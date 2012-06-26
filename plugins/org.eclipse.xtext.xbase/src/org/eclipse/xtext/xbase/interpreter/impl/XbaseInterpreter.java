@@ -651,7 +651,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					argumentValues.add(internalEvaluate(expr, context, indicator));
 				}
 			}
-			return invokeOperation(operation, receiver, argumentValues);
+			return invokeOperation(operation, receiver, argumentValues, context, indicator);
 		}
 		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
@@ -710,9 +710,18 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
-		return invokeOperation(operation, receiver, argumentValues);
+		return invokeOperation(operation, receiver, argumentValues, context, indicator);
 	}
 
+	/**
+	 * @since 2.3.1
+	 */
+	@SuppressWarnings("unused")
+	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues,
+			IEvaluationContext context, CancelIndicator indicator) {
+		return invokeOperation(operation, receiver, argumentValues);
+	}
+	
 	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
@@ -897,7 +906,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: "
 					+ jvmOperation.getIdentifier() + " without receiver"));
 		List<Object> argumentValues = Lists.newArrayList(value);
-		Object result = invokeOperation(jvmOperation, receiver, argumentValues);
+		Object result = invokeOperation(jvmOperation, receiver, argumentValues, context, indicator);
 		return result;
 	}
 
