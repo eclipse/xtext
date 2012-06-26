@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xpect
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.eclipse.xpect; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ de.itemis.statefullexer;bundle-version="1.0.0"
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xpect,
+ org.eclipse.xpect.services,
+ org.eclipse.xpect.xpect,
+ org.eclipse.xpect.xpect.impl,
+ org.eclipse.xpect.xpect.util,
+ org.eclipse.xpect.serializer,
+ org.eclipse.xpect.parser.antlr,
+ org.eclipse.xpect.parser.antlr.internal,
+ org.eclipse.xpect.validation,
+ org.eclipse.xpect.scoping,
+ org.eclipse.xpect.generator,
+ org.eclipse.xpect.formatting,
+ org.eclipse.xpect.parser.antlr.lexer
