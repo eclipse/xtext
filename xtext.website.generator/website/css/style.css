@@ -211,7 +211,7 @@ ul#screens li {
 img.screenshot {
 	min-width: 260px;
 	height: 134px;
-	margin-left: 10px;
+	margin-left: 16px;
 	float: left;
 }
 
@@ -241,7 +241,7 @@ img.screenshot {
 	width: 80px;
 	height: 80px;
 	position: absolute;
-	left: 115px;
+	left: 120px;
 	opacity: 0.0;
 	top: 34px;
 	outline: none;
