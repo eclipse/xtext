@@ -23,13 +23,13 @@ import static extension org.eclipse.xtext.util.Strings.*
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	
 	override generate(Grammar grammar, XpandExecutionContext ctx) {
-		println("begin")
+//		println("begin")
 		new KeywordHelper(grammar, false);
 		lexerGrammar = grammar.namespace + ".lexer." + grammar.name.lastToken(".") + "Lexer"
 		val srcGen = if (contentAssist || highlighting) Generator::SRC_GEN_UI else Generator::SRC_GEN;
 		val srcGenPath = ctx.output.getOutlet(srcGen).getPath();
 		val grammarFile = lexerGrammar.replace('.', '/') + ".g";
-		println("writing " + grammarFile)
+//		println("writing " + grammarFile)
 
 		val nfa2dot = new NfaToDot2()
 		nfa2dot.stateFormatter.add[TokenNFA$TokenNfaState<AbstractElement> s | 
@@ -80,7 +80,7 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		val javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
 		suppressWarningsImpl(javaFile);
 		
-		println("end")
+//		println("end")
 	}
 	
 	def create it: <AbstractRule, Integer>newHashMap() getRule2Index(Grammar grammar) {

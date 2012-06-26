@@ -42,11 +42,11 @@ public class NfaToDot2 extends GraphvizDotBuilder2 {
 		for (Object group : nfa.getAllGroups()) {
 			Cluster c = new Cluster(group, groupToString(nfa, group));
 			result.add(c);
-			System.out.println("Group: " + group);
+//			System.out.println("Group: " + group);
 			if (group != null)
 				for (Object s : nfa.getStatesInGroup(group)) {
 					c.add(create(c, nfa, s));
-					System.out.println("  State: " + s);
+//					System.out.println("  State: " + s);
 					for (Object f : nfa.getFollowers(s))
 						c.add(create(c, nfa, s, f));
 				}

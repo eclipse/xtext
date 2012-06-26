@@ -45,7 +45,7 @@ class LexerStatesProvider implements ILexerStatesProvider {
 //			if(n.ambiguousTransitions.empty)
 //				return n;
 //		}
-		println(solution)
+//		println(solution)
 //		println("Could not determine unambiguous lexer states")
 		solution
 	}
