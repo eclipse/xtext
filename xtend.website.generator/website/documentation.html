@@ -29,14 +29,12 @@
 	
 	<link rel="shortcut icon" href="images/favicon.png">
 	
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/bootstrap-responsive.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/shield-responsive.css">
-	
+	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type='text/css'>
+	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
 	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
-	
-	<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
+	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
 	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
 	<script src="js/twitter.js" type="text/javascript"></script>
 	<script src="js/jquery-1.7.1.min.js"></script>
@@ -283,20 +281,15 @@ public class HelloWorld {
 									<li><strong>Xtend Introductory Examples</strong> contains a couple of example code snippets illustrating certain
 									  aspects and strengths of Xtend. 
 									  It for instance shows how to build an API which allows for writing code like this:
-									</p>
 									<pre class="prettyprint lang-xtend linenums">
 assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)</pre>
-									<p>
-									
 									  Also the <a href="#moviesExample">the movies example</a> explained in detail in <a href="#moviesExample">the next section</a>
 									  is included there.</li>
 									<li><strong>Xtend Solutions For Euler</strong> contains solutions to a lot of the problems you will find at <a href="http://projecteuler.net/">Project Euler's website</a>.
 									   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
 									   with the following expression :
-									</p>
 									<pre class="prettyprint lang-xtend linenums">
-(1..999).filter[ i | i % 3 == 0 || i % 5 == 0 ].reduce[ i1, i2 | i1 + i2 ]</pre>
-									<p></li>
+(1..999).filter[ i | i % 3 == 0 || i % 5 == 0 ].reduce[ i1, i2 | i1 + i2 ]</pre></li>
 								</ul>
 								<p>
 							</p>
@@ -1038,10 +1031,10 @@ def dispatch printTypes(Integer x, Number y) {
 								<pre class="prettyprint lang-java linenums">
 public String printTypes(final Number x, final Number y) {
   if (x instanceof Integer
-       && y != null) {
+       &amp;&amp; y != null) {
     return _printTypes((Integer)x, y);
   } else if (x != null
-       && y instanceof Integer) {
+       &amp;&amp; y instanceof Integer) {
     return _printTypes(x, (Integer)y);
   } else {
     throw new IllegalArgumentException("Unhandled parameter types: " +
@@ -1540,7 +1533,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 								<tr><td></td>
 								<td></td>
 								</tr>
-								<tr><td><code class="prettyprint lang-xtend">e1 && e2</code></td>
+								<tr><td><code class="prettyprint lang-xtend">e1 &amp;&amp; e2</code></td>
 								<td><code class="prettyprint lang-xtend">e1.operator_and(e2)</code></td>
 								</tr>
 								<tr><td></td>
@@ -1647,7 +1640,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 							<section id="_10" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Short-Circuit Boolean Operators</h3>
 							<p>
-								If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&&</code> are bound to the library methods 
+								If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&amp;&amp;</code> are bound to the library methods 
 								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html"><code class="prettyprint lang-xtend">BooleanExtensions.operator_and(boolean l, boolean r)</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java">(src)</a> resp. 
 								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html"><code class="prettyprint lang-xtend">BooleanExtensions.operator_or(boolean l, boolean r)</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java">(src)</a> the operation is evaluated in short circuit mode.
 								That means that the right hand operand might not be evaluated at all in the following cases: 
@@ -1655,7 +1648,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 								<ol>
 									<li>in the case of <code class="prettyprint lang-xtend">||</code> the operand on the right hand side is not evaluated if the left 
 									    operand evaluates to <code class="prettyprint lang-xtend">true</code>.</li>
-									<li>in the case of <code class="prettyprint lang-xtend">&&</code> the operand on the right hand side is not evaluated if the left 
+									<li>in the case of <code class="prettyprint lang-xtend">&amp;&amp;</code> the operand on the right hand side is not evaluated if the left 
 									    operand evaluates to <code class="prettyprint lang-xtend">false</code>.</li>
 								</ol>
 								<p>
@@ -1673,8 +1666,8 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 								<pre class="prettyprint lang-xtend linenums">
 my.property = 23
 myList += 23
-x &gt; 23 && y &lt; 23
-x && y || z
+x &gt; 23 &amp;&amp; y &lt; 23
+x &amp;&amp; y || z
 1 + 3 * 5 * (- 23)
 !(x)</pre>
 								<p>
@@ -2542,9 +2535,11 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) '''
 								syntax coloring in Eclipse communicates this behavior.
 							</p>
 							<p>
+								</p>
 								<div class="thumbnail">
 									<img src="images/Xtend_template_coloring.png" alt="Syntax Coloring For Templates In Eclipse" width="566" height="213">
 								</div>
+								<p>
 							</p>
 							<p>
 								The behavior is best described with a set of examples. The following table assumes a data structure 
@@ -2703,36 +2698,25 @@ public void setName(final String name) {
 		</div>
 	</div>
 	<div id="extra">
-	
 		<div class="inner">
-	
 			<div class="container">
-	
 				<div class="row">
-	
 					<div class="span6">
-	
 						<h3>Quick Links</h3>
-	
-	
 						<ul class="footer-links clearfix">
-	<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
-	</ul>
+							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+						</ul>
 						<ul class="footer-links clearfix">
-	            			<li><a href="/index.html">Home</a></li>
+	      			<li><a href="/index.html">Home</a></li>
 							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
 						</ul>
-	
 					</div>
-	
-	
 					<div class="span6">
-	
 						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">@Xtendlang</a> Tweets</h3>
 						<br />
 						<div id="tweet">
@@ -2742,15 +2726,10 @@ public void setName(final String name) {
 									out what I've been twittering</a>
 							</p>
 						</div>
-	
-	
 					</div>
 				</div>
-	
 			</div>
-	
 		</div>
-	
 	</div>
 	<!-- Le javascript
 	    ================================================== -->
@@ -2775,7 +2754,6 @@ public void setName(final String name) {
 	
 	<!-- Include the plug-in -->
 	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-	
 	<script src="js/custom.js" type="text/javascript"></script>
 </body>
 </html>
