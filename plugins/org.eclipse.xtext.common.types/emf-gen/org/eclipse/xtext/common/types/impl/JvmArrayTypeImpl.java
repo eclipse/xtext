@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmArrayTypeImpl extends JvmComponentTypeImpl implements JvmArrayType
+public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmArrayType
 {
 	/**
 	 * <!-- begin-user-doc -->

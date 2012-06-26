@@ -139,10 +139,6 @@ public class IndexedJvmTypeAccess {
 		JvmComponentType component = (JvmComponentType) resolveJavaObject(rootType, fragment.substring(0, fragment.length() - 2));
 		if (component == null)
 			return null;
-		if (component.getArrayType() == null) {
-			JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-			arrayType.setComponentType(component);
-		}
 		return component.getArrayType();
 	}
 	
