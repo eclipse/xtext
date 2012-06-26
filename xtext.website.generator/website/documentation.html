@@ -7417,11 +7417,12 @@ grammar org.eclipse.xtext.example.Domainmodel
 								<p>
 							</p>
 							<p>
-								As we can express all kinds of Java type references directly now, the indirection for <strong>DataTypes</strong> 
-								is no longer necessary. To eliminate it, all cross-references to <strong>Types</strong> have to be replaced by calls to the production rule <strong>JvmTypeReference</strong>.
-								The rules <strong>DataType</strong>, <strong>Type</strong>, and <strong>QualifiedName</strong> become obsolete (the latter is already defined
-								in Xbase), and the <strong>Type</strong> in <strong>AbstractEntity</strong> must be changed to <strong>Entity</strong>. As we now have all kinds of generic Java collections at hand,
-								<strong>Feature.many</strong> is obsolete, too. The whole grammar now reads:
+								Because we can express all kinds of Java type references directly now, an indirection for <strong>DataTypes</strong> as
+								in the previous section is no longer necessary. If we start from the <a href="#DomainmodelNextSteps">domain model 
+								example in the tutorial</a> again, we have to replace all cross-references to <strong>Types</strong> by calls to the production 
+								rule <strong>JvmTypeReference</strong>. The rules <strong>DataType</strong>, <strong>Type</strong>, and <strong>QualifiedName</strong> become obsolete (the latter is 
+								already defined in Xbase), and the <strong>Type</strong> in <strong>AbstractEntity</strong> must be changed to <strong>Entity</strong>. As we now have 
+								all kinds of generic Java collections at hand, <strong>Feature.many</strong> is obsolete, too. The whole grammar now reads:
 							</p>
 							<p>
 								</p>
