@@ -1,22 +1,24 @@
 package de.itemis.statefullexer
 
+import java.util.Set
 import org.eclipse.xpand2.XpandExecutionContext
+import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil
 import org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
 import org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch
+import org.eclipse.xtext.util.formallang.PdaToDot
+import org.eclipse.xtext.xbase.lib.Pair
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import static extension org.eclipse.xtext.util.Strings.*
-import static de.itemis.statefullexer.TokenNFA$NFAStateType.*
-import org.eclipse.xtext.util.formallang.PdaToDot
-import org.eclipse.xtext.RuleCall
 
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	
@@ -37,7 +39,7 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 				case(TokenNFA$NFAStateType::STOP): "stop"
 			}
 		]
-		nfa2dot.groupFormatter.add[AbstractRule r | r.name]
+		nfa2dot.groupFormatter.add[LexicalGroup r | r.group.name + "\\n" + r.hidden.map[name].join(", ")]
 		
 		val pda2dot = new PdaToDot<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>()
 		pda2dot.setStateFormatter[
@@ -87,12 +89,24 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 			put(rule, i = i + 1)
 	}
 	
-	def getStateTokens(Grammar grammar, ILexerStatesProvider$ILexerState state) {
+	def getStateTokens(Grammar grammar, ILexerStatesProvider$ILexerStates nfa) {
+		val groups = <Pair<Object, ILexerStatesProvider$ILexerState>, Token>newLinkedHashMap()
+		for(s: nfa.allStates) {
+			for(t : s.tokens) {
+				var x = groups.get(t -> null)
+				if(x == null)
+					groups.put(t -> null, x = new Token(newLinkedHashSet(), t, null))
+				x.sources.add(s)  
+			} 
+			for(t : nfa.getOutgoingTransitions(s)) {
+				var x = groups.get(t.token -> t.target)
+				if(x == null)
+					groups.put(t.token -> t.target, x = new Token(newLinkedHashSet(), t.token, t.target))
+				x.sources.add(s)  
+			} 
+		}
 		val rule2index = grammar.rule2Index
-		val transitionTokens = state.outgoingTransitions.map[it.token -> it]
-		val stateTokens = state.tokens.map[it -> null as ILexerStatesProvider$ILexerStateTransition]
-		val tokens = stateTokens + transitionTokens
-		tokens.sortBy[switch(it.key) { AbstractRule: rule2index.get(it.key) String: 0 }]
+		groups.values.sortBy[switch(it.token) { AbstractRule: rule2index.get(it.token) String: 0 }]
 	}
 	
 	def getStatelessTerminalRules(Grammar grammar, ILexerStatesProvider$ILexerStates nfa) {
@@ -116,18 +130,13 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		
 		@members{
 			«FOR s: nfa.allStates»
-				// state «s.rule.name» = «s.ID»
+				// state «s.name» = «s.ID»
 			«ENDFOR»
 			private int tokenstate = «nfa.start.ID»;
 		}
 		
-		«FOR s: nfa.allStates»
-			// state «s.rule.name» («s.ID») {
-				«FOR t: getStateTokens(grammar, s)»
-					«genToken(grammar, s, t.key, t.value)»
-				«ENDFOR»
-			// }
-			
+		«FOR s: getStateTokens(grammar, nfa)»
+			«genToken(grammar, s.sources, s.token, s.target)»
 		«ENDFOR»
 		
 		«FOR rule:getStatelessTerminalRules(grammar, nfa)»
@@ -135,29 +144,36 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		«ENDFOR»
 	'''
 	
-	def guardAction(ILexerStatesProvider$ILexerState state) {
-		"{tokenstate==" + state.ID + "}?=>"
+	def guardAction(Set<ILexerStatesProvider$ILexerState> sources) {
+		val id = sources.map[ID].reduce[ Integer a, Integer b | a + b ]
+		"{(tokenstate & " + id + ") != 0}?=>"
 	}
 	
-	def transitionAction(ILexerStatesProvider$ILexerStateTransition trans) {
-		"{tokenstate=" + trans.target.ID + ";}"
+	def transitionAction(ILexerStatesProvider$ILexerState target) {
+		"{tokenstate=" + target.ID + ";}"
 	}
 	
-	def dispatch genToken(Grammar grammar, ILexerStatesProvider$ILexerState state, String keyword, Void NULL) '''
+	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, String keyword, Void NULL) '''
 		«val keywords = KeywordHelper::getHelper(grammar)»
-		«keywords.getRuleName(keyword)»: «state.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»';
+		«keywords.getRuleName(keyword)»: «sources.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»';
 	'''
 	
-	def dispatch genToken(Grammar grammar, ILexerStatesProvider$ILexerState state, TerminalRule rule, Void NULL) '''
-		RULE_«rule.name»: «state.guardAction» «rule.toLexerBody»;
+	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, TerminalRule rule, Void NULL) '''
+		RULE_«rule.name»: «if("ANY_OTHER" != rule.name) sources.guardAction» «rule.toLexerBody»;
 	'''
 	
-	def dispatch genToken(Grammar grammar, ILexerStatesProvider$ILexerState state, String keyword, ILexerStatesProvider$ILexerStateTransition trans) '''
+	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, String keyword, ILexerStatesProvider$ILexerState target) '''
 		«val keywords = KeywordHelper::getHelper(grammar)»
-		«keywords.getRuleName(keyword)»: «state.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»' «trans.transitionAction»;
+		«keywords.getRuleName(keyword)»: «sources.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»' «target.transitionAction»;
 	'''
 	
-	def dispatch genToken(Grammar grammar, ILexerStatesProvider$ILexerState state, TerminalRule rule, ILexerStatesProvider$ILexerStateTransition trans) '''
-		RULE_«rule.name»: «state.guardAction» «rule.toLexerBody»  «trans.transitionAction»;
+	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, TerminalRule rule, ILexerStatesProvider$ILexerState target) '''
+		RULE_«rule.name»: «if("ANY_OTHER" != rule.name) sources.guardAction» «rule.toLexerBody»  «target.transitionAction»;
 	'''
+}
+
+@Data class Token {
+	Set<ILexerStatesProvider$ILexerState> sources
+	Object token
+	ILexerStatesProvider$ILexerState target
 }

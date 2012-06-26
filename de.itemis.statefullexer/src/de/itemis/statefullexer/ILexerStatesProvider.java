@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 
 public interface ILexerStatesProvider {
@@ -16,7 +15,7 @@ public interface ILexerStatesProvider {
 
 		Iterable<ILexerStateTransition> getOutgoingTransitions();
 
-		AbstractRule getRule();
+		String getName();
 
 		Set<Object /* TerminalRule | String */> getTokens();
 	}

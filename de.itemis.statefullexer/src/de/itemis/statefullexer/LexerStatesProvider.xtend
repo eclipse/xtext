@@ -2,7 +2,6 @@ package de.itemis.statefullexer
 
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
-import com.google.common.collect.Multimaps
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
@@ -21,7 +20,6 @@ import org.eclipse.xtext.util.formallang.NfaFactory
 import org.eclipse.xtext.util.formallang.NfaUtil
 import org.eclipse.xtext.util.formallang.Pda
 import org.eclipse.xtext.util.formallang.PdaFactory
-import org.eclipse.xtext.util.formallang.PdaUtil
 import org.eclipse.xtext.xbase.lib.Pair
 
 import static extension de.itemis.statefullexer.Util.*
@@ -31,88 +29,130 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 class LexerStatesProvider implements ILexerStatesProvider {
 	
 	override getStates(Grammar grammar) {
-		val owner2terminal = grammar.terminalOwner
-		val followers = grammar.followerMap
-		val result = createNfa(owner2terminal, followers)
-		val ambiguous = result.ambiguousTransitions
-		if(ambiguous.empty)
-			return result
-		val solutions = newArrayList(result)
-		for(r: new NfaUtil2().getAllTransitions(result)) {
-			val m = mutateFollowers(owner2terminal, r, followers)
-			val n = createNfa(m, followers)
-			solutions.add(n)
-			if(n.ambiguousTransitions.empty)
-				return n;
-		}
-		println(solutions.join("\n"))
-		println("Could not determine unambiguous lexer states")
-		result
+		val nfa = grammar.nfa
+		val solution = nfa.createLexerState
+//		val owner2terminal = grammar.terminalOwner
+//		val followers = grammar.followerMap
+//		val result = createNfa(owner2terminal, followers)
+//		val ambiguous = result.ambiguousTransitions
+//		if(ambiguous.empty)
+//			return result
+//		val solutions = newArrayList(result)
+//		for(r: new NfaUtil2().getAllTransitions(result)) {
+//			val m = mutateFollowers(owner2terminal, r, followers)
+//			val n = createNfa(m, followers)
+//			solutions.add(n)
+//			if(n.ambiguousTransitions.empty)
+//				return n;
+//		}
+		println(solution)
+//		println("Could not determine unambiguous lexer states")
+		solution
 	}
 	
-	def private mutateFollowers(Multimap<AbstractRule, EObject> owner2terminal, ILexerStatesProvider$ILexerStateTransition transition, Multimap<AbstractElement, AbstractElement> followers){
-		val newOwner2terminal = LinkedHashMultimap::create(owner2terminal)
-		for(f: followers.get(transition.element))
-			if(transition.target.elements.contains(f)) {
-				newOwner2terminal.remove(transition.target.rule, f)
-				newOwner2terminal.put(transition.source.rule, f)
-			}
-		newOwner2terminal
-	}
+//	def private mutateFollowers(Multimap<AbstractRule, EObject> owner2terminal, ILexerStatesProvider$ILexerStateTransition transition, Multimap<AbstractElement, AbstractElement> followers){
+//		val newOwner2terminal = LinkedHashMultimap::create(owner2terminal)
+//		for(f: followers.get(transition.element))
+//			if(transition.target.elements.contains(f)) {
+//				newOwner2terminal.remove(transition.target.rule, f)
+//				newOwner2terminal.put(transition.source.rule, f)
+//			}
+//		newOwner2terminal
+//	}
+//	
+//	def private createNfa(Multimap<AbstractRule, EObject> owner2terminal, Multimap<AbstractElement, AbstractElement> followers) {
+//		val terminal2owner = Multimaps::invertFrom(owner2terminal, LinkedHashMultimap::create)
+//		val state2terminal = LinkedHashMultimap::<AbstractRule, EObject>create
+//		val transitions = LinkedHashMultimap::<AbstractRule, Pair<AbstractElement, AbstractRule>>create
+//		for(e:owner2terminal.entries) { 
+//			val t = e.value
+//			val from = e.key
+//			switch(t) {
+//				AbstractElement: {
+//					val followerstates = followers.get(t).map[terminal2owner.get(it)].flatten.toSet
+//					for(to:followerstates) 
+//						if(from == to)
+//							state2terminal.put(from, t)
+//						else 
+//							transitions.put(from, t -> to)
+//				}
+//				AbstractRule: {
+////					println(e)
+//					state2terminal.put(from, t)
+//				}
+//			}
+//		}
+//		var i = -1
+//		val states = <AbstractRule, LexerState>newLinkedHashMap()
+//		for(e:state2terminal.asMap.entrySet) 
+//			states.put(e.key, new LexerState(i = i + 1, e.key, newArrayList(), e.value.toSet))
+//		for(t:transitions.entries) {
+//			var from = states.get(t.key) 
+//			var to = states.get(t.value.value)
+//			if(from == null)
+//				states.put(t.key, from = new LexerState(i = i + 1, t.key, newArrayList(), newHashSet()))
+//			if(to == null)
+//				states.put(t.value.value, to = new LexerState(i = i + 1, t.key, newArrayList(), newHashSet()))
+//			from.outgoingTransitions.add(new LexerStateTransition(t.value.key, from, to))
+//		}
+//		val start = states.values.iterator.next
+//		new LexerStateNfa( /* owner2terminal, */start, start)
+//	}
 	
-	def private createNfa(Multimap<AbstractRule, EObject> owner2terminal, Multimap<AbstractElement, AbstractElement> followers) {
-		val terminal2owner = Multimaps::invertFrom(owner2terminal, LinkedHashMultimap::create)
-		val state2terminal = LinkedHashMultimap::<AbstractRule, EObject>create
-		val transitions = LinkedHashMultimap::<AbstractRule, Pair<AbstractElement, AbstractRule>>create
-		for(e:owner2terminal.entries) { 
-			val t = e.value
-			val from = e.key
-			switch(t) {
-				AbstractElement: {
-					val followerstates = followers.get(t).map[terminal2owner.get(it)].flatten.toSet
-					for(to:followerstates) 
-						if(from == to)
-							state2terminal.put(from, t)
-						else 
-							transitions.put(from, t -> to)
+	def private createLexerState(NfaWithGroups<LexicalGroup, TokenNFA$TokenNfaState<AbstractElement>> nfa) {
+		var i = 1
+		val states = <LexicalGroup, LexerState>newLinkedHashMap()
+		for(g : nfa.allGroups) {
+			val s = new LexerState(i, g.group.name, newArrayList(), newLinkedHashSet())
+			i = i * 2
+			states.put(g, s)
+			for(h :g.hidden)	
+				s.elements.add(h)
+		}
+		val consumed = <TokenNFA$TokenNfaState<AbstractElement>>newHashSet()
+		val visited = <Pair<LexicalGroup,TokenNFA$TokenNfaState<AbstractElement>>>newHashSet()
+		val all = new NfaUtil().collect(nfa) 
+		for(from : all) 
+			for(to : nfa.getFollowers(from)) 
+				/*if(from.token != null) */ {
+					val fromGroup = nfa.getGroupFromState(from)
+					val toGroup = nfa.getGroupFromState(to)
+					if(fromGroup != toGroup) {
+//						val exists = nfa.getStatesInGroup(fromGroup).exists[it != from && token.tokenObj == from.token.tokenObj] 
+						val sel = if(to.token instanceof Keyword) to else  from
+						if(!visited.contains(fromGroup -> sel))  {
+							val fromS = states.get(fromGroup)
+							val toS = states.get(toGroup)
+							if(!fromS.outgoingTransitions.exists[element == sel.token && target == toS])
+								fromS.outgoingTransitions.add(new LexerStateTransition(sel.token, fromS, toS))
+							consumed.add(sel)
+							visited.add(fromGroup -> sel)
+						}
+					} 
 				}
-				AbstractRule: {
-//					println(e)
-					state2terminal.put(from, t)
-				}
+		for(from : all) 
+			if(from.token != null && !consumed.contains(from)) {
+				val fromGroup = nfa.getGroupFromState(from)
+				states.get(fromGroup).elements.add(from.token)
 			}
-		}
-		var i = -1
-		val states = <AbstractRule, LexerState>newLinkedHashMap()
-		for(e:state2terminal.asMap.entrySet) 
-			states.put(e.key, new LexerState(i = i + 1, e.key, newArrayList(), e.value.toSet))
-		for(t:transitions.entries) {
-			var from = states.get(t.key) 
-			var to = states.get(t.value.value)
-			if(from == null)
-				states.put(t.key, from = new LexerState(i = i + 1, t.key, newArrayList(), newHashSet()))
-			if(to == null)
-				states.put(t.value.value, to = new LexerState(i = i + 1, t.key, newArrayList(), newHashSet()))
-			from.outgoingTransitions.add(new LexerStateTransition(t.value.key, from, to))
-		}
-		val start = states.values.iterator.next
+		val start = states.get(nfa.getGroupFromState(nfa.start))
 		new LexerStateNfa( /* owner2terminal, */start, start)
 	}
 	
-	def private List<AbstractRule> getHidden(Grammar grammar) {
+	def private Set<AbstractRule> getHidden(Grammar grammar) {
 		if(!grammar.hiddenTokens.empty)
-			grammar.hiddenTokens
+			grammar.hiddenTokens.toSet
 		else if(!grammar.usedGrammars.empty) 
 			grammar.usedGrammars.get(0).hidden
 		else 
-			emptyList
+			<AbstractRule>newLinkedHashSet()
 	}
 	
 	def private Multimap<AbstractRule, EObject> getTerminalOwner(Grammar grammar) {
 		val result = LinkedHashMultimap::<AbstractRule, EObject>create()
 		val startrule = grammar.allParserRules.get(0)
 		val starthidden = grammar.hidden
-		collectTerminalOwner(startrule, startrule, result, starthidden, newHashSet)
+		collectTerminalOwner(startrule, startrule, result, starthidden.toList, newHashSet)
 		result
 	}
 	
@@ -151,10 +191,10 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		pda
 	}
 	
-	def NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
+	def NfaWithGroups<LexicalGroup, TokenNFA$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
 		val pda = getPda(grammar)
-		val fact =  new TokenGroupNFA$TokenGroupNfaFactory<AbstractRule, AbstractElement>() as NfaFactory<NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>>, TokenNFA$TokenNfaState<AbstractElement>, AbstractElement>
-		val traverser = new LaxicalGroupsTraverser(grammar.rules.get(0))
+		val fact =  new TokenGroupNFA$TokenGroupNfaFactory<LexicalGroup, AbstractElement>() as NfaFactory<NfaWithGroups<LexicalGroup, TokenNFA$TokenNfaState<AbstractElement>>, TokenNFA$TokenNfaState<AbstractElement>, AbstractElement>
+		val traverser = new LaxicalGroupsTraverser(new LexicalGroup(grammar.rules.get(0), grammar.hidden))
 		val filter = [TokenPDA$TokenPDAState<AbstractElement> s | !s.token.parserRuleCall ]
 		val token = [TokenPDA$TokenPDAState<AbstractElement> s | s.token ] 
 		val nfa = new NfaUtil2().create(pda, traverser, filter, token, fact)
@@ -179,18 +219,40 @@ class StatesCfgAdapter extends CfgAdapter {
 	}
 }
 
+class LexicalGroup {
+	@Property val AbstractRule group
+	@Property val Set<AbstractRule> hidden
+	
+	new (AbstractRule group, Set<AbstractRule> hidden) {
+		this._group = group 
+		this._hidden = hidden 
+	}
+	
+	override hashCode() {
+		group.hashCode()
+	}
+	
+	override equals(Object obj) {
+		if(obj == null || ^class != obj.^class)
+			return false;
+		val other = obj as LexicalGroup
+		_group == other._group 
+	}
+	
+} 
+
 class LaxicalGroupsTraverserItem  {
 	@Property val LaxicalGroupsTraverserItem parent
 	@Property val RuleCall item
-	@Property val AbstractRule group
+	@Property val LexicalGroup group
 
-	new(AbstractRule group) {
+	new(LexicalGroup group) {
 		this._parent = null
 		this._item = null
 		this._group = group
 	}
 
-	new(LaxicalGroupsTraverserItem parent, RuleCall item, AbstractRule group) {
+	new(LaxicalGroupsTraverserItem parent, RuleCall item, LexicalGroup group) {
 		super();
 		this._parent = parent;
 		this._item = item;
@@ -207,7 +269,17 @@ class LaxicalGroupsTraverserItem  {
 		}
 		if (count >= 2)
 			return null;
-		val g = if(item.rule.isSpace) item.rule else group 
+		val g = if(item.rule.isSpace) {
+				val hidden = if(item.rule instanceof ParserRule && (item.rule as ParserRule).definesHiddenTokens)
+					(item.rule as ParserRule).hiddenTokens.toSet
+				else 
+					group.hidden.toSet
+				new LexicalGroup(item.rule, hidden) 
+			} else {
+				if(item.rule instanceof ParserRule && (item.rule as ParserRule).definesHiddenTokens)
+					group.hidden.addAll((item.rule as ParserRule).hiddenTokens) 
+				group
+			} 
 		return new LaxicalGroupsTraverserItem(this, item, g);
 	}
 
@@ -218,8 +290,8 @@ class LaxicalGroupsTraverserItem  {
 	}
 }
 
-@Data class LaxicalGroupsTraverser implements GroupingTraverser<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, LaxicalGroupsTraverserItem, AbstractRule> {
-	val AbstractRule group
+@Data class LaxicalGroupsTraverser implements GroupingTraverser<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, LaxicalGroupsTraverserItem, LexicalGroup> {
+	val LexicalGroup group
 	
 	override getGroup(LaxicalGroupsTraverserItem result) {
 		result.group
@@ -242,7 +314,7 @@ class LaxicalGroupsTraverserItem  {
 }
 
 class Util {
-	def static getToken(EObject ele) {
+	def static getTokenObj(EObject ele) {
 		switch(ele) { 
 			RuleCall: ele.rule 
 			Keyword: ele.value
@@ -277,7 +349,7 @@ class Util {
 	}
 	
 	override getFollowers(ILexerStatesProvider$ILexerState state) {
-		state.outgoingTransitions.map[target]
+		state.outgoingTransitions?.map[target]
 	}
 	
 	def getAmbiguousTransitions() {
@@ -287,13 +359,13 @@ class Util {
 	override toString() '''
 		Solution {
 			«FOR t:ambiguousTransitions»
-				Ambiguous Transition: «t.source.rule.name» ---«t.token.tokenName»---> «t.target.rule.name»
+				Ambiguous Transition: «t.source.name» ---«t.token.tokenName»---> «t.target.name»
 			«ENDFOR»
 			«FOR s:allStates»
-				State «s.rule.name»: «s.tokens.map[tokenName].join(", ")»
+				State «s.name»: «s.tokens.map[tokenName].join(", ")»
 			«ENDFOR»
 			«FOR t:new NfaUtil2().getAllTransitions(this)»
-				Transition: «t.source.rule.name» ---«t.token.tokenName»---> «t.target.rule.name»
+				Transition: «t.source.name» ---«t.token.tokenName»---> «t.target.name»
 			«ENDFOR»
 		}
 	'''
@@ -306,7 +378,7 @@ class Util {
 
 @Data class LexerState implements ILexerStatesProvider$ILexerState {
 	int ID
-	AbstractRule rule
+	String name
 	List<ILexerStatesProvider$ILexerStateTransition> outgoingTransitions
 	Set<EObject> elements
 	
@@ -319,7 +391,7 @@ class Util {
 	}
 
 	override getTokens() {
-		elements.map[token].toSet
+		elements.map[tokenObj].toSet
 	}
 	
 } 
@@ -337,7 +409,7 @@ class Util {
 	}
 
 	override getToken() {
-		element.token
+		element.tokenObj
 	}
 	
 } 
