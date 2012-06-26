@@ -1,6 +1,7 @@
 package bootstrap;
 
 import bootstrap.Body;
+import bootstrap.Config;
 import bootstrap.MainSite;
 import bootstrap.Menu;
 import bootstrap.PostProcessor;
@@ -14,6 +15,7 @@ import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -44,15 +46,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.ImageRef;
 
 @SuppressWarnings("all")
 public class GenerateBootstrapDoc {
   public static void main(final String[] args) {
-    XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
-    final Injector injector = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
+    Config _config = new Config();
+    final Injector injector = _config.createInjectorAndDoEMFRegistration();
     GenerateBootstrapDoc _instance = injector.<GenerateBootstrapDoc>getInstance(GenerateBootstrapDoc.class);
     _instance.generate();
   }
@@ -75,12 +76,20 @@ public class GenerateBootstrapDoc {
   @Inject
   private IResourceValidator validator;
   
+  @Inject(optional = true)
+  @Named(value = "documentRoot")
+  private String documentRoot = "../org.eclipse.xtend.doc.xdoc/xdoc";
+  
+  @Inject(optional = true)
+  @Named(value = "targetDirectory")
+  private String targetDirectory = "../../website/documentation";
+  
   public void generate() {
     try {
       final Document document = this.loadDocument();
-      File _file = new File("../../website/documentation");
+      File _file = new File(this.targetDirectory);
       final File targetDir = _file;
-      File _file_1 = new File("../org.eclipse.xtend.doc.xdoc/xdoc");
+      File _file_1 = new File(this.documentRoot);
       final File sourceDir = _file_1;
       File _file_2 = new File(targetDir, "index.html");
       final File file = _file_2;

@@ -40,11 +40,15 @@ codelanguage-def[Xtext][
   EOF
 ]
 
+part[Getting Started]
+
 chapter-ref[Introduction]
 
-chapter-ref[Installation]
-
 chapter-ref[GettingStarted]
+
+chapter-ref[moviesExample]
+
+part[Reference Documentation]
 
 chapter-ref[types]
 
