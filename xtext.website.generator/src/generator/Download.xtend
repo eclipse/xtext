@@ -189,7 +189,7 @@ class Download extends AbstractWebsite {
 									The license allows to use Xtext for development and even for developing and selling commercial products based on Xtext.
 								</p>
 						    ''')»
-						    «faqEntry('If Xtext is open-source how can I get professional support?','''
+						    «faqEntry('If Xtext is open-source, how can I get professional support?','''
 								  <p>Software systems built from open source components requires manpower that understands the internal dependencies of 
 								  these components and can quickly and efficiently eliminate problems, should an error occur. </p>
 								  <p><b>itemis</b> is the leading consulting company for Eclipse-based development tools and is the main

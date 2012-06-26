@@ -247,7 +247,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("clearContents: true,");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("template: \'\"%text%\" <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">%time%</a><br/><br/>\'");
+    _builder.append("template : \'\"%text%\" - %time% by <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">@%user_screen_name%</a><br/><br/>\'");
     _builder.newLine();
     _builder.append("\t\t     ");
     _builder.append("});");
@@ -511,11 +511,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3><a href=\"https://twitter.com/#!/xtext\" style=\"color: white;\">@");
+    _builder.append("<h3><a href=\"https://twitter.com/#!/xtext\" style=\"color: white;\">");
     String _twitterID = this.twitterID();
     String _firstUpper = StringExtensions.toFirstUpper(_twitterID);
     _builder.append(_firstUpper, "					");
-    _builder.append("</a> Tweets</h3>");
+    _builder.append("</a> on Twitter</h3>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("<br />");
@@ -600,7 +600,7 @@ public abstract class AbstractWebsite implements Resource {
         _builder.newLine();
         _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/prettify.js\"></script>");
         _builder.newLine();
-        _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-common.js\"></script>");
+        _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-xtend.js\"></script>");
         _builder.newLine();
       }
     }

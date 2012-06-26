@@ -70,7 +70,7 @@
 			        includeRT: true,
 			        enableLinks: true, 
 			        clearContents: true,
-			        template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
+			        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
 			     });
 	         
 	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -124,247 +124,247 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
-	<div id="header_wrapper" class="container" >
-		<div class="inner">
-			<div class="container">
-				<div class="page-heading"><h1>Download</h1></div>
-			</div>
+<div id="header_wrapper" class="container" >
+	<div class="inner">
+		<div class="container">
+			<div class="page-heading"><h1>Download</h1></div>
 		</div>
 	</div>
-	<div id="page">
-		<div class="inner">
-			<div class="container clearfix">
-				<h2>Download Options</h2>
-				<hr>
-				<!--table one starts-->
-				<div class="span1">&nbsp;</div>
-			    <div class="span4">
-					<div class="pricing">
-					    <table>
-							<tfoot>
-							    <tr>
-									<td></td>
-							    </tr>
-							</tfoot>
-							<tbody>
+</div>
+<div id="page">
+	<div class="inner">
+		<div class="container clearfix">
+			<h2>Download Options</h2>
+			<hr>
+			<!--table one starts-->
+			<div class="span1">&nbsp;</div>
+		    <div class="span4">
+				<div class="pricing">
+				    <table>
+						<tfoot>
 						    <tr>
-								<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+								<td></td>
+						    </tr>
+						</tfoot>
+						<tbody>
+					    <tr>
+							<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+					    </tr>
+					    <tr>
+					    	<td style="text-align: center;">
+					    	<a  
+					    	rel="popover" 
+					    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+					    	data-original-title="Right-click and 'Copy Link'"
+					    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
+					    	class="has-popover btn btn-primary btn-large"
+					    	style="width: 70%;">Latest Release</a></td>
+					    </tr>
+					    <tr>
+							<td style="text-align: center;">
+							<a
+							  rel="popover" 
+					    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+					    	data-original-title="Right-click and 'Copy Link'" 
+							  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
+					    	class="has-popover btn btn-primary btn-large"
+					    	style="width: 70%;">Latest Milestone</a></td>
+					    </tr>
+					    <tr>
+							<td style="text-align: center;">
+							<a
+								rel="popover" 
+					    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+					    	data-original-title="Right-click and 'Copy Link'" 
+								href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" 
+					    	class="has-popover btn btn-primary btn-large"
+					    	style="width: 70%;">Bleeding Edge!</a></td>
+					    </tr>
+					</tbody>
+				    </table>
+				</div>
+		    </div>
+		    <div class="span1">&nbsp;</div>
+		    <div class="span4">
+				<div class="pricing">
+				    <table>
+						<tfoot>
+						    <tr>
+								<td></td>
+						    </tr>
+						</tfoot>
+						<tbody>
+						    <tr>
+								<td class="focus">Full Eclipse <span>Just Download and Unzip</span></td>
 						    </tr>
 						    <tr>
-						    	<td style="text-align: center;">
-						    	<a  
-						    	rel="popover" 
-						    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
-						    	data-original-title="Right-click and 'Copy Link'"
-						    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
-						    	class="has-popover btn btn-primary btn-large"
-						    	style="width: 70%;">Latest Release</a></td>
+						    	<td style="text-align: center; white-space: nowrap;">
+						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa-x86_64.tar.gz" 
+						    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa.tar.gz" 
+						    	class="btn btn-primary btn-large"
+						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
 						    <tr>
-								<td style="text-align: center;">
-								<a
-								  rel="popover" 
-						    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
-						    	data-original-title="Right-click and 'Copy Link'" 
-								  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
-						    	class="has-popover btn btn-primary btn-large"
-						    	style="width: 70%;">Latest Milestone</a></td>
+						    	<td style="text-align: center; white-space: nowrap;">
+						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk-x86_64.tar.gz" 
+						    	class="btn btn-primary btn-large"
+						    	style="width: 45%;">Linux 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz" 
+						    	class="btn btn-primary btn-large"
+						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
 						    <tr>
-								<td style="text-align: center;">
-								<a
-									rel="popover" 
-						    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
-						    	data-original-title="Right-click and 'Copy Link'" 
-									href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" 
-						    	class="has-popover btn btn-primary btn-large"
-						    	style="width: 70%;">Bleeding Edge!</a></td>
+						    	<td style="text-align: center; white-space: nowrap;">
+						    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32-x86_64.zip" 
+						    	class="btn btn-primary btn-large"
+						    	style="width: 45%;">Windows 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz" 
+						    	class="btn btn-primary btn-large"
+						    	style="width:20%;">32 Bit</a></td>
 						    </tr>
 						</tbody>
-					    </table>
-					</div>
-			    </div>
-			    <div class="span1">&nbsp;</div>
-			    <div class="span4">
-					<div class="pricing">
-					    <table>
-							<tfoot>
-							    <tr>
-									<td></td>
-							    </tr>
-							</tfoot>
-							<tbody>
-							    <tr>
-									<td class="focus">Full Eclipse <span>Just Download and Unzip</span></td>
-							    </tr>
-							    <tr>
-							    	<td style="text-align: center; white-space: nowrap;">
-							    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa-x86_64.tar.gz" 
-							    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa.tar.gz" 
-							    	class="btn btn-primary btn-large"
-							    	style="width:20%;">32 Bit</a></td>
-							    </tr>
-							    <tr>
-							    	<td style="text-align: center; white-space: nowrap;">
-							    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk-x86_64.tar.gz" 
-							    	class="btn btn-primary btn-large"
-							    	style="width: 45%;">Linux 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz" 
-							    	class="btn btn-primary btn-large"
-							    	style="width:20%;">32 Bit</a></td>
-							    </tr>
-							    <tr>
-							    	<td style="text-align: center; white-space: nowrap;">
-							    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32-x86_64.zip" 
-							    	class="btn btn-primary btn-large"
-							    	style="width: 45%;">Windows 64 Bit</a>&nbsp;<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz" 
-							    	class="btn btn-primary btn-large"
-							    	style="width:20%;">32 Bit</a></td>
-							    </tr>
-							</tbody>
-					    </table>
-					</div>
-			    </div>
-				<div class="span1">&nbsp;</div>
-			</div>
-			    <div class="container">
-							<div class="container">
-			<h2>Installation Instructions</h2>
-			<hr>
+				    </table>
+				</div>
+		    </div>
 			<div class="span1">&nbsp;</div>
-			  <div class="span9">
-			    <p>
-			      <strong>  Eclipse Xtext is implemented in Java, so you must have a 
-			        <a href="http://www.oracle.com/technetwork/java/index.html">Java
-			        Runtime Environment</a> installed in order to proceed.
-			      </strong>
-			    </p>
-			    <p>
-			      There are two easy ways to get Xtext up and running. A pre-configured Eclipse distribution is available
-			      which has already all the necessary plug-ins installed. Alternatively, you can install Xtext into your
-			      existing Eclipse by means of the Eclipse update mechanism.
-			    </p>
-			    <!--  section -->
-			    <section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
-			    <h2>  Install Pre-Configured Eclipse With Xtext
-			    </h2>
-			      <ol>
-			        <li>Download the distribution from above that matches your OS.</li>
-			        <li>Unzip the archive into the directory of your choice. 
-							<strong>  Windows Users should choose a directory close to the root since the zip contains a 
-							deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.
-							</strong>
-			        </li>
-			        <li>Launch Eclipse and select the workspace location. A workspace location is the directory for your user data
-							    and project files.
-			        </li>
-			      </ol>
-			    </section>
-			    <!--  section -->
-			    <section style="padding-top: 68px; margin-top: -68px;">
-			    <h2>  Install Xtext From Update Site
-			    </h2>
-			    <p>
-			      If you have an Eclipse running : 
-			    </p>
-			      <ul>
-			        <li>  
-							    Choose 
-							<strong>  Help -&gt; Install New Software...
-							</strong> from the menu bar and
-							<strong>  Add...
-							</strong> Insert one of the update site URLs from above.
-							    This site aggregates all the necessary and optional components and dependencies of Xtext.
-			        </li>
-			        <li>Select the <i>Xtext SDK</i> from the category <i>Xtext {version}</i> and 
-			        complete the wizard by clicking the <i>Next</i> button until you can click <i>Finish</i>.
-			        </li>
-			        <li>  
-							    After a quick download and a restart of Eclipse, Xtext is ready to use.
-			        </li>
-			      </ul>
-			    <p>
-			      Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 
-			      the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid 
-			      this, you can manually install the feature 
-			      <strong>  Xtext Antlr-2.0.0
-			      </strong> from the itemis update site
-			      (
-			      <a href="http://download.itemis.de/updates/">http://download.itemis.de/updates/</a>). 
-			      The general installation procedures are not affected by this issue.
-			    </p>
-			    </section>
-			  </div>
+		</div>
+		    <div class="container">
+						<div class="container">
+		<h2>Installation Instructions</h2>
+		<hr>
+		<div class="span1">&nbsp;</div>
+		  <div class="span9">
+		    <p>
+		      <strong>  Eclipse Xtext is implemented in Java, so you must have a 
+		        <a href="http://www.oracle.com/technetwork/java/index.html">Java
+		        Runtime Environment</a> installed in order to proceed.
+		      </strong>
+		    </p>
+		    <p>
+		      There are two easy ways to get Xtext up and running. A pre-configured Eclipse distribution is available
+		      which has already all the necessary plug-ins installed. Alternatively, you can install Xtext into your
+		      existing Eclipse by means of the Eclipse update mechanism.
+		    </p>
+		    <!--  section -->
+		    <section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
+		    <h2>  Install Pre-Configured Eclipse With Xtext
+		    </h2>
+		      <ol>
+		        <li>Download the distribution from above that matches your OS.</li>
+		        <li>Unzip the archive into the directory of your choice. 
+						<strong>  Windows Users should choose a directory close to the root since the zip contains a 
+						deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.
+						</strong>
+		        </li>
+		        <li>Launch Eclipse and select the workspace location. A workspace location is the directory for your user data
+						    and project files.
+		        </li>
+		      </ol>
+		    </section>
+		    <!--  section -->
+		    <section style="padding-top: 68px; margin-top: -68px;">
+		    <h2>  Install Xtext From Update Site
+		    </h2>
+		    <p>
+		      If you have an Eclipse running : 
+		    </p>
+		      <ul>
+		        <li>  
+						    Choose 
+						<strong>  Help -&gt; Install New Software...
+						</strong> from the menu bar and
+						<strong>  Add...
+						</strong> Insert one of the update site URLs from above.
+						    This site aggregates all the necessary and optional components and dependencies of Xtext.
+		        </li>
+		        <li>Select the <i>Xtext SDK</i> from the category <i>Xtext {version}</i> and 
+		        complete the wizard by clicking the <i>Next</i> button until you can click <i>Finish</i>.
+		        </li>
+		        <li>  
+						    After a quick download and a restart of Eclipse, Xtext is ready to use.
+		        </li>
+		      </ul>
+		    <p>
+		      Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 
+		      the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid 
+		      this, you can manually install the feature 
+		      <strong>  Xtext Antlr-2.0.0
+		      </strong> from the itemis update site
+		      (
+		      <a href="http://download.itemis.de/updates/">http://download.itemis.de/updates/</a>). 
+		      The general installation procedures are not affected by this issue.
+		    </p>
+		    </section>
+		  </div>
+		<div class="span1">&nbsp;</div>
+		</div>
+		<div class="container">
+			<h2>FAQs</h2>
+			<hr />
 			<div class="span1">&nbsp;</div>
-			</div>
-			<div class="container">
-				<h2>FAQs</h2>
-				<hr />
-				<div class="span1">&nbsp;</div>
-				<div class="span9" id="faq">
-					<div class="accordion" id="accordion2">
-					    <div class="accordion-group">
-					      <div class="accordion-heading">
-					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_an_update_site_">
-					    	  What is an update site?
-					    	</a>
-					      </div>
-					      <div id="What_is_an_update_site_" class="accordion-body collapse">
-					    	<div class="accordion-inner">
-					    	  Eclipse comes with a built-in update manager, that understands so called update sites.
-					    	  When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
-					    	</div>
-					      </div>
-					    </div>
-					    <div class="accordion-group">
-					      <div class="accordion-heading">
-					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_the_license_of_Xtext_">
-					    	  What is the license of Xtext?
-					    	</a>
-					      </div>
-					      <div id="What_is_the_license_of_Xtext_" class="accordion-body collapse">
-					    	<div class="accordion-inner">
-					    	  <p>Xtext is freely available under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-					    	  <p>
-					    	  	The license allows to use Xtext for development and even for developing and selling commercial products based on Xtext.
-					    	  </p>
-					    	</div>
-					      </div>
-					    </div>
-					    <div class="accordion-group">
-					      <div class="accordion-heading">
-					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#If_Xtext_is_open_source_how_can_I_get_professional_support_">
-					    	  If Xtext is open-source how can I get professional support?
-					    	</a>
-					      </div>
-					      <div id="If_Xtext_is_open_source_how_can_I_get_professional_support_" class="accordion-body collapse">
-					    	<div class="accordion-inner">
-					    	  <p>Software systems built from open source components requires manpower that understands the internal dependencies of 
-					    	  these components and can quickly and efficiently eliminate problems, should an error occur. </p>
-					    	  <p><b>itemis</b> is the leading consulting company for Eclipse-based development tools and is the main
-					    	  supporter for the Xtext project. Xtext experts are available for consulting.</p>
-					    	  See <a target="_blank" href="http://xtext.itemis.com">xtext.itemis.com</a> for more details.
-					    	</div>
-					      </div>
-					    </div>
-					    <div class="accordion-group">
-					      <div class="accordion-heading">
-					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Can_I_download_the_update_site_as_a_zip_">
-					    	  Can I download the update site as a zip?
-					    	</a>
-					      </div>
-					      <div id="Can_I_download_the_update_site_as_a_zip_" class="accordion-body collapse">
-					    	<div class="accordion-inner">
-					    	  <p>If you instead prefer a downloadable updatesite or an SDK zip, 
-					    	  please have a look at the following site : <a href="http://www.eclipse.org/modeling/tmf/downloads/">http://www.eclipse.org/modeling/tmf/downloads/</a></p>
-					    	</div>
-					      </div>
-					    </div>
-					</div>
-		  		</div>
-				<div class="span1">&nbsp;</div>
-			</div>
+			<div class="span9" id="faq">
+				<div class="accordion" id="accordion2">
+				    <div class="accordion-group">
+				      <div class="accordion-heading">
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_an_update_site_">
+				    	  What is an update site?
+				    	</a>
+				      </div>
+				      <div id="What_is_an_update_site_" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+				    	  Eclipse comes with a built-in update manager, that understands so called update sites.
+				    	  When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
+				    	</div>
+				      </div>
+				    </div>
+				    <div class="accordion-group">
+				      <div class="accordion-heading">
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_the_license_of_Xtext_">
+				    	  What is the license of Xtext?
+				    	</a>
+				      </div>
+				      <div id="What_is_the_license_of_Xtext_" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+				    	  <p>Xtext is freely available under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
+				    	  <p>
+				    	  	The license allows to use Xtext for development and even for developing and selling commercial products based on Xtext.
+				    	  </p>
+				    	</div>
+				      </div>
+				    </div>
+				    <div class="accordion-group">
+				      <div class="accordion-heading">
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#If_Xtext_is_open_source__how_can_I_get_professional_support_">
+				    	  If Xtext is open-source, how can I get professional support?
+				    	</a>
+				      </div>
+				      <div id="If_Xtext_is_open_source__how_can_I_get_professional_support_" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+				    	  <p>Software systems built from open source components requires manpower that understands the internal dependencies of 
+				    	  these components and can quickly and efficiently eliminate problems, should an error occur. </p>
+				    	  <p><b>itemis</b> is the leading consulting company for Eclipse-based development tools and is the main
+				    	  supporter for the Xtext project. Xtext experts are available for consulting.</p>
+				    	  See <a target="_blank" href="http://xtext.itemis.com">xtext.itemis.com</a> for more details.
+				    	</div>
+				      </div>
+				    </div>
+				    <div class="accordion-group">
+				      <div class="accordion-heading">
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Can_I_download_the_update_site_as_a_zip_">
+				    	  Can I download the update site as a zip?
+				    	</a>
+				      </div>
+				      <div id="Can_I_download_the_update_site_as_a_zip_" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+				    	  <p>If you instead prefer a downloadable updatesite or an SDK zip, 
+				    	  please have a look at the following site : <a href="http://www.eclipse.org/modeling/tmf/downloads/">http://www.eclipse.org/modeling/tmf/downloads/</a></p>
+				    	</div>
+				      </div>
+				    </div>
+				</div>
+	  		</div>
+			<div class="span1">&nbsp;</div>
 		</div>
 	</div>
+</div>
 	<div id="extra">
 		<div class="inner">
 			<div class="container">
@@ -385,7 +385,7 @@
 						</ul>
 					</div>
 					<div class="span6">
-						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">@Xtext</a> Tweets</h3>
+						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
 						<br />
 						<div id="tweet">
 							<p>Please wait while my tweets load</p>

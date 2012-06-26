@@ -107,7 +107,7 @@ abstract class AbstractWebsite implements Resource {
 				        includeRT: true,
 				        enableLinks: true, 
 				        clearContents: true,
-				        template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
+				        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
 				     });
 		         
 		         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -196,7 +196,7 @@ abstract class AbstractWebsite implements Resource {
 							</ul>
 						</div>
 						<div class="span6">
-							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">@«twitterID.toFirstUpper»</a> Tweets</h3>
+							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">«twitterID.toFirstUpper»</a> on Twitter</h3>
 							<br />
 							<div id="tweet">
 								<p>Please wait while my tweets load</p>
@@ -233,7 +233,7 @@ abstract class AbstractWebsite implements Resource {
 		«IF prettyPrint»		
 			<!-- include pretty-print files -->
 			<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-			<script type="text/javascript" src="google-code-prettify/lang-common.js"></script>
+			<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 		«ENDIF»
 		
 		<!-- Include the plug-in -->

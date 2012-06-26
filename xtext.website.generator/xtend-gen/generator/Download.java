@@ -561,7 +561,7 @@ public class Download extends AbstractWebsite {
     _builder_3.newLine();
     _builder_3.append("See <a target=\"_blank\" href=\"http://xtext.itemis.com\">xtext.itemis.com</a> for more details.");
     _builder_3.newLine();
-    CharSequence _faqEntry_2 = this.faqEntry("If Xtext is open-source how can I get professional support?", _builder_3);
+    CharSequence _faqEntry_2 = this.faqEntry("If Xtext is open-source, how can I get professional support?", _builder_3);
     _builder.append(_faqEntry_2, "				    ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t    ");

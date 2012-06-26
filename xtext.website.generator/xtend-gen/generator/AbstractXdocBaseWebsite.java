@@ -11,10 +11,10 @@ import org.eclipse.xtext.xdoc.xdoc.LangDef;
 public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
   protected abstract Document getDocument();
   
-  public CharSequence javaScriptDocumentStart() {
+  public CharSequence javaScriptAtTheEnd() {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _javaScriptDocumentStart = super.javaScriptDocumentStart();
-    _builder.append(_javaScriptDocumentStart, "");
+    CharSequence _javaScriptAtTheEnd = super.javaScriptAtTheEnd();
+    _builder.append(_javaScriptAtTheEnd, "");
     _builder.newLineIfNotEmpty();
     CharSequence _prettify = this.prettify();
     _builder.append(_prettify, "");
@@ -28,6 +28,7 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
   
   public CharSequence prettify() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-common.js\"></script>");
     CharSequence result = _builder;
     Document _document = this.getDocument();
     boolean _notEquals = (!Objects.equal(_document, null));
@@ -44,14 +45,22 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
           for(final LangDef lang : languages) {
             {
               boolean _or = false;
+              boolean _or_1 = false;
               String _name = lang.getName();
               boolean _equalsIgnoreCase = _name.equalsIgnoreCase("java");
               if (_equalsIgnoreCase) {
-                _or = true;
+                _or_1 = true;
               } else {
                 String _name_1 = lang.getName();
                 boolean _equalsIgnoreCase_1 = _name_1.equalsIgnoreCase("xml");
-                _or = (_equalsIgnoreCase || _equalsIgnoreCase_1);
+                _or_1 = (_equalsIgnoreCase || _equalsIgnoreCase_1);
+              }
+              if (_or_1) {
+                _or = true;
+              } else {
+                String _name_2 = lang.getName();
+                boolean _equalsIgnoreCase_2 = _name_2.equalsIgnoreCase("xtend");
+                _or = (_or_1 || _equalsIgnoreCase_2);
               }
               boolean _not = (!_or);
               if (_not) {
@@ -70,8 +79,8 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
                   }
                 }
                 _builder_1.append("\', \'");
-                String _name_2 = lang.getName();
-                String _lowerCase = _name_2.toLowerCase();
+                String _name_3 = lang.getName();
+                String _lowerCase = _name_3.toLowerCase();
                 _builder_1.append(_lowerCase, "	");
                 _builder_1.append("\');");
                 _builder_1.newLineIfNotEmpty();
