@@ -109,9 +109,24 @@ Workflow {
     
                 // content assist API
                 fragment = contentAssist.JavaBasedContentAssistFragment {}
-    
+
                 // generates a more lightweight Antlr parser and lexer tailored for content assist
-                fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+                fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
+                
+                fragment = de.itemis.statefullexer.StatefulLexerFragment {
+//                	lexerGrammar = "org.eclipse.xpect.ui.highlighting.CradleHighlightingLexer" 
+                	highlighting = true
+                	antlrParam = "-lib"
+                	antlrParam = "${runtimeProject}.ui/src-gen/org/eclipse/xpect/ui/contentassist/antlr/lexer"
+                }
+    
+                
+                fragment = de.itemis.statefullexer.StatefulLexerFragment {
+//                	lexerGrammar = "org.eclipse.xpect.ui.contentassist.XpectContentAssistLexer" 
+                	contentAssist = true
+                	antlrParam = "-lib"
+                	antlrParam = "${runtimeProject}.ui/src-gen/org/eclipse/xpect/ui/contentassist/antlr/lexer"
+                }
     
                 // generates junit test support classes into Generator#pathTestProject
                 fragment = junit.Junit4Fragment {}

@@ -3,15 +3,61 @@
  */
 package org.eclipse.xpect.scoping;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xpect.xpect.XpectFile;
+import org.eclipse.xpect.xpect.XpectPackage;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * This class contains custom scoping description.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
- *
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
+ * how and when to use it
+ * 
  */
-public class XpectScopeProvider extends AbstractDeclarativeScopeProvider {
+public class XpectScopeProvider extends AbstractScopeProvider {
+
+	@Inject
+	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+	private IScopeProvider delegate;
+
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (reference == XpectPackage.Literals.XPECT_INVOCATION__ELEMENT)
+			return createXpectInvocationElementScope(EcoreUtil2
+					.getContainerOfType(context, XpectFile.class));
+		return delegate.getScope(context, reference);
+	}
+
+	private IScope createXpectInvocationElementScope(XpectFile file) {
+		if (file.getSetup() == null || file.getSetup().getTest() == null
+				|| file.getSetup().getTest().eIsProxy())
+			return IScope.NULLSCOPE;
+		JvmDeclaredType type = file.getSetup().getTest();
+		List<IEObjectDescription> descs = Lists.newArrayList();
+		for (JvmFeature feature : type.getAllFeatures())
+			if (feature instanceof JvmOperation)
+				descs.add(EObjectDescription.create(
+						QualifiedName.create(feature.getSimpleName()), feature));
+		return new SimpleScope(descs);
+	}
 
 }
