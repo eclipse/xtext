@@ -28,11 +28,6 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
   
   public CharSequence prettify() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\" rel=\"stylesheet\" />");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/prettify.js\"></script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-common.js\"></script>");
     CharSequence result = _builder;
     Document _document = this.getDocument();
     boolean _notEquals = (!Objects.equal(_document, null));

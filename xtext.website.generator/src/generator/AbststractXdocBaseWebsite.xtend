@@ -16,10 +16,7 @@ abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
 	}
 	
 	def prettify() { 
-		var result = '''
-		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-		<script type="text/javascript" src="google-code-prettify/lang-common.js"></script>'''
+		var result = ''''''
 		if(document != null){
 			val languages = document.langDefs
 			if(languages.size > 0)

@@ -39,10 +39,10 @@ abstract class AbstractWebsite implements Resource {
 		<html lang="en">
 		<head>
 			<meta charset="utf-8">
-			<title>Xtext - Language Development Made Easy!</title>
+			<title>«websiteTitle»</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="description"
-				content="The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages">
+				content="«websiteDescription»">
 			<meta name="author" content="Sven Efftinge">
 			«stylesheets»
 			«javaScriptDocumentStart»
@@ -55,22 +55,22 @@ abstract class AbstractWebsite implements Resource {
 		</body>
 		</html>
 	'''
+	def websiteDescription() { 
+		'The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages'
+	}
+
+	
+	def websiteTitle() {
+		'Xtext - Language Development Made Easy!'
+	}
+
 	
 	def javaScriptDocumentStart() '''
-		<script
-			src="js/twitter.js"
-			type="text/javascript">
-		        </script>
-		<script type="text/javascript">
-		            
-		        </script>
-		
-		
+		<script src="js/twitter.js" type="text/javascript"></script>
 		<script src="js/jquery-1.7.1.min.js"></script>
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
 			<script type="text/javascript">
 		     $(document).ready(function() {
-
 						«IF isPrettyPrint»
 										 prettyPrint();
 						«ENDIF»
@@ -102,7 +102,7 @@ abstract class AbstractWebsite implements Resource {
 						«ENDIF»
 			 	     
 			 	     getTwitters('tweet', { 
-				        id: 'xtext', 
+				        id: '«twitterID»', 
 				        count: 5,
 				        includeRT: true,
 				        enableLinks: true, 
@@ -117,7 +117,7 @@ abstract class AbstractWebsite implements Resource {
 			</script>
 		<script type="text/javascript">
 			var _gaq = _gaq || [];	
-		  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		  	_gaq.push([ '_setAccount', '«analyticsAccount»' ]);
 			_gaq.push([ '_trackPageview' ]);
 			(function() {
 				var ga = document.createElement('script');
@@ -131,6 +131,10 @@ abstract class AbstractWebsite implements Resource {
 			})();
 		</script>
 	'''
+	def analyticsAccount() { 'UA-2429174-4' }
+
+	def twitterID() { 'xtext' }
+
 	def protected boolean isPrettyPrint() { false }
 	def protected boolean isOutline() { true }
 	def protected boolean isPopover() { true }
@@ -147,7 +151,7 @@ abstract class AbstractWebsite implements Resource {
 					</a> <a class="brand" href="index.html"></a>
 		
 		      <div class="btn-group pull-right">
-		        <g:plusone href="http://www.xtext.org"></g:plusone>
+		        <g:plusone href="«plusoneURL»"></g:plusone>
 		      </div>
 		
 					<div class="nav-collapse collapse" style="height: 0px;">
@@ -167,41 +171,32 @@ abstract class AbstractWebsite implements Resource {
 		</div>
 		<!-- Navbar End -->
 	'''
+	def plusoneURL() { 'http://www.xtext.org' }
+
 
 	
 	def quickLinksAndTweets() '''
 		<div id="extra">
-
 			<div class="inner">
-		
 				<div class="container">
-		
 					<div class="row">
-		
 						<div class="span6">
-		
 							<h3>Quick Links</h3>
-		
-		
 							<ul class="footer-links clearfix">
-		<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-		<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-		<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
-		</ul>
+								<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+								<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+								<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+								<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+							</ul>
 							<ul class="footer-links clearfix">
-		            			<li><a href="/index.html">Home</a></li>
+		      			<li><a href="/index.html">Home</a></li>
 								<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 								<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 								<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
 							</ul>
-		
 						</div>
-		
-		
 						<div class="span6">
-		
-							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">@Xtext</a> Tweets</h3>
+							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">@«twitterID.toFirstUpper»</a> Tweets</h3>
 							<br />
 							<div id="tweet">
 								<p>Please wait while my tweets load</p>
@@ -210,15 +205,10 @@ abstract class AbstractWebsite implements Resource {
 										out what I've been twittering</a>
 								</p>
 							</div>
-		
-		
 						</div>
 					</div>
-		
 				</div>
-		
 			</div>
-		
 		</div>
 	'''
 
@@ -239,14 +229,15 @@ abstract class AbstractWebsite implements Resource {
 		<script src="js/bootstrap-collapse.js"></script>
 		<script src="js/bootstrap-carousel.js"></script>
 		<script src="js/bootstrap-typeahead.js"></script>
-		<script type="text/javascript">
-			$(function () { 
-				$(".has-popover").popover();  
-			});  
-		</script>
+
+		«IF prettyPrint»		
+			<!-- include pretty-print files -->
+			<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+			<script type="text/javascript" src="google-code-prettify/lang-common.js"></script>
+		«ENDIF»
+		
 		<!-- Include the plug-in -->
 		<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-		
 		<script src="js/custom.js" type="text/javascript"></script>
 	'''
 
@@ -276,14 +267,13 @@ abstract class AbstractWebsite implements Resource {
 		
 		<link rel="shortcut icon" href="images/favicon.png">
 		
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/bootstrap-responsive.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/shield-responsive.css">
-		
+		<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+		<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+		<link href="css/style.css" rel="stylesheet" type='text/css'>
+		<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
 		<link href='css/fonts.css' rel='stylesheet' type='text/css'>
-		
-		<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
+		<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
 	'''
 
 	def headline(String title) '''

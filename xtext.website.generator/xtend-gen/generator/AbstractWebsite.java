@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 @SuppressWarnings("all")
@@ -66,8 +67,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<meta charset=\"utf-8\">");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<title>Xtext - Language Development Made Easy!</title>");
-    _builder.newLine();
+    _builder.append("<title>");
+    String _websiteTitle = this.websiteTitle();
+    _builder.append(_websiteTitle, "	");
+    _builder.append("</title>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
     _builder.newLine();
@@ -75,8 +79,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<meta name=\"description\"");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("content=\"The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages\">");
-    _builder.newLine();
+    _builder.append("content=\"");
+    String _websiteDescription = this.websiteDescription();
+    _builder.append(_websiteDescription, "		");
+    _builder.append("\">");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<meta name=\"author\" content=\"Sven Efftinge\">");
     _builder.newLine();
@@ -115,27 +122,17 @@ public abstract class AbstractWebsite implements Resource {
     return _builder;
   }
   
+  public String websiteDescription() {
+    return "The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages";
+  }
+  
+  public String websiteTitle() {
+    return "Xtext - Language Development Made Easy!";
+  }
+  
   public CharSequence javaScriptDocumentStart() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<script");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("src=\"js/twitter.js\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("type=\"text/javascript\">");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("</script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\">");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("</script>");
-    _builder.newLine();
-    _builder.newLine();
+    _builder.append("<script src=\"js/twitter.js\" type=\"text/javascript\"></script>");
     _builder.newLine();
     _builder.append("<script src=\"js/jquery-1.7.1.min.js\"></script>");
     _builder.newLine();
@@ -146,7 +143,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("     ");
     _builder.append("$(document).ready(function() {");
-    _builder.newLine();
     _builder.newLine();
     {
       boolean _isPrettyPrint = this.isPrettyPrint();
@@ -234,8 +230,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("getTwitters(\'tweet\', { ");
     _builder.newLine();
     _builder.append("\t\t        ");
-    _builder.append("id: \'xtext\', ");
-    _builder.newLine();
+    _builder.append("id: \'");
+    String _twitterID = this.twitterID();
+    _builder.append(_twitterID, "		        ");
+    _builder.append("\', ");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t        ");
     _builder.append("count: 5,");
     _builder.newLine();
@@ -277,8 +276,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("var _gaq = _gaq || [];\t");
     _builder.newLine();
     _builder.append("  \t");
-    _builder.append("_gaq.push([ \'_setAccount\', \'UA-2429174-4\' ]);");
-    _builder.newLine();
+    _builder.append("_gaq.push([ \'_setAccount\', \'");
+    String _analyticsAccount = this.analyticsAccount();
+    _builder.append(_analyticsAccount, "  	");
+    _builder.append("\' ]);");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("_gaq.push([ \'_trackPageview\' ]);");
     _builder.newLine();
@@ -315,6 +317,14 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("</script>");
     _builder.newLine();
     return _builder;
+  }
+  
+  public String analyticsAccount() {
+    return "UA-2429174-4";
+  }
+  
+  public String twitterID() {
+    return "xtext";
   }
   
   protected boolean isPrettyPrint() {
@@ -361,8 +371,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"btn-group pull-right\">");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<g:plusone href=\"http://www.xtext.org\"></g:plusone>");
-    _builder.newLine();
+    _builder.append("<g:plusone href=\"");
+    String _plusoneURL = this.plusoneURL();
+    _builder.append(_plusoneURL, "        ");
+    _builder.append("\"></g:plusone>");
+    _builder.newLineIfNotEmpty();
     _builder.append("      ");
     _builder.append("</div>");
     _builder.newLine();
@@ -433,49 +446,51 @@ public abstract class AbstractWebsite implements Resource {
     return _builder;
   }
   
+  public String plusoneURL() {
+    return "http://www.xtext.org";
+  }
+  
   public CharSequence quickLinksAndTweets() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"extra\">");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t");
     _builder.append("<div class=\"inner\">");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<div class=\"container\">");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<div class=\"row\">");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<h3>Quick Links</h3>");
-    _builder.newLine();
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org/legal/privacy.php\">Privacy Policy</a></li>");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org/legal/termsofuse.php\">Terms of Use</a></li>");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org/legal/copyright.php\">Copyright Agent</a></li>");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org/legal/\">Legal</a></li>");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
-    _builder.append("            \t\t\t");
+    _builder.append("      \t\t\t");
     _builder.append("<li><a href=\"/index.html\">Home</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
@@ -490,19 +505,19 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</div>");
-    _builder.newLine();
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3><a href=\"https://twitter.com/#!/xtext\" style=\"color: white;\">@Xtext</a> Tweets</h3>");
-    _builder.newLine();
+    _builder.append("<h3><a href=\"https://twitter.com/#!/xtext\" style=\"color: white;\">@");
+    String _twitterID = this.twitterID();
+    String _firstUpper = StringExtensions.toFirstUpper(_twitterID);
+    _builder.append(_firstUpper, "					");
+    _builder.append("</a> Tweets</h3>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("<br />");
     _builder.newLine();
@@ -527,22 +542,17 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("</div>");
     _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</div>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("</div>");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</div>");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t");
     _builder.append("</div>");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("</div>");
     _builder.newLine();
@@ -583,23 +593,22 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<script src=\"js/bootstrap-typeahead.js\"></script>");
     _builder.newLine();
-    _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("$(function () { ");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("$(\".has-popover\").popover();  ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("});  ");
-    _builder.newLine();
-    _builder.append("</script>");
+    {
+      boolean _isPrettyPrint = this.isPrettyPrint();
+      if (_isPrettyPrint) {
+        _builder.append("<!-- include pretty-print files -->");
+        _builder.newLine();
+        _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/prettify.js\"></script>");
+        _builder.newLine();
+        _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-common.js\"></script>");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("<!-- Include the plug-in -->");
     _builder.newLine();
     _builder.append("<script src=\"js/jquery.easing.1.3.js\" type=\"text/javascript\"></script>");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("<script src=\"js/custom.js\" type=\"text/javascript\"></script>");
     _builder.newLine();
@@ -659,19 +668,19 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<link rel=\"shortcut icon\" href=\"images/favicon.png\">");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("<link href=\"css/bootstrap.css\" rel=\"stylesheet\">");
+    _builder.append("<link href=\"css/bootstrap.css\" rel=\"stylesheet\" type=\'text/css\'>");
     _builder.newLine();
-    _builder.append("<link href=\"css/bootstrap-responsive.css\" rel=\"stylesheet\">");
+    _builder.append("<link href=\"css/bootstrap-responsive.css\" rel=\"stylesheet\" type=\'text/css\'>");
     _builder.newLine();
-    _builder.append("<link rel=\"stylesheet\" href=\"css/style.css\">");
+    _builder.append("<link href=\"css/style.css\" rel=\"stylesheet\" type=\'text/css\'>");
     _builder.newLine();
-    _builder.append("<link rel=\"stylesheet\" href=\"css/shield-responsive.css\">");
-    _builder.newLine();
+    _builder.append("<link href=\"css/shield-responsive.css\" rel=\"stylesheet\" type=\'text/css\'>");
     _builder.newLine();
     _builder.append("<link href=\'css/fonts.css\' rel=\'stylesheet\' type=\'text/css\'>");
     _builder.newLine();
+    _builder.append("<link href=\"css/prettyPhoto.css\" rel=\"stylesheet\" media=\"screen\" type=\'text/css\'>");
     _builder.newLine();
-    _builder.append("<link rel=\"stylesheet\" media=\"screen\" href=\"css/prettyPhoto.css\" />");
+    _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\" rel=\"stylesheet\"/>");
     _builder.newLine();
     return _builder;
   }
