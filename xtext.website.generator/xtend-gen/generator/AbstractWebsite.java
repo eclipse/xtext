@@ -491,7 +491,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
     _builder.append("      \t\t\t");
-    _builder.append("<li><a href=\"/index.html\">Home</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse Home</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://marketplace.eclipse.org/\">Market Place</a></li>");
