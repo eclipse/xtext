@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -26,18 +27,48 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
+	
+	@Override
+	public JvmArrayType getArrayType() {
+		JvmArrayType result = super.getArrayType();
+		if (result == null) {
+			result = TypesFactory.eINSTANCE.createJvmArrayType();
+			boolean wasDeliver = eDeliver();
+			eSetDeliver(false);
+			try {
+				setArrayType(result);
+			} finally {
+				eSetDeliver(wasDeliver);
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
+				// don't demand-create the array if queried reflectively
+				if (resolve && arrayType != null) return getArrayType();
+				return basicGetArrayType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 	
 	@Override
 	public String getPackageName() {

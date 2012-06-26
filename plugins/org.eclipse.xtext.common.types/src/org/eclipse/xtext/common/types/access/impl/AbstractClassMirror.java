@@ -110,10 +110,6 @@ public abstract class AbstractClassMirror implements IClassMirror {
 		JvmComponentType component = (JvmComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2), fallback);
 		if (component == null)
 			return null;
-		if (component.getArrayType() == null) {
-			JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
-			arrayType.setComponentType(component);
-		}
 		return component.getArrayType();
 	}
 	
