@@ -149,7 +149,7 @@ public class Download extends AbstractWebsite {
     _builder.append("data-original-title=\"Right-click and \'Copy Link\'\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
-    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/stable/\" ");
+    _builder.append("href=\"http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t    \t");
     _builder.append("class=\"has-popover btn btn-primary btn-large\"");

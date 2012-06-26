@@ -53,7 +53,7 @@ class Download extends AbstractWebsite {
 										rel="popover" 
 							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
 							    	data-original-title="Right-click and 'Copy Link'" 
-										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/stable/" 
+										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" 
 							    	class="has-popover btn btn-primary btn-large"
 							    	style="width: 70%;">Bleeding Edge!</a></td>
 							    </tr>
