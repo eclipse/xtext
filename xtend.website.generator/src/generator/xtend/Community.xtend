@@ -14,20 +14,20 @@ class Community extends AbstractXtendWebsite {
 				«entry('''
 						icon_forum.png
 					''','''
-						Got Questions?
+						Discussion Group
 					''','''
-						http://www.eclipse.org/forums/index.php?t=thread&frm_id=27
+						https://groups.google.com/group/xtend-lang
 					''','''
-						<p>The <strong>Xtext forum</strong> is the first source for getting answers in case you got stuck.
+						<p>The <strong>Xtend Google Group</strong> is the first source for getting answers in case you got stuck.
 						The community is very friendly. 
 						<br>Please ask any questions clearly and with sufficient information attached.</p>
 					''')»
 				«entry('''
 						icon_bugzilla.png
 					''','''
-						Found a Bug?
+						File a Bug
 					''','''
-						https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&classification=Modeling&product=TMF&component=Xtext&long_desc_type=allwordssubstr&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&status_whiteboard_type=allwordssubstr&status_whiteboard=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&emailtype1=exact&email1=&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0=
+						https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Xtend
 					''','''
 						<p>Bug reports and enhancement request are tracked at <strong>bugs.eclipse.org</strong>. Please 
 						explain the problem and provide a reduced but reproducable eample.
@@ -36,11 +36,11 @@ class Community extends AbstractXtendWebsite {
 				«entry('''
 						icon_twitter.png
 					''','''
-						Xtext on Twitter
+						Xtend on Twitter
 					''','''
-						http://www.eclipse.org/forums/index.php?t=thread&frm_id=27
+						https://twitter.com/#!/xtendlang
 					''','''
-						<p>If you are on twitter and want to get notified about all things Xtext, you should consider following <strong>@Xtext</strong>.</p>
+						<p>If you are on twitter and want to get notified about all things Xtend, you should consider following <strong>@xtendlang</strong>.</p>
 					''')»
 				«entry('''
 						icon_prof_support.png
@@ -49,10 +49,11 @@ class Community extends AbstractXtendWebsite {
 					''','''
 						http://xtext.itemis.com
 					''','''
-						<p>Need training, problem solving, a prototype, or just a top-notch IDE for your language? 
-						<br><strong>itemis</strong> offers all kinds of professional consulting around Xtext.</p>
+						<p>Need training or problem solving? 
+						<br><strong>itemis</strong> offers all kinds of consulting around professional software development.</p>
 					''')»
 			</div>
+			<br/><br/>
 			<br/><br/>
 		</div>
 	'''

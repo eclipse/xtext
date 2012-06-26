@@ -50,31 +50,50 @@ strong {
 	background: url(../images/pattern1.jpg) repeat #ebebeb;
 }
 
-.btn_android {
-	background: url(../images/btn-android.png) no-repeat;
-	width: 178px;
-	height: 65px;
-	margin-top: 20px;
-	float: left;
-	margin-left: 10px;
+#comparison h2 {
+	font-family: 'Vollkorn', serif;
+	color: #6B6B6B;
+	font-weight: 400;
+	line-height: 1.3em;
+	font-style: normal;
+	word-spacing: 1px;
+	text-align: right;
+	font-size: 24px;
+	margin:20pt;
 }
 
-.btn_appstore {
-	background: url(../images/btn-appstore.png) no-repeat;
-	width: 178px;
-	height: 65px;
-	margin-top: 20px;
-	float: left;
+td.code {
+	background-color: transparent; 
+	border: inherited;
+}
+
+td.code pre {
+	background-color: transparent; 
+	border: none;
 }
 
 .btn_download {
 	background: url(../images/download.png) no-repeat;
-	width: 225px;
-	height: 80px;
+	width: 160px;
+	height: 60px;
 /* 	margin-top: 20px; */
 	float: left;
 /* 	margin-left: 10px; */
 }
+.btn_documentation {
+	background: url(../images/documentation.png) no-repeat;
+	width: 200px;
+	height: 60px;
+	float: left;
+/* 	margin-top: 20px; */
+/* 	margin-left: 10px; */
+}
+@media (min-width: 1200px) {
+  .btn_documentation {
+		margin-left:40px;
+  }
+}
+
 
 .button_wrapper {
 	position: relative;
@@ -135,8 +154,8 @@ strong {
 	#header_wrapper {
 		margin-left : -15pt;
 		margin-right : -15pt;
-		padding-top:0;
-	}	
+		padding: 10pt;
+	}
 }
 
 .image-slider h2 {
@@ -183,8 +202,9 @@ strong {
 	line-height: 1.3em;
 	font-style: normal;
 	word-spacing: 1px;
-	text-align: center;
+	text-align: left;
 	font-size: 24px;
+	margin-top: 10pt;
 }
 
 #features p {
@@ -194,7 +214,12 @@ strong {
 	line-height: 1.3em;
 	font-style: normal;
 	word-spacing: 1px;
-	text-align: center;
+	text-align: left;
+}
+
+.float {
+	float: left;
+	min-height: 220px;
 }
 
 .icon_bg {
@@ -231,15 +256,21 @@ ul#screens li {
 }
 
 img.screenshot {
-	width: 260px;
-	height: 134px;
-	margin-left: 42px;
-	float: left;
+/* 	width: 260px; */
+/* 	height: 134px; */
+/* 	margin-left: 42px; */
+/* 	float: left; */
+}
+
+.feature {
+	float:left;
 }
 
 .thumb {
 	position: relative;
 	overflow: hidden;
+	float:left;
+	margin:10pt;
 }
 
 .thumb .zoom {
@@ -265,28 +296,25 @@ img.screenshot {
 	opacity: 0.4;
 	outline: none;
 	position: absolute;
-	left: 220px;
+	left: 190px;
 	top: 140px;
 }
 
 @media (min-width: 1200px) {
   .introduction .zoom {
-	position: absolute;
-	left: 220px;
-	top: 140px;
   }
+  .introduction {
+		margin-left:30pt;
+	}
 }
 @media (max-width: 979px) {
   .introduction .zoom {
-	position: absolute;
-	left: 140px;
-	top: 140px;
+	left: 165px;
+	top: 120px;
   }
 }
 @media (max-width: 767px) {
   .introduction .zoom {
-	position: absolute;
-	left: 220px;
 	top: 220px;
   }
 }
@@ -615,6 +643,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #extra {
 	border-top: 1px solid #fff;
 	background-color: #222;
+	margin-top:20pt;
 }
 
 #extra .inner {
@@ -661,15 +690,15 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #nav-outline {
 	position: fixed;
 	left: 50%;
-	top: 60pt;
+	top: 65pt;
 	margin-left: -345pt;
 	max-width: 200px;
 	list-style: none;
 }
 @media (min-width: 1200px) {
 	#nav-outline {
-		margin-left: -435pt;
-		max-width: 200px;
+		margin-left: -425pt;
+		max-width: 250px;
 	}	
 }
 @media (max-width: 979px) {
@@ -697,7 +726,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	left: 50%;
 	margin-left: -50%;
 	width: 100%;
-	z-index: 999;
+	z-index: 1030;
 	background-image: none;
 	background-color: #222;
 }
@@ -810,6 +839,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	color: #74C0CF;
 	text-align: center;
 }
+
 
 /*List Styles */
 ul.list1 li {

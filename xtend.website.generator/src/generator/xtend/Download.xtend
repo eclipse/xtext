@@ -186,7 +186,7 @@ class Download extends AbstractXtendWebsite {
 							<section>
 							<h2 style="padding-top: 15px;">Getting the runtime library via Maven</h2>
 							<p>
-								The <a href="#library">runtime library</a> is contained in the same Maven repository as the plug-in : <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+								The <a href="api/2.3.0/index.html">runtime library</a> is contained in the same Maven repository as the plug-in : <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
 							</p>
 							The XML for the dependency is :
 							</p>
@@ -205,54 +205,7 @@ class Download extends AbstractXtendWebsite {
 				  </div>
 				<div class="span1">&nbsp;</div>
 				</div>
-				<div class="container">
-					<h2>FAQs</h2>
-					<hr />
-					<div class="span1">&nbsp;</div>
-					<div class="span9" id="faq">
-						<div class="accordion" id="accordion2">
-						    «faqEntry('What is an update site?','''
-								Eclipse comes with a built-in update manager, that understands so called update sites.
-								When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
-						    ''')»
-						    «faqEntry('What is the license of Xtext?','''
-								<p>Xtext is freely available under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-								<p>
-									The license allows to use Xtext for development and even for developing and selling commercial products based on Xtext.
-								</p>
-						    ''')»
-						    «faqEntry('If Xtext is open-source how can I get professional support?','''
-								  <p>Software systems built from open source components requires manpower that understands the internal dependencies of 
-								  these components and can quickly and efficiently eliminate problems, should an error occur. </p>
-								  <p><b>itemis</b> is the leading consulting company for Eclipse-based development tools and is the main
-								  supporter for the Xtext project. Xtext experts are available for consulting.</p>
-								  See <a target="_blank" href="http://xtext.itemis.com">xtext.itemis.com</a> for more details.
-						    ''')»
-						    «faqEntry('Can I download the update site as a zip?','''
-								  <p>If you instead prefer a downloadable updatesite or an SDK zip, 
-								  please have a look at the following site : <a href="http://www.eclipse.org/modeling/tmf/downloads/">http://www.eclipse.org/modeling/tmf/downloads/</a></p>
-						    ''')»
-						</div>
-			  		</div>
-					<div class="span1">&nbsp;</div>
-				</div>
 			</div>
-		</div>
-	'''
-	
-	def faqEntry(String question, CharSequence answer) '''
-		«val key = question.replaceAll('\\W','_')»
-		<div class="accordion-group">
-		  <div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#«key»">
-			  «question»
-			</a>
-		  </div>
-		  <div id="«key»" class="accordion-body collapse">
-			<div class="accordion-inner">
-			  «answer»
-			</div>
-		  </div>
 		</div>
 	'''
 	

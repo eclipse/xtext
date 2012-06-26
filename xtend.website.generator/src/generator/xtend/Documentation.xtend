@@ -110,6 +110,10 @@ class Documentation extends AbstractXtendWebsite {
 					</li>
 				«ENDFOR»
 			«ENDFOR»
+			<li>&nbsp;</li>
+			<li style="color : #333;">Additional Resources</li>
+			<li><a href="documentation/2.3.0/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+			<li><a href="api/2.3.0/index.html">Runtime Library API</a>
 		</ul>
 	'''
 	

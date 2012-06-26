@@ -486,8 +486,8 @@ code[Xtend][
   \]
 ]
 
-A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
-in the closure's expression. That is exactly what we did with the variable code[textField].
+A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to. 
+That is exactly what we did with the variable code[textField] above.
 
 section2:closureTypes[Typing]
 
@@ -518,7 +518,7 @@ code[Xtend][
   val stringToStringFunction2 = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
 ]
 
-Checked exceptions that are thrown in the body of a closure but not declared in the implemented method of the target type are rethrown using the 
+Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are rethrown using the 
 ref:declaredExceptions[sneaky-throw technique].
 Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
 
