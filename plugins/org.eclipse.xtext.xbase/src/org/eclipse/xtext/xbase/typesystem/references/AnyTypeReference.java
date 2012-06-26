@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,8 +37,34 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	public String toString() {
+	public String getSimpleName() {
 		return "null";
+	}
+	
+	@Override
+	public String getIdentifier() {
+		return "null";
+	}
+	
+	@Override
+	public boolean isType(Class<?> clazz) {
+		return false;
+	}
+	
+	@Override
+	@Nullable
+	public JvmType getType() {
+		return null;
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getSuperTypes() {
+		return Collections.emptyList();
+	}
+	
+	@Override
+	public void collectSuperTypes(SuperTypeAcceptor acceptor) {
+		// noop
 	}
 	
 	@Override

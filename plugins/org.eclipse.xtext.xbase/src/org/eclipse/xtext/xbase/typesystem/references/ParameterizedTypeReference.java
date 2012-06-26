@@ -7,18 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -36,8 +47,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (type == null) {
 			throw new NullPointerException("type may not be null");
 		}
+		if (type instanceof JvmArrayType) {
+			throw new IllegalArgumentException("type should be an array type");
+		}
 		this.type = type;
-		// TODO check against owner
+		// TODO check against owner or specialized representation of the owner
 		this.resolved = !(type instanceof JvmTypeParameter);
 	}
 	
@@ -59,6 +73,15 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isRawType() {
+		if (type instanceof JvmGenericType) {
+			if (!((JvmGenericType) type).getTypeParameters().isEmpty() && expose(typeArguments).isEmpty())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
 		if (type instanceof JvmPrimitiveType) {
 			Primitives primitives = getOwner().getServices().getPrimitives();
@@ -69,8 +92,64 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getPrimitiveIfWrapperType() {
+		if (type instanceof JvmDeclaredType) {
+			Primitives primitives = getOwner().getServices().getPrimitives();
+			JvmType primitiveType = primitives.getPrimitiveTypeIfWrapper((JvmDeclaredType) type);
+			if (primitiveType != null) {
+				return new ParameterizedTypeReference(getOwner(), primitiveType);
+			}
+		}
+		return this;
+	}
+	
+	@Override
 	public boolean isPrimitive() {
 		return type instanceof JvmPrimitiveType;
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getSuperTypes() {
+		// TODO should this be a service?
+		if (type instanceof JvmDeclaredType) {
+			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
+			if (!superTypes.isEmpty()) {
+				if (!isRawType()) {
+					DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
+					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(this);
+					StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(mapping, getOwner());
+					OwnedConverter converter = new OwnedConverter(getOwner());
+					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
+					for(JvmTypeReference superType: superTypes) {
+						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+						result.add(substitutor.substitute(lightweightSuperType));
+					}
+					return result;
+				} else {
+					OwnedConverter converter = new OwnedConverter(getOwner());
+					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
+					for(JvmTypeReference superType: superTypes) {
+						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+						result.add(lightweightSuperType.getRawTypeReference());
+					}
+					return result;
+				}
+			}
+		} else if (type instanceof JvmTypeParameter) {
+			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
+			if (!constraints.isEmpty()) {
+				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(constraints.size());
+				OwnedConverter converter = new OwnedConverter(getOwner());
+				for(JvmTypeConstraint constraint: constraints) {
+					if (constraint instanceof JvmUpperBound) {
+						LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
+						result.add(upperBound);
+					}
+				}
+				return result;
+			}
+		}
+		return Collections.emptyList();
 	}
 	
 	public List<LightweightTypeReference> getTypeArguments() {
@@ -111,10 +190,19 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public String toString() {
+	public String getSimpleName() {
+		return getAsString(type.getSimpleName(), new SimpleNameFunction());
+	}
+	
+	@Override
+	public String getIdentifier() {
+		return getAsString(type.getIdentifier(), new IdentifierFunction());
+	}
+	
+	protected String getAsString(String type, Function<LightweightTypeReference, String> format) {
 		if (typeArguments != null)
-			return type.getSimpleName() + "<" + Joiner.on(", ").join(getTypeArguments()) + ">";
-		return type.getSimpleName();
+			return type + "<" + Joiner.on(", ").join(Iterables.transform(typeArguments, format)) + ">";
+		return type;
 	}
 
 	@Override

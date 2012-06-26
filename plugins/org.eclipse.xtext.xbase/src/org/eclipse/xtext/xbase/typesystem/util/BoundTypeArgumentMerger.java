@@ -5,16 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -88,29 +91,30 @@ public class BoundTypeArgumentMerger {
 				variance = VarianceInfo.IN.mergeInvariance(variance, inVariance);
 			}
 		} else if (!outTypes.isEmpty()) {
-			type = owner.getCommonSuperType(outTypes);
+			TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
+			type = conformanceComputer.getCommonSuperType(outTypes);
 			if (type == null)
 				throw new IllegalStateException("common super type may not be null");
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 			if (!inVariances.isEmpty()) {
-				LightweightTypeReference inType = getMostSpecialType(inTypes, owner);
-				boolean conformant = owner.isConformant(type, inType, new TypeConformanceComputationArgument(false, true, false));
+				LightweightTypeReference inType = getMostSpecialType(inTypes);
+				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false));
 				VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 				variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
 			}
 		} else if (!inTypes.isEmpty()) {
-			type = getMostSpecialType(inTypes, owner);
+			type = getMostSpecialType(inTypes);
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
 		return new LightweightMergedBoundTypeArgument(type, variance);
 	}
 
-	protected LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates, TypeReferenceOwner owner) {
+	protected LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates) {
 		LightweightTypeReference type;
 		type = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
 			LightweightTypeReference candidate = candidates.get(i);
-			if (owner.isConformant(type, candidate)) {
+			if (type.isAssignableFrom(candidate)) {
 				type = candidate;
 			}
 		}

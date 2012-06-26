@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -71,6 +72,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
+	@NonNull
 	protected JvmType getRoot() {
 		return (JvmType) super.getRoot();
 	}
@@ -142,6 +144,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
+	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		prepare(resolvedTypes, session);
 		super.computeTypes(resolvedTypes, session);
@@ -149,6 +152,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
+	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmConstructor) {
 			_computeTypes(resolvedTypes, featureScopeSession, (JvmConstructor) element);

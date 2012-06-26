@@ -3,19 +3,19 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutorTest;
-import org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
 /**
  * @author Sebastian Zarnekow
@@ -56,18 +56,7 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
     throw _unsupportedOperationException;
   }
   
-  public LightweightTypeReference getCommonSuperType(final List<LightweightTypeReference> subTypes) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
-  }
-  
-  public boolean isConformant(final LightweightTypeReference declaredType, final LightweightTypeReference actualType) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
-  }
-  
-  public boolean isConformant(final LightweightTypeReference type, final LightweightTypeReference inType, final TypeConformanceComputationArgument argument) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
+  public ResourceSet getContextResourceSet() {
+    return this.getContextResourceSet();
   }
 }

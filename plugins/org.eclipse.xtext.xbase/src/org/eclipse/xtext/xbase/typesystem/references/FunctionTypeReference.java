@@ -15,7 +15,9 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -27,7 +29,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	private List<LightweightTypeReference> parameterTypes;
 	private LightweightTypeReference returnType;
 	
-	protected FunctionTypeReference(TypeReferenceOwner owner, JvmType type) {
+	public FunctionTypeReference(TypeReferenceOwner owner, JvmType type) {
 		super(owner, type);
 	}
 	
@@ -71,7 +73,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		return result;
 	}
 	
-	protected void addParameterType(LightweightTypeReference parameterType) {
+	public void addParameterType(LightweightTypeReference parameterType) {
 		if (parameterType == null) {
 			throw new NullPointerException("parameterType may not be null");
 		}
@@ -84,7 +86,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		resolved &= parameterType.isResolved();
 	}
 	
-	protected void setReturnType(LightweightTypeReference returnType) {
+	public void setReturnType(LightweightTypeReference returnType) {
 		if (returnType == null) {
 			throw new NullPointerException("returnType may not be null");
 		}
@@ -96,8 +98,8 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	}
 	
 	@Override
-	public String toString() {
-		return "(" + Joiner.on(", ").join(parameterTypes) + ")=>" + returnType + " // " + super.toString();
+	protected String getAsString(String type, Function<LightweightTypeReference, String> format) {
+		return "(" + Joiner.on(", ").join(Iterables.transform(expose(parameterTypes), format)) + ")=>" + format.apply(returnType);
 	}
 	
 	@Override

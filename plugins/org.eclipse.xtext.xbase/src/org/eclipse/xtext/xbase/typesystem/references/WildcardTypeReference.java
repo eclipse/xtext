@@ -12,12 +12,15 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -61,6 +64,16 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			result.lowerBound = lowerBound.copyInto(owner);
 		}
 		return result;
+	}
+	
+	@Override
+	public boolean isType(Class<?> clazz) {
+		return false;
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getSuperTypes() {
+		return expose(getUpperBounds());
 	}
 	
 	@Override
@@ -110,14 +123,29 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	public String toString() {
+	public String getSimpleName() {
+		return getAsString(new SimpleNameFunction());
+	}
+	
+	@Override
+	public String getIdentifier() {
+		return getAsString(new IdentifierFunction());
+	}
+	
+	@Override
+	@Nullable
+	public JvmType getType() {
+		return null;
+	}
+	
+	private String getAsString(Function<LightweightTypeReference, String> format) {
 		if (lowerBound != null) {
-			return "? super " + lowerBound;
+			return "? super " + format.apply(lowerBound);
 		}
 		if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
 			return "?";
 		}
-		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(upperBounds) : "");
+		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(Iterables.transform(upperBounds, format)) : "");
 	}
 	
 	@Override

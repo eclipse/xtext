@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -53,6 +54,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return result;
 	}
 	
+	@Override
+	public boolean isRawType() {
+		if (resolvedTo != null)
+			return resolvedTo.isRawType();
+		return false;
+	}
+	
 	public JvmTypeParameter getTypeParameter() {
 		return typeParameter;
 	}
@@ -89,11 +97,34 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isArray() {
+		if (resolvedTo != null) {
+			return resolvedTo.isArray();
+		}
+		return false;
+	}
+	
+	@Override
 	@Nullable
 	public JvmType getType() {
 		if (resolvedTo != null)
 			return resolvedTo.getType();
 		return getTypeParameter();
+	}
+	
+	@Override
+	public boolean isType(Class<?> clazz) {
+		if (resolvedTo != null) {
+			return resolvedTo.isType(clazz);
+		}
+		return false;
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getSuperTypes() {
+		if (resolvedTo != null)
+			return resolvedTo.getSuperTypes();
+		return Collections.emptyList();
 	}
 	
 	@Override
@@ -117,11 +148,19 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	public String toString() {
+	public String getSimpleName() {
 		if (resolvedTo != null) {
-			return resolvedTo.toString();
+			return resolvedTo.getSimpleName();
 		}
-		return "Unbound <" + typeParameter + ">";
+		return "Unbound <" + typeParameter.getSimpleName() + ">";
+	}
+	
+	@Override
+	public String getIdentifier() {
+		if (resolvedTo != null) {
+			return resolvedTo.getIdentifier();
+		}
+		return "Unbound <" + typeParameter.getIdentifier() + ">";
 	}
 	
 	@Override
@@ -180,5 +219,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			throw new IllegalStateException("Cannot query hints for a resolved reference");
 		}
 		return getOwner().getAllHints(getHandle());
+	}
+
+	public boolean equalHandles(UnboundTypeReference reference) {
+		return getHandle().equals(reference.getHandle());
 	}
 }

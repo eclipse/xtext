@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,8 +15,15 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
+import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,21 +31,44 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  *  - get rid of containment constraints
  *  - easier copying
  *  - isResolved
+ *  - getSynonyms
+ *  - getSuperTypes (resolved)
+ *  - isAssignableFrom
+ *  - collectSuperTypes
+ *  - getAllSuperTypes
+ * ?? - getFeatures (returns feature handles?)
+ *  - getFeatureByName
  */
 @NonNullByDefault
 public abstract class LightweightTypeReference {
 	
+	protected static class IdentifierFunction implements Function<LightweightTypeReference, String> {
+		public String apply(@Nullable LightweightTypeReference reference) {
+			if (reference == null)
+				throw new NullPointerException("reference");
+			return reference.getIdentifier();
+		}
+	}
+	
+	protected static class SimpleNameFunction implements Function<LightweightTypeReference, String> {
+		public String apply(@Nullable LightweightTypeReference reference) {
+			if (reference == null)
+				throw new NullPointerException("reference");
+			return reference.getSimpleName();
+		}
+	}
+	
 	private TypeReferenceOwner owner;
 	
 	protected LightweightTypeReference(TypeReferenceOwner owner) {
-		this.owner = owner;
+		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 
 	public boolean isResolved() {
 		return true;
 	}
 	
-	protected TypeReferenceOwner getOwner() {
+	public TypeReferenceOwner getOwner() {
 		return owner;
 	}
 	
@@ -68,20 +97,18 @@ public abstract class LightweightTypeReference {
 	public abstract JvmTypeReference toTypeReference();
 	
 	@Nullable
-	public JvmType getType() {
-		return null;
-	}
+	public abstract JvmType getType();
 	
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
 		return this;
 	}
 	
-	/*
-	 * Does pretty much the same as the RawTypeHelper
-	 * TODO implement me
-	 */
+	public LightweightTypeReference getPrimitiveIfWrapperType() {
+		return this;
+	}
+	
 	public List<JvmType> getRawTypes() {
-		throw new UnsupportedOperationException();
+		return getServices().getRawTypeHelper().getAllRawTypes(this, getOwner().getContextResourceSet());
 	}
 	
 	/*
@@ -90,15 +117,52 @@ public abstract class LightweightTypeReference {
 	 * TODO implement me
 	 */
 	public LightweightTypeReference getRawTypeReference() {
-		throw new UnsupportedOperationException();
+		return getServices().getRawTypeHelper().getRawTypeReference(this, getOwner().getContextResourceSet());
 	}
 	
-	/*
-	 * Returns true if the associated type expects arguments but none are given
-	 * TODO implement me
-	 */
 	public boolean isRawType() {
-		throw new UnsupportedOperationException();
+		return false;
+	}
+	
+	public boolean isArray() {
+		return false;
+	}
+	
+	public abstract List<LightweightTypeReference> getSuperTypes();
+	
+	public void collectSuperTypes(SuperTypeAcceptor acceptor) {
+		throw new UnsupportedOperationException("Implement me");
+	}
+	
+//	public abstract List<LightweightTypeReference> getAllSuperTypes();
+	
+	protected List<LightweightTypeReference> getSuperTypes(@Nullable List<LightweightTypeReference> references) {
+		if (references == null || references.isEmpty())
+			return Collections.emptyList();
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(references.size());
+		for(LightweightTypeReference reference: references) {
+			result.addAll(reference.getSuperTypes());
+		}
+		return result;
+	}
+	
+	public boolean isPrimitive() {
+		return false;
+	}
+	
+	public boolean isPrimitiveVoid() {
+		return isType(Void.TYPE);
+	}
+	
+	public boolean isAssignableFrom(LightweightTypeReference reference) {
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true);
+		return isAssignableFrom(reference, argument);
+	}
+	
+	public boolean isAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
+		TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
+		TypeConformanceResult result = conformanceCompouter.isConformant(this, reference, argument);
+		return result.isConformant();
 	}
 	
 	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
@@ -111,16 +175,20 @@ public abstract class LightweightTypeReference {
 	protected abstract LightweightTypeReference doCopyInto(TypeReferenceOwner owner);
 	
 	@Override
-	public abstract String toString();
-
-	public boolean isType(Class<?> clazz) {
-		return false;
+	public final String toString() {
+		return getSimpleName();
 	}
 	
-	public boolean isType(Type type) {
-		throw new UnsupportedOperationException();
+	public abstract String getSimpleName();
+	
+	public abstract String getIdentifier();
+	
+	protected JvmType findType(Class<?> type) {
+		return getServices().getTypeReferences().findDeclaredType(type, getOwner().getContextResourceSet());
 	}
 
+	public abstract boolean isType(Class<?> clazz);
+	
 	public void accept(TypeReferenceVisitor visitor) {
 		visitor.doVisitTypeReference(this);
 	}
@@ -153,6 +221,7 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 
+	// TODO move to utility / factory
 	public CompoundTypeReference toMultiType(LightweightTypeReference reference) {
 		if (reference == null) {
 			throw new NullPointerException("reference may not be null");
@@ -163,8 +232,4 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 
-	public boolean isPrimitive() {
-		return false;
-	}
-	
 }

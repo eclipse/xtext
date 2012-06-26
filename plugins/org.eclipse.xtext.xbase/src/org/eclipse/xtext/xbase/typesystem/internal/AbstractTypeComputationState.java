@@ -29,22 +29,22 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xbase.typesystem.references.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeParameterAwareTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
 import com.google.common.collect.Lists;
 

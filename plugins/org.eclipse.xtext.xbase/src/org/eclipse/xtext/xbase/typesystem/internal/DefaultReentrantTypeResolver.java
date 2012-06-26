@@ -9,12 +9,13 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -23,6 +24,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 
 	@Inject
@@ -41,7 +43,7 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	
 	private boolean resolving = false;
 	
-	public void initializeFrom(@NonNull EObject root) {
+	public void initializeFrom(EObject root) {
 		this.root = root;
 	}
 	
@@ -49,7 +51,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		return root;
 	}
 	
-	@NonNull
 	public IResolvedTypes reentrantResolve() {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");

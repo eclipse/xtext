@@ -49,6 +49,7 @@ class PublicStackedResolvedTypes extends StackedResolvedTypes {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
 	override public setTypeComputer(ITypeComputer typeComputer) {

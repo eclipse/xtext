@@ -7,29 +7,116 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OwnedConverter implements Function<JvmTypeReference, LightweightTypeReference>{
+public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTypeReference> implements Function<JvmTypeReference, LightweightTypeReference> {
 
-	private final Converter converter;
 	private final TypeReferenceOwner owner;
 
 	public OwnedConverter(TypeReferenceOwner owner) {
-		this.converter = new Converter();
-		this.owner = owner;
+		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 	
 	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
-		return converter.toLightweightReference(reference, owner);
+		return visit(reference);
 	}
 
 	public LightweightTypeReference apply(JvmTypeReference reference) {
 		return toLightweightReference(reference);
 	}
+
+	@Override
+	public LightweightTypeReference doVisitAnyTypeReference(JvmAnyTypeReference reference) {
+		return new AnyTypeReference(owner);
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+		JvmTypeReference originalComponentType = reference.getComponentType();
+		LightweightTypeReference lightweightComponentType = visit(originalComponentType);
+		return new ArrayTypeReference(owner, lightweightComponentType);
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference) {
+		return doVisitCompoundReference(reference, false);
+	}
+
+	protected LightweightTypeReference doVisitCompoundReference(JvmCompoundTypeReference reference,
+			boolean synonym) {
+		CompoundTypeReference result = new CompoundTypeReference(owner, synonym);
+		for(JvmTypeReference component: reference.getReferences()) {
+			result.addComponent(visit(component));
+		}
+		return result;
+	}
+
+	@Override
+	public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, reference.getType());
+		for(JvmTypeReference argument: reference.getArguments()) {
+			result.addTypeArgument(visit(argument));
+		}
+		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference reference) {
+		return doVisitCompoundReference(reference, true);
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+		WildcardTypeReference result = new WildcardTypeReference(owner);
+		for(JvmTypeConstraint constraint: reference.getConstraints()) {
+			if (constraint instanceof JvmUpperBound) {
+				result.addUpperBound(visit(constraint.getTypeReference()));
+			} else {
+				result.setLowerBound(visit(constraint.getTypeReference()));
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference) {
+		FunctionTypeReference result = new FunctionTypeReference(owner, reference.getType());
+		JvmTypeReference equivalent = reference.getEquivalent();
+		if (equivalent instanceof JvmParameterizedTypeReference) {
+			for(JvmTypeReference argument: ((JvmParameterizedTypeReference)equivalent).getArguments()) {
+				result.addTypeArgument(visit(argument));
+			}
+		}
+		for(JvmTypeReference parameter: reference.getParamTypes()) {
+			result.addParameterType(visit(parameter));
+		}
+		if (reference.getReturnType() != null) {
+			result.setReturnType(visit(reference.getReturnType()));
+		}
+		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitTypeReference(JvmTypeReference reference) {
+		throw new IllegalStateException("Did not expect: " + reference);
+	}
+	
 }
 

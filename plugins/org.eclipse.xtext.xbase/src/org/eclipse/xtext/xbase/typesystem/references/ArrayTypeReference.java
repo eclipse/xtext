@@ -7,10 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,7 +31,10 @@ public class ArrayTypeReference extends LightweightTypeReference {
 
 	public ArrayTypeReference(TypeReferenceOwner owner, LightweightTypeReference component) {
 		super(owner);
-		this.component = component;
+		this.component = Preconditions.checkNotNull(component, "component");
+		if (!(component.getType() instanceof JvmComponentType)) {
+			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
+		}
 	}
 	
 	@Override
@@ -33,8 +45,43 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public JvmArrayType getType() {
+		JvmType componentType = component.getType();
+		if (componentType instanceof JvmComponentType) {
+			return Preconditions.checkNotNull(((JvmComponentType) componentType).getArrayType());
+		}
+		throw new IllegalStateException("component type seems to be invalid");
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getSuperTypes() {
+		List<LightweightTypeReference> componentSuperTypes = component.getSuperTypes();
+		if (!componentSuperTypes.isEmpty()) {
+			List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(componentSuperTypes.size());
+			for(LightweightTypeReference componentSuperType: componentSuperTypes) {
+				result.add(new ArrayTypeReference(getOwner(), componentSuperType));
+			}
+			return result;
+		}
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(3);
+		result.add(new ParameterizedTypeReference(getOwner(), findType(Serializable.class)));
+		result.add(new ParameterizedTypeReference(getOwner(), findType(Cloneable.class)));
+		return result;
+	}
+	
+	@Override
 	public boolean isResolved() {
 		return component.isResolved();
+	}
+	
+	@Override
+	public boolean isRawType() {
+		return component.isRawType();
+	}
+	
+	@Override
+	public boolean isArray() {
+		return true;
 	}
 
 	@Override
@@ -44,8 +91,13 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public String toString() {
-		return component + "[]";
+	public String getSimpleName() {
+		return component.getSimpleName() + "[]";
+	}
+	
+	@Override
+	public String getIdentifier() {
+		return component.getIdentifier() + "[]";
 	}
 	
 	@Override

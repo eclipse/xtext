@@ -3,9 +3,10 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import com.google.inject.Inject;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 /**
@@ -34,6 +35,17 @@ public class CommonTypeComputationServices {
   
   public void setTypeConformanceComputer(final TypeConformanceComputer typeConformanceComputer) {
     this._typeConformanceComputer = typeConformanceComputer;
+  }
+  
+  @Inject
+  private IRawTypeHelper _rawTypeHelper;
+  
+  public IRawTypeHelper getRawTypeHelper() {
+    return this._rawTypeHelper;
+  }
+  
+  public void setRawTypeHelper(final IRawTypeHelper rawTypeHelper) {
+    this._rawTypeHelper = rawTypeHelper;
   }
   
   @Inject
