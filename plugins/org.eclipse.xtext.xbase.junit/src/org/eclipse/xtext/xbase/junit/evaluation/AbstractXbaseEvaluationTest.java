@@ -2503,6 +2503,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("foobar", "(new StringBuilder => [ append('foo') it => [foo | foo.append('bar')] ]).toString");
 	}
 	
+	@Test
+	public void testItAssignment() throws Exception {
+		assertEvaluatesTo(42l, "(new java.util.Date() => [ time = 42l ]).time");
+	}
+	
+	@Test
+	public void testItAssignment_1() throws Exception {
+		assertEvaluatesTo(42l, "{val it = new java.util.Date(); time = 42l; time }");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertEquals(object, invokeXbaseExpression(string));
 	}
