@@ -158,7 +158,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_1.append("Xtend removes all the unnecessary syntactical noise: No semicolons, ");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("no empty parenthesis, good default visibility.<br/><br/>");
+    _builder_1.append("no empty parentheses, good default visibility.<br/><br/>");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("<strong>Whitespace can be so beautiful!</strong>");

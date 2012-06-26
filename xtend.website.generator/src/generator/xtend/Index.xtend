@@ -63,7 +63,7 @@ class Index extends AbstractXtendWebsite {
 				«entry('Less Noise','''
 					<p>
 						Xtend removes all the unnecessary syntactical noise: No semicolons, 
-						no empty parenthesis, good default visibility.<br/><br/>
+						no empty parentheses, good default visibility.<br/><br/>
 						<strong>Whitespace can be so beautiful!</strong>
 					</p>
 					''',

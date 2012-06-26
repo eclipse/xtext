@@ -488,6 +488,7 @@ tfoot td {
 .pricing td.focus span {
 	font-size: 10px;
 	display: block;
+	margin-top: 5px;
 }
 
 .pricing td.focus-best span {
