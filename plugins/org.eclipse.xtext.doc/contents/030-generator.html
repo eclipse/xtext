@@ -55,7 +55,7 @@ Given the following simple Java class (POJO):
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(Person&nbsp;child)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.children.add(child);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -78,7 +78,7 @@ Person&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -105,7 +105,7 @@ The interpreter will basically do the same as the following <em>main</em> method
 &nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -141,7 +141,7 @@ child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -244,28 +244,28 @@ Workflow&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> and is part of the very slim runtime 
+Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> and is part of the very slim runtime 
 model shipped with MWE2. It accepts 
 <span class="inlinecode">bean</span>s and <span class="inlinecode">component</span>s. A <span class="inlinecode"><span class="keyword">var</span></span> declaration is a first class concept of MWE2&apos;s configuration language 
 and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
 Note that you can refer to the variables using the <span class="inlinecode">${variable-name}</span> notation. 
 </p>
 <p>
-The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr></a> does nothing but provides a means to apply global side-effects, which 
+The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> does nothing but provides a means to apply global side-effects, which 
 unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
-e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a>.
+e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
-Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr></a> method 
-accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a>, which is the primary concept of MWE2&apos;s workflow model. The
-language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> and can therefore be used within MWE2 workflows. 
+Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> method 
+accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a>, which is the primary concept of MWE2&apos;s workflow model. The
+language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> and can therefore be used within MWE2 workflows. 
 </p>
 <a name="generator_6"></a>
 <h3>Standard Generator Fragments</h3>
@@ -439,7 +439,7 @@ constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.c
 &nbsp;&nbsp;@Inject<br/>
 &nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IScopeProvider&nbsp;scopeProvider;<br/>
 <br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -471,7 +471,7 @@ implemented in Java. Here&apos;s an example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -501,7 +501,7 @@ method is :
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -531,7 +531,7 @@ A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com
 &nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br/>
 &nbsp;&nbsp;&nbsp;*/</span><br/>
 &nbsp;&nbsp;T&nbsp;get();<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -549,7 +549,7 @@ the following binding method.
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;<br/>
 &nbsp;&nbsp;provideIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -570,7 +570,7 @@ if some global state should be shared in the application:
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -584,7 +584,7 @@ or
 <p class="code">
 <span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -603,7 +603,7 @@ name &apos;configure&apos;, has a return type <span class="inlinecode"><span cla
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br/>
 &nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
-}&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -626,7 +626,7 @@ method. It could look like this:
 &nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);<br/>
 &nbsp;&nbsp;application.run();<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

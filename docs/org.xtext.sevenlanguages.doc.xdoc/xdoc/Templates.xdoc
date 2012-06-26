@@ -1,0 +1,35 @@
+chapter:templates[Templates]
+
+section:templates_motivation[The Problem]
+
+Motivation
+Why
+
+section:templates_solution[A Solution With Xtext]
+
+Why a DSL
+How about expressions
+DSL example, Java example, Client code example (if appropriate)
+
+Approx 2 pages upto here
+
+section2:templates_statistics[Some Stats]
+
+files touched, LOC, animals harmed, etc 
+can also be funny
+
+section:templates_running[Running the Example]
+
+Details on how to run it: Prerequisites, additional plugins... 
+
+section:templates_details[The Solution in Detail]
+
+section2:templates_grammar[Grammar]
+
+section2:templates_inferrer[Translation to Java]
+
+section2:templates_additons[Additional Aspects]
+
+Addtionally customized things: validation, scoping, code completion ...
+
+section:templates_beyond[Beyond This Example]

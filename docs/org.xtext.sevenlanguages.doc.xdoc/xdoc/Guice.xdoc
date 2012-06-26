@@ -1,0 +1,36 @@
+chapter:guice[Guice Modules]
+
+section:guice_motivation[The Problem]
+
+Motivation
+Why
+
+section:guice_solution[A Solution With Xtext]
+
+Why a DSL
+How about expressions
+DSL example, Java example, Client code example (if appropriate)
+
+Approx 2 pages upto here
+
+section2:guice_statistics[Some Stats]
+
+files touched, LOC, animals harmed, etc 
+can also be funny
+
+
+section:guice_running[Running the Example]
+
+Details on how to run it: Prerequisites, additional plugins... 
+
+section:guice_details[The Solution in Detail]
+
+section2:guice_grammar[Grammar]
+
+section2:guice_inferrer[Translation to Java]
+
+section2:guice_additons[Additional Aspects]
+
+Addtionally customized things: validation, scoping, code completion ...
+
+section:guice_beyond[Beyond This Example]

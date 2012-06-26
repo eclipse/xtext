@@ -27,7 +27,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmPrimitiveTypeImpl extends JvmComponentTypeImpl implements JvmPrimitiveType
+public class JvmPrimitiveTypeImpl extends JvmComponentTypeImplCustom implements JvmPrimitiveType
 {
 	/**
 	 * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.

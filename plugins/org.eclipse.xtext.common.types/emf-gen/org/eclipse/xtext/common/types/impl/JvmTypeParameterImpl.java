@@ -42,7 +42,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmTypeParameterImpl extends JvmComponentTypeImpl implements JvmTypeParameter
+public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements JvmTypeParameter
 {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
