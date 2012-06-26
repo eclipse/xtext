@@ -310,11 +310,9 @@ Hello World!</pre>
 								<p>
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/FiveMinTutorial_FreshProject.png" alt="" width="880" height="684">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -337,11 +335,9 @@ Hello World!</pre>
 								editor.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/FiveMinTutorial_LaunchConfig.png" alt="" width="862" height="626">
 								</div>
-								<p>
 							</p>
 							<p>
 								Before you can create a file for the sample language, you will have to create a sample project. Select
@@ -354,11 +350,9 @@ Hello World!</pre>
 								and see how the input is validated immediately.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/FiveMinTutorial_Editor.png" alt="" width="767" height="505">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -449,11 +443,9 @@ entity Comment extends HasAuthor {
 								Click on <strong>Finish</strong> to create the projects.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_wizard.png" alt="" width="633" height="547">
 								</div>
-								<p>
 							</p>
 							<p>
 								After you have successfully finished the wizard, you will find three new projects in your workspace.
@@ -474,11 +466,9 @@ entity Comment extends HasAuthor {
 								<p>
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_initialprojectlayout.png" alt="" width="912" height="544">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -544,37 +534,47 @@ Feature:
 								</p>
 								<ol>
 									<li>The first rule in a grammar is always used as the entry or start rule.  
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Domainmodel :
   elements += Type*
 ;</pre>
+									<p>
+									
 									    
 									    It says that a <strong>Domainmodel</strong> contains an arbitrary number (<code class="prettyprint lang-xtext">*</code>) of <strong>Type</strong>s which will be added (<code class="prettyprint lang-xtext">+=</code>)
 									    to a feature called <code class="prettyprint lang-xtext">elements</code>.</li>
 									<li>The rule <strong>Type</strong> delegates to either the rule <strong>DataType</strong> or (<code class="prettyprint lang-xtext">|</code>) the rule <strong>Entity</strong>.
 									      
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Type:
   DataType | Entity
-;</pre></li>
+;</pre>
+									<p></li>
 									<li>The rule <strong>DataType</strong> starts with a keyword <code class="prettyprint lang-xtext">'datatype'</code>, followed by an identifier
 									    which is parsed by a rule called <strong>ID</strong>. The rule <strong>ID</strong> is defined in the super grammar
 									<strong>org.eclipse.xtext.common.Terminals</strong> and parses a single word, a.k.a identifier. You can navigate
 									    to the declaration by using <strong>F3</strong> on the rule call.
 									    The value returned by the call to <strong>ID</strong> is assigned (<code class="prettyprint lang-xtext">=</code>) to the feature <strong>name</strong>.
 									      
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 DataType:
   'datatype' name = ID
-;</pre></li>
+;</pre>
+									<p></li>
 									<li>The rule <strong>Entity</strong> again starts with the definition of a keyword followed by a name.
 									    
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Entity :
   'entity' name = ID ('extends' superType = [Entity])? '{'
     features += Feature*
   '}'
 ;</pre>
+									<p>
+									
 									    
 									    Next up there is the extends clause which is parenthesized and optional (<code class="prettyprint lang-xtext">?</code>). 
 									    Since the feature named <strong>superType</strong> is a cross reference (note the square brackets),
@@ -583,10 +583,13 @@ Entity :
 									    Finally between curly braces there can be any number of <strong>Features</strong>, which invokes the next rule.</li>
 									<li>Last but not least, the rule <strong>Feature</strong> is defined as follows:
 									    
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Feature:
   (many ?= 'many')? name = ID ':' type = [Type] 
 ;</pre>
+									<p>
+									
 									    
 									    The keyword <code class="prettyprint lang-domainexample">many</code> is used to model a multi valued feature in the domain model
 									    DSL. The assignment operator (<code class="prettyprint lang-xtext">?=</code>) implies that the feature <strong>many</strong> is of type <strong>boolean</strong>. You are already familiar with
@@ -621,11 +624,9 @@ Feature:
 								messages in the Console View.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_rungenerator.png" alt="" width="601" height="510">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -637,11 +638,9 @@ Feature:
 								memory settings and parameters set. Now you can hit <strong>Run</strong> to start a new Eclipse.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_launchconfiguration.png" alt="" width="1074" height="780">
 								</div>
-								<p>
 							</p>
 							<p>
 								This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
@@ -653,11 +652,9 @@ Feature:
 								the outline view, find references etc.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_editor.png" alt="" width="879" height="637">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -729,6 +726,7 @@ package my.company.blog {
 									    the entry rule has to be modified. Furthermore, a common super type for <strong>Packages</strong> and <strong>Types</strong>
 									    should be introduced: the <strong>AbstractElement</strong>.
 									        
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Domainmodel:
   (elements += AbstractElement)*
@@ -736,11 +734,13 @@ Domainmodel:
 
 AbstractElement:
   PackageDeclaration | Type
-;</pre></li>
+;</pre>
+									<p></li>
 									<li>A <code class="prettyprint lang-xtext">PackageDeclaration</code> in turn looks pretty much as expected. It contains a number
 									    of <strong>Imports</strong> and <strong>AbstractElements</strong>. Since <strong>Imports</strong> should be allowed for the root-Domainmodel,
 									    too, we add them as an alternative to the rule <code class="prettyprint lang-xtext">AbstractElement</code>.
 									    
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 PackageDeclaration:
   'package' name = QualifiedName '{'
@@ -755,6 +755,8 @@ AbstractElement:
 QualifiedName:
   ID ('.' ID)*
 ;</pre>
+									<p>
+									
 									    
 									    The <code class="prettyprint lang-xtext">QualifiedName</code> is a little special. It does not contain any assignments. Therefore,
 									    it serves as a data type rule, which returns a String. So the feature <strong>name</strong> of a <strong>Package</strong> is still of
@@ -763,6 +765,7 @@ QualifiedName:
 									    in a parser rule, the framework will treat the value as an import. It even supports wildcard
 									    and handles them as expected:
 									    
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Import:
   'import' importedNamespace = QualifiedNameWithWildcard
@@ -771,12 +774,15 @@ Import:
 QualifiedNameWithWildcard:
   QualifiedName '.*'?
 ;</pre>
+									<p>
+									
 									    
 									    Similar to the rule <code class="prettyprint lang-xtext">QualifiedName</code>, <code class="prettyprint lang-xtext">QualifiedNameWithWildcard</code> returns
 									    a plain string.</li>
 									<li>The last step is to allow fully qualified names in cross references, too. Otherwise one could
 									    not refer to an entity without adding an import statement.
 									    
+									</p>
 									<pre class="prettyprint lang-xtext linenums">
 Entity:
   'entity' name = ID 
@@ -789,6 +795,8 @@ Entity:
 Feature:
   (many ?= 'many')? name = ID ':' type = [Type | QualifiedName]
 ;</pre>
+									<p>
+									
 									    
 									<strong>Please note that the bar (<code class="prettyprint lang-xtend">|</code>) is not an alternative in the context of a cross reference,
 									    but used to specify the syntax of the parsed string.</strong></li>
@@ -859,11 +867,9 @@ Feature:
 								into smaller parts and have cross-references across file boundaries.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_multipleeditors.png" alt="" width="978" height="448">
 								</div>
-								<p>
 							</p>
 							</section>
 						</div>
@@ -1041,6 +1047,7 @@ class DomainmodelGenerator implements IGenerator {
 									    a for loop, we use the extension method <code class="prettyprint lang-java">toIterable()</code> from the built-in library class
 									<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IteratorExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions">IteratorExtensions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">(src)</a>.
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 class DomainmodelGenerator implements IGenerator {
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
@@ -1048,19 +1055,24 @@ class DomainmodelGenerator implements IGenerator {
       ...
     }
   }
-}</pre></li>
+}</pre>
+									<p></li>
 									<li>Now let's answer the question, how we determine the file name of the Java class, that each <strong>Entity</strong>
 									    should yield. This information should be derived from the qualified name of the <strong>Entity</strong> since
 									    Java enforces this pattern. The qualified name itself has to be obtained from a special service
 									    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 									    inject the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a> into the generator.
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 @Inject extension IQualifiedNameProvider</pre>
+									<p>
+									
 									    
 									    This allows to ask for the name of an entity. It is straightforward to convert the name into
 									    a file name:
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 override void doGenerate(Resource resource, IFileSystemAccess fsa) {
   for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
@@ -1068,21 +1080,25 @@ override void doGenerate(Resource resource, IFileSystemAccess fsa) {
       e.fullyQualifiedName.toString("/") + ".java",
       e.compile)
   }
-}</pre></li>
+}</pre>
+									<p></li>
 									<li>The next step is to write the actual template code for an entity. For now, the function <code class="prettyprint lang-xtend">Entity.compile</code>
 									    does not exist, but it is easy to create it:
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) '''
   package &laquo;e.eContainer.fullyQualifiedName&raquo;;
   
   public class &laquo;e.name&raquo; {
   }
-'''</pre></li>
+'''</pre>
+									<p></li>
 									<li>This small template is basically the first shot at a Java-Beans generator. However, it is currently
 									    rather incomplete and will fail, if the <strong>Entity</strong> is not contained in a package. A small modification
 									    fixes this. The <code class="prettyprint lang-java">package</code>-declaration has to be wrapped in an <code class="prettyprint lang-xtend">IF</code> expression:
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) '''
   &laquo;IF e.eContainer != null&raquo;
@@ -1091,8 +1107,10 @@ def compile(Entity e) '''
   
   public class &laquo;e.name&raquo; {
   }
-'''</pre>Let's handle the <strong>superType</strong> of an <strong>Entity</strong> gracefully, too by using another <code class="prettyprint lang-xtend">IF</code> expression:
+'''</pre>
+									<p>Let's handle the <strong>superType</strong> of an <strong>Entity</strong> gracefully, too by using another <code class="prettyprint lang-xtend">IF</code> expression:
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
   &laquo;IF e.eContainer != null&raquo;
@@ -1102,13 +1120,15 @@ def compile(Entity e) '''
   public class &laquo;e.name&raquo; &laquo;IF e.superType != null
           &raquo;extends &laquo;e.superType.fullyQualifiedName&raquo; &laquo;ENDIF&raquo;{
   }
-'''</pre></li>
+'''</pre>
+									<p></li>
 									<li>Even though the template will compile the <strong>Entities</strong> without any complains, it still lacks support
 									    for the Java properties, that each of the declared features should yield.
 									    
 									    For that purpose, you have to create another Xtend function that compiles a single feature
 									    to the respective Java code.
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 def compile(Feature f) '''
   private &laquo;f.type.fullyQualifiedName&raquo; &laquo;f.name&raquo;;
@@ -1121,10 +1141,13 @@ def compile(Feature f) '''
     this.&laquo;f.name&raquo; = &laquo;f.name&raquo;;
   }
 '''</pre>
+									<p>
+									
 									    
 									    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure
 									    that the function is actually used.
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 def compile(Entity e) ''' 
   &laquo;IF e.eContainer != null&raquo;
@@ -1137,7 +1160,8 @@ def compile(Entity e) '''
       &laquo;f.compile&raquo;
     &laquo;ENDFOR&raquo;
   }
-'''</pre></li>
+'''</pre>
+									<p></li>
 								</ol>
 								<p>
 							</p>
@@ -1232,6 +1256,7 @@ class DomainmodelGenerator implements IGenerator {
 									    the language specific <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/IInjectorProvider.html"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider">IInjectorProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">(src)</a>. Both have to be provided
 									    by means of class annotations:  
 									 
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
@@ -1239,12 +1264,14 @@ import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
 @InjectWith(typeof(DomainmodelInjectorProvider))
 @RunWith(typeof(XtextRunner))
 class ParserTest {
-}</pre></li>
+}</pre>
+									<p></li>
 									<li>The actual test case is pretty straight forward with Xtend. The utility class 
 									<strong>org.eclipse.xtext.junit4.util.ParseHelper</strong> allows to parse an arbitrary string into a
 									<strong>Domainmodel</strong>. The model itself can be traversed and checked afterwards. A static import of
 									<a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html"><abbr title="org.junit.Assert">Assert</abbr></a> leads to concise and readable test cases.
 									    
+									</p>
 									<pre class="prettyprint lang-xtend linenums">
 import org.eclipse.xtext.junit4.util.ParseHelper
 import static org.junit.Assert.*
@@ -1262,7 +1289,8 @@ def void parseDomainmodel() {
     }")
   val entity = model.elements.head as Entity
   assertSame(entity, entity.features.head.type)
-}</pre></li>
+}</pre>
+									<p></li>
 									<li>After saving the Xtend file, it is time to run the test. Please locate the generated java class
 									    in the <strong>xtend-gen</strong> folder and select <strong>Run As -&gt; JUnit Test</strong> from the context menu.</li>
 								</ol>
@@ -1421,11 +1449,9 @@ package my.model {
 								Click on <strong>Finish</strong> to create the projects.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_wizard.png" alt="" width="633" height="547">
 								</div>
-								<p>
 							</p>
 							<p>
 								After you have successfully finished the wizard, you will find three new projects in your workspace.
@@ -1446,11 +1472,9 @@ package my.model {
 								<p>
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/30min_initialprojectlayout.png" alt="" width="912" height="544">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -1529,30 +1553,42 @@ Operation:
 							<p>
 								</p>
 								<ol>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 grammar org.example.domainmodel.Domainmodel with
               org.eclipse.xtext.xbase.Xbase</pre>
+									<p>
+									
 									    The first thing to note is that instead of inheriting from the usual <strong>org.eclipse.xtext.common.Terminals</strong>
 									    grammar, we make use of <strong>org.eclipse.xtext.xbase.Xbase</strong>. 
 									    
 									    Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Domainmodel:
   elements+=AbstractElement*;</pre>
+									<p>
+									
 									    
 									    The first rule in a grammar is always used as the entry or start rule.  
 									    
 									    It says that a <strong>Domainmodel</strong> contains an arbitrary number (<code class="prettyprint lang-xtext">*</code>) of <strong>AbstractElement</strong>s which will be added (<code class="prettyprint lang-xtext">+=</code>)
 									    to a feature called <code class="prettyprint lang-xtext">elements</code>.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 AbstractElement:
   PackageDeclaration | Entity | Import;</pre>
+									<p>
+									
 									    The rule <strong>AbstractElement</strong> delegates to either the rule <strong>PackageDeclaration</strong>, the rule <strong>Entity</strong> or the rule <strong>Import</strong>.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 PackageDeclaration:
   'package' name=QualifiedName '{'
     elements+=AbstractElement*
   '}';</pre>
+									<p>
+									
 									    A <strong>PackageDeclaration</strong> is used to declare a name space which can again contain any number
 									    of <strong>AbstractElement</strong>s.  
 									    
@@ -1562,20 +1598,26 @@ PackageDeclaration:
 									    The qualified name of an <strong>Entity</strong> 'Baz' which is contained in a <strong>PackageDeclaration</strong> 'foo.bar'
 									    will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
 									    to use a different implementation of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Import:
   'import' importedNamespace=QualifiedNameWithWildCard;
 
 QualifiedNameWithWildCard :
   QualifiedName  ('.' '*')?;</pre>
+									<p>
+									
 									    The rule <strong>Import</strong> makes use of the <a href="#namespaceImports">namespace support</a>, too. It basically allows you to get full-blown
 									    import functionality as you are used to from Java, just by having these two rules in place.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Entity:
   'entity' name=ValidID 
     ('extends' superType=JvmTypeReference)? '{'
     features+=Feature*
   '}';</pre>
+									<p>
+									
 									    The rule <strong>Entity</strong> starts with the definition of a keyword followed by a name.
 									    
 									    The <strong>extends</strong> clause which is parenthesized and optional (note the trailing <code class="prettyprint lang-xtext">?</code>) makes use of the rule
@@ -1584,30 +1626,41 @@ Entity:
 									    names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
 									    
 									    Finally between curly braces there can be any number of <strong>Features</strong>, which leads us to the next rule.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Feature:
   Property | Operation;</pre>
+									<p>
+									
 									    
 									    The rule <strong>Feature</strong> delegates to either a <strong>Property</strong> or an <strong>Operation</strong>.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Property:
   name=ValidID ':' type=JvmTypeReference;</pre>
+									<p>
+									
 									    A <strong>Property</strong> has a name and makes again use of the inherited rule <strong>JvmTypeReference</strong>.</li>
-									<li><pre class="prettyprint lang-xtext linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtext linenums">
 Operation:
   'op' name=ValidID 
   '('(params+=FullJvmFormalParameter 
     (',' params+=FullJvmFormalParameter)*)?')'
   ':' type=JvmTypeReference 
   body=XBlockExpression;</pre>
+									<p>
+									
 									<strong>Operation</strong>s also have a signature as expected. Note that also for formal parameters we can
 									    reuse a rule from the super grammar.The <strong>Operation</strong>'s body, that is the actual implementation is defined by the rule <strong>XBlockExpression</strong>
 									    which is one of the most often used entry rules from Xbase. A block consist of any
 									    number of expressions between curly braces such as:
+									</p>
 									<pre class="prettyprint lang-xbase linenums">
 {
   return "Hello World" + "!"
-}</pre></li>
+}</pre>
+									<p></li>
 								</ol>
 								<p>
 							</p>
@@ -1628,11 +1681,9 @@ Operation:
 								messages in the Console View.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/JvmTutorial_RunGenerator.png" alt="" width="770" height="575">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -1724,17 +1775,23 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 								</p>
 								<ol>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 def dispatch void infer(Entity element, 
           IAcceptor&lt;JvmDeclaredType&gt; acceptor, 
           boolean isPrelinkingPhase) {</pre>
+									<p>
+									
 									    Using the dispatch keyword makes sure that the method is called for instances of type <strong>Entity</strong>
 									    only. Have a look at <a href="http://www.xtend-lang.org/documentation">the Xtend documentation</a> on polymorphic dispatch to 
 									    understand Xtend's dispatch functions. Extending <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer">AbstractModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">(src)</a> makes 
 									    sure we don't have to walk the syntax model on our own.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 acceptor.accept(element.toClass(element.fullyQualifiedName)  
 ...</pre>
+									<p>
+									
 									  Every <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmDeclaredType.html"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType">JvmDeclaredType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">(src)</a> you create in the model inference needs
 									  to be passed to the <strong>acceptor</strong> in order to get recognized.
 									  
@@ -1743,14 +1800,20 @@ acceptor.accept(element.toClass(element.fullyQualifiedName)
 									  
 									  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
 									  to the implicit variable <code class="prettyprint lang-xtend">it</code>. Therein you can further initialize the created Java element.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 ).initializeLater [</pre>
+									<p>
+									
 									    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
 									    and be passed to the <strong>acceptor</strong>.
 									    The types' features are created in the second phase. The actions in this phase are specified in the lambda
 									    expression passed to <code class="prettyprint lang-xtend">initializeLater</code>. Think of it as an anonymous class.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 documentation = element.documentation</pre>
+									<p>
+									
 									    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
 									    to an invocation of the method 
 									<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a><strong>#setDocumentation(<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmIdentifiableElement.html"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement">JvmIdentifiableElement</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java">(src)</a> element,String documentation)</strong>
@@ -1758,13 +1821,17 @@ documentation = element.documentation</pre>
 									<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a><strong>#getDocumentation(<a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> element)</strong>
 									    
 									    Xtend's extension methods are explained in detail on the <a href="http://www.xtend-lang.org/documentation">Xtend website</a>.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 if (element.superType != null)
    superTypes += entity.superType.cloneWithProxies</pre>
+									<p>
+									
 									    Set the <strong>superType</strong> on the inferred element. Note that we have to clone the type reference from
 									    the <strong>element.superType</strong>. If we did not do that, the type reference would be automatically removed 
 									    from the <strong>element</strong>, as <strong>superType</strong> is an EMF containment reference.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 for (feature : element.features) {
   switch feature {
     Property : {
@@ -1775,18 +1842,24 @@ for (feature : element.features) {
     }
   }
 }</pre>
+									<p>
+									
 									    When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
 									    If <strong>feature</strong> is of type <strong>Property</strong> the first block is executed. If it is an <strong>Operation</strong> the
 									    second block is executed. Note that the variable <strong>feature</strong> will be implicitly casted to the respective
 									    type within the blocks.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 Property : {
   members += feature.toField(feature.name, feature.type)
   members += feature.toSetter(feature.name, feature.type)
   members += feature.toGetter(feature.name, feature.type)
 }</pre>
+									<p>
+									
 									    For each <strong>Property</strong> we create a field as well as a corresponding getter and setter.</li>
-									<li><pre class="prettyprint lang-xtend linenums">
+									<li></p>
+									<pre class="prettyprint lang-xtend linenums">
 Operation : {
   members += feature.toMethod(feature.name, feature.type) [
     documentation = feature.documentation
@@ -1796,6 +1869,8 @@ Operation : {
     body = feature.body
   ]
 }</pre>
+									<p>
+									
 									    
 									<strong>Operations</strong> are being mapped to a corresponding Java method. The documentation is translated and
 									    the parameters are added within the initializer.
@@ -1816,11 +1891,9 @@ Operation : {
 								bar.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/JvmTutorial_LaunchEditor.png" alt="" width="635" height="176">
 								</div>
-								<p>
 							</p>
 							<p>
 								In the new workbench, create a Java project (<strong>File -&gt; New -&gt; Project...  -&gt; Java Project</strong>.
@@ -1835,11 +1908,9 @@ Operation : {
 								Have fun!
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/JvmTutorial_Editor.png" alt="" width="673" height="486">
 								</div>
-								<p>
 							</p>
 							</section>
 						</div>
@@ -2191,7 +2262,7 @@ grammar org.xtext.example.SecretCompartments
 								In order to be able to find the referenced package in the language generator, some configuration values
 								have to be set. It is usually the easiest way to register the generated <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> 
 								interface in the workflow.
-								The <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe/utils/StandaloneSetup.html"><abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup">StandaloneSetup</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">(src)</a> offers the respective methods to achieve this.
+								The <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe/utils/StandaloneSetup.html"><abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup">StandaloneSetup</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">(src)</a> offers the respective methods to achieve this.
 								Simply state something like this in the workflow:
 							</p>
 							<p>
@@ -2811,14 +2882,14 @@ Event returns MyEvent : ....;</pre>
 							<h5>Unordered Groups</h5>
 							<p>
 								The elements of an unordered group can occur in any order but each element must appear once. Unordered 
-								groups are separated by <code class="prettyprint lang-xtext">&amp;</code>. The following rule <code class="prettyprint lang-xtext">Modifier</code> allows to parse simplified
+								groups are separated by <code class="prettyprint lang-xtext">&</code>. The following rule <code class="prettyprint lang-xtext">Modifier</code> allows to parse simplified
 								modifiers of the Java language:
 							</p>
 							<p>
 								</p>
 								<pre class="prettyprint lang-xtext linenums">
 Modifier: 
-  static?='static'? &amp; final?='final'? &amp; visibility=Visibility;
+  static?='static'? & final?='final'? & visibility=Visibility;
 
 enum Visibility:
   PUBLIC='public' | PRIVATE='private' | PROTECTED='protected';</pre>
@@ -2858,7 +2929,7 @@ final // ERROR: visibility is missing</pre>
 								</p>
 								<pre class="prettyprint lang-xtext linenums">
 Rule:
-  values+=INT* &amp; name=ID;</pre>
+  values+=INT* & name=ID;</pre>
 								<p>
 							</p>
 							<p>
@@ -3365,24 +3436,32 @@ Condition:
 							<p>
 								</p>
 								<ul>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> <ul>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> </p>
+									<ul>
 										<li>for each generate-package declaration. After the directive <code class="prettyprint lang-xtext">generate</code> a list of parameters follows. The <strong>name</strong> of the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> 
 										  will be set to the first parameter, its <strong>nsURI</strong> to the second parameter. An optional alias as the third parameter allows 
 										  to distinguish generated <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html">EPackages</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> later. Only one generated package declaration 
 										  per alias is allowed.</li>
-									</ul></li>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html"><abbr title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a> <ul>
+									</ul>
+									<p></li>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html"><abbr title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a> </p>
+									<ul>
 										<li>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same 
 										  name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html"><abbr title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a> 
 										  will be generated.</li>
 										<li>for each type defined in an action or a cross-reference.</li>
-									</ul></li>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html"><abbr title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java">(src)</a> <ul>
+									</ul>
+									<p></li>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html"><abbr title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java">(src)</a> </p>
+									<ul>
 										<li>for each return type of an enum rule.</li>
-									</ul></li>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html"><abbr title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">(src)</a> <ul>
+									</ul>
+									<p></li>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html"><abbr title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">(src)</a> </p>
+									<ul>
 										<li>for each return type of a terminal rule or a data type rule.</li>
-									</ul></li>
+									</ul>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -3415,16 +3494,20 @@ Condition:
 								While iterating the parser rules Xtext creates
 								</p>
 								<ul>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html"><abbr title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">(src)</a> in each current return type <ul>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html"><abbr title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">(src)</a> in each current return type </p>
+									<ul>
 										<li>of type <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code class="prettyprint lang-xtend">?=</code> operator. 
 										  No further <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html">EReferences</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">(src)</a> or <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html">EAttributes</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">(src)</a> will be generated from this assignment.</li>
 										<li>for each assignment with the <code class="prettyprint lang-xtend">=</code> or <code class="prettyprint lang-xtend">+=</code> operator calling a terminal rule. Its type will be the return type of the called rule.</li>
-									</ul></li>
-									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html"><abbr title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">(src)</a> in each current return type <ul>
+									</ul>
+									<p></li>
+									<li>an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html"><abbr title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">(src)</a> in each current return type </p>
+									<ul>
 										<li>for each assignment with the <code class="prettyprint lang-xtend">=</code> or <code class="prettyprint lang-xtend">+=</code> operator in a parser rule calling a parser rule. 
 										  The <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html">EReference's</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">(src)</a> type will be the return type of the called parser rule.</li>
 										<li>for each assigned action. The reference's type will be set to the return type of the current calling rule.</li>
-									</ul></li>
+									</ul>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -3707,11 +3790,9 @@ public class CreatePersons {
 								<p>
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/family_tree.png" alt="" width="316" height="101">
 								</div>
-								<p>
 							</p>
 							<p>
 								And this is how it works:
@@ -3767,11 +3848,9 @@ child = com.mycompany.Person {
 								the outline view, etc.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/generator-structure.png" alt="" width="537" height="397">
 								</div>
-								<p>
 							</p>
 							<!-- subsection -->
 							<section id="generator_fragment" style="padding-top: 68px; margin-top: -68px;">
@@ -3843,22 +3922,22 @@ Workflow {
 								<p>
 							</p>
 							<p>
-								Here the root element is <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> and is part of the very slim runtime 
+								Here the root element is <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> and is part of the very slim runtime 
 								model shipped with MWE2. It accepts 
 								<code class="prettyprint lang-java">bean</code>s and <code class="prettyprint lang-java">component</code>s. A <code class="prettyprint lang-mwe2">var</code> declaration is a first class concept of MWE2's configuration language 
 								and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
 								Note that you can refer to the variables using the <code class="prettyprint lang-mwe2">${variable-name}</code> notation.
 							</p>
 							<p>
-								The method <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html">Workflow.addBean(Object)</a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> does nothing but provides a means to apply global side-effects, which 
+								The method <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html">Workflow.addBean(Object)</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> does nothing but provides a means to apply global side-effects, which 
 								unfortunately is required sometimes. In this example we do a so called <strong>EMF stand-alone setup</strong>. This class 
 								initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 								e.g. it allows to populate EMF's singletons like the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html"><abbr title="org.eclipse.emf.ecore.EPackage$Registry">Registry</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a>.
 							</p>
 							<p>
-								Following the <code class="prettyprint lang-java">bean</code> assignment there are three <code class="prettyprint lang-java">component</code> elements. The <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html">Workflow.addComponent()</a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> method 
-								accepts instances of <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a>, which is the primary concept of MWE2's workflow model. The
-								language generator component itself is an instance of <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a> and can therefore be used within MWE2 workflows.
+								Following the <code class="prettyprint lang-java">bean</code> assignment there are three <code class="prettyprint lang-java">component</code> elements. The <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html">Workflow.addComponent()</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> method 
+								accepts instances of <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a>, which is the primary concept of MWE2's workflow model. The
+								language generator component itself is an instance of <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a> and can therefore be used within MWE2 workflows.
 							</p>
 							</section>
 							</section>
@@ -4777,11 +4856,9 @@ public interface IScopeProvider {
 								an overview on the description classes and their relationships.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/index_datamodel.png" alt="The data model of Xtext's index" width="456" height="457">
 								</div>
-								<p>
 							</p>
 							<p>
 								A language is configured with a default implementation of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.Manager.html"><abbr title="org.eclipse.xtext.resource.IResourceDescription$Manager">Manager</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">(src)</a> 
@@ -5017,11 +5094,9 @@ public void listVisibleResources(
 								of the referring language. These will be described in detail in the following sections.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/index_container.png" alt="IContainer Management" width="691" height="640">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!-- subsection -->
@@ -5543,21 +5618,25 @@ MyRule:
 								</p>
 								<ul>
 									<li>A model element can not be consumed. This can have the following reasons/solutions:
+									</p>
 									<ul>
 										<li>The model element should not be stored in the model.</li>
 										<li>The grammar needs an assignment which would consume the model element.</li>
 										<li>The <a href="#transientvalues">transient value service</a> can be used to indicate that this model 
 										      element should not be consumed.</li>
-									</ul></li>
+									</ul>
+									<p></li>
 									<li>An assignment in the grammar has no corresponding model element. The default transient 
 									    value service considers a model element to be transient if it is <strong>unset</strong> or <strong>equals</strong> its 
 									    default value. However, the parse tree constructor may serialize default values if 
 									    this is required by a grammar constraint to be able to serialize another model element.
 									    The following solution may help to solve such a scenario:
+									</p>
 									<ul>
 										<li>A model element should be added to the model.</li>
 										<li>The assignment in the grammar should be made optional.</li>
-									</ul></li>
+									</ul>
+									<p></li>
 									<li>The type of the model element differs from the type in the grammar. The type of the model 
 									    element must be identical to the return type of the grammar rule or the action's type. 
 									    Subtypes are not allowed.</li>
@@ -6530,11 +6609,9 @@ public void fixFeatureName(final Issue issue,
 								<a href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm">Eclipse online help</a> .
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/preferences_templates.png" alt="" width="866" height="673">
 								</div>
-								<p>
 							</p>
 							<p>
 								By default Xtext registers <strong>context types</strong> that follow certain patterns. A context type will be created
@@ -6596,11 +6673,9 @@ ${event:CrossReference('Transition.event')} =&gt;
 								<p>
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/templates_crossref.png" alt="" width="430" height="354">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!-- subsection -->
@@ -6652,11 +6727,9 @@ ${public:Enum('Visibility')} entity ${Name} {
 								the outline with the editor selection by clicking the <strong>Link with Editor</strong> button.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/sample_outline.png" alt="" width="579" height="323">
 								</div>
-								<p>
 							</p>
 							<p>
 								In its default implementation, the outline view shows the containment hierarchy of your model. 
@@ -7011,11 +7084,9 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 								helps to understand the meaning and to find errors in the source code.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/highlighting.png" alt="" width="198" height="82">
 								</div>
-								<p>
 							</p>
 							<p>
 								The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
@@ -7029,11 +7100,9 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 								persisted and reloaded on startup.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/preferences_syntax.png" alt="" width="760" height="434">
 								</div>
-								<p>
 							</p>
 							<!-- subsection -->
 							<section id="_73" style="padding-top: 68px; margin-top: -68px;">
@@ -8145,9 +8214,11 @@ terminal ID:
 								<ul>
 									<li><code class="prettyprint lang-xbase">'Foo Bar Baz'</code></li>
 									<li><code class="prettyprint lang-xbase">"Foo Bar Baz"</code></li>
-									<li><pre class="prettyprint lang-xbase linenums">
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 "the quick brown fox
-   jumps over the lazy dog."</pre></li>
+   jumps over the lazy dog."</pre>
+									<p></li>
 									<li><code class="prettyprint lang-xbase">'Escapes : \' '</code></li>
 									<li><code class="prettyprint lang-xbase">"Escapes : \" "</code></li>
 								</ul>
@@ -8284,7 +8355,7 @@ terminal ID:
 								<tr><td></td>
 								<td></td>
 								</tr>
-								<tr><td><code class="prettyprint lang-xtend">e1 &amp;&amp; e2</code></td>
+								<tr><td><code class="prettyprint lang-xtend">e1 && e2</code></td>
 								<td><code class="prettyprint lang-xtend">e1.operator_and(e2)</code></td>
 								</tr>
 								<tr><td></td>
@@ -8390,12 +8461,12 @@ terminal ID:
 							<section id="_88" style="padding-top: 68px; margin-top: -68px;">
 							<h5>Short-Circuit Boolean Operators</h5>
 							<p>
-								If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&amp;&amp;</code> are used in a context where the left hand operand is of type boolean, the operation is evaluated
+								If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&&</code> are used in a context where the left hand operand is of type boolean, the operation is evaluated
 								in short circuit mode, which means that the right hand operand is not evaluated at all in the following cases: 
 								</p>
 								<ol>
 									<li>in the case of <code class="prettyprint lang-xtend">||</code> the operand on the right hand side is not evaluated if the left operand evaluates to <code class="prettyprint lang-xbase">true</code>.</li>
-									<li>in the case of <code class="prettyprint lang-xtend">&amp;&amp;</code> the operand on the right hand side is not evaluated if the left operand evaluates to <code class="prettyprint lang-xbase">false</code>.</li>
+									<li>in the case of <code class="prettyprint lang-xtend">&&</code> the operand on the right hand side is not evaluated if the left operand evaluates to <code class="prettyprint lang-xbase">false</code>.</li>
 								</ol>
 								<p>
 							</p>
@@ -8408,8 +8479,8 @@ terminal ID:
 								<ul>
 									<li><code class="prettyprint lang-xbase">my.foo = 23</code></li>
 									<li><code class="prettyprint lang-xbase">myList += 23</code></li>
-									<li><code class="prettyprint lang-xbase">x &gt; 23 &amp;&amp; y &lt; 23</code></li>
-									<li><code class="prettyprint lang-xbase">x &amp;&amp; y || z</code></li>
+									<li><code class="prettyprint lang-xbase">x &gt; 23 && y &lt; 23</code></li>
+									<li><code class="prettyprint lang-xbase">x && y || z</code></li>
 									<li><code class="prettyprint lang-xbase">1 + 3 * 5 * (- 23)</code></li>
 									<li><code class="prettyprint lang-xbase">!(x)</code></li>
 									<li><code class="prettyprint lang-xbase">my.foo = 23</code></li>
@@ -8592,10 +8663,14 @@ myProperty</pre>
 							<p>
 								</p>
 								<ul>
-									<li><pre class="prettyprint lang-xbase linenums">
-new String()</pre></li>
-									<li><pre class="prettyprint lang-xbase linenums">
-new java.util.ArrayList&lt;java.math.BigDecimal&gt;()</pre></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
+new String()</pre>
+									<p></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
+new java.util.ArrayList&lt;java.math.BigDecimal&gt;()</pre>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -8908,18 +8983,22 @@ switch x {
 							<p>
 								</p>
 								<ul>
-									<li><pre class="prettyprint lang-xbase linenums">
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 switch foo {
   Entity : foo.superType.name
   Datatype : foo.name
   default : throw new IllegalStateException
-}</pre></li>
-									<li><pre class="prettyprint lang-xbase linenums">
+}</pre>
+									<p></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 switch x : foo.bar.complicated('hello',42) {
   case "hello42" : ...
   case x.length&lt;2 : ...
   default : ....
-}</pre></li>
+}</pre>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -9034,13 +9113,17 @@ var msg = new ArrayList&lt;String&gt; // -&gt; type ArrayList&lt;String&gt;</pre
 							<p>
 								</p>
 								<ul>
-									<li><pre class="prettyprint lang-xbase linenums">
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 for (String s : myStrings) {
   doSideEffect(s);
-}</pre></li>
-									<li><pre class="prettyprint lang-xbase linenums">
+}</pre>
+									<p></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 for (s : myStrings)
-  doSideEffect(s)</pre></li>
+  doSideEffect(s)</pre>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -9058,13 +9141,17 @@ for (s : myStrings)
 							<p>
 								</p>
 								<ul>
-									<li><pre class="prettyprint lang-xbase linenums">
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 while (true) {
   doSideEffect("foo");
-}</pre></li>
-									<li><pre class="prettyprint lang-xbase linenums">
+}</pre>
+									<p></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 while ( ( i = i + 1 ) &lt; max ) 
-  doSideEffect( "foo" )</pre></li>
+  doSideEffect( "foo" )</pre>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -9084,12 +9171,16 @@ while ( ( i = i + 1 ) &lt; max )
 							<p>
 								</p>
 								<ul>
-									<li><pre class="prettyprint lang-xbase linenums">
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
 do {
   doSideEffect("foo");
-} while (true)</pre></li>
-									<li><pre class="prettyprint lang-xbase linenums">
-do doSideEffect("foo") while ((i=i+1)&lt;max)</pre></li>
+} while (true)</pre>
+									<p></li>
+									<li></p>
+									<pre class="prettyprint lang-xbase linenums">
+do doSideEffect("foo") while ((i=i+1)&lt;max)</pre>
+									<p></li>
 								</ul>
 								<p>
 							</p>
@@ -9310,7 +9401,7 @@ html [
 								second module is assembled of three components that read an Ecore 
 								file, transform the contained classifier-names to upper-case and 
 								serialize the resource back to a new file. The last example uses 
-								the life-cycle methods of the <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a> 
+								the life-cycle methods of the <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">(src)</a> 
 								to print the execution time of the workflow.
 							</p>
 							<!-- subsection -->
@@ -9374,7 +9465,7 @@ public class SayHello implements IWorkflowComponent {
 								It looks like a simple POJO and that's the philosophy behind MWE2. 
 								It is easily possible to assemble completely independent objects in 
 								a declarative manner. To make the workflow executable with the 
-								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner">Mwe2Runner</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">(src)</a>, the component 
+								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner">Mwe2Runner</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">(src)</a>, the component 
 								<code class="prettyprint lang-mwe2">SayHello</code> must be nested in a root 
 								workflow:
 							</p>
@@ -9391,7 +9482,7 @@ Workflow {
 								<p>
 							</p>
 							<p>
-								The package <code class="prettyprint lang-java">org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> 
+								The package <code class="prettyprint lang-java">org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">(src)</a> 
 								is implicitly imported in MWE2 modules to make the the modules more 
 								concise. The execution result of this workflow will be revealed 
 								after a quick <strong>Run As .. -&gt; MWE2 Workflow</strong> in the console as
@@ -9835,8 +9926,8 @@ var newMandatory
 							<p>
 								It is not only possible to define mandatory properties for MWE2 
 								modules but for classes as well. Therefore MWE2 ships with the 
-								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a> annotation. If a <code class="prettyprint lang-java">set</code>- or <code class="prettyprint lang-java">add</code>-method is marked as
-								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a>, the module validation will fail if no value was assigned
+								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a> annotation. If a <code class="prettyprint lang-java">set</code>- or <code class="prettyprint lang-java">add</code>-method is marked as
+								<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a>, the module validation will fail if no value was assigned
 								to that feature.
 							</p>
 							</section>
@@ -9951,11 +10042,9 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;</pre>
 							<section id="MWE2ModuleSyntax" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Module</h3>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/mwe2/module.png" alt="" width="693" height="70">
 								</div>
-								<p>
 							</p>
 							<p>
 								A <code class="prettyprint lang-mwe2">module</code> consists of four parts. The very first statement in a 
@@ -9986,11 +10075,9 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;</pre>
 								It is allowed to define modules without any properties.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/mwe2/property.png" alt="" width="524" height="144">
 								</div>
-								<p>
 							</p>
 							<p>
 								Each declared property is locally visible in the module. It 
@@ -10016,11 +10103,9 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;</pre>
 								type or from another module.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/mwe2/component.png" alt="" width="877" height="98">
 								</div>
-								<p>
 							</p>
 							<p>
 								The type of the component can be derived in many cases except for 
@@ -10048,11 +10133,9 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;</pre>
 								means of feature-to-value pairs.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/mwe2/assignment.png" alt="" width="320" height="132">
 								</div>
-								<p>
 							</p>
 							<p>
 								The available constructs on the right hand side of the assignment
@@ -10178,11 +10261,9 @@ var anotherString = 'It is possible to embed ${aString} into
 								looks similar to this
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/ast.png" alt="Sample AST" width="1053" height="489">
 								</div>
-								<p>
 							</p>
 							<p>
 								The <strong>AST</strong> should contain the essence of your textual models. It abstracts over syntactical information. 
@@ -10194,11 +10275,9 @@ var anotherString = 'It is possible to embed ${aString} into
 								the meta model of our example:
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/metamodel.png" alt="Sample meta model" width="604" height="517">
 								</div>
-								<p>
 							</p>
 							<p>
 								The language in which the meta model is defined is called <strong>Ecore</strong>. In other words, the meta model is 
@@ -10248,11 +10327,9 @@ var anotherString = 'It is possible to embed ${aString} into
 								We have summarized these most relevant concepts of Ecore in the following diagram:
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/ecore.png" alt="Ecore concepts" width="701" height="607">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -10301,11 +10378,9 @@ var anotherString = 'It is possible to embed ${aString} into
 								self-defined DSL by just replacing the resource implementation used by your other modeling tools.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/emf-integration.png" alt="" width="656" height="443">
 								</div>
-								<p>
 							</p>
 							<p>
 								The generator fragment <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html"><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment">ResourceFactoryFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java">(src)</a> 
@@ -10806,8 +10881,10 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 									      methods to resolve elements. In
 									    Xtext 2.0 these methods aren't static anymore. For that reason you could create an instance of this class or let 
 									    Guice do the job for you: 
+									</p>
 									<pre class="prettyprint lang-java linenums">
-@Inject private EObjectAtOffsetHelper eObjectAtOffsetHelper;</pre></li>
+@Inject private EObjectAtOffsetHelper eObjectAtOffsetHelper;</pre>
+									<p></li>
 									<li>The method <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/EObjectAtOffsetHelper.html">EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java">(src)</a> 
 									    changed to <code class="prettyprint lang-java">resolveElementAt(XtextResource, int)</code>.
 									    You have to use the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html"><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">(src)</a> to compute the 
