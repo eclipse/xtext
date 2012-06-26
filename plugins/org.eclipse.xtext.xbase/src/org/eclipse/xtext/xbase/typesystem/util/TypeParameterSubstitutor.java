@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
 
@@ -13,6 +13,16 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Maps;
 

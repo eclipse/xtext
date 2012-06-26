@@ -14,9 +14,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.Primitives
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer
 import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger
+import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
 
 /**
@@ -31,6 +31,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	TypeConformanceComputer typeConformanceComputer;
+
+	@Inject
+	@Property
+	IRawTypeHelper rawTypeHelper
 	
 	@Inject
 	@Property

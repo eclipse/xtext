@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +14,11 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API 
@@ -37,7 +41,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 	public void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
 		if (param instanceof UnboundTypeReference) {
 			UnboundTypeReference castedParam = (UnboundTypeReference) param;
-			if (castedParam.getHandle().equals(reference.getHandle()))
+			if (castedParam.equalHandles(reference))
 				return;
 		}
 		acceptHint(reference, param);

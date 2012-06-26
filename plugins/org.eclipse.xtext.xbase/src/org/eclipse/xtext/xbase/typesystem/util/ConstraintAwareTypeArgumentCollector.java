@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.List;
 
@@ -14,7 +14,13 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 

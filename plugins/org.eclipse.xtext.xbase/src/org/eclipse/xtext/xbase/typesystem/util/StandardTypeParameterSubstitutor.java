@@ -5,12 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

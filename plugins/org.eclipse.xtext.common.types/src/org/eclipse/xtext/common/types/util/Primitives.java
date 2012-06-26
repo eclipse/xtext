@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -101,6 +102,29 @@ public class Primitives {
 			default :
 				throw new IllegalArgumentException("Not a primitive : "+primitive);
 		}
+	}
+	
+	public JvmType getPrimitiveTypeIfWrapper(JvmDeclaredType type) {
+		if (typeReferences.is(type, Byte.class)) {
+			return typeReferences.findDeclaredType(Byte.TYPE, type);
+		} else if (typeReferences.is(type, Short.class)) {
+			return typeReferences.findDeclaredType(Short.TYPE, type);
+		} else if (typeReferences.is(type, Character.class)) {
+			return typeReferences.findDeclaredType(Character.TYPE, type);
+		} else if (typeReferences.is(type, Integer.class)) {
+			return typeReferences.findDeclaredType(Integer.TYPE, type);
+		} else if (typeReferences.is(type, Long.class)) {
+			return typeReferences.findDeclaredType(Long.TYPE, type);
+		} else if (typeReferences.is(type, Float.class)) {
+			return typeReferences.findDeclaredType(Float.TYPE, type);
+		} else if (typeReferences.is(type, Double.class)) {
+			return typeReferences.findDeclaredType(Double.TYPE, type);
+		} else if (typeReferences.is(type, Boolean.class)) {
+			return typeReferences.findDeclaredType(Boolean.TYPE, type);
+		} else if (typeReferences.is(type, Void.class)) {
+			return typeReferences.findDeclaredType(Void.TYPE, type);
+		}
+		return null;
 	}
 
 	protected JvmType getType(Class<?> class1, Notifier context) {
