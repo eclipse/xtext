@@ -125,15 +125,6 @@ class Community extends AbstractWebsite {
         <td>Mohamed Bouragba, Mohamed Said, Maxime Kapusta and Yoann Vasseur</td>
       </tr>
       <tr>
-        <td><a href="http://aranea.origo.ethz.ch">Aranea</a></td>
-        <td>Messaging and infrastructure layer that uses Xtext for generating the message
-    and support classes.</td>
-        <td>MIT</td>
-        <td>Framework</td>
-        <td>1.x</td>
-        <td>Patrick Ruckstuhl</td>
-      </tr>
-      <tr>
         <td><a href="http://www.artop.org/">ARText (part&nbsp;of&nbsp;Artop)</a></td>
         <td>ARText, a textual language for the specification of AUTOSAR
     systems. See the <a href="http://vimeo.com/16768196">very</a> <a href="http://vimeo.com/13154188">cool</a> <a href="http://vimeo.com/12080038">screencasts</a>.</td>
