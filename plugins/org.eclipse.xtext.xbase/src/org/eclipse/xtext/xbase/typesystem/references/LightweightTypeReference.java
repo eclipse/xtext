@@ -9,10 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
@@ -20,6 +22,9 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputation
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -128,23 +133,35 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
-	public abstract List<LightweightTypeReference> getSuperTypes();
+	public final List<LightweightTypeReference> getSuperTypes() {
+		TypeParameterSubstitutor<?> substitutor = createSubstitutor();
+		return getSuperTypes(substitutor);
+	}
+
+	protected TypeParameterSubstitutor<?> createSubstitutor() {
+		DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(this);
+		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(mapping, getOwner());
+		return substitutor;
+	}
+	
+	protected abstract List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor);
 	
 	public void collectSuperTypes(SuperTypeAcceptor acceptor) {
-		throw new UnsupportedOperationException("Implement me");
+		TypeParameterSubstitutor<?> substitutor = createSubstitutor();
+		List<LightweightTypeReference> superTypes = getSuperTypes(substitutor);
+		collectSuperTypes(1, superTypes, substitutor, acceptor);
+	}
+	
+	protected void collectSuperTypes(int level, List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor, SuperTypeAcceptor acceptor) {
+		for(LightweightTypeReference reference: references) {
+			if (acceptor.accept(reference, level)) {
+				collectSuperTypes(level + 1, reference.getSuperTypes(substitutor), substitutor, acceptor);
+			}
+		}
 	}
 	
 //	public abstract List<LightweightTypeReference> getAllSuperTypes();
-	
-	protected List<LightweightTypeReference> getSuperTypes(@Nullable List<LightweightTypeReference> references) {
-		if (references == null || references.isEmpty())
-			return Collections.emptyList();
-		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(references.size());
-		for(LightweightTypeReference reference: references) {
-			result.addAll(reference.getSuperTypes());
-		}
-		return result;
-	}
 	
 	public boolean isPrimitive() {
 		return false;

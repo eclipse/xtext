@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -67,11 +68,21 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getSuperTypes() {
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		if (!isSynonym()) {
-			return getSuperTypes(components);
+			return getSuperTypes(components, substitutor);
 		}
 		return Collections.emptyList();
+	}
+	
+	protected List<LightweightTypeReference> getSuperTypes(@Nullable List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor) {
+		if (references == null || references.isEmpty())
+			return Collections.emptyList();
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(references.size());
+		for(LightweightTypeReference reference: references) {
+			result.addAll(reference.getSuperTypes(substitutor));
+		}
+		return result;
 	}
 	
 	@Override

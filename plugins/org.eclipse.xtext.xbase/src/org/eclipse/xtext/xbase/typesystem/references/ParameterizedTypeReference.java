@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -109,15 +110,12 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getSuperTypes() {
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		// TODO should this be a service?
 		if (type instanceof JvmDeclaredType) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			if (!superTypes.isEmpty()) {
 				if (!isRawType()) {
-					DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
-					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(this);
-					StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(mapping, getOwner());
 					OwnedConverter converter = new OwnedConverter(getOwner());
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
@@ -130,7 +128,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
 						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						result.add(lightweightSuperType.getRawTypeReference());
+						result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
 					}
 					return result;
 				}
@@ -143,7 +141,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 				for(JvmTypeConstraint constraint: constraints) {
 					if (constraint instanceof JvmUpperBound) {
 						LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
-						result.add(upperBound);
+						result.add(substitutor.substitute(upperBound));
 					}
 				}
 				return result;
