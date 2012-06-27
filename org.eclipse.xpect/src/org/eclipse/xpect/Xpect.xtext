@@ -14,7 +14,7 @@ XpectFile:
 	
 Lexicalspace_Setup returns Setup hidden(WS, ML_COMMENT, SL_COMMENT):
 	{Setup} "XPECT_CLASS" test=[types::JvmDeclaredType|QualifiedName] 
-	("{" assignemnts+=Assignment* "}")?
+	(assignemnts+=Assignment*)?
 	"END_CLASS"
 ;
 	
@@ -33,7 +33,7 @@ Ignore returns Ignore hidden():
 	{Ignore} "XPECT_IGNORE";
 
 Lexicalspace_Invocation returns XpectInvocation hidden(WS, ML_COMMENT, SL_COMMENT):
-	"XPECT" ignore?="!"? element=[types::JvmIdentifiableElement|INVOCATION];
+	"XPECT" ignore?="!"? element=[types::JvmOperation|INVOCATION];
 	
 Text:
 	ANY_OTHER+

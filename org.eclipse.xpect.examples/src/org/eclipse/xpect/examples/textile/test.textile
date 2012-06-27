@@ -1,0 +1,5 @@
+
+
+XPECT_CLASS org.eclipse.xpect.examples.textile.SimpleTest END_CLASS
+
+XPECT simple
