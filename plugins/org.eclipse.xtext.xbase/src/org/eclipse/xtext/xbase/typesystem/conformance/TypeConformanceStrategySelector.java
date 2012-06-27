@@ -53,19 +53,19 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference reference,
+	protected TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(anyTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
-	public TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference reference,
+	protected TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(arrayTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
-	public TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference reference,
+	protected TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(multiTypeDispatcher, copyArgument(reference, param));
 	}
@@ -77,25 +77,25 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	}
 
 	@Override
-	public TypeConformanceResult doVisitParameterizedTypeReference(ParameterizedTypeReference reference,
+	protected TypeConformanceResult doVisitParameterizedTypeReference(ParameterizedTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(parameterizedTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
-	public TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference reference,
+	protected TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(synonymTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
-	public TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference reference,
+	protected TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(unknownTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
-	public TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference reference,
+	protected TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(wildcardTypeDispatcher, copyArgument(reference, param));
 	}

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
@@ -83,6 +84,7 @@ public class TypeConformanceComputer {
 	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
 	 * {@link CharSequence} requires <code>2</code> hops. 
 	 */
+	@NonNullByDefault
 	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeAcceptor {
 
 		/**
@@ -104,7 +106,7 @@ public class TypeConformanceComputer {
 		
 		public boolean accept(LightweightTypeReference superType, int distance) {
 			if (superType == null)
-				return false;
+				throw new IllegalStateException("superType may not be null");
 			JvmType type = superType.getType();
 			rawTypeToReference.put(type, superType);
 			if (distances.contains(type)) {

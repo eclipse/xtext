@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public interface SuperTypeAcceptor {
 	/**
 	 * @param superType a visited super type

@@ -23,7 +23,7 @@ public class SynonymConformanceStrategy extends TypeConformanceStrategy<Compound
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		List<LightweightTypeReference> leftReferences = left.getComponents();
 		if (leftReferences.isEmpty())
 			return TypeConformanceResult.FAILED;
@@ -36,13 +36,13 @@ public class SynonymConformanceStrategy extends TypeConformanceStrategy<Compound
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference left, CompoundTypeReference right,
+	protected TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference left, CompoundTypeReference right,
 			TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference left,
+	protected TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference left,
 			CompoundTypeReference right, 
 			TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		return doVisitTypeReference(left, right, param);

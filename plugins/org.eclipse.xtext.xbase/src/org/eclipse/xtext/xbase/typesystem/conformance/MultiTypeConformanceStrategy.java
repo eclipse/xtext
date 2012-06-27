@@ -21,7 +21,7 @@ public class MultiTypeConformanceStrategy extends TypeConformanceStrategy<Compou
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		for(LightweightTypeReference component: left.getComponents()) {
 			// TODO I think we should disable primitive widening / boxing here
 			TypeConformanceResult result = conformanceComputer.isConformant(component, right, param);
@@ -35,7 +35,7 @@ public class MultiTypeConformanceStrategy extends TypeConformanceStrategy<Compou
 	}
 
 	@Override
-	public TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
+	protected TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 }

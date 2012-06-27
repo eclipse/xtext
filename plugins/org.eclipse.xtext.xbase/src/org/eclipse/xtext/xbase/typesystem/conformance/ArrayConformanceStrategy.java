@@ -23,7 +23,7 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 	}
 
 	@Override
-	public TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference left,
+	protected TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference left,
 			ArrayTypeReference right,
 			TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
 		LightweightTypeReference leftComponent = left.getComponentType();
@@ -32,12 +32,12 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 	}
 
 	@Override
-	public TypeConformanceResult doVisitAnyTypeReference(ArrayTypeReference left, AnyTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
+	protected TypeConformanceResult doVisitAnyTypeReference(ArrayTypeReference left, AnyTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
 		return TypeConformanceResult.SUCCESS;
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(ArrayTypeReference left, LightweightTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(ArrayTypeReference left, LightweightTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
 		return TypeConformanceResult.FAILED;
 	}
 }
