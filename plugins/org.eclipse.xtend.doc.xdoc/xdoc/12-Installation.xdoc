@@ -71,7 +71,7 @@ img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclips
 
 section:library[The Runtime Library]
 
-The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the classpath, which provides useful extensions
+The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the class path, which provides useful extensions
 to existing classes and interfaces from the JDK. Many 
 features of Xtend are not built into the language itself but provided via this library. 
 It is available from a ref:MavenSupport[Maven repository] and via p2

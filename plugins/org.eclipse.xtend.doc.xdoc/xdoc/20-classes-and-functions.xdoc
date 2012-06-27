@@ -75,7 +75,7 @@ is compiled to a separate top-level Java class.
 Abstract classes are defined using the code[Xtend][abstract] modifier as in Java. See also ref:abstractMethods 
 on abstract methods.
 
-Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of 
+Xtend's approach to inheritance is conceptual the same as in Java. Single inheritance of 
 classes as well as implementing multiple interfaces is supported. 
 Xtend classes can of course extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
 
@@ -126,7 +126,7 @@ or code[Xtend][private].
 section:fields[Fields]
 
 A field can have an initializer. Final fields are declared using code[Xtend][val], while 
-code[Xtend][var] introduces a non-final field and can be ommitted. Yet, if an initializer expression
+code[Xtend][var] introduces a non-final field and can be omitted. Yet, if an initializer expression
 is present, the type of a field can be skipped after code[Xtend][val] and code[Xtend][var].
 Fields marked as code[Xtend][static] will be compiled to static Java fields.  
 
@@ -207,7 +207,7 @@ Xtend does not force you to catch or redeclare checked exceptions. Nevertheless,
 the exceptions thrown in a method's body using the same code[Xtend][throws] clause as in Java.
 
 If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
-compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
+compiler will throw the checked exception silently (using the sneaky-throw technique introduced by 
 link[http://projectlombok.org/features/SneakyThrows.html][Lombok]). 
   
 code[Xtend][

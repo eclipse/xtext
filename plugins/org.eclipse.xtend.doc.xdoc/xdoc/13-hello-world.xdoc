@@ -34,7 +34,7 @@ It is provided by the runtime library and only one nice utility that is handy wh
 expressions.
 
 You can put an Xtend class into a source folder of any Java project within Eclipse (or any Maven project). Eclipse will complain
-about the missing library if it is not on the classpath and provide a quick fix to add it.
+about the missing library if it is not on the class path and provide a quick fix to add it.
 
 The next thing you might want to do is materializing one of the example projects into your workspace.
 To do so right click anywhere in the e[Navigator] view in Eclipse and select e[New -> Example...].

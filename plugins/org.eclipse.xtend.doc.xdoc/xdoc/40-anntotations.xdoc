@@ -1,7 +1,7 @@
 chapter:processedAnnotations[Processed Annotations]
 
 Xtend comes with annotations that help to steer the compilation process.
-These annotations reside in the code[org.eclipse.xtend.lib] plug-in/jar which must be on the classpath
+These annotations reside in the code[org.eclipse.xtend.lib] plug-in/jar which must be on the class path
 of the project containing the Xtend files. 
 
 section:propertyAnnotation[@Property]
@@ -37,7 +37,7 @@ has the following effect:
 ul[
   item[all fields are flagged final,]
   item[getter methods will be generated (if not existent),]
-  item[a constructor taking paramaters for all non-initialized fields will be generated (if not existent),]
+  item[a constructor taking parameters for all non-initialized fields will be generated (if not existent),]
   item[equals(Object) / hashCode() methods will be generated (if not existent),]
   item[a toString() method will be generated (if not existent).]
 ]
