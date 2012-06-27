@@ -10,6 +10,11 @@ class Index extends AbstractXtendWebsite {
 		true
 	}
 	
+	override quickLinksAndTweets() '''
+		«super.quickLinksAndTweets()»
+		<a href="http://dryicons.com/">Icons by http://dryicons.com</a>
+	'''
+	
 	override contents() '''
 	<!--Container-->
 	
