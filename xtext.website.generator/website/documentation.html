@@ -2119,7 +2119,10 @@ grammar org.xtext.example.SecretCompartments
 							to do so:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">generate secrets 'http://www.eclipse.org/secretcompartment'</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+generate secrets 'http://www.eclipse.org/secretcompartment'</pre>
+							<p>
 						</p>
 						<p>
 							That statement could actually be read as: generate an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> with the 
@@ -2160,7 +2163,10 @@ grammar org.xtext.example.SecretCompartments
 							To import an EPackage, you have to state its namespace URI like this:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">import "http://www.xtext.org/example/Domainmodel" as dmodel</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+import "http://www.xtext.org/example/Domainmodel" as dmodel</pre>
+							<p>
 						</p>
 						<p>
 							In order to be able to find the referenced package in the language generator, some configuration values
@@ -2275,7 +2281,10 @@ language = {
 							An import statement referring to an Ecore file by a <strong>platform:/resource/</strong>-URI looks like this:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">import 'platform:/resource/my.project/model/SecretCompartments.ecore'</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+import 'platform:/resource/my.project/model/SecretCompartments.ecore'</pre>
+							<p>
 						</p>
 						<p>
 							If you want to mix generated and imported Ecore models you'll have to configure the generator fragment 
@@ -2314,7 +2323,10 @@ fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 							Example:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">import 'classpath:/model/JvmTypes.ecore' as types</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+import 'classpath:/model/JvmTypes.ecore' as types</pre>
+							<p>
 						</p>
 						<p>
 							As with platform resource URIs you'll also have to tell the generator where the corresponding <strong>*.genmodel</strong> can be found:
@@ -2485,7 +2497,10 @@ terminal INT returns ecore::EInt :
 							The <strong>ID</strong> rule in <code class="prettyprint lang-xtext">org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal ID : '^'? .... ;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal ID : '^'? .... ;</pre>
+							<p>
 						</p>
 						<p>
 							The question mark sets the cardinality to <strong>none or one</strong> (i.e. optional) like explained above.
@@ -2508,7 +2523,10 @@ terminal INT returns ecore::EInt :
 							Example:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal INT returns ecore::EInt: ('0'..'9')+;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal INT returns ecore::EInt: ('0'..'9')+;</pre>
+							<p>
 						</p>
 						<p>
 							In this case an <strong>INT</strong> is comprised of one or more (note the <code class="prettyprint lang-xtext">+</code> operator) characters 
@@ -2523,7 +2541,10 @@ terminal INT returns ecore::EInt :
 							Example:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal FOO : 'f' . 'o';</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal FOO : 'f' . 'o';</pre>
+							<p>
 						</p>
 						<p>
 							The rule above would allow expressions like <strong>foo</strong>, <strong>f0o</strong> or even <strong>f_o</strong>.
@@ -2537,7 +2558,10 @@ terminal INT returns ecore::EInt :
 							The multi-line comment is implemented this way:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal ML_COMMENT  : '/*' -&gt; '*/';</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal ML_COMMENT  : '/*' -&gt; '*/';</pre>
+							<p>
 						</p>
 						<p>
 							This is the rule for Java-style comments that begin with <code class="prettyprint lang-xtext">/*</code> and end with <code class="prettyprint lang-xtext">*/</code>.
@@ -2550,7 +2574,10 @@ terminal INT returns ecore::EInt :
 							All the tokens explained above can be inverted using a preceding exclamation mark:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal BETWEEN_HASHES  : '#' (!'#')* '#';</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal BETWEEN_HASHES  : '#' (!'#')* '#';</pre>
+							<p>
 						</p>
 						</section>
 						<!-- subsection -->
@@ -2564,7 +2591,10 @@ terminal INT returns ecore::EInt :
 							Example:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal DOUBLE : INT '.' INT;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal DOUBLE : INT '.' INT;</pre>
+							<p>
 						</p>
 						<p>
 							<strong>Note: It is generally not a good idea to implement floating point literals with terminal rules. You
@@ -2579,7 +2609,10 @@ terminal INT returns ecore::EInt :
 							For instance, the white space rule uses alternatives like this:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal WS : (' '|'\t'|'\r'|'\n')+;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal WS : (' '|'\t'|'\r'|'\n')+;</pre>
+							<p>
 						</p>
 						<p>
 							That is a WS can be made of one or more white space characters (including <code class="prettyprint lang-xtext">' ', '\t', '\r', '\n'</code>).
@@ -2593,7 +2626,10 @@ terminal INT returns ecore::EInt :
 							Example:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');</pre>
+							<p>
 						</p>
 						<p>
 							That is the 2-digit hexadecimal code of ASCII characters.
@@ -2629,7 +2665,10 @@ terminal STRING  :
 							starting with a special delimiter.
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">terminal UNCLOSED_COMMENT : '/*' (!EOF)* EOF;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+terminal UNCLOSED_COMMENT : '/*' (!EOF)* EOF;</pre>
+							<p>
 						</p>
 						</section>
 						</section>
@@ -2697,7 +2736,10 @@ State :
 							The syntactic declaration for states in the state machine example starts with a keyword <code class="prettyprint lang-fowlerexample">state</code> followed by an assignment:
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">name=ID</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+name=ID</pre>
+							<p>
 						</p>
 						<p>
 							The left hand side refers to a feature <strong>name</strong> of the current object (which has the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html"><abbr title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a> <strong>State</strong> in this case). 
@@ -3221,13 +3263,19 @@ enum ChangeKind :
 							Please note, that Ecore does not support unset values for enums. If you define a grammar like
 						</p>
 						<p>
-							<code class="prettyprint lang-xtext">Element: "element" name=ID (value=SomeEnum)?;</code>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+Element: "element" name=ID (value=SomeEnum)?;</pre>
+							<p>
 						</p>
 						<p>
 							with the input of
 						</p>
 						<p>
-							<code class="prettyprint lang-java">element Foo</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+element Foo</pre>
+							<p>
 						</p>
 						<p>
 							the resulting value of the element <strong>Foo</strong> will hold the enum value with the internal representation of <code class="prettyprint lang-xtend">0</code> (zero). 
@@ -4607,7 +4655,10 @@ ReferringType :
 							When parsing a given input string, say
 						</p>
 						<p>
-							<code class="prettyprint lang-linkingexample">ref Entity01</code>
+							</p>
+							<pre class="prettyprint lang-linkingexample linenums">
+ref Entity01</pre>
+							<p>
 						</p>
 						<p>
 							the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/lazy/LazyLinker.html"><abbr title="org.eclipse.xtext.linking.lazy.LazyLinker">LazyLinker</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java">(src)</a> first creates an EMF proxy and 
@@ -5210,7 +5261,10 @@ IScope scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt; ctx, EReference ref)</pre>
 							be declared as follows (assuming the cross-reference is declared by the <strong>Transition</strong> type and is called <strong>target</strong>):
 						</p>
 						<p>
-							<code class="prettyprint lang-java">IScope scope_Transition_target(Transition this, EReference ref)</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+IScope scope_Transition_target(Transition this, EReference ref)</pre>
+							<p>
 						</p>
 						<p>
 							If such a method does not exist, the implementation will try to find one for the context object's container. 
@@ -5228,7 +5282,10 @@ IScope scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt; ctx, EReference ref)</pre>
 							example the signature first matched would be:
 						</p>
 						<p>
-							<code class="prettyprint lang-java">IScope scope_State(Transition this, EReference ref)</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+IScope scope_State(Transition this, EReference ref)</pre>
+							<p>
 						</p>
 						<p>
 							If no such method exists, the implementation will again try to find a method matching the context object's 
@@ -5236,7 +5293,10 @@ IScope scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt; ctx, EReference ref)</pre>
 							available states at the state machine level:
 						</p>
 						<p>
-							<code class="prettyprint lang-java">IScope scope_State(StateMachine this, EReference ref)</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+IScope scope_State(StateMachine this, EReference ref)</pre>
+							<p>
 						</p>
 						<p>
 							This scope can now be used for any cross-references of type <strong>State</strong> for context objects owned by the 
@@ -5300,7 +5360,10 @@ FowlerDslQualifiedNameProvider
 							Java, where
 						</p>
 						<p>
-							<code class="prettyprint lang-java">import java.util.Set;</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+import java.util.Set;</pre>
+							<p>
 						</p>
 						<p>
 							makes it possible to refer to <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html">java.util.Set</a> by its simple name <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html"><abbr title="java.util.Set">Set</abbr></a>.
@@ -6551,7 +6614,10 @@ public void fixFeatureName(final Issue issue,
 							template variable is called <strong>CrossReference</strong> and its syntax is as follows:
 						</p>
 						<p>
-							<code class="prettyprint lang-xml">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</code>
+							</p>
+							<pre class="prettyprint lang-xml linenums">
+${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</pre>
+							<p>
 						</p>
 						<p>
 							This small example yields the text <strong>event =&gt; state</strong> and allows selecting any events and states using a drop down:
@@ -6591,7 +6657,10 @@ ${event:CrossReference('Transition.event')} =&gt;
 							The syntax is as follows:
 						</p>
 						<p>
-							<code class="prettyprint lang-java">${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)</pre>
+							<p>
 						</p>
 						<p>
 							For example the following template (taken from another example):
@@ -9373,7 +9442,10 @@ Workflow {
 							after a quick <strong>Run As .. -&gt; MWE2 Workflow</strong> in the console as
 						</p>
 						<p>
-							<code class="prettyprint lang-java">Hello World!</code>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+Hello World!</pre>
+							<p>
 						</p>
 						</section>
 						<!-- subsection -->
