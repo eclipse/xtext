@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Xtext - Language Development Made Easy!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages">
+	<meta name="author" content="Sven Efftinge">
+	<style>
+		#header_wrapper {
+			padding-top: 10px;
+			/* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		
+		code.prettyprint {
+	        padding: 0px;
+	        background-color: white;
+			border: none;
+	    }
+	</style>
+	<!--  styles -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Le fav and touch icons -->
+	
+	<link rel="shortcut icon" href="images/favicon.png">
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type='text/css'>
+	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
+	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<script src="js/twitter.js" type="text/javascript"></script>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+					prettyPrint();
+	         
+					 $('a[data-rel]').each(function() {
+	             $(this).attr('rel', $(this).data('rel'));
+	         });
+	        
+					 $("a[rel^='prettyPhoto']").prettyPhoto({
+	             animation_speed: 'fast',
+	             slideshow: 5000,
+	             autoplay_slideshow: false,
+	             opacity: 0.80,
+	             show_title: true,
+	             theme: 'ligh_square',
+	             overlay_gallery: false,
+	             social_tools: false
+	       
+	         });
+	         
+					$('#nav-outline > li > a').live('click', function() {        
+						$(this).parent().find('ul').slideToggle();      
+					});
+	         
+					$('.has-popover').popover();
+		 	     
+		 	     getTwitters('tweet', { 
+			        id: 'xtext', 
+			        count: 5,
+			        includeRT: true,
+			        enableLinks: true, 
+			        clearContents: true,
+			        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+			     });
+	         
+	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		 	     po.src = 'https://apis.google.com/js/plusone.js';
+		 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	     });
+		</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];	
+	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top"
+		style="border-bottom: 1px solid #000;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="index.html"></a>
+	
+	      <div class="btn-group pull-right">
+	        <g:plusone href="http://www.xtext.org"></g:plusone>
+	      </div>
+	
+				<div class="nav-collapse collapse" style="height: 0px;">
+					<ul class="nav">
+						<li ><a href="download.html">Download</a></li>
+						<li ><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+					</ul>
+	
+				</div>
+				<!--/.nav-collapse -->
+	
+			</div>
+		</div>
+	</div>
+	<!-- Navbar End -->
+<!--Container-->
+<div id="header_wrapper" class="container">
+	<div class="inner">
+		<div class="container">
+			<div class="page-heading"><h1>Documentation</h1></div>
+		</div> <!-- /.container -->
+	</div> <!-- /inner -->
+	<ul id="nav-outline">
+		<li>&nbsp;</li>
+		<li style="color : #333;">Getting Started</li>
+		<li><a href="documentation.html#FirstFiveMinutes">5 Minutes Tutorial</a>
+	<ul>	<li><a href="documentation.html#NewProject">Creating A New Xtext Project</a></li>
+		<li><a href="documentation.html#RunWorkflow">Generating The Language Infrastructure</a></li>
+		<li><a href="documentation.html#TestingTheEditor">Try The Editor</a></li>
+		<li><a href="documentation.html#Conclusion">Conclusion</a></li>
+	</ul>	</li>
+		<li><a href="documentation1.html#DomainModelWalkThrough">15 Minutes Tutorial</a>
+	<ul>	<li><a href="documentation1.html#_0">Create A New Xtext Project</a></li>
+		<li><a href="documentation1.html#_1">Write Your Own Grammar</a></li>
+		<li><a href="documentation1.html#_2">Generate Language Artifacts</a></li>
+		<li><a href="documentation1.html#_3">Run the Generated IDE Plug-in</a></li>
+		<li><a href="documentation1.html#_4">Second Iteration: Adding Packages and Imports</a></li>
+	</ul>	</li>
+		<li><a href="documentation2.html#DomainmodelNextSteps">15 Minutes Tutorial - Extended</a>
+	<ul>	<li><a href="documentation2.html#TutorialCodeGeneration">Writing a Code Generator With Xtend</a></li>
+		<li><a href="documentation2.html#TutorialUnitTests">Unit Testing the Language</a></li>
+		<li><a href="documentation2.html#TutorialValidation">Creating Custom Validation Rules</a></li>
+	</ul>	</li>
+		<li><a href="documentation3.html#JvmDomainmodel">Five simple steps to your JVM language</a>
+	<ul>	<li><a href="documentation3.html#_5">Step One: Create A New Xtext Project</a></li>
+		<li><a href="documentation3.html#_6">Step Two: Write the Grammar</a></li>
+		<li><a href="documentation3.html#_7">Step Three: Generate Language Artifacts</a></li>
+		<li><a href="documentation3.html#_8">Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li><a href="documentation3.html#_9">Step Five : Try the Editor!</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Reference Documentation</li>
+		<li><a href="documentation4.html#Overview">Overview</a>
+	<ul>	<li><a href="documentation4.html#_10">What is Xtext?</a></li>
+		<li><a href="documentation4.html#_11">How Does It Work?</a></li>
+		<li><a href="documentation4.html#_12">Xtext is Highly Configurable</a></li>
+		<li><a href="documentation4.html#_13">Who Uses Xtext?</a></li>
+		<li><a href="documentation4.html#_14">Who is Behind Xtext?</a></li>
+		<li><a href="documentation4.html#DSL">What is a Domain-Specific Language</a></li>
+	</ul>	</li>
+		<li><a href="documentation5.html#grammarLanguage">The Grammar Language</a>
+	<ul>	<li><a href="documentation5.html#statemachine">A First Example</a></li>
+		<li><a href="documentation5.html#syntax">The Syntax</a></li>
+		<li><a href="documentation5.html#metamodelInference">Ecore Model Inference</a></li>
+		<li><a href="documentation5.html#grammarMixins">Grammar Mixins</a></li>
+		<li><a href="documentation5.html#_15">Common Terminals</a></li>
+	</ul>	</li>
+		<li><a href="documentation6.html#configuration">Configuration</a>
+	<ul>	<li><a href="documentation6.html#generator">The Language Generator</a></li>
+		<li><a href="documentation6.html#dependencyInjection">Dependency Injection in Xtext with Google Guice</a></li>
+	</ul>	</li>
+		<li><a href="documentation7.html#runtime_concepts">Runtime Concepts</a>
+	<ul>	<li><a href="documentation7.html#runtimeSetup">Runtime Setup (ISetup)</a></li>
+		<li><a href="documentation7.html#equinoxSetup">Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li><a href="documentation7.html#_16">Logging</a></li>
+		<li><a href="documentation7.html#validation">Validation</a></li>
+		<li><a href="documentation7.html#linking">Linking</a></li>
+		<li><a href="documentation7.html#scoping">Scoping</a></li>
+		<li><a href="documentation7.html#valueconverter">Value Converter</a></li>
+		<li><a href="documentation7.html#serialization">Serialization</a></li>
+		<li><a href="documentation7.html#formatting">Formatting (Pretty Printing)</a></li>
+		<li><a href="documentation7.html#fragmentProvider">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li><a href="documentation7.html#encoding">Encoding in Xtext</a></li>
+	</ul>	</li>
+		<li><a href="documentation8.html#ide_concepts">IDE Concepts</a>
+	<ul>	<li><a href="documentation8.html#labelProvider">Label Provider</a></li>
+		<li><a href="documentation8.html#contentAssist">Content Assist</a></li>
+		<li><a href="documentation8.html#quickfixes">Quick Fixes</a></li>
+		<li><a href="documentation8.html#templates">Template Proposals</a></li>
+		<li><a href="documentation8.html#outline">Outline View</a></li>
+		<li><a href="documentation8.html#hyperlinking">Hyperlinking</a></li>
+		<li><a href="documentation8.html#highlighting">Syntax Coloring</a></li>
+		<li><a href="documentation8.html#refactoring">Rename Refactoring</a></li>
+	</ul>	</li>
+		<li><a href="documentation9.html#Xbase">Xtext and Java</a>
+	<ul>	<li><a href="documentation9.html#_17">Plug-in Setup</a></li>
+		<li><a href="documentation9.html#jvmtypes">Referring to Java Elements using JVM Types</a></li>
+		<li><a href="documentation9.html#xbaseJavaReferences">Referring to Java Types Using Xbase</a></li>
+		<li><a href="documentation9.html#xbaseInferredType">Inferring a JVM Model</a></li>
+		<li><a href="documentation9.html#xbaseExpressions">Using Xbase Expressions</a></li>
+		<li><a href="documentation9.html#xbaseLanguageRef_Introduction">Xbase Language Reference</a></li>
+	</ul>	</li>
+		<li><a href="documentation10.html#MWE2">MWE2</a>
+	<ul>	<li><a href="documentation10.html#MWE2Exampe">Examples</a></li>
+		<li><a href="documentation10.html#MWE2LanguageReference">Language Reference</a></li>
+		<li><a href="documentation10.html#MWE2SyntaxReference">Syntax Reference</a></li>
+	</ul>	</li>
+		<li><a href="documentation11.html#emf_integration">Integration with EMF and Other EMF Editors</a>
+	<ul>	<li><a href="documentation11.html#model_metamodel">Model, Ecore Model, and Ecore</a></li>
+		<li><a href="documentation11.html#emf_codegen">EMF Code Generation</a></li>
+		<li><a href="documentation11.html#xtext_resource">XtextResource Implementation</a></li>
+		<li><a href="documentation11.html#gmf_integration">Integration with GMF Editors</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Appendix</li>
+		<li><a href="documentation12.html#migrating_from_1_0_x">Migrating from Xtext 1.0.x to 2.0</a>
+	<ul>	<li><a href="documentation12.html#_18">Take the Shortcut</a></li>
+		<li><a href="documentation12.html#_19">Migrating Step By Step</a></li>
+		<li><a href="documentation12.html#_20">Now go for then new features</a></li>
+	</ul>	</li>
+		<li><a href="documentation13.html#migrating_from_0_7">Migrating from Xtext 0.7.x to 1.0</a>
+	<ul>	<li><a href="documentation13.html#_21">Migrating Step By Step</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Additional Resources
+		<li><a href="documentation/2.3.0/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+		<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/">API Documentation (JavaDoc)</a>
+	</ul>
+</div>
+<div id="page">  
+	<div class="inner">
+		<div id="maincontainer" class="container">
+			<!-- chapter -->
+			<section id="migrating_from_0_7" style="padding-top: 68px; margin-top: -68px;">
+				<div class="row">
+					<div class="span8 offset3">
+						<h1 style="padding-top: 30px;">
+							Migrating from Xtext 0.7.x to 1.0
+						</h1>
+						<hr style="margin-top: 5px; margin-bottom: 5px;">
+						<p>
+							For the sake of completeness, here is how you migrate from Xtext 0.7.x to Xtext 1.0, so you might do
+							a migration to 2.0 in two steps. Nevertheless, there have been so many new features and changes that 
+							it probably makes more sense to just copy the grammar and start with a new Xtext 2.0 project. The grammar 
+							language is fully backward compatible.
+						</p>
+						<!--  section -->
+						<section id="_21" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Migrating Step By Step</h2>
+						<p>
+							Once again, you should make sure that no old plug-ins are in your target platform. Some plug-ins from 
+							Xtext 0.7.x have been merged and do no longer exist.
+						</p>
+						<p>
+							<strong>Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes 
+							while fixing them with only a few well described user actions. Doing these steps in another order 
+							causes most likely a higher effort.</strong>
+						</p>
+						<!-- subsection -->
+						<section id="_111" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Update the Plug-in Dependencies and Import Statements</h3>
+						<p>
+							You should update the constraints from version <strong>0.7.x</strong> to <strong>[1.0.0,2.0.0)</strong> in your manifest files 
+							if you specified any concrete versions. Make sure that your <strong>dsl.ui</strong>-projects do not refer to the 
+							plug-in <strong>org.eclipse.xtext.ui.common</strong> or <strong>org.eclipse.xtext.ui.core</strong> but to <strong>org.eclipse.xtext.ui</strong> 
+							instead. The arguably easiest way is a global text-based search and replace across the manifest files. 
+							The bundle <strong>org.eclipse.xtext.log4j</strong> is obsolete as well. The generator will create <strong>import-package</strong> 
+							entries in the manifests later on.
+						</p>
+						<p>
+							The next step is to fix the import statements in your classes to match the refactored naming scheme 
+							in Xtext. Perform a global search for <code class="prettyprint lang-java">import org.eclipse.xtext.ui.common.</code> and 
+							<code class="prettyprint lang-java">org.eclipse.xtext.ui.core.</code> and replace the matches with <code class="prettyprint lang-java">import org.eclipse.xtext.ui.</code>. 
+							This fixes most of the problems in the manually written code.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_112" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Rename the Packages in the dsl.ui-Plug-in</h3>
+						<p>
+							We changed the naming pattern for artifacts in the <strong>dsl.ui</strong>-plug-in to match the OSGi conventions. 
+							The easiest way to update your existing projects is to apply a "Rename Package" refactoring on the 
+							packages in the <strong>src</strong>- and <strong>src-gen</strong> folder <strong>before</strong> you re-run the workflow that regenerates your 
+							language. Make sure you ticked "Rename subpackages" in the rename dialog. It is error-prone to enable the 
+							search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, 
+							it is important to perform the rename operation in the <strong>src-gen</strong> folder, too. This ensures that the 
+							references in your manually written code are properly updated.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_113" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Update the Workflow</h3>
+						<p>
+							The <strong>JavaScopingFragment</strong> does no longer exist. It has been superseded by the 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html"><abbr title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment">ImportURIScopingFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java">(src)</a> 
+							in combination with the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.html"><abbr title="org.eclipse.xtext.generator.exporting.SimpleNamesFragment">SimpleNamesFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.java">(src)</a>.
+							Please replace
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xml linenums">
+&lt;fragment class=
+  "org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;</pre>
+							<p>
+						</p>
+						<p>
+							with
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xml linenums">
+&lt;fragment class=
+  "org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/&gt;
+&lt;fragment class=
+  "org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/&gt;</pre>
+							<p>
+						</p>
+						<p>
+							The <strong>PackratParserFragment</strong> has been abandoned as well. It is save to remove the reference to that one if it is activated 
+							in your workflow. After you've changed your workflow, it should be possible to regenerate your language without any 
+							errors in the console. It is ok to have compilation errors prior to executing the workflow.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_114" style="padding-top: 68px; margin-top: -68px;">
+						<h3>MANIFEST.MF and plugin.xml</h3>
+						<p>
+							The previous rename package refactoring updated most of the entries in the <strong>MANIFEST.MF</strong> and and some entries in 
+							the <strong>plugin.xml</strong>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems 
+							in the manifest files but it is unlikely that it will spot the erroneous references in the <strong>plugin.xml</strong>.
+						</p>
+						<p>
+							</p>
+							<ul>
+								<li>In the generated UI plug-in's <strong>MANIFEST.MF</strong>, remove the package exports of no longer 
+								    existing packages and make sure the bundle activator points to the newly generated 
+								    one (with <strong>.ui.</strong> in its package name).</li>
+								<li>It was already mentioned that the plug-ins <strong>org.eclipse.xtext.ui.core</strong> and <strong>org.eclipse.xtext.ui.common</strong> 
+								    have been merged into a new single plug-in <strong>org.eclipse.xtext.ui</strong>. The same happened to the respective 
+								    Java packages. Change eventually remaining bundle-dependencies in all manifests.</li>
+								<li>The plug-in <strong>org.eclipse.xtext.log4j</strong> no longer exists. We use a package import of <strong>org.apache.log4j</strong> instead. 
+								    Also remove the buddy registration.</li>
+								<li>Due to renamed packages, you have to fix all references to classes therein in the <strong>plugin.xml</strong>. 
+								    A comparison with the <strong>plugin.xml_gen</strong> will be a great help. If you haven't added a lot manually, 
+								    consider merging these into the generated version instead of going the other way around. Note that 
+								    warnings in the <strong>plugin.xml</strong> can be considered to be real errors most of the time.
+								    Make sure the <strong>MyDslExecutableExtensionFactory</strong> has the <strong>.ui.</strong> package prefix.
+								    Classes from <strong>org.eclipse.xtext.ui.common</strong> and <strong>org.eclipse.xtext.ui.core</strong> are now usually 
+								    somewhere in <strong>org.eclipse.xtext.ui</strong>. They are also referenced by the 
+								<strong>MyDslExecutableExtensionFactory</strong> and thus not covered by the validation of the <strong>plugin.xml</strong>.</li>
+								<li>A number of new features are being registered in the <strong>plugin.xml</strong>, e.g. <strong>Find references</strong>, <strong>Quick Outline</strong>, 
+								    and <strong>Quick Fixes</strong>. You can enable them by manually copying the respective entries from <strong>plugin.xml_gen</strong> to <strong>plugin.xml</strong>.</li>
+								<li>To run MWE2 workflows later on, you must change the plug-in dependencies from 
+								<strong>org.eclipse.emf.mwe.core</strong> to <strong>org.eclipse.emf.mwe2.launch</strong> in your manifest. Optional resolution is fine.</li>
+							</ul>
+							<p>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_115" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Noteworthy API Changes</h3>
+						<p>
+							The <strong>src</strong> folders are generated once, so existing code will not be overwritten but has to be updated manually. 
+							At least one new class has appeared in your <strong>src</strong>-folder of the <strong>ui</strong> plug-in. there will now be a 
+							<strong>MyDslStandaloneSetup</strong> inheriting form the generated <strong>MyDslStandaloneSetupGenerated</strong> to allow customization.
+						</p>
+						<p>
+							You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes. 
+							It is usually only necessary to change your code, if you face any compilation problems.
+						</p>
+						<p>
+							</p>
+							<ul>
+								<li>The method <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IScopeProvider.html">IScopeProvider.getScope(EObject,EClass)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">(src)</a> has been 
+								    removed. Use <code class="prettyprint lang-java">getScope(EObject,EReference)</code> instead.</li>
+								<li>Renamed <strong>DefaultScopeProvider</strong> to <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider">SimpleLocalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.java">(src)</a>. There have been 
+								    further significant changes in the scoping API that allow for optimized implementations. Consult the 
+								<a href="documentation7.html#scoping">section on scoping</a> for details.</li>
+								<li>The return type of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractInjectableValidator.html">AbstractInjectableValidator.getEPackages()</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractInjectableValidator.java">(src)</a> was 
+								    changed from <code class="prettyprint lang-java">List&lt;? extends EPackage&gt;</code> to <code class="prettyprint lang-java">List&lt;EPackage&gt;</code>.</li>
+								<li>The parser interfaces now use <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Reader.html"><abbr title="java.io.Reader">Reader</abbr></a> instead of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/InputStream.html"><abbr title="java.io.InputStream">InputStream</abbr></a> to explicitly address 
+								    encoding. Have a look at the <a href="documentation7.html#encoding">section on encoding</a> for details.</li>
+								<li>The handling of <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html"><abbr title="org.eclipse.jface.viewers.ILabelProvider">ILabelProvider</abbr></a> in various contexts has been refactored. 
+								    The former base class <strong>DefaultLabelProvider</strong> no longer exists. Use the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.html"><abbr title="org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider">DefaultEObjectLabelProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">(src)</a> instead. 
+								    See the <a href="documentation8.html#labelProvider">section on label providers</a> for details.</li>
+								<li>We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate.</li>
+								<li>The runtime and UI modules have separate base classes <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/service/DefaultRuntimeModule.html"><abbr title="org.eclipse.xtext.service.DefaultRuntimeModule">DefaultRuntimeModule</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java">(src)</a> and 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/DefaultUiModule.html"><abbr title="org.eclipse.xtext.ui.DefaultUiModule">DefaultUiModule</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java">(src)</a> now. We use Guice's module overrides to combine them with the newly 
+								    introduced <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/shared/internal/SharedModule.html"><abbr title="org.eclipse.xtext.ui.shared.internal.SharedModule">SharedModule</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java">(src)</a>. You have to add a constructor the your 
+								<strong>MyDslUiModule</strong> that takes an <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/plugin/AbstractUIPlugin.html"><abbr title="org.eclipse.ui.plugin.AbstractUIPlugin">AbstractUIPlugin</abbr></a> as argument and pass that one to 
+								    the super constructor. <strong>Tip: There is an Eclipse quick fix available for that one.</strong></li>
+								<li>The interfaces <strong>ILexicalHighlightigConfiguration</strong> and <strong>ISemanticHighlightingConfiguration</strong> have been merged into 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">(src)</a>.</li>
+								<li>The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/DefaultTemplateProposalProvider.html"><abbr title="org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider">DefaultTemplateProposalProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/DefaultTemplateProposalProvider.java">(src)</a> takes an additional, injectable 
+								    constructor parameter of type <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/ContextTypeIdHelper.html"><abbr title="org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper">ContextTypeIdHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/ContextTypeIdHelper.java">(src)</a>.</li>
+								<li>The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html"><abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper">HyperlinkHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java">(src)</a> uses field injection instead of constructor 
+								    injection. The method <code class="prettyprint lang-java">createHyperlinksByOffset(..)</code> should be overridden instead of the former 
+								<code class="prettyprint lang-java">findCrossLinkedEObject</code>.</li>
+								<li>The API to skip a node in the outline has changed. Instead of returning the <strong>HIDDEN_NODE</strong> you'll have to implement 
+								<code class="prettyprint lang-java">boolean consumeNode(MyType)</code> and return <strong>false</strong>.
+								    
+								<strong>Note: The outline has been re-implemented in Xtext 2.0</strong>.</li>
+								<li>The <strong>Readonly*Storage</strong> implementations have been removed. There is a new API to open editors for objects with a 
+								    given URI. Please use the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/IURIEditorOpener.html"><abbr title="org.eclipse.xtext.ui.editor.IURIEditorOpener">IURIEditorOpener</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/IURIEditorOpener.java">(src)</a> to create an editor or the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/resource/IStorage2UriMapper.html"><abbr title="org.eclipse.xtext.ui.resource.IStorage2UriMapper">IStorage2UriMapper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/resource/IStorage2UriMapper.java">(src)</a> to obtain an <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/resources/IStorage.html"><abbr title="org.eclipse.core.resources.IStorage">IStorage</abbr></a> 
+								    for a given <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html"><abbr title="org.eclipse.emf.common.util.URI">URI</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">(src)</a>.</li>
+								<li>The interfaces <strong>IStateAccess</strong> and <strong>IEObjectHandle</strong> have been moved along with the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/concurrent/IUnitOfWork.html"><abbr title="org.eclipse.xtext.util.concurrent.IUnitOfWork">IUnitOfWork</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java">(src)</a> 
+								    to the package <strong>org.eclipse.xtext.util.concurrent</strong>.
+								    
+								<strong>Note: IStateAccess was split into IReadAccess and IWriteAccess in Xtext 2.0.</strong></li>
+								<li>The <strong>ValidationJobFactory</strong> is gone. Please implement a custom <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/IResourceValidator.html"><abbr title="org.eclipse.xtext.validation.IResourceValidator">IResourceValidator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IResourceValidator.java">(src)</a> 
+								    instead.</li>
+								<li>The grammar elements <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/Alternatives.html"><abbr title="org.eclipse.xtext.Alternatives">Alternatives</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Alternatives.java">(src)</a> and <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/Group.html"><abbr title="org.eclipse.xtext.Group">Group</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Group.java">(src)</a> have a new common 
+								    super type <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/CompoundElement.html"><abbr title="org.eclipse.xtext.CompoundElement">CompoundElement</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CompoundElement.java">(src)</a>. The methods <code class="prettyprint lang-java">getGroups()</code> and <code class="prettyprint lang-java">getTokens()</code> have been refactored to <code class="prettyprint lang-java">getElements()</code>.</li>
+								<li>Completion proposals take a <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html"><abbr title="org.eclipse.jface.viewers.StyledString">StyledString</abbr></a> instead of a plain string as display string.</li>
+								<li>The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/AbstractLabelProvider.html"><abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider">AbstractLabelProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java">(src)</a> does no longer expose its 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/IImageHelper.html"><abbr title="org.eclipse.xtext.ui.IImageHelper">IImageHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java">(src)</a>. Use <code class="prettyprint lang-java">convertToImage</code> instead or inject your own <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/IImageHelper.html"><abbr title="org.eclipse.xtext.ui.IImageHelper">IImageHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/IImageHelper.java">(src)</a>.</li>
+								<li>The implementation-classes from <strong>org.eclipse.xtext.index</strong> were superseded by the builder infrastructure. Use the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment">QualifiedNamesFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java">(src)</a> and the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment">ImportNamespacesScopingFragment</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java">(src)</a> 
+								    instead of the <strong>ImportedNamespacesScopingFragment</strong>. Please refer to the <a href="documentation7.html#index_based">section about the builder infrastructure</a> for details.</li>
+								<li>All the Xtend-based fragments were removed.</li>
+								<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/ILinkingService.html">ILinkingService.getLinkText</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java">(src)</a> was removed. Have a look at the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/impl/LinkingHelper.html"><abbr title="org.eclipse.xtext.linking.impl.LinkingHelper">LinkingHelper</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/LinkingHelper.java">(src)</a> and the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parsetree/reconstr/impl/CrossReferenceSerializer.html"><abbr title="org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer">CrossReferenceSerializer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/CrossReferenceSerializer.java">(src)</a> if you relied on this method.</li>
+								<li>The <strong>SerializerUtil</strong> was renamed to <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parsetree/reconstr/Serializer.html"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java">(src)</a>. There were other 
+								    heavy refactorings that involved the serializer and its components like e.g. the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.html"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITransientValueService">ITransientValueService</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java">(src)</a> but it should be pretty straight forward to 
+								    migrate existing client code.</li>
+								<li>The method-signatures of the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IFragmentProvider.html"><abbr title="org.eclipse.xtext.resource.IFragmentProvider">IFragmentProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">(src)</a> have changed. The <a href="documentation7.html#fragmentProvider">documentation</a> 
+								    will give a clue on how to update existing implementations.</li>
+								<li>Some static methods were removed from utility classes such as <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/EcoreUtil2.html"><abbr title="org.eclipse.xtext.EcoreUtil2">EcoreUtil2</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java">(src)</a> and <strong>ParsetreeUtil</strong> 
+								    in favor of more sophisticated implementations.</li>
+							</ul>
+							<p>
+						</p>
+						<p>
+							For an overview over the new features in Xtext 1.0 consult our <a href="http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php">New and Noteworthy</a> online.
+						</p>
+						</section>
+						</section>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+	<div id="extra">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="span6">
+						<h3>Quick Links</h3>
+						<ul class="footer-links clearfix">
+							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+						</ul>
+						<ul class="footer-links clearfix">
+	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
+							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
+							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
+							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+						</ul>
+					</div>
+					<div class="span6">
+						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
+						<br />
+						<div id="tweet">
+							<p>Please wait while my tweets load</p>
+							<p>
+								<a href="http://twitter.com/rem">If you can't wait - check
+									out what I've been twittering</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Le javascript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+	
+	<!-- include pretty-print files -->
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+	
+	<!-- Include the plug-in -->
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="js/custom.js" type="text/javascript"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-common.js"></script><script type="text/javascript">
+		registerLanguage('grammar|import|generate|terminal|enum|returns|with|hidden|as|current|fragment|EOF', 'xtext');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'xbase');
+		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
+		registerLanguage('IMPORT|EXTENSION|FILE|ENDFILE|DEFINE|ENDDEFINE|FOR|ENDFOR|FOREACH|ENDFOREACH|AS|SEPARATOR|ITERATOR|EXPAND|REM|ENDREM|PROTECT|ENDPROTECT|this|IF|ENDIF|ELSE|null', 'xpand');
+		registerLanguage('import|extension|this|create|cached|true|false|let|switch|case|if|then|else|context|WARNING|ERROR', 'check');
+		registerLanguage('Hello', 'mydsl');
+		registerLanguage('package|entity|datatype|many|import|extends|public|op|return|mapped-to', 'domainexample');
+		registerLanguage('datatype|mapped-to', 'javatypesexample');
+		registerLanguage('events|commands|state|actions|end|resetEvents', 'fowlerexample');
+		registerLanguage('ref', 'linkingexample');
+	</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ class Generator {
 			new Index,
 			new Download, 
 //			new Examples, 
-			new Documentation, 
+			new MultiPageDocumentation, 
 			new Community 
 		)
 		println("Done.")

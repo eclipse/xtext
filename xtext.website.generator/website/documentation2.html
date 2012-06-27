@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Xtext - Language Development Made Easy!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages">
+	<meta name="author" content="Sven Efftinge">
+	<style>
+		#header_wrapper {
+			padding-top: 10px;
+			/* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		
+		code.prettyprint {
+	        padding: 0px;
+	        background-color: white;
+			border: none;
+	    }
+	</style>
+	<!--  styles -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Le fav and touch icons -->
+	
+	<link rel="shortcut icon" href="images/favicon.png">
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type='text/css'>
+	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
+	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<script src="js/twitter.js" type="text/javascript"></script>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+					prettyPrint();
+	         
+					 $('a[data-rel]').each(function() {
+	             $(this).attr('rel', $(this).data('rel'));
+	         });
+	        
+					 $("a[rel^='prettyPhoto']").prettyPhoto({
+	             animation_speed: 'fast',
+	             slideshow: 5000,
+	             autoplay_slideshow: false,
+	             opacity: 0.80,
+	             show_title: true,
+	             theme: 'ligh_square',
+	             overlay_gallery: false,
+	             social_tools: false
+	       
+	         });
+	         
+					$('#nav-outline > li > a').live('click', function() {        
+						$(this).parent().find('ul').slideToggle();      
+					});
+	         
+					$('.has-popover').popover();
+		 	     
+		 	     getTwitters('tweet', { 
+			        id: 'xtext', 
+			        count: 5,
+			        includeRT: true,
+			        enableLinks: true, 
+			        clearContents: true,
+			        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+			     });
+	         
+	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		 	     po.src = 'https://apis.google.com/js/plusone.js';
+		 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	     });
+		</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];	
+	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top"
+		style="border-bottom: 1px solid #000;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="index.html"></a>
+	
+	      <div class="btn-group pull-right">
+	        <g:plusone href="http://www.xtext.org"></g:plusone>
+	      </div>
+	
+				<div class="nav-collapse collapse" style="height: 0px;">
+					<ul class="nav">
+						<li ><a href="download.html">Download</a></li>
+						<li ><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+					</ul>
+	
+				</div>
+				<!--/.nav-collapse -->
+	
+			</div>
+		</div>
+	</div>
+	<!-- Navbar End -->
+<!--Container-->
+<div id="header_wrapper" class="container">
+	<div class="inner">
+		<div class="container">
+			<div class="page-heading"><h1>Documentation</h1></div>
+		</div> <!-- /.container -->
+	</div> <!-- /inner -->
+	<ul id="nav-outline">
+		<li>&nbsp;</li>
+		<li style="color : #333;">Getting Started</li>
+		<li><a href="documentation.html#FirstFiveMinutes">5 Minutes Tutorial</a>
+	<ul>	<li><a href="documentation.html#NewProject">Creating A New Xtext Project</a></li>
+		<li><a href="documentation.html#RunWorkflow">Generating The Language Infrastructure</a></li>
+		<li><a href="documentation.html#TestingTheEditor">Try The Editor</a></li>
+		<li><a href="documentation.html#Conclusion">Conclusion</a></li>
+	</ul>	</li>
+		<li><a href="documentation1.html#DomainModelWalkThrough">15 Minutes Tutorial</a>
+	<ul>	<li><a href="documentation1.html#_0">Create A New Xtext Project</a></li>
+		<li><a href="documentation1.html#_1">Write Your Own Grammar</a></li>
+		<li><a href="documentation1.html#_2">Generate Language Artifacts</a></li>
+		<li><a href="documentation1.html#_3">Run the Generated IDE Plug-in</a></li>
+		<li><a href="documentation1.html#_4">Second Iteration: Adding Packages and Imports</a></li>
+	</ul>	</li>
+		<li><a href="documentation2.html#DomainmodelNextSteps">15 Minutes Tutorial - Extended</a>
+	<ul>	<li><a href="documentation2.html#TutorialCodeGeneration">Writing a Code Generator With Xtend</a></li>
+		<li><a href="documentation2.html#TutorialUnitTests">Unit Testing the Language</a></li>
+		<li><a href="documentation2.html#TutorialValidation">Creating Custom Validation Rules</a></li>
+	</ul>	</li>
+		<li><a href="documentation3.html#JvmDomainmodel">Five simple steps to your JVM language</a>
+	<ul>	<li><a href="documentation3.html#_5">Step One: Create A New Xtext Project</a></li>
+		<li><a href="documentation3.html#_6">Step Two: Write the Grammar</a></li>
+		<li><a href="documentation3.html#_7">Step Three: Generate Language Artifacts</a></li>
+		<li><a href="documentation3.html#_8">Step Four: Define the Mapping to JVM Concepts</a></li>
+		<li><a href="documentation3.html#_9">Step Five : Try the Editor!</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Reference Documentation</li>
+		<li><a href="documentation4.html#Overview">Overview</a>
+	<ul>	<li><a href="documentation4.html#_10">What is Xtext?</a></li>
+		<li><a href="documentation4.html#_11">How Does It Work?</a></li>
+		<li><a href="documentation4.html#_12">Xtext is Highly Configurable</a></li>
+		<li><a href="documentation4.html#_13">Who Uses Xtext?</a></li>
+		<li><a href="documentation4.html#_14">Who is Behind Xtext?</a></li>
+		<li><a href="documentation4.html#DSL">What is a Domain-Specific Language</a></li>
+	</ul>	</li>
+		<li><a href="documentation5.html#grammarLanguage">The Grammar Language</a>
+	<ul>	<li><a href="documentation5.html#statemachine">A First Example</a></li>
+		<li><a href="documentation5.html#syntax">The Syntax</a></li>
+		<li><a href="documentation5.html#metamodelInference">Ecore Model Inference</a></li>
+		<li><a href="documentation5.html#grammarMixins">Grammar Mixins</a></li>
+		<li><a href="documentation5.html#_15">Common Terminals</a></li>
+	</ul>	</li>
+		<li><a href="documentation6.html#configuration">Configuration</a>
+	<ul>	<li><a href="documentation6.html#generator">The Language Generator</a></li>
+		<li><a href="documentation6.html#dependencyInjection">Dependency Injection in Xtext with Google Guice</a></li>
+	</ul>	</li>
+		<li><a href="documentation7.html#runtime_concepts">Runtime Concepts</a>
+	<ul>	<li><a href="documentation7.html#runtimeSetup">Runtime Setup (ISetup)</a></li>
+		<li><a href="documentation7.html#equinoxSetup">Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li><a href="documentation7.html#_16">Logging</a></li>
+		<li><a href="documentation7.html#validation">Validation</a></li>
+		<li><a href="documentation7.html#linking">Linking</a></li>
+		<li><a href="documentation7.html#scoping">Scoping</a></li>
+		<li><a href="documentation7.html#valueconverter">Value Converter</a></li>
+		<li><a href="documentation7.html#serialization">Serialization</a></li>
+		<li><a href="documentation7.html#formatting">Formatting (Pretty Printing)</a></li>
+		<li><a href="documentation7.html#fragmentProvider">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li><a href="documentation7.html#encoding">Encoding in Xtext</a></li>
+	</ul>	</li>
+		<li><a href="documentation8.html#ide_concepts">IDE Concepts</a>
+	<ul>	<li><a href="documentation8.html#labelProvider">Label Provider</a></li>
+		<li><a href="documentation8.html#contentAssist">Content Assist</a></li>
+		<li><a href="documentation8.html#quickfixes">Quick Fixes</a></li>
+		<li><a href="documentation8.html#templates">Template Proposals</a></li>
+		<li><a href="documentation8.html#outline">Outline View</a></li>
+		<li><a href="documentation8.html#hyperlinking">Hyperlinking</a></li>
+		<li><a href="documentation8.html#highlighting">Syntax Coloring</a></li>
+		<li><a href="documentation8.html#refactoring">Rename Refactoring</a></li>
+	</ul>	</li>
+		<li><a href="documentation9.html#Xbase">Xtext and Java</a>
+	<ul>	<li><a href="documentation9.html#_17">Plug-in Setup</a></li>
+		<li><a href="documentation9.html#jvmtypes">Referring to Java Elements using JVM Types</a></li>
+		<li><a href="documentation9.html#xbaseJavaReferences">Referring to Java Types Using Xbase</a></li>
+		<li><a href="documentation9.html#xbaseInferredType">Inferring a JVM Model</a></li>
+		<li><a href="documentation9.html#xbaseExpressions">Using Xbase Expressions</a></li>
+		<li><a href="documentation9.html#xbaseLanguageRef_Introduction">Xbase Language Reference</a></li>
+	</ul>	</li>
+		<li><a href="documentation10.html#MWE2">MWE2</a>
+	<ul>	<li><a href="documentation10.html#MWE2Exampe">Examples</a></li>
+		<li><a href="documentation10.html#MWE2LanguageReference">Language Reference</a></li>
+		<li><a href="documentation10.html#MWE2SyntaxReference">Syntax Reference</a></li>
+	</ul>	</li>
+		<li><a href="documentation11.html#emf_integration">Integration with EMF and Other EMF Editors</a>
+	<ul>	<li><a href="documentation11.html#model_metamodel">Model, Ecore Model, and Ecore</a></li>
+		<li><a href="documentation11.html#emf_codegen">EMF Code Generation</a></li>
+		<li><a href="documentation11.html#xtext_resource">XtextResource Implementation</a></li>
+		<li><a href="documentation11.html#gmf_integration">Integration with GMF Editors</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Appendix</li>
+		<li><a href="documentation12.html#migrating_from_1_0_x">Migrating from Xtext 1.0.x to 2.0</a>
+	<ul>	<li><a href="documentation12.html#_18">Take the Shortcut</a></li>
+		<li><a href="documentation12.html#_19">Migrating Step By Step</a></li>
+		<li><a href="documentation12.html#_20">Now go for then new features</a></li>
+	</ul>	</li>
+		<li><a href="documentation13.html#migrating_from_0_7">Migrating from Xtext 0.7.x to 1.0</a>
+	<ul>	<li><a href="documentation13.html#_21">Migrating Step By Step</a></li>
+	</ul>	</li>
+		<li>&nbsp;</li>
+		<li style="color : #333;">Additional Resources
+		<li><a href="documentation/2.3.0/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+		<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/">API Documentation (JavaDoc)</a>
+	</ul>
+</div>
+<div id="page">  
+	<div class="inner">
+		<div id="maincontainer" class="container">
+			<!-- chapter -->
+			<section id="DomainmodelNextSteps" style="padding-top: 68px; margin-top: -68px;">
+				<div class="row">
+					<div class="span8 offset3">
+						<h1 style="padding-top: 30px;">
+							15 Minutes Tutorial - Extended
+						</h1>
+						<hr style="margin-top: 5px; margin-bottom: 5px;">
+						<p>
+							After you have developed you first own DSL, the question arises, how the behavior and the semantics of
+							the language can be customized. Therefore a couple of mini-tutorials are available, that illustrate common
+							use cases when crafting an own DSL.
+						</p>
+						<p>
+							These lessons are independent from each other. Each of them will be based on the language that
+							was build in the first <a href="documentation1.html#DomainModelWalkThrough">domain model tutorial</a>.
+						</p>
+						<p>
+							That is, the syntax and the grammar for the language look like this:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-domainexample linenums">
+package java.lang {
+  datatype String
+}
+
+package my.company.blog {
+  import java.lang.*
+  import my.company.common.*
+    
+  entity Blog {
+    title: String
+    many posts: Post
+  }
+  
+  entity HasAuthor {
+    author: String
+  }
+  
+  entity Post extends HasAuthor {
+    title: String
+    content: String
+    many comments: Comment
+  }
+  
+  entity Comment extends HasAuthor {
+    content: String
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+grammar org.eclipse.xtext.example.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+Domainmodel:
+  (elements += AbstractElement)*
+;
+
+PackageDeclaration:
+  'package' name = QualifiedName '{'
+    (elements += AbstractElement)*
+  '}'
+;
+
+AbstractElement:
+  PackageDeclaration | Type | Import
+;
+
+QualifiedName:
+  ID ('.' ID)*
+;
+
+Import:
+  'import' importedNamespace = QualifiedNameWithWildcard
+;
+  
+QualifiedNameWithWildcard:
+  QualifiedName '.*'?
+;
+  
+Type:
+  DataType | Entity
+;
+  
+DataType:
+  'datatype' name=ID
+;
+ 
+Entity:
+  'entity' name = ID 
+              ('extends' superType = [Entity | QualifiedName])?
+  '{'
+    (features += Feature)*
+  '}'
+;
+ 
+Feature:
+  (many ?= 'many')? name = ID ':' type = [Type | QualifiedName]
+;</pre>
+							<p>
+						</p>
+						<!--  section -->
+						<section id="TutorialCodeGeneration" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Writing a Code Generator With Xtend</h2>
+						<p>
+							As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the
+							runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator
+							with Eclipse.
+						</p>
+						<p>
+							In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For
+							each <strong>Entity</strong>, a Java class is generated and each <strong>Feature</strong> will lead to a private field in that class and
+							public getters and setters. For the sake of simplicity, we will use fully qualified names all over
+							the generated code.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+package my.company.blog;
+
+public class HasAuthor {
+  private java.lang.String author;
+  
+  public java.lang.String getAuthor() {
+    return author;
+  }
+  
+  public void setAuthor(java.lang.String author) {
+    this.author = author;
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							First of all, locate the file <strong>DomainmodelGenerator.xtend</strong> in the package <strong>org.eclipse.xtext.example.generator</strong>.
+							This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
+							Eclipse environment.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+package org.eclipse.xtext.example.generator
+
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess
+
+class DomainmodelGenerator implements IGenerator {
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							Let's make the implementation more meaningful and start writing the code generator. The strategy is to find
+							all entities within a resource and trigger code generation for each one.
+						</p>
+						<p>
+							</p>
+							<ol>
+								<li>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore
+								    we need to iterate a resource with all its deeply nested elements. This can be achieved with the method
+								<code class="prettyprint lang-xtend">getAllContents()</code>. To use the resulting <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/TreeIterator.html"><abbr title="org.eclipse.emf.common.util.TreeIterator">TreeIterator</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">(src)</a> in
+								    a for loop, we use the extension method <code class="prettyprint lang-java">toIterable()</code> from the built-in library class
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IteratorExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions">IteratorExtensions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">(src)</a>.
+								    
+								<pre class="prettyprint lang-xtend linenums">
+class DomainmodelGenerator implements IGenerator {
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+      ...
+    }
+  }
+}</pre></li>
+								<li>Now let's answer the question, how we determine the file name of the Java class, that each <strong>Entity</strong>
+								    should yield. This information should be derived from the qualified name of the <strong>Entity</strong> since
+								    Java enforces this pattern. The qualified name itself has to be obtained from a special service
+								    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
+								    inject the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a> into the generator.
+								    
+								<pre class="prettyprint lang-xtend linenums">
+@Inject extension IQualifiedNameProvider</pre>
+								    
+								    This allows to ask for the name of an entity. It is straightforward to convert the name into
+								    a file name:
+								    
+								<pre class="prettyprint lang-xtend linenums">
+override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+  for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+    fsa.generateFile(
+      e.fullyQualifiedName.toString("/") + ".java",
+      e.compile)
+  }
+}</pre></li>
+								<li>The next step is to write the actual template code for an entity. For now, the function <code class="prettyprint lang-xtend">Entity.compile</code>
+								    does not exist, but it is easy to create it:
+								    
+								<pre class="prettyprint lang-xtend linenums">
+def compile(Entity e) '''
+  package &laquo;e.eContainer.fullyQualifiedName&raquo;;
+  
+  public class &laquo;e.name&raquo; {
+  }
+'''</pre></li>
+								<li>This small template is basically the first shot at a Java-Beans generator. However, it is currently
+								    rather incomplete and will fail, if the <strong>Entity</strong> is not contained in a package. A small modification
+								    fixes this. The <code class="prettyprint lang-java">package</code>-declaration has to be wrapped in an <code class="prettyprint lang-xtend">IF</code> expression:
+								    
+								<pre class="prettyprint lang-xtend linenums">
+def compile(Entity e) '''
+  &laquo;IF e.eContainer != null&raquo;
+    package &laquo;e.eContainer.fullyQualifiedName&raquo;;
+  &laquo;ENDIF&raquo;
+  
+  public class &laquo;e.name&raquo; {
+  }
+'''</pre>Let's handle the <strong>superType</strong> of an <strong>Entity</strong> gracefully, too by using another <code class="prettyprint lang-xtend">IF</code> expression:
+								    
+								<pre class="prettyprint lang-xtend linenums">
+def compile(Entity e) ''' 
+  &laquo;IF e.eContainer != null&raquo;
+    package &laquo;e.eContainer.fullyQualifiedName&raquo;;
+  &laquo;ENDIF&raquo;
+  
+  public class &laquo;e.name&raquo; &laquo;IF e.superType != null
+          &raquo;extends &laquo;e.superType.fullyQualifiedName&raquo; &laquo;ENDIF&raquo;{
+  }
+'''</pre></li>
+								<li>Even though the template will compile the <strong>Entities</strong> without any complains, it still lacks support
+								    for the Java properties, that each of the declared features should yield.
+								    
+								    For that purpose, you have to create another Xtend function that compiles a single feature
+								    to the respective Java code.
+								    
+								<pre class="prettyprint lang-xtend linenums">
+def compile(Feature f) '''
+  private &laquo;f.type.fullyQualifiedName&raquo; &laquo;f.name&raquo;;
+  
+  public &laquo;f.type.fullyQualifiedName&raquo; get&laquo;f.name.toFirstUpper&raquo;() {
+    return &laquo;f.name&raquo;;
+  }
+  
+  public void set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo; &laquo;f.name&raquo;) {
+    this.&laquo;f.name&raquo; = &laquo;f.name&raquo;;
+  }
+'''</pre>
+								    
+								    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure
+								    that the function is actually used.
+								    
+								<pre class="prettyprint lang-xtend linenums">
+def compile(Entity e) ''' 
+  &laquo;IF e.eContainer != null&raquo;
+    package &laquo;e.eContainer.fullyQualifiedName&raquo;;
+  &laquo;ENDIF&raquo;
+  
+  public class &laquo;e.name&raquo; &laquo;IF e.superType != null
+          &raquo;extends &laquo;e.superType.fullyQualifiedName&raquo; &laquo;ENDIF&raquo;{
+    &laquo;FOR f:e.features&raquo;
+      &laquo;f.compile&raquo;
+    &laquo;ENDFOR&raquo;
+  }
+'''</pre></li>
+							</ol>
+							<p>
+						</p>
+						<p>
+							The final code generator looks pretty much like the following code snippet. Now you can give it a try!
+							Launch a new Eclipse Application (<strong>Run As -&gt; Eclipse Application</strong> on the Xtext project) and create a
+							<strong>dmodel</strong> file in a Java Project. Now simply create a new source folder <strong>src-gen</strong> in the that project
+							and see how the compiler will pick up your sample <strong>Entities</strong> and generate Java code for them.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+package org.eclipse.xtext.example.generator
+
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.example.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.Feature
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+
+import com.google.inject.Inject
+
+class DomainmodelGenerator implements IGenerator {
+
+  @Inject extension IQualifiedNameProvider
+
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+      fsa.generateFile(
+        e.fullyQualifiedName.toString("/") + ".java",
+        e.compile)
+    }
+  }
+
+  def compile(Entity e) ''' 
+    &laquo;IF e.eContainer != null&raquo;
+      package &laquo;e.eContainer.fullyQualifiedName&raquo;;
+    &laquo;ENDIF&raquo;
+    
+    public class &laquo;e.name&raquo; &laquo;IF e.superType != null
+            &raquo;extends &laquo;e.superType.fullyQualifiedName&raquo; &laquo;ENDIF&raquo;{
+      &laquo;FOR f:e.features&raquo;
+        &laquo;f.compile&raquo;
+      &laquo;ENDFOR&raquo;
+    }
+  '''
+
+  def compile(Feature f) '''
+    private &laquo;f.type.fullyQualifiedName&raquo; &laquo;f.name&raquo;;
+    
+    public &laquo;f.type.fullyQualifiedName&raquo; get&laquo;f.name.toFirstUpper&raquo;() {
+      return &laquo;f.name&raquo;;
+    }
+    
+    public void set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo; &laquo;f.name&raquo;) {
+      this.&laquo;f.name&raquo; = &laquo;f.name&raquo;;
+    }
+  '''
+}</pre>
+							<p>
+						</p>
+						<p>
+							If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized
+							into your workspace. Simply choose <strong>New -&gt; Example -&gt; Xtend Examples -&gt; Xtend Introductory
+							Examples</strong> and have a look at Xtend's features.
+							As a small exercise, you could implement support for the <strong>many</strong> attribute of a <strong>Feature</strong> or enforce
+							naming conventions, e.g. field names should start with an underscore.
+						</p>
+						</section>
+						<!--  section -->
+						<section id="TutorialUnitTests" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Unit Testing the Language</h2>
+						<p>
+							Automated tests are crucial for the maintainability and the quality of a software product. That is why
+							it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
+							a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI
+							tests for Junit4.
+						</p>
+						<p>
+							This tutorial is about testing the parser and the linker for the <strong>Domainmodel</strong>. It leverages Xtend to
+							write the testcase.
+						</p>
+						<p>
+							</p>
+							<ol>
+								<li>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
+								    plugin, and select <strong>New -&gt; Xtend Class</strong> from the context menu. Provide a meaningful name and
+								    enter the package before you hit finish.
+								    
+								    The core of the test infrastructure is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/XtextRunner.html"><abbr title="org.eclipse.xtext.junit4.XtextRunner">XtextRunner</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">(src)</a> and
+								    the language specific <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/IInjectorProvider.html"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider">IInjectorProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">(src)</a>. Both have to be provided
+								    by means of class annotations:  
+								 
+								<pre class="prettyprint lang-xtend linenums">
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
+
+@InjectWith(typeof(DomainmodelInjectorProvider))
+@RunWith(typeof(XtextRunner))
+class ParserTest {
+}</pre></li>
+								<li>The actual test case is pretty straight forward with Xtend. The utility class 
+								<strong>org.eclipse.xtext.junit4.util.ParseHelper</strong> allows to parse an arbitrary string into a
+								<strong>Domainmodel</strong>. The model itself can be traversed and checked afterwards. A static import of
+								<a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html"><abbr title="org.junit.Assert">Assert</abbr></a> leads to concise and readable test cases.
+								    
+								<pre class="prettyprint lang-xtend linenums">
+import org.eclipse.xtext.junit4.util.ParseHelper
+import static org.junit.Assert.*
+
+...
+											    
+@Inject
+ParseHelper&lt;Domainmodel&gt; parser
+
+@Test 
+def void parseDomainmodel() {
+  val model = parser.parse(
+    "entity MyEntity {
+      parent: MyEntity
+    }")
+  val entity = model.elements.head as Entity
+  assertSame(entity, entity.features.head.type)
+}</pre></li>
+								<li>After saving the Xtend file, it is time to run the test. Please locate the generated java class
+								    in the <strong>xtend-gen</strong> folder and select <strong>Run As -&gt; JUnit Test</strong> from the context menu.</li>
+							</ol>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="TutorialValidation" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Creating Custom Validation Rules</h2>
+						<p>
+							One of the main advantages of DSLs is the possibility to statically validate domain specific constraints.
+							This can be achieved by means of static analysis. Because this is a common use case,
+							Xtext provides a dedicated hook for this kind of validation rules. In this lesson, we want to ensure
+							that the name of an <strong>Entity</strong> starts with an upper-case letter and that all features have distinct names
+							across the inheritance relationship of an <strong>Entity</strong>.
+						</p>
+						<p>
+							Try to locate the class <strong>DomainmodelJavaValidator</strong> in the package <strong>org.eclipse.xtext.example.validation</strong>.
+							It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines
+							of code:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+@Check
+public void checkNameStartsWithCapital(Entity entity) {
+  if (!Character.isUpperCase(entity.getName().charAt(0))) {
+    warning("Name should start with a capital", 
+      DomainmodelPackage.Literals.TYPE__NAME);
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							Any name for the method will do. The important thing is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/Check.html"><abbr title="org.eclipse.xtext.validation.Check">Check</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">(src)</a>
+							annotation that advises the framework to use the method as a validation rule. If the name starts with
+							a lower case letter, a warning will be attached to the name of the <strong>Entity</strong>.
+						</p>
+						<p>
+							The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the <strong>Entity</strong>
+							and look for features with equal names.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+@Check
+public void checkFeatureNameIsUnique(Feature f) {
+  Entity superEntity = ((Entity) f.eContainer()).getSuperType();
+  while(superEntity != null) {
+    for(Feature other: superEntity.getFeatures()) {
+      if (f.getName().equals(other.getName())) {
+        error("Feature names have to be unique",
+            DomainmodelPackage.Literals.FEATURE__NAME);
+        return;
+      }
+    }
+    superEntity = superEntity.getSuperType();
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							The sibling features, that are defined in the same entity, are automatically validated by the Xtext framework.
+							Therefore, they do not have to be checked twice.
+						</p>
+						</section>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+	<div id="extra">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="span6">
+						<h3>Quick Links</h3>
+						<ul class="footer-links clearfix">
+							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+						</ul>
+						<ul class="footer-links clearfix">
+	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
+							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
+							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
+							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+						</ul>
+					</div>
+					<div class="span6">
+						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
+						<br />
+						<div id="tweet">
+							<p>Please wait while my tweets load</p>
+							<p>
+								<a href="http://twitter.com/rem">If you can't wait - check
+									out what I've been twittering</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Le javascript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+	
+	<!-- include pretty-print files -->
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+	
+	<!-- Include the plug-in -->
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="js/custom.js" type="text/javascript"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-common.js"></script><script type="text/javascript">
+		registerLanguage('grammar|import|generate|terminal|enum|returns|with|hidden|as|current|fragment|EOF', 'xtext');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'xbase');
+		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
+		registerLanguage('IMPORT|EXTENSION|FILE|ENDFILE|DEFINE|ENDDEFINE|FOR|ENDFOR|FOREACH|ENDFOREACH|AS|SEPARATOR|ITERATOR|EXPAND|REM|ENDREM|PROTECT|ENDPROTECT|this|IF|ENDIF|ELSE|null', 'xpand');
+		registerLanguage('import|extension|this|create|cached|true|false|let|switch|case|if|then|else|context|WARNING|ERROR', 'check');
+		registerLanguage('Hello', 'mydsl');
+		registerLanguage('package|entity|datatype|many|import|extends|public|op|return|mapped-to', 'domainexample');
+		registerLanguage('datatype|mapped-to', 'javatypesexample');
+		registerLanguage('events|commands|state|actions|end|resetEvents', 'fowlerexample');
+		registerLanguage('ref', 'linkingexample');
+	</script>
+</body>
+</html>
