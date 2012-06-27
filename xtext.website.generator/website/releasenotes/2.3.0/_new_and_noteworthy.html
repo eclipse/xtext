@@ -1,0 +1,175 @@
+<html>
+<head>
+<title>Eclipse Xtext</title>
+<style type="text/css" title="text/css" media="screen">
+td  {
+	border-top: 1px solid #D4D4DD;
+	text-align: left;
+	vertical-align: top;
+	font-weight: normal;
+	padding: 5pt;
+	padding-bottom: 40px;
+	width: 425px;
+}
+
+td.entry_cell {
+	font-weight: bold;
+	width: 30%
+}
+
+td.change {
+	font-style: italic;
+	color: red;
+}
+
+table {
+    border-top-style: none;
+ 	border-collapse: collapse;
+}
+
+h2 {
+	border-bottom: none;
+}
+
+img {
+	max-width: 425px;  
+}
+
+</style>
+
+</head>
+<body>
+<h1>What's new in Xtext 2.3 M6</h1>
+<small>See what was new in the <a href="../2.2.0/new_and_noteworthy.php">previous release</a></small>
+<p>Xtext 2.3 M6 offers a lot of new features and improvements. All in all, 
+<a href="https://bugs.eclipse.org/bugs/buglist.cgi?list_id=944371;resolution=FIXED;classification=Modeling;chfieldto=2012-03-20;query_format=advanced;chfieldfrom=2011-12-15;component=Xtext;product=TMF">over 120 bug reports and feature requests</a> 
+have been solved since Xtext 2.2. Here is a summary of the most significant enhancements:</p>
+<table>
+	<tr>
+		<td class="entry_cell">Debug Support</td>
+		<td>
+		<p>
+			Xtext now supports debugging of DSLs if you generate Java code from your language. It uses Java's <a href="http://jcp.org/en/jsr/detail?id=45">Debugging Support for Other Languages 
+			(JSR-045)</a> to allow to set breakpoints in your language and step through the implementation. All you need to do is to provide the
+			mapping information between your DSL files and the generated Java code. This will happen automatically if you use the Xbase infrastructure 
+			for your language implementation.  
+		</p>
+		<div align="center">
+			<iframe src="http://player.vimeo.com/video/38847856?title=0&amp;byline=0&amp;portrait=0" width="640" height="384" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		</div>
+		</td>	
+	</tr>
+<!-- Not yet in Xbase
+	<tr>
+		<td class="entry_cell">Generated Source View</td>
+		<td>
+		<p>
+			If you generate source code from your Xtext DSLs, it is now easy to implement a View for your workbench 
+			that provides a preview of the how the generated code would look like.
+		</p>
+		</td>	
+	</tr>
+-->
+	<tr>
+		<td class="entry_cell">Hover Improvements</td>
+		<td>
+		<p>
+			The hover for Xbase languages now renders the fully resolved signature of the referenced Java method, constructor or field.
+			Also the JavaDoc is rendered correctly just like Eclipse JDT does it for Java.
+		</p>
+		<img src="images/hover.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Semantic highlighting of expressions</td>
+		<td>
+		<p>
+			Expressions that are built on top of the Xbase library now provide nice syntax coloring to indicate whether a feature call
+			refers to an imported extension function, static or instance methods or fields.
+		</p>
+		<img src="images/semantic_coloring_small.png"/>	
+		</td>
+	</tr>
+	<tr>
+		<td class="entry_cell">Spell Checking</td>
+		<td>
+		<p>
+			Spell checking is now available for all languages by default. It checks the contents of string literals and
+			comments. You can even use quick fixes to correct spelling mistakes.
+		</p>
+		<img src="images/spelling.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Improved Problem Markers</td>
+		<td>
+		<p>
+			The problems view shows more information about the type of a warning or error. All languages now define their own
+			marker types thus they can act independently from each other and show more reliable indicators about
+			available quickfixes.
+		</p>
+		<img src="images/markers.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Call Hierarchy View</td>
+		<td>
+		<p>
+			For languages that utilize Xbase and support the concept of method calls, Xtext does now integrate 
+			with the JDT's Call Hierarchy View.
+		</p>
+		<img src="images/call_hierarchy.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Type Hierarchy View</td>
+		<td>
+		<p>
+			For languages that utilize Xbase and support the concept of inheritance, Xtext does now integrate 
+			with the JDT's Type Hierarchy View.
+		</p>
+		<img src="images/type_hierarchy.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Xbase Compiler Improvements</td>
+		<td>
+		<p>
+			To make the generated Java code even more readable, 
+			the compiler can now inline certain operations. As a result the generated Java code is more idiomatic 
+			and therefore easier to understand. Also some superfluous statements have been removed to make it more concise.
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="entry_cell">Xbase Number Literals</td>
+		<td>
+		<p>
+			Fearless arithmetics with big numbers: Xbase now has comprehensive support for number literals. 
+			This includes most of the things you can do in Java, and in addition it has first class support 
+			for BigDecimal and BigInteger (including overloaded arithmetic operators).
+		</p>
+		<pre>
+new BigDecimal("6.1").subtract(
+       new BigDecimal("0.755").multiply(BigDecimal.valueOf(3L)))</pre>
+		<p>
+			In Xbase you can use literals and operators :
+		</p>
+		<pre class="prettyprint lang-xtend">6.1bd - 0.755bd * 3bd</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="entry_cell">Xtend moved to Tools</td>
+		<td>
+		<p>
+			<a href="http://eclipse.org/xtend/">Xtend</a> has moved to its own project under the 
+			umbrella of <a href="http://www.eclipse.org/projects/project.php?id=tools.xtend">eclipse.tools</a>.
+			It now has it's own <a href="http://eclipse.org/xtend">new & noteworthy</a> document.
+		</p>
+		</td>	
+	</tr>
+</table>
+
+
+</body>
+</html>
