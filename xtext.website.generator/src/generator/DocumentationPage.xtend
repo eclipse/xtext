@@ -71,7 +71,7 @@ class DocumentationPage extends AbstractXdocBaseWebsite {
 				<li style="color : #333;">«part.title.toHtmlText»</li>
 				«FOR chapter : part.sections»
 					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
-					«FOR section : chapter.sections BEFORE '<ul>' AFTER '</ul>'»
+					«FOR section : chapter.sections BEFORE subMenuListTag(chapter) AFTER '</ul>'»
 						<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 					«ENDFOR»
 					</li>
@@ -80,6 +80,13 @@ class DocumentationPage extends AbstractXdocBaseWebsite {
 			«additionalLinks»
 		</ul>
 	'''
+	
+	def String subMenuListTag(AbstractSection section) {
+		if(section.targetPath == this.section.targetPath) 
+			'<ul style="display: block;">'
+		else 
+			'<ul>'
+	}
 	
 	def additionalLinks() '''
 		<li>&nbsp;</li>

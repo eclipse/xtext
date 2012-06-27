@@ -5,6 +5,7 @@ import bootstrap.HtmlExtensions;
 import bootstrap.PostProcessor;
 import bootstrap.TargetPaths;
 import bootstrap.XdocExtensions;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import generator.AbstractXdocBaseWebsite;
 import generator.DocumentationSetup;
@@ -142,7 +143,8 @@ public class DocumentationPage extends AbstractXdocBaseWebsite {
               for(final AbstractSection section : _sections_1) {
                 if (!_hasElements) {
                   _hasElements = true;
-                  _builder.append("<ul>", "	");
+                  String _subMenuListTag = this.subMenuListTag(chapter);
+                  _builder.append(_subMenuListTag, "	");
                 }
                 _builder.append("\t");
                 _builder.append("<li><a href=\"");
@@ -173,6 +175,19 @@ public class DocumentationPage extends AbstractXdocBaseWebsite {
     _builder.append("</ul>");
     _builder.newLine();
     return _builder;
+  }
+  
+  public String subMenuListTag(final AbstractSection section) {
+    String _xifexpression = null;
+    String _targetPath = this._targetPaths.getTargetPath(section);
+    String _targetPath_1 = this._targetPaths.getTargetPath(this.section);
+    boolean _equals = Objects.equal(_targetPath, _targetPath_1);
+    if (_equals) {
+      _xifexpression = "<ul style=\"display: block;\">";
+    } else {
+      _xifexpression = "<ul>";
+    }
+    return _xifexpression;
   }
   
   public CharSequence additionalLinks() {
