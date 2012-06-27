@@ -61,7 +61,7 @@ e[eOpposite] of each other and owned by either end of the associations.
 The superclass of EAttributes and EReferences is e[EStructuralFeature] and allows to define a name and a 
 cardinality by setting e[lowerBound] and e[upperBound]. Setting the latter to -1 means 'unbounded'. 
 
-The common supertype of EDataType and EClass is e[EClassifier]. An codeRef[org.eclipse.emf.ecore.EPackage] acts as a namespace and 
+The common super type of EDataType and EClass is e[EClassifier]. An codeRef[org.eclipse.emf.ecore.EPackage] acts as a namespace and 
 container of EClassifiers. 
 
 We have summarized these most relevant concepts of Ecore in the following diagram:  
@@ -142,14 +142,14 @@ ul[
     elements will become stale. As the Xtext editor continuously re-parses the model on changes, 
     this will happen rather often. It is safer to synchronize editors more loosely, e.g. on 
     file changes.]
-  item[Implement an codeRef[org.eclipse.xtext.resource.IFragmentProvider] (ref:fragmentProvider[howto]) to make 
+  item[Implement an codeRef[org.eclipse.xtext.resource.IFragmentProvider] (ref:fragmentProvider[how-to]) to make 
     the XtextResource return stable fragments for its contained
     elements, e.g. based on composite names rather than order of 
     appearance.]
   item[Implement an codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] and an 
-    codeRef[org.eclipse.xtext.scoping.IScopeProvider] (ref:scoping[howto]) to make the 
+    codeRef[org.eclipse.xtext.scoping.IScopeProvider] (ref:scoping[how-to]) to make the 
     names of all linkable elements in cross-references unique.]
-  item[Provide an codeRef[org.eclipse.xtext.formatting.IFormatter] (ref:formatting[howto]) to improve the readability 
+  item[Provide an codeRef[org.eclipse.xtext.formatting.IFormatter] (ref:formatting[how-to]) to improve the readability 
     of the generated textual models.]
   item[Register an codeRef[org.eclipse.xtext.parser.antlr.IReferableElementsUnloader] to turn 
     deleted/replaced model elements into EMF proxies. Design the rest 
@@ -210,7 +210,7 @@ elements when their semantic counterparts change, are added or are removed. Some
 can be derived from the semantic model by some default mapping, but usually there is a lot of graphical 
 stuff that the user wants to change to make the diagram look better.   
 
-In an Xtext editor, changes in the text are transfered to the underlying 
+In an Xtext editor, changes in the text are transferred to the underlying 
 codeRef[org.eclipse.xtext.resource.XtextResource] by a call to the method 
 codeRef[org.eclipse.xtext.resource.XtextResource][XtextResource.update(int, int, String)], which will trigger a
 partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
@@ -288,6 +288,6 @@ section2[Stage 3: A Popup Xtext Editor (experimental)]
 e[SimplePropertyPopupXtextEditorEditPartOverride] demonstrates how to spawn an Xtext editor to edit a model 
 element. The editor pops up in its control and shows only the section of the selected element. It is a fully 
 fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only
-transfered back to the model if it does not have any errors.   
+transferred back to the model if it does not have any errors.   
 
 Note that there still are synchronization issues, that's why we keep this one marked as experimental.

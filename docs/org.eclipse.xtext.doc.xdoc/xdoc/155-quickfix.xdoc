@@ -88,7 +88,7 @@ public void fixFeatureName(final Issue issue,
 }
 ] 
 
-section2[Quickfixes for Linking Errors and Syntax Errors]
+section2[Quick Fixes for Linking Errors and Syntax Errors]
 
 You can even define quick fixes for linking errors. The issue codes are assigned by the 
 codeRef[org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider]. Have a look at the domain model 

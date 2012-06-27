@@ -169,7 +169,7 @@ described in the following chapter.
 section3:import_uri[Global Scopes Based On Explicit Imports (ImportURI Mechanism)]
 
 A simple and straight forward solution is to have explicit references to other resources in your 
-file by explicitly listing pathes or codeRef[org.eclipse.emf.common.util.URI][URIs] to all referenced resources 
+file by explicitly listing paths or codeRef[org.eclipse.emf.common.util.URI][URIs] to all referenced resources 
 in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy 
 implementation of an codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] which is based on a naming convention 
 and makes this semantics very easy to use. Talking of the introductory example and given you would want to add 
@@ -211,19 +211,19 @@ It will bind an codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvi
 e[importURI] features.
 
 
-section3:index_based[Global Scopes Based On External Configuration (e.g. Classpath-Based)]
+section3:index_based[Global Scopes Based On External Configuration (e.g. Class Path Based)]
 
 Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 external configuration in order to define what is visible from outside a resource. Java for instances 
-uses the notion of the classpath to define containers (jars and class folders) which contain any 
+uses the notion of the class path to define containers (jars and class folders) which contain any 
 referenceable elements. In the case of Java also the order of such entries is important. 
 
 Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 codeRef[org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider] has to be bound to 
 the codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] interface. 
 
-By default Xtext leverages the classpath mechanism since it is well designed and already understood 
-by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
+By default Xtext leverages the class path mechanism since it is well designed and already understood 
+by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
 even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 and independent from the JDT.
 
@@ -249,9 +249,9 @@ Guice configuration of the global index in the UI scenario in
 codeRef[org.eclipse.xtext.ui.shared.internal.SharedModule].
 
 The index is basically a flat list of instances of codeRef[org.eclipse.xtext.resource.IResourceDescription]. 
-The index itself doesn't know about visibility constraints due to classpath restriction. Rather than that, 
+The index itself doesn't know about visibility constraints due to class path restriction. Rather than that, 
 they are defined by the referencing language by means of so called codeRef[org.eclipse.xtext.resource.IContainer][IContainers]: 
-While Java might load a resource via codeRef[java.lang.ClassLoader][ClassLoader.loadResource()] (i.e. using the classpath mechanism), another 
+While Java might load a resource via codeRef[java.lang.ClassLoader][ClassLoader.loadResource()] (i.e. using the class path mechanism), another 
 language could load the same resource using the file system paths. 
 
 Consequently, the information which container a resource belongs to depends on the referencing 
@@ -292,7 +292,7 @@ additional codeRef[org.eclipse.xtext.resource.containers.IAllContainersState] wh
 keeps track of the set of available containers and their visibility relationships.  
 
 Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, 
-you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
+you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
 Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
 differ in the bound instance of codeRef[org.eclipse.xtext.resource.containers.IAllContainersState] 
 of the referring language. These will be described in detail in the following sections.
@@ -309,11 +309,11 @@ It usually refers to
 ul[
   item[a source folder of a Java project,]
   item[a referenced jar, ]
-  item[a classpath entry of a referenced Java project, or]
+  item[a class path entry of a referenced Java project, or]
   item[the exported packages of a required PDE plug-in.]
 ]
 
-So for an element to be referable, its resource must be on the classpath of the caller's Java project 
+So for an element to be referable, its resource must be on the class path of the caller's Java project 
 and it must be exported (as described above). 
 
 As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of 
@@ -336,13 +336,13 @@ public Provider<IAllContainersState> provideIAllContainersState() {
 in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 binding, as we have to bind a global singleton to a Guice provider. A 
 codeRef[org.eclipse.xtext.ui.containers.StrictJavaProjectsState] requires all elements to be on the 
-classpath, while the default codeRef[org.eclipse.xtext.ui.containers.JavaProjectsState] also allows 
+class path, while the default codeRef[org.eclipse.xtext.ui.containers.JavaProjectsState] also allows 
 models in non-source folders. 
 
 
 section4:project_based_containers[Eclipse Project-Based Containers]
 
-If the classpath-based mechanism doesn't work for your case, Xtext offers an alternative container 
+If the class path based mechanism doesn't work for your case, Xtext offers an alternative container 
 manager based on plain Eclipse projects: Each project acts as a container and the project references 
 e[Properties->Project References] are the visible containers. 
 
@@ -369,12 +369,12 @@ This one can be configured with a mapping of container handles to resource URIs.
 It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end 
 of the MWE2 workflow component codeRef[org.eclipse.xtext.mwe.Reader]. This is responsible 
 for reading in models in a workflow, e.g. for later code generation. The 
-codeRef[org.eclipse.xtext.mwe.Reader] allows to either scan the whole classpath or a set of paths 
+codeRef[org.eclipse.xtext.mwe.Reader] allows to either scan the whole class path or a set of paths 
 for all models therein. When paths are given, each path entry becomes an 
 codeRef[org.eclipse.xtext.resource.IContainer] of its own. In the following snippet,
 
 code[Java][component = org.eclipse.xtext.mwe.Reader {
-  // lookup all resources on the classpath
+  // lookup all resources on the class path
   // useJavaClassPath = true
   
   // or define search scope explicitly
@@ -423,7 +423,7 @@ public class ScopeExample { // class body scope
 }
 ]
 
-In fact the classpath scope should also reflect the order of classpath entries.
+In fact the class path scope should also reflect the order of class path entries.
 For instance:
 
 code[Java][classpathScope{stuff from bin/}

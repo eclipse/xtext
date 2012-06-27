@@ -465,7 +465,7 @@ bar.
 img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
 In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project].
-Xbase relies on a small runtime library on the classpath. To add this, right-click on the project and
+Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
 go to e[Java Build Path -> Libraries -> Add Library] and choose e[Xtend Library]. The create a new file 
 with the file extension you chose in the beginning (e[*.dmodel]) in the source folder of the Java project.
 This will open the generated entity editor. Try it and discover the rich functionality it provides. You 

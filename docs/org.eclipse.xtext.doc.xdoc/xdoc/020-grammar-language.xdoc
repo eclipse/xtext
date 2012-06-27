@@ -56,7 +56,7 @@ state unlockedPanel
 end
 ]
 
-What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+What we have are a bunch of declared events, commands, and states. Some events are additionally marked
 as being reset events. Within states there are references to declared actions. Actions should be executed 
 when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
 state.
@@ -114,10 +114,10 @@ Each Xtext grammar starts with a header that defines some properties of the gram
 code[Xtext][grammar org.xtext.example.SecretCompartments
    with org.eclipse.xtext.common.Terminals]
 
-The first line declares the name of the language. Xtext leverages Java's classpath mechanism. This means that the name 
+The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name 
 can be any valid Java qualifier. The file name needs to correspond to the language name and have the file 
 extension code[.xtext]. This means that the name has to be e[SecretCompartments.xtext] and must be placed 
-in a package e[org.xtext.example] on your project's classpath. In other words, your code[.xtext] file
+in a package e[org.xtext.example] on your project's class path. In other words, your code[.xtext] file
 has to reside in a Java source folder to be valid.
 
 The second aspect that can be deduced from the first line of the grammar is its relationship to other
@@ -168,7 +168,7 @@ and is only supported for backwards compatibility reasons.
 section4[Using Namespace URIs to Import Existing EPackages]
 
 You can use namespace URI in order to import existing codeRef[org.eclipse.emf.ecore.EPackage]. This is generally 
-preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+preferable. The package will be read from the Xtext index and therefore your grammar is independent
 from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
 in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
 Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
@@ -214,7 +214,7 @@ language = {
 }
 ]
 
-You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+You can use either platform URIs or class path URIs to list the required ecore files (see below for details
 on both URI schemes).
 
 Important note: EPackages have to refer to each other by means of platform-resource or platform-plugin
@@ -289,12 +289,12 @@ code[MWE2][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 }
 ]
 
-section4[Using Classpath URIs to Import Existing EPackages - Deprecated]
+section4[Using Class Path URIs to Import Existing EPackages - Deprecated]
 
-We usually like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
+We usually like to leverage Java's class path mechanism, because is is well understood and can be configured easily
 with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 e[*.ecore] file which is contained in a jar, you can make use of the 
-classpath URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
+e['classpath:'] URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
 which is shipped as part of Xtext. 
 
 Example:
@@ -496,7 +496,7 @@ That is the 2-digit hexadecimal code of ASCII characters.
 
 section3:terminal_fragment[Terminal Fragments]
 
-Since terminal rules are used in an unscoped context, it's not easily possible to reuse parts of their
+Since terminal rules are used in a stateless context, it's not easily possible to reuse parts of their
 definition. Fragments solve this problem. They allow the same EBNF elements as terminal rules do but
 may not be consumed by the lexer. Instead, they have to be used by other terminal rules. This allows
 to extract repeating parts of a definition:
@@ -588,10 +588,10 @@ The used assignment operator does not influence the cardinality of the expected 
 
 section4:cross_reference[Cross-References]
 
-A unique feature of Xtext is the ability to declare crosslinks in the grammar. In traditional compiler 
-construction the crosslinks are not established during parsing but in a later linking phase. This is the 
-same in Xtext, but we allow to specify crosslink information in the grammar. This information is used by the linker.
-The syntax for crosslinks is:
+A unique feature of Xtext is the ability to declare cross-links in the grammar. In traditional compiler 
+construction the cross-links are not established during parsing but in a later linking phase. This is the 
+same in Xtext, but we allow to specify cross-link information in the grammar. This information is used by the linker.
+The syntax for cross-links is:
 
 code[Xtext][CrossReference :
   '\[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? '\]'
@@ -620,7 +620,7 @@ Event returns MyEvent : ....;
 
 Looking at the syntax definition for cross-references, there is an optional part starting with a vertical 
 bar (pipe) followed by e[CrossReferenceableTerminal]. This is the part describing the concrete text, from 
-which the crosslink later should be established. If the terminal is omitted, it is expected to be the rule
+which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule
 with the name e[ID] - if one can be found. The terminal is mandatory for languages that do not define a rule with the name e[ID].
 
 Have a look at the ref:linking[linking section] in order to understand how linking is done.
@@ -1123,7 +1123,7 @@ Xtext supports the reuse of existing grammars. Grammars that are created via the
 code[Xtext][org.eclipse.xtext.common.Terminals]
 by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 
-To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language.
+To reuse an existing grammar, make sure the grammar file is on the class path of the inheriting language.
 If it is in a different plug-in, make sure to add a plug-in dependency in the code[MANIFEST.MF]. 
 
 code[Xtext][grammar org.xtext.example.SecretCompartments 

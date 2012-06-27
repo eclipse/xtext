@@ -71,7 +71,7 @@ public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 }
 ]
 
-Second, configure the global scope provider to scan project root folders instead of the classpath of Java projects.   
+Second, configure the global scope provider to scan project root folders instead of the class path of Java projects.   
 
 code[Java][@Override
 public com.google.inject.Provider

@@ -24,14 +24,14 @@ item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getWarnings(
 ]
 
 
-section3:linking_validation[Linker: Crosslink Validation]
+section3:linking_validation[Linker: Cross-link Validation]
 
-Any broken crosslinks can be checked generically. As crosslink resolution is done lazily 
+Any broken cross-links can be checked generically. As cross-link resolution is done lazily 
 (see ref:linking[linking]), any broken links are resolved lazily as well. If you want to validate whether 
 all links are valid, you will have to navigate through the model so that all installed EMF proxies 
 get resolved. This is done automatically in the editor.
 
-Similar to syntax errors, any unresolvable crosslinks will be reported and can be obtained through:
+Similar to syntax errors, any unresolvable cross-links will be reported and can be obtained through:
 
 ul[
 item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getErrors()]]]
