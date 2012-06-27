@@ -55,15 +55,14 @@ abstract class AbstractWebsite implements Resource {
 		</body>
 		</html>
 	'''
+	
 	def websiteDescription() { 
 		'The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages'
 	}
 
-	
 	def websiteTitle() {
 		'Xtext - Language Development Made Easy!'
 	}
-
 	
 	def javaScriptDocumentStart() '''
 		<script src="js/twitter.js" type="text/javascript"></script>
