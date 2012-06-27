@@ -196,7 +196,7 @@ abstract class AbstractWebsite implements Resource {
 							</ul>
 						</div>
 						<div class="span6">
-							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">«twitterID.toFirstUpper»</a> on Twitter</h3>
+							<h3><a href="https://twitter.com/#!/«twitterID»" style="color: white;">«twitterID.toFirstUpper»</a> on Twitter</h3>
 							<br />
 							<div id="tweet">
 								<p>Please wait while my tweets load</p>

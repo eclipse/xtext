@@ -511,9 +511,12 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3><a href=\"https://twitter.com/#!/xtext\" style=\"color: white;\">");
+    _builder.append("<h3><a href=\"https://twitter.com/#!/");
     String _twitterID = this.twitterID();
-    String _firstUpper = StringExtensions.toFirstUpper(_twitterID);
+    _builder.append(_twitterID, "					");
+    _builder.append("\" style=\"color: white;\">");
+    String _twitterID_1 = this.twitterID();
+    String _firstUpper = StringExtensions.toFirstUpper(_twitterID_1);
     _builder.append(_firstUpper, "					");
     _builder.append("</a> on Twitter</h3>");
     _builder.newLineIfNotEmpty();
