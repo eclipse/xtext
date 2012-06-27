@@ -13,8 +13,7 @@ import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithPar
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractConformanceVisitor<T extends LightweightTypeReference> extends 
+public abstract class AbstractConformanceVisitor<T extends LightweightTypeReference>
+		extends	TypeReferenceVisitorWithParameterAndNonNullResult<TypeConformanceComputationArgument.Internal<T>, TypeConformanceResult> {
 
-		TypeReferenceVisitorWithParameterAndNonNullResult<TypeConformanceComputationArgument.Internal<T>, TypeConformanceResult> {
-	
 }

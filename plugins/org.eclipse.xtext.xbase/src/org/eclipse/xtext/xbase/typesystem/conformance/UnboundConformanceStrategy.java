@@ -21,12 +21,12 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(UnboundTypeReference left, LightweightTypeReference reference, TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(UnboundTypeReference left, LightweightTypeReference reference, TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		return TypeConformanceResult.FAILED;
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference left, UnboundTypeReference right,
+	protected TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference left, UnboundTypeReference right,
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		if (left.getTypeParameter() == right.getTypeParameter())
 			return TypeConformanceResult.SUCCESS;

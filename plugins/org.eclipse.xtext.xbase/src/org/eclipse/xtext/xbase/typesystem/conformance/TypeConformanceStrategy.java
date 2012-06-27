@@ -37,78 +37,78 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 	}
 
 	@Override
-	public final TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitAnyTypeReference(getLeft(param), right, param);
 	}
 	
-	public TypeConformanceResult doVisitAnyTypeReference(T left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitAnyTypeReference(T left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitCompoundTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitCompoundTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitCompoundTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitCompoundTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitCompoundTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitArrayTypeReference(ArrayTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitArrayTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitArrayTypeReference(T left, ArrayTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitArrayTypeReference(T left, ArrayTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitParameterizedTypeReference(ParameterizedTypeReference right,
+	protected final TypeConformanceResult doVisitParameterizedTypeReference(ParameterizedTypeReference right,
 			TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitParameterizedTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitParameterizedTypeReference(T left, ParameterizedTypeReference right,
+	protected TypeConformanceResult doVisitParameterizedTypeReference(T left, ParameterizedTypeReference right,
 			TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	protected TypeConformanceResult doVisitFunctionTypeReference(FunctionTypeReference right, Internal<T> param) {
+	protected final TypeConformanceResult doVisitFunctionTypeReference(FunctionTypeReference right, Internal<T> param) {
 		return doVisitFunctionTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitFunctionTypeReference(T left, FunctionTypeReference right,
+	protected TypeConformanceResult doVisitFunctionTypeReference(T left, FunctionTypeReference right,
 			TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitParameterizedTypeReference(left, right, param);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitTypeReference(LightweightTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitTypeReference(LightweightTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitTypeReference(T left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitTypeReference(T left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		throw new IllegalStateException("doVisitTypeReference was invoked but not implemented for: " + left + " <= " + right);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitUnboundTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitUnboundTypeReference(T left, UnboundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitUnboundTypeReference(T left, UnboundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	public final TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitWildcardTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitWildcardTypeReference(T left, WildcardTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitWildcardTypeReference(T left, WildcardTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override
-	protected TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitMultiTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitMultiTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitMultiTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitMultiTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		for(LightweightTypeReference reference: right.getComponents()) {
 			TypeConformanceResult result = reference.accept(this, param);
 			if (result.isConformant())
@@ -120,10 +120,10 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 	}
 	
 	@Override
-	protected TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected final TypeConformanceResult doVisitSynonymTypeReference(CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitSynonymTypeReference(getLeft(param), right, param);
 	}
-	public TypeConformanceResult doVisitSynonymTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+	protected TypeConformanceResult doVisitSynonymTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		List<LightweightTypeReference> rightComponents = right.getComponents();
 		if (rightComponents.isEmpty())
 			return TypeConformanceResult.FAILED;

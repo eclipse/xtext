@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -133,9 +135,26 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
-	public final List<LightweightTypeReference> getSuperTypes() {
+	public List<LightweightTypeReference> getSuperTypes() {
 		TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 		return getSuperTypes(substitutor);
+	}
+	
+	public List<LightweightTypeReference> getAllSuperTypes() {
+		final List<LightweightTypeReference> result = Lists.newArrayList();
+		// TODO sort by distance
+		collectSuperTypes(new SuperTypeAcceptor() {
+			private Set<JvmType> seenTypes = Sets.newHashSetWithExpectedSize(4);
+			
+			public boolean accept(LightweightTypeReference superType, int distance) {
+				if (seenTypes.add(superType.getType())) {
+					result.add(superType);
+					return true;
+				}
+				return false;
+			}
+		});
+		return result;
 	}
 
 	protected TypeParameterSubstitutor<?> createSubstitutor() {

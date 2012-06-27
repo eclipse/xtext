@@ -24,7 +24,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(WildcardTypeReference leftWildcard, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<WildcardTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(WildcardTypeReference leftWildcard, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<WildcardTypeReference> param) {
 		if (param.asTypeArgument) {
 			LightweightTypeReference lowerBound = leftWildcard.getLowerBound();
 			if (lowerBound != null) {
@@ -46,13 +46,13 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitMultiTypeReference(WildcardTypeReference left, CompoundTypeReference right,
+	protected TypeConformanceResult doVisitMultiTypeReference(WildcardTypeReference left, CompoundTypeReference right,
 			TypeConformanceComputationArgument.Internal<WildcardTypeReference> param) {
 		return doVisitTypeReference(left, right, param);
 	}
 
 	@Override
-	public TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference leftWildcard, WildcardTypeReference rightWildcard, TypeConformanceComputationArgument.Internal<WildcardTypeReference> param) {
+	protected TypeConformanceResult doVisitWildcardTypeReference(WildcardTypeReference leftWildcard, WildcardTypeReference rightWildcard, TypeConformanceComputationArgument.Internal<WildcardTypeReference> param) {
 		if (param.asTypeArgument) {
 			LightweightTypeReference leftLowerBound = leftWildcard.getLowerBound();
 			if (leftLowerBound != null) {

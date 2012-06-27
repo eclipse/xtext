@@ -23,12 +23,12 @@ public class AnyTypeConformanceStrategy extends TypeConformanceStrategy<AnyTypeR
 	}
 
 	@Override
-	public TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
+	protected TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
 		return TypeConformanceResult.SUCCESS;
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(AnyTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(AnyTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
 		return TypeConformanceResult.FAILED;
 	}
 }

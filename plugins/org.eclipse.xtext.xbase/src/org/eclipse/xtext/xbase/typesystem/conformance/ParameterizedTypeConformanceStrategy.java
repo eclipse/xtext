@@ -15,8 +15,10 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -33,7 +35,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 
 	@Override
-	public TypeConformanceResult doVisitArrayTypeReference(TypeReference left, ArrayTypeReference right,
+	protected TypeConformanceResult doVisitArrayTypeReference(TypeReference left, ArrayTypeReference right,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (left.isType(Object.class))
 			return TypeConformanceResult.SUBTYPE;
@@ -45,7 +47,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 
 	@Override
-	public TypeConformanceResult doVisitParameterizedTypeReference(TypeReference leftReference,
+	protected TypeConformanceResult doVisitParameterizedTypeReference(TypeReference leftReference,
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (leftReference.getType() == rightReference.getType()) {
@@ -85,9 +87,9 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			// early exit - remaining cases are all compatible to java.lang.Object
 			if (leftReference.isType(Object.class))
 				return TypeConformanceResult.SUCCESS;
-			// TODO avoid infinite recursion - fetch all superTypes at once
-			for(LightweightTypeReference rightSuperTypes: rightReference.getSuperTypes()) {
-				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperTypes, param);
+			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion);
+			for(LightweightTypeReference rightSuperTypes: rightReference.getAllSuperTypes()) {
+				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperTypes, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
 					return TypeConformanceResult.merge(result, new TypeConformanceResult(TypeConformanceResult.Kind.SUBTYPE));
 				}
@@ -97,7 +99,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 	
 	@Override
-	public TypeConformanceResult doVisitWildcardTypeReference(TypeReference left,
+	protected TypeConformanceResult doVisitFunctionTypeReference(TypeReference left, FunctionTypeReference right,
+			Internal<TypeReference> param) {
+		throw new UnsupportedOperationException("Implement me");
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitWildcardTypeReference(TypeReference left,
 			WildcardTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (!param.isAsTypeArgument()) {
 			for(LightweightTypeReference upperBound: right.getUpperBounds()) {
@@ -275,14 +283,14 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 
 	@Override
-	public TypeConformanceResult doVisitAnyTypeReference(TypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
+	protected TypeConformanceResult doVisitAnyTypeReference(TypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (left.isPrimitive() || left.isPrimitiveVoid())
 			return TypeConformanceResult.FAILED;
 		return TypeConformanceResult.SUCCESS;
 	}
 
 	@Override
-	public TypeConformanceResult doVisitTypeReference(TypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
+	protected TypeConformanceResult doVisitTypeReference(TypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		return TypeConformanceResult.FAILED;
 	}
 }
