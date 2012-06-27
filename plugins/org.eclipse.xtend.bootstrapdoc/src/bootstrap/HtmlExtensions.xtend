@@ -26,7 +26,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
-import com.google.inject.Singleton
+
 import static bootstrap.ParagraphState.*
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
@@ -37,13 +37,17 @@ class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
 }
 
-@Singleton
 class HtmlExtensions {
 	
 	@Inject extension CodeRefs
 	@Inject extension ImageExtensions
+	@Inject extension TargetPaths
 
-	def href(Identifiable id) {
+	def href(Identifiable it) {
+		targetPath + "#" + hrefId
+	}
+
+	def hrefId(Identifiable id) {
 		val it = switch id {
 			ChapterRef : id.chapter
 			SectionRef : id.section
@@ -52,16 +56,16 @@ class HtmlExtensions {
 		}
 		if(name != null) { 
 			name 
-		} else if(artificialHrefs.containsKey(it)) {
-			artificialHrefs.get(it)
+		} else if(artificialHrefIds.containsKey(it)) {
+			artificialHrefIds.get(it)
 		} else {
-			val newHref = '_'+artificialHrefs.size()
-			artificialHrefs.put(it, newHref)
+			val newHref = '_'+artificialHrefIds.size()
+			artificialHrefIds.put(it, newHref)
 			newHref
 		}  
 	}
 	
-	def protected artificialHrefs(Identifiable id) {
+	def protected artificialHrefIds(Identifiable id) {
 		val adapters = id.eResource.resourceSet.eAdapters
 		val adapter = adapters.filter(typeof(ArtificialIds)).head 
 						?: (new ArtificialIds => [
@@ -111,7 +115,7 @@ class HtmlExtensions {
 		<a name="«name.quote»"></a>
 	'''
 	
-	def protected dispatch CharSequence toHtml(Ref it, ParagraphState state) '''<a href="#«ref.href»">«contents.toHtml(state)»</a>'''
+	def protected dispatch CharSequence toHtml(Ref it, ParagraphState state) '''<a href="«ref.href»">«contents.toHtml(state)»</a>'''
 	
 	def protected dispatch CharSequence toHtml(OrderedList it, ParagraphState state) { '''
 			<ol>

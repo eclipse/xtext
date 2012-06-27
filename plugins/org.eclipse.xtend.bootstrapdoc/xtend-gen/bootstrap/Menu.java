@@ -57,7 +57,7 @@ public class Menu {
           boolean _lessEqualsThan = (_size <= 1);
           if (_lessEqualsThan) {
             _builder.append("\t\t\t\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href = this._htmlExtensions.href(s);
             _builder.append(_href, "				");
             _builder.append("\">");
@@ -87,7 +87,7 @@ public class Menu {
               for(final AbstractSection subSection : _sections_2) {
                 _builder.append("\t\t\t\t");
                 _builder.append("\t\t");
-                _builder.append("<li><a href=\"#");
+                _builder.append("<li><a href=\"");
                 String _href_1 = this._htmlExtensions.href(subSection);
                 _builder.append(_href_1, "						");
                 _builder.append("\">");

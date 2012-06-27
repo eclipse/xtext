@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
-import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 
 @SuppressWarnings("all")
@@ -18,13 +17,13 @@ public class DocumentationBody extends Body {
   @Inject
   private HtmlExtensions _htmlExtensions;
   
-  public CharSequence h1(final Chapter chapter) {
+  public CharSequence h1(final AbstractSection chapter) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- chapter -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(chapter);
-    _builder.append(_href, "");
+    String _hrefId = this._htmlExtensions.hrefId(chapter);
+    _builder.append(_hrefId, "");
     _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -81,8 +80,8 @@ public class DocumentationBody extends Body {
     _builder.append("<!--  section -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(section);
-    _builder.append(_href, "");
+    String _hrefId = this._htmlExtensions.hrefId(section);
+    _builder.append(_hrefId, "");
     _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("<h2 style=\"padding-top: 15px;\">");

@@ -5,10 +5,10 @@ import bootstrap.CodeRefs;
 import bootstrap.ImageDimension;
 import bootstrap.ImageExtensions;
 import bootstrap.ParagraphState;
+import bootstrap.TargetPaths;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +55,6 @@ import org.eclipse.xtext.xdoc.xdoc.Todo;
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
 import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 
-@Singleton
 @SuppressWarnings("all")
 public class HtmlExtensions {
   @Inject
@@ -64,7 +63,18 @@ public class HtmlExtensions {
   @Inject
   private ImageExtensions _imageExtensions;
   
-  public String href(final Identifiable id) {
+  @Inject
+  private TargetPaths _targetPaths;
+  
+  public String href(final Identifiable it) {
+    String _targetPath = this._targetPaths.getTargetPath(it);
+    String _plus = (_targetPath + "#");
+    String _hrefId = this.hrefId(it);
+    String _plus_1 = (_plus + _hrefId);
+    return _plus_1;
+  }
+  
+  public String hrefId(final Identifiable id) {
     String _xblockexpression = null;
     {
       Identifiable _switchResult = null;
@@ -105,20 +115,20 @@ public class HtmlExtensions {
         _xifexpression = _name_1;
       } else {
         String _xifexpression_1 = null;
-        Map<Identifiable,String> _artificialHrefs = this.artificialHrefs(it);
-        boolean _containsKey = _artificialHrefs.containsKey(it);
+        Map<Identifiable,String> _artificialHrefIds = this.artificialHrefIds(it);
+        boolean _containsKey = _artificialHrefIds.containsKey(it);
         if (_containsKey) {
-          Map<Identifiable,String> _artificialHrefs_1 = this.artificialHrefs(it);
-          String _get = _artificialHrefs_1.get(it);
+          Map<Identifiable,String> _artificialHrefIds_1 = this.artificialHrefIds(it);
+          String _get = _artificialHrefIds_1.get(it);
           _xifexpression_1 = _get;
         } else {
           String _xblockexpression_1 = null;
           {
-            Map<Identifiable,String> _artificialHrefs_2 = this.artificialHrefs(it);
-            int _size = _artificialHrefs_2.size();
+            Map<Identifiable,String> _artificialHrefIds_2 = this.artificialHrefIds(it);
+            int _size = _artificialHrefIds_2.size();
             final String newHref = ("_" + Integer.valueOf(_size));
-            Map<Identifiable,String> _artificialHrefs_3 = this.artificialHrefs(it);
-            _artificialHrefs_3.put(it, newHref);
+            Map<Identifiable,String> _artificialHrefIds_3 = this.artificialHrefIds(it);
+            _artificialHrefIds_3.put(it, newHref);
             _xblockexpression_1 = (newHref);
           }
           _xifexpression_1 = _xblockexpression_1;
@@ -130,7 +140,7 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected Map<Identifiable,String> artificialHrefs(final Identifiable id) {
+  protected Map<Identifiable,String> artificialHrefIds(final Identifiable id) {
     Resource _eResource = id.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final EList<Adapter> adapters = _resourceSet.eAdapters();
@@ -248,7 +258,7 @@ public class HtmlExtensions {
   
   protected CharSequence _toHtml(final Ref it, final ParagraphState state) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<a href=\"#");
+    _builder.append("<a href=\"");
     Identifiable _ref = it.getRef();
     String _href = this.href(_ref);
     _builder.append(_href, "");

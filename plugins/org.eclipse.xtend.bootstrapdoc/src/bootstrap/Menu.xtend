@@ -22,13 +22,13 @@ class Menu {
 						<ul class="nav">
 							«FOR s : document.sections»
 								«IF s.sections.size <= 1»
-									<li><a href="#«s.href»">«s.title.toHtmlText»</a></li>
+									<li><a href="«s.href»">«s.title.toHtmlText»</a></li>
 								«ELSE»
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle="dropdown">«s.title.toHtmlText» <b class="caret"></b></a>
 										<ul class="dropdown-menu">
 											«FOR subSection : s.sections»
-											<li><a href="#«subSection.href»">«subSection.title.toHtmlText»</a></li>
+											<li><a href="«subSection.href»">«subSection.title.toHtmlText»</a></li>
 											«ENDFOR»
 										</ul>
 									</li>
