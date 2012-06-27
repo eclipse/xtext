@@ -218,7 +218,7 @@
 						<p>
 							Unlike other JVM languages Xtend has <a href="#javaInteroperability">zero interoperability issues</a> with Java:
 							Everything you write interacts with Java exactly as expected. At the same time Xtend is much more concise, 
-							readable and expressive. Xtend's small <a href="#library">library</a> is just a thin layer that provides useful 
+							readable and expressive. Xtend's small library is just a thin layer that provides useful 
 							utilities and extensions on top of the Java Development Kit (JDK).
 						</p>
 						<p>
@@ -273,7 +273,7 @@ public class HelloWorld {
 						</p>
 						<p>
 							The only surprising fact in the generated Java code may be the referenced library class <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/InputOutput.html"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java">(src)</a>. 
-							It is provided by the <a href="#library">runtime library</a> and only one nice utility that is handy when using
+							It is provided by the runtime library and only one nice utility that is handy when using
 							expressions.
 						</p>
 						<p>
@@ -419,7 +419,7 @@ import static extension com.google.common.io.CharStreams.*</pre>
 						</p>
 						<p>
 							<a href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html"><code class="prettyprint lang-xtend">CharStreams.readLines(Reader)</code></a> returns a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html"><code class="prettyprint lang-xtend">List&lt;String&gt;</code></a> on which we call another extension method called <code class="prettyprint lang-xtend">map</code>.
-							That one is defined in the <a href="#library">runtime library</a> (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html">ListExtensions.map(...)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">(src)</a>) and is always imported and
+							That one is defined in the runtime library (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html">ListExtensions.map(...)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">(src)</a>) and is always imported and
 							therefore automatically available on all lists. The <code class="prettyprint lang-xtend">map</code> extension expects a function as a parameter.
 							It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
 						</p>
@@ -1238,7 +1238,7 @@ myObject.save</pre>
 						<section id="libraryExtensions" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Extensions From The Library</h3>
 						<p>
-							The <a href="#library">library</a> puts a lot of very useful extension methods on existing types from the Java
+							The library puts a lot of very useful extension methods on existing types from the Java
 							SDK without any further ado.
 						</p>
 						<p>
@@ -1525,7 +1525,7 @@ something as MyClass
 							There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 							to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 							operators for any type just by implementing the corresponding method signature. As an example, the 
-							<a href="#library">Xtend runtime library</a> contains a class <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions">BigDecimalExtensions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">(src)</a> that defines operators for 
+							runtime library contains a class <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions">BigDecimalExtensions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">(src)</a> that defines operators for 
 							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html">BigDecimals</a> which allows the following code:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">

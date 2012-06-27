@@ -118,7 +118,7 @@ section:operators[Infix Operators and Operator Overloading]
 There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature. As an example, the 
-ref:library[Xtend runtime library] contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
+runtime library contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
 codeRef[java.math.BigDecimal][BigDecimals] which allows the following code:
 code[Xtend][
   val x = 2.71BD

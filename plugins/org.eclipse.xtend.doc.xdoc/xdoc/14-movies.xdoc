@@ -80,7 +80,7 @@ import static extension com.google.common.io.CharStreams.*
 ]
 
 codeRef[com.google.common.io.CharStreams][code[CharStreams.readLines(Reader)]] returns a codeRef[java.util.List][code[List<String>]] on which we call another extension method called code[map].
-That one is defined in the ref:library[runtime library] (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions][ListExtensions.map(...)]) and is always imported and
+That one is defined in the runtime library (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions][ListExtensions.map(...)]) and is always imported and
 therefore automatically available on all lists. The code[map] extension expects a function as a parameter.
 It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
 
