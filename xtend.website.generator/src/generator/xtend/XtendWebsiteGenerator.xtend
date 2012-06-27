@@ -8,6 +8,7 @@ import static extension generator.Generator.*
 class XtendWebsiteGenerator {
 	
 	def static void main(String[] args) {
+		System::setProperty("java.awt.headless", "true")
 		// clean dir
 		val out = new File("website")
 		out.generateFiles(
@@ -17,7 +18,6 @@ class XtendWebsiteGenerator {
 			new Community 
 		)
 		println("Done.")
-		System::exit(0)
 	}
 	
 	def static void generateFiles(File targetDir, Resource ... sites) {

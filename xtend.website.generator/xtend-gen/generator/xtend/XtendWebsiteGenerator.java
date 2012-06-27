@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 @SuppressWarnings("all")
 public class XtendWebsiteGenerator {
   public static void main(final String[] args) {
+    System.setProperty("java.awt.headless", "true");
     File _file = new File("website");
     final File out = _file;
     Index _index = new Index();
@@ -20,7 +21,6 @@ public class XtendWebsiteGenerator {
     Community _community = new Community();
     Generator.generateFiles(out, _index, _download, _documentation, _community);
     InputOutput.<String>println("Done.");
-    System.exit(0);
   }
   
   public static void generateFiles(final File targetDir, final Resource... sites) {
