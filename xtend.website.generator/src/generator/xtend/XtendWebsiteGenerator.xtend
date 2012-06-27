@@ -1,9 +1,9 @@
 package generator.xtend
 
+import generator.Resource
 import java.io.File
 
 import static extension generator.Generator.*
-import generator.Resource
 
 class XtendWebsiteGenerator {
 	
@@ -17,6 +17,7 @@ class XtendWebsiteGenerator {
 			new Community 
 		)
 		println("Done.")
+		System::exit(0)
 	}
 	
 	def static void generateFiles(File targetDir, Resource ... sites) {

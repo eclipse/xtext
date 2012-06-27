@@ -28,6 +28,10 @@ import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 import com.google.inject.Singleton
 import static bootstrap.ParagraphState.*
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
@@ -172,7 +176,11 @@ class HtmlExtensions {
 	
 	def protected dispatch CharSequence toHtml(CodeBlock it, ParagraphState state) {
 		val code = contents.toHtml(state).toString
-		if (code.contains('\n') && !code.contains('\r')) {
+		if (code.contains('\n') || eContainer?.eContainingFeature == XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS && switch eContainer {
+			TextOrMarkup: 
+				(eContainer as TextOrMarkup).contents.size == 1
+			default: false
+		}) {
 			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
 			«code.trimCode»«markCodeEnd»</pre>'''.insert(state)
 		} else {

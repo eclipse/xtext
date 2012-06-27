@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -52,6 +53,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import org.eclipse.xtext.xdoc.xdoc.TextPart;
 import org.eclipse.xtext.xdoc.xdoc.Todo;
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 
 @Singleton
 @SuppressWarnings("all")
@@ -420,16 +422,40 @@ public class HtmlExtensions {
       CharSequence _html = this.toHtml(_contents, state);
       final String code = _html.toString();
       CharSequence _xifexpression = null;
-      boolean _and = false;
+      boolean _or = false;
       boolean _contains = code.contains("\n");
-      if (!_contains) {
-        _and = false;
+      if (_contains) {
+        _or = true;
       } else {
-        boolean _contains_1 = code.contains("\r");
-        boolean _not = (!_contains_1);
-        _and = (_contains && _not);
+        boolean _and = false;
+        EObject _eContainer = it.eContainer();
+        EStructuralFeature _eContainingFeature = _eContainer==null?(EStructuralFeature)null:_eContainer.eContainingFeature();
+        boolean _equals = Objects.equal(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _switchResult = false;
+          EObject _eContainer_1 = it.eContainer();
+          final EObject eContainer = _eContainer_1;
+          boolean _matched = false;
+          if (!_matched) {
+            if (eContainer instanceof TextOrMarkup) {
+              final TextOrMarkup _textOrMarkup = (TextOrMarkup)eContainer;
+              _matched=true;
+              EList<EObject> _contents_1 = ((TextOrMarkup) _textOrMarkup).getContents();
+              int _size = _contents_1.size();
+              boolean _equals_1 = (_size == 1);
+              _switchResult = _equals_1;
+            }
+          }
+          if (!_matched) {
+            _switchResult = false;
+          }
+          _and = (_equals && _switchResult);
+        }
+        _or = (_contains || _and);
       }
-      if (_and) {
+      if (_or) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<pre class=\"prettyprint lang-");
         LangDef _language = it.getLanguage();

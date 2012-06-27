@@ -20,6 +20,7 @@ public class XtendWebsiteGenerator {
     Community _community = new Community();
     Generator.generateFiles(out, _index, _download, _documentation, _community);
     InputOutput.<String>println("Done.");
+    System.exit(0);
   }
   
   public static void generateFiles(final File targetDir, final Resource... sites) {
