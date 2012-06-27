@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -58,7 +59,7 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getSuperTypes() {
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		return Collections.emptyList();
 	}
 	

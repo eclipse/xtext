@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -72,8 +73,13 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getSuperTypes() {
-		return expose(getUpperBounds());
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
+		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(nonNullUpperBounds.size());
+		for(LightweightTypeReference upperBound: nonNullUpperBounds) {
+			result.add(substitutor.substitute(upperBound));
+		}
+		return result;
 	}
 	
 	@Override

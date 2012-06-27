@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -54,8 +55,8 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getSuperTypes() {
-		List<LightweightTypeReference> componentSuperTypes = component.getSuperTypes();
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
+		List<LightweightTypeReference> componentSuperTypes = component.getSuperTypes(substitutor);
 		if (!componentSuperTypes.isEmpty()) {
 			List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(componentSuperTypes.size());
 			for(LightweightTypeReference componentSuperType: componentSuperTypes) {
