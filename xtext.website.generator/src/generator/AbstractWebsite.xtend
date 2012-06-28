@@ -148,11 +148,6 @@ abstract class AbstractWebsite implements Resource {
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a class="brand" href="index.html"></a>
-		
-		      <div class="btn-group pull-right">
-		        <g:plusone href="«plusoneURL»"></g:plusone>
-		      </div>
-		
 					<div class="nav-collapse collapse" style="height: 0px;">
 						<ul class="nav">
 							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
@@ -161,9 +156,11 @@ abstract class AbstractWebsite implements Resource {
 							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
 							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 						</ul>
-		
 					</div>
 					<!--/.nav-collapse -->
+			        <div class="btn-group pull-right">
+			          <g:plusone href="«plusoneURL»"></g:plusone>
+			        </div>
 		
 				</div>
 			</div>
@@ -273,6 +270,9 @@ abstract class AbstractWebsite implements Resource {
 		<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 		<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
 		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+		<!--[if lt IE 9]>
+		<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
+		<![endif]-->
 	'''
 
 	def headline(String title) '''

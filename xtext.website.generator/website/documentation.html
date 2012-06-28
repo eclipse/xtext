@@ -36,6 +36,9 @@
 	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
 	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<!--[if lt IE 9]>
+	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
+	<![endif]-->
 	<script src="js/twitter.js" type="text/javascript"></script>
 	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
@@ -105,11 +108,6 @@
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="brand" href="index.html"></a>
-	
-	      <div class="btn-group pull-right">
-	        <g:plusone href="http://www.xtext.org"></g:plusone>
-	      </div>
-	
 				<div class="nav-collapse collapse" style="height: 0px;">
 					<ul class="nav">
 						<li ><a href="download.html">Download</a></li>
@@ -117,9 +115,11 @@
 						<li ><a href="community.html">Community</a></li>
 						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
-	
 				</div>
 				<!--/.nav-collapse -->
+		        <div class="btn-group pull-right">
+		          <g:plusone href="http://www.xtext.org"></g:plusone>
+		        </div>
 	
 			</div>
 		</div>
@@ -1194,7 +1194,7 @@ class DomainmodelGenerator implements IGenerator {
 						</p>
 						<p>
 							This tutorial is about testing the parser and the linker for the <strong>Domainmodel</strong>. It leverages Xtend to
-							write the testcase.
+							write the test case.
 						</p>
 						<p>
 							</p>
@@ -1799,7 +1799,7 @@ Operation : {
 						</p>
 						<p>
 							In the new workbench, create a Java project (<strong>File -&gt; New -&gt; Project...  -&gt; Java Project</strong>.
-							Xbase relies on a small runtime library on the classpath. To add this, right-click on the project and
+							Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
 							go to <strong>Java Build Path -&gt; Libraries -&gt; Add Library</strong> and choose <strong>Xtend Library</strong>. The create a new file 
 							with the file extension you chose in the beginning (<strong>*.dmodel</strong>) in the source folder of the Java project.
 							This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
@@ -2011,7 +2011,7 @@ end</pre>
 							<p>
 						</p>
 						<p>
-							What we have are a bunch of declared events, commands, and states. Some events are addiitonally marked
+							What we have are a bunch of declared events, commands, and states. Some events are additionally marked
 							as being reset events. Within states there are references to declared actions. Actions should be executed 
 							when entering the state. Furthermore, there are transitions consisting of a reference to an event and a 
 							state.
@@ -2084,10 +2084,10 @@ grammar org.xtext.example.SecretCompartments
 							<p>
 						</p>
 						<p>
-							The first line declares the name of the language. Xtext leverages Java's classpath mechanism. This means that the name 
+							The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name 
 							can be any valid Java qualifier. The file name needs to correspond to the language name and have the file 
 							extension <code class="prettyprint lang-xtend">.xtext</code>. This means that the name has to be <strong>SecretCompartments.xtext</strong> and must be placed 
-							in a package <strong>org.xtext.example</strong> on your project's classpath. In other words, your <code class="prettyprint lang-xtend">.xtext</code> file
+							in a package <strong>org.xtext.example</strong> on your project's class path. In other words, your <code class="prettyprint lang-xtend">.xtext</code> file
 							has to reside in a Java source folder to be valid.
 						</p>
 						<p>
@@ -2153,7 +2153,7 @@ generate secrets 'http://www.eclipse.org/secretcompartment'</pre>
 						<h5>Using Namespace URIs to Import Existing EPackages</h5>
 						<p>
 							You can use namespace URI in order to import existing <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a>. This is generally 
-							preferrable. The package will be read from the Xtext index and therefore your grammar is independent
+							preferable. The package will be read from the Xtext index and therefore your grammar is independent
 							from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
 							in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
 							Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
@@ -2212,7 +2212,7 @@ language = {
 							<p>
 						</p>
 						<p>
-							You can use either platform URIs or classpath URIs to list the required ecore files (see below for details
+							You can use either platform URIs or class path URIs to list the required ecore files (see below for details
 							on both URI schemes).
 						</p>
 						<p>
@@ -2311,12 +2311,12 @@ fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 						</section>
 						<!-- subsection -->
 						<section id="_26" style="padding-top: 68px; margin-top: -68px;">
-						<h5>Using Classpath URIs to Import Existing EPackages - Deprecated</h5>
+						<h5>Using Class Path URIs to Import Existing EPackages - Deprecated</h5>
 						<p>
-							We usually like to leverage Java's classpath mechanism, because is is well understood and can be configured easily
+							We usually like to leverage Java's class path mechanism, because is is well understood and can be configured easily
 							with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing
 							<strong>*.ecore</strong> file which is contained in a jar, you can make use of the 
-							classpath URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
+							<strong>'classpath:'</strong> URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
 							which is shipped as part of Xtext.
 						</p>
 						<p>
@@ -2640,7 +2640,7 @@ terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');</pre>
 						<section id="terminal_fragment" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Terminal Fragments</h4>
 						<p>
-							Since terminal rules are used in an unscoped context, it's not easily possible to reuse parts of their
+							Since terminal rules are used in a stateless context, it's not easily possible to reuse parts of their
 							definition. Fragments solve this problem. They allow the same EBNF elements as terminal rules do but
 							may not be consumed by the lexer. Instead, they have to be used by other terminal rules. This allows
 							to extract repeating parts of a definition:
@@ -2772,10 +2772,10 @@ name=ID</pre>
 						<section id="cross_reference" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Cross-References</h5>
 						<p>
-							A unique feature of Xtext is the ability to declare crosslinks in the grammar. In traditional compiler 
-							construction the crosslinks are not established during parsing but in a later linking phase. This is the 
-							same in Xtext, but we allow to specify crosslink information in the grammar. This information is used by the linker.
-							The syntax for crosslinks is:
+							A unique feature of Xtext is the ability to declare cross-links in the grammar. In traditional compiler 
+							construction the cross-links are not established during parsing but in a later linking phase. This is the 
+							same in Xtext, but we allow to specify cross-link information in the grammar. This information is used by the linker.
+							The syntax for cross-links is:
 						</p>
 						<p>
 							</p>
@@ -2816,7 +2816,7 @@ Event returns MyEvent : ....;</pre>
 						<p>
 							Looking at the syntax definition for cross-references, there is an optional part starting with a vertical 
 							bar (pipe) followed by <strong>CrossReferenceableTerminal</strong>. This is the part describing the concrete text, from 
-							which the crosslink later should be established. If the terminal is omitted, it is expected to be the rule
+							which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule
 							with the name <strong>ID</strong> - if one can be found. The terminal is mandatory for languages that do not define a rule with the name <strong>ID</strong>.
 						</p>
 						<p>
@@ -3520,7 +3520,7 @@ enum MyGeneratedEnum:
 							by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 						</p>
 						<p>
-							To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language.
+							To reuse an existing grammar, make sure the grammar file is on the class path of the inheriting language.
 							If it is in a different plug-in, make sure to add a plug-in dependency in the <code class="prettyprint lang-xtend">MANIFEST.MF</code>.
 						</p>
 						<p>
@@ -4231,9 +4231,9 @@ public static void main(String[] args) {
 						<h2 style="padding-top: 15px;">Logging</h2>
 						<p>
 							Xtext uses Apache's log4j for logging. It is configured using files named <strong>log4j.properties</strong>, which are looked up 
-							in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
+							in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
 							you have to do is putting such a <strong>log4j.properties</strong> in place and make sure that it is not overridden by other 
-							<strong>log4j.properties</strong> in previous classpath entries.
+							<strong>log4j.properties</strong> in previous class path entries.
 						</p>
 						<p>
 							In OSGi you provide configuration by creating a fragment for <strong>org.apache.log4j</strong>. In this case you need to make 
@@ -4275,15 +4275,15 @@ public static void main(String[] args) {
 						</section>
 						<!-- subsection -->
 						<section id="linking_validation" style="padding-top: 68px; margin-top: -68px;">
-						<h4>Linker: Crosslink Validation</h4>
+						<h4>Linker: Cross-link Validation</h4>
 						<p>
-							Any broken crosslinks can be checked generically. As crosslink resolution is done lazily 
+							Any broken cross-links can be checked generically. As cross-link resolution is done lazily 
 							(see <a href="#linking">linking</a>), any broken links are resolved lazily as well. If you want to validate whether 
 							all links are valid, you will have to navigate through the model so that all installed EMF proxies 
 							get resolved. This is done automatically in the editor.
 						</p>
 						<p>
-							Similar to syntax errors, any unresolvable crosslinks will be reported and can be obtained through:
+							Similar to syntax errors, any unresolvable cross-links will be reported and can be obtained through:
 						</p>
 						<p>
 							</p>
@@ -4600,14 +4600,14 @@ public class MyLanguageValidatorTest extends AbstractXtextTests {
 						<p>
 							</p>
 							<ol>
-								<li>declaration of a crosslink in the grammar (at least in the Ecore model)</li>
+								<li>declaration of a cross-link in the grammar (at least in the Ecore model)</li>
 								<li>specification of linking semantics (usually provided via the <a href="#scoping">scoping API</a>)</li>
 							</ol>
 							<p>
 						</p>
 						<!-- subsection -->
 						<section id="_51" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Declaration of Crosslinks</h3>
+						<h3>Declaration of Cross-links</h3>
 						<p>
 							In the grammar a cross-reference is specified using square brackets.
 						</p>
@@ -4667,7 +4667,7 @@ ref Entity01</pre>
 							In the case of lazy linking the stored <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html"><abbr title="org.eclipse.emf.common.util.URI">URI</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">(src)</a> comprises of the context 
 							information given at parse time, which is the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> containing the cross-reference, 
 							the actual <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html"><abbr title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">(src)</a>, the index (in case it's a multi-valued cross-reference) 
-							and the string which represented the crosslink in the concrete syntax. The latter usually corresponds to 
+							and the string which represented the cross-link in the concrete syntax. The latter usually corresponds to 
 							the name of the referenced <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a>. In EMF a <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html"><abbr title="org.eclipse.emf.common.util.URI">URI</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">(src)</a>
 							consists of information about the resource the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> is contained in as well as a so 
 							called fragment part, which is used to find the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> within that resource. When an  
@@ -4897,7 +4897,7 @@ private IResourceServiceProvider.Registry rspr =
 						<h4>Global Scopes Based On Explicit Imports (ImportURI Mechanism)</h4>
 						<p>
 							A simple and straight forward solution is to have explicit references to other resources in your 
-							file by explicitly listing pathes or <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html">URIs</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">(src)</a> to all referenced resources 
+							file by explicitly listing paths or <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html">URIs</a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">(src)</a> to all referenced resources 
 							in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy 
 							implementation of an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IGlobalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">(src)</a> which is based on a naming convention 
 							and makes this semantics very easy to use. Talking of the introductory example and given you would want to add 
@@ -4945,11 +4945,11 @@ Import :
 						</section>
 						<!-- subsection -->
 						<section id="index_based" style="padding-top: 68px; margin-top: -68px;">
-						<h4>Global Scopes Based On External Configuration (e.g. Classpath-Based)</h4>
+						<h4>Global Scopes Based On External Configuration (e.g. Class Path Based)</h4>
 						<p>
 							Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 							external configuration in order to define what is visible from outside a resource. Java for instances 
-							uses the notion of the classpath to define containers (jars and class folders) which contain any 
+							uses the notion of the class path to define containers (jars and class folders) which contain any 
 							referenceable elements. In the case of Java also the order of such entries is important.
 						</p>
 						<p>
@@ -4958,8 +4958,8 @@ Import :
 							the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IGlobalScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">(src)</a> interface.
 						</p>
 						<p>
-							By default Xtext leverages the classpath mechanism since it is well designed and already understood 
-							by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
+							By default Xtext leverages the class path mechanism since it is well designed and already understood 
+							by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
 							even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 							and independent from the JDT.
 						</p>
@@ -4988,9 +4988,9 @@ Import :
 						</p>
 						<p>
 							The index is basically a flat list of instances of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.html"><abbr title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">(src)</a>. 
-							The index itself doesn't know about visibility constraints due to classpath restriction. Rather than that, 
+							The index itself doesn't know about visibility constraints due to class path restriction. Rather than that, 
 							they are defined by the referencing language by means of so called <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IContainer.html">IContainers</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">(src)</a>: 
-							While Java might load a resource via <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/ClassLoader.html">ClassLoader.loadResource()</a> (i.e. using the classpath mechanism), another 
+							While Java might load a resource via <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/ClassLoader.html">ClassLoader.loadResource()</a> (i.e. using the class path mechanism), another 
 							language could load the same resource using the file system paths.
 						</p>
 						<p>
@@ -5037,7 +5037,7 @@ public void listVisibleResources(
 						</p>
 						<p>
 							Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, 
-							you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
+							you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
 							Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
 							differ in the bound instance of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/containers/IAllContainersState.html"><abbr title="org.eclipse.xtext.resource.containers.IAllContainersState">IAllContainersState</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java">(src)</a> 
 							of the referring language. These will be described in detail in the following sections.
@@ -5062,13 +5062,13 @@ public void listVisibleResources(
 							<ul>
 								<li>a source folder of a Java project,</li>
 								<li>a referenced jar,</li>
-								<li>a classpath entry of a referenced Java project, or</li>
+								<li>a class path entry of a referenced Java project, or</li>
 								<li>the exported packages of a required PDE plug-in.</li>
 							</ul>
 							<p>
 						</p>
 						<p>
-							So for an element to be referable, its resource must be on the classpath of the caller's Java project 
+							So for an element to be referable, its resource must be on the class path of the caller's Java project 
 							and it must be exported (as described above).
 						</p>
 						<p>
@@ -5099,7 +5099,7 @@ public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
 							in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 							binding, as we have to bind a global singleton to a Guice provider. A 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.html"><abbr title="org.eclipse.xtext.ui.containers.StrictJavaProjectsState">StrictJavaProjectsState</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.java">(src)</a> requires all elements to be on the 
-							classpath, while the default <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/containers/JavaProjectsState.html"><abbr title="org.eclipse.xtext.ui.containers.JavaProjectsState">JavaProjectsState</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/JavaProjectsState.java">(src)</a> also allows 
+							class path, while the default <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/containers/JavaProjectsState.html"><abbr title="org.eclipse.xtext.ui.containers.JavaProjectsState">JavaProjectsState</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/JavaProjectsState.java">(src)</a> also allows 
 							models in non-source folders.
 						</p>
 						</section>
@@ -5107,7 +5107,7 @@ public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
 						<section id="project_based_containers" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Eclipse Project-Based Containers</h5>
 						<p>
-							If the classpath-based mechanism doesn't work for your case, Xtext offers an alternative container 
+							If the class path based mechanism doesn't work for your case, Xtext offers an alternative container 
 							manager based on plain Eclipse projects: Each project acts as a container and the project references 
 							<strong>Properties-&gt;Project References</strong> are the visible containers.
 						</p>
@@ -5145,7 +5145,7 @@ public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
 							It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end 
 							of the MWE2 workflow component <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mwe/Reader.html"><abbr title="org.eclipse.xtext.mwe.Reader">Reader</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java">(src)</a>. This is responsible 
 							for reading in models in a workflow, e.g. for later code generation. The 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mwe/Reader.html"><abbr title="org.eclipse.xtext.mwe.Reader">Reader</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java">(src)</a> allows to either scan the whole classpath or a set of paths 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mwe/Reader.html"><abbr title="org.eclipse.xtext.mwe.Reader">Reader</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java">(src)</a> allows to either scan the whole class path or a set of paths 
 							for all models therein. When paths are given, each path entry becomes an 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IContainer.html"><abbr title="org.eclipse.xtext.resource.IContainer">IContainer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">(src)</a> of its own. In the following snippet,
 						</p>
@@ -5153,7 +5153,7 @@ public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
 							</p>
 							<pre class="prettyprint lang-java linenums">
 component = org.eclipse.xtext.mwe.Reader {
-  // lookup all resources on the classpath
+  // lookup all resources on the class path
   // useJavaClassPath = true
   
   // or define search scope explicitly
@@ -5212,7 +5212,7 @@ public class ScopeExample { // class body scope
 							<p>
 						</p>
 						<p>
-							In fact the classpath scope should also reflect the order of classpath entries.
+							In fact the class path scope should also reflect the order of class path entries.
 							For instance:
 						</p>
 						<p>
@@ -5506,7 +5506,7 @@ public IValueConverter&lt;MyDataType&gt; getMyRuleNameConverter() {
 							Serialization is invoked when calling 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/XtextResource.html">XtextResource.save(..)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a>. Furthermore, the
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parsetree/reconstr/Serializer.html"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer">Serializer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java">(src)</a> provides resource-independent 
-							support for serialization. Another situation that triggers serialization is applying <a href="#quickfixes">Quick Fixes</a> 
+							support for serialization. Another situation that triggers serialization is applying <a href="#quickfixes">quick fixes</a> 
 							with semantic modifications. Serialization is <strong>not</strong> called when a textual editors contents is saved to disk.
 						</p>
 						<!-- subsection -->
@@ -5600,7 +5600,7 @@ MyRule:
 								    element must be identical to the return type of the grammar rule or the action's type. 
 								    Subtypes are not allowed.</li>
 								<li><a href="#valueconverter">Value conversion</a> fails. The value converter can indicate that a value 
-								    is not serializeable by throwing a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/conversion/ValueConverterException.html"><abbr title="org.eclipse.xtext.conversion.ValueConverterException">ValueConverterException</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java">(src)</a>.</li>
+								    is not serializable by throwing a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/conversion/ValueConverterException.html"><abbr title="org.eclipse.xtext.conversion.ValueConverterException">ValueConverterException</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java">(src)</a>.</li>
 								<li>An enum literal is not allowed at this position. This can happen if the referenced enum 
 								    rule only lists a subset of the literals of the actual enumeration.</li>
 							</ul>
@@ -6545,7 +6545,7 @@ public void fixFeatureName(final Issue issue,
 						</p>
 						<!-- subsection -->
 						<section id="_65" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Quickfixes for Linking Errors and Syntax Errors</h3>
+						<h3>Quick Fixes for Linking Errors and Syntax Errors</h3>
 						<p>
 							You can even define quick fixes for linking errors. The issue codes are assigned by the 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.html"><abbr title="org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider">ILinkingDiagnosticMessageProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java">(src)</a>. Have a look at the domain model 
@@ -7225,13 +7225,13 @@ public class HighlightingConfiguration
 						<section id="#refactoring" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Rename Refactoring</h2>
 						<p>
-							Xtext provides rename refactoring of the elements in your langauge. That includes
+							Xtext provides rename refactoring of the elements in your language. That includes
 						</p>
 						<p>
 							</p>
 							<ul>
 								<li>a command, handlers and keybindings on both declarations and references,</li>
-								<li>inplace linked editing for the new name,</li>
+								<li>in-place linked editing for the new name,</li>
 								<li>validation and preview,</li>
 								<li>renaming of declaration and all references even across language boundaries.</li>
 							</ul>
@@ -7630,7 +7630,7 @@ entity Person {
 							inherit from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html"><abbr title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">(src)</a>. But this would result in a lot of 
 							accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how
 							to derive a JVM model from your model. This <strong>inferred JVM model</strong> is the representation of your concepts
-							in the typesystem of Xbase.
+							in the type system of Xbase.
 						</p>
 						<p>
 							The main component for the inferred JVM model is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a>.
@@ -7648,7 +7648,7 @@ entity Person {
 						</p>
 						<p>
 							The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you
-							make sure all types exist and are referrable when you create their members in the second phase. 
+							make sure all types exist and are referable when you create their members in the second phase. 
 							Use <code class="prettyprint lang-xtend">acceptor.accept(JvmDeclaredType)</code> for the first phase and provide the initialization
 							code for the second phase. You have to pass a <a href="#Xbase_Expressions_Lambda">lambda expression</a> to the method
 							<code class="prettyprint lang-xtend">initializeLater()</code> on the return type of the <code class="prettyprint lang-xtend">acceptor.accept()</code> method.
@@ -7711,7 +7711,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 						<p>
 							Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
 							but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details
-							on this expression langugae, please consult the <a href="#xbaseLanguageRef_Introduction">reference documentation</a> and the 
+							on this expression language, please consult the <a href="#xbaseLanguageRef_Introduction">reference documentation</a> and the 
 							Xbase tutorial <strong>(File &gt; New &gt; Example &gt; Xtext Examples &gt; Xbase Tutorial)</strong>.
 						</p>
 						<p>
@@ -7738,7 +7738,7 @@ import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase</pre>
 							additional concept <strong>Operation</strong>.: An <strong>Operation</strong>'s 
 							parameters are <strong>FullJvmFormalParameters</strong>. The production rule for <strong>FullJvmFormalParameters</strong> expects
 							both the name and the type here. That is reasonable since the type of parameters should not be inferred. 
-							The opertion's return type is a <strong>JvmTypeReference</strong> and its <strong>body</strong> is
+							The operation's return type is a <strong>JvmTypeReference</strong> and its <strong>body</strong> is
 							an <strong>XBlockExpression</strong>. The final parser rule reads as:
 						</p>
 						<p>
@@ -7756,7 +7756,7 @@ Operation:
 						</p>
 						<p>
 							To integrate <strong>Operations</strong> in our models, we have to call this rule. We copy the previous <strong>Feature</strong>
-							to a new rule <strong>Property</strong> and let <strong>Feature</strong> become the supertype of <strong>Property</strong> and <strong>Operation</strong>:
+							to a new rule <strong>Property</strong> and let <strong>Feature</strong> become the super type of <strong>Property</strong> and <strong>Operation</strong>:
 						</p>
 						<p>
 							</p>
@@ -8141,7 +8141,7 @@ terminal ID:
 							conforms to each <strong>T2,..,Tn</strong>. The linear type inheritance sequence of <strong>T1</strong> is computed by ordering all types which are part if the type hierarchy of <strong>T1</strong>
 							by their specificity. A type <strong>T1</strong> is considered more specific than <strong>T2</strong> if <strong>T1</strong> is a subtype of <strong>T2</strong>. Any types with equal specificity will be sorted by
 							the maximal distance to the originating subtype. <strong>CharSequence</strong> has distance 2 to <strong>StringBuilder</strong> because
-							the supertype <strong>AbstractStringBuilder</strong> implements the interface, too. Even if <strong>StringBuilder</strong> implements
+							the super type <strong>AbstractStringBuilder</strong> implements the interface, too. Even if <strong>StringBuilder</strong> implements
 							<strong>CharSequence</strong> directly, the interface gets distance 2 in the ordering because it is not the most general class
 							in the type hierarchy that implements the interface. If the distances for two classes are the same in
 							the hierarchy, their qualified name is used as the compare-key to ensure deterministic results.
@@ -8178,7 +8178,7 @@ terminal ID:
 							See <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5">§ 3.10.5 String Literals</a>
 						</p>
 						<p>
-							In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+							In contrast to Java, equal string literals within the same class do not necessarily refer to the same
 							instance at runtime.
 						</p>
 						</section>
@@ -8553,7 +8553,7 @@ myObj.myProperty</pre>
 						<p>
 							the compiler first looks for an accessible field <code class="prettyprint lang-xbase">myProperty</code> in the type of <code class="prettyprint lang-xbase">myObj</code>. If no such field exists it 
 							tries to find a method called <code class="prettyprint lang-java">myProperty()</code> before it looks 
-							for the getter methods <code class="prettyprint lang-java">getMyProperty()</code>. If none of these members can be found, the expression is unbound and a compiliation error is indicated.
+							for the getter methods <code class="prettyprint lang-java">getMyProperty()</code>. If none of these members can be found, the expression is unbound and a compilation error is indicated.
 						</p>
 						</section>
 						<!-- subsection -->
@@ -8701,7 +8701,7 @@ myList.findFirst[ name==null ]</pre>
 							<p>
 						</p>
 						<p>
-							Another usecase for lambda expressions is to store function objects in variables:
+							Another use case for lambda expressions is to store function objects in variables:
 						</p>
 						<p>
 							</p>
@@ -8941,7 +8941,7 @@ switch x {
 						<h5>Typing</h5>
 						<p>
 							The return type of a switch expression is computed using the rules defined in the
-							section on <a href="#Xbase_Types_CommonSuperType">common supertypes</a>. The set of types from which the common 
+							section on <a href="#Xbase_Types_CommonSuperType">common super types</a>. The set of types from which the common 
 							super type is computed corresponds to the types of each case's result expression. If a switch expression's
 							type is computed using the expected type from the context, it is sufficient to return the expected type if all 
 							case branches types conform to the expected type.
@@ -9069,7 +9069,7 @@ var msg = new ArrayList&lt;String&gt; // -&gt; type ArrayList&lt;String&gt;</pre
 						<p>
 							The for loop <code class="prettyprint lang-xbase">for (T1 variable : iterableOfT1) expression</code> is used to execute a certain expression for each element of an
 							array of an instance of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><abbr title="java.lang.Iterable">Iterable</abbr></a>.
-							The local <code class="prettyprint lang-xtend">variable</code> is final, hence canot be updated.
+							The local <code class="prettyprint lang-xtend">variable</code> is final, hence cannot be updated.
 						</p>
 						<p>
 							The return type of a for loop is <code class="prettyprint lang-xbase">void</code>.
@@ -9182,7 +9182,7 @@ listOfStrings.map [ e |
 						<h4>Try, Catch, Finally</h4>
 						<p>
 							The try-catch-finally expression is used to handle exceptional situations.
-							You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are rethrown in a way the compiler
+							You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are thrown in a way the compiler
 							does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
 							<a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>.
 							The syntax again is the same known from Java.
@@ -9226,7 +9226,7 @@ try {
 						</p>
 						<p>
 							The precedence of extension methods is always lower than real member methods, i.e. you cannot override
-							member features. Also the extension members are not invoked polymorphicly. If you have two extension methods
+							member features. Also the extension members are not invoked polymorphic. If you have two extension methods
 							on the scope (<code class="prettyprint lang-xtend">foo(Object)</code> and <code class="prettyprint lang-xtend">foo(String)</code>) the expression <code class="prettyprint lang-xbase">(foo as Object).foo</code> would
 							bind and invoke <code class="prettyprint lang-xtend">foo(Object)</code>.
 						</p>
@@ -9565,7 +9565,7 @@ public class ResourceWriter extends WorkflowComponentWithSlot {
 							<p>
 						</p>
 						<p>
-							Last but not least, the common supertype for those components looks like this:
+							Last but not least, the common super type for those components looks like this:
 						</p>
 						<p>
 							</p>
@@ -10289,7 +10289,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							cardinality by setting <strong>lowerBound</strong> and <strong>upperBound</strong>. Setting the latter to -1 means 'unbounded'.
 						</p>
 						<p>
-							The common supertype of EDataType and EClass is <strong>EClassifier</strong>. An <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> acts as a namespace and 
+							The common super type of EDataType and EClass is <strong>EClassifier</strong>. An <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a> acts as a namespace and 
 							container of EClassifiers.
 						</p>
 						<p>
@@ -10395,14 +10395,14 @@ var anotherString = 'It is possible to embed ${aString} into
 								    elements will become stale. As the Xtext editor continuously re-parses the model on changes, 
 								    this will happen rather often. It is safer to synchronize editors more loosely, e.g. on 
 								    file changes.</li>
-								<li>Implement an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IFragmentProvider.html"><abbr title="org.eclipse.xtext.resource.IFragmentProvider">IFragmentProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">(src)</a> (<a href="#fragmentProvider">howto</a>) to make 
+								<li>Implement an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IFragmentProvider.html"><abbr title="org.eclipse.xtext.resource.IFragmentProvider">IFragmentProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">(src)</a> (<a href="#fragmentProvider">how-to</a>) to make 
 								    the XtextResource return stable fragments for its contained
 								    elements, e.g. based on composite names rather than order of 
 								    appearance.</li>
 								<li>Implement an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a> and an 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">(src)</a> (<a href="#scoping">howto</a>) to make the 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IScopeProvider.html"><abbr title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">(src)</a> (<a href="#scoping">how-to</a>) to make the 
 								    names of all linkable elements in cross-references unique.</li>
-								<li>Provide an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IFormatter.html"><abbr title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">(src)</a> (<a href="#formatting">howto</a>) to improve the readability 
+								<li>Provide an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IFormatter.html"><abbr title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">(src)</a> (<a href="#formatting">how-to</a>) to improve the readability 
 								    of the generated textual models.</li>
 								<li>Register an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.html"><abbr title="org.eclipse.xtext.parser.antlr.IReferableElementsUnloader">IReferableElementsUnloader</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.java">(src)</a> to turn 
 								    deleted/replaced model elements into EMF proxies. Design the rest 
@@ -10507,7 +10507,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							stuff that the user wants to change to make the diagram look better.
 						</p>
 						<p>
-							In an Xtext editor, changes in the text are transfered to the underlying 
+							In an Xtext editor, changes in the text are transferred to the underlying 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/XtextResource.html"><abbr title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a> by a call to the method 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/XtextResource.html">XtextResource.update(int, int, String)</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a>, which will trigger a
 							partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
@@ -10609,7 +10609,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 							<strong>SimplePropertyPopupXtextEditorEditPartOverride</strong> demonstrates how to spawn an Xtext editor to edit a model 
 							element. The editor pops up in its control and shows only the section of the selected element. It is a fully 
 							fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only
-							transfered back to the model if it does not have any errors.
+							transferred back to the model if it does not have any errors.
 						</p>
 						<p>
 							Note that there still are synchronization issues, that's why we keep this one marked as experimental.
