@@ -408,8 +408,8 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<li>");
     {
       String _twitterID = this.twitterID();
-      boolean _equals_3 = Objects.equal(_twitterID, "Xtext");
-      if (_equals_3) {
+      boolean _equalsIgnoreCase = _twitterID.equalsIgnoreCase("xtext");
+      if (_equalsIgnoreCase) {
         _builder.append("<a href=\"http://xtend-lang.org\">Xtend</a>");
       } else {
         _builder.append("<a href=\"http://xtext.org\">Xtext</a>");

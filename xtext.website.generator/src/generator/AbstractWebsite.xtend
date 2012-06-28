@@ -154,7 +154,7 @@ abstract class AbstractWebsite implements Resource {
 «««							<li «IF path == 'examples.html'»class="active"«ENDIF»><a href="examples.html">Examples</a></li>
 							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
 							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
-							<li>«IF twitterID == 'Xtext'»<a href="http://xtend-lang.org">Xtend</a>«ELSE»<a href="http://xtext.org">Xtext</a>«ENDIF»</li>
+							<li>«IF twitterID.equalsIgnoreCase('xtext')»<a href="http://xtend-lang.org">Xtend</a>«ELSE»<a href="http://xtext.org">Xtext</a>«ENDIF»</li>
 							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 						</ul>
 					</div>
