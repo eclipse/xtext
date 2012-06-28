@@ -1,0 +1,7 @@
+/* Fixes for some bugs in IE < 9 */
+
+.nav-collapse,
+.nav-collapse.collapse {
+	overflow: auto !important;
+	position: static !important;
+}
