@@ -325,5 +325,12 @@
            class="org.eclipse.xpect.ui.Overriding">
      </module>
   </extension>
+  <extension
+        point="org.eclipse.jdt.junit.runners.junitRunnerUI">
+     <junitRunnerUIHandler
+           handlerClass="org.eclipse.xpect.ui.junit.XpectRunnerUIHandler"
+           runnerClass="org.eclipse.xpect.lib.XpectRunner">
+     </junitRunnerUIHandler>
+  </extension>
 
 </plugin>
