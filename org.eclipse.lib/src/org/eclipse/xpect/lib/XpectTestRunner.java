@@ -9,14 +9,12 @@ import org.eclipse.xpect.lib.IXpectParameterProvider.IRegion;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IXpectMultiParameterProvider;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IXpectSingleParameterProvider;
 import org.eclipse.xpect.xpect.XpectInvocation;
-import org.eclipse.xpect.xpect.XpectPackage;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class XpectTestRunner {
@@ -125,18 +123,23 @@ public class XpectTestRunner {
 		return result;
 	}
 
-	public String getMethodName() {
-		if (method != null && method.getMethod() != null)
-			return method.getMethod().getName();
-		for (INode node : NodeModelUtils.findNodesForFeature(invocation, XpectPackage.Literals.XPECT_INVOCATION__ELEMENT))
-			return NodeModelUtils.getTokenText(node);
-		return "(error)";
+	protected String getTitle() {
+		return new XpectTestTitleProvider().getTitle(this);
+	}
+
+	protected String getFullName() {
+		List<String> result = Lists.newArrayList();
+		result.add("title=" + uriRunner.getRunner().getUniqueName(getTitle()));
+		if (invocation.getElement() != null && !invocation.getElement().eIsProxy())
+			result.add("method=" + invocation.getElement().getQualifiedName());
+		result.add("file=" + uriRunner.getUri());
+		return Joiner.on(";").join(result);
 	}
 
 	public Description createDescription() {
 		XpectRunner runner = uriRunner.getRunner();
 		Class<?> javaClass = runner.getTestClass().getJavaClass();
-		return Description.createTestDescription(javaClass, runner.getUniqueName(getMethodName()));
+		return Description.createTestDescription(javaClass, getFullName());
 	}
 
 	protected Object[] createParameterValues(List<ITypedProvider> proposedParameters) {
