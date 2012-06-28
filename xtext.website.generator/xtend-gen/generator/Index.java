@@ -57,7 +57,7 @@ public class Index extends AbstractWebsite {
     _builder.append("<div class=\"introduction\">");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("<a href=\"#\"><img src=\"images/slides/introduction.png\"");
+    _builder.append("<a href=\"#\"><img src=\"images/slides/Introduction.png\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("alt=\"image\" style=\"min-height: 460px; min-width: 580px;\"/></a> ");

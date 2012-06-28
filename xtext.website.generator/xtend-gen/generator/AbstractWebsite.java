@@ -319,7 +319,7 @@ public abstract class AbstractWebsite implements Resource {
   }
   
   public String analyticsAccount() {
-    return "UA-2429174-4";
+    return "UA-2429174-3";
   }
   
   public String twitterID() {

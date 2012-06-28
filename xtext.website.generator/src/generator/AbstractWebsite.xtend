@@ -130,7 +130,7 @@ abstract class AbstractWebsite implements Resource {
 			})();
 		</script>
 	'''
-	def analyticsAccount() { 'UA-2429174-4' }
+	def analyticsAccount() { 'UA-2429174-3' }
 
 	def twitterID() { 'xtext' }
 
