@@ -405,6 +405,19 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("><a href=\"community.html\">Community</a></li>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
+    _builder.append("<li>");
+    {
+      String _twitterID = this.twitterID();
+      boolean _equals_3 = Objects.equal(_twitterID, "Xtext");
+      if (_equals_3) {
+        _builder.append("<a href=\"http://xtend-lang.org\">Xtend</a>");
+      } else {
+        _builder.append("<a href=\"http://xtext.org\">Xtext</a>");
+      }
+    }
+    _builder.append("</li>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
