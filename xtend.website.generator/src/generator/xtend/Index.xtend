@@ -31,7 +31,7 @@ class Index extends AbstractXtendWebsite {
 						You can use any existing Java library seamlessly 
 						from Xtend (and vice-versa). The compiled output is readable 
 						and pretty-printed, and tends to run as fast or faster than the equivalent
-						handwritten Java code.</p>
+						handwritten Java code. It's the <a href="http://coffeescript.org/">CoffeeScript</a> for Java.</p>
 					<a href="download.html" class="btn_download"></a>
 				<a href="documentation.html" class="btn_documentation"></a>
 				</div>
@@ -98,7 +98,7 @@ class Index extends AbstractXtendWebsite {
 				«entry('Better Tooling','''
 					<p>
 						Static typing is not only important for early error detection but even more so for top-notch IDE support.
-						To ensure a great and holistic user experience, the IDE and the language has been designed side by side. And of course
+						To ensure a great and holistic user experience, the IDE and the language have been designed side by side. And of course
 						the tools integrate tightly with Eclipse's existing Java IDE.
 					</p>
 					''',

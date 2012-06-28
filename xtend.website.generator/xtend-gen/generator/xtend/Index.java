@@ -67,7 +67,7 @@ public class Index extends AbstractXtendWebsite {
     _builder.append("and pretty-printed, and tends to run as fast or faster than the equivalent");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("handwritten Java code.</p>");
+    _builder.append("handwritten Java code. It\'s the <a href=\"http://coffeescript.org/\">CoffeeScript</a> for Java.</p>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("<a href=\"download.html\" class=\"btn_download\"></a>");
@@ -228,7 +228,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_4.append("Static typing is not only important for early error detection but even more so for top-notch IDE support.");
     _builder_4.newLine();
     _builder_4.append("\t");
-    _builder_4.append("To ensure a great and holistic user experience, the IDE and the language has been designed side by side. And of course");
+    _builder_4.append("To ensure a great and holistic user experience, the IDE and the language have been designed side by side. And of course");
     _builder_4.newLine();
     _builder_4.append("\t");
     _builder_4.append("the tools integrate tightly with Eclipse\'s existing Java IDE.");

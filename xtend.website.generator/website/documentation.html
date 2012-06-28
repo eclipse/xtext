@@ -114,6 +114,7 @@
 						<li ><a href="download.html">Download</a></li>
 						<li class="active"><a href="documentation.html">Documentation</a></li>
 						<li ><a href="community.html">Community</a></li>
+						<li><a href="http://xtext.org">Xtext</a></li>
 						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
 	
@@ -278,7 +279,7 @@ public class HelloWorld {
 						</p>
 						<p>
 							You can put an Xtend class into a source folder of any Java project within Eclipse (or any Maven project). Eclipse will complain
-							about the missing library if it is not on the classpath and provide a quick fix to add it.
+							about the missing library if it is not on the class path and provide a quick fix to add it.
 						</p>
 						<p>
 							The next thing you might want to do is materializing one of the example projects into your workspace.
@@ -402,7 +403,7 @@ class Movies {
 						</p>
 						<p>
 							A <a href="#fields">field's type</a> can be inferred from the expression on the right hand-side. 
-							That is called local type inference and is supported everyhwere in Xtend.
+							That is called local type inference and is supported everywhere in Xtend.
 							We want the field to be final, so we declare it as a value using the keyword <code class="prettyprint lang-xtend">val</code>.
 						</p>
 						<p>
@@ -426,8 +427,8 @@ import static extension com.google.common.io.CharStreams.*</pre>
 						<p>
 							Function objects are created using <a href="#lambdas">lambda expressions</a> (the code in squared brackets).
 							Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-							separator (two whitespaces) and calling iterator on the result. As you might know <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html">String.split(String)</a>
-							returns a string array (<code class="prettyprint lang-xtend">String[]</code>), which Xtend <a href="#conversionRules">auto-convertes to a list</a> when we 
+							separator (two whitespace characters) and calling iterator on the result. As you might know <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html">String.split(String)</a>
+							returns a string array (<code class="prettyprint lang-xtend">String[]</code>), which Xtend <a href="#conversionRules">auto-converts to a list</a> when we 
 							call <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><code class="prettyprint lang-xtend">Iterable.iterator()</code></a> on it.
 						</p>
 						<p>
@@ -506,18 +507,18 @@ movies.filter[ categories.contains('Action') ].size</pre>
 						</section>
 						<!-- subsection -->
 						<section id="_4" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Question 2 : What Is The Year The Best Movie From The 80ies Was Released?</h3>
+						<h3>Question 2 : What Is The Year The Best Movie From The 80's Was Released?</h3>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-@Test def void yearOfBestMovieFrom80ies() {
+@Test def void yearOfBestMovieFrom80s() {
   assertEquals(1989, 
     movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].last.year)
 }</pre>
 							<p>
 						</p>
 						<p>
-							Here we <code class="prettyprint lang-xtend">filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80ies).
+							Here we <code class="prettyprint lang-xtend">filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80's).
 							The <code class="prettyprint lang-xtend">..</code> operator is again an extension defined in <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">(src)</a> and returns an instance of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerRange.html"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange">IntegerRange</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java">(src)</a>.
 							Operator overloading is explained in <a href="#operators">section</a>.
 						</p>
@@ -577,7 +578,7 @@ movies.filter[ (1980..1989).contains(year) ].sortBy[ -rating ].head.year</pre>
 						<p>
 							Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types 
 							as <code class="prettyprint lang-xtend">int</code> or <code class="prettyprint lang-xtend">boolean</code>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
-							classpath.
+							class path.
 						</p>
 						<p>
 							Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
@@ -735,7 +736,7 @@ import static java.util.Collections.*</pre>
 							on abstract methods.
 						</p>
 						<p>
-							Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of 
+							Xtend's approach to inheritance is conceptual the same as in Java. Single inheritance of 
 							classes as well as implementing multiple interfaces is supported. 
 							Xtend classes can of course extend other Xtend classes, and even Java classes can inherit from Xtend classes.
 						</p>
@@ -795,7 +796,7 @@ class MyClass extends AnotherClass {
 						<h2 style="padding-top: 15px;">Fields</h2>
 						<p>
 							A field can have an initializer. Final fields are declared using <code class="prettyprint lang-xtend">val</code>, while 
-							<code class="prettyprint lang-xtend">var</code> introduces a non-final field and can be ommitted. Yet, if an initializer expression
+							<code class="prettyprint lang-xtend">var</code> introduces a non-final field and can be omitted. Yet, if an initializer expression
 							is present, the type of a field can be skipped after <code class="prettyprint lang-xtend">val</code> and <code class="prettyprint lang-xtend">var</code>.
 							Fields marked as <code class="prettyprint lang-xtend">static</code> will be compiled to static Java fields.
 						</p>
@@ -900,7 +901,7 @@ override String second(List&lt;String&gt; elements) {
 						</p>
 						<p>
 							If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
-							compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
+							compiler will throw the checked exception silently (using the sneaky-throw technique introduced by 
 							<a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). 
 							  
 							</p>
@@ -1412,7 +1413,7 @@ val data = try {
 							A string literal is of type <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a> (just like in Java).
 							String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 							because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
-							least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
+							least likely occur in the actual string. Special characters can be quoted with a backslash or defined using
 							Java's unicode notation. Contrary to Java, strings can span multiple lines.
 						</p>
 						<p>
@@ -2107,7 +2108,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 							<p>
 						</p>
 						<p>
-							Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are rethrown using the 
+							Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the 
 							<a href="#declaredExceptions">sneaky-throw technique</a>.
 							Of course you can always <a href="#Xtend_Expressions_TryCatch">catch and handle</a> them.
 						</p>
@@ -2228,7 +2229,7 @@ for (T1 variable : arrayOrIterable) expression</pre>
 							<p>
 							 
 							is used to execute a certain expression for each element of an array or an instance of 
-							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><abbr title="java.lang.Iterable">Iterable</abbr></a>. The local <code class="prettyprint lang-xtend">variable</code> is final, hence canot be updated.
+							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html"><abbr title="java.lang.Iterable">Iterable</abbr></a>. The local <code class="prettyprint lang-xtend">variable</code> is final, hence cannot be updated.
 						</p>
 						<p>
 							The return type of a for loop is <code class="prettyprint lang-xtend">void</code>. The type of the local variable can be left out. 
@@ -2346,7 +2347,7 @@ listOfStrings.map(e| {
 						<p>
 							The try-catch-finally expression is used to handle exceptional situations.
 							Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
-							will be silently rethrown (see the <a href="#declaredExceptions">section on declared exceptions</a>). The syntax 
+							will be silently thrown (see the <a href="#declaredExceptions">section on declared exceptions</a>). The syntax 
 							again is like Java.
 						</p>
 						<p>
@@ -2382,11 +2383,11 @@ val name = try {
 						<p>
 							Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<code class="prettyprint lang-xtend">'''</code>). 
 							A template expression can span multiple lines and expressions can be nested which are evaluated and their <code class="prettyprint lang-xtend">toString()</code> 
-							representation is automatcially inserted at that position.
+							representation is automatically inserted at that position.
 						</p>
 						<p>
 							The terminals for interpolated expression are so called guillemets <code class="prettyprint lang-xtend">&laquo;expression&raquo;</code>. They read nicely and are not often used
-							in text so you seldomly need to escape them. These escaping conflicts are the reason why
+							in text so you seldom need to escape them. These escaping conflicts are the reason why
 							template languages often use longer character sequences like e.g. <code class="prettyprint lang-xtend">&lt;%= expression %&gt;</code> in JSP, for the price of worse readability. 
 							The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 						</p>
@@ -2643,7 +2644,7 @@ node Parent{
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
 							Xtend comes with annotations that help to steer the compilation process.
-							These annotations reside in the <code class="prettyprint lang-xtend">org.eclipse.xtend.lib</code> plug-in/jar which must be on the classpath
+							These annotations reside in the <code class="prettyprint lang-xtend">org.eclipse.xtend.lib</code> plug-in/jar which must be on the class path
 							of the project containing the Xtend files.
 						</p>
 						<!--  section -->
@@ -2691,7 +2692,7 @@ public void setName(final String name) {
 							<ul>
 								<li>all fields are flagged final,</li>
 								<li>getter methods will be generated (if not existent),</li>
-								<li>a constructor taking paramaters for all non-initialized fields will be generated (if not existent),</li>
+								<li>a constructor taking parameters for all non-initialized fields will be generated (if not existent),</li>
 								<li>equals(Object) / hashCode() methods will be generated (if not existent),</li>
 								<li>a toString() method will be generated (if not existent).</li>
 							</ul>
