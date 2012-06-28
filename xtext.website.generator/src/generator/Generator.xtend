@@ -13,8 +13,8 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new Download, 
-//			new Examples, 
-			new MultiPageDocumentation, 
+			new ExamplesResource, 
+			new Documentation, 
 			new Community 
 		)
 		println("Done.")

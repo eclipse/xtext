@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Xtext - Language Development Made Easy!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages">
+	<meta name="author" content="Sven Efftinge">
+	<style>
+		#header_wrapper {
+			padding-top: 10px;
+			/* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		
+		code.prettyprint {
+	        padding: 0px;
+	        background-color: white;
+			border: none;
+	    }
+	</style>
+	<!--  styles -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Le fav and touch icons -->
+	
+	<link rel="shortcut icon" href="images/favicon.png">
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type='text/css'>
+	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
+	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<script src="js/twitter.js" type="text/javascript"></script>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+					prettyPrint();
+	         
+					 $('a[data-rel]').each(function() {
+	             $(this).attr('rel', $(this).data('rel'));
+	         });
+	        
+					 $("a[rel^='prettyPhoto']").prettyPhoto({
+	             animation_speed: 'fast',
+	             slideshow: 5000,
+	             autoplay_slideshow: false,
+	             opacity: 0.80,
+	             show_title: true,
+	             theme: 'ligh_square',
+	             overlay_gallery: false,
+	             social_tools: false
+	       
+	         });
+	         
+					$('#nav-outline > li > a').live('click', function() {        
+						$(this).parent().find('ul').slideToggle();      
+					});
+	         
+					$('.has-popover').popover();
+		 	     
+		 	     getTwitters('tweet', { 
+			        id: 'xtext', 
+			        count: 5,
+			        includeRT: true,
+			        enableLinks: true, 
+			        clearContents: true,
+			        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+			     });
+	         
+	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		 	     po.src = 'https://apis.google.com/js/plusone.js';
+		 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	     });
+		</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];	
+	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top"
+		style="border-bottom: 1px solid #000;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="index.html"></a>
+	
+	
+				<div class="nav-collapse collapse" style="height: 0px;">
+					<ul class="nav">
+						<li ><a href="download.html">Download</a></li>
+						<li class="dropdown">
+							<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="examples.html#introduction">Seven Languages by Seven Geeks</a></li>
+								<li><a href="examples1.html#simple">A Simple Language</a></li>
+								<li><a href="examples2.html#mongo">MongoBeans</a></li>
+								<li><a href="examples3.html#routing">Http Routing</a></li>
+								<li><a href="examples4.html#templates">Templates</a></li>
+								<li><a href="examples5.html#guice">Guice Modules</a></li>
+								<li><a href="examples6.html#cradle">Cradle</a></li>
+								<li><a href="examples7.html#tortoise">Tortoise Shell</a></li>
+							</ul>
+						</li>
+						<li ><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+					</ul>
+	
+				</div>
+				<!--/.nav-collapse -->
+	
+			</div>
+		</div>
+	</div>
+	<!-- Navbar End -->
+<!--Container-->
+<div id="header_wrapper" class="container" >
+	<div class="inner">
+		<div class="container">
+			<div class="page-heading"><h1>Documentation</h1></div>
+		</div> <!-- /.container -->
+	</div> <!-- /inner -->
+</div>
+<div id="page">  
+	<div class="inner">
+		<div id="maincontainer" class="container">
+			<!-- chapter -->
+			<section id="tortoise" style="padding-top: 68px; margin-top: -68px;">
+				<div class="row">
+					<div class="span10 offset1">
+						<h1>
+							Tortoise Shell
+						</h1>
+						<hr style="margin-top: 5px; margin-bottom: 5px;">
+						<p>
+							Do you remember the programming language <a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29">Logo</a>? 
+							Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
+							But the remarkable part was the so called <strong>turtle</strong>, a graphical cursor that can be given commands to move and turn, 
+							thereby drawing lines.
+						</p>
+						<!--  section -->
+						<section id="examples7.html#tortoise_motivation" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">The Problem</h2>
+						<p>
+							The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
+							I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
+							interpreter. But technically, this example will teach you how to use and adapt the 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a> for your own language.
+						</p>
+						</section>
+						<!--  section -->
+						<section id="examples7.html#tortoise_solution" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
+						<p>
+							We have build a language that allows to define <strong>Programs</strong> and <strong>SubPrograms</strong>. Each of these has a body
+							which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
+							to issue commands to the turtle. Here is an example explaining the concepts in comments:
+							 
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td></p>
+							<pre class="prettyprint lang-tortoise linenums">
+// Program: Haus vom Nikolaus
+begin
+  // local variable
+  val length = 100   
+  // all Math.* methods are available
+  val diagonal = length * sqrt(2)
+  // assignment of a property
+  lineWidth = 2 
+  // call to a SubProgram
+  square(length)
+  // call to a command method
+  turnRight(135)
+  // all ColorConstants.* are available
+  lineColor = blue 
+  forward(diagonal)
+  turnLeft(90)
+  lineColor = red
+  forward(diagonal / 2)
+  turnLeft(90)
+  forward(diagonal / 2)
+  turnLeft(90)
+  lineColor = blue
+  forward(diagonal)
+end
+
+// subprogram with parameter
+sub square
+  int length
+begin
+  forward(length)
+  turnRight(90) 
+  forward(length)
+  turnRight(90)
+  forward(length)
+  turnRight(90)
+  forward(length)
+end</pre>
+							<p></td>
+							<td></p>
+							<div class="thumbnail">
+								<img src="images/Nikolaus.png" alt="" width="261" height="263">
+							</div>
+							<p></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						<p>
+							The main trick about our solution is not to build in the turtle commands into the language itself, but
+							define it in the runtime library. This way, the language stays as slim as can be and additions can be easily
+							added without the need to regenerate the whole language infrastructure.
+						</p>
+						<p>
+							The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>. You can
+							think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
+							modify it using methods. Here is an excerpt of its code:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class Tortoise {
+  double angle
+  double x
+  double y
+  @Property int delay = 200
+
+  boolean isPaint = true
+  @Property int lineWidth
+  @Property Color lineColor
+
+  List&lt;ITortoiseEvent$Listener&gt; listeners = newArrayList()
+...</pre>
+							<p>
+						</p>
+						<p>
+							We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
+							EClass. When a method that changes the state is called, an event is thrown. These events are consumed
+							by a GEF based view and turned into animations of a <abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/view/TortoiseFigure.java">(src)</a>.
+						</p>
+						<!-- subsection -->
+						<section id="tortoise_statistics" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Some Stats</h3>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td>Language name</td>
+							<td>TortoiseShell</td>
+							</tr>
+							<tr><td>Author</td>
+							<td>Jan Koehnlein</td>
+							</tr>
+							<tr><td>Xtext Grammar</td>
+							<td>ridiculously tiny (17 LOC, 3 parser rules (+1 for a nicer Ecore model))</td>
+							</tr>
+							<tr><td>Xtext extensions</td>
+							<td>4 classes</td>
+							</tr>
+							<tr><td>Execution</td>
+							<td>interpreter</td>
+							</tr>
+							<tr><td>Runtime library</td>
+							<td>huge, a lot of fun!</td>
+							</tr>
+							<tr><td>Hardest part</td>
+							<td>Teaching GEF to center a figure</td>
+							</tr>
+							<tr><td>Animals harmed</td>
+							<td>0 (except virtual turtles)</td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						</section>
+						</section>
+						<!--  section -->
+						<section id="examples7.html#tortoise_running" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Running the Example</h2>
+						<p>
+							You should have installed the <a href="http://www.eclipse.org/gef">Graphical Editing Framework (GEF)</a>. Import the projects 
+							into an Eclipse workspace and run the launch config <strong>Run (org.eclipse.xtext.tortoiseshell)</strong>. Import the example plug-in 
+							into the new workspace and open one of the example files. Also open the <strong>Tortoise View</strong> <strong>(Window &gt;
+							Show View &gt; Other &gt; Xtext &gt; TortoiseView)</strong>. The <strong>Program</strong> is interpreted on save. An additional toggle button <strong>Step Mode</strong> 
+							in the <strong>Tortoise View</strong> allows to execute the code live from the editor upto the carret's current line.
+						</p>
+						<p>
+							</p>
+							<div class="thumbnail">
+								<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" width="651" height="546">
+							</div>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="examples7.html#tortoise_details" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">The Solution in Detail</h2>
+						<!-- subsection -->
+						<section id="tortoise_grammar" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Grammar</h3>
+						<p>
+							The grammar is almost a joke. Once again, we inherit from the Xbase language to have nice Java integration
+							and rich expressions. A user can define a <strong>Program</strong> which can have <strong>SubPrograms</strong> with parameters. The <strong>Executable</strong>
+							rule is never called, but defines a common supertype for <strong>Program</strong> and <strong>SubProgram</strong> which will define
+							their common member <code class="prettyprint lang-xtend">body</code>. A <strong>Body</strong> is an <strong>XBlockExpression</strong> from Xbase, but with the keywords
+							<code class="prettyprint lang-xtend">begin</code> and <code class="prettyprint lang-xtend">end</code> instead of the curly braces.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+grammar org.xtext.tortoiseshell.TortoiseShell with org.eclipse.xtext.xbase.Xbase
+
+import "http://www.eclipse.org/xtext/xbase/Xbase"
+generate tortoiseShell "http://www.xtext.org/tortoiseshell/TortoiseShell"
+
+Program :
+  body=Body
+  subPrograms+=SubProgram*;
+  
+SubProgram:
+  'sub' name=ValidID
+  (parameters += FullJvmFormalParameter)*
+  body=Body;
+
+Body returns XBlockExpression:
+  {XBlockExpression}
+  'begin'
+  (expressions+=XExpressionInsideBlock ';'?)*
+  'end';
+  
+Executable:
+  Program | SubProgram;</pre>
+							<p>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Translation to Java</h3>
+						<p>
+							With the tortoise commands in the runtime library class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>, we 
+							have to make sure to infer a Java class that inherits from this. Within this class, we create a method
+							for each <strong>Program</strong> and <strong>SubProgram</strong>. The resulting code looks like this:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
+  public static val INFERRED_CLASS_NAME = 'MyTortoiseProgram'
+  @Inject extension JvmTypesBuilder
+     def dispatch void infer(Program program, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+       acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater[
+         superTypes += program.newTypeRef(typeof(Tortoise))
+         if(program.body != null)
+           members += program.toMethod("main", program.newTypeRef(Void::TYPE)) [
+             body = program.body
+           ]
+         for(subProgram: program.subPrograms)
+           members += subProgram.toMethod(subProgram.name, program.newTypeRef(Void::TYPE)) [
+             for(functionParameter: subProgram.parameters)
+               parameters += functionParameter.toParameter(functionParameter.name, functionParameter.parameterType)
+             body = subProgram.body
+           ]
+       ]
+     }
+}</pre>
+							<p>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="tortoise_interpreter" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Interpreter</h3>
+						<p>
+							The Xbase languge library does not only provide a compiler that generates Java code, but also an 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>. This has been adapted to
+							to execute our <strong>Programs</strong>.
+						</p>
+						<p>
+							In fact, an interpreter is just a big visitor. For each expression type, it has an evaluation method,
+							that recursively calls the evaluation methods for the subexpressions forming its parameters. The methods
+							also pass an execution context storing all temporary state such as local variables.
+						</p>
+						<p>
+							The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
+							<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>) and inferred ones. While the former are evaluated
+							via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
+							<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
+							methods to execute them directly. This is accomplished by overriding the method
+						</p>
+						<p>
+							<code class="prettyprint lang-xtend">invokeOperation</code>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+@Inject extension IJvmModelAssociations
+ 
+override protected invokeOperation(JvmOperation operation, Object receiver, List&lt;Object&gt; argumentValues) {
+  val executable = operation.sourceElements.head
+  if(executable instanceof Executable) {
+    val context = createContext
+    context.newValue(XbaseScopeProvider::THIS, tortoise)
+    var index = 0
+    for(param: operation.parameters) {
+      context.newValue(QualifiedName::create(param.name), argumentValues.get(index))
+      index = index + 1  
+    }
+    evaluate((executable as Executable).body, context, CancelIndicator::NullImpl)
+  } else {
+    super.invokeOperation(operation, receiver, argumentValues)
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							One thing you have to know about the Java inferrence is that when creating Java elements using the
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>, the infrastructure stores the information which 
+							elements have been inferred from which source elements. To navigate these traces, we use the the Xbase service
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>. So to detect wheter a 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a> is inferred, we check whether it has a source element.
+							If so, we have to setup an exection context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
+							execute the method's body using the interpreter.
+						</p>
+						<p>
+							To start the interpretation we have to do almost the same: Setup the execution context and then evaluate
+							the <strong>Program's</strong> body. The respective code is
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+override run(Tortoise tortoise, EObject program, int stopAtLine) {
+  if(tortoise != null &amp;&amp; program != null) {
+    this.tortoise = tortoise
+    this.stopAtLine = stopAtLine
+    try {
+      program.jvmElements.filter(typeof(JvmOperation)).head
+        ?.invokeOperation(null, Collections::emptyList)
+    } catch (StopLineReachedException exc) {
+      // ignore
+    }
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							The <abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.interpreter/src/org/xtext/tortoiseshell/interpreter/StopLineReachedException.java">(src)</a> is part of the <strong>Step Mode</strong>.
+							It is thrown when the execution reaches the line <code class="prettyprint lang-xtend">stopAtLine</code>, thus terminating the current execution.
+							The throwing code is
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+override protected internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
+  val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
+  if(line-1 == stopAtLine)
+    throw new StopLineReachedException
+  super.internalEvaluate(expression, context, indicator)
+}</pre>
+							<p>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Additional Aspects</h3>
+						<p>
+							To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a> and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
+							callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.scoping/src/org/xtext/tortoiseshell/scoping/TortoiseShellExtensionClassNameProvider.java">(src)</a>.
+						</p>
+						<p>
+							To overcome a small issue in the interpreter we also had to implement the 
+							<abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider">TortoiseShellIdentifiableSimpleNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.scoping/src/org/xtext/tortoiseshell/scoping/TortoiseShellIdentifiableSimpleNameProvider.java">(src)</a>.
+						</p>
+						</section>
+						</section>
+						<!--  section -->
+						<section id="examples7.html#tortoise_beyond" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Beyond This Example</h2>
+						<p>
+							You could add a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
+							etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
+							<a href="http://en.wikipedia.org/wiki/Tron_%28video_game%29">Tron</a>. Of course, there could also be more UI, 
+							like for exporting figures. The lesson to learn is that even a language with just a few concepts can become
+							very flexible by using powerful libraries.
+						</p>
+						</section>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+	<div id="extra">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="span6">
+						<h3>Quick Links</h3>
+						<ul class="footer-links clearfix">
+							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+						</ul>
+						<ul class="footer-links clearfix">
+	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
+							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
+							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
+							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+						</ul>
+					</div>
+					<div class="span6">
+						<h3><a href="https://twitter.com/#!/xtext" style="color: white;">Xtext</a> on Twitter</h3>
+						<br />
+						<div id="tweet">
+							<p>Please wait while my tweets load</p>
+							<p>
+								<a href="http://twitter.com/rem">If you can't wait - check
+									out what I've been twittering</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Le javascript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+	
+	<!-- include pretty-print files -->
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+	
+	<!-- Include the plug-in -->
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="js/custom.js" type="text/javascript"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-common.js"></script><script type="text/javascript">
+		registerLanguage('grammar|import|generate|terminal|enum|returns|with|hidden|as|current|fragment|EOF', 'xtext');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'xbase');
+		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
+		registerLanguage('package|import', 'mongobeans');
+		registerLanguage('sub|begin|end', 'tortoise');
+		registerLanguage('GET|POST|PUT|DELETE|HEAD|import|when', 'routing');
+		registerLanguage('application', 'simple');
+	</script>
+</body>
+</html>

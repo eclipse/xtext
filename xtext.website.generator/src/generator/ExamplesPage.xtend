@@ -2,33 +2,44 @@ package generator
 
 import bootstrap.Body
 import bootstrap.HtmlExtensions
+import bootstrap.PostProcessor
+import bootstrap.TargetPaths
 import bootstrap.XdocExtensions
-import com.google.inject.Binder
-import com.google.inject.Guice
 import com.google.inject.Inject
-import com.google.inject.Module
-import org.eclipse.xtext.xdoc.XdocRuntimeModule
-import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
+import org.eclipse.xtext.xdoc.xdoc.Document
 
-class Examples extends MultiPageDocumentation {
-	/*
+public class ExamplesPage extends AbstractXdocBaseWebsite {
 	@Inject extension Body
-	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
+	@Inject PostProcessor processor
+	@Inject extension TargetPaths
+	@Inject extension XdocExtensions
 
-	override getStandaloneSetup() {
-		new ExampleSetup
+	val AbstractSection rootSection
+	val Document document 
+	
+	new(Document document, AbstractSection rootSection) {
+		this.document = document
+		this.rootSection = rootSection
 	}	
-
-	override getXdocDocumentRootFolder() {
-		'../docs/org.xtext.sevenlanguages.doc.xdoc/xdoc'
+	
+	override getDocument() {
+		document
 	}
-
- 	override path() {
-    	'examples.html'
-  	}
-  	
+	
+	override getStandaloneSetup() {
+		new ExamplesSetup
+	}
+	
+	override path() {
+		rootSection.targetPath
+	}
+	
+	override website() {
+		processor.postProcess(super.website())
+	}
+			
   	override navBar() '''
 		<!-- Navbar -->
 		<div class="navbar navbar-fixed-top"
@@ -63,8 +74,8 @@ class Examples extends MultiPageDocumentation {
 		<li class="dropdown«IF path == 'examples.html'» active«ENDIF»">
 			<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				«FOR chapter: document.allChapters»
-					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a></li>
+				«FOR rootSection: document.targetRoots»
+					<li><a href="«rootSection.href»">«rootSection.title.toHtmlText»</a></li>
 				«ENDFOR»
 			</ul>
 		</li>
@@ -81,47 +92,9 @@ class Examples extends MultiPageDocumentation {
 		</div>
 		<div id="page">  
 			<div class="inner">
-				«document.body»
+				«rootSection.body»
 			</div>
 		</div>
 	'''
-	
-}
 
-class ExampleSetup extends XdocStandaloneSetup implements Module {
-	
-	override createInjector() {
-		val module = new XdocRuntimeModule
-		Guice::createInjector(module, this)
-	}
-	
-	override configure(Binder binder) {
-		binder.bind(typeof(Body)).to(typeof(ExamplesBody))
-	}
-}
-
-class ExamplesBody extends DocumentationBody {
-	@Inject extension XdocExtensions
-	@Inject extension HtmlExtensions
-	
-	override h1(AbstractSection chapter) '''
-		<!-- chapter -->
-		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
-			<div class="row">
-				<div class="span10 offset1">
-					<h1>
-						«chapter.title.toHtmlText»
-					</h1>
-					<hr style="margin-top: 5px; margin-bottom: 5px;">
-					«FOR content : chapter.contents»
-						«content?.toHtmlParagraph»
-					«ENDFOR»
-					«FOR section: chapter.sections»
-						«section.h2»
-					«ENDFOR»
-				</div>
-			</div>
-		</section>
-	'''
-*/	
 }

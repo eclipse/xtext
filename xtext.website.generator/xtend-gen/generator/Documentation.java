@@ -272,24 +272,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
         }
       }
     }
-    _builder.append("\t");
-    CharSequence _additionalLinks = this.additionalLinks();
-    _builder.append(_additionalLinks, "	");
-    _builder.newLineIfNotEmpty();
     _builder.append("</ul>");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence additionalLinks() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<li>&nbsp;</li>");
-    _builder.newLine();
-    _builder.append("<li style=\"color : #333;\">Additional Resources");
-    _builder.newLine();
-    _builder.append("<li><a href=\"documentation/2.3.0/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
-    _builder.newLine();
-    _builder.append("<li><a href=\"http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/\">API Documentation (JavaDoc)</a>");
     _builder.newLine();
     return _builder;
   }

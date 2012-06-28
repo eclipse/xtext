@@ -1,9 +1,10 @@
 package generator;
 
 import generator.Community;
+import generator.Documentation;
 import generator.Download;
+import generator.ExamplesResource;
 import generator.Index;
-import generator.MultiPageDocumentation;
 import generator.Resource;
 import java.io.File;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -16,9 +17,10 @@ public class Generator {
     final File out = _file;
     Index _index = new Index();
     Download _download = new Download();
-    MultiPageDocumentation _multiPageDocumentation = new MultiPageDocumentation();
+    ExamplesResource _examplesResource = new ExamplesResource();
+    Documentation _documentation = new Documentation();
     Community _community = new Community();
-    Generator.generateFiles(out, _index, _download, _multiPageDocumentation, _community);
+    Generator.generateFiles(out, _index, _download, _examplesResource, _documentation, _community);
     InputOutput.<String>println("Done.");
   }
   

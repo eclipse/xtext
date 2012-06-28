@@ -6,8 +6,8 @@ import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import generator.DocumentationPage;
-import generator.DocumentationSetup;
+import generator.ExamplesPage;
+import generator.ExamplesSetup;
 import generator.Resource;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,9 +31,17 @@ import org.eclipse.xtext.xdoc.xdoc.ImageRef;
 import xdocgen.DocumentLoad;
 
 @SuppressWarnings("all")
-public class MultiPageDocumentation implements Resource {
-  public MultiPageDocumentation() {
-    DocumentationSetup _standaloneSetup = this.getStandaloneSetup();
+public class ExamplesResource implements Resource {
+  @Inject
+  private TargetPaths _targetPaths;
+  
+  @Inject
+  private DocumentLoad docLoader;
+  
+  private final Document doc;
+  
+  public ExamplesResource() {
+    ExamplesSetup _standaloneSetup = this.getStandaloneSetup();
     final Injector injector = _standaloneSetup.createInjectorAndDoEMFRegistration();
     injector.injectMembers(this);
     String _xdocDocumentRootFolder = this.getXdocDocumentRootFolder();
@@ -44,31 +52,23 @@ public class MultiPageDocumentation implements Resource {
           return Boolean.valueOf((it instanceof Chapter));
         }
       };
-    this._targetPaths.splitAt(this.doc, _function, "documentation");
+    this._targetPaths.splitAt(this.doc, _function, "examples");
   }
   
-  public DocumentationSetup getStandaloneSetup() {
-    DocumentationSetup _documentationSetup = new DocumentationSetup();
-    return _documentationSetup;
+  public ExamplesSetup getStandaloneSetup() {
+    ExamplesSetup _examplesSetup = new ExamplesSetup();
+    return _examplesSetup;
   }
   
   public String getXdocDocumentRootFolder() {
-    return "../docs/org.eclipse.xtext.doc.xdoc/xdoc";
+    return "../docs/org.xtext.sevenlanguages.doc.xdoc/xdoc";
   }
-  
-  private final Document doc;
-  
-  @Inject
-  private DocumentLoad docLoader;
-  
-  @Inject
-  private TargetPaths _targetPaths;
   
   public void generateTo(final File targetDir) {
     List<? extends AbstractSection> _targetRoots = this._targetPaths.getTargetRoots(this.doc);
     for (final AbstractSection section : _targetRoots) {
-      DocumentationPage _documentationPage = new DocumentationPage(this.doc, section);
-      _documentationPage.generateTo(targetDir);
+      ExamplesPage _examplesPage = new ExamplesPage(this.doc, section);
+      _examplesPage.generateTo(targetDir);
     }
     this.copyImages(this.doc, targetDir);
   }
