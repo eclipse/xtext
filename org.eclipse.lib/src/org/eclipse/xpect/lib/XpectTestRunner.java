@@ -3,7 +3,9 @@ package org.eclipse.xpect.lib;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IClaimedRegion;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IRegion;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IXpectMultiParameterProvider;
@@ -14,8 +16,8 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class XpectTestRunner {
 
@@ -128,12 +130,12 @@ public class XpectTestRunner {
 	}
 
 	protected String getFullName() {
-		List<String> result = Lists.newArrayList();
-		result.add("title=" + uriRunner.getRunner().getUniqueName(getTitle()));
+		Map<String, String> result = Maps.newLinkedHashMap();
+		result.put("title", uriRunner.getRunner().getUniqueName(getTitle()));
 		if (invocation.getElement() != null && !invocation.getElement().eIsProxy())
-			result.add("method=" + invocation.getElement().getQualifiedName());
-		result.add("file=" + uriRunner.getUri());
-		return Joiner.on(";").join(result);
+			result.put("method", invocation.getElement().getSimpleName());
+		result.put("file", EcoreUtil.getURI(invocation).toString());
+		return TestDataUtil.encode(result);
 	}
 
 	public Description createDescription() {

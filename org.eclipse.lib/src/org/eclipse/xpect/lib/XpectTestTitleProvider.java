@@ -12,9 +12,30 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 		XpectInvocation invocation = runner.getInvocation();
 		INode node = NodeModelUtils.findActualNodeFor(invocation);
 		String document = node.getRootNode().getText();
-		int lineStart = document.lastIndexOf("\n", node.getOffset());
+		String title = findTitle(document, node.getOffset());
+		String method = findMethodName(runner);
+		if (title != null && method != null)
+			return method + ": " + title;
+		if (title != null)
+			return title;
+		if (method != null)
+			return method;
+		return "(error)";
+	}
+
+	protected String findMethodName(XpectTestRunner runner) {
+		XpectFrameworkMethod method = runner.getMethod();
+		if (method != null && method.getMethod() != null)
+			return method.getMethod().getName();
+		for (INode n : NodeModelUtils.findNodesForFeature(runner.getInvocation(), XpectPackage.Literals.XPECT_INVOCATION__ELEMENT))
+			return NodeModelUtils.getTokenText(n);
+		return null;
+	}
+
+	protected String findTitle(String document, int offset) {
+		int lineStart = document.lastIndexOf("\n", offset);
 		if (lineStart > 0) {
-			String prefix = document.substring(lineStart + 1, node.getOffset());
+			String prefix = document.substring(lineStart + 1, offset);
 			String trimmedPrefix = prefix.trim();
 			if (trimmedPrefix.length() > 0)
 				for (int i = 0; i < trimmedPrefix.length(); i++) {
@@ -32,12 +53,7 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 				}
 			}
 		}
-		XpectFrameworkMethod method = runner.getMethod();
-		if (method != null && method.getMethod() != null)
-			return method.getMethod().getName();
-		for (INode n : NodeModelUtils.findNodesForFeature(invocation, XpectPackage.Literals.XPECT_INVOCATION__ELEMENT))
-			return NodeModelUtils.getTokenText(n);
-		return "(error)";
+		return null;
 	}
 
 }
