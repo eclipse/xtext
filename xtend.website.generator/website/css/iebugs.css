@@ -2,6 +2,6 @@
 
 .nav-collapse,
 .nav-collapse.collapse {
-	overflow: auto !important;
+	overflow: visible !important;
 	position: static !important;
 }
