@@ -3,3 +3,12 @@
 XPECT_CLASS org.eclipse.xpect.examples.textile.SimpleTest END_CLASS
 
 XPECT simple
+
+XPECT simpleString --> foo bar
+
+
+XPECT simpleString ---
+	Hello, this
+		is some Multiline
+	String
+---

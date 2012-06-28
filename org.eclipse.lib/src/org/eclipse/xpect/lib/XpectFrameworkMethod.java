@@ -72,10 +72,14 @@ public class XpectFrameworkMethod {
 	}
 
 	protected List<IXpectMultiParameterProvider> findMultiParameterProvider(Method method) {
+		if (method == null)
+			return Collections.emptyList();
 		return AnnotationUtil.newInstancesViaMetaAnnotation(method, XpectMultiParameterProvider.class, IXpectMultiParameterProvider.class);
 	}
 
 	protected IXpectSingleParameterProvider findSingleParameterProvider(Method method, int paramIndex) {
+		if (method == null)
+			return null;
 		List<IXpectSingleParameterProvider> handler = AnnotationUtil.newInstancesViaMetaAnnotation(method, paramIndex,
 				XpectSingleParameterProvider.class, IXpectSingleParameterProvider.class);
 		if (handler.isEmpty())

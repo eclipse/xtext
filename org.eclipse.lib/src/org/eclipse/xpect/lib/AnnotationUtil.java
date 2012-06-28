@@ -12,16 +12,17 @@ public class AnnotationUtil {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T newInstance(Class<T> type, Class<?> declarator, Annotation annotation) throws IllegalAccessException {
-		try {
-			Constructor<?> c = type.getConstructor(declarator.getClass(), annotation.annotationType());
-			if (c != null)
-				return (T) c.newInstance(declarator, annotation);
-		} catch (SecurityException e) {
-		} catch (NoSuchMethodException e) {
-		} catch (InstantiationException e) {
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
-		}
+		if (declarator != null)
+			try {
+				Constructor<?> c = type.getConstructor(declarator.getClass(), annotation.annotationType());
+				if (c != null)
+					return (T) c.newInstance(declarator, annotation);
+			} catch (SecurityException e) {
+			} catch (NoSuchMethodException e) {
+			} catch (InstantiationException e) {
+			} catch (InvocationTargetException e) {
+				throw new RuntimeException(e);
+			}
 		try {
 			Constructor<?> c = type.getConstructor(annotation.annotationType());
 			if (c != null)

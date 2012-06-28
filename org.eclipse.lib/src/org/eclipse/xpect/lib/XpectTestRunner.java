@@ -1,5 +1,6 @@
 package org.eclipse.xpect.lib;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import org.eclipse.xpect.lib.IXpectParameterProvider.IRegion;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IXpectMultiParameterProvider;
 import org.eclipse.xpect.lib.IXpectParameterProvider.IXpectSingleParameterProvider;
 import org.eclipse.xpect.xpect.XpectInvocation;
+import org.eclipse.xpect.xpect.XpectPackage;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -43,10 +48,10 @@ public class XpectTestRunner {
 	}
 
 	private Description description;
+
 	private Throwable error;
 	private XpectInvocation invocation;
 	private XpectFrameworkMethod method;
-
 	private XpectFileRunner uriRunner;
 
 	public XpectTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation) {
@@ -120,11 +125,18 @@ public class XpectTestRunner {
 		return result;
 	}
 
+	public String getMethodName() {
+		if (method != null && method.getMethod() != null)
+			return method.getMethod().getName();
+		for (INode node : NodeModelUtils.findNodesForFeature(invocation, XpectPackage.Literals.XPECT_INVOCATION__ELEMENT))
+			return NodeModelUtils.getTokenText(node);
+		return "(error)";
+	}
+
 	public Description createDescription() {
 		XpectRunner runner = uriRunner.getRunner();
 		Class<?> javaClass = runner.getTestClass().getJavaClass();
-		String name = method.getMethod().getName();
-		return Description.createTestDescription(javaClass, runner.getUniqueName(name));
+		return Description.createTestDescription(javaClass, runner.getUniqueName(getMethodName()));
 	}
 
 	protected Object[] createParameterValues(List<ITypedProvider> proposedParameters) {
@@ -141,6 +153,10 @@ public class XpectTestRunner {
 		if (this.description == null)
 			this.description = createDescription();
 		return description;
+	}
+
+	public String getDocument() {
+		return ((XtextResource) invocation.eResource()).getParseResult().getRootNode().getText();
 	}
 
 	public Throwable getError() {
@@ -176,7 +192,7 @@ public class XpectTestRunner {
 		}
 	}
 
-	protected void runInternal(IXpectSetup<Object, Object, Object> setup, SetupContext ctx) throws Exception {
+	protected void runInternal(IXpectSetup<Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
 		List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamAdapters());
 		Object test = uriRunner.getRunner().getTestClass().getJavaClass().newInstance();
@@ -190,6 +206,8 @@ public class XpectTestRunner {
 				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
 			Object[] params = createParameterValues(proposedParameters);
 			method.getMethod().invoke(test, params);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
 		} finally {
 			if (setup != null)
 				setup.afterTest(ctx, ctx.getUserTestCtx());
