@@ -1,13 +1,14 @@
 package generator.xtend
 
+import generator.Resource
 import java.io.File
 
 import static extension generator.Generator.*
-import generator.Resource
 
 class XtendWebsiteGenerator {
 	
 	def static void main(String[] args) {
+		System::setProperty("java.awt.headless", "true")
 		// clean dir
 		val out = new File("website")
 		out.generateFiles(

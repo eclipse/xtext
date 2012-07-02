@@ -14,7 +14,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xdoc.XdocRuntimeModule
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
-import org.eclipse.xtext.xdoc.xdoc.Chapter
 import org.eclipse.xtext.xdoc.xdoc.Document
 import org.eclipse.xtext.xdoc.xdoc.ImageRef
 import xdocgen.DocumentLoad
@@ -93,9 +92,9 @@ class Documentation extends AbstractXtendWebsite {
 	def menu(Document doc) '''
 		<ul id="nav-outline">
 			«FOR chapter : doc.chapters»
-				<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
+				<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
 				«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-					<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
+					<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 				«ENDFOR»
 				</li>
 			«ENDFOR»
@@ -103,9 +102,9 @@ class Documentation extends AbstractXtendWebsite {
 				<li>&nbsp;</li>
 				<li style="color : #333;">«part.title.toHtmlText»</li>
 				«FOR chapter : part.chapters»
-					<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
+					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-						<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
+						<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 					«ENDFOR»
 					</li>
 				«ENDFOR»
@@ -135,9 +134,9 @@ class DocumentationBody extends Body {
 	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
 	
-	override h1(Chapter chapter) '''
+	override h1(AbstractSection chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span8 offset3">
 					<h1 style="padding-top: 30px;">
@@ -157,7 +156,7 @@ class DocumentationBody extends Body {
 	
 	override h2(AbstractSection section) '''
 		<!--  section -->
-		<section id="«section.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 		<h2 style="padding-top: 15px;">«section.title.toHtmlText»</h2>
 		«FOR content : section.contents»
 			«content.toHtmlParagraph»

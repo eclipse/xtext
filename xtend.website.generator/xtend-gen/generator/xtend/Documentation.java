@@ -171,7 +171,7 @@ public class Documentation extends AbstractXtendWebsite {
       EList<Chapter> _chapters = doc.getChapters();
       for(final Chapter chapter : _chapters) {
         _builder.append("\t");
-        _builder.append("<li><a href=\"#");
+        _builder.append("<li><a href=\"");
         String _href = this._htmlExtensions.href(chapter);
         _builder.append(_href, "	");
         _builder.append("\">");
@@ -189,7 +189,7 @@ public class Documentation extends AbstractXtendWebsite {
               _builder.append("<ul>", "	");
             }
             _builder.append("\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href_1 = this._htmlExtensions.href(section);
             _builder.append(_href_1, "	");
             _builder.append("\">");
@@ -225,7 +225,7 @@ public class Documentation extends AbstractXtendWebsite {
           EList<Chapter> _chapters_1 = part.getChapters();
           for(final Chapter chapter_1 : _chapters_1) {
             _builder.append("\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href_2 = this._htmlExtensions.href(chapter_1);
             _builder.append(_href_2, "	");
             _builder.append("\">");
@@ -243,7 +243,7 @@ public class Documentation extends AbstractXtendWebsite {
                   _builder.append("<ul>", "	");
                 }
                 _builder.append("\t");
-                _builder.append("<li><a href=\"#");
+                _builder.append("<li><a href=\"");
                 String _href_3 = this._htmlExtensions.href(section_1);
                 _builder.append(_href_3, "	");
                 _builder.append("\">");

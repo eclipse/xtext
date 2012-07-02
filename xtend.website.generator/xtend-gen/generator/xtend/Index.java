@@ -13,6 +13,16 @@ public class Index extends AbstractXtendWebsite {
     return true;
   }
   
+  public CharSequence quickLinksAndTweets() {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _quickLinksAndTweets = super.quickLinksAndTweets();
+    _builder.append(_quickLinksAndTweets, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<a href=\"http://dryicons.com/\">Icons by http://dryicons.com</a>");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--Container-->");

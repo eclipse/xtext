@@ -1,11 +1,10 @@
 package bootstrap;
 
 import bootstrap.ImageDimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Iterator;
+import java.io.FileInputStream;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -22,22 +21,20 @@ public class ImageExtensions {
       final URI imageURI = _createURI.resolve(resourceURI);
       String _fileString = imageURI.toFileString();
       File _file = new File(_fileString);
-      final ImageInputStream imgageStream = ImageIO.createImageInputStream(_file);
-      Iterator<ImageReader> _imageReaders = ImageIO.getImageReaders(imgageStream);
-      final ImageReader imageReader = _imageReaders.next();
-      imageReader.setInput(imgageStream);
+      final File imageFile = _file;
+      FileInputStream _fileInputStream = new FileInputStream(imageFile);
+      final FileInputStream stream = _fileInputStream;
       try {
-        int _minIndex = imageReader.getMinIndex();
-        int _width = imageReader.getWidth(_minIndex);
-        int _minIndex_1 = imageReader.getMinIndex();
-        int _height = imageReader.getHeight(_minIndex_1);
+        final BufferedImage image = ImageIO.read(stream);
+        int _width = image.getWidth();
+        int _height = image.getHeight();
         ImageDimension _imageDimension = new ImageDimension(_width, _height);
         return _imageDimension;
-      } catch (Exception _e) {
-        throw Exceptions.sneakyThrow(_e);
+      } finally {
+        if (stream!=null) stream.close();
       }
-    } catch (Exception _e_1) {
-      throw Exceptions.sneakyThrow(_e_1);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }

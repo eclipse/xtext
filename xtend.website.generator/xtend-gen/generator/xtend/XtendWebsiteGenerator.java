@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 @SuppressWarnings("all")
 public class XtendWebsiteGenerator {
   public static void main(final String[] args) {
+    System.setProperty("java.awt.headless", "true");
     File _file = new File("website");
     final File out = _file;
     Index _index = new Index();

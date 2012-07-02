@@ -7,4 +7,6 @@ Require-Bundle: org.eclipse.xtend.doc.xdoc;bundle-version="2.3.0",
  org.eclipse.xtext.xdoc;bundle-version="0.1.0",
  org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
  org.eclipse.xtend.bootstrapdoc;bundle-version="1.0.0",
- xtext.website.generator;bundle-version="1.0.0"
+ xtext.website.generator;bundle-version="1.0.0",
+ org.eclipse.xtend.lib;bundle-version="2.3.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

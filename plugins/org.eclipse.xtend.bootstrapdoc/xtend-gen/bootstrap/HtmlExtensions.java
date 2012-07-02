@@ -5,10 +5,10 @@ import bootstrap.CodeRefs;
 import bootstrap.ImageDimension;
 import bootstrap.ImageExtensions;
 import bootstrap.ParagraphState;
+import bootstrap.TargetPaths;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -52,8 +53,8 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import org.eclipse.xtext.xdoc.xdoc.TextPart;
 import org.eclipse.xtext.xdoc.xdoc.Todo;
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 
-@Singleton
 @SuppressWarnings("all")
 public class HtmlExtensions {
   @Inject
@@ -62,7 +63,18 @@ public class HtmlExtensions {
   @Inject
   private ImageExtensions _imageExtensions;
   
-  public String href(final Identifiable id) {
+  @Inject
+  private TargetPaths _targetPaths;
+  
+  public String href(final Identifiable it) {
+    String _targetPath = this._targetPaths.getTargetPath(it);
+    String _plus = (_targetPath + "#");
+    String _hrefId = this.hrefId(it);
+    String _plus_1 = (_plus + _hrefId);
+    return _plus_1;
+  }
+  
+  public String hrefId(final Identifiable id) {
     String _xblockexpression = null;
     {
       Identifiable _switchResult = null;
@@ -103,20 +115,20 @@ public class HtmlExtensions {
         _xifexpression = _name_1;
       } else {
         String _xifexpression_1 = null;
-        Map<Identifiable,String> _artificialHrefs = this.artificialHrefs(it);
-        boolean _containsKey = _artificialHrefs.containsKey(it);
+        Map<Identifiable,String> _artificialHrefIds = this.artificialHrefIds(it);
+        boolean _containsKey = _artificialHrefIds.containsKey(it);
         if (_containsKey) {
-          Map<Identifiable,String> _artificialHrefs_1 = this.artificialHrefs(it);
-          String _get = _artificialHrefs_1.get(it);
+          Map<Identifiable,String> _artificialHrefIds_1 = this.artificialHrefIds(it);
+          String _get = _artificialHrefIds_1.get(it);
           _xifexpression_1 = _get;
         } else {
           String _xblockexpression_1 = null;
           {
-            Map<Identifiable,String> _artificialHrefs_2 = this.artificialHrefs(it);
-            int _size = _artificialHrefs_2.size();
+            Map<Identifiable,String> _artificialHrefIds_2 = this.artificialHrefIds(it);
+            int _size = _artificialHrefIds_2.size();
             final String newHref = ("_" + Integer.valueOf(_size));
-            Map<Identifiable,String> _artificialHrefs_3 = this.artificialHrefs(it);
-            _artificialHrefs_3.put(it, newHref);
+            Map<Identifiable,String> _artificialHrefIds_3 = this.artificialHrefIds(it);
+            _artificialHrefIds_3.put(it, newHref);
             _xblockexpression_1 = (newHref);
           }
           _xifexpression_1 = _xblockexpression_1;
@@ -128,7 +140,7 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected Map<Identifiable,String> artificialHrefs(final Identifiable id) {
+  protected Map<Identifiable,String> artificialHrefIds(final Identifiable id) {
     Resource _eResource = id.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final EList<Adapter> adapters = _resourceSet.eAdapters();
@@ -246,7 +258,7 @@ public class HtmlExtensions {
   
   protected CharSequence _toHtml(final Ref it, final ParagraphState state) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<a href=\"#");
+    _builder.append("<a href=\"");
     Identifiable _ref = it.getRef();
     String _href = this.href(_ref);
     _builder.append(_href, "");
@@ -420,16 +432,40 @@ public class HtmlExtensions {
       CharSequence _html = this.toHtml(_contents, state);
       final String code = _html.toString();
       CharSequence _xifexpression = null;
-      boolean _and = false;
+      boolean _or = false;
       boolean _contains = code.contains("\n");
-      if (!_contains) {
-        _and = false;
+      if (_contains) {
+        _or = true;
       } else {
-        boolean _contains_1 = code.contains("\r");
-        boolean _not = (!_contains_1);
-        _and = (_contains && _not);
+        boolean _and = false;
+        EObject _eContainer = it.eContainer();
+        EStructuralFeature _eContainingFeature = _eContainer==null?(EStructuralFeature)null:_eContainer.eContainingFeature();
+        boolean _equals = Objects.equal(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _switchResult = false;
+          EObject _eContainer_1 = it.eContainer();
+          final EObject eContainer = _eContainer_1;
+          boolean _matched = false;
+          if (!_matched) {
+            if (eContainer instanceof TextOrMarkup) {
+              final TextOrMarkup _textOrMarkup = (TextOrMarkup)eContainer;
+              _matched=true;
+              EList<EObject> _contents_1 = ((TextOrMarkup) _textOrMarkup).getContents();
+              int _size = _contents_1.size();
+              boolean _equals_1 = (_size == 1);
+              _switchResult = _equals_1;
+            }
+          }
+          if (!_matched) {
+            _switchResult = false;
+          }
+          _and = (_equals && _switchResult);
+        }
+        _or = (_contains || _and);
       }
-      if (_and) {
+      if (_or) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<pre class=\"prettyprint lang-");
         LangDef _language = it.getLanguage();

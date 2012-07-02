@@ -101,20 +101,6 @@ td.code pre {
 	float: left;
 }
 
-.image_left {
-	border-radius: 98px;
-	-moz-border-radius: 98px;
-	-webkit-border-radius: 98px;
-	float: left;
-}
-
-@media (max-width: 767px) {
-  .image_left {
-    height: 80px;
-    margin-right: 10px;
-  }
-}
-
 .image_left_reviews {
 	margin: 0px 10px 10px 0px;
 	width: 100px;
@@ -601,23 +587,50 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
 	padding: 10px;
 	margin-bottom: 15px;
-	height: 60px;
+	height: 80px;
 	position: relative;
+}
+
+.team h3 {
+	margin: 20px;
+}
+@media (max-width: 979px) {
+  .team h3 {
+		margin: 10px;
+	}
+}
+@media (max-width: 767px) {
+  .team h3 {
+		margin: 5px;
+	}
 }
 
 @media (min-width: 1200px) {
   .team {
-    height: 70px;
-  } 
+    height: 80px;
+  }
 }
 @media (max-width: 979px) {
   .team {
-    height: 70px;
+    height: 80px;
   }
 }
 @media (max-width: 767px) {
   .team {
     height: 110px;
+  }
+}
+
+.image_left {
+	float: left;
+	height: 80px;
+	margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .image_left {
+/*     height: 80px; */
+/*     margin-right: 10px; */
   }
 }
 

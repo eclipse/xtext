@@ -44,7 +44,7 @@ public class XdocExtensions {
   }
   
   public Iterable<? extends AbstractSection> getSections(final AbstractSection section) {
-    List<AbstractSection> _switchResult = null;
+    Iterable<? extends AbstractSection> _switchResult = null;
     AbstractSection _resolve = this.resolve(section);
     final AbstractSection it = _resolve;
     boolean _matched = false;
@@ -52,7 +52,15 @@ public class XdocExtensions {
       if (it instanceof Document) {
         final Document _document = (Document)it;
         _matched=true;
-        EList<Chapter> _chapters = _document.getChapters();
+        Iterable<Chapter> _allChapters = this.getAllChapters(_document);
+        _switchResult = _allChapters;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof Part) {
+        final Part _part = (Part)it;
+        _matched=true;
+        EList<Chapter> _chapters = _part.getChapters();
         final Function1<Chapter,AbstractSection> _function = new Function1<Chapter,AbstractSection>() {
             public AbstractSection apply(final Chapter it) {
               AbstractSection _resolve = XdocExtensions.this.resolve(it);

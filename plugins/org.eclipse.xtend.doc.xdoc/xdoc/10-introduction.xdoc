@@ -20,7 +20,7 @@ ul[
 
 Unlike other JVM languages Xtend has ref:javaInteroperability[zero interoperability issues] with Java:
 Everything you write interacts with Java exactly as expected. At the same time Xtend is much more concise, 
-readable and expressive. Xtend's small ref:library[library] is just a thin layer that provides useful 
+readable and expressive. Xtend's small library is just a thin layer that provides useful 
 utilities and extensions on top of the Java Development Kit (JDK). 
 
 Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
