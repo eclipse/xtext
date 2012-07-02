@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -29,8 +29,10 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Multiset;
+import com.google.common.primitives.Ints;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -142,16 +144,45 @@ public abstract class LightweightTypeReference {
 	
 	public List<LightweightTypeReference> getAllSuperTypes() {
 		final List<LightweightTypeReference> result = Lists.newArrayList();
-		// TODO sort by distance
+		final Multiset<JvmType> distances = HashMultiset.create(7);
+		final Multiset<JvmType> counterPerType = HashMultiset.create(7);
 		collectSuperTypes(new SuperTypeAcceptor() {
-			private Set<JvmType> seenTypes = Sets.newHashSetWithExpectedSize(4);
+
+			int counter = 0;
 			
 			public boolean accept(LightweightTypeReference superType, int distance) {
-				if (seenTypes.add(superType.getType())) {
+				JvmType type = superType.getType();
+				counterPerType.add(type, counter++);
+				if (distances.contains(type)) {
+					int currentCount = distances.count(type);
+					if (currentCount < distance + 1) {
+						distances.setCount(type, distance + 1);
+					} else {
+						return false;
+					}
+				} else {
 					result.add(superType);
-					return true;
+					distances.add(type, distance + 1);
 				}
-				return false;
+				return true;
+			}
+			
+		});
+		Collections.sort(result, new Comparator<LightweightTypeReference>() {
+			public int compare(@Nullable LightweightTypeReference o1, @Nullable LightweightTypeReference o2) {
+				if (o1 == null || o2 == null) {
+					throw new IllegalArgumentException();
+				}
+				JvmType type1 = o1.getType();
+				JvmType type2 = o2.getType();
+				if (type1 == null)
+					return 1;
+				if (type2 == null)
+					return -1;
+				int distanceCompare = Ints.compare(distances.count(type1), distances.count(type2));
+				if (distanceCompare != 0)
+					return distanceCompare;
+				return Ints.compare(counterPerType.count(type1), counterPerType.count(type2));
 			}
 		});
 		return result;

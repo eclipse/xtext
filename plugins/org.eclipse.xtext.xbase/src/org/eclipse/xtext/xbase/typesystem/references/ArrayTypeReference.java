@@ -65,8 +65,8 @@ public class ArrayTypeReference extends LightweightTypeReference {
 			return result;
 		}
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(3);
-		result.add(new ParameterizedTypeReference(getOwner(), findType(Serializable.class)));
 		result.add(new ParameterizedTypeReference(getOwner(), findType(Cloneable.class)));
+		result.add(new ParameterizedTypeReference(getOwner(), findType(Serializable.class)));
 		return result;
 	}
 	
