@@ -10,43 +10,29 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.common.collect.ListMultimap
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.junit.After
 
 /**
  * @author Sebastian Zarnekow
  */
-class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implements TypeReferenceOwner {
+class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 
 	@Inject
 	extension IXtendJvmAssociations
 	
 	@Inject
 	BoundTypeArgumentMerger merger
-
-	@Inject
-	CommonTypeComputationServices services
-	
-	extension OwnedConverter = new OwnedConverter(this)
-	
-	ResourceSet contextResourceSet
 
 	def mappedBy(String typeParameters, String... alternatingTypeReferences) {
 		// TODO synthesize unique variable names as soon as the function should be validated
@@ -58,17 +44,6 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implements TypeR
 			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightReference, operation.parameters.get(i+1).parameterType.toLightweightReference)
 		}
 		return collector.typeParameterMapping
-	}
-	
-	override protected function(String string) throws Exception {
-		val result = super.function(string)
-		contextResourceSet = result.eResource.resourceSet
-		return result
-	}
-	
-	@After
-	def void tearDown() {
-		contextResourceSet = null
 	}
 	
 	def merge(ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName) {
@@ -90,22 +65,6 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implements TypeR
 			assertEquals(variance, merged.value.variance)
 		}
 		merged.key
-	}
-	
-	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getAllHints(Object handle) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getServices() {
-		return services
-	}
-	
-	override getContextResourceSet() {
-		return contextResourceSet
 	}
 	
 	@Test def void testUnusedParam() {

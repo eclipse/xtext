@@ -6,10 +6,8 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -18,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -27,14 +24,10 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,24 +35,12 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implements TypeReferenceOwner {
+public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private BoundTypeArgumentMerger merger;
-  
-  @Inject
-  private CommonTypeComputationServices services;
-  
-  private OwnedConverter _ownedConverter = new Function0<OwnedConverter>() {
-    public OwnedConverter apply() {
-      OwnedConverter _ownedConverter = new OwnedConverter(ActualTypeArgumentMergeTest.this);
-      return _ownedConverter;
-    }
-  }.apply();
-  
-  private ResourceSet contextResourceSet;
   
   public ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> mappedBy(final String typeParameters, final String... alternatingTypeReferences) {
     try {
@@ -98,31 +79,18 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implement
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _get = _parameters.get((i).intValue());
         JvmTypeReference _parameterType = _get.getParameterType();
-        LightweightTypeReference _lightweightReference = this._ownedConverter.toLightweightReference(_parameterType);
+        LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         int _plus = ((i).intValue() + 1);
         JvmFormalParameter _get_1 = _parameters_1.get(_plus);
         JvmTypeReference _parameterType_1 = _get_1.getParameterType();
-        LightweightTypeReference _lightweightReference_1 = this._ownedConverter.toLightweightReference(_parameterType_1);
+        LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_parameterType_1);
         collector.populateTypeParameterMapping(_lightweightReference, _lightweightReference_1);
       }
       return collector.getTypeParameterMapping();
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  protected XtendFunction function(final String string) throws Exception {
-    final XtendFunction result = super.function(string);
-    Resource _eResource = result.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    this.contextResourceSet = _resourceSet;
-    return result;
-  }
-  
-  @After
-  public void tearDown() {
-    this.contextResourceSet = null;
   }
   
   public Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> merge(final ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> mapping, final String typeParamName) {
@@ -174,24 +142,6 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implement
       _xblockexpression = (_key);
     }
     return _xblockexpression;
-  }
-  
-  public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public CommonTypeComputationServices getServices() {
-    return this.services;
-  }
-  
-  public ResourceSet getContextResourceSet() {
-    return this.contextResourceSet;
   }
   
   @Test

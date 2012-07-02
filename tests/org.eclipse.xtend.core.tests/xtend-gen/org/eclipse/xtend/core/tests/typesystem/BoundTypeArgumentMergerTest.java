@@ -5,10 +5,8 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -19,7 +17,6 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -28,12 +25,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,24 +34,12 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implements TypeReferenceOwner {
+public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private BoundTypeArgumentMerger merger;
-  
-  @Inject
-  private CommonTypeComputationServices services;
-  
-  private ResourceSet contextResourceSet;
-  
-  private OwnedConverter _ownedConverter = new Function0<OwnedConverter>() {
-    public OwnedConverter apply() {
-      OwnedConverter _ownedConverter = new OwnedConverter(BoundTypeArgumentMergerTest.this);
-      return _ownedConverter;
-    }
-  }.apply();
   
   public LightweightMergedBoundTypeArgument merge(final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
     LightweightMergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(null, mergeUs);
@@ -88,7 +69,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implement
           public void apply(final JvmFormalParameter p, final Integer i) {
             final Triple<String,VarianceInfo,VarianceInfo> input = ((List<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)).get((i).intValue());
             JvmTypeReference _parameterType = p.getParameterType();
-            LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this._ownedConverter.toLightweightReference(_parameterType);
+            LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
             Object _object = new Object();
             Object _elvis = ObjectExtensions.<Object>operator_elvis(source, _object);
             VarianceInfo _second = input.getSecond();
@@ -122,37 +103,6 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implement
     VarianceInfo _value = pair.getValue();
     Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
     return _create;
-  }
-  
-  protected XtendFunction function(final String string) throws Exception {
-    final XtendFunction result = super.function(string);
-    Resource _eResource = result.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    this.contextResourceSet = _resourceSet;
-    return result;
-  }
-  
-  @After
-  public void tearDown() {
-    this.contextResourceSet = null;
-  }
-  
-  public ResourceSet getContextResourceSet() {
-    return this.contextResourceSet;
-  }
-  
-  public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public CommonTypeComputationServices getServices() {
-    return this.services;
   }
   
   @Test
