@@ -85,4 +85,9 @@ public class AllSuperTypeTest extends AbstractSuperTypeTest {
     Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V extends CharSequence, T extends V");
     this.assertSuperTypes(_mappedTo, "V", "CharSequence", "Object");
   }
+  
+  public void testTypeParameterArray() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T extends Object[]");
+    this.assertSuperTypes(_mappedTo, "Object[]", "Cloneable", "Serializable", "Object");
+  }
 }

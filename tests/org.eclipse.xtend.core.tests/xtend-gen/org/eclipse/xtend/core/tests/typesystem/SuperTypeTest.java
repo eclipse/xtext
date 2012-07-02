@@ -72,6 +72,11 @@ public class SuperTypeTest extends AbstractSuperTypeTest {
     this.assertSuperTypes(_mappedTo, "CharSequence");
   }
   
+  public void testTypeParameterArray() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T extends CharSequence[]");
+    this.assertSuperTypes(_mappedTo, "CharSequence[]");
+  }
+  
   public void testDependentTypeParameters() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V, T extends V");
     this.assertSuperTypes(_mappedTo, "V");

@@ -132,6 +132,9 @@ public abstract class AbstractSuperTypeTest extends AbstractTestingTypeReference
   public abstract void testTypeParameters();
   
   @Test
+  public abstract void testTypeParameterArray();
+  
+  @Test
   public abstract void testDependentTypeParameters();
   
   @Test
