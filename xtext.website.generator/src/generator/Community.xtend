@@ -8,11 +8,6 @@ class Community extends AbstractWebsite {
 	
 	override contents() '''
 	<div id="header_wrapper" class="container" >
-		<div class="inner">
-			<div class="container">
-				<div class="page-heading"><h1>Resources</h1></div>
-			</div>
-		</div>
 	</div>
 		<div id="page">
 			<div id="team" class="container clearfix"> 

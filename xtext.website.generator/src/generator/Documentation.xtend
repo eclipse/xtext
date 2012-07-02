@@ -70,11 +70,6 @@ class Documentation extends AbstractXdocBaseWebsite {
 	override contents() '''
 		<!--Container-->
 		<div id="header_wrapper" class="container">
-			<div class="inner">
-				<div class="container">
-					<div class="page-heading"><h1>Documentation</h1></div>
-				</div> <!-- /.container -->
-			</div> <!-- /inner -->
 			«doc.menu»
 		</div>
 		<div id="page">  

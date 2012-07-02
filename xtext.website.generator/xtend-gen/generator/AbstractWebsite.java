@@ -386,8 +386,19 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<li ");
     {
       String _path_1 = this.path();
-      boolean _equals_1 = Objects.equal(_path_1, "documentation.html");
+      boolean _equals_1 = Objects.equal(_path_1, "7languages.html");
       if (_equals_1) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"7languages.html\">7 Languages</a></li>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<li ");
+    {
+      String _path_2 = this.path();
+      boolean _equals_2 = Objects.equal(_path_2, "documentation.html");
+      if (_equals_2) {
         _builder.append("class=\"active\"");
       }
     }
@@ -396,9 +407,9 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
-      String _path_2 = this.path();
-      boolean _equals_2 = Objects.equal(_path_2, "community.html");
-      if (_equals_2) {
+      String _path_3 = this.path();
+      boolean _equals_3 = Objects.equal(_path_3, "community.html");
+      if (_equals_3) {
         _builder.append("class=\"active\"");
       }
     }
@@ -629,39 +640,6 @@ public abstract class AbstractWebsite implements Resource {
   
   public CharSequence stylesheets() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<style>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("#header_wrapper {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("padding-top: 10px;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("/* 60px to make the container go all the way to the bottom of the topbar */");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("code.prettyprint {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("padding: 0px;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("background-color: white;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("border: none;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("</style>");
-    _builder.newLine();
     _builder.append("<!--  styles -->");
     _builder.newLine();
     _builder.append("<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->");
@@ -706,23 +684,6 @@ public abstract class AbstractWebsite implements Resource {
   public CharSequence headline(final String title) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"header_wrapper\" class=\"container\" >");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<div class=\"inner\">");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<div class=\"container\">");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<div class=\"page-heading\"><h1>");
-    _builder.append(title, "			");
-    _builder.append("</h1></div>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</div>");
     _builder.newLine();
     _builder.append("</div>");
     _builder.newLine();

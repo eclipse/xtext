@@ -34,10 +34,6 @@ strong {
 	font-weight: bold;
 }
 
-#features {
-	background: url(../images/pattern1.jpg) repeat #ebebeb;
-}
-
 .btn_android {
 	background: url(../images/btn-android.png) no-repeat;
 	width: 178px;
@@ -115,6 +111,13 @@ strong {
 	height: auto;
 	border: none;
 	overflow: hidden;
+	min-height:60px;
+}
+
+@media (max-width: 767px) {
+  #header_wrapper {
+		min-height:10px;
+	}
 }
 
 .image-slider h2 {
@@ -141,6 +144,7 @@ strong {
 #features {
 	height: auto;
 	padding-top: 10px;
+	background: url(../images/pattern1.jpg) repeat #ebebeb;
 }
 
 #features h1 {
@@ -622,7 +626,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
   left: 0;
   right: 0;
   text-indent: -9999px;
-  z-index: 1000;
+  z-index: 200;
 }
 
 .team :hover {
@@ -786,6 +790,8 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 /* 	filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#ffffff', */
 /* 		endColorstr='#ebebeb', GradientType=0 ); IE6-8 */
 	border-top: 1px solid #000;
+	padding-top : 20px; 
+	padding-bottom : 20px; 
 }
 
 #page h1 {
@@ -796,6 +802,11 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	font-style: normal;
 	word-spacing: 1px;
 	font-size: 32px;
+}
+
+#page h1 small,#page h2 small,#page h3 small,#page h4 small,#page h5 small,#page h6 small {
+	font-weight: normal;
+	color: #A11;
 }
 
 .page-heading {
@@ -890,14 +901,58 @@ section {
 	margin-top: -100px;
 }
 
+.languages .row {
+	margin : 0;
+}
+
 .language-card {
 	margin : 3px;
 }
-.language-card table {
+.language-card {
 	border : 1px solid #A11;
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 1)), color-stop(100%,rgba(235, 235, 235, 1)));
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='white', endColorstr='#EBEBEB',GradientType=0 );
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+/* 	padding: 10px; */
+/* 	margin-bottom: 15px; */
+/* 	height: 60px; */
+	position: relative;
 }
+
+.language-card :hover {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 8px #A00;
+  -moz-box-shadow: 0 0 8px #A00;
+  box-shadow: 0 0 8px #A00;
+}
+
+@media (max-width: 979px) {
+	.language-card {
+		height:200px;
+	}
+}
+@media (max-width: 767px) {
+	.language-card {
+		min-height:150px;
+		height:auto;
+	}
+}
+
 .language-card td {
-	padding-right: 4px;
+	padding-right: 12px;
+	height: 100%;
 }
 .language-icon {
 	max-width : 140px;

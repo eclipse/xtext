@@ -151,7 +151,7 @@ abstract class AbstractWebsite implements Resource {
 					<div class="nav-collapse collapse" style="height: 0px;">
 						<ul class="nav">
 							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
-«««							<li «IF path == 'examples.html'»class="active"«ENDIF»><a href="examples.html">Examples</a></li>
+							<li «IF path == '7languages.html'»class="active"«ENDIF»><a href="7languages.html">7 Languages</a></li>
 							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
 							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
 							<li>«IF twitterID.equalsIgnoreCase('xtext')»<a href="http://xtend-lang.org">Xtend</a>«ELSE»<a href="http://xtext.org">Xtext</a>«ENDIF»</li>
@@ -242,18 +242,6 @@ abstract class AbstractWebsite implements Resource {
 	
 	
 	def stylesheets() '''
-		<style>
-			#header_wrapper {
-				padding-top: 10px;
-				/* 60px to make the container go all the way to the bottom of the topbar */
-			}
-			
-			code.prettyprint {
-		        padding: 0px;
-		        background-color: white;
-				border: none;
-		    }
-		</style>
 		<!--  styles -->
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
@@ -278,11 +266,6 @@ abstract class AbstractWebsite implements Resource {
 
 	def headline(String title) '''
 		<div id="header_wrapper" class="container" >
-			<div class="inner">
-				<div class="container">
-					<div class="page-heading"><h1>«title»</h1></div>
-				</div>
-			</div>
 		</div>
 	'''
 }

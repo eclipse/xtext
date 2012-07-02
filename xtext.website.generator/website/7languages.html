@@ -7,18 +7,6 @@
 	<meta name="description"
 		content="The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages">
 	<meta name="author" content="Sven Efftinge">
-	<style>
-		#header_wrapper {
-			padding-top: 10px;
-			/* 60px to make the container go all the way to the bottom of the topbar */
-		}
-		
-		code.prettyprint {
-	        padding: 0px;
-	        background-color: white;
-			border: none;
-	    }
-	</style>
 	<!--  styles -->
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -110,6 +98,7 @@
 				<div class="nav-collapse collapse" style="height: 0px;">
 					<ul class="nav">
 						<li ><a href="download.html">Download</a></li>
+						<li class="active"><a href="7languages.html">7 Languages</a></li>
 						<li ><a href="documentation.html">Documentation</a></li>
 						<li ><a href="community.html">Community</a></li>
 						<li><a href="http://xtend-lang.org">Xtend</a></li>
@@ -127,225 +116,146 @@
 	<!-- Navbar End -->
 <!--Container-->
 <div id="header_wrapper" class="container" >
-	<div class="inner">
-		<div class="container">
-			<div class="page-heading"><h1>7 Languages</h1></div>
-		</div> <!-- /.container -->
-	</div> <!-- /inner -->
 </div>
-<div id="page">  
-	<div id="features">
-		<div class="container">
-			<br /> <br />
-			<h1>7 Languages </h1>
-			<hr />
-			<div class="row">
-				<div class="span6 float language-card">
-					<p>
-						If your language runs on the JVM Building domain-specific languages (DSLs) for the structural parts of an application has always been rather 
-						simple with Xtext. Nevertheless, when it came to the behavioral parts, users often fell back to implementing 
-						them in the target language, e.g. Java. The reason is that expressions, which are usually the part of a language 
-						that describe behavior, are hard to get right and very costly to implement. There are two major drawbacks with
-						this apporach: First, information that belongs to a single concept is spread across multiple artifacts in several 
-						languages on different layers of abstraction. Second, you need rather complex and error prone patterns such 
-						as protected  regions or generation gap to integrate the manually written code with the generated one.
-					</p>
-				</div>
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-scripting.png" alt="Image" />
-						</td>
-						<td>
-							<h4>Scripting Language</h4>
-							<p>
-								A simple scripting language that lets you write code into a blank file without any
-										structural boilerplate like class or method definitions.<br/>
-										Translates to a Java class with a main method.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-scripting.png" alt="Image" />
-					</div>
-					<h4>Scripting Language</h4>
-					<p>
-						A simple scripting language that lets you write code into a blank file without any
-								structural boilerplate like class or method definitions.<br/>
-								Translates to a Java class with a main method.
-					</p>
-				</div>-->
+<div id="page" class="languages">
+	<div class="container">
+		<h1>7 Languages <small>- Learn By Example</small></h1>
+		<hr />
+		<div class="row">
+			<div class="span6" style="margin:3px;">
+				<p>
+					Xtext has special support for languages that run on the Java Virtual Machine.
+					This makes it very easy to intergrate fully featured statically typed expressions,
+					complete Java type references and Java annotations anywhere in your language.
+				</p>
+				<p>
+					On this page we provide 7 different languages showing how these concepts can be used.
+				</p>
 			</div>
-			<div class="row">
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-helmet.png" alt="Image" />
-						</td>
-						<td>
-							<h4>Build Language</h4>
-							<p>
-								A little language that lets you define tasks and dependencies between them. 
-								Much like a nice and concise ANT or a statically typed Gradle.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-helmet.png" alt="Image" />
-					</div>
-					<h4>Build Language</h4>
-					<p>
-						A little language that lets you define tasks and dependencies between them. 
-						Much like a nice and concise ANT or a statically typed Gradle.
-					</p>
-				</div>-->
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-database.png" alt="Image" />
-						</td>
-						<td>
-							<h4>DSL for MongoDB</h4>
-							<p>
-								This langauge lets you declare document structures for MongoDB and generates
-								a handy Java API to interact with MongoDB in a statically typed and structured manner.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-database.png" alt="Image" />
-					</div>
-					<h4>DSL for MongoDB</h4>
-					<p>
-						This langauge lets you declare document structures for MongoDB and generates
-						a handy Java API to interact with MongoDB in a statically typed and structured manner.
-					</p>
-				</div>-->
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#scripting" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-scripting.png" alt="Image" />
+					</td>
+					<td>
+						<h2>Scripting Language</h2>
+						<p>
+							A simple scripting language that lets you write code into a blank file without any
+									structural boilerplate like class or method definitions.<br/>
+									Translates to a Java class with a main method.
+						</p>
+					</td>
+				</tr>
+			</table>
 			</div>
-			<div class="row">
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-guice.png" alt="Image" />
-						</td>
-						<td>
-							<h4>DSL for Guice</h4>
-							<p>
-								This language lets you declare guice modules in a more readable and declarative way, such that many of the runtime checks can
-								be done at compile time.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-guice.png" alt="Image" />
-					</div>
-					<h4>DSL for Guice</h4>
-					<p>
-						This language lets you declare guice modules in a more readable and declarative way, such that many of the runtime checks can
-						be done at compile time.
-					</p>
-				</div>-->
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-web.png" alt="Image" />
-						</td>
-						<td>
-							<h4>Http Routing Language</h4>
-							<p>
-								Web.xml on steroids and without the XML: Write a URL pattern and map it to a method call in Java.
-								Similar to how the Play! framework does it, but with great Eclipse integration and not limited to static methods.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-web.png" alt="Image" />
-					</div>
-					<h4>Http Routing Language</h4>
-					<p>
-						Web.xml on steroids and without the XML: Write a URL pattern and map it to a method call in Java.
-						Similar to how the Play! framework does it, but with great Eclipse integration and not limited to static methods.
-					</p>
-				</div>-->
+		</div>
+		<div class="row">
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#build" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-helmet.png" alt="Image" />
+					</td>
+					<td>
+						<h2>Build Language</h2>
+						<p>
+							A little language that lets you define tasks and dependencies between them. 
+							Much like a nice and concise ANT or a statically typed Gradle.
+						</p>
+					</td>
+				</tr>
+			</table>
 			</div>
-			<div class="row">
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td >
-							<img class="language-icon" src="images/red-glossy-template.png" alt="Image" />
-						</td>
-						<td>
-							<h4>Template Language</h4>
-							<p>
-								A straight forward template language which allows for statically-typed expressions and 
-								named arguments with default values.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-template.png" alt="Image" />
-					</div>
-					<h4>Template Language</h4>
-					<p>
-						A straight forward template language which allows for statically-typed expressions and 
-						named arguments with default values.
-					</p>
-				</div>-->
-				<div class="span6 float language-card">
-				<table>
-					<tr>
-						<td>
-							<img class="language-icon" src="images/red-glossy-turtle.png" alt="Image" />
-						</td>
-						<td>
-							<h4>Little Tortoise</h4>
-							<p>
-								Remember Logo? A cute little tortoise painting on a canvas what ever you want.
-							</p>
-						</td>
-					</tr>
-				</table>
-				</div>
-				<!--<div class="span6 float language-card">
-					<div class="thumb">
-						<img class="language-icon"
-							src="images/red-glossy-turtle.png" alt="Image" />
-					</div>
-					<h4>Little Tortoise</h4>
-					<p>
-						Remember Logo? A cute little tortoise painting on a canvas what ever you want.
-					</p>
-				</div>-->
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#mongoDB" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-database.png" alt="Image" />
+					</td>
+					<td>
+						<h2>DSL for MongoDB</h2>
+						<p>
+							This langauge lets you declare document structures for MongoDB and generates
+							a handy Java API to interact with MongoDB in a statically typed and structured manner.
+						</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#guice" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-guice.png" alt="Image" />
+					</td>
+					<td>
+						<h2>DSL for Guice</h2>
+						<p>
+							This language lets you declare guice modules in a more readable and declarative way, such that many of the runtime checks can
+							be done at compile time.
+						</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#httpRouting" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-web.png" alt="Image" />
+					</td>
+					<td>
+						<h2>Http Routing Language</h2>
+						<p>
+							Web.xml on steroids and without the XML: Write a URL pattern and map it to a method call in Java.
+							Similar to how the Play! framework does it, but with great Eclipse integration and not limited to static methods.
+						</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#template" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-template.png" alt="Image" />
+					</td>
+					<td>
+						<h2>Template Language</h2>
+						<p>
+							A straight forward template language which allows for statically-typed expressions and 
+							named arguments with default values.
+						</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="span6 float language-card">
+			<a href="sevenLanguageDoc.html#tortoise" class="anchor-in-div"></a>
+			<table>
+				<tr>
+					<td >
+						<img class="language-icon" src="images/red-glossy-turtle.png" alt="Image" />
+					</td>
+					<td>
+						<h2>Little Tortoise</h2>
+						<p>
+							Remember Logo? A cute little tortoise painting on a canvas what ever you want.
+						</p>
+					</td>
+				</tr>
+			</table>
 			</div>
 		</div>
 	</div>
