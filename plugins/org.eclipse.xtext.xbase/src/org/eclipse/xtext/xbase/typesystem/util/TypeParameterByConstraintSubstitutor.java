@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

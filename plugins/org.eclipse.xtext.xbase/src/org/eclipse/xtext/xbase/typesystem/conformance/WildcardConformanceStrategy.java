@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;

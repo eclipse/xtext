@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 
 import com.google.common.collect.ListMultimap;
 
