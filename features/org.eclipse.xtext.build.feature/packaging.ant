@@ -164,7 +164,8 @@
 				<equals arg1="${director.result}" arg2="0"/>
 			</not>
 		</condition>
-		<antcall target="-check.director.result" inheritall="true"/>
+		<echo>${director.failed}</echo>
+		<!--antcall target="-check.director.result" inheritall="true"/>-->
 		
 		
 		<!-- remove the p2 metadata, so that the installation of target platform IUs is not confused -->
@@ -173,7 +174,7 @@
 		</delete>
 	</target>
 	
-	<target name="-check.director.result" unless="director.failed">
+	<target name="-check.director.result" if="director.failed">
 		<echo>${director.output}</echo>
 		<fail message="p2 Director execution failed."/>
 	</target>
