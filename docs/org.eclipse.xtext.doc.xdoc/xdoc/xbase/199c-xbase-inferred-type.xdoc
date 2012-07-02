@@ -18,7 +18,7 @@ One way to achieve this is to let your concepts inherit from a corresponding JVM
 inherit from codeRef[org.eclipse.xtext.common.types.JvmGenericType]. But this would result in a lot of 
 accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how
 to derive a JVM model from your model. This e[inferred JVM model] is the representation of your concepts
-in the typesystem of Xbase.  
+in the type system of Xbase.  
 
 The main component for the inferred JVM model is the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
 It has a single method that takes the root model element as an argument and produces a number of 
@@ -34,7 +34,7 @@ inherit from the codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer]
 input model and dispatches to its contents until you decide which elements to handle. 
 
 The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you
-make sure all types exist and are referrable when you create their members in the second phase. 
+make sure all types exist and are referable when you create their members in the second phase. 
 Use code[Xtend][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialization
 code for the second phase. You have to pass a ref:Xbase_Expressions_Lambda[lambda expression] to the method
 code[Xtend][initializeLater()] on the return type of the code[Xtend][acceptor.accept()] method.

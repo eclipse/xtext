@@ -6,7 +6,7 @@ a test project for that purpose. It simplifies the setup procedure both for the 
 tests for Junit4.
 
 This tutorial is about testing the parser and the linker for the e[Domainmodel]. It leverages Xtend to
-write the testcase.
+write the test case.
 
 ol[
   item[

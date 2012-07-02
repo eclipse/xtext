@@ -1,10 +1,10 @@
 section:refactoring[Rename Refactoring]
 
-Xtext provides rename refactoring of the elements in your langauge. That includes
+Xtext provides rename refactoring of the elements in your language. That includes
 
 ul[
 item[a command, handlers and keybindings on both declarations and references,]
-item[inplace linked editing for the new name,]
+item[in-place linked editing for the new name,]
 item[validation and preview,]
 item[renaming of declaration and all references even across language boundaries.]
 ]

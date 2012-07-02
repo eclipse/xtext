@@ -201,7 +201,7 @@ public class ResourceWriter extends WorkflowComponentWithSlot {
 }
 ]
 
-Last but not least, the common supertype for those components looks like this:
+Last but not least, the common super type for those components looks like this:
 
 code[Java][
 public abstract class WorkflowComponentWithSlot 

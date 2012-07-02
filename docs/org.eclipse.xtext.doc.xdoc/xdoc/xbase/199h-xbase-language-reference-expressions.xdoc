@@ -20,7 +20,7 @@ do not.
 
 See link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5][§ 3.10.5 String Literals]
 
-In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+In contrast to Java, equal string literals within the same class do not necessarily refer to the same
 instance at runtime.
 
 section4[Examples]
@@ -254,7 +254,7 @@ code[Xbase][
 
 the compiler first looks for an accessible field code[Xbase][myProperty] in the type of code[Xbase][myObj]. If no such field exists it 
 tries to find a method called code[Java][myProperty()] before it looks 
-for the getter methods code[Java][getMyProperty()]. If none of these members can be found, the expression is unbound and a compiliation error is indicated.
+for the getter methods code[Java][getMyProperty()]. If none of these members can be found, the expression is unbound and a compilation error is indicated.
 
 section4:Xbase_Expressions_NullSafeFeatureCalls[Null-Safe Feature Call]
 
@@ -360,7 +360,7 @@ code[Xbase][
   myList.findFirst\[ name==null \]
 ]
 
-Another usecase for lambda expressions is to store function objects in variables:
+Another use case for lambda expressions is to store function objects in variables:
 
 code[Xbase][
   val func = \[ String s | s.length>3 \]
@@ -534,7 +534,7 @@ the type guard works like an automated cast. All subsequent references to the sw
 section4[Typing]
 
 The return type of a switch expression is computed using the rules defined in the
-section on ref:Xbase_Types_CommonSuperType[common supertypes]. The set of types from which the common 
+section on ref:Xbase_Types_CommonSuperType[common super types]. The set of types from which the common 
 super type is computed corresponds to the types of each case's result expression. If a switch expression's
 type is computed using the expected type from the context, it is sufficient to return the expected type if all 
 case branches types conform to the expected type.
@@ -636,7 +636,7 @@ section3:Xbase_Expressions_ForLoop[For Loop]
 
 The for loop code[Xbase][for (T1 variable : iterableOfT1) expression] is used to execute a certain expression for each element of an
 array of an instance of codeRef[java.lang.Iterable].
-The local code[variable] is final, hence canot be updated. 
+The local code[variable] is final, hence cannot be updated. 
 
 The return type of a for loop is code[Xbase][void].
 The type of the local variable can be left out. In that case it is inferred from the type of the array
@@ -727,7 +727,7 @@ code[Xbase][
 section3:Xbase_Expressions_TryCatch[Try, Catch, Finally]
 
 The try-catch-finally expression is used to handle exceptional situations.
-You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are rethrown in a way the compiler
+You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are thrown in a way the compiler
 does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
 link[http://projectlombok.org/features/SneakyThrows.html][Lombok].
 The syntax again is the same known from Java.

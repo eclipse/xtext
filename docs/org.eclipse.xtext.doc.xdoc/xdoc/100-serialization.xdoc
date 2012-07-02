@@ -22,7 +22,7 @@ ol[
 Serialization is invoked when calling 
 codeRef[org.eclipse.xtext.resource.XtextResource][XtextResource.save(..)]. Furthermore, the
 codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer] provides resource-independent 
-support for serialization. Another situation that triggers serialization is applying ref:quickfixes[Quick Fixes] 
+support for serialization. Another situation that triggers serialization is applying ref:quickfixes[quick fixes] 
 with semantic modifications. Serialization is e[not] called when a textual editors contents is saved to disk.
 
 section2:serializationcontract[The Contract]
@@ -101,7 +101,7 @@ ul[
     element must be identical to the return type of the grammar rule or the action's type. 
     Subtypes are not allowed.]
   item[ref:valueconverter[Value conversion] fails. The value converter can indicate that a value 
-    is not serializeable by throwing a codeRef[org.eclipse.xtext.conversion.ValueConverterException].]
+    is not serializable by throwing a codeRef[org.eclipse.xtext.conversion.ValueConverterException].]
   item[An enum literal is not allowed at this position. This can happen if the referenced enum 
     rule only lists a subset of the literals of the actual enumeration.]
 ]

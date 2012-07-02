@@ -17,7 +17,7 @@ language link[http://www.xtend-lang.org][Xtend], where extension methods are lex
 imports and/or dependency injection.
 
 The precedence of extension methods is always lower than real member methods, i.e. you cannot override
-member features. Also the extension members are not invoked polymorphicly. If you have two extension methods
+member features. Also the extension members are not invoked polymorphic. If you have two extension methods
 on the scope (code[foo(Object)] and code[foo(String)]) the expression code[Xbase][(foo as Object).foo] would
 bind and invoke code[foo(Object)].
 

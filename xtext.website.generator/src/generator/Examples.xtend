@@ -1,18 +1,18 @@
 package generator
 
-import com.google.inject.Inject
 import bootstrap.Body
-import org.eclipse.xtext.xdoc.XdocStandaloneSetup
-import com.google.inject.Module
-import com.google.inject.Binder
-import org.eclipse.xtext.xdoc.XdocRuntimeModule
-import com.google.inject.Guice
-import org.eclipse.xtext.xdoc.xdoc.Chapter
-import bootstrap.XdocExtensions
 import bootstrap.HtmlExtensions
+import bootstrap.XdocExtensions
+import com.google.inject.Binder
+import com.google.inject.Guice
+import com.google.inject.Inject
+import com.google.inject.Module
+import org.eclipse.xtext.xdoc.XdocRuntimeModule
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 
-class Examples extends Documentation {
-	
+class Examples extends MultiPageDocumentation {
+	/*
 	@Inject extension Body
 	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
@@ -64,7 +64,7 @@ class Examples extends Documentation {
 			<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				«FOR chapter: document.allChapters»
-					<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a></li>
+					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a></li>
 				«ENDFOR»
 			</ul>
 		</li>
@@ -104,9 +104,9 @@ class ExamplesBody extends DocumentationBody {
 	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
 	
-	override h1(Chapter chapter) '''
+	override h1(AbstractSection chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span10 offset1">
 					<h1>
@@ -123,5 +123,5 @@ class ExamplesBody extends DocumentationBody {
 			</div>
 		</section>
 	'''
-	
+*/	
 }

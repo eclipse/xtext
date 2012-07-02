@@ -55,15 +55,14 @@ abstract class AbstractWebsite implements Resource {
 		</body>
 		</html>
 	'''
+	
 	def websiteDescription() { 
 		'The website of Eclipse Xtext, an open-source framework for development of programming langauges and domain-specific languages'
 	}
 
-	
 	def websiteTitle() {
 		'Xtext - Language Development Made Easy!'
 	}
-
 	
 	def javaScriptDocumentStart() '''
 		<script src="js/twitter.js" type="text/javascript"></script>
@@ -196,7 +195,7 @@ abstract class AbstractWebsite implements Resource {
 							</ul>
 						</div>
 						<div class="span6">
-							<h3><a href="https://twitter.com/#!/xtext" style="color: white;">«twitterID.toFirstUpper»</a> on Twitter</h3>
+							<h3><a href="https://twitter.com/#!/«twitterID»" style="color: white;">«twitterID.toFirstUpper»</a> on Twitter</h3>
 							<br />
 							<div id="tweet">
 								<p>Please wait while my tweets load</p>

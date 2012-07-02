@@ -7,13 +7,14 @@ import static extension generator.Generator.*
 class Generator {
 	
 	def static void main(String[] args) {
+		System::setProperty("java.awt.headless", "true")
 		// clean dir
 		val out = new File("website")
 		out.generateFiles(
 			new Index,
 			new Download, 
-			new Examples, 
-			new Documentation, 
+//			new Examples, 
+			new MultiPageDocumentation, 
 			new Community 
 		)
 		println("Done.")

@@ -12,6 +12,7 @@ Workflow {
 		targetDir = targetDir
 		document = "Xtext 2.3 Documentation"
 		pdfLatex = "/usr/texbin/pdflatex"
+		release = true
 		// cleanAfterRun = false
 	}
 
