@@ -195,4 +195,33 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Iterable<? super T>", "T, V extends T");
     this.isAssignableFrom(_mappedTo_1, "Iterable<? super V>");
   }
+  
+  @Test
+  public void testFunctionTypes_01() {
+    this.isAssignableFrom("(String)=>void", "(CharSequence)=>void");
+    this.isAssignableFrom("(String)=>void", "(CharSequence)=>void");
+    this.isAssignableFrom("(CharSequence)=>void", "(String)=>void");
+  }
+  
+  @Test
+  public void testFunctionTypes_02() {
+    this.isAssignableFrom("(String)=>String", "(CharSequence)=>String");
+    this.isAssignableFrom("(String)=>String", "(CharSequence)=>String");
+    this.isAssignableFrom("(CharSequence)=>String", "(String)=>String");
+  }
+  
+  @Test
+  public void testFunctionTypes_03() {
+    this.isAssignableFrom("(String)=>CharSequence", "(CharSequence)=>String");
+    this.isAssignableFrom("(String)=>CharSequence", "(CharSequence)=>String");
+    this.isAssignableFrom("(CharSequence)=>CharSequence", "(String)=>String");
+  }
+  
+  @Test
+  public void testFunctionTypes_08() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_1, "(int)=>int");
+  }
 }
