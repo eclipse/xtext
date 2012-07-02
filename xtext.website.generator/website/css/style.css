@@ -889,3 +889,16 @@ section {
 	padding-top: 100px;
 	margin-top: -100px;
 }
+
+.language-card {
+	margin : 3px;
+}
+.language-card table {
+	border : 1px solid #A11;
+}
+.language-card td {
+	padding-right: 4px;
+}
+.language-icon {
+	max-width : 140px;
+}

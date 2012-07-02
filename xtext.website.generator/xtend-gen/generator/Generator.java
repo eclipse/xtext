@@ -6,6 +6,7 @@ import generator.Download;
 import generator.ExamplesResource;
 import generator.Index;
 import generator.Resource;
+import generator.SevenLanguages;
 import java.io.File;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
@@ -19,8 +20,9 @@ public class Generator {
     Download _download = new Download();
     ExamplesResource _examplesResource = new ExamplesResource();
     Documentation _documentation = new Documentation();
+    SevenLanguages _sevenLanguages = new SevenLanguages();
     Community _community = new Community();
-    Generator.generateFiles(out, _index, _download, _examplesResource, _documentation, _community);
+    Generator.generateFiles(out, _index, _download, _examplesResource, _documentation, _sevenLanguages, _community);
     InputOutput.<String>println("Done.");
   }
   
