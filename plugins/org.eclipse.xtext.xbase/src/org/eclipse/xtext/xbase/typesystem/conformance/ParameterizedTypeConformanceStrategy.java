@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -104,8 +103,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	
 	@Override
 	protected TypeConformanceResult doVisitFunctionTypeReference(TypeReference left, FunctionTypeReference right,
-			Internal<TypeReference> param) {
-		throw new UnsupportedOperationException("Implement me");
+			TypeConformanceComputationArgument.Internal<TypeReference> param) {
+		return super.doVisitFunctionTypeReference(left, right, param);
 	}
 	
 	@Override
