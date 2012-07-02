@@ -9,28 +9,22 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
-import org.junit.After
-import org.eclipse.emf.ecore.resource.ResourceSet
 
 /**
  * @author Sebastian Zarnekow
  */
-class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implements TypeReferenceOwner {
+class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 
 	@Inject
 	extension IXtendJvmAssociations
@@ -38,13 +32,6 @@ class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implements TypeR
 	@Inject
 	BoundTypeArgumentMerger merger
 	
-	@Inject
-	CommonTypeComputationServices services
-	
-	ResourceSet contextResourceSet
-	
-	extension OwnedConverter = new OwnedConverter(this)
-
 	def merge(Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
 		mergeWithSource(null, mergeUs)
 	}
@@ -73,33 +60,6 @@ class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implements TypeR
 	
 	def operator_mappedTo(Pair<String, VarianceInfo> pair, VarianceInfo third) {
 		Tuples::create(pair.key, pair.value, third)
-	}
-	
-	override protected function(String string) throws Exception {
-		val result = super.function(string)
-		contextResourceSet = result.eResource.resourceSet
-		return result
-	}
-	
-	@After
-	def void tearDown() {
-		contextResourceSet = null
-	}
-	
-	override getContextResourceSet() {
-		return contextResourceSet
-	}
-	
-	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getAllHints(Object handle) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getServices() {
-		services
 	}
 	
 	@Test def void testNothingToMerge_01() {
