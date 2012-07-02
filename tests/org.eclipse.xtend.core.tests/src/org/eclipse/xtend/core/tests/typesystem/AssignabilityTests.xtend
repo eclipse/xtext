@@ -400,6 +400,44 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		("T"->"T").isNotAssignableFrom("int")
 	}
 	
+	@Test
+	def void testFunctionTypes_01()
+	
+	@Test
+	def void testFunctionTypes_02()
+	
+	@Test
+	def void testFunctionTypes_03()
+
+	@Test
+	def void testFunctionTypes_04() {
+		"(String)=>CharSequence".isNotAssignableFrom("()=>String")
+		"()=>CharSequence".isNotAssignableFrom("(CharSequence)=>String")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("(String, CharSequence)=>String")
+	}
+	
+	@Test
+	def void testFunctionTypes_05() {
+		"(int, int)=>boolean".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("(int, int)=>boolean")
+	}
+	
+	@Test
+	def void testFunctionTypes_06() {
+		"(int, int)=>boolean".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("(int, int)=>boolean")
+	}
+	
+	@Test
+	def void testFunctionTypes_07() {
+		("(T)=>void"->"T extends Integer").isAssignableFrom("(Integer)=>void")
+		("(T)=>int"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("(T)=>void"->"T extends Integer").isAssignableFrom("(int)=>void")
+		("(T)=>Integer"->"T extends Integer").isAssignableFrom("(int)=>int")
+	}
+	
+	@Test
+	def void testFunctionTypes_08()
 }
 
 /**
@@ -578,6 +616,33 @@ class AssignabilityTest extends AbstractAssignabilityTest {
 		("Iterable<? super V>"->"T, V extends T").isAssignableFrom("Iterable<? super T>")
 		("Iterable<? super T>"->"T, V extends T").isNotAssignableFrom("Iterable<? super V>")
 	}
+	
+	@Test
+	override testFunctionTypes_01() {
+		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(CharSequence)=>void".isNotAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testFunctionTypes_02() {
+		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(CharSequence)=>String".isNotAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypes_03() {
+		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypes_08() {
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("(int)=>int")
+	}
 }
 
 /**
@@ -754,6 +819,33 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 	override testTwoTypeParameters_03() {
 		("Iterable<? super V>"->"T, V extends T").isAssignableFrom("Iterable<? super T>")
 		("Iterable<? super T>"->"T, V extends T").isAssignableFrom("Iterable<? super V>")
+	}
+	
+	@Test
+	override testFunctionTypes_01() {
+		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(CharSequence)=>void".isAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testFunctionTypes_02() {
+		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(CharSequence)=>String".isAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypes_03() {
+		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
+		"(CharSequence)=>CharSequence".isAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypes_08() {
+		("(T)=>T"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("(T)=>T"->"T extends Integer").isAssignableFrom("(int)=>int")
 	}
 }
 
