@@ -92,6 +92,9 @@ abstract class AbstractSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testTypeParameters()
 	
 	@Test
+	def void testTypeParameterArray()
+	
+	@Test
 	def void testDependentTypeParameters()
 	
 	@Test
@@ -165,6 +168,10 @@ class SuperTypeTest extends AbstractSuperTypeTest {
 	
 	override testTypeParameters() {
 		("T"->"T extends CharSequence").assertSuperTypes("CharSequence")
+	}
+	
+	override testTypeParameterArray() {
+		("T"->"T extends CharSequence[]").assertSuperTypes("CharSequence[]")
 	}
 	
 	override testDependentTypeParameters() {
@@ -251,6 +258,11 @@ class AllSuperTypeTest extends AbstractSuperTypeTest {
 	override testDependentTypeParametersWithBounds() {
 		("T"->"V extends CharSequence, T extends V").assertSuperTypes("V", "CharSequence", "Object")
 	}
+
+	override testTypeParameterArray() {
+		("T"->"T extends Object[]").assertSuperTypes("Object[]", "Cloneable", "Serializable", "Object")
+	}
+	
 }
 
 /* 
