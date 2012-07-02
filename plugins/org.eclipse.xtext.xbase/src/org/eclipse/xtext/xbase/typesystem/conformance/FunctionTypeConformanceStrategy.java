@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 /**
@@ -31,8 +34,41 @@ public class FunctionTypeConformanceStrategy extends
 	
 	@Override
 	protected TypeConformanceResult doVisitFunctionTypeReference(FunctionTypeReference left, FunctionTypeReference right,
-			Internal<FunctionTypeReference> param) {
-		throw new UnsupportedOperationException("Implement me");
+			TypeConformanceComputationArgument.Internal<FunctionTypeReference> param) {
+		List<LightweightTypeReference> leftParameterTypes = left.getParameterTypes();
+		List<LightweightTypeReference> rightParameterTypes = right.getParameterTypes();
+		if (leftParameterTypes.size() != rightParameterTypes.size()) {
+			return TypeConformanceResult.FAILED;
+		}
+		LightweightTypeReference leftReturnType = left.getReturnType();
+		LightweightTypeReference rightReturnType = right.getReturnType();
+		boolean leftIsVoid = leftReturnType != null && leftReturnType.isPrimitiveVoid();
+		boolean rightIsVoid = rightReturnType != null && rightReturnType.isPrimitiveVoid();
+		if (leftIsVoid) {
+			if (rightIsVoid) {
+				if (param.rawType)
+					return TypeConformanceResult.SUCCESS;
+			} else {
+				return TypeConformanceResult.FAILED;
+			}
+		} else if (rightIsVoid) {
+			return TypeConformanceResult.FAILED;
+		} else if (param.rawType) {
+			return TypeConformanceResult.SUCCESS;
+		}
+		if (param.rawType) {
+			throw new IllegalStateException("rawTypeComputation should have exited earlier");
+		}
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true);
+		if (!conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
+			return TypeConformanceResult.FAILED;
+		}
+		for(int i = 0; i < leftParameterTypes.size(); i++) {
+			if (!conformanceComputer.isConformant(rightParameterTypes.get(i), leftParameterTypes.get(i), argument).isConformant()) {
+				return TypeConformanceResult.FAILED;
+			} 
+		}
+		return TypeConformanceResult.SUCCESS;
 	}
 
 }
