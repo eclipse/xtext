@@ -51,9 +51,12 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (leftReference.getType() == rightReference.getType()) {
-			if (leftReference.isRawType() || rightReference.isRawType() || leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
+			if (param.rawType || leftReference.isRawType() || rightReference.isRawType() || leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
 				return TypeConformanceResult.SUCCESS;
 			return areArgumentsConformant(leftReference, rightReference);
+		}
+		if (leftReference.isType(Void.TYPE) || rightReference.isType(Void.TYPE)) {
+			return TypeConformanceResult.FAILED;
 		}
 		if (param.allowPrimitiveConversion) {
 			if (leftReference.isPrimitive()) {
@@ -69,7 +72,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				} else {
 					LightweightTypeReference primitive = rightReference.getPrimitiveIfWrapperType();
 					if (primitive.isPrimitive()) {
-						if (isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
+						JvmPrimitiveType rightPrimitiveType = (JvmPrimitiveType) primitive.getType();
+						if (rightPrimitiveType != null && (rightPrimitiveType == leftType || isWideningConversion(primitives, leftType, rightPrimitiveType))) {
 							return new TypeConformanceResult(TypeConformanceResult.Kind.UNBOXING);
 						}
 						return TypeConformanceResult.FAILED;

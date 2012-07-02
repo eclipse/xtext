@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -24,8 +23,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
@@ -120,7 +117,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
 						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						result.add(substitutor.substitute(lightweightSuperType));
+						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1)
+							result.add(substitutor.substitute(lightweightSuperType));
 					}
 					return result;
 				} else {
@@ -128,7 +126,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 					for(JvmTypeReference superType: superTypes) {
 						LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
-						result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
+						if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1)
+							result.add(substitutor.substitute(lightweightSuperType).getRawTypeReference());
 					}
 					return result;
 				}
