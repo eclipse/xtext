@@ -69,13 +69,13 @@
 			<include name="org.eclipse.jdt.core_*.jar" />
 			<!-- Xtext bundles -->
 			<include name="org.antlr.runtime_3.2.0*.jar" />
-			<include name="org.eclipse.xtend.core_2.3*.jar" />
-			<include name="org.eclipse.xtend.lib_2.3*.jar" />
-			<include name="org.eclipse.xtext.common.types_2.3*.jar" />
-			<include name="org.eclipse.xtext.util_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase.lib_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase_2.3*.jar" />
-			<include name="org.eclipse.xtext_2.3*.jar" />
+			<include name="org.eclipse.xtend.core_2.4*.jar" />
+			<include name="org.eclipse.xtend.lib_2.4*.jar" />
+			<include name="org.eclipse.xtext.common.types_2.4*.jar" />
+			<include name="org.eclipse.xtext.util_2.4*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib_2.4*.jar" />
+			<include name="org.eclipse.xtext.xbase_2.4*.jar" />
+			<include name="org.eclipse.xtext_2.4*.jar" />
 		</fileset>
 
 		<unzip dest="${binJarTemp}">
@@ -105,13 +105,13 @@
 			<include name="org.eclipse.jdt.core.source_*.jar" />
 			<!-- Xtext bundles -->
 			<include name="org.antlr.runtime.source_3.2.0*.jar" />
-			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
-			<include name="org.eclipse.xtend.lib.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.util.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase.lib.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase.source_2.3*.jar" />
+			<include name="org.eclipse.xtend.core.source_2.4*.jar" />
+			<include name="org.eclipse.xtend.lib.source_2.4*.jar" />
+			<include name="org.eclipse.xtext.common.types.source_2.4*.jar" />
+			<include name="org.eclipse.xtext.source_2.4*.jar" />
+			<include name="org.eclipse.xtext.util.source_2.4*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib.source_2.4*.jar" />
+			<include name="org.eclipse.xtext.xbase.source_2.4*.jar" />
 		</fileset>
 
 		<unzip dest="${sourceJarTemp}" overwrite="true">
