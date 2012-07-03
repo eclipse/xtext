@@ -1,13 +1,14 @@
 package bootstrap;
 
 import bootstrap.HtmlExtensions;
+import bootstrap.TargetPaths;
 import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
-import org.eclipse.xtext.xdoc.xdoc.Chapter;
-import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 
 @SuppressWarnings("all")
@@ -18,16 +19,26 @@ public class Body {
   @Inject
   private HtmlExtensions _htmlExtensions;
   
-  public CharSequence body(final Document document) {
+  @Inject
+  private TargetPaths _targetPaths;
+  
+  public CharSequence body(final AbstractSection rootSection) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"maincontainer\" class=\"container\">");
     _builder.newLine();
     {
-      EList<Chapter> _chapters = document.getChapters();
-      for(final Chapter chapter : _chapters) {
+      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(rootSection);
+      final Function1<AbstractSection,Boolean> _function = new Function1<AbstractSection,Boolean>() {
+          public Boolean apply(final AbstractSection it) {
+            boolean _isTargetRootElement = Body.this._targetPaths.isTargetRootElement(it);
+            boolean _not = (!_isTargetRootElement);
+            return Boolean.valueOf(_not);
+          }
+        };
+      Iterable<? extends AbstractSection> _filter = IterableExtensions.filter(_sections, _function);
+      for(final AbstractSection chapter : _filter) {
         _builder.append("\t");
-        AbstractSection _resolve = this._xdocExtensions.resolve(chapter);
-        CharSequence _h1 = this.h1(((Chapter) _resolve));
+        CharSequence _h1 = this.h1(chapter);
         _builder.append(_h1, "	");
         _builder.newLineIfNotEmpty();
       }
@@ -37,56 +48,54 @@ public class Body {
     return _builder;
   }
   
-  public CharSequence h1(final Chapter chapter) {
+  public CharSequence h1(final AbstractSection section) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- chapter -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(chapter);
-    _builder.append(_href, "");
-    _builder.append("\">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("<div class=\"page-header\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<h1>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    TextOrMarkup _title = chapter.getTitle();
-    CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "		");
+    String _hrefId = this._htmlExtensions.hrefId(section);
+    _builder.append(_hrefId, "");
+    _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("</h1>");
-    _builder.newLine();
-    _builder.append("</div>");
-    _builder.newLine();
     _builder.append("<div class=\"row\">");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<div class=\"span9 offset2\">");
+    _builder.append("\t\t");
+    _builder.append("<div class=\"span8 offset3\">");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<h1>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    TextOrMarkup _title = section.getTitle();
+    CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+    _builder.append(_htmlText, "				");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("</h1>");
     _builder.newLine();
     {
-      EList<TextOrMarkup> _contents = chapter.getContents();
+      EList<TextOrMarkup> _contents = section.getContents();
       for(final TextOrMarkup content : _contents) {
-        _builder.append("\t\t");
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
-        _builder.append(_html_1, "		");
+        _builder.append("\t\t\t");
+        CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
+        _builder.append(_htmlParagraph, "			");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(chapter);
-      for(final AbstractSection section : _sections) {
-        _builder.append("\t\t");
-        CharSequence _h2 = this.h2(section);
-        _builder.append(_h2, "		");
+      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
+      for(final AbstractSection subSection : _sections) {
+        _builder.append("\t\t\t");
+        CharSequence _h2 = this.h2(subSection);
+        _builder.append(_h2, "			");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("\t");
+    _builder.append("\t\t");
     _builder.append("</div>");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</div>");
     _builder.newLine();
     _builder.append("</section>");
@@ -99,21 +108,21 @@ public class Body {
     _builder.append("<!--  section -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(section);
-    _builder.append(_href, "");
-    _builder.append("\">");
+    String _hrefId = this._htmlExtensions.hrefId(section);
+    _builder.append(_hrefId, "");
+    _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("<h2>");
     TextOrMarkup _title = section.getTitle();
-    CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "");
+    CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+    _builder.append(_htmlText, "");
     _builder.append("</h2>");
     _builder.newLineIfNotEmpty();
     {
       EList<TextOrMarkup> _contents = section.getContents();
       for(final TextOrMarkup content : _contents) {
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
-        _builder.append(_html_1, "");
+        CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
+        _builder.append(_htmlParagraph, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -135,16 +144,16 @@ public class Body {
     _builder.append("<!-- subsection -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(section);
-    _builder.append(_href, "");
-    _builder.append("\">");
+    String _hrefId = this._htmlExtensions.hrefId(section);
+    _builder.append(_hrefId, "");
+    _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("<h");
     _builder.append(hLevel, "");
     _builder.append(">");
     TextOrMarkup _title = section.getTitle();
-    CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "");
+    CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+    _builder.append(_htmlText, "");
     _builder.append("</h");
     _builder.append(hLevel, "");
     _builder.append(">");
@@ -152,8 +161,8 @@ public class Body {
     {
       EList<TextOrMarkup> _contents = section.getContents();
       for(final TextOrMarkup content : _contents) {
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
-        _builder.append(_html_1, "");
+        CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
+        _builder.append(_htmlParagraph, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -166,6 +175,8 @@ public class Body {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("</section>");
+    _builder.newLine();
     return _builder;
   }
 }

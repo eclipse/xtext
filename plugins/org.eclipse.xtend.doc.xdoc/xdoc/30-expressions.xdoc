@@ -28,7 +28,7 @@ section2:stringLiterals[String Literals]
 A string literal is of type codeRef[java.lang.String] (just like in Java).
 String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
-least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
+least likely occur in the actual string. Special characters can be quoted with a backslash or defined using
 Java's unicode notation. Contrary to Java, strings can span multiple lines.
 
 %% TODO '\u00a1Hola el mundo!' Highlighting for unicode escape sequences
@@ -118,7 +118,7 @@ section:operators[Infix Operators and Operator Overloading]
 There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature. As an example, the 
-ref:library[Xtend runtime library] contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
+runtime library contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
 codeRef[java.math.BigDecimal][BigDecimals] which allows the following code:
 code[Xtend][
   val x = 2.71BD
@@ -486,8 +486,8 @@ code[Xtend][
   \]
 ]
 
-A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
-in the closure's expression. That is exactly what we did with the variable code[textField].
+A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to. 
+That is exactly what we did with the variable code[textField] above.
 
 section2:closureTypes[Typing]
 
@@ -518,7 +518,7 @@ code[Xtend][
   val stringToStringFunction2 = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
 ]
 
-Checked exceptions that are thrown in the body of a closure but not declared in the implemented method of the target type are rethrown using the 
+Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the 
 ref:declaredExceptions[sneaky-throw technique].
 Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
 
@@ -611,7 +611,7 @@ code[Xtend][
   for (T1 variable : arrayOrIterable) expression
 ] 
 is used to execute a certain expression for each element of an array or an instance of 
-codeRef[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
+codeRef[java.lang.Iterable]. The local code[variable] is final, hence cannot be updated. 
 
 The return type of a for loop is code[Xtend][void]. The type of the local variable can be left out. 
 In that case it is inferred from the type of the array or code[java.lang.Iterable] returned by the 
@@ -712,7 +712,7 @@ section:Xtend_Expressions_TryCatch[Try, Catch, Finally]
 
 The try-catch-finally expression is used to handle exceptional situations.
 Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
-will be silently rethrown (see the ref:declaredExceptions[section on declared exceptions]). The syntax 
+will be silently thrown (see the ref:declaredExceptions[section on declared exceptions]). The syntax 
 again is like Java.
 
 code[Xtend][
@@ -742,10 +742,10 @@ section:templates[Template Expressions]
 
 Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (code[''']). 
 A template expression can span multiple lines and expressions can be nested which are evaluated and their code[toString()] 
-representation is automatcially inserted at that position.
+representation is automatically inserted at that position.
 
 The terminals for interpolated expression are so called guillemets code[Xtend][«expression»]. They read nicely and are not often used
-in text so you seldomly need to escape them. These escaping conflicts are the reason why
+in text so you seldom need to escape them. These escaping conflicts are the reason why
 template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP, for the price of worse readability. 
 The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 

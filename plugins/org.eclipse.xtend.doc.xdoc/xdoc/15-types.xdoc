@@ -1,8 +1,8 @@
-chapter:types[Static Typing and Java Interoperability]
+chapter:types[Java Interoperability]
 
 Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types 
 as code[Xtend][int] or code[Xtend][boolean], arrays and of course all classes, interfaces, enums and annotations that reside on the 
-classpath.  
+class path.  
 
 Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
 generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as

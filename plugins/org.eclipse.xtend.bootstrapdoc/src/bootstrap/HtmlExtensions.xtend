@@ -1,9 +1,12 @@
 package bootstrap
 
+import com.google.inject.Inject
 import java.util.List
 import java.util.Map
+import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xdoc.xdoc.Anchor
+import org.eclipse.xtext.xdoc.xdoc.ChapterRef
 import org.eclipse.xtext.xdoc.xdoc.Code
 import org.eclipse.xtext.xdoc.xdoc.CodeBlock
 import org.eclipse.xtext.xdoc.xdoc.CodeRef
@@ -14,6 +17,8 @@ import org.eclipse.xtext.xdoc.xdoc.Item
 import org.eclipse.xtext.xdoc.xdoc.Link
 import org.eclipse.xtext.xdoc.xdoc.OrderedList
 import org.eclipse.xtext.xdoc.xdoc.Ref
+import org.eclipse.xtext.xdoc.xdoc.Section2Ref
+import org.eclipse.xtext.xdoc.xdoc.SectionRef
 import org.eclipse.xtext.xdoc.xdoc.Table
 import org.eclipse.xtext.xdoc.xdoc.TableData
 import org.eclipse.xtext.xdoc.xdoc.TableRow
@@ -22,132 +27,191 @@ import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 
-import static bootstrap.HtmlExtensions.*
+import static bootstrap.ParagraphState.*
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 import org.eclipse.xtext.xdoc.xdoc.XdocPackage
+
+class ArtificialIds extends AdapterImpl {
+	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
+}
 
 class HtmlExtensions {
 	
-	static val JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/"
-	
-	Map<Identifiable, String> artificialHrefs = newHashMap()
+	@Inject extension CodeRefs
+	@Inject extension ImageExtensions
+	@Inject extension TargetPaths
 
 	def href(Identifiable it) {
+		targetPath + "#" + hrefId
+	}
+
+	def hrefId(Identifiable id) {
+		val it = switch id {
+			ChapterRef : id.chapter
+			SectionRef : id.section
+			Section2Ref : id.section2
+			default : id
+		}
 		if(name != null) { 
 			name 
-		} else if(artificialHrefs.containsKey(it)) {
-			artificialHrefs.get(it)
+		} else if(artificialHrefIds.containsKey(it)) {
+			artificialHrefIds.get(it)
 		} else {
-			val newHref = it.eClass.name + '_' + artificialHrefs.size()
-			artificialHrefs.put(it, newHref)
+			val newHref = '_'+artificialHrefIds.size()
+			artificialHrefIds.put(it, newHref)
 			newHref
 		}  
 	}
 	
+	def protected artificialHrefIds(Identifiable id) {
+		val adapters = id.eResource.resourceSet.eAdapters
+		val adapter = adapters.filter(typeof(ArtificialIds)).head 
+						?: (new ArtificialIds => [
+							adapters.add(it)
+						])
+		return adapter.artificialHrefs
+	}
 	
-	def dispatch CharSequence toHtml(TextOrMarkup it) '''
-		«IF isParagraph»
-			<p>
-		«ENDIF»
-			«contents.toHtml»
-		«IF isParagraph»
-			</p>
-		«ENDIF»
-	'''
 	
-	def private isParagraph(TextOrMarkup it) {
-		switch eContainingFeature {
-			case XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS : true
-			default : false
+	def protected dispatch CharSequence toHtml(TextOrMarkup it, ParagraphState state) {
+		val innerState = if (state == NONE) IN_PARAGRAPH else state  
+		val contentsToHtml = contents.toHtml(innerState).toString.trim
+		if(!contentsToHtml.nullOrEmpty) {
+			if(state == NONE) {
+				val result = '''
+					<p>
+						«contentsToHtml»
+					</p>
+				'''
+				result
+			} else {
+				contentsToHtml
+			}
+		} else {
+			''
 		}
+		
+	}
+	
+	def toHtmlText(Object element) {
+		toHtml(element, IN_PARAGRAPH)
 	}
 
-	def dispatch CharSequence toHtml(List<EObject> it) {
-		map[toHtml].join
+	def toHtmlParagraph(Object element) {
+		toHtml(element, NONE)
 	}
 
-	def dispatch toHtml(TextPart it) '''
-		«text.quote»
-	'''
-	
-	def dispatch toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
+	def protected dispatch CharSequence toHtml(List<EObject> it, ParagraphState state) {
+		map[toHtml(state)].join
+	}
 
-	def dispatch toHtml(Anchor it) '''
-		<a name="«name.quote»"/>
+	def protected dispatch CharSequence toHtml(TextPart it, ParagraphState state) '''«text.quote»'''
+	
+	def protected dispatch CharSequence toHtml(Emphasize it, ParagraphState state) '''<strong>«contents.toHtml(state)»</strong>'''
+
+	def protected dispatch CharSequence toHtml(Anchor it, ParagraphState state) '''
+		<a name="«name.quote»"></a>
 	'''
 	
-	def dispatch toHtml(Ref it) '''<a href="#«ref.href»">«contents.toHtml»</a>'''
+	def protected dispatch CharSequence toHtml(Ref it, ParagraphState state) '''<a href="«ref.href»">«contents.toHtml(state)»</a>'''
 	
-	def dispatch toHtml(OrderedList it) '''
-		<ol>
-			«FOR item:items»
-				«item.toHtml»
-			«ENDFOR»
-		</ol>
+	def protected dispatch CharSequence toHtml(OrderedList it, ParagraphState state) { '''
+			<ol>
+				«FOR item:items»
+					«item.toHtml(state)»
+				«ENDFOR»
+			</ol>
+		'''.insert(state)
+	}
+	
+	def protected dispatch CharSequence toHtml(Item it, ParagraphState state) '''
+		<li>«contents.toHtml(IN_LISTITEM)»</li>
 	'''
 	
-	def dispatch toHtml(Item it) '''
-		<li>«contents.toHtml»</li>
-	'''
+	def protected dispatch CharSequence toHtml(UnorderedList it, ParagraphState state) { '''
+			<ul>
+				«FOR item:items»
+					«item.toHtml(state)»
+				«ENDFOR»
+			</ul>
+		'''.insert(state)
+	}
 	
-	def dispatch toHtml(UnorderedList it) '''
-		<ul>
-			«FOR item:items»
-				«item.toHtml»
-			«ENDFOR»
-		</ul>
-	'''
+	def protected dispatch CharSequence toHtml(ImageRef it, ParagraphState state) {
+		val dimension = it.dimension
+		val caption = it.caption?.trim
+		'''
+			<div class="thumbnail">
+				<img src="«path»" alt="«caption»" «IF dimension!=null»width="«dimension.width»" height="«dimension.height»"«ENDIF»>
+			</div>
+		'''.insert(state)
+	}
 	
-	def dispatch toHtml(ImageRef it) '''
-		<div class="thumbnail">
-			<img src="«path»" alt="«name»">
-		</div>
-	'''
-	
-	def dispatch toHtml(Todo it) {
+	def protected dispatch CharSequence toHtml(Todo it, ParagraphState state) {
 		println("TODO: " + text)
 		return ""
 	}
 	
-	def dispatch CharSequence toHtml(CodeRef it) '''
-		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">«
-		IF altText != null»«altText»«
-		ELSE»<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>«
-		ENDIF»</a>
-	'''
+	def protected dispatch CharSequence toHtml(CodeRef it, ParagraphState state) {
+		val sourceCodeURI = element?.sourceCodeURI
+		val javaDocURI = element?.javaDocURI
+		'''
+		«IF javaDocURI != null
+			»<a href="«javaDocURI»">«
+		ENDIF»«
+		IF altText != null
+			»«altText.toHtml(state)»«
+		ELSE
+			»<abbr title="«element?.identifier»">«element?.simpleName?.trim»</abbr>«
+		ENDIF»«
+		IF javaDocURI != null 
+			»</a>«
+		ENDIF»«
+		IF sourceCodeURI!=null
+			» <a href="«sourceCodeURI»">(src)</a>«
+		ENDIF»'''
+	}
 	
-	def dispatch toHtml(Code it) {
+	def protected dispatch CharSequence toHtml(Code it, ParagraphState state) {
 		contents.quote
 	}
 	
-	def dispatch toHtml(CodeBlock it) {
-		val code = contents.toHtml.toString
-		if (code.contains('\n') && !code.contains('\r')) {
+	def protected dispatch CharSequence toHtml(CodeBlock it, ParagraphState state) {
+		val code = contents.toHtml(state).toString
+		if (code.contains('\n') || eContainer?.eContainingFeature == XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS && switch eContainer {
+			TextOrMarkup: 
+				(eContainer as TextOrMarkup).contents.size == 1
+			default: false
+		}) {
 			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>'''
+			«code.trimCode»«markCodeEnd»</pre>'''.insert(state)
 		} else {
 			'''<code class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'»">«code.trimCode»</code>'''
 		}
 	}
 	
-	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
+	def protected dispatch CharSequence toHtml(Link it, ParagraphState state) '''<a href="«url»">«text»</a>'''
 
-	def dispatch toHtml(Table it) '''
-		<table class="table table-bordered table-condensed">
-		«FOR row:rows»
-			«row.toHtml»
-		«ENDFOR»
-		</table>
+	def protected dispatch CharSequence toHtml(Table it, ParagraphState state) { '''
+			<table class="table table-bordered table-condensed">
+			«FOR row:rows»
+				«row.toHtml(state)»
+			«ENDFOR»
+			</table>
+		'''.insert(state)
+	}
+	
+	def protected dispatch CharSequence toHtml(TableRow it, ParagraphState state) '''
+		<tr>«data.toHtml(state)»</tr>
 	'''
 	
-	def dispatch toHtml(TableRow it) '''
-		<tr>«data.toHtml»</tr>
+	def protected dispatch CharSequence toHtml(TableData it, ParagraphState state) '''
+		<td>«contents.toHtml(state)»</td>
 	'''
 	
-	def dispatch toHtml(TableData it) '''
-		<td>«contents.toHtml»</td>
-	'''
-	
-	def dispatch toHtml(EObject it) {
+	def protected dispatch CharSequence toHtml(EObject it, ParagraphState state) {
 		println("Missing toHtml for " + eClass.name)
 		""
 	}
@@ -159,7 +223,17 @@ class HtmlExtensions {
 		'###xdoc code end###'
 	}	
 	
+	def protected insert(CharSequence content, ParagraphState state) {
+		if(state == IN_PARAGRAPH) '''
+			</p>
+			«content»
+			<p>
+		''' else content
+	}
+	
 	def protected trimCode(String it) {
+		if(nullOrEmpty) 
+			return ''
 		var start = 0
 		while(start < length()-1 && (substring(start, start+1) == ' ' || substring(start,start+1) == '\t'))
 			start = start + 1;
@@ -172,10 +246,11 @@ class HtmlExtensions {
 	}
 	
 	def protected quote(CharSequence it) {
-		toString.replace('<', '&lt;').replace('>', '&gt;')
+		toString.replace('&', '&amp;')
+			.replace('<', '&lt;').replace('>', '&gt;')
 			.replace('«', '&laquo;').replace('»', '&raquo;')
 			.replace('\\[', '[').replace('\\]',']')
-			.replace("'", '&apos;').replace('´','&apos;').replace('`','&apos;')
+			.replace('´',"'").replace('`',"'")
 	}
 
 }

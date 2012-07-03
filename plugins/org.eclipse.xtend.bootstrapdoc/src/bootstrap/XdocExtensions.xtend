@@ -10,12 +10,18 @@ import org.eclipse.xtext.xdoc.xdoc.Section2Ref
 import org.eclipse.xtext.xdoc.xdoc.Section3
 import org.eclipse.xtext.xdoc.xdoc.Section4
 import org.eclipse.xtext.xdoc.xdoc.SectionRef
+import org.eclipse.xtext.xdoc.xdoc.Part
 
 class XdocExtensions {
 	
+	def getAllChapters(Document document) {
+		(document.chapters + document.parts.map[chapters].flatten).map[resolve as Chapter]
+	}
+	
 	def Iterable<? extends AbstractSection> getSections(AbstractSection section) {
 		switch it : section.resolve {
-			Document : it.chapters.map[resolve]
+			Document : it.allChapters
+			Part 	: it.chapters.map[resolve]
 			Chapter : it.subSections.map[resolve]
 			Section : it.subSections.map[resolve]
 			Section2 : it.subSections.map[resolve]

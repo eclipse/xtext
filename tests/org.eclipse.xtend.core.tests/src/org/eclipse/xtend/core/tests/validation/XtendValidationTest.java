@@ -1058,6 +1058,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	helper.assertError(clazz.getMembers().get(0), TypesPackage.Literals.JVM_TYPE_PARAMETER, INVALID_IDENTIFIER, "volatile");
     }
     
+    @Test public void testKeywordConflict_03() throws Exception {
+    	XtendClass clazz = clazz("class ^null { public int ^true public int ^false }");
+    	helper.assertError(clazz, XTEND_CLASS, INVALID_IDENTIFIER, "null");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, INVALID_IDENTIFIER, "true");
+    	helper.assertError(clazz.getMembers().get(1), XTEND_FIELD, INVALID_IDENTIFIER, "false");
+    }
+    
     @Test public void testAbstractMethodsInNonAbstractClass() throws Exception {
     	XtendClass clazz = clazz("class Foo { def String test() }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT);

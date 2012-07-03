@@ -1,14 +1,17 @@
 package bootstrap;
 
+import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.ChapterRef;
 import org.eclipse.xtext.xdoc.xdoc.Document;
+import org.eclipse.xtext.xdoc.xdoc.Part;
 import org.eclipse.xtext.xdoc.xdoc.Section;
 import org.eclipse.xtext.xdoc.xdoc.Section2;
 import org.eclipse.xtext.xdoc.xdoc.Section2Ref;
@@ -18,8 +21,30 @@ import org.eclipse.xtext.xdoc.xdoc.SectionRef;
 
 @SuppressWarnings("all")
 public class XdocExtensions {
+  public Iterable<Chapter> getAllChapters(final Document document) {
+    EList<Chapter> _chapters = document.getChapters();
+    EList<Part> _parts = document.getParts();
+    final Function1<Part,EList<Chapter>> _function = new Function1<Part,EList<Chapter>>() {
+        public EList<Chapter> apply(final Part it) {
+          EList<Chapter> _chapters = it.getChapters();
+          return _chapters;
+        }
+      };
+    List<EList<Chapter>> _map = ListExtensions.<Part, EList<Chapter>>map(_parts, _function);
+    Iterable<Chapter> _flatten = Iterables.<Chapter>concat(_map);
+    Iterable<Chapter> _plus = Iterables.<Chapter>concat(_chapters, _flatten);
+    final Function1<Chapter,Chapter> _function_1 = new Function1<Chapter,Chapter>() {
+        public Chapter apply(final Chapter it) {
+          AbstractSection _resolve = XdocExtensions.this.resolve(it);
+          return ((Chapter) _resolve);
+        }
+      };
+    Iterable<Chapter> _map_1 = IterableExtensions.<Chapter, Chapter>map(_plus, _function_1);
+    return _map_1;
+  }
+  
   public Iterable<? extends AbstractSection> getSections(final AbstractSection section) {
-    List<AbstractSection> _switchResult = null;
+    Iterable<? extends AbstractSection> _switchResult = null;
     AbstractSection _resolve = this.resolve(section);
     final AbstractSection it = _resolve;
     boolean _matched = false;
@@ -27,7 +52,15 @@ public class XdocExtensions {
       if (it instanceof Document) {
         final Document _document = (Document)it;
         _matched=true;
-        EList<Chapter> _chapters = _document.getChapters();
+        Iterable<Chapter> _allChapters = this.getAllChapters(_document);
+        _switchResult = _allChapters;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof Part) {
+        final Part _part = (Part)it;
+        _matched=true;
+        EList<Chapter> _chapters = _part.getChapters();
         final Function1<Chapter,AbstractSection> _function = new Function1<Chapter,AbstractSection>() {
             public AbstractSection apply(final Chapter it) {
               AbstractSection _resolve = XdocExtensions.this.resolve(it);

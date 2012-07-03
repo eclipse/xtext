@@ -57,13 +57,13 @@ public class Menu {
           boolean _lessEqualsThan = (_size <= 1);
           if (_lessEqualsThan) {
             _builder.append("\t\t\t\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href = this._htmlExtensions.href(s);
             _builder.append(_href, "				");
             _builder.append("\">");
             TextOrMarkup _title = s.getTitle();
-            CharSequence _html = this._htmlExtensions.toHtml(_title);
-            _builder.append(_html, "				");
+            CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+            _builder.append(_htmlText, "				");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           } else {
@@ -74,8 +74,8 @@ public class Menu {
             _builder.append("\t");
             _builder.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\">");
             TextOrMarkup _title_1 = s.getTitle();
-            CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
-            _builder.append(_html_1, "					");
+            CharSequence _htmlText_1 = this._htmlExtensions.toHtmlText(_title_1);
+            _builder.append(_htmlText_1, "					");
             _builder.append(" <b class=\"caret\"></b></a>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t");
@@ -87,13 +87,13 @@ public class Menu {
               for(final AbstractSection subSection : _sections_2) {
                 _builder.append("\t\t\t\t");
                 _builder.append("\t\t");
-                _builder.append("<li><a href=\"#");
+                _builder.append("<li><a href=\"");
                 String _href_1 = this._htmlExtensions.href(subSection);
                 _builder.append(_href_1, "						");
                 _builder.append("\">");
                 TextOrMarkup _title_2 = subSection.getTitle();
-                CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
-                _builder.append(_html_2, "						");
+                CharSequence _htmlText_2 = this._htmlExtensions.toHtmlText(_title_2);
+                _builder.append(_htmlText_2, "						");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }
