@@ -1,0 +1,61 @@
+section:TutorialUnitTests[Unit Testing the Language]
+
+Automated tests are crucial for the maintainability and the quality of a software product. That is why
+it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
+a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI
+tests for Junit4.
+
+This tutorial is about testing the parser and the linker for the e[Domainmodel]. It leverages Xtend to
+write the test case.
+
+ol[
+  item[
+    First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
+    plugin, and select e[New -> Xtend Class] from the context menu. Provide a meaningful name and
+    enter the package before you hit finish.
+    
+    The core of the test infrastructure is the codeRef[org.eclipse.xtext.junit4.XtextRunner] and
+    the language specific codeRef[org.eclipse.xtext.junit4.IInjectorProvider]. Both have to be provided
+    by means of class annotations:  
+ 
+    code[Xtend][
+      import org.eclipse.xtext.junit4.XtextRunner
+      import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
+      
+      @InjectWith(typeof(DomainmodelInjectorProvider))
+      @RunWith(typeof(XtextRunner))
+      class ParserTest {
+      }
+    ]
+  ]
+  item[
+    The actual test case is pretty straight forward with Xtend. The utility class 
+    e[org.eclipse.xtext.junit4.util.ParseHelper] allows to parse an arbitrary string into a
+    e[Domainmodel]. The model itself can be traversed and checked afterwards. A static import of
+    codeRef[org.junit.Assert] leads to concise and readable test cases.
+    
+    code[Xtend][
+      import org.eclipse.xtext.junit4.util.ParseHelper
+      import static org.junit.Assert.*
+      
+      ...
+    
+      @Inject
+      ParseHelper<Domainmodel> parser
+      
+      @Test 
+      def void parseDomainmodel() {
+        val model = parser.parse(
+          "entity MyEntity {
+            parent: MyEntity
+          }")
+        val entity = model.elements.head as Entity
+        assertSame(entity, entity.features.head.type)
+      }
+    ]
+  ]
+  item[
+    After saving the Xtend file, it is time to run the test. Please locate the generated java class
+    in the e[xtend-gen] folder and select e[Run As -> JUnit Test] from the context menu.
+  ]
+]

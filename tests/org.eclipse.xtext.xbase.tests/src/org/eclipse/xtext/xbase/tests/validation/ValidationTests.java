@@ -746,5 +746,4 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
-	
 }

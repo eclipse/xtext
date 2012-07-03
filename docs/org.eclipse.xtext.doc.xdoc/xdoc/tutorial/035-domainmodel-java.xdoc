@@ -1,0 +1,477 @@
+chapter:JvmDomainmodel[Five simple steps to your JVM language]
+
+In this tutorial we will basically implement the domain model language again, but this time we will make use of
+the special JVM support shipped with Xtext 2.x. This kind of language really is a sweet spot for DSLs,
+so feel free to use this as a blueprint and add your project specific features later on.
+
+The revised domain model language supports expressions and cross links to Java types. It is directly
+translated to Java source code. The syntax should look very familiar. Here is an example:
+
+code[DomainExample][
+import java.util.List
+
+package my.model {
+
+  entity Person {
+    name: String
+    firstName: String
+    friends: List<Person>
+    address : Address
+    op getFullName() : String {
+      return firstName + " " + name;
+    }
+    
+    op getFriendsSortedByFullName() : List<Person> {
+      return friends.sortBy\[ f | f.fullName \]
+    }
+  }
+  
+  entity Address {
+    street: String
+    zip: String
+    city: String
+  }
+}
+]
+
+As you can see, it supports all kinds of advanced features such as Java generics and full expressions
+even including lambda expressions. Don't panic you will not have to implement these concepts on your own but will
+reuse a lot of helpful infrastructure to build the language.
+
+We will now walk through the e[five!] little steps needed to get this language fully working including
+its compiler.
+
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
+
+section[Step One: Create A New Xtext Project]
+
+In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
+
+  e[File -> New -> Project...  -> Xtext -> Xtext Project]
+
+Choose a meaningful project name, language name and file extension, e.g.
+
+table[
+  tr[td[e[Main project name:]]td[org.example.domainmodel]]
+  tr[td[e[Language name:]]td[org.example.domainmodel.Domainmodel]]
+  tr[td[e[DSL-File extension:]]td[dmodel]]
+]
+
+Click on e[Finish] to create the projects. 
+
+img[images/30min_wizard.png][ ][ ][ ]
+
+After you have successfully finished the wizard, you will find three new projects in your workspace.
+
+table[
+  tr[
+    td[org.example.domainmodel]td[Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)]
+  ]
+  tr[
+    td[org.example.domainmodel.tests]td[Unit tests go here.]
+  ]
+  tr[
+    td[org.example.domainmodel.ui]td[The Eclipse editor and all the other workbench related functionality.]
+  ]
+]
+
+img[images/30min_initialprojectlayout.png][ ][ ][ ]
+
+section[Step Two: Write the Grammar]
+
+The wizard will automatically open the grammar file 
+e[Domainmodel.xtext] in the editor. As you can see it already contains a simple e[Hello World] grammar:
+
+code[Xtext][
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+
+Model:
+  greetings+=Greeting*;
+  
+Greeting:
+  'Hello' name=ID '!';
+]
+
+Please replace that grammar definition with the one for our language:
+
+code[Xtext][
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.xbase.Xbase
+
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+
+Domainmodel:
+  elements+=AbstractElement*;
+
+AbstractElement:
+  PackageDeclaration | Entity | Import;
+
+PackageDeclaration:
+  'package' name=QualifiedName '{'
+    elements+=AbstractElement*
+  '}';
+
+Import:
+  'import' importedNamespace=QualifiedNameWithWildCard;
+
+QualifiedNameWithWildCard :
+  QualifiedName  ('.' '*')?;
+
+Entity:
+  'entity' name=ValidID 
+    ('extends' superType=JvmTypeReference)? '{'
+    features+=Feature*
+  '}';
+
+Feature:
+  Property | Operation;
+
+Property:
+  name=ValidID ':' type=JvmTypeReference;
+
+Operation:
+  'op' name=ValidID 
+    '('(params+=FullJvmFormalParameter 
+      (',' params+=FullJvmFormalParameter)*)?')'
+    ':' type=JvmTypeReference 
+    body=XBlockExpression;
+
+]
+
+Let's have a look at what the different grammar constructs mean:
+
+ol[
+  item[
+    code[Xtext][
+    grammar org.example.domainmodel.Domainmodel with
+                  org.eclipse.xtext.xbase.Xbase
+    ]
+    The first thing to note is that instead of inheriting from the usual e[org.eclipse.xtext.common.Terminals]
+    grammar, we make use of e[org.eclipse.xtext.xbase.Xbase]. 
+    
+    Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
+
+    %%In case you also want to use Java annotations, you can extend e[org.eclipse.xtext.xbase.XbaseWithAnnotations]
+    %%instead.
+  ]
+  item[
+    code[Xtext][
+    Domainmodel:
+      elements+=AbstractElement*;
+    ]
+    
+    The first rule in a grammar is always used as the entry or start rule.  
+    
+    It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
+    to a feature called code[Xtext][elements].
+  ]
+  item[
+    code[Xtext][
+    AbstractElement:
+      PackageDeclaration | Entity | Import;
+    ]
+    The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
+  ]
+  item[
+    code[Xtext][
+    PackageDeclaration:
+      'package' name=QualifiedName '{'
+        elements+=AbstractElement*
+      '}';
+    ]
+    A e[PackageDeclaration] is used to declare a name space which can again contain any number
+    of e[AbstractElement]s.  
+    
+    Xtext has built-in support for qualified names and scoping based on the hierarchy
+    of the produced model. The default
+    implementation will add the package names as the prefix to contained entities and nested packages.
+    The qualified name of an e[Entity] 'Baz' which is contained in a e[PackageDeclaration] 'foo.bar'
+    will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
+    to use a different implementation of codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider].
+  ]
+  item[
+    code[Xtext][
+    Import:
+      'import' importedNamespace=QualifiedNameWithWildCard;
+    
+    QualifiedNameWithWildCard :
+      QualifiedName  ('.' '*')?;
+    ]
+    The rule e[Import] makes use of the ref:namespaceImports[namespace support], too. It basically allows you to get full-blown
+    import functionality as you are used to from Java, just by having these two rules in place.
+  ]
+  item[
+    code[Xtext][
+    Entity:
+      'entity' name=ValidID 
+        ('extends' superType=JvmTypeReference)? '{'
+        features+=Feature*
+      '}';
+    ]
+    The rule e[Entity] starts with the definition of a keyword followed by a name.
+    
+    The e[extends] clause which is parenthesized and optional (note the trailing code[Xtext][?]) makes use of the rule
+    e[JvmTypeReference] which is defined in a super grammar. e[JvmTypeReference] defines the
+    syntax for full Java-like type names. That is everything from simple names, over fully qualified
+    names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
+    
+    Finally between curly braces there can be any number of e[Features], which leads us to the next rule.
+  ]
+  item[
+    code[Xtext][
+    Feature:
+      Property | Operation;
+    ]
+    
+    The rule e[Feature] delegates to either a e[Property] or an e[Operation].
+  ]
+  item[
+    code[Xtext][
+    Property:
+      name=ValidID ':' type=JvmTypeReference;
+    ]
+    A e[Property] has a name and makes again use of the inherited rule e[JvmTypeReference].
+  ]
+  item[
+    code[Xtext][
+    Operation:
+      'op' name=ValidID 
+      '('(params+=FullJvmFormalParameter 
+        (',' params+=FullJvmFormalParameter)*)?')'
+      ':' type=JvmTypeReference 
+      body=XBlockExpression;
+    ]
+    e[Operation]s also have a signature as expected. Note that also for formal parameters we can
+    reuse a rule from the super grammar.
+
+    The e[Operation]'s body, that is the actual implementation is defined by the rule e[XBlockExpression]
+    which is one of the most often used entry rules from Xbase. A block consist of any
+    number of expressions between curly braces such as:
+    code[Xbase][
+    {
+      return "Hello World" + "!"
+    }
+    ]
+  ]
+
+]
+
+section[Step Three: Generate Language Artifacts]
+
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the
+various language components. To do so right click in the grammar editor. From the opened context menu, choose
+
+  e[Run As -> Generate Xtext Artifacts].
+
+This will trigger the Xtext language generator. It generates the parser and 
+serializer and some additional infrastructure code. You will see its logging 
+messages in the Console View. 
+
+img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
+
+section[Step Four: Define the Mapping to JVM Concepts]
+
+The syntax alone is not enough to make the language work. We need to map the domain specific concepts to some other language
+in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
+but languages using Xbase can omit this step and make use of the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
+
+The idea is that you translate your language concepts to any number of Java types (codeRef[org.eclipse.xtext.common.types.JvmDeclaredType]). 
+Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain
+any valid members. In the end you as a language developer are responsible to create a correct model
+according to the Java language.
+
+By mapping your language concepts to Java elements, you implicitly tell Xtext in what kind of scopes
+the various expressions live and what return types are expected from them. Xtext 2.x also comes with
+a code generator which can translate that Java model into readable Java code, including the expressions.
+
+If you have already triggered the 'Generate Xtext Artifacts' action, you should find a stub called 
+e[org/example/domainmodel/jvmmodel/DomainmodelJvmModelInferrer.xtend]
+in the src folder. Please replace its contents with the following :
+
+code[Xtend][
+package org.example.domainmodel.jvmmodel
+
+import com.google.inject.Inject
+import org.example.domainmodel.domainmodel.Entity
+import org.example.domainmodel.domainmodel.Operation
+import org.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+
+class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
+
+  /**
+   * a builder API to programmatically create Jvm elements 
+   * in readable way.
+   */
+  @Inject extension JvmTypesBuilder
+  
+  @Inject extension IQualifiedNameProvider
+  
+  def dispatch void infer(Entity element, 
+                IJvmDeclaredTypeAcceptor acceptor, 
+                boolean isPrelinkingPhase) {
+      acceptor.accept(
+      element.toClass( element.fullyQualifiedName )
+    ).initializeLater \[
+      documentation = element.documentation
+      if (element.superType != null)
+        superTypes += element.superType.cloneWithProxies
+      for (feature : element.features) {
+        switch feature {
+      
+          Property : {
+            members += feature.toField(feature.name, feature.type)
+            members += feature.toGetter(feature.name, feature.type)
+            members += feature.toSetter(feature.name, feature.type)
+          }
+      
+          Operation : {
+            members += feature.toMethod(feature.name, feature.type) \[
+              documentation = feature.documentation
+              for (p : feature.params) {
+                parameters += p.toParameter(p.name, p.parameterType)
+              }
+              body = feature.body
+            \]
+          }
+        }
+      }
+    \]
+  }
+}
+]
+
+Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the involved API
+for details, especially the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]).
+
+ol[
+  item[
+    code[Xtend][
+      def dispatch void infer(Entity element, 
+                IAcceptor<JvmDeclaredType> acceptor, 
+                boolean isPrelinkingPhase) {
+    ]
+    Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
+    only. Have a look at link[http://www.xtend-lang.org/documentation][the Xtend documentation] on polymorphic dispatch to 
+    understand Xtend's dispatch functions. Extending codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes 
+    sure we don't have to walk the syntax model on our own.
+  ]
+  item[
+    code[Xtend][
+        acceptor.accept(element.toClass(element.fullyQualifiedName)  
+        ...
+    ]
+  Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
+  to be passed to the e[acceptor] in order to get recognized.
+  
+  The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
+  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
+  
+  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
+  to the implicit variable code[Xtend][it]. Therein you can further initialize the created Java element. 
+  ]
+  item[
+    code[Xtend][
+     ).initializeLater \[
+    ]
+    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
+    and be passed to the e[acceptor].
+    The types' features are created in the second phase. The actions in this phase are specified in the lambda
+    expression passed to code[initializeLater]. Think of it as an anonymous class.
+  ]
+  item[
+    code[Xtend][
+        documentation = element.documentation
+    ]
+    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
+    to an invocation of the method 
+    codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#setDocumentation(codeRef[org.eclipse.xtext.common.types.JvmIdentifiableElement] element,String documentation)]
+    and code[element.documentation] is in fact calling the extension method  
+    codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
+    
+    Xtend's extension methods are explained in detail on the link[http://www.xtend-lang.org/documentation][Xtend website].
+  ]
+  item[
+    code[Xtend][
+     if (element.superType != null)
+        superTypes += entity.superType.cloneWithProxies
+    ]
+    Set the e[superType] on the inferred element. Note that we have to clone the type reference from
+    the e[element.superType]. If we did not do that, the type reference would be automatically removed 
+    from the e[element], as e[superType] is an EMF containment reference.   
+  ]
+  item[
+    code[Xtend][
+      for (feature : element.features) {
+        switch feature {
+          Property : {
+            // ...
+          }
+          Operation : {
+            // ...
+          }
+        }
+      }
+    ]
+    When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
+    If e[feature] is of type e[Property] the first block is executed. If it is an e[Operation] the
+    second block is executed. Note that the variable e[feature] will be implicitly casted to the respective
+    type within the blocks.
+  ]
+  item[
+    code[Xtend][
+        Property : {
+          members += feature.toField(feature.name, feature.type)
+          members += feature.toSetter(feature.name, feature.type)
+          members += feature.toGetter(feature.name, feature.type)
+        }
+    ]
+    For each e[Property] we create a field as well as a corresponding getter and setter.  
+  ]
+  item[
+    code[Xtend][
+        Operation : {
+          members += feature.toMethod(feature.name, feature.type) \[
+            documentation = feature.documentation
+            for (p : feature.params) {
+              parameters += p.toParameter(p.name, p.parameterType)
+            }
+            body = feature.body
+          \]
+        }
+    ]
+    
+    e[Operations] are being mapped to a corresponding Java method. The documentation is translated and
+    the parameters are added within the initializer.
+    
+    The line code[Xtend][body = feature.body] registers the e[Operation]'s expression as the body of
+    the newly created Java method. This defines the scope of the expression. The frameworks deduces the
+    visible fields and parameters as well as the expected return type from that information.
+  ]
+]
+
+section[Step Five : Try the Editor!]
+
+We are now able to test the IDE integration, by spawning a new Eclipse using our plug-ins. To do so just
+use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
+bar.
+
+img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
+
+In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project].
+Xbase relies on a small runtime library on the class path. To add this, right-click on the project and
+go to e[Java Build Path -> Libraries -> Add Library] and choose e[Xtend Library]. The create a new file 
+with the file extension you chose in the beginning (e[*.dmodel]) in the source folder of the Java project.
+This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
+should also have a look at the preferences of your language to find out what can be individually configured 
+to your users needs.
+
+Have fun!
+
+img[images/JvmTutorial_Editor.png][][][]

@@ -1,0 +1,99 @@
+section2:xbaseLanguageRef_Types[Types]
+
+Basically all kinds of JVM types are available and referable. 
+
+section3:Xbase_Types_Arrays[Arrays]
+
+Arrays cannot be declared explicitly,
+but they can be passed around and they are (if needed) transparently converted to a List of the component type.
+
+In other words, the return type of a Java method that returns an array of ints (code[Java][int\[\]]) can be directly assigned to 
+a variable of type codeRef[java.util.List][List<Integer>]. Due to type inference
+this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked 
+with a code[List] instead.
+
+section3:Xbase_Types_TypeReferences[Simple Type References]
+
+A simple type reference only consists of a e[qualified name]. A qualified name is a name made up of identifiers which are separated by a dot 
+(like in Java).
+
+There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
+
+section4[Examples]
+
+ul[
+  item[code[java.lang.String]]
+  item[code[String]]
+]
+
+section3:Xbase_Types_FunctionTypes[Function Types]
+
+Xbase introduces e[lambda expressions], and therefore an additional function type signature. On the JVM-Level a lambda
+expression (or more generally any function object) is just an instance of one of the types in 
+codeRef[org.eclipse.xtext.xbase.lib.Functions], 
+depending on the number of arguments. However, as lambda expressions are a very important language feature, 
+a special sugared syntax for function types has been introduced.  
+So instead of writing code[Java][Function1<String,Boolean>] one can write code[Xbase][(String)=>Boolean].
+
+For more information on lambda expressions see ref:Xbase_Expressions_Lambda.
+
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][=>Boolean // predicate without parameters]]
+  item[code[Xbase][()=>String // provider of string]]
+  item[code[Xbase][(String)=>Boolean // One argument predicate]]
+  item[code[Xbase][(Mutable)=>void // A procedure doing side effects only]]
+  item[code[Xbase][(List<String>, Integer)=>String]]
+]
+
+section3:Xbase_Types_ParameterizedTypeReference[Parameterized Type References]
+
+The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
+refer to the third edition of the  link[http://docs.oracle.com/javase/specs/jls/se7/html/index.html][Java Language Specification].
+
+The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
+type arguments.
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][String]]
+  item[code[Xbase][java.lang.String]]
+  item[code[Xbase][List<?>]]
+  item[code[Xbase][List<? extends Comparable<? extends FooBar>]]
+  item[code[Xbase][List<? super MyLowerBound>]]
+  item[code[Xbase][List<? extends =>Boolean>]]
+]
+
+section3:Xbase_Types_Primitives[Primitives]
+
+Xbase supports all Java primitives. The conformance rules (e.g. boxing and unboxing) are also exactly like defined
+in the Java Language Specification.
+
+section3:Xbase_Types_ConformanceRules[Conformance and Conversion]
+
+Type conformance rules are used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
+the type of the right hand expression needs to conform to the type of the variable.
+
+As Xbase implements the type system of Java it also fully supports the conformance rules defined
+in the link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html][Java Language Specification].
+
+Some types in Xbase can be used synonymously even if they do not conform to each other in Java. An example for this are arrays and lists 
+or function types with compatible function parameters. Objects of these types are implicitly converted by Xbase on demand.   
+
+section3:Xbase_Types_CommonSuperType[Common Super Type]
+
+Because of type inference Xbase sometimes needs to compute the most common super type of a given set
+of types. 
+
+For a set e[\[T1,T2,...Tn\]] of types the common super type is computed by using the linear type inheritance sequence of e[T1] and is iterated until one type
+conforms to each e[T2,..,Tn]. The linear type inheritance sequence of e[T1] is computed by ordering all types which are part if the type hierarchy of e[T1]
+by their specificity. A type e[T1] is considered more specific than e[T2] if e[T1] is a subtype of e[T2]. Any types with equal specificity will be sorted by
+the maximal distance to the originating subtype. e[CharSequence] has distance 2 to e[StringBuilder] because
+the super type e[AbstractStringBuilder] implements the interface, too. Even if e[StringBuilder] implements
+e[CharSequence] directly, the interface gets distance 2 in the ordering because it is not the most general class
+in the type hierarchy that implements the interface. If the distances for two classes are the same in
+the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
+

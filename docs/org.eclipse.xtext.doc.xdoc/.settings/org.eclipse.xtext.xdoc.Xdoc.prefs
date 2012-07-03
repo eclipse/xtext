@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+is_project_specific=true
+outlet.DEFAULT_OUTPUT.cleanDirectory=false
+outlet.DEFAULT_OUTPUT.cleanupDerived=true
+outlet.DEFAULT_OUTPUT.createDirectory=true
+outlet.DEFAULT_OUTPUT.derived=false
+outlet.DEFAULT_OUTPUT.directory=../org.eclipse.xtext.doc/contents
+outlet.DEFAULT_OUTPUT.override=true
+outlet.WEB_SITE.cleanDirectory=false
+outlet.WEB_SITE.cleanupDerived=true
+outlet.WEB_SITE.createDirectory=false
+outlet.WEB_SITE.derived=false
+outlet.WEB_SITE.directory=
+outlet.WEB_SITE.override=true

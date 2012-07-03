@@ -1,0 +1,743 @@
+section2:xbaseLanguageRef_Expressions[Expressions]
+
+Expressions are the main language constructs which are used to express behavior and compute values. The concept of 
+statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
+be helpful. An expression always results in a value (it might be the value code[Xbase][null] though). In addition, every resolved expressions is
+of a static type.
+
+section3:Xbase_Expressions_Literals[Literals]
+
+A literal denotes a fixed unchangeable value. Literals for strings, numbers, booleans,
+code[Xbase][null] and Java types are supported.
+
+section4:Xbase_Expressions_StringLiteral[String Literals]
+
+String literals can either use code[Xbase]['single quotes'] or code[Xbase]["double quotes"] as their terminals. When using
+double quotes all literals allowed by Java string literals are supported. In addition new line 
+characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single 
+quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
+do not.
+
+See link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5][§ 3.10.5 String Literals]
+
+In contrast to Java, equal string literals within the same class do not necessarily refer to the same
+instance at runtime.
+
+section4[Examples]
+
+ul[
+  item[code[Xbase]['Foo Bar Baz']]
+  item[code[Xbase]["Foo Bar Baz"]]
+  item[code[Xbase]["the quick brown fox
+   jumps over the lazy dog."]]
+  item[code[Xbase]['Escapes : \' ']]
+  item[code[Xbase]["Escapes : \" "]]
+]
+
+section4:Xbase_Expressions_NumberLiteral[Number Literals]
+
+Xbase supports roughly the same number literals as Java with a few notable differences.   
+As in Java 7, you can separate digits using code[Xbase][_] for better readability
+of large numbers.
+ 
+An integer literal represents an code[Xbase][int], a code[Xbase][long] (suffix code[L]) or even a
+codeRef[java.math.BigInteger] (suffix code[BI]). There are no octal number literals.
+
+code[Xbase][
+  42
+  1_234_567_890 
+  0xbeef    // hexadecimal
+  077       // decimal 77 (*NOT* octal)
+  42L
+  0xbeef#L // hexadecimal, mind the '#'
+  0xbeef_beef_beef_beef_beef#BI // BigInteger
+]
+
+A floating-point literal creates a code[Xbase][double] (suffix code[D] or omitted), a code[Xbase][float] 
+(suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] sign you have to 
+specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
+literals.  
+code[Xbase][
+  42d     // double
+  0.42e2  // implicit double
+  0.42e2f // float
+  4.2f    // float
+  0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
+]
+
+section4:Xbase_Expressions_BooleanLiteral[Boolean Literals]
+
+There are two boolean literals, code[Xbase][true] and code[Xbase][false] which correspond to their Java counterpart of type e[boolean]. 
+
+ul[
+  item[code[Xbase][true]]
+  item[code[Xbase][false]]
+]
+
+section4:Xbase_Expressions_NullLiteral[Null Literal]
+
+The null literal is, as in Java, code[Xbase][null]. 
+It is compatible to any reference type and therefore always of the null type.
+
+ul[
+  item[code[Xbase][null]]
+]
+
+section4:Xbase_Expressions_TypeLiteral[Type Literals]
+
+Type literals are specified using the keyword code[Xbase][typeof] :
+
+ul[
+  item[code[Xbase][typeof(String)] which yields code[Java][String.class]]
+]
+
+section3:Xbase_Expressions_TypeCasts[Type Casts]
+
+Type cast behave the same as in Java, but have a slightly more readable syntax.
+Type casts bind stronger than any other operator but weaker than feature calls.
+
+The conformance rules for casts are defined in the link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5][Java Language Specification].
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][my.foo as MyType]]
+  item[code[Xbase][(1 + 3 * 5 * (- 23)) as BigInteger]]
+]
+
+section3:Xbase_Expressions_Operators[Infix Operators / Operator Overloading]
+
+There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
+to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
+operators for any type just by implementing the corresponding method signature.
+The following defines the operators and the corresponding Java method signatures / expressions.
+
+table[
+  tr[td[code[e1 += e2]]       td[code[e1.operator_add(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 || e2]]       td[code[e1.operator_or(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 && e2]]       td[code[e1.operator_and(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 == e2]]       td[code[e1.operator_equals(e2)]]]
+  tr[td[code[e1 != e2]]       td[code[e1.operator_notEquals(e2)]]]
+  tr[td[]td[]]
+
+  tr[td[code[e1 < e2]]        td[code[e1.operator_lessThan(e2)]]]
+  tr[td[code[e1 > e2]]        td[code[e1.operator_greaterThan(e2)]]]
+  tr[td[code[e1 <= e2]]       td[code[e1.operator_lessEqualsThan(e2)]]]
+  tr[td[code[e1 >= e2]]       td[code[e1.operator_greaterEqualsThan(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 -> e2]]       td[code[e1.operator_mappedTo(e2)]]]
+  tr[td[code[e1 .. e2]]       td[code[e1.operator_upTo(e2)]]]
+  tr[td[code[e1 => e2]]       td[code[e1.operator_doubleArrow(e2)]]]
+  tr[td[code[e1 << e2]]       td[code[e1.operator_doubleLessThan(e2)]]]
+  tr[td[code[e1 >> e2]]       td[code[e1.operator_doubleGreaterThan(e2)]]]
+  tr[td[code[e1 <<< e2]]      td[code[e1.operator_tripleLessThan(e2)]]]
+  tr[td[code[e1 >>> e2]]      td[code[e1.operator_tripleGreaterThan(e2)]]]
+  tr[td[code[e1 <> e2]]       td[code[e1.operator_diamond(e2)]]]
+  tr[td[code[e1 ?: e2]]       td[code[e1.operator_elvis(e2)]]]
+  tr[td[code[e1 <=> e2]]      td[code[e1.operator_spaceship(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 + e2]]        td[code[e1.operator_plus(e2)]]]
+  tr[td[code[e1 - e2]]        td[code[e1.operator_minus(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[e1 * e2]]        td[code[e1.operator_multiply(e2)]]]
+  tr[td[code[e1 / e2]]        td[code[e1.operator_divide(e2)]]]
+  tr[td[code[e1 % e2]]        td[code[e1.operator_modulo(e2)]]]
+  tr[td[code[e1 ** e2]]       td[code[e1.operator_power(e2)]]]
+  tr[td[]td[]]
+  
+  tr[td[code[! e1]]           td[code[e1.operator_not()]]]
+  tr[td[code[- e1]]           td[code[e1.operator_minus()]]]
+]
+    
+The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
+The assignment operator code[+=] is right-to-left associative in the same way as the plain assignment
+operator code[=] is. Consequently, code[a = b = c] is executed as code[a = (b = c)]. All other
+operators are left-to-right associative. Parentheses can be used to adjust the default precedence and associativity. 
+
+section4[Short-Circuit Boolean Operators]
+
+If the operators code[||] and code[&&] are used in a context where the left hand operand is of type boolean, the operation is evaluated
+in short circuit mode, which means that the right hand operand is not evaluated at all in the following cases: 
+ol[
+  item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][true].]
+  item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][false].]
+] 
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][my.foo = 23]]
+  item[code[Xbase][myList += 23]]
+  item[code[Xbase][x > 23 && y < 23]]
+  item[code[Xbase][x && y || z]]
+  item[code[Xbase][1 + 3 * 5 * (- 23)]]
+  item[code[Xbase][!(x)]]
+  item[code[Xbase][my.foo = 23]]
+  item[code[Xbase][my.foo = 23]]
+]
+
+section4[With Operator]
+
+The e[with] operator code[=>] executes the ref:Xbase_Expressions_Lambda[lambda expression] with a single parameter on the right-hand
+ side with a given argument on its left-hand side. The result is the left operand after applying the lambda expression. In 
+combination with the  ref:Xbase_Expressions_implicit_parameter[implicit parameter] code[Xbase][it] this allows very convenient
+initialization of newly created objects. Example:
+
+code[Xbase][
+  val person = new Person => \[
+    firstName = 'John'
+    lastName = 'Coltrane'
+  \]
+  // equivalent to
+  val person = new Person
+  person.firstName = 'John'
+  person.lastName = 'Coltrane'
+]
+
+
+
+section3:Xbase_Expressions_PropertyAssignment[Assignments]
+
+ref:Xbase_Expressions_VariableDeclaration[Local variables] can be reassigned using the code[=] operator. Also properties can be set using 
+that operator:
+Given the expression 
+
+code[Xbase][
+  myObj.myProperty = "foo"
+]
+
+The compiler first looks for an accessible Java Field called code[myProperty] on the declared or inferred type of code[myObj]. If such
+a field can be found, the expressions translates to
+the following Java code:
+
+code[Java][
+  myObj.myProperty = "foo";
+]
+
+Remember, in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
+Java expression, which is the assigned value.
+
+If there is no accessible field on the left operand's type, a method called code[Java][setMyProperty(OneArg)] (JavaBeans
+setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value of the assignment will be the 
+return value of the setter method (which is usually of type code[Xbase][void] and therefore the value code[Xbase][null]). 
+As a result the compiler translates to :
+
+code[Java][
+  myObj.setMyProperty("foo")
+]
+
+
+section3:Xbase_Expressions_FeatureCalls[Feature Calls]
+
+A feature call is used to access members of objects, such as fields and methods, but it can also refer to local variables and parameters, 
+which are made available by the current expression's scope. 
+
+
+section4:Xbase_Expressions_PropertyAccess[Property Access]
+
+Feature calls are directly translated to their Java equivalent with the exception, that access to properties follows similar rules as 
+described in ref:Xbase_Expressions_PropertyAssignment. 
+That is, for the expression
+
+code[Xbase][
+  myObj.myProperty
+]
+
+the compiler first looks for an accessible field code[Xbase][myProperty] in the type of code[Xbase][myObj]. If no such field exists it 
+tries to find a method called code[Java][myProperty()] before it looks 
+for the getter methods code[Java][getMyProperty()]. If none of these members can be found, the expression is unbound and a compilation error is indicated.
+
+section4:Xbase_Expressions_NullSafeFeatureCalls[Null-Safe Feature Call]
+
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return code[Xbase][null] if a receiver was code[Xbase][null].
+Xbase supports the safe navigation operator code[Xbase][?.] to make such code more readable.
+
+Instead of writing 
+
+code[Java][
+  if ( myRef != null ) myRef.doStuff()
+]
+
+one can write
+
+code[Xbase][
+  myRef?.doStuff()
+]
+
+section4:Xbase_Expressions_staticFeatureCalls[Static Feature Calls]
+
+To access static members of a type, use code[::], e.g.
+
+code[Xbase][
+   java::util::Collections::singleton("Lonesome Cowboy")
+   System::err.println("An error occurred")
+]
+
+section3:Xbase_Expressions_ImplicitThis[Implicit variables 'this' and 'it']
+
+If the current scope contains a variable named code[Xbase][this] or code[Xbase][it], the compiler will make all its members available implicitly.
+That is if one of 
+code[Xbase][
+  it.myProperty
+  this.myProperty
+]
+is a valid expression
+code[Xbase][
+  myProperty
+]
+is valid as well. It resolves to the same feature as long as there is no local variable code[Xbase][myProperty] declared,
+which would have higher precedence. 
+
+As code[Xbase][this] is bound to the surrounding object in Java, code[Xbase][it] can be used
+in finer-grained constructs such as function parameters. That is why code[Xbase][it.myProperty] has 
+higher precedence than code[Xbase][this.myProperty]. code[Xbase][it] is also the 
+ref:Xbase_Expressions_implicit_parameter[default parameter name in lambda expressions]. 
+
+
+
+section3:Xbase_Expressions_ConstructorCall[Constructor Call]
+
+Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java.
+
+section4[Examples]
+
+ul[
+  item[
+    code[Xbase][
+      new String()
+    ]
+  ]
+  item[
+    code[Xbase][
+      new java.util.ArrayList<java.math.BigDecimal>()
+    ]
+  ]
+]
+
+section3:Xbase_Expressions_Lambda[Lambda Expressions]
+
+A lambda expression is a literal that defines an anonymous function. Xbase' lambda expressions are allowed
+to access variables of the declarator. Any final variables and parameters visible at construction 
+time can be referred to in the lambda expression's body. These expressions are also known as closures.
+
+Lambda expressions are surrounded by square brackets (\code[\[\]]):
+
+code[Xbase][
+  myList.findFirst(\[ e | e.name==null \])
+]
+
+When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parentheses: 
+
+code[Xbase][
+  myList.findFirst() \[ e | e.name==null \]
+]
+
+Since in Xbase parentheses are optional for method calls, the same can be written as:
+
+code[Xbase][
+  myList.findFirst\[ e | e.name==null \]
+]
+
+This example can be further simplified since the lambda's parameter is available as the implicit variable code[Xbase][it], 
+if the parameter is not declared explicitly: 
+
+code[Xbase][
+  myList.findFirst\[ it.name==null \]
+]
+
+Since code[Xbase][it] is implicit, this is the same as:
+
+code[Xbase][
+  myList.findFirst\[ name==null \]
+]
+
+Another use case for lambda expressions is to store function objects in variables:
+
+code[Xbase][
+  val func = \[ String s | s.length>3 \]
+]
+
+section4:Xbase_Expressions_LambdaTypeInference[Typing]
+
+Lambda expressions produce function objects. The type is a ref:Xbase_Types_FunctionTypes[function type], parameterized
+with the types of the lambda's parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
+The parameter types can be inferred if the lambda expression is used in a context where this is possible.
+
+For instance, given the following Java method signature:
+code[Java][
+  public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
+] 
+
+the type of the parameter can be inferred. Which allows users to write:
+code[Xbase][
+  newArrayList( "Foo", "Bar" ).findFirst\[ e | e == "Bar" \]
+]
+instead of 
+code[Xbase][
+  newArrayList( "Foo", "Bar" ).findFirst\[ String e | e == "Bar" \]
+]
+
+
+section4:Xbase_Expressions_FunctionMapping[Function Mapping]
+
+An Xbase lambda expression is a Java object of one of the e[Function] interfaces that are part of the runtime library of Xbase. There is an interface 
+for each number of parameters (up to six parameters). The names of the interfaces are 
+ul[
+  item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function0][Function0<ReturnType>] for zero parameters, ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function1][Function1<Param1Type, ReturnType>] for one parameters, ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function2][Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
+  item[... ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function6][Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
+]
+or
+ul[
+  item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure0][Procedure0] for zero parameters, ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure1][Procedure1<Param1Type>] for one parameters, ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure2][Procedure2<Param1Type, Param2Type>] for two parameters, ]
+  item[... ]
+  item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure6][Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
+]
+if the return type is code[Java][void].
+
+In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava 
+(formerly known as Google Collect) lambda expressions are auto coerced to expected types if those 
+types declare only one abstract method (methods from code[Java][java.lang.Object] don't count).
+
+As a result given the method codeRef[java.util.Collections][Collections.sort(List<T>, Comparator<? super T>)] is available
+as an extension method, it can be invoked like this
+
+code[Xbase][
+newArrayList( 'aaa', 'bb', 'c' ).sort \[
+  e1, e2 | if ( e1.length > e2.length ) {
+        -1 
+       } else if ( e1.length < e2.length ) { 
+        1
+       } else { 
+        0
+       }
+\]
+]
+
+section4:Xbase_Expressions_implicit_parameter[Implicit Parameter e[it]]
+
+If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can
+be omitted. Use code[Xbase][it] to refer to the parameter inside the lambda expression's body.
+code[Xbase][
+val (String s)=>String function = \[ toUpperCase \] 
+  // equivalent to \[it | it.toUpperCase\]
+]
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][\[ | "foo" \]   // lambda expression without parameters]]
+  item[code[Xbase][\[ String s | s.toUpperCase() \] // explicit argument type]]
+  item[code[Xbase][\[ a, b, c | a+b+c \] // inferred argument types]]
+]
+
+section3:Xbase_Expressions_IfExpression[If Expression]
+
+An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
+like Java's ternary operator (code[Java][predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value. Consequently, you can use 
+if expressions deeply nested within other expressions.
+
+An expression code[Xbase][if (p) e1 else e2] results in either the value code[e1] or code[e2] depending on whether the predicate code[p] 
+evaluates to code[Xbase][true] or code[Xbase][false]. The else part is optional which is a shorthand for code[Xbase][else null].
+That means 
+
+code[Xbase][
+  if (foo) x 
+]
+
+is the a short hand for
+
+code[Xbase][
+  if (foo) x else null
+]
+
+section4:Xbase_Expressions_IfTypeInference[Typing]
+
+The type of an if expression is calculated by the return types code[T1] and code[T2] of the two expression code[e1] and code[e2].
+It uses the rules defined in ref:Xbase_Types_CommonSuperType.
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][if (isFoo) this else that]]
+  item[code[Xbase][if (isFoo) { this } else if (thatFoo) { that } else { other }]]
+  item[code[Xbase][if (isFoo) this]]
+]
+
+section3:Xbase_Expressions_SwitchExpression[Switch Expression]
+
+The switch expression is a bit different from Java's. First, there is no fall through which means only one case is evaluated at most.
+Second, the use of switch is not limited to certain values but can be used for any object reference instead.
+ 
+For a switch expression 
+code[Xbase][
+switch e {
+  case e1 : er1
+  case e2 : er2
+  ...
+  case en : ern
+  default : er
+}
+]
+
+the main expression code[e] is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from ref:Xbase_Expressions_ForLoop[for loops], the value is bound to the given name.
+Expressions of type codeRef[java.lang.Boolean] or code[Xbase][boolean] are not allowed in a switch expression.
+
+The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[Xbase][true].
+Then the right hand expression of the case evaluated and the result is returned.
+
+If none of the guards matches the default expression is evaluated and returned. If no default expression
+is specified the expression evaluates to code[Xbase][null].
+
+Example:
+
+code[Xbase][
+switch myString {
+  case myString.length>5 : 'a long string.'
+  case 'foo' : "It's a foo."
+  default : "It's a short non-foo string."
+}
+]
+
+section4[Type guards]
+
+In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a ref:Xbase_Types_TypeReferences[type reference] preceding
+the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
+Example:
+code[Xbase][
+var Object x = ...;
+switch x {
+  String case x.length()>0 : x.length()
+  List<?> : x.size()
+  default : -1
+}
+]
+
+Only if the switch value passes a type guard, i.e. an instanceof operation returns code[Xbase][true], the case's guard expression is executed using the same semantics as explained above. 
+If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
+the type guard works like an automated cast. All subsequent references to the switch value will be of the type specified in the type guard.
+
+section4[Typing]
+
+The return type of a switch expression is computed using the rules defined in the
+section on ref:Xbase_Types_CommonSuperType[common super types]. The set of types from which the common 
+super type is computed corresponds to the types of each case's result expression. If a switch expression's
+type is computed using the expected type from the context, it is sufficient to return the expected type if all 
+case branches types conform to the expected type.
+
+section4[Examples]
+
+ul[
+  item[
+    code[Xbase][
+      switch foo {
+        Entity : foo.superType.name
+        Datatype : foo.name
+        default : throw new IllegalStateException
+      }
+    ]
+  ]
+  item[
+    code[Xbase][
+      switch x : foo.bar.complicated('hello',42) {
+        case "hello42" : ...
+        case x.length<2 : ...
+        default : ....
+      }
+    ]
+  ]
+]
+
+
+section3:Xbase_Expressions_VariableDeclaration[Variable Declarations]
+
+Variable declarations are only allowed within ref:Xbase_Expressions_Blocks[blocks]. They are visible in any
+subsequent expressions in the block. Generally, overriding or shadowing variables from outer scopes is not allowed.
+However, it can be used to overload the ref:Xbase_Expressions_ImplicitThis[implicit variable] 
+code[Xbase][it], in order to subsequently access an object's features in an unqualified manner.
+
+A variable declaration starting with the keyword code[Xbase][val] denotes an unchangeable value, which is essentially 
+a final variable. In rare cases, one needs to update the value of a reference. In such situations
+the variable needs to be declared with the keyword code[Xbase][var], which stands for variable.
+
+A typical example for using code[Xbase][var] is a counter in a loop. 
+code[Xbase][
+{
+  val max = 100
+  var i = 0
+  while (i > max) {
+    println("Hi there!")
+    i = i +1
+  }
+}
+]
+
+Variables declared outside a lambda expression using the code[Xbase][var] keyword are not accessible from within a
+the lambda expression.
+
+section4[Typing]
+
+The return type of a variable declaration expression is always code[Xbase][void]. 
+The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
+Here is an example for an explicitly declared type:
+code[Xbase][
+  var List<String> msg = new ArrayList<String>(); 
+]
+In such cases, the right hand expression's type must ref:Xbase_Types_ConformanceRules[conform] to the type on the left hand side. 
+
+Alternatively the type can be left out and will be inferred from the initialization expression:  
+code[Xbase][
+  var msg = new ArrayList<String> // -> type ArrayList<String>  
+]
+
+section3:Xbase_Expressions_Blocks[Blocks]
+
+The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
+The return type of a block is also the type of the last expression. Empty blocks return code[Xbase][null]. 
+ref:Xbase_Expressions_VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
+
+A block expression is surrounded by curly braces and contains at least one expression.
+It can optionally be terminated by a semicolon.
+
+section4[Examples]
+
+code[Xbase][
+{
+  doSideEffect("foo")
+  result
+}
+]
+code[Xbase][
+{
+  var x = greeting();
+  if (x.equals("Hello ")) {
+    x+"World!"; 
+  } else {
+    x;
+  }
+}
+]
+
+section3:Xbase_Expressions_ForLoop[For Loop]
+
+The for loop code[Xbase][for (T1 variable : iterableOfT1) expression] is used to execute a certain expression for each element of an
+array of an instance of codeRef[java.lang.Iterable].
+The local code[variable] is final, hence cannot be updated. 
+
+The return type of a for loop is code[Xbase][void].
+The type of the local variable can be left out. In that case it is inferred from the type of the array
+or codeRef[java.lang.Iterable] returned by the iterable expression.
+
+ul[
+  item[
+    code[Xbase][
+      for (String s : myStrings) {
+        doSideEffect(s);
+      }
+    ]
+  ]
+  item[
+    code[Xbase][
+      for (s : myStrings)
+        doSideEffect(s)
+    ]
+  ]
+]
+
+
+section3:Xbase_Expressions_WhileExpression[While Loop]
+
+A while loop code[Xbase][while (predicate) expression] is used to execute a certain expression unless the predicate is evaluated to code[Xbase][false].
+The return type of a while loop is code[Xbase][void].
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][
+    while (true) {
+      doSideEffect("foo");
+    }
+  ]]
+  item[code[Xbase][
+    while ( ( i = i + 1 ) < max ) 
+      doSideEffect( "foo" )
+  ]]
+]
+
+section3:Xbase_Expressions_DoWhileExpression[Do-While Loop]
+
+A do-while loop code[Xbase][do expression while (predicate)] is used to execute a certain expression until the predicate is evaluated to code[Xbase][false].
+The difference to the ref:Xbase_Expressions_WhileExpression[while loop] is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The return type of a do-while loop is code[Xbase][void].
+
+section4[Examples]
+
+ul[
+  item[code[Xbase][
+    do {
+      doSideEffect("foo");
+    } while (true)
+  ]]
+  item[code[Xbase][
+    do doSideEffect("foo") while ((i=i+1)<max)
+  ]]
+]
+
+section3:Xbase_Expressions_Return[Return Expression]
+
+Although an explicit return is often not necessary, it is supported.
+In a lambda expression for instance a return expression is always implied if the expression itself is not of type
+code[Xbase][void]. Anyway you can make it explicit:
+
+code[Xbase][
+  listOfStrings.map \[ e |
+    if (e==null) 
+      return "NULL"
+    e.toUpperCase
+  \]
+]
+
+section3:Xbase_Expressions_Throw[Throwing Exceptions]
+
+Like in Java it is possible to throw codeRef[java.lang.Throwable]. The syntax is exactly the same as in Java.
+
+code[Xbase][
+{
+  ...
+  if (myList.isEmpty)
+    throw new IllegalArgumentException("the list must not be empty")
+  ...
+}   
+]
+
+section3:Xbase_Expressions_TryCatch[Try, Catch, Finally]
+
+The try-catch-finally expression is used to handle exceptional situations.
+You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are thrown in a way the compiler
+does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
+link[http://projectlombok.org/features/SneakyThrows.html][Lombok].
+The syntax again is the same known from Java.
+
+code[Xbase][
+  try {
+    throw new RuntimeException()
+  } catch (NullPointerException e) {
+    // handle e
+  } finally {
+    // do stuff
+  }
+]

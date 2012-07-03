@@ -1,0 +1,492 @@
+chapter:mongo[MongoBeans]
+
+link[http://www.mongodb.org][MongoDB] is a very popular document-based database management system. 
+In mongoDB, database entries (AKA e[documents]) have fields, which are essentially e[(key, value)] pairs.
+MongoDB is schema free, i.e. there are no rules which fields have to be defined and of what type they are.
+This allows for very flexible and heterogenous data structures and maps perfectly with JSON. 
+
+section:mongo_motivation[The Problem]
+
+Java is statically typed: The available types, their field names and field types, are known and validated 
+at compile time. The JavaBeans convention defines how instances can be manipulated. 
+
+OTOH, the standard mongoDB Java driver reflects mongoDB's schema freeness by providing mongo documents as 
+raw Java maps. This results in some major annoyances: First, you loose the benefit from Java's static typing. 
+You can ask a codeRef[com.mongodb.DBObject] for the value of a specific field, but you cannot be sure 
+that the returned codeRef[java.lang.Object] is of some expected type. As database entities are likely to 
+play a major role in your application, having them implemented as a generic codeRef[com.mongodb.DBObject]
+will likely result poorly readable and unsafe code. Second, additional behavior that would usually go into 
+methods of your entity classes has to be defined by external helper classes. Third, constructing a graph of 
+nested generic maps looks pretty bulky and inconventient in Java and breaks with the JavaBeans conventions.
+
+section:mongo_solution[A Solution With Xtext]
+
+In this project, we have created a small DSL e[mongoBeans] based on Xtext that allows to create basic 
+entity classes that are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of 
+the language as a description how to map mongoDB documents to JavaBeans, in analogy to well known object 
+relational mappers.
+
+An example mongoBeans file looks like this:
+code[mongoBeans][
+import java.util.*
+
+package org.musicdb {
+    // a mongo bean
+    Artist {
+        String name    // single valued property
+        Album* albums  // array property
+        // an operation
+        Iterable<Track> getOevre() {
+            albums.map\[track\].flatten
+        }
+    }
+
+    // another mongo bean
+    Album {
+        String title 
+        int year 
+        // inline definition of a mongo bean
+        Track {        
+            String title
+            int seconds
+        }* tracks
+    }
+}
+]
+
+From each e[MongoBean] definition in a e[MongoFile] file, we generate a Java class that wraps a 
+codeRef[com.mongodb.DBObject]. The class provides statically typed getter and setter methods for all 
+defined e[MongoProperties]. In the implementation of these accessor methods we delegate to the wrapped
+codeRef[com.mongodb.DBObject] and do all the casting and conversion work. For the code[Artist] in the 
+above example, this would look like
+
+code[Java][
+public class Artist implements IMongoBean {
+
+  private DBObject _dbObject;  
+  ...
+  public String getName() {
+    return (String) _dbObject.get("name");
+  }
+  
+  public void setName(final String name) {
+     _dbObject.put("name", name);
+  }
+  ...
+}
+]
+
+By generating Java code, the rest of the application can use a safe, statically typed and JavaBeans 
+conformant API to access the datamodel. In addition, e[MongoBeans] can define e[MongoOperations] 
+which are translated to Java methods. We can use e[MongoProperties] as well as Java types inside the 
+operations' bodies. 
+
+Client code could then look like this:
+code[Java][
+Artist john = new Artist();
+john.setName("John Coltrane");
+Album album = new Album();
+album.setTitle("A Love Supreme");
+john.getAlbums().add(album);
+Track...  // create some tracks and add them to the album
+ 
+System.out.println(john.getName() + "'s Oevre");
+for(Track track: john.getOevre()) 
+  System.out.println(track.getTitle());
+
+DBCollection dbCollection = ... // standard mongoDB driver code
+dbCollection.save(john.getDBObject())
+]
+
+section2:mongo_statistics[Some Stats]
+
+table[
+tr[td[Language name]td[mongoBeans]]
+tr[td[Author]td[Jan Koehnlein]]
+tr[td[Xtext Grammar]td[27 LOC, 9 rules]]
+tr[td[Xtext extensions]td[6 classes]]
+tr[td[Execution]td[Java code generator]]
+tr[td[Runtime library]td[4 classes]]
+tr[td[Hardest part]td[Finding a project name w/o politically incorrect connotation]]
+]
+
+section:mongo_running[Running the Example]
+
+In addtion to the ref:common_requirements[common requirements], you need the 
+link[http://www.mongodb.org/downloads][mongoDB implementation] for your platform. We have included 
+the mongoDB Java driver from link[http://download.eclipse.org/tools/orbit/downloads/][Eclipse Orbit] 
+in the code base. 
+
+Import the projects into an Eclipse workspace and run the launch config 
+e[Run (org.eclipse.xtext.mongobeans)]. Import the example plug-in into the new workspace and run 
+code[MusicDBXtendTest] as a JUnit test.
+
+section:mongo_details[The Solution in Detail]
+
+section2:mongo_grammar[Grammar]
+
+The complete mongoBenas grammar looks like this: 
+
+code[Xtext][
+grammar org.xtext.mongobeans.MongoBeans with org.eclipse.xtext.xbase.Xbase
+
+generate mongoBeans "http://www.eclipse.org/xtext/mongobeans/MongoBeans"
+
+MongoFile:
+  elements+=AbstractElement*;
+
+Import:
+  'import' importedNamespace=QualifiedNameWithWildcard;
+
+AbstractElement:
+  Import | PackageDeclaration | MongoBean;
+
+PackageDeclaration:
+  'package' name=QualifiedName '{'
+    elements+=AbstractElement*
+  '}';
+
+MongoBean:
+  name=ValidID '{'
+    features+=AbstractFeature*
+  '}';
+
+AbstractFeature:
+  MongoOperation | MongoProperty;
+
+MongoProperty:
+  (type=JvmTypeReference | inlineType=MongoBean) (many?='*')? name=ValidID;
+
+MongoOperation:
+  =>(returnType=JvmTypeReference name=ValidID '(') 
+    (parameters+=FullJvmFormalParameter (',' parameters+=FullJvmFormalParameter)*)? 
+  ')' 
+  body=XBlockExpression;
+
+QualifiedNameWithWildcard:
+  QualifiedName (".*")?;
+]
+
+The grammar inherits from the grammar of code[Xbase] in order to allow references to Java elements and Xbase 
+expressions. A e[MongoFile] contains any number of e[AbstractElements], which can be e[PackageDeclarations],
+e[Imports] or e[MongoBeans]. e[Imports] use Xtext's naming convention code[importedNamespace] to automatically 
+shorten qualified names of matching elements. Note that as opposed to Java, e[PackageDeclarations] can be nested.     
+e[MongoBeans] define statically typed MongoProperties, which can be single-valued or array-valued denoted by an 
+code[*] following the type name. The type of a e[MongoProperty] can also be defined inline. e[MongoBeans] can 
+also define e[MongoOperations]. Instead of defining all possible expressions for the body of an operation, we 
+leverage Xtext's expression language library Xbase. 
+
+section2:mongo_inferrer[Translation to Java]
+
+The JVM model inferrencnce is implemented in the codeRef[org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
+As the generated code is quite rich, this is the most complex component of this language.
+
+For each e[MongoBean], we create a Java class implementing the interface codeRef[org.xtext.mongobeans.runtime.IMongoBean].
+This interface is the first type of our small runtime library. The generated Java classes rely on this
+library to work, so it has to be on the classpath at runtime.
+
+table[
+  tr[
+    td[DSL]
+    td[code[mongoBeans][
+package org.musicdb {
+  Artist { ...]]]
+  tr[
+    td[Java]
+    td[code[Java][
+package org.musicdb;
+...
+public class Artist implements IMongoBean {  ...]]]
+]
+
+The inferrer code responsible for this section looks like this:
+code[Xtend][
+@Inject extension JvmTypesBuilder
+@Inject extension IQualifiedNameProvider  
+...
+def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+  for(bean : file.eAllOfType(typeof(MongoBean))) {
+       acceptor.accept(bean.toClass(bean.fullyQualifiedName))
+         .initializeLater(\[
+           documentation = bean.documentation
+           superTypes += newTypeRef(bean, 'org.xtext.mongobeans.IMongoBean')
+... // calling various methods to create Java members with from the MongoFeatures
+         \])
+  }
+}
+]
+
+First, finds all elements of type e[MongoBean] in the given e[MongoFile]. For each of these, create a new 
+Java class using the extension method code[toClass] from the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]. Analogously, the 
+The method code[fullyQualifiedName] comes actually from the secend injected extension 
+codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. Confused yet? Then better read the ref:xtend_primer[Xtend
+Primer] and the ref:simple[simple example] first: 
+
+The so created Java class is passed to the code[acceptor] as one of the results of the method. 
+The lambda expression passed to code[initializeLater] describes what happens to this class in the second
+phase. First the documentation is copied. Note that code[documentation = bean.documentation] is equivalent to 
+code[Xtend][it.setDocumentation(bean.documentation)] or even 
+code[Xtend][it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))]. This is the moment where you
+should be really flashed by the awesome syntax of Xtend.
+
+The we set the supertype. By using code[Xtend][_jvmTypesBuilder.newTypeRef(bean,
+String)] we create a reference to the existing interface codeRef[org.xtext.mongobeans.runtime.IMongoBean]. This
+will also insert a Java import at the appropriate location. 
+
+Each e[MongoBean] wraps a codeRef[com.mongodb.DBObject] which is represented as a Java field with a 
+getter. There are two constructors, one for a given codeRef[com.mongodb.DBObject] and one that 
+creates a new one. We have to store the class name in the DB object, if we want to be able to restore
+JavaBeans from query results.
+
+table[
+  tr[
+    td[DSL]
+    td[code[mongoBeans][
+Artist { ...]]]
+  tr[
+    td[Java]
+    td[code[Java][
+public class Artist implements IMongoBean { 
+  private DBObject _dbObject;
+  
+  public DBObject getDbObject() {
+    return this._dbObject;
+  }
+
+  public Artist(final DBObject dbObject) {
+    this._dbObject = dbObject;
+  }
+  
+  public Artist() {
+    _dbObject = new BasicDBObject();
+    _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
+  }
+...
+]]]
+]
+
+The inferrer code does this in two separate methods: One for the property code[_dbObject] and another
+for the constructors. Once again, we are using extension methods from the 
+code[JvmTypesBuilder]todo[link] and the shortcut syntax to access setters. Also note the closures to
+initialize the bodies of the constructors. We could just have appended a multi-line string, but in order
+to get the imports in the generated code right we are using the helper method code[appendTypeRef()].
+
+code[Xtend][
+  def protected addDbObjectProperty(JvmDeclaredType inferredType, MongoBean bean) {
+    inferredType.members += bean.toField('_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
+    inferredType.members += bean.toGetter('dbObject', '_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
+  }
+
+  def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
+    inferredType.members += bean.toConstructor \[
+      documentation = '''Creates a new «bean.name» wrapping the given {@link DBObject}.'''
+      parameters += toParameter("dbObject", newTypeRef(bean, 'com.mongodb.DBObject'))
+      body = \[
+        append('this._dbObject = dbObject;')
+      \]
+    \]
+    inferredType.members += bean.toConstructor \[
+      documentation = '''Creates a new «bean.name» wrapping a new {@link BasicDBObject}.'''
+      body = \[
+        append('_dbObject = new ')
+        appendTypeRef(bean, 'com.mongodb.BasicDBObject')
+        append('();').newLine
+        append('''
+          _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+        ''')
+      \]
+    \]
+  }
+]
+
+Next on our list are the getters and setters delegating to the code[_dbObject]. Let us start with single
+valued e[MongoProperties]:
+
+table[
+  tr[
+    td[DSL]
+    td[code[mongoBeans][
+...
+    String name
+    Artist friend
+...]]]
+  tr[
+    td[Java]
+    td[code[Java][
+...
+  public String getName() {
+    return (String) _dbObject.get("name");
+  }
+  
+  public void setName(final String name) {
+     _dbObject.put("name", name);
+  }
+  
+  public Artist getFriend() {
+    return WrappingUtil.wrapAndCast((DBObject) _dbObject.get("friend"));
+  }
+  
+  public void setFriend(final Artist friend) {
+     _dbObject.put("friend", WrappingUtil.unwrap(friend));
+  }
+...]]]
+]
+
+As a Java client would expect the result of code[getFriend()] should be a code[Artist], we have to handle
+e[MongoProperties] whose type is a e[MongoBean] differently. Note that the generated Java code uses 
+static helper methods to do the wrapping / unwrapping. They are defined in the second runtime class 
+codeRef[org.xtext.mongobeans.runtime.WrappingUtil]. To detect whether a type is actually a e[MongoBean] or not, we 
+use the helper class codeRef[org.xtext.mongobeans.jvmmodel.MongoTypes] that is also injected as an extension.
+
+code[Xtend][
+def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty property) {
+  inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) \[
+    documentation = property.documentation
+    body = \[
+      append('return ')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      } 
+    \]
+  \]
+  inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) \[
+    documentation = property.documentation
+    parameters += toParameter(property.name, property.jvmType)
+    body = \[
+      append(''' _dbObject.put("«property.name»", ''')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      }
+      append(');')
+    \]
+  \]
+}
+]
+
+Multi-valued e[MongoProperties] with a e[MongoBean] type require a special implementation of 
+codeRef[java.util.List] to automatically wrap/unwrap the elements. That's the third runtime library 
+class codeRef[org.xtext.mongobeans.runtime.MongoBeanList]. Note that we need a getter only. For multi-valued
+primitive properties, the Java driver already delivers a codeRef[java.util.List]:
+
+table[
+  tr[
+    td[DSL]
+    td[code[mongoBeans][
+...
+  String* aliases
+    Album* albums
+...]]]
+  tr[
+    td[Java]
+    td[code[Java][
+...
+  public List<String> getAliases() {
+    return (List<String>) _dbObject.get("aliases");
+  }
+  
+  private MongoBeanList<Album> _albums;
+  
+  public List<Album> getAlbums() {
+    if(_albums==null)
+      _albums = new MongoBeanList<Album>(_dbObject, "albums");
+    return _albums;
+  }
+...
+  ]]]
+]
+
+So this is what the inferrer snippet looks like:
+code[Xtend][
+  def protected addListAccessor(JvmDeclaredType inferredType, MongoProperty property) {
+    if(isMongoPrimitiveType(property.jvmType)) {
+      inferredType.members += property.toMethod('get' + property.name.toFirstUpper, 
+        newTypeRef(property, 'java.util.List', property.jvmType.asWrapperTypeIfPrimitive)
+      ) \[
+        documentation = property.documentation
+        body = \[
+...
+        \]
+      \]    
+    } else {
+      inferredType.members += property.toField('_' + property.name, newTypeRef(property,
+         'org.xtext.mongobeans.MongoBeanList', property.jvmType))
+      inferredType.members += property.toMethod('get' + property.name.toFirstUpper,
+        newTypeRef(property, 'java.util.List', property.jvmType)
+      ) \[
+ ...
+        \]
+      \]
+    }
+  }  
+]
+
+Last but not least, we want to create methods for e[MongoOperations]. 
+
+table[
+  tr[
+    td[DSL]
+    td[code[mongoBeans][
+...
+  Iterable<Track> getOevre() {
+      albums.map\[tracks\].flatten
+  }
+...]]]
+  tr[
+    td[Java]
+    td[code[Java][
+...
+  public Iterable<Track> getOevre() {
+    // some java code you really don't care about but it should just do the right thing
+  }
+...
+  ]]]
+]
+
+The inferrer code for this particular task is surprisingly simple, as we can directly associate the
+body of the e[MongoOperation]  to the generated Java method. The Xbase compiler will automatically 
+transform that to Java. 
+
+code[Xtend][
+def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) {
+    inferredType.members += operation.toMethod(operation.name, operation.returnType) \[
+      documentation = operation.documentation
+      for(parameter: operation.parameters)
+        parameters += parameter.toParameter(parameter.name, parameter.parameterType)
+      body = operation.body
+    \]
+  }
+]
+
+Puh, that was a lot of code, but because it is the essence of this language we hope it has been worthwhile.
+
+section2:mongo_additons[Additional Aspects]
+
+We have tweaked the language's infrastructure a bit more. 
+
+First, we have adapted the codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. By default, the
+qualified name of an element is calculated by concatening all the simple names of its containers with
+a dot. In our example, the e[MongoBean] code[Track] would consequently be named 
+code[org.musicdb.Album.track.Track]. To ignore properties and beans on the path, we implemented our own
+codeRef[org.xtext.mongobeans.scoping.MongoQualifiedNameProvider]. Note that we have to add a binding
+in the respective codeRef[org.xtext.mongobeans.MongoBeansRuntimeModule][Guice module] to make the framework 
+pick up our customization. See the link[http://www.xtext.org/documentation][Xtext documentation] for details 
+on dependency injection.
+
+Second, the Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
+we have added the codeRef[org.xtext.mongobeans.validation.MongoBeansValidator]. 
+
+To improve the language visually, we have tuned the 
+codeRef[org.xtext.mongobeans.ui.outline.MongoBeansOutlineTreeProvider][outline] and the 
+codeRef[org.xtext.mongobeans.ui.labeling.MongoBeansLabelProvider][label providers] as well. 
+
+section:mongo_beyond[Beyond This Example]
+
+Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
+Furthermore, the codeRef[org.xtext.mongobeans.example.MusicDBXtendTest][example] shows how to use Xtend to 
+build a very compact API to create trees of e[MongoBean] instances. 
+codeRef[org.xtext.mongobeans.runtime.MongoExtensions][Extension methods] can also be used to wrap other
+classes of the mongoDB driver.   

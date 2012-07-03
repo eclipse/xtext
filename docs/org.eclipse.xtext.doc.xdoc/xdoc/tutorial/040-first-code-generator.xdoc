@@ -1,0 +1,234 @@
+section:TutorialCodeGeneration[Writing a Code Generator With Xtend]
+
+As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the
+runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator
+with Eclipse.
+
+In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For
+each e[Entity], a Java class is generated and each e[Feature] will lead to a private field in that class and
+public getters and setters. For the sake of simplicity, we will use fully qualified names all over
+the generated code.
+
+code[Java][
+package my.company.blog;
+
+public class HasAuthor {
+  private java.lang.String author;
+  
+  public java.lang.String getAuthor() {
+    return author;
+  }
+  
+  public void setAuthor(java.lang.String author) {
+    this.author = author;
+  }
+}
+]
+
+First of all, locate the file e[DomainmodelGenerator.xtend] in the package e[org.eclipse.xtext.example.generator].
+This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
+Eclipse environment.
+
+code[Xtend][
+package org.eclipse.xtext.example.generator
+
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess
+
+class DomainmodelGenerator implements IGenerator {
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+  }
+}
+]
+
+Let's make the implementation more meaningful and start writing the code generator. The strategy is to find
+all entities within a resource and trigger code generation for each one.
+
+ol[
+  item[
+    First of all, you will have to filter the contents of the resource down to the defined entities. Therefore
+    we need to iterate a resource with all its deeply nested elements. This can be achieved with the method
+    code[getAllContents()]. To use the resulting codeRef[org.eclipse.emf.common.util.TreeIterator] in
+    a for loop, we use the extension method code[Java][toIterable()] from the built-in library class
+    codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions].
+    
+    code[Xtend][
+    class DomainmodelGenerator implements IGenerator {
+      override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+        for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+          ...
+        }
+      }
+    }
+    ]
+  ]
+  item[
+    Now let's answer the question, how we determine the file name of the Java class, that each e[Entity]
+    should yield. This information should be derived from the qualified name of the e[Entity] since
+    Java enforces this pattern. The qualified name itself has to be obtained from a special service
+    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
+    inject the codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] into the generator.
+    
+    code[Xtend][
+      @Inject extension IQualifiedNameProvider
+    ]
+    
+    This allows to ask for the name of an entity. It is straightforward to convert the name into
+    a file name:
+    
+    code[Xtend][
+    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+      for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+        fsa.generateFile(
+          e.fullyQualifiedName.toString("/") + ".java",
+          e.compile)
+      }
+    }
+    ]
+  ]
+  item[
+    The next step is to write the actual template code for an entity. For now, the function code[Xtend][Entity.compile]
+    does not exist, but it is easy to create it:
+    
+    code[Xtend][
+    def compile(Entity e) '''
+      package «e.eContainer.fullyQualifiedName»;
+      
+      public class «e.name» {
+      }
+    '''
+    ]
+  ]
+  item[
+    This small template is basically the first shot at a Java-Beans generator. However, it is currently
+    rather incomplete and will fail, if the e[Entity] is not contained in a package. A small modification
+    fixes this. The code[Java][package]-declaration has to be wrapped in an code[Xtend][IF] expression:
+    
+    code[Xtend][
+    def compile(Entity e) '''
+      «IF e.eContainer != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
+      
+      public class «e.name» {
+      }
+    '''
+    ]
+
+    Let's handle the e[superType] of an e[Entity] gracefully, too by using another code[Xtend][IF] expression:
+    
+    code[Xtend][
+    def compile(Entity e) ''' 
+      «IF e.eContainer != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
+      
+      public class «e.name» «IF e.superType != null
+              »extends «e.superType.fullyQualifiedName» «ENDIF»{
+      }
+    '''
+    ]
+  ]
+  item[
+    Even though the template will compile the e[Entities] without any complains, it still lacks support
+    for the Java properties, that each of the declared features should yield.
+    
+    For that purpose, you have to create another Xtend function that compiles a single feature
+    to the respective Java code.
+    
+    code[Xtend][
+    def compile(Feature f) '''
+      private «f.type.fullyQualifiedName» «f.name»;
+      
+      public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
+        return «f.name»;
+      }
+      
+      public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
+        this.«f.name» = «f.name»;
+      }
+    '''
+    ]
+    
+    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure
+    that the function is actually used.
+    
+    code[Xtend][
+    def compile(Entity e) ''' 
+      «IF e.eContainer != null»
+        package «e.eContainer.fullyQualifiedName»;
+      «ENDIF»
+      
+      public class «e.name» «IF e.superType != null
+              »extends «e.superType.fullyQualifiedName» «ENDIF»{
+        «FOR f:e.features»
+          «f.compile»
+        «ENDFOR»
+      }
+    '''
+    ]
+  ]
+]
+
+The final code generator looks pretty much like the following code snippet. Now you can give it a try!
+Launch a new Eclipse Application (e[Run As -> Eclipse Application] on the Xtext project) and create a
+e[dmodel] file in a Java Project. Now simply create a new source folder e[src-gen] in the that project
+and see how the compiler will pick up your sample e[Entities] and generate Java code for them. 
+
+code[Xtend][
+package org.eclipse.xtext.example.generator
+
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.example.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.Feature
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+
+import com.google.inject.Inject
+
+class DomainmodelGenerator implements IGenerator {
+
+  @Inject extension IQualifiedNameProvider
+
+  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+      fsa.generateFile(
+        e.fullyQualifiedName.toString("/") + ".java",
+        e.compile)
+    }
+  }
+
+  def compile(Entity e) ''' 
+    «IF e.eContainer != null»
+      package «e.eContainer.fullyQualifiedName»;
+    «ENDIF»
+    
+    public class «e.name» «IF e.superType != null
+            »extends «e.superType.fullyQualifiedName» «ENDIF»{
+      «FOR f:e.features»
+        «f.compile»
+      «ENDFOR»
+    }
+  '''
+
+  def compile(Feature f) '''
+    private «f.type.fullyQualifiedName» «f.name»;
+    
+    public «f.type.fullyQualifiedName» get«f.name.toFirstUpper»() {
+      return «f.name»;
+    }
+    
+    public void set«f.name.toFirstUpper»(«f.type.fullyQualifiedName» «f.name») {
+      this.«f.name» = «f.name»;
+    }
+  '''
+}
+]
+
+If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized
+into your workspace. Simply choose e[New -> Example -> Xtend Examples -> Xtend Introductory
+Examples] and have a look at Xtend's features.
+As a small exercise, you could implement support for the e[many] attribute of a e[Feature] or enforce
+naming conventions, e.g. field names should start with an underscore.

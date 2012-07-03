@@ -1,0 +1,423 @@
+chapter:DomainModelWalkThrough[15 Minutes Tutorial]
+
+In this tutorial we will implement a small domain-specific language to model entities and properties
+similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
+
+code[DomainExample][
+datatype String
+
+entity Blog {
+  title: String
+  many posts: Post
+}
+
+entity HasAuthor {
+  author: String
+}
+
+entity Post extends HasAuthor {
+  title: String
+  content: String
+  many comments: Comment
+}
+
+entity Comment extends HasAuthor {
+  content: String
+}
+]
+
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
+
+section[Create A New Xtext Project]
+
+In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
+
+  e[File -> New -> Project...  -> Xtext -> Xtext project]
+
+Choose a meaningful project name, language name and file extension, e.g.
+
+table[
+  tr[td[e[Main project name:]]td[org.example.domainmodel]]
+  tr[td[e[Language name:]]td[org.example.domainmodel.Domainmodel]]
+  tr[td[e[DSL-File extension:]]td[dmodel]]
+]
+
+Click on e[Finish] to create the projects. 
+
+img[images/30min_wizard.png][ ][ ][ ]
+
+After you have successfully finished the wizard, you will find three new projects in your workspace.
+
+table[
+  tr[
+    td[org.example.domainmodel]td[Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)]
+  ]
+  tr[
+    td[org.example.domainmodel.tests]td[Unit tests go here.]
+  ]
+  tr[
+    td[org.example.domainmodel.ui]td[The Eclipse editor and all the other workbench related functionality.]
+  ]
+]
+
+img[images/30min_initialprojectlayout.png][ ][ ][ ]
+
+section[Write Your Own Grammar]
+
+%% e[Please note]: If you encounter strange errors while copying and pasting
+%% a snippet from this document to your Eclipse editor, your documentation
+%% viewer most likely has inserted characters different from {space} into your 
+%% clipboard. Reenter the "white space" or type the text by hand to be sure everything
+%% works fine. 
+
+The wizard will automatically open the grammar file 
+e[Domainmodel.xtext] in the editor. As you can see that it already contains a simple e[Hello World] grammar:
+
+code[Xtext][
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+
+Model:
+  greetings+=Greeting*;
+  
+Greeting:
+  'Hello' name=ID '!';
+]
+
+Let's now just replace that grammar definition with the one for our domain model language:
+
+code[Xtext][
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+
+Domainmodel :
+  elements += Type*
+;
+  
+Type:
+  DataType | Entity
+;
+  
+DataType:
+  'datatype' name = ID
+;
+ 
+Entity:
+  'entity' name = ID ('extends' superType = \[Entity\])? '{'
+     features += Feature*
+  '}'
+;
+ 
+Feature:
+  many?='many'? name = ID ':' type = \[Type\]
+;
+]
+
+Let's have a more detailed look at what the different grammar rules mean:
+
+ol[
+  item[
+    The first rule in a grammar is always used as the entry or start rule.  
+    code[Xtext][
+    Domainmodel :
+      elements += Type*
+    ;
+    ]
+    
+    It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[Type]s which will be added (code[Xtext][+=])
+    to a feature called code[Xtext][elements].
+  ]
+  item[
+    The rule e[Type] delegates to either the rule e[DataType] or (code[Xtext][|]) the rule e[Entity].
+      
+    code[Xtext][
+    Type:
+      DataType | Entity
+    ;
+    ]
+  ]
+  item[
+    The rule e[DataType] starts with a keyword code[Xtext]['datatype'], followed by an identifier
+    which is parsed by a rule called e[ID]. The rule e[ID] is defined in the super grammar
+    e[org.eclipse.xtext.common.Terminals] and parses a single word, a.k.a identifier. You can navigate
+    to the declaration by using e[F3] on the rule call.
+    The value returned by the call to e[ID] is assigned (code[Xtext][=]) to the feature e[name].
+      
+    code[Xtext][
+    DataType:
+      'datatype' name = ID
+    ;
+    ]
+  ]
+  item[
+    The rule e[Entity] again starts with the definition of a keyword followed by a name.
+    
+    code[Xtext][
+    Entity :
+      'entity' name = ID ('extends' superType = \[Entity\])? '{'
+        features += Feature*
+      '}'
+    ;
+    ]
+    
+    Next up there is the extends clause which is parenthesized and optional (code[Xtext][?]). 
+    Since the feature named e[superType] is a cross reference (note the square brackets),
+    the parser rule e[Entity] is not called here, but only a single identifier (the e[ID]-rule) is parsed.
+    The actual e[Entity] will be resolved during the linking phase.
+    Finally between curly braces there can be any number of e[Features], which invokes the next rule.
+  ]
+  item[
+    Last but not least, the rule e[Feature] is defined as follows:
+    
+    code[Xtext][
+    Feature:
+      (many ?= 'many')? name = ID ':' type = \[Type\] 
+    ;
+    ]
+    
+    The keyword code[DomainExample][many] is used to model a multi valued feature in the domain model
+    DSL. The assignment operator (code[Xtext][?=]) implies that the feature e[many] is of type e[boolean]. You are already familiar with
+    the other syntax elements in this parser rule. 
+  ]
+
+]
+
+This domain model grammar already uses the most important concepts of Xtext's grammar language. 
+you have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (code[Xtext][=]) 
+where the multi value assignment used a plus-equals (code[Xtext][+=]). We have also seen the boolean assignment
+operator (code[Xtext][?=]). Furthermore we saw how a cross reference can be declared and learned about
+different cardinalities (code[Xtext][?] = optional, code[Xtext][*] = any number, code[Xtext][+] = at
+least once).  Please consult the ref:grammarLanguage[Grammar Language Reference] for more details.
+Let's now have a look what you can do with such a language description.
+
+section[Generate Language Artifacts]
+
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the
+various language components. To do so, locate the file e[GenerateDomainmodel.mwe2] file next to the grammar 
+file in the package explorer view. From its context menu, choose
+
+  e[Run As -> MWE2 Workflow].
+
+This will trigger the Xtext language generator. It generates the parser and 
+serializer and some additional infrastructure code. You will see its logging 
+messages in the Console View. 
+
+img[images/30min_rungenerator.png][ ][ ][ ]
+
+section[Run the Generated IDE Plug-in]
+
+We are now able to test the IDE integration. If you select e[Run -> Run Configurations...] from the Eclipse menu, you can
+choose e[Eclipse Application -> Launch Runtime Eclipse]. This preconfigured launch shortcut already has appropriate
+memory settings and parameters set. Now you can hit e[Run] to start a new Eclipse.
+
+img[images/30min_launchconfiguration.png][ ][ ][ ]
+
+This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
+In the new workbench, create a new project of your choice, e.g.
+e[File -> New -> Project...  -> Java Project] and therein a new file 
+with the file extension you chose in the beginning (e[*.dmodel]). This will open
+the generated entity editor. Try it and discover the default 
+functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
+the outline view, find references etc.
+
+img[images/30min_editor.png][][][]
+
+section[Second Iteration: Adding Packages and Imports]
+
+After you have created the your first DSL and had a look at the editor, the language should be refined
+and incrementally enhanced. The Domain Model language should support the notion of e[Package]s in order to avoid name
+clashes and to better fit with the target environment (Java). A e[Package] may contain e[Types] and other packages. 
+In order to allow fort names in references, we will also add a way to declare imports.
+
+In the end we want to be able to split the previously used model into to distinct files :
+
+code[DomainExample][
+// datatypes.dmodel
+
+datatype String
+]
+
+code[DomainExample][
+// commons.dmodel
+
+package my.company.common {
+  
+  entity HasAuthor {
+    author: String
+  }
+}
+]
+
+code[DomainExample][
+// blogs.dmodel
+
+package my.company.blog {
+  
+  import my.company.common.*
+    
+  entity Blog {
+    title: String
+    many posts: Post
+  }
+  
+  entity Post extends my.company.common.HasAuthor {
+    title: String
+    content: String
+    many comments: Comment
+  }
+  
+  entity Comment extends HasAuthor {
+    content: String
+  }
+}
+]
+
+Let's start enhancing the grammar. 
+
+ol[
+  item[
+    Since a e[Domainmodel] no longer contains types but packages, too,
+    the entry rule has to be modified. Furthermore, a common super type for e[Packages] and e[Types]
+    should be introduced: the e[AbstractElement].
+        
+    code[Xtext][
+    Domainmodel:
+      (elements += AbstractElement)*
+    ;
+    
+    AbstractElement:
+      PackageDeclaration | Type
+    ;
+    ]
+  ]
+  item[
+    A code[Xtext][PackageDeclaration] in turn looks pretty much as expected. It contains a number
+    of e[Imports] and e[AbstractElements]. Since e[Imports] should be allowed for the root-Domainmodel,
+    too, we add them as an alternative to the rule code[Xtext][AbstractElement].
+    
+    code[Xtext][
+    PackageDeclaration:
+      'package' name = QualifiedName '{'
+        (elements += AbstractElement)*
+      '}'
+    ;
+    
+    AbstractElement:
+      PackageDeclaration | Type | Import
+    ;
+    
+    QualifiedName:
+      ID ('.' ID)*
+    ;
+    ]
+    
+    The code[Xtext][QualifiedName] is a little special. It does not contain any assignments. Therefore,
+    it serves as a data type rule, which returns a String. So the feature e[name] of a e[Package] is still of
+    type codeRef[java.lang.String].
+  ]
+  item[
+    Imports can be defined in a very convenient way with Xtext. If you use the name e[importedNamespace]
+    in a parser rule, the framework will treat the value as an import. It even supports wildcard
+    and handles them as expected:
+    
+    code[Xtext][
+    Import:
+      'import' importedNamespace = QualifiedNameWithWildcard
+    ;
+  
+    QualifiedNameWithWildcard:
+      QualifiedName '.*'?
+    ;
+    ]
+    
+    Similar to the rule code[Xtext][QualifiedName], code[Xtext][QualifiedNameWithWildcard] returns
+    a plain string. 
+  ]
+  item[
+    The last step is to allow fully qualified names in cross references, too. Otherwise one could
+    not refer to an entity without adding an import statement.
+    
+    code[Xtext][
+    Entity:
+      'entity' name = ID 
+                  ('extends' superType = \[Entity | QualifiedName\])?
+      '{'
+        (features += Feature)*
+      '}'
+    ;
+     
+    Feature:
+      (many ?= 'many')? name = ID ':' type = \[Type | QualifiedName\]
+    ;
+    ]
+    
+    e[Please note that the bar (code[|]) is not an alternative in the context of a cross reference,
+    but used to specify the syntax of the parsed string.] 
+  ]
+]
+
+That's all for the grammar. It should now read as 
+
+code[Xtext][
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+
+Domainmodel:
+  (elements += AbstractElement)*
+;
+
+PackageDeclaration:
+  'package' name = QualifiedName '{'
+    (elements += AbstractElement)*
+  '}'
+;
+
+AbstractElement:
+  PackageDeclaration | Type | Import
+;
+
+QualifiedName:
+  ID ('.' ID)*
+;
+
+Import:
+  'import' importedNamespace = QualifiedNameWithWildcard
+;
+  
+QualifiedNameWithWildcard:
+  QualifiedName '.*'?
+;
+  
+Type:
+  DataType | Entity
+;
+  
+DataType:
+  'datatype' name=ID
+;
+ 
+Entity:
+  'entity' name = ID 
+              ('extends' superType = \[Entity | QualifiedName\])?
+  '{'
+    (features += Feature)*
+  '}'
+;
+ 
+Feature:
+  (many ?= 'many')? name = ID ':' type = \[Type | QualifiedName\]
+;
+]
+
+You should regenerate the language infrastructure as described in the 
+previous section, and give the editor another try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries.
+
+img[images/30min_multipleeditors.png][][][]
+

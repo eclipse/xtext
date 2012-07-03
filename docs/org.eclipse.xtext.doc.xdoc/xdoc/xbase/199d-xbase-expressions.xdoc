@@ -1,0 +1,109 @@
+section:xbaseExpressions[Using Xbase Expressions]
+
+Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
+but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details
+on this expression language, please consult the ref:xbaseLanguageRef_Introduction[reference documentation] and the 
+Xbase tutorial e[(File > New > Example > Xtext Examples > Xbase Tutorial)]. 
+
+Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add  
+behavior to your DSLs and make them executable. As Xbase integrates tightly with Java, there is usually no additional code needed to run 
+your DSL as part of a Java application. 
+
+section2[Making Your Grammar Refer To Xbase]
+
+If you want to refer to codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers] from the Xbase model, you need
+to import Xbase first:
+
+code[Xtext][
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+]
+
+Now identify the location in your grammar where you want references to Java types and Xbase expressions to appear
+and call the appropriate rules of the super grammar. Adding Xbase expression to the domainmodel example leads to the
+additional concept e[Operation].: An e[Operation]'s 
+parameters are e[FullJvmFormalParameters]. The production rule for e[FullJvmFormalParameters] expects
+both the name and the type here. That is reasonable since the type of parameters should not be inferred. 
+The operation's return type is a e[JvmTypeReference] and its e[body] is
+an e[XBlockExpression]. The final parser rule reads as:
+
+code[Xtext][
+Operation:
+  'op' name=ValidID '(' 
+  (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' 
+  ':' type=JvmTypeReference 
+    body=XBlockExpression;
+]
+
+If you are unsure which entry point to choose for your expressions, consider the e[XBlockExpression].
+
+To integrate e[Operations] in our models, we have to call this rule. We copy the previous e[Feature]
+to a new rule e[Property] and let e[Feature] become the super type of e[Property] and e[Operation]:
+
+code[Xtext][
+Feature:
+  Property | Operation
+;
+ 
+Property:
+  name = ID ':' type = JvmTypeReference
+; 
+]
+
+Note: You will have to adapt the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] to these
+changes, i.e. rename e[Feature] to e[Property] and create a codeRef[org.eclipse.xtext.common.types.JvmOperation]
+for each e[Operation]. We leave that as an exercise :-) 
+
+If you are done with that, everything will work out of the box. Since each expression is now logically
+contained in an codeRef[org.eclipse.xtext.common.types.JvmOperation][operation], all the scoping rules and
+visibility constraints are implied from that context. The framework will take care that the operation's
+parameters are visible inside the operation's body and that the declared return types are validated against the actual
+expression types.
+
+There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts
+such as codeRef[org.eclipse.xtext.common.types.JvmType][types] and codeRef[org.eclipse.xtext.common.types.JvmOperation][operations]
+were already derived from the model, a generator can be used to serialize that information to Java code.
+There is no need to write a code generator on top of that. The codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator]
+knows how to generate operation bodies properly. 
+
+section2[Using the Xbase Interpreter]
+
+Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
+Xbase ships with the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] which makes this
+rather easy.
+
+An interpreter is essentially an external visitor, that recursively processes a model based on the model
+element's types. By now you should be aware that polymorphic dispatching is exactly the technology needed
+here. In the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter], the dispatch method
+is called e[_evaluate<SomeDescription>] and takes three parameters, e.g. 
+
+code[Java][
+protected Object _evaluateBlockExpression(XBlockExpression literal, 
+                      IEvaluationContext context, 
+                      CancelIndicator indicator)
+]
+
+The codeRef[org.eclipse.core.expressions.IEvaluationContext] keeps the state of the running application,
+i.e. the local variables and their values. Additionally, it can be e[fork]ed, thus allowing to shadow the 
+elements of the original context. Here is an example code snippet how to call the
+codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter]:
+
+code[Java][
+@Inject private XbaseInterpreter xbaseInterpreter;
+
+@Inject private Provider<IEvaluationContext> contextProvider;
+
+...
+public Object evaluate(XExpression expression, Object thisElement) {
+  IEvaluationContext evaluationContext = contextProvider.get();
+  // provide initial context and implicit variables
+  evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
+  
+  IEvaluationResult result = xbaseInterpreter.evaluate(expression,   
+    evaluationContext, CancelIndicator.NullImpl);
+  if (result.getException() != null) {
+    // handle exception
+  } 
+  return result.getResult();
+}
+]
+

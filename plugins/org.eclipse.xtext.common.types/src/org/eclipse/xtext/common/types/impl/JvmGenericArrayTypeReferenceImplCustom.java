@@ -12,7 +12,6 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
@@ -28,15 +27,6 @@ public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeR
 			JvmType componentType = componentTypeReference.getType();
 			if (componentType instanceof JvmComponentType) {
 				JvmArrayType result = ((JvmComponentType) componentType).getArrayType();
-				if (result == null) {
-					result = TypesFactory.eINSTANCE.createJvmArrayType();
-					componentType.eSetDeliver(false);
-					try {
-						result.setComponentType((JvmComponentType) componentType);
-					} finally {
-						componentType.eSetDeliver(true);
-					}
-				}
 				return result;
 			}
 		}

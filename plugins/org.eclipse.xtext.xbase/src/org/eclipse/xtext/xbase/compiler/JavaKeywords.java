@@ -37,6 +37,7 @@ public class JavaKeywords {
 	        "else" ,
 	        "enum" , // added in 5.0
 	        "extends" ,
+	        "false" ,
 	        "final" ,
 	        "finally" ,
 	        "float" ,
@@ -51,6 +52,7 @@ public class JavaKeywords {
 	        "long" ,
 	        "native" ,
 	        "new" ,
+	        "null" ,
 	        "package" ,
 	        "private" ,
 	        "protected" ,
@@ -66,6 +68,7 @@ public class JavaKeywords {
 	        "throw" ,
 	        "throws" ,
 	        "transient" ,
+	        "true" ,
 	        "try" ,
 	        "void" ,
 	        "volatile" ,

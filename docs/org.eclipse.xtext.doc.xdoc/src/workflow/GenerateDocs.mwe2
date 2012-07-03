@@ -1,0 +1,19 @@
+module GenerateSpec
+
+import org.eclipse.emf.mwe.utils.*
+
+var targetDir = "manual"
+var modelPath = "xdoc"
+
+Workflow {
+	component = @workflow.XDocGenerator { 
+		// or define search scope explicitly
+		modelPath = modelPath
+		targetDir = targetDir
+		document = "Xtext 2.3 Documentation"
+		pdfLatex = "/usr/texbin/pdflatex"
+		release = true
+		// cleanAfterRun = false
+	}
+
+}

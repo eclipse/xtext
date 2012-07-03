@@ -98,10 +98,6 @@ public class RawTypeHelper implements IRawTypeHelper {
 			for(JvmType rawComponentType: rawComponentTypes) {
 				if (!rawComponentType.eIsProxy() && rawComponentType instanceof JvmComponentType) {
 					JvmArrayType arrayType = ((JvmComponentType) rawComponentType).getArrayType();
-					if (arrayType == null) {
-						arrayType = factory.createJvmArrayType();
-						arrayType.setComponentType((JvmComponentType) rawComponentType);
-					}
 					result.add(arrayType);
 				}
 			}
