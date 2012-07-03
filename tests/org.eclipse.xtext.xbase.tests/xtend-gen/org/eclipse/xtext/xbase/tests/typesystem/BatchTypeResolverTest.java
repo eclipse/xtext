@@ -301,31 +301,26 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_01() throws Exception {
     this.resolvesTo("1 + 1", "int");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_02() throws Exception {
     this.resolvesTo("1L + 1", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_03() throws Exception {
     this.resolvesTo("1 + 1L", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_04() throws Exception {
     this.resolvesTo("\'\' + \'\'", "String");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_05() throws Exception {
     this.resolvesTo("\'\' + 1", "String");
@@ -485,7 +480,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("[String x| true]", "(String)=>boolean");
   }
   
-  @Ignore
   @Test
   public void testClosure_03() throws Exception {
     String _plus = ("{\n" + 
@@ -497,7 +491,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo(_plus_2, "List<Object>");
   }
   
-  @Ignore
   @Test
   public void testClosure_04() throws Exception {
     String _plus = ("{\n" + 
@@ -550,7 +543,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
   }
   
-  @Ignore
   @Test
   public void testClosure_13() throws Exception {
     this.resolvesTo("{ \n\t\t\tval mapper = [ x | x ]\n\t\t\tnewArrayList(1).map(mapper)\n\t\t}", "List<Integer>");
@@ -873,7 +865,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_06() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s)", "List<String>");
@@ -991,25 +982,21 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size())", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_a() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_b() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_c() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -1085,13 +1072,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_o() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_p() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
@@ -1163,7 +1148,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_26() throws Exception {
     this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "List<Integer>");
@@ -1229,13 +1213,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_Bug342134_01() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "List<String>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_Bug342134_02() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e))", "List<ArrayList<String>>");
@@ -1517,19 +1499,16 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_041() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_042() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_043() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
@@ -1832,43 +1811,36 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.HashSet)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "HashSet<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_103() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.flatten\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_104() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(newHashSet)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "HashSet<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_105() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_106() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tsecond.add(new java.util.ArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_107() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_108() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_109() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
