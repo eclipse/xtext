@@ -68,7 +68,9 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	
 	def isAssignableFrom(Pair<String, String> lhsAndParams, String rhs, boolean expectation) {
 		// TODO synthesize unique variable names as soon as the function should be validated
-		val signature = '''def «IF !lhsAndParams.value.nullOrEmpty»<«lhsAndParams.value»> «ENDIF»void method(«lhsAndParams.key?:'Object'» lhs, «rhs?:'Object'» rhs) {}'''
+		val signature = '''def «IF !lhsAndParams.value.nullOrEmpty»<«lhsAndParams.value»> «ENDIF»void method(«
+			lhsAndParams.key.fixup» lhs, «
+			rhs.fixup» rhs) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
 		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType.toLightweightReference else new AnyTypeReference(this)
@@ -79,6 +81,14 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 				assertEquals(expectation, superType.testIsAssignable(rhsType))		
 			}
 		}
+	}
+	
+	def private String fixup(String type) {
+		type?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
+			?.replace("$Function<", "com.google.common.base.Function<")
+			?.replace("$Predicate<", "com.google.common.base.Predicate<")
+			?.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function")
+			?:'Object'
 	}
 	
 	def boolean testIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) { 
@@ -424,12 +434,6 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	
 	@Test
 	def void testFunctionTypes_06() {
-		"(int, int)=>boolean".isAssignableFrom("(Integer, Integer)=>Boolean")
-		"(Integer, Integer)=>Boolean".isAssignableFrom("(int, int)=>boolean")
-	}
-	
-	@Test
-	def void testFunctionTypes_07() {
 		("(T)=>void"->"T extends Integer").isAssignableFrom("(Integer)=>void")
 		("(T)=>int"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
 		("(T)=>void"->"T extends Integer").isAssignableFrom("(int)=>void")
@@ -437,7 +441,194 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	}
 	
 	@Test
-	def void testFunctionTypes_08()
+	def void testFunctionTypes_07()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_01()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_02()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_03()
+
+	@Test
+	def void testFunctionTypeAsParameterized_04() {
+		"$Function1<String, CharSequence>".isNotAssignableFrom("()=>String")
+		"$Function1<? super String, CharSequence>".isNotAssignableFrom("()=>String")
+		"$Function1<? super String, ? extends CharSequence>".isNotAssignableFrom("()=>String")
+		"$Function1<String, ? extends CharSequence>".isNotAssignableFrom("()=>String")
+		"$Function0<CharSequence>".isNotAssignableFrom("(CharSequence)=>String")
+		"$Function0<? extends CharSequence>".isNotAssignableFrom("(CharSequence)=>String")
+		"$Function0<? super CharSequence>".isNotAssignableFrom("(CharSequence)=>String")
+		"$Function1<CharSequence, CharSequence>".isNotAssignableFrom("(String, CharSequence)=>String")
+		"$Function1<CharSequence, ? extends CharSequence>".isNotAssignableFrom("(String, CharSequence)=>String")
+		"$Function1<? super CharSequence, CharSequence>".isNotAssignableFrom("(String, CharSequence)=>String")
+		"$Function1<? super CharSequence, ? extends CharSequence>".isNotAssignableFrom("(String, CharSequence)=>String")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_05() {
+		"$Function2<Integer, Integer, Boolean>".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"$Function2<? super Integer, ? super Integer, Boolean>".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"$Function2<Integer, Integer, ? extends Boolean>".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"$Function2<? super Integer, ? super Integer, ? extends Boolean>".isAssignableFrom("(Integer, Integer)=>Boolean")
+		"$Function2<Integer, Integer, Boolean>".isAssignableFrom("(int, int)=>boolean")
+		"$Function2<? super Integer, ? super Integer, Boolean>".isAssignableFrom("(int, int)=>boolean")
+		"$Function2<Integer, Integer, ? extends Boolean>".isAssignableFrom("(int, int)=>boolean")
+		"$Function2<? super Integer, ? super Integer, ? extends Boolean>".isAssignableFrom("(int, int)=>boolean")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_06() {
+		("$Procedure1<T>"->"T extends Integer").isAssignableFrom("(Integer)=>void")
+		("$Procedure1<? super T>"->"T extends Integer").isAssignableFrom("(Integer)=>void")
+		("$Function1<T, Integer>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, Integer>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<T, ? extends Integer>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, ? extends Integer>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Procedure1<T>"->"T extends Integer").isAssignableFrom("(int)=>void")
+		("$Procedure1<? super T>"->"T extends Integer").isAssignableFrom("(int)=>void")
+		("$Function1<T, Integer>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<? super T, Integer>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<T, ? extends Integer>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<? super T, ? extends Integer>"->"T extends Integer").isAssignableFrom("(int)=>int")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_07()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_08()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_09()
+	
+	@Test
+	def void testFunctionTypeAsParameterized_10()
+
+	@Test
+	def void testFunctionTypeAsParameterized_11() {
+		"(String)=>CharSequence".isNotAssignableFrom("$Function0<String>")
+		"(String)=>CharSequence".isNotAssignableFrom("$Function0<? extends String>")
+		"(String)=>CharSequence".isNotAssignableFrom("$Function0<? super String>")
+		"()=>CharSequence".isNotAssignableFrom("$Function1<CharSequence, String>")
+		"()=>CharSequence".isNotAssignableFrom("$Function1<? super CharSequence, String>")
+		"()=>CharSequence".isNotAssignableFrom("$Function1<CharSequence, ? extends String>")
+		"()=>CharSequence".isNotAssignableFrom("$Function1<? super CharSequence, ? extends String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function2<String, CharSequence, String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function2<? super String, ? super CharSequence, String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function2<String, CharSequence, ? extends String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function2<? super String, ? super CharSequence, ? extends String>")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_12() {
+		"(int, int)=>boolean".isAssignableFrom("$Function2<Integer, Integer, Boolean>")
+		"(int, int)=>boolean".isAssignableFrom("$Function2<? super Integer, ? super Integer, ? extends Boolean>")
+		"(int, int)=>boolean".isAssignableFrom("$Function2<Integer, Integer, Boolean>")
+		"(int, int)=>boolean".isAssignableFrom("$Function2<? super Integer, ? super Integer, ? extends Boolean>")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("$Function2<Integer, Integer, Boolean>")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("$Function2<? super Integer, ? super Integer, Boolean>")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("$Function2<Integer, Integer, ? extends Boolean>")
+		"(Integer, Integer)=>Boolean".isAssignableFrom("$Function2<? super Integer, ? super Integer, ? extends Boolean>")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_13() {
+		("(T)=>void"->"T extends Integer").isAssignableFrom("$Procedure1<Integer>")
+		("(T)=>void"->"T extends Integer").isAssignableFrom("$Procedure1<? super Integer>")
+		("(T)=>int"->"T extends Integer").isAssignableFrom("$Function1<Integer, Integer>")
+		("(T)=>int"->"T extends Integer").isAssignableFrom("$Function1<? super Integer, Integer>")
+		("(T)=>int"->"T extends Integer").isAssignableFrom("$Function1<Integer, ? extends Integer>")
+		("(T)=>int"->"T extends Integer").isAssignableFrom("$Function1<? super Integer, ? extends Integer>")
+		("(T)=>Integer"->"T extends Integer").isAssignableFrom("$Function1<Integer, Integer>")
+		("(T)=>Integer"->"T extends Integer").isAssignableFrom("$Function1<? super Integer, Integer>")
+		("(T)=>Integer"->"T extends Integer").isAssignableFrom("$Function1<Integer, ? extends Integer>")
+		("(T)=>Integer"->"T extends Integer").isAssignableFrom("$Function1<? super Integer, ? extends Integer>")
+	}
+	
+	@Test
+	def void testFunctionTypeAsParameterized_14()
+	
+	@Test
+	def void testDemandConvertedFunctionType_01()
+	
+	@Test
+	def void testDemandConvertedFunctionType_02() {
+		"Runnable".isAssignableFrom("()=>void")
+		"Runnable".isNotAssignableFrom("()=>String")
+		"Runnable".isNotAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_03() {
+		"Iterable<String>".isAssignableFrom("()=>java.util.Iterator<String>")
+		"Iterable<? extends String>".isAssignableFrom("()=>java.util.Iterator<? extends String>")
+		"Iterable<String>".isNotAssignableFrom("()=>void")
+		"Iterable<String>".isNotAssignableFrom("(Number)=>java.util.Iterator<String>")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_04() {
+		"$Function<String, CharSequence>".isNotAssignableFrom("()=>CharSequence")
+		"Iterable<CharSequence>".isNotAssignableFrom("(CharSequence)=>String")
+		"Comparator<CharSequence>".isNotAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_05()
+	
+	@Test
+	def void testDemandConvertedFunctionType_06()
+	
+	@Test
+	def void testDemandConvertedFunctionType_07() {
+		"java.util.Comparator<Integer>".isAssignableFrom("(int, int)=>int")
+		"java.util.Comparator<? super Integer>".isAssignableFrom("(Integer, Integer)=>int")
+		"java.util.Comparator<Integer>".isAssignableFrom("(Number, Integer)=>Integer")
+		"java.util.Comparator<? super Integer>".isAssignableFrom("(Integer, Number)=>Integer")
+		"java.util.Comparator<Integer>".isAssignableFrom("(Number, Object)=>int")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_08() {
+		"Comparable<String>".isNotAssignableFrom("$Function<String, Integer>")
+		"Comparable<String>".isNotAssignableFrom("$Function<? super String, Integer>")
+		"Comparable<String>".isNotAssignableFrom("$Function<String, ? extends Integer>")
+		"Comparable<String>".isNotAssignableFrom("$Function<? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_09() {
+		"Comparable<String>".isAssignableFrom("$Function1<String, Integer>")
+		"Comparable<String>".isAssignableFrom("$Function1<? super String, Integer>")
+		"Comparable<String>".isAssignableFrom("$Function1<String, ? extends Integer>")
+		"Comparable<String>".isAssignableFrom("$Function1<? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_10() {
+		"()=>void".isAssignableFrom("Runnable")
+		"()=>String".isNotAssignableFrom("Runnable")
+		"(String)=>void".isNotAssignableFrom("Runnable")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_11() {
+		"()=>java.util.Iterator<String>".isAssignableFrom("Iterable<String>")
+		"()=>java.util.Iterator<? extends String>".isAssignableFrom("Iterable<? extends String>")
+
+		"()=>void".isNotAssignableFrom("Iterable<String>")
+		"(Number)=>java.util.Iterator<String>".isNotAssignableFrom("Iterable<String>")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_12() {
+		"()=>CharSequence".isNotAssignableFrom("$Function<String, CharSequence>")
+		"(CharSequence)=>String".isNotAssignableFrom("Iterable<CharSequence>")
+		"(String)=>String".isNotAssignableFrom("Comparator<CharSequence>")
+	}
 }
 
 /**
@@ -620,29 +811,170 @@ class AssignabilityTest extends AbstractAssignabilityTest {
 	@Test
 	override testFunctionTypes_01() {
 		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
-		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(String)=>void".isAssignableFrom("(String)=>void")
 		"(CharSequence)=>void".isNotAssignableFrom("(String)=>void")
 	}
 	
 	@Test
 	override testFunctionTypes_02() {
 		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
-		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>String".isAssignableFrom("(String)=>String")
 		"(CharSequence)=>String".isNotAssignableFrom("(String)=>String")
 	}
 	
 	@Test
 	override testFunctionTypes_03() {
 		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
-		"(String)=>CharSequence".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>CharSequence".isAssignableFrom("(String)=>String")
 		"(CharSequence)=>CharSequence".isNotAssignableFrom("(String)=>String")
 	}
 	
 	@Test
-	override testFunctionTypes_08() {
+	override testFunctionTypes_07() {
 		("(T)=>T"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
 		("(T)=>T"->"T extends Integer").isNotAssignableFrom("(int)=>int")
 	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_01() {
+		"$Procedure1<String>".isAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<? super String>".isAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<? extends String>".isNotAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<String>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? super String>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? extends String>".isNotAssignableFrom("(String)=>void")
+		"$Procedure1<CharSequence>".isNotAssignableFrom("(String)=>void")
+		"$Procedure1<? super CharSequence>".isNotAssignableFrom("(String)=>void")
+		"$Procedure1<? extends CharSequence>".isNotAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_02() {
+		"$Function1<String, String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, ? extends String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, ? extends String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, String>".isAssignableFrom("(String)=>String")
+		"$Function1<String, ? extends String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, ? extends String>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, String>".isNotAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, String>".isNotAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, ? extends String>".isNotAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, ? extends String>".isNotAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_03() {
+		"$Function1<String, CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, ? extends CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, ? extends CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<String, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, CharSequence>".isNotAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, CharSequence>".isNotAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, ? extends CharSequence>".isNotAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, ? extends CharSequence>".isNotAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_07() {
+		("$Function1<T, T>"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, T>"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
+		("$Function1<T, ? extends T>"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, ? extends T>"->"T extends Integer").isNotAssignableFrom("(Integer)=>Integer")
+		("$Function1<T, T>"->"T extends Integer").isNotAssignableFrom("(int)=>int")
+		("$Function1<? super T, T>"->"T extends Integer").isNotAssignableFrom("(int)=>int")
+		("$Function1<T, ? extends T>"->"T extends Integer").isNotAssignableFrom("(int)=>int")
+		("$Function1<? super T, ? extends T>"->"T extends Integer").isNotAssignableFrom("(int)=>int")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_08() {
+		"(String)=>void".isAssignableFrom("$Procedure1<CharSequence>")
+		"(String)=>void".isAssignableFrom("$Procedure1<? super CharSequence>")
+		"(String)=>void".isAssignableFrom("$Procedure1<String>")
+		"(String)=>void".isAssignableFrom("$Procedure1<? super String>")
+		"(CharSequence)=>void".isNotAssignableFrom("$Procedure1<String>")
+		"(CharSequence)=>void".isNotAssignableFrom("$Procedure1<? super String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_09() {
+		"(String)=>String".isAssignableFrom("$Function1<CharSequence, String>")
+		"(String)=>String".isAssignableFrom("$Function1<? super CharSequence, String>")
+		"(String)=>String".isAssignableFrom("$Function1<CharSequence, ? extends String>")
+		"(String)=>String".isAssignableFrom("$Function1<? super CharSequence, ? extends String>")
+		"(String)=>String".isAssignableFrom("$Function1<String, String>")
+		"(String)=>String".isAssignableFrom("$Function1<? super String, String>")
+		"(String)=>String".isAssignableFrom("$Function1<String, ? extends String>")
+		"(String)=>String".isAssignableFrom("$Function1<? super String, ? extends String>")
+		"(CharSequence)=>String".isNotAssignableFrom("$Function1<String, String>")
+		"(CharSequence)=>String".isNotAssignableFrom("$Function1<? super String, String>")
+		"(CharSequence)=>String".isNotAssignableFrom("$Function1<String, ? extends String>")
+		"(CharSequence)=>String".isNotAssignableFrom("$Function1<? super String, ? extends String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_10() {
+		"(String)=>CharSequence".isAssignableFrom("$Function1<CharSequence, String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<? super CharSequence, String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<CharSequence, ? extends String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<? super CharSequence, ? extends String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<String, String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<? super String, String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<String, ? extends String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<? super String, ? extends String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function1<String, String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function1<? super String, String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function1<String, ? extends String>")
+		"(CharSequence)=>CharSequence".isNotAssignableFrom("$Function1<? super String, ? extends String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_14() {
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("$Function1<Integer, Integer>")
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("$Function1<? super Integer, Integer>")
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("$Function1<Integer, ? extends Integer>")
+		("(T)=>T"->"T extends Integer").isNotAssignableFrom("$Function1<? super Integer, ? extends Integer>")
+	}
+
+	@Test
+	override testDemandConvertedFunctionType_01() {
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(CharSequence)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(CharSequence)=>void")
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(Object)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(Object)=>void")
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<CharSequence>".isNotAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super CharSequence>".isNotAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testDemandConvertedFunctionType_05() {
+		"org.eclipse.xtext.util.IAcceptor<Integer>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super Integer>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? extends Integer>".isNotAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<Number>".isNotAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? extends Number>".isNotAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super Number>".isNotAssignableFrom("(int)=>void")
+	}
+	
+	@Test
+	override testDemandConvertedFunctionType_06() {
+		"Comparable<Integer>".isAssignableFrom("(int)=>int")
+		"Comparable<? super Integer>".isAssignableFrom("(Integer)=>Integer")
+		"Comparable<? super Integer>".isAssignableFrom("(Number)=>Integer")
+		"Comparable<Integer>".isAssignableFrom("(int)=>int")
+		"Comparable<? super Integer>".isAssignableFrom("(Integer)=>int")
+		"Comparable<? super Integer>".isAssignableFrom("(Number)=>int")
+		"Comparable<String>".isNotAssignableFrom("(int)=>int")
+	}
+	
 }
 
 /**
@@ -824,14 +1156,14 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 	@Test
 	override testFunctionTypes_01() {
 		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
-		"(String)=>void".isAssignableFrom("(CharSequence)=>void")
+		"(String)=>void".isAssignableFrom("(String)=>void")
 		"(CharSequence)=>void".isAssignableFrom("(String)=>void")
 	}
 	
 	@Test
 	override testFunctionTypes_02() {
 		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
-		"(String)=>String".isAssignableFrom("(CharSequence)=>String")
+		"(String)=>String".isAssignableFrom("(String)=>String")
 		"(CharSequence)=>String".isAssignableFrom("(String)=>String")
 	}
 	
@@ -843,331 +1175,442 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 	}
 	
 	@Test
-	override testFunctionTypes_08() {
+	override testFunctionTypes_07() {
 		("(T)=>T"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
 		("(T)=>T"->"T extends Integer").isAssignableFrom("(int)=>int")
 	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_01() {
+		"$Procedure1<String>".isAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<? super String>".isAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<? extends String>".isAssignableFrom("(CharSequence)=>void")
+		"$Procedure1<String>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? super String>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? extends String>".isAssignableFrom("(String)=>void")
+		"$Procedure1<CharSequence>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? super CharSequence>".isAssignableFrom("(String)=>void")
+		"$Procedure1<? extends CharSequence>".isAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_02() {
+		"$Function1<String, String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, ? extends String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, ? extends String>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, String>".isAssignableFrom("(String)=>String")
+		"$Function1<String, ? extends String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, ? extends String>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, String>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, ? extends String>".isAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, ? extends String>".isAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_03() {
+		"$Function1<String, CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, ? extends CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<? super String, ? extends CharSequence>".isAssignableFrom("(CharSequence)=>String")
+		"$Function1<String, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<String, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super String, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<CharSequence, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+		"$Function1<? super CharSequence, ? extends CharSequence>".isAssignableFrom("(String)=>String")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_07() {
+		("$Function1<T, T>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, T>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<T, ? extends T>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<? super T, ? extends T>"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
+		("$Function1<T, T>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<? super T, T>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<T, ? extends T>"->"T extends Integer").isAssignableFrom("(int)=>int")
+		("$Function1<? super T, ? extends T>"->"T extends Integer").isAssignableFrom("(int)=>int")
+	}
+
+	@Test
+	override testFunctionTypeAsParameterized_08() {
+		"(String)=>void".isAssignableFrom("$Procedure1<CharSequence>")
+		"(String)=>void".isAssignableFrom("$Procedure1<String>")
+		"(CharSequence)=>void".isAssignableFrom("$Procedure1<String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_09() {
+		"(String)=>String".isAssignableFrom("$Function1<CharSequence,String>")
+		"(CharSequence)=>String".isAssignableFrom("$Function1<String, String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_10() {
+		"(String)=>CharSequence".isAssignableFrom("$Function1<CharSequence, String>")
+		"(String)=>CharSequence".isAssignableFrom("$Function1<CharSequence, String>")
+		"(CharSequence)=>CharSequence".isAssignableFrom("$Function1<String, String>")
+	}
+	
+	@Test
+	override testFunctionTypeAsParameterized_14() {
+		("(T)=>T"->"T extends Integer").isAssignableFrom("$Function1<Integer, Integer>")
+	}
+
+	@Test
+	override testDemandConvertedFunctionType_01() {
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(CharSequence)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(CharSequence)=>void")
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(Object)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(Object)=>void")
+		"org.eclipse.xtext.util.IAcceptor<String>".isAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super String>".isAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<CharSequence>".isAssignableFrom("(String)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super CharSequence>".isAssignableFrom("(String)=>void")
+	}
+	
+	@Test
+	override testDemandConvertedFunctionType_05() {
+		"org.eclipse.xtext.util.IAcceptor<Integer>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super Integer>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? extends Integer>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<Number>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? extends Number>".isAssignableFrom("(int)=>void")
+		"org.eclipse.xtext.util.IAcceptor<? super Number>".isAssignableFrom("(int)=>void")
+	}
+	
+	@Test
+	override testDemandConvertedFunctionType_06() {
+		"Comparable<Integer>".isAssignableFrom("(int)=>int")
+		"Comparable<String>".isAssignableFrom("(int)=>int")
+	}
+	
 }
 
-/* 
-	
-	
-	
-	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
-		List<JvmTypeReference> refs = Lists.newArrayList();
-		for (int i = 0; i < types.length; i++) {
-			Class<?> class1 = types[i];
-			refs.add(ref(class1));
-		}
-		assertCommonSuperType(expected.getCanonicalName(), refs);
-	}
-	
-	protected void assertCommonSuperType(String expected, JvmTypeReference... types) {
-		assertCommonSuperType(expected, Arrays.asList(types));
-	}
-	
-	protected void assertCommonSuperType(String expected, List<JvmTypeReference> refs) {
-		JvmTypeReference type = getComputer().getCommonSuperType(refs);
-		assertEquals(expected, type.getIdentifier());
-	}
-	
-	@Test public void testCommonSuperType_0() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence",
-				ref(String.class),
-				ref(StringBuilder.class));
-	}
-	
-
-	@Test public void testCommonSuperType_1() throws Exception {
-		assertCommonSuperType(
-				CharSequence.class,
-				String.class,
-				StringBuilder.class,
-				CharSequence.class
-				);
-	}
-	
-	@Test public void testCommonSuperType_2() throws Exception {
-		assertCommonSuperType(Object.class,
-				String.class,
-				StringBuilder.class,
-				CharSequence.class,
-				Object.class
-		);
-	}
-	
-	@Test public void testCommonSuperType_3() throws Exception {
-		assertCommonSuperType(String.class,
-				String.class,
-				String.class
-		);
-	}
-	
-	@Test public void testCommonSuperType_4() throws Exception {
-		assertCommonSuperType(String.class,
-				String.class
-		);
-	}
-	
-	@Test public void testCommonSuperType_5() throws Exception {
-		assertCommonSuperType(
-				Serializable.class,
-				String.class,
-				StringBuilder.class,
-				Serializable.class);
-	}
-	
-	@Test public void testCommonSuperType_6() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence", // like testCommonSuperType_6 but different order
-				ref(StringBuilder.class),
-				ref(String.class));
-	}
-	
-	@Test public void testCommonSuperType_7() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Appendable & java.lang.CharSequence",
-				ref(StringBuilder.class),
-				ref(CharBuffer.class));
-	}
-	
-	@Test public void testCommonSuperType_8() throws Exception {
-		assertCommonSuperType(
-				"java.util.Collection<java.lang.String>",
-				ref(Set.class, ref(String.class)),
-				ref(List.class, ref(String.class)));
-	}
-	
-	@Test public void testCommonSuperType_9() throws Exception {
-		assertCommonSuperType(
-				"java.util.Collection", // one rawtype given - expect raw type
-				ref(Set.class, ref(String.class)),
-				ref(List.class));
-	}
-	
-	@Test public void testCommonSuperType_10() throws Exception {
-		assertCommonSuperType(
-				"java.util.Collection<? extends java.lang.CharSequence>",
-				ref(Set.class, ref(String.class)),
-				ref(List.class, ref(CharSequence.class)));
-	}
-	
-	@Test public void testCommonSuperType_11() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
-				ref(String.class),
-				ref(Integer.class));
-	}
-	
-	@Test public void testCommonSuperType_12() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Number & java.lang.Comparable<? extends java.lang.Object>",
-				ref(Double.class),
-				ref(Integer.class));
-	}
-	
-	@Test public void testCommonSuperType_13() throws Exception {
-		assertCommonSuperType(
-				"java.lang.AbstractStringBuilder & java.io.Serializable",
-				ref(StringBuilder.class),
-				ref(StringBuffer.class));
-	}
-	
-	@Test public void testCommonSuperType_14() throws Exception {
-		assertCommonSuperType(
-				"java.lang.CharSequence & java.io.Serializable",
-				multiRef(ref(CharSequence.class), ref(Serializable.class)),
-				multiRef(ref(CharSequence.class), ref(Serializable.class)));
-	}
-	
-	@Test public void testCommonSuperType_15() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				multiRef(ref(CharSequence.class), ref(Serializable.class)));
-	}
-	
-	@Test public void testCommonSuperType_16() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence",
-				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
-				multiRef(ref(Serializable.class), ref(CharSequence.class)));
-	}
-	
-	@Test public void testCommonSuperType_17() throws Exception {
-		assertCommonSuperType(
-				"java.lang.CharSequence & java.io.Serializable",
-				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
-				multiRef(ref(CharSequence.class), ref(Serializable.class)));
-	}
-	
-	@Test public void testCommonSuperType_18() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
-	}
-	
-	@Test public void testCommonSuperType_19() throws Exception {
-		assertCommonSuperType(
-				"java.lang.CharSequence & java.io.Serializable",
-				multiRef(ref(CharSequence.class), ref(Serializable.class)),
-				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
-	}
-	
-	@Test public void testCommonSuperType_20() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Object",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				multiRef(ref(Comparable.class), ref(Appendable.class)));
-	}
-	
-	@Test public void testCommonSuperType_21() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Object",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				ref(CharSequence.class),
-				ref(Serializable.class));
-	}
-	
-	@Test public void testCommonSuperType_22() throws Exception {
-		assertCommonSuperType(
-				"java.lang.CharSequence",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				ref(CharSequence.class));
-	}
-	
-	@Test public void testCommonSuperType_23() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.CharSequence",
-				multiRef(ref(Serializable.class), ref(CharSequence.class)),
-				any());
-	}
-	
-	@Test public void testCommonSuperType_24() throws Exception {
-		assertCommonSuperType(
-				"null",
-				any(),
-				any());
-	}
-	
-	@Test public void testCommonSuperType_25() throws Exception {
-		assertCommonSuperType(
-				"java.lang.CharSequence",
-				ref(CharSequence.class),
-				ref(String.class),
-				any());
-	}
-	
-	@Test public void testCommonSuperType_26() throws Exception {
-		assertCommonSuperType(
-				"java.util.Collection<? extends java.lang.AbstractStringBuilder & java.io.Serializable>",
-				ref(List.class, ref(StringBuffer.class)),
-				ref(Set.class, ref(StringBuilder.class)));
-	}
-	
-	@Test public void testCommonSuperType_27() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Iterable", // one raw type - super type should be raw type
-				ref(Collection.class, ref(String.class)),
-				ref(RawIterable.class));
-	}
-	
-	@Test public void testCommonSuperType_28() throws Exception {
-//		Integer[] i = null;
-//		Double[] d = null;
-//		List<Comparable<? extends Number>[]> list = ImmutableList.<Comparable<? extends Number>[]>of(i, d);
-//		List<Comparable<? extends Comparable<? extends Object>>[]> list2 = ImmutableList.<Comparable<? extends Comparable<? extends Object>>[]>of(i, d);
-		assertCommonSuperType(
-				"java.lang.Number[] & java.lang.Comparable<? extends java.lang.Object>[]",
-				array(ref(Double.class),1),
-				array(ref(Integer.class),1));
-	}
-	
-	@Test public void testCommonSuperType_29() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.Cloneable",
-				array(ref(double.class),1),
-				array(ref(int.class),1));
-	}
-	
-	@Test public void testCommonSuperType_30() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable & java.lang.Cloneable",
-				array(ref(int.class),2),
-				array(ref(int.class),1));
-	}
-	
-	@Test public void testCommonSuperType_31() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Object[]",
-				array(ref(CharSequence.class),2),
-				array(ref(CharSequence.class),1));
-	}
-	
-	@Test public void testCommonSuperType_32() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Number[]",
-				array(ref(Number.class),1),
-				array(ref(Integer.class),1),
-				array(ref(Double.class),1));
-	}
-	
-	@Test public void testCommonSuperType_33() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Number[][][] & java.lang.Comparable<? extends java.lang.Object>[][][]",
-				array(ref(Double.class),3),
-				array(ref(Integer.class),3));
-	}
-	
-	@Test public void testCommonSuperType_34() throws Exception {
-		assertCommonSuperType(
-				"java.io.Serializable[]",
-				array(ref(Number.class),2),
-				array(ref(Number.class),1));
-	}
-	
-	@Test public void testCommonSuperType_35() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
-				ref(String.class),
-				ref(int.class));
-	}
-	
-	@Test
-	public void testCommonSuperType_36() throws Exception {
-		assertCommonSuperType(
-				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
-				ref(LinkedList.class, ref(String.class)),
-				ref(ArrayList.class, ref(String.class)));
-	}
-	@Test
-	public void testCommonSuperType_37() throws Exception {
-		assertCommonSuperType(
-				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
-				ref(LinkedList.class, ref(String.class)),
-				ref(ArrayList.class, ref(String.class)));
-	}
-	
-	@Test public void testBug343100_01() throws Exception {
-		assertCommonSuperType(
-				"java.lang.Class<? extends java.lang.Object>",
-				ref(Class.class, ref(Void.class)),
-				ref(Class.class, ref(String.class)),
-				any());
-	}
-	
-	@Test public void testBug343100_02() throws Exception {
-		assertCommonSuperType(
-				"java.util.Collection<? extends java.lang.Object>",
-				ref(Collection.class, ref(Void.class)),
-				ref(List.class, ref(String.class)));
-	}
-	
-	public TypeConformanceComputer getComputer() {
-		return computer;
-	}
-
-*/
+///* 
+//	
+//	
+//	
+//	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
+//		List<JvmTypeReference> refs = Lists.newArrayList();
+//		for (int i = 0; i < types.length; i++) {
+//			Class<?> class1 = types[i];
+//			refs.add(ref(class1));
+//		}
+//		assertCommonSuperType(expected.getCanonicalName(), refs);
+//	}
+//	
+//	protected void assertCommonSuperType(String expected, JvmTypeReference... types) {
+//		assertCommonSuperType(expected, Arrays.asList(types));
+//	}
+//	
+//	protected void assertCommonSuperType(String expected, List<JvmTypeReference> refs) {
+//		JvmTypeReference type = getComputer().getCommonSuperType(refs);
+//		assertEquals(expected, type.getIdentifier());
+//	}
+//	
+//	@Test public void testCommonSuperType_0() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence",
+//				ref(String.class),
+//				ref(StringBuilder.class));
+//	}
+//	
+//
+//	@Test public void testCommonSuperType_1() throws Exception {
+//		assertCommonSuperType(
+//				CharSequence.class,
+//				String.class,
+//				StringBuilder.class,
+//				CharSequence.class
+//				);
+//	}
+//	
+//	@Test public void testCommonSuperType_2() throws Exception {
+//		assertCommonSuperType(Object.class,
+//				String.class,
+//				StringBuilder.class,
+//				CharSequence.class,
+//				Object.class
+//		);
+//	}
+//	
+//	@Test public void testCommonSuperType_3() throws Exception {
+//		assertCommonSuperType(String.class,
+//				String.class,
+//				String.class
+//		);
+//	}
+//	
+//	@Test public void testCommonSuperType_4() throws Exception {
+//		assertCommonSuperType(String.class,
+//				String.class
+//		);
+//	}
+//	
+//	@Test public void testCommonSuperType_5() throws Exception {
+//		assertCommonSuperType(
+//				Serializable.class,
+//				String.class,
+//				StringBuilder.class,
+//				Serializable.class);
+//	}
+//	
+//	@Test public void testCommonSuperType_6() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence", // like testCommonSuperType_6 but different order
+//				ref(StringBuilder.class),
+//				ref(String.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_7() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Appendable & java.lang.CharSequence",
+//				ref(StringBuilder.class),
+//				ref(CharBuffer.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_8() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.Collection<java.lang.String>",
+//				ref(Set.class, ref(String.class)),
+//				ref(List.class, ref(String.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_9() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.Collection", // one rawtype given - expect raw type
+//				ref(Set.class, ref(String.class)),
+//				ref(List.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_10() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.Collection<? extends java.lang.CharSequence>",
+//				ref(Set.class, ref(String.class)),
+//				ref(List.class, ref(CharSequence.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_11() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
+//				ref(String.class),
+//				ref(Integer.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_12() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Number & java.lang.Comparable<? extends java.lang.Object>",
+//				ref(Double.class),
+//				ref(Integer.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_13() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.AbstractStringBuilder & java.io.Serializable",
+//				ref(StringBuilder.class),
+//				ref(StringBuffer.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_14() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.CharSequence & java.io.Serializable",
+//				multiRef(ref(CharSequence.class), ref(Serializable.class)),
+//				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_15() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_16() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_17() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.CharSequence & java.io.Serializable",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
+//				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_18() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_19() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.CharSequence & java.io.Serializable",
+//				multiRef(ref(CharSequence.class), ref(Serializable.class)),
+//				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_20() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Object",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				multiRef(ref(Comparable.class), ref(Appendable.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_21() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Object",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				ref(CharSequence.class),
+//				ref(Serializable.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_22() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.CharSequence",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				ref(CharSequence.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_23() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.CharSequence",
+//				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+//				any());
+//	}
+//	
+//	@Test public void testCommonSuperType_24() throws Exception {
+//		assertCommonSuperType(
+//				"null",
+//				any(),
+//				any());
+//	}
+//	
+//	@Test public void testCommonSuperType_25() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.CharSequence",
+//				ref(CharSequence.class),
+//				ref(String.class),
+//				any());
+//	}
+//	
+//	@Test public void testCommonSuperType_26() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.Collection<? extends java.lang.AbstractStringBuilder & java.io.Serializable>",
+//				ref(List.class, ref(StringBuffer.class)),
+//				ref(Set.class, ref(StringBuilder.class)));
+//	}
+//	
+//	@Test public void testCommonSuperType_27() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Iterable", // one raw type - super type should be raw type
+//				ref(Collection.class, ref(String.class)),
+//				ref(RawIterable.class));
+//	}
+//	
+//	@Test public void testCommonSuperType_28() throws Exception {
+////		Integer[] i = null;
+////		Double[] d = null;
+////		List<Comparable<? extends Number>[]> list = ImmutableList.<Comparable<? extends Number>[]>of(i, d);
+////		List<Comparable<? extends Comparable<? extends Object>>[]> list2 = ImmutableList.<Comparable<? extends Comparable<? extends Object>>[]>of(i, d);
+//		assertCommonSuperType(
+//				"java.lang.Number[] & java.lang.Comparable<? extends java.lang.Object>[]",
+//				array(ref(Double.class),1),
+//				array(ref(Integer.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_29() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.Cloneable",
+//				array(ref(double.class),1),
+//				array(ref(int.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_30() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable & java.lang.Cloneable",
+//				array(ref(int.class),2),
+//				array(ref(int.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_31() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Object[]",
+//				array(ref(CharSequence.class),2),
+//				array(ref(CharSequence.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_32() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Number[]",
+//				array(ref(Number.class),1),
+//				array(ref(Integer.class),1),
+//				array(ref(Double.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_33() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Number[][][] & java.lang.Comparable<? extends java.lang.Object>[][][]",
+//				array(ref(Double.class),3),
+//				array(ref(Integer.class),3));
+//	}
+//	
+//	@Test public void testCommonSuperType_34() throws Exception {
+//		assertCommonSuperType(
+//				"java.io.Serializable[]",
+//				array(ref(Number.class),2),
+//				array(ref(Number.class),1));
+//	}
+//	
+//	@Test public void testCommonSuperType_35() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
+//				ref(String.class),
+//				ref(int.class));
+//	}
+//	
+//	@Test
+//	public void testCommonSuperType_36() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
+//				ref(LinkedList.class, ref(String.class)),
+//				ref(ArrayList.class, ref(String.class)));
+//	}
+//	@Test
+//	public void testCommonSuperType_37() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
+//				ref(LinkedList.class, ref(String.class)),
+//				ref(ArrayList.class, ref(String.class)));
+//	}
+//	
+//	@Test public void testBug343100_01() throws Exception {
+//		assertCommonSuperType(
+//				"java.lang.Class<? extends java.lang.Object>",
+//				ref(Class.class, ref(Void.class)),
+//				ref(Class.class, ref(String.class)),
+//				any());
+//	}
+//	
+//	@Test public void testBug343100_02() throws Exception {
+//		assertCommonSuperType(
+//				"java.util.Collection<? extends java.lang.Object>",
+//				ref(Collection.class, ref(Void.class)),
+//				ref(List.class, ref(String.class)));
+//	}
+//	
+//	public TypeConformanceComputer getComputer() {
+//		return computer;
+//	}
+//
+//*/
 

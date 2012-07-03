@@ -199,14 +199,14 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
   @Test
   public void testFunctionTypes_01() {
     this.isAssignableFrom("(String)=>void", "(CharSequence)=>void");
-    this.isAssignableFrom("(String)=>void", "(CharSequence)=>void");
+    this.isAssignableFrom("(String)=>void", "(String)=>void");
     this.isAssignableFrom("(CharSequence)=>void", "(String)=>void");
   }
   
   @Test
   public void testFunctionTypes_02() {
     this.isAssignableFrom("(String)=>String", "(CharSequence)=>String");
-    this.isAssignableFrom("(String)=>String", "(CharSequence)=>String");
+    this.isAssignableFrom("(String)=>String", "(String)=>String");
     this.isAssignableFrom("(CharSequence)=>String", "(String)=>String");
   }
   
@@ -218,10 +218,129 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
   }
   
   @Test
-  public void testFunctionTypes_08() {
+  public void testFunctionTypes_07() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isAssignableFrom(_mappedTo_1, "(int)=>int");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_01() {
+    this.isAssignableFrom("$Procedure1<String>", "(CharSequence)=>void");
+    this.isAssignableFrom("$Procedure1<? super String>", "(CharSequence)=>void");
+    this.isAssignableFrom("$Procedure1<? extends String>", "(CharSequence)=>void");
+    this.isAssignableFrom("$Procedure1<String>", "(String)=>void");
+    this.isAssignableFrom("$Procedure1<? super String>", "(String)=>void");
+    this.isAssignableFrom("$Procedure1<? extends String>", "(String)=>void");
+    this.isAssignableFrom("$Procedure1<CharSequence>", "(String)=>void");
+    this.isAssignableFrom("$Procedure1<? super CharSequence>", "(String)=>void");
+    this.isAssignableFrom("$Procedure1<? extends CharSequence>", "(String)=>void");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_02() {
+    this.isAssignableFrom("$Function1<String, String>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<? super String, String>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<String, ? extends String>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<? super String, ? extends String>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<String, String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super String, String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<String, ? extends String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super String, ? extends String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<CharSequence, String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super CharSequence, String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<CharSequence, ? extends String>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super CharSequence, ? extends String>", "(String)=>String");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_03() {
+    this.isAssignableFrom("$Function1<String, CharSequence>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<? super String, CharSequence>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<String, ? extends CharSequence>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<? super String, ? extends CharSequence>", "(CharSequence)=>String");
+    this.isAssignableFrom("$Function1<String, CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super String, CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<String, ? extends CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super String, ? extends CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<CharSequence, CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super CharSequence, CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<CharSequence, ? extends CharSequence>", "(String)=>String");
+    this.isAssignableFrom("$Function1<? super CharSequence, ? extends CharSequence>", "(String)=>String");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_07() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_1, "(Integer)=>Integer");
+    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_2, "(Integer)=>Integer");
+    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_3, "(Integer)=>Integer");
+    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_4, "(int)=>int");
+    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_5, "(int)=>int");
+    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_6, "(int)=>int");
+    Pair<String,String> _mappedTo_7 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
+    this.isAssignableFrom(_mappedTo_7, "(int)=>int");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_08() {
+    this.isAssignableFrom("(String)=>void", "$Procedure1<CharSequence>");
+    this.isAssignableFrom("(String)=>void", "$Procedure1<String>");
+    this.isAssignableFrom("(CharSequence)=>void", "$Procedure1<String>");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_09() {
+    this.isAssignableFrom("(String)=>String", "$Function1<CharSequence,String>");
+    this.isAssignableFrom("(CharSequence)=>String", "$Function1<String, String>");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_10() {
+    this.isAssignableFrom("(String)=>CharSequence", "$Function1<CharSequence, String>");
+    this.isAssignableFrom("(String)=>CharSequence", "$Function1<CharSequence, String>");
+    this.isAssignableFrom("(CharSequence)=>CharSequence", "$Function1<String, String>");
+  }
+  
+  @Test
+  public void testFunctionTypeAsParameterized_14() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    this.isAssignableFrom(_mappedTo, "$Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testDemandConvertedFunctionType_01() {
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<String>", "(CharSequence)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super String>", "(CharSequence)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<String>", "(Object)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super String>", "(Object)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<String>", "(String)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super String>", "(String)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<CharSequence>", "(String)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super CharSequence>", "(String)=>void");
+  }
+  
+  @Test
+  public void testDemandConvertedFunctionType_05() {
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<Integer>", "(int)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super Integer>", "(int)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? extends Integer>", "(int)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<Number>", "(int)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? extends Number>", "(int)=>void");
+    this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super Number>", "(int)=>void");
+  }
+  
+  @Test
+  public void testDemandConvertedFunctionType_06() {
+    this.isAssignableFrom("Comparable<Integer>", "(int)=>int");
+    this.isAssignableFrom("Comparable<String>", "(int)=>int");
   }
 }
