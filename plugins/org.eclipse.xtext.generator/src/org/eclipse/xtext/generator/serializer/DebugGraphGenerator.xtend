@@ -14,7 +14,6 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.util.formallang.PdaToDot
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.util.formallang.NfaToDot
-import org.eclipse.xtext.util.GraphvizDotBuilder
 
 class DebugGraphGenerator { 
 	

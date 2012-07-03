@@ -69,7 +69,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.validation.impl,
  org.eclipse.xtext.xtext;x-internal:=true,
  org.eclipse.xtext.xtext.ecoreInference;x-internal:=true
-Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
+Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.5.0";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="2.5.0";visibility:=reexport,
  org.eclipse.emf.codegen;bundle-version="2.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.common;bundle-version="2.5.0",
