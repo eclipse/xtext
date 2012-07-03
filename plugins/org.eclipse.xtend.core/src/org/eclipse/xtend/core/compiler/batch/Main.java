@@ -47,7 +47,7 @@ public class Main {
 	}
 	
 	private static void printUsage() {
-		System.out.println("Usage: XtendBatchCompiler <options> <source directories>");
+		System.out.println("Usage: Main <options> <source directories>");
 		System.out.println("where possible options include:");
 		System.out.println("-d <directory>             Specify where to place generated xtend files");
 		System.out.println("-tp <path>                 Temp directory to hold generated stubs and classes");

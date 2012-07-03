@@ -12,25 +12,19 @@
 <h1>Processed Annotations</h1>
 <p>
 Xtend comes with annotations that help to steer the compilation process.
-These annotations reside in the <span class="inlinecode">org.eclipse.xtend.lib</span> plug-in/jar which must be on the classpath
+These annotations reside in the <span class="inlinecode">org.eclipse.xtend.lib</span> plug-in/jar which must be on the class path
 of the project containing the Xtend files. 
 </p>
 <a name="propertyAnnotation"></a>
 <h2>@Property</h2>
 <p>
-For fields that are annotated as <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a>, the Xtend compiler will generate a Java field, a
+For fields that are annotated as <a class="jdoc" href="http://download.eclipse.org/xtend/javadoc/2.3/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.lib/src/org/eclipse/xtend/lib/Property.java" title="View Source Code" >(src)</a>, the Xtend compiler will generate a Java field, a
 getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
 an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
 Thus, an Xtend field
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@Property&nbsp;String&nbsp;name<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">@Property&nbsp;String&nbsp;name</span>
 </p>
 <p>
 will compile to the Java code
@@ -47,7 +41,7 @@ will compile to the Java code
 <br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(<span class="keyword">final</span>&nbsp;String&nbsp;name)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">this</span>._name&nbsp;=&nbsp;name;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -55,7 +49,7 @@ will compile to the Java code
 <a name="dataAnnotation"></a>
 <h2>@Data</h2>
 <p>
-The annotation <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+The annotation <a class="jdoc" href="http://download.eclipse.org/xtend/javadoc/2.3/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.lib/src/org/eclipse/xtend/lib/Data.java" title="View Source Code" >(src)</a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
 has the following effect:
 </p>
 <p>
@@ -67,7 +61,7 @@ has the following effect:
 		getter methods will be generated (if not existent),
 	</li>
 	<li>
-		a constructor taking paramaters for all non-initialized fields will be generated (if not existent),
+		a constructor taking parameters for all non-initialized fields will be generated (if not existent),
 	</li>
 	<li>
 		equals(Object) / hashCode() methods will be generated (if not existent),
@@ -87,7 +81,7 @@ Example:
 @Data&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br/>
 &nbsp;&nbsp;String&nbsp;firstName<br/>
 &nbsp;&nbsp;String&nbsp;lastName<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

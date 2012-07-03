@@ -4,28 +4,32 @@
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
 		</div>
 		<ul id="leftnav">
+		<li class="partentry" >
+		Getting Started
+		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
 		</li>
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="12-Installation.php">Installation</a></div>
-		<ul style="display: none;" id="subToc_12-Installation.html">
-		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
-		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
-		</ul>
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="13-hello-world.php">Hello World</a></div>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="13-getting-started.php">Getting Started</a></div>
-		<ul style="display: none;" id="subToc_13-getting-started.html">
-		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
+		<a href="14-movies.php">The Movies Example</a></div>
+		<ul style="display: none;" id="subToc_14-movies.html">
+		<li id="14-movies.html#moviesExample_2.html" ><a href="14-movies.php#moviesExample_2.php" >The Data</a></li>
+		<li id="14-movies.html#moviesExample_3.html" ><a href="14-movies.php#moviesExample_3.php" >Parsing The Data</a></li>
+		<li id="14-movies.html#moviesExample_4.html" ><a href="14-movies.php#moviesExample_4.php" >Answering Some Questions</a></li>
 		</ul>
+		</li>
+		<li class="partentry" >
+		Reference Documentation
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
+		<a href="15-types.php">Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
 		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
 		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
@@ -81,7 +85,7 @@
 	</div>
 	<div id="midcolumn">
 		<a name="types" ></a>
-		<h1>Static Typing and Java Interoperability</h1>
+		<h1>Java Interoperability</h1>
 				<div class="toc">
 				  <ul>
 				    <li><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
@@ -93,7 +97,7 @@
 		<p>
 		Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types 
 		as <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
-		classpath.  
+		class path.  
 		</p>
 		<p>
 		Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
@@ -141,8 +145,8 @@
 			</p>
 			<p>
 			Another very useful conversion applies to lambda expressions. A lambda expression
-			usually is of one of the types listed in <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
-			or <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However if the expected type is an interface with a single method
+			usually is of one of the types listed in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+			or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However if the expected type is an interface with a single method
 			declaration, a lambda expression is automatically converted to that
 			type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.php#closureTypes.php" title="Go to &quot;Typing&quot;" >section closureTypes</a>
 			for more details.

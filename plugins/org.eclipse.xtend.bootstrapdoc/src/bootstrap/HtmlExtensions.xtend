@@ -26,12 +26,9 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
 import static bootstrap.ParagraphState.*
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.xdoc.xdoc.AbstractSection
-import org.eclipse.xtext.xdoc.xdoc.AbstractSection
-import org.eclipse.xtext.xdoc.xdoc.XdocPackage
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
