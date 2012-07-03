@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -39,6 +40,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	Primitives primitives;
+	
+	@Inject
+	@Property
+	FunctionTypes functionTypes;
 	
 	@Inject
 	@Property

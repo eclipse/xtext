@@ -18,9 +18,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.RawTypeHelper;
@@ -262,19 +260,6 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		state.acceptActualType(result);
 	}
 	
-	protected List<JvmTypeParameter> collectAllTypeParameters(LightweightTypeReference closureType,
-			JvmOperation operation) {
-		List<JvmType> rawTypes = closureType.getRawTypes();
-		List<JvmTypeParameter> allTypeParameters = Lists.newArrayList();
-		for(JvmType rawType: rawTypes) {
-			if (rawType instanceof JvmTypeParameterDeclarator) {
-				allTypeParameters.addAll(((JvmTypeParameterDeclarator) rawType).getTypeParameters());
-			}
-		}
-		allTypeParameters.addAll(operation.getTypeParameters());
-		return allTypeParameters;
-	}
-	
 	protected void _computeTypes(XClosure object, LightweightTypeComputationState state) {
 		for(LightweightTypeExpectation expectation: state.getImmediateExpectations()) {
 			List<JvmFormalParameter> closureParameters = object.getFormalParameters();
@@ -368,7 +353,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping(XClosure object,
 			LightweightTypeReference closureType, JvmOperation operation, LightweightTypeComputationState state) {
-		List<JvmTypeParameter> allTypeParameters = collectAllTypeParameters(closureType, operation);
+		List<JvmTypeParameter> allTypeParameters = functionTypes.collectAllTypeParameters(closureType, operation);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = getClosureTypeParameterMapping(
 				closureType, operation, allTypeParameters, state);
 		
@@ -391,11 +376,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	protected ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getClosureTypeParameterMapping(
 			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, LightweightTypeComputationState state) {
 		ActualTypeArgumentCollector typeArgumentCollector = state.createTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED);
-		JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
-		LightweightTypeReference lightweightTypeReference = state.toLightweightTypeReference(operationTypeDeclarator);
-		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, closureType);
-		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();
-		return typeParameterMapping;
+		return functionTypes.getFunctionTypeParameterMapping(closureType, operation, typeArgumentCollector, state.getReferenceOwner());
 	}
 	
 	protected void _computeTypes(XCastedExpression object, LightweightTypeComputationState state) {

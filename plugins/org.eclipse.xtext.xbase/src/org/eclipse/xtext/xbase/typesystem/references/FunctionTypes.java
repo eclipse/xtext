@@ -15,12 +15,18 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -138,8 +144,31 @@ public class FunctionTypes {
 //		return result;
 //	}
 	
-	public JvmOperation findImplementingOperation(LightweightTypeReference closureType) {
+	public List<JvmTypeParameter> collectAllTypeParameters(LightweightTypeReference closureType,
+			JvmOperation operation) {
 		List<JvmType> rawTypes = closureType.getRawTypes();
+		List<JvmTypeParameter> allTypeParameters = Lists.newArrayList();
+		for(JvmType rawType: rawTypes) {
+			if (rawType instanceof JvmTypeParameterDeclarator) {
+				allTypeParameters.addAll(((JvmTypeParameterDeclarator) rawType).getTypeParameters());
+			}
+		}
+		allTypeParameters.addAll(operation.getTypeParameters());
+		return allTypeParameters;
+	}
+	
+	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getFunctionTypeParameterMapping(
+			LightweightTypeReference functionType, JvmOperation operation,
+			ActualTypeArgumentCollector typeArgumentCollector, TypeReferenceOwner owner) {
+		JvmParameterizedTypeReference operationTypeDeclarator = typeReferences.createTypeRef(operation.getDeclaringType());
+		LightweightTypeReference lightweightTypeReference = new OwnedConverter(owner).toLightweightReference(operationTypeDeclarator);
+		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, functionType);
+		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();
+		return typeParameterMapping;
+	}
+	
+	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
+		List<JvmType> rawTypes = functionType.getRawTypes();
 		for(JvmType rawType: rawTypes) {
 			if (rawType instanceof JvmDeclaredType) {
 				Iterable<JvmOperation> features = filter(((JvmDeclaredType)rawType).getAllFeatures(), JvmOperation.class);
@@ -186,17 +215,17 @@ public class FunctionTypes {
 		return new FunctionTypeReference(owner, declaredType);
 	}
 	
-	public LightweightTypeReference createFunctionTypeRef(
+	public FunctionTypeReference createFunctionTypeRef(
 			TypeReferenceOwner owner,
-			LightweightTypeReference closureType, 
+			LightweightTypeReference functionType, 
 			List<LightweightTypeReference> parameterTypes,
 			LightweightTypeReference returnType) {
-		JvmType type = closureType.getType();
+		JvmType type = functionType.getType();
 		if (type == null)
 			throw new IllegalArgumentException("type may not be null");
 		FunctionTypeReference result = new FunctionTypeReference(owner, type);
-		if (closureType instanceof ParameterizedTypeReference) {
-			for(LightweightTypeReference typeArgument: ((ParameterizedTypeReference) closureType).getTypeArguments()) {
+		if (functionType instanceof ParameterizedTypeReference) {
+			for(LightweightTypeReference typeArgument: ((ParameterizedTypeReference) functionType).getTypeArguments()) {
 				result.addTypeArgument(typeArgument.copyInto(owner));
 			}
 		}
