@@ -76,7 +76,6 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -651,7 +650,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					argumentValues.add(internalEvaluate(expr, context, indicator));
 				}
 			}
-			return invokeOperation(operation, receiver, argumentValues);
+			return invokeOperation(operation, receiver, argumentValues, context, indicator);
 		}
 		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
@@ -710,9 +709,18 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
-		return invokeOperation(operation, receiver, argumentValues);
+		return invokeOperation(operation, receiver, argumentValues, context, indicator);
 	}
 
+	/**
+	 * @since 2.3.1
+	 */
+	@SuppressWarnings("unused")
+	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues,
+			IEvaluationContext context, CancelIndicator indicator) {
+		return invokeOperation(operation, receiver, argumentValues);
+	}
+	
 	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
@@ -880,14 +888,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
-		Object receiver = null;
 		if (assignment.getAssignable() == null) {
-			// TODO don't imply 'this', but get the information from the AST 
-			receiver = context.getValue(XbaseScopeProvider.THIS);
-		} else {
-			receiver = internalEvaluate(assignment.getAssignable(), context, indicator);
+			XExpression implicitReceiver = assignment.getImplicitReceiver();
+			if(implicitReceiver instanceof XFeatureCall) {
+			    JvmIdentifiableElement feature = ((XFeatureCall) implicitReceiver).getFeature();
+			    if(feature!= null && feature.getIdentifier() != null) 
+			      return context.getValue(QualifiedName.create(feature.getIdentifier()));
+			}
 		}
-		return receiver;
+		return internalEvaluate(assignment.getAssignable(), context, indicator);
 	}
 
 	protected Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value,
@@ -897,7 +906,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: "
 					+ jvmOperation.getIdentifier() + " without receiver"));
 		List<Object> argumentValues = Lists.newArrayList(value);
-		Object result = invokeOperation(jvmOperation, receiver, argumentValues);
+		Object result = invokeOperation(jvmOperation, receiver, argumentValues, context, indicator);
 		return result;
 	}
 
