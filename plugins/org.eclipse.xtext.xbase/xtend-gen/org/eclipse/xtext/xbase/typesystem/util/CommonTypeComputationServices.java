@@ -6,6 +6,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -57,6 +58,17 @@ public class CommonTypeComputationServices {
   
   public void setPrimitives(final Primitives primitives) {
     this._primitives = primitives;
+  }
+  
+  @Inject
+  private FunctionTypes _functionTypes;
+  
+  public FunctionTypes getFunctionTypes() {
+    return this._functionTypes;
+  }
+  
+  public void setFunctionTypes(final FunctionTypes functionTypes) {
+    this._functionTypes = functionTypes;
   }
   
   @Inject

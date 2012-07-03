@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult.Kind;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -29,7 +29,22 @@ public class FunctionTypeConformanceStrategy extends
 	protected TypeConformanceResult doVisitParameterizedTypeReference(FunctionTypeReference leftReference,
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<FunctionTypeReference> param) {
-		throw new UnsupportedOperationException("Implement me");
+		if (!rightReference.isRawType()) {
+			FunctionTypeReference functionType = getFunctionTypeReference(rightReference);
+			if (functionType != null) {
+				return conformanceComputer.isConformant(leftReference, functionType, param);
+			}
+			if (isFunctionType(leftReference) != FunctionTypeKind.NONE) {
+				FunctionTypeReference converted = convertToFunctionTypeReference(rightReference, param.rawType);
+				if (converted != null) {
+					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftReference, converted, param);
+					if (functionsAreConformant.isConformant()) {
+						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(Kind.DEMAND_CONVERSION));
+					}
+				}
+			}
+		}
+		return super.doVisitParameterizedTypeReference(leftReference, rightReference, param);
 	}
 	
 	@Override
