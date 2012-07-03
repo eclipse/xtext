@@ -288,7 +288,9 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmDeclaredType number = longValue.getDeclaringType();
 		assertNotNull(number.getArrayType());
 		assertSame(type, number.getArrayType().getArrayType());
-		assertNull(type.getArrayType());
+		assertNull(type.eGet(TypesPackage.Literals.JVM_COMPONENT_TYPE__ARRAY_TYPE));
+		// array will created on the fly
+		assertNotNull(type.getArrayType());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
