@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.XbaseFactory
-import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
@@ -36,6 +35,8 @@ import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
+import org.eclipse.xtext.xbase.XExpression
 
 /**
  * @author Sebastian Zarnekow
@@ -206,4 +207,22 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor {
 		visit(original, newHashSet());
 	}
 
-} 
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class PublicResolvedTypes extends ResolvedTypes {
+	new(DefaultReentrantTypeResolver resolver) {
+		super(resolver)
+	}
+	
+	override public createUnboundTypeParameter(XExpression expression, JvmTypeParameter type) {
+		super.createUnboundTypeParameter(expression, type)
+	}
+	
+	override public getUnboundTypeParameter(Object handle) {
+		super.getUnboundTypeParameter(handle)
+	}
+	
+}
