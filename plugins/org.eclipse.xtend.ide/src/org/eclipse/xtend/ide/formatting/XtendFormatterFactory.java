@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.formatter;
+package org.eclipse.xtend.ide.formatting;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -14,12 +14,16 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtend.core.formatting.XtendFormatter2;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 
 import com.google.inject.Inject;
 
@@ -58,12 +62,19 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 			IParseResult parseResult = state.getParseResult();
 			if (parseResult == null)
 				return null;
-			return formatter.format(parseResult.getRootNode(), region);
+			final MultiTextEdit mte = new MultiTextEdit();
+			formatter.format(parseResult.getRootNode(), region.getOffset(), region.getLength(),
+					new Procedure3<Integer, Integer, String>() {
+						public void apply(Integer p1, Integer p2, String p3) {
+							mte.addChild(new ReplaceEdit(p1, p2, p3));
+						}
+					});
+			return mte;
 		}
 	}
 
 	@Inject
-	protected XtendFormatter formatter;
+	protected XtendFormatter2 formatter;
 
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {

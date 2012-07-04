@@ -1,4 +1,4 @@
-package org.eclipse.xtend.ide.formatter;
+package org.eclipse.xtend.core.formatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +19,13 @@ public class FormatterState {
     return this._lastHiddens;
   }
   
-  private boolean _wrap;
+  private int _wrap;
   
-  public boolean isWrap() {
+  public int getWrap() {
     return this._wrap;
   }
   
-  public void setWrap(final boolean wrap) {
+  public void setWrap(final int wrap) {
     this._wrap = wrap;
   }
   

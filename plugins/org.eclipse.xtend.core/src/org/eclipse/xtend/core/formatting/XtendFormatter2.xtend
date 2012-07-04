@@ -5,40 +5,35 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.formatter
+package org.eclipse.xtend.core.formatting
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.jface.text.IRegion
-import org.eclipse.text.edits.MultiTextEdit
-import org.eclipse.text.edits.TextEdit
 import org.eclipse.xtend.core.services.XtendGrammarAccess
+import org.eclipse.xtend.lib.Data
 import org.eclipse.xtend.lib.Property
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
-import org.eclipse.text.edits.ReplaceEdit
-import org.eclipse.xtext.RuleCall
 
 /**
  * @author Moitz Eysholdt - Initial contribution and API
  */
-public class XtendFormatter {
+public class XtendFormatter2 {
 
 	@Inject extension XtendGrammarAccess;
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 
-	def TextEdit format(ICompositeNode root, IRegion region) {
+	def void format(ICompositeNode root, int offset, int length, (int, int, String)=>void textEditAcceptor) {
 		val uri = root.semanticElement.eResource.URI
-		val edit = new MultiTextEdit()
 		val lineSeparator = whitespaeInfo.getLineSeparatorInformation(uri).lineSeparator
 		val indentation = whitespaeInfo.getIndentationInformation(uri).indentString
-		format(edit, root, new FormatterState(), new FormatterCfg(lineSeparator, indentation))
-		edit	
+		format(root, new FormatterState(), new FormatterCfg(lineSeparator, indentation), textEditAcceptor)
 	}
 	
-	def void format(MultiTextEdit edit, INode node, FormatterState state, FormatterCfg cfg) {
+	def void format(INode node, FormatterState state, FormatterCfg cfg, (int, int, String)=>void textEditAcceptor) {
 		switch node {
 			ILeafNode case node.hidden: {
 				state.lastHiddens += node
@@ -47,52 +42,51 @@ public class XtendFormatter {
 				
 				// match before LeafNode
 				switch(node.grammarElement) {
-					case classAccess.rightCurlyBracketKeyword_10: { state.wrap = true state.indentation = state.indentation - 1 } 
-					case XBlockExpressionAccess.rightCurlyBracketKeyword_3: { state.wrap = true state.indentation = state.indentation - 1 } 
-					case XBlockExpressionAccess.semicolonKeyword_2_1: { state.wrap = false state.space = "" } 
-					case node.text == ".": { state.wrap = false state.space = "" } 
+					case classAccess.rightCurlyBracketKeyword_10: { state.wrap = 1 state.indentation = state.indentation - 1 } 
+					case XBlockExpressionAccess.rightCurlyBracketKeyword_3: { state.wrap = 1 state.indentation = state.indentation - 1 } 
+					case XBlockExpressionAccess.semicolonKeyword_2_1: { state.wrap = 1 state.space = "" } 
+					case node.text == ".": { state.wrap = 2 state.space = "" } 
 				}
 				
 				// apply formatting
 				val oldText = state.lastHiddens.map[text].join
 				val oldOffset = if(state.lastHiddens.empty) node.offset else state.lastHiddens.head.offset
 				val oldLength = if(state.lastHiddens.empty) 0 else oldText.length
-				val newText   = if(state.wrap) cfg.lineSeparator + cfg.getIndentation(state.indentation) else state.space 
-				val textEdit = new ReplaceEdit(oldOffset, oldLength, newText)
+				val newText   = if(state.wrap >0 ) cfg.getWrap(state.wrap) + cfg.getIndentation(state.indentation) else state.space 
+				textEditAcceptor.apply(oldOffset, oldLength, newText)
 //				println('''replacing "«oldText.replace("\n", "\\n")»" with "«newText.replace("\n", "\\n")»"''')
-				edit.addChild(textEdit)
 				state.lastHiddens.clear()
-				state.wrap = false
+				state.wrap = 0
 				state.space = " "
 				
 				// match after LeafNode
 				switch(node.grammarElement) {
-					case classAccess.leftCurlyBracketKeyword_8: { state.wrap = true state.indentation = state.indentation + 1 }
-					case XBlockExpressionAccess.leftCurlyBracketKeyword_1: { state.wrap = true state.indentation = state.indentation + 1 }
-					case node.text == ".": { state.wrap = false state.space = "" }
+					case classAccess.leftCurlyBracketKeyword_8: { state.wrap = 1 state.indentation = state.indentation + 1 }
+					case XBlockExpressionAccess.leftCurlyBracketKeyword_1: { state.wrap = 1 state.indentation = state.indentation + 1 }
+					case node.text == ".": { state.wrap = 1 state.space = "" }
 				}
 			}
 			ICompositeNode: {
 				// match before CompositeNode
 				switch ge:node.grammarElement {
 					RuleCall: switch rule:ge.rule {
-						case importRule: state.wrap = true 
-						case memberRule: state.wrap = true 
-						case classRule: state.wrap = true 
+						case importRule: state.wrap = 2 
+						case memberRule: state.wrap = 2 
+						case classRule: state.wrap = 2
 					} 
 				}
 
 				// format children				
 				for(INode child:node.children)
-					format(edit, child, state, cfg)
+					format(child, state, cfg, textEditAcceptor)
 					
 				// match after CompositeNode
 				switch ge:node.grammarElement {
-					case XBlockExpressionAccess.expressionsXExpressionInsideBlockParserRuleCall_2_0_0: state.wrap = true 
+					case XBlockExpressionAccess.expressionsXExpressionInsideBlockParserRuleCall_2_0_0: state.wrap = 1 
 					RuleCall: switch rule:ge.rule {
-						case importRule: state.wrap = true 
-						case memberRule: state.wrap = true 
-						case classRule: state.wrap = true 
+						case importRule: state.wrap = 2 
+						case memberRule: state.wrap = 2 
+						case classRule: state.wrap = 2
 					} 
 				}
 			}
@@ -104,7 +98,7 @@ public class XtendFormatter {
 
 class FormatterState {
 	@Property val List<ILeafNode> lastHiddens = newArrayList()
-	@Property boolean wrap
+	@Property int wrap
 	@Property int indentation = 0
 	@Property String space = ""
 	
@@ -116,7 +110,14 @@ class FormatterState {
 	
 	def getIndentation(int levels) {
 		if(levels > 0) 
-			(0..levels).map[_indentation].join 
+			(0..levels - 1).map[_indentation].join 
+		else 
+			""
+	}
+	
+	def getWrap(int levels) {
+		if(levels > 0) 
+			(0..levels - 1).map[_lineSeparator].join 
 		else 
 			""
 	}

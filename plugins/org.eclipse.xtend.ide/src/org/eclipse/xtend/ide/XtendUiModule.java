@@ -25,7 +25,7 @@ import org.eclipse.xtend.ide.editor.SingleLineCommentHelper;
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
-import org.eclipse.xtend.ide.formatter.XtendFormatterFactory;
+import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtend.ide.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
