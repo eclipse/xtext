@@ -13,6 +13,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Triple;
@@ -37,6 +38,28 @@ public class XtendFormatterTest {
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
+  }
+  
+  public void assertFormattedExpression(final CharSequence toBeFormatted) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append(toBeFormatted, "		");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final CharSequence text = _builder;
+    this.assertFormatted(text, text);
   }
   
   public void assertFormatted(final CharSequence expectation, final CharSequence toBeFormatted) {
@@ -101,6 +124,9 @@ public class XtendFormatterTest {
         if (_t instanceof AssertionError) {
           final AssertionError e = (AssertionError)_t;
           InputOutput.<StringBuilder>println(debugTrace);
+          InputOutput.println();
+          String _compactDump = NodeModelUtils.compactDump(root, true);
+          InputOutput.<String>println(_compactDump);
           throw e;
         } else {
           throw Exceptions.sneakyThrow(_t);
@@ -112,7 +138,7 @@ public class XtendFormatterTest {
   }
   
   @Test
-  public void format1() {
+  public void formatClass() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -125,5 +151,204 @@ public class XtendFormatterTest {
     _builder_1.append("package foo class bar{}");
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClassAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatImports() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.Map");
+    _builder.newLine();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatMethod() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatMethod1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(String x) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatMethod2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(String x, String y) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatMethodAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated def baz() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatGenerics() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = <Pair<String, String>>newArrayList()");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatClosures() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = newArrayList(\"A\", \"b\")");
+    _builder.newLine();
+    _builder.append("val y = x.filter[ toUpperCase == it ]");
+    _builder.newLine();
+    _builder.append("y.join");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatIf1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatIf2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatIfElse1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatIfElse2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("} else {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
   }
 }

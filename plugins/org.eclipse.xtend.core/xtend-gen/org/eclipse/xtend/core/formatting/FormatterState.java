@@ -19,6 +19,16 @@ public class FormatterState {
     return this._lastHiddens;
   }
   
+  private ILeafNode _last = null;
+  
+  public ILeafNode getLast() {
+    return this._last;
+  }
+  
+  public void setLast(final ILeafNode last) {
+    this._last = last;
+  }
+  
   private int _wrap;
   
   public int getWrap() {
