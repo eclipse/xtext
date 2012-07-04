@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -98,6 +99,18 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			for(JvmTypeReference superType: superTypes) {
 				LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+				Boolean recursion = lightweightSuperType.accept(this, data);
+				if (recursion != null && recursion.booleanValue()) {
+					return Boolean.TRUE;
+				}
+			}
+		} else if (type instanceof JvmTypeParameter) {
+			TypeReferenceOwner owner = reference.getOwner();
+			OwnedConverter converter = new OwnedConverter(owner);
+			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
+			for(JvmTypeConstraint constraint: constraints) {
+				JvmTypeReference constraintReference = constraint.getTypeReference();
+				LightweightTypeReference lightweightSuperType = converter.toLightweightReference(constraintReference);
 				Boolean recursion = lightweightSuperType.accept(this, data);
 				if (recursion != null && recursion.booleanValue()) {
 					return Boolean.TRUE;
