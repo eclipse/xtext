@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
 import org.junit.Assert
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
@@ -23,6 +24,19 @@ class XtendFormatterTest {
 	
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted)
+	}
+	
+	def assertFormattedExpression(CharSequence toBeFormatted) {
+		val text = '''
+			package foo
+			
+			class bar {
+				def baz() {
+					«toBeFormatted»
+				}
+			}
+		'''
+		assertFormatted(text, text)
 	}
 	
 	def assertFormatted(CharSequence expectation, CharSequence toBeFormatted) {
@@ -52,11 +66,13 @@ class XtendFormatterTest {
 			Assert::assertEquals(expectation.toString, newDocument.toString)
 		} catch(AssertionError e) {
 			println(debugTrace)
+			println()
+			println(NodeModelUtils::compactDump(root, true))
 			throw e
 		}
 	}
 	
-	@Test def format1() {
+	@Test def formatClass() {
 		assertFormatted('''
 			package foo
 			
@@ -64,6 +80,125 @@ class XtendFormatterTest {
 			}
 		''', '''
 			package foo class bar{}
+		''')	
+	}
+	
+	@Test def formatClassAnnotation() {
+		assertFormatted('''
+			package foo
+
+			@Deprecated
+			class bar {
+				def baz() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatImports() {
+		assertFormatted('''
+			package foo
+			
+			import java.util.Map
+			import java.util.Set
+			
+			class bar {
+				def baz() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethod() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def baz() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethod1() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def baz(String x) {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethod2() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def baz(String x, String y) {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethodAnnotation() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				@Deprecated def baz() {
+				}
+			}
+		''')	
+	}
+	
+	
+	@Test def formatGenerics() {
+		assertFormattedExpression('''
+			val x = <Pair<String, String>>newArrayList()
+		''')	
+	}
+	
+	@Test def formatClosures() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter[ toUpperCase == it ]
+			y.join
+		''')	
+	}
+	
+	@Test def formatIf1() {
+		assertFormattedExpression('''
+			if(true)
+				println("foo")
+		''')	
+	}
+	
+	@Test def formatIf2() {
+		assertFormattedExpression('''
+			if(true) {
+				println("foo")
+			}
+		''')	
+	}
+	
+	@Test def formatIfElse1() {
+		assertFormattedExpression('''
+			if(true)
+				println("foo")
+			else
+				println("bar")
+		''')	
+	}
+	
+	@Test def formatIfElse2() {
+		assertFormattedExpression('''
+			if(true) {
+				println("foo")
+			} else {
+				println("bar")
+			}
 		''')	
 	}
 	
