@@ -65,7 +65,7 @@ public class XtendFormatter2 {
 				val oldText = state.lastHiddens.map[text].join
 				val oldOffset = if(state.lastHiddens.empty) node.offset else state.lastHiddens.head.offset
 				val oldLength = if(state.lastHiddens.empty) 0 else oldText.length
-				val newText   = if(state.wrap > 0 && !state.space.empty) cfg.getWrap(state.wrap) + cfg.getIndentation(state.indentation) else state.space
+				val newText   = if(state.wrap > 0 && state.space.length != 0) cfg.getWrap(state.wrap) + cfg.getIndentation(state.indentation) else state.space
 				if(oldText != newText) 
 					textEditAcceptor.apply(oldOffset, oldLength, newText)
 //				println('''replacing "«oldText.replace("\n", "\\n")»" with "«newText.replace("\n", "\\n")»"''')
