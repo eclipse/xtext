@@ -66,7 +66,7 @@ The main trick about our solution is not to build in the turtle commands into th
 define it in the runtime library. This way, the language stays as slim as can be and additions can be easily
 added without the need to regenerate the whole language infrastructure.
 
-The core of the runtime library is the class codeRef[org.xtext.tortoiseshell.runtime.Tortoise]. You can
+The core of the runtime library is the class codeRef[org.xtext.tortoiseshell.lib.Tortoise]. You can
 think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
 modify it using methods. Here is an excerpt of its code:
 
@@ -87,7 +87,7 @@ class Tortoise {
 
 We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
 EClass. When a method that changes the state is called, an event is thrown. These events are consumed
-by a GEF based view and turned into animations of a codeRef[org.xtext.tortoiseshell.runtime.view.TortoiseFigure].  
+by a GEF based view and turned into animations of a codeRef[org.xtext.tortoiseshell.lib.view.TortoiseFigure].  
 
 section2:tortoise_statistics[Some Stats]
 
@@ -149,7 +149,7 @@ Executable:
 
 section2:tortoise_inferrer[Translation to Java]
 
-With the tortoise commands in the runtime library class codeRef[org.xtext.tortoiseshell.runtime.Tortoise], we 
+With the tortoise commands in the runtime library class codeRef[org.xtext.tortoiseshell.lib.Tortoise], we 
 have to make sure to infer a Java class that inherits from this. Within this class, we create a method
 for each e[Program] and e[SubProgram]. The resulting code looks like this:
 
@@ -185,9 +185,9 @@ that recursively calls the evaluation methods for the subexpressions forming its
 also pass an execution context storing all temporary state such as local variables.
 
 The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
-codeRef[org.xtext.tortoiseshell.runtime.Tortoise]) and inferred ones. While the former are evaluated
+codeRef[org.xtext.tortoiseshell.lib.Tortoise]) and inferred ones. While the former are evaluated
 via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-codeRef[org.xtext.tortoiseshell.runtime.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
+codeRef[org.xtext.tortoiseshell.lib.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
 methods to execute them directly. This is accomplished by overriding the method 
 
 code[invokeOperation]:

@@ -181,7 +181,7 @@ section2:mongo_inferrer[Translation to Java]
 The JVM model inferrencnce is implemented in the codeRef[org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
 As the generated code is quite rich, this is the most complex component of this language.
 
-For each e[MongoBean], we create a Java class implementing the interface codeRef[org.xtext.mongobeans.runtime.IMongoBean].
+For each e[MongoBean], we create a Java class implementing the interface codeRef[org.xtext.mongobeans.lib.IMongoBean].
 This interface is the first type of our small runtime library. The generated Java classes rely on this
 library to work, so it has to be on the classpath at runtime.
 
@@ -230,7 +230,7 @@ code[Xtend][it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))]. This is
 should be really flashed by the awesome syntax of Xtend.
 
 The we set the supertype. By using code[Xtend][_jvmTypesBuilder.newTypeRef(bean,
-String)] we create a reference to the existing interface codeRef[org.xtext.mongobeans.runtime.IMongoBean]. This
+String)] we create a reference to the existing interface codeRef[org.xtext.mongobeans.lib.IMongoBean]. This
 will also insert a Java import at the appropriate location. 
 
 Each e[MongoBean] wraps a codeRef[com.mongodb.DBObject] which is represented as a Java field with a 
@@ -335,7 +335,7 @@ table[
 As a Java client would expect the result of code[getFriend()] should be a code[Artist], we have to handle
 e[MongoProperties] whose type is a e[MongoBean] differently. Note that the generated Java code uses 
 static helper methods to do the wrapping / unwrapping. They are defined in the second runtime class 
-codeRef[org.xtext.mongobeans.runtime.WrappingUtil]. To detect whether a type is actually a e[MongoBean] or not, we 
+codeRef[org.xtext.mongobeans.lib.WrappingUtil]. To detect whether a type is actually a e[MongoBean] or not, we 
 use the helper class codeRef[org.xtext.mongobeans.jvmmodel.MongoTypes] that is also injected as an extension.
 
 code[Xtend][
@@ -369,7 +369,7 @@ def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty p
 
 Multi-valued e[MongoProperties] with a e[MongoBean] type require a special implementation of 
 codeRef[java.util.List] to automatically wrap/unwrap the elements. That's the third runtime library 
-class codeRef[org.xtext.mongobeans.runtime.MongoBeanList]. Note that we need a getter only. For multi-valued
+class codeRef[org.xtext.mongobeans.lib.MongoBeanList]. Note that we need a getter only. For multi-valued
 primitive properties, the Java driver already delivers a codeRef[java.util.List]:
 
 table[
@@ -488,5 +488,5 @@ section:mongo_beyond[Beyond This Example]
 Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
 Furthermore, the codeRef[org.xtext.mongobeans.example.MusicDBXtendTest][example] shows how to use Xtend to 
 build a very compact API to create trees of e[MongoBean] instances. 
-codeRef[org.xtext.mongobeans.runtime.MongoExtensions][Extension methods] can also be used to wrap other
+codeRef[org.xtext.mongobeans.lib.MongoExtensions][Extension methods] can also be used to wrap other
 classes of the mongoDB driver.   
