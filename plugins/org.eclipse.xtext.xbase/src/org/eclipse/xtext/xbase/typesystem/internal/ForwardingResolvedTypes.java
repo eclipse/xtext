@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -21,19 +23,23 @@ import com.google.common.collect.ForwardingObject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class ForwardingResolvedTypes extends ForwardingObject implements LightweightResolvedTypes {
 
 	@Override
 	protected abstract LightweightResolvedTypes delegate();
 	
+	@Nullable
 	public JvmTypeReference getActualType(XExpression expression) {
 		return delegate().getActualType(expression);
 	}
 
+	@Nullable
 	public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		return delegate().getActualType(identifiable);
 	}
 
+	@Nullable
 	public JvmTypeReference getExpectedType(XExpression expression) {
 		return delegate().getExpectedType(expression);
 	}
@@ -46,14 +52,17 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 		return delegate().getQueuedDiagnostics();
 	}
 
+	@Nullable
 	public LightweightTypeReference internalGetActualType(XExpression expression) {
 		return delegate().internalGetActualType(expression);
 	}
 
+	@Nullable
 	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement identifiable) {
 		return delegate().internalGetActualType(identifiable);
 	}
 
+	@Nullable
 	public LightweightTypeReference internalGetExpectedType(XExpression expression) {
 		return delegate().internalGetExpectedType(expression);
 	}

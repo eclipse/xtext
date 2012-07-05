@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -18,18 +20,26 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class BaseResolvedTypes implements LightweightResolvedTypes, TypeReferenceOwner {
+@NonNullByDefault
+public abstract class BaseResolvedTypes implements LightweightResolvedTypes {
 
 	private final OwnedConverter converter;
 
 	protected BaseResolvedTypes() {
-		this.converter = new OwnedConverter(this);
+		this.converter = createConverter();
 	}
 	
 	protected OwnedConverter getConverter() {
 		return converter;
 	}
 	
+	public TypeReferenceOwner getReferenceOwner() {
+		return getConverter().getOwner();
+	}
+	
+	protected abstract OwnedConverter createConverter();
+	
+	@Nullable
 	public final JvmTypeReference getActualType(XExpression expression) {
 		LightweightTypeReference result = internalGetActualType(expression);
 		if (result != null)
@@ -37,6 +47,7 @@ public abstract class BaseResolvedTypes implements LightweightResolvedTypes, Typ
 		return null;
 	}
 
+	@Nullable
 	public final JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		LightweightTypeReference result = internalGetActualType(identifiable);
 		if (result != null)
@@ -44,6 +55,7 @@ public abstract class BaseResolvedTypes implements LightweightResolvedTypes, Typ
 		return null;
 	}
 
+	@Nullable
 	public final JvmTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = internalGetExpectedType(expression);
 		if (result != null)

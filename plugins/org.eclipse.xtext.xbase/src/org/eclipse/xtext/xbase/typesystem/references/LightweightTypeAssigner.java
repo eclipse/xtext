@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -19,9 +18,14 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 @NonNullByDefault
 public interface LightweightTypeAssigner extends ITypeAssigner {
 
-	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType);
+	void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType);
 	
-	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType, @Nullable LightweightTypeReference expectedType);
+	/**
+	 * TODO JavaDoc
+	 *  - actualDeclaredType == the type on the lambda parameter
+	 *  - expected type == the type of the parameter on the implementing operation
+	 */
+	void assignType(JvmIdentifiableElement element, LightweightTypeReference actualDeclaredType, LightweightTypeReference expectedType);
 	
 	LightweightTypeComputationState getForkedState();
 	

@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
@@ -17,12 +20,17 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class RootUnboundTypeReference extends UnboundTypeReference {
+public class ExpressionAwareUnboundTypeReference extends UnboundTypeReference {
 
 	private XExpression expression;
 
-	protected RootUnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
+	protected ExpressionAwareUnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
 		super(owner, typeParameter, new Object());
+		this.expression = expression;
+	}
+	
+	private ExpressionAwareUnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter, Object handle) {
+		super(owner, typeParameter, handle);
 		this.expression = expression;
 	}
 	
@@ -31,8 +39,22 @@ public class RootUnboundTypeReference extends UnboundTypeReference {
 	}
 	
 	@Override
+	protected ExpressionAwareUnboundTypeReference createCopy(TypeReferenceOwner owner) {
+		return new ExpressionAwareUnboundTypeReference(owner, expression, getTypeParameter(), getHandle());
+	}
+	
+	@Override
 	public Object getHandle() {
 		return super.getHandle();
+	}
+	
+	protected void tryResolve() {
+		if (internalIsResolved())
+			return;
+		List<LightweightBoundTypeArgument> hints = getAllHints();
+		if (!hints.isEmpty()) {
+			resolveWithHints(hints);
+		}
 	}
 	
 }

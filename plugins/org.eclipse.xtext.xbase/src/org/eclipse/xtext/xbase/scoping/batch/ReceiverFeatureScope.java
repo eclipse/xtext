@@ -63,11 +63,19 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
 		for(JvmIdentifiableElement feature: allFeatures) {
 			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 		}
 		return allDescriptions;
+	}
+
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = Collections.emptyMap();
+		if (receiverType != null) {
+			receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		}
+		return receiverTypeParameterMapping;
 	}
 	
 	@Override
@@ -89,7 +97,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
 		for(JvmIdentifiableElement feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
 			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));

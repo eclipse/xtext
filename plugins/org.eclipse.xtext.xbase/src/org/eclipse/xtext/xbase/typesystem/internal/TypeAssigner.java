@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeAssigner;
@@ -33,17 +32,17 @@ public class TypeAssigner extends BaseTypeAssigner {
 		return state;
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType, @Nullable LightweightTypeReference expectedType) {
+	public void assignType(JvmIdentifiableElement element, LightweightTypeReference actualDeclaredType, LightweightTypeReference expectedType) {
 		// TODO validation messages
-		if (declaredType != null)
-			state.getResolvedTypes().setType(element, declaredType);
-		else
-			state.getResolvedTypes().setType(element, expectedType);
+//		if (declaredType != null)
+			state.getResolvedTypes().setType(element, actualDeclaredType);
+//		else
+//			state.getResolvedTypes().setType(element, expectedType);
 		state.addLocalToCurrentScope(element);
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType) {
-		state.getResolvedTypes().setType(element, declaredType);
+	public void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType) {
+		state.getResolvedTypes().setType(element, expectedType);
 		state.addLocalToCurrentScope(element);
 	}
 

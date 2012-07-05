@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
@@ -36,7 +35,6 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 		return computeTypes(rootExpression);
 	}
 	
-	@Nullable
 	protected abstract XExpression getRootExpression();
 	
 	@Override

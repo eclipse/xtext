@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -20,12 +19,12 @@ public abstract class BaseTypeAssigner implements LightweightTypeAssigner {
 
 	protected abstract OwnedConverter getConverter();
 	
-	public final void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType) {
+	public final void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType) {
 		assignType(element, getConverter().toLightweightReference(declaredType));
 	}
 
-	public final void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType,
-			@Nullable JvmTypeReference expectedType) {
+	public final void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType,
+			JvmTypeReference expectedType) {
 		OwnedConverter converter = getConverter();
 		assignType(element, converter.toLightweightReference(declaredType), converter.toLightweightReference(expectedType));
 	}

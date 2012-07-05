@@ -17,6 +17,8 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
@@ -32,6 +34,10 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 
 	public OwnedConverter(TypeReferenceOwner owner) {
 		this.owner = Preconditions.checkNotNull(owner, "owner");
+	}
+	
+	public TypeReferenceOwner getOwner() {
+		return owner;
 	}
 	
 	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
@@ -66,6 +72,21 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 			result.addComponent(visit(component));
 		}
 		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitComputedTypeReference(XComputedTypeReference reference) {
+		IJvmTypeReferenceProvider typeProvider = reference.getTypeProvider();
+		if (typeProvider instanceof UnboundTypeReferenceResolver) {
+			UnboundTypeReference typeReference = ((UnboundTypeReferenceResolver) typeProvider).getUnboundTypeReference();
+			if (typeReference.isResolved()) {
+				LightweightTypeReference resolved = typeReference.getResolvedTo();
+				if (resolved != null)
+					return resolved.copyInto(owner);
+			}
+			return typeReference.copyInto(owner);
+		}
+		return super.doVisitComputedTypeReference(reference);
 	}
 
 	@Override

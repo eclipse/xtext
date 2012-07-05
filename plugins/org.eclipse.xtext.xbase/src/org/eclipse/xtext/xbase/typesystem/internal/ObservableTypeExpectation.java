@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ObservableTypeExpectation extends TypeExpectation {
 
+	@NonNullByDefault // bug in null stuff
 	interface Observer {
 		void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint conformanceHint);
 	}
@@ -32,4 +36,12 @@ public class ObservableTypeExpectation extends TypeExpectation {
 		super.acceptActualType(type, conformanceHint);
 	}
 
+	@Override
+	public ObservableTypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		LightweightTypeReference expectedType = internalGetExpectedType();
+		if (expectedType == null || expectedType.isOwnedBy(referenceOwner))
+			return this;
+		return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType(), observer);
+	}
+	
 }

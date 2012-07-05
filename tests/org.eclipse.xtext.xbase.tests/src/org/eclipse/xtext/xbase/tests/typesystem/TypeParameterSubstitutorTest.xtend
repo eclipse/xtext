@@ -46,4 +46,8 @@ class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubst
 		return contextResourceSet
 	}
 	
+	override isResolved(Object handle) {
+		throw new UnsupportedOperationException("Should not be invoked")
+	}
+	
 }

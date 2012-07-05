@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class TypeData {
 	private final XExpression expression;
 	private final LightweightTypeExpectation expectation;
@@ -34,6 +37,16 @@ public class TypeData {
 		this.type = type;
 		this.conformanceHint = conformanceHint;
 		this.returnType = returnType;
+	}
+	
+	public TypeData copyInto(TypeReferenceOwner owner) {
+		if (isOwnedBy(owner))
+			return this;
+		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), conformanceHint, returnType);
+	}
+	
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		return expectation.isOwnedBy(owner) && type.isOwnedBy(owner);
 	}
 
 	@Override

@@ -70,19 +70,15 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		if (!isSynonym()) {
-			return getSuperTypes(components, substitutor);
+			if (components == null || components.isEmpty())
+				return Collections.emptyList();
+			List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(components.size());
+			for(LightweightTypeReference component: components) {
+				result.add(substitutor.substitute(component));
+			}
+			return result;
 		}
 		return Collections.emptyList();
-	}
-	
-	protected List<LightweightTypeReference> getSuperTypes(@Nullable List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor) {
-		if (references == null || references.isEmpty())
-			return Collections.emptyList();
-		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(references.size());
-		for(LightweightTypeReference reference: references) {
-			result.addAll(reference.getSuperTypes(substitutor));
-		}
-		return result;
 	}
 	
 	@Override

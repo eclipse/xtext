@@ -9,77 +9,102 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class StackedResolvedTypes extends ResolvedTypes {
 
 	private final ResolvedTypes parent;
-	private final Set<Object> createdParameters;
 
 	protected StackedResolvedTypes(ResolvedTypes parent) {
 		super(parent.getResolver());
 		this.parent = parent;
-		this.createdParameters = Sets.newHashSet();
 	}
 	
 	protected ResolvedTypes getParent() {
 		return parent;
 	}
 	
-	@Override
-	@NonNull
-	protected RootUnboundTypeReference createUnboundTypeReference(@NonNull XExpression expression,
-			@NonNull JvmTypeParameter type) {
-		RootUnboundTypeReference result = super.createUnboundTypeReference(expression, type);
-		createdParameters.add(result.getHandle());
-		return result;
-	}
-	
 	protected void mergeIntoParent() {
-//		for(UnboundTypeReference unboundParameter: stackedUnboundParameters.values()) {
-//			unboundParameter.mergeIntoParent();
-//		}
 		ResolvedTypes parent = getParent();
 		mergeInto(parent);
 	}
-	
 
 	protected void mergeInto(ResolvedTypes parent) {
 		mergeTypeParametersIntoParent(parent);
-		parent.ensureExpressionTypesMapExists().putAll(ensureExpressionTypesMapExists());
-		parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
-		parent.ensureLinkingMapExists().putAll(ensureLinkingMapExists());
+		mergeExpressionTypesIntoParent(parent);
+		mergeTypesIntoParent(parent);
+		mergeLinkingCandidatesIntoParent(parent);
+	}
+	
+	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
+		for(Map.Entry<XExpression, Collection<TypeData>> entry: basicGetExpressionTypes().asMap().entrySet()) {
+			for(TypeData typeData: entry.getValue()) {
+				parent.acceptType(entry.getKey(), typeData.copyInto(parent.getReferenceOwner()));
+			}
+		}
+	}
+	
+	protected void mergeLinkingCandidatesIntoParent(ResolvedTypes parent) {
+		Map<XExpression, ILinkingCandidate<?>> linkingCandidates = basicGetLinkingCandidates();
+		if (!linkingCandidates.isEmpty()) {
+			for(Map.Entry<XExpression, ILinkingCandidate<?>> entry: linkingCandidates.entrySet()) {
+				parent.acceptLinkingInformation(entry.getKey(), entry.getValue());
+			}
+		}
+	}
+
+	protected void mergeTypesIntoParent(ResolvedTypes parent) {
+		Map<JvmIdentifiableElement, LightweightTypeReference> types = basicGetTypes();
+		if (!types.isEmpty()) {
+			for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: types.entrySet()) {
+				parent.setType(entry.getKey(), entry.getValue().copyInto(parent.getReferenceOwner()));
+			}
+		}
 	}
 
 	protected void mergeTypeParametersIntoParent(ResolvedTypes parent) {
-//		for (Object handle: createdParameters) {
-//			getUnboundTypeParameter(handle).bindIfPossible();
-//		}
-		for(UnboundTypeReference unbound: ensureTypeParameterMapExists().values()) {
-			unbound.copyInto(parent);
+		for(ExpressionAwareUnboundTypeReference unbound: basicGetTypeParameters().values()) {
+			LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
+			if (reference instanceof ExpressionAwareUnboundTypeReference) {
+				parent.acceptUnboundTypeReference(unbound.getHandle(), (ExpressionAwareUnboundTypeReference) reference);
+			}
+		}
+		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();
+		for(Map.Entry<Object, LightweightBoundTypeArgument> hint: typeParameterHints.entries()) {
+			LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
+			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+					boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
+					boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
+					boundTypeArgument.getDeclaredVariance(), 
+					boundTypeArgument.getActualVariance());
+			parent.acceptHint(hint.getKey(), copy);
 		}
 	}
 
 	@Override
+	@Nullable
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
 		Collection<TypeData> result = super.doGetTypeData(expression);
 		if (result == null) {
@@ -89,24 +114,27 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement identifiable) {
-		LightweightTypeReference result = super.internalGetActualType(identifiable);
+	@Nullable
+	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable) {
+		LightweightTypeReference result = super.doGetActualType(identifiable);
 		if (result == null) {
-			result = parent.internalGetActualType(identifiable);
+			result = parent.doGetActualType(identifiable);
 		}
 		return result;
 	}
 	
 	@Override
-	public List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
-		List<LightweightTypeReference> result = super.internalGetActualTypeArguments(expression);
+	@Nullable
+	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
+		List<LightweightTypeReference> result = super.doGetActualTypeArguments(expression);
 		if (result == null) {
-			result = parent.internalGetActualTypeArguments(expression);
+			result = parent.doGetActualTypeArguments(expression);
 		}
 		return result;
 	}
 	
 	@Override
+	@Nullable
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
 		IFeatureLinkingCandidate result = super.getFeature(featureCall);
 		if (result == null) {
@@ -116,6 +144,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
+	@Nullable
 	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
 		IConstructorLinkingCandidate result = super.getConstructor(constructorCall);
 		if (result == null) {
@@ -125,7 +154,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public void reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
 		super.reassignType(identifiable, reference);
 		if (reference == null) {
 			getParent().reassignType(identifiable, reference);
@@ -140,19 +169,28 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@NonNull
-	protected UnboundTypeReference getUnboundTypeReference(@NonNull Object handle) {
-		UnboundTypeReference result = ensureTypeParameterMapExists().get(handle);
+	protected UnboundTypeReference getUnboundTypeReference(Object handle) {
+		UnboundTypeReference result = basicGetTypeParameters().get(handle);
 		if (result == null) {
-			return parent.getUnboundTypeReference(handle);
-//			if (result != null) {
-//				result = result.copyInto(this);
-//				
-//			}
-//			StackedUnboundParameter stackedResult = new StackedUnboundParameter(result, this);
-//			stackedUnboundParameters.put(result.getHandle(), stackedResult);
-//			result = stackedResult;
-//			}
+			result = parent.getUnboundTypeReference(handle);
+			if (result.internalIsResolved())
+				throw new IllegalStateException("Cannot query unbound reference that was already resolved");
+			return (UnboundTypeReference) result.copyInto(getReferenceOwner());
+		}
+		return result;
+	}
+	
+	@Override
+	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
+		// TODO Auto-generated method stub
+		return super.getAllHints(handle);
+	}
+	
+	@Override
+	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
+		List<LightweightBoundTypeArgument> result = super.getHints(handle);
+		if (result.isEmpty()) {
+			return getParent().getHints(handle);
 		}
 		return result;
 	}
@@ -160,9 +198,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	protected void appendContent(StringBuilder result, String indentation) {
 		super.appendContent(result, indentation);
-//		appendContent(stackedUnboundParameters, "stackedUnboundParameters", result, indentation);
 		result.append("\n" + indentation + "parent: [");
 		parent.appendContent(result, indentation + "  ");
-		closeBracket(result);
+		closeBracket(result, indentation);
 	}
 }

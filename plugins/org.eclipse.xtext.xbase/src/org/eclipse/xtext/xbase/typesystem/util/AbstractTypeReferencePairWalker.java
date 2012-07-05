@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -84,7 +85,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	protected class ParameterizedTypeReferenceTraverser extends
 			TypeReferenceVisitorWithParameter<ParameterizedTypeReference> {
 		@Override
-		public void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ParameterizedTypeReference declaration) {
+		protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ParameterizedTypeReference declaration) {
 			JvmType type = declaration.getType();
 			if (type instanceof JvmTypeParameter) {
 				if (type != reference.getType() && shouldProcess((JvmTypeParameter) type)) {
@@ -95,6 +96,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					&& !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
 				doVisitSuperTypesWithMatchingParams(reference, declaration);
 			}
+		}
+
+		@Override
+		protected void doVisitAnyTypeReference(AnyTypeReference reference, ParameterizedTypeReference param) {
+			// nothing to do
 		}
 
 		protected void doVisitSuperTypesWithMatchingParams(ParameterizedTypeReference reference,

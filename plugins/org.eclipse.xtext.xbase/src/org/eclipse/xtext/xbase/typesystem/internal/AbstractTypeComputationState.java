@@ -108,7 +108,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	@Nullable
 	protected final ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
 		if (expression != null) {
-			StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, expression);
+			StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
 			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 			getResolver().getTypeComputer().computeTypes(expression, state);
 			if (mergeAll) {
@@ -208,6 +208,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	}
 
 	public void reassignType(XExpression object, LightweightTypeReference type) {
+		if (type == null)
+			throw new IllegalArgumentException("Reassigned type may not be null");
 		JvmIdentifiableElement refinable = getTypeComputer().getRefinableCandidate(object, this);
 		if (refinable != null) {
 			resolvedTypes.reassignType(refinable, type);
@@ -229,7 +231,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		// TODO reuse this information later on
 //		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
 		
-		StackedResolvedTypes demandComputedTypes = new StackedResolvedTypes(resolvedTypes);
+		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
 		final AbstractTypeComputationState forked = fork().withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
 			
@@ -240,9 +242,9 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 			
 			@Override
 			@Nullable
-			public LightweightTypeReference internalGetActualType(@Nullable XExpression expression) {
+			public LightweightTypeReference internalGetActualType(XExpression expression) {
 				LightweightTypeReference type = super.internalGetActualType(expression);
-				if (type == null && expression != null) {
+				if (type == null) {
 					LightweightTypeComputationResult result = forked.computeTypes(expression);
 					return result.internalGetActualExpressionType();
 				}
@@ -265,12 +267,18 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		if (description instanceof BucketedEObjectDescription) {
 			BucketedEObjectDescription casted = (BucketedEObjectDescription) description;
 			if (casted.getReceiverType() != null) {
-//				final ExpressionAwareStackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(demandComputedTypes, featureCall);
-				ExpressionTypeComputationState state = createExpressionComputationState(featureCall, demandComputedTypes);
-				return new FeatureLinkingCandidate(featureCall, description, state);
+				final ExpressionAwareStackedResolvedTypes resolvedTypes = demandComputedTypes.pushTypes(featureCall);
+				ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+				return new FeatureLinkingCandidate(featureCall, description, state) {
+					@Override
+					public void apply() {
+						super.apply();
+						demandComputedTypes.mergeIntoParent();
+					}
+				};
 			}
 		}
-		final ExpressionAwareStackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(this.resolvedTypes, featureCall);
+		final ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		return new FeatureLinkingCandidate(featureCall, description, state);
 	}
@@ -293,7 +301,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	}
 
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
-		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, constructorCall);
+		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
@@ -306,7 +314,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, source, getReferenceOwner()) {
 			@Override
 			protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
-					@Nullable Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
+					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
 				return createSubstitutor(mapping);
 			}
 //			@Override
@@ -322,7 +330,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return typeArgumentCollector;
 	}
 	
-	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(@Nullable Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
+	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
 		return getResolvedTypes().createSubstitutor(typeParameterMapping);
 	}
 	
@@ -336,6 +344,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	}
 
 	public TypeReferenceOwner getReferenceOwner() {
-		return getResolvedTypes();
+		return getResolvedTypes().getReferenceOwner();
 	}
 }

@@ -192,7 +192,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
-		StackedResolvedTypes childResolvedTypes = new StackedResolvedTypes(resolvedTypes);
+		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
 		JvmTypeReference superType = getExtendedClass(type);
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type, superType);
 		if (superType != null) {

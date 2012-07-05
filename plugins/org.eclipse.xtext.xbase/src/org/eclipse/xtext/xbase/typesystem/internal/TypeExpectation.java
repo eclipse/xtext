@@ -7,17 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 
 	private final LightweightTypeReference reference;
 
-	public TypeExpectation(LightweightTypeReference reference, AbstractTypeComputationState state, boolean returnType) {
+	public TypeExpectation(@Nullable LightweightTypeReference reference, AbstractTypeComputationState state, boolean returnType) {
 		super(state, returnType);
 		this.reference = reference;
 	}
@@ -26,8 +30,15 @@ public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 		return false;
 	}
 	
+	@Nullable
 	public LightweightTypeReference internalGetExpectedType() {
 		return reference;
+	}
+	
+	public TypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		if (reference == null || reference.isOwnedBy(referenceOwner))
+			return this;
+		return new TypeExpectation(reference.copyInto(referenceOwner), getState(), isReturnType());
 	}
 
 }

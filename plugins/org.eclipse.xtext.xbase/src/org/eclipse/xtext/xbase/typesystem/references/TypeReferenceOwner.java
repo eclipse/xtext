@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  */
 @NonNullByDefault
 public interface TypeReferenceOwner {
-
+	
 	CommonTypeComputationServices getServices();
 	
 	ResourceSet getContextResourceSet();
@@ -29,5 +29,7 @@ public interface TypeReferenceOwner {
 	
 	// TODO move these to *somewhere* else
 	List<LightweightBoundTypeArgument> getAllHints(Object handle);
+
+	boolean isResolved(Object handle);
 	
 }

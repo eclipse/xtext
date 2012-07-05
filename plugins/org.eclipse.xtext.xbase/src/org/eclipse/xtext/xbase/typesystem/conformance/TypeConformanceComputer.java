@@ -155,17 +155,6 @@ public class TypeConformanceComputer {
 				return null;
 			}
 		}
-//		if (allTypesAreArrays(types)) {
-//			List<LightweightTypeReference> componentTypes = getComponentTypes(types);
-//			LightweightTypeReference resultComponent = doGetCommonSuperType(componentTypes, new TypeConformanceComputationArgument(false, false, false));
-//			if (resultComponent != null) {
-//				JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
-//				result.setComponentType(resultComponent);
-//				return result;
-//			}
-//		}
-		// TODO handle all primitives
-		// TODO handle arrays
 		if (containsPrimitiveOrAnyReferences(types)) {
 			List<LightweightTypeReference> withoutPrimitives = replacePrimitivesAndRemoveAnyReferences(types);
 			if (withoutPrimitives.equals(types))
@@ -257,78 +246,6 @@ public class TypeConformanceComputer {
 		}
 		return false;
 	}
-	
-//	protected List<LightweightTypeReference> getComponentTypes(List<LightweightTypeReference> types) {
-//		ITypeReferenceVisitor<LightweightTypeReference> componentTypeComputer = new AbstractTypeReferenceVisitor.InheritanceAware<LightweightTypeReference>() {
-//			@Override
-//			public LightweightTypeReference doVisitTypeReference(LightweightTypeReference reference) {
-//				return null;
-//			}
-//			@Override
-//			protected LightweightTypeReference handleNullReference() {
-//				return null;
-//			}
-//			@Override
-//			public LightweightTypeReference doVisitMultiTypeReference(JvmMultiTypeReference multi) {
-//				JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
-//				for(LightweightTypeReference reference: multi.getReferences()) {
-//					LightweightTypeReference component = visit(reference);
-//					if (component != null) {
-//						if (component.eContainer() == null) {
-//							result.getReferences().add(component);
-//						} else {
-//							JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
-//							delegate.setDelegate(component);
-//							result.getReferences().add(delegate);
-//						}
-//					}
-//				}
-//				return result;
-//			}
-//			@Override
-//			public LightweightTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
-//				return reference.getComponentType();
-//			}
-//			@Override
-//			public LightweightTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference synonym) {
-//				LightweightTypeReference result = null;
-//				for(LightweightTypeReference reference: synonym.getReferences()) {
-//					LightweightTypeReference component = visit(reference);
-//					if (component != null) {
-//						if (result == null) {
-//							result = component;
-//						} else {
-//							if (!(result instanceof JvmSynonymTypeReference)) {
-//								JvmSynonymTypeReference newResult = factory.createJvmSynonymTypeReference();
-//								if (result.eContainer() == null) {
-//									newResult.getReferences().add(result);
-//								} else {
-//									JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
-//									delegate.setDelegate(component);
-//									newResult.getReferences().add(delegate);
-//								}
-//								result = newResult;
-//							}
-//							if (component.eContainer() == null) {
-//								((JvmSynonymTypeReference) result).getReferences().add(result);
-//							} else {
-//								JvmDelegateTypeReference delegate = factory.createJvmDelegateTypeReference();
-//								delegate.setDelegate(component);
-//								((JvmSynonymTypeReference) result).getReferences().add(delegate);
-//							}
-//						}
-//					}
-//				}
-//				return result;
-//			}
-//		};
-//		List<LightweightTypeReference> result = Lists.newArrayList();
-//		for(LightweightTypeReference reference: types) {
-//			LightweightTypeReference componentType = componentTypeComputer.visit(reference);
-//			result.add(componentType);
-//		}
-//		return result;
-//	}
 	
 	protected LightweightTypeReference getTypeParametersForSupertype(
 			final Multimap<JvmType, LightweightTypeReference> all, 

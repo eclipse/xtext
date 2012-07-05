@@ -36,7 +36,7 @@ public class ObservableTypeComputationStateWithExpectation extends AbstractStack
 
 	@Override
 	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		LightweightTypeExpectation result = createTypeExpectation(expectedType, actualState, false);
+		LightweightTypeExpectation result = createTypeExpectation(expectedType.copyInto(actualState.getReferenceOwner()), actualState, false);
 		return Collections.singletonList(result);
 	}
 

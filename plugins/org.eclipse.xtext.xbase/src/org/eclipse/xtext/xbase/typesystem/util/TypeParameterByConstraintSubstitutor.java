@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
@@ -34,6 +36,31 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			TypeReferenceOwner owner) {
 		super(typeParameterMapping, owner);
+	}
+	
+	@Override
+	protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, ConstraintVisitingInfo visiting) {
+		JvmTypeParameter typeParameter = reference.getTypeParameter();
+		if (!visiting.tryVisit(typeParameter)) {
+			LightweightTypeReference mappedReference = getDeclaredUpperBound(typeParameter, visiting);
+			getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+			if (mappedReference != null)
+				return mappedReference;
+			return getObjectReference(typeParameter);
+		}
+		try {
+			LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(typeParameter);
+			if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+				LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
+				return result;
+			} else {
+				LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+				getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+				return mappedReference;
+			}
+		} finally {
+			visiting.didVisit(typeParameter);
+		}
 	}
 	
 	@Override
@@ -103,16 +130,28 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
 		if (type.getTypeParameters().size() > parameterIndex) {
 			JvmTypeParameter typeParameter = type.getTypeParameters().get(parameterIndex);
-			if (!typeParameter.getConstraints().isEmpty()) {
-				JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
-				if (constraint instanceof JvmUpperBound) {
-					LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-					return reference.accept(this, visiting);
-				}
+			LightweightTypeReference result = getDeclaredUpperBound(typeParameter, visiting);
+			if (result != null)
+				return result;
+		}
+		return getObjectReference(type);
+	}
+
+	protected LightweightTypeReference getObjectReference(EObject context) {
+		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, context);
+		return new ParameterizedTypeReference(getOwner(), objectType);
+	}
+
+	@Nullable
+	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameter typeParameter, ConstraintVisitingInfo visiting) {
+		if (!typeParameter.getConstraints().isEmpty()) {
+			JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+			if (constraint instanceof JvmUpperBound) {
+				LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+				return reference.accept(this, visiting);
 			}
 		}
-		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, type);
-		return new ParameterizedTypeReference(getOwner(), objectType);
+		return null;
 	}
 	
 	@Override

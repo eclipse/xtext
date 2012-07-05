@@ -42,6 +42,8 @@ public abstract class BaseTypeComputationState implements LightweightTypeComputa
 	}
 
 	public final void reassignType(XExpression object, JvmTypeReference type) {
+		if (type == null)
+			throw new IllegalArgumentException("Reassigned type may not be null");
 		reassignType(object, toLightweightReference(type));
 	}
 

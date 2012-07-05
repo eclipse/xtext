@@ -210,9 +210,10 @@ public class FunctionTypes {
 		String simpleClassName = (procedure ? "Procedure" : "Function") + Math.min(6, parameterCount);
 		final Class<?> loadFunctionClass = loadFunctionClass(simpleClassName, procedure);
 		JvmType declaredType = typeReferences.findDeclaredType(loadFunctionClass, context);
-		if (declaredType == null)
+		if (declaredType == null || !(declaredType instanceof JvmTypeParameterDeclarator))
 			return null;
-		return new FunctionTypeReference(owner, declaredType);
+		FunctionTypeReference result = new FunctionTypeReference(owner, declaredType);
+		return result;
 	}
 	
 	public FunctionTypeReference createFunctionTypeRef(

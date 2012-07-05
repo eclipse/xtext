@@ -40,7 +40,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		resolver.typeComputer = this 
 		val expression = expression("{ null }")
 		val resolution = new PublicResolvedTypes(resolver)
-		val any = new AnyTypeReference(resolution)
+		val any = new AnyTypeReference(resolution.getReferenceOwner())
 		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		assertEquals(any.toString, resolution.getActualType(expression).identifier)
 		assertEquals(any.toString, resolution.internalGetActualType(expression).toString)

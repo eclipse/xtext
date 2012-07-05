@@ -7,92 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import com.google.inject.Inject
-import com.google.inject.Provider
-import com.google.inject.Singleton
-import java.util.List
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
-import org.eclipse.xtext.xbase.XbaseFactory
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
-import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver
-import org.eclipse.xtext.xbase.typing.ITypeProvider
-import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-
-import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class BatchTypeResolverTest extends AbstractXbaseTestCase {
+abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	
-	@Inject
-	IBatchTypeResolver typeResolver;
-	@Inject
-	ITypeProvider typeProvider;
-
-	def void resolvesTo(String expression, String type) throws Exception {
-		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
-		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
-		val resolvedType = resolvedTypes.getActualType(xExpression)
-		assertEquals(type, resolvedType.simpleName);
-		for(content: xExpression.eAllContents.toIterable) {
-			switch(content) {
-				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
-					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content, resolvedTypes)
-					}
-				}
-				XExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
-				}
-				XCasePart : { /* skip */}
-				JvmIdentifiableElement: {
-					assertIdentifiableTypeIsResolved(content, resolvedTypes)
-				}
-			}
-		}
-	}
-	
-	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
-		val type = types.getActualType(expression)
-		assertNotNull(expression.toString, type)
-		assertNotNull(expression.toString + " / " + type, type.identifier)	
-	}
-	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
-		val type = types.getActualType(identifiable)
-		assertNotNull(identifiable.toString, type)
-		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
-	}
-	
-	def getTypeResolver() {
-		typeResolver
-	}
-	
-	def void resolvesTo2(String expression, String type) throws Exception {
-		val xExpression = expression(expression, false /* true */);
-		val resolvedType = typeProvider.getType(xExpression)
-		assertEquals(type, resolvedType.simpleName);
-//		for(content: xExpression.eAllContents.toIterable) {
-//			if (content instanceof XExpression)
-//				typeProvider.getType(content as XExpression)
-//		}
-	}
+	def void resolvesTo(String expression, String type)
 	
 	def void resolvesTo(String expression, Class<?> type) throws Exception {
 		expression.resolvesTo(type.simpleName)
@@ -245,22 +169,27 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)".resolvesTo("long")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testOverloadedOperators_01() throws Exception {
 		"1 + 1".resolvesTo("int")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testOverloadedOperators_02() throws Exception {
 		"1L + 1".resolvesTo("long")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testOverloadedOperators_03() throws Exception {
 		"1 + 1L".resolvesTo("long")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testOverloadedOperators_04() throws Exception {
 		"'' + ''".resolvesTo("String")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testOverloadedOperators_05() throws Exception {
 		"'' + 1".resolvesTo("String")
 	}
@@ -306,20 +235,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"for(x : null as String[]) x.length".resolvesTo("void")
 	}
 
-	@Test def void testNull() throws Exception {
-		val typeResolution = typeResolver.resolveTypes(null)
-		assertNotNull(typeResolution);
-		assertEquals(IResolvedTypes::NULL, typeResolution)
-	}
-
-	@Test def void testProxy() throws Exception {
-		val proxy = XbaseFactory::eINSTANCE.createXFeatureCall();
-		(proxy as InternalEObject).eSetProxyURI(URI::createURI("path#fragment"));
-		val typeResolution = typeResolver.resolveTypes(proxy)
-		assertNotNull(typeResolution);
-		assertEquals(IResolvedTypes::NULL, typeResolution)
-	}
-	
 	@Test def void testImplicitImportPrintln_01() throws Exception {
 		"println(null)".resolvesTo("Object")
 	}
@@ -392,6 +307,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	@Ignore("lower bound")
 	def void testClosure_03() throws Exception {
 		("{\n" + 
 		"  var java.util.List<? super String> list = null;\n" + 
@@ -400,6 +316,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	}
 
 	@Test
+	@Ignore("overloading")
 	def void testClosure_04() throws Exception {
 		("{\n" + 
 		"  var java.util.List<? super String> list = null;\n" + 
@@ -440,11 +357,26 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"[Object x| x.toString x ]".resolvesTo("(Object)=>Object")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testClosure_13() throws Exception {
 		"{ 
 			val mapper = [ x | x ]
 			newArrayList(1).map(mapper)
 		}".resolvesTo("List<Integer>")
+	}
+	
+	@Test def void testClosure_13a() throws Exception {
+		"{ 
+			val mapper = [ x | x ]
+			newArrayList(1).map(mapper).head
+		}".resolvesTo("Integer")
+	}
+	
+	@Test def void testClosure_13b() throws Exception {
+		"{ 
+			val mapper = [ x | x ]
+			newArrayList(1).map(mapper).findFirst [ true ]
+		}".resolvesTo("Integer")
 	}
 	
 	@Ignore("TODO deferred closure body typing")
@@ -560,6 +492,14 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("List<Integer>")
 	}
 	
+	@Test def void testClosure_28() throws Exception {
+		"[|].apply()".resolvesTo("Object")
+	}
+	
+	@Test def void testClosure_29() throws Exception {
+		"[].apply()".resolvesTo("Object")
+	}
+	
 	@Test def void testTypeArgs() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
 	}
@@ -663,6 +603,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	}
 
 	@Test def void testBlockExpression_01() throws Exception {
+		"{}".resolvesTo("null")
 		"{null}".resolvesTo("null")
 		"{''.toString 4}".resolvesTo("int")
 		"{''.toString true}".resolvesTo("boolean")
@@ -832,8 +773,23 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".resolvesTo("List<Number & Comparable<?>>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_06() throws Exception {
 		"newArrayList('').map(s|s)".resolvesTo("List<String>")
+	}
+	
+	@Ignore("overloading")
+	@Test def void testFeatureCall_06a() throws Exception {
+		"newArrayList('').map [it|it]".resolvesTo("List<String>")
+	}
+	
+	@Ignore("overloading")
+	@Test def void testFeatureCall_06b() throws Exception {
+		"newArrayList('').map [it]".resolvesTo("List<String>")
+	}
+	
+	@Test def void testFeatureCall_06c() throws Exception {
+		"(null as Iterable<String>).map(s|s)".resolvesTo("Iterable<String>")
 	}
 	
 	@Test def void testFeatureCall_06_00() throws Exception {
@@ -928,18 +884,22 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1))".resolvesTo("ArrayList<List<Integer>>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15() throws Exception {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_a() throws Exception {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e)".resolvesTo("List<Integer>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_b() throws Exception {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_c() throws Exception {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -1058,10 +1018,12 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		.map(e|e).map(e|e).map(e|e).map(e|e).head").resolvesTo("Integer");
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_o() throws Exception {
 		"newArrayList(newArrayList('')).map(iterable|iterable.size())".resolvesTo("List<Integer>");
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_p() throws Exception {
 		"newArrayList(newArrayList('')).map(iterable|iterable.size()).map(e|e)".resolvesTo("List<Integer>");
 	}
@@ -1119,11 +1081,19 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )".resolvesTo("List<Integer>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testFeatureCall_26() throws Exception {
 		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
            val Object o = list.head 
            list
         }".resolvesTo("List<Integer>");
+	}
+	
+	@Test def void testFeatureCall_26a() throws Exception {
+		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+           val Object o = list.head 
+           list.head
+        }".resolvesTo("Integer");
 	}
 	
 	@Test def void testFeatureCall_27() throws Exception {
@@ -1140,11 +1110,19 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
         }".resolvesTo("List<Integer>");
 	}
 
+	@Ignore("overloading")
 	@Test def void testFeatureCall_30() throws Exception {
 		"{ val list = newArrayList(null as Integer).map [ v|v.intValue ]
            val Object o = list.head 
            list
         }".resolvesTo("List<Integer>");
+	}
+	
+	@Test def void testFeatureCall_31() throws Exception {
+		"{ val list = newArrayList(null as Integer).map [ v|v.intValue ]
+           val Object o = list.head 
+           list.findFirst [ intValue == 0 ]
+        }".resolvesTo("Integer");
 	}
 	
 	@Test def void testToList_01() throws Exception {
@@ -1183,31 +1161,50 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }".resolvesTo("List<String>")
 	}
 	
+	@Ignore("overloading")
+	@Test def void testFeatureCall_Bug342134_00() throws Exception {
+		"(null as java.util.List<String>).map(e|newArrayList(e)).flatten".resolvesTo("List<String>")
+	}
+	
 	@Test def void testFeatureCall_Bug342134_01() throws Exception {
+		"(null as java.util.List<String>).map(e|newArrayList(e)).flatten.head".resolvesTo("String")
+	}
+	
+	@Ignore("overloading")
+	@Test def void testFeatureCall_Bug342134_02() throws Exception {
 		"newArrayList('').map(e|newArrayList(e)).flatten".resolvesTo("List<String>")
 	}
 	
-	@Test def void testFeatureCall_Bug342134_02() throws Exception {
+	@Test def void testFeatureCall_Bug342134_03() throws Exception {
+		"newArrayList('').map(e|newArrayList(e)).flatten.head".resolvesTo("String")
+	}
+	
+	@Ignore("overloading")
+	@Test def void testFeatureCall_Bug342134_04() throws Exception {
 		"newArrayList('').map(e|newArrayList(e))".resolvesTo("List<ArrayList<String>>")
 	}
 	
-	@Test def void testFeatureCall_Bug342134_03() throws Exception {
-		"<String>newArrayList.map(e|newArrayList(e)).flatten".resolvesTo("Iterable<String>")
-	}
-	
-	@Test def void testFeatureCall_Bug342134_04() throws Exception {
-		"newArrayList('').map(e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
-	}
-	
 	@Test def void testFeatureCall_Bug342134_05() throws Exception {
-		"newArrayList.map(String e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
+		"newArrayList('').map(e|newArrayList(e)).head".resolvesTo("ArrayList<String>")
 	}
 	
 	@Test def void testFeatureCall_Bug342134_06() throws Exception {
-		"newArrayList(newArrayList('')).flatten".resolvesTo("Iterable<String>")
+		"<String>newArrayList.map(e|newArrayList(e)).flatten".resolvesTo("Iterable<String>")
 	}
 	
 	@Test def void testFeatureCall_Bug342134_07() throws Exception {
+		"newArrayList('').map(e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testFeatureCall_Bug342134_08() throws Exception {
+		"newArrayList.map(String e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testFeatureCall_Bug342134_09() throws Exception {
+		"newArrayList(newArrayList('')).flatten".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testFeatureCall_Bug342134_10() throws Exception {
 		"<java.util.List<String>>newArrayList().flatten".resolvesTo("Iterable<String>")
 	}
 	
@@ -1617,6 +1614,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_041() throws Exception {
 		"{
 			val list = newArrayList
@@ -1625,6 +1623,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_042() throws Exception {
 		"{
 			val list = newArrayList
@@ -1635,6 +1634,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_043() throws Exception {
 		"{
 			val list = newArrayList
@@ -1709,7 +1709,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_052() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_052() throws Exception {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
@@ -2155,7 +2155,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_102() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_102() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.HashSet)
@@ -2164,7 +2164,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_103() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_103() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2173,7 +2173,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_104() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_104() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(newHashSet)
@@ -2182,7 +2182,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_105() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_105() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2191,7 +2191,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_106() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_106() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			val second = new java.util.ArrayList
@@ -2202,6 +2202,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_107() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2210,6 +2211,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_108() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2220,6 +2222,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("overloading")
 	@Test def void testDeferredTypeArgumentResolution_109() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2286,7 +2289,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_117() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_117() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), null as java.util.ArrayList<String>)
@@ -2294,7 +2297,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_118() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_118() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
@@ -2394,8 +2397,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
-	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_130() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(println(new Integer(0)))
@@ -2424,7 +2426,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_133() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_133() throws Exception {
 		"{
 			val list = newArrayList
 			list.map[String s| s]
@@ -2432,7 +2434,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_134() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_134() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.map[String s| s]
@@ -2440,7 +2442,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_135() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_135() throws Exception {
 		"{
 			val list = newArrayList
 			list.add(newArrayList)
@@ -2449,7 +2451,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
+	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_136() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2570,50 +2572,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Test def void testStaticMethods_06() throws Exception {
 		"String::CASE_INSENSITIVE_ORDER".resolvesTo("Comparator<String>")
-	}
-	
-}
-
-/**
- * This tests ensures that the type calculation does not depend on some lazy evaluation.
- * Therefore all argument types for all overloaded variants are computed eagerly.
- * @author Sebastian Zarnekow
- */
-class IsolationTest extends BatchTypeResolverTest {
-
-	@Inject
-	EagerArgumentTypeResolver eagerResolver
-
-	@Inject
-	Provider<IReentrantTypeResolver> typeResolverProvider;
-	
-	@Inject
-	extension ReflectExtensions
-
-	@Before
-	def void setEagerResolver() {
-		val castedResolver = typeResolver as DefaultBatchTypeResolver
-		val Provider<IReentrantTypeResolver> provider = [|
-			val reentrantResolver = typeResolverProvider.get
-			reentrantResolver.set("typeComputer", eagerResolver)
-			return reentrantResolver
-		]
-		castedResolver.set("typeResolverProvider", provider)
-	}
-
-}
-
-/**
- * @author Sebastian Zarnekow
- */
-@Singleton
-class EagerArgumentTypeResolver extends XbaseTypeComputer {
-	
-	override protected <Candidate extends ILinkingCandidate<Candidate>> getBestCandidate(List<Candidate> candidates) {
-		candidates.forEach[
-			(it as AbstractLinkingCandidate).computeArgumentTypes(feature)
-		]
-		super.<Candidate> getBestCandidate(candidates)
 	}
 	
 }

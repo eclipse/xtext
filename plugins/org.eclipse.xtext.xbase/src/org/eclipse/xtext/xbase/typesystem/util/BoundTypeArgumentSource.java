@@ -68,5 +68,12 @@ public enum BoundTypeArgumentSource {
 	 *  }
 	 * </pre>
 	 */
-	INFERRED
+	INFERRED,
+	
+	/**
+	 * <pre>
+	 *  Used to indicate that a type argument was resolved
+	 * </pre>
+	 */
+	RESOLVED
 }
