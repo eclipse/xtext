@@ -14,8 +14,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeReference
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
+import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareUnboundTypeReference
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,7 +26,7 @@ class PublicResolvedTypes extends RootResolvedTypes {
 		super(resolver)
 	}
 	
-	override public RootUnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
+	override public ExpressionAwareUnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
 		super.createUnboundTypeReference(expression, type)
 	}
 	
