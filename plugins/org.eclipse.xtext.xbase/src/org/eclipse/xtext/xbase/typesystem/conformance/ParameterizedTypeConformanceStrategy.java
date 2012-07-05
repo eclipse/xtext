@@ -29,12 +29,12 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult.Kind;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -54,6 +54,7 @@ import com.google.common.collect.Maps;
 @NonNullByDefault
 public class ParameterizedTypeConformanceStrategy<TypeReference extends ParameterizedTypeReference> extends
 		TypeConformanceStrategy<TypeReference> {
+	
 	public ParameterizedTypeConformanceStrategy(TypeConformanceComputer conformanceComputer) {
 		super(conformanceComputer);
 	}
@@ -182,6 +183,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	protected FunctionTypeReference convertToFunctionTypeReference(ParameterizedTypeReference reference, boolean rawType) {
 		CommonTypeComputationServices services = reference.getOwner().getServices();
 		FunctionTypes functionTypes = services.getFunctionTypes();
+		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 		JvmOperation operation = functionTypes.findImplementingOperation(reference);
 		if (operation == null)
 			return null;
@@ -193,7 +195,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), reference.getOwner());
 			for(JvmFormalParameter parameter: operation.getParameters()) {
 				LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-				LightweightTypeReference lowerBound = getLowerBoundOrInvariant(lightweight);
+				LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(lightweight);
 				if (lowerBound == null)
 					return null;
 				result.addParameterType(lowerBound);
@@ -213,13 +215,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
 		for(JvmFormalParameter parameter: operation.getParameters()) {
 			LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-			LightweightTypeReference lowerBound = getLowerBoundOrInvariant(lightweight);
+			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(lightweight);
 			if (lowerBound == null)
 				return null;
 			parameterTypes.add(lowerBound);
 		}
 		LightweightTypeReference returnType = substitutor.substitute(declaredReturnType);
-		FunctionTypeReference result = functionTypes.createFunctionTypeRef(reference.getOwner(), reference, parameterTypes, getUpperBoundOrInvariant(returnType));
+		FunctionTypeReference result = functionTypes.createFunctionTypeRef(reference.getOwner(), reference, parameterTypes, lightweightTypeReferences.getUpperBoundOrInvariant(returnType));
 		return result;
 	}
 	
@@ -236,13 +238,15 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			functionType.setReturnType(new ParameterizedTypeReference(reference.getOwner(), voidType));
 			return functionType;
 		} else if (functionTypeKind == FunctionTypeKind.FUNCTION) {
+			CommonTypeComputationServices services = reference.getOwner().getServices();
+			LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
 			List<LightweightTypeReference> allTypeArguments = reference.getTypeArguments();
 			if (!setTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))
 				return null;
 			LightweightTypeReference lastTypeArgument = allTypeArguments.get(allTypeArguments.size() - 1);
 			functionType.addTypeArgument(lastTypeArgument);
-			LightweightTypeReference returnType = getUpperBoundOrInvariant(lastTypeArgument);
+			LightweightTypeReference returnType = lightweightTypeReferences.getUpperBoundOrInvariant(lastTypeArgument);
 			if (returnType == null) {
 				return null;
 			}
@@ -253,45 +257,17 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 	
 	protected boolean setTypeArguments(List<LightweightTypeReference> typeArguments, FunctionTypeReference result) {
+		CommonTypeComputationServices services = result.getOwner().getServices();
+		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 		for(LightweightTypeReference typeArgument: typeArguments) {
 			result.addTypeArgument(typeArgument);
-			LightweightTypeReference lowerBound = getLowerBoundOrInvariant(typeArgument);
+			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(typeArgument);
 			if (lowerBound == null || lowerBound instanceof AnyTypeReference) {
 				return false;
 			}
 			result.addParameterType(lowerBound);
 		}
 		return true;
-	}
-	
-	@Nullable
-	protected LightweightTypeReference getUpperBoundOrInvariant(LightweightTypeReference reference) {
-		if (reference instanceof WildcardTypeReference) {
-			List<LightweightTypeReference> bounds = ((WildcardTypeReference) reference).getUpperBounds();
-			if (bounds.size() == 0) {
-				return null;
-			}
-			if (bounds.size() > 1) {
-				CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), false);
-				for(LightweightTypeReference bound: bounds)
-					result.addComponent(bound);
-				return result;
-			} else {
-				return bounds.get(0);
-			}
-		}
-		return reference;
-	}
-	
-	@Nullable
-	protected LightweightTypeReference getLowerBoundOrInvariant(LightweightTypeReference reference) {
-		if (reference instanceof WildcardTypeReference) {
-			LightweightTypeReference lowerBound = ((WildcardTypeReference) reference).getLowerBound();
-			if (lowerBound != null)
-				return lowerBound;
-			return null;
-		}
-		return reference;
 	}
 	
 	protected enum FunctionTypeKind {

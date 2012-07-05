@@ -63,10 +63,14 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 	
 	protected IResolvedTypes resolve() {
-		ResolvedTypes result = new RootResolvedTypes(this);
+		ResolvedTypes result = createResolvedTypes();
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);
 		return result;
+	}
+
+	protected RootResolvedTypes createResolvedTypes() {
+		return new RootResolvedTypes(this);
 	}
 	
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {

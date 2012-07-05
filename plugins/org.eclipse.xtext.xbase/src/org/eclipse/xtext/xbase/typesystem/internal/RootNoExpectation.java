@@ -7,19 +7,24 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class RootNoExpectation extends AbstractRootTypeExpectation {
 
 	public RootNoExpectation(AbstractTypeComputationState state) {
 		super(state);
 	}
 
+	@Nullable
 	public LightweightTypeReference internalGetExpectedType() {
 		return null;
 	}
@@ -43,5 +48,9 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 //		LightweightTypeReference substitute = substitutor.substitute(type);
 //		}
 		super.acceptActualType(type, hint);
+	}
+	
+	public RootNoExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		return this;
 	}
 }

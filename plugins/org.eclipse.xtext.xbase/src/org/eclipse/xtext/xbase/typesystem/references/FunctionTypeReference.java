@@ -99,7 +99,9 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	
 	@Override
 	protected String getAsString(String type, Function<LightweightTypeReference, String> format) {
-		return "(" + Joiner.on(", ").join(Iterables.transform(expose(parameterTypes), format)) + ")=>" + format.apply(returnType);
+		if (isRawType())
+			return type;
+		return "(" + Joiner.on(", ").join(Iterables.transform(expose(parameterTypes), format)) + ")=>" + (returnType != null ? format.apply(returnType) : "./.");
 	}
 	
 	@Override

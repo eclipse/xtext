@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class BaseTypeExpectation implements LightweightTypeExpectation {
 
 	private final TypeReferenceOwner owner;
@@ -31,6 +34,7 @@ public abstract class BaseTypeExpectation implements LightweightTypeExpectation 
 		acceptActualType(getConverter().toLightweightReference(type), hint);
 	}
 
+	@Nullable
 	public final JvmTypeReference getExpectedType() {
 		LightweightTypeReference result = internalGetExpectedType();
 		if (result != null) {

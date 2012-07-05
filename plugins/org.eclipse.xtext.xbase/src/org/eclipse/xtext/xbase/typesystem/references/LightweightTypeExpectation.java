@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public interface LightweightTypeExpectation extends ITypeExpectation {
 
+	@Nullable
 	LightweightTypeReference internalGetExpectedType();
 
 	void acceptActualType(LightweightTypeReference type, ConformanceHint hint);
@@ -22,5 +26,9 @@ public interface LightweightTypeExpectation extends ITypeExpectation {
 	OwnedConverter getConverter();
 	
 	TypeReferenceOwner getReferenceOwner();
+	
+	LightweightTypeExpectation copyInto(TypeReferenceOwner referenceOwner);
+	
+	boolean isOwnedBy(TypeReferenceOwner referenceOwner);
 	
 }

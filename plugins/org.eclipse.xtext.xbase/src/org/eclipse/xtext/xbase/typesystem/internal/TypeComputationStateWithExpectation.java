@@ -44,7 +44,8 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
-			result = new TypeExpectation(expectedType, actualState, returnType);
+			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
+			result = new TypeExpectation(copied, actualState, returnType);
 		} else {
 			result = new NoExpectation(actualState, returnType);
 		}

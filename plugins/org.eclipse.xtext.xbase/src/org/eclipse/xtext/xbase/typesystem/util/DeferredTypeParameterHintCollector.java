@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 @NonNullByDefault
 public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePairWalker {
 
-	protected class ComputedTypeReferenceTraverser extends
+	protected class UnboundTypeReferenceTraverser extends
 		TypeReferenceVisitorWithParameter<UnboundTypeReference> {
 		
 		@Override
@@ -50,15 +50,15 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 		
 	}
 	
-	private ComputedTypeReferenceTraverser computedTypeReferenceTraverser;
+	private UnboundTypeReferenceTraverser computedTypeReferenceTraverser;
 	
 	public DeferredTypeParameterHintCollector(TypeReferenceOwner owner) {
 		super(owner);
-		computedTypeReferenceTraverser = createComputedTypeReferenceTraverser();
+		computedTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
 	}
 	
-	protected ComputedTypeReferenceTraverser createComputedTypeReferenceTraverser() {
-		return new ComputedTypeReferenceTraverser();
+	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+		return new UnboundTypeReferenceTraverser();
 	}
 	
 	@Override

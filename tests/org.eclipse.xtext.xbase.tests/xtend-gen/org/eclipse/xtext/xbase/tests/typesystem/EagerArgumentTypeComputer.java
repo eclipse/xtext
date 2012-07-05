@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate;
  */
 @Singleton
 @SuppressWarnings("all")
-public class EagerArgumentTypeResolver extends XbaseTypeComputer {
+public class EagerArgumentTypeComputer extends XbaseTypeComputer {
   protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(final List<Candidate> candidates) {
     Candidate _xblockexpression = null;
     {

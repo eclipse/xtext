@@ -7,13 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 
 	private final AbstractTypeComputationState state;
@@ -30,6 +33,11 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isOwnedBy(TypeReferenceOwner referenceOwner) {
+		LightweightTypeReference expectedType = internalGetExpectedType();
+		return expectedType == null || expectedType.isOwnedBy(referenceOwner);
 	}
 	
 	protected AbstractTypeComputationState getState() {

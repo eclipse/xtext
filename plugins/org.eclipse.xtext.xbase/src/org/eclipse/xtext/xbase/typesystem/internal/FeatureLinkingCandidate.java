@@ -138,16 +138,20 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	}
 	
 	@Override
-	protected StackedResolvedTypes resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
 			LightweightTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(getState().getResolvedTypes(), argument);
-			resolvedTypes.acceptType(argument, null, receiverType, ConformanceHint.UNCHECKED, false);
+			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes().pushTypes(argument);
+			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
+			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, argumentState, false);
+			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
+			// TODO should we use the result of #acceptType?
+			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
 				resolveAgainstActualType(declaredType, receiverType, argumentState);
-			return resolvedTypes;
+			resolvedTypes.mergeIntoParent();
 		} else {
-			return super.resolveArgumentType(argument, declaredType, argumentState);
+			super.resolveArgumentType(argument, declaredType, argumentState);
 		}
 	}
 	

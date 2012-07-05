@@ -7,6 +7,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -25,6 +26,17 @@ public class CommonTypeComputationServices {
   
   public void setTypeReferences(final TypeReferences typeReferences) {
     this._typeReferences = typeReferences;
+  }
+  
+  @Inject
+  private LightweightTypeReferences _lightweightTypeReferences;
+  
+  public LightweightTypeReferences getLightweightTypeReferences() {
+    return this._lightweightTypeReferences;
+  }
+  
+  public void setLightweightTypeReferences(final LightweightTypeReferences lightweightTypeReferences) {
+    this._lightweightTypeReferences = lightweightTypeReferences;
   }
   
   @Inject

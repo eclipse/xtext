@@ -130,6 +130,10 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		protected List<JvmType> doVisitUnboundTypeReference(UnboundTypeReference reference, ResourceSet resourceSet) {
+			if (!reference.getAllHints().isEmpty()) {
+				LightweightTypeReference resolved = reference.resolve();
+				return resolved.accept(this, resourceSet);
+			}
 			JvmTypeParameter typeParameter = reference.getTypeParameter();
 			return getRawTypesFromConstraints(reference.getOwner(), typeParameter.getConstraints(), resourceSet);
 		}

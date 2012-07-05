@@ -59,4 +59,9 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   public ResourceSet getContextResourceSet() {
     return this.getContextResourceSet();
   }
+  
+  public boolean isResolved(final Object handle) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
+    throw _unsupportedOperationException;
+  }
 }

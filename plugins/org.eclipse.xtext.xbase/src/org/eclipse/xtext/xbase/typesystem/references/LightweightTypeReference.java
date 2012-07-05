@@ -24,8 +24,8 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -191,7 +191,7 @@ public abstract class LightweightTypeReference {
 	protected TypeParameterSubstitutor<?> createSubstitutor() {
 		DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(this);
-		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(mapping, getOwner());
+		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
 		return substitutor;
 	}
 	
@@ -233,7 +233,7 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
-		if (isResolved()) {
+		if (isOwnedBy(owner)) {
 			return this;
 		}
 		return doCopyInto(owner);

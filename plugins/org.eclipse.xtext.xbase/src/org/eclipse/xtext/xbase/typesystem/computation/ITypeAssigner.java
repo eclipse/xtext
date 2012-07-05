@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -20,9 +19,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 @NonNullByDefault
 public interface ITypeAssigner {
 
-	void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType);
+	void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType);
 	
-	void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType, @Nullable JvmTypeReference expectedType);
+	void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType, JvmTypeReference expectedType);
 	
 	ITypeComputationState getForkedState();
 	

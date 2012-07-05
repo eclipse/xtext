@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -48,7 +49,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final XExpression expression = this.expression("{ null }");
       PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
-      AnyTypeReference _anyTypeReference = new AnyTypeReference(resolution);
+      TypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
+      AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
       final AnyTypeReference any = _anyTypeReference;
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();

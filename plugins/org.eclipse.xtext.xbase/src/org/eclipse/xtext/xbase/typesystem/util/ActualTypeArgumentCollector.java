@@ -60,11 +60,11 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	}
 	
 	protected LightweightBoundTypeArgument boundByConstraint(LightweightTypeReference reference, Object origin) {
-		return new LightweightBoundTypeArgument(reference, BoundTypeArgumentSource.CONSTRAINT, origin, VarianceInfo.OUT, VarianceInfo.OUT);
+		return new LightweightBoundTypeArgument(reference.getWrapperTypeIfPrimitive(), BoundTypeArgumentSource.CONSTRAINT, origin, VarianceInfo.OUT, VarianceInfo.OUT);
 	}
 	
 	protected LightweightBoundTypeArgument boundByDefaultSource(LightweightTypeReference reference) {
-		return new LightweightBoundTypeArgument(reference, defaultSource, getOrigin(), getExpectedVariance(), getActualVariance());
+		return new LightweightBoundTypeArgument(reference.getWrapperTypeIfPrimitive(), defaultSource, getOrigin(), getExpectedVariance(), getActualVariance());
 	}
 	
 	@Override

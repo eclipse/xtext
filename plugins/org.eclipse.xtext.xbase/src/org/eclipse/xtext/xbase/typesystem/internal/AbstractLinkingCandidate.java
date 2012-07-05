@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -60,7 +61,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	private final XExpression expression;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
-	private List<StackedResolvedTypes> stackedResolvedTypes;
+	private boolean argumentsComputed;
 	
 	protected AbstractLinkingCandidate(XExpression expression, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
@@ -98,6 +99,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return typeParameterMapping;
 	}
 
+	@NonNullByDefault
 	public void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint conformanceHint) {
 		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
 		if (expectedType == null || actual instanceof AnyTypeReference) {
@@ -126,9 +128,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
 		computeArgumentTypes(feature /*, featureType */);
-		for(StackedResolvedTypes pending: stackedResolvedTypes) {
-			pending.mergeIntoParent();
-		}
 		List<LightweightTypeExpectation> expectations = getState().getImmediateExpectations();
 		for(LightweightTypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
@@ -146,7 +145,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				@Override
 				@NonNull
 				protected LightweightTypeReference getUnmappedSubstitute(@NonNull ParameterizedTypeReference reference, @NonNull JvmTypeParameter type, @NonNull ConstraintVisitingInfo visiting) {
-					RootUnboundTypeReference result = getState().getResolvedTypes().createUnboundTypeReference(getExpression(), type);
+					ExpressionAwareUnboundTypeReference result = getState().getResolvedTypes().createUnboundTypeReference(getExpression(), type);
 					return result;
 				}
 				
@@ -154,20 +153,32 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			substitutor.enhanceMapping(typeParameterMapping);
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType);
-			deferredBindTypeArguments(expectation, substitutedFeatureType);
-			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
+			deferredBindTypeArgument(expectation, substitutedFeatureType);
+			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
 		}
 		getState().getResolvedTypes().mergeIntoParent();
 	}
 	
-	protected void acceptActualType(LightweightTypeExpectation expectation, LightweightTypeReference featureType) {
-		deferredBindTypeArguments(expectation, featureType);
-		expectation.acceptActualType(featureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
+	@NonNullByDefault
+	protected void deferredBindTypeArgument(LightweightTypeExpectation expecation, LightweightTypeReference type) {
+		LightweightTypeReference expectedType = expecation.internalGetExpectedType();
+		if (expectedType != null) { 
+			// TODO expectation#hasTypeParameters / isUnresolved to improve the runtime performance
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
+				@Override
+				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
+					return getState().createSubstitutor(mapping);
+				}
+			};
+			collector.processPairedReferences(expectedType, type);
+		}
 	}
 	
 	public void computeArgumentTypes(JvmIdentifiableElement feature /* LightweightTypeReference featureType */) {
-		if (stackedResolvedTypes != null)
+		if (argumentsComputed)
 			return;
+		argumentsComputed = true;
 		int declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
 		List<JvmFormalParameter> parameters = null;
@@ -181,7 +192,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 		List<XExpression> arguments = getArguments();
 		int fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
-		stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
 		if (parameters != null) {
 			UnboundTypeParameterPreservingSubstitutor substitutor = getState().createSubstitutor(getDeclaratorParameterMapping());
 			substitutor.enhanceMapping(typeParameterMapping);
@@ -192,7 +202,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				AbstractTypeComputationState argumentState = new ObservableTypeComputationStateWithExpectation(
 						getState(), 
 						substitutor.substitute(parameterType), this);
-				stackedResolvedTypes.add(resolveArgumentType(argument, parameterType, argumentState));
+				resolveArgumentType(argument, parameterType, argumentState);
 			}
 			if (varArgs) {
 				int lastParamIndex = declaredParameterCount - 1;
@@ -213,14 +223,14 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				}
 				for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 					XExpression argument = arguments.get(i);
-					stackedResolvedTypes.add(resolveArgumentType(argument, null, argumentState));
+					resolveArgumentType(argument, null, argumentState);
 				}
 			}
 		}
 		if (!varArgs) {
 			for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 				XExpression argument = arguments.get(i);
-				stackedResolvedTypes.add(resolveArgumentType(argument, null, getState().fork().withNonVoidExpectation()));
+				resolveArgumentType(argument, null, getState().fork().withNonVoidExpectation());
 			}
 		}
 	}
@@ -264,29 +274,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return null;
 	}
 	
-	protected void deferredBindTypeArguments(LightweightTypeExpectation expectation, LightweightTypeReference actual) {
-		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
-		if (expectedType != null) { 
-			// TODO expectation#hasTypeParameters / isUnresolved to improve the runtime performance
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
-				@Override
-				protected void addHint(@NonNull UnboundTypeReference typeParameter, @NonNull LightweightTypeReference reference) {
-//					if (!getDeclaredTypeParameters().contains(typeParameter.getTypeParameter()) && typeParameter.getExpression() != getExpression()) {
-						UnboundTypeReference replaced = (UnboundTypeReference) copy(typeParameter);
-						super.addHint(replaced, reference);
-//					}
-				}
-				@Override
-				@NonNull 
-				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
-						@NonNull Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-					return getState().createSubstitutor(mapping);
-				}
-			};
-			collector.processPairedReferences(expectedType, actual);
-		}
-	}
-
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, AbstractTypeComputationState state) {
 		// TODO this(..) and super(..) for generic types
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
@@ -323,9 +310,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap();
 	}
 
-	protected StackedResolvedTypes resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
-		StackedResolvedTypes result = argumentState.computeTypesWithoutMerge(argument);
-		return result;
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
+		argumentState.computeTypes(argument);
 	}
 
 	public List<XExpression> getArguments() {

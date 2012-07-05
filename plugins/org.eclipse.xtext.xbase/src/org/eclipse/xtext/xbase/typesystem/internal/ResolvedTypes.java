@@ -11,10 +11,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -39,7 +38,9 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
@@ -49,41 +50,74 @@ import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSub
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
+import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
  */
+@NonNullByDefault
 public abstract class ResolvedTypes extends BaseResolvedTypes {
 
+	protected class Owner implements TypeReferenceOwner {
+
+		public CommonTypeComputationServices getServices() {
+			return ResolvedTypes.this.getServices();
+		}
+
+		public ResourceSet getContextResourceSet() {
+			return ResolvedTypes.this.getContextResourceSet();
+		}
+
+		public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
+			ResolvedTypes.this.acceptHint(handle, boundTypeArgument);
+		}
+
+		public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
+			return ResolvedTypes.this.getAllHints(handle);
+		}
+
+		public boolean isResolved(Object handle) {
+			return ResolvedTypes.this.isResolved(handle);
+		}
+		
+	}
+	
 	private final DefaultReentrantTypeResolver resolver;
 	
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
 	private Multimap<XExpression, TypeData> expressionTypes;
-	private Map<Object, UnboundTypeReference> unboundTypeParameters;
+	private Map<Object, ExpressionAwareUnboundTypeReference> unboundTypeParameters;
 	private ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints;
+	private Set<Object> resolvedTypeParameters;
 	private Map<XExpression, ILinkingCandidate<?>> featureLinking;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
 	}
 	
-	@NonNull
+	@Override
+	protected OwnedConverter createConverter() {
+		return new OwnedConverter(new Owner());
+	}
+	
 	public ResourceSet getContextResourceSet() {
 		return resolver.getRoot().eResource().getResourceSet();
 	}
 	
+	// overridden because we want it to be accessible from within this package
 	@Override
 	protected OwnedConverter getConverter() {
 		return super.getConverter();
 	}
-	
-	@NonNull 
+
 	public CommonTypeComputationServices getServices() {
 		return resolver.getServices();
 	}
@@ -91,7 +125,8 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	public List<Diagnostic> getQueuedDiagnostics() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
-	
+
+	@Nullable
 	protected TypeData getTypeData(XExpression expression, boolean returnType) {
 		Collection<TypeData> values = doGetTypeData(expression);
 		if (values == null) {
@@ -101,14 +136,16 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return result;
 	}
 	
+	@Nullable
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
-		Collection<TypeData> result = ensureExpressionTypesMapExists().get(expression);
+		Collection<TypeData> result = basicGetExpressionTypes().get(expression);
 		if (result.isEmpty())
 			return null;
 		return result;
 	}
-
-	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, final boolean returnType, boolean nullIfEmpty) {
+	
+	@Nullable
+	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		List<TypeData> values = Lists.newArrayListWithCapacity(allValues.size());
 		for(TypeData value: allValues) {
 			if (returnType == value.isReturnType()) {
@@ -138,7 +175,10 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 				LightweightTypeReference mergedType = getMergedType(references);
 //			}
 //		});
-		TypeData result = new TypeData(expression, null /* TODO use all expectations? */, mergedType, ConformanceHint.MERGED /* TODO do we need that? */, returnType);
+		// TODO improve - return error type information
+		if (mergedType == null)
+			return null;
+		TypeData result = new TypeData(expression, values.get(0).getExpectation() /* TODO use all expectations? */, mergedType, ConformanceHint.MERGED /* TODO do we need that? */, returnType);
 		return result;
 	}
 	
@@ -158,6 +198,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 //		return true;
 //	}
 
+	@Nullable
 	protected LightweightTypeReference getMergedType(List<LightweightTypeReference> types) {
 		if (types.isEmpty()) {
 			return null;
@@ -166,7 +207,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			LightweightTypeReference result = types.get(0);
 			return result;
 		}
-		LightweightTypeReference result = getCommonSuperType(types);
+		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(types);
 		if (result != null || types.isEmpty()) {
 			return result;
 		}
@@ -179,21 +220,48 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return types.get(0);
 	}
 
+	@Nullable
 	public LightweightTypeReference internalGetActualType(XExpression expression) {
+		LightweightTypeReference result = doGetActualType(expression);
+		return toOwnedReference(result);
+	}
+
+	@Nullable
+	protected LightweightTypeReference toOwnedReference(@Nullable LightweightTypeReference result) {
+		return result != null ? result.copyInto(getReferenceOwner()) : null;
+	}
+
+	@Nullable
+	protected LightweightTypeReference doGetActualType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData != null)
 			return typeData.getActualType();
 		return null;
 	}
-
+	
+	@Nullable
 	public LightweightTypeReference internalGetExpectedType(XExpression expression) {
+		LightweightTypeReference result = doGetExpectedType(expression);
+		return toOwnedReference(result);
+	}
+
+	@Nullable
+	protected LightweightTypeReference doGetExpectedType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData != null)
 			return typeData.getExpectation().internalGetExpectedType();
 		return null;
 	}
 	
-	public List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
+	public final List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
+		List<LightweightTypeReference> result = doGetActualTypeArguments(expression);
+		if (result == null)
+			return Collections.emptyList();
+		return result;
+	}
+	
+	@Nullable
+	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
@@ -201,24 +269,30 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		setType(identifiable, getConverter().toLightweightReference(reference));
 	}
 	
-	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		ensureTypesMapExists().put(identifiable, reference);
-	}
-	
 	public void reassignType(JvmIdentifiableElement identifiable, JvmTypeReference reference) {
 		reassignType(identifiable, getConverter().toLightweightReference(reference));
 	}
+
+	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
+		if (ensureTypesMapExists().put(identifiable, reference) != null) {
+			throw new IllegalStateException("identifiable was already typed");
+		}
+	}
 	
-	public void reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
 		if (reference != null) {
 			LightweightTypeReference actualType = internalGetActualType(identifiable);
-			if (!isConformant(reference, actualType)) {
-				if (isConformant(actualType, reference)) {
-					ensureReassignedTypesMapExists().put(identifiable, reference);
-				} else {
-					CompoundTypeReference multiType = actualType.toMultiType(reference);
-					ensureReassignedTypesMapExists().put(identifiable, multiType);					
+			if (actualType != null) {
+				if (!reference.isAssignableFrom(actualType)) {
+					if (actualType.isAssignableFrom(reference)) {
+						ensureReassignedTypesMapExists().put(identifiable, reference);
+					} else {
+						CompoundTypeReference multiType = actualType.toMultiType(reference);
+						ensureReassignedTypesMapExists().put(identifiable, multiType);					
+					}
 				}
+			} else {
+				ensureReassignedTypesMapExists().put(identifiable, reference);
 			}
 		} else {
 			ensureReassignedTypesMapExists().remove(identifiable);
@@ -226,84 +300,11 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	}
 	
 	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-//		// TODO guard asserter - should only be active in tests
-//		ITypeReferenceVisitor<Boolean> asserter = new AbstractXtypeReferenceVisitor<Boolean>() {
-//			@Override
-//			public Boolean doVisitTypeReference(LightweightTypeReference reference) {
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			protected Boolean handleNullReference() {
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitFunctionTypeReference(XFunctionTypeRef reference) {
-//				for(LightweightTypeReference paramType: reference.getParamTypes()) {
-//					if (visit(paramType))
-//						return Boolean.TRUE;
-//				}
-//				if (visit(reference.getReturnType()))
-//					return Boolean.TRUE;
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
-//				for(LightweightTypeReference component: reference.getReferences()) {
-//					if (visit(component))
-//						return Boolean.TRUE;
-//				}
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitComputedTypeReference(XComputedTypeReference reference) {
-//				if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-//					BaseUnboundTypeParameter unboundTypeParameter = (BaseUnboundTypeParameter) reference.getTypeProvider();
-//					if (unboundTypeParameters != null) {
-//						if (unboundTypeParameters.containsKey(unboundTypeParameter.getHandle())) {
-//							if (!(unboundTypeParameter instanceof RootUnboundTypeParameter)) {
-//								throw new IllegalStateException("unboundTypeParameter must be a RootUnboundTypeParameter");
-//							}
-//						}
-//					}
-//					getUnboundTypeParameter(unboundTypeParameter.getHandle());
-//					for(Object other: unboundTypeParameter.getEquallyBoundHandles())
-//						getUnboundTypeParameter(other);
-//				}
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
-//				if (visit(reference.getComponentType()))
-//					return Boolean.TRUE;
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
-//				for(JvmTypeConstraint constraint: reference.getConstraints()) {
-//					if (visit(constraint.getTypeReference()))
-//						return Boolean.TRUE;
-//				}
-//				return Boolean.FALSE;
-//			}
-//			@Override
-//			public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-//				for(LightweightTypeReference argument: reference.getArguments()) {
-//					if (visit(argument))
-//						return Boolean.TRUE;
-//				}
-//				return Boolean.FALSE;
-//			}
-//		};
-		if (!type.isOwnedBy(this)) {
+		if (!type.isOwnedBy(getReferenceOwner())) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");
 		}
-		if (expectation != null) {
-			LightweightTypeReference expectedType = expectation.internalGetExpectedType();
-			if (expectedType != null) {
-				if (!expectedType.isOwnedBy(this)) {
-					throw new IllegalArgumentException("expected type is associated with an incompatible owner");
-				}
-			}
+		if (!expectation.isOwnedBy(getReferenceOwner())) {
+			throw new IllegalArgumentException("expected type is associated with an incompatible owner");
 		}
 		
 //		AbstractTypeComputationState state = expectation.getState();
@@ -312,12 +313,12 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), this) {
+		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getReferenceOwner()) {
 			@Override
 			protected LightweightTypeReference getUnmappedSubstitute(
-					@NonNull ParameterizedTypeReference reference,
-					@NonNull JvmTypeParameter type, 
-					@NonNull ConstraintVisitingInfo visiting) {
+					ParameterizedTypeReference reference,
+					JvmTypeParameter type, 
+					ConstraintVisitingInfo visiting) {
 				// TODO extract method 'isExpressionWithTypeArguments'
 				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
 					return createUnboundTypeReference(expression, type);
@@ -327,62 +328,88 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			}
 			
 			@Override
-			@NonNull
-			protected LightweightTypeReference doVisitUnboundTypeReference(@NonNull UnboundTypeReference reference,
-					@NonNull ConstraintVisitingInfo visiting) {
+			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
+					ConstraintVisitingInfo visiting) {
 				return reference;
 			}
 			
 		};
 		LightweightTypeReference actualType = substitutor.substitute(type);
-		ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
+		acceptType(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
 		return actualType;
 	}
+	
+	protected void acceptType(XExpression expression, TypeData typeData) {
+		ensureExpressionTypesMapExists().put(expression, typeData);
+	}
+	
+	protected Map<JvmIdentifiableElement, LightweightTypeReference> basicGetTypes() {
+		return types != null ? types : Collections.<JvmIdentifiableElement, LightweightTypeReference>emptyMap(); 
+	}
 
-	protected Map<JvmIdentifiableElement, LightweightTypeReference> ensureTypesMapExists() {
+	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureTypesMapExists() {
 		if (types == null) {
 			types = Maps.newLinkedHashMap();
 		}
 		return types;
 	}
-	
-	protected Map<JvmIdentifiableElement, LightweightTypeReference> ensureReassignedTypesMapExists() {
+
+	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureReassignedTypesMapExists() {
 		if (reassignedTypes == null) {
 			reassignedTypes = Maps.newLinkedHashMap();
 		}
 		return reassignedTypes;
 	}
 	
-	protected Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
+	protected Multimap<XExpression, TypeData> basicGetExpressionTypes() {
+		return expressionTypes != null ? expressionTypes : ImmutableMultimap.<XExpression, TypeData>of();
+	}
+	
+	private Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
 		if (expressionTypes == null) {
 			expressionTypes = createExpressionTypesMap();
 		}
 		return expressionTypes;
 	}
 	
-	protected Multimap<XExpression, TypeData> createExpressionTypesMap() {
+	private Multimap<XExpression, TypeData> createExpressionTypesMap() {
 		return createMultiMap();
 	}
 
-	protected ListMultimap<Object, LightweightBoundTypeArgument> ensureTypeParameterHintsMapExists() {
+	protected ListMultimap<Object, LightweightBoundTypeArgument> basicGetTypeParameterHints() {
+		return typeParameterHints != null ? typeParameterHints : ImmutableListMultimap.<Object, LightweightBoundTypeArgument>of();
+	}
+	
+	private ListMultimap<Object, LightweightBoundTypeArgument> ensureTypeParameterHintsMapExists() {
 		if (typeParameterHints == null) {
 			typeParameterHints = createMultiMap();
 		}
 		return typeParameterHints;
 	}
 
-	protected <K, V> ListMultimap<K, V> createMultiMap() {
+	private <K, V> ListMultimap<K, V> createMultiMap() {
 		return Multimaps2.newLinkedHashListMultimap(2, 2);
 	}
 	
-	protected Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {
+	private Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {
 		if (featureLinking == null) {
 			featureLinking = Maps.newLinkedHashMap();
 		}
 		return featureLinking;
 	}
 	
+	protected Map<XExpression, ILinkingCandidate<?>> basicGetLinkingCandidates() {
+		return featureLinking != null ? featureLinking : Collections.<XExpression, ILinkingCandidate<?>>emptyMap();
+	}
+	
+	@Nullable
 	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement identifiable) {
+		LightweightTypeReference result = doGetActualType(identifiable);
+		return toOwnedReference(result);
+	}
+
+	@Nullable
+	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable) {
 		if (reassignedTypes != null) {
 			LightweightTypeReference result = reassignedTypes.get(identifiable);
 			if (result != null) {
@@ -391,13 +418,14 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		}
 		if (types == null)
 			return getDeclaredType(identifiable);
-		LightweightTypeReference result = ensureTypesMapExists().get(identifiable);
+		LightweightTypeReference result = basicGetTypes().get(identifiable);
 		if (result == null) {
 			return getDeclaredType(identifiable);
 		}
 		return result;
 	}
 	
+	@Nullable
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
 			return getConverter().toLightweightReference(((JvmOperation) identifiable).getReturnType());
@@ -411,39 +439,51 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return null;
 	}
 	
+	@Nullable
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
-		return (IFeatureLinkingCandidate) ensureLinkingMapExists().get(featureCall);
+		return (IFeatureLinkingCandidate) basicGetLinkingCandidates().get(featureCall);
 	}
 	
+	@Nullable
 	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
-		return (IConstructorLinkingCandidate) ensureLinkingMapExists().get(constructorCall);
+		return (IConstructorLinkingCandidate) basicGetLinkingCandidates().get(constructorCall);
 	}
 
 	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate<?> candidate) {
-		ensureLinkingMapExists().put(expression, candidate);
+		if (ensureLinkingMapExists().put(expression, candidate) != null) {
+			throw new IllegalStateException("Expression was already linked");
+		}
 	}
 
 	protected DefaultReentrantTypeResolver getResolver() {
 		return resolver;
 	}
 	
-	@NonNull
-	protected UnboundTypeReference getUnboundTypeReference(@NonNull Object handle) {
-		UnboundTypeReference result = ensureTypeParameterMapExists().get(handle);
+	protected UnboundTypeReference getUnboundTypeReference(Object handle) {
+		UnboundTypeReference result = basicGetTypeParameters().get(handle);
 		if (result == null) {
 			throw new IllegalStateException("Could not find type parameter");
 		}
+		if (result.internalIsResolved())
+			throw new IllegalStateException("Cannot query unbount type reference that was already resolved");
 		return result;
 	}
 
-	@NonNull
-	protected RootUnboundTypeReference createUnboundTypeReference(@NonNull XExpression expression, @NonNull JvmTypeParameter type) {
-		RootUnboundTypeReference result = new RootUnboundTypeReference(this, expression, type);
-		ensureTypeParameterMapExists().put(result.getHandle(), result);
+	protected ExpressionAwareUnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
+		ExpressionAwareUnboundTypeReference result = new ExpressionAwareUnboundTypeReference(getReferenceOwner(), expression, type);
+		acceptUnboundTypeReference(result.getHandle(), result);
 		return result;
 	}
+
+	protected void acceptUnboundTypeReference(Object handle, ExpressionAwareUnboundTypeReference reference) {
+		ensureTypeParameterMapExists().put(handle, reference);
+	}
 	
-	protected Map<Object, UnboundTypeReference> ensureTypeParameterMapExists() {
+	protected Map<Object, ExpressionAwareUnboundTypeReference> basicGetTypeParameters() {
+		return unboundTypeParameters != null ? unboundTypeParameters : Collections.<Object, ExpressionAwareUnboundTypeReference>emptyMap();
+	}
+	
+	private Map<Object, ExpressionAwareUnboundTypeReference> ensureTypeParameterMapExists() {
 		if (unboundTypeParameters == null) {
 			unboundTypeParameters = Maps.newLinkedHashMap();
 		}
@@ -452,20 +492,20 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 
 	protected UnboundTypeParameterPreservingSubstitutor createSubstitutor(
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
-		return new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, this);
+		return new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, getReferenceOwner());
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(getClass().getSimpleName()).append(": [");
 		appendContent(result, "  ");
-		closeBracket(result);
+		closeBracket(result, "");
 		return result.toString();
 	}
 
-	protected void closeBracket(StringBuilder result) {
+	protected void closeBracket(StringBuilder result, String indentation) {
 		if (result.charAt(result.length() - 1) != '[')
-			result.append("\n]");
+			result.append('\n').append(indentation).append("]");
 		else
 			result.append("]");
 	}
@@ -479,7 +519,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		appendContent(typeParameterHints, "typeParameterHints", result, indentation);
 	}
 
-	protected void appendContent(Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
+	protected void appendContent(@Nullable Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
 			MapJoiner joiner = Joiner.on("\n" + indentation).withKeyValueSeparator(" -> ");
 			result.append("\n" + indentation).append(prefix).append(": ");
@@ -487,7 +527,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		}
 	}
 	
-	protected void appendContent(Multimap<?, ?> map, String prefix, StringBuilder result, String indentation) {
+	protected void appendContent(@Nullable Multimap<?, ?> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
 			MultimapJoiner joiner = new MultimapJoiner(Joiner.on("\n  " + indentation), "\n" + indentation, " -> ");
 			result.append("\n" + indentation).append(prefix).append(": ");
@@ -495,31 +535,91 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		}
 	}
 
-	public void acceptHint(@NonNull Object handle, @NonNull LightweightBoundTypeArgument boundTypeArgument) {
-		// TODO validate
-		ensureTypeParameterHintsMapExists().put(handle, boundTypeArgument);
-	}
-
-	@NonNull
-	public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
-		List<LightweightBoundTypeArgument> hints = ensureTypeParameterHintsMapExists().get(handle);
-		return hints;
-	}
-
-	@Nullable
-	public LightweightTypeReference getCommonSuperType(@NonNull List<LightweightTypeReference> subTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isConformant(@NonNull LightweightTypeReference declaredType, @NonNull LightweightTypeReference actualType) {
-		// TODO Auto-generated method stub
-		return false;
+	public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
+		if (boundTypeArgument.getSource() == BoundTypeArgumentSource.RESOLVED) {
+			if (resolvedTypeParameters == null) {
+				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
+			}
+			if (resolvedTypeParameters.add(handle)) {
+				for (LightweightBoundTypeArgument formerHint : basicGetTypeParameterHints().get(handle)) {
+					LightweightTypeReference reference = formerHint.getTypeReference();
+					if (reference instanceof ExpressionAwareUnboundTypeReference) {
+						acceptHint(((ExpressionAwareUnboundTypeReference) reference).getHandle(), boundTypeArgument);
+					}
+				}
+				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
+			}
+		} else {
+			if (!isResolved(handle)) {
+				if (boundTypeArgument.getTypeReference() instanceof ExpressionAwareUnboundTypeReference) {
+					ExpressionAwareUnboundTypeReference other = (ExpressionAwareUnboundTypeReference) boundTypeArgument.getTypeReference();
+					UnboundTypeReference currentUnbound = getUnboundTypeReference(handle);
+					ensureTypeParameterHintsMapExists().put(
+							other.getHandle(),
+							new LightweightBoundTypeArgument(currentUnbound, boundTypeArgument.getSource(),
+									boundTypeArgument.getOrigin(), boundTypeArgument.getDeclaredVariance(),
+									boundTypeArgument.getActualVariance()));
+				}
+				ensureTypeParameterHintsMapExists().put(handle, boundTypeArgument);
+			} else {
+				throw new IllegalStateException("Cannot add hints if the reference was already resolved");
+			}
+		}
 	}
 	
-	@NonNullByDefault
-	public boolean isConformant(LightweightTypeReference type, LightweightTypeReference inType,	TypeConformanceComputationArgument argument) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isResolved(Object handle) {
+		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
 	}
+
+	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
+		List<LightweightBoundTypeArgument> actualHints = getHints(handle);
+		int i = 0;
+		while(i < actualHints.size()) {
+			LightweightBoundTypeArgument hint = actualHints.get(i);
+			if (hint.getTypeReference() instanceof ExpressionAwareUnboundTypeReference) {
+				break;
+			}
+			i++;
+		}
+		if (i >= actualHints.size())
+			return actualHints;
+		List<LightweightBoundTypeArgument> transitivity = Lists.newArrayList();
+		Set<Object> seenHandles = Sets.newHashSet(handle); 
+		transitivity.addAll(actualHints.subList(0, i));
+		List<LightweightBoundTypeArgument> allRemaining = actualHints.subList(i, actualHints.size());
+		addNonRecursiveHints(allRemaining, seenHandles, transitivity);
+		return transitivity;
+	}
+
+	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
+		return basicGetTypeParameterHints().get(handle);
+	}
+
+	protected void addNonRecursiveHints(List<LightweightBoundTypeArgument> hints, Set<Object> seenHandles,
+			List<LightweightBoundTypeArgument> result) {
+		for(LightweightBoundTypeArgument hint: hints) {
+			LightweightTypeReference reference = hint.getTypeReference();
+			if (reference instanceof ExpressionAwareUnboundTypeReference) {
+				Object otherHandle = ((ExpressionAwareUnboundTypeReference) reference).getHandle();
+				if (seenHandles.add(otherHandle)) {
+					addNonRecursiveHints(getHints(otherHandle), seenHandles, result);
+				}
+			} else {
+				result.add(hint);
+			}
+		}
+	}
+	
+	protected StackedResolvedTypes pushTypes() {
+		return new StackedResolvedTypes(this);
+	}
+	
+	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression context) {
+		return new ExpressionAwareStackedResolvedTypes(this, context);
+	}
+	
+	protected StackedResolvedTypes pushReassigningTypes() {
+		return new ReassigningStackedResolvedTypes(this);
+	}
+
 }
