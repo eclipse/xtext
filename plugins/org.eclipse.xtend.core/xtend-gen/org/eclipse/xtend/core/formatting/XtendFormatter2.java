@@ -264,9 +264,9 @@ public class XtendFormatter2 {
             _and = false;
           } else {
             String _space = state.getSpace();
-            boolean _isEmpty_2 = _space.isEmpty();
-            boolean _not_1 = (!_isEmpty_2);
-            _and = (_greaterThan && _not_1);
+            int _length_1 = _space.length();
+            boolean _notEquals_7 = (_length_1 != 0);
+            _and = (_greaterThan && _notEquals_7);
           }
           if (_and) {
             int _wrap_1 = state.getWrap();
@@ -280,8 +280,8 @@ public class XtendFormatter2 {
             _xifexpression_2 = _space_1;
           }
           final String newText = _xifexpression_2;
-          boolean _notEquals_7 = (!Objects.equal(oldText, newText));
-          if (_notEquals_7) {
+          boolean _notEquals_8 = (!Objects.equal(oldText, newText));
+          if (_notEquals_8) {
             textEditAcceptor.apply(Integer.valueOf(oldOffset), Integer.valueOf(oldLength), newText);
           }
           List<ILeafNode> _lastHiddens_4 = state.getLastHiddens();
