@@ -10,8 +10,7 @@ thereby drawing lines.
 section:tortoise_motivation[The Problem]
 
 The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
-I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
-interpreter. But technically, this example will teach you how to use and adapt the 
+Technically, this example will teach you how to use and adapt the 
 codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] for your own language.  
 
 section:tortoise_solution[A Solution With Xtext]
@@ -20,23 +19,15 @@ We have build a language that allows to define e[Programs] and e[SubPrograms]. E
 which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
 to issue commands to the turtle. Here is an example explaining the concepts in comments:
  
-table[
-tr[td[
 code[tortoise][
 // Program: Haus vom Nikolaus
 begin
-  // local variable
-  val length = 100   
-  // all Math.* methods are available
-  val diagonal = length * sqrt(2)
-  // assignment of a property
-  lineWidth = 2 
-  // call to a SubProgram
-  square(length)
-  // call to a command method
-  turnRight(135)
-  // all ColorConstants.* are available
-  lineColor = blue 
+  val length = 150                // local variable
+  val diagonal = length * sqrt(2) // all Math.* methods are available
+  lineWidth = 2                   // assignment of a property
+  square(length)                  // call to a SubProgram
+  turnRight(45)                   // call to a command method
+  lineColor = blue                // all ColorConstants.* are available
   forward(diagonal)
   turnLeft(90)
   lineColor = red
@@ -46,25 +37,19 @@ begin
   turnLeft(90)
   lineColor = blue
   forward(diagonal)
-end
+end  // main program
 
-// subprogram with parameter
-sub square
-  int length
+sub square           // a subprogram
+  int length         // parameter
 begin
-  forward(length)
-  turnRight(90) 
-  forward(length)
-  turnRight(90)
-  forward(length)
-  turnRight(90)
-  forward(length)
-end
-]]
-td[img[images/Nikolaus.png][][][]]]
+  for (i : 1..4) {   // loop-expression from Xbase 
+    forward(length)
+    turnRight(90) 
+  }
+end  // sub square
 ]
 
-The main trick about our solution is not to build in the turtle commands into the language itself, but
+The main trick about our solution is to e[not] build in the turtle commands into the language itself, but
 define it in the runtime library. This way, the language stays as slim as can be and additions can be easily
 added without the need to regenerate the whole language infrastructure.
 
@@ -87,8 +72,7 @@ class Tortoise {
 ...
 ]
 
-We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
-EClass. When a method that changes the state is called, an event is thrown. These events are consumed
+When a method changes the state of the tortoise, an event is thrown. These events are consumed
 by a GEF based view and turned into animations of a codeRef[org.xtext.tortoiseshell.lib.view.TortoiseFigure].  
 
 section2:tortoise_statistics[Some Stats]
