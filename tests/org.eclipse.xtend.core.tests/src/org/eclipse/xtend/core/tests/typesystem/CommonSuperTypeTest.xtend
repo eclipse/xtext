@@ -16,6 +16,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.common.types.util.Primitives
+import org.eclipse.xtext.common.types.TypesFactory
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
@@ -53,7 +58,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		}
 	}
 	
-	def private String fixup(String type) {
+	def protected String fixup(String type) {
 		type?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
 			?.replace("$Function<", "com.google.common.base.Function<")
 			?.replace("$Predicate<", "com.google.common.base.Predicate<")
@@ -304,3 +309,64 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	}
 }
 
+/**
+ * @author Sebastian Zarnekow
+ */
+class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
+	
+	@Inject
+	extension IXtendJvmAssociations
+	
+	@Inject
+	TypeConformanceComputer typeConformanceComputer
+	
+	@Inject
+	extension TypeReferences
+	
+	@Inject
+	extension Primitives
+	
+	override isSuperTypeOf(Pair<String, String> superTypeAndParam, String... types) {
+		// TODO synthesize unique variable names as soon as the function should be validated
+		val signature = '''def «IF !superTypeAndParam.value.nullOrEmpty»<«superTypeAndParam.value»> «ENDIF»void method(«
+			FOR type: types SEPARATOR ', '»«type.fixup» t«ENDFOR») {}'''
+		val function = function(signature.toString)
+		val operation = function.directlyInferredOperation
+		val typeReferences = new ArrayList(operation.parameters.map [ parameterType ])
+		var computedSuperType = typeConformanceComputer.getCommonSuperType(typeReferences)
+		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
+		computedSuperType = typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList)
+		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
+		computedSuperType = typeConformanceComputer.getCommonSuperType(typeReferences.reverseView)
+		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
+		if (!(computedSuperType?.is(Void::TYPE) || computedSuperType?.primitive)) {
+			computedSuperType = typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(TypesFactory::eINSTANCE.createJvmAnyTypeReference, TypesFactory::eINSTANCE.createJvmAnyTypeReference)).toList)
+			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
+		}
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_11() {
+		super.testCommonSuperType_11()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_12() {
+		super.testCommonSuperType_12()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_37() {
+		super.testCommonSuperType_37()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_41() {
+		super.testCommonSuperType_41()
+	}
+	
+}

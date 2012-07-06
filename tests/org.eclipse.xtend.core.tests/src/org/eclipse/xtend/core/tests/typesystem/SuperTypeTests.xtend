@@ -18,11 +18,14 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer
+import org.eclipse.xtext.common.types.util.SuperTypeCollector
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
  */
-abstract class AbstractSuperTypeTest extends AbstractTestingTypeReferenceOwner {
+abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Inject
 	extension IXtendJvmAssociations
@@ -110,7 +113,7 @@ abstract class AbstractSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 /**
  * @author Sebastian Zarnekow
  */
-class SuperTypeTest extends AbstractSuperTypeTest {
+class SuperTypesTest extends AbstractSuperTypesTest {
 	
 	override collectSuperTypes(LightweightTypeReference reference) {
 		reference.superTypes
@@ -191,7 +194,7 @@ class SuperTypeTest extends AbstractSuperTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-class AllSuperTypeTest extends AbstractSuperTypeTest {
+class AllSuperTypesTest extends AbstractSuperTypesTest {
 	
 	override collectSuperTypes(LightweightTypeReference reference) {
 		reference.allSuperTypes
@@ -269,6 +272,59 @@ class AllSuperTypeTest extends AbstractSuperTypeTest {
 	@Test
 	override testTypeParameterArray() {
 		("T"->"T extends Object[]").assertSuperTypes("Object[]", "Cloneable", "Serializable", "Object")
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
+
+	@Inject
+	extension IXtendJvmAssociations
+	
+	@Inject
+	SuperTypeCollector superTypeCollector
+
+	override assertSuperTypes(Pair<String, String> type, String... superTypes) {
+		// TODO synthesize unique variable names as soon as the function should be validated
+		val signature = '''def «IF !type.value.nullOrEmpty»<«type.value»> «ENDIF»void method(«type.key» type) {}'''
+		val function = function(signature.toString)
+		val operation = function.directlyInferredOperation
+		val subtype = operation.parameters.head.parameterType
+		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
+		assertEquals(superTypes.toSet, computedSuperTypes.map[ simpleName ].toSet as Object)
+	}
+	
+	@Ignore
+	@Test
+	override testRawCollection() {
+		super.testRawCollection()
+	}
+	
+	@Ignore
+	@Test
+	override testStringCollection() {
+		super.testStringCollection()
+	}
+	
+	@Ignore
+	@Test
+	override testRawList() {
+		super.testRawList()
+	}
+	
+	@Ignore
+	@Test
+	override testStringList() {
+		super.testStringList()
+	}
+	
+	@Ignore
+	@Test
+	override testStringArrayArrayList() {
+		super.testStringArrayArrayList()
 	}
 	
 }

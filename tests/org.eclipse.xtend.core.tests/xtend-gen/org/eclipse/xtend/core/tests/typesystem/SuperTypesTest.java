@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.Collection;
 import java.util.List;
-import org.eclipse.xtend.core.tests.typesystem.AbstractSuperTypeTest;
+import org.eclipse.xtend.core.tests.typesystem.AbstractSuperTypesTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class SuperTypeTest extends AbstractSuperTypeTest {
+public class SuperTypesTest extends AbstractSuperTypesTest {
   public Iterable<LightweightTypeReference> collectSuperTypes(final LightweightTypeReference reference) {
     List<LightweightTypeReference> _superTypes = reference.getSuperTypes();
     return _superTypes;

@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public abstract class AbstractSuperTypeTest extends AbstractTestingTypeReferenceOwner {
+public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   

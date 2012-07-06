@@ -151,7 +151,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     }
   }
   
-  private String fixup(final String type) {
+  protected String fixup(final String type) {
     String _replace = type==null?(String)null:type.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
     String _replace_1 = _replace==null?(String)null:_replace.replace("$Function<", "com.google.common.base.Function<");
     String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Predicate<", "com.google.common.base.Predicate<");
