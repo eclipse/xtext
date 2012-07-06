@@ -17,6 +17,9 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer
+import org.eclipse.xtext.common.types.TypesFactory
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
@@ -83,7 +86,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		}
 	}
 	
-	def private String fixup(String type) {
+	def protected String fixup(String type) {
 		type?.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure")
 			?.replace("$Function<", "com.google.common.base.Function<")
 			?.replace("$Predicate<", "com.google.common.base.Predicate<")
@@ -973,6 +976,61 @@ class AssignabilityTest extends AbstractAssignabilityTest {
 		"Comparable<? super Integer>".isAssignableFrom("(Integer)=>int")
 		"Comparable<? super Integer>".isAssignableFrom("(Number)=>int")
 		"Comparable<String>".isNotAssignableFrom("(int)=>int")
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class OldAPIAssignabilityTest extends AssignabilityTest {
+	
+	@Inject
+	extension IXtendJvmAssociations
+	
+	@Inject
+	TypeConformanceComputer conformanceComputer
+	
+	override isAssignableFrom(Pair<String, String> lhsAndParams, String rhs, boolean expectation) {
+		// TODO synthesize unique variable names as soon as the function should be validated
+		val signature = '''def «IF !lhsAndParams.value.nullOrEmpty»<«lhsAndParams.value»> «ENDIF»void method(«
+			lhsAndParams.key.fixup» lhs, «
+			rhs.fixup» rhs) {}'''
+		val function = function(signature.toString)
+		val operation = function.directlyInferredOperation
+		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
+		val rhsType = if (rhs != null) operation.parameters.last.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
+		assertEquals(expectation, conformanceComputer.isConformant(lhsType, rhsType))
+	}
+	
+	@Ignore
+	@Test
+	override testPrimitiveConversion_09() {
+		super.testPrimitiveConversion_09()
+	}
+	
+	@Ignore
+	@Test
+	override testFunctionTypeAsParameterized_01() {
+		super.testFunctionTypeAsParameterized_01()
+	}
+	
+	@Ignore
+	@Test
+	override testDemandConvertedFunctionType_05() {
+		super.testDemandConvertedFunctionType_05()
+	}
+	
+	@Ignore
+	@Test
+	override testTypeParameter_06() {
+		super.testTypeParameter_06()
+	}
+	
+	@Ignore
+	@Test
+	override testTwoTypeParameters_01() {
+		super.testTwoTypeParameters_01()
 	}
 	
 }
