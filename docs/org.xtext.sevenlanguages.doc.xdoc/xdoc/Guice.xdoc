@@ -1,4 +1,6 @@
-chapter:guice[Guice Modules]
+chapter:guice[DSL for Guice]
+
+img[images/guicemodules_screenshot.png][][][]
 
 section:guice_motivation[The Problem]
 

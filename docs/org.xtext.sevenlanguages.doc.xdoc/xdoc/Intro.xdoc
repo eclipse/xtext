@@ -22,7 +22,7 @@ item[ref:mongo[JavaBeans-like statically typed access to mongoDB documents]]
 item[ref:routing[An HTTP routing servlet with full support of expressions]]
 item[ref:templates[Templates with embedded expressions]]
 item[ref:guice[Configuration of modules for Google Guice]]
-item[ref:cradle[Dependency management]]
+item[ref:builddsl[Dependency management]]
 item[ref:tortoise[A Logo like programming environment for educational purposes]]
 ]
 

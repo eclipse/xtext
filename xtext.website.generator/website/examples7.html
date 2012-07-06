@@ -105,13 +105,13 @@
 							<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="examples.html#introduction">Seven Languages by Seven Geeks</a></li>
-								<li><a href="examples1.html#simple">A Simple Language</a></li>
-								<li><a href="examples2.html#mongo">MongoBeans</a></li>
-								<li><a href="examples3.html#routing">Http Routing</a></li>
-								<li><a href="examples4.html#templates">Templates</a></li>
-								<li><a href="examples5.html#guice">Guice Modules</a></li>
-								<li><a href="examples6.html#cradle">Cradle</a></li>
-								<li><a href="examples7.html#tortoise">Tortoise Shell</a></li>
+								<li><a href="examples1.html#simple">Scripting Language</a></li>
+								<li><a href="examples2.html#mongo">DSL for MongoDB</a></li>
+								<li><a href="examples3.html#routing">Http Routing Language</a></li>
+								<li><a href="examples4.html#templates">Template Language</a></li>
+								<li><a href="examples5.html#guice">DSL for Guice</a></li>
+								<li><a href="examples6.html#builddsl">Build Language</a></li>
+								<li><a href="examples7.html#tortoise">Little Tortoise</a></li>
 							</ul>
 						</li>
 						<li ><a href="documentation.html">Documentation</a></li>
@@ -142,9 +142,16 @@
 				<div class="row">
 					<div class="span10 offset1">
 						<h1>
-							Tortoise Shell
+							Little Tortoise
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
+						<p>
+							</p>
+							<div class="thumbnail">
+								<img src="images/tortoise_screenshot.png" alt="" width="590" height="441">
+							</div>
+							<p>
+						</p>
 						<p>
 							Do you remember the programming language <a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29">Logo</a>? 
 							Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
@@ -226,7 +233,7 @@ end</pre>
 							added without the need to regenerate the whole language infrastructure.
 						</p>
 						<p>
-							The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>. You can
+							The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>. You can
 							think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
 							modify it using methods. Here is an excerpt of its code:
 						</p>
@@ -250,7 +257,7 @@ class Tortoise {
 						<p>
 							We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
 							EClass. When a method that changes the state is called, an event is thrown. These events are consumed
-							by a GEF based view and turned into animations of a <abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/view/TortoiseFigure.java">(src)</a>.
+							by a GEF based view and turned into animations of a <abbr title="org.xtext.tortoiseshell.lib.view.TortoiseFigure">TortoiseFigure</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/view/TortoiseFigure.java">(src)</a>.
 						</p>
 						<!-- subsection -->
 						<section id="tortoise_statistics" style="padding-top: 68px; margin-top: -68px;">
@@ -350,7 +357,7 @@ Executable:
 						<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Translation to Java</h3>
 						<p>
-							With the tortoise commands in the runtime library class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>, we 
+							With the tortoise commands in the runtime library class <abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>, we 
 							have to make sure to infer a Java class that inherits from this. Within this class, we create a method
 							for each <strong>Program</strong> and <strong>SubProgram</strong>. The resulting code looks like this:
 						</p>
@@ -394,9 +401,9 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 						</p>
 						<p>
 							The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
-							<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>) and inferred ones. While the former are evaluated
+							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a>) and inferred ones. While the former are evaluated
 							via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-							<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
+							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.java">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
 							methods to execute them directly. This is accomplished by overriding the method
 						</p>
 						<p>

@@ -1,4 +1,6 @@
-chapter:simple[A Simple Language]
+chapter:simple[Scripting Language]
+
+img[images/scripting_screenshot.png][][][]
 
 This example languages demonstrates the basics of a JVM language build with Xtext. It will introduce
 you to the Xbase expression language and the DSL to Java transformation, a.k.a. JVM model inferrence.

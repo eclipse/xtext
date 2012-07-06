@@ -1,4 +1,6 @@
-chapter:mongo[MongoBeans]
+chapter:mongo[DSL for MongoDB]
+
+img[images/mongobeans_screenshot.png][][][]
 
 link[http://www.mongodb.org][MongoDB] is a very popular document-based database management system. 
 In mongoDB, database entries (AKA e[documents]) have fields, which are essentially e[(key, value)] pairs.

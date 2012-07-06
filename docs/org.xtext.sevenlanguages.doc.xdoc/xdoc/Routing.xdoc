@@ -1,4 +1,6 @@
-chapter:routing[Http Routing]
+chapter:routing[Http Routing Language]
+
+img[images/httprouting_screenshot.png][][][]
 
 section:routing_motivation[The Problem]
 

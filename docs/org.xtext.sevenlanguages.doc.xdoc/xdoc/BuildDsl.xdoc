@@ -1,0 +1,37 @@
+chapter:builddsl[Build Language]
+
+img[images/builddsl_screenshot.png][][][]
+
+section:builddsl_motivation[The Problem]
+
+Motivation
+Why
+
+section:builddsl_solution[A Solution With Xtext]
+
+Why a DSL
+How about expressions
+DSL example, Java example, Client code example (if appropriate)
+
+Approx 2 pages upto here
+
+section2:builddsl_statistics[Some Stats]
+
+files touched, LOC, animals harmed, etc 
+can also be funny
+
+section:builddsl_running[Running the Example]
+
+Details on how to run it: Prerequisites, additional plugins... 
+
+section:builddsl_details[The Solution in Detail]
+
+section2:builddsl_grammar[Grammar]
+
+section2:builddsl_inferrer[Translation to Java]
+
+section2:builddsl_additons[Additional Aspects]
+
+Addtionally customized things: validation, scoping, code completion ...
+
+section:builddsl_beyond[Beyond This Example]
