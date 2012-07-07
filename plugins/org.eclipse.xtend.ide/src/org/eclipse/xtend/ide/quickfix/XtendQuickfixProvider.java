@@ -232,6 +232,10 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								public ResourceSet getContextResourceSet() {
 									return state.getResourceSet();
 								}
+								
+								public boolean isResolved(@NonNull Object handle) {
+									throw new UnsupportedOperationException();
+								}
 							};
 							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
 									Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),

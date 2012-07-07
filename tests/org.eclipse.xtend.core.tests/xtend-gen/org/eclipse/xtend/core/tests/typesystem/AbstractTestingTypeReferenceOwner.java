@@ -19,7 +19,7 @@ import org.junit.After;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements TypeReferenceOwner {
+public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements TypeReferenceOwner {
   @Inject
   private CommonTypeComputationServices services;
   
@@ -65,5 +65,10 @@ public class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase imp
   
   public CommonTypeComputationServices getServices() {
     return this.services;
+  }
+  
+  public boolean isResolved(final Object handle) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
   }
 }

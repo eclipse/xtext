@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 /**
  * @author Sebastian Zarnekow
  */
-class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements TypeReferenceOwner {
+abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements TypeReferenceOwner {
 	
 	@Inject
 	CommonTypeComputationServices services
@@ -58,6 +58,10 @@ class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements
 	
 	override getServices() {
 		services
+	}
+	
+	override isResolved(Object handle) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
 }

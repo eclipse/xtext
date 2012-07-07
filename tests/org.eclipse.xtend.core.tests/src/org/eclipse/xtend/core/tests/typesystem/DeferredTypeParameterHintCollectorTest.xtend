@@ -177,7 +177,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 				if (mappedReference != null) {
 					return mappedReference.typeReference.accept(this, visiting)
 				} else {
-					val result = new UnboundTypeReference(owner, type as JvmTypeParameter, new Object)
+					val result = new SimpleUnboundTypeReference(owner, type as JvmTypeParameter, new Object)
 					typeParameterMapping.put(type as JvmTypeParameter, new LightweightMergedBoundTypeArgument(result, INVARIANT))
 					return result
 				}
@@ -201,4 +201,16 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 	}
 	
 } 
+
+class SimpleUnboundTypeReference extends UnboundTypeReference {
+	
+	new(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
+		super(owner, typeParameter, handle)
+	}
+
+	override protected createCopy(TypeReferenceOwner owner) {
+		return new SimpleUnboundTypeReference(owner, typeParameter, handle)
+	}
+		
+}
 

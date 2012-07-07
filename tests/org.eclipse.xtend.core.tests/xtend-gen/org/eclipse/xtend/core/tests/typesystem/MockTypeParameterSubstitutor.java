@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.xtend.core.tests.typesystem.SimpleUnboundTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
@@ -57,8 +58,8 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
         } else {
           TypeReferenceOwner _owner = this.getOwner();
           Object _object = new Object();
-          UnboundTypeReference _unboundTypeReference = new UnboundTypeReference(_owner, ((JvmTypeParameter) type), _object);
-          final UnboundTypeReference result = _unboundTypeReference;
+          SimpleUnboundTypeReference _simpleUnboundTypeReference = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter) type), _object);
+          final SimpleUnboundTypeReference result = _simpleUnboundTypeReference;
           Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping_1 = this.getTypeParameterMapping();
           LightweightMergedBoundTypeArgument _lightweightMergedBoundTypeArgument = new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT);
           _typeParameterMapping_1.put(((JvmTypeParameter) type), _lightweightMergedBoundTypeArgument);
