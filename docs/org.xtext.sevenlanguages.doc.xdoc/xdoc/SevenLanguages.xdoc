@@ -40,30 +40,49 @@ codelanguage-def[Xtend][
 ]
 
 codelanguage-def[mongoBeans][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	package, import
 ]
 
 codelanguage-def[tortoise][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	sub, begin, end
 ]
 
 codelanguage-def[routing][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	GET, POST, PUT, DELETE, HEAD, import, when 
 ]
 
-codelanguage-def[simple][
-	application 
+codelanguage-def[scripting][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return
 ]
 
 chapter-ref[introduction]
 
-chapter-ref[simple]
+chapter-ref[scripting]
 
-chapter-ref[mongo]
+chapter-ref[mongoDB]
 
-chapter-ref[routing]
+chapter-ref[httpRouting]
 
-chapter-ref[templates]
+chapter-ref[template]
 
 chapter-ref[guice]
 

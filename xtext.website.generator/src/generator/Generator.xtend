@@ -13,9 +13,9 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new Download, 
-			new ExamplesResource, 
-			new Documentation, 
 			new SevenLanguages,
+			new SevenLanguagesDocumentation, 
+			new Documentation, 
 			new Community 
 		)
 		println("Done.")

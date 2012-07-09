@@ -1,4 +1,4 @@
-chapter:mongo[DSL for MongoDB]
+chapter:mongoDB[DSL for MongoDB]
 
 img[images/mongobeans_screenshot.png][][][]
 
@@ -222,7 +222,7 @@ First, finds all elements of type e[MongoBean] in the given e[MongoFile]. For ea
 Java class using the extension method code[toClass] from the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]. Analogously, the 
 The method code[fullyQualifiedName] comes actually from the secend injected extension 
 codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. Confused yet? Then better read the ref:xtend_primer[Xtend
-Primer] and the ref:simple[simple example] first: 
+Primer] and the ref:scripting[simple example] first: 
 
 The so created Java class is passed to the code[acceptor] as one of the results of the method. 
 The lambda expression passed to code[initializeLater] describes what happens to this class in the second

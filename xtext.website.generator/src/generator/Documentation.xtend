@@ -82,9 +82,9 @@ class Documentation extends AbstractXdocBaseWebsite {
 	def menu(Document doc) '''
 		<ul id="nav-outline">
 			«FOR chapter : doc.chapters»
-				<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
+				<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
 				«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-					<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
+					<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 				«ENDFOR»
 				</li>
 			«ENDFOR»
@@ -92,9 +92,9 @@ class Documentation extends AbstractXdocBaseWebsite {
 				<li>&nbsp;</li>
 				<li style="color : #333;">«part.title.toHtmlText»</li>
 				«FOR chapter : part.chapters»
-					<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
+					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-						<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
+						<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 					«ENDFOR»
 					</li>
 				«ENDFOR»
@@ -125,7 +125,7 @@ class DocumentationBody extends Body {
 	
 	override h1(AbstractSection chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span8 offset3">
 					<h1 style="padding-top: 30px;">

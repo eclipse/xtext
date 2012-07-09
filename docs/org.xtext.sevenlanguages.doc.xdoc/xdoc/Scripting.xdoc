@@ -1,4 +1,4 @@
-chapter:simple[Scripting Language]
+chapter:scripting[Scripting Language]
 
 img[images/scripting_screenshot.png][][][]
 
@@ -6,11 +6,11 @@ This example languages demonstrates the basics of a JVM language build with Xtex
 you to the Xbase expression language and the DSL to Java transformation, a.k.a. JVM model inferrence.
 It is a good starting point to read for all other languages.
 
-section:simple_motivation[The Problem]
+section:scripting_motivation[The Problem]
 
 We are going to build a language to define an application with a method body. A file in this language
 should look like this
-code[simple][
+code[scripting][
 // declaration of the application's name
 application my.first.Application
 
@@ -25,7 +25,7 @@ The expressions are written in Xbase, the expression library we are going to use
 the code should be self-explanatory. The Xbase language is more exhaustively covered in the 
 link[http://www.xtext.org/documentation][Xtext documentation]. 
 
-section:simple_solution[A Solution With Xtext]
+section:scripting_solution[A Solution With Xtext]
 
 The idea is to parse the language and automatically generate a Java class from it. The generated Java class 
 should have the following structure
@@ -40,40 +40,40 @@ public class Application {
 }
 ] 
 
-section2:simple_statistics[Some Stats]
+section2:scripting_statistics[Some Stats]
 
 table[
-tr[td[Language name]td[SimpleExpressions]]
+tr[td[Language name]td[scriptingExpressions]]
 tr[td[Author]td[Jan Koehnlein]]
 tr[td[Xtext Grammar]td[8 LOC]]
 tr[td[Xtext extensions]td[inferrer only]]
 tr[td[Execution]td[Java code generator]]
 tr[td[Runtime library]td[none]]
-tr[td[Hardest part]td[Making it as simple as possible]]
+tr[td[Hardest part]td[Making it as scripting as possible]]
 ]
 
-section:simple_running[Running the Example]
+section:scripting_running[Running the Example]
 
-Make sure you have the projects e[org.xtext.simple] and e[org.xtext.simple.ui] in your workspace.
-Then start a new Eclipse by choosing e[Run > Run Configurations... > Eclipse Application > Run (org.xtext.simple)].
-Create a new Java project and a new file with the file extension e[.simple] in the source folder. Try the above example. 
+Make sure you have the projects e[org.xtext.scripting] and e[org.xtext.scripting.ui] in your workspace.
+Then start a new Eclipse by choosing e[Run > Run Configurations... > Eclipse Application > Run (org.xtext.scripting)].
+Create a new Java project and a new file with the file extension e[.scripting] in the source folder. Try the above example. 
 As soon as you save, a new folder e[src-gen] will appear in the project. It will contain the Java code for
 your application. Make e[src-gen] a source folder e[(Right-click > Build path > Use as Source Folder)] and execute
 it.
 
-section:simple_details[The Solution in Detail]
+section:scripting_details[The Solution in Detail]
 
 All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
 is what we will be describing in the folloging section.
 
-section2:simple_grammar[Grammar]
+section2:scripting_grammar[Grammar]
 
 To build language with Xtext, you first have to define a grammar. As opposed to other parser generators,
 an Xtext grammar defines both, the lexical structure of the langauge and the structure of the abstract
 syntax tree, the object model that is build from the text by the parser. For more detailed description
 of the Xtext grammar language, please see the link[http://www.xtext.org/documentation][Xtext documentation].
 
-The grammar for our DSL is rather simple. We inherit from code[org.eclipse.xtext.xbase.Xbase] to get the
+The grammar for our DSL is rather scripting. We inherit from code[org.eclipse.xtext.xbase.Xbase] to get the
 syntax of the expressions. As we want to refer to the type 
 codeRef[org.eclipse.xtext.xbase.XBlockExpression], we have to import Xbase's Ecore model. The single type 
 inferred from this grammar goes into the Ecore model code[simpleExpressions].
@@ -92,7 +92,7 @@ Main returns XBlockExpression:
   (expressions+=XExpressionInsideBlock ';'?)*;
 ]
 
-The grammar has two rules: An e[Application] is marked with the keyword code[simple][application] followed
+The grammar has two rules: An e[Application] is marked with the keyword code[scripting][application] followed
 by a qualified name - as defined in the supergrammar separated with dots. The code[main] of an e[Application]
 is a codeRef[org.eclipse.xtext.xbase.XBlockExpression] from Xbase. Note that we reuse the semantic type 
 codeRef[org.eclipse.xtext.xbase.XBlockExpression] but use a different syntax - without the curly braces
@@ -103,7 +103,7 @@ to Xbase's codeRef[org.eclipse.xtext.xbase.XBlockExpression] which allows any se
 including variable declarations, control structures, closures, etc. Our little languague is already 
 Turing-complete!
 
-section2:simple_inferrer[Translation to Java]
+section2:scripting_inferrer[Translation to Java]
 
 To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
 is defined in the so called codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer]. The language

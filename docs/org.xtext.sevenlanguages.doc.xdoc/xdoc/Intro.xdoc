@@ -1,4 +1,4 @@
-chapter:introduction[Seven Languages by Seven Geeks]
+chapter:introduction[Seven Languages in Seven Weeks]
 
 Building domain-specific languages (DSLs) for the structural parts of an application has always been rather 
 simple with Xtext. Nevertheless, when it came to the behavioral parts, users often fell back to implementing 
@@ -17,11 +17,11 @@ In this document we describe seven languages created with Xtext 2 that run on th
 The languages address typical use cases encountered in Java application development. The seven languages cover
 
 ul[
-item[ref:simple[Simple Java applications]]
-item[ref:mongo[JavaBeans-like statically typed access to mongoDB documents]]
-item[ref:routing[An HTTP routing servlet with full support of expressions]]
-item[ref:templates[Templates with embedded expressions]]
+item[ref:scripting[Simple Java applications]]
+item[ref:mongoDB[JavaBeans-like statically typed access to mongoDB documents]]
 item[ref:guice[Configuration of modules for Google Guice]]
+item[ref:httpRouting[An HTTP routing servlet with full support of expressions]]
+item[ref:template[Templates with embedded expressions]]
 item[ref:builddsl[Dependency management]]
 item[ref:tortoise[A Logo like programming environment for educational purposes]]
 ]
