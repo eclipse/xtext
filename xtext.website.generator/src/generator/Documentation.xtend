@@ -145,7 +145,7 @@ class DocumentationBody extends Body {
 	
 	override h2(AbstractSection section) '''
 		<!--  section -->
-		<section id="«section.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 		<h2 style="padding-top: 15px;">«section.title.toHtmlText»</h2>
 		«FOR content : section.contents»
 			«content.toHtmlParagraph»

@@ -80,8 +80,8 @@ public class DocumentationBody extends Body {
     _builder.append("<!--  section -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _href = this._htmlExtensions.href(section);
-    _builder.append(_href, "");
+    String _hrefId = this._htmlExtensions.hrefId(section);
+    _builder.append(_hrefId, "");
     _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("<h2 style=\"padding-top: 15px;\">");

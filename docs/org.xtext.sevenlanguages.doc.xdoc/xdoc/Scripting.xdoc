@@ -1,12 +1,10 @@
 chapter:scripting[Scripting Language]
 
-img[images/scripting_screenshot.png][][][]
-
 This example languages demonstrates the basics of a JVM language build with Xtext. It will introduce
 you to the Xbase expression language and the DSL to Java transformation, a.k.a. JVM model inferrence.
 It is a good starting point to read for all other languages.
 
-section:scripting_motivation[The Problem]
+img[images/scripting_screenshot.png][][][]
 
 We are going to build a language to define an application with a method body. A file in this language
 should look like this
@@ -25,7 +23,7 @@ The expressions are written in Xbase, the expression library we are going to use
 the code should be self-explanatory. The Xbase language is more exhaustively covered in the 
 link[http://www.xtext.org/documentation][Xtext documentation]. 
 
-section:scripting_solution[A Solution With Xtext]
+section:scripting_solution[Overview]
 
 The idea is to parse the language and automatically generate a Java class from it. The generated Java class 
 should have the following structure
@@ -61,7 +59,7 @@ As soon as you save, a new folder e[src-gen] will appear in the project. It will
 your application. Make e[src-gen] a source folder e[(Right-click > Build path > Use as Source Folder)] and execute
 it.
 
-section:scripting_details[The Solution in Detail]
+section:scripting_details[Implementation]
 
 All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
 is what we will be describing in the folloging section.
@@ -196,7 +194,7 @@ Finally, we associate the body of the e[Application] with the body of the code[m
 shipped with Xbase knows how to translate that to Java code, so there is nothing more you have to care
 about.  
 
-section:mongo_beyond[Beyond This Example]
+section:scripting_beyond[Beyond This Example]
 
 Well, that has only been the start, but you should now be familiar with the basic concepts of creating
 a JVM language with Xtext. No go for the real applications in the other languages!

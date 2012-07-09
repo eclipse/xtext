@@ -1,13 +1,11 @@
 chapter:mongoDB[DSL for MongoDB]
 
-img[images/mongobeans_screenshot.png][][][]
-
 link[http://www.mongodb.org][MongoDB] is a very popular document-based database management system. 
 In mongoDB, database entries (AKA e[documents]) have fields, which are essentially e[(key, value)] pairs.
 MongoDB is schema free, i.e. there are no rules which fields have to be defined and of what type they are.
 This allows for very flexible and heterogenous data structures and maps perfectly with JSON. 
 
-section:mongo_motivation[The Problem]
+img[images/mongobeans_screenshot.png][][][]
 
 Java is statically typed: The available types, their field names and field types, are known and validated 
 at compile time. The JavaBeans convention defines how instances can be manipulated. 
@@ -21,7 +19,7 @@ will likely result poorly readable and unsafe code. Second, additional behavior 
 methods of your entity classes has to be defined by external helper classes. Third, constructing a graph of 
 nested generic maps looks pretty bulky and inconventient in Java and breaks with the JavaBeans conventions.
 
-section:mongo_solution[A Solution With Xtext]
+section:mongo_solution[Overview]
 
 In this project, we have created a small DSL e[mongoBeans] based on Xtext that allows to create basic 
 entity classes that are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of 
@@ -123,7 +121,7 @@ Import the projects into an Eclipse workspace and run the launch config
 e[Run (org.eclipse.xtext.mongobeans)]. Import the example plug-in into the new workspace and run 
 code[MusicDBXtendTest] as a JUnit test.
 
-section:mongo_details[The Solution in Detail]
+section:mongo_details[Implementation]
 
 section2:mongo_grammar[Grammar]
 

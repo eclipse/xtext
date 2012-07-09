@@ -74,7 +74,9 @@ codelanguage-def[scripting][
 	long, byte, void, return
 ]
 
-chapter-ref[introduction]
+part-ref[general_overview]
+
+part[The 7 Languages]
 
 chapter-ref[scripting]
 

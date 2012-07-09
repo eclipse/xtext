@@ -1,19 +1,17 @@
 chapter:tortoise[Little Tortoise]
 
-img[images/tortoise_screenshot.png][][][]
-
 Do you remember the programming language link[http://en.wikipedia.org/wiki/Logo_%28programming_language%29][Logo]? 
 Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
 But the remarkable part was the so called e[turtle], a graphical cursor that can be given commands to move and turn, 
 thereby drawing lines.
 
-section:tortoise_motivation[The Problem]
+img[images/tortoise_screenshot.png][][][]
 
 The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
 Technically, this example will teach you how to use and adapt the 
 codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] for your own language.  
 
-section:tortoise_solution[A Solution With Xtext]
+section:tortoise_solution[Overview]
 
 We have build a language that allows to define e[Programs] and e[SubPrograms]. Each of these has a body
 which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
@@ -98,7 +96,7 @@ in the e[Tortoise View] allows to execute the code live from the editor upto the
 
 img[images/Pythagoras.png][Tortoise takes a rest after running the Pythagoras example][][]
 
-section:tortoise_details[The Solution in Detail]
+section:tortoise_details[Implementation]
 
 section2:tortoise_grammar[Grammar]
 

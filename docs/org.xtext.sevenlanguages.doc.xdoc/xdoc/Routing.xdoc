@@ -1,18 +1,17 @@
 chapter:httpRouting[Http Routing Language]
 
-img[images/httprouting_screenshot.png][][][]
-
-section:routing_motivation[The Problem]
-
 There are several different frameworks out there like link[https://github.com/playframework/Play20/wiki/ScalaRouting][Play]
 to support HttpRoutes.
+
+img[images/httprouting_screenshot.png][][][]
+
 Normally they are defined in a special format in a separated central file. In most of the cases there is no tooling except a normal text/XML editor. 
 The only way to decide which route matches is the URL with different wildcards and placeholders. 
 The order of the routes defined in the file is important to decide which matches first. There is no support to access parts of the URL while the mapping is done.
 In most of the cases you might want to have full control via expressions to decide which action should be called. 
 Normally concrete classes are used directly in the route definition to point to an action that should be triggered. That's not really reusable in different scenarios and dependency injection is what you would really like to use.
 
-section:routing_solution[A Solution With Xtext]
+section:routing_solution[Overview]
 
 In this project, we have created a small DSL base on link[http://www.xtext.org][Xtext] that allows to create routing with full support of expressions and access to the URL while the routing is done.
 The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and link[http://code.google.com/p/google-guice][Guice] bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
@@ -63,7 +62,7 @@ Import the projects into an Eclipse workspace and run the launch config
 e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
 org.eclipse.httprouting.example. You'll see that the Servlet-API ist already included in the example.
 
-section:routing_details[The Solution in Detail]
+section:routing_details[Implementation]
 
 section2:routing_grammar[Grammar]
 

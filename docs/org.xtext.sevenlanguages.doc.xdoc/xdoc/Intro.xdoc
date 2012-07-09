@@ -1,4 +1,6 @@
-chapter:introduction[Seven Languages in Seven Weeks]
+part:general_overview[General Overview]
+
+chapter:introduction[Introduction]
 
 Building domain-specific languages (DSLs) for the structural parts of an application has always been rather 
 simple with Xtext. Nevertheless, when it came to the behavioral parts, users often fell back to implementing 
@@ -29,7 +31,7 @@ item[ref:tortoise[A Logo like programming environment for educational purposes]]
 We tried to keep each language as simple as possible, focussing on the value a DSL can add to the respective 
 scenario. We also covered different aspects of customization to the language infrastructure when appropriate.
 
-section:common_requirements[Common Requirements]
+chapter:common_requirements[Common Requirements]
 
 To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 4.2 or higher]
 for your platform. In addition, you have to install link[http://www.xtext.org][Xtext 2.3] and 
@@ -41,7 +43,7 @@ link[http://download.itemis.com/distros][itemis distribution].
 
 Additional requirements are mentioned in the e[Running the Example] section of each chapter.
 
-section2:installation[Getting the Code]
+section:installation[Getting the Code]
 
 You can get the source code for all languages from the github repository at
 link[https://github.com/xtext-dev/seven-languages-xtext.git][https://github.com/xtext-dev/seven-languages-xtext].
@@ -60,7 +62,7 @@ e[Run > Run Configurations... > Eclipse Application > Run (<language>)].
 
 todo[further installation instructions? Git?]
 
-section:xtend_primer[A Short Xtend Primer]
+chapter:xtend_primer[A Short Xtend Primer]
 
 We are going to use the language link[http://www.xtend-lang.org][Xtend] as much as possible. Xtend is 
 designed as a powerful and less verbose alternative to Java. It can refer to any Java artifact and 

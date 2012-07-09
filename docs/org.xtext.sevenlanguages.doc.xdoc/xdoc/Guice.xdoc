@@ -1,13 +1,13 @@
 chapter:guice[DSL for Guice]
 
-img[images/guicemodules_screenshot.png][][][]
+Some introductionary words 
 
-section:guice_motivation[The Problem]
+img[images/guicemodules_screenshot.png][][][]
 
 Motivation
 Why
 
-section:guice_solution[A Solution With Xtext]
+section:guice_solution[Overview]
 
 Why a DSL
 How about expressions
@@ -25,7 +25,7 @@ section:guice_running[Running the Example]
 
 Details on how to run it: Prerequisites, additional plugins... 
 
-section:guice_details[The Solution in Detail]
+section:guice_details[Implementation]
 
 section2:guice_grammar[Grammar]
 

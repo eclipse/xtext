@@ -1,13 +1,13 @@
 chapter:builddsl[Build Language]
 
-img[images/builddsl_screenshot.png][][][]
+Some introductionary words
 
-section:builddsl_motivation[The Problem]
+img[images/builddsl_screenshot.png][][][]
 
 Motivation
 Why
 
-section:builddsl_solution[A Solution With Xtext]
+section:builddsl_solution[Overview]
 
 Why a DSL
 How about expressions
@@ -24,7 +24,7 @@ section:builddsl_running[Running the Example]
 
 Details on how to run it: Prerequisites, additional plugins... 
 
-section:builddsl_details[The Solution in Detail]
+section:builddsl_details[Implementation]
 
 section2:builddsl_grammar[Grammar]
 

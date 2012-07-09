@@ -1,13 +1,13 @@
 chapter:template[Template Language]
 
-img[images/template_screenshot.png][][][]
+Some introdcution
 
-section:templates_motivation[The Problem]
+img[images/template_screenshot.png][][][]
 
 Motivation
 Why
 
-section:templates_solution[A Solution With Xtext]
+section:templates_solution[Overview]
 
 Why a DSL
 How about expressions
@@ -24,7 +24,7 @@ section:templates_running[Running the Example]
 
 Details on how to run it: Prerequisites, additional plugins... 
 
-section:templates_details[The Solution in Detail]
+section:templates_details[Implementation]
 
 section2:templates_grammar[Grammar]
 

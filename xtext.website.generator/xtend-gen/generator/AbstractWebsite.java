@@ -385,9 +385,17 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
+      boolean _or = false;
       String _path_1 = this.path();
       boolean _equals_1 = Objects.equal(_path_1, "7languages.html");
       if (_equals_1) {
+        _or = true;
+      } else {
+        String _path_2 = this.path();
+        boolean _equals_2 = Objects.equal(_path_2, "7languagesDoc.html");
+        _or = (_equals_1 || _equals_2);
+      }
+      if (_or) {
         _builder.append("class=\"active\"");
       }
     }
@@ -396,9 +404,9 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
-      String _path_2 = this.path();
-      boolean _equals_2 = Objects.equal(_path_2, "documentation.html");
-      if (_equals_2) {
+      String _path_3 = this.path();
+      boolean _equals_3 = Objects.equal(_path_3, "documentation.html");
+      if (_equals_3) {
         _builder.append("class=\"active\"");
       }
     }
@@ -407,9 +415,9 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
-      String _path_3 = this.path();
-      boolean _equals_3 = Objects.equal(_path_3, "community.html");
-      if (_equals_3) {
+      String _path_4 = this.path();
+      boolean _equals_4 = Objects.equal(_path_4, "community.html");
+      if (_equals_4) {
         _builder.append("class=\"active\"");
       }
     }
