@@ -167,7 +167,8 @@ class Foo {
 a[xtend_lambda]
 Xtend provides lambda expressions. These are anonymous functions in square brackets. 
 code[Xtend][
-\[String foo, String bar | foo + bar\]  // a function (String foo, String bar) { foo + bar }
+\[String foo, String bar | foo + bar\]  
+  // a function (String foo, String bar) { foo + bar }
 ]
 a[xtend_lambda_coercion]
 As this is a bit bulky, there are more rules to make working with lambdas more attractive:
@@ -178,10 +179,12 @@ inferred.]
 item[If you skip the declaration of the only parameter, it will be implicitly called code[Xtend][it].]
 ]
 code[Xtend][
-new Thread \[ println("Hello concurrent world") \] // lambda will be coerced to a Runnable
+new Thread \[ println("Hello concurrent world") \] 
+  // lambda will be coerced to a Runnable
 val list = newArrayList('fooooo', 'fo', 'foo')
-list.sortBy\[ length \]   // lambda is coerced into a function (String)=>Comparable
-                        // equivalent to list.sortBy\[Comparable it | it.length\]
+list.sortBy\[ length \]   
+  // lambda is coerced into a function (String)=>Comparable
+  // equivalent to list.sortBy\[Comparable it | it.length\]
 ]
 
 a[xtend_templates]
@@ -204,7 +207,9 @@ code[Xtend][
         «ENDFOR»
         «IF route.condition != null»
           if («route.nameOfRouteMethod»Condition(request, response
-            «FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR»))
+            «FOR v : route.url.variables 
+             BEFORE ", " 
+             SEPARATOR ", "»«v.name»«ENDFOR»))
         «ENDIF»
         «route.nameOfRouteMethod»(request, response
           «FOR v : route.url.variables», «v.name»«ENDFOR»);

@@ -7,23 +7,13 @@ img[images/scripting_screenshot.png][][][]
 
 section:scripting_solution[Overview]
 
-As you can see the language is straight forward: All you can do is write expressions and imports.
-Here's another example:
-
-code[scripting][
-// some expressions making up the application's body
-val names = newArrayList('Dennis', 'Holger', 'Jan', 'Moritz', 'Sebastian', 'Sven')
-for(name: names) {
-  println('Hello ' + name + '!')
-}
-]
-
+As you can see the language is straight forward: All you can do is write expressions and imports in any order.
 The expressions you see are the same available in Xtend and they are defined in its own grammar (called Xbase).
 They are syntactically very close to Java, but feature a lot of modern concepts, like lambda expressions
-and operator overloading. They support local type inference so you don't have to write types everyhwere
+and operator overloading. They support local type inference so you do not have to write types everyhwere
 like in Java, but the expressions are still statically-typed. 
-For a Java developer, the code should be self-explanatory. The Xbase expression language is more exhaustively covered in the 
-link[http://www.xtext.org/documentation][Xtext documentation].
+For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively 
+covered in the link[http://www.xtext.org/documentation][Xtext documentation].
 
 A script is compiled to a Java class with one main method. That is the script
 
@@ -78,25 +68,26 @@ generate scripting "http://www.xtext.org/scripting/Scripting"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 Script returns XBlockExpression:
-	{Script} // return an object of type Script which is a subtype of XBlockExpression
-	((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
+  {Script} 
+  // return an object of type Script which is a subtype of XBlockExpression
+  ((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
 
 Import:
-	'import' importedNamespace=QualifiedNameWithWildcard;
+  'import' importedNamespace=QualifiedNameWithWildcard;
 
 QualifiedNameWithWildcard:
-	QualifiedName '.*'?;
+  QualifiedName '.*'?;
 ]
 
 The main rule e[Script] is defined to produce an object of type code[Script] which is a subtype of code[XBlockExpression]. 
 A block expression simply consists of any number of expressions. The rule code[XExpressionInsideBlock] is defined in the
-super grammar. Usually block expressions are surrounded by curly braces, but of course we don't
+super grammar. Usually block expressions are surrounded by curly braces, but of course we do not
 want to force anybody to write curly braces at the beginning and the end of a simple script.
 
 In addition to expressions you can have any number of imports. Xtext has a very simple way to let you
 define imports, all you need to do is name a feature code[importedNamespace] and it will be interpreted
 as a namespace import. For JVM languages you might want to have additional functionality, like static
-imports which is explained in the section about the ref:builddsl language.
+imports which is explained in the section about the ref:builddsl[build DSL].
 
 section2:scripting_inferrer[Translation to Java]
 
@@ -116,21 +107,24 @@ The JVM model inferrer code for the scripting language looks like this:
 
 code[Xtend][
 class ScriptingJvmModelInferrer extends AbstractModelInferrer {
-	
-   	@Inject extension JvmTypesBuilder
+  
+  @Inject extension JvmTypesBuilder
 
-   	def dispatch void infer(Script script, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		val className = script.eResource.URI.trimFileExtension.lastSegment
-   		acceptor.accept(script.toClass(className)).initializeLater \[
-   			// the class gets one main method
-   			members += script.toMethod('main', script.newTypeRef('void')) \[
-   				parameters += script.toParameter("args", script.newTypeRef('java.lang.String')).addArrayTypeDimension)
-   				setStatic(true)
-   				// Associate the script as the body of the main method
-   				body = script
-   			\]
-   		\]
-  	}
+  def dispatch void infer(Script script, 
+                          IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    val className = script.eResource.URI.trimFileExtension.lastSegment
+    acceptor.accept(script.toClass(className)).initializeLater \[
+      // the class gets one main method
+      members += script.toMethod('main', script.newTypeRef('void')) \[
+        parameters += script.toParameter("args", 
+            script.newTypeRef('java.lang.String')).addArrayTypeDimension)
+        setStatic(true)
+        // Associate the script as the body of the main method
+        body = script
+      \]
+    \]
+  }
 }
 ]
 
@@ -147,7 +141,7 @@ parameter code[args] defined in the main method is now on the scope. So you coul
 
 code[scripting][
 for (arg : args)
-	println('-- '+arg)
+  println('-- '+arg)
 ]   
 
 As you can imagine, this is fairly powerful way to put things on the scope implicitly. 

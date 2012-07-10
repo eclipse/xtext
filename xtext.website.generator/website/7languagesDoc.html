@@ -430,7 +430,8 @@ class Foo {
 							Xtend provides lambda expressions. These are anonymous functions in square brackets. 
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-[String foo, String bar | foo + bar]  // a function (String foo, String bar) { foo + bar }</pre>
+[String foo, String bar | foo + bar]  
+  // a function (String foo, String bar) { foo + bar }</pre>
 							<p>
 							
 							<a name="xtend_lambda_coercion"></a>
@@ -447,10 +448,12 @@ class Foo {
 							
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-new Thread [ println("Hello concurrent world") ] // lambda will be coerced to a Runnable
+new Thread [ println("Hello concurrent world") ] 
+  // lambda will be coerced to a Runnable
 val list = newArrayList('fooooo', 'fo', 'foo')
-list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Comparable
-                        // equivalent to list.sortBy[Comparable it | it.length]</pre>
+list.sortBy[ length ]   
+  // lambda is coerced into a function (String)=&gt;Comparable
+  // equivalent to list.sortBy[Comparable it | it.length]</pre>
 							<p>
 						</p>
 						<p>
@@ -478,10 +481,12 @@ list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Compar
         &laquo;ENDFOR&raquo;
         &laquo;IF route.condition != null&raquo;
           if (&laquo;route.nameOfRouteMethod&raquo;Condition(request, response
-            &laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", "&raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;))
+            &laquo;FOR v : route.url.variables 
+             BEFORE ", " 
+             SEPARATOR ", "&raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;))
         &laquo;ENDIF&raquo;
         &laquo;route.nameOfRouteMethod&raquo;(request, response
-            &laquo;FOR v : route.url.variables&raquo;, &laquo;v.name&raquo;&laquo;ENDFOR&raquo;);
+          &laquo;FOR v : route.url.variables&raquo;, &laquo;v.name&raquo;&laquo;ENDFOR&raquo;);
       }
     }
   &laquo;ENDFOR&raquo;
@@ -514,26 +519,13 @@ list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Compar
 						<section id="scripting_solution" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Overview</h2>
 						<p>
-							As you can see the language is straight forward: All you can do is write expressions and imports.
-							Here's another example:
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-scripting linenums">
-// some expressions making up the application's body
-val names = newArrayList('Dennis', 'Holger', 'Jan', 'Moritz', 'Sebastian', 'Sven')
-for(name: names) {
-  println('Hello ' + name + '!')
-}</pre>
-							<p>
-						</p>
-						<p>
+							As you can see the language is straight forward: All you can do is write expressions and imports in any order.
 							The expressions you see are the same available in Xtend and they are defined in its own grammar (called Xbase).
 							They are syntactically very close to Java, but feature a lot of modern concepts, like lambda expressions
-							and operator overloading. They support local type inference so you don't have to write types everyhwere
+							and operator overloading. They support local type inference so you do not have to write types everyhwere
 							like in Java, but the expressions are still statically-typed. 
-							For a Java developer, the code should be self-explanatory. The Xbase expression language is more exhaustively covered in the 
-							<a href="http://www.xtext.org/documentation">Xtext documentation</a>.
+							For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively 
+							covered in the <a href="http://www.xtext.org/documentation">Xtext documentation</a>.
 						</p>
 						<p>
 							A script is compiled to a Java class with one main method. That is the script
@@ -606,20 +598,21 @@ generate scripting "http://www.xtext.org/scripting/Scripting"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 Script returns XBlockExpression:
-	{Script} // return an object of type Script which is a subtype of XBlockExpression
-	((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
+  {Script} 
+  // return an object of type Script which is a subtype of XBlockExpression
+  ((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
 
 Import:
-	'import' importedNamespace=QualifiedNameWithWildcard;
+  'import' importedNamespace=QualifiedNameWithWildcard;
 
 QualifiedNameWithWildcard:
-	QualifiedName '.*'?;</pre>
+  QualifiedName '.*'?;</pre>
 							<p>
 						</p>
 						<p>
 							The main rule <strong>Script</strong> is defined to produce an object of type <code class="prettyprint lang-xtend">Script</code> which is a subtype of <code class="prettyprint lang-xtend">XBlockExpression</code>. 
 							A block expression simply consists of any number of expressions. The rule <code class="prettyprint lang-xtend">XExpressionInsideBlock</code> is defined in the
-							super grammar. Usually block expressions are surrounded by curly braces, but of course we don't
+							super grammar. Usually block expressions are surrounded by curly braces, but of course we do not
 							want to force anybody to write curly braces at the beginning and the end of a simple script.
 						</p>
 						<p>
@@ -654,21 +647,24 @@ QualifiedNameWithWildcard:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 class ScriptingJvmModelInferrer extends AbstractModelInferrer {
-	
-   	@Inject extension JvmTypesBuilder
+  
+  @Inject extension JvmTypesBuilder
 
-   	def dispatch void infer(Script script, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		val className = script.eResource.URI.trimFileExtension.lastSegment
-   		acceptor.accept(script.toClass(className)).initializeLater [
-   			// the class gets one main method
-   			members += script.toMethod('main', script.newTypeRef('void')) [
-   				parameters += script.toParameter("args", script.newTypeRef('java.lang.String')).addArrayTypeDimension)
-   				setStatic(true)
-   				// Associate the script as the body of the main method
-   				body = script
-   			]
-   		]
-  	}
+  def dispatch void infer(Script script, 
+                          IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    val className = script.eResource.URI.trimFileExtension.lastSegment
+    acceptor.accept(script.toClass(className)).initializeLater [
+      // the class gets one main method
+      members += script.toMethod('main', script.newTypeRef('void')) [
+        parameters += script.toParameter("args", 
+            script.newTypeRef('java.lang.String')).addArrayTypeDimension)
+        setStatic(true)
+        // Associate the script as the body of the main method
+        body = script
+      ]
+    ]
+  }
 }</pre>
 							<p>
 						</p>
@@ -690,7 +686,7 @@ class ScriptingJvmModelInferrer extends AbstractModelInferrer {
 							</p>
 							<pre class="prettyprint lang-scripting linenums">
 for (arg : args)
-	println('-- '+arg)</pre>
+  println('-- '+arg)</pre>
 							<p>
 						</p>
 						<p>
