@@ -2,41 +2,61 @@ part:general_overview[General Overview]
 
 chapter:introduction[Introduction]
 
-Building domain-specific languages (DSLs) for the structural parts of an application has always been rather 
-simple with Xtext. Nevertheless, when it came to the behavioral parts, users often fell back to implementing 
-them in the target language, e.g. Java. The reason is that expressions, which are usually the part of a language 
-that describe behavior, are hard to get right and very costly to implement. There are two major drawbacks with
-this apporach: First, information that belongs to a single concept is spread across multiple artifacts in several 
-languages on different layers of abstraction. Second, you need rather complex and error prone patterns such 
-as protected  regions or generation gap to integrate the manually written code with the generated one.
+Building a domain-specific language (DSLs) for structural parts of an application has always been rather 
+easy with Xtext. But structure alone is not sufficient in many cases. When it comes to the behavioral parts users 
+often fall back to implementing them in Java, because expressions and statements are hard to get right and extremely complex and 
+therefore costly to implement.
 
-The main goal of Xtext 2.0 was to make it as easy as possible to write DSLs that directly integrate with 
-Java. In these JVM languages, you can directly refer to Java artifacts, and your own DSLs artifacts are mapped 
-back to Java. By leveraging Xbase, an expression library shipped with Xtext 2, you can even add behavior right 
-into your language using powerful expressions beyond the capabilities of plain Java.  
+This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
+annotations and full-featured expressions anywhere in your languages. You not only reuse the grammar but the full implementation 
+including a compiler, interpreter, the whole type system and a tight IDE integration. And the best part is, that it's 
+relatively easy to do so.
 
-In this document we describe seven languages created with Xtext 2 that run on the Java Virtual Machine.
-The languages address typical use cases encountered in Java application development. The seven languages cover
+section[It's just two steps]
+
+To get a fully working and compiling language you only need to do two things.
+
+section2[Write the grammar]
+
+Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
+languages is, that you inherit from an abstract grammar (org.eclipse.xtext.xbase.XbaseWithAnnotations) which predefine the syntax
+for the reusable parts. You don't need to use them all or actually any of them and you can of course chnge the syntax or add new
+concepts.
+
+section2[Map to Java]
+
+Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that you use 
+a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces and so on depending 
+on a concrete instance of your language. This hook not only defines how your language is translated to Java, but also defines 
+the scope of used expressions. The expressions from your language 'live' in the context you give them in this hook.
+If you for instance want an expression to have certain local variables on its scope, just put it into a method 
+with corresponding parameters or use instance fields if that works better.
+
+To better communicate the power and flexibility of these two abstractions, we've built seven example languages using on them.
+We've built:
 
 ul[
-item[ref:scripting[Simple Java applications]]
-item[ref:mongoDB[JavaBeans-like statically typed access to mongoDB documents]]
-item[ref:guice[Configuration of modules for Google Guice]]
-item[ref:httpRouting[An HTTP routing servlet with full support of expressions]]
-item[ref:template[Templates with embedded expressions]]
-item[ref:builddsl[Dependency management]]
-item[ref:tortoise[A Logo like programming environment for educational purposes]]
+item[ref:scripting[A simple scripting language]]
+item[ref:mongoDB[A DSL for statically-typed MongoDB documents]]
+item[ref:guice[A Guice modules DSL]]
+item[ref:httpRouting[A Playframework-like HTTP routing language]]
+item[ref:template[A template language]]
+item[ref:builddsl[A Grade-like build DSL]]
+item[ref:tortoise[A Logo-like programming environment for educational purposes]]
 ]
 
-We tried to keep each language as simple as possible, focussing on the value a DSL can add to the respective 
-scenario. We also covered different aspects of customization to the language infrastructure when appropriate.
+Each language still is very simple and focuses on the value a DSL can add to the respective 
+scenario. It's meant to give you an idea of what's possible without being a full practical solution.
+Yet the languages are flexible and come with powerful core abstractions.
+We also covered different technical aspects of customization to the language infrastructure. Some langauges
+have special import logic, others have special syntax coloring, outline views or content assist.
+The new API for JVM languages doesn't mean that anything is hidden away and not customizable.
 
 chapter:common_requirements[Common Requirements]
 
 To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 4.2 or higher]
-for your platform. In addition, you have to install link[http://www.xtext.org][Xtext 2.3] and 
-link[http://www.xtend-lang.org][Xtend 2.3]. Both of these are also available on the official 
-link[][Eclipse Juno Update Site] todo[link!]
+for your platform. In addition, you have to install link[http://www.xtend-lang.org/download.html][Xtend]
+and of course link[http://www.xtext.org/download.html][Xtext 2.3].
 
 If you prefer a simple all-inclusive installation, consider downloading the latest
 link[http://download.itemis.com/distros][itemis distribution].
@@ -60,17 +80,15 @@ We do not provide all plug-ins for all languages. Note that the first four have 
 you start from, while the last one goes into the runtime workspace spawned from the initial one using
 e[Run > Run Configurations... > Eclipse Application > Run (<language>)].
 
-todo[further installation instructions? Git?]
-
 chapter:xtend_primer[A Short Xtend Primer]
 
-We are going to use the language link[http://www.xtend-lang.org][Xtend] as much as possible. Xtend is 
-designed as a powerful and less verbose alternative to Java. It can refer to any Java artifact and 
-compiles to Java code and is therefore fully interoperable with Java. In addition, it uses the same
-expressions that we use in our example languages, so this will give you a taste of how powerful these 
-languages will actually be. 
+Any general code in the examples is implemented in link[http://www.xtend-lang.org][Xtend]. Xtend is 
+a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and 
+compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages.
+In fact it's built with the same API you'll learn through in this document, so this should also give you a taste of 
+how powerful JVM-languages built with Xtext can actually be. 
 
-Xtend should be rather easy to learn for Java developers. In this section we will shortly describe
+Xtend is designed to be easy to learn for Java developers. In this section we will shortly describe
 the most important language features needed in our examples. For a full description of the Xtend language, 
 please consult the link[http://www.xtend-lang.org/documentation][Xtend documentation]. 
 
@@ -92,7 +110,8 @@ Empty parentheses on method calls can be skipped.
 a[xtend_methods] 
 
 Methods are introduced with the keyword code[Xtend][def] or code[Xtend][override] if they override/implement
-a super type's method. They are public by default. The value of the last expression is returned.
+a super type's method. They are public if not specified otherwise. The value of the last expression is returned
+if no explicit return expression is used and the method's return type is not code[void].
 
 a[xtend_variables]
 
@@ -158,3 +177,31 @@ val list = newArrayList('fooooo', 'fo', 'foo')
 list.sortBy\[ length \]   // lambda is coerced into a function (String)=>Comparable
                         // equivalent to list.sortBy\[Comparable it | it.length\]
 ]
+
+a[xtend_templates]
+Also noteworthy is the template expression, which allows to do interpolated multi-line string literals.
+In addition the template expressions has intelligent whitespace handling and supports a special FOR and IF construct, 
+which is far better readable in this context.
+
+We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here's
+an example from the ref:httpRouting language:
+
+code[Xtend][
+'''
+	String url =  request.getRequestURL().toString();
+	«FOR route : routes»
+		{
+			java.util.regex.Matcher _matcher = _pattern«route.index».matcher(url);
+			if (_matcher.find()) {
+				«FOR variable : route.url.variables»
+						String «variable.name» = _matcher.group(«variable.index + 1»);
+				«ENDFOR»
+				«IF route.condition != null»
+					if («route.nameOfRouteMethod»Condition(request, response«FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR»))
+				«ENDIF»
+				«route.nameOfRouteMethod»(request, response«FOR v : route.url.variables», «v.name»«ENDFOR»);
+			}
+		}
+	«ENDFOR»
+'''
+] 
