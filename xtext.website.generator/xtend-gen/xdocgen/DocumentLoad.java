@@ -56,10 +56,12 @@ public class DocumentLoad {
         }
     });
     final Collection<URI> uris = _resolvePathes.values();
-    for (final URI uri : uris) {
+    Collection<URI> _xtendFiles = this.getXtendFiles();
+    Iterable<URI> _plus = Iterables.<URI>concat(uris, _xtendFiles);
+    for (final URI uri : _plus) {
       {
-        String _plus = ("Loading " + uri);
-        InputOutput.<String>println(_plus);
+        String _plus_1 = ("Loading " + uri);
+        InputOutput.<String>println(_plus_1);
         rs.getResource(uri, true);
       }
     }
@@ -133,5 +135,30 @@ public class DocumentLoad {
     Iterator<Document> _filter = Iterators.<Document>filter(_allContents, Document.class);
     final List<Document> docs = IteratorExtensions.<Document>toList(_filter);
     return IterableExtensions.<Document>head(docs);
+  }
+  
+  protected Collection<URI> getXtendFiles() {
+    Collection<URI> _xblockexpression = null;
+    {
+      final String classPath = System.getProperty("java.class.path");
+      final String separator = System.getProperty("path.separator");
+      final String[] entries = classPath.split(separator);
+      PathTraverser _pathTraverser = new PathTraverser();
+      final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+          public Boolean apply(final URI it) {
+            String _fileExtension = it.fileExtension();
+            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            return _equals;
+          }
+        };
+      Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(entries)), new Predicate<URI>() {
+          public boolean apply(URI input) {
+            return _function.apply(input);
+          }
+      });
+      Collection<URI> _values = _resolvePathes.values();
+      _xblockexpression = (_values);
+    }
+    return _xblockexpression;
   }
 }

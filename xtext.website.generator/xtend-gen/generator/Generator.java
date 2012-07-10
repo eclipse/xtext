@@ -8,12 +8,14 @@ import generator.Resource;
 import generator.SevenLanguages;
 import generator.SevenLanguagesDocumentation;
 import java.io.File;
+import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class Generator {
   public static void main(final String[] args) {
     System.setProperty("java.awt.headless", "true");
+    XtendStandaloneSetup.doSetup();
     File _file = new File("website");
     final File out = _file;
     Index _index = new Index();
