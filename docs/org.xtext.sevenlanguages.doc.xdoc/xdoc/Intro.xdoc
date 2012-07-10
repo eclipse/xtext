@@ -59,7 +59,7 @@ The new API for JVM languages doesn't mean that anything is hidden away and not 
 
 chapter:common_requirements[Common Requirements]
 
-To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 4.2 or higher]
+To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 4.2 or higher]
 for your platform. In addition, you have to install link[http://www.xtend-lang.org/download.html][Xtend]
 and of course link[http://www.xtext.org/download.html][Xtext 2.3].
 

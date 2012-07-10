@@ -168,7 +168,7 @@ also define e[MongoOperations]. The body of such an operation is an e[XBlockExpr
 
 section2:mongo_inferrer[Translation to Java]
 
-The JVM model inference is implemented in the codeRef[org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
+The JVM model inference is implemented in the codeRef[org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
 As the generated code is quite rich, this is the most complex component of this language.
 
 For each e[MongoBean], we create a Java class implementing the interface codeRef[org.xtext.mongobeans.lib.IMongoBean].
@@ -530,5 +530,5 @@ class MongoBeansLabelProvider extends XbaseLabelProvider {
 section:mongo_beyond[Beyond This Example]
 
 Possible next moves would be to add further concepts in the DSL, e.g. transient properties, indices or references. 
-The codeRef[org.xtext.mongobeans.example.MusicDBXtendTest][example] also shows how to use Xtend to 
+The codeRef[org.xtext.mongobeans.examples.MusicDBXtendTest][example] also shows how to use Xtend to 
 build a very compact API to create trees of e[MongoBean] instances. 
