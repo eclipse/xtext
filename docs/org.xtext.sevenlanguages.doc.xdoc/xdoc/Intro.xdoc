@@ -9,7 +9,7 @@ therefore costly to implement.
 
 This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
 annotations and full-featured expressions anywhere in your languages. You not only reuse the grammar but the full implementation 
-including a compiler, interpreter, the whole type system and a tight IDE integration. And the best part is, that it's 
+including a compiler, interpreter, the whole type system and a tight IDE integration. And the best part is, that it is 
 relatively easy to do so.
 
 section[It's just two steps]
@@ -20,25 +20,25 @@ section2[Write the grammar]
 
 Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
 languages is, that you inherit from an abstract grammar (org.eclipse.xtext.xbase.XbaseWithAnnotations) which predefine the syntax
-for the reusable parts. You don't need to use them all or actually any of them and you can of course chnge the syntax or add new
+for the reusable parts. You do not need to use them all or actually any of them and you can of course chnge the syntax or add new
 concepts.
 
 section2[Map to Java]
 
 Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
-For that you use a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces and so 
-on for your languages constructs. This hook not only defines how your language is translated to Java, but also defines 
+For that you use a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces etc.
+from your languages constructs. This hook not only defines how your language is translated to Java, but also defines 
 the scope of used expressions. The expressions from your language 'live' in the context you give them in this hook.
-If you for instance want an expression to have certain local variables on its scope, just put it into a method 
-with corresponding parameters or use instance fields if that works better.
+If you for instance want an expression to have access to certain local variables, just put it into a method with appropriate 
+parameters or use instance fields if that works better.
 
-Also this hook makes your DSL constructs visible to other JVM languages. The Java type system is used as a common hub to 
-integrate arbitrary languages with each other. You can for instance call ref:template[templates] directly from a ref:scripting[Script]
-and vice versa. You don't even need to have the equivalent Java code being generated, everything is based on the Java types you
+This hook also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to 
+integrate arbitrary languages with each other. You can for instance call ref:template[templates] directly from a ref:scripting[script]
+and vice versa. You do not even need to generate the equivalent Java code, everything is based on the Java types you
 create in the model inferrer.
 
-To better communicate the power and flexibility of these two abstractions, we've built seven example languages using on them.
-We've built:
+To better communicate the power and flexibility of these two abstractions, we have built seven example languages using on them.
+We have built:
 
 ul[
 item[ref:scripting[A simple scripting language]]
@@ -51,11 +51,11 @@ item[ref:tortoise[A Logo-like programming environment for educational purposes]]
 ]
 
 Each language still is very simple and focuses on the value a DSL can add to the respective 
-scenario. It's meant to give you an idea of what's possible without being a full practical solution.
+scenario. It is meant to give you an idea of what is possible without being a full practical solution.
 Yet the languages are flexible and come with powerful core abstractions.
 We also covered different technical aspects of customization to the language infrastructure. Some langauges
 have special import logic, others have special syntax coloring, outline views or content assist.
-The new API for JVM languages doesn't mean that anything is hidden away and not customizable.
+The new API for JVM languages does not mean that anything is hidden away and not customizable.
 
 chapter:common_requirements[Common Requirements]
 
@@ -72,25 +72,26 @@ section:installation[Getting the Code]
 
 You can get the source code for all languages from the github repository at
 link[https://github.com/xtext-dev/seven-languages-xtext.git][https://github.com/xtext-dev/seven-languages-xtext].
-Each language is contained in their own subdirectory. There are multiple Eclipse projects per langauge
+The repository contains two folders e[languages] and e[examples]. Download the plug-ins from e[languages] into
+the root workspace and the e[examples] into the runtime workspace spawned from the root one using
+e[Run > Run Configurations... > Eclipse Application > Run (<language>)].
+
+Each language consists of several Eclipse projects
 table[
 tr[td[e[org.xtext.<language>]]td[The base infrastructure]]
 tr[td[e[org.xtext.<language>.ui]]td[The editor based on Eclipse]]
-tr[td[e[org.xtext.<language>.sdk]]td[An Eclipse feature for the language]]
 tr[td[e[org.xtext.<language>.tests]]td[Tests for the language]]
-tr[td[e[org.xtext.<language>.runtime]]td[Runtime library]]
+tr[td[e[org.xtext.<language>.lib]]td[Runtime library]]
 tr[td[e[org.xtext.<language>.example]]td[Examples for using the language]]
 ] 
-We do not provide all plug-ins for all languages. Note that the first four have to reside in the workspace
-you start from, while the last one goes into the runtime workspace spawned from the initial one using
-e[Run > Run Configurations... > Eclipse Application > Run (<language>)].
+We do not provide all plug-ins for all languages. 
 
 chapter:xtend_primer[A Short Xtend Primer]
 
 Any general code in the examples is implemented in link[http://www.xtend-lang.org][Xtend]. Xtend is 
 a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and 
 compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages.
-In fact it's built with the same API you'll learn through in this document, so this should also give you a taste of 
+In fact it is built with the same API you will learn through in this document, so this should also give you a taste of 
 how powerful JVM-languages built with Xtext can actually be. 
 
 Xtend is designed to be easy to learn for Java developers. In this section we will shortly describe
@@ -184,29 +185,31 @@ list.sortBy\[ length \]   // lambda is coerced into a function (String)=>Compara
 ]
 
 a[xtend_templates]
-Also noteworthy is the template expression, which allows to do interpolated multi-line string literals.
-In addition the template expressions has intelligent whitespace handling and supports a special FOR and IF construct, 
-which is far better readable in this context.
+Also noteworthy is the template expression, which allows to define interpolated multi-line string literals.
+In addition, the template expressions has intelligent whitespace handling and supports a special code[Xtend][FOR] and 
+code[Xtend][IF] construct, which is far better readable in this context.
 
-We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here's
-an example from the ref:httpRouting language:
+We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is
+an example from the ref:httpRouting[http routing language]:
 
 code[Xtend][
 '''
-	String url =  request.getRequestURL().toString();
-	«FOR route : routes»
-		{
-			java.util.regex.Matcher _matcher = _pattern«route.index».matcher(url);
-			if (_matcher.find()) {
-				«FOR variable : route.url.variables»
-						String «variable.name» = _matcher.group(«variable.index + 1»);
-				«ENDFOR»
-				«IF route.condition != null»
-					if («route.nameOfRouteMethod»Condition(request, response«FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR»))
-				«ENDIF»
-				«route.nameOfRouteMethod»(request, response«FOR v : route.url.variables», «v.name»«ENDFOR»);
-			}
-		}
-	«ENDFOR»
+  String url =  request.getRequestURL().toString();
+  «FOR route : routes»
+    {
+      java.util.regex.Matcher _matcher = _pattern«route.index».matcher(url);
+      if (_matcher.find()) {
+        «FOR variable : route.url.variables»
+            String «variable.name» = _matcher.group(«variable.index + 1»);
+        «ENDFOR»
+        «IF route.condition != null»
+          if («route.nameOfRouteMethod»Condition(request, response
+            «FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR»))
+        «ENDIF»
+        «route.nameOfRouteMethod»(request, response
+          «FOR v : route.url.variables», «v.name»«ENDFOR»);
+      }
+    }
+  «ENDFOR»
 '''
 ] 
