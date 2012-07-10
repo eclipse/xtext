@@ -98,8 +98,16 @@ class Documentation extends AbstractXdocBaseWebsite {
 					«ENDFOR»
 					</li>
 				«ENDFOR»
-			«ENDFOR»
+			«ENDFOR»			
+			«additionalLinks»
 		</ul>
+	'''
+	
+	def additionalLinks() '''
+		<li>&nbsp;</li>
+		<li style="color : #333;">Additional Resources
+		<li><a href="documentation/2.3.0/Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
+		<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/">API Documentation (JavaDoc)</a>
 	'''
 	
 	override protected getDocument() {
