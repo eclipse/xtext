@@ -9,6 +9,10 @@ class SevenLanguagesDocumentation extends Documentation {
 	override path() {
 		"7languagesDoc.html"
 	}
+
+	override additionalLinks() {
+		// no additional links
+	}
 	
 }
 

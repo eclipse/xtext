@@ -11,4 +11,8 @@ public class SevenLanguagesDocumentation extends Documentation {
   public String path() {
     return "7languagesDoc.html";
   }
+  
+  public CharSequence additionalLinks() {
+    return null;
+  }
 }
