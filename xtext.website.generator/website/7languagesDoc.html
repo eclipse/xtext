@@ -133,43 +133,60 @@
 		<li><a href="#scripting">Scripting Language</a>
 	<ul>	<li><a href="#scripting_solution">Overview</a></li>
 		<li><a href="#scripting_running">Running the Example</a></li>
-		<li><a href="#scripting_details">Implementation</a></li>
+		<li><a href="#scripting_grammar">Grammar</a></li>
+		<li><a href="#scripting_inferrer">Translation to Java</a></li>
 		<li><a href="#scripting_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#mongoDB">DSL for MongoDB</a>
 	<ul>	<li><a href="#mongo_solution">Overview</a></li>
 		<li><a href="#mongo_running">Running the Example</a></li>
-		<li><a href="#mongo_details">Implementation</a></li>
+		<li><a href="#mongo_grammar">Grammar</a></li>
+		<li><a href="#mongo_inferrer">Translation to Java</a></li>
+		<li><a href="#mongo_nameProvider">Qualified Name Provider</a></li>
+		<li><a href="#mongo_validation">Validation</a></li>
+		<li><a href="#mongo_visual">IDE Enhancements</a></li>
 		<li><a href="#mongo_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#httpRouting">Http Routing Language</a>
 	<ul>	<li><a href="#routing_solution">Overview</a></li>
 		<li><a href="#routing_running">Running the Example</a></li>
-		<li><a href="#routing_details">Implementation</a></li>
+		<li><a href="#routing_grammar">Grammar</a></li>
+		<li><a href="#routing_inferrer">Translation to Java</a></li>
+		<li><a href="#routing_additons">Additional Aspects</a></li>
 		<li><a href="#routing_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#template">Template Language</a>
 	<ul>	<li><a href="#templates_solution">Overview</a></li>
 		<li><a href="#templates_running">Running the Example</a></li>
 		<li><a href="#templates_details">Implementation</a></li>
+		<li><a href="#templates_grammar">Grammar</a></li>
+		<li><a href="#templates_inferrer">Translation to Java</a></li>
+		<li><a href="#templates_additons">Additional Aspects</a></li>
 		<li><a href="#templates_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#guice">DSL for Guice</a>
 	<ul>	<li><a href="#guice_solution">Overview</a></li>
 		<li><a href="#guice_running">Running the Example</a></li>
 		<li><a href="#guice_details">Implementation</a></li>
+		<li><a href="#guice_grammar">Grammar</a></li>
+		<li><a href="#guice_inferrer">Translation to Java</a></li>
+		<li><a href="#guice_additons">Additional Aspects</a></li>
 		<li><a href="#guice_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#builddsl">Build Language</a>
 	<ul>	<li><a href="#builddsl_solution">Overview</a></li>
 		<li><a href="#builddsl_running">Running the Example</a></li>
-		<li><a href="#builddsl_details">Implementation</a></li>
+		<li><a href="#builddsl_grammar">Grammar</a></li>
+		<li><a href="#builddsl_inferrer">Translation to Java</a></li>
+		<li><a href="#builddsl_additons">Additional Aspects</a></li>
 		<li><a href="#builddsl_beyond">Beyond This Example</a></li>
 	</ul>	</li>
 		<li><a href="#tortoise">Little Tortoise</a>
 	<ul>	<li><a href="#tortoise_solution">Overview</a></li>
 		<li><a href="#tortoise_running">Running the Example</a></li>
-		<li><a href="#tortoise_details">Implementation</a></li>
+		<li><a href="#tortoise_grammar">Grammar</a></li>
+		<li><a href="#tortoise_inferrer">Translation to Java</a></li>
+		<li><a href="#tortoise_interpreter">Interpreter</a></li>
 		<li><a href="#tortoise_additons">Literal Classes</a></li>
 		<li><a href="#tortoise_beyond">Beyond This Example</a></li>
 	</ul>	</li>
@@ -570,15 +587,8 @@ public class Application {
 						</p>
 						</section>
 						<!--  section -->
-						<section id="scripting_details" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Implementation</h2>
-						<p>
-							All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
-							is what we will be describing in the following section.
-						</p>
-						<!-- subsection -->
 						<section id="scripting_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						<p>
 							To build language with Xtext, you first have to define a grammar. As opposed to other parser generators,
 							an Xtext grammar defines both, the lexical structure of the language and an object model (aka AST) that is build during parsing. 
@@ -623,9 +633,9 @@ QualifiedNameWithWildcard:
 							imports which is explained in the section about the <a href="#builddsl">build DSL</a>.
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="scripting_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
 							is defined in the so called <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a>. The language
@@ -693,7 +703,6 @@ for (arg : args)
 						<p>
 							As you can imagine, this is fairly powerful way to put things on the scope implicitly.
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="scripting_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -850,11 +859,8 @@ dbCollection.save(john.getDBObject())</pre>
 						</p>
 						</section>
 						<!--  section -->
-						<section id="mongo_details" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
 						<section id="mongo_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						<p>
 							The complete mongoBeans grammar looks like this:
 						</p>
@@ -911,9 +917,9 @@ QualifiedNameWithWildcard:
 							also define <strong>MongoOperations</strong>. The body of such an operation is an <strong>XBlockExpression</strong> from Xbase.
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="mongo_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							The JVM model inference is implemented in the <abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.xtend">(src)</a>.
 							As the generated code is quite rich, this is the most complex component of this language.
@@ -1196,9 +1202,9 @@ def protected addMethod(JvmDeclaredType inferredType,
 							That was a lot of code, but because it is the essence of this language we hope it has been worthwhile.
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="mongo_nameProvider" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Qualified Name Provider</h3>
+						<h2 style="padding-top: 15px;">Qualified Name Provider</h2>
 						<p>
 							By default, the qualified name of an element is calculated by concatening all the simple names of its 
 							containers with a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
@@ -1239,9 +1245,9 @@ public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider(
 							dependency injection.
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="mongo_validation" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Validation</h3>
+						<h2 style="padding-top: 15px;">Validation</h2>
 						<p>
 							The Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
 							we have added the <abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/validation/MongoBeansValidator.xtend">(src)</a>. It also checks for missing types 
@@ -1272,9 +1278,9 @@ class MongoBeansValidator extends XbaseJavaValidator {
 							<p>
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="mongo_visual" style="padding-top: 68px; margin-top: -68px;">
-						<h3>IDE Enhancements</h3>
+						<h2 style="padding-top: 15px;">IDE Enhancements</h2>
 						<p>
 							The validator from the previous section raises an error <code class="prettyprint lang-xtend">ILLEGAL_PROPERTY_NAME</code> when a property is named <strong>dbObject</strong>.
 							We have implemented a quick fix to replace the invalid name:
@@ -1343,7 +1349,6 @@ class MongoBeansLabelProvider extends XbaseLabelProvider {
   }</pre>
 							<p>
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="mongo_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -1460,11 +1465,8 @@ class MongoBeansLabelProvider extends XbaseLabelProvider {
 						</p>
 						</section>
 						<!--  section -->
-						<section id="routing_details" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
 						<section id="routing_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						<p>
 							The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 							predefined by <a href="http://www.eclipse.org/Xtext/#xbase">Xbase</a> plus support for Annotations.
@@ -1508,9 +1510,9 @@ Key:
 							compare XFeatureCall and RouteFeatureCall with each other.
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="routing_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							For each <strong>RouteFile</strong>, we create a Java class extending the class <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html"><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a>.
 							The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
@@ -1936,9 +1938,9 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							<p>
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="routing_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Additional Aspects</h3>
+						<h2 style="padding-top: 15px;">Additional Aspects</h2>
 						<p>
 							With the Grammar and the inferrer mentioned in the sections above the DSL is funtional and does excatly
 							what we want but there are several things we should customize to have a nice tool-support.
@@ -1968,7 +1970,6 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							in <abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/validation/RouteJavaValidator.xtend">(src)</a> where we raise an error when a placeholder
 							is defined after a wildcard in the URL.
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="routing_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -2017,14 +2018,6 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						<p>
 							Approx 2 pages upto here
 						</p>
-						<!-- subsection -->
-						<section id="templates_statistics" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Some Stats</h3>
-						<p>
-							files touched, LOC, animals harmed, etc 
-							can also be funny
-						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="templates_running" style="padding-top: 68px; margin-top: -68px;">
@@ -2036,21 +2029,21 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						<!--  section -->
 						<section id="templates_details" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
+						</section>
+						<!--  section -->
 						<section id="templates_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="templates_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="templates_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Additional Aspects</h3>
+						<h2 style="padding-top: 15px;">Additional Aspects</h2>
 						<p>
 							Addtionally customized things: validation, scoping, code completion ...
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="templates_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -2092,14 +2085,6 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						<p>
 							Approx 2 pages upto here
 						</p>
-						<!-- subsection -->
-						<section id="guice_statistics" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Some Stats</h3>
-						<p>
-							files touched, LOC, animals harmed, etc 
-							can also be funny
-						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="guice_running" style="padding-top: 68px; margin-top: -68px;">
@@ -2111,21 +2096,21 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						<!--  section -->
 						<section id="guice_details" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
+						</section>
+						<!--  section -->
 						<section id="guice_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="guice_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="guice_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Additional Aspects</h3>
+						<h2 style="padding-top: 15px;">Additional Aspects</h2>
 						<p>
 							Addtionally customized things: validation, scoping, code completion ...
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="guice_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -2167,14 +2152,6 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						<p>
 							Approx 2 pages upto here
 						</p>
-						<!-- subsection -->
-						<section id="builddsl_statistics" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Some Stats</h3>
-						<p>
-							files touched, LOC, animals harmed, etc 
-							can also be funny
-						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="builddsl_running" style="padding-top: 68px; margin-top: -68px;">
@@ -2184,23 +2161,19 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						</p>
 						</section>
 						<!--  section -->
-						<section id="builddsl_details" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
 						<section id="builddsl_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="builddsl_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="builddsl_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Additional Aspects</h3>
+						<h2 style="padding-top: 15px;">Additional Aspects</h2>
 						<p>
 							Addtionally customized things: validation, scoping, code completion ...
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="builddsl_beyond" style="padding-top: 68px; margin-top: -68px;">
@@ -2324,11 +2297,8 @@ class Tortoise {
 						</p>
 						</section>
 						<!--  section -->
-						<section id="tortoise_details" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Implementation</h2>
-						<!-- subsection -->
 						<section id="tortoise_grammar" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Grammar</h3>
+						<h2 style="padding-top: 15px;">Grammar</h2>
 						<p>
 							The grammar very short. Once again, we inherit from the Xbase language to have nice Java integration
 							and rich expressions. A user can define a <strong>Program</strong> which can have <strong>SubPrograms</strong> with parameters. The 
@@ -2365,9 +2335,9 @@ Executable:
 							<p>
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Translation to Java</h3>
+						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							With the tortoise commands defined as methods in the runtime library class 
 							<abbr title="org.xtext.tortoiseshell.lib.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend">(src)</a>, we have to infer a Java class that inherits from this. 
@@ -2406,9 +2376,9 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 						</p>
 						</section>
-						<!-- subsection -->
+						<!--  section -->
 						<section id="tortoise_interpreter" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Interpreter</h3>
+						<h2 style="padding-top: 15px;">Interpreter</h2>
 						<p>
 							The Xbase languge library does not only provide a compiler that generates Java code, but also an 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>. This has been adapted to
@@ -2503,7 +2473,6 @@ override protected internalEvaluate(XExpression expression,
 }</pre>
 							<p>
 						</p>
-						</section>
 						</section>
 						<!--  section -->
 						<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">

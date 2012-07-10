@@ -62,9 +62,7 @@ Import the projects into an Eclipse workspace and run the launch config
 e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
 org.eclipse.httprouting.example. You'll see that the Servlet-API ist already included in the example.
 
-section:routing_details[Implementation]
-
-section2:routing_grammar[Grammar]
+section:routing_grammar[Grammar]
 
 The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
@@ -102,7 +100,7 @@ method call on a type. The difference between RouteFeatureCall and XFeatureCall 
 does not allow a static method call.If you would like to see the difference on a grammar level please
 compare XFeatureCall and RouteFeatureCall with each other.
 
-section2:routing_inferrer[Translation to Java]
+section:routing_inferrer[Translation to Java]
 
 For each e[RouteFile], we create a Java class extending the class codeRef[javax.servlet.http.HttpServlet].
 The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
@@ -477,7 +475,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
    	}
 ]
 
-section2:routing_additons[Additional Aspects]
+section:routing_additons[Additional Aspects]
 
 With the Grammar and the inferrer mentioned in the sections above the DSL is funtional and does excatly
 what we want but there are several things we should customize to have a nice tool-support.

@@ -45,12 +45,7 @@ Then start a new Eclipse by choosing e[Run > Run Configurations... > Eclipse App
 Import the project e[org.xtext.scripting.examples] into your workspace using the e[Import existing projects
 into workspace] wizard.
 
-section:scripting_details[Implementation]
-
-All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
-is what we will be describing in the following section.
-
-section2:scripting_grammar[Grammar]
+section:scripting_grammar[Grammar]
 
 To build language with Xtext, you first have to define a grammar. As opposed to other parser generators,
 an Xtext grammar defines both, the lexical structure of the language and an object model (aka AST) that is build during parsing. 
@@ -89,7 +84,7 @@ define imports, all you need to do is name a feature code[importedNamespace] and
 as a namespace import. For JVM languages you might want to have additional functionality, like static
 imports which is explained in the section about the ref:builddsl[build DSL].
 
-section2:scripting_inferrer[Translation to Java]
+section:scripting_inferrer[Translation to Java]
 
 To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
 is defined in the so called codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer]. The language

@@ -82,9 +82,7 @@ in the e[Tortoise View] allows to execute the code live from the editor upto the
 
 img[images/Pythagoras.png][Tortoise takes a rest after running the Pythagoras example][][]
 
-section:tortoise_details[Implementation]
-
-section2:tortoise_grammar[Grammar]
+section:tortoise_grammar[Grammar]
 
 The grammar very short. Once again, we inherit from the Xbase language to have nice Java integration
 and rich expressions. A user can define a e[Program] which can have e[SubPrograms] with parameters. The 
@@ -118,7 +116,7 @@ Executable:
   Program | SubProgram;
 ]
 
-section2:tortoise_inferrer[Translation to Java]
+section:tortoise_inferrer[Translation to Java]
 
 With the tortoise commands defined as methods in the runtime library class 
 codeRef[org.xtext.tortoiseshell.lib.Tortoise], we have to infer a Java class that inherits from this. 
@@ -153,7 +151,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
   }
  }] 
 
-section2:tortoise_interpreter[Interpreter]
+section:tortoise_interpreter[Interpreter]
 
 The Xbase languge library does not only provide a compiler that generates Java code, but also an 
 codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter][interpreter]. This has been adapted to
