@@ -25,12 +25,17 @@ concepts.
 
 section2[Map to Java]
 
-Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that you use 
-a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces and so on depending 
-on a concrete instance of your language. This hook not only defines how your language is translated to Java, but also defines 
+Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
+For that you use a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces and so 
+on for your languages constructs. This hook not only defines how your language is translated to Java, but also defines 
 the scope of used expressions. The expressions from your language 'live' in the context you give them in this hook.
 If you for instance want an expression to have certain local variables on its scope, just put it into a method 
 with corresponding parameters or use instance fields if that works better.
+
+Also this hook makes your DSL constructs visible to other JVM languages. The Java type system is used as a common hub to 
+integrate arbitrary languages with each other. You can for instance call ref:template[templates] directly from a ref:scripting[Script]
+and vice versa. You don't even need to have the equivalent Java code being generated, everything is based on the Java types you
+create in the model inferrer.
 
 To better communicate the power and flexibility of these two abstractions, we've built seven example languages using on them.
 We've built:
