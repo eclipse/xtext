@@ -1,10 +1,10 @@
 chapter:template[Template Language]
 
-This is a template language specialized for generation of HTML documents.
+This is a little template language specialized in generating HTML documents.
 
 img[images/template_screenshot.png][][][]
 
-The language allows web designers to do their job and let's developers put in the dynamic parts. 
+The language allows web designers to do their job and lets developers put in the dynamic parts. 
 The syntax and terminals are chosen to be readable and allow rendering the templates in the browser as 
 well as in any HTML 5 compatible WYSIWYG editors. Still, when opened in the DSL editor you get the 
 fully featured, statically typed Eclipse editor.
@@ -17,10 +17,10 @@ To switch between text mode and expression mode, we use the French quotes code[«
 starts in text mode.
 
 The template will be compiled to a Java class with a code[generate(params)] method. You can provide 
-additional information like a package declaration, imports and parameters in the preamble inside an 
-HTML comment at the beginning of the document.
+additional information like a package declaration, imports and parameters in the preamble inside a 
+template at the beginning of the document.
 
-We provide a additional code[templates][FOR-ENDFOR] and code[templates][IF-ELSE-ENDIF] statements to
+We provide additional code[templates][FOR-ENDFOR] and code[templates][IF-ELSE-ENDIF] statements to
 iterate / branch over fixed text blocks. To distinguish them from the Xbase expressions with the same
 names, they are in uppercase.
 
@@ -38,9 +38,8 @@ code[Xtext][
 grammar org.xtext.template.Template 
     with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
-generate template 'http://www.itemis.de/xtl/XTL'
+generate template "http://www.xtext.org/template/Template"
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
-import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
 TemplateFile:
   '<!--''«' 
