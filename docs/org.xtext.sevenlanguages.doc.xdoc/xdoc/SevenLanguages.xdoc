@@ -33,7 +33,7 @@ codelanguage-def[Xtend][
 	case,enum,instanceof,return,
 	catch,extends,int,short,try,
 	char,final,static,void,
-	class,finally,long,
+	class,finally,long,null,
 	float,super,while,create,dispatch,extension,typeof,as,
 	val, var,
 	IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
@@ -89,6 +89,15 @@ codelanguage-def[builddsl][
 	this, it, int, boolean, short, char, double, float, 
 	long, byte, void, return,
 	package, import, param, task, depends 
+]
+
+codelanguage-def[templates][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import, param, FOR, ENDFOR, IF, ELSE, ENDIF 
 ]
 
 part-ref[general_overview]
