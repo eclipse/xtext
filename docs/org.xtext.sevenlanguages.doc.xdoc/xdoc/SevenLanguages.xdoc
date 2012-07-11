@@ -74,6 +74,15 @@ codelanguage-def[scripting][
 	long, byte, void, return
 ]
 
+codelanguage-def[builddsl][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import, param, task, depends 
+]
+
 part-ref[general_overview]
 
 part[The 7 Languages]

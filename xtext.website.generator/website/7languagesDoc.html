@@ -178,8 +178,10 @@
 		<li><a href="#builddsl_running">Running the Example</a></li>
 		<li><a href="#builddsl_grammar">Grammar</a></li>
 		<li><a href="#builddsl_inferrer">Translation to Java</a></li>
-		<li><a href="#builddsl_additons">Additional Aspects</a></li>
-		<li><a href="#builddsl_beyond">Beyond This Example</a></li>
+		<li><a href="#builddsl_validation">Validation</a></li>
+		<li><a href="#builddsl_imports">Static Imports</a></li>
+		<li><a href="#builddsl_library">Operator Overloading</a></li>
+		<li><a href="#builddsl_launch"><strong>Run as...</strong> Integration</a></li>
 	</ul>	</li>
 		<li><a href="#tortoise">Little Tortoise</a>
 	<ul>	<li><a href="#tortoise_solution">Overview</a></li>
@@ -2128,7 +2130,9 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
-							Some introductionary words
+							Build tools likle Ant or Gradle decompose the build process into a set of tasks. A task can stand for
+							a compilation, copying some files, bundling, running tests etc. The order of execution is calculated from 
+							the dependencies of the tasks define.
 						</p>
 						<p>
 							</p>
@@ -2138,46 +2142,393 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							<p>
 						</p>
 						<p>
-							Motivation
-							Why
+							This example show how to create a build DSL with Xtext. We leverage the full power of Xbase inside the
+							bodies of the tasks, and manage command line parameters as well as task dependencies.
 						</p>
 						<!--  section -->
 						<section id="builddsl_solution" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Overview</h2>
 						<p>
-							Why a DSL
-							How about expressions
-							DSL example, Java example, Client code example (if appropriate)
+							The above screenshot shows an examplary build script. A script has a couple of parameters. The 
+							tasks define dependencies to other tasks. What happens if the task is executed is defined in a block
+							within curly braces.
 						</p>
 						<p>
-							Approx 2 pages upto here
+							A build script can be run from the command line, assigning values to the parameters in the syntax
+							<code class="prettyprint lang-xtend">myscript --&lt;paramName&gt; &lt;value&gt;</code>.
+						</p>
+						<p>
+							We have put most functionality of the language in the runtime library: Detecting the order of execution,
+							parsing parameters, etc. The language itself concentrates on the structural parts, and leaves the actions
+							to Xbase. With this approach, it has proven beneficial to allow additional library methods to be added
+							via the extension method mechanism.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="builddsl_running" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Running the Example</h2>
 						<p>
-							Details on how to run it: Prerequisites, additional plugins...
+							In the runtime workspace, open the <strong>BuildExample.build</strong> in the editor. The example project comes with 
+							some sample java code to compile in the <strong>example-project</strong> folder. Choose <strong>Run as &gt; Build Task</strong> from the context
+							menu of any task to execute it.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="builddsl_grammar" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Grammar</h2>
+						<p>
+							The grammar of the DSL is once again quite slim:
+							 
+							</p>
+							<pre class="prettyprint lang-xtext linenums">
+grammar org.xtext.builddsl.BuildDSL with org.eclipse.xtext.xbase.Xbase
+
+generate build "http://www.xtext.org/builddsl"
+
+BuildFile:
+  ("package" name=QualifiedName)?
+  imports+=ImportDeclaration*
+  declarations+=Declaration*;
+
+ImportDeclaration:
+  'import' importedNamespace=QualifiedNameWithWildCard;
+
+QualifiedNameWithWildCard:
+  QualifiedName '.*'?;
+
+Declaration:
+  Task | Parameter;
+
+Parameter:
+  'param' type=JvmTypeReference? name=ValidID ('=' init=XExpression)?;
+
+Task:
+  'task' name=ValidID 
+  ('depends' depends+=[Task|ValidID] (',' depends+=[Task|ValidID])*)?
+  action=XBlockExpression;</pre>
+							<p>
+						</p>
+						<p>
+							First there is the usual package delaration and <strong>Import</strong> stuff. It is followed by the <strong>Declarations</strong>.
+							A <strong>Declaration</strong> can be a <strong>Task</strong> or a <strong>Parameter</strong>. A <strong>Parameter</strong> can declare a type and an initialization
+							expression. <strong>Tasks</strong> define dependencies on other tasks and an action, which is a 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> from Xbase, thus everthing is possible here.
+						</p>
 						</section>
 						<!--  section -->
 						<section id="builddsl_inferrer" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
-						</section>
-						<!--  section -->
-						<section id="builddsl_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Additional Aspects</h2>
 						<p>
-							Addtionally customized things: validation, scoping, code completion ...
+							For each <strong>BuildFile</strong> we create a Java class that extends the library class 
+							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">(src)</a>. We generate a main method allowing to execute the script as
+							a Java application with command line parameters. The use of <code class="prettyprint lang-java">Sytem.exit</code> allows to return error codes
+							to the caller.
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td>DSL</td>
+							<td></p>
+							<pre class="prettyprint lang-builddsl linenums">
+package sample</pre>
+							<p></td>
+							</tr>
+							<tr><td>Java</td>
+							<td></p>
+							<pre class="prettyprint lang-java linenums">
+package sample;
+...
+public class SimpleBuild extends BuildScript {
+...
+  public static void main(final String[] args) {
+    SimpleBuild script = new SimpleBuild();
+    if (script.showHelp(args)) {
+      System.exit(HELP);
+    }
+    System.exit(script.doBuild(args));
+  }
+...
+}</pre>
+							<p></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						<p>
+							The respective inferrer code looks like this:
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
+
+  @Inject extension JvmTypesBuilder
+  @Inject ITypeProvider typeProvider
+
+  def dispatch void infer(BuildFile file, 
+                          IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    val fqn = file.javaClassName
+    val scriptName = Strings::lastToken(fqn, ".")
+    acceptor.accept(file.toClass(fqn)).initializeLater [
+      superTypes += file.newTypeRef(typeof(BuildScript))
+...      
+      val stringArray = 
+          file.newTypeRef(typeof(String)).addArrayTypeDimension
+      members += file.toMethod("main", file.newTypeRef(Void::TYPE)) [
+        parameters += toParameter("args", stringArray)
+        setStatic(true)
+        body = [ append('''
+          &laquo;scriptName&raquo; script = new &laquo;scriptName&raquo;();
+          if (script.showHelp(args)) {
+            System.exit(HELP);
+          }
+          System.exit(script.doBuild(args));
+        ''') ]
+      ]
+    ]
+...</pre>
+							<p>
+						</p>
+						<p>
+							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.java">(src)</a> annotation
+							communicates the dependencies to the runtime. The superclass will scan for such annotations and execute
+							the dependencies in the right order.
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td>DSL</td>
+							<td></p>
+							<pre class="prettyprint lang-builddsl linenums">
+task print depends prepare {
+  print(name)
+}</pre>
+							<p></td>
+							</tr>
+							<tr><td>Java</td>
+							<td></p>
+							<pre class="prettyprint lang-java linenums">
+@DependsOn("prepare")
+protected void print() {
+  InputOutput.&lt;String&gt;print(this.name);
+}</pre>
+							<p></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						<p>
+							The annotation part may be interesting, so here is the snippet from the inferrer:
+							 
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+// a method for the actual task body
+members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void::TYPE)) [
+  visibility = JvmVisibility::PROTECTED
+  annotations += task.toAnnotation(typeof(DependsOn)) =&gt; [
+    values += eINSTANCE.createJvmStringAnnotationValue =&gt; [
+      values += task.depends.map[name]
+    ]
+  ]
+  body = task.action
+]]</pre>
+							<p>
+						</p>
+						<p>
+							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">(src)</a> annotation from each <strong>Parameter</strong>. 
+							The superclass will make the so marked fields initializable from command line arguments.
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td>DSL</td>
+							<td></p>
+							<pre class="prettyprint lang-builddsl linenums">
+param name = 'World'</pre>
+							<p></td>
+							</tr>
+							<tr><td>Java</td>
+							<td></p>
+							<pre class="prettyprint lang-java linenums">
+@Param
+public String name = "World";</pre>
+							<p></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						<p>
+							The type can be skipped. If there is an initialization expression, the parameter's type is inferred using
+							the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/typing/ITypeProvider.html"><abbr title="org.eclipse.xtext.xbase.typing.ITypeProvider">ITypeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/typing/ITypeProvider.java">(src)</a>. If nothing is specified, <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a> 
+							is assumed. In the inferrer, this looks like:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+@Inject ITypeProvider typeProvider
+...
+val type = declaredParameter.type 
+  ?: typeProvider.getType(declaredParameter.init)
+  ?: file.newTypeRef(typeof(String))</pre>
+							<p>
 						</p>
 						</section>
 						<!--  section -->
-						<section id="builddsl_beyond" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Beyond This Example</h2>
+						<section id="builddsl_validation" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Validation</h2>
+						<p>
+							When <strong>Tasks</strong> are depending on each other, cycles will break the computation of the execution order.
+							There is a check for this constraint in the validator <abbr title="org.xtext.builddsl.validation.BuildDSLValidator">BuildDSLValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/validation/BuildDSLValidator.xtend">(src)</a>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class BuildDSLValidator extends XbaseJavaValidator {
+...
+  @Check
+  def void checkNoRecursiveDependencies(Task task) {
+    task.findDependentTasks [ cycle |
+      if (cycle.size == 1) {
+        error('''The task '&laquo;task.name&raquo;' cannot depend on itself.''', 
+            cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      } else {
+        error('''There is a cyclic dependency that involves tasks &laquo;
+                cycle.map[name].join(", ")&raquo;''', 
+              cycle.head, DECLARATION__NAME, CYCLIC_DEPENDENCY)
+      }
+    ]
+  }
+...</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="builddsl_imports" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Static Imports</h2>
+						<p>
+							It is very likely that users want to add their own functionality, e.g. to format a file. To facilitate
+							that, all imports in the build DSL are automatically static extension imports, too. That means, the static
+							methods of an imported type are callable in <a href="#xtend_extension">extension syntax</a>. This is accomplished
+							by binding our own <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/scoping/featurecalls/StaticImplicitMethodsFeatureForTypeProvider.html"><abbr title="org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider">StaticImplicitMethodsFeatureForTypeProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/scoping/featurecalls/StaticImplicitMethodsFeatureForTypeProvider.java">(src)</a>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class AllImportsAreStaticFeatureProvider 
+    extends StaticImplicitMethodsFeatureForTypeProvider {
+
+  override getVisibleTypesContainingStaticMethods(
+      Iterable&lt;JvmTypeReference&gt; hierarchy) {
+    val buildFile = context.contents.get(0) as BuildFile
+    val importedTypes = &lt;String&gt;newArrayList
+    for (importDeclaration : buildFile.imports) {
+      val importedTypeOrPackage = importDeclaration.importedNamespace
+      if (!importedTypeOrPackage.endsWith(".*")) {
+        importedTypes += importedTypeOrPackage
+      }
+    }
+    val result = Maps::newLinkedHashMap(
+      super.getVisibleTypesContainingStaticMethods(hierarchy))
+    for (entry : result.entrySet) {
+      val copy = Sets::newLinkedHashSet(entry.getValue)
+      copy += importedTypes
+      entry.value = copy
+    }
+    return result
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							We also ship some predefined extension classes to enhance the Java classes <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/File.html"><abbr title="java.io.File">File</abbr></a>, <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a>
+							and <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Class.html"><abbr title="java.lang.Class">Class</abbr></a>. These are bound in a customized 
+							<abbr title="org.xtext.builddsl.scoping.BuildDSLExtensionClassNameProvider">BuildDSLExtensionClassNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLExtensionClassNameProvider.xtend">(src)</a>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class BuildDSLExtensionClassNameProvider extends ExtensionClassNameProvider {
+  override simpleComputeExtensionClasses() {
+    super.simpleComputeExtensionClasses =&gt; [
+      put(typeof(File), typeof(FileExtensions))
+      put(typeof(String), typeof(FileExtensions))
+      put(typeof(Class), typeof(ClassExtensions))
+    ]
+  }
+}</pre>
+							<p>
+						</p>
+						<p>
+							As always, the new implementations has to be bound in the <abbr title="org.xtext.builddsl.BuildDSLRuntimeModule">BuildDSLRuntimeModule</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/BuildDSLRuntimeModule.java">(src)</a>:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-java linenums">
+public class BuildDSLRuntimeModule 
+    extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
+...
+  public Class&lt;? extends ExtensionClassNameProvider&gt; 
+      bindExtensionClassNameProvider() {
+    return BuildDSLExtensionClassNameProvider.class;
+  }
+  
+  public Class&lt;? extends StaticImplicitMethodsFeatureForTypeProvider&gt; 
+      bindStaticImplicitMethodsFeatureForTypeProvider() {
+    return AllImportsAreStaticFeatureProvider.class;
+  }
+...</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="builddsl_library" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Operator Overloading</h2>
+						<p>
+							As we expect a build language to deal with files and directories a lot, we have extended the syntax 
+							around these in the <abbr title="org.xtext.builddsl.lib.FileExtensions">FileExtensions</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.xtend">(src)</a>. We leverage the fact that Xbase 
+							allows to overload operators by means of library extensions. The following examples show how to avoid 
+							the noisy constructor calls to <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/File.html"><abbr title="java.io.File">File</abbr></a>:
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td>DSL</td>
+							<td></p>
+							<pre class="prettyprint lang-builddsl linenums">
+val dir = 'someDir'.file
+val file = dir / 'fileName.txt'
+val theSameFile = 'someDir' / 'fileName.txt'</pre>
+							<p></td>
+							</tr>
+							<tr><td>Java</td>
+							<td></p>
+							<pre class="prettyprint lang-java linenums">
+final File dir = FileExtensions.file("someDir");
+final File file = FileExtensions.operator_divide(dir, "fileName.txt");
+final File theSameFile = FileExtensions.operator_divide("someDir", 
+                                                        "fileName.txt");</pre>
+							<p></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						<p>
+							The compiler replaces operators with method calls to methods named <code class="prettyprint lang-xtend">operator_&lt;operatorName&gt;()</code>.
+							These have to be callable on the left operand, i.e. be a method of the left operands type or be added
+							as an extension to the left operand type. In this case, we use the latter approach, as <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/File.html"><abbr title="java.io.File">File</abbr></a>
+							as well as <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a> are sealed types. To learn more about operators and overloading
+							them please consult the <a href="documentation.html#Xbase_Expressions_Operators">Xtext documentation</a>.
+						</p>
+						</section>
+						<!--  section -->
+						<section id="builddsl_launch" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;"><strong>Run as...</strong> Integration</h2>
+						<p>
+							To facilitate executing build scripts from wihtin Java, we have extended Eclipse's launch support. The
+							respective classes are <abbr title="org.xtext.builddsl.ui.launch.BuildDSLLaunchDelegate">BuildDSLLaunchDelegate</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">(src)</a>,
+							<abbr title="org.xtext.builddsl.ui.launch.BuildDSLLaunchShortcut">BuildDSLLaunchShortcut</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">(src)</a> and 
+							<abbr title="org.xtext.builddsl.ui.launch.BuildDSLLaunchTabGroup">BuildDSLLaunchTabGroup</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">(src)</a>. Describing all the details would be a bit
+							lengthy but it is uite straight-forward if you are familiar with the launching API.
+						</p>
 						</section>
 					</div>
 				</div>
@@ -2584,6 +2935,7 @@ class TortoiseShellExtensionClassNameProvider extends
 		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return|sub|begin|end', 'tortoise');
 		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return|GET|POST|PUT|DELETE|HEAD|import|when', 'routing');
 		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'scripting');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return|package|import|param|task|depends', 'builddsl');
 	</script>
 </body>
 </html>

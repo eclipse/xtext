@@ -1261,7 +1261,7 @@ public void checkNameStartsWithCapital(Entity entity) {
 							<p>
 						</p>
 						<p>
-							Any name for the method will do. The important thing is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/Check.html"><abbr title="org.eclipse.xtext.validation.Check">Check</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">(src)</a>
+							Any name for the method will do. The important thing is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/Check.html"><abbr title="org.eclipse.xtext.validation.Check">@Check</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">(src)</a>
 							annotation that advises the framework to use the method as a validation rule. If the name starts with
 							a lower case letter, a warning will be attached to the name of the <strong>Entity</strong>.
 						</p>
@@ -3952,7 +3952,7 @@ Workflow {
 						</p>
 						<p>
 							For instance when some code wants to use a scope provider, it just declares a field (or method or 
-							constructor) and adds the <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html"><abbr title="com.google.inject.Inject">Inject</abbr></a> annotation:
+							constructor) and adds the <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html"><abbr title="com.google.inject.Inject">@Inject</abbr></a> annotation:
 						</p>
 						<p>
 							</p>
@@ -4402,7 +4402,7 @@ fragment =
 							The purpose of the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator">AbstractDeclarativeValidator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">(src)</a> is to allow you to 
 							write constraints in a declarative way - as the class name already suggests. That is instead of writing 
 							exhaustive if-else constructs or extending the generated EMF switch you just have to add the 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/Check.html"><abbr title="org.eclipse.xtext.validation.Check">Check</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">(src)</a> annotation to any method and it will be invoked automatically
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/Check.html"><abbr title="org.eclipse.xtext.validation.Check">@Check</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">(src)</a> annotation to any method and it will be invoked automatically
 							when validation takes place. Moreover you can state for what type the respective constraint method is, just 
 							by declaring a typed parameter. This also lets you avoid any type casts. In addition to the reflective 
 							invocation of validation methods the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator">AbstractDeclarativeValidator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">(src)</a> 
@@ -6483,7 +6483,7 @@ public void fixName(final Issue issue,
 						</p>
 						<p>
 							By using the correct signature (see below) and annotating the method with the 
-							@<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/quickfix/Fix.html"><abbr title="org.eclipse.xtext.ui.editor.quickfix.Fix">Fix</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java">(src)</a> annotation referencing the previously specified 
+							@<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/quickfix/Fix.html"><abbr title="org.eclipse.xtext.ui.editor.quickfix.Fix">@Fix</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java">(src)</a> annotation referencing the previously specified 
 							issue code from the validator, Xtext knows that this method implements a fix for the problem. This 
 							also allows us to annotate multiple methods as fixes for the same problem.
 						</p>
@@ -9872,8 +9872,8 @@ var newMandatory
 						<p>
 							It is not only possible to define mandatory properties for MWE2 
 							modules but for classes as well. Therefore MWE2 ships with the 
-							<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a> annotation. If a <code class="prettyprint lang-java">set</code>- or <code class="prettyprint lang-java">add</code>-method is marked as
-							<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a>, the module validation will fail if no value was assigned
+							<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">@Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a> annotation. If a <code class="prettyprint lang-java">set</code>- or <code class="prettyprint lang-java">add</code>-method is marked as
+							<a href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory">@Mandatory</abbr></a> <a href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">(src)</a>, the module validation will fail if no value was assigned
 							to that feature.
 						</p>
 						</section>
