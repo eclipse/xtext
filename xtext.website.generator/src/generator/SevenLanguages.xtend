@@ -23,8 +23,8 @@ class SevenLanguages extends AbstractWebsite {
 							Java type references and annotations anywhere in your language.
 						</p>
 						<p style="margin: 5pt;">
-							Learn how this new API by example and have a look at the 7 different languages we've built
-							with it (in less than 7 weeks).
+							<a href="7languagesDoc.html">Learn this new API by example and have a look at the 7 different languages we've built
+							with it (in less than 7 weeks).</a>
 						</p>
 					</div>
 					«language('Scripting Language','7languagesDoc.html#scripting','images/red-glossy-scripting.png','''

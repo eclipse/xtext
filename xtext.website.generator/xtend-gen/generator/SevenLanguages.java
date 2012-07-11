@@ -56,10 +56,10 @@ public class SevenLanguages extends AbstractWebsite {
     _builder.append("<p style=\"margin: 5pt;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("Learn how this new API by example and have a look at the 7 different languages we\'ve built");
+    _builder.append("<a href=\"7languagesDoc.html\">Learn this new API by example and have a look at the 7 different languages we\'ve built");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("with it (in less than 7 weeks).");
+    _builder.append("with it (in less than 7 weeks).</a>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</p>");

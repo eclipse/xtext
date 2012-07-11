@@ -10,20 +10,16 @@ therefore costly to implement.
 This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
 annotations and full-featured expressions anywhere in your languages. You not only reuse the grammar but the full implementation 
 including a compiler, interpreter, the whole type system and a tight IDE integration. And the best part is, that it is 
-relatively easy to do so.
+relatively easy to do so. It is actually just two steps:
 
-section[It's just two steps]
-
-To get a fully working and compiling language you only need to do two things.
-
-section2[Write the grammar]
+section[Write the grammar]
 
 Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
-languages is, that you inherit from an abstract grammar (org.eclipse.xtext.xbase.XbaseWithAnnotations) which predefine the syntax
-for the reusable parts. You do not need to use them all or actually any of them and you can of course chnge the syntax or add new
-concepts.
+languages is, that you inherit from an abstract grammar (org.eclipse.xtext.xbase.Xbase) which predefines the syntax
+for the reusable parts. You do not need to use them all or actually any of them and you can of course change the syntax 
+or add new concepts as it seems fit.
 
-section2[Map to Java]
+section[Map to Java]
 
 Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
 For that you use a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces etc.
@@ -56,6 +52,12 @@ Yet the languages are flexible and come with powerful core abstractions.
 We also covered different technical aspects of customization to the language infrastructure. Some langauges
 have special import logic, others have special syntax coloring, outline views or content assist.
 The new API for JVM languages does not mean that anything is hidden away and not customizable.
+
+section:provisional_API[CAUTION: This is Provisional API]
+
+e[Please be aware that most of new API covered in this document is not yet finalized and will
+be improved in incompatible ways in future releases. The projects in these examples are configured 
+to supress the corresponding API warnings (to see any interesting warnings).]
 
 chapter:common_requirements[Common Requirements]
 
