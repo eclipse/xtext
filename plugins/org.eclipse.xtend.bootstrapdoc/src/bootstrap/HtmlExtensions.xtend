@@ -29,6 +29,7 @@ import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
 import static bootstrap.ParagraphState.*
+import org.eclipse.xtext.common.types.JvmAnnotationType
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
@@ -161,7 +162,11 @@ class HtmlExtensions {
 		IF altText != null
 			»«altText.toHtml(state)»«
 		ELSE
-			»<abbr title="«element?.identifier»">«element?.simpleName?.trim»</abbr>«
+			»<abbr title="«element?.identifier»">«
+			IF element instanceof JvmAnnotationType
+				»@«
+			ENDIF
+			»«element?.simpleName?.trim»</abbr>«
 		ENDIF»«
 		IF javaDocURI != null 
 			»</a>«
