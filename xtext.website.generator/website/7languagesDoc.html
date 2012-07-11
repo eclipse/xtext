@@ -210,6 +210,7 @@
 							easy with Xtext. But structure alone is not sufficient in many cases. When it comes to the behavioral parts users 
 							often fall back to implementing them in Java, because expressions and statements are hard to get right and extremely complex and 
 							therefore costly to implement.
+<<<<<<< HEAD
 						</p>
 						<p>
 							This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
@@ -249,10 +250,56 @@
 							integrate arbitrary languages with each other. You can for instance call <a href="#template">templates</a> directly from a <a href="#scripting">script</a>
 							and vice versa. You do not even need to generate the equivalent Java code, everything is based on the Java types you
 							create in the model inferrer.
+=======
 						</p>
 						<p>
+							This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
+							annotations and full-featured expressions anywhere in your languages. You not only reuse the grammar but the full implementation 
+							including a compiler, interpreter, the whole type system and a tight IDE integration. And the best part is, that it's 
+							relatively easy to do so.
+>>>>>>> [website] regenerated seven langs
+						</p>
+						<!--  section -->
+						<section id="_0" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">It's just two steps</h2>
+						<p>
+<<<<<<< HEAD
 							To better communicate the power and flexibility of these two abstractions, we have built seven example languages using on them.
 							We have built:
+=======
+							To get a fully working and compiling language you only need to do two things.
+						</p>
+						<!-- subsection -->
+						<section id="_1" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Write the grammar</h3>
+						<p>
+							Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
+							languages is, that you inherit from an abstract grammar (org.eclipse.xtext.xbase.XbaseWithAnnotations) which predefine the syntax
+							for the reusable parts. You don't need to use them all or actually any of them and you can of course chnge the syntax or add new
+							concepts.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_2" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Map to Java</h3>
+						<p>
+							Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
+							For that you use a special API, called the JvmModelInferrer, where you can create any number of Java classes, interfaces and so 
+							on for your languages constructs. This hook not only defines how your language is translated to Java, but also defines 
+							the scope of used expressions. The expressions from your language 'live' in the context you give them in this hook.
+							If you for instance want an expression to have certain local variables on its scope, just put it into a method 
+							with corresponding parameters or use instance fields if that works better.
+						</p>
+						<p>
+							Also this hook makes your DSL constructs visible to other JVM languages. The Java type system is used as a common hub to 
+							integrate arbitrary languages with each other. You can for instance call <a href="#template">templates</a> directly from a <a href="#scripting">Script</a>
+							and vice versa. You don't even need to have the equivalent Java code being generated, everything is based on the Java types you
+							create in the model inferrer.
+						</p>
+						<p>
+							To better communicate the power and flexibility of these two abstractions, we've built seven example languages using on them.
+							We've built:
+>>>>>>> [website] regenerated seven langs
 						</p>
 						<p>
 							</p>
@@ -269,11 +316,19 @@
 						</p>
 						<p>
 							Each language still is very simple and focuses on the value a DSL can add to the respective 
+<<<<<<< HEAD
 							scenario. It is meant to give you an idea of what is possible without being a full practical solution.
 							Yet the languages are flexible and come with powerful core abstractions.
 							We also covered different technical aspects of customization to the language infrastructure. Some langauges
 							have special import logic, others have special syntax coloring, outline views or content assist.
 							The new API for JVM languages does not mean that anything is hidden away and not customizable.
+=======
+							scenario. It's meant to give you an idea of what's possible without being a full practical solution.
+							Yet the languages are flexible and come with powerful core abstractions.
+							We also covered different technical aspects of customization to the language infrastructure. Some langauges
+							have special import logic, others have special syntax coloring, outline views or content assist.
+							The new API for JVM languages doesn't mean that anything is hidden away and not customizable.
+>>>>>>> [website] regenerated seven langs
 						</p>
 						</section>
 						</section>
@@ -289,7 +344,11 @@
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
+<<<<<<< HEAD
 							To run any of the examples, you will need <a href="http://www.eclipse.org/downloads">Eclipse 4.2 or higher</a>
+=======
+							To run any of the examples, you will need <a href="http://www.eclipse.org/download">Eclipse 4.2 or higher</a>
+>>>>>>> [website] regenerated seven langs
 							for your platform. In addition, you have to install <a href="http://www.xtend-lang.org/download.html">Xtend</a>
 							and of course <a href="http://www.xtext.org/download.html">Xtext 2.3</a>.
 						</p>
@@ -350,7 +409,11 @@
 							Any general code in the examples is implemented in <a href="http://www.xtend-lang.org">Xtend</a>. Xtend is 
 							a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and 
 							compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages.
+<<<<<<< HEAD
 							In fact it is built with the same API you will learn through in this document, so this should also give you a taste of 
+=======
+							In fact it's built with the same API you'll learn through in this document, so this should also give you a taste of 
+>>>>>>> [website] regenerated seven langs
 							how powerful JVM-languages built with Xtext can actually be.
 						</p>
 						<p>
@@ -513,6 +576,39 @@ list.sortBy[ length ]
 '''</pre>
 							<p>
 						</p>
+						<p>
+							<a name="xtend_templates"></a>
+							
+							Also noteworthy is the template expression, which allows to do interpolated multi-line string literals.
+							In addition the template expressions has intelligent whitespace handling and supports a special FOR and IF construct, 
+							which is far better readable in this context.
+						</p>
+						<p>
+							We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here's
+							an example from the <a href="#httpRouting"></a> language:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+'''
+	String url =  request.getRequestURL().toString();
+	&laquo;FOR route : routes&raquo;
+		{
+			java.util.regex.Matcher _matcher = _pattern&laquo;route.index&raquo;.matcher(url);
+			if (_matcher.find()) {
+				&laquo;FOR variable : route.url.variables&raquo;
+						String &laquo;variable.name&raquo; = _matcher.group(&laquo;variable.index + 1&raquo;);
+				&laquo;ENDFOR&raquo;
+				&laquo;IF route.condition != null&raquo;
+					if (&laquo;route.nameOfRouteMethod&raquo;Condition(request, response&laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", "&raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;))
+				&laquo;ENDIF&raquo;
+				&laquo;route.nameOfRouteMethod&raquo;(request, response&laquo;FOR v : route.url.variables&raquo;, &laquo;v.name&raquo;&laquo;ENDFOR&raquo;);
+			}
+		}
+	&laquo;ENDFOR&raquo;
+'''</pre>
+							<p>
+						</p>
 					</div>
 				</div>
 			</section>
@@ -539,6 +635,7 @@ list.sortBy[ length ]
 						<section id="scripting_solution" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Overview</h2>
 						<p>
+<<<<<<< HEAD
 							As you can see the language is straight forward: All you can do is write expressions and imports in any order.
 							The expressions you see are the same available in Xtend and they are defined in its own grammar (called Xbase).
 							They are syntactically very close to Java, but feature a lot of modern concepts, like lambda expressions
@@ -546,6 +643,37 @@ list.sortBy[ length ]
 							like in Java, but the expressions are still statically-typed. 
 							For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively 
 							covered in the <a href="http://www.xtext.org/documentation">Xtext documentation</a>.
+						</p>
+						<p>
+							A script is compiled to a Java class with one main method. That is the script
+=======
+							As you can see the language is straight forward: All you can do is write expressions and imports.
+							Here's another example:
+>>>>>>> [website] regenerated seven langs
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-scripting linenums">
+<<<<<<< HEAD
+println('Hello World!')</pre>
+							<p>
+						</p>
+						<p>
+=======
+// some expressions making up the application's body
+val names = newArrayList('Dennis', 'Holger', 'Jan', 'Moritz', 'Sebastian', 'Sven')
+for(name: names) {
+  println('Hello ' + name + '!')
+}</pre>
+							<p>
+						</p>
+						<p>
+							The expressions you see are the same available in Xtend and they are defined in its own grammar (called Xbase).
+							They are syntactically very close to Java, but feature a lot of modern concepts, like lambda expressions
+							and operator overloading. They support local type inference so you don't have to write types everyhwere
+							like in Java, but the expressions are still statically-typed. 
+							For a Java developer, the code should be self-explanatory. The Xbase expression language is more exhaustively covered in the 
+							<a href="http://www.xtext.org/documentation">Xtext documentation</a>.
 						</p>
 						<p>
 							A script is compiled to a Java class with one main method. That is the script
@@ -557,6 +685,7 @@ println('Hello World!')</pre>
 							<p>
 						</p>
 						<p>
+>>>>>>> [website] regenerated seven langs
 							gets compiled to the following Java source code
 						</p>
 						<p>
@@ -589,6 +718,16 @@ public class Application {
 						</p>
 						</section>
 						<!--  section -->
+<<<<<<< HEAD
+=======
+						<section id="scripting_details" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Implementation</h2>
+						<p>
+							All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
+							is what we will be describing in the following section.
+						</p>
+						<!-- subsection -->
+>>>>>>> [website] regenerated seven langs
 						<section id="scripting_grammar" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Grammar</h2>
 						<p>
@@ -611,6 +750,7 @@ generate scripting "http://www.xtext.org/scripting/Scripting"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 Script returns XBlockExpression:
+<<<<<<< HEAD
   {Script} 
   // return an object of type Script which is a subtype of XBlockExpression
   ((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
@@ -620,19 +760,37 @@ Import:
 
 QualifiedNameWithWildcard:
   QualifiedName '.*'?;</pre>
+=======
+	{Script} // return an object of type Script which is a subtype of XBlockExpression
+	((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
+
+Import:
+	'import' importedNamespace=QualifiedNameWithWildcard;
+
+QualifiedNameWithWildcard:
+	QualifiedName '.*'?;</pre>
+>>>>>>> [website] regenerated seven langs
 							<p>
 						</p>
 						<p>
 							The main rule <strong>Script</strong> is defined to produce an object of type <code class="prettyprint lang-xtend">Script</code> which is a subtype of <code class="prettyprint lang-xtend">XBlockExpression</code>. 
 							A block expression simply consists of any number of expressions. The rule <code class="prettyprint lang-xtend">XExpressionInsideBlock</code> is defined in the
+<<<<<<< HEAD
 							super grammar. Usually block expressions are surrounded by curly braces, but of course we do not
+=======
+							super grammar. Usually block expressions are surrounded by curly braces, but of course we don't
+>>>>>>> [website] regenerated seven langs
 							want to force anybody to write curly braces at the beginning and the end of a simple script.
 						</p>
 						<p>
 							In addition to expressions you can have any number of imports. Xtext has a very simple way to let you
 							define imports, all you need to do is name a feature <code class="prettyprint lang-xtend">importedNamespace</code> and it will be interpreted
 							as a namespace import. For JVM languages you might want to have additional functionality, like static
+<<<<<<< HEAD
 							imports which is explained in the section about the <a href="#builddsl">build DSL</a>.
+=======
+							imports which is explained in the section about the <a href="#builddsl"></a> language.
+>>>>>>> [website] regenerated seven langs
 						</p>
 						</section>
 						<!--  section -->
@@ -655,6 +813,7 @@ QualifiedNameWithWildcard:
 						</p>
 						<p>
 							The JVM model inferrer code for the scripting language looks like this:
+<<<<<<< HEAD
 						</p>
 						<p>
 							</p>
@@ -700,6 +859,50 @@ class ScriptingJvmModelInferrer extends AbstractModelInferrer {
 							<pre class="prettyprint lang-scripting linenums">
 for (arg : args)
   println('-- '+arg)</pre>
+=======
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class ScriptingJvmModelInferrer extends AbstractModelInferrer {
+	
+   	@Inject extension JvmTypesBuilder
+
+   	def dispatch void infer(Script script, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+   		val className = script.eResource.URI.trimFileExtension.lastSegment
+   		acceptor.accept(script.toClass(className)).initializeLater [
+   			// the class gets one main method
+   			members += script.toMethod('main', script.newTypeRef('void')) [
+   				parameters += script.toParameter("args", script.newTypeRef('java.lang.String')).addArrayTypeDimension)
+   				setStatic(true)
+   				// Associate the script as the body of the main method
+   				body = script
+   			]
+   		]
+  	}
+}</pre>
+							<p>
+						</p>
+						<p>
+							It maps each script to one Java class with a main method. Note the use of <code class="prettyprint lang-xtend">script</code> as a receiver
+							for all the factory methods. When creating a Java element, you need to pass a context so Xtext knows
+							what the origin of a Java element is. This is used throughout the workbench for featurs like find references,
+							call hierarchies, rename refactoring and more.
+						</p>
+						<p>
+							As the whole script is an expression it is associated with the body of the main method. That association is important 
+							since it defines the scope of the expression, which includes what variables, fields and methods are visible and what type is expected.
+						</p>
+						<p>
+							In this case <code class="prettyprint lang-xtend">void</code> is expected, so you would get an error when using a return expression. Also the
+							parameter <code class="prettyprint lang-xtend">args</code> defined in the main method is now on the scope. So you could write the following script:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-scripting linenums">
+for (arg : args)
+	println('-- '+arg)</pre>
+>>>>>>> [website] regenerated seven langs
 							<p>
 						</p>
 						<p>
