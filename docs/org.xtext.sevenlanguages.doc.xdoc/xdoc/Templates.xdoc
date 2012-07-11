@@ -1,13 +1,13 @@
 chapter:template[Template Language]
 
-A template language allows to fill pieces of text resulting from some computation into a document at fixed
-locations. Popular dedicated template languages are Veloctiy, JSP, Xpand or MTL. 
+This is a template language specialized for generation of HTML documents.
 
 img[images/template_screenshot.png][][][]
 
-This example is a language for HTML templates. It borrows a lot from Xtend, so it will help you learn 
-the mechanisms we used to implement link[http://www.xtend-lang.org/documentation.html#templates][template 
-support in Xtend]. 
+The language allows web designers to do their job and let's developers put in the dynamic parts. 
+The syntax and terminals are chosen to be readable and allow to render the templates in the browser as 
+well as in any HTML 5 compatible WYSIWYG editors. Still, when opened in the DSL editor you get the 
+fully-featured statically-typed Eclipse editor.
 
 section:templates_solution[Overview]
 
