@@ -1,13 +1,14 @@
 chapter:builddsl[Build Language]
 
-Build tools likle Ant or Gradle decompose the build process into a set of tasks. A task can stand for
-a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from 
+Build tools like Ant or link[http://www.gradle.org/][Gradle] decompose the build process into a set of tasks. A task can 
+stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from 
 the dependencies of the defined tasks.
 
 img[images/builddsl_screenshot.png][][][]
 
-This example shows how to create a build DSL with Xtext. We leverage the full power of Xbase inside the
-bodies of the tasks, and manage command line parameters as well as task dependencies.  
+This build language is a fully-statically typed language which combines the declarative approach of defining tasks
+and dependencies with the full power of a modern expression language. It is a bit similar to Gradle but statically typed 
+and with very good IDE support.  
 
 section:builddsl_solution[Overview]
 
