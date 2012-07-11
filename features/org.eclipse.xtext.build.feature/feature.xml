@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.build"
       label="Xtext Update Site"
-      version="2.3.0.qualifier"
+      version="2.4.0.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg">
 
@@ -66,13 +66,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="com.google.inject.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.lib"
          download-size="0"
          install-size="0"
          version="0.0.0"

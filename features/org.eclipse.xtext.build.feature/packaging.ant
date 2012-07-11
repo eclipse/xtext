@@ -135,7 +135,7 @@
 		  install location as secondary bundle pools so that only the desired components are installed
 		  in the install destination directory
 		-->
-		<java jar="${launcher.jar}" fork="true" failonerror="true">
+		<java jar="${launcher.jar}" fork="true" resultproperty="director.result" outputproperty="director.output">
 			<arg value="-consolelog" />
 			<arg value="-application" />
 			<arg value="org.eclipse.equinox.p2.director" />
@@ -158,13 +158,27 @@
 			<arg value="-p2.arch" />
 			<arg value="${wildcard}" />
 		</java>
-
+		
+		<condition property="director.failed">
+			<not>
+				<equals arg1="${director.result}" arg2="0"/>
+			</not>
+		</condition>
+		<echo>${director.failed}</echo>
+		<!--antcall target="-check.director.result" inheritall="true"/>-->
+		
+		
 		<!-- remove the p2 metadata, so that the installation of target platform IUs is not confused -->
 		<delete dir="${install.destination}" includeEmptyDirs="true">
 			<include name="p2/**" />
 		</delete>
 	</target>
-
+	
+	<target name="-check.director.result" if="director.failed">
+		<echo>${director.output}</echo>
+		<fail message="p2 Director execution failed."/>
+	</target>
+	
 	<target name="-install.ius" depends="-install.content.ius" if="target.platform.ius">
 		<!--
 		  install the specified TP IUs

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="managed by buckminster" id="927989779">
+        <filter comment="Inner dependency - ignore because self managed" id="927989779">
             <message_arguments>
-                <message_argument value="2.3.0"/>
+                <message_argument value="2.4.0"/>
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
