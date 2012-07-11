@@ -1,16 +1,17 @@
-chapter:routing[Http Routing]
-
-section:routing_motivation[The Problem]
+chapter:httpRouting[Http Routing Language]
 
 There are several different frameworks out there like link[https://github.com/playframework/Play20/wiki/ScalaRouting][Play]
 to support HttpRoutes.
+
+img[images/httprouting_screenshot.png][][][]
+
 Normally they are defined in a special format in a separated central file. In most of the cases there is no tooling except a normal text/XML editor. 
 The only way to decide which route matches is the URL with different wildcards and placeholders. 
 The order of the routes defined in the file is important to decide which matches first. There is no support to access parts of the URL while the mapping is done.
 In most of the cases you might want to have full control via expressions to decide which action should be called. 
 Normally concrete classes are used directly in the route definition to point to an action that should be triggered. That's not really reusable in different scenarios and dependency injection is what you would really like to use.
 
-section:routing_solution[A Solution With Xtext]
+section:routing_solution[Overview]
 
 In this project, we have created a small DSL base on link[http://www.xtext.org][Xtext] that allows to create routing with full support of expressions and access to the URL while the routing is done.
 The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and link[http://code.google.com/p/google-guice][Guice] bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
@@ -61,9 +62,7 @@ Import the projects into an Eclipse workspace and run the launch config
 e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
 org.eclipse.httprouting.example. You'll see that the Servlet-API ist already included in the example.
 
-section:routing_details[The Solution in Detail]
-
-section2:routing_grammar[Grammar]
+section:routing_grammar[Grammar]
 
 The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
@@ -101,7 +100,7 @@ method call on a type. The difference between RouteFeatureCall and XFeatureCall 
 does not allow a static method call.If you would like to see the difference on a grammar level please
 compare XFeatureCall and RouteFeatureCall with each other.
 
-section2:routing_inferrer[Translation to Java]
+section:routing_inferrer[Translation to Java]
 
 For each e[RouteFile], we create a Java class extending the class codeRef[javax.servlet.http.HttpServlet].
 The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
@@ -476,7 +475,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
    	}
 ]
 
-section2:routing_additons[Additional Aspects]
+section:routing_additons[Additional Aspects]
 
 With the Grammar and the inferrer mentioned in the sections above the DSL is funtional and does excatly
 what we want but there are several things we should customize to have a nice tool-support.
@@ -501,10 +500,3 @@ To give the user feedback while the routes are defined we can establish validati
 in codeRef[org.xtext.httprouting.validation.RouteJavaValidator] where we raise an error when a placeholder
 is defined after a wildcard in the URL.
 
-section:routing_beyond[Beyond This Example]
-
-Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
-should not be a hard thing to extend this example. To enable DI in the context of a codeRef[javax.servlet.http.HttpServlet]
-there has to be a wrapper or something like that to create an injector. One really cool thing would be
-to establish and codeRef[org.eclipse.xtext.xbase.XExpression] that handles the complete guice-key and action call stuff with a corresponding
-compiler but this is fare beyond the scope of this example. ;-)

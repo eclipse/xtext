@@ -319,7 +319,7 @@ public abstract class AbstractWebsite implements Resource {
   }
   
   public String analyticsAccount() {
-    return "UA-2429174-4";
+    return "UA-2429174-3";
   }
   
   public String twitterID() {
@@ -365,20 +365,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t");
     _builder.append("</a> <a class=\"brand\" href=\"index.html\"></a>");
     _builder.newLine();
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("<div class=\"btn-group pull-right\">");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<g:plusone href=\"");
-    String _plusoneURL = this.plusoneURL();
-    _builder.append(_plusoneURL, "        ");
-    _builder.append("\"></g:plusone>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("      ");
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<div class=\"nav-collapse collapse\" style=\"height: 0px;\">");
     _builder.newLine();
@@ -399,9 +385,28 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
+      boolean _or = false;
       String _path_1 = this.path();
-      boolean _equals_1 = Objects.equal(_path_1, "documentation.html");
+      boolean _equals_1 = Objects.equal(_path_1, "7languages.html");
       if (_equals_1) {
+        _or = true;
+      } else {
+        String _path_2 = this.path();
+        boolean _equals_2 = Objects.equal(_path_2, "7languagesDoc.html");
+        _or = (_equals_1 || _equals_2);
+      }
+      if (_or) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"7languages.html\">7 Languages</a></li>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<li ");
+    {
+      String _path_3 = this.path();
+      boolean _equals_3 = Objects.equal(_path_3, "documentation.html");
+      if (_equals_3) {
         _builder.append("class=\"active\"");
       }
     }
@@ -410,13 +415,26 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
-      String _path_2 = this.path();
-      boolean _equals_2 = Objects.equal(_path_2, "community.html");
-      if (_equals_2) {
+      String _path_4 = this.path();
+      boolean _equals_4 = Objects.equal(_path_4, "community.html");
+      if (_equals_4) {
         _builder.append("class=\"active\"");
       }
     }
     _builder.append("><a href=\"community.html\">Community</a></li>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<li>");
+    {
+      String _twitterID = this.twitterID();
+      boolean _equalsIgnoreCase = _twitterID.equalsIgnoreCase("xtext");
+      if (_equalsIgnoreCase) {
+        _builder.append("<a href=\"http://xtend-lang.org\">Xtend</a>");
+      } else {
+        _builder.append("<a href=\"http://xtext.org\">Xtext</a>");
+      }
+    }
+    _builder.append("</li>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
@@ -424,12 +442,23 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("</div>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<!--/.nav-collapse -->");
+    _builder.newLine();
+    _builder.append("\t        ");
+    _builder.append("<div class=\"btn-group pull-right\">");
+    _builder.newLine();
+    _builder.append("\t          ");
+    _builder.append("<g:plusone href=\"");
+    String _plusoneURL = this.plusoneURL();
+    _builder.append(_plusoneURL, "	          ");
+    _builder.append("\"></g:plusone>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t        ");
+    _builder.append("</div>");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t");
@@ -619,39 +648,6 @@ public abstract class AbstractWebsite implements Resource {
   
   public CharSequence stylesheets() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<style>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("#header_wrapper {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("padding-top: 10px;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("/* 60px to make the container go all the way to the bottom of the topbar */");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("code.prettyprint {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("padding: 0px;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("background-color: white;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("border: none;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("</style>");
-    _builder.newLine();
     _builder.append("<!--  styles -->");
     _builder.newLine();
     _builder.append("<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->");
@@ -684,29 +680,18 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\" rel=\"stylesheet\"/>");
     _builder.newLine();
+    _builder.append("<!--[if lt IE 9]>");
+    _builder.newLine();
+    _builder.append("<link href=\"css/iebugs.css\" rel=\"stylesheet\" type=\'text/css\'>");
+    _builder.newLine();
+    _builder.append("<![endif]-->");
+    _builder.newLine();
     return _builder;
   }
   
   public CharSequence headline(final String title) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"header_wrapper\" class=\"container\" >");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<div class=\"inner\">");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<div class=\"container\">");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<div class=\"page-heading\"><h1>");
-    _builder.append(title, "			");
-    _builder.append("</h1></div>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</div>");
     _builder.newLine();
     _builder.append("</div>");
     _builder.newLine();

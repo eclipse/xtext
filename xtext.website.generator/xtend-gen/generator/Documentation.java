@@ -134,21 +134,6 @@ public class Documentation extends AbstractXdocBaseWebsite {
     _builder.append("<div id=\"header_wrapper\" class=\"container\">");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<div class=\"inner\">");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<div class=\"container\">");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<div class=\"page-heading\"><h1>Documentation</h1></div>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("</div> <!-- /.container -->");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</div> <!-- /inner -->");
-    _builder.newLine();
-    _builder.append("\t");
     CharSequence _menu = this.menu(this.doc);
     _builder.append(_menu, "	");
     _builder.newLineIfNotEmpty();
@@ -179,7 +164,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
       EList<Chapter> _chapters = doc.getChapters();
       for(final Chapter chapter : _chapters) {
         _builder.append("\t");
-        _builder.append("<li><a href=\"#");
+        _builder.append("<li><a href=\"");
         String _href = this._htmlExtensions.href(chapter);
         _builder.append(_href, "	");
         _builder.append("\">");
@@ -197,7 +182,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
               _builder.append("<ul>", "	");
             }
             _builder.append("\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href_1 = this._htmlExtensions.href(section);
             _builder.append(_href_1, "	");
             _builder.append("\">");
@@ -233,7 +218,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
           EList<Chapter> _chapters_1 = part.getChapters();
           for(final Chapter chapter_1 : _chapters_1) {
             _builder.append("\t");
-            _builder.append("<li><a href=\"#");
+            _builder.append("<li><a href=\"");
             String _href_2 = this._htmlExtensions.href(chapter_1);
             _builder.append(_href_2, "	");
             _builder.append("\">");
@@ -251,7 +236,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
                   _builder.append("<ul>", "	");
                 }
                 _builder.append("\t");
-                _builder.append("<li><a href=\"#");
+                _builder.append("<li><a href=\"");
                 String _href_3 = this._htmlExtensions.href(section_1);
                 _builder.append(_href_3, "	");
                 _builder.append("\">");

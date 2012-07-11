@@ -1,40 +1,30 @@
-chapter:tortoise[Tortoise Shell]
+chapter:tortoise[Little Tortoise]
 
 Do you remember the programming language link[http://en.wikipedia.org/wiki/Logo_%28programming_language%29][Logo]? 
 Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
 But the remarkable part was the so called e[turtle], a graphical cursor that can be given commands to move and turn, 
 thereby drawing lines.
 
-section:tortoise_motivation[The Problem]
+img[images/tortoise_screenshot.png][][][]
 
-The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
-I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
-interpreter. But technically, this example will teach you how to use and adapt the 
-codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] for your own language.  
+The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt 
+and use the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] for your own languages.  
 
-section:tortoise_solution[A Solution With Xtext]
+section:tortoise_solution[Overview]
 
 We have build a language that allows to define e[Programs] and e[SubPrograms]. Each of these has a body
 which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
-to issue commands to the turtle. Here is an example explaining the concepts in comments:
+to issue commands to the tortoise. Here is an example explaining the concepts in comments:
  
-table[
-tr[td[
 code[tortoise][
 // Program: Haus vom Nikolaus
 begin
-  // local variable
-  val length = 100   
-  // all Math.* methods are available
-  val diagonal = length * sqrt(2)
-  // assignment of a property
-  lineWidth = 2 
-  // call to a SubProgram
-  square(length)
-  // call to a command method
-  turnRight(135)
-  // all ColorConstants.* are available
-  lineColor = blue 
+  val length = 150                // local variable
+  val diagonal = length * sqrt(2) // all Math.* methods are available
+  lineWidth = 2                   // assignment of a property
+  square(length)                  // call to a SubProgram
+  turnRight(45)                   // call to a command method
+  lineColor = blue                // all ColorConstants.* are available
   forward(diagonal)
   turnLeft(90)
   lineColor = red
@@ -44,29 +34,23 @@ begin
   turnLeft(90)
   lineColor = blue
   forward(diagonal)
-end
+end  // main program
 
-// subprogram with parameter
-sub square
-  int length
+sub square           // a subprogram
+  int length         // parameter
 begin
-  forward(length)
-  turnRight(90) 
-  forward(length)
-  turnRight(90)
-  forward(length)
-  turnRight(90)
-  forward(length)
-end
-]]
-td[img[images/Nikolaus.png][][][]]]
+  for (i : 1..4) {   // loop-expression from Xbase 
+    forward(length)
+    turnRight(90) 
+  }
+end  // sub square
 ]
 
-The main trick about our solution is not to build in the turtle commands into the language itself, but
+The main trick about our solution is to e[not] bake in the turtle commands into the language itself, but
 define it in the runtime library. This way, the language stays as slim as can be and additions can be easily
 added without the need to regenerate the whole language infrastructure.
 
-The core of the runtime library is the class codeRef[org.xtext.tortoiseshell.runtime.Tortoise]. You can
+The core of the runtime library is the class codeRef[org.xtext.tortoiseshell.lib.Tortoise]. You can
 think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
 modify it using methods. Here is an excerpt of its code:
 
@@ -85,45 +69,30 @@ class Tortoise {
 ...
 ]
 
-We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
-EClass. When a method that changes the state is called, an event is thrown. These events are consumed
-by a GEF based view and turned into animations of a codeRef[org.xtext.tortoiseshell.runtime.view.TortoiseFigure].  
-
-section2:tortoise_statistics[Some Stats]
-
-table[
-tr[td[Language name]td[TortoiseShell]]
-tr[td[Author]td[Jan Koehnlein]]
-tr[td[Xtext Grammar]td[ridiculously tiny (17 LOC, 3 parser rules (+1 for a nicer Ecore model))]]
-tr[td[Xtext extensions]td[4 classes]]
-tr[td[Execution]td[interpreter]]
-tr[td[Runtime library]td[huge, a lot of fun!]]
-tr[td[Hardest part]td[Teaching GEF to center a figure]]
-tr[td[Animals harmed]td[0 (except virtual turtles)]]
-]
+When a method changes the state of the tortoise, an event is thrown. These events are consumed
+by a GEF based view and turned into animations of a codeRef[org.xtext.tortoiseshell.lib.view.TortoiseFigure]. This
+loose coupling of model and view allows for easier testing.
 
 section:tortoise_running[Running the Example]
 
-You should have installed the link[http://www.eclipse.org/gef][Graphical Editing Framework (GEF)]. Import the projects 
-into an Eclipse workspace and run the launch config e[Run (org.eclipse.xtext.tortoiseshell)]. Import the example plug-in 
-into the new workspace and open one of the example files. Also open the e[Tortoise View] e[(Window >
-Show View > Other > Xtext > TortoiseView)]. The e[Program] is interpreted on save. An additional toggle button e[Step Mode] 
+In the runtime Eclipse, open the e[Tortoise View] e[(Window > Show View > Other > Xtext > TortoiseView)].
+Then open one of the example files in e[org.eclipse.xtext.tortoiseshell.examples]. 
+The e[Program] is interpreted on editor activation and on save. An additional toggle button e[Step Mode] 
 in the e[Tortoise View] allows to execute the code live from the editor upto the carret's current line.
 
 img[images/Pythagoras.png][Tortoise takes a rest after running the Pythagoras example][][]
 
-section:tortoise_details[The Solution in Detail]
+section:tortoise_grammar[Grammar]
 
-section2:tortoise_grammar[Grammar]
-
-The grammar is almost a joke. Once again, we inherit from the Xbase language to have nice Java integration
-and rich expressions. A user can define a e[Program] which can have e[SubPrograms] with parameters. The e[Executable]
-rule is never called, but defines a common supertype for e[Program] and e[SubProgram] which will define
-their common member code[body]. A e[Body] is an e[XBlockExpression] from Xbase, but with the keywords
-code[begin] and code[end] instead of the curly braces.
+The grammar very short. Once again, we inherit from the Xbase language to have nice Java integration
+and rich expressions. A user can define a e[Program] which can have e[SubPrograms] with parameters. The 
+e[Executable] rule is never called, but defines a common supertype for e[Program] and e[SubProgram] which 
+will hold their common member code[body]. A e[Body] is an e[XBlockExpression] from Xbase, but with the 
+keywords code[begin] and code[end] instead of the curly braces.
 
 code[Xtext][
-grammar org.xtext.tortoiseshell.TortoiseShell with org.eclipse.xtext.xbase.Xbase
+grammar org.xtext.tortoiseshell.TortoiseShell
+  with org.eclipse.xtext.xbase.Xbase
 
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 generate tortoiseShell "http://www.xtext.org/tortoiseshell/TortoiseShell"
@@ -147,47 +116,55 @@ Executable:
   Program | SubProgram;
 ]
 
-section2:tortoise_inferrer[Translation to Java]
+section:tortoise_inferrer[Translation to Java]
 
-With the tortoise commands in the runtime library class codeRef[org.xtext.tortoiseshell.runtime.Tortoise], we 
-have to make sure to infer a Java class that inherits from this. Within this class, we create a method
-for each e[Program] and e[SubProgram]. The resulting code looks like this:
+With the tortoise commands defined as methods in the runtime library class 
+codeRef[org.xtext.tortoiseshell.lib.Tortoise], we have to infer a Java class that inherits from this. 
+Within this class, we create a method for each e[Program] and e[SubProgram]. The resulting code looks 
+like this:
 
 code[Xtend][
 class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
   public static val INFERRED_CLASS_NAME = 'MyTortoiseProgram'
+  
   @Inject extension JvmTypesBuilder
-     def dispatch void infer(Program program, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-       acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater\[
-         superTypes += program.newTypeRef(typeof(Tortoise))
-         if(program.body != null)
-           members += program.toMethod("main", program.newTypeRef(Void::TYPE)) \[
-             body = program.body
-           \]
-         for(subProgram: program.subPrograms)
-           members += subProgram.toMethod(subProgram.name, program.newTypeRef(Void::TYPE)) \[
-             for(functionParameter: subProgram.parameters)
-               parameters += functionParameter.toParameter(functionParameter.name, functionParameter.parameterType)
-             body = subProgram.body
-           \]
-       \]
-     }
-}] 
+  
+  def dispatch void infer(Program program, 
+                          IJvmDeclaredTypeAcceptor acceptor, 
+                          boolean isPreIndexingPhase) {
+    acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater \[
+      superTypes += program.newTypeRef(typeof(Tortoise))
+      if(program.body != null)
+        members += program.toMethod("main", 
+            program.newTypeRef(Void::TYPE)) \[
+          body = program.body
+        \]
+      for(subProgram: program.subPrograms)
+        members += subProgram.toMethod(subProgram.name, 
+            program.newTypeRef(Void::TYPE)) \[
+          for(functionParameter: subProgram.parameters)
+            parameters += functionParameter.toParameter(
+                functionParameter.name, functionParameter.parameterType)
+          body = subProgram.body
+        \]
+    \]
+  }
+ }] 
 
-section2:tortoise_interpreter[Interpreter]
+section:tortoise_interpreter[Interpreter]
 
 The Xbase languge library does not only provide a compiler that generates Java code, but also an 
 codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter][interpreter]. This has been adapted to
 to execute our e[Programs]. 
 
-In fact, an interpreter is just a big visitor. For each expression type, it has an evaluation method,
-that recursively calls the evaluation methods for the subexpressions forming its parameters. The methods
+After all an interpreter is just a big visitor. For each expression type, it has an evaluation method,
+that recursively calls the evaluation methods for the subexpressions for its arguments. The methods
 also pass an execution context storing all temporary state such as local variables.
 
-The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
-codeRef[org.xtext.tortoiseshell.runtime.Tortoise]) and inferred ones. While the former are evaluated
+The first thing we have to cope with is the mixture of existing Java methods (from the super class
+codeRef[org.xtext.tortoiseshell.lib.Tortoise]) and inferred ones. While the former are evaluated
 via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-codeRef[org.xtext.tortoiseshell.runtime.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
+codeRef[org.xtext.tortoiseshell.lib.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
 methods to execute them directly. This is accomplished by overriding the method 
 
 code[invokeOperation]:
@@ -195,17 +172,21 @@ code[invokeOperation]:
 code[Xtend][
   @Inject extension IJvmModelAssociations
    
-  override protected invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
+  override protected invokeOperation(JvmOperation operation, 
+                                     Object receiver, 
+                                     List<Object> argumentValues) {
     val executable = operation.sourceElements.head
     if(executable instanceof Executable) {
       val context = createContext
       context.newValue(XbaseScopeProvider::THIS, tortoise)
       var index = 0
       for(param: operation.parameters) {
-        context.newValue(QualifiedName::create(param.name), argumentValues.get(index))
+        context.newValue(QualifiedName::create(param.name), 
+                         argumentValues.get(index))
         index = index + 1  
       }
-      evaluate((executable as Executable).body, context, CancelIndicator::NullImpl)
+      evaluate((executable as Executable).body, context, 
+               CancelIndicator::NullImpl)
     } else {
       super.invokeOperation(operation, receiver, argumentValues)
     }
@@ -243,7 +224,9 @@ It is thrown when the execution reaches the line code[stopAtLine], thus terminat
 The throwing code is
 
 code[Xtend][
-  override protected internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
+  override protected internalEvaluate(XExpression expression, 
+                                      IEvaluationContext context, 
+                                      CancelIndicator indicator) {
     val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
     if(line-1 == stopAtLine)
       throw new StopLineReachedException
@@ -251,18 +234,24 @@ code[Xtend][
   }
 ]
 
-section2:tortoise_additons[Additional Aspects]
+section:tortoise_additons[Literal Classes]
 
 To make the static methods and fields of codeRef[java.lang.Math] and codeRef[org.eclipse.draw2d.ColorConstants]
-callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider].
+callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider]:
+
+code[Xtend][
+class TortoiseShellExtensionClassNameProvider extends 
+  StaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider {
+
+  override protected computeLiteralClassNames() {
+    super.computeLiteralClassNames => \[
+      it += "java.lang.Math"
+      it += "org.eclipse.draw2d.ColorConstants" 
+    \]  
+  }
+}
+]
 
 To overcome a small issue in the interpreter we also had to implement the 
 codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider]. 
 
-section:tortoise_beyond[Beyond This Example]
-
-You could add a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
-etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
-link[http://en.wikipedia.org/wiki/Tron_%28video_game%29][Tron]. Of course, there could also be more UI, 
-like for exporting figures. The lesson to learn is that even a language with just a few concepts can become
-very flexible by using powerful libraries. 

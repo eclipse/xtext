@@ -17,25 +17,12 @@ public class DocumentationBody extends Body {
   @Inject
   private HtmlExtensions _htmlExtensions;
   
-  public CharSequence body(final AbstractSection rootSection) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<div id=\"maincontainer\" class=\"container\">");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _h1 = this.h1(rootSection);
-    _builder.append(_h1, "	");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</div>");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence h1(final AbstractSection section) {
+  public CharSequence h1(final AbstractSection chapter) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- chapter -->");
     _builder.newLine();
     _builder.append("<section id=\"");
-    String _hrefId = this._htmlExtensions.hrefId(section);
+    String _hrefId = this._htmlExtensions.hrefId(chapter);
     _builder.append(_hrefId, "");
     _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
@@ -49,7 +36,7 @@ public class DocumentationBody extends Body {
     _builder.append("<h1 style=\"padding-top: 30px;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    TextOrMarkup _title = section.getTitle();
+    TextOrMarkup _title = chapter.getTitle();
     CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
     _builder.append(_htmlText, "				");
     _builder.newLineIfNotEmpty();
@@ -60,7 +47,7 @@ public class DocumentationBody extends Body {
     _builder.append("<hr style=\"margin-top: 5px; margin-bottom: 5px;\">");
     _builder.newLine();
     {
-      EList<TextOrMarkup> _contents = section.getContents();
+      EList<TextOrMarkup> _contents = chapter.getContents();
       for(final TextOrMarkup content : _contents) {
         _builder.append("\t\t\t");
         CharSequence _htmlParagraph = content==null?(CharSequence)null:this._htmlExtensions.toHtmlParagraph(content);
@@ -69,10 +56,10 @@ public class DocumentationBody extends Body {
       }
     }
     {
-      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
-      for(final AbstractSection subSection : _sections) {
+      Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(chapter);
+      for(final AbstractSection section : _sections) {
         _builder.append("\t\t\t");
-        CharSequence _h2 = this.h2(subSection);
+        CharSequence _h2 = this.h2(section);
         _builder.append(_h2, "			");
         _builder.newLineIfNotEmpty();
       }

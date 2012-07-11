@@ -1,3 +1,9 @@
+code.prettyprint {
+  padding: 0px;
+  background-color: white;
+	border: none;
+}
+/* 	here starts original */
 .com { color: green; }
 .lit { color: #195f91; }
 .pun { color: #555; }

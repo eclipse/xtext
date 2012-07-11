@@ -40,34 +40,64 @@ codelanguage-def[Xtend][
 ]
 
 codelanguage-def[mongoBeans][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	package, import
 ]
 
 codelanguage-def[tortoise][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	sub, begin, end
 ]
 
 codelanguage-def[routing][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
 	GET, POST, PUT, DELETE, HEAD, import, when 
 ]
 
-codelanguage-def[simple][
-	application 
+codelanguage-def[scripting][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return
 ]
 
-chapter-ref[introduction]
+codelanguage-def[builddsl][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import, param, task, depends 
+]
 
-chapter-ref[simple]
+part-ref[general_overview]
 
-chapter-ref[mongo]
+part[The 7 Languages]
 
-chapter-ref[routing]
+chapter-ref[scripting]
 
-chapter-ref[templates]
+chapter-ref[builddsl]
+
+chapter-ref[mongoDB]
 
 chapter-ref[guice]
 
-chapter-ref[cradle]
+chapter-ref[httpRouting]
+
+chapter-ref[template]
 
 chapter-ref[tortoise]
 
