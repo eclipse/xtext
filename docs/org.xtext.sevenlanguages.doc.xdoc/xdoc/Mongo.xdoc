@@ -9,17 +9,11 @@ img[images/mongobeans_screenshot.png][][][]
 
 OTOH, Java is statically typed: The available types, their field names and field types, are known and validated 
 at compile time. The JavaBeans convention defines how instances can be manipulated. the standard mongoDB Java 
-driver reflects mongoDB's schema freeness by providing mongo documents as raw Java maps. This results in some 
-major annoyances: 
-ul[
-item[You can ask a codeRef[com.mongodb.DBObject] for the value of a specific field, but you cannot be sure 
-that the returned codeRef[java.lang.Object] is of some expected type. You are losing Java's compile
-time type checks for your domain elements and the generic code becomes hard to read.]
-item[Additional behavior of the domain elements that would usually go into methods of your entity classes has 
-to be defined by external helper classes.] 
-item[Constructing a graph of nested generic maps looks pretty bulky and inconvenient in Java and breaks with 
-the JavaBeans conventions.]
-]
+driver reflects mongoDB's schema freeness by providing mongo documents as raw Java maps. 
+
+With this language you can describe statically-typed Java-facades for MongoDB documents without hiding the dynamic
+nature of it. The language uses a tree-like syntax similar to JSON but lets you add Java type information
+to it.
 
 section:mongo_solution[Overview]
 
