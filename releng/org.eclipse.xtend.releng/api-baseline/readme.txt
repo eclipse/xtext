@@ -6,4 +6,4 @@ How to set API Baseline.
 3. Export wizard asks for a location, point him to
 	 {your_local_git_repo}/releng/org.eclipse.xtend.releng/api-baseline/ folder and click "Finish"
 4. Open API-Baseline settings
-5. Add new baseline name Xtend 2.3.0, location {your_local_git_repo}/releng/org.eclipse.xtend.releng/api-baseline/
+5. Add new baseline name Xtend 2.4.0, location {your_local_git_repo}/releng/org.eclipse.xtend.releng/api-baseline/

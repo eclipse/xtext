@@ -4,28 +4,32 @@
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
 		</div>
 		<ul id="leftnav">
+		<li class="partentry" >
+		Getting Started
+		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
 		</li>
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="12-Installation.php">Installation</a></div>
-		<ul style="display: none;" id="subToc_12-Installation.html">
-		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
-		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
-		</ul>
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="13-hello-world.php">Hello World</a></div>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="13-getting-started.php">Getting Started</a></div>
-		<ul style="display: none;" id="subToc_13-getting-started.html">
-		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
+		<a href="14-movies.php">The Movies Example</a></div>
+		<ul style="display: none;" id="subToc_14-movies.html">
+		<li id="14-movies.html#moviesExample_2.html" ><a href="14-movies.php#moviesExample_2.php" >The Data</a></li>
+		<li id="14-movies.html#moviesExample_3.html" ><a href="14-movies.php#moviesExample_3.php" >Parsing The Data</a></li>
+		<li id="14-movies.html#moviesExample_4.html" ><a href="14-movies.php#moviesExample_4.php" >Answering Some Questions</a></li>
 		</ul>
+		</li>
+		<li class="partentry" >
+		Reference Documentation
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
+		<a href="15-types.php">Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
 		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
 		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
@@ -152,7 +156,7 @@
 			A string literal is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> (just like in Java).
 			String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 			because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
-			least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
+			least likely occur in the actual string. Special characters can be quoted with a backslash or defined using
 			Java's unicode notation. Contrary to Java, strings can span multiple lines.
 			</p>
 			<p>
@@ -231,13 +235,7 @@
 			<h2>Type Literals</h2>
 			<p>
 			Type literals are specified using the keyword <span class="inlinecode"><span class="keyword">typeof</span></span> :
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">typeof</span>(java.lang.String)&nbsp;<span class="comment">//&nbsp;yields&nbsp;java.lang.String.class</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)&nbsp;<span class="comment">//&nbsp;yields&nbsp;java.lang.String.class</span></span>
 			</p>
 		<a name="typeCasts" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -283,7 +281,7 @@
 			There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 			to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 			operators for any type just by implementing the corresponding method signature. As an example, the 
-			<a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">Xtend runtime library</a> contains a class <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html" title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions">BigDecimalExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java" title="View Source Code" >(src)</a> that defines operators for 
+			runtime library contains a class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html" title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions">BigDecimalExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java" title="View Source Code" >(src)</a> that defines operators for 
 			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html" title="java.math.BigDecimal">BigDecimals</abbr></a> which allows the following code:
 			<div class="literallayout">
 				<div class="incode">
@@ -453,8 +451,8 @@
 			<h2>Short-Circuit Boolean Operators</h2>
 			<p>
 			If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&amp;&amp;</span> are bound to the library methods 
-			<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_and(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> resp. 
-			<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_or(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> the operation is evaluated in short circuit mode.
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_and(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> resp. 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_or(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> the operation is evaluated in short circuit mode.
 			That means that the right hand operand might not be evaluated at all in the following cases: 
 			<ol>
 			  <li>in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left 
@@ -501,13 +499,7 @@
 			</p>
 			<p>
 			Of course, also non-final fields can be set using an assignment: 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myField&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myField&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span></span>
 			</p>
 			<a name="propertyAssignments" ></a>
 			<h3>Setting Properties</h3>
@@ -517,13 +509,7 @@
 			hence you can call a setter using an assignment:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myProperty&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;<span class="comment">//&nbsp;calls&nbsp;myObj.setMyProperty("foo")</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;<span class="comment">//&nbsp;calls&nbsp;myObj.setMyProperty("foo")</span></span>
 			</p>
 			<p>
 			The setter is only used if the field is not accessible from the given context. That is why the 
@@ -631,13 +617,7 @@
 			<p>
 			The type of the variable itself can either be explicitly declared or be inferred from the right hand side
 			expression. Here is an example for an explicitly declared type:
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList</span>
 			</p>
 			<p>
 			In such cases, the type of the right hand expression must conform to the type 
@@ -645,13 +625,7 @@
 			</p>
 			<p>
 			Alternatively the type can be left out and will be inferred from the initialization expression:  
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;msg&nbsp;is&nbsp;of&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;msg&nbsp;is&nbsp;of&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
 			</p>
 		<a name="featureCalls" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -678,13 +652,7 @@
 			accessible, a simple name binds to a corresponding Java-Bean getter method if available :
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObj.myProperty&nbsp;<span class="comment">//&nbsp;myObj.getMyProperty()&nbsp;&nbsp;(..&nbsp;in&nbsp;case&nbsp;myObj.myProperty&nbsp;is&nbsp;not&nbsp;visible.)</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObj.myProperty&nbsp;<span class="comment">//&nbsp;myObj.getMyProperty()&nbsp;&nbsp;(..&nbsp;in&nbsp;case&nbsp;myObj.myProperty&nbsp;is&nbsp;not&nbsp;visible.)</span></span>
 			</p>
 			<a name="implicitVariables" ></a>
 			<h2>Implicit Variables <em>this</em> and <em>it</em></h2>
@@ -693,25 +661,13 @@
 			field access or method invocations like in:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">this</span>.myField
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">this</span>.myField</span>
 			</p>
 			<p>
 			or omit the receiver:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myField
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myField</span>
 			</p>
 			<p>
 			You can use the variable name <span class="inlinecode"><span class="keyword">it</span></span> to get the same behavior for any variable or parameter:
@@ -762,23 +718,11 @@
 			</p>
 			<p>
 			Instead of writing 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()</span>
 			</p>
 			<p>
 			one can write
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myRef?.doStuff
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myRef?.doStuff</span>
 			</p>
 		<a name="constructorCall" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -942,8 +886,8 @@
 			</div>
 			</p>
 			<p>
-			A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
-			in the closure's expression. That is exactly what we did with the variable <span class="inlinecode">textField</span>.
+			A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to. 
+			That is exactly what we did with the variable <span class="inlinecode">textField</span> above.
 			</p>
 			<a name="closureTypes" ></a>
 			<h2>Typing</h2>
@@ -958,16 +902,10 @@
 			assignment:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">val</span>&nbsp;toUpperCaseFunction&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">val</span>&nbsp;toUpperCaseFunction&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span></span>
 			</p>
 			<p>
-			The type will be one of the types found in <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
+			The type will be one of the types found in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
 			It is a procedure if the return type is <span class="inlinecode"><span class="keyword">void</span></span>, otherwise it is a function.
 			</p>
 			<p>
@@ -989,7 +927,7 @@
 			</div>
 			</p>
 			<p>
-			Checked exceptions that are thrown in the body of a closure but not declared in the implemented method of the target type are rethrown using the 
+			Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the 
 			<a href="20-classes-and-functions.php#declaredExceptions.php" title="Go to &quot;Declared Exceptions&quot;">sneaky-throw technique</a>.
 			Of course you can always <a href="30-expressions.php#Xtend_Expressions_TryCatch.php" title="Go to &quot;Try, Catch, Finally&quot;">catch and handle</a> them.
 			</p>
@@ -1004,37 +942,18 @@
 			</p>
 			<p>
 			An expression 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2
-					</p>
-				</div>
-			</div>
-			 
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> 
 			results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> evaluates 
 			to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(foo)&nbsp;x
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
 			</p>
 			<p>
 			is a short hand for
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
 			</p>
 			<p>
 			The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
@@ -1046,13 +965,7 @@
 			Consequently, you can use if expressions deeply nested within expressions:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">if</span>&nbsp;(firstName&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;firstName&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;lastName&nbsp;<span class="keyword">else</span>&nbsp;lastName
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">if</span>&nbsp;(firstName&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;firstName&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;lastName&nbsp;<span class="keyword">else</span>&nbsp;lastName</span>
 			</p>
 		<a name="switchExpression" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -1130,16 +1043,9 @@
 			<h1>For Loop</h1>
 			<p>
 			The for loop 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression
-					</p>
-				</div>
-			</div>
-			 
+			<span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression</span> 
 			is used to execute a certain expression for each element of an array or an instance of 
-			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="java.lang.Iterable">Iterable</abbr></a>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
+			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="java.lang.Iterable">Iterable</abbr></a>. The local <span class="inlinecode">variable</span> is final, hence cannot be updated. 
 			</p>
 			<p>
 			The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>. The type of the local variable can be left out. 
@@ -1168,14 +1074,7 @@
 			<h1>While Loop</h1>
 			<p>
 			A while loop 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression
-					</p>
-				</div>
-			</div>
-			 
+			<span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> 
 			is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
 			The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 			</p>
@@ -1201,14 +1100,7 @@
 			<h1>Do-While Loop</h1>
 			<p>
 			A do-while loop 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)
-					</p>
-				</div>
-			</div>
-			 
+			<span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> 
 			is used to execute a certain expression until the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
 			The difference to the <a href="30-expressions.php#whileExpression.php" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing 
 			the block once before evaluating the predicate for the first time. The return type of a do-while 
@@ -1288,7 +1180,7 @@
 			<p>
 			The try-catch-finally expression is used to handle exceptional situations.
 			Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
-			will be silently rethrown (see the <a href="20-classes-and-functions.php#declaredExceptions.php" title="Go to &quot;Declared Exceptions&quot;">section on declared exceptions</a>). The syntax 
+			will be silently thrown (see the <a href="20-classes-and-functions.php#declaredExceptions.php" title="Go to &quot;Declared Exceptions&quot;">section on declared exceptions</a>). The syntax 
 			again is like Java.
 			</p>
 			<p>
@@ -1340,11 +1232,11 @@
 			<p>
 			Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<span class="inlinecode"><span class="string">&apos;&apos;&apos;</span></span>). 
 			A template expression can span multiple lines and expressions can be nested which are evaluated and their <span class="inlinecode">toString()</span> 
-			representation is automatcially inserted at that position.
+			representation is automatically inserted at that position.
 			</p>
 			<p>
 			The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression<span class="string">&raquo;</span></span>. They read nicely and are not often used
-			in text so you seldomly need to escape them. These escaping conflicts are the reason why
+			in text so you seldom need to escape them. These escaping conflicts are the reason why
 			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worse readability. 
 			The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 			</p>
@@ -1557,14 +1449,7 @@
 			    
 			    </td>
 			    <td>
-			          <div class="literallayout">
-			    	<div class="incode">
-			    		<p class="code">
-			    			node&nbsp;NodeName&nbsp;{}
-			    		</p>
-			    	</div>
-			    </div>
-			    
+			          <span class="inlinecode">node&nbsp;NodeName&nbsp;{}</span>
 			    </td>
 			  </tr>
 			</table>

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -393,8 +394,14 @@ public class HtmlExtensions {
           String _identifier = _element_2==null?(String)null:_element_2.getIdentifier();
           _builder.append(_identifier, "");
           _builder.append("\">");
-          JvmDeclaredType _element_3 = it.getElement();
-          String _simpleName = _element_3==null?(String)null:_element_3.getSimpleName();
+          {
+            JvmDeclaredType _element_3 = it.getElement();
+            if ((_element_3 instanceof JvmAnnotationType)) {
+              _builder.append("@");
+            }
+          }
+          JvmDeclaredType _element_4 = it.getElement();
+          String _simpleName = _element_4==null?(String)null:_element_4.getSimpleName();
           String _trim = _simpleName==null?(String)null:_simpleName.trim();
           _builder.append(_trim, "");
           _builder.append("</abbr>");

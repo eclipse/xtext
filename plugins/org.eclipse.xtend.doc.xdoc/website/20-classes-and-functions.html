@@ -4,28 +4,32 @@
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
 		</div>
 		<ul id="leftnav">
+		<li class="partentry" >
+		Getting Started
+		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
 		</li>
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="12-Installation.php">Installation</a></div>
-		<ul style="display: none;" id="subToc_12-Installation.html">
-		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
-		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
-		</ul>
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="13-hello-world.php">Hello World</a></div>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="13-getting-started.php">Getting Started</a></div>
-		<ul style="display: none;" id="subToc_13-getting-started.html">
-		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
+		<a href="14-movies.php">The Movies Example</a></div>
+		<ul style="display: none;" id="subToc_14-movies.html">
+		<li id="14-movies.html#moviesExample_2.html" ><a href="14-movies.php#moviesExample_2.php" >The Data</a></li>
+		<li id="14-movies.html#moviesExample_3.html" ><a href="14-movies.php#moviesExample_3.php" >Parsing The Data</a></li>
+		<li id="14-movies.html#moviesExample_4.html" ><a href="14-movies.php#moviesExample_4.php" >Answering Some Questions</a></li>
 		</ul>
+		</li>
+		<li class="partentry" >
+		Reference Documentation
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
+		<a href="15-types.php">Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
 		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
 		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
@@ -139,13 +143,7 @@
 			</ul>
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">package</span>&nbsp;com.acme
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
 			</p>
 		<a name="imports" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -196,7 +194,7 @@
 			on abstract methods.
 			</p>
 			<p>
-			Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of 
+			Xtend's approach to inheritance is conceptual the same as in Java. Single inheritance of 
 			classes as well as implementing multiple interfaces is supported. 
 			Xtend classes can of course extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
 			</p>
@@ -269,7 +267,7 @@
 			<h1>Fields</h1>
 			<p>
 			A field can have an initializer. Final fields are declared using <span class="inlinecode"><span class="keyword">val</span></span>, while 
-			<span class="inlinecode"><span class="keyword">var</span></span> introduces a non-final field and can be ommitted. Yet, if an initializer expression
+			<span class="inlinecode"><span class="keyword">var</span></span> introduces a non-final field and can be omitted. Yet, if an initializer expression
 			is present, the type of a field can be skipped after <span class="inlinecode"><span class="keyword">val</span></span> and <span class="inlinecode"><span class="keyword">var</span></span>.
 			Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
 			</p>
@@ -399,7 +397,7 @@
 			</p>
 			<p>
 			If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
-			compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
+			compiler will throw the checked exception silently (using the sneaky-throw technique introduced by 
 			<a href="http://projectlombok.org/features/SneakyThrows.html" >Lombok</a>). 
 			  
 			<div class="literallayout">
@@ -745,13 +743,7 @@
 			This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 			Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 			method is called on the argument parameter as if it was one of its members.
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
 			</p>
 			<p>
 			Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
@@ -762,25 +754,13 @@
 			like this. In Java for instance you often see code like this:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						persistenceManager.save(myObject);
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">persistenceManager.save(myObject);</span>
 			</p>
 			<p>
 			Without tying your entities to the persistenceManager, extension methods allow you to write
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObject.save
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObject.save</span>
 			</p>
 			<p>
 			There are different ways to make methods available as extensions, which are described in the following.
@@ -788,7 +768,7 @@
 			<a name="libraryExtensions" ></a>
 			<h2>Extensions From The Library</h2>
 			<p>
-			The <a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">library</a> puts a lot of very useful extension methods on existing types from the Java
+			The library puts a lot of very useful extension methods on existing types from the Java
 			SDK without any further ado.
 			</p>
 			<p>
@@ -806,14 +786,14 @@
 			</p>
 			<p>
 			<ul>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a></li>
 			</ul>
 			</p>
 			<a name="extensionMethods_8" ></a>
@@ -849,13 +829,7 @@
 			</p>
 			<p>
 			The following import declaration 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 			</p>
 			<p>
 			allows to use its methods like this:

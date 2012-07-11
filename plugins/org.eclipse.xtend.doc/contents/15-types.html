@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>Static Typing and Java Interoperability</title>
+<title>Java Interoperability</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,11 +9,11 @@
 </head>
 <body>
 <a name="types"></a>
-<h1>Static Typing and Java Interoperability</h1>
+<h1>Java Interoperability</h1>
 <p>
 Xtend, like Java, is a statically typed language. In fact it completely supports Java&apos;s type system, including the primitive types 
 as <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
-classpath.  
+class path.  
 </p>
 <p>
 Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
@@ -46,15 +46,15 @@ write the following:
 <span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
 Another very useful conversion applies to lambda expressions. A lambda expression
-usually is of one of the types listed in <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
-or <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However if the expected type is an interface with a single method
+usually is of one of the types listed in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However if the expected type is an interface with a single method
 declaration, a lambda expression is automatically converted to that
 type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
 for more details.
