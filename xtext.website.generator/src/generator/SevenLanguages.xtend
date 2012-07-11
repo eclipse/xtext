@@ -12,15 +12,15 @@ class SevenLanguages extends AbstractWebsite {
 		</div>
 		<div id="page" class="languages">
 			<div class="container">
-				<h1>7 Languages For The JVM<small>- Learn By Example</small></h1>
+				<h1>7 Languages For The JVM<small>- Learning By Example</small></h1>
 				<hr />
 				<div class="row">
 					<div class="span6" style="margin: 4px; text-align: justify;">
 						<p style="margin: 5pt;">
 							If your DSL is targeting the Java Virtual Machine (JVM) you are lucky, because
-							Xtext provides a new very powerful API for this.
-							The new API let's you easily intergrate statically typed expressions,
-							Java type references and annotations anywhere in your language.
+							Xtext provides a very powerful API for this.
+							The new API lets you easily integrate statically typed expressions,
+							Java's type references and annotations anywhere in your language.
 						</p>
 						<p style="margin: 5pt;">
 							<a href="7languagesDoc.html">Learn this new API by example and have a look at the 7 different languages we've built
@@ -28,9 +28,9 @@ class SevenLanguages extends AbstractWebsite {
 						</p>
 					</div>
 					«language('Scripting Language','7languagesDoc.html#scripting','images/red-glossy-scripting.png','''
-					A simple scripting language that lets you write code into a blank file without any
+					A simple scripting language that allows you to write code into a blank file without any
 							structural boilerplate like class or method definitions.<br/>
-							Translates to a Java class with a main method.
+							It translates to a Java class with a main method.
 					''')»
 				</div>
 				<div class="row">
@@ -39,14 +39,14 @@ class SevenLanguages extends AbstractWebsite {
 							Much like a nice and concise Ant or a statically typed Gradle.
 					''')»
 					«language('DSL for MongoDB','7languagesDoc.html#mongoDB','images/red-glossy-database.png','''
-							This langauge lets you declare document structures for MongoDB and generates
+							Document structures for MongoDB can be defined with this language. It generates
 							a handy Java API to interact with MongoDB in a statically typed and structured manner.
 					''')»
 				</div>
 				<div class="row">
 					«language('DSL for Guice','7languagesDoc.html#guice','images/red-glossy-guice.png','''
-							This language lets you declare Google Guice modules in a more readable and declarative way, such that many of the runtime checks can
-							be done at compile time.
+							This language allows you to declare Google Guice modules in a more readable and declarative way.
+							Thereby many of the runtime checks can be done at compile time.
 					''')»
 					«language('Http Routing Language','7languagesDoc.html#httpRouting','images/red-glossy-web.png','''
 							Web.xml on steroids and without the XML: Write a URL pattern and map it to a method call in Java.
@@ -59,7 +59,7 @@ class SevenLanguages extends AbstractWebsite {
 							named arguments with default values.
 					''')»
 					«language('Little Tortoise','7languagesDoc.html#tortoise','images/red-glossy-turtle.png','''
-							Remember Logo? A cute little tortoise painting on a canvas what ever you want.
+							Remember Logo? A cute little tortoise painting on a canvas whatever you want.
 					''')»
 				</div>
 			</div>
