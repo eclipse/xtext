@@ -255,10 +255,3 @@ class TortoiseShellExtensionClassNameProvider extends
 To overcome a small issue in the interpreter we also had to implement the 
 codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider]. 
 
-section:tortoise_beyond[Beyond This Example]
-
-You could add a lot of library stuff, such as methods for drawing primitves like circles, filled polygons
-etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
-link[http://en.wikipedia.org/wiki/Tron_%28video_game%29][Tron]. Of course, there could also be more UI, 
-like for exporting figures. We hope you learned that even a language with just a few concepts can become
-very flexible by using powerful libraries. 

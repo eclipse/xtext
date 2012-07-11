@@ -524,9 +524,3 @@ class MongoBeansLabelProvider extends XbaseLabelProvider {
     }
   } 
 ]
-
-section:mongo_beyond[Beyond This Example]
-
-Possible next moves would be to add further concepts in the DSL, e.g. transient properties, indices or references. 
-The codeRef[org.xtext.mongobeans.examples.MusicDBXtendTest][example] also shows how to use Xtend to 
-build a very compact API to create trees of e[MongoBean] instances. 

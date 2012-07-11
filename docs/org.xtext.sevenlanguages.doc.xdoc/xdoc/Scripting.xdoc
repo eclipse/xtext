@@ -141,7 +141,3 @@ for (arg : args)
 
 As you can imagine, this is fairly powerful way to put things on the scope implicitly. 
 
-section:scripting_beyond[Beyond This Example]
-
-Well, that has only been the start, but you should now be familiar with the basic concepts of creating
-a JVM language with Xtext.

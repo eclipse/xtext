@@ -500,10 +500,3 @@ To give the user feedback while the routes are defined we can establish validati
 in codeRef[org.xtext.httprouting.validation.RouteJavaValidator] where we raise an error when a placeholder
 is defined after a wildcard in the URL.
 
-section:routing_beyond[Beyond This Example]
-
-Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
-should not be a hard thing to extend this example. To enable DI in the context of a codeRef[javax.servlet.http.HttpServlet]
-there has to be a wrapper or something like that to create an injector. One really cool thing would be
-to establish and codeRef[org.eclipse.xtext.xbase.XExpression] that handles the complete guice-key and action call stuff with a corresponding
-compiler but this is fare beyond the scope of this example. ;-)
