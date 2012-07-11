@@ -15,6 +15,10 @@ body { /*	background: url(../images/pattern1.jpg) repeat #ffffff;*/
 	background: url('../images/noise.png') #A00;
 }
 
+p {
+	font-size: 14px;
+}
+
 .btn-primary:hover {
 	box-shadow: 0 0 3px rgba(0, 0, 0, 1);
 }
