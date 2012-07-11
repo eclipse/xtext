@@ -13,127 +13,131 @@ configuration (web.xml), where you configure what servlet should be called for w
 annotations to match incoming URLs and other frameworks have their own external DSLs for that.
 
 The HTTP routing language explained in this section uses an approach very similar to the one from the
-link[http://playframework.org][playframework]. You basically declare a list of URL patterns and explain
+link[http://playframework.org][Play framework]. You basically declare a list of URL patterns and explain
 what to do for each case. In contrast to play! which heavily relies on static methods, you can also declare
 so called dependencies which are translated to fields annotated with code[@Inject]. So this DSL plays
-nicely with dependency injection and especially with the ref:guice[guice modules DSL].
+nicely with dependency injection and especially with the ref:guice[Guice modules DSL].
 
 code[routing][
 inject GuessTheNumber controller
 
 GET /guess/:theGuess
-	do controller.handleGuess(theGuess)
+  do controller.handleGuess(theGuess)
 ]
 
-As you can see, you can have named variable placeholders in the URL and use them in the code[do]-part.
-There also is a code[when]-part which allows to specify an additional condition using the request object
+As you can see, you can have named variable placeholders in the URL and use them in the code[routing][do]-part.
+There also is a code[routing][when]-part which allows to specify an additional condition using the request object
 as well as any parameters:
 
 code[routing][
 inject GuessTheNumber controller
 
 GET /guess/:theGuess
-    when !controller.isValidGuess(theGuess)
-    do controller.handleWrongRange(theGuess)
+  when !controller.isValidGuess(theGuess)
+  do controller.handleWrongRange(theGuess)
 
 GET /guess/:theGuess
-	do controller.handleGuess(theGuess)
+  do controller.handleGuess(theGuess)
 ]
 
 section:routing_running[Running the Example]
 
 The example project's name is e[org.xtext.httprouting.examples] and includes a simple but runnable number
 guessing game. Just start the server (an embedded Jetty) by running codeRef[framework.StartServer] as a
-Java Application. Then point your browser to the following URL : link[http://localhost:8080/guess][http://localhost:8080/guess].
+Java Application. Then point your browser to the URL link[http://localhost:8080/guess][http://localhost:8080/guess].
 
 section:routing_grammar[Grammar]
 
 The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
 code[Xtext][
-grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+grammar org.xtext.httprouting.Route 
+  with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
 generate route "http://www.xtext.org/httprouting/Route"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 Model :
-	imports+=Import*
-	declarations+=AbstractDeclaration*;
+  imports+=Import*
+  declarations+=AbstractDeclaration*;
 
 Import :
-	'import' importedType=\[ types::JvmType | QualifiedName\];
+  'import' importedType=\[ types::JvmType | QualifiedName\];
 
 AbstractDeclaration :
-	Dependency | Route;
+  Dependency | Route;
 
 Dependency :
-	'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
+  'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
 
 Route :
-	requestType=RequestType url=URL ('when' condition=XExpression)? 'do' call=XExpression;
+  requestType=RequestType url=URL 
+  ('when' condition=XExpression)? 
+  'do' call=XExpression;
 
 enum RequestType :
-	GET | POST | PUT | DELETE | HEAD;
+  GET | POST | PUT | DELETE | HEAD;
 
 /**
  * matches URLs like 
- * 	'/foo/bar.html' or 
- * 	'/customer/:customerID/save'
+ *   '/foo/bar.html' or 
+ *   '/customer/:customerID/save'
  */
 URL :
-	{URL} 
-	( '/' | ('/' (QualifiedName | variables+=Variable))* ('/' variables+=Variable wildcard?='*')?);
+  {URL} 
+  ( '/' | ('/' (QualifiedName | variables+=Variable))* 
+  ('/' variables+=Variable wildcard?='*')?);
 
 Variable :
-	':' name=ID;
+  ':' name=ID;
 ]
 
-The Route DSL defines imports by using crossreferences. This makes it possible to use contentassist and
-get an error marker if the type does not exist. It's planned for an upcoming version of Xtext to provide
+The routing DSL defines imports by using cross references. This makes it possible to use content assist and
+get an error marker if the type does not exist. It is planned for an upcoming version of Xtext to provide
 an even better abstraction for importing Java types, including automatic support for IDE features like organize imports.
 
-Other than that there shouldn't be any surprises if you know the grammar language: A file consists of
-any number of imports followed by any numbe rof dependencies and routes. A route starts with a RequestType,
-i.e. HTTP method, followed by a url pattern. Then an optional when-clause can be specified followed by
+Other than that there should not be any surprises if you know the grammar language: A e[Model] consists of
+any number of e[Imports] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with an e[RequestType],
+i.e. HTTP method, followed by a e[URL] pattern. Then an optional when-clause can be specified followed by
 a mandatory do-clause.
 
 section:routing_inferrer[Translation to Java]
 
 In codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer] you can see that a Java class 
 extending the class codeRef[javax.servlet.http.HttpServlet] is derived.
-First the e[dependencies] are translated to Java fields. This is almost a one-to-one mapping.
+First the e[Dependencies] are translated to Java fields. This is almost a one-to-one mapping.
 
 code[Xtend][
 // translate the dependencies to fields annotated with @Inejct
 for (field : model.declarations.filter(typeof(Dependency))) {
-	members += field.toField(field.name, field.type) \[
-		annotations += field.toAnnotation(typeof(Inject))
-		field.annotations.translateAnnotationsTo(it)
-	\]
+  members += field.toField(field.name, field.type) \[
+    annotations += field.toAnnotation(typeof(Inject))
+    field.annotations.translateAnnotationsTo(it)
+  \]
 }
 ]
 
-Next up a field for the URL patterns is generated and a method for the used expressions (to give them
-a proper scope and context).
+Next up a field for the e[URL] patterns is generated and a method for the used expressions, such giving them
+a proper scope and context.
 
 code[Xtend][
 // declare fields for the URL regexp, a method for each when-part 
 // and of course the call part of a route
 for (route : model.routes.filter\[ url != null \]) {
-	members += route.toRoutePatternField
-	if (route.condition != null)
-		members += route.toRouteConditionMethod
-	members += route.toRouteCallMethod
+  members += route.toRoutePatternField
+  if (route.condition != null)
+    members += route.toRouteConditionMethod
+  members += route.toRouteCallMethod
 }
 ]
 
 Note that the code in a model inferrer has to be very defensive, because it is called for any kind of
-broken models. You just can't assume that the url is set although it is mandatory in the grammar, because
+broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because
 the user might have written syntactically incorrect code.
 
 Next up the handler methods from codeRef[javax.servlet.http.HttpServlet] are implemented such that they
-dispatch according the the URL patterns and when clauses. Here's a translated example:
+dispatch according the the URL patterns and when-clauses. Here is a translated example:
 
 table[
   tr[
@@ -144,7 +148,7 @@ import com.acme.GuessTheNumber
 inject GuessTheNumber controller
 
 GET /guess/:theGuess
-	do controller.handleGuess(theGuess)
+  do controller.handleGuess(theGuess)
     ]]]
   tr[
     td[Java]
@@ -156,19 +160,22 @@ public class NumberGuessing extends HttpServlet {
   
   private static Pattern _pattern2 = Pattern.compile("/guess/(\\w+)");
   
-  public void _doGet2(final HttpServletRequest request, final HttpServletResponse response, final String theGuess) {
+  public void _doGet2(final HttpServletRequest request, 
+                      final HttpServletResponse response, 
+                      final String theGuess) {
     this.controller.handleGuess(theGuess);
   }
   
   @Override
-  public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+  public void doGet(final HttpServletRequest request, 
+                    final HttpServletResponse response) {
     String url =  request.getRequestURL().toString();
     {
-    	java.util.regex.Matcher _matcher = _pattern2.matcher(url);
-    	if (_matcher.find()) {
-    		String theGuess = _matcher.group(1);
-    		_doGet2(request, response, theGuess);
-    	}
+      java.util.regex.Matcher _matcher = _pattern2.matcher(url);
+      if (_matcher.find()) {
+        String theGuess = _matcher.group(1);
+        _doGet2(request, response, theGuess);
+      }
     }
   }
 }]]]
@@ -178,30 +185,33 @@ As you can see the expression code[Xtend][controller.handleGuess(theGuess)] is p
 three parameters. This is done in the following method from codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer]:
 
 code[Xtend][
-	/**
-	 * Creates a method for the route's target call.
-	 * Gives scope and live to the expression.
-	 */
-	def protected toRouteCallMethod(Route route) {
-		route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) \[
-			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
-			parameters += route.toParameter("response", route.newTypeRef(HTTP_RESPONSE))
-			for (variable : route.url.variables) {
-				parameters += variable.toParameter(variable.name, route.newTypeRef(typeof(String)))
-			}
-			body = route.call
-		\]
-	}
+  /**
+   * Creates a method for the route's target call.
+   * Gives scope and live to the expression.
+   */
+  def protected toRouteCallMethod(Route route) {
+    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) \[
+      parameters += route.toParameter("request",  
+          route.newTypeRef(HTTP_REQUEST))
+      parameters += route.toParameter("response", 
+          route.newTypeRef(HTTP_RESPONSE))
+      for (variable : route.url.variables) {
+        parameters += variable.toParameter(variable.name, 
+          route.newTypeRef(typeof(String)))
+      }
+      body = route.call
+    \]
+  }
 ]
 
 Just because of that code you can now refer to the local variables code[request], code[response], and
 code[theGuess]. Also it defines that the expected type is code[Xtend][void] so you are not allowed to
-write for instance code[return 42]. 
+write thing like code[return 42]. 
 
 section:routing_improts[Validated Imports]
 
-Unlike in the other examples, where we used Xtext's generic namespace imports approach, in the HTTP Routes DSL we use real cross-references
-to Java types in imports. Although it's not as convenioent to implement it has the advantage having imports validated 
+Unlike in the other examples, where we used Xtext's default imports approach, in the routing DSL we use real cross-references
+to Java types in imports. Although it is not as convenient to implement, it has the advantage having imports validated 
 and getting proper content assist in your imports section. For future releases it is planned to significantly
 improve support for import sections for JVM languages including nice IDE features like organize imports.
 
@@ -210,7 +220,7 @@ magic 'importedNamespace' feature name we simply use a cross reference to codeRe
 
 code[Xtext][
 Import :
-	'import' importedType=\[ types::JvmType | QualifiedName\];
+  'import' importedType=\[ types::JvmType | QualifiedName\];
 ]
 
 In addition to that you need to explain how the import of a type contributes to the namespace resolution.
@@ -218,21 +228,24 @@ For that you subclass the scope provider as done in codeRef[org.xtext.httproutin
 and override the method code[internalGetImportedNamespaceResolvers] like in the following:
 
 code[Xtend][
-	override internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
-		val model = context.getContainerOfType(typeof(Model))
-		return model.imports.map \[
-				createImportedNamespaceResolver(importedType.qualifiedName, ignoreCase)
-			\].filterNull.toList
-	}
+  override internalGetImportedNamespaceResolvers(EObject context, 
+      boolean ignoreCase) {
+    val model = context.getContainerOfType(typeof(Model))
+    return model.imports.map \[
+        createImportedNamespaceResolver(importedType.qualifiedName, 
+           ignoreCase)
+      \].filterNull.toList
+  }
 ]
 
 To register your customized class you go into the runtime module codeRef[org.xtext.httprouting.RouteRuntimeModule]
 and override the corresponding binding:
 
 code[Java][
-	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-		.to(RouteImportedNamespaceScopeProvider.class);
-	}
+  @Override
+  public void configureIScopeProviderDelegate(Binder binder) {
+    binder.bind(IScopeProvider.class).annotatedWith(
+        Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+    .to(RouteImportedNamespaceScopeProvider.class);
+  }
 ]

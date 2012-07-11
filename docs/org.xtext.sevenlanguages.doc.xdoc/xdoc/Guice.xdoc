@@ -45,7 +45,8 @@ The Guice DSL described in this section lets you describe aboves module like thi
 
 code[guice][
   MyModule {
-    @Named("properties") Map<String,String> to-instance newHashMap('debugLevel' -> 'info')
+    @Named("properties") Map<String,String> 
+      to-instance newHashMap('debugLevel' -> 'info')
   }
 ]
 
@@ -230,7 +231,7 @@ com.acme.RuntimeModule {
 @DataFile
 private String _from0;
   
-// and later within configure the following code is used to get the key
+// and later the following code is used to get the key
   Key<java.lang.String> key = 
       Key.get(new TypeLiteral<String>(){}, 
           getClass().getDeclaredField("_from0").getAnnotations()\[0\]);
@@ -267,7 +268,7 @@ def guiceKey(KeyAST it) '''
   ENDIF»)'''
 ]
 
-That's basically it, the rest should hopefully be self-explanatory.
+That is basically it, the rest should hopefully be self-explanatory.
 
 section:guice_validation[Validation]
 
