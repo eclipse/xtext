@@ -6,7 +6,7 @@ locations. Popular dedicated template languages are Veloctiy, JSP, Xpand or MTL.
 img[images/template_screenshot.png][][][]
 
 This example is a language for HTML templates. It borrows a lot from Xtend, so it will help you learn 
-themechanisms we used to implement link[http://www.xtend-lang.org/documentation.html#templates][template 
+the mechanisms we used to implement link[http://www.xtend-lang.org/documentation.html#templates][template 
 support in Xtend]. 
 
 section:templates_solution[Overview]
@@ -84,14 +84,14 @@ RichStringIf returns xbase::XIfExpression:
   
 RichStringElseIf returns xbase::XIfExpression:
   {RichStringIf}
-  "ELSEIF"if=XExpression
+  "ELSEIF" if=XExpression
     then=RichString
   (else=RichStringElseIf | "ELSE" else=RichString)?;
 
 terminal TEXT : '»' (!'«')* (EOF|'«');
 ]
 
-It all becomes quite straight forward once you have understand the escaping. Have a look at the last rule
+It becomes quite straight forward once you have understood the escaping. Have a look at the last rule
 e[TEXT] first: It says that a text starts with a closing french quote and ends with an opening quote or 
 the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
 
@@ -224,10 +224,7 @@ tr[td[DSL]td[code[templates][
   <meta name="viewport" content="width=device-width, initial-sca...">
   <meta name="description"
     content="«description»">
-  <meta name="author" content="«author»">
-</head>
-<body>
-«...
+  <meta name="author" content="«...
 ]]]
 tr[td[Java]td[code[Java][
 private CharSequence generate() {
@@ -237,8 +234,6 @@ private CharSequence generate() {
     ""));
   _appendable.append(ObjectExtensions.operator_elvis(
     this.title,""));
-  _appendable.append(ObjectExtensions.operator_elvis(
-    "</title>\n\t<meta name=\"viewport\" content=\"width=devic..."));
   // appends galore
 ...
 ]]]
@@ -284,7 +279,7 @@ RichString : {
   for (nestedExpression : expr.expressions) {
     nestedExpression.internalToJavaStatement(it, true)
     newLine
-    append('''«name».append(org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_elvis(''')
+    append('''«name».append(ObjectExtensions.operator_elvis(''')
     nestedExpression.internalToJavaExpression(it)
     append(',""));')
   }
@@ -307,7 +302,8 @@ RichStringForLoop : {
     StringBuilder «name» = new StringBuilder();
     for (final ''')
   serialize(paramType, expr, it);
-  append(''' «declareVariable(expr.declaredParam, makeJavaIdentifier(expr.declaredParam.name))» : ''')
+  append(''' «declareVariable(expr.declaredParam, 
+      makeJavaIdentifier(expr.declaredParam.name))» : ''')
   internalToJavaExpression(expr.forExpression, it)
   append(") {").increaseIndentation
     expr.eachExpression.internalToJavaStatement(it, true)
@@ -318,11 +314,12 @@ RichStringForLoop : {
   decreaseIndentation.newLine.append("}")
 }] 
 
-The compiler now knows how to handle our new expressions in a statement context. In addition, we have
+The compiler now knows how to handle the new expressions in a statement context. In addition, we have
 to teach it to compile them in an expression context. This is what the second method does:
 
 code[Xtend][
-override protected internalToConvertedExpression(XExpression obj, ITreeAppendable it) {
+override protected internalToConvertedExpression(XExpression obj, 
+                                                 ITreeAppendable it) {
   if (hasName(obj))
     append(getName(obj))
   else 
@@ -349,15 +346,21 @@ class TemplateTypeProvider extends XbaseTypeProvider {
   
   @Inject TypeReferences typeReferences
   
-  def dispatch type(RichString string, JvmTypeReference typeRef, boolean isRawTypes) {
+  def dispatch type(RichString string, 
+                    JvmTypeReference typeRef, 
+                    boolean isRawTypes) {
     typeReferences.getTypeForName(typeof(StringBuilder), string)
   }
   
-  def dispatch type(RichStringForLoop string, JvmTypeReference typeRef, boolean isRawTypes) {
+  def dispatch type(RichStringForLoop string, 
+                    JvmTypeReference typeRef, 
+                    boolean isRawTypes) {
     typeReferences.getTypeForName(typeof(StringBuilder), string)
   }
   
-  def dispatch expectedType(RichStringForLoop container, EReference reference, int index, boolean rawType) {
+  def dispatch expectedType(RichStringForLoop container, 
+                            EReference reference, 
+                            int index, boolean rawType) {
     if (reference == XFOR_LOOP_EXPRESSION__EACH_EXPRESSION)
       typeReferences.getTypeForName(typeof(Object), container)
     else
@@ -382,11 +385,15 @@ The french quotes are not easy to type on every keyboard. We have adapted conten
 when the cursor is inside a TEXT terminal:
 
 code[Java][
-public class TemplateProposalProvider extends AbstractTemplateProposalProvider {
+public class TemplateProposalProvider 
+    extends AbstractTemplateProposalProvider {
   @Override
-  public void complete_TEXT(EObject model, RuleCall ruleCall, ContentAssistContext context,
+  public void complete_TEXT(EObject model, 
+                            RuleCall ruleCall, 
+                            ContentAssistContext context,
       ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(new CompletionProposal("«»", context.getOffset(), 0, 1));
+    acceptor.accept(new CompletionProposal("«»", 
+        context.getOffset(), 0, 1));
   }
 }
 ]
