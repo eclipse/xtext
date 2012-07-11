@@ -89,15 +89,15 @@ part[The 7 Languages]
 
 chapter-ref[scripting]
 
+chapter-ref[builddsl]
+
 chapter-ref[mongoDB]
+
+chapter-ref[guice]
 
 chapter-ref[httpRouting]
 
 chapter-ref[template]
-
-chapter-ref[guice]
-
-chapter-ref[builddsl]
 
 chapter-ref[tortoise]
 

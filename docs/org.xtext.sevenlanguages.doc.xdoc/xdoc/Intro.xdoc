@@ -42,11 +42,11 @@ We have built:
 
 ul[
 item[ref:scripting[A simple scripting language]]
+item[ref:builddsl[A Grade-like build DSL]]
 item[ref:mongoDB[A DSL for statically-typed MongoDB documents]]
 item[ref:guice[A Guice modules DSL]]
 item[ref:httpRouting[A Playframework-like HTTP routing language]]
 item[ref:template[A template language]]
-item[ref:builddsl[A Grade-like build DSL]]
 item[ref:tortoise[A Logo-like programming environment for educational purposes]]
 ]
 
