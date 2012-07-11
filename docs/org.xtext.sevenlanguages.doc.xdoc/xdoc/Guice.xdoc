@@ -35,13 +35,13 @@ public class MyModule implements Module {
 }
 ]
 
-The big advantage of using Java over an external text or XML file, is that you can leverage
+The big advantage of using Java over an external text or XML file is that you can leverage
 the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. 
 codeRef[com.google.inject.TypeLiteral]) a lot in
 order to have an agreeable syntax. Also since the configuration is 'hidden' in a method implementation and not
 really declarative you cannot validate a Guice module at compile time.
 
-The Guice DSL described in this section lets you describe aboves module like this:
+The Guice DSL described in this section lets you describe the module above like this:
 
 code[guice][
   MyModule {
@@ -77,12 +77,12 @@ com.acme.TestModule mixin RuntimeModule {
 
 section:guice_grammar[Grammar]
 
-The grammar is less than 30 lines long. It allows to declare any number of imports using the import mechanism
+The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism
 already described for the ref:scripting_grammar[scripting language]. A module can 'mixin' any number of other modules, which allows
 to reuse existing modules but override keys with different bindings. The mixin feature is described as a 
 cross reference to another code[ModuleAST]. Cross references are covered in detail in the link[http://www.eclipse.org/Xtext/documentation.html#cross_reference][Xtext documentation].
 
-The language allows to bind keys to other keys and to instances. Other concepts like binding to providers
+The language allows binding keys to other keys and to instances. Other concepts like binding to providers
 is something you could do, but would not help in getting the idea across. Everybody is encouraged to fork
 this first prototype and build something really useful ;-)
 
@@ -238,7 +238,7 @@ private String _from0;
   ]]]
 ]
 
-The two section in the model inferrer responsible for this are:
+The two sections in the model inferrer responsible for this are:
 
 code[Xtend][
 for (binding : module.bindings) {
@@ -268,11 +268,11 @@ def guiceKey(KeyAST it) '''
   ENDIF»)'''
 ]
 
-That is basically it, the rest should hopefully be self-explanatory.
+That is basically it. The rest should hopefully be self-explanatory.
 
 section:guice_validation[Validation]
 
-One of the sweetspots for a Guice modules DSL is the ability to do a lot of the validation usually done
+One of the sweet spots for a Guice modules DSL is the ability to do a lot of the validation usually done
 at runtime during compile time. Since this is just an example it just scratches the surface. There is
 just a single compiler check validating whether any used annotation is itself annotated with 
 codeRef[com.google.inject.BindingAnnotation].
@@ -288,7 +288,7 @@ code[Xtend][
   }
 ]
 
-It would be really cool to leverage the full information which is available and analyze the dependencies
-transitively so you get feedback while you type for any unfullfilled dependencies. Also using all the
+It would be really cool to leverage the full information, which is available and analyze the dependencies
+transitively so you get feedback while you type for any unfulfilled dependencies. Also using all the
 information to compile a ready to use codeRef[com.google.inject.Injector] instead of a module seems 
 interesting.

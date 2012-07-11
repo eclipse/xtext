@@ -5,15 +5,15 @@ This is a template language specialized for generation of HTML documents.
 img[images/template_screenshot.png][][][]
 
 The language allows web designers to do their job and let's developers put in the dynamic parts. 
-The syntax and terminals are chosen to be readable and allow to render the templates in the browser as 
+The syntax and terminals are chosen to be readable and allow rendering the templates in the browser as 
 well as in any HTML 5 compatible WYSIWYG editors. Still, when opened in the DSL editor you get the 
-fully-featured statically-typed Eclipse editor.
+fully featured, statically typed Eclipse editor.
 
 section:templates_solution[Overview]
 
 A template language works in two modes: Plain text mode, where everything goes directly into the output
 and the expression mode, where expressions have to be evaluated and the result is inserted into the text.
-To switch between text mode and expression mode, we use the french quotes code[«] and code[»]. A document
+To switch between text mode and expression mode, we use the French quotes code[«] and code[»]. A document
 starts in text mode.
 
 The template will be compiled to a Java class with a code[generate(params)] method. You can provide 
@@ -91,16 +91,16 @@ RichStringElseIf returns xbase::XIfExpression:
 terminal TEXT : '»' (!'«')* (EOF|'«');
 ]
 
-It becomes quite straight forward once you have understood the escaping. Have a look at the last rule
-e[TEXT] first: It says that a text starts with a closing french quote and ends with an opening quote or 
+It becomes quite straightforward once you have understood the escaping. Have a look at the last rule
+e[TEXT] first: It says that a text starts with a closing French quote and ends with an opening quote or 
 the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
 
 A e[TemplateFile] starts with a comment and switches to the expression mode for the preamble part consisting 
 of the package declaration, the imports and the parameter declaration. The body is a e[RichString], which
 is an alternating sequence of e[RichStringLiterals] and e[RichStringPart]. The e[RichStringLiterals]
-is essentially a text block (in inverted french quotes). The e[RichStringPart] is either an Xbase expression,
+is essentially a text block (in inverted French quotes). The e[RichStringPart] is either an Xbase expression,
 a e[RichStringForLoop] or a e[RichStringIf]. The latter inherit from the Xbase expressions with the same name 
-to reuse as much of the Xbase infrastructure as possible. The rest should be straight forward.
+to reuse as much of the Xbase infrastructure as possible. The rest should be easy.
 
 section:templates_inferrer[Translation to Java]
 
@@ -210,7 +210,7 @@ for (param : element.params) {
 ]
 
 The body of the template is compiled into a big private code[Java][generate()] method. We skip
-the inferrer code here, as it is straight forward. But we had to extend the compiler to support rich
+the inferrer code here, as it is straightforward. But we had to extend the compiler to support rich
 strings and the new code[templates][FOR] loop our new control structures. This is described in the 
 ref:templates_compiler[next section].
 
@@ -374,14 +374,14 @@ codeRef[org.xtext.template.TemplateRuntimeModule][runtime module] as well.
 
 section:templates_valueConverter[Value Converter]
 
-The e[RichStringLiterals] still have the french quotes around their values. As we do not want to see 
+The e[RichStringLiterals] still have the French quotes around their values. As we do not want to see 
 them in the output, we
 have implemented the codeRef[org.xtext.template.TemplateValueConverterService] and bound it in the 
 codeRef[org.xtext.template.TemplateRuntimeModule][runtime module].
 
 section:templates_contentAssist[Content Assist]
 
-The french quotes are not easy to type on every keyboard. We have adapted content assist to insert them
+The French quotes are not easy to type on every keyboard. We have adapted content assist to insert them
 when the cursor is inside a TEXT terminal:
 
 code[Java][
@@ -405,4 +405,4 @@ we have changed the way the text is highlighted. This customization consists of 
 styles in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingConfiguration] and apply
 them to the text in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingCalculator]. As
 this is rather extensively covered in the link[documentation.html#highlighting][Xtext documentation], we 
-skip a deeper explaination here.
+skip a deeper explanation here.

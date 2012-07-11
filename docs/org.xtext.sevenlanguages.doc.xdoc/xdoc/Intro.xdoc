@@ -7,7 +7,7 @@ easy with Xtext. But structure alone is not sufficient in many cases. When it co
 often fall back to implementing them in Java. The reasons are obvious: expressions and statements are hard to get 
 right and extremely complex and therefore costly to implement.
 
-This document introduces and explains a new API, which allows to reuse predefined language constructs such as type references, 
+This document introduces and explains a new API, which allows reusing predefined language constructs such as type references, 
 annotations and fully featured expressions anywhere in your languages. You not only reuse the grammar but the complete implementation 
 including a compiler, interpreter, the whole Java type system and a tight IDE integration. And the best part is, that it is 
 relatively easy to do so. It is actually just two steps:
@@ -15,14 +15,14 @@ relatively easy to do so. It is actually just two steps:
 section[Write the Grammar]
 
 Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
-languages is, that you inherit from an abstract grammar org.eclipse.xtext.xbase.Xbase which predefines the syntax
+languages is, that you inherit from an abstract grammar org.eclipse.xtext.xbase.Xbase, which predefines the syntax
 for the reusable parts. You do not need to use all of them directly and you can of course change the syntax 
-or add new concepts as it seems fit.
+or add new concepts, as it seems fit.
 
 section[Map to Java]
 
 Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
-For that purpose you use a so called model inferrer, a special API that allows you to create any number of Java classes, interfaces 
+For that purpose you use a so-called model inferrer, a special API that allows you to create any number of Java classes, interfaces 
 or members from your DSL. This hook not only defines how your language is translated to Java, but also defines 
 the scope of the embedded expressions. The expressions from your language 'live' in the context you give them.
 If you want an expression to have access to certain local variables, just put it into a method with appropriate 
@@ -30,7 +30,7 @@ parameters or use instance fields if they work better.
 
 This hook also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to 
 integrate arbitrary languages with each other. You can for instance call ref:template[templates] directly from a ref:scripting[script]
-and vice versa. You do not even need to generate the equivalent Java code, everything is based on the Java types you
+and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you
 create in the model inferrer.
 
 To illustrate the power and flexibility of these two abstractions, we have built seven example languages using them:
@@ -46,9 +46,9 @@ item[ref:tortoise[A Logo-like programming environment for educational purposes]]
 ]
 
 Each language is very simple and focuses on the value a DSL can add to the respective 
-view point. It is meant to give you an idea of what is possible without being a complete practical solution.
+viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution.
 Yet the languages are flexible and come with powerful core abstractions.
-We also covered different technical aspects of customizing to the language infrastructure. Some langauges
+We also covered different technical aspects of customizing to the language infrastructure. Some languages
 have special import logic, others implement special syntax coloring, outline views or content assist.
 The new API for JVM languages does not mean that anything is hidden away and not customizable.
 
@@ -189,7 +189,7 @@ list.sortBy\[ length \]
 ]
 
 a[xtend_templates]
-Also noteworthy is the template expression, which allows to define interpolated multi-line string literals.
+Also noteworthy is the template expression, which allows defining interpolated multi-line string literals.
 In addition, the template expressions has intelligent whitespace handling and supports a special code[Xtend][FOR] and 
 code[Xtend][IF] construct, which is far better readable in this context.
 

@@ -95,10 +95,10 @@ Variable :
 
 The routing DSL defines imports by using cross references. This makes it possible to use content assist and
 get an error marker if the type does not exist. It is planned for an upcoming version of Xtext to provide
-an even better abstraction for importing Java types, including automatic support for IDE features like organize imports.
+an even better abstraction for importing Java types, including automatic support for IDE features like organizing imports.
 
 Other than that there should not be any surprises if you know the grammar language: A e[Model] consists of
-any number of e[Imports] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with an e[RequestType],
+any number of e[Imports] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with a e[RequestType],
 i.e. HTTP method, followed by a e[URL] pattern. Then an optional when-clause can be specified followed by
 a mandatory do-clause.
 
@@ -137,7 +137,7 @@ broken models. You just cannot assume that the URL is set although it is mandato
 the user might have written syntactically incorrect code.
 
 Next up the handler methods from codeRef[javax.servlet.http.HttpServlet] are implemented such that they
-dispatch according the the URL patterns and when-clauses. Here is a translated example:
+dispatch according the URL patterns and when-clauses. Here is a translated example:
 
 table[
   tr[

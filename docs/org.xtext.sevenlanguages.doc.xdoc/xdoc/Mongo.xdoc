@@ -11,7 +11,7 @@ OTOH, Java is statically typed: The available types, their field names and field
 at compile time. The JavaBeans convention defines how instances can be manipulated. the standard mongoDB Java 
 driver reflects mongoDB's schema freeness by providing mongo documents as raw Java maps. 
 
-With this language you can describe statically-typed Java-facades for MongoDB documents without hiding the dynamic
+With this language you can describe statically typed Java-facades for MongoDB documents without hiding the dynamic
 nature of it. The language uses a tree-like syntax similar to JSON but lets you add Java type information
 to it.
 
@@ -101,7 +101,7 @@ link[http://www.mongodb.org/downloads][mongoDB implementation] for your platform
 the mongoDB Java driver from link[http://download.eclipse.org/tools/orbit/downloads/][Eclipse Orbit] 
 in the code base. 
 
-Import the projects into an Eclipse workspace and run the launch config 
+Import the projects into an Eclipse workspace and run the launch configuration
 e[Run (org.eclipse.xtext.mongobeans)]. Import the example plug-in into the new workspace and run 
 code[MusicDBXtendTest] as a JUnit test.
 
@@ -398,7 +398,7 @@ That was a lot of code, but because it is the essence of this language we hope i
 
 section:mongo_nameProvider[Qualified Name Provider]
 
-By default, the qualified name of an element is calculated by concatening all the simple names of its 
+By default, the qualified name of an element is calculated by joining all the simple names of its 
 containers with a dot. In our example, the e[MongoBean] code[Track] would consequently be named 
 code[org.musicdb.Album.track.Track]. To ignore properties and beans on the path, we implemented our own
 codeRef[org.xtext.mongobeans.scoping.MongoQualifiedNameProvider]. 
