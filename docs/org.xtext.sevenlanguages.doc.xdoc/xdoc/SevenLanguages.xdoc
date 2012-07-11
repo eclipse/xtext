@@ -36,6 +36,8 @@ codelanguage-def[Xtend][
 	class,finally,long,null,
 	float,super,while,create,dispatch,extension,typeof,as,
 	val, var,
+	null,true,false,
+	it,
 	IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
 ]
 
