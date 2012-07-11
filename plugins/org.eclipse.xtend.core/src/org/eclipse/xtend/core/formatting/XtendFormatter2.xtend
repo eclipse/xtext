@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.formatting
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend.core.services.XtendGrammarAccess
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.Data
 import org.eclipse.xtend.lib.Property
@@ -21,7 +22,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XIfExpression
-import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Moitz Eysholdt - Initial contribution and API
@@ -31,14 +32,15 @@ public class XtendFormatter2 {
 	@Inject extension XtendGrammarAccess;
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 
-	def void format(ICompositeNode root, int offset, int length, (int, int, String)=>void textEditAcceptor) {
+	def void format(XtextResource res, int offset, int length, (int, int, String)=>void textEditAcceptor) {
+		val root = res.parseResult.rootNode
 		val uri = root.semanticElement.eResource.URI
 		val lineSeparator = whitespaeInfo.getLineSeparatorInformation(uri).lineSeparator
 		val indentation = whitespaeInfo.getIndentationInformation(uri).indentString
 		format(root, new FormatterState(), new FormatterCfg(lineSeparator, indentation), textEditAcceptor)
 	}
 	
-	def void format(INode node, FormatterState state, FormatterCfg cfg, (int, int, String)=>void textEditAcceptor) {
+	def protected void format(INode node, FormatterState state, FormatterCfg cfg, (int, int, String)=>void textEditAcceptor) {
 		switch node {
 			ILeafNode case node.hidden: {
 				state.lastHiddens += node
@@ -48,8 +50,14 @@ public class XtendFormatter2 {
 				// match before LeafNode
 				switch(node.grammarElement) {
 					case classAccess.rightCurlyBracketKeyword_10: { state.wrap = 1 state.indentation = state.indentation - 1 } 
-					case XBlockExpressionAccess.rightCurlyBracketKeyword_3: { state.wrap = 1 state.indentation = state.indentation - 1 } 
+					case XBlockExpressionAccess.rightCurlyBracketKeyword_3: { state.wrap = 1 state.indentation = state.indentation - 1 }
+//					case XClosureAccess.rightSquareBracketKeyword_3: {
+//						val closure = sem as XClosure 
+//						if(!closure.explicitSyntax) state.space = ""
+//						if((closure.expression as XBlockExpression).expressions.size > 1) { state.wrap = 1 state.indentation = state.indentation - 1 }
+//					} 
 					case XBlockExpressionAccess.semicolonKeyword_2_1: { state.space = "" } 
+					case XExpressionInClosureAccess.semicolonKeyword_1_1: { state.space = "" } 
 					case node.text == ".": { if(state.last?.text != "=") state.space = "" } 
 					case node.text == ",": { if(state.last?.text != "=") state.space = "" } 
 					case node.text == "(": { if(state.last?.text != "=") state.space = "" } 
@@ -78,6 +86,15 @@ public class XtendFormatter2 {
 				switch(node.grammarElement) {
 					case classAccess.leftCurlyBracketKeyword_8: { state.wrap = 1 state.indentation = state.indentation + 1 }
 					case XBlockExpressionAccess.leftCurlyBracketKeyword_1: { state.wrap = 1 state.indentation = state.indentation + 1 }
+//					case XClosureAccess.leftSquareBracketKeyword_0_0_1: {
+//						val closure = sem as XClosure 
+//						if(!closure.explicitSyntax && state.last?.text != "=") state.space = ""
+//						if((closure.expression as XBlockExpression).expressions.size > 1 && !closure.explicitSyntax) { state.wrap = 1 state.indentation = state.indentation - 1 }
+//					} 
+//					case XClosureAccess.explicitSyntaxVerticalLineKeyword_1_0_1_0: {
+//						val closure = sem as XClosure 
+//						if((closure.expression as XBlockExpression).expressions.size > 1) { state.wrap = 1 state.indentation = state.indentation - 1 }
+//					} 
 					case node.text == ".": { state.space = "" }
 					case node.text == "(": { state.space = "" } 
 					case node.text == "<": { state.space = "" } 

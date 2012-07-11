@@ -28,6 +28,8 @@ import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XBlockExpressionElements;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XExpressionInClosureElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XIfExpressionElements;
 
 /**
@@ -51,7 +54,9 @@ public class XtendFormatter2 {
   @Inject
   private IWhitespaceInformationProvider whitespaeInfo;
   
-  public void format(final ICompositeNode root, final int offset, final int length, final Procedure3<? super Integer,? super Integer,? super String> textEditAcceptor) {
+  public void format(final XtextResource res, final int offset, final int length, final Procedure3<? super Integer,? super Integer,? super String> textEditAcceptor) {
+    IParseResult _parseResult = res.getParseResult();
+    final ICompositeNode root = _parseResult.getRootNode();
     EObject _semanticElement = root.getSemanticElement();
     Resource _eResource = _semanticElement.eResource();
     final URI uri = _eResource.getURI();
@@ -64,7 +69,7 @@ public class XtendFormatter2 {
     this.format(root, _formatterState, _formatterCfg, textEditAcceptor);
   }
   
-  public void format(final INode node, final FormatterState state, final FormatterCfg cfg, final Procedure3<? super Integer,? super Integer,? super String> textEditAcceptor) {
+  protected void format(final INode node, final FormatterState state, final FormatterCfg cfg, final Procedure3<? super Integer,? super Integer,? super String> textEditAcceptor) {
     boolean _matched = false;
     if (!_matched) {
       if (node instanceof ILeafNode) {
@@ -113,6 +118,14 @@ public class XtendFormatter2 {
             XBlockExpressionElements _xBlockExpressionAccess_1 = this._xtendGrammarAccess.getXBlockExpressionAccess();
             Keyword _semicolonKeyword_2_1 = _xBlockExpressionAccess_1.getSemicolonKeyword_2_1();
             if (Objects.equal(_switchValue,_semicolonKeyword_2_1)) {
+              _matched_1=true;
+              state.setSpace("");
+            }
+          }
+          if (!_matched_1) {
+            XExpressionInClosureElements _xExpressionInClosureAccess = this._xtendGrammarAccess.getXExpressionInClosureAccess();
+            Keyword _semicolonKeyword_1_1 = _xExpressionInClosureAccess.getSemicolonKeyword_1_1();
+            if (Objects.equal(_switchValue,_semicolonKeyword_1_1)) {
               _matched_1=true;
               state.setSpace("");
             }
