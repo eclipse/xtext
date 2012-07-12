@@ -2,7 +2,7 @@ chapter:tortoise[Little Tortoise]
 
 Do you remember the programming language link[http://en.wikipedia.org/wiki/Logo_%28programming_language%29][Logo]? 
 Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
-But the remarkable part was the so called e[turtle], a graphical cursor that can be given commands to move and turn, 
+But the remarkable part was the so-called e[turtle], a graphical cursor that can be given commands to move and turn, 
 thereby drawing lines.
 
 img[images/tortoise_screenshot.png][][][]
@@ -12,7 +12,7 @@ and use the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] f
 
 section:tortoise_solution[Overview]
 
-We have build a language that allows to define e[Programs] and e[SubPrograms]. Each of these has a body
+We have built a language that allows to define e[Programs] and e[SubPrograms]. Each of these has a body,
 which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
 to issue commands to the tortoise. Here is an example explaining the concepts in comments:
  
@@ -51,8 +51,8 @@ define it in the runtime library. This way, the language stays as slim as can be
 added without the need to regenerate the whole language infrastructure.
 
 The core of the runtime library is the class codeRef[org.xtext.tortoiseshell.lib.Tortoise]. You can
-think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
-modify it using methods. Here is an excerpt of its code:
+think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows 
+modifying it using methods. Here is an excerpt of its code:
 
 code[Xtend][
 class Tortoise {
@@ -78,15 +78,15 @@ section:tortoise_running[Running the Example]
 In the runtime Eclipse, open the e[Tortoise View] e[(Window > Show View > Other > Xtext > TortoiseView)].
 Then open one of the example files in e[org.eclipse.xtext.tortoiseshell.examples]. 
 The e[Program] is interpreted on editor activation and on save. An additional toggle button e[Step Mode] 
-in the e[Tortoise View] allows to execute the code live from the editor upto the carret's current line.
+in the e[Tortoise View] allows to execute the code live from the editor up to the caret's current line.
 
 img[images/Pythagoras.png][Tortoise takes a rest after running the Pythagoras example][][]
 
 section:tortoise_grammar[Grammar]
 
-The grammar very short. Once again, we inherit from the Xbase language to have nice Java integration
-and rich expressions. A user can define a e[Program] which can have e[SubPrograms] with parameters. The 
-e[Executable] rule is never called, but defines a common supertype for e[Program] and e[SubProgram] which 
+The grammar is very short. Once again, we inherit from the Xbase language to have nice Java integration
+and rich expressions. A user can define a e[Program], which can have e[SubPrograms] with parameters. The 
+e[Executable] rule is never called, but defines a common supertype for e[Program] and e[SubProgram] that 
 will hold their common member code[body]. A e[Body] is an e[XBlockExpression] from Xbase, but with the 
 keywords code[begin] and code[end] instead of the curly braces.
 
@@ -153,8 +153,8 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 
 section:tortoise_interpreter[Interpreter]
 
-The Xbase languge library does not only provide a compiler that generates Java code, but also an 
-codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter][interpreter]. This has been adapted to
+The Xbase language library does not only provide a compiler that generates Java code, but also an 
+codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter][interpreter]. This has been adapted 
 to execute our e[Programs]. 
 
 After all an interpreter is just a big visitor. For each expression type, it has an evaluation method,
@@ -195,10 +195,10 @@ code[Xtend][
 
 One thing you have to know about the Java inferrence is that when creating Java elements using the
 codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder], the infrastructure stores the information which 
-elements have been inferred from which source elements. To navigate these traces, we use the the Xbase service
-codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations]. So to detect wheter a 
+elements have been inferred from which source elements. To navigate these traces, we use the Xbase service
+codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations]. So to detect whether a 
 codeRef[org.eclipse.xtext.common.types.JvmOperation] is inferred, we check whether it has a source element.
-If so, we have to setup an exection context binding code[this] and the parameters as local variables and then 
+If so, we have to setup an execution context binding code[this] and the parameters as local variables and then 
 execute the method's body using the interpreter. 
 
 To start the interpretation we have to do almost the same: Setup the execution context and then evaluate

@@ -1,13 +1,14 @@
 chapter:builddsl[Build Language]
 
-Build tools likle Ant or Gradle decompose the build process into a set of tasks. A task can stand for
-a compilation, copying some files, bundling, running tests etc. The order of execution is calculated from 
-the dependencies of the tasks define.
+Build tools like Ant or link[http://www.gradle.org/][Gradle] decompose the build process into a set of tasks. A task can 
+stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from 
+the dependencies of the defined tasks.
 
 img[images/builddsl_screenshot.png][][][]
 
-This example show how to create a build DSL with Xtext. We leverage the full power of Xbase inside the
-bodies of the tasks, and manage command line parameters as well as task dependencies.  
+This build language is a fully-statically typed language which combines the declarative approach of defining tasks
+and dependencies with the full power of a modern expression language. It is a bit similar to Gradle but statically typed 
+and with very good IDE support.  
 
 section:builddsl_solution[Overview]
 
@@ -19,7 +20,7 @@ A build script can be run from the command line, assigning values to the paramet
 code[myscript --<paramName> <value>]. 
 
 We have put most functionality of the language in the runtime library: Detecting the order of execution,
-parsing parameters, etc. The language itself concentrates on the structural parts, and leaves the actions
+parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions
 to Xbase. With this approach, it has proven beneficial to allow additional library methods to be added
 via the extension method mechanism. So we do not ship a library of tasks as e.g. Ant does. 
 
@@ -71,7 +72,7 @@ section:builddsl_inferrer[Translation to Java]
 
 For each e[BuildFile] we create a Java class that extends the library class 
 codeRef[org.xtext.builddsl.lib.BuildScript]. We generate a main method allowing to execute the script as
-a Java application with command line parameters. The use of code[Java][Sytem.exit] allows to return error codes
+a Java application with command line parameters. The use of code[Java][System.exit] allows to return error codes
 to the caller.  
 
 table[
@@ -151,7 +152,7 @@ code[Xtend][
 members += file.tasks.map\[ task | toMethod(task.methodName, task.newTypeRef(Void::TYPE)) \[
   visibility = JvmVisibility::PROTECTED
   annotations += task.toAnnotation(typeof(DependsOn)) => \[
-    values += eINSTANCE.createJvmStringAnnotationValue => \[
+    values += createJvmStringAnnotationValue => \[
       values += task.depends.map\[name\]
     \]
   \]
@@ -174,7 +175,8 @@ public String name = "World";
 
 The type can be skipped. If there is an initialization expression, the parameter's type is inferred using
 the codeRef[org.eclipse.xtext.xbase.typing.ITypeProvider]. If nothing is specified, codeRef[java.lang.String] 
-is assumed. In the inferrer, this looks like:
+is assumed. The Elvis-operator comes handy for this use case. The different sources are tried to find the
+best type for the field. In the inferrer, this looks like:
 
 code[Xtend][
 @Inject ITypeProvider typeProvider
@@ -210,7 +212,8 @@ class BuildDSLValidator extends XbaseJavaValidator {
 section:builddsl_imports[Static Imports]
 
 It is very likely that users want to add their own functionality, e.g. to format a file. To facilitate
-that, all imports in the build DSL are automatically static extension imports, too. That means, the static
+that, all imports in the build DSL are automatically treated like Xtend's code[Xtend][static extension] 
+imports, too. That means, the static
 methods of an imported type are callable in ref:xtend_extension[extension syntax]. This is accomplished
 by binding our own codeRef[org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider]:
 
@@ -237,7 +240,8 @@ class AllImportsAreStaticFeatureProvider
     }
     return result
   }
-}]
+}
+]
 
 We also ship some predefined extension classes to enhance the Java classes codeRef[java.io.File], codeRef[java.lang.String]
 and codeRef[java.lang.Class]. These are bound in a customized 
@@ -252,7 +256,8 @@ class BuildDSLExtensionClassNameProvider extends ExtensionClassNameProvider {
       put(typeof(Class), typeof(ClassExtensions))
     \]
   }
-}]
+}
+]
 
 As always, the new implementations have to be bound in the codeRef[org.xtext.builddsl.BuildDSLRuntimeModule]:
 
@@ -296,15 +301,15 @@ final File theSameFile = FileExtensions.operator_divide(
 
 The compiler replaces operators with method calls to methods named code[Xtend][operator_<operatorName>()].
 These have to be callable on the left operand, i.e. be a method of the left operands type or be added
-as an extension to the left operand type. In this case, we use the latter approach, as codeRef[java.io.File]
-as well as codeRef[java.lang.String] are sealed types. To learn more about operators and overloading
-them please consult the link[documentation.html#Xbase_Expressions_Operators][Xtext documentation].
+as an extension to the left operand type. In this case, we use the latter approach, since codeRef[java.io.File]
+as well as codeRef[java.lang.String] are sealed types. To learn more about operators and operator overloading
+please consult the link[http://www.eclipse.org/Xtext/documentation.html#Xbase_Expressions_Operators][Xtext documentation].
 
 section:builddsl_launch[Run as... Integration]
 
-To facilitate executing build scripts from wihtin Java, we have extended Eclipse's launch support. The
+To facilitate executing build scripts from within Java, we have extended Eclipse's launch support. The
 respective classes are codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchDelegate],
 codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchShortcut] and 
 codeRef[org.xtext.builddsl.ui.launch.BuildDSLLaunchTabGroup]. Describing all the details would be a bit
-lengthy but it is uite straight-forward if you are familiar with the launching API.   
+lengthy but it is quite straightforward if you are familiar with the launching API.   
 

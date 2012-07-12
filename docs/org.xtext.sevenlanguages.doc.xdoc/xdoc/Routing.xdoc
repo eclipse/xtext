@@ -1,502 +1,251 @@
 chapter:httpRouting[Http Routing Language]
 
-There are several different frameworks out there like link[https://github.com/playframework/Play20/wiki/ScalaRouting][Play]
-to support HttpRoutes.
+This is a little language that lets you dispatch incoming HTTP requests.
 
 img[images/httprouting_screenshot.png][][][]
 
-Normally they are defined in a special format in a separated central file. In most of the cases there is no tooling except a normal text/XML editor. 
-The only way to decide which route matches is the URL with different wildcards and placeholders. 
-The order of the routes defined in the file is important to decide which matches first. There is no support to access parts of the URL while the mapping is done.
-In most of the cases you might want to have full control via expressions to decide which action should be called. 
-Normally concrete classes are used directly in the route definition to point to an action that should be triggered. That's not really reusable in different scenarios and dependency injection is what you would really like to use.
-
 section:routing_solution[Overview]
 
-In this project, we have created a small DSL base on link[http://www.xtext.org][Xtext] that allows to create routing with full support of expressions and access to the URL while the routing is done.
-The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and link[http://code.google.com/p/google-guice][Guice] bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
-Eventually, we do only have a single code[javax.servlet.http.HttpServlet]todo[ref] containing the logic for routing implemented in Java. 
-To define routes you'll have to create a file with the extension '.route'. The first part of a route defines the type (GET, POST, PUT, DELETE or HEAD) of the route and the pattern.
-code[routing][GET /client/foo/:id/bar/:rest* ...]
-ul[
-	item[code[:id] means a placeholder for a word]
-	item[code[:rest*] means match everything to the rest of the url]
+For server-side web development one needs to match any incoming HTTP requests to some handling code. A request
+is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters,
+etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external 
+configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses 
+annotations to match incoming URLs and other frameworks have their own external DSLs for that.
+
+The HTTP routing language explained in this section uses an approach very similar to the one from the
+link[http://playframework.org][Play framework]. You basically declare a list of URL patterns and explain
+what to do for each case. In contrast to play! which heavily relies on static methods, you can also declare
+so called dependencies which are translated to fields annotated with code[@Inject]. So this DSL plays
+nicely with dependency injection and especially with the ref:guice[Guice modules DSL].
+
+code[routing][
+inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
 ]
-Then you have the possibility to define a condition like:
-code[routing][GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ...]
-Here you have access to id and rest statically typed to String. The servlet will provide the value of the placeholder or wildcard when the mapping takes place. 
-An optional annotated Guice-key could be used after the condition or pattern to get an instance of that type/interface and trigger an operation. 
-code[routing][GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass->doSomething(Integer::parseInt(id))]
-You'll see that there is access to all features of the bound type/interface with access to the placeholders or wildcard values from the URL.
-If you want to call static methods there is no need for a Guice-key. 
-code[routing][GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass::doSomethingStatic(id)]
-In both cases you have the possibility to feed the methods with an expression.
 
-To map that to Java we have to clarify what concepts we have and where we should hook in.
-First of all a code[javax.servlet.http.HttpServlet]todo[ref] has exactly one method for each request type (GET,
-POST, ...). Within these methods we'll have to call our routing logic. A route describes a pattern, a condition, a guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
-the given URL from the request. A condition should be a method with a boolean returntype where the request and the values of the variables from the URL-pattern are handled in as parameters. 
-The guice-key should be a field annotated with whatever is specified by
-the user and @Inject to tell Guice to inject an implementation here. 
-There is one more need for a method to wrap the action call with same parameters as the condition.
-Now we have everything to fill in our logic inside of the global method of the HttpServlet. First of
-all we have to match the URL, extract the values for the variables and establish local variables for
-that. If there is a condition we have to establish a guard for the action call. Only when the pattern
-matches the URL and the condition is true the call should be triggered. Otherwise a following route should
-be evaluated in the same way.
+As you can see, you can have named variable placeholders in the URL and use them in the code[routing][do]-part.
+There also is a code[routing][when]-part which allows to specify an additional condition using the request object
+as well as any parameters:
 
-section2:routing_statistics[Some Stats]
+code[routing][
+inject GuessTheNumber controller
 
-table[
-tr[td[Language name]td[HttpRouting]]
-tr[td[Xtext Grammar]td[39 LOC, 8 rules, 1 Enum]]
-tr[td[Xtext extensions]td[6 classes]]
-tr[td[Execution]td[Java code generator]]
-tr[td[Hardest Part]td[Handle regular expressions :-)]]
+GET /guess/:theGuess
+  when !controller.isValidGuess(theGuess)
+  do controller.handleWrongRange(theGuess)
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
 ]
 
 section:routing_running[Running the Example]
 
-You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servlet-API on the class path of your project.
-Import the projects into an Eclipse workspace and run the launch config
-e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
-org.eclipse.httprouting.example. You'll see that the Servlet-API ist already included in the example.
+The example project's name is e[org.xtext.httprouting.examples] and includes a simple but runnable number
+guessing game. Just start the server (an embedded Jetty) by running codeRef[framework.StartServer] as a
+Java Application. Then point your browser to the URL link[http://localhost:8080/guess][http://localhost:8080/guess].
 
 section:routing_grammar[Grammar]
 
 The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
-code[Xtext][grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations]
 code[Xtext][
-Import:
-	'import' importedType=\[types::JvmType|QualifiedName\];
-]
-The Route DSL defines imports by using crossreferences. This makes it possible to use contentassist here
-and it is clear that the imported type exist.
-code[Xtext][
-Route:
-	requestType=RequestType url=URL condition=Condition? (key=Key call=RouteFeatureCall | call=XFeatureCall);
-	
-URL:
-	{URL} "/" (ID ("." ID)? | variables+=Variable) ("/" (ID ("." ID)? | variables+=Variable))*;
-	
-Variable:
-	":" name=ID (wildcard?="*")?;
-	
-Condition:
-	"when" expression=XExpression;
-	
-Key:
-	annotations+=XAnnotation? type=JvmTypeReference;
-]
-A Route has a type followed by an URL-pattern that can define variables. A variable could be a placeholder
-':id' or a wildcard ':name*'. After the URL-pattern matches an optional condition can point out if the
-route matches. Here you'll have the full support Xbase offers with access to the defined variables. 
+grammar org.xtext.httprouting.Route 
+  with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
-One special thing here is that we can point to an action-implementation in different ways. 
-One is to define a guice-key with an optinal annotation to specialize a
-binding and access an available feature of the type directly after that. The other is to have a static
-method call on a type. The difference between RouteFeatureCall and XFeatureCall is that RouteFeatureCall
-does not allow a static method call.If you would like to see the difference on a grammar level please
-compare XFeatureCall and RouteFeatureCall with each other.
+generate route "http://www.xtext.org/httprouting/Route"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+
+Model :
+  imports+=Import*
+  declarations+=AbstractDeclaration*;
+
+Import :
+  'import' importedType=\[ types::JvmType | QualifiedName\];
+
+AbstractDeclaration :
+  Dependency | Route;
+
+Dependency :
+  'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
+
+Route :
+  requestType=RequestType url=URL 
+  ('when' condition=XExpression)? 
+  'do' call=XExpression;
+
+enum RequestType :
+  GET | POST | PUT | DELETE | HEAD;
+
+/**
+ * matches URLs like 
+ *   '/foo/bar.html' or 
+ *   '/customer/:customerID/save'
+ */
+URL :
+  {URL} 
+  ( '/' | ('/' (QualifiedName | variables+=Variable))* 
+  ('/' variables+=Variable wildcard?='*')?);
+
+Variable :
+  ':' name=ID;
+]
+
+The routing DSL defines imports by using cross references. This makes it possible to use content assist and
+get an error marker if the type does not exist. It is planned for an upcoming version of Xtext to provide
+an even better abstraction for importing Java types, including automatic support for IDE features like organizing imports.
+
+Other than that there should not be any surprises if you know the grammar language: A e[Model] consists of
+any number of e[Imports] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with a e[RequestType],
+i.e. HTTP method, followed by a e[URL] pattern. Then an optional when-clause can be specified followed by
+a mandatory do-clause.
 
 section:routing_inferrer[Translation to Java]
 
-For each e[RouteFile], we create a Java class extending the class codeRef[javax.servlet.http.HttpServlet].
-The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
+In codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer] you can see that a Java class 
+extending the class codeRef[javax.servlet.http.HttpServlet] is derived.
+First the e[Dependencies] are translated to Java fields. This is almost a one-to-one mapping.
+
+code[Xtend][
+// translate the dependencies to fields annotated with @Inejct
+for (field : model.declarations.filter(typeof(Dependency))) {
+  members += field.toField(field.name, field.type) \[
+    annotations += field.toAnnotation(typeof(Inject))
+    field.annotations.translateAnnotationsTo(it)
+  \]
+}
+]
+
+Next up a field for the e[URL] patterns is generated and a method for the used expressions, such giving them
+a proper scope and context.
+
+code[Xtend][
+// declare fields for the URL regexp, a method for each when-part 
+// and of course the call part of a route
+for (route : model.routes.filter\[ url != null \]) {
+  members += route.toRoutePatternField
+  if (route.condition != null)
+    members += route.toRouteConditionMethod
+  members += route.toRouteCallMethod
+}
+]
+
+Note that the code in a model inferrer has to be very defensive, because it is called for any kind of
+broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because
+the user might have written syntactically incorrect code.
+
+Next up the handler methods from codeRef[javax.servlet.http.HttpServlet] are implemented such that they
+dispatch according the URL patterns and when-clauses. Here is a translated example:
 
 table[
   tr[
     td[DSL]
-    td[code[routing][]]]
+    td[code[routing][
+import com.acme.GuessTheNumber
+
+inject GuessTheNumber controller
+
+GET /guess/:theGuess
+  do controller.handleGuess(theGuess)
+    ]]]
   tr[
     td[Java]
     td[code[Java][
-package org.xtext.httpRouting;
-...
 @SuppressWarnings("serial")
-public class HttpMapperServlet extends HttpServlet {
- ...]]]
-]
-
-The inferrer code responsible for this section looks like this:
-
-code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-				superTypes += model.newTypeRef("javax.servlet.http.HttpServlet")
-   				annotations += model.toAnnotation(typeof(SuppressWarnings), "serial")
-		... // calling various methods to create Java members with from the Routes
-         \])
-}
-]
-
-For each Route a URL-pattern should end in a compiled regular expression pattern stored in a field.
-
-table[
-  tr[
-    td[DSL]
-    td[code[routing][GET /client/foo/:id]]]
-  tr[
-    td[Java]
-    td[code[Java][
-private static Pattern pattern0 = Pattern.compile("/client/foo/(\\w+)");
-]]]
-]
-
-The inferrer code responsible for this section looks like this:
-
-code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-			...
-		val routes = model.routes
-   				var routeCounter = 0
-   				for (route : routes) {
-   					if (route.url != null) {
-		   				addRoutePatternField(route, routeCounter)
-		   				...
-	   				}
-					routeCounter = routeCounter + 1
-   				}
-		... //
-         \])
-}
-
-def protected addRoutePatternField(JvmDeclaredType servlet, Route route, int routeCounter) {
-		val patternField = route.url.toField("_pattern" + routeCounter , route.newTypeRef(typeof(Pattern))) \[
-			setStatic(true)
-			setInitializer \[
-				append('Pattern.compile("')
-				append(getRegExPattern(NodeModelUtils::getNode(route.url).text.trim, route.url.variables))
-				append('")')
-			\]
-		\]
-		servlet.members += patternField
-   	}
-...
-def getRegExPattern(String originalPattern, List<Variable> variables) {
-	var pattern = originalPattern
-	for(variable : variables){
-		if(variable.wildcard)
-			pattern = pattern.replaceAll("(:" + variable.name + "\\*)", "(.+)")
-		else
-			pattern = originalPattern.replaceAll("(:" + variable.name + ")", "(\\\\\\\\w+)")
-	}
-	pattern
-}
-...
-]
-
-As we know the name of each variable we can replace the variable from the URL with a regualr expression
-with the same meaning to match the URL that has be routed. As we do not have a element in our model where
-the complete URL-pattern is stored we have to use the NodeModel to get the text behind the URL-pattern.
-
-table[
-  tr[
-    td[DSL]
-    td[code[routing][GET /client/foo/:id when id=='42']]]
-  tr[
-    td[Java]
-    td[code[Java][
- public boolean doGet0Condition(final HttpServletRequest request, final String id) {
-    boolean _equals = Objects.equal(id, "42");
-    return _equals;
+public class NumberGuessing extends HttpServlet {
+  @Inject
+  private GuessTheNumber controller;
+  
+  private static Pattern _pattern2 = Pattern.compile("/guess/(\\w+)");
+  
+  public void _doGet2(final HttpServletRequest request, 
+                      final HttpServletResponse response, 
+                      final String theGuess) {
+    this.controller.handleGuess(theGuess);
   }
-]]]
-]
-
-For each Route a condition should end in a method with a boolean return type. Each variable value should
-be handled in as a parameter. Same is true for the codeRef[javax.servlet.http.HttpServletRequest].
-
-code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-private static String REQUEST = "javax.servlet.http.HttpServletRequest"
-...
-
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-			...
-		val routes = model.routes
-   				var routeCounter = 0
-   				for (route : routes) {
-   					if (route.url != null) {
-   						...
-		   				addRouteConditionMethod(route, routeCounter)
-		   				...
-	   				}
-					routeCounter = routeCounter + 1
-   				}
-		... //
-         \])
-}
-
-def protected addRouteConditionMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
-	if (route.condition != null && route.condition.expression != null) {
-	   	val name = route.nameOfRouteMethod(routeCounter)
-		servlet.members += route.toMethod(name + "Condition", route.newTypeRef(Boolean::TYPE)) \[
-			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
-			for (variable : route.url.variables){
-				parameters += variable.toParameter(variable.name, route.newTypeRef(typeof(String)))
-			}
-			body = route.condition.expression
-		\]
-	}
-}
-
-def nameOfRouteMethod(Route route, int i) {
-		"_do" + route.type.literal.toLowerCase.toFirstUpper + i
-	}
-]
-
-The expression defined in the condition ends up in the body of the new create method. That implies that
-all things sourrounding the method (fields, methods and parameters) are accessable within the expression.
-Isn't that cool. ;-)
-
-table[
-  tr[
-    td[DSL]
-    td[code[routing][
-import com.google.inject.name.Named
-import org.xtext.example.actionclasses.ActionClass
-
-GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass]]]
-  tr[
-    td[Java]
-    td[code[Java][
-@Inject
-@Named(value = "ActionClassName")
-private ActionClass key0;
-]]]
-]
-
-For each Route a guice-key should end in a field with the defined annotations on it plus @Inject. As a guice-key is optional we have to make sure that route has a key. Now we create a field and add the
-annotations to it.
-
-code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-private static String REQUEST = "javax.servlet.http.HttpServletRequest"
-...
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-			...
-			val routes = model.routes
-			var routeCounter = 0
-			for (route : routes) {
-				if (route.url != null) {
-	   				...
-   					addRouteKeyField(route, routeCounter)
-	   				...
-   				}
-				routeCounter = routeCounter + 1
-			}
-		...
-         \])
-}
-...
-def protected addRouteKeyField(JvmDeclaredType servlet, Route route, int routeCounter) {
-		if (route.hasValidKey){
-			servlet.members += route.key.toField("_key" + routeCounter, route.key.type) => \[
-				annotations += route.toAnnotation(typeof(Inject))
-				route.key.annotations.translateAnnotationsTo(it)
-			\]
-		}
-   	}
-...
-def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
-}
-]
-
-table[
-  tr[
-    td[DSL]
-    td[code[routing][
-import com.google.inject.name.Named
-import org.xtext.example.actionclasses.ActionClass
-
-GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass->doSomething(Integer::parseInt(id))]]]
-  tr[
-    td[Java]
-    td[code[Java][
-public boolean doGet0Condition(final HttpServletRequest request, final String id) {
-    boolean _equals = Objects.equal(id, "42");
-    return _equals;
-}
-]]]
-]
-
-For each Route an action call should end in a method where the guice-key (if there is one) and the variables
-should be handle in as parameters. The only special thing here is that the parameter that represents
-the guice-key is named 'it'. That implies that 'it' becomes the implicite reciever and the features of
-the type behind the guice-key are accessable without pointing out that 'it' is the reciever. Wow that's
-so easy...
-code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-private static String REQUEST = "javax.servlet.http.HttpServletRequest"
-...
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-			...
-		val routes = model.routes
-		var routeCounter = 0
-		for (route : routes) {
-			if (route.url != null) {
-   				...
-   				addRouteMethod(route, routeCounter)
-			}
-			routeCounter = routeCounter + 1
-   		}
-		... //
-         \])
-}
-...
-def protected addRouteMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
-   		val name = route.nameOfRouteMethod(routeCounter)
-		servlet.members += route.toMethod(name, route.newTypeRef(Void::TYPE)) \[
-			documentation = route.documentation
-			if (route.hasValidKey)
-				parameters += route.key.toParameter("it", route.key.type)
-			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
-			for (variable : route.url.variables) {
-				parameters += variable.toParameter(variable.name, route.newTypeRef(typeof(String)))
-			}
-			body = route.call
-		\]
-   	}
-...
-def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
-}
-]
-
-
-table[
-  tr[
-    td[DSL]
-    td[code[routing][
-import com.google.inject.name.Named
-import org.xtext.example.actionclasses.ActionClass
-
-GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass->doSomething(Integer::parseInt(id))]]]
-  tr[
-    td[Java]
-    td[code[Java][
-public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
-	String url =  request.getRequestURI();
-	Matcher matcher0 = pattern0.matcher(url);
-	if(matcher0.find()){
-			String id =matcher0.group(1);
-			if(doGet0Condition(request, id))
-			doGet0(key0,request, id);
+  
+  @Override
+  public void doGet(final HttpServletRequest request, 
+                    final HttpServletResponse response) {
+    String url =  request.getRequestURL().toString();
+    {
+      java.util.regex.Matcher _matcher = _pattern2.matcher(url);
+      if (_matcher.find()) {
+        String theGuess = _matcher.group(1);
+        _doGet2(request, response, theGuess);
+      }
     }
-}
-]]]
+  }
+}]]]
 ]
 
-Now we have to put our logic in the global methods of codeRef[javax.servlet.http.HttpServlet]. First
-of all we have to establish several methods for the corresponding request types. As an example for GET
-the method code[Java][public void doGet(final HttpServletRequest request, final HttpServletResponse response)]
-is responsible to handle such requests. So we have two challanges: estalish a method for each request
-type and put the logic in there for the routes that fits for that type.
-Inside of the method we'll have to match the URL from the request to the pattern and extract the values
-for the variables from the URL-pattern. Then we'll have to establish a guard to respect the condition.
-After that we'll finally call the action with the given values of the variables.
+As you can see the expression code[Xtend][controller.handleGuess(theGuess)] is put into a method with
+three parameters. This is done in the following method from codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer]:
 
 code[Xtend][
-@Inject extension JvmTypesBuilder
-...
-private static String REQUEST = "javax.servlet.http.HttpServletRequest"
-...
-def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
-			.initializeLater(\[
-			...	
-			addMethod("doGet", model, routes,RequestType::GET)
-			addMethod("doPost", model, routes,RequestType::POST)
-			addMethod("doPut", model, routes,RequestType::PUT)
-			addMethod("doDelete", model, routes,RequestType::DELETE)
-			addMethod("doHead", model, routes,RequestType::HEAD)
-			\])
-}
-def protected addMethod(JvmDeclaredType servlet, String name, EObject element, Iterable<Route> routes, RequestType filterType) {
-   		servlet.members += element.toMethod(name,element.newTypeRef(Void::TYPE)) \[
-			parameters += element.toParameter("request", element.newTypeRef(HTTP_REQUEST))
-			parameters += element.toParameter("response", element.newTypeRef("javax.servlet.http.HttpServletResponse"))
-			body = \[
-				var x = 0
-				if (routes.exists\[e | e.requestType == filterType\])
-					append('String url =  request.getRequestURL().toString();').newLine
-				for (route : routes) {
-					if (route.requestType == filterType) {
-						if (route.url != null) {
-							append(element.newTypeRef(typeof(Matcher)).type)
-							append(''' _matcher«x» = _pattern«x».matcher(url);''')
-							newLine
-							val variables = route.url.variables
-						    append('''if (_matcher«x».find()) {''').newLine
-					    	for (variable : variables) {
-								append('''		String «variable.name» = _matcher«x».group(«variables.indexOf(variable) + 1»);''')
-								newLine
-							}
-							if (route.condition != null) {
-								append('''		if («route.nameOfRouteMethod(x)»Condition(request''')
-				   				append('''«FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR»''')
-				   				append('''))''')
-				   				newLine
-				   			}
-							append('''			«route.nameOfRouteMethod(x)»(''')
-							if(route.hasValidKey)
-								append('''_key«x»,''')
-							append('''request''')
-			   				append('''«FOR v : route.url.variables BEFORE ", " SEPARATOR ", " »«v.name»«ENDFOR»''')
-			   				append(''');''')
-			   				newLine
-							append('''}''')
-							newLine
-						}
-					}
-					x = x + 1
-				}
-			\]
-		\]
-   	}
+  /**
+   * Creates a method for the route's target call.
+   * Gives scope and live to the expression.
+   */
+  def protected toRouteCallMethod(Route route) {
+    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void::TYPE)) \[
+      parameters += route.toParameter("request",  
+          route.newTypeRef(HTTP_REQUEST))
+      parameters += route.toParameter("response", 
+          route.newTypeRef(HTTP_RESPONSE))
+      for (variable : route.url.variables) {
+        parameters += variable.toParameter(variable.name, 
+          route.newTypeRef(typeof(String)))
+      }
+      body = route.call
+    \]
+  }
 ]
 
-section:routing_additons[Additional Aspects]
+Just because of that code you can now refer to the local variables code[request], code[response], and
+code[theGuess]. Also it defines that the expected type is code[Xtend][void] so you are not allowed to
+write thing like code[return 42]. 
 
-With the Grammar and the inferrer mentioned in the sections above the DSL is funtional and does excatly
-what we want but there are several things we should customize to have a nice tool-support.
-ul[
-	item[First of all there are several things we do not want to have in the contentassist] 
-	item[The outline is really ugly when the elements do not have a name]
-	item[There is a need for validation in the URL-pattern defintion]
+section:routing_improts[Validated Imports]
+
+Unlike in the other examples, where we used Xtext's default imports approach, in the routing DSL we use real cross-references
+to Java types in imports. Although it is not as convenient to implement, it has the advantage having imports validated 
+and getting proper content assist in your imports section. For future releases it is planned to significantly
+improve support for import sections for JVM languages including nice IDE features like organize imports.
+
+To get a bit of this goodness you first use a slightly different e[Import] rule in the grammar. Instead of using the
+magic 'importedNamespace' feature name we simply use a cross reference to codeRef[org.eclipse.xtext.common.types.JvmType]:
+
+code[Xtext][
+Import :
+  'import' importedType=\[ types::JvmType | QualifiedName\];
 ]
-So lets concentrate on the things in the contentassist. The inferred methods and fields have syntetic names
-and from the context of a condition or an action call we do not want to see the inferred things at all.
-So for that reason we have to customize the code and tweak the codeRef[org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer]. All inferred fields and methods
-that we don't wanna see in the contentassist are prefixed with an underscore. Now we have the possibility
-to filter out proposals with this prefix in codeRef[org.xtext.httprouting.ui.contentassist.RouteProposalProvider].
-The other thing is that in case of a guice-Key we introduce a parameter with the name 'it'. This means that
-all features of the type behind it are visible without writing it in front of the call. Good thing but
-we do not want 'it' as itself in the contentassist. Let's just filter that one out in codeRef[org.xtext.httprouting.ui.contentassist.RouteProposalProvider].
 
-To tweak the outline for the routes you'll some customized labels in codeRef[org.xtext.httprouting.ui.labeling.RouteLabelProvider].
-For some objects we do not wanna see a node in the outline at all so there is a need fo a custom codeRef[org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider].
+In addition to that you need to explain how the import of a type contributes to the namespace resolution.
+For that you subclass the scope provider as done in codeRef[org.xtext.httprouting.scoping.RouteImportedNamespaceScopeProvider]
+and override the method code[internalGetImportedNamespaceResolvers] like in the following:
 
-To give the user feedback while the routes are defined we can establish validation. You'll find a validation
-in codeRef[org.xtext.httprouting.validation.RouteJavaValidator] where we raise an error when a placeholder
-is defined after a wildcard in the URL.
+code[Xtend][
+  override internalGetImportedNamespaceResolvers(EObject context, 
+      boolean ignoreCase) {
+    val model = context.getContainerOfType(typeof(Model))
+    return model.imports.map \[
+        createImportedNamespaceResolver(importedType.qualifiedName, 
+           ignoreCase)
+      \].filterNull.toList
+  }
+]
 
+To register your customized class you go into the runtime module codeRef[org.xtext.httprouting.RouteRuntimeModule]
+and override the corresponding binding:
+
+code[Java][
+  @Override
+  public void configureIScopeProviderDelegate(Binder binder) {
+    binder.bind(IScopeProvider.class).annotatedWith(
+        Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+    .to(RouteImportedNamespaceScopeProvider.class);
+  }
+]
