@@ -18,6 +18,7 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.formatting.XtendFormatter2;
+import org.eclipse.xtend.core.formatting.XtendFormatter3;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
@@ -63,18 +64,22 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 			if (parseResult == null)
 				return null;
 			final MultiTextEdit mte = new MultiTextEdit();
-			formatter.format(parseResult.getRootNode(), region.getOffset(), region.getLength(),
-					new Procedure3<Integer, Integer, String>() {
-						public void apply(Integer p1, Integer p2, String p3) {
-							mte.addChild(new ReplaceEdit(p1, p2, p3));
-						}
-					});
+			try {
+				formatter.format(state, region.getOffset(), region.getLength(),
+						new Procedure3<Integer, Integer, String>() {
+							public void apply(Integer p1, Integer p2, String p3) {
+								mte.addChild(new ReplaceEdit(p1, p2, p3));
+							}
+						});
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
 			return mte;
 		}
 	}
 
 	@Inject
-	protected XtendFormatter2 formatter;
+	protected XtendFormatter3 formatter;
 
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
