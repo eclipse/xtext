@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -164,7 +165,33 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	protected void deferredBindTypeArgument(LightweightTypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
 		if (expectedType != null) { 
-			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState());
+			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState()) {
+				@Override
+				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+					return new ParameterizedTypeReferenceTraverser() {
+						@Override
+						public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+								ParameterizedTypeReference declaration) {
+							ExpressionAwareUnboundTypeReference casted = (ExpressionAwareUnboundTypeReference) reference;
+							casted.tryResolve();
+							if (casted.internalIsResolved()) {
+								outerVisit(reference, declaration);
+							} else {
+								addHint(reference, declaration);
+							}
+						}
+						
+						@Override
+						protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+								Set<JvmTypeParameter> visited) {
+							if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+								return false;
+							}
+							return true;
+						}
+					};
+				}
+			};
 			collector.processPairedReferences(expectedType, type);
 		}
 	}
