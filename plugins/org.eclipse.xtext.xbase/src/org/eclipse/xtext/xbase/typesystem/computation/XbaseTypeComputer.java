@@ -72,6 +72,7 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollec
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -329,20 +330,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			expressionResultType = declaredReturnType;
 		} else {
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner()) {
-				@Override
-				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
-//					if (!getDeclaredTypeParameters().contains(typeParameter.getTypeParameter()) && typeParameter.getExpression() != getExpression()) {
-						UnboundTypeReference replaced = (UnboundTypeReference) copy(typeParameter);
-						super.addHint(replaced, reference);
-//					}
-				}
-				@Override
-				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
-						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-					return state.createSubstitutor(mapping);
-				}
-			};
+			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(state);
 			collector.processPairedReferences(declaredReturnType, expressionResultType);
 		}
 		return expressionResultType;

@@ -1,9 +1,16 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Assert;
@@ -24,21 +31,122 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
       final JvmTypeReference resolvedType = this.typeProvider.getType(xExpression);
       String _simpleName = resolvedType==null?(String)null:resolvedType.getSimpleName();
       Assert.assertEquals(type, _simpleName);
+      TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
+      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+      for (final EObject content : _iterable) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (content instanceof XSwitchExpression) {
+            final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
+            _matched=true;
+            this.assertExpressionTypeIsResolved(_xSwitchExpression);
+            String _localVarName = _xSwitchExpression.getLocalVarName();
+            boolean _notEquals = (!Objects.equal(_localVarName, null));
+            if (_notEquals) {
+              this.assertIdentifiableTypeIsResolved(_xSwitchExpression);
+            }
+          }
+        }
+        if (!_matched) {
+          if (content instanceof XExpression) {
+            final XExpression _xExpression = (XExpression)content;
+            _matched=true;
+            this.assertExpressionTypeIsResolved(_xExpression);
+          }
+        }
+        if (!_matched) {
+          if (content instanceof XCasePart) {
+            final XCasePart _xCasePart = (XCasePart)content;
+            _matched=true;
+          }
+        }
+        if (!_matched) {
+          if (content instanceof JvmIdentifiableElement) {
+            final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
+            _matched=true;
+            this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement);
+          }
+        }
+      }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
+  public void assertExpressionTypeIsResolved(final XExpression expression) {
+    final JvmTypeReference type = this.typeProvider.getType(expression);
+    String _string = expression.toString();
+    Assert.assertNotNull(_string, type);
+    String _string_1 = expression.toString();
+    String _plus = (_string_1 + " / ");
+    String _plus_1 = (_plus + type);
+    String _identifier = type.getIdentifier();
+    Assert.assertNotNull(_plus_1, _identifier);
+  }
+  
+  public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable) {
+    final JvmTypeReference type = this.typeProvider.getTypeForIdentifiable(identifiable);
+    String _string = identifiable.toString();
+    Assert.assertNotNull(_string, type);
+    String _string_1 = identifiable.toString();
+    String _plus = (_string_1 + " / ");
+    String _plus_1 = (_plus + type);
+    String _identifier = type.getIdentifier();
+    Assert.assertNotNull(_plus_1, _identifier);
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_d_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_h_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_i_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_j_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_k_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_l_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
   @Ignore(value = "timeout")
   @Test
   public void testFeatureCall_15_m() throws Exception {
-    Assert.fail();
+    Assert.fail("timeout");
   }
   
   @Ignore(value = "timeout")
   @Test
   public void testFeatureCall_15_n() throws Exception {
-    Assert.fail();
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCall_24_b() throws Exception {
+    Assert.fail("fails in old implementation");
   }
   
   @Ignore(value = "fails in old implementation")
@@ -548,6 +656,12 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_051() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_052() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

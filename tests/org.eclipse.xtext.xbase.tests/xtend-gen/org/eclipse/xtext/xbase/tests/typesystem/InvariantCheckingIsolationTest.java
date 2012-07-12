@@ -48,6 +48,54 @@ public class InvariantCheckingIsolationTest extends AbstractBatchTypeResolverTes
   
   @Ignore(value = "error candidates")
   @Test
+  public void testFeatureCall_17_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_18_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_19_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_20_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_21_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_22_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_23_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
+  public void testFeatureCall_24_b() throws Exception {
+    Assert.fail();
+  }
+  
+  @Ignore(value = "error candidates")
+  @Test
   public void testFeatureCall_26a() throws Exception {
     Assert.fail();
   }

@@ -104,18 +104,90 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 		val xExpression = expression(expression, false /* true */);
 		val resolvedType = typeProvider.getType(xExpression)
 		assertEquals(type, resolvedType?.simpleName);
+		
+		
+		for(content: xExpression.eAllContents.toIterable) {
+			switch(content) {
+				XSwitchExpression: {
+					assertExpressionTypeIsResolved(content)
+					if (content.localVarName != null) {
+						assertIdentifiableTypeIsResolved(content)
+					}
+				}
+				XExpression: {
+					assertExpressionTypeIsResolved(content)
+				}
+				XCasePart : { /* skip */}
+				JvmIdentifiableElement: {
+					assertIdentifiableTypeIsResolved(content)
+				}
+			}
+		}
+		
+	}
+	
+	def void assertExpressionTypeIsResolved(XExpression expression) {
+		val type = typeProvider.getType(expression)
+		assertNotNull(expression.toString, type)
+		assertNotNull(expression.toString + " / " + type, type.identifier)	
+	}
+	
+	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable) {
+		val type = typeProvider.getTypeForIdentifiable(identifiable)
+		assertNotNull(identifiable.toString, type)
+		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_d_2() throws Exception {
+		fail("timeout")
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_h_2() throws Exception {
+		fail("timeout")
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_i_2() throws Exception {
+		fail("timeout")
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_j_2() throws Exception {
+		fail("timeout")
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_k_2() throws Exception {
+		fail("timeout")
+	}
+	
+	@Ignore("timeout")
+	@Test
+	override testFeatureCall_15_l_2() throws Exception {
+		fail("timeout")
 	}
 	
 	@Ignore("timeout")
 	@Test
 	override testFeatureCall_15_m() throws Exception {
-		fail
+		fail("timeout")
 	}
 	
 	@Ignore("timeout")
 	@Test
 	override testFeatureCall_15_n() throws Exception {
-		fail
+		fail("timeout")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testFeatureCall_24_b() throws Exception {
+		fail("fails in old implementation")
 	}
 	
 	@Ignore("fails in old implementation") @Test override testOverloadedVarArgs_03() throws Exception {
@@ -385,6 +457,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_051() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_052() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_053() throws Exception {
@@ -691,6 +766,54 @@ class IsolationTest extends AbstractBatchTypeResolverTest {
 	
 	@Ignore("error candidates")
 	@Test
+	override testFeatureCall_17_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_18_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_19_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_20_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_21_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_22_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_23_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_24_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
 	override testFeatureCall_26a() throws Exception {
 		fail
 	}
@@ -738,6 +861,54 @@ class InvariantCheckingIsolationTest extends AbstractBatchTypeResolverTest {
 	@Ignore("error candidates")
 	@Test
 	override testFeatureCall_07_03() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_17_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_18_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_19_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_20_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_21_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_22_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_23_b() throws Exception {
+		fail
+	}
+	
+	@Ignore("error candidates")
+	@Test
+	override testFeatureCall_24_b() throws Exception {
 		fail
 	}
 	
