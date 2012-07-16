@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
-
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -30,7 +30,7 @@ import com.google.common.collect.Iterables;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class CollectionExtensions {
+@GwtCompatible public class CollectionExtensions {
 
 	/**
 	 * The operator mapping from {@code +=} to {@link Collection#add(Object)}. Returns <code>true</code> if the

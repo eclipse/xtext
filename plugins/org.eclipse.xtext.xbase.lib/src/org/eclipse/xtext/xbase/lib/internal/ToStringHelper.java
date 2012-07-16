@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib.internal;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @Deprecated
-public class ToStringHelper extends org.eclipse.xtext.xbase.lib.util.ToStringHelper {
+@GwtCompatible public class ToStringHelper extends org.eclipse.xtext.xbase.lib.util.ToStringHelper {
 
 }

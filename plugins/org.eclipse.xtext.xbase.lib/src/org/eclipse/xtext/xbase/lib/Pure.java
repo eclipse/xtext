@@ -13,6 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 
 /**
  * Whether the constructor or method causes any side-effects to
@@ -27,6 +28,6 @@ import com.google.common.annotations.Beta;
     ElementType.CONSTRUCTOR,
     ElementType.METHOD})
 @Beta
-public @interface Pure {
+@GwtCompatible public @interface Pure {
 
 }

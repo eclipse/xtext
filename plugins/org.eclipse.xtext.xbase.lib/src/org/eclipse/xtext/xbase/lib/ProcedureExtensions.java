@@ -15,13 +15,15 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure4;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure5;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure6;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This is an extension library for {@link Procedures procedures}, e.g. side-effect only-closures.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @see Procedures
  */
-public class ProcedureExtensions {
+@GwtCompatible public class ProcedureExtensions {
 
 	/**
 	 * Curries a procedure that takes one argument.

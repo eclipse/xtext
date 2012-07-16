@@ -10,13 +10,15 @@ package org.eclipse.xtext.xbase.lib;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link BigDecimal big decimal numbers}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class BigDecimalExtensions {
+@GwtCompatible public class BigDecimalExtensions {
 
 	/**
 	 * The unary <code>minus</code> operator. 

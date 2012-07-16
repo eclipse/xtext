@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link Comparable comparables}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ComparableExtensions {
+@GwtCompatible public class ComparableExtensions {
 
 	/**
 	 * The comparison operator <code>less than</code>.

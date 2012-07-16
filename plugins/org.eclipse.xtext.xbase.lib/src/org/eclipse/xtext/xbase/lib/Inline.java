@@ -13,6 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 
 /**
  * Allows to describe how a certain static function should be inlined by the Xbase compiler.
@@ -23,7 +24,7 @@ import com.google.common.annotations.Beta;
 @Beta
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD })
-public @interface Inline {
+@GwtCompatible public @interface Inline {
 
 	/**
 	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n} parameters of

@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link Double floating point numbers}, e.g. <code>double</code> or <code>Double</code>.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DoubleExtensions {
+@GwtCompatible public class DoubleExtensions {
 
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the unary java <code>-</code> operator.
