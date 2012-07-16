@@ -9,12 +9,13 @@ package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 /**
  * This is an extension library for all {@link Object objects}.
  */
-public class ObjectExtensions {
+@GwtCompatible public class ObjectExtensions {
 
 	/**
 	 * The <code>equals not</code> operator. This is the equivalent to a negated, null-safe
