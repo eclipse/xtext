@@ -2226,7 +2226,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_102() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_102() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.HashSet)
@@ -2235,7 +2235,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_103() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_103() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2244,7 +2244,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_104() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_104() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(newHashSet)
@@ -2253,7 +2253,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_105() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_105() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2262,7 +2262,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_106() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_106() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			val second = new java.util.ArrayList
@@ -2360,7 +2360,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_117() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_117() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), null as java.util.ArrayList<String>)
@@ -2368,7 +2368,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_118() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_118() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
@@ -2468,7 +2468,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_130() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(println(new Integer(0)))
@@ -2497,7 +2497,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_133() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_133() throws Exception {
 		"{
 			val list = newArrayList
 			list.map[String s| s]
@@ -2505,7 +2505,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_134() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_134() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.map[String s| s]
@@ -2513,7 +2513,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_135() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_135() throws Exception {
 		"{
 			val list = newArrayList
 			list.add(newArrayList)
@@ -2522,11 +2522,77 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_136() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
 			val Iterable<String> s = list.head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_137() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(println(list), null, null)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_138() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(list, null, null)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_139() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(println(list), '', '')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_140() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(println(list), println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_141() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(list, println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_142() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(println(list), println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_143() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = $$IterableExtensions::head(list)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_144() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = list.head.head
 			list.head
 		}".resolvesTo("ArrayList<String>")
 	}

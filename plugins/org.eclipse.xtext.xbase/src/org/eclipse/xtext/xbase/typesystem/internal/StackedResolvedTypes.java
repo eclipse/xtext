@@ -186,13 +186,25 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return super.getAllHints(handle);
 	}
 	
+	// TODO this is overly expensive - testFeatureCall_15_n degraded to 3 secs
 	@Override
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
 		List<LightweightBoundTypeArgument> result = super.getHints(handle);
 		if (result.isEmpty()) {
 			return getParent().getHints(handle);
 		}
-		return result;
+		List<LightweightBoundTypeArgument> parentHints = getParent().getHints(handle);
+		List<LightweightBoundTypeArgument> withParentHints = Lists.newArrayListWithCapacity(parentHints.size() + result.size());
+		for(LightweightBoundTypeArgument parentHint: parentHints) {
+			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+					parentHint.getTypeReference().copyInto(getReferenceOwner()), 
+					parentHint.getSource(), parentHint.getOrigin(), 
+					parentHint.getDeclaredVariance(), 
+					parentHint.getActualVariance());
+			withParentHints.add(copy);
+		}
+		withParentHints.addAll(result);
+		return withParentHints;
 	}
 
 	@Override

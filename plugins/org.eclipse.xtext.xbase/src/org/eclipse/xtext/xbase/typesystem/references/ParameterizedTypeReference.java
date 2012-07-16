@@ -178,7 +178,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			throw new NullPointerException("argument may not be null");
 		}
 		if (!argument.isOwnedBy(getOwner())) {
-			throw new NullPointerException("argument is not valid in current context");
+			throw new IllegalArgumentException("argument is not valid in current context");
 		}
 		if (typeArguments == null)
 			typeArguments = Lists.newArrayListWithCapacity(2);
