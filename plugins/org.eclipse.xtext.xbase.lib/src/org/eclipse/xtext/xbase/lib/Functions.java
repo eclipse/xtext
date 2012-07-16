@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This class serves as a container for the various function types that are used to implement the type of closures in
  * Xbase.
@@ -15,7 +17,7 @@ package org.eclipse.xtext.xbase.lib;
  * @see FunctionExtensions
  * @see Procedures
  */
-public interface Functions {
+@GwtCompatible public interface Functions {
 
 	/**
 	 * A function without any parameters.

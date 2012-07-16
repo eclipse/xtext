@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * <p>
  * A {@link StringConcatenation} allows for efficient, indentation aware concatenation of character sequences.
@@ -40,6 +42,7 @@ import java.util.List;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
+@GwtCompatible(emulated = true)
 public class StringConcatenation implements CharSequence {
 
 	/**

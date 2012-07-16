@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 /**
@@ -19,7 +20,7 @@ import com.google.common.base.Objects;
  *            the value-type of the pair.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class Pair<K, V> {
+@GwtCompatible public final class Pair<K, V> {
 
 	private final K k;
 	private final V v;

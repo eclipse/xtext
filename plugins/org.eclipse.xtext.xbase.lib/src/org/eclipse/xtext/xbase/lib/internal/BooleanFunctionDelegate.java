@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.lib.internal;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
 
 /**
@@ -17,7 +18,7 @@ import com.google.common.base.Predicate;
  * @param <T>
  *            the type of the objects that can be used by this predicate.
  */
-public class BooleanFunctionDelegate<T> implements Predicate<T> {
+@GwtCompatible public class BooleanFunctionDelegate<T> implements Predicate<T> {
 
 	private final Function1<? super T, Boolean> delegate;
 

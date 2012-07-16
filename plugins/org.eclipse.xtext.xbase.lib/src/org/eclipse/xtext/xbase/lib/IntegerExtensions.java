@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 
 /**
@@ -16,7 +18,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Jan Koehnlein - Primitive versions
  * @since 2.3
  */
-public class IntegerExtensions {
+@GwtCompatible public class IntegerExtensions {
 	
 	/**
 	 * The <code>..</code> operator yields an {@link IntegerRange}.

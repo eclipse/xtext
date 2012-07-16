@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -41,7 +42,7 @@ import com.google.common.collect.Sets;
  * #immutableSortedMap
  * #immutableSortedSet
  */
-public class CollectionLiterals {
+@GwtCompatible public class CollectionLiterals {
 
 	/**
 	 * Returns the empty, immutable list.
