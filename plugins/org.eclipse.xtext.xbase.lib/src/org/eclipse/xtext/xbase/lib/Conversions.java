@@ -12,6 +12,7 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.RandomAccess;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Iterables;
 
 /**
@@ -24,7 +25,7 @@ import com.google.common.collect.Iterables;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public class Conversions {
+@GwtCompatible public class Conversions {
 
 	/**
 	 * Wraps {@code object} in a list if and only if {@code object} is an array. Works for primitive and

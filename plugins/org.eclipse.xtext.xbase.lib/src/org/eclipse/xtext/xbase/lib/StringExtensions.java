@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link String strings}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class StringExtensions {
+@GwtCompatible public class StringExtensions {
 
 	/**
 	 * The binary <code>+</code> operator that concatenates two strings.

@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.lib;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * A sequence of integers starting from <code>start</code> up to <code>end</code> with an increment of <code>step</code>. 
  * The value of <code>start</code> is always included. 
@@ -19,7 +21,7 @@ import java.util.NoSuchElementException;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
-public class IntegerRange implements Iterable<Integer> {
+@GwtCompatible public class IntegerRange implements Iterable<Integer> {
 
 	private final int start;
 	private final int end;

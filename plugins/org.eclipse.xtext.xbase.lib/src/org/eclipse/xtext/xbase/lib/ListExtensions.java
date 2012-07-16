@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Lists;
 
 /**
@@ -29,7 +30,7 @@ import com.google.common.collect.Lists;
  * List#take -> List
  * List#drop -> List
  */
-public class ListExtensions {
+@GwtCompatible public class ListExtensions {
 
 	/**
 	 * Sorts the specified list itself into ascending order, according to the natural ordering of its elements.

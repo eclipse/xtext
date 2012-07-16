@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * Useful helper methods when dealing with exceptions.
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Exceptions {
+@GwtCompatible public class Exceptions {
 
 	/*
 	 * shamelessly taken from Project Lombok
