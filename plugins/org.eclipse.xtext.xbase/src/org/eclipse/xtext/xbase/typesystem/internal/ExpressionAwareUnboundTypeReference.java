@@ -48,7 +48,7 @@ public class ExpressionAwareUnboundTypeReference extends UnboundTypeReference {
 		return super.getHandle();
 	}
 	
-	protected void tryResolve() {
+	public void tryResolve() {
 		if (internalIsResolved())
 			return;
 		List<LightweightBoundTypeArgument> hints = getAllHints();

@@ -272,7 +272,7 @@ public abstract class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	public void acceptHint(LightweightBoundTypeArgument hint) {
-		if (internalGetResolvedTo() != null) {
+		if (internalIsResolved()) {
 			throw new IllegalStateException("Cannot add hints to a resolved reference");
 		}
 		getOwner().acceptHint(this.getHandle(), hint);
