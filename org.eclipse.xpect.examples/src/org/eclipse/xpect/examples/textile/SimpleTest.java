@@ -1,10 +1,10 @@
 package org.eclipse.xpect.examples.textile;
 
-import org.eclipse.xpect.lib.XpectTestFiles;
-import org.eclipse.xpect.lib.Xpect;
-import org.eclipse.xpect.lib.XpectRunner;
-import org.eclipse.xpect.lib.parameters.IStringExpectation;
-import org.eclipse.xpect.lib.parameters.StringExpectation;
+import org.eclipse.xpect.parameters.IStringExpectation;
+import org.eclipse.xpect.parameters.StringExpectation;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.runner.XpectTestFiles;
 import org.junit.runner.RunWith;
 
 @RunWith(XpectRunner.class)

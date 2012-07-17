@@ -4,5 +4,4 @@ Bundle-Name: Examples
 Bundle-SymbolicName: org.eclipse.xpect.examples
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.xpect;bundle-version="1.0.0",
- org.eclipse.xpect.lib;bundle-version="1.0.0"
+Require-Bundle: org.eclipse.xpect;bundle-version="1.0.0"

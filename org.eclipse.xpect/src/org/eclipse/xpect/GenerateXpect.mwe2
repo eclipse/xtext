@@ -4,9 +4,11 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/org/eclipse/xpect/Xpect.xtext"
-var file.extensions = "xpect"
 var projectName = "org.eclipse.xpect"
+var grammarURI = "classpath:/org/eclipse/xpect/Xpect.xtext"
+var genmodelURI = "platform:/resource/${projectName}/model/Xpect.genmodel"
+var ecoreURI = "platform:/resource/${projectName}/model/Xpect.ecore"
+var file.extensions = "xpect"
 var runtimeProject = "../${projectName}"
 
 Workflow {
@@ -14,8 +16,8 @@ Workflow {
             scanClassPath = true
             platformUri = "${runtimeProject}/.."
             // The following two lines can be removed, if Xbase is not used.
-            registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-            registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+            registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
+            registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
         }
     
         component = DirectoryCleaner {
@@ -25,6 +27,11 @@ Workflow {
         component = DirectoryCleaner {
             directory = "${runtimeProject}.ui/src-gen"
         }
+        
+        component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+        	genModel = genmodelURI
+        	srcPath = "${runtimeProject}/src"
+        }
     
         component = Generator {
             pathRtProject = runtimeProject
@@ -33,19 +40,12 @@ Workflow {
             projectNameRt = projectName
             projectNameUi = "${projectName}.ui"
             language = {
+            	loadedResource = ecoreURI
                 uri = grammarURI
                 fileExtensions = file.extensions
     
                 // Java API to access grammar elements (required by several other fragments)
                 fragment = grammarAccess.GrammarAccessFragment {}
-    
-                // generates Java API for the generated EPackages
-                fragment = ecore.EcoreGeneratorFragment {
-                // referencedGenModels = "
-                //  platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
-                //  platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel
-                // "
-                }
     
                 // Serializer 2.0
                 fragment = serializer.SerializerFragment {
@@ -87,12 +87,6 @@ Workflow {
                 fragment = scoping.ImportNamespacesScopingFragment {}
                 fragment = exporting.QualifiedNamesFragment {}
                 fragment = builder.BuilderIntegrationFragment {}
-    
-                // generator API
-                fragment = generator.GeneratorFragment {
-                    generateMwe = false
-                    generateJavaMain = false
-                }
     
                 // formatter API
                 fragment = formatting.FormatterFragment {}

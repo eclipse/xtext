@@ -11,7 +11,7 @@ import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.xpect.lib.TestDataUtil;
+import org.eclipse.xpect.util.TestDataUtil;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.util.Strings;

@@ -6,8 +6,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/xpect/Xpect" 
-       class = "org.eclipse.xpect.xpect.XpectPackage"
-       genModel = "org/eclipse/xpect/Xpect.genmodel" /> 
+       class = "org.eclipse.xpect.XpectPackage"
+       genModel = "model/Xpect.genmodel" /> 
 	
   </extension>
 
