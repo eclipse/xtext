@@ -5,6 +5,8 @@ import java.util.Collections;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaFactory;
 
+import com.google.common.base.Function;
+
 import de.itemis.statefullexer.TokenPDA.TokenPDAState;
 
 @SuppressWarnings("restriction")
@@ -16,24 +18,32 @@ public class TokenPDA<T, S> implements Pda<TokenPDAState<T>, S> {
 
 	public static class TokenPDAFactory<T, S> implements PdaFactory<Pda<TokenPDAState<T>, S>, TokenPDAState<T>, S, T> {
 
+		private Function<T, String> stateFormatter;
+
 		@Override
 		public Pda<TokenPDAState<T>, S> create(T start, T stop) {
-			return new TokenPDA<T, S>(new TokenPDAState<T>(start, PDAStateType.START), new TokenPDAState<T>(stop, PDAStateType.STOP));
+			TokenPDAState<T> startStates = new TokenPDAState<T>(start, PDAStateType.START, stateFormatter);
+			TokenPDAState<T> finalStates = new TokenPDAState<T>(stop, PDAStateType.STOP, stateFormatter);
+			return new TokenPDA<T, S>(startStates, finalStates);
 		}
 
 		@Override
 		public TokenPDAState<T> createPop(Pda<TokenPDAState<T>, S> pda, T token) {
-			return new TokenPDAState<T>(token, PDAStateType.POP);
+			return new TokenPDAState<T>(token, PDAStateType.POP, stateFormatter);
 		}
 
 		@Override
 		public TokenPDAState<T> createPush(Pda<TokenPDAState<T>, S> pda, T token) {
-			return new TokenPDAState<T>(token, PDAStateType.PUSH);
+			return new TokenPDAState<T>(token, PDAStateType.PUSH, stateFormatter);
 		}
 
 		@Override
 		public TokenPDAState<T> createState(Pda<TokenPDAState<T>, S> nfa, T token) {
-			return new TokenPDAState<T>(token, PDAStateType.ELEMENT);
+			return new TokenPDAState<T>(token, PDAStateType.ELEMENT, stateFormatter);
+		}
+
+		public Function<T, String> getStateFormatter() {
+			return stateFormatter;
 		}
 
 		@Override
@@ -41,10 +51,15 @@ public class TokenPDA<T, S> implements Pda<TokenPDAState<T>, S> {
 			owner.followers = followers;
 		}
 
+		public void setStateFormatter(Function<T, String> stateFormatter) {
+			this.stateFormatter = stateFormatter;
+		}
+
 	}
 
 	public static class TokenPDAState<S> {
 		protected Iterable<TokenPDAState<S>> followers;
+		protected Function<S, String> formatter;
 		protected S token;
 		protected PDAStateType type;
 
@@ -52,6 +67,13 @@ public class TokenPDA<T, S> implements Pda<TokenPDAState<T>, S> {
 			super();
 			this.token = token;
 			this.type = type;
+		}
+
+		protected TokenPDAState(S token, PDAStateType type, Function<S, String> formatter) {
+			super();
+			this.token = token;
+			this.type = type;
+			this.formatter = formatter;
 		}
 
 		public Iterable<TokenPDAState<S>> getFollowers() {
@@ -68,7 +90,7 @@ public class TokenPDA<T, S> implements Pda<TokenPDAState<T>, S> {
 
 		@Override
 		public String toString() {
-			return type + ": " + token;
+			return type + ": " + (formatter != null ? formatter.apply(token) : token + "");
 		}
 
 	}

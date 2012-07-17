@@ -3,6 +3,7 @@ package de.itemis.statefullexer;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.util.formallang.NfaFactory;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.NfaUtil.MappedComparator;
 import org.eclipse.xtext.util.formallang.Pda;
-import org.eclipse.xtext.util.formallang.PdaUtil.HashStack;
 import org.eclipse.xtext.util.formallang.ProductionUtil;
 
 import com.google.common.base.Function;
@@ -72,6 +72,47 @@ public class NfaUtil2 {
 		}
 	}
 
+	public static class HashStack<T> implements Iterable<T> {
+
+		protected LinkedList<T> list = Lists.newLinkedList();
+		protected Set<T> set = Sets.newLinkedHashSet();
+
+		public boolean contains(Object value) {
+			return set.contains(value);
+		}
+
+		public boolean isEmpty() {
+			return list.isEmpty();
+		}
+
+		public Iterator<T> iterator() {
+			return list.iterator();
+		}
+
+		public T peek() {
+			return list.getLast();
+		}
+
+		public T pop() {
+			T result = list.getLast();
+			list.removeLast();
+			set.remove(result);
+			return result;
+		}
+
+		public boolean push(T value) {
+			boolean r = set.add(value);
+			if (r)
+				list.addLast(value);
+			return r;
+		}
+
+		@Override
+		public String toString() {
+			return list.toString();
+		}
+	}
+
 	protected <S, R, P, G> GroupingTraversalItem<S, R, G> newItem(Pda<S, P> pda, MappedComparator<S, Integer> comp, Map<S, Integer> distances, S next, R item,
 			G group) {
 		List<S> followers = Lists.newArrayList();
@@ -103,6 +144,7 @@ public class NfaUtil2 {
 			while (current.followers.hasNext()) {
 				S next = current.followers.next();
 				R item = traverser.enter(pda, next, current.data);
+				// System.out.println(next);
 				if (item != null) {
 					G group = traverser.getGroup(item);
 					if ((next == pda.getStop() && traverser.isSolution(item)) || success.contains(Tuples.create(next, item, group))) {
@@ -117,13 +159,24 @@ public class NfaUtil2 {
 							g = i.group;
 						}
 						edges.put(Tuples.create(g, s), Tuples.create(group, next));
+						// System.out.println("success");
 					} else {
-						if (trace.push(newItem(pda, distanceComp, distances, next, item, group)))
+						if (trace.push(newItem(pda, distanceComp, distances, next, item, group))) {
+							// System.out.println("push " + next);
 							continue ROOT;
+						} /*
+						 * else System.out.println("loop " + next);
+						 */
 					}
-				}
+				} /*
+				 * else System.out.println("skip " + next);
+				 */
 			}
 			trace.pop();
+			/*
+			 * if (!trace.isEmpty()) System.out.println("pop -> " +
+			 * trace.peek().state);
+			 */
 		}
 		D result = factory.create(tokens.apply(pda.getStart()), tokens.apply(pda.getStop()));
 		Map<Pair<G, S>, Pair<G, X>> old2new = Maps.newHashMap();

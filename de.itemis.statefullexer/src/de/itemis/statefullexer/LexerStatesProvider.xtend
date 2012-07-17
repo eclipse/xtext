@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.Pair
 import static extension de.itemis.statefullexer.Util.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch
 
 class LexerStatesProvider implements ILexerStatesProvider {
 	
@@ -186,8 +187,10 @@ class LexerStatesProvider implements ILexerStatesProvider {
 	def Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall> getPda(Grammar grammar) {
 		val cfg = new StatesCfgAdapter(grammar)
 		val ff = new FollowerFunctionImpl(cfg).setFilter[it instanceof Keyword || it instanceof RuleCall]
-		val pdaFact = new TokenPDA$TokenPDAFactory<AbstractElement, RuleCall>() as PdaFactory<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, RuleCall, AbstractElement>
-		val pda = new PdaUtil2().create(cfg, ff, pdaFact)
+		val pdaFact = new TokenPDA$TokenPDAFactory<AbstractElement, RuleCall>() 
+		pdaFact.stateFormatter = new GrammarElementTitleSwitch().showQualified.showAssignments
+		val pdaFact2 = pdaFact as PdaFactory<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, RuleCall, AbstractElement>
+		val pda = new PdaUtil2().create(cfg, ff, pdaFact2)
 		pda
 	}
 	
@@ -239,6 +242,9 @@ class LexicalGroup {
 		_group == other._group 
 	}
 	
+	override toString() {
+		group.name
+	}
 } 
 
 class LaxicalGroupsTraverserItem  {

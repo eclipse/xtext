@@ -5,6 +5,8 @@ import java.util.Collections;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaFactory;
 
+import com.google.common.base.Function;
+
 import de.itemis.statefullexer.TokenNFA.TokenNfaState;
 
 @SuppressWarnings("restriction")
@@ -37,11 +39,17 @@ public class TokenNFA<T> implements Nfa<TokenNfaState<T>> {
 		protected Iterable<TokenNfaState<S>> followers;
 		protected S token;
 		protected NFAStateType type;
+		protected Function<S, String> formatter;
 
-		protected TokenNfaState(S token, NFAStateType type) {
+		protected TokenNfaState(S token, NFAStateType type, Function<S, String> formatter) {
 			super();
 			this.token = token;
 			this.type = type;
+			this.formatter = formatter;
+		}
+
+		protected TokenNfaState(S token, NFAStateType type) {
+			this(token, type, null);
 		}
 
 		public Iterable<TokenNfaState<S>> getFollowers() {
@@ -58,7 +66,7 @@ public class TokenNFA<T> implements Nfa<TokenNfaState<T>> {
 
 		@Override
 		public String toString() {
-			return type + ": " + token;
+			return type + ": " + (formatter != null ? formatter.apply(token) : token + "");
 		}
 
 	}

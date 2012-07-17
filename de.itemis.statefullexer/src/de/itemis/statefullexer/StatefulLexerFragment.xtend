@@ -60,9 +60,9 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		pda2dot.setStateFormatter[
 			switch(type) { 
 				case(TokenPDA$PDAStateType::START): "start"
-				case(TokenPDA$PDAStateType::ELEMENT): new GrammarElementTitleSwitch().doSwitch(token)
-				case(TokenPDA$PDAStateType::PUSH): new GrammarElementTitleSwitch().doSwitch(token)
-				case(TokenPDA$PDAStateType::POP): new GrammarElementTitleSwitch().doSwitch(token)
+				case(TokenPDA$PDAStateType::ELEMENT): new GrammarElementTitleSwitch().showQualified.showAssignments.doSwitch(token)
+				case(TokenPDA$PDAStateType::PUSH): new GrammarElementTitleSwitch().showQualified.showAssignments.doSwitch(token)
+				case(TokenPDA$PDAStateType::POP): new GrammarElementTitleSwitch().showQualified.showAssignments.doSwitch(token)
 				case(TokenPDA$PDAStateType::STOP): "stop"
 			}
 		]
