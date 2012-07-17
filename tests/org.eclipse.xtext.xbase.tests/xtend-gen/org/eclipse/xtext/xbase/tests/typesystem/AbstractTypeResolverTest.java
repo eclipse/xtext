@@ -2110,7 +2110,42 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_144() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<String>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_145() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<Iterable<String>>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_146() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_147() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = list.head.head.head\n\t\t\tlist.head\n\t\t}", "ArrayList<Iterable<String>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_148() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = $$IterableExtensions::flatten(list)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_149() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(newHashSet)\n\t\t\tval String s = $$IterableExtensions::flatten(list).head\n\t\t\tlist.head\n\t\t}", "HashSet<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_150() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval String s = $$IterableExtensions::flatten(list).head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_151() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tsecond.add(new java.util.ArrayList)\n\t\t\tval String s = $$IterableExtensions::flatten(second).head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
   @Test
