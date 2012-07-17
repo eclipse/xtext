@@ -13,14 +13,13 @@ import java.util.Collection
 import java.util.Collections
 import java.util.List
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtext.common.types.util.SuperTypeCollector
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer
-import org.eclipse.xtext.common.types.util.SuperTypeCollector
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
@@ -297,34 +296,34 @@ class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
 		assertEquals(superTypes.toSet, computedSuperTypes.map[ simpleName ].toSet as Object)
 	}
 	
-	@Ignore
+	@Ignore("Old API does not support this properly")
 	@Test
 	override testRawCollection() {
-		super.testRawCollection()
+		fail("Old API does not support this properly")
 	}
 	
-	@Ignore
+	@Ignore("Old API does not support this properly")
 	@Test
 	override testStringCollection() {
-		super.testStringCollection()
+		fail("Old API does not support this properly")
 	}
 	
-	@Ignore
+	@Ignore("Old API does not support this properly")
 	@Test
 	override testRawList() {
-		super.testRawList()
+		fail("Old API does not support this properly")
 	}
 	
-	@Ignore
+	@Ignore("Old API does not support this properly")
 	@Test
 	override testStringList() {
-		super.testStringList()
+		fail("Old API does not support this properly")
 	}
 	
-	@Ignore
+	@Ignore("Old API does not support this properly")
 	@Test
 	override testStringArrayArrayList() {
-		super.testStringArrayArrayList()
+		fail("Old API does not support this properly")
 	}
 	
 }
