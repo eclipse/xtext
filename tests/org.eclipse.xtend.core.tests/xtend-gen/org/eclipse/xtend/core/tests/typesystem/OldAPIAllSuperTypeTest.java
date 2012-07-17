@@ -59,7 +59,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
       final JvmTypeReference subtype = _head.getParameterType();
       final Set<JvmTypeReference> computedSuperTypes = this.superTypeCollector.collectSuperTypes(subtype);
-      Set<String> _set = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
+      Set _set = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
       final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
           public String apply(final JvmTypeReference it) {
             String _simpleName = it.getSimpleName();
@@ -67,40 +67,40 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
           }
         };
       Iterable<String> _map = IterableExtensions.<JvmTypeReference, String>map(computedSuperTypes, _function);
-      Set<String> _set_1 = IterableExtensions.<String>toSet(_map);
+      Set _set_1 = IterableExtensions.<String>toSet(_map);
       Assert.assertEquals(_set, ((Object) _set_1));
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Ignore
+  @Ignore(value = "Old API does not support this properly")
   @Test
   public void testRawCollection() {
-    super.testRawCollection();
+    Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore
+  @Ignore(value = "Old API does not support this properly")
   @Test
   public void testStringCollection() {
-    super.testStringCollection();
+    Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore
+  @Ignore(value = "Old API does not support this properly")
   @Test
   public void testRawList() {
-    super.testRawList();
+    Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore
+  @Ignore(value = "Old API does not support this properly")
   @Test
   public void testStringList() {
-    super.testStringList();
+    Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore
+  @Ignore(value = "Old API does not support this properly")
   @Test
   public void testStringArrayArrayList() {
-    super.testStringArrayArrayList();
+    Assert.fail("Old API does not support this properly");
   }
 }
