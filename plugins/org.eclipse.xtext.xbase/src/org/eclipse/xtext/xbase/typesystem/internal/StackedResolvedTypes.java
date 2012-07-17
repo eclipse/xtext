@@ -102,6 +102,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			parent.acceptHint(hint.getKey(), copy);
 		}
 	}
+	
+	@Override
+	public boolean isResolved(Object handle) {
+		return super.isResolved(handle) || parent.isResolved(handle);
+	}
 
 	@Override
 	@Nullable
@@ -186,12 +191,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return super.getAllHints(handle);
 	}
 	
-	// TODO this is overly expensive - testFeatureCall_15_n degraded to 3 secs
 	@Override
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
 		List<LightweightBoundTypeArgument> result = super.getHints(handle);
-		if (result.isEmpty()) {
-			return getParent().getHints(handle);
+		if (result.size() == 1 && isResolved(handle)) {
+			return result;
 		}
 		List<LightweightBoundTypeArgument> parentHints = getParent().getHints(handle);
 		List<LightweightBoundTypeArgument> withParentHints = Lists.newArrayListWithCapacity(parentHints.size() + result.size());

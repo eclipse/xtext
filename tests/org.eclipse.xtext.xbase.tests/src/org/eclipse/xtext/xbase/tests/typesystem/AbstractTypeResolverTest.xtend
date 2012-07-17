@@ -2594,8 +2594,76 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			list.add(new java.util.ArrayList)
 			val Iterable<String> s = list.head.head
 			list.head
+		}".resolvesTo("ArrayList<Iterable<String>>")
+	}
+	
+//	@Ignore("There seems to be a problem with transitive type parameter resolution")
+	@Test def void testDeferredTypeArgumentResolution_145() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = list.head.head.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<Iterable<String>>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_146() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = list.head.head
+			list.head
 		}".resolvesTo("ArrayList<String>")
 	}
+	
+//	@Ignore("There seems to be a problem with transitive type parameter resolution")
+	@Test def void testDeferredTypeArgumentResolution_147() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = list.head.head.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<String>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_148() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = $$IterableExtensions::flatten(list)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_149() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(newHashSet)
+			val String s = $$IterableExtensions::flatten(list).head
+			list.head
+		}".resolvesTo("HashSet<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_150() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = $$IterableExtensions::flatten(list).head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_151() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			val second = new java.util.ArrayList
+			second.add(new java.util.ArrayList)
+			val String s = $$IterableExtensions::flatten(second).head
+			list.add(second.head)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{
