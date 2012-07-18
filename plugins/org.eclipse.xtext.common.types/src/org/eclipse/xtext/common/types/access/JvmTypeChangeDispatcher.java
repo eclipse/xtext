@@ -41,6 +41,12 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 	 */
 	protected class NotificationDispatcher extends EContentAdapter {
 		
+		private Notifier notifier;
+
+		public NotificationDispatcher(Notifier notifier) {
+			this.notifier = notifier;
+		}
+		
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return NotificationDispatcher.class.equals(type);
@@ -49,13 +55,19 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (notification.isTouch() || listeners.isEmpty())
+			if (listeners.isEmpty() || (notification.isTouch() && !isRemoveThis(notification))) 
 				return;
 			Iterator<Runnable> iterator = listeners.iterator();
 			while(iterator.hasNext()) {
 				iterator.next().run();
 				iterator.remove();
 			}
+		}
+
+		protected boolean isRemoveThis(Notification notification) {
+			return notification.getEventType() == Notification.REMOVING_ADAPTER 
+					&& notification.getOldValue() == this
+					&& notification.getNotifier() == notifier;
 		}
 		
 		@Override
@@ -75,7 +87,7 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 		NotificationDispatcher result = (NotificationDispatcher) EcoreUtil.getAdapter(
 				notifier.eAdapters(), NotificationDispatcher.class);
 		if (result == null) {
-			result = new NotificationDispatcher();
+			result = new NotificationDispatcher(notifier);
 			notifier.eAdapters().add(result);
 		}
 		listeners.add(runnable);
