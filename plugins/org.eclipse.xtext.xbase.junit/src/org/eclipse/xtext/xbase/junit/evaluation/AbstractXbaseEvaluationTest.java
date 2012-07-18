@@ -978,6 +978,210 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testAssignment_16() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"  prop1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_17() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_18() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_19() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_20() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_21() throws Exception {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  null" +
+				"}");
+	}
+	
+	@Test public void testAssignment_22() throws Exception {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  null" +
+				"}");
+	}
+	
+	@Test public void testAssignment_23() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop3 = 1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_24() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"}");
+	}
+	
+	@Test public void testAssignment_25() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.GenericType1<String>()" +
+				"  it += 'literal'" +
+				"  get()" +
+				"}");
+	}
+	
+	@Test public void testAssignment_26() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{" +
+				"  var it = new testdata.GenericType1<String>()" +
+				"  it += 'literal'" +
+				"}");
+	}
+	
+	@Test public void testAssignment_27() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties2()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_28() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1" +
+				"  prop1 = 'literal'" +
+				"  prop1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_29() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.GenericType1<String>" +
+				"  it += 'literal'" +
+				"  get()" +
+				"}");
+	}
+	
+	@Test public void testAssignment_30() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.comparator = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  client.compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_31() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  comparator = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_32() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.array = newArrayList(1)" +
+						"  client.array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_33() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  array = newArrayList(1)" +
+						"  array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_34() throws Exception {
+		assertEvaluatesTo("a", 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.varArgArray = newArrayList('a')" +
+						"  client.array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_35() throws Exception {
+		assertEvaluatesTo("a", 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  varArgArray = newArrayList('a')" +
+						"  array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_36() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.comparatorField = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  client.compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_37() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  comparatorField = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_38() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var java.util.Comparator<String> c = null" +
+						"  c = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  c.compare('', '')" +
+				"}");
+	}
+	
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
