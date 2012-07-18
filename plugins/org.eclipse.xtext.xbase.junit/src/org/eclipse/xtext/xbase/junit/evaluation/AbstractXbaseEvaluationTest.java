@@ -978,6 +978,129 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testAssignment_16() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"  prop1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_17() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_18() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_19() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_20() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_21() throws Exception {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  null" +
+				"}");
+	}
+	
+	@Test public void testAssignment_22() throws Exception {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  null" +
+				"}");
+	}
+	
+	@Test public void testAssignment_23() throws Exception {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop3 = 1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_24() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"}");
+	}
+	
+	@Test public void testAssignment_25() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.GenericType1<String>()" +
+				"  it += 'literal'" +
+				"  get()" +
+				"}");
+	}
+	
+	@Test public void testAssignment_26() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{" +
+				"  var it = new testdata.GenericType1<String>()" +
+				"  it += 'literal'" +
+				"}");
+	}
+	
+	@Test public void testAssignment_27() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties2()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	@Test public void testAssignment_28() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.Properties1" +
+				"  prop1 = 'literal'" +
+				"  prop1" +
+				"}");
+	}
+	
+	@Test public void testAssignment_29() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var it = new testdata.GenericType1<String>" +
+				"  it += 'literal'" +
+				"  get()" +
+				"}");
+	}
+	
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
