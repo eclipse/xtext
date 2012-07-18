@@ -138,7 +138,22 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
-
+	}
+	
+	@Test
+	public void testRenameJavaTypeInferred() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java",
+				"public class JavaClass {}");
+			String xtendModel = "class XtendClass { val foo = new JavaClass() }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			XtextEditor editor = testHelper.openEditor(xtendClass);
+			renameJavaElement(findJavaType("JavaClass"), "NewJavaClass");
+			synchronize(editor);
+			assertEquals(xtendModel.replace("JavaClass", "NewJavaClass"), editor.getDocument().get());
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
 	}
 
 	@Test
@@ -156,7 +171,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
-
+		
 	@Test
 	public void testRenameRefToJavaConstructor() throws Exception {
 		try {
@@ -173,7 +188,40 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
-
+	
+	@Test
+	public void testRenameJavaImplicitConstructor() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+			String xtendModel = "class XtendClass extends JavaClass {  }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			// JDT automatically switches from the constructor to the type
+			IType javaType = findJavaType("JavaClass");
+			assertNotNull(javaType);
+			renameJavaElement(javaType, "NewJavaClass");
+			assertFileContains(xtendClass, "extends NewJavaClass");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+		
+	@Test
+	public void testRenameRefToJavaImplicitConstructor() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+			String xtendModel = "class XtendClass { JavaClass x = new JavaClass() }";
+			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+			assertFileExists("src/NewJavaClass.java");
+			IResourcesSetupUtil.waitForAutoBuild();
+			synchronize(editor);
+			assertTrue(editor.getDocument().get(),
+					editor.getDocument().get().contains("NewJavaClass x = new NewJavaClass()"));
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+	
 	@Test
 	public void testRenameJavaField() throws Exception {
 		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
@@ -516,15 +564,16 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	@Test
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=383102
 	public void testRenameExtensionMethodFromSuper() throws Exception {
-		String superModel = "class Super { def foo(String it) { null } }";
-		IFile superClass = testHelper.createFile("Super.xtend", superModel);
+		String superModel = "public class Super { public void foo(String it) {} }";
+		IFile superClass = testHelper.createFile("Super.java", superModel);
 		String subModel = "class Sub extends Super { def bar() { ''.foo } }";
 		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
 		final XtextEditor editor = testHelper.openEditor(subClass);
+		IResourcesSetupUtil.waitForAutoBuild();
 		renameXtendElement(editor, subModel.indexOf("foo"), "newFoo");
 		synchronize(editor);
 		assertEquals(subModel.replace("foo", "newFoo"), editor.getDocument().get());
-		assertFileContains(superClass, "def newFoo(");
+		assertFileContains(superClass, "public void newFoo(");
 	}
 
 	@Test
