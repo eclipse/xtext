@@ -514,6 +514,20 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=383102
+	public void testRenameExtensionMethodFromSuper() throws Exception {
+		String superModel = "class Super { def foo(String it) { null } }";
+		IFile superClass = testHelper.createFile("Super.xtend", superModel);
+		String subModel = "class Sub extends Super { def bar() { ''.foo } }";
+		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
+		final XtextEditor editor = testHelper.openEditor(subClass);
+		renameXtendElement(editor, subModel.indexOf("foo"), "newFoo");
+		synchronize(editor);
+		assertEquals(subModel.replace("foo", "newFoo"), editor.getDocument().get());
+		assertFileContains(superClass, "def newFoo(");
+	}
+
+	@Test
 	public void testRenameXtendProperty() throws Exception {
 		String xtendModel = "import org.eclipse.xtend.lib.Property class XtendClass { @Property int foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
