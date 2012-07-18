@@ -374,4 +374,12 @@ class XtendFormatterTest {
 		''')	
 	}
 	
+//	if (!set.add(task))
+//			return
+//		;
+// - constructors
+// - annotations
+// - templates
+// - don't unfold imports when formatting
+	
 }
