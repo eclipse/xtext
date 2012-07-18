@@ -16,9 +16,11 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
 
@@ -70,6 +72,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("SomeClass.aString", assignment);
+		assertNull(assignment.getImplicitReceiver());
 	}
 	
 	@Test public void testUnqualifiedField_onThis() throws Exception {
@@ -82,6 +85,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("SomeClass.aString", assignment);
+		assertImplicitReceiver("SomeClass", assignment);
 	}
 	
 	@Test public void testUnqualifiedField_onIt() throws Exception {
@@ -93,6 +97,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("testdata.FieldAccess.stringField", assignment);
+		assertImplicitReceiver("it", assignment);
 	}
 	
 	@Test public void testUnqualifiedField_onExtension() throws Exception {
@@ -105,6 +110,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("testdata.FieldAccess.stringField", assignment);
+		assertImplicitReceiver("SomeClass._fieldAccess", assignment);
 	}
 	
 	@Test public void testSugaredAssignment_onThis() throws Exception {
@@ -117,6 +123,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("SomeClass.setString(java.lang.String)", assignment);
+		assertImplicitReceiver("SomeClass", assignment);
 	}
 	
 	@Test public void testUnqualifiedField_withConflict_onIt() throws Exception {
@@ -128,6 +135,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("testdata.Properties1.prop1", assignment);
+		assertImplicitReceiver("it", assignment);
 	}
 	
 	@Test public void testSugaredAssignment_onIt() throws Exception {
@@ -139,6 +147,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("testdata.Properties1.setProp2(java.lang.String)", assignment);
+		assertImplicitReceiver("it", assignment);
 	}
 	
 	@Test public void testSugaredAssignment_onExtension() throws Exception {
@@ -151,6 +160,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("testdata.Properties1.setProp2(java.lang.String)", assignment);
+		assertImplicitReceiver("SomeClass._properties1", assignment);
 	}
 	
 	@Test public void testSugaredAssignment_asExtension() throws Exception {
@@ -163,6 +173,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("SomeClass.setMyValue(java.lang.String,java.lang.String)", assignment);
+		assertImplicitReceiver("SomeClass", assignment);
 	}
 	
 	@Test public void testSugaredAssignment_onThis_withIt() throws Exception {
@@ -175,10 +186,19 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("SomeClass.setValue(java.lang.String,java.lang.String)", assignment);
+		assertImplicitReceiver("SomeClass", assignment);
 	}
 	
 	protected void assertLinksTo(String identifier, XAssignment featureCall) {
 		assertLinksTo(identifier, featureCall, false);
+	}
+	
+	protected void assertImplicitReceiver(String identifier, XAssignment assignment) {
+		assertTrue("assignment.implicitReceiver instanceof XFeatureCall", assignment.getImplicitReceiver() instanceof XAbstractFeatureCall);
+		XAbstractFeatureCall implicitReceiver = (XAbstractFeatureCall) assignment.getImplicitReceiver();
+		JvmIdentifiableElement linked = implicitReceiver.getFeature();
+		assertFalse("is resolved", linked.eIsProxy());
+		assertEquals(identifier, linked.getIdentifier());
 	}
 	
 	protected void assertLinksTo(String identifier, EClass type, XAssignment featureCall) {
