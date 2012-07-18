@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -160,15 +162,34 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	@NonNullByDefault
-	protected void deferredBindTypeArgument(LightweightTypeExpectation expecation, LightweightTypeReference type) {
-		LightweightTypeReference expectedType = expecation.internalGetExpectedType();
+	protected void deferredBindTypeArgument(LightweightTypeExpectation expectation, LightweightTypeReference type) {
+		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
 		if (expectedType != null) { 
-			// TODO expectation#hasTypeParameters / isUnresolved to improve the runtime performance
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
+			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState()) {
 				@Override
-				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
-						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-					return getState().createSubstitutor(mapping);
+				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+					return new ParameterizedTypeReferenceTraverser() {
+						@Override
+						public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+								ParameterizedTypeReference declaration) {
+							ExpressionAwareUnboundTypeReference casted = (ExpressionAwareUnboundTypeReference) reference;
+							casted.tryResolve();
+							if (casted.internalIsResolved()) {
+								outerVisit(reference, declaration);
+							} else {
+								addHint(reference, declaration);
+							}
+						}
+						
+						@Override
+						protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+								Set<JvmTypeParameter> visited) {
+							if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+								return false;
+							}
+							return true;
+						}
+					};
 				}
 			};
 			collector.processPairedReferences(expectedType, type);

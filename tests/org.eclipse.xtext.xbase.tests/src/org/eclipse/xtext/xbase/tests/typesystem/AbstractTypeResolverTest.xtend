@@ -804,7 +804,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.toString).head".resolvesTo("String")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_06_03() throws Exception {
 		"newArrayList('').map(s|1)".resolvesTo("List<Integer>")
 	}
@@ -813,7 +813,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|1).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_07() throws Exception {
 		"newArrayList('').map(s|s.length)".resolvesTo("List<Integer>")
 	}
@@ -909,49 +909,80 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
 	
+	@Test def void testFeatureCall_15_d_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
+	}
+	
 	@Ignore
 	@Test def void testFeatureCall_15_e() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>")
+	}
+	@Test def void testFeatureCall_15_e_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer")
 	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_f() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>");
 	}
+	@Test def void testFeatureCall_15_f_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer");
+	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_g() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>");
+	}
+	@Test def void testFeatureCall_15_g_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer");
 	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_h() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_15_h_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_i() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_15_i_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size()).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_15_i_2() throws Exception {
+	@Test def void testFeatureCall_15_i_3() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)".resolvesTo("List<Integer>")
+	}
+	@Test def void testFeatureCall_15_i_4() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e).head".resolvesTo("Integer")
 	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_j() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_15_j_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_k() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_15_k_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
 	@Test def void testFeatureCall_15_l() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
+	}
+	@Test def void testFeatureCall_15_l_2() throws Exception {
+		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
 	}
 	
 	@Test def void testFeatureCall_15_m() throws Exception {
@@ -1022,63 +1053,103 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testFeatureCall_15_o() throws Exception {
 		"newArrayList(newArrayList('')).map(iterable|iterable.size())".resolvesTo("List<Integer>");
 	}
+	@Test def void testFeatureCall_15_o_2() throws Exception {
+		"newArrayList(newArrayList('')).map(iterable|iterable.size()).head".resolvesTo("Integer");
+	}
 	
 	@Ignore("overloading")
 	@Test def void testFeatureCall_15_p() throws Exception {
 		"newArrayList(newArrayList('')).map(iterable|iterable.size()).map(e|e)".resolvesTo("List<Integer>");
 	}
+	@Test def void testFeatureCall_15_p_2() throws Exception {
+		"newArrayList(newArrayList('')).map(iterable|iterable.size()).map(e|e).head".resolvesTo("Integer");
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_16() throws Exception {
+	@Test def void testFeatureCall_16_a() throws Exception {
 		"newArrayList('').map(s|1).map(i|1)".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_16_b() throws Exception {
+		"newArrayList('').map(s|1).map(i|1).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_17() throws Exception {
+	@Test def void testFeatureCall_17_a() throws Exception {
 		"newArrayList('').map(s|s.length).map(i|i)".resolvesTo("List<Integer>")
 	}
+	@Test def void testFeatureCall_17_b() throws Exception {
+		"newArrayList('').map(s|s.length).map(i|i).head".resolvesTo("Integer")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_18() throws Exception {
+	@Test def void testFeatureCall_18_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b|b)".resolvesTo("List<Boolean>")
 	}
+	@Test def void testFeatureCall_18_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b|b).head".resolvesTo("Boolean")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_19() throws Exception {
+	@Test def void testFeatureCall_19_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { 'length'.length b })".resolvesTo("List<Boolean>")
 	}
+	@Test def void testFeatureCall_19_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b| { 'length'.length b }).head".resolvesTo("Boolean")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_20() throws Exception {
+	@Test def void testFeatureCall_20_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(Boolean b|!b)".resolvesTo("List<Boolean>")
 	}
+	@Test def void testFeatureCall_20_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(Boolean b|!b).head".resolvesTo("Boolean")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_21() throws Exception {
+	@Test def void testFeatureCall_21_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| ! b )".resolvesTo("List<Boolean>")
 	}
-	
-	@Ignore
-	@Test def void testFeatureCall_22() throws Exception {
-		"newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )".resolvesTo("List<Boolean>")
+	@Test def void testFeatureCall_21_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b| ! b ).head".resolvesTo("Boolean")
 	}
 	
 	@Ignore
-	@Test def void testFeatureCall_23() throws Exception {
+	@Test def void testFeatureCall_22_a() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )".resolvesTo("List<Boolean>")
+	}
+	@Test def void testFeatureCall_22_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } ).head".resolvesTo("Boolean")
+	}
+	
+	@Ignore
+	@Test def void testFeatureCall_23_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { b.operator_not } )".resolvesTo("List<Boolean>")
+	}
+	@Test def void testFeatureCall_23_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 == 5).map(b| { b.operator_not } ).head".resolvesTo("Boolean")
 	}
 
 	@Ignore
-	@Test def void testFeatureCall_24() throws Exception {
+	@Test def void testFeatureCall_24_a() throws Exception {
 		("newArrayList('').map(s|" +
 				"$$ObjectExtensions::operator_equals(" +
 				"	$$IntegerExtensions::operator_plus(s.length,1), 5)" +
 				").map(b| $$BooleanExtensions::operator_not(b) )").resolvesTo("List<Boolean>")
 	}
+	@Test def void testFeatureCall_24_b() throws Exception {
+		("newArrayList('').map(s|" +
+				"$$ObjectExtensions::operator_equals(" +
+				"	$$IntegerExtensions::operator_plus(s.length,1), 5)" +
+				").map(b| $$BooleanExtensions::operator_not(b) ).head").resolvesTo("Boolean")
+	}
 	
 	@Ignore
-	@Test def void testFeatureCall_25() throws Exception {
+	@Test def void testFeatureCall_25_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )".resolvesTo("List<Integer>")
+	}
+	@Ignore("overloading")
+	@Test def void testFeatureCall_25_b() throws Exception {
+		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 ).head".resolvesTo("Integer")
 	}
 	
 	@Ignore("overloading")
@@ -1709,7 +1780,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_052() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_052() throws Exception {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
@@ -2155,7 +2226,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_102() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_102() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.HashSet)
@@ -2164,7 +2235,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_103() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_103() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2173,7 +2244,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_104() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_104() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(newHashSet)
@@ -2182,7 +2253,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("HashSet<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_105() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_105() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2191,7 +2262,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_106() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_106() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			val second = new java.util.ArrayList
@@ -2289,7 +2360,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_117() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_117() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), null as java.util.ArrayList<String>)
@@ -2297,7 +2368,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_118() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_118() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
@@ -2397,7 +2468,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_130() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(println(new Integer(0)))
@@ -2426,7 +2497,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_133() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_133() throws Exception {
 		"{
 			val list = newArrayList
 			list.map[String s| s]
@@ -2434,7 +2505,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_134() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_134() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.map[String s| s]
@@ -2442,7 +2513,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_135() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_135() throws Exception {
 		"{
 			val list = newArrayList
 			list.add(newArrayList)
@@ -2451,7 +2522,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_136() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(new java.util.ArrayList)
@@ -2459,6 +2530,140 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			list.head
 		}".resolvesTo("ArrayList<String>")
 	}
+	
+	@Test def void testDeferredTypeArgumentResolution_137() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(println(list), null, null)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_138() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(list, null, null)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_139() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::<String>addAll(println(list), '', '')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_140() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(println(list), println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_141() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(list, println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_142() throws Exception {
+		"{
+			val list = newArrayList
+			$$CollectionExtensions::addAll(println(list), println(''), println(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_143() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = $$IterableExtensions::head(list)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_144() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = list.head.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<String>>")
+	}
+	
+//	@Ignore("There seems to be a problem with transitive type parameter resolution")
+	@Test def void testDeferredTypeArgumentResolution_145() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = list.head.head.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<Iterable<String>>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_146() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = list.head.head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+//	@Ignore("There seems to be a problem with transitive type parameter resolution")
+	@Test def void testDeferredTypeArgumentResolution_147() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = list.head.head.head
+			list.head
+		}".resolvesTo("ArrayList<Iterable<String>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_148() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = $$IterableExtensions::flatten(list)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_149() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(newHashSet)
+			val String s = $$IterableExtensions::flatten(list).head
+			list.head
+		}".resolvesTo("HashSet<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_150() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val String s = $$IterableExtensions::flatten(list).head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_151() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			val second = new java.util.ArrayList
+			second.add(new java.util.ArrayList)
+			val String s = $$IterableExtensions::flatten(second).head
+			list.add(second.head)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{

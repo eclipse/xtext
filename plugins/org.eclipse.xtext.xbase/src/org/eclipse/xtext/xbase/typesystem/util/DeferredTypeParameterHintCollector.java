@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareUnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -33,7 +34,13 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 		
 		@Override
 		protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
-			addHint(declaration, reference);
+			ExpressionAwareUnboundTypeReference casted = (ExpressionAwareUnboundTypeReference) declaration;
+			if (casted.internalIsResolved() || getOwner().isResolved(casted.getHandle())) {
+				casted.tryResolve();
+				outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+			} else {
+				addHint(declaration, reference);
+			}
 		}
 		
 		@Override

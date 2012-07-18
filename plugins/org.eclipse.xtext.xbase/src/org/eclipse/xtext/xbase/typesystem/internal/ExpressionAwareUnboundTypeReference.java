@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO this class should be removed
  */
 @NonNullByDefault
 public class ExpressionAwareUnboundTypeReference extends UnboundTypeReference {
@@ -48,7 +49,7 @@ public class ExpressionAwareUnboundTypeReference extends UnboundTypeReference {
 		return super.getHandle();
 	}
 	
-	protected void tryResolve() {
+	public void tryResolve() {
 		if (internalIsResolved())
 			return;
 		List<LightweightBoundTypeArgument> hints = getAllHints();
