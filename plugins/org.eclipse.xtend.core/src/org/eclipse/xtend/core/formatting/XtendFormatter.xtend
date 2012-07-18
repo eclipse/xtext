@@ -42,7 +42,7 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 
 import static extension com.google.common.collect.Multimaps.*
 
-public class XtendFormatter3 {
+public class XtendFormatter {
 	
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 	@Inject TextRenderer renderer

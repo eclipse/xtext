@@ -17,8 +17,7 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.formatting.XtendFormatter2;
-import org.eclipse.xtend.core.formatting.XtendFormatter3;
+import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
@@ -79,7 +78,7 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 	}
 
 	@Inject
-	protected XtendFormatter3 formatter;
+	protected XtendFormatter formatter;
 
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {

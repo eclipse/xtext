@@ -68,7 +68,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 
 @SuppressWarnings("all")
-public class XtendFormatter3 {
+public class XtendFormatter {
   @Inject
   private IWhitespaceInformationProvider whitespaeInfo;
   
@@ -80,11 +80,11 @@ public class XtendFormatter3 {
     final Procedure1<RendererConfiguration> _function = new Procedure1<RendererConfiguration>() {
         public void apply(final RendererConfiguration it) {
           URI _uRI = res.getURI();
-          ILineSeparatorInformation _lineSeparatorInformation = XtendFormatter3.this.whitespaeInfo.getLineSeparatorInformation(_uRI);
+          ILineSeparatorInformation _lineSeparatorInformation = XtendFormatter.this.whitespaeInfo.getLineSeparatorInformation(_uRI);
           String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
           it.setLineSeparator(_lineSeparator);
           URI _uRI_1 = res.getURI();
-          IIndentationInformation _indentationInformation = XtendFormatter3.this.whitespaeInfo.getIndentationInformation(_uRI_1);
+          IIndentationInformation _indentationInformation = XtendFormatter.this.whitespaeInfo.getIndentationInformation(_uRI_1);
           String _indentString = _indentationInformation.getIndentString();
           it.setIndentation(_indentString);
         }
@@ -119,7 +119,7 @@ public class XtendFormatter3 {
             FormattingData _next = _iterator.next();
             _xifexpression = _next;
           } else {
-            FormattingData _mergeEdits = XtendFormatter3.this.mergeEdits(it);
+            FormattingData _mergeEdits = XtendFormatter.this.mergeEdits(it);
             _xifexpression = _mergeEdits;
           }
           return _xifexpression;
@@ -514,7 +514,7 @@ public class XtendFormatter3 {
         EList<XCasePart> _cases_1 = expr.getCases();
         final Function1<XCasePart,Boolean> _function_1 = new Function1<XCasePart,Boolean>() {
             public Boolean apply(final XCasePart it) {
-              INode _nodeForEObject = XtendFormatter3.this.nodeForEObject(it);
+              INode _nodeForEObject = XtendFormatter.this.nodeForEObject(it);
               String _text = _nodeForEObject.getText();
               String _trim = _text.trim();
               boolean _contains = _trim.contains("\n");
