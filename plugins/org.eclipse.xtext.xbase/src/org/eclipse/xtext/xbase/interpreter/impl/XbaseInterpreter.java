@@ -868,7 +868,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 */
 	protected Object _assignValueToDeclaredVariable(XVariableDeclaration variable, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
-		context.assignValue(QualifiedName.create(variable.getName()), value);
+		if (variable.getType() != null) {
+			JvmTypeReference type = variable.getType();
+			Object coerced = coerceArgumentType(value, type);
+			context.assignValue(QualifiedName.create(variable.getName()), coerced);
+		} else {
+			context.assignValue(QualifiedName.create(variable.getName()), value);
+		}
 		return value;
 	}
 
@@ -878,13 +884,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (receiver == null)
 			throw new EvaluationException(new NullPointerException("Cannot assign value to field: "
 					+ jvmField.getIdentifier() + " on null instance"));
+		JvmTypeReference type = jvmField.getType();
+		Object coerced = coerceArgumentType(value, type);
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
 				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
 			field.setAccessible(true);
-			field.set(receiver, value);
+			field.set(receiver, coerced);
 			return value;
 		} catch (Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getIdentifier()
@@ -904,11 +912,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (assignment.getImplicitReceiver() != null && assignment.getAssignable() != null) {
 			XExpression implicitArgument = assignment.getAssignable();
 			Object argResult = internalEvaluate(implicitArgument, context, indicator);
-			JvmTypeReference parameterType = jvmOperation.getParameters().get(0).getParameterType();
-			Object firstValue = coerceArgumentType(argResult, parameterType);
-			argumentValues = Lists.newArrayList(firstValue, value);
+			JvmTypeReference firstParameterType = jvmOperation.getParameters().get(0).getParameterType();
+			Object firstValue = coerceArgumentType(argResult, firstParameterType);
+			JvmTypeReference secondParameterType = jvmOperation.getParameters().get(1).getParameterType();
+			Object secondValue = coerceArgumentType(value, secondParameterType);
+			argumentValues = Lists.newArrayList(firstValue, secondValue);
 		} else {
-			argumentValues = Lists.newArrayList(value);
+			JvmTypeReference secondParameterType = jvmOperation.getParameters().get(0).getParameterType();
+			Object coerced = coerceArgumentType(value, secondParameterType);
+			argumentValues = Lists.newArrayList(coerced);
 		}
 		Object receiver = getReceiver(assignment, context, indicator);
 		Object result = invokeOperation(jvmOperation, receiver, argumentValues, context, indicator);
