@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
 
@@ -135,15 +133,14 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
 			LightweightTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes().pushTypes(argument);
+			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
 			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, argumentState, false);
 			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
 			// TODO should we use the result of #acceptType?
 			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
-				resolveAgainstActualType(declaredType, receiverType, argumentState);
-			resolvedTypes.mergeIntoParent();
+				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, argumentState);
 		} else {
 			super.resolveArgumentType(argument, declaredType, argumentState);
 		}
