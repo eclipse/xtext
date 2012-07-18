@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
@@ -59,14 +60,40 @@ public class TextRenderer {
     RenderState _xblockexpression = null;
     {
       RenderState state = renderState;
-      Iterable<FormattingData> _filterNull = IterableExtensions.<FormattingData>filterNull(data);
-      final Function1<FormattingData,Integer> _function = new Function1<FormattingData,Integer>() {
+      final Function1<FormattingData,Boolean> _function = new Function1<FormattingData,Boolean>() {
+          public Boolean apply(final FormattingData it) {
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(it, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _or = false;
+              int _length = it.getLength();
+              boolean _equals = (_length == 0);
+              if (_equals) {
+                _or = true;
+              } else {
+                int _offset = it.getOffset();
+                int _offset_1 = it.getOffset();
+                int _length_1 = it.getLength();
+                int _plus = (_offset_1 + _length_1);
+                String _substring = document.substring(_offset, _plus);
+                boolean _isWhitespace = TextRenderer.this.isWhitespace(_substring);
+                _or = (_equals || _isWhitespace);
+              }
+              _and = (_notEquals && _or);
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+      Iterable<FormattingData> _filter = IterableExtensions.<FormattingData>filter(data, _function);
+      final Function1<FormattingData,Integer> _function_1 = new Function1<FormattingData,Integer>() {
           public Integer apply(final FormattingData it) {
             int _offset = it.getOffset();
             return Integer.valueOf(_offset);
           }
         };
-      final List<FormattingData> fmt = IterableExtensions.<FormattingData, Integer>sortBy(_filterNull, _function);
+      final List<FormattingData> fmt = IterableExtensions.<FormattingData, Integer>sortBy(_filter, _function_1);
       for (final FormattingData f : fmt) {
         {
           int _offset = f.getOffset();
@@ -82,19 +109,6 @@ public class TextRenderer {
               int _column = _line_1.getColumn();
               int _plus = (_column + textlength);
               _line.setColumn(_plus);
-              boolean _and = false;
-              if (!cancelIfLineFull) {
-                _and = false;
-              } else {
-                Line _line_2 = state.getLine();
-                int _column_1 = _line_2.getColumn();
-                int _maxLineWidth = cfg.getMaxLineWidth();
-                boolean _greaterThan = (_column_1 > _maxLineWidth);
-                _and = (cancelIfLineFull && _greaterThan);
-              }
-              if (_and) {
-                return null;
-              }
               final String replacement = _whitespaceData.getSpace();
               List<TextReplacement> _replacements = state.getReplacements();
               int _offset_2 = _whitespaceData.getOffset();
@@ -144,6 +158,21 @@ public class TextRenderer {
       _xblockexpression = (state);
     }
     return _xblockexpression;
+  }
+  
+  public boolean isWhitespace(final String doc) {
+    int _length = doc.length();
+    int _minus = (_length - 1);
+    IntegerRange _upTo = new IntegerRange(0, _minus);
+    final Function1<Integer,Boolean> _function = new Function1<Integer,Boolean>() {
+        public Boolean apply(final Integer it) {
+          char _charAt = doc.charAt((it).intValue());
+          boolean _isWhitespace = Character.isWhitespace(_charAt);
+          return Boolean.valueOf(_isWhitespace);
+        }
+      };
+    boolean _forall = IterableExtensions.<Integer>forall(_upTo, _function);
+    return _forall;
   }
   
   public TextRenderer() {
