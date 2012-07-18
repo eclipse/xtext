@@ -713,9 +713,14 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	/**
+	 * @param operation the operation that should be invoked.
+	 * @param receiver the receiver for the invocation. It may be <code>null</code> which could signal a {@link NullPointerException} or
+	 *   be valid if the given {@code operation} is a static operation.
+	 * @param argumentValues the argument values. The number of arguments has to match the number of declared parameters. 
+	 * @param context the current evalutation context.
+	 * @param indicator the cancel indicator.
 	 * @since 2.3.1
 	 */
-	@SuppressWarnings("unused")
 	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues,
 			IEvaluationContext context, CancelIndicator indicator) {
 		return invokeOperation(operation, receiver, argumentValues);
@@ -863,7 +868,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 */
 	protected Object _assignValueToDeclaredVariable(XVariableDeclaration variable, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
-		context.assignValue(QualifiedName.create(variable.getName()), value);
+		if (variable.getType() != null) {
+			JvmTypeReference type = variable.getType();
+			Object coerced = coerceArgumentType(value, type);
+			context.assignValue(QualifiedName.create(variable.getName()), coerced);
+		} else {
+			context.assignValue(QualifiedName.create(variable.getName()), value);
+		}
 		return value;
 	}
 
@@ -873,13 +884,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (receiver == null)
 			throw new EvaluationException(new NullPointerException("Cannot assign value to field: "
 					+ jvmField.getIdentifier() + " on null instance"));
+		JvmTypeReference type = jvmField.getType();
+		Object coerced = coerceArgumentType(value, type);
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
 				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
 			field.setAccessible(true);
-			field.set(receiver, value);
+			field.set(receiver, coerced);
 			return value;
 		} catch (Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getIdentifier()
@@ -888,24 +901,28 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
-		if (assignment.getAssignable() == null) {
-			XExpression implicitReceiver = assignment.getImplicitReceiver();
-			if(implicitReceiver instanceof XFeatureCall) {
-			    JvmIdentifiableElement feature = ((XFeatureCall) implicitReceiver).getFeature();
-			    if(feature!= null && feature.getIdentifier() != null) 
-			      return context.getValue(QualifiedName.create(feature.getIdentifier()));
-			}
-		}
-		return internalEvaluate(assignment.getAssignable(), context, indicator);
+		XExpression receiver = callToJavaMapping.getActualReceiver(assignment);
+		Object result = receiver == null ? null : internalEvaluate(receiver, context, indicator);
+		return result;
 	}
 
 	protected Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
+		List<Object> argumentValues;
+		if (assignment.getImplicitReceiver() != null && assignment.getAssignable() != null) {
+			XExpression implicitArgument = assignment.getAssignable();
+			Object argResult = internalEvaluate(implicitArgument, context, indicator);
+			JvmTypeReference firstParameterType = jvmOperation.getParameters().get(0).getParameterType();
+			Object firstValue = coerceArgumentType(argResult, firstParameterType);
+			JvmTypeReference secondParameterType = jvmOperation.getParameters().get(1).getParameterType();
+			Object secondValue = coerceArgumentType(value, secondParameterType);
+			argumentValues = Lists.newArrayList(firstValue, secondValue);
+		} else {
+			JvmTypeReference secondParameterType = jvmOperation.getParameters().get(0).getParameterType();
+			Object coerced = coerceArgumentType(value, secondParameterType);
+			argumentValues = Lists.newArrayList(coerced);
+		}
 		Object receiver = getReceiver(assignment, context, indicator);
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: "
-					+ jvmOperation.getIdentifier() + " without receiver"));
-		List<Object> argumentValues = Lists.newArrayList(value);
 		Object result = invokeOperation(jvmOperation, receiver, argumentValues, context, indicator);
 		return result;
 	}
