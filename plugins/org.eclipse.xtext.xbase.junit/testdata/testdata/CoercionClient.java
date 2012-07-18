@@ -3,7 +3,7 @@ package testdata;
 import java.util.Comparator;
 
 /**
- * @since 2.3
+ * @since 2.4
  */
 public class CoercionClient {
 	public Comparator<String> comparatorField;
