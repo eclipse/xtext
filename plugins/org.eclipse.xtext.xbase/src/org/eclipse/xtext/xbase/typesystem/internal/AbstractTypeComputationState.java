@@ -137,7 +137,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return this;
 	}
 	
-	public AbstractTypeComputationState withExpectation(@Nullable LightweightTypeReference expectation) {
+	/*
+	 * Clients who override this method have to be careful with AbstractLinkingCandidate#computeArgumentTypes where
+	 * a subtype of TypeComputationStateWithExpectation is used.
+	 */
+	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
 	}
 

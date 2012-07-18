@@ -51,5 +51,5 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 		}
 		return result;
 	}
-
+	
 }
