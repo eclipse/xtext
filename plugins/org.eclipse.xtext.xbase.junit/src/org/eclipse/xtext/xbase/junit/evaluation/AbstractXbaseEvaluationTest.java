@@ -1101,6 +1101,87 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testAssignment_30() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.comparator = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  client.compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_31() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  comparator = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_32() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.array = newArrayList(1)" +
+						"  client.array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_33() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  array = newArrayList(1)" +
+						"  array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_34() throws Exception {
+		assertEvaluatesTo("a", 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.varArgArray = newArrayList('a')" +
+						"  client.array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_35() throws Exception {
+		assertEvaluatesTo("a", 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  varArgArray = newArrayList('a')" +
+						"  array.head" +
+				"}");
+	}
+	
+	@Test public void testAssignment_36() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var client = new testdata.CoercionClient" +
+						"  client.comparatorField = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  client.compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_37() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var it = new testdata.CoercionClient" +
+						"  comparatorField = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  compare('', '')" +
+				"}");
+	}
+	
+	@Test public void testAssignment_38() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), 
+				"{" +
+						"  var java.util.Comparator<String> c = null" +
+						"  c = [ s1, s2 | s1.compareTo(s2) ]" +
+						"  c.compare('', '')" +
+				"}");
+	}
+	
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
