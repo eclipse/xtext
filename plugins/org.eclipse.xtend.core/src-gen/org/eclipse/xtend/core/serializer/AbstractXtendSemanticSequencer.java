@@ -201,7 +201,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XAssignment(context, (XAssignment) semanticObject); 
+					sequence_XAssignment_XMemberFeatureCall(context, (XAssignment) semanticObject); 
 					return; 
 				}
 				else break;
@@ -234,7 +234,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XAdditiveExpression(context, (XBinaryOperation) semanticObject); 
+					sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, (XBinaryOperation) semanticObject); 
 					return; 
 				}
 				else break;
