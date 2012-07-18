@@ -102,6 +102,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			parent.acceptHint(hint.getKey(), copy);
 		}
 	}
+	
+	@Override
+	public boolean isResolved(Object handle) {
+		return super.isResolved(handle) || parent.isResolved(handle);
+	}
 
 	@Override
 	@Nullable
@@ -189,10 +194,21 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
 		List<LightweightBoundTypeArgument> result = super.getHints(handle);
-		if (result.isEmpty()) {
-			return getParent().getHints(handle);
+		if (result.size() == 1 && isResolved(handle)) {
+			return result;
 		}
-		return result;
+		List<LightweightBoundTypeArgument> parentHints = getParent().getHints(handle);
+		List<LightweightBoundTypeArgument> withParentHints = Lists.newArrayListWithCapacity(parentHints.size() + result.size());
+		for(LightweightBoundTypeArgument parentHint: parentHints) {
+			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+					parentHint.getTypeReference().copyInto(getReferenceOwner()), 
+					parentHint.getSource(), parentHint.getOrigin(), 
+					parentHint.getDeclaredVariance(), 
+					parentHint.getActualVariance());
+			withParentHints.add(copy);
+		}
+		withParentHints.addAll(result);
+		return withParentHints;
 	}
 
 	@Override

@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
@@ -104,14 +105,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
 		if (!isStatic() && !isExtension()) {
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
-				@Override
-				@NonNull
-				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
-						@NonNull Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-					return state.createSubstitutor(mapping);
-				}
-			};
+			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(state);
 			collector.processPairedReferences(declaredType, actualType);
 		}
 	}
