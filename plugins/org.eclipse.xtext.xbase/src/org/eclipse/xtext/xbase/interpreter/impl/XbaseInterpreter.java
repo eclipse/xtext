@@ -76,7 +76,6 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -651,7 +650,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					argumentValues.add(internalEvaluate(expr, context, indicator));
 				}
 			}
-			return invokeOperation(operation, receiver, argumentValues);
+			return invokeOperation(operation, receiver, argumentValues, context, indicator);
 		}
 		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
@@ -710,9 +709,23 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
-		return invokeOperation(operation, receiver, argumentValues);
+		return invokeOperation(operation, receiver, argumentValues, context, indicator);
 	}
 
+	/**
+	 * @param operation the operation that should be invoked.
+	 * @param receiver the receiver for the invocation. It may be <code>null</code> which could signal a {@link NullPointerException} or
+	 *   be valid if the given {@code operation} is a static operation.
+	 * @param argumentValues the argument values. The number of arguments has to match the number of declared parameters. 
+	 * @param context the current evalutation context.
+	 * @param indicator the cancel indicator.
+	 * @since 2.3.1
+	 */
+	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues,
+			IEvaluationContext context, CancelIndicator indicator) {
+		return invokeOperation(operation, receiver, argumentValues);
+	}
+	
 	protected Object invokeOperation(JvmOperation operation, Object receiver, List<Object> argumentValues) {
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
@@ -880,24 +893,25 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
-		Object receiver = null;
-		if (assignment.getAssignable() == null) {
-			// TODO don't imply 'this', but get the information from the AST 
-			receiver = context.getValue(XbaseScopeProvider.THIS);
-		} else {
-			receiver = internalEvaluate(assignment.getAssignable(), context, indicator);
-		}
-		return receiver;
+		XExpression receiver = callToJavaMapping.getActualReceiver(assignment);
+		Object result = receiver == null ? null : internalEvaluate(receiver, context, indicator);
+		return result;
 	}
 
 	protected Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
+		List<Object> argumentValues;
+		if (assignment.getImplicitReceiver() != null && assignment.getAssignable() != null) {
+			XExpression implicitArgument = assignment.getAssignable();
+			Object argResult = internalEvaluate(implicitArgument, context, indicator);
+			JvmTypeReference parameterType = jvmOperation.getParameters().get(0).getParameterType();
+			Object firstValue = coerceArgumentType(argResult, parameterType);
+			argumentValues = Lists.newArrayList(firstValue, value);
+		} else {
+			argumentValues = Lists.newArrayList(value);
+		}
 		Object receiver = getReceiver(assignment, context, indicator);
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot invoke instance method: "
-					+ jvmOperation.getIdentifier() + " without receiver"));
-		List<Object> argumentValues = Lists.newArrayList(value);
-		Object result = invokeOperation(jvmOperation, receiver, argumentValues);
+		Object result = invokeOperation(jvmOperation, receiver, argumentValues, context, indicator);
 		return result;
 	}
 
