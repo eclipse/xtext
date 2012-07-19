@@ -541,12 +541,6 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
 			}
 			if (resolvedTypeParameters.add(handle)) {
-				for (LightweightBoundTypeArgument formerHint : basicGetTypeParameterHints().get(handle)) {
-					LightweightTypeReference reference = formerHint.getTypeReference();
-					if (reference instanceof UnboundTypeReference) {
-						acceptHint(((UnboundTypeReference) reference).getHandle(), boundTypeArgument);
-					}
-				}
 				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
 			}
 		} else {
