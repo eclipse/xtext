@@ -128,7 +128,7 @@ public class StatusWrapper {
 	}
 
 	public void add(int severity, String message, EObject element, ITextRegion region) {
-		status.addEntry(new RefactoringStatusEntry(severity, message, createContext(element, region)));
+		status.addEntry(new RefactoringStatusEntry(severity, notNull(message), createContext(element, region)));
 	}
 
 	public void add(int severity, String message, Exception exc, Logger log) {
