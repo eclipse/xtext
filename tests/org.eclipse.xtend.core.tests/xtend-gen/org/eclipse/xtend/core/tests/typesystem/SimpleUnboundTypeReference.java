@@ -7,7 +7,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @SuppressWarnings("all")
 public class SimpleUnboundTypeReference extends UnboundTypeReference {
   public SimpleUnboundTypeReference(final TypeReferenceOwner owner, final JvmTypeParameter typeParameter, final Object handle) {
-    super(owner, typeParameter, handle);
+    super(owner, null, typeParameter, handle);
   }
   
   protected UnboundTypeReference createCopy(final TypeReferenceOwner owner) {
