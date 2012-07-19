@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollecto
 import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
@@ -195,7 +196,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				@Override
 				@NonNull
 				protected LightweightTypeReference getUnmappedSubstitute(@NonNull ParameterizedTypeReference reference, @NonNull JvmTypeParameter type, @NonNull ConstraintVisitingInfo visiting) {
-					ExpressionAwareUnboundTypeReference result = getState().getResolvedTypes().createUnboundTypeReference(getExpression(), type);
+					UnboundTypeReference result = getState().getResolvedTypes().createUnboundTypeReference(getExpression(), type);
 					return result;
 				}
 				
@@ -220,9 +221,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 						@Override
 						public void doVisitUnboundTypeReference(UnboundTypeReference reference,
 								ParameterizedTypeReference declaration) {
-							ExpressionAwareUnboundTypeReference casted = (ExpressionAwareUnboundTypeReference) reference;
-							casted.tryResolve();
-							if (casted.internalIsResolved()) {
+							reference.tryResolve();
+							if (reference.internalIsResolved()) {
 								outerVisit(reference, declaration);
 							} else {
 								addHint(reference, declaration);
@@ -265,12 +265,13 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			UnboundTypeParameterPreservingSubstitutor substitutor = getState().createSubstitutor(getDeclaratorParameterMapping());
 			substitutor.enhanceMapping(typeParameterMapping);
 			for(int i = 0; i < fixedArityArgumentCount; i++) {
-				final JvmFormalParameter parameter = parameters.get(i);
-				final LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
+				JvmFormalParameter parameter = parameters.get(i);
+				LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
+				LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 				XExpression argument = arguments.get(i);
-				TypeComputationStateWithExpectation argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutor.substitute(parameterType));
+				TypeComputationStateWithExpectation argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
 						
-				resolveArgumentType(argument, parameterType, argumentState);
+				resolveArgumentType(argument, substitutedParameterType, argumentState);
 			}
 			if (varArgs) {
 				int lastParamIndex = declaredParameterCount - 1;
@@ -280,20 +281,17 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();
 				
 				TypeComputationStateWithExpectation argumentState = null;
+				LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 				if (arguments.size() == declaredParameterCount) {
 //					XExpression lastArgument = arguments.get(lastParamIndex);
 					// TODO expect Array and componentType
-//					argumentState = new ObservableTypeComputationStateWithExpectation(
-//							getState(), substitutor.substitute(componentType), this);
-					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutor.substitute(componentType));
+					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
 				} else {
-//					argumentState = new ObservableTypeComputationStateWithExpectation(
-//							getState(), substitutor.substitute(componentType), this);
-					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutor.substitute(componentType));
+					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
 				}
 				for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 					XExpression argument = arguments.get(i);
-					resolveArgumentType(argument, componentType, argumentState);
+					resolveArgumentType(argument, substitutedComponentType, argumentState);
 				}
 			}
 		}
@@ -344,20 +342,62 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return null;
 	}
 	
-	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, AbstractTypeComputationState state) {
+	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		// TODO this(..) and super(..) for generic types
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 		if (!typeParameters.isEmpty()) {
 			// TODO actualType -(hint for)-> declared type == inferred
 			// declared type -(hint for)-> actual type == expected
-			ActualTypeArgumentCollector implementation = state.createTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.INFERRED);
-//			ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, getState().getServices()) {
-//				@Override
-//				protected void acceptHint(UnboundTypeParameter typeParameter, LightweightTypeReference param) {
-//					BaseUnboundTypeParameter stacked = getState().getResolvedTypes().getUnboundTypeParameter(typeParameter.getHandle());
-//					super.acceptHint(stacked, param);
-//				}
-//			};
+			ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner()) {
+				@Override
+				@NonNullByDefault
+				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
+					return state.createSubstitutor(mapping);
+				}
+				@Override
+				@NonNullByDefault
+				protected void acceptHint(UnboundTypeReference reference, LightweightTypeReference param) {
+					if (!shouldProcess(reference.getTypeParameter())) {
+						UnboundTypeReference casted = reference;
+						casted.tryResolve();
+						if (casted.internalIsResolved()) {
+							outerVisit(reference, param);
+						} else {
+							super.acceptHint(reference, param);
+						}
+					} else {
+						reference.acceptHint(boundByInference(param));
+					}
+				}
+				@Override
+				@NonNullByDefault
+				protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+					return new UnboundTypeReferenceTraverser() {
+						@Override
+						protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+							if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+								declaration.tryResolve();
+								outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+							} else {
+								acceptHint(declaration, reference);
+							}
+						}
+						@Override
+						protected void doVisitWildcardTypeReference(WildcardTypeReference reference,
+								UnboundTypeReference declaration) {
+							if (shouldProcess(declaration.getTypeParameter())) {
+								declaration.acceptHint(boundByInference(reference));
+							} else {
+								super.doVisitWildcardTypeReference(reference, declaration);
+							}
+						}
+					};
+				}
+				private LightweightBoundTypeArgument boundByInference(LightweightTypeReference reference) {
+					return new LightweightBoundTypeArgument(reference.getWrapperTypeIfPrimitive(), BoundTypeArgumentSource.INFERRED, getOrigin(), getExpectedVariance(), getActualVariance());
+				}
+			};
 			implementation.populateTypeParameterMapping(declaredType, actualType);
 			ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> parameterMapping = implementation.rawGetTypeParameterMapping();
 			for(Map.Entry<JvmTypeParameter, LightweightBoundTypeArgument> entry: parameterMapping.entries()) {
