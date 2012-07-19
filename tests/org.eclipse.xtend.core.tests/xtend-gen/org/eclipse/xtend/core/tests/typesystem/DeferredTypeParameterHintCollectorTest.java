@@ -226,6 +226,10 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     return _get;
   }
   
+  public boolean isResolved(final Object handle) {
+    return false;
+  }
+  
   public Triple<String,VarianceInfo,VarianceInfo> operator_mappedTo(final Pair<String,VarianceInfo> pair, final VarianceInfo third) {
     String _key = pair.getKey();
     VarianceInfo _value = pair.getValue();
