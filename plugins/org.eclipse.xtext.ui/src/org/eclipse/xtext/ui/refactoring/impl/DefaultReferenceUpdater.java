@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -107,10 +108,8 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			if (crossReference != null) {
 				String newReferenceText = crossReferenceSerializerFacade.serializeCrossRef(referringElement,
 						crossReference, newTargetElement, referenceTextRegion, updateAcceptor.getRefactoringStatus());
-				if (newReferenceText != null) {
-					createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
-							referringResourceURI, updateAcceptor);
-				}
+				createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
+						referringResourceURI, updateAcceptor);
 			}
 		}
 	}
@@ -118,9 +117,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText,
 			EObject referringElement, EObject newTargetElement, EReference reference, 
 			URI referringResourceURI, IRefactoringUpdateAcceptor updateAcceptor) {
-		TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
-				referenceTextRegion.getLength(), newReferenceText);
-		updateAcceptor.accept(referringResourceURI, referenceEdit);
+		if (newReferenceText != null) {
+			TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
+					referenceTextRegion.getLength(), newReferenceText);
+			updateAcceptor.accept(referringResourceURI, referenceEdit);
+		}
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
