@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareUnboundTypeReference
 import org.eclipse.xtext.xbase.typesystem.internal.ReassigningStackedResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 
 /**
  * @author Sebastian Zarnekow
@@ -172,7 +172,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		super.acceptType(expression, typeData)
 	}
 	
-	override acceptUnboundTypeReference(Object handle, ExpressionAwareUnboundTypeReference reference) {
+	override acceptUnboundTypeReference(Object handle, UnboundTypeReference reference) {
 		if (!reference.isOwnedBy(getReferenceOwner())) {
 			throw new IllegalArgumentException("reference is not owned by this resolved types") 
 		}

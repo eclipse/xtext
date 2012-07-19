@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -28,16 +29,39 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class UnboundTypeReference extends LightweightTypeReference {
+public class UnboundTypeReference extends LightweightTypeReference {
 
 	private LightweightTypeReference resolvedTo;
 	private final JvmTypeParameter typeParameter;
 	private final Object handle;
+	private final XExpression expression;
 	
-	public UnboundTypeReference(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
+	public UnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
+		this(owner, expression, typeParameter, new Object());
+	}
+	
+	protected UnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter, Object handle) {
 		super(owner);
 		this.typeParameter = typeParameter;
 		this.handle = handle;
+		this.expression = expression;
+	}
+	
+	public XExpression getExpression() {
+		return expression;
+	}
+	
+	protected UnboundTypeReference createCopy(TypeReferenceOwner owner) {
+		return new UnboundTypeReference(owner, expression, getTypeParameter(), getHandle());
+	}
+	
+	public void tryResolve() {
+		if (internalIsResolved())
+			return;
+		List<LightweightBoundTypeArgument> hints = getAllHints();
+		if (!hints.isEmpty()) {
+			resolveWithHints(hints);
+		}
 	}
 
 	@Override
@@ -61,7 +85,7 @@ public abstract class UnboundTypeReference extends LightweightTypeReference {
 		return typeParameter;
 	}
 	
-	protected Object getHandle() {
+	public Object getHandle() {
 		return handle;
 	}
 	
@@ -212,8 +236,6 @@ public abstract class UnboundTypeReference extends LightweightTypeReference {
 		UnboundTypeReference result = createCopy(owner);
 		return result;
 	}
-
-	protected abstract UnboundTypeReference createCopy(TypeReferenceOwner owner);
 
 	@Override
 	public String getSimpleName() {

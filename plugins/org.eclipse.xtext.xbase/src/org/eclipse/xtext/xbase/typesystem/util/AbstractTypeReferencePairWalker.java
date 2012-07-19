@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameter;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Sets;
@@ -81,7 +82,40 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			}
 		}
 	}
-
+	
+	protected class UnboundTypeReferenceTraverser extends TypeReferenceVisitorWithParameter<UnboundTypeReference> {
+		
+		@Override
+		protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+			if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+				declaration.tryResolve();
+				outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+			} else {
+				processTypeParameter(declaration.getTypeParameter(), reference);
+			}
+		}
+		
+		@Override
+		protected void doVisitWildcardTypeReference(WildcardTypeReference reference, UnboundTypeReference declaration) {
+			LightweightTypeReference lowerBound = reference.getLowerBound();
+			if (lowerBound != null) {
+				outerVisit(declaration, lowerBound, declaration, getExpectedVariance(), VarianceInfo.IN);
+			} else {
+				for (LightweightTypeReference upperBound : reference.getUpperBounds()) {
+					outerVisit(declaration, upperBound, declaration, getExpectedVariance(), VarianceInfo.OUT);
+				}
+			}
+		}
+		
+		@Override
+		protected void doVisitUnboundTypeReference(UnboundTypeReference reference, UnboundTypeReference param) {
+			if (param.equalHandles(reference))
+				return;
+			super.doVisitUnboundTypeReference(reference, param);
+		}
+		
+	}
+	
 	protected class ParameterizedTypeReferenceTraverser extends
 			TypeReferenceVisitorWithParameter<ParameterizedTypeReference> {
 		@Override
@@ -168,6 +202,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
 	private final WildcardTypeReferenceTraverser wildcardTypeReferenceTraverser;
 	private final ArrayTypeReferenceTraverser arrayTypeReferenceTraverser;
+	private final UnboundTypeReferenceTraverser computedTypeReferenceTraverser;
 	
 	private VarianceInfo expectedVariance;
 
@@ -180,6 +215,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
 		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
 		arrayTypeReferenceTraverser = createArrayTypeReferenceTraverser();
+		computedTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
 	}
 	
 	protected void processTypeParameter(JvmTypeParameter typeParameter, LightweightTypeReference reference) {
@@ -187,6 +223,10 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	
 	protected boolean shouldProcess(JvmTypeParameter type) {
 		return true;
+	}
+	
+	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+		return new UnboundTypeReferenceTraverser();
 	}
 
 	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
@@ -220,6 +260,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	public void doVisitArrayTypeReference(ArrayTypeReference declaredReference,
 			LightweightTypeReference param) {
 		param.accept(arrayTypeReferenceTraverser, declaredReference);
+	}
+	
+	@Override
+	public void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
+		param.accept(computedTypeReferenceTraverser, reference);
 	}
 
 	protected void outerVisit(LightweightTypeReference reference, LightweightTypeReference parameter, Object origin, VarianceInfo expectedVariance, VarianceInfo actualVariance) {

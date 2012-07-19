@@ -7,22 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO move this one to tests if everything worked out as expected
  */
 public class RootResolvedTypes extends ResolvedTypes {
 
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
-	}
-
-	@Override
-	@NonNull
-	protected ExpressionAwareUnboundTypeReference getUnboundTypeReference(@NonNull Object handle) {
-		return (ExpressionAwareUnboundTypeReference) super.getUnboundTypeReference(handle);
 	}
 
 }
