@@ -27,10 +27,13 @@ import org.eclipse.xtend.core.formatting.OrganizeImports;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -52,11 +55,14 @@ import com.google.inject.Inject;
  */
 public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 
-	@Inject
+	@Inject@LinkingScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject 
+	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
 	private OrganizeImports organizeImports;
@@ -103,16 +109,24 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText, EObject referringElement,
 			EObject newTargetElement, EReference reference, URI referringResourceURI,
 			IRefactoringUpdateAcceptor updateAcceptor) {
-		if (newTargetElement instanceof JvmType && updateAcceptor instanceof ImportAwareUpdateAcceptor) {
-			if (newReferenceText.contains(".")) {
-				String simpleName = ((JvmType) newTargetElement).getSimpleName();
+		JvmDeclaredType targetContainerType = EcoreUtil2.getContainerOfType(newTargetElement, JvmDeclaredType.class);
+		if (targetContainerType != null && updateAcceptor instanceof ImportAwareUpdateAcceptor) {
+			if (targetContainerType.getIdentifier().contains(".")) {
 				IScope scope = scopeProvider.getScope(referringElement, reference);
 				if (scope != null) {
-					IEObjectDescription singleElement = scope.getSingleElement(QualifiedName.create(simpleName));
-					if (singleElement == null) {
-						newReferenceText = simpleName;
-						((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(((JvmType) newTargetElement)
-								.getQualifiedName());
+					if(newReferenceText != null && newReferenceText.startsWith(targetContainerType.getIdentifier())) {
+						// check for ambiguities if there were an import
+						String shortName = targetContainerType.getSimpleName() 
+								+ newReferenceText.substring(targetContainerType.getIdentifier().length());
+						IEObjectDescription singleElement = scope.getSingleElement(
+								qualifiedNameConverter.toQualifiedName(shortName));
+						if (singleElement == null) {
+							newReferenceText = shortName;
+							((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(targetContainerType.getIdentifier());
+						} else if(singleElement.getQualifiedName().equals(qualifiedNameProvider.getFullyQualifiedName(newTargetElement))) {
+							// same element on scope with simple name
+							newReferenceText = shortName;
+						}
 					}
 				}
 			}
@@ -120,7 +134,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		super.createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference,
 				referringResourceURI, updateAcceptor);
 	}
-
+	
 	public static class ImportAwareUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		private IRefactoringUpdateAcceptor delegate;

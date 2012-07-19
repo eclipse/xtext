@@ -27,7 +27,6 @@ import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
@@ -175,17 +174,34 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	@Test
 	public void testRenameRefToJavaConstructor() throws Exception {
 		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { public JavaClass() {} }");
-			String xtendModel = "class XtendClass { JavaClass x = new JavaClass() }";
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
+			String xtendModel = "import test.JavaClass class XtendClass { JavaClass x = new JavaClass() }";
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
 			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
-			assertFileExists("src/NewJavaClass.java");
+			assertFileExists("src/test/NewJavaClass.java");
+			IResourcesSetupUtil.waitForAutoBuild();
+			synchronize(editor);
+			assertTrue(editor.getDocument().get(),
+					editor.getDocument().get().contains("{ NewJavaClass x = new NewJavaClass() }"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+	
+	@Test
+	public void testRenameRefToJavaConstructorSamePackage() throws Exception {
+		try {
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
+			String xtendModel = "package test class XtendClass { JavaClass x = new JavaClass() }";
+			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+			assertFileExists("src/test/NewJavaClass.java");
 			IResourcesSetupUtil.waitForAutoBuild();
 			synchronize(editor);
 			assertTrue(editor.getDocument().get(),
 					editor.getDocument().get().contains("NewJavaClass x = new NewJavaClass()"));
 		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
 	
@@ -577,6 +593,74 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameJavaClassStaticImport() throws Exception {
+		try {
+			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+			testHelper.createFile("test/Extension.java", extensionModel);
+			String refModel = "import static test.Extension.* class XtendRef { def bar() { foo('') } }";
+			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
+			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertFileExists("src/test/NewExtension.java");
+			assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
+			IResourcesSetupUtil.waitForAutoBuild();
+		}
+	}
+	
+	@Test
+	public void testRenameJavaClassStaticExtensionImport() throws Exception {
+		try {
+			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+			testHelper.createFile("test/Extension.java", extensionModel);
+			String refModel = "import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
+			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
+			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertFileExists("src/test/NewExtension.java");
+			assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
+			IResourcesSetupUtil.waitForAutoBuild();
+		}
+	}
+	
+	@Test
+	public void testRenameJavaClassStaticImportSamePackage() throws Exception {
+		try {
+			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+			testHelper.createFile("test/Extension.java", extensionModel);
+			String refModel = "package test import static test.Extension.* class XtendRef { def bar() { foo('') } }";
+			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
+			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertFileExists("src/test/NewExtension.java");
+			assertFileContains(refXtendClass, "import static test.NewExtension.*");
+		} finally {
+			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
+			IResourcesSetupUtil.waitForAutoBuild();
+		}
+	}
+	
+	@Test
+	public void testRenameJavaClassStaticExtensionImportSamePackage() throws Exception {
+		try {
+			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+			testHelper.createFile("test/Extension.java", extensionModel);
+			String refModel = "package test import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
+			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
+			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertFileExists("src/test/NewExtension.java");
+			assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
+		} finally {
+			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
+			IResourcesSetupUtil.waitForAutoBuild();
+		}
+	}
+	
+	@Test
 	public void testRenameXtendProperty() throws Exception {
 		String xtendModel = "import org.eclipse.xtend.lib.Property class XtendClass { @Property int foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
@@ -600,8 +684,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertTrue(status.hasError());
 		//		assertEquals(1,status.getEntries().length);  // TODO: on hudson it's two !?
 		//		assertTrue(status.getEntryAt(0).getMessage().contains("Cannot rename single inferred element"));
-		for (RefactoringStatusEntry entry : status.getEntries())
-			System.out.println(entry.getMessage());
 	}
 
 	@Test
