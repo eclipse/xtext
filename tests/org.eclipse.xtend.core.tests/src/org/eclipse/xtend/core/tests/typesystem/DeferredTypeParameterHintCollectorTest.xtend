@@ -104,6 +104,10 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		hints.get(handle)
 	}
 	
+	override isResolved(Object handle) {
+		return false
+	}
+	
 	def operator_mappedTo(Pair<String, VarianceInfo> pair, VarianceInfo third) {
 		Tuples::create(pair.key, pair.value, third)
 	}
@@ -205,7 +209,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 class SimpleUnboundTypeReference extends UnboundTypeReference {
 	
 	new(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
-		super(owner, typeParameter, handle)
+		super(owner, null, typeParameter, handle)
 	}
 
 	override protected createCopy(TypeReferenceOwner owner) {
