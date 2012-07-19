@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.impl.XtendImportImpl;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
@@ -33,6 +34,9 @@ public class XtendImportImplCustom extends XtendImportImpl {
 		String result = getImportedNamespace();
 		if (result == null) {
 			if (this.eIsSet(XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE)) {
+				JvmType unresolvedType = (JvmType) this.eGet(XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE, false);
+				if(!unresolvedType.eIsProxy())
+					return unresolvedType.getIdentifier();
 				List<INode> list = NodeModelUtils.findNodesForFeature(this,
 						XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE);
 				StringBuilder sb = new StringBuilder();
