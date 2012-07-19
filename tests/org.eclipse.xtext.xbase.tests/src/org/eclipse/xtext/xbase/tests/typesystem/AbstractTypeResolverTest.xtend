@@ -332,7 +332,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"[x| null]".resolvesTo("(Object)=>Object")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testClosure_07() throws Exception {
 		"[String x, String y| x + y ]".resolvesTo("(String, String)=>String")
 	}
@@ -818,7 +818,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_07_01() throws Exception {
 		"<String>newArrayList.map(s|s.length)".resolvesTo("List<Integer>")
 	}
@@ -831,17 +831,17 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"<String>newArrayList.map(s|s.length).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_08() throws Exception {
 		"newArrayList('').map(s|s != null)".resolvesTo("List<Boolean>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_09() throws Exception {
 		"newArrayList('').map(s|s.length+1)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_10() throws Exception {
 		"newArrayList('').map(s|1).map(i|i+1)".resolvesTo("List<Integer>")
 	}
@@ -850,27 +850,27 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|1).toList()".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_12() throws Exception {
 		"newArrayList('').map(s|1).toList().map(i|i)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_13() throws Exception {
 		"newArrayList('').map(s|1).toList().map(i|i+1)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_13_2() throws Exception {
 		"{ var it = newArrayList('').map(s|1).toList() it.map(i|i+1) }".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_13_3() throws Exception {
 		"{ var it = newArrayList('').map(s|1).toList() map(i|i+1) }".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_13_4() throws Exception {
 		"{ var it = newArrayList('').map(s|1).toList() it.map(i|i+1) }".resolvesTo("List<Integer>")
 	}
@@ -879,7 +879,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{ var it = newArrayList('').map(s|1).toList() it }".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_14() throws Exception {
 		"newArrayList(newArrayList('').map(s|1))".resolvesTo("ArrayList<List<Integer>>")
 	}
@@ -904,7 +904,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_d() throws Exception {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -913,7 +913,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_e() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
@@ -921,7 +921,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_f() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>");
 	}
@@ -929,7 +929,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer");
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_g() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>");
 	}
@@ -937,7 +937,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer");
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_h() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
@@ -945,7 +945,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_i() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size())".resolvesTo("List<Integer>")
 	}
@@ -953,7 +953,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size()).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_i_3() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -961,7 +961,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_j() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -969,7 +969,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_k() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -977,7 +977,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_15_l() throws Exception {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
@@ -1065,7 +1065,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('')).map(iterable|iterable.size()).map(e|e).head".resolvesTo("Integer");
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_16_a() throws Exception {
 		"newArrayList('').map(s|1).map(i|1)".resolvesTo("List<Integer>")
 	}
@@ -1073,7 +1073,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|1).map(i|1).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_17_a() throws Exception {
 		"newArrayList('').map(s|s.length).map(i|i)".resolvesTo("List<Integer>")
 	}
@@ -1081,7 +1081,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length).map(i|i).head".resolvesTo("Integer")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_18_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b|b)".resolvesTo("List<Boolean>")
 	}
@@ -1089,7 +1089,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b|b).head".resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_19_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { 'length'.length b })".resolvesTo("List<Boolean>")
 	}
@@ -1097,7 +1097,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { 'length'.length b }).head".resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_20_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(Boolean b|!b)".resolvesTo("List<Boolean>")
 	}
@@ -1105,7 +1105,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(Boolean b|!b).head".resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_21_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| ! b )".resolvesTo("List<Boolean>")
 	}
@@ -1113,7 +1113,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| ! b ).head".resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_22_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )".resolvesTo("List<Boolean>")
 	}
@@ -1121,7 +1121,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } ).head".resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_23_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { b.operator_not } )".resolvesTo("List<Boolean>")
 	}
@@ -1129,7 +1129,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| { b.operator_not } ).head".resolvesTo("Boolean")
 	}
 
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_24_a() throws Exception {
 		("newArrayList('').map(s|" +
 				"$$ObjectExtensions::operator_equals(" +
@@ -1143,7 +1143,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 				").map(b| $$BooleanExtensions::operator_not(b) ).head").resolvesTo("Boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCall_25_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )".resolvesTo("List<Integer>")
 	}
@@ -1463,7 +1463,6 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
 	@Test def void testDeferredTypeArgumentResolution_018() throws Exception {
 		"{
 			val list = newArrayList
@@ -1880,7 +1879,6 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
 	@Test def void testDeferredTypeArgumentResolution_064() throws Exception {
 		"{
 			val list = newArrayList
@@ -2046,7 +2044,6 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
 	@Test def void testDeferredTypeArgumentResolution_084() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2468,7 +2465,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_130() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.add(println(new Integer(0)))
@@ -2497,7 +2494,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_133() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_133() throws Exception {
 		"{
 			val list = newArrayList
 			list.map[String s| s]
@@ -2505,7 +2502,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next") @Test def void testDeferredTypeArgumentResolution_134() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_134() throws Exception {
 		"{
 			val list = new java.util.ArrayList
 			list.map[String s| s]
@@ -2731,7 +2728,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCallWithOperatorOverloading_2() throws Exception {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next".resolvesTo("boolean")
 	}
@@ -2740,7 +2737,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"new java.util.ArrayList<Byte>() += null".resolvesTo("boolean")
 	}
 	
-	@Ignore
+	@Ignore("overloading")
 	@Test def void testFeatureCallWithOperatorOverloading_4() throws Exception {
 		"new java.util.ArrayList<Byte>() += newArrayList('x'.getBytes().iterator.next)".resolvesTo("boolean")
 	}
