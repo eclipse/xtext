@@ -38,15 +38,20 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 	}
 
 	@Override
-	public void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
-		if (param instanceof UnboundTypeReference) {
-			UnboundTypeReference castedParam = (UnboundTypeReference) param;
-			if (castedParam.equalHandles(reference))
-				return;
-		}
-		acceptHint(reference, param);
+	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+		return new UnboundTypeReferenceTraverser() {
+			@Override
+			protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+				if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+					declaration.tryResolve();
+					outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+				} else {
+					acceptHint(declaration, reference);
+				}
+			}	
+		};
 	}
-
+	
 	protected void acceptHint(UnboundTypeReference reference, LightweightTypeReference param) {
 		reference.acceptHint(boundByDefaultSource(param));
 	}

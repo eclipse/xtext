@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -49,7 +48,6 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareUnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -339,9 +337,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 						@Override
 						public void doVisitUnboundTypeReference(UnboundTypeReference reference,
 								ParameterizedTypeReference declaration) {
-							ExpressionAwareUnboundTypeReference casted = (ExpressionAwareUnboundTypeReference) reference;
-							casted.tryResolve();
-							if (casted.internalIsResolved()) {
+							reference.tryResolve();
+							if (reference.internalIsResolved()) {
 								outerVisit(reference, declaration);
 							} else {
 								addHint(reference, declaration);

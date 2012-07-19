@@ -606,6 +606,18 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_102() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_103() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_104() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_105() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_106() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_110() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -702,7 +714,13 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_144() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_145() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_146() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_147() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_148() throws Exception {

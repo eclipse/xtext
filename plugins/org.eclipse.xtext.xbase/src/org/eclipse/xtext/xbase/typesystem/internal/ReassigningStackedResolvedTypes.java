@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,7 +56,7 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	@Override
-	protected void acceptUnboundTypeReference(Object handle, ExpressionAwareUnboundTypeReference reference) {
+	protected void acceptUnboundTypeReference(Object handle, UnboundTypeReference reference) {
 		getParent().acceptUnboundTypeReference(handle, reference);
 	}
 	
@@ -70,7 +71,7 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	@Override
-	protected ExpressionAwareUnboundTypeReference createUnboundTypeReference(XExpression expression,
+	protected UnboundTypeReference createUnboundTypeReference(XExpression expression,
 			JvmTypeParameter type) {
 		throw new UnsupportedOperationException("Should not be invoked");
 	}
