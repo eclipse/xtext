@@ -94,7 +94,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
 	private Multimap<XExpression, TypeData> expressionTypes;
-	private Map<Object, ExpressionAwareUnboundTypeReference> unboundTypeParameters;
+	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
 	private Map<XExpression, ILinkingCandidate<?>> featureLinking;
@@ -469,21 +469,21 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return result;
 	}
 
-	protected ExpressionAwareUnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
-		ExpressionAwareUnboundTypeReference result = new ExpressionAwareUnboundTypeReference(getReferenceOwner(), expression, type);
+	protected UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
+		UnboundTypeReference result = new UnboundTypeReference(getReferenceOwner(), expression, type);
 		acceptUnboundTypeReference(result.getHandle(), result);
 		return result;
 	}
 
-	protected void acceptUnboundTypeReference(Object handle, ExpressionAwareUnboundTypeReference reference) {
+	protected void acceptUnboundTypeReference(Object handle, UnboundTypeReference reference) {
 		ensureTypeParameterMapExists().put(handle, reference);
 	}
 	
-	protected Map<Object, ExpressionAwareUnboundTypeReference> basicGetTypeParameters() {
-		return unboundTypeParameters != null ? unboundTypeParameters : Collections.<Object, ExpressionAwareUnboundTypeReference>emptyMap();
+	protected Map<Object, UnboundTypeReference> basicGetTypeParameters() {
+		return unboundTypeParameters != null ? unboundTypeParameters : Collections.<Object, UnboundTypeReference>emptyMap();
 	}
 	
-	private Map<Object, ExpressionAwareUnboundTypeReference> ensureTypeParameterMapExists() {
+	private Map<Object, UnboundTypeReference> ensureTypeParameterMapExists() {
 		if (unboundTypeParameters == null) {
 			unboundTypeParameters = Maps.newLinkedHashMap();
 		}
@@ -543,16 +543,16 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			if (resolvedTypeParameters.add(handle)) {
 				for (LightweightBoundTypeArgument formerHint : basicGetTypeParameterHints().get(handle)) {
 					LightweightTypeReference reference = formerHint.getTypeReference();
-					if (reference instanceof ExpressionAwareUnboundTypeReference) {
-						acceptHint(((ExpressionAwareUnboundTypeReference) reference).getHandle(), boundTypeArgument);
+					if (reference instanceof UnboundTypeReference) {
+						acceptHint(((UnboundTypeReference) reference).getHandle(), boundTypeArgument);
 					}
 				}
 				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
 			}
 		} else {
 			if (!isResolved(handle)) {
-				if (boundTypeArgument.getTypeReference() instanceof ExpressionAwareUnboundTypeReference) {
-					ExpressionAwareUnboundTypeReference other = (ExpressionAwareUnboundTypeReference) boundTypeArgument.getTypeReference();
+				if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+					UnboundTypeReference other = (UnboundTypeReference) boundTypeArgument.getTypeReference();
 					UnboundTypeReference currentUnbound = getUnboundTypeReference(handle);
 					ensureTypeParameterHintsMapExists().put(
 							other.getHandle(),
@@ -576,7 +576,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		int i = 0;
 		while(i < actualHints.size()) {
 			LightweightBoundTypeArgument hint = actualHints.get(i);
-			if (hint.getTypeReference() instanceof ExpressionAwareUnboundTypeReference) {
+			if (hint.getTypeReference() instanceof UnboundTypeReference) {
 				break;
 			}
 			i++;
@@ -599,8 +599,8 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			List<LightweightBoundTypeArgument> result) {
 		for(LightweightBoundTypeArgument hint: hints) {
 			LightweightTypeReference reference = hint.getTypeReference();
-			if (reference instanceof ExpressionAwareUnboundTypeReference) {
-				Object otherHandle = ((ExpressionAwareUnboundTypeReference) reference).getHandle();
+			if (reference instanceof UnboundTypeReference) {
+				Object otherHandle = ((UnboundTypeReference) reference).getHandle();
 				if (seenHandles.add(otherHandle)) {
 					addNonRecursiveHints(getHints(otherHandle), seenHandles, result);
 				}

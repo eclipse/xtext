@@ -14,13 +14,13 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareUnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow
@@ -121,8 +121,8 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     return result;
   }
   
-  public ExpressionAwareUnboundTypeReference getUnboundTypeReference(final Object handle) {
-    final ExpressionAwareUnboundTypeReference result = super.getUnboundTypeReference(handle);
+  public UnboundTypeReference getUnboundTypeReference(final Object handle) {
+    final UnboundTypeReference result = super.getUnboundTypeReference(handle);
     TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
@@ -254,7 +254,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     super.acceptType(expression, typeData);
   }
   
-  public void acceptUnboundTypeReference(final Object handle, final ExpressionAwareUnboundTypeReference reference) {
+  public void acceptUnboundTypeReference(final Object handle, final UnboundTypeReference reference) {
     TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);

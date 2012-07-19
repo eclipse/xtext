@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.ListMultimap;
 
@@ -44,13 +45,13 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	
 	@Override
 	protected void mergeTypeParametersIntoParent(ResolvedTypes parent) {
-		for(ExpressionAwareUnboundTypeReference unbound: basicGetTypeParameters().values()) {
+		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
 			if (unbound.getExpression() == expression) {
 				unbound.tryResolve();
 			}
 			LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
-			if (reference instanceof ExpressionAwareUnboundTypeReference) {
-				parent.acceptUnboundTypeReference(unbound.getHandle(), (ExpressionAwareUnboundTypeReference) reference);
+			if (reference instanceof UnboundTypeReference) {
+				parent.acceptUnboundTypeReference(unbound.getHandle(), (UnboundTypeReference) reference);
 			}
 		}
 		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();
