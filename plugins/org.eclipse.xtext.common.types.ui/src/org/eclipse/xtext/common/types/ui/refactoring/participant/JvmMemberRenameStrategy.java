@@ -17,9 +17,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -53,18 +55,36 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	}
 
 	protected JvmMember setName(URI targetURI, ResourceSet resourceSet, final String newName) {
-		JvmMember member = (JvmMember) resourceSet.getEObject(targetURI, true);
-		member.internalSetIdentifier(null);
+		final JvmMember member = (JvmMember) resourceSet.getEObject(targetURI, true);
+		/*
+		 * This seems to be the only location in Xtext code where a JVM element is changed!
+		 */
+		// clear all cached identifiers of contained members
+		for(JvmMember containedMember: EcoreUtil2.eAllOfType(member, JvmMember.class)) 
+			containedMember.internalSetIdentifier(null);
 		member.setSimpleName(newName);
 		if (member instanceof JvmDeclaredType && ((InternalEObject) member).eDirectResource() != null) {
 			Resource typeResource = member.eResource();
 			if (typeResource instanceof TypeResource) {
+				// rename the resource
 				String originalURI = typeResource.getURI().toString();
-				int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/') + 1);
+				int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/')) + 1;
 				URI typeResourceNewURI = URI.createURI(originalURI.substring(0, lastIndexOf) + newName);
 				typeResource.setURI(typeResourceNewURI);
 				// disconnect the mirrored IJavaElement as it is invalid now
-				((TypeResource) typeResource).setMirror(null);
+				((TypeResource) typeResource).setMirror(new AbstractClassMirror() {
+					public boolean isSealed() {
+						return false;
+					}
+					
+					public void initialize(TypeResource typeResource) {
+					}
+					
+					@Override
+					protected String getTypeName() {
+						return member.getIdentifier();
+					}
+				});
 			}
 		}
 		return member;
