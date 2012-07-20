@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -18,11 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -112,7 +107,4 @@ public interface ITypeComputationState {
 	
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
-	ActualTypeArgumentCollector createTypeArgumentCollector(List<JvmTypeParameter> typeParameters, BoundTypeArgumentSource source);
-
-	UnboundTypeParameterPreservingSubstitutor createSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping);
 }

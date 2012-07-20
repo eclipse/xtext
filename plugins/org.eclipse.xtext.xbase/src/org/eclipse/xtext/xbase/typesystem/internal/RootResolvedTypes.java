@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,6 +17,12 @@ public class RootResolvedTypes extends ResolvedTypes {
 
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
+	}
+
+	public void resolveUnboundTypeParameters() {
+		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
+			unbound.resolve();
+		}
 	}
 
 }
