@@ -30,45 +30,63 @@ import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.common.util.URI
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes
+import org.eclipse.xtext.xtype.XFunctionTypeRef
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 
 /**
  * @author Sebastian Zarnekow
  */
-abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest {
+abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
-	override void resolvesTo(String expression, String type) {
+	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
+		val lightweightResolvedTypes = resolvedTypes as LightweightResolvedTypes
 		val resolvedType = resolvedTypes.getActualType(xExpression)
 		assertEquals(type, resolvedType.simpleName);
+		val lightweight = lightweightResolvedTypes.internalGetActualType(xExpression)
+		assertEquals(type, lightweight.simpleName);
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
 				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
+					assertExpressionTypeIsResolved(content, lightweightResolvedTypes)
 					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content, resolvedTypes)
+						assertIdentifiableTypeIsResolved(content, lightweightResolvedTypes)
 					}
 				}
 				XExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
+					assertExpressionTypeIsResolved(content, lightweightResolvedTypes)
 				}
 				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
-					assertIdentifiableTypeIsResolved(content, resolvedTypes)
+					assertIdentifiableTypeIsResolved(content, lightweightResolvedTypes)
 				}
 			}
 		}
+		return lightweight
 	}
 	
+	override void isFunctionAndEquivalentTo(LightweightTypeReference reference, String type) {
+		assertTrue(reference instanceof FunctionTypeReference)
+		assertEquals(type, (reference as FunctionTypeReference).equivalent)
+	}
+	
+	def String getEquivalent(ParameterizedTypeReference type) {
+		'''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
+	}
 		
-	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
-		val type = types.getActualType(expression)
+	def void assertExpressionTypeIsResolved(XExpression expression, LightweightResolvedTypes types) {
+		val type = types.internalGetActualType(expression)
 		assertNotNull(expression.toString, type)
 		assertNotNull(expression.toString + " / " + type, type.identifier)	
 	}
 	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
-		val type = types.getActualType(identifiable)
+	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, LightweightResolvedTypes types) {
+		val type = types.internalGetActualType(identifiable)
 		assertNotNull(identifiable.toString, type)
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
@@ -95,12 +113,12 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest {
 /**
  * @author Sebastian Zarnekow
  */
-class OldAPITypeResolverTest extends AbstractTypeResolverTest {
+class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
 	
 	@Inject
 	ITypeProvider typeProvider
 	
-	override void resolvesTo(String expression, String type) {
+	override JvmTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression, false /* true */);
 		val resolvedType = typeProvider.getType(xExpression)
 		assertEquals(type, resolvedType?.simpleName);
@@ -123,7 +141,12 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 				}
 			}
 		}
-		
+		return resolvedType
+	}
+	
+	override void isFunctionAndEquivalentTo(JvmTypeReference reference, String type) {
+		assertTrue(reference instanceof XFunctionTypeRef)
+		assertEquals(type, (reference as XFunctionTypeRef).equivalent.simpleName)
 	}
 	
 	def void assertExpressionTypeIsResolved(XExpression expression) {
@@ -339,12 +362,6 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_008() throws Exception {
 		fail("fails in old implementation")
 	}
-	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_05b() throws Exception {
-		fail("fails in old implementation")
-	}
-	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_05c() throws Exception {
-		fail("fails in old implementation")
-	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_009() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -370,6 +387,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_017() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_018() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_019() throws Exception {
@@ -495,6 +515,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_063() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_064() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_065() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -550,6 +573,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_083() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_084() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_085() throws Exception {
@@ -678,10 +704,19 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_129() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_130() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_131() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_132() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_133() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_134() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_135() throws Exception {
@@ -733,6 +768,24 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_151() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_152() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_153() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_154() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_155() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_156() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_157() throws Exception {
 		fail("fails in old implementation")
 	}
 	

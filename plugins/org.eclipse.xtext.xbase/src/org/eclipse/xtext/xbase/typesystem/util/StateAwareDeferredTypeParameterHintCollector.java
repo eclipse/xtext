@@ -8,11 +8,14 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,17 +24,39 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationS
 @NonNullByDefault
 public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypeParameterHintCollector {
 
-	private LightweightTypeComputationState state;
-
-	public StateAwareDeferredTypeParameterHintCollector(LightweightTypeComputationState state) {
-		super(state.getReferenceOwner());
-		this.state = state;
+	public StateAwareDeferredTypeParameterHintCollector(TypeReferenceOwner owner) {
+		super(owner);
 	}
 	
 	@Override
-	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+	protected final TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-		return state.createSubstitutor(mapping);
+		return new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
+	}
+	
+	@Override
+	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+		return new ParameterizedTypeReferenceTraverser() {
+			@Override
+			public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+					ParameterizedTypeReference declaration) {
+				reference.tryResolve();
+				if (reference.internalIsResolved()) {
+					outerVisit(reference, declaration);
+				} else {
+					addHint(reference, declaration);
+				}
+			}
+			
+			@Override
+			protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+					Set<JvmTypeParameter> visited) {
+				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+					return false;
+				}
+				return true;
+			}
+		};
 	}
 
 }
