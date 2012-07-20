@@ -1,7 +1,14 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.util.HashSet;
+import java.util.Set;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -9,12 +16,38 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
-  public abstract void resolvesTo(final String expression, final String type);
+public abstract class AbstractTypeResolverTest<Reference extends Object> extends AbstractXbaseTestCase {
+  public abstract Reference resolvesTo(final String expression, final String type);
   
-  public void resolvesTo(final String expression, final Class<? extends Object> type) throws Exception {
-    String _simpleName = type.getSimpleName();
-    this.resolvesTo(expression, _simpleName);
+  public abstract void isFunctionAndEquivalentTo(final Reference reference, final String type);
+  
+  private static Set<String> seenExpressions;
+  
+  @BeforeClass
+  public static void createSeenExpressionsSet() {
+    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
+    AbstractTypeResolverTest.seenExpressions = _newHashSet;
+  }
+  
+  @AfterClass
+  public static void discardSeenExpressions() {
+    AbstractTypeResolverTest.seenExpressions = null;
+  }
+  
+  protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
+    XExpression _xblockexpression = null;
+    {
+      final String string = expression.toString();
+      boolean _add = AbstractTypeResolverTest.seenExpressions.add(string);
+      boolean _not = (!_add);
+      if (_not) {
+        String _plus = ("Duplicate expression under test: " + expression);
+        Assert.fail(_plus);
+      }
+      XExpression _expression = super.expression(expression, resolve);
+      _xblockexpression = (_expression);
+    }
+    return _xblockexpression;
   }
   
   @Test
@@ -363,7 +396,8 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_02() throws Exception {
-    this.resolvesTo("[String x| true]", "(String)=>boolean");
+    Reference _resolvesTo = this.resolvesTo("[String x| true]", "(String)=>boolean");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, Boolean>");
   }
   
   @Test
@@ -392,43 +426,51 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_05() throws Exception {
-    this.resolvesTo("[x| true]", "(Object)=>boolean");
+    Reference _resolvesTo = this.resolvesTo("[x| true]", "(Object)=>boolean");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Boolean>");
   }
   
   @Test
   public void testClosure_06() throws Exception {
-    this.resolvesTo("[x| null]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[x| null]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testClosure_07() throws Exception {
-    this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
+    Reference _resolvesTo = this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, Boolean>");
   }
   
   @Test
   public void testClosure_08() throws Exception {
-    this.resolvesTo("[x| x]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[x| x]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_09() throws Exception {
-    this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
+    Reference _resolvesTo = this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, String>");
   }
   
   @Test
   public void testClosure_10() throws Exception {
-    this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_11() throws Exception {
-    this.resolvesTo("[Object x| x]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[Object x| x]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_12() throws Exception {
-    this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Ignore(value = "overloading")
@@ -455,62 +497,74 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_15() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_16() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_17() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_18() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_19() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_20() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_21() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_22() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_23() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_24() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_25() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_26() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
@@ -830,7 +884,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length)", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_07_01() throws Exception {
     this.resolvesTo("<String>newArrayList.map(s|s.length)", "List<Integer>");
@@ -846,19 +900,19 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("<String>newArrayList.map(s|s.length).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_08() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s != null)", "List<Boolean>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_09() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length+1)", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_10() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|i+1)", "List<Integer>");
@@ -869,31 +923,31 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|1).toList()", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_12() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i)", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i+1)", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13_2() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13_3() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() map(i|i+1) }", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13_4() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
@@ -904,7 +958,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_14() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
@@ -934,7 +988,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_d() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -945,7 +999,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_e() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -956,7 +1010,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_f() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -967,7 +1021,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_g() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -978,7 +1032,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_h() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -989,7 +1043,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_i() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size())", "List<Integer>");
@@ -1000,7 +1054,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_i_3() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
@@ -1011,7 +1065,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_j() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
@@ -1022,7 +1076,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_k() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -1033,7 +1087,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_l() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -1076,7 +1130,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_16_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|1)", "List<Integer>");
@@ -1087,7 +1141,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|1).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_17_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length).map(i|i)", "List<Integer>");
@@ -1098,7 +1152,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length).map(i|i).head", "Integer");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_18_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b)", "List<Boolean>");
@@ -1109,7 +1163,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_19_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b })", "List<Boolean>");
@@ -1120,7 +1174,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b }).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_20_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b)", "List<Boolean>");
@@ -1131,7 +1185,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_21_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| ! b )", "List<Boolean>");
@@ -1142,7 +1196,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| ! b ).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_22_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } )", "List<Boolean>");
@@ -1153,7 +1207,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } ).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_23_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } )", "List<Boolean>");
@@ -1164,7 +1218,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } ).head", "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_24_a() throws Exception {
     String _plus = ("newArrayList(\'\').map(s|" + 
@@ -1187,7 +1241,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo(_plus_2, "Boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_25_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
@@ -1411,17 +1465,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_008() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\torg::eclipse::xtext::xbase::lib::CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05b() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05c() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1469,7 +1513,6 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tfor(String s: list.subList(1, 1)) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
   @Test
   public void testDeferredTypeArgumentResolution_018() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
@@ -1605,7 +1648,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_044() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1645,7 +1688,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_052() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1703,7 +1746,6 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tfor(String s: println(list.subList(1, 1))) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
   @Test
   public void testDeferredTypeArgumentResolution_064() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
@@ -1771,7 +1813,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_077() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1804,7 +1846,6 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tfor(String s: list.subList(1, 1)) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
   @Test
   public void testDeferredTypeArgumentResolution_084() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
@@ -2038,7 +2079,6 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = println(new java.util.ArrayList)\n\t\t\tfor(String s: println(list.subList(1, 1))) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "next")
   @Test
   public void testDeferredTypeArgumentResolution_130() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
@@ -2054,13 +2094,11 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tprintln(list).add(println(second.get(0)))\n\t\t\tprintln(list).add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "next")
   @Test
   public void testDeferredTypeArgumentResolution_133() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| s]\n\t\t\tlist.map(fun)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "next")
   @Test
   public void testDeferredTypeArgumentResolution_134() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
@@ -2093,17 +2131,17 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_140() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tprintln(list)\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_141() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, println(\'\'), println(\'\'))\n\t\t\tprintln(list).head\n\t\t}", "String");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_142() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tprintln(println(println(list)).head)\n\t\t}", "String");
   }
   
   @Test
@@ -2152,6 +2190,36 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testDeferredTypeArgumentResolution_152() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_153() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$IterableExtensions::map(list, [String s| s])\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_154() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| s]\n\t\t\t$$IterableExtensions::map(list, fun)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_155() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map(println([String s| println(s)]))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_156() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist.head\n\t\t}", "String");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_157() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
   public void testRecursiveTypeArgumentResolution_01() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(list)\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
   }
@@ -2191,7 +2259,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(list.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCallWithOperatorOverloading_2() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes().iterator.next", "boolean");
@@ -2202,7 +2270,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("new java.util.ArrayList<Byte>() += null", "boolean");
   }
   
-  @Ignore
+  @Ignore(value = "overloading")
   @Test
   public void testFeatureCallWithOperatorOverloading_4() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += newArrayList(\'x\'.getBytes().iterator.next)", "boolean");

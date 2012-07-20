@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -46,7 +47,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
@@ -436,6 +436,11 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		if (identifiable instanceof JvmConstructor) {
 			return getConverter().toLightweightReference(resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType()));
 		}
+		if (identifiable instanceof JvmFormalParameter) {
+			JvmTypeReference parameterType = ((JvmFormalParameter) identifiable).getParameterType();
+			if (parameterType != null)
+				return getConverter().toLightweightReference(parameterType);
+		}
 		return null;
 	}
 	
@@ -490,11 +495,6 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return unboundTypeParameters;
 	}
 
-	protected UnboundTypeParameterPreservingSubstitutor createSubstitutor(
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
-		return new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, getReferenceOwner());
-	}
-	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(getClass().getSimpleName()).append(": [");
@@ -541,12 +541,6 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
 			}
 			if (resolvedTypeParameters.add(handle)) {
-				for (LightweightBoundTypeArgument formerHint : basicGetTypeParameterHints().get(handle)) {
-					LightweightTypeReference reference = formerHint.getTypeReference();
-					if (reference instanceof UnboundTypeReference) {
-						acceptHint(((UnboundTypeReference) reference).getHandle(), boundTypeArgument);
-					}
-				}
 				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
 			}
 		} else {
