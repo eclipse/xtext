@@ -10,16 +10,37 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Ignore
 import org.junit.Test
+import java.util.Set
+import org.junit.AfterClass
+import org.junit.BeforeClass
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
+abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase {
 	
-	def void resolvesTo(String expression, String type)
+	def Reference resolvesTo(String expression, String type)
 	
-	def void resolvesTo(String expression, Class<?> type) throws Exception {
-		expression.resolvesTo(type.simpleName)
+	def void isFunctionAndEquivalentTo(Reference reference, String type)
+	
+	static Set<String> seenExpressions
+	
+	@BeforeClass
+	def static void createSeenExpressionsSet() {
+		seenExpressions = newHashSet
+	}
+	
+	@AfterClass
+	def static void discardSeenExpressions() {
+		seenExpressions = null
+	}
+	
+	override protected expression(CharSequence expression, boolean resolve) throws Exception {
+		val string = expression.toString
+		if (!seenExpressions.add(string)) {
+			fail("Duplicate expression under test: " + expression)
+		}
+		super.expression(expression, resolve)
 	}
 
 	@Test def void testNullLiteral() throws Exception {
@@ -303,7 +324,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testClosure_02() throws Exception {
-		"[String x| true]".resolvesTo("(String)=>boolean")
+		"[String x| true]".resolvesTo("(String)=>boolean").isFunctionAndEquivalentTo("Function1<String, Boolean>")
 	}
 	
 	@Test
@@ -325,36 +346,36 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	}
 
 	@Test def void testClosure_05() throws Exception {
-		"[x| true]".resolvesTo("(Object)=>boolean")
+		"[x| true]".resolvesTo("(Object)=>boolean").isFunctionAndEquivalentTo("Function1<Object, Boolean>")
 	}
 	
 	@Test def void testClosure_06() throws Exception {
-		"[x| null]".resolvesTo("(Object)=>Object")
+		"[x| null]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
 	}
 	
 	@Ignore("overloading")
 	@Test def void testClosure_07() throws Exception {
-		"[String x, String y| x + y ]".resolvesTo("(String, String)=>String")
+		"[String x, String y| x + y ]".resolvesTo("(String, String)=>String").isFunctionAndEquivalentTo("Function2<String, String, Boolean>")
 	}
 	
 	@Test def void testClosure_08() throws Exception {
-		"[x| x]".resolvesTo("(Object)=>Object")
+		"[x| x]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
 	}
 	
 	@Test def void testClosure_09() throws Exception {
-		"[String x, String y| x.substring(y.length)]".resolvesTo("(String, String)=>String")
+		"[String x, String y| x.substring(y.length)]".resolvesTo("(String, String)=>String").isFunctionAndEquivalentTo("Function2<String, String, String>")
 	}
 	
 	@Test def void testClosure_10() throws Exception {
-		"[ x | x.toString x ]".resolvesTo("(Object)=>Object")
+		"[ x | x.toString x ]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
 	}
 	
 	@Test def void testClosure_11() throws Exception {
-		"[Object x| x]".resolvesTo("(Object)=>Object")
+		"[Object x| x]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
 	}
 	
 	@Test def void testClosure_12() throws Exception {
-		"[Object x| x.toString x ]".resolvesTo("(Object)=>Object")
+		"[Object x| x.toString x ]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
 	}
 	
 	@Ignore("overloading")
@@ -392,7 +413,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val String s = fun.apply(null)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_16() throws Exception {
@@ -400,7 +421,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.List<String> list = newArrayList(fun.apply(null))
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_17() throws Exception {
@@ -408,7 +429,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.List<String> list = newArrayList.map(fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_18() throws Exception {
@@ -416,7 +437,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.Set<String> list = newArrayList.map(fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_19() throws Exception {
@@ -424,7 +445,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.ArrayList<String> list = newArrayList.map(fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_20() throws Exception {
@@ -432,7 +453,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val Iterable<String> list = newArrayList.map(fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_21() throws Exception {
@@ -441,7 +462,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val list = newArrayList.map(fun)
 			val Iterable<String> iter = list
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_22() throws Exception {
@@ -449,7 +470,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_23() throws Exception {
@@ -457,7 +478,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_24() throws Exception {
@@ -465,7 +486,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_25() throws Exception {
@@ -473,7 +494,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val Iterable<String> list = $$ListExtensions::map(newArrayList, fun)
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_26() throws Exception {
@@ -482,7 +503,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 			val list = $$ListExtensions::map(newArrayList, fun)
 			val Iterable<String> iter = list
 			fun
-		}".resolvesTo("(String)=>String")
+		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
 	@Test def void testClosure_27() throws Exception {
@@ -1366,25 +1387,9 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testDeferredTypeArgumentResolution_008() throws Exception {
 		"{
 			val list = newArrayList
-			org::eclipse::xtext::xbase::lib::CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)
-			list
-		}".resolvesTo("ArrayList<String>")
-	}
-	
-	@Test def void testDeferredTypeArgumentResolution_05b() throws Exception {
-		"{
-			val list = newArrayList
-			list.addAll(null as java.util.ArrayList<String>)
-			list
-		}".resolvesTo("ArrayList<String>")
-	}
-	
-	@Test def void testDeferredTypeArgumentResolution_05c() throws Exception {
-		"{
-			val list = newArrayList
-			list.addAll(newArrayList(''))
-			list
-		}".resolvesTo("ArrayList<String>")
+			$$CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)
+			list.head
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_009() throws Exception {
@@ -1719,8 +1724,8 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{
 			val list = newArrayList
 			list.addAll('', '', '')
-			list
-		}".resolvesTo("ArrayList<String>")
+			list.head
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_045() throws Exception {
@@ -1783,8 +1788,8 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
-			list
-		}".resolvesTo("ArrayList<String>")
+			list.head
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_053() throws Exception {
@@ -1988,8 +1993,8 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{
 			val list = new java.util.ArrayList
 			list.addAll('', '', '')
-			list
-		}".resolvesTo("ArrayList<String>")
+			list.head
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_078() throws Exception {
@@ -2497,7 +2502,8 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testDeferredTypeArgumentResolution_133() throws Exception {
 		"{
 			val list = newArrayList
-			list.map[String s| s]
+			val fun = [String s| s]
+			list.map(fun)
 			list
 		}".resolvesTo("ArrayList<String>")
 	}
@@ -2556,7 +2562,7 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
-			list
+			println(list)
 		}".resolvesTo("ArrayList<String>")
 	}
 	
@@ -2564,16 +2570,16 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(list, println(''), println(''))
-			list
-		}".resolvesTo("ArrayList<String>")
+			println(list).head
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_142() throws Exception {
 		"{
 			val list = newArrayList
 			$$CollectionExtensions::addAll(println(list), println(''), println(''))
-			list
-		}".resolvesTo("ArrayList<String>")
+			println(println(println(list)).head)
+		}".resolvesTo("String")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_143() throws Exception {
@@ -2659,6 +2665,54 @@ abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Test def void testDeferredTypeArgumentResolution_152() throws Exception {
+		"{
+			val list = newArrayList
+			list.map[String s| s]
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_153() throws Exception {
+		"{
+			val list = newArrayList
+			$$IterableExtensions::map(list, [String s| s])
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_154() throws Exception {
+		"{
+			val list = newArrayList
+			val fun = [String s| s]
+			$$IterableExtensions::map(list, fun)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_155() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.map(println([String s| println(s)]))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_156() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(null as java.util.ArrayList<String>)
+			list.head
+		}".resolvesTo("String")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_157() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(newArrayList(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{

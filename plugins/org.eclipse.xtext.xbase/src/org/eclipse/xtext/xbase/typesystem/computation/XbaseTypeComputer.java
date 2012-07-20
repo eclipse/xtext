@@ -73,8 +73,10 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
@@ -280,17 +282,19 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = getTypeParameterMapping(
 					object, closureType, operation, state);
-			UnboundTypeParameterPreservingSubstitutor substitutor = state.createSubstitutor(typeParameterMapping);
+			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 			LightweightTypeReference declaredReturnType = getSubstitutedClosureReturnType(operation, substitutor, state);
 			LightweightTypeAssigner typeAssigner = state.fork().withExpectation(declaredReturnType).assignTypes();
 			LightweightTypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(
 					closureParameters, substitutor, operation.getParameters(), typeAssigner);
 			LightweightTypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(object.getExpression());
-			List<LightweightTypeReference> closureParameterTypes = getClosureParameterTypes(closureParameters, expressionResult);
+			List<LightweightTypeReference> closureParameterTypes = getClosureParameterTypes(operation, typeParameterMapping, closureParameters, expressionResult, closureBodyTypeComputationState);
 			LightweightTypeReference expressionResultType = getClosureBodyType(declaredReturnType, expressionResult, closureBodyTypeComputationState);
+			substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, closureBodyTypeComputationState.getReferenceOwner());
 			LightweightTypeReference substitutedClosureType = substitutor.substitute(closureType);
 			LightweightTypeReference result = createFunctionTypeReference(expectation.getReferenceOwner(), substitutedClosureType, closureParameterTypes, expressionResultType);
-			expectation.acceptActualType(result, ConformanceHint.DEMAND_CONVERSION); // TODO the hint is probably wrong
+			// TODO the hint is probably wrong
+			expectation.acceptActualType(result, ConformanceHint.DEMAND_CONVERSION); 
 		}
 	}
 
@@ -330,35 +334,43 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			expressionResultType = declaredReturnType;
 		} else {
-			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(state) {
-				@Override
-				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-					return new ParameterizedTypeReferenceTraverser() {
-						@Override
-						public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-								ParameterizedTypeReference declaration) {
-							reference.tryResolve();
-							if (reference.internalIsResolved()) {
-								outerVisit(reference, declaration);
-							} else {
-								addHint(reference, declaration);
-							}
-						}
-					};
-				}
-			};
-			collector.processPairedReferences(declaredReturnType, expressionResultType);
+			deferredBindTypeArgument(declaredReturnType, expressionResultType, state);
 		}
 		return expressionResultType;
 	}
 	
-	protected List<LightweightTypeReference> getClosureParameterTypes(List<JvmFormalParameter> closureParameters,
-			LightweightTypeComputationResult expressionResult) {
+	protected void deferredBindTypeArgument(LightweightTypeReference declaredReturnType, LightweightTypeReference type, LightweightTypeComputationState state) {
+		if (declaredReturnType != null) { 
+			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(state.getReferenceOwner());
+			collector.processPairedReferences(declaredReturnType, type);
+		}
+	}
+	
+	protected List<LightweightTypeReference> getClosureParameterTypes(JvmOperation operation, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, List<JvmFormalParameter> closureParameters,
+			LightweightTypeComputationResult expressionResult, LightweightTypeComputationState state) {
 		List<LightweightTypeReference> closureParameterTypes = Lists.newArrayListWithCapacity(closureParameters.size());
-		for(JvmFormalParameter parameter: closureParameters) {
+		int max = Math.min(operation.getParameters().size(), closureParameters.size());
+		for(int i = 0; i < max; i++) {
+			JvmFormalParameter closureParameter = closureParameters.get(i);
+			JvmFormalParameter operationParameter = operation.getParameters().get(i);
+			LightweightTypeReference closureParameterType = expressionResult.internalGetActualType(closureParameter);
+			LightweightTypeReference operationParameterType = expressionResult.internalGetActualType(operationParameter);
+			resolveAgainstActualType(operationParameterType, closureParameterType, typeParameterMapping, state);
+			closureParameterTypes.add(closureParameterType);
+		}
+		for(int i = max; i < closureParameters.size(); i++) {
+			JvmFormalParameter parameter = closureParameters.get(i);
 			closureParameterTypes.add(expressionResult.internalGetActualType(parameter));
 		}
 		return closureParameterTypes;
+	}
+	
+	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, final LightweightTypeComputationState state) {
+		// TODO this(..) and super(..) for generic types
+		if (!typeParameterMapping.isEmpty()) {
+			List<JvmTypeParameter> typeParameters = Lists.newArrayList(typeParameterMapping.keySet());
+			TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, typeParameterMapping, state.getReferenceOwner());
+		}
 	}
 
 	protected LightweightTypeComputationState getClosureBodyTypeComputationState(
@@ -420,7 +432,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	protected ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getClosureTypeParameterMapping(
 			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, LightweightTypeComputationState state) {
-		ActualTypeArgumentCollector typeArgumentCollector = state.createTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED);
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, state.getReferenceOwner());
 		return services.getFunctionTypes().getFunctionTypeParameterMapping(closureType, operation, typeArgumentCollector, state.getReferenceOwner());
 	}
 	
@@ -445,13 +457,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				reference.addTypeArgument(wildcard);
 				iterable = reference;
 			}
-			// TODO add synonymes automatically
+			// TODO add synonyms automatically
 			LightweightTypeComputationState iterableState = state.fork().withExpectation(iterable);
 			iterableState.computeTypes(object.getForExpression());
 			
 		} else {
 			JvmTypeReference iterable = getTypeReferences().getTypeForName(Iterable.class, object, getTypeReferences().wildCard());
-			// TODO add synonymes automatically
+			// TODO add synonyms automatically
 			LightweightTypeComputationState iterableState = state.fork().withExpectation(iterable); 
 			LightweightTypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.internalGetActualExpressionType();

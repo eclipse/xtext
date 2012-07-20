@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,11 +22,11 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
+public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
   @Inject
   private ITypeProvider typeProvider;
   
-  public void resolvesTo(final String expression, final String type) {
+  public JvmTypeReference resolvesTo(final String expression, final String type) {
     try {
       final XExpression xExpression = this.expression(expression, false);
       final JvmTypeReference resolvedType = this.typeProvider.getType(xExpression);
@@ -68,9 +69,17 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
           }
         }
       }
+      return resolvedType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void isFunctionAndEquivalentTo(final JvmTypeReference reference, final String type) {
+    Assert.assertTrue((reference instanceof XFunctionTypeRef));
+    JvmTypeReference _equivalent = ((XFunctionTypeRef) reference).getEquivalent();
+    String _simpleName = _equivalent.getSimpleName();
+    Assert.assertEquals(type, _simpleName);
   }
   
   public void assertExpressionTypeIsResolved(final XExpression expression) {
@@ -416,18 +425,6 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_008() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore(value = "fails in old implementation")
-  @Test
-  public void testDeferredTypeArgumentResolution_05b() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore(value = "fails in old implementation")
-  @Test
-  public void testDeferredTypeArgumentResolution_05c() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -1135,6 +1132,18 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testDeferredTypeArgumentResolution_133() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_134() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testDeferredTypeArgumentResolution_135() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -1232,6 +1241,42 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_151() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_152() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_153() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_154() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_155() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_156() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_157() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

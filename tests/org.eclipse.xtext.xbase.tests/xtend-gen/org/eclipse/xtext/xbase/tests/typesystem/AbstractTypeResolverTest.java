@@ -1,7 +1,14 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.util.HashSet;
+import java.util.Set;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -9,12 +16,38 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
-  public abstract void resolvesTo(final String expression, final String type);
+public abstract class AbstractTypeResolverTest<Reference extends Object> extends AbstractXbaseTestCase {
+  public abstract Reference resolvesTo(final String expression, final String type);
   
-  public void resolvesTo(final String expression, final Class<? extends Object> type) throws Exception {
-    String _simpleName = type.getSimpleName();
-    this.resolvesTo(expression, _simpleName);
+  public abstract void isFunctionAndEquivalentTo(final Reference reference, final String type);
+  
+  private static Set<String> seenExpressions;
+  
+  @BeforeClass
+  public static void createSeenExpressionsSet() {
+    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
+    AbstractTypeResolverTest.seenExpressions = _newHashSet;
+  }
+  
+  @AfterClass
+  public static void discardSeenExpressions() {
+    AbstractTypeResolverTest.seenExpressions = null;
+  }
+  
+  protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
+    XExpression _xblockexpression = null;
+    {
+      final String string = expression.toString();
+      boolean _add = AbstractTypeResolverTest.seenExpressions.add(string);
+      boolean _not = (!_add);
+      if (_not) {
+        String _plus = ("Duplicate expression under test: " + expression);
+        Assert.fail(_plus);
+      }
+      XExpression _expression = super.expression(expression, resolve);
+      _xblockexpression = (_expression);
+    }
+    return _xblockexpression;
   }
   
   @Test
@@ -363,7 +396,8 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_02() throws Exception {
-    this.resolvesTo("[String x| true]", "(String)=>boolean");
+    Reference _resolvesTo = this.resolvesTo("[String x| true]", "(String)=>boolean");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, Boolean>");
   }
   
   @Test
@@ -392,43 +426,51 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_05() throws Exception {
-    this.resolvesTo("[x| true]", "(Object)=>boolean");
+    Reference _resolvesTo = this.resolvesTo("[x| true]", "(Object)=>boolean");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Boolean>");
   }
   
   @Test
   public void testClosure_06() throws Exception {
-    this.resolvesTo("[x| null]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[x| null]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Ignore(value = "overloading")
   @Test
   public void testClosure_07() throws Exception {
-    this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
+    Reference _resolvesTo = this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, Boolean>");
   }
   
   @Test
   public void testClosure_08() throws Exception {
-    this.resolvesTo("[x| x]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[x| x]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_09() throws Exception {
-    this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
+    Reference _resolvesTo = this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, String>");
   }
   
   @Test
   public void testClosure_10() throws Exception {
-    this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_11() throws Exception {
-    this.resolvesTo("[Object x| x]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[Object x| x]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_12() throws Exception {
-    this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
+    Reference _resolvesTo = this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
   @Ignore(value = "overloading")
@@ -455,62 +497,74 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_15() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_16() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_17() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_18() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_19() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_20() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_21() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_22() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_23() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_24() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_25() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
   public void testClosure_26() throws Exception {
-    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   
   @Test
@@ -1411,17 +1465,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_008() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\torg::eclipse::xtext::xbase::lib::CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05b() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05c() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1604,7 +1648,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_044() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1644,7 +1688,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_052() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -1769,7 +1813,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_077() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.head\n\t\t}", "String");
   }
   
   @Test
@@ -2052,7 +2096,7 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_133() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| s]\n\t\t\tlist.map(fun)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
@@ -2087,17 +2131,17 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_140() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tprintln(list)\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_141() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, println(\'\'), println(\'\'))\n\t\t\tprintln(list).head\n\t\t}", "String");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_142() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tprintln(println(println(list)).head)\n\t\t}", "String");
   }
   
   @Test
@@ -2143,6 +2187,36 @@ public abstract class AbstractTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testDeferredTypeArgumentResolution_151() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tsecond.add(new java.util.ArrayList)\n\t\t\tval String s = $$IterableExtensions::flatten(second).head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_152() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_153() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$IterableExtensions::map(list, [String s| s])\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_154() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| s]\n\t\t\t$$IterableExtensions::map(list, fun)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_155() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map(println([String s| println(s)]))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_156() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist.head\n\t\t}", "String");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_157() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
