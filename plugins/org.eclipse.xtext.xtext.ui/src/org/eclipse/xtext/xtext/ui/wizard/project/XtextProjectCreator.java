@@ -234,6 +234,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
 		factory.addBundle(getXtextProjectInfo().getProjectName());
 		factory.addBundle(getXtextProjectInfo().getUiProjectName());
+		factory.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
 	}
 
 	protected void configureTestProjectFactory(PluginProjectFactory factory) {
