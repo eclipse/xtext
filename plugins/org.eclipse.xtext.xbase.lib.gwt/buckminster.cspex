@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<actions>
+		<public name="site.p2" actor="ant">
+			<actorProperties>
+				<property key="buildFile" value="gwtBuild.ant" />
+				<property key="targets" value="post.gather.bin.parts" />
+			</actorProperties>
+			<properties>
+				<property key="target.folder" value="${buckminster.output}/jar/" />
+			</properties>
+			<products alias="output" base="${buckminster.output}/jar/"
+				upToDatePolicy="ACTOR" />
+		</public>
+	</actions>
+	<alterActions>
+		<public name="bundle.jar">
+			<alterPrerequisites>
+				<attribute name="gwt.jar.contents" alias="action.requirements" />
+				<remove name="jar.contents" />
+			</alterPrerequisites>
+		</public>
+	</alterActions>
+</cspecExtension>
