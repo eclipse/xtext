@@ -19,11 +19,23 @@
 	<!--   target.folder - destination folder                                  -->
 	<!-- ===================================================================== -->
 	<target name="post.gather.bin.parts">
+		<antcall target="copy.gwt.sources" inheritall="true" />
+		<antcall target="copy.gwt.compatible.sources" inheritall="true" />
+	</target>
+
+	<target name="copy.gwt.sources">
 		<copy todir="${target.folder}">
 			<fileset dir="src-super">
 				<include name="**/*.*" />
 			</fileset>
-			<fileset dir="/Users/dhuebner/git/org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib/src">
+		</copy>
+	</target>
+
+	<target name="copy.gwt.compatible.sources">
+		<echo>${buckminster.home} ${gwt.compatible}</echo>
+		<echoproperties format="text" destfile="${buckminster.home}/properties.txt"/>
+		<copy todir="${target.folder}">
+			<fileset dir="${ant.file}/../../org.eclipse.xtext.xbase.lib/src">
 				<and>
 					<contains text="@GwtCompatible" />
 					<not>
