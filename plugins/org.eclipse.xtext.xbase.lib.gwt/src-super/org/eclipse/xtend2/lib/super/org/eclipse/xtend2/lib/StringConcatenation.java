@@ -211,7 +211,7 @@ public class StringConcatenation implements CharSequence {
 		for (int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!Character.isSpace(segment.charAt(j))) {
 					append(object, indentation, i + 1);
 					return;
 				}
@@ -270,7 +270,7 @@ public class StringConcatenation implements CharSequence {
 				return;
 			}
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!Character.isSpace(segment.charAt(j))) {
 					newLine();
 					return;
 				}
@@ -310,7 +310,7 @@ public class StringConcatenation implements CharSequence {
 				return segments.subList(0, i + 1);
 			}
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!Character.isSpace(segment.charAt(j))) {
 					return segments;
 				}
 			}
