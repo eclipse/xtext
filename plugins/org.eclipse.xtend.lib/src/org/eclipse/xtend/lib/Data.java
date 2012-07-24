@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This annotation is used by the Xtend compiler.
  * It turns an annotated class into an immutable value object.
@@ -17,6 +19,7 @@ import java.lang.annotation.Target;
  * 
  * @author Sven Efftinge
  */
+@GwtCompatible
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Data {
