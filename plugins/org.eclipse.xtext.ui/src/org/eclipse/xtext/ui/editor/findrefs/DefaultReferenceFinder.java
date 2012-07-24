@@ -14,6 +14,7 @@ import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
@@ -173,8 +175,14 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
 		URI uri = EcoreUtil2.getNormalizedURI(resource);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
-		IResourceDescription resourceDescription = resourceServiceProvider.getResourceDescriptionManager()
-				.getResourceDescription(resource);
+		if (resourceServiceProvider == null) {
+			return Collections.emptyMap();
+		}
+		IResourceDescription.Manager resourceDescriptionManager = resourceServiceProvider.getResourceDescriptionManager();
+		if (resourceDescriptionManager == null) {
+			return Collections.emptyMap();
+		}
+		IResourceDescription resourceDescription = resourceDescriptionManager.getResourceDescription(resource);
 		Map<EObject, URI> exportedElementMap = newIdentityHashMap();
 		if (resourceDescription != null) {
 			for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
