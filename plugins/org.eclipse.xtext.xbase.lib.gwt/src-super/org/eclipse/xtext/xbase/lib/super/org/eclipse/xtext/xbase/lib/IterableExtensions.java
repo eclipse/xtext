@@ -301,43 +301,6 @@ public class IterableExtensions {
 	}
 
 	/**
-	 * Returns the elements of {@code unfiltered} that satisfy a predicate. The resulting iterable's iterator does not
-	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered
-	 * original are reflected in the view.
-	 * 
-	 * @param unfiltered
-	 *            the unfiltered iterable. May not be <code>null</code>.
-	 * @param predicate
-	 *            the predicate. May not be <code>null</code>.
-	 * @return an iterable that contains only the elements that fulfill the predicate. Never <code>null</code>.
-	 */
-	@GwtIncompatible("Class.isInstance")
-	@Pure
-	public static <T> Iterable<T> filter(Iterable<T> unfiltered, Function1<? super T, Boolean> predicate) {
-		return Iterables.filter(unfiltered, new BooleanFunctionDelegate<T>(predicate));
-	}
-
-	/**
-	 * Returns all instances of class {@code type} in {@code unfiltered}. The returned iterable has elements whose class
-	 * is {@code type} or a subclass of {@code type}. The returned iterable's iterator does not support {@code remove()}
-	 * . The returned iterable is a view on the original elements. Changes in the unfiltered original are reflected in
-	 * the view.
-	 * 
-	 * @param unfiltered
-	 *            the unfiltered iterable. May not be <code>null</code>.
-	 * @param type
-	 *            the type of elements desired
-	 * @return an unmodifiable iterable containing all elements of the original iterable that were of the requested
-	 *         type. Never <code>null</code>.
-	 */
-	@GwtIncompatible("Class.isInstance")
-	@Pure
-	@Inline(value="$3.$4filter($1, $2)", imported=Iterables.class)
-	public static <T> Iterable<T> filter(Iterable<?> unfiltered, Class<T> type) {
-		return Iterables.filter(unfiltered, type);
-	}
-	
-	/**
 	 * Returns a new iterable filtering any null references.
 	 * 
 	 * @param unfiltered
