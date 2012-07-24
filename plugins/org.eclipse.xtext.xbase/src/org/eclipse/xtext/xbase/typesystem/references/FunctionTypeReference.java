@@ -58,6 +58,21 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	}
 	
 	@Override
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		if (super.isOwnedBy(owner)) {
+			if (returnType != null && !returnType.isOwnedBy(owner))
+				return false;
+			for(LightweightTypeReference parameterType: expose(parameterTypes)) {
+				if (!parameterType.isOwnedBy(owner)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public JvmTypeReference toTypeReference() {
 		XFunctionTypeRef result = getOwner().getServices().getXtypeFactory().createXFunctionTypeRef();
 		result.setType(getType());

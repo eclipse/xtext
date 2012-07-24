@@ -203,6 +203,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testNumberLiteral_25() throws Exception {
+    this.resolvesTo("1bi.toString", "String");
+  }
+  
+  @Test
   public void testOverloadedVarArgs_01() throws Exception {
     this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(null, null)", "long");
   }
@@ -232,34 +237,93 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)", "long");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "Boxing")
+  @Test
+  public void testBoxing_01() throws Exception {
+    this.resolvesTo("1.toString", "String");
+  }
+  
   @Test
   public void testOverloadedOperators_01() throws Exception {
     this.resolvesTo("1 + 1", "int");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testOverloadedOperators_02() throws Exception {
     this.resolvesTo("1L + 1", "long");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testOverloadedOperators_03() throws Exception {
     this.resolvesTo("1 + 1L", "long");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testOverloadedOperators_04() throws Exception {
     this.resolvesTo("\'\' + \'\'", "String");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testOverloadedOperators_05() throws Exception {
     this.resolvesTo("\'\' + 1", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_06() throws Exception {
+    this.resolvesTo("1 + \'\'", "String");
+  }
+  
+  @Ignore(value = "Boxing")
+  @Test
+  public void testOverloadedOperators_07() throws Exception {
+    this.resolvesTo("(0..Math::sqrt(1l).intValue).filter[ i | l % i == 0 ].empty", "boolean");
+  }
+  
+  @Test
+  public void testOverloadedOperators_08() throws Exception {
+    this.resolvesTo("(1..2).map[ toString ].reduce[ i1, i2| i1 + i2 ]", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_09() throws Exception {
+    this.resolvesTo("(1..2).map[ toString.length ].reduce[ i1, i2| i1 + i2 ]", "Integer");
+  }
+  
+  @Test
+  public void testOverloadedOperators_10() throws Exception {
+    this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + i2 ]", "BigInteger");
+  }
+  
+  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to String + Object")
+  @Test
+  public void testOverloadedOperators_11() throws Exception {
+    this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2 | i1.toString + i2 ]", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_12() throws Exception {
+    this.resolvesTo("{\n\t\t\tval i = 1bi\n\t\t\tval s = \'\'\n\t\t\ts + i\n\t\t}", "String");
+  }
+  
+  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to Object + String")
+  @Test
+  public void testOverloadedOperators_13() throws Exception {
+    this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + String::valueOf(i2) ]", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_14() throws Exception {
+    this.resolvesTo("{\n\t\t\tval i = 1bi\n\t\t\tval s = \'\'\n\t\t\ti + s\n\t\t}", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_15() throws Exception {
+    this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].map[ i | i.toString + i ]", "Iterable<String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_16() throws Exception {
+    this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].map[ i | i + String::valueOf(i) ]", "Iterable<String>");
   }
   
   @Test
@@ -413,7 +477,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  @Ignore(value = "overloading")
   public void testClosure_04() throws Exception {
     String _plus = ("{\n" + 
       "  var java.util.List<? super String> list = null;\n");
@@ -436,11 +499,10 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testClosure_07() throws Exception {
     Reference _resolvesTo = this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, Boolean>");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, String>");
   }
   
   @Test
@@ -473,7 +535,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testClosure_13() throws Exception {
     this.resolvesTo("{ \n\t\t\tval mapper = [ x | x ]\n\t\t\tnewArrayList(1).map(mapper)\n\t\t}", "List<Integer>");
@@ -829,19 +890,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_06() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s)", "List<String>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_06a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map [it|it]", "List<String>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_06b() throws Exception {
     this.resolvesTo("newArrayList(\'\').map [it]", "List<String>");
@@ -867,7 +925,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.toString).head", "String");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_06_03() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1)", "List<Integer>");
@@ -878,13 +935,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|1).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_07() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_07_01() throws Exception {
     this.resolvesTo("<String>newArrayList.map(s|s.length)", "List<Integer>");
@@ -900,19 +955,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("<String>newArrayList.map(s|s.length).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_08() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s != null)", "List<Boolean>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_09() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length+1)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_10() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|i+1)", "List<Integer>");
@@ -923,72 +975,57 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|1).toList()", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_12() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i+1)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13_2() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "Implicit receiver")
   @Test
   public void testFeatureCall_13_3() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() map(i|i+1) }", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_13_4() throws Exception {
-    this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
-  }
-  
-  @Test
-  public void testFeatureCall_13_5() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_14() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size())", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_a() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_b() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_c() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_d() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -999,7 +1036,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_e() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -1010,7 +1046,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_f() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -1021,7 +1056,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_g() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -1032,7 +1066,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_h() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
@@ -1043,7 +1076,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_i() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size())", "List<Integer>");
@@ -1054,7 +1086,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_i_3() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
@@ -1065,7 +1096,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_j() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
@@ -1076,7 +1106,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_k() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -1087,7 +1116,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_l() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -1108,7 +1136,18 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_n_1() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t).map(iterable|iterable.size()).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)\n\t\t.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).head", "Integer");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_n_2() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t).map(iterable|iterable.size()).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))\n\t\t.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).head", "Integer");
+  }
+  
   @Test
   public void testFeatureCall_15_o() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "List<Integer>");
@@ -1119,7 +1158,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_15_p() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
@@ -1130,7 +1168,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_16_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|1)", "List<Integer>");
@@ -1141,7 +1178,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|1).map(i|1).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_17_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length).map(i|i)", "List<Integer>");
@@ -1152,7 +1188,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length).map(i|i).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_18_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b)", "List<Boolean>");
@@ -1163,7 +1198,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_19_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b })", "List<Boolean>");
@@ -1174,7 +1208,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b }).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_20_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b)", "List<Boolean>");
@@ -1185,7 +1218,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_21_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| ! b )", "List<Boolean>");
@@ -1196,7 +1228,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| ! b ).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_22_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } )", "List<Boolean>");
@@ -1207,7 +1238,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } ).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_23_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } )", "List<Boolean>");
@@ -1218,7 +1248,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } ).head", "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_24_a() throws Exception {
     String _plus = ("newArrayList(\'\').map(s|" + 
@@ -1241,19 +1270,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo(_plus_2, "Boolean");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_25_a() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_25_b() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 ).head", "Integer");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_26() throws Exception {
     this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "List<Integer>");
@@ -1274,7 +1300,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{ val list = $$ListExtensions::map(newArrayList(null as Integer)) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_30() throws Exception {
     this.resolvesTo("{ val list = newArrayList(null as Integer).map [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
@@ -1330,10 +1355,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_Bug342134_00() throws Exception {
-    this.resolvesTo("(null as java.util.List<String>).map(e|newArrayList(e)).flatten", "List<String>");
+    this.resolvesTo("(null as java.util.List<String>).map(e|newArrayList(e)).flatten", "Iterable<String>");
   }
   
   @Test
@@ -1341,10 +1365,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("(null as java.util.List<String>).map(e|newArrayList(e)).flatten.head", "String");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_Bug342134_02() throws Exception {
-    this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "List<String>");
+    this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "Iterable<String>");
   }
   
   @Test
@@ -1352,7 +1375,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten.head", "String");
   }
   
-  @Ignore(value = "overloading")
   @Test
   public void testFeatureCall_Bug342134_04() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e))", "List<ArrayList<String>>");
@@ -2259,7 +2281,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(list.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "Arrays to Lists")
   @Test
   public void testFeatureCallWithOperatorOverloading_2() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes().iterator.next", "boolean");
@@ -2270,7 +2292,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("new java.util.ArrayList<Byte>() += null", "boolean");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "Arrays to Lists")
   @Test
   public void testFeatureCallWithOperatorOverloading_4() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += newArrayList(\'x\'.getBytes().iterator.next)", "boolean");

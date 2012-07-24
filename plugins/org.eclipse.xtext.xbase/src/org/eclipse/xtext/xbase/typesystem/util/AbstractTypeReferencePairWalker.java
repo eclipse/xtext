@@ -40,6 +40,24 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		protected void doVisitArrayTypeReference(ArrayTypeReference reference, ArrayTypeReference declaration) {
 			outerVisit(declaration.getComponentType(), reference.getComponentType());
 		}
+		
+		@Override
+		protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ArrayTypeReference declaration) {
+			JvmType type = reference.getType();
+			if (type instanceof JvmTypeParameter) {
+				if (shouldProcess((JvmTypeParameter) type)) {
+					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+					processTypeParameter(typeParameter, declaration);
+				}
+			}
+		}
+		
+		@Override
+		protected void doVisitUnboundTypeReference(UnboundTypeReference reference, ArrayTypeReference declaration) {
+			if (shouldProcess(reference.getTypeParameter())) {
+				processTypeParameter(reference.getTypeParameter(), declaration);
+			}
+		}
 	}
 
 	protected class WildcardTypeReferenceTraverser extends
@@ -173,7 +191,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 
 		@Override
-		public void doVisitArrayTypeReference(ArrayTypeReference reference, ParameterizedTypeReference declaration) {
+		protected void doVisitArrayTypeReference(ArrayTypeReference reference, ParameterizedTypeReference declaration) {
 			JvmType type = declaration.getType();
 			if (type instanceof JvmTypeParameter) {
 				if (shouldProcess((JvmTypeParameter) type)) {
@@ -184,7 +202,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 
 		@Override
-		public void doVisitWildcardTypeReference(WildcardTypeReference reference, ParameterizedTypeReference declaration) {
+		protected void doVisitWildcardTypeReference(WildcardTypeReference reference, ParameterizedTypeReference declaration) {
 			LightweightTypeReference lowerBound = reference.getLowerBound();
 			if (lowerBound != null) {
 				outerVisit(declaration, lowerBound, declaration, expectedVariance, VarianceInfo.IN);

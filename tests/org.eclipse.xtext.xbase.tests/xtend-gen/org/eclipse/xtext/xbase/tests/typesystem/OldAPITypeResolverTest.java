@@ -112,7 +112,19 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   
   @Ignore(value = "timeout")
   @Test
+  public void testFeatureCall_15_h() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
   public void testFeatureCall_15_h_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_i() throws Exception {
     Assert.fail("timeout");
   }
   
@@ -124,13 +136,31 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   
   @Ignore(value = "timeout")
   @Test
+  public void testFeatureCall_15_j() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
   public void testFeatureCall_15_j_2() throws Exception {
     Assert.fail("timeout");
   }
   
   @Ignore(value = "timeout")
   @Test
+  public void testFeatureCall_15_k() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
   public void testFeatureCall_15_k_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_l() throws Exception {
     Assert.fail("timeout");
   }
   
@@ -150,6 +180,36 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Test
   public void testFeatureCall_15_n() throws Exception {
     Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_n_1() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "timeout")
+  @Test
+  public void testFeatureCall_15_n_2() throws Exception {
+    Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCall_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCall_13() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCall_24_a() throws Exception {
+    Assert.fail("fails in old implementation");
   }
   
   @Ignore(value = "fails in old implementation")
@@ -215,6 +275,12 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Ignore(value = "fails in old implementation")
   @Test
   public void testClosure_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testClosure_13() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
