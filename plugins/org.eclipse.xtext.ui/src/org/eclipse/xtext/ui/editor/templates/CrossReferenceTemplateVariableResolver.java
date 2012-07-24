@@ -51,9 +51,13 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 		}
 		String[] classReferencePair = new String[] { abbreviatedCrossReference.substring(0, dotIndex),
 				abbreviatedCrossReference.substring(dotIndex + 1) };
-		EReference reference = getReference(classReferencePair[0], classReferencePair[1], getGrammar(castedContext));
+		Grammar grammar = getGrammar(castedContext);
+		if (grammar == null) {
+			return Collections.emptyList();
+		}
+		EReference reference = getReference(classReferencePair[0], classReferencePair[1], grammar);
 		if (reference == null) {
-			log.error("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1] //$NON-NLS-1$ //$NON-NLS-2$
+			log.debug("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1] //$NON-NLS-1$ //$NON-NLS-2$
 					+ "' could not be resolved."); //$NON-NLS-1$
 			return Collections.emptyList();
 		}
