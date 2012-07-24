@@ -15,13 +15,15 @@ import org.eclipse.xtext.xbase.lib.Functions.Function4;
 import org.eclipse.xtext.xbase.lib.Functions.Function5;
 import org.eclipse.xtext.xbase.lib.Functions.Function6;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This is an extension library for {@link Functions functions}, e.g. closures.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @see Functions
  */
-public class FunctionExtensions {
+@GwtCompatible public class FunctionExtensions {
 
 	/**
 	 * Curries a function that takes one argument.

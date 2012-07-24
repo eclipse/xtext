@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link Boolean booleans}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class BooleanExtensions {
+@GwtCompatible public class BooleanExtensions {
 
 	/**
 	 * The logical <code>and</code> (conjunction). This is the equivalent to the java <code>&&</code> operator.

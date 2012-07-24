@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
@@ -33,7 +34,7 @@ import com.google.common.collect.Sets;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class IteratorExtensions {
+@GwtCompatible public class IteratorExtensions {
 
 	/**
 	 * Wraps an {@link Iterator} in an {@link Iterable}.

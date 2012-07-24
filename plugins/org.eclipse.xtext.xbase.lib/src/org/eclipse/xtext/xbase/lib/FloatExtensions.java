@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link Float} numbers.
@@ -14,7 +16,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Jan Koehnlein - Code generator
  * @since 2.3
  */
-public class FloatExtensions {
+@GwtCompatible public class FloatExtensions {
 	// BEGIN generated code
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.

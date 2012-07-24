@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link Long} numbers.
@@ -14,7 +16,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Jan Koehnlein - Code generator
  * @since 2.3
  */
-public class LongExtensions {
+@GwtCompatible public class LongExtensions {
 	
 	/**
 	 * The bitwise inclusive <code>or</code> operation. This is the equivalent to the java <code>|</code> operator.

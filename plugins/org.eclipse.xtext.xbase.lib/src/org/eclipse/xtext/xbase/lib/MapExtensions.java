@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 
@@ -23,7 +24,7 @@ import com.google.common.collect.Maps;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MapExtensions {
+@GwtCompatible public class MapExtensions {
 
 	/**
 	 * Applies the given {@code procedure} for each {@link java.util.Map.Entry key value pair} of the given {@code map}. 

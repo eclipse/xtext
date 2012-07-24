@@ -9,13 +9,15 @@ package org.eclipse.xtext.xbase.lib;
 
 import java.math.BigInteger;
 
+import com.google.common.annotations.GwtCompatible;
+
 
 /**
  * This is an extension library for {@link BigInteger big integral numbers}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class BigIntegerExtensions {
+@GwtCompatible public class BigIntegerExtensions {
 
 	/**
 	 * The unary <code>minus</code> operator.

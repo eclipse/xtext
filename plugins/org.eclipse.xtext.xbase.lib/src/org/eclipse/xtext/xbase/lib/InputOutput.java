@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * Utilities to print information to the console.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class InputOutput {
+@GwtCompatible public class InputOutput {
 
 	/**
 	 * Prints a newline to standard out, by delegating directly to <code>System.out.println()</code>

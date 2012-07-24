@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.lib.internal;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 /**
@@ -20,7 +21,7 @@ import com.google.common.base.Function;
  *            the type of the result instances of this function.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FunctionDelegate<P, R> implements Function<P, R> {
+@GwtCompatible public class FunctionDelegate<P, R> implements Function<P, R> {
 
 	private final Functions.Function1<? super P, ? extends R> delegate;
 

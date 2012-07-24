@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
 
 /**
@@ -21,7 +22,7 @@ import com.google.common.base.Preconditions;
  * @since 2.3
  */
 @Beta
-public class ReflectExtensions {
+@GwtCompatible public class ReflectExtensions {
 
 	/**
 	 * Sets the given value on an the receivers's accessible field with the given name.
