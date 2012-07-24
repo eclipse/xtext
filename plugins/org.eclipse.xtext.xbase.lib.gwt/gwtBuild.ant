@@ -1,8 +1,4 @@
-<!-- ===================================================================== -->
-<!-- Custom targets called from a project's generated build.xml            -->
-<!-- Set customBuildCallbacks=<path/to/this/file> in your build.properties.-->
-<!-- ===================================================================== -->
-<project name="Build specific targets and properties" default="noDefault">
+<project name="GWT Build specific targets and properties" default="noDefault">
 
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
@@ -13,29 +9,14 @@
 
 
 	<!-- ===================================================================== -->
-	<!-- Steps to do after the target gather.bin.parts                         -->
 	<!-- Available parameters :                                                -->
-	<!--   build.result.folder - folder containing the build results           -->
 	<!--   target.folder - destination folder                                  -->
+	<!--   source.folder - gwt compatble java sources folder                                  -->
 	<!-- ===================================================================== -->
-	<target name="post.gather.bin.parts">
-		<antcall target="copy.gwt.sources" inheritall="true" />
-		<antcall target="copy.gwt.compatible.sources" inheritall="true" />
-	</target>
-
-	<target name="copy.gwt.sources">
-		<copy todir="${target.folder}">
-			<fileset dir="src-super">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
-	</target>
-
 	<target name="copy.gwt.compatible.sources">
-		<echo>${buckminster.home} ${gwt.compatible}</echo>
-		<echoproperties format="text" destfile="${buckminster.home}/properties.txt"/>
+		<echo>Copy gwt compatible classes from ${source.folder} to ${target.folder}</echo>
 		<copy todir="${target.folder}">
-			<fileset dir="${ant.file}/../../org.eclipse.xtext.xbase.lib/src">
+			<fileset dir="${source.folder}">
 				<and>
 					<contains text="@GwtCompatible" />
 					<not>

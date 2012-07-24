@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cspecExtension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
-	<dependencies>
+	<!--<dependencies>
 		<dependency name="org.eclipse.xtext.xbase.lib"
 			componentType="osgi.bundle" />
-	</dependencies>
+	</dependencies>-->
 	<artifacts>
 		<private name="gwt.sources" base="src-super/" />
-		<private name="xbase.compatible.sources" base="${buckminster.output}/gwt-sources" />
+		<private name="gwt.compatible.sources" base="${buckminster.output}/gwt-sources" />
 	</artifacts>
 
 	<actions>
 		<private name="copy.gwt.compatible.sources" actor="ant">
+		<!--<cs:attribute component="org.eclipse.emf.gwt.build.helper" name="helper.script" alias="helper.script" />-->
+				
 			<actorProperties>
 				<property key="buildFile" value="gwtBuild.ant" />
 				<property key="targets" value="copy.gwt.compatible.sources" />
 			</actorProperties>
 			<properties>
+				<property key="source.folder" value="${buckminster.home}/../org.eclipse.xtext.xbase.lib/src" />
 				<property key="target.folder" value="${buckminster.output}/gwt-sources" />
 			</properties>
 			<products>
