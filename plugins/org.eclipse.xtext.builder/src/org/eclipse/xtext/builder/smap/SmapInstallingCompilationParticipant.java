@@ -8,6 +8,8 @@
 package org.eclipse.xtext.builder.smap;
 
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
@@ -24,8 +26,10 @@ import org.eclipse.jdt.internal.core.Region;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.Files;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -44,17 +48,20 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 	@Inject 
 	private SmapSupport smapSupport;
 
+	private List<BuildContext> files;
+	
 	@Override
 	public boolean isActive(IJavaProject project) {
-		return org.eclipse.xtext.ui.XtextProjectHelper.hasNature(project.getProject());
+		return XtextProjectHelper.hasNature(project.getProject());
 	}
-
-	private BuildContext[] files;
 
 	@Override
 	public void buildStarting(BuildContext[] files, boolean isBatch) {
 		super.buildStarting(files, isBatch);
-		this.files = files;
+		if (this.files != null)
+			this.files.addAll(Arrays.asList(files));
+		else
+			this.files = Lists.newArrayList(files);
 	}
 	
 	@Override
