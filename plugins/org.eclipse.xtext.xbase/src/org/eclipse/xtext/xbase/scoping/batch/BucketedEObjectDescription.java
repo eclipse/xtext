@@ -78,5 +78,14 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	public boolean isStaticDescription() {
 		return receiverType == null;
 	}
+	
+	@Override
+	public String toString() {
+		EObject element = getEObjectOrProxy();
+		if (element instanceof JvmIdentifiableElement) {
+			return ((JvmIdentifiableElement) element).getIdentifier();
+		}
+		return String.valueOf(element);
+	}
 
 }
