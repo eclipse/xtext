@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.cli.UnrecognizedOptionException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -215,7 +216,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 	}
 	
-	public void computeArgumentTypes(JvmIdentifiableElement feature /* LightweightTypeReference featureType */) {
+	public void computeArgumentTypes() {
+		computeArgumentTypes(getFeature());
+	}
+	
+	protected void computeArgumentTypes(JvmIdentifiableElement feature /* LightweightTypeReference featureType */) {
 		if (argumentsComputed)
 			return;
 		argumentsComputed = true;
@@ -341,7 +346,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic()) {
 			XExpression receiver = getReceiver();
-			if (receiver != null) {
+			if (receiver != null && !arguments.contains(receiver)) {
 				List<XExpression> result = Lists.newArrayListWithCapacity(1 + arguments.size());
 				result.add(receiver);
 				result.addAll(arguments);
@@ -358,14 +363,111 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
 		if (typeArityCompareResult != 0)
 			return typeArityCompareResult;
+		// TODO lookup in Java spec or compare with JDT: check argument types first or number of type parameters first?
 		if (getDeclaredTypeParameters().size() > right.getDeclaredTypeParameters().size()) {
 			return 1;
 		}
-//		computeArgumentTypes(getFeature());
-//		((AbstractLinkingCandidate<LinkingCandidate>)right).computeArgumentTypes(right.getFeature());
+		if (right instanceof AbstractLinkingCandidate<?>) {
+			int argumentTypeCompareResult = compareByArgumentTypes((AbstractLinkingCandidate<?>) right);
+			if (argumentTypeCompareResult != 0)
+				return argumentTypeCompareResult;
+		}
 		return 0;
 	}
 	
+	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {
+		// TODO cleanup
+		try {
+			computeArgumentTypes();
+		} catch(UnsupportedOperationException e) {
+			try {
+				right.computeArgumentTypes();
+			} catch(UnsupportedOperationException e2) {
+				return 0;
+			}
+			return 1; 
+		}
+		try {
+			right.computeArgumentTypes();
+		} catch(UnsupportedOperationException e) {
+			return -1;
+		}
+		int matchingArgumentTypes = countMatchingArgumentTypes();
+		int rightMatchingArgumentTypes = right.countMatchingArgumentTypes();
+		if (matchingArgumentTypes != rightMatchingArgumentTypes) {
+			if (matchingArgumentTypes > rightMatchingArgumentTypes) {
+				return -1;
+			}
+			return 1;
+		}
+		int declaredParameterCount = getDeclaredParameters().size();
+		int rightDeclaredParameterCount = right.getDeclaredParameters().size();
+		if (declaredParameterCount != rightDeclaredParameterCount) {
+			if (declaredParameterCount >= rightDeclaredParameterCount)
+				return -1;
+			else
+				return 1;
+		}
+		
+		int result = compareDeclaredArgumentTypes(right);
+		return result;
+	}
+	
+	protected int countMatchingArgumentTypes() {
+		int result = 0;
+		for(XExpression argument: getArguments()) {
+			LightweightTypeReference actualArgumentType = getActualType(argument);
+			LightweightTypeReference expectedArgumentType = getExpectedType(argument);
+			if (expectedArgumentType != null && expectedArgumentType.isAssignableFrom(actualArgumentType)) {
+				result++;
+			} else {
+				return result;
+			}
+		}
+		return result;
+	}
+
+	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate<?> right) {
+		int result = 0;
+		for(XExpression argument: getArguments()) {
+			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(argument);
+			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(argument);
+			if (expectedArgumentType == null) {
+				if (rightExpectedArgumentType != null)
+					return 1;
+			} else {
+				if (rightExpectedArgumentType == null) {
+					return -1;
+				}
+				if (expectedArgumentType.isAssignableFrom(rightExpectedArgumentType)) {
+					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType))
+						result++;
+				} else if (rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
+					result--;
+				}
+			}
+		}
+		return result;
+	}
+	
+	protected LightweightTypeReference getActualType(XExpression expression) {
+		return state.getResolvedTypes().internalGetActualType(expression);
+	}
+	
+	protected LightweightTypeReference getExpectedType(XExpression expression) {
+		return state.getResolvedTypes().internalGetExpectedType(expression);
+	}
+	
+	protected LightweightTypeReference getSubstitutedExpectedType(XExpression expression) {
+		LightweightTypeReference expectedType = getExpectedType(expression);
+		if (expectedType != null) {
+			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+			LightweightTypeReference result = substitutor.substitute(expectedType);
+			return result;
+		}
+		return null;
+	}
+
 	protected int compareByArityWith(LinkingCandidate right) {
 		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
 		return arityCompareResult;
@@ -449,5 +551,10 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected ExpressionTypeComputationState getState() {
 		return state;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [" + description.toString() + "]";
 	}
 }
