@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
@@ -56,6 +57,8 @@ public class SharedCommonTypesModule implements Module {
 		
 		binder.bind(IWorkspaceRoot.class).toInstance(ResourcesPlugin.getWorkspace().getRoot());
 		binder.bind(ITraceInformation.class).to(FileBasedTraceInformation.class);
+		
+		binder.bind(IReferenceUpdater.class).to(NullReferenceUpdater.class);
 	}
 
 }
