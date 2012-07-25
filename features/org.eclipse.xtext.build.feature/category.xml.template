@@ -27,6 +27,9 @@
    <feature id="org.eclipse.xtend.m2e" version="0.0.0">
       <category name="xtend"/>
    </feature>
+   <feature id="org.eclipse.xtend.gwt" version="0.0.0">
+      <category name="gwt-related"/>
+   </feature>
    <category-def name="xtext" label="Xtext${package.qualifier}">
       <description>
         With Xtext you can easily create your own programming languages
@@ -38,6 +41,11 @@
    <category-def name="xtend" label="Xtend${package.qualifier}">
       <description>
         A programming language for Java developers. 
+      </description>
+   </category-def>
+   <category-def name="gwt-related" label="Xtend/Xbase-GWT${package.qualifier}">
+      <description>
+       Xbase/Xtend GWT Libraries
       </description>
    </category-def>
 </site>
