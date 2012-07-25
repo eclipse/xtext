@@ -127,6 +127,22 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
 
+		<cs:public name="package.tmf-xtext-gwt" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="package.ius" />
+			</cs:actorProperties>
+			<cs:properties>
+				<cs:property key="content.ius" value="org.eclipse.xtend.gwt.feature.group" />
+				<cs:property key="package.name" value="tmf-xtext-gwt" />
+			</cs:properties>
+			<cs:prerequisites>
+				<cs:attribute name="site.p2" alias="repository" />
+				<cs:attribute name="site.tp" alias="target.platform.repository" />
+			</cs:prerequisites>
+			<cs:products alias="output" base="${buckminster.output}/zips/" />
+		</cs:public>
+
 		<cs:public name="tag" actor="buckminster.tag">
 			<cs:actorProperties>
 				<cs:property key="tag" value="build_${build.id}" />
@@ -156,6 +172,7 @@
 			<cs:attribute name="package.tmf-xtext-examples" />
 			<cs:attribute name="package.tmf-xtext-runtime" />
 			<cs:attribute name="package.tmf-xtext-sourcedoc" />
+			<cs:attribute name="package.tmf-xtext-gwt" />
 		</cs:public>
 	</cs:groups>
 
