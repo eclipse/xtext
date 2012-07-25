@@ -20,7 +20,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -63,6 +71,26 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 
 	public LoadOperation create(ResourceSet parent, IProject project) {
 		return new CheckedLoadOperation(new ParallelLoadOperation(parent, project));
+	}
+	
+	@Override
+	protected Resource loadResource(URI uri, ResourceSet localResourceSet, ResourceSet parentResourceSet) {
+		if(localResourceSet != null) {
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			if(workspace != null) {
+				IWorkspaceRoot root = workspace.getRoot();
+				if(root != null) {
+					IFile file = root.getFile(new Path(uri.toPlatformString(true)));
+					if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
+						// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
+						// we will recover & load the resource in the main builder thread (that owns the project resource lock)
+						// (if we do try to load resources that are out of sync, we create a deadlock)
+						return null;
+					}
+				}
+			}
+		}
+		return super.loadResource(uri, localResourceSet, parentResourceSet);
 	}
 
 	private class ParallelLoadOperation implements LoadOperation {
@@ -146,6 +174,13 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 					throw new LoadOperationException(uri, throwable.getCause());
 				throw new LoadOperationException(uri, throwable);
 			}
+			
+			if(resource == null && uri != null) {
+				// failed to load resource in parallel (due to file synchronization issues)
+				// load the resource here, in the main builder thread
+				resource = parent.getResource(uri, true);
+			}
+			
 			return new LoadResult(resource, uri);
 		}
 
@@ -154,12 +189,32 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 		}
 
 		public void load(Collection<URI> uris) {
+			synchronizeResources(uris);
+			
 			toProcess += uris.size();
 			Collection<URI> workload = getSorter().sort(uris);
 			for(URI uri : workload) {
 				executor.execute(new ResourceLoadJob(uri));
 			}
 			executor.shutdown();
+		}
+		
+		/**
+		 * Make sure that all files that are about to be loaded are synchronized with the file system
+		 */
+		private void synchronizeResources(Collection<URI> toLoad) {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			for(URI uri : toLoad) {
+				Path path = new Path(uri.toPlatformString(true));
+				IFile file = root.getFile(path);
+				try {
+					if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
+						file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+					}
+				} catch (CoreException e) {
+					throw new RuntimeException(e);
+				}
+			}
 		}
 
 		public Collection<URI> cancel() {
