@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.formatting
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.core.formatting.XtendFormatter3
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.InjectWith
@@ -14,13 +13,14 @@ import org.eclipse.xtext.util.Tuples
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtend.core.formatting.XtendFormatter
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
 class XtendFormatterTest {
 	
 	@Inject extension ParseHelper<XtendFile>
-	@Inject XtendFormatter3 formatter
+	@Inject XtendFormatter formatter
 	
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted.parse.flattenWhitespace)
@@ -373,5 +373,13 @@ class XtendFormatterTest {
 			switch 'x'  { case 'x': { println('x') }  case   'y':  {  println('y') } }
 		''')	
 	}
+	
+//	if (!set.add(task))
+//			return
+//		;
+// - constructors
+// - annotations
+// - templates
+// - don't unfold imports when formatting
 	
 }

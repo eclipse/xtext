@@ -19,14 +19,14 @@ import org.eclipse.xtend.lib.Property
 	
 	def protected render(String document, RendererConfiguration cfg, Iterable<FormattingData> data, RenderState renderState, boolean cancelIfLineFull) {
 		var state = renderState
-		val fmt = data.filterNull.sortBy[offset]
+		val fmt = data.filter[it != null && (length == 0 || document.substring(offset, offset + length).whitespace)].sortBy[offset]
 		for(f:fmt) {
 			val textlength = f.offset - state.offset
 			switch f {
 				WhitespaceData: {
 					state.line.column = state.line.column + textlength
-					if(cancelIfLineFull && state.line.column > cfg.maxLineWidth)
-						return null
+//					if(cancelIfLineFull && state.line.column > cfg.maxLineWidth)
+//						return null
 					val replacement = f.space
 					state.replacements += new TextReplacement(f.offset, f.length, replacement)
 				}
@@ -52,6 +52,10 @@ import org.eclipse.xtend.lib.Property
 			state.offset = textlength + f.length
 		}
 		state
+	}
+	
+	def boolean isWhitespace(String doc) {
+		(0..doc.length-1).forall[Character::isWhitespace(doc.charAt(it))]
 	}
 }
 
