@@ -159,7 +159,6 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO subsequent type param usages influence expectation")
 	def void testFeatureCallVarArgument_02() {
 		"newArrayList(null, '')".expects.types('String')
 	}

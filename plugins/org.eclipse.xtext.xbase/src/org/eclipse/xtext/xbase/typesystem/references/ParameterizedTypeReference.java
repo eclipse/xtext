@@ -80,6 +80,18 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		if (super.isOwnedBy(owner)) {
+			for(LightweightTypeReference typeArgument: expose(typeArguments)) {
+				if (!typeArgument.isOwnedBy(owner))
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
 		if (type instanceof JvmPrimitiveType) {
 			Primitives primitives = getOwner().getServices().getPrimitives();

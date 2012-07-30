@@ -156,8 +156,17 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	
 	@Override
 	public LightweightTypeReference substitute(LightweightTypeReference original) {
-		LightweightTypeReference result = original.accept(this, createVisiting());
-		return result;
+		if (original instanceof UnboundTypeReference) {
+			ConstraintVisitingInfo visitingInfo = createVisiting();
+			JvmTypeParameter typeParameter = ((UnboundTypeReference) original).getTypeParameter();
+			JvmTypeParameterDeclarator declarator = typeParameter.getDeclarator();
+			visitingInfo.pushInfo(declarator, declarator.getTypeParameters().indexOf(typeParameter));
+			LightweightTypeReference result = original.accept(this, visitingInfo);
+			return result;
+		} else {
+			LightweightTypeReference result = original.accept(this, createVisiting());
+			return result;
+		}
 	}
 	
 	@Override

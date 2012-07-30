@@ -85,6 +85,8 @@ class ConstraintVisitingInfo {
 		visiting.remove(parameter);
 	}
 	def void pushInfo(JvmTypeParameterDeclarator declarator, int idx) {
+		if (declarator == null)
+			throw new NullPointerException("declarator may not be null")
 		this.declarator = declarator;
 		this.idx = idx;
 	}

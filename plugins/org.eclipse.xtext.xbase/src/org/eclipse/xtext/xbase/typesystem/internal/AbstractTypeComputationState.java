@@ -255,7 +255,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 			resultList.add(createCandidate(featureCall, demandComputedTypes, description));
 		}
 		if (resultList.isEmpty()) {
-			throw new UnsupportedOperationException("TODO Add error candidate");
+			throw new UnsupportedOperationException("TODO Add error candidate: " + featureCall);
 		}
 		return resultList;
 	}
