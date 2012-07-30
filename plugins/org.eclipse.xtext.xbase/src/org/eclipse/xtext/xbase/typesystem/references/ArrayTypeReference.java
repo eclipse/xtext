@@ -36,6 +36,9 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		if (!(component.getType() instanceof JvmComponentType)) {
 			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
 		}
+		if (!component.isOwnedBy(owner)) {
+			throw new IllegalArgumentException("component is not valid in current context");
+		}
 	}
 	
 	@Override
@@ -78,6 +81,11 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isRawType() {
 		return component.isRawType();
+	}
+	
+	@Override
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		return super.isOwnedBy(owner) && component.isOwnedBy(owner);
 	}
 	
 	@Override

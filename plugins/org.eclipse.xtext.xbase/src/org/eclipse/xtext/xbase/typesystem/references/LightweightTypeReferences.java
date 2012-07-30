@@ -26,7 +26,7 @@ public class LightweightTypeReferences {
 			if (bounds.size() > 1) {
 				CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), false);
 				for(LightweightTypeReference bound: bounds)
-					result.addComponent(bound);
+					result.addComponent(bound.copyInto(reference.getOwner()));
 				return result;
 			} else {
 				return bounds.get(0);
@@ -40,7 +40,7 @@ public class LightweightTypeReferences {
 		if (reference instanceof WildcardTypeReference) {
 			LightweightTypeReference lowerBound = ((WildcardTypeReference) reference).getLowerBound();
 			if (lowerBound != null)
-				return lowerBound;
+				return lowerBound.copyInto(reference.getOwner());
 			return null;
 		}
 		return reference;

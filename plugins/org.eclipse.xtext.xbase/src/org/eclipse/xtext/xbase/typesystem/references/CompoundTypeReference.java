@@ -59,6 +59,19 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		if (super.isOwnedBy(owner)) {
+			for (LightweightTypeReference parameterType : expose(components)) {
+				if (!parameterType.isOwnedBy(owner)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	@Nullable
 	public JvmType getType() {
 		if (components != null && components.size() == 1)

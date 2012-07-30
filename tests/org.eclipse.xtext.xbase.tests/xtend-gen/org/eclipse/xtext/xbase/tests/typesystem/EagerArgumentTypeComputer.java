@@ -2,7 +2,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -20,8 +20,15 @@ public class EagerArgumentTypeComputer extends XbaseTypeComputer {
     {
       final Procedure1<Candidate> _function = new Procedure1<Candidate>() {
           public void apply(final Candidate it) {
-            JvmIdentifiableElement _feature = it.getFeature();
-            ((AbstractLinkingCandidate) it).computeArgumentTypes(_feature);
+            try {
+              ((AbstractLinkingCandidate) it).computeArgumentTypes();
+            } catch (final Throwable _t) {
+              if (_t instanceof UnsupportedOperationException) {
+                final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+              } else {
+                throw Exceptions.sneakyThrow(_t);
+              }
+            }
           }
         };
       IterableExtensions.<Candidate>forEach(candidates, _function);

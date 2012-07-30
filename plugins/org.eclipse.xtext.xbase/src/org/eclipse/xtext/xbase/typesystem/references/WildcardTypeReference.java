@@ -52,6 +52,21 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public LightweightTypeReference getLowerBound() {
 		return lowerBound;
 	}
+	
+	@Override
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		if (super.isOwnedBy(owner)) {
+			if (lowerBound != null && !lowerBound.isOwnedBy(owner))
+				return false;
+			for(LightweightTypeReference parameterType: expose(upperBounds)) {
+				if (!parameterType.isOwnedBy(owner)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	protected WildcardTypeReference doCopyInto(TypeReferenceOwner owner) {
