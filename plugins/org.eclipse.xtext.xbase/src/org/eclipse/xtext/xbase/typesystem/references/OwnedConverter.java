@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -106,12 +107,19 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	@Override
 	public LightweightTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
 		WildcardTypeReference result = new WildcardTypeReference(owner);
+		boolean upperBoundSeen = false;
 		for(JvmTypeConstraint constraint: reference.getConstraints()) {
 			if (constraint instanceof JvmUpperBound) {
+				upperBoundSeen = true;
 				result.addUpperBound(visit(constraint.getTypeReference()));
 			} else {
 				result.setLowerBound(visit(constraint.getTypeReference()));
 			}
+		}
+		if (!upperBoundSeen) {
+			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, reference);
+			ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
+			result.addUpperBound(upperBound);
 		}
 		return result;
 	}

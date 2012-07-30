@@ -41,31 +41,16 @@ public interface LightweightResolvedTypes extends IResolvedTypes {
 	 */
 	List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression);
 	
-	LightweightResolvedTypes NULL = new LightweightResolvedTypes() {
-		
-		public List<Diagnostic> getQueuedDiagnostics() {
-			return Collections.emptyList();
-		}
-		
-		@Nullable
-		public JvmTypeReference getExpectedType(XExpression expression) {
-			return null;
-		}
-		
-		public List<JvmTypeReference> getActualTypeArguments(XExpression expression) {
-			return Collections.emptyList();
-		}
-		
-		@Nullable
-		public JvmTypeReference getActualType(XExpression expression) {
-			return null;
-		}
+	LightweightResolvedTypes NULL = new NullLightweightResolvedTypes();
+	
+	/**
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 */
+	class NullLightweightResolvedTypes extends NullResolvedTypes implements LightweightResolvedTypes {
 
-		@Nullable
-		public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
-			return null;
-		}
-
+		protected NullLightweightResolvedTypes() {}
+		
 		@Nullable
 		public LightweightTypeReference internalGetActualType(XExpression expression) {
 			return null;
@@ -84,5 +69,5 @@ public interface LightweightResolvedTypes extends IResolvedTypes {
 		public List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
 			return Collections.emptyList();
 		}
-	};
+	}
 }

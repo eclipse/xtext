@@ -1337,7 +1337,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testToList_05() throws Exception {
-		"{ val Iterable<? super String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }".resolvesTo("List<String>")
+		"{ val Iterable<? super String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }".resolvesTo("List<Object>")
 	}
 	
 	@Test def void testToList_06() throws Exception {

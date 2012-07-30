@@ -11,10 +11,14 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
@@ -22,20 +26,18 @@ import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.eclipse.xtext.xtype.XFunctionTypeRef
+import org.junit.Ignore
+import org.junit.Rule
+import org.junit.Test
+import org.junit.rules.Timeout
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.XbaseFactory
-import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.emf.common.util.URI
-import org.junit.Test
-import org.junit.Ignore
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes
-import org.eclipse.xtext.xtype.XFunctionTypeRef
-import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 
 /**
  * @author Sebastian Zarnekow
@@ -877,6 +879,49 @@ class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
 	
 	override getTypeResolver() {
 		typeResolver
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class TypeResolverPerformanceTest extends BatchTypeResolverTest {
+	
+	@Rule
+	public val timeout = new Timeout(400) // TODO improve - aim at something like 100
+	
+	override LightweightTypeReference resolvesTo(String expression, String type) {
+		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
+		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
+		val lightweightResolvedTypes = resolvedTypes as LightweightResolvedTypes
+		val lightweight = lightweightResolvedTypes.internalGetActualType(xExpression)
+		assertEquals(type, lightweight.simpleName);
+		return lightweight
+	}
+	
+	@Test
+	@Ignore("Performance") 
+	override testBlockExpression_03() throws Exception {
+		super.testBlockExpression_03()
+	}
+	
+	@Test
+	@Ignore("Performance") 
+	override testFeatureCall_15_n() throws Exception {
+		super.testFeatureCall_15_n()
+	}
+	
+	@Test
+	@Ignore("Performance") 
+	override testFeatureCall_25_a() throws Exception {
+		super.testFeatureCall_25_a()
+	}
+	
+	@Test
+	@Ignore("Performance") 
+	override testFeatureCall_25_b() throws Exception {
+		super.testFeatureCall_25_b()
 	}
 	
 }

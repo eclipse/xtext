@@ -48,7 +48,16 @@ public interface IResolvedTypes {
 
 	// TODO return types? are they necessary for clients if diagnostics were already produced?
 	
-	IResolvedTypes NULL = new IResolvedTypes() {
+	IResolvedTypes NULL = new NullResolvedTypes();
+
+	/**
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 */
+	class NullResolvedTypes implements IResolvedTypes {
+		
+		protected NullResolvedTypes() {
+		}
 		
 		public List<Diagnostic> getQueuedDiagnostics() {
 			return Collections.emptyList();
@@ -72,6 +81,6 @@ public interface IResolvedTypes {
 		public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
-	};
+	}
 	
 }
