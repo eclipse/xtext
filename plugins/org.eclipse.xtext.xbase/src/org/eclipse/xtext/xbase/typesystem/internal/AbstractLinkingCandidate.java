@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.cli.UnrecognizedOptionException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -58,7 +57,8 @@ import com.google.common.collect.Maps;
 public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinkingCandidate<LinkingCandidate>> 
 		implements ILinkingCandidate<LinkingCandidate> { 
 	
-	public class LinkingTypeComputationState extends TypeComputationStateWithExpectation {
+	@NonNullByDefault
+	protected class LinkingTypeComputationState extends TypeComputationStateWithExpectation {
 		public LinkingTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 				DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
 				LightweightTypeReference typeReference) {
@@ -66,7 +66,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 		
 		@Override
-		@NonNullByDefault
 		protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType,
 				AbstractTypeComputationState actualState, boolean returnType) {
 			AbstractTypeExpectation result = null;
@@ -81,7 +80,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 
 	@NonNullByDefault
-	public class ObservableTypeExpectation extends TypeExpectation {
+	protected class ObservableTypeExpectation extends TypeExpectation {
 
 		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType) {
 			super(expectedType, state, returnType);
@@ -102,14 +101,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 		
 	}
-
 	
 	private final IEObjectDescription description;
 	private final ExpressionTypeComputationState state;
 	private final XExpression expression;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
-	
-	private boolean argumentsComputed;
 	
 	protected AbstractLinkingCandidate(XExpression expression, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
@@ -173,9 +169,9 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	public void apply() {
+		computeArgumentTypes();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
-		computeArgumentTypes(feature /*, featureType */);
 		List<LightweightTypeExpectation> expectations = getState().getImmediateExpectations();
 		for(LightweightTypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
@@ -216,18 +212,28 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 	}
 	
-	public void computeArgumentTypes() {
-		computeArgumentTypes(getFeature());
-	}
+	private int nextArgument = 0;
+	private Boolean[] argumentCompatibility;
+	private int fixedArityArgumentCount;
+	private List<XExpression> arguments;
+	private boolean varArgs;
+	private int declaredParameterCount;
+	private List<JvmFormalParameter> parameters;
 	
-	protected void computeArgumentTypes(JvmIdentifiableElement feature /* LightweightTypeReference featureType */) {
-		if (argumentsComputed)
+	public void computeArgumentTypes() {
+		initializeArgumentTypeComputation();
+		while(nextArgument < argumentCompatibility.length)
+			computeArgumentType(nextArgument);
+	}
+
+	private void initializeArgumentTypeComputation() {
+		if (argumentCompatibility != null)
 			return;
-		argumentsComputed = true;
-		int declaredParameterCount = 0;
+		
+		declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
-		List<JvmFormalParameter> parameters = null;
-		boolean varArgs = false;
+		varArgs = false;
+		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmExecutable) {
 			JvmExecutable executable = (JvmExecutable) feature;
 			declaredParameterCount = executable.getParameters().size();
@@ -235,46 +241,59 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			fixedArityParameterCount = varArgs ? declaredParameterCount - 1 : declaredParameterCount;
 			parameters = executable.getParameters();
 		}
-		List<XExpression> arguments = getArguments();
-		int fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
+		arguments = getArguments();
+		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
+		argumentCompatibility = new Boolean[arguments.size()];
+	}
+	
+	protected void computeArgumentType(int argumentIndex) {
+		initializeArgumentTypeComputation();
+		if (argumentIndex < nextArgument || argumentCompatibility.length == 0)
+			return;
 		if (parameters != null) {
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
 			substitutor.enhanceMapping(typeParameterMapping);
-			for(int i = 0; i < fixedArityArgumentCount; i++) {
-				JvmFormalParameter parameter = parameters.get(i);
-				LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
-				LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
-				XExpression argument = arguments.get(i);
-				TypeComputationStateWithExpectation argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
-						
-				resolveArgumentType(argument, substitutedParameterType, argumentState);
-			}
-			if (varArgs) {
-				int lastParamIndex = declaredParameterCount - 1;
-				LightweightTypeReference lastParameterType = getState().toLightweightTypeReference(parameters.get(lastParamIndex).getParameterType());
-				if (!(lastParameterType instanceof ArrayTypeReference))
-					throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
-				final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();
-				
-				TypeComputationStateWithExpectation argumentState = null;
-				LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
-				if (arguments.size() == declaredParameterCount) {
-//					XExpression lastArgument = arguments.get(lastParamIndex);
-					// TODO expect Array and componentType
-					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
-				} else {
-					argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+			try {
+				if (argumentIndex < fixedArityArgumentCount) {
+					JvmFormalParameter parameter = parameters.get(argumentIndex);
+					LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
+					LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
+					XExpression argument = arguments.get(argumentIndex);
+					TypeComputationStateWithExpectation argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
+							
+					resolveArgumentType(argument, substitutedParameterType, argumentState);
+					return;
 				}
-				for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
-					XExpression argument = arguments.get(i);
-					resolveArgumentType(argument, substitutedComponentType, argumentState);
+				if (varArgs) {
+					int lastParamIndex = declaredParameterCount - 1;
+					LightweightTypeReference lastParameterType = getState().toLightweightTypeReference(parameters.get(lastParamIndex).getParameterType());
+					if (!(lastParameterType instanceof ArrayTypeReference))
+						throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
+					final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();
+					
+					TypeComputationStateWithExpectation argumentState = null;
+					LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
+					if (arguments.size() == declaredParameterCount) {
+	//					XExpression lastArgument = arguments.get(lastParamIndex);
+						// TODO expect Array and componentType
+						argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+					} else {
+						argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+					}
+					for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
+						XExpression argument = arguments.get(i);
+						resolveArgumentType(argument, substitutedComponentType, argumentState);
+					}
+					nextArgument = arguments.size();
 				}
-			}
-		}
-		if (!varArgs) {
-			for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
-				XExpression argument = arguments.get(i);
-				resolveArgumentType(argument, null, getState().fork().withNonVoidExpectation());
+				if (!varArgs) {
+					if (argumentIndex < arguments.size()) {
+						XExpression argument = arguments.get(argumentIndex);
+						resolveArgumentType(argument, null, getState().fork().withNonVoidExpectation());
+					}
+				}
+			} finally {
+				nextArgument = Math.max(argumentIndex + 1, nextArgument);
 			}
 		}
 	}
@@ -376,29 +395,18 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {
-		// TODO cleanup
-		try {
-			computeArgumentTypes();
-		} catch(UnsupportedOperationException e) {
-			try {
-				right.computeArgumentTypes();
-			} catch(UnsupportedOperationException e2) {
-				return 0;
+		initializeArgumentTypeComputation();
+		right.initializeArgumentTypeComputation();
+		
+		int upTo = Math.min(argumentCompatibility.length, right.argumentCompatibility.length);
+		for(int i = 0; i < upTo; i++) {
+			boolean leftMatches = isMatchingArgumentType(i);
+			boolean rightMatches = right.isMatchingArgumentType(i);
+			if (leftMatches != rightMatches) {
+				if (leftMatches)
+					return -1;
+				return 1;
 			}
-			return 1; 
-		}
-		try {
-			right.computeArgumentTypes();
-		} catch(UnsupportedOperationException e) {
-			return -1;
-		}
-		int matchingArgumentTypes = countMatchingArgumentTypes();
-		int rightMatchingArgumentTypes = right.countMatchingArgumentTypes();
-		if (matchingArgumentTypes != rightMatchingArgumentTypes) {
-			if (matchingArgumentTypes > rightMatchingArgumentTypes) {
-				return -1;
-			}
-			return 1;
 		}
 		int declaredParameterCount = getDeclaredParameters().size();
 		int rightDeclaredParameterCount = right.getDeclaredParameters().size();
@@ -413,18 +421,21 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return result;
 	}
 	
-	protected int countMatchingArgumentTypes() {
-		int result = 0;
-		for(XExpression argument: getArguments()) {
+	protected boolean isMatchingArgumentType(int idx) {
+		Boolean cached = argumentCompatibility[idx];
+		if (cached == null) {
+			computeArgumentType(idx);
+			XExpression argument = arguments.get(idx);
 			LightweightTypeReference actualArgumentType = getActualType(argument);
 			LightweightTypeReference expectedArgumentType = getExpectedType(argument);
 			if (expectedArgumentType != null && expectedArgumentType.isAssignableFrom(actualArgumentType)) {
-				result++;
+				cached = Boolean.TRUE;
 			} else {
-				return result;
+				cached = Boolean.FALSE;
 			}
+			argumentCompatibility[idx] = cached;
 		}
-		return result;
+		return cached.booleanValue();
 	}
 
 	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate<?> right) {

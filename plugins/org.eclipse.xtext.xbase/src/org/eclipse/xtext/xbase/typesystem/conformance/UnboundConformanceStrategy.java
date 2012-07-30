@@ -43,6 +43,8 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		if (left.getTypeParameter() == right.getTypeParameter())
 			return TypeConformanceResult.SUCCESS;
+		if (left.getAllHints().equals(right.getAllHints()))
+			return TypeConformanceResult.SUCCESS;
 		return TypeConformanceResult.FAILED;
 	}
 }

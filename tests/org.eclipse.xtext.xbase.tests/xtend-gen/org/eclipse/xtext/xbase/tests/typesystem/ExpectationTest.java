@@ -207,7 +207,6 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  @Ignore(value = "TODO subsequent type param usages influence expectation")
   public void testFeatureCallVarArgument_02() {
     ExpectationTest _expects = this.expects("newArrayList(null, \'\')");
     _expects.types("String");
