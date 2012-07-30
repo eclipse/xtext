@@ -9,10 +9,12 @@ package org.eclipse.xtext.ui.tests.core.util;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.junit.After;
 import org.junit.Assert;
@@ -43,5 +45,14 @@ public class ValidURITest extends Assert {
 		assertTrue(EcoreUtil2.isValidUri(dummyResource, URI.createURI("platform:/resource" + FILE_PATH)));
 		assertFalse(EcoreUtil2.isValidUri(dummyResource, URI.createURI("platform://resource" + FILE_PATH)));
 		assertFalse(EcoreUtil2.isValidUri(dummyResource, URI.createURI("platform:///resource" + FILE_PATH)));
+	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=385620
+	 */
+	@Test public void emptyImportURIStringShouldBeInvalid() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource dummyResource = resourceSet.createResource(URI.createURI("test.foo"));
+		assertFalse(EcoreUtil2.isValidUri(dummyResource, URI.createURI("")));
 	}
 }

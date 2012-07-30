@@ -164,9 +164,8 @@
 				<equals arg1="${director.result}" arg2="0"/>
 			</not>
 		</condition>
-		<echo>${director.failed}</echo>
-		<!--antcall target="-check.director.result" inheritall="true"/>-->
-		
+	
+		<antcall target="-check.director.result" inheritall="true"/>
 		
 		<!-- remove the p2 metadata, so that the installation of target platform IUs is not confused -->
 		<delete dir="${install.destination}" includeEmptyDirs="true">
