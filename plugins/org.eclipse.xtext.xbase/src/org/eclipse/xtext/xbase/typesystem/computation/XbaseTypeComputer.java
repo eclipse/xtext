@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.RawTypeHelper;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -462,7 +463,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			iterableState.computeTypes(object.getForExpression());
 			
 		} else {
-			JvmTypeReference iterable = getTypeReferences().getTypeForName(Iterable.class, object, getTypeReferences().wildCard());
+			JvmWildcardTypeReference wildcard = getTypeReferences().wildCardExtends(getTypeReferences().getTypeForName(Object.class, object));
+			JvmTypeReference iterable = getTypeReferences().getTypeForName(Iterable.class, object, wildcard);
 			// TODO add synonyms automatically
 			LightweightTypeComputationState iterableState = state.fork().withExpectation(iterable); 
 			LightweightTypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
