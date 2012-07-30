@@ -49,6 +49,16 @@ public class ImportUriValidatorTest extends AbstractXtextTests {
 		assertEquals(Diagnostic.ERROR, diagnostics.getSeverity());
 	}
 	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=385620
+	 */
+	@Test public void emptyImportURIStringShouldBeInvalid() throws Exception {
+		String model = "import ''";
+		Resource resource = getResourceFromString(model);
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertEquals(Diagnostic.ERROR, diagnostics.getSeverity());
+	}
+	
 	@ComposedChecks(validators=ImportUriValidator.class)
 	public static class Validator extends AbstractDeclarativeValidator {
 		
