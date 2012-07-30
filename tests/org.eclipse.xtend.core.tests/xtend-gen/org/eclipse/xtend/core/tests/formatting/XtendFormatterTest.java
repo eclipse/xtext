@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtend.core.formatting.XtendFormatter3;
+import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,7 +39,7 @@ public class XtendFormatterTest {
   private ParseHelper<XtendFile> _parseHelper;
   
   @Inject
-  private XtendFormatter3 formatter;
+  private XtendFormatter formatter;
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     try {

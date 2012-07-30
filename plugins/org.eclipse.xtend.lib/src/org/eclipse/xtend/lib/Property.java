@@ -12,12 +12,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * @author Sven Efftinge
  * 
  * Creates a getter and setter method for the annotated field.
  * Prepends the field name with an underscore (e.g. <code>_myField</code>)
  */
+@GwtCompatible
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Property {
