@@ -424,6 +424,9 @@ public class EcoreUtil2 extends EcoreUtil {
 	 * resource factory and the physical resource exists.
 	 */
 	public static boolean isValidUri(Resource resource, URI uri) {
+		if (uri == null || uri.isEmpty()) {
+			return false;
+		}
 		URI newURI = getResolvedImportUri(resource, uri);
 		try {
 			ResourceSet resourceSet = resource.getResourceSet();
@@ -448,7 +451,7 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	private static URI getResolvedImportUri(Resource context, URI uri) {
 		URI contextURI = context.getURI();
-		if (contextURI.isHierarchical() && !contextURI.isRelative() && uri.isRelative()) {
+		if (contextURI.isHierarchical() && !contextURI.isRelative() && (uri.isRelative() && !uri.isEmpty())) {
 			uri = uri.resolve(contextURI);
 		}
 		return uri;
