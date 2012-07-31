@@ -26,6 +26,10 @@ import com.google.inject.Provider;
  */
 public abstract class AbstractSessionBasedScope extends AbstractScope {
 
+	protected interface NameAcceptor {
+		void accept(String simpleName, int order);
+	}
+	
 	private final IFeatureScopeSession session;
 	private final XAbstractFeatureCall featureCall;
 	
@@ -46,8 +50,8 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		return featureCall;
 	}
 	
-	protected String getFeatureName(QualifiedName name) {
-		return name.toString();
+	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
+		acceptor.accept(name.toString(), 1);
 	}
 	
 	@Override

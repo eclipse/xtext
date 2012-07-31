@@ -120,13 +120,16 @@ public abstract class LightweightTypeReference {
 		return getServices().getRawTypeHelper().getAllRawTypes(this, getOwner().getContextResourceSet());
 	}
 	
-	/*
-	 * Replaced wildcards and type parameters by their respective
-	 * constraints. Returns the JvmTypes without arguments.
-	 * TODO implement me
-	 */
 	public LightweightTypeReference getRawTypeReference() {
 		return getServices().getRawTypeHelper().getRawTypeReference(this, getOwner().getContextResourceSet());
+	}
+	
+	public LightweightTypeReference getUpperBoundSubstitute() {
+		return this;
+	}
+	
+	public LightweightTypeReference getLowerBoundSubstitute() {
+		return this;
 	}
 	
 	public boolean isRawType() {
@@ -135,6 +138,11 @@ public abstract class LightweightTypeReference {
 	
 	public boolean isArray() {
 		return false;
+	}
+	
+	@Nullable
+	public LightweightTypeReference getComponentType() {
+		return null;
 	}
 	
 	public List<LightweightTypeReference> getSuperTypes() {
@@ -211,9 +219,11 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
-//	public abstract List<LightweightTypeReference> getAllSuperTypes();
-	
 	public boolean isPrimitive() {
+		return false;
+	}
+	
+	public boolean isWrapper() {
 		return false;
 	}
 	
@@ -250,11 +260,33 @@ public abstract class LightweightTypeReference {
 	
 	public abstract String getIdentifier();
 	
+	@Nullable
 	protected JvmType findType(Class<?> type) {
 		return getServices().getTypeReferences().findDeclaredType(type, getOwner().getContextResourceSet());
 	}
+	
+	protected JvmType findNonNullType(Class<?> type) {
+		JvmType result = findType(type);
+		if (result == null) {
+			throw new IllegalStateException("Cannot find type " + type);
+		}
+		return result;
+	}
 
 	public abstract boolean isType(Class<?> clazz);
+	
+	public boolean isAssignableFrom(Class<?> clazz) {
+		if (isType(clazz)) {
+			return true;
+		}
+		JvmType type = findType(clazz);
+		if (type == null) {
+			return false;
+		}
+		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
+		boolean result = isAssignableFrom(other);
+		return result;
+	}
 	
 	public void accept(TypeReferenceVisitor visitor) {
 		visitor.doVisitTypeReference(this);

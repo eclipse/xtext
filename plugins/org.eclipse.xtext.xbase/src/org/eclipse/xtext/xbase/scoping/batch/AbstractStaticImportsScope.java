@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
 import com.google.common.collect.Lists;
@@ -70,24 +71,38 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 	protected abstract List<TypeBucket> getBuckets();
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		List<TypeBucket> buckets = getBuckets();
+	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
+		super.processFeatureNames(name, acceptor);
+		String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+		acceptor.accept(aliasedGetter, 2);
+		String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+		acceptor.accept(aliasedBooleanGetter, 2);
+	}
+	
+	@Override
+	protected Collection<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
+		final List<TypeBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();
 		}
-		List<IEObjectDescription> result = Lists.newArrayList();
-		String simpleName = getFeatureName(name);
-		for(TypeBucket bucket: buckets) {
-			for(JvmType type: bucket.getTypes()) {
-				if (type instanceof JvmDeclaredType) {
-					Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-					for(JvmFeature feature: features) {
-						if (isStatic(feature))
-							result.add(createNamedDescription(name, feature, bucket));
+		final List<IEObjectDescription> result = Lists.newArrayList();
+		processFeatureNames(name, new NameAcceptor() {
+			public void accept(String simpleName, int order) {
+				for(TypeBucket bucket: buckets) {
+					for(JvmType type: bucket.getTypes()) {
+						if (type instanceof JvmDeclaredType) {
+							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+							for(JvmFeature feature: features) {
+								if (isStatic(feature))
+									result.add(createNamedDescription(name, feature, bucket));
+							}
+							
+						}
 					}
 				}
 			}
-		}
+		});
+		
 		// TODO cache the result in the session explicitly for the static types
 		// especially interesting for cache misses
 		return result;

@@ -178,7 +178,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
-		TypeData result = new TypeData(expression, values.get(0).getExpectation() /* TODO use all expectations? */, mergedType, ConformanceHint.MERGED /* TODO do we need that? */, returnType);
+		TypeData result = new TypeData(expression, values.get(0).getExpectation() /* TODO use all expectations? */, mergedType.getUpperBoundSubstitute(), ConformanceHint.MERGED /* TODO do we need that? */, returnType);
 		return result;
 	}
 	
@@ -334,7 +334,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			}
 			
 		};
-		LightweightTypeReference actualType = substitutor.substitute(type);
+		LightweightTypeReference actualType = substitutor.substitute(type).getUpperBoundSubstitute();
 		acceptType(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
 		return actualType;
 	}
