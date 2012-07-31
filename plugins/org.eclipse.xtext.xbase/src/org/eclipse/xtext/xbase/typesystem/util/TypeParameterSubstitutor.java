@@ -60,16 +60,20 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 			return reference;
 		FunctionTypeReference result = new FunctionTypeReference(getOwner(), reference.getType());
 		for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
-			result.addParameterType(parameterType.accept(this, visiting));
+			result.addParameterType(visitTypeArgument(parameterType, visiting));
 		}
 		for(LightweightTypeReference typeArgument: reference.getTypeArguments()) {
-			result.addTypeArgument(typeArgument.accept(this, visiting));
+			result.addTypeArgument(visitTypeArgument(typeArgument, visiting));
 		}
 		LightweightTypeReference returnType = reference.getReturnType();
 		if (returnType != null) {
-			result.setReturnType(returnType.accept(this, visiting));
+			result.setReturnType(visitTypeArgument(returnType, visiting));
 		}
 		return result;
+	}
+
+	protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, Visiting visiting) {
+		return reference.accept(this, visiting);
 	}
 	
 	@Override
@@ -84,7 +88,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), reference.getType());
 		for(LightweightTypeReference argument: reference.getTypeArguments()) {
-			result.addTypeArgument(argument.accept(this, visiting));
+			result.addTypeArgument(visitTypeArgument(argument, visiting));
 		}
 		return result;
 	}
@@ -106,10 +110,10 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		WildcardTypeReference result = new WildcardTypeReference(getOwner());
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		if (lowerBound != null) {
-			result.setLowerBound(lowerBound.accept(this, visiting));
+			result.setLowerBound(visitTypeArgument(lowerBound, visiting));
 		}
 		for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
-			result.addUpperBound(upperBound.accept(this, visiting));
+			result.addUpperBound(visitTypeArgument(upperBound, visiting));
 		}
 		return result;
 	}
@@ -118,7 +122,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
-		LightweightTypeReference component = reference.getComponentType().accept(this, visiting);
+		LightweightTypeReference component = visitTypeArgument(reference.getComponentType(), visiting);
 		return new ArrayTypeReference(getOwner(), component);
 	}
 	
@@ -133,7 +137,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 			return reference;
 		CompoundTypeReference result = new CompoundTypeReference(getOwner(), reference.isSynonym());
 		for(LightweightTypeReference component: reference.getComponents()) {
-			reference.addComponent(component.accept(this, visiting));
+			reference.addComponent(visitTypeArgument(component, visiting));
 		}
 		return result;
 	}

@@ -88,6 +88,27 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getUpperBoundSubstitute() {
+		List<LightweightTypeReference> upperBounds = getUpperBounds();
+		if (upperBounds.size() == 1) {
+			LightweightTypeReference result = upperBounds.get(0);
+			return result;
+		}
+		CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
+		for(LightweightTypeReference upperBound: upperBounds) {
+			result.addComponent(upperBound);
+		}
+		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference getLowerBoundSubstitute() {
+		if (lowerBound != null)
+			return lowerBound;
+		return new AnyTypeReference(getOwner());
+	}
+	
+	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(nonNullUpperBounds.size());

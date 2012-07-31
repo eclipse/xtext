@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -52,14 +53,17 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 	
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
-		String simpleName = getFeatureName(name);
-		for(JvmType type: bucket.getTypes()) {
-			if (type instanceof JvmDeclaredType) {
-				Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-				Iterables.addAll(allFeatures, features);
+		final Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
+		processFeatureNames(name, new NameAcceptor() {
+			public void accept(String simpleName, int order) {
+				for(JvmType type: bucket.getTypes()) {
+					if (type instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+						Iterables.addAll(allFeatures, features);
+					}
+				}
 			}
-		}
+		});
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
@@ -79,10 +83,17 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 	}
 	
 	@Override
-	protected String getFeatureName(QualifiedName name) {
+	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		QualifiedName methodName = operatorMapping.getMethodName(name);
-		String simpleName = methodName == null ? name.toString() : methodName.toString();
-		return simpleName;
+		if (methodName != null) {
+			acceptor.accept(methodName.toString(), 2);
+		} else {
+			super.processFeatureNames(name, acceptor);
+			String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedGetter, 2);
+			String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedBooleanGetter, 2);
+		}
 	}
 
 	@Override
