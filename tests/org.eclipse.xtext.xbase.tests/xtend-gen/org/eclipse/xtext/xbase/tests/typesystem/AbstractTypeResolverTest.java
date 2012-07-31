@@ -237,7 +237,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)", "long");
   }
   
-  @Ignore(value = "Boxing")
   @Test
   public void testBoxing_01() throws Exception {
     this.resolvesTo("1.toString", "String");
@@ -273,10 +272,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("1 + \'\'", "String");
   }
   
-  @Ignore(value = "Boxing")
   @Test
   public void testOverloadedOperators_07() throws Exception {
-    this.resolvesTo("(0..Math::sqrt(1l).intValue).filter[ i | l % i == 0 ].empty", "boolean");
+    this.resolvesTo("(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].isEmpty", "boolean");
   }
   
   @Test
@@ -324,6 +322,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testOverloadedOperators_16() throws Exception {
     this.resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].map[ i | i + String::valueOf(i) ]", "Iterable<String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_17() throws Exception {
+    this.resolvesTo("(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].empty", "boolean");
   }
   
   @Test
@@ -432,7 +435,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'foo\',\'bar\').forEach []", "void");
   }
   
-  @Ignore
   @Test
   public void testFeatureCallWithArrayToIterableConversion() throws Exception {
     this.resolvesTo("\'foo\'.toCharArray.iterator", "Iterator<Character>");
@@ -465,7 +467,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  @Ignore(value = "lower bound")
   public void testClosure_03() throws Exception {
     String _plus = ("{\n" + 
       "  var java.util.List<? super String> list = null;\n");
@@ -641,6 +642,22 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testClosure_29() throws Exception {
     this.resolvesTo("[].apply()", "Object");
+  }
+  
+  @Test
+  public void testClosure_30() throws Exception {
+    this.resolvesTo("$$ListExtensions::map(null as java.util.List<? super String>) [e|e]", "List<Object>");
+  }
+  
+  @Test
+  public void testClosure_31() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  $$ListExtensions::map(list) [e|e]\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    this.resolvesTo(_plus_2, "List<Object>");
   }
   
   @Test
@@ -999,6 +1016,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCall_13_4() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "List<Integer>");
+  }
+  
+  @Ignore(value = "Implicit receiver")
+  @Test
+  public void testFeatureCall_13_5() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> it = null map(i|i+1) }", "List<Integer>");
   }
   
   @Test
@@ -1411,6 +1434,188 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBounds_01() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> list = null list.get(0) }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_02() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> list = null list.get(0) }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_03() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> list = null list.get(0) }", "Object");
+  }
+  
+  @Test
+  public void testBounds_04() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> list = null list.subList(0, 1) }", "List<Integer>");
+  }
+  
+  @Test
+  public void testBounds_05() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> list = null list.subList(0, 1) }", "List<? extends Integer>");
+  }
+  
+  @Test
+  public void testBounds_06() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> list = null list.subList(0, 1) }", "List<? super Integer>");
+  }
+  
+  @Test
+  public void testBounds_07() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> list = null list.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_08() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> list = null list.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_09() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> list = null list.last }", "Object");
+  }
+  
+  @Test
+  public void testBounds_10() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<Integer>> list = null list.last }", "Iterable<Integer>");
+  }
+  
+  @Test
+  public void testBounds_11() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<Integer>> list = null list.last.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_12() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<Integer>> list = null list.last }", "Iterable<Integer>");
+  }
+  
+  @Test
+  public void testBounds_13() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<Integer>> list = null list.last.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_14() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<? extends Integer>> list = null list.last }", "Iterable<? extends Integer>");
+  }
+  
+  @Test
+  public void testBounds_15() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<? extends Integer>> list = null list.last.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_16() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last }", "Iterable<? extends Integer>");
+  }
+  
+  @Test
+  public void testBounds_17() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last.last }", "Integer");
+  }
+  
+  @Test
+  public void testBounds_18() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<? super Integer>> list = null list.last }", "Iterable<? super Integer>");
+  }
+  
+  @Test
+  public void testBounds_19() throws Exception {
+    this.resolvesTo("{ var java.util.List<Iterable<? super Integer>> list = null list.last.last }", "Object");
+  }
+  
+  @Test
+  public void testBounds_20() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last }", "Iterable<? super Integer>");
+  }
+  
+  @Test
+  public void testBounds_21() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last.last }", "Object");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_01() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> it = null get(0) }", "Integer");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_02() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> it = null get(0) }", "Integer");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_03() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> it = null get(0) }", "Object");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_04() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> it = null subList(0, 1) }", "List<Integer>");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_05() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> it = null subList(0, 1) }", "List<? extends Integer>");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_06() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> it = null subList(0, 1) }", "List<? super Integer>");
+  }
+  
+  @Ignore(value = "Implicit receiver")
+  @Test
+  public void testImplicitReceiverBounds_07() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> it = null last }", "Integer");
+  }
+  
+  @Ignore(value = "Implicit receiver")
+  @Test
+  public void testImplicitReceiverBounds_08() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> it = null last }", "Integer");
+  }
+  
+  @Test
+  public void testImplicitReceiverBounds_09() throws Exception {
+    this.resolvesTo("{ var java.util.List<? super Integer> it = null last }", "Object");
+  }
+  
+  @Test
+  public void testPropertyAccess_01() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> it = null empty }", "boolean");
+  }
+  
+  @Test
+  public void testPropertyAccess_02() throws Exception {
+    this.resolvesTo("{ var java.util.List<Integer> list = null list.empty }", "boolean");
+  }
+  
+  @Test
+  public void testPropertyAccess_03() throws Exception {
+    this.resolvesTo("{ var Iterable<Integer> iterable = null iterable.empty }", "boolean");
+  }
+  
+  @Test
+  public void testPropertyAccess_04() throws Exception {
+    this.resolvesTo("{ var Iterable<Integer> it = null empty }", "boolean");
+  }
+  
+  @Test
+  public void testPropertyAccess_05() throws Exception {
+    this.resolvesTo("{ var Iterable<Integer> iterable = null iterable.class }", "Class<? extends Iterable>");
+  }
+  
+  @Test
+  public void testPropertyAccess_06() throws Exception {
+    this.resolvesTo("{ var Iterable<Integer> it = null class }", "Class<? extends Iterable>");
+  }
+  
+  @Test
   public void testReceiverIsPartiallyResolved_01() throws Exception {
     this.resolvesTo("newArrayList.get(0)", "Object");
   }
@@ -1650,19 +1855,19 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_041() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_042() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_043() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
@@ -1983,19 +2188,19 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tsecond.add(new java.util.ArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_107() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_108() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "overloading")
+  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_109() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
@@ -2281,7 +2486,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(list.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "Arrays to Lists")
   @Test
   public void testFeatureCallWithOperatorOverloading_2() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes().iterator.next", "boolean");
@@ -2292,7 +2496,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("new java.util.ArrayList<Byte>() += null", "boolean");
   }
   
-  @Ignore(value = "Arrays to Lists")
   @Test
   public void testFeatureCallWithOperatorOverloading_4() throws Exception {
     this.resolvesTo("new java.util.ArrayList<Byte>() += newArrayList(\'x\'.getBytes().iterator.next)", "boolean");

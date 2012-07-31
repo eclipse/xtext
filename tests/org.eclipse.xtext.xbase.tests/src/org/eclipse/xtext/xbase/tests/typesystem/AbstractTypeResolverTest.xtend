@@ -194,7 +194,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)".resolvesTo("long")
 	}
 	
-	@Ignore("Boxing")
 	@Test def void testBoxing_01() throws Exception {
 		"1.toString".resolvesTo("String")
 	}
@@ -223,9 +222,8 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"1 + ''".resolvesTo("String")
 	}
 	
-	@Ignore("Boxing")
 	@Test def void testOverloadedOperators_07() throws Exception {
-		"(0..Math::sqrt(1l).intValue).filter[ i | l % i == 0 ].empty".resolvesTo("boolean")
+		"(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].isEmpty".resolvesTo("boolean")
 	}
 	
 	@Test def void testOverloadedOperators_08() throws Exception {
@@ -272,6 +270,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testOverloadedOperators_16() throws Exception {
 		"(1..2).map[ new java.math.BigInteger(toString) ].map[ i | i + String::valueOf(i) ]".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testOverloadedOperators_17() throws Exception {
+		"(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].empty".resolvesTo("boolean")
 	}
 
 	@Test def void testCastExpression() throws Exception {
@@ -360,7 +362,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList('foo','bar').forEach []".resolvesTo("void")
 	}
 
-	@Ignore
 	@Test def void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		"'foo'.toCharArray.iterator".resolvesTo("Iterator<Character>")
 	}
@@ -387,7 +388,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test
-	@Ignore("lower bound")
 	def void testClosure_03() throws Exception {
 		("{\n" + 
 		"  var java.util.List<? super String> list = null;\n" + 
@@ -577,10 +577,21 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"[].apply()".resolvesTo("Object")
 	}
 	
+	@Test def void testClosure_30() throws Exception {
+		"$$ListExtensions::map(null as java.util.List<? super String>) [e|e]".resolvesTo("List<Object>")
+	}
+	
+	@Test def void testClosure_31() throws Exception {
+		("{\n" + 
+		"  var java.util.List<? super String> list = null;\n" + 
+		"  $$ListExtensions::map(list) [e|e]\n" +
+		"}").resolvesTo("List<Object>")
+	}
+	
 	@Test def void testTypeArgs() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
 	}
-
+	
 	@Test def void testIfExpression() throws Exception {
 		"if (true) 'foo' else null".resolvesTo("String")
 		"if (true) 'foo' else 'bar'".resolvesTo("String")
@@ -937,6 +948,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testFeatureCall_13_4() throws Exception {
 		"{ var it = newArrayList('').map(s|1).toList() it }".resolvesTo("List<Integer>")
+	}
+	
+	@Ignore("Implicit receiver")
+	@Test def void testFeatureCall_13_5() throws Exception {
+		"{ var java.util.List<? extends Integer> it = null map(i|i+1) }".resolvesTo("List<Integer>")
 	}
 	
 	@Test def void testFeatureCall_14() throws Exception {
@@ -1400,6 +1416,152 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"<java.util.List<String>>newArrayList().flatten".resolvesTo("Iterable<String>")
 	}
 	
+	@Test def void testBounds_01() throws Exception {
+		"{ var java.util.List<Integer> list = null list.get(0) }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_02() throws Exception {
+		"{ var java.util.List<? extends Integer> list = null list.get(0) }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_03() throws Exception {
+		"{ var java.util.List<? super Integer> list = null list.get(0) }".resolvesTo("Object")
+	}
+	
+	@Test def void testBounds_04() throws Exception {
+		"{ var java.util.List<Integer> list = null list.subList(0, 1) }".resolvesTo("List<Integer>")
+	}
+	
+	@Test def void testBounds_05() throws Exception {
+		"{ var java.util.List<? extends Integer> list = null list.subList(0, 1) }".resolvesTo("List<? extends Integer>")
+	}
+	
+	@Test def void testBounds_06() throws Exception {
+		"{ var java.util.List<? super Integer> list = null list.subList(0, 1) }".resolvesTo("List<? super Integer>")
+	}
+	
+	@Test def void testBounds_07() throws Exception {
+		"{ var java.util.List<Integer> list = null list.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_08() throws Exception {
+		"{ var java.util.List<? extends Integer> list = null list.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_09() throws Exception {
+		"{ var java.util.List<? super Integer> list = null list.last }".resolvesTo("Object")
+	}
+	
+	@Test def void testBounds_10() throws Exception {
+		"{ var java.util.List<Iterable<Integer>> list = null list.last }".resolvesTo("Iterable<Integer>")
+	}
+	
+	@Test def void testBounds_11() throws Exception {
+		"{ var java.util.List<Iterable<Integer>> list = null list.last.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_12() throws Exception {
+		"{ var java.util.List<? extends Iterable<Integer>> list = null list.last }".resolvesTo("Iterable<Integer>")
+	}
+	
+	@Test def void testBounds_13() throws Exception {
+		"{ var java.util.List<? extends Iterable<Integer>> list = null list.last.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_14() throws Exception {
+		"{ var java.util.List<Iterable<? extends Integer>> list = null list.last }".resolvesTo("Iterable<? extends Integer>")
+	}
+	
+	@Test def void testBounds_15() throws Exception {
+		"{ var java.util.List<Iterable<? extends Integer>> list = null list.last.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_16() throws Exception {
+		"{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last }".resolvesTo("Iterable<? extends Integer>")
+	}
+	
+	@Test def void testBounds_17() throws Exception {
+		"{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last.last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testBounds_18() throws Exception {
+		"{ var java.util.List<Iterable<? super Integer>> list = null list.last }".resolvesTo("Iterable<? super Integer>")
+	}
+	
+	@Test def void testBounds_19() throws Exception {
+		"{ var java.util.List<Iterable<? super Integer>> list = null list.last.last }".resolvesTo("Object")
+	}
+	
+	@Test def void testBounds_20() throws Exception {
+		"{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last }".resolvesTo("Iterable<? super Integer>")
+	}
+	
+	@Test def void testBounds_21() throws Exception {
+		"{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last.last }".resolvesTo("Object")
+	}
+	
+	@Test def void testImplicitReceiverBounds_01() throws Exception {
+		"{ var java.util.List<Integer> it = null get(0) }".resolvesTo("Integer")
+	}
+	
+	@Test def void testImplicitReceiverBounds_02() throws Exception {
+		"{ var java.util.List<? extends Integer> it = null get(0) }".resolvesTo("Integer")
+	}
+	
+	@Test def void testImplicitReceiverBounds_03() throws Exception {
+		"{ var java.util.List<? super Integer> it = null get(0) }".resolvesTo("Object")
+	}
+	
+	@Test def void testImplicitReceiverBounds_04() throws Exception {
+		"{ var java.util.List<Integer> it = null subList(0, 1) }".resolvesTo("List<Integer>")
+	}
+	
+	@Test def void testImplicitReceiverBounds_05() throws Exception {
+		"{ var java.util.List<? extends Integer> it = null subList(0, 1) }".resolvesTo("List<? extends Integer>")
+	}
+	
+	@Test def void testImplicitReceiverBounds_06() throws Exception {
+		"{ var java.util.List<? super Integer> it = null subList(0, 1) }".resolvesTo("List<? super Integer>")
+	}
+	
+	@Ignore("Implicit receiver")
+	@Test def void testImplicitReceiverBounds_07() throws Exception {
+		"{ var java.util.List<Integer> it = null last }".resolvesTo("Integer")
+	}
+	
+	@Ignore("Implicit receiver")
+	@Test def void testImplicitReceiverBounds_08() throws Exception {
+		"{ var java.util.List<? extends Integer> it = null last }".resolvesTo("Integer")
+	}
+	
+	@Test def void testImplicitReceiverBounds_09() throws Exception {
+		"{ var java.util.List<? super Integer> it = null last }".resolvesTo("Object")
+	}
+	
+	@Test def void testPropertyAccess_01() throws Exception {
+		"{ var java.util.List<Integer> it = null empty }".resolvesTo("boolean")
+	}
+	
+	@Test def void testPropertyAccess_02() throws Exception {
+		"{ var java.util.List<Integer> list = null list.empty }".resolvesTo("boolean")
+	}
+	
+	@Test def void testPropertyAccess_03() throws Exception {
+		"{ var Iterable<Integer> iterable = null iterable.empty }".resolvesTo("boolean")
+	}
+	
+	@Test def void testPropertyAccess_04() throws Exception {
+		"{ var Iterable<Integer> it = null empty }".resolvesTo("boolean")
+	}
+	
+	@Test def void testPropertyAccess_05() throws Exception {
+		"{ var Iterable<Integer> iterable = null iterable.class }".resolvesTo("Class<? extends Iterable>")
+	}
+	
+	@Test def void testPropertyAccess_06() throws Exception {
+		"{ var Iterable<Integer> it = null class }".resolvesTo("Class<? extends Iterable>")
+	}
+	
 	@Test def void testReceiverIsPartiallyResolved_01() throws Exception {
 		"newArrayList.get(0)".resolvesTo("Object")
 	}
@@ -1789,7 +1951,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_041() throws Exception {
 		"{
 			val list = newArrayList
@@ -1798,7 +1960,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_042() throws Exception {
 		"{
 			val list = newArrayList
@@ -1809,7 +1971,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_043() throws Exception {
 		"{
 			val list = newArrayList
@@ -2375,7 +2537,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_107() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2384,7 +2546,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_108() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2395,7 +2557,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("overloading")
+	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_109() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2882,7 +3044,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("Arrays to Lists")
 	@Test def void testFeatureCallWithOperatorOverloading_2() throws Exception {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next".resolvesTo("boolean")
 	}
@@ -2891,7 +3052,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"new java.util.ArrayList<Byte>() += null".resolvesTo("boolean")
 	}
 	
-	@Ignore("Arrays to Lists")
 	@Test def void testFeatureCallWithOperatorOverloading_4() throws Exception {
 		"new java.util.ArrayList<Byte>() += newArrayList('x'.getBytes().iterator.next)".resolvesTo("boolean")
 	}

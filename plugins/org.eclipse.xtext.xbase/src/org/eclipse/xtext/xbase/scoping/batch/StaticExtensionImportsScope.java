@@ -40,10 +40,13 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 	
 	@Override
-	protected String getFeatureName(QualifiedName name) {
+	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		QualifiedName methodName = operatorMapping.getMethodName(name);
-		String simpleName = methodName == null ? name.toString() : methodName.toString();
-		return simpleName;
+		if (methodName != null) {
+			acceptor.accept(methodName.toString(), 2);
+		} else {
+			super.processFeatureNames(name, acceptor);
+		}
 	}
 	
 	@Override

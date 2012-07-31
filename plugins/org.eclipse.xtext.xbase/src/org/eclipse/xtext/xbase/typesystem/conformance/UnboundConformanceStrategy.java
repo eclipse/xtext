@@ -28,11 +28,11 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	protected TypeConformanceResult doVisitTypeReference(UnboundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
 		for(LightweightBoundTypeArgument hint: hints) {
-			VarianceInfo varianceInfo = hint.getDeclaredVariance().mergeDeclaredWithActual(hint.getActualVariance());
-			if (varianceInfo == VarianceInfo.INVARIANT) {
-				return conformanceComputer.isConformant(hint.getTypeReference(), right, param);
-			} else if (varianceInfo == VarianceInfo.OUT) {
-				
+			if (hint.getDeclaredVariance() != null) {
+				VarianceInfo varianceInfo = hint.getDeclaredVariance().mergeDeclaredWithActual(hint.getActualVariance());
+				if (varianceInfo == VarianceInfo.INVARIANT) {
+					return conformanceComputer.isConformant(hint.getTypeReference(), right, param);
+				}
 			}
 		}
 		return TypeConformanceResult.FAILED;

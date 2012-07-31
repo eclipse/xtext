@@ -140,6 +140,37 @@ public class Primitives {
 		return result != type && result != null;
 	}
 
+	public boolean isWrapperType(JvmType type) {
+		if (typeReferences.is(type, Byte.class)) {
+			return true;
+		} else if (typeReferences.is(type, Short.class)) {
+			return true;
+		} else if (typeReferences.is(type, Character.class)) {
+			return true;
+		} else if (typeReferences.is(type, Integer.class)) {
+			return true;
+		} else if (typeReferences.is(type, Long.class)) {
+			return true;
+		} else if (typeReferences.is(type, Float.class)) {
+			return true;
+		} else if (typeReferences.is(type, Double.class)) {
+			return true;
+		} else if (typeReferences.is(type, Boolean.class)) {
+			return true;
+		} else if (typeReferences.is(type, Void.class)) {
+			return true;
+		}
+		if (type instanceof JvmTypeParameter) {
+			EList<JvmTypeConstraint> constraints = ((JvmTypeParameter)type).getConstraints();
+			for(JvmUpperBound upperBound: filter(constraints, JvmUpperBound.class)) {
+				JvmTypeReference upperBoundType = upperBound.getTypeReference();
+				if (isWrapperType(upperBoundType))
+					return true;
+			}
+		}
+		return false;
+	}
+	
 	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
 		return new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
 

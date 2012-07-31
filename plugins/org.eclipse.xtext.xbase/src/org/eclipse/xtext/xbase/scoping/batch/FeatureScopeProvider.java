@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -36,6 +38,8 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeature
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -64,6 +68,9 @@ public class FeatureScopeProvider implements FeatureNames {
 
 	@Inject
 	private OperatorMapping operatorMapping;
+	
+	@Inject
+	private SynonymTypesProvider synonymProvider;
 	
 	protected static final int DEFAULT_MEMBER_CALL_PRIORITY = 0;
 	protected static final int DEFAULT_IT_PRIORITY = 10;
@@ -155,15 +162,28 @@ public class FeatureScopeProvider implements FeatureNames {
 //	}
 	
 	protected IScope createFeatureScopeForTypeRef(
-			XExpression receiver,
+			final XExpression receiver,
 			LightweightTypeReference featureDeclarator, 
-			EObject featureCall,
-			IFeatureScopeSession session,
+			final EObject featureCall,
+			final IFeatureScopeSession session,
 			IScope parent) {
 		// TODO ReceiverFeatureScopes for synonyms
+		final Wrapper<IScope> wrapper = Wrapper.wrap(parent);
+		synonymProvider.collectSynonymTypes(featureDeclarator, new SynonymTypesProvider.Acceptor() {
+
+			int id = 100;
+			
+			@Override
+			protected void accept(LightweightTypeReference synonym, Set<ConformanceHint> hints) {
+				List<JvmType> rawTypes = synonym.getRawTypes();
+				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
+				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, synonym, asAbstractFeatureCall(featureCall), bucket, operatorMapping));
+			}
+			
+		});
 		List<JvmType> rawTypes = featureDeclarator.getRawTypes();
 		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
-		IScope result = new ReceiverFeatureScope(parent, session, receiver, featureDeclarator, asAbstractFeatureCall(featureCall), typeBucket, operatorMapping);
+		IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, asAbstractFeatureCall(featureCall), typeBucket, operatorMapping);
 		return result;
 	}
 

@@ -256,6 +256,12 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testClosure_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testClosure_05() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -388,6 +394,18 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testClosure_30() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testClosure_31() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testIfExpression_03() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -437,6 +455,18 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Ignore(value = "fails in old implementation")
   @Test
   public void testToList_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testPropertyAccess_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testPropertyAccess_06() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -683,6 +713,24 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_040() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_041() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_042() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_043() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -1055,6 +1103,24 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_106() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_107() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_108() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_109() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

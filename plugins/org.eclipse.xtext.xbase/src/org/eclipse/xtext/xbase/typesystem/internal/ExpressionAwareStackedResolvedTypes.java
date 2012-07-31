@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.ListMultimap;
 
@@ -58,13 +59,17 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 		for(Map.Entry<Object, LightweightBoundTypeArgument> hint: typeParameterHints.entries()) {
 			if (!parent.isResolved(hint.getKey())) {
 				LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
-				LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
-						boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
-						boundTypeArgument.getSource(), 
-						boundTypeArgument.getOrigin(), 
-						boundTypeArgument.getDeclaredVariance(), 
-						boundTypeArgument.getActualVariance());
-				parent.acceptHint(hint.getKey(), copy);
+				if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
+					parent.acceptHint(hint.getKey(), boundTypeArgument);
+				} else {
+					LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+							boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
+							boundTypeArgument.getSource(), 
+							boundTypeArgument.getOrigin(), 
+							boundTypeArgument.getDeclaredVariance(), 
+							boundTypeArgument.getActualVariance());
+					parent.acceptHint(hint.getKey(), copy);
+				}
 			}
 		}
 	}

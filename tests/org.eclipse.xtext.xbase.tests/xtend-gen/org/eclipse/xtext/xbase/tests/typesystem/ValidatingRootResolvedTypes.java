@@ -69,11 +69,19 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   }
   
   public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
+    boolean _and = false;
     LightweightTypeReference _typeReference = boundTypeArgument.getTypeReference();
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = _typeReference.isOwnedBy(_referenceOwner);
-    boolean _not = (!_isOwnedBy);
-    if (_not) {
+    boolean _notEquals = (!Objects.equal(_typeReference, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      LightweightTypeReference _typeReference_1 = boundTypeArgument.getTypeReference();
+      TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+      boolean _not = (!_isOwnedBy);
+      _and = (_notEquals && _not);
+    }
+    if (_and) {
       IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
       throw _illegalArgumentException;
     }
@@ -107,11 +115,19 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     final List<LightweightBoundTypeArgument> result = super.getAllHints(handle);
     final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
         public void apply(final LightweightBoundTypeArgument it) {
+          boolean _and = false;
           LightweightTypeReference _typeReference = it.getTypeReference();
-          TypeReferenceOwner _referenceOwner = ValidatingRootResolvedTypes.this.getReferenceOwner();
-          boolean _isOwnedBy = _typeReference.isOwnedBy(_referenceOwner);
-          boolean _not = (!_isOwnedBy);
-          if (_not) {
+          boolean _notEquals = (!Objects.equal(_typeReference, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            LightweightTypeReference _typeReference_1 = it.getTypeReference();
+            TypeReferenceOwner _referenceOwner = ValidatingRootResolvedTypes.this.getReferenceOwner();
+            boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+            boolean _not = (!_isOwnedBy);
+            _and = (_notEquals && _not);
+          }
+          if (_and) {
             IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("hint is not owned by this resolved types");
             throw _illegalArgumentException;
           }

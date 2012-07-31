@@ -68,8 +68,8 @@ public class ArrayTypeReference extends LightweightTypeReference {
 			return result;
 		}
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(3);
-		result.add(new ParameterizedTypeReference(getOwner(), findType(Cloneable.class)));
-		result.add(new ParameterizedTypeReference(getOwner(), findType(Serializable.class)));
+		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Cloneable.class)));
+		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Serializable.class)));
 		return result;
 	}
 	
@@ -91,6 +91,10 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isArray() {
 		return true;
+	}
+	
+	public LightweightTypeReference getComponent() {
+		return component;
 	}
 
 	@Override
@@ -117,6 +121,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	
+	@Override
 	public LightweightTypeReference getComponentType() {
 		return component;
 	}
