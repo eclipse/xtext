@@ -418,14 +418,21 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> expectedTypeParameterMapping = Maps.newLinkedHashMap();
 		for(JvmTypeParameter typeParameter: allTypeParameters) {
 			List<LightweightBoundTypeArgument> boundInformation = typeParameterMapping.get(typeParameter);
+			LightweightMergedBoundTypeArgument boundTypeArgument = null;
 			if (boundInformation.isEmpty()) {
 				UnboundTypeReference unboundTypeReference = state.createUnboundTypeReference(object, typeParameter);
 				// TODO use VarianceInfo.IN / .OUT respectively if direct arg in operation
-				LightweightMergedBoundTypeArgument boundTypeArgument = new LightweightMergedBoundTypeArgument(unboundTypeReference, VarianceInfo.INVARIANT);
+				boundTypeArgument = new LightweightMergedBoundTypeArgument(unboundTypeReference, VarianceInfo.INVARIANT);
 				expectedTypeParameterMapping.put(typeParameter, boundTypeArgument);
 			} else {
-				LightweightMergedBoundTypeArgument boundTypeArgument = services.getBoundTypeArgumentMerger().merge(typeParameterMapping.get(typeParameter), state.getReferenceOwner());
+				boundTypeArgument = services.getBoundTypeArgumentMerger().merge(typeParameterMapping.get(typeParameter), state.getReferenceOwner());
 				expectedTypeParameterMapping.put(typeParameter, boundTypeArgument);
+			}
+			if (boundTypeArgument != null) {
+				LightweightTypeReference typeReference = boundTypeArgument.getTypeReference();
+				if (typeReference instanceof UnboundTypeReference) {
+					((UnboundTypeReference) typeReference).acceptHint(boundTypeArgument.getVariance());
+				}
 			}
 		}
 		return expectedTypeParameterMapping;

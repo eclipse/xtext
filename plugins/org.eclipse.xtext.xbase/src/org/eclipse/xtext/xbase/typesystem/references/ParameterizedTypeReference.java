@@ -119,6 +119,16 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isWrapper() {
+		if (type instanceof JvmDeclaredType || type instanceof JvmTypeParameter) {
+			Primitives primitives = getOwner().getServices().getPrimitives();
+			boolean result = primitives.isWrapperType(type);
+			return result;
+		}
+		return false;
+	}
+	
+	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		// TODO should this be a service?
 		if (type instanceof JvmDeclaredType) {

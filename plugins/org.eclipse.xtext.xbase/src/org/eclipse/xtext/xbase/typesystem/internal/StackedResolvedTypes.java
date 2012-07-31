@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -94,12 +95,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();
 		for(Map.Entry<Object, LightweightBoundTypeArgument> hint: typeParameterHints.entries()) {
 			LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
-			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
-					boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
-					boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
-					boundTypeArgument.getDeclaredVariance(), 
-					boundTypeArgument.getActualVariance());
-			parent.acceptHint(hint.getKey(), copy);
+			if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
+				parent.acceptHint(hint.getKey(), boundTypeArgument);
+			} else {
+				LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+						boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
+						boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
+						boundTypeArgument.getDeclaredVariance(), 
+						boundTypeArgument.getActualVariance());
+				parent.acceptHint(hint.getKey(), copy);
+			}
 		}
 	}
 	
@@ -126,6 +131,12 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			result = parent.doGetActualType(identifiable);
 		}
 		return result;
+	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+		return null;
 	}
 	
 	@Override
@@ -200,12 +211,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		List<LightweightBoundTypeArgument> parentHints = getParent().getHints(handle);
 		List<LightweightBoundTypeArgument> withParentHints = Lists.newArrayListWithCapacity(parentHints.size() + result.size());
 		for(LightweightBoundTypeArgument parentHint: parentHints) {
-			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
-					parentHint.getTypeReference().copyInto(getReferenceOwner()), 
-					parentHint.getSource(), parentHint.getOrigin(), 
-					parentHint.getDeclaredVariance(), 
-					parentHint.getActualVariance());
-			withParentHints.add(copy);
+			if (parentHint.getTypeReference() == null) {
+				withParentHints.add(parentHint);
+			} else {
+				LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+						parentHint.getTypeReference().copyInto(getReferenceOwner()), 
+						parentHint.getSource(), parentHint.getOrigin(), 
+						parentHint.getDeclaredVariance(), 
+						parentHint.getActualVariance());
+				withParentHints.add(copy);
+			}
 		}
 		withParentHints.addAll(result);
 		return withParentHints;

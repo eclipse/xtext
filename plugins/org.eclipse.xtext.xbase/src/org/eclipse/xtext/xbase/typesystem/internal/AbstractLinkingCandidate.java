@@ -196,7 +196,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			};
 			substitutor.enhanceMapping(typeParameterMapping);
 			// TODO enhance with expectation
-			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType);
+			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
 			deferredBindTypeArgument(expectation, substitutedFeatureType);
 			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
 		}

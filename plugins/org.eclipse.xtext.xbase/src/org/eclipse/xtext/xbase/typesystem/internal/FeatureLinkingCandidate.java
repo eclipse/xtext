@@ -14,6 +14,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -25,6 +27,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -169,6 +173,28 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmConstructor) {
 			return getState().getResolvedTypes().getConverter().toLightweightReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
+		}
+		/*
+		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 
+		 * the static type of the expression on which getClass is called. For example, 
+		 * no cast is required in this code fragment:
+		 *   Number n = 0;
+		 *   Class<? extends Number> c = n.getClass();
+		 */
+		if (feature instanceof JvmOperation && feature.getSimpleName().equals("getClass")) {
+			JvmOperation getClassOperation = (JvmOperation) feature;
+			if (getClassOperation.getParameters().isEmpty() && "java.lang.Object".equals(getClassOperation.getDeclaringType().getIdentifier())) {
+				LightweightTypeReference receiverType = getReceiverType();
+				List<JvmType> rawTypes = receiverType.getRawTypes();
+				if (rawTypes.isEmpty()) {
+					return super.getDeclaredType(feature);
+				}
+				ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), getClassOperation.getReturnType().getType());
+				WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
+				wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
+				result.addTypeArgument(wildcard);
+				return result;
+			}
 		}
 		return super.getDeclaredType(feature);
 	}

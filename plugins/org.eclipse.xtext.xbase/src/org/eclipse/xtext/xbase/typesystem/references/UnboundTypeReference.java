@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -52,7 +53,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	protected UnboundTypeReference createCopy(TypeReferenceOwner owner) {
-		return new UnboundTypeReference(owner, expression, getTypeParameter(), getHandle());
+		UnboundTypeReference result = new UnboundTypeReference(owner, expression, getTypeParameter(), getHandle());
+		return result;
 	}
 	
 	public void tryResolve() {
@@ -94,6 +96,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return internalGetResolvedTo();
 	}
 	
+	@Override
+	public LightweightTypeReference getUpperBoundSubstitute() {
+		if (internalGetResolvedTo() != null)
+			return resolvedTo.getUpperBoundSubstitute();
+		return super.getUpperBoundSubstitute();
+	}
+	
 	public LightweightTypeReference resolve() {
 		List<LightweightBoundTypeArgument> allHints = getOwner().getAllHints(getHandle());
 		if (!allHints.isEmpty() && resolveWithHints(allHints)) {
@@ -111,14 +120,23 @@ public class UnboundTypeReference extends LightweightTypeReference {
 
 	protected boolean resolveWithHints(List<LightweightBoundTypeArgument> allHints) {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
+		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
+		EnumSet<VarianceInfo> varianceHints = EnumSet.noneOf(VarianceInfo.class);
 		for(LightweightBoundTypeArgument hint: allHints) {
-			if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
-				inferredHints.add(hint);
+			if (hint.getOrigin() instanceof VarianceInfo) {
+				varianceHints.add((VarianceInfo) hint.getOrigin());
+			} else {
+				effectiveHints.add(hint);
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					inferredHints.add(hint);
+				}
 			}
 		}
-		LightweightMergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(!inferredHints.isEmpty() ? inferredHints : allHints, getOwner());
+		if (effectiveHints.isEmpty())
+			return false;
+		LightweightMergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(!inferredHints.isEmpty() ? inferredHints : effectiveHints, getOwner());
 		if (typeArgument != null) {
-			if (!inferredHints.isEmpty() && inferredHints.size() != allHints.size()) {
+			if (!inferredHints.isEmpty() && inferredHints.size() != effectiveHints.size()) {
 				DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getOwner()) {
 					@Override
 					protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
@@ -133,14 +151,16 @@ public class UnboundTypeReference extends LightweightTypeReference {
 						};
 					}
 				};
-				for(LightweightBoundTypeArgument hint: allHints) {
+				for(LightweightBoundTypeArgument hint: effectiveHints) {
 					if (hint.getSource() != BoundTypeArgumentSource.INFERRED) {
 						collector.processPairedReferences(typeArgument.getTypeReference(), hint.getTypeReference());
 					}
 				}
 			}
 			resolvedTo = typeArgument.getTypeReference();
-			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(typeArgument.getTypeReference(), BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, typeArgument.getVariance()));
+			if (resolvedTo != null && varianceHints.contains(VarianceInfo.IN))
+				resolvedTo = resolvedTo.getUpperBoundSubstitute();
+			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(resolvedTo, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, typeArgument.getVariance()));
 			return true;
 		}
 		return false;
@@ -196,6 +216,31 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return resolvedTo.isArray();
 		}
 		return false;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getComponentType() {
+		if (internalIsResolved()) {
+			return resolvedTo.getComponentType();
+		}
+		return super.getComponentType();
+	}
+	
+	@Override
+	public boolean isWrapper() {
+		if (internalIsResolved()) {
+			return resolvedTo.isWrapper();
+		}
+		return false;
+	}
+	
+	@Override
+	public LightweightTypeReference getPrimitiveIfWrapperType() {
+		if (internalIsResolved()) {
+			return resolvedTo.getPrimitiveIfWrapperType();
+		}
+		return this;
 	}
 	
 	@Override
@@ -290,6 +335,10 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return visitor.doVisitUnboundTypeReference(this, param);
 		}
 	}
+	
+	public void acceptHint(VarianceInfo variance) {
+		acceptHint(new LightweightBoundTypeArgument(null, null, variance, null, null));		
+	}
 
 	public void acceptHint(
 			LightweightTypeReference hint, BoundTypeArgumentSource source, Object origin,
@@ -314,4 +363,5 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	public boolean equalHandles(UnboundTypeReference reference) {
 		return getHandle().equals(reference.getHandle());
 	}
+
 }
