@@ -1855,19 +1855,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_041() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_042() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_043() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
@@ -2188,19 +2185,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval second = new java.util.ArrayList\n\t\t\tsecond.add(new java.util.ArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_107() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_108() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "VarArgs")
   @Test
   public void testDeferredTypeArgumentResolution_109() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tval secondList = new java.util.ArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");

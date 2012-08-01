@@ -1951,7 +1951,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_041() throws Exception {
 		"{
 			val list = newArrayList
@@ -1960,7 +1959,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_042() throws Exception {
 		"{
 			val list = newArrayList
@@ -1971,7 +1969,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_043() throws Exception {
 		"{
 			val list = newArrayList
@@ -2537,7 +2534,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_107() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2546,7 +2542,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_108() throws Exception {
 		"{
 			val list = new java.util.ArrayList
@@ -2557,7 +2552,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("VarArgs")
 	@Test def void testDeferredTypeArgumentResolution_109() throws Exception {
 		"{
 			val list = new java.util.ArrayList
