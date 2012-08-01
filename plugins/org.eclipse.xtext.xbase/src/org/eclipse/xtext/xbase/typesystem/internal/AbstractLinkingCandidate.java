@@ -382,10 +382,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
 		if (typeArityCompareResult != 0)
 			return typeArityCompareResult;
-		// TODO lookup in Java spec or compare with JDT: check argument types first or number of type parameters first?
-		if (getDeclaredTypeParameters().size() > right.getDeclaredTypeParameters().size()) {
-			return 1;
-		}
 		if (right instanceof AbstractLinkingCandidate<?>) {
 			int argumentTypeCompareResult = compareByArgumentTypes((AbstractLinkingCandidate<?>) right);
 			if (argumentTypeCompareResult != 0)
