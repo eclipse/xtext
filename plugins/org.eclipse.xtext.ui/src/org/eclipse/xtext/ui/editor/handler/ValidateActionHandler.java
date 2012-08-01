@@ -12,20 +12,15 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
-import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -46,8 +41,6 @@ public class ValidateActionHandler extends AbstractHandler {
 	private MarkerTypeProvider markerTypeProvider;
 	@Inject
 	private IssueResolutionProvider issueResolutionProvider;
-	@Inject
-	private IssueUtil issueUtil;
 	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
