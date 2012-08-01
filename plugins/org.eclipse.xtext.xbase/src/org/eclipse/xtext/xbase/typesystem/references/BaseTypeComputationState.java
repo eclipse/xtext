@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class BaseTypeComputationState implements LightweightTypeComputationState, LightweightTypeComputationState.LightweightFork {
+public abstract class BaseTypeComputationState implements LightweightTypeComputationState {
 
 	protected abstract BaseResolvedTypes getResolvedTypes();
 	

@@ -27,42 +27,36 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public interface ITypeComputationState {
 	
-	interface Fork {
-		
-		/**
-		 * The given expectation will be resolved if it contains unresolved type
-		 * arguments, e.g. an operation that declares two parameters of the very
-		 * same type argument will yield a more detailed expectation if possible.
-		 * <code>&lt;T&gt; T foo(T, T)</code> with
-		 * <code>foo&lt;String&gt;(null, 'string')</code> will allow to pass the unresolved T as expectation
-		 * where clients would be invoked with the better candidate 'string'.
-		 */
-		ITypeComputationState withExpectation(JvmTypeReference expectation);
-		
-		ITypeComputationState withNonVoidExpectation();
-		
-		/**
-		 * Discards the current expectation and allows to use return and throw 
-		 * independently from the parent's state.
-		 */
-		ITypeComputationState withoutExpectation();
-		
-		/**
-		 * Transfers the available return type expectation to the immediate expectation of this
-		 * computation step. 
-		 */
-		ITypeComputationState withReturnExpectation();
-		
-		/**
-		 * Keeps the return type expectation. Otherwise the state is free of expectations.
-		 */
-		ITypeComputationState withoutImmediateExpectation();
+	/**
+	 * The given expectation will be resolved if it contains unresolved type
+	 * arguments, e.g. an operation that declares two parameters of the very
+	 * same type argument will yield a more detailed expectation if possible.
+	 * <code>&lt;T&gt; T foo(T, T)</code> with
+	 * <code>foo&lt;String&gt;(null, 'string')</code> will allow to pass the unresolved T as expectation
+	 * where clients would be invoked with the better candidate 'string'.
+	 */
+	ITypeComputationState withExpectation(JvmTypeReference expectation);
 	
-		ITypeComputationState withTypeCheckpoint();
-		
-	}
+	ITypeComputationState withNonVoidExpectation();
 	
-	Fork fork();
+	/**
+	 * Discards the current expectation and allows to use return and throw 
+	 * independently from the parent's state.
+	 */
+	ITypeComputationState withoutExpectation();
+	
+	/**
+	 * Transfers the available return type expectation to the immediate expectation of this
+	 * computation step. 
+	 */
+	ITypeComputationState withReturnExpectation();
+	
+	/**
+	 * Keeps the return type expectation. Otherwise the state is free of expectations.
+	 */
+	ITypeComputationState withoutImmediateExpectation();
+
+	ITypeComputationState withTypeCheckpoint();
 
 	ITypeComputationResult computeTypes(@Nullable XExpression expression);
 	
@@ -88,12 +82,12 @@ public interface ITypeComputationState {
 	/**
 	 * The result is never empty.
 	 */
-	List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall);
+	List<? extends IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall);
 	
 	/**
 	 * The result is never empty.
 	 */
-	List<IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall);
+	List<? extends IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall);
 	
 	void acceptActualType(JvmTypeReference type);
 	

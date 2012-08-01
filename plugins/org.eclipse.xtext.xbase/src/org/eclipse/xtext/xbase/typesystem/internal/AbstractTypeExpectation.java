@@ -28,7 +28,6 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	
 	public boolean isVoidTypeAllowed() {
 		LightweightTypeReference expectedType = internalGetExpectedType();
-		// TODO avoid resolving the type ref
 		if (expectedType != null && expectedType.isType(Void.TYPE)) {
 			return true;
 		}
@@ -42,6 +41,10 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	
 	protected AbstractTypeComputationState getState() {
 		return state;
+	}
+	
+	protected ResolvedTypes getResolvedTypes() {
+		return state.getResolvedTypes();
 	}
 	
 	@Override

@@ -34,9 +34,9 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 	}
 	
 	@Override
-	protected List<LightweightTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
+	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
 		LightweightTypeReference voidType = getResolvedTypes().getConverter().toLightweightReference(getTypeReferences().getTypeForName(Void.TYPE, getMember()));
-		LightweightTypeExpectation result = returnType ? new TypeExpectation(voidType, actualState, returnType) : new RootTypeExpectation(voidType, actualState);
+		AbstractTypeExpectation result = returnType ? new TypeExpectation(voidType, actualState, returnType) : new RootTypeExpectation(voidType, actualState);
 		return Collections.singletonList(result);
 	}
 

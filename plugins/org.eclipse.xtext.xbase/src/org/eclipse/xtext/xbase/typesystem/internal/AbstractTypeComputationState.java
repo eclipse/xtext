@@ -50,6 +50,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
+	private List<AbstractTypeExpectation> immediateExpectations;
+	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -88,43 +90,29 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return reentrantTypeResolver.getTypeArgumentMerger();
 	}
 	
+	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
+	
 	public LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
-		 ResolvedTypes types = computeTypes(expression, true);
-		 if (types != null) {
-			return new ResolutionBasedComputationResult(expression, types); 
-		 } else {
+		if (expression != null) {
+			ExpressionTypeComputationState state = createExpressionComputationState(expression, resolvedTypes.pushTypes(expression));
+			getResolver().getTypeComputer().computeTypes(expression, state);
+			StackedResolvedTypes mergeMe = state.getMergableResolvedTypes();
+			mergeMe.mergeIntoParent();
+			return new ResolutionBasedComputationResult(expression, resolvedTypes);
+		} else {
 			// create diagnostics if necessary
 			return new NoTypeResult();
-		 }
-	}
-	
-	@Nullable
-	protected final ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
-		if (expression != null) {
-			StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
-			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
-			getResolver().getTypeComputer().computeTypes(expression, state);
-			if (mergeAll) {
-				stackedResolvedTypes.mergeIntoParent();
-				return resolvedTypes;
-			}
-			return stackedResolvedTypes;
-		} else {
-			return null;
 		}
 	}
 	
-	@Nullable
-	protected StackedResolvedTypes computeTypesWithoutMerge(@Nullable XExpression expression) {
-		return (StackedResolvedTypes) computeTypes(expression, false);
+	protected StackedResolvedTypes getMergableResolvedTypes() {
+		return (StackedResolvedTypes) getResolvedTypes();
 	}
-
+	
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
 	}
-	
-	protected abstract LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
 	
 	public AbstractTypeComputationState fork() {
 		return this;
@@ -181,17 +169,21 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new TypeAssigner(state);
 	}
 
-	public final List<LightweightTypeExpectation> getImmediateExpectations() {
-		return getImmediateExpectations(this);
+	public final List<? extends LightweightTypeExpectation> getImmediateExpectations() {
+		if (immediateExpectations == null)
+			immediateExpectations = getImmediateExpectations(this);
+		return immediateExpectations;
 	}
 	
-	public final List<LightweightTypeExpectation> getReturnExpectations() {
-		return getReturnExpectations(this);
+	public final List<? extends LightweightTypeExpectation> getReturnExpectations() {
+		if (returnExpectations == null)
+			returnExpectations = getReturnExpectations(this);
+		return returnExpectations;
 	}
 	
-	protected abstract List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
 	
-	protected abstract List<LightweightTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(LightweightTypeExpectation expectation: getImmediateExpectations()) {
