@@ -37,6 +37,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IDocumentPartitioner;
+import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
@@ -44,6 +45,7 @@ import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -302,8 +304,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		if (element instanceof IFileEditorInput) {
 			IFileEditorInput input = (IFileEditorInput) element;
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, issueUtil);
+		} else if(element instanceof IURIEditorInput){
+			return new AnnotationModel();
 		}
-		// TODO: do we need an annotation model for IURIEditorInput? JDT does not even display TODOs
 		return super.createAnnotationModel(element);
 	}
 
