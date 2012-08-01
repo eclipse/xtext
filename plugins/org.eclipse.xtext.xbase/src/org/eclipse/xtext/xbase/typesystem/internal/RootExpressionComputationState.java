@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -41,8 +40,8 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 	}
 
 	@Override
-	protected List<LightweightTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		LightweightTypeExpectation result = null;
+	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
+		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			result = returnType ? new TypeExpectation(expectedType, actualState, returnType) : new RootTypeExpectation(expectedType, actualState);
 		} else {

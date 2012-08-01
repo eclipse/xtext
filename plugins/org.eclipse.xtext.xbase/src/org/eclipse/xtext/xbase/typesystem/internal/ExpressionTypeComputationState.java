@@ -31,10 +31,6 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 
 	@Override
-	protected LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		return acceptType(getResolvedTypes(), expectation, type, conformanceHint, returnType);
-	}
-	
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
 		return resolvedTypes.acceptType(expression, expectation, type, conformanceHint, returnType);
 	}

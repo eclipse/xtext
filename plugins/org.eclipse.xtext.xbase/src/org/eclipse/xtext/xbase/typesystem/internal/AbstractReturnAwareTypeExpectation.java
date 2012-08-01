@@ -25,7 +25,7 @@ public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExp
 	}
 
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint conformanceHint) {
-		getState().acceptType(this, type, conformanceHint, returnType);
+		getState().acceptType(getResolvedTypes(), this, type, conformanceHint, returnType);
 	}
 	
 	protected boolean isReturnType() {

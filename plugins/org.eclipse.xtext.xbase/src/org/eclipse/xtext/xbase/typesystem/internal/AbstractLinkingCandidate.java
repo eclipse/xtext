@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -58,32 +59,67 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		implements ILinkingCandidate<LinkingCandidate> { 
 	
 	@NonNullByDefault
-	protected class LinkingTypeComputationState extends TypeComputationStateWithExpectation {
+	protected class LinkingTypeComputationState extends AbstractStackedTypeComputationState {
+
+		private final LightweightTypeReference expectedType;
+
 		public LinkingTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 				DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
 				LightweightTypeReference typeReference) {
-			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, typeReference);
+			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+			this.expectedType = typeReference;
+		}
+
+		@Override
+		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, ConformanceHint.EXPECTATION_INDEPENDENT);
+			return Collections.singletonList(result);
 		}
 		
-		@Override
 		protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType,
-				AbstractTypeComputationState actualState, boolean returnType) {
+				AbstractTypeComputationState actualState, boolean returnType, ConformanceHint hint) {
 			AbstractTypeExpectation result = null;
 			if (expectedType != null) {
 				LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
-				result = new ObservableTypeExpectation(copied, actualState, returnType);
+				result = new ObservableTypeExpectation(copied, actualState, returnType, hint);
 			} else {
 				result = new NoExpectation(actualState, returnType);
 			}
 			return result;
+		}
+		
+		protected LightweightTypeReference getExpectedType() {
+			return expectedType;
+		}
+		
+	}
+	
+	@NonNullByDefault
+	protected class VarArgTypeComputationState extends LinkingTypeComputationState {
+
+		public VarArgTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+				DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
+				ArrayTypeReference typeReference) {
+			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, typeReference);
+		}
+	
+		@Override
+		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+			ArrayTypeReference array = (ArrayTypeReference) getExpectedType();
+			AbstractTypeExpectation main = createTypeExpectation(array, actualState, false, ConformanceHint.EXPECTATION_INDEPENDENT);
+			AbstractTypeExpectation component = createTypeExpectation(array.getComponent(), actualState, false, ConformanceHint.VAR_ARG);
+			return ImmutableList.of(main, component);
 		}
 	}
 
 	@NonNullByDefault
 	protected class ObservableTypeExpectation extends TypeExpectation {
 
-		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType) {
+		private ConformanceHint conformanceHint;
+
+		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, ConformanceHint conformanceHint) {
 			super(expectedType, state, returnType);
+			this.conformanceHint = conformanceHint;
 		}
 		
 		@Override
@@ -97,7 +133,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			LightweightTypeReference expectedType = internalGetExpectedType();
 			if (expectedType == null || expectedType.isOwnedBy(referenceOwner))
 				return this;
-			return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType());
+			return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType(), conformanceHint);
 		}
 		
 	}
@@ -172,7 +208,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		computeArgumentTypes();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
-		List<LightweightTypeExpectation> expectations = getState().getImmediateExpectations();
+		List<? extends LightweightTypeExpectation> expectations = getState().getImmediateExpectations();
 		for(LightweightTypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
@@ -259,7 +295,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 					LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
 					LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 					XExpression argument = arguments.get(argumentIndex);
-					TypeComputationStateWithExpectation argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
+					AbstractTypeComputationState argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
 							
 					resolveArgumentType(argument, substitutedParameterType, argumentState);
 					return;
@@ -271,12 +307,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 						throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 					final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();
 					
-					TypeComputationStateWithExpectation argumentState = null;
+					AbstractTypeComputationState argumentState = null;
 					LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 					if (arguments.size() == declaredParameterCount) {
-	//					XExpression lastArgument = arguments.get(lastParamIndex);
-						// TODO expect Array and componentType
-						argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+						ArrayTypeReference arrayType = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
+						argumentState = new VarArgTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, arrayType);
 					} else {
 						argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
 					}
@@ -468,7 +503,24 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	protected LightweightTypeReference getSubstitutedExpectedType(XExpression expression) {
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType != null) {
-			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner()) {
+				@Override
+				@NonNullByDefault
+				public LightweightTypeReference substitute(LightweightTypeReference original) {
+					if (original instanceof ArrayTypeReference) {
+						LightweightTypeReference componentType = original.getComponentType();
+						if (componentType instanceof UnboundTypeReference) {
+							ConstraintVisitingInfo visitingInfo = createVisiting();
+							JvmTypeParameter typeParameter = ((UnboundTypeReference) componentType).getTypeParameter();
+							JvmTypeParameterDeclarator declarator = typeParameter.getDeclarator();
+							visitingInfo.pushInfo(declarator, declarator.getTypeParameters().indexOf(typeParameter));
+							LightweightTypeReference result = original.accept(this, visitingInfo);
+							return result;
+						}
+					} 
+					return super.substitute(original);
+				}
+			};
 			LightweightTypeReference result = substitutor.substitute(expectedType);
 			return result;
 		}

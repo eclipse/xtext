@@ -879,6 +879,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testFeatureCall_03_a() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList(null as String[])", "List<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_03_b() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList(null as int[])", "List<int[]>");
+  }
+  
+  @Test
   public void testMemberFeatureCall_01() throws Exception {
     this.resolvesTo("\'x\'.length", "int");
   }
@@ -905,6 +915,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testFeatureCall_05_b() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(null as Float[])", "List<Float>");
   }
   
   @Test
@@ -2438,6 +2453,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testDeferredTypeArgumentResolution_157() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_158() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as String[])\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_159() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(null as String[])\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_160() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(null as String[])\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
   @Test
