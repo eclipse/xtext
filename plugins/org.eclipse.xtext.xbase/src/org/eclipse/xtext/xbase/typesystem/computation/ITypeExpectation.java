@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

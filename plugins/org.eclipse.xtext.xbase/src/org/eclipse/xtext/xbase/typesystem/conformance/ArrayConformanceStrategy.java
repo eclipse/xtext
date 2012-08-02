@@ -60,7 +60,7 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 				for(LightweightTypeReference rightSuperTypes: right.getAllSuperTypes()) {
 					TypeConformanceResult result = conformanceComputer.isConformant(left, rightSuperTypes, paramWithoutSuperTypeCheck);
 					if (result.isConformant()) {
-						return TypeConformanceResult.merge(result, new TypeConformanceResult(TypeConformanceResult.Kind.SUBTYPE));
+						return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
 					}
 				}
 			}

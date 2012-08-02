@@ -80,4 +80,14 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	protected void mergeIntoParent() {
 		throw new UnsupportedOperationException("Should not be invoked");
 	}
+	
+	@Override
+	protected void performMergeIntoParent() {
+		throw new UnsupportedOperationException("Should not be invoked");
+	}
+	
+	@Override
+	protected void prepareMergeIntoParent() {
+		throw new UnsupportedOperationException("Should not be invoked");
+	}
 }

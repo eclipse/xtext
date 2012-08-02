@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -35,13 +35,13 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (getParent().getExpression() != getExpression()) {
-			LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
-			getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
+			LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, returnType, hints);
+			getParent().acceptType(resolvedTypes, expectation, actualType, returnType, hints);
 			return actualType;
 		} else {
-			LightweightTypeReference actualType = getParent().acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+			LightweightTypeReference actualType = getParent().acceptType(resolvedTypes, expectation, type, returnType, hints);
 			return actualType;
 		}
 	}

@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -156,5 +157,11 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     final IResolvedTypes typeResolution = _typeResolver.resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
+  }
+  
+  @Ignore(value = "Performance")
+  @Test
+  public void testFeatureCall_25_d() throws Exception {
+    super.testFeatureCall_25_d();
   }
 }

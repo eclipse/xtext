@@ -11,8 +11,8 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +23,7 @@ public interface LightweightTypeExpectation extends ITypeExpectation {
 	@Nullable
 	LightweightTypeReference internalGetExpectedType();
 
-	void acceptActualType(LightweightTypeReference type, ConformanceHint hint);
+	void acceptActualType(LightweightTypeReference type, ConformanceHint... hint);
 
 	OwnedConverter getConverter();
 	

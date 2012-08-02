@@ -110,6 +110,11 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}
+	
+	@Ignore("Performance") @Test override testFeatureCall_25_d() throws Exception {
+		super.testFeatureCall_25_d()
+	}
+	
 }
 
 /**
@@ -883,6 +888,15 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_157() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_158() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_159() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_160() throws Exception {
 		fail("fails in old implementation")
 	}
 	

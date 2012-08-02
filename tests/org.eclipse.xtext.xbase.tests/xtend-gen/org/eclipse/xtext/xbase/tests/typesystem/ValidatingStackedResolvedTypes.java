@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingExpressionAwareResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingReassigningResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
@@ -83,7 +83,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     super.acceptHint(handle, boundTypeArgument);
   }
   
-  public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final ConformanceHint conformanceHint, final boolean returnType) {
+  public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final ConformanceHint... hints) {
     LightweightTypeReference _xblockexpression = null;
     {
       TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
@@ -100,7 +100,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
         IllegalArgumentException _illegalArgumentException_1 = new IllegalArgumentException("type is not owned by this resolved types");
         throw _illegalArgumentException_1;
       }
-      LightweightTypeReference _acceptType = super.acceptType(expression, expectation, type, conformanceHint, returnType);
+      LightweightTypeReference _acceptType = super.acceptType(expression, expectation, type, returnType, hints);
       _xblockexpression = (_acceptType);
     }
     return _xblockexpression;

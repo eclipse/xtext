@@ -23,10 +23,10 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
@@ -78,12 +78,12 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return reentrantTypeResolver;
 	}
 	
-	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
+	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	
 	public final LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
 		if (expression != null) {
 			ExpressionAwareStackedResolvedTypes stackedResolvedTypes = doComputeTypes(expression);
-			stackedResolvedTypes.mergeIntoParent();
+			stackedResolvedTypes.performMergeIntoParent();
 			return new ResolutionBasedComputationResult(expression, resolvedTypes);
 		} else {
 			// create diagnostics if necessary
@@ -95,6 +95,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 		getResolver().getTypeComputer().computeTypes(expression, state);
+		stackedResolvedTypes.prepareMergeIntoParent();
 		return stackedResolvedTypes;
 	}
 	
@@ -182,7 +183,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(LightweightTypeExpectation expectation: getImmediateExpectations()) {
-			expectation.acceptActualType(type, ConformanceHint.EXPECTATION_INDEPENDENT);
+			expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.EXPECTATION_INDEPENDENT);
 		}
 	}
 

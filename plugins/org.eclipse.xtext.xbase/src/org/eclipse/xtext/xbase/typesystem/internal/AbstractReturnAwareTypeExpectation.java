@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -24,8 +24,8 @@ public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExp
 		this.returnType = returnType;
 	}
 
-	public void acceptActualType(LightweightTypeReference type, ConformanceHint conformanceHint) {
-		getState().acceptType(getResolvedTypes(), this, type, conformanceHint, returnType);
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		getState().acceptType(getResolvedTypes(), this, type, returnType, hints);
 	}
 	
 	protected boolean isReturnType() {
