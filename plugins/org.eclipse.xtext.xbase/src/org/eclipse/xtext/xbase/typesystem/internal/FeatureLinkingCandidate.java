@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -108,17 +109,20 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	}
 	
 	@Override
-	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, LightweightTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
+			if (!(argumentState instanceof AbstractTypeComputationState))
+				throw new IllegalArgumentException("argumentState was " + argumentState);
+			AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
 			LightweightTypeReference receiverType = getReceiverType();
 			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
-			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, argumentState, false);
+			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
 			// TODO should we use the result of #acceptType?
 			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
-				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, argumentState);
+				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 		} else {
 			super.resolveArgumentType(argument, declaredType, argumentState);
 		}

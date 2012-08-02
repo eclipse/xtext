@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -35,9 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.Lists;
 
@@ -70,12 +66,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return featureScopeSession;
 	}
 	
-	protected CommonTypeComputationServices getServices() {
-		return reentrantTypeResolver.getServices();
-	}
-	
 	protected TypeReferences getTypeReferences() {
-		return getServices().getTypeReferences();
+		return reentrantTypeResolver.getServices().getTypeReferences();
 	}
 	
 	protected ITypeComputer getTypeComputer() {
@@ -86,36 +78,29 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return reentrantTypeResolver;
 	}
 	
-	protected BoundTypeArgumentMerger getTypeArgumentMerger() {
-		return reentrantTypeResolver.getTypeArgumentMerger();
-	}
-	
 	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
 	
-	public LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public final LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
 		if (expression != null) {
-			ExpressionTypeComputationState state = createExpressionComputationState(expression, resolvedTypes.pushTypes(expression));
-			getResolver().getTypeComputer().computeTypes(expression, state);
-			StackedResolvedTypes mergeMe = state.getMergableResolvedTypes();
-			mergeMe.mergeIntoParent();
+			ExpressionAwareStackedResolvedTypes stackedResolvedTypes = doComputeTypes(expression);
+			stackedResolvedTypes.mergeIntoParent();
 			return new ResolutionBasedComputationResult(expression, resolvedTypes);
 		} else {
 			// create diagnostics if necessary
 			return new NoTypeResult();
 		}
 	}
-	
-	protected StackedResolvedTypes getMergableResolvedTypes() {
-		return (StackedResolvedTypes) getResolvedTypes();
+
+	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
+		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
+		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
+		getResolver().getTypeComputer().computeTypes(expression, state);
+		return stackedResolvedTypes;
 	}
 	
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
-	}
-	
-	public AbstractTypeComputationState fork() {
-		return this;
 	}
 	
 	/*
@@ -124,6 +109,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	 */
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+	}
+	
+	@Override
+	public TypeComputationStateWithExpectation withExpectation(JvmTypeReference expectation) {
+		return (TypeComputationStateWithExpectation) super.withExpectation(expectation);
 	}
 
 	public AbstractTypeComputationState withNonVoidExpectation() {
@@ -154,6 +144,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type);
 		return assigner.getForkedState();
+	}
+	
+	@Override
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
+		return (AbstractTypeComputationState) super.assignType(element, type);
 	}
 	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
@@ -191,11 +186,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		}
 	}
 
-	@Nullable
-	public LightweightTypeReference internalGetType(JvmIdentifiableElement element) {
-		return resolvedTypes.internalGetActualType(element);
-	}
-
 	public void reassignType(XExpression object, LightweightTypeReference type) {
 		if (type == null)
 			throw new IllegalArgumentException("Reassigned type may not be null");
@@ -221,7 +211,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 //		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
 		
 		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
-		final AbstractTypeComputationState forked = fork().withNonVoidExpectation(demandComputedTypes);
+		final AbstractTypeComputationState forked = withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
 			
 			@Override
@@ -295,10 +285,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
-	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
-		return resolvedTypes.createUnboundTypeReference(expression, typeParameter);
-	}
-	
 	@Override
 	public String toString() {
 		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);

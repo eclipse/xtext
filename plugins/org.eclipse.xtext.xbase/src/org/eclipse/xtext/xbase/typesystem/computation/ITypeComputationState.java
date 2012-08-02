@@ -91,14 +91,10 @@ public interface ITypeComputationState {
 	
 	void acceptActualType(JvmTypeReference type);
 	
-	@Nullable JvmTypeReference getType(JvmIdentifiableElement element);
-
 	// TODO implement this better, especially for instanceof in conditions
 	
 	void reassignType(XExpression object, JvmTypeReference type);
 	
 	void discardReassignedTypes(XExpression object);
-	
-	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
 }

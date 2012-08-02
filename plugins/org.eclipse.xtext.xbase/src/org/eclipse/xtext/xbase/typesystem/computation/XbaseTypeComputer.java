@@ -266,13 +266,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			JvmOperation operation = null;
 			if (closureType == null) {
 				// TODO - closure has no expected type - has to be function or procedure
-				closureType = functionTypes.createRawFunctionTypeRef(state.getReferenceOwner(), object, closureParameters.size(), false);
+				closureType = functionTypes.createRawFunctionTypeRef(expectation.getReferenceOwner(), object, closureParameters.size(), false);
 				operation = functionTypes.findImplementingOperation(closureType);
 				initClosureType((FunctionTypeReference) closureType, operation);
 			} else {
 				operation = functionTypes.findImplementingOperation(closureType);
 				if (operation == null) {
-					closureType = functionTypes.createRawFunctionTypeRef(state.getReferenceOwner(), object, closureParameters.size(), false);
+					closureType = functionTypes.createRawFunctionTypeRef(expectation.getReferenceOwner(), object, closureParameters.size(), false);
 					operation = functionTypes.findImplementingOperation(closureType);
 					initClosureType((FunctionTypeReference) closureType, operation);
 				}
@@ -282,7 +282,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			}
 			
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = getTypeParameterMapping(
-					object, closureType, operation, state);
+					object, closureType, operation, expectation);
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 			LightweightTypeReference declaredReturnType = getSubstitutedClosureReturnType(operation, substitutor, state);
 			LightweightTypeAssigner typeAssigner = state.withExpectation(declaredReturnType).assignTypes();
@@ -410,22 +410,22 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping(XClosure object,
-			LightweightTypeReference closureType, JvmOperation operation, LightweightTypeComputationState state) {
+			LightweightTypeReference closureType, JvmOperation operation, LightweightTypeExpectation expectation) {
 		List<JvmTypeParameter> allTypeParameters = services.getFunctionTypes().collectAllTypeParameters(closureType, operation);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = getClosureTypeParameterMapping(
-				closureType, operation, allTypeParameters, state);
+				closureType, operation, allTypeParameters, expectation);
 		
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> expectedTypeParameterMapping = Maps.newLinkedHashMap();
 		for(JvmTypeParameter typeParameter: allTypeParameters) {
 			List<LightweightBoundTypeArgument> boundInformation = typeParameterMapping.get(typeParameter);
 			LightweightMergedBoundTypeArgument boundTypeArgument = null;
 			if (boundInformation.isEmpty()) {
-				UnboundTypeReference unboundTypeReference = state.createUnboundTypeReference(object, typeParameter);
+				UnboundTypeReference unboundTypeReference = expectation.createUnboundTypeReference(object, typeParameter);
 				// TODO use VarianceInfo.IN / .OUT respectively if direct arg in operation
 				boundTypeArgument = new LightweightMergedBoundTypeArgument(unboundTypeReference, VarianceInfo.INVARIANT);
 				expectedTypeParameterMapping.put(typeParameter, boundTypeArgument);
 			} else {
-				boundTypeArgument = services.getBoundTypeArgumentMerger().merge(typeParameterMapping.get(typeParameter), state.getReferenceOwner());
+				boundTypeArgument = services.getBoundTypeArgumentMerger().merge(typeParameterMapping.get(typeParameter), expectation.getReferenceOwner());
 				expectedTypeParameterMapping.put(typeParameter, boundTypeArgument);
 			}
 			if (boundTypeArgument != null) {
@@ -439,9 +439,9 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getClosureTypeParameterMapping(
-			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, LightweightTypeComputationState state) {
-		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, state.getReferenceOwner());
-		return services.getFunctionTypes().getFunctionTypeParameterMapping(closureType, operation, typeArgumentCollector, state.getReferenceOwner());
+			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, LightweightTypeExpectation expectation) {
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, expectation.getReferenceOwner());
+		return services.getFunctionTypes().getFunctionTypeParameterMapping(closureType, operation, typeArgumentCollector, expectation.getReferenceOwner());
 	}
 	
 	protected void _computeTypes(XCastedExpression object, LightweightTypeComputationState state) {
