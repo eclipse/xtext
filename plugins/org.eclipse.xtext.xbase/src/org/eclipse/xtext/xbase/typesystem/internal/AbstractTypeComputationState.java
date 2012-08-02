@@ -207,9 +207,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
-		// TODO reuse this information later on
-//		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
-		
 		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
 		final AbstractTypeComputationState forked = withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
