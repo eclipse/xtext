@@ -19,6 +19,10 @@ public class TypeConformanceComputationArgument {
 	protected final boolean asTypeArgument;
 	protected final boolean allowPrimitiveConversion;
 	
+	public TypeConformanceComputationArgument() {
+		this(false, false, true);
+	}
+	
 	public TypeConformanceComputationArgument(boolean rawType, boolean asTypeArgument,
 			boolean allowPrimitiveConversion) {
 		this.rawType = rawType;

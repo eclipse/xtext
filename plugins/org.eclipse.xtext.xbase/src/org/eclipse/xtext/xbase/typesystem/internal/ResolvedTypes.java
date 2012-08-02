@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,10 +30,10 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.BaseResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -166,10 +168,12 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 //			protected LightweightTypeReference doGetTypeReference() {
 //				Collection<TypeData> freshlyObtainedValues = ensureExpressionTypesMapExists().get(expression);
 				List<LightweightTypeReference> references = Lists.newArrayList();
+				EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 				for(TypeData value: values) {
 					LightweightTypeReference reference = value.getActualType();
 //					if (returnType == value.isReturnType() && isValidForMergedResult(reference, mergedType)) {
 						references.add(reference);
+						mergedHints.addAll(value.getConformanceHints());
 //					}
 				}
 				LightweightTypeReference mergedType = getMergedType(references);
@@ -178,25 +182,11 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
-		TypeData result = new TypeData(expression, values.get(0).getExpectation() /* TODO use all expectations? */, mergedType.getUpperBoundSubstitute(), ConformanceHint.MERGED /* TODO do we need that? */, returnType);
+		
+		/* TODO ensure that all expectations are the same */
+		TypeData result = new TypeData(expression, values.get(0).getExpectation(), mergedType.getUpperBoundSubstitute(), mergedHints , returnType);
 		return result;
 	}
-	
-//	protected boolean isValidForMergedResult(LightweightTypeReference reference, LightweightTypeReference mayNotBe) {
-//		if (reference == mayNotBe || reference == null)
-//			return false;
-//		if (reference instanceof CompoundTypeReference) {
-//			List<LightweightTypeReference> components = ((CompoundTypeReference) reference).getComponents();
-//			if (components.isEmpty())
-//				return false;
-//			for(LightweightTypeReference component: components) {
-//				if (!isValidForMergedResult(component, mayNotBe)) {
-//					return false;
-//				}
-//			}
-//		}
-//		return true;
-//	}
 
 	@Nullable
 	protected LightweightTypeReference getMergedType(List<LightweightTypeReference> types) {
@@ -299,7 +289,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		}
 	}
 	
-	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!type.isOwnedBy(getReferenceOwner())) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");
 		}
@@ -335,7 +325,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 			
 		};
 		LightweightTypeReference actualType = substitutor.substitute(type).getUpperBoundSubstitute();
-		acceptType(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
+		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
 		return actualType;
 	}
 	

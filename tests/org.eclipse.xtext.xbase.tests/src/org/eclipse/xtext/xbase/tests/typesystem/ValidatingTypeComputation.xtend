@@ -13,7 +13,7 @@ import java.util.Collection
 import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
@@ -91,12 +91,12 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("type is not owned by this resolved types")
-		super.acceptType(expression, expectation, type, conformanceHint, returnType)
+		super.acceptType(expression, expectation, type, returnType, hints)
 	}
 	
 	override getAllHints(Object handle) {
@@ -226,12 +226,12 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("type is not owned by this resolved types")
-		super.acceptType(expression, expectation, type, conformanceHint, returnType)
+		super.acceptType(expression, expectation, type, returnType, hints)
 	}
 	
 	override getAllHints(Object handle) {
@@ -338,12 +338,12 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("type is not owned by this resolved types")
-		super.acceptType(expression, expectation, type, conformanceHint, returnType)
+		super.acceptType(expression, expectation, type, returnType, hints)
 	}
 	
 	override getAllHints(Object handle) {
@@ -449,12 +449,12 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("type is not owned by this resolved types")
-		super.acceptType(expression, expectation, type, conformanceHint, returnType)
+		super.acceptType(expression, expectation, type, returnType, hints)
 	}
 	
 	override getAllHints(Object handle) {

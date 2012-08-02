@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,11 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -48,6 +53,15 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	protected void mergeIntoParent() {
+		prepareMergeIntoParent();
+		performMergeIntoParent();
+	}
+	
+	protected void prepareMergeIntoParent() {
+		// override in sub types
+	}
+	
+	protected void performMergeIntoParent() {
 		ResolvedTypes parent = getParent();
 		mergeInto(parent);
 	}
@@ -94,16 +108,18 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		}
 		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();
 		for(Map.Entry<Object, LightweightBoundTypeArgument> hint: typeParameterHints.entries()) {
-			LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
-			if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
-				parent.acceptHint(hint.getKey(), boundTypeArgument);
-			} else {
-				LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
-						boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
-						boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
-						boundTypeArgument.getDeclaredVariance(), 
-						boundTypeArgument.getActualVariance());
-				parent.acceptHint(hint.getKey(), copy);
+			if (!parent.isResolved(hint.getKey())) {
+				LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
+				if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
+					parent.acceptHint(hint.getKey(), boundTypeArgument);
+				} else {
+					LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+							boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
+							boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
+							boundTypeArgument.getDeclaredVariance(), 
+							boundTypeArgument.getActualVariance());
+					parent.acceptHint(hint.getKey(), copy);
+				}
 			}
 		}
 	}
@@ -225,7 +241,31 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		withParentHints.addAll(result);
 		return withParentHints;
 	}
-
+	
+	protected EnumSet<ConformanceHint> getConformanceHints(XExpression expression) {
+		TypeData typeData = getTypeData(expression, false);
+		if (typeData == null) {
+			return EnumSet.of(ConformanceHint.EXCEPTION);
+		}
+		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
+		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
+			LightweightTypeReference actualType = typeData.getActualType();
+			LightweightTypeExpectation expectation = typeData.getExpectation();
+			LightweightTypeReference expectedType = expectation.internalGetExpectedType();
+			if (expectedType != null) {
+				TypeConformanceResult conformanceResult = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
+				conformanceHints.addAll(conformanceResult.getConformanceHints());
+				conformanceHints.remove(ConformanceHint.UNCHECKED);
+				conformanceHints.add(ConformanceHint.CHECKED);
+			} else {
+				conformanceHints.remove(ConformanceHint.UNCHECKED);
+				conformanceHints.add(ConformanceHint.CHECKED);
+				conformanceHints.add(ConformanceHint.SUCCESS);
+			}
+		}
+		return conformanceHints;
+	}
+	
 	@Override
 	protected void appendContent(StringBuilder result, String indentation) {
 		super.appendContent(result, indentation);

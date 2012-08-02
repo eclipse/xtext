@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
@@ -23,26 +25,29 @@ public class TypeData {
 	private final XExpression expression;
 	private final LightweightTypeExpectation expectation;
 	private final LightweightTypeReference type;
-	private final ConformanceHint conformanceHint;
+	private final EnumSet<ConformanceHint> hints;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
 			LightweightTypeExpectation expectation, 
 			LightweightTypeReference type,
-			ConformanceHint conformanceHint,
+			EnumSet<ConformanceHint> hints,
 			boolean returnType) {
+		if (!hints.contains(ConformanceHint.CHECKED) && !hints.contains(ConformanceHint.UNCHECKED)) {
+			throw new IllegalArgumentException("Invalid hints: " + hints);
+		}
 		this.expression = expression;
 		this.expectation = expectation;
 		this.type = type;
-		this.conformanceHint = conformanceHint;
+		this.hints = hints;
 		this.returnType = returnType;
 	}
 	
 	public TypeData copyInto(TypeReferenceOwner owner) {
 		if (isOwnedBy(owner))
 			return this;
-		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), conformanceHint, returnType);
+		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), hints.clone(), returnType);
 	}
 	
 	public boolean isOwnedBy(TypeReferenceOwner owner) {
@@ -52,15 +57,15 @@ public class TypeData {
 	@Override
 	public String toString() {
 		return "TypeData [expectation=" + expectation + ", type=" + type
-				+ ", conformanceHint=" + conformanceHint + ", returnType=" + returnType + "]";
+				+ ", conformanceHint=" + hints + ", returnType=" + returnType + "]";
 	}
 	
 	public LightweightTypeExpectation getExpectation() {
 		return expectation;
 	}
 	
-	public ConformanceHint getConformanceHint() {
-		return conformanceHint;
+	public EnumSet<ConformanceHint> getConformanceHints() {
+		return hints;
 	}
 	
 	public XExpression getExpression() {
