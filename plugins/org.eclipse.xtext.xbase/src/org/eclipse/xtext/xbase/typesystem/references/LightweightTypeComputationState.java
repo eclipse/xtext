@@ -85,8 +85,6 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	
 	void acceptActualType(LightweightTypeReference type);
 	
-	@Nullable LightweightTypeReference internalGetType(JvmIdentifiableElement element);
-
 	// TODO implement this better, especially for instanceof in conditions
 	
 	void reassignType(XExpression object, LightweightTypeReference type);
