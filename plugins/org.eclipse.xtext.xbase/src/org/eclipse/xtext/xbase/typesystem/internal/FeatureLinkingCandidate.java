@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -52,41 +53,6 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
 		}
 		return receiverType;
-	}
-	
-	@Override
-	public int compareTo(IFeatureLinkingCandidate right) {
-		int result = super.compareTo(right);
-		if (result == 0) {
-			return result;
-		}
-		return result;
-	}
-	
-	@Override
-	protected int compareByArityWith(IFeatureLinkingCandidate right) {
-		int result = super.compareByArityWith(right);
-		if (result == 0) {
-			// TODO sort according to type compatibility
-			result = favorInstanceOverExtensions(right);
-			if (result != 0)
-				return result;
-			if (right.getDeclaredParameters().size() > getDeclaredParameters().size())
-				return 1;
-		}
-		return result;
-	}
-	
-	private int favorInstanceOverExtensions(IFeatureLinkingCandidate right) {
-		if (!isStaticOrExtension(this) && isStaticOrExtension(right))
-			return -1;
-		if (isStaticOrExtension(this) == isStaticOrExtension(right))
-			return 0;
-		return 1;
-	}
-	
-	protected boolean isStaticOrExtension(IFeatureLinkingCandidate candidate) {
-		return candidate.isStatic() || candidate.isExtension();
 	}
 	
 	public boolean isExtension() {
@@ -143,17 +109,20 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	}
 	
 	@Override
-	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, AbstractTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, LightweightTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
+			if (!(argumentState instanceof AbstractTypeComputationState))
+				throw new IllegalArgumentException("argumentState was " + argumentState);
+			AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
 			LightweightTypeReference receiverType = getReceiverType();
 			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
-			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, argumentState, false);
+			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
 			// TODO should we use the result of #acceptType?
 			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
-				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, argumentState);
+				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 		} else {
 			super.resolveArgumentType(argument, declaredType, argumentState);
 		}

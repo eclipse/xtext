@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -35,9 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.Lists;
 
@@ -50,6 +46,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
+	private List<AbstractTypeExpectation> immediateExpectations;
+	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -68,12 +66,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return featureScopeSession;
 	}
 	
-	protected CommonTypeComputationServices getServices() {
-		return reentrantTypeResolver.getServices();
-	}
-	
 	protected TypeReferences getTypeReferences() {
-		return getServices().getTypeReferences();
+		return reentrantTypeResolver.getServices().getTypeReferences();
 	}
 	
 	protected ITypeComputer getTypeComputer() {
@@ -84,50 +78,29 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return reentrantTypeResolver;
 	}
 	
-	protected BoundTypeArgumentMerger getTypeArgumentMerger() {
-		return reentrantTypeResolver.getTypeArgumentMerger();
-	}
+	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
 	
-	public LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
-		 ResolvedTypes types = computeTypes(expression, true);
-		 if (types != null) {
-			return new ResolutionBasedComputationResult(expression, types); 
-		 } else {
+	public final LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
+		if (expression != null) {
+			ExpressionAwareStackedResolvedTypes stackedResolvedTypes = doComputeTypes(expression);
+			stackedResolvedTypes.mergeIntoParent();
+			return new ResolutionBasedComputationResult(expression, resolvedTypes);
+		} else {
 			// create diagnostics if necessary
 			return new NoTypeResult();
-		 }
-	}
-	
-	@Nullable
-	protected final ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
-		if (expression != null) {
-			StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
-			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
-			getResolver().getTypeComputer().computeTypes(expression, state);
-			if (mergeAll) {
-				stackedResolvedTypes.mergeIntoParent();
-				return resolvedTypes;
-			}
-			return stackedResolvedTypes;
-		} else {
-			return null;
 		}
 	}
-	
-	@Nullable
-	protected StackedResolvedTypes computeTypesWithoutMerge(@Nullable XExpression expression) {
-		return (StackedResolvedTypes) computeTypes(expression, false);
-	}
 
+	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
+		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
+		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
+		getResolver().getTypeComputer().computeTypes(expression, state);
+		return stackedResolvedTypes;
+	}
+	
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
-	}
-	
-	protected abstract LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
-	
-	public AbstractTypeComputationState fork() {
-		return this;
 	}
 	
 	/*
@@ -136,6 +109,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	 */
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+	}
+	
+	@Override
+	public TypeComputationStateWithExpectation withExpectation(JvmTypeReference expectation) {
+		return (TypeComputationStateWithExpectation) super.withExpectation(expectation);
 	}
 
 	public AbstractTypeComputationState withNonVoidExpectation() {
@@ -168,6 +146,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return assigner.getForkedState();
 	}
 	
+	@Override
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
+		return (AbstractTypeComputationState) super.assignType(element, type);
+	}
+	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
 		featureScopeSession = featureScopeSession.addLocalElement(QualifiedName.create(element.getSimpleName()), element);
 	}
@@ -181,27 +164,26 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new TypeAssigner(state);
 	}
 
-	public final List<LightweightTypeExpectation> getImmediateExpectations() {
-		return getImmediateExpectations(this);
+	public final List<? extends LightweightTypeExpectation> getImmediateExpectations() {
+		if (immediateExpectations == null)
+			immediateExpectations = getImmediateExpectations(this);
+		return immediateExpectations;
 	}
 	
-	public final List<LightweightTypeExpectation> getReturnExpectations() {
-		return getReturnExpectations(this);
+	public final List<? extends LightweightTypeExpectation> getReturnExpectations() {
+		if (returnExpectations == null)
+			returnExpectations = getReturnExpectations(this);
+		return returnExpectations;
 	}
 	
-	protected abstract List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
 	
-	protected abstract List<LightweightTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(LightweightTypeExpectation expectation: getImmediateExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.EXPECTATION_INDEPENDENT);
 		}
-	}
-
-	@Nullable
-	public LightweightTypeReference internalGetType(JvmIdentifiableElement element) {
-		return resolvedTypes.internalGetActualType(element);
 	}
 
 	public void reassignType(XExpression object, LightweightTypeReference type) {
@@ -225,11 +207,8 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
-		// TODO reuse this information later on
-//		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
-		
 		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
-		final AbstractTypeComputationState forked = fork().withNonVoidExpectation(demandComputedTypes);
+		final AbstractTypeComputationState forked = withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
 			
 			@Override
@@ -303,10 +282,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
-	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
-		return resolvedTypes.createUnboundTypeReference(expression, typeParameter);
-	}
-	
 	@Override
 	public String toString() {
 		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);

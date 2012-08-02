@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -91,7 +92,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				JvmType rightType = rightReference.getType();
 				if (rightReference.isPrimitive()) {
 					if (isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
-						return new TypeConformanceResult(TypeConformanceResult.Kind.PRIMITIVE_WIDENING);
+						return new TypeConformanceResult(Kind.PRIMITIVE_WIDENING);
 					}
 					return TypeConformanceResult.FAILED;
 				} else {
@@ -99,7 +100,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					if (primitive.isPrimitive()) {
 						JvmPrimitiveType rightPrimitiveType = (JvmPrimitiveType) primitive.getType();
 						if (rightPrimitiveType != null && (rightPrimitiveType == leftType || isWideningConversion(primitives, leftType, rightPrimitiveType))) {
-							return new TypeConformanceResult(TypeConformanceResult.Kind.UNBOXING);
+							return new TypeConformanceResult(Kind.UNBOXING);
 						}
 						return TypeConformanceResult.FAILED;
 					}
@@ -108,7 +109,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				LightweightTypeReference wrapper = rightReference.getWrapperTypeIfPrimitive();
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, wrapper, param);
 				if (result.isConformant()) {
-					return new TypeConformanceResult(TypeConformanceResult.Kind.BOXING);
+					return new TypeConformanceResult(Kind.BOXING);
 				}
 			}
 		}
@@ -120,7 +121,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			for(LightweightTypeReference rightSuperTypes: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperTypes, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
-					return TypeConformanceResult.merge(result, new TypeConformanceResult(TypeConformanceResult.Kind.SUBTYPE));
+					return TypeConformanceResult.merge(result, new TypeConformanceResult(Kind.SUBTYPE));
 				}
 			}
 		}
@@ -304,114 +305,6 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		return TypeConformanceResult.FAILED;
 	}
 
-//	protected TypeConformanceResult isConformant(JvmType leftType, JvmType rightType,
-//			ParameterizedTypeReference leftReference, ParameterizedTypeReference rightReference,
-//			TypeConformanceComputationArgument.Internal<ParameterizedTypeReference> param) {
-//		if (leftType == rightType) {
-//			if (param.rawType)
-//				return TypeConformanceResult.SUCCESS;
-//			if (!leftReference.getArguments().isEmpty() || !rightReference.getArguments().isEmpty())
-//				return areArgumentsConformant(leftReference, rightReference);
-//			return TypeConformanceResult.SUCCESS;
-//		}
-//		if (param.allowPrimitiveConversion) {
-//			if (leftType instanceof JvmPrimitiveType) {
-//				if (rightType instanceof JvmPrimitiveType) {
-//					if (isWideningConversion((JvmPrimitiveType)leftType, (JvmPrimitiveType) rightType)) {
-//						return new TypeConformanceResult(TypeConformanceResult.Kind.PRIMITIVE_WIDENING);
-//					}
-//				} else if (rightType instanceof JvmGenericType) {
-//					JvmTypeReference potentialPrimitive = conformanceComputer.getPrimitives().asPrimitiveIfWrapperType(rightReference);
-//					if (potentialPrimitive != rightReference) {
-//						if (leftType == potentialPrimitive.getType() || isWideningConversion((JvmPrimitiveType)leftType, (JvmPrimitiveType) potentialPrimitive.getType())) {
-//							return new TypeConformanceResult(TypeConformanceResult.Kind.UNBOXING);
-//						}
-//					}
-//				}
-//			} else if (rightType instanceof JvmPrimitiveType) {
-//				if (leftType instanceof JvmGenericType) {
-//					JvmTypeReference potentialWrapper = conformanceComputer.getPrimitives().asWrapperTypeIfPrimitive(rightReference);
-//					if (potentialWrapper != rightReference) {
-//						TypeConformanceResult result = conformanceComputer.isConformant(leftReference, potentialWrapper, param);
-//						if (result.isConformant()) {
-//							return new TypeConformanceResult(TypeConformanceResult.Kind.BOXING);
-//						}
-//					}
-//				}
-//			}
-//		}
-//		class Foo<F1 extends CharSequence, F2> {
-//			<T1, T2, T3 extends T2, T4 extends CharSequence, T5 extends CharSequence> void foo(T1 t1, T2 t2, T3 t3, List<? super T2> l) {
-//				t1 = t2;
-//				t1 = t3;
-//				t2 = t3;
-//				t3 = l.get(0);
-//				t2 = l.get(0);
-//				List<T2> lt2 = null;
-//				List<T3> lt3 = null;
-//				lt2 = lt3;
-//				lt3 = lt2;
-//				l.add(t1);
-//				l.add(t2);
-//				l.add(t3);
-//				T4 t4 = null;
-//				T5 t5 = null;
-//				t4 = t5;
-//				t5 = t4;
-//				F1 f1 = null;
-//				F2 f2 = null;
-//				t1 = f1;
-//				t1 = f2;
-//				t4 = f1;
-//				f1 = t4;
-//				CharSequence c = t4;
-//			}
-//			<T> T foo() {
-//				return null;
-//			}
-//			<T> void bar(T t) {
-//				T t2 = foo();
-//			}
-//		}
-//		if (!param.asTypeArgument) {
-//			// early exit - remaining cases are all compatible to java.lang.Object
-//			if (leftType instanceof JvmDeclaredType) {
-//				if (leftReference.isType(Object.class))
-//					return TypeConformanceResult.SUBTYPE;
-//			}
-//			if (rightType instanceof JvmTypeParameter) {
-//				List<JvmTypeConstraint> rightConstraints = ((JvmTypeParameter) rightType).getConstraints();
-//				if (!rightConstraints.isEmpty()) {
-//					for(JvmTypeConstraint rightConstraint: rightConstraints) {
-//						if (rightConstraint instanceof JvmUpperBound) {
-//							TypeConformanceResult candidate = conformanceComputer.isConformant(leftReference, rightConstraint.getTypeReference(), param);
-//							if (candidate.isConformant())
-//								return candidate;
-//						} else {
-//							return TypeConformanceResult.FAILED;
-//						}
-//					}
-//				} 
-//				return TypeConformanceResult.FAILED;
-//			}
-//			if (leftType instanceof JvmTypeParameter) {
-//				return TypeConformanceResult.FAILED;
-//			}
-//			if (leftType instanceof JvmDeclaredType && rightType instanceof JvmDeclaredType) {
-//				if (conformanceComputer.getSuperTypeCollector().isSuperType((JvmDeclaredType)rightType, (JvmDeclaredType)leftType)) {
-//					if (param.rawType)
-//						return TypeConformanceResult.SUBTYPE;
-//					// check for raw type references - since we are a subtype, type argument can 
-//					// considered to be compatible if the reference itself does not define own arguments
-//					if (leftReference.getArguments().isEmpty() || rightReference.getArguments().isEmpty())
-//						return TypeConformanceResult.SUBTYPE;
-//					return areArgumentsConformant(leftReference, rightReference);
-//				}
-//			}
-//		}
-//		return TypeConformanceResult.FAILED;
-//	}
-
 	/**
 	 * See Java Language Specification <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.1.2">§{5.1.2} Widening Primitive Conversion</a>
 	 */
@@ -473,6 +366,16 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (left.isPrimitive() || left.isPrimitiveVoid())
 			return TypeConformanceResult.FAILED;
 		return TypeConformanceResult.SUCCESS;
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitUnboundTypeReference(TypeReference left, UnboundTypeReference right,
+			TypeConformanceComputationArgument.Internal<TypeReference> param) {
+		if (left.getType() == right.getType())
+			return TypeConformanceResult.SUCCESS;
+		if (left.isType(Object.class))
+			return TypeConformanceResult.SUCCESS;
+		return TypeConformanceResult.FAILED;
 	}
 
 	@Override

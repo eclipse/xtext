@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -17,7 +16,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class BaseTypeComputationState implements LightweightTypeComputationState, LightweightTypeComputationState.LightweightFork {
+public abstract class BaseTypeComputationState implements LightweightTypeComputationState {
 
 	protected abstract BaseResolvedTypes getResolvedTypes();
 	
@@ -25,20 +24,12 @@ public abstract class BaseTypeComputationState implements LightweightTypeComputa
 		return getResolvedTypes().getConverter().toLightweightReference(reference);
 	}
 	
-	public final LightweightTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
+	public LightweightTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
 		return assignType(element, toLightweightReference(type));
 	}
 
 	public final void acceptActualType(JvmTypeReference type) {
 		acceptActualType(toLightweightReference(type));
-	}
-
-	@Nullable
-	public final JvmTypeReference getType(JvmIdentifiableElement element) {
-		LightweightTypeReference result = internalGetType(element);
-		if (result != null)
-			return result.toTypeReference();
-		return null;
 	}
 
 	public final void reassignType(XExpression object, JvmTypeReference type) {
@@ -47,7 +38,7 @@ public abstract class BaseTypeComputationState implements LightweightTypeComputa
 		reassignType(object, toLightweightReference(type));
 	}
 
-	public final LightweightTypeComputationState withExpectation(JvmTypeReference expectation) {
+	public LightweightTypeComputationState withExpectation(JvmTypeReference expectation) {
 		return withExpectation(toLightweightReference(expectation));
 	}
 	

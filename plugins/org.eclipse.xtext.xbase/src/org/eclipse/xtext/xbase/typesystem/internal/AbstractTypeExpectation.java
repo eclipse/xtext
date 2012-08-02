@@ -8,9 +8,12 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,7 +31,6 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	
 	public boolean isVoidTypeAllowed() {
 		LightweightTypeReference expectedType = internalGetExpectedType();
-		// TODO avoid resolving the type ref
 		if (expectedType != null && expectedType.isType(Void.TYPE)) {
 			return true;
 		}
@@ -42,6 +44,14 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	
 	protected AbstractTypeComputationState getState() {
 		return state;
+	}
+	
+	protected ResolvedTypes getResolvedTypes() {
+		return state.getResolvedTypes();
+	}
+	
+	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
+		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 	}
 	
 	@Override

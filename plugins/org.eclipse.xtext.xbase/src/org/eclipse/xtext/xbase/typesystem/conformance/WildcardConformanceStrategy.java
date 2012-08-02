@@ -27,11 +27,11 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 		if (param.asTypeArgument) {
 			LightweightTypeReference lowerBound = leftWildcard.getLowerBound();
 			if (lowerBound != null) {
-				// TODO does that make any sense?
 				TypeConformanceResult result = conformanceComputer.isConformant(right, lowerBound, new TypeConformanceComputationArgument(false, false, false));
 				if (!result.isConformant()) {
 					return result;
 				}
+				return TypeConformanceResult.SUCCESS;
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(upperBound, right, new TypeConformanceComputationArgument(false, false, false));

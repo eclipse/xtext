@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
@@ -26,6 +28,8 @@ public interface LightweightTypeExpectation extends ITypeExpectation {
 	OwnedConverter getConverter();
 	
 	TypeReferenceOwner getReferenceOwner();
+	
+	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
 	LightweightTypeExpectation copyInto(TypeReferenceOwner referenceOwner);
 	
