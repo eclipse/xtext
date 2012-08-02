@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
@@ -39,7 +39,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 	
 	@Override
-	public void acceptActualType(LightweightTypeReference type, ConformanceHint hint) {
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 		// TODO resolve all unbound type parameters
 //		AbstractTypeComputationState state = getState();
 //		if (hint contains RAW) {
@@ -47,7 +47,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 //				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
 //		LightweightTypeReference substitute = substitutor.substitute(type);
 //		}
-		super.acceptActualType(type, hint);
+		super.acceptActualType(type, hints);
 	}
 	
 	public RootNoExpectation copyInto(TypeReferenceOwner referenceOwner) {

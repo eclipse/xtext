@@ -49,6 +49,7 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -295,7 +296,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			LightweightTypeReference substitutedClosureType = substitutor.substitute(closureType);
 			LightweightTypeReference result = createFunctionTypeReference(expectation.getReferenceOwner(), substitutedClosureType, closureParameterTypes, expressionResultType);
 			// TODO the hint is probably wrong
-			expectation.acceptActualType(result, ConformanceHint.DEMAND_CONVERSION); 
+			expectation.acceptActualType(result, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED); 
 		}
 	}
 

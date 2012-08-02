@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -33,9 +33,9 @@ public class ChildExpressionTypeCheckpointComputationState extends ExpressionTyp
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
-		getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
+			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, returnType, hints);
+		getParent().acceptType(resolvedTypes, expectation, actualType, returnType, hints);
 		return actualType;
 	}
 	

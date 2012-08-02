@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
@@ -131,10 +133,17 @@ public class CompoundTypeComputationState implements LightweightTypeComputationS
 			return new NoTypeResult();
 		}
 		StackedResolvedTypes resolvedTypes = components[0].doComputeTypes(expression);
+		EnumSet<ConformanceHint> conformanceHints = resolvedTypes.getConformanceHints(expression);
 		for(int i = 1; i < components.length; i++) {
-			components[i].doComputeTypes(expression);
+			StackedResolvedTypes candidate = components[i].doComputeTypes(expression);
+			EnumSet<ConformanceHint> candidateHints = candidate.getConformanceHints(expression);
+			int compareResult = ConformanceHint.compareHints(conformanceHints, candidateHints);
+			if (compareResult == 1) {
+				resolvedTypes = candidate;
+				conformanceHints = candidateHints;
+			}
 		}
-		resolvedTypes.mergeIntoParent();
+		resolvedTypes.performMergeIntoParent();
 		ResolutionBasedComputationResult result = new ResolutionBasedComputationResult(expression, resolvedTypes.getParent());
 		return result;
 	}

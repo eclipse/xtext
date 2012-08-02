@@ -232,14 +232,32 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public boolean isAssignableFrom(LightweightTypeReference reference) {
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true);
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument();
 		return isAssignableFrom(reference, argument);
 	}
 	
 	public boolean isAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
+		TypeConformanceResult result = internalIsAssignableFrom(reference, argument);
+		return result.isConformant();
+	}
+	
+	public TypeConformanceResult internalIsAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
 		TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
 		TypeConformanceResult result = conformanceCompouter.isConformant(this, reference, argument);
-		return result.isConformant();
+		return result;
+	}
+	
+	public boolean isAssignableFrom(Class<?> clazz) {
+		if (isType(clazz)) {
+			return true;
+		}
+		JvmType type = findType(clazz);
+		if (type == null) {
+			return false;
+		}
+		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
+		boolean result = isAssignableFrom(other);
+		return result;
 	}
 	
 	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
@@ -274,19 +292,6 @@ public abstract class LightweightTypeReference {
 	}
 
 	public abstract boolean isType(Class<?> clazz);
-	
-	public boolean isAssignableFrom(Class<?> clazz) {
-		if (isType(clazz)) {
-			return true;
-		}
-		JvmType type = findType(clazz);
-		if (type == null) {
-			return false;
-		}
-		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
-		boolean result = isAssignableFrom(other);
-		return result;
-	}
 	
 	public void accept(TypeReferenceVisitor visitor) {
 		visitor.doVisitTypeReference(this);

@@ -399,7 +399,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	def void testClosure_04() throws Exception {
 		("{\n" + 
 		"  var java.util.List<? super String> list = null;\n" + 
-		"  list.map(e|e == null)\n" +
+		"  list.map(e|false)\n" +
 		"}").resolvesTo("List<Boolean>")
 	}
 
@@ -836,7 +836,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"new testdata.ClassWithVarArgs().toList('', '')".resolvesTo("List<String>")
 	}
 	
-	@Ignore("next")
 	@Test def void testFeatureCall_03_a() throws Exception {
 		"new testdata.ClassWithVarArgs().toList(null as String[])".resolvesTo("List<String>")
 	}
@@ -869,7 +868,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".resolvesTo("List<Number & Comparable<?>>")
 	}
 	
-	@Ignore("next")
 	@Test def void testFeatureCall_05_b() throws Exception {
 		"new testdata.ClassWithVarArgs().toNumberList(null as Float[])".resolvesTo("List<Float>")
 	}
@@ -1308,7 +1306,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testFeatureCall_25_c() throws Exception {
-		"newArrayList('').map[ length + 1 * 5 ].map [ it / 5 ].head".resolvesTo("Integer")
+		"newArrayList('').map[ length + 1 * 5 ].map [ it / 5 ).head".resolvesTo("Integer")
+	}
+	
+	@Test def void testFeatureCall_25_d() throws Exception {
+		"newArrayList('').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head".resolvesTo("Integer")
 	}
 	
 	@Test def void testFeatureCall_26() throws Exception {
@@ -2987,7 +2989,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next")
 	@Test def void testDeferredTypeArgumentResolution_158() throws Exception {
 		"{
 			val list = newArrayList
@@ -2996,7 +2997,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next")
 	@Test def void testDeferredTypeArgumentResolution_159() throws Exception {
 		"{
 			val list = newArrayList
@@ -3007,7 +3007,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore("next")
 	@Test def void testDeferredTypeArgumentResolution_160() throws Exception {
 		"{
 			val list = newArrayList

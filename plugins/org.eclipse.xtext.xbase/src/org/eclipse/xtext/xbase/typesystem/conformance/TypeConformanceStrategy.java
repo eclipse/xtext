@@ -132,7 +132,7 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 			if (candidate.isConformant()) {
 				if (i == 0)
 					return candidate;
-				TypeConformanceResult result = TypeConformanceResult.merge(candidate, new TypeConformanceResult(TypeConformanceResult.Kind.SYNONYM));
+				TypeConformanceResult result = TypeConformanceResult.merge(candidate, new TypeConformanceResult(ConformanceHint.SYNONYM));
 				result.setSynonymIndex(i);
 				result.setConversion(rightComponents.get(0), rightComponents.get(i));
 				return result;

@@ -10,10 +10,15 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,16 +31,34 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 
 	@Override
 	protected TypeConformanceResult doVisitTypeReference(UnboundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+		TypeConformanceResult result = tryResolveAndCheckConformance(left, right, param);
+		if (result != null)
+			return result;
+		return TypeConformanceResult.FAILED;
+	}
+
+	@Nullable
+	protected TypeConformanceResult tryResolveAndCheckConformance(UnboundTypeReference left, LightweightTypeReference right,
+			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
+		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		for(LightweightBoundTypeArgument hint: hints) {
 			if (hint.getDeclaredVariance() != null) {
-				VarianceInfo varianceInfo = hint.getDeclaredVariance().mergeDeclaredWithActual(hint.getActualVariance());
-				if (varianceInfo == VarianceInfo.INVARIANT) {
-					return conformanceComputer.isConformant(hint.getTypeReference(), right, param);
-				}
+				hintsToProcess.add(hint);
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
+		LightweightMergedBoundTypeArgument mergeResult = merger.merge(hintsToProcess, left.getOwner());
+		if (mergeResult != null) {
+			TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
+			return result;
+		}
+		return null;
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitMultiTypeReference(UnboundTypeReference left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+		return doVisitTypeReference(left, right, param);
 	}
 	
 	@Override

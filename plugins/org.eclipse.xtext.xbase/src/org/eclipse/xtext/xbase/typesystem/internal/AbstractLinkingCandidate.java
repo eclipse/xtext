@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +26,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
-import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -62,22 +63,23 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	protected class LinkingTypeComputationState extends AbstractStackedTypeComputationState {
 
 		private final LightweightTypeReference expectedType;
+		private final ConformanceHint defaultHint;
 
-		public LinkingTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-				DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
-				LightweightTypeReference typeReference) {
-			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
-			this.expectedType = typeReference;
+		public LinkingTypeComputationState(AbstractTypeComputationState parent,
+				LightweightTypeReference expectedType, @Nullable ConformanceHint defaultHint) {
+			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent.getResolver(), parent);
+			this.expectedType = expectedType;
+			this.defaultHint = defaultHint;
 		}
 
 		@Override
 		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, ConformanceHint.EXPECTATION_INDEPENDENT);
+			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, defaultHint);
 			return Collections.singletonList(result);
 		}
 		
 		protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType,
-				AbstractTypeComputationState actualState, boolean returnType, ConformanceHint hint) {
+				AbstractTypeComputationState actualState, boolean returnType, @Nullable ConformanceHint hint) {
 			AbstractTypeExpectation result = null;
 			if (expectedType != null) {
 				LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
@@ -99,15 +101,21 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 
 		private ConformanceHint conformanceHint;
 
-		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, ConformanceHint conformanceHint) {
+		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, @Nullable ConformanceHint conformanceHint) {
 			super(expectedType, state, returnType);
 			this.conformanceHint = conformanceHint;
 		}
 		
 		@Override
-		public void acceptActualType(LightweightTypeReference type, ConformanceHint conformanceHint) {
-			accept(this, type, conformanceHint);
-			super.acceptActualType(type, conformanceHint);
+		public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+			ConformanceHint[] actualHints = hints;
+			if (this.conformanceHint != null) {
+				actualHints = new ConformanceHint[hints.length + 1];
+				System.arraycopy(hints, 0, actualHints, 0, hints.length);
+				actualHints[hints.length] = conformanceHint;
+			}				
+			accept(this, type, actualHints);
+			super.acceptActualType(type, actualHints);
 		}
 
 		@Override
@@ -162,7 +170,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 
 	@NonNullByDefault
-	public void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint conformanceHint) {
+	public void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint... hints) {
 		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
 		if (expectedType == null || actual instanceof AnyTypeReference) {
 			return;
@@ -230,7 +238,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	private int nextArgument = 0;
-	private Boolean[] argumentCompatibility;
 	private int fixedArityArgumentCount;
 	private List<XExpression> arguments;
 	private boolean varArgs;
@@ -239,12 +246,12 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	public void computeArgumentTypes() {
 		initializeArgumentTypeComputation();
-		while(nextArgument < argumentCompatibility.length)
+		while(nextArgument < arguments.size())
 			computeArgumentType(nextArgument);
 	}
 
 	private void initializeArgumentTypeComputation() {
-		if (argumentCompatibility != null)
+		if (arguments != null)
 			return;
 		
 		declaredParameterCount = 0;
@@ -260,12 +267,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 		arguments = getArguments();
 		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
-		argumentCompatibility = new Boolean[arguments.size()];
 	}
 	
 	protected void computeArgumentType(int argumentIndex) {
 		initializeArgumentTypeComputation();
-		if (argumentIndex < nextArgument || argumentCompatibility.length == 0)
+		if (argumentIndex < nextArgument || arguments.size() == 0)
 			return;
 		if (parameters != null) {
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
@@ -276,7 +282,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 					LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
 					LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 					XExpression argument = arguments.get(argumentIndex);
-					AbstractTypeComputationState argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedParameterType);
+					AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
 					resolveArgumentType(argument, substitutedParameterType, argumentState);
 					return;
 				}
@@ -290,20 +296,19 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 					LightweightTypeComputationState argumentState = null;
 					LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 					if (arguments.size() == declaredParameterCount) {
-						LinkingTypeComputationState first = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+						LinkingTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
 						ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
-						LinkingTypeComputationState second = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, arrayTypeReference);
+						LinkingTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
 						argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
 					} else {
-						argumentState = new LinkingTypeComputationState(state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitutedComponentType);
+						argumentState = createVarArgTypeComputationState(substitutedComponentType);
 					}
 					for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 						XExpression argument = arguments.get(i);
 						resolveArgumentType(argument, substitutedComponentType, argumentState);
 					}
 					nextArgument = arguments.size();
-				}
-				if (!varArgs) {
+				} else {
 					if (argumentIndex < arguments.size()) {
 						XExpression argument = arguments.get(argumentIndex);
 						resolveArgumentType(argument, null, getState().withNonVoidExpectation());
@@ -313,6 +318,14 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				nextArgument = Math.max(argumentIndex + 1, nextArgument);
 			}
 		}
+	}
+
+	protected LinkingTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
+		return new LinkingTypeComputationState(state, expectedType, null);
+	}
+	
+	protected LinkingTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
+		return new LinkingTypeComputationState(state, expectedType, ConformanceHint.VAR_ARG);
 	}
 	
 	protected JvmTypeParameter getTypeParameter(@Nullable LightweightTypeReference referenceToTypeParameter) {
@@ -411,15 +424,13 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
-		int upTo = Math.min(argumentCompatibility.length, right.argumentCompatibility.length);
+		int upTo = Math.min(arguments.size(), right.arguments.size());
 		for(int i = 0; i < upTo; i++) {
-			boolean leftMatches = isMatchingArgumentType(i);
-			boolean rightMatches = right.isMatchingArgumentType(i);
-			if (leftMatches != rightMatches) {
-				if (leftMatches)
-					return -1;
-				return 1;
-			}
+			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i);
+			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i);
+			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
+			if (hintCompareResult != 0)
+				return hintCompareResult;
 		}
 		int declaredParameterCount = getDeclaredParameters().size();
 		int rightDeclaredParameterCount = right.getDeclaredParameters().size();
@@ -434,21 +445,37 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return result;
 	}
 	
-	protected boolean isMatchingArgumentType(int idx) {
-		Boolean cached = argumentCompatibility[idx];
-		if (cached == null) {
-			computeArgumentType(idx);
-			XExpression argument = arguments.get(idx);
-			LightweightTypeReference actualArgumentType = getActualType(argument);
-			LightweightTypeReference expectedArgumentType = getExpectedType(argument);
-			if (expectedArgumentType != null && expectedArgumentType.isAssignableFrom(actualArgumentType)) {
-				cached = Boolean.TRUE;
-			} else {
-				cached = Boolean.FALSE;
+	protected int compareByConformanceHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+		for(ConformanceHint hint: Arrays.asList(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG, 
+				ConformanceHint.BOXING, ConformanceHint.UNBOXING, ConformanceHint.PRIMITIVE_WIDENING)) {
+			boolean leftContains = leftConformance.contains(hint);
+			boolean rightContains = rightConformance.contains(hint);
+			if (leftContains != rightContains) {
+				if (leftContains)
+					return 1;
+				return -1;
 			}
-			argumentCompatibility[idx] = cached;
 		}
-		return cached.booleanValue();
+		return 0;
+	}
+	
+	protected int compareByConformanceHint(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance, ConformanceHint unexpectedHint) {
+		boolean leftContains = leftConformance.contains(unexpectedHint);
+		boolean rightContains = rightConformance.contains(unexpectedHint);
+		if (leftContains != rightContains) {
+			if (leftContains)
+				return 1;
+			return -1;
+		}
+		return 0;
+	}
+	
+	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
+		while(idx >= nextArgument) {
+			computeArgumentType(nextArgument);
+		}
+		XExpression argument = arguments.get(idx);
+		return state.getResolvedTypes().getConformanceHints(argument);
 	}
 
 	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate<?> right) {

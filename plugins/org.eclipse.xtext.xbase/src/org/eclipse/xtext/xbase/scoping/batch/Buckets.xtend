@@ -12,7 +12,7 @@ import java.util.Set
 import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

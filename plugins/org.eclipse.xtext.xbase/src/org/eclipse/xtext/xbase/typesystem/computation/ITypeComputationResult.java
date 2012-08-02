@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.EnumSet;
+
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,6 +30,6 @@ public interface ITypeComputationResult {
 	
 	@Nullable JvmTypeReference getActualType(JvmIdentifiableElement element);
 	
-	@Nullable ConformanceHint getConformance();
+	@Nullable EnumSet<ConformanceHint> getConformanceHints();
 	
 }
