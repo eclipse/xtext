@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -31,6 +32,10 @@ public class NoTypeResult extends BaseTypeComputationResult {
 	}
 
 	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement element) {
+		throw new UnsupportedOperationException("TODO implement me");
+	}
+	
+	public ConformanceHint getConformance() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 
