@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -35,7 +37,7 @@ public class NoTypeResult extends BaseTypeComputationResult {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
-	public ConformanceHint getConformance() {
+	public EnumSet<ConformanceHint> getConformanceHints() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 

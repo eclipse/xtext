@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult.Kind;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -92,7 +91,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				JvmType rightType = rightReference.getType();
 				if (rightReference.isPrimitive()) {
 					if (isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
-						return new TypeConformanceResult(Kind.PRIMITIVE_WIDENING);
+						return new TypeConformanceResult(ConformanceHint.PRIMITIVE_WIDENING);
 					}
 					return TypeConformanceResult.FAILED;
 				} else {
@@ -100,7 +99,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					if (primitive.isPrimitive()) {
 						JvmPrimitiveType rightPrimitiveType = (JvmPrimitiveType) primitive.getType();
 						if (rightPrimitiveType != null && (rightPrimitiveType == leftType || isWideningConversion(primitives, leftType, rightPrimitiveType))) {
-							return new TypeConformanceResult(Kind.UNBOXING);
+							return new TypeConformanceResult(ConformanceHint.UNBOXING);
 						}
 						return TypeConformanceResult.FAILED;
 					}
@@ -109,7 +108,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				LightweightTypeReference wrapper = rightReference.getWrapperTypeIfPrimitive();
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, wrapper, param);
 				if (result.isConformant()) {
-					return new TypeConformanceResult(Kind.BOXING);
+					return new TypeConformanceResult(ConformanceHint.BOXING);
 				}
 			}
 		}
@@ -121,7 +120,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			for(LightweightTypeReference rightSuperTypes: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperTypes, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
-					return TypeConformanceResult.merge(result, new TypeConformanceResult(Kind.SUBTYPE));
+					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
 				}
 			}
 		}
@@ -141,7 +140,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			if (rightFunctionType != null) {
 				TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftFunctionType, rightFunctionType, param);
 				if (functionsAreConformant.isConformant()) {
-					return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(Kind.DEMAND_CONVERSION));
+					return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
 				}
 			}
 		} else {
@@ -151,7 +150,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				if (leftFunctionType != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftFunctionType, rightFunctionType, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(Kind.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}
@@ -172,7 +171,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(converted, right, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(Kind.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}

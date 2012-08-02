@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -43,9 +45,11 @@ public class ResolutionBasedComputationResult extends BaseTypeComputationResult 
 		return resolution.internalGetActualType(expression);
 	}
 	
-	public ConformanceHint getConformance() {
+	public EnumSet<ConformanceHint> getConformanceHints() {
 		TypeData typeData = resolution.getTypeData(expression, false);
-		return typeData.getConformanceHint();
+		if (typeData == null)
+			return EnumSet.noneOf(ConformanceHint.class);
+		return typeData.getConformanceHints();
 	}
 
 }

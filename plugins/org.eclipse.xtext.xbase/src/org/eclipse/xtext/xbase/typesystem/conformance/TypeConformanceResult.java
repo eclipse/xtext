@@ -22,47 +22,46 @@ public class TypeConformanceResult {
 	
 	private static final Logger log = Logger.getLogger(TypeConformanceResult.class);
 
-	public static final TypeConformanceResult SUCCESS = new TypeConformanceResult(Kind.SUCCESS);
-	public static final TypeConformanceResult SUBTYPE = new TypeConformanceResult(Kind.SUBTYPE);
-	public static final TypeConformanceResult FAILED = new TypeConformanceResult(Kind.FAILED);
+	public static final TypeConformanceResult SUCCESS = new TypeConformanceResult(ConformanceHint.SUCCESS);
+	public static final TypeConformanceResult SUBTYPE = new TypeConformanceResult(ConformanceHint.SUBTYPE);
+	public static final TypeConformanceResult FAILED = new TypeConformanceResult(ConformanceHint.INCOMPATIBLE);
 	
-	public enum Kind {
-		SUCCESS, SUBTYPE, PRIMITIVE_WIDENING, BOXING, UNBOXING, SYNONYM, DEMAND_CONVERSION, FAILED, EXCEPTION
-	}
-	
-	private final EnumSet<Kind> kinds;
+	private final EnumSet<ConformanceHint> kinds;
 	private LightweightTypeReference from;
 	private LightweightTypeReference to;
 	private int synonymIndex;
 	private final Exception trace;
 	
 	public static TypeConformanceResult merge(TypeConformanceResult first, TypeConformanceResult second) {
-		TypeConformanceResult result = new TypeConformanceResult(first.getKinds(), null);
-		result.getKinds().addAll(second.getKinds());
+		TypeConformanceResult result = new TypeConformanceResult(first.getConformanceHints(), null);
+		result.getConformanceHints().addAll(second.getConformanceHints());
 		result.from = first.from;
 		result.to = first.to;
 		result.synonymIndex = first.synonymIndex;
 		return result;
 	}
 
-	public TypeConformanceResult(Kind kind) {
-		this(EnumSet.of(kind), null);
+	public TypeConformanceResult(ConformanceHint hint) {
+		this(EnumSet.of(hint), null);
 	}
 	
-	public TypeConformanceResult(Kind kind, Exception trace) {
-		this(EnumSet.of(kind), trace);
+	public TypeConformanceResult(ConformanceHint hint, Exception trace) {
+		this(EnumSet.of(hint), trace);
 	}
 	
-	public TypeConformanceResult(EnumSet<Kind> kinds, @Nullable Exception trace) {
-		this.kinds = EnumSet.copyOf(kinds);
-		if (log.isDebugEnabled() && trace == null)
+	public TypeConformanceResult(EnumSet<ConformanceHint> hints, @Nullable Exception stackTrace) {
+		this.kinds = EnumSet.copyOf(hints);
+		if (isConformant()) {
+			kinds.add(ConformanceHint.SUCCESS);
+		}
+		if (log.isDebugEnabled() && stackTrace == null)
 			this.trace = new Exception("trace");
 		else
-			this.trace = trace;
+			this.trace = stackTrace;
 	}
 	
 	public boolean isConformant() {
-		return !(kinds.contains(Kind.FAILED) || kinds.contains(Kind.EXCEPTION));
+		return !(kinds.contains(ConformanceHint.INCOMPATIBLE) || kinds.contains(ConformanceHint.EXCEPTION));
 	}
 	
 	protected void setConversion(LightweightTypeReference from, LightweightTypeReference to) {
@@ -82,7 +81,7 @@ public class TypeConformanceResult {
 		return to;
 	}
 	
-	public EnumSet<Kind> getKinds() {
+	public EnumSet<ConformanceHint> getConformanceHints() {
 		return kinds;
 	}
 
@@ -90,7 +89,7 @@ public class TypeConformanceResult {
 		return synonymIndex;
 	}
 
-	public Exception getTrace() {
+	public Exception getStackTrace() {
 		return trace;
 	}
 

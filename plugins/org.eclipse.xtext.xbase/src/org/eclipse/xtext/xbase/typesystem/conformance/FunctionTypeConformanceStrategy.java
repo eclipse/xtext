@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult.Kind;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -39,7 +38,7 @@ public class FunctionTypeConformanceStrategy extends
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftReference, converted, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(Kind.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}
@@ -74,7 +73,7 @@ public class FunctionTypeConformanceStrategy extends
 		if (param.rawType) {
 			throw new IllegalStateException("rawTypeComputation should have exited earlier");
 		}
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true);
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument();
 		if (!conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
 			return TypeConformanceResult.FAILED;
 		}

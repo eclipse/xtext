@@ -23,8 +23,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -120,7 +120,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
 			// TODO should we use the result of #acceptType?
-			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, ConformanceHint.UNCHECKED, false);
+			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
 			if (declaredType != null)
 				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 		} else {
