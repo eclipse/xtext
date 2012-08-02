@@ -23,8 +23,8 @@ public abstract class AbstractRootTypeExpectation extends AbstractTypeExpectatio
 	}
 	
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint hint) {
-		getState().acceptType(this, type, hint, true);
-		getState().acceptType(this, type, hint, false);
+		getState().acceptType(getResolvedTypes(), this, type, hint, true);
+		getState().acceptType(getResolvedTypes(), this, type, hint, false);
 	}
 
 }

@@ -253,6 +253,10 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("timeout")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testFeatureCall_03_b() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testFeatureCall_10() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -958,6 +962,11 @@ class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 		super.testFeatureCall_25_b()
 	}
 	
+	@Test
+	@Ignore("Performance") 
+	override testFeatureCall_25_c() throws Exception {
+		super.testFeatureCall_25_c()
+	}
 }
 
 /**
@@ -1246,7 +1255,7 @@ class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeReso
 @Singleton
 class EagerArgumentTypeComputer extends XbaseTypeComputer {
 	
-	override protected <Candidate extends ILinkingCandidate<Candidate>> getBestCandidate(List<Candidate> candidates) {
+	override protected <Candidate extends ILinkingCandidate<Candidate>> getBestCandidate(List<? extends Candidate> candidates) {
 		candidates.forEach[
 			try {
 				(it as AbstractLinkingCandidate).computeArgumentTypes()

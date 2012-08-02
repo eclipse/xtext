@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -38,20 +37,20 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	protected abstract XExpression getRootExpression();
 	
 	@Override
-	protected LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		return getResolvedTypes().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
+	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		return types.acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
 	}
 	
 	@Override
-	protected final List<LightweightTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
+	protected final List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
 		return getExpectations(actualState, true);
 	}
 	
 	@Override
-	protected final List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	protected final List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 		return getExpectations(actualState, false);
 	}
 	
-	protected abstract List<LightweightTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
+	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
 	
 }

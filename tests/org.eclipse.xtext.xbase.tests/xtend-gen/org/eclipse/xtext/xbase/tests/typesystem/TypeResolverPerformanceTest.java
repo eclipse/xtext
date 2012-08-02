@@ -66,4 +66,10 @@ public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   public void testFeatureCall_25_b() throws Exception {
     super.testFeatureCall_25_b();
   }
+  
+  @Test
+  @Ignore(value = "Performance")
+  public void testFeatureCall_25_c() throws Exception {
+    super.testFeatureCall_25_c();
+  }
 }

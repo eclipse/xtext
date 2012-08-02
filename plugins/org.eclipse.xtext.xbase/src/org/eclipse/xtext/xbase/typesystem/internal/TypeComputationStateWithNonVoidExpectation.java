@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -32,8 +31,8 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 	}
 
 	@Override
-	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		LightweightTypeExpectation result = createTypeExpectation(null, actualState);
+	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		AbstractTypeExpectation result = createTypeExpectation(null, actualState);
 		return Collections.singletonList(result);
 	}
 	

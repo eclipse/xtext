@@ -27,4 +27,6 @@ public interface ITypeComputationResult {
 	
 	@Nullable JvmTypeReference getActualType(JvmIdentifiableElement element);
 	
+	@Nullable ConformanceHint getConformance();
+	
 }
