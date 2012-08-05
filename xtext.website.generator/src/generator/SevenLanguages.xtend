@@ -17,14 +17,10 @@ class SevenLanguages extends AbstractWebsite {
 				<div class="row">
 					<div class="span6" style="margin: 4px; text-align: justify;">
 						<p style="margin: 5pt;">
-							If your DSL is targeting the Java Virtual Machine (JVM) you are lucky, because
-							Xtext provides a very powerful API for this.
-							The new API lets you easily integrate statically typed expressions,
-							Java's type references and annotations anywhere in your language.
+							Structural DSLs are great but at some point a software system needs behavior. Xtext now lets you reuse and integrate all kinds of Java language constructs right in your language. The new approach allows for embedding the powerful expressions known from Xtend as well as Java type references and annotations. As a result you get a holistic development experience and a fully-integrated Eclipse IDE, too.
 						</p>
 						<p style="margin: 5pt;">
-							<a href="7languagesDoc.html">Learn this new API by example and have a look at the 7 different languages we've built
-							with it (in less than 7 weeks).</a>
+							<a href="7languagesDoc.html">Learn this new API by example and have a look at the 7 different languages we've built with it (in less than 7 weeks). It is surprisingly simple!</a>
 						</p>
 					</div>
 					«language('Scripting Language','7languagesDoc.html#scripting','images/red-glossy-scripting.png','''
