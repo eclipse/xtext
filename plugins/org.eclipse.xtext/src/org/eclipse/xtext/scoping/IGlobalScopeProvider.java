@@ -14,8 +14,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import com.google.common.base.Predicate;
 
 /**
- * A marker interface used to identify {@link IScopeProvider} implementations providing
- * scopes for the world, that is things which are not local (i.e. within a resource).
+ * Provides scopes for the world, that is things which are not local (i.e. within a resource).
  * 
  * Common scope providers (local ones) use them to delegate lookup for any elements, which are not
  * locally available.
