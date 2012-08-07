@@ -448,10 +448,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	protected boolean isReparseRequired(XtextResource resource, IResourceDescription.Event event) {
 		IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
 		IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			if (resourceDescriptionManager.isAffected(delta, description)) {
-				return true;
-			}
+		if (resourceDescriptionManager.isAffected(event.getDeltas(), description, resourceDescriptions)) {
+			return true;
 		}
 		if (!isDirty() && !dirtyStateManager.hasContent(resource.getURI())) {
 			IResourceDescription originalDescription = resourceDescriptions.getResourceDescription(resource.getURI());
