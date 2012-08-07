@@ -13,6 +13,8 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -24,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -37,6 +40,9 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -167,7 +173,16 @@ public class JvmDeclaredTypeSignatureHashProvider {
 		}
 
 		protected SignatureHashBuilder appendSuperTypeSignatures(JvmDeclaredType type) {
-			for (JvmTypeReference superType : superTypeCollector.collectSuperTypes(type)) {
+			Set<JvmTypeReference> allSuperTypes = superTypeCollector.collectSuperTypes(type);
+			Collection<JvmType> transformedSuperTypes = Lists.newArrayList((Iterables.transform(allSuperTypes, new Function<JvmTypeReference, JvmType>() {
+				public JvmType apply(JvmTypeReference input){
+					return input.getType();
+				}
+			})));
+			// The inheritance hierarchy contains cycles -> stop calculation here
+			if(transformedSuperTypes.contains(type))
+				return this;
+			for (JvmTypeReference superType : allSuperTypes) {
 				append("super ");
 				superType
 						.accept(new org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
