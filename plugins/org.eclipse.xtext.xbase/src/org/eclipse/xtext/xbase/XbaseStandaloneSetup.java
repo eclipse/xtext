@@ -17,7 +17,6 @@ public class XbaseStandaloneSetup extends XbaseStandaloneSetupGenerated{
 	
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		new XtypeStandaloneSetup().createInjectorAndDoEMFRegistration();
 		EPackage.Registry.INSTANCE.put(XbasePackage.eINSTANCE.getNsURI(),XbasePackage.eINSTANCE);
 		return super.createInjectorAndDoEMFRegistration();
 	}
