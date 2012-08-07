@@ -183,6 +183,16 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		getSignature("package test class Foo implements Comparable<Foo> { def compareTo(Foo x) { 0 } }");
 	}
 	
+	@Test
+	public void testInheritanceRecursion() throws Exception {
+		getSignature("package test class Foo extends Foo {}");
+	}
+	
+	@Test 
+	public void testInheritanceCycles() throws Exception {
+		getSignature("package test class Foo extends Bar {} class Bar extends Foo {}");
+	}
+	
 	protected void assertSameSignature(String model0, String model1) throws Exception {
 		assertEquals(getSignature(model0), getSignature(model1));
 	}
