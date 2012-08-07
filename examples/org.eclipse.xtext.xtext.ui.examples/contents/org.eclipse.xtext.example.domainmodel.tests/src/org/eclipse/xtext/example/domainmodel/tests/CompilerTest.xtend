@@ -27,7 +27,7 @@ class CompilerTest {
 					return x + ' ' + this.name
 				}
 			}
-		'''.compile[
+		'''.compile [
 			val obj = it.compiledClass.newInstance
 			obj.invoke('setName', 'Foo')
 			assertEquals("Hello Foo", obj.invoke('doStuff','Hello'))
@@ -42,6 +42,7 @@ class CompilerTest {
 			}
 		'''.compile[assertEquals('''
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			public class Foo {
 			  public Foo() {
@@ -61,12 +62,10 @@ class CompilerTest {
 			    this.name = name;
 			  }
 			  
+			  @Override
 			  public String toString() {
-			    StringBuilder result = new StringBuilder("\nFoo {");
-			    result.append("\n  name = ").append(String.valueOf(name).replace("\n","\n  "));
-			    result.append("\n}");
-			    return result.toString();
-			    
+			    String result = new ToStringHelper().toString(this);
+			    return result;
 			  }
 			}
 		'''.toString, generatedCode)
