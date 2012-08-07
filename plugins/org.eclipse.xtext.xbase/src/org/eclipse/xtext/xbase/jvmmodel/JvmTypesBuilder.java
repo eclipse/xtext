@@ -648,7 +648,9 @@ public class JvmTypesBuilder {
 		JvmOperation result = toMethod(sourceElement, "toString", newTypeRef(sourceElement, String.class), null);
 		if (result == null)
 			return null;
-		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		JvmType overrideType = references.findDeclaredType(Override.class, sourceElement);
+		if (overrideType != null)
+			result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
 		setBody(result, new Procedure1<ITreeAppendable>() {
 			public void apply(@Nullable ITreeAppendable p) {
 				if (p == null)
@@ -834,6 +836,9 @@ public class JvmTypesBuilder {
 	public JvmAnnotationReference toAnnotation(@Nullable EObject sourceElement, @Nullable String annotationTypeName, @Nullable Object value) {
 		JvmAnnotationReference result = typesFactory.createJvmAnnotationReference();
 		JvmType jvmType = references.findDeclaredType(annotationTypeName, sourceElement);
+		if (jvmType == null) {
+			throw new IllegalArgumentException("The type "+annotationTypeName +" is not on the classpath.");
+		}
 		if (!(jvmType instanceof JvmAnnotationType)) {
 			throw new IllegalArgumentException("The given class " + annotationTypeName + " is not an annotation type.");
 		}
