@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
+import org.eclipse.xtend.core.typing.ReturnTypeProvider;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -170,6 +171,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	
+	@Inject
+	private ReturnTypeProvider returnTypeProvider;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -908,10 +912,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 						XtendFunction function = associations.getXtendFunction(jvmOperation);
 						if (function != null) {
-							JvmTypeReference functionReturnType = function.getReturnType();
-							if (functionReturnType == null)
-								functionReturnType = getTypeProvider().getCommonReturnType(function.getExpression(),
-										true);
+							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
 							if (functionReturnType != null) {
 								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
 									error("Incompatible return type of dispatch method. Expected "

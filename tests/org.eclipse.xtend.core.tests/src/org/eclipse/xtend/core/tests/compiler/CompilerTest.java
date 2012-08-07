@@ -483,6 +483,25 @@ public class CompilerTest extends AbstractXtendTestCase {
 	}
 	
 	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=382208
+	 */
+	@Test public void testDispatchedCreateMethods() throws Exception {
+		String code = 
+				"package x class Z {" +
+						"  def dispatch create new StringBuilder foo(Object x) { for (y : 1..2) append(y)}\n" +
+						"  def dispatch create new StringBuilder foo(String x) { append(2)}\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
+		assertNotNull(method);
+		StringBuilder sb = (StringBuilder) method.invoke(class1.newInstance(), "foo");
+		assertEquals("2", sb.toString());
+		sb = (StringBuilder) method.invoke(class1.newInstance(), 23);
+		assertEquals("12", sb.toString());
+	}
+	
+	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345458
 	 */
 	@Test public void testBug_345458() throws Exception {
