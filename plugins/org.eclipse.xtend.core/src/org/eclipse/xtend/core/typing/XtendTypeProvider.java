@@ -11,17 +11,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -54,6 +53,9 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private ReturnTypeProvider returnTypeProvider;
 	
 	@Override
 	protected JvmTypeReference typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
@@ -107,7 +109,7 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 		if (reference == XtendPackage.Literals.XTEND_FUNCTION__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
-			JvmTypeReference declaredOrInferredReturnType = ((XtendResource)function.eResource()).getDeclaredOrOverriddenReturnType(function);
+			JvmTypeReference declaredOrInferredReturnType = returnTypeProvider.getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null) {
 				declaredOrInferredReturnType = getCommonReturnType(function.getExpression(), false);
 				if (declaredOrInferredReturnType != null && !earlyExitComputer.isEarlyExit(function.getExpression())) {
@@ -135,7 +137,7 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	protected JvmTypeReference _expectedType(CreateExtensionInfo info, EReference reference, int index, boolean rawType) {
 		if (reference == XtendPackage.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) {
 			XtendFunction function = EcoreUtil2.getContainerOfType(info, XtendFunction.class);
-			JvmTypeReference declaredOrInferredReturnType = ((XtendResource)info.eResource()).getDeclaredOrOverriddenReturnType(function);
+			JvmTypeReference declaredOrInferredReturnType = returnTypeProvider.getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
@@ -159,7 +161,7 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return function.getReturnType();
 		if (function.getCreateExtensionInfo()!=null) {
 			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
-				return ((XtendResource)expr.eResource()).getDeclaredOrOverriddenReturnType(function);
+				return returnTypeProvider.getDeclaredOrOverriddenReturnType(function);
 		}
 		return getExpectedType(function.getExpression(), rawType);
 	}
