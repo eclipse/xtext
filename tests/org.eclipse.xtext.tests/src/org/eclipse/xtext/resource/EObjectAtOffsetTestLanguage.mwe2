@@ -47,5 +47,9 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 			fragment = generator.builder.BuilderIntegrationFragment {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/resource/Bug385636TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 	}
 }
