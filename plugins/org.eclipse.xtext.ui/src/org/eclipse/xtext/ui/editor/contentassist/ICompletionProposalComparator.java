@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.TemplateProposal;
+import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
 
 import com.google.inject.ImplementedBy;
 
@@ -45,6 +46,8 @@ public interface ICompletionProposalComparator extends Comparator<ICompletionPro
 				return ((ConfigurableCompletionProposal) proposal).getPriority();
 			} else if (proposal instanceof TemplateProposal) {
 				return ((TemplateProposal) proposal).getRelevance();
+			} else if (proposal instanceof QuickAssistCompletionProposal) {
+				return ((QuickAssistCompletionProposal) proposal).getRelevance();
 			}
 			return null;
 		}

@@ -42,6 +42,23 @@ public class IssueResolutionAcceptor {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				modificationWrapper));
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void accept(Issue issue, String label, String description, String image, IModification modification, int relevance) {
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
+				modification, relevance));
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification, int relevance) {
+		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
+				modificationWrapper, relevance));
+	}
 
 	public List<IssueResolution> getIssueResolutions() {
 		return issueResolutions;
