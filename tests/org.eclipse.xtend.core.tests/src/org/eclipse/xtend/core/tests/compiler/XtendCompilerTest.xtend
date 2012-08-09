@@ -11,7 +11,64 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	
-	@Inject extension IXtendJvmAssociations 
+	@Inject extension IXtendJvmAssociations
+	
+	@Test def testBug383568() {
+		'''
+			@Data class UsesExtension {
+			  extension String
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class UsesExtension {
+			  private final String __string;
+			  
+			  public String get_string() {
+			    return this.__string;
+			  }
+			  
+			  public UsesExtension(final String _string) {
+			    super();
+			    this.__string = _string;
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((__string== null) ? 0 : __string.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    UsesExtension other = (UsesExtension) obj;
+			    if (__string == null) {
+			      if (other.__string != null)
+			        return false;
+			    } else if (!__string.equals(other.__string))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			}
+		''')
+	} 
 	
 	@Test def testBug381201_01() {
 		'''

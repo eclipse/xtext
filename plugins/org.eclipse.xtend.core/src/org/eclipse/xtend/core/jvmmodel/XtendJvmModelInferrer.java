@@ -220,8 +220,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					}
 					final Map<String, JvmField> namesToField = newHashMap();
 					for (XtendField f : fields) {
-						if (f.getInitialValue() == null && f.getName() != null) {
-							String name = f.getName();
+						if (f.getInitialValue() == null) {
+							String name = computeFieldName(f, inferredJvmType);
 							int tries = 1;
 							while (!names.add(name)) {
 								name = name + (tries++);
