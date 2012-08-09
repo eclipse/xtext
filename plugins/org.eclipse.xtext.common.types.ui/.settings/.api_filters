@@ -7,6 +7,12 @@
                 <message_argument value="2.2.1"/>
             </message_arguments>
         </filter>
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.3.1"/>
+                <message_argument value="2.3.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory">
         <filter id="338792546">

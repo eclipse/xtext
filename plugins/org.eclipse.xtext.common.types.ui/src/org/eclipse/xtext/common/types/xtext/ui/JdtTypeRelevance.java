@@ -18,12 +18,18 @@ package org.eclipse.xtext.common.types.xtext.ui;
  */
 public class JdtTypeRelevance {
 
-	public int getRelevence(String typeName, String prefix) {
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public int getRelevance(String typeName, String prefix) {
 		int relevance = 0;
 		// If the simple name is an exact match
 		if (typeName.endsWith("."+prefix))
-			relevance += 30;
+			relevance += 40;
 		// higher precedence for java packages
+		if (typeName.startsWith("java.lang")) {
+			relevance += 30;
+		}
 		if (typeName.startsWith("java.util")) {
 			relevance += 20;
 		}

@@ -11,6 +11,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.jdt.internal.core.NameLookup;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
@@ -28,8 +33,11 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
+import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.NonRestrictedAccess;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
@@ -93,6 +101,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
+	
+	@Inject
+	public IJavaProjectProvider projectProvider;
 	
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -169,6 +180,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
 			IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter,
 			ICompletionProposalAcceptor acceptor) {
+		IJavaProject javaProject = projectProvider.getJavaProject(context.getResource().getResourceSet());
+		Filter restrictedAccessFilter = TypeMatchFilters.and(filter, new TypeMatchFilters.NonRestrictedAccess(javaProject));
 		String prefix = context.getPrefix();
 		if (prefix.length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
@@ -176,7 +189,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					if (!prefix.contains(".") && !prefix.contains("::") && !Character.isUpperCase(prefix.charAt(0)))
 						return;
 				}
-				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
+				typeProposalProvider.createTypeProposals(this, context, reference, restrictedAccessFilter, valueConverter, acceptor);
 			}
 		} else {
 			if (forced || !getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
@@ -190,7 +203,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						}
 					}
 				}
-				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
+				typeProposalProvider.createTypeProposals(this, context, reference, restrictedAccessFilter, valueConverter, acceptor);
 			}
 		}
 	}
