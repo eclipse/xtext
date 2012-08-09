@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import static java.util.Arrays.*;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +27,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.spelling.SpellingAnnotation;
 import org.eclipse.ui.texteditor.spelling.SpellingProblem;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalComparator;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
@@ -43,6 +43,9 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 
 	@Inject
 	private IssueUtil issueUtil;
+	
+	@Inject
+	private ICompletionProposalComparator comparator;
 
 	private String errorMessage;
 
@@ -156,11 +159,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	}
 	
 	protected void sortQuickfixes(List<ICompletionProposal> quickFixes) {
-		Collections.sort(quickFixes, new Comparator<ICompletionProposal>() {
-			public int compare(ICompletionProposal o1, ICompletionProposal o2) {
-				return o1.getDisplayString().compareTo(o2.getDisplayString());
-			}
-		});
+		Collections.sort(quickFixes, comparator);
 	}
 
 	protected Set<Annotation> getApplicableAnnotations(final IXtextDocument document, final IAnnotationModel annotationModel,

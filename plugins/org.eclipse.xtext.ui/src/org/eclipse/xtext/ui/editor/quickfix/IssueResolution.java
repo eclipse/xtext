@@ -22,13 +22,29 @@ public class IssueResolution {
 	private String image;
 	private IModification modification;
 	private IModificationContext modificationContext;
+	private int relevance;
 	
 	public IssueResolution(String label, String description, String image, IModificationContext modificationContext, IModification modification) {
+		this(label, description, image, modificationContext, modification, 0);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public IssueResolution(String label, String description, String image, IModificationContext modificationContext, IModification modification, int relevance) {
 		this.description = description;
 		this.label = label;
 		this.image = image;
 		this.modificationContext = modificationContext;
 		this.modification = modification;
+		this.relevance = relevance;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public int getRelevance() {
+		return relevance;
 	}
 
 	public String getDescription() {
