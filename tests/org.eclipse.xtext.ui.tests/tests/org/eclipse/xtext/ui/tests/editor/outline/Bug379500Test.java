@@ -50,4 +50,12 @@ public class Bug379500Test extends AbstractOutlineWorkbenchTest {
 	protected void setFiltering(boolean isFiltering) {
 		preferenceStore.setValue(SampleFilterContribution.PREFERENCE_KEY, isFiltering);
 	}
+	
+	
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
+		setFiltering(false);
+		closeEditors();
+	}
 }
