@@ -58,6 +58,11 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.Iterable<? extends java.lang.CharSequence>", fc.getRightOperand());
 	}
 	
+	@Test public void testLowerBoundIsNotVoid() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new foo.ClassWithGenericMethod().genericMethod(return null)");
+		assertExpected("T", fc.getExplicitArguments().get(1));
+	}
+	
 	@Test public void testTypeParamInference_01_a() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
