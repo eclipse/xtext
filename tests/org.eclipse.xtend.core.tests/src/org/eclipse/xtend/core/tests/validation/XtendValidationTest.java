@@ -1194,4 +1194,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     			"}}");
     	helper.assertNoIssues(file);
     }
+    
+    @Test public void testBug386659() throws Exception {
+    	XtendFile file  = file(
+    			"class foo {\n" +
+    			"  def <T> T genericMethod(T t) {\n" +
+    			"    return t\n" +
+    			"  }\n" +
+    			"  def test() {\n" +
+    			"    genericMethod(return null)" +
+    			"  }\n" +
+    			"}");
+    	helper.assertError(file, XRETURN_EXPRESSION, INCOMPATIBLE_TYPES);
+    }
 }
