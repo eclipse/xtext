@@ -65,6 +65,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.common.types.xtext.ui.JdtTypeRelevance;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -145,6 +146,8 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	private Primitives primitives;
 	@Inject
 	private CommonTypeComputationServices computationServices;
+	@Inject
+	private JdtTypeRelevance jdtTypeRelevance;
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
@@ -674,7 +677,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		return fqNameAsString;
 	}
 
-	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
+	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, final String typeSimpleName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		SearchEngine searchEngine = new SearchEngine();
 		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
@@ -711,7 +714,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 									appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
 									appendable.insertNewImports();
 								}
-							}, 100 /* generally relevant proposals*/);
+							}, jdtTypeRelevance.getRelevance(qualifiedTypeName, typeSimpleName) + 100);
 						}
 					}
 				}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
