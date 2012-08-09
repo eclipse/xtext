@@ -45,7 +45,7 @@ public abstract class AbstractContainer extends AbstractCompoundSelectable imple
 			public boolean apply(IResourceDescription input) {
 				return uri.equals(input.getURI());
 			}
-		});
+		}, null);
 	}
 	
 	@Override
