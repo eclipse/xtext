@@ -720,7 +720,7 @@ public class TypeArgumentContextProvider {
 		for (int i = 0; i < paramCount && i < argumentTypes.size(); i++) {
 			JvmTypeReference parameterType = parameters.get(i).getParameterType();
 			JvmTypeReference argumentType = argumentTypes.get(i);
-			if (argumentType != null && parameterType != null) {
+			if (argumentType != null && parameterType != null && !typeReferences.is(argumentType, Void.TYPE)) {
 				resolveAgainstActualType(parameterType, argumentType, result, true, i);
 			}
 		}
