@@ -318,7 +318,8 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 				ICompositeNode parent = node.getParent();
 				if (node.hasSiblings()) {
 					for(INode sibling: parent.getChildren()) {
-						if (GrammarUtil.containingAssignment(sibling.getGrammarElement()) != null) {
+						EObject grammarElement = sibling.getGrammarElement();
+						if (grammarElement != null && GrammarUtil.containingAssignment(grammarElement) != null) {
 							result = parent;
 						}
 					}

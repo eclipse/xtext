@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.resource.Bug385636 with org.eclipse.xtext.common.Terminals
+
+generate bug385636 "http://www.xtext.org/Bug385636"
+
+Program: define=DefineVariables statements+=Statement* 'END' ;
+
+DefineVariables: 'VARIABLES' variables += DefineVariable+ 'ENDVARIABLES';
+
+DefineVariable: 'NAME' name=ID;
+
+NVariableAccess: variable=[DefineVariable];
+
+// Comparisons: left associative, priority 2
+Statement returns Expression:
+	Expression_VariableName (
+		(('C1') {Expression_Larger_Equal.left=current} right=Expression_VariableName) |
+		(('C2')  {Expression_Smaller.left=current} right=Expression_VariableName) |
+		(('C3') {Expression_Smaller_Equal.left=current} right=Expression_VariableName) |
+		(('C4') {Expression_Equal.left=current} right=Expression_VariableName) |
+		(('C5') {Expression_Not_Equal.left=current} right=Expression_VariableName)|
+		(('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName) |
+		(('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)
+
+	)*;
+
+
+Expression_VariableName : variable = NVariableAccess;
