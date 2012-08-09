@@ -28,16 +28,20 @@ public class FeatureProjectFactory extends ProjectFactory {
   
   private static String BUILD_PROPS_FILE_NAME = "build.properties";
   
-  private List containedBundles = new Function0<List>() {
-    public List apply() {
-      ArrayList<?> _arrayList = new ArrayList<Object>();
+  private static String SOURCE_FEAT_ENDING = ".source";
+  
+  private static String FEAT_ENDING = ".feature";
+  
+  private List<String> containedBundles = new Function0<List<String>>() {
+    public List<String> apply() {
+      ArrayList<String> _arrayList = new ArrayList<String>();
       return _arrayList;
     }
   }.apply();
   
-  private List includedFeatures = new Function0<List>() {
-    public List apply() {
-      ArrayList<?> _arrayList = new ArrayList<Object>();
+  private List<String> includedFeatures = new Function0<List<String>>() {
+    public List<String> apply() {
+      ArrayList<String> _arrayList = new ArrayList<String>();
       return _arrayList;
     }
   }.apply();
@@ -123,7 +127,7 @@ public class FeatureProjectFactory extends ProjectFactory {
     _builder.append("version=\"1.0.0.qualifier\">");
     _builder.newLine();
     {
-      for(final Object includedFeature : this.includedFeatures) {
+      for(final String includedFeature : this.includedFeatures) {
         _builder.append("\t");
         _builder.append("<includes");
         _builder.newLine();
@@ -140,7 +144,7 @@ public class FeatureProjectFactory extends ProjectFactory {
       }
     }
     {
-      for(final Object containedBundle : this.containedBundles) {
+      for(final String containedBundle : this.containedBundles) {
         _builder.append("\t");
         _builder.append("<plugin");
         _builder.newLine();
@@ -180,7 +184,7 @@ public class FeatureProjectFactory extends ProjectFactory {
     _builder.append("<site>");
     _builder.newLine();
     {
-      for(final Object includedFeature : this.includedFeatures) {
+      for(final String includedFeature : this.includedFeatures) {
         _builder.append("\t");
         _builder.append("<feature id=\"");
         _builder.append(includedFeature, "	");
@@ -195,8 +199,9 @@ public class FeatureProjectFactory extends ProjectFactory {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("<feature id=\"");
-        _builder.append(includedFeature, "	");
-        _builder.append(".source\" version=\"0.0.0\">");
+        String _sourceFeatureName = includedFeature==null?(String)null:this.sourceFeatureName(includedFeature);
+        _builder.append(_sourceFeatureName, "	");
+        _builder.append("\" version=\"0.0.0\">");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
@@ -220,5 +225,21 @@ public class FeatureProjectFactory extends ProjectFactory {
     _builder.append("</site>");
     _builder.newLine();
     this.writeToFile(_builder, FeatureProjectFactory.CATEGORY_FILE_NAME, project, monitor);
+  }
+  
+  private String sourceFeatureName(final String featureId) {
+    String _xblockexpression = null;
+    {
+      boolean _endsWith = featureId.endsWith(FeatureProjectFactory.FEAT_ENDING);
+      if (_endsWith) {
+        String _plus = ("\\" + FeatureProjectFactory.FEAT_ENDING);
+        String _plus_1 = (_plus + "$");
+        String _plus_2 = (FeatureProjectFactory.SOURCE_FEAT_ENDING + FeatureProjectFactory.FEAT_ENDING);
+        featureId.replaceAll(_plus_1, _plus_2);
+      }
+      String _plus_3 = (featureId + FeatureProjectFactory.SOURCE_FEAT_ENDING);
+      _xblockexpression = (_plus_3);
+    }
+    return _xblockexpression;
   }
 }

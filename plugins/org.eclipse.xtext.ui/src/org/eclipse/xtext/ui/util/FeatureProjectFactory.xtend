@@ -23,9 +23,11 @@ class FeatureProjectFactory extends ProjectFactory {
 	static String MANIFEST_FILENAME = "feature.xml";
 	static String CATEGORY_FILE_NAME = "category.xml";
 	static String BUILD_PROPS_FILE_NAME = "build.properties";
+	static String SOURCE_FEAT_ENDING = ".source";
+	static String FEAT_ENDING = ".feature";
 	
-	List containedBundles = new ArrayList()
-	List includedFeatures = new ArrayList()
+	List<String> containedBundles = new ArrayList()
+	List<String> includedFeatures = new ArrayList()
 	String mainCategoryName
 	
 	String featureLabel
@@ -109,7 +111,7 @@ class FeatureProjectFactory extends ProjectFactory {
 			<feature id="«includedFeature»" version="0.0.0">
 				<category name="main"/>
 			</feature>
-			<feature id="«includedFeature».source" version="0.0.0">
+			<feature id="«includedFeature?.sourceFeatureName»" version="0.0.0">
 				<category name="main.source"/>
 			</feature>
 			«ENDFOR»
@@ -119,5 +121,14 @@ class FeatureProjectFactory extends ProjectFactory {
 		'''
 		.writeToFile(CATEGORY_FILE_NAME, project, monitor);
 	}
+	
+	def private String sourceFeatureName(String featureId) {
+		if(featureId.endsWith(FEAT_ENDING)) {
+			featureId.replaceAll("\\"+FEAT_ENDING+"$", SOURCE_FEAT_ENDING+FEAT_ENDING )
+		}
+		featureId+SOURCE_FEAT_ENDING
+	}
+
+
 	
 }
