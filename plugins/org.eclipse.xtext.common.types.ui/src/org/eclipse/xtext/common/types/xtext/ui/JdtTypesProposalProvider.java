@@ -82,6 +82,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	@Inject
 	private JdtTypeProviderFactory jdtTypeProviderFatory;
 	
+	@Inject
+	private JdtTypeRelevance jdtTypeRelevance;
+	
 	public static class FQNShortener extends ReplacementTextApplier {
 		protected final IScope scope;
 		protected final Resource context;
@@ -310,12 +313,14 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			}
 			ICompletionProposal proposal = proposalFactory.createCompletionProposal(proposalAsString, displayString, img, context);
 			if (proposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal theProposal = (ConfigurableCompletionProposal) proposal;
 				// calculate the type lazy, as this require a lot of time for large completion lists
-				((ConfigurableCompletionProposal) proposal).setAdditionalProposalInfo(new Provider<EObject>(){
+				theProposal.setAdditionalProposalInfo(new Provider<EObject>(){
 					public EObject get() {
 						return jvmTypeProvider.findTypeByName(typeName);
 					}});
-				((ConfigurableCompletionProposal) proposal).setHover(hover);
+				theProposal.setHover(hover);
+				theProposal.setPriority(jdtTypeRelevance.getRelevence(typeName, context.getPrefix()));
 			}
 			acceptor.accept(proposal);
 		}
