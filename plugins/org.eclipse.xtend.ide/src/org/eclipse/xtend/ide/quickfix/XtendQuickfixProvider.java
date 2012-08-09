@@ -247,23 +247,29 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		final String defaultValueLiteral = getDefaultValueLiteral(expectedType);
 		localVarDescriptionBuilder.append("val ").append(elementName).append(" = ").append(defaultValueLiteral);
 		localVarDescriptionBuilder.newLine().append("...");
-		IssueResolution issueResolutionlocalVarInType = new IssueResolution("create local variable " + elementName, localVarDescriptionBuilder.toString(), "fix_local_var.png", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
-			public void apply(final EObject element, final IModificationContext context) throws Exception {
-				if(element != null){
-					XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);
-					if(xtendMember != null){
-					int offset = getFirstOffsetOfKeyword(xtendMember, "{");
-					IXtextDocument xtextDocument = context.getXtextDocument();
-						if(offset != -1 && xtextDocument != null){
-							final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, element, offset, 0, 1, false);
-							appendable.newLine().append("val ").append(elementName).append(" = ").append(defaultValueLiteral);
-							appendable.commitChanges();
+		issueResolutionAcceptor.accept(
+				issue, 
+				defaultValueLiteral, 
+				elementName, 
+				defaultValueLiteral, 
+				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
+					public void apply(final EObject element, final IModificationContext context) throws Exception {
+						if (element != null) {
+							XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);
+							if (xtendMember != null) {
+								int offset = getFirstOffsetOfKeyword(xtendMember, "{");
+								IXtextDocument xtextDocument = context.getXtextDocument();
+								if (offset != -1 && xtextDocument != null) {
+									final ReplacingAppendable appendable = appendableFactory.get(xtextDocument,
+											element, offset, 0, 1, false);
+									appendable.newLine().append("val ").append(elementName).append(" = ")
+											.append(defaultValueLiteral);
+									appendable.commitChanges();
+								}
+							}
 						}
 					}
-				}
-			}
-		}));
-		issueResolutionAcceptor.getIssueResolutions().add(issueResolutionlocalVarInType);
+				}));
 	}
 
 	
@@ -705,7 +711,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 									appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
 									appendable.insertNewImports();
 								}
-							});
+							}, 100 /* generally relevant proposals*/);
 						}
 					}
 				}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
