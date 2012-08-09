@@ -423,5 +423,14 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.antlr.serializer,
  org.eclipse.xtext.parser.antlr.bug378967Test,
  org.eclipse.xtext.parser.antlr.bug378967Test.impl,
- org.eclipse.xtext.parser.antlr.bug378967Test.util
+ org.eclipse.xtext.parser.antlr.bug378967Test.util,
+ org.eclipse.xtext.resource.liveContainerTestLanguage,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerTestLanguage.util,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.impl,
+ org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.util,
+ org.eclipse.xtext.resource.bug385636,
+ org.eclipse.xtext.resource.bug385636.impl,
+ org.eclipse.xtext.resource.bug385636.util
 
