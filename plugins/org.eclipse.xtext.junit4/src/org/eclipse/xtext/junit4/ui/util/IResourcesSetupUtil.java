@@ -9,6 +9,7 @@ package org.eclipse.xtext.junit4.ui.util;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -61,6 +62,19 @@ public class IResourcesSetupUtil {
 		description.setNatureIds(newNatures);
 		project.setDescription(description, null);
 	}
+	
+	public static void addBuilder(IProject project, String builderId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		ICommand[] specs = description.getBuildSpec();
+		ICommand command = description.newCommand();
+		command.setBuilderName(builderId);
+		// Add the nature
+		ICommand[] specsModified = new ICommand[specs.length + 1];
+		System.arraycopy(specs, 0, specsModified, 0, specs.length);
+		specsModified[specs.length] = command;
+		description.setBuildSpec(specsModified);
+		project.setDescription(description, monitor());
+	}
 
 	public static void removeNature(IProject project, String nature)
 			throws CoreException {
@@ -75,6 +89,24 @@ public class IResourcesSetupUtil {
 				System.arraycopy(natures, i + 1, newNatures, i, natures.length
 						- i - 1);
 				description.setNatureIds(newNatures);
+				project.setDescription(description, null);
+				return;
+			}
+		}
+
+	}
+	
+	public static void removeBuilder(IProject project, String builderId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		ICommand[] builderSpecs = description.getBuildSpec();
+
+		for (int i = 0; i < builderSpecs.length; ++i) {
+			if (builderId.equals(builderSpecs[i].getBuilderName())) {
+				// Remove the builder
+				ICommand[] modifiedSpecs = new ICommand[builderSpecs.length - 1];
+				System.arraycopy(builderSpecs, 0, modifiedSpecs, 0, i);
+				System.arraycopy(builderSpecs, i + 1, modifiedSpecs, i, builderSpecs.length - i - 1);
+				description.setBuildSpec(modifiedSpecs);
 				project.setDescription(description, null);
 				return;
 			}
