@@ -219,7 +219,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		if (object.eResource() != null) {
 			uri = object.eResource().getURI();
 			if (uri.isPlatformResource()) {
-				projectName = uri.segment(1);
+				// Name of project must be serialized in decoded format see https://bugs.eclipse.org/bugs/show_bug.cgi?id=384188
+				projectName = URI.decode(uri.segment(1));
 			}
 		}
 		ILocationData newData = new LocationData(textRegion, uri, projectName);
