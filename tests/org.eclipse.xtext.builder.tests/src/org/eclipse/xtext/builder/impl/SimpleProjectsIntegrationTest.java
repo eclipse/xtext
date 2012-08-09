@@ -30,7 +30,6 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePa
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
