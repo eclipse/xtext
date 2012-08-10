@@ -124,7 +124,7 @@ class FeatureProjectFactory extends ProjectFactory {
 	
 	def private String sourceFeatureName(String featureId) {
 		if(featureId.endsWith(FEAT_ENDING)) {
-			featureId.replaceAll("\\"+FEAT_ENDING+"$", SOURCE_FEAT_ENDING+FEAT_ENDING )
+			return featureId.replaceAll("\\"+FEAT_ENDING+"$", SOURCE_FEAT_ENDING+FEAT_ENDING )
 		}
 		featureId+SOURCE_FEAT_ENDING
 	}

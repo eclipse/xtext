@@ -235,7 +235,7 @@ public class FeatureProjectFactory extends ProjectFactory {
         String _plus = ("\\" + FeatureProjectFactory.FEAT_ENDING);
         String _plus_1 = (_plus + "$");
         String _plus_2 = (FeatureProjectFactory.SOURCE_FEAT_ENDING + FeatureProjectFactory.FEAT_ENDING);
-        featureId.replaceAll(_plus_1, _plus_2);
+        return featureId.replaceAll(_plus_1, _plus_2);
       }
       String _plus_3 = (featureId + FeatureProjectFactory.SOURCE_FEAT_ENDING);
       _xblockexpression = (_plus_3);
