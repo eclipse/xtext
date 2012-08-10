@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
@@ -34,6 +35,9 @@ import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
+import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.jdt.internal.core.NameLookup;
+import org.eclipse.jdt.internal.core.NameLookup.Answer;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -679,45 +683,52 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 
 	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, final String typeSimpleName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
-		SearchEngine searchEngine = new SearchEngine();
-		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
-				SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new TypeNameRequestor() {
-					@Override
-					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-							char[][] enclosingTypeNames, String path) {
-						final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
-								simpleTypeName);
-						JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
-						if(importType instanceof JvmDeclaredType
-								&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
-							StringBuilder label = new StringBuilder("Import '");
-							label.append(new String(simpleTypeName));
-							label.append("' (");
-							label.append(new String(packageName));
-							if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
-								boolean isFirst = true;
-								for(char[] enclosingTypeName: enclosingTypeNames) {
-									if(isFirst) 
-										label.append(".");
-									else 
-										label.append("$");
-									isFirst = false;
-									label.append(new String(enclosingTypeName));
+		if(contextType != null){
+			IJavaProject javaProject = projectProvider.getJavaProject(contextType.eResource().getResourceSet());
+			final NameLookup nameLookup = ((JavaProject) javaProject).newNameLookup(new ICompilationUnit[0]);
+			SearchEngine searchEngine = new SearchEngine();
+			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new TypeNameRequestor() {
+						@Override
+						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+								char[][] enclosingTypeNames, String path) {
+							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
+									simpleTypeName);
+							Answer answer = nameLookup.findType(qualifiedTypeName, false, NameLookup.ACCEPT_ALL, true);
+							if(answer != null && !answer.ignoreIfBetter()){
+								JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
+								if(importType instanceof JvmDeclaredType
+										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
+									StringBuilder label = new StringBuilder("Import '");
+									label.append(new String(simpleTypeName));
+									label.append("' (");
+									label.append(new String(packageName));
+									if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+										boolean isFirst = true;
+										for(char[] enclosingTypeName: enclosingTypeNames) {
+											if(isFirst) 
+												label.append(".");
+											else 
+												label.append("$");
+											isFirst = false;
+											label.append(new String(enclosingTypeName));
+										}
+									}
+									label.append(")");
+									acceptor.accept(issue, label.toString(), label.toString(), "fix_indent.gif", new ISemanticModification() {
+										@SuppressWarnings("null")
+										public void apply(EObject element, IModificationContext context) throws Exception {
+											ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+													element, 0, 0);
+											appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
+											appendable.insertNewImports();
+										}
+									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, typeSimpleName) + 100);
 								}
 							}
-							label.append(")");
-							acceptor.accept(issue, label.toString(), label.toString(), "fix_indent.gif", new ISemanticModification() {
-								@SuppressWarnings("null")
-								public void apply(EObject element, IModificationContext context) throws Exception {
-									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
-											element, 0, 0);
-									appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
-									appendable.insertNewImports();
-								}
-							}, jdtTypeRelevance.getRelevance(qualifiedTypeName, typeSimpleName) + 100);
 						}
-					}
-				}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+		}
 	}
 
 	@Fix(IssueCodes.INCONSISTENT_INDENTATION)
