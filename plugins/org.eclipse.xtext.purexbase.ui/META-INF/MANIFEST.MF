@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.xbase.ui,
  org.eclipse.jdt.core
-Import-Package: org.apache.log4j,
+Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase.ui,

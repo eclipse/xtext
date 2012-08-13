@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.xtext.testlanguages;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.xtext.builder,
  org.antlr.runtime
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.backtracking.ui.contentassist,

@@ -67,5 +67,5 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xtype;x-friends:="org.eclipse.xtext.xbase.tests",
  org.eclipse.xtext.xtype.impl;x-internal:=true,
  org.eclipse.xtext.xtype.util;x-internal:=true
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Localization: plugin

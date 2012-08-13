@@ -29,5 +29,5 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.scoping,
  org.eclipse.xtext.example.arithmetics.formatting,
  org.eclipse.xtext.example.arithmetics.serializer
-Import-Package: org.apache.log4j,
+Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.commons.logging

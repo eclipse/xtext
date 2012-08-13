@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.ui;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.ui.editors;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.jface.text;bundle-version="3.4.0";visibility:=reexport,
- org.eclipse.ui.ide;bundle-version="3.4.0",
+ org.eclipse.ui.ide;bundle-version="3.8.0",
  org.eclipse.xtext;visibility:=reexport,
  org.eclipse.ui.views;bundle-version="3.3.0",
  org.eclipse.emf.edit.ui;bundle-version="2.3.1";visibility:=reexport,
@@ -86,4 +86,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Import-Package: org.apache.commons.lang,
- org.apache.log4j
+ org.apache.log4j;version="1.2.15"
