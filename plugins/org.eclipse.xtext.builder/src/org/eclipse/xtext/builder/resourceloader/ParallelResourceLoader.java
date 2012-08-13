@@ -75,18 +75,16 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 	
 	@Override
 	protected Resource loadResource(URI uri, ResourceSet localResourceSet, ResourceSet parentResourceSet) {
-		if(localResourceSet != null) {
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			if(workspace != null) {
-				IWorkspaceRoot root = workspace.getRoot();
-				if(root != null) {
-					IFile file = root.getFile(new Path(uri.toPlatformString(true)));
-					if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
-						// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
-						// we will recover & load the resource in the main builder thread (that owns the project resource lock)
-						// (if we do try to load resources that are out of sync, we create a deadlock)
-						return null;
-					}
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		if(workspace != null) {
+			IWorkspaceRoot root = workspace.getRoot();
+			if(root != null) {
+				IFile file = root.getFile(new Path(uri.toPlatformString(true)));
+				if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
+					// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
+					// we will recover & load the resource in the main builder thread (that owns the project resource lock)
+					// (if we do try to load resources that are out of sync, we create a deadlock)
+					return null;
 				}
 			}
 		}
