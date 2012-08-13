@@ -169,6 +169,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"1bi.toString".resolvesTo("String")
 	}
 	
+	@Test def void testNumberLiteralInClosure_01() throws Exception {
+		"newArrayList().map[42]".resolvesTo("List<Integer>")
+	}
+	
 	@Test def void testOverloadedVarArgs_01() throws Exception {
 		"testdata::OverloadedMethods::overloadedVarArgs(null, null)".resolvesTo("long")
 	}
