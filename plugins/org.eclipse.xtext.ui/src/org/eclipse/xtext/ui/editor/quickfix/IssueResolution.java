@@ -29,7 +29,7 @@ public class IssueResolution {
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public IssueResolution(String label, String description, String image, IModificationContext modificationContext, IModification modification, int relevance) {
 		this.description = description;
@@ -41,7 +41,7 @@ public class IssueResolution {
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public int getRelevance() {
 		return relevance;

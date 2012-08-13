@@ -12,7 +12,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
  * Computes the relevance of a certain type proposal, based on a given text.
  * 
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.3
+ * @since 2.4
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
