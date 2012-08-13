@@ -48,4 +48,4 @@ Export-Package: org.eclipse.xtext.ui;x-friends:="org.eclipse.xtext.xtext.ui.test
  org.eclipse.xtext.xtext.ui.refactoring;x-internal:=true,
  org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests"
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
