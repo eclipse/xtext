@@ -412,6 +412,24 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def testBug380060() { 
+		assertCompilesTo('''
+			class Foo<T> {
+			    def static void main(String[] args) {
+			        new Foo()
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public static void main(final String[] args) {
+			    new Foo<Object>();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug372864() { 
 		assertCompilesTo('''
 			class Foo {

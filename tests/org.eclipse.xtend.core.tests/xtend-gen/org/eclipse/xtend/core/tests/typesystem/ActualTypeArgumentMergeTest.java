@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -21,11 +21,12 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,17 +35,14 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
+public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private BoundTypeArgumentMerger merger;
   
-  @Inject
-  private CommonTypeComputationServices services;
-  
-  public ListMultimap<JvmTypeParameter,BoundTypeArgument> mappedBy(final String typeParameters, final String... alternatingTypeReferences) {
+  public ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> mappedBy(final String typeParameters, final String... alternatingTypeReferences) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -71,7 +69,7 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmTypeParameter> _typeParameters = operation.getTypeParameters();
-      ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, this.services);
+      ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
       final ActualTypeArgumentCollector collector = _actualTypeArgumentCollector;
       int _size = ((List<String>)Conversions.doWrapArray(alternatingTypeReferences)).size();
       int _minus = (_size - 1);
@@ -81,11 +79,13 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _get = _parameters.get((i).intValue());
         JvmTypeReference _parameterType = _get.getParameterType();
+        LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         int _plus = ((i).intValue() + 1);
         JvmFormalParameter _get_1 = _parameters_1.get(_plus);
         JvmTypeReference _parameterType_1 = _get_1.getParameterType();
-        collector.populateTypeParameterMapping(_parameterType, _parameterType_1);
+        LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_parameterType_1);
+        collector.populateTypeParameterMapping(_lightweightReference, _lightweightReference_1);
       }
       return collector.getTypeParameterMapping();
     } catch (Exception _e) {
@@ -93,15 +93,15 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
     }
   }
   
-  public Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> merge(final ListMultimap<JvmTypeParameter,BoundTypeArgument> mapping, final String typeParamName) {
+  public Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> merge(final ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> mapping, final String typeParamName) {
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
       boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
-        final List<BoundTypeArgument> mappingData = mapping.get(key);
-        MergedBoundTypeArgument _merge = this.merger.merge(mappingData);
-        return Pair.<ListMultimap<JvmTypeParameter,BoundTypeArgument>, MergedBoundTypeArgument>of(mapping, _merge);
+        final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
+        LightweightMergedBoundTypeArgument _merge = this.merger.merge(mappingData, this);
+        return Pair.<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>, LightweightMergedBoundTypeArgument>of(mapping, _merge);
       }
     }
     StringConcatenation _builder = new StringConcatenation();
@@ -122,23 +122,23 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
     return null;
   }
   
-  public ListMultimap<JvmTypeParameter,BoundTypeArgument> to(final Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> merged, final String type, final VarianceInfo variance) {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _xblockexpression = null;
+  public ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> to(final Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> merged, final String type, final VarianceInfo variance) {
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _xblockexpression = null;
     {
       boolean _equals = Objects.equal(type, null);
       if (_equals) {
-        MergedBoundTypeArgument _value = merged.getValue();
+        LightweightMergedBoundTypeArgument _value = merged.getValue();
         Assert.assertNull(_value);
       } else {
-        MergedBoundTypeArgument _value_1 = merged.getValue();
-        JvmTypeReference _typeReference = _value_1.getTypeReference();
-        String _simpleName = _typeReference.getSimpleName();
-        Assert.assertEquals(type, _simpleName);
-        MergedBoundTypeArgument _value_2 = merged.getValue();
+        LightweightMergedBoundTypeArgument _value_1 = merged.getValue();
+        LightweightTypeReference _typeReference = _value_1.getTypeReference();
+        String _string = _typeReference.toString();
+        Assert.assertEquals(type, _string);
+        LightweightMergedBoundTypeArgument _value_2 = merged.getValue();
         VarianceInfo _variance = _value_2.getVariance();
         Assert.assertEquals(variance, _variance);
       }
-      ListMultimap<JvmTypeParameter,BoundTypeArgument> _key = merged.getKey();
+      ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _key = merged.getKey();
       _xblockexpression = (_key);
     }
     return _xblockexpression;
@@ -146,516 +146,516 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
   
   @Test
   public void testUnusedParam() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnusedParams_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnusedParams_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnusedParams_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2 extends T", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2 extends T", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnusedParams_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnusedParams_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2 extends CharSequence", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2 extends CharSequence", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "Object", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnambiguousMapping_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.List<T>", "java.util.List<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.List<T>", "java.util.List<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnambiguousMapping_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.Map<T, T>", "java.util.Map<String, String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.Map<T, T>", "java.util.Map<String, String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnambiguousMapping_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("K, V", "java.util.Map<K, V>", "java.util.Map<String, Integer>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "K");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "V");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("K, V", "java.util.Map<K, V>", "java.util.Map<String, Integer>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "K");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "V");
     this.to(_merge_1, "Integer", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnambiguousMapping_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "T", "CharSequence");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "T", "CharSequence");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUnambiguousMapping_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2", "T", "CharSequence", "T2", "CharSequence");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2", "T", "CharSequence", "T2", "CharSequence");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "T", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "T", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "T", "CharSequence");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "T", "CharSequence");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_06() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<CharSequence>", "Iterable<T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<CharSequence>", "Iterable<T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_07() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<String>", "Iterable<T>", "Iterable<CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<String>", "Iterable<T>", "Iterable<CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_08() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? extends CharSequence>", "Iterable<T>", "Iterable<? extends CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? extends CharSequence>", "Iterable<T>", "Iterable<? extends CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", null);
   }
   
   @Test
   public void testUsedTwice_09() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<? extends CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<T>", "Iterable<? extends CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", null);
   }
   
   @Test
   public void testUsedTwice_10() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<? extends T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<? extends T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_11() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<? super T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "CharSequence", "Iterable<? super T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", null);
   }
   
   @Test
   public void testUsedTwice_12() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<? super T>", "Iterable<CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<? super T>", "Iterable<CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", null);
   }
   
   @Test
   public void testUsedTwice_13() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<String>", "Iterable<? super T>", "Iterable<CharSequence>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<String>", "Iterable<? super T>", "Iterable<CharSequence>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUsedTwice_14() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<CharSequence>", "Iterable<? super T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<CharSequence>", "Iterable<? super T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.List<T>", "java.util.Set<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.List<T>", "java.util.Set<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.ArrayList<T>", "java.util.HashSet<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.ArrayList<T>", "java.util.HashSet<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.ArrayList<T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.ArrayList<T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.HashMap<java.util.ArrayList<T>, java.util.ArrayList<T>>", "java.util.Map<Iterable<String>, java.util.HashSet<Integer>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.HashMap<java.util.ArrayList<T>, java.util.ArrayList<T>>", "java.util.Map<Iterable<String>, java.util.HashSet<Integer>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.HashMap<java.util.ArrayList<T>, java.util.ArrayList<T>>", "java.util.Map<Iterable<Integer>, java.util.HashSet<String>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.HashMap<java.util.ArrayList<T>, java.util.ArrayList<T>>", "java.util.Map<Iterable<Integer>, java.util.HashSet<String>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Integer", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_06() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "org.eclipse.xtend.core.tests.typesystem.MapType<T>", "java.util.HashMap<String, Integer>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "org.eclipse.xtend.core.tests.typesystem.MapType<T>", "java.util.HashMap<String, Integer>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testBestEffortMapping_07() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "org.eclipse.xtend.core.tests.typesystem.MapType<T>", "java.util.HashMap<Integer, String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "org.eclipse.xtend.core.tests.typesystem.MapType<T>", "java.util.HashMap<Integer, String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Integer", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testInheritanceMapping_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("E", "Iterable<E>", "java.util.ArrayList<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "E");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("E", "Iterable<E>", "java.util.ArrayList<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "E");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testInheritanceMapping_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("C", "Comparable<C>", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "C");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("C", "Comparable<C>", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "C");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testMappedGenericType_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<String>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<String>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Iterable<String>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testMappedArray_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T[]", "String[]");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T[]", "String[]");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testMappedArray_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "T[]", "String[][]");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T[]", "String[][]");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String[]", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<? extends String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<? extends String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<? super String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends T>", "Iterable<? super String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? extends String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? extends String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.OUT);
   }
   
   @Test
   public void testUpperBound_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<Iterable<T>>", "Iterable<Iterable<? extends CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<Iterable<T>>", "Iterable<Iterable<? extends CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.OUT);
   }
   
   @Test
   public void testUpperBound_06() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<? extends CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<? extends CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Iterable<? extends CharSequence>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_07() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<Iterable<? extends CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<Iterable<? extends CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.OUT);
   }
   
   @Test
   public void testUpperBound_08() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<Iterable<CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<Iterable<CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_09() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<? extends Iterable<CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<? extends Iterable<CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_10() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<? super Iterable<CharSequence>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? extends Iterable<T>>", "Iterable<? super Iterable<CharSequence>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharSequence", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testUpperBound_11() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Comparable<?> & Serializable", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testLowerBound_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testLowerBound_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<? super String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<? super String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testLowerBound_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<? extends String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<? super T>", "Iterable<? extends String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", null);
   }
   
   @Test
   public void testLowerBound_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "Iterable<? super T>", "Iterable<? extends String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", null);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "Iterable<? super T>", "Iterable<? extends String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", null);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "String", null);
   }
   
   @Test
   public void testLowerBound_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "java.util.Map<? super T, T>", "java.util.Map<? extends String, Integer>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "Integer", null);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "java.util.Map<? super T, T>", "java.util.Map<? extends String, Integer>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "Integer", null);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "Integer", null);
   }
   
   @Test
   public void testLowerBound_06() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? super String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<? super String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
   @Test
   public void testLowerBound_07() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<Iterable<T>>", "java.util.LinkedList<Iterable<? super String>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<Iterable<T>>", "java.util.LinkedList<Iterable<? super String>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
   @Test
   public void testLowerBound_08() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<? super String>>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "Iterable<T>", "Iterable<Iterable<? super String>>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Iterable<? super String>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testLowerBound_09() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2", "Iterable<? super T2>", "Iterable<? extends String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", null);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2", "Iterable<? super T2>", "Iterable<? extends String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", null);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "String", null);
   }
   
   @Test
   public void testDependentTypeParams_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2 extends T", "java.util.Map<T, T2>", "java.util.Map<String, String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends CharSequence, T2 extends T", "java.util.Map<T, T2>", "java.util.Map<String, String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testDependentTypeParams_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "Iterable<T>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T", "Iterable<T>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testDependentTypeParams_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2 extends CharSequence", "Iterable<T2>", "Iterable<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends T2, T2 extends CharSequence", "Iterable<T2>", "Iterable<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testDependentTypeParams_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T, T3 extends T2", "java.util.Map<T, T3>", "java.util.Map<String, Integer>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to_1 = this.to(_merge_1, "String", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_2 = this.merge(_to_1, "T3");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T, T2 extends T, T3 extends T2", "java.util.Map<T, T3>", "java.util.Map<String, Integer>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to_1 = this.to(_merge_1, "String", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_2 = this.merge(_to_1, "T3");
     this.to(_merge_2, "Integer", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_01() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends T", "String", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends T", "String", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Object", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_02() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "Iterable<Object>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_03() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "T", "java.util.List<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "T", "java.util.List<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "List<String>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_04() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "Iterable<? extends T>", "java.util.List<String>");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>", "Iterable<? extends T>", "java.util.List<String>");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_05() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<? extends T>", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    this.to(_merge, "Iterable<Object>", VarianceInfo.INVARIANT);
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<? extends T>", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    this.to(_merge, "Iterable<?>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_06() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<T>", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<T>", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
     this.to(_merge, "CharIterable<CharSequence>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_07() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends T>", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    this.to(_merge, "CharIterable<CharSequence>", VarianceInfo.INVARIANT);
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends T>", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    this.to(_merge, "CharIterable<? extends CharSequence>", VarianceInfo.INVARIANT);
   }
   
   @Test
   public void testCircularTypeParams_08() {
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>, T2 extends Iterable<T>", "CharSequence", "String");
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    ListMultimap<JvmTypeParameter,BoundTypeArgument> _to = this.to(_merge, "Iterable<Object>", VarianceInfo.INVARIANT);
-    Pair<ListMultimap<JvmTypeParameter,BoundTypeArgument>,MergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T extends Iterable<T>, T2 extends Iterable<T>", "CharSequence", "String");
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
+    ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _to = this.to(_merge, "Iterable<Object>", VarianceInfo.INVARIANT);
+    Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge_1 = this.merge(_to, "T2");
     this.to(_merge_1, "Iterable<Iterable<Object>>", VarianceInfo.INVARIANT);
   }
 }

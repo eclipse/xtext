@@ -103,6 +103,10 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -186,7 +190,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			if(elementName != null)
 				xtextDocument.modify(new IUnitOfWork.Void<XtextResource>(){
 					@Override
-					public void process(XtextResource state) throws Exception {
+					public void process(final XtextResource state) throws Exception {
 						EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
 						// For now we do not provide quickfixes for super as target
 						if(eObject instanceof XMemberFeatureCall){
@@ -214,9 +218,38 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								expectedFieldType = typeProvider.getType(xExpression);
 							}
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), computationServices);
-							JvmTypeReference resolvedExpectedType= substitutor.substitute(expectedType);
-							if(resolvedExpectedType != null && resolvedExpectedType.getType() != null){
+							TypeReferenceOwner owner = new TypeReferenceOwner() {
+
+								@NonNull
+								public CommonTypeComputationServices getServices() {
+									return computationServices;
+								}
+
+								@NonNull
+								public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
+									throw new UnsupportedOperationException();
+								}
+
+								public void acceptHint(@NonNull Object handle,
+										@NonNull LightweightBoundTypeArgument boundTypeArgument) {
+									throw new UnsupportedOperationException();
+								}
+
+								@NonNull
+								public ResourceSet getContextResourceSet() {
+									return state.getResourceSet();
+								}
+								
+								public boolean isResolved(@NonNull Object handle) {
+									throw new UnsupportedOperationException();
+								}
+							};
+							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+									Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
+									owner);
+							JvmTypeReference resolvedExpectedType = substitutor.substitute(
+									new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
+							if (resolvedExpectedType != null && resolvedExpectedType.getType() != null) {
 								typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
 								appendable.append(" ");
 							}
@@ -237,8 +270,6 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							}
 						}
 					}
-
-					
 				});
 		}
 	}

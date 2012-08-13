@@ -9,13 +9,12 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
@@ -25,14 +24,14 @@ import static org.junit.Assert.*
 /**
  * @author Sebastian Zarnekow
  */
-class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
+class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 
 	@Inject
 	extension IXtendJvmAssociations
 	
 	@Inject
 	BoundTypeArgumentMerger merger
-
+	
 	def merge(Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
 		mergeWithSource(null, mergeUs)
 	}
@@ -42,15 +41,15 @@ class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
 		val signature = '''def void method(«mergeUs.join(null, ' p, ', ' p') [first]») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val mergable = <BoundTypeArgument>newArrayList
+		val mergable = <LightweightBoundTypeArgument>newArrayList
 		operation.parameters.forEach[ p, i |
 			val input = mergeUs.get(i)
-			mergable += new BoundTypeArgument(p.parameterType, null, source ?: new Object, input.second, input.third)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, source ?: new Object, input.second, input.third)
 		]
-		return merger.merge(mergable)
+		return merger.merge(mergable, this)
 	}
 	
-	def to(MergedBoundTypeArgument merged, String type, VarianceInfo variance) {
+	def to(LightweightMergedBoundTypeArgument merged, String type, VarianceInfo variance) {
 		if (type == null) {
 			assertNull(merged)
 		} else {
@@ -687,4 +686,5 @@ class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
 //			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
 //			.assertMapping('T2', 'Iterable<Iterable<Object>>'->OUT->OUT)
 //	}
+
 }

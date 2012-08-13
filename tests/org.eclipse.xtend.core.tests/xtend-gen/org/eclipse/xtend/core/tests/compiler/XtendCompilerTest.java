@@ -1007,6 +1007,41 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testBug380060() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def static void main(String[] args) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("new Foo()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static void main(final String[] args) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("new Foo<Object>();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug372864() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");

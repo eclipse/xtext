@@ -11,14 +11,13 @@ import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
@@ -28,34 +27,28 @@ import static org.junit.Assert.*
 /**
  * @author Sebastian Zarnekow
  */
-class ActualTypeArgumentCollectorTest extends AbstractXtendTestCase {
+class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner {
 
 	@Inject
 	extension IXtendJvmAssociations
 	
-	@Inject
-	CommonTypeComputationServices services
-
 	def mappedBy(String typeParameters, String... alternatingTypeReferences) {
-		// TODO synthesize unique variable names as soon as the function should be validated
-		val signature = '''def «IF !typeParameters.nullOrEmpty»<«typeParameters»>«ENDIF» void method(«alternatingTypeReferences.join(null, ' p, ', ' p') [it]») {}'''
-		val function = function(signature.toString)
-		val operation = function.directlyInferredOperation
-		val collector = new ActualTypeArgumentCollector(operation.typeParameters, services)
+		val operation = operation(typeParameters, alternatingTypeReferences)
+		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, this)
 		for(i: (0..alternatingTypeReferences.size-1).withStep(2)) {
-			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType, operation.parameters.get(i+1).parameterType)
+			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightReference, operation.parameters.get(i+1).parameterType.toLightweightReference)
 		}
 		return collector.typeParameterMapping
 	}
 	
-	def assertMapping(Multimap<JvmTypeParameter, BoundTypeArgument> mapping, String typeParamName, Triple<String,VarianceInfo,VarianceInfo>... mappedTypes) {
+	def assertMapping(Multimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName, Triple<String,VarianceInfo,VarianceInfo>... mappedTypes) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
 				assertNotNull(mappedTypes)
 				val mappingData = mapping.get(key)
-				assertEquals(mappingData.map['''«typeReference.simpleName»(«declaredVariance»/«actualVariance»)'''].toString, mappedTypes.size, mappingData.size)
-				assertEquals(mappedTypes.toList as Object, mappingData.map[ Tuples::create(typeReference.simpleName, declaredVariance, actualVariance) ].toList)
+				assertEquals(mappingData.map['''«typeReference»(«declaredVariance»/«actualVariance»)'''].toString, mappedTypes.size, mappingData.size)
+				assertEquals(mappedTypes.toList as Object, mappingData.map[ Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
 				return mapping
 			}
 		}
@@ -64,7 +57,7 @@ class ActualTypeArgumentCollectorTest extends AbstractXtendTestCase {
 		return mapping
 	}
 	
-	def assertOrigins(Multimap<JvmTypeParameter, BoundTypeArgument> mapping, String typeParamName, int count) {
+	def assertOrigins(Multimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName, int count) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
@@ -75,6 +68,13 @@ class ActualTypeArgumentCollectorTest extends AbstractXtendTestCase {
 		}
 		return mapping
 	}
+
+	def protected operation(String typeParameters, String... alternatingTypeReferences) {
+		val signature = '''def «IF !typeParameters.nullOrEmpty»<«typeParameters»>«ENDIF» void method(«alternatingTypeReferences.join(null, ' p, ', ' p') [it]») {}'''
+		val function = function(signature.toString)
+		val operation = function.directlyInferredOperation
+		operation
+	} 
 	
 	def operator_mappedTo(Pair<String, VarianceInfo> pair, VarianceInfo third) {
 		Tuples::create(pair.key, pair.value, third)
@@ -338,20 +338,30 @@ class ActualTypeArgumentCollectorTest extends AbstractXtendTestCase {
 	
 	@Test def void testCircularTypeParams_05() {
 		'T extends Iterable<? extends T>'.mappedBy('CharSequence', 'String')
-			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
+			.assertMapping('T', 'Iterable<?>'->OUT->OUT)
 	}
 	
 	@Test def void testCircularTypeParams_06() {
+		'T extends Iterable<T>'.mappedBy('CharSequence', 'String')
+			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_07() {
+		'T extends Iterable<? super T>'.mappedBy('CharSequence', 'String')
+			.assertMapping('T', 'Iterable<? super Object>'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_08() {
 		'T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<T>'.mappedBy('CharSequence', 'String')
 			.assertMapping('T', 'CharIterable<CharSequence>'->OUT->OUT)
 	}
 	
-	@Test def void testCircularTypeParams_07() {
+	@Test def void testCircularTypeParams_09() {
 		'T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends T>'.mappedBy('CharSequence', 'String')
-			.assertMapping('T', 'CharIterable<CharSequence>'->OUT->OUT)
+			.assertMapping('T', 'CharIterable<? extends CharSequence>'->OUT->OUT)
 	}
 	
-	@Test def void testCircularTypeParams_08() {
+	@Test def void testCircularTypeParams_10() {
 		'T extends Iterable<T>, T2 extends Iterable<T>'.mappedBy('CharSequence', 'String')
 			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
 			.assertMapping('T2', 'Iterable<Iterable<Object>>'->OUT->OUT)
