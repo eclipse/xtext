@@ -208,6 +208,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testNumberLiteralInClosure_01() throws Exception {
+    this.resolvesTo("newArrayList().map[42]", "List<Integer>");
+  }
+  
+  @Test
   public void testOverloadedVarArgs_01() throws Exception {
     this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(null, null)", "long");
   }
