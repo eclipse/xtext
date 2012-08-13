@@ -14,7 +14,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractXtypeReferenceVisitor<Result> extends AbstractTypeReferenceVisitor.InheritanceAware<Result> {
+public abstract class AbstractXtypeReferenceVisitor<Result> extends AbstractTypeReferenceVisitor.InheritanceAware<Result> implements XtypeReferenceVisitor<Result> {
 
 	public Result doVisitFunctionTypeReference(XFunctionTypeRef reference) {
 		return doVisitSpecializedTypeReference(reference);

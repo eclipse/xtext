@@ -7,22 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public abstract class AbstractRootTypeExpectation extends AbstractTypeExpectation {
 
 	public AbstractRootTypeExpectation(AbstractTypeComputationState state) {
 		super(state);
 	}
 	
-	public void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
-		getState().acceptType(this, type, hint, true);
-		getState().acceptType(this, type, hint, false);
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		getState().acceptType(getResolvedTypes(), this, type, true, hints);
+		getState().acceptType(getResolvedTypes(), this, type, false, hints);
 	}
 
 }

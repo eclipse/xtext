@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -20,7 +16,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.inject.Inject;
 
@@ -28,6 +23,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 
 	@Inject
@@ -42,14 +38,11 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	@Inject
 	private IBatchScopeProvider batchScopeProvider;
 	
-	@Inject
-	private BoundTypeArgumentMerger typeArgumentMerger;
-	
 	private EObject root;
 	
 	private boolean resolving = false;
 	
-	public void initializeFrom(@NonNull EObject root) {
+	public void initializeFrom(EObject root) {
 		this.root = root;
 	}
 	
@@ -57,7 +50,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		return root;
 	}
 	
-	@NonNull
 	public IResolvedTypes reentrantResolve() {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");
@@ -71,14 +63,15 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 	
 	protected IResolvedTypes resolve() {
-		ResolvedTypes result = new ResolvedTypes(this);
+		RootResolvedTypes result = createResolvedTypes();
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);
+		result.resolveUnboundTypeParameters();
 		return result;
 	}
-	
-	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
-		return new TypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services);
+
+	protected RootResolvedTypes createResolvedTypes() {
+		return new RootResolvedTypes(this);
 	}
 	
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
@@ -119,6 +112,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 	
 	protected BoundTypeArgumentMerger getTypeArgumentMerger() {
-		return typeArgumentMerger;
+		return services.getBoundTypeArgumentMerger();
 	}
 }

@@ -7,37 +7,56 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public abstract class AbstractTypeExpectation implements ITypeExpectation {
+@NonNullByDefault
+public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 
 	private final AbstractTypeComputationState state;
 
 	protected AbstractTypeExpectation(AbstractTypeComputationState state) {
+		super(state.getReferenceOwner());
 		this.state = state;
 	}
 	
 	public boolean isVoidTypeAllowed() {
-		JvmTypeReference expectedType = getExpectedType();
-		// TODO avoid resolving the type ref
-		if (expectedType != null && Void.TYPE.getName().equals(expectedType.getSimpleName())) {
+		LightweightTypeReference expectedType = internalGetExpectedType();
+		if (expectedType != null && expectedType.isType(Void.TYPE)) {
 			return true;
 		}
 		return false;
 	}
 	
+	public boolean isOwnedBy(TypeReferenceOwner referenceOwner) {
+		LightweightTypeReference expectedType = internalGetExpectedType();
+		return expectedType == null || expectedType.isOwnedBy(referenceOwner);
+	}
+	
 	protected AbstractTypeComputationState getState() {
 		return state;
 	}
-
+	
+	protected ResolvedTypes getResolvedTypes() {
+		return state.getResolvedTypes();
+	}
+	
+	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
+		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
+	}
+	
 	@Override
 	public String toString() {
-		JvmTypeReference expectedType = getExpectedType();
+		LightweightTypeReference expectedType = internalGetExpectedType();
 		String expectedTypeString = "";
 		if (expectedType != null) {
 			expectedTypeString = expectedType.toString();
@@ -50,7 +69,5 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		}
 		return getClass().getSimpleName() + " [expectation=" + expectedTypeString + "]";
 	}
-	
-	
 	
 }

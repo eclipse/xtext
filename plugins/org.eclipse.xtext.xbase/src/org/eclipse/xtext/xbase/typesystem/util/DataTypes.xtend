@@ -7,55 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util
 
-import java.util.Map
-import java.util.Set
-import org.eclipse.xtend.lib.Data
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.util.TypeReferences
 import com.google.inject.Inject
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer
-import org.eclipse.xtext.xtype.XtypeFactory
+import java.util.Set
+import org.eclipse.xtend.lib.Property
+import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.Primitives
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class TraversalData {
-	Set<JvmType> visited = newHashSet
-	Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = newLinkedHashMap
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class BoundTypeArgument {
-	JvmTypeReference typeReference
-	BoundTypeArgumentSource source
-	Object origin
-	VarianceInfo declaredVariance
-	VarianceInfo actualVariance
-	
-	def isValidVariancePair() {
-		declaredVariance.mergeDeclaredWithActual(actualVariance) != null
-	}
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class MergedBoundTypeArgument {
-	JvmTypeReference typeReference
-	VarianceInfo variance
-}
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
+import org.eclipse.xtext.xtype.XtypeFactory
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -68,11 +32,27 @@ class CommonTypeComputationServices {
 	
 	@Inject
 	@Property
+	LightweightTypeReferences lightweightTypeReferences
+	
+	@Inject
+	@Property
 	TypeConformanceComputer typeConformanceComputer;
+
+	@Inject
+	@Property
+	IRawTypeHelper rawTypeHelper
 	
 	@Inject
 	@Property
 	Primitives primitives;
+	
+	@Inject
+	@Property
+	FunctionTypes functionTypes;
+	
+	@Inject
+	@Property
+	BoundTypeArgumentMerger boundTypeArgumentMerger
 
 	@Inject(optional = true)
 	@Property
@@ -81,4 +61,39 @@ class CommonTypeComputationServices {
 	@Inject(optional = true)
 	@Property
 	TypesFactory typesFactory = TypesFactory::eINSTANCE;
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
+ */
+class ConstraintVisitingInfo {
+	Set<JvmTypeParameter> visiting
+	JvmTypeParameterDeclarator declarator
+	int idx
+	
+	new() {
+		visiting = newHashSet
+	}
+	new(JvmTypeParameter initial) {
+		visiting = newHashSet(initial)
+	}
+	def boolean tryVisit(JvmTypeParameter parameter) {
+		return visiting.add(parameter);
+	}
+	def void didVisit(JvmTypeParameter parameter) {
+		visiting.remove(parameter);
+	}
+	def void pushInfo(JvmTypeParameterDeclarator declarator, int idx) {
+		if (declarator == null)
+			throw new NullPointerException("declarator may not be null")
+		this.declarator = declarator;
+		this.idx = idx;
+	}
+	def getCurrentDeclarator() {
+		return declarator
+	}
+	def getCurrentIndex() {
+		return idx
+	}
 }

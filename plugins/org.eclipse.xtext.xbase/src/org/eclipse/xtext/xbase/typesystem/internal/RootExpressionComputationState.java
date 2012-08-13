@@ -12,10 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 public class RootExpressionComputationState extends AbstractRootTypeComputationState {
 
 	private final XExpression expression;
-	private final JvmTypeReference expectedType;
+	private final LightweightTypeReference expectedType;
 
 	public RootExpressionComputationState(ResolvedTypes resolvedTypes, 
 			IFeatureScopeSession featureScopeSession, XExpression expression,
@@ -34,15 +33,15 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 	}
 	
 	public RootExpressionComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression,
-			DefaultReentrantTypeResolver defaultReentrantTypeResolver, @Nullable JvmTypeReference expectedType) {
+			DefaultReentrantTypeResolver defaultReentrantTypeResolver, @Nullable LightweightTypeReference expectedType) {
 		super(resolvedTypes, featureScopeSession, defaultReentrantTypeResolver);
 		this.expression = expression;
 		this.expectedType = expectedType;
 	}
 
 	@Override
-	protected List<ITypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		ITypeExpectation result = null;
+	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
+		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			result = returnType ? new TypeExpectation(expectedType, actualState, returnType) : new RootTypeExpectation(expectedType, actualState);
 		} else {

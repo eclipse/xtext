@@ -7,20 +7,25 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class RootNoExpectation extends AbstractRootTypeExpectation {
 
 	public RootNoExpectation(AbstractTypeComputationState state) {
 		super(state);
 	}
 
-	public JvmTypeReference getExpectedType() {
+	@Nullable
+	public LightweightTypeReference internalGetExpectedType() {
 		return null;
 	}
 
@@ -34,14 +39,18 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 	
 	@Override
-	public void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 		// TODO resolve all unbound type parameters
 //		AbstractTypeComputationState state = getState();
 //		if (hint contains RAW) {
 //		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
-//				Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), state.getServices());
-//		JvmTypeReference substitute = substitutor.substitute(type);
+//				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
+//		LightweightTypeReference substitute = substitutor.substitute(type);
 //		}
-		super.acceptActualType(type, hint);
+		super.acceptActualType(type, hints);
+	}
+	
+	public RootNoExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		return this;
 	}
 }

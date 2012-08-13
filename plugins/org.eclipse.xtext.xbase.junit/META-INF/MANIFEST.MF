@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=r
  com.google.guava;bundle-version="1.0.0";visibility:=reexport,
  com.google.inject;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
- org.eclipse.emf.ecore;bundle-version="2.5.0";;resolution:=optional;x-installation:=greedy;visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="2.5.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
  org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy;visibility:=reexport,
@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=r
  org.eclipse.xtext.junit4;bundle-version="2.3.0"
 Export-Package: org.eclipse.xtext.xbase.compiler;x-internal:=true,
  org.eclipse.xtext.xbase.junit.evaluation;x-internal:=true,
+ org.eclipse.xtext.xbase.junit.typesystem;x-internal:=true,
  org.eclipse.xtext.xbase.junit.ui;x-internal:=true,
  testdata,
  testdata.a,

@@ -8,11 +8,10 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.TypeAssigner;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.
 @NonNullByDefault
 public class ChildExpressionTypeComputationState extends ExpressionTypeComputationState {
 
-	protected ChildExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+	protected ChildExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, 
 			ExpressionTypeComputationState parent,
@@ -35,11 +34,16 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	}
 	
 	@Override
-	protected JvmTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
-			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
-		getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
-		return actualType;
+	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
+			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		if (getParent().getExpression() != getExpression()) {
+			LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, returnType, hints);
+			getParent().acceptType(resolvedTypes, expectation, actualType, returnType, hints);
+			return actualType;
+		} else {
+			LightweightTypeReference actualType = getParent().acceptType(resolvedTypes, expectation, type, returnType, hints);
+			return actualType;
+		}
 	}
 	
 	@Override

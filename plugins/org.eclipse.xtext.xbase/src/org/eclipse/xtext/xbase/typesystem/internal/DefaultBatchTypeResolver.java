@@ -77,7 +77,7 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		final List<Adapter> adapters = root.eAdapters();
 		final TypeResolutionStateAdapter currentAdapter = (TypeResolutionStateAdapter) EcoreUtil.getAdapter(adapters, TypeResolutionStateAdapter.class);
 		if (currentAdapter == null) {
-			final IReentrantTypeResolver newResolver = typeResolverProvider.get();
+			final IReentrantTypeResolver newResolver = createResolver();
 			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
 			adapters.add(newAdapter);
 			IReentrantTypeResolver result = new IReentrantTypeResolver() {
@@ -98,6 +98,10 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		} else {
 			return currentAdapter;	
 		}
+	}
+
+	protected IReentrantTypeResolver createResolver() {
+		return typeResolverProvider.get();
 	}
 
 }

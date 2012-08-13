@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -14,7 +15,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.typesystem.AccessibleReentrantTypeResolver;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTestingTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -29,7 +29,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExpectationTest extends AbstractXbaseTestCase {
   @Inject
-  private AccessibleReentrantTypeResolver resolver;
+  private PublicReentrantTypeResolver resolver;
   
   @Inject
   private ExpectationTestingTypeComputer typeComputer;
@@ -128,7 +128,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   public void recordExpectation(final ITypeComputationState state) {
-    List<ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
+    List<? extends ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
     Iterables.<ITypeExpectation>addAll(this.expectations, _immediateExpectations);
   }
   
@@ -207,7 +207,6 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  @Ignore(value = "TODO subsequent type param usages influence expectation")
   public void testFeatureCallVarArgument_02() {
     ExpectationTest _expects = this.expects("newArrayList(null, \'\')");
     _expects.types("String");

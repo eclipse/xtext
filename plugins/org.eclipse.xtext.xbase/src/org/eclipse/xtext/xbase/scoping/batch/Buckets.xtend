@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.scoping.batch
 
 import java.util.List
+import java.util.Set
 import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,6 +22,15 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 class TypeBucket {
 	int id
 	List<JvmType> types
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
+ */
+@Data
+class SynonymTypeBucket extends TypeBucket {
+	Set<ConformanceHint> hints
 }
 
 /**

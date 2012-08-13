@@ -12,9 +12,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,18 +31,18 @@ public class NoExpectationTypeComputationState extends AbstractStackedTypeComput
 	}
 
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(null, actualState, false);
+	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		AbstractTypeExpectation result = createTypeExpectation(null, actualState, false);
 		return Collections.singletonList(result);
 	}
 	
 	@Override
-	public List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(null, actualState, true);
+	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
+		AbstractTypeExpectation result = createTypeExpectation(null, actualState, true);
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		if (expectedType != null)
 			throw new IllegalArgumentException("expectedType should be null");
 		return new NoExpectation(actualState, returnType);
