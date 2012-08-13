@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -74,7 +73,6 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     Assert.assertFalse(_equal);
   }
   
-  @Ignore
   @Test
   public void testRecursiveInheritance() {
     final EObject eObject = EcoreFactory.eINSTANCE.createEObject();
@@ -87,8 +85,10 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(bar);
     this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _newTypeRef_1);
     String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
-    String _hash_1 = this._jvmDeclaredTypeSignatureHashProvider.getHash(bar);
-    boolean _equal = Strings.equal(_hash, _hash_1);
+    Assert.assertNotNull(_hash);
+    String _hash_1 = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
+    String _hash_2 = this._jvmDeclaredTypeSignatureHashProvider.getHash(bar);
+    boolean _equal = Strings.equal(_hash_1, _hash_2);
     Assert.assertFalse(_equal);
   }
   

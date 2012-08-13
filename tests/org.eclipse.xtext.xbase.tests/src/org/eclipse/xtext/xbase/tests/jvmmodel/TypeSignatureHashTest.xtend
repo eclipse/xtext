@@ -54,7 +54,6 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 		assertFalse('Bar'.equal(bar.hash))
 	}
 	
-	@Ignore
 	@Test
 	def void testRecursiveInheritance() {
 		val eObject = EcoreFactory::eINSTANCE.createEObject
@@ -62,6 +61,7 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 		val foo = eObject.toClass('Foo')
 		bar.superTypes += newTypeRef(foo);
 		foo.superTypes += newTypeRef(bar);
+		assertNotNull(foo.hash)
 		assertFalse(foo.hash.equal(bar.hash))
 	}
 
