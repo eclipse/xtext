@@ -44,7 +44,7 @@ public class IssueResolutionAcceptor {
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public void accept(Issue issue, String label, String description, String image, IModification modification, int relevance) {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
@@ -52,7 +52,7 @@ public class IssueResolutionAcceptor {
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification, int relevance) {
 		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);

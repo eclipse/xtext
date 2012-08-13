@@ -219,7 +219,7 @@ public final class TypeMatchFilters {
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public static class NonRestrictedAccess implements ITypesProposalProvider.Filter {
 		

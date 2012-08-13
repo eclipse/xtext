@@ -45,7 +45,7 @@ public class QuickAssistCompletionProposal implements ICompletionProposal, IComp
 	}
 	
 	/**
-	 * @since 2.3
+	 * @since 2.4
 	 */
 	public int getRelevance() {
 		return resolution.getRelevance();
