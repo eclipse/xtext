@@ -7,16 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ResolutionBasedComputationResult implements ITypeComputationResult {
+public class ResolutionBasedComputationResult extends BaseTypeComputationResult {
 
 	private final XExpression expression;
 	private final ResolvedTypes resolution;
@@ -26,20 +29,27 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 		this.resolution = resolution;
 	}
 
-	public JvmTypeReference getActualExpressionType() {
-		return resolution.getActualType(expression);
+	public LightweightTypeReference internalGetActualExpressionType() {
+		return resolution.internalGetActualType(expression);
 	}
 
-	public JvmTypeReference getActualType(JvmIdentifiableElement element) {
-		return resolution.getActualType(element);
+	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement element) {
+		return resolution.internalGetActualType(element);
 	}
 
 	public XExpression getExpression() {
 		return expression;
 	}
 
-	public JvmTypeReference getExpectedExpressionType() {
-		return resolution.getExpectedType(expression);
+	public LightweightTypeReference internalGetExpectedExpressionType() {
+		return resolution.internalGetActualType(expression);
+	}
+	
+	public EnumSet<ConformanceHint> getConformanceHints() {
+		TypeData typeData = resolution.getTypeData(expression, false);
+		if (typeData == null)
+			return EnumSet.noneOf(ConformanceHint.class);
+		return typeData.getConformanceHints();
 	}
 
 }

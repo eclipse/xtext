@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -26,8 +27,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
-import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.ImmutableMap;
@@ -55,14 +56,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		@Override
 		protected JvmTypeReference doGetTypeReference() {
 			resolver.computeTypes(resolvedTypes, featureScopeSession, member);
-			return resolver.getComputedType(member);
+			return resolver.getComputedType(member).toTypeReference();
 		}
 	}
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-//	private Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
 	
 	@Override
 	public void initializeFrom(@NonNull EObject root) {
@@ -73,32 +72,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
+	@NonNull
 	protected JvmType getRoot() {
 		return (JvmType) super.getRoot();
 	}
 	
-	protected JvmTypeReference getComputedType(JvmMember member) {
+	protected LightweightTypeReference getComputedType(JvmMember member) {
 		throw new UnsupportedOperationException("member: " + member);
 	}
-//	
-//	@Override
-//	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
-//		JvmType root = getRoot();
-//		if (root instanceof JvmDeclaredType) {
-//			DeclaratorTypeArgumentCollector visitor = new DeclaratorTypeArgumentCollector();
-//			// TODO merge bound parameter things
-//			Map<JvmTypeParameter, JvmTypeReference> mapping = Maps.newHashMap();
-//			for(JvmTypeReference superType: ((JvmDeclaredType) root).getSuperTypes()) {
-//				mapping.putAll(visitor.getTypeParameterMapping(superType));
-//			}
-//			if (root instanceof JvmTypeParameterDeclarator) {
-//				
-//			}
-//			typeParameterMapping = mapping;
-//		} else {
-//			typeParameterMapping = Maps.newHashMap();			
-//		}
-//	}
 	
 	/**
 	 * Assign computed type references to the identifiable structural elements in the processed type.
@@ -158,11 +139,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return result;
 	}
 	
-	protected IJvmTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
+	protected DemandTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
 		return new DemandTypeReferenceProvider(member, resolvedTypes, featureScopeSession, this);
 	}
 	
 	@Override
+	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		prepare(resolvedTypes, session);
 		super.computeTypes(resolvedTypes, session);
@@ -170,6 +152,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
+	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmConstructor) {
 			_computeTypes(resolvedTypes, featureScopeSession, (JvmConstructor) element);
@@ -209,13 +192,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
-		StackedResolvedTypes childResolvedTypes = new StackedResolvedTypes(resolvedTypes);
+		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
 		JvmTypeReference superType = getExtendedClass(type);
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type, superType);
 		if (superType != null) {
 			childResolvedTypes.reassignType(superType.getType(), superType);
-			// We use reassignType to make sure that the following works
-			/*
+			/* 
+			 * We use reassignType to make sure that the following works:
+			 *
 			 * StringList extends AbstractList<String> {
 			 *   NestedIntList extends AbstractList<Integer> {
 			 *   }
@@ -223,7 +207,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			 * }
 			 */
 		}
-		childResolvedTypes.reassignType(type, superType);
+		childResolvedTypes.reassignType(type, getServices().getTypeReferences().createTypeRef(type));
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
 			computeTypes(childResolvedTypes, childSession, members.get(i));
@@ -239,7 +223,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType thisType,
 			JvmTypeReference superType) {
-		IFeatureScopeSession childSession = session;
+		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
 			builder.put(FeatureNames.THIS, thisType);

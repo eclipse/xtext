@@ -12,14 +12,16 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -29,27 +31,24 @@ import com.google.inject.Singleton;
 @Singleton
 public class BoundTypeArgumentMerger {
 	
-	@Inject
-	private TypeConformanceComputer conformanceComputer;
-	
 	@Nullable
-	public MergedBoundTypeArgument merge(Collection<BoundTypeArgument> allArguments) {
+	public LightweightMergedBoundTypeArgument merge(Collection<LightweightBoundTypeArgument> allArguments, TypeReferenceOwner owner) {
 		if (allArguments.isEmpty())
 			return null;
 		if (allArguments.size() == 1) {
-			BoundTypeArgument argument = Iterables.getOnlyElement(allArguments);
-			return new MergedBoundTypeArgument(argument.getTypeReference(), 
+			LightweightBoundTypeArgument argument = Iterables.getOnlyElement(allArguments);
+			return new LightweightMergedBoundTypeArgument(argument.getTypeReference(), 
 					argument.getDeclaredVariance().mergeDeclaredWithActual(argument.getActualVariance()));
 		}
-		List<JvmTypeReference> invariantTypes = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> invariantTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> invariantVariances = Lists.newArrayListWithCapacity(3);
-		List<JvmTypeReference> outTypes = Lists.newArrayListWithCapacity(3);
-		List<JvmTypeReference> constraintOutTypes = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> outTypes = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> constraintOutTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> outVariances = Lists.newArrayListWithCapacity(3);
-		List<JvmTypeReference> inTypes = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> inTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> inVariances = Lists.newArrayListWithCapacity(3);
 		Set<Object> seenOrigin = Sets.newHashSet();
-		for(BoundTypeArgument boundTypeArgument: allArguments) {
+		for(LightweightBoundTypeArgument boundTypeArgument: allArguments) {
 			Object origin = boundTypeArgument.getOrigin();
 			switch(boundTypeArgument.getDeclaredVariance()) {
 				case INVARIANT:
@@ -76,7 +75,7 @@ public class BoundTypeArgumentMerger {
 					break;
 			}
 		}
-		JvmTypeReference type = null;
+		LightweightTypeReference type = null;
 		VarianceInfo variance = null;
 		if (outTypes.isEmpty()) {
 			outTypes.addAll(constraintOutTypes);
@@ -92,11 +91,14 @@ public class BoundTypeArgumentMerger {
 				variance = VarianceInfo.IN.mergeInvariance(variance, inVariance);
 			}
 		} else if (!outTypes.isEmpty()) {
+			TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
 			type = conformanceComputer.getCommonSuperType(outTypes);
+			if (type == null)
+				throw new IllegalStateException("common super type may not be null");
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 			if (!inVariances.isEmpty()) {
-				JvmTypeReference inType = getMostSpecialType(inTypes);
-				boolean conformant = conformanceComputer.isConformant(type, inType, new TypeConformanceComputationArgument(false, true, false)).isConformant();
+				LightweightTypeReference inType = getMostSpecialType(inTypes);
+				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false));
 				VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 				variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
 			}
@@ -104,15 +106,15 @@ public class BoundTypeArgumentMerger {
 			type = getMostSpecialType(inTypes);
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
-		return new MergedBoundTypeArgument(type, variance);
+		return new LightweightMergedBoundTypeArgument(type, variance);
 	}
 
-	protected JvmTypeReference getMostSpecialType(List<JvmTypeReference> candidates) {
-		JvmTypeReference type;
+	protected LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates) {
+		LightweightTypeReference type;
 		type = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
-			JvmTypeReference candidate = candidates.get(i);
-			if (conformanceComputer.isConformant(type, candidate)) {
+			LightweightTypeReference candidate = candidates.get(i);
+			if (type.isAssignableFrom(candidate)) {
 				type = candidate;
 			}
 		}

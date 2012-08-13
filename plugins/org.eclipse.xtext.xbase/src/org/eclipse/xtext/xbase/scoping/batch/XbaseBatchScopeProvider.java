@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -50,7 +50,7 @@ public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatc
 			// TODO funnel through scope session
 			IFeatureScopeSession session = newSession(context.eResource());
 			session = session.recursiveInitialize(context);
-			return session.createFeatureCallScope(context, reference, IResolvedTypes.NULL);
+			return session.createFeatureCallScope(context, reference, LightweightResolvedTypes.NULL);
 		}
 		return delegateGetScope(context, reference);
 	}

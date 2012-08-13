@@ -8,31 +8,35 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
-import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor {
-	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
-			CommonTypeComputationServices services) {
-		super(typeParameterMapping, services);
+@NonNullByDefault
+public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor<Object> {
+	
+	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			TypeReferenceOwner owner) {
+		super(typeParameterMapping, owner);
 	}
 
 	@Override
-	public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
-			Set<JvmTypeParameter> param) {
-		if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-			XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-			result.setTypeProvider(reference.getTypeProvider());
-			return result;
-		}
-		return super.doVisitComputedTypeReference(reference, param);
+	public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
+			Object param) {
+		return reference.copyInto(getOwner());
 	}
+
+	@Override
+	protected Object createVisiting() {
+		return new Object();
+	}
+	
 }

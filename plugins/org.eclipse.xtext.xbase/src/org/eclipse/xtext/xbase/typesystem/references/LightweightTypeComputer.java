@@ -5,23 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.computation;
+package org.eclipse.xtext.xbase.typesystem.references;
+
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO document the available conformance hints
- * TODO JavaDoc, toString
  */
-public enum ConformanceHint {
-	EXPECTATION_INDEPENDENT,
-	SUBTYPE, 
-	PRIMITIVE_WIDENING, 
-	BOXING, 
-	UNBOXING,
-	RAWTYPE_CONVERSION,
-	DEMAND_CONVERSION,
-	INCOMPATIBLE,
-	UNCHECKED,
-	RAW,
-	MERGED
+public interface LightweightTypeComputer extends ITypeComputer {
+
+	void computeTypes(XExpression expression, LightweightTypeComputationState state);
+
+	JvmIdentifiableElement getRefinableCandidate(XExpression object, LightweightTypeComputationState state);
+	
 }

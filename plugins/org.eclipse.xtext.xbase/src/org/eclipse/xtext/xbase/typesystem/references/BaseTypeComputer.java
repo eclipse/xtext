@@ -1,0 +1,34 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.typesystem.references;
+
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public abstract class BaseTypeComputer implements LightweightTypeComputer {
+
+	public final void computeTypes(XExpression expression, ITypeComputationState state) {
+		computeTypes(expression, castToLightweightState(state));
+	}
+
+	public final JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
+		return getRefinableCandidate(object, castToLightweightState(state));
+	}
+
+	protected LightweightTypeComputationState castToLightweightState(ITypeComputationState state) {
+		if (state instanceof LightweightTypeComputationState) {
+			return (LightweightTypeComputationState) state;
+		}
+		throw new IllegalStateException("state is not a LightweightTypeComputationState");
+	}
+	
+}

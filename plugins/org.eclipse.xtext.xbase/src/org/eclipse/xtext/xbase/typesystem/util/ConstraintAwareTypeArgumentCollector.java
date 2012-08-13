@@ -9,16 +9,18 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.List;
 
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmMultiTypeReference;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.typesystem.util.TraversalData;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 
@@ -26,34 +28,37 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgumentCollector {
 
-	private final TypesFactory factory;
+	private TypeReferenceOwner owner;
 
-	public ConstraintAwareTypeArgumentCollector(TypesFactory factory) {
-		this.factory = factory;
+	public ConstraintAwareTypeArgumentCollector(TypeReferenceOwner owner) {
+		this.owner = owner;
 	}
 	
 	@Override
-	public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, TraversalData data) {
+	public Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference, LightweightTraversalData data) {
 		JvmType type = reference.getType();
-		if (type != null && !type.eIsProxy() && data.getVisited().add(type)) {
+		if (!type.eIsProxy() && data.getVisited().add(type)) {
 			if (type instanceof JvmTypeParameter) {
 				if (!data.getTypeParameterMapping().containsKey(type)) {
 					List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
-					List<JvmTypeReference> upperBounds = Lists.newArrayList();
+					List<LightweightTypeReference> upperBounds = Lists.newArrayList();
+					OwnedConverter converter = new OwnedConverter(owner);
 					for(JvmTypeConstraint constraint: constraints) {
-						if (constraint instanceof JvmUpperBound) {
-							visit(constraint.getTypeReference(), data);
-							upperBounds.add(EcoreUtil2.cloneIfContained(constraint.getTypeReference()));
+						if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
+							upperBounds.add(converter.toLightweightReference(constraint.getTypeReference()));
 						}
 					}
 					if (upperBounds.size() > 1) {
-						JvmMultiTypeReference boundReference = factory.createJvmMultiTypeReference();
-						boundReference.getReferences().addAll(upperBounds);
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, boundReference);
+						CompoundTypeReference result = new CompoundTypeReference(owner, false);
+						for(LightweightTypeReference upperBound: upperBounds) {
+							result.addComponent(upperBound);
+						}
+						data.getTypeParameterMapping().put((JvmTypeParameter) type, new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT));
 					} else if (upperBounds.size() == 1) {
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, upperBounds.get(0));
+						data.getTypeParameterMapping().put((JvmTypeParameter) type, new LightweightMergedBoundTypeArgument(upperBounds.get(0), VarianceInfo.INVARIANT));
 					} else {
 						return Boolean.FALSE;
 					}

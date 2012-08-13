@@ -14,9 +14,9 @@ package org.eclipse.xtext.xbase.typesystem.util;
 public enum BoundTypeArgumentSource {
 	/**
 	 * <pre>
-	 *  public <T> void method(List<? extends T> list) {
-	 *    List<String> someList = ..
-	 *    this.<CharSequence>method(someList);
+	 *  public &lt;T&gt; void method(List&lt;? extends T&gt; list) {
+	 *    List&lt;String&gt; someList = ..
+	 *    this.&lt;CharSequence&gt;method(someList);
 	 *  }
 	 * </pre>
 	 */
@@ -24,7 +24,7 @@ public enum BoundTypeArgumentSource {
 	
 	/**
 	 * <pre>
-	 *  public <T extends CharSequence> void method() {
+	 *  public &lt;T extends CharSequence&gt; void method() {
 	 *    this.method();
 	 *  }
 	 * </pre>
@@ -33,8 +33,8 @@ public enum BoundTypeArgumentSource {
 	
 	/**
 	 * <pre>
-	 *  CharIterable<E extends CharSequence> extends Iterable<E> {}
-	 *  public <T> void method(CharIterable<T>) {
+	 *  CharIterable&lt;E extends CharSequence&gt; extends Iterable&lt;E&gt; {}
+	 *  public &lt;T&gt; void method(CharIterable&lt;T&gt;) {
 	 *    this.method();
 	 *  }
 	 * </pre>
@@ -43,9 +43,9 @@ public enum BoundTypeArgumentSource {
 	
 	/**
 	 * <pre>
-	 *    public <T> List<T> createList(T... elements) {}
+	 *    public &lt;T&gt; List&lt;T&gt; createList(T... elements) {}
 	 *    
-	 *    val list = createList() // list<unbound/T>
+	 *    val list = createList() // list&lt;unbound/T&gt;
 	 *    list.add('string') // bind T to String
 	 * </pre>
 	 */
@@ -53,7 +53,7 @@ public enum BoundTypeArgumentSource {
 	
 	/**
 	 * <pre>
-	 *  public <T extends CharSequence> T method() {
+	 *  public &lt;T extends CharSequence&gt; T method() {
 	 *    String s = method();
 	 *  }
 	 * </pre>
@@ -62,11 +62,18 @@ public enum BoundTypeArgumentSource {
 	
 	/**
 	 * <pre>
-	 *  public <T> void method(List<T> list) {
-	 *    List<String> someList = ..
+	 *  public &lt;T&gt; void method(List&lt;T&gt; list) {
+	 *    List&lt;String&gt; someList = ..
 	 *    this.method(someList);
 	 *  }
 	 * </pre>
 	 */
-	INFERRED
+	INFERRED,
+	
+	/**
+	 * <pre>
+	 *  Used to indicate that a type argument was resolved
+	 * </pre>
+	 */
+	RESOLVED
 }

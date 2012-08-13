@@ -12,10 +12,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,12 +24,12 @@ import org.eclipse.xtext.xbase.XExpression;
 public class BucketedEObjectDescription extends EObjectDescription {
 
 	private final int bucketId;
-	private final JvmTypeReference receiverType;
+	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
-	private final Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping;
+	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
 
 	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			JvmTypeReference receiverType, Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping,
+			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
 			int bucketId) {
 		super(qualifiedName, element, null);
 		this.receiver = receiver;
@@ -38,7 +39,7 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	}
 	
 	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			JvmTypeReference receiverType, int bucketId) {
+			LightweightTypeReference receiverType, int bucketId) {
 		this(qualifiedName, element, receiver, receiverType, null, bucketId);
 	}
 	
@@ -58,7 +59,7 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return bucketId;
 	}
 
-	public JvmTypeReference getReceiverType() {
+	public LightweightTypeReference getReceiverType() {
 		return receiverType;
 	}
 
@@ -66,7 +67,7 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return receiver;
 	}
 
-	public Map<JvmTypeParameter, JvmTypeReference> getReceiverTypeParameterMapping() {
+	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {
 		return receiverTypeParameterMapping;
 	}
 
@@ -76,6 +77,15 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	
 	public boolean isStaticDescription() {
 		return receiverType == null;
+	}
+	
+	@Override
+	public String toString() {
+		EObject element = getEObjectOrProxy();
+		if (element instanceof JvmIdentifiableElement) {
+			return ((JvmIdentifiableElement) element).getIdentifier();
+		}
+		return String.valueOf(element);
 	}
 
 }

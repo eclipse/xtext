@@ -7,19 +7,25 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 
 	public NoExpectation(AbstractTypeComputationState state, boolean returnType) {
 		super(state, returnType);
 	}
 
-	public JvmTypeReference getExpectedType() {
+	@Nullable
+	public LightweightTypeReference internalGetExpectedType() {
 		return null;
 	}
 
@@ -30,5 +36,9 @@ public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 	@Override
 	public boolean isVoidTypeAllowed() {
 		return true;
+	}
+	
+	public LightweightTypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		return this;
 	}
 }

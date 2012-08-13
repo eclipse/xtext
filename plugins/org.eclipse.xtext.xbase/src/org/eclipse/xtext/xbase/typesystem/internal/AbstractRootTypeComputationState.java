@@ -10,13 +10,11 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -36,24 +34,23 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 		return computeTypes(rootExpression);
 	}
 	
-	@Nullable
 	protected abstract XExpression getRootExpression();
 	
 	@Override
-	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		return getResolvedTypes().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
+	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		return types.acceptType(getRootExpression(), expectation, type, returnType, hints);
 	}
 	
 	@Override
-	protected final List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
+	protected final List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
 		return getExpectations(actualState, true);
 	}
 	
 	@Override
-	protected final List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	protected final List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 		return getExpectations(actualState, false);
 	}
 	
-	protected abstract List<ITypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
+	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
 	
 }

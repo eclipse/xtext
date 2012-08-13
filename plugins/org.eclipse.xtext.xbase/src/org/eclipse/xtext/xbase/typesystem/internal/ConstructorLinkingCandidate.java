@@ -9,28 +9,27 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
+public class ConstructorLinkingCandidate extends AbstractLinkingCandidate<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
 
-	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, AbstractTypeComputationState state) {
+	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);
 	}
 
@@ -48,8 +47,8 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTyp
 	}
 	
 	@Override
-	protected List<JvmTypeReference> getTypeArguments() {
-		return getConstructorCall().getTypeArguments();
+	protected List<LightweightTypeReference> getExplicitTypeArguments() {
+		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
 	@Override
@@ -66,23 +65,4 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTyp
 		return Collections.emptyList();
 	}
 	
-	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getFeatureTypeParameterMapping() {
-		JvmDeclaredType createdType = getConstructor().getDeclaringType();
-		if (createdType instanceof JvmTypeParameterDeclarator) {
-			List<JvmTypeReference> typeArguments = getConstructorCall().getTypeArguments();
-			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
-			if (!typeArguments.isEmpty()) {
-				int max = Math.min(typeArguments.size(), typeParameters.size());
-				Map<JvmTypeParameter, JvmTypeReference> result = Maps.newHashMapWithExpectedSize(max);
-				for(int i = 0; i < max; i++) {
-					result.put(typeParameters.get(i), typeArguments.get(i));
-				}
-				// TODO computed type references for the remaining type parameters
-				return result;
-			}
-		}
-		return super.getFeatureTypeParameterMapping();
-	}
-
 }

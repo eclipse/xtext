@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noimplement This interface is not intended to be implemented by clients.
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public interface ITypeExpectation {
 
 	void acceptActualType(JvmTypeReference type, ConformanceHint hint);
@@ -24,6 +28,7 @@ public interface ITypeExpectation {
 	 * may want to check {@link #isNoTypeExpectation()} or {@link #isVoidTypeAllowed()}.
 	 * @return the expected type. This may be <code>null</code>. 
 	 */
+	@Nullable
 	JvmTypeReference getExpectedType();
 	
 	/**

@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExpectation {
 
 	private final boolean returnType;
@@ -22,8 +24,12 @@ public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExp
 		this.returnType = returnType;
 	}
 
-	public void acceptActualType(JvmTypeReference type, ConformanceHint conformanceHint) {
-		getState().acceptType(this, type, conformanceHint, returnType);
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		getState().acceptType(getResolvedTypes(), this, type, returnType, hints);
+	}
+	
+	protected boolean isReturnType() {
+		return returnType;
 	}
 
 }

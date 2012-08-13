@@ -7,54 +7,72 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import java.util.EnumSet;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class TypeData {
 	private final XExpression expression;
-	private final ITypeExpectation expectation;
-	private final JvmTypeReference type;
-	private final ConformanceHint conformanceHint;
+	private final LightweightTypeExpectation expectation;
+	private final LightweightTypeReference type;
+	private final EnumSet<ConformanceHint> hints;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
-			ITypeExpectation expectation, 
-			JvmTypeReference type,
-			ConformanceHint conformanceHint,
+			LightweightTypeExpectation expectation, 
+			LightweightTypeReference type,
+			EnumSet<ConformanceHint> hints,
 			boolean returnType) {
+		if (!hints.contains(ConformanceHint.CHECKED) && !hints.contains(ConformanceHint.UNCHECKED)) {
+			throw new IllegalArgumentException("Invalid hints: " + hints);
+		}
 		this.expression = expression;
 		this.expectation = expectation;
 		this.type = type;
-		this.conformanceHint = conformanceHint;
+		this.hints = hints;
 		this.returnType = returnType;
+	}
+	
+	public TypeData copyInto(TypeReferenceOwner owner) {
+		if (isOwnedBy(owner))
+			return this;
+		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), hints.clone(), returnType);
+	}
+	
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
+		return expectation.isOwnedBy(owner) && type.isOwnedBy(owner);
 	}
 
 	@Override
 	public String toString() {
 		return "TypeData [expectation=" + expectation + ", type=" + type
-				+ ", conformanceHint=" + conformanceHint + ", returnType=" + returnType + "]";
+				+ ", conformanceHint=" + hints + ", returnType=" + returnType + "]";
 	}
 	
-	public ITypeExpectation getExpectation() {
+	public LightweightTypeExpectation getExpectation() {
 		return expectation;
 	}
 	
-	public ConformanceHint getConformanceHint() {
-		return conformanceHint;
+	public EnumSet<ConformanceHint> getConformanceHints() {
+		return hints;
 	}
 	
 	public XExpression getExpression() {
 		return expression;
 	}
 	
-	public JvmTypeReference getActualType() {
+	public LightweightTypeReference getActualType() {
 		return type;
 	}
 	

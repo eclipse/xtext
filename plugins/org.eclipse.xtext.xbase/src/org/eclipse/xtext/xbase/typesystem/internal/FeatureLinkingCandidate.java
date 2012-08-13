@@ -11,74 +11,48 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
-			AbstractTypeComputationState state) {
+			ExpressionTypeComputationState state) {
 		super(featureCall, description, state);
 	}
 
-	protected JvmTypeReference getReceiverType() {
-		JvmTypeReference receiverType = null;
+	protected LightweightTypeReference getReceiverType() {
+		LightweightTypeReference receiverType = null;
 		if (getDescription() instanceof BucketedEObjectDescription) {
 			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
 		}
 		return receiverType;
-	}
-	
-	@Override
-	public int compareTo(IFeatureLinkingCandidate right) {
-		int result = super.compareTo(right);
-		if (result == 0) {
-			return result;
-		}
-		return result;
-	}
-	
-	@Override
-	protected int compareByArityWith(IFeatureLinkingCandidate right) {
-		int result = super.compareByArityWith(right);
-		if (result == 0) {
-			// TODO sort according to type compatibility
-			result = favorInstanceOverExtensions(right);
-			if (result != 0)
-				return result;
-			if (right.getDeclaredParameters().size() > getDeclaredParameters().size())
-				return 1;
-		}
-		return result;
-	}
-	
-	private int favorInstanceOverExtensions(IFeatureLinkingCandidate right) {
-		if (!isStaticOrExtension(this) && isStaticOrExtension(right))
-			return -1;
-		if (isStaticOrExtension(this) == isStaticOrExtension(right))
-			return 0;
-		return 1;
-	}
-	
-	protected boolean isStaticOrExtension(IFeatureLinkingCandidate candidate) {
-		return candidate.isStatic() || candidate.isExtension();
 	}
 	
 	public boolean isExtension() {
@@ -95,6 +69,22 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 			return ((BucketedEObjectDescription) description).isStaticDescription();
 		}
 		return false;
+	}
+	
+	@Override
+	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
+		super.resolveAgainstActualType(declaredType, actualType, state);
+		if (!isStatic() && !isExtension()) {
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner()) {
+				@NonNullByDefault
+				@Override
+				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
+					return new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
+				}
+			};
+			collector.processPairedReferences(declaredType, actualType);
+		}
 	}
 
 	@Override
@@ -114,28 +104,34 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected List<JvmTypeReference> getTypeArguments() {
-		return getFeatureCall().getTypeArguments();
+	protected List<LightweightTypeReference> getExplicitTypeArguments() {
+		return Lists.transform(getFeatureCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
 	@Override
-	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, LightweightTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
-			JvmTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(getState().getResolvedTypes());
-			resolvedTypes.acceptType(argument, null, receiverType, ConformanceHint.UNCHECKED, false);
+			if (!(argumentState instanceof AbstractTypeComputationState))
+				throw new IllegalArgumentException("argumentState was " + argumentState);
+			AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
+			LightweightTypeReference receiverType = getReceiverType();
+			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
+			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
+			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
+			// TODO should we use the result of #acceptType?
+			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
 			if (declaredType != null)
-				resolveAgainstActualType(declaredType, receiverType);
-			return resolvedTypes;
+				resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 		} else {
-			return super.resolveArgumentType(argument, declaredType, argumentState);
+			super.resolveArgumentType(argument, declaredType, argumentState);
 		}
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getDeclaratorParameterMapping() {
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		if (getDescription() instanceof BucketedEObjectDescription) {
-			Map<JvmTypeParameter, JvmTypeReference> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
 			if (result != null)
 				return result;
 		}
@@ -143,28 +139,31 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getFeatureTypeParameterMapping() {
-		JvmIdentifiableElement feature = getFeature();
-		if (feature instanceof JvmTypeParameterDeclarator) {
-			List<JvmTypeReference> typeArguments = getFeatureCall().getTypeArguments();
-			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
-			if (!typeArguments.isEmpty()) {
-				int max = Math.min(typeArguments.size(), typeParameters.size());
-				Map<JvmTypeParameter, JvmTypeReference> result = Maps.newHashMapWithExpectedSize(max);
-				for(int i = 0; i < max; i++) {
-					result.put(typeParameters.get(i), typeArguments.get(i));
+	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
+		if (feature instanceof JvmConstructor) {
+			return getState().getResolvedTypes().getConverter().toLightweightReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
+		}
+		/*
+		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 
+		 * the static type of the expression on which getClass is called. For example, 
+		 * no cast is required in this code fragment:
+		 *   Number n = 0;
+		 *   Class<? extends Number> c = n.getClass();
+		 */
+		if (feature instanceof JvmOperation && feature.getSimpleName().equals("getClass")) {
+			JvmOperation getClassOperation = (JvmOperation) feature;
+			if (getClassOperation.getParameters().isEmpty() && "java.lang.Object".equals(getClassOperation.getDeclaringType().getIdentifier())) {
+				LightweightTypeReference receiverType = getReceiverType();
+				List<JvmType> rawTypes = receiverType.getRawTypes();
+				if (rawTypes.isEmpty()) {
+					return super.getDeclaredType(feature);
 				}
-				// TODO computed type references for the remaining type parameters
+				ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), getClassOperation.getReturnType().getType());
+				WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
+				wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
+				result.addTypeArgument(wildcard);
 				return result;
 			}
-		}
-		return super.getFeatureTypeParameterMapping();
-	}
-	
-	@Override
-	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement feature) {
-		if (feature instanceof JvmConstructor) {
-			return getState().getTypeReferences().getTypeForName(Void.TYPE, feature);
 		}
 		return super.getDeclaredType(feature);
 	}

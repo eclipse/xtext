@@ -18,13 +18,15 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 
 import com.google.common.collect.Iterables;
@@ -38,10 +40,10 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 
 	private final TypeBucket bucket;
 	private final OperatorMapping operatorMapping;
-	private final JvmTypeReference receiverType;
+	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
 
-	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, JvmTypeReference receiverType, XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
+	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
 		super(parent, session, featureCall);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
@@ -51,34 +53,52 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 	
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		Set<JvmIdentifiableElement> allFeatures = Sets.newHashSet();
-		String simpleName = getFeatureName(name);
-		for(JvmType type: bucket.getTypes()) {
-			if (type instanceof JvmDeclaredType) {
-				Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-				Iterables.addAll(allFeatures, features);
+		final Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
+		processFeatureNames(name, new NameAcceptor() {
+			public void accept(String simpleName, int order) {
+				for(JvmType type: bucket.getTypes()) {
+					if (type instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
+						Iterables.addAll(allFeatures, features);
+					}
+				}
 			}
-		}
+		});
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
 		for(JvmIdentifiableElement feature: allFeatures) {
 			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 		}
 		return allDescriptions;
 	}
+
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = Collections.emptyMap();
+		if (receiverType != null) {
+			receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		}
+		return receiverTypeParameterMapping;
+	}
 	
 	@Override
-	protected String getFeatureName(QualifiedName name) {
+	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		QualifiedName methodName = operatorMapping.getMethodName(name);
-		String simpleName = methodName == null ? name.toString() : methodName.toString();
-		return simpleName;
+		if (methodName != null) {
+			acceptor.accept(methodName.toString(), 2);
+		} else {
+			super.processFeatureNames(name, acceptor);
+			String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedGetter, 2);
+			String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedBooleanGetter, 2);
+		}
 	}
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		Set<JvmIdentifiableElement> allFeatures = Sets.newHashSet();
+		Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
 		for(JvmType type: bucket.getTypes()) {
 			if (type instanceof JvmDeclaredType) {
 				Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
@@ -88,7 +108,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
 		for(JvmIdentifiableElement feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
 			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
