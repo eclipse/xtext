@@ -89,6 +89,20 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			super.completeMember_Name(model, assignment, context, acceptor);
 		}
 	}
+	
+	@Override
+	public void completeMember_Type(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, XtendPackage.Literals.XTEND_FIELD__TYPE, true,
+				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+	}
+	
+	@Override
+	public void completeMember_ReturnType(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE, true,
+				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+	}
 
 	protected Set<String> getAllKeywords() {
 		return GrammarUtil.getAllKeywords(grammarAccess.getGrammar());
