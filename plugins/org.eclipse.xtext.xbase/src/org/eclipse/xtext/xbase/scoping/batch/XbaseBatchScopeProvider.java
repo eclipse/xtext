@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,17 +25,16 @@ import com.google.inject.name.Named;
 public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatchScopeProvider {
 
 	@Inject
-	private XbaseScopeSessionProvider scopeSession;
+	private IFeatureScopeSession rootSession;
+	
+	@Inject
+	private ImplicitlyImportedTypes implicitlyImportedTypes;
 	
 	@Inject
 	private TypeScopeProvider typeScopeProvider;
 	
 	@Inject
-	private FeatureScopeProvider featureScopeProvider;
-	
-	@Inject
-	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
-	private IScopeProvider delegate;
+	private FeatureScopes featureScopeProvider;
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -47,33 +46,19 @@ public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatc
 			return typeScopeProvider.createTypeScope(parent, context, reference);
 		}
 		if (isFeatureCallScope(reference)) {
-			// TODO funnel through scope session
+			// TODO use a valid instance of resolved types
 			IFeatureScopeSession session = newSession(context.eResource());
-			session = session.recursiveInitialize(context);
-			return session.createFeatureCallScope(context, reference, LightweightResolvedTypes.NULL);
+			return session.getScope(context, reference, LightweightResolvedTypes.NULL);
 		}
 		return delegateGetScope(context, reference);
 	}
 	
 	public IFeatureScopeSession newSession(Resource context) {
-		return scopeSession.withContext(context);
+		List<JvmType> literalClasses = implicitlyImportedTypes.getLiteralClasses(context);
+		List<JvmType> extensionClasses = implicitlyImportedTypes.getExtensionClasses(context);
+		return rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
 	}
 	
-	@Override
-	protected IScope delegateGetScope(EObject context, EReference reference) {
-		return getDelegate().getScope(context, reference);
-	}
-
-	@Override
-	public void setDelegate(IScopeProvider delegate) {
-		this.delegate = delegate;
-	}
-
-	@Override
-	public IScopeProvider getDelegate() {
-		return delegate;
-	}
-
 	protected boolean isTypeScope(EReference reference) {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}

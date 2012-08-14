@@ -9,8 +9,10 @@ import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
+ * A type bucket that was produced from the synonym of a type.
+ * It tracks the conformance hints for a synonym, e.g. boxing or unboxing information.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 @SuppressWarnings("all")

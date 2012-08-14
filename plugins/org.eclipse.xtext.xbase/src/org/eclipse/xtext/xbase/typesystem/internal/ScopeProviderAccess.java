@@ -26,35 +26,28 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.scoping.batch.FeatureScopeProvider;
-import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.Inject;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API 
  * TODO JavaDoc, toString
  */
 public class ScopeProviderAccess {
 
-	@Inject 
+	@Inject
 	private LinkingHelper linkingHelper;
-	
+
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-	
-	@Inject
-	private FeatureScopeProvider featureScopeProvider;
-	
-	@Inject
-	private IBatchScopeProvider constructorScopeProvider;
-	
+
 	@Inject
 	private LazyURIEncoder encoder;
-	
-	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes types) throws IllegalNodeException {
+
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference,
+			IFeatureScopeSession session, LightweightResolvedTypes types) throws IllegalNodeException {
 		EObject toBeLinked = (EObject) expression.eGet(reference, false);
 		if (toBeLinked == null) {
 			return Collections.emptyList();
@@ -67,17 +60,17 @@ public class ScopeProviderAccess {
 		if (encoder.isCrossLinkFragment(expression.eResource(), fragment)) {
 			List<String> split = Strings.split(fragment, LazyURIEncoder.SEP);
 			INode compositeNode = NodeModelUtils.getNode(expression);
-			if (compositeNode==null)
+			if (compositeNode == null)
 				throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
 			INode node = encoder.getNode(compositeNode, split.get(3));
 			final EClass requiredType = reference.getEReferenceType();
 			if (requiredType == null)
 				return Collections.emptyList();
-		
+
 			final String crossRefString = linkingHelper.getCrossRefNodeAsString(node, true);
 			if (crossRefString != null && !crossRefString.equals("")) {
 				final IScope scope = session.getScope(expression, reference, types);
-				QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
+				QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
 				Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
 				return descriptions;
 			}

@@ -9,21 +9,18 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FeatureScopeSessionWithDynamicExtensions extends FeatureScopeSession {
+public class FeatureScopeSessionWithDynamicExtensions extends AbstractNestedFeatureScopeSession {
 
 	private final List<XExpression> extensionProviders;
-	private final JvmIdentifiableElement baseElement;
 
 	public FeatureScopeSessionWithDynamicExtensions(AbstractFeatureScopeSession parent,
-			FeatureScopeProvider featureScopeProvider, JvmIdentifiableElement baseElement, List<XExpression> extensionProviders) {
+			FeatureScopes featureScopeProvider, List<XExpression> extensionProviders) {
 		super(parent, featureScopeProvider);
-		this.baseElement = baseElement;
 		this.extensionProviders = extensionProviders;
 	}
 

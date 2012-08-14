@@ -19,6 +19,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
+ * A description that contains some more information, e.g. on the bound
+ * type parameters, the receiver or its type.
+ * 
+ * The bucket concept allows to properly identify ambiguous descriptions, 
+ * e.g. if two descriptions from the very same bucket are matching with equal
+ * confidence, the link is ambiguous and should be indicated as such.
+ * 
+ * A possible scenario is a conflict in the static imports where
+ * two imported types have the very same static method signature, e.g.
+ * {@code main(String[])}.
+ * If the client tries to invoke that method without an explicitly declared receiver,
+ * it should be flagged as ambiguous.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class BucketedEObjectDescription extends EObjectDescription {

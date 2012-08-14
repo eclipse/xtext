@@ -21,11 +21,11 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class FeatureScopeSessionWithLocalElements extends FeatureScopeSession {
+public class FeatureScopeSessionWithLocalElements extends AbstractNestedFeatureScopeSession {
 
 	private final Map<QualifiedName, JvmIdentifiableElement> map;
 
-	public FeatureScopeSessionWithLocalElements(AbstractFeatureScopeSession parent, FeatureScopeProvider featureScopeProvider, Map<QualifiedName, JvmIdentifiableElement> map) {
+	public FeatureScopeSessionWithLocalElements(AbstractFeatureScopeSession parent, FeatureScopes featureScopeProvider, Map<QualifiedName, JvmIdentifiableElement> map) {
 		super(parent, featureScopeProvider);
 		this.map = map;
 	}

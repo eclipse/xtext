@@ -18,13 +18,13 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class FeatureScopeSessionWithStaticTypes extends FeatureScopeSession {
+public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureScopeSession {
 
 	private final List<JvmType> staticFeatureProviders;
 	private final List<JvmType> extensionProviders;
 
 	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
-			FeatureScopeProvider featureScopeProvider, List<JvmType> staticFeatureProviders,
+			FeatureScopes featureScopeProvider, List<JvmType> staticFeatureProviders,
 			List<JvmType> extensionProviders) {
 		super(featureScopeSession, featureScopeProvider);
 		this.staticFeatureProviders = staticFeatureProviders;
@@ -33,15 +33,15 @@ public class FeatureScopeSessionWithStaticTypes extends FeatureScopeSession {
 	
 	@Override
 	public List<TypeBucket> getStaticallyImportedTypes() {
-		return createTypeBucket(staticFeatureProviders, super.getStaticallyImportedTypes());
+		return concatTypeBuckets(staticFeatureProviders, super.getStaticallyImportedTypes());
 	}
 	
 	@Override
 	public List<TypeBucket> getStaticallyImportedExtensionTypes() {
-		return createTypeBucket(extensionProviders, super.getStaticallyImportedExtensionTypes());
+		return concatTypeBuckets(extensionProviders, super.getStaticallyImportedExtensionTypes());
 	}
 
-	protected List<TypeBucket> createTypeBucket(List<JvmType> types, List<TypeBucket> parentResult) {
+	protected List<TypeBucket> concatTypeBuckets(List<JvmType> types, List<TypeBucket> parentResult) {
 		if (types.isEmpty()) {
 			return parentResult;
 		}

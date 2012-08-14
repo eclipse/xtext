@@ -25,7 +25,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.scoping.batch.FeatureNames;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
@@ -226,11 +226,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
-			builder.put(FeatureNames.THIS, thisType);
-			builder.put(FeatureNames.SUPER, superType.getType());
+			builder.put(IFeatureNames.THIS, thisType);
+			builder.put(IFeatureNames.SUPER, superType.getType());
 			childSession = session.addLocalElements(builder.build());
 		} else {
-			childSession = session.addLocalElement(FeatureNames.THIS, thisType);
+			childSession = session.addLocalElement(IFeatureNames.THIS, thisType);
 		}
 		return childSession;
 	}

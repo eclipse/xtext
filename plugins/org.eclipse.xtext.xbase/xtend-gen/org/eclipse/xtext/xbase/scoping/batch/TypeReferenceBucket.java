@@ -6,8 +6,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 /**
+ * A type bucket collects a number of types that originate in the
+ * very same source, e.g. all implicit receiver types are contained
+ * in the very same bucket.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 @SuppressWarnings("all")
