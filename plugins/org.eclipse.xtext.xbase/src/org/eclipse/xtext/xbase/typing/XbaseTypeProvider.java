@@ -1050,7 +1050,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			arrayType.setComponentType(result);
 			result = arrayType;
 		}
-		return getTypeReferences().getTypeForName(Class.class, object, typeRef);
+		return getTypeReferences().getTypeForName(Class.class, object, result);
 	}
 
 	/**
