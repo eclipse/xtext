@@ -7,15 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import org.apache.log4j.Logger;
 import org.eclipse.jdt.core.Flags;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
-import org.eclipse.jdt.internal.core.JavaProject;
-import org.eclipse.jdt.internal.core.NameLookup;
-import org.eclipse.jdt.internal.core.NameLookup.Answer;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter;
 
 /**
@@ -218,36 +211,6 @@ public final class TypeMatchFilters {
 		}
 	}
 	
-	/**
-	 * @since 2.4
-	 */
-	public static class NonRestrictedAccess implements ITypesProposalProvider.Filter {
-		
-		private final static Logger log = Logger.getLogger(TypeMatchFilters.NonRestrictedAccess.class);
-		
-		private NameLookup nameLookup;
-
-		public NonRestrictedAccess(IJavaProject project) {
-			try {
-				this.nameLookup = ((JavaProject) project).newNameLookup(new ICompilationUnit[0]);
-			} catch (JavaModelException e) {
-				log.error(e);
-			}
-		}
-
-		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
-				String path) {
-			final String name = new String(packageName) + "." + new String(simpleTypeName);
-			Answer answer = nameLookup.findType(name, false, NameLookup.ACCEPT_ALL, true);
-			return answer != null && !answer.ignoreIfBetter();
-		}
-
-		public int getSearchFor() {
-			return IJavaSearchConstants.TYPE;
-		}
-		
-	}
-
 	public static class IsPublic implements ITypesProposalProvider.Filter {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
