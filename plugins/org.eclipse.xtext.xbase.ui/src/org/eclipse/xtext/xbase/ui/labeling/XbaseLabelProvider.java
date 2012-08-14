@@ -127,7 +127,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 			if (returnType instanceof JvmAnyTypeReference) {
 				returnTypeString = "Object";
 			} else {
-				returnTypeString = returnType.getSimpleName();
+				returnTypeString = uiStrings.referenceToString(returnType, "Object");
 			}
 		}
 		return new StyledString(simpleName + uiStrings.parameters(element)).append(new StyledString(" : " + returnTypeString,StyledString.DECORATIONS_STYLER));
