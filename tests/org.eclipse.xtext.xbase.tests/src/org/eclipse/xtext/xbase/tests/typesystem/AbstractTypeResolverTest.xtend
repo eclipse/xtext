@@ -960,7 +960,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ var it = newArrayList('').map(s|1).toList() it.map(i|i+1) }".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore("Implicit receiver")
 	@Test def void testFeatureCall_13_3() throws Exception {
 		"{ var it = newArrayList('').map(s|1).toList() map(i|i+1) }".resolvesTo("List<Integer>")
 	}
@@ -969,7 +968,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ var it = newArrayList('').map(s|1).toList() it }".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore("Implicit receiver")
 	@Test def void testFeatureCall_13_5() throws Exception {
 		"{ var java.util.List<? extends Integer> it = null map(i|i+1) }".resolvesTo("List<Integer>")
 	}
@@ -1551,12 +1549,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ var java.util.List<? super Integer> it = null subList(0, 1) }".resolvesTo("List<? super Integer>")
 	}
 	
-	@Ignore("Implicit receiver")
 	@Test def void testImplicitReceiverBounds_07() throws Exception {
 		"{ var java.util.List<Integer> it = null last }".resolvesTo("Integer")
 	}
 	
-	@Ignore("Implicit receiver")
 	@Test def void testImplicitReceiverBounds_08() throws Exception {
 		"{ var java.util.List<? extends Integer> it = null last }".resolvesTo("Integer")
 	}

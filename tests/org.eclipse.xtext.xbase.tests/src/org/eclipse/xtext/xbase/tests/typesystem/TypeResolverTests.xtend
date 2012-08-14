@@ -1049,6 +1049,12 @@ class IsolationTest extends AbstractBatchTypeResolverTest {
 		fail
 	}
 	
+	@Ignore("wrong expectation")
+	@Test
+	override testFeatureCall_13_5() throws Exception {
+		fail
+	}
+	
 	@Ignore("error candidates")
 	@Test
 	override testFeatureCall_17_b() throws Exception {
@@ -1146,6 +1152,12 @@ class InvariantCheckingIsolationTest extends AbstractBatchTypeResolverTest {
 	@Ignore("error candidates")
 	@Test
 	override testFeatureCall_07_03() throws Exception {
+		fail
+	}
+	
+	@Ignore("wrong expectation")
+	@Test
+	override testFeatureCall_13_5() throws Exception {
 		fail
 	}
 	

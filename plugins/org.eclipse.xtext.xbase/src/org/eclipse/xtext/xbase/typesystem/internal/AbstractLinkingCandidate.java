@@ -405,19 +405,19 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return arguments;
 	}
 	
-	public int compareTo(LinkingCandidate right) {
+	public boolean isPreferredOver(LinkingCandidate right) {
 		int arityCompareResult = compareByArityWith(right);
 		if (arityCompareResult != 0)
-			return arityCompareResult;
+			return arityCompareResult <= 0;
 		int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
 		if (typeArityCompareResult != 0)
-			return typeArityCompareResult;
+			return typeArityCompareResult <= 0;
 		if (right instanceof AbstractLinkingCandidate<?>) {
 			int argumentTypeCompareResult = compareByArgumentTypes((AbstractLinkingCandidate<?>) right);
 			if (argumentTypeCompareResult != 0)
-				return argumentTypeCompareResult;
+				return argumentTypeCompareResult <= 0;
 		}
-		return 0;
+		return true;
 	}
 	
 	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {

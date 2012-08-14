@@ -572,7 +572,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		Candidate result = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
 			Candidate candidate = candidates.get(i);
-			if (result.compareTo(candidate) > 0)
+			if (!result.isPreferredOver(candidate))
 				result = candidate;
 		}
 		return result;
