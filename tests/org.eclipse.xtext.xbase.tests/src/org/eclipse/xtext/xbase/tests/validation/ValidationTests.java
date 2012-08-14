@@ -746,4 +746,9 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
+	@Test public void testTypeLiteralVoidArray() throws Exception {
+		XExpression expression = expression("typeof(void[])");
+		helper.assertError(expression, XTYPE_LITERAL, INVALID_TYPE);
+	}
+	
 }

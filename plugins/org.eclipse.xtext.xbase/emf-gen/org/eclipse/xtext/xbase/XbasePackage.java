@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtext.xbase;
 
@@ -1258,13 +1257,22 @@ public interface XbasePackage extends EPackage
 	int XTYPE_LITERAL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Array Dimensions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTYPE_LITERAL__ARRAY_DIMENSIONS = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>XType Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTYPE_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+	int XTYPE_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.
@@ -2357,6 +2365,17 @@ public interface XbasePackage extends EPackage
 	EReference getXTypeLiteral_Type();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.xbase.XTypeLiteral#getArrayDimensions <em>Array Dimensions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Array Dimensions</em>'.
+	 * @see org.eclipse.xtext.xbase.XTypeLiteral#getArrayDimensions()
+	 * @see #getXTypeLiteral()
+	 * @generated
+	 */
+	EAttribute getXTypeLiteral_ArrayDimensions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XInstanceOfExpression <em>XInstance Of Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3213,6 +3232,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XTYPE_LITERAL__TYPE = eINSTANCE.getXTypeLiteral_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Dimensions</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTYPE_LITERAL__ARRAY_DIMENSIONS = eINSTANCE.getXTypeLiteral_ArrayDimensions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.

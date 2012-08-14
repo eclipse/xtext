@@ -1261,17 +1261,10 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     type=[JvmType|QualifiedName]
+	 *     (type=[JvmType|QualifiedName] arrayDimensions+=ArrayBrackets*)
 	 */
 	protected void sequence_XTypeLiteral(EObject context, XTypeLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XTYPE_LITERAL__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XTYPE_LITERAL__TYPE));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_3_0_1(), semanticObject.getType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

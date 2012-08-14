@@ -28,9 +28,21 @@ public abstract class AbstractXtypeSyntacticSequencer extends AbstractSyntacticS
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getArrayBracketsRule())
+			return getArrayBracketsToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * ArrayBrackets :
+	 * 	'[' ']'
+	 * ;
+	 */
+	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "[]";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

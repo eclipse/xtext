@@ -147,6 +147,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="XWhileExpression" eSuperTypes="#//XAbstractWhileExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="XTypeLiteral" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrayDimensions" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XInstanceOfExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"

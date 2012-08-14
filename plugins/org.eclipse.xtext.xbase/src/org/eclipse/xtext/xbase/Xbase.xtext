@@ -251,7 +251,7 @@ XStringLiteral returns XExpression:
 	{XStringLiteral} value=STRING;
 
 XTypeLiteral returns XExpression :
-	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] ')'
+	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] (arrayDimensions+=ArrayBrackets)* ')'
 ;
 
 XThrowExpression returns XExpression :

@@ -982,7 +982,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTypeLiteral returns XExpression:
-	//	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] ")";
+	//	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] arrayDimensions+=ArrayBrackets* ")";
 	public XbaseGrammarAccess.XTypeLiteralElements getXTypeLiteralAccess() {
 		return gaXbase.getXTypeLiteralAccess();
 	}
@@ -1071,13 +1071,24 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//JvmTypeReference:
-	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
+	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
+	//	XFunctionTypeRef;
 	public XtypeGrammarAccess.JvmTypeReferenceElements getJvmTypeReferenceAccess() {
 		return gaXbase.getJvmTypeReferenceAccess();
 	}
 	
 	public ParserRule getJvmTypeReferenceRule() {
 		return getJvmTypeReferenceAccess().getRule();
+	}
+
+	//ArrayBrackets:
+	//	"[" "]";
+	public XtypeGrammarAccess.ArrayBracketsElements getArrayBracketsAccess() {
+		return gaXbase.getArrayBracketsAccess();
+	}
+	
+	public ParserRule getArrayBracketsRule() {
+		return getArrayBracketsAccess().getRule();
 	}
 
 	//XFunctionTypeRef:

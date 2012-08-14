@@ -11723,11 +11723,11 @@ protected class XStringLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule XTypeLiteral ****************
  *
  * XTypeLiteral returns XExpression:
- * 	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] ")";
+ * 	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] arrayDimensions+=ArrayBrackets* ")";
  *
  **/
 
-// {XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] ")"
+// {XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] arrayDimensions+=ArrayBrackets* ")"
 protected class XTypeLiteral_Group extends GroupToken {
 	
 	public XTypeLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11742,7 +11742,7 @@ protected class XTypeLiteral_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XTypeLiteral_RightParenthesisKeyword_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XTypeLiteral_RightParenthesisKeyword_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -11863,22 +11863,58 @@ protected class XTypeLiteral_TypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// ")"
-protected class XTypeLiteral_RightParenthesisKeyword_4 extends KeywordToken  {
+// arrayDimensions+=ArrayBrackets*
+protected class XTypeLiteral_ArrayDimensionsAssignment_4 extends AssignmentToken  {
 	
-	public XTypeLiteral_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XTypeLiteral_ArrayDimensionsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_4();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXTypeLiteralAccess().getArrayDimensionsAssignment_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XTypeLiteral_TypeAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XTypeLiteral_ArrayDimensionsAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XTypeLiteral_TypeAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("arrayDimensions",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("arrayDimensions");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXTypeLiteralAccess().getArrayDimensionsArrayBracketsParserRuleCall_4_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getXTypeLiteralAccess().getArrayDimensionsArrayBracketsParserRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ")"
+protected class XTypeLiteral_RightParenthesisKeyword_5 extends KeywordToken  {
+	
+	public XTypeLiteral_RightParenthesisKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XTypeLiteral_ArrayDimensionsAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XTypeLiteral_TypeAssignment_3(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -12773,11 +12809,13 @@ protected class XCatchClause_ExpressionAssignment_4 extends AssignmentToken  {
 /************ begin Rule JvmTypeReference ****************
  *
  * JvmTypeReference:
- * 	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
+ * 	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
+ * 	XFunctionTypeRef;
  *
  **/
 
-// JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef
+// JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
+// XFunctionTypeRef
 protected class JvmTypeReference_Alternatives extends AlternativesToken {
 
 	public JvmTypeReference_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12809,7 +12847,7 @@ protected class JvmTypeReference_Alternatives extends AlternativesToken {
 
 }
 
-// JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+// JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 protected class JvmTypeReference_Group_0 extends GroupToken {
 	
 	public JvmTypeReference_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12876,7 +12914,7 @@ protected class JvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0
 	}	
 }
 
-// => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")*
+// => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 protected class JvmTypeReference_Group_0_1 extends GroupToken {
 	
 	public JvmTypeReference_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12905,7 +12943,7 @@ protected class JvmTypeReference_Group_0_1 extends GroupToken {
 
 }
 
-// {JvmGenericArrayTypeReference.componentType=current} "[" "]"
+// {JvmGenericArrayTypeReference.componentType=current} ArrayBrackets
 protected class JvmTypeReference_Group_0_1_0 extends GroupToken {
 	
 	public JvmTypeReference_Group_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12920,7 +12958,7 @@ protected class JvmTypeReference_Group_0_1_0 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeReference_RightSquareBracketKeyword_0_1_0_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new JvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -12957,44 +12995,22 @@ protected class JvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction
 	}
 }
 
-// "["
-protected class JvmTypeReference_LeftSquareBracketKeyword_0_1_0_1 extends KeywordToken  {
-	
-	public JvmTypeReference_LeftSquareBracketKeyword_0_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// ArrayBrackets
+protected class JvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1 extends UnassignedTextToken {
+
+	public JvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getJvmTypeReferenceAccess().getLeftSquareBracketKeyword_0_1_0_1();
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getJvmTypeReferenceAccess().getArrayBracketsParserRuleCall_0_1_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new JvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// "]"
-protected class JvmTypeReference_RightSquareBracketKeyword_0_1_0_2 extends KeywordToken  {
-	
-	public JvmTypeReference_RightSquareBracketKeyword_0_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getJvmTypeReferenceAccess().getRightSquareBracketKeyword_0_1_0_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new JvmTypeReference_LeftSquareBracketKeyword_0_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13042,6 +13058,7 @@ protected class JvmTypeReference_XFunctionTypeRefParserRuleCall_1 extends RuleCa
 
 
 /************ end Rule JvmTypeReference ****************/
+
 
 
 /************ begin Rule XFunctionTypeRef ****************

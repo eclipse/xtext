@@ -191,7 +191,8 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	public void configureXTypeLiteral(FormattingConfig c, XTypeLiteralElements ele) {
 		c.setNoSpace().around(ele.getLeftParenthesisKeyword_2());
-		c.setNoSpace().around(ele.getRightParenthesisKeyword_4());
+		c.setNoSpace().around(ele.getArrayDimensionsArrayBracketsParserRuleCall_4_0());
+		c.setNoSpace().around(ele.getRightParenthesisKeyword_5());
 	}
 
 	public void configureXTryCatchFinallyExpression(FormattingConfig c, XTryCatchFinallyExpressionElements ele) {

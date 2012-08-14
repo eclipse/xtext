@@ -4214,11 +4214,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     if ( (LA19_0==35) ) {
                         int LA19_1 = input.LA(2);
 
-                        if ( (LA19_1==35) && (synpred8_InternalDomainmodel())) {
-                            alt19=1;
-                        }
-                        else if ( (LA19_1==EOF||(LA19_1>=RULE_STRING && LA19_1<=RULE_ID)||LA19_1==15||LA19_1==21||LA19_1==36||(LA19_1>=43 && LA19_1<=44)||LA19_1==48||LA19_1==52||LA19_1==56||LA19_1==58||(LA19_1>=61 && LA19_1<=63)||LA19_1==66||(LA19_1>=68 && LA19_1<=75)) ) {
+                        if ( (LA19_1==EOF||(LA19_1>=RULE_STRING && LA19_1<=RULE_ID)||LA19_1==15||LA19_1==21||LA19_1==36||(LA19_1>=43 && LA19_1<=44)||LA19_1==48||LA19_1==52||LA19_1==56||LA19_1==58||(LA19_1>=61 && LA19_1<=63)||LA19_1==66||(LA19_1>=68 && LA19_1<=75)) ) {
                             alt19=2;
+                        }
+                        else if ( (LA19_1==35) && (synpred8_InternalDomainmodel())) {
+                            alt19=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -8509,11 +8509,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 if ( (LA48_2==RULE_ID) ) {
                     int LA48_3 = input.LA(3);
 
-                    if ( (LA48_3==19) && (synpred24_InternalDomainmodel())) {
-                        alt48=2;
-                    }
-                    else if ( (LA48_3==21||(LA48_3>=23 && LA48_3<=47)||(LA48_3>=49 && LA48_3<=52)||LA48_3==67) ) {
+                    if ( (LA48_3==21||(LA48_3>=23 && LA48_3<=47)||(LA48_3>=49 && LA48_3<=52)||LA48_3==67) ) {
                         alt48=1;
+                    }
+                    else if ( (LA48_3==19) && (synpred24_InternalDomainmodel())) {
+                        alt48=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
@@ -12699,22 +12699,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXTypeLiteral"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4426:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) otherlv_4= ')' ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4426:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
     public final EObject ruleXTypeLiteral() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_2=null;
-        Token otherlv_4=null;
+        Token otherlv_5=null;
+        AntlrDatatypeRuleToken lv_arrayDimensions_4_0 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4429:28: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) otherlv_4= ')' ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:1: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) otherlv_4= ')' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4429:28: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:1: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:1: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) otherlv_4= ')' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:2: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) otherlv_4= ')'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:1: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:2: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
             {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4430:2: ()
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4431:5: 
@@ -12775,10 +12777,63 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleXTypeLiteral10413); if (state.failed) return current;
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4459:2: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
+            loop76:
+            do {
+                int alt76=2;
+                int LA76_0 = input.LA(1);
+
+                if ( (LA76_0==52) ) {
+                    alt76=1;
+                }
+
+
+                switch (alt76) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4460:1: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    {
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4460:1: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4461:3: lv_arrayDimensions_4_0= ruleArrayBrackets
+            	    {
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getXTypeLiteralAccess().getArrayDimensionsArrayBracketsParserRuleCall_4_0()); 
+            	      	    
+            	    }
+            	    pushFollow(FOLLOW_ruleArrayBrackets_in_ruleXTypeLiteral10422);
+            	    lv_arrayDimensions_4_0=ruleArrayBrackets();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getXTypeLiteralRule());
+            	      	        }
+            	             		add(
+            	             			current, 
+            	             			"arrayDimensions",
+            	              		lv_arrayDimensions_4_0, 
+            	              		"ArrayBrackets");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop76;
+                }
+            } while (true);
+
+            otherlv_5=(Token)match(input,23,FOLLOW_23_in_ruleXTypeLiteral10435); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_4, grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_4());
+                  	newLeafNode(otherlv_5, grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_5());
                   
             }
 
@@ -12804,7 +12859,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXThrowExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4471:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4489:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
     public final EObject entryRuleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -12812,13 +12867,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4472:2: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4473:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4490:2: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4491:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXThrowExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression10449);
+            pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression10471);
             iv_ruleXThrowExpression=ruleXThrowExpression();
 
             state._fsp--;
@@ -12826,7 +12881,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXThrowExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXThrowExpression10459); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXThrowExpression10481); if (state.failed) return current;
 
             }
 
@@ -12844,7 +12899,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXThrowExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4480:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4498:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
     public final EObject ruleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -12855,14 +12910,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4483:28: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4484:1: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4501:28: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4502:1: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4484:1: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4484:2: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4502:1: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4502:2: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4484:2: ()
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4485:5: 
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4502:2: ()
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4503:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12874,24 +12929,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,73,FOLLOW_73_in_ruleXThrowExpression10505); if (state.failed) return current;
+            otherlv_1=(Token)match(input,73,FOLLOW_73_in_ruleXThrowExpression10527); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXThrowExpressionAccess().getThrowKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4494:1: ( (lv_expression_2_0= ruleXExpression ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4495:1: (lv_expression_2_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4512:1: ( (lv_expression_2_0= ruleXExpression ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4513:1: (lv_expression_2_0= ruleXExpression )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4495:1: (lv_expression_2_0= ruleXExpression )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4496:3: lv_expression_2_0= ruleXExpression
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4513:1: (lv_expression_2_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4514:3: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression10526);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression10548);
             lv_expression_2_0=ruleXExpression();
 
             state._fsp--;
@@ -12938,7 +12993,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXReturnExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4520:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4538:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
     public final EObject entryRuleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -12946,13 +13001,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4521:2: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4522:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4539:2: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4540:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXReturnExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression10562);
+            pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression10584);
             iv_ruleXReturnExpression=ruleXReturnExpression();
 
             state._fsp--;
@@ -12960,7 +13015,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXReturnExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXReturnExpression10572); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXReturnExpression10594); if (state.failed) return current;
 
             }
 
@@ -12978,7 +13033,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXReturnExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4529:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4547:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
     public final EObject ruleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -12989,14 +13044,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4532:28: ( ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4533:1: ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4550:28: ( ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4551:1: ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4533:1: ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4533:2: () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4551:1: ( () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4551:2: () otherlv_1= 'return' ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4533:2: ()
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4534:5: 
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4551:2: ()
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4552:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13008,28 +13063,28 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,74,FOLLOW_74_in_ruleXReturnExpression10618); if (state.failed) return current;
+            otherlv_1=(Token)match(input,74,FOLLOW_74_in_ruleXReturnExpression10640); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4543:1: ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?
-            int alt76=2;
-            alt76 = dfa76.predict(input);
-            switch (alt76) {
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4561:1: ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?
+            int alt77=2;
+            alt77 = dfa77.predict(input);
+            switch (alt77) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4543:2: ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4561:2: ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4548:1: (lv_expression_2_0= ruleXExpression )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4549:3: lv_expression_2_0= ruleXExpression
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4566:1: (lv_expression_2_0= ruleXExpression )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4567:3: lv_expression_2_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getXReturnExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression10649);
+                    pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression10671);
                     lv_expression_2_0=ruleXExpression();
 
                     state._fsp--;
@@ -13079,7 +13134,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXTryCatchFinallyExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4573:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4591:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
     public final EObject entryRuleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13087,13 +13142,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4574:2: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4575:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4592:2: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4593:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10686);
+            pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10708);
             iv_ruleXTryCatchFinallyExpression=ruleXTryCatchFinallyExpression();
 
             state._fsp--;
@@ -13101,7 +13156,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXTryCatchFinallyExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10696); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10718); if (state.failed) return current;
 
             }
 
@@ -13119,7 +13174,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXTryCatchFinallyExpression"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4582:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4600:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
     public final EObject ruleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13138,14 +13193,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4585:28: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4586:1: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4603:28: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4604:1: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4586:1: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4586:2: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4604:1: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4604:2: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4586:2: ()
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4587:5: 
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4604:2: ()
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4605:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13157,24 +13212,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,75,FOLLOW_75_in_ruleXTryCatchFinallyExpression10742); if (state.failed) return current;
+            otherlv_1=(Token)match(input,75,FOLLOW_75_in_ruleXTryCatchFinallyExpression10764); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4596:1: ( (lv_expression_2_0= ruleXExpression ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4597:1: (lv_expression_2_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:1: ( (lv_expression_2_0= ruleXExpression ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4615:1: (lv_expression_2_0= ruleXExpression )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4597:1: (lv_expression_2_0= ruleXExpression )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4598:3: lv_expression_2_0= ruleXExpression
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4615:1: (lv_expression_2_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4616:3: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10763);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10785);
             lv_expression_2_0=ruleXExpression();
 
             state._fsp--;
@@ -13198,61 +13253,61 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:2: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:2: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            int alt80=2;
+            int LA80_0 = input.LA(1);
 
-            if ( (LA79_0==77) ) {
-                alt79=1;
+            if ( (LA80_0==77) ) {
+                alt80=1;
             }
-            else if ( (LA79_0==76) ) {
-                alt79=2;
+            else if ( (LA80_0==76) ) {
+                alt80=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 79, 0, input);
+                    new NoViableAltException("", 80, 0, input);
 
                 throw nvae;
             }
-            switch (alt79) {
+            switch (alt80) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:3: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:3: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:3: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:4: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:3: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:4: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:4: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
-                    int cnt77=0;
-                    loop77:
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:4: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
+                    int cnt78=0;
+                    loop78:
                     do {
-                        int alt77=2;
-                        int LA77_0 = input.LA(1);
+                        int alt78=2;
+                        int LA78_0 = input.LA(1);
 
-                        if ( (LA77_0==77) ) {
-                            int LA77_2 = input.LA(2);
+                        if ( (LA78_0==77) ) {
+                            int LA78_2 = input.LA(2);
 
                             if ( (synpred34_InternalDomainmodel()) ) {
-                                alt77=1;
+                                alt78=1;
                             }
 
 
                         }
 
 
-                        switch (alt77) {
+                        switch (alt78) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:5: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:5: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
                     	    {
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4616:1: (lv_catchClauses_3_0= ruleXCatchClause )
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4617:3: lv_catchClauses_3_0= ruleXCatchClause
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4634:1: (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4635:3: lv_catchClauses_3_0= ruleXCatchClause
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_3_0_0_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10793);
+                    	    pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10815);
                     	    lv_catchClauses_3_0=ruleXCatchClause();
 
                     	    state._fsp--;
@@ -13278,34 +13333,34 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt77 >= 1 ) break loop77;
+                    	    if ( cnt78 >= 1 ) break loop78;
                     	    if (state.backtracking>0) {state.failed=true; return current;}
                                 EarlyExitException eee =
-                                    new EarlyExitException(77, input);
+                                    new EarlyExitException(78, input);
                                 throw eee;
                         }
-                        cnt77++;
+                        cnt78++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:3: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
-                    int alt78=2;
-                    int LA78_0 = input.LA(1);
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:3: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    int alt79=2;
+                    int LA79_0 = input.LA(1);
 
-                    if ( (LA78_0==76) ) {
-                        int LA78_1 = input.LA(2);
+                    if ( (LA79_0==76) ) {
+                        int LA79_1 = input.LA(2);
 
                         if ( (synpred35_InternalDomainmodel()) ) {
-                            alt78=1;
+                            alt79=1;
                         }
                     }
-                    switch (alt78) {
+                    switch (alt79) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:4: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:4: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
                             {
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:4: ( ( 'finally' )=>otherlv_4= 'finally' )
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:5: ( 'finally' )=>otherlv_4= 'finally'
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:4: ( ( 'finally' )=>otherlv_4= 'finally' )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:5: ( 'finally' )=>otherlv_4= 'finally'
                             {
-                            otherlv_4=(Token)match(input,76,FOLLOW_76_in_ruleXTryCatchFinallyExpression10815); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,76,FOLLOW_76_in_ruleXTryCatchFinallyExpression10837); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_0_1_0());
@@ -13314,18 +13369,18 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4638:2: ( (lv_finallyExpression_5_0= ruleXExpression ) )
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4639:1: (lv_finallyExpression_5_0= ruleXExpression )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4656:2: ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4657:1: (lv_finallyExpression_5_0= ruleXExpression )
                             {
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4639:1: (lv_finallyExpression_5_0= ruleXExpression )
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4640:3: lv_finallyExpression_5_0= ruleXExpression
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4657:1: (lv_finallyExpression_5_0= ruleXExpression )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4658:3: lv_finallyExpression_5_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_0_1_1_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10837);
+                            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10859);
                             lv_finallyExpression_5_0=ruleXExpression();
 
                             state._fsp--;
@@ -13362,29 +13417,29 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4657:6: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4675:6: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4657:6: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4657:8: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4675:6: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4675:8: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
                     {
-                    otherlv_6=(Token)match(input,76,FOLLOW_76_in_ruleXTryCatchFinallyExpression10859); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,76,FOLLOW_76_in_ruleXTryCatchFinallyExpression10881); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4661:1: ( (lv_finallyExpression_7_0= ruleXExpression ) )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4662:1: (lv_finallyExpression_7_0= ruleXExpression )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4679:1: ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4680:1: (lv_finallyExpression_7_0= ruleXExpression )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4662:1: (lv_finallyExpression_7_0= ruleXExpression )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4663:3: lv_finallyExpression_7_0= ruleXExpression
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4680:1: (lv_finallyExpression_7_0= ruleXExpression )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4681:3: lv_finallyExpression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10880);
+                    pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10902);
                     lv_finallyExpression_7_0=ruleXExpression();
 
                     state._fsp--;
@@ -13440,7 +13495,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXCatchClause"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4687:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4705:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
     public final EObject entryRuleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -13448,13 +13503,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4688:2: (iv_ruleXCatchClause= ruleXCatchClause EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4689:2: iv_ruleXCatchClause= ruleXCatchClause EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4706:2: (iv_ruleXCatchClause= ruleXCatchClause EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4707:2: iv_ruleXCatchClause= ruleXCatchClause EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCatchClauseRule()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10918);
+            pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10940);
             iv_ruleXCatchClause=ruleXCatchClause();
 
             state._fsp--;
@@ -13462,7 +13517,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXCatchClause; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXCatchClause10928); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXCatchClause10950); if (state.failed) return current;
 
             }
 
@@ -13480,7 +13535,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXCatchClause"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4696:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4714:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
     public final EObject ruleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -13495,16 +13550,16 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4699:28: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4700:1: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4717:28: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4718:1: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4700:1: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4700:2: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4718:1: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4718:2: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4700:2: ( ( 'catch' )=>otherlv_0= 'catch' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4700:3: ( 'catch' )=>otherlv_0= 'catch'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4718:2: ( ( 'catch' )=>otherlv_0= 'catch' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4718:3: ( 'catch' )=>otherlv_0= 'catch'
             {
-            otherlv_0=(Token)match(input,77,FOLLOW_77_in_ruleXCatchClause10973); if (state.failed) return current;
+            otherlv_0=(Token)match(input,77,FOLLOW_77_in_ruleXCatchClause10995); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getXCatchClauseAccess().getCatchKeyword_0());
@@ -13513,24 +13568,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleXCatchClause10986); if (state.failed) return current;
+            otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleXCatchClause11008); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4709:1: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4710:1: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4727:1: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4728:1: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4710:1: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4711:3: lv_declaredParam_2_0= ruleFullJvmFormalParameter
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4728:1: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4729:3: lv_declaredParam_2_0= ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXCatchClauseAccess().getDeclaredParamFullJvmFormalParameterParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause11007);
+            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause11029);
             lv_declaredParam_2_0=ruleFullJvmFormalParameter();
 
             state._fsp--;
@@ -13554,24 +13609,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,23,FOLLOW_23_in_ruleXCatchClause11019); if (state.failed) return current;
+            otherlv_3=(Token)match(input,23,FOLLOW_23_in_ruleXCatchClause11041); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4731:1: ( (lv_expression_4_0= ruleXExpression ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4732:1: (lv_expression_4_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4749:1: ( (lv_expression_4_0= ruleXExpression ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4750:1: (lv_expression_4_0= ruleXExpression )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4732:1: (lv_expression_4_0= ruleXExpression )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4733:3: lv_expression_4_0= ruleXExpression
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4750:1: (lv_expression_4_0= ruleXExpression )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4751:3: lv_expression_4_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause11040);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause11062);
             lv_expression_4_0=ruleXExpression();
 
             state._fsp--;
@@ -13618,7 +13673,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4757:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4775:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -13626,13 +13681,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4758:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4759:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4776:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4777:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName11077);
+            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName11099);
             iv_ruleQualifiedName=ruleQualifiedName();
 
             state._fsp--;
@@ -13640,7 +13695,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleQualifiedName.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName11088); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName11110); if (state.failed) return current;
 
             }
 
@@ -13658,7 +13713,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedName"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4766:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4784:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -13671,18 +13726,18 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4769:28: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4770:1: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4787:28: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4788:1: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4770:1: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4771:5: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4788:1: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4789:5: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
             {
             if ( state.backtracking==0 ) {
                
                       newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_0()); 
                   
             }
-            pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName11135);
+            pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName11157);
             this_ValidID_0=ruleValidID();
 
             state._fsp--;
@@ -13697,20 +13752,20 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4781:1: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
-            loop80:
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4799:1: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            loop81:
             do {
-                int alt80=2;
-                int LA80_0 = input.LA(1);
+                int alt81=2;
+                int LA81_0 = input.LA(1);
 
-                if ( (LA80_0==24) ) {
-                    int LA80_2 = input.LA(2);
+                if ( (LA81_0==24) ) {
+                    int LA81_2 = input.LA(2);
 
-                    if ( (LA80_2==RULE_ID) ) {
-                        int LA80_3 = input.LA(3);
+                    if ( (LA81_2==RULE_ID) ) {
+                        int LA81_3 = input.LA(3);
 
                         if ( (synpred37_InternalDomainmodel()) ) {
-                            alt80=1;
+                            alt81=1;
                         }
 
 
@@ -13720,14 +13775,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 }
 
 
-                switch (alt80) {
+                switch (alt81) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4781:2: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4799:2: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
             	    {
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4781:2: ( ( '.' )=>kw= '.' )
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4781:3: ( '.' )=>kw= '.'
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4799:2: ( ( '.' )=>kw= '.' )
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4799:3: ( '.' )=>kw= '.'
             	    {
-            	    kw=(Token)match(input,24,FOLLOW_24_in_ruleQualifiedName11163); if (state.failed) return current;
+            	    kw=(Token)match(input,24,FOLLOW_24_in_ruleQualifiedName11185); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
@@ -13742,7 +13797,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	              newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); 
             	          
             	    }
-            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName11186);
+            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName11208);
             	    this_ValidID_2=ruleValidID();
 
             	    state._fsp--;
@@ -13762,7 +13817,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop80;
+            	    break loop81;
                 }
             } while (true);
 
@@ -13789,7 +13844,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNumber"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4808:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4826:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
     public final String entryRuleNumber() throws RecognitionException {
         String current = null;
 
@@ -13800,13 +13855,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4812:2: (iv_ruleNumber= ruleNumber EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4813:2: iv_ruleNumber= ruleNumber EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4830:2: (iv_ruleNumber= ruleNumber EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4831:2: iv_ruleNumber= ruleNumber EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNumberRule()); 
             }
-            pushFollow(FOLLOW_ruleNumber_in_entryRuleNumber11240);
+            pushFollow(FOLLOW_ruleNumber_in_entryRuleNumber11262);
             iv_ruleNumber=ruleNumber();
 
             state._fsp--;
@@ -13814,7 +13869,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNumber.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumber11251); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumber11273); if (state.failed) return current;
 
             }
 
@@ -13835,7 +13890,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNumber"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4823:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4841:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
     public final AntlrDatatypeRuleToken ruleNumber() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -13850,31 +13905,31 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4827:28: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4828:1: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4845:28: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4846:1: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4828:1: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
-            int alt84=2;
-            int LA84_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4846:1: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            int alt85=2;
+            int LA85_0 = input.LA(1);
 
-            if ( (LA84_0==RULE_HEX) ) {
-                alt84=1;
+            if ( (LA85_0==RULE_HEX) ) {
+                alt85=1;
             }
-            else if ( ((LA84_0>=RULE_INT && LA84_0<=RULE_DECIMAL)) ) {
-                alt84=2;
+            else if ( ((LA85_0>=RULE_INT && LA85_0<=RULE_DECIMAL)) ) {
+                alt85=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 84, 0, input);
+                    new NoViableAltException("", 85, 0, input);
 
                 throw nvae;
             }
-            switch (alt84) {
+            switch (alt85) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4828:6: this_HEX_0= RULE_HEX
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4846:6: this_HEX_0= RULE_HEX
                     {
-                    this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleNumber11295); if (state.failed) return current;
+                    this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleNumber11317); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_HEX_0);
@@ -13889,33 +13944,33 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4836:6: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4854:6: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4836:6: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4836:7: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4854:6: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4854:7: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4836:7: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
-                    int alt81=2;
-                    int LA81_0 = input.LA(1);
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4854:7: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
+                    int alt82=2;
+                    int LA82_0 = input.LA(1);
 
-                    if ( (LA81_0==RULE_INT) ) {
-                        alt81=1;
+                    if ( (LA82_0==RULE_INT) ) {
+                        alt82=1;
                     }
-                    else if ( (LA81_0==RULE_DECIMAL) ) {
-                        alt81=2;
+                    else if ( (LA82_0==RULE_DECIMAL) ) {
+                        alt82=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 81, 0, input);
+                            new NoViableAltException("", 82, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt81) {
+                    switch (alt82) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4836:12: this_INT_1= RULE_INT
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4854:12: this_INT_1= RULE_INT
                             {
-                            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumber11323); if (state.failed) return current;
+                            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumber11345); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               		current.merge(this_INT_1);
@@ -13930,9 +13985,9 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4844:10: this_DECIMAL_2= RULE_DECIMAL
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4862:10: this_DECIMAL_2= RULE_DECIMAL
                             {
-                            this_DECIMAL_2=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber11349); if (state.failed) return current;
+                            this_DECIMAL_2=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber11371); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               		current.merge(this_DECIMAL_2);
@@ -13949,50 +14004,50 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4851:2: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
-                    int alt83=2;
-                    int LA83_0 = input.LA(1);
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:2: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    int alt84=2;
+                    int LA84_0 = input.LA(1);
 
-                    if ( (LA83_0==24) ) {
-                        int LA83_1 = input.LA(2);
+                    if ( (LA84_0==24) ) {
+                        int LA84_1 = input.LA(2);
 
-                        if ( ((LA83_1>=RULE_INT && LA83_1<=RULE_DECIMAL)) ) {
-                            alt83=1;
+                        if ( ((LA84_1>=RULE_INT && LA84_1<=RULE_DECIMAL)) ) {
+                            alt84=1;
                         }
                     }
-                    switch (alt83) {
+                    switch (alt84) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4852:2: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4870:2: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             {
-                            kw=(Token)match(input,24,FOLLOW_24_in_ruleNumber11369); if (state.failed) return current;
+                            kw=(Token)match(input,24,FOLLOW_24_in_ruleNumber11391); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
                                       newLeafNode(kw, grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0()); 
                                   
                             }
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4857:1: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
-                            int alt82=2;
-                            int LA82_0 = input.LA(1);
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:1: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            int alt83=2;
+                            int LA83_0 = input.LA(1);
 
-                            if ( (LA82_0==RULE_INT) ) {
-                                alt82=1;
+                            if ( (LA83_0==RULE_INT) ) {
+                                alt83=1;
                             }
-                            else if ( (LA82_0==RULE_DECIMAL) ) {
-                                alt82=2;
+                            else if ( (LA83_0==RULE_DECIMAL) ) {
+                                alt83=2;
                             }
                             else {
                                 if (state.backtracking>0) {state.failed=true; return current;}
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 82, 0, input);
+                                    new NoViableAltException("", 83, 0, input);
 
                                 throw nvae;
                             }
-                            switch (alt82) {
+                            switch (alt83) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4857:6: this_INT_4= RULE_INT
+                                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:6: this_INT_4= RULE_INT
                                     {
-                                    this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumber11385); if (state.failed) return current;
+                                    this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumber11407); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                       		current.merge(this_INT_4);
@@ -14007,9 +14062,9 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4865:10: this_DECIMAL_5= RULE_DECIMAL
+                                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4883:10: this_DECIMAL_5= RULE_DECIMAL
                                     {
-                                    this_DECIMAL_5=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber11411); if (state.failed) return current;
+                                    this_DECIMAL_5=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber11433); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                       		current.merge(this_DECIMAL_5);
@@ -14064,7 +14119,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4883:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4901:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
     public final EObject entryRuleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14072,13 +14127,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4884:2: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4885:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4902:2: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4903:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference11464);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference11486);
             iv_ruleJvmTypeReference=ruleJvmTypeReference();
 
             state._fsp--;
@@ -14086,7 +14141,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeReference11474); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeReference11496); if (state.failed) return current;
 
             }
 
@@ -14104,53 +14159,51 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4892:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) ;
     public final EObject ruleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_2=null;
-        Token otherlv_3=null;
         EObject this_JvmParameterizedTypeReference_0 = null;
 
-        EObject this_XFunctionTypeRef_4 = null;
+        EObject this_XFunctionTypeRef_3 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4895:28: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4896:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4913:28: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4896:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
-            int alt86=2;
-            int LA86_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
+            int alt87=2;
+            int LA87_0 = input.LA(1);
 
-            if ( (LA86_0==RULE_ID) ) {
-                alt86=1;
+            if ( (LA87_0==RULE_ID) ) {
+                alt87=1;
             }
-            else if ( (LA86_0==21||LA86_0==39) ) {
-                alt86=2;
+            else if ( (LA87_0==21||LA87_0==39) ) {
+                alt87=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 86, 0, input);
+                    new NoViableAltException("", 87, 0, input);
 
                 throw nvae;
             }
-            switch (alt86) {
+            switch (alt87) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4896:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4896:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4897:5: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4915:5: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference11522);
+                    pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference11544);
                     this_JvmParameterizedTypeReference_0=ruleJvmParameterizedTypeReference();
 
                     state._fsp--;
@@ -14161,20 +14214,20 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                               afterParserOrEnumRuleCall();
                           
                     }
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:1: ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
-                    loop85:
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:1: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
+                    loop86:
                     do {
-                        int alt85=2;
-                        int LA85_0 = input.LA(1);
+                        int alt86=2;
+                        int LA86_0 = input.LA(1);
 
-                        if ( (LA85_0==52) ) {
-                            int LA85_2 = input.LA(2);
+                        if ( (LA86_0==52) ) {
+                            int LA86_2 = input.LA(2);
 
-                            if ( (LA85_2==54) ) {
-                                int LA85_3 = input.LA(3);
+                            if ( (LA86_2==54) ) {
+                                int LA86_3 = input.LA(3);
 
                                 if ( (synpred38_InternalDomainmodel()) ) {
-                                    alt85=1;
+                                    alt86=1;
                                 }
 
 
@@ -14184,15 +14237,15 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         }
 
 
-                        switch (alt85) {
+                        switch (alt86) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:2: ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:2: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:5: ( () otherlv_2= '[' otherlv_3= ']' )
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:6: () otherlv_2= '[' otherlv_3= ']'
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4924:24: ( () ruleArrayBrackets )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4924:25: () ruleArrayBrackets
                     	    {
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:6: ()
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4909:5: 
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4924:25: ()
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4925:5: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -14204,16 +14257,19 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_2=(Token)match(input,52,FOLLOW_52_in_ruleJvmTypeReference11560); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
-
-                    	          	newLeafNode(otherlv_2, grammarAccess.getJvmTypeReferenceAccess().getLeftSquareBracketKeyword_0_1_0_1());
+                    	       
+                    	              newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getArrayBracketsParserRuleCall_0_1_0_1()); 
                     	          
                     	    }
-                    	    otherlv_3=(Token)match(input,54,FOLLOW_54_in_ruleJvmTypeReference11572); if (state.failed) return current;
-                    	    if ( state.backtracking==0 ) {
+                    	    pushFollow(FOLLOW_ruleArrayBrackets_in_ruleJvmTypeReference11580);
+                    	    ruleArrayBrackets();
 
-                    	          	newLeafNode(otherlv_3, grammarAccess.getJvmTypeReferenceAccess().getRightSquareBracketKeyword_0_1_0_2());
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	              afterParserOrEnumRuleCall();
                     	          
                     	    }
 
@@ -14224,7 +14280,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop85;
+                    	    break loop86;
                         }
                     } while (true);
 
@@ -14235,21 +14291,21 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4924:5: this_XFunctionTypeRef_4= ruleXFunctionTypeRef
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4940:5: this_XFunctionTypeRef_3= ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getXFunctionTypeRefParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference11604);
-                    this_XFunctionTypeRef_4=ruleXFunctionTypeRef();
+                    pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference11611);
+                    this_XFunctionTypeRef_3=ruleXFunctionTypeRef();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_XFunctionTypeRef_4; 
+                              current = this_XFunctionTypeRef_3; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -14278,8 +14334,100 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleJvmTypeReference"
 
 
+    // $ANTLR start "entryRuleArrayBrackets"
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4956:1: entryRuleArrayBrackets returns [String current=null] : iv_ruleArrayBrackets= ruleArrayBrackets EOF ;
+    public final String entryRuleArrayBrackets() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleArrayBrackets = null;
+
+
+        try {
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4957:2: (iv_ruleArrayBrackets= ruleArrayBrackets EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4958:2: iv_ruleArrayBrackets= ruleArrayBrackets EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getArrayBracketsRule()); 
+            }
+            pushFollow(FOLLOW_ruleArrayBrackets_in_entryRuleArrayBrackets11647);
+            iv_ruleArrayBrackets=ruleArrayBrackets();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleArrayBrackets.getText(); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleArrayBrackets11658); if (state.failed) return current;
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleArrayBrackets"
+
+
+    // $ANTLR start "ruleArrayBrackets"
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4965:1: ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '[' kw= ']' ) ;
+    public final AntlrDatatypeRuleToken ruleArrayBrackets() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token kw=null;
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4968:28: ( (kw= '[' kw= ']' ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4969:1: (kw= '[' kw= ']' )
+            {
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4969:1: (kw= '[' kw= ']' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4970:2: kw= '[' kw= ']'
+            {
+            kw=(Token)match(input,52,FOLLOW_52_in_ruleArrayBrackets11696); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                      current.merge(kw);
+                      newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getLeftSquareBracketKeyword_0()); 
+                  
+            }
+            kw=(Token)match(input,54,FOLLOW_54_in_ruleArrayBrackets11709); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                      current.merge(kw);
+                      newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getRightSquareBracketKeyword_1()); 
+                  
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleArrayBrackets"
+
+
     // $ANTLR start "entryRuleXFunctionTypeRef"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4940:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4989:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
     public final EObject entryRuleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -14287,13 +14435,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4941:2: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4942:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4990:2: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4991:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionTypeRefRule()); 
             }
-            pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef11639);
+            pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef11749);
             iv_ruleXFunctionTypeRef=ruleXFunctionTypeRef();
 
             state._fsp--;
@@ -14301,7 +14449,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXFunctionTypeRef; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXFunctionTypeRef11649); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXFunctionTypeRef11759); if (state.failed) return current;
 
             }
 
@@ -14319,7 +14467,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXFunctionTypeRef"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4949:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4998:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -14337,52 +14485,52 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4952:28: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4953:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5001:28: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5002:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4953:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4953:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5002:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5002:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4953:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
-            int alt89=2;
-            int LA89_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5002:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
+            int alt90=2;
+            int LA90_0 = input.LA(1);
 
-            if ( (LA89_0==21) ) {
-                alt89=1;
+            if ( (LA90_0==21) ) {
+                alt90=1;
             }
-            switch (alt89) {
+            switch (alt90) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4953:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5002:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
-                    otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleXFunctionTypeRef11687); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleXFunctionTypeRef11797); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0());
                           
                     }
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4957:1: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
-                    int alt88=2;
-                    int LA88_0 = input.LA(1);
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5006:1: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
+                    int alt89=2;
+                    int LA89_0 = input.LA(1);
 
-                    if ( (LA88_0==RULE_ID||LA88_0==21||LA88_0==39) ) {
-                        alt88=1;
+                    if ( (LA89_0==RULE_ID||LA89_0==21||LA89_0==39) ) {
+                        alt89=1;
                     }
-                    switch (alt88) {
+                    switch (alt89) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4957:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5006:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4957:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4958:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5006:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5007:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4958:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4959:3: lv_paramTypes_1_0= ruleJvmTypeReference
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5007:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5008:3: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11709);
+                            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11819);
                             lv_paramTypes_1_0=ruleJvmTypeReference();
 
                             state._fsp--;
@@ -14406,39 +14554,39 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4975:2: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
-                            loop87:
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5024:2: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            loop88:
                             do {
-                                int alt87=2;
-                                int LA87_0 = input.LA(1);
+                                int alt88=2;
+                                int LA88_0 = input.LA(1);
 
-                                if ( (LA87_0==22) ) {
-                                    alt87=1;
+                                if ( (LA88_0==22) ) {
+                                    alt88=1;
                                 }
 
 
-                                switch (alt87) {
+                                switch (alt88) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4975:4: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5024:4: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
-                            	    otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleXFunctionTypeRef11722); if (state.failed) return current;
+                            	    otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleXFunctionTypeRef11832); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_2, grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_1_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4979:1: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4980:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5028:1: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5029:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4980:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4981:3: lv_paramTypes_3_0= ruleJvmTypeReference
+                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5029:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5030:3: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
                             	      	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11743);
+                            	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11853);
                             	    lv_paramTypes_3_0=ruleJvmTypeReference();
 
                             	    state._fsp--;
@@ -14467,7 +14615,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             	    break;
 
                             	default :
-                            	    break loop87;
+                            	    break loop88;
                                 }
                             } while (true);
 
@@ -14477,7 +14625,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleXFunctionTypeRef11759); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,23,FOLLOW_23_in_ruleXFunctionTypeRef11869); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_2());
@@ -14489,24 +14637,24 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,39,FOLLOW_39_in_ruleXFunctionTypeRef11773); if (state.failed) return current;
+            otherlv_5=(Token)match(input,39,FOLLOW_39_in_ruleXFunctionTypeRef11883); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5005:1: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5006:1: (lv_returnType_6_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5054:1: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5055:1: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5006:1: (lv_returnType_6_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5007:3: lv_returnType_6_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5055:1: (lv_returnType_6_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5056:3: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11794);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11904);
             lv_returnType_6_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -14553,7 +14701,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmParameterizedTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5031:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5080:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
     public final EObject entryRuleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14561,13 +14709,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5032:2: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5033:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5081:2: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5082:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11830);
+            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11940);
             iv_ruleJvmParameterizedTypeReference=ruleJvmParameterizedTypeReference();
 
             state._fsp--;
@@ -14575,7 +14723,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmParameterizedTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11840); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11950); if (state.failed) return current;
 
             }
 
@@ -14593,7 +14741,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5040:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5089:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) ;
     public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14608,17 +14756,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5043:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5044:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5092:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5093:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5044:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5044:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5093:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5093:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5044:2: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5045:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5093:2: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5094:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5045:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5046:3: ruleQualifiedName
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5094:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5095:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -14632,7 +14780,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11888);
+            pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11998);
             ruleQualifiedName();
 
             state._fsp--;
@@ -14648,17 +14796,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
-            int alt91=2;
-            alt91 = dfa91.predict(input);
-            switch (alt91) {
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            int alt92=2;
+            alt92 = dfa92.predict(input);
+            switch (alt92) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:3: ( ( '<' )=>otherlv_1= '<' )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:4: ( '<' )=>otherlv_1= '<'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:3: ( ( '<' )=>otherlv_1= '<' )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:4: ( '<' )=>otherlv_1= '<'
                     {
-                    otherlv_1=(Token)match(input,36,FOLLOW_36_in_ruleJvmParameterizedTypeReference11909); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,36,FOLLOW_36_in_ruleJvmParameterizedTypeReference12019); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0());
@@ -14667,18 +14815,18 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5064:2: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5065:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5113:2: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5114:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5065:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5066:3: lv_arguments_2_0= ruleJvmArgumentTypeReference
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5114:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5115:3: lv_arguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11931);
+                    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference12041);
                     lv_arguments_2_0=ruleJvmArgumentTypeReference();
 
                     state._fsp--;
@@ -14702,39 +14850,39 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5082:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
-                    loop90:
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5131:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    loop91:
                     do {
-                        int alt90=2;
-                        int LA90_0 = input.LA(1);
+                        int alt91=2;
+                        int LA91_0 = input.LA(1);
 
-                        if ( (LA90_0==22) ) {
-                            alt90=1;
+                        if ( (LA91_0==22) ) {
+                            alt91=1;
                         }
 
 
-                        switch (alt90) {
+                        switch (alt91) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5082:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5131:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,22,FOLLOW_22_in_ruleJvmParameterizedTypeReference11944); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,22,FOLLOW_22_in_ruleJvmParameterizedTypeReference12054); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5086:1: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5087:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5135:1: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5136:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5087:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5088:3: lv_arguments_4_0= ruleJvmArgumentTypeReference
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5136:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5137:3: lv_arguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11965);
+                    	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference12075);
                     	    lv_arguments_4_0=ruleJvmArgumentTypeReference();
 
                     	    state._fsp--;
@@ -14763,11 +14911,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop90;
+                    	    break loop91;
                         }
                     } while (true);
 
-                    otherlv_5=(Token)match(input,35,FOLLOW_35_in_ruleJvmParameterizedTypeReference11979); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,35,FOLLOW_35_in_ruleJvmParameterizedTypeReference12089); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
@@ -14802,7 +14950,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5116:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5165:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
     public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14810,13 +14958,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5117:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5118:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5166:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5167:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference12017);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference12127);
             iv_ruleJvmArgumentTypeReference=ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -14824,7 +14972,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmArgumentTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference12027); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference12137); if (state.failed) return current;
 
             }
 
@@ -14842,7 +14990,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5125:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5174:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14854,36 +15002,36 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5128:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5129:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5177:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5178:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5129:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
-            int alt92=2;
-            int LA92_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5178:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            int alt93=2;
+            int LA93_0 = input.LA(1);
 
-            if ( (LA92_0==RULE_ID||LA92_0==21||LA92_0==39) ) {
-                alt92=1;
+            if ( (LA93_0==RULE_ID||LA93_0==21||LA93_0==39) ) {
+                alt93=1;
             }
-            else if ( (LA92_0==78) ) {
-                alt92=2;
+            else if ( (LA93_0==78) ) {
+                alt93=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 92, 0, input);
+                    new NoViableAltException("", 93, 0, input);
 
                 throw nvae;
             }
-            switch (alt92) {
+            switch (alt93) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5130:5: this_JvmTypeReference_0= ruleJvmTypeReference
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5179:5: this_JvmTypeReference_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference12074);
+                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference12184);
                     this_JvmTypeReference_0=ruleJvmTypeReference();
 
                     state._fsp--;
@@ -14898,14 +15046,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5140:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5189:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference12101);
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference12211);
                     this_JvmWildcardTypeReference_1=ruleJvmWildcardTypeReference();
 
                     state._fsp--;
@@ -14942,7 +15090,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5156:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5205:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
     public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14950,13 +15098,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5157:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5158:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5206:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5207:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference12136);
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference12246);
             iv_ruleJvmWildcardTypeReference=ruleJvmWildcardTypeReference();
 
             state._fsp--;
@@ -14964,7 +15112,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmWildcardTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference12146); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference12256); if (state.failed) return current;
 
             }
 
@@ -14982,7 +15130,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmWildcardTypeReference"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5165:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5214:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
     public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14995,14 +15143,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5168:28: ( ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5169:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5217:28: ( ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5218:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5169:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5169:2: () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5218:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5218:2: () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5169:2: ()
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5170:5: 
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5218:2: ()
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5219:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -15014,38 +15162,38 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,78,FOLLOW_78_in_ruleJvmWildcardTypeReference12192); if (state.failed) return current;
+            otherlv_1=(Token)match(input,78,FOLLOW_78_in_ruleJvmWildcardTypeReference12302); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5179:1: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
-            int alt93=3;
-            int LA93_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5228:1: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
+            int alt94=3;
+            int LA94_0 = input.LA(1);
 
-            if ( (LA93_0==18) ) {
-                alt93=1;
+            if ( (LA94_0==18) ) {
+                alt94=1;
             }
-            else if ( (LA93_0==66) ) {
-                alt93=2;
+            else if ( (LA94_0==66) ) {
+                alt94=2;
             }
-            switch (alt93) {
+            switch (alt94) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5179:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5228:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5179:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5180:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5228:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5229:1: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5180:1: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5181:3: lv_constraints_2_0= ruleJvmUpperBound
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5229:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5230:3: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference12214);
+                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference12324);
                     lv_constraints_2_0=ruleJvmUpperBound();
 
                     state._fsp--;
@@ -15073,20 +15221,20 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5198:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5247:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5198:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5199:1: (lv_constraints_3_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5247:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5248:1: (lv_constraints_3_0= ruleJvmLowerBound )
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5199:1: (lv_constraints_3_0= ruleJvmLowerBound )
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5200:3: lv_constraints_3_0= ruleJvmLowerBound
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5248:1: (lv_constraints_3_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5249:3: lv_constraints_3_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference12241);
+                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference12351);
                     lv_constraints_3_0=ruleJvmLowerBound();
 
                     state._fsp--;
@@ -15139,7 +15287,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5224:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5273:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
     public final EObject entryRuleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -15147,13 +15295,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5225:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5226:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5274:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5275:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound12279);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound12389);
             iv_ruleJvmUpperBound=ruleJvmUpperBound();
 
             state._fsp--;
@@ -15161,7 +15309,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound12289); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound12399); if (state.failed) return current;
 
             }
 
@@ -15179,7 +15327,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmUpperBound"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5233:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5282:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -15190,30 +15338,30 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5236:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5237:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5285:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5286:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5237:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5237:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5286:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5286:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,18,FOLLOW_18_in_ruleJvmUpperBound12326); if (state.failed) return current;
+            otherlv_0=(Token)match(input,18,FOLLOW_18_in_ruleJvmUpperBound12436); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5241:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5242:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5290:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5291:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5242:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5243:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5291:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5292:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound12347);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound12457);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -15260,7 +15408,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5267:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5316:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
     public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -15268,13 +15416,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5268:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5269:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5317:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5318:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded12383);
+            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded12493);
             iv_ruleJvmUpperBoundAnded=ruleJvmUpperBoundAnded();
 
             state._fsp--;
@@ -15282,7 +15430,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBoundAnded; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded12393); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded12503); if (state.failed) return current;
 
             }
 
@@ -15300,7 +15448,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmUpperBoundAnded"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5276:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5325:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -15311,30 +15459,30 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5279:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5280:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5328:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5329:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5280:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5280:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5329:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5329:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleJvmUpperBoundAnded12430); if (state.failed) return current;
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleJvmUpperBoundAnded12540); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5284:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5285:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5333:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5334:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5285:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5286:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5334:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5335:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded12451);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded12561);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -15381,7 +15529,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmLowerBound"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5310:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5359:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
     public final EObject entryRuleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -15389,13 +15537,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5311:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5312:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5360:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5361:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound12487);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound12597);
             iv_ruleJvmLowerBound=ruleJvmLowerBound();
 
             state._fsp--;
@@ -15403,7 +15551,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmLowerBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound12497); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound12607); if (state.failed) return current;
 
             }
 
@@ -15421,7 +15569,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmLowerBound"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5319:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5368:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -15432,30 +15580,30 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5322:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5323:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5371:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5372:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5323:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5323:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5372:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5372:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,66,FOLLOW_66_in_ruleJvmLowerBound12534); if (state.failed) return current;
+            otherlv_0=(Token)match(input,66,FOLLOW_66_in_ruleJvmLowerBound12644); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5327:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5328:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5376:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5377:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5328:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5329:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5377:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5378:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound12555);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound12665);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -15502,7 +15650,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleValidID"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5355:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5404:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
     public final String entryRuleValidID() throws RecognitionException {
         String current = null;
 
@@ -15510,13 +15658,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5356:2: (iv_ruleValidID= ruleValidID EOF )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5357:2: iv_ruleValidID= ruleValidID EOF
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5405:2: (iv_ruleValidID= ruleValidID EOF )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5406:2: iv_ruleValidID= ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getValidIDRule()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID12594);
+            pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID12704);
             iv_ruleValidID=ruleValidID();
 
             state._fsp--;
@@ -15524,7 +15672,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleValidID.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValidID12605); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValidID12715); if (state.failed) return current;
 
             }
 
@@ -15542,7 +15690,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValidID"
-    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5364:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5413:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15551,10 +15699,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5367:28: (this_ID_0= RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5368:5: this_ID_0= RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5416:28: (this_ID_0= RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5417:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleValidID12644); if (state.failed) return current;
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleValidID12754); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_ID_0);
@@ -16025,32 +16173,32 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:1982:2: ( '.' | ( ( '?.' ) ) | ( ( '*.' ) ) )
-        int alt94=3;
+        int alt95=3;
         switch ( input.LA(1) ) {
         case 24:
             {
-            alt94=1;
+            alt95=1;
             }
             break;
         case 50:
             {
-            alt94=2;
+            alt95=2;
             }
             break;
         case 51:
             {
-            alt94=3;
+            alt95=3;
             }
             break;
         default:
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 94, 0, input);
+                new NoViableAltException("", 95, 0, input);
 
             throw nvae;
         }
 
-        switch (alt94) {
+        switch (alt95) {
             case 1 :
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:1982:4: '.'
                 {
@@ -16138,13 +16286,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2124:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt96=2;
-        int LA96_0 = input.LA(1);
+        int alt97=2;
+        int LA97_0 = input.LA(1);
 
-        if ( (LA96_0==RULE_ID||LA96_0==21||LA96_0==39) ) {
-            alt96=1;
+        if ( (LA97_0==RULE_ID||LA97_0==21||LA97_0==39) ) {
+            alt97=1;
         }
-        switch (alt96) {
+        switch (alt97) {
             case 1 :
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2124:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -16166,17 +16314,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2128:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop95:
+                loop96:
                 do {
-                    int alt95=2;
-                    int LA95_0 = input.LA(1);
+                    int alt96=2;
+                    int LA96_0 = input.LA(1);
 
-                    if ( (LA95_0==22) ) {
-                        alt95=1;
+                    if ( (LA96_0==22) ) {
+                        alt96=1;
                     }
 
 
-                    switch (alt95) {
+                    switch (alt96) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2128:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -16203,7 +16351,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop95;
+                	    break loop96;
                     }
                 } while (true);
 
@@ -16287,13 +16435,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2487:6: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2487:6: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt98=2;
-        int LA98_0 = input.LA(1);
+        int alt99=2;
+        int LA99_0 = input.LA(1);
 
-        if ( (LA98_0==RULE_ID||LA98_0==21||LA98_0==39) ) {
-            alt98=1;
+        if ( (LA99_0==RULE_ID||LA99_0==21||LA99_0==39) ) {
+            alt99=1;
         }
-        switch (alt98) {
+        switch (alt99) {
             case 1 :
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2487:7: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -16315,17 +16463,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2491:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop97:
+                loop98:
                 do {
-                    int alt97=2;
-                    int LA97_0 = input.LA(1);
+                    int alt98=2;
+                    int LA98_0 = input.LA(1);
 
-                    if ( (LA97_0==22) ) {
-                        alt97=1;
+                    if ( (LA98_0==22) ) {
+                        alt98=1;
                     }
 
 
-                    switch (alt97) {
+                    switch (alt98) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:2491:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -16352,7 +16500,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop97;
+                	    break loop98;
                     }
                 } while (true);
 
@@ -16544,13 +16692,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:3867:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt102=2;
-        int LA102_0 = input.LA(1);
+        int alt103=2;
+        int LA103_0 = input.LA(1);
 
-        if ( (LA102_0==RULE_ID||LA102_0==21||LA102_0==39) ) {
-            alt102=1;
+        if ( (LA103_0==RULE_ID||LA103_0==21||LA103_0==39) ) {
+            alt103=1;
         }
-        switch (alt102) {
+        switch (alt103) {
             case 1 :
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:3867:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -16572,17 +16720,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:3871:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop101:
+                loop102:
                 do {
-                    int alt101=2;
-                    int LA101_0 = input.LA(1);
+                    int alt102=2;
+                    int LA102_0 = input.LA(1);
 
-                    if ( (LA101_0==22) ) {
-                        alt101=1;
+                    if ( (LA102_0==22) ) {
+                        alt102=1;
                     }
 
 
-                    switch (alt101) {
+                    switch (alt102) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:3871:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -16609,7 +16757,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop101;
+                	    break loop102;
                     }
                 } while (true);
 
@@ -16698,13 +16846,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4143:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt104=2;
-        int LA104_0 = input.LA(1);
+        int alt105=2;
+        int LA105_0 = input.LA(1);
 
-        if ( (LA104_0==RULE_ID||LA104_0==21||LA104_0==39) ) {
-            alt104=1;
+        if ( (LA105_0==RULE_ID||LA105_0==21||LA105_0==39) ) {
+            alt105=1;
         }
-        switch (alt104) {
+        switch (alt105) {
             case 1 :
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4143:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -16726,17 +16874,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4147:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop103:
+                loop104:
                 do {
-                    int alt103=2;
-                    int LA103_0 = input.LA(1);
+                    int alt104=2;
+                    int LA104_0 = input.LA(1);
 
-                    if ( (LA103_0==22) ) {
-                        alt103=1;
+                    if ( (LA104_0==22) ) {
+                        alt104=1;
                     }
 
 
-                    switch (alt103) {
+                    switch (alt104) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4147:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -16763,7 +16911,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop103;
+                	    break loop104;
                     }
                 } while (true);
 
@@ -16818,13 +16966,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred33_InternalDomainmodel
     public final void synpred33_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4543:2: ( ( ruleXExpression ) )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4544:1: ( ruleXExpression )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4561:2: ( ( ruleXExpression ) )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4562:1: ( ruleXExpression )
         {
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4544:1: ( ruleXExpression )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4545:1: ruleXExpression
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4562:1: ( ruleXExpression )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4563:1: ruleXExpression
         {
-        pushFollow(FOLLOW_ruleXExpression_in_synpred33_InternalDomainmodel10632);
+        pushFollow(FOLLOW_ruleXExpression_in_synpred33_InternalDomainmodel10654);
         ruleXExpression();
 
         state._fsp--;
@@ -16839,10 +16987,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred34_InternalDomainmodel
     public final void synpred34_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:5: ( 'catch' )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4614:7: 'catch'
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:5: ( 'catch' )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4632:7: 'catch'
         {
-        match(input,77,FOLLOW_77_in_synpred34_InternalDomainmodel10777); if (state.failed) return ;
+        match(input,77,FOLLOW_77_in_synpred34_InternalDomainmodel10799); if (state.failed) return ;
 
         }
     }
@@ -16850,10 +16998,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred35_InternalDomainmodel
     public final void synpred35_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:5: ( 'finally' )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4633:7: 'finally'
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:5: ( 'finally' )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4651:7: 'finally'
         {
-        match(input,76,FOLLOW_76_in_synpred35_InternalDomainmodel10807); if (state.failed) return ;
+        match(input,76,FOLLOW_76_in_synpred35_InternalDomainmodel10829); if (state.failed) return ;
 
         }
     }
@@ -16861,10 +17009,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred37_InternalDomainmodel
     public final void synpred37_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4781:3: ( '.' )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4782:2: '.'
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4799:3: ( '.' )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4800:2: '.'
         {
-        match(input,24,FOLLOW_24_in_synpred37_InternalDomainmodel11154); if (state.failed) return ;
+        match(input,24,FOLLOW_24_in_synpred37_InternalDomainmodel11176); if (state.failed) return ;
 
         }
     }
@@ -16872,19 +17020,22 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred38_InternalDomainmodel
     public final void synpred38_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:2: ( ( () '[' ']' ) )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:3: ( () '[' ']' )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:2: ( ( () ruleArrayBrackets ) )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:3: ( () ruleArrayBrackets )
         {
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:3: ( () '[' ']' )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:4: () '[' ']'
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:3: ( () ruleArrayBrackets )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:4: () ruleArrayBrackets
         {
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4905:4: ()
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:1: 
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4923:4: ()
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4924:1: 
         {
         }
 
-        match(input,52,FOLLOW_52_in_synpred38_InternalDomainmodel11537); if (state.failed) return ;
-        match(input,54,FOLLOW_54_in_synpred38_InternalDomainmodel11541); if (state.failed) return ;
+        pushFollow(FOLLOW_ruleArrayBrackets_in_synpred38_InternalDomainmodel11559);
+        ruleArrayBrackets();
+
+        state._fsp--;
+        if (state.failed) return ;
 
         }
 
@@ -16895,10 +17046,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred39_InternalDomainmodel
     public final void synpred39_InternalDomainmodel_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:4: ( '<' )
-        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5059:6: '<'
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:4: ( '<' )
+        // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:5108:6: '<'
         {
-        match(input,36,FOLLOW_36_in_synpred39_InternalDomainmodel11901); if (state.failed) return ;
+        match(input,36,FOLLOW_36_in_synpred39_InternalDomainmodel12011); if (state.failed) return ;
 
         }
     }
@@ -17425,8 +17576,8 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     protected DFA73 dfa73 = new DFA73(this);
     protected DFA72 dfa72 = new DFA72(this);
     protected DFA74 dfa74 = new DFA74(this);
-    protected DFA76 dfa76 = new DFA76(this);
-    protected DFA91 dfa91 = new DFA91(this);
+    protected DFA77 dfa77 = new DFA77(this);
+    protected DFA92 dfa92 = new DFA92(this);
     static final String DFA18_eotS =
         "\13\uffff";
     static final String DFA18_eofS =
@@ -17438,7 +17589,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     static final String DFA18_acceptS =
         "\1\uffff\1\2\10\uffff\1\1";
     static final String DFA18_specialS =
-        "\2\uffff\1\7\1\4\1\1\1\0\1\6\1\3\1\2\1\5\1\uffff}>";
+        "\2\uffff\1\3\1\1\1\4\1\5\1\7\1\0\1\2\1\6\1\uffff}>";
     static final String[] DFA18_transitionS = {
             "\5\1\6\uffff\2\1\2\uffff\1\1\1\uffff\5\1\1\uffff\10\1\1\2\1"+
             "\3\1\4\1\5\1\6\1\7\1\10\1\11\12\1\1\uffff\15\1\1\uffff\12\1",
@@ -17491,10 +17642,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA18_5 = input.LA(1);
+                        int LA18_7 = input.LA(1);
 
                          
-                        int index18_5 = input.index();
+                        int index18_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
@@ -17502,14 +17653,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index18_5);
+                        input.seek(index18_7);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA18_4 = input.LA(1);
+                        int LA18_3 = input.LA(1);
 
                          
-                        int index18_4 = input.index();
+                        int index18_3 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
@@ -17517,7 +17668,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index18_4);
+                        input.seek(index18_3);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
@@ -17536,10 +17687,10 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA18_7 = input.LA(1);
+                        int LA18_2 = input.LA(1);
 
                          
-                        int index18_7 = input.index();
+                        int index18_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
@@ -17547,14 +17698,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index18_7);
+                        input.seek(index18_2);
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA18_3 = input.LA(1);
+                        int LA18_4 = input.LA(1);
 
                          
-                        int index18_3 = input.index();
+                        int index18_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
@@ -17562,10 +17713,25 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index18_3);
+                        input.seek(index18_4);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
+                        int LA18_5 = input.LA(1);
+
+                         
+                        int index18_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index18_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
                         int LA18_9 = input.LA(1);
 
                          
@@ -17580,7 +17746,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         input.seek(index18_9);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 7 : 
                         int LA18_6 = input.LA(1);
 
                          
@@ -17593,21 +17759,6 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index18_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA18_2 = input.LA(1);
-
-                         
-                        int index18_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalDomainmodel()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index18_2);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -19239,21 +19390,21 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String DFA76_eotS =
+    static final String DFA77_eotS =
         "\101\uffff";
-    static final String DFA76_eofS =
+    static final String DFA77_eofS =
         "\1\33\100\uffff";
-    static final String DFA76_minS =
+    static final String DFA77_minS =
         "\1\4\32\0\46\uffff";
-    static final String DFA76_maxS =
+    static final String DFA77_maxS =
         "\1\115\32\0\46\uffff";
-    static final String DFA76_acceptS =
+    static final String DFA77_acceptS =
         "\33\uffff\1\2\44\uffff\1\1";
-    static final String DFA76_specialS =
+    static final String DFA77_specialS =
         "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
         "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"+
         "\46\uffff}>";
-    static final String[] DFA76_transitionS = {
+    static final String[] DFA77_transitionS = {
             "\1\21\1\15\1\16\1\17\1\1\6\uffff\1\6\1\33\2\uffff\1\33\1\uffff"+
             "\1\32\4\33\1\uffff\11\33\1\10\6\33\1\4\1\3\3\33\1\2\3\33\1\12"+
             "\1\uffff\2\33\1\23\1\33\1\7\2\33\1\24\1\25\1\26\2\33\1\11\1"+
@@ -19324,47 +19475,47 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA76_eot = DFA.unpackEncodedString(DFA76_eotS);
-    static final short[] DFA76_eof = DFA.unpackEncodedString(DFA76_eofS);
-    static final char[] DFA76_min = DFA.unpackEncodedStringToUnsignedChars(DFA76_minS);
-    static final char[] DFA76_max = DFA.unpackEncodedStringToUnsignedChars(DFA76_maxS);
-    static final short[] DFA76_accept = DFA.unpackEncodedString(DFA76_acceptS);
-    static final short[] DFA76_special = DFA.unpackEncodedString(DFA76_specialS);
-    static final short[][] DFA76_transition;
+    static final short[] DFA77_eot = DFA.unpackEncodedString(DFA77_eotS);
+    static final short[] DFA77_eof = DFA.unpackEncodedString(DFA77_eofS);
+    static final char[] DFA77_min = DFA.unpackEncodedStringToUnsignedChars(DFA77_minS);
+    static final char[] DFA77_max = DFA.unpackEncodedStringToUnsignedChars(DFA77_maxS);
+    static final short[] DFA77_accept = DFA.unpackEncodedString(DFA77_acceptS);
+    static final short[] DFA77_special = DFA.unpackEncodedString(DFA77_specialS);
+    static final short[][] DFA77_transition;
 
     static {
-        int numStates = DFA76_transitionS.length;
-        DFA76_transition = new short[numStates][];
+        int numStates = DFA77_transitionS.length;
+        DFA77_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA76_transition[i] = DFA.unpackEncodedString(DFA76_transitionS[i]);
+            DFA77_transition[i] = DFA.unpackEncodedString(DFA77_transitionS[i]);
         }
     }
 
-    class DFA76 extends DFA {
+    class DFA77 extends DFA {
 
-        public DFA76(BaseRecognizer recognizer) {
+        public DFA77(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 76;
-            this.eot = DFA76_eot;
-            this.eof = DFA76_eof;
-            this.min = DFA76_min;
-            this.max = DFA76_max;
-            this.accept = DFA76_accept;
-            this.special = DFA76_special;
-            this.transition = DFA76_transition;
+            this.decisionNumber = 77;
+            this.eot = DFA77_eot;
+            this.eof = DFA77_eof;
+            this.min = DFA77_min;
+            this.max = DFA77_max;
+            this.accept = DFA77_accept;
+            this.special = DFA77_special;
+            this.transition = DFA77_transition;
         }
         public String getDescription() {
-            return "4543:1: ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?";
+            return "4561:1: ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA76_1 = input.LA(1);
+                        int LA77_1 = input.LA(1);
 
                          
-                        int index76_1 = input.index();
+                        int index77_1 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19372,14 +19523,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_1);
+                        input.seek(index77_1);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA76_2 = input.LA(1);
+                        int LA77_2 = input.LA(1);
 
                          
-                        int index76_2 = input.index();
+                        int index77_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19387,14 +19538,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_2);
+                        input.seek(index77_2);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA76_3 = input.LA(1);
+                        int LA77_3 = input.LA(1);
 
                          
-                        int index76_3 = input.index();
+                        int index77_3 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19402,14 +19553,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_3);
+                        input.seek(index77_3);
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA76_4 = input.LA(1);
+                        int LA77_4 = input.LA(1);
 
                          
-                        int index76_4 = input.index();
+                        int index77_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19417,14 +19568,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_4);
+                        input.seek(index77_4);
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA76_5 = input.LA(1);
+                        int LA77_5 = input.LA(1);
 
                          
-                        int index76_5 = input.index();
+                        int index77_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19432,14 +19583,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_5);
+                        input.seek(index77_5);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA76_6 = input.LA(1);
+                        int LA77_6 = input.LA(1);
 
                          
-                        int index76_6 = input.index();
+                        int index77_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19447,14 +19598,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_6);
+                        input.seek(index77_6);
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA76_7 = input.LA(1);
+                        int LA77_7 = input.LA(1);
 
                          
-                        int index76_7 = input.index();
+                        int index77_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19462,14 +19613,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_7);
+                        input.seek(index77_7);
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA76_8 = input.LA(1);
+                        int LA77_8 = input.LA(1);
 
                          
-                        int index76_8 = input.index();
+                        int index77_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19477,14 +19628,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_8);
+                        input.seek(index77_8);
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA76_9 = input.LA(1);
+                        int LA77_9 = input.LA(1);
 
                          
-                        int index76_9 = input.index();
+                        int index77_9 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19492,14 +19643,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_9);
+                        input.seek(index77_9);
                         if ( s>=0 ) return s;
                         break;
                     case 9 : 
-                        int LA76_10 = input.LA(1);
+                        int LA77_10 = input.LA(1);
 
                          
-                        int index76_10 = input.index();
+                        int index77_10 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19507,14 +19658,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_10);
+                        input.seek(index77_10);
                         if ( s>=0 ) return s;
                         break;
                     case 10 : 
-                        int LA76_11 = input.LA(1);
+                        int LA77_11 = input.LA(1);
 
                          
-                        int index76_11 = input.index();
+                        int index77_11 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19522,14 +19673,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_11);
+                        input.seek(index77_11);
                         if ( s>=0 ) return s;
                         break;
                     case 11 : 
-                        int LA76_12 = input.LA(1);
+                        int LA77_12 = input.LA(1);
 
                          
-                        int index76_12 = input.index();
+                        int index77_12 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19537,14 +19688,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_12);
+                        input.seek(index77_12);
                         if ( s>=0 ) return s;
                         break;
                     case 12 : 
-                        int LA76_13 = input.LA(1);
+                        int LA77_13 = input.LA(1);
 
                          
-                        int index76_13 = input.index();
+                        int index77_13 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19552,14 +19703,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_13);
+                        input.seek(index77_13);
                         if ( s>=0 ) return s;
                         break;
                     case 13 : 
-                        int LA76_14 = input.LA(1);
+                        int LA77_14 = input.LA(1);
 
                          
-                        int index76_14 = input.index();
+                        int index77_14 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19567,14 +19718,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_14);
+                        input.seek(index77_14);
                         if ( s>=0 ) return s;
                         break;
                     case 14 : 
-                        int LA76_15 = input.LA(1);
+                        int LA77_15 = input.LA(1);
 
                          
-                        int index76_15 = input.index();
+                        int index77_15 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19582,14 +19733,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_15);
+                        input.seek(index77_15);
                         if ( s>=0 ) return s;
                         break;
                     case 15 : 
-                        int LA76_16 = input.LA(1);
+                        int LA77_16 = input.LA(1);
 
                          
-                        int index76_16 = input.index();
+                        int index77_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19597,14 +19748,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_16);
+                        input.seek(index77_16);
                         if ( s>=0 ) return s;
                         break;
                     case 16 : 
-                        int LA76_17 = input.LA(1);
+                        int LA77_17 = input.LA(1);
 
                          
-                        int index76_17 = input.index();
+                        int index77_17 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19612,14 +19763,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_17);
+                        input.seek(index77_17);
                         if ( s>=0 ) return s;
                         break;
                     case 17 : 
-                        int LA76_18 = input.LA(1);
+                        int LA77_18 = input.LA(1);
 
                          
-                        int index76_18 = input.index();
+                        int index77_18 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19627,14 +19778,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_18);
+                        input.seek(index77_18);
                         if ( s>=0 ) return s;
                         break;
                     case 18 : 
-                        int LA76_19 = input.LA(1);
+                        int LA77_19 = input.LA(1);
 
                          
-                        int index76_19 = input.index();
+                        int index77_19 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19642,14 +19793,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_19);
+                        input.seek(index77_19);
                         if ( s>=0 ) return s;
                         break;
                     case 19 : 
-                        int LA76_20 = input.LA(1);
+                        int LA77_20 = input.LA(1);
 
                          
-                        int index76_20 = input.index();
+                        int index77_20 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19657,14 +19808,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_20);
+                        input.seek(index77_20);
                         if ( s>=0 ) return s;
                         break;
                     case 20 : 
-                        int LA76_21 = input.LA(1);
+                        int LA77_21 = input.LA(1);
 
                          
-                        int index76_21 = input.index();
+                        int index77_21 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19672,14 +19823,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_21);
+                        input.seek(index77_21);
                         if ( s>=0 ) return s;
                         break;
                     case 21 : 
-                        int LA76_22 = input.LA(1);
+                        int LA77_22 = input.LA(1);
 
                          
-                        int index76_22 = input.index();
+                        int index77_22 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19687,14 +19838,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_22);
+                        input.seek(index77_22);
                         if ( s>=0 ) return s;
                         break;
                     case 22 : 
-                        int LA76_23 = input.LA(1);
+                        int LA77_23 = input.LA(1);
 
                          
-                        int index76_23 = input.index();
+                        int index77_23 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19702,14 +19853,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_23);
+                        input.seek(index77_23);
                         if ( s>=0 ) return s;
                         break;
                     case 23 : 
-                        int LA76_24 = input.LA(1);
+                        int LA77_24 = input.LA(1);
 
                          
-                        int index76_24 = input.index();
+                        int index77_24 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19717,14 +19868,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_24);
+                        input.seek(index77_24);
                         if ( s>=0 ) return s;
                         break;
                     case 24 : 
-                        int LA76_25 = input.LA(1);
+                        int LA77_25 = input.LA(1);
 
                          
-                        int index76_25 = input.index();
+                        int index77_25 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19732,14 +19883,14 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_25);
+                        input.seek(index77_25);
                         if ( s>=0 ) return s;
                         break;
                     case 25 : 
-                        int LA76_26 = input.LA(1);
+                        int LA77_26 = input.LA(1);
 
                          
-                        int index76_26 = input.index();
+                        int index77_26 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred33_InternalDomainmodel()) ) {s = 64;}
@@ -19747,30 +19898,30 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 27;}
 
                          
-                        input.seek(index76_26);
+                        input.seek(index77_26);
                         if ( s>=0 ) return s;
                         break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 76, _s, input);
+                new NoViableAltException(getDescription(), 77, _s, input);
             error(nvae);
             throw nvae;
         }
     }
-    static final String DFA91_eotS =
+    static final String DFA92_eotS =
         "\102\uffff";
-    static final String DFA91_eofS =
+    static final String DFA92_eofS =
         "\1\2\101\uffff";
-    static final String DFA91_minS =
+    static final String DFA92_minS =
         "\1\4\1\0\100\uffff";
-    static final String DFA91_maxS =
+    static final String DFA92_maxS =
         "\1\115\1\0\100\uffff";
-    static final String DFA91_acceptS =
+    static final String DFA92_acceptS =
         "\2\uffff\1\2\76\uffff\1\1";
-    static final String DFA91_specialS =
+    static final String DFA92_specialS =
         "\1\uffff\1\0\100\uffff}>";
-    static final String[] DFA91_transitionS = {
+    static final String[] DFA92_transitionS = {
             "\5\2\6\uffff\2\2\2\uffff\7\2\1\uffff\11\2\1\1\20\2\1\uffff\15"+
             "\2\1\uffff\12\2",
             "\1\uffff",
@@ -19840,47 +19991,47 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA91_eot = DFA.unpackEncodedString(DFA91_eotS);
-    static final short[] DFA91_eof = DFA.unpackEncodedString(DFA91_eofS);
-    static final char[] DFA91_min = DFA.unpackEncodedStringToUnsignedChars(DFA91_minS);
-    static final char[] DFA91_max = DFA.unpackEncodedStringToUnsignedChars(DFA91_maxS);
-    static final short[] DFA91_accept = DFA.unpackEncodedString(DFA91_acceptS);
-    static final short[] DFA91_special = DFA.unpackEncodedString(DFA91_specialS);
-    static final short[][] DFA91_transition;
+    static final short[] DFA92_eot = DFA.unpackEncodedString(DFA92_eotS);
+    static final short[] DFA92_eof = DFA.unpackEncodedString(DFA92_eofS);
+    static final char[] DFA92_min = DFA.unpackEncodedStringToUnsignedChars(DFA92_minS);
+    static final char[] DFA92_max = DFA.unpackEncodedStringToUnsignedChars(DFA92_maxS);
+    static final short[] DFA92_accept = DFA.unpackEncodedString(DFA92_acceptS);
+    static final short[] DFA92_special = DFA.unpackEncodedString(DFA92_specialS);
+    static final short[][] DFA92_transition;
 
     static {
-        int numStates = DFA91_transitionS.length;
-        DFA91_transition = new short[numStates][];
+        int numStates = DFA92_transitionS.length;
+        DFA92_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA91_transition[i] = DFA.unpackEncodedString(DFA91_transitionS[i]);
+            DFA92_transition[i] = DFA.unpackEncodedString(DFA92_transitionS[i]);
         }
     }
 
-    class DFA91 extends DFA {
+    class DFA92 extends DFA {
 
-        public DFA91(BaseRecognizer recognizer) {
+        public DFA92(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 91;
-            this.eot = DFA91_eot;
-            this.eof = DFA91_eof;
-            this.min = DFA91_min;
-            this.max = DFA91_max;
-            this.accept = DFA91_accept;
-            this.special = DFA91_special;
-            this.transition = DFA91_transition;
+            this.decisionNumber = 92;
+            this.eot = DFA92_eot;
+            this.eof = DFA92_eof;
+            this.min = DFA92_min;
+            this.max = DFA92_max;
+            this.accept = DFA92_accept;
+            this.special = DFA92_special;
+            this.transition = DFA92_transition;
         }
         public String getDescription() {
-            return "5059:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
+            return "5108:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA91_1 = input.LA(1);
+                        int LA92_1 = input.LA(1);
 
                          
-                        int index91_1 = input.index();
+                        int index92_1 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred39_InternalDomainmodel()) ) {s = 65;}
@@ -19888,13 +20039,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 2;}
 
                          
-                        input.seek(index91_1);
+                        input.seek(index92_1);
                         if ( s>=0 ) return s;
                         break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 91, _s, input);
+                new NoViableAltException(getDescription(), 92, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -20278,92 +20429,96 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleXTypeLiteral10320 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_72_in_ruleXTypeLiteral10366 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_21_in_ruleXTypeLiteral10378 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral10401 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_ruleXTypeLiteral10413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression10449 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXThrowExpression10459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_73_in_ruleXThrowExpression10505 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXThrowExpression10526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression10562 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXReturnExpression10572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleXReturnExpression10618 = new BitSet(new long[]{0xE5111810002081F2L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXReturnExpression10649 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10686 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_75_in_ruleXTryCatchFinallyExpression10742 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10763 = new BitSet(new long[]{0x0000000000000000L,0x0000000000003000L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10793 = new BitSet(new long[]{0x0000000000000002L,0x0000000000003000L});
-    public static final BitSet FOLLOW_76_in_ruleXTryCatchFinallyExpression10815 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_76_in_ruleXTryCatchFinallyExpression10859 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10918 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXCatchClause10928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_77_in_ruleXCatchClause10973 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_ruleXCatchClause10986 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause11007 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_ruleXCatchClause11019 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCatchClause11040 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName11077 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName11088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName11135 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_ruleQualifiedName11163 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName11186 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_ruleNumber_in_entryRuleNumber11240 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumber11251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_HEX_in_ruleNumber11295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleNumber11323 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber11349 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_ruleNumber11369 = new BitSet(new long[]{0x00000000000000C0L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleNumber11385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber11411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference11464 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeReference11474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference11522 = new BitSet(new long[]{0x0010000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleJvmTypeReference11560 = new BitSet(new long[]{0x0040000000000000L});
-    public static final BitSet FOLLOW_54_in_ruleJvmTypeReference11572 = new BitSet(new long[]{0x0010000000000002L});
-    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference11604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef11639 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXFunctionTypeRef11649 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleXFunctionTypeRef11687 = new BitSet(new long[]{0x0000008000A00100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11709 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_22_in_ruleXFunctionTypeRef11722 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11743 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_23_in_ruleXFunctionTypeRef11759 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_39_in_ruleXFunctionTypeRef11773 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11794 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11830 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11888 = new BitSet(new long[]{0x0000001000000002L});
-    public static final BitSet FOLLOW_36_in_ruleJvmParameterizedTypeReference11909 = new BitSet(new long[]{0x0000008000200100L,0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11931 = new BitSet(new long[]{0x0000000800400000L});
-    public static final BitSet FOLLOW_22_in_ruleJvmParameterizedTypeReference11944 = new BitSet(new long[]{0x0000008000200100L,0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11965 = new BitSet(new long[]{0x0000000800400000L});
-    public static final BitSet FOLLOW_35_in_ruleJvmParameterizedTypeReference11979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference12017 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference12027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference12074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference12101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference12136 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference12146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleJvmWildcardTypeReference12192 = new BitSet(new long[]{0x0000000000040002L,0x0000000000000004L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference12214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference12241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound12279 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound12289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleJvmUpperBound12326 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound12347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded12383 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded12393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_79_in_ruleJvmUpperBoundAnded12430 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded12451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound12487 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound12497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleJvmLowerBound12534 = new BitSet(new long[]{0x0000008000200100L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound12555 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID12594 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValidID12605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleValidID12644 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral10401 = new BitSet(new long[]{0x0010000000800000L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_ruleXTypeLiteral10422 = new BitSet(new long[]{0x0010000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleXTypeLiteral10435 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression10471 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXThrowExpression10481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_73_in_ruleXThrowExpression10527 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXThrowExpression10548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression10584 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXReturnExpression10594 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleXReturnExpression10640 = new BitSet(new long[]{0xE5111810002081F2L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXReturnExpression10671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10708 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_75_in_ruleXTryCatchFinallyExpression10764 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10785 = new BitSet(new long[]{0x0000000000000000L,0x0000000000003000L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10815 = new BitSet(new long[]{0x0000000000000002L,0x0000000000003000L});
+    public static final BitSet FOLLOW_76_in_ruleXTryCatchFinallyExpression10837 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_76_in_ruleXTryCatchFinallyExpression10881 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10902 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10940 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXCatchClause10950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_77_in_ruleXCatchClause10995 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_ruleXCatchClause11008 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause11029 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleXCatchClause11041 = new BitSet(new long[]{0xE5111810002081F0L,0x0000000000000FF4L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCatchClause11062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName11099 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName11110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName11157 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_24_in_ruleQualifiedName11185 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName11208 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_ruleNumber_in_entryRuleNumber11262 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumber11273 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleNumber11317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleNumber11345 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber11371 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_24_in_ruleNumber11391 = new BitSet(new long[]{0x00000000000000C0L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleNumber11407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber11433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference11486 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeReference11496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference11544 = new BitSet(new long[]{0x0010000000000002L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_ruleJvmTypeReference11580 = new BitSet(new long[]{0x0010000000000002L});
+    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference11611 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_entryRuleArrayBrackets11647 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleArrayBrackets11658 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_ruleArrayBrackets11696 = new BitSet(new long[]{0x0040000000000000L});
+    public static final BitSet FOLLOW_54_in_ruleArrayBrackets11709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef11749 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXFunctionTypeRef11759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleXFunctionTypeRef11797 = new BitSet(new long[]{0x0000008000A00100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11819 = new BitSet(new long[]{0x0000000000C00000L});
+    public static final BitSet FOLLOW_22_in_ruleXFunctionTypeRef11832 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11853 = new BitSet(new long[]{0x0000000000C00000L});
+    public static final BitSet FOLLOW_23_in_ruleXFunctionTypeRef11869 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_39_in_ruleXFunctionTypeRef11883 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11904 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11940 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11998 = new BitSet(new long[]{0x0000001000000002L});
+    public static final BitSet FOLLOW_36_in_ruleJvmParameterizedTypeReference12019 = new BitSet(new long[]{0x0000008000200100L,0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference12041 = new BitSet(new long[]{0x0000000800400000L});
+    public static final BitSet FOLLOW_22_in_ruleJvmParameterizedTypeReference12054 = new BitSet(new long[]{0x0000008000200100L,0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference12075 = new BitSet(new long[]{0x0000000800400000L});
+    public static final BitSet FOLLOW_35_in_ruleJvmParameterizedTypeReference12089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference12127 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference12137 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference12184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference12211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference12246 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference12256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_78_in_ruleJvmWildcardTypeReference12302 = new BitSet(new long[]{0x0000000000040002L,0x0000000000000004L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference12324 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference12351 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound12389 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound12399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleJvmUpperBound12436 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound12457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded12493 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded12503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleJvmUpperBoundAnded12540 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded12561 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound12597 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound12607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_ruleJvmLowerBound12644 = new BitSet(new long[]{0x0000008000200100L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound12665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID12704 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValidID12715 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleValidID12754 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpMultiAssign_in_synpred1_InternalDomainmodel1616 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpOr_in_synpred2_InternalDomainmodel1964 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpAnd_in_synpred3_InternalDomainmodel2223 = new BitSet(new long[]{0x0000000000000002L});
@@ -20416,12 +20571,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred31_InternalDomainmodel9696 = new BitSet(new long[]{0x0020000000400000L});
     public static final BitSet FOLLOW_53_in_synpred31_InternalDomainmodel9710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_52_in_synpred32_InternalDomainmodel9830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_synpred33_InternalDomainmodel10632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_77_in_synpred34_InternalDomainmodel10777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_76_in_synpred35_InternalDomainmodel10807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_synpred37_InternalDomainmodel11154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_synpred38_InternalDomainmodel11537 = new BitSet(new long[]{0x0040000000000000L});
-    public static final BitSet FOLLOW_54_in_synpred38_InternalDomainmodel11541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_synpred39_InternalDomainmodel11901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_synpred33_InternalDomainmodel10654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_77_in_synpred34_InternalDomainmodel10799 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_76_in_synpred35_InternalDomainmodel10829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_synpred37_InternalDomainmodel11176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_synpred38_InternalDomainmodel11559 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_synpred39_InternalDomainmodel12011 = new BitSet(new long[]{0x0000000000000002L});
 
 }

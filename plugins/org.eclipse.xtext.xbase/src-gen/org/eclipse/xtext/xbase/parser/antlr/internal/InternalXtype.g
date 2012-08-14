@@ -87,34 +87,65 @@ ruleJvmTypeReference returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 ((((
-)	'[' 
-	']' 
-))=>((
+)	ruleArrayBrackets))=>((
     {
         $current = forceCreateModelElementAndSet(
             grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0(),
             $current);
     }
-)	otherlv_2='[' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getJvmTypeReferenceAccess().getLeftSquareBracketKeyword_0_1_0_1());
+)
+    { 
+        newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getArrayBracketsParserRuleCall_0_1_0_1()); 
     }
-	otherlv_3=']' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getJvmTypeReferenceAccess().getRightSquareBracketKeyword_0_1_0_2());
+ruleArrayBrackets
+    { 
+        afterParserOrEnumRuleCall();
     }
 ))*)
     |
     { 
         newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getXFunctionTypeRefParserRuleCall_1()); 
     }
-    this_XFunctionTypeRef_4=ruleXFunctionTypeRef
+    this_XFunctionTypeRef_3=ruleXFunctionTypeRef
     { 
-        $current = $this_XFunctionTypeRef_4.current; 
+        $current = $this_XFunctionTypeRef_3.current; 
         afterParserOrEnumRuleCall();
     }
 )
 ;
+
+
+
+
+
+// Entry rule entryRuleArrayBrackets
+entryRuleArrayBrackets returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getArrayBracketsRule()); } 
+	 iv_ruleArrayBrackets=ruleArrayBrackets 
+	 { $current=$iv_ruleArrayBrackets.current.getText(); }  
+	 EOF 
+;
+
+// Rule ArrayBrackets
+ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	kw='[' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getLeftSquareBracketKeyword_0()); 
+    }
+
+	kw=']' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getRightSquareBracketKeyword_1()); 
+    }
+)
+    ;
 
 
 

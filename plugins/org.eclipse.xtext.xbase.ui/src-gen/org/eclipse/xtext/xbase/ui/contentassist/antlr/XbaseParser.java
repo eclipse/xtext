@@ -198,6 +198,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0(), "rule__JvmTypeReference__Group_0__0");
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0_1(), "rule__JvmTypeReference__Group_0_1__0");
 					put(grammarAccess.getJvmTypeReferenceAccess().getGroup_0_1_0(), "rule__JvmTypeReference__Group_0_1_0__0");
+					put(grammarAccess.getArrayBracketsAccess().getGroup(), "rule__ArrayBrackets__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup(), "rule__XFunctionTypeRef__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0(), "rule__XFunctionTypeRef__Group_0__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0_1(), "rule__XFunctionTypeRef__Group_0_1__0");
@@ -303,6 +304,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXNumberLiteralAccess().getValueAssignment_1(), "rule__XNumberLiteral__ValueAssignment_1");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_1(), "rule__XStringLiteral__ValueAssignment_1");
 					put(grammarAccess.getXTypeLiteralAccess().getTypeAssignment_3(), "rule__XTypeLiteral__TypeAssignment_3");
+					put(grammarAccess.getXTypeLiteralAccess().getArrayDimensionsAssignment_4(), "rule__XTypeLiteral__ArrayDimensionsAssignment_4");
 					put(grammarAccess.getXThrowExpressionAccess().getExpressionAssignment_2(), "rule__XThrowExpression__ExpressionAssignment_2");
 					put(grammarAccess.getXReturnExpressionAccess().getExpressionAssignment_2(), "rule__XReturnExpression__ExpressionAssignment_2");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionAssignment_2(), "rule__XTryCatchFinallyExpression__ExpressionAssignment_2");

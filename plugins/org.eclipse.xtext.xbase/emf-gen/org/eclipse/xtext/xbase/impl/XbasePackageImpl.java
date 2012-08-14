@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -1107,6 +1106,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXTypeLiteral_ArrayDimensions()
+	{
+		return (EAttribute)xTypeLiteralEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXInstanceOfExpression()
 	{
 		return xInstanceOfExpressionEClass;
@@ -1400,6 +1409,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		xTypeLiteralEClass = createEClass(XTYPE_LITERAL);
 		createEReference(xTypeLiteralEClass, XTYPE_LITERAL__TYPE);
+		createEAttribute(xTypeLiteralEClass, XTYPE_LITERAL__ARRAY_DIMENSIONS);
 
 		xInstanceOfExpressionEClass = createEClass(XINSTANCE_OF_EXPRESSION);
 		createEReference(xInstanceOfExpressionEClass, XINSTANCE_OF_EXPRESSION__TYPE);
@@ -1594,6 +1604,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		initEClass(xTypeLiteralEClass, XTypeLiteral.class, "XTypeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXTypeLiteral_Type(), theTypesPackage.getJvmType(), null, "type", null, 1, 1, XTypeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXTypeLiteral_ArrayDimensions(), ecorePackage.getEString(), "arrayDimensions", null, 0, -1, XTypeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xInstanceOfExpressionEClass, XInstanceOfExpression.class, "XInstanceOfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXInstanceOfExpression_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 1, 1, XInstanceOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
