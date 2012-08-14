@@ -19,9 +19,11 @@ import org.eclipse.xtext.xbase.XExpression;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public interface ILinkingCandidate<Candidate extends ILinkingCandidate<Candidate>> extends Comparable<Candidate> {
+public interface ILinkingCandidate<Candidate extends ILinkingCandidate<Candidate>> {
 	
 	void apply();
+	
+	boolean isPreferredOver(Candidate other);
 	
 	JvmIdentifiableElement getFeature();
 

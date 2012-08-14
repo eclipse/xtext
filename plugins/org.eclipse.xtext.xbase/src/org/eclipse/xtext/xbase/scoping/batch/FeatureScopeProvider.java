@@ -13,14 +13,11 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -29,42 +26,35 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class FeatureScopeProvider implements FeatureNames {
 
-	@Inject
-	private Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider;
+//	@Inject
+//	private Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider;
 	
-	@Inject
-	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
+//	@Inject
+//	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
 
-	@Inject
-	private Provider<StaticImplicitMethodsFeatureForTypeProvider> implicitStaticFeatures;
+//	@Inject
+//	private Provider<StaticImplicitMethodsFeatureForTypeProvider> implicitStaticFeatures;
 	
-	@Inject
-	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
+//	@Inject
+//	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
 
-	@Inject
-	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
+//	@Inject
+//	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
 
 	@Inject
 	private OperatorMapping operatorMapping;
@@ -72,13 +62,16 @@ public class FeatureScopeProvider implements FeatureNames {
 	@Inject
 	private SynonymTypesProvider synonymProvider;
 	
-	protected static final int DEFAULT_MEMBER_CALL_PRIORITY = 0;
-	protected static final int DEFAULT_IT_PRIORITY = 10;
-	protected static final int DEFAULT_THIS_PRIORITY = 20;
-	protected static final int DEFAULT_IMPLICIT_STATIC_FEATURE_PRIORITY = 60;
-
-	protected static final int DEFAULT_SUGAR_PRIORITY_OFFSET = 100;
-	protected static final int DEFAULT_STATIC_EXTENSION_PRIORITY_OFFSET = 230;
+	@Inject(optional = true)
+	private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
+	
+//	protected static final int DEFAULT_MEMBER_CALL_PRIORITY = 0;
+//	protected static final int DEFAULT_IT_PRIORITY = 10;
+//	protected static final int DEFAULT_THIS_PRIORITY = 20;
+//	protected static final int DEFAULT_IMPLICIT_STATIC_FEATURE_PRIORITY = 60;
+//
+//	protected static final int DEFAULT_SUGAR_PRIORITY_OFFSET = 100;
+//	protected static final int DEFAULT_STATIC_EXTENSION_PRIORITY_OFFSET = 230;
 	
 	/**
 	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is a feature
@@ -120,7 +113,7 @@ public class FeatureScopeProvider implements FeatureNames {
 //		DelegatingScope implicitFeaturesAndStatics = new DelegatingScope(IScope.NULLSCOPE);
 //		LocalVariableScopeContext scopeContext = createLocalVariableScopeContext(context, reference, includeCurrentBlock, idx);
 		IScope staticImports = createStaticFeaturesScope(context, IScope.NULLSCOPE, session);
-		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticImports, session);
+		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticImports, session, resolvedTypes);
 		IScope implicitReceivers = createImplicitFeatureCallScope(context, staticExtensions, session, resolvedTypes);
 		IScope localVariables = new LocalVariableScope(implicitReceivers, session, asAbstractFeatureCall(context));
 //		IScope scopeForImplicitFeatures = createImplicitFeatureCallScope(context, resource, IScope.NULLSCOPE, localVariableScope);
@@ -167,7 +160,6 @@ public class FeatureScopeProvider implements FeatureNames {
 			final EObject featureCall,
 			final IFeatureScopeSession session,
 			IScope parent) {
-		// TODO ReceiverFeatureScopes for synonyms
 		final Wrapper<IScope> wrapper = Wrapper.wrap(parent);
 		synonymProvider.collectSynonymTypes(featureDeclarator, new SynonymTypesProvider.Acceptor() {
 
@@ -207,14 +199,27 @@ public class FeatureScopeProvider implements FeatureNames {
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.internalGetActualType(receiver);
 		if (receiverType != null) {
-			IScope result = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session);
+			IScope result = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
 			return createFeatureScopeForTypeRef(receiver, receiverType, featureCall, session, result);
 		} else {
 			return IScope.NULLSCOPE;
 		}
 	}
 
-	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session) {
+	protected IScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+		IScope result = parent;
+		if (receiver == null) {
+			result = createImplicitExtensionScope(THIS, featureCall, session, resolvedTypes, result);
+			result = createImplicitExtensionScope(IT, featureCall, session, resolvedTypes, result);
+			return result;
+		} else {
+			result = createStaticExtensionsScope(receiver, receiverType, featureCall, parent, session);
+		}
+		return result;
+	}
+
+	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver,
+			LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session) {
 		return new StaticExtensionImportsScope(parent, session, receiver, receiverType, asAbstractFeatureCall(featureCall), operatorMapping);
 	}
 
@@ -251,8 +256,23 @@ public class FeatureScopeProvider implements FeatureNames {
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.internalGetActualType(thisElement);
-			// TODO create feature call to this and add it as receiver
-			return createFeatureScopeForTypeRef(null, type, featureCall, session, parent);
+			
+			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
+			implicitReceiver.setFeature(thisElement);
+			return createFeatureScopeForTypeRef(implicitReceiver, type, featureCall, session, parent);
+		}
+		return parent;
+	}
+	
+	protected IScope createImplicitExtensionScope(QualifiedName implicitName, EObject featureCall,
+			IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes, IScope parent) {
+		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
+		if (thisDescription != null) {
+			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+			LightweightTypeReference type = resolvedTypes.internalGetActualType(thisElement);
+			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
+			implicitReceiver.setFeature(thisElement);
+			return createStaticExtensionsScope(implicitReceiver, type, featureCall, parent, session);
 		}
 		return parent;
 	}
@@ -652,138 +672,138 @@ public class FeatureScopeProvider implements FeatureNames {
 //		}
 //	}
 	
-	protected void addStaticFeatureDescriptionProviders(
-			Resource resource, 
-			JvmDeclaredType contextType,
-			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//	protected void addStaticFeatureDescriptionProviders(
+//			Resource resource, 
+//			JvmDeclaredType contextType,
+//			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//
+//		StaticImplicitMethodsFeatureForTypeProvider implicitMethodsProvider = newImplicitStaticFeaturesProvider();
+//		implicitMethodsProvider.setResourceContext(resource);
+//		addFeatureDescriptionProviders(contextType, implicitMethodsProvider, null, null, getImplicitStaticFeaturePriority(), true, acceptor);
+//	}
+	
+//	protected int getThisPriority() {
+//		return DEFAULT_THIS_PRIORITY;
+//	}
+	
+//	protected int getDefaultPriority() {
+//		return DEFAULT_MEMBER_CALL_PRIORITY;
+//	}
 
-		StaticImplicitMethodsFeatureForTypeProvider implicitMethodsProvider = newImplicitStaticFeaturesProvider();
-		implicitMethodsProvider.setResourceContext(resource);
-		addFeatureDescriptionProviders(contextType, implicitMethodsProvider, null, null, getImplicitStaticFeaturePriority(), true, acceptor);
-	}
+//	protected int getItPriority() {
+//		return DEFAULT_IT_PRIORITY;
+//	}
 	
-	protected int getThisPriority() {
-		return DEFAULT_THIS_PRIORITY;
-	}
+//	protected int getSugarPriorityOffset() {
+//		return DEFAULT_SUGAR_PRIORITY_OFFSET;
+//	}
 	
-	protected int getDefaultPriority() {
-		return DEFAULT_MEMBER_CALL_PRIORITY;
-	}
+//	protected int getImplicitStaticExtensionPriorityOffset() {
+//		return DEFAULT_STATIC_EXTENSION_PRIORITY_OFFSET;
+//	}
+	
+//	protected int getImplicitStaticFeaturePriority() {
+//		return DEFAULT_IMPLICIT_STATIC_FEATURE_PRIORITY;
+//	}
+	
+//	protected void addFeatureDescriptionProviders(
+//			JvmDeclaredType contextType,
+//			IFeaturesForTypeProvider featureProvider,
+//			XExpression implicitReceiver,
+//			XExpression implicitArgument,
+//			int priority,
+//			boolean preferStatics,
+//			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//		DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescriptionProvider();
+//		defaultProvider.setContextType(contextType);
+//		defaultProvider.setPriority(priority);
+//		if (featureProvider != null)
+//			defaultProvider.setFeaturesForTypeProvider(featureProvider);
+//		defaultProvider.setImplicitReceiver(implicitReceiver);
+//		defaultProvider.setImplicitArgument(implicitArgument);
+//		defaultProvider.setPreferStatics(preferStatics);
+//		acceptor.accept(defaultProvider);
+//
+//		XFeatureCallSugarDescriptionProvider sugarProvider = newSugarDescriptionProvider();
+//		sugarProvider.setContextType(contextType);
+//		sugarProvider.setPriority(priority + getSugarPriorityOffset());
+//		if (featureProvider != null)
+//			sugarProvider.setFeaturesForTypeProvider(featureProvider);
+//		sugarProvider.setImplicitReceiver(implicitReceiver);
+//		sugarProvider.setImplicitArgument(implicitArgument);
+//		sugarProvider.setPreferStatics(preferStatics);
+//		acceptor.accept(sugarProvider);
+//	}
 
-	protected int getItPriority() {
-		return DEFAULT_IT_PRIORITY;
-	}
-	
-	protected int getSugarPriorityOffset() {
-		return DEFAULT_SUGAR_PRIORITY_OFFSET;
-	}
-	
-	protected int getImplicitStaticExtensionPriorityOffset() {
-		return DEFAULT_STATIC_EXTENSION_PRIORITY_OFFSET;
-	}
-	
-	protected int getImplicitStaticFeaturePriority() {
-		return DEFAULT_IMPLICIT_STATIC_FEATURE_PRIORITY;
-	}
-	
-	protected void addFeatureDescriptionProviders(
-			JvmDeclaredType contextType,
-			IFeaturesForTypeProvider featureProvider,
-			XExpression implicitReceiver,
-			XExpression implicitArgument,
-			int priority,
-			boolean preferStatics,
-			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
-		DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescriptionProvider();
-		defaultProvider.setContextType(contextType);
-		defaultProvider.setPriority(priority);
-		if (featureProvider != null)
-			defaultProvider.setFeaturesForTypeProvider(featureProvider);
-		defaultProvider.setImplicitReceiver(implicitReceiver);
-		defaultProvider.setImplicitArgument(implicitArgument);
-		defaultProvider.setPreferStatics(preferStatics);
-		acceptor.accept(defaultProvider);
+//	protected void addFeatureDescriptionProviders(
+//			Resource resource, 
+//			JvmDeclaredType contextType, 
+//			XExpression implicitReceiver,
+//			XExpression implicitArgument,
+//			int priority,
+//			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//		addFeatureDescriptionProviders(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
+//		
+//		if (implicitArgument == null) {
+//			StaticImplicitMethodsFeatureForTypeProvider implicitStaticFeatures = newImplicitStaticFeaturesProvider();
+//			implicitStaticFeatures.setResourceContext(resource);
+//			implicitStaticFeatures.setExtensionProvider(true);
+//			addFeatureDescriptionProviders(contextType, implicitStaticFeatures, implicitReceiver, implicitArgument, priority + getImplicitStaticExtensionPriorityOffset(), true, acceptor);
+//		}
+//	}
 
-		XFeatureCallSugarDescriptionProvider sugarProvider = newSugarDescriptionProvider();
-		sugarProvider.setContextType(contextType);
-		sugarProvider.setPriority(priority + getSugarPriorityOffset());
-		if (featureProvider != null)
-			sugarProvider.setFeaturesForTypeProvider(featureProvider);
-		sugarProvider.setImplicitReceiver(implicitReceiver);
-		sugarProvider.setImplicitArgument(implicitArgument);
-		sugarProvider.setPreferStatics(preferStatics);
-		acceptor.accept(sugarProvider);
-	}
-
-	protected void addFeatureDescriptionProviders(
-			Resource resource, 
-			JvmDeclaredType contextType, 
-			XExpression implicitReceiver,
-			XExpression implicitArgument,
-			int priority,
-			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
-		addFeatureDescriptionProviders(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
-		
-		if (implicitArgument == null) {
-			StaticImplicitMethodsFeatureForTypeProvider implicitStaticFeatures = newImplicitStaticFeaturesProvider();
-			implicitStaticFeatures.setResourceContext(resource);
-			implicitStaticFeatures.setExtensionProvider(true);
-			addFeatureDescriptionProviders(contextType, implicitStaticFeatures, implicitReceiver, implicitArgument, priority + getImplicitStaticExtensionPriorityOffset(), true, acceptor);
-		}
-	}
-
-	private StaticImplicitMethodsFeatureForTypeProvider newImplicitStaticFeaturesProvider() {
-		return implicitStaticFeatures.get();
-	}
+//	private StaticImplicitMethodsFeatureForTypeProvider newImplicitStaticFeaturesProvider() {
+//		return implicitStaticFeatures.get();
+//	}
 	
-	/**
-	 * @param resource the resource which may define implicitly available feature description providers.
-	 */
-	protected void addFeatureDescriptionProvidersForAssignment(
-			Resource resource,
-			JvmDeclaredType contextType, 
-			XExpression implicitReceiver,
-			XExpression implicitArgument,
-			int priority,
-			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
-		addFeatureDescriptionProvidersForAssignment(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
-	}
+//	/**
+//	 * @param resource the resource which may define implicitly available feature description providers.
+//	 */
+//	protected void addFeatureDescriptionProvidersForAssignment(
+//			Resource resource,
+//			JvmDeclaredType contextType, 
+//			XExpression implicitReceiver,
+//			XExpression implicitArgument,
+//			int priority,
+//			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//		addFeatureDescriptionProvidersForAssignment(contextType, null, implicitReceiver, implicitArgument, priority, false, acceptor);
+//	}
 
-	protected void addFeatureDescriptionProvidersForAssignment(
-			JvmDeclaredType contextType,
-			IFeaturesForTypeProvider featureProvider,
-			XExpression implicitReceiver,
-			XExpression implicitArgument, 
-			int priority,
-			boolean preferStatics,
-			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
-		XAssignmentDescriptionProvider assignmentProvider = assignmentFeatureDescProvider.get();
-		assignmentProvider.setContextType(contextType);
-		if (featureProvider != null)
-			assignmentProvider.setFeaturesForTypeProvider(featureProvider);
-		assignmentProvider.setImplicitReceiver(implicitReceiver);
-		assignmentProvider.setImplicitArgument(implicitArgument);
-		assignmentProvider.setPriority(priority);
-		assignmentProvider.setPreferStatics(preferStatics);
-		acceptor.accept(assignmentProvider);
-		
-		XAssignmentSugarDescriptionProvider sugarProvider = assignmentSugarFeatureDescProvider.get();
-		sugarProvider.setContextType(contextType);
-		if (featureProvider != null)
-			sugarProvider.setFeaturesForTypeProvider(featureProvider);
-		sugarProvider.setImplicitReceiver(implicitReceiver);
-		sugarProvider.setImplicitArgument(implicitArgument);
-		sugarProvider.setPriority(getSugarPriorityOffset() + priority);
-		sugarProvider.setPreferStatics(preferStatics);
-		acceptor.accept(sugarProvider);
-	}
+//	protected void addFeatureDescriptionProvidersForAssignment(
+//			JvmDeclaredType contextType,
+//			IFeaturesForTypeProvider featureProvider,
+//			XExpression implicitReceiver,
+//			XExpression implicitArgument, 
+//			int priority,
+//			boolean preferStatics,
+//			IAcceptor<IJvmFeatureDescriptionProvider> acceptor) {
+//		XAssignmentDescriptionProvider assignmentProvider = assignmentFeatureDescProvider.get();
+//		assignmentProvider.setContextType(contextType);
+//		if (featureProvider != null)
+//			assignmentProvider.setFeaturesForTypeProvider(featureProvider);
+//		assignmentProvider.setImplicitReceiver(implicitReceiver);
+//		assignmentProvider.setImplicitArgument(implicitArgument);
+//		assignmentProvider.setPriority(priority);
+//		assignmentProvider.setPreferStatics(preferStatics);
+//		acceptor.accept(assignmentProvider);
+//		
+//		XAssignmentSugarDescriptionProvider sugarProvider = assignmentSugarFeatureDescProvider.get();
+//		sugarProvider.setContextType(contextType);
+//		if (featureProvider != null)
+//			sugarProvider.setFeaturesForTypeProvider(featureProvider);
+//		sugarProvider.setImplicitReceiver(implicitReceiver);
+//		sugarProvider.setImplicitArgument(implicitArgument);
+//		sugarProvider.setPriority(getSugarPriorityOffset() + priority);
+//		sugarProvider.setPreferStatics(preferStatics);
+//		acceptor.accept(sugarProvider);
+//	}
 
-	private DefaultJvmFeatureDescriptionProvider newDefaultFeatureDescriptionProvider() {
-		return defaultFeatureDescProvider.get();
-	}
+//	private DefaultJvmFeatureDescriptionProvider newDefaultFeatureDescriptionProvider() {
+//		return defaultFeatureDescProvider.get();
+//	}
 	
-	private XFeatureCallSugarDescriptionProvider newSugarDescriptionProvider() {
-		return sugarFeatureDescProvider.get();
-	}
+//	private XFeatureCallSugarDescriptionProvider newSugarDescriptionProvider() {
+//		return sugarFeatureDescProvider.get();
+//	}
 	
 }

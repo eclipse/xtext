@@ -1032,7 +1032,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
   }
   
-  @Ignore(value = "Implicit receiver")
   @Test
   public void testFeatureCall_13_3() throws Exception {
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() map(i|i+1) }", "List<Integer>");
@@ -1043,7 +1042,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "List<Integer>");
   }
   
-  @Ignore(value = "Implicit receiver")
   @Test
   public void testFeatureCall_13_5() throws Exception {
     this.resolvesTo("{ var java.util.List<? extends Integer> it = null map(i|i+1) }", "List<Integer>");
@@ -1603,13 +1601,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{ var java.util.List<? super Integer> it = null subList(0, 1) }", "List<? super Integer>");
   }
   
-  @Ignore(value = "Implicit receiver")
   @Test
   public void testImplicitReceiverBounds_07() throws Exception {
     this.resolvesTo("{ var java.util.List<Integer> it = null last }", "Integer");
   }
   
-  @Ignore(value = "Implicit receiver")
   @Test
   public void testImplicitReceiverBounds_08() throws Exception {
     this.resolvesTo("{ var java.util.List<? extends Integer> it = null last }", "Integer");
