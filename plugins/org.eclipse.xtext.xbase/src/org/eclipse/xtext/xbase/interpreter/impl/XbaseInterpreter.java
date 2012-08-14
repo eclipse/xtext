@@ -81,6 +81,7 @@ import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -272,7 +273,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
 		try {
-			Class<?> result = classFinder.forName(literal.getType().getQualifiedName());
+			Class<?> result = classFinder.forName(literal.getType().getQualifiedName() + Joiner.on("").join(literal.getArrayDimensions()));
 			return result;
 		} catch (ClassNotFoundException cnfe) {
 			throw new EvaluationException(cnfe);

@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -517,7 +518,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	protected void _computeTypes(XTypeLiteral object, LightweightTypeComputationState state) {
 		JvmParameterizedTypeReference typeRef = services.getTypesFactory().createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
-		state.acceptActualType(getTypeReferences().getTypeForName(Class.class, object, typeRef));
+		JvmTypeReference result = typeRef;
+		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
+			JvmGenericArrayTypeReference arrayType = services.getTypesFactory().createJvmGenericArrayTypeReference();
+			arrayType.setComponentType(result);
+			result = arrayType;
+		}
+		state.acceptActualType(getTypeReferences().getTypeForName(Class.class, object, result));
 	}
 	
 	protected void _computeTypes(XInstanceOfExpression object, LightweightTypeComputationState state) {

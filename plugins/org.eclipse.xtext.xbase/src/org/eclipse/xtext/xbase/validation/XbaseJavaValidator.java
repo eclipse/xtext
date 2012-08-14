@@ -77,6 +77,7 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -93,6 +94,7 @@ import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
@@ -1139,6 +1141,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			warning(message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, UNUSED_LOCAL_VARIABLE);
 		}
 	}
+	
+	@Check
+	public void checkTypeLiteral(XTypeLiteral typeLiteral) {
+		if (!typeLiteral.getArrayDimensions().isEmpty() && typeLiteral.getType().getIdentifier().equals("void")) {
+			error("'void"+Joiner.on("").join(typeLiteral.getArrayDimensions()) +"' is not a valid type", null, INVALID_TYPE);
+		}
+	}
+
 
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
 		return !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();

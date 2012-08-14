@@ -1044,6 +1044,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _type(XTypeLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		JvmParameterizedTypeReference typeRef = factory.createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
+		JvmTypeReference result = typeRef;
+		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
+			JvmGenericArrayTypeReference arrayType = getTypesFactory().createJvmGenericArrayTypeReference();
+			arrayType.setComponentType(result);
+			result = arrayType;
+		}
 		return getTypeReferences().getTypeForName(Class.class, object, typeRef);
 	}
 

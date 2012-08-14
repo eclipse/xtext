@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 
 /**
@@ -197,7 +198,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XTypeLiteral expr, ITreeAppendable b) {
-		b.append(expr.getType()).append(".class");
+		b.append(expr.getType()).append(Joiner.on("").join(expr.getArrayDimensions())).append(".class");
 	}
 	
 	public void _toJavaStatement(XTypeLiteral expr, ITreeAppendable b, boolean isReferenced) {
