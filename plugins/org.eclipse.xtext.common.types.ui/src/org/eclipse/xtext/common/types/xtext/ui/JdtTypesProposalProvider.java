@@ -20,11 +20,14 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
-import org.eclipse.jdt.core.search.TypeNameRequestor;
+import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
+import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
+import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -48,6 +51,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
+import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -84,6 +88,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	
 	@Inject
 	private JdtTypeRelevance jdtTypeRelevance;
+	
+	@Inject
+	private IContentProposalPriorities priorities;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		protected final IScope scope;
@@ -234,17 +241,15 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		});
 		final ContentAssistContext myContext = contextBuilder.toContext();
 		final IJvmTypeProvider jvmTypeProvider = jdtTypeProviderFatory.findOrCreateTypeProvider(context.getResource().getResourceSet());
-		SearchEngine searchEngine = new SearchEngine();
+		BasicSearchEngine searchEngine = new BasicSearchEngine();
 		searchEngine.searchAllTypeNames(
 				packageName, SearchPattern.R_PATTERN_MATCH, 
 				typeName, SearchPattern.R_PREFIX_MATCH | SearchPattern.R_CAMELCASE_MATCH, 
 				filter.getSearchFor(), scope, 
-				new TypeNameRequestor() {
-					@Override
-					public void acceptType(int modifiers,
-							char[] packageName, char[] simpleTypeName,
-							char[][] enclosingTypeNames, String path) {
-						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+				new IRestrictedAccessTypeRequestor() {
+					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+							char[][] enclosingTypeNames, String path, AccessRestriction access) {
+						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path) && (!checkAccessRestriction() || (access == null || access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter()))) {
 							StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
 							if (packageName.length != 0) {
 								fqName.append(packageName);
@@ -267,6 +272,13 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return !acceptor.canAcceptMoreProposals();
 					}
 				});
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected boolean checkAccessRestriction() {
+		return true;
 	}
 
 	protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(
@@ -320,7 +332,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return jvmTypeProvider.findTypeByName(typeName);
 					}});
 				theProposal.setHover(hover);
-				theProposal.setPriority(jdtTypeRelevance.getRelevance(typeName, context.getPrefix()));
+				theProposal.setPriority(priorities.getDefaultPriority() + jdtTypeRelevance.getRelevance(typeName, context.getPrefix()));
 			}
 			acceptor.accept(proposal);
 		}
