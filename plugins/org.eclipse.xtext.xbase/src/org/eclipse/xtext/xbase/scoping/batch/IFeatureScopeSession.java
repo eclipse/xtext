@@ -20,66 +20,101 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * A feature scope session allows to successively enhance the reachable features
+ * by added local variables, parameters from the context or the list of imports.
+ * Afterwards it's possible to ask for an {@link IScope} by means of 
+ * {@link #getScope(EObject, EReference, LightweightResolvedTypes)}. 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
+ * 
+ * TODO More JavaDoc
+ * TODO cleanup
  */
 @NonNullByDefault
 @ImplementedBy(RootFeatureScopeSession.class)
 public interface IFeatureScopeSession {
 
-	/*
-		 * initialize with 
-		 * this, super, fields falls vorhanden (z.b. nicht in annotations)
-		 *   - jmd überprüft die fields auf extension field semantic, d.h.
-		 *   - auch imports hier übergeben
-		 *   - wir übergeben die DomainSpeciifc elements und jmd packt die 
-		 *     inferierten jvm elements in die scope session
-		 * 
-		 * fork
-		 *   - add element (impliziter fork?)
-		 *   - add elements?
-		 *   
-		 * jmd verwaltet diese elemente (parameter und leitet daraus die implizit 
-		 *   erreichbaren element ab, so dass diese stets und ständig sichtbar sind)
-		 *   diese werden sortiert und gebulkt, d.h.
-		 *   it -> this -> alle extension fields -> statische imports -> implizite imports
-		 *   
-		 *   - ergänzt jemand etwas, wird die current values liste verändert
-		 *   
-		 * simple feature call scoping und extension scoping bei member feature calls
-		 *   und assignments wird auf diese menge der bekannten identifier runtergebrochen
-		 *   
-		 * typdaten müssen auf der session gesetzt werden, d.h. wir erfragen an einer
-		 *   zentralen instanz die an den current intermediate state delegiert
-		 *   - diese sollte beim starten der session gesetzt werden
-		 *   - ist die batch scope geschichte vllt typesystemspezifisch?
-		 *   
-		 */
-
-	IFeatureScopeSession addTypesToStaticScope(List<JvmType> staticFeatureProviders, List<JvmType> extensionProviders);
+	/**
+	 * Return the scope for the given {@code context} and {@code reference} based on the
+	 * known resolved {@code types}.
+	 * @param context the context object. May not be <code>null</code>.
+	 * @param reference the reference that holds the unresolved proxy. May not be <code>null</code>.
+	 * @param types the already computed types.
+	 * @see IScopeProvider#getScope(EObject, EReference)
+	 */
+	IScope getScope(EObject context, EReference reference, LightweightResolvedTypes types);
 	
-	IFeatureScopeSession addToExtensionScope(JvmIdentifiableElement baseElement, List<XExpression> extensionProviders);
+	/**
+	 * Add types to the session that are imported statically either as plain static imports 
+	 * or with an extension semantic.
+	 * @param staticFeatureProviders the static feature providers. May not be <code>null</code>.
+	 * @param staticExtensionProviders the static extension providers. May not be <code>null</code>.
+	 * @return a configured session.
+	 */
+	IFeatureScopeSession addTypesToStaticScope(List<JvmType> staticFeatureProviders, List<JvmType> staticExtensionProviders);
 	
+	/**
+	 * Add receivers to the session that contribute extensions.
+	 * @param extensionProviders the expressions that yield extension receivers.
+	 * @return a configured session.
+	 */
+	IFeatureScopeSession addToExtensionScope(List<XExpression> extensionProviders);
+	
+	/**
+	 * Add a locally defined identifiable to this scope. It will shadow previously registered locals.
+	 * @param name the qualified name of the identifiable.
+	 * @param element the element itself.
+	 * @return a configured session.
+	 */
 	IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element);
 	
+	/**
+	 * Add locally defined identifiables to this scope. Since the elements have unique names, they cannot shadow
+	 * each other. However, they will shadow previously added local elements.
+	 * @param elements the local elements.
+	 * @return a configured session.
+	 */
 	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements);
 	
-	IScope createFeatureCallScope(EObject context, EReference reference, LightweightResolvedTypes resolvedTypes);
-	
+	/**
+	 * Find a local element with the given qualified name.
+	 * @return the known element or <code>null</code>.
+	 */
 	@Nullable IEObjectDescription getLocalElement(QualifiedName name);
+	
+	/**
+	 * Return all local elements that are known in this session.
+	 * @return all local elements. Never <code>null</code>.
+	 */
 	Collection<IEObjectDescription> getLocalElements();
 
+	/**
+	 * All statically imported types as type buckets. The list has usually two elements:
+	 * <ol>
+	 *   <li>The implicitly imported types as a single bucket.</li>
+	 *   <li>The explicitly imported types as a single bucket.</li>
+	 * </ol>
+	 * Scenarios with more than two buckets are especially nested structures with multiple
+	 * import sections or ordered imports.
+	 */
 	List<TypeBucket> getStaticallyImportedTypes();
+	
+	/**
+	 * All statically imported extension types as type buckets. The list has usually two elements:
+	 * <ol>
+	 *   <li>The implicitly available extensions as a single bucket.</li>
+	 *   <li>The explicitly imported extensions as a single bucket.</li>
+	 * </ol>
+	 * Scenarios with more than two buckets are especially nested structures with multiple
+	 * import sections or ordered imports.
+	 */
 	List<TypeBucket> getStaticallyImportedExtensionTypes();
-
-	IFeatureScopeSession recursiveInitialize(EObject context);
-
-	IScope getScope(XExpression expression, EReference reference, LightweightResolvedTypes types);
 
 }

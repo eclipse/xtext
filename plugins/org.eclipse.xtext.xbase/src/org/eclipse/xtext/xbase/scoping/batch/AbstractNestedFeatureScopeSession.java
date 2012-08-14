@@ -16,28 +16,34 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 /**
+ * An abstract nested feature scope session.
+ * Delegates all queries to its parent.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * TODO toString
+ * TODO more JavaDoc
  */
 @NonNullByDefault
-public class FeatureScopeSession extends AbstractFeatureScopeSession {
+public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureScopeSession {
 	
 	private final AbstractFeatureScopeSession parent;
-	private final FeatureScopeProvider featureScopeProvider;
+	private final FeatureScopes featureScopeProvider;
 	private int id;
 
-	public FeatureScopeSession(AbstractFeatureScopeSession parent, FeatureScopeProvider featureScopeProvider) {
+	protected AbstractNestedFeatureScopeSession(AbstractFeatureScopeSession parent, FeatureScopes featureScopeProvider) {
 		this.parent = parent;
 		this.featureScopeProvider = featureScopeProvider;
 		this.id = parent.getId() + 1;
 	}
 	
 	@Override
-	protected IScopeProvider getScopeProvider() {
-		return parent.getScopeProvider();
+	protected IScopeProvider getDefaultScopeProvider() {
+		return parent.getDefaultScopeProvider();
 	}
 
 	@Override
-	protected FeatureScopeProvider getFeatureScopeProvider() {
+	protected FeatureScopes getFeatureScopes() {
 		return featureScopeProvider;
 	}
 	

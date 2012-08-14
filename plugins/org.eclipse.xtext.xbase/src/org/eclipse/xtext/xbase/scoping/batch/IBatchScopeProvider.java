@@ -14,8 +14,14 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Extends the {@link IScopeProvider} by a means to collect
+ * scope information in a batch mode. It allows to {@link #newSession(Resource) open} 
+ * a new {@link IFeatureScopeSession session} which maintains 
+ * all the necessary scoping information.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, remove ImplementedBy annotation
+ * 
+ * TODO More JavaDoc, remove ImplementedBy annotation
  */
 @ImplementedBy(XbaseBatchScopeProvider.class)
 public interface IBatchScopeProvider extends IScopeProvider {
@@ -23,6 +29,7 @@ public interface IBatchScopeProvider extends IScopeProvider {
 	/**
 	 * Returns a preconfigured feature scope session that is aware of
 	 * implicitly imported types such as {@link CollectionLiterals}.
+	 * @param context the resource that contains the to-be-linked instances.
 	 * @return a new feature scope session. Never <code>null</code>.
 	 */
 	IFeatureScopeSession newSession(Resource context);

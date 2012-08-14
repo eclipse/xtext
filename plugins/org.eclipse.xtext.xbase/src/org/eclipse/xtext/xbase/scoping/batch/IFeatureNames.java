@@ -10,10 +10,12 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import org.eclipse.xtext.naming.QualifiedName;
 
 /**
+ * A marker interface that provides access to commonly used
+ * qualified names.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
-public interface FeatureNames {
+public interface IFeatureNames {
 
 	QualifiedName THIS = QualifiedName.create("this");
 	QualifiedName SUPER = QualifiedName.create("super");

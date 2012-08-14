@@ -27,16 +27,25 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import com.google.common.collect.Lists;
 
 /**
+ * Skeleton implementation for feature scope sessions.
+ * 
+ * It introduces a simple means to identify the nesting level ({@link #getId()}.
+ * Requested scopes for other things that features are delegated 
+ * to the {@link #getDefaultScopeProvider() default scope provider}.
+ * The concrete scope computation is performed by {@link #getFeatureScopes() a utility}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * TODO toString, more JavaDoc
  */
 @NonNullByDefault
 public abstract class AbstractFeatureScopeSession implements IFeatureScopeSession {
 
-	public IScope getScope(XExpression expression, EReference reference, LightweightResolvedTypes types) {
-		if (getFeatureScopeProvider().isFeatureCallScope(reference)) {
-			return createFeatureCallScope(expression, reference, types);
+	public IScope getScope(EObject context, EReference reference, LightweightResolvedTypes types) {
+		if (getFeatureScopes().isFeatureCallScope(reference)) {
+			return createFeatureCallScope(context, reference, types);
 		} else {
-			return getScopeProvider().getScope(expression, reference);
+			return getDefaultScopeProvider().getScope(context, reference);
 		}
 	}
 	
@@ -44,18 +53,22 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 			List<JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
 			return this;
-		FeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, getFeatureScopeProvider(), staticFeatureProviders, extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, getFeatureScopes(), staticFeatureProviders, extensionProviders);
 		return result;
 	}
 
-	protected abstract FeatureScopeProvider getFeatureScopeProvider();
-	protected abstract IScopeProvider getScopeProvider();
+	protected abstract FeatureScopes getFeatureScopes();
+	protected abstract IScopeProvider getDefaultScopeProvider();
+	
+	/**
+	 * A simple means to identify the session.
+	 */
 	protected abstract int getId();
 
-	public IFeatureScopeSession addToExtensionScope(JvmIdentifiableElement baseElement, List<XExpression> extensionProviders) {
+	public IFeatureScopeSession addToExtensionScope(List<XExpression> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return this;
-		FeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, getFeatureScopeProvider(), baseElement, extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, getFeatureScopes(), extensionProviders);
 		return result;
 	}
 
@@ -67,12 +80,12 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements) {
 		if (elements.isEmpty())
 			return this;
-		FeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, getFeatureScopeProvider(), elements);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, getFeatureScopes(), elements);
 		return result;
 	}
 
-	public IScope createFeatureCallScope(EObject context, EReference reference, LightweightResolvedTypes resolvedTypes) {
-		return getFeatureScopeProvider().createFeatureCallScope(context, reference, this, resolvedTypes);
+	protected IScope createFeatureCallScope(EObject context, EReference reference, LightweightResolvedTypes resolvedTypes) {
+		return getFeatureScopes().createFeatureCallScope(context, reference, this, resolvedTypes);
 	}
 	
 	public Collection<IEObjectDescription> getLocalElements() {
@@ -82,7 +95,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	}
 
 	/**
-	 * @param result the list of all local elements. Shadowing semantics does not have to be applied. 
+	 * @param result the list of all local elements. Shadowing semantics do not have to be applied. 
 	 */
 	protected void addLocalElements(List<IEObjectDescription> result) {
 	}
@@ -93,10 +106,6 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	
 	public List<TypeBucket> getStaticallyImportedExtensionTypes() {
 		return Collections.emptyList();
-	}
-	
-	public IFeatureScopeSession recursiveInitialize(EObject context) {
-		return this;
 	}
 	
 }

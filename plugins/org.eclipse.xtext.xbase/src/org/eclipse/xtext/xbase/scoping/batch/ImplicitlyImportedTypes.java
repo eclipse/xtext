@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,6 +42,7 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ *
  * TODO JavaDoc, toString that lists the literal and extension classes
  */
 @Singleton
@@ -69,12 +71,18 @@ public class ImplicitlyImportedTypes {
 		return result;
 	}
 
+	/*
+	 * The list should be sorted since it allows for easier diff and merge
+	 */
 	protected List<Class<?>> getLiteralClasses() {
 		return Lists.<Class<?>> newArrayList(
 			CollectionLiterals.class,
 			InputOutput.class);
 	}
 
+	/*
+	 * The list should be sorted since it allows for easier diff and merge
+	 */
 	protected List<Class<?>> getExtensionClasses() {
 		return Lists.<Class<?>> newArrayList(
 			BigDecimalExtensions.class,
@@ -99,13 +107,13 @@ public class ImplicitlyImportedTypes {
 			StringExtensions.class);
 	}
 
-//	public static void main(String[] args) {
-//		List<Class<?>> classes = new ImplicitlyImportedTypes().getExtensionClasses();
-//		List<String> strings = Lists.newArrayList();
-//		for(Class<?> clazz: classes) {
-//			strings.add(clazz.getSimpleName());
-//		}
-//		Collections.sort(strings);
-//		for(String s: strings) System.out.println(s+ ".class,");
-//	}
+	public static void main(String[] args) {
+		List<Class<?>> classes = new ImplicitlyImportedTypes().getExtensionClasses();
+		List<String> strings = Lists.newArrayList();
+		for(Class<?> clazz: classes) {
+			strings.add(clazz.getSimpleName());
+		}
+		Collections.sort(strings);
+		for(String s: strings) System.out.println(s+ ".class,");
+	}
 }

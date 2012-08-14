@@ -15,8 +15,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 
 /**
+ * A type bucket collects a number of types that originate in the 
+ * very same source, e.g. all imported types are contained in the 
+ * same bucket where all types that are available via wildcard imports
+ * are contained in a different bucket.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class TypeBucket {
@@ -25,8 +29,10 @@ class TypeBucket {
 }
 
 /**
+ * A type bucket that was produced from the synonym of a type.
+ * It tracks the conformance hints for a synonym, e.g. boxing or unboxing information.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class SynonymTypeBucket extends TypeBucket {
@@ -34,8 +40,11 @@ class SynonymTypeBucket extends TypeBucket {
 }
 
 /**
+ * A type bucket collects a number of types that originate in the 
+ * very same source, e.g. all implicit receiver types are contained
+ * in the very same bucket.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class TypeReferenceBucket {
