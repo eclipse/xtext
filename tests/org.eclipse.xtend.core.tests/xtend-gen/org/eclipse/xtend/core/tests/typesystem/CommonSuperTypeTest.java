@@ -291,7 +291,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_25() {
-    this.isSuperTypeOf("Iterable", "java.util.List<StringBuilder>", "org.eclipse.xtext.common.types.testSetups.RawIterable");
+    this.isSuperTypeOf("Iterable", "java.util.List<StringBuilder>", "org.eclipse.xtend.core.tests.typesystem.RawIterable");
   }
   
   @Test

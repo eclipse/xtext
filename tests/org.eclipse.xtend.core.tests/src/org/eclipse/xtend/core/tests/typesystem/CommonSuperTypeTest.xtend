@@ -190,7 +190,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_25() {
-		"Iterable".isSuperTypeOf("java.util.List<StringBuilder>", "org.eclipse.xtext.common.types.testSetups.RawIterable")
+		"Iterable".isSuperTypeOf("java.util.List<StringBuilder>", "org.eclipse.xtend.core.tests.typesystem.RawIterable")
 	}
 	
 	@Test
