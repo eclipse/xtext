@@ -280,9 +280,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				XtendField field = (XtendField)member;
 				 if(isEmpty(field.getName())) {
 					 if(field.isExtension()) {
-						 JvmType type = field.getType().getType();
-						 if(type != null) 
-							 type2extension.put(type, field);
+						 JvmTypeReference typeReference = field.getType();
+						 if (typeReference != null) {
+							 JvmType type = typeReference.getType();
+							 if(type != null) 
+								 type2extension.put(type, field);
+						 }
 					 }
 				 } else {
 					 name2field.put(field.getName(), field);
@@ -1204,7 +1207,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return;
 			String message;
 			if(field.isExtension()) {
-				if(field.getName() == null)
+				if(field.getName() == null && jvmField.getType() != null)
 					message = "The extension " + jvmField.getType().getIdentifier() 
 						+ " is not used in " + jvmField.getDeclaringType().getSimpleName();
 				else
@@ -1247,7 +1250,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkDeclaredExceptions(XtendFunction function){
 		JvmOperation jvmType = associations.getDirectlyInferredOperation(function);
-		checkExceptions(function,jvmType.getExceptions(), XtendPackage.Literals.XTEND_FUNCTION__EXCEPTIONS);
+		if (jvmType != null) {
+			checkExceptions(function,jvmType.getExceptions(), XtendPackage.Literals.XTEND_FUNCTION__EXCEPTIONS);
+		}
 	}
 	
 	private void checkExceptions(EObject context, EList<JvmTypeReference> exceptions, EReference reference){
