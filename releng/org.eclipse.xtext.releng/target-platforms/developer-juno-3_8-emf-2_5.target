@@ -14,7 +14,7 @@
 <unit id="org.junit4" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/3.8milestones"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
