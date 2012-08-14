@@ -724,7 +724,7 @@ ruleXNumberLiteral :
 
 // Rule XTypeLiteral
 ruleXTypeLiteral :
-	'typeof' '(' ruleQualifiedName ')'
+	'typeof' '(' ruleQualifiedName ruleArrayBrackets* ')'
 ;
 
 // Rule XThrowExpression
@@ -786,11 +786,14 @@ ruleNumber :
 // Rule JvmTypeReference
 ruleJvmTypeReference :
 	ruleJvmParameterizedTypeReference ( (
-	'[' ']'
-	) => (
-		'[' ']'
-	) )* |
+	ruleArrayBrackets
+	) => ruleArrayBrackets )* |
 	ruleXFunctionTypeRef
+;
+
+// Rule ArrayBrackets
+ruleArrayBrackets :
+	'[' ']'
 ;
 
 // Rule XFunctionTypeRef
