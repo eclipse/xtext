@@ -26,18 +26,18 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
-import org.eclipse.jdt.internal.core.JavaProject;
-import org.eclipse.jdt.internal.core.NameLookup;
-import org.eclipse.jdt.internal.core.NameLookup.Answer;
+import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
+import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
+import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -715,18 +715,15 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, final String typeSimpleName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		if(contextType != null){
-			IJavaProject javaProject = projectProvider.getJavaProject(contextType.eResource().getResourceSet());
-			final NameLookup nameLookup = ((JavaProject) javaProject).newNameLookup(new ICompilationUnit[0]);
-			SearchEngine searchEngine = new SearchEngine();
+			BasicSearchEngine searchEngine = new BasicSearchEngine();
 			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
-					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new TypeNameRequestor() {
-						@Override
-						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-								char[][] enclosingTypeNames, String path) {
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
+						
+						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
+								String path, AccessRestriction access) {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 									simpleTypeName);
-							Answer answer = nameLookup.findType(qualifiedTypeName, false, NameLookup.ACCEPT_ALL, true);
-							if(answer != null && !answer.ignoreIfBetter()){
+							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
 								JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
 								if(importType instanceof JvmDeclaredType
 										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
