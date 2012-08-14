@@ -370,3 +370,4 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 
 abstract class MapType<T> implements Map<T, T> {} 
 abstract class CharIterable<T extends CharSequence> implements Iterable<T> {}
+abstract class RawIterable implements Iterable {}
