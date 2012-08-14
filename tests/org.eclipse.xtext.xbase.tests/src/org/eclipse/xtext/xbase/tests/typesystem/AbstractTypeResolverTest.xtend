@@ -50,6 +50,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testTypeLiteral() throws Exception {
 		"typeof(String)".resolvesTo("Class<String>")
 	}
+	
+	@Test def void testTypeLiteral_1() throws Exception {
+		"typeof(String[])".resolvesTo("Class<String[]>")
+	}
 
 	@Test def void testBooleanLiteral() throws Exception {
 		"true".resolvesTo("boolean")
