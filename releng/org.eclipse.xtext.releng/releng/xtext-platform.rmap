@@ -79,7 +79,7 @@
   </rm:searchPath>
   <rm:searchPath name="jdt.annotation">
     <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
-      <rm:uri format="{0}/eclipse/updates/3.8milestones">
+      <rm:uri format="{0}/eclipse/updates/3.8">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
