@@ -689,7 +689,15 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 
 	@Test public void testTypeLiteral_02() throws Exception {
-		assertEvaluatesTo(Void.TYPE, "typeof(void)");
+		assertEvaluatesTo(void.class, "typeof(void)");
+	}
+	
+	@Test public void testTypeLiteral_03() throws Exception {
+		assertEvaluatesTo(String[].class, "typeof(String[])");
+	}
+	
+	@Test public void testTypeLiteral_04() throws Exception {
+		assertEvaluatesTo(int[][].class, "typeof(int[][])");
 	}
 	
 	@Test public void testIfExpression_00() throws Exception {
