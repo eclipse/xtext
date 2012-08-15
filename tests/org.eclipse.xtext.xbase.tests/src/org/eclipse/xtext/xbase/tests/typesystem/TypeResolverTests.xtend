@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typing.ITypeProvider
@@ -47,29 +46,26 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
-		val lightweightResolvedTypes = resolvedTypes as LightweightResolvedTypes
 		val resolvedType = resolvedTypes.getActualType(xExpression)
 		assertEquals(type, resolvedType.simpleName);
-		val lightweight = lightweightResolvedTypes.internalGetActualType(xExpression)
-		assertEquals(type, lightweight.simpleName);
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
 				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content, lightweightResolvedTypes)
+					assertExpressionTypeIsResolved(content, resolvedTypes)
 					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content, lightweightResolvedTypes)
+						assertIdentifiableTypeIsResolved(content, resolvedTypes)
 					}
 				}
 				XExpression: {
-					assertExpressionTypeIsResolved(content, lightweightResolvedTypes)
+					assertExpressionTypeIsResolved(content, resolvedTypes)
 				}
 				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
-					assertIdentifiableTypeIsResolved(content, lightweightResolvedTypes)
+					assertIdentifiableTypeIsResolved(content, resolvedTypes)
 				}
 			}
 		}
-		return lightweight
+		return resolvedType
 	}
 	
 	override void isFunctionAndEquivalentTo(LightweightTypeReference reference, String type) {
@@ -81,14 +77,14 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		'''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
 		
-	def void assertExpressionTypeIsResolved(XExpression expression, LightweightResolvedTypes types) {
-		val type = types.internalGetActualType(expression)
+	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
+		val type = types.getActualType(expression)
 		assertNotNull(expression.toString, type)
 		assertNotNull(expression.toString + " / " + type, type.identifier)	
 	}
 	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, LightweightResolvedTypes types) {
-		val type = types.internalGetActualType(identifiable)
+	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
+		val type = types.getActualType(identifiable)
 		assertNotNull(identifiable.toString, type)
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
@@ -954,8 +950,7 @@ class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
-		val lightweightResolvedTypes = resolvedTypes as LightweightResolvedTypes
-		val lightweight = lightweightResolvedTypes.internalGetActualType(xExpression)
+		val lightweight = resolvedTypes.getActualType(xExpression)
 		assertEquals(type, lightweight.simpleName);
 		return lightweight
 	}

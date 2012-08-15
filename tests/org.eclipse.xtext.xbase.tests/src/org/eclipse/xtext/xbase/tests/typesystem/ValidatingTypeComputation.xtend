@@ -115,22 +115,22 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		return result
 	}
 	
-	override internalGetActualType(JvmIdentifiableElement identifiable) {
-		val result = super.internalGetActualType(identifiable)
+	override getActualType(JvmIdentifiableElement identifiable) {
+		val result = super.getActualType(identifiable)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetActualType(XExpression expression) {
-		val result = super.internalGetActualType(expression)
+	override getActualType(XExpression expression) {
+		val result = super.getActualType(expression)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetExpectedType(XExpression expression) {
-		val result = super.internalGetExpectedType(expression)
+	override getExpectedType(XExpression expression) {
+		val result = super.getExpectedType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -250,22 +250,22 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		return result
 	}
 	
-	override internalGetActualType(JvmIdentifiableElement identifiable) {
-		val result = super.internalGetActualType(identifiable)
+	override getActualType(JvmIdentifiableElement identifiable) {
+		val result = super.getActualType(identifiable)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetActualType(XExpression expression) {
-		val result = super.internalGetActualType(expression)
+	override getActualType(XExpression expression) {
+		val result = super.getActualType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetExpectedType(XExpression expression) {
-		val result = super.internalGetExpectedType(expression)
+	override getExpectedType(XExpression expression) {
+		val result = super.getExpectedType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -362,22 +362,22 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		return result
 	}
 	
-	override internalGetActualType(JvmIdentifiableElement identifiable) {
-		val result = super.internalGetActualType(identifiable)
+	override getActualType(JvmIdentifiableElement identifiable) {
+		val result = super.getActualType(identifiable)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetActualType(XExpression expression) {
-		val result = super.internalGetActualType(expression)
+	override getActualType(XExpression expression) {
+		val result = super.getActualType(expression)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetExpectedType(XExpression expression) {
-		val result = super.internalGetExpectedType(expression)
+	override getExpectedType(XExpression expression) {
+		val result = super.getExpectedType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -473,22 +473,22 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		return result
 	}
 	
-	override internalGetActualType(JvmIdentifiableElement identifiable) {
-		val result = super.internalGetActualType(identifiable)
+	override getActualType(JvmIdentifiableElement identifiable) {
+		val result = super.getActualType(identifiable)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetActualType(XExpression expression) {
-		val result = super.internalGetActualType(expression)
+	override getActualType(XExpression expression) {
+		val result = super.getActualType(expression)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
-	override internalGetExpectedType(XExpression expression) {
-		val result = super.internalGetExpectedType(expression)
+	override getExpectedType(XExpression expression) {
+		val result = super.getExpectedType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result

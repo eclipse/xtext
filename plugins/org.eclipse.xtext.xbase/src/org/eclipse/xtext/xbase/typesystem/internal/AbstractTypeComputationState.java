@@ -22,17 +22,17 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 
@@ -201,14 +201,14 @@ public abstract class AbstractTypeComputationState implements LightweightTypeCom
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
 			
 			@Override
-			protected LightweightResolvedTypes delegate() {
+			protected IResolvedTypes delegate() {
 				return forked.getResolvedTypes();
 			}
 			
 			@Override
 			@Nullable
-			public LightweightTypeReference internalGetActualType(XExpression expression) {
-				LightweightTypeReference type = super.internalGetActualType(expression);
+			public LightweightTypeReference getActualType(XExpression expression) {
+				LightweightTypeReference type = super.getActualType(expression);
 				if (type == null) {
 					LightweightTypeComputationResult result = forked.computeTypes(expression);
 					return result.getActualExpressionType();

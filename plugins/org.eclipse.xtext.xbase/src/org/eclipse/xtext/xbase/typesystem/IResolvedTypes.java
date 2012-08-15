@@ -14,10 +14,10 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * Resolved types represent the result of the type resolution.
@@ -44,31 +44,32 @@ public interface IResolvedTypes {
 	 * @param expression expression whose type is queried.
 	 */
 	@Nullable
-	JvmTypeReference getActualType(XExpression expression);
+	LightweightTypeReference getActualType(XExpression expression);
 	
 	/**
 	 * Returns the actually inferred or declared type for the given identifiable or <code>null</code> if none.
 	 * @param identifiable identifiable whose type is queried.
 	 */
 	@Nullable
-	JvmTypeReference getActualType(JvmIdentifiableElement identifiable);
+	LightweightTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
 	/**
 	 * Returns the actually expected type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected type is queried.
 	 */
 	@Nullable
-	JvmTypeReference getExpectedType(XExpression expression);
+	LightweightTypeReference getExpectedType(XExpression expression);
 	
 	/**
 	 * @param expression may either be an {@link XAbstractFeatureCall} or {@link XConstructorCall}. May not be <code>null</code>. 
 	 */
-	List<JvmTypeReference> getActualTypeArguments(XExpression expression);
+	List<LightweightTypeReference> getActualTypeArguments(XExpression expression);
 
 	// TODO return types? are they necessary for clients if diagnostics were already produced?
 	
 	IResolvedTypes NULL = new NullResolvedTypes();
-
+	
+	
 	/**
 	 * @noextend This class is not intended to be subclassed by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
@@ -83,21 +84,21 @@ public interface IResolvedTypes {
 		}
 		
 		@Nullable
-		public JvmTypeReference getExpectedType(XExpression expression) {
+		public LightweightTypeReference getExpectedType(XExpression expression) {
 			return null;
 		}
 		
-		public List<JvmTypeReference> getActualTypeArguments(XExpression expression) {
+		public List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 			return Collections.emptyList();
 		}
 		
 		@Nullable
-		public JvmTypeReference getActualType(XExpression expression) {
+		public LightweightTypeReference getActualType(XExpression expression) {
 			return null;
 		}
 
 		@Nullable
-		public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
+		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
 	}

@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.junit.Assert;
@@ -41,13 +39,9 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
       final XExpression xExpression = this.expression(_replace, false);
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
-      final LightweightResolvedTypes lightweightResolvedTypes = ((LightweightResolvedTypes) resolvedTypes);
-      final JvmTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
+      final LightweightTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
       String _simpleName = resolvedType.getSimpleName();
       Assert.assertEquals(type, _simpleName);
-      final LightweightTypeReference lightweight = lightweightResolvedTypes.internalGetActualType(xExpression);
-      String _simpleName_1 = lightweight.getSimpleName();
-      Assert.assertEquals(type, _simpleName_1);
       TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
       Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
       for (final EObject content : _iterable) {
@@ -56,11 +50,11 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           if (content instanceof XSwitchExpression) {
             final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xSwitchExpression, lightweightResolvedTypes);
+            this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
             String _localVarName = _xSwitchExpression.getLocalVarName();
             boolean _notEquals = (!Objects.equal(_localVarName, null));
             if (_notEquals) {
-              this.assertIdentifiableTypeIsResolved(_xSwitchExpression, lightweightResolvedTypes);
+              this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
             }
           }
         }
@@ -68,7 +62,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           if (content instanceof XExpression) {
             final XExpression _xExpression = (XExpression)content;
             _matched=true;
-            this.assertExpressionTypeIsResolved(_xExpression, lightweightResolvedTypes);
+            this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
           }
         }
         if (!_matched) {
@@ -81,11 +75,11 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           if (content instanceof JvmIdentifiableElement) {
             final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
             _matched=true;
-            this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, lightweightResolvedTypes);
+            this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
           }
         }
       }
-      return lightweight;
+      return resolvedType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,8 +110,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     return _builder.toString();
   }
   
-  public void assertExpressionTypeIsResolved(final XExpression expression, final LightweightResolvedTypes types) {
-    final LightweightTypeReference type = types.internalGetActualType(expression);
+  public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
+    final LightweightTypeReference type = types.getActualType(expression);
     String _string = expression.toString();
     Assert.assertNotNull(_string, type);
     String _string_1 = expression.toString();
@@ -127,8 +121,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     Assert.assertNotNull(_plus_1, _identifier);
   }
   
-  public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final LightweightResolvedTypes types) {
-    final LightweightTypeReference type = types.internalGetActualType(identifiable);
+  public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
+    final LightweightTypeReference type = types.getActualType(identifiable);
     String _string = identifiable.toString();
     Assert.assertNotNull(_string, type);
     String _string_1 = identifiable.toString();

@@ -145,8 +145,8 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
-  public LightweightTypeReference internalGetActualType(final JvmIdentifiableElement identifiable) {
-    final LightweightTypeReference result = super.internalGetActualType(identifiable);
+  public LightweightTypeReference getActualType(final JvmIdentifiableElement identifiable) {
+    final LightweightTypeReference result = super.getActualType(identifiable);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
@@ -157,8 +157,8 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
-  public LightweightTypeReference internalGetActualType(final XExpression expression) {
-    final LightweightTypeReference result = super.internalGetActualType(expression);
+  public LightweightTypeReference getActualType(final XExpression expression) {
+    final LightweightTypeReference result = super.getActualType(expression);
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(result, null));
     if (!_notEquals) {
@@ -176,8 +176,8 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
-  public LightweightTypeReference internalGetExpectedType(final XExpression expression) {
-    final LightweightTypeReference result = super.internalGetExpectedType(expression);
+  public LightweightTypeReference getExpectedType(final XExpression expression) {
+    final LightweightTypeReference result = super.getExpectedType(expression);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);

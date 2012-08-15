@@ -6,7 +6,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.BatchTypeResolverTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -33,8 +32,7 @@ public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
       final XExpression xExpression = this.expression(_replace, false);
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
-      final LightweightResolvedTypes lightweightResolvedTypes = ((LightweightResolvedTypes) resolvedTypes);
-      final LightweightTypeReference lightweight = lightweightResolvedTypes.internalGetActualType(xExpression);
+      final LightweightTypeReference lightweight = resolvedTypes.getActualType(xExpression);
       String _simpleName = lightweight.getSimpleName();
       Assert.assertEquals(type, _simpleName);
       return lightweight;

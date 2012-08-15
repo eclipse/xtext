@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.common.collect.Lists;
 
@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public abstract class AbstractFeatureScopeSession implements IFeatureScopeSession {
 
-	public IScope getScope(EObject context, EReference reference, LightweightResolvedTypes types) {
+	public IScope getScope(EObject context, EReference reference, IResolvedTypes types) {
 		if (getFeatureScopes().isFeatureCallScope(reference)) {
 			return createFeatureCallScope(context, reference, types);
 		} else {
@@ -84,7 +84,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 
-	protected IScope createFeatureCallScope(EObject context, EReference reference, LightweightResolvedTypes resolvedTypes) {
+	protected IScope createFeatureCallScope(EObject context, EReference reference, IResolvedTypes resolvedTypes) {
 		return getFeatureScopes().createFeatureCallScope(context, reference, this, resolvedTypes);
 	}
 	

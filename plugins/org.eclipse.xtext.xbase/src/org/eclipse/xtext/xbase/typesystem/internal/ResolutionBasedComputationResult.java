@@ -30,11 +30,11 @@ public class ResolutionBasedComputationResult implements LightweightTypeComputat
 	}
 
 	public LightweightTypeReference getActualExpressionType() {
-		return resolution.internalGetActualType(expression);
+		return resolution.getActualType(expression);
 	}
 
 	public LightweightTypeReference getActualType(JvmIdentifiableElement element) {
-		return resolution.internalGetActualType(element);
+		return resolution.getActualType(element);
 	}
 
 	public XExpression getExpression() {
@@ -42,7 +42,7 @@ public class ResolutionBasedComputationResult implements LightweightTypeComputat
 	}
 
 	public LightweightTypeReference getExpectedExpressionType() {
-		return resolution.internalGetActualType(expression);
+		return resolution.getActualType(expression);
 	}
 	
 	public EnumSet<ConformanceHint> getConformanceHints() {
