@@ -98,7 +98,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (parameterTypes == null)
 			parameterTypes = Lists.newArrayListWithCapacity(2);
 		parameterTypes.add(parameterType);
-		resolved &= parameterType.isResolved();
+		resolved = resolved && parameterType.isResolved();
 	}
 	
 	public void setReturnType(LightweightTypeReference returnType) {
@@ -109,7 +109,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 			throw new NullPointerException("returnType is not valid in current context");
 		}
 		this.returnType = returnType;
-		resolved &= returnType.isResolved();
+		resolved = resolved && returnType.isResolved();
 	}
 	
 	@Override

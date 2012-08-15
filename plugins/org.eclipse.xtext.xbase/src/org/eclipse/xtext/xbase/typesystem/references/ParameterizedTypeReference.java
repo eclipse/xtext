@@ -205,7 +205,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (typeArguments == null)
 			typeArguments = Lists.newArrayListWithCapacity(2);
 		typeArguments.add(argument);
-		resolved &= argument.isResolved();
+		resolved = resolved && argument.isResolved();
 	}
 	
 	@Override

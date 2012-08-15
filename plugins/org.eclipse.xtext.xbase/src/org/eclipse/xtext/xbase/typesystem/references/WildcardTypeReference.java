@@ -147,7 +147,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (upperBounds == null)
 			upperBounds = Lists.newArrayListWithCapacity(2);
 		upperBounds.add(upperBound);
-		resolved &= upperBound.isResolved();
+		resolved = resolved && upperBound.isResolved();
 	}
 	
 	public void setLowerBound(LightweightTypeReference lowerBound) {
@@ -161,7 +161,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			throw new IllegalStateException("only one lower bound is supported");
 		}
 		this.lowerBound = lowerBound;
-		resolved &= lowerBound.isResolved();
+		resolved = resolved && lowerBound.isResolved();
 	}
 
 	@Override
