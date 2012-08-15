@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,7 +34,7 @@ public class RootTypeExpectation extends AbstractRootTypeExpectation {
 		return reference;
 	}
 
-	public LightweightTypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+	public LightweightTypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return new RootTypeExpectation(reference.copyInto(referenceOwner), getState());
 	}
 }

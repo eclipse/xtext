@@ -20,24 +20,43 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
- * A type resolution allows to query the types of given expressions. Furthermore 
- * it encapsulates the issues that occurred during type resolution.
+ * Resolved types represent the result of the type resolution.
+ * They offer a means to query for actual types, expectations, 
+ * the type arguments for a feature call or the diagnostics that
+ * were produced during the type resolution.
  * 
- * TODO JavaDoc, toString
+ * TODO JavaDoc, describe contract for toString
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
 public interface IResolvedTypes {
 
+	/* 
+	 * TODO find a suitable abstraction to represent diagnostics
+	 * It's cumbersome to use Issues since they only know about URIs 
+	 * so we probably want to use Diagnostics?
+	 */
 	List<Diagnostic> getQueuedDiagnostics();
 	
+	/**
+	 * Returns the actually inferred type for the given expression or <code>null</code> if none.
+	 * @param expression expression whose type is queried.
+	 */
 	@Nullable
 	JvmTypeReference getActualType(XExpression expression);
 	
+	/**
+	 * Returns the actually inferred or declared type for the given identifiable or <code>null</code> if none.
+	 * @param identifiable identifiable whose type is queried.
+	 */
 	@Nullable
 	JvmTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
+	/**
+	 * Returns the actually expected type for the given expression or <code>null</code> if none.
+	 * @param expression expression whose expected type is queried.
+	 */
 	@Nullable
 	JvmTypeReference getExpectedType(XExpression expression);
 	

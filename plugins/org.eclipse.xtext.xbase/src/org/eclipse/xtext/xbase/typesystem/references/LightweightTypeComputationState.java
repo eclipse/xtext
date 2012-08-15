@@ -91,6 +91,6 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	
 	void discardReassignedTypes(XExpression object);
 
-	TypeReferenceOwner getReferenceOwner();
+	ITypeReferenceOwner getReferenceOwner();
 	
 }

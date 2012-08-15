@@ -9,9 +9,15 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
-
 /**
+ * The root resolved types are the effective result of a type computation.
+ * They don't have a parent and should never yield unresolved type references
+ * when clients query for types of expressions or identifiables.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * TODO guard against unresolved type references
+ * TODO toString
  */
 public class RootResolvedTypes extends ResolvedTypes {
 

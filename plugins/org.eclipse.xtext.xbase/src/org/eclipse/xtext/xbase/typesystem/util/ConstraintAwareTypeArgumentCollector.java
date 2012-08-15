@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 
@@ -31,9 +31,9 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgumentCollector {
 
-	private TypeReferenceOwner owner;
+	private ITypeReferenceOwner owner;
 
-	public ConstraintAwareTypeArgumentCollector(TypeReferenceOwner owner) {
+	public ConstraintAwareTypeArgumentCollector(ITypeReferenceOwner owner) {
 		this.owner = owner;
 	}
 	

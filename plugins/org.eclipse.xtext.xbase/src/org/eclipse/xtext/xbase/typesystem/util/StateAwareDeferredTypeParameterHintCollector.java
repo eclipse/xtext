@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypeParameterHintCollector {
 
-	public StateAwareDeferredTypeParameterHintCollector(TypeReferenceOwner owner) {
+	public StateAwareDeferredTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
 	}
 	

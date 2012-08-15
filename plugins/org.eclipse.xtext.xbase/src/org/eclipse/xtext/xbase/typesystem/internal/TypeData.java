@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,13 +44,13 @@ public class TypeData {
 		this.returnType = returnType;
 	}
 	
-	public TypeData copyInto(TypeReferenceOwner owner) {
+	public TypeData copyInto(ITypeReferenceOwner owner) {
 		if (isOwnedBy(owner))
 			return this;
 		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), hints.clone(), returnType);
 	}
 	
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		return expectation.isOwnedBy(owner) && type.isOwnedBy(owner);
 	}
 

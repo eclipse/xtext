@@ -30,7 +30,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 
 	private LightweightTypeReference component;
 
-	public ArrayTypeReference(TypeReferenceOwner owner, LightweightTypeReference component) {
+	public ArrayTypeReference(ITypeReferenceOwner owner, LightweightTypeReference component) {
 		super(owner);
 		this.component = Preconditions.checkNotNull(component, "component");
 		if (!(component.getType() instanceof JvmComponentType)) {
@@ -84,7 +84,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		return super.isOwnedBy(owner) && component.isOwnedBy(owner);
 	}
 	
@@ -98,7 +98,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		LightweightTypeReference copiedComponent = component.copyInto(owner);
 		return new ArrayTypeReference(owner, copiedComponent);
 	}

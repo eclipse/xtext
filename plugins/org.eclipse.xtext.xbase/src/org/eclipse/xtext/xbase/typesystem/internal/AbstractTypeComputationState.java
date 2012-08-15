@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationR
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 
@@ -292,7 +292,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new OwnedConverter(getReferenceOwner()).toLightweightReference(reference);
 	}
 
-	public TypeReferenceOwner getReferenceOwner() {
+	public ITypeReferenceOwner getReferenceOwner() {
 		return getResolvedTypes().getReferenceOwner();
 	}
 }

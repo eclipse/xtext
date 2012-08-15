@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
@@ -94,7 +94,7 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 			}
 		}
 		if (type instanceof JvmDeclaredType) {
-			TypeReferenceOwner owner = reference.getOwner();
+			ITypeReferenceOwner owner = reference.getOwner();
 			OwnedConverter converter = new OwnedConverter(owner);
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			for(JvmTypeReference superType: superTypes) {
@@ -105,7 +105,7 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 				}
 			}
 		} else if (type instanceof JvmTypeParameter) {
-			TypeReferenceOwner owner = reference.getOwner();
+			ITypeReferenceOwner owner = reference.getOwner();
 			OwnedConverter converter = new OwnedConverter(owner);
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
 			for(JvmTypeConstraint constraint: constraints) {

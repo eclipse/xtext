@@ -159,7 +159,7 @@ public class FunctionTypes {
 	
 	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getFunctionTypeParameterMapping(
 			LightweightTypeReference functionType, JvmOperation operation,
-			ActualTypeArgumentCollector typeArgumentCollector, TypeReferenceOwner owner) {
+			ActualTypeArgumentCollector typeArgumentCollector, ITypeReferenceOwner owner) {
 		JvmParameterizedTypeReference operationTypeDeclarator = typeReferences.createTypeRef(operation.getDeclaringType());
 		LightweightTypeReference lightweightTypeReference = new OwnedConverter(owner).toLightweightReference(operationTypeDeclarator);
 		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, functionType);
@@ -206,7 +206,7 @@ public class FunctionTypes {
 		return false;
 	}
 
-	public FunctionTypeReference createRawFunctionTypeRef(TypeReferenceOwner owner, EObject context, int parameterCount, boolean procedure) {
+	public FunctionTypeReference createRawFunctionTypeRef(ITypeReferenceOwner owner, EObject context, int parameterCount, boolean procedure) {
 		String simpleClassName = (procedure ? "Procedure" : "Function") + Math.min(6, parameterCount);
 		final Class<?> loadFunctionClass = loadFunctionClass(simpleClassName, procedure);
 		JvmType declaredType = typeReferences.findDeclaredType(loadFunctionClass, context);
@@ -217,7 +217,7 @@ public class FunctionTypes {
 	}
 	
 	public FunctionTypeReference createFunctionTypeRef(
-			TypeReferenceOwner owner,
+			ITypeReferenceOwner owner,
 			LightweightTypeReference functionType, 
 			List<LightweightTypeReference> parameterTypes,
 			LightweightTypeReference returnType) {

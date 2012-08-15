@@ -11,15 +11,15 @@ import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 /**
  * @author Sebastian Zarnekow
  */
-class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements TypeReferenceOwner {
+class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
 	
 	@Inject CommonTypeComputationServices services
 	

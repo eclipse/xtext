@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
@@ -28,7 +28,7 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 
 	public static void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType,
 			List<JvmTypeParameter> typeParameters, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
-			TypeReferenceOwner owner) {
+			ITypeReferenceOwner owner) {
 		TypeArgumentFromComputedTypeCollector implementation = new TypeArgumentFromComputedTypeCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, owner);
 		implementation.populateTypeParameterMapping(declaredType, actualType);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> parameterMapping = implementation.rawGetTypeParameterMapping();
@@ -44,7 +44,7 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 	}
 	
 	public TypeArgumentFromComputedTypeCollector(List<JvmTypeParameter> parametersToBeMapped,
-			BoundTypeArgumentSource defaultSource, TypeReferenceOwner owner) {
+			BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(parametersToBeMapped, defaultSource, owner);
 	}
 

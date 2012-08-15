@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationS
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 
@@ -37,9 +37,9 @@ import com.google.common.collect.Lists;
 public class CompoundTypeComputationState implements LightweightTypeComputationState {
 
 	private AbstractTypeComputationState[] components;
-	private TypeReferenceOwner owner;
+	private ITypeReferenceOwner owner;
 
-	public CompoundTypeComputationState(TypeReferenceOwner owner, AbstractTypeComputationState... components) {
+	public CompoundTypeComputationState(ITypeReferenceOwner owner, AbstractTypeComputationState... components) {
 		this.owner = owner;
 		this.components = components;
 	}
@@ -172,7 +172,7 @@ public class CompoundTypeComputationState implements LightweightTypeComputationS
 		return new CompoundTypeAssigner(owner, array);
 	}
 
-	public TypeReferenceOwner getReferenceOwner() {
+	public ITypeReferenceOwner getReferenceOwner() {
 		return owner;
 	}
 

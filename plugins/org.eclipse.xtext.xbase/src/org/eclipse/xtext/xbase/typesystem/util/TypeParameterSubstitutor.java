@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
@@ -35,9 +35,9 @@ import com.google.common.collect.Maps;
 public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVisitorWithParameterAndNonNullResult<Visiting, LightweightTypeReference> {
 		
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
-	private final TypeReferenceOwner owner;
+	private final ITypeReferenceOwner owner;
 
-	public TypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, TypeReferenceOwner owner) {
+	public TypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, ITypeReferenceOwner owner) {
 		this.owner = owner;
 		this.typeParameterMapping = Maps.newLinkedHashMap(typeParameterMapping);
 	}
@@ -50,7 +50,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		this.typeParameterMapping.putAll(typeParameterMapping);
 	}
 	
-	protected TypeReferenceOwner getOwner() {
+	protected ITypeReferenceOwner getOwner() {
 		return owner;
 	}
 	

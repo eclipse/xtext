@@ -40,7 +40,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	private JvmType type;
 	protected boolean resolved;
 	
-	public ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
+	public ParameterizedTypeReference(ITypeReferenceOwner owner, JvmType type) {
 		super(owner);
 		if (type == null) {
 			throw new NullPointerException("type may not be null");
@@ -80,7 +80,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (super.isOwnedBy(owner)) {
 			for(LightweightTypeReference typeArgument: expose(typeArguments)) {
 				if (!typeArgument.isOwnedBy(owner))
@@ -176,13 +176,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected ParameterizedTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected ParameterizedTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
 		copyTypeArguments(result, owner);
 		return result;
 	}
 
-	protected void copyTypeArguments(ParameterizedTypeReference result, TypeReferenceOwner owner) {
+	protected void copyTypeArguments(ParameterizedTypeReference result, ITypeReferenceOwner owner) {
 		if (typeArguments != null && !typeArguments.isEmpty()) {
 			for(LightweightTypeReference typeArgument: typeArguments) {
 				result.addTypeArgument(typeArgument.copyInto(owner));

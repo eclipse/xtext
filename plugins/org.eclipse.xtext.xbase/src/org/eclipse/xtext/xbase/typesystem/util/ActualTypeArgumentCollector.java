@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.ListMultimap;
 
@@ -48,7 +48,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	private final List<JvmTypeParameter> parametersToBeMapped;
 	private final BoundTypeArgumentSource defaultSource;
 
-	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, BoundTypeArgumentSource defaultSource, TypeReferenceOwner owner) {
+	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(owner);
 		this.parametersToBeMapped = parametersToBeMapped;
 		this.defaultSource = defaultSource;

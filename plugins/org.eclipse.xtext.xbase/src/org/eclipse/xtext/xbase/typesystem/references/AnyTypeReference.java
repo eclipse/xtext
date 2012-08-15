@@ -23,12 +23,12 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 @NonNullByDefault
 public class AnyTypeReference extends LightweightTypeReference {
 
-	public AnyTypeReference(TypeReferenceOwner owner) {
+	public AnyTypeReference(ITypeReferenceOwner owner) {
 		super(owner);
 	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		throw new UnsupportedOperationException();
 	}
 
