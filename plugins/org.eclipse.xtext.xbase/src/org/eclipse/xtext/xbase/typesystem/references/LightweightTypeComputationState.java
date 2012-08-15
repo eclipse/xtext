@@ -12,15 +12,20 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 
 /**
+ * @noimplement This interface is not intended to be implemented by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public interface LightweightTypeComputationState extends ITypeComputationState {
+public interface LightweightTypeComputationState {
 
 	/**
 	 * The given expectation will be resolved if it contains unresolved type
@@ -31,11 +36,6 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	 * where clients would be invoked with the better candidate 'string'.
 	 */
 	LightweightTypeComputationState withExpectation(LightweightTypeReference expectation);
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	LightweightTypeComputationState withExpectation(JvmTypeReference expectation);
 	
 	LightweightTypeComputationState withNonVoidExpectation();
 	
@@ -65,11 +65,7 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	 */
 	LightweightTypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type);
 	
-	LightweightTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type);
-	
 	LightweightTypeAssigner assignTypes();
-	
-	LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference);
 	
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
 	
@@ -83,6 +79,16 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	 */
 	List<? extends LightweightTypeExpectation> getReturnExpectations();
 	
+	/**
+	 * The result is never empty.
+	 */
+	List<? extends IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall);
+	
+	/**
+	 * The result is never empty.
+	 */
+	List<? extends IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall);
+	
 	void acceptActualType(LightweightTypeReference type);
 	
 	// TODO implement this better, especially for instanceof in conditions
@@ -92,5 +98,7 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	void discardReassignedTypes(XExpression object);
 
 	ITypeReferenceOwner getReferenceOwner();
+	
+	OwnedConverter getConverter();
 	
 }

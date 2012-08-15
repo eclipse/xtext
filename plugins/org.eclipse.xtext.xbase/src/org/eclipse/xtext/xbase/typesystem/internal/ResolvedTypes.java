@@ -239,7 +239,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	protected LightweightTypeReference doGetExpectedType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData != null)
-			return typeData.getExpectation().internalGetExpectedType();
+			return typeData.getExpectation().getExpectedType();
 		return null;
 	}
 	
@@ -255,14 +255,6 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
-	public void setType(JvmIdentifiableElement identifiable, JvmTypeReference reference) {
-		setType(identifiable, getConverter().toLightweightReference(reference));
-	}
-	
-	public void reassignType(JvmIdentifiableElement identifiable, JvmTypeReference reference) {
-		reassignType(identifiable, getConverter().toLightweightReference(reference));
-	}
-
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
 		if (ensureTypesMapExists().put(identifiable, reference) != null) {
 			throw new IllegalStateException("identifiable was already typed");

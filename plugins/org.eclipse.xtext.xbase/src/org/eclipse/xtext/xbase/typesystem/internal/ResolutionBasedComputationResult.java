@@ -12,14 +12,14 @@ import java.util.EnumSet;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ResolutionBasedComputationResult extends BaseTypeComputationResult {
+public class ResolutionBasedComputationResult implements LightweightTypeComputationResult {
 
 	private final XExpression expression;
 	private final ResolvedTypes resolution;
@@ -29,11 +29,11 @@ public class ResolutionBasedComputationResult extends BaseTypeComputationResult 
 		this.resolution = resolution;
 	}
 
-	public LightweightTypeReference internalGetActualExpressionType() {
+	public LightweightTypeReference getActualExpressionType() {
 		return resolution.internalGetActualType(expression);
 	}
 
-	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement element) {
+	public LightweightTypeReference getActualType(JvmIdentifiableElement element) {
 		return resolution.internalGetActualType(element);
 	}
 
@@ -41,7 +41,7 @@ public class ResolutionBasedComputationResult extends BaseTypeComputationResult 
 		return expression;
 	}
 
-	public LightweightTypeReference internalGetExpectedExpressionType() {
+	public LightweightTypeReference getExpectedExpressionType() {
 		return resolution.internalGetActualType(expression);
 	}
 	

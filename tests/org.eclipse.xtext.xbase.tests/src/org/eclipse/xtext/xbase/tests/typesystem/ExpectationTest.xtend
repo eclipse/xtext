@@ -13,8 +13,6 @@ import java.util.List
 import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.xbase.XNullLiteral
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
 import org.junit.Ignore
@@ -23,6 +21,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,7 +32,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Inject ExpectationTestingTypeComputer typeComputer
 	
-	List<ITypeExpectation> expectations
+	List<LightweightTypeExpectation> expectations
 	
 	boolean pendingAssert = false;
 	
@@ -92,7 +91,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		resolver.typeComputer = null
 	}
 	
-	def void recordExpectation(ITypeComputationState state) {
+	def void recordExpectation(LightweightTypeComputationState state) {
 		expectations += state.immediateExpectations	
 	}
 
@@ -133,7 +132,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testFeatureCallArgument_03() {
-		"newArrayList.findFirst(null)".expects.types('Function1<? super Object, Boolean>')
+		"newArrayList.findFirst(null)".expects.types('Function1<? super Unbound[T], Boolean>')
 	}
 	
 	@Test

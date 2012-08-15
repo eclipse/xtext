@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.BaseTypeAssigner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class TypeAssigner extends BaseTypeAssigner {
+public class TypeAssigner implements LightweightTypeAssigner {
 	private final AbstractTypeComputationState state;
 
 	protected TypeAssigner(AbstractTypeComputationState state) {
@@ -46,7 +46,6 @@ public class TypeAssigner extends BaseTypeAssigner {
 		state.addLocalToCurrentScope(element);
 	}
 
-	@Override
 	protected OwnedConverter getConverter() {
 		return state.getResolvedTypes().getConverter();
 	}

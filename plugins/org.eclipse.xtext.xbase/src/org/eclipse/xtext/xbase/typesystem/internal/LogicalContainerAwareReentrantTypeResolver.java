@@ -110,7 +110,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		if (field.getType() != null) {
-			resolvedTypes.setType(field, field.getType());
+			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(field.getType());
+			resolvedTypes.setType(field, lightweightReference);
 		} else {
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field);
 			field.setType(reference);
@@ -120,12 +121,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected void _doPrepare(ResolvedTypes resolvedTypes, JvmConstructor constructor) {
 		JvmDeclaredType producedType = constructor.getDeclaringType();
 		JvmParameterizedTypeReference asReference = getServices().getTypeReferences().createTypeRef(producedType);
-		resolvedTypes.setType(constructor, asReference);
+		LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(asReference);
+		resolvedTypes.setType(constructor, lightweightReference);
 	}
 	
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		if (operation.getReturnType() != null) {
-			resolvedTypes.setType(operation, operation.getReturnType());
+			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(operation.getReturnType());
+			resolvedTypes.setType(operation, lightweightReference);
 		} else {
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation);
 			operation.setReturnType(reference);
@@ -135,7 +138,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
 		result.setTypeProvider(createTypeProvider(resolvedTypes, featureScopeSession, member));
-		resolvedTypes.setType(member, result);
+		// TODO do we need a lightweight computed type reference?
+//		resolvedTypes.setType(member, result);
 		return result;
 	}
 	
@@ -196,7 +200,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference superType = getExtendedClass(type);
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type, superType);
 		if (superType != null) {
-			childResolvedTypes.reassignType(superType.getType(), superType);
+			LightweightTypeReference lightweightSuperType = resolvedTypes.getConverter().toLightweightReference(superType);
+			childResolvedTypes.reassignType(superType.getType(), lightweightSuperType);
 			/* 
 			 * We use reassignType to make sure that the following works:
 			 *
@@ -207,7 +212,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			 * }
 			 */
 		}
-		childResolvedTypes.reassignType(type, getServices().getTypeReferences().createTypeRef(type));
+		JvmParameterizedTypeReference thisType = getServices().getTypeReferences().createTypeRef(type);
+		LightweightTypeReference lightweightThisType = resolvedTypes.getConverter().toLightweightReference(thisType);
+		childResolvedTypes.reassignType(type, lightweightThisType);
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
 			computeTypes(childResolvedTypes, childSession, members.get(i));

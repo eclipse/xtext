@@ -10,9 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -20,17 +21,24 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
+public abstract class AbstractTypeExpectation implements LightweightTypeExpectation {
 
 	private final AbstractTypeComputationState state;
 
 	protected AbstractTypeExpectation(AbstractTypeComputationState state) {
-		super(state.getReferenceOwner());
 		this.state = state;
 	}
 	
+	public OwnedConverter getConverter() {
+		return state.getConverter();
+	}
+	
+	public ITypeReferenceOwner getReferenceOwner() {
+		return state.getReferenceOwner();
+	}
+
 	public boolean isVoidTypeAllowed() {
-		LightweightTypeReference expectedType = internalGetExpectedType();
+		LightweightTypeReference expectedType = getExpectedType();
 		if (expectedType != null && expectedType.isType(Void.TYPE)) {
 			return true;
 		}
@@ -38,7 +46,7 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	}
 	
 	public boolean isOwnedBy(ITypeReferenceOwner referenceOwner) {
-		LightweightTypeReference expectedType = internalGetExpectedType();
+		LightweightTypeReference expectedType = getExpectedType();
 		return expectedType == null || expectedType.isOwnedBy(referenceOwner);
 	}
 	
@@ -56,7 +64,7 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	
 	@Override
 	public String toString() {
-		LightweightTypeReference expectedType = internalGetExpectedType();
+		LightweightTypeReference expectedType = getExpectedType();
 		String expectedTypeString = "";
 		if (expectedType != null) {
 			expectedTypeString = expectedType.toString();

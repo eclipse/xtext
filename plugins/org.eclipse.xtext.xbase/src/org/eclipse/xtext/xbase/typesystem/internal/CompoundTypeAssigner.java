@@ -30,18 +30,6 @@ public class CompoundTypeAssigner implements LightweightTypeAssigner {
 		this.assigners = assigners;
 	}
 
-	public void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType) {
-		for(LightweightTypeAssigner assigner: assigners) {
-			assigner.assignType(element, declaredType);
-		}
-	}
-
-	public void assignType(JvmIdentifiableElement element, JvmTypeReference declaredType, JvmTypeReference expectedType) {
-		for(LightweightTypeAssigner assigner: assigners) {
-			assigner.assignType(element, declaredType, expectedType);
-		}
-	}
-
 	public void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType) {
 		for(LightweightTypeAssigner assigner: assigners) {
 			assigner.assignType(element, expectedType);

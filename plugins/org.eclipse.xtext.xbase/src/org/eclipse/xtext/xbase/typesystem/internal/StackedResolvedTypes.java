@@ -251,7 +251,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			LightweightTypeExpectation expectation = typeData.getExpectation();
-			LightweightTypeReference expectedType = expectation.internalGetExpectedType();
+			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
 				TypeConformanceResult conformanceResult = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
 				conformanceHints.addAll(conformanceResult.getConformanceHints());

@@ -7,19 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.util.EnumSet;
+
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface LightweightTypeComputationResult extends ITypeComputationResult {
+public interface LightweightTypeComputationResult {
 
-	LightweightTypeReference internalGetActualExpressionType();
+	LightweightTypeReference getActualExpressionType();
 	
-	@Nullable LightweightTypeReference internalGetExpectedExpressionType();
+	@Nullable LightweightTypeReference getExpectedExpressionType();
 	
-	@Nullable LightweightTypeReference internalGetActualType(JvmIdentifiableElement element);
+	@Nullable LightweightTypeReference getActualType(JvmIdentifiableElement element);
+	
+	@Nullable XExpression getExpression();
+	
+	@Nullable EnumSet<ConformanceHint> getConformanceHints();
 	
 }

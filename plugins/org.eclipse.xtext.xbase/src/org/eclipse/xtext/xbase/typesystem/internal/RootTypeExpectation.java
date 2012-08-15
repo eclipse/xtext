@@ -30,7 +30,7 @@ public class RootTypeExpectation extends AbstractRootTypeExpectation {
 		return false;
 	}
 	
-	public LightweightTypeReference internalGetExpectedType() {
+	public LightweightTypeReference getExpectedType() {
 		return reference;
 	}
 

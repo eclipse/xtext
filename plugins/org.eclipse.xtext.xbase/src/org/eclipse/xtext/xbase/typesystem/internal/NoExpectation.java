@@ -25,7 +25,7 @@ public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 	}
 
 	@Nullable
-	public LightweightTypeReference internalGetExpectedType() {
+	public LightweightTypeReference getExpectedType() {
 		return null;
 	}
 
