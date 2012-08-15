@@ -93,8 +93,11 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XtendPackage.Literals.XTEND_FIELD__TYPE, true,
-				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+		if (model instanceof XtendField) {
+			// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
+			completeJavaTypes(context, XtendPackage.Literals.XTEND_FIELD__TYPE, true,
+					getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+		}
 	}
 	
 	@Override
