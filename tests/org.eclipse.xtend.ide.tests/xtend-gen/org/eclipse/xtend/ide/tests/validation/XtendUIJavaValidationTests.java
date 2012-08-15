@@ -32,7 +32,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
   public void testForbiddenImport() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.ui.tests.restricted.RestrictedClass");
+      _builder.append("import org.eclipse.xtend.core.tests.restricted.RestrictedClass");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -52,7 +52,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
   public void testDiscouragedImport() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.ui.tests.internal.InternalClass");
+      _builder.append("import org.eclipse.xtend.core.tests.internal.InternalClass");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -95,7 +95,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
   public void testForbiddenConstructorCall() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.ui.tests.restricted.RestrictedClass");
+      _builder.append("import org.eclipse.xtend.core.tests.restricted.RestrictedClass");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -127,7 +127,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
   public void testDiscouragedConstructorCall() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.ui.tests.internal.InternalClass");
+      _builder.append("import org.eclipse.xtend.core.tests.internal.InternalClass");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -162,7 +162,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(org.eclipse.xtext.ui.tests.restricted.RestrictedClass x) {}");
+      _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -188,7 +188,7 @@ public class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(org.eclipse.xtext.ui.tests.internal.InternalClass x){}");
+      _builder.append("def bar(org.eclipse.xtend.core.tests.internal.InternalClass x){}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

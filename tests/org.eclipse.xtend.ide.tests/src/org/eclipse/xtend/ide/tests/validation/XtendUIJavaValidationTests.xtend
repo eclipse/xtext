@@ -22,7 +22,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtext.ui.tests.restricted.RestrictedClass
+		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
 		class Foo {
 		}
 
@@ -33,7 +33,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtext.ui.tests.internal.InternalClass
+		import org.eclipse.xtend.core.tests.internal.InternalClass
 		class Foo {
 		}
 
@@ -56,7 +56,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenConstructorCall() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtext.ui.tests.restricted.RestrictedClass
+		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
 		class Foo {
 			RestrictedClass x = new RestrictedClass
 		}
@@ -71,7 +71,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedConstructorCall() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtext.ui.tests.internal.InternalClass
+		import org.eclipse.xtend.core.tests.internal.InternalClass
 		class Foo {
 			InternalClass x = new InternalClass
 		}
@@ -87,7 +87,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	def void testForbiddenTypeUsage() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		class Foo {
-			def bar(org.eclipse.xtext.ui.tests.restricted.RestrictedClass x) {}
+			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
 		}
 
 		''')
@@ -99,7 +99,7 @@ class XtendUIJavaValidationTests extends AbstractXtendUITestCase {
 	def void testDiscouragedTypeUsage() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		class Foo {
-			def bar(org.eclipse.xtext.ui.tests.internal.InternalClass x){}
+			def bar(org.eclipse.xtend.core.tests.internal.InternalClass x){}
 		}
 
 		''')

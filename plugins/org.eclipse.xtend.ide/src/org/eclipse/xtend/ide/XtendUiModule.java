@@ -281,7 +281,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	} 
 
 	@Override
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIJavaValidator> bindXbaseUIJavaValidator() {
-		return org.eclipse.xtend.ide.validator.XtendUIJavaValidator.class;
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
+		return org.eclipse.xtend.ide.validator.XtendUIValidator.class;
 	}
 }
