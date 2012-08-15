@@ -14,10 +14,10 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
