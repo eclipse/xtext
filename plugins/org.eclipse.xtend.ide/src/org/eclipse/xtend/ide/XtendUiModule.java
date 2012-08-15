@@ -279,4 +279,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public void configureFilterSyntheticMembersContribution(Binder binder) {
 		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("FilterSyntheticsContribution")).to(ShowSyntheticMembersContribution.class);
 	} 
+
+	@Override
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIJavaValidator> bindXbaseUIJavaValidator() {
+		return org.eclipse.xtend.ide.validator.XtendUIJavaValidator.class;
+	}
 }
