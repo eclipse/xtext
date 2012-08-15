@@ -22,11 +22,11 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -250,7 +250,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
 		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
 			LightweightTypeReference actualType = typeData.getActualType();
-			LightweightTypeExpectation expectation = typeData.getExpectation();
+			ITypeExpectation expectation = typeData.getExpectation();
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
 				TypeConformanceResult conformanceResult = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());

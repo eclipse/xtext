@@ -17,11 +17,11 @@ import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +32,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Inject ExpectationTestingTypeComputer typeComputer
 	
-	List<LightweightTypeExpectation> expectations
+	List<ITypeExpectation> expectations
 	
 	boolean pendingAssert = false;
 	
@@ -47,8 +47,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	def types(String... names) {
 		assertTrue(pendingAssert)
 		pendingAssert = false
-		assertEquals(expectations.map[expectedType?.simpleName].toString, names.size, expectations.size)
-		assertEquals(names.toSet as Object, expectations.map[expectedType?.simpleName].toSet)
+		assertEquals(expectations.map[getExpectedType?.simpleName].toString, names.size, expectations.size)
+		assertEquals(names.toSet as Object, expectations.map[getExpectedType?.simpleName].toSet)
 		return this
 	}
 	
@@ -57,9 +57,9 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false
 		assertEquals(1, expectations.size)
 		val expectation = expectations.head
-		assertTrue(expectation.noTypeExpectation)
-		assertTrue(expectation.voidTypeAllowed)
-		assertNull(expectation.expectedType)
+		assertTrue(expectation.isNoTypeExpectation)
+		assertTrue(expectation.isVoidTypeAllowed)
+		assertNull(expectation.getExpectedType)
 		return this
 	}
 	
@@ -68,9 +68,9 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false
 		assertEquals(1, expectations.size)
 		val expectation = expectations.head
-		assertFalse(expectation.noTypeExpectation)
-		assertFalse(expectation.voidTypeAllowed)
-		assertNull(expectation.expectedType)
+		assertFalse(expectation.isNoTypeExpectation)
+		assertFalse(expectation.isVoidTypeAllowed)
+		assertNull(expectation.getExpectedType)
 		return this
 	}
 	
@@ -91,8 +91,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		resolver.typeComputer = null
 	}
 	
-	def void recordExpectation(LightweightTypeComputationState state) {
-		expectations += state.immediateExpectations	
+	def void recordExpectation(ITypeComputationState state) {
+		expectations += state.getImmediateExpectations	
 	}
 
 	@Test
@@ -181,7 +181,7 @@ class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	@Property
 	ExpectationTest test
 	
-	override protected _computeTypes(XNullLiteral object, LightweightTypeComputationState state) {
+	override protected _computeTypes(XNullLiteral object, ITypeComputationState state) {
 		test.recordExpectation(state)
 		super._computeTypes(object, state)
 	}

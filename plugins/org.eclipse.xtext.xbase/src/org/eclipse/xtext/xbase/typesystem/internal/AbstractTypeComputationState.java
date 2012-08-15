@@ -25,12 +25,12 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc
  */
 @NonNullByDefault
-public abstract class AbstractTypeComputationState implements LightweightTypeComputationState {
+public abstract class AbstractTypeComputationState implements ITypeComputationState {
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
@@ -78,7 +78,7 @@ public abstract class AbstractTypeComputationState implements LightweightTypeCom
 	
 	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	
-	public final LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public final ITypeComputationResult computeTypes(@Nullable XExpression expression) {
 		if (expression != null) {
 			ExpressionAwareStackedResolvedTypes stackedResolvedTypes = doComputeTypes(expression);
 			stackedResolvedTypes.performMergeIntoParent();
@@ -153,13 +153,13 @@ public abstract class AbstractTypeComputationState implements LightweightTypeCom
 		return new TypeAssigner(state);
 	}
 
-	public final List<? extends LightweightTypeExpectation> getImmediateExpectations() {
+	public final List<? extends ITypeExpectation> getImmediateExpectations() {
 		if (immediateExpectations == null)
 			immediateExpectations = getImmediateExpectations(this);
 		return immediateExpectations;
 	}
 	
-	public final List<? extends LightweightTypeExpectation> getReturnExpectations() {
+	public final List<? extends ITypeExpectation> getReturnExpectations() {
 		if (returnExpectations == null)
 			returnExpectations = getReturnExpectations(this);
 		return returnExpectations;
@@ -170,25 +170,19 @@ public abstract class AbstractTypeComputationState implements LightweightTypeCom
 	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
 	
 	public void acceptActualType(LightweightTypeReference type) {
-		for(LightweightTypeExpectation expectation: getImmediateExpectations()) {
+		for(ITypeExpectation expectation: getImmediateExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.EXPECTATION_INDEPENDENT);
 		}
 	}
 
-	public void reassignType(XExpression object, LightweightTypeReference type) {
+	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		if (type == null)
 			throw new IllegalArgumentException("Reassigned type may not be null");
-		JvmIdentifiableElement refinable = getTypeComputer().getRefinableCandidate(object, this);
-		if (refinable != null) {
-			resolvedTypes.reassignType(refinable, type);
-		}
+		resolvedTypes.reassignType(refinable, type);
 	}
 
-	public void discardReassignedTypes(XExpression object) {
-		JvmIdentifiableElement refinable = getTypeComputer().getRefinableCandidate(object, this);
-		if (refinable != null) {
-			resolvedTypes.reassignType(refinable, (LightweightTypeReference) null);
-		}
+	public void discardReassignedTypes(JvmIdentifiableElement refinable) {
+		resolvedTypes.reassignType(refinable, (LightweightTypeReference) null);
 	}
 
 	public List<IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall) {
@@ -210,7 +204,7 @@ public abstract class AbstractTypeComputationState implements LightweightTypeCom
 			public LightweightTypeReference getActualType(XExpression expression) {
 				LightweightTypeReference type = super.getActualType(expression);
 				if (type == null) {
-					LightweightTypeComputationResult result = forked.computeTypes(expression);
+					ITypeComputationResult result = forked.computeTypes(expression);
 					return result.getActualExpressionType();
 				}
 				return type;

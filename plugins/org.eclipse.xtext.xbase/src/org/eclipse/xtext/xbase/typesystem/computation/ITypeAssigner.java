@@ -5,17 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public interface LightweightTypeAssigner {
+public interface ITypeAssigner {
 
 	void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType);
 	
@@ -26,7 +27,7 @@ public interface LightweightTypeAssigner {
 	 */
 	void assignType(JvmIdentifiableElement element, LightweightTypeReference actualDeclaredType, LightweightTypeReference expectedType);
 	
-	LightweightTypeComputationState getForkedState();
+	ITypeComputationState getForkedState();
 	
 	LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference);
 	

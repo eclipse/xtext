@@ -5,19 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public interface LightweightTypeExpectation {
+public interface ITypeExpectation {
 
 	void acceptActualType(LightweightTypeReference type, ConformanceHint... hint);
 
@@ -27,7 +31,7 @@ public interface LightweightTypeExpectation {
 	
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
-	LightweightTypeExpectation copyInto(ITypeReferenceOwner referenceOwner);
+	ITypeExpectation copyInto(ITypeReferenceOwner referenceOwner);
 	
 	boolean isOwnedBy(ITypeReferenceOwner referenceOwner);
 	

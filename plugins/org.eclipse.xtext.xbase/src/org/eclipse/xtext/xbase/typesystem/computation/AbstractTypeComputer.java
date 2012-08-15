@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 
 import com.google.inject.Singleton;
 
@@ -29,11 +28,11 @@ public abstract class AbstractTypeComputer implements ITypeComputer {
 		}
 	}
 	
-	public void computeTypes(XExpression expression, LightweightTypeComputationState state) {
+	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		_computeTypes(expression, state);
 	}
 	
-	protected void _computeTypes(XExpression expression, LightweightTypeComputationState state) {
+	protected void _computeTypes(XExpression expression, ITypeComputationState state) {
 		throw new UnsupportedOperationException("Missing type computation for expression type: " + expression.eClass().getName() + " / " + state);
 	}
 
