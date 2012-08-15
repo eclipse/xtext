@@ -11,9 +11,9 @@ import java.util.EnumSet;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -23,14 +23,14 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class TypeData {
 	private final XExpression expression;
-	private final LightweightTypeExpectation expectation;
+	private final ITypeExpectation expectation;
 	private final LightweightTypeReference type;
 	private final EnumSet<ConformanceHint> hints;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
-			LightweightTypeExpectation expectation, 
+			ITypeExpectation expectation, 
 			LightweightTypeReference type,
 			EnumSet<ConformanceHint> hints,
 			boolean returnType) {
@@ -60,7 +60,7 @@ public class TypeData {
 				+ ", conformanceHint=" + hints + ", returnType=" + returnType + "]";
 	}
 	
-	public LightweightTypeExpectation getExpectation() {
+	public ITypeExpectation getExpectation() {
 		return expectation;
 	}
 	

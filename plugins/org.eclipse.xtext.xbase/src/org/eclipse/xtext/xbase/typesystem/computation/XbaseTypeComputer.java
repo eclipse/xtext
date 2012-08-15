@@ -55,10 +55,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeAssigner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -101,7 +97,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	private CommonTypeComputationServices services;
 	
 	@Override
-	public void computeTypes(XExpression expression, LightweightTypeComputationState state) {
+	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		if (expression instanceof XFeatureCall) {
 			_computeTypes((XFeatureCall)expression, state);
 		} else if (expression instanceof XAbstractFeatureCall) {
@@ -147,14 +143,14 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 	
-	protected LightweightTypeReference getTypeForName(Class<?> clazz, LightweightTypeComputationState state) {
+	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
 		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
 		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
 		return state.getConverter().toLightweightReference(typeReference);
 	}
 	
-	protected void _computeTypes(XIfExpression object, LightweightTypeComputationState state) {
-		LightweightTypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
+	protected void _computeTypes(XIfExpression object, ITypeComputationState state) {
+		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
 		conditionExpectation.computeTypes(object.getIf());
 		// TODO instanceof may specialize the types in the nested expression
 		// TODO then expression may influence the expected type of else and vice versa
@@ -168,27 +164,31 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 	
-	protected void _computeTypes(XSwitchExpression object, LightweightTypeComputationState state) {
-		LightweightTypeComputationState switchExpressionState = state.withNonVoidExpectation();
-		LightweightTypeComputationResult computedType = switchExpressionState.computeTypes(object.getSwitch());
-		LightweightTypeComputationState allCasePartsState = state;
+	protected void _computeTypes(XSwitchExpression object, ITypeComputationState state) {
+		ITypeComputationState switchExpressionState = state.withNonVoidExpectation();
+		ITypeComputationResult computedType = switchExpressionState.computeTypes(object.getSwitch());
+		ITypeComputationState allCasePartsState = state;
 		if (object.getLocalVarName() != null) {
 			allCasePartsState = allCasePartsState.assignType(object, computedType.getActualExpressionType());
 		}
 		// TODO case expressions may influence the expected type of other cases
 		for(XCasePart casePart: object.getCases()) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
-			LightweightTypeComputationState casePartState = allCasePartsState.withTypeCheckpoint();
+			ITypeComputationState casePartState = allCasePartsState.withTypeCheckpoint();
 			if (casePart.getTypeGuard() != null) {
+				JvmIdentifiableElement refinable = null;
 				if (object.getLocalVarName() != null) {
-					casePartState.reassignType(object, casePartState.getConverter().toLightweightReference(casePart.getTypeGuard()));
+					refinable = getRefinableCandidate(object, casePartState);
 				} else {
-					casePartState.reassignType(object.getSwitch(), casePartState.getConverter().toLightweightReference(casePart.getTypeGuard()));
+					refinable = getRefinableCandidate(object.getSwitch(), casePartState);
+				}
+				if (refinable != null) {
+					casePartState.reassignType(refinable, casePartState.getConverter().toLightweightReference(casePart.getTypeGuard()));
 				}
 			}
 			if (casePart.getCase() != null) {
 				// boolean or object / primitive
-				LightweightTypeComputationState caseState = casePartState.withNonVoidExpectation(); 
+				ITypeComputationState caseState = casePartState.withNonVoidExpectation(); 
 				caseState.computeTypes(casePart.getCase());
 			}
 			casePartState.computeTypes(casePart.getThen());
@@ -202,11 +202,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 	
-	protected void _computeTypes(XBlockExpression object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {
 		List<XExpression> expressions = object.getExpressions();
 		if (!expressions.isEmpty()) {
 			for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
-				LightweightTypeComputationState expressionState = state.withoutImmediateExpectation(); // no expectation
+				ITypeComputationState expressionState = state.withoutImmediateExpectation(); // no expectation
 				expressionState.computeTypes(expression);
 				if (expression instanceof XVariableDeclaration) {
 					state.addLocalToCurrentScope((XVariableDeclaration)expression);
@@ -218,18 +218,18 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 
-	protected void _computeTypes(XVariableDeclaration object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
 		JvmTypeReference declaredType = object.getType();
 		LightweightTypeReference lightweightTypeReference = declaredType != null ? state.getConverter().toLightweightReference(declaredType) : null;
-		LightweightTypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
-		LightweightTypeComputationResult computedType = initializerState.computeTypes(object.getRight());
+		ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
+		ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
 		// TODO keep information about the actual type 
 		state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType());
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
 	}
 
-	protected void _computeTypes(final XConstructorCall constructorCall, LightweightTypeComputationState state) {
+	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
 		List<? extends IConstructorLinkingCandidate> candidates = state.getLinkingCandidates(constructorCall);
 		IConstructorLinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
@@ -238,7 +238,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	/**
 	 * @param object used for dispatching
 	 */
-	protected void _computeTypes(XBooleanLiteral object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XBooleanLiteral object, ITypeComputationState state) {
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
@@ -246,11 +246,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	/**
 	 * @param object used for dispatching
 	 */
-	protected void _computeTypes(XNullLiteral object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XNullLiteral object, ITypeComputationState state) {
 		state.acceptActualType(new AnyTypeReference(state.getReferenceOwner()));
 	}
 
-	protected void _computeTypes(XNumberLiteral object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XNumberLiteral object, ITypeComputationState state) {
 		// TODO evaluate expectation if no specific suffix is given
 		LightweightTypeReference result = getTypeForName(numberLiterals.getJavaType(object), state);
 		state.acceptActualType(result);
@@ -259,15 +259,15 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	/**
 	 * @param object used for dispatching
 	 */
-	protected void _computeTypes(XStringLiteral object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XStringLiteral object, ITypeComputationState state) {
 		// TODO evaluate expectation to allow string literals with length == 1 to appear like a char or a Character
 		LightweightTypeReference result = getTypeForName(String.class, state);
 		state.acceptActualType(result);
 	}
 	
-	protected void _computeTypes(XClosure object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XClosure object, ITypeComputationState state) {
 		FunctionTypes functionTypes = services.getFunctionTypes();
-		for(LightweightTypeExpectation expectation: state.getImmediateExpectations()) {
+		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
 			List<JvmFormalParameter> closureParameters = object.getFormalParameters();
 			LightweightTypeReference closureType = expectation.getExpectedType();
 			JvmOperation operation = null;
@@ -292,10 +292,10 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 					object, closureType, operation, expectation);
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 			LightweightTypeReference declaredReturnType = getSubstitutedClosureReturnType(operation, substitutor, state);
-			LightweightTypeAssigner typeAssigner = state.withExpectation(declaredReturnType).assignTypes();
-			LightweightTypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(
+			ITypeAssigner typeAssigner = state.withExpectation(declaredReturnType).assignTypes();
+			ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(
 					closureParameters, substitutor, operation.getParameters(), typeAssigner);
-			LightweightTypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(object.getExpression());
+			ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(object.getExpression());
 			List<LightweightTypeReference> closureParameterTypes = getClosureParameterTypes(operation, typeParameterMapping, closureParameters, expressionResult, closureBodyTypeComputationState);
 			LightweightTypeReference expressionResultType = getClosureBodyType(declaredReturnType, expressionResult, closureBodyTypeComputationState);
 			substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, closureBodyTypeComputationState.getReferenceOwner());
@@ -337,7 +337,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	@NonNullByDefault
 	protected LightweightTypeReference getClosureBodyType(LightweightTypeReference declaredReturnType,
-			LightweightTypeComputationResult expressionResult, final LightweightTypeComputationState state) {
+			ITypeComputationResult expressionResult, final ITypeComputationState state) {
 		LightweightTypeReference expressionResultType = expressionResult.getActualExpressionType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			expressionResultType = declaredReturnType;
@@ -347,7 +347,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		return expressionResultType;
 	}
 	
-	protected void deferredBindTypeArgument(LightweightTypeReference declaredReturnType, LightweightTypeReference type, LightweightTypeComputationState state) {
+	protected void deferredBindTypeArgument(LightweightTypeReference declaredReturnType, LightweightTypeReference type, ITypeComputationState state) {
 		if (declaredReturnType != null) { 
 			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(state.getReferenceOwner());
 			collector.processPairedReferences(declaredReturnType, type);
@@ -355,7 +355,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 	
 	protected List<LightweightTypeReference> getClosureParameterTypes(JvmOperation operation, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, List<JvmFormalParameter> closureParameters,
-			LightweightTypeComputationResult expressionResult, LightweightTypeComputationState state) {
+			ITypeComputationResult expressionResult, ITypeComputationState state) {
 		List<LightweightTypeReference> closureParameterTypes = Lists.newArrayListWithCapacity(closureParameters.size());
 		int max = Math.min(operation.getParameters().size(), closureParameters.size());
 		for(int i = 0; i < max; i++) {
@@ -373,7 +373,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		return closureParameterTypes;
 	}
 	
-	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, final LightweightTypeComputationState state) {
+	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, final ITypeComputationState state) {
 		// TODO this(..) and super(..) for generic types
 		if (!typeParameterMapping.isEmpty()) {
 			List<JvmTypeParameter> typeParameters = Lists.newArrayList(typeParameterMapping.keySet());
@@ -381,9 +381,9 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 
-	protected LightweightTypeComputationState getClosureBodyTypeComputationState(
+	protected ITypeComputationState getClosureBodyTypeComputationState(
 			List<JvmFormalParameter> closureParameters, UnboundTypeParameterPreservingSubstitutor substitutor,
-			List<JvmFormalParameter> operationParameters, LightweightTypeAssigner typeAssigner) {
+			List<JvmFormalParameter> operationParameters, ITypeAssigner typeAssigner) {
 		int paramCount = Math.min(closureParameters.size(), operationParameters.size());
 		// TODO validate parameter count - check against operation if available
 		for(int i = 0; i < paramCount; i++) {
@@ -411,13 +411,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected LightweightTypeReference getSubstitutedClosureReturnType(JvmOperation operation,
-			UnboundTypeParameterPreservingSubstitutor substitutor, LightweightTypeComputationState state) {
+			UnboundTypeParameterPreservingSubstitutor substitutor, ITypeComputationState state) {
 		LightweightTypeReference result = substitutor.substitute(state.getConverter().toLightweightReference(operation.getReturnType()));
 		return result;
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping(XClosure object,
-			LightweightTypeReference closureType, JvmOperation operation, LightweightTypeExpectation expectation) {
+			LightweightTypeReference closureType, JvmOperation operation, ITypeExpectation expectation) {
 		List<JvmTypeParameter> allTypeParameters = services.getFunctionTypes().collectAllTypeParameters(closureType, operation);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = getClosureTypeParameterMapping(
 				closureType, operation, allTypeParameters, expectation);
@@ -446,18 +446,18 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getClosureTypeParameterMapping(
-			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, LightweightTypeExpectation expectation) {
+			LightweightTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, ITypeExpectation expectation) {
 		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, expectation.getReferenceOwner());
 		return services.getFunctionTypes().getFunctionTypeParameterMapping(closureType, operation, typeArgumentCollector, expectation.getReferenceOwner());
 	}
 	
-	protected void _computeTypes(XCastedExpression object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XCastedExpression object, ITypeComputationState state) {
 		LightweightTypeReference objectType = getTypeForName(Object.class, state);
 		state.withExpectation(objectType).computeTypes(object.getTarget());
 		state.acceptActualType(state.getConverter().toLightweightReference(object.getType()));
 	}
 
-	protected void _computeTypes(final XForLoopExpression object, final LightweightTypeComputationState state) {
+	protected void _computeTypes(final XForLoopExpression object, final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
 		LightweightTypeReference parameterType = null;
 		if (declaredParam.getParameterType() != null) {
@@ -473,7 +473,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				iterable = reference;
 			}
 			// TODO add synonyms automatically
-			LightweightTypeComputationState iterableState = state.withExpectation(iterable);
+			ITypeComputationState iterableState = state.withExpectation(iterable);
 			iterableState.computeTypes(object.getForExpression());
 			
 		} else {
@@ -482,8 +482,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			ParameterizedTypeReference iterable = new ParameterizedTypeReference(state.getReferenceOwner(), services.getTypeReferences().findDeclaredType(Iterable.class, object));
 			iterable.addTypeArgument(wildcard);
 			// TODO add synonyms automatically
-			LightweightTypeComputationState iterableState = state.withExpectation(iterable); 
-			LightweightTypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
+			ITypeComputationState iterableState = state.withExpectation(iterable); 
+			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
 				@Override
@@ -505,15 +505,15 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		if (parameterType == null) {
 			throw new IllegalStateException("Should not be possible");
 		}
-		LightweightTypeComputationState eachState = state.withoutImmediateExpectation().assignType(declaredParam, parameterType);
+		ITypeComputationState eachState = state.withoutImmediateExpectation().assignType(declaredParam, parameterType);
 		eachState.computeTypes(object.getEachExpression());
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
 	}
 
-	protected void _computeTypes(XAbstractWhileExpression object, LightweightTypeComputationState state) {
-		LightweightTypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
+	protected void _computeTypes(XAbstractWhileExpression object, ITypeComputationState state) {
+		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
 		conditionExpectation.computeTypes(object.getPredicate());
 		// TODO reassign type if instanceof clause is present and cannot be ignored due to binary boolean operations
 		state.withoutImmediateExpectation().computeTypes(object.getBody());
@@ -522,7 +522,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		state.acceptActualType(primitiveVoid);
 	}
 
-	protected void _computeTypes(XTypeLiteral object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XTypeLiteral object, ITypeComputationState state) {
 		JvmParameterizedTypeReference typeRef = services.getTypesFactory().createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
 		JvmTypeReference result = typeRef;
@@ -536,43 +536,43 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		state.acceptActualType(lightweightReference);
 	}
 	
-	protected void _computeTypes(XInstanceOfExpression object, LightweightTypeComputationState state) {
-		LightweightTypeComputationState expressionState = state.withExpectation(getTypeForName(Object.class, state));
+	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
+		ITypeComputationState expressionState = state.withExpectation(getTypeForName(Object.class, state));
 		expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
 
-	protected void _computeTypes(XThrowExpression object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XThrowExpression object, ITypeComputationState state) {
 		LightweightTypeReference throwable = getTypeForName(Throwable.class, state);
-		LightweightTypeComputationState expressionState = state.withExpectation(throwable);
+		ITypeComputationState expressionState = state.withExpectation(throwable);
 		expressionState.computeTypes(object.getExpression());
 		state.acceptActualType(getPrimitiveVoid(state));
 	}
 
-	protected void _computeTypes(XReturnExpression object, LightweightTypeComputationState state) {
-		LightweightTypeComputationState expressionState = state.withReturnExpectation();
+	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
+		ITypeComputationState expressionState = state.withReturnExpectation();
 		expressionState.computeTypes(object.getExpression());
 		state.acceptActualType(getPrimitiveVoid(state));
 	}
 	
-	protected LightweightTypeReference getPrimitiveVoid(LightweightTypeComputationState state) {
+	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
 		return getTypeForName(Void.TYPE, state);
 	}
 
-	protected void _computeTypes(XTryCatchFinallyExpression object, LightweightTypeComputationState state) {
+	protected void _computeTypes(XTryCatchFinallyExpression object, ITypeComputationState state) {
 		state.computeTypes(object.getExpression());
 		for (XCatchClause catchClause : object.getCatchClauses()) {
 			JvmFormalParameter catchClauseParam = catchClause.getDeclaredParam();
 			LightweightTypeReference lightweightReference = state.getConverter().toLightweightReference(catchClauseParam.getParameterType());
-			LightweightTypeComputationState catchClauseState = state.assignType(catchClauseParam, lightweightReference);
+			ITypeComputationState catchClauseState = state.assignType(catchClauseParam, lightweightReference);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
 		// TODO validate / handle return / throw in finally block
 		state.withoutImmediateExpectation().computeTypes(object.getFinallyExpression());
 	}
 	
-	protected void _computeTypes(final XAbstractFeatureCall featureCall, LightweightTypeComputationState state) {
+	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
 		IFeatureLinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
@@ -588,7 +588,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		return result;
 	}
 
-	public JvmIdentifiableElement getRefinableCandidate(XExpression object, LightweightTypeComputationState state) {
+	protected JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
 		if (object instanceof XSwitchExpression) {
 			return (XSwitchExpression) object;
 		}
@@ -612,7 +612,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	 * }
 	 */
 	
-//	protected void _computeTypes(final XAssignment context, LightweightTypeComputationState state) {
+//	protected void _computeTypes(final XAssignment context, ITypeComputationState state) {
 //		_computeTypes((XAbstractFeatureCall) context, state);
 //		state.discardReassignedTypes(context.getAssignable());
 //	}

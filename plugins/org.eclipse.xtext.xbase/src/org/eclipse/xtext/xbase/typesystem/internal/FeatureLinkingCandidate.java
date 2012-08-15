@@ -24,9 +24,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -109,7 +109,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	}
 	
 	@Override
-	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, LightweightTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		if (argument == getReceiver()) {
 			if (!(argumentState instanceof AbstractTypeComputationState))
 				throw new IllegalArgumentException("argumentState was " + argumentState);

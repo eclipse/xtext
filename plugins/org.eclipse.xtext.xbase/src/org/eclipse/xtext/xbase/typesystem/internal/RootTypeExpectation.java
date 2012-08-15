@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -34,7 +34,7 @@ public class RootTypeExpectation extends AbstractRootTypeExpectation {
 		return reference;
 	}
 
-	public LightweightTypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
+	public ITypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return new RootTypeExpectation(reference.copyInto(referenceOwner), getState());
 	}
 }

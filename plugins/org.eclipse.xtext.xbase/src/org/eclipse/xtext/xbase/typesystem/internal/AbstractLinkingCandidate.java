@@ -27,14 +27,14 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -198,7 +198,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		computeArgumentTypes();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
-		for(LightweightTypeExpectation expectation: state.getImmediateExpectations()) {
+		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
@@ -229,7 +229,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	@NonNullByDefault
-	protected void deferredBindTypeArgument(LightweightTypeExpectation expectation, LightweightTypeReference type) {
+	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
 			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState().getReferenceOwner());
@@ -293,7 +293,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 						throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 					final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();
 					
-					LightweightTypeComputationState argumentState = null;
+					ITypeComputationState argumentState = null;
 					LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 					if (arguments.size() == declaredParameterCount) {
 						LinkingTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
@@ -385,7 +385,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap();
 	}
 
-	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, LightweightTypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		argumentState.computeTypes(argument);
 	}
 

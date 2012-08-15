@@ -5,19 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.EnumSet;
+
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface LightweightTypeComputer extends ITypeComputer {
+public interface ITypeComputationResult {
 
-	void computeTypes(XExpression expression, LightweightTypeComputationState state);
-
-	JvmIdentifiableElement getRefinableCandidate(XExpression object, LightweightTypeComputationState state);
+	LightweightTypeReference getActualExpressionType();
+	
+	@Nullable LightweightTypeReference getExpectedExpressionType();
+	
+	@Nullable LightweightTypeReference getActualType(JvmIdentifiableElement element);
+	
+	@Nullable XExpression getExpression();
+	
+	@Nullable EnumSet<ConformanceHint> getConformanceHints();
 	
 }

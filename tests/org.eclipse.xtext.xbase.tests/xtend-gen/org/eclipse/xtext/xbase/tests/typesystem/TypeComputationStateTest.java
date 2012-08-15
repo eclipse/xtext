@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -17,15 +16,15 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,11 +70,11 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     }
   }
   
-  public void computeTypes(final XExpression expression, final LightweightTypeComputationState state) {
+  public void computeTypes(final XExpression expression, final ITypeComputationState state) {
     try {
       Assert.assertTrue("state is instanceof ExpressionTypeComputationState", (state instanceof ExpressionTypeComputationState));
-      List<? extends LightweightTypeExpectation> _immediateExpectations = state.getImmediateExpectations();
-      LightweightTypeExpectation _head = IterableExtensions.head(_immediateExpectations);
+      List<? extends ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
+      ITypeExpectation _head = IterableExtensions.head(_immediateExpectations);
       final LightweightTypeReference expectedType = _head.getExpectedType();
       if ((state instanceof ChildExpressionTypeComputationState)) {
         final ChildExpressionTypeComputationState casted = ((ChildExpressionTypeComputationState) state);
@@ -113,10 +112,5 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public JvmIdentifiableElement getRefinableCandidate(final XExpression expression, final LightweightTypeComputationState state) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Unexpected!");
-    throw _unsupportedOperationException;
   }
 }

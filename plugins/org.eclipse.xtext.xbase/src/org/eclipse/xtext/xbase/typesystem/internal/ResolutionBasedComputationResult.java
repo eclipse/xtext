@@ -11,15 +11,15 @@ import java.util.EnumSet;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ResolutionBasedComputationResult implements LightweightTypeComputationResult {
+public class ResolutionBasedComputationResult implements ITypeComputationResult {
 
 	private final XExpression expression;
 	private final ResolvedTypes resolution;

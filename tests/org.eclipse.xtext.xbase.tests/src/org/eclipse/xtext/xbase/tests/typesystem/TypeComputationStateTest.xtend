@@ -22,9 +22,9 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,9 +46,9 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		assertEquals(any.toString, resolution.getActualType(expression.eContents.head as XNullLiteral).toString)
 	}
 
-	override computeTypes(XExpression expression, LightweightTypeComputationState state) {
+	override computeTypes(XExpression expression, ITypeComputationState state) {
 		assertTrue("state is instanceof ExpressionTypeComputationState", state instanceof ExpressionTypeComputationState)
-		val expectedType = state.immediateExpectations.head.expectedType
+		val expectedType = state.getImmediateExpectations.head.getExpectedType
 		if (state instanceof ChildExpressionTypeComputationState) {
 			val casted = state as ChildExpressionTypeComputationState
 			val resolution = casted.<ResolvedTypes>get("resolvedTypes")
@@ -66,10 +66,6 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 			val resolution = state.<ResolvedTypes>get("resolvedTypes")
 			assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
 		}
-	}
-	
-	override getRefinableCandidate(XExpression expression, LightweightTypeComputationState state) {
-		throw new UnsupportedOperationException("Unexpected!")
 	}
 	
 }

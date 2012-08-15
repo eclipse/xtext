@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.references;
+package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 
@@ -15,8 +15,9 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @noimplement This interface is not intended to be implemented by clients.
@@ -25,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public interface LightweightTypeComputationState {
+public interface ITypeComputationState {
 
 	/**
 	 * The given expectation will be resolved if it contains unresolved type
@@ -35,49 +36,49 @@ public interface LightweightTypeComputationState {
 	 * <code>foo&lt;String&gt;(null, 'string')</code> will allow to pass the unresolved T as expectation
 	 * where clients would be invoked with the better candidate 'string'.
 	 */
-	LightweightTypeComputationState withExpectation(LightweightTypeReference expectation);
+	ITypeComputationState withExpectation(LightweightTypeReference expectation);
 	
-	LightweightTypeComputationState withNonVoidExpectation();
+	ITypeComputationState withNonVoidExpectation();
 	
 	/**
 	 * Discards the current expectation and allows to use return and throw 
 	 * independently from the parent's state.
 	 */
-	LightweightTypeComputationState withoutExpectation();
+	ITypeComputationState withoutExpectation();
 	
 	/**
 	 * Transfers the available return type expectation to the immediate expectation of this
 	 * computation step. 
 	 */
-	LightweightTypeComputationState withReturnExpectation();
+	ITypeComputationState withReturnExpectation();
 	
 	/**
 	 * Keeps the return type expectation. Otherwise the state is free of expectations.
 	 */
-	LightweightTypeComputationState withoutImmediateExpectation();
+	ITypeComputationState withoutImmediateExpectation();
 
-	LightweightTypeComputationState withTypeCheckpoint();
+	ITypeComputationState withTypeCheckpoint();
 
-	LightweightTypeComputationResult computeTypes(@Nullable XExpression expression);
+	ITypeComputationResult computeTypes(@Nullable XExpression expression);
 	
 	/**
 	 * @param type the type of the element. <code>null</code> or other invalid types will be treated as error types.
 	 */
-	LightweightTypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type);
+	ITypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type);
 	
-	LightweightTypeAssigner assignTypes();
+	ITypeAssigner assignTypes();
 	
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
 	
 	/**
 	 * The result is never empty.
 	 */
-	List<? extends LightweightTypeExpectation> getImmediateExpectations();
+	List<? extends ITypeExpectation> getImmediateExpectations();
 	
 	/**
 	 * The result is never empty.
 	 */
-	List<? extends LightweightTypeExpectation> getReturnExpectations();
+	List<? extends ITypeExpectation> getReturnExpectations();
 	
 	/**
 	 * The result is never empty.
@@ -93,9 +94,9 @@ public interface LightweightTypeComputationState {
 	
 	// TODO implement this better, especially for instanceof in conditions
 	
-	void reassignType(XExpression object, LightweightTypeReference type);
+	void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type);
 	
-	void discardReassignedTypes(XExpression object);
+	void discardReassignedTypes(JvmIdentifiableElement refinable);
 
 	ITypeReferenceOwner getReferenceOwner();
 	
