@@ -13,7 +13,7 @@
         <features name="de.itemis.xtext.antlr.sdk.feature.group" versionRange="2.0.0"/>
       </repositories>
     </contributions>
-    <validationRepositories location="http://download.eclipse.org/eclipse/updates/3.7/"/>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/3.5/"/>
     <validationRepositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
     <validationRepositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones"/>
     <validationRepositories location="http://download.eclipse.org/tools/gef/updates/releases/"/>
