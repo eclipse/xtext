@@ -145,7 +145,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		if (components == null)
 			components = Lists.newArrayListWithCapacity(2);
 		components.add(component);
-		resolved &= component.isResolved();
+		resolved = resolved && component.isResolved();
 	}
 	
 	@Override
