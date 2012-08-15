@@ -106,7 +106,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 		</handler>
 		<handler 
 			class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
-			commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy">
+			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
 			<activeWhen>
 				<reference
 					definitionId="«name».Editor.opened">
@@ -127,7 +127,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 		</menuContribution>
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
-			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy"
+			<command commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy"
 				style="push"
 				tooltip="Quick Type Hierarchy">
 				<visibleWhen checkEnabled="false">
