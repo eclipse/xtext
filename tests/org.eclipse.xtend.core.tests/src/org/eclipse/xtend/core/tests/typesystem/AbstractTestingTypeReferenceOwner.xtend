@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typesystem
 
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
@@ -16,11 +15,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.junit.After
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 /**
  * @author Sebastian Zarnekow
  */
-abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements TypeReferenceOwner {
+abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements ITypeReferenceOwner {
 	
 	@Inject
 	CommonTypeComputationServices services
