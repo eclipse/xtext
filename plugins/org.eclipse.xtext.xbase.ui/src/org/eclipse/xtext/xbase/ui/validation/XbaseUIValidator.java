@@ -44,7 +44,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.4
  */
-public class XbaseUIJavaValidator extends AbstractDeclarativeValidator {
+public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	private IJavaProjectProvider projectProvider;
