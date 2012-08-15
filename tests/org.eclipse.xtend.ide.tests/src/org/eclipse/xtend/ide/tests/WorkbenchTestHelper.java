@@ -217,7 +217,8 @@ public class WorkbenchTestHelper extends Assert {
 		projectFactory.addRequiredBundles(newArrayList(
 				"com.google.inject",
 				"org.eclipse.xtend.lib", 
-				"org.eclipse.xtext.xbase.lib", 
+				"org.eclipse.xtext.xbase.lib",
+				"org.eclipse.xtext.ui.tests",
 				"org.junit4"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
