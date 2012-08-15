@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
 
@@ -48,7 +48,7 @@ public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatc
 		if (isFeatureCallScope(reference)) {
 			// TODO use a valid instance of resolved types
 			IFeatureScopeSession session = newSession(context.eResource());
-			return session.getScope(context, reference, LightweightResolvedTypes.NULL);
+			return session.getScope(context, reference, IResolvedTypes.NULL);
 		}
 		return delegateGetScope(context, reference);
 	}

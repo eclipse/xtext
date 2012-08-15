@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.ImplementedBy;
 
@@ -30,7 +30,7 @@ import com.google.inject.ImplementedBy;
  * A feature scope session allows to successively enhance the reachable features
  * by added local variables, parameters from the context or the list of imports.
  * Afterwards it's possible to ask for an {@link IScope} by means of 
- * {@link #getScope(EObject, EReference, LightweightResolvedTypes)}. 
+ * {@link #getScope(EObject, EReference, IResolvedTypes)}. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * 
@@ -49,7 +49,7 @@ public interface IFeatureScopeSession {
 	 * @param types the already computed types.
 	 * @see IScopeProvider#getScope(EObject, EReference)
 	 */
-	IScope getScope(EObject context, EReference reference, LightweightResolvedTypes types);
+	IScope getScope(EObject context, EReference reference, IResolvedTypes types);
 	
 	/**
 	 * Add types to the session that are imported statically either as plain static imports 

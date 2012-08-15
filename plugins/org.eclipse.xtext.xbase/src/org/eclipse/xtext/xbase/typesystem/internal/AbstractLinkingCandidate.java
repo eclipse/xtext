@@ -378,7 +378,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
-		return state.getResolvedTypes().internalGetActualType(feature);
+		return state.getResolvedTypes().getActualType(feature);
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
@@ -502,11 +502,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected LightweightTypeReference getActualType(XExpression expression) {
-		return state.getResolvedTypes().internalGetActualType(expression);
+		return state.getResolvedTypes().getActualType(expression);
 	}
 	
 	protected LightweightTypeReference getExpectedType(XExpression expression) {
-		return state.getResolvedTypes().internalGetExpectedType(expression);
+		return state.getResolvedTypes().getExpectedType(expression);
 	}
 	
 	protected LightweightTypeReference getSubstitutedExpectedType(XExpression expression) {

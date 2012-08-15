@@ -29,9 +29,9 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
@@ -61,7 +61,7 @@ public class FeatureScopes implements IFeatureNames {
 	 * call without receiver (XFeatureCall).
 	 * @param session the currently available session data
 	 */
-	public IScope createFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+	public IScope createFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (!(context instanceof XAbstractFeatureCall)) {
 			return IScope.NULLSCOPE;
 		}
@@ -84,7 +84,7 @@ public class FeatureScopes implements IFeatureNames {
 	 * @param context the context e.g. a for loop expression, a block or a catch clause
 	 * @param reference the reference who's value shall be scoped. Not necessarily a feature of the context.
 	 */
-	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (featureCall.getDeclaringType() != null) {
@@ -137,12 +137,12 @@ public class FeatureScopes implements IFeatureNames {
 	 * @param resolvedTypes TODO
 	 * @param session TODO
 	 */
-	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (!isFeatureCallScope(reference))
 			return IScope.NULLSCOPE;
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
-		LightweightTypeReference receiverType = resolvedTypes.internalGetActualType(receiver);
+		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
 		if (receiverType != null) {
 			IScope result = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
 			return createFeatureScopeForTypeRef(receiver, receiverType, featureCall, session, result);
@@ -151,7 +151,7 @@ public class FeatureScopes implements IFeatureNames {
 		}
 	}
 
-	protected IScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+	protected IScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		if (receiver == null) {
 			result = createImplicitExtensionScope(THIS, featureCall, session, resolvedTypes, result);
@@ -188,7 +188,7 @@ public class FeatureScopes implements IFeatureNames {
 		return new StaticImportsScope(parent, session, asAbstractFeatureCall(featureCall));
 	}
 	
-	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
+	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result);
 		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result);
@@ -196,11 +196,11 @@ public class FeatureScopes implements IFeatureNames {
 	}
 
 	protected IScope createImplicitFeatureCallScope(QualifiedName implicitName, EObject featureCall,
-			IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes, IScope parent) {
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
 		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-			LightweightTypeReference type = resolvedTypes.internalGetActualType(thisElement);
+			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			
 			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
 			implicitReceiver.setFeature(thisElement);
@@ -210,11 +210,11 @@ public class FeatureScopes implements IFeatureNames {
 	}
 	
 	protected IScope createImplicitExtensionScope(QualifiedName implicitName, EObject featureCall,
-			IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes, IScope parent) {
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
 		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-			LightweightTypeReference type = resolvedTypes.internalGetActualType(thisElement);
+			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
 			implicitReceiver.setFeature(thisElement);
 			return createStaticExtensionsScope(implicitReceiver, type, featureCall, parent, session);

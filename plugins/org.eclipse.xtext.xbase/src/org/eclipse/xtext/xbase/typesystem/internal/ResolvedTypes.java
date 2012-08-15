@@ -30,11 +30,11 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.BaseResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -65,7 +65,7 @@ import com.google.common.collect.Sets;
  * TODO JavaDoc
  */
 @NonNullByDefault
-public abstract class ResolvedTypes extends BaseResolvedTypes {
+public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected class Owner implements ITypeReferenceOwner {
 
@@ -91,6 +91,8 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		
 	}
 	
+	private final OwnedConverter converter;
+
 	private final DefaultReentrantTypeResolver resolver;
 	
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
@@ -103,21 +105,23 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
+		this.converter = createConverter();
 	}
 	
-	@Override
+	protected OwnedConverter getConverter() {
+		return converter;
+	}
+	
+	public ITypeReferenceOwner getReferenceOwner() {
+		return getConverter().getOwner();
+	}
+	
 	protected OwnedConverter createConverter() {
 		return new OwnedConverter(new Owner());
 	}
 	
 	public ResourceSet getContextResourceSet() {
 		return resolver.getRoot().eResource().getResourceSet();
-	}
-	
-	// overridden because we want it to be accessible from within this package
-	@Override
-	protected OwnedConverter getConverter() {
-		return super.getConverter();
 	}
 
 	public CommonTypeComputationServices getServices() {
@@ -211,7 +215,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	}
 
 	@Nullable
-	public LightweightTypeReference internalGetActualType(XExpression expression) {
+	public LightweightTypeReference getActualType(XExpression expression) {
 		LightweightTypeReference result = doGetActualType(expression);
 		return toOwnedReference(result);
 	}
@@ -230,7 +234,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	}
 	
 	@Nullable
-	public LightweightTypeReference internalGetExpectedType(XExpression expression) {
+	public LightweightTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression);
 		return toOwnedReference(result);
 	}
@@ -243,7 +247,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 		return null;
 	}
 	
-	public final List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
+	public final List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 		List<LightweightTypeReference> result = doGetActualTypeArguments(expression);
 		if (result == null)
 			return Collections.emptyList();
@@ -263,7 +267,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	
 	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
 		if (reference != null) {
-			LightweightTypeReference actualType = internalGetActualType(identifiable);
+			LightweightTypeReference actualType = getActualType(identifiable);
 			if (actualType != null) {
 				if (!reference.isAssignableFrom(actualType)) {
 					if (actualType.isAssignableFrom(reference)) {
@@ -385,7 +389,7 @@ public abstract class ResolvedTypes extends BaseResolvedTypes {
 	}
 	
 	@Nullable
-	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement identifiable) {
+	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		LightweightTypeReference result = doGetActualType(identifiable);
 		return toOwnedReference(result);
 	}
