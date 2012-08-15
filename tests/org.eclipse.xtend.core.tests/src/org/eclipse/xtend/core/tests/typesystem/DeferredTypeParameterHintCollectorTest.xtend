@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgumen
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector
@@ -31,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
@@ -161,7 +161,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 	
 	val PublicResolvedTypes resolvedTypes
 	
-	new(TypeReferenceOwner owner, PublicResolvedTypes resolvedTypes) {
+	new(ITypeReferenceOwner owner, PublicResolvedTypes resolvedTypes) {
 		super(<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), owner)
 		this.resolvedTypes = resolvedTypes
 	}
@@ -208,11 +208,11 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 
 class SimpleUnboundTypeReference extends UnboundTypeReference {
 	
-	new(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
+	new(ITypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
 		super(owner, null, typeParameter, handle)
 	}
 
-	override protected createCopy(TypeReferenceOwner owner) {
+	override protected createCopy(ITypeReferenceOwner owner) {
 		return new SimpleUnboundTypeReference(owner, typeParameter, handle)
 	}
 		

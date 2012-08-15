@@ -106,7 +106,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -218,7 +218,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								expectedFieldType = typeProvider.getType(xExpression);
 							}
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-							TypeReferenceOwner owner = new TypeReferenceOwner() {
+							ITypeReferenceOwner owner = new ITypeReferenceOwner() {
 
 								@NonNull
 								public CommonTypeComputationServices getServices() {
