@@ -13,7 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor<Object> {
 	
 	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
-			TypeReferenceOwner owner) {
+			ITypeReferenceOwner owner) {
 		super(typeParameterMapping, owner);
 	}
 

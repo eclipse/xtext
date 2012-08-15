@@ -34,7 +34,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	private LightweightTypeReference lowerBound;
 	private boolean resolved;
 	
-	public WildcardTypeReference(TypeReferenceOwner owner) {
+	public WildcardTypeReference(ITypeReferenceOwner owner) {
 		super(owner);
 		resolved = true;
 	}
@@ -54,7 +54,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (super.isOwnedBy(owner)) {
 			if (lowerBound != null && !lowerBound.isOwnedBy(owner))
 				return false;
@@ -69,7 +69,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected WildcardTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected WildcardTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		if (upperBounds != null && !upperBounds.isEmpty()) {
 			for(LightweightTypeReference upperBound: upperBounds) {

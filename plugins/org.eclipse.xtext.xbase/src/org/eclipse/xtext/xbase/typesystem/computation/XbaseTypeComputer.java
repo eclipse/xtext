@@ -64,7 +64,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -303,7 +303,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	@NonNullByDefault
 	protected void initClosureType(FunctionTypeReference result, JvmOperation operation) {
-		TypeReferenceOwner owner = result.getOwner();
+		ITypeReferenceOwner owner = result.getOwner();
 		OwnedConverter converter = new OwnedConverter(owner);
 		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), owner);
@@ -324,7 +324,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 
-	protected LightweightTypeReference createFunctionTypeReference(TypeReferenceOwner owner, LightweightTypeReference closureType,
+	protected LightweightTypeReference createFunctionTypeReference(ITypeReferenceOwner owner, LightweightTypeReference closureType,
 			List<LightweightTypeReference> parameterTypes, LightweightTypeReference expressionResultType) {
 		LightweightTypeReference result = services.getFunctionTypes().createFunctionTypeRef(owner, closureType, parameterTypes, expressionResultType);
 		return result;

@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -138,7 +138,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 			return getRawTypesFromConstraints(reference.getOwner(), typeParameter.getConstraints(), resourceSet);
 		}
 
-		protected List<JvmType> getRawTypesFromConstraints(TypeReferenceOwner owner, List<JvmTypeConstraint> constraints, ResourceSet resourceSet) {
+		protected List<JvmType> getRawTypesFromConstraints(ITypeReferenceOwner owner, List<JvmTypeConstraint> constraints, ResourceSet resourceSet) {
 			if (!constraints.isEmpty()) {
 				List<JvmType> result = Lists.newArrayList();
 				OwnedConverter converter = new OwnedConverter(owner);
@@ -229,7 +229,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 			return result;
 		}
 
-		protected LightweightTypeReference getRawTypeFromConstraints(TypeReferenceOwner owner, JvmTypeParameter typeParameter, ResourceSet resourceSet) {
+		protected LightweightTypeReference getRawTypeFromConstraints(ITypeReferenceOwner owner, JvmTypeParameter typeParameter, ResourceSet resourceSet) {
 			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 			if (!constraints.isEmpty()) {
 				CompoundTypeReference result = new CompoundTypeReference(owner, false);
@@ -244,7 +244,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 			return createObjectReference(owner, resourceSet);
 		}
 
-		protected LightweightTypeReference createObjectReference(TypeReferenceOwner owner, ResourceSet resourceSet) {
+		protected LightweightTypeReference createObjectReference(ITypeReferenceOwner owner, ResourceSet resourceSet) {
 			// no upper bound found - seems to be an invalid - assume object as upper bound
 			URI objectURI = new ClassURIHelper().getFullURI(Object.class);
 			JvmType objectType = factory.createJvmGenericType();

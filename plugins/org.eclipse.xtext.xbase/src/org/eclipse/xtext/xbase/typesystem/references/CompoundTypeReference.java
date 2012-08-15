@@ -32,7 +32,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	private List<LightweightTypeReference> components;
 	private boolean resolved;
 
-	public CompoundTypeReference(TypeReferenceOwner owner, boolean synonym) {
+	public CompoundTypeReference(ITypeReferenceOwner owner, boolean synonym) {
 		super(owner);
 		this.synonym = synonym;
 		this.resolved = true;
@@ -59,7 +59,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (super.isOwnedBy(owner)) {
 			for (LightweightTypeReference parameterType : expose(components)) {
 				if (!parameterType.isOwnedBy(owner)) {
@@ -116,7 +116,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		CompoundTypeReference result = new CompoundTypeReference(owner, synonym);
 		if (components != null && !components.isEmpty()) {
 			for(LightweightTypeReference typeArgument: components) {

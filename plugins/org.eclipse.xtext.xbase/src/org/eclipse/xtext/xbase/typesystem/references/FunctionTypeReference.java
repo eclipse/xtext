@@ -29,12 +29,12 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	private List<LightweightTypeReference> parameterTypes;
 	private LightweightTypeReference returnType;
 	
-	public FunctionTypeReference(TypeReferenceOwner owner, JvmType type) {
+	public FunctionTypeReference(ITypeReferenceOwner owner, JvmType type) {
 		super(owner, type);
 	}
 	
 	@Override
-	protected FunctionTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected FunctionTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		FunctionTypeReference result = new FunctionTypeReference(owner, getType());
 		copyTypeArguments(result, owner);
 		if (parameterTypes != null && !parameterTypes.isEmpty()) {
@@ -58,7 +58,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	}
 	
 	@Override
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (super.isOwnedBy(owner)) {
 			if (returnType != null && !returnType.isOwnedBy(owner))
 				return false;

@@ -27,12 +27,12 @@ public interface LightweightTypeExpectation extends ITypeExpectation {
 
 	OwnedConverter getConverter();
 	
-	TypeReferenceOwner getReferenceOwner();
+	ITypeReferenceOwner getReferenceOwner();
 	
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
-	LightweightTypeExpectation copyInto(TypeReferenceOwner referenceOwner);
+	LightweightTypeExpectation copyInto(ITypeReferenceOwner referenceOwner);
 	
-	boolean isOwnedBy(TypeReferenceOwner referenceOwner);
+	boolean isOwnedBy(ITypeReferenceOwner referenceOwner);
 	
 }

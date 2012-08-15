@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
 public class BoundTypeArgumentMerger {
 	
 	@Nullable
-	public LightweightMergedBoundTypeArgument merge(Collection<LightweightBoundTypeArgument> allArguments, TypeReferenceOwner owner) {
+	public LightweightMergedBoundTypeArgument merge(Collection<LightweightBoundTypeArgument> allArguments, ITypeReferenceOwner owner) {
 		if (allArguments.isEmpty())
 			return null;
 		if (allArguments.size() == 1) {

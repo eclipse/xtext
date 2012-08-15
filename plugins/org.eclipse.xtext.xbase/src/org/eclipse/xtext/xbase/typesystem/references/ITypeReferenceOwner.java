@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  * TODO JAvaDoc, factory (methods?) for lightweight type references
  */
 @NonNullByDefault
-public interface TypeReferenceOwner {
+public interface ITypeReferenceOwner {
 	
 	CommonTypeComputationServices getServices();
 	
@@ -30,6 +30,7 @@ public interface TypeReferenceOwner {
 	// TODO move these to *somewhere* else
 	List<LightweightBoundTypeArgument> getAllHints(Object handle);
 
+	// TODO move these to *somewhere* else
 	boolean isResolved(Object handle);
 	
 }

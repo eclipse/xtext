@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -37,7 +37,7 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 		return false;
 	}
 	
-	public boolean isOwnedBy(TypeReferenceOwner referenceOwner) {
+	public boolean isOwnedBy(ITypeReferenceOwner referenceOwner) {
 		LightweightTypeReference expectedType = internalGetExpectedType();
 		return expectedType == null || expectedType.isOwnedBy(referenceOwner);
 	}

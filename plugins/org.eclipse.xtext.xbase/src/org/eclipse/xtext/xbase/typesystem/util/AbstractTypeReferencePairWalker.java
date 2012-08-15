@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -215,7 +215,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 	}
 	
-	private final TypeReferenceOwner owner;
+	private final ITypeReferenceOwner owner;
 	
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
 	private final WildcardTypeReferenceTraverser wildcardTypeReferenceTraverser;
@@ -228,7 +228,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 	private Object origin;
 	
-	protected AbstractTypeReferencePairWalker(TypeReferenceOwner owner) {
+	protected AbstractTypeReferencePairWalker(ITypeReferenceOwner owner) {
 		this.owner = owner;
 		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
 		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
@@ -324,7 +324,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		return origin;
 	}
 	
-	protected TypeReferenceOwner getOwner() {
+	protected ITypeReferenceOwner getOwner() {
 		return owner;
 	}
 

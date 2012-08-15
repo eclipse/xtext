@@ -31,13 +31,13 @@ import com.google.common.base.Preconditions;
  */
 public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTypeReference> implements Function<JvmTypeReference, LightweightTypeReference> {
 
-	private final TypeReferenceOwner owner;
+	private final ITypeReferenceOwner owner;
 
-	public OwnedConverter(TypeReferenceOwner owner) {
+	public OwnedConverter(ITypeReferenceOwner owner) {
 		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 	
-	public TypeReferenceOwner getOwner() {
+	public ITypeReferenceOwner getOwner() {
 		return owner;
 	}
 	

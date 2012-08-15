@@ -18,10 +18,10 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 @NonNullByDefault
 public abstract class BaseTypeExpectation implements LightweightTypeExpectation {
 
-	private final TypeReferenceOwner owner;
+	private final ITypeReferenceOwner owner;
 	private final OwnedConverter converter;
 
-	protected BaseTypeExpectation(TypeReferenceOwner owner) {
+	protected BaseTypeExpectation(ITypeReferenceOwner owner) {
 		this.owner = owner;
 		this.converter = new OwnedConverter(owner);
 	}
@@ -43,7 +43,7 @@ public abstract class BaseTypeExpectation implements LightweightTypeExpectation 
 		return null;
 	}
 	
-	public TypeReferenceOwner getReferenceOwner() {
+	public ITypeReferenceOwner getReferenceOwner() {
 		return owner;
 	}
 	

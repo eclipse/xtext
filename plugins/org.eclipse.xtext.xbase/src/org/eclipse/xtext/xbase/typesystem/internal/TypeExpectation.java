@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,7 +35,7 @@ public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 		return reference;
 	}
 	
-	public TypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+	public TypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		if (reference == null || reference.isOwnedBy(referenceOwner))
 			return this;
 		return new TypeExpectation(reference.copyInto(referenceOwner), getState(), isReturnType());

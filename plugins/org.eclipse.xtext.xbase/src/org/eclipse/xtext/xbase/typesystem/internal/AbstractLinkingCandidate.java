@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationS
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -119,7 +119,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 
 		@Override
-		public ObservableTypeExpectation copyInto(TypeReferenceOwner referenceOwner) {
+		public ObservableTypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 			LightweightTypeReference expectedType = internalGetExpectedType();
 			if (expectedType == null || expectedType.isOwnedBy(referenceOwner))
 				return this;

@@ -11,7 +11,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,7 +50,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 		super.acceptActualType(type, hints);
 	}
 	
-	public RootNoExpectation copyInto(TypeReferenceOwner referenceOwner) {
+	public RootNoExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return this;
 	}
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 public class StandardTypeParameterSubstitutor extends TypeParameterSubstitutor<Object> {
 
 	public StandardTypeParameterSubstitutor(
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, TypeReferenceOwner owner) {
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, ITypeReferenceOwner owner) {
 		super(typeParameterMapping, owner);
 	}
 

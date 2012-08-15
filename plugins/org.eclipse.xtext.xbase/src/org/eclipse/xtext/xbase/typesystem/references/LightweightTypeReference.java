@@ -67,9 +67,9 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
-	private TypeReferenceOwner owner;
+	private ITypeReferenceOwner owner;
 	
-	protected LightweightTypeReference(TypeReferenceOwner owner) {
+	protected LightweightTypeReference(ITypeReferenceOwner owner) {
 		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 
@@ -77,7 +77,7 @@ public abstract class LightweightTypeReference {
 		return true;
 	}
 	
-	public TypeReferenceOwner getOwner() {
+	public ITypeReferenceOwner getOwner() {
 		return owner;
 	}
 	
@@ -89,7 +89,7 @@ public abstract class LightweightTypeReference {
 		return getOwner().getServices();
 	}
 	
-	public boolean isOwnedBy(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		if (isResolved()) {
 			return true;
 		}
@@ -260,14 +260,14 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 	
-	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
+	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
 		if (isOwnedBy(owner)) {
 			return this;
 		}
 		return doCopyInto(owner);
 	}
 
-	protected abstract LightweightTypeReference doCopyInto(TypeReferenceOwner owner);
+	protected abstract LightweightTypeReference doCopyInto(ITypeReferenceOwner owner);
 	
 	@Override
 	public final String toString() {

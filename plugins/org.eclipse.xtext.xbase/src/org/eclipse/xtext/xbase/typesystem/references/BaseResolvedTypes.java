@@ -33,7 +33,7 @@ public abstract class BaseResolvedTypes implements LightweightResolvedTypes {
 		return converter;
 	}
 	
-	public TypeReferenceOwner getReferenceOwner() {
+	public ITypeReferenceOwner getReferenceOwner() {
 		return getConverter().getOwner();
 	}
 	

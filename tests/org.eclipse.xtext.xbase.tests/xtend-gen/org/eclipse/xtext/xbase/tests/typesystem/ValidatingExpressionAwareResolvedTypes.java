@@ -15,9 +15,9 @@ import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolve
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 @SuppressWarnings("all")
@@ -42,7 +42,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   }
   
   public void setType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -53,7 +53,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   }
   
   public void reassignType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -71,7 +71,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       _and = false;
     } else {
       LightweightTypeReference _typeReference_1 = boundTypeArgument.getTypeReference();
-      TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
       _and = (_notEquals && _not);
@@ -86,14 +86,14 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final ConformanceHint... hints) {
     LightweightTypeReference _xblockexpression = null;
     {
-      TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = expectation.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
       if (_not) {
         IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("expectation is not owned by this resolved types");
         throw _illegalArgumentException;
       }
-      TypeReferenceOwner _referenceOwner_1 = this.getReferenceOwner();
+      ITypeReferenceOwner _referenceOwner_1 = this.getReferenceOwner();
       boolean _isOwnedBy_1 = type.isOwnedBy(_referenceOwner_1);
       boolean _not_1 = (!_isOwnedBy_1);
       if (_not_1) {
@@ -117,7 +117,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
             _and = false;
           } else {
             LightweightTypeReference _typeReference_1 = it.getTypeReference();
-            TypeReferenceOwner _referenceOwner = ValidatingExpressionAwareResolvedTypes.this.getReferenceOwner();
+            ITypeReferenceOwner _referenceOwner = ValidatingExpressionAwareResolvedTypes.this.getReferenceOwner();
             boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
             boolean _not = (!_isOwnedBy);
             _and = (_notEquals && _not);
@@ -134,7 +134,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
     final UnboundTypeReference result = super.getUnboundTypeReference(handle);
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -146,7 +146,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   public LightweightTypeReference internalGetActualType(final JvmIdentifiableElement identifiable) {
     final LightweightTypeReference result = super.internalGetActualType(identifiable);
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -158,7 +158,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   public LightweightTypeReference internalGetActualType(final XExpression expression) {
     final LightweightTypeReference result = super.internalGetActualType(expression);
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -170,7 +170,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   public LightweightTypeReference internalGetExpectedType(final XExpression expression) {
     final LightweightTypeReference result = super.internalGetExpectedType(expression);
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -187,7 +187,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     if (!_notEquals) {
       _and = false;
     } else {
-      TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
       _and = (_notEquals && _not);
@@ -202,7 +202,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
     final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
         public void apply(final LightweightTypeReference it) {
-          TypeReferenceOwner _owner = it.getOwner();
+          ITypeReferenceOwner _owner = it.getOwner();
           boolean _isOwnedBy = it.isOwnedBy(_owner);
           boolean _not = (!_isOwnedBy);
           if (_not) {
@@ -213,7 +213,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       };
     IterableExtensions.<LightweightTypeReference>forEach(types, _function);
     final LightweightTypeReference result = super.getMergedType(types);
-    TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
@@ -226,7 +226,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   public TypeData mergeTypeData(final XExpression expression, final Collection<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
     final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
         public void apply(final TypeData it) {
-          TypeReferenceOwner _referenceOwner = ValidatingExpressionAwareResolvedTypes.this.getReferenceOwner();
+          ITypeReferenceOwner _referenceOwner = ValidatingExpressionAwareResolvedTypes.this.getReferenceOwner();
           boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
           boolean _not = (!_isOwnedBy);
           if (_not) {
@@ -242,7 +242,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     if (!_notEquals) {
       _and = false;
     } else {
-      TypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
       _and = (_notEquals && _not);

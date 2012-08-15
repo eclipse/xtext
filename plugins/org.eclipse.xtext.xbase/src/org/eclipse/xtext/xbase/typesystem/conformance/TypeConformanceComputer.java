@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -250,7 +250,7 @@ public class TypeConformanceComputer {
 	protected LightweightTypeReference getTypeParametersForSupertype(
 			final Multimap<JvmType, LightweightTypeReference> all, 
 			JvmType rawType, 
-			TypeReferenceOwner owner,
+			ITypeReferenceOwner owner,
 			List<LightweightTypeReference> initiallyRequested) {
 		if (rawType instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
@@ -382,7 +382,7 @@ public class TypeConformanceComputer {
 		});
 	}
 	
-	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, TypeReferenceOwner owner) {
+	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
 		Set<String> allNames = Sets.newHashSet();
 		for(LightweightTypeReference type: types)
 			allNames.add(type.getIdentifier());
@@ -412,7 +412,7 @@ public class TypeConformanceComputer {
 		return result;
 	}
 
-	protected LightweightTypeReference createObjectWildcardReference(TypeReferenceOwner owner) {
+	protected LightweightTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
 		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
 		ParameterizedTypeReference objectReference = new ParameterizedTypeReference(owner, objectType);
 		WildcardTypeReference result = new WildcardTypeReference(owner);

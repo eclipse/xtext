@@ -27,21 +27,49 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import com.google.common.collect.Lists;
 
 /**
+ * A type reference that points to a type parameter that is not yet resolved.
+ * Such type references may be produced in cases like
+ * <code>
+ *   val x = newArrayList
+ * </code>
+ * where {@code x} has the inferred type {@code List<Unbound[E]>}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
 public class UnboundTypeReference extends LightweightTypeReference {
 
+	/**
+	 * The resolved representation of this type reference.
+	 */
 	private LightweightTypeReference resolvedTo;
+	
 	private final JvmTypeParameter typeParameter;
+	
+	/**
+	 * A handle uniquely identifies a unbound type reference. Since
+	 * unbound references are cloned eagerly into new owners as soon as
+	 * the potential owner is forked, we need a means to identify such references
+	 * across owner boundaries. 
+	 */
 	private final Object handle;
+	
+	/**
+	 * The expression that is the origin for the unbound type reference.
+	 * Given the example
+	 * <code>
+	 *   val x = newArrayList
+	 * </code>
+	 * its the feature call {@code newArrayList} for the unbound type reference
+	 * to {@code E}
+	 */
 	private final XExpression expression;
 	
-	public UnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
+	public UnboundTypeReference(ITypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
 		this(owner, expression, typeParameter, new Object());
 	}
 	
-	protected UnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter, Object handle) {
+	protected UnboundTypeReference(ITypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter, Object handle) {
 		super(owner);
 		this.typeParameter = typeParameter;
 		this.handle = handle;
@@ -52,11 +80,16 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return expression;
 	}
 	
-	protected UnboundTypeReference createCopy(TypeReferenceOwner owner) {
+	protected UnboundTypeReference createCopy(ITypeReferenceOwner owner) {
 		UnboundTypeReference result = new UnboundTypeReference(owner, expression, getTypeParameter(), getHandle());
 		return result;
 	}
 	
+	/**
+	 * Try to resolve this reference iff there are hints available.
+	 * May be invoked multiple times since it will simply returns if
+	 * the reference is already resolved.
+	 */
 	public void tryResolve() {
 		if (internalIsResolved())
 			return;
@@ -87,10 +120,21 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return typeParameter;
 	}
 	
+	/**
+	 * Returns the identifying handle for this reference.
+	 * @see UnboundTypeReference#handle
+	 */
 	public Object getHandle() {
 		return handle;
 	}
 	
+	/**
+	 * Returns the resolved reference for this unbound reference.
+	 * It does not try to resolve this reference but only returns
+	 * the resolved representation if this one was resolved by other clients 
+	 * explicitly.
+	 * @return the resolved reference or <code>null</code>.
+	 */
 	@Nullable
 	public LightweightTypeReference getResolvedTo() {
 		return internalGetResolvedTo();
@@ -103,6 +147,11 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return super.getUpperBoundSubstitute();
 	}
 	
+	/**
+	 * Force this reference to be resolved. If not hints are available,
+	 * the reference is resolved to the constraints of the type parameters.
+	 * @return the resolved representation. Never <code>null</code>.
+	 */
 	public LightweightTypeReference resolve() {
 		List<LightweightBoundTypeArgument> allHints = getOwner().getAllHints(getHandle());
 		if (!allHints.isEmpty() && resolveWithHints(allHints)) {
@@ -173,7 +222,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 * Otherwise we copy this reference.
 	 */
 	@Override
-	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
+	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
 		return doCopyInto(owner);
 	}
 	
@@ -274,7 +323,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		if (internalIsResolved()) {
 			return resolvedTo.copyInto(owner);
 		}

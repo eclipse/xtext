@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,9 +23,9 @@ import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 public class CompoundTypeAssigner implements LightweightTypeAssigner {
 
 	private final TypeAssigner[] assigners;
-	private final TypeReferenceOwner owner;
+	private final ITypeReferenceOwner owner;
 
-	public CompoundTypeAssigner(TypeReferenceOwner owner, TypeAssigner[] assigners) {
+	public CompoundTypeAssigner(ITypeReferenceOwner owner, TypeAssigner[] assigners) {
 		this.owner = owner;
 		this.assigners = assigners;
 	}
