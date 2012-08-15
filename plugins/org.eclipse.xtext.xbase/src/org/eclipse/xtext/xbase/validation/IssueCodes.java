@@ -62,6 +62,8 @@ public class IssueCodes {
 	public static final String INVALID_NUMBER_FORMAT = ISSUE_CODE_PREFIX + "invalidNumberFormat";
 	public static final String FIELD_ALREADY_INITIALIZED = ISSUE_CODE_PREFIX + "field_already_initialized";
 	public static final String INVALID_TYPE = ISSUE_CODE_PREFIX + "invalid_type";
+	public static final String FORBIDDEN_REFERENCE = "forbidden_reference";
+	public static final String DISCOURAGED_REFERENCE = "discouraged_reference";
 	
 	
 	// list is not necessarily complete
