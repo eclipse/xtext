@@ -15,13 +15,13 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.xbase.ui.validation.XbaseUIJavaValidator;
+import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
 
 /**
  * @author Holger Schill - Initial contribution and API
  * @since 2.4
  */
-public class XtendUIJavaValidator extends XbaseUIJavaValidator {
+public class XtendUIValidator extends XbaseUIValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
