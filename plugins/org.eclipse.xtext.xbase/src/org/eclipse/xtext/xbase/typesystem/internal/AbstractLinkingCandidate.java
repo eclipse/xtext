@@ -31,12 +31,12 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -120,7 +120,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 
 		@Override
 		public ObservableTypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
-			LightweightTypeReference expectedType = internalGetExpectedType();
+			LightweightTypeReference expectedType = getExpectedType();
 			if (expectedType == null || expectedType.isOwnedBy(referenceOwner))
 				return this;
 			return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType(), conformanceHint);
@@ -171,7 +171,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 
 	@NonNullByDefault
 	public void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint... hints) {
-		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
+		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType == null || actual instanceof AnyTypeReference) {
 			return;
 		}
@@ -230,7 +230,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	@NonNullByDefault
 	protected void deferredBindTypeArgument(LightweightTypeExpectation expectation, LightweightTypeReference type) {
-		LightweightTypeReference expectedType = expectation.internalGetExpectedType();
+		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
 			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState().getReferenceOwner());
 			collector.processPairedReferences(expectedType, type);
@@ -279,7 +279,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			try {
 				if (argumentIndex < fixedArityArgumentCount) {
 					JvmFormalParameter parameter = parameters.get(argumentIndex);
-					LightweightTypeReference parameterType = getState().toLightweightTypeReference(parameter.getParameterType());
+					LightweightTypeReference parameterType = getState().getConverter().toLightweightReference(parameter.getParameterType());
 					LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 					XExpression argument = arguments.get(argumentIndex);
 					AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
@@ -288,7 +288,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				}
 				if (varArgs) {
 					int lastParamIndex = declaredParameterCount - 1;
-					LightweightTypeReference lastParameterType = getState().toLightweightTypeReference(parameters.get(lastParamIndex).getParameterType());
+					LightweightTypeReference lastParameterType = getState().getConverter().toLightweightReference(parameters.get(lastParamIndex).getParameterType());
 					if (!(lastParameterType instanceof ArrayTypeReference))
 						throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 					final LightweightTypeReference componentType = ((ArrayTypeReference) lastParameterType).getComponentType();

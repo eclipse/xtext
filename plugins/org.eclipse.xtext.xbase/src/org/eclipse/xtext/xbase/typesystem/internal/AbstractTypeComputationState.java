@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -27,9 +26,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -42,7 +41,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc
  */
 @NonNullByDefault
-public abstract class AbstractTypeComputationState extends BaseTypeComputationState {
+public abstract class AbstractTypeComputationState implements LightweightTypeComputationState {
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
@@ -57,7 +56,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		this.reentrantTypeResolver = reentrantTypeResolver;
 	}
 	
-	@Override
 	protected ResolvedTypes getResolvedTypes() {
 		return resolvedTypes;
 	}
@@ -112,11 +110,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
 	}
 	
-	@Override
-	public TypeComputationStateWithExpectation withExpectation(JvmTypeReference expectation) {
-		return (TypeComputationStateWithExpectation) super.withExpectation(expectation);
-	}
-
 	public AbstractTypeComputationState withNonVoidExpectation() {
 		return withNonVoidExpectation(resolvedTypes);
 	}
@@ -145,11 +138,6 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type);
 		return assigner.getForkedState();
-	}
-	
-	@Override
-	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
-		return (AbstractTypeComputationState) super.assignType(element, type);
 	}
 	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
@@ -223,7 +211,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 				LightweightTypeReference type = super.internalGetActualType(expression);
 				if (type == null) {
 					LightweightTypeComputationResult result = forked.computeTypes(expression);
-					return result.internalGetActualExpressionType();
+					return result.getActualExpressionType();
 				}
 				return type;
 			}
@@ -288,11 +276,11 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);
 	}
 
-	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
-		return new OwnedConverter(getReferenceOwner()).toLightweightReference(reference);
-	}
-
 	public ITypeReferenceOwner getReferenceOwner() {
 		return getResolvedTypes().getReferenceOwner();
+	}
+	
+	public OwnedConverter getConverter() {
+		return new OwnedConverter(getReferenceOwner());
 	}
 }

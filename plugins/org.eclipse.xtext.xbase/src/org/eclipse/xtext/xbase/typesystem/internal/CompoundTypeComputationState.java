@@ -60,27 +60,7 @@ public class CompoundTypeComputationState implements LightweightTypeComputationS
 		return result;
 	}
 
-	public void acceptActualType(JvmTypeReference type) {
-		for (LightweightTypeComputationState component : components) {
-			component.acceptActualType(type);
-		}
-	}
-
-	public void reassignType(XExpression object, JvmTypeReference type) {
-		for (LightweightTypeComputationState component : components) {
-			component.reassignType(object, type);
-		}
-	}
-
 	public LightweightTypeComputationState withExpectation(LightweightTypeReference expectation) {
-		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
-		for (int i = 0; i < components.length; i++) {
-			result[i] = components[i].withExpectation(expectation);
-		}
-		return new CompoundTypeComputationState(owner, result);
-	}
-
-	public LightweightTypeComputationState withExpectation(JvmTypeReference expectation) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
 			result[i] = components[i].withExpectation(expectation);
@@ -156,14 +136,6 @@ public class CompoundTypeComputationState implements LightweightTypeComputationS
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public LightweightTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
-		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
-		for (int i = 0; i < components.length; i++) {
-			result[i] = components[i].assignType(element, type);
-		}
-		return new CompoundTypeComputationState(owner, result);
-	}
-
 	public LightweightTypeAssigner assignTypes() {
 		TypeAssigner[] array = new TypeAssigner[components.length];
 		for (int i = 0; i < array.length; i++) {
@@ -174,6 +146,10 @@ public class CompoundTypeComputationState implements LightweightTypeComputationS
 
 	public ITypeReferenceOwner getReferenceOwner() {
 		return owner;
+	}
+	
+	public OwnedConverter getConverter() {
+		return new OwnedConverter(owner);
 	}
 
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {

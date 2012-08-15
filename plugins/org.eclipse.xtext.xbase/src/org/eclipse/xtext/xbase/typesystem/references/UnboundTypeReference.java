@@ -336,7 +336,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		if (internalIsResolved()) {
 			return resolvedTo.getSimpleName();
 		}
-		return "Unbound <" + typeParameter.getSimpleName() + ">";
+		return "Unbound[" + typeParameter.getSimpleName() + "]";
 	}
 	
 	@Override
@@ -344,7 +344,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		if (internalIsResolved()) {
 			return resolvedTo.getIdentifier();
 		}
-		return "Unbound <" + typeParameter.getIdentifier() + ">";
+		return "Unbound[" + typeParameter.getIdentifier() + "]";
 	}
 	
 	@Override

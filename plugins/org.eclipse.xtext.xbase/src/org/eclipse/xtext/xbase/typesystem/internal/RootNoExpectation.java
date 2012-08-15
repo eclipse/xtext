@@ -25,7 +25,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 
 	@Nullable
-	public LightweightTypeReference internalGetExpectedType() {
+	public LightweightTypeReference getExpectedType() {
 		return null;
 	}
 

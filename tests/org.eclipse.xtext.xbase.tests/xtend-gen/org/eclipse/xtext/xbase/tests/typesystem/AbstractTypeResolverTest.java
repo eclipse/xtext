@@ -1367,6 +1367,31 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testFeatureCall_32() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[String s | s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_33() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.findFirst[String s | true]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_34() throws Exception {
+    this.resolvesTo("newArrayList.map[String s | s.substring(1,1) ]", "List<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_35() throws Exception {
+    this.resolvesTo("newArrayList.map[ s | s.toString ]", "List<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_36() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | s.toString ]\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
+  }
+  
+  @Test
   public void testToList_01() throws Exception {
     this.resolvesTo("{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }", "List<? extends String>");
   }

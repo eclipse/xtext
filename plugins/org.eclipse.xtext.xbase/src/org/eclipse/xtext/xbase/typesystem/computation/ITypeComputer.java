@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 
 import com.google.inject.ImplementedBy;
 
@@ -19,8 +20,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(XbaseTypeComputer.class)
 public interface ITypeComputer {
 
-	void computeTypes(XExpression expression, ITypeComputationState state);
+	void computeTypes(XExpression expression, LightweightTypeComputationState state);
 
-	JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state);
+	JvmIdentifiableElement getRefinableCandidate(XExpression object, LightweightTypeComputationState state);
 
 }

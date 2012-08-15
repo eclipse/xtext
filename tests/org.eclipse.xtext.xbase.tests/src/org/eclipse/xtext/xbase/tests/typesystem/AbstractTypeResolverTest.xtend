@@ -1361,6 +1361,38 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
         }".resolvesTo("Integer");
 	}
 	
+	@Test def void testFeatureCall_32() throws Exception {
+		"{
+			val list = newArrayList
+			list.forEach[String s | s]
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testFeatureCall_33() throws Exception {
+		"{
+			val list = newArrayList
+			list.findFirst[String s | true]
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testFeatureCall_34() throws Exception {
+		"newArrayList.map[String s | s.substring(1,1) ]".resolvesTo("List<String>")
+	}
+
+	@Test def void testFeatureCall_35() throws Exception {
+		"newArrayList.map[ s | s.toString ]".resolvesTo("List<String>")
+	}
+	
+	@Test def void testFeatureCall_36() throws Exception {
+		"{
+			val list = newArrayList
+			list.forEach[ s | s.toString ]
+			list
+		}".resolvesTo("ArrayList<Object>")
+	}
+	
 	@Test def void testToList_01() throws Exception {
 		"{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }".resolvesTo("List<? extends String>")
 	}
