@@ -11,11 +11,18 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -60,7 +67,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkRestrictedType(XConstructorCall constructorCall){
 		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
-		checkRestrictedType(constructorCall, declaringType);
+		checkRestrictedType(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, declaringType);
 	}
 
 
@@ -69,18 +76,19 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		if (typeReference != null && typeReference.eResource() != null && typeReference.eResource().getResourceSet() != null) {
 			JvmType type = typeReference.getType();
 			if (type instanceof JvmDeclaredType) {
-				checkRestrictedType(typeReference, (JvmDeclaredType) type);
+				checkRestrictedType(typeReference, null, (JvmDeclaredType) type);
 			}
 		}
 	}
 
-	protected void checkRestrictedType(EObject context, JvmDeclaredType typeToCheck) {
+	protected void checkRestrictedType(EObject context, final EStructuralFeature feature, JvmDeclaredType typeToCheck) {
 		IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 		if(javaProject == null)
 			return;
 		IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
 		if(javaElement == null)
 			return;
+
 		final IJavaProject declaringJavaProject = javaElement.getJavaProject();
 		if(declaringJavaProject == null)
 			return;
@@ -95,10 +103,12 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 								char[][] enclosingTypeNames, String path, AccessRestriction access) {
-							if (access.getProblemId() == IProblem.ForbiddenReference) {
-								error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), null, FORBIDDEN_REFERENCE);
-							} else if (access.getProblemId() == IProblem.DiscouragedReference) {
-								warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), null, DISCOURAGED_REFERENCE);
+							if(access != null){
+								if (access.getProblemId() == IProblem.ForbiddenReference) {
+									error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, FORBIDDEN_REFERENCE);
+								} else if (access.getProblemId() == IProblem.DiscouragedReference) {
+									warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
+								}
 							}
 						}
 					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
