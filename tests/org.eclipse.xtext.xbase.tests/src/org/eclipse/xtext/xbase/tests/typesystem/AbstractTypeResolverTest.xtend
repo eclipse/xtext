@@ -972,6 +972,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ var java.util.List<? extends Integer> it = null map(i|i+1) }".resolvesTo("List<Integer>")
 	}
 	
+	@Test def void testFeatureCall_13_6() throws Exception {
+		"{ var java.util.List<? extends Integer> it = null map(i|i) }".resolvesTo("List<Integer>")
+	}
+	
 	@Test def void testFeatureCall_14() throws Exception {
 		"newArrayList(newArrayList('').map(s|1))".resolvesTo("ArrayList<List<Integer>>")
 	}

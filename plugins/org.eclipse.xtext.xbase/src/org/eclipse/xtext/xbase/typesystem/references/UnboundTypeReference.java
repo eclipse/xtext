@@ -207,7 +207,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				}
 			}
 			resolvedTo = typeArgument.getTypeReference();
-			if (resolvedTo != null && varianceHints.contains(VarianceInfo.IN))
+			if (resolvedTo != null && varianceHints.contains(VarianceInfo.IN) && varianceHints.contains(VarianceInfo.OUT))
 				resolvedTo = resolvedTo.getUpperBoundSubstitute();
 			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(resolvedTo, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, typeArgument.getVariance()));
 			return true;
