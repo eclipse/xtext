@@ -202,6 +202,98 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)".resolvesTo("long")
 	}
 	
+	@Test def void testOverloadedMethods_01() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			var Object o = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, o)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_02() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			var String s = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, s)
+		}".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedMethods_03() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			var Object o = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, o)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_04() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			var String s = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, s)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_05() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, null)
+		}".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedMethods_06() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, null)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_07() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			var Object o = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, o)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_08() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			var String s = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, s)
+		}".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedMethods_09() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			var Object o = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, o)
+		}".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedMethods_10() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			var String s = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, s)
+		}".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedMethods_11() throws Exception {
+		"{
+			var java.util.List<CharSequence> list = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, null)
+		}".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedMethods_12() throws Exception {
+		"{
+			var java.util.List<? extends CharSequence> list = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloadedWithTypeParam(list, null)
+		}".resolvesTo("long")
+	}
+	
 	@Test def void testBoxing_01() throws Exception {
 		"1.toString".resolvesTo("String")
 	}

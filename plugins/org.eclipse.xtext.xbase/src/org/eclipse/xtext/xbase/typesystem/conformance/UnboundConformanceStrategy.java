@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 
 import com.google.common.collect.Lists;
 
@@ -42,13 +43,17 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
 		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
+		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		for(LightweightBoundTypeArgument hint: hints) {
 			if (hint.getDeclaredVariance() != null) {
 				hintsToProcess.add(hint);
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					inferredHintsToProcess.add(hint);
+				}
 			}
 		}
 		BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
-		LightweightMergedBoundTypeArgument mergeResult = merger.merge(hintsToProcess, left.getOwner());
+		LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() ? hintsToProcess : inferredHintsToProcess, left.getOwner());
 		if (mergeResult != null) {
 			TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
 			return result;
