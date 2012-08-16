@@ -34,6 +34,6 @@ public class XtendUIValidator extends XbaseUIValidator {
 	public void checkRestrictedType(XtendImport xtendImport){
 		JvmType importedType = xtendImport.getImportedType();
 		if(importedType instanceof JvmDeclaredType)
-			checkRestrictedType(xtendImport, (JvmDeclaredType) importedType);
+			checkRestrictedType(xtendImport, XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE, (JvmDeclaredType) importedType);
 	}
 }
