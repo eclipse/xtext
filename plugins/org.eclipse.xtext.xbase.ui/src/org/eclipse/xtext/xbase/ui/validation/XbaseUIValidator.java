@@ -79,7 +79,11 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected void checkRestrictedType(EObject context, final EStructuralFeature feature, JvmDeclaredType typeToCheck) {
+	private static final int FORBIDDENREFERENCEID = 1;
+	private static final int DISCOURAGEDREFERENCEID = 2;
+	private static final int VALIDREFERENCEID = 0;
+
+	protected void checkRestrictedType(EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
 		IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 		if(javaProject == null)
 			return;
@@ -91,25 +95,37 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			return;
 		String packageName = typeToCheck.getPackageName();
 		final String simpleName = typeToCheck.getSimpleName();
-		IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
-		BasicSearchEngine searchEngine = new BasicSearchEngine();
-		try {
-			searchEngine.searchAllTypeNames(packageName.toCharArray(), SearchPattern.R_EXACT_MATCH,
-					simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
-					searchScope, new IRestrictedAccessTypeRequestor() {
-						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-								char[][] enclosingTypeNames, String path, AccessRestriction access) {
-							if(access != null){
-								if (access.getProblemId() == IProblem.ForbiddenReference) {
-									error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, FORBIDDEN_REFERENCE);
-								} else if (access.getProblemId() == IProblem.DiscouragedReference) {
-									warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
-								}
+		if(!getContext().containsKey(typeToCheck)){
+			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
+			BasicSearchEngine searchEngine = new BasicSearchEngine();
+			try {
+				searchEngine.searchAllTypeNames(packageName.toCharArray(), SearchPattern.R_EXACT_MATCH,
+						simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
+						searchScope, new IRestrictedAccessTypeRequestor() {
+							public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+									char[][] enclosingTypeNames, String path, AccessRestriction access) {
+								if(access != null){
+									if (access.getProblemId() == IProblem.ForbiddenReference) {
+										getContext().put(typeToCheck, FORBIDDENREFERENCEID);
+									} else if (access.getProblemId() == IProblem.DiscouragedReference) {
+										getContext().put(typeToCheck, DISCOURAGEDREFERENCEID);
+									} else
+										getContext().put(typeToCheck, VALIDREFERENCEID);
+								} else
+									getContext().put(typeToCheck, VALIDREFERENCEID);
 							}
-						}
-					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
-		} catch (JavaModelException e) {
-			// Ignore
+						}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+			} catch (JavaModelException e) {
+				// Ignore
+			}
+		}
+		Object element = getContext().get(typeToCheck);
+		if(element != null){
+			if(element.equals(FORBIDDENREFERENCEID)){
+				error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, FORBIDDEN_REFERENCE);
+			} else if(element.equals(DISCOURAGEDREFERENCEID)){
+				warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
+			}
 		}
 	}
 
