@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
@@ -22,7 +23,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatchScopeProvider {
+public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements IBatchScopeProvider {
 
 	@Inject
 	private IFeatureScopeSession rootSession;

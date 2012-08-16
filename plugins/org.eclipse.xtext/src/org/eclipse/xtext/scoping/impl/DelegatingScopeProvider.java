@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.batch;
+package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -21,9 +21,13 @@ import com.google.inject.name.Named;
 /**
  * This implementation skips the declarative API of the {@link AbstractDeclarativeScopeProvider}
  * while still delegating to another {@link org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider#NAMED_DELEGATE provider}.
+ * 
+ * Meant to be used as the base class for custom scope providers.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.4
  */
-public class XtypeScopeProvider extends AbstractScopeProvider implements IDelegatingScopeProvider {
+public class DelegatingScopeProvider extends AbstractScopeProvider implements IDelegatingScopeProvider {
 
 	@Inject
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
