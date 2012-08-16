@@ -8,21 +8,16 @@
 package org.eclipse.xtext.xbase.ui.validation;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.core.IAccessRule;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -33,6 +28,7 @@ import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
 import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
 import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -43,7 +39,6 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtype.XtypePackage;
-import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import com.google.inject.Inject;
 
@@ -76,7 +71,10 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		if (typeReference != null && typeReference.eResource() != null && typeReference.eResource().getResourceSet() != null) {
 			JvmType type = typeReference.getType();
 			if (type instanceof JvmDeclaredType) {
-				checkRestrictedType(typeReference, null, (JvmDeclaredType) type);
+				if(typeReference instanceof JvmParameterizedTypeReference)
+					checkRestrictedType(typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, (JvmDeclaredType) type);
+				else
+					checkRestrictedType(typeReference, null, (JvmDeclaredType) type);
 			}
 		}
 	}
@@ -88,7 +86,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
 		if(javaElement == null)
 			return;
-
 		final IJavaProject declaringJavaProject = javaElement.getJavaProject();
 		if(declaringJavaProject == null)
 			return;
@@ -100,7 +97,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			searchEngine.searchAllTypeNames(packageName.toCharArray(), SearchPattern.R_EXACT_MATCH,
 					simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
 					searchScope, new IRestrictedAccessTypeRequestor() {
-
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 								char[][] enclosingTypeNames, String path, AccessRestriction access) {
 							if(access != null){
