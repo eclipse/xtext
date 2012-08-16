@@ -12,6 +12,8 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+import org.eclipse.osgi.internal.loader.buddy.SystemPolicy$ParentClassLoader
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -172,18 +174,41 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 	}
-
-	@Test
-	def void testDiscouragedTypeUsage() {
+	
+		@Test
+	def void testParameterizedTypeReference() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		class Foo {
-			def bar(org.eclipse.xtend.core.tests.internal.InternalClass x){}
+			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass<org.eclipse.xtend.core.tests.internal.InternalClass> x) {}
 		}
-
 		''')
-
 		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
-		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
+		val parameter = function.parameters.get(0)
+		val type = parameter.parameterType as JvmParameterizedTypeReference
+		val typeParameter = type.arguments.get(0)
+		helper.assertError(type, JVM_PARAMETERIZED_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+		helper.assertWarning(typeParameter, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 	}
+	
+	@Test
+	def void testPerformance() {
+		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
+		import org.eclipse.xtend.core.tests.internal.InternalClass
+		
+		class Foo {
+		«FOR i : (0..200)»
+			RestrictedClass x«i» = new RestrictedClass
+			InternalClass y«i» = new InternalClass
+			def bar(InternalClass p1«i», RestrictedClass p2«i»){}
+		«ENDFOR»
+		}
+		''')
+		helper.validate(xtendFile)
+		
+		
+	}
+
+
 
 }

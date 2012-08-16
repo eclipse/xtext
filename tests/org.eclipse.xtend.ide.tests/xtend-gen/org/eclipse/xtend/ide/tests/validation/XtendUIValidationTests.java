@@ -13,10 +13,12 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
 
@@ -338,16 +340,15 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testDiscouragedTypeUsage() {
+  public void testParameterizedTypeReference() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(org.eclipse.xtend.core.tests.internal.InternalClass x){}");
+      _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass<org.eclipse.xtend.core.tests.internal.InternalClass> x) {}");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
@@ -356,8 +357,52 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XtendMember _get_1 = _members.get(0);
       final XtendFunction function = ((XtendFunction) _get_1);
       EList<XtendParameter> _parameters = function.getParameters();
-      XtendParameter _get_2 = _parameters.get(0);
-      this.helper.assertWarning(_get_2, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+      final XtendParameter parameter = _parameters.get(0);
+      JvmTypeReference _parameterType = parameter.getParameterType();
+      final JvmParameterizedTypeReference type = ((JvmParameterizedTypeReference) _parameterType);
+      EList<JvmTypeReference> _arguments = type.getArguments();
+      final JvmTypeReference typeParameter = _arguments.get(0);
+      this.helper.assertError(type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertWarning(typeParameter, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPerformance() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.core.tests.restricted.RestrictedClass");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.core.tests.internal.InternalClass");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      {
+        IntegerRange _upTo = new IntegerRange(0, 200);
+        for(final Integer i : _upTo) {
+          _builder.append("RestrictedClass x");
+          _builder.append(i, "");
+          _builder.append(" = new RestrictedClass");
+          _builder.newLineIfNotEmpty();
+          _builder.append("InternalClass y");
+          _builder.append(i, "");
+          _builder.append(" = new InternalClass");
+          _builder.newLineIfNotEmpty();
+          _builder.append("def bar(InternalClass p1");
+          _builder.append(i, "");
+          _builder.append(", RestrictedClass p2");
+          _builder.append(i, "");
+          _builder.append("){}");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      this.helper.validate(xtendFile);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
