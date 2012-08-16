@@ -9,7 +9,11 @@ package org.eclipse.xtend.core.tests.restricted;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * This class is here for testing XtendUIValidations
  */
 public class RestrictedClass {
 
+	public class InnerRestrictedClass {
+		
+	}
 }
