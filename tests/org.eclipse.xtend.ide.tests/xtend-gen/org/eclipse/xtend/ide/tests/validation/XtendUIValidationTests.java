@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -370,6 +371,17 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   }
   
   @Test
+  @Ignore(value = "Enable on demand")
+  public void testPerformance_1() {
+    this.testPerformance();
+  }
+  
+  @Test
+  @Ignore(value = "Enable on demand")
+  public void testPerformance_2() {
+    this.testPerformance();
+  }
+  
   public void testPerformance() {
     try {
       StringConcatenation _builder = new StringConcatenation();
