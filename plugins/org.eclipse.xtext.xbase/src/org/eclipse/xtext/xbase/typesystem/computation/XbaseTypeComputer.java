@@ -81,14 +81,12 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, is @Singleton actually necessary?
+ * TODO JavaDoc
  */
-@Singleton
-public class XbaseTypeComputer extends AbstractTypeComputer {
+public class XbaseTypeComputer implements ITypeComputer {
 
 	@Inject
 	private NumberLiterals numberLiterals;
@@ -96,7 +94,6 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	@Inject 
 	private CommonTypeComputationServices services;
 	
-	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		if (expression instanceof XFeatureCall) {
 			_computeTypes((XFeatureCall)expression, state);
@@ -139,7 +136,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		} else if (expression instanceof XVariableDeclaration) {
 			_computeTypes((XVariableDeclaration)expression, state);
 		} else { 
-			super.computeTypes(expression, state);
+			throw new UnsupportedOperationException("Missing type computation for expression type: " + expression.eClass().getName() + " / " + state);
 		}
 	}
 	
