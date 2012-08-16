@@ -20,5 +20,18 @@ public class TypeResolutionTestData {
 	static <T> List<T> fixedToList(Iterable<T> iter) { return null; }
 	static <T> List<T> brokenToList(Iterable<? extends T> iter) { return null; }
 	static <T> List<T> brokenToList2(Iterable<? super T> iter) { return null; }
+
+	public static int overloaded(List<? extends CharSequence> list, Object o) {
+		return 1;
+	}
+	public static long overloaded(List<CharSequence> list, String s) {
+		return 1;
+	}
+	public static <T> int overloadedWithTypeParam(List<? extends T> list, Object o) {
+		return 1;
+	}
+	public static <T> long overloadedWithTypeParam(List<T> list, String s) {
+		return 1;
+	}
 	
 }
