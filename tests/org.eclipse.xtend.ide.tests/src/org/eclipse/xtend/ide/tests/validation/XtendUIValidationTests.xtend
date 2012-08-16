@@ -14,6 +14,7 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.osgi.internal.loader.buddy.SystemPolicy$ParentClassLoader
+import org.junit.Ignore
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -190,7 +191,16 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		helper.assertWarning(typeParameter, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 	}
 	
-	@Test
+	@Test@Ignore("Enable on demand")
+	def void testPerformance_1() {
+		testPerformance
+	}
+	
+	@Test@Ignore("Enable on demand")
+	def void testPerformance_2() {
+		testPerformance
+	}
+
 	def void testPerformance() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
@@ -205,10 +215,5 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 		''')
 		helper.validate(xtendFile)
-		
-		
 	}
-
-
-
 }
