@@ -1048,6 +1048,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testFeatureCall_13_6() throws Exception {
+    this.resolvesTo("{ var java.util.List<? extends Integer> it = null map(i|i) }", "List<Integer>");
+  }
+  
+  @Test
   public void testFeatureCall_14() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
   }
