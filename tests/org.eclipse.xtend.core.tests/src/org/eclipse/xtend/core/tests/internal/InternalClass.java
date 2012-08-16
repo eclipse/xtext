@@ -11,7 +11,7 @@ package org.eclipse.xtend.core.tests.internal;
  * @author Holger Schill - Initial contribution and API
  * This class is here for testing XtendUIValidations
  */
-public class InternalClass {
+public class InternalClass<T> {
 	public class InnerInternalClass {
 		
 	}
