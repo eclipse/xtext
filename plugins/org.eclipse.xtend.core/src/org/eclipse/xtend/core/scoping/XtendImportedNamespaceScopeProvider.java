@@ -8,24 +8,18 @@
 package org.eclipse.xtend.core.scoping;
 
 import static com.google.common.collect.Lists.*;
-import static java.util.Collections.*;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
-import org.eclipse.xtext.scoping.impl.ImportScope;
-import org.eclipse.xtext.scoping.impl.ScopeBasedSelectable;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 
@@ -42,11 +36,12 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 	private IQualifiedNameConverter nameConverter;
 	
 	@Override
-	public IScope getScope(EObject context, EReference reference) {
+	protected IScope internalGetScope(IScope parent, IScope globalScope, EObject context, EReference reference) {
 		if (context instanceof XtendImport) {
-			return getResourceScope(context.eResource(), reference);
+			return globalScope;
+		} else {
+			return super.internalGetScope(parent, globalScope, context, reference);
 		}
-		return super.getScope(context, reference);
 	}
 	
 	@Override
@@ -73,89 +68,9 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 	}
 	
 	@Override
-	protected ImportNormalizer createImportedNamespaceResolver(String namespace, boolean ignoreCase) {
-		if (Strings.isEmpty(namespace))
-			return null;
-		QualifiedName importedNamespace = nameConverter.toQualifiedName(namespace);
-		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
-			return null;
-		}
-		boolean hasWildCard = ignoreCase ? 
-				importedNamespace.getLastSegment().equalsIgnoreCase(getWildCard()) :
-				importedNamespace.getLastSegment().equals(getWildCard());
-		if (hasWildCard) {
-			if (importedNamespace.getSegmentCount() <= 1)
-				return null;
-			return doCreateImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
-		} else {
-			return doCreateImportNormalizer(importedNamespace, false, ignoreCase);
-		}
-	}
-	
-	@Override
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return Collections.emptyList();
-	}
-	
-	protected List<ImportNormalizer> getDefaultImports() {
 		return newArrayList(new ImportNormalizer(QualifiedName.create("java","lang"), true, false),
 				new ImportNormalizer(QualifiedName.create("org","eclipse","xtend","lib"), true, false));
 	}
 
-	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,
-			boolean ignoreCase) {
-		return new NestedTypeAwareImportNormalizer(importedNamespace, wildcard, ignoreCase);
-	}
-	
-	@Override
-	protected IScope getLocalElementsScope(IScope parent, final EObject context,
-			final EReference reference) {
-		IScope result = parent;
-		ISelectable allDescriptions = getAllDescriptions(context.eResource());
-		ScopeBasedSelectable parentSelectable = new ScopeBasedSelectable(parent);
-		QualifiedName name = getQualifiedNameOfLocalElement(context);
-		boolean ignoreCase = isIgnoreCase(reference);
-		if (context instanceof XtendFile) {
-			// explicitly add java.lang imports with correct import-selectable
-			List<ImportNormalizer> defaultImports = getDefaultImports();
-			result = createImportScope(result, defaultImports, parentSelectable, reference.getEReferenceType(), isIgnoreCase(reference));
-		}
-		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
-		if (!namespaceResolvers.isEmpty()) {
-			if (isRelativeImport() && name!=null) {
-				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
-				result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
-			}
-			result = createImportScope(result, namespaceResolvers, parentSelectable, reference.getEReferenceType(), isIgnoreCase(reference));
-		}
-		if (name!=null) {
-			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
-			result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
-		}
-		return result;
-	}
-	
-	@Override
-	protected boolean isRelativeImport() {
-		return false;
-	}
-	
-	@Override
-	protected ImportScope createImportScope(IScope parent, List<ImportNormalizer> namespaceResolvers, ISelectable importFrom, EClass type, boolean ignoreCase) {
-		return new ImportScope(namespaceResolvers, parent, importFrom, type, ignoreCase) {
-			@Override
-			protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
-				if (name.getSegmentCount() > 1)
-					return null;
-				return super.getSingleLocalElementByName(name);
-			}
-			
-			@Override
-			protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-				if (name.getSegmentCount() > 1)
-					return Collections.emptyList();
-				return super.getLocalElementsByName(name);
-			}
-		};
-	}
 }

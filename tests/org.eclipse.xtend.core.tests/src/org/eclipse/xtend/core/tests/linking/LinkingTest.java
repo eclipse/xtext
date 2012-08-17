@@ -254,6 +254,48 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertNotSame(typeParamDecl,paramType.getType());
 	}
 	
+	@Test public void testTypeParameterShadowsType_1() throws Exception {
+		XtendFunction func = (XtendFunction) file("class A {} class B { def <A> A foo(A x) {x}}")
+				.getXtendClasses().get(1).getMembers().get(0);
+		
+		JvmTypeReference returnType = func.getReturnType();
+		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
+		assertEquals("A", typeParamDecl.getIdentifier());
+		
+		JvmTypeParameter param = (JvmTypeParameter) func.getParameters().get(0).getParameterType().getType();
+		assertSame(typeParamDecl, param);
+	}
+	
+	@Test public void testTypeParameterShadowsType_2() throws Exception {
+		XtendFunction func = (XtendFunction) file("class A {} class B<A>  { def A foo(A x) {x}}")
+				.getXtendClasses().get(1).getMembers().get(0);
+		
+		JvmTypeReference returnType = func.getReturnType();
+		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
+		assertEquals("A", typeParamDecl.getIdentifier());
+		
+		JvmTypeParameter param = (JvmTypeParameter) func.getParameters().get(0).getParameterType().getType();
+		assertSame(typeParamDecl, param);
+	}
+	
+	@Test public void testTypeParameterShadowsType_3() throws Exception {
+		final XtendFile file = file("class A {} class B extends A  { def <A> A foo(A x) {x}}");
+		final XtendClass xtendClass = file.getXtendClasses().get(1);
+		
+		final JvmType extendedType = xtendClass.getSuperTypes().get(0).getType();
+		assertTrue(extendedType instanceof JvmGenericType);
+		
+		XtendFunction func = (XtendFunction) xtendClass.getMembers().get(0);
+		
+		JvmTypeReference returnType = func.getReturnType();
+		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
+		assertEquals("A", typeParamDecl.getIdentifier());
+		
+		JvmTypeParameter param = (JvmTypeParameter) func.getParameters().get(0).getParameterType().getType();
+		assertSame(typeParamDecl, param);
+		assertNotSame(extendedType, param);
+	}
+	
 	@Test public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { def String foo() {'hello world'} def String bar(String foo) {foo}}");
 		XtendClass xClass = file.getXtendClasses().get(0);
