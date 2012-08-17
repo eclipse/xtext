@@ -8867,11 +8867,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 {
                 int LA75_2 = input.LA(2);
 
-                if ( (LA75_2==EOF||(LA75_2>=RULE_ID && LA75_2<=RULE_DECIMAL)||LA75_2==21||(LA75_2>=23 && LA75_2<=27)||(LA75_2>=30 && LA75_2<=32)||(LA75_2>=35 && LA75_2<=38)||(LA75_2>=40 && LA75_2<=41)||(LA75_2>=43 && LA75_2<=44)||(LA75_2>=46 && LA75_2<=48)||(LA75_2>=51 && LA75_2<=53)||(LA75_2>=59 && LA75_2<=83)||(LA75_2>=85 && LA75_2<=104)||(LA75_2>=107 && LA75_2<=108)) ) {
-                    alt75=2;
-                }
-                else if ( (LA75_2==39) ) {
+                if ( (LA75_2==39) ) {
                     alt75=1;
+                }
+                else if ( (LA75_2==EOF||(LA75_2>=RULE_ID && LA75_2<=RULE_DECIMAL)||LA75_2==21||(LA75_2>=23 && LA75_2<=27)||(LA75_2>=30 && LA75_2<=32)||(LA75_2>=35 && LA75_2<=38)||(LA75_2>=40 && LA75_2<=41)||(LA75_2>=43 && LA75_2<=44)||(LA75_2>=46 && LA75_2<=48)||(LA75_2>=51 && LA75_2<=53)||(LA75_2>=59 && LA75_2<=83)||(LA75_2>=85 && LA75_2<=104)||(LA75_2>=107 && LA75_2<=108)) ) {
+                    alt75=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -12227,7 +12227,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXUnaryOperation"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4094:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4094:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
     public final EObject ruleXUnaryOperation() throws RecognitionException {
         EObject current = null;
 
@@ -12239,10 +12239,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4097:28: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:1: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4097:28: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:1: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:1: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:1: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             int alt90=2;
             int LA90_0 = input.LA(1);
 
@@ -12261,10 +12261,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             }
             switch (alt90) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:2: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:2: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:2: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:3: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXCastedExpression ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:2: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:3: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
                     {
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4098:3: ()
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4099:5: 
@@ -12313,19 +12313,19 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4119:2: ( (lv_operand_2_0= ruleXCastedExpression ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4120:1: (lv_operand_2_0= ruleXCastedExpression )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4119:2: ( (lv_operand_2_0= ruleXUnaryOperation ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4120:1: (lv_operand_2_0= ruleXUnaryOperation )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4120:1: (lv_operand_2_0= ruleXCastedExpression )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4121:3: lv_operand_2_0= ruleXCastedExpression
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4120:1: (lv_operand_2_0= ruleXUnaryOperation )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4121:3: lv_operand_2_0= ruleXUnaryOperation
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getXUnaryOperationAccess().getOperandXCastedExpressionParserRuleCall_0_2_0()); 
+                      	        newCompositeNode(grammarAccess.getXUnaryOperationAccess().getOperandXUnaryOperationParserRuleCall_0_2_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation8896);
-                    lv_operand_2_0=ruleXCastedExpression();
+                    pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXUnaryOperation8896);
+                    lv_operand_2_0=ruleXUnaryOperation();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -12338,7 +12338,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"operand",
                               		lv_operand_2_0, 
-                              		"XCastedExpression");
+                              		"XUnaryOperation");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -25411,7 +25411,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA82_acceptS =
         "\1\uffff\1\2\10\uffff\1\1";
     static final String DFA82_specialS =
-        "\2\uffff\1\0\1\3\1\2\1\1\1\4\1\7\1\5\1\6\1\uffff}>";
+        "\2\uffff\1\0\1\7\1\5\1\4\1\6\1\1\1\2\1\3\1\uffff}>";
     static final String[] DFA82_transitionS = {
             "\13\1\6\uffff\1\1\1\uffff\5\1\2\uffff\1\3\1\1\1\2\2\uffff\4"+
             "\1\1\uffff\2\1\1\uffff\2\1\1\uffff\3\1\2\uffff\3\1\5\uffff\12"+
@@ -25481,10 +25481,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA82_5 = input.LA(1);
+                        int LA82_7 = input.LA(1);
 
                          
-                        int index82_5 = input.index();
+                        int index82_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred11_InternalXtend()) ) {s = 10;}
@@ -25492,55 +25492,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index82_5);
+                        input.seek(index82_7);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA82_4 = input.LA(1);
-
-                         
-                        int index82_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred11_InternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index82_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA82_3 = input.LA(1);
-
-                         
-                        int index82_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred11_InternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index82_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA82_6 = input.LA(1);
-
-                         
-                        int index82_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred11_InternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index82_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA82_8 = input.LA(1);
 
                          
@@ -25555,7 +25510,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index82_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 3 : 
                         int LA82_9 = input.LA(1);
 
                          
@@ -25570,11 +25525,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index82_9);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
-                        int LA82_7 = input.LA(1);
+                    case 4 : 
+                        int LA82_5 = input.LA(1);
 
                          
-                        int index82_7 = input.index();
+                        int index82_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred11_InternalXtend()) ) {s = 10;}
@@ -25582,7 +25537,52 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index82_7);
+                        input.seek(index82_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA82_4 = input.LA(1);
+
+                         
+                        int index82_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred11_InternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index82_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA82_6 = input.LA(1);
+
+                         
+                        int index82_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred11_InternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index82_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA82_3 = input.LA(1);
+
+                         
+                        int index82_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred11_InternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index82_3);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -28516,7 +28516,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleXUnaryOperation_in_entryRuleXUnaryOperation8807 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXUnaryOperation8817 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpUnary_in_ruleXUnaryOperation8875 = new BitSet(new long[]{0x1000C808400070F0L,0x0000007F79488800L});
-    public static final BitSet FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation8896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXUnaryOperation8896 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation8925 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpUnary_in_entryRuleOpUnary8961 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpUnary8972 = new BitSet(new long[]{0x0000000000000002L});
