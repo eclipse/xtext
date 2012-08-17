@@ -45,7 +45,7 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 	}
 	
 	public IFeatureScopeSession newSession(Resource context) {
-		List<JvmType> literalClasses = implicitlyImportedTypes.getLiteralClasses(context);
+		List<JvmType> literalClasses = implicitlyImportedTypes.getStaticImportClasses(context);
 		List<JvmType> extensionClasses = implicitlyImportedTypes.getExtensionClasses(context);
 		return rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
 	}

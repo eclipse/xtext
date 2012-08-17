@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,8 +41,11 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  *
- * TODO JavaDoc, toString that lists the literal and extension classes
+ * Used to contribute methods from Java types as
+ * a) extension methods (see {@link #getExtensionClasses(Resource)}
+ * b) statically imported methods (see {@link #getStaticImportClasses(Resource)}
  */
 @Singleton
 public class ImplicitlyImportedTypes {
@@ -51,11 +53,17 @@ public class ImplicitlyImportedTypes {
 	@Inject
 	private TypeReferences typeReferences;
 	
-	public List<JvmType> getLiteralClasses(Resource context) {
-		List<Class<?>> classes = getLiteralClasses();
+	/**
+	 * @return all JvmType containing static methods which are implicitly imported
+	 */
+	public List<JvmType> getStaticImportClasses(Resource context) {
+		List<Class<?>> classes = getStaticImportClasses();
 		return getTypes(classes, context);
 	}
 
+	/**
+	 * @return all JvmTypes who's static methods are put on the scope of their first argument type (i.e. extension methods).
+	 */
 	public List<JvmType> getExtensionClasses(Resource context) {
 		List<Class<?>> classes = getExtensionClasses();
 		return getTypes(classes, context);
@@ -74,7 +82,7 @@ public class ImplicitlyImportedTypes {
 	/*
 	 * The list should be sorted since it allows for easier diff and merge
 	 */
-	protected List<Class<?>> getLiteralClasses() {
+	protected List<Class<?>> getStaticImportClasses() {
 		return Lists.<Class<?>> newArrayList(
 			CollectionLiterals.class,
 			InputOutput.class);
@@ -107,13 +115,4 @@ public class ImplicitlyImportedTypes {
 			StringExtensions.class);
 	}
 
-	public static void main(String[] args) {
-		List<Class<?>> classes = new ImplicitlyImportedTypes().getExtensionClasses();
-		List<String> strings = Lists.newArrayList();
-		for(Class<?> clazz: classes) {
-			strings.add(clazz.getSimpleName());
-		}
-		Collections.sort(strings);
-		for(String s: strings) System.out.println(s+ ".class,");
-	}
 }
