@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -39,10 +38,8 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -181,9 +178,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			if (isConstructorCallScope(reference)) {
 				return createConstructorCallScope(context, reference);
 			}
-			if (isTypeScope(reference)) {
-				return createTypeScope(context, reference);
-			}
 			return super.getScope(context, reference);
 		} catch (RuntimeException e) {
 			log.error("error during scoping", e);
@@ -195,56 +189,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 	}
 
-	protected IScope createTypeScope(EObject context, EReference reference) {
-		final IScope parentScope = super.getScope(context, reference);
-		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
-		if (logicalContainer != null) {
-			 return createTypeScope(logicalContainer, reference, parentScope);
-		}
-		return parentScope;
-	}
-	
-	protected IScope createTypeScope(JvmIdentifiableElement context, EReference reference, IScope parentScope) {
-		if (context == null)
-			return parentScope;
-		if (context.eContainer() instanceof JvmIdentifiableElement) {
-			parentScope = createTypeScope((JvmIdentifiableElement) context.eContainer(), reference, parentScope);
-		}
-		if (context instanceof JvmGenericType) {
-			JvmGenericType genericType = (JvmGenericType) context;
-			List<IEObjectDescription> descriptions = Lists.newArrayList();
-			if (genericType.getSimpleName() != null) {
-				QualifiedName inferredDeclaringTypeName = QualifiedName.create(genericType.getSimpleName());
-				descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, genericType));
-			}
-			for (JvmTypeParameter param : genericType.getTypeParameters()) {
-				if (param.getSimpleName() != null) {
-					QualifiedName paramName = QualifiedName.create(param.getSimpleName());
-					descriptions.add(EObjectDescription.create(paramName, param));
-				}
-			}
-			if (!descriptions.isEmpty())
-				return MapBasedScope.createScope(parentScope, descriptions);
-		} else if (context instanceof JvmExecutable) {
-			JvmExecutable executable = (JvmExecutable) context;
-			List<IEObjectDescription> descriptions = null;
-			for (JvmTypeParameter param : executable.getTypeParameters()) {
-				if (param.getSimpleName() != null) {
-					if (descriptions == null)
-						descriptions = Lists.newArrayList();
-					QualifiedName paramName = QualifiedName.create(param.getSimpleName());
-					descriptions.add(EObjectDescription.create(paramName, param));
-				}
-			}
-			if (descriptions != null && !descriptions.isEmpty())
-				return MapBasedScope.createScope(parentScope, descriptions);
-		}
-		return parentScope;
-	}
-
-	protected boolean isTypeScope(EReference reference) {
-		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
-	}
 	
 	protected boolean isVisible(JvmFeature feature, JvmDeclaredType contextType) {
 		return visibilityService.isVisible(feature, contextType);
