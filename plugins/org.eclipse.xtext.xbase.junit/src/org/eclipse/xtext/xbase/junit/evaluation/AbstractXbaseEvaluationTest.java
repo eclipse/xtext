@@ -505,6 +505,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("-1","(-1).toString()");
 	}
 	
+	@Test public void testUnaryOperator_03() throws Exception {
+		assertEvaluatesTo(1,"- -1");
+	}
+	
+	@Test public void testUnaryOperator_04() throws Exception {
+		assertEvaluatesTo(true,"!!true");
+	}
+	
 	@Test public void testUpToOperator() throws Exception {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
