@@ -32,20 +32,10 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 	private ImplicitlyImportedTypes implicitlyImportedTypes;
 	
 	@Inject
-	private TypeScopeProvider typeScopeProvider;
-	
-	@Inject
 	private FeatureScopes featureScopeProvider;
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (isConstructorCallScope(reference)) {
-			return delegateGetScope(context, reference);
-		}
-		if (isTypeScope(reference)) {
-			IScope parent = delegateGetScope(context, reference);
-			return typeScopeProvider.createTypeScope(parent, context, reference);
-		}
 		if (isFeatureCallScope(reference)) {
 			// TODO use a valid instance of resolved types
 			IFeatureScopeSession session = newSession(context.eResource());
