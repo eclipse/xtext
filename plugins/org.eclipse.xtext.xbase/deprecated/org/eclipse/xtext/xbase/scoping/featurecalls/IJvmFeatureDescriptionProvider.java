@@ -19,6 +19,7 @@ import com.google.common.base.Function;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public interface IJvmFeatureDescriptionProvider {
 
 	@Override

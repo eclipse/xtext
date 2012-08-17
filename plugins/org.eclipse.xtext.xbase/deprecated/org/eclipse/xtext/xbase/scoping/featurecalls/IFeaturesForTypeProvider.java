@@ -15,6 +15,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 @ImplementedBy(DefaultFeaturesForTypeProvider.class)
 public interface IFeaturesForTypeProvider {
 	

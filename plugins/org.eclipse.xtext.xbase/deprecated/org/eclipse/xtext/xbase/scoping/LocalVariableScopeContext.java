@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
  * @see XbaseScopeProvider#createLocalVariableScopeContext(EObject, EReference, boolean, int)
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LocalVariableScopeContext {
 	private final EObject context;
 	private final EReference reference;

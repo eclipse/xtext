@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -92,7 +93,8 @@ import com.google.inject.util.Providers;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Refactored feature scoping to acceptor pattern
  */
-public class XbaseScopeProvider extends XtypeScopeProvider {
+@Deprecated
+public class XbaseScopeProvider extends DelegatingScopeProvider {
 
 	protected static final int DEFAULT_MEMBER_CALL_PRIORITY = 0;
 	protected static final int DEFAULT_IT_PRIORITY = 10;

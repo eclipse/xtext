@@ -22,6 +22,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 @Singleton
 public class JvmFeatureSignatureProvider {
 	

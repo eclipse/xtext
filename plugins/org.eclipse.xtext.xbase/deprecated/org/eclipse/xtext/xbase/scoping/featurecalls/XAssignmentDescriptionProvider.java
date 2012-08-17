@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.IAcceptor;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class XAssignmentDescriptionProvider extends DefaultJvmFeatureDescriptionProvider {
 	
 	@Override

@@ -17,6 +17,7 @@ import com.google.common.base.Function;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LazyJvmFeatureScopeStrategy {
 
 	private final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider;

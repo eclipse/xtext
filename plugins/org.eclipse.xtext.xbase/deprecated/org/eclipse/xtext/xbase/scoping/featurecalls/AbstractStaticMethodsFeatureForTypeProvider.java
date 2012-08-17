@@ -33,6 +33,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public abstract class AbstractStaticMethodsFeatureForTypeProvider extends AbstractFeaturesForTypeProvider {
 
 	@Inject

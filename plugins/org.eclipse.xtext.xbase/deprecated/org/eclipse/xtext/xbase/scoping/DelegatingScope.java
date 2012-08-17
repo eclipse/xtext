@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class DelegatingScope extends JvmFeatureScope {
 	
 	private IScope delegate = IScope.NULLSCOPE;

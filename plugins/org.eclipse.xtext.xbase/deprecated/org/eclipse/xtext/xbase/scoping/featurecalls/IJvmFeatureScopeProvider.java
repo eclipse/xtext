@@ -26,6 +26,7 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 @ImplementedBy(JvmFeatureScopeProvider.class)
 public interface IJvmFeatureScopeProvider {
 

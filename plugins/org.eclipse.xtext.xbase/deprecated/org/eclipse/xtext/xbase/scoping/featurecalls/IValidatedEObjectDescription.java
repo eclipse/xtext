@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public interface IValidatedEObjectDescription extends IEObjectDescription {
 
 	boolean isValid();

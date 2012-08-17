@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="emf-gen"/>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="generator"/>
+	<classpathentry kind="src" path="deprecated"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

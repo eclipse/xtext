@@ -28,6 +28,7 @@ import com.google.inject.Provider;
  *  
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class FilteredDelegatingScope extends DelegatingScope implements Predicate<IEObjectDescription>{
 	
 	private final boolean onlyVisibleAndValidStaticState;

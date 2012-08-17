@@ -26,6 +26,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
 	private static enum CheckState {

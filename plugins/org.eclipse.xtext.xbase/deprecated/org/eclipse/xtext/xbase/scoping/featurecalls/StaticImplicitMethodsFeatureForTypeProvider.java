@@ -58,6 +58,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	@Singleton

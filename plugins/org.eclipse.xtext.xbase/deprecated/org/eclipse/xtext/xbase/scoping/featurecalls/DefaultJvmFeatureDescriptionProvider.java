@@ -32,6 +32,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider, IFeaturesForTypeProvider {
 	
 	protected static class ShadowingAwareAcceptor implements IAcceptor<JvmFeatureDescription> {
