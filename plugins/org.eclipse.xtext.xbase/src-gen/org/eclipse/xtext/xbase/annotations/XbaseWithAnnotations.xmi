@@ -580,7 +580,7 @@
             </terminal>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.20"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.20"/>

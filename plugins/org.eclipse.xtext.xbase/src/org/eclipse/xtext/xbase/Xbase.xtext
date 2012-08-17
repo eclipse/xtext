@@ -82,7 +82,7 @@ OpMulti:
 	'*' | '**' | '/' | '%';
 
 XUnaryOperation returns XExpression:
-	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XCastedExpression
+	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XUnaryOperation
 	| XCastedExpression;
 
 OpUnary:

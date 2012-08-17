@@ -210,7 +210,7 @@ ruleOpMulti :
 
 // Rule XUnaryOperation
 ruleXUnaryOperation :
-	ruleOpUnary ruleXCastedExpression |
+	ruleOpUnary ruleXUnaryOperation |
 	ruleXCastedExpression
 ;
 
