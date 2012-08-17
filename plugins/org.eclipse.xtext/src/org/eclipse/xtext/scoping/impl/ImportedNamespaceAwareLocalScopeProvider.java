@@ -159,10 +159,17 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		if (hasWildCard) {
 			if (importedNamespace.getSegmentCount() <= 1)
 				return null;
-			return new ImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
+			return doCreateImportNormalizer(importedNamespace, true, ignoreCase);
 		} else {
-			return new ImportNormalizer(importedNamespace, false, ignoreCase);
+			return doCreateImportNormalizer(importedNamespace, false, ignoreCase);
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard, boolean ignoreCase) {
+		return new ImportNormalizer(importedNamespace.skipLast(1), wildcard, ignoreCase);
 	}
 
 	protected IScope getLocalElementsScope(IScope parent, final EObject context,
