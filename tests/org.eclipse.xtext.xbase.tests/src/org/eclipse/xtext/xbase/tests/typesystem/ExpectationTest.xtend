@@ -8,18 +8,16 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import java.util.List
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.xbase.XNullLiteral
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 
 import static org.junit.Assert.*
 
@@ -32,7 +30,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Inject ExpectationTestingTypeComputer typeComputer
 	
-	List<ITypeExpectation> expectations
+	List<String> expectations
+	List<ITypeExpectation> finalExpectations
 	
 	boolean pendingAssert = false;
 	
@@ -47,16 +46,23 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	def types(String... names) {
 		assertTrue(pendingAssert)
 		pendingAssert = false
-		assertEquals(expectations.map[getExpectedType?.simpleName].toString, names.size, expectations.size)
-		assertEquals(names.toSet as Object, expectations.map[getExpectedType?.simpleName].toSet)
+		assertEquals(expectations.toString, names.size, expectations.size)
+		assertEquals(names.toSet as Object, expectations.toSet)
+		return this
+	}
+	
+	def finalizedAs(String... names) {
+		assertFalse(pendingAssert)
+		assertEquals(finalExpectations.map[ expectedType?.simpleName ].toString, names.size, expectations.size)
+		assertEquals(names.toSet as Object, finalExpectations.map[ expectedType?.simpleName ].toSet)
 		return this
 	}
 	
 	def nothing() {
 		assertTrue(pendingAssert)
 		pendingAssert = false
-		assertEquals(1, expectations.size)
-		val expectation = expectations.head
+		assertEquals(1, finalExpectations.size)
+		val expectation = finalExpectations.head
 		assertTrue(expectation.isNoTypeExpectation)
 		assertTrue(expectation.isVoidTypeAllowed)
 		assertNull(expectation.getExpectedType)
@@ -66,8 +72,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	def notVoid() {
 		assertTrue(pendingAssert)
 		pendingAssert = false
-		assertEquals(1, expectations.size)
-		val expectation = expectations.head
+		assertEquals(1, finalExpectations.size)
+		val expectation = finalExpectations.head
 		assertFalse(expectation.isNoTypeExpectation)
 		assertFalse(expectation.isVoidTypeAllowed)
 		assertNull(expectation.getExpectedType)
@@ -80,6 +86,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false
 		resolver.typeComputer = typeComputer
 		expectations = newArrayList
+		finalExpectations = newArrayList
 	}
 	
 	@After
@@ -87,12 +94,14 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		assertFalse(pendingAssert)
 		pendingAssert = false
 		expectations = null
+		finalExpectations = null
 		typeComputer.test = null
 		resolver.typeComputer = null
 	}
 	
 	def void recordExpectation(ITypeComputationState state) {
-		expectations += state.getImmediateExpectations	
+		finalExpectations += state.immediateExpectations
+		expectations += state.immediateExpectations.map [ expectedType?.simpleName ]	
 	}
 
 	@Test
@@ -127,22 +136,40 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testFeatureCallArgument_02() {
-		"newArrayList.<String>findFirst(null)".expects.types('Function1<? super String, Boolean>')
+		"newArrayList.<String>findFirst(null)".expects
+			.types('Function1<? super String, Boolean>')
+			.finalizedAs('Function1<? super String, Boolean>')
 	}
 	
 	@Test
 	def void testFeatureCallArgument_03() {
-		"newArrayList.findFirst(null)".expects.types('Function1<? super Unbound[T], Boolean>')
+		"newArrayList.findFirst(null)".expects
+			.types('Function1<? super Unbound[T], Boolean>')
+			.finalizedAs('Function1<? super Object, Boolean>')
 	}
 	
 	@Test
 	def void testFeatureCallArgument_04() {
-		"<String>newArrayList.findFirst(null)".expects.types('Function1<? super String, Boolean>')
+		"<String>newArrayList.findFirst(null)".expects
+			.types('Function1<? super Unbound[T], Boolean>')
+			.finalizedAs('Function1<? super String, Boolean>')
 	}
 	
 	@Test
 	def void testFeatureCallArgument_05() {
-		"newArrayList('').findFirst(null)".expects.types('Function1<? super String, Boolean>')
+		"newArrayList('').findFirst(null)".expects
+			.types('Function1<? super Unbound[T], Boolean>')
+			.finalizedAs('Function1<? super String, Boolean>')
+	}
+	
+	@Test
+	def void testFeatureCallArgument_06() {
+		"{
+			val (Iterable<CharSequence>)=>void f
+			f.apply(null)
+		}".expects
+			.types('Iterable<CharSequence>')
+			.finalizedAs('Iterable<CharSequence>')
 	}
 	
 	@Test
@@ -152,30 +179,28 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO Add synonyms to expectation, resolve")
 	def void testFeatureCallVarArgument_01() {
-		"newArrayList(null)".expects.types('unbound/T')
+		"newArrayList(null)".expects.types('Unbound[T]', 'Unbound[T][]').finalizedAs("Object", "Object[]")
 	}
 	
 	@Test
 	def void testFeatureCallVarArgument_02() {
-		"newArrayList(null, '')".expects.types('String')
+		"newArrayList(null, '')".expects.types('Unbound[T]').finalizedAs("String")
 	}
 	
 	@Test
-	@Ignore("TODO Propagate expectation")
 	def void testFeatureCallVarArgument_03() {
-		"{ val Iterable<String> iterable = newArrayList(null) }".expects.types('String[]', 'String')
+		"{ val Iterable<String> iterable = newArrayList(null) }".expects
+			.types('Unbound[T][]', 'Unbound[T]')
+			.finalizedAs('String[]', 'String')
 	}
 	
 	@Test
-	@Ignore("TODO Add synonyms to expectation")
 	def void testForLoop_01() {
-		"for(int x: null) {}".expects.types('int[]', 'Iterable<Integer>')
+		"for(int x: null) {}".expects.types('int[]').finalizedAs('int[]')
 	}
 }
 
-@Singleton
 class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	
 	@Property

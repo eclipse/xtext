@@ -321,11 +321,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 
 	protected LinkingTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
-		return new LinkingTypeComputationState(state, expectedType, null);
+		return new LinkingTypeComputationState(state, expectedType.getLowerBoundSubstitute(), null);
 	}
 	
 	protected LinkingTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
-		return new LinkingTypeComputationState(state, expectedType, ConformanceHint.VAR_ARG);
+		return new LinkingTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceHint.VAR_ARG);
 	}
 	
 	protected JvmTypeParameter getTypeParameter(@Nullable LightweightTypeReference referenceToTypeParameter) {

@@ -164,10 +164,64 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
 	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testBlockExpression_03() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_b() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_c() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_d() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
 	@Ignore("timeout")
 	@Test
 	override testFeatureCall_15_d_2() throws Exception {
 		fail("timeout")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_e_2() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_f() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_f_2() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_g() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_g_2() throws Exception {
+		fail("not a timeout but too slow")
 	}
 	
 	@Ignore("timeout")
@@ -192,6 +246,18 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	@Test
 	override testFeatureCall_15_i_2() throws Exception {
 		fail("timeout")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_i_3() throws Exception {
+		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_15_i_4() throws Exception {
+		fail("not a timeout but too slow")
 	}
 	
 	@Ignore("timeout")
@@ -252,6 +318,12 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	@Test
 	override testFeatureCall_15_n_2() throws Exception {
 		fail("timeout")
+	}
+	
+	@Ignore("not a timeout but too slow")
+	@Test
+	override testFeatureCall_25_d() throws Exception {
+		fail("not a timeout but too slow")
 	}
 	
 	@Ignore("fails in old implementation") @Test override testFeatureCall_03_b() throws Exception {

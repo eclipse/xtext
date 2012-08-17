@@ -35,9 +35,9 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> parameterMapping = implementation.rawGetTypeParameterMapping();
 		for(Map.Entry<JvmTypeParameter, LightweightBoundTypeArgument> entry: parameterMapping.entries()) {
 			LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(entry.getKey());
-			if (boundTypeArgument != null) {
+			if (boundTypeArgument != null && boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
 				UnboundTypeReference typeReference = (UnboundTypeReference) boundTypeArgument.getTypeReference();
-				if (!typeReference.isResolved()) {
+				if (!typeReference.internalIsResolved()) {
 					typeReference.acceptHint(entry.getValue());
 				}
 			}

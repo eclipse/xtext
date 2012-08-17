@@ -117,8 +117,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			if (leftReference.isType(Object.class))
 				return TypeConformanceResult.SUCCESS;
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion);
-			for(LightweightTypeReference rightSuperTypes: rightReference.getAllSuperTypes()) {
-				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperTypes, paramWithoutSuperTypeCheck);
+			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
+				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
 					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
 				}
@@ -374,6 +374,11 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.SUCCESS;
 		if (left.isType(Object.class))
 			return TypeConformanceResult.SUCCESS;
+		right.tryResolve();
+		LightweightTypeReference resolvedTo = right.getResolvedTo();
+		if (resolvedTo != null) {
+			return conformanceComputer.isConformant(left, right, param);
+		}
 		return TypeConformanceResult.FAILED;
 	}
 

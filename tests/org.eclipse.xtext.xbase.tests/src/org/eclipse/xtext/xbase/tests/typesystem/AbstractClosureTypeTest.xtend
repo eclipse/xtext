@@ -533,12 +533,10 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			"(String)=>boolean", "(Boolean)=>boolean")
 	}
 	
-	@Ignore("Unary operation")
 	@Test def void testFeatureCall_44() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| !!b )".resolvesClosuresTo(
 			"(String)=>boolean", "(Boolean)=>boolean")
 	}
-	@Ignore("Unary operation")
 	@Test def void testFeatureCall_45() throws Exception {
 		"newArrayList('').map(s|s.length + 1 == 5).map(b| !!b ).head".resolvesClosuresTo(
 			"(String)=>boolean", "(Boolean)=>boolean")
