@@ -17,6 +17,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class JvmFeatureScope extends SimpleScope {
 	
 	private String scopeDescription;

@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LocalVarDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
 	private String issueCode;

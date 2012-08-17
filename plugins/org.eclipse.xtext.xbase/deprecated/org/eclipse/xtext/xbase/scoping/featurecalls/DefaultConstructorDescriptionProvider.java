@@ -18,6 +18,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class DefaultConstructorDescriptionProvider extends DefaultJvmFeatureDescriptionProvider {
 
 	@Override

@@ -26,6 +26,7 @@ import com.google.common.collect.Maps;
  * @see FilteredDelegatingScope
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LazyJvmFeatureScope extends JvmFeatureScope {
 
 	private final LazyJvmFeatureScopeStrategy strategy;

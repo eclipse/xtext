@@ -44,6 +44,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 
 	@Inject

@@ -31,6 +31,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
+@Deprecated
 public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescriptionProvider {
 
 	@Inject
