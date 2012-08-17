@@ -843,30 +843,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
          }".resolvesTo("Map<Integer, String>")
 	}
 	
-//	@Test def void testBlockExpression_04() throws Exception {
-//		for(j : 1 .. 20) {
-//			var input = "{ val s1 = ''\n"
-//			val max = 1000
-//			for(i : 1 .. max) {
-//				input = input + " val s" + (i+1) + " = s" + i + "\n"
-//			}
-//			input = input + " s" + (max + 1) + "}"
-//			input.resolvesTo2("String")
-//		}
-//	}
-//	
-//	@Test def void testBlockExpression_05() throws Exception {
-//		for(j : 1 .. 20) {
-//			var input = "{ val s1 = ''\n"
-//			val max = 1000
-//			for(i : 1 .. max) {
-//				input = input + " val s" + (i+1) + " = s" + i + "\n"
-//			}
-//			input = input + " s" + (max + 1) + "}"
-//			input.resolvesTo2("String")
-//		}
-//	}
-	
 	@Test def void testConstructorCall() throws Exception {
 		"new java.util.ArrayList<String>()".resolvesTo("ArrayList<String>")
 		"new java.util.HashMap<String,Boolean>".resolvesTo("HashMap<String, Boolean>");
@@ -919,6 +895,26 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testClassNewInstance() throws Exception {
 		"typeof(String).newInstance".resolvesTo("String")
+	}
+	
+	@Test def void testVarArgs_01() throws Exception {
+		"newArrayList(new Double('-20'), new Integer('20'))".resolvesTo("ArrayList<Number & Comparable<?>>");
+	}
+	
+	@Test def void testVarArgs_02() throws Exception {
+		"newArrayList(if (true) new Double('-20') else new Integer('20'))".resolvesTo("ArrayList<Number & Comparable<?>>");
+	}
+	
+	@Test def void testVarArgs_03() throws Exception {
+		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))".resolvesTo("ArrayList<Number & Comparable<?>>");
+	}
+	
+	@Test def void testVarArgs_04() throws Exception {
+		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))".resolvesTo("ArrayList<Number & Comparable<?>>");
+	}
+	
+	@Test def void testVarArgs_05() throws Exception {
+		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))".resolvesTo("ArrayList<Number & Comparable<?>>");
 	}
 
 	@Test def void testFeatureCall_01() throws Exception {

@@ -200,18 +200,35 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {
-		List<XExpression> expressions = object.getExpressions();
-		if (!expressions.isEmpty()) {
-			for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
-				ITypeComputationState expressionState = state.withoutImmediateExpectation(); // no expectation
-				expressionState.computeTypes(expression);
-				if (expression instanceof XVariableDeclaration) {
-					state.addLocalToCurrentScope((XVariableDeclaration)expression);
+		for (ITypeExpectation expectation: state.getImmediateExpectations()) {
+			LightweightTypeReference expectedType = expectation.getExpectedType();
+			if (expectedType != null && expectedType.isPrimitiveVoid()) {
+				List<XExpression> expressions = object.getExpressions();
+				if (!expressions.isEmpty()) {
+					for(XExpression expression: expressions) {
+						ITypeComputationState expressionState = state.withoutImmediateExpectation(); // no expectation
+						expressionState.computeTypes(expression);
+						if (expression instanceof XVariableDeclaration) {
+							state.addLocalToCurrentScope((XVariableDeclaration)expression);
+						}
+					}
+				}
+				expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+			} else {
+				List<XExpression> expressions = object.getExpressions();
+				if (!expressions.isEmpty()) {
+					for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
+						ITypeComputationState expressionState = state.withoutImmediateExpectation();
+						expressionState.computeTypes(expression);
+						if (expression instanceof XVariableDeclaration) {
+							state.addLocalToCurrentScope((XVariableDeclaration)expression);
+						}
+					}
+					state.computeTypes(IterableExtensions.last(expressions));
+				} else {
+					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
 			}
-			state.computeTypes(IterableExtensions.last(expressions));
-		} else {
-			state.acceptActualType(new AnyTypeReference(state.getReferenceOwner()));
 		}
 	}
 

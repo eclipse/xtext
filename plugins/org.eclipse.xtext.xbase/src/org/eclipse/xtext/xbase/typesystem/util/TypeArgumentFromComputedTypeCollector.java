@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -76,6 +77,12 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 					acceptHint(declaration, reference);
 				}
 			}
+			
+			@Override
+			protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
+				doVisitTypeReference(reference, param);
+			}
+			
 			@Override
 			protected void doVisitWildcardTypeReference(WildcardTypeReference reference,
 					UnboundTypeReference declaration) {
