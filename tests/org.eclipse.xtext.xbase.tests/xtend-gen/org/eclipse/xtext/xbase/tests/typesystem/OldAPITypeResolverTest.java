@@ -104,10 +104,64 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
     Assert.assertNotNull(_plus_1, _identifier);
   }
   
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testBlockExpression_03() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_b() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_c() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_d() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
   @Ignore(value = "timeout")
   @Test
   public void testFeatureCall_15_d_2() throws Exception {
     Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_e_2() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_f() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_f_2() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_g() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_g_2() throws Exception {
+    Assert.fail("not a timeout but too slow");
   }
   
   @Ignore(value = "timeout")
@@ -132,6 +186,18 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Test
   public void testFeatureCall_15_i_2() throws Exception {
     Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_i_3() throws Exception {
+    Assert.fail("not a timeout but too slow");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_15_i_4() throws Exception {
+    Assert.fail("not a timeout but too slow");
   }
   
   @Ignore(value = "timeout")
@@ -192,6 +258,12 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Test
   public void testFeatureCall_15_n_2() throws Exception {
     Assert.fail("timeout");
+  }
+  
+  @Ignore(value = "not a timeout but too slow")
+  @Test
+  public void testFeatureCall_25_d() throws Exception {
+    Assert.fail("not a timeout but too slow");
   }
   
   @Ignore(value = "fails in old implementation")

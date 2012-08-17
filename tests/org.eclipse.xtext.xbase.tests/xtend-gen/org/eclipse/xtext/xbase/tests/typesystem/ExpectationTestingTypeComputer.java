@@ -1,12 +1,10 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.inject.Singleton;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTest;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 
-@Singleton
 @SuppressWarnings("all")
 public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
   private ExpectationTest _test;

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -213,18 +214,21 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
-		// TODO Auto-generated method stub
-		return super.getAllHints(handle);
-	}
-	
-	@Override
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
 		List<LightweightBoundTypeArgument> result = super.getHints(handle);
-		if (result.size() == 1 && isResolved(handle)) {
+		if (result.size() == 1 && super.isResolved(handle)) {
 			return result;
 		}
 		List<LightweightBoundTypeArgument> parentHints = getParent().getHints(handle);
+		if (parentHints.size() == 1 && getParent().isResolved(handle)) {
+			LightweightBoundTypeArgument parentHint = parentHints.get(0);
+			LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+					parentHint.getTypeReference().copyInto(getReferenceOwner()), 
+					parentHint.getSource(), parentHint.getOrigin(), 
+					parentHint.getDeclaredVariance(), 
+					parentHint.getActualVariance());
+			return Collections.singletonList(copy);
+		}
 		List<LightweightBoundTypeArgument> withParentHints = Lists.newArrayListWithCapacity(parentHints.size() + result.size());
 		for(LightweightBoundTypeArgument parentHint: parentHints) {
 			if (parentHint.getTypeReference() == null) {

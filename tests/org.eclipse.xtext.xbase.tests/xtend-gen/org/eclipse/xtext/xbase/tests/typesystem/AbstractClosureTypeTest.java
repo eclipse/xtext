@@ -600,14 +600,12 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
       "(String)=>boolean", "(Boolean)=>boolean");
   }
   
-  @Ignore(value = "Unary operation")
   @Test
   public void testFeatureCall_44() throws Exception {
     this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| !!b )", 
       "(String)=>boolean", "(Boolean)=>boolean");
   }
   
-  @Ignore(value = "Unary operation")
   @Test
   public void testFeatureCall_45() throws Exception {
     this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| !!b ).head", 
