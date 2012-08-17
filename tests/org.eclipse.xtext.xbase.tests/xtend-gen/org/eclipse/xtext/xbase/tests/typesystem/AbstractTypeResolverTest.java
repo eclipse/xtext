@@ -931,6 +931,31 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testVarArgs_01() throws Exception {
+    this.resolvesTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testVarArgs_02() throws Exception {
+    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testVarArgs_03() throws Exception {
+    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testVarArgs_04() throws Exception {
+    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testVarArgs_05() throws Exception {
+    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
   public void testFeatureCall_01() throws Exception {
     this.resolvesTo("\'foo\'.length", "int");
   }

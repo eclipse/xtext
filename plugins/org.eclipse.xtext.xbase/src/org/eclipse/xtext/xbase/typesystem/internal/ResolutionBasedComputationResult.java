@@ -51,5 +51,10 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 			return EnumSet.noneOf(ConformanceHint.class);
 		return typeData.getConformanceHints();
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Result %s for %s", getActualExpressionType(), expression);
+	}
 
 }

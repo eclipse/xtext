@@ -41,9 +41,9 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 			for(LightweightTypeReference typeArgument: parameterTypes) {
 				result.addParameterType(typeArgument.copyInto(owner));
 			}
-			if (returnType != null) {
-				result.returnType = returnType.copyInto(owner);
-			}
+		}
+		if (returnType != null) {
+			result.returnType = returnType.copyInto(owner);
 		}
 		return result;
 	}

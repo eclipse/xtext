@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.conformance;
+package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,15 +23,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -130,9 +123,13 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		protected List<JvmType> doVisitUnboundTypeReference(UnboundTypeReference reference, ResourceSet resourceSet) {
-			if (!reference.getAllHints().isEmpty()) {
-				LightweightTypeReference resolved = reference.resolve();
-				return resolved.accept(this, resourceSet);
+			List<LightweightBoundTypeArgument> hints = reference.getAllHints();
+			if (!hints.isEmpty()) {
+				if (reference.resolveWithHints(hints)) {
+					LightweightTypeReference resolvedTo = reference.getResolvedTo();
+					if (resolvedTo != null)
+						return resolvedTo.accept(this, resourceSet);
+				}
 			}
 			JvmTypeParameter typeParameter = reference.getTypeParameter();
 			return getRawTypesFromConstraints(reference.getOwner(), typeParameter.getConstraints(), resourceSet);
