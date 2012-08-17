@@ -51,6 +51,7 @@ import org.junit.Test;
 
 import test.ExtensionMethods;
 import test.SampleBuilder;
+import test.SuperClass;
 import testdata.Properties1;
 
 import com.google.common.base.Function;
@@ -2901,5 +2902,9 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertFalse(newInstance.hashCode() == fourthInstance.hashCode());
 	}
 	
-	
+	@Test public void testPackageScope() throws Exception {
+		Class<?> code = compileJavaCode("test.Bar", "package test class Bar extends SuperClass {}");
+		SuperClass sc = (SuperClass) code.newInstance();
+		assertNotNull(sc);
+	}
 }
