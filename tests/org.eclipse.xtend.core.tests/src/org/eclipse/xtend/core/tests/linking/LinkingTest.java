@@ -296,6 +296,24 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertNotSame(extendedType, param);
 	}
 	
+	@Test public void testTypeParameterShadowsType_4() throws Exception {
+		final XtendFile file = file("class B<A>  { def A foo(A x) {x} def <A> A foo(A x) {x}}");
+		final XtendClass xtendClass = file.getXtendClasses().get(0);
+		
+		XtendFunction func1 = (XtendFunction) xtendClass.getMembers().get(0);
+		
+		
+		XtendFunction func2 = (XtendFunction) xtendClass.getMembers().get(1);
+		
+		JvmTypeParameter classTypeParam = (JvmTypeParameter) func1.getReturnType().getType();
+		assertTrue(classTypeParam.getDeclarator() instanceof JvmGenericType);
+		assertSame(classTypeParam, func1.getParameters().get(0).getParameterType().getType());
+		
+		JvmTypeParameter funcTypeParam = (JvmTypeParameter) func2.getReturnType().getType();
+		assertTrue(funcTypeParam.getDeclarator() instanceof JvmOperation);
+		assertSame(funcTypeParam, func2.getParameters().get(0).getParameterType().getType());
+	}
+	
 	@Test public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { def String foo() {'hello world'} def String bar(String foo) {foo}}");
 		XtendClass xClass = file.getXtendClasses().get(0);
