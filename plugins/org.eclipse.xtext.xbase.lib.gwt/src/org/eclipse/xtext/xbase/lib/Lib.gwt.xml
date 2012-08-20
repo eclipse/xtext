@@ -6,4 +6,5 @@
 	<source path=""/>
 	<source path="internal"/>
 	<source path="util"/>
+	<super-source path="super"/>
 </module>
