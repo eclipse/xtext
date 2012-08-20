@@ -311,7 +311,6 @@ public class IterableExtensions {
 	 *            the predicate. May not be <code>null</code>.
 	 * @return an iterable that contains only the elements that fulfill the predicate. Never <code>null</code>.
 	 */
-	@GwtIncompatible("Class.isInstance")
 	@Pure
 	public static <T> Iterable<T> filter(Iterable<T> unfiltered, Function1<? super T, Boolean> predicate) {
 		return Iterables.filter(unfiltered, new BooleanFunctionDelegate<T>(predicate));
