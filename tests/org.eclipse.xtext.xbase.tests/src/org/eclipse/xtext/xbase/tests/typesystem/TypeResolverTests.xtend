@@ -37,6 +37,9 @@ import org.junit.Test
 import org.junit.rules.Timeout
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XbasePackage
 
 /**
  * @author Sebastian Zarnekow
@@ -56,12 +59,32 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 						assertIdentifiableTypeIsResolved(content, resolvedTypes)
 					}
 				}
+				XAbstractFeatureCall: {
+					assertExpressionTypeIsResolved(content, resolvedTypes)
+					if (content.implicitReceiver != null) {
+						assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
+					}
+				}
 				XExpression: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
 				}
 				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
 					assertIdentifiableTypeIsResolved(content, resolvedTypes)
+				}
+			}
+		}
+		for(content: xExpression.eAllContents.toIterable) {
+			switch(content) {
+				XConstructorCall: {
+					val constructor = content.eGet(XbasePackage$Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR, false) as InternalEObject
+					assertNotNull(content.toString, constructor)
+					assertFalse(content.toString, constructor.eIsProxy())
+				}
+				XAbstractFeatureCall: {
+					val feature = content.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
+					assertNotNull(content.toString, feature)
+					assertFalse(content.toString, feature.eIsProxy())
 				}
 			}
 		}

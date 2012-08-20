@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Map;
+
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -28,6 +32,13 @@ public class RootResolvedTypes extends ResolvedTypes {
 	public void resolveUnboundTypeParameters() {
 		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
 			unbound.resolve();
+		}
+	}
+
+	public void resolveProxies() {
+		Map<XExpression, ILinkingCandidate<?>> candidates = basicGetLinkingCandidates();
+		for(ILinkingCandidate<?> candidate: candidates.values()) {
+			candidate.resolveLinkingProxy();
 		}
 	}
 

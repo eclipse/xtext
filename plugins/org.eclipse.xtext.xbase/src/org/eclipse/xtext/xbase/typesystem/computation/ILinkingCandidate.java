@@ -23,6 +23,8 @@ public interface ILinkingCandidate<Candidate extends ILinkingCandidate<Candidate
 	
 	void apply();
 	
+	void resolveLinkingProxy();
+	
 	boolean isPreferredOver(Candidate other);
 	
 	JvmIdentifiableElement getFeature();
