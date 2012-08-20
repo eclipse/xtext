@@ -565,7 +565,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setSimpleName(method.getName());
 		setVisibility(result, method.getModifiers());
 
-		IMethod javaMethod = (IMethod) method.getJavaElement();
+		IMethod javaMethod = null;
+		try {
+			javaMethod = (IMethod) method.getJavaElement();
+		} catch(IllegalArgumentException e) {
+			log.debug("Cannot locate javaMethod for: " + fqName);
+		}
 		String[] parameterNames = fastGetParameterNames(javaMethod);
 		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {

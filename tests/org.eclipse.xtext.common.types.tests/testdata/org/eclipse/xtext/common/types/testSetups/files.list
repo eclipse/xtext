@@ -28,5 +28,6 @@ TestAnnotationWithDefaults.java.txt
 TestAnnotationWithStringDefault.java.txt
 TestEnum.java.txt
 TestScenario.java.txt
+TypeParamEndsWithDollar.java.txt
 TypeWithInnerAnnotation.java.txt
 TypeWithInnerEnum.java.txt
