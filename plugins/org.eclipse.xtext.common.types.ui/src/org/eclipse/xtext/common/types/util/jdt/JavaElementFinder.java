@@ -160,8 +160,18 @@ public class JavaElementFinder implements IJavaElementFinder {
 				String parameterType = parameterTypes[i];
 				String readable = toQualifiedRawTypeName(parameterType, declaringType);
 				String qualifiedParameterType = formalParameter.getParameterType().getType().getQualifiedName('.');
-				if (!readable.equals(qualifiedParameterType))
-					match = false;
+				if (!readable.equals(qualifiedParameterType)) {
+					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=387576
+					if (qualifiedParameterType.endsWith("$") && qualifiedParameterType.startsWith(readable)) {
+						for(int c = readable.length(); c < qualifiedParameterType.length() && match; c++) {
+							if (qualifiedParameterType.charAt(c) != '$') {
+								match = false;
+							}
+						}
+					} else {
+						match = false;
+					}
+				}
 			}
 			return match;
 		}

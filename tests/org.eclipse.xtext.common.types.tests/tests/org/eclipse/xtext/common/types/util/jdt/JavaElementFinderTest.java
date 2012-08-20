@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
+import org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -81,6 +82,18 @@ public class JavaElementFinderTest extends Assert {
 	
 	@Test public void testCollectionsReverse() throws Exception {
 		doTestFindMethod(Collections.class, "reverse", 1);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_01() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function1", 1);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_02() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function2", 2);
+	}
+	
+	@Test public void testTypeParamEndsWithDollar_03() throws Exception {
+		doTestFindMethod(TypeParamEndsWithDollar.class, "function3", 1);
 	}
 
 	protected void doTestFindMethod(Class<?> declaringType, String methodName, int numberOfParameters) {

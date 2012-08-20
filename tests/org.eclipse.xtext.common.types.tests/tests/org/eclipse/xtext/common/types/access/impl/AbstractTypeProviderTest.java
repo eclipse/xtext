@@ -2425,4 +2425,48 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		getAndResolveAllFragments(resource);
 		recomputeAndCheckIdentifiers(resource);
 	}
+	
+	@Test
+	public void testFindTypeByName_TypeParamEndsWithDollar() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test
+	public void testTypeParamEndsWithDollar_01() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation function = (JvmOperation) type.findAllFeaturesByName("function1").iterator().next();
+		JvmFormalParameter parameter = function.getParameters().get(0);
+		JvmType parameterType = parameter.getParameterType().getType();
+		assertEquals(function.getTypeParameters().get(0), parameterType);
+	}
+	
+	@Test
+	public void testTypeParamEndsWithDollar_02() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation function = (JvmOperation) type.findAllFeaturesByName("function2").iterator().next();
+		JvmFormalParameter parameter = function.getParameters().get(0);
+		JvmType parameterType = parameter.getParameterType().getType();
+		assertEquals(function.getTypeParameters().get(0), parameterType);
+		JvmFormalParameter secondParameter = function.getParameters().get(1);
+		JvmType secondParameterType = secondParameter.getParameterType().getType();
+		assertEquals(type.getTypeParameters().get(0), secondParameterType);
+	}
+	
+	@Test
+	public void testTypeParamEndsWithDollar_03() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation function = (JvmOperation) type.findAllFeaturesByName("function3").iterator().next();
+		JvmFormalParameter parameter = function.getParameters().get(0);
+		JvmType parameterType = parameter.getParameterType().getType();
+		assertEquals(function.getTypeParameters().get(0), parameterType);
+	}
 }
