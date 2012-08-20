@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -310,6 +311,22 @@ public class IterableExtensions {
 	@Pure
 	public static <T> Iterable<T> filterNull(Iterable<T> unfiltered) {
 		return Iterables.filter(unfiltered, Predicates.notNull());
+	}
+	
+	/**
+	 * Returns the elements of {@code unfiltered} that satisfy a predicate. The resulting iterable's iterator does not
+	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered
+	 * original are reflected in the view.
+	 * 
+	 * @param unfiltered
+	 *            the unfiltered iterable. May not be <code>null</code>.
+	 * @param predicate
+	 *            the predicate. May not be <code>null</code>.
+	 * @return an iterable that contains only the elements that fulfill the predicate. Never <code>null</code>.
+	 */
+	@Pure
+	public static <T> Iterable<T> filter(Iterable<T> unfiltered, Function1<? super T, Boolean> predicate) {
+		return Iterables.filter(unfiltered, new BooleanFunctionDelegate<T>(predicate));
 	}
 
 	/**
