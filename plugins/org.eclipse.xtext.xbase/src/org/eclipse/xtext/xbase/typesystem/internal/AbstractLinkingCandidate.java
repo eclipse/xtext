@@ -13,6 +13,11 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -581,6 +586,30 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		if (explicitTypeArguments.size() == 0)
 			return 0;
 		return getDeclaredTypeParameters().size() - explicitTypeArguments.size();
+	}
+	
+	protected void resolveLinkingProxy(EReference structuralFeature, int featureId) {
+		XExpression expression = getExpression();
+		InternalEObject internalView = (InternalEObject) expression;
+		JvmIdentifiableElement newFeature = getFeature();
+		if (newFeature.eIsProxy()) {
+			newFeature = (JvmIdentifiableElement) internalView.eResolveProxy((InternalEObject) newFeature);
+		}
+		EObject oldFeature = (EObject) expression.eGet(structuralFeature, false);
+		if (oldFeature == null || !(oldFeature.eIsProxy())) {
+			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
+		}
+		if (internalView.eNotificationRequired()) {
+			boolean wasDeliver = internalView.eDeliver();
+			internalView.eSetDeliver(false);
+			expression.eSet(structuralFeature, newFeature);
+			internalView.eSetDeliver(wasDeliver);
+			if (newFeature != oldFeature) {
+				internalView.eNotify(new ENotificationImpl(internalView, Notification.RESOLVE, featureId, oldFeature, newFeature));
+			}
+		} else {
+			expression.eSet(structuralFeature, newFeature);
+		}
 	}
 	
 	protected abstract List<LightweightTypeReference> getExplicitTypeArguments();

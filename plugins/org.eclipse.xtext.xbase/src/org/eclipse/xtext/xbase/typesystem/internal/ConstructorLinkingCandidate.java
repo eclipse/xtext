@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -54,6 +55,10 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate<IConst
 	@Override
 	public List<JvmFormalParameter> getDeclaredParameters() {
 		return getConstructor().getParameters();
+	}
+	
+	public void resolveLinkingProxy() {
+		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 	}
 	
 	@Override

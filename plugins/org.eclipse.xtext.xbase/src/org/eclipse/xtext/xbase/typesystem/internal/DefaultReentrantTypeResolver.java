@@ -67,6 +67,7 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);
 		result.resolveUnboundTypeParameters();
+		result.resolveProxies();
 		return result;
 	}
 

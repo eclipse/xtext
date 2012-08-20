@@ -9,11 +9,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -59,6 +62,19 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           }
         }
         if (!_matched) {
+          if (content instanceof XAbstractFeatureCall) {
+            final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content;
+            _matched=true;
+            this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
+            XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+            boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
+            if (_notEquals) {
+              XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+              this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+            }
+          }
+        }
+        if (!_matched) {
           if (content instanceof XExpression) {
             final XExpression _xExpression = (XExpression)content;
             _matched=true;
@@ -76,6 +92,37 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
             _matched=true;
             this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
+          }
+        }
+      }
+      TreeIterator<EObject> _eAllContents_1 = xExpression.eAllContents();
+      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_eAllContents_1);
+      for (final EObject content_1 : _iterable_1) {
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (content_1 instanceof XConstructorCall) {
+            final XConstructorCall _xConstructorCall = (XConstructorCall)content_1;
+            _matched_1=true;
+            Object _eGet = _xConstructorCall.eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+            final InternalEObject constructor = ((InternalEObject) _eGet);
+            String _string = _xConstructorCall.toString();
+            Assert.assertNotNull(_string, constructor);
+            String _string_1 = _xConstructorCall.toString();
+            boolean _eIsProxy = constructor.eIsProxy();
+            Assert.assertFalse(_string_1, _eIsProxy);
+          }
+        }
+        if (!_matched_1) {
+          if (content_1 instanceof XAbstractFeatureCall) {
+            final XAbstractFeatureCall _xAbstractFeatureCall = (XAbstractFeatureCall)content_1;
+            _matched_1=true;
+            Object _eGet = _xAbstractFeatureCall.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+            final InternalEObject feature = ((InternalEObject) _eGet);
+            String _string = _xAbstractFeatureCall.toString();
+            Assert.assertNotNull(_string, feature);
+            String _string_1 = _xAbstractFeatureCall.toString();
+            boolean _eIsProxy = feature.eIsProxy();
+            Assert.assertFalse(_string_1, _eIsProxy);
           }
         }
       }

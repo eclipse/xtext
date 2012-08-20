@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -69,6 +70,18 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 			return ((BucketedEObjectDescription) description).isStaticDescription();
 		}
 		return false;
+	}
+	
+	@Override
+	public void apply() {
+		XExpression receiver = getReceiver();
+		if (receiver != null && receiver.eResource() == null) {
+			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
+			LightweightTypeReference receiverType = getReceiverType();
+			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+		}
+		super.apply();
 	}
 	
 	@Override
@@ -166,6 +179,17 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 			}
 		}
 		return super.getDeclaredType(feature);
+	}
+	
+	public void resolveLinkingProxy() {
+		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+		setImplicitReceiver();
+	}
+
+	protected void setImplicitReceiver() {
+		XExpression receiver = getReceiver();
+		if (receiver != null && receiver.eResource() == null)
+			getFeatureCall().setImplicitReceiver(receiver);
 	}
 
 }
