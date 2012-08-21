@@ -83,9 +83,9 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	protected void mergeLinkingCandidatesIntoParent(ResolvedTypes parent) {
-		Map<XExpression, ILinkingCandidate<?>> linkingCandidates = basicGetLinkingCandidates();
+		Map<XExpression, ILinkingCandidate> linkingCandidates = basicGetLinkingCandidates();
 		if (!linkingCandidates.isEmpty()) {
-			for(Map.Entry<XExpression, ILinkingCandidate<?>> entry: linkingCandidates.entrySet()) {
+			for(Map.Entry<XExpression, ILinkingCandidate> entry: linkingCandidates.entrySet()) {
 				parent.acceptLinkingInformation(entry.getKey(), entry.getValue());
 			}
 		}

@@ -101,7 +101,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
-	private Map<XExpression, ILinkingCandidate<?>> featureLinking;
+	private Map<XExpression, ILinkingCandidate> featureLinking;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
@@ -377,15 +377,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return Multimaps2.newLinkedHashListMultimap(2, 2);
 	}
 	
-	private Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {
+	private Map<XExpression, ILinkingCandidate> ensureLinkingMapExists() {
 		if (featureLinking == null) {
 			featureLinking = Maps.newLinkedHashMap();
 		}
 		return featureLinking;
 	}
 	
-	protected Map<XExpression, ILinkingCandidate<?>> basicGetLinkingCandidates() {
-		return featureLinking != null ? featureLinking : Collections.<XExpression, ILinkingCandidate<?>>emptyMap();
+	protected Map<XExpression, ILinkingCandidate> basicGetLinkingCandidates() {
+		return featureLinking != null ? featureLinking : Collections.<XExpression, ILinkingCandidate>emptyMap();
 	}
 	
 	@Nullable
@@ -440,7 +440,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return (IConstructorLinkingCandidate) basicGetLinkingCandidates().get(constructorCall);
 	}
 
-	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate<?> candidate) {
+	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
 		if (ensureLinkingMapExists().put(expression, candidate) != null) {
 			throw new IllegalStateException("Expression was already linked");
 		}

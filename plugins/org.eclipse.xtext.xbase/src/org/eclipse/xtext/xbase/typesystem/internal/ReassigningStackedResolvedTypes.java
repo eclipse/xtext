@@ -31,7 +31,7 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	@Override
-	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate<?> candidate) {
+	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
 		getParent().acceptLinkingInformation(expression, candidate);
 	}
 	

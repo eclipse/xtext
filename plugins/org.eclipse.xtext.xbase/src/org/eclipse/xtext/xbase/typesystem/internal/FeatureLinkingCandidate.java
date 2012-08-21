@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -41,7 +42,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
@@ -108,6 +109,12 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 			return ((XMemberFeatureCall) featureCall).getMemberCallArguments();
 		} else if (featureCall instanceof XFeatureCall) {
 			return ((XFeatureCall) featureCall).getFeatureCallArguments();
+		} else if (featureCall instanceof XAssignment) {
+			XExpression value = ((XAssignment) featureCall).getValue();
+			if (value == null) {
+				return Collections.emptyList();
+			}
+			return Collections.singletonList(value);
 		}
 		return featureCall.getExplicitArguments();
 	}

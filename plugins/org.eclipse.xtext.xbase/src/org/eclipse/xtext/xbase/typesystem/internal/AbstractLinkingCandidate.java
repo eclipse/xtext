@@ -322,6 +322,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			} finally {
 				nextArgument = Math.max(argumentIndex + 1, nextArgument);
 			}
+		} else {
+			nextArgument++;
 		}
 	}
 
@@ -410,22 +412,24 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return arguments;
 	}
 	
-	public boolean isPreferredOver(LinkingCandidate right) {
-		int arityCompareResult = compareByArityWith(right);
-		if (arityCompareResult != 0)
-			return arityCompareResult <= 0;
-		int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
-		if (typeArityCompareResult != 0)
-			return typeArityCompareResult <= 0;
-		if (right instanceof AbstractLinkingCandidate<?>) {
-			int argumentTypeCompareResult = compareByArgumentTypes((AbstractLinkingCandidate<?>) right);
+	public boolean isPreferredOver(ILinkingCandidate other) {
+		if (other instanceof AbstractLinkingCandidate) {
+			AbstractLinkingCandidate right = (AbstractLinkingCandidate) other;
+			int arityCompareResult = compareByArityWith(right);
+			if (arityCompareResult != 0)
+				return arityCompareResult <= 0;
+			int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
+			if (typeArityCompareResult != 0)
+				return typeArityCompareResult <= 0;
+			int argumentTypeCompareResult = compareByArgumentTypes(right);
 			if (argumentTypeCompareResult != 0)
 				return argumentTypeCompareResult <= 0;
+			return true;
 		}
-		return true;
+		throw new IllegalArgumentException("other was " + other);
 	}
 	
-	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {
+	protected int compareByArgumentTypes(AbstractLinkingCandidate right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
@@ -483,7 +487,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return state.getResolvedTypes().getConformanceHints(argument);
 	}
 
-	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate<?> right) {
+	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate right) {
 		int result = 0;
 		for(XExpression argument: getArguments()) {
 			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(argument);
@@ -541,7 +545,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return null;
 	}
 
-	protected int compareByArityWith(LinkingCandidate right) {
+	protected int compareByArityWith(AbstractLinkingCandidate right) {
 		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
 		return arityCompareResult;
 	}

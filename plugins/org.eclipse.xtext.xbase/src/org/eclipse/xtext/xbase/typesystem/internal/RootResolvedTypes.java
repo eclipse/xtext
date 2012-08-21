@@ -36,8 +36,8 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 
 	public void resolveProxies() {
-		Map<XExpression, ILinkingCandidate<?>> candidates = basicGetLinkingCandidates();
-		for(ILinkingCandidate<?> candidate: candidates.values()) {
+		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
+		for(ILinkingCandidate candidate: candidates.values()) {
 			candidate.resolveLinkingProxy();
 		}
 	}

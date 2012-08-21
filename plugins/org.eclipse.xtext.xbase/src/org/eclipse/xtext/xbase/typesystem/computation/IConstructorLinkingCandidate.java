@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public interface IConstructorLinkingCandidate extends ILinkingCandidate<IConstructorLinkingCandidate> {
+public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 
 	XConstructorCall getConstructorCall();
 	 
