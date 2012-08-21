@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -56,6 +57,9 @@ public class FeatureScopes implements IFeatureNames {
 	@Inject(optional = true)
 	private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
 	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+	
 	/**
 	 * creates the feature scope for {@link XAbstractFeatureCall}, including the local variables in case it is a feature
 	 * call without receiver (XFeatureCall).
@@ -77,6 +81,10 @@ public class FeatureScopes implements IFeatureNames {
 
 	public boolean isFeatureCallScope(EReference reference) {
 		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+	}
+	
+	protected SuperTypeCollector getSuperTypeCollector() {
+		return superTypeCollector;
 	}
 	
 	/**

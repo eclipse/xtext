@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -82,6 +84,13 @@ public interface IFeatureScopeSession {
 	 * @return a configured session.
 	 */
 	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements);
+	
+	/**
+	 * Returns <code>true</code> if the feature is visible according to the {@link JvmVisibility} and the current context.
+	 * @param feature the feature that shall be accessed.
+	 * @return <code>true</code> if the feature can be accessed.
+	 */
+	boolean isVisible(JvmFeature feature);
 	
 	/**
 	 * Find a local element with the given qualified name.

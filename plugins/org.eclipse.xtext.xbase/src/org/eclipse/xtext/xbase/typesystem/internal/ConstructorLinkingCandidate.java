@@ -57,6 +57,11 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 		return getConstructor().getParameters();
 	}
 	
+	@Override
+	protected boolean hasExplicitArguments() {
+		return !getSyntacticArguments().isEmpty();
+	}
+	
 	public void resolveLinkingProxy() {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 	}

@@ -191,6 +191,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 		return Collections.emptyList();
 	}
 	
+	protected abstract boolean hasExplicitArguments();
+	
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmTypeParameterDeclarator) {
@@ -389,6 +391,12 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 	public boolean isPreferredOver(ILinkingCandidate other) {
 		if (other instanceof AbstractLinkingCandidate) {
 			AbstractLinkingCandidate right = (AbstractLinkingCandidate) other;
+			boolean visible = isVisible();
+			if (visible != right.isVisible()) {
+				if (visible)
+					return true;
+				return false;
+			}
 			int arityCompareResult = compareByArityWith(right);
 			if (arityCompareResult != 0)
 				return arityCompareResult <= 0;
@@ -403,28 +411,40 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 		throw new IllegalArgumentException("other was " + other);
 	}
 	
+	protected boolean isVisible() {
+		if (description instanceof BucketedEObjectDescription)
+			return ((BucketedEObjectDescription) description).isVisible();
+		return true;
+	}
+	
 	protected int compareByArgumentTypes(AbstractLinkingCandidate right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
+		int leftBoxing = 0;
+		int rightBoxing = 0;
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i);
 			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i);
 			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 			if (hintCompareResult != 0)
 				return hintCompareResult;
+			if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
+				leftBoxing++;
+			}
+			if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
+				rightBoxing++;
+			}
 		}
-		int declaredParameterCount = getDeclaredParameters().size();
-		int rightDeclaredParameterCount = right.getDeclaredParameters().size();
-		if (declaredParameterCount != rightDeclaredParameterCount) {
-			if (declaredParameterCount >= rightDeclaredParameterCount)
+		if (leftBoxing != rightBoxing) {
+			if (leftBoxing < rightBoxing)
 				return -1;
-			else
-				return 1;
+			return 1;
 		}
-		
 		int result = compareDeclaredArgumentTypes(right);
+		if (result != 0)
+			return result;
 		return result;
 	}
 	
@@ -463,9 +483,10 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 
 	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate right) {
 		int result = 0;
-		for(XExpression argument: getArguments()) {
-			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(argument);
-			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(argument);
+		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
+		for(int i = 0; i < upTo; i++) {
+			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(arguments.getArgument(i));
+			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(right.arguments.getArgument(i));
 			if (expectedArgumentType == null) {
 				if (rightExpectedArgumentType != null)
 					return 1;

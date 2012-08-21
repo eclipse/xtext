@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -40,30 +42,53 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
+	private final boolean visible;
 
-	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
-			int bucketId) {
+	public BucketedEObjectDescription(
+			QualifiedName qualifiedName, EObject element, 
+			XExpression receiver, LightweightTypeReference receiverType, 
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
+			int bucketId, boolean visible) {
 		super(qualifiedName, element, null);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.receiverTypeParameterMapping = receiverTypeParameterMapping;
 		this.bucketId = bucketId;
+		this.visible = visible;
 	}
 	
 	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			LightweightTypeReference receiverType, int bucketId) {
-		this(qualifiedName, element, receiver, receiverType, null, bucketId);
+			LightweightTypeReference receiverType, int bucketId, boolean visible) {
+		this(qualifiedName, element, receiver, receiverType, null, bucketId, visible);
 	}
 	
-	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, int bucketId) {
-		this(qualifiedName, element, null, null, null, bucketId);
+	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, int bucketId, boolean visible) {
+		this(qualifiedName, element, null, null, null, bucketId, visible);
 	}
 
 	public String getShadowingKey() {
 		EObject object = getEObjectOrProxy();
+		if (object instanceof JvmExecutable) {
+			JvmExecutable executable = (JvmExecutable) object;
+			StringBuilder builder = new StringBuilder(executable.getSimpleName());
+			builder.append('(');
+			boolean first = true;
+			for(JvmFormalParameter parameter: executable.getParameters()) {
+				if (!first) {
+					builder.append(',');
+				} else {
+					first = false;
+				}
+				if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
+					builder.append(parameter.getParameterType().getType().getIdentifier());
+				else
+					builder.append("null");
+			}
+			builder.append(')');
+			return builder.toString();
+		}
 		if (object instanceof JvmIdentifiableElement) {
-			return ((JvmIdentifiableElement) object).getIdentifier();
+			return ((JvmIdentifiableElement) object).getSimpleName();
 		}
 		return getName().toString();
 	}
@@ -78,6 +103,10 @@ public class BucketedEObjectDescription extends EObjectDescription {
 
 	public XExpression getReceiver() {
 		return receiver;
+	}
+	
+	public boolean isVisible() {
+		return visible;
 	}
 
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {

@@ -65,7 +65,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 	}
 
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		result.add(new BucketedEObjectDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket.getId()));
+		result.add(new BucketedEObjectDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket.getId(), getSession().isVisible(feature)));
 	}
 
 	protected abstract List<TypeBucket> getBuckets();
@@ -110,6 +110,6 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 
 	protected BucketedEObjectDescription createNamedDescription(QualifiedName name, JvmFeature feature,
 			TypeBucket bucket) {
-		return new BucketedEObjectDescription(name, feature, bucket.getId());
+		return new BucketedEObjectDescription(name, feature, bucket.getId(), getSession().isVisible(feature));
 	}
 }

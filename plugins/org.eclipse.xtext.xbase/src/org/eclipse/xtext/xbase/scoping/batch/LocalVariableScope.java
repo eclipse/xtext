@@ -55,7 +55,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 		Collection<IEObjectDescription> localElements = getLocalElementsByName(name);
 		if (localElements.isEmpty())
 			return getParent().getElements(name);
-		if (!looksLikeLocalVariable()) {
+		if (looksLikeLocalVariable()) {
 			return localElements;
 		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {

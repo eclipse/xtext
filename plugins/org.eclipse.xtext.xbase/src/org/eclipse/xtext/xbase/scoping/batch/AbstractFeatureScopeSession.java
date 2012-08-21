@@ -80,6 +80,14 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements) {
 		if (elements.isEmpty())
 			return this;
+		if (elements.containsKey(IFeatureNames.THIS)) {
+			JvmIdentifiableElement associatedWithThis = elements.get(IFeatureNames.THIS);
+			if (associatedWithThis instanceof JvmType) {
+				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, getFeatureScopes(), (JvmType) associatedWithThis);
+				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, getFeatureScopes(), elements);
+				return result;
+			}
+		}
 		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, getFeatureScopes(), elements);
 		return result;
 	}
