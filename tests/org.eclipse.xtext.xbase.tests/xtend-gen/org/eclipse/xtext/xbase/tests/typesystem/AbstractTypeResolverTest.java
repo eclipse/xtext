@@ -51,6 +51,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testAssignment_01() throws Exception {
+    this.resolvesTo("new testdata.FieldAccess().stringField = null", "String");
+  }
+  
+  @Test
+  public void testAssignment_02() throws Exception {
+    this.resolvesTo("new testdata.FieldAccess().stringField = new Object", "String");
+  }
+  
+  @Test
+  public void testAssignment_03() throws Exception {
+    this.resolvesTo("new testdata.FieldAccess().stringField = \'\'", "String");
+  }
+  
+  @Test
   public void testNullLiteral() throws Exception {
     this.resolvesTo("null", "null");
   }
