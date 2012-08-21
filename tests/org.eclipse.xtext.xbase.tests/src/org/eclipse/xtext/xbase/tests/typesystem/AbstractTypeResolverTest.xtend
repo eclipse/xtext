@@ -42,6 +42,18 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}
 		super.expression(expression, resolve)
 	}
+	
+	@Test def void testAssignment_01() throws Exception {
+		"new testdata.FieldAccess().stringField = null".resolvesTo("String")
+	}
+	
+	@Test def void testAssignment_02() throws Exception {
+		"new testdata.FieldAccess().stringField = new Object".resolvesTo("String")
+	}
+	
+	@Test def void testAssignment_03() throws Exception {
+		"new testdata.FieldAccess().stringField = ''".resolvesTo("String")
+	}
 
 	@Test def void testNullLiteral() throws Exception {
 		"null".resolvesTo("null")
