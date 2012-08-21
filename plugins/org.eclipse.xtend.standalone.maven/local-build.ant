@@ -66,6 +66,7 @@
 				<exclude name="**/target.platform/" />
 			</fileset>
 		</delete>
+		<delete failonerror="false" includeemptydirs="true" verbose="true" dir="${releng.project.location}/dependencies"/>
 	</target>
 	<!-- - - - - - - - - - - - - - - - - - 
 	          target: Clean up target platform folder  
