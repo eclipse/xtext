@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -71,6 +72,43 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 			return ((BucketedEObjectDescription) description).isStaticDescription();
 		}
 		return false;
+	}
+	
+	@Override
+	protected boolean hasExplicitArguments() {
+		return getFeatureCall().isExplicitOperationCallOrBuilderSyntax();
+	}
+	
+	@Override
+	protected int compareByArityWith(AbstractLinkingCandidate right) {
+		int result = super.compareByArityWith(right);
+		boolean isExecutable = getFeature() instanceof JvmExecutable;
+		if (result == 0 && isExecutable != (right.getFeature() instanceof JvmExecutable)) {
+			if (hasExplicitArguments()) {
+				if (isExecutable)
+					return -1;
+				return 1;
+			} else {
+				if (isExecutable)
+					return 1;
+				return -1;
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	protected int compareByArgumentTypes(AbstractLinkingCandidate right) {
+		int result = super.compareByArgumentTypes(right);
+		if (result != 0 || !(right instanceof FeatureLinkingCandidate))
+			return result;
+		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
+		if (isExtension() != casted.isExtension()) {
+			if (isExtension())
+				return 1;
+			return -1;
+		}
+		return result;
 	}
 	
 	@Override

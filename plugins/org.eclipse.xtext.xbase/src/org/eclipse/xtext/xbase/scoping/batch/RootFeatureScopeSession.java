@@ -12,6 +12,8 @@ import java.util.Collections;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -56,6 +58,15 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	@Override
 	protected int getId() {
 		return 0;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * By default, all public features are considered to be accessible.
+	 */
+	public boolean isVisible(JvmFeature feature) {
+		return feature.getVisibility() == JvmVisibility.PUBLIC;
 	}
 	
 }

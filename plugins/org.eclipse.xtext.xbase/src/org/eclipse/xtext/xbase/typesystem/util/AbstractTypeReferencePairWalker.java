@@ -270,19 +270,24 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	}
 	
 	@Override
-	public void doVisitWildcardTypeReference(WildcardTypeReference declaredReference, LightweightTypeReference param) {
+	protected void doVisitWildcardTypeReference(WildcardTypeReference declaredReference, LightweightTypeReference param) {
 		param.accept(wildcardTypeReferenceTraverser, declaredReference);
 	}
 
 	@Override
-	public void doVisitArrayTypeReference(ArrayTypeReference declaredReference,
+	protected void doVisitArrayTypeReference(ArrayTypeReference declaredReference,
 			LightweightTypeReference param) {
 		param.accept(arrayTypeReferenceTraverser, declaredReference);
 	}
 	
 	@Override
-	public void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
+	protected void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
 		param.accept(computedTypeReferenceTraverser, reference);
+	}
+	
+	@Override
+	protected void doVisitAnyTypeReference(AnyTypeReference reference, LightweightTypeReference param) {
+		// nothing to do
 	}
 
 	protected void outerVisit(LightweightTypeReference reference, LightweightTypeReference parameter, Object origin, VarianceInfo expectedVariance, VarianceInfo actualVariance) {

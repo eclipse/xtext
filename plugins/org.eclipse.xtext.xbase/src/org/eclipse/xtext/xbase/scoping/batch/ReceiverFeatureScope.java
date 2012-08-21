@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -53,7 +54,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 	
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		final Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
+		final Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		processFeatureNames(name, new NameAcceptor() {
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
@@ -68,8 +69,8 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
-		for(JvmIdentifiableElement feature: allFeatures) {
-			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
+		for(JvmFeature feature: allFeatures) {
+			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId(), getSession().isVisible(feature)));
 		}
 		return allDescriptions;
 	}
@@ -89,16 +90,18 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 			acceptor.accept(methodName.toString(), 2);
 		} else {
 			super.processFeatureNames(name, acceptor);
-			String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
-			acceptor.accept(aliasedGetter, 2);
-			String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
-			acceptor.accept(aliasedBooleanGetter, 2);
+			if (!(getFeatureCall() instanceof XAssignment)) {
+				String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+				acceptor.accept(aliasedGetter, 2);
+				String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+				acceptor.accept(aliasedBooleanGetter, 2);
+			}
 		}
 	}
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		Set<JvmIdentifiableElement> allFeatures = Sets.newLinkedHashSet();
+		Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		for(JvmType type: bucket.getTypes()) {
 			if (type instanceof JvmDeclaredType) {
 				Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
@@ -109,12 +112,12 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = getReceiverTypeParameterMapping();
-		for(JvmIdentifiableElement feature: allFeatures) {
+		for(JvmFeature feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
+			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId(), getSession().isVisible(feature)));
 			QualifiedName operator = operatorMapping.getOperator(featureName);
 			if (operator != null) {
-				allDescriptions.add(new BucketedEObjectDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
+				allDescriptions.add(new BucketedEObjectDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId(), getSession().isVisible(feature)));
 			}
 		}
 		return allDescriptions;

@@ -106,7 +106,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
 		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
 		assertEquals("testdata.FieldAccessSub.privateField()",((JvmOperation)call1.getFeature()).getIdentifier());
-		assertSame(call1.getFeature(),call2.getFeature());
+		assertSame(call1.getFeature(), call2.getFeature());
 	}
 	
 	@Test public void testFeatureCall_3() throws Exception {
@@ -223,7 +223,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testPropertyAccess_4() throws Exception {
 		XMemberFeatureCall exp = (XMemberFeatureCall) expression("new testdata.Properties1().prop2");
-		assertTrue(exp.getFeature() instanceof JvmOperation);
+		assertTrue(exp.getFeature().toString(), exp.getFeature() instanceof JvmOperation);
 		assertEquals("testdata.Properties1.getProp2()",exp.getFeature().getIdentifier());
 	}
 	
@@ -264,7 +264,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	val this = new java.util.ArrayList<String>(); " +
 				"	size;" +
 				"}");
-		assertTrue(((XFeatureCall)bop.getExpressions().get(2)).getFeature() instanceof XVariableDeclaration);
+		JvmIdentifiableElement feature = ((XFeatureCall)bop.getExpressions().get(2)).getFeature();
+		assertTrue(feature.toString(), feature instanceof XVariableDeclaration);
 	}
 	
 	@Test public void testShadowing_3() throws Exception {
@@ -424,7 +425,8 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testMemberCallOnNull_02() throws Exception {
 		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) expression("null.isNullOrEmpty");
-		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+		JvmIdentifiableElement feature = nullOrEmpty.getFeature();
+		assertTrue(feature.toString(), feature.eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnNull_03() throws Exception {
@@ -451,7 +453,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testMemberCallOnNull_07() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var x = null x.isNullOrEmpty }");
 		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) block.getExpressions().get(1);
-		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+		assertTrue(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnNull_08() throws Exception {
@@ -481,7 +483,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testMemberCallOnNull_12() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = null isNullOrEmpty }");
 		XFeatureCall nullOrEmpty = (XFeatureCall) block.getExpressions().get(1);
-		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+		assertTrue(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnMultiType_01() throws Exception {
@@ -519,7 +521,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testMemberCallOnMultiType_07() throws Exception {
-		XBlockExpression block = (XBlockExpression) expression("{ var this = if (true) new Double('') else new Integer('') compareTo(number) }");
+		XBlockExpression block = (XBlockExpression) expression("{ var this = if (true) new Double('') else new Integer('') compareTo(this) }");
 		XFeatureCall compareTo = (XFeatureCall) block.getExpressions().get(1);
 		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
 	}
@@ -538,6 +540,12 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testMemberCallOnMultiType_10() throws Exception {
 		XBinaryOperation lessThan = (XBinaryOperation) expression("(if (true) new Double('') else new Integer('')) < 0");
 		assertEquals("org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_lessThan(java.lang.Comparable,C)", lessThan.getFeature().getIdentifier());
+	}
+	
+	@Test public void testMemberCallOnMultiTypeWithUnresolvableArgument_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = if (true) new Double('') else new Integer('') compareTo(number) }");
+		XFeatureCall compareTo = (XFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
 	}
 	
 	@Test public void testOverloadedMethods_01() throws Exception {
