@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
@@ -99,7 +100,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
 			BasicSearchEngine searchEngine = new BasicSearchEngine();
 			try {
-				searchEngine.searchAllTypeNames(packageName.toCharArray(), SearchPattern.R_EXACT_MATCH,
+				searchEngine.searchAllTypeNames(packageName != null ? packageName.toCharArray() : CharOperation.NO_CHAR, SearchPattern.R_EXACT_MATCH,
 						simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
 						searchScope, new IRestrictedAccessTypeRequestor() {
 							public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
