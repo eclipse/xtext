@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ConstructorLinkingCandidate extends AbstractLinkingCandidate<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
+public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implements IConstructorLinkingCandidate {
 
 	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);

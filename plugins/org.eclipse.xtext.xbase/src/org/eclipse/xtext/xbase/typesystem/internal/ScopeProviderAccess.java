@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -72,12 +73,59 @@ public class ScopeProviderAccess {
 				final IScope scope = session.getScope(expression, reference, types);
 				QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
 				Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
+				if (Iterables.isEmpty(descriptions)) {
+					return Collections.<IEObjectDescription>singletonList(new ErrorDescription(node, qualifiedLinkName));
+				}
 				return descriptions;
 			}
 			return Collections.emptyList();
 		} else {
 			throw new IllegalStateException(expression + " uses unsupported uri fragment " + uri);
 		}
+	}
+	
+	public static class ErrorDescription implements IEObjectDescription {
+
+		private QualifiedName name;
+		private INode node;
+
+		public ErrorDescription(INode node, QualifiedName name) {
+			this.node = node;
+			this.name = name;
+		}
+		
+		public QualifiedName getName() {
+			return name;
+		}
+		
+		public INode getNode() {
+			return node;
+		}
+
+		public QualifiedName getQualifiedName() {
+			return name;
+		}
+
+		public EObject getEObjectOrProxy() {
+			return null;
+		}
+
+		public URI getEObjectURI() {
+			return null;
+		}
+
+		public EClass getEClass() {
+			return null;
+		}
+
+		public String getUserData(String key) {
+			return null;
+		}
+
+		public String[] getUserDataKeys() {
+			return Strings.EMPTY_ARRAY;
+		}
+		
 	}
 
 }

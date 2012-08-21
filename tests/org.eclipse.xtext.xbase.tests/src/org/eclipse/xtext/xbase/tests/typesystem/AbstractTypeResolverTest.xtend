@@ -1404,7 +1404,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testFeatureCall_25_c() throws Exception {
-		"newArrayList('').map[ length + 1 * 5 ].map [ it / 5 ).head".resolvesTo("Integer")
+		"newArrayList('').map[ length + 1 * 5 ].map [ it / 5 ].head".resolvesTo("Integer")
 	}
 	
 	@Test def void testFeatureCall_25_d() throws Exception {

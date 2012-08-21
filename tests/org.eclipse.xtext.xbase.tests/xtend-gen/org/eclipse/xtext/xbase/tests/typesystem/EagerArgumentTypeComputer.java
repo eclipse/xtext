@@ -15,13 +15,15 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate;
 @Singleton
 @SuppressWarnings("all")
 public class EagerArgumentTypeComputer extends XbaseTypeComputer {
-  protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(final List<? extends Candidate> candidates) {
+  protected <Candidate extends ILinkingCandidate> Candidate getBestCandidate(final List<? extends Candidate> candidates) {
     Candidate _xblockexpression = null;
     {
       final Procedure1<Candidate> _function = new Procedure1<Candidate>() {
           public void apply(final Candidate it) {
             try {
-              ((AbstractLinkingCandidate) it).computeArgumentTypes();
+              if ((it instanceof AbstractLinkingCandidate)) {
+                ((AbstractLinkingCandidate) it).computeArgumentTypes();
+              }
             } catch (final Throwable _t) {
               if (_t instanceof UnsupportedOperationException) {
                 final UnsupportedOperationException e = (UnsupportedOperationException)_t;

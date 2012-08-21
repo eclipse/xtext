@@ -217,7 +217,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			resultList.add(createCandidate(featureCall, demandComputedTypes, description));
 		}
 		if (resultList.isEmpty()) {
-			throw new UnsupportedOperationException("TODO Add error candidate: " + featureCall);
+			throw new IllegalStateException("Linking candidates may not be empty");
 		}
 		return resultList;
 	}
@@ -236,10 +236,14 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 					}
 				};
 			}
-		}
-		final ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
+		} 
+		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
-		return new FeatureLinkingCandidate(featureCall, description, state);
+		if (description instanceof ScopeProviderAccess.ErrorDescription) {
+			return new UnresolvableFeatureCall(featureCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
+		} else {
+			return new FeatureLinkingCandidate(featureCall, description, state);
+		}
 	}
 	
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
@@ -254,7 +258,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			resultList.add(createCandidate(constructorCall, description));
 		}
 		if (resultList.isEmpty()) {
-			throw new UnsupportedOperationException("TODO Add error candidate");
+			throw new IllegalStateException("Linking candidates may not be empty");
 		}
 		return resultList;
 	}
@@ -262,7 +266,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
 		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
-		return new ConstructorLinkingCandidate(constructorCall, description, state);
+		if (description instanceof ScopeProviderAccess.ErrorDescription) {
+			return new UnresolvableConstructorCall(constructorCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
+		} else {
+			return new ConstructorLinkingCandidate(constructorCall, description, state);
+		}
 	}
 
 	@Override

@@ -2,8 +2,11 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -29,6 +32,14 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   public JvmTypeReference resolvesTo(final String expression, final String type) {
     try {
       final XExpression xExpression = this.expression(expression, false);
+      Resource _eResource = xExpression.eResource();
+      EList<Diagnostic> _errors = _eResource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      Assert.assertTrue(_isEmpty);
+      Resource _eResource_1 = xExpression.eResource();
+      EList<Diagnostic> _warnings = _eResource_1.getWarnings();
+      boolean _isEmpty_1 = _warnings.isEmpty();
+      Assert.assertTrue(_isEmpty_1);
       final JvmTypeReference resolvedType = this.typeProvider.getType(xExpression);
       String _simpleName = resolvedType==null?(String)null:resolvedType.getSimpleName();
       Assert.assertEquals(type, _simpleName);
@@ -69,6 +80,14 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
           }
         }
       }
+      Resource _eResource_2 = xExpression.eResource();
+      EList<Diagnostic> _errors_1 = _eResource_2.getErrors();
+      boolean _isEmpty_2 = _errors_1.isEmpty();
+      Assert.assertTrue(_isEmpty_2);
+      Resource _eResource_3 = xExpression.eResource();
+      EList<Diagnostic> _warnings_1 = _eResource_3.getWarnings();
+      boolean _isEmpty_3 = _warnings_1.isEmpty();
+      Assert.assertTrue(_isEmpty_3);
       return resolvedType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

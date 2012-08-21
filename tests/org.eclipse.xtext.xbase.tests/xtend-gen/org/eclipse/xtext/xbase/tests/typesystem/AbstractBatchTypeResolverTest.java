@@ -2,10 +2,13 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -40,6 +43,20 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     try {
       String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(_replace, false);
+      Resource _eResource = xExpression.eResource();
+      EList<Diagnostic> _errors = _eResource.getErrors();
+      String _string = _errors.toString();
+      Resource _eResource_1 = xExpression.eResource();
+      EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+      boolean _isEmpty = _errors_1.isEmpty();
+      Assert.assertTrue(_string, _isEmpty);
+      Resource _eResource_2 = xExpression.eResource();
+      EList<Diagnostic> _warnings = _eResource_2.getWarnings();
+      String _string_1 = _warnings.toString();
+      Resource _eResource_3 = xExpression.eResource();
+      EList<Diagnostic> _warnings_1 = _eResource_3.getWarnings();
+      boolean _isEmpty_1 = _warnings_1.isEmpty();
+      Assert.assertTrue(_string_1, _isEmpty_1);
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
@@ -105,11 +122,11 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             _matched_1=true;
             Object _eGet = _xConstructorCall.eGet(Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
             final InternalEObject constructor = ((InternalEObject) _eGet);
-            String _string = _xConstructorCall.toString();
-            Assert.assertNotNull(_string, constructor);
-            String _string_1 = _xConstructorCall.toString();
+            String _string_2 = _xConstructorCall.toString();
+            Assert.assertNotNull(_string_2, constructor);
+            String _string_3 = _xConstructorCall.toString();
             boolean _eIsProxy = constructor.eIsProxy();
-            Assert.assertFalse(_string_1, _eIsProxy);
+            Assert.assertFalse(_string_3, _eIsProxy);
           }
         }
         if (!_matched_1) {
@@ -118,14 +135,28 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             _matched_1=true;
             Object _eGet = _xAbstractFeatureCall.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
             final InternalEObject feature = ((InternalEObject) _eGet);
-            String _string = _xAbstractFeatureCall.toString();
-            Assert.assertNotNull(_string, feature);
-            String _string_1 = _xAbstractFeatureCall.toString();
+            String _string_2 = _xAbstractFeatureCall.toString();
+            Assert.assertNotNull(_string_2, feature);
+            String _string_3 = _xAbstractFeatureCall.toString();
             boolean _eIsProxy = feature.eIsProxy();
-            Assert.assertFalse(_string_1, _eIsProxy);
+            Assert.assertFalse(_string_3, _eIsProxy);
           }
         }
       }
+      Resource _eResource_4 = xExpression.eResource();
+      EList<Diagnostic> _errors_2 = _eResource_4.getErrors();
+      String _string_2 = _errors_2.toString();
+      Resource _eResource_5 = xExpression.eResource();
+      EList<Diagnostic> _errors_3 = _eResource_5.getErrors();
+      boolean _isEmpty_2 = _errors_3.isEmpty();
+      Assert.assertTrue(_string_2, _isEmpty_2);
+      Resource _eResource_6 = xExpression.eResource();
+      EList<Diagnostic> _warnings_2 = _eResource_6.getWarnings();
+      String _string_3 = _warnings_2.toString();
+      Resource _eResource_7 = xExpression.eResource();
+      EList<Diagnostic> _warnings_3 = _eResource_7.getWarnings();
+      boolean _isEmpty_3 = _warnings_3.isEmpty();
+      Assert.assertTrue(_string_3, _isEmpty_3);
       return resolvedType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

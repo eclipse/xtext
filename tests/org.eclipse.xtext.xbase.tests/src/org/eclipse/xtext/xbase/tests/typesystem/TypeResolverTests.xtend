@@ -48,6 +48,8 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
+		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
 		val resolvedType = resolvedTypes.getActualType(xExpression)
 		assertEquals(type, resolvedType.simpleName);
@@ -88,6 +90,8 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 				}
 			}
 		}
+		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
 	
@@ -146,10 +150,10 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	
 	override JvmTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression, false /* true */);
+		assertTrue(xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.warnings.isEmpty)
 		val resolvedType = typeProvider.getType(xExpression)
 		assertEquals(type, resolvedType?.simpleName);
-		
-		
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
 				XSwitchExpression: {
@@ -167,6 +171,8 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 				}
 			}
 		}
+		assertTrue(xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
 	
@@ -1123,90 +1129,6 @@ class IsolationTest extends AbstractBatchTypeResolverTest {
 		typeResolver
 	}
 	
-	@Ignore("error candidates")
-	@Test
-	override testEMap_01() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testEMap_02() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_07_02() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_07_03() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_17_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_18_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_19_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_20_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_21_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_22_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_23_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_24_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_26a() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_31() throws Exception {
-		fail
-	}
-	
 }
 
 /**
@@ -1223,89 +1145,6 @@ class InvariantCheckingIsolationTest extends AbstractBatchTypeResolverTest {
 		typeResolver
 	}
 
-	@Ignore("error candidates")
-	@Test
-	override testEMap_01() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testEMap_02() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_07_02() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_07_03() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_17_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_18_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_19_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_20_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_21_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_22_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_23_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_24_b() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_26a() throws Exception {
-		fail
-	}
-	
-	@Ignore("error candidates")
-	@Test
-	override testFeatureCall_31() throws Exception {
-		fail
-	}
 }
 
 /**
@@ -1367,10 +1206,11 @@ class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeReso
 @Singleton
 class EagerArgumentTypeComputer extends XbaseTypeComputer {
 	
-	override protected <Candidate extends ILinkingCandidate<Candidate>> getBestCandidate(List<? extends Candidate> candidates) {
+	override protected <Candidate extends ILinkingCandidate> getBestCandidate(List<? extends Candidate> candidates) {
 		candidates.forEach[
 			try {
-				(it as AbstractLinkingCandidate).computeArgumentTypes()
+				if (it instanceof AbstractLinkingCandidate)
+					(it as AbstractLinkingCandidate).computeArgumentTypes()
 			} catch(UnsupportedOperationException e) {
 				// ignore
 			}
