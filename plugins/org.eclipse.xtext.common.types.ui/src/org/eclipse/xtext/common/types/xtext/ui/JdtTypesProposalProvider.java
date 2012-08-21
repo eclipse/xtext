@@ -34,6 +34,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -91,6 +93,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	
 	@Inject
 	private IContentProposalPriorities priorities;
+
+	@Inject
+	private IDirtyStateManager dirtyStateManager;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		protected final IScope scope;
@@ -272,6 +277,16 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return !acceptor.canAcceptMoreProposals();
 					}
 				});
+		if (acceptor.canAcceptMoreProposals()) {
+			Iterable<IEObjectDescription> allDirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
+			for(IEObjectDescription description: allDirtyTypes) {
+				QualifiedName qualifiedName = description.getQualifiedName();
+				if (filter.accept(Flags.AccPublic, qualifiedName.skipLast(1).toString().toCharArray(), qualifiedName.getLastSegment().toCharArray(), new char[0][0], description.getEObjectURI().toPlatformString(true))) {
+					String fqName = description.getQualifiedName().toString();
+					createTypeProposal(fqName, Flags.AccPublic, false, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
+				}
+			}
+		}
 	}
 	
 	/**
