@@ -61,8 +61,7 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO Javadoc
  */
-public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinkingCandidate<LinkingCandidate>> 
-		implements ILinkingCandidate<LinkingCandidate> { 
+public abstract class AbstractLinkingCandidate implements ILinkingCandidate { 
 	
 	@NonNullByDefault
 	protected class LinkingTypeComputationState extends AbstractStackedTypeComputationState {
