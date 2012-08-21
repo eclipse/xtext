@@ -30,7 +30,7 @@
           target: deploy.artifacts                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="deploy.artifacts">
-		<mkdir dir="${user.home}/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/" />
+		<!--<mkdir dir="${user.home}/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/" />-->
 		<copy verbose="true" overwrite="true" todir="${deploy.dir}">
 			<fileset dir="${output.folder}">
 				<include name="org.eclipse.xtend.standalone-${maven.version}.jar" />
@@ -64,6 +64,7 @@
 		<!-- TP bundles -->
 		<fileset dir="${bundles.folder}" id="binJars">
 			<include name="org.eclipse.emf.common_*.jar" />
+			<include name="org.eclipse.emf.codegen_*.jar" />
 			<include name="org.eclipse.emf.ecore.xmi_*.jar" />
 			<include name="org.eclipse.emf.ecore_*.jar" />
 			<include name="org.eclipse.jdt.core_*.jar" />
@@ -100,6 +101,7 @@
 		<!-- TP bundles -->
 		<fileset dir="${bundles.folder}" id="sourceJars">
 			<include name="org.eclipse.emf.common.source_*.jar" />
+			<include name="org.eclipse.emf.codegen_.source_*.jar" />
 			<include name="org.eclipse.emf.ecore.source_*.jar" />
 			<include name="org.eclipse.emf.ecore.xmi.source_*.jar" />
 			<include name="org.eclipse.jdt.core.source_*.jar" />

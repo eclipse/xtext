@@ -23,6 +23,8 @@
 		<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
 		<deployment.url>file://${deployment.folder}</deployment.url>
 		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 	</properties>
 	<build>
 		<plugins>
