@@ -33,6 +33,10 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	protected Primitives getPrimitives() {
+		return primitives;
+	}
+	
 	@Test public void testPrimitiveBooleanBindings() throws Exception {
 		XExpression expression = expression("{!true||false&&true==false!=true}", true);
 		assertOnlyPrimitveOperationsBound(expression);
