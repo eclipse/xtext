@@ -144,12 +144,6 @@ public class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
   
   @Test
   @Ignore(value = "Implement me")
-  public void testPropertySetter_2() throws Exception {
-    Assert.fail("Implement me");
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
   public void testMemberCallOnNull_02() throws Exception {
     Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
   }

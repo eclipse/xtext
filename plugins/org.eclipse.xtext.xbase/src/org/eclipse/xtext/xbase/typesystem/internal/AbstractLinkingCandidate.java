@@ -575,6 +575,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 		JvmIdentifiableElement identifiable = getFeature();
 		if (identifiable instanceof JvmExecutable) {
 			return getArityMismatch((JvmExecutable) identifiable, getArguments());
+		} else if (getExpression() instanceof XAssignment) {
+			return getArguments().size() - 1;
 		} else {
 			return getArguments().size();
 		}

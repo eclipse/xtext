@@ -15,7 +15,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -54,6 +56,18 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	
 	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		acceptor.accept(name.toString(), 1);
+	}
+	
+	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {
+		if (getFeatureCall() instanceof XAssignment) {
+			String aliasedSetter = "set" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedSetter, 2);
+		} else {
+			String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedGetter, 2);
+			String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+			acceptor.accept(aliasedBooleanGetter, 2);
+		}
 	}
 	
 	@Override
