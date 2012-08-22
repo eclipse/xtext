@@ -27,4 +27,15 @@ abstract class AbstractXtendWebsite extends AbstractWebsite {
 	override plusoneURL() { 
 		'http://www.xtend-lang.org' 
 	}
+	
+	override topLevelMenu() {
+		newArrayList(
+			'news.html' -> 'News',
+			'download.html' -> 'Download',
+			'documentation.html' -> 'Documentation',
+			'community.html' -> 'Community',
+			'http://xtext.org' -> 'Xtext',
+			'http://www.eclipse.org' -> 'Eclipse.org'
+		)
+	}
 }

@@ -32,42 +32,36 @@
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
 		<script type="text/javascript">
 	     $(document).ready(function() {
-					prettyPrint();
-	         
-					 $('a[data-rel]').each(function() {
-	             $(this).attr('rel', $(this).data('rel'));
-	         });
-	        
-					 $("a[rel^='prettyPhoto']").prettyPhoto({
-	             animation_speed: 'fast',
-	             slideshow: 5000,
-	             autoplay_slideshow: false,
-	             opacity: 0.80,
-	             show_title: true,
-	             theme: 'ligh_square',
-	             overlay_gallery: false,
-	             social_tools: false
-	       
-	         });
-	         
-					$('#nav-outline > li > a').live('click', function() {        
-						$(this).parent().find('ul').slideToggle();      
-					});
-	         
-					$('.has-popover').popover();
-		 	     
-		 	     getTwitters('tweet', { 
-			        id: 'xtendlang', 
-			        count: 5,
-			        includeRT: true,
-			        enableLinks: true, 
-			        clearContents: true,
-			        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-			     });
-	         
-	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		 	     po.src = 'https://apis.google.com/js/plusone.js';
-		 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			prettyPrint();
+			$('a[data-rel]').each(function() {
+				$(this).attr('rel', $(this).data('rel'));
+			});
+			
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+				animation_speed: 'fast',
+				slideshow: 5000,
+				autoplay_slideshow: false,
+				opacity: 0.80,
+				show_title: true,
+				theme: 'ligh_square',
+				overlay_gallery: false,
+				social_tools: false
+			});
+			$('#nav-outline > li > a').live('click', function() {        
+				$(this).parent().find('ul').slideToggle();      
+			});
+			$('.has-popover').popover();
+			getTwitters('tweet', { 
+				id: 'xtendlang', 
+				count: 5,
+				includeRT: true,
+				enableLinks: true, 
+				clearContents: true,
+				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+			});
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 	     });
 		</script>
 	<script type="text/javascript">
@@ -98,11 +92,12 @@
 				</a> <a class="brand" href="index.html"></a>
 				<div class="nav-collapse collapse" style="height: 0px;">
 					<ul class="nav">
+						<li ><a href="news.html">News</a></li>
 						<li class="active"><a href="download.html">Download</a></li>
 						<li ><a href="documentation.html">Documentation</a></li>
 						<li ><a href="community.html">Community</a></li>
-						<li><a href="http://xtext.org">Xtext</a></li>
-						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+						<li ><a href="http://xtext.org">Xtext</a></li>
+						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

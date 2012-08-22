@@ -5,14 +5,18 @@ import java.io.File
 
 import static extension generator.Generator.*
 
+import org.eclipse.xtend.core.XtendStandaloneSetup
+
 class XtendWebsiteGenerator {
 	
 	def static void main(String[] args) {
 		System::setProperty("java.awt.headless", "true")
+		XtendStandaloneSetup::doSetup
 		// clean dir
 		val out = new File("website")
 		out.generateFiles(
 			new Index,
+			new News,
 			new Download, 
 			new Documentation, 
 			new Community 

@@ -37,6 +37,11 @@ h2 {
 	color: #005580;
 }
 
+h2 small {
+	font-size: 10px;
+	color: #717576;
+}
+
 img {
 	max-width: 100%;
 	height: auto;
