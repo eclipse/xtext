@@ -89,12 +89,6 @@ class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
 	
 	@Test
 	@Ignore("Implement me")
-	override testPropertySetter_2() throws Exception {
-		fail("Implement me")
-	}
-	
-	@Test
-	@Ignore("Implement me")
 	override testMemberCallOnNull_02() throws Exception {
 		fail("Should be unresolved proxy for now - or ambiguous feature later on")
 	}

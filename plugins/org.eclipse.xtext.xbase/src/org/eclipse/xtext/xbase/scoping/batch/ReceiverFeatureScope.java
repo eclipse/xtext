@@ -15,15 +15,12 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -90,12 +87,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 			acceptor.accept(methodName.toString(), 2);
 		} else {
 			super.processFeatureNames(name, acceptor);
-			if (!(getFeatureCall() instanceof XAssignment)) {
-				String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
-				acceptor.accept(aliasedGetter, 2);
-				String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
-				acceptor.accept(aliasedBooleanGetter, 2);
-			}
+			processAsPropertyNames(name, acceptor);
 		}
 	}
 
