@@ -24,6 +24,28 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypeParameterHintCollector {
 
+	protected class DeferredParameterizedTypeReferenceTraverser extends ParameterizedTypeReferenceTraverser {
+		@Override
+		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+				ParameterizedTypeReference declaration) {
+			reference.tryResolve();
+			if (reference.internalIsResolved()) {
+				outerVisit(reference, declaration);
+			} else {
+				addHint(reference, declaration);
+			}
+		}
+
+		@Override
+		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+				Set<JvmTypeParameter> visited) {
+			if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+				return false;
+			}
+			return true;
+		}
+	}
+
 	public StateAwareDeferredTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
 	}
@@ -36,27 +58,7 @@ public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypePa
 	
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ParameterizedTypeReferenceTraverser() {
-			@Override
-			public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-					ParameterizedTypeReference declaration) {
-				reference.tryResolve();
-				if (reference.internalIsResolved()) {
-					outerVisit(reference, declaration);
-				} else {
-					addHint(reference, declaration);
-				}
-			}
-			
-			@Override
-			protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
-					Set<JvmTypeParameter> visited) {
-				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
-					return false;
-				}
-				return true;
-			}
-		};
+		return new DeferredParameterizedTypeReferenceTraverser();
 	}
 
 }
