@@ -67,8 +67,10 @@ public class PdaUtil {
 		}
 
 		public boolean push(T value) {
-			list.addLast(value);
-			return set.add(value);
+			boolean result = set.add(value);
+			if (result)
+				list.addLast(value);
+			return result;
 		}
 
 		@Override
