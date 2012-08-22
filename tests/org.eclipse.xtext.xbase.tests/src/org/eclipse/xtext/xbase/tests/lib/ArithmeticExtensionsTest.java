@@ -184,12 +184,14 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 		assertEquals("long", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testShiftOperators_0() {
 		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
 		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
 		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testShiftOperators_1() {
 		assertEquals(0x8000000000000000L, LongExtensions.shiftLeft(0x1L, 63));
 		assertEquals(0xffffffffffffffffL, LongExtensions.shiftRight(0x8000000000000000L, 63));

@@ -4,10 +4,8 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -64,28 +62,6 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
         }
       };
     IterableExtensions.<Object>forEach(references, _function);
-  }
-  
-  public void assertExpressionTypeIsResolved(final XExpression expression) {
-    final JvmTypeReference type = this.typeProvider.getType(expression);
-    String _string = expression.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = expression.toString();
-    String _plus = (_string_1 + " / ");
-    String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
-  }
-  
-  public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable) {
-    final JvmTypeReference type = this.typeProvider.getTypeForIdentifiable(identifiable);
-    String _string = identifiable.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = identifiable.toString();
-    String _plus = (_string_1 + " / ");
-    String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
   }
   
   @Ignore(value = "fails in old impl")

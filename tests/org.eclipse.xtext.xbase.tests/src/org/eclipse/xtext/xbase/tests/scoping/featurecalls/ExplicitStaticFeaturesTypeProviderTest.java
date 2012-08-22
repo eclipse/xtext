@@ -30,6 +30,7 @@ import com.google.inject.Provider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 
 	@Inject

@@ -9,17 +9,15 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typing.ITypeProvider
 import org.eclipse.xtext.xtype.XFunctionTypeRef
-
-import static org.junit.Assert.*
 import org.junit.Ignore
 import org.junit.Test
+
+import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow
@@ -85,18 +83,6 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 			assertTrue(reference instanceof XFunctionTypeRef)
 			assertEquals(types.get(index), (reference as XFunctionTypeRef).equivalent.simpleName)
 		]
-	}
-	
-	def void assertExpressionTypeIsResolved(XExpression expression) {
-		val type = typeProvider.getType(expression)
-		assertNotNull(expression.toString, type)
-		assertNotNull(expression.toString + " / " + type, type.identifier)	
-	}
-	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable) {
-		val type = typeProvider.getTypeForIdentifiable(identifiable)
-		assertNotNull(identifiable.toString, type)
-		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
 	
 	@Ignore("fails in old impl")

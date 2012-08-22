@@ -33,6 +33,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 
 	@Inject 

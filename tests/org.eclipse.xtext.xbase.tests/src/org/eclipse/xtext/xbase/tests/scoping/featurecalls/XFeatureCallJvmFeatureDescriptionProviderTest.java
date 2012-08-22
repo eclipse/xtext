@@ -27,6 +27,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	
 	@Test public void testNoContext() throws Exception {
