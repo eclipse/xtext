@@ -29,16 +29,23 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 
 	public static void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType,
 			List<JvmTypeParameter> typeParameters, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			BoundTypeArgumentSource source,
 			ITypeReferenceOwner owner) {
-		TypeArgumentFromComputedTypeCollector implementation = new TypeArgumentFromComputedTypeCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, owner);
+		TypeArgumentFromComputedTypeCollector implementation = new TypeArgumentFromComputedTypeCollector(typeParameters, source, owner);
 		implementation.populateTypeParameterMapping(declaredType, actualType);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> parameterMapping = implementation.rawGetTypeParameterMapping();
 		for(Map.Entry<JvmTypeParameter, LightweightBoundTypeArgument> entry: parameterMapping.entries()) {
 			LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(entry.getKey());
-			if (boundTypeArgument != null && boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-				UnboundTypeReference typeReference = (UnboundTypeReference) boundTypeArgument.getTypeReference();
-				if (!typeReference.internalIsResolved()) {
-					typeReference.acceptHint(entry.getValue());
+			if (boundTypeArgument != null ) {
+				LightweightBoundTypeArgument computedBoundTypeArgument = entry.getValue();
+				if (computedBoundTypeArgument.getSource() == BoundTypeArgumentSource.RESOLVED) {
+					VarianceInfo varianceInfo = computedBoundTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(computedBoundTypeArgument.getActualVariance());
+					typeParameterMapping.put(entry.getKey(), new LightweightMergedBoundTypeArgument(computedBoundTypeArgument.getTypeReference(), varianceInfo));
+				} else if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+					UnboundTypeReference typeReference = (UnboundTypeReference) boundTypeArgument.getTypeReference();
+					if (!typeReference.internalIsResolved()) {
+						typeReference.acceptHint(entry.getValue());
+					}
 				}
 			}
 		}

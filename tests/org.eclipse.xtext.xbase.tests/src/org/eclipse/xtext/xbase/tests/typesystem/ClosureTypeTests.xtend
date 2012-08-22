@@ -245,6 +245,12 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test
+	override testClosure_26() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
 	override testMemberFeatureCall_01() throws Exception {
 		fail("fails in old impl")
 	}

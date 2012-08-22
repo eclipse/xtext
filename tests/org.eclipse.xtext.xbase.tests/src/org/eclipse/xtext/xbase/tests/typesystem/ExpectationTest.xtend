@@ -120,8 +120,13 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testAssignment() {
+	def void testAssignment_01() {
 		"{ val String s = null }".expects.types('String')
+	}
+	
+	@Test
+	def void testAssignment_02() {
+		"{ val String s; s = null }".expects.types('String')
 	}
 	
 	@Test
@@ -175,7 +180,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	@Test
 	@Ignore("TODO null type is bound differently")
 	def void testExtensionReceiver_01() {
-		"null.isNullOrEmpty()".expects.types('String')
+		"null.isNullOrEmpty()".expects.types('String', 'Iterable<Unbound[T]>')
 	}
 	
 	@Test
@@ -198,6 +203,16 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testForLoop_01() {
 		"for(int x: null) {}".expects.types('int[]').finalizedAs('int[]')
+	}
+	
+	@Test
+	def void testUpperBound_01() {
+		"(1 as Comparable<?>).compareTo(null)".expects.types('null').finalizedAs('null')
+	}
+	
+	@Test
+	def void testLowerBound_01() {
+		"(1 as Comparable<? super CharSequence>).compareTo(null)".expects.types('CharSequence').finalizedAs('CharSequence')
 	}
 }
 

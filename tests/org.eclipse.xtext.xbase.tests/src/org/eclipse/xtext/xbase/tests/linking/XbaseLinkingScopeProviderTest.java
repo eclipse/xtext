@@ -606,18 +606,34 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
+	@Test public void testOverloadedMethods_05() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+						"    var java.util.List<?> any = null\n" +
+						"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+						"    receiver.overloaded(any, any)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(2);
+		JvmIdentifiableElement overloaded = featureCall.getFeature();
+		assertNotNull(overloaded);
+		assertFalse(overloaded.eIsProxy());
+		assertEquals("testdata.OverloadedMethods.overloaded(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
+	}
+	
 	@Test public void testOverloadedMethodsJava_01() throws Exception {
 		List<CharSequence> chars = null;
 		List<String> strings = null;
 		List<? extends Object> objects = null;
+		List<?> wildcards = null;
 		assertEquals("overloaded(Collection,Iterable)", new OverloadedMethods<Object>().overloaded(chars, strings));
 		assertEquals("overloaded(Iterable,Collection)", new OverloadedMethods<Object>().overloaded(strings, chars));
 		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(strings, strings));
 		assertEquals("overloaded(List,List)", new OverloadedMethods<Object>().overloaded(chars, chars));
 		assertEquals("overloaded(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded(objects, objects));
+		assertEquals("overloaded(Iterable,Iterable)", new OverloadedMethods<Object>().overloaded(wildcards, wildcards));
 	}
 	
-	@Test public void testOverloadedMethods_05() throws Exception {
+	@Test public void testOverloadedMethods_06() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" +
 				"    var java.util.List<CharSequence> chars = null\n" +
@@ -632,7 +648,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.Collection,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	@Test public void testOverloadedMethods_06() throws Exception {
+	@Test public void testOverloadedMethods_07() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" +
 				"    var java.util.List<CharSequence> chars = null\n" +
@@ -647,7 +663,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.util.Collection)", overloaded.getIdentifier());
 	}
 	
-	@Test public void testOverloadedMethods_07() throws Exception {
+	@Test public void testOverloadedMethods_08() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" +
 				"    var java.util.List<String> strings = null\n" +
@@ -661,7 +677,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.util.List,java.util.List)", overloaded.getIdentifier());
 	}
 	
-	@Test public void testOverloadedMethods_08() throws Exception {
+	@Test public void testOverloadedMethods_09() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" +
 				"    var java.util.List<? extends Object> objects = null\n" +
@@ -675,7 +691,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.OverloadedMethods.overloaded2(java.lang.Iterable,java.lang.Iterable)", overloaded.getIdentifier());
 	}
 	
-	@Test public void testOverloadedMethods_09() throws Exception {
+	@Test public void testOverloadedMethods_10() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" +
 				"    var java.util.List<? extends CharSequence> chars = null\n" +

@@ -127,10 +127,4 @@ class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
 		}
 	}
 	
-	@Test
-	@Ignore("Fix me")
-	override testOverloadedMethods_04() throws Exception {
-		fail("Fix me")
-	}
-	
 }

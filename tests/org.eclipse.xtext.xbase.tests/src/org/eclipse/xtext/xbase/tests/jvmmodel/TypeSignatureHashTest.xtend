@@ -18,7 +18,6 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import static extension org.eclipse.xtext.util.Strings.*;
-import org.junit.Ignore
 
 /**
  * The remaining tests are in xtend.core.tests, as it is a lot easier to specify JvmModels in Xtend ;-)

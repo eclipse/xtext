@@ -855,10 +855,76 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
          }".resolvesTo("Map<Integer, String>")
 	}
 	
-	@Test def void testConstructorCall() throws Exception {
+	@Test def void testEMap_05() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null
+		  eMap.map[ key ].head
+         }".resolvesTo("Integer")
+	}
+	
+	@Test def void testEMap_06() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null
+		  eMap.map[ value ].head
+         }".resolvesTo("String")
+	}
+	
+	@Test def void testEMap_07() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null
+		  eMap.map[ it ].head
+         }".resolvesTo("Entry<? extends Integer, String>")
+	}
+	
+	@Test def void testEMap_08() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null
+		  eMap.map
+         }".resolvesTo("Map<? extends Integer, String>")
+	}
+	
+	@Test def void testEMap_09() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null
+		  eMap.map[ key ].head
+         }".resolvesTo("Object")
+	}
+	
+	@Test def void testEMap_10() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null
+		  eMap.map[ value ].head
+         }".resolvesTo("String")
+	}
+	
+	@Test def void testEMap_11() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null
+		  eMap.map[ it ].head
+         }".resolvesTo("Entry<? super Integer, String>")
+	}
+	
+	@Test def void testEMap_12() throws Exception {
+		"{ 
+          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null
+		  eMap.map
+         }".resolvesTo("Map<? super Integer, String>")
+	}
+	
+	@Test def void testConstructorCall_01() throws Exception {
 		"new java.util.ArrayList<String>()".resolvesTo("ArrayList<String>")
 		"new java.util.HashMap<String,Boolean>".resolvesTo("HashMap<String, Boolean>");
 		"new java.util.ArrayList()".resolvesTo("ArrayList<Object>")
+	}
+	
+	@Test def void testConstructorCall_02() throws Exception {
+		"new java.util.ArrayList<? extends String>()".resolvesTo("ArrayList<String>")
+		"new java.util.HashMap<? extends String, ? extends Boolean>".resolvesTo("HashMap<String, Boolean>");
+	}
+	
+	@Test def void testConstructorCall_03() throws Exception {
+		"new java.util.ArrayList<? super String>()".resolvesTo("ArrayList<Object>")
+		"new java.util.HashMap<? super String,Boolean>".resolvesTo("HashMap<Object, Boolean>");
 	}
 	
 	@Test def void testConstructorTypeInference_01() throws Exception {
