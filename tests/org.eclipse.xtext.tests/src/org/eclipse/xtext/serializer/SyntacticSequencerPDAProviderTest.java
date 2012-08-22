@@ -646,4 +646,57 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	@Test
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=387731
+	public void testPotentialOOME() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("AllElements: elements+=Elements*; \n");
+		grammar.append("Elements: Dummy | Model;\n");
+		grammar.append("Dummy: 'Dummy' name=ID; \n");
+		grammar.append("Model: 'model' '{' greetings1+=Greeting1+ & greetings2+=Greeting2* '}';\n");
+		grammar.append("Greeting1: 'Hello' name=ID '!';\n");
+		grammar.append("Greeting2: 'Hi' name=ID '!';");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("AllElements_AllElements:\n");
+		expected.append("  elements+=Elements elements+=Elements\n");
+		expected.append("  elements+=Elements stop\n");
+		expected.append("  start elements+=Elements\n");
+		expected.append("Dummy_Dummy:\n");
+		expected.append("  name=ID stop\n");
+		expected.append("  start 'Dummy' name=ID\n");
+		expected.append("Dummy_Elements:\n");
+		expected.append("  name=ID <<Dummy stop\n");
+		expected.append("  start >>Dummy 'Dummy' name=ID\n");
+		expected.append("Greeting1_Greeting1:\n");
+		expected.append("  name=ID '!' stop\n");
+		expected.append("  start 'Hello' name=ID\n");
+		expected.append("Greeting2_Greeting2:\n");
+		expected.append("  name=ID '!' stop\n");
+		expected.append("  start 'Hi' name=ID\n");
+		expected.append("Model_Elements:\n");
+		expected.append("  greetings1+=Greeting1 '}'* <<Model stop\n");
+		expected.append("  greetings1+=Greeting1 '}'* greetings2+=Greeting2\n");
+		expected.append("  greetings1+=Greeting1 ('}'* 'model' '{')? greetings1+=Greeting1\n");
+		expected.append("  greetings2+=Greeting2 '}'* greetings2+=Greeting2\n");
+		expected.append("  greetings2+=Greeting2 '}'+ 'model' '{' greetings1+=Greeting1\n");
+		expected.append("  greetings2+=Greeting2 '}'+ <<Model stop\n");
+		expected.append("  start >>Model '}'* 'model' '{' greetings1+=Greeting1\n");
+		expected.append("  start >>Model '}'* greetings2+=Greeting2\n");
+		expected.append("  start >>Model '}'+ <<Model stop\n");
+		expected.append("Model_Model:\n");
+		expected.append("  greetings1+=Greeting1 '}'* greetings2+=Greeting2\n");
+		expected.append("  greetings1+=Greeting1 '}'* stop\n");
+		expected.append("  greetings1+=Greeting1 ('}'* 'model' '{')? greetings1+=Greeting1\n");
+		expected.append("  greetings2+=Greeting2 '}'* greetings2+=Greeting2\n");
+		expected.append("  greetings2+=Greeting2 '}'+ 'model' '{' greetings1+=Greeting1\n");
+		expected.append("  greetings2+=Greeting2 '}'+ stop\n");
+		expected.append("  start '}'* 'model' '{' greetings1+=Greeting1\n");
+		expected.append("  start '}'* greetings2+=Greeting2\n");
+		expected.append("  start '}'+ stop\n");
+		expected.append("null_AllElements:\n");
+		expected.append("  start stop");
+		assertEquals(expected.toString(), actual);
+	}
+
 }
