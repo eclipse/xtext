@@ -879,10 +879,62 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testConstructorCall() throws Exception {
+  public void testEMap_05() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ key ].head\n         }", "Integer");
+  }
+  
+  @Test
+  public void testEMap_06() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ value ].head\n         }", "String");
+  }
+  
+  @Test
+  public void testEMap_07() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ it ].head\n         }", "Entry<? extends Integer, String>");
+  }
+  
+  @Test
+  public void testEMap_08() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map\n         }", "Map<? extends Integer, String>");
+  }
+  
+  @Test
+  public void testEMap_09() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null\n\t\t  eMap.map[ key ].head\n         }", "Object");
+  }
+  
+  @Test
+  public void testEMap_10() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null\n\t\t  eMap.map[ value ].head\n         }", "String");
+  }
+  
+  @Test
+  public void testEMap_11() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null\n\t\t  eMap.map[ it ].head\n         }", "Entry<? super Integer, String>");
+  }
+  
+  @Test
+  public void testEMap_12() throws Exception {
+    this.resolvesTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? super Integer, String> eMap = null\n\t\t  eMap.map\n         }", "Map<? super Integer, String>");
+  }
+  
+  @Test
+  public void testConstructorCall_01() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>()", "ArrayList<String>");
     this.resolvesTo("new java.util.HashMap<String,Boolean>", "HashMap<String, Boolean>");
     this.resolvesTo("new java.util.ArrayList()", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testConstructorCall_02() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<? extends String>()", "ArrayList<String>");
+    this.resolvesTo("new java.util.HashMap<? extends String, ? extends Boolean>", "HashMap<String, Boolean>");
+  }
+  
+  @Test
+  public void testConstructorCall_03() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<? super String>()", "ArrayList<Object>");
+    this.resolvesTo("new java.util.HashMap<? super String,Boolean>", "HashMap<Object, Boolean>");
   }
   
   @Test

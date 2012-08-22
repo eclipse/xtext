@@ -30,6 +30,7 @@ import com.google.common.base.Predicate;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testStaticMethods() throws Exception {

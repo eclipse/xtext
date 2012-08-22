@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgumen
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 
@@ -44,17 +45,24 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
 		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
+		int laterCount = 0;
+		boolean inferredAsWildcard = false;
 		for(LightweightBoundTypeArgument hint: hints) {
 			if (hint.getDeclaredVariance() != null) {
 				hintsToProcess.add(hint);
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					if (hint.getTypeReference() instanceof WildcardTypeReference) {
+						inferredAsWildcard = true;
+					}
 					inferredHintsToProcess.add(hint);
+				} else if (hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
+					laterCount++;
 				}
 			}
 		}
 		BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
-		LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() ? hintsToProcess : inferredHintsToProcess, left.getOwner());
-		if (mergeResult != null) {
+		LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
+		if (mergeResult != null && mergeResult.getVariance() != null) {
 			TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
 			return result;
 		}

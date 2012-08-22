@@ -181,10 +181,4 @@ public class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
       this.failOnUnresolvedProxy = true;
     }
   }
-  
-  @Test
-  @Ignore(value = "Fix me")
-  public void testOverloadedMethods_04() throws Exception {
-    Assert.fail("Fix me");
-  }
 }

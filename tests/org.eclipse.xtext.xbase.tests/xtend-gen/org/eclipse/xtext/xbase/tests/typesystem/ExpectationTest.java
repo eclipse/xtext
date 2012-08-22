@@ -178,8 +178,14 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAssignment() {
+  public void testAssignment_01() {
     ExpectationTest _expects = this.expects("{ val String s = null }");
+    _expects.types("String");
+  }
+  
+  @Test
+  public void testAssignment_02() {
+    ExpectationTest _expects = this.expects("{ val String s; s = null }");
     _expects.types("String");
   }
   
@@ -234,7 +240,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   @Ignore(value = "TODO null type is bound differently")
   public void testExtensionReceiver_01() {
     ExpectationTest _expects = this.expects("null.isNullOrEmpty()");
-    _expects.types("String");
+    _expects.types("String", "Iterable<Unbound[T]>");
   }
   
   @Test
@@ -263,5 +269,19 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     ExpectationTest _expects = this.expects("for(int x: null) {}");
     ExpectationTest _types = _expects.types("int[]");
     _types.finalizedAs("int[]");
+  }
+  
+  @Test
+  public void testUpperBound_01() {
+    ExpectationTest _expects = this.expects("(1 as Comparable<?>).compareTo(null)");
+    ExpectationTest _types = _expects.types("null");
+    _types.finalizedAs("null");
+  }
+  
+  @Test
+  public void testLowerBound_01() {
+    ExpectationTest _expects = this.expects("(1 as Comparable<? super CharSequence>).compareTo(null)");
+    ExpectationTest _types = _expects.types("CharSequence");
+    _types.finalizedAs("CharSequence");
   }
 }
