@@ -146,7 +146,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 				}
 			} else if (type instanceof JvmTypeParameterDeclarator
 					&& !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
-				doVisitSuperTypesWithMatchingParams(reference, declaration);
+				doVisitMatchingTypeParameters(reference, declaration);
 			}
 		}
 
@@ -155,7 +155,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			// nothing to do
 		}
 
-		protected void doVisitSuperTypesWithMatchingParams(ParameterizedTypeReference reference,
+		protected void doVisitMatchingTypeParameters(ParameterizedTypeReference reference,
 				ParameterizedTypeReference declaration) {
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
 			TypeParameterSubstitutor<?> actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
