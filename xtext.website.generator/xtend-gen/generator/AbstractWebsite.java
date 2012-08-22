@@ -9,9 +9,12 @@ import com.google.inject.Injector;
 import generator.Resource;
 import java.io.File;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
@@ -143,126 +146,10 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("     ");
     _builder.append("$(document).ready(function() {");
     _builder.newLine();
-    {
-      boolean _isPrettyPrint = this.isPrettyPrint();
-      if (_isPrettyPrint) {
-        _builder.append("\t\t\t\t");
-        _builder.append("prettyPrint();");
-        _builder.newLine();
-      }
-    }
-    _builder.append("         ");
-    _builder.newLine();
-    _builder.append("\t\t\t\t ");
-    _builder.append("$(\'a[data-rel]\').each(function() {");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("$(this).attr(\'rel\', $(this).data(\'rel\'));");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.append("});");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.newLine();
-    _builder.append("\t\t\t\t ");
-    _builder.append("$(\"a[rel^=\'prettyPhoto\']\").prettyPhoto({");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("animation_speed: \'fast\',");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("slideshow: 5000,");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("autoplay_slideshow: false,");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("opacity: 0.80,");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("show_title: true,");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("theme: \'ligh_square\',");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("overlay_gallery: false,");
-    _builder.newLine();
-    _builder.append("             ");
-    _builder.append("social_tools: false");
-    _builder.newLine();
-    _builder.append("       ");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.append("});");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.newLine();
-    {
-      boolean _isOutline = this.isOutline();
-      if (_isOutline) {
-        _builder.append("\t\t\t\t");
-        _builder.append("$(\'#nav-outline > li > a\').live(\'click\', function() {        ");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("$(this).parent().find(\'ul\').slideToggle();      ");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("});");
-        _builder.newLine();
-      }
-    }
-    _builder.append("         ");
-    _builder.newLine();
-    {
-      boolean _isPopover = this.isPopover();
-      if (_isPopover) {
-        _builder.append("\t\t\t\t");
-        _builder.append("$(\'.has-popover\').popover();");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t \t     ");
-    _builder.newLine();
-    _builder.append("\t \t     ");
-    _builder.append("getTwitters(\'tweet\', { ");
-    _builder.newLine();
-    _builder.append("\t\t        ");
-    _builder.append("id: \'");
-    String _twitterID = this.twitterID();
-    _builder.append(_twitterID, "		        ");
-    _builder.append("\', ");
+    _builder.append("\t\t");
+    CharSequence _jsOnLoad = this.jsOnLoad();
+    _builder.append(_jsOnLoad, "		");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t        ");
-    _builder.append("count: 5,");
-    _builder.newLine();
-    _builder.append("\t\t        ");
-    _builder.append("includeRT: true,");
-    _builder.newLine();
-    _builder.append("\t\t        ");
-    _builder.append("enableLinks: true, ");
-    _builder.newLine();
-    _builder.append("\t\t        ");
-    _builder.append("clearContents: true,");
-    _builder.newLine();
-    _builder.append("\t\t        ");
-    _builder.append("template : \'\"%text%\" - %time% by <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">@%user_screen_name%</a><br/><br/>\'");
-    _builder.newLine();
-    _builder.append("\t\t     ");
-    _builder.append("});");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.append("var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;");
-    _builder.newLine();
-    _builder.append("\t \t     ");
-    _builder.append("po.src = \'https://apis.google.com/js/plusone.js\';");
-    _builder.newLine();
-    _builder.append("\t \t     ");
-    _builder.append("var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);");
-    _builder.newLine();
     _builder.append("     ");
     _builder.append("});");
     _builder.newLine();
@@ -322,6 +209,104 @@ public abstract class AbstractWebsite implements Resource {
     return "UA-2429174-3";
   }
   
+  public CharSequence jsOnLoad() {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isPrettyPrint = this.isPrettyPrint();
+      if (_isPrettyPrint) {
+        _builder.append("prettyPrint();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("$(\'a[data-rel]\').each(function() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("$(this).attr(\'rel\', $(this).data(\'rel\'));");
+    _builder.newLine();
+    _builder.append("});");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("$(\"a[rel^=\'prettyPhoto\']\").prettyPhoto({");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("animation_speed: \'fast\',");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("slideshow: 5000,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("autoplay_slideshow: false,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("opacity: 0.80,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("show_title: true,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("theme: \'ligh_square\',");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("overlay_gallery: false,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("social_tools: false");
+    _builder.newLine();
+    _builder.append("});");
+    _builder.newLine();
+    {
+      boolean _isOutline = this.isOutline();
+      if (_isOutline) {
+        _builder.append("$(\'#nav-outline > li > a\').live(\'click\', function() {        ");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("$(this).parent().find(\'ul\').slideToggle();      ");
+        _builder.newLine();
+        _builder.append("});");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _isPopover = this.isPopover();
+      if (_isPopover) {
+        _builder.append("$(\'.has-popover\').popover();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("getTwitters(\'tweet\', { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("id: \'");
+    String _twitterID = this.twitterID();
+    _builder.append(_twitterID, "	");
+    _builder.append("\', ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("count: 5,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("includeRT: true,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("enableLinks: true, ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("clearContents: true,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("template : \'\"%text%\" - %time% by <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">@%user_screen_name%</a><br/><br/>\'");
+    _builder.newLine();
+    _builder.append("});");
+    _builder.newLine();
+    _builder.append("var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;");
+    _builder.newLine();
+    _builder.append("po.src = \'https://apis.google.com/js/plusone.js\';");
+    _builder.newLine();
+    _builder.append("var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public String twitterID() {
     return "xtext";
   }
@@ -336,6 +321,17 @@ public abstract class AbstractWebsite implements Resource {
   
   protected boolean isPopover() {
     return true;
+  }
+  
+  public Iterable<Pair<String,String>> topLevelMenu() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("download.html", "Download");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("7languages.html", "7 Languages");
+    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("documentation.html", "Documentation");
+    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("community.html", "Community");
+    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("http://xtend-lang.org", "Xtend");
+    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
+    ArrayList<Pair<String,String>> _newArrayList = CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
+    return _newArrayList;
   }
   
   public CharSequence navBar() {
@@ -371,74 +367,29 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t");
     _builder.append("<ul class=\"nav\">");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li ");
     {
-      String _path = this.path();
-      boolean _equals = Objects.equal(_path, "download.html");
-      if (_equals) {
-        _builder.append("class=\"active\"");
+      Iterable<Pair<String,String>> _pLevelMenu = this.topLevelMenu();
+      for(final Pair<String,String> it : _pLevelMenu) {
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<li ");
+        {
+          String _path = this.path();
+          String _key = it.getKey();
+          boolean _equals = Objects.equal(_path, _key);
+          if (_equals) {
+            _builder.append("class=\"active\"");
+          }
+        }
+        _builder.append("><a href=\"");
+        String _key_1 = it.getKey();
+        _builder.append(_key_1, "					");
+        _builder.append("\">");
+        String _value = it.getValue();
+        _builder.append(_value, "					");
+        _builder.append("</a></li>");
+        _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("><a href=\"download.html\">Download</a></li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li ");
-    {
-      boolean _or = false;
-      String _path_1 = this.path();
-      boolean _equals_1 = Objects.equal(_path_1, "7languages.html");
-      if (_equals_1) {
-        _or = true;
-      } else {
-        String _path_2 = this.path();
-        boolean _equals_2 = Objects.equal(_path_2, "7languagesDoc.html");
-        _or = (_equals_1 || _equals_2);
-      }
-      if (_or) {
-        _builder.append("class=\"active\"");
-      }
-    }
-    _builder.append("><a href=\"7languages.html\">7 Languages</a></li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li ");
-    {
-      String _path_3 = this.path();
-      boolean _equals_3 = Objects.equal(_path_3, "documentation.html");
-      if (_equals_3) {
-        _builder.append("class=\"active\"");
-      }
-    }
-    _builder.append("><a href=\"documentation.html\">Documentation</a></li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li ");
-    {
-      String _path_4 = this.path();
-      boolean _equals_4 = Objects.equal(_path_4, "community.html");
-      if (_equals_4) {
-        _builder.append("class=\"active\"");
-      }
-    }
-    _builder.append("><a href=\"community.html\">Community</a></li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li>");
-    {
-      String _twitterID = this.twitterID();
-      boolean _equalsIgnoreCase = _twitterID.equalsIgnoreCase("xtext");
-      if (_equalsIgnoreCase) {
-        _builder.append("<a href=\"http://xtend-lang.org\">Xtend</a>");
-      } else {
-        _builder.append("<a href=\"http://xtext.org\">Xtext</a>");
-      }
-    }
-    _builder.append("</li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
-    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();

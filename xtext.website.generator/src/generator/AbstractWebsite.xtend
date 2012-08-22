@@ -6,6 +6,8 @@ import com.google.common.base.Charsets
 import static extension com.google.common.io.CharStreams.*
 import static extension com.google.common.io.Files.*
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
+import java.lang.Iterable
+import org.eclipse.xtext.xbase.lib.Pair
 
 abstract class AbstractWebsite implements Resource {
 	
@@ -70,48 +72,7 @@ abstract class AbstractWebsite implements Resource {
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
 			<script type="text/javascript">
 		     $(document).ready(function() {
-						«IF isPrettyPrint»
-										 prettyPrint();
-						«ENDIF»
-		         
-						 $('a[data-rel]').each(function() {
-		             $(this).attr('rel', $(this).data('rel'));
-		         });
-		        
-						 $("a[rel^='prettyPhoto']").prettyPhoto({
-		             animation_speed: 'fast',
-		             slideshow: 5000,
-		             autoplay_slideshow: false,
-		             opacity: 0.80,
-		             show_title: true,
-		             theme: 'ligh_square',
-		             overlay_gallery: false,
-		             social_tools: false
-		       
-		         });
-		         
-						«IF isOutline»
-											$('#nav-outline > li > a').live('click', function() {        
-												$(this).parent().find('ul').slideToggle();      
-											});
-						«ENDIF»
-		         
-						«IF isPopover()»
-											$('.has-popover').popover();
-						«ENDIF»
-			 	     
-			 	     getTwitters('tweet', { 
-				        id: '«twitterID»', 
-				        count: 5,
-				        includeRT: true,
-				        enableLinks: true, 
-				        clearContents: true,
-				        template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
-				     });
-		         
-		         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			 	     po.src = 'https://apis.google.com/js/plusone.js';
-			 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+				«jsOnLoad»
 		     });
 			</script>
 		<script type="text/javascript">
@@ -131,12 +92,62 @@ abstract class AbstractWebsite implements Resource {
 		</script>
 	'''
 	def analyticsAccount() { 'UA-2429174-3' }
+	
+	def CharSequence jsOnLoad() '''
+		«IF isPrettyPrint»
+			prettyPrint();
+		«ENDIF»
+		$('a[data-rel]').each(function() {
+			$(this).attr('rel', $(this).data('rel'));
+		});
+
+		$("a[rel^='prettyPhoto']").prettyPhoto({
+			animation_speed: 'fast',
+			slideshow: 5000,
+			autoplay_slideshow: false,
+			opacity: 0.80,
+			show_title: true,
+			theme: 'ligh_square',
+			overlay_gallery: false,
+			social_tools: false
+		});
+		«IF isOutline»
+			$('#nav-outline > li > a').live('click', function() {        
+				$(this).parent().find('ul').slideToggle();      
+			});
+		«ENDIF»
+		«IF isPopover()»
+			$('.has-popover').popover();
+		«ENDIF»
+		getTwitters('tweet', { 
+			id: '«twitterID»', 
+			count: 5,
+			includeRT: true,
+			enableLinks: true, 
+			clearContents: true,
+			template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+		});
+		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	'''
 
 	def twitterID() { 'xtext' }
 
 	def protected boolean isPrettyPrint() { false }
 	def protected boolean isOutline() { true }
 	def protected boolean isPopover() { true }
+	
+	def Iterable<Pair<String,String>> topLevelMenu() {
+		newArrayList(
+			'download.html' -> 'Download',
+			'7languages.html' -> '7 Languages',
+			'documentation.html' -> 'Documentation',
+			'community.html' -> 'Community',
+			'http://xtend-lang.org' -> 'Xtend',
+			'http://www.eclipse.org' -> 'Eclipse.org'
+		)
+	}
 
 	def navBar() '''
 		<!-- Navbar -->
@@ -150,12 +161,9 @@ abstract class AbstractWebsite implements Resource {
 					</a> <a class="brand" href="index.html"></a>
 					<div class="nav-collapse collapse" style="height: 0px;">
 						<ul class="nav">
-							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
-							<li «IF path == '7languages.html' || path == '7languagesDoc.html'»class="active"«ENDIF»><a href="7languages.html">7 Languages</a></li>
-							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
-							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
-							<li>«IF twitterID.equalsIgnoreCase('xtext')»<a href="http://xtend-lang.org">Xtend</a>«ELSE»<a href="http://xtext.org">Xtext</a>«ENDIF»</li>
-							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+							«FOR it : topLevelMenu»
+							<li «IF path == key»class="active"«ENDIF»><a href="«key»">«value»</a></li>
+							«ENDFOR»
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
