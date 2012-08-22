@@ -105,6 +105,10 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					}
 				}
 			} else if (rightReference.isPrimitive()) {
+				if (leftReference.isType(Object.class))
+					return new TypeConformanceResult(ConformanceHint.BOXING);
+				if (leftReference.isType(String.class))
+					return TypeConformanceResult.FAILED;
 				LightweightTypeReference wrapper = rightReference.getWrapperTypeIfPrimitive();
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, wrapper, param);
 				if (result.isConformant()) {

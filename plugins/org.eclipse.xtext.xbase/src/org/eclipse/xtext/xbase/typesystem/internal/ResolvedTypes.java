@@ -144,10 +144,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
-		Collection<TypeData> result = basicGetExpressionTypes().get(expression);
-		if (result.isEmpty())
-			return null;
-		return result;
+		Multimap<XExpression, TypeData> multimap = basicGetExpressionTypes();
+		if (multimap.containsKey(expression))
+			return multimap.get(expression);
+		return null;
 	}
 	
 	@Nullable
@@ -572,7 +572,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
-		return basicGetTypeParameterHints().get(handle);
+		ListMultimap<Object,LightweightBoundTypeArgument> multimap = basicGetTypeParameterHints();
+		if (multimap.containsKey(handle))
+			return multimap.get(handle);
+		return Collections.emptyList();
 	}
 
 	protected void addNonRecursiveHints(List<LightweightBoundTypeArgument> hints, Set<Object> seenHandles,
