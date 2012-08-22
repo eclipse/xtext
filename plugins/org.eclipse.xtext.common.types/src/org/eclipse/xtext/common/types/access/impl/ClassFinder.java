@@ -22,6 +22,11 @@ public class ClassFinder {
 
 	public Class<?> forName(String name) throws ClassNotFoundException {
 		try {
+			if (name.length() <= "boolean".length() && name.indexOf('.') == -1) {
+				Class<?> result = Primitives.forName(name);
+				if (result != null)
+					return result;
+			}
 			return Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
 		} catch(ClassNotFoundException e) {
 			Class<?> result = Primitives.forName(name);
