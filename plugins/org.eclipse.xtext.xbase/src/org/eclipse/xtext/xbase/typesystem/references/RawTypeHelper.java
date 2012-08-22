@@ -24,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
