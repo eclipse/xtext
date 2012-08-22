@@ -28,6 +28,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	
 	@Test public void testFinalFields() throws Exception {
