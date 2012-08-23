@@ -781,6 +781,45 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("Integer")
 	}
 	
+	@Test def void testSwitchExpression_7() throws Exception {
+		"{
+			val Comparable<Object> it = null
+			switch it {
+	            CharSequence: switch(it) {
+                    Appendable: {
+                        charAt(1)
+                    }
+                }
+        	}
+		}".resolvesTo("Character")
+	}
+	
+	@Test def void testSwitchExpression_8() throws Exception {
+		"{
+			val Comparable<Object> it = null
+			switch it {
+	            CharSequence: switch(it) {
+                    Appendable: {
+                        append(null)
+                    }
+                }
+        	}
+		}".resolvesTo("Appendable")
+	}
+	
+	@Test def void testSwitchExpression_9() throws Exception {
+		"{
+			val Comparable<Object> it = null
+			switch it {
+	            CharSequence: switch(it) {
+                    Appendable: {
+                        compareTo(null)
+                    }
+                }
+        	}
+		}".resolvesTo("Integer")
+	}
+	
 	@Test def void testTypeGuardedCase_0() throws Exception {
 		"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & CharSequence")
 //		assertEquals("Object", toString(typeProvider.getType(expression.getSwitch())));
@@ -1498,6 +1537,13 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testFeatureCall_26a() throws Exception {
 		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+           val Object o = list.head 
+           list.head
+        }".resolvesTo("Integer");
+	}
+	
+	@Test def void testFeatureCall_26b() throws Exception {
+		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.compareTo(null))
            val Object o = list.head 
            list.head
         }".resolvesTo("Integer");
