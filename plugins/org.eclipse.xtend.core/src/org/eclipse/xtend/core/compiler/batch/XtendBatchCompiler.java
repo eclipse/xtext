@@ -117,7 +117,7 @@ public class XtendBatchCompiler {
 	public void setUseCurrentClassLoaderAsParent(boolean useCurrentClassLoaderAsParent) {
 		this.useCurrentClassLoaderAsParent = useCurrentClassLoaderAsParent;
 	}
-	
+
 	public String getTempDirectory() {
 		return tempDirectory;
 	}
@@ -233,7 +233,7 @@ public class XtendBatchCompiler {
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
 			Iterable<Issue> warnings = Iterables.filter(issues, SeverityFilter.WARNING);
-			reportIssues(Iterables.concat(errors,warnings));
+			reportIssues(Iterables.concat(errors, warnings));
 			if (!Iterables.isEmpty(errors)) {
 				return false;
 			}
@@ -298,9 +298,9 @@ public class XtendBatchCompiler {
 			commandLine.add("-verbose");
 		}
 		if (!isEmpty(classPath)) {
-			commandLine.add("-cp " + concat(File.pathSeparator, getClassPathEntries()));
+			commandLine.add("-cp \"" + concat(File.pathSeparator, getClassPathEntries())+"\"");
 		}
-		commandLine.add("-d \"" + classDirectory.toString()+"\"");
+		commandLine.add("-d \"" + classDirectory.toString() + "\"");
 		commandLine.add("-" + getComplianceLevel());
 		commandLine.add("-proceedOnError");
 		List<String> sourceDirectories = newArrayList(getSourcePathDirectories());
@@ -324,7 +324,7 @@ public class XtendBatchCompiler {
 		for (Resource resource : resources) {
 			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(resource.getURI());
-			if(resourceServiceProvider != null){
+			if (resourceServiceProvider != null) {
 				IResourceValidator resourceValidator = resourceServiceProvider.getResourceValidator();
 				List<Issue> result = resourceValidator.validate(resource, CheckMode.ALL, null);
 				addAll(issues, result);
@@ -354,7 +354,8 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class),
+				useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 	}
@@ -371,12 +372,15 @@ public class XtendBatchCompiler {
 	}
 
 	private StringBuilder createIssueMessage(Issue issue) {
-		URI resourceUri = issue.getUriToProblem().trimFragment();
 		StringBuilder issueBuilder = new StringBuilder("\n");
 		issueBuilder.append(issue.getSeverity()).append(": \t");
-		issueBuilder.append(resourceUri.lastSegment()).append(" - ");
-		if (resourceUri.isFile()) {
-			issueBuilder.append(resourceUri.toFileString());
+		URI uriToProblem = issue.getUriToProblem();
+		if (uriToProblem != null) {
+			URI resourceUri = uriToProblem.trimFragment();
+			issueBuilder.append(resourceUri.lastSegment()).append(" - ");
+			if (resourceUri.isFile()) {
+				issueBuilder.append(resourceUri.toFileString());
+			}
 		}
 		issueBuilder.append("\n").append(issue.getLineNumber()).append(": ").append(issue.getMessage());
 		return issueBuilder;
