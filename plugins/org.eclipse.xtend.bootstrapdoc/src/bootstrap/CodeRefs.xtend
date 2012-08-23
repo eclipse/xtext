@@ -19,7 +19,7 @@ class CodeRefs {
 	
 	def getJavaDocURI(JvmIdentifiableElement element) {
 		val uri = genJavaDocLink(element)
-		if(uri.nullOrEmpty && !NO_JAVADOC_PACKAGE_PREFIXES.exists[element.identifier.startsWith(it)]) {
+		if(uri.nullOrEmpty && !NO_JAVADOC_PACKAGE_PREFIXES.exists[element?.identifier?.startsWith(it)]) {
 			LOG.error('Missing JavaDoc link for ' + element.identifier)
 			return null
 		}
@@ -28,7 +28,7 @@ class CodeRefs {
 
 	def getSourceCodeURI(JvmIdentifiableElement element) {
 		val uri = gitLink(element)
-		if((uri == null || uri.contains('broken-link')) && 
+		if((uri == null || uri.contains('broken-link')) && element.identifier != null &&
 				!NO_SOURCE_PACKAGE_PREFIXES.exists[element.identifier.startsWith(it)]) {
 			LOG.error('Missing source link for ' + element.identifier)
 			return null

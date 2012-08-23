@@ -53,8 +53,8 @@ public class CodeRefs {
       } else {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
             public Boolean apply(final String it) {
-              String _identifier = element.getIdentifier();
-              boolean _startsWith = _identifier.startsWith(it);
+              String _identifier = element==null?(String)null:element.getIdentifier();
+              boolean _startsWith = _identifier==null?false:_identifier.startsWith(it);
               return Boolean.valueOf(_startsWith);
             }
           };
@@ -78,6 +78,7 @@ public class CodeRefs {
     {
       final String uri = this._gitExtensions.gitLink(element);
       boolean _and = false;
+      boolean _and_1 = false;
       boolean _or = false;
       boolean _equals = Objects.equal(uri, null);
       if (_equals) {
@@ -87,6 +88,13 @@ public class CodeRefs {
         _or = (_equals || _contains);
       }
       if (!_or) {
+        _and_1 = false;
+      } else {
+        String _identifier = element.getIdentifier();
+        boolean _notEquals = (!Objects.equal(_identifier, null));
+        _and_1 = (_or && _notEquals);
+      }
+      if (!_and_1) {
         _and = false;
       } else {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
@@ -98,11 +106,11 @@ public class CodeRefs {
           };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_SOURCE_PACKAGE_PREFIXES, _function);
         boolean _not = (!_exists);
-        _and = (_or && _not);
+        _and = (_and_1 && _not);
       }
       if (_and) {
-        String _identifier = element.getIdentifier();
-        String _plus = ("Missing source link for " + _identifier);
+        String _identifier_1 = element.getIdentifier();
+        String _plus = ("Missing source link for " + _identifier_1);
         CodeRefs.LOG.error(_plus);
         return null;
       }
