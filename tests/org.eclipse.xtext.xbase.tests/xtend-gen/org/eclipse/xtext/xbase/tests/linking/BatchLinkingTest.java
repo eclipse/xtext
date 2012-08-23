@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.tests.linking.XbaseLinkingScopeProviderTest;
+import org.eclipse.xtext.xbase.tests.linking.AbstractXbaseLinkingTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
+public class BatchLinkingTest extends AbstractXbaseLinkingTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   

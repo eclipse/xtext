@@ -24,7 +24,7 @@ import org.junit.Ignore
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class BatchLinkingTest extends XbaseLinkingScopeProviderTest {
+class BatchLinkingTest extends AbstractXbaseLinkingTest {
 	
 	@Inject
 	IBatchTypeResolver typeResolver;
