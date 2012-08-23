@@ -804,6 +804,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testSwitchExpression_7() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "Character");
+  }
+  
+  @Test
+  public void testSwitchExpression_8() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        append(null)\n                    }\n                }\n        \t}\n\t\t}", "Appendable");
+  }
+  
+  @Test
+  public void testSwitchExpression_9() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: switch(it) {\n                    Appendable: {\n                        compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "Integer");
+  }
+  
+  @Test
   public void testTypeGuardedCase_0() throws Exception {
     this.resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
   }
@@ -1501,6 +1516,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCall_26a() throws Exception {
     this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "Integer");
+  }
+  
+  @Test
+  public void testFeatureCall_26b() throws Exception {
+    this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.compareTo(null))\n           val Object o = list.head \n           list.head\n        }", "Integer");
   }
   
   @Test

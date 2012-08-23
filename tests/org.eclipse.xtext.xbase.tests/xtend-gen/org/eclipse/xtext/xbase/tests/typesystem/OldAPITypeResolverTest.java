@@ -527,6 +527,18 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testSwitchExpression_7() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testSwitchExpression_8() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testConstructorCall_01() throws Exception {
     Assert.fail("fails in old implementation");
   }
