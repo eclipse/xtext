@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
-import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
 
@@ -80,21 +79,20 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 		if (expectedType != null) {
 			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
 				
-				private int ignoreLowerBound = 0;
+				private int invariantIndicator = 0;
 				
 				@Override
 				protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
 					return new WildcardTypeReferenceTraverser() {
 						@Override
-						public void doVisitTypeReference(LightweightTypeReference reference, WildcardTypeReference declaration) {
-							if (ignoreLowerBound == 1) {
-								for (LightweightTypeReference declaredUpperBound : declaration.getUpperBounds()) {
-									outerVisit(declaredUpperBound, reference, declaration, VarianceInfo.OUT, VarianceInfo.INVARIANT);
-								}
+						public void doVisitTypeReference(LightweightTypeReference reference,
+								WildcardTypeReference declaration) {
+							if (invariantIndicator == 1) {
+								outerVisit(declaration.getInvariantBoundSubstitute(), reference);
 							} else {
 								super.doVisitTypeReference(reference, declaration);
 							}
-						}		
+						}
 					};
 				}
 				
@@ -105,10 +103,10 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 						protected void doVisitMatchingTypeParameters(ParameterizedTypeReference reference,
 								ParameterizedTypeReference declaration) {
 							try {
-								ignoreLowerBound++;
+								invariantIndicator++;
 								super.doVisitMatchingTypeParameters(reference, declaration);
 							} finally {
-								ignoreLowerBound--;
+								invariantIndicator--;
 							}
 						}
 					};

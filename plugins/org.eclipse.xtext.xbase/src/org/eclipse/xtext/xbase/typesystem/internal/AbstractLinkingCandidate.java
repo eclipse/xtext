@@ -161,7 +161,7 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 				LightweightTypeReference explicitTypeArgument = explicitTypeArguments.get(i);
 				UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, declaredTypeParameter);
 				// TODO create error if explicit type argument is wildcard
-				typeReference.acceptHint(explicitTypeArgument.getUpperBoundSubstitute(), BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+				typeReference.acceptHint(explicitTypeArgument.getInvariantBoundSubstitute(), BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 				typeParameterMapping.put(declaredTypeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
 			}
 			for(int i = size; i < declaredTypeParameters.size(); i++) {
