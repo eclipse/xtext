@@ -11,7 +11,8 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -34,16 +35,19 @@ public class XClosureImplCustom extends XClosureImpl {
 	 */
 	@Override
 	public JvmFormalParameter getImplicitParameter() {
-		if (super.getImplicitParameter() == null) {
+		JvmFormalParameter result = super.getImplicitParameter();
+		if (result != null)
+			return result;
+		if (!eIsSet(XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS) && !isExplicitSyntax() && expression != null) {
 			eSetDeliver(false);
 			try {
-				JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
-				parameter.setName(XbaseScopeProvider.IT.toString());
-				super.setImplicitParameter(parameter);
+				result = TypesFactory.eINSTANCE.createJvmFormalParameter();
+				result.setName(IFeatureNames.IT.toString());
+				super.setImplicitParameter(result);
 			} finally {
 				eSetDeliver(true);
 			}
 		}
-		return super.getImplicitParameter();
+		return result;
 	}
 }
