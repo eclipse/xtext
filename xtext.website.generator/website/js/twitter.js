@@ -30,7 +30,7 @@
  *
  * @license MIT (MIT-LICENSE.txt)
  * @version 1.13.3 - ify now supports lists
- * @date $Date$
+ * @date $Date: 2012/07/11 19:31:10 $
  */
 
 // to protect variables from resetting if included more than once

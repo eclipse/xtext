@@ -13,6 +13,7 @@ class Generator {
 		val out = new File("website")
 		out.generateFiles(
 			new Index,
+			new News,
 			new Download, 
 			new SevenLanguages,
 			new SevenLanguagesDocumentation, 
