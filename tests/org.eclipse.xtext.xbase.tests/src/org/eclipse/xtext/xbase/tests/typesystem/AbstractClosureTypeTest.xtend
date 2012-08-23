@@ -14,8 +14,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
-
-import static org.junit.Assert.*
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import java.util.List
 import org.junit.Ignore

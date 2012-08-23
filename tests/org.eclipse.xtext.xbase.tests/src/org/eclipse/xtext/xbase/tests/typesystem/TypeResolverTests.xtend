@@ -35,8 +35,6 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
-
-import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XbasePackage

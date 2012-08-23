@@ -24,8 +24,6 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 
-import static org.junit.Assert.*
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typing.ITypeProvider
-
-import static org.junit.Assert.*
 import org.junit.Ignore
 import org.junit.Test
 
@@ -31,7 +29,7 @@ class BatchFeatureCallTypeTests extends AbstractFeatureCallTypeTest {
 		val resolvedTypes = typeResolver.resolveTypes(featureCalls.head)
 		featureCalls.forEach [ featureCall, index |
 			val type = resolvedTypes.getActualType(featureCall)
-			assertEquals('''failed for closure at «index»''', types.get(index), type.simpleName); 
+			assertEquals('''failed for feature call at «index»''', types.get(index), type.simpleName); 
 		]
 	}
 		
