@@ -91,6 +91,23 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void bug387829() {
+    this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setClassPath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.compile();
+    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test");
+    File _file = new File(_plus);
+    final File compilerOutputDir = _file;
+    boolean _exists = compilerOutputDir.exists();
+    Assert.assertTrue("Compiler output exists", _exists);
+    String[] _list = compilerOutputDir.list();
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(4, _size);
+  }
+  
+  @Test
   public void testCompileTestData() {
     this.batchCompiler.compile();
     String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");

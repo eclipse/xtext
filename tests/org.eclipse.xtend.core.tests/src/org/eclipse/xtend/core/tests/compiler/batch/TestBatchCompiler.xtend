@@ -56,7 +56,19 @@ class TestBatchCompiler {
     	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
         batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
         batchCompiler.compile
-        assertEquals(4, new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
+        assertEquals(4,  new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
+    }
+    
+    @Test
+    def void bug387829() {
+        batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
+    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+        batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
+        batchCompiler.setClassPath(XTEND_SRC_DIRECTORY) //Tests Bug 387829
+        batchCompiler.compile
+        val compilerOutputDir = new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test")
+        assertTrue("Compiler output exists",compilerOutputDir.exists)
+        assertEquals(4, compilerOutputDir.list.size)
     }
 
 	@Test
