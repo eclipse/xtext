@@ -38,6 +38,7 @@ import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.ScopeBasedSelectable;
+import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
@@ -69,6 +70,12 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 			throw new IllegalArgumentException("context must be contained in a resource");
 		IScope globalScope = getGlobalScope(context.eResource(), reference); 
 		return internalGetScope(globalScope, globalScope, context, reference);
+	}
+	
+	@Override
+	protected IScope getGlobalScope(final Resource context, final EReference reference) {
+		IScope globalScope = super.getGlobalScope(context, reference, null);
+		return SelectableBasedScope.createScope(globalScope, getAllDescriptions(context), reference.getEReferenceType(), isIgnoreCase(reference));
 	}
 	
 	protected IScope internalGetScope(IScope parent, IScope globalScope, EObject context, EReference reference) {
@@ -109,14 +116,14 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 			if (derivedJvmElement instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredType = (JvmDeclaredType) derivedJvmElement;
 				QualifiedName jvmTypeName = getQualifiedNameOfLocalElement(declaredType);
-				if (jvmTypeName != null && !jvmTypeName.equals(name)) {
-					ImportNormalizer localNormalizer = new ImportNormalizer(jvmTypeName, true, ignoreCase); 
-					result = createImportScope(result, singletonList(localNormalizer), resourceOnlySelectable, reference.getEReferenceType(), ignoreCase);
-				}
 				if (declaredType.getDeclaringType() == null && !Strings.isEmpty(declaredType.getPackageName())) {
 					QualifiedName packageName = this.qualifiedNameConverter.toQualifiedName(declaredType.getPackageName());
 					ImportNormalizer normalizer = new ImportNormalizer(packageName, true, ignoreCase);
 					result = createImportScope(result, singletonList(normalizer), globalScopeSelectable, reference.getEReferenceType(), ignoreCase);
+				}
+				if (jvmTypeName != null && !jvmTypeName.equals(name)) {
+					ImportNormalizer localNormalizer = new ImportNormalizer(jvmTypeName, true, ignoreCase); 
+					result = createImportScope(result, singletonList(localNormalizer), resourceOnlySelectable, reference.getEReferenceType(), ignoreCase);
 				}
 			}
 			// scope for JvmTypeParameterDeclarator
