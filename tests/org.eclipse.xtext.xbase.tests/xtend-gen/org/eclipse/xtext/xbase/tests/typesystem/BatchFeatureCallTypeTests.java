@@ -35,7 +35,7 @@ public class BatchFeatureCallTypeTests extends AbstractFeatureCallTypeTest {
         public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for closure at ");
+          _builder.append("failed for feature call at ");
           _builder.append(index, "");
           String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
           String _simpleName = type.getSimpleName();
