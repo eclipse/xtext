@@ -193,6 +193,26 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   }
   
   @Test
+  public void testConstructorTypeParameters_01() throws Exception {
+    this.resolvesConstructorCallsTo("new java.util.ArrayList<? extends String>()", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_02() throws Exception {
+    this.resolvesConstructorCallsTo("new java.util.ArrayList<? super String>()", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_03() throws Exception {
+    this.resolvesConstructorCallsTo("new java.util.ArrayList<? super Iterable<? super String>>()", "ArrayList<Iterable<? super String>>");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_04() throws Exception {
+    this.resolvesConstructorCallsTo("new java.util.ArrayList<? extends Iterable<? extends String>>()", "ArrayList<Iterable<? extends String>>");
+  }
+  
+  @Test
   public void testConstructorTypeInference_01() throws Exception {
     this.resolvesConstructorCallsTo("{ var Iterable<? extends String> it = new java.util.ArrayList() }", "ArrayList<String>");
   }
@@ -214,7 +234,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testConstructorTypeInference_05() throws Exception {
-    this.resolvesConstructorCallsTo("{ var Iterable<? super String> it = new java.util.ArrayList() }", "ArrayList<Object>");
+    this.resolvesConstructorCallsTo("{ var Iterable<? super String> it = new java.util.ArrayList() }", "ArrayList<String>");
   }
   
   @Test
@@ -244,12 +264,12 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testConstructorTypeInference_11() throws Exception {
-    this.resolvesConstructorCallsTo("{ var Iterable<? super Iterable<? super String>> it = new java.util.ArrayList() }", "ArrayList<Object>");
+    this.resolvesConstructorCallsTo("{ var Iterable<? super Iterable<? super String>> it = new java.util.ArrayList() }", "ArrayList<Iterable<? super String>>");
   }
   
   @Test
   public void testConstructorTypeInference_12() throws Exception {
-    this.resolvesConstructorCallsTo("{ var java.util.Map<? super String, ? super String> it = new java.util.HashMap }", "HashMap<Object, Object>");
+    this.resolvesConstructorCallsTo("{ var java.util.Map<? super String, ? super String> it = new java.util.HashMap }", "HashMap<String, String>");
   }
   
   @Test

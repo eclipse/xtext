@@ -54,22 +54,26 @@ class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 		]		
 	}
 	
-	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_04() throws Exception {
+	@Ignore("fails in old implementation") @Test override testConstructorTypeParameters_01() throws Exception {
 		fail("fails in old implementation")
 	}
-	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_05() throws Exception {
+	@Ignore("fails in old implementation") @Test override testConstructorTypeParameters_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testConstructorTypeParameters_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testConstructorTypeParameters_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_04() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_06() throws Exception {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_07() throws Exception {
-		fail("fails in old implementation")
-	}
-	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_11() throws Exception {
-		fail("fails in old implementation")
-	}
-	@Ignore("fails in old implementation") @Test override testConstructorTypeInference_12() throws Exception {
 		fail("fails in old implementation")
 	}
 	

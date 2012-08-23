@@ -150,6 +150,22 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
          }".resolvesConstructorCallsTo("BasicEMap<Integer, String>")
 	}
 	
+	@Test def void testConstructorTypeParameters_01() throws Exception {
+		"new java.util.ArrayList<? extends String>()".resolvesConstructorCallsTo("ArrayList<String>")
+	}
+	
+	@Test def void testConstructorTypeParameters_02() throws Exception {
+		"new java.util.ArrayList<? super String>()".resolvesConstructorCallsTo("ArrayList<String>")
+	}
+	
+	@Test def void testConstructorTypeParameters_03() throws Exception {
+		"new java.util.ArrayList<? super Iterable<? super String>>()".resolvesConstructorCallsTo("ArrayList<Iterable<? super String>>")
+	}
+	
+	@Test def void testConstructorTypeParameters_04() throws Exception {
+		"new java.util.ArrayList<? extends Iterable<? extends String>>()".resolvesConstructorCallsTo("ArrayList<Iterable<? extends String>>")
+	}
+	
 	@Test def void testConstructorTypeInference_01() throws Exception {
 		"{ var Iterable<? extends String> it = new java.util.ArrayList() }".resolvesConstructorCallsTo("ArrayList<String>")
 	}
@@ -167,7 +183,7 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testConstructorTypeInference_05() throws Exception {
-		"{ var Iterable<? super String> it = new java.util.ArrayList() }".resolvesConstructorCallsTo("ArrayList<Object>")
+		"{ var Iterable<? super String> it = new java.util.ArrayList() }".resolvesConstructorCallsTo("ArrayList<String>")
 	}
 	
 	@Test def void testConstructorTypeInference_06() throws Exception {
@@ -191,11 +207,11 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testConstructorTypeInference_11() throws Exception {
-		"{ var Iterable<? super Iterable<? super String>> it = new java.util.ArrayList() }".resolvesConstructorCallsTo("ArrayList<Object>")
+		"{ var Iterable<? super Iterable<? super String>> it = new java.util.ArrayList() }".resolvesConstructorCallsTo("ArrayList<Iterable<? super String>>")
 	}
 	
 	@Test def void testConstructorTypeInference_12() throws Exception {
-		"{ var java.util.Map<? super String, ? super String> it = new java.util.HashMap }".resolvesConstructorCallsTo("HashMap<Object, Object>")
+		"{ var java.util.Map<? super String, ? super String> it = new java.util.HashMap }".resolvesConstructorCallsTo("HashMap<String, String>")
 	}
 	
 	@Test def void testVarArgs_01() throws Exception {

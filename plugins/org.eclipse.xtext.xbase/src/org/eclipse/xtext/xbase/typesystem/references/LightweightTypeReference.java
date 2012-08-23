@@ -132,6 +132,10 @@ public abstract class LightweightTypeReference {
 		return this;
 	}
 	
+	public LightweightTypeReference getInvariantBoundSubstitute() {
+		return this;
+	}
+	
 	public boolean isRawType() {
 		return false;
 	}

@@ -933,8 +933,8 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testConstructorCall_03() throws Exception {
-    this.resolvesTo("new java.util.ArrayList<? super String>()", "ArrayList<Object>");
-    this.resolvesTo("new java.util.HashMap<? super String,Boolean>", "HashMap<Object, Boolean>");
+    this.resolvesTo("new java.util.ArrayList<? super String>()", "ArrayList<String>");
+    this.resolvesTo("new java.util.HashMap<? super String,Boolean>", "HashMap<String, Boolean>");
   }
   
   @Test

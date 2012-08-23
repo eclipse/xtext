@@ -41,13 +41,31 @@ public class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTe
   
   @Ignore(value = "fails in old implementation")
   @Test
-  public void testConstructorTypeInference_04() throws Exception {
+  public void testConstructorTypeParameters_01() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
   @Ignore(value = "fails in old implementation")
   @Test
-  public void testConstructorTypeInference_05() throws Exception {
+  public void testConstructorTypeParameters_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testConstructorTypeParameters_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testConstructorTypeParameters_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testConstructorTypeInference_04() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -60,18 +78,6 @@ public class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTe
   @Ignore(value = "fails in old implementation")
   @Test
   public void testConstructorTypeInference_07() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore(value = "fails in old implementation")
-  @Test
-  public void testConstructorTypeInference_11() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore(value = "fails in old implementation")
-  @Test
-  public void testConstructorTypeInference_12() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

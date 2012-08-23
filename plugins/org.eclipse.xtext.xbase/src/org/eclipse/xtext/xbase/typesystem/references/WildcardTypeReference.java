@@ -109,6 +109,13 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getInvariantBoundSubstitute() {
+		if (lowerBound != null)
+			return lowerBound;
+		return getUpperBoundSubstitute();
+	}
+	
+	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(nonNullUpperBounds.size());

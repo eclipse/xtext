@@ -923,8 +923,8 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testConstructorCall_03() throws Exception {
-		"new java.util.ArrayList<? super String>()".resolvesTo("ArrayList<Object>")
-		"new java.util.HashMap<? super String,Boolean>".resolvesTo("HashMap<Object, Boolean>");
+		"new java.util.ArrayList<? super String>()".resolvesTo("ArrayList<String>")
+		"new java.util.HashMap<? super String,Boolean>".resolvesTo("HashMap<String, Boolean>");
 	}
 	
 	@Test def void testConstructorTypeInference_01() throws Exception {
