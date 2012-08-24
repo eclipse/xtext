@@ -19,8 +19,8 @@ public class AnchoredData extends FormattingData {
     return this._rightAnchor;
   }
   
-  public AnchoredData(final int offset, final int length, final Object leftAnchor, final Object rightAnchor) {
-    super(offset, length);
+  public AnchoredData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor) {
+    super(offset, length, indentationChange);
     this._leftAnchor = leftAnchor;
     this._rightAnchor = rightAnchor;
   }

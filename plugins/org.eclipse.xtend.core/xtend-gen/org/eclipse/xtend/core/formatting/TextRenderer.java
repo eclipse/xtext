@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -104,12 +105,17 @@ public class TextRenderer {
             if (f instanceof WhitespaceData) {
               final WhitespaceData _whitespaceData = (WhitespaceData)f;
               _matched=true;
+              int _indentation = state.getIndentation();
+              int _indentationChange = _whitespaceData.getIndentationChange();
+              int _plus = (_indentation + _indentationChange);
+              state.setIndentation(_plus);
               Line _line = state.getLine();
               Line _line_1 = state.getLine();
               int _column = _line_1.getColumn();
-              int _plus = (_column + textlength);
-              _line.setColumn(_plus);
-              final String replacement = _whitespaceData.getSpace();
+              int _plus_1 = (_column + textlength);
+              _line.setColumn(_plus_1);
+              String _space = _whitespaceData.getSpace();
+              final String replacement = ObjectExtensions.<String>operator_elvis(_space, " ");
               List<TextReplacement> _replacements = state.getReplacements();
               int _offset_2 = _whitespaceData.getOffset();
               int _length = _whitespaceData.getLength();
@@ -121,33 +127,37 @@ public class TextRenderer {
             if (f instanceof NewLineData) {
               final NewLineData _newLineData = (NewLineData)f;
               _matched=true;
-              Line _line = state.getLine();
-              Line _line_1 = state.getLine();
-              int _column = _line_1.getColumn();
-              int _plus = (_column + textlength);
-              _line.setColumn(_plus);
               int _indentation = state.getIndentation();
               int _indentationChange = _newLineData.getIndentationChange();
-              int _plus_1 = (_indentation + _indentationChange);
-              state.setIndentation(_plus_1);
-              int _offset_2 = _newLineData.getOffset();
-              int _length = _newLineData.getLength();
-              int _plus_2 = (_offset_2 + _length);
-              int _indentation_1 = state.getIndentation();
-              int _indentationLength = cfg.getIndentationLength();
-              int _multiply = (_indentation_1 * _indentationLength);
-              Line _line_2 = new Line(_plus_2, _multiply);
-              state.setLine(_line_2);
+              int _plus = (_indentation + _indentationChange);
+              state.setIndentation(_plus);
               int _newLines = _newLineData.getNewLines();
-              String _wrap = cfg.getWrap(_newLines);
-              int _indentation_2 = state.getIndentation();
-              String _indentation_3 = cfg.getIndentation(_indentation_2);
-              final String replacement = (_wrap + _indentation_3);
-              List<TextReplacement> _replacements = state.getReplacements();
-              int _offset_3 = _newLineData.getOffset();
-              int _length_1 = _newLineData.getLength();
-              TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
-              _replacements.add(_textReplacement);
+              boolean _greaterThan = (_newLines > 0);
+              if (_greaterThan) {
+                Line _line = state.getLine();
+                Line _line_1 = state.getLine();
+                int _column = _line_1.getColumn();
+                int _plus_1 = (_column + textlength);
+                _line.setColumn(_plus_1);
+                int _offset_2 = _newLineData.getOffset();
+                int _length = _newLineData.getLength();
+                int _plus_2 = (_offset_2 + _length);
+                int _indentation_1 = state.getIndentation();
+                int _indentationLength = cfg.getIndentationLength();
+                int _multiply = (_indentation_1 * _indentationLength);
+                Line _line_2 = new Line(_plus_2, _multiply);
+                state.setLine(_line_2);
+                int _newLines_1 = _newLineData.getNewLines();
+                String _wrap = cfg.getWrap(_newLines_1);
+                int _indentation_2 = state.getIndentation();
+                String _indentation_3 = cfg.getIndentation(_indentation_2);
+                final String replacement = (_wrap + _indentation_3);
+                List<TextReplacement> _replacements = state.getReplacements();
+                int _offset_3 = _newLineData.getOffset();
+                int _length_1 = _newLineData.getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                _replacements.add(_textReplacement);
+              }
             }
           }
           int _length = f.getLength();

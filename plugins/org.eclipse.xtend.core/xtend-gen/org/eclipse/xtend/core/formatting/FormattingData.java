@@ -1,12 +1,12 @@
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.xtend.core.formatting.Format;
+import org.eclipse.xtend.core.formatting.FormatX;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
-public class FormattingData extends Format {
+public class FormattingData extends FormatX {
   private final int _offset;
   
   public int getOffset() {
@@ -19,10 +19,17 @@ public class FormattingData extends Format {
     return this._length;
   }
   
-  public FormattingData(final int offset, final int length) {
+  private final int _indentationChange;
+  
+  public int getIndentationChange() {
+    return this._indentationChange;
+  }
+  
+  public FormattingData(final int offset, final int length, final int indentationChange) {
     super();
     this._offset = offset;
     this._length = length;
+    this._indentationChange = indentationChange;
   }
   
   @Override
@@ -31,6 +38,7 @@ public class FormattingData extends Format {
     int result = super.hashCode();
     result = prime * result + _offset;
     result = prime * result + _length;
+    result = prime * result + _indentationChange;
     return result;
   }
   
@@ -48,6 +56,8 @@ public class FormattingData extends Format {
     if (other._offset != _offset)
       return false;
     if (other._length != _length)
+      return false;
+    if (other._indentationChange != _indentationChange)
       return false;
     return true;
   }

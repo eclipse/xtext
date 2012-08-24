@@ -266,6 +266,28 @@ class XtendFormatterTest {
 		''')	
 	}
 	
+	@Test def formatIf1MLSemicolon1() {
+		assertFormattedExpression('''
+			if(true)
+				println("foo");
+		''', '''
+			if(true)
+			println("foo");
+		''')	
+	}
+	
+	@Test def formatIf1MLSemicolon2() {
+		assertFormattedExpression('''
+			if(true)
+				println("foo");
+			println("bar")
+		''', '''
+			if(true)
+			println("foo");
+			println("bar")
+		''')	
+	}
+	
 	@Test def formatIf2() {
 		assertFormattedExpression('''
 			if(true) {

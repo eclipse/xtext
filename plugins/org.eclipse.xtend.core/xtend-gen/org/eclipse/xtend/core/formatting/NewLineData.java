@@ -13,16 +13,9 @@ public class NewLineData extends AnchoredData {
     return this._newLines;
   }
   
-  private final int _indentationChange;
-  
-  public int getIndentationChange() {
-    return this._indentationChange;
-  }
-  
-  public NewLineData(final int offset, final int length, final Object leftAnchor, final Object rightAnchor, final int newLines, final int indentationChange) {
-    super(offset, length, leftAnchor, rightAnchor);
+  public NewLineData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor, final int newLines) {
+    super(offset, length, indentationChange, leftAnchor, rightAnchor);
     this._newLines = newLines;
-    this._indentationChange = indentationChange;
   }
   
   @Override
@@ -30,7 +23,6 @@ public class NewLineData extends AnchoredData {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + _newLines;
-    result = prime * result + _indentationChange;
     return result;
   }
   
@@ -46,8 +38,6 @@ public class NewLineData extends AnchoredData {
       return false;
     NewLineData other = (NewLineData) obj;
     if (other._newLines != _newLines)
-      return false;
-    if (other._indentationChange != _indentationChange)
       return false;
     return true;
   }

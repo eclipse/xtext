@@ -571,6 +571,42 @@ public class XtendFormatterTest {
   }
   
   @Test
+  public void formatIf1MLSemicolon1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\");");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("if(true)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\");");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatIf1MLSemicolon2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\");");
+    _builder.newLine();
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("if(true)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\");");
+    _builder_1.newLine();
+    _builder_1.append("println(\"bar\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatIf2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true) {");
