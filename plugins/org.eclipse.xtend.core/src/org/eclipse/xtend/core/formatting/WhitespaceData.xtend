@@ -2,11 +2,12 @@ package org.eclipse.xtend.core.formatting
 
 import org.eclipse.xtend.lib.Data
 
-class Format {}
+class FormatX {}
 
-@Data class FormattingData extends Format {
+@Data class FormattingData extends FormatX {
 	int offset
 	int length
+	int indentationChange
 }
 
 @Data class AnchoredData extends FormattingData {
@@ -21,7 +22,6 @@ class Format {}
 
 @Data class NewLineData extends AnchoredData {
 	int newLines
-	int indentationChange
 }
 
 //@Data class FormattingAlternative extends FormattingData {

@@ -24,18 +24,21 @@ import org.eclipse.xtend.lib.Property
 			val textlength = f.offset - state.offset
 			switch f {
 				WhitespaceData: {
+					state.indentation = state.indentation + f.indentationChange
 					state.line.column = state.line.column + textlength
 //					if(cancelIfLineFull && state.line.column > cfg.maxLineWidth)
 //						return null
-					val replacement = f.space
+					val replacement = f.space ?: " "
 					state.replacements += new TextReplacement(f.offset, f.length, replacement)
 				}
 				NewLineData: {
-					state.line.column = state.line.column + textlength
 					state.indentation = state.indentation + f.indentationChange
-					state.line = new Line(f.offset + f.length, state.indentation * cfg.indentationLength)
-					val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(state.indentation)
-					state.replacements += new TextReplacement(f.offset, f.length, replacement)
+					if(f.newLines > 0) {
+						state.line.column = state.line.column + textlength
+						state.line = new Line(f.offset + f.length, state.indentation * cfg.indentationLength)
+						val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(state.indentation)
+						state.replacements += new TextReplacement(f.offset, f.length, replacement)
+					}
 				}
 //				FormattingAlternative: {
 //					val gi = f.group.iterator
