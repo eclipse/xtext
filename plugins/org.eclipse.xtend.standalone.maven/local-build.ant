@@ -66,20 +66,51 @@
 				<exclude name="**/target.platform/" />
 			</fileset>
 		</delete>
-		<delete failonerror="false" includeemptydirs="true" verbose="true" dir="${releng.project.location}/dependencies"/>
+		<delete failonerror="false" includeemptydirs="true" verbose="true" dir="${releng.project.location}/dependencies" />
 	</target>
 	<!-- - - - - - - - - - - - - - - - - - 
 	          target: Clean up target platform folder  
 	          Use this target if any TP dependencies are changed                    
 	         - - - - - - - - - - - - - - - - - -->
 	<target name="reset.target-platform">
-		<delete  includeemptydirs="true" verbose="true">
+		<delete includeemptydirs="true" verbose="true">
 			<fileset dir="${build.root}" defaultexcludes="false">
 				<include name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
 				<include name="**/target.platform/" />
 			</fileset>
 		</delete>
-
+	</target>
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: Maven deploy
+	          deploy:deploy-file -V -B 
+	          -DXTEXT_REPOSITORY=${eclipse.download}/modeling/tmf/xtext/updates/composite/maintenance/releases
+	          -Dmaven.version=2.3.1
+	          -DGIT_BRANCH=v2.3.1 
+	          -Dsources=/opt/users/hudsonbuild/workspace/Xtext-Maven-Deploy/output/org.eclipse.xtend.standalone-2.3.1-sources.jar 
+	          -Durl=file:///shared/common/xtend/maven/ 
+	          -DpomFile=/opt/users/hudsonbuild/workspace/Xtext-Maven-Deploy/output/org.eclipse.xtend.standalone-2.3.1.pom 
+	          -Dfile=/opt/users/hudsonbuild/workspace/Xtext-Maven-Deploy/output/org.eclipse.xtend.standalone-2.3.1.jar 
+	          -Dmaven.ext.class.path=/opt/users/hudsonbuild/maven/slavebundle/resources:/opt/users/hudsonbuild/maven/slavebundle/lib/maven3-eventspy-3.0.jar:/opt/users/hudsonbuild/slave.jar
+	          -Dhudson.eventspy.port=51621
+	          -Dmaven.repo.local=/opt/users/hudsonbuild/workspace/Xtext-Maven-Deploy/.maven/repo
+	          -f org.eclipse.xtend/plugins/org.eclipse.xtend.standalone.maven/pom.xml -U                  
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="run.maven.deploy">
+		<exec executable="mvn">
+			<arg value="deploy:deploy-file" />
+			<arg value="-V" />
+			<arg value="-B" />
+			<arg value="-Durl=${url}" />
+			<arg value="-Dsources=${sources}" />
+			<arg value="-DpomFile=${pomFile}" />
+			<arg value="-Dfile=${file}" />
+			<arg line="-data ${build.root}/buckminster.workspace" />
+			<arg line="-configuration ${build.root}/configuration" />
+			<arg line="--displaystacktrace" />
+			<arg line="--loglevel INFO" />
+			<arg line="-S '${commands.file}'" />
+			<arg line="-vmargs -Xmx1g" />
+		</exec>
 	</target>
 
 </project>

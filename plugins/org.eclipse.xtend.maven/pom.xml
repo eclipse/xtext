@@ -6,7 +6,10 @@
 	<packaging>pom</packaging>
 	<version>2.4.0-SNAPSHOT</version>
 	<modules>
+		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
+		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.maven</module>
+		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
 	</modules>
 	<distributionManagement>
@@ -32,6 +35,36 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>java</executable>
+					<workingDirectory>${deployment.folder}/../</workingDirectory>
+					<arguments>
+						<argument>-jar</argument>
+						<argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument>
+						<argument>-t</argument>
+						<argument>min</argument>
+						<argument>-i</argument>
+						<argument>maven-index</argument>
+						<argument>-r</argument>
+						<argument>maven</argument>
+						<argument>-n</argument>
+						<argument>${xtend.repo.name}</argument>
+						<argument>-d</argument>
+						<argument>maven/.index</argument>
+					</arguments>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

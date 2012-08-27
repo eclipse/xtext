@@ -28,5 +28,25 @@
 		</copy>
 	</target>
 
+	<property name="bundles.folder" value="./dependencies/plugins/" />
+	<property name="maven.version" value="2.4.0-SNAPSHOT" />
+	<property name="output.folder" value="output" />
+	
+	<property name="binJarTemp" value="binJarTemp" />
+	<property name="sourceJarTemp" value="sourceJarTemp" />
+	<property name="deploy.dir" value="${user.home}/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.lib.gwt/${maven.version}/" />
+
+	<target name="run">
+		<echo>Using version: ${maven.version}</echo>
+				
+		<loadfile property="modifiedPomXml" srcFile="pom-template.pom">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</loadfile>
+		<echo file="${output.folder}/org.eclipse.xtend.lib.gwt-${maven.version}.pom">${modifiedPomXml}</echo>
+		<echo>Pom stored:${output.folder}/org.eclipse.xtend.lib.gwt-${maven.version}.pom</echo>
+		<echo>Run deploy.artifacts target to deploy!</echo>
+	</target>
 
 </project>
