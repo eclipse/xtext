@@ -5,8 +5,10 @@
 <project name="deploy" default="default">
 
     <target name="default" description="description">
-		<copydir dest="../../xtend-website" src="website">
-		</copydir>        
+		<copy todir="../../xtend-website">
+			<fileset dir="website">
+			</fileset>
+		</copy>        
     </target>
 
 </project>
