@@ -5,8 +5,11 @@
 <project name="deploy" default="default">
 
     <target name="default" description="description">
-		<copydir dest="../../xtext-website" src="website">
-		</copydir>        
+		<copy todir="../../xtext-website">
+			<fileset dir="website">
+			</fileset>
+		</copy> 
     </target>
 
+	
 </project>

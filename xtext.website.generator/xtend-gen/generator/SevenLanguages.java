@@ -23,6 +23,9 @@ public class SevenLanguages extends AbstractWebsite {
     _builder.append("<div class=\"container\">");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("<div style=\"float :right;\"><a href=\"http://www.bmbf.de/en/\" target=\"_blank\"><img src=\"images/bmbf-logo.png\"/></a></div>");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("<h1>7 Languages For The JVM<small>- Learning By Example</small></h1>");
     _builder.newLine();
     _builder.append("\t\t");

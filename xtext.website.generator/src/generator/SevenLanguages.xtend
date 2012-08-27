@@ -12,6 +12,7 @@ class SevenLanguages extends AbstractWebsite {
 		</div>
 		<div id="page" class="languages">
 			<div class="container">
+				<div style="float :right;"><a href="http://www.bmbf.de/en/" target="_blank"><img src="images/bmbf-logo.png"/></a></div>
 				<h1>7 Languages For The JVM<small>- Learning By Example</small></h1>
 				<hr />
 				<div class="row">
