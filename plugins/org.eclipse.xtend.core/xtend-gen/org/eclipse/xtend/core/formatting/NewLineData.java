@@ -1,25 +1,26 @@
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.xtend.core.formatting.AnchoredData;
+import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
-public class NewLineData extends AnchoredData {
+public class NewLineData extends FormattingData {
   private final int _newLines;
   
   public int getNewLines() {
     return this._newLines;
   }
   
-  public int newLength() {
+  public boolean isEmpty() {
     int _newLines = this.getNewLines();
-    return _newLines;
+    boolean _equals = (_newLines == 0);
+    return _equals;
   }
   
-  public NewLineData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor, final int newLines) {
-    super(offset, length, indentationChange, leftAnchor, rightAnchor);
+  public NewLineData(final int offset, final int length, final int indentationChange, final int newLines) {
+    super(offset, length, indentationChange);
     this._newLines = newLines;
   }
   

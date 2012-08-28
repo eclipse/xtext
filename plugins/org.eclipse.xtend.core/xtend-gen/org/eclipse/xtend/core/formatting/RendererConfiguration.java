@@ -62,6 +62,12 @@ public class RendererConfiguration {
     return _xifexpression;
   }
   
+  public int getIndentationLenght(final int levels) {
+    int _indentationLength = this.getIndentationLength();
+    int _multiply = (levels * _indentationLength);
+    return _multiply;
+  }
+  
   public String getWrap(final int levels) {
     String _xifexpression = null;
     boolean _greaterThan = (levels > 0);

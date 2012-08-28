@@ -1,34 +1,28 @@
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.xtend.core.formatting.AnchoredData;
+import com.google.common.base.Objects;
+import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
-public class WhitespaceData extends AnchoredData {
+public class WhitespaceData extends FormattingData {
   private final String _space;
   
   public String getSpace() {
     return this._space;
   }
   
-  private final boolean _canWrap;
-  
-  public boolean isCanWrap() {
-    return this._canWrap;
-  }
-  
-  public int newLength() {
+  public boolean isEmpty() {
     String _space = this.getSpace();
-    int _length = _space.length();
-    return _length;
+    boolean _equals = Objects.equal(_space, null);
+    return _equals;
   }
   
-  public WhitespaceData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor, final String space, final boolean canWrap) {
-    super(offset, length, indentationChange, leftAnchor, rightAnchor);
+  public WhitespaceData(final int offset, final int length, final int indentationChange, final String space) {
+    super(offset, length, indentationChange);
     this._space = space;
-    this._canWrap = canWrap;
   }
   
   @Override
@@ -36,7 +30,6 @@ public class WhitespaceData extends AnchoredData {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + ((_space== null) ? 0 : _space.hashCode());
-    result = prime * result + (_canWrap ? 1231 : 1237);
     return result;
   }
   
@@ -55,8 +48,6 @@ public class WhitespaceData extends AnchoredData {
       if (other._space != null)
         return false;
     } else if (!_space.equals(other._space))
-      return false;
-    if (other._canWrap != _canWrap)
       return false;
     return true;
   }

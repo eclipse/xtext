@@ -4,13 +4,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @SuppressWarnings("all")
 public class FormattingDataInit {
-  public Object leftAnchor;
-  
-  public Object rightAnchor;
-  
   public String space = null;
-  
-  public boolean canWrap = true;
   
   public int newLines = 0;
   

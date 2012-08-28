@@ -799,10 +799,13 @@ public class XtendFormatterTest {
   @Test
   public void formatFeatureCall1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8),");
+    _builder.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))");
+    _builder.append("newArrayList(5, 6, 7, 8), newArrayList(9, 10, 11, 12),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("newArrayList(13, 14, 15, 16))");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))");

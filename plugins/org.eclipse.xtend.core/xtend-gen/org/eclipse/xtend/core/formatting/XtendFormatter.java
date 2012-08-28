@@ -1,27 +1,18 @@
 package org.eclipse.xtend.core.formatting;
 
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableListMultimap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtend.core.formatting.AnchoredData;
-import org.eclipse.xtend.core.formatting.Format;
+import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
-import org.eclipse.xtend.core.formatting.TextRenderer;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -70,9 +61,6 @@ public class XtendFormatter {
   @Inject
   private IWhitespaceInformationProvider whitespaeInfo;
   
-  @Inject
-  private TextRenderer renderer;
-  
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length) {
     List<TextReplacement> _xblockexpression = null;
     {
@@ -93,57 +81,13 @@ public class XtendFormatter {
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String text = _rootNode.getText();
-      Format _format = new Format(cfg, text);
-      final Format format = _format;
+      FormattableDocument _formattableDocument = new FormattableDocument(cfg, text);
+      final FormattableDocument format = _formattableDocument;
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(((XtendFile) _head), format);
-      List<TextReplacement> _format_1 = this.format(format, offset, length);
-      _xblockexpression = (_format_1);
-    }
-    return _xblockexpression;
-  }
-  
-  public List<TextReplacement> format(final Format format, final int offset, final int length) {
-    List<TextReplacement> _xblockexpression = null;
-    {
-      List<FormattingData> _formattings = format.getFormattings();
-      final Function1<FormattingData,Pair<Integer,Integer>> _function = new Function1<FormattingData,Pair<Integer,Integer>>() {
-          public Pair<Integer,Integer> apply(final FormattingData it) {
-            int _offset = it.getOffset();
-            int _length = it.getLength();
-            Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(_offset), Integer.valueOf(_length));
-            return _mappedTo;
-          }
-        };
-      final ImmutableListMultimap<Pair<Integer,Integer>,FormattingData> range2edit = Multimaps.<Pair<Integer,Integer>, FormattingData>index(_formattings, new Function<FormattingData,Pair<Integer,Integer>>() {
-          public Pair<Integer,Integer> apply(FormattingData input) {
-            return _function.apply(input);
-          }
-      });
-      ImmutableMap<Pair<Integer,Integer>,Collection<FormattingData>> _asMap = range2edit.asMap();
-      ImmutableCollection<Collection<FormattingData>> _values = _asMap.values();
-      final Function1<Collection<FormattingData>,FormattingData> _function_1 = new Function1<Collection<FormattingData>,FormattingData>() {
-          public FormattingData apply(final Collection<FormattingData> it) {
-            FormattingData _xifexpression = null;
-            int _size = it.size();
-            boolean _equals = (_size == 1);
-            if (_equals) {
-              Iterator<FormattingData> _iterator = it.iterator();
-              FormattingData _next = _iterator.next();
-              _xifexpression = _next;
-            } else {
-              FormattingData _mergeEdits = XtendFormatter.this.mergeEdits(it);
-              _xifexpression = _mergeEdits;
-            }
-            return _xifexpression;
-          }
-        };
-      final Iterable<FormattingData> mergededits = IterableExtensions.<Collection<FormattingData>, FormattingData>map(_values, _function_1);
-      String _document = format.getDocument();
-      RendererConfiguration _cfg = format.getCfg();
-      List<TextReplacement> _createEdits = this.renderer.createEdits(_document, _cfg, mergededits, offset, length);
-      _xblockexpression = (_createEdits);
+      List<TextReplacement> _renderToEdits = format.renderToEdits(offset, length);
+      _xblockexpression = (_renderToEdits);
     }
     return _xblockexpression;
   }
@@ -161,97 +105,7 @@ public class XtendFormatter {
     IterableExtensions.<TextReplacement>forEach(_format, _function);
   }
   
-  protected FormattingData mergeEdits(final Collection<FormattingData> edits) {
-    FormattingData _head = IterableExtensions.<FormattingData>head(edits);
-    int _offset = _head.getOffset();
-    FormattingData _head_1 = IterableExtensions.<FormattingData>head(edits);
-    int _length = _head_1.getLength();
-    Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(_offset), Integer.valueOf(_length));
-    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          for (final FormattingData e : edits) {
-            boolean _matched = false;
-            if (!_matched) {
-              if (e instanceof AnchoredData) {
-                final AnchoredData _anchoredData = (AnchoredData)e;
-                _matched=true;
-                Object _leftAnchor = _anchoredData.getLeftAnchor();
-                boolean _notEquals = (!Objects.equal(_leftAnchor, null));
-                if (_notEquals) {
-                  boolean _equals = Objects.equal(it.leftAnchor, null);
-                  if (_equals) {
-                    Object _leftAnchor_1 = _anchoredData.getLeftAnchor();
-                    it.leftAnchor = _leftAnchor_1;
-                  } else {
-                    IllegalStateException _illegalStateException = new IllegalStateException("can not merge formatting data.");
-                    throw _illegalStateException;
-                  }
-                }
-                Object _rightAnchor = _anchoredData.getRightAnchor();
-                boolean _notEquals_1 = (!Objects.equal(_rightAnchor, null));
-                if (_notEquals_1) {
-                  boolean _equals_1 = Objects.equal(it.rightAnchor, null);
-                  if (_equals_1) {
-                    Object _rightAnchor_1 = _anchoredData.getRightAnchor();
-                    it.rightAnchor = _rightAnchor_1;
-                  } else {
-                    IllegalStateException _illegalStateException_1 = new IllegalStateException("can not merge formatting data.");
-                    throw _illegalStateException_1;
-                  }
-                }
-                int _indentationChange = _anchoredData.getIndentationChange();
-                int _plus = (it.indentationChange + _indentationChange);
-                it.indentationChange = _plus;
-                boolean _matched_1 = false;
-                if (!_matched_1) {
-                  if (_anchoredData instanceof WhitespaceData) {
-                    final WhitespaceData _whitespaceData = (WhitespaceData)_anchoredData;
-                    _matched_1=true;
-                    String _space = _whitespaceData.getSpace();
-                    boolean _notEquals_2 = (!Objects.equal(_space, null));
-                    if (_notEquals_2) {
-                      boolean _equals_2 = Objects.equal(it.space, null);
-                      if (_equals_2) {
-                        String _space_1 = _whitespaceData.getSpace();
-                        it.space = _space_1;
-                      } else {
-                        IllegalStateException _illegalStateException_2 = new IllegalStateException("can not merge formatting data.");
-                        throw _illegalStateException_2;
-                      }
-                    }
-                    boolean _or = false;
-                    if (it.canWrap) {
-                      _or = true;
-                    } else {
-                      boolean _isCanWrap = _whitespaceData.isCanWrap();
-                      _or = (it.canWrap || _isCanWrap);
-                    }
-                    it.canWrap = _or;
-                  }
-                }
-                if (!_matched_1) {
-                  if (_anchoredData instanceof NewLineData) {
-                    final NewLineData _newLineData = (NewLineData)_anchoredData;
-                    _matched_1=true;
-                    int _newLines = _newLineData.getNewLines();
-                    int _max = Math.max(it.newLines, _newLines);
-                    it.newLines = _max;
-                  }
-                }
-              }
-            }
-          }
-          boolean _greaterThan = (it.newLines > 0);
-          if (_greaterThan) {
-            it.space = null;
-          }
-        }
-      };
-    FormattingData _newFormattingData = this.newFormattingData(_mappedTo, _function);
-    return _newFormattingData;
-  }
-  
-  protected void _format(final XtendFile xtendFile, final Format format) {
+  protected void _format(final XtendFile xtendFile, final FormattableDocument format) {
     final INode pkg = this.nodeForFeature(xtendFile, Literals.XTEND_FILE__PACKAGE);
     final ILeafNode pkgSemicolon = this.immediatelyFollowingKeyword(pkg, ";");
     boolean _notEquals = (!Objects.equal(pkgSemicolon, null));
@@ -318,7 +172,7 @@ public class XtendFormatter {
     format.operator_add(_append_5);
   }
   
-  protected void _format(final XtendClass clazz, final Format format) {
+  protected void _format(final XtendClass clazz, final FormattableDocument format) {
     EList<XAnnotation> _annotations = clazz.getAnnotations();
     for (final XAnnotation annotation : _annotations) {
       INode _nodeForEObject = this.nodeForEObject(annotation);
@@ -429,47 +283,50 @@ public class XtendFormatter {
     }
   }
   
-  protected void _format(final XVariableDeclaration expr, final Format format) {
+  protected void _format(final XVariableDeclaration expr, final FormattableDocument format) {
     XExpression _right = expr.getRight();
     this.format(_right, format);
   }
   
-  protected void _format(final Void expr, final Format format) {
+  protected void _format(final Void expr, final FormattableDocument format) {
   }
   
-  protected void _format(final XFeatureCall expr, final Format format) {
+  protected void _format(final XFeatureCall expr, final FormattableDocument format) {
     INode node = null;
     boolean indented = false;
     EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
     for (final XExpression arg : _featureCallArguments) {
       {
-        final String lookahead = this.lookahead(arg, format);
-        final int ll = this.lineLengthBefore(arg, format);
         boolean _notEquals = (!Objects.equal(node, null));
         if (_notEquals) {
-          int _length = lookahead.length();
-          int _plus = (_length + ll);
-          RendererConfiguration _cfg = format.getCfg();
-          int _maxLineWidth = _cfg.getMaxLineWidth();
-          boolean _greaterThan = (_plus > _maxLineWidth);
-          if (_greaterThan) {
+          boolean _fitsIntoLine = this.fitsIntoLine(format, arg);
+          if (_fitsIntoLine) {
             final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-                public void apply(final FormattingDataInit it) {
-                  it.newLine();
-                  it.increaseIndentation();
-                }
-              };
-            FormattingData _append = this.append(node, _function);
-            format.operator_add(_append);
-            indented = true;
-          } else {
-            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.space = " ";
                 }
               };
+            FormattingData _append = this.append(node, _function);
+            format.operator_add(_append);
+          } else {
+            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.newLine();
+                }
+              };
             FormattingData _append_1 = this.append(node, _function_1);
             format.operator_add(_append_1);
+            boolean _not = (!indented);
+            if (_not) {
+              final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.increaseIndentation();
+                  }
+                };
+              FormattingData _append_2 = this.append(node, _function_2);
+              format.operator_add(_append_2);
+            }
+            indented = true;
           }
         }
         this.format(arg, format);
@@ -490,14 +347,14 @@ public class XtendFormatter {
     }
   }
   
-  protected void _format(final XMemberFeatureCall expr, final Format format) {
+  protected void _format(final XMemberFeatureCall expr, final FormattableDocument format) {
     EList<XExpression> _memberCallArguments = expr.getMemberCallArguments();
     for (final XExpression arg : _memberCallArguments) {
       this.format(arg, format);
     }
   }
   
-  protected void _format(final XSwitchExpression expr, final Format format) {
+  protected void _format(final XSwitchExpression expr, final FormattableDocument format) {
     EList<XCasePart> _cases = expr.getCases();
     final Function1<XCasePart,Boolean> _function = new Function1<XCasePart,Boolean>() {
         public Boolean apply(final XCasePart it) {
@@ -796,7 +653,7 @@ public class XtendFormatter {
     }
   }
   
-  protected void _format(final XClosure expr, final Format format) {
+  protected void _format(final XClosure expr, final FormattableDocument format) {
     final ILeafNode open = this.nodeForKeyword(expr, "[");
     final ILeafNode close = this.nodeForKeyword(expr, "]");
     final INode explicit = this.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
@@ -1031,7 +888,7 @@ public class XtendFormatter {
     return _switchResult;
   }
   
-  protected void _format(final XIfExpression expr, final Format format) {
+  protected void _format(final XIfExpression expr, final FormattableDocument format) {
     XExpression _then = expr.getThen();
     final INode thennode = this.nodeForEObject(_then);
     XExpression _else = expr.getElse();
@@ -1158,7 +1015,7 @@ public class XtendFormatter {
     }
   }
   
-  protected void _format(final XForLoopExpression expr, final Format format) {
+  protected void _format(final XForLoopExpression expr, final FormattableDocument format) {
     XExpression _eachExpression = expr.getEachExpression();
     if ((_eachExpression instanceof XBlockExpression)) {
     } else {
@@ -1174,7 +1031,6 @@ public class XtendFormatter {
       format.operator_add(_prepend);
       final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.newLine();
             it.decreaseIndentation();
           }
         };
@@ -1187,7 +1043,7 @@ public class XtendFormatter {
     this.format(_eachExpression_2, format);
   }
   
-  protected void _format(final XBlockExpression expr, final Format format) {
+  protected void _format(final XBlockExpression expr, final FormattableDocument format) {
     final ILeafNode open = this.nodeForKeyword(expr, "{");
     final ILeafNode close = this.nodeForKeyword(expr, "}");
     boolean _and = false;
@@ -1265,7 +1121,6 @@ public class XtendFormatter {
         }
         final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.newLine();
               it.decreaseIndentation();
             }
           };
@@ -1275,7 +1130,7 @@ public class XtendFormatter {
     }
   }
   
-  protected void _format(final XExpression expr, final Format format) {
+  protected void _format(final XExpression expr, final FormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
       boolean _matched = false;
@@ -1505,14 +1360,14 @@ public class XtendFormatter {
     if (_or) {
       Integer _key = range.getKey();
       Integer _value = range.getValue();
-      WhitespaceData _whitespaceData = new WhitespaceData((_key).intValue(), (_value).intValue(), it.indentationChange, it.leftAnchor, it.rightAnchor, it.space, it.canWrap);
+      WhitespaceData _whitespaceData = new WhitespaceData((_key).intValue(), (_value).intValue(), it.indentationChange, it.space);
       return _whitespaceData;
     } else {
       boolean _equals_2 = Objects.equal(it.space, null);
       if (_equals_2) {
         Integer _key_1 = range.getKey();
         Integer _value_1 = range.getValue();
-        NewLineData _newLineData = new NewLineData((_key_1).intValue(), (_value_1).intValue(), it.indentationChange, it.leftAnchor, it.rightAnchor, it.newLines);
+        NewLineData _newLineData = new NewLineData((_key_1).intValue(), (_value_1).intValue(), it.indentationChange, it.newLines);
         return _newLineData;
       } else {
         String _string = init.toString();
@@ -1649,131 +1504,39 @@ public class XtendFormatter {
     return null;
   }
   
-  public int lineLengthBefore(final EObject expression, final Format fmt) {
-    int _xblockexpression = (int) 0;
-    {
-      final INode node = this.nodeForEObject(expression);
-      List<FormattingData> _formattings = fmt.getFormattings();
-      final Function1<FormattingData,Integer> _function = new Function1<FormattingData,Integer>() {
-          public Integer apply(final FormattingData it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
-      final List<FormattingData> sorted = IterableExtensions.<FormattingData, Integer>sortBy(_formattings, _function);
-      final Function1<FormattingData,Boolean> _function_1 = new Function1<FormattingData,Boolean>() {
-          public Boolean apply(final FormattingData it) {
-            return Boolean.valueOf((it instanceof NewLineData));
-          }
-        };
-      final FormattingData lastWrap = IterableExtensions.<FormattingData>findLast(sorted, _function_1);
-      int _xifexpression = (int) 0;
-      boolean _equals = Objects.equal(lastWrap, null);
-      if (_equals) {
-        _xifexpression = 0;
-      } else {
-        int _offset = lastWrap.getOffset();
-        _xifexpression = _offset;
-      }
-      final int firstIndex = _xifexpression;
-      final int lastIndex = node.getOffset();
-      int indentation = 0;
-      int lineLength = (-1);
-      for (final FormattingData edit : sorted) {
-        {
-          boolean _lessThan = (lineLength < 0);
-          if (_lessThan) {
-            int _indentationChange = edit.getIndentationChange();
-            int _plus = (indentation + _indentationChange);
-            indentation = _plus;
-          }
-          boolean _and = false;
-          int _offset_1 = edit.getOffset();
-          boolean _greaterEqualsThan = (_offset_1 >= firstIndex);
-          if (!_greaterEqualsThan) {
-            _and = false;
-          } else {
-            int _offset_2 = edit.getOffset();
-            int _length = edit.getLength();
-            int _plus_1 = (_offset_2 + _length);
-            boolean _lessEqualsThan = (_plus_1 <= lastIndex);
-            _and = (_greaterEqualsThan && _lessEqualsThan);
-          }
-          if (_and) {
-            boolean _lessThan_1 = (lineLength < 0);
-            if (_lessThan_1) {
-              int _newLength = edit.newLength();
-              int _length_1 = edit.getLength();
-              int _minus = (_newLength - _length_1);
-              lineLength = _minus;
-            } else {
-              int _newLength_1 = edit.newLength();
-              int _length_2 = edit.getLength();
-              int _minus_1 = (_newLength_1 - _length_2);
-              int _plus_2 = (lineLength + _minus_1);
-              lineLength = _plus_2;
-            }
-          }
-        }
-      }
-      RendererConfiguration _cfg = fmt.getCfg();
-      String _indentation = _cfg.getIndentation(indentation);
-      int _length = _indentation.length();
-      int _plus = (lineLength + _length);
-      int _minus = (lastIndex - firstIndex);
-      int _plus_1 = (_plus + _minus);
-      _xblockexpression = (_plus_1);
-    }
-    return _xblockexpression;
-  }
-  
-  public String lookahead(final EObject expression, final Format fmt) {
+  public String lookahead(final FormattableDocument fmt, final EObject expression) {
     String _xblockexpression = null;
     {
-      Format _format = new Format(fmt);
-      final Format lookahead = _format;
+      FormattableDocument _formattableDocument = new FormattableDocument(fmt);
+      final FormattableDocument lookahead = _formattableDocument;
       this.format(expression, lookahead);
       final INode node = this.nodeForEObject(expression);
       int _offset = node.getOffset();
       int _length = node.getLength();
-      final List<TextReplacement> edits = this.format(lookahead, _offset, _length);
-      int lastOffset = node.getOffset();
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder newDocument = _stringBuilder;
-      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
-          public Integer apply(final TextReplacement it) {
-            int _offset = it.getOffset();
-            return Integer.valueOf(_offset);
-          }
-        };
-      List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
-      for (final TextReplacement edit : _sortBy) {
-        {
-          String _document = fmt.getDocument();
-          int _offset_1 = edit.getOffset();
-          final String text = _document.substring(lastOffset, _offset_1);
-          newDocument.append(text);
-          String _text = edit.getText();
-          newDocument.append(_text);
-          int _offset_2 = edit.getOffset();
-          int _length_1 = edit.getLength();
-          int _plus = (_offset_2 + _length_1);
-          lastOffset = _plus;
-        }
-      }
-      String _document = fmt.getDocument();
-      int _offset_1 = node.getOffset();
-      int _length_1 = node.getLength();
-      int _plus = (_offset_1 + _length_1);
-      final String text = _document.substring(lastOffset, _plus);
-      newDocument.append(text);
-      String _string = newDocument.toString();
-      _xblockexpression = (_string);
+      String _renderToString = lookahead.renderToString(_offset, _length);
+      _xblockexpression = (_renderToString);
     }
     return _xblockexpression;
   }
   
-  protected void format(final EObject expr, final Format format) {
+  public boolean fitsIntoLine(final FormattableDocument fmt, final EObject expression) {
+    final INode node = this.nodeForEObject(expression);
+    final String lookahead = this.lookahead(fmt, expression);
+    boolean _contains = lookahead.contains("\n");
+    if (_contains) {
+      return false;
+    } else {
+      int _offset = node.getOffset();
+      int _lineLengthBefore = fmt.lineLengthBefore(_offset);
+      int _length = lookahead.length();
+      final int length = (_lineLengthBefore + _length);
+      RendererConfiguration _cfg = fmt.getCfg();
+      int _maxLineWidth = _cfg.getMaxLineWidth();
+      return (length <= _maxLineWidth);
+    }
+  }
+  
+  protected void format(final EObject expr, final FormattableDocument format) {
     if (expr instanceof XFeatureCall) {
       _format((XFeatureCall)expr, format);
       return;

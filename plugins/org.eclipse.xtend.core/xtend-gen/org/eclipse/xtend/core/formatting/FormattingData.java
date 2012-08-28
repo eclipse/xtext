@@ -24,7 +24,7 @@ public abstract class FormattingData {
     return this._indentationChange;
   }
   
-  public abstract int newLength();
+  public abstract boolean isEmpty();
   
   public FormattingData(final int offset, final int length, final int indentationChange) {
     super();
