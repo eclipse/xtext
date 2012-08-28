@@ -13,6 +13,11 @@ public class NewLineData extends AnchoredData {
     return this._newLines;
   }
   
+  public int newLength() {
+    int _newLines = this.getNewLines();
+    return _newLines;
+  }
+  
   public NewLineData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor, final int newLines) {
     super(offset, length, indentationChange, leftAnchor, rightAnchor);
     this._newLines = newLines;

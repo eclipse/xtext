@@ -1,18 +1,14 @@
 package org.eclipse.xtend.core.formatting;
 
 import com.google.common.base.Objects;
-import java.util.HashSet;
 import java.util.List;
-import org.eclipse.xtend.core.formatting.Anchors;
 import org.eclipse.xtend.core.formatting.FormattingData;
-import org.eclipse.xtend.core.formatting.Line;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.RenderState;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.lib.Data;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -22,42 +18,38 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 @Data
 @SuppressWarnings("all")
 public class TextRenderer {
-  public List<TextReplacement> render(final String document, final RendererConfiguration cfg, final Iterable<FormattingData> data) {
+  public List<TextReplacement> createEdits(final String document, final RendererConfiguration cfg, final Iterable<FormattingData> data, final int offset, final int length) {
     List<TextReplacement> _xblockexpression = null;
     {
-      RenderState state = null;
-      Anchors _anchors = new Anchors();
-      final HashSet<Anchors> allanchors = CollectionLiterals.<Anchors>newHashSet(_anchors);
-      boolean _dowhile = false;
-      do {
-        {
-          Anchors _xifexpression = null;
-          boolean _notEquals = (!Objects.equal(state, null));
-          if (_notEquals) {
-            Anchors _anchors_1 = state.getAnchors();
-            Anchors _anchors_2 = new Anchors(_anchors_1);
-            _xifexpression = _anchors_2;
-          } else {
-            Anchors _anchors_3 = new Anchors();
-            _xifexpression = _anchors_3;
+      final Function1<FormattingData,Boolean> _function = new Function1<FormattingData,Boolean>() {
+          public Boolean apply(final FormattingData e) {
+            boolean _and = false;
+            int _offset = e.getOffset();
+            boolean _greaterEqualsThan = (_offset >= offset);
+            if (!_greaterEqualsThan) {
+              _and = false;
+            } else {
+              int _offset_1 = e.getOffset();
+              int _length = e.getLength();
+              int _plus = (_offset_1 + _length);
+              int _plus_1 = (offset + length);
+              boolean _lessEqualsThan = (_plus <= _plus_1);
+              _and = (_greaterEqualsThan && _lessEqualsThan);
+            }
+            return Boolean.valueOf(_and);
           }
-          final Anchors anchors = _xifexpression;
-          Line _line = new Line(0, 0);
-          RenderState _renderState = new RenderState(0, 0, _line, anchors);
-          state = _renderState;
-          this.render(document, cfg, data, state, false);
-        }
-        Anchors _anchors_1 = state.getAnchors();
-        boolean _add = allanchors.add(_anchors_1);
-        _dowhile = _add;
-      } while(_dowhile);
+        };
+      final Iterable<FormattingData> filtered = IterableExtensions.<FormattingData>filter(data, _function);
+      RenderState _renderState = new RenderState(0, 0);
+      RenderState state = _renderState;
+      this.render(document, cfg, filtered, state);
       List<TextReplacement> _replacements = state.getReplacements();
       _xblockexpression = (_replacements);
     }
     return _xblockexpression;
   }
   
-  protected RenderState render(final String document, final RendererConfiguration cfg, final Iterable<FormattingData> data, final RenderState renderState, final boolean cancelIfLineFull) {
+  protected RenderState render(final String document, final RendererConfiguration cfg, final Iterable<FormattingData> data, final RenderState renderState) {
     RenderState _xblockexpression = null;
     {
       RenderState state = renderState;
@@ -109,11 +101,6 @@ public class TextRenderer {
               int _indentationChange = _whitespaceData.getIndentationChange();
               int _plus = (_indentation + _indentationChange);
               state.setIndentation(_plus);
-              Line _line = state.getLine();
-              Line _line_1 = state.getLine();
-              int _column = _line_1.getColumn();
-              int _plus_1 = (_column + textlength);
-              _line.setColumn(_plus_1);
               String _space = _whitespaceData.getSpace();
               final String replacement = ObjectExtensions.<String>operator_elvis(_space, " ");
               List<TextReplacement> _replacements = state.getReplacements();
@@ -134,28 +121,15 @@ public class TextRenderer {
               int _newLines = _newLineData.getNewLines();
               boolean _greaterThan = (_newLines > 0);
               if (_greaterThan) {
-                Line _line = state.getLine();
-                Line _line_1 = state.getLine();
-                int _column = _line_1.getColumn();
-                int _plus_1 = (_column + textlength);
-                _line.setColumn(_plus_1);
-                int _offset_2 = _newLineData.getOffset();
-                int _length = _newLineData.getLength();
-                int _plus_2 = (_offset_2 + _length);
-                int _indentation_1 = state.getIndentation();
-                int _indentationLength = cfg.getIndentationLength();
-                int _multiply = (_indentation_1 * _indentationLength);
-                Line _line_2 = new Line(_plus_2, _multiply);
-                state.setLine(_line_2);
                 int _newLines_1 = _newLineData.getNewLines();
                 String _wrap = cfg.getWrap(_newLines_1);
-                int _indentation_2 = state.getIndentation();
-                String _indentation_3 = cfg.getIndentation(_indentation_2);
-                final String replacement = (_wrap + _indentation_3);
+                int _indentation_1 = state.getIndentation();
+                String _indentation_2 = cfg.getIndentation(_indentation_1);
+                final String replacement = (_wrap + _indentation_2);
                 List<TextReplacement> _replacements = state.getReplacements();
-                int _offset_3 = _newLineData.getOffset();
-                int _length_1 = _newLineData.getLength();
-                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                int _offset_2 = _newLineData.getOffset();
+                int _length = _newLineData.getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_2, _length, replacement);
                 _replacements.add(_textReplacement);
               }
             }

@@ -2,15 +2,16 @@ package org.eclipse.xtend.core.formatting
 
 import org.eclipse.xtend.lib.Data
 
-class FormatX {}
+//class FormatX {}
 
-@Data class FormattingData extends FormatX {
+@Data abstract class FormattingData /* extends FormatX */ {
 	int offset
 	int length
 	int indentationChange
+	def int newLength() 
 }
 
-@Data class AnchoredData extends FormattingData {
+@Data abstract class AnchoredData extends FormattingData {
 	Object leftAnchor
 	Object rightAnchor
 }
@@ -18,10 +19,18 @@ class FormatX {}
 @Data class WhitespaceData extends AnchoredData {
 	String space
 	boolean canWrap
+	
+	override int newLength() {
+		space.length
+	}
 }
 
 @Data class NewLineData extends AnchoredData {
 	int newLines
+	
+	override int newLength() {
+		newLines
+	}
 }
 
 //@Data class FormattingAlternative extends FormattingData {

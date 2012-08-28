@@ -6,7 +6,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
-public class AnchoredData extends FormattingData {
+public abstract class AnchoredData extends FormattingData {
   private final Object _leftAnchor;
   
   public Object getLeftAnchor() {

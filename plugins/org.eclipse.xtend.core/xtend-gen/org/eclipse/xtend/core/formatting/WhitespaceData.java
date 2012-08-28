@@ -19,6 +19,12 @@ public class WhitespaceData extends AnchoredData {
     return this._canWrap;
   }
   
+  public int newLength() {
+    String _space = this.getSpace();
+    int _length = _space.length();
+    return _length;
+  }
+  
   public WhitespaceData(final int offset, final int length, final int indentationChange, final Object leftAnchor, final Object rightAnchor, final String space, final boolean canWrap) {
     super(offset, length, indentationChange, leftAnchor, rightAnchor);
     this._space = space;
