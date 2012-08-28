@@ -78,6 +78,15 @@
             name="Refactoring">
             <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
+        <page
+              category="org.eclipse.xtend.core.Xtend"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.formatting.preferences.FormatterPreferencePage"
+              id="org.eclipse.xtend.core.Xtend.formatter"
+              name="Formatter">
+           <keywordReference
+                 id="org.eclipse.xtend.ide.keyword_Xtend">
+           </keywordReference>
+        </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
