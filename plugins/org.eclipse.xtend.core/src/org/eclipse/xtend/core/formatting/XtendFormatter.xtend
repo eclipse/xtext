@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
@@ -41,7 +42,7 @@ import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 
 import static extension com.google.common.collect.Multimaps.*
-import com.google.common.base.Preconditions
+import org.eclipse.xtend.core.formatting.RendererConfiguration
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -49,21 +50,28 @@ public class XtendFormatter {
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 	@Inject TextRenderer renderer
 	
-	def void format(XtextResource res, int offset, int length, (int, int, String)=>void out ) {
+	def List<TextReplacement> format(XtextResource res, int offset, int length) {
 		val cfg = new RendererConfiguration() => [
 			lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
 			indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
 		]
-		
-		val format = new Format(res.parseResult.rootNode.text)
+		val text = res.parseResult.rootNode.text
+		val format = new Format(cfg, text)
 		format(res.contents.head as XtendFile, format)
+		
+		format(format, offset, length)
+	}
+	
+	def List<TextReplacement> format(Format format, int offset, int length) {
 		
 		val range2edit = format.formattings.index[it.offset -> it.length]
 		val mergededits = range2edit.asMap.values.map[if(size == 1) iterator.next else mergeEdits]
 		
-		val edits = renderer.render(res.parseResult.rootNode.text, cfg, mergededits)
-		
-		edits.filter[e|e.offset >= offset && e.offset + e.length <= offset + length].forEach[e|out.apply(e.offset, e.length, e.text)]
+		renderer.createEdits(format.document, format.cfg, mergededits, offset, length)
+	}
+	
+	def void format(XtextResource res, int offset, int length, (int, int, String)=>void out) {
+		format(res, offset, length).forEach[e|out.apply(e.offset, e.length, e.text)]
 	}
 	
 	def protected FormattingData mergeEdits(Collection<FormattingData> edits) {
@@ -162,8 +170,25 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XFeatureCall expr, Format format) {
-		for(arg : expr.featureCallArguments)
+		var INode node = null
+		var indented = false
+		for(arg : expr.featureCallArguments) {
+//			println("looking into "+arg)
+			val lookahead = lookahead(arg, format)
+			val ll = lineLengthBefore(arg, format)
+			if(node != null) {
+				if(lookahead.length + ll > format.cfg.maxLineWidth) {
+					format += node.append[newLine; increaseIndentation ]
+					indented = true
+				} else 
+					format += node.append[space=" "]
+			}
+//			println("ll:" + ll + " lookahead"  + lookahead)
 			arg.format(format)
+			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
+		}
+		if(indented)
+			format += expr.nodeForEObject.append[decreaseIndentation]
 	}
 	
 	def protected dispatch void format(XMemberFeatureCall expr, Format format) {
@@ -496,6 +521,49 @@ public class XtendFormatter {
 				return previous as ILeafNode
 		}
 	}
+	
+	def int lineLengthBefore(EObject expression, Format fmt) {
+		val node = expression.nodeForEObject
+		val sorted = fmt.formattings.sortBy[offset]
+		val lastWrap = sorted.findLast[it instanceof NewLineData]
+		val firstIndex = if(lastWrap == null) 0 else lastWrap.offset
+		val lastIndex = node.offset 
+		var indentation = 0
+		var lineLength = -1
+//		var lastOffset = -1
+		for(edit:sorted) {
+			if(lineLength < 0)
+				indentation = indentation + edit.indentationChange
+			if(edit.offset >= firstIndex && edit.offset + edit.length <= lastIndex) {
+				if(lineLength < 0) {
+					lineLength = edit.newLength - edit.length
+				} else {
+					lineLength = lineLength + (edit.newLength - edit.length)
+				}
+//				lineLength = lineLength + edit.newLength
+//				lastOffset = edit.offset + edit.length
+			}
+		}
+		lineLength + fmt.cfg.getIndentation(indentation).length + (lastIndex - firstIndex)
+	}
+	
+	def String lookahead(EObject expression, Format fmt) {
+		val lookahead = new Format(fmt)
+		format(expression, lookahead)
+		val node = expression.nodeForEObject
+		val edits = format(lookahead, node.offset, node.length)
+		var lastOffset = node.offset
+		val newDocument = new StringBuilder()
+		for(edit:edits.sortBy[offset]) {
+			val text = fmt.document.substring(lastOffset, edit.offset)
+			newDocument.append(text)
+			newDocument.append(edit.text)
+			lastOffset = edit.offset + edit.length
+		}
+		val text = fmt.document.substring(lastOffset, node.offset + node.length)
+		newDocument.append(text)
+		newDocument.toString
+	}
 }
 
 //@Data class Whitespace {
@@ -546,44 +614,57 @@ public class XtendFormatter {
 //}
 
 class Format {
+	@Property val RendererConfiguration cfg
 	@Property val String document
-	@Property int offset
+//	@Property int offset
 	@Property List<FormattingData> formattings
 	
-	new(String document){
-		this._offset = 0
+	new(RendererConfiguration cfg, String document){
+//		this._offset = 0
+		this._cfg = cfg
 		this._document = document
 		this._formattings = newArrayList()
 	}
 	
 	new(Format fmt) {
+		this._cfg = fmt.cfg
 		this._document = fmt.document
-		this._offset = fmt.offset
-		this._formattings = formattings.toList
+//		this._offset = fmt.offset
+		this._formattings = newArrayList()
+		this._formattings += fmt.formattings
 	}
 	
 	def protected add(FormattingData data) {
-		if(data != null)
+		if(data != null) {
 			formattings += data
+		}
 	}
 	
 	def operator_add(FormattingData data) {
 		add(data)
 	}
-}
-
-class SingleLineLookahead extends Format {
-	new(Format fmt) {
-		super(fmt)
-	}
 	
-	override add(FormattingData data) {
-		formattings += data
+	def getOffset() {
+		val last = formattings.reduce[i, j| if(i.offset < j.offset) j else i ]
+		val diff = formattings.fold(0, [i, j| i + (j.newLength - j.length)])
+		last.offset + last.length + diff
 	}
 }
 
-class DoesNotFitIntoLineException extends RuntimeException {
-}
+//class SingleLineLookahead extends Format {
+//	new(Format fmt) {
+//		super(fmt)
+//	}
+//	
+//	override add(FormattingData data) {
+//		if(data instanceof WhitespaceData)
+//			throw new DoesNotFitIntoLineException()
+//		formattings += data
+//	}
+//}
+
+//class DoesNotFitIntoLineException extends RuntimeException {
+//}
 
 class FormattingDataInit {
 	public Object leftAnchor
@@ -614,3 +695,5 @@ class FormattingDataInit {
 	}
 	
 }
+
+// problem: Format is not being filled sequentially, therefore lookahead operations on it may be affected 

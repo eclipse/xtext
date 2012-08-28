@@ -396,9 +396,15 @@ class XtendFormatterTest {
 		''')	
 	}
 	
-//	if (!set.add(task))
-//			return
-//		;
+	@Test def formatFeatureCall1() {
+		assertFormattedExpression('''
+			val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8),
+				newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))
+		''', '''
+			val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))
+		''')	
+	}
+	
 // - constructors
 // - annotations
 // - templates
