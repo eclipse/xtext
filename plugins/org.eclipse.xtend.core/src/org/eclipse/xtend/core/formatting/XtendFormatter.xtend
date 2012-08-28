@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.formatting
 
 import com.google.inject.Inject
-import java.util.Collection
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -16,7 +15,6 @@ import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
@@ -41,14 +39,10 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 
-import static extension com.google.common.collect.Multimaps.*
-import org.eclipse.xtend.core.formatting.RendererConfiguration
-
 @SuppressWarnings("restriction")
 public class XtendFormatter {
 	
 	@Inject IWhitespaceInformationProvider whitespaeInfo
-	@Inject TextRenderer renderer
 	
 	def List<TextReplacement> format(XtextResource res, int offset, int length) {
 		val cfg = new RendererConfiguration() => [
@@ -56,64 +50,17 @@ public class XtendFormatter {
 			indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
 		]
 		val text = res.parseResult.rootNode.text
-		val format = new Format(cfg, text)
+		val format = new FormattableDocument(cfg, text)
 		format(res.contents.head as XtendFile, format)
-		
-		format(format, offset, length)
-	}
-	
-	def List<TextReplacement> format(Format format, int offset, int length) {
-		
-		val range2edit = format.formattings.index[it.offset -> it.length]
-		val mergededits = range2edit.asMap.values.map[if(size == 1) iterator.next else mergeEdits]
-		
-		renderer.createEdits(format.document, format.cfg, mergededits, offset, length)
+
+		format.renderToEdits(offset, length)		
 	}
 	
 	def void format(XtextResource res, int offset, int length, (int, int, String)=>void out) {
 		format(res, offset, length).forEach[e|out.apply(e.offset, e.length, e.text)]
 	}
 	
-	def protected FormattingData mergeEdits(Collection<FormattingData> edits) {
-		newFormattingData(edits.head.offset -> edits.head.length, [
-			for(e:edits)
-				switch e {
-					AnchoredData: {
-						if(e.leftAnchor != null) {
-							if(leftAnchor == null)
-								leftAnchor = e.leftAnchor
-							else 
-								throw new IllegalStateException("can not merge formatting data.")
-						}
-						if(e.rightAnchor != null) {
-							if(rightAnchor == null) 
-								rightAnchor = e.rightAnchor
-							else 
-								throw new IllegalStateException("can not merge formatting data.")
-						}
-						indentationChange = indentationChange + e.indentationChange
-						switch e {
-							WhitespaceData: {
-								if(e.space != null) {
-									if(space == null)
-										space = e.space
-									else 
-										throw new IllegalStateException("can not merge formatting data.")
-								}
-								canWrap = canWrap || e.canWrap
-							}
-							NewLineData: {
-								newLines = Math::max(newLines, e.newLines)
-							}
-						}	
-					}
-				}
-				if(newLines > 0)
-					space = null
-		])
-	}
-	
-	def protected dispatch void format(XtendFile xtendFile, Format format) {
+	def protected dispatch void format(XtendFile xtendFile, FormattableDocument format) {
 		val pkg = xtendFile.nodeForFeature(XTEND_FILE__PACKAGE)
 		val pkgSemicolon = pkg.immediatelyFollowingKeyword(";")
 		if(pkgSemicolon != null) {
@@ -133,7 +80,7 @@ public class XtendFormatter {
 		format += xtendFile.nodeForEObject.append[newLine]
 	}
 	
-	def protected dispatch void format(XtendClass clazz, Format format) {
+	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
 		for(annotation:clazz.annotations)
 			format += annotation.nodeForEObject.append[newLine]
 		val clazzOpenBrace = clazz.nodeForKeyword("{")
@@ -162,28 +109,27 @@ public class XtendFormatter {
 		}
 	}
 	
-	def protected dispatch void format(XVariableDeclaration expr, Format format) {
+	def protected dispatch void format(XVariableDeclaration expr, FormattableDocument format) {
 		expr.right.format(format)				
 	}
 	
-	def protected dispatch void format(Void expr, Format format) {
+	def protected dispatch void format(Void expr, FormattableDocument format) {
 	}
 	
-	def protected dispatch void format(XFeatureCall expr, Format format) {
+	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
 		var INode node = null
 		var indented = false
 		for(arg : expr.featureCallArguments) {
-//			println("looking into "+arg)
-			val lookahead = lookahead(arg, format)
-			val ll = lineLengthBefore(arg, format)
 			if(node != null) {
-				if(lookahead.length + ll > format.cfg.maxLineWidth) {
-					format += node.append[newLine; increaseIndentation ]
-					indented = true
-				} else 
+				if(format.fitsIntoLine(arg)) {
 					format += node.append[space=" "]
+				} else { 
+					format += node.append[newLine]
+					if(!indented)
+						format += node.append[increaseIndentation]
+					indented = true
+				}
 			}
-//			println("ll:" + ll + " lookahead"  + lookahead)
 			arg.format(format)
 			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
 		}
@@ -191,12 +137,12 @@ public class XtendFormatter {
 			format += expr.nodeForEObject.append[decreaseIndentation]
 	}
 	
-	def protected dispatch void format(XMemberFeatureCall expr, Format format) {
+	def protected dispatch void format(XMemberFeatureCall expr, FormattableDocument format) {
 		for(arg : expr.memberCallArguments)
 			arg.format(format)
 	}
 	
-	def protected dispatch void format(XSwitchExpression expr, Format format) {
+	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.nodeForEObject.text.trim.contains("\n")
 		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")]
@@ -259,7 +205,7 @@ public class XtendFormatter {
 		}
 	}
 	
-	def protected dispatch void format(XClosure expr, Format format) {
+	def protected dispatch void format(XClosure expr, FormattableDocument format) {
 		val open = expr.nodeForKeyword("[")
 		val close = expr.nodeForKeyword("]")
 		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
@@ -321,7 +267,7 @@ public class XtendFormatter {
 		}
 	}
 	
-	def protected dispatch void format(XIfExpression expr, Format format) {
+	def protected dispatch void format(XIfExpression expr, FormattableDocument format) {
 		val thennode = expr.then.nodeForEObject
 		val elsenode = expr.^else?.nodeForEObject
 		val multiline = thennode.text.trim.contains("\n") || 
@@ -349,18 +295,18 @@ public class XtendFormatter {
 			expr.^else.format(format)
 	}
 	
-	def protected dispatch void format(XForLoopExpression expr, Format format) {
+	def protected dispatch void format(XForLoopExpression expr, FormattableDocument format) {
 		if(expr.eachExpression instanceof XBlockExpression) {
 		} else {
 			val each = expr.eachExpression.nodeForEObject 
 			format += each.prepend[newLine increaseIndentation]
-			format += each.append[newLine decreaseIndentation]
+			format += each.append[decreaseIndentation]
 		}
 		expr.forExpression.format(format)
 		expr.eachExpression.format(format)
 	}
 	
-	def protected dispatch void format(XBlockExpression expr, Format format) {
+	def protected dispatch void format(XBlockExpression expr, FormattableDocument format) {
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
 		if(open != null && close != null) {
@@ -381,24 +327,17 @@ public class XtendFormatter {
 						}
 					}
 				}
-				format += close.prepend[ newLine; decreaseIndentation ]
+				format += close.prepend[ decreaseIndentation ]
 			}
 		}
 	}
 	
-	def protected dispatch void format(XExpression expr, Format format) {
+	def protected dispatch void format(XExpression expr, FormattableDocument format) {
 		for(obj:expr.eContents)
 			switch(obj) {
 				XExpression: obj.format(format)
 			}
 	}
-	
-//	def operator_add(FormattingGroup group, Format data) {
-//		switch data {
-//			FormattingData: group.data.add(data) 
-//			FormattingGroup: group.data.addAll(data.data) 
-//		}
-//	}
 	
 	def INode nodeForEObject(EObject obj) {
 		NodeModelUtils::findActualNodeFor(obj)
@@ -469,9 +408,9 @@ public class XtendFormatter {
 		val it = new FormattingDataInit()
 		init.apply(it)
 		if(newLines == 0 || space == "")
-			return new WhitespaceData(range.key, range.value, indentationChange, leftAnchor, rightAnchor, space, canWrap)
+			return new WhitespaceData(range.key, range.value, indentationChange, space)
 		else if(space == null)
-			return new NewLineData(range.key, range.value, indentationChange, leftAnchor, rightAnchor, newLines)
+			return new NewLineData(range.key, range.value, indentationChange, newLines)
 		else 
 			throw new IllegalStateException(init.toString) 
 	}
@@ -522,155 +461,27 @@ public class XtendFormatter {
 		}
 	}
 	
-	def int lineLengthBefore(EObject expression, Format fmt) {
-		val node = expression.nodeForEObject
-		val sorted = fmt.formattings.sortBy[offset]
-		val lastWrap = sorted.findLast[it instanceof NewLineData]
-		val firstIndex = if(lastWrap == null) 0 else lastWrap.offset
-		val lastIndex = node.offset 
-		var indentation = 0
-		var lineLength = -1
-//		var lastOffset = -1
-		for(edit:sorted) {
-			if(lineLength < 0)
-				indentation = indentation + edit.indentationChange
-			if(edit.offset >= firstIndex && edit.offset + edit.length <= lastIndex) {
-				if(lineLength < 0) {
-					lineLength = edit.newLength - edit.length
-				} else {
-					lineLength = lineLength + (edit.newLength - edit.length)
-				}
-//				lineLength = lineLength + edit.newLength
-//				lastOffset = edit.offset + edit.length
-			}
-		}
-		lineLength + fmt.cfg.getIndentation(indentation).length + (lastIndex - firstIndex)
-	}
-	
-	def String lookahead(EObject expression, Format fmt) {
-		val lookahead = new Format(fmt)
+	def String lookahead(FormattableDocument fmt, EObject expression) {
+		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
-		val edits = format(lookahead, node.offset, node.length)
-		var lastOffset = node.offset
-		val newDocument = new StringBuilder()
-		for(edit:edits.sortBy[offset]) {
-			val text = fmt.document.substring(lastOffset, edit.offset)
-			newDocument.append(text)
-			newDocument.append(edit.text)
-			lastOffset = edit.offset + edit.length
-		}
-		val text = fmt.document.substring(lastOffset, node.offset + node.length)
-		newDocument.append(text)
-		newDocument.toString
-	}
-}
-
-//@Data class Whitespace {
-//	int offset
-//	int length
-//	FormatterCfg cfg
-//	
-//	def setNoSpace() {
-//		cfg.out.apply(offset, length, "")
-//	}
-//	
-//	def setSpace(String space) {
-//		cfg.out.apply(offset, length, space)
-//	}
-//	
-//	def setNewLine(int indentation) {
-//		cfg.out.apply(offset, length, cfg.getWrap(1) + cfg.getIndentation(indentation))
-//	}
-//	
-//	def setNewLine() {
-//		cfg.out.apply(offset, length, cfg.getWrap(1))
-//	}
-//	
-//	def setNewLines(int newLines, int indentation) {
-//		cfg.out.apply(offset, length, cfg.getWrap(newLines) + cfg.getIndentation(indentation))
-//	}
-//	
-//}
-
-//@Data class FormatterCfg {
-//	String lineSeparator
-//	String indentation
-//	(int, int, String)=>void out
-//	
-//	def getIndentation(int levels) {
-//		if(levels > 0) 
-//			(0..levels - 1).map[_indentation].join 
-//		else 
-//			""
-//	}
-//	
-//	def getWrap(int levels) {
-//		if(levels > 0) 
-//			(0..levels - 1).map[_lineSeparator].join 
-//		else 
-//			""
-//	}
-//}
-
-class Format {
-	@Property val RendererConfiguration cfg
-	@Property val String document
-//	@Property int offset
-	@Property List<FormattingData> formattings
-	
-	new(RendererConfiguration cfg, String document){
-//		this._offset = 0
-		this._cfg = cfg
-		this._document = document
-		this._formattings = newArrayList()
+		lookahead.renderToString(node.offset, node.length)
 	}
 	
-	new(Format fmt) {
-		this._cfg = fmt.cfg
-		this._document = fmt.document
-//		this._offset = fmt.offset
-		this._formattings = newArrayList()
-		this._formattings += fmt.formattings
-	}
-	
-	def protected add(FormattingData data) {
-		if(data != null) {
-			formattings += data
+	def boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
+		val node = expression.nodeForEObject
+		val lookahead = fmt.lookahead(expression)
+		if(lookahead.contains("\n")) {
+			return false
+		} else {
+			val length = fmt.lineLengthBefore(node.offset) + lookahead.length
+			return length <= fmt.cfg.maxLineWidth
 		}
 	}
-	
-	def operator_add(FormattingData data) {
-		add(data)
-	}
-	
-	def getOffset() {
-		val last = formattings.reduce[i, j| if(i.offset < j.offset) j else i ]
-		val diff = formattings.fold(0, [i, j| i + (j.newLength - j.length)])
-		last.offset + last.length + diff
-	}
 }
-
-//class SingleLineLookahead extends Format {
-//	new(Format fmt) {
-//		super(fmt)
-//	}
-//	
-//	override add(FormattingData data) {
-//		if(data instanceof WhitespaceData)
-//			throw new DoesNotFitIntoLineException()
-//		formattings += data
-//	}
-//}
-
-//class DoesNotFitIntoLineException extends RuntimeException {
-//}
 
 class FormattingDataInit {
-	public Object leftAnchor
-	public Object rightAnchor
 	public String space = null
-	public boolean canWrap = true
 	public int newLines = 0
 	public int indentationChange = 0
 	

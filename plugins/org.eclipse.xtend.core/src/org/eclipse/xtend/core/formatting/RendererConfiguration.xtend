@@ -13,6 +13,10 @@ class RendererConfiguration {
 			""
 	}
 	
+	def getIndentationLenght(int levels) {
+		levels * indentationLength
+	}
+	
 	def getWrap(int levels) {
 		if(levels > 0) 
 			(0..levels - 1).map[_lineSeparator].join 
