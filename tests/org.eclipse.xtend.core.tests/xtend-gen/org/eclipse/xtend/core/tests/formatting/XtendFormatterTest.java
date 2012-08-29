@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -833,6 +834,7 @@ public class XtendFormatterTest {
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
   
+  @Ignore
   @Test
   public void formatMemberFeatureCall1() {
     StringConcatenation _builder = new StringConcatenation();

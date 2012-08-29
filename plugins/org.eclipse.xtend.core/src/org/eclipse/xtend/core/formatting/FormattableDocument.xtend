@@ -131,7 +131,7 @@ class FormattableDocument {
 		// check if there is a \n between the NewLineData and offset 
 		var lastOffset = lastWrap.offset + lastWrap.length
 		var lineStart = lastOffset
-		for(f:formattings.subMap(lastWrap.offset, false, offset, false).values) {
+		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) {
 			val text = document.substring(lastOffset, f.offset)
 			val index = text.lastIndexOf("\n") 
 			if(index >= 0 ) {
@@ -143,7 +143,7 @@ class FormattableDocument {
 		
 		// calculate length between \n or NewLineData and offset
 		var lengthDiff = 0
-		for(f:formattings.subMap(lastWrap.offset, false, offset, false).values) 
+		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) 
 			if(f instanceof WhitespaceData)
 				lengthDiff = lengthDiff + (((f as WhitespaceData).space?.length ?: 0) - f.length)
 		(offset - lineStart) + cfg.getIndentationLenght(currentIndentation) + lengthDiff  

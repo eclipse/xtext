@@ -290,11 +290,10 @@ public class XtendFormatter {
   protected void _format(final Void expr, final FormattableDocument format) {
   }
   
-  protected void _format(final XFeatureCall expr, final FormattableDocument format) {
+  protected void formatFeatureCallParams(final List<XExpression> params, final FormattableDocument format) {
     INode node = null;
     boolean indented = false;
-    EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
-    for (final XExpression arg : _featureCallArguments) {
+    for (final XExpression arg : params) {
       {
         boolean _notEquals = (!Objects.equal(node, null));
         if (_notEquals) {
@@ -335,7 +334,8 @@ public class XtendFormatter {
       }
     }
     if (indented) {
-      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(expr);
+      XExpression _last = IterableExtensions.<XExpression>last(params);
+      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last);
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.decreaseIndentation();
@@ -346,10 +346,87 @@ public class XtendFormatter {
     }
   }
   
+  protected void _format(final XFeatureCall expr, final FormattableDocument format) {
+    boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
+    if (_isExplicitOperationCall) {
+      EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
+      this.formatFeatureCallParams(_featureCallArguments, format);
+    } else {
+      EList<XExpression> _featureCallArguments_1 = expr.getFeatureCallArguments();
+      for (final XExpression arg : _featureCallArguments_1) {
+        this.format(arg, format);
+      }
+    }
+  }
+  
   protected void _format(final XMemberFeatureCall expr, final FormattableDocument format) {
-    EList<XExpression> _memberCallArguments = expr.getMemberCallArguments();
-    for (final XExpression arg : _memberCallArguments) {
-      this.format(arg, format);
+    XExpression _memberCallTarget = expr.getMemberCallTarget();
+    this.format(_memberCallTarget, format);
+    boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
+    if (_isExplicitOperationCall) {
+      XExpression _memberCallTarget_1 = expr.getMemberCallTarget();
+      final INode targetNode = this._nodeModelAccess.nodeForEObject(_memberCallTarget_1);
+      final INode callNode = this._nodeModelAccess.nodeForEObject(expr);
+      int _offset = targetNode.getOffset();
+      int _length = targetNode.getLength();
+      final int callOffset = (_offset + _length);
+      int _offset_1 = callNode.getOffset();
+      int _length_1 = callNode.getLength();
+      int _plus = (_offset_1 + _length_1);
+      final int callLength = (_plus - callOffset);
+      String _xifexpression = null;
+      boolean _isNullSafe = expr.isNullSafe();
+      if (_isNullSafe) {
+        _xifexpression = "?.";
+      } else {
+        String _xifexpression_1 = null;
+        boolean _isSpreading = expr.isSpreading();
+        if (_isSpreading) {
+          _xifexpression_1 = "*.";
+        } else {
+          _xifexpression_1 = ".";
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      final ILeafNode op = this._nodeModelAccess.nodeForKeyword(expr, _xifexpression);
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _prepend = this.prepend(op, _function);
+      format.operator_add(_prepend);
+      final Procedure1<FormattableDocument> _function_1 = new Procedure1<FormattableDocument>() {
+          public void apply(final FormattableDocument it) {
+            EList<XExpression> _memberCallArguments = expr.getMemberCallArguments();
+            XtendFormatter.this.formatFeatureCallParams(_memberCallArguments, format);
+          }
+        };
+      boolean _fitsIntoLine = this.fitsIntoLine(format, callOffset, callLength, _function_1);
+      if (_fitsIntoLine) {
+        final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.noSpace();
+            }
+          };
+        FormattingData _append = this.append(op, _function_2);
+        format.operator_add(_append);
+      } else {
+        final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.newLine();
+            }
+          };
+        FormattingData _append_1 = this.append(op, _function_3);
+        format.operator_add(_append_1);
+      }
+      EList<XExpression> _memberCallArguments = expr.getMemberCallArguments();
+      this.formatFeatureCallParams(_memberCallArguments, format);
+    } else {
+      EList<XExpression> _memberCallArguments_1 = expr.getMemberCallArguments();
+      for (final XExpression arg : _memberCallArguments_1) {
+        this.format(arg, format);
+      }
     }
   }
   
@@ -1197,7 +1274,19 @@ public class XtendFormatter {
     }
   }
   
-  public String lookahead(final FormattableDocument fmt, final EObject expression) {
+  protected String lookahead(final FormattableDocument fmt, final int offset, final int length, final Procedure1<? super FormattableDocument> format) {
+    String _xblockexpression = null;
+    {
+      FormattableDocument _formattableDocument = new FormattableDocument(fmt);
+      final FormattableDocument lookahead = _formattableDocument;
+      format.apply(fmt);
+      String _renderToString = lookahead.renderToString(offset, length);
+      _xblockexpression = (_renderToString);
+    }
+    return _xblockexpression;
+  }
+  
+  protected String lookahead(final FormattableDocument fmt, final EObject expression) {
     String _xblockexpression = null;
     {
       FormattableDocument _formattableDocument = new FormattableDocument(fmt);
@@ -1212,7 +1301,22 @@ public class XtendFormatter {
     return _xblockexpression;
   }
   
-  public boolean fitsIntoLine(final FormattableDocument fmt, final EObject expression) {
+  protected boolean fitsIntoLine(final FormattableDocument fmt, final int offset, final int length, final Procedure1<? super FormattableDocument> format) {
+    final String lookahead = this.lookahead(fmt, offset, length, format);
+    boolean _contains = lookahead.contains("\n");
+    if (_contains) {
+      return false;
+    } else {
+      int _lineLengthBefore = fmt.lineLengthBefore(offset);
+      int _length = lookahead.length();
+      final int line = (_lineLengthBefore + _length);
+      RendererConfiguration _cfg = fmt.getCfg();
+      int _maxLineWidth = _cfg.getMaxLineWidth();
+      return (line <= _maxLineWidth);
+    }
+  }
+  
+  protected boolean fitsIntoLine(final FormattableDocument fmt, final EObject expression) {
     final INode node = this._nodeModelAccess.nodeForEObject(expression);
     final String lookahead = this.lookahead(fmt, expression);
     boolean _contains = lookahead.contains("\n");

@@ -112,10 +112,10 @@ public class XtendFormatter {
 	def protected dispatch void format(Void expr, FormattableDocument format) {
 	}
 	
-	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
+	def protected void formatFeatureCallParams(List<XExpression> params, FormattableDocument format) {
 		var INode node = null
 		var indented = false
-		for(arg : expr.featureCallArguments) {
+		for(arg : params) {
 			if(node != null) {
 				if(format.fitsIntoLine(arg)) {
 					format += node.append[space=" "]
@@ -130,12 +130,36 @@ public class XtendFormatter {
 			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
 		}
 		if(indented)
-			format += expr.nodeForEObject.append[decreaseIndentation]
+			format += params.last.nodeForEObject.append[decreaseIndentation]
+	}
+	
+	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
+		if(expr.explicitOperationCall)
+			formatFeatureCallParams(expr.featureCallArguments, format)
+		else for(arg : expr.featureCallArguments)
+			format(arg, format)
 	}
 	
 	def protected dispatch void format(XMemberFeatureCall expr, FormattableDocument format) {
-		for(arg : expr.memberCallArguments)
-			arg.format(format)
+		format(expr.memberCallTarget, format)
+		
+		if(expr.explicitOperationCall) {
+			val targetNode = expr.memberCallTarget.nodeForEObject
+			val callNode = expr.nodeForEObject
+			val callOffset = targetNode.offset + targetNode.length
+			val callLength = callNode.offset + callNode.length - callOffset
+			
+			val op = expr.nodeForKeyword(if(expr.nullSafe) "?." else if(expr.spreading) "*." else ".")
+			format += op.prepend[noSpace]
+			
+			if(format.fitsIntoLine(callOffset, callLength, [ formatFeatureCallParams(expr.memberCallArguments, format) ])) {
+				format += op.append[noSpace]
+			} else {
+				format += op.append[newLine]
+			}
+			formatFeatureCallParams(expr.memberCallArguments, format)
+		} else for(arg : expr.memberCallArguments)
+			format(arg, format)
 	}
 	
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
@@ -360,14 +384,30 @@ public class XtendFormatter {
 	}
 	
 	
-	def String lookahead(FormattableDocument fmt, EObject expression) {
+	def protected String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
+		val lookahead = new FormattableDocument(fmt)
+		format.apply(fmt)
+		lookahead.renderToString(offset, length)
+	}
+	
+	def protected String lookahead(FormattableDocument fmt, EObject expression) {
 		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
 		lookahead.renderToString(node.offset, node.length)
 	}
 	
-	def boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
+	def protected boolean fitsIntoLine(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
+		val lookahead = fmt.lookahead(offset, length, format)
+		if(lookahead.contains("\n")) {
+			return false
+		} else {
+			val line = fmt.lineLengthBefore(offset) + lookahead.length
+			return line <= fmt.cfg.maxLineWidth
+		}
+	}
+	
+	def protected boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
 		val node = expression.nodeForEObject
 		val lookahead = fmt.lookahead(expression)
 		if(lookahead.contains("\n")) {

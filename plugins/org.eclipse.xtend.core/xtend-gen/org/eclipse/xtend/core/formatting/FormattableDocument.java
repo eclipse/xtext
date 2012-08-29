@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.NavigableMap;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.NewLineData;
@@ -359,7 +359,8 @@ public class FormattableDocument {
       int lineStart = lastOffset;
       TreeMap<Integer,FormattingData> _formattings_1 = this.getFormattings();
       int _offset_2 = lastWrap.getOffset();
-      NavigableMap<Integer,FormattingData> _subMap = _formattings_1.subMap(Integer.valueOf(_offset_2), false, Integer.valueOf(offset), false);
+      int _plus_1 = (_offset_2 + 1);
+      SortedMap<Integer,FormattingData> _subMap = _formattings_1.subMap(Integer.valueOf(_plus_1), Integer.valueOf(offset));
       Collection<FormattingData> _values_1 = _subMap.values();
       for (final FormattingData f_1 : _values_1) {
         {
@@ -369,20 +370,21 @@ public class FormattableDocument {
           final int index = text.lastIndexOf("\n");
           boolean _greaterEqualsThan = (index >= 0);
           if (_greaterEqualsThan) {
-            int _plus_1 = (index + lastOffset);
-            lineStart = _plus_1;
+            int _plus_2 = (index + lastOffset);
+            lineStart = _plus_2;
             currentIndentation = 0;
           }
           int _offset_4 = f_1.getOffset();
           int _length_1 = f_1.getLength();
-          int _plus_2 = (_offset_4 + _length_1);
-          lastOffset = _plus_2;
+          int _plus_3 = (_offset_4 + _length_1);
+          lastOffset = _plus_3;
         }
       }
       int lengthDiff = 0;
       TreeMap<Integer,FormattingData> _formattings_2 = this.getFormattings();
       int _offset_3 = lastWrap.getOffset();
-      NavigableMap<Integer,FormattingData> _subMap_1 = _formattings_2.subMap(Integer.valueOf(_offset_3), false, Integer.valueOf(offset), false);
+      int _plus_2 = (_offset_3 + 1);
+      SortedMap<Integer,FormattingData> _subMap_1 = _formattings_2.subMap(Integer.valueOf(_plus_2), Integer.valueOf(offset));
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
@@ -391,16 +393,16 @@ public class FormattableDocument {
           Integer _elvis = ObjectExtensions.<Integer>operator_elvis(Integer.valueOf(_length_1), Integer.valueOf(0));
           int _length_2 = f_2.getLength();
           int _minus = ((_elvis).intValue() - _length_2);
-          int _plus_1 = (lengthDiff + _minus);
-          lengthDiff = _plus_1;
+          int _plus_3 = (lengthDiff + _minus);
+          lengthDiff = _plus_3;
         }
       }
       int _minus_1 = (offset - lineStart);
       RendererConfiguration _cfg = this.getCfg();
       int _indentationLenght = _cfg.getIndentationLenght(currentIndentation);
-      int _plus_2 = (_minus_1 + _indentationLenght);
-      int _plus_3 = (_plus_2 + lengthDiff);
-      _xblockexpression = (_plus_3);
+      int _plus_4 = (_minus_1 + _indentationLenght);
+      int _plus_5 = (_plus_4 + lengthDiff);
+      _xblockexpression = (_plus_5);
     }
     return _xblockexpression;
   }
