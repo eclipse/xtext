@@ -50,7 +50,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
@@ -63,23 +62,17 @@ public class XtendFormatter {
   @Inject
   private NodeModelAccess _nodeModelAccess;
   
-  public List<TextReplacement> format(final XtextResource res, final int offset, final int length) {
+  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final RendererConfiguration cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
-      RendererConfiguration _rendererConfiguration = new RendererConfiguration();
-      final Procedure1<RendererConfiguration> _function = new Procedure1<RendererConfiguration>() {
-          public void apply(final RendererConfiguration it) {
-            URI _uRI = res.getURI();
-            ILineSeparatorInformation _lineSeparatorInformation = XtendFormatter.this.whitespaeInfo.getLineSeparatorInformation(_uRI);
-            String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
-            it.setLineSeparator(_lineSeparator);
-            URI _uRI_1 = res.getURI();
-            IIndentationInformation _indentationInformation = XtendFormatter.this.whitespaeInfo.getIndentationInformation(_uRI_1);
-            String _indentString = _indentationInformation.getIndentString();
-            it.setIndentation(_indentString);
-          }
-        };
-      final RendererConfiguration cfg = ObjectExtensions.<RendererConfiguration>operator_doubleArrow(_rendererConfiguration, _function);
+      URI _uRI = res.getURI();
+      ILineSeparatorInformation _lineSeparatorInformation = this.whitespaeInfo.getLineSeparatorInformation(_uRI);
+      String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
+      cfg.setLineSeparator(_lineSeparator);
+      URI _uRI_1 = res.getURI();
+      IIndentationInformation _indentationInformation = this.whitespaeInfo.getIndentationInformation(_uRI_1);
+      String _indentString = _indentationInformation.getIndentString();
+      cfg.setIndentation(_indentString);
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String text = _rootNode.getText();
@@ -94,8 +87,8 @@ public class XtendFormatter {
     return _xblockexpression;
   }
   
-  public void format(final XtextResource res, final int offset, final int length, final Procedure3<? super Integer,? super Integer,? super String> out) {
-    List<TextReplacement> _format = this.format(res, offset, length);
+  public void format(final XtextResource res, final int offset, final int length, final RendererConfiguration cfg, final Procedure3<? super Integer,? super Integer,? super String> out) {
+    List<TextReplacement> _format = this.format(res, offset, length, cfg);
     final Procedure1<TextReplacement> _function = new Procedure1<TextReplacement>() {
         public void apply(final TextReplacement e) {
           int _offset = e.getOffset();

@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -132,6 +133,7 @@ public class XtendFormatterTest {
       final ArrayList<Triple<Integer,Integer,String>> edits = CollectionLiterals.<Triple<Integer,Integer,String>>newArrayList();
       Resource _eResource_2 = parsed.eResource();
       int _length = oldDocument.length();
+      RendererConfiguration _rendererConfiguration = new RendererConfiguration();
       final Procedure3<Integer,Integer,String> _function = new Procedure3<Integer,Integer,String>() {
           public void apply(final Integer offset, final Integer length, final String replacement) {
             boolean _lessThan = (offset < 0);
@@ -225,7 +227,7 @@ public class XtendFormatterTest {
             edits.add(_create);
           }
         };
-      this.formatter.format(((XtextResource) _eResource_2), 0, _length, _function);
+      this.formatter.format(((XtextResource) _eResource_2), 0, _length, _rendererConfiguration, _function);
       int lastOffset = 0;
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder newDocument = _stringBuilder;

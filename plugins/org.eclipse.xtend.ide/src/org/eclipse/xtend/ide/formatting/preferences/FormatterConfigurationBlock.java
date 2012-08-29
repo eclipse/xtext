@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.formatting.preferences;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,8 +25,9 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.ide.formatting.IRendererConfigurationProvider;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
-import org.eclipse.xtend.ide.formatting.XtendFormatterFactory.ContentFormatter;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
@@ -85,8 +87,7 @@ public class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 	@Override
 	protected ModifyDialog createModifyDialog(Shell shell, Profile profile, ProfileManager profileManager,
 			ProfileStore profileStore, boolean newProfile) {
-		// TODO Auto-generated method stub
-		return null;
+		return new FormatterModifyDialog(shell, profile, profileManager, profileStore, newProfile, "", "");
 	}
 
 	@Override
@@ -103,35 +104,50 @@ public class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 
 		final EmbeddedEditorModelAccess partialEditor = handle.createPartialEditor();
 		partialEditor.updateModel("", PREVIEW_CONTENT, "");
-		PreviewUpdater updater = new PreviewUpdater(handle, xtendFormatterFactory.new ContentFormatter());
+		PreviewUpdater updater = new PreviewUpdater(handle, xtendFormatterFactory);
 		profileManager.addObserver(updater);
-		updater.doFormat();
+		updater.doFormat(profileManager.getSelected().getSettings());
 	}
 
 	private static class PreviewUpdater implements Observer {
 		private EmbeddedEditor handle;
-		private ContentFormatter contentFormatter;
+		private XtendFormatterFactory xtendFormatterFactory;
 
-		public PreviewUpdater(EmbeddedEditor handle, ContentFormatter contentFormatter) {
+		public PreviewUpdater(EmbeddedEditor handle, XtendFormatterFactory xtendFormatterFactory) {
 			this.handle = handle;
-			this.contentFormatter = contentFormatter;
+			this.xtendFormatterFactory = xtendFormatterFactory;
 		}
 
 		public void update(Observable o, Object arg) {
+			final ProfileManager manager = (ProfileManager) o;
 			final int value = ((Integer) arg).intValue();
 			switch (value) {
 				case ProfileManager.PROFILE_CREATED_EVENT:
 				case ProfileManager.PROFILE_DELETED_EVENT:
 				case ProfileManager.SELECTION_CHANGED_EVENT:
 				case ProfileManager.SETTINGS_CHANGED_EVENT: {
-					doFormat();
+					doFormat(manager.getSelected().getSettings());
 				}
 			}
 		}
 
-		public void doFormat() {
-			contentFormatter.format(handle.getDocument(), new Region(0, handle.getDocument().getLength()));
+		public void doFormat(final Map<?,?> map) {
+			xtendFormatterFactory.setConfigurationProvider(new IRendererConfigurationProvider() {
+				public RendererConfiguration rendererConfiguration() {
+					RendererConfiguration rendererConfiguration = new RendererConfiguration();
+					try {
+						rendererConfiguration.setIndentationLength(Integer.parseInt((String) map
+								.get("indentationLength")));
+						rendererConfiguration.setMaxLineWidth(Integer.parseInt((String) map.get("maxLineWidth")));
+					} catch (NumberFormatException nfe) {
+					}
+					return rendererConfiguration;
+				}
+			});
+			xtendFormatterFactory.createConfiguredFormatter(null, null).format(handle.getDocument(),
+					new Region(0, handle.getDocument().getLength()));
 			handle.getViewer().refresh();
 		}
+
 	}
 }
