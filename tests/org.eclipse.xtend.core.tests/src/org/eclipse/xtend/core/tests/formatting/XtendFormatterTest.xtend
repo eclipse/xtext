@@ -418,9 +418,11 @@ class XtendFormatterTest {
 		''')	
 	}
 	
-	@Ignore
 	@Test def formatMemberFeatureCall1() {
 		assertFormattedExpression('''
+			val ML1 = "x".substring(0).substring(1).substring(2).substring(3).
+				substring(4).substring(5).substring(6).substring(7).substring(8).
+				substring(9).substring(10).substring(11)
 		''', '''
 			val ML1 = "x".substring(0).substring(1).substring(2).substring(3).substring(4).substring(5).substring(6).substring(7).substring(8).substring(9).substring(10).substring(11)
 		''')	
