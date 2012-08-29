@@ -3,10 +3,35 @@
  */
 package org.eclipse.xtext.purexbase;
 
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.XbaseBatchTypeProvider;
+import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
+
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.AbstractPureXbaseRuntimeModule {
 	
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return XbaseBatchScopeProvider.class;
+	}
+	
+	public java.lang.Class<? extends ITypeProvider> bindITypeProvider() {
+		return XbaseBatchTypeProvider.class;
+	}
+	
+	public java.lang.Class<? extends IBatchTypeResolver> bindIBatchTypeResolver() {
+		return LogicalContainerAwareBatchTypeResolver.class;
+	}
+	
+	public java.lang.Class<? extends IReentrantTypeResolver> bindIReentrantTypeResolver() {
+		return LogicalContainerAwareReentrantTypeResolver.class;
+	}
 }
