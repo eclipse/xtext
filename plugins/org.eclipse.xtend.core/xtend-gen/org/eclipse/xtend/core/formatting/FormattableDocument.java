@@ -230,11 +230,14 @@ public class FormattableDocument {
               int _plus_2 = (indentation + _indentationChange);
               indentation = _plus_2;
               String _space = _whitespaceData.getSpace();
-              final String replacement = ObjectExtensions.<String>operator_elvis(_space, " ");
-              int _offset_3 = _whitespaceData.getOffset();
-              int _length_1 = _whitespaceData.getLength();
-              TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
-              replacements.add(_textReplacement);
+              boolean _notEquals = (!Objects.equal(_space, null));
+              if (_notEquals) {
+                final String replacement = _whitespaceData.getSpace();
+                int _offset_3 = _whitespaceData.getOffset();
+                int _length_1 = _whitespaceData.getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                replacements.add(_textReplacement);
+              }
             }
           }
           if (!_matched) {

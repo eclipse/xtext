@@ -71,8 +71,10 @@ class FormattableDocument {
 				switch f {
 					WhitespaceData: {
 						indentation = indentation + f.indentationChange
-						val replacement = f.space ?: " "
-						replacements += new TextReplacement(f.offset, f.length, replacement)
+						if(f.space != null) {
+							val replacement = f.space
+							replacements += new TextReplacement(f.offset, f.length, replacement)
+						}
 					}
 					NewLineData: {
 						indentation = indentation + f.indentationChange
