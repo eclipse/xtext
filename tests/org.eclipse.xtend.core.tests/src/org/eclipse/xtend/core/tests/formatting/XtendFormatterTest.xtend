@@ -14,6 +14,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtend.core.formatting.XtendFormatter
+import org.junit.Ignore
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
@@ -414,6 +415,14 @@ class XtendFormatterTest {
 				newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))
 		''', '''
 			val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16))
+		''')	
+	}
+	
+	@Ignore
+	@Test def formatMemberFeatureCall1() {
+		assertFormattedExpression('''
+		''', '''
+			val ML1 = "x".substring(0).substring(1).substring(2).substring(3).substring(4).substring(5).substring(6).substring(7).substring(8).substring(9).substring(10).substring(11)
 		''')	
 	}
 	
