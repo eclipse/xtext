@@ -141,25 +141,40 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XMemberFeatureCall expr, FormattableDocument format) {
-		format(expr.memberCallTarget, format)
+		var EObject top = expr
+		var calls = <XMemberFeatureCall>newArrayList()
+		while(top instanceof XMemberFeatureCall) {
+			calls += top as XMemberFeatureCall
+			top = (top as XMemberFeatureCall).memberCallTarget
+		}
+		format(top, format)
 		
-		if(expr.explicitOperationCall) {
-			val targetNode = expr.memberCallTarget.nodeForEObject
-			val callNode = expr.nodeForEObject
-			val callOffset = targetNode.offset + targetNode.length
-			val callLength = callNode.offset + callNode.length - callOffset
-			
-			val op = expr.nodeForKeyword(if(expr.nullSafe) "?." else if(expr.spreading) "*." else ".")
-			format += op.prepend[noSpace]
-			
-			if(format.fitsIntoLine(callOffset, callLength, [ formatFeatureCallParams(expr.memberCallArguments, format) ])) {
-				format += op.append[noSpace]
-			} else {
-				format += op.append[newLine]
-			}
-			formatFeatureCallParams(expr.memberCallArguments, format)
-		} else for(arg : expr.memberCallArguments)
-			format(arg, format)
+		var indented = false
+		for(call:calls.reverse) {
+			if(call.explicitOperationCall) {
+				val targetNode = call.memberCallTarget.nodeForEObject
+				val callNode = call.nodeForEObject
+				val callOffset = targetNode.offset + targetNode.length
+				val callLength = callNode.offset + callNode.length - callOffset
+				
+				val op = call.nodeForKeyword(if(call.nullSafe) "?." else if(call.spreading) "*." else ".")
+				format += op.prepend[noSpace]
+				
+				if(format.fitsIntoLine(callOffset, callLength, [ formatFeatureCallParams(call.memberCallArguments, format) ])) {
+					format += op.append[noSpace]
+				} else {
+					format += op.append[newLine]
+					if(!indented) {
+						indented = true
+						format += op.append[increaseIndentation]
+					}
+				}
+				formatFeatureCallParams(call.memberCallArguments, format)
+			} else for(arg : call.memberCallArguments)
+				format(arg, format)
+		}
+		if(indented)
+			format += calls.last.nodeForEObject.append[decreaseIndentation]
 	}
 	
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
