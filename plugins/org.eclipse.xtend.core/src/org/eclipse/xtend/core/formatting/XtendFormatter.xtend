@@ -40,11 +40,10 @@ public class XtendFormatter {
 	
 	@Inject extension NodeModelAccess
 	
-	def List<TextReplacement> format(XtextResource res, int offset, int length) {
-		val cfg = new RendererConfiguration() => [
-			lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
-			indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
-		]
+	def List<TextReplacement> format(XtextResource res, int offset, int length, RendererConfiguration cfg) {
+		cfg.lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
+		cfg.indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
+		
 		val text = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, text)
 		format(res.contents.head as XtendFile, format)
@@ -52,8 +51,8 @@ public class XtendFormatter {
 		format.renderToEdits(offset, length)		
 	}
 	
-	def void format(XtextResource res, int offset, int length, (int, int, String)=>void out) {
-		format(res, offset, length).forEach[e|out.apply(e.offset, e.length, e.text)]
+	def void format(XtextResource res, int offset, int length, RendererConfiguration cfg, (int, int, String)=>void out) {
+		format(res, offset, length, cfg).forEach[e|out.apply(e.offset, e.length, e.text)]
 	}
 	
 	def protected dispatch void format(XtendFile xtendFile, FormattableDocument format) {

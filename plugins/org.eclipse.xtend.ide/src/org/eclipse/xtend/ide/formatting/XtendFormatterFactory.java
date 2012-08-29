@@ -17,6 +17,7 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -64,7 +65,7 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 				return null;
 			final MultiTextEdit mte = new MultiTextEdit();
 			try {
-				formatter.format(state, region.getOffset(), region.getLength(),
+				formatter.format(state, region.getOffset(), region.getLength(), cfgProvider.rendererConfiguration(),
 						new Procedure3<Integer, Integer, String>() {
 							public void apply(Integer p1, Integer p2, String p3) {
 								mte.addChild(new ReplaceEdit(p1, p2, p3));
@@ -79,6 +80,18 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 
 	@Inject
 	protected XtendFormatter formatter;
+
+	private IRendererConfigurationProvider cfgProvider = new IRendererConfigurationProvider() {
+		RendererConfiguration cfg = new RendererConfiguration();
+
+		public RendererConfiguration rendererConfiguration() {
+			return cfg;
+		}
+	};
+
+	public void setConfigurationProvider(IRendererConfigurationProvider provider) {
+		this.cfgProvider = provider;
+	}
 
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
