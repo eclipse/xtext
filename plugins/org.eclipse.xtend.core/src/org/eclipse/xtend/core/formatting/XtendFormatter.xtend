@@ -392,6 +392,10 @@ class FormattingDataInit {
 		space = ""
 	}
 	
+	def oneSpace() {
+		space = " "
+	}
+	
 	def increaseIndentation() {
 		indentationChange = indentationChange + 1
 	}
