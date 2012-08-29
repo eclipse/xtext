@@ -175,6 +175,10 @@ public class EmbeddedEditorFactory {
 			this.readonly = true;
 			return this;
 		}
+		public Builder withResourceValidator(IResourceValidator resourceValidator) {
+			this.resourceValidator = resourceValidator;
+			return this;
+		}
 		public EmbeddedEditor withParent(final Composite parent) {
 			if (editorBuild)
 				throw new IllegalStateException();
