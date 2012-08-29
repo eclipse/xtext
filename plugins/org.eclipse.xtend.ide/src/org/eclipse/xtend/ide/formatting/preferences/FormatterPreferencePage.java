@@ -11,25 +11,30 @@ import org.eclipse.jdt.internal.ui.preferences.PreferencesAccess;
 import org.eclipse.jdt.internal.ui.preferences.ProfilePreferencePage;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileConfigurationBlock;
 
+import com.google.inject.Inject;
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class FormatterPreferencePage extends ProfilePreferencePage {
-	private static final String PAGE_ID = "org.eclipse.xtend.core.Xtend.formatter";
+	private static final String PREF_PAGE_ID = "org.eclipse.xtend.core.Xtend.formatter";
+	private static final String PROP_PAGE_ID = PREF_PAGE_ID + ".propertyPage";
+	
+	@Inject FormatterConfigurationBlock.Factory factory;
 
 	@Override
 	protected ProfileConfigurationBlock createConfigurationBlock(PreferencesAccess access) {
-		return new FormatterConfigurationBlock(getProject(), access, "id");
+		return factory.create(getProject(), access, "id");
 	}
 
 	@Override
 	protected String getPreferencePageID() {
-		return PAGE_ID;
+		return PREF_PAGE_ID;
 	}
 
 	@Override
 	protected String getPropertyPageID() {
-		return PAGE_ID;
+		return PROP_PAGE_ID;
 	}
 
 }

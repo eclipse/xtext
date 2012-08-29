@@ -20,22 +20,24 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public class XtendFormatterProfileManager extends ProfileManager {
+public class FormatterProfileManager extends ProfileManager {
 
-	private static final String DEFAULT_PROFILE_LABEL = "Default [built-in]";
-	private static final KeySet[] KEY_SETS = new KeySet[] { new KeySet("Node name", new ArrayList(getXtendSettings()
-			.keySet())) };
+	private static final String NODE_NAME = "org.eclipse.xtend.formatter_settings";
 	private static final String DEFUALT_PROFILE_KEY = "org.eclipse.xtend.ide.default.eclipse_profile";
+	private static final String DEFAULT_PROFILE_LABEL = "Default [built-in]";
 	private static final String PROFILE_KEY = DEFUALT_PROFILE_KEY;
 	private static final String FORMATTER_SETTINGS_VERSION = "1";
 
-	public XtendFormatterProfileManager(List profiles, IScopeContext context, PreferencesAccess preferencesAccess,
+	private static final KeySet[] KEY_SETS = new KeySet[] { new KeySet(NODE_NAME, new ArrayList<Object>(
+			getXtendSettings().keySet())) };
+
+	public FormatterProfileManager(List<Object> profiles, IScopeContext context, PreferencesAccess preferencesAccess,
 			IProfileVersioner profileVersioner) {
 		super(addBuiltinProfiles(profiles, profileVersioner), context, preferencesAccess, profileVersioner, KEY_SETS,
 				PROFILE_KEY, FORMATTER_SETTINGS_VERSION);
 	}
 
-	private static List addBuiltinProfiles(List profiles, IProfileVersioner profileVersioner) {
+	private static List<Object> addBuiltinProfiles(final List<Object> profiles, IProfileVersioner profileVersioner) {
 		final Profile javaProfile = new BuiltInProfile(DEFUALT_PROFILE_KEY, DEFAULT_PROFILE_LABEL, getXtendSettings(),
 				1, profileVersioner.getCurrentVersion(), profileVersioner.getProfileKind());
 		profiles.add(javaProfile);

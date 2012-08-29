@@ -86,6 +86,9 @@
            <keywordReference
                  id="org.eclipse.xtend.ide.keyword_Xtend">
            </keywordReference>
+           <keywordReference
+                 id="org.eclipse.jdt.ui.formatter">
+           </keywordReference>
         </page>
     </extension>
     <extension
@@ -99,6 +102,27 @@
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+        <page
+              category="org.eclipse.xtend.core.Xtend"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.formatting.preferences.FormatterPreferencePage"
+              id="org.eclipse.xtend.core.Xtend.formatter.propertyPage"
+              name="Formatter">
+           <keywordReference
+                 id="org.eclipse.xtend.ide.keyword_Xtend">
+           </keywordReference>
+           <enabledWhen>
+              <adapt
+                    type="org.eclipse.core.resources.IProject">
+              </adapt>
+           </enabledWhen>
+           <filter
+                 name="projectNature"
+                 value="org.eclipse.xtext.ui.shared.xtextNature">
+           </filter>
+           <keywordReference
+                 id="org.eclipse.jdt.ui.formatter">
+           </keywordReference>
         </page>
     </extension>
     <extension

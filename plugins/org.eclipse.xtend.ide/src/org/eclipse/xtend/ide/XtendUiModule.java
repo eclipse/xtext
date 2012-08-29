@@ -26,6 +26,7 @@ import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
+import org.eclipse.xtend.ide.formatting.preferences.FormatterResourceProvider;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtend.ide.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
+import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
@@ -274,6 +276,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends ITraceInformation> bindTraceInformation() {
 		return FileBasedTraceInformation.class;
+	}
+	
+	public Class<? extends IEditedResourceProvider> bindIEditedResourceProvider() {
+		return FormatterResourceProvider.class;
 	}
 	
 	public void configureFilterSyntheticMembersContribution(Binder binder) {
