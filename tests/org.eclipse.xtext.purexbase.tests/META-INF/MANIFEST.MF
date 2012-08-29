@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.core.runtime,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
- org.eclipse.ui.workbench;resolution:=optional;x-installation:=greedy
+ org.eclipse.ui.workbench;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.xbase.junit;bundle-version="2.4.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15",
  org.hamcrest.core;version="1.1.0",
