@@ -832,4 +832,13 @@ public class XtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatMemberFeatureCall1() {
+    StringConcatenation _builder = new StringConcatenation();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\".substring(0).substring(1).substring(2).substring(3).substring(4).substring(5).substring(6).substring(7).substring(8).substring(9).substring(10).substring(11)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }
