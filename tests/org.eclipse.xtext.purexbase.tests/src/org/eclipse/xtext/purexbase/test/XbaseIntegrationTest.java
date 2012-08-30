@@ -1,5 +1,7 @@
 package org.eclipse.xtext.purexbase.test;
 
+import java.lang.reflect.Method;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider;
@@ -24,9 +26,12 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		helper.compile(expression, new IAcceptor<CompilationTestHelper.Result>() {
 			public void accept(Result t) {
 				try {
-					Object instance = t.getCompiledClass().newInstance();
-					result[0] = t.getCompiledClass().getDeclaredMethod("myMethod").invoke(instance);
+					final Class<?> compiledClass = t.getCompiledClass();
+					Object instance = compiledClass.newInstance();
+					final Method method = compiledClass.getDeclaredMethod("myMethod");
+					result[0] = method.invoke(instance);
 				} catch (Exception e) {
+					e.printStackTrace();
 					fail(e.toString());
 				}
 			}
