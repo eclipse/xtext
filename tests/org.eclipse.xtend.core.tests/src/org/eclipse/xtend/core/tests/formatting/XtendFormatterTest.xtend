@@ -335,14 +335,14 @@ class XtendFormatterTest {
 			
 	@Test def formatFor1() {
 		assertFormattedExpression('''
-			for(i:1..2)
+			for(i:1 .. 2)
 				println(i)
 		''')	
 	}
 	
 	@Test def formatFor2() {
 		assertFormattedExpression('''
-			for(i:1..2) {
+			for(i:1 .. 2) {
 				println(i)
 			}
 		''')	
@@ -428,6 +428,26 @@ class XtendFormatterTest {
 				substring(9).substring(10).substring(11)
 		''', '''
 			val ML1 = "x".substring(0).substring(1).substring(2).substring(3).substring(4).substring(5).substring(6).substring(7).substring(8).substring(9).substring(10).substring(11)
+		''')	
+	}
+	
+	@Test def formatBinaryExpression1() {
+		assertFormattedExpression('''
+			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +
+				15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 +
+				29 + 30 + 31 + 32 + 33 + 34 + 35 + 36
+		''', '''
+			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 
+		''')	
+	}
+	
+	@Test def formatBinaryExpression2() {
+		assertFormattedExpression('''
+			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
+				11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 + 19 + 20 + 21 + 22 + 23 + 24 +
+				25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36
+		''', '''
+			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 
 		''')	
 	}
 	

@@ -678,7 +678,7 @@ public class XtendFormatterTest {
   @Test
   public void formatFor1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("for(i:1..2)");
+    _builder.append("for(i:1 .. 2)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(i)");
@@ -689,7 +689,7 @@ public class XtendFormatterTest {
   @Test
   public void formatFor2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("for(i:1..2) {");
+    _builder.append("for(i:1 .. 2) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(i)");
@@ -848,6 +848,40 @@ public class XtendFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("val ML1 = \"x\".substring(0).substring(1).substring(2).substring(3).substring(4).substring(5).substring(6).substring(7).substring(8).substring(9).substring(10).substring(11)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBinaryExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 +");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("29 + 30 + 31 + 32 + 33 + 34 + 35 + 36");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 ");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBinaryExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 + 19 + 20 + 21 + 22 + 23 + 24 +");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 ");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }

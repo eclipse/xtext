@@ -23,6 +23,10 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -459,6 +463,103 @@ public class XtendFormatter {
         };
       FormattingData _append_3 = this.append(_nodeForEObject, _function_5);
       format.operator_add(_append_3);
+    }
+  }
+  
+  protected AbstractRule binaryOperationPrecedence(final EObject op) {
+    final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(node, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      EObject _grammarElement = node.getGrammarElement();
+      _and = (_notEquals && (_grammarElement instanceof CrossReference));
+    }
+    if (_and) {
+      EObject _grammarElement_1 = node.getGrammarElement();
+      final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
+      if ((terminal instanceof RuleCall)) {
+        return ((RuleCall) terminal).getRule();
+      }
+    }
+    return null;
+  }
+  
+  protected void _format(final XBinaryOperation expr, final FormattableDocument format) {
+    AbstractRule precendece = this.binaryOperationPrecedence(expr);
+    EObject top = expr;
+    ArrayList<XBinaryOperation> calls = CollectionLiterals.<XBinaryOperation>newArrayList();
+    AbstractRule _binaryOperationPrecedence = this.binaryOperationPrecedence(top);
+    boolean _equals = Objects.equal(_binaryOperationPrecedence, precendece);
+    boolean _while = _equals;
+    while (_while) {
+      {
+        calls.add(((XBinaryOperation) top));
+        XExpression _leftOperand = ((XBinaryOperation) top).getLeftOperand();
+        top = _leftOperand;
+      }
+      AbstractRule _binaryOperationPrecedence_1 = this.binaryOperationPrecedence(top);
+      boolean _equals_1 = Objects.equal(_binaryOperationPrecedence_1, precendece);
+      _while = _equals_1;
+    }
+    this.format(top, format);
+    boolean indented = false;
+    List<XBinaryOperation> _reverse = ListExtensions.<XBinaryOperation>reverse(calls);
+    for (final XBinaryOperation call : _reverse) {
+      {
+        final INode op = this._nodeModelAccess.nodeForFeature(call, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.oneSpace();
+            }
+          };
+        FormattingData _prepend = this.prepend(op, _function);
+        format.operator_add(_prepend);
+        XExpression _rightOperand = call.getRightOperand();
+        boolean _fitsIntoLine = this.fitsIntoLine(format, _rightOperand);
+        if (_fitsIntoLine) {
+          final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.oneSpace();
+              }
+            };
+          FormattingData _append = this.append(op, _function_1);
+          format.operator_add(_append);
+        } else {
+          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.newLine();
+              }
+            };
+          FormattingData _append_1 = this.append(op, _function_2);
+          format.operator_add(_append_1);
+          boolean _not = (!indented);
+          if (_not) {
+            indented = true;
+            final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.increaseIndentation();
+                }
+              };
+            FormattingData _append_2 = this.append(op, _function_3);
+            format.operator_add(_append_2);
+          }
+        }
+        XExpression _rightOperand_1 = call.getRightOperand();
+        this.format(_rightOperand_1, format);
+      }
+    }
+    if (indented) {
+      XBinaryOperation _last = IterableExtensions.<XBinaryOperation>last(calls);
+      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last);
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.decreaseIndentation();
+          }
+        };
+      FormattingData _append = this.append(_nodeForEObject, _function);
+      format.operator_add(_append);
     }
   }
   
@@ -1366,7 +1467,10 @@ public class XtendFormatter {
   }
   
   protected void format(final EObject expr, final FormattableDocument format) {
-    if (expr instanceof XFeatureCall) {
+    if (expr instanceof XBinaryOperation) {
+      _format((XBinaryOperation)expr, format);
+      return;
+    } else if (expr instanceof XFeatureCall) {
       _format((XFeatureCall)expr, format);
       return;
     } else if (expr instanceof XMemberFeatureCall) {

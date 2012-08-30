@@ -32,6 +32,10 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.AbstractRule
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -171,6 +175,45 @@ public class XtendFormatter {
 				formatFeatureCallParams(call.memberCallArguments, format)
 			} else for(arg : call.memberCallArguments)
 				format(arg, format)
+		}
+		if(indented)
+			format += calls.last.nodeForEObject.append[decreaseIndentation]
+	}
+	
+	def protected AbstractRule binaryOperationPrecedence(EObject op) {
+		val node = op.nodeForFeature(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE)
+		if(node != null && node.grammarElement instanceof CrossReference) {
+			val terminal = (node.grammarElement as CrossReference).terminal
+			if(terminal instanceof RuleCall)
+				return (terminal as RuleCall).rule
+		}
+	}
+	
+	def protected dispatch void format(XBinaryOperation expr, FormattableDocument format) {
+		var precendece = expr.binaryOperationPrecedence
+		var EObject top = expr
+		var calls = <XBinaryOperation>newArrayList()
+		while(top.binaryOperationPrecedence == precendece) {
+			calls += top as XBinaryOperation
+			top = (top as XBinaryOperation).leftOperand
+		}
+		format(top, format)
+		
+		var indented = false
+		for(call:calls.reverse) {
+			val op = call.nodeForFeature(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE)
+			format += op.prepend[oneSpace]
+			
+			if(format.fitsIntoLine(call.rightOperand)) {
+				format += op.append[oneSpace]
+			} else {
+				format += op.append[newLine]
+				if(!indented) {
+					indented = true
+					format += op.append[increaseIndentation]
+				}
+			}
+			format(call.rightOperand, format)
 		}
 		if(indented)
 			format += calls.last.nodeForEObject.append[decreaseIndentation]
