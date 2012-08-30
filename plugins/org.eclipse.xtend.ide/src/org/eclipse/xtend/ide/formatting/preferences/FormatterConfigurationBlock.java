@@ -77,7 +77,7 @@ public class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 		return new FormatterProfileStore(profileVersioner);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected ProfileManager createProfileManager(List profiles, IScopeContext context, PreferencesAccess access,
 			IProfileVersioner profileVersioner) {

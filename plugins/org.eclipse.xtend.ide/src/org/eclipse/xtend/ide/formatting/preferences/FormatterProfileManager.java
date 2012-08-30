@@ -20,6 +20,7 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class FormatterProfileManager extends ProfileManager {
 
 	private static final String NODE_NAME = "org.eclipse.xtend.formatter_settings";
@@ -28,24 +29,24 @@ public class FormatterProfileManager extends ProfileManager {
 	private static final String PROFILE_KEY = DEFUALT_PROFILE_KEY;
 	private static final String FORMATTER_SETTINGS_VERSION = "1";
 
-	private static final KeySet[] KEY_SETS = new KeySet[] { new KeySet(NODE_NAME, new ArrayList<Object>(
+	private static final KeySet[] KEY_SETS = new KeySet[] { new KeySet(NODE_NAME, new ArrayList<String>(
 			getXtendSettings().keySet())) };
 
-	public FormatterProfileManager(List<Object> profiles, IScopeContext context, PreferencesAccess preferencesAccess,
+	public FormatterProfileManager(List profiles, IScopeContext context, PreferencesAccess preferencesAccess,
 			IProfileVersioner profileVersioner) {
 		super(addBuiltinProfiles(profiles, profileVersioner), context, preferencesAccess, profileVersioner, KEY_SETS,
 				PROFILE_KEY, FORMATTER_SETTINGS_VERSION);
 	}
 
-	private static List<Object> addBuiltinProfiles(final List<Object> profiles, IProfileVersioner profileVersioner) {
+	private static List addBuiltinProfiles(final List profiles, IProfileVersioner profileVersioner) {
 		final Profile javaProfile = new BuiltInProfile(DEFUALT_PROFILE_KEY, DEFAULT_PROFILE_LABEL, getXtendSettings(),
 				1, profileVersioner.getCurrentVersion(), profileVersioner.getProfileKind());
 		profiles.add(javaProfile);
 		return profiles;
 	}
 
-	private static Map<Object, Object> getXtendSettings() {
-		final Map<Object, Object> options = new HashMap<Object, Object>();
+	private static Map<String, String> getXtendSettings() {
+		final Map<String, String> options = new HashMap<String, String>();
 		return options;
 	}
 
