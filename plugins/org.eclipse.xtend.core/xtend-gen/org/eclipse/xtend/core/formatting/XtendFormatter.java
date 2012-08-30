@@ -410,9 +410,9 @@ public class XtendFormatter {
         FormattingData _prepend = this.prepend(op, _function);
         format.operator_add(_prepend);
         final Procedure1<FormattableDocument> _function_1 = new Procedure1<FormattableDocument>() {
-            public void apply(final FormattableDocument it) {
+            public void apply(final FormattableDocument f) {
               EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-              XtendFormatter.this.formatFeatureCallParams(_memberCallArguments, format);
+              XtendFormatter.this.formatFeatureCallParams(_memberCallArguments, f);
             }
           };
         boolean _fitsIntoLine = this.fitsIntoLine(format, callOffset, callLength, _function_1);
@@ -1412,7 +1412,7 @@ public class XtendFormatter {
     {
       FormattableDocument _formattableDocument = new FormattableDocument(fmt);
       final FormattableDocument lookahead = _formattableDocument;
-      format.apply(fmt);
+      format.apply(lookahead);
       String _renderToString = lookahead.renderToString(offset, length);
       _xblockexpression = (_renderToString);
     }

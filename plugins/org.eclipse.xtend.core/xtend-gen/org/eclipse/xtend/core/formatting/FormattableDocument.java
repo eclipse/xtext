@@ -124,16 +124,8 @@ public class FormattableDocument {
         indentationChange = _plus;
         old = data1;
       } else {
-        boolean _and_1 = false;
         boolean _isEmpty_2 = data1.isEmpty();
-        if (!_isEmpty_2) {
-          _and_1 = false;
-        } else {
-          boolean _isEmpty_3 = data2.isEmpty();
-          boolean _not_1 = (!_isEmpty_3);
-          _and_1 = (_isEmpty_2 && _not_1);
-        }
-        if (_and_1) {
+        if (_isEmpty_2) {
           int _indentationChange_2 = data2.getIndentationChange();
           int _indentationChange_3 = data1.getIndentationChange();
           int _plus_1 = (_indentationChange_2 + _indentationChange_3);
@@ -403,6 +395,50 @@ public class FormattableDocument {
       int _plus_4 = (_minus_1 + _indentationLenght);
       int _plus_5 = (_plus_4 + lengthDiff);
       _xblockexpression = (_plus_5);
+    }
+    return _xblockexpression;
+  }
+  
+  public String toString() {
+    String _xblockexpression = null;
+    {
+      int lastOffset = 0;
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder debugTrace = _stringBuilder;
+      List<TextReplacement> _renderToEdits = this.renderToEdits();
+      for (final TextReplacement edit : _renderToEdits) {
+        {
+          String _document = this.getDocument();
+          int _offset = edit.getOffset();
+          final String text = _document.substring(lastOffset, _offset);
+          debugTrace.append(text);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("[");
+          String _document_1 = this.getDocument();
+          int _offset_1 = edit.getOffset();
+          int _offset_2 = edit.getOffset();
+          int _length = edit.getLength();
+          int _plus = (_offset_2 + _length);
+          String _substring = _document_1.substring(_offset_1, _plus);
+          _builder.append(_substring, "");
+          _builder.append("|");
+          String _text = edit.getText();
+          _builder.append(_text, "");
+          _builder.append("]");
+          debugTrace.append(_builder.toString());
+          int _offset_3 = edit.getOffset();
+          int _length_1 = edit.getLength();
+          int _plus_1 = (_offset_3 + _length_1);
+          lastOffset = _plus_1;
+        }
+      }
+      String _document = this.getDocument();
+      String _document_1 = this.getDocument();
+      int _length = _document_1.length();
+      final String text = _document.substring(lastOffset, _length);
+      debugTrace.append(text);
+      String _string = debugTrace.toString();
+      _xblockexpression = (_string);
     }
     return _xblockexpression;
   }

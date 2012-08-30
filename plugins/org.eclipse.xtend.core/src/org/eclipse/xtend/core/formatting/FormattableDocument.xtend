@@ -40,7 +40,7 @@ class FormattableDocument {
 		if(!data1.empty && data2.empty) {
 			indentationChange = data1.indentationChange + data2.indentationChange
 			old = data1
-		} else if(data1.empty && !data2.empty) {
+		} else if(data1.empty) {
 			indentationChange = data2.indentationChange + data1.indentationChange
 			old = data2
 		}
@@ -147,6 +147,20 @@ class FormattableDocument {
 			if(f instanceof WhitespaceData)
 				lengthDiff = lengthDiff + (((f as WhitespaceData).space?.length ?: 0) - f.length)
 		(offset - lineStart) + cfg.getIndentationLenght(currentIndentation) + lengthDiff  
+	}
+	
+	override toString() {
+		var lastOffset = 0
+		val debugTrace = new StringBuilder()
+		for(edit:renderToEdits) {
+			val text = document.substring(lastOffset, edit.offset)
+			debugTrace.append(text)
+			debugTrace.append('''[«document.substring(edit.offset, edit.offset + edit.length)»|«edit.text»]''')
+			lastOffset = edit.offset + edit.length
+		}
+		val text = document.substring(lastOffset, document.length)
+		debugTrace.append(text)
+		debugTrace.toString
 	}
 	
 }

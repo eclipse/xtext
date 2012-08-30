@@ -163,7 +163,7 @@ public class XtendFormatter {
 				val op = call.nodeForKeyword(if(call.nullSafe) "?." else if(call.spreading) "*." else ".")
 				format += op.prepend[noSpace]
 				
-				if(format.fitsIntoLine(callOffset, callLength, [ formatFeatureCallParams(call.memberCallArguments, format) ])) {
+				if(format.fitsIntoLine(callOffset, callLength, [ f | formatFeatureCallParams(call.memberCallArguments, f) ])) {
 					format += op.append[noSpace]
 				} else {
 					format += op.append[newLine]
@@ -443,7 +443,7 @@ public class XtendFormatter {
 	
 	def protected String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
 		val lookahead = new FormattableDocument(fmt)
-		format.apply(fmt)
+		format.apply(lookahead)
 		lookahead.renderToString(offset, length)
 	}
 	
