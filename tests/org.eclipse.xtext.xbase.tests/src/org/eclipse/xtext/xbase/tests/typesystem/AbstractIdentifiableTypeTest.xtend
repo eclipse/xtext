@@ -10,16 +10,19 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import java.util.Set
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
-import org.junit.Test
 import org.junit.Ignore
-import org.eclipse.xtext.xbase.XClosure
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.junit.Test
+
+import static org.junit.Assert.*
+
+import static extension org.eclipse.xtext.xbase.tests.typesystem.AbstractIdentifiableTypeTest.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,12 +45,8 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	
 	def protected findIdentifiables(CharSequence expression) {
 		val xExpression = expression(expression, false)
-		val identifiables = EcoreUtil2::eAll(xExpression).map[
-			switch(it) {
-				XClosure: it.implicitParameter
-				default: it 
-			}
-		].filter [
+		
+		val identifiables = EcoreUtil2::eAll(xExpression).filter [
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true

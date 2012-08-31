@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -53,26 +52,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     try {
       final XExpression xExpression = this.expression(expression, false);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      final Function1<EObject,EObject> _function = new Function1<EObject,EObject>() {
-          public EObject apply(final EObject it) {
-            EObject _switchResult = null;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XClosure) {
-                final XClosure _xClosure = (XClosure)it;
-                _matched=true;
-                JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
-                _switchResult = _implicitParameter;
-              }
-            }
-            if (!_matched) {
-              _switchResult = it;
-            }
-            return _switchResult;
-          }
-        };
-      Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
-      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject it) {
             boolean _and = false;
             boolean _notEquals = (!Objects.equal(it, null));
@@ -114,10 +94,10 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             return Boolean.valueOf(_and);
           }
         };
-      Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_map, _function_1);
+      Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAll, _function);
       Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
       final List<JvmIdentifiableElement> identifiables = IteratorExtensions.<JvmIdentifiableElement>toList(_filter_1);
-      final Function1<JvmIdentifiableElement,Integer> _function_2 = new Function1<JvmIdentifiableElement,Integer>() {
+      final Function1<JvmIdentifiableElement,Integer> _function_1 = new Function1<JvmIdentifiableElement,Integer>() {
           public Integer apply(final JvmIdentifiableElement it) {
             int _xblockexpression = (int) 0;
             {
@@ -138,7 +118,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             return Integer.valueOf(_xblockexpression);
           }
         };
-      return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
+      return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
