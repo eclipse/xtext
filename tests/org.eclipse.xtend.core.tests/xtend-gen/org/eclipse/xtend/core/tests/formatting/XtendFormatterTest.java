@@ -409,6 +409,31 @@ public class XtendFormatterTest {
   }
   
   @Test
+  public void formatMethod3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(String p1, String p2, String p3, String p4, String p5, String p6,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p7, String p8, String p9, String p10, String p11, String p12,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String p13, String p14) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void formatMethodAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

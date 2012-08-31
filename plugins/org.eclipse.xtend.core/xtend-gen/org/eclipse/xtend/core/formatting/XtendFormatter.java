@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -210,27 +211,16 @@ public class XtendFormatter {
       for (final Integer i : _upTo) {
         {
           EList<XtendMember> _members_2 = clazz.getMembers();
-          XtendMember _get = _members_2.get((i).intValue());
-          final XtendMember member = _get;
-          boolean _matched = false;
-          if (!_matched) {
-            if (member instanceof XtendFunction) {
-              final XtendFunction _xtendFunction = (XtendFunction)member;
-              _matched=true;
-              XExpression _expression = _xtendFunction.getExpression();
-              this.format(_expression, format);
-            }
-          }
+          final XtendMember current = _members_2.get((i).intValue());
+          this.format(current, format);
           EList<XtendMember> _members_3 = clazz.getMembers();
           int _size_1 = _members_3.size();
           int _minus_1 = (_size_1 - 1);
           boolean _lessThan = ((i).intValue() < _minus_1);
           if (_lessThan) {
             EList<XtendMember> _members_4 = clazz.getMembers();
-            final XtendMember current = _members_4.get((i).intValue());
-            EList<XtendMember> _members_5 = clazz.getMembers();
             int _plus = ((i).intValue() + 1);
-            final XtendMember next = _members_5.get(_plus);
+            final XtendMember next = _members_4.get(_plus);
             boolean _and = false;
             if (!(current instanceof XtendField)) {
               _and = false;
@@ -257,9 +247,9 @@ public class XtendFormatter {
               format.operator_add(_append_3);
             }
           } else {
-            EList<XtendMember> _members_6 = clazz.getMembers();
-            XtendMember _get_1 = _members_6.get((i).intValue());
-            INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(_get_1);
+            EList<XtendMember> _members_5 = clazz.getMembers();
+            XtendMember _get = _members_5.get((i).intValue());
+            INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(_get);
             final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.newLine();
@@ -280,6 +270,106 @@ public class XtendFormatter {
       FormattingData _append_2 = this.append(clazzOpenBrace, _function_3);
       format.operator_add(_append_2);
     }
+  }
+  
+  protected void _format(final XtendFunction func, final FormattableDocument format) {
+    final INode nameNode = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__NAME);
+    final ILeafNode open = this._nodeModelAccess.immediatelyFollowingKeyword(nameNode, "(");
+    INode comma = null;
+    boolean indented = false;
+    EList<XtendParameter> _parameters = func.getParameters();
+    for (final XtendParameter param : _parameters) {
+      {
+        boolean _fitsIntoLine = this.fitsIntoLine(format, param);
+        if (_fitsIntoLine) {
+          boolean _equals = Objects.equal(comma, null);
+          if (_equals) {
+            final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.noSpace();
+                }
+              };
+            FormattingData _append = this.append(open, _function);
+            format.operator_add(_append);
+          } else {
+            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.oneSpace();
+                }
+              };
+            FormattingData _append_1 = this.append(comma, _function_1);
+            format.operator_add(_append_1);
+          }
+        } else {
+          INode _xifexpression = null;
+          boolean _equals_1 = Objects.equal(comma, null);
+          if (_equals_1) {
+            _xifexpression = open;
+          } else {
+            _xifexpression = comma;
+          }
+          final INode n = _xifexpression;
+          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.newLine();
+              }
+            };
+          FormattingData _append_2 = this.append(n, _function_2);
+          format.operator_add(_append_2);
+          boolean _not = (!indented);
+          if (_not) {
+            final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.increaseIndentation();
+                }
+              };
+            FormattingData _append_3 = this.append(n, _function_3);
+            format.operator_add(_append_3);
+          }
+          indented = true;
+        }
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(param);
+        ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
+        comma = _immediatelyFollowingKeyword;
+      }
+    }
+    EList<XtendParameter> _parameters_1 = func.getParameters();
+    int _size = _parameters_1.size();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      EList<XtendParameter> _parameters_2 = func.getParameters();
+      XtendParameter _last = IterableExtensions.<XtendParameter>last(_parameters_2);
+      final INode last = this._nodeModelAccess.nodeForEObject(_last);
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _append = this.append(last, _function);
+      format.operator_add(_append);
+      if (indented) {
+        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.decreaseIndentation();
+            }
+          };
+        FormattingData _append_1 = this.append(last, _function_1);
+        format.operator_add(_append_1);
+      }
+    } else {
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _append_2 = this.append(open, _function_2);
+      format.operator_add(_append_2);
+    }
+    XExpression _expression = func.getExpression();
+    this.format(_expression, format);
+  }
+  
+  protected void _format(final XtendParameter param, final FormattableDocument format) {
   }
   
   protected void _format(final XVariableDeclaration expr, final FormattableDocument format) {
@@ -1466,49 +1556,55 @@ public class XtendFormatter {
     }
   }
   
-  protected void format(final EObject expr, final FormattableDocument format) {
-    if (expr instanceof XBinaryOperation) {
-      _format((XBinaryOperation)expr, format);
+  protected void format(final EObject func, final FormattableDocument format) {
+    if (func instanceof XtendFunction) {
+      _format((XtendFunction)func, format);
       return;
-    } else if (expr instanceof XFeatureCall) {
-      _format((XFeatureCall)expr, format);
+    } else if (func instanceof XBinaryOperation) {
+      _format((XBinaryOperation)func, format);
       return;
-    } else if (expr instanceof XMemberFeatureCall) {
-      _format((XMemberFeatureCall)expr, format);
+    } else if (func instanceof XFeatureCall) {
+      _format((XFeatureCall)func, format);
       return;
-    } else if (expr instanceof XtendClass) {
-      _format((XtendClass)expr, format);
+    } else if (func instanceof XMemberFeatureCall) {
+      _format((XMemberFeatureCall)func, format);
       return;
-    } else if (expr instanceof XBlockExpression) {
-      _format((XBlockExpression)expr, format);
+    } else if (func instanceof XtendClass) {
+      _format((XtendClass)func, format);
       return;
-    } else if (expr instanceof XClosure) {
-      _format((XClosure)expr, format);
+    } else if (func instanceof XtendParameter) {
+      _format((XtendParameter)func, format);
       return;
-    } else if (expr instanceof XForLoopExpression) {
-      _format((XForLoopExpression)expr, format);
+    } else if (func instanceof XBlockExpression) {
+      _format((XBlockExpression)func, format);
       return;
-    } else if (expr instanceof XIfExpression) {
-      _format((XIfExpression)expr, format);
+    } else if (func instanceof XClosure) {
+      _format((XClosure)func, format);
       return;
-    } else if (expr instanceof XSwitchExpression) {
-      _format((XSwitchExpression)expr, format);
+    } else if (func instanceof XForLoopExpression) {
+      _format((XForLoopExpression)func, format);
       return;
-    } else if (expr instanceof XVariableDeclaration) {
-      _format((XVariableDeclaration)expr, format);
+    } else if (func instanceof XIfExpression) {
+      _format((XIfExpression)func, format);
       return;
-    } else if (expr instanceof XtendFile) {
-      _format((XtendFile)expr, format);
+    } else if (func instanceof XSwitchExpression) {
+      _format((XSwitchExpression)func, format);
       return;
-    } else if (expr instanceof XExpression) {
-      _format((XExpression)expr, format);
+    } else if (func instanceof XVariableDeclaration) {
+      _format((XVariableDeclaration)func, format);
       return;
-    } else if (expr == null) {
+    } else if (func instanceof XtendFile) {
+      _format((XtendFile)func, format);
+      return;
+    } else if (func instanceof XExpression) {
+      _format((XExpression)func, format);
+      return;
+    } else if (func == null) {
       _format((Void)null, format);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(expr, format).toString());
+        Arrays.<Object>asList(func, format).toString());
     }
   }
 }
