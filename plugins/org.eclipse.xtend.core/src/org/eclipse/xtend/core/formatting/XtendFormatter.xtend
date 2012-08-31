@@ -38,6 +38,7 @@ import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtext.xbase.XBlockExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -145,6 +146,9 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(Void expr, FormattableDocument format) {
+	}
+	
+	def protected dispatch void format(EObject expr, FormattableDocument format) {
 	}
 	
 	def protected void formatFeatureCallParams(List<XExpression> params, FormattableDocument format) {
@@ -377,6 +381,10 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XIfExpression expr, FormattableDocument format) {
+		if(!(expr.eContainer instanceof XBlockExpression)) {
+			format += expr.nodeForKeyword("if").append[increaseIndentation]
+			format += expr.nodeForEObject.append[decreaseIndentation]
+		}
 		val thennode = expr.then.nodeForEObject
 		val elsenode = expr.^else?.nodeForEObject
 		val multiline = thennode.text.trim.contains("\n") || 
@@ -540,3 +548,28 @@ class FormattingDataInit {
 }
 
 // problem: Format is not being filled sequentially, therefore lookahead operations on it may be affected 
+
+/*
+ * def dispatch void genExpression(ExpCtx it, ForStmt forStmt) {
+		genExpression("loop", forStmt.source,
+			forStmt.
+				newTypeRef(typeof(Iterable),
+					wildCardExtends(forStmt.parameterType)))
+	}
+ */
+ 
+ 
+ /*
+				members +=
+					element.
+						toMethod("toString", element.newTypeRef(typeof(String))) [
+							body = [
+								val type = findDeclaredType(typeof(ToStringHelper),
+									element)
+								append("return new ")
+								append(type)
+								append("().toString(this);");
+							]
+						]
+
+  */
