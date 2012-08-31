@@ -29,6 +29,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 import org.junit.AfterClass
 import org.eclipse.search.ui.text.AbstractTextSearchResult
+import org.eclipse.xtend.core.xtend.XtendClass
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
@@ -234,7 +235,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		val clazz= xtendFile("Xtend.xtend", '''
 			class Xtend {
 			}
-		'''.toString).xtendClasses.head
+		'''.toString).xtendTypes.head
 		waitForAutoBuild
 		getJavaElements(clazz) => [
 			assertEquals(1, size)
@@ -248,7 +249,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				def foo() {
 				}
 			}
-		'''.toString).xtendClasses.head.members.head
+		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
 		waitForAutoBuild
 		getJavaElements(method) => [
 			assertEquals(1, size)
@@ -261,7 +262,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			class Xtend {
 				int foo
 			}
-		'''.toString).xtendClasses.head.members.head
+		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
 		waitForAutoBuild
 		getJavaElements(field) => [
 			assertEquals(1, size)
@@ -274,7 +275,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			class Xtend {
 				@Property int foo
 			}
-		'''.toString).xtendClasses.head.members.head
+		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
 		waitForAutoBuild
 		
 		getJavaElements(field) => [
@@ -294,7 +295,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				def dispatch foo(Number x) {
 				}
 			}
-		'''.toString).xtendClasses.head.members.head
+		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
 		waitForAutoBuild
 		getJavaElements(method) => [
 			assertEquals(2, size)

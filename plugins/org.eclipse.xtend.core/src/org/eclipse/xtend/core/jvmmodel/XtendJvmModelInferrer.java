@@ -28,9 +28,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
+import org.eclipse.xtend.core.jvmmodel.annotationprocessing.IAnnotationProcessor;
 import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -39,10 +41,12 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -65,6 +69,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -122,26 +127,68 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		if (!(xtendFile instanceof XtendFile))
 			return;
 		final XtendFile xtendFile2 = (XtendFile) xtendFile;
-		final EList<XtendClass> classes = xtendFile2.getXtendClasses();
-		for (final XtendClass xtendClass : classes) {
-			if (Strings.isEmpty(xtendClass.getName()))
+		final List<XtendTypeDeclaration> classes = xtendFile2.getXtendTypes();
+		for (final XtendTypeDeclaration xtendTypeDeclaration : classes) {
+			if (Strings.isEmpty(xtendTypeDeclaration.getName()))
 				continue;
-			final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
-			inferredJvmType.setPackageName(xtendClass.getPackageName());
-			inferredJvmType.setSimpleName(xtendClass.getName());
-			associator.associatePrimary(xtendClass, inferredJvmType);
-			acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
-				public void apply(@Nullable JvmGenericType p) {
-					initialize(xtendClass, inferredJvmType);
-				}
-			});
+			if (xtendTypeDeclaration instanceof XtendClass) {
+				final XtendClass xtendClass = (XtendClass) xtendTypeDeclaration;
+				final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
+				inferredJvmType.setPackageName(xtendFile2.getPackage());
+				inferredJvmType.setSimpleName(xtendClass.getName());
+				associator.associatePrimary(xtendClass, inferredJvmType);
+				acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
+					public void apply(@Nullable JvmGenericType p) {
+						initialize(xtendClass, inferredJvmType);
+					}
+				});
+			} else if (xtendTypeDeclaration instanceof XtendAnnotationType) {
+				final XtendAnnotationType annotationType = (XtendAnnotationType) xtendTypeDeclaration;
+				final JvmAnnotationType inferredAnnotationType = typesFactory.createJvmAnnotationType();
+				inferredAnnotationType.setPackageName(xtendFile2.getPackage());
+				inferredAnnotationType.setSimpleName(annotationType.getName());
+				associator.associatePrimary(annotationType, inferredAnnotationType);
+				acceptor.accept(inferredAnnotationType).initializeLater(new Procedure1<JvmAnnotationType>() {
+					public void apply(@Nullable JvmAnnotationType p) {
+						initialize(annotationType, inferredAnnotationType);
+					}
+				});
+			}
 		}
 	}
 
+	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
+		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotations(), annotationTranslationFilter), inferredJvmType);
+		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		for (XtendMember member : source.getMembers()) {
+			if (member instanceof XtendField) {
+				XtendField field = (XtendField) member;
+				JvmOperation operation = typesFactory.createJvmOperation();
+				associator.associatePrimary(member, operation);
+				operation.setSimpleName(field.getName());
+				JvmTypeReference returnType = null;
+				if (field.getType() != null) {
+					returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
+				} else {
+					returnType = getTypeProxy(operation);
+				}
+				operation.setReturnType(returnType);
+				if (field.getInitialValue() != null)
+					jvmTypesBuilder.setBody(operation, field.getInitialValue());
+				operation.setVisibility(JvmVisibility.PUBLIC);
+				jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotationInfo().getAnnotations(), annotationTranslationFilter), operation);
+				jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(source));
+				inferredJvmType.getMembers().add(operation);
+			}
+		}
+		
+	}
+	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		inferredJvmType.setAbstract(source.isAbstract());
-		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotations(), annotationTranslationFilter), inferredJvmType);
 		boolean isDataObject = hasAnnotation(source, Data.class);
 		JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class,
 				source);
@@ -182,6 +229,27 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			addDataObjectMethods(source, inferredJvmType);
 		}
 		nameClashResolver.resolveNameClashes(inferredJvmType);
+		
+		// do annotation processing in depth-first order
+		recursiveCallParticipants(source);
+	}
+	
+	@Inject private IAnnotationProcessor.Provider annotationProcessorProvider;
+	
+	protected void recursiveCallParticipants(XtendAnnotationTarget target) {
+		callParticipant(target);
+		for (XtendAnnotationTarget child : filter(target.eContents(), XtendAnnotationTarget.class)) {
+			recursiveCallParticipants(child);
+		}
+	}
+	
+	protected void callParticipant(XtendAnnotationTarget sourceAnnotationTarget) {
+		Iterable<JvmAnnotationTarget> elements = filter(associations.getJvmElements(sourceAnnotationTarget), JvmAnnotationTarget.class);
+		for (XAnnotation annotation : sourceAnnotationTarget.getAnnotations()) {
+			IAnnotationProcessor participant = annotationProcessorProvider.get(annotation.getAnnotationType());
+			if (participant != null)
+				participant.process(annotation, elements, CancelIndicator.NullImpl /* TODO do real cancel indication */);
+		}
 	}
 
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
@@ -433,7 +501,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (JvmTypeReference exception : source.getExceptions()) {
 			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
-		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), operation);
+		jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotationInfo().getAnnotations(), annotationTranslationFilter), operation);
 		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
 		if (createExtensionInfo != null) {
 			transformCreateExtension(source, createExtensionInfo, container, operation, returnType);
@@ -520,11 +588,11 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (JvmTypeReference exception : source.getExceptions()) {
 			constructor.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
-		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), constructor);
+		jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotationInfo().getAnnotations(), annotationTranslationFilter) , constructor);
 		associator.associateLogicalContainer(source.getExpression(), constructor);
 		jvmTypesBuilder.setDocumentation(constructor, jvmTypesBuilder.getDocumentation(source));
 	}
-
+	
 	protected void transform(XtendField source, JvmGenericType container) {
 		if (source.isExtension() || source.getName() != null) {
 			JvmField field = typesFactory.createJvmField();
@@ -547,7 +615,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 			boolean isProperty = isDataObject;
 			for (XAnnotation anno : source.getAnnotations()) {
-				if (anno == null || anno.getAnnotationType() == null || anno.getAnnotationType().getIdentifier() == null)
+				if (doNotTranslate(anno))
 					continue;
 				if (Property.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
 					isProperty = true;
@@ -576,6 +644,18 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 			
 		}
+	}
+	
+	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {
+		public boolean apply(@Nullable XAnnotation annotation) {
+			if (annotation == null)
+				return false;
+			return !doNotTranslate(annotation);
+		}
+	};
+
+	protected boolean doNotTranslate(XAnnotation anno) {
+		return anno == null || anno.getAnnotationType() == null || anno.getAnnotationType().getIdentifier() == null || annotationProcessorProvider.get(anno.getAnnotationType()) != null;
 	}
 
 	protected boolean hasMethod(XtendClass xtendClass, String simpleName, List<? extends JvmFormalParameter> parameters) {

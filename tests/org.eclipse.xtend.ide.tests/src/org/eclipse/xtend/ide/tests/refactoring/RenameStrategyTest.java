@@ -37,7 +37,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	private WorkbenchTestHelper testHelper;
 
 	@Test public void testInferredClassRenamed() throws Exception {
-		XtendClass fooClass = testHelper.xtendFile("Foo", "class Foo { }").getXtendClasses().get(0);
+		XtendClass fooClass = (XtendClass) testHelper.xtendFile("Foo", "class Foo { }").getXtendTypes().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooClass, null);
 		renameStrategy.applyDeclarationChange("Bar", fooClass.eResource().getResourceSet());
 		JvmGenericType inferredType = associations.getInferredType(fooClass);
@@ -54,8 +54,8 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testInferredMethodRenamed() throws Exception {
-		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { def Foo foo() {this} }")
-				.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction fooMethod = (XtendFunction) ((XtendClass)testHelper.xtendFile("Foo", "class Foo { def Foo foo() {this} }")
+				.getXtendTypes().get(0)).getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
 		renameStrategy.applyDeclarationChange("bar", fooMethod.eResource().getResourceSet());
 		assertEquals("bar", fooMethod.getName());
@@ -68,8 +68,8 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testXtendConstructorIgnored() throws Exception {
-		XtendConstructor constructor = (XtendConstructor) testHelper.xtendFile("Foo", "class Foo { new() {} }")
-				.getXtendClasses().get(0).getMembers().get(0);
+		XtendConstructor constructor = (XtendConstructor) ((XtendClass)testHelper.xtendFile("Foo", "class Foo { new() {} }")
+				.getXtendTypes().get(0)).getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(constructor, null);
 		assertNull(renameStrategy);
 	}

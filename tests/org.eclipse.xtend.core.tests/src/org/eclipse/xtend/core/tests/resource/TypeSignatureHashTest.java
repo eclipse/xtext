@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
@@ -208,7 +209,7 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 	}
 
 	protected String getTypeSignature(XtendFile file) {
-		JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
+		JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
 		return signatureBuilderProvider.get().appendSignature(inferredType).hash();
 	}
 }

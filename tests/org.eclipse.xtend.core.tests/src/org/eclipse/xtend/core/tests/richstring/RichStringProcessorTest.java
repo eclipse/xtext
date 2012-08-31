@@ -140,7 +140,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(getPrefix()+string+"}"), null);
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		XtendClass clazz = file.getXtendClasses().get(0);
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
 		return (RichString) function.getExpression();
 	}

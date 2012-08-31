@@ -1,20 +1,20 @@
 package org.eclipse.xtend.ide.tests.validation
 
 import com.google.inject.Inject
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.Test
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFunction
-
-import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
-import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
-import org.eclipse.osgi.internal.loader.buddy.SystemPolicy$ParentClassLoader
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Ignore
+import org.junit.Test
+
+import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
+import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -88,7 +88,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
-		val field = xtendFile.xtendClasses.get(0).members.get(0) as XtendField
+		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
 	}
@@ -103,7 +103,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
-		val field = xtendFile.xtendClasses.get(0).members.get(0) as XtendField
+		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
 	}
@@ -119,7 +119,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
-		val field = xtendFile.xtendClasses.get(0).members.get(0) as XtendField
+		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
 	}
@@ -134,7 +134,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
-		val field = xtendFile.xtendClasses.get(0).members.get(0) as XtendField
+		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
 	}
@@ -147,7 +147,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 	}
 
@@ -160,7 +160,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 
-		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 	}
 	
@@ -172,7 +172,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 	}
 	
@@ -183,7 +183,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass<org.eclipse.xtend.core.tests.internal.InternalClass> x) {}
 		}
 		''')
-		val function = xtendFile.xtendClasses.get(0).members.get(0) as XtendFunction
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		val parameter = function.parameters.get(0)
 		val type = parameter.parameterType as JvmParameterizedTypeReference
 		val typeParameter = type.arguments.get(0)

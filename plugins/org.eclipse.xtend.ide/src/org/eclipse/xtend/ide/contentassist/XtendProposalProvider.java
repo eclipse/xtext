@@ -142,9 +142,10 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 
 		};
 	}
+	
 
 	@Override
-	public void completeClass_Extends(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(),
 				new ITypesProposalProvider.Filter() {
@@ -162,18 +163,18 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 
 	@Override
-	public void completeClass_Implements(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeType_Implements(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(),
 				TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
 	}
 
 	@Override
-	public void completeClass_Members(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeType_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendClass)
 			overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
-		super.completeClass_Members(model, assignment, context, acceptor);
+		super.completeType_Members(model, assignment, context, acceptor);
 	}
 
 	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

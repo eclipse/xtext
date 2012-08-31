@@ -76,7 +76,7 @@ public class XtendFormatter {
 				format += imp.nodeForEObject.append[newLine]
 			else 
 				format += imp.nodeForEObject.append[newLines = 2] 
-		for(clazz:xtendFile.xtendClasses) 
+		for(clazz : xtendFile.xtendTypes) 
 			clazz.format(format)
 		
 		format += xtendFile.nodeForEObject.append[newLine]

@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -125,7 +126,7 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	protected Class<?> compileToClass(final String text) throws Exception {
 		XtendFile file = parseHelper.parse(text);
 		validationHelper.assertNoErrors(file);
-		JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
+		JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
 		CharSequence javaCode = generator.generateType(inferredType);
 		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
 		return class1;

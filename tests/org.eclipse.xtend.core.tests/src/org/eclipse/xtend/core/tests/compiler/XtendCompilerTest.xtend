@@ -1,11 +1,12 @@
 package org.eclipse.xtend.core.tests.compiler
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.junit.Test
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
+import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendTestCase {
 	
@@ -1837,9 +1838,47 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 
+	@Test
+	def testAnnotationType_1(){
+		assertCompilesTo(
+		'''
+			@interface MyAnnotation { 
+				String x;
+				int y;
+				Class<?>[] value;
+			}
+		''','''
+			public @interface MyAnnotation{
+			  public String x();
+			  public int y();
+			  public Class<? extends Object>[] value();
+			}
+		''')
+	}
+	
+	@Test
+	def testAnnotationType_2(){
+		assertCompilesTo(
+		'''
+			@interface MyAnnotation { 
+				String x = 'foo'
+				int y = 42
+				Class<?> value = typeof(String)
+				boolean flag = true
+			}
+		''','''
+			public @interface MyAnnotation{
+			  public String x() default "foo";
+			  public int y() default 42;
+			  public Class<? extends Object> value() default String.class;
+			  public boolean flag() default true;
+			}
+		''')
+	}
+
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
-		val inferredType = file.getXtendClasses.head.getInferredType
+		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
 		val javaCode = generator.generateType(inferredType);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
 	}

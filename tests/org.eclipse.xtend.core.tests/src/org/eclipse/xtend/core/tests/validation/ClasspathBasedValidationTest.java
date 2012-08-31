@@ -74,7 +74,7 @@ public class ClasspathBasedValidationTest extends Assert {
 	@Ignore
 	@Test public void testFileNamingConventions_1() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
-			xtendFile.getXtendClasses().get(0).setName("Bar");
+			xtendFile.getXtendTypes().get(0).setName("Bar");
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_PACKAGE);
 		helper.assertError(xtendFile, XtendPackage.Literals.XTEND_CLASS, IssueCodes.WRONG_FILE);
 	}

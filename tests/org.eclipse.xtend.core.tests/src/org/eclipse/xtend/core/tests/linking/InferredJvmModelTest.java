@@ -495,7 +495,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredJvmType() throws Exception {
 		XtendFile xtendFile = file("class Foo { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		assertEquals(associations.getInferredType(xtendClass), inferredType);
 		assertEquals(xtendClass, associations.getXtendClass(inferredType));
 		assertEquals(JvmVisibility.PUBLIC, inferredType.getVisibility());
@@ -504,7 +504,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredJvmConstructor() throws Exception {
 		XtendFile xtendFile = file("class Foo { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		assertEquals(1, inferredType.getMembers().size());
 		JvmMember inferredFirstMember = inferredType.getMembers().get(0);
 		assertTrue(inferredFirstMember instanceof JvmConstructor);
@@ -515,10 +515,10 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredSuperType() throws Exception {
 		XtendFile xtendFile = file("class Foo extends Object { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		assertEquals(1, inferredType.getSuperTypes().size());
-		assertFalse(xtendClass.getSuperTypes().get(0) == inferredType.getSuperTypes().get(0));
-		assertEquals(xtendClass.getSuperTypes().get(0).getType(), inferredType.getSuperTypes().get(0).getType());
+		assertFalse(xtendClass.getExtends() == inferredType.getSuperTypes().get(0));
+		assertEquals(xtendClass.getExtends().getType(), inferredType.getSuperTypes().get(0).getType());
 		assertEquals(0, xtendClass.getMembers().size());
 		assertEquals(1, inferredType.getMembers().size());
 	}
@@ -526,9 +526,9 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredSuperTypeTypeArgument() throws Exception {
 		XtendFile xtendFile = file("class Foo extends Iterable<Object> { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		assertEquals(1, inferredType.getSuperTypes().size());
-		JvmTypeReference xtendSuperType = xtendClass.getSuperTypes().get(0);
+		JvmTypeReference xtendSuperType = xtendClass.getExtends();
 		JvmTypeReference jvmSuperType = inferredType.getSuperTypes().get(0);
 		assertFalse(xtendSuperType == jvmSuperType);
 		assertTrue(jvmSuperType instanceof JvmParameterizedTypeReference);
@@ -545,7 +545,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredTypeParameter() throws Exception {
 		XtendFile xtendFile = file("class Foo <T> { }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		assertEquals(1, inferredType.getTypeParameters().size());
 		assertFalse(xtendClass.getTypeParameters().get(0) == inferredType.getTypeParameters().get(0));
 		assertEquals(xtendClass.getTypeParameters().get(0).getIdentifier(), inferredType.getTypeParameters().get(0)
@@ -566,7 +566,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredFunction_01() throws Exception {
 		XtendFile xtendFile = file("class Foo { def bar() { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
 		assertEquals(2, jvmMembers.size());
 		JvmMember jvmMember = jvmMembers.get(1);
@@ -580,7 +580,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	@Test public void testInferredFunction_02() throws Exception {
 		XtendFile xtendFile = file("class Foo { def create result: newArrayList(s) newList(String s) {} }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
-		XtendClass xtendClass = xtendFile.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
 		assertEquals(4, jvmMembers.size());
 		JvmMember jvmMember = jvmMembers.get(1);
@@ -615,7 +615,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertFalse(xtendFunction.getReturnType() == jvmOperation.getReturnType());
 		assertEquals(xtendFunction.getReturnType().getType(), jvmOperation.getReturnType().getType());
 	}
@@ -625,7 +625,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertFalse(xtendFunction.getReturnType() == jvmOperation.getReturnType());
 		assertEquals(xtendFunction.getReturnType().getType(), jvmOperation.getReturnType().getType());
 	}
@@ -634,7 +634,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFile xtendFile = file("class Foo { def bar(Boolean baz) { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals(1, jvmOperation.getParameters().size());
 		JvmFormalParameter jvmParameter = jvmOperation.getParameters().get(0);
 		XtendParameter xtendParameter = xtendFunction.getParameters().get(0);
@@ -647,7 +647,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());
-		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals(inferredType, xtendFunction.getReturnType().getType());
 	}
 	
@@ -725,7 +725,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals("java.util.List<S>", jvmOperation.getReturnType().getIdentifier());
 		JvmTypeReference argument = ((JvmParameterizedTypeReference)jvmOperation.getReturnType()).getArguments().get(0);
 		assertSame(inferredType, ((JvmTypeParameter)argument.getType()).getDeclarator());
-		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals("java.util.List<S>", xtendFunction.getReturnType().getIdentifier());
 	}
 

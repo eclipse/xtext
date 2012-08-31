@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -86,56 +87,59 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		if (!xtendFile.getImports().isEmpty())
 			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__IMPORTS,
 					images.forImportContainer(), "import declarations", false);
-		for (XtendClass xtendClass : xtendFile.getXtendClasses()) {
-			EObjectNode classNode = createEObjectNode(parentNode, xtendClass);
-			createFeatureNodes(classNode, xtendClass);
+		for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
+			EObjectNode classNode = createEObjectNode(parentNode, xtendType);
+			createFeatureNodes(classNode, xtendType);
 		}
 	}
 
-	protected void createFeatureNodes(IOutlineNode parentNode, XtendClass xtendClass) {
-		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
-		if (inferredType != null) {
-			Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = dispatchingSupport.getDispatcher2dispatched(
-					xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
-			Set<JvmFeature> processedFeatures = newHashSet();
-			for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
-				XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
-				if (dispatcherNode != null) {
-					dispatcherNode.setDispatch(true);
-					processedFeatures.add(dispatcher);
-					for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
-						XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
-						if (xtendFunction == null) {
-							createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
-						} else {
-							createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
+	protected void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
+		if (xtendType instanceof XtendClass) {
+			XtendClass xtendClass = (XtendClass) xtendType;
+			final JvmGenericType inferredType = associations.getInferredType(xtendClass);
+			if (inferredType != null) {
+				Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = dispatchingSupport.getDispatcher2dispatched(
+						xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
+				Set<JvmFeature> processedFeatures = newHashSet();
+				for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
+					XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
+					if (dispatcherNode != null) {
+						dispatcherNode.setDispatch(true);
+						processedFeatures.add(dispatcher);
+						for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
+							XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
+							if (xtendFunction == null) {
+								createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
+							} else {
+								createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
+							}
+							processedFeatures.add(dispatchCase);
 						}
-						processedFeatures.add(dispatchCase);
 					}
 				}
-			}
-			Iterable<JvmFeature> remainingFeatures;
-			if (getCurrentMode() == SHOW_INHERITED_MODE) {
-				remainingFeatures = filter(
-						featureOverridesService.getAllJvmFeatures(typeReferences.createTypeRef(inferredType)),
-						new Predicate<JvmMember>() {
-							public boolean apply(JvmMember input) {
-								return visibilityService.isVisible(input, inferredType);
-							}
-						});
-			} else {
-				remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
-			}
-			for (JvmFeature feature : remainingFeatures) {
-				if (!processedFeatures.contains(feature)) {
-					EObject primarySourceElement = associations.getPrimarySourceElement(feature);
-					createNodeForFeature(parentNode, inferredType, feature, 
-							primarySourceElement != null ? primarySourceElement : feature);
+				Iterable<JvmFeature> remainingFeatures;
+				if (getCurrentMode() == SHOW_INHERITED_MODE) {
+					remainingFeatures = filter(
+							featureOverridesService.getAllJvmFeatures(typeReferences.createTypeRef(inferredType)),
+							new Predicate<JvmMember>() {
+								public boolean apply(JvmMember input) {
+									return visibilityService.isVisible(input, inferredType);
+								}
+							});
+				} else {
+					remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
 				}
+				for (JvmFeature feature : remainingFeatures) {
+					if (!processedFeatures.contains(feature)) {
+						EObject primarySourceElement = associations.getPrimarySourceElement(feature);
+						createNodeForFeature(parentNode, inferredType, feature, 
+								primarySourceElement != null ? primarySourceElement : feature);
+					}
+				}
+			} else {
+				for (XtendMember member : xtendClass.getMembers())
+					createEObjectNode(parentNode, member);
 			}
-		} else {
-			for (XtendMember member : xtendClass.getMembers())
-				createEObjectNode(parentNode, member);
 		}
 	}
 

@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -166,11 +168,15 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
-		final XtendClass xtendClass = xtendFile.getXtendClasses().isEmpty() ? null : xtendFile.getXtendClasses().get(0);
-		if (xtendClass == null || xtendClass.getMembers() == null) {
-			return Collections.emptyList();
-		}
-		return filter(xtendClass.getMembers(), XtendFunction.class);
+		return concat(transform(xtendFile.getXtendTypes(), new Function<XtendTypeDeclaration, Iterable<XtendFunction>>(){
+			public java.lang.Iterable<XtendFunction> apply(XtendTypeDeclaration input) {
+				if (input instanceof XtendClass) {
+					XtendClass xtendClass = (XtendClass) input;
+					return filter(xtendClass.getMembers(), XtendFunction.class);
+				}
+				return Collections.emptyList();
+			}
+		}));
 	}
 
 	protected boolean isOverwriteIndicator(JvmOperation jvmOperation) {

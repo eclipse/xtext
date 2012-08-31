@@ -122,15 +122,15 @@ public class OrganizeImports {
 		int offset = 0;
 		if (packDecl.size() >= 1)
 			offset = packDecl.get(0).getOffset() + packDecl.get(0).getLength();
-		if (xtendFile.getXtendClasses() == null)
+		if (xtendFile.getXtendTypes() == null)
 			return null;
-		if (xtendFile.getXtendClasses().isEmpty()) {
+		if (xtendFile.getXtendTypes().isEmpty()) {
 			ICompositeNode node = NodeModelUtils.getNode(xtendFile);
 			if (node == null)
 				throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
 			return new TextRegion(offset, node.getTotalEndOffset() - offset);
 		}
-		ICompositeNode node = NodeModelUtils.getNode(xtendFile.getXtendClasses().get(0));
+		ICompositeNode node = NodeModelUtils.getNode(xtendFile.getXtendTypes().get(0));
 		if (node == null)
 			throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
 		int length = node.getTotalOffset() - offset;

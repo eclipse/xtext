@@ -43,7 +43,7 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall)contextObject;
 			XtendClass xtendClazz = EcoreUtil2.getContainerOfType(featureCall, XtendClass.class);
 			if(xtendClazz != null){
-				String clazzName = xtendClazz.getSimpleName();
+				String clazzName = xtendClazz.getName();
 				EList<XExpression> explicitArguments = featureCall.getExplicitArguments();
 				String firstPartOfMessage = "The method ";
 				if(explicitArguments.size() == 0 || featureCall instanceof XAssignment)

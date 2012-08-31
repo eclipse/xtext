@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.lib.Property;
@@ -126,7 +127,7 @@ public class CompilerTestHelper {
 			final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
-			JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
+			JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
 			CharSequence javaCode = generator.generateType(inferredType);
 			return javaCode.toString();
 		} catch (Exception e) {

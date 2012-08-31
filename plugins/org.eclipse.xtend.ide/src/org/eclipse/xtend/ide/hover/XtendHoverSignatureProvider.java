@@ -43,7 +43,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	protected ITypeProvider typeProvider;
 
 	protected String _signature(XtendClass clazz, boolean typeAtEnd) {
-		return clazz.getSimpleName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
+		return clazz.getName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
 	}
 
 	protected String _signature(XtendFunction function, boolean typeAtEnd) {

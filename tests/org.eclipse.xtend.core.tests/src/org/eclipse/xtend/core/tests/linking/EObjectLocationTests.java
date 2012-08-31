@@ -46,10 +46,10 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 		XtextResource resource = (XtextResource) file.eResource();
 		EObject fooDeclaration = eObjectAtOffsetHelper.resolveElementAt(resource, model.indexOf("Foo"));
 		assertTrue(fooDeclaration instanceof XtendClass);
-		assertEquals(file.getXtendClasses().get(0), fooDeclaration);
+		assertEquals(file.getXtendTypes().get(0), fooDeclaration);
 		EObject fooReference = eObjectAtOffsetHelper.resolveElementAt(resource, model.lastIndexOf("Foo"));
 		assertTrue(fooReference instanceof JvmGenericType);
-		assertEquals(file.getXtendClasses().get(0), associations.getPrimarySourceElement(fooReference));
+		assertEquals(file.getXtendTypes().get(0), associations.getPrimarySourceElement(fooReference));
 		EObject hashCodeReference = eObjectAtOffsetHelper.resolveElementAt(resource, model.indexOf("hashCode"));
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}
@@ -60,7 +60,7 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 		XtextResource resource = (XtextResource) file.eResource();
 		EObject fooReference = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.lastIndexOf("Foo"));
 		assertTrue(fooReference instanceof JvmGenericType);
-		assertEquals(file.getXtendClasses().get(0), associations.getPrimarySourceElement(fooReference));
+		assertEquals(file.getXtendTypes().get(0), associations.getPrimarySourceElement(fooReference));
 		EObject hashCodeReference = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("hashCode"));
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}

@@ -260,7 +260,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 	}
 	
 	protected XtendClass clazz(String string) throws Exception {
-		return file(string).getXtendClasses().get(0);
+		return (XtendClass) file(string).getXtendTypes().get(0);
 	}
 
 	protected XtendFile file(String string) throws Exception {
