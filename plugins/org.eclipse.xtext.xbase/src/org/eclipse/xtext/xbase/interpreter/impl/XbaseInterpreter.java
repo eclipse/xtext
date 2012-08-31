@@ -740,6 +740,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (Modifier.isStatic(method.getModifiers()) && receiver!=null) {
 				throw new IllegalArgumentException("A static method can't be invoked on a receiver.");
 			}
+			// get the actual overriden method.
+			if (receiver != null)
+				method = receiver.getClass().getMethod(method.getName(), method.getParameterTypes());
 			Object result = method.invoke(receiver, argumentValues.toArray(new Object[argumentValues.size()]));
 			return result;
 		} catch (EvaluationException e) {
