@@ -598,6 +598,28 @@ public class XtendFormatterTest {
   }
   
   @Test
+  public void formatIf1MLVar() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("var x = if(true)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("var x = if(true)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\") else println(\"bar\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatIf1MLSemicolon1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true)");
