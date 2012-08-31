@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getXtendClasses <em>Xtend Classes</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getXtendTypes <em>Xtend Types</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -56,14 +56,14 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	protected EList<XtendImport> imports;
 
 	/**
-	 * The cached value of the '{@link #getXtendClasses() <em>Xtend Classes</em>}' containment reference list.
+	 * The cached value of the '{@link #getXtendTypes() <em>Xtend Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getXtendClasses()
+	 * @see #getXtendTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XtendClass> xtendClasses;
+	protected EList<XtendTypeDeclaration> xtendTypes;
 
 	/**
 	 * The default value of the '{@link #getPackage() <em>Package</em>}' attribute.
@@ -125,13 +125,13 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XtendClass> getXtendClasses()
+	public EList<XtendTypeDeclaration> getXtendTypes()
 	{
-		if (xtendClasses == null)
+		if (xtendTypes == null)
 		{
-			xtendClasses = new EObjectContainmentEList<XtendClass>(XtendClass.class, this, XtendPackage.XTEND_FILE__XTEND_CLASSES);
+			xtendTypes = new EObjectContainmentEList<XtendTypeDeclaration>(XtendTypeDeclaration.class, this, XtendPackage.XTEND_FILE__XTEND_TYPES);
 		}
-		return xtendClasses;
+		return xtendTypes;
 	}
 
 	/**
@@ -169,8 +169,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case XtendPackage.XTEND_FILE__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-			case XtendPackage.XTEND_FILE__XTEND_CLASSES:
-				return ((InternalEList<?>)getXtendClasses()).basicRemove(otherEnd, msgs);
+			case XtendPackage.XTEND_FILE__XTEND_TYPES:
+				return ((InternalEList<?>)getXtendTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -187,8 +187,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case XtendPackage.XTEND_FILE__IMPORTS:
 				return getImports();
-			case XtendPackage.XTEND_FILE__XTEND_CLASSES:
-				return getXtendClasses();
+			case XtendPackage.XTEND_FILE__XTEND_TYPES:
+				return getXtendTypes();
 			case XtendPackage.XTEND_FILE__PACKAGE:
 				return getPackage();
 		}
@@ -210,9 +210,9 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 				getImports().clear();
 				getImports().addAll((Collection<? extends XtendImport>)newValue);
 				return;
-			case XtendPackage.XTEND_FILE__XTEND_CLASSES:
-				getXtendClasses().clear();
-				getXtendClasses().addAll((Collection<? extends XtendClass>)newValue);
+			case XtendPackage.XTEND_FILE__XTEND_TYPES:
+				getXtendTypes().clear();
+				getXtendTypes().addAll((Collection<? extends XtendTypeDeclaration>)newValue);
 				return;
 			case XtendPackage.XTEND_FILE__PACKAGE:
 				setPackage((String)newValue);
@@ -234,8 +234,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 			case XtendPackage.XTEND_FILE__IMPORTS:
 				getImports().clear();
 				return;
-			case XtendPackage.XTEND_FILE__XTEND_CLASSES:
-				getXtendClasses().clear();
+			case XtendPackage.XTEND_FILE__XTEND_TYPES:
+				getXtendTypes().clear();
 				return;
 			case XtendPackage.XTEND_FILE__PACKAGE:
 				setPackage(PACKAGE_EDEFAULT);
@@ -256,8 +256,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			case XtendPackage.XTEND_FILE__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case XtendPackage.XTEND_FILE__XTEND_CLASSES:
-				return xtendClasses != null && !xtendClasses.isEmpty();
+			case XtendPackage.XTEND_FILE__XTEND_TYPES:
+				return xtendTypes != null && !xtendTypes.isEmpty();
 			case XtendPackage.XTEND_FILE__PACKAGE:
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 		}

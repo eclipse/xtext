@@ -160,6 +160,16 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 				return createXtendConstructorAdapter();
 			}
 			@Override
+			public Adapter caseXtendTypeDeclaration(XtendTypeDeclaration object)
+			{
+				return createXtendTypeDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseXtendAnnotationType(XtendAnnotationType object)
+			{
+				return createXtendAnnotationTypeAdapter();
+			}
+			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -422,6 +432,36 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendConstructorAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration <em>Type Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+	 * @generated
+	 */
+	public Adapter createXtendTypeDeclarationAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendAnnotationType <em>Annotation Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendAnnotationType
+	 * @generated
+	 */
+	public Adapter createXtendAnnotationTypeAdapter()
 	{
 		return null;
 	}

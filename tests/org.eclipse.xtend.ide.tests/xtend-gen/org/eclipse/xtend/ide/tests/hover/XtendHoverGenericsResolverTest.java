@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.hover;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.eclipse.core.resources.IProject;
@@ -10,6 +11,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -71,7 +73,8 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final EList<XtendClass> clazz = xtendFile.getXtendClasses();
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(clazz);
       EList<XtendMember> _members = _head.getMembers();
       XtendMember _get = _members.get(0);
@@ -116,7 +119,8 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final EList<XtendClass> clazz = xtendFile.getXtendClasses();
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(clazz);
       EList<XtendMember> _members = _head.getMembers();
       XtendMember _get = _members.get(0);
@@ -156,7 +160,8 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final EList<XtendClass> clazz = xtendFile.getXtendClasses();
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(clazz);
       EList<XtendMember> _members = _head.getMembers();
       XtendMember _get = _members.get(0);

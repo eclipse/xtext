@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
@@ -272,20 +273,24 @@ public class XtendBatchCompiler {
 		JavaIoFileSystemAccess fileSystemAccess = javaIoFileSystemAccessProvider.get();
 		fileSystemAccess.setOutputPath(outputDirectory.toString());
 		for (Resource resource : resourceSet.getResources()) {
-			for (XtendClass xtendClass : getXtendClasses(resource)) {
-				if (xtendClass == null) {
+			XtendFile xtendFile = getXtendFile(resource);
+			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
+				if (xtendType == null) {
 					continue;
 				}
-				StringBuilder classSignatureBuilder = new StringBuilder();
-				if (!Strings.isEmpty(xtendClass.getPackageName())) {
-					classSignatureBuilder.append("package " + xtendClass.getPackageName() + ";");
-					classSignatureBuilder.append("\n");
+				if (xtendType instanceof XtendClass) {
+					XtendClass xtendClass = (XtendClass) xtendType;
+					StringBuilder classSignatureBuilder = new StringBuilder();
+					if (!Strings.isEmpty(xtendFile.getPackage())) {
+						classSignatureBuilder.append("package " + xtendFile.getPackage() + ";");
+						classSignatureBuilder.append("\n");
+					}
+					classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
+					if (log.isDebugEnabled()) {
+						log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
+					}
+					fileSystemAccess.generateFile(getJavaFileName(xtendClass), classSignatureBuilder.toString());
 				}
-				classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
-				if (log.isDebugEnabled()) {
-					log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
-				}
-				fileSystemAccess.generateFile(getJavaFileName(xtendClass), classSignatureBuilder.toString());
 			}
 		}
 		return outputDirectory;
@@ -426,17 +431,17 @@ public class XtendBatchCompiler {
 		return qualifiedNameProvider.getFullyQualifiedName(xtendClass);
 	}
 
-	private List<XtendClass> getXtendClasses(Resource resource) {
+	protected XtendFile getXtendFile(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult != null) {
 			EObject model = parseResult.getRootASTElement();
 			if (model instanceof XtendFile) {
 				XtendFile xtendFile = (XtendFile) model;
-				return xtendFile.getXtendClasses();
+				return xtendFile;
 			}
 		}
-		return emptyList();
+		return null;
 	}
 
 	protected List<String> getClassPathEntries() {

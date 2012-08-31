@@ -60,18 +60,18 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testFindReferencesToClass() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClasses().get(0);
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar extends Foo {}").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}").getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar extends Foo {}").getXtendTypes().get(0);
 		waitForAutoBuild();
 		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(classBar.getSuperTypes().get(0), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		mockAcceptor.expect(classBar.getExtends(), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesThis() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} }").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { def foo() {this} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		JvmGenericType inferredType = associations.getInferredType(classFoo);
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
@@ -83,8 +83,8 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testFindReferencesToConstructor() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClasses().get(0);
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def bar() {new Foo()} }").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}").getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def bar() {new Foo()} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		JvmConstructor inferredConstructor = associations.getInferredConstructor(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
@@ -96,8 +96,8 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testFindReferencesFromReturnType() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClasses().get(0);
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def Foo bar() {null} }").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}").getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def Foo bar() {null} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
@@ -108,8 +108,8 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testFindReferencesFromParameter() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClasses().get(0);
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def bar(Foo x) {null} }").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}").getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def bar(Foo x) {null} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
@@ -121,9 +121,9 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testFindReferencesToFunction() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }")
-				.getXtendClasses().get(0);
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def baz(Foo this) {foo()} }").getXtendClasses().get(0);
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }")
+				.getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def baz(Foo this) {foo()} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 		XtendFunction functionBar = (XtendFunction) classFoo.getMembers().get(1);

@@ -154,6 +154,24 @@ public interface XtendFactory extends EFactory
 	XtendConstructor createXtendConstructor();
 
 	/**
+	 * Returns a new object of class '<em>Type Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Declaration</em>'.
+	 * @generated
+	 */
+	XtendTypeDeclaration createXtendTypeDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Annotation Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotation Type</em>'.
+	 * @generated
+	 */
+	XtendAnnotationType createXtendAnnotationType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -120,6 +120,8 @@ public class XtendSwitch<T>
 			{
 				XtendClass xtendClass = (XtendClass)theEObject;
 				T result = caseXtendClass(xtendClass);
+				if (result == null) result = caseXtendTypeDeclaration(xtendClass);
+				if (result == null) result = caseXtendMember(xtendClass);
 				if (result == null) result = caseXtendAnnotationTarget(xtendClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -220,6 +222,25 @@ public class XtendSwitch<T>
 				T result = caseXtendConstructor(xtendConstructor);
 				if (result == null) result = caseXtendMember(xtendConstructor);
 				if (result == null) result = caseXtendAnnotationTarget(xtendConstructor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_TYPE_DECLARATION:
+			{
+				XtendTypeDeclaration xtendTypeDeclaration = (XtendTypeDeclaration)theEObject;
+				T result = caseXtendTypeDeclaration(xtendTypeDeclaration);
+				if (result == null) result = caseXtendMember(xtendTypeDeclaration);
+				if (result == null) result = caseXtendAnnotationTarget(xtendTypeDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_ANNOTATION_TYPE:
+			{
+				XtendAnnotationType xtendAnnotationType = (XtendAnnotationType)theEObject;
+				T result = caseXtendAnnotationType(xtendAnnotationType);
+				if (result == null) result = caseXtendTypeDeclaration(xtendAnnotationType);
+				if (result == null) result = caseXtendMember(xtendAnnotationType);
+				if (result == null) result = caseXtendAnnotationTarget(xtendAnnotationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -463,6 +484,38 @@ public class XtendSwitch<T>
 	 * @generated
 	 */
 	public T caseXtendConstructor(XtendConstructor object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendTypeDeclaration(XtendTypeDeclaration object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendAnnotationType(XtendAnnotationType object)
 	{
 		return null;
 	}

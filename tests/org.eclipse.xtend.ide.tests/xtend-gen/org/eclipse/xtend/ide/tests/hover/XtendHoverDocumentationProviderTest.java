@@ -1,14 +1,20 @@
 package org.eclipse.xtend.ide.tests.hover;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import java.util.Iterator;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -21,6 +27,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -69,15 +76,19 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       Assert.assertEquals("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b>  something</dd><dd><b>b</b> </dd></dl>", docu);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public XtendFunction getFirstMethod(final XtendFile file) {
+    TreeIterator<EObject> _eAllContents = file.eAllContents();
+    Iterator<XtendFunction> _filter = Iterators.<XtendFunction>filter(_eAllContents, XtendFunction.class);
+    XtendFunction _head = IteratorExtensions.<XtendFunction>head(_filter);
+    return _head;
   }
   
   @Test
@@ -126,10 +137,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.List%23java.util.List\">java.util.List</a></dd></dl>");
@@ -173,10 +181,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException\">NullPointerException</a> -  not so good</dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException\">RuntimeException</a></dd></dl>");
@@ -220,10 +225,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -269,10 +271,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -318,10 +317,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -367,10 +363,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -416,10 +409,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -473,10 +463,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember member = _members.get(0);
+      final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
@@ -533,8 +520,9 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       XtendMember _get = _members.get(1);
       final XtendFunction function = ((XtendFunction) _get);

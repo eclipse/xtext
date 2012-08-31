@@ -35,16 +35,16 @@ public class NamingTest extends AbstractXtendTestCase {
 
 	@Test public void testQualifiedNameProvider_0() throws Exception {
 		XtendFile file = file("package foo class Bar {}");
-		assertEquals(QualifiedName.create("foo", "Bar"), nameProvider.getFullyQualifiedName(file.getXtendClasses().get(0)));
+		assertEquals(QualifiedName.create("foo", "Bar"), nameProvider.getFullyQualifiedName(file.getXtendTypes().get(0)));
 		assertEquals(QualifiedName.create("foo", "Bar"),
-				nameProvider.getFullyQualifiedName(associations.getInferredType(file.getXtendClasses().get(0))));
+				nameProvider.getFullyQualifiedName(associations.getInferredType((XtendClass) file.getXtendTypes().get(0))));
 		assertEquals(QualifiedName.create("foo", "Bar"),
-				nameProvider.getFullyQualifiedName(associations.getInferredConstructor(file.getXtendClasses().get(0))));
+				nameProvider.getFullyQualifiedName(associations.getInferredConstructor((XtendClass) file.getXtendTypes().get(0))));
 	}
 
 	@Test public void testQualifiedNameProvider_1() throws Exception {
 		XtendFile file = file("package foo class Bar { def baz() {this} }");
-		XtendFunction function = (XtendFunction) file.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"), nameProvider.getFullyQualifiedName(function));
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"),
 				nameProvider.getFullyQualifiedName(associations.getDirectlyInferredOperation(function)));
@@ -53,7 +53,7 @@ public class NamingTest extends AbstractXtendTestCase {
 	@Test public void testBug364508_toValue() throws Exception {
 		String model = "package foo.create import foo.baz.create class Bar {}";
 		XtendFile file = file(model);
-		XtendClass xtendClass = file.getXtendClasses().get(0);
+		XtendClass xtendClass = (XtendClass) file.getXtendTypes().get(0);
 		assertEquals(QualifiedName.create("foo", "create", "Bar"), nameProvider.getFullyQualifiedName(xtendClass));
 		assertEquals(QualifiedName.create("foo", "create", "Bar"),
 				nameProvider.getFullyQualifiedName(associations.getInferredConstructor(xtendClass)));

@@ -13,6 +13,7 @@ import org.junit.Test
 import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
@@ -80,7 +81,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(it, 42)",serializer.computeUnsugaredExpression(call))
@@ -100,7 +101,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(it, 42)",serializer.computeUnsugaredExpression(call))
@@ -121,7 +122,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(1)
 		assertEquals("this._extension.bar(it, 42 + a)", serializer.computeUnsugaredExpression(call))
@@ -141,7 +142,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(it, 40 + 2)", serializer.computeUnsugaredExpression(call))
@@ -163,7 +164,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(new ArrayList<String>(), 42)",  serializer.computeUnsugaredExpression(call))
@@ -184,7 +185,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(new ArrayList<String>(), 42)", serializer.computeUnsugaredExpression(call))
@@ -206,7 +207,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals('''this._extension.barCharSequence(42, «"'''"»   Test   Test
@@ -228,7 +229,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extension.bar(it, 42)", serializer.computeUnsugaredExpression(call))
@@ -249,7 +250,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("it.substring(0)", serializer.computeUnsugaredExpression(call))
@@ -271,7 +272,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(1)
 		assertEquals("it.substring(0)",  serializer.computeUnsugaredExpression(call))
@@ -292,7 +293,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("IterableExtensions::head(new ArrayList<String>())", serializer.computeUnsugaredExpression(call))
@@ -312,7 +313,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this.fooBarBaz(it)", serializer.computeUnsugaredExpression(call))
@@ -332,7 +333,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this._extensionJava.bar(it, 40 + 2)", serializer.computeUnsugaredExpression(call))
@@ -352,7 +353,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("Extension::setZonk(it, s + s + s)", serializer.computeUnsugaredExpression(call))
@@ -371,7 +372,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(1) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(1) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		assertEquals("this.foo()", serializer.computeUnsugaredExpression(call))
@@ -390,7 +391,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(0) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(0) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		val call2 = block.expressions.get(1)
@@ -424,7 +425,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		}
 		'''.toString)
 		waitForAutoBuild
-		val function = xtendFile.getXtendClasses.head.members.get(2) as XtendFunction
+		val function = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head.members.get(2) as XtendFunction
 		val block = function.expression as XBlockExpression
 		val call = block.expressions.get(0)
 		val call2 = block.expressions.get(1)

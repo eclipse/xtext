@@ -16,7 +16,7 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 File returns XtendFile : 
     ('package' package=QualifiedName ';'?)?
 	(imports+=Import)*
-	(xtendClasses+=Class)*
+	(xtendTypes+=Type)*
 ;
 
 Import returns XtendImport : 
@@ -29,14 +29,31 @@ Import returns XtendImport :
 QualifiedNameWithWildCard :
 	QualifiedName  '.' '*';
 	
-Class returns XtendClass :
-   annotations+=XAnnotation* 
-   'public'? abstract?='abstract'? 'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-   ("extends" extends=JvmParameterizedTypeReference)? 
-   ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
-	   (members+=Member)*
-   '}';
+Type returns XtendTypeDeclaration :
+	{XtendTypeDeclaration} annotations+=XAnnotation* 
+	({XtendClass.annotationInfo = current}
+	   'public'? abstract?='abstract'? 'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+	   ("extends" extends=JvmParameterizedTypeReference)? 
+	   ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+		   (members+=Member)*
+	   '}'
+	 |{XtendAnnotationType.annotationInfo = current}
+		'@' 'interface' name=ValidID '{'
+		   (members+=AnnotationMember)*
+	   	'}'
+	)
+;
 
+AnnotationMember returns XtendMember :
+	{XtendMember} annotations+=XAnnotation* 
+	({XtendField.annotationInfo = current}	
+		 	('val' | type=JvmTypeReference) name=ValidID ('=' initialValue=XAnnotationElementValue)? ';'?
+	|{XtendFunction.annotationInfo = current}
+			name='do' ('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')?
+				expression=XBlockExpression
+	)
+;
+	
 Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation* 
 	(

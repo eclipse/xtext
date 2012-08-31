@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -51,7 +52,7 @@ public class TestCaseCompiler {
 		IXtendJvmAssociations associations = injector.getInstance(IXtendJvmAssociations.class);
 		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
 		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
-		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClasses().get(0));
+		JvmGenericType inferredType = associations.getInferredType((XtendClass) xtendFile.getXtendTypes().get(0));
 		CharSequence javaCode = generator.generateType(inferredType);
 		writer.append(javaCode);
 		writer.close();

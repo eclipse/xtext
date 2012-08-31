@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -158,8 +159,8 @@ public class XtendFormatter {
         format.operator_add(_append_4);
       }
     }
-    EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
-    for (final XtendClass clazz : _xtendClasses) {
+    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+    for (final XtendTypeDeclaration clazz : _xtendTypes) {
       this.format(clazz, format);
     }
     INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(xtendFile);
@@ -1579,58 +1580,58 @@ public class XtendFormatter {
     }
   }
   
-  protected void format(final EObject func, final FormattableDocument format) {
-    if (func instanceof XtendFunction) {
-      _format((XtendFunction)func, format);
+  protected void format(final EObject clazz, final FormattableDocument format) {
+    if (clazz instanceof XtendClass) {
+      _format((XtendClass)clazz, format);
       return;
-    } else if (func instanceof XBinaryOperation) {
-      _format((XBinaryOperation)func, format);
+    } else if (clazz instanceof XtendFunction) {
+      _format((XtendFunction)clazz, format);
       return;
-    } else if (func instanceof XFeatureCall) {
-      _format((XFeatureCall)func, format);
+    } else if (clazz instanceof XBinaryOperation) {
+      _format((XBinaryOperation)clazz, format);
       return;
-    } else if (func instanceof XMemberFeatureCall) {
-      _format((XMemberFeatureCall)func, format);
+    } else if (clazz instanceof XFeatureCall) {
+      _format((XFeatureCall)clazz, format);
       return;
-    } else if (func instanceof XtendClass) {
-      _format((XtendClass)func, format);
+    } else if (clazz instanceof XMemberFeatureCall) {
+      _format((XMemberFeatureCall)clazz, format);
       return;
-    } else if (func instanceof XtendParameter) {
-      _format((XtendParameter)func, format);
+    } else if (clazz instanceof XtendParameter) {
+      _format((XtendParameter)clazz, format);
       return;
-    } else if (func instanceof XBlockExpression) {
-      _format((XBlockExpression)func, format);
+    } else if (clazz instanceof XBlockExpression) {
+      _format((XBlockExpression)clazz, format);
       return;
-    } else if (func instanceof XClosure) {
-      _format((XClosure)func, format);
+    } else if (clazz instanceof XClosure) {
+      _format((XClosure)clazz, format);
       return;
-    } else if (func instanceof XForLoopExpression) {
-      _format((XForLoopExpression)func, format);
+    } else if (clazz instanceof XForLoopExpression) {
+      _format((XForLoopExpression)clazz, format);
       return;
-    } else if (func instanceof XIfExpression) {
-      _format((XIfExpression)func, format);
+    } else if (clazz instanceof XIfExpression) {
+      _format((XIfExpression)clazz, format);
       return;
-    } else if (func instanceof XSwitchExpression) {
-      _format((XSwitchExpression)func, format);
+    } else if (clazz instanceof XSwitchExpression) {
+      _format((XSwitchExpression)clazz, format);
       return;
-    } else if (func instanceof XVariableDeclaration) {
-      _format((XVariableDeclaration)func, format);
+    } else if (clazz instanceof XVariableDeclaration) {
+      _format((XVariableDeclaration)clazz, format);
       return;
-    } else if (func instanceof XtendFile) {
-      _format((XtendFile)func, format);
+    } else if (clazz instanceof XtendFile) {
+      _format((XtendFile)clazz, format);
       return;
-    } else if (func instanceof XExpression) {
-      _format((XExpression)func, format);
+    } else if (clazz instanceof XExpression) {
+      _format((XExpression)clazz, format);
       return;
-    } else if (func != null) {
-      _format(func, format);
+    } else if (clazz != null) {
+      _format(clazz, format);
       return;
-    } else if (func == null) {
+    } else if (clazz == null) {
       _format((Void)null, format);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(func, format).toString());
+        Arrays.<Object>asList(clazz, format).toString());
     }
   }
 }

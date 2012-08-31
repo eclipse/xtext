@@ -52,6 +52,7 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -124,7 +125,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  * @author Holger Schill
  */
-@ComposedChecks(validators = { ClasspathBasedChecks.class })
+@ComposedChecks(validators = { ClasspathBasedChecks.class, AnnotationValidation.class })
 public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
@@ -230,8 +231,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	protected EObject getContainingAnnotationTarget(XAnnotation annotation) {
 		final EObject eContainer = annotation.eContainer();
-		// in fields and functions annotations are contained in a synthetic container
-		if (eContainer.eClass() == XtendPackage.Literals.XTEND_MEMBER) {
+		// skip synthetic container
+		if (eContainer.eClass() == XtendPackage.Literals.XTEND_MEMBER || eContainer.eClass() == XtendPackage.Literals.XTEND_TYPE_DECLARATION) {
 			return eContainer.eContainer();
 		}
 		return eContainer;
@@ -337,12 +338,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkClassPath(XtendClass clazz) {
 		final JvmGenericType listType = (JvmGenericType) getTypeRefs().findDeclaredType(List.class.getName(), clazz);
 		if (listType == null || listType.getTypeParameters().isEmpty()) {
-			error("Xtend requires Java source level 1.5.", clazz, XTEND_CLASS__NAME,
+			error("Xtend requires Java source level 1.5.", clazz, XTEND_TYPE_DECLARATION__NAME,
 					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 		if (getTypeRefs().findDeclaredType(StringConcatenation.class, clazz) == null || getTypeRefs().findDeclaredType(Exceptions.class, clazz) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.", clazz,
-					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+					XTEND_TYPE_DECLARATION__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
 
@@ -387,7 +388,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				JvmGenericType inferredType = associations.getInferredType(xtendClass);
 				if (inferredType != null && hasCycleInHierarchy(inferredType, Lists.<JvmGenericType> newArrayList())) {
 					error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
-							XTEND_CLASS__NAME, CYCLIC_INHERITANCE);
+							XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 				}
 			}
 		}
@@ -610,7 +611,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return EcoreUtil.getURI(from).toString();
 			}
 		});
-		error(errorMsg.toString(), xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT, 
+		error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, CLASS_MUST_BE_ABSTRACT, 
 						toArray(uris, String.class));
 	}
 	
@@ -710,11 +711,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					List<String> issueData = newArrayList();
 					for(JvmConstructor superConstructor:superConstructors) {
 						issueData.add(EcoreUtil.getURI(superConstructor).toString());
-						issueData.add(doGetReadableSignature(xtendClass.getSimpleName(), superConstructor.getParameters()));
+						issueData.add(doGetReadableSignature(xtendClass.getName(), superConstructor.getParameters()));
 					}
 					error("No default constructor in super type " + superType.getSimpleName() + "." +
 							xtendClass.getName() + " must define an explicit constructor.",
-							xtendClass, XTEND_CLASS__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
+							xtendClass, XTEND_TYPE_DECLARATION__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
 				} else {
 					for(JvmConstructor constructor: constructors) {
 						XExpression expression = containerProvider.getAssociatedExpression(constructor);
@@ -1084,9 +1085,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		//TODO this check should not be file local, but instead check for any other sources which might declare a
 		// java type with the same name. Also this then belongs to Xbase and should be defined on JvmGenericTypes.
 		Set<String> names = newLinkedHashSet();
-		for (XtendClass clazz : file.getXtendClasses()) {	
+		for (XtendTypeDeclaration clazz : file.getXtendTypes()) {	
 			if (!names.add(clazz.getName()))
-				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_CLASS__NAME, -1, IssueCodes.DUPLICATE_CLASS);
+				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_CLASS);
 		}
 	}
 	
@@ -1129,8 +1130,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		}
 
-		for (final XtendClass xtendClass : file.getXtendClasses()) {
-			String clazzName = xtendClass.getSimpleName();
+		for (final XtendTypeDeclaration xtendType : file.getXtendTypes()) {
+			String clazzName = xtendType.getName();
 			if(importedNames.containsKey(clazzName)){
 				JvmType importedType = importedNames.get(clazzName);
 				if(importedType != null){
@@ -1139,7 +1140,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						error("The import '" + importedType.getIdentifier() + "' conflicts with a type defined in the same file", xtendImport, null, IssueCodes.IMPORT_CONFLICT );
 				}
 			}
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendClass);
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendType);
 			if (node != null) {
 				for (INode n : node.getAsTreeIterable()) {
 					if (n.getGrammarElement() instanceof CrossReference) {
@@ -1296,7 +1297,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkJavaKeywordConflict(XtendClass member) {
-		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_CLASS__NAME);
+		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME);
 		for (JvmTypeParameter p : member.getTypeParameters()) {
 			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
 		}

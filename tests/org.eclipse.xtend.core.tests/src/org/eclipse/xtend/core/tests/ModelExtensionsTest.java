@@ -29,18 +29,16 @@ public class ModelExtensionsTest extends AbstractXtendTestCase {
 	
 	@Test public void testXtendClass() throws Exception {
 		XtendFile file = file("package foo class Bar extends Object implements java.io.Serializable {}");
-		XtendClass xtendClass = file.getXtendClasses().get(0);
-		assertEquals("foo", xtendClass.getPackageName());
+		XtendClass xtendClass = (XtendClass) file.getXtendTypes().get(0);
+		assertEquals("foo", file.getPackage());
 		assertEquals("Bar", xtendClass.getName());
-		List<JvmTypeReference> superTypes = xtendClass.getSuperTypes();
-		assertEquals(2, superTypes.size());
-		assertEquals("java.lang.Object", superTypes.get(0).getQualifiedName());
-		assertEquals("java.io.Serializable", superTypes.get(1).getQualifiedName());
+		assertEquals("java.lang.Object", xtendClass.getExtends().getQualifiedName());
+		assertEquals("java.io.Serializable", xtendClass.getImplements().get(0).getQualifiedName());
 	}
 	
 	@Test public void testXtendFunction() throws Exception {
 		XtendFile file = file("package foo class Bar { def int foo() {1}}");
-		XtendFunction xtendFunction = (XtendFunction) file.getXtendClasses().get(0).getMembers().get(0);
+		XtendFunction xtendFunction = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals("foo", xtendFunction.getName());
 	}
 	

@@ -13,6 +13,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.util.TextRegion
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtend.core.xtend.XtendClass
 
 /**
  * @author Sebastian Zarnekow
@@ -745,7 +746,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		
 		val actualXtendCode = xtendGroup1 + xtendGroup2 + xtendGroup3 
 		val file = file(actualXtendCode, true)
-		val inferredType = file.getXtendClasses.head.getInferredType
+		val inferredType = (file.getXtendTypes.head as XtendClass).getInferredType
 		val compiledCode = generator.generateType(inferredType);
 		
 		val javaMatcher = p.matcher(java.toString);

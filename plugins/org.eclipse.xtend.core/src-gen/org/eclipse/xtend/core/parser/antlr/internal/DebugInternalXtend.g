@@ -7,7 +7,7 @@ grammar DebugInternalXtend ;
 ruleFile :
 	(
 		'package' ruleQualifiedName ';'?
-	)? ruleImport* ruleClass*
+	)? ruleImport* ruleType*
 ;
 
 // Rule Import
@@ -24,19 +24,41 @@ ruleQualifiedNameWithWildCard :
 	ruleQualifiedName '.' '*'
 ;
 
-// Rule Class
-ruleClass :
-	ruleXAnnotation* 'public'? 'abstract'? 'class' ruleValidID (
-		'<' ruleJvmTypeParameter (
-			',' ruleJvmTypeParameter
-		)* '>'
-	)? (
-		'extends' ruleJvmParameterizedTypeReference
-	)? (
-		'implements' ruleJvmParameterizedTypeReference (
-			',' ruleJvmParameterizedTypeReference
-		)*
-	)? '{' ruleMember* '}'
+// Rule Type
+ruleType :
+	ruleXAnnotation* (
+		'public'? 'abstract'? 'class' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference
+		)? (
+			'implements' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		'@' 'interface' ruleValidID '{' ruleAnnotationMember* '}'
+	)
+;
+
+// Rule AnnotationMember
+ruleAnnotationMember :
+	ruleXAnnotation* (
+		(
+			'val' |
+			ruleJvmTypeReference
+		) ruleValidID (
+			'=' ruleXAnnotationElementValue
+		)? ';'? |
+		'do' (
+			'(' (
+				ruleParameter (
+					',' ruleParameter
+				)*
+			)? ')'
+		)? ruleXBlockExpression
+	)
 ;
 
 // Rule Member

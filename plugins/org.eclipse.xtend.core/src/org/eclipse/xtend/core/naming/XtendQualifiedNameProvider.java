@@ -8,10 +8,11 @@
 package org.eclipse.xtend.core.naming;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -33,10 +34,13 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 
 	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		if (obj instanceof XtendClass) {
-			XtendClass xtendClass = (XtendClass) obj;
-			final String qualifiedName = (xtendClass.getPackageName() != null ? xtendClass.getPackageName() + "." : "")
-					+ xtendClass.getName();
+		if (obj instanceof XtendTypeDeclaration) {
+			XtendTypeDeclaration typeDecl = (XtendTypeDeclaration) obj;
+			if (typeDecl.getName() == null)
+				return null;
+			XtendFile file = (XtendFile) typeDecl.eContainer();
+			final String qualifiedName = (file.getPackage() != null ? file.getPackage() + "." : "")
+					+ typeDecl.getName();
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
 		}
 		if(obj instanceof XtendConstructor) {

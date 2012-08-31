@@ -83,6 +83,8 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 			case XtendPackage.RICH_STRING_ELSE_IF: return createRichStringElseIf();
 			case XtendPackage.CREATE_EXTENSION_INFO: return createCreateExtensionInfo();
 			case XtendPackage.XTEND_CONSTRUCTOR: return createXtendConstructor();
+			case XtendPackage.XTEND_TYPE_DECLARATION: return createXtendTypeDeclaration();
+			case XtendPackage.XTEND_ANNOTATION_TYPE: return createXtendAnnotationType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -117,7 +119,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendClass createXtendClass()
 	{
-		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
+		XtendClassImpl xtendClass = new XtendClassImpl();
 		return xtendClass;
 	}
 
@@ -240,6 +242,28 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		XtendConstructorImpl xtendConstructor = new XtendConstructorImpl();
 		return xtendConstructor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendTypeDeclaration createXtendTypeDeclaration()
+	{
+		XtendTypeDeclarationImpl xtendTypeDeclaration = new XtendTypeDeclarationImpl();
+		return xtendTypeDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendAnnotationType createXtendAnnotationType()
+	{
+		XtendAnnotationTypeImpl xtendAnnotationType = new XtendAnnotationTypeImpl();
+		return xtendAnnotationType;
 	}
 
 	/**

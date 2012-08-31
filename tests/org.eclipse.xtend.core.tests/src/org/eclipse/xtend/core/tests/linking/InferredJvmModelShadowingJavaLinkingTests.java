@@ -45,13 +45,13 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtendTest
 	}
 	@Test public void testLinkJavaClass() throws Exception {
 		XtendClass bar = classFile("test/Bar", "package test class Bar extends Foo {}");
-		assertTrue(isJavaElement(bar.getSuperTypes().get(0).getType()));
+		assertTrue(isJavaElement(bar.getExtends().getType()));
 	}
 	
 	@Test public void testLinkInferredJvmClass() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo {}");
 		XtendClass bar = classFile("test/Bar", "package test class Bar extends Foo {}");
-		assertEquals(associations.getInferredType(foo), bar.getSuperTypes().get(0).getType());
+		assertEquals(associations.getInferredType(foo), bar.getExtends().getType());
 	}
 	
 	@Test public void testLinkJavaConstructor() throws Exception {
@@ -89,7 +89,7 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtendTest
 		resource.load(new StringInputStream(content), null);
 		EObject root = resource.getContents().get(0);
 		assertTrue(root instanceof XtendFile);
-		return ((XtendFile) root).getXtendClasses().get(0);
+		return (XtendClass) ((XtendFile) root).getXtendTypes().get(0);
 	}
 	
 	protected boolean isJavaElement(EObject element) {

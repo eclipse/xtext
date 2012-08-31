@@ -16,6 +16,7 @@ import org.junit.After
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 	@Inject
@@ -46,7 +47,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			def <T> T something(Iterable<T> iterable)
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass))
 		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
@@ -67,7 +68,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			def <T,Y> Y something(Iterable<T> iterable, Y type1, T type2)
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass))
 		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
@@ -87,7 +88,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass))
 		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall

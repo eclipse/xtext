@@ -17,9 +17,9 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITextViewerExtension;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -84,7 +84,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			}
 			// we could create an import statement if there is no conflict
 			XtendFile file = (XtendFile) context.getContents().get(0);
-			XtendClass clazz = file.getXtendClasses().isEmpty() ? null : file.getXtendClasses().get(0);
+			XtendTypeDeclaration clazz = (file.getXtendTypes().isEmpty() ? null : file.getXtendTypes().get(0));
 			
 			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(typeName);			
 			if (qualifiedName.getSegmentCount() == 1) {

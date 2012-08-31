@@ -1,13 +1,15 @@
 package org.eclipse.xtend.core.tests.compiler;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -3972,13 +3974,86 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       "class Foo { def test(){System::out.println(\'\'\'SomeString\'\'\')} }\n\t\t", _builder);
   }
   
+  @Test
+  public void testAnnotationType_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@interface MyAnnotation { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String x;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int y;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Class<?>[] value;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface MyAnnotation{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String x();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int y();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Class<? extends Object>[] value();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testAnnotationType_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@interface MyAnnotation { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String x = \'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int y = 42");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Class<?> value = typeof(String)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("boolean flag = true");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface MyAnnotation{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String x() default \"foo\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int y() default 42;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Class<? extends Object> value() default String.class;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean flag() default true;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
       final XtendFile file = this.file(_string, true);
-      EList<XtendClass> _xtendClasses = file.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
-      final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(_head);
+      Resource _eResource = file.eResource();
+      EList<EObject> _contents = _eResource.getContents();
+      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
+      final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
       final CharSequence javaCode = this.generator.generateType(inferredType);
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();

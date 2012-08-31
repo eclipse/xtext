@@ -21,6 +21,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -39,7 +40,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		class Foo {
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val signature = signatureProvider.getSignature(clazz)
 		assertEquals("Foo",signature)
 	}
@@ -53,7 +54,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def void bar(String a, int b) throws NullPointerException, RuntimeException {}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction1 = clazz.members.get(0)
 		val xtendFunction2 = clazz.members.get(1)
 		val signature1 = signatureProvider.getSignature(xtendFunction1)
@@ -70,7 +71,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def bar(String a) throws NullPointerException
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val xtendParameter = xtendFunction.parameters.get(0)
 		val signature = signatureProvider.getSignature(xtendParameter)
@@ -91,7 +92,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def bar(String a) throws NullPointerException
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
 		assertEquals("Collections collections",signature)
@@ -108,7 +109,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			val collections = <String>newArrayList
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
 		assertEquals("ArrayList<String> collections",signature)
@@ -125,7 +126,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			extension String
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
 		assertEquals("String",signature)
@@ -142,7 +143,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			val = ""
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
 		assertEquals("",signature)
@@ -156,7 +157,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			new(String a, int b){}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendConstructor = clazz.members.get(0)
 		val signature = signatureProvider.getSignature(xtendConstructor)
 		assertEquals("Foo(String a, int b)",signature)
@@ -172,7 +173,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
@@ -185,7 +186,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		package testPackage
 		class Foo<T,Y> {}
 		''',resourceSet)
-		val clazz = xtendFile.xtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val signature = signatureProvider.getSignature(clazz)
 		assertEquals("Foo<T, Y>",signature)
 	}
@@ -200,7 +201,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
@@ -220,7 +221,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val param = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XForLoopExpression).declaredParam
 		val signature = signatureProvider.getSignature(param)
@@ -240,7 +241,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 				}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val closure = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XFeatureCall).featureCallArguments.get(0) as XClosure
 		val param = closure.declaredFormalParameters.get(0)
@@ -258,7 +259,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val variable = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XVariableDeclaration
 		val signature = signatureProvider.getSignature(variable)
@@ -277,7 +278,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def dispatch void a(int i){}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val field = clazz.members.head
 		val function = clazz.members.get(1);
 		val fieldSignature = signatureProvider.getSignature(field)
@@ -298,7 +299,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
 		val function = clazz.members.head
 		val signature = signatureProvider.getSignature(function)
 		EcoreUtil::resolveAll(xtendFile)
@@ -323,8 +324,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		}
 		
 		''',resourceSet)
-		val clazz = xtendFile.getXtendClasses.head
-		val clazz2 = xtendFile.xtendClasses.get(1)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val clazz2 = xtendFile.getXtendTypes.filter(typeof(XtendClass)).drop(1).head
 		val function1 = clazz.members.get(1) as XtendFunction
 		val function2 = clazz2.members.get(1) as XtendFunction
 		val expression1 = function1.expression as XBlockExpression

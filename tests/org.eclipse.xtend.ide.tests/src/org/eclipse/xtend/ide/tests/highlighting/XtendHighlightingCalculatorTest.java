@@ -108,7 +108,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	protected XtendClass clazz(String string) throws Exception {
-		return file(string).getXtendClasses().get(0);
+		return (XtendClass) file(string).getXtendTypes().get(0);
 	}
 
 	

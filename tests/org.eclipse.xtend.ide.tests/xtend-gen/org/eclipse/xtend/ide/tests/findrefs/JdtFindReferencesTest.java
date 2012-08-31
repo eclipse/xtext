@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.findrefs;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IProject;
@@ -26,6 +27,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -780,8 +782,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
-      EList<XtendClass> _xtendClasses = _xtendFile.getXtendClasses();
-      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      final XtendTypeDeclaration clazz = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       IResourcesSetupUtil.waitForAutoBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(clazz);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
@@ -827,8 +829,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
-      EList<XtendClass> _xtendClasses = _xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForAutoBuild();
@@ -873,8 +876,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
-      EList<XtendClass> _xtendClasses = _xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForAutoBuild();
@@ -919,8 +923,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
-      EList<XtendClass> _xtendClasses = _xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForAutoBuild();
@@ -1005,8 +1010,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
-      EList<XtendClass> _xtendClasses = _xtendFile.getXtendClasses();
-      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForAutoBuild();

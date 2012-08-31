@@ -83,13 +83,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_FILE__IMPORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Xtend Classes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Xtend Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FILE__XTEND_CLASSES = 1;
+	int XTEND_FILE__XTEND_TYPES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' attribute.
@@ -193,97 +193,6 @@ public interface XtendPackage extends EPackage
 	int XTEND_ANNOTATION_TARGET_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl <em>Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtend.core.xtend.impl.XtendClassImpl
-	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendClass()
-	 * @generated
-	 */
-	int XTEND_CLASS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ANNOTATIONS = XTEND_ANNOTATION_TARGET__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__NAME = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ABSTRACT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__EXTENDS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__IMPLEMENTS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__SUPER_TYPES = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__MEMBERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of structural features of the '<em>Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 7;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl <em>Member</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -319,6 +228,143 @@ public interface XtendPackage extends EPackage
 	 * @ordered
 	 */
 	int XTEND_MEMBER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl <em>Type Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendTypeDeclaration()
+	 * @generated
+	 */
+	int XTEND_TYPE_DECLARATION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_TYPE_DECLARATION__ANNOTATIONS = XTEND_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_TYPE_DECLARATION__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_TYPE_DECLARATION__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_TYPE_DECLARATION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl <em>Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendClassImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendClass()
+	 * @generated
+	 */
+	int XTEND_CLASS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__ANNOTATIONS = XTEND_TYPE_DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__ANNOTATION_INFO = XTEND_TYPE_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__NAME = XTEND_TYPE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__ABSTRACT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__EXTENDS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__IMPLEMENTS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__MEMBERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS_FEATURE_COUNT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl <em>Function</em>}' class.
@@ -960,6 +1006,61 @@ public interface XtendPackage extends EPackage
 	 */
 	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 6;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl <em>Annotation Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendAnnotationType()
+	 * @generated
+	 */
+	int XTEND_ANNOTATION_TYPE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE__ANNOTATIONS = XTEND_TYPE_DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE__ANNOTATION_INFO = XTEND_TYPE_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE__NAME = XTEND_TYPE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE__MEMBERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Annotation Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE_FEATURE_COUNT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendFile <em>File</em>}'.
@@ -983,15 +1084,15 @@ public interface XtendPackage extends EPackage
 	EReference getXtendFile_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses <em>Xtend Classes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendTypes <em>Xtend Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Xtend Classes</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses()
+	 * @return the meta object for the containment reference list '<em>Xtend Types</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendFile#getXtendTypes()
 	 * @see #getXtendFile()
 	 * @generated
 	 */
-	EReference getXtendFile_XtendClasses();
+	EReference getXtendFile_XtendTypes();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFile#getPackage <em>Package</em>}'.
@@ -1069,17 +1170,6 @@ public interface XtendPackage extends EPackage
 	EClass getXtendClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendClass#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendClass#getName()
-	 * @see #getXtendClass()
-	 * @generated
-	 */
-	EAttribute getXtendClass_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendClass#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1111,17 +1201,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EReference getXtendClass_Implements();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtend.core.xtend.XtendClass#getSuperTypes <em>Super Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Types</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendClass#getSuperTypes()
-	 * @see #getXtendClass()
-	 * @generated
-	 */
-	EReference getXtendClass_SuperTypes();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendClass#getMembers <em>Members</em>}'.
@@ -1706,6 +1785,48 @@ public interface XtendPackage extends EPackage
 	EReference getXtendConstructor_Exceptions();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration <em>Type Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Declaration</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+	 * @generated
+	 */
+	EClass getXtendTypeDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getName()
+	 * @see #getXtendTypeDeclaration()
+	 * @generated
+	 */
+	EAttribute getXtendTypeDeclaration_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendAnnotationType <em>Annotation Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotation Type</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendAnnotationType
+	 * @generated
+	 */
+	EClass getXtendAnnotationType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendAnnotationType#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendAnnotationType#getMembers()
+	 * @see #getXtendAnnotationType()
+	 * @generated
+	 */
+	EReference getXtendAnnotationType_Members();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1747,12 +1868,12 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_FILE__IMPORTS = eINSTANCE.getXtendFile_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Xtend Classes</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Xtend Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XTEND_FILE__XTEND_CLASSES = eINSTANCE.getXtendFile_XtendClasses();
+		EReference XTEND_FILE__XTEND_TYPES = eINSTANCE.getXtendFile_XtendTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
@@ -1815,14 +1936,6 @@ public interface XtendPackage extends EPackage
 		EClass XTEND_CLASS = eINSTANCE.getXtendClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_CLASS__NAME = eINSTANCE.getXtendClass_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1845,14 +1958,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CLASS__IMPLEMENTS = eINSTANCE.getXtendClass_Implements();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_CLASS__SUPER_TYPES = eINSTANCE.getXtendClass_SuperTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
@@ -2309,6 +2414,42 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CONSTRUCTOR__EXCEPTIONS = eINSTANCE.getXtendConstructor_Exceptions();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl <em>Type Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendTypeDeclaration()
+		 * @generated
+		 */
+		EClass XTEND_TYPE_DECLARATION = eINSTANCE.getXtendTypeDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_TYPE_DECLARATION__NAME = eINSTANCE.getXtendTypeDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl <em>Annotation Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendAnnotationType()
+		 * @generated
+		 */
+		EClass XTEND_ANNOTATION_TYPE = eINSTANCE.getXtendAnnotationType();
+
+		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_ANNOTATION_TYPE__MEMBERS = eINSTANCE.getXtendAnnotationType_Members();
 
 	}
 

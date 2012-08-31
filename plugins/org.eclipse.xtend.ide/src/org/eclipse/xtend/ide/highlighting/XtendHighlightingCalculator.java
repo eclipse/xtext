@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.highlighting;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.List;
 import java.util.Queue;
 
@@ -32,6 +34,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
@@ -77,10 +80,10 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		for (XtendClass xtendClass : file.getXtendClasses()) {
-			highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
-			highlightRichStringsInAnnotations(acceptor, xtendClass);
-			for (XtendMember member : xtendClass.getMembers()) {
+		for (XtendAnnotationTarget xtendType : file.getXtendTypes()) {
+			highlightDeprectedXtendAnnotationTarget(acceptor, xtendType);
+			highlightRichStringsInAnnotations(acceptor, xtendType);
+			for (XtendMember member : filter(xtendType.eContents(), XtendMember.class)) {
 				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();

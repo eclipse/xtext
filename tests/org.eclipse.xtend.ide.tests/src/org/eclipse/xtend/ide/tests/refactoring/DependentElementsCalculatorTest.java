@@ -41,7 +41,7 @@ public class DependentElementsCalculatorTest extends AbstractXtendUITestCase {
 	
 	@Test public void testDependentElements() throws Exception {
 		XtendFile file = testHelper.xtendFile("Foo", "class Foo { def Foo foo() {new Foo()} }");
-		XtendClass fooClass = file.getXtendClasses().get(0);
+		XtendClass fooClass = (XtendClass) file.getXtendTypes().get(0);
 		List<URI> dependentElementURIs = newArrayList(dependentElementsCalculator.getDependentElementURIs(fooClass, null));
 		assertEquals(3, dependentElementURIs.size());
 		XtendFunction fooFunction = (XtendFunction) fooClass.getMembers().get(0);

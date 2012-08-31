@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses <em>Xtend Classes</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendTypes <em>Xtend Types</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -48,20 +48,20 @@ public interface XtendFile extends EObject
 	EList<XtendImport> getImports();
 
 	/**
-	 * Returns the value of the '<em><b>Xtend Classes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendClass}.
+	 * Returns the value of the '<em><b>Xtend Types</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Xtend Classes</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Xtend Types</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Xtend Classes</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendClasses()
+	 * @return the value of the '<em>Xtend Types</em>' containment reference list.
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<XtendClass> getXtendClasses();
+	EList<XtendTypeDeclaration> getXtendTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' attribute.

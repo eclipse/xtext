@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -37,11 +36,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
@@ -49,28 +46,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * @generated
  */
-public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendClass
+public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendClass
 {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -112,16 +89,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	protected EList<JvmTypeReference> implements_;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSuperTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<JvmTypeReference> superTypes;
-
-	/**
 	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,29 +127,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	protected EClass eStaticClass()
 	{
 		return XtendPackage.Literals.XTEND_CLASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName)
-	{
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__NAME, oldName, name));
 	}
 
 	/**
@@ -275,20 +219,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeReference> getSuperTypes()
-	{
-		if (superTypes == null)
-		{
-			superTypes = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_CLASS__SUPER_TYPES);
-		}
-		return superTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<XtendMember> getMembers()
 	{
 		if (members == null)
@@ -310,30 +240,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XtendPackage.XTEND_CLASS__TYPE_PARAMETERS);
 		}
 		return typeParameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getPackageName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSimpleName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -368,16 +274,12 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__NAME:
-				return getName();
 			case XtendPackage.XTEND_CLASS__ABSTRACT:
 				return isAbstract();
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return getExtends();
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return getImplements();
-			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
-				return getSuperTypes();
 			case XtendPackage.XTEND_CLASS__MEMBERS:
 				return getMembers();
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
@@ -397,9 +299,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__NAME:
-				setName((String)newValue);
-				return;
 			case XtendPackage.XTEND_CLASS__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
@@ -409,10 +308,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
 				getImplements().addAll((Collection<? extends JvmTypeReference>)newValue);
-				return;
-			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
-				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 			case XtendPackage.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
@@ -436,9 +331,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XtendPackage.XTEND_CLASS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -447,9 +339,6 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 				return;
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
-				return;
-			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
-				getSuperTypes().clear();
 				return;
 			case XtendPackage.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
@@ -471,16 +360,12 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtendPackage.XTEND_CLASS__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return extends_ != null;
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return implements_ != null && !implements_.isEmpty();
-			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
-				return superTypes != null && !superTypes.isEmpty();
 			case XtendPackage.XTEND_CLASS__MEMBERS:
 				return members != null && !members.isEmpty();
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
@@ -500,9 +385,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", abstract: ");
+		result.append(" (abstract: ");
 		result.append(abstract_);
 		result.append(')');
 		return result.toString();
