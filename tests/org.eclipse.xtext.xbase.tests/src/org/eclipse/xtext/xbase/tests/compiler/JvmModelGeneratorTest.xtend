@@ -60,6 +60,35 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val instance = compiledClass.newInstance
 		assertEquals("FOO", compiledClass.getMethod("doStuff",typeof(String)).invoke(instance,"foo"))
 	}
+	@Test
+	def void testAnnotation_1() {
+		val expression = expression("42", false);
+		val clazz = expression.toAnnotationType("my.test.Foo") [
+			members += expression.toMethod("theTruth", references.getTypeForName(typeof(int), expression)) [
+				setBody(expression)
+			]
+		]
+		val compiledClass = compile(expression.eResource, clazz)
+		assertTrue(compiledClass.annotation)
+		val method = compiledClass.methods.head
+		assertEquals('theTruth', method.name)
+		assertEquals(42, method.defaultValue)
+	}
+	
+	@Test
+	def void testAnnotation_2() {
+		val expression = expression("typeof(String)", false);
+		val clazz = expression.toAnnotationType("my.test.Foo") [
+			members += expression.toMethod("value", references.getTypeForName(typeof(Class), expression, references.wildCard)) [
+				setBody(expression)
+			]
+			members += expression.toMethod("otherValue", references.getTypeForName(typeof(int), expression)) []
+		]
+		val compiledClass = compile(expression.eResource, clazz)
+		assertTrue(compiledClass.annotation)
+		assertEquals(typeof(String), compiledClass.methods.findFirst[name == 'value'].defaultValue)
+		assertNull(compiledClass.methods.findFirst[name == 'otherValue'].defaultValue)
+	}
 	
 	@Test
 	def void testImplements() {

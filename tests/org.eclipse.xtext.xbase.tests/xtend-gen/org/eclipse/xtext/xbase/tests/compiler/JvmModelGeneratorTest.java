@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -39,6 +42,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -110,6 +114,97 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Method _method = compiledClass.getMethod("doStuff", String.class);
       Object _invoke = _method.invoke(instance, "foo");
       Assert.assertEquals("FOO", _invoke);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotation_1() {
+    try {
+      final XExpression expression = this.expression("42", false);
+      final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
+          public void apply(final JvmAnnotationType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(int.class, expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "theTruth", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+          }
+        };
+      final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiledClass = this.compile(_eResource, clazz);
+      boolean _isAnnotation = compiledClass.isAnnotation();
+      Assert.assertTrue(_isAnnotation);
+      Method[] _methods = compiledClass.getMethods();
+      final Method method = IterableExtensions.<Method>head(((Iterable<Method>)Conversions.doWrapArray(_methods)));
+      String _name = method.getName();
+      Assert.assertEquals("theTruth", _name);
+      Object _defaultValue = method.getDefaultValue();
+      Assert.assertEquals(Integer.valueOf(42), _defaultValue);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotation_2() {
+    try {
+      final XExpression expression = this.expression("typeof(String)", false);
+      final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
+          public void apply(final JvmAnnotationType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmWildcardTypeReference _wildCard = JvmModelGeneratorTest.this.references.wildCard();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(Class.class, expression, _wildCard);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "value", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmTypeReference _typeForName_1 = JvmModelGeneratorTest.this.references.getTypeForName(int.class, expression);
+            final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                }
+              };
+            JvmOperation _method_1 = JvmModelGeneratorTest.this.builder.toMethod(expression, "otherValue", _typeForName_1, _function_1);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_1, _method_1);
+          }
+        };
+      final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiledClass = this.compile(_eResource, clazz);
+      boolean _isAnnotation = compiledClass.isAnnotation();
+      Assert.assertTrue(_isAnnotation);
+      Method[] _methods = compiledClass.getMethods();
+      final Function1<Method,Boolean> _function_1 = new Function1<Method,Boolean>() {
+          public Boolean apply(final Method it) {
+            String _name = it.getName();
+            boolean _equals = Objects.equal(_name, "value");
+            return Boolean.valueOf(_equals);
+          }
+        };
+      Method _findFirst = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods)), _function_1);
+      Object _defaultValue = _findFirst.getDefaultValue();
+      Assert.assertEquals(String.class, _defaultValue);
+      Method[] _methods_1 = compiledClass.getMethods();
+      final Function1<Method,Boolean> _function_2 = new Function1<Method,Boolean>() {
+          public Boolean apply(final Method it) {
+            String _name = it.getName();
+            boolean _equals = Objects.equal(_name, "otherValue");
+            return Boolean.valueOf(_equals);
+          }
+        };
+      Method _findFirst_1 = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods_1)), _function_2);
+      Object _defaultValue_1 = _findFirst_1.getDefaultValue();
+      Assert.assertNull(_defaultValue_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

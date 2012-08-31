@@ -153,6 +153,14 @@ public class JvmModelGenerator implements IGenerator {
     fsa.generateFile(_plus, _generateType);
   }
   
+  protected void _internalDoGenerate(final JvmAnnotationType type, final IFileSystemAccess fsa) {
+    String _qualifiedName = type.getQualifiedName();
+    String _replace = _qualifiedName.replace(".", "/");
+    String _plus = (_replace + ".java");
+    CharSequence _generateType = this.generateType(type);
+    fsa.generateFile(_plus, _generateType);
+  }
+  
   public CharSequence generateType(final JvmDeclaredType type) {
     ImportManager _importManager = new ImportManager(true, type);
     final ImportManager importManager = _importManager;
@@ -278,6 +286,71 @@ public class JvmModelGenerator implements IGenerator {
       _xblockexpression = (_newLine_1);
     }
     return _xblockexpression;
+  }
+  
+  protected ITreeAppendable _generateBody(final JvmAnnotationType it, final ITreeAppendable appendable) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      this.generateJavaDoc(it, appendable);
+      this.generateAnnotations(it, appendable, true);
+      this.generateModifier(it, appendable);
+      appendable.append("@interface ");
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(appendable, it);
+      String _simpleName = it.getSimpleName();
+      _traceSignificant.append(_simpleName);
+      appendable.append("{");
+      EList<JvmMember> _members = it.getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      for (final JvmOperation operation : _filter) {
+        this.generateAnnotationMethod(operation, appendable);
+      }
+      ITreeAppendable _newLine = appendable.newLine();
+      ITreeAppendable _append = _newLine.append("}");
+      ITreeAppendable _newLine_1 = _append.newLine();
+      _xblockexpression = (_newLine_1);
+    }
+    return _xblockexpression;
+  }
+  
+  public void generateAnnotationMethod(final JvmOperation it, final ITreeAppendable appendable) {
+    ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
+    _increaseIndentation.newLine();
+    appendable.openScope();
+    this.generateJavaDoc(it, appendable);
+    final ITreeAppendable tracedAppendable = appendable.trace(it);
+    this.generateAnnotations(it, tracedAppendable, true);
+    this.generateModifier(it, tracedAppendable);
+    JvmTypeReference _returnType = it.getReturnType();
+    this.serialize(_returnType, tracedAppendable);
+    tracedAppendable.append(" ");
+    ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
+    String _simpleName = it.getSimpleName();
+    _traceSignificant.append(_simpleName);
+    tracedAppendable.append("()");
+    this.generateDefaultExpression(it, tracedAppendable);
+    tracedAppendable.append(";");
+    appendable.decreaseIndentation();
+    appendable.closeScope();
+  }
+  
+  public void generateDefaultExpression(final JvmOperation it, final ITreeAppendable appendable) {
+    Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
+    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    if (_notEquals) {
+      appendable.append(" default ");
+      appendable.increaseIndentation();
+      Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(it);
+      _compilationStrategy_1.apply(appendable);
+      appendable.decreaseIndentation();
+    } else {
+      final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
+      boolean _notEquals_1 = (!Objects.equal(expression, null));
+      if (_notEquals_1) {
+        appendable.append(" default ");
+        JvmTypeReference _returnType = it.getReturnType();
+        this.compiler.compileAsJavaExpression(expression, appendable, _returnType);
+      }
+    }
   }
   
   protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable) {
@@ -1479,7 +1552,10 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
-    if (type instanceof JvmEnumerationType) {
+    if (type instanceof JvmAnnotationType) {
+      _internalDoGenerate((JvmAnnotationType)type, fsa);
+      return;
+    } else if (type instanceof JvmEnumerationType) {
       _internalDoGenerate((JvmEnumerationType)type, fsa);
       return;
     } else if (type instanceof JvmGenericType) {
@@ -1495,7 +1571,9 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public ITreeAppendable generateBody(final JvmDeclaredType it, final ITreeAppendable appendable) {
-    if (it instanceof JvmEnumerationType) {
+    if (it instanceof JvmAnnotationType) {
+      return _generateBody((JvmAnnotationType)it, appendable);
+    } else if (it instanceof JvmEnumerationType) {
       return _generateBody((JvmEnumerationType)it, appendable);
     } else if (it instanceof JvmGenericType) {
       return _generateBody((JvmGenericType)it, appendable);
