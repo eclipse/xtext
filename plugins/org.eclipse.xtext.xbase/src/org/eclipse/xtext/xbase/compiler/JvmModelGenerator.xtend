@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.apache.log4j.Logger
+import org.eclipse.xtext.common.types.JvmAnnotationType
 
 /**
  * A generator implementation that processes the 
@@ -91,6 +92,10 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch void internalDoGenerate(JvmEnumerationType type, IFileSystemAccess fsa) {
+		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
+	}
+	
+	def dispatch void internalDoGenerate(JvmAnnotationType type, IFileSystemAccess fsa) {
 		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
 	}
 	
@@ -152,6 +157,51 @@ class JvmModelGenerator implements IGenerator {
 		literals.forEach[b.set(generateEnumLiteral(appendable.trace(it), b.get()))]
 		members.filter[!(it instanceof JvmEnumerationLiteral)].forEach [ b.set(generateMember(appendable.trace(it), b.get())) ]
 		appendable.newLine.append("}").newLine
+	}
+	
+	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable) {
+		generateJavaDoc(appendable)
+		generateAnnotations(appendable, true)
+		generateModifier(appendable)
+		appendable.append("@interface ")
+		appendable.traceSignificant(it).append(simpleName)
+		appendable.append("{")
+		for (operation : members.filter(typeof(JvmOperation))) {
+			generateAnnotationMethod(operation, appendable)
+		}
+		appendable.newLine.append("}").newLine
+	}
+	
+	def generateAnnotationMethod(JvmOperation it, ITreeAppendable appendable) {
+		appendable.increaseIndentation.newLine
+		appendable.openScope
+		generateJavaDoc(appendable)
+		val tracedAppendable = appendable.trace(it)
+		generateAnnotations(tracedAppendable, true)
+		generateModifier(tracedAppendable)
+		returnType.serialize(tracedAppendable)
+		tracedAppendable.append(" ")
+		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.append("()")
+		generateDefaultExpression(tracedAppendable)
+		tracedAppendable.append(";")
+		appendable.decreaseIndentation
+		appendable.closeScope
+	}
+	
+	def void generateDefaultExpression(JvmOperation it, ITreeAppendable appendable) {
+		if (compilationStrategy != null) {
+			appendable.append(" default ")
+			appendable.increaseIndentation
+			compilationStrategy.apply(appendable)
+			appendable.decreaseIndentation
+		} else {
+			val expression = associatedExpression
+			if (expression != null) {
+				appendable.append(" default ")
+				compiler.compileAsJavaExpression(expression, appendable, returnType)
+			}
+		}
 	}
 	
 	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable) {
