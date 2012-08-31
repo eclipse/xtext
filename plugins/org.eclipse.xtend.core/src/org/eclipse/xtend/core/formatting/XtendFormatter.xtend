@@ -36,6 +36,8 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtend.core.xtend.XtendParameter
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -87,13 +89,9 @@ public class XtendFormatter {
 		if(!clazz.members.empty) {
 			format += clazzOpenBrace.append[newLine; increaseIndentation]
 			for(i: 0..(clazz.members.size - 1)) { 
-				switch member : clazz.members.get(i) {
-					XtendFunction: {
-						member.expression.format(format)
-					}
-				}
+				val current = clazz.members.get(i)
+				current.format(format)
 				if(i < clazz.members.size - 1) {
-					val current = clazz.members.get(i)
 					val next = clazz.members.get(i + 1)
 					if(current instanceof XtendField && next instanceof XtendField)
 						format += current.nodeForEObject.append[newLine]
@@ -106,6 +104,40 @@ public class XtendFormatter {
 		} else {
 			format += clazzOpenBrace.append[newLine]
 		}
+	}
+	
+	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
+		val nameNode = func.nodeForFeature(XtendPackage$Literals::XTEND_FUNCTION__NAME)
+		val open = nameNode.immediatelyFollowingKeyword("(")
+		var INode comma = null
+		var indented = false
+		for(param:func.parameters) {
+			if(format.fitsIntoLine(param)) {
+				if(comma == null) 
+					format += open.append[noSpace]
+				else 
+					format += comma.append[oneSpace]
+			} else {
+				val n = if(comma == null) open else comma 
+				format += n.append[newLine]
+				if(!indented)
+					format += n.append[increaseIndentation]
+				indented = true
+			}
+			comma = param.nodeForEObject.immediatelyFollowingKeyword(",") 
+		}
+		if(func.parameters.size > 0) {
+			val last = func.parameters.last.nodeForEObject
+			format += last.append[noSpace]
+			if(indented)
+				format += last.append[decreaseIndentation]
+		} else 
+			format += open.append[noSpace]
+		func.expression.format(format) 
+	}
+	
+	def protected dispatch void format(XtendParameter param, FormattableDocument format) {
+		
 	}
 	
 	def protected dispatch void format(XVariableDeclaration expr, FormattableDocument format) {
