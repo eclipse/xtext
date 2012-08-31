@@ -101,6 +101,8 @@ public class CompilationTestHelper {
 			}
 			for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
 				acceptor.accept(new Result() {
+					
+					private Class<?> compiledClass = null;
 
 					public String getGeneratedPath() {
 						return e.getKey();
@@ -115,10 +117,12 @@ public class CompilationTestHelper {
 					}
 
 					public Class<?> getCompiledClass() {
-						String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
-						name = name.replace('/', '.');
-						final Class<?> clazz = javaCompiler.compileToClass(name, e.getValue().toString());
-						return clazz;
+						if (compiledClass == null) {
+							String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
+							name = name.replace('/', '.');
+							compiledClass = javaCompiler.compileToClass(name, e.getValue().toString());
+						}
+						return compiledClass;
 					}
 
 					public Map<String, CharSequence> getAllGeneratedResources() {
@@ -131,6 +135,5 @@ public class CompilationTestHelper {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	
 }
