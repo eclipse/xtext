@@ -537,7 +537,9 @@ public class JvmTypesBuilder {
 		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
 		String prefix = "get";
-		if (typeRef != null && !typeRef.eIsProxy() && !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier())) {
+		if (typeRef != null && !typeRef.eIsProxy() 
+				&& typeRef.getType()!=null 
+				&& !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier())) {
 			prefix = "is";
 		}
 		result.setSimpleName(prefix + Strings.toFirstUpper(propertyName));
