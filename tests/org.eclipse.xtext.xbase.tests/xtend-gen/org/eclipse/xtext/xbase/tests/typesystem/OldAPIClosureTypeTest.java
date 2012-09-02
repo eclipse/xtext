@@ -78,6 +78,48 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   
   @Ignore(value = "fails in old impl")
   @Test
+  public void testOverloadedOperators_12() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_13() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_14() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_16() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_17() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_19() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_20() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
   public void testClosure_02() throws Exception {
     Assert.fail("fails in old impl");
   }

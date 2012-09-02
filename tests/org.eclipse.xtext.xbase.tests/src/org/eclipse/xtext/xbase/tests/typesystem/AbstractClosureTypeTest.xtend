@@ -112,6 +112,72 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.resolvesClosuresTo("(Integer)=>boolean")
 			.withEquivalents("Function1<Integer, Boolean>")
 	}
+	
+	@Test def void testOverloadedOperators_10() throws Exception {
+		"(0..Math::sqrt(1l).intValue).filter[ i | return 1l % i == 0 ].isEmpty"
+			.resolvesClosuresTo("(Integer)=>boolean")
+			.withEquivalents("Function1<Integer, Boolean>")
+	}
+	
+	@Test def void testOverloadedOperators_11() throws Exception {
+		"(1..2).map[ toString ].reduce[ i1, i2| return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>String", "(String, String)=>String")
+			.withEquivalents("Function1<Integer, String>", "Function2<String, String, String>")
+	}
+	
+	@Test def void testOverloadedOperators_12() throws Exception {
+		"(1..2).map[ toString.length ].reduce[ i1, i2| return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>int", "(Integer, Integer)=>int")
+			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
+	}
+	
+	@Test def void testOverloadedOperators_13() throws Exception {
+		"(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger")
+			.withEquivalents("Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>")
+	}
+	
+	@Test def void testOverloadedOperators_14() throws Exception {
+		"(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 ].isEmpty"
+			.resolvesClosuresTo("(Integer)=>Boolean")
+			.withEquivalents("Function1<Integer, Boolean>")
+	}
+	
+	@Test def void testOverloadedOperators_15() throws Exception {
+		"(1..2).map[ if (true) toString ].reduce[ i1, i2| if (true) return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>String", "(String, String)=>String")
+			.withEquivalents("Function1<Integer, String>", "Function2<String, String, String>")
+	}
+	
+	@Test def void testOverloadedOperators_16() throws Exception {
+		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
+	}
+	
+	@Test def void testOverloadedOperators_17() throws Exception {
+		"(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| if (true) return i1 + i2 ]"
+			.resolvesClosuresTo("(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger")
+			.withEquivalents("Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>")
+	}
+	
+	@Test def void testOverloadedOperators_18() throws Exception {
+		"(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 else return null ].isEmpty"
+			.resolvesClosuresTo("(Integer)=>Boolean")
+			.withEquivalents("Function1<Integer, Boolean>")
+	}
+	
+	@Test def void testOverloadedOperators_19() throws Exception {
+		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]"
+			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>int")
+			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
+	}
+	
+	@Test def void testOverloadedOperators_20() throws Exception {
+		"(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]"
+			.resolvesClosuresTo("(Integer)=>Integer", "(Integer, Integer)=>Integer")
+			.withEquivalents("Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>")
+	}
 
 	@Test def void testMethodTypeParamInference_00() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e | true)"
@@ -975,4 +1041,83 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
 	}
 	
+	@Test def void testDeferredTypeArgumentResolution_07() throws Exception {
+		"{
+			val list = newArrayList
+			val fun = [String s| return s]
+			list.map(fun)
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_08() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.map[String s| return s]
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_09() throws Exception {
+		"{
+			val list = newArrayList
+			list.map[String s| return s]
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_10() throws Exception {
+		"{
+			val list = newArrayList
+			$$IterableExtensions::map(list, [String s| return s])
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_11() throws Exception {
+		"{
+			val list = newArrayList
+			val fun = [String s| return s]
+			$$IterableExtensions::map(list, fun)
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_12() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.map(println([String s| return println(s)]))
+			list
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
+	}
+
+	@Test def void testCLosureWithReturnExpression_01() throws Exception {
+		"[ | if (true) return '' else return new StringBuilder ]"
+			.resolvesClosuresTo("()=>Serializable & CharSequence")
+			.withEquivalents("Function0<Serializable & CharSequence>")
+	}
+	
+	@Test def void testCLosureWithReturnExpression_02() throws Exception {
+		"[ | if (true) '' else return new StringBuilder ]"
+			.resolvesClosuresTo("()=>Serializable & CharSequence")
+			.withEquivalents("Function0<Serializable & CharSequence>")
+	}
+	
+	@Test def void testCLosureWithReturnExpression_03() throws Exception {
+		"[ | if (true) return '' else new StringBuilder ]"
+			.resolvesClosuresTo("()=>Serializable & CharSequence")
+			.withEquivalents("Function0<Serializable & CharSequence>")
+	}
+	
+	@Test def void testCLosureWithReturnExpression_04() throws Exception {
+		"[ | if (true) '' else new StringBuilder ]"
+			.resolvesClosuresTo("()=>Serializable & CharSequence")
+			.withEquivalents("Function0<Serializable & CharSequence>")
+	}
+
+	@Test def void testCLosureWithReturnExpression_05() throws Exception {
+		"[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)"
+			.resolvesClosuresTo("(int, int)=>Integer")
+			.withEquivalents("Function2<Integer, Integer, Integer>")
+	}	
 }

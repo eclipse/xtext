@@ -751,7 +751,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testIfExpression() throws Exception {
+  public void testIfExpression_01() throws Exception {
     this.resolvesTo("if (true) \'foo\' else null", "String");
     this.resolvesTo("if (true) \'foo\' else \'bar\'", "String");
     this.resolvesTo("if (true) \'foo\'", "String");
@@ -765,6 +765,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testIfExpression_03() throws Exception {
     this.resolvesTo("if (true) return \'foo\'", "null");
+  }
+  
+  @Test
+  public void testIfExpression_04() throws Exception {
+    this.resolvesTo("if (true) return \'\' else new StringBuilder", "StringBuilder");
   }
   
   @Test

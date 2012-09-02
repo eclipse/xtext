@@ -32,6 +32,11 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	public LightweightTypeReference getActualType(XExpression expression) {
 		return delegate().getActualType(expression);
 	}
+	
+	@Nullable
+	public LightweightTypeReference getReturnType(XExpression expression) {
+		return delegate().getReturnType(expression);
+	}
 
 	@Nullable
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {

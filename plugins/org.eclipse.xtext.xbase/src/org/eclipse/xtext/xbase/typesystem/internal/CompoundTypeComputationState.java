@@ -67,6 +67,14 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
+	
+	public ITypeComputationState withRootExpectation(LightweightTypeReference expectation) {
+		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
+		for (int i = 0; i < components.length; i++) {
+			result[i] = components[i].withRootExpectation(expectation);
+		}
+		return new CompoundTypeComputationState(owner, result);
+	}
 
 	public ITypeComputationState withNonVoidExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];

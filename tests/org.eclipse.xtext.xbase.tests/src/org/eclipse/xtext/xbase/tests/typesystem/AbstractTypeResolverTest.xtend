@@ -704,7 +704,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
 	}
 	
-	@Test def void testIfExpression() throws Exception {
+	@Test def void testIfExpression_01() throws Exception {
 		"if (true) 'foo' else null".resolvesTo("String")
 		"if (true) 'foo' else 'bar'".resolvesTo("String")
 		"if (true) 'foo'".resolvesTo("String")
@@ -716,6 +716,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testIfExpression_03() throws Exception {
 		"if (true) return 'foo'".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_04() throws Exception {
+		"if (true) return '' else new StringBuilder".resolvesTo("StringBuilder")
 	}
 
 	@Test def void testSwitchExpression() throws Exception {

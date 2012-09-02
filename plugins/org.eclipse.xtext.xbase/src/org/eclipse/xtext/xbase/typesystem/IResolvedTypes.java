@@ -47,6 +47,13 @@ public interface IResolvedTypes {
 	LightweightTypeReference getActualType(XExpression expression);
 	
 	/**
+	 * Returns the actually inferred return type for the given expression or <code>null</code> if none.
+	 * @param expression expression whose return type is queried.
+	 */
+	@Nullable
+	LightweightTypeReference getReturnType(XExpression expression);
+	
+	/**
 	 * Returns the actually inferred or declared type for the given identifiable or <code>null</code> if none.
 	 * @param identifiable identifiable whose type is queried.
 	 */
@@ -94,6 +101,11 @@ public interface IResolvedTypes {
 		
 		@Nullable
 		public LightweightTypeReference getActualType(XExpression expression) {
+			return null;
+		}
+		
+		@Nullable
+		public LightweightTypeReference getReturnType(XExpression expression) {
 			return null;
 		}
 

@@ -144,6 +144,72 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testOverloadedOperators_10() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | return 1l % i == 0 ].isEmpty", "(Integer)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Boolean>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_11() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ toString ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>String", "(String, String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, String>", "Function2<String, String, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_12() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ toString.length ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_13() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_14() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 ].isEmpty", "(Integer)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Boolean>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_15() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>String", "(String, String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, String>", "Function2<String, String, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_16() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_17() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_18() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | if (true) return 1l % i == 0 else return null ].isEmpty", "(Integer)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Boolean>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_19() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_20() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
   public void testMethodTypeParamInference_00() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().findFirst(e | true)", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
@@ -953,5 +1019,71 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   public void testDeferredTypeArgumentResolution_06() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map(println([String s| println(s)]))\n\t\t\tlist\n\t\t}", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_07() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| return s]\n\t\t\tlist.map(fun)\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_08() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map[String s| return s]\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_09() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.map[String s| return s]\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_10() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$IterableExtensions::map(list, [String s| return s])\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_11() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tval fun = [String s| return s]\n\t\t\t$$IterableExtensions::map(list, fun)\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_12() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map(println([String s| return println(s)]))\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testCLosureWithReturnExpression_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) return \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
+  }
+  
+  @Test
+  public void testCLosureWithReturnExpression_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
+  }
+  
+  @Test
+  public void testCLosureWithReturnExpression_03() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) return \'\' else new StringBuilder ]", "()=>Serializable & CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
+  }
+  
+  @Test
+  public void testCLosureWithReturnExpression_04() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) \'\' else new StringBuilder ]", "()=>Serializable & CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
+  }
+  
+  @Test
+  public void testCLosureWithReturnExpression_05() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)", "(int, int)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function2<Integer, Integer, Integer>");
   }
 }
