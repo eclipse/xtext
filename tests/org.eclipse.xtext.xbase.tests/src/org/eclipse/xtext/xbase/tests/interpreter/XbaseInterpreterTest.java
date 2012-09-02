@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -59,12 +60,23 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 		interpreter = null;
 		parseHelper = null;
 	}
+	
+	@Test
+	public void testInvokeProtectedMethod() throws Exception {
+		// assuming a context where protected members are accessible, e.g. an interpreted operation
+		// in the very same class
+		assertEvaluatesTo("", "{ val x = new testdata.VisibilitySuperType() x.protectedProperty }", false);
+	}
 
 	@Override
 	public void assertEvaluatesTo(Object expectation, String model) {
+		assertEvaluatesTo(expectation, model, true);
+	}
+	
+	public void assertEvaluatesTo(Object expectation, String model, boolean validate) {
 		XExpression expression = null;
 		try {
-			expression = expression(model, true);
+			expression = expression(model, validate);
 			IEvaluationResult result = interpreter.evaluate(expression);
 			assertNull("Expected no exception. Model was: " + model + ", Exception was: " + result.getException(),
 					result.getException());
