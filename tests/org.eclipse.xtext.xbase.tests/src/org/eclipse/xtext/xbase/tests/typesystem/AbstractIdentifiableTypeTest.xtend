@@ -23,6 +23,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.xbase.tests.typesystem.AbstractIdentifiableTypeTest.*
+import org.eclipse.xtext.xbase.XClosure
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,7 +47,13 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	def protected findIdentifiables(CharSequence expression) {
 		val xExpression = expression(expression, false)
 		
-		val identifiables = EcoreUtil2::eAll(xExpression).filter [
+		val identifiables = EcoreUtil2::eAll(xExpression).map[
+			switch(it) {
+				// derived features are not part of eContents thus we add it here explicitly
+				XClosure: it.implicitParameter
+				default: it 
+			}
+		].filter [
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
