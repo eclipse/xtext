@@ -97,6 +97,48 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test
+	override testOverloadedOperators_12() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_13() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_14() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_16() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_17() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_19() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_20() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
 	override testClosure_02() throws Exception {
 		fail("fails in old impl")
 	}

@@ -307,7 +307,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					object, closureType, operation, expectation);
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 			LightweightTypeReference declaredReturnType = getSubstitutedClosureReturnType(operation, substitutor, state);
-			ITypeAssigner typeAssigner = state.withExpectation(declaredReturnType).assignTypes();
+			ITypeAssigner typeAssigner = state.withRootExpectation(declaredReturnType).assignTypes();
 			ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(
 					closureParameters, substitutor, operation.getParameters(), typeAssigner);
 			ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(object.getExpression());

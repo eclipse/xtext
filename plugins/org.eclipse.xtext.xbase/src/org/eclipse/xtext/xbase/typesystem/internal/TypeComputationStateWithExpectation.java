@@ -51,4 +51,8 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 		return result;
 	}
 	
+	protected LightweightTypeReference getExpectedType() {
+		return expectedType;
+	}
+	
 }

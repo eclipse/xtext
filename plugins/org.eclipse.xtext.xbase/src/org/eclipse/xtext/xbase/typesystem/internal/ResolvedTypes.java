@@ -219,6 +219,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		LightweightTypeReference result = doGetActualType(expression);
 		return toOwnedReference(result);
 	}
+	
+	@Nullable
+	public LightweightTypeReference getReturnType(XExpression expression) {
+		LightweightTypeReference result = doGetReturnType(expression);
+		return toOwnedReference(result);
+	}
 
 	@Nullable
 	protected LightweightTypeReference toOwnedReference(@Nullable LightweightTypeReference result) {
@@ -228,6 +234,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	@Nullable
 	protected LightweightTypeReference doGetActualType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
+		if (typeData != null)
+			return typeData.getActualType();
+		return null;
+	}
+	
+	@Nullable
+	protected LightweightTypeReference doGetReturnType(XExpression expression) {
+		TypeData typeData = getTypeData(expression, true);
 		if (typeData != null)
 			return typeData.getActualType();
 		return null;

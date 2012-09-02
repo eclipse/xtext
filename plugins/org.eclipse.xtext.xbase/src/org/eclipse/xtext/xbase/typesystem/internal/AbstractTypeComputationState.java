@@ -110,6 +110,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
 	}
 	
+	public TypeComputationStateWithExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {
+		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+	}
+	
 	public AbstractTypeComputationState withNonVoidExpectation() {
 		return withNonVoidExpectation(resolvedTypes);
 	}
@@ -145,7 +149,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	public TypeAssigner assignTypes() {
-		final TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
+		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 		return createTypeAssigner(state);
 	}
 

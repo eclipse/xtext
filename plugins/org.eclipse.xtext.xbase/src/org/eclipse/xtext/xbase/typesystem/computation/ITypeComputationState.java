@@ -38,6 +38,8 @@ public interface ITypeComputationState {
 	 */
 	ITypeComputationState withExpectation(LightweightTypeReference expectation);
 	
+	ITypeComputationState withRootExpectation(LightweightTypeReference expectation);
+	
 	ITypeComputationState withNonVoidExpectation();
 	
 	/**
