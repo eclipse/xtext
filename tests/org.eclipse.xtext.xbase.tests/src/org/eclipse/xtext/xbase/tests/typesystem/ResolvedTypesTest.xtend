@@ -42,9 +42,9 @@ class ResolvedTypesTest extends AbstractXbaseTestCase {
 		testMe.queuedDiagnostics
 	}
 	
-	@Test(expected=typeof(UnsupportedOperationException))
+	@Test
 	def void testActualTypeArguments() {
-		testMe.getActualTypeArguments(null)
+		assertTrue(testMe.getActualTypeArguments(null).empty)
 	}
 	
 	@Test

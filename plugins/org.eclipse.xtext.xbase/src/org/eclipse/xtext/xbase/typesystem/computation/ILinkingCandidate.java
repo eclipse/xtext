@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * The supertype of {@link IFeatureLinkingCandidate} and {@link IConstructorLinkingCandidate}.
@@ -23,5 +26,7 @@ public interface ILinkingCandidate {
 	boolean isPreferredOver(ILinkingCandidate other);
 	
 	JvmIdentifiableElement getFeature();
+	
+	List<LightweightTypeReference> getTypeArguments();
 
 }

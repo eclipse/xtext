@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -8,6 +9,7 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.junit.Assert;
 import org.junit.Before;
@@ -56,10 +58,12 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
     _testMe.getQueuedDiagnostics();
   }
   
-  @Test(expected = UnsupportedOperationException.class)
+  @Test
   public void testActualTypeArguments() {
     PublicResolvedTypes _testMe = this.getTestMe();
-    _testMe.getActualTypeArguments(null);
+    List<LightweightTypeReference> _actualTypeArguments = _testMe.getActualTypeArguments(null);
+    boolean _isEmpty = _actualTypeArguments.isEmpty();
+    Assert.assertTrue(_isEmpty);
   }
   
   @Test

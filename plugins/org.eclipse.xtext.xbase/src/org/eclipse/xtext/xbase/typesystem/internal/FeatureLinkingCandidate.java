@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,22 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 			return ((BucketedEObjectDescription) description).isStaticDescription();
 		}
 		return false;
+	}
+	
+	@Override
+	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
+		if (idx == 0 && getReceiver() != null && !getArguments().contains(getReceiver())) {
+			return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+		}
+		return super.getConformanceHints(idx);
+	}
+	
+	@Override
+	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
+		if (idx == 0 && getReceiver() != null && !getArguments().contains(getReceiver())) {
+			return getReceiverType();
+		}
+		return super.getSubstitutedExpectedType(idx);
 	}
 	
 	@Override

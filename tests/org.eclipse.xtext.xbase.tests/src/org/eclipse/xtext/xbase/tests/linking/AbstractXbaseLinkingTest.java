@@ -136,6 +136,61 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.MethodOverrides2.m1(java.lang.Object)",((JvmOperation)call3.getFeature()).getIdentifier());
 	}
 	
+	@Test public void testFeatureCall_5() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = newArrayList\n" + 
+				"	list.addAll(null as java.util.ArrayList<String>)\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.addAll(java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
+	@Test public void testFeatureCall_6() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = newArrayList\n" + 
+				"	list.addAll(null as Iterable<String>)\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,java.lang.Iterable)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
+	@Test public void testFeatureCall_7() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = newArrayList\n" + 
+				"	list.addAll(null as String[])\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
+	@Test public void testFeatureCall_8() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = newArrayList\n" + 
+				"	list.addAll(1, null as String[])\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
+	@Test public void testFeatureCall_9() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = newArrayList\n" + 
+				"	list.addAll(null as Integer, null as String[])\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
 	@Test public void testGenerics() throws Exception {
 		expression("new testdata.GenericType1<String>() += 'foo'", true);
 	}

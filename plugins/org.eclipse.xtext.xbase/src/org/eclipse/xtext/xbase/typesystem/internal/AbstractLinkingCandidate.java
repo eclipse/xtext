@@ -137,6 +137,7 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 	private final ExpressionTypeComputationState state;
 	private final XExpression expression;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
+	private List<LightweightTypeReference> typeArguments;
 	
 	protected AbstractLinkingCandidate(XExpression expression, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
@@ -189,6 +190,22 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 			return ((JvmExecutable) feature).getParameters();
 		}
 		return Collections.emptyList();
+	}
+	
+	public List<LightweightTypeReference> getTypeArguments() {
+		if (typeArguments == null) {
+			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
+			if (typeParameters.isEmpty()) {
+				typeArguments = Collections.emptyList();
+			} else {
+				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(typeParameters.size());
+				for(JvmTypeParameter parameter: typeParameters) {
+					result.add(typeParameterMapping.get(parameter).getTypeReference());
+				}
+				typeArguments = result;
+			}
+		}
+		return typeArguments;
 	}
 	
 	protected abstract boolean hasExplicitArguments();
@@ -485,8 +502,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
 		for(int i = 0; i < upTo; i++) {
-			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(arguments.getArgument(i));
-			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(right.arguments.getArgument(i));
+			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(i);
+			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);
 			if (expectedArgumentType == null) {
 				if (rightExpectedArgumentType != null)
 					return 1;
@@ -513,7 +530,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 		return state.getResolvedTypes().getExpectedType(expression);
 	}
 	
-	protected LightweightTypeReference getSubstitutedExpectedType(XExpression expression) {
+	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
+		XExpression expression = arguments.getArgument(argumentIndex);
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType != null) {
 			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner()) {

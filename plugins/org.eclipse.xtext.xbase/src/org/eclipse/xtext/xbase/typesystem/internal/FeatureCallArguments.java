@@ -29,6 +29,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 	private boolean varArgs;
 	private List<JvmFormalParameter> parameters;
 	private OwnedConverter converter;
+	private final int argumentSizeFixup;
 	
 	public FeatureCallArguments(AbstractLinkingCandidate candidate) {
 		int fixedArityParameterCount = 0;
@@ -41,12 +42,15 @@ public class FeatureCallArguments implements IExpressionArguments {
 			fixedArityParameterCount = varArgs ? parameters.size() - 1 : parameters.size();
 		}
 		arguments = candidate.getArguments();
-		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
 		converter = candidate.getState().getConverter();
+		argumentSizeFixup = candidate.getReceiver() == null || arguments.contains(candidate.getReceiver()) ? 0 : 1;
+		nextArgument = argumentSizeFixup;
+		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size()) + argumentSizeFixup;
 	}
 	
 	public LightweightTypeReference getDeclaredType(int argumentIndex) {
-		JvmFormalParameter parameter = parameters.get(argumentIndex);
+		int idx = argumentIndex - argumentSizeFixup;
+		JvmFormalParameter parameter = parameters.get(idx);
 		JvmTypeReference parameterType = parameter.getParameterType();
 		LightweightTypeReference result = converter.toLightweightReference(parameterType);
 		return result;
@@ -65,7 +69,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 	}
 	
 	public int getArgumentSize() {
-		return arguments.size();
+		return arguments.size() + argumentSizeFixup;
 	}
 	
 	public ArrayTypeReference getVarArgType() {
@@ -78,7 +82,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 	}
 	
 	public boolean hasUnprocessedArguments() {
-		return parameters != null && nextArgument < arguments.size();
+		return parameters != null && nextArgument - argumentSizeFixup < arguments.size();
 	}
 	
 	public int getNextUnprocessedNextArgument() {
@@ -86,11 +90,11 @@ public class FeatureCallArguments implements IExpressionArguments {
 	}
 
 	public boolean isProcessed(int argumentIndex) {
-		 return parameters == null || argumentIndex < nextArgument || arguments.size() == 0 || argumentIndex >= arguments.size();
+		return parameters == null || argumentIndex < nextArgument || arguments.size() == 0 || argumentIndex - argumentSizeFixup >= arguments.size();
 	}
 
 	public XExpression getArgument(int argumentIndex) {
-		return arguments.get(argumentIndex);
+		return arguments.get(argumentIndex - argumentSizeFixup);
 	}
 
 	public void markProcessed(int argumentIndex) {

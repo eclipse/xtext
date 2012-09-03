@@ -270,7 +270,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
-		throw new UnsupportedOperationException("TODO implement me");
+		ILinkingCandidate result = basicGetLinkingCandidates().get(expression);
+		if (result != null) {
+			return result.getTypeArguments();
+		}
+		return Collections.emptyList();
 	}
 	
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
