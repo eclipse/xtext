@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -121,6 +122,10 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 	
 	public String getLinkText() {
 		return text;
+	}
+	
+	protected OwnedConverter getConverter() {
+		return state.getConverter();
 	}
 
 }

@@ -74,7 +74,6 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 			return result;
 		}
 		
-		
 	}
 
 	protected TypeComputationStateWithRootExpectation(

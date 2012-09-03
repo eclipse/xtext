@@ -7,14 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,4 +51,15 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableFeature impleme
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
+	public List<LightweightTypeReference> getTypeArguments() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();
+		if (typeArguments.isEmpty())
+			return Collections.emptyList();
+		List<LightweightTypeReference> result = Lists.newArrayList();
+		for(JvmTypeReference typeArgument: typeArguments) {
+			result.add(getConverter().toLightweightReference(typeArgument));
+		}
+		return result;
+	}
 }
