@@ -78,10 +78,10 @@ class FormattableDocument {
 					}
 					NewLineData: {
 						indentation = indentation + f.indentationChange
-						if(f.newLines > 0) {
+//						if(f.newLines > 0) {
 							val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(indentation)
 							replacements += new TextReplacement(f.offset, f.length, replacement)
-						}
+//						}
 					}
 				}
 				oldOffset = textlength + f.length
