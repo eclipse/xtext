@@ -239,20 +239,16 @@ public class FormattableDocument {
               int _indentationChange = _newLineData.getIndentationChange();
               int _plus_2 = (indentation + _indentationChange);
               indentation = _plus_2;
+              RendererConfiguration _cfg = this.getCfg();
               int _newLines = _newLineData.getNewLines();
-              boolean _greaterThan = (_newLines > 0);
-              if (_greaterThan) {
-                RendererConfiguration _cfg = this.getCfg();
-                int _newLines_1 = _newLineData.getNewLines();
-                String _wrap = _cfg.getWrap(_newLines_1);
-                RendererConfiguration _cfg_1 = this.getCfg();
-                String _indentation = _cfg_1.getIndentation(indentation);
-                final String replacement = (_wrap + _indentation);
-                int _offset_3 = _newLineData.getOffset();
-                int _length_1 = _newLineData.getLength();
-                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
-                replacements.add(_textReplacement);
-              }
+              String _wrap = _cfg.getWrap(_newLines);
+              RendererConfiguration _cfg_1 = this.getCfg();
+              String _indentation = _cfg_1.getIndentation(indentation);
+              final String replacement = (_wrap + _indentation);
+              int _offset_3 = _newLineData.getOffset();
+              int _length_1 = _newLineData.getLength();
+              TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+              replacements.add(_textReplacement);
             }
           }
           int _length_1 = f.getLength();

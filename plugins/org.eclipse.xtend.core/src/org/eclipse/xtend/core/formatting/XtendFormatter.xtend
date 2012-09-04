@@ -10,10 +10,16 @@ package org.eclipse.xtend.core.formatting
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendPackage$Literals
+import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.XtextResource
@@ -27,18 +33,9 @@ import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.CrossReference
-import org.eclipse.xtext.AbstractRule
-import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtend.core.xtend.XtendParameter
-import org.eclipse.xtext.xbase.XBlockExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -46,6 +43,10 @@ public class XtendFormatter {
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 	
 	@Inject extension NodeModelAccess
+	
+	@Inject extension FormatterExtensions
+	
+	@Inject RichStringFormatter richStringFormatter
 	
 	def List<TextReplacement> format(XtextResource res, int offset, int length, RendererConfiguration cfg) {
 		cfg.lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
@@ -141,6 +142,10 @@ public class XtendFormatter {
 		
 	}
 	
+	def protected dispatch void format(RichString rs, FormattableDocument format) {
+		richStringFormatter.format(this, format, rs)
+	}
+	
 	def protected dispatch void format(XVariableDeclaration expr, FormattableDocument format) {
 		expr.right.format(format)				
 	}
@@ -217,7 +222,7 @@ public class XtendFormatter {
 	}
 	
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
-		val node = op.nodeForFeature(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE)
+		val node = op.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 		if(node != null && node.grammarElement instanceof CrossReference) {
 			val terminal = (node.grammarElement as CrossReference).terminal
 			if(terminal instanceof RuleCall)
@@ -237,7 +242,7 @@ public class XtendFormatter {
 		
 		var indented = false
 		for(call:calls.reverse) {
-			val op = call.nodeForFeature(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE)
+			val op = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 			format += op.prepend[oneSpace]
 			
 			if(format.fitsIntoLine(call.rightOperand)) {
@@ -456,52 +461,11 @@ public class XtendFormatter {
 			}
 	}
 	
-	
-	def protected FormattingData append(INode node, (FormattingDataInit)=>void init) {
-		if(node != null) {
-			node.rangeAfter?.newFormattingData(init)
-		}
-	}
-	
-	def protected FormattingData prepend(INode node, (FormattingDataInit)=>void init) {
-		if(node != null) {
-			node.rangeBefore?.newFormattingData(init)
-		}
-	}
-	
-	def protected FormattingData newFormattingData(Pair<Integer, Integer> range, (FormattingDataInit)=>void init) {
-		val it = new FormattingDataInit()
-		init.apply(it)
-		if(newLines == 0 || space == "")
-			return new WhitespaceData(range.key, range.value, indentationChange, space)
-		else if(space == null)
-			return new NewLineData(range.key, range.value, indentationChange, newLines)
-		else 
-			throw new IllegalStateException(init.toString) 
-	}
-	
-	
-	def protected String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
-		val lookahead = new FormattableDocument(fmt)
-		format.apply(lookahead)
-		lookahead.renderToString(offset, length)
-	}
-	
 	def protected String lookahead(FormattableDocument fmt, EObject expression) {
 		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
 		lookahead.renderToString(node.offset, node.length)
-	}
-	
-	def protected boolean fitsIntoLine(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
-		val lookahead = fmt.lookahead(offset, length, format)
-		if(lookahead.contains("\n")) {
-			return false
-		} else {
-			val line = fmt.lineLengthBefore(offset) + lookahead.length
-			return line <= fmt.cfg.maxLineWidth
-		}
 	}
 	
 	def protected boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
@@ -514,38 +478,31 @@ public class XtendFormatter {
 			return length <= fmt.cfg.maxLineWidth
 		}
 	}
+	
 }
 
-class FormattingDataInit {
-	public String space = null
-	public int newLines = 0
-	public int indentationChange = 0
+
+
+/* class RichStringFormatter extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	
-	def newLine() {
-		newLines = 1
+	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
+		println('''super.acceptSemanticLineBreak(charCount=«charCount», origin, controlStructureSeen=«controlStructureSeen»)''')
+		
 	}
 	
-	def noSpace() {
-		space = ""
+	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+		println('''super.acceptSemanticText(text=«text», origin)''')
 	}
 	
-	def oneSpace() {
-		space = " "
+	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
+		println('''super.acceptTemplateLineBreak(charCount=«charCount», origin)''')
+		
 	}
 	
-	def increaseIndentation() {
-		indentationChange = indentationChange + 1
+	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
+		println('''super.acceptTemplateText(text=«text», origin)''')
 	}
-	
-	def decreaseIndentation() {
-		indentationChange = indentationChange - 1
-	}
-	
-	override toString() {
-		new ToStringHelper().toString(this)
-	}
-	
-}
+} */
 
 // problem: Format is not being filled sequentially, therefore lookahead operations on it may be affected 
 
