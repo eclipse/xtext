@@ -15,6 +15,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -33,6 +34,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private final TypeURIHelper typeUriHelper;
 
 	private final JdtBasedTypeFactory typeFactory;
+
+	private final WorkingCopyOwner workingCopyOwner;
 	
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
 		this(javaProject, resourceSet, null);
@@ -43,16 +46,25 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
+		this(javaProject, resourceSet, indexedJvmTypeAccess, null);
+	}
+	
+	/**
+	 * @since 2.4
+	 * @noreference This constructor is not intended to be referenced by clients.
+	 */
+	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
 		super(resourceSet, indexedJvmTypeAccess);
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
 		this.javaProject = javaProject;
 		this.typeUriHelper = createTypeURIHelper();
+		this.workingCopyOwner = workingCopyOwner;
 		this.typeFactory = createTypeFactory();
 	}
 	
 	protected JdtBasedTypeFactory createTypeFactory() {
-		return new JdtBasedTypeFactory(typeUriHelper);
+		return new JdtBasedTypeFactory(typeUriHelper, workingCopyOwner);
 	}
 
 	protected TypeURIHelper createTypeURIHelper() {
