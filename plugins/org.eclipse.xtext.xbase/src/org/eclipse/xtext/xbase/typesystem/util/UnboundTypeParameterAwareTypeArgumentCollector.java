@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -72,6 +73,19 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 					}
 				} else {
 					acceptHint(reference, declaration);
+				}
+			}
+			@Override
+			protected void doVisitCompoundTypeReference(CompoundTypeReference reference,
+					ParameterizedTypeReference declaration) {
+				JvmType type = declaration.getType();
+				if (type instanceof JvmTypeParameter) {
+					JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
+					if (shouldProcess(unboundTypeParameter)) {
+						processTypeParameter(unboundTypeParameter, reference);
+					}
+				} else {
+					super.doVisitCompoundTypeReference(reference, declaration);
 				}
 			}
 		};

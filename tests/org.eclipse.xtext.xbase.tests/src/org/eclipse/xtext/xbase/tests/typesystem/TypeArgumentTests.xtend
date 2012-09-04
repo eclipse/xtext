@@ -60,66 +60,6 @@ class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 		]
 	}
 	
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testMethodTypeParamInference_06() throws Exception {
-		fail("Somebody uses the uper bound but should not")
-	}
-		
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testMethodTypeParamInference_07() throws Exception {
-		fail("Somebody uses the uper bound but should not")
-	}
-		
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testMethodTypeParamInference_08() throws Exception {
-		fail("Somebody uses the uper bound but should not")
-	}
-		
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testMethodTypeParamInference_09() throws Exception {
-		fail("Somebody uses the uses bound but should not")
-	}
-	
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testClosure_03() throws Exception {
-		fail("Somebody uses the uses bound but should not")
-	}
-	
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testClosure_04() throws Exception {
-		fail("Somebody uses the uses bound but should not")
-	}
-	
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testFeatureCall_35() throws Exception {
-		fail("Somebody uses the uses bound but should not")
-	}
-	
-	@Test
-	@Ignore("Somebody uses the uses bound but should not")
-	override testFeatureCall_36() throws Exception {
-		fail("Somebody uses the uses bound but should not")
-	}
-	
-	@Test
-	@Ignore("Gosh this one is strange")
-	override testDeferredTypeArgumentResolution_065() throws Exception {
-		fail("Gosh this one is strange")
-	}
-	
-	@Test
-	@Ignore("Gosh this one is strange")
-	override testDeferredTypeArgumentResolution_131() throws Exception {
-		fail("Gosh this one is strange")
-	}
-	
 }
 
 /**
@@ -351,6 +291,10 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 	}
 	
 	@Ignore("fails in old implementation") @Test override testTypeByTransitiveExpectation_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testExpectationActualMismatch_02() throws Exception {
 		fail("fails in old implementation")
 	}
 	
@@ -745,6 +689,9 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_160() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_161() throws Exception {
 		fail("fails in old implementation")
 	}
 	

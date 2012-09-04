@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -77,9 +78,19 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
 		for(Map.Entry<XExpression, Collection<TypeData>> entry: basicGetExpressionTypes().asMap().entrySet()) {
 			for(TypeData typeData: entry.getValue()) {
-				parent.acceptType(entry.getKey(), typeData.copyInto(parent.getReferenceOwner()));
+				parent.acceptType(entry.getKey(), prepareMerge(typeData, parent.getReferenceOwner()));
 			}
 		}
+	}
+	
+	protected TypeData prepareMerge(TypeData typeData, ITypeReferenceOwner owner) {
+		LightweightTypeReference typeReference = typeData.getActualType();
+		if (typeData.isOwnedBy(owner) && !(typeReference instanceof UnboundTypeReference))
+			return typeData;
+		if (typeReference instanceof UnboundTypeReference && super.isResolved(((UnboundTypeReference) typeReference).getHandle())) {
+			typeReference = typeReference.getUpperBoundSubstitute();
+		}
+		return new TypeData(typeData.getExpression(), typeData.getExpectation().copyInto(owner), typeReference.copyInto(owner), typeData.getConformanceHints().clone(), typeData.isReturnType());
 	}
 	
 	protected void mergeLinkingCandidatesIntoParent(ResolvedTypes parent) {
@@ -95,7 +106,12 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		Map<JvmIdentifiableElement, LightweightTypeReference> types = basicGetTypes();
 		if (!types.isEmpty()) {
 			for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: types.entrySet()) {
-				parent.setType(entry.getKey(), entry.getValue().copyInto(parent.getReferenceOwner()));
+				LightweightTypeReference value = entry.getValue();
+				if (value instanceof UnboundTypeReference && super.isResolved(((UnboundTypeReference) value).getHandle())) {
+					parent.setType(entry.getKey(), value.getUpperBoundSubstitute().copyInto(parent.getReferenceOwner()));
+				} else {
+					parent.setType(entry.getKey(), value.copyInto(parent.getReferenceOwner()));
+				}
 			}
 		}
 	}

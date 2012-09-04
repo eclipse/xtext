@@ -44,12 +44,6 @@ public class TypeData {
 		this.returnType = returnType;
 	}
 	
-	public TypeData copyInto(ITypeReferenceOwner owner) {
-		if (isOwnedBy(owner))
-			return this;
-		return new TypeData(expression, expectation.copyInto(owner), type.copyInto(owner), hints.clone(), returnType);
-	}
-	
 	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		return expectation.isOwnedBy(owner) && type.isOwnedBy(owner);
 	}
