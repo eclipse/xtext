@@ -226,8 +226,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				}
 			}
 			resolvedTo = typeArgument.getTypeReference();
-			if (resolvedTo != null && varianceHints.contains(VarianceInfo.IN)) {
-				if (varianceHints.contains(VarianceInfo.OUT) || typeArgument.getVariance() == VarianceInfo.INVARIANT || (resolvedTo instanceof WildcardTypeReference && ((WildcardTypeReference) resolvedTo).getLowerBound() != null)) {
+			if (resolvedTo != null) {
+				if (varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
 				}
 			}

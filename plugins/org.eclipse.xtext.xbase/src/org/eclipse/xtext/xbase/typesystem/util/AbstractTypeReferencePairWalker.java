@@ -220,7 +220,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
 	private final WildcardTypeReferenceTraverser wildcardTypeReferenceTraverser;
 	private final ArrayTypeReferenceTraverser arrayTypeReferenceTraverser;
-	private final UnboundTypeReferenceTraverser computedTypeReferenceTraverser;
+	private final UnboundTypeReferenceTraverser unboundTypeReferenceTraverser;
 	
 	private VarianceInfo expectedVariance;
 
@@ -233,7 +233,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
 		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
 		arrayTypeReferenceTraverser = createArrayTypeReferenceTraverser();
-		computedTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
+		unboundTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
 	}
 	
 	protected void processTypeParameter(JvmTypeParameter typeParameter, LightweightTypeReference reference) {
@@ -282,7 +282,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	
 	@Override
 	protected void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
-		param.accept(computedTypeReferenceTraverser, reference);
+		param.accept(unboundTypeReferenceTraverser, reference);
 	}
 	
 	@Override

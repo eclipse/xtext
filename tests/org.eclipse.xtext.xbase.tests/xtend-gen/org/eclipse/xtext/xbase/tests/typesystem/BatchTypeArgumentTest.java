@@ -15,8 +15,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow
@@ -64,65 +62,5 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
         }
       };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(typeArguments)), _function);
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testMethodTypeParamInference_06() throws Exception {
-    Assert.fail("Somebody uses the uper bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testMethodTypeParamInference_07() throws Exception {
-    Assert.fail("Somebody uses the uper bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testMethodTypeParamInference_08() throws Exception {
-    Assert.fail("Somebody uses the uper bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testMethodTypeParamInference_09() throws Exception {
-    Assert.fail("Somebody uses the uses bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testClosure_03() throws Exception {
-    Assert.fail("Somebody uses the uses bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testClosure_04() throws Exception {
-    Assert.fail("Somebody uses the uses bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testFeatureCall_35() throws Exception {
-    Assert.fail("Somebody uses the uses bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Somebody uses the uses bound but should not")
-  public void testFeatureCall_36() throws Exception {
-    Assert.fail("Somebody uses the uses bound but should not");
-  }
-  
-  @Test
-  @Ignore(value = "Gosh this one is strange")
-  public void testDeferredTypeArgumentResolution_065() throws Exception {
-    Assert.fail("Gosh this one is strange");
-  }
-  
-  @Test
-  @Ignore(value = "Gosh this one is strange")
-  public void testDeferredTypeArgumentResolution_131() throws Exception {
-    Assert.fail("Gosh this one is strange");
   }
 }

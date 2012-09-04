@@ -1708,6 +1708,19 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testExpectationActualMismatch_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.ArrayList<Integer>).add(println(null as Double))", "Double");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testExpectationActualMismatch_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(null as Integer)\n\t\t\tlist.get(0).toString\n\t\t\tlist.add(println(null as Double))\n\t\t}", "Integer");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Double");
+    this.done(_and);
+  }
+  
+  @Test
   public void testDeferredTypeArgumentResolution_001() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList", "Object");
     this.done(_bindTypeArgumentsTo);
@@ -2696,6 +2709,13 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
     Iterator<XExpression> _and_1 = this.and(_and, "String");
     this.done(_and_1);
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_161() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(null as Integer)\n\t\t\tlist.get(0)\n\t\t\tlist.add(println(null as Double))\n\t\t}", "Number & Comparable<?>");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Double");
+    this.done(_and);
   }
   
   @Test

@@ -1105,6 +1105,19 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	@Test def void testTypeByTransitiveExpectation_02() throws Exception {
 		"newArrayList.subList(1,1).subList(1,1).head".bindTypeArgumentsTo("Object").and("Object").done
 	}
+
+	@Test def void testExpectationActualMismatch_01() throws Exception {
+		"(null as java.util.ArrayList<Integer>).add(println(null as Double))".bindTypeArgumentsTo("Double").done
+	}
+	
+	@Test def void testExpectationActualMismatch_02() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(null as Integer)
+			list.get(0).toString
+			list.add(println(null as Double))
+		}".bindTypeArgumentsTo("Integer").and("Double").done
+	}
 	
 	@Test def void testDeferredTypeArgumentResolution_001() throws Exception {
 		"newArrayList".bindTypeArgumentsTo("Object").done
@@ -2266,6 +2279,15 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 			list.addAll(null as String[])
 			secondList
 		}".bindTypeArgumentsTo("String").and("String").and("String").done
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_161() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(null as Integer)
+			list.get(0)
+			list.add(println(null as Double))
+		}".bindTypeArgumentsTo("Number & Comparable<?>").and("Double").done
 	}
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {

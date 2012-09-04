@@ -397,6 +397,12 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testExpectationActualMismatch_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testDeferredTypeArgumentResolution_002() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -1178,6 +1184,12 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testDeferredTypeArgumentResolution_160() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_161() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

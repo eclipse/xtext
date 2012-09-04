@@ -200,7 +200,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 			} else {
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(typeParameters.size());
 				for(JvmTypeParameter parameter: typeParameters) {
-					result.add(typeParameterMapping.get(parameter).getTypeReference());
+					LightweightMergedBoundTypeArgument typeArgument = typeParameterMapping.get(parameter);
+					result.add(typeArgument.getTypeReference());
 				}
 				typeArguments = result;
 			}

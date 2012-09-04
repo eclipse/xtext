@@ -392,7 +392,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			};
 			LightweightTypeReference substitutedClosureType = closureTypeSubstitutor.substitute(closureType);
 			LightweightTypeReference result = createFunctionTypeReference(expectation.getReferenceOwner(), substitutedClosureType, closureParameterTypes, expressionResultType);
-			// TODO the hint is probably wrong
+			// TODO the hint is probably wrong - if we expect a native function type, demand conversion is not true
 			expectation.acceptActualType(result, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED); 
 		}
 	}

@@ -49,6 +49,7 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
@@ -166,23 +167,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return typeData;
 		}
 		
-//		final XComputedTypeReference mergedType = getXtypeFactory().createXComputedTypeReference();
-//		mergedType.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
-//			@Override
-//			protected LightweightTypeReference doGetTypeReference() {
-//				Collection<TypeData> freshlyObtainedValues = ensureExpressionTypesMapExists().get(expression);
-				List<LightweightTypeReference> references = Lists.newArrayList();
-				EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
-				for(TypeData value: values) {
-					LightweightTypeReference reference = value.getActualType();
-//					if (returnType == value.isReturnType() && isValidForMergedResult(reference, mergedType)) {
-						references.add(reference);
-						mergedHints.addAll(value.getConformanceHints());
-//					}
-				}
-				LightweightTypeReference mergedType = getMergedType(references);
-//			}
-//		});
+		List<LightweightTypeReference> references = Lists.newArrayList();
+		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
+		for (TypeData value : values) {
+			LightweightTypeReference reference = value.getActualType();
+			references.add(reference);
+			mergedHints.addAll(value.getConformanceHints());
+		}
+		LightweightTypeReference mergedType = getMergedType(references);
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
@@ -545,12 +537,40 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
 			}
 			if (resolvedTypeParameters.add(handle)) {
+				List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
+				for(LightweightBoundTypeArgument existingTypeArgument: existingTypeArguments) {
+					if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
+						if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+							UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+							// resolve similar pending type arguments
+							VarianceInfo definedVarianceInfo = existingTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(existingTypeArgument.getActualVariance());
+							if (definedVarianceInfo == VarianceInfo.INVARIANT) {
+								acceptHint(existingReference.getHandle(), boundTypeArgument);
+							}
+						}
+					}
+				}
 				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
 			}
 		} else {
 			if (!isResolved(handle)) {
 				if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
 					UnboundTypeReference other = (UnboundTypeReference) boundTypeArgument.getTypeReference();
+					if (ensureTypeParameterHintsMapExists().containsKey(handle)) {
+						// don't add fully redundant hints
+						List<LightweightBoundTypeArgument> existingValues = ensureTypeParameterHintsMapExists().get(handle);
+						for(LightweightBoundTypeArgument existingValue: existingValues) {
+							if (existingValue.getTypeReference() instanceof UnboundTypeReference) {
+								if (((UnboundTypeReference) existingValue.getTypeReference()).getHandle() == other.getHandle()) {
+									if (existingValue.getActualVariance() == boundTypeArgument.getActualVariance() 
+											&& existingValue.getDeclaredVariance() == boundTypeArgument.getDeclaredVariance()
+											&& existingValue.getSource() == boundTypeArgument.getSource()) {
+										return;
+									}
+								}
+							}
+						}
+					}
 					UnboundTypeReference currentUnbound = getUnboundTypeReference(handle);
 					ensureTypeParameterHintsMapExists().put(
 							other.getHandle(),
