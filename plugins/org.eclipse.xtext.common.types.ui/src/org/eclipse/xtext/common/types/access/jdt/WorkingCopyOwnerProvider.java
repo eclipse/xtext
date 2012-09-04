@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public class WorkingCopyOwnerProvider {
+public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	
 	@Inject private ResourceDescriptionsProvider descriptionsProvider;
 	
