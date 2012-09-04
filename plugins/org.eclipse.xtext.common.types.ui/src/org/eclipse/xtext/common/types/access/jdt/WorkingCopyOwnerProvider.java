@@ -61,6 +61,15 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 				}
 				return super.findSource(typeName, packageName);
 			}
+			
+			
+			/**
+			 * not implemented because we don't have a proper index for Java package names and the very rare cases in which this would
+			 * cause trouble are not worth the general degrade in performance.
+			 */
+			@Override public boolean isPackage(String[] pkg) {
+				return super.isPackage(pkg);
+			}
 		};
 	}
 	
