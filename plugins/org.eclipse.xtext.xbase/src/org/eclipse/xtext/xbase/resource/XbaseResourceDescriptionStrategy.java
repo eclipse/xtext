@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -31,6 +32,7 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 	private static final Logger LOG = Logger.getLogger(XbaseResourceDescriptionStrategy.class);
 
 	public static final String SIGNATURE_HASH_KEY = "sig";
+	public static final String IS_INTERFACE = "interface";
 	
 	@Inject
 	private JvmDeclaredTypeSignatureHashProvider hashProvider;
@@ -67,7 +69,13 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 	}
 
 	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
-		if (eObject instanceof JvmDeclaredType) 
+		if (eObject instanceof JvmDeclaredType) {
 			userData.put(SIGNATURE_HASH_KEY, hashProvider.getHash((JvmDeclaredType) eObject));
+		}
+		if (eObject instanceof JvmGenericType) {
+			JvmGenericType genericType = (JvmGenericType) eObject;
+			if (genericType.isInterface())
+				userData.put(SIGNATURE_HASH_KEY, Boolean.TRUE.toString());
+		}
 	}
 }

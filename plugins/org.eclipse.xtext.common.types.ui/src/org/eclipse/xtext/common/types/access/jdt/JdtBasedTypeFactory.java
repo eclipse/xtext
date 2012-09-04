@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -34,6 +36,7 @@ import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.core.BinaryType;
+import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.jdt.internal.core.JavaElement;
 import org.eclipse.jdt.internal.core.SourceMapper;
 import org.eclipse.jdt.internal.core.SourceMethod;
@@ -77,9 +80,19 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
 	private final TypeURIHelper uriHelper;
+	private WorkingCopyOwner workingCopyOwner;
 
+	@Deprecated
 	public JdtBasedTypeFactory(TypeURIHelper uriHelper) {
+		this(uriHelper, DefaultWorkingCopyOwner.PRIMARY);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public JdtBasedTypeFactory(TypeURIHelper uriHelper, WorkingCopyOwner workingCopyOwner) {
 		this.uriHelper = uriHelper;
+		this.workingCopyOwner = workingCopyOwner;
 	}
 
 	public JvmDeclaredType createType(IType jdtType) {
@@ -87,6 +100,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
 					+ jdtType.getFullyQualifiedName() + "'.");
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
+		parser.setWorkingCopyOwner(workingCopyOwner);
 		parser.setProject(jdtType.getJavaProject());
 		parser.setIgnoreMethodBodies(true);
 		
