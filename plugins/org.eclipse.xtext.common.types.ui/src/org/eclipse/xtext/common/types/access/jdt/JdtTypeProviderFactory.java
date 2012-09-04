@@ -24,7 +24,7 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 	private IJavaProjectProvider javaProjectProvider;
 	
 	@Inject
-	private WorkingCopyOwnerProvider copyOwnerProvider;
+	private IWorkingCopyOwnerProvider copyOwnerProvider;
 
 	/**
 	 * @since 2.4
