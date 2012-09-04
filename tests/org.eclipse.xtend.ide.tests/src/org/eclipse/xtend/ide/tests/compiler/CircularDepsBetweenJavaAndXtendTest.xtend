@@ -38,7 +38,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test def void testJavaReferencesXtendWithTypeParam() {
-		workbenchTestHelper.createFile('JavaInterface.java', '''
+		workbenchTestHelper.createFile('JavaClass.java', '''
 			public class JavaClass extends XtendClass<JavaClass> {
 			}
 		''')

@@ -68,7 +68,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.workbenchTestHelper.createFile("JavaInterface.java", _builder.toString());
+      this.workbenchTestHelper.createFile("JavaClass.java", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("class XtendClass<T extends JavaClass> {");
       _builder_1.newLine();
