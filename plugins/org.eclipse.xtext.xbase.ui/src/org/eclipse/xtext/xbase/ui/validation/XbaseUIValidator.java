@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.core.compiler.IProblem;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -121,11 +123,23 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			}
 		}
 		Object element = getContext().get(typeToCheck);
-		if(element != null){
-			if(element.equals(FORBIDDENREFERENCEID)){
-				error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, FORBIDDEN_REFERENCE);
-			} else if(element.equals(DISCOURAGEDREFERENCEID)){
-				warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
+		if (element != null) {
+			String message = null;
+			Severity severity = null;
+			String issueCode = null;
+			if (element.equals(FORBIDDENREFERENCEID)) {
+				severity = new JdtPreferenceAccess(javaProject).getSeverity(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+				message = "Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName();
+				issueCode = FORBIDDEN_REFERENCE;
+			} else if (element.equals(DISCOURAGEDREFERENCEID)) {
+				message = "Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName();
+				severity = new JdtPreferenceAccess(javaProject).getSeverity(JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
+				issueCode = DISCOURAGED_REFERENCE;
+			}
+			if (severity == Severity.ERROR) {
+				error(message, context, feature, -1, issueCode);
+			} else if (severity == Severity.WARNING) {
+				warning(message, context, feature, -1, issueCode);
 			}
 		}
 	}
