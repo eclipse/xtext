@@ -4,7 +4,7 @@ import org.junit.Test
 
 class XtendFormatterTest extends AbstractFormatterTest {
 	
-	@Test def formatClass() {
+	@Test def formatClass1() {
 		assertFormatted('''
 			package foo
 			
@@ -14,6 +14,16 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			package foo class bar{}
 		''')	
 	}
+	
+	@Test def formatClass2() {
+		assertFormatted('''
+			class bar {
+			}
+		''', '''
+			class bar{}
+		''')	
+	}
+	
 	
 	@Test def formatClassAnnotation() {
 		assertFormatted('''
