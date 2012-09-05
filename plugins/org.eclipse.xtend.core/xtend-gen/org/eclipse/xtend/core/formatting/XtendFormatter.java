@@ -521,6 +521,13 @@ public class XtendFormatter {
         format.operator_add(_prepend);
         final Procedure1<FormattableDocument> _function_1 = new Procedure1<FormattableDocument>() {
             public void apply(final FormattableDocument f) {
+              final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.noSpace();
+                  }
+                };
+              FormattingData _append = XtendFormatter.this._formatterExtensions.append(op, _function);
+              f.operator_add(_append);
               EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
               XtendFormatter.this.formatFeatureCallParams(_memberCallArguments, f);
             }

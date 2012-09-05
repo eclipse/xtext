@@ -666,6 +666,25 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatMemberFeatureCall2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = \"x\".substring(0).substring(1)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\"");
+    _builder_1.newLine();
+    _builder_1.append(".");
+    _builder_1.newLine();
+    _builder_1.append("substring(0)");
+    _builder_1.newLine();
+    _builder_1.append(".");
+    _builder_1.newLine();
+    _builder_1.append("substring(1)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatBinaryExpression1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +");
