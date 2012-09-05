@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.Tuples
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
-class AbstractFormatterTest {
+abstract class AbstractFormatterTest {
 	@Inject extension ParseHelper<XtendFile>
 	@Inject XtendFormatter formatter
 	
