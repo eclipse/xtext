@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterators;
+import com.google.common.collect.Iterables;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -72,6 +72,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
           }
         };
       Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
+      Set<EObject> _set = IteratorExtensions.<EObject>toSet(_map);
       final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject it) {
             boolean _and = false;
@@ -114,9 +115,9 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             return Boolean.valueOf(_and);
           }
         };
-      Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_map, _function_1);
-      Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
-      final List<JvmIdentifiableElement> identifiables = IteratorExtensions.<JvmIdentifiableElement>toList(_filter_1);
+      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
+      Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
+      final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
       final Function1<JvmIdentifiableElement,Integer> _function_2 = new Function1<JvmIdentifiableElement,Integer>() {
           public Integer apply(final JvmIdentifiableElement it) {
             int _xblockexpression = (int) 0;

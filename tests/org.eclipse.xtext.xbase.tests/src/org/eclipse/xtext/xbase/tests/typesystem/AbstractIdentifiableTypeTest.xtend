@@ -53,7 +53,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 				XClosure: it.implicitParameter
 				default: it 
 			}
-		].filter [
+		].toSet.filter [
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
