@@ -165,7 +165,7 @@ class JvmModelGenerator implements IGenerator {
 		generateModifier(appendable)
 		appendable.append("@interface ")
 		appendable.traceSignificant(it).append(simpleName)
-		appendable.append("{")
+		appendable.append(" {")
 		for (operation : members.filter(typeof(JvmOperation))) {
 			generateAnnotationMethod(operation, appendable)
 		}

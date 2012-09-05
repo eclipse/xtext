@@ -298,7 +298,7 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(appendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
-      appendable.append("{");
+      appendable.append(" {");
       EList<JvmMember> _members = it.getMembers();
       Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
       for (final JvmOperation operation : _filter) {
