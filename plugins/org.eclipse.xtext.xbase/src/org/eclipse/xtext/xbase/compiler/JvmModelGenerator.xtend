@@ -1,12 +1,14 @@
 package org.eclipse.xtext.xbase.compiler
 
 import com.google.inject.Inject
+import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmAnnotationValue
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue
@@ -56,8 +58,8 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
-import org.apache.log4j.Logger
-import org.eclipse.xtext.common.types.JvmAnnotationType
+
+import static org.eclipse.xtext.xbase.compiler.JvmModelGenerator.*
 
 /**
  * A generator implementation that processes the 
@@ -85,21 +87,17 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
+	
 	def dispatch void internalDoGenerate(EObject obj, IFileSystemAccess fsa) {}
 	
-	def dispatch void internalDoGenerate(JvmGenericType type, IFileSystemAccess fsa) {
-		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
-	}
-	
-	def dispatch void internalDoGenerate(JvmEnumerationType type, IFileSystemAccess fsa) {
-		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
-	}
-	
-	def dispatch void internalDoGenerate(JvmAnnotationType type, IFileSystemAccess fsa) {
+	def dispatch void internalDoGenerate(JvmDeclaredType type, IFileSystemAccess fsa) {
+		if (DisableCodeGenerationAdapter::isDisabled(type))
+			return;
 		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
 	}
 	
 	def CharSequence generateType(JvmDeclaredType type) {
+		
 		val importManager = new ImportManager(true, type)
 		val bodyAppendable = createAppendable(type, importManager)
 		generateBody(type, bodyAppendable)
@@ -117,12 +115,13 @@ class JvmModelGenerator implements IGenerator {
 		return importAppendable
 	}
 	
+	
 	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable) {
 		generateJavaDoc(appendable)
 		val childAppendable = appendable.trace(it)
 		generateAnnotations(childAppendable, true)
 		generateModifier(childAppendable)
-		if (interface) {
+		if (isInterface) {
 			childAppendable.append("interface ")
 		} else {
 			childAppendable.append("class ")
@@ -265,11 +264,12 @@ class JvmModelGenerator implements IGenerator {
 			]
 			appendable.append(" ")
 		}]
-		if (it instanceof JvmGenericType && (it as JvmGenericType).interface) {
+		if (it instanceof JvmGenericType && (it as JvmGenericType).isInterface) {
 			commaDelimited.apply(superTypes, "extends")
 		} else {
 			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
-			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).interface).head
+			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).isInterface).head
+			
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
 			if (superClazz != null) {
 				appendable.append("extends ")
