@@ -60,6 +60,7 @@ public class XtendFormatter {
 		format.renderToEdits(offset, length)		
 	}
 	
+	
 	def void format(XtextResource res, int offset, int length, RendererConfiguration cfg, (int, int, String)=>void out) {
 		format(res, offset, length, cfg).forEach[e|out.apply(e.offset, e.length, e.text)]
 	}
@@ -209,7 +210,10 @@ public class XtendFormatter {
 				val op = call.nodeForKeyword(if(call.nullSafe) "?." else if(call.spreading) "*." else ".")
 				format += op.prepend[noSpace]
 				
-				if(format.fitsIntoLine(callOffset, callLength, [ f | formatFeatureCallParams(call.memberCallArguments, f) ])) {
+				if(format.fitsIntoLine(callOffset, callLength, [ f |
+					f += op.append[noSpace] 
+					formatFeatureCallParams(call.memberCallArguments, f)
+				])) {
 					format += op.append[noSpace]
 				} else {
 					format += op.append[newLine]

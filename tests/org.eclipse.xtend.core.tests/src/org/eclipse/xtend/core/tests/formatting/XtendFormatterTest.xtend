@@ -393,6 +393,18 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatMemberFeatureCall2() {
+		assertFormattedExpression('''
+			val ML1 = "x".substring(0).substring(1)
+		''', '''
+			val ML1 = "x"
+			.
+			substring(0)
+			.
+			substring(1)
+		''')	
+	}
+	
 	@Test def formatBinaryExpression1() {
 		assertFormattedExpression('''
 			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +
