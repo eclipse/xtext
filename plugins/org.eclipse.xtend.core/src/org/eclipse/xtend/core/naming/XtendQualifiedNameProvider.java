@@ -13,7 +13,9 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -47,6 +49,8 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 			return getFullyQualifiedName(obj.eContainer());
 		}
 		if (obj instanceof JvmGenericType
+			|| obj instanceof JvmAnnotationType
+			|| obj instanceof JvmEnumerationType
 			|| obj instanceof JvmOperation
 			|| obj instanceof JvmConstructor
 			|| obj instanceof JvmField

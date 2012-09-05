@@ -43,6 +43,7 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -1282,6 +1283,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkJavaKeywordConflict(XtendFunction member) {
+		if (member.eContainer() instanceof XtendAnnotationType && "do".equals(member.getName()))
+			return;
 		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_FUNCTION__NAME);
 		for (JvmTypeParameter p : member.getTypeParameters()) {
 			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);

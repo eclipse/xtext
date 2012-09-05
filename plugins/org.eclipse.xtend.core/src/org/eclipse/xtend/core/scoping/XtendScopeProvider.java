@@ -98,6 +98,9 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		if (contextType instanceof JvmGenericType) { 
 			JvmGenericType inferredJvmType = (JvmGenericType) contextType;
 			XtendClass xtendClass = xtendjvmAssociations.getXtendClass(inferredJvmType);
+			if (xtendClass == null) {
+				return;
+			}
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
 				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;
@@ -160,6 +163,9 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		if (contextType instanceof JvmGenericType) {
 			JvmGenericType inferredJvmType = (JvmGenericType) contextType;
 			final XtendClass xtendClass = this.xtendjvmAssociations.getXtendClass(inferredJvmType);
+			if (xtendClass == null) {
+				return;
+			}
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
 				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;

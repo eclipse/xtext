@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
@@ -72,7 +73,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
@@ -150,13 +153,55 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				associator.associatePrimary(annotationType, inferredAnnotationType);
 				acceptor.accept(inferredAnnotationType).initializeLater(new Procedure1<JvmAnnotationType>() {
 					public void apply(@Nullable JvmAnnotationType p) {
-						initialize(annotationType, inferredAnnotationType);
+						initialize(annotationType, p);
 					}
 				});
+				
+				if (!isEmpty(filter(annotationType.getMembers(),XtendFunction.class))) {
+					final JvmGenericType processingClass = typesFactory.createJvmGenericType();
+					// no code generation, since this class will be interpreted.
+					DisableCodeGenerationAdapter.disableCodeGeneration(processingClass);
+					// no view from outside, no export of descriptions
+					processingClass.setVisibility(JvmVisibility.PRIVATE);
+					processingClass.setPackageName(xtendFile2.getPackage());
+					processingClass.setSimpleName(annotationType.getName()+"Processor");
+					
+					associator.associate(annotationType, processingClass);
+					acceptor.accept(processingClass).initializeLater(new Procedure1<JvmGenericType>() {
+						public void apply(@Nullable JvmGenericType p) {
+							initializeAnnoatationProcessorClass(annotationType, p);
+						}
+					});
+				}
 			}
 		}
 	}
-
+	
+	protected void initializeAnnoatationProcessorClass(XtendAnnotationType source, JvmGenericType processorType) {
+		for (XtendMember member : source.getMembers()) {
+			if (member instanceof XtendField) {
+				XtendField field = (XtendField) member;
+				JvmField jvmField = jvmTypesBuilder.toField(field, field.getName(), field.getType());
+				if (jvmField != null) {
+					processorType.getMembers().add(jvmField);
+					jvmField.setVisibility(JvmVisibility.PRIVATE);
+				}
+			} else if (member instanceof XtendFunction) {
+				XtendFunction function = (XtendFunction) member;
+				JvmOperation method = jvmTypesBuilder.toMethod(function, "doProcess", jvmTypesBuilder.newTypeRef(function, void.class), null);
+				if (method != null) {
+					processorType.getMembers().add(method);
+					method.setVisibility(JvmVisibility.PRIVATE);
+					for (XtendParameter param : function.getParameters()) {
+						final JvmFormalParameter parameter = jvmTypesBuilder.toParameter(param, param.getName(), jvmTypesBuilder.newTypeRef(function, XExpression.class));
+						method.getParameters().add(parameter);
+					}
+					jvmTypesBuilder.setBody(method, function.getExpression());
+				}
+			}
+		}
+	}
+	
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		jvmTypesBuilder.translateAnnotationsTo(filter(source.getAnnotations(), annotationTranslationFilter), inferredJvmType);
