@@ -1842,13 +1842,13 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	def testAnnotationType_1(){
 		assertCompilesTo(
 		'''
-			@interface MyAnnotation { 
+			annotation MyAnnotation { 
 				String x;
 				int y;
 				Class<?>[] value;
 			}
 		''','''
-			public @interface MyAnnotation{
+			public @interface MyAnnotation {
 			  public String x();
 			  public int y();
 			  public Class<? extends Object>[] value();
@@ -1860,18 +1860,32 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	def testAnnotationType_2(){
 		assertCompilesTo(
 		'''
-			@interface MyAnnotation { 
+			annotation MyAnnotation { 
 				String x = 'foo'
 				int y = 42
 				Class<?> value = typeof(String)
 				boolean flag = true
 			}
 		''','''
-			public @interface MyAnnotation{
+			public @interface MyAnnotation {
 			  public String x() default "foo";
 			  public int y() default 42;
 			  public Class<? extends Object> value() default String.class;
 			  public boolean flag() default true;
+			}
+		''')
+	}
+	
+	@Test
+	def testAnnotationType_3(){
+		assertCompilesTo(
+		'''
+			annotation annotation { 
+				String annotation = 'foo'
+			}
+		''','''
+			public @interface annotation {
+			  public String annotation() default "foo";
 			}
 		''')
 	}

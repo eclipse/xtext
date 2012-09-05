@@ -3977,7 +3977,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   @Test
   public void testAnnotationType_1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@interface MyAnnotation { ");
+    _builder.append("annotation MyAnnotation { ");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("String x;");
@@ -3991,7 +3991,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public @interface MyAnnotation{");
+    _builder_1.append("public @interface MyAnnotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String x();");
@@ -4010,7 +4010,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   @Test
   public void testAnnotationType_2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@interface MyAnnotation { ");
+    _builder.append("annotation MyAnnotation { ");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("String x = \'foo\'");
@@ -4027,7 +4027,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public @interface MyAnnotation{");
+    _builder_1.append("public @interface MyAnnotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String x() default \"foo\";");
@@ -4040,6 +4040,27 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean flag() default true;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testAnnotationType_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation annotation { ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String annotation = \'foo\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface annotation {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String annotation() default \"foo\";");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

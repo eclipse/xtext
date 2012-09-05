@@ -157,8 +157,7 @@
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtend#//XtendAnnotationType"/>
               </type>
             </elements>
-            <elements xsi:type="xtext:Keyword" value="@"/>
-            <elements xsi:type="xtext:Keyword" value="interface"/>
+            <elements xsi:type="xtext:Keyword" value="annotation"/>
             <elements xsi:type="xtext:Assignment" feature="name" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
             </elements>
@@ -503,6 +502,7 @@
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/3/@rules.12"/>
         <elements xsi:type="xtext:Keyword" value="create"/>
+        <elements xsi:type="xtext:Keyword" value="annotation"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Parameter">

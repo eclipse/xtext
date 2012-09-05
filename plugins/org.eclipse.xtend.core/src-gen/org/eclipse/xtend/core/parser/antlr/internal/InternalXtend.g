@@ -540,57 +540,53 @@ ruleType returns [EObject current=null]
             grammarAccess.getTypeAccess().getXtendAnnotationTypeAnnotationInfoAction_2_1_0(),
             $current);
     }
-)	otherlv_22='@' 
+)	otherlv_22='annotation' 
     {
-    	newLeafNode(otherlv_22, grammarAccess.getTypeAccess().getCommercialAtKeyword_2_1_1());
-    }
-	otherlv_23='interface' 
-    {
-    	newLeafNode(otherlv_23, grammarAccess.getTypeAccess().getInterfaceKeyword_2_1_2());
+    	newLeafNode(otherlv_22, grammarAccess.getTypeAccess().getAnnotationKeyword_2_1_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getNameValidIDParserRuleCall_2_1_3_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getNameValidIDParserRuleCall_2_1_2_0()); 
 	    }
-		lv_name_24_0=ruleValidID		{
+		lv_name_23_0=ruleValidID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_24_0, 
+        		lv_name_23_0, 
         		"ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_25='{' 
+)	otherlv_24='{' 
     {
-    	newLeafNode(otherlv_25, grammarAccess.getTypeAccess().getLeftCurlyBracketKeyword_2_1_4());
+    	newLeafNode(otherlv_24, grammarAccess.getTypeAccess().getLeftCurlyBracketKeyword_2_1_3());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getMembersAnnotationMemberParserRuleCall_2_1_5_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getMembersAnnotationMemberParserRuleCall_2_1_4_0()); 
 	    }
-		lv_members_26_0=ruleAnnotationMember		{
+		lv_members_25_0=ruleAnnotationMember		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
        		add(
        			$current, 
        			"members",
-        		lv_members_26_0, 
+        		lv_members_25_0, 
         		"AnnotationMember");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_27='}' 
+)*	otherlv_26='}' 
     {
-    	newLeafNode(otherlv_27, grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_2_1_6());
+    	newLeafNode(otherlv_26, grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_2_1_5());
     }
 )))
 ;
@@ -1783,6 +1779,13 @@ ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getValidIDAccess().getCreateKeyword_1()); 
+    }
+
+    |
+	kw='annotation' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValidIDAccess().getAnnotationKeyword_2()); 
     }
 )
     ;

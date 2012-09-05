@@ -38,7 +38,7 @@ Type returns XtendTypeDeclaration :
 		   (members+=Member)*
 	   '}'
 	 |{XtendAnnotationType.annotationInfo = current}
-		'@' 'interface' name=ValidID '{'
+		'annotation' name=ValidID '{'
 		   (members+=AnnotationMember)*
 	   	'}'
 	)
@@ -86,7 +86,7 @@ CreateExtensionInfo:
 ;
 
 ValidID:
-	ID | 'create'
+	ID | 'create' | 'annotation'
 ;
 
 Parameter returns XtendParameter:

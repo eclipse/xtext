@@ -328,8 +328,8 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getImplementsAssignment_2_0_7_1(), "rule__Type__ImplementsAssignment_2_0_7_1");
 					put(grammarAccess.getTypeAccess().getImplementsAssignment_2_0_7_2_1(), "rule__Type__ImplementsAssignment_2_0_7_2_1");
 					put(grammarAccess.getTypeAccess().getMembersAssignment_2_0_9(), "rule__Type__MembersAssignment_2_0_9");
-					put(grammarAccess.getTypeAccess().getNameAssignment_2_1_3(), "rule__Type__NameAssignment_2_1_3");
-					put(grammarAccess.getTypeAccess().getMembersAssignment_2_1_5(), "rule__Type__MembersAssignment_2_1_5");
+					put(grammarAccess.getTypeAccess().getNameAssignment_2_1_2(), "rule__Type__NameAssignment_2_1_2");
+					put(grammarAccess.getTypeAccess().getMembersAssignment_2_1_4(), "rule__Type__MembersAssignment_2_1_4");
 					put(grammarAccess.getAnnotationMemberAccess().getAnnotationsAssignment_1(), "rule__AnnotationMember__AnnotationsAssignment_1");
 					put(grammarAccess.getAnnotationMemberAccess().getTypeAssignment_2_0_1_1(), "rule__AnnotationMember__TypeAssignment_2_0_1_1");
 					put(grammarAccess.getAnnotationMemberAccess().getNameAssignment_2_0_2(), "rule__AnnotationMember__NameAssignment_2_0_2");

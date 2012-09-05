@@ -38,7 +38,7 @@ ruleType :
 				',' ruleJvmParameterizedTypeReference
 			)*
 		)? '{' ruleMember* '}' |
-		'@' 'interface' ruleValidID '{' ruleAnnotationMember* '}'
+		'annotation' ruleValidID '{' ruleAnnotationMember* '}'
 	)
 ;
 
@@ -141,7 +141,8 @@ ruleCreateExtensionInfo :
 // Rule ValidID
 ruleValidID :
 	RULE_ID |
-	'create'
+	'create' |
+	'annotation'
 ;
 
 // Rule Parameter
