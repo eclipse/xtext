@@ -10,6 +10,7 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral
 import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.XbasePackage$Literals
+import java.util.List
 
 class RichStringFormatter {
 	@Inject Provider<RichStringFormatterImpl> provider
@@ -20,6 +21,12 @@ class RichStringFormatter {
 		impl.formatter = formatter
 		impl.document = doc
 		richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
+		for(offs:impl.indentOffsets)
+			doc += new NewLineData(offs, impl.bodyIndent, 0, 0)
+		if(impl.indentOffset > 0 && impl.outdentOffset > 0) {
+			doc += new WhitespaceData(impl.indentOffset, 0, 1, null)
+			doc += new WhitespaceData(impl.outdentOffset, 0, -1, null)
+		}
 	}
 }
 
@@ -31,54 +38,75 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 	@Property FormattableDocument document
 	
 	int offset
-	boolean afterSemanticNewLine = false
-	
+	boolean afterNewLine = false
+	boolean semanticSeen = false
+	RichStringLiteral lastLiteral
+	@Property int bodyIndent = Integer::MAX_VALUE
+	@Property List<Integer> indentOffsets = newArrayList()
+	@Property int indentOffset = -1
+	@Property int outdentOffset = -1
+		
 	def protected literalPrefixLenght(INode node) {
 		switch t:node.text {
 			case t.startsWith("'''"): 3
-			case t.startsWith("\u00AB\u00AB"): 2
-			case t.startsWith("\u00AB"): 1
+			case t.startsWith("»»"): 2
+			case t.startsWith("»"): 1
 			default: 1
 		}
 	}
 	
 	override announceNextLiteral(RichStringLiteral object) {
 		val node = object.nodeForFeature(XbasePackage$Literals::XSTRING_LITERAL__VALUE)
+		if(node.text.startsWith("»"))
+			document += node.prepend[noSpace]
+		if(node.text.endsWith("«"))
+			document += node.append[noSpace]
+			
+		lastLiteral = object
 		offset = node.offset + node.literalPrefixLenght
-//		println('''announceNextLiteral(offset=«offset», object=«object.hashCode»)''')
-		afterSemanticNewLine = false
+//					println('''announceNextLiteral(offset=«offset», object=«object.hashCode»)''')
+		afterNewLine = false
 	}
 	
 	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
-//		println('''acceptSemanticLineBreak(offset=«offset», charCount=«charCount», origin=«origin.hashCode», controlStructureSeen=«controlStructureSeen»)''')
+//				println('''acceptSemanticLineBreak(offset=«offset», charCount=«charCount», origin=«origin.hashCode», controlStructureSeen=«controlStructureSeen»)''')
 		offset = offset + charCount
-		afterSemanticNewLine = true
+		afterNewLine = true
+		semanticSeen = true
 	}
 	
 	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
-//		println('''acceptTemplateLineBreak(offset=«offset», charCount=«charCount», origin=«origin.hashCode»)''')
-		document += newFormattingData(offset -> charCount, [newLine])
+//				println('''acceptTemplateLineBreak(offset=«offset», charCount=«charCount», origin=«origin.hashCode»)''')
+		//		document += newFormattingData(offset -> charCount, [newLine])
+		if(!semanticSeen)
+			indentOffset = offset
 		offset = offset + charCount
-		afterSemanticNewLine = false
+		afterNewLine = true
 	}
 	
 	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
-//		println('''acceptSemanticText(offset=«offset», text="«text»", origin=«origin?.hashCode»)''')
+//				println('''acceptSemanticText(offset=«offset», text="«text»", origin=«origin?.hashCode»)''')
 		offset = offset + text.length
-		afterSemanticNewLine = false
+		afterNewLine = false
+		semanticSeen = true
 	}
 	
 	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
-//		println('''acceptTemplateText(offset=«offset», text="«text»", origin=«origin?.hashCode»)''')
-		val length = text.length 
-		if(length > 0) {
-			if(afterSemanticNewLine)
-				document += new NewLineData(offset, length, 0, 0)
-			else 
-				document += newFormattingData(offset -> length, [ space = document.cfg.getIndentation(1)])
+//				println('''acceptTemplateText(offset=«offset», text="«text»", origin=«origin?.hashCode»)''')
+		if(text.length > 0) {
+			if(afterNewLine && lastLiteral != null) {
+				val node = lastLiteral.nodeForFeature(XbasePackage$Literals::XSTRING_LITERAL__VALUE)
+				if(offset + text.length + 3 == node.offset + node.length) {
+					document += new NewLineData(offset, text.length, 0, 0)
+					outdentOffset = offset - 2
+				} else {
+					bodyIndent = Math::min(bodyIndent, text.length)
+					indentOffsets += offset
+				}
+			}
+			afterNewLine = false
 		}
-		offset = offset + length
-		afterSemanticNewLine = false
+		offset = offset + text.length
 	}
 	
 }
