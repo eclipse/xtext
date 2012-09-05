@@ -21,9 +21,9 @@ public class JdtPreferenceAccess {
   public JdtPreferenceAccess(final IJavaProject project) {
     IProject _project = project.getProject();
     ProjectScope _projectScope = new ProjectScope(_project);
-    ArrayList<IScopeContext> _newArrayList = CollectionLiterals.<IScopeContext>newArrayList(_projectScope, 
-      InstanceScope.INSTANCE, 
-      DefaultScope.INSTANCE);
+    InstanceScope _instanceScope = new InstanceScope();
+    DefaultScope _defaultScope = new DefaultScope();
+    ArrayList<IScopeContext> _newArrayList = CollectionLiterals.<IScopeContext>newArrayList(_projectScope, _instanceScope, _defaultScope);
     this.lookupOrder = _newArrayList;
   }
   

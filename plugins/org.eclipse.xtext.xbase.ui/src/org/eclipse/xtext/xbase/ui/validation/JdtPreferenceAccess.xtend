@@ -16,8 +16,8 @@ class JdtPreferenceAccess {
 	new(IJavaProject project) {
 		lookupOrder = newArrayList(
 			new ProjectScope(project.project),
-			InstanceScope::INSTANCE,
-			DefaultScope::INSTANCE)
+			new InstanceScope,
+			new DefaultScope)
 	}
 	
 	def Severity getSeverity(String key) {
