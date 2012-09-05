@@ -23,6 +23,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.URIUtil;
@@ -40,7 +41,11 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import com.google.inject.Inject;
 import com.google.inject.internal.MoreTypes;
 
+import static java.util.Collections.*;
+
 import static com.google.common.collect.Lists.*;
+
+import static com.google.common.collect.Maps.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -258,39 +263,44 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	public Class<?> compileToClass(String classname, String code) {
+		return compileToClasses(singletonMap(classname, code)).get(classname);
+	}
+	
+	public Map<String,Class<?>> compileToClasses(Map<String,String> sources) {
 		File tempDir = createTempDir();
-		final String classNameAsPath = classname.replace('.',
-				File.separatorChar);
-		final File srcFile = new File(tempDir, classNameAsPath + ".java");
-
-		createFolderStructure(srcFile.getParentFile());
-		final File targetFile = new File(tempDir, classNameAsPath + ".class");
-		if (targetFile.exists())
-			targetFile.delete();
 		try {
-			srcFile.createNewFile();
-			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
+			for (Entry<String, String> entry : sources.entrySet()) {
+				String classname = entry.getKey();
+				String code = entry.getValue();
+				final String classNameAsPath = classname.replace('.', File.separatorChar);
+				final File srcFile = new File(tempDir, classNameAsPath + ".java");
+				createFolderStructure(srcFile.getParentFile());
+				srcFile.createNewFile();
+				Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
+			}
 			errorStream.setDelegate(new ByteArrayOutputStream());
 			StringBuilder sb = new StringBuilder(getComplianceLevelArg());
 			sb.append(" ");
 			sb.append(getClasspathArgs());
 			sb.append(" ");
 			sb.append('\"');
-			sb.append(srcFile.getCanonicalPath());
+			sb.append(tempDir.getCanonicalPath());
 			sb.append('\"');
 			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : "
-						+ errorStream.toString() + "\n" + code);
+						+ errorStream.toString() + "\n" + sources.keySet());
 			final URL url = tempDir.toURI().toURL();
-			URLClassLoader loader = new URLClassLoader(new URL[] { url },
+			final URLClassLoader loader = new URLClassLoader(new URL[] { url },
 					parentClassLoader);
-			Class<?> class1 = loader.loadClass(classname);
-			return class1;
-		} catch (RuntimeException e) {
-			throw e;
+			Map<String,Class<?>> result = newHashMap();
+			for (String name : sources.keySet()) {
+				Class<?> clazz = loader.loadClass(name);
+				result.put(name, clazz);
+			}
+			return result;
 		} catch (Exception e) {
-			throw new WrappedException(e);
+			throw new RuntimeException(e);
 		} finally {
 			cleanUpTmpFolder(tempDir);
 		}
@@ -308,6 +318,10 @@ public class OnTheFlyJavaCompiler {
 		// VM unique temp dir
 		File tempDir = new File(rootTempDir, "otfjc"
 				+ OnTheFlyJavaCompiler.class.hashCode());
+		if (tempDir.exists()) {
+			tempDir.delete();
+		}
+		tempDir.mkdir();
 		return tempDir;
 	}
 

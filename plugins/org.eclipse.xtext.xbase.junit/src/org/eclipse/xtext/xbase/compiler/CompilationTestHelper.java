@@ -17,9 +17,12 @@ import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 
 import com.google.inject.Inject;
+
+import static com.google.common.collect.Maps.*;
 
 /**
  * @author Sven Efftinge
@@ -45,7 +48,7 @@ public class CompilationTestHelper {
 		final boolean[] called = {false};
 		compile(source, new IAcceptor<CompilationTestHelper.Result>() {
 			public void accept(Result r) {
-				Assert.assertEquals(expected.toString(), r.getGeneratedCode());
+				Assert.assertEquals(expected.toString(), r.getSingleGeneratedCode());
 				called[0] = true;
 			}
 		});
@@ -57,30 +60,20 @@ public class CompilationTestHelper {
 	 *   
 	 */
 	public static interface Result {
-		/**
-		 * @return the outlet-relative path of the generated artifact
-		 */
-		String getGeneratedPath();
 		
-		/**
-		 * @return the actual generated code
-		 */
-		String getGeneratedCode();
+		Map<String,String> getGeneratedCode();
+
+		String getGeneratedCode(String typeName);
 		
-		/**
-		 * @return the loaded, validated and fully linked source resource
-		 */
-		Resource getSource();
-		
-		/**
-		 * @return the dynamically loaded class of the generated code.
-		 */
+		String getSingleGeneratedCode();
+
+		Resource getResource();
+
 		Class<?> getCompiledClass();
 		
-		/**
-		 * @return access to all generated artifacts. The key points to the pathesa dn the values are the generated code.
-		 */
-		Map<String,CharSequence> getAllGeneratedResources();
+		Class<?> getCompiledClass(String className);
+
+		Map<String, CharSequence> getAllGeneratedResources();
 	}
 	
 	/**
@@ -96,41 +89,61 @@ public class CompilationTestHelper {
 			validationTestHelper.assertNoErrors(parsed);
 			final InMemoryFileSystemAccess access = new InMemoryFileSystemAccess();
 			generator.doGenerate(parsed.eResource(), access);
-			if (access.getFiles().size() != 1) {
-				throw new AssertionError("Expected one generated Java source, but found "+access.getFiles().keySet());
-			}
-			for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
-				acceptor.accept(new Result() {
-					
-					private Class<?> compiledClass = null;
-
-					public String getGeneratedPath() {
-						return e.getKey();
+			acceptor.accept(new Result() {
+				
+				private Map<String,Class<?>> compiledClasses;
+				private Map<String,String> generatedCode;
+				
+				public Map<String,Class<?>> getCompiledClasses() {
+					if (compiledClasses == null) {
+						compiledClasses = javaCompiler.compileToClasses(getGeneratedCode());
 					}
-
-					public String getGeneratedCode() {
-						return e.getValue().toString();
-					}
-
-					public Resource getSource() {
-						return (Resource) parsed.eResource();
-					}
-
-					public Class<?> getCompiledClass() {
-						if (compiledClass == null) {
+					return compiledClasses;
+				}
+				
+				public Map<String,String> getGeneratedCode() {
+					if (generatedCode == null) {
+						generatedCode = newHashMap();
+						for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
 							String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
-							name = name.replace('/', '.');
-							compiledClass = javaCompiler.compileToClass(name, e.getValue().toString());
+							generatedCode.put(name, e.getValue().toString());
 						}
-						return compiledClass;
 					}
+					return generatedCode;
+				}
 
-					public Map<String, CharSequence> getAllGeneratedResources() {
-						return access.getFiles();
+				public String getGeneratedCode(String typeName) {
+					for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
+						String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
+						if (name.equals(typeName))
+							return e.getValue().toString();
 					}
-					
-				});
-			}
+					return null;
+				}
+				
+				public String getSingleGeneratedCode() {
+					if (access.getFiles().size() == 1)
+						return access.getFiles().values().iterator().next().toString();
+					return null;
+				}
+
+				public Resource getResource() {
+					return (Resource) parsed.eResource();
+				}
+
+				public Class<?> getCompiledClass() {
+					return IterableExtensions.head(getCompiledClasses().values());
+				}
+				
+				public Class<?> getCompiledClass(String className) {
+					return getCompiledClasses().get(className);
+				}
+
+				public Map<String, CharSequence> getAllGeneratedResources() {
+					return access.getFiles();
+				}
+				
+			});
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
