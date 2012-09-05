@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = XtendInjectorProvider.class)
 @SuppressWarnings("all")
-public class AbstractFormatterTest {
+public abstract class AbstractFormatterTest {
   @Inject
   private ParseHelper<XtendFile> _parseHelper;
   
