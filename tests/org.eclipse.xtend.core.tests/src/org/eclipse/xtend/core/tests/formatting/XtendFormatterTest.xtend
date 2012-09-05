@@ -362,6 +362,27 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatConstructor1() {
+		assertFormattedExpression('''
+			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
+				new ArrayList(5, 6, 7, 8), new ArrayList(9, 10, 11, 12),
+				new ArrayList(13, 14, 15, 16))
+		''', '''
+			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))
+		''')	
+	}
+	
+	@Test def formatConstructor2() {
+		assertFormattedExpression('''
+			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
+				new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108,
+					109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),
+				new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))
+		''', '''
+			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))
+		''')	
+	}
+	
 	@Test def formatMemberFeatureCall1() {
 		assertFormattedExpression('''
 			val ML1 = "x".substring(0).substring(1).substring(2).substring(3).
