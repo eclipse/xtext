@@ -385,6 +385,29 @@ public class XtendFormatter {
   }
   
   protected void _format(final XVariableDeclaration expr, final FormattableDocument format) {
+    final INode nameNode = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
+    final INode rightNode = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT);
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _prepend = this._formatterExtensions.prepend(nameNode, _function);
+    format.operator_add(_prepend);
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _append = this._formatterExtensions.append(nameNode, _function_1);
+    format.operator_add(_append);
+    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _prepend_1 = this._formatterExtensions.prepend(rightNode, _function_2);
+    format.operator_add(_prepend_1);
     XExpression _right = expr.getRight();
     this.format(_right, format);
   }

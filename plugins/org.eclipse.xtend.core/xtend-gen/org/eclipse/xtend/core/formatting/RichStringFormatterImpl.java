@@ -1,19 +1,22 @@
 package org.eclipse.xtend.core.formatting;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor.ForLoopOnce;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
-import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -46,7 +49,66 @@ public class RichStringFormatterImpl extends ForLoopOnce {
   
   private int offset;
   
-  private boolean afterSemanticNewLine = false;
+  private boolean afterNewLine = false;
+  
+  private boolean semanticSeen = false;
+  
+  private RichStringLiteral lastLiteral;
+  
+  private int _bodyIndent = Integer.MAX_VALUE;
+  
+  public int getBodyIndent() {
+    return this._bodyIndent;
+  }
+  
+  public void setBodyIndent(final int bodyIndent) {
+    this._bodyIndent = bodyIndent;
+  }
+  
+  private List<Integer> _indentOffsets = new Function0<List<Integer>>() {
+    public List<Integer> apply() {
+      ArrayList<Integer> _newArrayList = CollectionLiterals.<Integer>newArrayList();
+      return _newArrayList;
+    }
+  }.apply();
+  
+  public List<Integer> getIndentOffsets() {
+    return this._indentOffsets;
+  }
+  
+  public void setIndentOffsets(final List<Integer> indentOffsets) {
+    this._indentOffsets = indentOffsets;
+  }
+  
+  private int _indentOffset = new Function0<Integer>() {
+    public Integer apply() {
+      int _minus = (-1);
+      return _minus;
+    }
+  }.apply();
+  
+  public int getIndentOffset() {
+    return this._indentOffset;
+  }
+  
+  public void setIndentOffset(final int indentOffset) {
+    this._indentOffset = indentOffset;
+  }
+  
+  private int _outdentOffset = new Function0<Integer>() {
+    public Integer apply() {
+      int _minus = (-1);
+      return _minus;
+    }
+  }.apply();
+  
+  public int getOutdentOffset() {
+    return this._outdentOffset;
+  }
+  
+  public void setOutdentOffset(final int outdentOffset) {
+    this._outdentOffset = outdentOffset;
+  }
   
   protected int literalPrefixLenght(final INode node) {
     int _switchResult = (int) 0;
@@ -61,14 +123,14 @@ public class RichStringFormatterImpl extends ForLoopOnce {
       }
     }
     if (!_matched) {
-      boolean _startsWith_1 = t.startsWith("\u00AB\u00AB");
+      boolean _startsWith_1 = t.startsWith("\u00BB\u00BB");
       if (_startsWith_1) {
         _matched=true;
         _switchResult = 2;
       }
     }
     if (!_matched) {
-      boolean _startsWith_2 = t.startsWith("\u00AB");
+      boolean _startsWith_2 = t.startsWith("\u00BB");
       if (_startsWith_2) {
         _matched=true;
         _switchResult = 1;
@@ -82,66 +144,103 @@ public class RichStringFormatterImpl extends ForLoopOnce {
   
   public void announceNextLiteral(final RichStringLiteral object) {
     final INode node = this._nodeModelAccess.nodeForFeature(object, Literals.XSTRING_LITERAL__VALUE);
+    String _text = node.getText();
+    boolean _startsWith = _text.startsWith("\u00BB");
+    if (_startsWith) {
+      FormattableDocument _document = this.getDocument();
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _prepend = this._formatterExtensions.prepend(node, _function);
+      _document.operator_add(_prepend);
+    }
+    String _text_1 = node.getText();
+    boolean _endsWith = _text_1.endsWith("\u00AB");
+    if (_endsWith) {
+      FormattableDocument _document_1 = this.getDocument();
+      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _append = this._formatterExtensions.append(node, _function_1);
+      _document_1.operator_add(_append);
+    }
+    this.lastLiteral = object;
     int _offset = node.getOffset();
     int _literalPrefixLenght = this.literalPrefixLenght(node);
     int _plus = (_offset + _literalPrefixLenght);
     this.offset = _plus;
-    this.afterSemanticNewLine = false;
+    this.afterNewLine = false;
   }
   
   public void acceptSemanticLineBreak(final int charCount, final RichStringLiteral origin, final boolean controlStructureSeen) {
     int _plus = (this.offset + charCount);
     this.offset = _plus;
-    this.afterSemanticNewLine = true;
+    this.afterNewLine = true;
+    this.semanticSeen = true;
   }
   
   public void acceptTemplateLineBreak(final int charCount, final RichStringLiteral origin) {
-    FormattableDocument _document = this.getDocument();
-    Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(this.offset), Integer.valueOf(charCount));
-    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.newLine();
-        }
-      };
-    FormattingData _newFormattingData = this._formatterExtensions.newFormattingData(_mappedTo, _function);
-    _document.operator_add(_newFormattingData);
+    boolean _not = (!this.semanticSeen);
+    if (_not) {
+      this.setIndentOffset(this.offset);
+    }
     int _plus = (this.offset + charCount);
     this.offset = _plus;
-    this.afterSemanticNewLine = false;
+    this.afterNewLine = true;
   }
   
   public void acceptSemanticText(final CharSequence text, final RichStringLiteral origin) {
     int _length = text.length();
     int _plus = (this.offset + _length);
     this.offset = _plus;
-    this.afterSemanticNewLine = false;
+    this.afterNewLine = false;
+    this.semanticSeen = true;
   }
   
   public void acceptTemplateText(final CharSequence text, final RichStringLiteral origin) {
-    final int length = text.length();
-    boolean _greaterThan = (length > 0);
+    int _length = text.length();
+    boolean _greaterThan = (_length > 0);
     if (_greaterThan) {
-      if (this.afterSemanticNewLine) {
-        FormattableDocument _document = this.getDocument();
-        NewLineData _newLineData = new NewLineData(this.offset, length, 0, 0);
-        _document.operator_add(_newLineData);
+      boolean _and = false;
+      if (!this.afterNewLine) {
+        _and = false;
       } else {
-        FormattableDocument _document_1 = this.getDocument();
-        Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(this.offset), Integer.valueOf(length));
-        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              FormattableDocument _document = RichStringFormatterImpl.this.getDocument();
-              RendererConfiguration _cfg = _document.getCfg();
-              String _indentation = _cfg.getIndentation(1);
-              it.space = _indentation;
-            }
-          };
-        FormattingData _newFormattingData = this._formatterExtensions.newFormattingData(_mappedTo, _function);
-        _document_1.operator_add(_newFormattingData);
+        boolean _notEquals = (!Objects.equal(this.lastLiteral, null));
+        _and = (this.afterNewLine && _notEquals);
       }
+      if (_and) {
+        final INode node = this._nodeModelAccess.nodeForFeature(this.lastLiteral, Literals.XSTRING_LITERAL__VALUE);
+        int _length_1 = text.length();
+        int _plus = (this.offset + _length_1);
+        int _plus_1 = (_plus + 3);
+        int _offset = node.getOffset();
+        int _length_2 = node.getLength();
+        int _plus_2 = (_offset + _length_2);
+        boolean _equals = (_plus_1 == _plus_2);
+        if (_equals) {
+          FormattableDocument _document = this.getDocument();
+          int _length_3 = text.length();
+          NewLineData _newLineData = new NewLineData(this.offset, _length_3, 0, 0);
+          _document.operator_add(_newLineData);
+          int _minus = (this.offset - 2);
+          this.setOutdentOffset(_minus);
+        } else {
+          int _bodyIndent = this.getBodyIndent();
+          int _length_4 = text.length();
+          int _min = Math.min(_bodyIndent, _length_4);
+          this.setBodyIndent(_min);
+          List<Integer> _indentOffsets = this.getIndentOffsets();
+          _indentOffsets.add(Integer.valueOf(this.offset));
+        }
+      }
+      this.afterNewLine = false;
     }
-    int _plus = (this.offset + length);
-    this.offset = _plus;
-    this.afterSemanticNewLine = false;
+    int _length_5 = text.length();
+    int _plus_3 = (this.offset + _length_5);
+    this.offset = _plus_3;
   }
 }

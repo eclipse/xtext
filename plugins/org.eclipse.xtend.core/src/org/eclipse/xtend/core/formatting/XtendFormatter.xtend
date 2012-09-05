@@ -149,6 +149,11 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XVariableDeclaration expr, FormattableDocument format) {
+		val nameNode = expr.nodeForFeature(XVARIABLE_DECLARATION__NAME)
+		val rightNode = expr.nodeForFeature(XVARIABLE_DECLARATION__RIGHT)
+		format += nameNode.prepend[oneSpace]
+		format += nameNode.append[oneSpace]
+		format += rightNode.prepend[oneSpace]
 		expr.right.format(format)				
 	}
 	
