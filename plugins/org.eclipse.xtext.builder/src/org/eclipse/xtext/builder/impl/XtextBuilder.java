@@ -147,25 +147,26 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		// return early if there's nothing to do.
+		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
+		// and would be expensive to create.
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData).isEmpty())
+			return;
+		
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		if (resourceSet instanceof ResourceSetImpl) {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
 		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData);
-		if (!buildData.isEmpty()) {
-			ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
-			if (participant != null) {
-				participant.build(new BuildContext(this, resourceSet, deltas, type),
-						progress.newChild(1));
-				getProject().getWorkspace().checkpoint(false);
-			} else {
-				progress.worked(1);
-			}
+		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
+		if (participant != null) {
+			participant.build(new BuildContext(this, resourceSet, deltas, type),
+					progress.newChild(1));
+			getProject().getWorkspace().checkpoint(false);
 		} else {
-			progress.worked(2);
+			progress.worked(1);
 		}
 		resourceSet.eSetDeliver(false);
 		resourceSet.getResources().clear();
