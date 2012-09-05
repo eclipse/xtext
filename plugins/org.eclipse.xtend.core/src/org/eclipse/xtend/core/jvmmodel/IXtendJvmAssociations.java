@@ -99,7 +99,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 		}
 
 		public XtendClass getXtendClass(JvmGenericType jvmType) {
-			return (XtendClass) getPrimarySourceElement(jvmType);
+			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
+			if (primarySourceElement instanceof XtendClass) 
+				return (XtendClass) primarySourceElement;
+			return null;
 		}
 
 		public XtendFunction getXtendFunction(JvmOperation jvmOperation) {

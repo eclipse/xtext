@@ -36,7 +36,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	private static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
 
-	private static class TestSetup extends XtendStandaloneSetup {
+	public static class TestSetup extends XtendStandaloneSetup {
 		
 		@Override
 		public Injector createInjector() {

@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.tests.compiler.batch;
 
-import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
@@ -21,7 +21,7 @@ public class XtendInjectorProvider implements IInjectorProvider, IRegistryConfig
 	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
-			this.injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
+			this.injector = new AbstractXtendTestCase.TestSetup().createInjectorAndDoEMFRegistration();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
