@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import org.eclipse.xtext.xbase.XConstructorCall
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -175,6 +176,10 @@ public class XtendFormatter {
 		}
 		if(indented)
 			format += params.last.nodeForEObject.append[decreaseIndentation]
+	}
+	
+	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
+		formatFeatureCallParams(expr.arguments, format)
 	}
 	
 	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {

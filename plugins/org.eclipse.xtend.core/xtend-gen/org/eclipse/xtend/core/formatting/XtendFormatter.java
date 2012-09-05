@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -448,6 +449,11 @@ public class XtendFormatter {
       FormattingData _append = this._formatterExtensions.append(_nodeForEObject, _function);
       format.operator_add(_append);
     }
+  }
+  
+  protected void _format(final XConstructorCall expr, final FormattableDocument format) {
+    EList<XExpression> _arguments = expr.getArguments();
+    this.formatFeatureCallParams(_arguments, format);
   }
   
   protected void _format(final XFeatureCall expr, final FormattableDocument format) {
@@ -1536,6 +1542,9 @@ public class XtendFormatter {
       return;
     } else if (clazz instanceof XClosure) {
       _format((XClosure)clazz, format);
+      return;
+    } else if (clazz instanceof XConstructorCall) {
+      _format((XConstructorCall)clazz, format);
       return;
     } else if (clazz instanceof XForLoopExpression) {
       _format((XForLoopExpression)clazz, format);

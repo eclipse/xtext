@@ -612,6 +612,43 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatConstructor1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(5, 6, 7, 8), new ArrayList(9, 10, 11, 12),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(13, 14, 15, 16))");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatConstructor2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatMemberFeatureCall1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML1 = \"x\".substring(0).substring(1).substring(2).substring(3).");
