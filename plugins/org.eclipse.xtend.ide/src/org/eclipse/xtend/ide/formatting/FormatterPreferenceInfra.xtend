@@ -61,8 +61,10 @@ class FormatterPreferenceInfra {
 		}'''
 			case SettingsData$Category::LINE_WRAPPING: '''
 		class Movies {
-		  val movies = new FileReader('data.csv').readLines.map [ line |  val segments = line.split('  ').iterator
-		  return new Movie(segments.next, Integer::parseInt(segments.next), Double::parseDouble(segments.next), Long::parseLong(segments.next),  segments.toSet)]
+		  def readMovies() {
+		    val movies = new FileReader('data.csv').readLines.map [ line |  val segments = line.split('  ').iterator
+		    return new Movie(segments.next, Integer::parseInt(segments.next), Double::parseDouble(segments.next), Long::parseLong(segments.next),  segments.toSet)]
+		  }
 		}'''
 		}
 	}

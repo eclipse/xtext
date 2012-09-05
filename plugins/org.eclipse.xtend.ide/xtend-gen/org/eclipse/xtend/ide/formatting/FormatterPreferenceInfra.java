@@ -120,10 +120,16 @@ public class FormatterPreferenceInfra {
         _builder_1.append("class Movies {");
         _builder_1.newLine();
         _builder_1.append("  ");
+        _builder_1.append("def readMovies() {");
+        _builder_1.newLine();
+        _builder_1.append("    ");
         _builder_1.append("val movies = new FileReader(\'data.csv\').readLines.map [ line |  val segments = line.split(\'  \').iterator");
         _builder_1.newLine();
-        _builder_1.append("  ");
+        _builder_1.append("    ");
         _builder_1.append("return new Movie(segments.next, Integer::parseInt(segments.next), Double::parseDouble(segments.next), Long::parseLong(segments.next),  segments.toSet)]");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("}");
         _builder_1.newLine();
         _builder_1.append("}");
         _switchResult = _builder_1;
