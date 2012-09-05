@@ -75,7 +75,7 @@ public class XbaseResourceDescriptionStrategy extends DefaultResourceDescription
 		if (eObject instanceof JvmGenericType) {
 			JvmGenericType genericType = (JvmGenericType) eObject;
 			if (genericType.isInterface())
-				userData.put(SIGNATURE_HASH_KEY, Boolean.TRUE.toString());
+				userData.put(IS_INTERFACE, Boolean.TRUE.toString());
 		}
 	}
 }
