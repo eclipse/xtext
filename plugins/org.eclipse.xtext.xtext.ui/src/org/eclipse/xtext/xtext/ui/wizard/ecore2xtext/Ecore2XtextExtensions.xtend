@@ -249,7 +249,7 @@ def static boolean isID(EStructuralFeature it) {
 	def static boolean needsConcreteRule(EClassifier eClassifier) {
 		switch(eClassifier) {
 			EClass: 
-				!eClassifier.^abstract && !eClassifier.interface
+				!eClassifier.^abstract && !eClassifier.isInterface
 			EClassifier:
 				true
 			default:

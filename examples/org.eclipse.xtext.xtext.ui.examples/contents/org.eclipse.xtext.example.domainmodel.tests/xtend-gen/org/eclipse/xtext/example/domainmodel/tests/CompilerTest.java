@@ -148,8 +148,8 @@ public class CompilerTest {
           _builder.append("}");
           _builder.newLine();
           String _string = _builder.toString();
-          String _generatedCode = it.getGeneratedCode();
-          Assert.assertEquals(_string, _generatedCode);
+          String _singleGeneratedCode = it.getSingleGeneratedCode();
+          Assert.assertEquals(_string, _singleGeneratedCode);
         }
       };
     this._compilationTestHelper.compile(_builder, new IAcceptor<Result>() {

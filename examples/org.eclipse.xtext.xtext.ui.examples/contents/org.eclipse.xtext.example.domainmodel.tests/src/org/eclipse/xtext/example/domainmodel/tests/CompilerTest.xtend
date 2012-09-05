@@ -68,7 +68,7 @@ class CompilerTest {
 			    return result;
 			  }
 			}
-		'''.toString, generatedCode)
+		'''.toString, getSingleGeneratedCode)
 		]
 	}
 	

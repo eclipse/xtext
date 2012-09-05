@@ -63,6 +63,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
@@ -137,23 +138,11 @@ public class JvmModelGenerator implements IGenerator {
   protected void _internalDoGenerate(final EObject obj, final IFileSystemAccess fsa) {
   }
   
-  protected void _internalDoGenerate(final JvmGenericType type, final IFileSystemAccess fsa) {
-    String _qualifiedName = type.getQualifiedName();
-    String _replace = _qualifiedName.replace(".", "/");
-    String _plus = (_replace + ".java");
-    CharSequence _generateType = this.generateType(type);
-    fsa.generateFile(_plus, _generateType);
-  }
-  
-  protected void _internalDoGenerate(final JvmEnumerationType type, final IFileSystemAccess fsa) {
-    String _qualifiedName = type.getQualifiedName();
-    String _replace = _qualifiedName.replace(".", "/");
-    String _plus = (_replace + ".java");
-    CharSequence _generateType = this.generateType(type);
-    fsa.generateFile(_plus, _generateType);
-  }
-  
-  protected void _internalDoGenerate(final JvmAnnotationType type, final IFileSystemAccess fsa) {
+  protected void _internalDoGenerate(final JvmDeclaredType type, final IFileSystemAccess fsa) {
+    boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(type);
+    if (_isDisabled) {
+      return;
+    }
     String _qualifiedName = type.getQualifiedName();
     String _replace = _qualifiedName.replace(".", "/");
     String _plus = (_replace + ".java");
@@ -1552,14 +1541,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
-    if (type instanceof JvmAnnotationType) {
-      _internalDoGenerate((JvmAnnotationType)type, fsa);
-      return;
-    } else if (type instanceof JvmEnumerationType) {
-      _internalDoGenerate((JvmEnumerationType)type, fsa);
-      return;
-    } else if (type instanceof JvmGenericType) {
-      _internalDoGenerate((JvmGenericType)type, fsa);
+    if (type instanceof JvmDeclaredType) {
+      _internalDoGenerate((JvmDeclaredType)type, fsa);
       return;
     } else if (type != null) {
       _internalDoGenerate(type, fsa);
