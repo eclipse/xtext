@@ -64,14 +64,17 @@ class NodeModelAccess {
 		}
 	}
 	
-		def protected ILeafNode findNextLeaf(INode node, (ILeafNode) => boolean matches) {
-		if(node instanceof ILeafNode && matches.apply(node as ILeafNode))
-			return node as ILeafNode
-		val ni = new NodeIterator(node)
-		while(ni.hasNext) {
-			val next = ni.next
-			if(next instanceof ILeafNode && matches.apply(next as ILeafNode))
-				return next as ILeafNode
+	
+	def protected ILeafNode findNextLeaf(INode node, (ILeafNode) => boolean matches) {
+		if(node != null) {
+			if(node instanceof ILeafNode && matches.apply(node as ILeafNode))
+				return node as ILeafNode
+			val ni = new NodeIterator(node)
+			while(ni.hasNext) {
+				val next = ni.next
+				if(next instanceof ILeafNode && matches.apply(next as ILeafNode))
+					return next as ILeafNode
+			}
 		}
 	}
 	

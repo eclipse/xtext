@@ -104,7 +104,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 	@Override
 	protected void doUpdatePreview() {
-		//TODO	throws an NPE formatterPreview.doFormat(fWorkingValues);
+		formatterPreview.doFormat(fWorkingValues);
 	}
 
 	/**

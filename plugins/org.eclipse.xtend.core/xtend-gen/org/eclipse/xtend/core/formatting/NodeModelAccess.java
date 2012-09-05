@@ -197,36 +197,39 @@ public class NodeModelAccess {
   }
   
   protected ILeafNode findNextLeaf(final INode node, final Function1<? super ILeafNode,? extends Boolean> matches) {
-    boolean _and = false;
-    if (!(node instanceof ILeafNode)) {
-      _and = false;
-    } else {
-      Boolean _apply = matches.apply(((ILeafNode) node));
-      _and = ((node instanceof ILeafNode) && (_apply).booleanValue());
-    }
-    if (_and) {
-      return ((ILeafNode) node);
-    }
-    NodeIterator _nodeIterator = new NodeIterator(node);
-    final NodeIterator ni = _nodeIterator;
-    boolean _hasNext = ni.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
-      {
-        final INode next = ni.next();
-        boolean _and_1 = false;
-        if (!(next instanceof ILeafNode)) {
-          _and_1 = false;
-        } else {
-          Boolean _apply_1 = matches.apply(((ILeafNode) next));
-          _and_1 = ((next instanceof ILeafNode) && (_apply_1).booleanValue());
-        }
-        if (_and_1) {
-          return ((ILeafNode) next);
-        }
+    boolean _notEquals = (!Objects.equal(node, null));
+    if (_notEquals) {
+      boolean _and = false;
+      if (!(node instanceof ILeafNode)) {
+        _and = false;
+      } else {
+        Boolean _apply = matches.apply(((ILeafNode) node));
+        _and = ((node instanceof ILeafNode) && (_apply).booleanValue());
       }
-      boolean _hasNext_1 = ni.hasNext();
-      _while = _hasNext_1;
+      if (_and) {
+        return ((ILeafNode) node);
+      }
+      NodeIterator _nodeIterator = new NodeIterator(node);
+      final NodeIterator ni = _nodeIterator;
+      boolean _hasNext = ni.hasNext();
+      boolean _while = _hasNext;
+      while (_while) {
+        {
+          final INode next = ni.next();
+          boolean _and_1 = false;
+          if (!(next instanceof ILeafNode)) {
+            _and_1 = false;
+          } else {
+            Boolean _apply_1 = matches.apply(((ILeafNode) next));
+            _and_1 = ((next instanceof ILeafNode) && (_apply_1).booleanValue());
+          }
+          if (_and_1) {
+            return ((ILeafNode) next);
+          }
+        }
+        boolean _hasNext_1 = ni.hasNext();
+        _while = _hasNext_1;
+      }
     }
     return null;
   }

@@ -7,7 +7,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
-  public void formatClass() {
+  public void formatClass1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -18,6 +18,19 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package foo class bar{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClass2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{}");
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
