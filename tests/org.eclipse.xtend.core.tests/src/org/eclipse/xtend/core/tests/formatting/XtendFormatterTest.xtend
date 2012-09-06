@@ -271,7 +271,16 @@ class XtendFormatterTest extends AbstractFormatterTest {
 				println("bar")
 			}
 		''')
-		
+	}
+	
+	@Test def formatIfElse3() {
+		assertFormattedExpression('''
+			if(true) {
+				println("foo")
+			} else if(false) {
+				println("bar")
+			}
+		''')
 	}
 			
 	@Test def formatFor1() {

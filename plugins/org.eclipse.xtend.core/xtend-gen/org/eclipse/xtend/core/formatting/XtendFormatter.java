@@ -1239,8 +1239,7 @@ public class XtendFormatter {
   
   protected void _format(final XIfExpression expr, final FormattableDocument format) {
     EObject _eContainer = expr.eContainer();
-    boolean _not = (!(_eContainer instanceof XBlockExpression));
-    if (_not) {
+    if ((_eContainer instanceof XVariableDeclaration)) {
       ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "if");
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
@@ -1289,8 +1288,8 @@ public class XtendFormatter {
     if ((_then_1 instanceof XBlockExpression)) {
       _or_2 = true;
     } else {
-      boolean _not_1 = (!multiline);
-      _or_2 = ((_then_1 instanceof XBlockExpression) || _not_1);
+      boolean _not = (!multiline);
+      _or_2 = ((_then_1 instanceof XBlockExpression) || _not);
     }
     if (_or_2) {
       final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
@@ -1346,8 +1345,8 @@ public class XtendFormatter {
     if ((_else_3 instanceof XBlockExpression)) {
       _or_3 = true;
     } else {
-      boolean _not_2 = (!multiline);
-      _or_3 = ((_else_3 instanceof XBlockExpression) || _not_2);
+      boolean _not_1 = (!multiline);
+      _or_3 = ((_else_3 instanceof XBlockExpression) || _not_1);
     }
     if (_or_3) {
       final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
