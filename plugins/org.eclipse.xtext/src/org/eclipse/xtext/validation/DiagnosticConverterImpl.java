@@ -60,18 +60,12 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 
 	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic,
 			IAcceptor<Issue> acceptor) {
-		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
+		Severity severity = getSeverity(diagnostic);
+		if (severity == null)
 			return;
 		IssueImpl issue = new Issue.IssueImpl();
-		issue.setSeverity(Severity.ERROR);
-		switch (diagnostic.getSeverity()) {
-			case org.eclipse.emf.common.util.Diagnostic.WARNING:
-				issue.setSeverity(Severity.WARNING);
-				break;
-			case org.eclipse.emf.common.util.Diagnostic.INFO:
-				issue.setSeverity(Severity.INFO);
-				break;
-		}
+		issue.setSeverity(severity);
+		
 		IssueLocation locationData = getLocationData(diagnostic);
 		if (locationData != null) {
 			issue.setLineNumber(locationData.lineNumber);
@@ -81,21 +75,50 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
+
+		issue.setCode(getIssueCode(diagnostic));
+		
 		if (diagnostic instanceof AbstractValidationDiagnostic) {
 			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
 			issue.setType(diagnosticImpl.getCheckType());
-			issue.setCode(diagnosticImpl.getIssueCode());
 			issue.setData(diagnosticImpl.getIssueData());
 		} else {
 			// default to FAST
 			issue.setType(CheckType.FAST);
-			issue.setCode(diagnostic.getSource() + "." + diagnostic.getCode());
 		}
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		issue.setMessage(diagnostic.getMessage());
 		//		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		acceptor.accept(issue);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String getIssueCode(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getIssueCode();
+		} else {
+			return diagnostic.getSource() + "." + diagnostic.getCode();
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected Severity getSeverity(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
+			return null;
+		switch (diagnostic.getSeverity()) {
+			case org.eclipse.emf.common.util.Diagnostic.WARNING:
+				return Severity.WARNING;
+			case org.eclipse.emf.common.util.Diagnostic.INFO:
+				return Severity.INFO;
+			default :
+				return Severity.ERROR;
+		}
 	}
 
 	protected EObject getCauser(org.eclipse.emf.common.util.Diagnostic diagnostic) {
