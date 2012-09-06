@@ -22,8 +22,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -37,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -53,6 +56,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -68,6 +74,12 @@ public class OrganizeImports {
 	
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
 	
 	public String getOrganizedImportSection(XtextResource state) {
 		ReferenceAcceptor acceptor = intitializeReferenceAcceptor(state);
@@ -155,7 +167,15 @@ public class OrganizeImports {
 		TreeIterator<EObject> contents = EcoreUtil.getAllContents(xtendFile, true);
 		while (contents.hasNext()) {
 			EObject next = contents.next();
-			if (next instanceof JvmTypeReference) {
+			if (next instanceof XtendTypeDeclaration) {
+				Set<EObject> elements = associations.getJvmElements(next);
+				if (!elements.isEmpty()) {
+					EObject type = elements.iterator().next();
+					if (type instanceof JvmDeclaredType) {
+						acceptor.setThisType((JvmDeclaredType) type);
+					}
+				}
+			} else if (next instanceof JvmTypeReference) {
 				acceptor.acceptType((JvmTypeReference) next);
 			} else if (next instanceof XAnnotation) {
 				acceptor.acceptType(((XAnnotation) next).getAnnotationType());
@@ -208,9 +228,14 @@ public class OrganizeImports {
 		public Set<JvmType> staticMembers = newLinkedHashSet();
 		public Set<JvmType> staticExtensionMembers = newLinkedHashSet();
 		private Set<String> implicitPackageImports = newLinkedHashSet();
+		private JvmDeclaredType thisType = null;
+		
+		public void setThisType(JvmDeclaredType declaredType) {
+			this.thisType = declaredType;
+		}
 
 		public void acceptType(JvmTypeReference ref) {
-			if (ref instanceof XFunctionTypeRef)
+			if (ref instanceof XFunctionTypeRef || ref instanceof WildcardTypeReference)
 				return;
 			if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
 				return;
@@ -294,11 +319,30 @@ public class OrganizeImports {
 		}
 
 		public void acceptType(JvmType type) {
-			types.add(type);
+			if (type != null && !type.equals(this.thisType)) {
+				types.add(type);
+			}
 		}
 
 		public void acceptStaticImport(JvmMember member) {
-			staticMembers.add(member.getDeclaringType());
+			final JvmDeclaredType declaringType = member.getDeclaringType();
+			JvmDeclaredType currentlyChecked = thisType;
+			while (currentlyChecked != null) {
+				if (currentlyChecked == declaringType)
+					return;
+				final JvmTypeReference typeRefToSuperClass = IterableExtensions.findFirst(currentlyChecked.getSuperTypes(), new Function1<JvmTypeReference, Boolean>(){
+					public Boolean apply(JvmTypeReference type) {
+						if (type.getType() instanceof JvmGenericType) {
+							JvmGenericType genericType = (JvmGenericType) type.getType();
+							return !genericType.isInterface();
+						}
+						return false;
+					}
+				});
+				currentlyChecked = typeRefToSuperClass==null?null: (JvmDeclaredType) typeRefToSuperClass.getType();
+			}
+			
+			staticMembers.add(declaringType);
 		}
 
 		public void acceptStaticExtensionImport(JvmMember member) {
