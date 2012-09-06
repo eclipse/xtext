@@ -38,6 +38,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
@@ -56,9 +57,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -74,9 +72,6 @@ public class OrganizeImports {
 	
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
-	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
 	
 	@Inject
 	private IXtendJvmAssociations associations;
@@ -224,18 +219,24 @@ public class OrganizeImports {
 
 	public static class ReferenceAcceptor implements IImportCollection {
 
+		@Inject
+		private SuperTypeCollector superTypeCollector;
+		
 		public Set<JvmType> types = newLinkedHashSet();
 		public Set<JvmType> staticMembers = newLinkedHashSet();
 		public Set<JvmType> staticExtensionMembers = newLinkedHashSet();
 		private Set<String> implicitPackageImports = newLinkedHashSet();
 		private JvmDeclaredType thisType = null;
 		
+		private Set<JvmType> knownTypesForStaticImports = null;
+		
 		public void setThisType(JvmDeclaredType declaredType) {
 			this.thisType = declaredType;
+			knownTypesForStaticImports = null;
 		}
 
 		public void acceptType(JvmTypeReference ref) {
-			if (ref instanceof XFunctionTypeRef || ref instanceof WildcardTypeReference)
+			if (ref instanceof XFunctionTypeRef)
 				return;
 			if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
 				return;
@@ -325,24 +326,16 @@ public class OrganizeImports {
 		}
 
 		public void acceptStaticImport(JvmMember member) {
-			final JvmDeclaredType declaringType = member.getDeclaringType();
-			JvmDeclaredType currentlyChecked = thisType;
-			while (currentlyChecked != null) {
-				if (currentlyChecked == declaringType)
-					return;
-				final JvmTypeReference typeRefToSuperClass = IterableExtensions.findFirst(currentlyChecked.getSuperTypes(), new Function1<JvmTypeReference, Boolean>(){
-					public Boolean apply(JvmTypeReference type) {
-						if (type.getType() instanceof JvmGenericType) {
-							JvmGenericType genericType = (JvmGenericType) type.getType();
-							return !genericType.isInterface();
-						}
-						return false;
-					}
-				});
-				currentlyChecked = typeRefToSuperClass==null?null: (JvmDeclaredType) typeRefToSuperClass.getType();
+			if (thisType == member.getDeclaringType())
+				return;
+			if (knownTypesForStaticImports == null) {
+				JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+				reference.setType(thisType);
+				knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
 			}
-			
-			staticMembers.add(declaringType);
+			if (knownTypesForStaticImports.contains(member.getDeclaringType()))
+				return;
+			staticMembers.add(member.getDeclaringType());
 		}
 
 		public void acceptStaticExtensionImport(JvmMember member) {
