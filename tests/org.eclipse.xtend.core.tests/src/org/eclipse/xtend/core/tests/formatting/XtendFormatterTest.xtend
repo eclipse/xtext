@@ -273,13 +273,47 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')
 	}
 	
-	@Test def formatIfElse3() {
+	@Test def formatIfElseIf1() {
+		assertFormattedExpression('''
+			if(true)
+				println("foo")
+			else if(false)
+				println("bar")
+		''', '''
+			if(true)
+			println("foo")
+			else if(false)
+			println("bar")
+		''')
+	}
+	
+	@Test def formatIfElseIf2() {
 		assertFormattedExpression('''
 			if(true) {
 				println("foo")
 			} else if(false) {
 				println("bar")
 			}
+		''', '''
+			if(true) {
+			println("foo")
+			} else if(false) {
+			println("bar")
+			}
+		''')
+	}
+	
+	@Test def formatIfElseIf3() {
+		assertFormattedExpression('''
+			if(true) {
+				println("foo")
+			} else if(false)
+				println("bar")
+		''', '''
+			if(true) {
+			println("foo")
+			} else if(false)
+			println("bar")
 		''')
 	}
 			

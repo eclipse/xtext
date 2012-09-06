@@ -452,7 +452,32 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatIfElse3() {
+  public void formatIfElseIf1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("else if(false)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("if(true)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\")");
+    _builder_1.newLine();
+    _builder_1.append("else if(false)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"bar\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatIfElseIf2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true) {");
     _builder.newLine();
@@ -466,7 +491,43 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormattedExpression(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("if(true) {");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\")");
+    _builder_1.newLine();
+    _builder_1.append("} else if(false) {");
+    _builder_1.newLine();
+    _builder_1.append("println(\"bar\")");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatIfElseIf3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("} else if(false)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("if(true) {");
+    _builder_1.newLine();
+    _builder_1.append("println(\"foo\")");
+    _builder_1.newLine();
+    _builder_1.append("} else if(false)");
+    _builder_1.newLine();
+    _builder_1.append("println(\"bar\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
   
   @Test

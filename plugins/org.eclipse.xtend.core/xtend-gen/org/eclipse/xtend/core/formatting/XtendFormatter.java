@@ -1341,12 +1341,19 @@ public class XtendFormatter {
       }
     }
     boolean _or_3 = false;
+    boolean _or_4 = false;
     XExpression _else_3 = expr.getElse();
-    if ((_else_3 instanceof XBlockExpression)) {
+    if ((_else_3 instanceof XIfExpression)) {
+      _or_4 = true;
+    } else {
+      XExpression _else_4 = expr.getElse();
+      _or_4 = ((_else_3 instanceof XIfExpression) || (_else_4 instanceof XBlockExpression));
+    }
+    if (_or_4) {
       _or_3 = true;
     } else {
       boolean _not_1 = (!multiline);
-      _or_3 = ((_else_3 instanceof XBlockExpression) || _not_1);
+      _or_3 = (_or_4 || _not_1);
     }
     if (_or_3) {
       final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
@@ -1375,11 +1382,11 @@ public class XtendFormatter {
     }
     XExpression _then_2 = expr.getThen();
     this.format(_then_2, format);
-    XExpression _else_4 = expr.getElse();
-    boolean _notEquals_2 = (!Objects.equal(_else_4, null));
+    XExpression _else_5 = expr.getElse();
+    boolean _notEquals_2 = (!Objects.equal(_else_5, null));
     if (_notEquals_2) {
-      XExpression _else_5 = expr.getElse();
-      this.format(_else_5, format);
+      XExpression _else_6 = expr.getElse();
+      this.format(_else_6, format);
     }
   }
   
