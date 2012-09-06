@@ -286,8 +286,8 @@ public class OnTheFlyJavaCompiler {
 			sb.append('\"');
 			sb.append(tempDir.getCanonicalPath());
 			sb.append('\"');
-			System.out
-					.println(sb);
+			if (sources.size() > 1)
+				System.out.println(sb);
 			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : "
