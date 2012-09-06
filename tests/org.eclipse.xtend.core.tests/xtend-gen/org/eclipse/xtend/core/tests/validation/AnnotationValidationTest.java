@@ -23,7 +23,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
   public void testAnnotationValueTypeCheck_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@interface MyAnnotation {");
+      _builder.append("annotation MyAnnotation {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("StringBuilder notAllowed");
@@ -40,7 +40,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
   public void testAnnotationValueTypeCheck_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@interface MyAnnotation {");
+      _builder.append("annotation MyAnnotation {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("Class<? extends StringBuilder>[] allowed1");
@@ -72,7 +72,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
   public void testAnnotationValueTypeCheck_03() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@interface MyAnnotation {");
+      _builder.append("annotation MyAnnotation {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("String[][] notAllowed");
