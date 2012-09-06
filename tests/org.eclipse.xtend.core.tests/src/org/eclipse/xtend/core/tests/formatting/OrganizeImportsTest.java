@@ -419,7 +419,7 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\nimport static extension MyExtensionLib.*", section);
 	}
 	
-	@Test public void testBug380637() throws Exception {
+	@Test public void testBug380637_01() throws Exception {
 		String model =  "class MyExtensionLib {\n" + 
 						"    def static func1 (String a, int b) { " +
 						"       func1(a,b)" +
@@ -429,5 +429,27 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
 		
 		assertEquals("", section);
+	}
+	
+	@Test public void testBug380637_02() throws Exception {
+		String model =  
+				"abstract class MyClass implements org.eclipse.xtext.scoping.IScope {\n" + 
+				"    org.eclipse.xtext.scoping.IScope scope = NULLSCOPE" + 
+				"}";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("\n\nimport org.eclipse.xtext.scoping.IScope", section);
+	}
+	
+	@Test public void testBug380637_03() throws Exception {
+		String model =  
+				"abstract class MyClass extends org.eclipse.xtext.scoping.impl.AbstractScope {\n" + 
+				"    Object field = NULLSCOPE" + 
+				"}";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("\n\nimport org.eclipse.xtext.scoping.impl.AbstractScope", section);
 	}
 }
