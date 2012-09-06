@@ -401,7 +401,7 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 						"\nimport java.util.Map$Entry", section);
 	}
 	
-	@Test public void testBug388933() throws Exception {
+	@Test public void testBug388933_01() throws Exception {
 		String model = 
 				"import static extension MyExtensionLib.*\n" + 
 				"\n" + 
@@ -417,6 +417,21 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 		assertEquals(
 				"\n" +
 				"\nimport static extension MyExtensionLib.*", section);
+	}
+	
+	@Test public void testBug388933_02() throws Exception {
+		String model = 
+				"import static java.util.Arrays.*\n" + 
+				"\n" + 
+				"class C {\n" + 
+				"    var x = asList\n" + 
+				"}";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static java.util.Arrays.*", section);
 	}
 	
 	@Test public void testBug380637_01() throws Exception {

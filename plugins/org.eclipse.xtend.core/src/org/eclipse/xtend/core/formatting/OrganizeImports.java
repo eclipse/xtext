@@ -187,7 +187,7 @@ public class OrganizeImports {
 					if (member instanceof JvmOperation) {
 						JvmOperation operation = (JvmOperation) member;
 						if (operation.isStatic()) {
-							if (operation.getParameters().size() > featureCall.getExplicitArguments().size()) {
+							if (!operation.isVarArgs() && operation.getParameters().size() > featureCall.getExplicitArguments().size()) {
 								acceptor.acceptStaticExtensionImport(operation);
 							} else {
 								acceptor.acceptStaticImport(operation);
