@@ -1,14 +1,14 @@
 package org.eclipse.xtend.core.tests.validation
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.junit.Test
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
-import org.eclipse.xtend.core.validation.IssueCodes
 
 class AnnotationValidationTest extends AbstractXtendTestCase {
 	
@@ -17,7 +17,7 @@ class AnnotationValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testAnnotationValueTypeCheck_01() {
 		val file = parser.parse(''' 
-			@interface MyAnnotation {
+			annotation MyAnnotation {
 				StringBuilder notAllowed
 			}''')
 		helper.assertError(file, XTEND_FIELD, IssueCodes::INVALID_ANNOTATION_VALUE_TYPE)
@@ -25,7 +25,7 @@ class AnnotationValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testAnnotationValueTypeCheck_02() {
 		val file = parser.parse(''' 
-			@interface MyAnnotation {
+			annotation MyAnnotation {
 				Class<? extends StringBuilder>[] allowed1
 				String allowed2
 				boolean allowed3
@@ -38,7 +38,7 @@ class AnnotationValidationTest extends AbstractXtendTestCase {
 	
 	@Test def void testAnnotationValueTypeCheck_03() {
 		val file = parser.parse(''' 
-			@interface MyAnnotation {
+			annotation MyAnnotation {
 				String[][] notAllowed
 			}''')
 		helper.assertError(file, XTEND_FIELD, IssueCodes::INVALID_ANNOTATION_VALUE_TYPE)
