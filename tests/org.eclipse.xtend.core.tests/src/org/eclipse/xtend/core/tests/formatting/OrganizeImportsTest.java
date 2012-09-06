@@ -400,4 +400,22 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\n" +
 						"\nimport java.util.Map$Entry", section);
 	}
+	
+	@Test public void testBug388933() throws Exception {
+		String model = 
+				"import static extension MyExtensionLib.*\n" + 
+				"\n" + 
+				"class MyExtensionLib {\n" + 
+				"    def static func1 (String a, int b) {  }\n" + 
+				"}\n" + 
+				"class MyClient {\n" + 
+				"    def sample (String it) { func1(47)  }\n" + 
+				"}";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static extension MyExtensionLib.*", section);
+	}
 }
