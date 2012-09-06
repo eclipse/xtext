@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtext.xbase.XVariableDeclaration
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -400,7 +401,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XIfExpression expr, FormattableDocument format) {
-		if(!(expr.eContainer instanceof XBlockExpression)) {
+		if(expr.eContainer instanceof XVariableDeclaration) {
 			format += expr.nodeForKeyword("if").append[increaseIndentation]
 			format += expr.nodeForEObject.append[decreaseIndentation]
 		}
