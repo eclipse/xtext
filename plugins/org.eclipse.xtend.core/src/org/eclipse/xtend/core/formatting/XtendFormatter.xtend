@@ -38,6 +38,7 @@ import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XIfExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -421,7 +422,7 @@ public class XtendFormatter {
 			else
 				format += thennode.append[decreaseIndentation]
 		}
-		if(expr.^else instanceof XBlockExpression || !multiline) {
+		if(expr.^else instanceof XIfExpression || expr.^else instanceof XBlockExpression || !multiline) {
 			format += elsenode.prepend[space = " "]
 		} else {
 			format += elsenode.prepend[newLine increaseIndentation]
