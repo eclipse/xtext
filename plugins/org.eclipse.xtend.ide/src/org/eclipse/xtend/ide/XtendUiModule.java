@@ -80,8 +80,10 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.validation.PreferenceAwareDiagnosticConverter;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -289,5 +291,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
 		return org.eclipse.xtend.ide.validator.XtendUIValidator.class;
+	}
+	
+	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
+		return PreferenceAwareDiagnosticConverter.class;
 	}
 }
