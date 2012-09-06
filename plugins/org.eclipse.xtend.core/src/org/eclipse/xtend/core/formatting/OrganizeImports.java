@@ -170,12 +170,19 @@ public class OrganizeImports {
 				if (featureCall.getDeclaringType() == null) {
 					final JvmIdentifiableElement member = featureCall.getFeature();
 					if (member instanceof JvmOperation) {
-						if (((JvmOperation) member).isStatic())
-							acceptor.acceptStaticImport((JvmMember) member);
+						JvmOperation operation = (JvmOperation) member;
+						if (operation.isStatic()) {
+							if (operation.getParameters().size() > featureCall.getExplicitArguments().size()) {
+								acceptor.acceptStaticExtensionImport(operation);
+							} else {
+								acceptor.acceptStaticImport(operation);
+							}
+						}
 					}
 					if (member instanceof JvmField) {
-						if (((JvmField) member).isStatic())
+						if (((JvmField) member).isStatic()) {
 							acceptor.acceptStaticImport((JvmMember) member);
+						}
 					}
 				} else {
 					acceptor.acceptType(featureCall.getDeclaringType());
