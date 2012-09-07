@@ -32,14 +32,8 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 		this.typeFactory = typeFactory;
 	}
 	
-
 	public void initialize(TypeResource typeResource) {
-		ShutUpAboutCompilationErrorsJdtLogger silentLogger = new ShutUpAboutCompilationErrorsJdtLogger();
-		try {
-			typeResource.getContents().add(typeFactory.createType(mirroredType));
-		} finally {
-			silentLogger.uninstall();
-		}
+		typeResource.getContents().add(typeFactory.createType(mirroredType));
 		this.typeResource = typeResource;
 		typeResource.getResourceSet().eAdapters().add(this);
 	}
