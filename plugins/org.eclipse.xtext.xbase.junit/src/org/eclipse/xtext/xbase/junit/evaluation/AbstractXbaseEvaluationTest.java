@@ -1965,6 +1965,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testClosure_30() throws Exception {
+		assertEvaluatesTo("Foo", 
+				"{" +
+					"  new testdata.InterfaceASubClient().getClassName [| 'Foo' ]" +
+				"}");
+	}
+	
 	/**
 	 * @since 2.3
 	 */
