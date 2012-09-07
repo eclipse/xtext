@@ -13,12 +13,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
@@ -31,6 +33,8 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typing.Closures;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -144,7 +148,13 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			final ITreeAppendable appendable, final Later expression, XExpression context) {
 //		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
 		if (expectedType.getIdentifier().equals(Object.class.getName())
-				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
+				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())
+				|| ((expectedType instanceof JvmSynonymTypeReference) 
+					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
+						public boolean apply(@Nullable JvmTypeReference ref) {
+							return EcoreUtil.equals(ref.getType(), functionType.getType());
+						}
+					}))) {
 			// same raw type but different type parameters
 			// at this point we know that we are compatible so we have to convince the Java compiler about that ;-)
 			if (!getTypeConformanceComputer().isConformant(expectedType, functionType)) {
@@ -160,7 +170,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		if (operation == null) {
 			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
-		JvmDeclaredType declaringType = operation.getDeclaringType();
+		JvmType declaringType = (expectedType instanceof JvmParameterizedTypeReference) ? expectedType.getType() : operation.getDeclaringType();
 		final JvmTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
 		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
 				new TypeArgumentContextProvider.AbstractRequest() {
