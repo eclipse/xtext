@@ -764,6 +764,83 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatMemberFeatureCall21() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = \"x\".toString.toString");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\"");
+    _builder_1.newLine();
+    _builder_1.append(".");
+    _builder_1.newLine();
+    _builder_1.append("toString");
+    _builder_1.newLine();
+    _builder_1.append(".");
+    _builder_1.newLine();
+    _builder_1.append("toString");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCall3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCall4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = \"x\".substring(0, 1, 2)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\".substring (");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("0, ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("1, ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("2");
+    _builder_1.newLine();
+    _builder_1.append(")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallBuilder1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("newArrayList(\"x\").map()[]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("newArrayList(\"x\")  .  map  (  )  [  ]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallBuilder2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("newArrayList(\"x\").map()[lenght]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("newArrayList(\"x\")  .  map  (  )  [  lenght  ]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatBinaryExpression1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +");

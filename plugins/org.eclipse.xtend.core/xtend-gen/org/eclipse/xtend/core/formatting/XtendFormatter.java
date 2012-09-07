@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.TextReplacement;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -60,6 +61,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 
 @SuppressWarnings(value = "restriction")
 public class XtendFormatter {
@@ -71,6 +73,9 @@ public class XtendFormatter {
   
   @Inject
   private FormatterExtensions _formatterExtensions;
+  
+  @Inject
+  private XtendGrammarAccess _xtendGrammarAccess;
   
   @Inject
   private RichStringFormatter richStringFormatter;
@@ -418,72 +423,176 @@ public class XtendFormatter {
   protected void _format(final EObject expr, final FormattableDocument format) {
   }
   
-  protected void formatFeatureCallParams(final List<XExpression> params, final FormattableDocument format) {
+  protected void formatFeatureCallParams(final INode open, final List<XExpression> params, final FormattableDocument format) {
+    XExpression _xifexpression = null;
+    boolean _and = false;
+    XExpression _last = IterableExtensions.<XExpression>last(params);
+    boolean _notEquals = (!Objects.equal(_last, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      XExpression _last_1 = IterableExtensions.<XExpression>last(params);
+      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last_1);
+      INode _firstChild = ((ICompositeNode) _nodeForEObject).getFirstChild();
+      EObject _grammarElement = _firstChild.getGrammarElement();
+      XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xtendGrammarAccess.getXMemberFeatureCallAccess();
+      RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
+      boolean _equals = Objects.equal(_grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
+      _and = (_notEquals && _equals);
+    }
+    if (_and) {
+      XExpression _last_2 = IterableExtensions.<XExpression>last(params);
+      _xifexpression = _last_2;
+    }
+    final XExpression builder = _xifexpression;
+    Iterable<XExpression> _xifexpression_1 = null;
+    boolean _notEquals_1 = (!Objects.equal(builder, null));
+    if (_notEquals_1) {
+      int _size = params.size();
+      int _minus = (_size - 1);
+      Iterable<XExpression> _take = IterableExtensions.<XExpression>take(params, _minus);
+      _xifexpression_1 = _take;
+    } else {
+      _xifexpression_1 = params;
+    }
+    final Iterable<XExpression> explicitParams = _xifexpression_1;
     INode node = null;
     boolean indented = false;
-    for (final XExpression arg : params) {
-      {
-        boolean _notEquals = (!Objects.equal(node, null));
-        if (_notEquals) {
-          boolean _fitsIntoLine = this.fitsIntoLine(format, arg);
-          if (_fitsIntoLine) {
-            final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-                public void apply(final FormattingDataInit it) {
-                  it.space = " ";
-                }
-              };
-            FormattingData _append = this._formatterExtensions.append(node, _function);
-            format.operator_add(_append);
-          } else {
-            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-                public void apply(final FormattingDataInit it) {
-                  it.newLine();
-                }
-              };
-            FormattingData _append_1 = this._formatterExtensions.append(node, _function_1);
-            format.operator_add(_append_1);
-            boolean _not = (!indented);
-            if (_not) {
-              final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+    boolean _isEmpty = IterableExtensions.isEmpty(explicitParams);
+    if (_isEmpty) {
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _append = this._formatterExtensions.append(open, _function);
+      format.operator_add(_append);
+    } else {
+      for (final XExpression arg : explicitParams) {
+        {
+          XExpression _head = IterableExtensions.<XExpression>head(explicitParams);
+          boolean _equals_1 = Objects.equal(arg, _head);
+          if (_equals_1) {
+            final INode head = this._nodeModelAccess.nodeForEObject(arg);
+            boolean _fitsIntoLine = this.fitsIntoLine(format, arg);
+            if (_fitsIntoLine) {
+              final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
-                    it.increaseIndentation();
+                    it.noSpace();
                   }
                 };
-              FormattingData _append_2 = this._formatterExtensions.append(node, _function_2);
-              format.operator_add(_append_2);
+              FormattingData _prepend = this._formatterExtensions.prepend(head, _function_1);
+              format.operator_add(_prepend);
+            } else {
+              final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.newLine();
+                  }
+                };
+              FormattingData _prepend_1 = this._formatterExtensions.prepend(head, _function_2);
+              format.operator_add(_prepend_1);
+              boolean _not = (!indented);
+              if (_not) {
+                final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+                    public void apply(final FormattingDataInit it) {
+                      it.increaseIndentation();
+                    }
+                  };
+                FormattingData _prepend_2 = this._formatterExtensions.prepend(head, _function_3);
+                format.operator_add(_prepend_2);
+              }
+              indented = true;
             }
-            indented = true;
+          } else {
+            boolean _notEquals_2 = (!Objects.equal(node, null));
+            if (_notEquals_2) {
+              boolean _fitsIntoLine_1 = this.fitsIntoLine(format, arg);
+              if (_fitsIntoLine_1) {
+                final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+                    public void apply(final FormattingDataInit it) {
+                      it.oneSpace();
+                    }
+                  };
+                FormattingData _append_1 = this._formatterExtensions.append(node, _function_4);
+                format.operator_add(_append_1);
+              } else {
+                final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+                    public void apply(final FormattingDataInit it) {
+                      it.newLine();
+                    }
+                  };
+                FormattingData _append_2 = this._formatterExtensions.append(node, _function_5);
+                format.operator_add(_append_2);
+                boolean _not_1 = (!indented);
+                if (_not_1) {
+                  final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+                      public void apply(final FormattingDataInit it) {
+                        it.increaseIndentation();
+                      }
+                    };
+                  FormattingData _append_3 = this._formatterExtensions.append(node, _function_6);
+                  format.operator_add(_append_3);
+                }
+                indented = true;
+              }
+            }
           }
+          XExpression _last_3 = IterableExtensions.<XExpression>last(explicitParams);
+          boolean _equals_2 = Objects.equal(arg, _last_3);
+          if (_equals_2) {
+            INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(arg);
+            final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.noSpace();
+                }
+              };
+            FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _function_7);
+            format.operator_add(_append_4);
+          }
+          this.format(arg, format);
+          INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(arg);
+          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject_2, ",");
+          node = _immediatelyFollowingKeyword;
         }
-        this.format(arg, format);
-        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(arg);
-        ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
-        node = _immediatelyFollowingKeyword;
       }
     }
     if (indented) {
-      XExpression _last = IterableExtensions.<XExpression>last(params);
-      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last);
-      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+      XExpression _last_3 = IterableExtensions.<XExpression>last(explicitParams);
+      INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(_last_3);
+      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.decreaseIndentation();
           }
         };
-      FormattingData _append = this._formatterExtensions.append(_nodeForEObject, _function);
-      format.operator_add(_append);
+      FormattingData _append_1 = this._formatterExtensions.append(_nodeForEObject_1, _function_1);
+      format.operator_add(_append_1);
+    }
+    boolean _notEquals_2 = (!Objects.equal(builder, null));
+    if (_notEquals_2) {
+      INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(builder);
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      FormattingData _prepend = this._formatterExtensions.prepend(_nodeForEObject_2, _function_2);
+      format.operator_add(_prepend);
+      this.format(builder, format);
     }
   }
   
   protected void _format(final XConstructorCall expr, final FormattableDocument format) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "(");
     EList<XExpression> _arguments = expr.getArguments();
-    this.formatFeatureCallParams(_arguments, format);
+    this.formatFeatureCallParams(_nodeForKeyword, _arguments, format);
   }
   
   protected void _format(final XFeatureCall expr, final FormattableDocument format) {
     boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
     if (_isExplicitOperationCall) {
+      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "(");
       EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
-      this.formatFeatureCallParams(_featureCallArguments, format);
+      this.formatFeatureCallParams(_nodeForKeyword, _featureCallArguments, format);
     } else {
       EList<XExpression> _featureCallArguments_1 = expr.getFeatureCallArguments();
       for (final XExpression arg : _featureCallArguments_1) {
@@ -508,101 +617,162 @@ public class XtendFormatter {
     boolean indented = false;
     List<XMemberFeatureCall> _reverse = ListExtensions.<XMemberFeatureCall>reverse(calls);
     for (final XMemberFeatureCall call : _reverse) {
-      boolean _isExplicitOperationCall = call.isExplicitOperationCall();
-      if (_isExplicitOperationCall) {
+      {
+        final INode featureNode = this._nodeModelAccess.nodeForFeature(call, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
         XExpression _memberCallTarget = call.getMemberCallTarget();
         final INode targetNode = this._nodeModelAccess.nodeForEObject(_memberCallTarget);
-        final INode callNode = this._nodeModelAccess.nodeForEObject(call);
-        int _offset = targetNode.getOffset();
-        int _length = targetNode.getLength();
-        final int callOffset = (_offset + _length);
-        int _offset_1 = callNode.getOffset();
-        int _length_1 = callNode.getLength();
-        int _plus = (_offset_1 + _length_1);
-        final int callLength = (_plus - callOffset);
-        String _xifexpression = null;
-        boolean _isNullSafe = call.isNullSafe();
-        if (_isNullSafe) {
-          _xifexpression = "?.";
-        } else {
-          String _xifexpression_1 = null;
-          boolean _isSpreading = call.isSpreading();
-          if (_isSpreading) {
-            _xifexpression_1 = "*.";
+        boolean _notEquals = (!Objects.equal(targetNode, null));
+        if (_notEquals) {
+          int _offset = targetNode.getOffset();
+          int _length = targetNode.getLength();
+          final int callOffset = (_offset + _length);
+          String _xifexpression = null;
+          boolean _isNullSafe = call.isNullSafe();
+          if (_isNullSafe) {
+            _xifexpression = "?.";
           } else {
-            _xifexpression_1 = ".";
+            String _xifexpression_1 = null;
+            boolean _isSpreading = call.isSpreading();
+            if (_isSpreading) {
+              _xifexpression_1 = "*.";
+            } else {
+              _xifexpression_1 = ".";
+            }
+            _xifexpression = _xifexpression_1;
           }
-          _xifexpression = _xifexpression_1;
-        }
-        final ILeafNode op = this._nodeModelAccess.nodeForKeyword(call, _xifexpression);
-        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.noSpace();
-            }
-          };
-        FormattingData _prepend = this._formatterExtensions.prepend(op, _function);
-        format.operator_add(_prepend);
-        final Procedure1<FormattableDocument> _function_1 = new Procedure1<FormattableDocument>() {
-            public void apply(final FormattableDocument f) {
-              final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.noSpace();
-                  }
-                };
-              FormattingData _append = XtendFormatter.this._formatterExtensions.append(op, _function);
-              f.operator_add(_append);
-              EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-              XtendFormatter.this.formatFeatureCallParams(_memberCallArguments, f);
-            }
-          };
-        boolean _fitsIntoLine = this._formatterExtensions.fitsIntoLine(format, callOffset, callLength, _function_1);
-        if (_fitsIntoLine) {
-          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          final ILeafNode op = this._nodeModelAccess.nodeForKeyword(call, _xifexpression);
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.noSpace();
               }
             };
-          FormattingData _append = this._formatterExtensions.append(op, _function_2);
-          format.operator_add(_append);
-        } else {
-          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-              public void apply(final FormattingDataInit it) {
-                it.newLine();
-              }
-            };
-          FormattingData _append_1 = this._formatterExtensions.append(op, _function_3);
-          format.operator_add(_append_1);
-          boolean _not = (!indented);
-          if (_not) {
-            indented = true;
-            final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+          FormattingData _prepend = this._formatterExtensions.prepend(op, _function);
+          format.operator_add(_prepend);
+          boolean _isExplicitOperationCall = call.isExplicitOperationCall();
+          if (_isExplicitOperationCall) {
+            final INode callNode = this._nodeModelAccess.nodeForEObject(call);
+            int _offset_1 = callNode.getOffset();
+            int _length_1 = callNode.getLength();
+            int _plus = (_offset_1 + _length_1);
+            final int callLength = (_plus - callOffset);
+            final ILeafNode open = this._nodeModelAccess.nodeForKeyword(call, "(");
+            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
-                  it.increaseIndentation();
+                  it.noSpace();
                 }
               };
-            FormattingData _append_2 = this._formatterExtensions.append(op, _function_4);
-            format.operator_add(_append_2);
+            FormattingData _append = this._formatterExtensions.append(featureNode, _function_1);
+            format.operator_add(_append);
+            int _lineLengthBefore = format.lineLengthBefore(callOffset);
+            int _length_2 = featureNode.getLength();
+            int _multiply = (_length_2 * 2);
+            final int shortLenght = (_lineLengthBefore + _multiply);
+            boolean _or = false;
+            RendererConfiguration _cfg = format.getCfg();
+            int _maxLineWidth = _cfg.getMaxLineWidth();
+            boolean _lessThan = (shortLenght < _maxLineWidth);
+            if (_lessThan) {
+              _or = true;
+            } else {
+              final Procedure1<FormattableDocument> _function_2 = new Procedure1<FormattableDocument>() {
+                  public void apply(final FormattableDocument f) {
+                    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+                        public void apply(final FormattingDataInit it) {
+                          it.noSpace();
+                        }
+                      };
+                    FormattingData _append = XtendFormatter.this._formatterExtensions.append(op, _function);
+                    f.operator_add(_append);
+                    EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
+                    XtendFormatter.this.formatFeatureCallParams(open, _memberCallArguments, f);
+                  }
+                };
+              boolean _fitsIntoLine = this._formatterExtensions.fitsIntoLine(format, callOffset, callLength, _function_2);
+              _or = (_lessThan || _fitsIntoLine);
+            }
+            if (_or) {
+              final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.noSpace();
+                  }
+                };
+              FormattingData _append_1 = this._formatterExtensions.append(op, _function_3);
+              format.operator_add(_append_1);
+            } else {
+              final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.newLine();
+                  }
+                };
+              FormattingData _append_2 = this._formatterExtensions.append(op, _function_4);
+              format.operator_add(_append_2);
+              boolean _not = (!indented);
+              if (_not) {
+                indented = true;
+                final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+                    public void apply(final FormattingDataInit it) {
+                      it.increaseIndentation();
+                    }
+                  };
+                FormattingData _append_3 = this._formatterExtensions.append(op, _function_5);
+                format.operator_add(_append_3);
+              }
+            }
+            EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
+            this.formatFeatureCallParams(open, _memberCallArguments, format);
+          } else {
+            int _lineLengthBefore_1 = format.lineLengthBefore(callOffset);
+            int _length_3 = featureNode.getLength();
+            final int shortLenght_1 = (_lineLengthBefore_1 + _length_3);
+            RendererConfiguration _cfg_1 = format.getCfg();
+            int _maxLineWidth_1 = _cfg_1.getMaxLineWidth();
+            boolean _lessThan_1 = (shortLenght_1 < _maxLineWidth_1);
+            if (_lessThan_1) {
+              final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.noSpace();
+                  }
+                };
+              FormattingData _append_4 = this._formatterExtensions.append(op, _function_6);
+              format.operator_add(_append_4);
+            } else {
+              final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    it.newLine();
+                  }
+                };
+              FormattingData _append_5 = this._formatterExtensions.append(op, _function_7);
+              format.operator_add(_append_5);
+              boolean _not_1 = (!indented);
+              if (_not_1) {
+                indented = true;
+                final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
+                    public void apply(final FormattingDataInit it) {
+                      it.increaseIndentation();
+                    }
+                  };
+                FormattingData _append_6 = this._formatterExtensions.append(op, _function_8);
+                format.operator_add(_append_6);
+              }
+            }
+            EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
+            for (final XExpression arg : _memberCallArguments_1) {
+              this.format(arg, format);
+            }
           }
-        }
-        EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-        this.formatFeatureCallParams(_memberCallArguments, format);
-      } else {
-        EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
-        for (final XExpression arg : _memberCallArguments_1) {
-          this.format(arg, format);
         }
       }
     }
     if (indented) {
       XMemberFeatureCall _last = IterableExtensions.<XMemberFeatureCall>last(calls);
       INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last);
-      final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.decreaseIndentation();
           }
         };
-      FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject, _function_5);
-      format.operator_add(_append_3);
+      FormattingData _append = this._formatterExtensions.append(_nodeForEObject, _function);
+      format.operator_add(_append);
     }
   }
   

@@ -39,6 +39,8 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtend.core.services.XtendGrammarAccess
+import org.eclipse.xtext.nodemodel.ICompositeNode
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -46,8 +48,8 @@ public class XtendFormatter {
 	@Inject IWhitespaceInformationProvider whitespaeInfo
 	
 	@Inject extension NodeModelAccess
-	
 	@Inject extension FormatterExtensions
+	@Inject extension XtendGrammarAccess
 	
 	@Inject RichStringFormatter richStringFormatter
 	
@@ -165,13 +167,28 @@ public class XtendFormatter {
 	def protected dispatch void format(EObject expr, FormattableDocument format) {
 	}
 	
-	def protected void formatFeatureCallParams(List<XExpression> params, FormattableDocument format) {
+	def protected void formatFeatureCallParams(INode open, List<XExpression> params, FormattableDocument format) {
+		val builder = if(params.last != null && (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0) params.last
+		val explicitParams = if(builder != null) params.take(params.size -1) else params		
 		var INode node = null
 		var indented = false
-		for(arg : params) {
-			if(node != null) {
+		
+		if(explicitParams.empty) {
+			format += open.append[noSpace]
+		} else for(arg : explicitParams) {
+			if(arg == explicitParams.head) {
+				val head = arg.nodeForEObject
 				if(format.fitsIntoLine(arg)) {
-					format += node.append[space=" "]
+					format += head.prepend[noSpace]
+				} else { 
+					format += head.prepend[newLine]
+					if(!indented)
+						format += head.prepend[increaseIndentation]
+					indented = true
+				}
+			} else if(node != null) {
+				if(format.fitsIntoLine(arg)) {
+					format += node.append[oneSpace]
 				} else { 
 					format += node.append[newLine]
 					if(!indented)
@@ -179,20 +196,27 @@ public class XtendFormatter {
 					indented = true
 				}
 			}
+			if(arg == explicitParams.last) {
+				format += arg.nodeForEObject.append[noSpace]
+			} 
 			arg.format(format)
 			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
 		}
 		if(indented)
-			format += params.last.nodeForEObject.append[decreaseIndentation]
+			format += explicitParams.last.nodeForEObject.append[decreaseIndentation]
+		if(builder != null) {
+			format += builder.nodeForEObject.prepend[noSpace]
+			builder.format(format)
+		}
 	}
 	
 	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
-		formatFeatureCallParams(expr.arguments, format)
+		formatFeatureCallParams(expr.nodeForKeyword("("), expr.arguments, format)
 	}
 	
 	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
 		if(expr.explicitOperationCall)
-			formatFeatureCallParams(expr.featureCallArguments, format)
+			formatFeatureCallParams(expr.nodeForKeyword("("), expr.featureCallArguments, format)
 		else for(arg : expr.featureCallArguments)
 			format(arg, format)
 	}
@@ -208,30 +232,48 @@ public class XtendFormatter {
 		
 		var indented = false
 		for(call:calls.reverse) {
-			if(call.explicitOperationCall) {
-				val targetNode = call.memberCallTarget.nodeForEObject
-				val callNode = call.nodeForEObject
+			val featureNode = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
+			val targetNode = call.memberCallTarget.nodeForEObject
+			if(targetNode != null) {
 				val callOffset = targetNode.offset + targetNode.length
-				val callLength = callNode.offset + callNode.length - callOffset
-				
 				val op = call.nodeForKeyword(if(call.nullSafe) "?." else if(call.spreading) "*." else ".")
 				format += op.prepend[noSpace]
-				
-				if(format.fitsIntoLine(callOffset, callLength, [ f |
-					f += op.append[noSpace] 
-					formatFeatureCallParams(call.memberCallArguments, f)
-				])) {
-					format += op.append[noSpace]
-				} else {
-					format += op.append[newLine]
-					if(!indented) {
-						indented = true
-						format += op.append[increaseIndentation]
+				if(call.explicitOperationCall) {
+					val callNode = call.nodeForEObject
+					val callLength = callNode.offset + callNode.length - callOffset
+					val open = call.nodeForKeyword("(")
+					format += featureNode.append[noSpace]
+					
+					val shortLenght = format.lineLengthBefore(callOffset) + (featureNode.length * 2)
+					
+					if(shortLenght < format.cfg.maxLineWidth || format.fitsIntoLine(callOffset, callLength, [ f |
+						f += op.append[noSpace] 
+						formatFeatureCallParams(open, call.memberCallArguments, f)
+					])) {
+						format += op.append[noSpace]
+					} else {
+						format += op.append[newLine]
+						if(!indented) {
+							indented = true
+							format += op.append[increaseIndentation]
+						}
 					}
-				}
-				formatFeatureCallParams(call.memberCallArguments, format)
-			} else for(arg : call.memberCallArguments)
-				format(arg, format)
+					formatFeatureCallParams(open, call.memberCallArguments, format)
+				} else {
+					val shortLenght = format.lineLengthBefore(callOffset) + featureNode.length
+					if(shortLenght < format.cfg.maxLineWidth) {
+						format += op.append[noSpace]
+					} else {
+						format += op.append[newLine]
+						if(!indented) {
+							indented = true
+							format += op.append[increaseIndentation]
+						}
+					}
+					for(arg : call.memberCallArguments)
+						format(arg, format)
+				} 
+			}
 		}
 		if(indented)
 			format += calls.last.nodeForEObject.append[decreaseIndentation]
