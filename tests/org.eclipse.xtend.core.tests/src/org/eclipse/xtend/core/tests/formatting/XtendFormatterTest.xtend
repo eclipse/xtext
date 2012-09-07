@@ -448,6 +448,58 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatMemberFeatureCall21() {
+		assertFormattedExpression('''
+			val ML1 = "x".toString.toString
+		''', '''
+			val ML1 = "x"
+			.
+			toString
+			.
+			toString
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCall3() {
+		assertFormattedExpression('''
+			val ML1 = "x".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
+		''', '''
+			val ML1 = "x".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCall4() {
+		assertFormattedExpression('''
+			val ML1 = "x".substring(0, 1, 2)
+		''', '''
+			val ML1 = "x".substring (
+			
+			0, 
+			
+			1, 
+			
+			2
+			)
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallBuilder1() {
+		assertFormattedExpression('''
+			newArrayList("x").map()[]
+		''', '''
+			newArrayList("x")  .  map  (  )  [  ]
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallBuilder2() {
+		assertFormattedExpression('''
+			newArrayList("x").map()[lenght]
+		''', '''
+			newArrayList("x")  .  map  (  )  [  lenght  ]
+		''')	
+	}
+	
 	@Test def formatBinaryExpression1() {
 		assertFormattedExpression('''
 			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +
