@@ -401,6 +401,9 @@ public class OnTheFlyJavaCompiler {
 		if (classpath.isEmpty()) {
 			initializeClassPath();
 		}
+		// no classpath
+		if (classpath.isEmpty())
+			return "";
 		for (int i = 0; i < classpath.size(); i++) {
 			sb.append(classpath.get(i));
 			if (i + 1 < classpath.size())
