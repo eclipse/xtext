@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -21,12 +20,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
 
 import com.google.common.collect.Lists;
 
@@ -70,50 +64,6 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 	
 	public void resolveLinkingProxy() {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
-	}
-	
-	@Override
-	@NonNullByDefault
-	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
-		LightweightTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType != null) {
-			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
-				
-				private int invariantIndicator = 0;
-				
-				@Override
-				protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
-					return new WildcardTypeReferenceTraverser() {
-						@Override
-						public void doVisitTypeReference(LightweightTypeReference reference,
-								WildcardTypeReference declaration) {
-							if (invariantIndicator == 1) {
-								outerVisit(declaration.getInvariantBoundSubstitute(), reference);
-							} else {
-								super.doVisitTypeReference(reference, declaration);
-							}
-						}
-					};
-				}
-				
-				@Override
-				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-					return new DeferredParameterizedTypeReferenceTraverser() {
-						@Override
-						protected void doVisitMatchingTypeParameters(ParameterizedTypeReference reference,
-								ParameterizedTypeReference declaration) {
-							try {
-								invariantIndicator++;
-								super.doVisitMatchingTypeParameters(reference, declaration);
-							} finally {
-								invariantIndicator--;
-							}
-						}
-					};
-				}
-			};
-			collector.processPairedReferences(expectedType, type);
-		}
 	}
 	
 	@Override
