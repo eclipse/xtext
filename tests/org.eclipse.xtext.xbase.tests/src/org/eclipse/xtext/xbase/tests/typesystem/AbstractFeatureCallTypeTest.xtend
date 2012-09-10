@@ -753,6 +753,72 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"newArrayList.subList(1,1).subList(1,1).head".resolvesFeatureCallsTo("ArrayList<Object>", "List<Object>", "List<Object>", "Object")
 	}
 	
+	@Test def void testDependentTypeArgumentResolution_01() throws Exception {
+		"{
+			var Iterable<CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<CharSequence>", "ArrayList<CharSequence>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_02() throws Exception {
+		"{
+			var Iterable<? extends CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<? extends CharSequence>", "ArrayList<CharSequence>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_03() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(null, newArrayList)
+		}".resolvesFeatureCallsTo("void", "ArrayList<Object>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_04() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>copyIntoList(null, newArrayList)
+		}".resolvesFeatureCallsTo("void", "ArrayList<String>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_05() throws Exception {
+		"{
+			var Iterable<? super CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<? super CharSequence>", "ArrayList<Object>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_06() throws Exception {
+		"{
+			var Iterable<StringBuffer> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<StringBuffer>", "ArrayList<StringBuffer>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_07() throws Exception {
+		"{
+			var Iterable<? extends StringBuffer> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<? extends StringBuffer>", "ArrayList<StringBuffer>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_08() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(null, newArrayList)
+		}".resolvesFeatureCallsTo("void", "ArrayList<Serializable>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_09() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>constrainedCopyIntoList(null, newArrayList)
+		}".resolvesFeatureCallsTo("void", "ArrayList<String>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_10() throws Exception {
+		"{
+			var Iterable<? super StringBuffer> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".resolvesFeatureCallsTo("void", "Iterable<? super StringBuffer>", "ArrayList<Object>")
+	}
+	
 	@Test def void testDeferredTypeArgumentResolution_002() throws Exception {
 		"{
 			val list = newArrayList

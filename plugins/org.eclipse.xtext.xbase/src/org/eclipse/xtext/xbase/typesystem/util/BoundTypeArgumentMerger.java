@@ -83,6 +83,10 @@ public class BoundTypeArgumentMerger {
 		if (!invariantTypes.isEmpty()) {
 			type = invariantTypes.get(0);
 			variance = VarianceInfo.INVARIANT.mergeDeclaredWithActuals(invariantVariances);
+			if (variance == null && invariantVariances.contains(VarianceInfo.IN) && invariantTypes.size() > 1) {
+				TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
+				type = conformanceComputer.getCommonSuperType(invariantTypes);
+			}
 			if (!outVariances.isEmpty()) {
 				VarianceInfo outVariance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 				variance = VarianceInfo.OUT.mergeInvariance(variance, outVariance);

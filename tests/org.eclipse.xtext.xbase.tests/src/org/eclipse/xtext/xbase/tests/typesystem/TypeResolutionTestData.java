@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,6 +22,15 @@ public class TypeResolutionTestData {
 	static <T> List<T> fixedToList(Iterable<T> iter) { return null; }
 	static <T> List<T> brokenToList(Iterable<? extends T> iter) { return null; }
 	static <T> List<T> brokenToList2(Iterable<? super T> iter) { return null; }
+	
+	static <T> void copyIntoList(Iterable<T> from, List<? super T> to) {}
+	static <T extends Serializable> void constrainedCopyIntoList(Iterable<T> from, List<? super T> to) {}
+	static <T> List<T> copyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
+	static <T extends Serializable> List<T> constrainedCopyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
+	
+	static <T, R> Iterable<R> copyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
+	static <T, R extends T> Iterable<R> constrainedCopyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
+	static <T, R extends CharSequence & Serializable> Iterable<R> constrainedCopyIntoMap2(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
 
 	public static int overloaded(List<? extends CharSequence> list, Object o) {
 		return 1;

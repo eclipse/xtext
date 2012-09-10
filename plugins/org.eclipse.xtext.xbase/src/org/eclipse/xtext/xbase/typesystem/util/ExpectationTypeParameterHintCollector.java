@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * TODO JavaDoc, toString - focus on differences to ActualTypeArgumentCollector and UnboundTypeParameterAwareTypeArgumentCollector
  */
 @NonNullByDefault
-public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypeParameterHintCollector {
+public class ExpectationTypeParameterHintCollector extends DeferredTypeParameterHintCollector {
 
 	protected class DeferredParameterizedTypeReferenceTraverser extends ParameterizedTypeReferenceTraverser {
 		@Override
@@ -46,12 +46,12 @@ public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypePa
 		}
 	}
 
-	public StateAwareDeferredTypeParameterHintCollector(ITypeReferenceOwner owner) {
+	public ExpectationTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
 	}
 	
 	@Override
-	protected final TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
 		return new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
 	}
@@ -60,5 +60,5 @@ public class StateAwareDeferredTypeParameterHintCollector extends DeferredTypePa
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
 		return new DeferredParameterizedTypeReferenceTraverser();
 	}
-
+	
 }

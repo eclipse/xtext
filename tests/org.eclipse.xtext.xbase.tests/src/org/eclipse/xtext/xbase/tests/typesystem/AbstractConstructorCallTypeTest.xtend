@@ -282,6 +282,72 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
         }".resolvesConstructorCallsTo("Double", "Integer");
 	}
 	
+	@Test def void testDependentTypeArgumentResolution_01() throws Exception {
+		"{
+			var Iterable<CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<CharSequence>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_02() throws Exception {
+		"{
+			var Iterable<? extends CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<CharSequence>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_03() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(null, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<Object>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_04() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>copyIntoList(null, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<String>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_05() throws Exception {
+		"{
+			var Iterable<? super CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<Object>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_06() throws Exception {
+		"{
+			var Iterable<StringBuilder> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<StringBuilder>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_07() throws Exception {
+		"{
+			var Iterable<? extends StringBuilder> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<StringBuilder>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_08() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(null, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<Serializable>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_09() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>constrainedCopyIntoList(null, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<String>")
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_10() throws Exception {
+		"{
+			var Iterable<? super StringBuilder> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, new java.util.ArrayList)
+		}".resolvesConstructorCallsTo("ArrayList<Object>")
+	}
+	
 	@Test def void testDeferredTypeArgumentResolution_064() throws Exception {
 		"{
 			val list = newArrayList

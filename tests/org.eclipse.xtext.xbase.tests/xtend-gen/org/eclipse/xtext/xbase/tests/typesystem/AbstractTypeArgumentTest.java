@@ -1721,6 +1721,76 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testDependentTypeArgumentResolution_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<CharSequence> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)\n\t\t}", "CharSequence");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "CharSequence");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<? extends CharSequence> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)\n\t\t}", "? extends CharSequence");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "CharSequence");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_03() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(null, newArrayList)\n\t\t}", "Object");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_04() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>copyIntoList(null, newArrayList)\n\t\t}", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_05() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<? super CharSequence> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)\n\t\t}", "? super CharSequence");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_06() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<String> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)\n\t\t}", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_07() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<? extends String> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)\n\t\t}", "? extends String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_08() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(null, newArrayList)\n\t\t}", "Serializable");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Serializable");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_09() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>constrainedCopyIntoList(null, newArrayList)\n\t\t}", "String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testDependentTypeArgumentResolution_10() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tvar Iterable<? super String> from = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)\n\t\t}", "? super String");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object");
+    this.done(_and);
+  }
+  
+  @Test
   public void testDeferredTypeArgumentResolution_001() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList", "Object");
     this.done(_bindTypeArgumentsTo);

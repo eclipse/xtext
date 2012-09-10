@@ -111,6 +111,7 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
     final Procedure2<String,Integer> _function = new Procedure2<String,Integer>() {
         public void apply(final String typeArgument, final Integer i) {
           final JvmTypeReference actualTypeArgument = actualTypeArguments.get((i).intValue());
+          Assert.assertNotNull(typeArgument, actualTypeArgument);
           String _simpleName = actualTypeArgument.getSimpleName();
           Assert.assertEquals(typeArgument, _simpleName);
         }
@@ -398,6 +399,30 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testExpectationActualMismatch_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_10() throws Exception {
     Assert.fail("fails in old implementation");
   }
   

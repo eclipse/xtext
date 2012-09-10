@@ -83,6 +83,30 @@ public class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTe
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testDependentTypeArgumentResolution_03() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDependentTypeArgumentResolution_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testDeferredTypeArgumentResolution_068() throws Exception {
     Assert.fail("fails in old implementation");
   }
