@@ -32,7 +32,7 @@ public class RendererConfiguration {
     this._indentationLength = indentationLength;
   }
   
-  private int _maxLineWidth = 80;
+  private int _maxLineWidth = 120;
   
   public int getMaxLineWidth() {
     return this._maxLineWidth;

@@ -4,7 +4,7 @@ class RendererConfiguration {
 	@Property String lineSeparator
 	@Property String indentation
 	@Property int indentationLength = 4
-	@Property int maxLineWidth = 80
+	@Property int maxLineWidth = 120
 	
 	def getIndentation(int levels) {
 		if(levels > 0) 
