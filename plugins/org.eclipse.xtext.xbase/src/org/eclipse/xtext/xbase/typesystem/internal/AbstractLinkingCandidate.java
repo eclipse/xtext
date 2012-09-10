@@ -48,7 +48,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StateAwareDeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -257,7 +257,7 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate {
 	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
-			DeferredTypeParameterHintCollector collector = new StateAwareDeferredTypeParameterHintCollector(getState().getReferenceOwner());
+			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getState().getReferenceOwner());
 			collector.processPairedReferences(expectedType, type);
 		}
 	}

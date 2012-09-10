@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -32,7 +31,7 @@ import com.google.common.collect.Lists;
  * <code>
  *   val x = newArrayList
  * </code>
- * where {@code x} has the inferred type {@code List<Unbound[E]>}.
+ * where {@code x} has the inferred type {@code ArrayList<Unbound[E]>}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -167,7 +166,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 * @return the resolved representation. Never <code>null</code>.
 	 */
 	public LightweightTypeReference resolve() {
-		List<LightweightBoundTypeArgument> allHints = getOwner().getAllHints(getHandle());
+		if (internalIsResolved())
+			return resolvedTo;
+		List<LightweightBoundTypeArgument> allHints = getAllHints();
 		if (!allHints.isEmpty() && resolveWithHints(allHints)) {
 			LightweightTypeReference result = internalGetResolvedTo();
 			if (result != null) {
@@ -204,27 +205,6 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return false;
 		LightweightMergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(!inferredHints.isEmpty() ? inferredHints : effectiveHints, getOwner());
 		if (typeArgument != null) {
-			if (!inferredHints.isEmpty() && inferredHints.size() != effectiveHints.size()) {
-				DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getOwner()) {
-					@Override
-					protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
-						return new UnboundTypeReferenceTraverser() {
-							@Override
-							public void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, UnboundTypeReference param) {
-								if (!param.isResolved() && param.getTypeParameter() == reference.getType()) {
-									return;
-								}
-								super.doVisitParameterizedTypeReference(reference, param);
-							}
-						};
-					}
-				};
-				for(LightweightBoundTypeArgument hint: effectiveHints) {
-					if (hint.getSource() != BoundTypeArgumentSource.INFERRED) {
-						collector.processPairedReferences(typeArgument.getTypeReference(), hint.getTypeReference());
-					}
-				}
-			}
 			resolvedTo = typeArgument.getTypeReference();
 			if (resolvedTo != null) {
 				if (varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) {

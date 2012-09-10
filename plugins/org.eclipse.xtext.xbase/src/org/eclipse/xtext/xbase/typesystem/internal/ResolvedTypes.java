@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
@@ -537,15 +538,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
 			}
 			if (resolvedTypeParameters.add(handle)) {
-				List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
-				for(LightweightBoundTypeArgument existingTypeArgument: existingTypeArguments) {
-					if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
-						if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-							UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
-							// resolve similar pending type arguments
-							VarianceInfo definedVarianceInfo = existingTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(existingTypeArgument.getActualVariance());
-							if (definedVarianceInfo == VarianceInfo.INVARIANT) {
-								acceptHint(existingReference.getHandle(), boundTypeArgument);
+				if (boundTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(boundTypeArgument.getActualVariance()) == VarianceInfo.INVARIANT) {
+					List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
+					for(int i = 0; i < existingTypeArguments.size(); i++) {
+						LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
+						if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
+							if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+								UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+								// resolve similar pending type arguments
+								VarianceInfo definedVarianceInfo = existingTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(existingTypeArgument.getActualVariance());
+								if (definedVarianceInfo == VarianceInfo.INVARIANT) {
+									acceptHint(existingReference.getHandle(), boundTypeArgument);
+								}
 							}
 						}
 					}
@@ -623,10 +627,31 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			if (reference instanceof UnboundTypeReference) {
 				Object otherHandle = ((UnboundTypeReference) reference).getHandle();
 				if (seenHandles.add(otherHandle)) {
-					addNonRecursiveHints(getHints(otherHandle), seenHandles, result);
+					addNonRecursiveHints(hint, getHints(otherHandle), seenHandles, result);
 				}
 			} else {
 				result.add(hint);
+			}
+		}
+	}
+	
+	protected void addNonRecursiveHints(LightweightBoundTypeArgument original, List<LightweightBoundTypeArgument> hints, Set<Object> seenHandles,
+			List<LightweightBoundTypeArgument> result) {
+		for(LightweightBoundTypeArgument hint: hints) {
+			LightweightTypeReference reference = hint.getTypeReference();
+			if (reference instanceof UnboundTypeReference) {
+				Object otherHandle = ((UnboundTypeReference) reference).getHandle();
+				if (seenHandles.add(otherHandle)) {
+					addNonRecursiveHints(original, getHints(otherHandle), seenHandles, result);
+				}
+			} else {
+				if (original.getDeclaredVariance() == VarianceInfo.IN && hint.getTypeReference() instanceof WildcardTypeReference) {
+					LightweightBoundTypeArgument delegateHint = new LightweightBoundTypeArgument(
+							hint.getTypeReference().getUpperBoundSubstitute(), original.getSource(), hint.getOrigin(), hint.getDeclaredVariance(), original.getActualVariance());
+					result.add(delegateHint);
+				} else {
+					result.add(hint);
+				}
 			}
 		}
 	}

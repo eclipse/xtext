@@ -119,6 +119,7 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 	def assertTypeArguments(String[] typeArguments, List<JvmTypeReference> actualTypeArguments) {
 		typeArguments.forEach [ typeArgument, i |
 			val actualTypeArgument = actualTypeArguments.get(i)
+			assertNotNull(typeArgument, actualTypeArgument)
 			assertEquals(typeArgument, actualTypeArgument.simpleName)
 		]
 	}
@@ -295,6 +296,19 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 	}
 	
 	@Ignore("fails in old implementation") @Test override testExpectationActualMismatch_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_10() throws Exception {
 		fail("fails in old implementation")
 	}
 	

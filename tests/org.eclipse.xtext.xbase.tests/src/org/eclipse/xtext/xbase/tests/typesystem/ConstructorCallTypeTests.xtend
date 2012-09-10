@@ -75,6 +75,19 @@ class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDependentTypeArgumentResolution_10() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_068() throws Exception {
 		fail("fails in old implementation")
 	}

@@ -1119,6 +1119,72 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		}".bindTypeArgumentsTo("Integer").and("Double").done
 	}
 	
+	@Test def void testDependentTypeArgumentResolution_01() throws Exception {
+		"{
+			var Iterable<CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("CharSequence").and("CharSequence").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_02() throws Exception {
+		"{
+			var Iterable<? extends CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("? extends CharSequence").and("CharSequence").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_03() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(null, newArrayList)
+		}".bindTypeArgumentsTo("Object").and("Object").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_04() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>copyIntoList(null, newArrayList)
+		}".bindTypeArgumentsTo("String").and("String").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_05() throws Exception {
+		"{
+			var Iterable<? super CharSequence> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::copyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("? super CharSequence").and("Object").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_06() throws Exception {
+		"{
+			var Iterable<String> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("String").and("String").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_07() throws Exception {
+		"{
+			var Iterable<? extends String> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("? extends String").and("String").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_08() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(null, newArrayList)
+		}".bindTypeArgumentsTo("Serializable").and("Serializable").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_09() throws Exception {
+		"{
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::<String>constrainedCopyIntoList(null, newArrayList)
+		}".bindTypeArgumentsTo("String").and("String").done
+	}
+	
+	@Test def void testDependentTypeArgumentResolution_10() throws Exception {
+		"{
+			var Iterable<? super String> from = null
+			org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::constrainedCopyIntoList(from, newArrayList)
+		}".bindTypeArgumentsTo("? super String").and("Object").done
+	}
+	
 	@Test def void testDeferredTypeArgumentResolution_001() throws Exception {
 		"newArrayList".bindTypeArgumentsTo("Object").done
 	}
