@@ -59,9 +59,12 @@ abstract class AbstractFormatterTest {
 		val root = (parsed.eResource as XtextResource).parseResult.rootNode
 		val oldDocument = root.text
 		val edits = <Triple<Integer, Integer, String>>newArrayList() 
+		val rc = new RendererConfiguration() => [
+			maxLineWidth = 80
+		]
 		
 		
-		formatter.format(parsed.eResource as XtextResource, 0, oldDocument.length, new RendererConfiguration(), [int offset, int length, String replacement |
+		formatter.format(parsed.eResource as XtextResource, 0, oldDocument.length, rc, [int offset, int length, String replacement |
 //			println("offs: "+offset + " -> " + oldDocument.subSequence(Math::max(0, offset - 5), offset) + "|" + oldDocument.subSequence(offset, Math::min(offset + 5, oldDocument.length)))
 			if(offset < 0) throw new IllegalStateException('''Offset to small. Offset: «offset»''') 
 			if(length < 0) throw new IllegalStateException('''Length to small. Length: «length»''') 

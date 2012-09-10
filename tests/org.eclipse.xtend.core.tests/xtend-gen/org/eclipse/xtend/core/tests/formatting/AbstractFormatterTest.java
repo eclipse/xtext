@@ -27,6 +27,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -130,10 +132,16 @@ public abstract class AbstractFormatterTest {
       final ICompositeNode root = _parseResult.getRootNode();
       final String oldDocument = root.getText();
       final ArrayList<Triple<Integer,Integer,String>> edits = CollectionLiterals.<Triple<Integer,Integer,String>>newArrayList();
+      RendererConfiguration _rendererConfiguration = new RendererConfiguration();
+      final Procedure1<RendererConfiguration> _function = new Procedure1<RendererConfiguration>() {
+          public void apply(final RendererConfiguration it) {
+            it.setMaxLineWidth(80);
+          }
+        };
+      final RendererConfiguration rc = ObjectExtensions.<RendererConfiguration>operator_doubleArrow(_rendererConfiguration, _function);
       Resource _eResource_2 = parsed.eResource();
       int _length = oldDocument.length();
-      RendererConfiguration _rendererConfiguration = new RendererConfiguration();
-      final Procedure3<Integer,Integer,String> _function = new Procedure3<Integer,Integer,String>() {
+      final Procedure3<Integer,Integer,String> _function_1 = new Procedure3<Integer,Integer,String>() {
           public void apply(final Integer offset, final Integer length, final String replacement) {
             boolean _lessThan = (offset < 0);
             if (_lessThan) {
@@ -226,19 +234,19 @@ public abstract class AbstractFormatterTest {
             edits.add(_create);
           }
         };
-      this.formatter.format(((XtextResource) _eResource_2), 0, _length, _rendererConfiguration, _function);
+      this.formatter.format(((XtextResource) _eResource_2), 0, _length, rc, _function_1);
       int lastOffset = 0;
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder newDocument = _stringBuilder;
       StringBuilder _stringBuilder_1 = new StringBuilder();
       final StringBuilder debugTrace = _stringBuilder_1;
-      final Function1<Triple<Integer,Integer,String>,Integer> _function_1 = new Function1<Triple<Integer,Integer,String>,Integer>() {
+      final Function1<Triple<Integer,Integer,String>,Integer> _function_2 = new Function1<Triple<Integer,Integer,String>,Integer>() {
           public Integer apply(final Triple<Integer,Integer,String> it) {
             Integer _first = it.getFirst();
             return _first;
           }
         };
-      List<Triple<Integer,Integer,String>> _sortBy = IterableExtensions.<Triple<Integer,Integer,String>, Integer>sortBy(edits, _function_1);
+      List<Triple<Integer,Integer,String>> _sortBy = IterableExtensions.<Triple<Integer,Integer,String>, Integer>sortBy(edits, _function_2);
       for (final Triple<Integer,Integer,String> edit : _sortBy) {
         {
           Integer _first = edit.getFirst();
