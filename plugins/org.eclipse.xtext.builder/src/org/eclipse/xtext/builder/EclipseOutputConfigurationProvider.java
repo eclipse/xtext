@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -17,7 +18,6 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -52,8 +52,7 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 
 	public Set<OutputConfiguration> getOutputConfigurations(IProject project) {
 		IPreferenceStore store = getPreferenceStoreAccess().getContextPreferenceStore(project);
-		Set<OutputConfiguration> outputConfigurations = Sets.newHashSetWithExpectedSize(getOutputConfigurations()
-				.size());
+		Set<OutputConfiguration> outputConfigurations = new LinkedHashSet<OutputConfiguration>(getOutputConfigurations().size());
 		for (OutputConfiguration output : getOutputConfigurations()) {
 			OutputConfiguration configuration = createAndOverlayOutputConfiguration(store, output);
 			outputConfigurations.add(configuration);
