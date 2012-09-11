@@ -40,7 +40,6 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
-import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.HashMultimap;
@@ -210,7 +209,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	 * @since 2.4
 	 */
 	protected void createContainer(IContainer container) throws CoreException {
-		ensureExists(container);
+        if (container instanceof IFolder) {
+        		createFolder((IFolder) container);
+        } else {
+        		ensureExists(container);
+        } 
 	}
 
 	protected void ensureParentExists(IFile file) throws CoreException {
@@ -248,7 +251,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	 * @since 2.4
 	 */
 	protected IContainer getContainer(OutputConfiguration outputConfig) {
-		return ResourceUtil.getContainer(project, outputConfig.getOutputDirectory());
+		String path = outputConfig.getOutputDirectory();
+		if (".".equals(path) || "./".equals(path) || "".equals(path)) {
+			return project;
+		}
+		return getFolder(outputConfig);
 	}
 
 	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
