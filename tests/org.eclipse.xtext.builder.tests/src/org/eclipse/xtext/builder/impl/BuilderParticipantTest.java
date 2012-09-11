@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
@@ -73,6 +74,24 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		super.tearDown();
 		participant = null;
 	}
+	
+	@Test public void testGenerateIntoProjectOutputDirectory() throws Exception {
+		IJavaProject project = createJavaProject("testGenerateIntoProjectOutputDirectory");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(), "./");
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./Foo.txt");
+		assertTrue(generatedFile.exists());
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(), ".");
+		file = folder.getFile("Bar" + F_EXT);
+		file.create(new StringInputStream("object Bar"), true, monitor());
+		waitForAutoBuild();
+		generatedFile = project.getProject().getFile("./Bar.txt");
+		assertTrue(generatedFile.exists());
+	}
 
 	@Test public void testCleanUpDerivedResources() throws Exception {
 		IJavaProject project = createJavaProject("foo");
@@ -83,7 +102,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		waitForAutoBuild();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
-		preferenceStoreAccess.getWritablePreferenceStore().setValue(getDefaultOutputDirectoryKey(), "./src2-gen");
+		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(), "./src2-gen");
 		
 		DerivedResourceCleanerJob derivedResourceCleanerJob = getInjector().getInstance(DerivedResourceCleanerJob.class);
 		derivedResourceCleanerJob.setUser(true);
@@ -96,7 +115,6 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		waitForAutoBuild();
 		generatedFile = project.getProject().getFile("./src2-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
-		preferenceStoreAccess.getWritablePreferenceStore().setValue(getDefaultOutputDirectoryKey(), "./src-gen");
 	}
 
 	@Test public void testDefaultConfiguration() throws Exception {

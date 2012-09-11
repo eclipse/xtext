@@ -40,6 +40,7 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.HashMultimap;
@@ -48,6 +49,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay - https://bugs.eclipse.org/bugs/show_bug.cgi?id=386135
  * @since 2.1
  */
 public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
@@ -118,11 +120,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		OutputConfiguration outputConfig = getOutputConfig(outputName);
 		
 		// check output folder exists
-		IFolder folder = getFolder(outputConfig);
-		if (!folder.exists()) {
+		IContainer container = getContainer(outputConfig);
+		if (!container.exists()) {
 			if (outputConfig.isCreateOutputDirectory()) {
 				try {
-					createFolder(folder);
+					createContainer(container);
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -196,8 +198,19 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		file.setDerived(derived);
 	}
 
+	/**
+	 * @deprecated use {@link #createContainer(IContainer)} instead
+	 */
+	@Deprecated
 	protected void createFolder(IFolder folder) throws CoreException {
 		ensureExists(folder);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void createContainer(IContainer container) throws CoreException {
+		ensureExists(container);
 	}
 
 	protected void ensureParentExists(IFile file) throws CoreException {
@@ -223,8 +236,19 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		}
 	}
 
+	/**
+	 * @deprecated use {@link #getContainer(OutputConfiguration)} instead
+	 */
+	@Deprecated
 	protected IFolder getFolder(OutputConfiguration outputConfig) {
 		return project.getFolder(new Path(outputConfig.getOutputDirectory()));
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected IContainer getContainer(OutputConfiguration outputConfig) {
+		return ResourceUtil.getContainer(project, outputConfig.getOutputDirectory());
 	}
 
 	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
@@ -411,8 +435,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	
 	protected IFile getFile(String fileName, String outputName) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
-		IFolder folder = getFolder(configuration);
-		return folder.getFile(new Path(fileName));
+		IContainer container = getContainer(configuration);
+		return container.getFile(new Path(fileName));
 	}
 	
 	/**
