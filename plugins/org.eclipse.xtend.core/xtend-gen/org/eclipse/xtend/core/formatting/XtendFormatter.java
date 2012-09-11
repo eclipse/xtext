@@ -1497,16 +1497,25 @@ public class XtendFormatter {
     for (final XExpression c : children) {
       {
         this.format(c, format);
+        final INode node = this._nodeModelAccess.nodeForEObject(c);
+        final ILeafNode semicolon = this._nodeModelAccess.immediatelyFollowingKeyword(node, ";");
+        final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.noSpace();
+            }
+          };
+        FormattingData _prepend = semicolon==null?(FormattingData)null:this._formatterExtensions.prepend(semicolon, _function_2);
+        format.operator_add(_prepend);
         XExpression _last = IterableExtensions.<XExpression>last(children);
         boolean _notEquals_1 = (!Objects.equal(c, _last));
         if (_notEquals_1) {
-          INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(c);
-          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          INode _elvis = ObjectExtensions.<INode>operator_elvis(semicolon, node);
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.newLine();
               }
             };
-          FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject, _function_2);
+          FormattingData _append_2 = this._formatterExtensions.append(_elvis, _function_3);
           format.operator_add(_append_2);
         }
       }
@@ -1558,6 +1567,18 @@ public class XtendFormatter {
         this.format(c, format);
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(c);
         last = _nodeForEObject;
+        final ILeafNode semicolon = this._nodeModelAccess.immediatelyFollowingKeyword(last, ";");
+        boolean _notEquals = (!Objects.equal(semicolon, null));
+        if (_notEquals) {
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _prepend = this._formatterExtensions.prepend(semicolon, _function_3);
+          format.operator_add(_prepend);
+          last = semicolon;
+        }
       }
     }
     if (indented) {

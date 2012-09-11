@@ -262,6 +262,17 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClosuresSemicolon() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("newArrayList(\"A\", \"b\").filter[ val b = it; b.toUpperCase == b ]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("newArrayList(\"A\", \"b\").filter[ val b = it  ;   b.toUpperCase == b ]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatClosuresEmpty() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -310,6 +321,34 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("val z = it z.toUpperCase == z ");
+    _builder_1.newLine();
+    _builder_1.append("] y.join");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatClosuresMultiLineSemicolon() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = newArrayList(\"A\", \"b\")");
+    _builder.newLine();
+    _builder.append("val y = x.filter [");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val z = it;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("z.toUpperCase == z;");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("y.join");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = newArrayList(\"A\", \"b\") val y = x.filter [");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val z = it  ;   z.toUpperCase == z  ;   ");
     _builder_1.newLine();
     _builder_1.append("] y.join");
     _builder_1.newLine();

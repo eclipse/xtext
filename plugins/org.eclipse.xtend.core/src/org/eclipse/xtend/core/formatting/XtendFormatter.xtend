@@ -473,8 +473,11 @@ public class XtendFormatter {
 			format += open?.append[newLine; increaseIndentation]
 		for(c:children) {
 			c.format(format)
+			val node = c.nodeForEObject
+			val semicolon = node.immediatelyFollowingKeyword(";")
+			format += semicolon?.prepend[ noSpace ]
 			if(c != children.last)
-				format += c.nodeForEObject.append[ newLine ]
+				format += (semicolon ?: node).append[ newLine ]
 		}
 		format += close?.prepend[ newLine; decreaseIndentation ]
 	}
@@ -494,6 +497,11 @@ public class XtendFormatter {
 			}
 			c.format(format)
 			last = c.nodeForEObject
+			val semicolon = last.immediatelyFollowingKeyword(";")
+			if(semicolon != null) {
+				format += semicolon.prepend[noSpace]
+				last = semicolon
+			}
 		}
 		if(indented)
 			format += children.last.nodeForEObject.append[decreaseIndentation]
