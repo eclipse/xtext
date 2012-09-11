@@ -447,6 +447,9 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	def void testFunctionTypes_07()
 	
 	@Test
+	def void testFunctionTypes_08()
+	
+	@Test
 	def void testFunctionTypeAsParameterized_01()
 	
 	@Test
@@ -631,6 +634,13 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		"()=>CharSequence".isNotAssignableFrom("$Function<String, CharSequence>")
 		"(CharSequence)=>String".isNotAssignableFrom("Iterable<CharSequence>")
 		"(String)=>String".isNotAssignableFrom("Comparator<CharSequence>")
+	}
+	
+	@Test
+	def void testDemandConvertedFunctionType_13() {
+		"java.util.Comparator<? super String>".isAssignableFrom("(String, String)=>int")
+		"java.util.Comparator<String>".isAssignableFrom("(CharSequence, CharSequence)=>int")
+		"java.util.Comparator<? super String>".isAssignableFrom("(CharSequence, CharSequence)=>int")
 	}
 }
 
@@ -839,6 +849,12 @@ class AssignabilityTest extends AbstractAssignabilityTest {
 	}
 	
 	@Test
+	override void testFunctionTypes_08() {
+		("()=>long").isNotAssignableFrom("()=>int")
+		("()=>int").isNotAssignableFrom("()=>long")
+	}
+	
+	@Test
 	override testFunctionTypeAsParameterized_01() {
 		"$Procedure1<String>".isAssignableFrom("(CharSequence)=>void")
 		"$Procedure1<? super String>".isAssignableFrom("(CharSequence)=>void")
@@ -1041,7 +1057,7 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 class RawAssignabilityTest extends AbstractAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true))
+		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true))
 	}
 	
 	@Test 
@@ -1236,6 +1252,12 @@ class RawAssignabilityTest extends AbstractAssignabilityTest {
 	override testFunctionTypes_07() {
 		("(T)=>T"->"T extends Integer").isAssignableFrom("(Integer)=>Integer")
 		("(T)=>T"->"T extends Integer").isAssignableFrom("(int)=>int")
+	}
+	
+	@Test
+	override void testFunctionTypes_08() {
+		("()=>long").isAssignableFrom("()=>int")
+		("()=>int").isAssignableFrom("()=>long")
 	}
 	
 	@Test

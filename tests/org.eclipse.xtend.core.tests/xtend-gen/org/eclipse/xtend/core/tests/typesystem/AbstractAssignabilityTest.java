@@ -552,6 +552,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   public abstract void testFunctionTypes_07();
   
   @Test
+  public abstract void testFunctionTypes_08();
+  
+  @Test
   public abstract void testFunctionTypeAsParameterized_01();
   
   @Test
@@ -757,5 +760,12 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isNotAssignableFrom("()=>CharSequence", "$Function<String, CharSequence>");
     this.isNotAssignableFrom("(CharSequence)=>String", "Iterable<CharSequence>");
     this.isNotAssignableFrom("(String)=>String", "Comparator<CharSequence>");
+  }
+  
+  @Test
+  public void testDemandConvertedFunctionType_13() {
+    this.isAssignableFrom("java.util.Comparator<? super String>", "(String, String)=>int");
+    this.isAssignableFrom("java.util.Comparator<String>", "(CharSequence, CharSequence)=>int");
+    this.isAssignableFrom("java.util.Comparator<? super String>", "(CharSequence, CharSequence)=>int");
   }
 }

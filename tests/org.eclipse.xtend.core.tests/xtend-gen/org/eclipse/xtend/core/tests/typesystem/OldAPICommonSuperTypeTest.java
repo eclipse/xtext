@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Inject
   private Primitives _primitives;
   
-  public void isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
+  public Object isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -127,9 +128,17 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
         String _simpleName_3 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
         Assert.assertEquals(_key_3, _simpleName_3);
       }
+      return computedSuperType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void isFunctionAndEquivalentTo(final Object reference, final String type) {
+    Assert.assertTrue((reference instanceof XFunctionTypeRef));
+    JvmTypeReference _equivalent = ((XFunctionTypeRef) reference).getEquivalent();
+    String _simpleName = _equivalent.getSimpleName();
+    Assert.assertEquals(type, _simpleName);
   }
   
   @Ignore
@@ -154,5 +163,47 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Test
   public void testCommonSuperType_41() {
     super.testCommonSuperType_41();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_51() {
+    super.testCommonSuperType_51();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_52() {
+    super.testCommonSuperType_52();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_56() {
+    super.testCommonSuperType_56();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_58() {
+    super.testCommonSuperType_58();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_59() {
+    super.testCommonSuperType_59();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_60() {
+    super.testCommonSuperType_60();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_63() {
+    super.testCommonSuperType_63();
   }
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -23,7 +24,9 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,12 +39,13 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
-  public void isSuperTypeOf(final String superType, final String... types) {
+  public Object isSuperTypeOf(final String superType, final String... types) {
     Pair<String,String> _mappedTo = Pair.<String, String>of(superType, null);
-    this.isSuperTypeOf(_mappedTo, types);
+    Object _isSuperTypeOf = this.isSuperTypeOf(_mappedTo, types);
+    return _isSuperTypeOf;
   }
   
-  public void isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
+  public Object isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -139,9 +143,41 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
           Assert.assertTrue(_isAssignableFrom);
         }
       }
+      return computedSuperType;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void isFunctionAndEquivalentTo(final Object reference, final String type) {
+    Assert.assertTrue((reference instanceof FunctionTypeReference));
+    String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
+    Assert.assertEquals(type, _equivalent);
+  }
+  
+  public String getEquivalent(final ParameterizedTypeReference type) {
+    List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
+    boolean _isEmpty = _typeArguments.isEmpty();
+    if (_isEmpty) {
+      JvmType _type = type.getType();
+      return _type.getSimpleName();
+    }
+    StringConcatenation _builder = new StringConcatenation();
+    JvmType _type_1 = type.getType();
+    String _simpleName = _type_1.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append("<");
+    List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
+    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+        public String apply(final LightweightTypeReference it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
+    String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
+    _builder.append(_join, "");
+    _builder.append(">");
+    return _builder.toString();
   }
   
   protected String fixup(final String type) {
@@ -410,5 +446,89 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   @Test
   public void testCommonSuperType_48() {
     this.isSuperTypeOf("double", "long", "double");
+  }
+  
+  @Test
+  public void testCommonSuperType_49() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("()=>void", "()=>void", "()=>void");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Procedure0");
+  }
+  
+  @Test
+  public void testCommonSuperType_50() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("()=>long", "()=>long", "()=>long");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Long>");
+  }
+  
+  @Test
+  public void testCommonSuperType_51() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>int", "()=>long");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testCommonSuperType_52() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>Integer", "()=>Long");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testCommonSuperType_53() {
+    this.isSuperTypeOf("Object", "()=>void", "()=>Void");
+  }
+  
+  @Test
+  public void testCommonSuperType_54() {
+    this.isSuperTypeOf("Object", "(String)=>void", "()=>void");
+  }
+  
+  @Test
+  public void testCommonSuperType_55() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(String)=>Integer");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ? extends Integer>");
+  }
+  
+  @Test
+  public void testCommonSuperType_56() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<String>", "(String, String)=>int");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function2<? super String, ? super String, ? extends Integer>");
+  }
+  
+  @Test
+  public void testCommonSuperType_57() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(Object)=>Integer");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ? extends Integer>");
+  }
+  
+  @Test
+  public void testCommonSuperType_58() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "(String)=>Appendable", "(CharSequence)=>CharSequence");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+  }
+  
+  @Test
+  public void testCommonSuperType_59() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<? super String>", "(String, String)=>int");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function2<? super String, ? super String, ? extends Integer>");
+  }
+  
+  @Test
+  public void testCommonSuperType_60() {
+    this.isSuperTypeOf("Object", "java.util.Comparator<? extends String>", "(String, String)=>int");
+  }
+  
+  @Test
+  public void testCommonSuperType_61() {
+    this.isSuperTypeOf("Comparator<String>", "java.util.Comparator<String>", "(CharSequence, CharSequence)=>int");
+  }
+  
+  @Test
+  public void testCommonSuperType_62() {
+    this.isSuperTypeOf("Comparator<? super String>", "java.util.Comparator<? super String>", "(CharSequence, CharSequence)=>int");
+  }
+  
+  @Test
+  public void testCommonSuperType_63() {
+    this.isSuperTypeOf("Object", "java.util.Comparator<? extends String>", "(CharSequence, CharSequence)=>int");
   }
 }

@@ -21,6 +21,9 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.common.types.util.Primitives
 import org.eclipse.xtext.common.types.TypesFactory
 import org.junit.Ignore
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 /**
  * @author Sebastian Zarnekow
@@ -34,7 +37,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		(superType->null).isSuperTypeOf(types)
 	}
 	
-	def isSuperTypeOf(Pair<String, String> superTypeAndParam, String... types) {
+	def Object isSuperTypeOf(Pair<String, String> superTypeAndParam, String... types) {
 		// TODO synthesize unique variable names as soon as the function should be validated
 		val signature = '''def «IF !superTypeAndParam.value.nullOrEmpty»<«superTypeAndParam.value»> «ENDIF»void method(«
 			FOR type: types SEPARATOR ', '»«type.fixup» t«ENDFOR») {}'''
@@ -56,6 +59,18 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 				assertTrue(computedSuperType.isAssignableFrom(subType))
 			}
 		}
+		return computedSuperType
+	}
+	
+	def void isFunctionAndEquivalentTo(Object reference, String type) {
+		assertTrue(reference instanceof FunctionTypeReference)
+		assertEquals(type, (reference as FunctionTypeReference).equivalent)
+	}
+	
+	def String getEquivalent(ParameterizedTypeReference type) {
+		if (type.typeArguments.empty)
+			return type.type.simpleName
+		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
 	
 	def protected String fixup(String type) {
@@ -307,6 +322,81 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_48() {
 		"double".isSuperTypeOf("long", "double")
 	}
+	
+	@Test
+	def void testCommonSuperType_49() {
+		"()=>void".isSuperTypeOf("()=>void", "()=>void").isFunctionAndEquivalentTo("Procedure0")
+	}
+	
+	@Test
+	def void testCommonSuperType_50() {
+		"()=>long".isSuperTypeOf("()=>long", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Long>")
+	}
+	
+	@Test
+	def void testCommonSuperType_51() {
+		"()=>Number & Comparable<?>".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+	}
+	
+	@Test
+	def void testCommonSuperType_52() {
+		"()=>Number & Comparable<?>".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+	}
+	
+	@Test
+	def void testCommonSuperType_53() {
+		"Object".isSuperTypeOf("()=>void", "()=>Void")
+	}
+	
+	@Test
+	def void testCommonSuperType_54() {
+		"Object".isSuperTypeOf("(String)=>void", "()=>void")
+	}
+	
+	@Test
+	def void testCommonSuperType_55() {
+		"(String)=>Integer".isSuperTypeOf("(String)=>Integer", "(String)=>Integer").isFunctionAndEquivalentTo("Function1<? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testCommonSuperType_56() {
+		"(String, String)=>int".isSuperTypeOf("java.util.Comparator<String>", "(String, String)=>int").isFunctionAndEquivalentTo("Function2<? super String, ? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testCommonSuperType_57() {
+		"(String)=>Integer".isSuperTypeOf("(String)=>Integer", "(Object)=>Integer").isFunctionAndEquivalentTo("Function1<? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testCommonSuperType_58() {
+		"(String)=>Object".isSuperTypeOf("(String)=>Appendable", "(CharSequence)=>CharSequence").isFunctionAndEquivalentTo("Function1<? super String, ?>")
+	}
+	
+	@Test
+	def void testCommonSuperType_59() {
+		"(String, String)=>int".isSuperTypeOf("java.util.Comparator<? super String>", "(String, String)=>int").isFunctionAndEquivalentTo("Function2<? super String, ? super String, ? extends Integer>")
+	}
+	
+	@Test
+	def void testCommonSuperType_60() {
+		"Object".isSuperTypeOf("java.util.Comparator<? extends String>", "(String, String)=>int")
+	}
+	
+	@Test
+	def void testCommonSuperType_61() {
+		"Comparator<String>".isSuperTypeOf("java.util.Comparator<String>", "(CharSequence, CharSequence)=>int")
+	}
+	
+	@Test
+	def void testCommonSuperType_62() {
+		"Comparator<? super String>".isSuperTypeOf("java.util.Comparator<? super String>", "(CharSequence, CharSequence)=>int")
+	}
+	
+	@Test
+	def void testCommonSuperType_63() {
+		"Object".isSuperTypeOf("java.util.Comparator<? extends String>", "(CharSequence, CharSequence)=>int")
+	}
 }
 
 /**
@@ -343,6 +433,12 @@ class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
 			computedSuperType = typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(TypesFactory::eINSTANCE.createJvmAnyTypeReference, TypesFactory::eINSTANCE.createJvmAnyTypeReference)).toList)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
+		return computedSuperType
+	}
+	
+	override void isFunctionAndEquivalentTo(Object reference, String type) {
+		assertTrue(reference instanceof XFunctionTypeRef)
+		assertEquals(type, (reference as XFunctionTypeRef).equivalent.simpleName)
 	}
 	
 	@Ignore
@@ -367,6 +463,48 @@ class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
 	@Test
 	override testCommonSuperType_41() {
 		super.testCommonSuperType_41()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_51() {
+		super.testCommonSuperType_51()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_52() {
+		super.testCommonSuperType_52()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_56() {
+		super.testCommonSuperType_56()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_58() {
+		super.testCommonSuperType_58()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_59() {
+		super.testCommonSuperType_59()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_60() {
+		super.testCommonSuperType_60()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_63() {
+		super.testCommonSuperType_63()
 	}
 	
 }
