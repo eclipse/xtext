@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.builder;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
@@ -22,16 +23,16 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 	public void setCurrentSource(IFolder currentSource) {
 		this.currentSource = currentSource;
 	}
-	
+
 	@Override
-	protected IFolder getFolder(OutputConfiguration outputConfig) {
+	protected IContainer getContainer(OutputConfiguration outputConfig) {
 		if (currentSource != null) {
 			String directory = outputConfig.getOutputDirectory();
-			IPath path = currentSource.getFullPath().append("../"+directory);
+			IPath path = currentSource.getFullPath().append("../" + directory);
 			IFolder folder = currentSource.getWorkspace().getRoot().getFolder(path);
 			return folder;
 		}
-		return super.getFolder(outputConfig);
+		return super.getContainer(outputConfig);
 	}
 
 }
