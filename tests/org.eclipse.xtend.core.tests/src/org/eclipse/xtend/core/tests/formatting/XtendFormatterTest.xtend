@@ -166,6 +166,17 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClosuresWrapIfNeeded() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z
+				z.toUpperCase == z ]
+			y.join
+		''', '''
+			val x = newArrayList("A", "b") val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z z.toUpperCase == z ] y.join
+		''')	
+	}
+	
 	@Test def formatClosuresParamMultiLine() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")

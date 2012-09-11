@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.formatting
 
 import com.google.inject.Inject
+import java.util.Collection
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.services.XtendGrammarAccess
 import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
@@ -21,11 +23,13 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
+import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XForLoopExpression
@@ -36,11 +40,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import org.eclipse.xtext.xbase.XConstructorCall
-import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.eclipse.xtext.xbase.XIfExpression
-import org.eclipse.xtend.core.services.XtendGrammarAccess
-import org.eclipse.xtext.nodemodel.ICompositeNode
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -382,58 +381,84 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XClosure expr, FormattableDocument format) {
-		val open = expr.nodeForKeyword("[")
-		val close = expr.nodeForKeyword("]")
-		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
-		val multiline = expr.nodeForEObject.text.trim.contains("\n")
+		val open = expr.nodeForKeyword("[") ?: expr.eContainer.nodeForKeyword("(")
+		val close = expr.nodeForKeyword("]") ?: expr.eContainer.nodeForKeyword(")")
+		val children = switch x:expr.expression {
+			XBlockExpression: x.expressions
+			XExpression: newArrayList(x)
+			default: <XExpression>emptyList
+		}
 		switch child:expr.expression {
-			XBlockExpression case expr.declaredFormalParameters.empty && child.expressions.empty: {
-				format += open?.append[noSpace]
-			}
-			XBlockExpression case multiline: {
-				if(explicit != null)
-					format += explicit.append[newLine; increaseIndentation]
-				else
-					format += open?.append[newLine; increaseIndentation]
-				for(c:child.expressions) {
-					c.format(format)
-					if(c != child.expressions.last)
-						format += c.nodeForEObject.append[ newLine ]
-				}
-				format += close?.prepend[ newLine; decreaseIndentation ]
-			}
-			XBlockExpression case expr.useNoSpaceInsideClosure: {
-				if(!expr.declaredFormalParameters.empty) {
-					val n = expr.declaredFormalParameters.get(0).nodeForEObject
-					format += n.prepend[noSpace]
-					format += n.append[noSpace]
-				}
-				val c = child.expressions.get(0).nodeForEObject
-				format += c.prepend[noSpace]
-				format += c.append[noSpace]
-			}
-			XBlockExpression: {
-				format += open?.append[ space = " " ]
-				for(c:child.expressions) {
-					c.format(format)
-					format += c.nodeForEObject.append[ space = " " ]
-				}
-			}
-			XExpression: {
-				child.format(format)
-			}
+			case expr.declaredFormalParameters.empty && children.empty:
+				format += expr.nodeForKeyword("[").append[noSpace]
+			case expr.useStyleClosureMultiline(format):
+				formatClosureMultiLine(expr, open, children, close, format)
+			case expr.useStyleClosureNoWhitespace():
+				formatClosureNoWhitespace(expr, open, children, close, format)
+			default:
+				formatClosureWrapIfNeeded(expr, open, children, close, format)
 		}
 	}
 	
-	def protected boolean useNoSpaceInsideClosure(XExpression expression) {
+	def protected void formatClosureMultiLine(XClosure expr, INode open, Collection<XExpression> children, INode close, FormattableDocument format) {
+		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
+		if(explicit != null)
+			format += explicit.append[newLine; increaseIndentation]
+		else
+			format += open?.append[newLine; increaseIndentation]
+		for(c:children) {
+			c.format(format)
+			if(c != children.last)
+				format += c.nodeForEObject.append[ newLine ]
+		}
+		format += close?.prepend[ newLine; decreaseIndentation ]
+	}
+	
+	def protected void formatClosureWrapIfNeeded(XClosure expr, INode open, Collection<XExpression> children, INode close, FormattableDocument format) {
+		var INode last = open
+		var indented = false
+		for(c:children) {
+			if(format.fitsIntoLine(c))
+				format += last.append[oneSpace]
+			else {
+				if(!indented) {
+					indented = true
+					format += last.append[increaseIndentation]	
+				}
+				format += last.append[newLine]
+			}
+			c.format(format)
+			last = c.nodeForEObject
+		}
+		if(indented)
+			format += children.last.nodeForEObject.append[decreaseIndentation]
+	}
+	
+	def protected void formatClosureNoWhitespace(XClosure expr, INode open, Collection<XExpression> children, INode close, FormattableDocument format) {
+		if(!expr.declaredFormalParameters.empty) {
+			val n = expr.declaredFormalParameters.get(0).nodeForEObject
+			format += n.prepend[noSpace]
+			format += n.append[noSpace]
+		}
+		val c = children.head.nodeForEObject
+		format += c.prepend[noSpace]
+		format += c.append[noSpace]
+	}
+	
+	def protected boolean useStyleClosureMultiline(XClosure closure, FormattableDocument doc) {
+		val close = closure.nodeForKeyword("]") ?: closure.eContainer.nodeForKeyword(")")
+		return close != null && close.whitespaceBefore?.text.contains("\n")
+	}
+	
+	def protected boolean useStyleClosureNoWhitespace(XExpression expression) {
 		switch expression {
 			XClosure: 
-				expression.declaredFormalParameters.size <= 1 && expression.expression.useNoSpaceInsideClosure
+				expression.declaredFormalParameters.size <= 1 && expression.expression.useStyleClosureNoWhitespace
 			XBlockExpression: 
 				if(expression.expressions.size != 1) 
 					false 
 				else 
-					expression.expressions.get(0).useNoSpaceInsideClosure
+					expression.expressions.get(0).useStyleClosureNoWhitespace
 			XFeatureCall: 
 				true
 			XBinaryOperation: 
