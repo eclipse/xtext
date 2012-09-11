@@ -10,13 +10,14 @@ package org.eclipse.xtext.builder;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.ui.util.ResourceUtil.getContainer;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -136,8 +137,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
         Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = newHashMap();
         for (OutputConfiguration config : outputConfigurations.values()) {
             if (config.isCleanUpDerivedResources()) {
-                final IFolder outputFolder = builtProject.getFolder(config.getOutputDirectory());
-				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(outputFolder, generatorIdProvider.getGeneratorIdentifier());
+                IContainer container = getContainer(builtProject, config.getOutputDirectory());
+				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(container, generatorIdProvider.getGeneratorIdentifier());
 				generatorMarkers.put(config, markers);
             }
         }
@@ -228,25 +229,25 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		for (OutputConfiguration config : outputConfigurations.values()) {
 			SubMonitor child = subMonitor.newChild(1);
 			final IProject project = ctx.getBuiltProject();
-			IFolder folder = project.getFolder(config.getOutputDirectory());
-			folder.refreshLocal(IResource.DEPTH_INFINITE, child);
+			IContainer container = getContainer(project, config.getOutputDirectory());
+			container.refreshLocal(IResource.DEPTH_INFINITE, child);
 		}
 	}
 
 	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, IProgressMonitor monitor) throws CoreException {
 		final IProject project = ctx.getBuiltProject();
-		IFolder folder = project.getFolder(config.getOutputDirectory());
-		if (!folder.exists())
+		IContainer container = getContainer(project, config.getOutputDirectory());
+		if (!container.exists()) {
 			return;
+		}
 		if (config.isCanClearOutputDirectory()) {
-			for (IResource resource : folder.members())
+			for (IResource resource : container.members()) {
 				resource.delete(IResource.KEEP_HISTORY, monitor);
-		} else {
-			if (config.isCleanUpDerivedResources()) {
-				List<IFile> resources = derivedResourceMarkers.findDerivedResources(folder, null);
-				for (IFile iFile : resources) {
-					iFile.delete(IResource.KEEP_HISTORY, monitor);
-				}
+			}
+		} else if (config.isCleanUpDerivedResources()) {
+			List<IFile> resources = derivedResourceMarkers.findDerivedResources(container, null);
+			for (IFile iFile : resources) {
+				iFile.delete(IResource.KEEP_HISTORY, monitor);
 			}
 		}
 	}
