@@ -197,63 +197,62 @@ public class FormattableDocument {
       TreeMap<Integer,FormattingData> _formattings = this.getFormattings();
       Collection<FormattingData> _values = _formattings.values();
       for (final FormattingData f : _values) {
-        boolean _and = false;
-        int _offset = f.getOffset();
-        boolean _greaterEqualsThan = (_offset >= offset);
-        if (!_greaterEqualsThan) {
-          _and = false;
-        } else {
-          int _offset_1 = f.getOffset();
-          int _length = f.getLength();
-          int _plus = (_offset_1 + _length);
-          int _plus_1 = (offset + length);
-          boolean _lessEqualsThan = (_plus <= _plus_1);
-          _and = (_greaterEqualsThan && _lessEqualsThan);
-        }
-        if (_and) {
-          int _offset_2 = f.getOffset();
-          final int textlength = (_offset_2 - oldOffset);
-          boolean _matched = false;
-          if (!_matched) {
-            if (f instanceof WhitespaceData) {
-              final WhitespaceData _whitespaceData = (WhitespaceData)f;
-              _matched=true;
-              int _indentationChange = _whitespaceData.getIndentationChange();
-              int _plus_2 = (indentation + _indentationChange);
-              indentation = _plus_2;
-              String _space = _whitespaceData.getSpace();
-              boolean _notEquals = (!Objects.equal(_space, null));
-              if (_notEquals) {
-                final String replacement = _whitespaceData.getSpace();
-                int _offset_3 = _whitespaceData.getOffset();
-                int _length_1 = _whitespaceData.getLength();
+        {
+          int _indentationChange = f.getIndentationChange();
+          int _plus = (indentation + _indentationChange);
+          indentation = _plus;
+          boolean _and = false;
+          int _offset = f.getOffset();
+          boolean _greaterEqualsThan = (_offset >= offset);
+          if (!_greaterEqualsThan) {
+            _and = false;
+          } else {
+            int _offset_1 = f.getOffset();
+            int _length = f.getLength();
+            int _plus_1 = (_offset_1 + _length);
+            int _plus_2 = (offset + length);
+            boolean _lessEqualsThan = (_plus_1 <= _plus_2);
+            _and = (_greaterEqualsThan && _lessEqualsThan);
+          }
+          if (_and) {
+            int _offset_2 = f.getOffset();
+            final int textlength = (_offset_2 - oldOffset);
+            boolean _matched = false;
+            if (!_matched) {
+              if (f instanceof WhitespaceData) {
+                final WhitespaceData _whitespaceData = (WhitespaceData)f;
+                _matched=true;
+                String _space = _whitespaceData.getSpace();
+                boolean _notEquals = (!Objects.equal(_space, null));
+                if (_notEquals) {
+                  final String replacement = _whitespaceData.getSpace();
+                  int _offset_3 = _whitespaceData.getOffset();
+                  int _length_1 = _whitespaceData.getLength();
+                  TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                  replacements.add(_textReplacement);
+                }
+              }
+            }
+            if (!_matched) {
+              if (f instanceof NewLineData) {
+                final NewLineData _newLineData = (NewLineData)f;
+                _matched=true;
+                RendererConfiguration _cfg = this.getCfg();
+                int _newLines = _newLineData.getNewLines();
+                String _wrap = _cfg.getWrap(_newLines);
+                RendererConfiguration _cfg_1 = this.getCfg();
+                String _indentation = _cfg_1.getIndentation(indentation);
+                final String replacement = (_wrap + _indentation);
+                int _offset_3 = _newLineData.getOffset();
+                int _length_1 = _newLineData.getLength();
                 TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
                 replacements.add(_textReplacement);
               }
             }
+            int _length_1 = f.getLength();
+            int _plus_3 = (textlength + _length_1);
+            oldOffset = _plus_3;
           }
-          if (!_matched) {
-            if (f instanceof NewLineData) {
-              final NewLineData _newLineData = (NewLineData)f;
-              _matched=true;
-              int _indentationChange = _newLineData.getIndentationChange();
-              int _plus_2 = (indentation + _indentationChange);
-              indentation = _plus_2;
-              RendererConfiguration _cfg = this.getCfg();
-              int _newLines = _newLineData.getNewLines();
-              String _wrap = _cfg.getWrap(_newLines);
-              RendererConfiguration _cfg_1 = this.getCfg();
-              String _indentation = _cfg_1.getIndentation(indentation);
-              final String replacement = (_wrap + _indentation);
-              int _offset_3 = _newLineData.getOffset();
-              int _length_1 = _newLineData.getLength();
-              TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
-              replacements.add(_textReplacement);
-            }
-          }
-          int _length_1 = f.getLength();
-          int _plus_2 = (textlength + _length_1);
-          oldOffset = _plus_2;
         }
       }
       _xblockexpression = (replacements);

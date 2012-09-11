@@ -65,27 +65,25 @@ class FormattableDocument {
 		val replacements = <TextReplacement>newArrayList
 		var oldOffset = offset
 		var indentation = 0
-		for(f:formattings.values)
+		for(f:formattings.values) {
+			indentation = indentation + f.indentationChange
 			if(f.offset >= offset && f.offset + f.length <= offset + length) {
 				val textlength = f.offset - oldOffset
 				switch f {
 					WhitespaceData: {
-						indentation = indentation + f.indentationChange
 						if(f.space != null) {
 							val replacement = f.space
 							replacements += new TextReplacement(f.offset, f.length, replacement)
 						}
 					}
 					NewLineData: {
-						indentation = indentation + f.indentationChange
-//						if(f.newLines > 0) {
-							val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(indentation)
-							replacements += new TextReplacement(f.offset, f.length, replacement)
-//						}
+						val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(indentation)
+						replacements += new TextReplacement(f.offset, f.length, replacement)
 					}
 				}
 				oldOffset = textlength + f.length
 			}
+		}
 		replacements
 	}
 	
