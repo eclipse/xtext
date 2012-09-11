@@ -62,14 +62,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 
 @SuppressWarnings(value = "restriction")
 public class XtendFormatter {
-  @Inject
-  private IWhitespaceInformationProvider whitespaeInfo;
-  
   @Inject
   private NodeModelAccess _nodeModelAccess;
   
@@ -80,7 +76,20 @@ public class XtendFormatter {
   private XtendGrammarAccess _xtendGrammarAccess;
   
   @Inject
+  private IWhitespaceInformationProvider whitespaeInfo;
+  
+  @Inject
   private RichStringFormatter richStringFormatter;
+  
+  private boolean _allowIdentityEdits = false;
+  
+  public boolean isAllowIdentityEdits() {
+    return this._allowIdentityEdits;
+  }
+  
+  public void setAllowIdentityEdits(final boolean allowIdentityEdits) {
+    this._allowIdentityEdits = allowIdentityEdits;
+  }
   
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final RendererConfiguration cfg) {
     List<TextReplacement> _xblockexpression = null;
@@ -95,29 +104,37 @@ public class XtendFormatter {
       cfg.setIndentation(_indentString);
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
-      final String text = _rootNode.getText();
-      FormattableDocument _formattableDocument = new FormattableDocument(cfg, text);
+      final String doc = _rootNode.getText();
+      FormattableDocument _formattableDocument = new FormattableDocument(cfg, doc);
       final FormattableDocument format = _formattableDocument;
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(((XtendFile) _head), format);
-      List<TextReplacement> _renderToEdits = format.renderToEdits(offset, length);
-      _xblockexpression = (_renderToEdits);
+      final List<TextReplacement> edits = format.renderToEdits(offset, length);
+      List<TextReplacement> _xifexpression = null;
+      boolean _isAllowIdentityEdits = this.isAllowIdentityEdits();
+      if (_isAllowIdentityEdits) {
+        _xifexpression = edits;
+      } else {
+        final Function1<TextReplacement,Boolean> _function = new Function1<TextReplacement,Boolean>() {
+            public Boolean apply(final TextReplacement it) {
+              int _offset = it.getOffset();
+              int _offset_1 = it.getOffset();
+              int _length = it.getLength();
+              int _plus = (_offset_1 + _length);
+              String _substring = doc.substring(_offset, _plus);
+              String _text = it.getText();
+              boolean _notEquals = (!Objects.equal(_substring, _text));
+              return Boolean.valueOf(_notEquals);
+            }
+          };
+        Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
+        List<TextReplacement> _list = IterableExtensions.<TextReplacement>toList(_filter);
+        _xifexpression = _list;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
-  }
-  
-  public void format(final XtextResource res, final int offset, final int length, final RendererConfiguration cfg, final Procedure3<? super Integer,? super Integer,? super String> out) {
-    List<TextReplacement> _format = this.format(res, offset, length, cfg);
-    final Procedure1<TextReplacement> _function = new Procedure1<TextReplacement>() {
-        public void apply(final TextReplacement e) {
-          int _offset = e.getOffset();
-          int _length = e.getLength();
-          String _text = e.getText();
-          out.apply(Integer.valueOf(_offset), Integer.valueOf(_length), _text);
-        }
-      };
-    IterableExtensions.<TextReplacement>forEach(_format, _function);
   }
   
   protected void _format(final XtendFile xtendFile, final FormattableDocument format) {

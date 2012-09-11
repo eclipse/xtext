@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting;
 
 import com.google.common.base.Objects;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
@@ -9,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -20,16 +20,12 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -131,7 +127,6 @@ public abstract class AbstractFormatterTest {
       IParseResult _parseResult = ((XtextResource) _eResource_1).getParseResult();
       final ICompositeNode root = _parseResult.getRootNode();
       final String oldDocument = root.getText();
-      final ArrayList<Triple<Integer,Integer,String>> edits = CollectionLiterals.<Triple<Integer,Integer,String>>newArrayList();
       RendererConfiguration _rendererConfiguration = new RendererConfiguration();
       final Procedure1<RendererConfiguration> _function = new Procedure1<RendererConfiguration>() {
           public void apply(final RendererConfiguration it) {
@@ -139,138 +134,46 @@ public abstract class AbstractFormatterTest {
           }
         };
       final RendererConfiguration rc = ObjectExtensions.<RendererConfiguration>operator_doubleArrow(_rendererConfiguration, _function);
+      this.formatter.setAllowIdentityEdits(true);
       Resource _eResource_2 = parsed.eResource();
       int _length = oldDocument.length();
-      final Procedure3<Integer,Integer,String> _function_1 = new Procedure3<Integer,Integer,String>() {
-          public void apply(final Integer offset, final Integer length, final String replacement) {
-            boolean _lessThan = (offset < 0);
-            if (_lessThan) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Offset to small. Offset: ");
-              _builder.append(offset, "");
-              IllegalStateException _illegalStateException = new IllegalStateException(_builder.toString());
-              throw _illegalStateException;
-            }
-            boolean _lessThan_1 = (length < 0);
-            if (_lessThan_1) {
-              StringConcatenation _builder_1 = new StringConcatenation();
-              _builder_1.append("Length to small. Length: ");
-              _builder_1.append(length, "");
-              IllegalStateException _illegalStateException_1 = new IllegalStateException(_builder_1.toString());
-              throw _illegalStateException_1;
-            }
-            int _plus = (offset + length);
-            int _length = oldDocument.length();
-            boolean _greaterThan = (_plus > _length);
-            if (_greaterThan) {
-              StringConcatenation _builder_2 = new StringConcatenation();
-              _builder_2.append("Range exceeds document. Offset: ");
-              _builder_2.append(offset, "");
-              _builder_2.append(" Length: ");
-              _builder_2.append(length, "");
-              _builder_2.append(" DocumentLenght: ");
-              int _length_1 = oldDocument.length();
-              _builder_2.append(_length_1, "");
-              IllegalStateException _illegalStateException_2 = new IllegalStateException(_builder_2.toString());
-              throw _illegalStateException_2;
-            }
-            final Function1<Triple<Integer,Integer,String>,Boolean> _function = new Function1<Triple<Integer,Integer,String>,Boolean>() {
-                public Boolean apply(final Triple<Integer,Integer,String> it) {
-                  boolean _and = false;
-                  Integer _first = it.getFirst();
-                  boolean _greaterEqualsThan = (offset >= (_first).intValue());
-                  if (!_greaterEqualsThan) {
-                    _and = false;
-                  } else {
-                    Integer _first_1 = it.getFirst();
-                    Integer _second = it.getSecond();
-                    int _plus = ((_first_1).intValue() + (_second).intValue());
-                    boolean _lessThan = (offset < _plus);
-                    _and = (_greaterEqualsThan && _lessThan);
-                  }
-                  return Boolean.valueOf(_and);
-                }
-              };
-            boolean _exists = IterableExtensions.<Triple<Integer,Integer,String>>exists(edits, _function);
-            if (_exists) {
-              StringConcatenation _builder_3 = new StringConcatenation();
-              _builder_3.append("Offset inside existing edit. Offset: ");
-              _builder_3.append(offset, "");
-              _builder_3.append(" Length: ");
-              _builder_3.append(length, "");
-              IllegalStateException _illegalStateException_3 = new IllegalStateException(_builder_3.toString());
-              throw _illegalStateException_3;
-            }
-            final Function1<Triple<Integer,Integer,String>,Boolean> _function_1 = new Function1<Triple<Integer,Integer,String>,Boolean>() {
-                public Boolean apply(final Triple<Integer,Integer,String> it) {
-                  boolean _and = false;
-                  int _plus = (offset + length);
-                  Integer _first = it.getFirst();
-                  boolean _greaterEqualsThan = (_plus >= (_first).intValue());
-                  if (!_greaterEqualsThan) {
-                    _and = false;
-                  } else {
-                    int _plus_1 = (offset + length);
-                    Integer _first_1 = it.getFirst();
-                    Integer _second = it.getSecond();
-                    int _plus_2 = ((_first_1).intValue() + (_second).intValue());
-                    boolean _lessEqualsThan = (_plus_1 <= _plus_2);
-                    _and = (_greaterEqualsThan && _lessEqualsThan);
-                  }
-                  return Boolean.valueOf(_and);
-                }
-              };
-            boolean _exists_1 = IterableExtensions.<Triple<Integer,Integer,String>>exists(edits, _function_1);
-            if (_exists_1) {
-              StringConcatenation _builder_4 = new StringConcatenation();
-              _builder_4.append("Offset+Lenght inside existing edit. Offset: ");
-              _builder_4.append(offset, "");
-              _builder_4.append(" Length: ");
-              _builder_4.append(length, "");
-              IllegalStateException _illegalStateException_4 = new IllegalStateException(_builder_4.toString());
-              throw _illegalStateException_4;
-            }
-            Triple<Integer,Integer,String> _create = Tuples.<Integer, Integer, String>create(Integer.valueOf(offset), Integer.valueOf(length), replacement);
-            edits.add(_create);
-          }
-        };
-      this.formatter.format(((XtextResource) _eResource_2), 0, _length, rc, _function_1);
+      final List<TextReplacement> edits = this.formatter.format(((XtextResource) _eResource_2), 0, _length, rc);
       int lastOffset = 0;
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder newDocument = _stringBuilder;
       StringBuilder _stringBuilder_1 = new StringBuilder();
       final StringBuilder debugTrace = _stringBuilder_1;
-      final Function1<Triple<Integer,Integer,String>,Integer> _function_2 = new Function1<Triple<Integer,Integer,String>,Integer>() {
-          public Integer apply(final Triple<Integer,Integer,String> it) {
-            Integer _first = it.getFirst();
-            return _first;
+      final Function1<TextReplacement,Integer> _function_1 = new Function1<TextReplacement,Integer>() {
+          public Integer apply(final TextReplacement it) {
+            int _offset = it.getOffset();
+            return Integer.valueOf(_offset);
           }
         };
-      List<Triple<Integer,Integer,String>> _sortBy = IterableExtensions.<Triple<Integer,Integer,String>, Integer>sortBy(edits, _function_2);
-      for (final Triple<Integer,Integer,String> edit : _sortBy) {
+      List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function_1);
+      for (final TextReplacement edit : _sortBy) {
         {
-          Integer _first = edit.getFirst();
-          final String text = oldDocument.substring(lastOffset, (_first).intValue());
+          int _offset = edit.getOffset();
+          final String text = oldDocument.substring(lastOffset, _offset);
           newDocument.append(text);
-          String _third = edit.getThird();
-          newDocument.append(_third);
+          String _text = edit.getText();
+          newDocument.append(_text);
           debugTrace.append(text);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
-          Integer _first_1 = edit.getFirst();
-          Integer _first_2 = edit.getFirst();
-          Integer _second = edit.getSecond();
-          int _plus = ((_first_2).intValue() + (_second).intValue());
-          String _substring = oldDocument.substring((_first_1).intValue(), _plus);
+          int _offset_1 = edit.getOffset();
+          int _offset_2 = edit.getOffset();
+          int _length_1 = edit.getLength();
+          int _plus = (_offset_2 + _length_1);
+          String _substring = oldDocument.substring(_offset_1, _plus);
           _builder.append(_substring, "");
           _builder.append("|");
-          String _third_1 = edit.getThird();
-          _builder.append(_third_1, "");
+          String _text_1 = edit.getText();
+          _builder.append(_text_1, "");
           _builder.append("]");
           debugTrace.append(_builder.toString());
-          Integer _first_3 = edit.getFirst();
-          Integer _second_1 = edit.getSecond();
-          int _plus_1 = ((_first_3).intValue() + (_second_1).intValue());
+          int _offset_3 = edit.getOffset();
+          int _length_2 = edit.getLength();
+          int _plus_1 = (_offset_3 + _length_2);
           lastOffset = _plus_1;
         }
       }

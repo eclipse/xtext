@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.formatting;
 
+import java.util.List;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -18,13 +20,13 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 
 import com.google.inject.Inject;
 
@@ -65,12 +67,13 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 				return null;
 			final MultiTextEdit mte = new MultiTextEdit();
 			try {
-				formatter.format(state, region.getOffset(), region.getLength(), cfgProvider.rendererConfiguration(),
-						new Procedure3<Integer, Integer, String>() {
-							public void apply(Integer p1, Integer p2, String p3) {
-								mte.addChild(new ReplaceEdit(p1, p2, p3));
-							}
-						});
+				RendererConfiguration cfg = cfgProvider.rendererConfiguration();
+				long start = System.currentTimeMillis();
+				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), cfg);
+				long time = System.currentTimeMillis() - start;
+				//				System.out.println(String.format("Formatting: Time to create text edits: %.3f sec. Applied edits: %d", time / 1000.0, edits.size()));
+				for (TextReplacement tr : edits)
+					mte.addChild(new ReplaceEdit(tr.getOffset(), tr.getLength(), tr.getText()));
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
