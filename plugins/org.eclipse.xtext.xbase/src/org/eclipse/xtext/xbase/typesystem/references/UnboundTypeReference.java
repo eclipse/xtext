@@ -93,9 +93,18 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		if (internalIsResolved())
 			return;
 		List<LightweightBoundTypeArgument> hints = getAllHints();
-		if (!hints.isEmpty()) {
+		if (!hints.isEmpty() && hasSignificantHint(hints)) {
 			resolveWithHints(hints);
 		}
+	}
+
+	protected boolean hasSignificantHint(List<LightweightBoundTypeArgument> hints) {
+		for (LightweightBoundTypeArgument hint: hints) {
+			if (!(hint.getOrigin() instanceof VarianceInfo)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

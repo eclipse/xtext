@@ -15,17 +15,13 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -83,18 +79,18 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftReference.isType(Void.TYPE) || rightReference.isType(Void.TYPE)) {
 			return TypeConformanceResult.FAILED;
 		}
-		if (param.allowPrimitiveConversion) {
+		if (param.allowPrimitiveConversion || param.allowPrimitiveWidening) {
 			if (leftReference.isPrimitive()) {
 				CommonTypeComputationServices services = leftReference.getOwner().getServices();
 				Primitives primitives = services.getPrimitives();
 				JvmPrimitiveType leftType = (JvmPrimitiveType) leftReference.getType();
 				JvmType rightType = rightReference.getType();
 				if (rightReference.isPrimitive()) {
-					if (isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
+					if (param.allowPrimitiveWidening && isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
 						return new TypeConformanceResult(ConformanceHint.PRIMITIVE_WIDENING);
 					}
 					return TypeConformanceResult.FAILED;
-				} else {
+				} else if (param.allowPrimitiveConversion){
 					LightweightTypeReference primitive = rightReference.getPrimitiveIfWrapperType();
 					if (primitive.isPrimitive()) {
 						JvmPrimitiveType rightPrimitiveType = (JvmPrimitiveType) primitive.getType();
@@ -103,8 +99,10 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 						}
 						return TypeConformanceResult.FAILED;
 					}
+				} else {
+					return TypeConformanceResult.FAILED;
 				}
-			} else if (rightReference.isPrimitive()) {
+			} else if (param.allowPrimitiveConversion && rightReference.isPrimitive()) {
 				if (leftReference.isType(Object.class))
 					return new TypeConformanceResult(ConformanceHint.BOXING);
 				if (leftReference.isType(String.class))
@@ -120,7 +118,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			// early exit - remaining cases are all compatible to java.lang.Object
 			if (leftReference.isType(Object.class))
 				return TypeConformanceResult.SUCCESS;
-			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion);
+			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening);
 			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
@@ -170,7 +168,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			if (functionType != null) {
 				return conformanceComputer.isConformant(functionType, right, param);
 			}
-			if (isFunctionType(right) != FunctionTypeKind.NONE) {
+			if (conformanceComputer.isFunctionType(right) != TypeConformanceComputer.FunctionTypeKind.NONE) {
 				FunctionTypeReference converted = convertToFunctionTypeReference(left, param.rawType);
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(converted, right, param);
@@ -231,67 +229,10 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	
 	@Nullable
 	protected FunctionTypeReference getFunctionTypeReference(ParameterizedTypeReference reference) {
-		FunctionTypeKind functionTypeKind = isFunctionType(reference);
-		if (functionTypeKind == FunctionTypeKind.PROCEDURE) {
-			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
-			if (!setTypeArguments(reference.getTypeArguments(), functionType))
-				return null;
-			JvmGenericType type = (JvmGenericType) functionType.getType();
-			JvmOperation applyOperation = (JvmOperation) type.findAllFeaturesByName("apply").iterator().next();
-			JvmType voidType = applyOperation.getReturnType().getType();
-			functionType.setReturnType(new ParameterizedTypeReference(reference.getOwner(), voidType));
-			return functionType;
-		} else if (functionTypeKind == FunctionTypeKind.FUNCTION) {
-			CommonTypeComputationServices services = reference.getOwner().getServices();
-			LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
-			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
-			List<LightweightTypeReference> allTypeArguments = reference.getTypeArguments();
-			if (!setTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))
-				return null;
-			LightweightTypeReference lastTypeArgument = allTypeArguments.get(allTypeArguments.size() - 1);
-			functionType.addTypeArgument(lastTypeArgument);
-			LightweightTypeReference returnType = lightweightTypeReferences.getUpperBoundOrInvariant(lastTypeArgument);
-			if (returnType == null) {
-				return null;
-			}
-			functionType.setReturnType(returnType);
-			return functionType;
-		}
+		ParameterizedTypeReference result = conformanceComputer.getFunctionTypeReference(reference);
+		if (result instanceof FunctionTypeReference)
+			return (FunctionTypeReference) result;
 		return null;
-	}
-	
-	protected boolean setTypeArguments(List<LightweightTypeReference> typeArguments, FunctionTypeReference result) {
-		CommonTypeComputationServices services = result.getOwner().getServices();
-		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
-		for(LightweightTypeReference typeArgument: typeArguments) {
-			result.addTypeArgument(typeArgument);
-			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(typeArgument);
-			if (lowerBound == null || lowerBound instanceof AnyTypeReference) {
-				return false;
-			}
-			result.addParameterType(lowerBound);
-		}
-		return true;
-	}
-	
-	protected enum FunctionTypeKind {
-		FUNCTION, PROCEDURE, NONE
-	}
-	
-	protected FunctionTypeKind isFunctionType(ParameterizedTypeReference reference) {
-		JvmType type = reference.getType();
-		if (type instanceof JvmGenericType) {
-			JvmDeclaredType outerType = ((JvmGenericType) type).getDeclaringType();
-			if (outerType != null) {
-				if (Procedures.class.getCanonicalName().equals(outerType.getQualifiedName())) {
-					return FunctionTypeKind.PROCEDURE;
-				}
-				if (Functions.class.getCanonicalName().equals(outerType.getQualifiedName())) {
-					return FunctionTypeKind.FUNCTION;
-				}
-			}
-		}
-		return FunctionTypeKind.NONE;
 	}
 	
 	@Override
@@ -355,7 +296,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftTypeArguments.size() != rightTypeArguments.size()) {
 			return TypeConformanceResult.FAILED;
 		}
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false);
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false);
 		for(int i = 0; i < leftTypeArguments.size(); i++) {
 			if (!conformanceComputer.isConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argument).isConformant()) {
 				return TypeConformanceResult.FAILED;

@@ -19,17 +19,25 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.LinkedHashMultiset;
@@ -62,7 +70,7 @@ public class TypeConformanceComputer {
 	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right, boolean ignoreGenerics) {
 		if (left == right && left != null)
 			return true;
-		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true));
+		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true));
 		return result.isConformant();
 	}
 	
@@ -70,7 +78,7 @@ public class TypeConformanceComputer {
 	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument flags) {
 		if (left == right && left != null)
 			return TypeConformanceResult.SUCCESS;
-		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion));
+		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening));
 	}
 	
 	/**
@@ -148,8 +156,9 @@ public class TypeConformanceComputer {
 			return types.get(0);
 		}
 		for(LightweightTypeReference type: types) {
-			if (conformsToAll(type, types))
-				return type;
+			LightweightTypeReference conformantType = conformsToAll(type, types);
+			if (conformantType != null)
+				return conformantType;
 			if (type.isPrimitiveVoid()) {
 				// we saw void but was not all were void
 				return null;
@@ -280,10 +289,12 @@ public class TypeConformanceComputer {
 					parameterSuperTypes.add(parameterSuperType);
 				}
 			}
+			
 			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, rawType);
 			for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
 				result.addTypeArgument(parameterSuperType);
 			}
+			result = getFunctionTypeReference(result);
 			return result;
 		} else if (rawType instanceof JvmArrayType) {
 			JvmComponentType componentType = ((JvmArrayType) rawType).getComponentType();
@@ -308,6 +319,71 @@ public class TypeConformanceComputer {
 			}
 		}
 		return null;
+	}
+	
+	@Nullable
+	protected ParameterizedTypeReference getFunctionTypeReference(ParameterizedTypeReference reference) {
+		FunctionTypeKind functionTypeKind = isFunctionType(reference);
+		if (functionTypeKind == FunctionTypeKind.PROCEDURE) {
+			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
+			if (!setTypeArguments(reference.getTypeArguments(), functionType))
+				return null;
+			JvmGenericType type = (JvmGenericType) functionType.getType();
+			JvmOperation applyOperation = (JvmOperation) type.findAllFeaturesByName("apply").iterator().next();
+			JvmType voidType = applyOperation.getReturnType().getType();
+			functionType.setReturnType(new ParameterizedTypeReference(reference.getOwner(), voidType));
+			return functionType;
+		} else if (functionTypeKind == FunctionTypeKind.FUNCTION) {
+			CommonTypeComputationServices services = reference.getOwner().getServices();
+			LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
+			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
+			List<LightweightTypeReference> allTypeArguments = reference.getTypeArguments();
+			if (!setTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))
+				return null;
+			LightweightTypeReference lastTypeArgument = allTypeArguments.get(allTypeArguments.size() - 1);
+			functionType.addTypeArgument(lastTypeArgument);
+			LightweightTypeReference returnType = lightweightTypeReferences.getUpperBoundOrInvariant(lastTypeArgument);
+			if (returnType == null) {
+				return null;
+			}
+			functionType.setReturnType(returnType);
+			return functionType;
+		}
+		return reference;
+	}
+	
+	protected enum FunctionTypeKind {
+		FUNCTION, PROCEDURE, NONE
+	}
+	
+	protected FunctionTypeKind isFunctionType(ParameterizedTypeReference reference) {
+		JvmType type = reference.getType();
+		if (type instanceof JvmGenericType) {
+			JvmDeclaredType outerType = ((JvmGenericType) type).getDeclaringType();
+			if (outerType != null) {
+				if (Procedures.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+					return FunctionTypeKind.PROCEDURE;
+				}
+				if (Functions.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+					return FunctionTypeKind.FUNCTION;
+				}
+			}
+		}
+		return FunctionTypeKind.NONE;
+	}
+
+	protected boolean setTypeArguments(List<LightweightTypeReference> typeArguments, FunctionTypeReference result) {
+		CommonTypeComputationServices services = result.getOwner().getServices();
+		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
+		for(LightweightTypeReference typeArgument: typeArguments) {
+			result.addTypeArgument(typeArgument);
+			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(typeArgument);
+			if (lowerBound == null || lowerBound instanceof AnyTypeReference) {
+				return false;
+			}
+			result.addParameterType(lowerBound);
+		}
+		return true;
 	}
 
 	protected void addComponentType(LightweightTypeReference reference, List<LightweightTypeReference> result) {
@@ -383,15 +459,24 @@ public class TypeConformanceComputer {
 	}
 	
 	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
+		LightweightTypeReference mostSpecialTypeIfAllWildcards = getMostSpecialTypeIfAllWildcards(types);
+		if (mostSpecialTypeIfAllWildcards != null) {
+			WildcardTypeReference result = createObjectWildcardReference(owner);
+			result.setLowerBound(mostSpecialTypeIfAllWildcards);
+			return result;
+		}
 		Set<String> allNames = Sets.newHashSet();
-		for(LightweightTypeReference type: types)
-			allNames.add(type.getIdentifier());
+		for(int i = 0; i < types.size(); i++) {
+			LightweightTypeReference type = types.get(i).getUpperBoundSubstitute();
+			types.set(i, type);
+			allNames.add(getIdentifier(type));
+		}
 		if (allNames.size() == 1)
 			return types.get(0);
 		if (types.size() == initiallyRequested.size()) {
 			boolean containsAll = true;
 			for(LightweightTypeReference initialRequest: initiallyRequested) {
-				if (!allNames.contains(initialRequest.getIdentifier())) {
+				if (!allNames.contains(getIdentifier(initialRequest))) {
 					containsAll = false;
 					break;
 				}
@@ -407,12 +492,45 @@ public class TypeConformanceComputer {
 		if (superType == null) {
 			return createObjectWildcardReference(owner);
 		}
+		if (superType instanceof UnboundTypeReference)
+			return superType;
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		result.addUpperBound(superType);
 		return result;
 	}
 
-	protected LightweightTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
+	private String getIdentifier(LightweightTypeReference type) {
+		if (type instanceof UnboundTypeReference && !type.isResolved())
+			return ((UnboundTypeReference) type).getHandle().toString();
+		return type.getIdentifier();
+	}
+
+	private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types) {
+		for(LightweightTypeReference type: types) {
+			if (type instanceof WildcardTypeReference) {
+				if (((WildcardTypeReference) type).getLowerBound() == null)
+					return null;
+			} else {
+				return null;
+			}
+		}
+		return getMostSpecialType(types);
+	}
+	
+	public LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates) {
+		LightweightTypeReference type;
+		type = candidates.get(0).getLowerBoundSubstitute();
+		for(int i = 1; i < candidates.size(); i++) {
+			LightweightTypeReference candidate = candidates.get(i).getLowerBoundSubstitute();
+			if (type.isAssignableFrom(candidate)) {
+				type = candidate;
+			} else if (!candidate.isAssignableFrom(type))
+				return null;
+		}
+		return type;
+	}
+
+	protected WildcardTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
 		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
 		ParameterizedTypeReference objectReference = new ParameterizedTypeReference(owner, objectType);
 		WildcardTypeReference result = new WildcardTypeReference(owner);
@@ -420,12 +538,23 @@ public class TypeConformanceComputer {
 		return result;
 	}
 
-	protected boolean conformsToAll(LightweightTypeReference type, final List<LightweightTypeReference> types) {
-		boolean conform = true;
-		for (int i = 0; conform && i < types.size(); i++) {
-			conform = isConformant(type, types.get(i));
+	protected LightweightTypeReference conformsToAll(LightweightTypeReference type, List<LightweightTypeReference> types) {
+		LightweightTypeReference result = type;
+		for (int i = 0; i < types.size(); i++) {
+			LightweightTypeReference other = types.get(i);
+			if (result != other) {
+				if (isConformant(result, other)) {
+					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
+					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) && isConformant(other, result)) {
+						result = other;
+					}
+				} else {
+					return null;
+				}
+			}
+			
 		}
-		return conform;
+		return result;
 	}
 	
 }

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -30,6 +31,9 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class BoundTypeArgumentMerger {
+	
+	@Inject
+	private TypeConformanceComputer conformanceComputer;
 	
 	@Nullable
 	public LightweightMergedBoundTypeArgument merge(Collection<LightweightBoundTypeArgument> allArguments, ITypeReferenceOwner owner) {
@@ -102,7 +106,7 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 			if (!inVariances.isEmpty()) {
 				LightweightTypeReference inType = getMostSpecialType(inTypes);
-				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false));
+				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false, false));
 				VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 				variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
 			}
@@ -114,14 +118,9 @@ public class BoundTypeArgumentMerger {
 	}
 
 	protected LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates) {
-		LightweightTypeReference type;
-		type = candidates.get(0);
-		for(int i = 1; i < candidates.size(); i++) {
-			LightweightTypeReference candidate = candidates.get(i);
-			if (type.isAssignableFrom(candidate)) {
-				type = candidate;
-			}
-		}
+		LightweightTypeReference type = conformanceComputer.getMostSpecialType(candidates);
+		if (type == null)
+			type = candidates.get(0);
 		return type;
 	}
 

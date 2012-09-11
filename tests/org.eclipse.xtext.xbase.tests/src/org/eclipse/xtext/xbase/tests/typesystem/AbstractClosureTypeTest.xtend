@@ -52,6 +52,30 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		}
 		super.expression(expression, resolve)
 	}
+	
+	@Test def void testIfExpression_01() throws Exception {
+		"if (true) [|''] else [|'']".resolvesClosuresTo("()=>String", "()=>String").withEquivalents("Function0<String>", "Function0<String>")
+	}
+	
+	@Test def void testIfExpression_02() throws Exception {
+		"if (true) [|''] else [|null as CharSequence]".resolvesClosuresTo("()=>String", "()=>CharSequence").withEquivalents("Function0<String>", "Function0<CharSequence>")
+	}
+	
+	@Test def void testIfExpression_03() throws Exception {
+		"if (true) [|null as Appendable] else [|null as CharSequence]".resolvesClosuresTo("()=>Appendable", "()=>CharSequence").withEquivalents("Function0<Appendable>", "Function0<CharSequence>")
+	}
+	
+	@Test def void testIfExpression_04() throws Exception {
+		"if (true) [ CharSequence c |''] else [ String s |'']".resolvesClosuresTo("(CharSequence)=>String", "(String)=>String").withEquivalents("Function1<CharSequence, String>", "Function1<String, String>")
+	}
+	
+	@Test def void testIfExpression_05() throws Exception {
+		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesClosuresTo("(Object)=>StringBuilder", "(Object)=>StringBuffer").withEquivalents("Function1<Object, StringBuilder>", "Function1<Object, StringBuffer>")
+	}
+	
+	@Test def void testIfExpression_06() throws Exception {
+		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesClosuresTo("(String)=>StringBuilder", "(String)=>StringBuffer").withEquivalents("Function1<String, StringBuilder>", "Function1<String, StringBuffer>")
+	}
 
 	@Test def void testNumberLiteralInClosure() throws Exception {
 		"newArrayList().map[42]".resolvesClosuresTo("(Object)=>int").withEquivalents("Function1<Object, Integer>")

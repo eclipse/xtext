@@ -721,6 +721,34 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testIfExpression_04() throws Exception {
 		"if (true) return '' else new StringBuilder".resolvesTo("StringBuilder")
 	}
+	
+	@Test def void testIfExpression_05() throws Exception {
+		"if (true) [|''] else [|'']".resolvesTo("()=>String").isFunctionAndEquivalentTo("Function0<String>")
+	}
+	
+	@Test def void testIfExpression_06() throws Exception {
+		"if (true) [|''] else [|null as CharSequence]".resolvesTo("()=>CharSequence").isFunctionAndEquivalentTo("Function0<CharSequence>")
+	}
+	
+	@Test def void testIfExpression_07() throws Exception {
+		"if (true) [|null as Appendable] else [|null as CharSequence]".resolvesTo("()=>Object").isFunctionAndEquivalentTo("Function0<?>")
+	}
+	
+	@Test def void testIfExpression_08() throws Exception {
+		"if (true) [ CharSequence c |''] else [ String s |'']".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
+	}
+	
+	@Test def void testIfExpression_09() throws Exception {
+		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesTo("(Object)=>AbstractStringBuilder & Serializable").isFunctionAndEquivalentTo("Function1<Object, ? extends AbstractStringBuilder & Serializable>")
+	}
+	
+	@Test def void testIfExpression_10() throws Exception {
+		"if (true) null as java.util.List<String> else null as String[]".resolvesTo("List<String>")
+	}
+	
+	@Test def void testIfExpression_11() throws Exception {
+		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesTo("AbstractStringBuilder & Serializable")
+	}
 
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
@@ -1038,6 +1066,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))".resolvesTo("ArrayList<Number & Comparable<?>>");
 	}
 
+	@Test def void testVarArgs_06() throws Exception {
+		"java::util::Arrays::asList(1, 3d, '4')".resolvesTo("List<Comparable<?> & Serializable>");
+	}
+	
 	@Test def void testFeatureCall_01() throws Exception {
 		"'foo'.length".resolvesTo("int")
 	}
@@ -1611,6 +1643,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 			list.forEach[ s | s.toString ]
 			list
 		}".resolvesTo("ArrayList<Object>")
+	}
+	
+	@Test def void testFeatureCall_37() throws Exception {
+		"java::util::Arrays::asList('', '', '').map(s | s.length()).fold(0) [ l, r | if (l > r) l else r]".resolvesTo("Integer")
 	}
 	
 	@Test def void testToList_01() throws Exception {
