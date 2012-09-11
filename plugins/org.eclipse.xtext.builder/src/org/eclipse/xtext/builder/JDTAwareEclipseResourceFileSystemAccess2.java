@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
-import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -21,13 +21,12 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFileSystemAccess2 {
 
 	@Override
-	protected void createFolder(IFolder folder) throws CoreException {
-		super.createFolder(folder);
-		
+	protected void createContainer(IContainer container) throws CoreException {
+		super.createContainer(container);
 		// make it a source folder
-		IJavaProject jp = JavaCore.create(folder.getProject());
+		IJavaProject jp = JavaCore.create(container.getProject());
 		if (jp.exists()) {
-			IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(folder.getFullPath());
+			IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(container.getFullPath());
 			IClasspathEntry[] newClassPath;
 			IClasspathEntry[] classPath = jp.getRawClasspath();
 			for (IClasspathEntry classPathEntry : classPath) {
