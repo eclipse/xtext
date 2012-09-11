@@ -272,6 +272,24 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClosuresWrapIfNeeded() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = newArrayList(\"A\", \"b\")");
+    _builder.newLine();
+    _builder.append("val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("z.toUpperCase == z ]");
+    _builder.newLine();
+    _builder.append("y.join");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = newArrayList(\"A\", \"b\") val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z z.toUpperCase == z ] y.join");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatClosuresParamMultiLine() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
