@@ -33,7 +33,7 @@ public class FunctionTypeConformanceStrategy extends
 			if (functionType != null) {
 				return conformanceComputer.isConformant(leftReference, functionType, param);
 			}
-			if (isFunctionType(leftReference) != FunctionTypeKind.NONE) {
+			if (conformanceComputer.isFunctionType(leftReference) != TypeConformanceComputer.FunctionTypeKind.NONE) {
 				FunctionTypeReference converted = convertToFunctionTypeReference(rightReference, param.rawType);
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftReference, converted, param);
@@ -73,7 +73,7 @@ public class FunctionTypeConformanceStrategy extends
 		if (param.rawType) {
 			throw new IllegalStateException("rawTypeComputation should have exited earlier");
 		}
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument();
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true, false);
 		if (!conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
 			return TypeConformanceResult.FAILED;
 		}

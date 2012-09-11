@@ -773,6 +773,46 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_05() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("if (true) [|\'\'] else [|\'\']", "()=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<String>");
+  }
+  
+  @Test
+  public void testIfExpression_06() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("if (true) [|\'\'] else [|null as CharSequence]", "()=>CharSequence");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<CharSequence>");
+  }
+  
+  @Test
+  public void testIfExpression_07() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("if (true) [|null as Appendable] else [|null as CharSequence]", "()=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<?>");
+  }
+  
+  @Test
+  public void testIfExpression_08() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("if (true) [ CharSequence c |\'\'] else [ String s |\'\']", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testIfExpression_09() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]", "(Object)=>AbstractStringBuilder & Serializable");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, ? extends AbstractStringBuilder & Serializable>");
+  }
+  
+  @Test
+  public void testIfExpression_10() throws Exception {
+    this.resolvesTo("if (true) null as java.util.List<String> else null as String[]", "List<String>");
+  }
+  
+  @Test
+  public void testIfExpression_11() throws Exception {
+    this.resolvesTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply(\'\')", "AbstractStringBuilder & Serializable");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");
@@ -1040,6 +1080,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testVarArgs_05() throws Exception {
     this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testVarArgs_06() throws Exception {
+    this.resolvesTo("java::util::Arrays::asList(1, 3d, \'4\')", "List<Comparable<?> & Serializable>");
   }
   
   @Test
@@ -1571,6 +1616,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCall_36() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | s.toString ]\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testFeatureCall_37() throws Exception {
+    this.resolvesTo("java::util::Arrays::asList(\'\', \'\', \'\').map(s | s.length()).fold(0) [ l, r | if (l > r) l else r]", "Integer");
   }
   
   @Test

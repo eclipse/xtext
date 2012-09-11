@@ -136,6 +136,10 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		super.testFeatureCall_25_d()
 	}
 	
+	@Ignore("TODO discuss the preference - list or array?") @Test override testIfExpression_10() throws Exception {
+		super.testIfExpression_10()
+	}
+	
 }
 
 /**
@@ -482,6 +486,21 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	}
 	
 	@Ignore("fails in old implementation") @Test override testIfExpression_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_06() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_07() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_09() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_11() throws Exception {
 		fail("fails in old implementation")
 	}
 	

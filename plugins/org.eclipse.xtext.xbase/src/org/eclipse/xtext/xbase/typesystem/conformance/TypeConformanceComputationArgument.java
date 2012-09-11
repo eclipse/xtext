@@ -18,16 +18,18 @@ public class TypeConformanceComputationArgument {
 	protected final boolean rawType;
 	protected final boolean asTypeArgument;
 	protected final boolean allowPrimitiveConversion;
+	protected final boolean allowPrimitiveWidening;
 	
 	public TypeConformanceComputationArgument() {
-		this(false, false, true);
+		this(false, false, true, true);
 	}
 	
 	public TypeConformanceComputationArgument(boolean rawType, boolean asTypeArgument,
-			boolean allowPrimitiveConversion) {
+			boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
 		this.rawType = rawType;
 		this.asTypeArgument = asTypeArgument;
 		this.allowPrimitiveConversion = allowPrimitiveConversion;
+		this.allowPrimitiveWidening = allowPrimitiveWidening;
 	}
 	
 	public boolean isAllowPrimitiveConversion() {
@@ -45,25 +47,26 @@ public class TypeConformanceComputationArgument {
 	@Override
 	public String toString() {
 		return "TypeConformanceComputationArgument [rawType=" + rawType + ", asTypeArgument=" + asTypeArgument
-				+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + "]";
+				+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + ", allowPrimitiveWidening=" + allowPrimitiveWidening + "]";
 	}
 
 	protected static class Internal<T extends LightweightTypeReference> extends TypeConformanceComputationArgument {
 		protected final T reference;
 		
-		protected static <T extends LightweightTypeReference> Internal<T> create(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion) {
-			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion);
+		protected static <T extends LightweightTypeReference> Internal<T> create(T reference, 
+				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
+			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening);
 		}
 		
-		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion) {
-			super(rawType, asTypeArgument, allowPrimitiveConversion);
+		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
+			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening);
 			this.reference = reference;
 		}
 
 		@Override
 		public String toString() {
 			return "TypeConformanceComputationArgument.Internal [reference=" + reference + ", rawType=" + rawType + ", asTypeArgument=" + asTypeArgument
-					+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + "]";
+					+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + ", allowPrimitiveWidening=" + allowPrimitiveWidening + "]";
 		}
 	}
 	

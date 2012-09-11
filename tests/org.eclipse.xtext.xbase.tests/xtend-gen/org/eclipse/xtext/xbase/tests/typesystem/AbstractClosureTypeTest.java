@@ -82,6 +82,42 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testIfExpression_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [|\'\'] else [|\'\']", "()=>String", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>", "Function0<String>");
+  }
+  
+  @Test
+  public void testIfExpression_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [|\'\'] else [|null as CharSequence]", "()=>String", "()=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>", "Function0<CharSequence>");
+  }
+  
+  @Test
+  public void testIfExpression_03() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [|null as Appendable] else [|null as CharSequence]", "()=>Appendable", "()=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Appendable>", "Function0<CharSequence>");
+  }
+  
+  @Test
+  public void testIfExpression_04() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [ CharSequence c |\'\'] else [ String s |\'\']", "(CharSequence)=>String", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, String>", "Function1<String, String>");
+  }
+  
+  @Test
+  public void testIfExpression_05() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [new StringBuilder()] else [new StringBuffer()]", "(Object)=>StringBuilder", "(Object)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, StringBuilder>", "Function1<Object, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_06() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply(\'\')", "(String)=>StringBuilder", "(String)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, StringBuilder>", "Function1<String, StringBuffer>");
+  }
+  
+  @Test
   public void testNumberLiteralInClosure() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList().map[42]", "(Object)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Integer>");

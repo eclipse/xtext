@@ -49,7 +49,7 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	}
 
 	protected <T extends LightweightTypeReference> TypeConformanceComputationArgument.Internal<T> copyArgument(T t, TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
-		return TypeConformanceComputationArgument.Internal.create(t, param.rawType, param.asTypeArgument, param.allowPrimitiveConversion);
+		return TypeConformanceComputationArgument.Internal.create(t, param.rawType, param.asTypeArgument, param.allowPrimitiveConversion, param.allowPrimitiveWidening);
 	}
 	
 	@Override

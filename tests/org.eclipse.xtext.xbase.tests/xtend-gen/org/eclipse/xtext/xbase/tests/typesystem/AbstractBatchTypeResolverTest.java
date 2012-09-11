@@ -236,4 +236,10 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   public void testFeatureCall_25_d() throws Exception {
     super.testFeatureCall_25_d();
   }
+  
+  @Ignore(value = "TODO discuss the preference - list or array?")
+  @Test
+  public void testIfExpression_10() throws Exception {
+    super.testIfExpression_10();
+  }
 }

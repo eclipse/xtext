@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
 
@@ -77,8 +78,13 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	@Override
 	protected TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference left, UnboundTypeReference right,
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
-		if (left.getTypeParameter() == right.getTypeParameter())
+		if (left.getHandle().equals(right.getHandle())) {
 			return TypeConformanceResult.SUCCESS;
+		}
+		if (left.getTypeParameter() == right.getTypeParameter()) {
+			left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+			return TypeConformanceResult.SUCCESS;
+		}
 		if (left.getAllHints().equals(right.getAllHints()))
 			return TypeConformanceResult.SUCCESS;
 		return TypeConformanceResult.FAILED;
