@@ -97,6 +97,29 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatMethodMultiline() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def baz(
+					String x,
+					String y
+				) {
+				}
+			}
+		''', '''
+			package foo
+			
+			class bar {
+				def baz(String x, String y
+				) {
+				}
+			}
+		''')	
+	}
+	
+	
 	@Test def formatMethodAnnotation() {
 		assertFormatted('''
 			package foo
@@ -430,6 +453,21 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatFeatureCallMultiline() {
+		assertFormattedExpression('''
+			val ML2 = newArrayList(
+				newArrayList(1, 2, 3, 4),
+				newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109,
+					110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),
+				newArrayList(9, 10, 11, 12),
+				newArrayList(13, 14, 15, 16)
+			)
+		''', '''
+			val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16)
+			)
+		''')	
+	}
+	
 	@Test def formatConstructor1() {
 		assertFormattedExpression('''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
@@ -448,6 +486,21 @@ class XtendFormatterTest extends AbstractFormatterTest {
 				new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))
 		''', '''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))
+		''')	
+	}
+	
+	@Test def formatConstructorMultiline() {
+		assertFormattedExpression('''
+			val ML2 = new ArrayList(
+				new ArrayList(1, 2, 3, 4),
+				new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108,
+					109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),
+				new ArrayList(9, 10, 11, 12),
+				new ArrayList(13, 14, 15, 16)
+			)
+		''', '''
+			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16)
+			)
 		''')	
 	}
 	
@@ -504,6 +557,24 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			
 			1, 
 			
+			2)
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallMultiline() {
+		assertFormattedExpression('''
+			val ML1 = "x".substring(
+				0,
+				1,
+				2
+			)
+		''', '''
+			val ML1 = "x".substring (
+			
+			0, 
+			
+			1, 
+			
 			2
 			)
 		''')	
@@ -522,6 +593,28 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			newArrayList("x").map()[lenght]
 		''', '''
 			newArrayList("x")  .  map  (  )  [  lenght  ]
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallBuilderMultiline1() {
+		assertFormattedExpression('''
+			newArrayList("x").map(
+				length
+			)[lenght]
+		''', '''
+			newArrayList("x")  .  map  (  length  
+			)  [  lenght  ]
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallBuilderMultiline2() {
+		assertFormattedExpression('''
+			newArrayList("x").map(length)[
+				lenght
+			]
+		''', '''
+			newArrayList("x")  .  map  (  length   )  [  lenght  
+			]
 		''')	
 	}
 	

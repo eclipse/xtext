@@ -163,6 +163,51 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatMethodMultiline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String x,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def baz(String x, String y");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(") {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatMethodAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -736,6 +781,36 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatFeatureCallMultiline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML2 = newArrayList(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("newArrayList(1, 2, 3, 4),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("newArrayList(9, 10, 11, 12),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("newArrayList(13, 14, 15, 16)");
+    _builder.newLine();
+    _builder.append(")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16)");
+    _builder_1.newLine();
+    _builder_1.append(")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatConstructor1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
@@ -768,6 +843,36 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16))");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatConstructorMultiline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML2 = new ArrayList(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(1, 2, 3, 4),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(9, 10, 11, 12),");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new ArrayList(13, 14, 15, 16)");
+    _builder.newLine();
+    _builder.append(")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16)");
+    _builder_1.newLine();
+    _builder_1.append(")");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
@@ -856,6 +961,37 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.append("1, ");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("2)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallMultiline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val ML1 = \"x\".substring(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("0,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("1,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("2");
+    _builder.newLine();
+    _builder.append(")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val ML1 = \"x\".substring (");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("0, ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("1, ");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("2");
     _builder_1.newLine();
     _builder_1.append(")");
@@ -881,6 +1017,42 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("newArrayList(\"x\")  .  map  (  )  [  lenght  ]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallBuilderMultiline1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("newArrayList(\"x\").map(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("length");
+    _builder.newLine();
+    _builder.append(")[lenght]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("newArrayList(\"x\")  .  map  (  length  ");
+    _builder_1.newLine();
+    _builder_1.append(")  [  lenght  ]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallBuilderMultiline2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("newArrayList(\"x\").map(length)[");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lenght");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("newArrayList(\"x\")  .  map  (  length   )  [  lenght  ");
+    _builder_1.newLine();
+    _builder_1.append("]");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
