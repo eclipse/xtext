@@ -318,6 +318,33 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClosuresWithOperator() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = new StringBuffer() => [");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("append(\"x\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("append(\"y\")");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = new StringBuffer() => [");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("append(\"x\")");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("append(\"y\")");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatIf1SL() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if(true) println(\"foo\")");

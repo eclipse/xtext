@@ -192,6 +192,20 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClosuresWithOperator() {
+		assertFormattedExpression('''
+			val x = new StringBuffer() => [
+				append("x")
+				append("y")
+			]
+		''', '''
+			val x = new StringBuffer() => [
+				append("x")
+				append("y")
+			]
+		''')	
+	}
+	
 	@Test def formatIf1SL() {
 		assertFormattedExpression('''
 			if(true) println("foo")

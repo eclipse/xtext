@@ -845,9 +845,17 @@ public class XtendFormatter {
           };
         FormattingData _prepend = this._formatterExtensions.prepend(op, _function);
         format.operator_add(_prepend);
+        boolean _or = false;
         XExpression _rightOperand = call.getRightOperand();
-        boolean _fitsIntoLine = this.fitsIntoLine(format, _rightOperand);
-        if (_fitsIntoLine) {
+        boolean _useStyleMultiline = this.useStyleMultiline(_rightOperand, format);
+        if (_useStyleMultiline) {
+          _or = true;
+        } else {
+          XExpression _rightOperand_1 = call.getRightOperand();
+          boolean _fitsIntoLine = this.fitsIntoLine(format, _rightOperand_1);
+          _or = (_useStyleMultiline || _fitsIntoLine);
+        }
+        if (_or) {
           final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.oneSpace();
@@ -875,8 +883,8 @@ public class XtendFormatter {
             format.operator_add(_append_2);
           }
         }
-        XExpression _rightOperand_1 = call.getRightOperand();
-        this.format(_rightOperand_1, format);
+        XExpression _rightOperand_2 = call.getRightOperand();
+        this.format(_rightOperand_2, format);
       }
     }
     if (indented) {
@@ -1251,8 +1259,8 @@ public class XtendFormatter {
       }
     }
     if (!_matched_1) {
-      boolean _useStyleClosureMultiline = this.useStyleClosureMultiline(expr, format);
-      if (_useStyleClosureMultiline) {
+      boolean _useStyleMultiline = this.useStyleMultiline(expr, format);
+      if (_useStyleMultiline) {
         _matched_1=true;
         this.formatClosureMultiLine(expr, open, children, close, format);
       }
@@ -1411,7 +1419,11 @@ public class XtendFormatter {
     format.operator_add(_append_1);
   }
   
-  protected boolean useStyleClosureMultiline(final XClosure closure, final FormattableDocument doc) {
+  protected boolean _useStyleMultiline(final XExpression closure, final FormattableDocument doc) {
+    return false;
+  }
+  
+  protected boolean _useStyleMultiline(final XClosure closure, final FormattableDocument doc) {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(closure, "]");
     EObject _eContainer = closure.eContainer();
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(_eContainer, ")");
@@ -1861,6 +1873,17 @@ public class XtendFormatter {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(clazz, format).toString());
+    }
+  }
+  
+  protected boolean useStyleMultiline(final XExpression closure, final FormattableDocument doc) {
+    if (closure instanceof XClosure) {
+      return _useStyleMultiline((XClosure)closure, doc);
+    } else if (closure != null) {
+      return _useStyleMultiline(closure, doc);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(closure, doc).toString());
     }
   }
 }
