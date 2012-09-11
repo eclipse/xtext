@@ -156,6 +156,14 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClosuresSemicolon() {
+		assertFormattedExpression('''
+			newArrayList("A", "b").filter[ val b = it; b.toUpperCase == b ]
+		''', '''
+			newArrayList("A", "b").filter[ val b = it  ;   b.toUpperCase == b ]
+		''')	
+	}
+	
 	@Test def formatClosuresEmpty() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
@@ -185,6 +193,21 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''', '''
 			val x = newArrayList("A", "b") val y = x.filter [
 				val z = it z.toUpperCase == z 
+			] y.join
+		''')	
+	}
+	
+	@Test def formatClosuresMultiLineSemicolon() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter [
+				val z = it;
+				z.toUpperCase == z;
+			]
+			y.join
+		''', '''
+			val x = newArrayList("A", "b") val y = x.filter [
+				val z = it  ;   z.toUpperCase == z  ;   
 			] y.join
 		''')	
 	}
