@@ -117,30 +117,46 @@ public class XtendFormatter {
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
 		val nameNode = func.nodeForFeature(XtendPackage$Literals::XTEND_FUNCTION__NAME)
 		val open = nameNode.immediatelyFollowingKeyword("(")
-		var INode comma = null
-		var indented = false
-		for(param:func.parameters) {
-			if(format.fitsIntoLine(param)) {
-				if(comma == null) 
-					format += open.append[noSpace]
-				else 
-					format += comma.append[oneSpace]
-			} else {
-				val n = if(comma == null) open else comma 
-				format += n.append[newLine]
-				if(!indented)
-					format += n.append[increaseIndentation]
-				indented = true
+		val close = func.nodeForKeyword(")")
+		if(close?.whitespaceBefore?.text?.contains("\n")) {
+			var INode comma = null
+			if(func.parameters.empty)
+				format += open.append[noSpace]
+			else for(param:func.parameters) {
+				if(param == func.parameters.head) 
+ 					format += open.append[newLine; increaseIndentation]
+ 				else if(comma != null)
+ 					format += comma.append[newLine]
+ 				if(param == func.parameters.last) 
+ 					format += param.nodeForEObject.append[newLine; decreaseIndentation]
+				comma = param.nodeForEObject.immediatelyFollowingKeyword(",") 
+			} 
+		} else {
+			var INode comma = null
+			var indented = false
+			for(param:func.parameters) {
+				if(format.fitsIntoLine(param)) {
+					if(comma == null) 
+						format += open.append[noSpace]
+					else 
+						format += comma.append[oneSpace]
+				} else {
+					val n = if(comma == null) open else comma 
+					format += n.append[newLine]
+					if(!indented)
+						format += n.append[increaseIndentation]
+					indented = true
+				}
+				comma = param.nodeForEObject.immediatelyFollowingKeyword(",") 
 			}
-			comma = param.nodeForEObject.immediatelyFollowingKeyword(",") 
+			if(func.parameters.size > 0) {
+				val last = func.parameters.last.nodeForEObject
+				format += last.append[noSpace]
+				if(indented)
+					format += last.append[decreaseIndentation]
+			} else 
+				format += open.append[noSpace]
 		}
-		if(func.parameters.size > 0) {
-			val last = func.parameters.last.nodeForEObject
-			format += last.append[noSpace]
-			if(indented)
-				format += last.append[decreaseIndentation]
-		} else 
-			format += open.append[noSpace]
 		func.expression.format(format) 
 	}
 	
@@ -167,9 +183,9 @@ public class XtendFormatter {
 	def protected dispatch void format(EObject expr, FormattableDocument format) {
 	}
 	
-	def protected void formatFeatureCallParams(INode open, List<XExpression> params, FormattableDocument format) {
-		val builder = if(params.last != null && (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0) params.last
-		val explicitParams = if(builder != null) params.take(params.size -1) else params		
+	def protected void formatFeatureCallParamsWrapIfNeeded(INode open, List<XExpression> params, FormattableDocument format) {
+		val builder = params.builder
+		val explicitParams = params.explicitParams		
 		var INode node = null
 		var indented = false
 		
@@ -210,13 +226,54 @@ public class XtendFormatter {
 		}
 	}
 	
+	def protected XExpression builder(List<XExpression> params) {
+		if(params.last != null && (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0) 
+			params.last
+	}
+	
+	def protected Iterable<XExpression> explicitParams(List<XExpression> params) {
+		val builder = params.builder
+		if(builder != null) params.take(params.size -1) else params
+	}
+	
+	def protected void formatFeatureCallParamsMultiline(INode open, List<XExpression> params, FormattableDocument format) {
+		val builder = params.builder
+		val explicitParams = params.explicitParams		
+		var INode node = null
+		
+		if(explicitParams.empty) {
+			format += open.append[noSpace]
+		} else for(arg : explicitParams) {
+			if(arg == explicitParams.head) {
+				val head = arg.nodeForEObject
+				format += head.prepend[newLine;increaseIndentation]
+			} else if(node != null)
+				format += node.append[newLine]
+			if(arg == explicitParams.last) 
+				format += arg.nodeForEObject.append[newLine;decreaseIndentation]
+			arg.format(format)
+			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
+		}
+		if(builder != null) {
+			format += builder.nodeForEObject.prepend[noSpace]
+			builder.format(format)
+		}
+	}
+	
 	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
-		formatFeatureCallParams(expr.nodeForKeyword("("), expr.arguments, format)
+		if(expr.useStyleMultiline(format))
+			formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.arguments, format)
+		else
+			formatFeatureCallParamsWrapIfNeeded(expr.nodeForKeyword("("), expr.arguments, format)
 	}
 	
 	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
-		if(expr.explicitOperationCall)
-			formatFeatureCallParams(expr.nodeForKeyword("("), expr.featureCallArguments, format)
+		if(expr.explicitOperationCall) {
+			if(expr.useStyleMultiline(format))
+				formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.featureCallArguments, format)
+			else
+				formatFeatureCallParamsWrapIfNeeded(expr.nodeForKeyword("("), expr.featureCallArguments, format)
+		}
 		else for(arg : expr.featureCallArguments)
 			format(arg, format)
 	}
@@ -244,21 +301,28 @@ public class XtendFormatter {
 					val open = call.nodeForKeyword("(")
 					format += featureNode.append[noSpace]
 					
-					val shortLenght = format.lineLengthBefore(callOffset) + (featureNode.length * 2)
-					
-					if(shortLenght < format.cfg.maxLineWidth || format.fitsIntoLine(callOffset, callLength, [ f |
-						f += op.append[noSpace] 
-						formatFeatureCallParams(open, call.memberCallArguments, f)
-					])) {
-						format += op.append[noSpace]
+					val lineLength = format.lineLengthBefore(callOffset)
+					if(call.useStyleMultiline(format)) {
+						if(lineLength + featureNode.length < format.cfg.maxLineWidth) 
+							format += op.append[noSpace]
+						else
+							format += op.append[newLine]
+						formatFeatureCallParamsMultiline(open, call.memberCallArguments, format)
 					} else {
-						format += op.append[newLine]
-						if(!indented) {
-							indented = true
-							format += op.append[increaseIndentation]
+						if(lineLength + (featureNode.length * 2) < format.cfg.maxLineWidth || format.fitsIntoLine(callOffset, callLength, [ f |
+							f += op.append[noSpace] 
+							formatFeatureCallParamsWrapIfNeeded(open, call.memberCallArguments, f)
+						])) {
+							format += op.append[noSpace]
+						} else {
+							format += op.append[newLine]
+							if(!indented) {
+								indented = true
+								format += op.append[increaseIndentation]
+							}
 						}
+						formatFeatureCallParamsWrapIfNeeded(open, call.memberCallArguments, format)
 					}
-					formatFeatureCallParams(open, call.memberCallArguments, format)
 				} else {
 					val shortLenght = format.lineLengthBefore(callOffset) + featureNode.length
 					if(shortLenght < format.cfg.maxLineWidth) {
@@ -452,7 +516,28 @@ public class XtendFormatter {
 	
 	def protected dispatch boolean useStyleMultiline(XClosure closure, FormattableDocument doc) {
 		val close = closure.nodeForKeyword("]") ?: closure.eContainer.nodeForKeyword(")")
-		return close != null && close.whitespaceBefore?.text.contains("\n")
+		return close != null && close?.whitespaceBefore?.text?.contains("\n")
+	}
+	
+	def protected dispatch boolean useStyleMultiline(XMemberFeatureCall fc, FormattableDocument doc) {
+		val close = fc.nodeForKeyword(")")
+		if(close != null && close?.whitespaceBefore?.text?.contains("\n")) 
+			return true;
+		fc.memberCallArguments.explicitParams.exists[useStyleMultiline(doc)]
+	}
+	
+	def protected dispatch boolean useStyleMultiline(XFeatureCall fc, FormattableDocument doc) {
+		val close = fc.nodeForKeyword(")")
+		if(close != null && close?.whitespaceBefore?.text?.contains("\n")) 
+			return true;
+		fc.featureCallArguments.explicitParams.exists[useStyleMultiline(doc)]
+	}
+	
+	def protected dispatch boolean useStyleMultiline(XConstructorCall fc, FormattableDocument doc) {
+		val close = fc.nodeForKeyword(")")
+		if(close != null && close?.whitespaceBefore?.text?.contains("\n")) 
+			return true;
+		fc.arguments.explicitParams.exists[useStyleMultiline(doc)]
 	}
 	
 	def protected boolean useStyleClosureNoWhitespace(XExpression expression) {
