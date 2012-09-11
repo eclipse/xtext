@@ -44,28 +44,29 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 @SuppressWarnings("restriction")
 public class XtendFormatter {
 	
-	@Inject IWhitespaceInformationProvider whitespaeInfo
-	
 	@Inject extension NodeModelAccess
 	@Inject extension FormatterExtensions
 	@Inject extension XtendGrammarAccess
 	
+	@Inject IWhitespaceInformationProvider whitespaeInfo
 	@Inject RichStringFormatter richStringFormatter
+	
+	@Property boolean allowIdentityEdits = false
 	
 	def List<TextReplacement> format(XtextResource res, int offset, int length, RendererConfiguration cfg) {
 		cfg.lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
 		cfg.indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
 		
-		val text = res.parseResult.rootNode.text
-		val format = new FormattableDocument(cfg, text)
+		val doc = res.parseResult.rootNode.text
+		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head as XtendFile, format)
 
-		format.renderToEdits(offset, length)		
-	}
-	
-	
-	def void format(XtextResource res, int offset, int length, RendererConfiguration cfg, (int, int, String)=>void out) {
-		format(res, offset, length, cfg).forEach[e|out.apply(e.offset, e.length, e.text)]
+		val edits = format.renderToEdits(offset, length)
+		
+		if(allowIdentityEdits)
+			edits
+		else 
+			edits.filter[doc.substring(it.offset, it.offset + it.length) != text].toList		
 	}
 	
 	def protected dispatch void format(XtendFile xtendFile, FormattableDocument format) {
