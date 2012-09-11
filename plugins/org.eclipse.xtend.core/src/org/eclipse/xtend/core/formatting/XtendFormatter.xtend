@@ -303,7 +303,7 @@ public class XtendFormatter {
 			val op = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 			format += op.prepend[oneSpace]
 			
-			if(format.fitsIntoLine(call.rightOperand)) {
+			if(call.rightOperand.useStyleMultiline(format) || format.fitsIntoLine(call.rightOperand)) {
 				format += op.append[oneSpace]
 			} else {
 				format += op.append[newLine]
@@ -392,7 +392,7 @@ public class XtendFormatter {
 		switch child:expr.expression {
 			case expr.declaredFormalParameters.empty && children.empty:
 				format += expr.nodeForKeyword("[").append[noSpace]
-			case expr.useStyleClosureMultiline(format):
+			case expr.useStyleMultiline(format):
 				formatClosureMultiLine(expr, open, children, close, format)
 			case expr.useStyleClosureNoWhitespace():
 				formatClosureNoWhitespace(expr, open, children, close, format)
@@ -446,7 +446,11 @@ public class XtendFormatter {
 		format += c.append[noSpace]
 	}
 	
-	def protected boolean useStyleClosureMultiline(XClosure closure, FormattableDocument doc) {
+	def protected dispatch boolean useStyleMultiline(XExpression closure, FormattableDocument doc) {
+		false
+	}
+	
+	def protected dispatch boolean useStyleMultiline(XClosure closure, FormattableDocument doc) {
 		val close = closure.nodeForKeyword("]") ?: closure.eContainer.nodeForKeyword(")")
 		return close != null && close.whitespaceBefore?.text.contains("\n")
 	}
