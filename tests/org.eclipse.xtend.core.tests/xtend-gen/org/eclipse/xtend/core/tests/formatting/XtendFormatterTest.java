@@ -442,7 +442,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIf1ML() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true)");
+    _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
@@ -458,7 +458,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIf1MLVar() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("var x = if(true)");
+    _builder.append("var x = if (true)");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("println(\"foo\")");
@@ -480,7 +480,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIf1MLSemicolon1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true)");
+    _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\");");
@@ -496,7 +496,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIf1MLSemicolon2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true)");
+    _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\");");
@@ -540,7 +540,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIfElse1ML() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true)");
+    _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
@@ -583,12 +583,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIfElseIf1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true)");
+    _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
     _builder.newLine();
-    _builder.append("else if(false)");
+    _builder.append("else if (false)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"bar\")");
@@ -608,12 +608,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIfElseIf2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true) {");
+    _builder.append("if (true) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
     _builder.newLine();
-    _builder.append("} else if(false) {");
+    _builder.append("} else if (false) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"bar\")");
@@ -637,12 +637,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIfElseIf3() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true) {");
+    _builder.append("if (true) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
     _builder.newLine();
-    _builder.append("} else if(false)");
+    _builder.append("} else if (false)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"bar\")");
@@ -662,7 +662,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatFor1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("for(i:1 .. 2)");
+    _builder.append("for (i : 1 .. 2)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(i)");
@@ -676,7 +676,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatFor2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("for(i:1 .. 2) {");
+    _builder.append("for (i : 1 .. 2) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(i)");
@@ -692,7 +692,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatWhile1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("while(true)");
+    _builder.append("while (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"x\")");
@@ -706,7 +706,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatWhile2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("while(true) {");
+    _builder.append("while (true) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"x\")");
@@ -727,7 +727,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("\t");
     _builder.append("println(\"x\")");
     _builder.newLine();
-    _builder.append("while(true)");
+    _builder.append("while (true)");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("do  println(\"x\")   while  (  true  ) ");
@@ -743,7 +743,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("\t");
     _builder.append("println(\"x\")");
     _builder.newLine();
-    _builder.append("} while(true)");
+    _builder.append("} while (true)");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("do  {  println(\"x\")   } while  (  true  ) ");

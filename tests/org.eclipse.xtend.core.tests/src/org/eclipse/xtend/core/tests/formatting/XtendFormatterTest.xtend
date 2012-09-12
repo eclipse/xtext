@@ -262,7 +262,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIf1ML() {
 		assertFormattedExpression('''
-			if(true)
+			if (true)
 				println("foo")
 		''', '''
 			if(true)
@@ -272,7 +272,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIf1MLVar() {
 		assertFormattedExpression('''
-			var x = if(true)
+			var x = if (true)
 					println("foo")
 				else
 					println("bar")
@@ -284,7 +284,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIf1MLSemicolon1() {
 		assertFormattedExpression('''
-			if(true)
+			if (true)
 				println("foo");
 		''', '''
 			if(true)
@@ -294,7 +294,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIf1MLSemicolon2() {
 		assertFormattedExpression('''
-			if(true)
+			if (true)
 				println("foo");
 			println("bar")
 		''', '''
@@ -322,7 +322,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIfElse1ML() {
 		assertFormattedExpression('''
-			if(true)
+			if (true)
 				println("foo")
 			else
 				println("bar")
@@ -346,9 +346,9 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIfElseIf1() {
 		assertFormattedExpression('''
-			if(true)
+			if (true)
 				println("foo")
-			else if(false)
+			else if (false)
 				println("bar")
 		''', '''
 			if(true)
@@ -360,9 +360,9 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIfElseIf2() {
 		assertFormattedExpression('''
-			if(true) {
+			if (true) {
 				println("foo")
-			} else if(false) {
+			} else if (false) {
 				println("bar")
 			}
 		''', '''
@@ -376,9 +376,9 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIfElseIf3() {
 		assertFormattedExpression('''
-			if(true) {
+			if (true) {
 				println("foo")
-			} else if(false)
+			} else if (false)
 				println("bar")
 		''', '''
 			if(true) {
@@ -390,7 +390,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			
 	@Test def formatFor1() {
 		assertFormattedExpression('''
-			for(i:1 .. 2)
+			for (i : 1 .. 2)
 				println(i)
 		''', '''
 			for  (  i  :  1 .. 2  )  println(i)
@@ -399,7 +399,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatFor2() {
 		assertFormattedExpression('''
-			for(i:1 .. 2) {
+			for (i : 1 .. 2) {
 				println(i)
 			}
 		''', '''
@@ -409,7 +409,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatWhile1() {
 		assertFormattedExpression('''
-			while(true)
+			while (true)
 				println("x")
 		''', '''
 			while  (  true  )  println("x")
@@ -418,7 +418,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatWhile2() {
 		assertFormattedExpression('''
-			while(true) {
+			while (true) {
 				println("x")
 			}
 		''', '''
@@ -430,7 +430,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			do
 				println("x")
-			while(true)
+			while (true)
 		''', '''
 			do  println("x")   while  (  true  ) 
 		''')	
@@ -440,7 +440,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			do {
 				println("x")
-			} while(true)
+			} while (true)
 		''', '''
 			do  {  println("x")   } while  (  true  ) 
 		''')		
