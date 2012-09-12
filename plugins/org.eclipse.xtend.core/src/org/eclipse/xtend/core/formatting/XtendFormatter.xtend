@@ -43,6 +43,7 @@ import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XDoWhileExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
+import org.eclipse.xtext.xbase.XThrowExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -264,6 +265,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
+		format += expr.nodeForKeyword("new").append[oneSpace]
 		if(expr.useStyleMultiline(format))
 			formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.arguments, format)
 		else
@@ -689,6 +691,10 @@ public class XtendFormatter {
 		}
 	}
 	
+	def protected dispatch void format(XThrowExpression expr, FormattableDocument format) {
+		format += expr.expression.nodeForEObject.prepend[oneSpace]
+		expr.expression.format(format)
+	}
 	
 	def protected dispatch void format(XExpression expr, FormattableDocument format) {
 		for(obj:expr.eContents)
