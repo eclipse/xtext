@@ -1964,25 +1964,85 @@ public class XtendFormatter {
   }
   
   protected void _format(final XForLoopExpression expr, final FormattableDocument format) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "for");
+    final Procedure1<ILeafNode> _function = new Procedure1<ILeafNode>() {
+        public void apply(final ILeafNode it) {
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _append = XtendFormatter.this._formatterExtensions.append(it, _function);
+          format.operator_add(_append);
+        }
+      };
+    ObjectExtensions.<ILeafNode>operator_doubleArrow(_nodeForKeyword, _function);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFOR_LOOP_EXPRESSION__DECLARED_PARAM);
+    final Procedure1<INode> _function_1 = new Procedure1<INode>() {
+        public void apply(final INode it) {
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _prepend = XtendFormatter.this._formatterExtensions.prepend(it, _function);
+          format.operator_add(_prepend);
+          final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _append = XtendFormatter.this._formatterExtensions.append(it, _function_1);
+          format.operator_add(_append);
+        }
+      };
+    ObjectExtensions.<INode>operator_doubleArrow(_nodeForFeature, _function_1);
+    INode _nodeForFeature_1 = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
+    final Procedure1<INode> _function_2 = new Procedure1<INode>() {
+        public void apply(final INode it) {
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _prepend = XtendFormatter.this._formatterExtensions.prepend(it, _function);
+          format.operator_add(_prepend);
+          final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _append = XtendFormatter.this._formatterExtensions.append(it, _function_1);
+          format.operator_add(_append);
+        }
+      };
+    ObjectExtensions.<INode>operator_doubleArrow(_nodeForFeature_1, _function_2);
     XExpression _eachExpression = expr.getEachExpression();
-    if ((_eachExpression instanceof XBlockExpression)) {
+    final INode each = this._nodeModelAccess.nodeForEObject(_eachExpression);
+    XExpression _eachExpression_1 = expr.getEachExpression();
+    if ((_eachExpression_1 instanceof XBlockExpression)) {
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      FormattingData _prepend = this._formatterExtensions.prepend(each, _function_3);
+      format.operator_add(_prepend);
     } else {
-      XExpression _eachExpression_1 = expr.getEachExpression();
-      final INode each = this._nodeModelAccess.nodeForEObject(_eachExpression_1);
-      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+      final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.newLine();
             it.increaseIndentation();
           }
         };
-      FormattingData _prepend = this._formatterExtensions.prepend(each, _function);
-      format.operator_add(_prepend);
-      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+      FormattingData _prepend_1 = this._formatterExtensions.prepend(each, _function_4);
+      format.operator_add(_prepend_1);
+      final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.decreaseIndentation();
           }
         };
-      FormattingData _append = this._formatterExtensions.append(each, _function_1);
+      FormattingData _append = this._formatterExtensions.append(each, _function_5);
       format.operator_add(_append);
     }
     XExpression _forExpression = expr.getForExpression();

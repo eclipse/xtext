@@ -667,7 +667,10 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("\t");
     _builder.append("println(i)");
     _builder.newLine();
-    this.assertFormattedExpression(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (  i  :  1 .. 2  )  println(i)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
   
   @Test
@@ -680,7 +683,10 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormattedExpression(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (  i  :  1   ..   2  )   {   println(i)  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
   
   @Test
