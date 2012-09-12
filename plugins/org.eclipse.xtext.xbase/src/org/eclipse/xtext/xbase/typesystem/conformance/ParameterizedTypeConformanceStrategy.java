@@ -74,7 +74,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftReference.getType() == rightReference.getType()) {
 			if (param.rawType || leftReference.isRawType() || rightReference.isRawType() || leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
 				return TypeConformanceResult.SUCCESS;
-			return areArgumentsConformant(leftReference, rightReference);
+			return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints);
 		}
 		if (leftReference.isType(Void.TYPE) || rightReference.isType(Void.TYPE)) {
 			return TypeConformanceResult.FAILED;
@@ -118,7 +118,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			// early exit - remaining cases are all compatible to java.lang.Object
 			if (leftReference.isType(Object.class))
 				return TypeConformanceResult.SUCCESS;
-			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening);
+			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
+					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
 			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
@@ -288,7 +289,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 
 	protected TypeConformanceResult areArgumentsConformant(ParameterizedTypeReference leftReference,
-			ParameterizedTypeReference rightReference) {
+			ParameterizedTypeReference rightReference, boolean unboundAddsHints) {
 		if (leftReference.getType() != rightReference.getType())
 			throw new IllegalArgumentException("cannot compare type arguments for different base types");
 		List<LightweightTypeReference> leftTypeArguments = leftReference.getTypeArguments();
@@ -296,7 +297,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftTypeArguments.size() != rightTypeArguments.size()) {
 			return TypeConformanceResult.FAILED;
 		}
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false);
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false, unboundAddsHints);
 		for(int i = 0; i < leftTypeArguments.size(); i++) {
 			if (!conformanceComputer.isConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argument).isConformant()) {
 				return TypeConformanceResult.FAILED;

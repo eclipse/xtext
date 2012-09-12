@@ -33,7 +33,8 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 			TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
 		LightweightTypeReference leftComponent = left.getComponentType();
 		LightweightTypeReference rightComponent = right.getComponentType();
-		return conformanceComputer.isConformant(leftComponent, rightComponent, new TypeConformanceComputationArgument(param.rawType, param.asTypeArgument, false, false));
+		return conformanceComputer.isConformant(leftComponent, rightComponent, 
+				new TypeConformanceComputationArgument(param.rawType, param.asTypeArgument, false, false, param.unboundComputationAddsHints));
 	}
 	
 	@Override
@@ -56,7 +57,8 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 		if (!param.asTypeArgument) {
 			JvmType type = right.getType();
 			if (type instanceof JvmTypeParameter) {
-				TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening);
+				TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
+						param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
 				for(LightweightTypeReference rightSuperTypes: right.getAllSuperTypes()) {
 					TypeConformanceResult result = conformanceComputer.isConformant(left, rightSuperTypes, paramWithoutSuperTypeCheck);
 					if (result.isConformant()) {

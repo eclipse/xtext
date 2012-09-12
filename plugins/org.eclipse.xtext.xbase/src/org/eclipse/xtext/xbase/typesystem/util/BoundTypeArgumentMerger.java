@@ -106,7 +106,7 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 			if (!inVariances.isEmpty()) {
 				LightweightTypeReference inType = getMostSpecialType(inTypes);
-				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false, false));
+				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false, false, true));
 				VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 				variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
 			}

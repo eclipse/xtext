@@ -70,13 +70,45 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testIfExpression_05() throws Exception {
-		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesClosuresTo("(Object)=>StringBuilder", "(Object)=>StringBuffer").withEquivalents("Function1<Object, StringBuilder>", "Function1<Object, StringBuffer>")
+		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesClosuresTo("(Object)=>StringBuilder", "(Object)=>StringBuffer")
+			.withEquivalents("Function1<Object, StringBuilder>", "Function1<Object, StringBuffer>")
 	}
 	
 	@Test def void testIfExpression_06() throws Exception {
-		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesClosuresTo("(String)=>StringBuilder", "(String)=>StringBuffer").withEquivalents("Function1<String, StringBuilder>", "Function1<String, StringBuffer>")
+		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesClosuresTo("(String)=>StringBuilder", "(String)=>StringBuffer")
+			.withEquivalents("Function1<String, StringBuilder>", "Function1<String, StringBuffer>")
+	}
+	
+	@Test def void testIfExpression_07() throws Exception {
+		"(if (true) [CharSequence c | new StringBuilder()] else [new StringBuffer()])"
+			.resolvesClosuresTo("(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer")
+			.withEquivalents("Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>")
+	}
+	
+	@Test def void testIfExpression_08() throws Exception {
+		"(if (true) [CharSequence c | new StringBuilder()] else [new StringBuffer()]).apply('')"
+			.resolvesClosuresTo("(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer")
+			.withEquivalents("Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>")
 	}
 
+	@Test def void testIfExpression_09() throws Exception {
+		"(if (true) [new StringBuilder()] else [CharSequence c | new StringBuffer()])"
+			.resolvesClosuresTo("(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer")
+			.withEquivalents("Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>")
+	}
+	
+	@Test def void testIfExpression_10() throws Exception {
+		"(if (true) [new StringBuilder()] else [CharSequence c | new StringBuffer()]).apply('')"
+			.resolvesClosuresTo("(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer")
+			.withEquivalents("Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>")
+	}
+	
+	@Test def void testIfExpression_11() throws Exception {
+		"(if (true) [Appendable a |new StringBuilder()] else [CharSequence c | new StringBuffer()])"
+			.resolvesClosuresTo("(Appendable)=>StringBuilder", "(CharSequence)=>StringBuffer")
+			.withEquivalents("Function1<Appendable, StringBuilder>", "Function1<CharSequence, StringBuffer>")
+	}
+	
 	@Test def void testNumberLiteralInClosure() throws Exception {
 		"newArrayList().map[42]".resolvesClosuresTo("(Object)=>int").withEquivalents("Function1<Object, Integer>")
 	}

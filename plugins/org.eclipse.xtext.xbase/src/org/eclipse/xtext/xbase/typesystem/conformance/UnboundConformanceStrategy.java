@@ -61,13 +61,18 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 				}
 			}
 		}
-		BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
-		LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
-		if (mergeResult != null && mergeResult.getVariance() != null) {
-			TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
-			return result;
+		if (hintsToProcess.isEmpty() && param.unboundComputationAddsHints) {
+			left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+			return TypeConformanceResult.SUCCESS;
+		} else {
+			BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
+			LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
+			if (mergeResult != null && mergeResult.getVariance() != null) {
+				TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
+				return result;
+			}
 		}
-		return null;
+		return TypeConformanceResult.FAILED;
 	}
 	
 	@Override
@@ -81,7 +86,7 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		if (left.getHandle().equals(right.getHandle())) {
 			return TypeConformanceResult.SUCCESS;
 		}
-		if (left.getTypeParameter() == right.getTypeParameter()) {
+		if (param.unboundComputationAddsHints && (!left.hasSignificantHints() || !right.hasSignificantHints())) {
 			left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
 			return TypeConformanceResult.SUCCESS;
 		}
