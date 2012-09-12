@@ -1057,7 +1057,7 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 class RawAssignabilityTest extends AbstractAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true))
+		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false))
 	}
 	
 	@Test 

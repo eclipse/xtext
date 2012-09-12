@@ -12,7 +12,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class RawAssignabilityTest extends AbstractAssignabilityTest {
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
-    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true);
+    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true, false);
     return lhs.isAssignableFrom(rhs, _typeConformanceComputationArgument);
   }
   
