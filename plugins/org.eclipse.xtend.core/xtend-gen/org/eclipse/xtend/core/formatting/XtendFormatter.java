@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -2288,6 +2289,65 @@ public class XtendFormatter {
     }
   }
   
+  protected void _format(final XTypeLiteral expr, final FormattableDocument format) {
+    final INode typeNode = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XTYPE_LITERAL__TYPE);
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "typeof");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    FormattingData _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+    format.operator_add(_append);
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    FormattingData _prepend = this._formatterExtensions.prepend(typeNode, _function_1);
+    format.operator_add(_prepend);
+    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    FormattingData _append_1 = this._formatterExtensions.append(typeNode, _function_2);
+    format.operator_add(_append_1);
+    INode node = typeNode;
+    boolean _notEquals = (!Objects.equal(node, null));
+    boolean _while = _notEquals;
+    while (_while) {
+      {
+        ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(node, "[");
+        node = _immediatelyFollowingKeyword;
+        boolean _notEquals_1 = (!Objects.equal(node, null));
+        if (_notEquals_1) {
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _append_2 = this._formatterExtensions.append(node, _function_3);
+          format.operator_add(_append_2);
+          ILeafNode _immediatelyFollowingKeyword_1 = this._nodeModelAccess.immediatelyFollowingKeyword(node, "]");
+          node = _immediatelyFollowingKeyword_1;
+          boolean _notEquals_2 = (!Objects.equal(node, null));
+          if (_notEquals_2) {
+            final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.noSpace();
+                }
+              };
+            FormattingData _append_3 = this._formatterExtensions.append(node, _function_4);
+            format.operator_add(_append_3);
+          }
+        }
+      }
+      boolean _notEquals_1 = (!Objects.equal(node, null));
+      _while = _notEquals_1;
+    }
+  }
+  
   protected void _format(final XExpression expr, final FormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
@@ -2379,6 +2439,9 @@ public class XtendFormatter {
       return;
     } else if (clazz instanceof XSwitchExpression) {
       _format((XSwitchExpression)clazz, format);
+      return;
+    } else if (clazz instanceof XTypeLiteral) {
+      _format((XTypeLiteral)clazz, format);
       return;
     } else if (clazz instanceof XVariableDeclaration) {
       _format((XVariableDeclaration)clazz, format);

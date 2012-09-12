@@ -1197,4 +1197,37 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatXTypeLiteral() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("typeof(String)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("typeof  (  String  )");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatXTypeLiteralArray1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("typeof(String[])");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("typeof  (  String  [  ])");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatXTypeLiteralArray2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("typeof(String[][])");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("typeof  (  String  [  ] [ ] )");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

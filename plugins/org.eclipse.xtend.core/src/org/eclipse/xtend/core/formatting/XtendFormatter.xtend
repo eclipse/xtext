@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XDoWhileExpression
+import org.eclipse.xtext.xbase.XTypeLiteral
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -669,6 +670,25 @@ public class XtendFormatter {
 			}
 		}
 	}
+	
+	def protected dispatch void format(XTypeLiteral expr, FormattableDocument format) {
+		val typeNode = expr.nodeForFeature(XTYPE_LITERAL__TYPE)
+		format += expr.nodeForKeyword("typeof").append[noSpace]
+		format += typeNode.prepend[noSpace]
+		format += typeNode.append[noSpace]
+		var node = typeNode
+		while(node != null) {
+			node = node.immediatelyFollowingKeyword("[")
+			if(node != null) {
+				format += node.append[noSpace]
+				node = node.immediatelyFollowingKeyword("]")
+				if(node != null) {
+					format += node.append[noSpace]
+				}
+			}
+		}
+	}
+	
 	
 	def protected dispatch void format(XExpression expr, FormattableDocument format) {
 		for(obj:expr.eContents)
