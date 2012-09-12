@@ -762,11 +762,112 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatTryFinallyExpression1() {
+		assertFormattedExpression('''
+			try
+				println("x")
+			finally
+				println("y")
+		''', '''
+			try   println("x")   finally   println("y")
+		''')	
+	}
+	
+	@Test def formatTryFinallyExpression2() {
+		assertFormattedExpression('''
+			try {
+				println("x")
+			} finally {
+				println("y")
+			}
+		''', '''
+			try  {   println("x")  }  finally  {  println("y")  }
+		''')	
+	}
+	
+	@Test def formatTryCatchExpression1() {
+		assertFormattedExpression('''
+			try
+				println("x")
+			catch (Exception e)
+				println("y")
+		''', '''
+			try   println("x")   catch (  Exception   e  )   println("y")
+		''')	
+	}
+	
+	@Test def formatTryCatchExpression2() {
+		assertFormattedExpression('''
+			try {
+				println("x")
+			} catch (Exception e) {
+				println("y")
+			}
+		''', '''
+			try  {   println("x")  }  catch (  Exception   e  )  {  println("y")  }
+		''')	
+	}
+	
+	@Test def formatTryCatchFinallyExpression1() {
+		assertFormattedExpression('''
+			try
+				println("x")
+			catch (Exception e)
+				println("y")
+			finally
+				println("z")
+		''', '''
+			try   println("x")  catch   (   Exception   e   )   println("y")  finally   println("z")
+		''')	
+	}
+	
+	@Test def formatTryCatchFinallyExpression2() {
+		assertFormattedExpression('''
+			try {
+				println("x")
+			} catch (Exception e) {
+				println("y")
+			} finally {
+				println("z")
+			}
+		''', '''
+			try  {   println("x")  }   catch   (   Exception   e   )  {  println("y")  } finally  {  println("z")  }
+		''')	
+	}
+	
+	@Test def formatTryCatchCatchFinallyExpression1() {
+		assertFormattedExpression('''
+			try
+				println("x")
+			catch (Exception e)
+				println("y")
+			catch (Exception f)
+				println("z")
+			finally
+				println("a")
+		''', '''
+			try   println("x")  catch   (   Exception   e   )   println("y")  catch   (   Exception   f  )   println("z")  finally   println("a")
+		''')	
+	}
+	
+	@Test def formatTryCatchCatchFinallyExpression2() {
+		assertFormattedExpression('''
+			try {
+				println("x")
+			} catch (Exception e) {
+				println("y")
+			} catch (Exception f) {
+				println("z")
+			} finally {
+				println("a")
+			}
+		''', '''
+			try  {   println("x")  }   catch   (   Exception   e   )  {  println("y")  } catch   (   Exception   f  )  {  println("z")  } finally  {  println("a")  }
+		''')	
+	}
 	
 	
-// - constructors
+	
 // - annotations
-// - templates
-// - don't unfold imports when formatting
 	
 }
