@@ -72,11 +72,31 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"false".resolvesTo("boolean")
 	}
 
-	@Test def void testStringLiteral() throws Exception {
+	@Test def void testStringLiteral_01() throws Exception {
 		"'foo'".resolvesTo("String")
 		'"foo"'.resolvesTo("String")
 	}
-
+	
+	@Test def void testStringLiteral_02() throws Exception {
+		"''".resolvesTo("String")
+	}
+	
+	@Test def void testStringLiteral_03() throws Exception {
+		"'1'".resolvesTo("String")
+	}
+	
+	@Test def void testStringLiteral_04() throws Exception {
+		"newArrayList('1')".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testStringLiteral_05() throws Exception {
+		"newArrayList(null as Character, '1')".resolvesTo("ArrayList<Serializable & Comparable<?>>")
+	}
+	
+	@Test def void testStringLiteral_06() throws Exception {
+		"newArrayList(null as Character, '11')".resolvesTo("ArrayList<Serializable & Comparable<?>>")
+	}
+	
 	@Test def void testNumberLiteral_0() throws Exception {
 		"3".resolvesTo("int")
 	}
@@ -386,6 +406,18 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testOverloadedOperators_17() throws Exception {
 		"(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].empty".resolvesTo("boolean")
+	}
+	
+	@Test def void testOverloadedOperators_18() throws Exception {
+		"'a' + 1".resolvesTo("String")
+	}
+	
+	@Test def void testOverloadedOperators_19() throws Exception {
+		"'aa' + 1".resolvesTo("String")
+	}
+	
+	@Test def void testOverloadedOperators_20() throws Exception {
+		"'a' - 1".resolvesTo("int")
 	}
 
 	@Test def void testCastExpression() throws Exception {
@@ -864,6 +896,15 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 //		assertEquals("CharSequence", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("Cloneable & CharSequence", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("String", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
+	}
+	
+	@Test def void testTypeGuardedCase_2() throws Exception {
+		"{
+			val java.util.Iterator<CharSequence> it = null
+			switch next {
+	            String: next
+        	}
+		}".resolvesTo("CharSequence")
 	}
 	
 	@Test def void testSwitchExpression_Bug343100() throws Exception {

@@ -52,6 +52,26 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)",assignment.getFeature().getIdentifier());
 	}
 	
+	@Test public void testBinaryOperation_1() throws Exception {
+		XBinaryOperation operation = (XBinaryOperation) expression("'1' + 1", true);
+		assertEquals("org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(java.lang.String,java.lang.Object)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_2() throws Exception {
+		XBinaryOperation operation = (XBinaryOperation) expression("'11' + 1", true);
+		assertEquals("org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(java.lang.String,java.lang.Object)",operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_3() throws Exception {
+		XBinaryOperation operation = (XBinaryOperation) expression("(null as char) + '1'", true);
+		assertEquals("org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_plus(java.lang.Object,java.lang.String)",operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_4() throws Exception {
+		XBinaryOperation operation = (XBinaryOperation) expression("(null as Character) + '1'", true);
+		assertEquals("org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_plus(java.lang.Object,java.lang.String)",operation.getFeature().getIdentifier());
+	}
+	
 	@Test public void testAssignmentToInvisibleElements() throws Exception {
 		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<String>().t = 'foo'");
 		assertEquals("testdata.GenericType1.t", expression.getFeature().getIdentifier());

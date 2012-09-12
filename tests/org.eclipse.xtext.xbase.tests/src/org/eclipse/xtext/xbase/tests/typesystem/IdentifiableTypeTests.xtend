@@ -158,6 +158,15 @@ class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_135() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_136() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_137() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testDeferredTypeArgumentResolution_138() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("takes too long") @Test override testFeatureCall_15_b() throws Exception {
 		fail("takes too long")

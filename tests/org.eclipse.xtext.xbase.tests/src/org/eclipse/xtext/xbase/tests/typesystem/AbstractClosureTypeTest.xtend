@@ -40,9 +40,12 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected findClosures(CharSequence expression) {
-		val xExpression = expression(expression, false)
-		val closures = EcoreUtil2::eAll(xExpression).filter(typeof(XClosure)).toList
-		return closures.sortBy [ NodeModelUtils::findActualNodeFor(it).offset ]
+		val expressionAsString = expression.toString
+			.replace('ClosureTypeResolutionTestData', 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData')
+			.replace('$$', 'org::eclipse::xtext::xbase::lib::')
+		val xExpression = expression(expressionAsString, false)
+		val Closures = EcoreUtil2::eAll(xExpression).filter(typeof(XClosure)).toList
+		return Closures.sortBy [ NodeModelUtils::findActualNodeFor(it).offset ]
 	}
 	
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {
@@ -298,8 +301,8 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testClosure_01() throws Exception {
-		"{ var closure = [|'literal']
-		  new testdata.ClosureClient().invoke0(closure)	}".resolvesClosuresTo("()=>String").withEquivalents("Function0<String>")
+		"{ var Closure = [|'literal']
+		  new testdata.ClosureClient().invoke0(Closure)	}".resolvesClosuresTo("()=>String").withEquivalents("Function0<String>")
 	}
 	
 	@Test
@@ -340,7 +343,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		  .withEquivalents("Function1<Integer, Integer>", "Function1<Integer, Boolean>")
 	}
 	
-	@Ignore("TODO deferred closure body typing")
+	@Ignore("TODO deferred Closure body typing")
 	@Test def void testClosure_07() throws Exception {
 		"{ 
 			val mapper = [ x | x.charAt(0) ]
@@ -486,6 +489,10 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		}".resolvesClosuresTo("(String, String)=>int").withEquivalents("Comparator<String>")
 	}
 	
+	@Test def void testClosure_27() throws Exception {
+		'(null as Iterable<? super String>).map(e|e)'.resolvesClosuresTo("(Object)=>Object").withEquivalents("Function1<Object, Object>")
+	}
+	
 	@Test def void testEMap_01() throws Exception {
 		"{ 
           val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()
@@ -547,6 +554,15 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
           val org.eclipse.emf.common.util.BasicEMap<Integer, ? extends String> eMap = null
 		  eMap.map[ it ].head
          }".resolvesClosuresTo("(Entry<Integer, ? extends String>)=>Entry<Integer, ? extends String>").withEquivalents("Function1<Entry<Integer, ? extends String>, Entry<Integer, ? extends String>>")
+	}
+	
+	@Test def void testIncompatibleExpression_01() throws Exception {
+		"new Thread [| return 'illegal' ]".resolvesClosuresTo("()=>void").withEquivalents("Runnable")
+	}
+	
+	@Ignore("TODO implement this")
+	@Test def void testIncompatibleExpression_02() throws Exception {
+		"(null as Iterable<String>).filter [ it ]".resolvesClosuresTo("(String)=>Boolean").withEquivalents("Function1<String, Boolean>")
 	}
 	
 	@Test def void testMemberFeatureCall_01() throws Exception {
@@ -1152,32 +1168,64 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			list
 		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
 	}
+	
+	@Test def void testDeferredTypeArgumentResolution_13() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, Object>map[s| s.toString]
+			list
+		}".resolvesClosuresTo("(String)=>String") // TODO .withEquivalents("Function1<String, String>")
+	}	
 
-	@Test def void testCLosureWithReturnExpression_01() throws Exception {
+	@Test def void testDeferredTypeArgumentResolution_14() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, Object>map[s| s.charAt(1) ]
+			list
+		}".resolvesClosuresTo("(String)=>char") // TODO .withEquivalents("Function1<String, Character>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_15() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, CharSequence>map[s| s]
+			list
+		}".resolvesClosuresTo("(CharSequence)=>CharSequence").withEquivalents("Function1<CharSequence, CharSequence>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_16() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, Object>map[s| s]
+			list
+		}".resolvesClosuresTo("(Object)=>Object").withEquivalents("Function1<Object, Object>")
+	}
+
+	@Test def void testClosureWithReturnExpression_01() throws Exception {
 		"[ | if (true) return '' else return new StringBuilder ]"
 			.resolvesClosuresTo("()=>Serializable & CharSequence")
 			.withEquivalents("Function0<Serializable & CharSequence>")
 	}
 	
-	@Test def void testCLosureWithReturnExpression_02() throws Exception {
+	@Test def void testClosureWithReturnExpression_02() throws Exception {
 		"[ | if (true) '' else return new StringBuilder ]"
 			.resolvesClosuresTo("()=>Serializable & CharSequence")
 			.withEquivalents("Function0<Serializable & CharSequence>")
 	}
 	
-	@Test def void testCLosureWithReturnExpression_03() throws Exception {
+	@Test def void testClosureWithReturnExpression_03() throws Exception {
 		"[ | if (true) return '' else new StringBuilder ]"
 			.resolvesClosuresTo("()=>Serializable & CharSequence")
 			.withEquivalents("Function0<Serializable & CharSequence>")
 	}
 	
-	@Test def void testCLosureWithReturnExpression_04() throws Exception {
+	@Test def void testClosureWithReturnExpression_04() throws Exception {
 		"[ | if (true) '' else new StringBuilder ]"
 			.resolvesClosuresTo("()=>Serializable & CharSequence")
 			.withEquivalents("Function0<Serializable & CharSequence>")
 	}
 
-	@Test def void testCLosureWithReturnExpression_05() throws Exception {
+	@Test def void testClosureWithReturnExpression_05() throws Exception {
 		"[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)"
 			.resolvesClosuresTo("(int, int)=>Integer")
 			.withEquivalents("Function2<Integer, Integer, Integer>")

@@ -62,7 +62,13 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			}
 		}
 		if (hintsToProcess.isEmpty() && param.unboundComputationAddsHints) {
-			left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+			if (right instanceof WildcardTypeReference) {
+				List<LightweightTypeReference> bounds = ((WildcardTypeReference) right).getUpperBounds();
+				for(LightweightTypeReference upperBound: bounds)
+					left.acceptHint(upperBound, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+			} else {
+				left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+			}
 			return TypeConformanceResult.SUCCESS;
 		} else {
 			BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();

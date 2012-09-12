@@ -45,15 +45,19 @@ public class TypeConformanceComputationArgument {
 	public boolean isRawType() {
 		return rawType;
 	}
+	
+	protected String flagsToString() {
+		return "rawType=" + String.valueOf(rawType).toUpperCase() + ",\n\t" +
+				"asTypeArgument=" + String.valueOf(asTypeArgument).toUpperCase() + ",\n\t" +
+				"allowPrimitiveConversion=" + String.valueOf(allowPrimitiveConversion).toUpperCase() + ",\n\t" +
+				"allowPrimitiveWidening=" + String.valueOf(allowPrimitiveWidening).toUpperCase() + ",\n\t" +
+				"unboundComputationAddsHints=" + String.valueOf(unboundComputationAddsHints).toUpperCase();
+	}
 
 	@Override
 	public String toString() {
 		return "TypeConformanceComputationArgument [\n\t" +
-				"rawType=" + rawType + ",\n\t" +
-				"asTypeArgument=" + asTypeArgument + ",\n\t" +
-				"allowPrimitiveConversion=" + allowPrimitiveConversion + ",\n\t" +
-				"allowPrimitiveWidening=" + allowPrimitiveWidening + ",\n\t" +
-				"unboundComputationAddsHints=" + unboundComputationAddsHints + "\n" +
+				flagsToString() + "\n" +
 				"]";
 	}
 
@@ -74,11 +78,7 @@ public class TypeConformanceComputationArgument {
 		public String toString() {
 			return "TypeConformanceComputationArgument.Internal [\n\t" +
 					"reference=" + reference + ",\n\t" +
-					"rawType=" + rawType + ",\n\t" +
-					"asTypeArgument=" + asTypeArgument + ",\n\t" +
-					"allowPrimitiveConversion=" + allowPrimitiveConversion + ",\n\t" +
-					"allowPrimitiveWidening=" + allowPrimitiveWidening + ",\n\t" +
-					"unboundComputationAddsHints=" + unboundComputationAddsHints + "\n" +
+					flagsToString() + "\n" +
 					"]";
 		}
 	}

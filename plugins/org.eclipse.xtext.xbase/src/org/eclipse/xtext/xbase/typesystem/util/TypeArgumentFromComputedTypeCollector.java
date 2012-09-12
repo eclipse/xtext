@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ import com.google.common.collect.ListMultimap;
 public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterAwareTypeArgumentCollector {
 
 	public static void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType,
-			List<JvmTypeParameter> typeParameters, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			Collection<JvmTypeParameter> typeParameters, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			BoundTypeArgumentSource source,
 			ITypeReferenceOwner owner) {
 		TypeArgumentFromComputedTypeCollector implementation = new TypeArgumentFromComputedTypeCollector(typeParameters, source, owner);
@@ -44,14 +45,17 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 				} else if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
 					UnboundTypeReference typeReference = (UnboundTypeReference) boundTypeArgument.getTypeReference();
 					if (!typeReference.internalIsResolved()) {
-						typeReference.acceptHint(entry.getValue());
+						LightweightBoundTypeArgument value = entry.getValue();
+						if (!(value.getTypeReference() instanceof UnboundTypeReference) || 
+								((UnboundTypeReference) value.getTypeReference()).getHandle() != typeReference.getHandle())
+							typeReference.acceptHint(value);
 					}
 				}
 			}
 		}
 	}
 	
-	public TypeArgumentFromComputedTypeCollector(List<JvmTypeParameter> parametersToBeMapped,
+	public TypeArgumentFromComputedTypeCollector(Collection<JvmTypeParameter> parametersToBeMapped,
 			BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(parametersToBeMapped, defaultSource, owner);
 	}

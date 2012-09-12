@@ -268,6 +268,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		}
 		if (getOwner().isResolved(getHandle())) {
 			List<LightweightBoundTypeArgument> hints = getOwner().getAllHints(getHandle());
+			if (hints.isEmpty()) {
+				throw new IllegalStateException("cannot have empty hints if marked as resolved");
+			}
 			if (hints.size() != 1)
 				return null;
 			LightweightBoundTypeArgument singleHint = hints.get(0);

@@ -29,6 +29,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	BatchIdentifiableTypeTests.class,
 	BatchConstructorCallTypeTests.class,
 	BatchTypeArgumentTest.class,
-	BatchLinkingTest.class
+	BatchLinkingTest.class,
+	StringLiteralTest.class,
+	ClosureTypeTest1.class,
+	ClosureTypeTest2.class,
+	ClosureTypeTest3.class,
+	ClosureTypeComputerUnitTest.class,
 })
 public class TypeSystemSuite {}

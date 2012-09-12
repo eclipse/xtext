@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,10 +28,6 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	TypeReferences typeReferences
-	
-	@Inject
-	@Property
-	LightweightTypeReferences lightweightTypeReferences
 	
 	@Inject
 	@Property

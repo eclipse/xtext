@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -28,7 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeArgumentCollector {
 
-	public UnboundTypeParameterAwareTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped,
+	public UnboundTypeParameterAwareTypeArgumentCollector(Collection<JvmTypeParameter> parametersToBeMapped,
 			BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(parametersToBeMapped, defaultSource, owner);
 	}

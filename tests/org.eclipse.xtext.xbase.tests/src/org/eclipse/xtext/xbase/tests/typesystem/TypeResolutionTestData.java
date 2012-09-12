@@ -45,4 +45,24 @@ public class TypeResolutionTestData {
 		return 1;
 	}
 	
+	interface ListFunction1<T, R> {
+		List<R> apply(List<T> in);
+	}
+	
+	interface ListFunction2<T, R> {
+		List<R> apply(List<? super T> in);
+	}
+	
+	interface ListFunction3<T, R> {
+		List<R> apply(List<? extends T> in);
+	}
+	
+	interface ListFunction4<T, R> {
+		List<? extends R> apply(List<T> in);
+	}
+	
+	interface ListFunction5<T, R> {
+		List<? super R> apply(List<T> in);
+	}
+	
 }

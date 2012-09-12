@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -56,6 +58,18 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		protected void doVisitUnboundTypeReference(UnboundTypeReference reference, ArrayTypeReference declaration) {
 			if (shouldProcess(reference.getTypeParameter())) {
 				processTypeParameter(reference.getTypeParameter(), declaration);
+			}
+		}
+	}
+	
+	protected class CompoundTypeReferenceTraverser extends TypeReferenceVisitorWithParameter<CompoundTypeReference> {
+		@Override
+		protected void doVisitTypeReference(LightweightTypeReference reference, CompoundTypeReference declaration) {
+			List<LightweightTypeReference> components = declaration.getComponents();
+			if (components.isEmpty()) {
+				for (LightweightTypeReference component: components) {
+					outerVisit(component, reference);
+				}
 			}
 		}
 	}
@@ -220,6 +234,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
 	private final WildcardTypeReferenceTraverser wildcardTypeReferenceTraverser;
 	private final ArrayTypeReferenceTraverser arrayTypeReferenceTraverser;
+	private final CompoundTypeReferenceTraverser compoundTypeReferenceTraverser;
 	private final UnboundTypeReferenceTraverser unboundTypeReferenceTraverser;
 	
 	private VarianceInfo expectedVariance;
@@ -233,6 +248,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
 		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
 		arrayTypeReferenceTraverser = createArrayTypeReferenceTraverser();
+		compoundTypeReferenceTraverser = createCompoundTypeReferenceTraverser();
 		unboundTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
 	}
 	
@@ -249,6 +265,10 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
 		return new ArrayTypeReferenceTraverser();
+	}
+	
+	protected CompoundTypeReferenceTraverser createCompoundTypeReferenceTraverser() {
+		return new CompoundTypeReferenceTraverser();
 	}
 
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
@@ -278,6 +298,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	protected void doVisitArrayTypeReference(ArrayTypeReference declaredReference,
 			LightweightTypeReference param) {
 		param.accept(arrayTypeReferenceTraverser, declaredReference);
+	}
+	
+	@Override
+	protected void doVisitCompoundTypeReference(CompoundTypeReference declaredReference, LightweightTypeReference param) {
+		param.accept(compoundTypeReferenceTraverser, declaredReference);
 	}
 	
 	@Override
@@ -313,10 +338,6 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	public void processPairedReferences(LightweightTypeReference declaredType, LightweightTypeReference actualType) {
 		outerVisit(declaredType, actualType, declaredType, VarianceInfo.OUT, VarianceInfo.OUT);
 	}
-	
-//	protected CommonTypeComputationServices getServices() {
-//		return services;
-//	}
 	
 	protected VarianceInfo getActualVariance() {
 		return actualVariance;

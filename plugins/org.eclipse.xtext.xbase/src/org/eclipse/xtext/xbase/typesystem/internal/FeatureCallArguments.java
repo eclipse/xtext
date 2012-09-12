@@ -31,7 +31,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 	private OwnedConverter converter;
 	private final int argumentSizeFixup;
 	
-	public FeatureCallArguments(AbstractLinkingCandidate candidate) {
+	public FeatureCallArguments(AbstractLinkingCandidate<?> candidate) {
 		int fixedArityParameterCount = 0;
 		varArgs = false;
 		JvmIdentifiableElement feature = candidate.getFeature();
@@ -42,7 +42,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 			fixedArityParameterCount = varArgs ? parameters.size() - 1 : parameters.size();
 		}
 		arguments = candidate.getArguments();
-		converter = candidate.getState().getConverter();
+		converter = candidate.state.getConverter();
 		argumentSizeFixup = candidate.getReceiver() == null || arguments.contains(candidate.getReceiver()) ? 0 : 1;
 		nextArgument = argumentSizeFixup;
 		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size()) + argumentSizeFixup;

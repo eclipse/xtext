@@ -77,7 +77,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			}
 		}
 		if (lowerBound != null) {
-			result.lowerBound = lowerBound.copyInto(owner);
+			result.setLowerBound(lowerBound.copyInto(owner));
 		}
 		return result;
 	}

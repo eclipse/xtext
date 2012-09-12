@@ -389,6 +389,10 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testOverloadedOperators_20() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testImplicitImportPrintln_01() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -511,6 +515,10 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_8() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_2() throws Exception {
 		fail("fails in old implementation")
 	}
 	

@@ -51,7 +51,7 @@ import com.google.common.primitives.Ints;
 @NonNullByDefault
 public abstract class LightweightTypeReference {
 	
-	protected static class IdentifierFunction implements Function<LightweightTypeReference, String> {
+	public static class IdentifierFunction implements Function<LightweightTypeReference, String> {
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -59,7 +59,7 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
-	protected static class SimpleNameFunction implements Function<LightweightTypeReference, String> {
+	public static class SimpleNameFunction implements Function<LightweightTypeReference, String> {
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");

@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.emf.ecore.InternalEObject
 import org.junit.Test
 import org.junit.Ignore
+import org.junit.Before
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,8 +32,14 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 	
 	boolean failOnUnresolvedProxy = true
 	
-	override expression(CharSequence string) throws Exception {
-		val result = super.expression(string);
+	@Before
+	def void init() {
+		failOnUnresolvedProxy = true
+	}
+	
+	override expression(CharSequence string, boolean resolve) throws Exception {
+		failOnUnresolvedProxy = resolve
+		val result = super.expression(string, false);
 		val resolvedTypes = typeResolver.resolveTypes(result);
 		for(content: result.eAllContents.toIterable) {
 			switch(content) {
