@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider
 import org.eclipse.xtext.xtype.XFunctionTypeRef
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.rules.ErrorCollector
+import org.junit.Rule
 
 /**
  * @author Sebastian Zarnekow
@@ -25,17 +27,25 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	@Inject
 	IBatchTypeResolver typeResolver;
 	
+	@Rule
+	public ErrorCollector collector= new ErrorCollector();
+	
 	override List<Object> resolvesClosuresTo(String expression, String... types) {
-		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
-		val closures = expressionWithQualifiedNames.findClosures
+		val closures = expression.findClosures
 		assertFalse(closures.empty)
 		assertEquals(types.size, closures.size)
 		val resolvedTypes = typeResolver.resolveTypes(closures.head)
 		val result = <Object>newArrayList
 		closures.forEach [ closure, index |
 			val closureType = resolvedTypes.getActualType(closure)
-			assertTrue('''failed for closure at «index»: «closureType»''', closureType instanceof FunctionTypeReference)
-			assertEquals('''failed for closure at «index»''', types.get(index), closureType.simpleName); 
+			collector.checkSucceeds[| 
+				assertTrue('''failed for closure at «index»: «closureType»''', closureType instanceof FunctionTypeReference) 
+				return null
+			]
+			collector.checkSucceeds[| 
+				assertEquals('''failed for closure at «index»''', types.get(index), closureType.simpleName) 
+				return null
+			] 
 			result += closureType
 		]
 		
@@ -44,8 +54,14 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	
 	override void withEquivalents(List<Object> references, String... types) {
 		references.forEach [ reference, index |
-			assertTrue(reference instanceof FunctionTypeReference)
-			assertEquals(types.get(index), (reference as FunctionTypeReference).equivalent)
+			collector.checkSucceeds[| 
+				assertTrue(reference instanceof FunctionTypeReference)
+				return null
+			]
+			collector.checkSucceeds[| 
+				assertEquals(types.get(index), (reference as FunctionTypeReference).equivalent)
+				return null	
+			]
 		]
 	}
 	
@@ -53,42 +69,6 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 		if (type.typeArguments.empty)
 			return type.type.simpleName
 		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
-	}
-	
-	@Test
-	@Ignore("Temporarily")
-	override testClosure_02() throws Exception {
-		fail("temporarily disabled")
-	}
-	
-	@Test
-	@Ignore("Temporarily")
-	override testClosure_03() throws Exception {
-		fail("temporarily disabled")
-	}
-		
-	@Test
-	@Ignore("Temporarily")
-	override testClosure_23() throws Exception {
-		fail("temporarily disabled")
-	}
-	
-	@Test
-	@Ignore("Temporarily")
-	override testClosure_24() throws Exception {
-		fail("temporarily disabled")
-	}
-	
-	@Test
-	@Ignore("Temporarily")
-	override testFeatureCall_23() throws Exception {
-		fail("temporarily disabled")
-	}
-	
-	@Test
-	@Ignore("Temporarily")
-	override testFeatureCall_24() throws Exception {
-		fail("temporarily disabled")
 	}
 }
 
@@ -101,8 +81,7 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	ITypeProvider typeProvider
 	
 	override List<Object> resolvesClosuresTo(String expression, String... types) {
-		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
-		val closures = expressionWithQualifiedNames.findClosures
+		val closures = expression.findClosures
 		val result = <Object>newArrayList
 		closures.forEach[ closure, index |
 			val closureType = typeProvider.getType(closure)
@@ -314,6 +293,12 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test
+	override testClosure_27() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
 	override testMemberFeatureCall_01() throws Exception {
 		fail("fails in old impl")
 	}
@@ -364,6 +349,24 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	@Test
 	override testIfExpression_12() throws Exception {
 		fail("fails in old impl")
+	}
+
+	@Ignore("fails in old impl")
+	@Test
+	override testDeferredTypeArgumentResolution_15() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testDeferredTypeArgumentResolution_16() throws Exception {
+		fail("fails in old impl")
+	}
+
+	@Ignore("fails in old impl")
+	@Test
+	override testIncompatibleExpression_01() throws Exception {
+		fail("fails in old impl")	
 	}
 	
 }

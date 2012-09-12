@@ -87,9 +87,34 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testStringLiteral() throws Exception {
+  public void testStringLiteral_01() throws Exception {
     this.resolvesTo("\'foo\'", "String");
     this.resolvesTo("\"foo\"", "String");
+  }
+  
+  @Test
+  public void testStringLiteral_02() throws Exception {
+    this.resolvesTo("\'\'", "String");
+  }
+  
+  @Test
+  public void testStringLiteral_03() throws Exception {
+    this.resolvesTo("\'1\'", "String");
+  }
+  
+  @Test
+  public void testStringLiteral_04() throws Exception {
+    this.resolvesTo("newArrayList(\'1\')", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testStringLiteral_05() throws Exception {
+    this.resolvesTo("newArrayList(null as Character, \'1\')", "ArrayList<Serializable & Comparable<?>>");
+  }
+  
+  @Test
+  public void testStringLiteral_06() throws Exception {
+    this.resolvesTo("newArrayList(null as Character, \'11\')", "ArrayList<Serializable & Comparable<?>>");
   }
   
   @Test
@@ -412,6 +437,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testOverloadedOperators_17() throws Exception {
     this.resolvesTo("(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].empty", "boolean");
+  }
+  
+  @Test
+  public void testOverloadedOperators_18() throws Exception {
+    this.resolvesTo("\'a\' + 1", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_19() throws Exception {
+    this.resolvesTo("\'aa\' + 1", "String");
+  }
+  
+  @Test
+  public void testOverloadedOperators_20() throws Exception {
+    this.resolvesTo("\'a\' - 1", "int");
   }
   
   @Test
@@ -871,6 +911,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testTypeGuardedCase_1() throws Exception {
     this.resolvesTo("switch s: \'\' as CharSequence { Cloneable: s String: s }", "CharSequence");
+  }
+  
+  @Test
+  public void testTypeGuardedCase_2() throws Exception {
+    this.resolvesTo("{\n\t\t\tval java.util.Iterator<CharSequence> it = null\n\t\t\tswitch next {\n\t            String: next\n        \t}\n\t\t}", "CharSequence");
   }
   
   @Test

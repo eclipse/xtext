@@ -26,8 +26,7 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   private ITypeProvider typeProvider;
   
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
-    final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
-    final List<XClosure> closures = this.findClosures(expressionWithQualifiedNames);
+    final List<XClosure> closures = this.findClosures(expression);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
         public void apply(final XClosure closure, final Integer index) {
@@ -258,6 +257,12 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   
   @Ignore(value = "fails in old impl")
   @Test
+  public void testClosure_27() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
   public void testMemberFeatureCall_01() throws Exception {
     Assert.fail("fails in old impl");
   }
@@ -307,6 +312,24 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   @Ignore(value = "fails in old impl")
   @Test
   public void testIfExpression_12() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testDeferredTypeArgumentResolution_15() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testDeferredTypeArgumentResolution_16() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIncompatibleExpression_01() throws Exception {
     Assert.fail("fails in old impl");
   }
 }

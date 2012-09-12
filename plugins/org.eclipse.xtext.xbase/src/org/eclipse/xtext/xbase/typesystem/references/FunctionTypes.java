@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.WrappedException;
@@ -41,20 +42,30 @@ public class FunctionTypes {
 
 	public List<JvmTypeParameter> collectAllTypeParameters(LightweightTypeReference closureType,
 			JvmOperation operation) {
+		// common case is worth optimizing
 		List<JvmType> rawTypes = closureType.getRawTypes();
-		List<JvmTypeParameter> allTypeParameters = Lists.newArrayList();
-		for(JvmType rawType: rawTypes) {
-			if (rawType instanceof JvmTypeParameterDeclarator) {
-				allTypeParameters.addAll(((JvmTypeParameterDeclarator) rawType).getTypeParameters());
+		if (rawTypes.size() == 1 && operation.getTypeParameters().isEmpty()) {
+			JvmType type = rawTypes.get(0);
+			if (type instanceof JvmTypeParameterDeclarator) {
+				return ((JvmTypeParameterDeclarator) type).getTypeParameters();
 			}
+			return Collections.emptyList();
+		} else {
+			List<JvmTypeParameter> allTypeParameters = Lists.newArrayList();
+			for(JvmType rawType: rawTypes) {
+				if (rawType instanceof JvmTypeParameterDeclarator) {
+					allTypeParameters.addAll(((JvmTypeParameterDeclarator) rawType).getTypeParameters());
+				}
+			}
+			allTypeParameters.addAll(operation.getTypeParameters());
+			return allTypeParameters;
 		}
-		allTypeParameters.addAll(operation.getTypeParameters());
-		return allTypeParameters;
 	}
 	
 	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getFunctionTypeParameterMapping(
 			LightweightTypeReference functionType, JvmOperation operation,
 			ActualTypeArgumentCollector typeArgumentCollector, ITypeReferenceOwner owner) {
+		// TODO we should use the function type instead of the operationTypeDeclarator, shouldn't we?
 		JvmParameterizedTypeReference operationTypeDeclarator = typeReferences.createTypeRef(operation.getDeclaringType());
 		LightweightTypeReference lightweightTypeReference = new OwnedConverter(owner).toLightweightReference(operationTypeDeclarator);
 		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, functionType);

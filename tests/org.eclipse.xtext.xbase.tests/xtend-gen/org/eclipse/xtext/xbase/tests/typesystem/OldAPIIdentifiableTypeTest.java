@@ -219,6 +219,24 @@ public class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
     Assert.fail("fails in old implementation");
   }
   
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_136() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_137() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testDeferredTypeArgumentResolution_138() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
   @Ignore(value = "takes too long")
   @Test
   public void testFeatureCall_15_b() throws Exception {

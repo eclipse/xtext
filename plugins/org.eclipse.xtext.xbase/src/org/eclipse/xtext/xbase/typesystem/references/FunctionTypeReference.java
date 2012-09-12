@@ -43,7 +43,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 			}
 		}
 		if (returnType != null) {
-			result.returnType = returnType.copyInto(owner);
+			result.setReturnType(returnType.copyInto(owner));
 		}
 		return result;
 	}

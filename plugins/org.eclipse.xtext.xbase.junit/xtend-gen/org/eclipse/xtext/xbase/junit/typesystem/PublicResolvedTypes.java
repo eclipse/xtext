@@ -1,10 +1,12 @@
 package org.eclipse.xtext.xbase.junit.typesystem;
 
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -25,5 +27,10 @@ public class PublicResolvedTypes extends RootResolvedTypes {
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
     UnboundTypeReference _unboundTypeReference = super.getUnboundTypeReference(handle);
     return _unboundTypeReference;
+  }
+  
+  public List<LightweightBoundTypeArgument> getHints(final Object handle) {
+    List<LightweightBoundTypeArgument> _hints = super.getHints(handle);
+    return _hints;
   }
 }

@@ -48,10 +48,13 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   protected List<XClosure> findClosures(final CharSequence expression) {
     try {
-      final XExpression xExpression = this.expression(expression, false);
+      String _string = expression.toString();
+      String _replace = _string.replace("ClosureTypeResolutionTestData", "org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData");
+      final String expressionAsString = _replace.replace("$$", "org::eclipse::xtext::xbase::lib::");
+      final XExpression xExpression = this.expression(expressionAsString, false);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XClosure> _filter = Iterators.<XClosure>filter(_eAll, XClosure.class);
-      final List<XClosure> closures = IteratorExtensions.<XClosure>toList(_filter);
+      final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(_filter);
       final Function1<XClosure,Integer> _function = new Function1<XClosure,Integer>() {
           public Integer apply(final XClosure it) {
             ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
@@ -59,7 +62,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
             return Integer.valueOf(_offset);
           }
         };
-      return IterableExtensions.<XClosure, Integer>sortBy(closures, _function);
+      return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -343,7 +346,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_01() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var closure = [|\'literal\']\n\t\t  new testdata.ClosureClient().invoke0(closure)\t}", "()=>String");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var Closure = [|\'literal\']\n\t\t  new testdata.ClosureClient().invoke0(Closure)\t}", "()=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function0<String>");
   }
   
@@ -389,7 +392,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
   }
   
-  @Ignore(value = "TODO deferred closure body typing")
+  @Ignore(value = "TODO deferred Closure body typing")
   @Test
   public void testClosure_07() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | x.charAt(0) ]\n\t\t\tnewArrayList(\'\').map(mapper)\n\t\t}", "Function1<String, Character>");
@@ -517,6 +520,12 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testClosure_27() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<? super String>).map(e|e)", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
   public void testEMap_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getKey ].head\n         }", "(Entry<Integer, String>)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, String>, Integer>");
@@ -568,6 +577,19 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   public void testEMap_09() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<Integer, ? extends String> eMap = null\n\t\t  eMap.map[ it ].head\n         }", "(Entry<Integer, ? extends String>)=>Entry<Integer, ? extends String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, ? extends String>, Entry<Integer, ? extends String>>");
+  }
+  
+  @Test
+  public void testIncompatibleExpression_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new Thread [| return \'illegal\' ]", "()=>void");
+    this.withEquivalents(_resolvesClosuresTo, "Runnable");
+  }
+  
+  @Ignore(value = "TODO implement this")
+  @Test
+  public void testIncompatibleExpression_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<String>).filter [ it ]", "(String)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
   }
   
   @Test
@@ -1130,31 +1152,53 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testCLosureWithReturnExpression_01() throws Exception {
+  public void testDeferredTypeArgumentResolution_13() throws Exception {
+    this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s.toString]\n\t\t\tlist\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_14() throws Exception {
+    this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s.charAt(1) ]\n\t\t\tlist\n\t\t}", "(String)=>char");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_15() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "(CharSequence)=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, CharSequence>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_16() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosureWithReturnExpression_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) return \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence");
     this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
   }
   
   @Test
-  public void testCLosureWithReturnExpression_02() throws Exception {
+  public void testClosureWithReturnExpression_02() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence");
     this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
   }
   
   @Test
-  public void testCLosureWithReturnExpression_03() throws Exception {
+  public void testClosureWithReturnExpression_03() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) return \'\' else new StringBuilder ]", "()=>Serializable & CharSequence");
     this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
   }
   
   @Test
-  public void testCLosureWithReturnExpression_04() throws Exception {
+  public void testClosureWithReturnExpression_04() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ | if (true) \'\' else new StringBuilder ]", "()=>Serializable & CharSequence");
     this.withEquivalents(_resolvesClosuresTo, "Function0<Serializable & CharSequence>");
   }
   
   @Test
-  public void testCLosureWithReturnExpression_05() throws Exception {
+  public void testClosureWithReturnExpression_05() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)", "(int, int)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function2<Integer, Integer, Integer>");
   }

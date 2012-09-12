@@ -770,7 +770,30 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.<String, Object>map[s| s]
 			list
+		}".resolvesIdentifiablesTo("ArrayList<String>", "Object") // could actually be 'String' but Object is quit ok, too
+	}
+
+	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, Object>map[s| s.toString]
+			list
+		}".resolvesIdentifiablesTo("ArrayList<String>", "String")
+	}	
+
+	@Test def void testDeferredTypeArgumentResolution_137() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, Object>map[s| s.charAt(1) ]
+			list
 		}".resolvesIdentifiablesTo("ArrayList<String>", "String")
 	}
 	
+	@Test def void testDeferredTypeArgumentResolution_138() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.<String, CharSequence>map[s| s]
+			list
+		}".resolvesIdentifiablesTo("ArrayList<String>", "CharSequence")
+	}
 }

@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -31,8 +32,14 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
   
   private boolean failOnUnresolvedProxy = true;
   
-  public XExpression expression(final CharSequence string) throws Exception {
-    final XExpression result = super.expression(string);
+  @Before
+  public void init() {
+    this.failOnUnresolvedProxy = true;
+  }
+  
+  public XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
+    this.failOnUnresolvedProxy = resolve;
+    final XExpression result = super.expression(string, false);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(result);
     TreeIterator<EObject> _eAllContents = result.eAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);

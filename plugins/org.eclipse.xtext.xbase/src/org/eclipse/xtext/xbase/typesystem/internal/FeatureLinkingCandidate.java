@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
@@ -88,18 +88,17 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 		return super.getSubstitutedExpectedType(idx);
 	}
 	
-	@Override
 	protected boolean hasExplicitArguments() {
 		return getFeatureCall().isExplicitOperationCallOrBuilderSyntax();
 	}
 	
 	@Override
-	protected int compareByArityWith(AbstractLinkingCandidate right) {
+	protected int compareByArityWith(AbstractLinkingCandidate<?> right) {
 		int result = super.compareByArityWith(right);
 		if (result == 0) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
 			if (isExecutable != right.getFeature() instanceof JvmExecutable) {
-				if (getExpression() instanceof XAssignment) {
+				if (expression instanceof XAssignment) {
 					if (isExecutable)
 						return 1;
 					return -1;
@@ -120,7 +119,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 	}
 	
 	@Override
-	protected int compareByArgumentTypes(AbstractLinkingCandidate right) {
+	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {
 		int result = super.compareByArgumentTypes(right);
 		if (result != 0 || !(right instanceof FeatureLinkingCandidate))
 			return result;
@@ -137,8 +136,8 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 	public void apply() {
 		XExpression receiver = getReceiver();
 		if (receiver != null && receiver.eResource() == null) {
-			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
-			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
+			StackedResolvedTypes resolvedTypes = state.getResolvedTypes();
+			TypeExpectation expectation = new TypeExpectation(null, state, false);
 			LightweightTypeReference receiverType = getReceiverType();
 			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
 		}
@@ -173,12 +172,12 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 	}
 
 	public XAbstractFeatureCall getFeatureCall() {
-		return (XAbstractFeatureCall) getExpression();
+		return expression;
 	}
 	
 	@Override
 	protected List<LightweightTypeReference> getExplicitTypeArguments() {
-		return Lists.transform(getFeatureCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+		return Lists.transform(getFeatureCall().getTypeArguments(), state.getResolvedTypes().getConverter());
 	}
 	
 	@Override
@@ -188,7 +187,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 				throw new IllegalArgumentException("argumentState was " + argumentState);
 			AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
 			LightweightTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			StackedResolvedTypes resolvedTypes = state.getResolvedTypes();
 			LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
 			TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 			LightweightTypeReference copiedReceiverType = receiverType.copyInto(resolvedTypes.getReferenceOwner());
@@ -214,7 +213,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 	@Override
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmConstructor) {
-			return getState().getResolvedTypes().getConverter().toLightweightReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
+			return state.getConverter().toLightweightReference(state.getTypeReferences().getTypeForName(Void.TYPE, feature));
 		}
 		/*
 		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 

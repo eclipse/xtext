@@ -16,9 +16,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	IsolationTest.class,
-	InvariantCheckingIsolationTest.class,
-	InvariantCheckingBatchTypeResolverTest.class,
-	TypeSystemSuite.class
+	BatchClosureTypeTest.class,
+	ClosureTypeComputerUnitTest.class,
+	ClosureTypeTest1.class,
+	ClosureTypeTest2.class,
+	ClosureTypeTest3.class,
+	BatchTypeArgumentTest.class,
 })
-public class CompleteTypeSystemSuite {}
+public class ClosureTypeSystemSuite {}

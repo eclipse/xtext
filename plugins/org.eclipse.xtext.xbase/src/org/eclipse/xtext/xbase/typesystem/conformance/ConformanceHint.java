@@ -31,6 +31,8 @@ public enum ConformanceHint {
 	CHECKED, // conformance computed
 	UNCHECKED, // nothing computed
 	
+//	UNDECIDED, // more than one type computed, results should not be merged but the better one should be used
+	
 	RAW, // only raw conformance computed
 	MERGED, // merged from different conformance sets
 	EXPECTATION_INDEPENDENT; // does not depend on the expectation

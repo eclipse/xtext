@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractTypeReferencePairWalker.CompoundTypeReferenceTraverser;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -60,6 +61,16 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 			@Override
 			protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
 				doVisitTypeReference(reference, param);
+			}
+		};
+	}
+	
+	@Override
+	protected CompoundTypeReferenceTraverser createCompoundTypeReferenceTraverser() {
+		return new CompoundTypeReferenceTraverser() {
+			@Override
+			protected void doVisitUnboundTypeReference(UnboundTypeReference reference, CompoundTypeReference declaration) {
+				addHint(reference, declaration);
 			}
 		};
 	}

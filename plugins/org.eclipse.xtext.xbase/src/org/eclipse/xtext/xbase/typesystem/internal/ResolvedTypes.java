@@ -41,15 +41,14 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgumen
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.base.Joiner;
@@ -165,27 +164,31 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		if (values.size() == 1) {
 			TypeData typeData = values.get(0);
+			LightweightTypeReference upperBoundSubstitute = typeData.getActualType().getUpperBoundSubstitute();
+			if (upperBoundSubstitute != typeData.getActualType())
+				return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), typeData.isReturnType());
 			return typeData;
 		}
 		
 		List<LightweightTypeReference> references = Lists.newArrayList();
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 		for (TypeData value : values) {
-			LightweightTypeReference reference = value.getActualType();
+			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
 			references.add(reference);
 			mergedHints.addAll(value.getConformanceHints());
 		}
-		LightweightTypeReference mergedType = getMergedType(references);
+		LightweightTypeReference mergedType = getMergedType(/*mergedHints, */references);
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
 		
 		/* TODO ensure that all expectations are the same */
-		TypeData result = new TypeData(expression, values.get(0).getExpectation(), mergedType.getUpperBoundSubstitute(), mergedHints , returnType);
+		TypeData result = new TypeData(expression, values.get(0).getExpectation(), mergedType, mergedHints , returnType);
 		return result;
 	}
 
 	@Nullable
+//	protected LightweightTypeReference getMergedType(EnumSet<ConformanceHint> mergedHints, List<LightweightTypeReference> types) {
 	protected LightweightTypeReference getMergedType(List<LightweightTypeReference> types) {
 		if (types.isEmpty()) {
 			return null;
@@ -194,6 +197,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			LightweightTypeReference result = types.get(0);
 			return result;
 		}
+//		if (mergedHints.contains(ConformanceHint.UNDECIDED)) {
+//			CompoundTypeReference result = new CompoundTypeReference(getReferenceOwner(), false);
+//			for (LightweightTypeReference type: types) {
+//				result.addComponent(type);
+//			}
+//			return result;
+//		}
 		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(types);
 		if (result != null || types.isEmpty()) {
 			return result;
@@ -310,26 +320,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getReferenceOwner()) {
+		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getReferenceOwner()) {
 			@Override
-			protected LightweightTypeReference getUnmappedSubstitute(
-					ParameterizedTypeReference reference,
-					JvmTypeParameter type, 
-					ConstraintVisitingInfo visiting) {
-				// TODO extract method 'isExpressionWithTypeArguments'
+			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
-					return createUnboundTypeReference(expression, type);
+					return ResolvedTypes.this.createUnboundTypeReference(expression, type);
 				} else {
 					throw new IllegalStateException("expression was: " + expression);
 				}
 			}
-			
-			@Override
-			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
-					ConstraintVisitingInfo visiting) {
-				return reference;
-			}
-			
 		};
 		LightweightTypeReference actualType = substitutor.substitute(type).getUpperBoundSubstitute();
 		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
@@ -545,9 +544,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 						if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
 							if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
 								UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
-								// resolve similar pending type arguments
-								VarianceInfo definedVarianceInfo = existingTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(existingTypeArgument.getActualVariance());
-								if (definedVarianceInfo == VarianceInfo.INVARIANT) {
+								// resolve similar pending type arguments, too
+								if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
 									acceptHint(existingReference.getHandle(), boundTypeArgument);
 								}
 							}

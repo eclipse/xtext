@@ -33,7 +33,6 @@ import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -336,14 +335,13 @@ public class TypeConformanceComputer {
 			return functionType;
 		} else if (functionTypeKind == FunctionTypeKind.FUNCTION) {
 			CommonTypeComputationServices services = reference.getOwner().getServices();
-			LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 			FunctionTypeReference functionType = new FunctionTypeReference(reference.getOwner(), reference.getType());
 			List<LightweightTypeReference> allTypeArguments = reference.getTypeArguments();
 			if (!setTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))
 				return null;
 			LightweightTypeReference lastTypeArgument = allTypeArguments.get(allTypeArguments.size() - 1);
 			functionType.addTypeArgument(lastTypeArgument);
-			LightweightTypeReference returnType = lightweightTypeReferences.getUpperBoundOrInvariant(lastTypeArgument);
+			LightweightTypeReference returnType = lastTypeArgument.getUpperBoundSubstitute();
 			if (returnType == null) {
 				return null;
 			}
@@ -375,10 +373,9 @@ public class TypeConformanceComputer {
 
 	protected boolean setTypeArguments(List<LightweightTypeReference> typeArguments, FunctionTypeReference result) {
 		CommonTypeComputationServices services = result.getOwner().getServices();
-		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 		for(LightweightTypeReference typeArgument: typeArguments) {
 			result.addTypeArgument(typeArgument);
-			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(typeArgument);
+			LightweightTypeReference lowerBound = typeArgument.getLowerBoundSubstitute();
 			if (lowerBound == null || lowerBound instanceof AnyTypeReference) {
 				return false;
 			}

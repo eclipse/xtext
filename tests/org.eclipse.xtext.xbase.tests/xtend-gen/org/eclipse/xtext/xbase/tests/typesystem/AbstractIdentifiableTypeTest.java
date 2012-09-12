@@ -794,6 +794,21 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testDeferredTypeArgumentResolution_135() throws Exception {
-    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "Object");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_136() throws Exception {
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s.toString]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_137() throws Exception {
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s.charAt(1) ]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_138() throws Exception {
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "CharSequence");
   }
 }

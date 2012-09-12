@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,10 +45,10 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	}
 
 	private final ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping;
-	private final List<JvmTypeParameter> parametersToBeMapped;
+	private final Collection<JvmTypeParameter> parametersToBeMapped;
 	private final BoundTypeArgumentSource defaultSource;
 
-	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
+	public ActualTypeArgumentCollector(Collection<JvmTypeParameter> parametersToBeMapped, BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(owner);
 		this.parametersToBeMapped = parametersToBeMapped;
 		this.defaultSource = defaultSource;
@@ -81,7 +81,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		return typeParameterMapping;
 	}
 	
-	protected List<JvmTypeParameter> getParametersToProcess() {
+	protected Collection<JvmTypeParameter> getParametersToProcess() {
 		return parametersToBeMapped;
 	}
 	

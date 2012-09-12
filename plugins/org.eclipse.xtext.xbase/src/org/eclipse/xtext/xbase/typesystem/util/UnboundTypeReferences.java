@@ -44,38 +44,5 @@ public final class UnboundTypeReferences {
 		}
 		return null;
 	}
-	
-//	public static boolean isUnboundAndEqual(UnboundTypeReference unboundReference, LightweightTypeReference reference) {
-//		if (reference instanceof UnboundTypeReference) {
-//			UnboundTypeReference other = (UnboundTypeReference) reference;
-//			if (!other.isResolved()) {
-//				if (unboundReference.getHandle().equals(other.getHandle())) {
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
-	
-//	public static boolean isUnboundTypeParameter(XComputedTypeReference reference) {
-//		if (reference.eIsSet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT))
-//			return false;
-//		IJvmTypeReferenceProvider typeProvider = reference.getTypeProvider();
-//		if (typeProvider instanceof UnboundTypeParameter) {
-//			boolean result = !((UnboundTypeParameter) typeProvider).isComputed();
-//			return result;
-//		}
-//		return false;
-//	}
-	
-//	public static  JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive, Primitives primitives) {
-//		if (potentialPrimitive instanceof XComputedTypeReference) {
-//			if (isUnboundTypeParameter((XComputedTypeReference) potentialPrimitive)){
-//				return potentialPrimitive;
-//			}
-//		}
-//		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-//		return result;
-//	}
 
 }

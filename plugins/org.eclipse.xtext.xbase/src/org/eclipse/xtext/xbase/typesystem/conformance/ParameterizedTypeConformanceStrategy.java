@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -186,7 +185,6 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	protected FunctionTypeReference convertToFunctionTypeReference(ParameterizedTypeReference reference, boolean rawType) {
 		CommonTypeComputationServices services = reference.getOwner().getServices();
 		FunctionTypes functionTypes = services.getFunctionTypes();
-		LightweightTypeReferences lightweightTypeReferences = services.getLightweightTypeReferences();
 		JvmOperation operation = functionTypes.findImplementingOperation(reference);
 		if (operation == null)
 			return null;
@@ -198,8 +196,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), reference.getOwner());
 			for(JvmFormalParameter parameter: operation.getParameters()) {
 				LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-				LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(lightweight);
-				if (lowerBound == null)
+				LightweightTypeReference lowerBound = lightweight.getLowerBoundSubstitute();
+				if (lowerBound instanceof AnyTypeReference)
 					return null;
 				result.addParameterType(lowerBound);
 			}
@@ -218,13 +216,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
 		for(JvmFormalParameter parameter: operation.getParameters()) {
 			LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-			LightweightTypeReference lowerBound = lightweightTypeReferences.getLowerBoundOrInvariant(lightweight);
-			if (lowerBound == null)
+			LightweightTypeReference lowerBound = lightweight.getLowerBoundSubstitute();
+			if (lowerBound instanceof AnyTypeReference)
 				return null;
 			parameterTypes.add(lowerBound);
 		}
 		LightweightTypeReference returnType = substitutor.substitute(declaredReturnType);
-		FunctionTypeReference result = functionTypes.createFunctionTypeRef(reference.getOwner(), reference, parameterTypes, lightweightTypeReferences.getUpperBoundOrInvariant(returnType));
+		FunctionTypeReference result = functionTypes.createFunctionTypeRef(reference.getOwner(), reference, parameterTypes, returnType.getUpperBoundSubstitute());
 		return result;
 	}
 	

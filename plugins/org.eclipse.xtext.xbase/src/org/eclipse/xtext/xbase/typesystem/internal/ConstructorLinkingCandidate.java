@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -28,18 +27,18 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implements IConstructorLinkingCandidate {
+public class ConstructorLinkingCandidate extends AbstractLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
 
 	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);
 	}
 
-	public XConstructorCall getConstructorCall() {
-		return (XConstructorCall) getExpression();
-	}
-
 	public JvmConstructor getConstructor() {
 		return (JvmConstructor) getFeature();
+	}
+	
+	public XConstructorCall getConstructorCall() {
+		return expression;
 	}
 
 	@Override
@@ -49,17 +48,7 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 	
 	@Override
 	protected List<LightweightTypeReference> getExplicitTypeArguments() {
-		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
-	}
-	
-	@Override
-	public List<JvmFormalParameter> getDeclaredParameters() {
-		return getConstructor().getParameters();
-	}
-	
-	@Override
-	protected boolean hasExplicitArguments() {
-		return !getSyntacticArguments().isEmpty();
+		return Lists.transform(getConstructorCall().getTypeArguments(), state.getResolvedTypes().getConverter());
 	}
 	
 	public void resolveLinkingProxy() {

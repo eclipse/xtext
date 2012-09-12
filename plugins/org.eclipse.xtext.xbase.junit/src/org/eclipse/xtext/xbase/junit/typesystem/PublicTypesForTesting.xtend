@@ -34,6 +34,10 @@ class PublicResolvedTypes extends RootResolvedTypes {
 		super.getUnboundTypeReference(handle)
 	}
 	
+	override public getHints(Object handle) {
+		super.getHints(handle)
+	}
+	
 }
 
 /**
