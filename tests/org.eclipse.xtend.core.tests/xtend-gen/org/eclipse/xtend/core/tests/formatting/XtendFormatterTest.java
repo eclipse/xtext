@@ -690,6 +690,68 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatWhile1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("while(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("while  (  true  )  println(\"x\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatWhile2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("while(true) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("while  (  true  )   {   println(\"x\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatDoWhile1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("do");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("while(true)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("do  println(\"x\")   while  (  true  ) ");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatDoWhile2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("do {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("} while(true)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("do  {  println(\"x\")   } while  (  true  ) ");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatSwitchSL() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
