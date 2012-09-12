@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
@@ -56,6 +57,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
@@ -2386,6 +2388,202 @@ public class XtendFormatter {
     this.format(_expression_1, format);
   }
   
+  protected void _format(final XTryCatchFinallyExpression expr, final FormattableDocument format) {
+    XExpression _expression = expr.getExpression();
+    final INode body = this._nodeModelAccess.nodeForEObject(_expression);
+    XExpression _expression_1 = expr.getExpression();
+    if ((_expression_1 instanceof XBlockExpression)) {
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      FormattingData _prepend = this._formatterExtensions.prepend(body, _function);
+      format.operator_add(_prepend);
+      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      FormattingData _append = this._formatterExtensions.append(body, _function_1);
+      format.operator_add(_append);
+    } else {
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.newLine();
+            it.increaseIndentation();
+          }
+        };
+      FormattingData _prepend_1 = this._formatterExtensions.prepend(body, _function_2);
+      format.operator_add(_prepend_1);
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.newLine();
+            it.decreaseIndentation();
+          }
+        };
+      FormattingData _append_1 = this._formatterExtensions.append(body, _function_3);
+      format.operator_add(_append_1);
+    }
+    XExpression _expression_2 = expr.getExpression();
+    this.format(_expression_2, format);
+    EList<XCatchClause> _catchClauses = expr.getCatchClauses();
+    for (final XCatchClause cc : _catchClauses) {
+      {
+        this.format(cc, format);
+        boolean _or = false;
+        EList<XCatchClause> _catchClauses_1 = expr.getCatchClauses();
+        XCatchClause _last = IterableExtensions.<XCatchClause>last(_catchClauses_1);
+        boolean _notEquals = (!Objects.equal(cc, _last));
+        if (_notEquals) {
+          _or = true;
+        } else {
+          XExpression _finallyExpression = expr.getFinallyExpression();
+          boolean _notEquals_1 = (!Objects.equal(_finallyExpression, null));
+          _or = (_notEquals || _notEquals_1);
+        }
+        if (_or) {
+          XExpression _expression_3 = cc.getExpression();
+          if ((_expression_3 instanceof XBlockExpression)) {
+            INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(cc);
+            final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.oneSpace();
+                }
+              };
+            FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject, _function_4);
+            format.operator_add(_append_2);
+          } else {
+            INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(cc);
+            final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.newLine();
+                }
+              };
+            FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject_1, _function_5);
+            format.operator_add(_append_3);
+          }
+        }
+      }
+    }
+    XExpression _finallyExpression = expr.getFinallyExpression();
+    boolean _notEquals = (!Objects.equal(_finallyExpression, null));
+    if (_notEquals) {
+      XExpression _finallyExpression_1 = expr.getFinallyExpression();
+      final INode fin = this._nodeModelAccess.nodeForEObject(_finallyExpression_1);
+      XExpression _finallyExpression_2 = expr.getFinallyExpression();
+      if ((_finallyExpression_2 instanceof XBlockExpression)) {
+        final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.oneSpace();
+            }
+          };
+        FormattingData _prepend_2 = this._formatterExtensions.prepend(fin, _function_4);
+        format.operator_add(_prepend_2);
+      } else {
+        final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.newLine();
+              it.increaseIndentation();
+            }
+          };
+        FormattingData _prepend_3 = this._formatterExtensions.prepend(fin, _function_5);
+        format.operator_add(_prepend_3);
+        final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.decreaseIndentation();
+            }
+          };
+        FormattingData _append_2 = this._formatterExtensions.append(fin, _function_6);
+        format.operator_add(_append_2);
+      }
+      XExpression _finallyExpression_3 = expr.getFinallyExpression();
+      this.format(_finallyExpression_3, format);
+    }
+  }
+  
+  protected void _format(final XCatchClause expr, final FormattableDocument format) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "catch");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+    format.operator_add(_append);
+    JvmFormalParameter _declaredParam = expr.getDeclaredParam();
+    INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_declaredParam);
+    final Procedure1<INode> _function_1 = new Procedure1<INode>() {
+        public void apply(final INode it) {
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _prepend = XtendFormatter.this._formatterExtensions.prepend(it, _function);
+          format.operator_add(_prepend);
+          final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          FormattingData _append = XtendFormatter.this._formatterExtensions.append(it, _function_1);
+          format.operator_add(_append);
+        }
+      };
+    ObjectExtensions.<INode>operator_doubleArrow(_nodeForEObject, _function_1);
+    XExpression _expression = expr.getExpression();
+    final INode body = this._nodeModelAccess.nodeForEObject(_expression);
+    XExpression _expression_1 = expr.getExpression();
+    if ((_expression_1 instanceof XBlockExpression)) {
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      FormattingData _prepend = this._formatterExtensions.prepend(body, _function_2);
+      format.operator_add(_prepend);
+    } else {
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.newLine();
+            it.increaseIndentation();
+          }
+        };
+      FormattingData _prepend_1 = this._formatterExtensions.prepend(body, _function_3);
+      format.operator_add(_prepend_1);
+      final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.decreaseIndentation();
+          }
+        };
+      FormattingData _append_1 = this._formatterExtensions.append(body, _function_4);
+      format.operator_add(_append_1);
+    }
+    JvmFormalParameter _declaredParam_1 = expr.getDeclaredParam();
+    this.format(_declaredParam_1, format);
+    XExpression _expression_2 = expr.getExpression();
+    this.format(_expression_2, format);
+  }
+  
+  protected void _format(final JvmFormalParameter expr, final FormattableDocument format) {
+    JvmTypeReference _parameterType = expr.getParameterType();
+    boolean _notEquals = (!Objects.equal(_parameterType, null));
+    if (_notEquals) {
+      JvmTypeReference _parameterType_1 = expr.getParameterType();
+      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_parameterType_1);
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      FormattingData _append = this._formatterExtensions.append(_nodeForEObject, _function);
+      format.operator_add(_append);
+    }
+    JvmTypeReference _parameterType_2 = expr.getParameterType();
+    this.format(_parameterType_2, format);
+  }
+  
   protected void _format(final XExpression expr, final FormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
@@ -2460,6 +2658,9 @@ public class XtendFormatter {
     } else if (clazz instanceof XtendParameter) {
       _format((XtendParameter)clazz, format);
       return;
+    } else if (clazz instanceof JvmFormalParameter) {
+      _format((JvmFormalParameter)clazz, format);
+      return;
     } else if (clazz instanceof XBlockExpression) {
       _format((XBlockExpression)clazz, format);
       return;
@@ -2484,6 +2685,9 @@ public class XtendFormatter {
     } else if (clazz instanceof XThrowExpression) {
       _format((XThrowExpression)clazz, format);
       return;
+    } else if (clazz instanceof XTryCatchFinallyExpression) {
+      _format((XTryCatchFinallyExpression)clazz, format);
+      return;
     } else if (clazz instanceof XTypeLiteral) {
       _format((XTypeLiteral)clazz, format);
       return;
@@ -2492,6 +2696,9 @@ public class XtendFormatter {
       return;
     } else if (clazz instanceof XtendFile) {
       _format((XtendFile)clazz, format);
+      return;
+    } else if (clazz instanceof XCatchClause) {
+      _format((XCatchClause)clazz, format);
       return;
     } else if (clazz instanceof XExpression) {
       _format((XExpression)clazz, format);

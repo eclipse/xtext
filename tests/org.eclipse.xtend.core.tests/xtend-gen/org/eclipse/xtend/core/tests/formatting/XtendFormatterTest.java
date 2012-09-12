@@ -1277,4 +1277,194 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatTryFinallyExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("finally");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try   println(\"x\")   finally   println(\"y\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryFinallyExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try  {   println(\"x\")  }  finally  {  println(\"y\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("catch (Exception e)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try   println(\"x\")   catch (  Exception   e  )   println(\"y\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try  {   println(\"x\")  }  catch (  Exception   e  )  {  println(\"y\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchFinallyExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("catch (Exception e)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("finally");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"z\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try   println(\"x\")  catch   (   Exception   e   )   println(\"y\")  finally   println(\"z\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchFinallyExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"z\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try  {   println(\"x\")  }   catch   (   Exception   e   )  {  println(\"y\")  } finally  {  println(\"z\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchCatchFinallyExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("catch (Exception e)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("catch (Exception f)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"z\")");
+    _builder.newLine();
+    _builder.append("finally");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"a\")");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try   println(\"x\")  catch   (   Exception   e   )   println(\"y\")  catch   (   Exception   f  )   println(\"z\")  finally   println(\"a\")");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchCatchFinallyExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("} catch (Exception f) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"z\")");
+    _builder.newLine();
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"a\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try  {   println(\"x\")  }   catch   (   Exception   e   )  {  println(\"y\")  } catch   (   Exception   f  )  {  println(\"z\")  } finally  {  println(\"a\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

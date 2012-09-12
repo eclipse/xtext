@@ -19,32 +19,36 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendPackage$Literals
 import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XCatchClause
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtext.xbase.XDoWhileExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.XThrowExpression
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression
+import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XWhileExpression
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import org.eclipse.xtext.xbase.XDoWhileExpression
-import org.eclipse.xtext.xbase.XTypeLiteral
-import org.eclipse.xtext.xbase.XThrowExpression
-import org.eclipse.xtext.xbase.XReturnExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -700,6 +704,57 @@ public class XtendFormatter {
 	def protected dispatch void format(XReturnExpression expr, FormattableDocument format) {
 		format += expr.expression.nodeForEObject.prepend[oneSpace]
 		expr.expression.format(format)
+	}
+	
+	def protected dispatch void format(XTryCatchFinallyExpression expr, FormattableDocument format) {
+		val body = expr.expression.nodeForEObject
+		if(expr.expression instanceof XBlockExpression) {
+			format += body.prepend[oneSpace]
+			format += body.append[oneSpace]
+		} else {
+			format += body.prepend[newLine increaseIndentation]
+			format += body.append[newLine decreaseIndentation]
+		}
+		expr.expression.format(format)
+		for(cc:expr.catchClauses) {
+			cc.format(format)
+			if(cc != expr.catchClauses.last || expr.finallyExpression != null) {
+				if(cc.expression instanceof XBlockExpression)
+					format += cc.nodeForEObject.append[oneSpace]
+				else 
+					format += cc.nodeForEObject.append[newLine]
+			}
+		}
+		if(expr.finallyExpression != null) {
+			val fin = expr.finallyExpression.nodeForEObject
+			if(expr.finallyExpression instanceof XBlockExpression) {
+				format += fin.prepend[oneSpace]
+			} else {
+				format += fin.prepend[newLine increaseIndentation]
+				format += fin.append[decreaseIndentation]
+			}
+			expr.finallyExpression.format(format)
+		}
+	}
+	
+	def protected dispatch void format(XCatchClause expr, FormattableDocument format) {
+		format += expr.nodeForKeyword("catch").append[oneSpace]
+		expr.declaredParam.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace]]
+		val body = expr.expression.nodeForEObject
+		if(expr.expression instanceof XBlockExpression)
+			format += body.prepend[oneSpace]
+		else {
+			format += body.prepend[newLine increaseIndentation]
+			format += body.append[decreaseIndentation]
+		}
+		expr.declaredParam.format(format)
+		expr.expression.format(format)
+	}
+	
+	def protected dispatch void format(JvmFormalParameter expr, FormattableDocument format) {
+		if(expr.parameterType != null)
+			format += expr.parameterType.nodeForEObject.append[oneSpace]
+		expr.parameterType.format(format)
 	}
 	
 	def protected dispatch void format(XExpression expr, FormattableDocument format) {
