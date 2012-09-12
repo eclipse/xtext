@@ -407,6 +407,45 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatWhile1() {
+		assertFormattedExpression('''
+			while(true)
+				println("x")
+		''', '''
+			while  (  true  )  println("x")
+		''')	
+	}
+	
+	@Test def formatWhile2() {
+		assertFormattedExpression('''
+			while(true) {
+				println("x")
+			}
+		''', '''
+			while  (  true  )   {   println("x")  }
+		''')	
+	}
+	
+	@Test def formatDoWhile1() {
+		assertFormattedExpression('''
+			do
+				println("x")
+			while(true)
+		''', '''
+			do  println("x")   while  (  true  ) 
+		''')	
+	}
+	
+	@Test def formatDoWhile2() {
+		assertFormattedExpression('''
+			do {
+				println("x")
+			} while(true)
+		''', '''
+			do  {  println("x")   } while  (  true  ) 
+		''')		
+	}
+	
 	@Test def formatSwitchSL() {
 		assertFormattedExpression('''
 			switch 'x' { case 'x': println('x') case 'y': println('y') }
