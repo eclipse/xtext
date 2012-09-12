@@ -704,6 +704,30 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatXTypeLiteral() {
+		assertFormattedExpression('''
+			typeof(String)
+		''', '''
+			 typeof  (  String  )
+		''')	
+	}
+	
+	@Test def formatXTypeLiteralArray1() {
+		assertFormattedExpression('''
+			typeof(String[])
+		''', '''
+			 typeof  (  String  [  ])
+		''')	
+	}
+	
+	@Test def formatXTypeLiteralArray2() {
+		assertFormattedExpression('''
+			typeof(String[][])
+		''', '''
+			 typeof  (  String  [  ] [ ] )
+		''')	
+	}
+	
 	
 // - constructors
 // - annotations
