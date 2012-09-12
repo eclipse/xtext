@@ -392,6 +392,8 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			for(i:1 .. 2)
 				println(i)
+		''', '''
+			for  (  i  :  1 .. 2  )  println(i)
 		''')	
 	}
 	
@@ -400,6 +402,8 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			for(i:1 .. 2) {
 				println(i)
 			}
+		''', '''
+			for  (  i  :  1   ..   2  )   {   println(i)  }
 		''')	
 	}
 	

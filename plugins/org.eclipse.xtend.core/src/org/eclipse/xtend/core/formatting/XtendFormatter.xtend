@@ -599,9 +599,13 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XForLoopExpression expr, FormattableDocument format) {
+		expr.nodeForKeyword("for") => [ format += append[noSpace] ] 
+		expr.nodeForFeature(XFOR_LOOP_EXPRESSION__DECLARED_PARAM) => [ format += prepend[noSpace] format += append[noSpace] ]
+		expr.nodeForFeature(XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) => [ format += prepend[noSpace] format += append[noSpace] ]
+		val each = expr.eachExpression.nodeForEObject 
 		if(expr.eachExpression instanceof XBlockExpression) {
+			format += each.prepend[oneSpace]
 		} else {
-			val each = expr.eachExpression.nodeForEObject 
 			format += each.prepend[newLine increaseIndentation]
 			format += each.append[decreaseIndentation]
 		}
