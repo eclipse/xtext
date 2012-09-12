@@ -398,6 +398,7 @@ public class XtendFormatter {
 		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")]
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
+		format += expr.nodeForKeyword("switch").append[oneSpace]
 		if(switchSL) {
 			format += open.prepend[space=" "]
 			format += open.append[space=" "]
@@ -585,7 +586,11 @@ public class XtendFormatter {
 		val elsenode = expr.^else?.nodeForEObject
 		val multiline = thennode.text.trim.contains("\n") || 
 		                thennode.whitespaceBefore?.text?.contains("\n") || 
-		                elsenode?.text?.trim?.contains("\n") 
+		                elsenode?.text?.trim?.contains("\n")
+		if(multiline)
+			format += expr.nodeForKeyword("if").append[oneSpace] 
+		else 
+			format += expr.nodeForKeyword("if").append[noSpace]
 		if(expr.then instanceof XBlockExpression || !multiline) {
 			format += thennode.prepend[space = " "]
 			if(expr.^else != null)
@@ -609,9 +614,9 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XForLoopExpression expr, FormattableDocument format) {
-		expr.nodeForKeyword("for") => [ format += append[noSpace] ] 
-		expr.declaredParam.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
-		expr.forExpression.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
+		expr.nodeForKeyword("for") => [ format += append[oneSpace] ] 
+		expr.declaredParam.nodeForEObject => [ format += prepend[noSpace] format += append[oneSpace] ]
+		expr.forExpression.nodeForEObject => [ format += prepend[oneSpace] format += append[noSpace] ]
 		val each = expr.eachExpression.nodeForEObject 
 		if(expr.eachExpression instanceof XBlockExpression) {
 			format += each.prepend[oneSpace]
@@ -624,7 +629,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XWhileExpression expr, FormattableDocument format) {
-		expr.nodeForKeyword("while") => [ format += append[noSpace] ] 
+		expr.nodeForKeyword("while") => [ format += append[oneSpace] ] 
 		expr.predicate.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
 		val body = expr.body.nodeForEObject 
 		if(expr.body instanceof XBlockExpression) {
@@ -638,7 +643,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XDoWhileExpression expr, FormattableDocument format) {
-		expr.nodeForKeyword("while") => [ format += append[noSpace] ] 
+		expr.nodeForKeyword("while") => [ format += append[oneSpace] ] 
 		expr.predicate.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
 		val body = expr.body.nodeForEObject 
 		if(expr.body instanceof XBlockExpression) {
