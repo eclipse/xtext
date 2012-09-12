@@ -44,6 +44,7 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.xbase.XDoWhileExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XThrowExpression
+import org.eclipse.xtext.xbase.XReturnExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -692,6 +693,11 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XThrowExpression expr, FormattableDocument format) {
+		format += expr.expression.nodeForEObject.prepend[oneSpace]
+		expr.expression.format(format)
+	}
+	
+	def protected dispatch void format(XReturnExpression expr, FormattableDocument format) {
 		format += expr.expression.nodeForEObject.prepend[oneSpace]
 		expr.expression.format(format)
 	}

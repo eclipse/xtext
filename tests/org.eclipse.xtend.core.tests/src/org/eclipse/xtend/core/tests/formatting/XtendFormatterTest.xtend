@@ -736,6 +736,33 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatXReturnExpression1() {
+		assertFormattedExpression('''
+			return "foo"
+		''', '''
+			return   "foo"
+		''')	
+	}
+	
+	@Test def formatXReturnExpression2() {
+		assertFormattedExpression('''
+			"foo"
+			return
+		''', '''
+			"foo"  return
+			
+		''')	
+	}
+	
+	@Test def formatXReturnExpression3() {
+		assertFormattedExpression('''
+			return;
+		''', '''
+			return   ;
+		''')	
+	}
+	
+	
 	
 // - constructors
 // - annotations

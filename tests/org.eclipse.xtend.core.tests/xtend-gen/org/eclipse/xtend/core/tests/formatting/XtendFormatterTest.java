@@ -1241,4 +1241,40 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatXReturnExpression1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("return \"foo\"");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("return   \"foo\"");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatXReturnExpression2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\"foo\"");
+    _builder.newLine();
+    _builder.append("return");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("\"foo\"  return");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatXReturnExpression3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("return;");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("return   ;");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

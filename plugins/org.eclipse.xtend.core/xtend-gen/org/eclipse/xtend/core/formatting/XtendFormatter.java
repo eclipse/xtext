@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -2371,6 +2372,20 @@ public class XtendFormatter {
     this.format(_expression_1, format);
   }
   
+  protected void _format(final XReturnExpression expr, final FormattableDocument format) {
+    XExpression _expression = expr.getExpression();
+    INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_expression);
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _prepend = this._formatterExtensions.prepend(_nodeForEObject, _function);
+    format.operator_add(_prepend);
+    XExpression _expression_1 = expr.getExpression();
+    this.format(_expression_1, format);
+  }
+  
   protected void _format(final XExpression expr, final FormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
@@ -2459,6 +2474,9 @@ public class XtendFormatter {
       return;
     } else if (clazz instanceof XIfExpression) {
       _format((XIfExpression)clazz, format);
+      return;
+    } else if (clazz instanceof XReturnExpression) {
+      _format((XReturnExpression)clazz, format);
       return;
     } else if (clazz instanceof XSwitchExpression) {
       _format((XSwitchExpression)clazz, format);
