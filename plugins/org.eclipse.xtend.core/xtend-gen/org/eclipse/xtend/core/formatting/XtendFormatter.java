@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
@@ -757,15 +758,23 @@ public class XtendFormatter {
   }
   
   protected void _format(final XConstructorCall expr, final FormattableDocument format) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "new");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+    format.operator_add(_append);
     boolean _useStyleMultiline = this.useStyleMultiline(expr, format);
     if (_useStyleMultiline) {
-      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "(");
-      EList<XExpression> _arguments = expr.getArguments();
-      this.formatFeatureCallParamsMultiline(_nodeForKeyword, _arguments, format);
-    } else {
       ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "(");
+      EList<XExpression> _arguments = expr.getArguments();
+      this.formatFeatureCallParamsMultiline(_nodeForKeyword_1, _arguments, format);
+    } else {
+      ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "(");
       EList<XExpression> _arguments_1 = expr.getArguments();
-      this.formatFeatureCallParamsWrapIfNeeded(_nodeForKeyword_1, _arguments_1, format);
+      this.formatFeatureCallParamsWrapIfNeeded(_nodeForKeyword_2, _arguments_1, format);
     }
   }
   
@@ -2348,6 +2357,20 @@ public class XtendFormatter {
     }
   }
   
+  protected void _format(final XThrowExpression expr, final FormattableDocument format) {
+    XExpression _expression = expr.getExpression();
+    INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_expression);
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    FormattingData _prepend = this._formatterExtensions.prepend(_nodeForEObject, _function);
+    format.operator_add(_prepend);
+    XExpression _expression_1 = expr.getExpression();
+    this.format(_expression_1, format);
+  }
+  
   protected void _format(final XExpression expr, final FormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
@@ -2439,6 +2462,9 @@ public class XtendFormatter {
       return;
     } else if (clazz instanceof XSwitchExpression) {
       _format((XSwitchExpression)clazz, format);
+      return;
+    } else if (clazz instanceof XThrowExpression) {
+      _format((XThrowExpression)clazz, format);
       return;
     } else if (clazz instanceof XTypeLiteral) {
       _format((XTypeLiteral)clazz, format);

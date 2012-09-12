@@ -1230,4 +1230,15 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatXThrowExpression() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("throw new RuntimeException()");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("throw  new  RuntimeException()");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

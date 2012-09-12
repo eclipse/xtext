@@ -708,7 +708,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			typeof(String)
 		''', '''
-			 typeof  (  String  )
+			typeof  (  String  )
 		''')	
 	}
 	
@@ -716,7 +716,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			typeof(String[])
 		''', '''
-			 typeof  (  String  [  ])
+			typeof  (  String  [  ])
 		''')	
 	}
 	
@@ -724,7 +724,15 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression('''
 			typeof(String[][])
 		''', '''
-			 typeof  (  String  [  ] [ ] )
+			typeof  (  String  [  ] [ ] )
+		''')	
+	}
+	
+	@Test def formatXThrowExpression() {
+		assertFormattedExpression('''
+			throw new RuntimeException()
+		''', '''
+			throw  new  RuntimeException()
 		''')	
 	}
 	
