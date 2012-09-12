@@ -50,7 +50,9 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	}
 	
 	def String getEquivalent(ParameterizedTypeReference type) {
-		'''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
+		if (type.typeArguments.empty)
+			return type.type.simpleName
+		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
 	
 	@Test
@@ -355,6 +357,12 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	@Ignore("fails in old impl")
 	@Test
 	override testIfExpression_09() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_12() throws Exception {
 		fail("fails in old impl")
 	}
 	

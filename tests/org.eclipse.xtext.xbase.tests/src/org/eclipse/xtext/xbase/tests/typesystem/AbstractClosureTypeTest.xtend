@@ -109,6 +109,12 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.withEquivalents("Function1<Appendable, StringBuilder>", "Function1<CharSequence, StringBuffer>")
 	}
 	
+	@Test def void testIfExpression_12() throws Exception {
+		"{ var java.io.FileFilter filter = (if (true) [true] else [false])"
+			.resolvesClosuresTo("(File)=>boolean", "(File)=>boolean")
+			.withEquivalents("FileFilter", "FileFilter")
+	}
+	
 	@Test def void testNumberLiteralInClosure() throws Exception {
 		"newArrayList().map[42]".resolvesClosuresTo("(Object)=>int").withEquivalents("Function1<Object, Integer>")
 	}

@@ -148,6 +148,12 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testIfExpression_12() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.io.FileFilter filter = (if (true) [true] else [false])", "(File)=>boolean", "(File)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "FileFilter", "FileFilter");
+  }
+  
+  @Test
   public void testNumberLiteralInClosure() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList().map[42]", "(Object)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Integer>");

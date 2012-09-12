@@ -303,4 +303,10 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   public void testIfExpression_09() throws Exception {
     Assert.fail("fails in old impl");
   }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIfExpression_12() throws Exception {
+    Assert.fail("fails in old impl");
+  }
 }
