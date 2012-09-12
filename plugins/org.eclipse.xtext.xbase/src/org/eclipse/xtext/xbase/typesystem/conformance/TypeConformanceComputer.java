@@ -70,7 +70,7 @@ public class TypeConformanceComputer {
 	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right, boolean ignoreGenerics) {
 		if (left == right && left != null)
 			return true;
-		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true));
+		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true, false));
 		return result.isConformant();
 	}
 	
@@ -78,7 +78,8 @@ public class TypeConformanceComputer {
 	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument flags) {
 		if (left == right && left != null)
 			return TypeConformanceResult.SUCCESS;
-		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening));
+		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(
+				right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening, flags.unboundComputationAddsHints));
 	}
 	
 	/**
@@ -543,9 +544,13 @@ public class TypeConformanceComputer {
 		for (int i = 0; i < types.size(); i++) {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
-				if (isConformant(result, other)) {
+				// if we stumble accross unbound references without any hints, assume they are compatible and add respective hints
+				TypeConformanceResult conformance = isConformant(result, other, new TypeConformanceComputationArgument(false, false, true, true, true));
+				if (conformance.isConformant()) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
-					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) && isConformant(other, result)) {
+					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) &&
+							// we explicitly don't want to add the conformance hints twice; #isConformant(other, result) is sufficient 
+							isConformant(other, result)) {
 						result = other;
 					}
 				} else {

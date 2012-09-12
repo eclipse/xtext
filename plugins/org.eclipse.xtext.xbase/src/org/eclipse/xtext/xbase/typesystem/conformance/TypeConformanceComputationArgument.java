@@ -19,17 +19,19 @@ public class TypeConformanceComputationArgument {
 	protected final boolean asTypeArgument;
 	protected final boolean allowPrimitiveConversion;
 	protected final boolean allowPrimitiveWidening;
+	protected final boolean unboundComputationAddsHints;
 	
 	public TypeConformanceComputationArgument() {
-		this(false, false, true, true);
+		this(false, false, true, true, false);
 	}
 	
 	public TypeConformanceComputationArgument(boolean rawType, boolean asTypeArgument,
-			boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
+			boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
 		this.rawType = rawType;
 		this.asTypeArgument = asTypeArgument;
 		this.allowPrimitiveConversion = allowPrimitiveConversion;
 		this.allowPrimitiveWidening = allowPrimitiveWidening;
+		this.unboundComputationAddsHints = unboundComputationAddsHints;
 	}
 	
 	public boolean isAllowPrimitiveConversion() {
@@ -46,27 +48,38 @@ public class TypeConformanceComputationArgument {
 
 	@Override
 	public String toString() {
-		return "TypeConformanceComputationArgument [rawType=" + rawType + ", asTypeArgument=" + asTypeArgument
-				+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + ", allowPrimitiveWidening=" + allowPrimitiveWidening + "]";
+		return "TypeConformanceComputationArgument [\n\t" +
+				"rawType=" + rawType + ",\n\t" +
+				"asTypeArgument=" + asTypeArgument + ",\n\t" +
+				"allowPrimitiveConversion=" + allowPrimitiveConversion + ",\n\t" +
+				"allowPrimitiveWidening=" + allowPrimitiveWidening + ",\n\t" +
+				"unboundComputationAddsHints=" + unboundComputationAddsHints + "\n" +
+				"]";
 	}
 
 	protected static class Internal<T extends LightweightTypeReference> extends TypeConformanceComputationArgument {
 		protected final T reference;
 		
 		protected static <T extends LightweightTypeReference> Internal<T> create(T reference, 
-				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
-			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening);
+				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
+			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints);
 		}
 		
-		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening) {
-			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening);
+		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
+			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints);
 			this.reference = reference;
 		}
 
 		@Override
 		public String toString() {
-			return "TypeConformanceComputationArgument.Internal [reference=" + reference + ", rawType=" + rawType + ", asTypeArgument=" + asTypeArgument
-					+ ", allowPrimitiveConversion=" + allowPrimitiveConversion + ", allowPrimitiveWidening=" + allowPrimitiveWidening + "]";
+			return "TypeConformanceComputationArgument.Internal [\n\t" +
+					"reference=" + reference + ",\n\t" +
+					"rawType=" + rawType + ",\n\t" +
+					"asTypeArgument=" + asTypeArgument + ",\n\t" +
+					"allowPrimitiveConversion=" + allowPrimitiveConversion + ",\n\t" +
+					"allowPrimitiveWidening=" + allowPrimitiveWidening + ",\n\t" +
+					"unboundComputationAddsHints=" + unboundComputationAddsHints + "\n" +
+					"]";
 		}
 	}
 	
