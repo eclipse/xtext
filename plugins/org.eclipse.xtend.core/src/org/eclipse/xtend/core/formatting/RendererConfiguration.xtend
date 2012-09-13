@@ -9,10 +9,13 @@ class RendererConfiguration {
 	@Property @Named("line.width.max") int maxLineWidth = 120
 	@Property @Named("indentation") String indentation
 	@Property @Named("indentation.length") int indentationLength = 4
+	@Property @Named("newlines.after.packagename") NewLineConfiguration newLinesAfterPackageName = new NewLineConfiguration(2, 2)
 	@Property @Named("newlines.between.imports") NewLineConfiguration newLinesBetweenImports = new NewLineConfiguration(1, 2)
+	@Property @Named("newlines.after.importsection") NewLineConfiguration newLinesAfterImportSection = new NewLineConfiguration(2, 3)
 	@Property @Named("newlines.between.fields") NewLineConfiguration newLinesBetweenFields = new NewLineConfiguration(1, 2)
 	@Property @Named("newlines.between.fields.and.methods") NewLineConfiguration newLinesBetweenFieldsAndMethods = new NewLineConfiguration(2, 2)
 	@Property @Named("newlines.between.methods") NewLineConfiguration newLinesBetweenMethods = new NewLineConfiguration(2, 2)
+	@Property @Named("newlines.between.classes") NewLineConfiguration newLinesBetweenClasses = new NewLineConfiguration(2, 3)
 	
 	new() {
 	}

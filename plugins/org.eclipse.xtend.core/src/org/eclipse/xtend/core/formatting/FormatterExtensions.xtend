@@ -21,6 +21,18 @@ class FormatterExtensions {
 			throw new IllegalStateException(init.toString) 
 	}
 	
+	def FormattingData newFormattingData(Pair<Integer, Integer> range, String document, NewLineConfiguration configuration) {
+		var countedNewLines = 0
+		var i = range.key
+		while(i < range.value + range.key) {
+			if(document.charAt(i).toString == "\n")
+				countedNewLines = countedNewLines + 1
+			i = i + 1
+		}
+		val newLines = Math::min(Math::max(countedNewLines, configuration.minNewLines), configuration.maxNewLines)
+		return new NewLineData(range.key, range.value, 0, newLines)
+	}
+	
 	
 	def String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
 		val lookahead = new FormattableDocument(fmt)
@@ -44,15 +56,26 @@ class FormatterExtensions {
 		}
 	}
 	
+	def FormattingData append(INode node, NewLineConfiguration configuration) {
+		if(node != null) {
+			node.rangeAfter?.newFormattingData(node.rootNode.text, configuration)
+		}
+	}
+	
 	def FormattingData prepend(INode node, (FormattingDataInit)=>void init) {
 		if(node != null) {
 			node.rangeBefore?.newFormattingData(init)
 		}
 	}
 	
+	def FormattingData prepend(INode node, NewLineConfiguration configuration) {
+		if(node != null) {
+			node.rangeBefore?.newFormattingData(node.rootNode.text, configuration)
+		}
+	}
+	
 	
 }
-
 
 class FormattingDataInit {
 	public String space = null
