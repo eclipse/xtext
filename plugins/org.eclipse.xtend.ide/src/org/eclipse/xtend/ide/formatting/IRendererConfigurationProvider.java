@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.formatting;
 
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public interface IRendererConfigurationProvider {
-	RendererConfiguration rendererConfiguration();
+	XtendFormatterConfig rendererConfiguration();
 }

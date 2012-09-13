@@ -49,7 +49,6 @@ import org.eclipse.xtext.xbase.XWhileExpression
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import org.eclipse.xtend.core.xtend.XtendFunction
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -63,7 +62,7 @@ public class XtendFormatter {
 	
 	@Property boolean allowIdentityEdits = false
 	
-	def List<TextReplacement> format(XtextResource res, int offset, int length, RendererConfiguration cfg) {
+	def List<TextReplacement> format(XtextResource res, int offset, int length, XtendFormatterConfig cfg) {
 		cfg.lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
 		cfg.indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
 		

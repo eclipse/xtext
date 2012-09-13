@@ -4,18 +4,18 @@ import com.google.inject.name.Named
 import java.util.Map
 import org.eclipse.xtend.lib.Property
 
-class RendererConfiguration { 
+class XtendFormatterConfig { 
 	@Property @Named("line.separator") String lineSeparator
 	@Property @Named("line.width.max") int maxLineWidth = 120
 	@Property @Named("indentation") String indentation
 	@Property @Named("indentation.length") int indentationLength = 4
-	@Property @Named("newlines.after.packagename") NewLineConfiguration newLinesAfterPackageName = new NewLineConfiguration(2, 2)
-	@Property @Named("newlines.between.imports") NewLineConfiguration newLinesBetweenImports = new NewLineConfiguration(1, 2)
-	@Property @Named("newlines.after.importsection") NewLineConfiguration newLinesAfterImportSection = new NewLineConfiguration(2, 3)
-	@Property @Named("newlines.between.fields") NewLineConfiguration newLinesBetweenFields = new NewLineConfiguration(1, 2)
-	@Property @Named("newlines.between.fields.and.methods") NewLineConfiguration newLinesBetweenFieldsAndMethods = new NewLineConfiguration(2, 2)
-	@Property @Named("newlines.between.methods") NewLineConfiguration newLinesBetweenMethods = new NewLineConfiguration(2, 2)
-	@Property @Named("newlines.between.classes") NewLineConfiguration newLinesBetweenClasses = new NewLineConfiguration(2, 3)
+	@Property @Named("newlines.after.packagename") NewLineConfig newLinesAfterPackageName = new NewLineConfig(2, 2)
+	@Property @Named("newlines.between.imports") NewLineConfig newLinesBetweenImports = new NewLineConfig(1, 2)
+	@Property @Named("newlines.after.importsection") NewLineConfig newLinesAfterImportSection = new NewLineConfig(2, 3)
+	@Property @Named("newlines.between.fields") NewLineConfig newLinesBetweenFields = new NewLineConfig(1, 2)
+	@Property @Named("newlines.between.fields.and.methods") NewLineConfig newLinesBetweenFieldsAndMethods = new NewLineConfig(2, 2)
+	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)
+	@Property @Named("newlines.between.classes") NewLineConfig newLinesBetweenClasses = new NewLineConfig(2, 3)
 	
 	new() {
 	}
@@ -27,7 +27,7 @@ class RendererConfiguration {
 				val value = switch property.value.type {
 					case typeof(int): Integer::parseInt(str)
 					case typeof(String): str
-					case typeof(NewLineConfiguration): new NewLineConfiguration(str)
+					case typeof(NewLineConfig): new NewLineConfig(str)
 				}
 				property.value.set(this, value)
 			}
@@ -62,7 +62,7 @@ class RendererConfiguration {
 	}
 }
 
-class NewLineConfiguration {
+class NewLineConfig {
 	@Property int minNewLines = 1
 	@Property int maxNewLines = 1
 

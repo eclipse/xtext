@@ -10,10 +10,11 @@ package org.eclipse.xtend.ide.formatting
 import java.util.List
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.formatter.DefaultCodeFormatterConstants
+import java.util.Map
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig
+
 import static org.eclipse.xtend.ide.formatting.SettingsData$Category.*
 import static org.eclipse.xtend.ide.formatting.SettingsData$WidgetType.*
-import java.util.Map
-import org.eclipse.xtend.core.formatting.RendererConfiguration
 
 class FormatterPreferenceInfra {
 	public static String PREFIX = "org.eclipse.xtend.formatter";
@@ -35,7 +36,7 @@ class FormatterPreferenceInfra {
 	}
 
 	def static createRendererConfiguration(Map<String,String> map){
-		val rendererConfiguration = new RendererConfiguration();
+		val rendererConfiguration = new XtendFormatterConfig();
 		try {
 			rendererConfiguration.setIndentationLength(Integer::parseInt(map
 								.get(INDENTATION_SIZE)));

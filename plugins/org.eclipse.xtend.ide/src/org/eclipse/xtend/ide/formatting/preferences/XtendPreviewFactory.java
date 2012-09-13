@@ -14,7 +14,7 @@ import java.util.Observer;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra;
 import org.eclipse.xtend.ide.formatting.IRendererConfigurationProvider;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
@@ -79,7 +79,7 @@ public class XtendPreviewFactory {
 
 		public void doFormat(final Map<String, String> map) {
 			xtendFormatterFactory.setConfigurationProvider(new IRendererConfigurationProvider() {
-				public RendererConfiguration rendererConfiguration() {
+				public XtendFormatterConfig rendererConfiguration() {
 					return FormatterPreferenceInfra.createRendererConfiguration(map);
 				}
 			});

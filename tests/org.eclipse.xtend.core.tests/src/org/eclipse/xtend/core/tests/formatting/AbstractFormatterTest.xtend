@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.formatting
 
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.core.formatting.RendererConfiguration
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig
 import org.eclipse.xtend.core.formatting.XtendFormatter
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
@@ -57,7 +57,7 @@ abstract class AbstractFormatterTest {
 		val parsed = toBeFormatted.parse
 		Assert::assertEquals(0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
-		val rc = new RendererConfiguration() => [
+		val rc = new XtendFormatterConfig() => [
 			maxLineWidth = 80
 		]
 		formatter.allowIdentityEdits = true
