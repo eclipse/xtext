@@ -1879,7 +1879,14 @@ public class XtendFormatter {
       _or = (_or_1 || _contains_2);
     }
     final boolean multiline = _or;
-    if (multiline) {
+    boolean _or_2 = false;
+    XExpression _then_1 = expr.getThen();
+    if ((_then_1 instanceof XBlockExpression)) {
+      _or_2 = true;
+    } else {
+      _or_2 = ((_then_1 instanceof XBlockExpression) || multiline);
+    }
+    if (_or_2) {
       ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "if");
       final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
@@ -1898,15 +1905,15 @@ public class XtendFormatter {
       FormattingData _append_3 = this._formatterExtensions.append(_nodeForKeyword_2, _function_3);
       format.operator_add(_append_3);
     }
-    boolean _or_2 = false;
-    XExpression _then_1 = expr.getThen();
-    if ((_then_1 instanceof XBlockExpression)) {
-      _or_2 = true;
+    boolean _or_3 = false;
+    XExpression _then_2 = expr.getThen();
+    if ((_then_2 instanceof XBlockExpression)) {
+      _or_3 = true;
     } else {
       boolean _not = (!multiline);
-      _or_2 = ((_then_1 instanceof XBlockExpression) || _not);
+      _or_3 = ((_then_2 instanceof XBlockExpression) || _not);
     }
-    if (_or_2) {
+    if (_or_3) {
       final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.space = " ";
@@ -1955,22 +1962,22 @@ public class XtendFormatter {
         format.operator_add(_append_6);
       }
     }
-    boolean _or_3 = false;
     boolean _or_4 = false;
+    boolean _or_5 = false;
     XExpression _else_3 = expr.getElse();
     if ((_else_3 instanceof XIfExpression)) {
-      _or_4 = true;
+      _or_5 = true;
     } else {
       XExpression _else_4 = expr.getElse();
-      _or_4 = ((_else_3 instanceof XIfExpression) || (_else_4 instanceof XBlockExpression));
+      _or_5 = ((_else_3 instanceof XIfExpression) || (_else_4 instanceof XBlockExpression));
     }
-    if (_or_4) {
-      _or_3 = true;
+    if (_or_5) {
+      _or_4 = true;
     } else {
       boolean _not_1 = (!multiline);
-      _or_3 = (_or_4 || _not_1);
+      _or_4 = (_or_5 || _not_1);
     }
-    if (_or_3) {
+    if (_or_4) {
       final Procedure1<FormattingDataInit> _function_9 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.space = " ";
@@ -1995,8 +2002,8 @@ public class XtendFormatter {
       FormattingData _append_7 = this._formatterExtensions.append(elsenode, _function_11);
       format.operator_add(_append_7);
     }
-    XExpression _then_2 = expr.getThen();
-    this.format(_then_2, format);
+    XExpression _then_3 = expr.getThen();
+    this.format(_then_3, format);
     XExpression _else_5 = expr.getElse();
     boolean _notEquals_2 = (!Objects.equal(_else_5, null));
     if (_notEquals_2) {

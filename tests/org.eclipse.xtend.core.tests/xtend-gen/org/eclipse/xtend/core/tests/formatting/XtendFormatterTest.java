@@ -516,7 +516,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIf2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true) {");
+    _builder.append("if (true) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
@@ -565,7 +565,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatIfElse2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true) {");
+    _builder.append("if (true) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
