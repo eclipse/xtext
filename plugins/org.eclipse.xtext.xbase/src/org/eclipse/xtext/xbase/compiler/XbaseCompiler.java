@@ -578,7 +578,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				typeGuardAppendable.trace(casePart.getTypeGuard()).append(casePart.getTypeGuard().getType());
 				typeGuardAppendable.append(") {");
 				typeGuardAppendable.increaseIndentation();
-				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall) expr.getSwitch()).getFeature() : expr;
+				JvmIdentifiableElement switchOver = isSimpleFeatureCall(expr.getSwitch()) ? ((XFeatureCall) expr.getSwitch()).getFeature() : expr;
 				typeGuardAppendable.openPseudoScope();
 				final String proposedName = getFavoriteVariableName(casePart.getTypeGuard().getType());
 				final String castedVariableName = typeGuardAppendable.declareSyntheticVariable(switchOver, proposedName);
@@ -650,6 +650,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
+	protected boolean isSimpleFeatureCall(XExpression switch1) {
+		if (switch1 instanceof XFeatureCall)  {
+			XFeatureCall featureCall = (XFeatureCall) switch1;
+			return !(featureCall.getFeature() instanceof JvmOperation);
+		}
+		return false;
+	}
+
 	protected Object getSwitchExpressionKey(XSwitchExpression expr) {
 		return new Pair<XSwitchExpression, String>(expr, "key");
 	}
