@@ -6,11 +6,11 @@ import java.util.TreeMap
 import org.eclipse.xtend.core.formatting.WhitespaceData
 
 class FormattableDocument {
-	@Property val RendererConfiguration cfg
+	@Property val XtendFormatterConfig cfg
 	@Property val String document
 	@Property TreeMap<Integer, FormattingData> formattings
 	
-	new(RendererConfiguration cfg, String document){
+	new(XtendFormatterConfig cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()

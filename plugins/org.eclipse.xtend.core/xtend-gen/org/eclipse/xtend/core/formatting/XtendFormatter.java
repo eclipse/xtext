@@ -13,11 +13,11 @@ import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
-import org.eclipse.xtend.core.formatting.NewLineConfiguration;
+import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.TextReplacement;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -99,7 +99,7 @@ public class XtendFormatter {
     this._allowIdentityEdits = allowIdentityEdits;
   }
   
-  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final RendererConfiguration cfg) {
+  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final XtendFormatterConfig cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
       URI _uRI = res.getURI();
@@ -157,13 +157,13 @@ public class XtendFormatter {
         };
       FormattingData _append = this._formatterExtensions.append(pkg, _function);
       format.operator_add(_append);
-      RendererConfiguration _cfg = format.getCfg();
-      NewLineConfiguration _newLinesAfterPackageName = _cfg.getNewLinesAfterPackageName();
+      XtendFormatterConfig _cfg = format.getCfg();
+      NewLineConfig _newLinesAfterPackageName = _cfg.getNewLinesAfterPackageName();
       FormattingData _append_1 = this._formatterExtensions.append(pkgSemicolon, _newLinesAfterPackageName);
       format.operator_add(_append_1);
     } else {
-      RendererConfiguration _cfg_1 = format.getCfg();
-      NewLineConfiguration _newLinesAfterPackageName_1 = _cfg_1.getNewLinesAfterPackageName();
+      XtendFormatterConfig _cfg_1 = format.getCfg();
+      NewLineConfig _newLinesAfterPackageName_1 = _cfg_1.getNewLinesAfterPackageName();
       FormattingData _append_2 = this._formatterExtensions.append(pkg, _newLinesAfterPackageName_1);
       format.operator_add(_append_2);
     }
@@ -174,14 +174,14 @@ public class XtendFormatter {
       boolean _notEquals_1 = (!Objects.equal(imp, _last));
       if (_notEquals_1) {
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(imp);
-        RendererConfiguration _cfg_2 = format.getCfg();
-        NewLineConfiguration _newLinesBetweenImports = _cfg_2.getNewLinesBetweenImports();
+        XtendFormatterConfig _cfg_2 = format.getCfg();
+        NewLineConfig _newLinesBetweenImports = _cfg_2.getNewLinesBetweenImports();
         FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject, _newLinesBetweenImports);
         format.operator_add(_append_3);
       } else {
         INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
-        RendererConfiguration _cfg_3 = format.getCfg();
-        NewLineConfiguration _newLinesAfterImportSection = _cfg_3.getNewLinesAfterImportSection();
+        XtendFormatterConfig _cfg_3 = format.getCfg();
+        NewLineConfig _newLinesAfterImportSection = _cfg_3.getNewLinesAfterImportSection();
         FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesAfterImportSection);
         format.operator_add(_append_4);
       }
@@ -195,8 +195,8 @@ public class XtendFormatter {
         boolean _notEquals_2 = (!Objects.equal(clazz, _last_1));
         if (_notEquals_2) {
           INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(clazz);
-          RendererConfiguration _cfg_4 = format.getCfg();
-          NewLineConfiguration _newLinesBetweenClasses = _cfg_4.getNewLinesBetweenClasses();
+          XtendFormatterConfig _cfg_4 = format.getCfg();
+          NewLineConfig _newLinesBetweenClasses = _cfg_4.getNewLinesBetweenClasses();
           FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenClasses);
           format.operator_add(_append_5);
         }
@@ -269,8 +269,8 @@ public class XtendFormatter {
             }
             if (_and) {
               INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(current);
-              RendererConfiguration _cfg = format.getCfg();
-              NewLineConfiguration _newLinesBetweenFields = _cfg.getNewLinesBetweenFields();
+              XtendFormatterConfig _cfg = format.getCfg();
+              NewLineConfig _newLinesBetweenFields = _cfg.getNewLinesBetweenFields();
               FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesBetweenFields);
               format.operator_add(_append_2);
             } else {
@@ -282,14 +282,14 @@ public class XtendFormatter {
               }
               if (_and_1) {
                 INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(current);
-                RendererConfiguration _cfg_1 = format.getCfg();
-                NewLineConfiguration _newLinesBetweenMethods = _cfg_1.getNewLinesBetweenMethods();
+                XtendFormatterConfig _cfg_1 = format.getCfg();
+                NewLineConfig _newLinesBetweenMethods = _cfg_1.getNewLinesBetweenMethods();
                 FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenMethods);
                 format.operator_add(_append_3);
               } else {
                 INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(current);
-                RendererConfiguration _cfg_2 = format.getCfg();
-                NewLineConfiguration _newLinesBetweenFieldsAndMethods = _cfg_2.getNewLinesBetweenFieldsAndMethods();
+                XtendFormatterConfig _cfg_2 = format.getCfg();
+                NewLineConfig _newLinesBetweenFieldsAndMethods = _cfg_2.getNewLinesBetweenFieldsAndMethods();
                 FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_3, _newLinesBetweenFieldsAndMethods);
                 format.operator_add(_append_4);
               }
@@ -878,7 +878,7 @@ public class XtendFormatter {
             if (_useStyleMultiline) {
               int _length_2 = featureNode.getLength();
               int _plus_1 = (lineLength + _length_2);
-              RendererConfiguration _cfg = format.getCfg();
+              XtendFormatterConfig _cfg = format.getCfg();
               int _maxLineWidth = _cfg.getMaxLineWidth();
               boolean _lessThan = (_plus_1 < _maxLineWidth);
               if (_lessThan) {
@@ -905,7 +905,7 @@ public class XtendFormatter {
               int _length_3 = featureNode.getLength();
               int _multiply = (_length_3 * 2);
               int _plus_2 = (lineLength + _multiply);
-              RendererConfiguration _cfg_1 = format.getCfg();
+              XtendFormatterConfig _cfg_1 = format.getCfg();
               int _maxLineWidth_1 = _cfg_1.getMaxLineWidth();
               boolean _lessThan_1 = (_plus_2 < _maxLineWidth_1);
               if (_lessThan_1) {
@@ -962,7 +962,7 @@ public class XtendFormatter {
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
             int _length_4 = featureNode.getLength();
             final int shortLenght = (_lineLengthBefore + _length_4);
-            RendererConfiguration _cfg_2 = format.getCfg();
+            XtendFormatterConfig _cfg_2 = format.getCfg();
             int _maxLineWidth_2 = _cfg_2.getMaxLineWidth();
             boolean _lessThan_2 = (shortLenght < _maxLineWidth_2);
             if (_lessThan_2) {
@@ -2667,7 +2667,7 @@ public class XtendFormatter {
       int _lineLengthBefore = fmt.lineLengthBefore(_offset);
       int _length = lookahead.length();
       final int length = (_lineLengthBefore + _length);
-      RendererConfiguration _cfg = fmt.getCfg();
+      XtendFormatterConfig _cfg = fmt.getCfg();
       int _maxLineWidth = _cfg.getMaxLineWidth();
       return (length <= _maxLineWidth);
     }

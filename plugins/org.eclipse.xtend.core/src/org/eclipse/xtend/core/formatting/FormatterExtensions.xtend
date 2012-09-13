@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.formatting
 
-
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.nodemodel.INode
 import com.google.inject.Inject
@@ -21,7 +20,7 @@ class FormatterExtensions {
 			throw new IllegalStateException(init.toString) 
 	}
 	
-	def FormattingData newFormattingData(Pair<Integer, Integer> range, String document, NewLineConfiguration configuration) {
+	def FormattingData newFormattingData(Pair<Integer, Integer> range, String document, NewLineConfig configuration) {
 		var countedNewLines = 0
 		var i = range.key
 		while(i < range.value + range.key) {
@@ -56,7 +55,7 @@ class FormatterExtensions {
 		}
 	}
 	
-	def FormattingData append(INode node, NewLineConfiguration configuration) {
+	def FormattingData append(INode node, NewLineConfig configuration) {
 		if(node != null) {
 			node.rangeAfter?.newFormattingData(node.rootNode.text, configuration)
 		}
@@ -68,7 +67,7 @@ class FormatterExtensions {
 		}
 	}
 	
-	def FormattingData prepend(INode node, NewLineConfiguration configuration) {
+	def FormattingData prepend(INode node, NewLineConfig configuration) {
 		if(node != null) {
 			node.rangeBefore?.newFormattingData(node.rootNode.text, configuration)
 		}

@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.eclipse.xtend.core.formatting.NewLineConfiguration;
+import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public class RendererConfiguration {
+public class XtendFormatterConfig {
   @Named(value = "line.separator")
   private String _lineSeparator;
   
@@ -59,121 +59,121 @@ public class RendererConfiguration {
   }
   
   @Named(value = "newlines.after.packagename")
-  private NewLineConfiguration _newLinesAfterPackageName = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 2);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesAfterPackageName = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(2, 2);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesAfterPackageName() {
+  public NewLineConfig getNewLinesAfterPackageName() {
     return this._newLinesAfterPackageName;
   }
   
-  public void setNewLinesAfterPackageName(final NewLineConfiguration newLinesAfterPackageName) {
+  public void setNewLinesAfterPackageName(final NewLineConfig newLinesAfterPackageName) {
     this._newLinesAfterPackageName = newLinesAfterPackageName;
   }
   
   @Named(value = "newlines.between.imports")
-  private NewLineConfiguration _newLinesBetweenImports = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(1, 2);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesBetweenImports = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(1, 2);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesBetweenImports() {
+  public NewLineConfig getNewLinesBetweenImports() {
     return this._newLinesBetweenImports;
   }
   
-  public void setNewLinesBetweenImports(final NewLineConfiguration newLinesBetweenImports) {
+  public void setNewLinesBetweenImports(final NewLineConfig newLinesBetweenImports) {
     this._newLinesBetweenImports = newLinesBetweenImports;
   }
   
   @Named(value = "newlines.after.importsection")
-  private NewLineConfiguration _newLinesAfterImportSection = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 3);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesAfterImportSection = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(2, 3);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesAfterImportSection() {
+  public NewLineConfig getNewLinesAfterImportSection() {
     return this._newLinesAfterImportSection;
   }
   
-  public void setNewLinesAfterImportSection(final NewLineConfiguration newLinesAfterImportSection) {
+  public void setNewLinesAfterImportSection(final NewLineConfig newLinesAfterImportSection) {
     this._newLinesAfterImportSection = newLinesAfterImportSection;
   }
   
   @Named(value = "newlines.between.fields")
-  private NewLineConfiguration _newLinesBetweenFields = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(1, 2);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesBetweenFields = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(1, 2);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesBetweenFields() {
+  public NewLineConfig getNewLinesBetweenFields() {
     return this._newLinesBetweenFields;
   }
   
-  public void setNewLinesBetweenFields(final NewLineConfiguration newLinesBetweenFields) {
+  public void setNewLinesBetweenFields(final NewLineConfig newLinesBetweenFields) {
     this._newLinesBetweenFields = newLinesBetweenFields;
   }
   
   @Named(value = "newlines.between.fields.and.methods")
-  private NewLineConfiguration _newLinesBetweenFieldsAndMethods = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 2);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesBetweenFieldsAndMethods = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(2, 2);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesBetweenFieldsAndMethods() {
+  public NewLineConfig getNewLinesBetweenFieldsAndMethods() {
     return this._newLinesBetweenFieldsAndMethods;
   }
   
-  public void setNewLinesBetweenFieldsAndMethods(final NewLineConfiguration newLinesBetweenFieldsAndMethods) {
+  public void setNewLinesBetweenFieldsAndMethods(final NewLineConfig newLinesBetweenFieldsAndMethods) {
     this._newLinesBetweenFieldsAndMethods = newLinesBetweenFieldsAndMethods;
   }
   
   @Named(value = "newlines.between.methods")
-  private NewLineConfiguration _newLinesBetweenMethods = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 2);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesBetweenMethods = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(2, 2);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesBetweenMethods() {
+  public NewLineConfig getNewLinesBetweenMethods() {
     return this._newLinesBetweenMethods;
   }
   
-  public void setNewLinesBetweenMethods(final NewLineConfiguration newLinesBetweenMethods) {
+  public void setNewLinesBetweenMethods(final NewLineConfig newLinesBetweenMethods) {
     this._newLinesBetweenMethods = newLinesBetweenMethods;
   }
   
   @Named(value = "newlines.between.classes")
-  private NewLineConfiguration _newLinesBetweenClasses = new Function0<NewLineConfiguration>() {
-    public NewLineConfiguration apply() {
-      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 3);
-      return _newLineConfiguration;
+  private NewLineConfig _newLinesBetweenClasses = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(2, 3);
+      return _newLineConfig;
     }
   }.apply();
   
-  public NewLineConfiguration getNewLinesBetweenClasses() {
+  public NewLineConfig getNewLinesBetweenClasses() {
     return this._newLinesBetweenClasses;
   }
   
-  public void setNewLinesBetweenClasses(final NewLineConfiguration newLinesBetweenClasses) {
+  public void setNewLinesBetweenClasses(final NewLineConfig newLinesBetweenClasses) {
     this._newLinesBetweenClasses = newLinesBetweenClasses;
   }
   
-  public RendererConfiguration() {
+  public XtendFormatterConfig() {
   }
   
-  public RendererConfiguration(final Map<String,String> properties) {
+  public XtendFormatterConfig(final Map<String,String> properties) {
     try {
       Map<String,Field> _namedProperties = this.getNamedProperties();
       Set<Entry<String,Field>> _entrySet = _namedProperties.entrySet();
@@ -202,10 +202,10 @@ public class RendererConfiguration {
               }
             }
             if (!_matched) {
-              if (Objects.equal(_switchValue,NewLineConfiguration.class)) {
+              if (Objects.equal(_switchValue,NewLineConfig.class)) {
                 _matched=true;
-                NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(str);
-                _switchResult = _newLineConfiguration;
+                NewLineConfig _newLineConfig = new NewLineConfig(str);
+                _switchResult = _newLineConfig;
               }
             }
             final Object value = _switchResult;
@@ -225,7 +225,7 @@ public class RendererConfiguration {
         public String apply(final Field it) {
           String _xtrycatchfinallyexpression = null;
           try {
-            Object _get = it.get(RendererConfiguration.this);
+            Object _get = it.get(XtendFormatterConfig.this);
             String _string = _get==null?(String)null:_get.toString();
             String _elvis = ObjectExtensions.<String>operator_elvis(_string, "");
             _xtrycatchfinallyexpression = _elvis;
@@ -274,7 +274,7 @@ public class RendererConfiguration {
       IntegerRange _upTo = new IntegerRange(0, _minus);
       final Function1<Integer,String> _function = new Function1<Integer,String>() {
           public String apply(final Integer it) {
-            return RendererConfiguration.this._indentation;
+            return XtendFormatterConfig.this._indentation;
           }
         };
       Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
@@ -300,7 +300,7 @@ public class RendererConfiguration {
       IntegerRange _upTo = new IntegerRange(0, _minus);
       final Function1<Integer,String> _function = new Function1<Integer,String>() {
           public String apply(final Integer it) {
-            return RendererConfiguration.this._lineSeparator;
+            return XtendFormatterConfig.this._lineSeparator;
           }
         };
       Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);

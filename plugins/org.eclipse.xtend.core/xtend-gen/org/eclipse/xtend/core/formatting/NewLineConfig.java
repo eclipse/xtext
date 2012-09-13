@@ -5,7 +5,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
-public class NewLineConfiguration {
+public class NewLineConfig {
   private int _minNewLines = 1;
   
   public int getMinNewLines() {
@@ -26,12 +26,12 @@ public class NewLineConfiguration {
     this._maxNewLines = maxNewLines;
   }
   
-  public NewLineConfiguration(final int min, final int max) {
+  public NewLineConfig(final int min, final int max) {
     this._minNewLines = min;
     this._maxNewLines = max;
   }
   
-  public NewLineConfiguration(final String data) {
+  public NewLineConfig(final String data) {
     final String[] parsed = data.split(",");
     int _size = ((List<String>)Conversions.doWrapArray(parsed)).size();
     boolean _equals = (_size == 2);

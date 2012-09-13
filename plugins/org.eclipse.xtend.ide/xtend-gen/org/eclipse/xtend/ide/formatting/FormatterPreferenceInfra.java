@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.formatter.DefaultCodeFormatterConstants;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.ide.formatting.FormatterSetting;
 import org.eclipse.xtend.ide.formatting.SettingsData.Category;
 import org.eclipse.xtend.ide.formatting.SettingsData.WidgetType;
@@ -63,9 +63,9 @@ public class FormatterPreferenceInfra {
     return _formatterSetting;
   }
   
-  public static RendererConfiguration createRendererConfiguration(final Map<String,String> map) {
-    RendererConfiguration _rendererConfiguration = new RendererConfiguration();
-    final RendererConfiguration rendererConfiguration = _rendererConfiguration;
+  public static XtendFormatterConfig createRendererConfiguration(final Map<String,String> map) {
+    XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
+    final XtendFormatterConfig rendererConfiguration = _xtendFormatterConfig;
     try {
       String _get = map.get(FormatterPreferenceInfra.INDENTATION_SIZE);
       int _parseInt = Integer.parseInt(_get);

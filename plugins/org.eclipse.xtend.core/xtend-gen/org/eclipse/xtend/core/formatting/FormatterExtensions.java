@@ -5,11 +5,11 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
-import org.eclipse.xtend.core.formatting.NewLineConfiguration;
+import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -52,7 +52,7 @@ public class FormatterExtensions {
     }
   }
   
-  public FormattingData newFormattingData(final Pair<Integer,Integer> range, final String document, final NewLineConfiguration configuration) {
+  public FormattingData newFormattingData(final Pair<Integer,Integer> range, final String document, final NewLineConfig configuration) {
     int countedNewLines = 0;
     Integer i = range.getKey();
     Integer _value = range.getValue();
@@ -109,7 +109,7 @@ public class FormatterExtensions {
       int _lineLengthBefore = fmt.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      RendererConfiguration _cfg = fmt.getCfg();
+      XtendFormatterConfig _cfg = fmt.getCfg();
       int _maxLineWidth = _cfg.getMaxLineWidth();
       return (line <= _maxLineWidth);
     }
@@ -126,7 +126,7 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public FormattingData append(final INode node, final NewLineConfiguration configuration) {
+  public FormattingData append(final INode node, final NewLineConfig configuration) {
     FormattingData _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
@@ -150,7 +150,7 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public FormattingData prepend(final INode node, final NewLineConfiguration configuration) {
+  public FormattingData prepend(final INode node, final NewLineConfig configuration) {
     FormattingData _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {

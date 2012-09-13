@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting;
 
 import java.util.Map;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,11 +9,11 @@ import org.junit.Test;
 public class XtendFormatterConfigurationTest {
   @Test
   public void test() {
-    RendererConfiguration _rendererConfiguration = new RendererConfiguration();
-    final RendererConfiguration cfg = _rendererConfiguration;
+    XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
+    final XtendFormatterConfig cfg = _xtendFormatterConfig;
     final Map<String,String> map = cfg.asMap();
-    RendererConfiguration _rendererConfiguration_1 = new RendererConfiguration(map);
-    final RendererConfiguration cfg2 = _rendererConfiguration_1;
+    XtendFormatterConfig _xtendFormatterConfig_1 = new XtendFormatterConfig(map);
+    final XtendFormatterConfig cfg2 = _xtendFormatterConfig_1;
     Assert.assertNotNull(cfg2);
   }
 }

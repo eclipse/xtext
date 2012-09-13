@@ -7,9 +7,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -127,13 +127,13 @@ public abstract class AbstractFormatterTest {
       IParseResult _parseResult = ((XtextResource) _eResource_1).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String oldDocument = _rootNode.getText();
-      RendererConfiguration _rendererConfiguration = new RendererConfiguration();
-      final Procedure1<RendererConfiguration> _function = new Procedure1<RendererConfiguration>() {
-          public void apply(final RendererConfiguration it) {
+      XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
+      final Procedure1<XtendFormatterConfig> _function = new Procedure1<XtendFormatterConfig>() {
+          public void apply(final XtendFormatterConfig it) {
             it.setMaxLineWidth(80);
           }
         };
-      final RendererConfiguration rc = ObjectExtensions.<RendererConfiguration>operator_doubleArrow(_rendererConfiguration, _function);
+      final XtendFormatterConfig rc = ObjectExtensions.<XtendFormatterConfig>operator_doubleArrow(_xtendFormatterConfig, _function);
       this.formatter.setAllowIdentityEdits(true);
       Resource _eResource_2 = parsed.eResource();
       int _length = oldDocument.length();

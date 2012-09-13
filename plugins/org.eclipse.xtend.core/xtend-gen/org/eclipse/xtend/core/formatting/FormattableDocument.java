@@ -8,9 +8,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.NewLineData;
-import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -20,9 +20,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class FormattableDocument {
-  private final RendererConfiguration _cfg;
+  private final XtendFormatterConfig _cfg;
   
-  public RendererConfiguration getCfg() {
+  public XtendFormatterConfig getCfg() {
     return this._cfg;
   }
   
@@ -42,7 +42,7 @@ public class FormattableDocument {
     this._formattings = formattings;
   }
   
-  public FormattableDocument(final RendererConfiguration cfg, final String document) {
+  public FormattableDocument(final XtendFormatterConfig cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
     TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
@@ -50,7 +50,7 @@ public class FormattableDocument {
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    RendererConfiguration _cfg = fmt.getCfg();
+    XtendFormatterConfig _cfg = fmt.getCfg();
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
@@ -237,10 +237,10 @@ public class FormattableDocument {
               if (f instanceof NewLineData) {
                 final NewLineData _newLineData = (NewLineData)f;
                 _matched=true;
-                RendererConfiguration _cfg = this.getCfg();
+                XtendFormatterConfig _cfg = this.getCfg();
                 int _newLines = _newLineData.getNewLines();
                 String _wrap = _cfg.getWrap(_newLines);
-                RendererConfiguration _cfg_1 = this.getCfg();
+                XtendFormatterConfig _cfg_1 = this.getCfg();
                 String _indentation = _cfg_1.getIndentation(indentation);
                 final String replacement = (_wrap + _indentation);
                 int _offset_3 = _newLineData.getOffset();
@@ -385,7 +385,7 @@ public class FormattableDocument {
         }
       }
       int _minus_1 = (offset - lineStart);
-      RendererConfiguration _cfg = this.getCfg();
+      XtendFormatterConfig _cfg = this.getCfg();
       int _indentationLenght = _cfg.getIndentationLenght(currentIndentation);
       int _plus_4 = (_minus_1 + _indentationLenght);
       int _plus_5 = (_plus_4 + lengthDiff);
