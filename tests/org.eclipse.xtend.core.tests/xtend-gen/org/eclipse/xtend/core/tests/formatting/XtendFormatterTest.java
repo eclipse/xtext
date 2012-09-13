@@ -36,6 +36,171 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClass3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth1() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth2(){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{ int member1 int member2 def meth1() {} def meth2(){} int member3 }");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClass4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member1");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth1() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth2(){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("int member1 ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("int member2 ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def meth1() {} ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def meth2(){} ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("int member3");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClasses1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class baz {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo class bar{} class baz{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClasses2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class baz {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class bar{} ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class baz{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatClassAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -57,7 +222,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatImports() {
+  public void formatImports1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -78,6 +243,43 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("}");
     _builder.newLine();
     this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatImports2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.Map");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Set");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
   }
   
   @Test

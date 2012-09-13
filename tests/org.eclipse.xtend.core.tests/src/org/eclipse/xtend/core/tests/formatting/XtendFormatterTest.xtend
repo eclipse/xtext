@@ -24,6 +24,97 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClass3() {
+		assertFormatted('''
+			class bar {
+				int member1
+				int member2
+			
+				def meth1() {
+				}
+			
+				def meth2(){
+				}
+			
+				int member3
+			}
+		''', '''
+			class bar{ int member1 int member2 def meth1() {} def meth2(){} int member3 }
+		''')	
+	}
+	
+	@Test def formatClass4() {
+		assertFormatted('''
+			class bar {
+				int member1
+
+				int member2
+			
+				def meth1() {
+				}
+			
+				def meth2(){
+				}
+			
+				int member3
+			}
+		''', '''
+			class bar{
+				
+				
+				int member1 
+				
+				
+				int member2 
+				
+				
+				def meth1() {} 
+				
+				
+				def meth2(){} 
+				
+				
+				int member3
+			}
+		''')	
+	}
+	
+	@Test def formatClasses1() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+			}
+			
+			class baz {
+			}
+		''', '''
+			package foo class bar{} class baz{}
+		''')	
+	}
+	
+	@Test def formatClasses2() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+			}
+			
+			
+			class baz {
+			}
+		''', '''
+			package foo 
+			
+			
+			
+			class bar{} 
+			
+			
+			
+			class baz{}
+		''')	
+	}
 	
 	@Test def formatClassAnnotation() {
 		assertFormatted('''
@@ -37,7 +128,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatImports() {
+	@Test def formatImports1() {
 		assertFormatted('''
 			package foo
 			
@@ -47,6 +138,32 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			class bar {
 				def baz() {
 				}
+			}
+		''')	
+	}
+	
+	@Test def formatImports2() {
+		assertFormatted('''
+			package foo
+			
+			import java.util.Map
+			
+			import java.util.Set
+
+			
+			class bar {
+			}
+		''', '''
+			package foo
+			
+			import java.util.Map
+
+			
+			import java.util.Set
+
+
+			
+			class bar {
 			}
 		''')	
 	}

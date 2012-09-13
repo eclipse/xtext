@@ -58,6 +58,22 @@ public class RendererConfiguration {
     this._indentationLength = indentationLength;
   }
   
+  @Named(value = "newlines.after.packagename")
+  private NewLineConfiguration _newLinesAfterPackageName = new Function0<NewLineConfiguration>() {
+    public NewLineConfiguration apply() {
+      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 2);
+      return _newLineConfiguration;
+    }
+  }.apply();
+  
+  public NewLineConfiguration getNewLinesAfterPackageName() {
+    return this._newLinesAfterPackageName;
+  }
+  
+  public void setNewLinesAfterPackageName(final NewLineConfiguration newLinesAfterPackageName) {
+    this._newLinesAfterPackageName = newLinesAfterPackageName;
+  }
+  
   @Named(value = "newlines.between.imports")
   private NewLineConfiguration _newLinesBetweenImports = new Function0<NewLineConfiguration>() {
     public NewLineConfiguration apply() {
@@ -72,6 +88,22 @@ public class RendererConfiguration {
   
   public void setNewLinesBetweenImports(final NewLineConfiguration newLinesBetweenImports) {
     this._newLinesBetweenImports = newLinesBetweenImports;
+  }
+  
+  @Named(value = "newlines.after.importsection")
+  private NewLineConfiguration _newLinesAfterImportSection = new Function0<NewLineConfiguration>() {
+    public NewLineConfiguration apply() {
+      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 3);
+      return _newLineConfiguration;
+    }
+  }.apply();
+  
+  public NewLineConfiguration getNewLinesAfterImportSection() {
+    return this._newLinesAfterImportSection;
+  }
+  
+  public void setNewLinesAfterImportSection(final NewLineConfiguration newLinesAfterImportSection) {
+    this._newLinesAfterImportSection = newLinesAfterImportSection;
   }
   
   @Named(value = "newlines.between.fields")
@@ -120,6 +152,22 @@ public class RendererConfiguration {
   
   public void setNewLinesBetweenMethods(final NewLineConfiguration newLinesBetweenMethods) {
     this._newLinesBetweenMethods = newLinesBetweenMethods;
+  }
+  
+  @Named(value = "newlines.between.classes")
+  private NewLineConfiguration _newLinesBetweenClasses = new Function0<NewLineConfiguration>() {
+    public NewLineConfiguration apply() {
+      NewLineConfiguration _newLineConfiguration = new NewLineConfiguration(2, 3);
+      return _newLineConfiguration;
+    }
+  }.apply();
+  
+  public NewLineConfiguration getNewLinesBetweenClasses() {
+    return this._newLinesBetweenClasses;
+  }
+  
+  public void setNewLinesBetweenClasses(final NewLineConfiguration newLinesBetweenClasses) {
+    this._newLinesBetweenClasses = newLinesBetweenClasses;
   }
   
   public RendererConfiguration() {

@@ -13,6 +13,7 @@ import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
+import org.eclipse.xtend.core.formatting.NewLineConfiguration;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RendererConfiguration;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
@@ -156,20 +157,14 @@ public class XtendFormatter {
         };
       FormattingData _append = this._formatterExtensions.append(pkg, _function);
       format.operator_add(_append);
-      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.newLines = 2;
-          }
-        };
-      FormattingData _append_1 = this._formatterExtensions.append(pkgSemicolon, _function_1);
+      RendererConfiguration _cfg = format.getCfg();
+      NewLineConfiguration _newLinesAfterPackageName = _cfg.getNewLinesAfterPackageName();
+      FormattingData _append_1 = this._formatterExtensions.append(pkgSemicolon, _newLinesAfterPackageName);
       format.operator_add(_append_1);
     } else {
-      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.newLines = 2;
-          }
-        };
-      FormattingData _append_2 = this._formatterExtensions.append(pkg, _function_2);
+      RendererConfiguration _cfg_1 = format.getCfg();
+      NewLineConfiguration _newLinesAfterPackageName_1 = _cfg_1.getNewLinesAfterPackageName();
+      FormattingData _append_2 = this._formatterExtensions.append(pkg, _newLinesAfterPackageName_1);
       format.operator_add(_append_2);
     }
     EList<XtendImport> _imports = xtendFile.getImports();
@@ -179,35 +174,41 @@ public class XtendFormatter {
       boolean _notEquals_1 = (!Objects.equal(imp, _last));
       if (_notEquals_1) {
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(imp);
-        final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.newLine();
-            }
-          };
-        FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject, _function_3);
+        RendererConfiguration _cfg_2 = format.getCfg();
+        NewLineConfiguration _newLinesBetweenImports = _cfg_2.getNewLinesBetweenImports();
+        FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject, _newLinesBetweenImports);
         format.operator_add(_append_3);
       } else {
         INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
-        final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.newLines = 2;
-            }
-          };
-        FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _function_4);
+        RendererConfiguration _cfg_3 = format.getCfg();
+        NewLineConfiguration _newLinesAfterImportSection = _cfg_3.getNewLinesAfterImportSection();
+        FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesAfterImportSection);
         format.operator_add(_append_4);
       }
     }
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     for (final XtendTypeDeclaration clazz : _xtendTypes) {
-      this.format(clazz, format);
+      {
+        this.format(clazz, format);
+        EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
+        XtendTypeDeclaration _last_1 = IterableExtensions.<XtendTypeDeclaration>last(_xtendTypes_1);
+        boolean _notEquals_2 = (!Objects.equal(clazz, _last_1));
+        if (_notEquals_2) {
+          INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(clazz);
+          RendererConfiguration _cfg_4 = format.getCfg();
+          NewLineConfiguration _newLinesBetweenClasses = _cfg_4.getNewLinesBetweenClasses();
+          FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenClasses);
+          format.operator_add(_append_5);
+        }
+      }
     }
     INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(xtendFile);
-    final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.newLine();
         }
       };
-    FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _function_5);
+    FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _function_1);
     format.operator_add(_append_5);
   }
   
@@ -268,35 +269,43 @@ public class XtendFormatter {
             }
             if (_and) {
               INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(current);
-              final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.newLine();
-                  }
-                };
-              FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject_1, _function_3);
+              RendererConfiguration _cfg = format.getCfg();
+              NewLineConfiguration _newLinesBetweenFields = _cfg.getNewLinesBetweenFields();
+              FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesBetweenFields);
               format.operator_add(_append_2);
             } else {
-              INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(current);
-              final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-                  public void apply(final FormattingDataInit it) {
-                    it.newLines = 2;
-                  }
-                };
-              FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject_2, _function_4);
-              format.operator_add(_append_3);
+              boolean _and_1 = false;
+              if (!(current instanceof XtendFunction)) {
+                _and_1 = false;
+              } else {
+                _and_1 = ((current instanceof XtendFunction) && (next instanceof XtendFunction));
+              }
+              if (_and_1) {
+                INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(current);
+                RendererConfiguration _cfg_1 = format.getCfg();
+                NewLineConfiguration _newLinesBetweenMethods = _cfg_1.getNewLinesBetweenMethods();
+                FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenMethods);
+                format.operator_add(_append_3);
+              } else {
+                INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(current);
+                RendererConfiguration _cfg_2 = format.getCfg();
+                NewLineConfiguration _newLinesBetweenFieldsAndMethods = _cfg_2.getNewLinesBetweenFieldsAndMethods();
+                FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_3, _newLinesBetweenFieldsAndMethods);
+                format.operator_add(_append_4);
+              }
             }
           } else {
             EList<XtendMember> _members_5 = clazz.getMembers();
             XtendMember _get = _members_5.get((i).intValue());
-            INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(_get);
-            final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+            INode _nodeForEObject_4 = this._nodeModelAccess.nodeForEObject(_get);
+            final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.newLine();
                   it.decreaseIndentation();
                 }
               };
-            FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_3, _function_5);
-            format.operator_add(_append_4);
+            FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_4, _function_3);
+            format.operator_add(_append_5);
           }
         }
       }

@@ -49,6 +49,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import org.eclipse.xtend.core.xtend.XtendFunction
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -83,17 +84,20 @@ public class XtendFormatter {
 		val pkgSemicolon = pkg.immediatelyFollowingKeyword(";")
 		if(pkgSemicolon != null) {
 			format += pkg.append[space=""]
-			format += pkgSemicolon.append[newLines = 2]
+			format += pkgSemicolon.append(format.cfg.newLinesAfterPackageName)
 		} else {
-			format += pkg.append[newLines = 2]
+			format += pkg.append(format.cfg.newLinesAfterPackageName)
 		}
 		for(imp:xtendFile.imports)
 			if(imp != xtendFile.imports.last)
-				format += imp.nodeForEObject.append[newLine]
+				format += imp.nodeForEObject.append(format.cfg.newLinesBetweenImports)
 			else 
-				format += imp.nodeForEObject.append[newLines = 2] 
-		for(clazz : xtendFile.xtendTypes) 
+				format += imp.nodeForEObject.append(format.cfg.newLinesAfterImportSection)
+		for(clazz : xtendFile.xtendTypes) {
 			clazz.format(format)
+			if(clazz != xtendFile.xtendTypes.last)
+				format += clazz.nodeForEObject.append(format.cfg.newLinesBetweenClasses)
+		}
 		
 		format += xtendFile.nodeForEObject.append[newLine]
 	}
@@ -111,9 +115,11 @@ public class XtendFormatter {
 				if(i < clazz.members.size - 1) {
 					val next = clazz.members.get(i + 1)
 					if(current instanceof XtendField && next instanceof XtendField)
-						format += current.nodeForEObject.append[newLine]
+						format += current.nodeForEObject.append(format.cfg.newLinesBetweenFields)
+					else if(current instanceof XtendFunction && next instanceof XtendFunction)
+						format += current.nodeForEObject.append(format.cfg.newLinesBetweenMethods)
 					else 
-						format += current.nodeForEObject.append[newLines = 2]
+						format += current.nodeForEObject.append(format.cfg.newLinesBetweenFieldsAndMethods)
 				} else {
 					format += clazz.members.get(i).nodeForEObject.append[newLine decreaseIndentation]
 				} 
