@@ -587,7 +587,7 @@ public class XtendFormatter {
 		val multiline = thennode.text.trim.contains("\n") || 
 		                thennode.whitespaceBefore?.text?.contains("\n") || 
 		                elsenode?.text?.trim?.contains("\n")
-		if(multiline)
+		if(expr.then instanceof XBlockExpression || multiline)
 			format += expr.nodeForKeyword("if").append[oneSpace] 
 		else 
 			format += expr.nodeForKeyword("if").append[noSpace]

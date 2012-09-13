@@ -306,7 +306,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIf2() {
 		assertFormattedExpression('''
-			if(true) {
+			if (true) {
 				println("foo")
 			}
 		''')	
@@ -336,7 +336,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatIfElse2() {
 		assertFormattedExpression('''
-			if(true) {
+			if (true) {
 				println("foo")
 			} else {
 				println("bar")
