@@ -153,7 +153,7 @@ public class RichStringFormatterImpl extends ForLoopOnce {
             it.noSpace();
           }
         };
-      FormattingData _prepend = this._formatterExtensions.prepend(node, _function);
+      Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(node, _function);
       _document.operator_add(_prepend);
     }
     String _text_1 = node.getText();
@@ -165,7 +165,7 @@ public class RichStringFormatterImpl extends ForLoopOnce {
             it.noSpace();
           }
         };
-      FormattingData _append = this._formatterExtensions.append(node, _function_1);
+      Iterable<FormattingData> _append = this._formatterExtensions.append(node, _function_1);
       _document_1.operator_add(_append);
     }
     this.lastLiteral = object;

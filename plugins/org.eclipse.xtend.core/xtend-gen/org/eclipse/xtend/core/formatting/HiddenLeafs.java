@@ -1,7 +1,9 @@
 package org.eclipse.xtend.core.formatting;
 
+import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.xtend.core.formatting.CommentInfo;
 import org.eclipse.xtend.core.formatting.LeafInfo;
 import org.eclipse.xtend.core.formatting.WhitespaceInfo;
 import org.eclipse.xtend.lib.Data;
@@ -79,6 +81,20 @@ public class HiddenLeafs {
         }
       };
     Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
+    return _fold;
+  }
+  
+  public Integer getNewLinesInComments() {
+    List<LeafInfo> _leafs = this.getLeafs();
+    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
+    final Function2<Integer,CommentInfo,Integer> _function = new Function2<Integer,CommentInfo,Integer>() {
+        public Integer apply(final Integer x, final CommentInfo i) {
+          int _newLines = i.getNewLines();
+          int _plus = ((x).intValue() + _newLines);
+          return Integer.valueOf(_plus);
+        }
+      };
+    Integer _fold = IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
     return _fold;
   }
   

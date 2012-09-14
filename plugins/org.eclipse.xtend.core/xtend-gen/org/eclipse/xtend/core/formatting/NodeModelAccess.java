@@ -412,19 +412,11 @@ public class NodeModelAccess {
       while (_while) {
         {
           final INode next = ni.next();
-          boolean _and = false;
-          if (!(next instanceof ILeafNode)) {
-            _and = false;
-          } else {
+          if ((next instanceof ILeafNode)) {
             boolean _isHidden = ((ILeafNode) next).isHidden();
-            _and = ((next instanceof ILeafNode) && _isHidden);
-          }
-          if (_and) {
-            result.add(((ILeafNode) next));
-          } else {
-            boolean _isEmpty = result.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
+            if (_isHidden) {
+              result.add(((ILeafNode) next));
+            } else {
               return result;
             }
           }
@@ -530,25 +522,17 @@ public class NodeModelAccess {
         {
           final INode previous = ni.previous();
           boolean _and = false;
-          boolean _and_1 = false;
           boolean _notEquals = (!Objects.equal(previous, current));
           if (!_notEquals) {
-            _and_1 = false;
-          } else {
-            _and_1 = (_notEquals && (previous instanceof ILeafNode));
-          }
-          if (!_and_1) {
             _and = false;
           } else {
-            boolean _isHidden = ((ILeafNode) previous).isHidden();
-            _and = (_and_1 && _isHidden);
+            _and = (_notEquals && (previous instanceof ILeafNode));
           }
           if (_and) {
-            result.add(((ILeafNode) previous));
-          } else {
-            boolean _isEmpty = result.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
+            boolean _isHidden = ((ILeafNode) previous).isHidden();
+            if (_isHidden) {
+              result.add(((ILeafNode) previous));
+            } else {
               return ListExtensions.<ILeafNode>reverse(result);
             }
           }

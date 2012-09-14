@@ -132,10 +132,12 @@ class NodeModelAccess {
 		val ni = new NodeIterator(node)
 		while(ni.hasNext) {
 			val next = ni.next
-			if(next instanceof ILeafNode && (next as ILeafNode).hidden)
-				result += next as ILeafNode
-			else if(!result.empty)
-				return result
+			if(next instanceof ILeafNode) { 
+				if ((next as ILeafNode).hidden)
+					result += next as ILeafNode
+				else //if(!result.empty)
+					return result
+			}
 		}
 		result
 	}
@@ -174,10 +176,12 @@ class NodeModelAccess {
 		val ni = new NodeIterator(current)
 		while(ni.hasPrevious) {
 			val previous = ni.previous
-			if(previous != current && previous instanceof ILeafNode && (previous as ILeafNode).hidden)
-				result += previous as ILeafNode
-			else if(!result.empty)
-				return result.reverse		
+			if(previous != current && previous instanceof ILeafNode) {
+				if((previous as ILeafNode).hidden)
+					result += previous as ILeafNode
+				else //if(!result.empty)
+					return result.reverse
+			}		
 		}
 		result.reverse
 	}
@@ -197,6 +201,10 @@ class NodeModelAccess {
 	
 	def getNewLines() {
 		leafs.fold(0, [x, i | x + i.newLines])
+	}
+	
+	def getNewLinesInComments() {
+		leafs.filter(typeof(CommentInfo)).fold(0, [x, i | x + i.newLines])
 	}
 }
 

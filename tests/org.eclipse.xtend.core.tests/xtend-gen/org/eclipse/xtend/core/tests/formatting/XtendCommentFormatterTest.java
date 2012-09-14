@@ -119,9 +119,6 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatMLCommentBeforeStatement2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("import java.util.Map");
     _builder.newLine();
     _builder.newLine();
@@ -133,7 +130,7 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo import java.util.Map ");
+    _builder_1.append("import java.util.Map ");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.newLine();
@@ -142,6 +139,74 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
     _builder_1.append("/* my comment */");
     _builder_1.newLine();
     _builder_1.append("class bar{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSLCommentAfterStatement2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar { // my comment");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{    // my comment");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSLCommentBeforeStatement21() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("// my comment");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("// my comment");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentAfterStatement2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar { /* my comment */");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{   /* my comment */ ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentBeforeStatement21() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("/* my comment */");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("/* my comment */");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
