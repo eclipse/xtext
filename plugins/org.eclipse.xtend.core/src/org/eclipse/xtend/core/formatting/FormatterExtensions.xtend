@@ -56,16 +56,6 @@ class FormatterExtensions {
 		result
 	}
 	
-	def WhitespaceInfo findWhitespaceToWrap(HiddenLeafs leafs) {
-		var WhitespaceInfo ws = null
-		for(l : leafs.leafs.reverse) 
-			switch l {
-				WhitespaceInfo: ws = l
-				CommentInfo:  if(l.trailing) return  ws 
-			}
-		ws
-	}
-	
 	def String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
 		val lookahead = new FormattableDocument(fmt)
 		format.apply(lookahead)

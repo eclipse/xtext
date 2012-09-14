@@ -106,7 +106,6 @@ public class XtendFormatter {
 		for(annotation:clazz.annotations)
 			format += annotation.nodeForEObject.append[newLine]
 		val clazzOpenBrace = clazz.nodeForKeyword("{")
-		val clazzCloseBrace = clazz.nodeForKeyword("}")
 		format += clazzOpenBrace.prepend[space=" "]
 		if(!clazz.members.empty) {
 			format += clazzOpenBrace.append[newLine; increaseIndentation]
