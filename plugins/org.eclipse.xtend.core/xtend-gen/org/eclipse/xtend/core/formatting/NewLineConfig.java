@@ -40,7 +40,7 @@ public class NewLineConfig {
       String _trim = _get.trim();
       int _parseInt = Integer.parseInt(_trim);
       this._minNewLines = _parseInt;
-      String _get_1 = ((List<String>)Conversions.doWrapArray(parsed)).get(0);
+      String _get_1 = ((List<String>)Conversions.doWrapArray(parsed)).get(1);
       String _trim_1 = _get_1.trim();
       int _parseInt_1 = Integer.parseInt(_trim_1);
       this._maxNewLines = _parseInt_1;

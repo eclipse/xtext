@@ -159,12 +159,12 @@ public class XtendFormatter {
       format.operator_add(_append);
       XtendFormatterConfig _cfg = format.getCfg();
       NewLineConfig _newLinesAfterPackageName = _cfg.getNewLinesAfterPackageName();
-      FormattingData _append_1 = this._formatterExtensions.append(pkgSemicolon, _newLinesAfterPackageName);
+      Iterable<FormattingData> _append_1 = this._formatterExtensions.append(pkgSemicolon, _newLinesAfterPackageName);
       format.operator_add(_append_1);
     } else {
       XtendFormatterConfig _cfg_1 = format.getCfg();
       NewLineConfig _newLinesAfterPackageName_1 = _cfg_1.getNewLinesAfterPackageName();
-      FormattingData _append_2 = this._formatterExtensions.append(pkg, _newLinesAfterPackageName_1);
+      Iterable<FormattingData> _append_2 = this._formatterExtensions.append(pkg, _newLinesAfterPackageName_1);
       format.operator_add(_append_2);
     }
     EList<XtendImport> _imports = xtendFile.getImports();
@@ -176,13 +176,13 @@ public class XtendFormatter {
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(imp);
         XtendFormatterConfig _cfg_2 = format.getCfg();
         NewLineConfig _newLinesBetweenImports = _cfg_2.getNewLinesBetweenImports();
-        FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject, _newLinesBetweenImports);
+        Iterable<FormattingData> _append_3 = this._formatterExtensions.append(_nodeForEObject, _newLinesBetweenImports);
         format.operator_add(_append_3);
       } else {
         INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
         XtendFormatterConfig _cfg_3 = format.getCfg();
         NewLineConfig _newLinesAfterImportSection = _cfg_3.getNewLinesAfterImportSection();
-        FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesAfterImportSection);
+        Iterable<FormattingData> _append_4 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesAfterImportSection);
         format.operator_add(_append_4);
       }
     }
@@ -197,7 +197,7 @@ public class XtendFormatter {
           INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(clazz);
           XtendFormatterConfig _cfg_4 = format.getCfg();
           NewLineConfig _newLinesBetweenClasses = _cfg_4.getNewLinesBetweenClasses();
-          FormattingData _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenClasses);
+          Iterable<FormattingData> _append_5 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenClasses);
           format.operator_add(_append_5);
         }
       }
@@ -271,7 +271,7 @@ public class XtendFormatter {
               INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(current);
               XtendFormatterConfig _cfg = format.getCfg();
               NewLineConfig _newLinesBetweenFields = _cfg.getNewLinesBetweenFields();
-              FormattingData _append_2 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesBetweenFields);
+              Iterable<FormattingData> _append_2 = this._formatterExtensions.append(_nodeForEObject_1, _newLinesBetweenFields);
               format.operator_add(_append_2);
             } else {
               boolean _and_1 = false;
@@ -284,13 +284,13 @@ public class XtendFormatter {
                 INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(current);
                 XtendFormatterConfig _cfg_1 = format.getCfg();
                 NewLineConfig _newLinesBetweenMethods = _cfg_1.getNewLinesBetweenMethods();
-                FormattingData _append_3 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenMethods);
+                Iterable<FormattingData> _append_3 = this._formatterExtensions.append(_nodeForEObject_2, _newLinesBetweenMethods);
                 format.operator_add(_append_3);
               } else {
                 INode _nodeForEObject_3 = this._nodeModelAccess.nodeForEObject(current);
                 XtendFormatterConfig _cfg_2 = format.getCfg();
                 NewLineConfig _newLinesBetweenFieldsAndMethods = _cfg_2.getNewLinesBetweenFieldsAndMethods();
-                FormattingData _append_4 = this._formatterExtensions.append(_nodeForEObject_3, _newLinesBetweenFieldsAndMethods);
+                Iterable<FormattingData> _append_4 = this._formatterExtensions.append(_nodeForEObject_3, _newLinesBetweenFieldsAndMethods);
                 format.operator_add(_append_4);
               }
             }

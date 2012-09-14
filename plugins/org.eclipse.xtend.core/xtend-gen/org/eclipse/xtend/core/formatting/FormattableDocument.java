@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FormattableDocument {
@@ -179,6 +180,18 @@ public class FormattableDocument {
   public FormattingData operator_add(final FormattingData data) {
     FormattingData _addFormatting = this.addFormatting(data);
     return _addFormatting;
+  }
+  
+  public void operator_add(final Iterable<FormattingData> data) {
+    boolean _notEquals = (!Objects.equal(data, null));
+    if (_notEquals) {
+      final Procedure1<FormattingData> _function = new Procedure1<FormattingData>() {
+          public void apply(final FormattingData it) {
+            FormattableDocument.this.addFormatting(it);
+          }
+        };
+      IterableExtensions.<FormattingData>forEach(data, _function);
+    }
   }
   
   public List<TextReplacement> renderToEdits() {

@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.formatting
 
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.nodemodel.INode
 import com.google.inject.Inject
+import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 class FormatterExtensions {
@@ -20,18 +20,42 @@ class FormatterExtensions {
 			throw new IllegalStateException(init.toString) 
 	}
 	
-	def FormattingData newFormattingData(Pair<Integer, Integer> range, String document, NewLineConfig configuration) {
-		var countedNewLines = 0
-		var i = range.key
-		while(i < range.value + range.key) {
-			if(document.charAt(i).toString == "\n")
-				countedNewLines = countedNewLines + 1
-			i = i + 1
-		}
-		val newLines = Math::min(Math::max(countedNewLines, configuration.minNewLines), configuration.maxNewLines)
-		return new NewLineData(range.key, range.value, 0, newLines)
+	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineConfig configuration) {
+		val result = <FormattingData>newArrayList
+		var applied = false
+		for(leaf : leafs.leafs) 
+			switch leaf {
+				WhitespaceInfo: {
+					val next = leaf.trailingComment
+					if(next?.trailing) {
+						result += new WhitespaceData(leaf.offset, leaf.length, 0, " ")
+					} else if (!applied) {
+						var newLines = Math::min(Math::max(leafs.newLines, configuration.minNewLines), configuration.maxNewLines)
+						if(leaf.leadingComment?.endsWithNewLine)
+							newLines = newLines - 1
+						result += new NewLineData(leaf.offset, leaf.length, 0, newLines)
+						applied = true
+					} else {
+						var newLines = 1
+						if(leaf.leadingComment?.endsWithNewLine)
+							newLines = newLines - 1
+						result += new NewLineData(leaf.offset, leaf.length, 0, newLines)
+					}
+				}
+				CommentInfo: {} 
+			}
+		result
 	}
 	
+	def WhitespaceInfo findWhitespaceToWrap(HiddenLeafs leafs) {
+		var WhitespaceInfo ws = null
+		for(l : leafs.leafs.reverse) 
+			switch l {
+				WhitespaceInfo: ws = l
+				CommentInfo:  if(l.trailing) return  ws 
+			}
+		ws
+	}
 	
 	def String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
 		val lookahead = new FormattableDocument(fmt)
@@ -55,9 +79,9 @@ class FormatterExtensions {
 		}
 	}
 	
-	def FormattingData append(INode node, NewLineConfig configuration) {
+	def Iterable<FormattingData> append(INode node, NewLineConfig configuration) {
 		if(node != null) {
-			node.rangeAfter?.newFormattingData(node.rootNode.text, configuration)
+			node.hiddenLeafsAfter.newFormattingData(configuration)
 		}
 	}
 	
@@ -67,9 +91,9 @@ class FormatterExtensions {
 		}
 	}
 	
-	def FormattingData prepend(INode node, NewLineConfig configuration) {
+	def Iterable<FormattingData> prepend(INode node, NewLineConfig configuration) {
 		if(node != null) {
-			node.rangeBefore?.newFormattingData(node.rootNode.text, configuration)
+			node.hiddenLeafsAfter.newFormattingData(configuration)
 		}
 	}
 	
@@ -106,3 +130,4 @@ class FormattingDataInit {
 	}
 	
 }
+

@@ -2,16 +2,23 @@ package org.eclipse.xtend.core.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.xtend.core.formatting.CommentInfo;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
+import org.eclipse.xtend.core.formatting.HiddenLeafs;
+import org.eclipse.xtend.core.formatting.LeafInfo;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
+import org.eclipse.xtend.core.formatting.WhitespaceInfo;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -52,40 +59,101 @@ public class FormatterExtensions {
     }
   }
   
-  public FormattingData newFormattingData(final Pair<Integer,Integer> range, final String document, final NewLineConfig configuration) {
-    int countedNewLines = 0;
-    Integer i = range.getKey();
-    Integer _value = range.getValue();
-    Integer _key = range.getKey();
-    int _plus = ((_value).intValue() + (_key).intValue());
-    boolean _lessThan = ((i).intValue() < _plus);
-    boolean _while = _lessThan;
-    while (_while) {
-      {
-        char _charAt = document.charAt((i).intValue());
-        String _string = Character.valueOf(_charAt).toString();
-        boolean _equals = Objects.equal(_string, "\n");
-        if (_equals) {
-          int _plus_1 = (countedNewLines + 1);
-          countedNewLines = _plus_1;
+  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final NewLineConfig configuration) {
+    ArrayList<FormattingData> _xblockexpression = null;
+    {
+      final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+      boolean applied = false;
+      List<LeafInfo> _leafs = leafs.getLeafs();
+      for (final LeafInfo leaf : _leafs) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (leaf instanceof WhitespaceInfo) {
+            final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)leaf;
+            _matched=true;
+            final CommentInfo next = _whitespaceInfo.trailingComment();
+            boolean _isTrailing = next==null?false:next.isTrailing();
+            if (_isTrailing) {
+              int _offset = _whitespaceInfo.getOffset();
+              int _length = _whitespaceInfo.getLength();
+              WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, 0, " ");
+              result.add(_whitespaceData);
+            } else {
+              boolean _not = (!applied);
+              if (_not) {
+                Integer _newLines = leafs.getNewLines();
+                int _minNewLines = configuration.getMinNewLines();
+                int _max = Math.max((_newLines).intValue(), _minNewLines);
+                int _maxNewLines = configuration.getMaxNewLines();
+                int newLines = Math.min(_max, _maxNewLines);
+                CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine = _leadingComment==null?false:_leadingComment.endsWithNewLine();
+                if (_endsWithNewLine) {
+                  int _minus = (newLines - 1);
+                  newLines = _minus;
+                }
+                int _offset_1 = _whitespaceInfo.getOffset();
+                int _length_1 = _whitespaceInfo.getLength();
+                NewLineData _newLineData = new NewLineData(_offset_1, _length_1, 0, newLines);
+                result.add(_newLineData);
+                applied = true;
+              } else {
+                int newLines_1 = 1;
+                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine_1 = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
+                if (_endsWithNewLine_1) {
+                  int _minus_1 = (newLines_1 - 1);
+                  newLines_1 = _minus_1;
+                }
+                int _offset_2 = _whitespaceInfo.getOffset();
+                int _length_2 = _whitespaceInfo.getLength();
+                NewLineData _newLineData_1 = new NewLineData(_offset_2, _length_2, 0, newLines_1);
+                result.add(_newLineData_1);
+              }
+            }
+          }
         }
-        int _plus_2 = ((i).intValue() + 1);
-        i = Integer.valueOf(_plus_2);
+        if (!_matched) {
+          if (leaf instanceof CommentInfo) {
+            final CommentInfo _commentInfo = (CommentInfo)leaf;
+            _matched=true;
+          }
+        }
       }
-      Integer _value_1 = range.getValue();
-      Integer _key_1 = range.getKey();
-      int _plus_1 = ((_value_1).intValue() + (_key_1).intValue());
-      boolean _lessThan_1 = ((i).intValue() < _plus_1);
-      _while = _lessThan_1;
+      _xblockexpression = (result);
     }
-    int _minNewLines = configuration.getMinNewLines();
-    int _max = Math.max(countedNewLines, _minNewLines);
-    int _maxNewLines = configuration.getMaxNewLines();
-    final int newLines = Math.min(_max, _maxNewLines);
-    Integer _key_1 = range.getKey();
-    Integer _value_1 = range.getValue();
-    NewLineData _newLineData = new NewLineData((_key_1).intValue(), (_value_1).intValue(), 0, newLines);
-    return _newLineData;
+    return _xblockexpression;
+  }
+  
+  public WhitespaceInfo findWhitespaceToWrap(final HiddenLeafs leafs) {
+    WhitespaceInfo _xblockexpression = null;
+    {
+      WhitespaceInfo ws = null;
+      List<LeafInfo> _leafs = leafs.getLeafs();
+      List<LeafInfo> _reverse = ListExtensions.<LeafInfo>reverse(_leafs);
+      for (final LeafInfo l : _reverse) {
+        boolean _matched = false;
+        if (!_matched) {
+          if (l instanceof WhitespaceInfo) {
+            final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)l;
+            _matched=true;
+            ws = _whitespaceInfo;
+          }
+        }
+        if (!_matched) {
+          if (l instanceof CommentInfo) {
+            final CommentInfo _commentInfo = (CommentInfo)l;
+            _matched=true;
+            boolean _isTrailing = _commentInfo.isTrailing();
+            if (_isTrailing) {
+              return ws;
+            }
+          }
+        }
+      }
+      _xblockexpression = (ws);
+    }
+    return _xblockexpression;
   }
   
   public String lookahead(final FormattableDocument fmt, final int offset, final int length, final Procedure1<? super FormattableDocument> format) {
@@ -126,14 +194,12 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public FormattingData append(final INode node, final NewLineConfig configuration) {
-    FormattingData _xifexpression = null;
+  public Iterable<FormattingData> append(final INode node, final NewLineConfig configuration) {
+    Iterable<FormattingData> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
-      Pair<Integer,Integer> _rangeAfter = this._nodeModelAccess.getRangeAfter(node);
-      ICompositeNode _rootNode = node.getRootNode();
-      String _text = _rootNode.getText();
-      FormattingData _newFormattingData = _rangeAfter==null?(FormattingData)null:this.newFormattingData(_rangeAfter, _text, configuration);
+      HiddenLeafs _hiddenLeafsAfter = this._nodeModelAccess.getHiddenLeafsAfter(node);
+      Iterable<FormattingData> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, configuration);
       _xifexpression = _newFormattingData;
     }
     return _xifexpression;
@@ -150,14 +216,12 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public FormattingData prepend(final INode node, final NewLineConfig configuration) {
-    FormattingData _xifexpression = null;
+  public Iterable<FormattingData> prepend(final INode node, final NewLineConfig configuration) {
+    Iterable<FormattingData> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
-      Pair<Integer,Integer> _rangeBefore = this._nodeModelAccess.getRangeBefore(node);
-      ICompositeNode _rootNode = node.getRootNode();
-      String _text = _rootNode.getText();
-      FormattingData _newFormattingData = _rangeBefore==null?(FormattingData)null:this.newFormattingData(_rangeBefore, _text, configuration);
+      HiddenLeafs _hiddenLeafsAfter = this._nodeModelAccess.getHiddenLeafsAfter(node);
+      Iterable<FormattingData> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, configuration);
       _xifexpression = _newFormattingData;
     }
     return _xifexpression;
