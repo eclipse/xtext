@@ -57,6 +57,11 @@ class FormattableDocument {
 		addFormatting(data)
 	}
 	
+	def operator_add(Iterable<FormattingData> data) {
+		if(data != null)
+			data.forEach[addFormatting]
+	}
+	
 	def List<TextReplacement> renderToEdits() {
 		renderToEdits(0, document.length)
 	}

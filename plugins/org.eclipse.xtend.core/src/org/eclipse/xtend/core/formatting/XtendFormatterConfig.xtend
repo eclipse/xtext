@@ -75,7 +75,7 @@ class NewLineConfig {
 		val parsed = data.split(",")
 		if(parsed.size == 2) {
 			_minNewLines = Integer::parseInt(parsed.get(0).trim)
-			_maxNewLines = Integer::parseInt(parsed.get(0).trim)
+			_maxNewLines = Integer::parseInt(parsed.get(1).trim)
 		}
 	}
 	

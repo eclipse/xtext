@@ -1,0 +1,100 @@
+package org.eclipse.xtend.core.tests.formatting
+
+import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest
+import org.junit.Test
+
+class XtendCommentFormatterTest extends AbstractFormatterTest {
+	@Test def formatSLCommentAfterStatement() {
+		assertFormatted('''
+			package foo // my comment
+			
+			class bar {
+			}
+		''', '''
+			package foo // my comment
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatSLCommentBeforeStatement1() {
+		assertFormatted('''
+			package foo
+			
+			// my comment
+			class bar {
+			}
+		''', '''
+			package foo 
+			// my comment
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatSLCommentBeforeStatement2() {
+		assertFormatted('''
+			package foo
+			
+			import java.util.Map
+			
+			
+			// my comment
+			class bar {
+			}
+		''', '''
+			package foo import java.util.Map 
+			
+			
+			
+			
+			// my comment
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatMLCommentAfterStatement() {
+		assertFormatted('''
+			package foo /* my comment */
+			
+			class bar {
+			}
+		''', '''
+			package foo /* my comment */
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatMLCommentBeforeStatement1() {
+		assertFormatted('''
+			package foo
+			
+			/* my comment */
+			class bar {
+			}
+		''', '''
+			package foo 
+			/* my comment */
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatMLCommentBeforeStatement2() {
+		assertFormatted('''
+			package foo
+			
+			import java.util.Map
+			
+			
+			/* my comment */
+			class bar {
+			}
+		''', '''
+			package foo import java.util.Map 
+			
+			
+			
+			
+			/* my comment */
+			class bar{}
+		''')	
+	}
+}
