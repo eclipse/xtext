@@ -21,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class NodeModelAccess {
@@ -117,35 +116,6 @@ public class NodeModelAccess {
     return _xblockexpression;
   }
   
-  public Pair<Integer,Integer> getRangeBefore(final INode node) {
-    Pair<Integer,Integer> _xblockexpression = null;
-    {
-      final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
-          public Boolean apply(final ILeafNode it) {
-            boolean _isHidden = it.isHidden();
-            boolean _not = (!_isHidden);
-            return Boolean.valueOf(_not);
-          }
-        };
-      final ILeafNode start = this.findNextLeaf(node, _function);
-      final ILeafNode previous = this.findPreviousLeaf(start);
-      Pair<Integer,Integer> _xifexpression = null;
-      boolean _isHidden = previous.isHidden();
-      if (_isHidden) {
-        int _offset = previous.getOffset();
-        int _length = previous.getLength();
-        Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(_offset), Integer.valueOf(_length));
-        _xifexpression = _mappedTo;
-      } else {
-        int _offset_1 = start.getOffset();
-        Pair<Integer,Integer> _mappedTo_1 = Pair.<Integer, Integer>of(Integer.valueOf(_offset_1), Integer.valueOf(0));
-        _xifexpression = _mappedTo_1;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
   public HiddenLeafs getHiddenLeafsBefore(final INode node) {
     HiddenLeafs _xblockexpression = null;
     {
@@ -190,42 +160,6 @@ public class NodeModelAccess {
       boolean _isHidden = previous.isHidden();
       if (_isHidden) {
         _xifexpression = previous;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
-  public Pair<Integer,Integer> getRangeAfter(final INode node) {
-    Pair<Integer,Integer> _xblockexpression = null;
-    {
-      final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
-          public Boolean apply(final ILeafNode it) {
-            boolean _isHidden = it.isHidden();
-            boolean _not = (!_isHidden);
-            return Boolean.valueOf(_not);
-          }
-        };
-      final ILeafNode start = this.findPreviousLeaf(node, _function);
-      final ILeafNode next = this.findNextLeaf(start);
-      Pair<Integer,Integer> _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(next, null));
-      if (_notEquals) {
-        Pair<Integer,Integer> _xifexpression_1 = null;
-        boolean _isHidden = next.isHidden();
-        if (_isHidden) {
-          int _offset = next.getOffset();
-          int _length = next.getLength();
-          Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(_offset), Integer.valueOf(_length));
-          _xifexpression_1 = _mappedTo;
-        } else {
-          int _offset_1 = start.getOffset();
-          int _length_1 = start.getLength();
-          int _plus = (_offset_1 + _length_1);
-          Pair<Integer,Integer> _mappedTo_1 = Pair.<Integer, Integer>of(Integer.valueOf(_plus), Integer.valueOf(0));
-          _xifexpression_1 = _mappedTo_1;
-        }
-        _xifexpression = _xifexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }

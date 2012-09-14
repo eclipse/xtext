@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.formatting.WhitespaceInfo;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -147,37 +146,6 @@ public class FormatterExtensions {
         }
       }
       _xblockexpression = (result);
-    }
-    return _xblockexpression;
-  }
-  
-  public WhitespaceInfo findWhitespaceToWrap(final HiddenLeafs leafs) {
-    WhitespaceInfo _xblockexpression = null;
-    {
-      WhitespaceInfo ws = null;
-      List<LeafInfo> _leafs = leafs.getLeafs();
-      List<LeafInfo> _reverse = ListExtensions.<LeafInfo>reverse(_leafs);
-      for (final LeafInfo l : _reverse) {
-        boolean _matched = false;
-        if (!_matched) {
-          if (l instanceof WhitespaceInfo) {
-            final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)l;
-            _matched=true;
-            ws = _whitespaceInfo;
-          }
-        }
-        if (!_matched) {
-          if (l instanceof CommentInfo) {
-            final CommentInfo _commentInfo = (CommentInfo)l;
-            _matched=true;
-            boolean _isTrailing = _commentInfo.isTrailing();
-            if (_isTrailing) {
-              return ws;
-            }
-          }
-        }
-      }
-      _xblockexpression = (ws);
     }
     return _xblockexpression;
   }

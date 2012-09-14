@@ -10,7 +10,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
-import org.eclipse.xtext.xbase.lib.Pair
 
 class NodeModelAccess {
 		def INode nodeForEObject(EObject obj) {
@@ -39,15 +38,6 @@ class NodeModelAccess {
 		if(result != null && result.text == kw) result
 	}
 	
-	def Pair<Integer, Integer> getRangeBefore(INode node) {
-		val start = node.findNextLeaf[!hidden]
-		val previous = start.findPreviousLeaf
-		if(previous.hidden)
-			previous.offset -> previous.length
-		else  
-			start.offset -> 0
-	}
-	
 	def HiddenLeafs getHiddenLeafsBefore(INode node) {
 		val start = node.findNextLeaf[!hidden]
 		val nodes = start.findPreviousHiddenLeafs
@@ -59,17 +49,6 @@ class NodeModelAccess {
 		val previous = start.findPreviousLeaf
 		if(previous.hidden) 
 			previous
-	}
-	
-	def Pair<Integer, Integer> getRangeAfter(INode node) {
-		val start = node.findPreviousLeaf[!hidden]
-		val next = start.findNextLeaf
-		if(next != null) {
-			if(next.hidden) 
-				next.offset -> next.length
-			else  
-				start.offset + start.length -> 0
-		}
 	}
 	
 	def HiddenLeafs getHiddenLeafsAfter(INode node) {

@@ -225,7 +225,6 @@ public class XtendFormatter {
       format.operator_add(_append);
     }
     final ILeafNode clazzOpenBrace = this._nodeModelAccess.nodeForKeyword(clazz, "{");
-    final ILeafNode clazzCloseBrace = this._nodeModelAccess.nodeForKeyword(clazz, "}");
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.space = " ";
