@@ -79,8 +79,6 @@ class XtendCommentFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatMLCommentBeforeStatement2() {
 		assertFormatted('''
-			package foo
-			
 			import java.util.Map
 			
 			
@@ -88,13 +86,57 @@ class XtendCommentFormatterTest extends AbstractFormatterTest {
 			class bar {
 			}
 		''', '''
-			package foo import java.util.Map 
+			import java.util.Map 
 			
 			
 			
 			
 			/* my comment */
 			class bar{}
+		''')	
+	}
+	
+	@Test def formatSLCommentAfterStatement2() {
+		assertFormatted('''
+			class bar { // my comment
+			}
+		''', '''
+			class bar{    // my comment
+			}
+		''')	
+	}
+	
+	@Test def formatSLCommentBeforeStatement21() {
+		assertFormatted('''
+			class bar {
+			// my comment
+			}
+		''', '''
+			class bar{
+			// my comment
+			}
+		''')	
+	}
+	
+	@Test def formatMLCommentAfterStatement2() {
+		assertFormatted('''
+			class bar { /* my comment */
+			}
+		''', '''
+			class bar{   /* my comment */ 
+			}
+		''')	
+	}
+	
+	@Test def formatMLCommentBeforeStatement21() {
+		assertFormatted('''
+			class bar {
+			/* my comment */
+			}
+		''', '''
+			class bar{
+			/* my comment */
+			}
 		''')	
 	}
 }
