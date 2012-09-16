@@ -9,10 +9,13 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
@@ -26,6 +29,9 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,6 +54,7 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 	}
 
 	public void apply() {
+		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		computeArgumentTypes();
 		for (ITypeExpectation expectation : state.getImmediateExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
@@ -81,6 +88,14 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 				Diagnostic diagnostic = createDiagnostic(message);
 				diagnostics.add(diagnostic);
 			}
+			Set<String> unresolvableProxies = lazyLinkingResource.getCache().get("UNRESOLVEABLE_PROXIES", lazyLinkingResource,
+				new Provider<Set<String>>() {
+					public Set<String> get() {
+						return Sets.newHashSet();
+					}
+				});
+			EObject referenced = (InternalEObject) getExpression().eGet(getReference(), false);
+			unresolvableProxies.add(EcoreUtil.getURI(referenced).fragment());
 		}
 	}
 	
