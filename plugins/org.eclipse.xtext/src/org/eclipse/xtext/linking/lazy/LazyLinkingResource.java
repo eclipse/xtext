@@ -52,6 +52,12 @@ import com.google.inject.Provider;
 public class LazyLinkingResource extends XtextResource {
 
 	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
+	
+	/**
+	 * The cache key for a Set of uri fragments that cannot be resolved. 
+	 * @since 2.4
+	 */
+	public static final String UNRESOLVEABLE_PROXIES_KEY = "UNRESOLVEABLE_PROXIES";
 
 	@Inject
 	private ILinkingService linkingService;
@@ -167,7 +173,7 @@ public class LazyLinkingResource extends XtextResource {
 				try {
 					if (!resolving.add(triple))
 						return handleCyclicResolution(triple);
-					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this,
+					Set<String> unresolveableProxies = getCache().get(UNRESOLVEABLE_PROXIES_KEY, this,
 							new Provider<Set<String>>() {
 								public Set<String> get() {
 									return Sets.newHashSet();
