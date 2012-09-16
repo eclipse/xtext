@@ -62,7 +62,7 @@ class NodeModelAccess {
 		for(node:nodes) {
 			var comment = false
 			var newLines = 0
-			if(!node.text.empty) 
+			if(!node.text.nullOrEmpty) 
 				for(i : 0 .. node.text.length - 1) {
 					val c = node.text.charAt(i)
 					if(c.toString == "\n")
