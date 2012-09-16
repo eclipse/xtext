@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class NodeModelAccess {
@@ -198,8 +199,8 @@ public class NodeModelAccess {
           boolean comment = false;
           int newLines = 0;
           String _text = node.getText();
-          boolean _isEmpty = _text.isEmpty();
-          boolean _not = (!_isEmpty);
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_text);
+          boolean _not = (!_isNullOrEmpty);
           if (_not) {
             String _text_1 = node.getText();
             int _length = _text_1.length();
