@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
-import org.eclipse.xtend.core.validation.ClasspathBasedChecks;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFactory;
@@ -49,16 +48,6 @@ public abstract class AbstractXtendTestCase extends Assert {
 				@SuppressWarnings("unused")
 				public XtendFactory bindFactory() {
 					return XtendFactory.eINSTANCE;
-				}
-
-				@SuppressWarnings("unused")
-				public ClasspathBasedChecks bindClassPathBasedChecks() {
-					return new ClasspathBasedChecks() {
-						@Override
-						public void checkFileNamingConventions(XtendFile xtendFile) {
-							// disabled
-						}
-					};
 				}
 
 			});
