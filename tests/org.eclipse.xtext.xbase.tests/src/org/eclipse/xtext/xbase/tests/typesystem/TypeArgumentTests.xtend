@@ -772,8 +772,8 @@ class FeatureCallRequest extends TypeArgumentContextProvider$AbstractRequest {
 	}
 	
 	override getDeclaredType() {
-		switch(feature) {
-			JvmOperation: feature.returnType
+		switch f : feature {
+			JvmOperation : f.returnType
 			default: null
 		}
 	}
