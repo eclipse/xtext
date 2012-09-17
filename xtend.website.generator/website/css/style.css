@@ -112,6 +112,14 @@ td.code pre {
 	float: left;
 }
 
+.image_between_p {
+	display: block; 
+	margin-left: auto;  
+	margin-right: auto; 
+	margin-top: 25px; 
+	margin-bottom : 25px;
+}
+
 .row_color {
 	background: url(../images/div-grey-top.png) no-repeat center top #f8f8f8;
 	bspwidth: 100%;

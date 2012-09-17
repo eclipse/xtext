@@ -124,6 +124,60 @@ class Download extends AbstractXtendWebsite {
 				      Standalone compilation is supported as well, the simplest way to do that is using the Maven plug-in.
 				    </p>
 				    <!--  section -->
+				    <section id="Update Site" style="padding-top: 68px; margin-top: -68px;">
+							<h2 style="padding-top: 15px;">Install From Update Site</h2>
+							<p>
+								If you already have an Eclipse running you should install the <i>"Xtend SDK"</i>-Feature from one of the update sites listed above. To do so
+								within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the 
+								field named <i>Work with</i>. Now search for the feature <e>Xtend SDK</e>, select it and click <i>Next</i> and on the next page <i>Finish</i>.
+							</p>
+							<img src="images/screenshot-installation.png" class="image_between_p"/>
+							<p>
+								Now the features are being downloaded and installed. Eclipse will ask you for a restart when downloading and installation is done.
+							</p>
+					</section>
+					<section id="Hello World" style="padding-top: 68px; margin-top: -68px;">
+							<h2 style="padding-top: 15px;">Getting Started</h2>
+							<p>
+								<img src="images/java-perspective.png" style="float : right; margin-left:10px;"/>
+								When you've started Eclipse for the first time, you should see an empty workspace. Switch to the 'Java perspective'
+								if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose 
+								<i>File -> New -> Java Project</i>. In the upcoming dialog choose any project name you want (e.g. <i>my.project</i>).
+								After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>'/src'</i>. 
+							</p>
+							<h3>A first class</h3>
+							<img src="images/menu new xtend class.png" class="image_between_p"/>
+							<p>
+								To create your first Xtend class select the source folder and press the right mouse button. You should find the entry 
+								<i>Xtend class</i> in the category <i>New &gt;</i>. If you don't see it you might not be in the Java perspective or you need to reset the perspective. To do so right click
+								on the perspective icon on the top right and choose <i>reset</i>.
+							</p>
+							<img src="images/new class wizard.png" class="image_between_p"/>
+							<p>
+								In the dialog you should give the class a name, for instance <i>HelloWorld</i>, and put it into some package (we chose <i>my.namespace</i>). Click <i>Finish</i> and
+								an empty class will be created for you.
+							</p>
+							<h3>The missing lib</h3>
+							<img src="images/xtend lib missing error.png"  class="image_between_p"/>
+							<p>
+								The newly created class will have an error marker, saying that you need to put the library on the classpath. There is a "quickfix" which does that for you.
+								Put the cursor on the marked location and press <i>CTRL+1</i> (or CMD+1 on a Mac) and select the option "Add Xtend libs to the classpath".
+							</p>
+							<p>
+								The library is also available from maven (see below) or as an OSGi bundle from the p2 update site above.
+							</p>
+							<h3>Have fun!</h3>
+							<p>
+								Now you are ready to code. Within the class body (between the curly braces) type <i>main<i> and press <i>CTRL+space</i>. An empty main method will be generated for you.
+							</p>
+							<p>
+								Now type in <code class="prettyprint lang-xtend">println('Hello World')</code>, save and run the application. To do so use the green arrow and choose <i>Run As -&gt; Java Application</i>.
+							</p>
+							<img src="images/run as java application.png" class="image_between_p"/>
+							<p>
+								<a href="documentation.html#GettingStarted">Click here for the next steps and more examples.</a> 
+							</p>
+					</section>
 				    <section id="MavenSupport" style="padding-top: 68px; margin-top: -68px;">
 							<h2 style="padding-top: 15px;">Maven Plug-In</h2>
 							<p>

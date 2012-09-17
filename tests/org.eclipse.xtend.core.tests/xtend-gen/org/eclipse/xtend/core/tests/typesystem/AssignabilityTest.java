@@ -224,12 +224,6 @@ public class AssignabilityTest extends AbstractAssignabilityTest {
   }
   
   @Test
-  public void testFunctionTypes_08() {
-    this.isNotAssignableFrom("()=>long", "()=>int");
-    this.isNotAssignableFrom("()=>int", "()=>long");
-  }
-  
-  @Test
   public void testFunctionTypeAsParameterized_01() {
     this.isAssignableFrom("$Procedure1<String>", "(CharSequence)=>void");
     this.isAssignableFrom("$Procedure1<? super String>", "(CharSequence)=>void");

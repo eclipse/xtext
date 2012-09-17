@@ -12,7 +12,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class RawAssignabilityTest extends AbstractAssignabilityTest {
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
-    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true, false);
+    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true);
     return lhs.isAssignableFrom(rhs, _typeConformanceComputationArgument);
   }
   
@@ -223,12 +223,6 @@ public class RawAssignabilityTest extends AbstractAssignabilityTest {
     this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isAssignableFrom(_mappedTo_1, "(int)=>int");
-  }
-  
-  @Test
-  public void testFunctionTypes_08() {
-    this.isAssignableFrom("()=>long", "()=>int");
-    this.isAssignableFrom("()=>int", "()=>long");
   }
   
   @Test
