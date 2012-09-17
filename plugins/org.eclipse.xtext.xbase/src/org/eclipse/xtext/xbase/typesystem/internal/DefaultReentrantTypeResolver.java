@@ -38,6 +38,9 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	@Inject
 	private IBatchScopeProvider batchScopeProvider;
 	
+	@Inject
+	private ExpressionArgumentFactory expressionArgumentFactory;
+	
 	private EObject root;
 	
 	private boolean resolving = false;
@@ -106,6 +109,10 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 
 	protected IBatchScopeProvider getBatchScopeProvider() {
 		return batchScopeProvider;
+	}
+	
+	protected ExpressionArgumentFactory getExpressionArgumentFactory() {
+		return expressionArgumentFactory;
 	}
 
 	protected CommonTypeComputationServices getServices() {

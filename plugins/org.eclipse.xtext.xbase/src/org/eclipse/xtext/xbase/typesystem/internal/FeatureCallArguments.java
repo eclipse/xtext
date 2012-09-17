@@ -48,6 +48,22 @@ public class FeatureCallArguments implements IExpressionArguments {
 		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size()) + argumentSizeFixup;
 	}
 	
+	protected int getArgumentSizeFixup() {
+		return argumentSizeFixup;
+	}
+	
+	protected List<JvmFormalParameter> getParameters() {
+		return parameters;
+	}
+	
+	protected OwnedConverter getConverter() {
+		return converter;
+	}
+	
+	protected List<XExpression> getArguments() {
+		return arguments;
+	}
+	
 	public LightweightTypeReference getDeclaredType(int argumentIndex) {
 		int idx = argumentIndex - argumentSizeFixup;
 		JvmFormalParameter parameter = parameters.get(idx);

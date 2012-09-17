@@ -93,10 +93,6 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		return true;
 	}
 	
-	public LightweightTypeReference getComponent() {
-		return component;
-	}
-
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		LightweightTypeReference copiedComponent = component.copyInto(owner);

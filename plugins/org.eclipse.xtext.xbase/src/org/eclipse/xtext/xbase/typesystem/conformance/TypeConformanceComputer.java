@@ -292,7 +292,7 @@ public class TypeConformanceComputer {
 			
 			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, rawType);
 			for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
-				result.addTypeArgument(parameterSuperType);
+				result.addTypeArgument(parameterSuperType.copyInto(result.getOwner()));
 			}
 			result = getFunctionTypeReference(result);
 			return result;
@@ -464,10 +464,11 @@ public class TypeConformanceComputer {
 			return result;
 		}
 		Set<String> allNames = Sets.newHashSet();
+		Set<String> allBoundNames = Sets.newHashSet();
 		for(int i = 0; i < types.size(); i++) {
 			LightweightTypeReference type = types.get(i).getUpperBoundSubstitute();
 			types.set(i, type);
-			allNames.add(getIdentifier(type));
+			addIdentifier(type, allNames, allBoundNames);
 		}
 		if (allNames.size() == 1)
 			return types.get(0);
@@ -492,9 +493,24 @@ public class TypeConformanceComputer {
 		}
 		if (superType instanceof UnboundTypeReference)
 			return superType;
+		if (allBoundNames.size() != allNames.size()) {
+			if (allBoundNames.size() == 1 && allBoundNames.contains(getIdentifier(superType))) {
+				return superType;
+			}
+		}
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		result.addUpperBound(superType);
 		return result;
+	}
+
+	private void addIdentifier(LightweightTypeReference type, Set<String> allNames, Set<String> allBoundNames) {
+		if (type instanceof UnboundTypeReference && !type.isResolved()) {
+			allNames.add(((UnboundTypeReference) type).getHandle().toString());
+		} else {
+			String identifier = type.getIdentifier();
+			allNames.add(identifier);
+			allBoundNames.add(identifier);
+		}
 	}
 
 	private String getIdentifier(LightweightTypeReference type) {
