@@ -9,24 +9,24 @@ package org.eclipse.xtend.ide.formatting.preferences;
 
 import org.eclipse.jdt.internal.ui.preferences.formatter.IProfileVersioner;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.CustomProfile;
+import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class FormatterProfileVersioner implements IProfileVersioner {
-
-	private static final String XTEND_FORMATTER_PROFILE = "XtendForamtterProfile";
+	public static String VERSION_KEY = FormatterPreferenceInfra.PREFIX + ".version";
 
 	public int getFirstVersion() {
-		return 0;
+		return 1;
 	}
 
 	public int getCurrentVersion() {
-		return 0;
+		return 1;
 	}
 
 	public String getProfileKind() {
-		return XTEND_FORMATTER_PROFILE;
+		return FormatterProfileStore.XTEND_PROFILES_KEY;
 	}
 
 	public void update(CustomProfile profile) {

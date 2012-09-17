@@ -5,15 +5,15 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.IModifyDialogTabPage$IM
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Group
 import org.eclipse.xtend.ide.formatting.SettingsData$Category
-import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra
+import static org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra.*
 import static org.eclipse.xtend.ide.formatting.preferences.AbstractModifyDialogTab.*
 import org.eclipse.xtend.ide.formatting.FormatterSetting
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 class GenericTab  extends AbstractModifyDialogTab {
-	extension FormatterPreferenceInfra = new FormatterPreferenceInfra
 	String previewContent
 	Category category
 
@@ -25,7 +25,7 @@ class GenericTab  extends AbstractModifyDialogTab {
 
 	override doCreatePreferences(Composite composite, int numColumns) {
 		val Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		for(FormatterSetting prefData: settingsByCategory(category)) {
+		for(FormatterSetting prefData: settingsByCategory(category, new XtendFormatterConfig(fWorkingValues))) {
 			createPref(prefData, generalGroup, numColumns)
 		}
 	}

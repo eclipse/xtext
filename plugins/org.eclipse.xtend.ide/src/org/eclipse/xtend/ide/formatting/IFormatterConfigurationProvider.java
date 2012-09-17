@@ -12,6 +12,8 @@ import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public interface IRendererConfigurationProvider {
+public interface IFormatterConfigurationProvider {
+	
 	XtendFormatterConfig rendererConfiguration();
+
 }
