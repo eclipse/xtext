@@ -809,7 +809,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkAbstract(XtendFunction function) {
-		if (function.getExpression() == null) {
+		if (function.getExpression() == null && function.eContainer() instanceof XtendClass) {
 			XtendClass declarator = (XtendClass) function.eContainer();
 			if (function.isDispatch()) {
 				error("The dispatch method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
@@ -1203,7 +1203,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return;
 			if (hasAnnotation(field.getAnnotations(), Property.class))
 				return;
-			if (hasAnnotation(((XtendClass)field.eContainer()).getAnnotations(), Data.class))
+			if (hasAnnotation(((XtendAnnotationTarget)field.eContainer()).getAnnotations(), Data.class))
 				return;
 			if (isLocallyUsed(jvmField, field.eContainer())) 
 				return;

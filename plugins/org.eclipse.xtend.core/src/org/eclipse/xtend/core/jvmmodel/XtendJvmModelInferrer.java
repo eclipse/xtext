@@ -26,10 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
-import org.eclipse.xtend.core.jvmmodel.annotationprocessing.IAnnotationProcessor;
 import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -47,7 +45,6 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -70,10 +67,9 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -92,7 +88,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
-@NonNullByDefault
 public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	public static final String CREATE_INITIALIZER_PREFIX = "_init_";
@@ -125,80 +120,41 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	
+	@Inject
+	private IScopeProvider scopeProvider;
 
-	public void infer(@Nullable EObject xtendFile, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void infer(@Nullable EObject xtendFile, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			return;
 		final XtendFile xtendFile2 = (XtendFile) xtendFile;
 		final List<XtendTypeDeclaration> classes = xtendFile2.getXtendTypes();
-		for (final XtendTypeDeclaration xtendTypeDeclaration : classes) {
-			if (Strings.isEmpty(xtendTypeDeclaration.getName()))
+		for (final XtendAnnotationType annotationType : filter(classes, XtendAnnotationType.class)) {
+			if (Strings.isEmpty(annotationType.getName()))
 				continue;
-			if (xtendTypeDeclaration instanceof XtendClass) {
-				final XtendClass xtendClass = (XtendClass) xtendTypeDeclaration;
-				final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
-				inferredJvmType.setPackageName(xtendFile2.getPackage());
-				inferredJvmType.setSimpleName(xtendClass.getName());
-				associator.associatePrimary(xtendClass, inferredJvmType);
-				acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
-					public void apply(@Nullable JvmGenericType p) {
-						initialize(xtendClass, inferredJvmType);
-					}
-				});
-			} else if (xtendTypeDeclaration instanceof XtendAnnotationType) {
-				final XtendAnnotationType annotationType = (XtendAnnotationType) xtendTypeDeclaration;
-				final JvmAnnotationType inferredAnnotationType = typesFactory.createJvmAnnotationType();
-				inferredAnnotationType.setPackageName(xtendFile2.getPackage());
-				inferredAnnotationType.setSimpleName(annotationType.getName());
-				associator.associatePrimary(annotationType, inferredAnnotationType);
-				acceptor.accept(inferredAnnotationType).initializeLater(new Procedure1<JvmAnnotationType>() {
-					public void apply(@Nullable JvmAnnotationType p) {
-						initialize(annotationType, p);
-					}
-				});
-				
-				if (!isEmpty(filter(annotationType.getMembers(),XtendFunction.class))) {
-					final JvmGenericType processingClass = typesFactory.createJvmGenericType();
-					// no code generation, since this class will be interpreted.
-					DisableCodeGenerationAdapter.disableCodeGeneration(processingClass);
-					// no view from outside, no export of descriptions
-					processingClass.setVisibility(JvmVisibility.PRIVATE);
-					processingClass.setPackageName(xtendFile2.getPackage());
-					processingClass.setSimpleName(annotationType.getName()+"Processor");
-					
-					associator.associate(annotationType, processingClass);
-					acceptor.accept(processingClass).initializeLater(new Procedure1<JvmGenericType>() {
-						public void apply(@Nullable JvmGenericType p) {
-							initializeAnnoatationProcessorClass(annotationType, p);
-						}
-					});
+			final JvmAnnotationType inferredAnnotationType = typesFactory.createJvmAnnotationType();
+			inferredAnnotationType.setPackageName(xtendFile2.getPackage());
+			inferredAnnotationType.setSimpleName(annotationType.getName());
+			DisableCodeGenerationAdapter.disableCodeGeneration(inferredAnnotationType);
+			associator.associatePrimary(annotationType, inferredAnnotationType);
+			acceptor.accept(inferredAnnotationType).initializeLater(new Procedure1<JvmAnnotationType>() {
+				public void apply(@Nullable JvmAnnotationType p) {
+					initialize(annotationType, p);
 				}
-			}
+			});
 		}
-	}
-	
-	protected void initializeAnnoatationProcessorClass(XtendAnnotationType source, JvmGenericType processorType) {
-		for (XtendMember member : source.getMembers()) {
-			if (member instanceof XtendField) {
-				XtendField field = (XtendField) member;
-				JvmField jvmField = jvmTypesBuilder.toField(field, field.getName(), field.getType());
-				if (jvmField != null) {
-					processorType.getMembers().add(jvmField);
-					jvmField.setVisibility(JvmVisibility.PRIVATE);
+		for (final XtendClass xtendClass : filter(classes, XtendClass.class)) {
+			if (Strings.isEmpty(xtendClass.getName()))
+				continue;
+			final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
+			inferredJvmType.setPackageName(xtendFile2.getPackage());
+			inferredJvmType.setSimpleName(xtendClass.getName());
+			associator.associatePrimary(xtendClass, inferredJvmType);
+			acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
+				public void apply(@Nullable JvmGenericType p) {
+					initialize(xtendClass, inferredJvmType);
 				}
-			} else if (member instanceof XtendFunction) {
-				XtendFunction function = (XtendFunction) member;
-				JvmOperation method = jvmTypesBuilder.toMethod(function, "doProcess", jvmTypesBuilder.newTypeRef(function, void.class), null);
-				if (method != null) {
-					processorType.getMembers().add(method);
-					method.setVisibility(JvmVisibility.PRIVATE);
-					for (XtendParameter param : function.getParameters()) {
-						final JvmFormalParameter parameter = jvmTypesBuilder.toParameter(param, param.getName(), jvmTypesBuilder.newTypeRef(function, XExpression.class));
-						method.getParameters().add(parameter);
-					}
-					jvmTypesBuilder.setBody(method, function.getExpression());
-				}
-			}
+			});
 		}
 	}
 	
@@ -275,28 +231,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		nameClashResolver.resolveNameClashes(inferredJvmType);
 		
-		// do annotation processing in depth-first order
-		recursiveCallParticipants(source);
 	}
 	
-	@Inject private IAnnotationProcessor.Provider annotationProcessorProvider;
-	
-	protected void recursiveCallParticipants(XtendAnnotationTarget target) {
-		callParticipant(target);
-		for (XtendAnnotationTarget child : filter(target.eContents(), XtendAnnotationTarget.class)) {
-			recursiveCallParticipants(child);
-		}
-	}
-	
-	protected void callParticipant(XtendAnnotationTarget sourceAnnotationTarget) {
-		Iterable<JvmAnnotationTarget> elements = filter(associations.getJvmElements(sourceAnnotationTarget), JvmAnnotationTarget.class);
-		for (XAnnotation annotation : sourceAnnotationTarget.getAnnotations()) {
-			IAnnotationProcessor participant = annotationProcessorProvider.get(annotation.getAnnotationType());
-			if (participant != null)
-				participant.process(annotation, elements, CancelIndicator.NullImpl /* TODO do real cancel indication */);
-		}
-	}
-
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
 		for (XAnnotation anno : source.getAnnotations()) {
 			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))
@@ -660,7 +596,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 			boolean isProperty = isDataObject;
 			for (XAnnotation anno : source.getAnnotations()) {
-				if (doNotTranslate(anno))
+				if (!annotationTranslationFilter.apply(anno))
 					continue;
 				if (Property.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
 					isProperty = true;
@@ -693,15 +629,13 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {
 		public boolean apply(@Nullable XAnnotation annotation) {
-			if (annotation == null)
+			if (annotation == null || annotation.getAnnotationType() == null)
 				return false;
-			return !doNotTranslate(annotation);
+			if (DisableCodeGenerationAdapter.isDisabled(annotation.getAnnotationType()))
+				return false;
+			return true;
 		}
 	};
-
-	protected boolean doNotTranslate(XAnnotation anno) {
-		return anno == null || anno.getAnnotationType() == null || anno.getAnnotationType().getIdentifier() == null || annotationProcessorProvider.get(anno.getAnnotationType()) != null;
-	}
 
 	protected boolean hasMethod(XtendClass xtendClass, String simpleName, List<? extends JvmFormalParameter> parameters) {
 		for (XtendMember member : xtendClass.getMembers()) {
@@ -721,14 +655,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						return true;
 				}
 			}
-		}
-		return false;
-	}
-
-	protected boolean containsAnnotation(EList<XAnnotation> annotations, Class<Property> class1) {
-		for (XAnnotation anno : annotations) {
-			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))
-				return true;
 		}
 		return false;
 	}

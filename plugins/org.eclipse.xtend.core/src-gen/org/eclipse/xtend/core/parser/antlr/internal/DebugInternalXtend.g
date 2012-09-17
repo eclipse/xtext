@@ -38,27 +38,21 @@ ruleType :
 				',' ruleJvmParameterizedTypeReference
 			)*
 		)? '{' ruleMember* '}' |
-		'annotation' ruleValidID '{' ruleAnnotationMember* '}'
+		'annotation' ruleValidID '{' ruleAnnotationField* '}'
 	)
 ;
 
-// Rule AnnotationMember
-ruleAnnotationMember :
+// Rule AnnotationField
+ruleAnnotationField :
 	ruleXAnnotation* (
+		ruleJvmTypeReference |
 		(
 			'val' |
-			ruleJvmTypeReference
-		) ruleValidID (
-			'=' ruleXAnnotationElementValue
-		)? ';'? |
-		'do' (
-			'(' (
-				ruleParameter (
-					',' ruleParameter
-				)*
-			)? ')'
-		)? ruleXBlockExpression
-	)
+			'var'
+		) ruleJvmTypeReference?
+	) ruleValidID (
+		'=' ruleXExpression
+	)? ';'?
 ;
 
 // Rule Member

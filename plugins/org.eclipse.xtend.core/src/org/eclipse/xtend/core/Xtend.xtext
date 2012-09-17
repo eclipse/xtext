@@ -39,21 +39,17 @@ Type returns XtendTypeDeclaration :
 	   '}'
 	 |{XtendAnnotationType.annotationInfo = current}
 		'annotation' name=ValidID '{'
-		   (members+=AnnotationMember)*
+		   (members+=AnnotationField)*
 	   	'}'
 	)
 ;
 
-AnnotationMember returns XtendMember :
-	{XtendMember} annotations+=XAnnotation* 
-	({XtendField.annotationInfo = current}	
-		 	('val' | type=JvmTypeReference) name=ValidID ('=' initialValue=XAnnotationElementValue)? ';'?
-	|{XtendFunction.annotationInfo = current}
-			name='do' ('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')?
-				expression=XBlockExpression
-	)
+AnnotationField returns XtendField :
+	annotations+=XAnnotation*	
+ 	(type=JvmTypeReference | (final?='val' | 'var') type=JvmTypeReference?) name=ValidID ('=' initialValue=XExpression)? ';'?
 ;
 	
+
 Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation* 
 	(
