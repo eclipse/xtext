@@ -25,8 +25,8 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 	private JvmType contextType;
 	private Set<String> superTypeNames;
 
-	public FeatureScopeSessionWithContext(AbstractFeatureScopeSession parent, FeatureScopes featureScopeProvider, JvmType contextType) {
-		super(parent, featureScopeProvider);
+	public FeatureScopeSessionWithContext(AbstractFeatureScopeSession parent, JvmType contextType) {
+		super(parent);
 		this.contextType = contextType;
 		SuperTypeCollector superTypeCollector = getFeatureScopes().getSuperTypeCollector();
 		superTypeNames = superTypeCollector.collectSuperTypeNames(contextType);

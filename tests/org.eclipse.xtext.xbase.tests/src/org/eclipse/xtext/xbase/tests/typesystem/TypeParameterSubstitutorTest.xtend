@@ -21,6 +21,12 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
  */
 class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject CommonTypeComputationServices services
 	
 	extension OwnedConverter = new OwnedConverter(this)

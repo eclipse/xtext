@@ -25,8 +25,8 @@ public class FeatureScopeSessionWithLocalElements extends AbstractNestedFeatureS
 
 	private final Map<QualifiedName, JvmIdentifiableElement> map;
 
-	public FeatureScopeSessionWithLocalElements(AbstractFeatureScopeSession parent, FeatureScopes featureScopeProvider, Map<QualifiedName, JvmIdentifiableElement> map) {
-		super(parent, featureScopeProvider);
+	public FeatureScopeSessionWithLocalElements(AbstractFeatureScopeSession parent, Map<QualifiedName, JvmIdentifiableElement> map) {
+		super(parent);
 		this.map = map;
 	}
 	

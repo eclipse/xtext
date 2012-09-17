@@ -24,9 +24,9 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 	private final List<JvmType> extensionProviders;
 
 	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
-			FeatureScopes featureScopeProvider, List<JvmType> staticFeatureProviders,
+			List<JvmType> staticFeatureProviders,
 			List<JvmType> extensionProviders) {
-		super(featureScopeSession, featureScopeProvider);
+		super(featureScopeSession);
 		this.staticFeatureProviders = staticFeatureProviders;
 		this.extensionProviders = extensionProviders;
 	}

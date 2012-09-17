@@ -18,6 +18,12 @@ import org.junit.Test
  */
 class BatchFeatureCallTypeTests extends AbstractFeatureCallTypeTest {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject
 	IBatchTypeResolver typeResolver;
 	

@@ -21,6 +21,13 @@ import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class ResolvedTypesTest extends AbstractXbaseTestCase {
+	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject 
 	@Property 
 	PublicReentrantTypeResolver resolver

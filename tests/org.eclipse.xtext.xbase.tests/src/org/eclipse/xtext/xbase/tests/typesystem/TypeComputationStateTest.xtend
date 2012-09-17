@@ -29,6 +29,12 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
  */
 class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject PublicReentrantTypeResolver resolver
 	
 	@Inject extension ReflectExtensions
