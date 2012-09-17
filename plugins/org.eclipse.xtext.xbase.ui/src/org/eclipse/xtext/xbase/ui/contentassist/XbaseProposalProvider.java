@@ -630,9 +630,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				result.append(parameterType.getComponentType().getSimpleName());
 				result.append("...");
 			} else {
-				String simpleName = parameter.getParameterType().getSimpleName();
-				if (simpleName != null) // is null if the file is not on the class path
-					result.append(simpleName);
+				if (parameter.getParameterType()!= null) {
+					String simpleName = parameter.getParameterType().getSimpleName();
+					if (simpleName != null) // is null if the file is not on the class path
+						result.append(simpleName);
+				}
 			}
 			result.append(' ');
 			result.append(notNull(parameter.getName()));

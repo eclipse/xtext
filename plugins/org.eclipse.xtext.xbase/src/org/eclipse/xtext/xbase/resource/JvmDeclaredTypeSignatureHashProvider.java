@@ -146,7 +146,7 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			if(innerTypesOnly)
 				members = filter(members, JvmDeclaredType.class);
 			for (JvmMember member : members) {
-				if (member.getVisibility() != JvmVisibility.PRIVATE) {
+				if (member.getVisibility() != JvmVisibility.PRIVATE && member.getSimpleName() != null) {
 					appendAnnotationReferences(member);
 					if (member instanceof JvmOperation) 
 						appendSignature((JvmOperation) member);
