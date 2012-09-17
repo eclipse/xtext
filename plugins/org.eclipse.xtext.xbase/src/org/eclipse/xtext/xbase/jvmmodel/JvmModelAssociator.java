@@ -61,6 +61,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	@Inject
 	private IJvmModelInferrer inferrer;
 	
+	@Inject
+	private JvmModelInferrerRegistry inferrerRegistry;
+	
 	@Inject 
 	private JvmModelCompleter completer;
 	
@@ -229,10 +232,19 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		EObject eObject = resource.getContents().get(0);
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		inferrer.infer(eObject, acceptor, preIndexingPhase);
+		List<? extends IJvmModelInferrer> secondaryInferrers = inferrerRegistry.getModelInferrer(resource.getURI().fileExtension());
+		for (IJvmModelInferrer secondaryInferrer : secondaryInferrers) {
+			secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
+		}
 		if (!preIndexingPhase) {
 			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
 				initializer.getValue().apply(initializer.getKey());
-				completer.complete(initializer.getKey());
+			}
+			for (EObject object : resource.getContents()) {
+				if (object instanceof JvmIdentifiableElement) {
+					JvmIdentifiableElement element = (JvmIdentifiableElement) object;
+					completer.complete(element);
+				}
 			}
 		}
 	}
