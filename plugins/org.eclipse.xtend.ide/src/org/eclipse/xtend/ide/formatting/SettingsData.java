@@ -16,7 +16,8 @@ public interface SettingsData {
 	 * @author Dennis Huebner - Initial contribution and API
 	 */
 	public static enum Category {
-		INDENTATION("indentation", "Indentation"), LINE_WRAPPING("line_wrapping", "Line wrapping");
+		INDENTATION("indentation", "Indentation"), LINE("line", "Line"), LINE_WRAPPING("newlines", "Line wrapping"), OTHER(
+				"other", "Other");
 
 		private String name;
 		private String label;
@@ -30,6 +31,16 @@ public interface SettingsData {
 			this.name = name;
 			this.label = label;
 			this.generic = generic;
+		}
+
+		public static Category byName(String name) {
+			Category[] values = values();
+			for (Category category : values) {
+				if (category.getName().equals(name)) {
+					return category;
+				}
+			}
+			return OTHER;
 		}
 
 		public String getName() {

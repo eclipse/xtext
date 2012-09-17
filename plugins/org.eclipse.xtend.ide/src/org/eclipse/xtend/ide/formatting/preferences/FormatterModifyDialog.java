@@ -14,6 +14,8 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.Profile;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra;
 import org.eclipse.xtend.ide.formatting.SettingsData.Category;
 
 import com.google.inject.Inject;
@@ -50,7 +52,10 @@ public class FormatterModifyDialog extends ModifyDialog {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void addPages(final Map values) {
 		for (Category category : Category.values()) {
-			addTabPage(category.getLabel(), tabFactory.createGenericTab(this, values, category));
+			if (FormatterPreferenceInfra.settingsByCategory(category, new XtendFormatterConfig(values)).iterator()
+					.hasNext()) {
+				addTabPage(category.getLabel(), tabFactory.createGenericTab(this, values, category));
+			}
 		}
 	}
 

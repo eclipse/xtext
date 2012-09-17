@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class XtendFormatterConfig {
@@ -191,8 +192,15 @@ public class XtendFormatterConfig {
             if (!_matched) {
               if (Objects.equal(_switchValue,int.class)) {
                 _matched=true;
-                int _parseInt = Integer.parseInt(str);
-                _switchResult = _parseInt;
+                int _xifexpression = (int) 0;
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(str);
+                if (_isNullOrEmpty) {
+                  _xifexpression = 0;
+                } else {
+                  int _parseInt = Integer.parseInt(str);
+                  _xifexpression = _parseInt;
+                }
+                _switchResult = _xifexpression;
               }
             }
             if (!_matched) {
@@ -225,14 +233,19 @@ public class XtendFormatterConfig {
         public String apply(final Field it) {
           String _xtrycatchfinallyexpression = null;
           try {
-            Object _get = it.get(XtendFormatterConfig.this);
-            String _string = _get==null?(String)null:_get.toString();
-            String _elvis = ObjectExtensions.<String>operator_elvis(_string, "");
-            _xtrycatchfinallyexpression = _elvis;
+            String _xblockexpression = null;
+            {
+              it.setAccessible(true);
+              Object _get = it.get(XtendFormatterConfig.this);
+              String _string = _get==null?(String)null:_get.toString();
+              String _elvis = ObjectExtensions.<String>operator_elvis(_string, "");
+              _xblockexpression = (_elvis);
+            }
+            _xtrycatchfinallyexpression = _xblockexpression;
           } catch (final Throwable _t) {
             if (_t instanceof Exception) {
               final Exception e = (Exception)_t;
-              _xtrycatchfinallyexpression = null;
+              _xtrycatchfinallyexpression = "";
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
@@ -244,7 +257,7 @@ public class XtendFormatterConfig {
     return _mapValues;
   }
   
-  protected Map<String,Field> getNamedProperties() {
+  public Map<String,Field> getNamedProperties() {
     Class<? extends Object> _class = this.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();
     final Function1<Field,Boolean> _function = new Function1<Field,Boolean>() {

@@ -4,7 +4,7 @@ import com.google.inject.name.Named
 import java.util.Map
 import org.eclipse.xtend.lib.Property
 
-class XtendFormatterConfig { 
+class XtendFormatterConfig {
 	@Property @Named("line.separator") String lineSeparator
 	@Property @Named("line.width.max") int maxLineWidth = 120
 	@Property @Named("indentation") String indentation
@@ -16,16 +16,16 @@ class XtendFormatterConfig {
 	@Property @Named("newlines.between.fields.and.methods") NewLineConfig newLinesBetweenFieldsAndMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.classes") NewLineConfig newLinesBetweenClasses = new NewLineConfig(2, 3)
-	
+
 	new() {
 	}
-	
+
 	new(Map<String, String> properties) {
 		for(property:namedProperties.entrySet) {
 			val str = properties.get(property.key)
 			if(str != null) {
 				val value = switch property.value.type {
-					case typeof(int): Integer::parseInt(str)
+					case typeof(int): if(str.nullOrEmpty) 0 else Integer::parseInt(str)
 					case typeof(String): str
 					case typeof(NewLineConfig): new NewLineConfig(str)
 				}
@@ -33,31 +33,37 @@ class XtendFormatterConfig {
 			}
 		}
 	}
-	
+
 	def Map<String, String> asMap() {
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=389512
-		namedProperties.mapValues[try { get(this)?.toString ?: "" } catch(Exception e) {}]
+		namedProperties.mapValues[
+			try {
+				it.setAccessible(true)
+				it.get(this)?.toString ?: ""
+			} catch (Exception e) {
+				""
+			}]
 	}
-	
-	def protected getNamedProperties() {
-		^class.declaredFields.filter[getAnnotation(typeof(Named)) != null].toMap[getAnnotation(typeof(Named)).value]
+
+	def getNamedProperties() {
+		^class.declaredFields.filter[ getAnnotation(typeof(Named)) != null].toMap[ getAnnotation(typeof(Named)).value]
 	}
-	
+
 	def getIndentation(int levels) {
-		if(levels > 0) 
-			(0..levels - 1).map[_indentation].join 
-		else 
+		if (levels > 0)
+			(0 .. levels - 1).map[_indentation].join
+		else
 			""
 	}
-	
+
 	def getIndentationLenght(int levels) {
 		levels * indentationLength
 	}
-	
+
 	def getWrap(int levels) {
-		if(levels > 0) 
-			(0..levels - 1).map[_lineSeparator].join 
-		else 
+		if (levels > 0)
+			(0 .. levels - 1).map[_lineSeparator].join
+		else
 			""
 	}
 }
@@ -70,7 +76,7 @@ class NewLineConfig {
 		_minNewLines = min
 		_maxNewLines = max
 	}
-	
+
 	new(String data) {
 		val parsed = data.split(",")
 		if(parsed.size == 2) {
@@ -78,7 +84,7 @@ class NewLineConfig {
 			_maxNewLines = Integer::parseInt(parsed.get(1).trim)
 		}
 	}
-	
+
 	override toString() '''
 		«_minNewLines», «_maxNewLines»
 	'''

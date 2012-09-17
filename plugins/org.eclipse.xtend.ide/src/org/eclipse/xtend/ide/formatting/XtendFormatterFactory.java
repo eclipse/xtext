@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.formatting;
 
 import java.util.List;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -34,7 +36,9 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XtendFormatterFactory implements IContentFormatterFactory {
-
+	
+	private @Inject IPreferenceStoreAccess preferenceStoreAccess;
+	
 	public class ContentFormatter implements IContentFormatter {
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
@@ -84,15 +88,17 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 	@Inject
 	protected XtendFormatter formatter;
 
-	private IRendererConfigurationProvider cfgProvider = new IRendererConfigurationProvider() {
+	private IFormatterConfigurationProvider cfgProvider = new IFormatterConfigurationProvider() {
 		XtendFormatterConfig cfg = new XtendFormatterConfig();
 
 		public XtendFormatterConfig rendererConfiguration() {
+			//TODO need context here (IProject, IResource etc.)
+			IPreferenceStore preferenceStore = preferenceStoreAccess.getContextPreferenceStore(null);
 			return cfg;
 		}
 	};
 
-	public void setConfigurationProvider(IRendererConfigurationProvider provider) {
+	public void setConfigurationProvider(IFormatterConfigurationProvider provider) {
 		this.cfgProvider = provider;
 	}
 
