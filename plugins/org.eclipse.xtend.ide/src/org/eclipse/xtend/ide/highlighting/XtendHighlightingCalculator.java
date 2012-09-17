@@ -8,9 +8,11 @@
 package org.eclipse.xtend.ide.highlighting;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -28,13 +30,11 @@ import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
@@ -70,11 +70,13 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Inject
 	private Provider<DefaultIndentationHandler> indentationHandlerProvider;
 
-	private Keyword createKeyword;
+	private Set<Keyword> contextualKeywords;
 
 	@Inject
 	protected void setXtendGrammarAccess(XtendGrammarAccess grammarAccess) {
-		this.createKeyword = grammarAccess.getValidIDAccess().getCreateKeyword_1();
+		contextualKeywords = newLinkedHashSet();
+		this.contextualKeywords.add(grammarAccess.getValidIDAccess().getCreateKeyword_1());
+		this.contextualKeywords.add(grammarAccess.getValidIDAccess().getAnnotationKeyword_2());
 	}
 
 	@Override
@@ -161,7 +163,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
 			TerminalRule idRule) {
 		super.highlightSpecialIdentifiers(leafNode, acceptor, idRule);
-		if (leafNode.getGrammarElement() == createKeyword) {
+		if (contextualKeywords.contains(leafNode.getGrammarElement())) {
 			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(),
 					DefaultHighlightingConfiguration.DEFAULT_ID);
 		}
