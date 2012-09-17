@@ -100,11 +100,11 @@ public class FeatureCallRequest extends AbstractRequest {
   public JvmTypeReference getDeclaredType() {
     JvmTypeReference _switchResult = null;
     JvmExecutable _feature = this.getFeature();
-    final JvmExecutable getFeature = _feature;
+    final JvmExecutable f = _feature;
     boolean _matched = false;
     if (!_matched) {
-      if (getFeature instanceof JvmOperation) {
-        final JvmOperation _jvmOperation = (JvmOperation)getFeature;
+      if (f instanceof JvmOperation) {
+        final JvmOperation _jvmOperation = (JvmOperation)f;
         _matched=true;
         JvmTypeReference _returnType = _jvmOperation.getReturnType();
         _switchResult = _returnType;
