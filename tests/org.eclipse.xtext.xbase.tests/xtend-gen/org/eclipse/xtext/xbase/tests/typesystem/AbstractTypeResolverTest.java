@@ -853,6 +853,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_12() throws Exception {
+    this.resolvesTo("if (true) newArrayList else <String>newHashSet", "AbstractCollection<String> & Serializable & Cloneable");
+  }
+  
+  @Test
+  public void testIfExpression_13() throws Exception {
+    this.resolvesTo("if (true) <StringBuffer>newArrayList else <String>newHashSet", "AbstractCollection<? extends Serializable & CharSequence> & Serializable & Cloneable");
+  }
+  
+  @Test
+  public void testIfExpression_14() throws Exception {
+    this.resolvesTo("if (true) newArrayList else newHashSet", "AbstractCollection<Object> & Serializable & Cloneable");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");
@@ -1666,6 +1681,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCall_37() throws Exception {
     this.resolvesTo("java::util::Arrays::asList(\'\', \'\', \'\').map(s | s.length()).fold(0) [ l, r | if (l > r) l else r]", "Integer");
+  }
+  
+  @Test
+  public void testFeatureCall_38() throws Exception {
+    this.resolvesTo("(null as Iterable<Integer>).fold(0) [ l, r | if (l > r) l else r]", "Integer");
   }
   
   @Test

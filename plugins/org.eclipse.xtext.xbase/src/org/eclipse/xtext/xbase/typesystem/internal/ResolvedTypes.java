@@ -35,18 +35,28 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
+import org.eclipse.xtext.xbase.typesystem.util.CustomTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -538,21 +548,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 			if (resolvedTypeParameters.add(handle)) {
 				if (boundTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(boundTypeArgument.getActualVariance()) == VarianceInfo.INVARIANT) {
-					List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
-					for(int i = 0; i < existingTypeArguments.size(); i++) {
-						LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
-						if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
-							if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-								UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
-								// resolve similar pending type arguments, too
-								if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
-									acceptHint(existingReference.getHandle(), boundTypeArgument);
-								}
-							}
-						}
-					}
+					resolveDependentTypeArguments(handle, boundTypeArgument);
 				}
-				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
+				if (isRecursive(handle, boundTypeArgument.getTypeReference())) {
+					LightweightBoundTypeArgument boundWithoutRecursion = removeRecursiveTypeArguments(handle, boundTypeArgument);
+					ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundWithoutRecursion));
+				} else {
+					ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
+				}
 			}
 		} else {
 			if (!isResolved(handle)) {
@@ -575,10 +578,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					}
 					UnboundTypeReference currentUnbound = getUnboundTypeReference(handle);
 					ensureTypeParameterHintsMapExists().put(
-							other.getHandle(),
-							new LightweightBoundTypeArgument(currentUnbound, boundTypeArgument.getSource(),
-									boundTypeArgument.getOrigin(), boundTypeArgument.getDeclaredVariance(),
-									boundTypeArgument.getActualVariance()));
+							other.getHandle(), copyBoundTypeArgument(currentUnbound, boundTypeArgument));
 				}
 				ensureTypeParameterHintsMapExists().put(handle, boundTypeArgument);
 			} else {
@@ -586,7 +586,159 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 	}
+
+	protected LightweightBoundTypeArgument copyBoundTypeArgument(LightweightTypeReference typeReference,
+			LightweightBoundTypeArgument boundTypeArgument) {
+		return new LightweightBoundTypeArgument(typeReference, boundTypeArgument.getSource(),
+				boundTypeArgument.getOrigin(), boundTypeArgument.getDeclaredVariance(),
+				boundTypeArgument.getActualVariance());
+	}
+
+	protected LightweightBoundTypeArgument removeRecursiveTypeArguments(final Object handle,
+			LightweightBoundTypeArgument boundTypeArgument) {
+		LightweightTypeReference boundArgumentWithoutRecursion = new CustomTypeParameterSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), boundTypeArgument.getTypeReference().getOwner()) {
+
+			@Override
+			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, ConstraintVisitingInfo visiting) {
+				if (!handle.equals(reference.getHandle())) {
+					return reference;
+				}
+				JvmTypeParameter typeParameter = reference.getTypeParameter();
+				if (!visiting.tryVisit(typeParameter)) {
+					LightweightTypeReference mappedReference = getDeclaredUpperBound(typeParameter, visiting);
+					getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+					if (mappedReference != null)
+						return mappedReference;
+					return getObjectReference(typeParameter);
+				}
+				try {
+					LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(typeParameter);
+					if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+						LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
+						return result;
+					} else {
+						LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+						getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+						return mappedReference;
+					}
+				} finally {
+					visiting.didVisit(typeParameter);
+				}
+			}
+			
+			@Override
+			protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, ConstraintVisitingInfo visiting) {
+				if (reference.isResolved() && reference.isOwnedBy(getOwner()))
+					return reference;
+				LightweightTypeReference lowerBound = reference.getLowerBound();
+				if (lowerBound instanceof UnboundTypeReference) {
+					if (handle.equals(((UnboundTypeReference) lowerBound).getHandle())) {
+						WildcardTypeReference result = new WildcardTypeReference(getOwner());
+						for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
+							result.addUpperBound(visitTypeArgument(upperBound, visiting));
+						}
+						return result;
+					}
+				}
+				return super.doVisitWildcardTypeReference(reference, visiting);
+			}
+			
+			@Override
+			@Nullable
+			protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
+				return reference;
+			}
+			
+		}.substitute(boundTypeArgument.getTypeReference());
+		LightweightBoundTypeArgument boundWithoutRecursion = copyBoundTypeArgument(boundArgumentWithoutRecursion, boundTypeArgument);
+		return boundWithoutRecursion;
+	}
+
+	protected void resolveDependentTypeArguments(final Object handle, LightweightBoundTypeArgument boundTypeArgument) {
+		List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
+		for(int i = 0; i < existingTypeArguments.size(); i++) {
+			LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
+			if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
+				if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+					UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+					// resolve similar pending type arguments, too
+					if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
+						acceptHint(existingReference.getHandle(), boundTypeArgument);
+					}
+				}
+			}
+		}
+	}
 	
+	protected boolean isRecursive(final Object handle, LightweightTypeReference typeReference) {
+		return typeReference.accept(new TypeReferenceVisitorWithNonNullResult<Boolean>() {
+			@Override
+			protected Boolean doVisitUnboundTypeReference(UnboundTypeReference reference) {
+				return handle.equals(reference.getHandle());
+			}
+			@Override
+			protected Boolean doVisitAnyTypeReference(AnyTypeReference reference) {
+				return Boolean.FALSE;
+			}
+			@Override
+			protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
+				if (reference.isResolved())
+					return Boolean.FALSE;
+				for(LightweightTypeReference typeArgument: reference.getTypeArguments()) {
+					if (typeArgument.accept(this)) {
+						return Boolean.TRUE;
+					}
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			protected Boolean doVisitCompoundTypeReference(CompoundTypeReference reference) {
+				if (reference.isResolved())
+					return Boolean.FALSE;
+				for(LightweightTypeReference component: reference.getComponents()) {
+					if (component.accept(this)) {
+						return Boolean.TRUE;
+					}
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			protected Boolean doVisitFunctionTypeReference(FunctionTypeReference reference) {
+				if (reference.isResolved())
+					return Boolean.FALSE;
+				LightweightTypeReference returnType = reference.getReturnType();
+				if (returnType != null && returnType.accept(this)) {
+					return Boolean.TRUE;
+				}
+				for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
+					if (parameterType.accept(this)) {
+						return Boolean.TRUE;
+					}
+				}
+				return doVisitParameterizedTypeReference(reference);
+			}
+			@Override
+			protected Boolean doVisitArrayTypeReference(ArrayTypeReference reference) {
+				return reference.getComponentType().accept(this);
+			}
+			@Override
+			protected Boolean doVisitWildcardTypeReference(WildcardTypeReference reference) {
+				if (reference.isResolved())
+					return Boolean.FALSE;
+				LightweightTypeReference lowerBound = reference.getLowerBound();
+				if (lowerBound != null && lowerBound.accept(this)) {
+					return Boolean.TRUE;
+				}
+				for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
+					if (upperBound.accept(this)) {
+						return Boolean.TRUE;
+					}
+				}
+				return Boolean.FALSE;
+			}
+		});
+	}
+
 	public boolean isResolved(Object handle) {
 		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
 	}
@@ -628,7 +780,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					addNonRecursiveHints(hint, getHints(otherHandle), seenHandles, result);
 				}
 			} else {
-				result.add(hint);
+				if (!result.contains(hint))
+					result.add(hint);
 			}
 		}
 	}

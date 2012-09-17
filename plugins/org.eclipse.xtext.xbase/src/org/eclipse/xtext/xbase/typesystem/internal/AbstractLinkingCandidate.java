@@ -39,10 +39,8 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -254,10 +252,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	protected void initializeArgumentTypeComputation() {
 		if (arguments != null)
 			return;
-		if (expression instanceof XAssignment && !(getFeature() instanceof JvmExecutable))
-			arguments = new AssignmentArguments(this);
-		else
-			arguments = new FeatureCallArguments(this);
+		arguments = state.getResolver().getExpressionArgumentFactory().createExpressionArguments(expression, this);
 	}
 
 	protected void computeArgumentType(int argumentIndex) {
@@ -272,8 +267,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 		if (arguments.isVarArgs()) {
 			ArrayTypeReference lastParameterType = arguments.getVarArgType();
-			final LightweightTypeReference componentType = lastParameterType.getComponentType();
-			
+			LightweightTypeReference componentType = lastParameterType.getComponentType();
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 			if (arguments.isExactArity()) {

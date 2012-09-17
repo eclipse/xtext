@@ -134,14 +134,32 @@ public class XbaseTypeComputer implements ITypeComputer {
 		conditionExpectation.computeTypes(object.getIf());
 		// TODO instanceof may specialize the types in the nested expression
 		// TODO then expression may influence the expected type of else and vice versa
-		state.computeTypes(object.getThen());
-		XExpression elseExpression = object.getElse();
+		state.computeTypes(getThen(object));
+		XExpression elseExpression = getElse(object);
 		if (elseExpression != null) {
-			state.computeTypes(object.getElse());
+			state.computeTypes(elseExpression);
 		} else {
 			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
 			state.acceptActualType(anyType);
 		}
+	}
+
+	/**
+	 * Only for testing purpose.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected XExpression getElse(XIfExpression ifExpression) {
+		return ifExpression.getElse();
+	}
+
+	/**
+	 * Only for testing purpose.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected XExpression getThen(XIfExpression ifExpression) {
+		return ifExpression.getThen();
 	}
 	
 	protected void _computeTypes(XSwitchExpression object, ITypeComputationState state) {
@@ -152,7 +170,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			allCasePartsState = allCasePartsState.assignType(object, computedType.getActualExpressionType());
 		}
 		// TODO case expressions may influence the expected type of other cases
-		for(XCasePart casePart: object.getCases()) {
+		for(XCasePart casePart: getCases(object)) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
 			ITypeComputationState casePartState = allCasePartsState.withTypeCheckpoint();
 			if (casePart.getTypeGuard() != null) {
@@ -180,6 +198,15 @@ public class XbaseTypeComputer implements ITypeComputer {
 			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
 			state.acceptActualType(anyType);
 		}
+	}
+
+	/**
+	 * Only for testing purpose.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected List<XCasePart> getCases(XSwitchExpression switchExpression) {
+		return switchExpression.getCases();
 	}
 	
 	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {

@@ -44,6 +44,9 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	protected TypeConformanceResult tryResolveAndCheckConformance(UnboundTypeReference left, LightweightTypeReference right,
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
+		if (hints.isEmpty() && !param.unboundComputationAddsHints) {
+			return TypeConformanceResult.FAILED; 
+		}
 		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		int laterCount = 0;

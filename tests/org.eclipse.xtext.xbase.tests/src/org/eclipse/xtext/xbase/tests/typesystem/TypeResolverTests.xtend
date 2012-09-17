@@ -515,6 +515,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	@Ignore("fails in old implementation") @Test override testIfExpression_11() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_12() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_4() throws Exception {
 		fail("fails in old implementation")
@@ -1085,6 +1088,315 @@ class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
 		typeResolver
 	}
 	
+}
+
+/**
+ * A test that triggers the computation of argument types in reverse order.
+ * Furthermore it will shuffle the order of branches in if and switch expressions.
+ * @author Sebastian Zarnekow
+ */
+class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
+	
+	static val shuffleInjector = ShuffledTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		shuffleInjector
+	}
+	
+	@Inject
+	IBatchTypeResolver typeResolver;
+	
+	override getTypeResolver() {
+		typeResolver
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testOverloadedOperators_08() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testOverloadedOperators_09() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testOverloadedOperators_10() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testOverloadedOperators_15() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testClosure_03() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testClosure_30() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testClosure_31() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_01() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_02() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_05() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_06() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_09() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testEMap_10() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testMemberFeatureCall_02() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_07() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_07_01() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_07_02() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_07_03() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_09() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_13_6() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_17_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_17_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_18_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_18_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_19_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_19_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_20_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_20_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_21_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_21_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_22_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_22_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_23_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_23_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_24_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_24_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_25_a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_25_b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_25_c() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_26() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_26a() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_26b() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_27() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_28() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_30() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_31() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_37() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_38() throws Exception {
+		fail("TODO deferred closure typing")
+	}
 }
 
 /**

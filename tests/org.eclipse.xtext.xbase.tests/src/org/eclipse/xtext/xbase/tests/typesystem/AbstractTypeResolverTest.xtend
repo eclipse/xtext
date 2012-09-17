@@ -782,6 +782,18 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesTo("AbstractStringBuilder & Serializable")
 	}
 
+	@Test def void testIfExpression_12() throws Exception {
+		"if (true) newArrayList else <String>newHashSet".resolvesTo("AbstractCollection<String> & Serializable & Cloneable")
+	}
+	
+	@Test def void testIfExpression_13() throws Exception {
+		"if (true) <StringBuffer>newArrayList else <String>newHashSet".resolvesTo("AbstractCollection<? extends Serializable & CharSequence> & Serializable & Cloneable")
+	}
+	
+	@Test def void testIfExpression_14() throws Exception {
+		"if (true) newArrayList else newHashSet".resolvesTo("AbstractCollection<Object> & Serializable & Cloneable")
+	}
+	
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
 		"switch true { case true : 's' case false : new Object() default: 'bar'}".resolvesTo("Object")
@@ -1688,6 +1700,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testFeatureCall_37() throws Exception {
 		"java::util::Arrays::asList('', '', '').map(s | s.length()).fold(0) [ l, r | if (l > r) l else r]".resolvesTo("Integer")
+	}
+	
+	@Test def void testFeatureCall_38() throws Exception {
+		"(null as Iterable<Integer>).fold(0) [ l, r | if (l > r) l else r]".resolvesTo("Integer")
 	}
 	
 	@Test def void testToList_01() throws Exception {

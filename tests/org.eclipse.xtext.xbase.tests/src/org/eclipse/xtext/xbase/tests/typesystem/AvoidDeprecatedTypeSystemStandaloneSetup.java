@@ -43,32 +43,34 @@ public class AvoidDeprecatedTypeSystemStandaloneSetup extends XbaseStandaloneSet
 	
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new XbaseRuntimeModule() {
-			@Override
-			public ClassLoader bindClassLoaderToInstance() {
-				return AbstractXbaseTestCase.class.getClassLoader();
-			}
-			@SuppressWarnings("unused")
-			public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
-				return SynchronizedXtextResourceSetProvider.class;
-			}
-			@Override
-			public Class<? extends IScopeProvider> bindIScopeProvider() {
-				return DisabledXbaseScopeProvider.class;
-			}
-			
-			@Override
-			public void configureLinkingIScopeProvider(Binder binder) {
-				binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseBatchScopeProvider.class);
-			}
-			
-			@SuppressWarnings("unused")
-			public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
-				return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
-			}
-		});
+		return Guice.createInjector(new TestXbaseRuntimeModule());
 	}
 	
+	public static class TestXbaseRuntimeModule extends XbaseRuntimeModule {
+		@Override
+		public ClassLoader bindClassLoaderToInstance() {
+			return AbstractXbaseTestCase.class.getClassLoader();
+		}
+
+		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
+			return SynchronizedXtextResourceSetProvider.class;
+		}
+
+		@Override
+		public Class<? extends IScopeProvider> bindIScopeProvider() {
+			return DisabledXbaseScopeProvider.class;
+		}
+
+		@Override
+		public void configureLinkingIScopeProvider(Binder binder) {
+			binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseBatchScopeProvider.class);
+		}
+
+		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+			return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
 		@Override
