@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -11,11 +12,13 @@ import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -34,6 +37,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
+  private final static Injector batchInjector = new Function0<Injector>() {
+    public Injector apply() {
+      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
+      return _setup;
+    }
+  }.apply();
+  
+  public Injector getInjector() {
+    return TypeComputationStateTest.batchInjector;
+  }
+  
   @Inject
   private PublicReentrantTypeResolver resolver;
   

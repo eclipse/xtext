@@ -24,6 +24,12 @@ import org.junit.Test
  */
 class ExpectationTest extends AbstractXbaseTestCase {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject PublicReentrantTypeResolver resolver
 	
 	@Inject ExpectationTestingTypeComputer typeComputer

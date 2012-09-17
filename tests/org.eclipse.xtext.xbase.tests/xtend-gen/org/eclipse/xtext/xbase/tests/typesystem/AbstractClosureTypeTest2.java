@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -42,6 +44,17 @@ import org.junit.rules.ErrorCollector;
  */
 @SuppressWarnings("all")
 public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
+  private final static Injector batchInjector = new Function0<Injector>() {
+    public Injector apply() {
+      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
+      return _setup;
+    }
+  }.apply();
+  
+  public Injector getInjector() {
+    return AbstractClosureTypeTest2.batchInjector;
+  }
+  
   @Inject
   private IBatchTypeResolver typeResolver;
   

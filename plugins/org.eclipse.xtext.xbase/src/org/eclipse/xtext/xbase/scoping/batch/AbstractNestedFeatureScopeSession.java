@@ -29,12 +29,16 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureScopeSession {
 	
 	private final AbstractFeatureScopeSession parent;
-	private final FeatureScopes featureScopeProvider;
+	private final FeatureScopes featureScopes;
+	private final ConstructorScopes constructorScopes;
+	private final TypeScopes typeScopes;
 	private int id;
 
-	protected AbstractNestedFeatureScopeSession(AbstractFeatureScopeSession parent, FeatureScopes featureScopeProvider) {
+	protected AbstractNestedFeatureScopeSession(AbstractFeatureScopeSession parent) {
 		this.parent = parent;
-		this.featureScopeProvider = featureScopeProvider;
+		this.featureScopes = parent.getFeatureScopes();
+		this.typeScopes = parent.getTypeScopes();
+		this.constructorScopes = parent.getConstructorScopes();
 		this.id = parent.getId() + 1;
 	}
 	
@@ -45,7 +49,17 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 
 	@Override
 	protected FeatureScopes getFeatureScopes() {
-		return featureScopeProvider;
+		return featureScopes;
+	}
+	
+	@Override
+	protected ConstructorScopes getConstructorScopes() {
+		return constructorScopes;
+	}
+	
+	@Override
+	protected TypeScopes getTypeScopes() {
+		return typeScopes;
 	}
 	
 	protected AbstractFeatureScopeSession getParent() {

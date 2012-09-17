@@ -7,21 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.List;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
-import org.eclipse.xtext.xbase.XExpression;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FeatureScopeSessionWithDynamicExtensions extends AbstractNestedFeatureScopeSession {
+public class DelegatingScopes {
 
-	private final List<XExpression> extensionProviders;
-
-	public FeatureScopeSessionWithDynamicExtensions(AbstractFeatureScopeSession parent,
-			List<XExpression> extensionProviders) {
-		super(parent);
-		this.extensionProviders = extensionProviders;
+	@Inject
+	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+	private IScopeProvider delegate;
+	
+	public IScopeProvider getDelegate() {
+		return delegate;
 	}
-
+	
 }

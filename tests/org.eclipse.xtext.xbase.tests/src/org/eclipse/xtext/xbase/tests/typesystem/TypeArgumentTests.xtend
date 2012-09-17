@@ -38,6 +38,12 @@ import org.junit.Ignore
  */
 class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject
 	IBatchTypeResolver typeResolver;
 	

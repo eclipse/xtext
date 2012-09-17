@@ -18,6 +18,12 @@ import org.junit.Test
  */
 class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject
 	IBatchTypeResolver typeResolver;
 	

@@ -30,8 +30,10 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.scoping.batch.AbstractFeatureScopeSession;
+import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.scoping.batch.TypeScopes;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData.ListFunction1;
 import org.eclipse.xtext.xbase.typesystem.computation.ClosureTypeComputer;
@@ -497,6 +499,16 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 
 		@Override
 		protected FeatureScopes getFeatureScopes() {
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		protected ConstructorScopes getConstructorScopes() {
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		protected TypeScopes getTypeScopes() {
 			throw new UnsupportedOperationException();
 		}
 

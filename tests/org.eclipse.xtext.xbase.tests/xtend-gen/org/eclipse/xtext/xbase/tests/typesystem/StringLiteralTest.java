@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -14,11 +15,13 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -30,6 +33,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class StringLiteralTest extends AbstractXbaseTestCase {
+  private final static Injector batchInjector = new Function0<Injector>() {
+    public Injector apply() {
+      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
+      return _setup;
+    }
+  }.apply();
+  
+  public Injector getInjector() {
+    return StringLiteralTest.batchInjector;
+  }
+  
   @Inject
   private IBatchTypeResolver typeResolver;
   

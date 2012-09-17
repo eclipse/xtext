@@ -24,6 +24,12 @@ import org.junit.Rule
  */
 class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject
 	IBatchTypeResolver typeResolver;
 	

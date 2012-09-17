@@ -44,6 +44,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IScope getScope(EObject context, EReference reference, IResolvedTypes types) {
 		if (getFeatureScopes().isFeatureCallScope(reference)) {
 			return createFeatureCallScope(context, reference, types);
+		} else if (getConstructorScopes().isConstructorCallScope(reference)) {
+			return createConstructorScope(context, reference, types);
+		} else if (getTypeScopes().isTypeScope(reference)) {
+			return createTypeScope(context, reference, types);
 		} else {
 			return getDefaultScopeProvider().getScope(context, reference);
 		}
@@ -53,11 +57,13 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 			List<JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
 			return this;
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, getFeatureScopes(), staticFeatureProviders, extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, staticFeatureProviders, extensionProviders);
 		return result;
 	}
 
 	protected abstract FeatureScopes getFeatureScopes();
+	protected abstract ConstructorScopes getConstructorScopes();
+	protected abstract TypeScopes getTypeScopes();
 	protected abstract IScopeProvider getDefaultScopeProvider();
 	
 	/**
@@ -68,7 +74,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession addToExtensionScope(List<XExpression> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return this;
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, getFeatureScopes(), extensionProviders);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, extensionProviders);
 		return result;
 	}
 
@@ -83,17 +89,25 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		if (elements.containsKey(IFeatureNames.THIS)) {
 			JvmIdentifiableElement associatedWithThis = elements.get(IFeatureNames.THIS);
 			if (associatedWithThis instanceof JvmType) {
-				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, getFeatureScopes(), (JvmType) associatedWithThis);
-				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, getFeatureScopes(), elements);
+				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, (JvmType) associatedWithThis);
+				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
 				return result;
 			}
 		}
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, getFeatureScopes(), elements);
+		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, elements);
 		return result;
 	}
 
 	protected IScope createFeatureCallScope(EObject context, EReference reference, IResolvedTypes resolvedTypes) {
 		return getFeatureScopes().createFeatureCallScope(context, reference, this, resolvedTypes);
+	}
+	
+	protected IScope createConstructorScope(EObject context, EReference reference, IResolvedTypes resolvedTypes) {
+		return getConstructorScopes().createConstructorScope(context, reference, this, resolvedTypes);
+	}
+	
+	protected IScope createTypeScope(EObject context, EReference reference, IResolvedTypes resolvedTypes) {
+		return getTypeScopes().createTypeScope(context, reference, this, resolvedTypes);
 	}
 	
 	public Collection<IEObjectDescription> getLocalElements() {

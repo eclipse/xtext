@@ -30,14 +30,30 @@ import com.google.inject.Inject;
 public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 
 	@Inject
-	private FeatureScopes featureScopeProvider;
+	private FeatureScopes featureScopes;
+	
+	@Inject
+	private ConstructorScopes constructorScopes;
+	
+	@Inject
+	private TypeScopes typeScopes;
 	
 	@Inject
 	private IScopeProvider scopeProvider;
 
 	@Override
 	protected FeatureScopes getFeatureScopes() {
-		return featureScopeProvider;
+		return featureScopes;
+	}
+	
+	@Override
+	protected TypeScopes getTypeScopes() {
+		return typeScopes;
+	}
+	
+	@Override
+	protected ConstructorScopes getConstructorScopes() {
+		return constructorScopes;
 	}
 	
 	@Override

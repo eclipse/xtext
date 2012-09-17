@@ -1,13 +1,16 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractIdentifiableTypeTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -18,6 +21,17 @@ import org.junit.Assert;
  */
 @SuppressWarnings("all")
 public class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
+  private final static Injector batchInjector = new Function0<Injector>() {
+    public Injector apply() {
+      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
+      return _setup;
+    }
+  }.apply();
+  
+  public Injector getInjector() {
+    return BatchIdentifiableTypeTests.batchInjector;
+  }
+  
   @Inject
   private IBatchTypeResolver typeResolver;
   

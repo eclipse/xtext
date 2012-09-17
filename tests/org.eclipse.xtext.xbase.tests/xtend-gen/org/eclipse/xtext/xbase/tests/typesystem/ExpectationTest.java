@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -10,10 +11,12 @@ import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTestingTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -28,6 +31,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ExpectationTest extends AbstractXbaseTestCase {
+  private final static Injector batchInjector = new Function0<Injector>() {
+    public Injector apply() {
+      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
+      return _setup;
+    }
+  }.apply();
+  
+  public Injector getInjector() {
+    return ExpectationTest.batchInjector;
+  }
+  
   @Inject
   private PublicReentrantTypeResolver resolver;
   

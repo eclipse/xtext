@@ -22,6 +22,12 @@ import static org.junit.Assert.*
  */
 class StringLiteralTest extends AbstractXbaseTestCase {
 	
+	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
+	
+	override getInjector() {
+		batchInjector
+	}
+	
 	@Inject
 	IBatchTypeResolver typeResolver
 	
