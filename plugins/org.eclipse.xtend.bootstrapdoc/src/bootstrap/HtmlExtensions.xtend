@@ -182,9 +182,9 @@ class HtmlExtensions {
 	
 	def protected dispatch CharSequence toHtml(CodeBlock it, ParagraphState state) {
 		val code = contents.toHtml(state).toString
-		if (code.contains('\n') || eContainer?.eContainingFeature == XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS && switch eContainer {
+		if (code.contains('\n') || eContainer?.eContainingFeature == XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS && switch x:eContainer {
 			TextOrMarkup: 
-				(eContainer as TextOrMarkup).contents.size == 1
+				x.contents.size == 1
 			default: false
 		}) {
 			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
