@@ -95,7 +95,7 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			return;
 		if (deleteMarkers) {
 			for(String markerId: getMarkerIds()) {
-				resource.deleteMarkers(markerId, false, IResource.DEPTH_INFINITE);	
+				resource.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);	
 			}
 		}
 		if (!issues.isEmpty()) {
