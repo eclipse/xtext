@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.AbstractTypeReferencePairWalker.CompoundTypeReferenceTraverser;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

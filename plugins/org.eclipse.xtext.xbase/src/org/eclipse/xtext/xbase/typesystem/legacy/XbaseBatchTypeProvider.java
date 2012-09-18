@@ -5,13 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem;
+package org.eclipse.xtext.xbase.typesystem.legacy;
 
 import static java.util.Collections.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -21,6 +22,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
@@ -28,14 +31,16 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.4
  */
 public class XbaseBatchTypeProvider implements ITypeProvider {
 	
 	@Inject private IBatchTypeResolver typeResolver;
 	@Inject private ILogicalContainerProvider containerProvider;
 	
-	protected IResolvedTypes getResolvedTypes(EObject x) {
-		return typeResolver.resolveTypes(x);
+	@NonNull
+	protected IResolvedTypes getResolvedTypes(EObject object) {
+		return typeResolver.resolveTypes(object);
 	}
 
 	public JvmTypeReference getExpectedReturnType(XExpression expression, boolean rawType) {

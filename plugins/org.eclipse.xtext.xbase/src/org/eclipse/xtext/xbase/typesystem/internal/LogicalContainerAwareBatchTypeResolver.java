@@ -27,7 +27,7 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
-	protected IReentrantTypeResolver getTypeResolver(EObject object) {
+	protected EObject getEntryPoint(EObject object) {
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(object);
 		if (logicalContainer == null) {
 			throw new IllegalStateException("expression is not contained in a logical container");
@@ -40,8 +40,7 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 		} else {
 			throw new IllegalStateException("logicalContainer is not contained in a declaredType");
 		}
-		IReentrantTypeResolver result = getOrCreateResolver(declaredType);
-		return result;
+		return declaredType;
 	}
 
 }

@@ -62,4 +62,8 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 		return featureScopeProvider.isFeatureCallScope(reference);
 	}
 
+	public boolean isBatchScopeable(EReference reference) {
+		return isConstructorCallScope(reference) || isFeatureCallScope(reference);
+	}
+
 }

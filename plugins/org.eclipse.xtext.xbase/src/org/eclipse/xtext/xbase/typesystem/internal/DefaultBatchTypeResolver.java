@@ -68,9 +68,13 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 	}
 
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
-		EObject root = EcoreUtil.getRootContainer(object);
+		EObject root = getEntryPoint(object);
 		IReentrantTypeResolver result = getOrCreateResolver(root);
 		return result;
+	}
+
+	protected EObject getEntryPoint(EObject object) {
+		return EcoreUtil.getRootContainer(object);
 	}
 
 	protected IReentrantTypeResolver getOrCreateResolver(EObject root) {
