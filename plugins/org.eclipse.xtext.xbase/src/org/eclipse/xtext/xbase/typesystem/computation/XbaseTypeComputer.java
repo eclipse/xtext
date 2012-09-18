@@ -57,7 +57,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollec
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.typing.NumberLiterals;
 
 import com.google.inject.Inject;
 

@@ -6,10 +6,10 @@ package org.eclipse.xtext.purexbase;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 

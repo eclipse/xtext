@@ -18,10 +18,12 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase.SynchronizedXtextResourceSetProvider;
@@ -65,9 +67,14 @@ public class AvoidDeprecatedTypeSystemStandaloneSetup extends XbaseStandaloneSet
 		public void configureLinkingIScopeProvider(Binder binder) {
 			binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseBatchScopeProvider.class);
 		}
-
+		
 		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
 			return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
+		}
+		
+		@Override
+		public Class<? extends XtextResource> bindXtextResource() {
+			return BatchLinkableResource.class;
 		}
 	}
 

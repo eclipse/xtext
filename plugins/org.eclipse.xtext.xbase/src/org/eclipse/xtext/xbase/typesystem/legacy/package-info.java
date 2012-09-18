@@ -5,23 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
-
-import com.google.inject.ImplementedBy;
-
 /**
+ * Classes that serve as adapter to the old implementations or interfaces
+ * of the type system. 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
-@ImplementedBy(CachingBatchTypeResolver.class)
-public interface IBatchTypeResolver {
-
-	@NonNull
-	IResolvedTypes resolveTypes(@Nullable EObject object);
-	
-}
+package org.eclipse.xtext.xbase.typesystem.legacy;

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
