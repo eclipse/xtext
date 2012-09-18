@@ -170,47 +170,7 @@ public class LazyLinkingResource extends XtextResource {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-				try {
-					if (!resolving.add(triple))
-						return handleCyclicResolution(triple);
-					Set<String> unresolveableProxies = getUnresolvableURIFragments();
-					if (unresolveableProxies.contains(uriFragment))
-						return null;
-					EReference reference = triple.getSecond();
-					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
-							triple.getFirst(), 
-							reference,
-							triple.getThird());
-
-					if (linkedObjects.isEmpty()) {
-						if (isUnresolveableProxyCacheable(triple))
-							unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-					if (linkedObjects.size() > 1)
-						throw new IllegalStateException("linkingService returned more than one object for fragment "
-								+ uriFragment);
-					EObject result = linkedObjects.get(0);
-					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-						log.error("An element of type " + result.getClass().getName()
-								+ " is not assignable to the reference " + reference.getEContainingClass().getName()
-								+ "." + reference.getName());
-						if (isUnresolveableProxyCacheable(triple))
-							unresolveableProxies.add(uriFragment);
-						createAndAddDiagnostic(triple);
-						return null;
-					}
-
-					// remove previously added error markers, since everything should be fine now
-					unresolveableProxies.remove(uriFragment);
-					removeDiagnostic(triple);
-					return result;
-				} catch (IllegalNodeException ex) {
-					createAndAddDiagnostic(triple, ex);
-				} finally {
-					resolving.remove(triple);
-				}
+				return getEObject(uriFragment, triple);
 			}
 		} catch (RuntimeException e) {
 			getErrors().add(new ExceptionDiagnostic(e));
@@ -220,6 +180,54 @@ public class LazyLinkingResource extends XtextResource {
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
+		try {
+			if (!resolving.add(triple))
+				return handleCyclicResolution(triple);
+			Set<String> unresolveableProxies = getUnresolvableURIFragments();
+			if (unresolveableProxies.contains(uriFragment))
+				return null;
+			EReference reference = triple.getSecond();
+			List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
+					triple.getFirst(), 
+					reference,
+					triple.getThird());
+
+			if (linkedObjects.isEmpty()) {
+				if (isUnresolveableProxyCacheable(triple))
+					unresolveableProxies.add(uriFragment);
+				createAndAddDiagnostic(triple);
+				return null;
+			}
+			if (linkedObjects.size() > 1)
+				throw new IllegalStateException("linkingService returned more than one object for fragment "
+						+ uriFragment);
+			EObject result = linkedObjects.get(0);
+			if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+				log.error("An element of type " + result.getClass().getName()
+						+ " is not assignable to the reference " + reference.getEContainingClass().getName()
+						+ "." + reference.getName());
+				if (isUnresolveableProxyCacheable(triple))
+					unresolveableProxies.add(uriFragment);
+				createAndAddDiagnostic(triple);
+				return null;
+			}
+
+			// remove previously added error markers, since everything should be fine now
+			unresolveableProxies.remove(uriFragment);
+			removeDiagnostic(triple);
+			return result;
+		} catch (IllegalNodeException ex) {
+			createAndAddDiagnostic(triple, ex);
+			return null;
+		} finally {
+			resolving.remove(triple);
+		}
 	}
 
 	/**
