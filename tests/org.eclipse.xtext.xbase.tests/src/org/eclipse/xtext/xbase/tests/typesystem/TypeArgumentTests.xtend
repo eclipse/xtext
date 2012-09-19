@@ -32,17 +32,16 @@ import org.junit.After
 import static org.junit.Assert.*
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject
 	IBatchTypeResolver typeResolver;

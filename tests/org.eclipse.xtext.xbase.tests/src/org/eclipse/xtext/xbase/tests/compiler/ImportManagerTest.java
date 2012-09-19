@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -33,9 +34,8 @@ public class ImportManagerTest extends AbstractXbaseTestCase {
 
 	private JvmDeclaredType fooClass;
 	
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		expression = expression("null");
 		fooClass = (JvmDeclaredType) typeReferences.findDeclaredType(foo.TestClass.class, expression);
 		importManager = new ImportManager(true, fooClass);

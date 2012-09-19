@@ -23,18 +23,17 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationStat
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
+import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
-	
+		
 	@Inject PublicReentrantTypeResolver resolver
 	
 	@Inject extension ReflectExtensions

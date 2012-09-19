@@ -25,6 +25,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import foo.TestAnnotation
 import foo.TestAnnotation2
+import org.junit.Before
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -35,9 +36,8 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
 	@Inject TypesFactory typesFactory;
 
-	override void setUp() {
-		super.setUp();
-		injector.injectMembers(this);
+	@Before
+	def void setUp() {
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(typeof(AbstractXbaseEvaluationTest));

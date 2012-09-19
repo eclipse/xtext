@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -34,9 +35,8 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 
 	private ResourceSet resourceSet;
 
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		resourceSet = get(XtextResourceSet.class);
 		resourceSet.getLoadOptions().put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware() {
 			
@@ -90,7 +90,6 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 	@Test public void testXbaseGenmodel() {
 		doTestResource("org.eclipse.xtext.xbase/model/Xbase.genmodel", "xbase", "xtype", "xAnnotations");
 	}
-	
 	
 	@Test public void testCommonTypes() {
 		doTestResource("org.eclipse.xtext.common.types/model/JavaVMTypes.ecore", "types");

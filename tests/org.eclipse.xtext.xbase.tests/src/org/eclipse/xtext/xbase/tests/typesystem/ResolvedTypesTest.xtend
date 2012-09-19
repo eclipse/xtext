@@ -16,17 +16,16 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ResolvedTypesTest extends AbstractXbaseTestCase {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject 
 	@Property 

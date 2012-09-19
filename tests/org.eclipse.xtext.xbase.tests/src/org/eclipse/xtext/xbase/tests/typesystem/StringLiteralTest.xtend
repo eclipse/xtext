@@ -16,17 +16,16 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class StringLiteralTest extends AbstractXbaseTestCase {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject
 	IBatchTypeResolver typeResolver

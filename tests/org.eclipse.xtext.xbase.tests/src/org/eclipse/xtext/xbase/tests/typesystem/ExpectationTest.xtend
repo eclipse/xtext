@@ -18,17 +18,17 @@ import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.Before
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ExpectationTest extends AbstractXbaseTestCase {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject PublicReentrantTypeResolver resolver
 	
@@ -84,8 +84,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		return this
 	}
 	
-	override setUp() throws Exception {
-		super.setUp()
+	@Before
+	def void setUp() throws Exception {
 		typeComputer.test = this
 		pendingAssert = false
 		resolver.typeComputer = typeComputer

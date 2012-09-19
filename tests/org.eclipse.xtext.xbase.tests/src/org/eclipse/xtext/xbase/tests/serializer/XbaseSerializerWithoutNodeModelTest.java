@@ -7,37 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.serializer.SerializerTester;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.junit.Before;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(FunctionTypeRefAwareInjectorProvider.class)
 public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluationTest {
-
-	static Injector injector = new XbaseStandaloneSetup() {
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new org.eclipse.xtext.xbase.XbaseRuntimeModule() {
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return AbstractXbaseTestCase.class.getClassLoader();
-				}
-				
-				@SuppressWarnings("unused")
-				public Class<? extends SerializerTester> bindSerializerTester() {
-					return XFunctionTypeRefAwareSerializerTester.class;
-				}
-			});
-		}
-	}.createInjectorAndDoEMFRegistration();
 
 	@Inject
 	private SerializerTester tester;
@@ -56,8 +39,4 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 		tester.assertSerializeWithoutNodeModel(expected);
 	}
 
-	@Before
-	public void setUp() throws Exception {
-		injector.injectMembers(this);
-	}
 }

@@ -15,17 +15,16 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
+import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject CommonTypeComputationServices services
 	

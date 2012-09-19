@@ -19,19 +19,16 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.After;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 
+	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		locationInFileProvider = get(ILocationInFileProvider.class);
-	}
-	
 	@After
 	public void tearDown() throws Exception {
 		locationInFileProvider = null;
