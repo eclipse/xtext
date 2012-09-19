@@ -40,7 +40,7 @@ public class BatchLinkingService {
 		if (reference.isMany())
 			throw new IllegalArgumentException("Not yet implemented for #many references");
 		batchTypeResolver.resolveTypes(context);
-		return (EObject) context.eGet(reference);
+		return (EObject) context.eGet(reference, false);
 	}
 
 }
