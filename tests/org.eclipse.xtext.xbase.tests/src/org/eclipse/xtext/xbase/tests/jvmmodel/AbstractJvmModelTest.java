@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.junit.runner.RunWith;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -17,29 +21,29 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@InjectWith(AbstractJvmModelTest.SimpleJvmModelTestInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public abstract class AbstractJvmModelTest extends AbstractXbaseTestCase {
 
-	static Injector injector = new XbaseStandaloneSetup() {
+	public static class SimpleJvmModelTestInjectorProvider extends XbaseInjectorProvider {
 		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new org.eclipse.xtext.xbase.XbaseRuntimeModule() {
-				
-				@Override
-				public void configure(com.google.inject.Binder binder) {
-					super.configure(binder);
-					binder.bind(IJvmModelInferrer.class).to(SimpleJvmModelInferrer.class);
-				}
-				
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return AbstractXbaseTestCase.class.getClassLoader();
-				}
-			});
+		protected Injector internalCreateInjector() {
+			return new SimpleJvmModelTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
-	}.createInjectorAndDoEMFRegistration();
-	
-	@Override
-	public Injector getInjector() {
-		return injector;
+
+		public static class SimpleJvmModelTestStandaloneSetup extends XbaseStandaloneSetup {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new XbaseTestRuntimeModule() {
+					@Override
+					public void configure(com.google.inject.Binder binder) {
+						super.configure(binder);
+						binder.bind(IJvmModelInferrer.class).to(SimpleJvmModelInferrer.class);
+					}
+				});
+			}
+		}
+		
 	}
+	
 }

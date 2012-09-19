@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.inject.Injector;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -13,6 +12,8 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -22,12 +23,11 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
-import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -36,23 +36,15 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = XbaseNewTypeSystemInjectorProvider.class)
 @SuppressWarnings("all")
 public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
-  private final static Injector batchInjector = new Function0<Injector>() {
-    public Injector apply() {
-      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
-      return _setup;
-    }
-  }.apply();
-  
-  public Injector getInjector() {
-    return AbstractBatchTypeResolverTest.batchInjector;
-  }
-  
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");

@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractOutputComparingCompilerTests extends AbstractXbaseTestCase {
+public abstract class AbstractOutputComparingCompilerTests extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider typeProvider;

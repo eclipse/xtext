@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 import foo.TestAnnotation;
 import foo.TestAnnotation2;
@@ -47,6 +46,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -69,21 +69,15 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Inject
   private TypesFactory typesFactory;
   
+  @Before
   public void setUp() {
-    try {
-      super.setUp();
-      Injector _injector = this.getInjector();
-      _injector.injectMembers(this);
-      this.javaCompiler.clearClassPath();
-      Class<? extends Object> _class = this.getClass();
-      this.javaCompiler.addClassPathOfClass(_class);
-      this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
-      this.javaCompiler.addClassPathOfClass(Functions.class);
-      this.javaCompiler.addClassPathOfClass(Provider.class);
-      this.javaCompiler.addClassPathOfClass(Supplier.class);
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    this.javaCompiler.clearClassPath();
+    Class<? extends Object> _class = this.getClass();
+    this.javaCompiler.addClassPathOfClass(_class);
+    this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
+    this.javaCompiler.addClassPathOfClass(Functions.class);
+    this.javaCompiler.addClassPathOfClass(Provider.class);
+    this.javaCompiler.addClassPathOfClass(Supplier.class);
   }
   
   @Test

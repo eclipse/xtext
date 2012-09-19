@@ -2,46 +2,39 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTestingTypeComputer;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = XbaseNewTypeSystemInjectorProvider.class)
 @SuppressWarnings("all")
 public class ExpectationTest extends AbstractXbaseTestCase {
-  private final static Injector batchInjector = new Function0<Injector>() {
-    public Injector apply() {
-      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
-      return _setup;
-    }
-  }.apply();
-  
-  public Injector getInjector() {
-    return ExpectationTest.batchInjector;
-  }
-  
   @Inject
   private PublicReentrantTypeResolver resolver;
   
@@ -137,8 +130,8 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     return this;
   }
   
+  @Before
   public void setUp() throws Exception {
-    super.setUp();
     this.typeComputer.setTest(this);
     this.pendingAssert = false;
     this.resolver.setTypeComputer(this.typeComputer);

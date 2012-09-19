@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate;
@@ -32,25 +33,28 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ShuffledTypeSystemStandaloneSetup extends AvoidDeprecatedTypeSystemStandaloneSetup {
-	
-	public static Injector setup() {
-		return new ShuffledTypeSystemStandaloneSetup().createInjectorAndDoEMFRegistration();
-	}
+public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSystemInjectorProvider {
 	
 	@Override
-	public Injector createInjector() {
-		return Guice.createInjector(new TestXbaseRuntimeModule() {
-			@SuppressWarnings("unused")
-			public Class<? extends XbaseTypeComputer> bindXbaseTypeComputer() {
-				return ShufflingXbaseTypeComputer.class;
-			}
-			
-			@SuppressWarnings("unused")
-			public Class<? extends ExpressionArgumentFactory> bindExpressionArgumentFactory() {
-				return ShufflingExpressionArgumentFactory.class;
-			}
-		});
+	protected Injector internalCreateInjector() {
+		return new XbaseShufflingNewTypeSystemTestStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
+
+	public static class XbaseShufflingNewTypeSystemTestStandaloneSetup extends XbaseStandaloneSetup {
+		@Override
+		public Injector createInjector() {
+			return Guice.createInjector(new XbaseNewTypeSystemTestRuntimeModule() {
+				@SuppressWarnings("unused")
+				public Class<? extends XbaseTypeComputer> bindXbaseTypeComputer() {
+					return ShufflingXbaseTypeComputer.class;
+				}
+				
+				@SuppressWarnings("unused")
+				public Class<? extends ExpressionArgumentFactory> bindExpressionArgumentFactory() {
+					return ShufflingExpressionArgumentFactory.class;
+				}
+			});
+		}
 	}
 	
 	public static class ShufflingXbaseTypeComputer extends XbaseTypeComputer {

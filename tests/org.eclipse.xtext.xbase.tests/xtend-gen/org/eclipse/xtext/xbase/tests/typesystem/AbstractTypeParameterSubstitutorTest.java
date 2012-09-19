@@ -6,11 +6,11 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData.NestedList;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -23,14 +23,10 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   private XtextResourceSet resourceSet;
   
-  public void setUp() {
-    try {
-      super.setUp();
-      XtextResourceSet _get = this.<XtextResourceSet>get(XtextResourceSet.class);
-      this.resourceSet = _get;
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  @Before
+  public void createResourceSet() {
+    XtextResourceSet _get = this.<XtextResourceSet>get(XtextResourceSet.class);
+    this.resourceSet = _get;
   }
   
   @After

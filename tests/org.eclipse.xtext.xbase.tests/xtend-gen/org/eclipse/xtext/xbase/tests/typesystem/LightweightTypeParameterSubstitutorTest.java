@@ -1,15 +1,16 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutorTest;
-import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -18,23 +19,15 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = XbaseNewTypeSystemInjectorProvider.class)
 @SuppressWarnings("all")
 public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
-  private final static Injector batchInjector = new Function0<Injector>() {
-    public Injector apply() {
-      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
-      return _setup;
-    }
-  }.apply();
-  
-  public Injector getInjector() {
-    return LightweightTypeParameterSubstitutorTest.batchInjector;
-  }
-  
   @Inject
   private CommonTypeComputationServices services;
   

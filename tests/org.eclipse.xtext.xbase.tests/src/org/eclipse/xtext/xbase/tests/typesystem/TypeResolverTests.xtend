@@ -40,17 +40,16 @@ import org.junit.Test
 import org.junit.rules.Timeout
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
@@ -1095,13 +1094,9 @@ class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
  * Furthermore it will shuffle the order of branches in if and switch expressions.
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseShufflingNewTypeSystemInjectorProvider))
 class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
-	
-	static val shuffleInjector = ShuffledTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		shuffleInjector
-	}
 	
 	@Inject
 	IBatchTypeResolver typeResolver;

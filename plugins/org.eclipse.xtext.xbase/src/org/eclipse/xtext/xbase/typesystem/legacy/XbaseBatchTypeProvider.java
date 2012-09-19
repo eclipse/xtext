@@ -24,16 +24,20 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public class XbaseBatchTypeProvider implements ITypeProvider {
+@Singleton
+public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	
 	@Inject private IBatchTypeResolver typeResolver;
 	@Inject private ILogicalContainerProvider containerProvider;
@@ -43,6 +47,7 @@ public class XbaseBatchTypeProvider implements ITypeProvider {
 		return typeResolver.resolveTypes(object);
 	}
 
+	@Override
 	public JvmTypeReference getExpectedReturnType(XExpression expression, boolean rawType) {
 		JvmIdentifiableElement container = containerProvider.getNearestLogicalContainer(expression);
 		if (container instanceof JvmOperation) {
@@ -51,54 +56,57 @@ public class XbaseBatchTypeProvider implements ITypeProvider {
 		throw new UnsupportedOperationException("TODO");
 	}
 
+	@Override
 	public JvmTypeReference getExpectedType(XExpression expression) {
-		return getResolvedTypes(expression).getExpectedType(expression).toTypeReference();
+		LightweightTypeReference expectedType = getResolvedTypes(expression).getExpectedType(expression);
+		if (expectedType != null)
+			return expectedType.toTypeReference();
+		return null;
 	}
 
+	@Override
 	public JvmTypeReference getExpectedType(XExpression expression, boolean rawType) {
 		return getResolvedTypes(expression).getExpectedType(expression).toTypeReference();
 	}
 
+	@Override
 	public JvmTypeReference getType(XExpression expression) {
 		return getResolvedTypes(expression).getActualType(expression).toTypeReference();
 	}
 
+	@Override
 	public JvmTypeReference getType(XExpression expression, boolean rawType) {
 		return getResolvedTypes(expression).getActualType(expression).toTypeReference();
 	}
 
+	@Override
 	public JvmTypeReference getType(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement) {
 		return getResolvedTypes(identifiableElement).getActualType(identifiableElement).toTypeReference();
 	}
 
+	@Override
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType) {
 		return getResolvedTypes(identifiableElement).getActualType(identifiableElement).toTypeReference();
 	}
 
+	@Override
 	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturn) {
 		return getExpectedReturnType(expression, false);
 	}
 
-	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression) {
-		// TODO
-		return emptyList();
-	}
-
-	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
-		// TODO
-		return emptyList();
-	}
-
+	@Override
 	public ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
 			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
 			JvmIdentifiableElement feature) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
 		throw new UnsupportedOperationException();
 	}

@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.After
 import org.junit.Test
+import org.junit.Before
 
 /**
  * @author Sebastian Zarnekow
@@ -26,8 +27,8 @@ abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbaseTestCas
 	
 	XtextResourceSet resourceSet
 	
-	override setUp() {
-		super.setUp
+	@Before
+	def void createResourceSet() {
 		resourceSet = get(typeof(XtextResourceSet));
 	}
 	

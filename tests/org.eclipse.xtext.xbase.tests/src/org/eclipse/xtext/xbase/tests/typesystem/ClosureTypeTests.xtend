@@ -18,17 +18,16 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.rules.ErrorCollector
 import org.junit.Rule
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchClosureTypeTest extends AbstractClosureTypeTest {
-	
-	static val batchInjector = AvoidDeprecatedTypeSystemStandaloneSetup::setup
-	
-	override getInjector() {
-		batchInjector
-	}
 	
 	@Inject
 	IBatchTypeResolver typeResolver;

@@ -1,40 +1,32 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeArgumentTest;
-import org.eclipse.xtext.xbase.tests.typesystem.AvoidDeprecatedTypeSystemStandaloneSetup;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = XbaseNewTypeSystemInjectorProvider.class)
 @SuppressWarnings("all")
 public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
-  private final static Injector batchInjector = new Function0<Injector>() {
-    public Injector apply() {
-      Injector _setup = AvoidDeprecatedTypeSystemStandaloneSetup.setup();
-      return _setup;
-    }
-  }.apply();
-  
-  public Injector getInjector() {
-    return BatchTypeArgumentTest.batchInjector;
-  }
-  
   @Inject
   private IBatchTypeResolver typeResolver;
   
