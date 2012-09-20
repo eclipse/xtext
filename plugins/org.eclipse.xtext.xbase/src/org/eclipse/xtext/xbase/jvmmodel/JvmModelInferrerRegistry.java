@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 
 import java.util.ArrayList;
@@ -15,6 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.plugin.RegistryReader;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
@@ -29,15 +34,43 @@ public class JvmModelInferrerRegistry {
 	
 	private final static Logger log = Logger.getLogger(JvmModelInferrerRegistry.class);
 	
-	private Map<String, List<IJvmModelInferrer>> map = newHashMap();
+	private volatile Map<String, List<IJvmModelInferrer>> map = null;
+	
+	private synchronized Map<String,List<IJvmModelInferrer>> getMap() {
+		if (map == null) {
+			map = initialize();
+		}
+		return map;
+	}
+	
+	private boolean isUseRegistry = true;
+	
+	public void setUseRegistry(boolean isUseRegistry) {
+		this.isUseRegistry = isUseRegistry;
+	}
+	
+	public boolean isUseRegistry() {
+		return isUseRegistry;
+	}
+
+	private Map<String, List<IJvmModelInferrer>> initialize() {
+		Map<String,List<IJvmModelInferrer>> result = newLinkedHashMap(); 
+		if (isUseRegistry)
+			initializeFromRegistry(result);
+		return result;
+	}
 
 	public List<? extends IJvmModelInferrer> getModelInferrer(String extension) {
-		if (!map.containsKey(extension))
+		if (!getMap().containsKey(extension))
 			return Collections.emptyList();
-		return Collections.unmodifiableList(map.get(extension));
+		return newArrayList(getMap().get(extension));
 	}
 	
 	public void register(String extension, IJvmModelInferrer inferrer) {
+		register(extension, inferrer, getMap());
+	}
+	
+	protected void register(String extension, IJvmModelInferrer inferrer, Map<String, List<IJvmModelInferrer>> map) {
 		if (!map.containsKey(extension)) {
 			map.put(extension, new ArrayList<IJvmModelInferrer>());
 		}
@@ -46,6 +79,36 @@ public class JvmModelInferrerRegistry {
 			list.add(inferrer);
 		else 
 			log.error("Java translator "+inferrer+" for extension '"+extension+"' was already registered.");
+	}
+	
+	public void deregister(String extension, IJvmModelInferrer inferrer) {
+		List<IJvmModelInferrer> list = getMap().get(extension);
+		if (list != null)
+			list.remove(inferrer);
+	}
+	
+	private void initializeFromRegistry(final Map<String, List<IJvmModelInferrer>> map) {
+		IExtensionRegistry eReg = Platform.getExtensionRegistry();
+		new RegistryReader(eReg, "org.eclipse.xtext.xbase", "java_translation_participant") {
+			
+			@Override
+			protected boolean readElement(IConfigurationElement element, boolean add) {
+				if (element.getName().equals("javaTranslator")) {
+					String fileExtension = element.getAttribute("fileExtension");
+					if (fileExtension == null) {
+						logMissingAttribute(element, "fileExtension");
+					} else if (element.getAttribute("class") == null) {
+						logMissingAttribute(element, "class");
+					} else if (add) {
+						register(fileExtension, new JvmModelInferrerDescriptor(element), map);
+						return true;
+					} else {
+						return true;
+					}
+				}
+				return false;
+			}
+		}.readRegistry();
 	}
 	
 	
@@ -60,6 +123,11 @@ public class JvmModelInferrerRegistry {
 		@Override
 		public List<? extends IJvmModelInferrer> getModelInferrer(String extension) {
 			return INSTANCE.getModelInferrer(extension);
+		}
+		
+		@Override
+		public void deregister(String extension, IJvmModelInferrer inferrer) {
+			INSTANCE.deregister(extension, inferrer);
 		}
 	}
 }

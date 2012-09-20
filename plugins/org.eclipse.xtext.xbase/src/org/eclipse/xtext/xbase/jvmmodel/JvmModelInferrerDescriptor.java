@@ -5,14 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.internal;
+package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,4 +41,8 @@ public class JvmModelInferrerDescriptor implements IJvmModelInferrer {
 		return new IJvmModelInferrer.NullImpl();
 	}
 
+	@Override
+	public String toString() {
+		return "descriptor from :" + element.getContributor().getName()+" ("+ element.getAttribute("class")+")";
+	}
 }
