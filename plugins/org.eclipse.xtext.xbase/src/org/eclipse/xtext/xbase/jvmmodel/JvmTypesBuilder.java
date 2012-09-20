@@ -323,6 +323,11 @@ public class JvmTypesBuilder {
 		associate(sourceElement, result);
 		return initializeSafely(result, initializer);
 	}
+
+	@Nullable 
+	public JvmAnnotationType toAnnotationType(@Nullable EObject sourceElement, @Nullable String name) {
+		return toAnnotationType(sourceElement, name, null);
+	}
 	
 	/**
 	 * Creates a public annotation declaration, associated to the given sourceElement. It sets the given name, which might be
@@ -1055,7 +1060,7 @@ public class JvmTypesBuilder {
 	 * @return the newly created {@link JvmTypeReference}
 	 */
 	@Nullable 
-	public JvmTypeReference newTypeRef(@Nullable JvmDeclaredType type, @Nullable JvmTypeReference... typeArgs) {
+	public JvmTypeReference newTypeRef(@Nullable JvmType type, @Nullable JvmTypeReference... typeArgs) {
 		return references.createTypeRef(type, typeArgs);
 	}
 
@@ -1095,7 +1100,7 @@ public class JvmTypesBuilder {
 		reference.setAnnotation(annotation);
 		for (XAnnotationElementValuePair val : anno.getElementValuePairs()) {
 			XExpression valueExpression = val.getValue();
-			JvmAnnotationValue annotationValue = getJvmAnnotationValue(valueExpression);
+			JvmAnnotationValue annotationValue = toJvmAnnotationValue(valueExpression);
 			if (annotationValue != null) {
 				JvmOperation op = (JvmOperation) val.eGet(
 						XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
@@ -1104,7 +1109,7 @@ public class JvmTypesBuilder {
 			}
 		}
 		if (anno.getValue() != null) {
-			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
+			JvmAnnotationValue value = toJvmAnnotationValue(anno.getValue());
 			if (value != null) {
 				Iterable<JvmFeature> allFeatures = anno.getAnnotationType().findAllFeaturesByName("value");
 				for (JvmFeature jvmFeature : allFeatures) {
@@ -1120,7 +1125,7 @@ public class JvmTypesBuilder {
 	}
 
 	@Nullable 
-	protected JvmAnnotationValue getJvmAnnotationValue(@Nullable XExpression value) {
+	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
 		if (value instanceof XAnnotationValueArray) {
 			EList<XExpression> values = ((XAnnotationValueArray) value).getValues();
 			JvmAnnotationValue result = null;
