@@ -628,8 +628,16 @@ public class JvmModelGenerator implements IGenerator {
     this.generateParameters(it, tracedAppendable);
     tracedAppendable.append(")");
     this.generateThrowsClause(it, tracedAppendable);
+    boolean _or = false;
     boolean _isAbstract = it.isAbstract();
     if (_isAbstract) {
+      _or = true;
+    } else {
+      boolean _hasBody = this.hasBody(it);
+      boolean _not_1 = (!_hasBody);
+      _or = (_isAbstract || _not_1);
+    }
+    if (_or) {
       tracedAppendable.append(";");
     } else {
       tracedAppendable.append(" ");
@@ -833,6 +841,20 @@ public class JvmModelGenerator implements IGenerator {
     final String name = tracedAppendable.declareVariable(it, _makeJavaIdentifier);
     ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     _traceSignificant.append(name);
+  }
+  
+  public boolean hasBody(final JvmExecutable op) {
+    boolean _or = false;
+    Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
+    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
+      boolean _notEquals_1 = (!Objects.equal(_associatedExpression, null));
+      _or = (_notEquals || _notEquals_1);
+    }
+    return _or;
   }
   
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable) {
