@@ -65,6 +65,8 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		ModeAware proposalProvider = getModeAwareProposalProvider();
+		if (proposalProvider == null)
+			return new ICompletionProposal[0];
 		int i = 0;
 		while(i++ < 1000) { // just to prevent endless loop in case #isLastMode has an error
 			proposalProvider.nextMode();
@@ -91,17 +93,23 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	}
 
 	public void assistSessionStarted(ContentAssistEvent event) {
-		getModeAwareProposalProvider().reset();
+		ModeAware proposalProvider = getModeAwareProposalProvider();
+		if (proposalProvider != null)
+			proposalProvider.reset();
 		this.currentAssistant = (IContentAssistantExtension2) event.assistant;
 	}
 
 	public void assistSessionEnded(ContentAssistEvent event) {
-		getModeAwareProposalProvider().reset();
+		ModeAware proposalProvider = getModeAwareProposalProvider();
+		if (proposalProvider != null)
+			proposalProvider.reset();
 		this.currentAssistant = null;
 	}
 	
 	public void assistSessionRestarted(ContentAssistEvent event) {
-		getModeAwareProposalProvider().reset();
+		ModeAware proposalProvider = getModeAwareProposalProvider();
+		if (proposalProvider != null)
+			proposalProvider.reset();
 	}
 
 	public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
