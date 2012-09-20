@@ -295,7 +295,7 @@ public class OnTheFlyJavaCompiler {
 					parentClassLoader);
 			Map<String,Class<?>> result = newHashMap();
 			for (String name : sources.keySet()) {
-				Class<?> clazz = loader.loadClass(name);
+				Class<?> clazz = loader.loadClass(name.replace('/','.'));
 				result.put(name, clazz);
 			}
 			return result;
