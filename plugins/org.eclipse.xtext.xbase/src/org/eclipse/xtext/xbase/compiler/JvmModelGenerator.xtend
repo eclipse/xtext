@@ -59,8 +59,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
-import static org.eclipse.xtext.xbase.compiler.JvmModelGenerator.*
-
 /**
  * A generator implementation that processes the 
  * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
@@ -343,7 +341,7 @@ class JvmModelGenerator implements IGenerator {
 		generateParameters(tracedAppendable)
 		tracedAppendable.append(")")
 		generateThrowsClause(tracedAppendable)
-		if (isAbstract) {
+		if (isAbstract || !hasBody) {
 			tracedAppendable.append(";")
 		} else {
 			tracedAppendable.append(" ")
@@ -464,6 +462,10 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.append(" ")
 		val name = tracedAppendable.declareVariable(it, makeJavaIdentifier(simpleName))
 		tracedAppendable.traceSignificant(it).append(name)
+	}
+	
+	def hasBody(JvmExecutable op) {
+		op.compilationStrategy != null || op.associatedExpression != null
 	}
 		
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
