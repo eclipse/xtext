@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -25,7 +26,6 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
@@ -35,7 +35,9 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -73,10 +75,20 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	private Set<Keyword> contextualKeywords;
 
 	@Inject
-	protected void setXtendGrammarAccess(XtendGrammarAccess grammarAccess) {
+	protected void setXtendGrammarAccess(IGrammarAccess grammarAccess) {
 		contextualKeywords = newLinkedHashSet();
-		this.contextualKeywords.add(grammarAccess.getValidIDAccess().getCreateKeyword_1());
-		this.contextualKeywords.add(grammarAccess.getValidIDAccess().getAnnotationKeyword_2());
+		EList<AbstractRule> rules = grammarAccess.getGrammar().getRules();
+		for (AbstractRule rule : rules) {
+			if (rule.getName().equals("ValidID")) {
+				TreeIterator<EObject> i = rule.eAllContents();
+				while (i.hasNext()) {
+					EObject o = i.next();
+					if (o instanceof Keyword) {
+						contextualKeywords.add((Keyword) o);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
