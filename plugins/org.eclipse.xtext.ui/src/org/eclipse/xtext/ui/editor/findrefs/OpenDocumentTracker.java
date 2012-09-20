@@ -120,7 +120,7 @@ public class OpenDocumentTracker {
 
 	private IPartListener2 partListener;
 
-	@Inject
+	@Inject(optional=true)
 	protected void initialize(final IWorkbench workbench) {
 		Assert.isNotNull(Display.getCurrent());
 		partListener = new PartListener();
