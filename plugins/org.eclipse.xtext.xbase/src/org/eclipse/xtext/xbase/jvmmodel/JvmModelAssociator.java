@@ -230,16 +230,34 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (resource.getContents().isEmpty())
 			return;
 		EObject eObject = resource.getContents().get(0);
+		
+		// call primary inferrer
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		inferrer.infer(eObject, acceptor, preIndexingPhase);
-		List<? extends IJvmModelInferrer> secondaryInferrers = inferrerRegistry.getModelInferrer(resource.getURI().fileExtension());
-		for (IJvmModelInferrer secondaryInferrer : secondaryInferrers) {
-			secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
-		}
 		if (!preIndexingPhase) {
 			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
 				initializer.getValue().apply(initializer.getKey());
 			}
+		}
+		
+		// call secondary inferrers
+		final String fileExtension = resource.getURI().fileExtension();
+		List<? extends IJvmModelInferrer> secondaryInferrers = inferrerRegistry.getModelInferrer(fileExtension);
+		for (IJvmModelInferrer secondaryInferrer : secondaryInferrers) {
+			acceptor = new JvmDeclaredTypeAcceptor(resource);
+			try {
+				secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
+				if (!preIndexingPhase) {
+					for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
+						initializer.getValue().apply(initializer.getKey());
+					}
+				}
+			} catch (Exception e) {
+				inferrerRegistry.deregister(fileExtension, secondaryInferrer);
+				LOG.info("Removed errorneous model inferrer for *."+ fileExtension+". - "+secondaryInferrer, e);
+			}
+		}
+		if (!preIndexingPhase) {
 			for (EObject object : resource.getContents()) {
 				if (object instanceof JvmIdentifiableElement) {
 					JvmIdentifiableElement element = (JvmIdentifiableElement) object;
