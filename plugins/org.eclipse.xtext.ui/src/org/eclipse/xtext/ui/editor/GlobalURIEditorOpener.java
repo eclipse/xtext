@@ -51,7 +51,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 	
-	@Inject 
+	@Inject(optional=true) 
 	//@Nullable
 	private IWorkbench workbench;
 	
