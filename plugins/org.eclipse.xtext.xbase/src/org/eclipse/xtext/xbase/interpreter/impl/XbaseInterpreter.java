@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,7 +53,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -175,22 +175,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	private PolymorphicDispatcher<Object> evaluateDispatcher = createEvaluateDispatcher();
-	private PolymorphicDispatcher<Object> assignmentDispatcher = createAssignmentDispatcher();
-	private PolymorphicDispatcher<Object> featureCallDispatcher = createFeatureCallDispatcher();
-
-	protected PolymorphicDispatcher<Object> createEvaluateDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_evaluate", 3, 3), this);
-	}
-
-	protected PolymorphicDispatcher<Object> createAssignmentDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_assignValue", 5, 5), this);
-	}
-
-	protected PolymorphicDispatcher<Object> createFeatureCallDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_featureCall", 5, 5), this);
-	}
-
 	public IEvaluationResult evaluate(XExpression expression) {
 		return evaluate(expression, createContext(), CancelIndicator.NullImpl);
 	}
@@ -215,10 +199,64 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) throws EvaluationException {
 		if (indicator.isCanceled())
 			throw new InterpreterCanceledException();
-		Object result = evaluateDispatcher.invoke(expression, context, indicator);
+		Object result = doEvaluate(expression, context, indicator);
 		final JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
 		result = wrapOrUnwrapArray(result, expectedType);
 		return result;
+	}
+	
+	/**
+	 * don't call this directly. Always call evaluate() internalEvaluate()
+	 */
+	protected Object doEvaluate(XExpression assignment, IEvaluationContext context, CancelIndicator indicator) {
+		if (assignment instanceof XAssignment) {
+	      return _doEvaluate((XAssignment)assignment, context, indicator);
+	    } else if (assignment instanceof XDoWhileExpression) {
+	      return _doEvaluate((XDoWhileExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XMemberFeatureCall) {
+	      return _doEvaluate((XMemberFeatureCall)assignment, context, indicator);
+	    } else if (assignment instanceof XWhileExpression) {
+	      return _doEvaluate((XWhileExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XAbstractFeatureCall) {
+	      return _doEvaluate((XAbstractFeatureCall)assignment, context, indicator);
+	    } else if (assignment instanceof XBlockExpression) {
+	      return _doEvaluate((XBlockExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XBooleanLiteral) {
+	      return _doEvaluate((XBooleanLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XCastedExpression) {
+	      return _doEvaluate((XCastedExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XClosure) {
+	      return _doEvaluate((XClosure)assignment, context, indicator);
+	    } else if (assignment instanceof XConstructorCall) {
+	      return _doEvaluate((XConstructorCall)assignment, context, indicator);
+	    } else if (assignment instanceof XForLoopExpression) {
+	      return _doEvaluate((XForLoopExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XIfExpression) {
+	      return _doEvaluate((XIfExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XInstanceOfExpression) {
+	      return _doEvaluate((XInstanceOfExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XNullLiteral) {
+	      return _doEvaluate((XNullLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XNumberLiteral) {
+	      return _doEvaluate((XNumberLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XReturnExpression) {
+	      return _doEvaluate((XReturnExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XStringLiteral) {
+	      return _doEvaluate((XStringLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XSwitchExpression) {
+	      return _doEvaluate((XSwitchExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XThrowExpression) {
+	      return _doEvaluate((XThrowExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XTryCatchFinallyExpression) {
+	      return _doEvaluate((XTryCatchFinallyExpression)assignment, context, indicator);
+	    } else if (assignment instanceof XTypeLiteral) {
+	      return _doEvaluate((XTypeLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XVariableDeclaration) {
+	      return _doEvaluate((XVariableDeclaration)assignment, context, indicator);
+	    } else {
+	      throw new IllegalArgumentException("Unhandled parameter types: " +
+	        Arrays.<Object>asList(assignment, context, indicator).toString());
+	    }
 	}
 
 	/**
@@ -226,11 +264,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XNullLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return null;
 	}
 	
-	protected Object _evaluateReturnExpression(XReturnExpression returnExpr, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XReturnExpression returnExpr, IEvaluationContext context, CancelIndicator indicator) {
 		Object returnValue = internalEvaluate(returnExpr.getExpression(), context, indicator);
 		throw new ReturnValue(returnValue);
 	}
@@ -239,7 +277,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return literal.getValue();
 	}
 
@@ -247,7 +285,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _evaluateNumberLiteral(XNumberLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XNumberLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));
 	}
 
@@ -255,7 +293,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XBooleanLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return literal.isIsTrue();
 	}
 
@@ -263,7 +301,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XTypeLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		if (literal.getType() == null || literal.getType().eIsProxy()) {
 			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(literal,
 					XbasePackage.Literals.XTYPE_LITERAL__TYPE);
@@ -280,7 +318,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object _evaluateClosure(XClosure closure, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XClosure closure, IEvaluationContext context, CancelIndicator indicator) {
 		Class<?> functionIntf = null;
 		switch (closure.getFormalParameters().size()) {
 			case 0:
@@ -312,7 +350,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return proxy;
 	}
 
-	protected Object _evaluateBlockExpression(XBlockExpression literal, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XBlockExpression literal, IEvaluationContext context, CancelIndicator indicator) {
 		List<XExpression> expressions = literal.getExpressions();
 
 		Object result = null;
@@ -323,7 +361,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
-	protected Object _evaluateIfExpression(XIfExpression ifExpression, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XIfExpression ifExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object conditionResult = internalEvaluate(ifExpression.getIf(), context, indicator);
 		if (Boolean.TRUE.equals(conditionResult)) {
 			return internalEvaluate(ifExpression.getThen(), context, indicator);
@@ -334,7 +372,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object _evaluateSwitchExpression(XSwitchExpression switchExpression, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XSwitchExpression switchExpression, IEvaluationContext context, CancelIndicator indicator) {
 		IEvaluationContext forkedContext = context.fork();
 		Object conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext, indicator);
 		String simpleName = featureNameProvider.getSimpleName(switchExpression);
@@ -371,7 +409,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 
-	protected Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
 		result = wrapOrUnwrapArray(result, castedExpression.getType());
 		result = coerceArgumentType(result, castedExpression.getType());
@@ -390,7 +428,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
-	protected Object _evaluateThrowExpression(XThrowExpression throwExpression, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XThrowExpression throwExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object thrown = internalEvaluate(throwExpression.getExpression(), context, indicator);
 		if (thrown == null) {
 			return throwNullPointerException(throwExpression, "throwable expression evaluated to 'null'");
@@ -401,7 +439,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		throw new EvaluationException((Throwable) thrown);
 	}
 
-	protected Object _evaluateTryCatchFinallyExpression(XTryCatchFinallyExpression tryCatchFinally,
+	protected Object _doEvaluate(XTryCatchFinallyExpression tryCatchFinally,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object result = null;
 		try {
@@ -464,7 +502,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
-	protected Object _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XForLoopExpression forLoop, IEvaluationContext context, CancelIndicator indicator) {
 		Object iterableOrIterator = internalEvaluate(forLoop.getForExpression(), context, indicator);
 		if (iterableOrIterator == null)
 			return throwNullPointerException(forLoop.getForExpression(), "iterable evaluated to 'null'");
@@ -487,7 +525,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 
-	protected Object _evaluateWhileExpression(XWhileExpression whileLoop, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XWhileExpression whileLoop, IEvaluationContext context, CancelIndicator indicator) {
 		Object condition = internalEvaluate(whileLoop.getPredicate(), context, indicator);
 		while (Boolean.TRUE.equals(condition)) {
 			internalEvaluate(whileLoop.getBody(), context, indicator);
@@ -496,7 +534,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 
-	protected IEvaluationResult _evaluateDoWhileExpression(XDoWhileExpression doWhileLoop, IEvaluationContext context, CancelIndicator indicator) {
+	protected IEvaluationResult _doEvaluate(XDoWhileExpression doWhileLoop, IEvaluationContext context, CancelIndicator indicator) {
 		Object condition = null;
 		do {
 			internalEvaluate(doWhileLoop.getBody(), context, indicator);
@@ -505,7 +543,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 	
-	protected Object _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XConstructorCall constructorCall, IEvaluationContext context, CancelIndicator indicator) {
 		JvmConstructor jvmConstructor = constructorCall.getConstructor();
 		List<Object> arguments = evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), context, indicator);
 		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
@@ -522,7 +560,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object _evaluateMemberFeatureCall(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
+	protected Object _doEvaluate(final XMemberFeatureCall featureCall, final IEvaluationContext context, final CancelIndicator indicator) {
 		if (featureCall.isSpreading()) {
 			Object memberCallTarget = internalEvaluate(featureCall.getMemberCallTarget(), context, indicator);
 			if (memberCallTarget == null)
@@ -530,7 +568,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (memberCallTarget instanceof Iterable) {
 				class Spread implements Function<Object, Object> {
 					public Object apply(Object from) {
-						Object result = internalFeatureCallDispatch(featureCall, from, context, indicator);
+						Object result = invokeFeature(featureCall.getFeature(), featureCall, from, context, indicator);
 						return result;
 					}
 				}
@@ -546,7 +584,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (featureCall.isNullSafe() && receiverObj==null) {
 				return getDefaultObjectValue(typeProvider.getType(featureCall));
 			}
-			return internalFeatureCallDispatch(featureCall, receiverObj, context, indicator);
+			return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
 		}
 	}
 
@@ -580,7 +618,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object _evaluateInstanceOf(XInstanceOfExpression instanceOf, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XInstanceOfExpression instanceOf, IEvaluationContext context, CancelIndicator indicator) {
 		Object instance = internalEvaluate(instanceOf.getExpression(), context, indicator);
 		if (instance == null)
 			return Boolean.FALSE;
@@ -595,7 +633,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return expectedType.isInstance(instance);
 	}
 
-	protected Object _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XVariableDeclaration variableDecl, IEvaluationContext context, CancelIndicator indicator) {
 		Object initialValue = null;
 		if (variableDecl.getRight()!=null) {
 			initialValue = internalEvaluate(variableDecl.getRight(), context, indicator);
@@ -630,7 +668,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return null;
 	}
 
-	protected Object _evaluateAbstractFeatureCall(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
 		if (expressionHelper.isShortCircuiteBooleanOperation(featureCall)) {
 			XExpression leftOperand = ((XBinaryOperation)featureCall).getLeftOperand();
 			Object result = internalEvaluate(leftOperand, context, indicator);
@@ -655,19 +693,27 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
-		return internalFeatureCallDispatch(featureCall, receiverObj, context, indicator);
+		return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
 	}
 
-	protected Object internalFeatureCallDispatch(XAbstractFeatureCall featureCall, Object receiverObj,
+	protected Object invokeFeature(JvmIdentifiableElement feature, XAbstractFeatureCall featureCall, Object receiverObj,
 			IEvaluationContext context, CancelIndicator indicator) {
-		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
+		if (feature instanceof JvmField) {
+			return _invokeFeature((JvmField)feature, featureCall, receiverObj, context, indicator);
+		} else if (feature instanceof JvmOperation) {
+			return _invokeFeature((JvmOperation)feature, featureCall, receiverObj, context, indicator);
+		} else if (feature != null) {
+			return _invokeFeature(feature, featureCall, receiverObj, context, indicator);
+		} else {
+			throw new NullPointerException("Feature was null");
+		}
 	}
 
 	/**
 	 * @param featureCall unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _featureCallJvmIdentifyableElement(JvmIdentifiableElement identifiable, XFeatureCall featureCall, Object receiver,
+	protected Object _invokeFeature(JvmIdentifiableElement identifiable, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was simple feature call but got receiver instead of null. Receiver: " + receiver);
@@ -681,7 +727,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param context unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _featureCallField(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _invokeFeature(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context, CancelIndicator indicator) {
 		return featureCallField(jvmField, receiver);
 	}
 
@@ -706,7 +752,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
+	protected Object _invokeFeature(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
@@ -853,21 +899,29 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
-	protected Object _evaluateAssignment(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
 		Object value = internalEvaluate(assignment.getValue(), context, indicator);
-		Object assign = assignValue(assignment.getFeature(), assignment, value, context, indicator);
+		Object assign = assignValueTo(assignment.getFeature(), assignment, value, context, indicator);
 		return assign;
 	}
 	
-	protected Object assignValue(JvmIdentifiableElement feature, XAssignment assignment, Object value, IEvaluationContext context, CancelIndicator indicator) {
-		return assignmentDispatcher.invoke(feature, assignment, value, context, indicator);
+	protected Object assignValueTo(JvmIdentifiableElement feature, XAssignment assignment, Object value, IEvaluationContext context, CancelIndicator indicator) {
+		if (feature instanceof XVariableDeclaration) {
+			return _assigneValueTo((XVariableDeclaration) feature, assignment, value, context, indicator);
+		} else if (feature instanceof JvmField) {
+			return _assigneValueTo((JvmField) feature, assignment, value, context, indicator);
+		} else if (feature instanceof JvmOperation) {
+			return _assigneValueTo((JvmOperation) feature, assignment, value, context, indicator);
+		} else {
+			throw new IllegalArgumentException("Couldn't invoke 'assignValueTo' for feature "+feature+"");
+		}
 	}
 
 	/**
 	 * @param assignment unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _assignValueToDeclaredVariable(XVariableDeclaration variable, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(XVariableDeclaration variable, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (variable.getType() != null) {
 			JvmTypeReference type = variable.getType();
@@ -879,7 +933,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
-	protected Object _assignValueToField(JvmField jvmField, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(JvmField jvmField, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object receiver = getReceiver(assignment, context, indicator);
 		if (receiver == null)
@@ -907,7 +961,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
-	protected Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(JvmOperation jvmOperation, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<Object> argumentValues;
 		if (assignment.getImplicitReceiver() != null && assignment.getAssignable() != null) {
