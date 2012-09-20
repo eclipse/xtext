@@ -169,6 +169,9 @@ public class XtextReconciler extends Job implements IReconciler {
 					ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
 					facade.removeCompletionListener(documentListener);
 				}
+				if (textViewer.getDocument() instanceof IXtextDocument) {
+					((IXtextDocument) textViewer.getDocument()).removeXtextDocumentContentObserver(documentListener);
+				}
 			}
 		}
 	}
