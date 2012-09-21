@@ -239,12 +239,91 @@ public class AnnotationProcessor implements IJvmModelInferrer {
             EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_has_errors", "The referenced macro annotation has compile errors.", annotation, null, _minus, null);
             _errors.add(_eObjectDiagnosticImpl);
           } else {
-            Pair<MacroAnnotation,XtendAnnotationTarget> _mappedTo = Pair.<MacroAnnotation, XtendAnnotationTarget>of(macroAnno, candidate);
-            acceptor.accept(_mappedTo);
+            boolean _isValidTarget = this.isValidTarget(macroAnno, annotation);
+            boolean _not = (!_isValidTarget);
+            if (_not) {
+              Resource _eResource_1 = annotation.eResource();
+              EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("The macro annotation ");
+              String _name = macroAnno.getName();
+              _builder.append(_name, "");
+              _builder.append(" can only be used on ");
+              EList<TargetType> _targetType = macroAnno.getTargetType();
+              String _join = IterableExtensions.join(_targetType, ",");
+              _builder.append(_join, "");
+              int _minus_1 = (-1);
+              EObjectDiagnosticImpl _eObjectDiagnosticImpl_1 = new EObjectDiagnosticImpl(Severity.ERROR, "invalid_annotation_target", _builder.toString(), annotation, null, _minus_1, null);
+              _errors_1.add(_eObjectDiagnosticImpl_1);
+            } else {
+              Pair<MacroAnnotation,XtendAnnotationTarget> _mappedTo = Pair.<MacroAnnotation, XtendAnnotationTarget>of(macroAnno, candidate);
+              acceptor.accept(_mappedTo);
+            }
           }
         }
       }
     }
+  }
+  
+  private boolean isValidTarget(final MacroAnnotation it, final XAnnotation annotation) {
+    EList<TargetType> _targetType = it.getTargetType();
+    boolean _isEmpty = _targetType.isEmpty();
+    if (_isEmpty) {
+      return true;
+    }
+    boolean _switchResult = false;
+    XtendAnnotationTarget _annotatedTarget = this._xAnnotationExtensions.getAnnotatedTarget(annotation);
+    final XtendAnnotationTarget target = _annotatedTarget;
+    boolean _matched = false;
+    if (!_matched) {
+      if (target instanceof XtendClass) {
+        final XtendClass _xtendClass = (XtendClass)target;
+        _matched=true;
+        EList<TargetType> _targetType_1 = it.getTargetType();
+        boolean _contains = _targetType_1.contains(TargetType.CLASS);
+        _switchResult = _contains;
+      }
+    }
+    if (!_matched) {
+      if (target instanceof XtendField) {
+        final XtendField _xtendField = (XtendField)target;
+        _matched=true;
+        EList<TargetType> _targetType_1 = it.getTargetType();
+        boolean _contains = _targetType_1.contains(TargetType.FIELD);
+        _switchResult = _contains;
+      }
+    }
+    if (!_matched) {
+      if (target instanceof XtendFunction) {
+        final XtendFunction _xtendFunction = (XtendFunction)target;
+        _matched=true;
+        EList<TargetType> _targetType_1 = it.getTargetType();
+        boolean _contains = _targetType_1.contains(TargetType.METHOD);
+        _switchResult = _contains;
+      }
+    }
+    if (!_matched) {
+      if (target instanceof XtendConstructor) {
+        final XtendConstructor _xtendConstructor = (XtendConstructor)target;
+        _matched=true;
+        EList<TargetType> _targetType_1 = it.getTargetType();
+        boolean _contains = _targetType_1.contains(TargetType.CONSTRUCTOR);
+        _switchResult = _contains;
+      }
+    }
+    if (!_matched) {
+      if (target instanceof XtendParameter) {
+        final XtendParameter _xtendParameter = (XtendParameter)target;
+        _matched=true;
+        EList<TargetType> _targetType_1 = it.getTargetType();
+        boolean _contains = _targetType_1.contains(TargetType.PARAMETER);
+        _switchResult = _contains;
+      }
+    }
+    if (!_matched) {
+      _switchResult = false;
+    }
+    return _switchResult;
   }
   
   private void invokeRegistrators(final XtendFile xtendFile, final Map<MacroAnnotation,List<XtendAnnotationTarget>> annotatedElements, final IJvmDeclaredTypeAcceptor acceptor, final CancelIndicator cancelIndicator) {

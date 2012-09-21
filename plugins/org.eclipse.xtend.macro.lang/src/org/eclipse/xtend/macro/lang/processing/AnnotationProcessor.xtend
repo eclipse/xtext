@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 /**
  * The annotation processor is registered with the compilation-particpant extenions point
@@ -129,11 +130,26 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 			val macroAnno = annotation.macroAnnotation
 			if (macroAnno != null) {
 				if (macroAnno.hasErrors) {
-					annotation.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, "macro_has_errors", "The referenced macro annotation has compile errors.", annotation, null, -1, null)					
+					annotation.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, "macro_has_errors", "The referenced macro annotation has compile errors.", annotation, null, -1, null)
+				} else if (!macroAnno.isValidTarget(annotation)) {
+					annotation.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, "invalid_annotation_target", '''The macro annotation «macroAnno.name» can only be used on «macroAnno.targetType.join(',')»''', annotation, null, -1, null)
 				} else {
 					acceptor.accept(macroAnno -> candidate)
 				}
 			}
+		}
+	}
+	
+	def private boolean isValidTarget(MacroAnnotation it, XAnnotation annotation) {
+		if (targetType.empty)
+			return true
+		return switch target : annotation.annotatedTarget {
+			XtendClass : targetType.contains(TargetType::CLASS)
+			XtendField : targetType.contains(TargetType::FIELD)
+			XtendFunction : targetType.contains(TargetType::METHOD)
+			XtendConstructor : targetType.contains(TargetType::CONSTRUCTOR)
+			XtendParameter : targetType.contains(TargetType::PARAMETER)
+			default : false
 		}
 	}
 

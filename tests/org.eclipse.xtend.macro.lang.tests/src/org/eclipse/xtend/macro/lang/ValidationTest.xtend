@@ -50,4 +50,22 @@ class ValidationTest {
 		assertTrue(message.contains('throw new NullPointerException'))
 		assertTrue( resourceSet.resources.findFirst[ URI.fileExtension == 'macro'].errors.empty)
 	}
+	
+	@Test def void testValidationError_02() {
+		val resourceSet = resourceSet(
+		'''
+			@MyAnnotation class Foo {}
+		'''.xtend, 
+		'''
+			@MyAnnotation for method {
+				process {
+				}
+			}
+		'''.macro)
+		EcoreUtil::resolveAll(resourceSet)
+		val message = resourceSet.resources.findFirst[ URI.fileExtension == 'xtend'].errors.head.message
+		assertTrue(message.contains('MyAnnotation'))
+		assertTrue(message.contains('method'))
+		assertTrue( resourceSet.resources.findFirst[ URI.fileExtension == 'macro'].errors.empty)
+	}
 }

@@ -18,12 +18,34 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage$Literals.*
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
+import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendField
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 
 class XAnnotationExtensions {
 	
 	@Inject extension IJvmModelAssociations associations
 	@Inject LazyURIEncoder encoder
 	@Inject ILinkingService linkingService
+	
+	def XtendAnnotationTarget getAnnotatedTarget(XAnnotation annotation) {
+		// ignore synthetic containers
+		switch container : annotation.eContainer {
+			XtendAnnotationType : container
+			XtendClass : container
+			XtendField : container
+			XtendFunction : container
+			XtendConstructor : container
+			XtendParameter : container
+			XtendAnnotationTarget 	: container.eContainer as XtendAnnotationTarget
+			XAnnotation 			: getAnnotatedTarget(container)
+			default 				: null
+		}
+	}
 	
 	/**
 	 * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy

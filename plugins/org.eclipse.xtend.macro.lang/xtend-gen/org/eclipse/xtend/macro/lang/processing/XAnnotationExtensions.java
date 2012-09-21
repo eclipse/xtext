@@ -9,6 +9,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.macro.lang.macro.MacroAnnotation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.linking.ILinkingService;
@@ -31,6 +38,75 @@ public class XAnnotationExtensions {
   
   @Inject
   private ILinkingService linkingService;
+  
+  public XtendAnnotationTarget getAnnotatedTarget(final XAnnotation annotation) {
+    XtendAnnotationTarget _switchResult = null;
+    EObject _eContainer = annotation.eContainer();
+    final EObject container = _eContainer;
+    boolean _matched = false;
+    if (!_matched) {
+      if (container instanceof XtendAnnotationType) {
+        final XtendAnnotationType _xtendAnnotationType = (XtendAnnotationType)container;
+        _matched=true;
+        _switchResult = _xtendAnnotationType;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendClass) {
+        final XtendClass _xtendClass = (XtendClass)container;
+        _matched=true;
+        _switchResult = _xtendClass;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendField) {
+        final XtendField _xtendField = (XtendField)container;
+        _matched=true;
+        _switchResult = _xtendField;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendFunction) {
+        final XtendFunction _xtendFunction = (XtendFunction)container;
+        _matched=true;
+        _switchResult = _xtendFunction;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendConstructor) {
+        final XtendConstructor _xtendConstructor = (XtendConstructor)container;
+        _matched=true;
+        _switchResult = _xtendConstructor;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendParameter) {
+        final XtendParameter _xtendParameter = (XtendParameter)container;
+        _matched=true;
+        _switchResult = _xtendParameter;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendAnnotationTarget) {
+        final XtendAnnotationTarget _xtendAnnotationTarget = (XtendAnnotationTarget)container;
+        _matched=true;
+        EObject _eContainer_1 = _xtendAnnotationTarget.eContainer();
+        _switchResult = ((XtendAnnotationTarget) _eContainer_1);
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XAnnotation) {
+        final XAnnotation _xAnnotation = (XAnnotation)container;
+        _matched=true;
+        XtendAnnotationTarget _annotatedTarget = this.getAnnotatedTarget(_xAnnotation);
+        _switchResult = _annotatedTarget;
+      }
+    }
+    if (!_matched) {
+      _switchResult = null;
+    }
+    return _switchResult;
+  }
   
   /**
    * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy
