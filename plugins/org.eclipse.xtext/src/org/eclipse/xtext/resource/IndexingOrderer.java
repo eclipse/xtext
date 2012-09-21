@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,9 +21,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.annotations.Beta;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -35,39 +34,32 @@ public class IndexingOrderer {
 	@Inject(optional=true) private IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
 	
 	public List<URI> getOrderedUris(final ResourceSet resourceSet, Iterable<URI> urisToIndex) {
-		final PriorityProvider provider = new PriorityProvider();
-		ArrayList<URI> result = newArrayList(urisToIndex);
-		Collections.sort(result, new Comparator<URI>() {
-			public int compare(URI o1, URI o2) {
-				int prio1 = provider.getIndexingPrio(resourceSet, o1);
-				int prio2 = provider.getIndexingPrio(resourceSet, o2);
-				return prio2 - prio1;
-			}
-		});
-		return result;
-	}
-
-	protected class PriorityProvider {
-		
-		private Cache<Pair<ResourceSet, URI>, Integer> cache = CacheBuilder.newBuilder().build(new CacheLoader<Pair<ResourceSet, URI>, Integer>() {
-			@Override
-			public Integer load(Pair<ResourceSet, URI> key) throws Exception {
-				IResourceServiceProvider serviceProvider = registry.getResourceServiceProvider(key.getSecond());
+		// create pairs of uri and priority
+		List<Pair<URI, Integer>> prios = newArrayList(transform(urisToIndex, new Function<URI, Pair<URI, Integer>>() {
+			public Pair<URI, Integer> apply(URI uri) {
+				IResourceServiceProvider serviceProvider = registry.getResourceServiceProvider(uri);
 				if (serviceProvider != null) {
 					IndexingPriorityProvider priorityProvider = serviceProvider.get(IndexingPriorityProvider.class);
 					if (priorityProvider != null)
-						return priorityProvider.getIndexingPriority(key.getFirst(), key.getSecond());
+						return Tuples.create(uri, priorityProvider.getIndexingPriority(resourceSet, uri));
 				}
-				return 0;
+				return Tuples.create(uri, 0);
 			}
-			
+		}));
+		// sort by priority
+		Collections.sort(prios, new Comparator<Pair<URI,Integer>>() {
+			public int compare(Pair<URI,Integer> o1, Pair<URI,Integer> o2) {
+				return o2.getSecond()- o1.getSecond();
+			}
 		});
-		
-		protected int getIndexingPrio(final ResourceSet resourceSet, URI uri) {
-			return cache.apply(Tuples.create(resourceSet, uri));
-		}
+		// return the sorted uris
+		return transform(prios, new Function<Pair<URI,Integer>, URI>() {
+			public URI apply(Pair<URI,Integer> uri) {
+				return uri.getFirst();
+			}
+		});
 	}
-	
+
 	@Beta
 	public static class IndexingPriorityProvider {
 	
