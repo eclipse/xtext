@@ -17,8 +17,24 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo class bar{}");
+    _builder_1.append("package  foo  class  bar  {  }");
     _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatClass11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("   ");
+    _builder_1.append("package  foo  class  bar  {  }");
     this.assertFormatted(_builder, _builder_1);
   }
   
@@ -73,9 +89,40 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClass31() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth1() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def meth1() {} ");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatClass4() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class bar {");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("int member1");
@@ -1018,6 +1065,17 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatSwitchSLParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch (\'x\') { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch  (\'x\')  {   case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')    }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatSwitchCaseSL() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' {");
@@ -1032,6 +1090,30 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("switch \'x\'  {   ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatSwitchCaseSLParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch (\'x\') {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\': println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\': println(\'y\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   (\'x\')  {   ");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')");

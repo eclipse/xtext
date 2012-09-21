@@ -37,7 +37,8 @@ class FormatterExtensions {
 				WhitespaceInfo: {
 					val next = leaf.trailingComment
 					if(next?.trailing) {
-						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, " ")
+						val space = if(leaf.offset == 0) "" else " "
+						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, space)
 					} else if (!applied) {
 						var newLines = Math::min(Math::max(leafs.newLines, configuration.minNewLines), configuration.maxNewLines)
 						if(leaf.leadingComment?.endsWithNewLine)

@@ -79,7 +79,9 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XtendFile xtendFile, FormattableDocument format) {
+		format += xtendFile.nodeForKeyword("package").prepend[noSpace]
 		val pkg = xtendFile.nodeForFeature(XTEND_FILE__PACKAGE)
+		format += pkg.prepend[oneSpace]
 		val pkgSemicolon = pkg.immediatelyFollowingKeyword(";")
 		if(pkgSemicolon != null) {
 			format += pkg.append[space=""]
@@ -105,10 +107,12 @@ public class XtendFormatter {
 	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
 		for(annotation:clazz.annotations)
 			format += annotation.nodeForEObject.append[newLine]
+		format += clazz.nodeForKeyword("class").append[oneSpace]
 		val clazzOpenBrace = clazz.nodeForKeyword("{")
 		format += clazzOpenBrace.prepend[space=" "]
 		if(!clazz.members.empty) {
-			format += clazzOpenBrace.append[newLine; increaseIndentation]
+			format += clazzOpenBrace.append[increaseIndentation]
+			format += clazzOpenBrace.append(format.cfg.newLinesBeforeFirstMember)
 			for(i: 0..(clazz.members.size - 1)) { 
 				val current = clazz.members.get(i)
 				current.format(format)
@@ -121,7 +125,9 @@ public class XtendFormatter {
 					else 
 						format += current.nodeForEObject.append(format.cfg.newLinesBetweenFieldsAndMethods)
 				} else {
-					format += clazz.members.get(i).nodeForEObject.append[newLine decreaseIndentation]
+					val node = clazz.members.get(i).nodeForEObject
+					format += node.append[decreaseIndentation]
+					format += node.append(format.cfg.newLinesAfterLastMember)
 				} 
 			}
 		} else {

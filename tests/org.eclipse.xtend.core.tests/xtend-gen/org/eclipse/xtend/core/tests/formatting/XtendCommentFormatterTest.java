@@ -7,6 +7,38 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendCommentFormatterTest extends AbstractFormatterTest {
   @Test
+  public void formatSLCommentAfterpackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/***********");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* copyright");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("***********/");
+    _builder.newLine();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class zonk {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/***********");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* copyright");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("***********/package foo");
+    _builder_1.newLine();
+    _builder_1.append("class zonk {}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatSLCommentAfterStatement() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo // my comment");

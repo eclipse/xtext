@@ -11,8 +11,17 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			class bar {
 			}
 		''', '''
-			package foo class bar{}
+			package  foo  class  bar  {  }
 		''')	
+	}
+	
+	@Test def formatClass11() {
+		assertFormatted('''
+			package foo
+			
+			class bar {
+			}
+		''', '''   package  foo  class  bar  {  }''')	
 	}
 	
 	@Test def formatClass2() {
@@ -43,9 +52,29 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClass31() {
+		assertFormatted('''
+			class bar {
+			
+				def meth1() {
+				}
+			
+			}
+		''', '''
+			class bar{
+			
+
+				def meth1() {} 
+
+
+			}
+		''')	
+	}
+	
 	@Test def formatClass4() {
 		assertFormatted('''
 			class bar {
+
 				int member1
 
 				int member2
@@ -602,6 +631,14 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatSwitchSLParenthesis() {
+		assertFormattedExpression('''
+			switch ('x') { case 'x': println('x') case 'y': println('y') }
+		''', '''
+			switch  ('x')  {   case 'x':   println('x')   case   'y':    println('y')    }
+		''')	
+	}
+	
 	@Test def formatSwitchCaseSL() {
 		assertFormattedExpression('''
 			switch 'x' {
@@ -610,6 +647,19 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			}
 		''', '''
 			switch 'x'  {   
+				case 'x':   println('x')   case   'y':    println('y')
+			}
+		''')	
+	}
+	
+	@Test def formatSwitchCaseSLParenthesis() {
+		assertFormattedExpression('''
+			switch ('x') {
+				case 'x': println('x')
+				case 'y': println('y')
+			}
+		''', '''
+			switch   ('x')  {   
 				case 'x':   println('x')   case   'y':    println('y')
 			}
 		''')	

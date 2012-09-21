@@ -99,9 +99,18 @@ public class FormatterExtensions {
             final CommentInfo next = _whitespaceInfo.trailingComment();
             boolean _isTrailing = next==null?false:next.isTrailing();
             if (_isTrailing) {
+              String _xifexpression = null;
               int _offset = _whitespaceInfo.getOffset();
+              boolean _equals = (_offset == 0);
+              if (_equals) {
+                _xifexpression = "";
+              } else {
+                _xifexpression = " ";
+              }
+              final String space = _xifexpression;
+              int _offset_1 = _whitespaceInfo.getOffset();
               int _length = _whitespaceInfo.getLength();
-              WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, indentationChange, " ");
+              WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, indentationChange, space);
               result.add(_whitespaceData);
             } else {
               boolean _not = (!applied);
@@ -117,9 +126,9 @@ public class FormatterExtensions {
                   int _minus = (newLines - 1);
                   newLines = _minus;
                 }
-                int _offset_1 = _whitespaceInfo.getOffset();
+                int _offset_2 = _whitespaceInfo.getOffset();
                 int _length_1 = _whitespaceInfo.getLength();
-                NewLineData _newLineData = new NewLineData(_offset_1, _length_1, indentationChange, newLines);
+                NewLineData _newLineData = new NewLineData(_offset_2, _length_1, indentationChange, newLines);
                 result.add(_newLineData);
                 applied = true;
               } else {
@@ -130,9 +139,9 @@ public class FormatterExtensions {
                   int _minus_1 = (newLines_1 - 1);
                   newLines_1 = _minus_1;
                 }
-                int _offset_2 = _whitespaceInfo.getOffset();
+                int _offset_3 = _whitespaceInfo.getOffset();
                 int _length_2 = _whitespaceInfo.getLength();
-                NewLineData _newLineData_1 = new NewLineData(_offset_2, _length_2, indentationChange, newLines_1);
+                NewLineData _newLineData_1 = new NewLineData(_offset_3, _length_2, indentationChange, newLines_1);
                 result.add(_newLineData_1);
               }
             }

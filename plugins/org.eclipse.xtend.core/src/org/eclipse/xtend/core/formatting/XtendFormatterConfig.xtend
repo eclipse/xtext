@@ -12,6 +12,8 @@ class XtendFormatterConfig {
 	@Property @Named("newlines.after.packagename") NewLineConfig newLinesAfterPackageName = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.imports") NewLineConfig newLinesBetweenImports = new NewLineConfig(1, 2)
 	@Property @Named("newlines.after.importsection") NewLineConfig newLinesAfterImportSection = new NewLineConfig(2, 3)
+	@Property @Named("newlines.before.first.member") NewLineConfig newLinesBeforeFirstMember = new NewLineConfig(1, 2)
+	@Property @Named("newlines.after.last.member") NewLineConfig newLinesAfterLastMember = new NewLineConfig(1, 2)
 	@Property @Named("newlines.between.fields") NewLineConfig newLinesBetweenFields = new NewLineConfig(1, 2)
 	@Property @Named("newlines.between.fields.and.methods") NewLineConfig newLinesBetweenFieldsAndMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)

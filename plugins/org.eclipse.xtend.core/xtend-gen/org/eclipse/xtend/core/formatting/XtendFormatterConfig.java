@@ -107,6 +107,38 @@ public class XtendFormatterConfig {
     this._newLinesAfterImportSection = newLinesAfterImportSection;
   }
   
+  @Named(value = "newlines.before.first.member")
+  private NewLineConfig _newLinesBeforeFirstMember = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(1, 2);
+      return _newLineConfig;
+    }
+  }.apply();
+  
+  public NewLineConfig getNewLinesBeforeFirstMember() {
+    return this._newLinesBeforeFirstMember;
+  }
+  
+  public void setNewLinesBeforeFirstMember(final NewLineConfig newLinesBeforeFirstMember) {
+    this._newLinesBeforeFirstMember = newLinesBeforeFirstMember;
+  }
+  
+  @Named(value = "newlines.after.last.member")
+  private NewLineConfig _newLinesAfterLastMember = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(1, 2);
+      return _newLineConfig;
+    }
+  }.apply();
+  
+  public NewLineConfig getNewLinesAfterLastMember() {
+    return this._newLinesAfterLastMember;
+  }
+  
+  public void setNewLinesAfterLastMember(final NewLineConfig newLinesAfterLastMember) {
+    this._newLinesAfterLastMember = newLinesAfterLastMember;
+  }
+  
   @Named(value = "newlines.between.fields")
   private NewLineConfig _newLinesBetweenFields = new Function0<NewLineConfig>() {
     public NewLineConfig apply() {
