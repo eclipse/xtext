@@ -171,6 +171,22 @@ public class XtendFormatterConfig {
     this._newLinesBetweenClasses = newLinesBetweenClasses;
   }
   
+  @Named(value = "newlines.around.expressions")
+  private NewLineConfig _newLinesAroundExpression = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(1, 2);
+      return _newLineConfig;
+    }
+  }.apply();
+  
+  public NewLineConfig getNewLinesAroundExpression() {
+    return this._newLinesAroundExpression;
+  }
+  
+  public void setNewLinesAroundExpression(final NewLineConfig newLinesAroundExpression) {
+    this._newLinesAroundExpression = newLinesAroundExpression;
+  }
+  
   public XtendFormatterConfig() {
   }
   

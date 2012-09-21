@@ -265,6 +265,37 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatBlockExpressionPreserveNewLines() {
+		assertFormatted('''
+			class Foo {
+				def bar() {
+
+					val x = newArrayList("A", "b");
+
+					val y = 'foo'
+
+					x.join
+
+				}
+			}
+		''', '''
+			class Foo {
+				def bar() {
+
+
+			val x = newArrayList("A", "b") ;
+
+
+			val y = 'foo'
+
+
+			 x.join
+
+
+			  }}
+		''')	
+	}
+	
 	@Test def formatClosures() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
@@ -867,7 +898,6 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			return
 		''', '''
 			"foo"  return
-			
 		''')	
 	}
 	

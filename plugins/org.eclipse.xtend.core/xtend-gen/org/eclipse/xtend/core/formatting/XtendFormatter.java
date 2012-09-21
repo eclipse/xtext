@@ -2282,12 +2282,15 @@ public class XtendFormatter {
       } else {
         final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.newLine();
               it.increaseIndentation();
             }
           };
         Iterable<FormattingData> _append_1 = this._formatterExtensions.append(open, _function_1);
         format.operator_add(_append_1);
+        XtendFormatterConfig _cfg = format.getCfg();
+        NewLineConfig _newLinesAroundExpression = _cfg.getNewLinesAroundExpression();
+        Iterable<FormattingData> _append_2 = this._formatterExtensions.append(open, _newLinesAroundExpression);
+        format.operator_add(_append_2);
         EList<XExpression> _expressions_1 = expr.getExpressions();
         for (final XExpression child : _expressions_1) {
           {
@@ -2314,21 +2317,15 @@ public class XtendFormatter {
                   };
                 Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(sem, _function_2);
                 format.operator_add(_prepend);
-                final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-                    public void apply(final FormattingDataInit it) {
-                      it.newLine();
-                    }
-                  };
-                Iterable<FormattingData> _append_2 = this._formatterExtensions.append(sem, _function_3);
-                format.operator_add(_append_2);
-              } else {
-                final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
-                    public void apply(final FormattingDataInit it) {
-                      it.newLine();
-                    }
-                  };
-                Iterable<FormattingData> _append_3 = this._formatterExtensions.append(childNode, _function_4);
+                XtendFormatterConfig _cfg_1 = format.getCfg();
+                NewLineConfig _newLinesAroundExpression_1 = _cfg_1.getNewLinesAroundExpression();
+                Iterable<FormattingData> _append_3 = this._formatterExtensions.append(sem, _newLinesAroundExpression_1);
                 format.operator_add(_append_3);
+              } else {
+                XtendFormatterConfig _cfg_2 = format.getCfg();
+                NewLineConfig _newLinesAroundExpression_2 = _cfg_2.getNewLinesAroundExpression();
+                Iterable<FormattingData> _append_4 = this._formatterExtensions.append(childNode, _newLinesAroundExpression_2);
+                format.operator_add(_append_4);
               }
             }
           }

@@ -452,6 +452,59 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatBlockExpressionPreserveNewLines() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val x = newArrayList(\"A\", \"b\");");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val y = \'foo\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x.join");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("val x = newArrayList(\"A\", \"b\") ;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("val y = \'foo\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("x.join");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatClosures() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -1464,7 +1517,6 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("\"foo\"  return");
-    _builder_1.newLine();
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }

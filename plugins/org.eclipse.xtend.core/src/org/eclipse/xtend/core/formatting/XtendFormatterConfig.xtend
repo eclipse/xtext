@@ -16,6 +16,7 @@ class XtendFormatterConfig {
 	@Property @Named("newlines.between.fields.and.methods") NewLineConfig newLinesBetweenFieldsAndMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.classes") NewLineConfig newLinesBetweenClasses = new NewLineConfig(2, 3)
+	@Property @Named("newlines.around.expressions") NewLineConfig newLinesAroundExpression = new NewLineConfig(1, 2)
 
 	new() {
 	}
