@@ -575,7 +575,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	}
 
 	private static void setLatestCompliance(Map map) {
-		JavaModelUtil.set50ComplianceOptions(map);
+//		JavaModelUtil.set50ComplianceOptions(map);
 	}
 
 	@Override
