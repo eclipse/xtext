@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtend Compile Time Library
+Bundle-SymbolicName: org.eclipse.xtend.macro
+Bundle-Version: 2.4.0.qualifier
+Bundle-Vendor: Eclipse Tools
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.4.0",
+ org.eclipse.xtext.xbase;bundle-version="2.4.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.4.0"
+Export-Package: org.eclipse.xtend.macro
