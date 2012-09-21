@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.xtend.macro.lang.editor/src" modelPluginID="org.eclipse.xtend.macro.lang"
     forceOverwrite="true" modelName="Macro" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtend.macro.lang.edit"
-    editorPluginID="org.eclipse.xtend.macro.lang.editor" runtimeVersion="2.8" usedGenPackages="../../../../../../../org.eclipse.xtend.core/model/Xtend.genmodel#//xtend ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    editorPluginID="org.eclipse.xtend.macro.lang.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../../org.eclipse.xtend.core/model/Xtend.genmodel#//xtend ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="Macro" basePackage="org.eclipse.xtend.macro.lang" disposableProviderFactory="true"
       ecorePackage="Macro.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Macro.ecore#//TargetType">
