@@ -4,6 +4,23 @@ import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest
 import org.junit.Test
 
 class XtendCommentFormatterTest extends AbstractFormatterTest {
+	@Test def formatSLCommentAfterpackage() {
+		assertFormatted('''
+			/***********
+			 * copyright
+			 ***********/
+			package foo
+			
+			class zonk {
+			}
+		''', '''
+			/***********
+			 * copyright
+			 ***********/package foo
+			class zonk {}
+		''')	
+	}
+	
 	@Test def formatSLCommentAfterStatement() {
 		assertFormatted('''
 			package foo // my comment
