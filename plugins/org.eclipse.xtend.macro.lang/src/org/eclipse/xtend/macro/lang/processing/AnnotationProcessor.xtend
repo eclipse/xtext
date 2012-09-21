@@ -14,25 +14,29 @@ import java.util.List
 import java.util.Map
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.macro.lang.MacroAnnotationExtensions
 import org.eclipse.xtend.macro.lang.macro.MacroAnnotation
+import org.eclipse.xtend.macro.lang.macro.TargetType
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtend.macro.lang.macro.TargetType
-import org.eclipse.xtend.core.xtend.XtendField
-import org.eclipse.xtend.core.xtend.XtendParameter
 
 /**
  * The annotation processor is registered with the compilation-particpant extenions point
@@ -123,8 +127,12 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	def private void registerMacroAnnotations(XtendAnnotationTarget candidate, IAcceptor<Pair<MacroAnnotation, XtendAnnotationTarget>> acceptor) {
 		for (annotation : candidate.annotations.filter[ processed ]) {
 			val macroAnno = annotation.macroAnnotation
-			if (macroAnno != null && !macroAnno.hasErrors) {
-				acceptor.accept(macroAnno -> candidate)
+			if (macroAnno != null) {
+				if (macroAnno.hasErrors) {
+					annotation.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, "macro_has_errors", "The referenced macro annotation has compile errors.", annotation, null, -1, null)					
+				} else {
+					acceptor.accept(macroAnno -> candidate)
+				}
 			}
 		}
 	}
@@ -172,13 +180,55 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 			try {
 				val result = interpreter.evaluate(macroAnnotation.processor.expression, ctx, cancelIndicator)
 				if (result.exception != null)
-					throw result.exception
+					handleError(xtendFile.eResource, elements, macroAnnotation, result.exception)
 			} catch (Exception e) {
 				LOG.error(e.message, e)
 			}
 		}
 	}
 	
+	def private void handleError(Resource resource, List<XtendAnnotationTarget> annotatedElements, MacroAnnotation annotation, Throwable exception) {
+		annotatedElements.forEach [
+			annotations.filter[ annotationType.simpleName == annotation.name ].forEach [
+				val message = switch exception {
+					MacroEvaluationException: '''
+						Problem during processing : [«exception.cause.getClass.simpleName»] «exception.message»
+						in «exception.causer.eResource.URI.lastSegment» Line:«NodeModelUtils::getNode(exception.causer).startLine»
+						
+							«getHighlightedRange(exception.causer, 2 , 2)»
+						
+					'''.toString
+					default : 'Problems during processing : ['+exception.getClass.simpleName+'] ' + (exception.message?:'')
+				}
+				resource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_processing_problem', message, it, null, -1, null)
+			]
+		]
+	}
+	
+	def private String getHighlightedRange(EObject obj, int linesBefore, int linesAfter) {
+		val node = NodeModelUtils::findActualNodeFor(obj)
+		val startLine = node.startLine - 1 - linesBefore
+		val endLine = node.startLine + linesAfter
+		val leafNodes = node.leafNodes.filter[!hidden]
+		val document = node.rootNode.leafNodes.fold(new StringBuilder) [result, leafNode |
+			if (leafNode == leafNodes.head) {
+				result.append("\u2588")
+			}
+			result.append(leafNode .text)		
+//			if (leafNode == leafNodes.last) {
+//				result.append("\u2588")
+//			} 
+			return result
+		]
+		val result = new StringBuilder
+		val lines = document.toString.split('\n')
+		for (i : startLine .. endLine) {
+			if (i >= 0 && i < lines.size) {
+				result.append(lines.get(i)).append('\n')
+			}
+		}
+		return result.toString
+	}
 	
 	def private List<XtendAnnotationTarget> getElements(MacroAnnotation macroAnnotation, Map<MacroAnnotation, List<XtendAnnotationTarget>> annotatedElements) {
 		annotatedElements.get(macroAnnotation).filter[e | isTargetType(e, macroAnnotation)].toList

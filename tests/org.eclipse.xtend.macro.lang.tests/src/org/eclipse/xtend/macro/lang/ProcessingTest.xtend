@@ -7,22 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtend.macro.lang
 
+import com.google.common.util.concurrent.FutureCallback
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
-import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import com.google.common.util.concurrent.FutureCallback
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(MacroInjectorProvider))
 class ProcessingTest {
 	
 	@Inject extension CompilationTestHelper
+	@Inject extension MacroTestExtensions 
 	
 	@Test def void testProcessing_01() {
 		resourceSet('''
@@ -150,12 +150,4 @@ class ProcessingTest {
 		]
 	}
 	
-	def Pair<String,CharSequence> xtend(CharSequence code) {
-		'MyXtendFile.xtend' -> code
-	}
-	
-	def Pair<String,CharSequence> macro(CharSequence code) {
-		'MyMacroFile.macro' -> code
-	}
-
 }

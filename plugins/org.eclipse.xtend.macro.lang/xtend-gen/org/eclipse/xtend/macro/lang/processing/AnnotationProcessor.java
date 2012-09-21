@@ -9,7 +9,10 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -24,13 +27,21 @@ import org.eclipse.xtend.macro.lang.macro.MacroAnnotation;
 import org.eclipse.xtend.macro.lang.macro.Processor;
 import org.eclipse.xtend.macro.lang.macro.Registrator;
 import org.eclipse.xtend.macro.lang.macro.TargetType;
+import org.eclipse.xtend.macro.lang.processing.MacroEvaluationException;
 import org.eclipse.xtend.macro.lang.processing.MacroInterpreter;
 import org.eclipse.xtend.macro.lang.processing.ProcessingContextImpl;
 import org.eclipse.xtend.macro.lang.processing.RegistrationContextImpl;
 import org.eclipse.xtend.macro.lang.processing.XAnnotationExtensions;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
@@ -40,10 +51,14 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -214,18 +229,19 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     for (final XAnnotation annotation : _filter) {
       {
         final MacroAnnotation macroAnno = this._xAnnotationExtensions.getMacroAnnotation(annotation);
-        boolean _and = false;
         boolean _notEquals = (!Objects.equal(macroAnno, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
+        if (_notEquals) {
           boolean _hasErrors = this._macroAnnotationExtensions.hasErrors(macroAnno);
-          boolean _not = (!_hasErrors);
-          _and = (_notEquals && _not);
-        }
-        if (_and) {
-          Pair<MacroAnnotation,XtendAnnotationTarget> _mappedTo = Pair.<MacroAnnotation, XtendAnnotationTarget>of(macroAnno, candidate);
-          acceptor.accept(_mappedTo);
+          if (_hasErrors) {
+            Resource _eResource = annotation.eResource();
+            EList<Diagnostic> _errors = _eResource.getErrors();
+            int _minus = (-1);
+            EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_has_errors", "The referenced macro annotation has compile errors.", annotation, null, _minus, null);
+            _errors.add(_eObjectDiagnosticImpl);
+          } else {
+            Pair<MacroAnnotation,XtendAnnotationTarget> _mappedTo = Pair.<MacroAnnotation, XtendAnnotationTarget>of(macroAnno, candidate);
+            acceptor.accept(_mappedTo);
+          }
         }
       }
     }
@@ -285,46 +301,175 @@ public class AnnotationProcessor implements IJvmModelInferrer {
   }
   
   private void invokeProcessors(final XtendFile xtendFile, final Map<MacroAnnotation,List<XtendAnnotationTarget>> annotatedElements, final CancelIndicator cancelIndicator) {
-    try {
-      Set<MacroAnnotation> _keySet = annotatedElements.keySet();
-      for (final MacroAnnotation macroAnnotation : _keySet) {
-        {
-          DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
-          final DefaultEvaluationContext ctx = _defaultEvaluationContext;
-          final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
-          final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
-          processingCtx.setElements(elements);
-          processingCtx.setSource(xtendFile);
-          processingCtx.setTypesBuilder(this.jvmTypesBuilder);
-          QualifiedName _create = QualifiedName.create("this");
-          ctx.newValue(_create, processingCtx);
-          QualifiedName _create_1 = QualifiedName.create("elements");
-          ctx.newValue(_create_1, elements);
-          QualifiedName _create_2 = QualifiedName.create("source");
-          ctx.newValue(_create_2, xtendFile);
-          try {
-            Processor _processor = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
-            XExpression _expression = _processor.getExpression();
-            final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
-            Throwable _exception = result.getException();
-            boolean _notEquals = (!Objects.equal(_exception, null));
-            if (_notEquals) {
-              throw result.getException();
-            }
-          } catch (final Throwable _t) {
-            if (_t instanceof Exception) {
-              final Exception e = (Exception)_t;
-              String _message = e.getMessage();
-              AnnotationProcessor.LOG.error(_message, e);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+    Set<MacroAnnotation> _keySet = annotatedElements.keySet();
+    for (final MacroAnnotation macroAnnotation : _keySet) {
+      {
+        DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
+        final DefaultEvaluationContext ctx = _defaultEvaluationContext;
+        final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
+        final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
+        processingCtx.setElements(elements);
+        processingCtx.setSource(xtendFile);
+        processingCtx.setTypesBuilder(this.jvmTypesBuilder);
+        QualifiedName _create = QualifiedName.create("this");
+        ctx.newValue(_create, processingCtx);
+        QualifiedName _create_1 = QualifiedName.create("elements");
+        ctx.newValue(_create_1, elements);
+        QualifiedName _create_2 = QualifiedName.create("source");
+        ctx.newValue(_create_2, xtendFile);
+        try {
+          Processor _processor = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
+          XExpression _expression = _processor.getExpression();
+          final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
+          Throwable _exception = result.getException();
+          boolean _notEquals = (!Objects.equal(_exception, null));
+          if (_notEquals) {
+            Resource _eResource = xtendFile.eResource();
+            Throwable _exception_1 = result.getException();
+            this.handleError(_eResource, elements, macroAnnotation, _exception_1);
+          }
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception e = (Exception)_t;
+            String _message = e.getMessage();
+            AnnotationProcessor.LOG.error(_message, e);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
         }
       }
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private void handleError(final Resource resource, final List<XtendAnnotationTarget> annotatedElements, final MacroAnnotation annotation, final Throwable exception) {
+    final Procedure1<XtendAnnotationTarget> _function = new Procedure1<XtendAnnotationTarget>() {
+        public void apply(final XtendAnnotationTarget it) {
+          EList<XAnnotation> _annotations = it.getAnnotations();
+          final Function1<XAnnotation,Boolean> _function = new Function1<XAnnotation,Boolean>() {
+              public Boolean apply(final XAnnotation it) {
+                JvmAnnotationType _annotationType = it.getAnnotationType();
+                String _simpleName = _annotationType.getSimpleName();
+                String _name = annotation.getName();
+                boolean _equals = Objects.equal(_simpleName, _name);
+                return Boolean.valueOf(_equals);
+              }
+            };
+          Iterable<XAnnotation> _filter = IterableExtensions.<XAnnotation>filter(_annotations, _function);
+          final Procedure1<XAnnotation> _function_1 = new Procedure1<XAnnotation>() {
+              public void apply(final XAnnotation it) {
+                String _switchResult = null;
+                boolean _matched = false;
+                if (!_matched) {
+                  if (exception instanceof MacroEvaluationException) {
+                    final MacroEvaluationException _macroEvaluationException = (MacroEvaluationException)exception;
+                    _matched=true;
+                    StringConcatenation _builder = new StringConcatenation();
+                    _builder.append("Problem during processing : [");
+                    Throwable _cause = _macroEvaluationException.getCause();
+                    Class<? extends Object> _class = _cause.getClass();
+                    String _simpleName = _class.getSimpleName();
+                    _builder.append(_simpleName, "");
+                    _builder.append("] ");
+                    String _message = _macroEvaluationException.getMessage();
+                    _builder.append(_message, "");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("in ");
+                    Resource _eResource = _macroEvaluationException.causer.eResource();
+                    URI _uRI = _eResource.getURI();
+                    String _lastSegment = _uRI.lastSegment();
+                    _builder.append(_lastSegment, "");
+                    _builder.append(" Line:");
+                    ICompositeNode _node = NodeModelUtils.getNode(_macroEvaluationException.causer);
+                    int _startLine = _node.getStartLine();
+                    _builder.append(_startLine, "");
+                    _builder.newLineIfNotEmpty();
+                    _builder.newLine();
+                    _builder.append("\t");
+                    String _highlightedRange = AnnotationProcessor.this.getHighlightedRange(_macroEvaluationException.causer, 2, 2);
+                    _builder.append(_highlightedRange, "	");
+                    _builder.newLineIfNotEmpty();
+                    _builder.newLine();
+                    String _string = _builder.toString();
+                    _switchResult = _string;
+                  }
+                }
+                if (!_matched) {
+                  Class<? extends Object> _class = exception.getClass();
+                  String _simpleName = _class.getSimpleName();
+                  String _plus = ("Problems during processing : [" + _simpleName);
+                  String _plus_1 = (_plus + "] ");
+                  String _message = exception.getMessage();
+                  String _elvis = ObjectExtensions.<String>operator_elvis(_message, "");
+                  String _plus_2 = (_plus_1 + _elvis);
+                  _switchResult = _plus_2;
+                }
+                final String message = _switchResult;
+                EList<Diagnostic> _errors = resource.getErrors();
+                int _minus = (-1);
+                EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_processing_problem", message, it, null, _minus, null);
+                _errors.add(_eObjectDiagnosticImpl);
+              }
+            };
+          IterableExtensions.<XAnnotation>forEach(_filter, _function_1);
+        }
+      };
+    IterableExtensions.<XtendAnnotationTarget>forEach(annotatedElements, _function);
+  }
+  
+  private String getHighlightedRange(final EObject obj, final int linesBefore, final int linesAfter) {
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
+    int _startLine = node.getStartLine();
+    int _minus = (_startLine - 1);
+    final int startLine = (_minus - linesBefore);
+    int _startLine_1 = node.getStartLine();
+    final int endLine = (_startLine_1 + linesAfter);
+    Iterable<ILeafNode> _leafNodes = node.getLeafNodes();
+    final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
+        public Boolean apply(final ILeafNode it) {
+          boolean _isHidden = it.isHidden();
+          boolean _not = (!_isHidden);
+          return Boolean.valueOf(_not);
+        }
+      };
+    final Iterable<ILeafNode> leafNodes = IterableExtensions.<ILeafNode>filter(_leafNodes, _function);
+    ICompositeNode _rootNode = node.getRootNode();
+    Iterable<ILeafNode> _leafNodes_1 = _rootNode.getLeafNodes();
+    StringBuilder _stringBuilder = new StringBuilder();
+    final Function2<StringBuilder,ILeafNode,StringBuilder> _function_1 = new Function2<StringBuilder,ILeafNode,StringBuilder>() {
+        public StringBuilder apply(final StringBuilder result, final ILeafNode leafNode) {
+          ILeafNode _head = IterableExtensions.<ILeafNode>head(leafNodes);
+          boolean _equals = Objects.equal(leafNode, _head);
+          if (_equals) {
+            result.append("\u2588");
+          }
+          String _text = leafNode.getText();
+          result.append(_text);
+          return result;
+        }
+      };
+    final StringBuilder document = IterableExtensions.<ILeafNode, StringBuilder>fold(_leafNodes_1, _stringBuilder, _function_1);
+    StringBuilder _stringBuilder_1 = new StringBuilder();
+    final StringBuilder result = _stringBuilder_1;
+    String _string = document.toString();
+    final String[] lines = _string.split("\n");
+    IntegerRange _upTo = new IntegerRange(startLine, endLine);
+    for (final Integer i : _upTo) {
+      boolean _and = false;
+      boolean _greaterEqualsThan = ((i).intValue() >= 0);
+      if (!_greaterEqualsThan) {
+        _and = false;
+      } else {
+        int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
+        boolean _lessThan = ((i).intValue() < _size);
+        _and = (_greaterEqualsThan && _lessThan);
+      }
+      if (_and) {
+        String _get = ((List<String>)Conversions.doWrapArray(lines)).get((i).intValue());
+        StringBuilder _append = result.append(_get);
+        _append.append("\n");
+      }
+    }
+    return result.toString();
   }
   
   private List<XtendAnnotationTarget> getElements(final MacroAnnotation macroAnnotation, final Map<MacroAnnotation,List<XtendAnnotationTarget>> annotatedElements) {

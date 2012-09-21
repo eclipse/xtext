@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.macro.ProcessingContext;
 import org.eclipse.xtend.macro.lang.jvmmodel.FunctionAdapter;
+import org.eclipse.xtend.macro.lang.processing.MacroEvaluationException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -28,8 +29,10 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
+import org.eclipse.xtext.xbase.interpreter.impl.EvaluationException;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -46,6 +49,30 @@ public class MacroInterpreter extends XbaseInterpreter {
   
   @Inject
   private FeatureCallToJavaMapping featureCallToJavaMapping;
+  
+  protected Object internalEvaluate(final XExpression expression, final IEvaluationContext context, final CancelIndicator indicator) throws EvaluationException {
+    Object _xtrycatchfinallyexpression = null;
+    try {
+      Object _internalEvaluate = super.internalEvaluate(expression, context, indicator);
+      _xtrycatchfinallyexpression = _internalEvaluate;
+    } catch (final Throwable _t) {
+      if (_t instanceof EvaluationException) {
+        final EvaluationException e = (EvaluationException)_t;
+        Throwable _cause = e.getCause();
+        if ((_cause instanceof MacroEvaluationException)) {
+          throw e;
+        } else {
+          Throwable _cause_1 = e.getCause();
+          MacroEvaluationException _macroEvaluationException = new MacroEvaluationException(expression, _cause_1);
+          EvaluationException _evaluationException = new EvaluationException(_macroEvaluationException);
+          throw _evaluationException;
+        }
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return _xtrycatchfinallyexpression;
+  }
   
   /**
    * handles special 'magic' methods from ProcessingContext

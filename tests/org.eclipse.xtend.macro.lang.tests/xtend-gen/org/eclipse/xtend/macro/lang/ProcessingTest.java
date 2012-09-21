@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.macro.lang.MacroInjectorProvider;
+import org.eclipse.xtend.macro.lang.MacroTestExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -30,6 +31,9 @@ public class ProcessingTest {
   @Inject
   private CompilationTestHelper _compilationTestHelper;
   
+  @Inject
+  private MacroTestExtensions _macroTestExtensions;
+  
   @Test
   public void testProcessing_01() {
     try {
@@ -43,7 +47,7 @@ public class ProcessingTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Pair<String,CharSequence> _xtend = this.xtend(_builder);
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@AsInterface for class {");
       _builder_1.newLine();
@@ -76,7 +80,7 @@ public class ProcessingTest {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      Pair<String,CharSequence> _macro = this.macro(_builder_1);
+      Pair<String,CharSequence> _macro = this._macroTestExtensions.macro(_builder_1);
       ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _macro);
       final Procedure1<Result> _function = new Procedure1<Result>() {
           public void apply(final Result it) {
@@ -112,7 +116,7 @@ public class ProcessingTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Pair<String,CharSequence> _xtend = this.xtend(_builder);
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@WithStringField for class {");
       _builder_1.newLine();
@@ -146,7 +150,7 @@ public class ProcessingTest {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      Pair<String,CharSequence> _macro = this.macro(_builder_1);
+      Pair<String,CharSequence> _macro = this._macroTestExtensions.macro(_builder_1);
       ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _macro);
       final Procedure1<Result> _function = new Procedure1<Result>() {
           public void apply(final Result it) {
@@ -208,7 +212,7 @@ public class ProcessingTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Pair<String,CharSequence> _xtend = this.xtend(_builder);
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -310,7 +314,7 @@ public class ProcessingTest {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      Pair<String,CharSequence> _macro = this.macro(_builder_1);
+      Pair<String,CharSequence> _macro = this._macroTestExtensions.macro(_builder_1);
       ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _macro);
       final Procedure1<Result> _function = new Procedure1<Result>() {
           public void apply(final Result it) {
@@ -338,15 +342,5 @@ public class ProcessingTest {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public Pair<String,CharSequence> xtend(final CharSequence code) {
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyXtendFile.xtend", code);
-    return _mappedTo;
-  }
-  
-  public Pair<String,CharSequence> macro(final CharSequence code) {
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyMacroFile.macro", code);
-    return _mappedTo;
   }
 }

@@ -20,10 +20,12 @@ import org.eclipse.xtext.common.types.util.JavaReflectAccess
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext
+import org.eclipse.xtext.xbase.interpreter.impl.EvaluationException
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
 
 /**
@@ -36,6 +38,18 @@ class MacroInterpreter extends XbaseInterpreter {
 	
 	@Inject JavaReflectAccess javaReflectAccess
 	@Inject FeatureCallToJavaMapping featureCallToJavaMapping
+	
+	override protected internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) throws EvaluationException {
+		try {
+			super.internalEvaluate(expression, context, indicator)
+		} catch (EvaluationException e) {
+			if (e.cause instanceof MacroEvaluationException) {
+				throw e
+			} else {
+				throw new EvaluationException(new MacroEvaluationException(expression, e.cause)) 
+			}
+		}
+	}
 	
 	/**
 	 * handles special 'magic' methods from ProcessingContext
@@ -92,4 +106,12 @@ class MacroInterpreter extends XbaseInterpreter {
 		super.invokeOperation(operation, receiver, argumentValues)
 	}
 	
+}
+
+class MacroEvaluationException extends RuntimeException {
+	public XExpression causer
+	new(XExpression causer, Throwable cause) {
+		super(cause)
+		this.causer = causer
+	}
 }
