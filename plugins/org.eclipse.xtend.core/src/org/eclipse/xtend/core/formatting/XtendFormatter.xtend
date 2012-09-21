@@ -670,7 +670,8 @@ public class XtendFormatter {
 			if(expr.expressions.empty) {
 				format += open.append[ newLine ] 
 			} else { 
-				format += open.append[ newLine; increaseIndentation ]
+				format += open.append[increaseIndentation]
+				format += open.append(format.cfg.newLinesAroundExpression)
 				for(child:expr.expressions) {
 					child.format(format)
 					if(child != expr.expressions.last || close != null) {
@@ -678,9 +679,9 @@ public class XtendFormatter {
 						val sem = childNode.immediatelyFollowingKeyword(";")
 						if(sem != null) {
 							format += sem.prepend[noSpace]
-							format += sem.append[newLine]
+							format += sem.append(format.cfg.newLinesAroundExpression)
 						} else {
-							format += childNode.append[ newLine ]
+							format += childNode.append(format.cfg.newLinesAroundExpression)
 						}
 					}
 				}
