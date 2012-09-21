@@ -1,0 +1,97 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.validation;
+
+import java.util.List;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * @since 2.4
+ */
+public class EObjectDiagnosticImpl extends AbstractDiagnostic {
+	
+	private EObject problematicObject;
+	private EStructuralFeature problematicFeature;
+	private int indexOfProblemanticValueInFeature = -1;
+	private Severity severity;
+	private String code;
+	private String message;
+	private String[] data;
+	
+	public EObjectDiagnosticImpl(Severity severity, String problemCode, String message, EObject problematicObject,
+			EStructuralFeature problematicFeature, int indexOfProblemanticValueInFeature, String[] data) {
+		super();
+		this.severity = severity;
+		this.code = problemCode;
+		this.message = message;
+		this.problematicObject = problematicObject;
+		this.problematicFeature = problematicFeature;
+		this.indexOfProblemanticValueInFeature = indexOfProblemanticValueInFeature;
+		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	@Override
+	protected INode getNode() {
+		if (problematicObject == null)
+			return null;
+		if (problematicFeature == null)
+			return NodeModelUtils.findActualNodeFor(problematicObject);
+			
+		List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(problematicObject, problematicFeature);
+		if (nodesForFeature.isEmpty()) {
+			return NodeModelUtils.findActualNodeFor(problematicObject);
+		}
+		if (nodesForFeature.size() == 1 && indexOfProblemanticValueInFeature == -1)
+			return nodesForFeature.get(0);
+		if (nodesForFeature.size() > indexOfProblemanticValueInFeature ) {
+			return nodesForFeature.get(indexOfProblemanticValueInFeature);
+		}
+		return null;
+	}
+
+	@Override
+	public String getCode() {
+		return code;
+	}
+
+	@Override
+	public String[] getData() {
+		return data;
+	}
+	
+	@Override
+	public URI getUriToProblem() {
+		return EcoreUtil.getURI(problematicObject);
+	}
+	
+	public Severity getSeverity() {
+		return severity;
+	}
+	
+	public EStructuralFeature getProblematicFeature() {
+		return problematicFeature;
+	}
+	
+	public EObject getProblematicObject() {
+		return problematicObject;
+	}
+
+}
