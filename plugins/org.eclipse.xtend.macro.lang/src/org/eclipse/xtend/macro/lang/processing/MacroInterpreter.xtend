@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext
 import org.eclipse.xtext.xbase.interpreter.impl.EvaluationException
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 /**
  * Specialization of the standard Xbase interpreter.

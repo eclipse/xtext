@@ -36,6 +36,22 @@ public interface ProcessingContext {
 	JvmConstructor constructor(Procedures.Procedure1<JvmConstructor> initializer);
 	
 	JvmFormalParameter param(String name, JvmTypeReference type);
+	
+	/**
+	 * adds a compile-time error to the given element with the given message
+	 * 
+	 * @param target
+	 * @param message
+	 */
+	void error(Object target, String message);
+	
+	/**
+	 * adds a compile-time warning to the given element with the given message
+	 * 
+	 * @param target
+	 * @param message
+	 */
+	void warning(Object target, String message);
 
 	/**
 	 * @returns the type T as a {@link JvmTypeReference} instance.

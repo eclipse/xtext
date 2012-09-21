@@ -9,6 +9,7 @@ package org.eclipse.xtend.macro.lang.processing
 
 import java.util.List
 import java.util.Stack
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.Property
@@ -19,12 +20,14 @@ import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions$Function1
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
-import org.eclipse.xtext.common.types.JvmType
 
 /**
  * Basic implementation of processing context.
@@ -125,4 +128,23 @@ class ProcessingContextImpl implements ProcessingContext {
 		return typesBuilder.newTypeRef(source, name, typeRef)
 	}
 
+
+	override error(Object target, String message) {
+		switch target {
+			EObject : {
+				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, target, null, -1, null)
+			}
+			default : throw new IllegalArgumentException("Only EObjects are supported atm.")
+		}
+	}
+	
+	override warning(Object target, String message) {
+		switch target {
+			EObject : {
+				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, target, null, -1, null)
+			}
+			default : throw new IllegalArgumentException("Only EObjects are supported atm.")
+		}
+	}
+	
 }

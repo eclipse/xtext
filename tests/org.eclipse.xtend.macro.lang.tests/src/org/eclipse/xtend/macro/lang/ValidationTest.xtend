@@ -68,4 +68,22 @@ class ValidationTest {
 		assertTrue(message.contains('method'))
 		assertTrue( resourceSet.resources.findFirst[ URI.fileExtension == 'macro'].errors.empty)
 	}
+	
+	@Test def void testValidationError_03() {
+		val resourceSet = resourceSet(
+		'''
+			@MyAnnotation class Foo {}
+		'''.xtend, 
+		'''
+			@MyAnnotation for class {
+				process {
+					error(elements.head, 'Bad name '+elements.head.name)
+				}
+			}
+		'''.macro)
+		EcoreUtil::resolveAll(resourceSet)
+		val message = resourceSet.resources.findFirst[ URI.fileExtension == 'xtend'].errors.head.message
+		assertTrue(message, message.contains('Bad name Foo'))
+		assertTrue( resourceSet.resources.findFirst[ URI.fileExtension == 'macro'].errors.empty)
+	}
 }

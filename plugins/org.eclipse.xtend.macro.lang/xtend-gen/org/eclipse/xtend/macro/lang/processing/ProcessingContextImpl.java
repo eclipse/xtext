@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.macro.ProcessingContext;
@@ -21,6 +22,8 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -201,5 +204,43 @@ public class ProcessingContextImpl implements ProcessingContext {
     JvmTypesBuilder _typesBuilder_1 = this.getTypesBuilder();
     XtendFile _source_1 = this.getSource();
     return _typesBuilder_1.newTypeRef(_source_1, name, typeRef);
+  }
+  
+  public void error(final Object target, final String message) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (target instanceof EObject) {
+        final EObject _eObject = (EObject)target;
+        _matched=true;
+        Resource _eResource = _eObject.eResource();
+        EList<Diagnostic> _errors = _eResource.getErrors();
+        int _minus = (-1);
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _eObject, null, _minus, null);
+        _errors.add(_eObjectDiagnosticImpl);
+      }
+    }
+    if (!_matched) {
+      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Only EObjects are supported atm.");
+      throw _illegalArgumentException;
+    }
+  }
+  
+  public void warning(final Object target, final String message) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (target instanceof EObject) {
+        final EObject _eObject = (EObject)target;
+        _matched=true;
+        Resource _eResource = _eObject.eResource();
+        EList<Diagnostic> _errors = _eResource.getErrors();
+        int _minus = (-1);
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _eObject, null, _minus, null);
+        _errors.add(_eObjectDiagnosticImpl);
+      }
+    }
+    if (!_matched) {
+      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Only EObjects are supported atm.");
+      throw _illegalArgumentException;
+    }
   }
 }
