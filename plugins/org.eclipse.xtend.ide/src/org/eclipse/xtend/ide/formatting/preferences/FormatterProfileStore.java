@@ -37,7 +37,7 @@ public class FormatterProfileStore extends ProfileStore {
 	}
 
 	@Override
-	public List<?> readProfiles(IScopeContext scope) throws CoreException {
+	public List readProfiles(IScopeContext scope) throws CoreException {
 		return readProfilesFromString(scope.getNode(xtendNodeID).get(XTEND_PROFILES_KEY, null));
 	}
 
