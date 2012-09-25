@@ -33,7 +33,7 @@ public class JvmGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	@Override
 	public IScope getScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentTypeScope = getParentTypeScope(resource, reference, filter, reference.getEReferenceType());
-		return super.getScope(parentTypeScope, resource, false, reference.getEReferenceType(), filter);
+		return parentTypeScope;
 	}
 
 	protected IScope getParentTypeScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter,
