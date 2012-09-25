@@ -229,6 +229,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(newArrayList("a","bb","ccc"), "newArrayList('a','bb','ccc').sortBy [x | x.length]");
 	}
 	
+	@Test public void testBuilderSyntax_04() throws Exception {
+		assertEvaluatesTo(newArrayList(), "<String>newArrayList.sortBy [length]");
+	}
+	
 	@Test public void testNestedClosures_01() throws Exception {
 		String expr = 
 				"{ " +
