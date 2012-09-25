@@ -11,8 +11,10 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
+import org.eclipse.xtext.ui.MarkerTypes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -51,6 +53,7 @@ public class XtextNature implements IProjectNature {
 						commands.length - i - 1);
 				description.setBuildSpec(newCommands);
 				project.setDescription(description, null);			
+				project.deleteMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
 				return;
 			}
 		}

@@ -15,26 +15,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
@@ -73,6 +78,33 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	public void tearDown() throws Exception {
 		super.tearDown();
 		participant = null;
+	}
+
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=345545
+	 */
+	@Test public void deconfigureXtextNatureShouldDeleteMarkers() throws Exception {
+		final IJavaProject project = createJavaProject("removeXtextNatureShouldDeleteMarkers");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("ob ject Foo"), true, monitor());
+		waitForAutoBuild();
+		IMarker[] markers = project.getProject().findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals(1, markers.length);
+		assertEquals(MarkerTypes.FAST_VALIDATION, markers[0].getType());
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				XtextNature xtextNature = new XtextNature();
+				xtextNature.setProject(project.getProject());
+				xtextNature.deconfigure();
+			}
+		}.run(monitor());
+		waitForAutoBuild();
+		markers = project.getProject().findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals(0, markers.length);
 	}
 	
 	@Test public void testGenerateIntoProjectOutputDirectory() throws Exception {
