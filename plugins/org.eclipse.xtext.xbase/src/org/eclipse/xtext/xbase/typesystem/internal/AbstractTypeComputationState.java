@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.FeatureLinkHelper;
 
 import com.google.common.collect.Lists;
 
@@ -103,7 +106,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	/*
-	 * Clients who override this method have to be careful with AbstractLinkingCandidate#computeArgumentTypes where
+	 * Clients who override this method have to be careful with AbstractPendingLinkingCandidate#computeArgumentTypes where
 	 * a subtype of TypeComputationStateWithExpectation is used.
 	 */
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
@@ -179,6 +182,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 	}
 
+	@SuppressWarnings({ "null", "unused" })
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		if (type == null)
 			throw new IllegalArgumentException("Reassigned type may not be null");
@@ -194,10 +198,14 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
+		EObject proxyOrResolved = (EObject) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+		if (!proxyOrResolved.eIsProxy()) {
+			result = createResolvedLink(featureCall, (JvmIdentifiableElement) proxyOrResolved);
+			return Collections.singletonList(result);
+		}
 		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
 		final AbstractTypeComputationState forked = withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
-			
 			@Override
 			protected IResolvedTypes delegate() {
 				return forked.getResolvedTypes();
@@ -215,7 +223,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			}
 		};
 		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
-				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, featureScopeSession, demandResolvedTypes);
+				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes);
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
 			resultList.add(createCandidate(featureCall, demandComputedTypes, description));
@@ -224,6 +232,19 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			throw new IllegalStateException("Linking candidates may not be empty");
 		}
 		return resultList;
+	}
+	
+	protected IFeatureLinkingCandidate createResolvedLink(XAbstractFeatureCall featureCall, JvmIdentifiableElement resolvedTo) {
+		// TODO inject the helper ?
+		FeatureLinkHelper helper = new FeatureLinkHelper();
+		XExpression receiver = helper.getReceiver(featureCall);
+		if (receiver != null) {
+			AbstractTypeComputationState child = withNonVoidExpectation();
+			child.computeTypes(receiver);
+		}
+		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+		return new ResolvedFeature(featureCall, resolvedTo, helper, state);
 	}
 	
 	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IEObjectDescription description) {
@@ -255,8 +276,13 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
+		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+		if (!proxyOrResolved.eIsProxy()) {
+			result = createResolvedLink(constructorCall, (JvmConstructor) proxyOrResolved);
+			return Collections.singletonList(result);
+		}
 		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
-				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, featureScopeSession, resolvedTypes);
+				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, proxyOrResolved, featureScopeSession, resolvedTypes);
 		List<IConstructorLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
 			resultList.add(createCandidate(constructorCall, description));
@@ -267,6 +293,12 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return resultList;
 	}
 
+	protected IConstructorLinkingCandidate createResolvedLink(XConstructorCall constructorCall, JvmConstructor resolvedTo) {
+		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
+		return new ResolvedConstructor(constructorCall, resolvedTo, state);
+	}
+	
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
 		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);

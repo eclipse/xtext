@@ -11,6 +11,8 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
@@ -39,15 +41,15 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 		tester.assertSerializeWithNodeModel(expected);
 	}
 
-//	@Ignore @Test
-//	@Override
-//	public void testReturnExpression_07() throws Exception {
-//		super.testReturnExpression_07();
-//	}
-//	
-//	@Ignore @Test
-//	@Override
-//	public void testReturnExpression_08() throws Exception {
-//		super.testReturnExpression_08();
-//	}
+	@Ignore @Test
+	@Override
+	public void testReturnExpression_07() throws Exception {
+		super.testReturnExpression_07();
+	}
+	
+	@Ignore @Test
+	@Override
+	public void testReturnExpression_08() throws Exception {
+		super.testReturnExpression_08();
+	}
 }

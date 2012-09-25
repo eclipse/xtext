@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
-import static java.util.Collections.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,7 +23,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Inject;
@@ -53,7 +50,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 		if (container instanceof JvmOperation) {
 			return ((JvmOperation) container).getReturnType();
 		}
-		throw new UnsupportedOperationException("TODO");
+		return getExpectedType(expression);
 	}
 
 	@Override

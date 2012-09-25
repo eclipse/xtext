@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
@@ -25,6 +26,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class UnresolvableConstructorCall extends AbstractUnresolvableFeature implements IConstructorLinkingCandidate {
 
 	public UnresolvableConstructorCall(XConstructorCall constructorCall, INode node, String text, ExpressionTypeComputationState state) {
@@ -32,7 +34,7 @@ public class UnresolvableConstructorCall extends AbstractUnresolvableFeature imp
 	}
 	
 	public JvmConstructor getConstructor() {
-		return null;
+		throw new UnsupportedOperationException("TODO return some error feature that is compatible to everything");
 	}
 	
 	public XConstructorCall getConstructorCall() {

@@ -8,8 +8,12 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -52,6 +56,20 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	@Override
 	public AbstractTypeComputationState withTypeCheckpoint() {
 		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
+	}
+	
+	@Override
+	protected IFeatureLinkingCandidate createResolvedLink(XAbstractFeatureCall featureCall,
+			JvmIdentifiableElement resolvedTo) {
+		if (isImplicitReceiver(featureCall)) {
+			return new ResolvedImplicitReceiver((XAbstractFeatureCall) featureCall.eContainer(), featureCall, this);
+		}
+		return super.createResolvedLink(featureCall, resolvedTo);
+	}
+	
+	protected boolean isImplicitReceiver(XAbstractFeatureCall featureCall) {
+		boolean result = featureCall.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
+		return result;
 	}
 	
 	protected XExpression getExpression() {

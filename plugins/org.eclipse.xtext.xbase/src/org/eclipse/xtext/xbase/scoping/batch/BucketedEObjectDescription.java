@@ -11,8 +11,10 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -117,7 +119,19 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return receiverType != null && receiverTypeParameterMapping == null;
 	}
 	
+	public boolean isStatic(JvmIdentifiableElement identifiable) {
+		if (identifiable instanceof JvmField)
+			return ((JvmField) identifiable).isStatic();
+		if (identifiable instanceof JvmOperation)
+			return ((JvmOperation) identifiable).isStatic();
+		return false;
+	}
+	
 	public boolean isStaticDescription() {
+		EObject object = getEObjectOrProxy();
+		if (object instanceof JvmIdentifiableElement) {
+			return isStatic((JvmIdentifiableElement) object);
+		}
 		return receiverType == null;
 	}
 	

@@ -47,9 +47,8 @@ public class ScopeProviderAccess {
 	@Inject
 	private LazyURIEncoder encoder;
 
-	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference,
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, EObject toBeLinked,
 			IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
-		EObject toBeLinked = (EObject) expression.eGet(reference, false);
 		if (toBeLinked == null) {
 			return Collections.emptyList();
 		}

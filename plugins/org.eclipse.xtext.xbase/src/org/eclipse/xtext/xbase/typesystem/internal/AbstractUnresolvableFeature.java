@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 	private XExpression expression;
 	private ExpressionTypeComputationState state;
@@ -94,7 +97,7 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 		return diagnostic;
 	}
 	
-	protected List<Diagnostic> getDiagnosticList(LazyLinkingResource resource, DiagnosticMessage message) throws AssertionError {
+	protected List<Diagnostic> getDiagnosticList(LazyLinkingResource resource, @Nullable DiagnosticMessage message) throws AssertionError {
 		if (message != null) {
 			switch (message.getSeverity()) {
 				case ERROR:
@@ -117,7 +120,7 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 	}
 
 	public JvmIdentifiableElement getFeature() {
-		return null;
+		throw new UnsupportedOperationException("TODO return some error feature that is compatible to everything");
 	}
 	
 	public EObject getContext() {
