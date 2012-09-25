@@ -34,7 +34,13 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 import static extension org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter.*
+import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import java.util.Map
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.util.CancelIndicator
 
 
 /**
@@ -53,6 +59,35 @@ class MacroJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension MacroAnnotationExtensions
 	@Inject extension XAnnotationExtensions
 	@Inject MacroInterpreter interpreter
+	@Inject extension IQualifiedNameProvider 
+	
+	def dispatch void infer(XtendClass clazz, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(clazz.toClass(clazz.fullyQualifiedName)).initializeLater [
+			
+			disableCodeGeneration
+			visibility = JvmVisibility::PUBLIC
+			
+			clazz.members.filter(typeof(XtendFunction)).forEach [ function |
+				members += function.toMethod(function.name, function.returnType) [
+					setStatic(function.isStatic)
+					exceptions 		+= function.exceptions.map[ cloneWithProxies() ]
+					typeParameters 	+= function.typeParameters.map[ cloneWithProxies() ]
+					parameters += function.parameters.map[ p | p.toParameter(p.name, p.parameterType)]
+					body = function.expression
+					eAdapters +=
+						new FunctionAdapter => [
+							it.function = [ arguments |
+								val map = <String,Object>newHashMap()
+								for (p : function.parameters) {
+									map.put(p.name, arguments.get(function.parameters.indexOf(p)))
+								}
+								return evaluate(function.expression, map)
+							]
+						]
+				]
+			]
+		]
+	}
 
 	def dispatch void infer(MacroAnnotation annotation, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
 		
@@ -180,7 +215,13 @@ class MacroJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	def evaluate(XExpression expression) {
-		val result = interpreter.evaluate(expression)
+		evaluate(expression, null)
+	}
+	
+	def evaluate(XExpression expression, Map<String,Object> arguments) {
+		val ctx = new DefaultEvaluationContext
+		arguments?.entrySet.forEach [ ctx.newValue(QualifiedName::create(key), value)]
+		val result = interpreter.evaluate(expression, ctx, CancelIndicator::NullImpl)
 		return result.result
 	}
 }

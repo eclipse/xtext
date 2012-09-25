@@ -23,13 +23,13 @@ Type returns XtendTypeDeclaration :
 
 ClassDeclaration returns XtendClass :
 	'class' name=ValidID '{'
-		(members+=Member)*
+		members+=Member*
 	'}'
 ;
 
 MacroAnnotation returns MacroAnnotation : 
 	'@' name=ValidID ('for' targetType+=TargetType (',' targetType+=TargetType )*)? '{'
-	   (members+=MacroAnnotationMember)*
+	   members+=MacroAnnotationMember*
    	'}'
 ;
 

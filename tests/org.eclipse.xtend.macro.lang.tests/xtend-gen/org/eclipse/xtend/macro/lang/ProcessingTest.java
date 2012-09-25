@@ -343,4 +343,253 @@ public class ProcessingTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testProcessingWithClassFunction_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import anotherPack.MyService");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@MyService");
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package anotherPack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.core.xtend.XtendClass");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.core.xtend.XtendFile");
+      _builder_1.newLine();
+      _builder_1.append("import static extension anotherPack.HelperClass.*");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class HelperClass {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def static String interfaceName(XtendClass it) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("it.qualifiedName + \"Interface\"");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def static String qualifiedName(XtendClass it) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("(eContainer as XtendFile).^package + \".\" + name");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyService for class {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("register {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [e |");
+      _builder_1.newLine();
+      _builder_1.append("\t  \t");
+      _builder_1.append("registerInterface(e.interfaceName)");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("process {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [ e |");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("with(e.qualifiedName) [");
+      _builder_1.newLine();
+      _builder_1.append("\t\t  ");
+      _builder_1.append("superTypes += type(e.interfaceName)");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      Pair<String,CharSequence> _macro = this._macroTestExtensions.macro(_builder_1);
+      ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _macro);
+      final Procedure1<Result> _function = new Procedure1<Result>() {
+          public void apply(final Result it) {
+            final Class<? extends Object> myClass = it.getCompiledClass("foo.MyClass");
+            Assert.assertNotNull(myClass);
+            final Class<? extends Object> interf = it.getCompiledClass("foo.MyClassInterface");
+            Class<? extends Object>[] _interfaces = myClass.getInterfaces();
+            Class<? extends Object> _get = ((List<Class<? extends Object>>)Conversions.doWrapArray(_interfaces)).get(0);
+            Assert.assertSame(_get, interf);
+          }
+        };
+      this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
+          public void accept(Result t) {
+            _function.apply(t);
+          }
+      });
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testProcessingWithClassFunction_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import anotherPack.MyService");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@MyService");
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package anotherPack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import static extension anotherPack.HelperClass.*");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyService for class {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("register {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [e |");
+      _builder_1.newLine();
+      _builder_1.append("\t  \t");
+      _builder_1.append("registerInterface(e.interfaceName)");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("process {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [ e |");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("with(e.qualifiedName) [");
+      _builder_1.newLine();
+      _builder_1.append("\t\t  ");
+      _builder_1.append("superTypes += type(e.interfaceName)");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyService.macro", _builder_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package anotherPack");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import org.eclipse.xtend.core.xtend.XtendClass");
+      _builder_2.newLine();
+      _builder_2.append("import org.eclipse.xtend.core.xtend.XtendFile");
+      _builder_2.newLine();
+      _builder_2.append("import static extension anotherPack.HelperClass.*");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class HelperClass {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def static String interfaceName(XtendClass it) {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("it.qualifiedName + \"Interface\"");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def static String qualifiedName(XtendClass it) {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("(eContainer as XtendFile).^package + \".\" + name");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      Pair<String,CharSequence> _mappedTo_1 = Pair.<String, CharSequence>of("HelperClass.macro", _builder_2);
+      ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _mappedTo, _mappedTo_1);
+      final Procedure1<Result> _function = new Procedure1<Result>() {
+          public void apply(final Result it) {
+            final Class<? extends Object> myClass = it.getCompiledClass("foo.MyClass");
+            Assert.assertNotNull(myClass);
+            final Class<? extends Object> interf = it.getCompiledClass("foo.MyClassInterface");
+            Class<? extends Object>[] _interfaces = myClass.getInterfaces();
+            Class<? extends Object> _get = ((List<Class<? extends Object>>)Conversions.doWrapArray(_interfaces)).get(0);
+            Assert.assertSame(_get, interf);
+          }
+        };
+      this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
+          public void accept(Result t) {
+            _function.apply(t);
+          }
+      });
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

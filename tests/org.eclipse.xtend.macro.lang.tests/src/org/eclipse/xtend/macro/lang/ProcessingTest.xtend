@@ -150,4 +150,118 @@ class ProcessingTest {
 		]
 	}
 	
+	@Test def void testProcessingWithClassFunction_01() {
+		resourceSet('''
+				package foo
+				
+				import anotherPack.MyService
+				
+				@MyService
+				class MyClass {
+					
+				}
+			'''.xtend,
+			'''
+				package anotherPack
+				
+				import org.eclipse.xtend.core.xtend.XtendClass
+				import org.eclipse.xtend.core.xtend.XtendFile
+				import static extension anotherPack.HelperClass.*
+				
+				class HelperClass {
+					
+					def static String interfaceName(XtendClass it) {
+						it.qualifiedName + "Interface"
+					}
+					
+					def static String qualifiedName(XtendClass it) {
+						(eContainer as XtendFile).^package + "." + name
+					}
+				}
+				
+				@MyService for class {
+				
+				  register {
+				  	elements.forEach [e |
+					  	registerInterface(e.interfaceName)
+				  	]
+				  }
+				
+				  process {
+				  	elements.forEach [ e |
+						with(e.qualifiedName) [
+						  superTypes += type(e.interfaceName)
+						]
+				  	]
+				  }
+				}
+			'''.macro
+		).compile [
+			val myClass = getCompiledClass('foo.MyClass')
+			assertNotNull(myClass)
+			val interf = getCompiledClass('foo.MyClassInterface')
+			assertSame( myClass.interfaces.get(0), interf )
+		]	
+	}
+	
+	
+	@Test def void testProcessingWithClassFunction_02() {
+		resourceSet('''
+				package foo
+				
+				import anotherPack.MyService
+				
+				@MyService
+				class MyClass {
+					
+				}
+			'''.xtend,
+			'MyService.macro' -> '''
+				package anotherPack
+				
+				import static extension anotherPack.HelperClass.*
+				
+				@MyService for class {
+				
+				  register {
+				  	elements.forEach [e |
+					  	registerInterface(e.interfaceName)
+				  	]
+				  }
+				
+				  process {
+				  	elements.forEach [ e |
+						with(e.qualifiedName) [
+						  superTypes += type(e.interfaceName)
+						]
+				  	]
+				  }
+				}
+			''',
+			'HelperClass.macro' ->'''
+				package anotherPack
+				
+				import org.eclipse.xtend.core.xtend.XtendClass
+				import org.eclipse.xtend.core.xtend.XtendFile
+				import static extension anotherPack.HelperClass.*
+				
+				class HelperClass {
+					
+					def static String interfaceName(XtendClass it) {
+						it.qualifiedName + "Interface"
+					}
+					
+					def static String qualifiedName(XtendClass it) {
+						(eContainer as XtendFile).^package + "." + name
+					}
+				}
+			'''
+		).compile [
+			val myClass = getCompiledClass('foo.MyClass')
+			assertNotNull(myClass)
+			val interf = getCompiledClass('foo.MyClassInterface')
+			assertSame( myClass.interfaces.get(0), interf )
+		]	
+	}
+	
 }
