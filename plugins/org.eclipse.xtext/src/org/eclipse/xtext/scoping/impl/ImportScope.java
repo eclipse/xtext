@@ -62,7 +62,7 @@ public class ImportScope extends AbstractScope {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + normalizers + getAllLocalElements() + " -> " + getParent();
+		return getClass().getSimpleName() + normalizers + " imports from " + importFrom + " for type "+type.getName();
 	}
 
 	@Override
