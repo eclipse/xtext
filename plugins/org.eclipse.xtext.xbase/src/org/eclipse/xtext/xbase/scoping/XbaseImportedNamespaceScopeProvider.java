@@ -68,7 +68,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 			throw new NullPointerException("context");
 		if (context.eResource() == null)
 			throw new IllegalArgumentException("context must be contained in a resource");
-		IScope globalScope = getGlobalScope(context.eResource(), reference); 
+		IScope globalScope = getGlobalScope(context.eResource(), reference);
 		return internalGetScope(globalScope, globalScope, context, reference);
 	}
 	
@@ -171,7 +171,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 			protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
 				if (name.getSegmentCount() > 1)
 					return null;
-				return super.getSingleLocalElementByName(name);
+				final IEObjectDescription result = super.getSingleLocalElementByName(name);
+				return result;
 			}
 			
 			@Override
