@@ -31,4 +31,9 @@ class ContainerState implements IContainerState {
 	public boolean isEmpty() {
 		return globalState.isEmpty(root);
 	}
+	
+	@Override
+	public String toString() {
+		return "container '" + root +"' from "+globalState;
+	}
 }

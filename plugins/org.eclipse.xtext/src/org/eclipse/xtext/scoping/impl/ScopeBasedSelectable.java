@@ -44,5 +44,10 @@ public class ScopeBasedSelectable implements ISelectable {
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return scope.getElements(object);
 	}
+	
+	@Override
+	public String toString() {
+		return scope.toString();
+	}
 
 }
