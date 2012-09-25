@@ -7,29 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -54,11 +42,10 @@ import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO Javadoc
  */
-public abstract class AbstractLinkingCandidate<Expression extends XExpression> implements ILinkingCandidate { 
-	
-	@NonNullByDefault
+@NonNullByDefault
+public abstract class AbstractLinkingCandidate<Expression extends XExpression> implements ILinkingCandidate {
+
 	protected class LinkingTypeComputationState extends AbstractStackedTypeComputationState {
 
 		private final LightweightTypeReference expectedType;
@@ -95,7 +82,6 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		
 	}
 	
-	@NonNullByDefault
 	protected class ObservableTypeExpectation extends TypeExpectation {
 
 		private ConformanceHint conformanceHint;
@@ -127,19 +113,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		
 	}
 	
-	protected final IEObjectDescription description;
-	protected final ExpressionTypeComputationState state;
-	protected final Expression expression;
-	protected final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
-	protected List<LightweightTypeReference> typeArguments;
+	private final ExpressionTypeComputationState state;
+	private final Expression expression;
+	private List<LightweightTypeReference> typeArguments;
 	protected IExpressionArguments arguments;
 	
-	protected AbstractLinkingCandidate(Expression expression, IEObjectDescription description,
-			ExpressionTypeComputationState state) {
+	protected AbstractLinkingCandidate(Expression expression, ExpressionTypeComputationState state) {
 		this.expression = expression;
-		this.description = description;
 		this.state = state;
-		this.typeParameterMapping = initializeTypeParameterMapping();
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> initializeTypeParameterMapping() {
@@ -170,7 +151,6 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return typeParameterMapping;
 	}
 	
-	@NonNullByDefault
 	protected void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType == null || actual instanceof AnyTypeReference) {
@@ -187,7 +167,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			} else {
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(typeParameters.size());
 				for(JvmTypeParameter parameter: typeParameters) {
-					LightweightMergedBoundTypeArgument typeArgument = typeParameterMapping.get(parameter);
+					LightweightMergedBoundTypeArgument typeArgument = getTypeParameterMapping().get(parameter);
 					result.add(typeArgument.getTypeReference());
 				}
 				typeArguments = result;
@@ -196,7 +176,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return typeArguments;
 	}
 	
-	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+	protected abstract Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping();
+	
+	protected List<JvmTypeParameter> getDeclaredTypeParameters() {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			return ((JvmTypeParameterDeclarator) feature).getTypeParameters();
@@ -215,14 +197,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
 
 				@Override
-				@NonNull
-				protected UnboundTypeReference createUnboundTypeReference(@NonNull JvmTypeParameter type) {
+				protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 					UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
 					return result;
 				}
 				
 			};
-			substitutor.enhanceMapping(typeParameterMapping);
+			substitutor.enhanceMapping(getTypeParameterMapping());
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
 			deferredBindTypeArgument(expectation, substitutedFeatureType);
@@ -231,7 +212,6 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		state.getResolvedTypes().mergeIntoParent();
 	}
 	
-	@NonNullByDefault
 	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
@@ -260,7 +240,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (arguments.isProcessed(argumentIndex))
 			return;
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
-		substitutor.enhanceMapping(typeParameterMapping);
+		substitutor.enhanceMapping(getTypeParameterMapping());
 		if (argumentIndex < arguments.getFixedArityArgumentCount()) {
 			computeFixedArityArgumentType(argumentIndex, substitutor);
 			return;
@@ -314,19 +294,27 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!typeParameters.isEmpty()) {
 			// TODO actualType -(hint for)-> declared type == inferred
 			// declared type -(hint for)-> actual type == expected
-			TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, typeParameterMapping, BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner());
+			TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, getTypeParameterMapping(), BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner());
 		}
 	}
 	
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
-		return state.getResolvedTypes().getActualType(feature);
+		LightweightTypeReference result = state.getResolvedTypes().getActualType(feature);
+		if (result == null)
+			throw new IllegalStateException("Cannot determine type for " + feature.getIdentifier());
+		return result;
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		return Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap();
 	}
 
-	protected void resolveArgumentType(XExpression argument, LightweightTypeReference declaredType, ITypeComputationState argumentState) {
+	/**
+	 * @param argument the expression that should be processed.
+	 * @param declaredType the declared (expected) type for the given expression.
+	 * @param argumentState the to-be-used state to compute the actual type of the argument. It is already configured with the expectation. 
+	 */
+	protected void resolveArgumentType(XExpression argument, @Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		argumentState.computeTypes(argument);
 	}
 	
@@ -346,127 +334,26 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return arguments;
 	}
 	
-	public boolean isPreferredOver(ILinkingCandidate other) {
-		if (other instanceof AbstractLinkingCandidate) {
-			AbstractLinkingCandidate<?> right = (AbstractLinkingCandidate<?>) other;
-			boolean visible = isVisible();
-			if (visible != right.isVisible()) {
-				if (visible)
-					return true;
-				return false;
-			}
-			int arityCompareResult = compareByArityWith(right);
-			if (arityCompareResult != 0)
-				return arityCompareResult <= 0;
-			int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
-			if (typeArityCompareResult != 0)
-				return typeArityCompareResult <= 0;
-			int argumentTypeCompareResult = compareByArgumentTypes(right);
-			if (argumentTypeCompareResult != 0)
-				return argumentTypeCompareResult <= 0;
-			return true;
-		}
-		throw new IllegalArgumentException("other was " + other);
-	}
+	public abstract boolean isPreferredOver(ILinkingCandidate other);
 	
-	protected boolean isVisible() {
-		if (description instanceof BucketedEObjectDescription)
-			return ((BucketedEObjectDescription) description).isVisible();
-		return true;
-	}
-	
-	protected int compareByArgumentTypes(AbstractLinkingCandidate<?> right) {
-		initializeArgumentTypeComputation();
-		right.initializeArgumentTypeComputation();
-		
-		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
-		int leftBoxing = 0;
-		int rightBoxing = 0;
-		for(int i = 0; i < upTo; i++) {
-			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i);
-			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i);
-			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
-			if (hintCompareResult != 0)
-				return hintCompareResult;
-			if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
-				leftBoxing++;
-			}
-			if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
-				rightBoxing++;
-			}
-		}
-		if (leftBoxing != rightBoxing) {
-			if (leftBoxing < rightBoxing)
-				return -1;
-			return 1;
-		}
-		int result = compareDeclaredArgumentTypes(right);
-		if (result != 0)
-			return result;
-		return result;
-	}
-	
-	protected int compareByConformanceHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
-		for(ConformanceHint hint: Arrays.asList(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG, 
-				ConformanceHint.BOXING, ConformanceHint.UNBOXING, ConformanceHint.PRIMITIVE_WIDENING)) {
-			boolean leftContains = leftConformance.contains(hint);
-			boolean rightContains = rightConformance.contains(hint);
-			if (leftContains != rightContains) {
-				if (leftContains)
-					return 1;
-				return -1;
-			}
-		}
-		return 0;
-	}
-	
-	protected int compareByConformanceHint(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance, ConformanceHint unexpectedHint) {
-		boolean leftContains = leftConformance.contains(unexpectedHint);
-		boolean rightContains = rightConformance.contains(unexpectedHint);
-		if (leftContains != rightContains) {
-			if (leftContains)
-				return 1;
-			return -1;
-		}
-		return 0;
-	}
-	
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
-		while(!arguments.isProcessed(idx)) {
-			computeArgumentType(arguments.getNextUnprocessedNextArgument());
-		}
-		XExpression argument = arguments.getArgument(idx);
-		return state.getResolvedTypes().getConformanceHints(argument);
-	}
-
-	protected int compareDeclaredArgumentTypes(AbstractLinkingCandidate<?> right) {
-		int result = 0;
-		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
-		for(int i = 0; i < upTo; i++) {
-			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(i);
-			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);
-			if (expectedArgumentType == null) {
-				if (rightExpectedArgumentType != null)
-					return 1;
-			} else {
-				if (rightExpectedArgumentType == null) {
-					return -1;
-				}
-				if (expectedArgumentType.isAssignableFrom(rightExpectedArgumentType)) {
-					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType))
-						result++;
-				} else if (rightExpectedArgumentType.isAssignableFrom(expectedArgumentType)) {
-					result--;
-				}
-			}
-		}
-		return result;
-	}
-	
+	@Nullable
 	protected LightweightTypeReference getExpectedType(XExpression expression) {
 		return state.getResolvedTypes().getExpectedType(expression);
 	}
 	
+	@Nullable
+	protected LightweightTypeReference getActualType(JvmIdentifiableElement identifiableElement) {
+		return state.getResolvedTypes().getActualType(identifiableElement);
+	}
+	
+	@Nullable
+	protected LightweightTypeReference getActualType(@Nullable XExpression expression) {
+		if (expression == null)
+			return null;
+		return state.getResolvedTypes().getActualType(expression);
+	}
+	
+	@Nullable
 	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
 		XExpression expression = arguments.getArgument(argumentIndex);
 		LightweightTypeReference expectedType = getExpectedType(expression);
@@ -478,110 +365,21 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return null;
 	}
 
-	protected int compareByArityWith(AbstractLinkingCandidate<?> right) {
-		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
-		return arityCompareResult;
-	}
-
-	protected int compareByArity(int leftArityMismatch, int rightArityMismatch) {
-		if (leftArityMismatch != rightArityMismatch) {
-			if (leftArityMismatch == 0)
-				return -1;
-			if (rightArityMismatch == 0)
-				return 1;
-			if (Math.abs(leftArityMismatch) < Math.abs(rightArityMismatch))
-				return -1;
-			if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
-				return 1;
-			if (leftArityMismatch > 0)
-				return -1;
-			if (rightArityMismatch > 0)
-				return 1;
-		}
-		if (Math.abs(leftArityMismatch) < Math.abs(rightArityMismatch))
-			return -1;
-		if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
-			return 1;
-		if (leftArityMismatch > 0)
-			return -1;
-		if (rightArityMismatch > 0)
-			return 1;
-		return 0;
-	}
-	
-	public int getArityMismatch() {
-		JvmIdentifiableElement identifiable = getFeature();
-		if (identifiable instanceof JvmExecutable) {
-			return getArityMismatch((JvmExecutable) identifiable, getArguments());
-		} else if (expression instanceof XAssignment) {
-			return getArguments().size() - 1;
-		} else {
-			return getArguments().size();
-		}
-	}
-	
-	public int getTypeArityMismatch() {
-		List<LightweightTypeReference> explicitTypeArguments = getExplicitTypeArguments();
-		if (explicitTypeArguments.size() == 0)
-			return 0;
-		return getDeclaredTypeParameters().size() - explicitTypeArguments.size();
-	}
-	
-	protected void resolveLinkingProxy(EReference structuralFeature, int featureId) {
-		InternalEObject internalView = (InternalEObject) expression;
-		JvmIdentifiableElement newFeature = getFeature();
-		if (newFeature.eIsProxy()) {
-			newFeature = (JvmIdentifiableElement) internalView.eResolveProxy((InternalEObject) newFeature);
-		}
-		EObject oldFeature = (EObject) expression.eGet(structuralFeature, false);
-		if (oldFeature == null || !(oldFeature.eIsProxy())) {
-			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
-		}
-		if (internalView.eNotificationRequired()) {
-			boolean wasDeliver = internalView.eDeliver();
-			internalView.eSetDeliver(false);
-			expression.eSet(structuralFeature, newFeature);
-			internalView.eSetDeliver(wasDeliver);
-			if (newFeature != oldFeature) {
-				internalView.eNotify(new ENotificationImpl(internalView, Notification.RESOLVE, featureId, oldFeature, newFeature));
-			}
-		} else {
-			expression.eSet(structuralFeature, newFeature);
-		}
-	}
-	
 	protected abstract List<LightweightTypeReference> getExplicitTypeArguments();
 
-	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
-		int fixedArityParamCount = executable.getParameters().size();
-		if (executable.isVarArgs()) {
-			fixedArityParamCount--;
-			if (arguments.size() >= fixedArityParamCount) {
-				return 0;
-			}
-		}
-		return fixedArityParamCount - arguments.size();
-	}
-	
 	protected abstract List<XExpression> getSyntacticArguments();
 	
-	protected IEObjectDescription getDescription() {
-		return description;
+	public abstract JvmIdentifiableElement getFeature();
+	
+	@Nullable
+	protected abstract XExpression getReceiver();
+	
+	protected Expression getExpression() {
+		return expression;
 	}
 	
-	public JvmIdentifiableElement getFeature() {
-		return (JvmIdentifiableElement) getDescription().getEObjectOrProxy();
+	protected ExpressionTypeComputationState getState() {
+		return state;
 	}
 	
-	protected XExpression getReceiver() {
-		if (getDescription() instanceof BucketedEObjectDescription) {
-			return ((BucketedEObjectDescription) getDescription()).getReceiver();
-		}
-		return null;
-	}
-	
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + " [" + description.toString() + "]";
-	}
 }

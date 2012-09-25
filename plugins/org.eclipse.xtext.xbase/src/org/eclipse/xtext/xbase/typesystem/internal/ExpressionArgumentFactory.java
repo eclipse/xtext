@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public class ExpressionArgumentFactory {
 
-	public IExpressionArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<?> candidate) {
+	public IExpressionArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<? extends XExpression> candidate) {
 		if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable))
 			return new AssignmentArguments(candidate);
 		else

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
 
@@ -14,6 +15,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 
 	XConstructorCall getConstructorCall();

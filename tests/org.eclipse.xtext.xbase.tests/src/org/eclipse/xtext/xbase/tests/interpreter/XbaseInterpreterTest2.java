@@ -5,22 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.computation;
+package org.eclipse.xtext.xbase.tests.interpreter;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
-@NonNullByDefault
-public interface IFeatureLinkingCandidate extends ILinkingCandidate {
-
-	XAbstractFeatureCall getFeatureCall();
-
-	boolean isStatic();
-	
-	boolean isExtension();
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseNewTypeSystemInjectorProvider.class)
+public abstract class XbaseInterpreterTest2 extends XbaseInterpreterTest {
 	
 }

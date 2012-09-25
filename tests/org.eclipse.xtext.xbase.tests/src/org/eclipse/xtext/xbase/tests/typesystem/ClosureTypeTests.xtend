@@ -30,7 +30,11 @@ import org.eclipse.xtext.junit4.InjectWith
 class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver batchTypeResolver;
+	
+	def getTypeResolver() {
+		batchTypeResolver
+	}
 	
 	@Rule
 	public ErrorCollector collector= new ErrorCollector();
@@ -75,6 +79,20 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 			return type.type.simpleName
 		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingBatchClosureTypeTest extends BatchClosureTypeTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver recomputingResolver;
+	
+	override getTypeResolver() {
+		recomputingResolver
+	}
+	
 }
 
 /**

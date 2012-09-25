@@ -16,10 +16,14 @@ import org.junit.Test
 /**
  * @author Sebastian Zarnekow
  */
-class BatchConstructorCallTypeTests extends AbstractConstructorCallTypeTest {
+class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver batchTypeResolver;
+	
+	def getTypeResolver() {
+		batchTypeResolver
+	}
 	
 	override resolvesConstructorCallsTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
@@ -33,6 +37,20 @@ class BatchConstructorCallTypeTests extends AbstractConstructorCallTypeTest {
 		]
 	}
 		
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingBatchConstructorCallTypeTest extends BatchConstructorCallTypeTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver recomputingResolver;
+	
+	override getTypeResolver() {
+		recomputingResolver
+	}
+	
 }
 
 /**

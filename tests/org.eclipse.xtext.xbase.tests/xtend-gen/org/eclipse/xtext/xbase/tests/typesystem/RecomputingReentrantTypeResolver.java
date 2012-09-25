@@ -1,0 +1,331 @@
+package org.eclipse.xtext.xbase.tests.typesystem;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.Joiner.MapJoiner;
+import com.google.inject.Inject;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.MapExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
+import org.eclipse.xtext.xbase.tests.typesystem.RecordingRootResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.ImplicitReceiver;
+import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.junit.Assert;
+
+/**
+ * @author Sebastian Zarnekow
+ */
+@SuppressWarnings("all")
+public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
+  @Inject
+  private ReflectExtensions _reflectExtensions;
+  
+  private final MapJoiner mapJoiner = new Function0<MapJoiner>() {
+    public MapJoiner apply() {
+      Joiner _on = Joiner.on("\n");
+      MapJoiner _withKeyValueSeparator = _on.withKeyValueSeparator("=");
+      return _withKeyValueSeparator;
+    }
+  }.apply();
+  
+  public RootResolvedTypes createResolvedTypes() {
+    RecordingRootResolvedTypes _recordingRootResolvedTypes = new RecordingRootResolvedTypes(this);
+    return _recordingRootResolvedTypes;
+  }
+  
+  public IResolvedTypes resolve() {
+    IResolvedTypes _resolve = super.resolve();
+    final Map<XExpression,ILinkingCandidate> firstRun = ((RecordingRootResolvedTypes) _resolve).getResolvedProxies();
+    IResolvedTypes _resolve_1 = super.resolve();
+    final RecordingRootResolvedTypes result = ((RecordingRootResolvedTypes) _resolve_1);
+    final Map<XExpression,ILinkingCandidate> secondRun = result.getResolvedProxies();
+    StringConcatenation _builder = new StringConcatenation();
+    String _join = this.mapJoiner.join(firstRun);
+    _builder.append(_join, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" \t");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.append("vs");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.newLine();
+    String _join_1 = this.mapJoiner.join(secondRun);
+    _builder.append(_join_1, "");
+    _builder.newLineIfNotEmpty();
+    int _size = firstRun.size();
+    int _size_1 = secondRun.size();
+    Assert.assertEquals(_builder.toString(), _size, _size_1);
+    final Joiner setJoiner = Joiner.on("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    Set<XExpression> _keySet = firstRun.keySet();
+    String _join_2 = setJoiner.join(_keySet);
+    _builder_1.append(_join_2, "");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append(" \t");
+    _builder_1.newLine();
+    _builder_1.append(" \t");
+    _builder_1.append("vs");
+    _builder_1.newLine();
+    _builder_1.append(" \t");
+    _builder_1.newLine();
+    Set<XExpression> _keySet_1 = secondRun.keySet();
+    String _join_3 = setJoiner.join(_keySet_1);
+    _builder_1.append(_join_3, "");
+    _builder_1.newLineIfNotEmpty();
+    Set<XExpression> _keySet_2 = firstRun.keySet();
+    Set<XExpression> _keySet_3 = secondRun.keySet();
+    Assert.assertEquals(_builder_1.toString(), ((Object) _keySet_2), _keySet_3);
+    final Procedure2<XExpression,ILinkingCandidate> _function = new Procedure2<XExpression,ILinkingCandidate>() {
+        public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
+          final ILinkingCandidate secondLinkingData = secondRun.get(expression);
+          RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
+        }
+      };
+    MapExtensions.<XExpression, ILinkingCandidate>forEach(firstRun, _function);
+    return result;
+  }
+  
+  protected void _assertEqualLinkingData(final IConstructorLinkingCandidate left, final IConstructorLinkingCandidate right) {
+    JvmConstructor _constructor = left.getConstructor();
+    JvmConstructor _constructor_1 = right.getConstructor();
+    Assert.assertEquals("constructor", _constructor, _constructor_1);
+    XConstructorCall _constructorCall = left.getConstructorCall();
+    XConstructorCall _constructorCall_1 = right.getConstructorCall();
+    Assert.assertEquals("constructorCall", _constructorCall, _constructorCall_1);
+    this.doAssertEqualLinkingData(left, right);
+  }
+  
+  protected void _assertEqualLinkingData(final ImplicitReceiver left, final IFeatureLinkingCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final IFeatureLinkingCandidate left, final ImplicitReceiver right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final ImplicitReceiver left, final ImplicitReceiver right) {
+    JvmIdentifiableElement _feature = left.getFeature();
+    JvmIdentifiableElement _feature_1 = right.getFeature();
+    Assert.assertEquals("feature", _feature, _feature_1);
+    XAbstractFeatureCall _featureCall = left.getFeatureCall();
+    XAbstractFeatureCall _featureCall_1 = right.getFeatureCall();
+    Assert.assertEquals("featureCall", _featureCall, _featureCall_1);
+    List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
+    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+        public String apply(final LightweightTypeReference it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
+    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_typeArguments, _function);
+    List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
+    final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
+        public String apply(final LightweightTypeReference it) {
+          String _simpleName = it.getSimpleName();
+          return _simpleName;
+        }
+      };
+    List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(_typeArguments_1, _function_1);
+    Assert.assertEquals("typeArguments", ((Object) _map), _map_1);
+  }
+  
+  protected void _assertEqualLinkingData(final IFeatureLinkingCandidate left, final IFeatureLinkingCandidate right) {
+    JvmIdentifiableElement _feature = left.getFeature();
+    JvmIdentifiableElement _feature_1 = right.getFeature();
+    Assert.assertEquals("feature", _feature, _feature_1);
+    XAbstractFeatureCall _featureCall = left.getFeatureCall();
+    XAbstractFeatureCall _featureCall_1 = right.getFeatureCall();
+    Assert.assertEquals("featureCall", _featureCall, _featureCall_1);
+    this.doAssertEqualLinkingData(left, right);
+    boolean _isStatic = left.isStatic();
+    boolean _isStatic_1 = right.isStatic();
+    Assert.assertEquals("isStatic", Boolean.valueOf(_isStatic), Boolean.valueOf(_isStatic_1));
+    boolean _isExtension = left.isExtension();
+    boolean _isExtension_1 = right.isExtension();
+    Assert.assertEquals("isExtension", Boolean.valueOf(_isExtension), Boolean.valueOf(_isExtension_1));
+  }
+  
+  public void doAssertEqualLinkingData(final ILinkingCandidate left, final ILinkingCandidate right) {
+    try {
+      List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
+      final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+          public String apply(final LightweightTypeReference it) {
+            String _simpleName = it.getSimpleName();
+            return _simpleName;
+          }
+        };
+      List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_typeArguments, _function);
+      List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
+      final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
+          public String apply(final LightweightTypeReference it) {
+            String _simpleName = it.getSimpleName();
+            return _simpleName;
+          }
+        };
+      List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(_typeArguments_1, _function_1);
+      Assert.assertEquals("typeArguments", ((Object) _map), _map_1);
+      Object _invoke = this._reflectExtensions.invoke(left, "getArguments");
+      Object _invoke_1 = this._reflectExtensions.invoke(right, "getArguments");
+      Assert.assertEquals("arguments", _invoke, _invoke_1);
+      List<LightweightTypeReference> _invokeAndCast = this.<List<LightweightTypeReference>>invokeAndCast(left, "getExplicitTypeArguments");
+      final Function1<LightweightTypeReference,String> _function_2 = new Function1<LightweightTypeReference,String>() {
+          public String apply(final LightweightTypeReference it) {
+            String _string = it.toString();
+            return _string;
+          }
+        };
+      List<String> _map_2 = ListExtensions.<LightweightTypeReference, String>map(_invokeAndCast, _function_2);
+      List<LightweightTypeReference> _invokeAndCast_1 = this.<List<LightweightTypeReference>>invokeAndCast(right, "getExplicitTypeArguments");
+      final Function1<LightweightTypeReference,String> _function_3 = new Function1<LightweightTypeReference,String>() {
+          public String apply(final LightweightTypeReference it) {
+            String _string = it.toString();
+            return _string;
+          }
+        };
+      List<String> _map_3 = ListExtensions.<LightweightTypeReference, String>map(_invokeAndCast_1, _function_3);
+      Assert.assertEquals("explicitTypeArguments", 
+        ((Object) _map_2), _map_3);
+      Object _invoke_2 = this._reflectExtensions.invoke(left, "getSyntacticArguments");
+      Object _invoke_3 = this._reflectExtensions.invoke(right, "getSyntacticArguments");
+      Assert.assertEquals("syntacticArguments", _invoke_2, _invoke_3);
+      Object _invoke_4 = this._reflectExtensions.invoke(left, "getReceiver");
+      Object _invoke_5 = this._reflectExtensions.invoke(right, "getReceiver");
+      Assert.assertEquals("receiver", _invoke_4, _invoke_5);
+      Object _invoke_6 = this._reflectExtensions.invoke(left, "getDeclaredTypeParameters");
+      Object _invoke_7 = this._reflectExtensions.invoke(right, "getDeclaredTypeParameters");
+      Assert.assertEquals("declaredTypeParameters", _invoke_6, _invoke_7);
+      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_2 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getTypeParameterMapping");
+      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_3 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getTypeParameterMapping");
+      this.assertEqualMapping("getTypeParameterMapping", _invokeAndCast_2, _invokeAndCast_3);
+      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_4 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping");
+      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_5 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping");
+      this.assertEqualMapping("getDeclaratorParameterMapping", _invokeAndCast_4, _invokeAndCast_5);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void assertEqualMapping(final String message, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> left, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(message, "");
+    _builder.append(":");
+    _builder.newLineIfNotEmpty();
+    String _join = this.mapJoiner.join(left);
+    _builder.append(_join, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" \t");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.append("vs");
+    _builder.newLine();
+    _builder.append(" \t");
+    _builder.newLine();
+    String _join_1 = this.mapJoiner.join(right);
+    _builder.append(_join_1, "");
+    _builder.newLineIfNotEmpty();
+    int _size = left.size();
+    int _size_1 = right.size();
+    Assert.assertEquals(_builder.toString(), _size, _size_1);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(message, "");
+    _builder_1.append(":");
+    _builder_1.newLineIfNotEmpty();
+    String _join_2 = this.mapJoiner.join(left);
+    _builder_1.append(_join_2, "");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append(" \t");
+    _builder_1.newLine();
+    _builder_1.append(" \t");
+    _builder_1.append("vs");
+    _builder_1.newLine();
+    _builder_1.append(" \t");
+    _builder_1.newLine();
+    String _join_3 = this.mapJoiner.join(right);
+    _builder_1.append(_join_3, "");
+    _builder_1.newLineIfNotEmpty();
+    Set<JvmTypeParameter> _keySet = left.keySet();
+    Set<JvmTypeParameter> _keySet_1 = right.keySet();
+    Assert.assertEquals(_builder_1.toString(), ((Object) _keySet), _keySet_1);
+    final Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument>() {
+        public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
+          final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
+          VarianceInfo _variance = leftData.getVariance();
+          VarianceInfo _variance_1 = rightData.getVariance();
+          Assert.assertEquals(_variance, _variance_1);
+          LightweightTypeReference _typeReference = leftData.getTypeReference();
+          String _simpleName = _typeReference.getSimpleName();
+          LightweightTypeReference _typeReference_1 = rightData.getTypeReference();
+          String _simpleName_1 = _typeReference_1.getSimpleName();
+          Assert.assertEquals(_simpleName, _simpleName_1);
+        }
+      };
+    MapExtensions.<JvmTypeParameter, LightweightMergedBoundTypeArgument>forEach(left, _function);
+  }
+  
+  public <T extends Object> T invokeAndCast(final ILinkingCandidate receiver, final String getter) {
+    try {
+      Object _invoke = this._reflectExtensions.invoke(receiver, getter);
+      return ((T) _invoke);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void assertEqualLinkingData(final ILinkingCandidate left, final ILinkingCandidate right) {
+    if (left instanceof ImplicitReceiver
+         && right instanceof ImplicitReceiver) {
+      _assertEqualLinkingData((ImplicitReceiver)left, (ImplicitReceiver)right);
+      return;
+    } else if (left instanceof ImplicitReceiver
+         && right instanceof IFeatureLinkingCandidate) {
+      _assertEqualLinkingData((ImplicitReceiver)left, (IFeatureLinkingCandidate)right);
+      return;
+    } else if (left instanceof IFeatureLinkingCandidate
+         && right instanceof ImplicitReceiver) {
+      _assertEqualLinkingData((IFeatureLinkingCandidate)left, (ImplicitReceiver)right);
+      return;
+    } else if (left instanceof IConstructorLinkingCandidate
+         && right instanceof IConstructorLinkingCandidate) {
+      _assertEqualLinkingData((IConstructorLinkingCandidate)left, (IConstructorLinkingCandidate)right);
+      return;
+    } else if (left instanceof IFeatureLinkingCandidate
+         && right instanceof IFeatureLinkingCandidate) {
+      _assertEqualLinkingData((IFeatureLinkingCandidate)left, (IFeatureLinkingCandidate)right);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(left, right).toString());
+    }
+  }
+}

@@ -8,12 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.tests.linking.BatchLinkingTest;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchClosureTypeTest;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchConstructorCallTypeTests;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchFeatureCallTypeTests;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchIdentifiableTypeTests;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchTypeArgumentTest;
-import org.eclipse.xtext.xbase.tests.typesystem.BatchTypeResolverTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -24,16 +18,17 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	BatchTypeResolverTest.class,
-	BatchFeatureCallTypeTests.class,
+	BatchFeatureCallTypeTest.class,
 	BatchClosureTypeTest.class,
-	BatchIdentifiableTypeTests.class,
-	BatchConstructorCallTypeTests.class,
+	BatchIdentifiableTypeTest.class,
+	BatchConstructorCallTypeTest.class,
 	BatchTypeArgumentTest.class,
-	BatchLinkingTest.class,
+	RecomputingTypeSystemSuite.class,
 	StringLiteralTest.class,
 	ClosureTypeTest1.class,
 	ClosureTypeTest2.class,
 	ClosureTypeTest3.class,
 	ClosureTypeComputerUnitTest.class,
+	BatchLinkingTest.class,
 })
 public class TypeSystemSuite {}

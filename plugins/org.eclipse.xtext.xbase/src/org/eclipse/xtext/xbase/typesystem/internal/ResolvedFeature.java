@@ -8,26 +8,21 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -35,51 +30,44 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.FeatureLinkHelper;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
+public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
 
-	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
-			ExpressionTypeComputationState state) {
-		super(featureCall, description, state);
+	private FeatureLinkHelper helper;
+
+	public ResolvedFeature(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, FeatureLinkHelper helper, ExpressionTypeComputationState state) {
+		super(featureCall, feature, state);
+		this.helper = helper;
 	}
 
 	protected LightweightTypeReference getReceiverType() {
-		if (getDescription() instanceof BucketedEObjectDescription) {
-			return ((BucketedEObjectDescription) getDescription()).getReceiverType();
+		LightweightTypeReference result = getActualType(getReceiver());
+		if (result == null) {
+			throw new IllegalStateException("Cannot determine type of receiver "+ getReceiver());
 		}
-		throw new IllegalStateException("Cannot determine receiver type");
+		return result;
 	}
 	
 	public boolean isExtension() {
-		IEObjectDescription description = getDescription();
-		if (description instanceof BucketedEObjectDescription) {
-			return ((BucketedEObjectDescription) description).isExtensionDescription();
-		}
+//		IEObjectDescription description = getDescription();
+//		if (description instanceof BucketedEObjectDescription) {
+//			return ((BucketedEObjectDescription) description).isExtensionDescription();
+//		}
+		// TODO implement
 		return false;
 	}
 	
 	public boolean isStatic() {
-		IEObjectDescription description = getDescription();
-		if (description instanceof BucketedEObjectDescription) {
-			return ((BucketedEObjectDescription) description).isStaticDescription();
-		}
-		return false;
-	}
-	
-	@Override
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
-		if (idx == 0 && getReceiver() != null && !getArguments().contains(getReceiver())) {
-			return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-		}
-		return super.getConformanceHints(idx);
+		return helper.isStatic(getFeature());
 	}
 	
 	@Override
@@ -96,58 +84,13 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
-		int result = super.compareByArityWith(right);
-		if (result == 0) {
-			boolean isExecutable = getFeature() instanceof JvmExecutable;
-			if (isExecutable != right.getFeature() instanceof JvmExecutable) {
-				if (getExpression() instanceof XAssignment) {
-					if (isExecutable)
-						return 1;
-					return -1;
-				} else {
-					if (hasExplicitArguments()) {
-						if (isExecutable)
-							return -1;
-						return 1;
-					} else {
-						if (isExecutable)
-							return 1;
-						return -1;
-					}
-				}
-			}
-		}
-		return result;
-	}
-	
-	@Override
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
-		int result = super.compareByArgumentTypes(right);
-		if (result != 0 || !(right instanceof FeatureLinkingCandidate))
-			return result;
-		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
-		if (isExtension() != casted.isExtension()) {
-			if (isExtension())
-				return 1;
-			return -1;
-		}
-		return result;
-	}
-	
-	@Override
 	public void apply() {
 		XExpression receiver = getReceiver();
-		if (receiver != null && receiver.eResource() == null) {
+		if (receiver != null) {
 			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			LightweightTypeReference receiverType = getReceiverType();
 			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
-			if (receiver instanceof XAbstractFeatureCall) {
-				new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) receiver, getState()).apply();
-			} else {
-				throw new IllegalStateException("unexpected implicit receiver, was: " + receiver);
-			}
 		}
 		super.apply();
 	}
@@ -210,13 +153,24 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
-		if (getDescription() instanceof BucketedEObjectDescription) {
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
-			if (result != null)
-				return result;
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = Collections.emptyMap();
+		if (!isStatic()) { // TODO get this one right for binary expressions (see #getReceiver)
+			XExpression receiver = getReceiver();
+			if (receiver != null) {
+				LightweightTypeReference receiverType = getReceiverType();
+				receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+			}
 		}
-		return Collections.emptyMap();
+		return receiverTypeParameterMapping;
 	}
+		
+		
+//		if (getDescription() instanceof BucketedEObjectDescription) {
+//			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+//			if (result != null)
+//				return result;
+//		}
+		// TODO implement me
 	
 	@Override
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
@@ -248,8 +202,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return super.getDeclaredType(feature);
 	}
 	
-	public void resolveLinkingProxy() {
-		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+	@Override
+	@Nullable
+	protected XExpression getReceiver() {
+		// TODO static functions should not have something like a 'receiver'
+		// see also FeatureLinkHelper.getReceiver
+//		if (isStatic())
+//			return null;
+		return helper.getReceiver(getExpression());
 	}
-
+	
 }

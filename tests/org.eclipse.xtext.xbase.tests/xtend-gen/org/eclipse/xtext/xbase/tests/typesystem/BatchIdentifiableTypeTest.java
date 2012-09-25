@@ -23,9 +23,13 @@ import org.junit.runner.RunWith;
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = XbaseNewTypeSystemInjectorProvider.class)
 @SuppressWarnings("all")
-public class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
+public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
   @Inject
-  private IBatchTypeResolver typeResolver;
+  private IBatchTypeResolver batchTypeResolver;
+  
+  public IBatchTypeResolver getTypeResolver() {
+    return this.batchTypeResolver;
+  }
   
   public void resolvesIdentifiablesTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
@@ -35,8 +39,9 @@ public class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
     int _size = ((List<String>)Conversions.doWrapArray(types)).size();
     int _size_1 = identifiables.size();
     Assert.assertEquals(_size, _size_1);
+    IBatchTypeResolver _typeResolver = this.getTypeResolver();
     JvmIdentifiableElement _head = IterableExtensions.<JvmIdentifiableElement>head(identifiables);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
         public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);

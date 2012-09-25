@@ -459,7 +459,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
 		if (ensureLinkingMapExists().put(expression, candidate) != null) {
-			throw new IllegalStateException("Expression was already linked");
+			throw new IllegalStateException("Expression " + expression + " was already linked");
 		}
 	}
 

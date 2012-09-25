@@ -146,6 +146,18 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             String _string_3 = _xAbstractFeatureCall.toString();
             boolean _eIsProxy = feature.eIsProxy();
             Assert.assertFalse(_string_3, _eIsProxy);
+            XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
+            boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
+            if (_notEquals) {
+              XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
+              Object _eGet_1 = _implicitReceiver_1.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+              final InternalEObject implicitFeature = ((InternalEObject) _eGet_1);
+              String _string_4 = implicitFeature.toString();
+              Assert.assertNotNull(_string_4, feature);
+              String _string_5 = implicitFeature.toString();
+              boolean _eIsProxy_1 = feature.eIsProxy();
+              Assert.assertFalse(_string_5, _eIsProxy_1);
+            }
           }
         }
       }
@@ -235,12 +247,6 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     final IResolvedTypes typeResolution = _typeResolver.resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
-  }
-  
-  @Ignore(value = "Performance")
-  @Test
-  public void testFeatureCall_25_d() throws Exception {
-    super.testFeatureCall_25_d();
   }
   
   @Ignore(value = "TODO discuss the preference - list or array?")

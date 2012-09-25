@@ -21,9 +21,9 @@ public class AssignmentArguments implements IExpressionArguments {
 	private XExpression value;
 	private boolean unprocessed = true;
 	
-	public AssignmentArguments(AbstractLinkingCandidate<?> candidate) {
-		XAssignment assignment = (XAssignment) candidate.expression;
-		declaredType = candidate.state.getResolvedTypes().getActualType(candidate.getFeature());
+	public AssignmentArguments(AbstractLinkingCandidate<? extends XExpression> candidate) {
+		XAssignment assignment = (XAssignment) candidate.getExpression();
+		declaredType = candidate.getActualType(candidate.getFeature());
 		value = assignment.getValue();
 	}
 

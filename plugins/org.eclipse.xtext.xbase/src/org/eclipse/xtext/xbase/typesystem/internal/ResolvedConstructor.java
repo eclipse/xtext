@@ -11,14 +11,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -26,15 +25,14 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
+public class ResolvedConstructor extends AbstractResolvedReference<XConstructorCall> implements IConstructorLinkingCandidate {
 
-	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
-		super(constructorCall, description, state);
+	public ResolvedConstructor(XConstructorCall constructorCall, JvmConstructor constructor, ExpressionTypeComputationState state) {
+		super(constructorCall, constructor, state);
 	}
-
+	
 	public JvmConstructor getConstructor() {
 		return (JvmConstructor) getFeature();
 	}
@@ -53,10 +51,6 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
-	public void resolveLinkingProxy() {
-		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
-	}
-	
 	@Override
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		JvmDeclaredType createdType = getConstructor().getDeclaringType();
@@ -64,6 +58,12 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 			return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
 		}
 		return Collections.emptyList();
+	}
+
+	@Override
+	@Nullable
+	protected XExpression getReceiver() {
+		return null;
 	}
 	
 }

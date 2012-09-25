@@ -15,6 +15,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
@@ -26,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
@@ -38,11 +40,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
-
-import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow
@@ -92,6 +90,11 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 					val feature = content.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 					assertNotNull(content.toString, feature)
 					assertFalse(content.toString, feature.eIsProxy())
+					if (content.implicitReceiver != null) {
+						val implicitFeature = content.implicitReceiver.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
+						assertNotNull(implicitFeature.toString, feature)
+						assertFalse(implicitFeature.toString, feature.eIsProxy())
+					}
 				}
 			}
 		}
@@ -137,10 +140,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		val typeResolution = typeResolver.resolveTypes(proxy)
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
-	}
-	
-	@Ignore("Performance") @Test override testFeatureCall_25_d() throws Exception {
-		super.testFeatureCall_25_d()
 	}
 	
 	@Ignore("TODO discuss the preference - list or array?") @Test override testIfExpression_10() throws Exception {
@@ -1090,6 +1089,20 @@ class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
 }
 
 /**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingTypeResolverTest extends AbstractBatchTypeResolverTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver typeResolver;
+	
+	override getTypeResolver() {
+		typeResolver
+	}
+	
+}
+
+/**
  * A test that triggers the computation of argument types in reverse order.
  * Furthermore it will shuffle the order of branches in if and switch expressions.
  * @author Sebastian Zarnekow
@@ -1341,6 +1354,12 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 	
 	@Test
 	@Ignore("TODO deferred closure typing")
+	override testFeatureCall_25_d() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
 	override testFeatureCall_26() throws Exception {
 		fail("TODO deferred closure typing")
 	}
@@ -1410,35 +1429,29 @@ abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 		return lightweight
 	}
 	
-	@Test
-	@Ignore("Performance") 
-	override testBlockExpression_03() throws Exception {
-		super.testBlockExpression_03()
-	}
-	
-	@Test
-	@Ignore("Performance") 
-	override testFeatureCall_15_n() throws Exception {
-		super.testFeatureCall_15_n()
-	}
-	
-	@Test
-	@Ignore("Performance") 
-	override testFeatureCall_25_a() throws Exception {
-		super.testFeatureCall_25_a()
-	}
-	
-	@Test
-	@Ignore("Performance") 
-	override testFeatureCall_25_b() throws Exception {
-		super.testFeatureCall_25_b()
-	}
-	
-	@Test
-	@Ignore("Performance") 
-	override testFeatureCall_25_c() throws Exception {
-		super.testFeatureCall_25_c()
-	}
+//	@Test
+//	@Ignore("Performance") 
+//	override testFeatureCall_15_n() throws Exception {
+//		super.testFeatureCall_15_n()
+//	}
+//	
+//	@Test
+//	@Ignore("Performance") 
+//	override testFeatureCall_25_a() throws Exception {
+//		super.testFeatureCall_25_a()
+//	}
+//	
+//	@Test
+//	@Ignore("Performance") 
+//	override testFeatureCall_25_b() throws Exception {
+//		super.testFeatureCall_25_b()
+//	}
+//	
+//	@Test
+//	@Ignore("Performance") 
+//	override testFeatureCall_25_c() throws Exception {
+//		super.testFeatureCall_25_c()
+//	}
 }
 
 /**
@@ -1562,12 +1575,8 @@ class EagerArgumentTypeComputer extends XbaseTypeComputer {
 	
 	override protected <Candidate extends ILinkingCandidate> getBestCandidate(List<? extends Candidate> candidates) {
 		candidates.forEach[
-			try {
-				if (it instanceof AbstractLinkingCandidate)
-					(it as AbstractLinkingCandidate).computeArgumentTypes()
-			} catch(UnsupportedOperationException e) {
-				// ignore
-			}
+			if (it instanceof AbstractPendingLinkingCandidate)
+				(it as AbstractPendingLinkingCandidate).computeArgumentTypes()
 		]
 		super.<Candidate> getBestCandidate(candidates)
 	}

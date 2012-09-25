@@ -44,7 +44,11 @@ import org.eclipse.xtext.junit4.InjectWith
 class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver batchTypeResolver;
+	
+	def getTypeResolver() {
+		batchTypeResolver
+	}
 	
 	IResolvedTypes resolvedTypes
 	
@@ -63,6 +67,20 @@ class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 		typeArguments.forEach [ typeArgument, i |
 			assertEquals('''«typeArguments.join(', ')» vs «actualTypeArguments.map[simpleName].join(', ')»''', typeArgument, actualTypeArguments.get(i).simpleName)
 		]
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingBatchTypeArgumentTest extends BatchTypeArgumentTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver recomputingResolver;
+	
+	override getTypeResolver() {
+		recomputingResolver
 	}
 	
 }

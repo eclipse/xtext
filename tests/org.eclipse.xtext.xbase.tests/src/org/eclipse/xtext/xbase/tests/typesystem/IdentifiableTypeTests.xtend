@@ -21,10 +21,14 @@ import org.eclipse.xtext.junit4.InjectWith
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
-class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
+class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver batchTypeResolver
+	
+	def getTypeResolver() {
+		batchTypeResolver
+	}
 	
 	override resolvesIdentifiablesTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
@@ -39,6 +43,20 @@ class BatchIdentifiableTypeTests extends AbstractIdentifiableTypeTest {
 		]
 	}
 		
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingBatchIdentifiableTypeTest extends BatchIdentifiableTypeTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver recomputingResolver;
+	
+	override getTypeResolver() {
+		recomputingResolver
+	}
+	
 }
 
 /**

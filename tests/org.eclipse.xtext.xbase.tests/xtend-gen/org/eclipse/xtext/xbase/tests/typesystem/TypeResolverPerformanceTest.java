@@ -8,9 +8,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.Timeout;
 
 /**
@@ -39,35 +37,5 @@ public abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest 
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Test
-  @Ignore(value = "Performance")
-  public void testBlockExpression_03() throws Exception {
-    super.testBlockExpression_03();
-  }
-  
-  @Test
-  @Ignore(value = "Performance")
-  public void testFeatureCall_15_n() throws Exception {
-    super.testFeatureCall_15_n();
-  }
-  
-  @Test
-  @Ignore(value = "Performance")
-  public void testFeatureCall_25_a() throws Exception {
-    super.testFeatureCall_25_a();
-  }
-  
-  @Test
-  @Ignore(value = "Performance")
-  public void testFeatureCall_25_b() throws Exception {
-    super.testFeatureCall_25_b();
-  }
-  
-  @Test
-  @Ignore(value = "Performance")
-  public void testFeatureCall_25_c() throws Exception {
-    super.testFeatureCall_25_c();
   }
 }

@@ -17,9 +17,13 @@ import org.junit.Assert;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class BatchConstructorCallTypeTests extends AbstractConstructorCallTypeTest {
+public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
   @Inject
-  private IBatchTypeResolver typeResolver;
+  private IBatchTypeResolver batchTypeResolver;
+  
+  public IBatchTypeResolver getTypeResolver() {
+    return this.batchTypeResolver;
+  }
   
   public void resolvesConstructorCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
@@ -29,8 +33,9 @@ public class BatchConstructorCallTypeTests extends AbstractConstructorCallTypeTe
     int _size = ((List<String>)Conversions.doWrapArray(types)).size();
     int _size_1 = featureCalls.size();
     Assert.assertEquals(_size, _size_1);
+    IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XConstructorCall _head = IterableExtensions.<XConstructorCall>head(featureCalls);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final Procedure2<XConstructorCall,Integer> _function = new Procedure2<XConstructorCall,Integer>() {
         public void apply(final XConstructorCall featureCall, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);

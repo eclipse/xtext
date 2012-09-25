@@ -28,12 +28,17 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   @Inject
-  private IBatchTypeResolver typeResolver;
+  private IBatchTypeResolver batchTypeResolver;
+  
+  public IBatchTypeResolver getTypeResolver() {
+    return this.batchTypeResolver;
+  }
   
   private IResolvedTypes resolvedTypes;
   
   protected void resolveTypes(final XExpression expression) {
-    IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(expression);
+    IBatchTypeResolver _typeResolver = this.getTypeResolver();
+    IResolvedTypes _resolveTypes = _typeResolver.resolveTypes(expression);
     this.resolvedTypes = _resolveTypes;
   }
   

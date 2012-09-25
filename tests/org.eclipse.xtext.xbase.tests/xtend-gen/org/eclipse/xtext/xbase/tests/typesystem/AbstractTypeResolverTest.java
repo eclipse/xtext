@@ -1615,7 +1615,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testFeatureCall_25_d() throws Exception {
-    this.resolvesTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head", "Integer");
+    this.resolvesTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ].head", "Integer");
   }
   
   @Test

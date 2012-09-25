@@ -5,22 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.computation;
+package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
-@NonNullByDefault
-public interface IFeatureLinkingCandidate extends ILinkingCandidate {
-
-	XAbstractFeatureCall getFeatureCall();
-
-	boolean isStatic();
-	
-	boolean isExtension();
-	
-}
+@RunWith(Suite.class)
+@SuiteClasses({
+	RecomputingTypeResolverTest.class,
+	RecomputingBatchFeatureCallTypeTest.class,
+	RecomputingBatchClosureTypeTest.class,
+	RecomputingBatchIdentifiableTypeTest.class,
+	RecomputingBatchConstructorCallTypeTest.class,
+	RecomputingBatchTypeArgumentTest.class,
+})
+public class RecomputingTypeSystemSuite {}

@@ -35,7 +35,11 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class BatchClosureTypeTest extends AbstractClosureTypeTest {
   @Inject
-  private IBatchTypeResolver typeResolver;
+  private IBatchTypeResolver batchTypeResolver;
+  
+  public IBatchTypeResolver getTypeResolver() {
+    return this.batchTypeResolver;
+  }
   
   @Rule
   public ErrorCollector collector = new Function0<ErrorCollector>() {
@@ -52,8 +56,9 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     int _size = ((List<String>)Conversions.doWrapArray(types)).size();
     int _size_1 = closures.size();
     Assert.assertEquals(_size, _size_1);
+    IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XClosure _head = IterableExtensions.<XClosure>head(closures);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
         public void apply(final XClosure closure, final Integer index) {

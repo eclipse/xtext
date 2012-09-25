@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -24,6 +25,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class UnresolvableFeatureCall extends AbstractUnresolvableFeature implements IFeatureLinkingCandidate {
 
 	public UnresolvableFeatureCall(XAbstractFeatureCall featureCall, INode node, String text, ExpressionTypeComputationState state) {

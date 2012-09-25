@@ -21,10 +21,14 @@ import org.eclipse.xtext.junit4.InjectWith
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
-class BatchFeatureCallTypeTests extends AbstractFeatureCallTypeTest {
+class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver batchTypeResolver;
+	
+	def getTypeResolver() {
+		batchTypeResolver
+	}
 	
 	override resolvesFeatureCallsTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
@@ -38,6 +42,20 @@ class BatchFeatureCallTypeTests extends AbstractFeatureCallTypeTest {
 		]
 	}
 		
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+abstract class RecomputingBatchFeatureCallTypeTest extends BatchFeatureCallTypeTest {
+	
+	@Inject
+	RecomputingBatchTypeResolver recomputingResolver;
+	
+	override getTypeResolver() {
+		recomputingResolver
+	}
+	
 }
 
 /**
