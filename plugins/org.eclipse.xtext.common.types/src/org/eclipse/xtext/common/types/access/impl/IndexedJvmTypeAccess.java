@@ -15,15 +15,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -47,6 +46,10 @@ public class IndexedJvmTypeAccess {
 	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
+			if (resourceSet instanceof ResourceSetImpl 
+				&& ((ResourceSetImpl)resourceSet).getURIResourceMap().containsKey(withoutFragment)) {
+				return resourceSet.getEObject(javaObjectURI, true);
+			}
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
 			List<String> fqnSegments = Strings.split(fqn, '.');
 			QualifiedName qualifiedName = QualifiedName.create(fqnSegments.toArray(new String[fqnSegments.size()]));
