@@ -137,8 +137,7 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 		
 		assertEquals(
 				"\n" +
-				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory" + 
-				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
 	}
 	
 	@Test public void testGetOrganizedImportSectionWithInnerClasses_02() throws Exception {
@@ -158,7 +157,60 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 		
 		assertEquals(
 				"\n" +
-				"\nimport org.eclipse.emf.ecore.EPackage$Registry" + 
+				"\nimport org.eclipse.emf.ecore.EPackage" + 
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+	}
+	
+	@Test public void testGetOrganizedImportSectionWithInnerClasses_03() throws Exception {
+		String model = 
+				"class Foo {\n" +
+				"  def test() {" +
+				"	 typeof(org.eclipse.emf.ecore.resource.Resource$Factory) == typeof(org.eclipse.emf.ecore.resource.Resource$Factory$Registry)"+
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+	}
+	
+	@Test public void testGetOrganizedImportSectionWithInnerClasses_04() throws Exception {
+		String model = 
+				"import org.eclipse.emf.ecore.resource.Resource\n" +
+				"import org.eclipse.emf.ecore.EPackage\n" +
+				"" +
+				"\n" +
+				"class Foo {\n" +
+				"  def test() {\n" +
+				"    typeof(Resource$Factory$Registry) == typeof(EPackage$Registry)" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.EPackage" + 
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+	}
+	
+	@Test public void testGetOrganizedImportSectionWithInnerClasses_05() throws Exception {
+		String model = 
+				"import org.eclipse.emf.ecore.resource.Resource$Factory$Registry\n" +
+				"" +
+				"\n" +
+				"class Foo {\n" +
+				"  def test() {\n" +
+				"    typeof(Registry)" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
 				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Registry", section);
 	}
 	
@@ -181,11 +233,11 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 	@Test public void testGetOrganizedImportSectionWithNameClash_02() throws Exception {
 		String model = 
 				"\n" +
-						"class Foo {\n" +
-						"  def java.util.List<String> test(java.awt.List s) {\n" +
-						"    return null\n" +
-						"  }\n" +
-						"}\n";
+				"class Foo {\n" +
+				"  def java.util.List<String> test(java.awt.List s) {\n" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model,true);
 		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
 		
@@ -197,11 +249,11 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 	@Test public void testGetOrganizedImportSectionWithStaticImport_01() throws Exception {
 		String model = 
 				"import static extension java.util.Collections.* \n" +
-						"class Foo {\n" +
-						"  def void test(java.util.List<String> s) {\n" +
-						"  sort(s)\n" +
-						"  }\n" +
-						"}\n";
+				"class Foo {\n" +
+				"  def void test(java.util.List<String> s) {\n" +
+				"  sort(s)\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model,true);
 		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
 		
@@ -325,9 +377,9 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 	@Test public void testGetRegion_02() throws Exception {
 		String model = 
 				"package foo.bar class Foo {\n" +
-						"  def void test() {\n" +
-						"  }\n" +
-						"}\n";
+				"  def void test() {\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model, true);
 		TextRegion region = organizeImports.computeRegion((XtextResource) file.eResource());
 		assertEquals(15, region.getOffset());
@@ -341,30 +393,115 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"/* foo \n" +
 				"*/\n" +
 				"class Foo {\n" +
-						"  def void test() {\n" +
-						"  }\n" +
-						"}\n";
+				"  def void test() {\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model, false);
 		TextRegion region = organizeImports.computeRegion((XtextResource) file.eResource());
 		assertEquals(15, region.getOffset());
 		assertEquals(19, region.getLength());
 	}
 	
-	@Test public void testInnerClassImport() throws Exception {
+	@Test public void testInnerClassImport_01() throws Exception {
 		String model = 
 				"package foo.bar\n" +
-						"import java.util.Map$Entry\n" +
-						"class Foo {\n" +
-						"  def Entry test() {" +
-						"    return null\n" +
-						"  }\n" +
-						"}\n";
+				"import java.util.Map$Entry\n" +
+				"class Foo {\n" +
+				"  def Entry test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
 		XtendFile file = file(model, true);
 		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
 		
 		assertEquals(
 				"\n" +
 				"\nimport java.util.Map$Entry", section);
+	}
+	
+	@Test public void testInnerClassImport_02() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import java.util.Map\n" +
+				"class Foo {\n" +
+				"  def Map$Entry test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport java.util.Map", section);
+	}
+	
+	@Test public void testInnerClassImport_03() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import java.util.Map$Entry\n" +
+				"class Foo {\n" +
+				"  def Map$Entry test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport java.util.Map", section);
+	}
+
+	@Test public void testInnerClassImport_04() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import org.eclipse.emf.ecore.resource.Resource\n" +
+				"class Foo {\n" +
+				"  def Resource$Factory$Descriptor test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+	}
+	
+	@Test public void testInnerClassImport_05() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor\n" +
+				"class Foo {\n" +
+				"  def Resource$Factory$Descriptor test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.resource.Resource", section);
+	}
+	
+	@Test public void testInnerClassImport_06() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor\n" +
+				"class Foo {\n" +
+				"  def Descriptor test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor", section);
 	}
 	
 	@Test public void testFunctionTypes_afterResolve() throws Exception {
@@ -398,7 +535,100 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 		
 		assertEquals(
 				"\n" +
-						"\nimport java.util.Map$Entry", section);
+				"\nimport java.util.Map$Entry", section);
+	}
+	
+	@Test public void testImport_PairOf() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import static org.eclipse.xtext.xbase.lib.Pair.*\n" +
+				"class Foo {\n" +
+				"  def Object test() {" +
+				"    return of('', '')\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static org.eclipse.xtext.xbase.lib.Pair.*", section);
+	}
+	
+	@Test public void testArrayType() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import java.io.Serializable\n" +
+				"class Foo {\n" +
+				"  def Serializable[][] test() {" +
+				"    return null\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport java.io.Serializable", section);
+	}
+	
+	@Test public void testStaticImport_IterableExtensions() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"import static org.eclipse.xtext.xbase.lib.IterableExtensions.*\n" +
+				"class Foo {\n" +
+				"  def Object test() {" +
+				"    return filter(null, null)\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static org.eclipse.xtext.xbase.lib.IterableExtensions.*", section);
+	}
+
+	@Test public void testPropertyAnnotation() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"class Foo {\n" +
+				"  @Property int prop\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("", section);
+	}
+	
+	@Test public void testNestedAnnotation_01() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"" +
+				"import org.eclipse.xtext.service.DispatchingProvider$Runtime" +
+				"" +
+				"@Runtime\n" +
+				"class Foo {\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("\n\nimport org.eclipse.xtext.service.DispatchingProvider$Runtime", section);
+	}
+	
+	@Test public void testNestedAnnotation_02() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"" +
+				"import org.eclipse.xtext.service.DispatchingProvider$Runtime" +
+				"" +
+				"@DispatchingProvider$Runtime\n" +
+				"class Foo {\n" +
+				"}\n";
+		XtendFile file = file(model, true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("\n\nimport org.eclipse.xtext.service.DispatchingProvider", section);
 	}
 	
 	@Test public void testBug388933_01() throws Exception {
