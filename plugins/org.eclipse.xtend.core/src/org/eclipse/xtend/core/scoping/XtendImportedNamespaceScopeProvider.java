@@ -32,6 +32,9 @@ import com.google.inject.Inject;
  */
 public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceScopeProvider {
 
+	public static final QualifiedName JAVA_LANG = QualifiedName.create("java","lang");
+	public static final QualifiedName XTEND_LIB = QualifiedName.create("org","eclipse","xtend","lib");
+	
 	@Inject
 	private IQualifiedNameConverter nameConverter;
 	
@@ -69,8 +72,8 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 	
 	@Override
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return newArrayList(new ImportNormalizer(QualifiedName.create("java","lang"), true, false),
-				new ImportNormalizer(QualifiedName.create("org","eclipse","xtend","lib"), true, false));
+		return newArrayList(new ImportNormalizer(JAVA_LANG, true, false),
+				new ImportNormalizer(XTEND_LIB, true, false));
 	}
 
 }

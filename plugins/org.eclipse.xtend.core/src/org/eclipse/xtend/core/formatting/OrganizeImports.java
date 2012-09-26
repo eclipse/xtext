@@ -18,18 +18,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -56,7 +55,10 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -76,6 +78,9 @@ public class OrganizeImports {
 	@Inject
 	private IXtendJvmAssociations associations;
 	
+	@Inject
+	private ImplicitlyImportedTypes implicitlyImportedTypes;
+	
 	public String getOrganizedImportSection(XtextResource state) {
 		ReferenceAcceptor acceptor = intitializeReferenceAcceptor(state);
 		if(acceptor == null)
@@ -89,7 +94,11 @@ public class OrganizeImports {
 		final XtendFile xtendFile = getXtendFile(state);
 		if (xtendFile == null)
 			return null;
-		acceptor.addImplicitlyImportedPackages(newArrayList("java.lang", xtendFile.getPackage()));
+		acceptor.addImplicitlyImportedPackages(newArrayList(
+				XtendImportedNamespaceScopeProvider.JAVA_LANG.toString("."), 
+				XtendImportedNamespaceScopeProvider.XTEND_LIB.toString("."), 
+				xtendFile.getPackage()));
+		acceptor.addImplicitlyImportedTypes(implicitlyImportedTypes.getStaticImportClasses(state), implicitlyImportedTypes.getExtensionClasses(state));
 		collectAllReferences(state, acceptor);
 		return acceptor;
 	}
@@ -173,13 +182,13 @@ public class OrganizeImports {
 			} else if (next instanceof JvmTypeReference) {
 				acceptor.acceptType((JvmTypeReference) next);
 			} else if (next instanceof XAnnotation) {
-				acceptor.acceptType(((XAnnotation) next).getAnnotationType());
+				acceptor.acceptPreferredType(next, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE);
 			} else if (next instanceof XInstanceOfExpression) {
 				acceptor.acceptType(((XInstanceOfExpression) next).getType());
 			} else if (next instanceof XConstructorCall) {
-				acceptor.acceptType(((XConstructorCall) next).getConstructor().getDeclaringType());
+				acceptor.acceptPreferredType(next, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 			} else if (next instanceof XTypeLiteral) {
-				acceptor.acceptType(((XTypeLiteral) next).getType());
+				acceptor.acceptPreferredType(next, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 			} else if (next instanceof XFeatureCall) {
 				final XFeatureCall featureCall = (XFeatureCall) next;
 				if (featureCall.getDeclaringType() == null) {
@@ -200,7 +209,7 @@ public class OrganizeImports {
 						}
 					}
 				} else {
-					acceptor.acceptType(featureCall.getDeclaringType());
+					acceptor.acceptPreferredType(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE);
 				}
 			} else if (next instanceof XMemberFeatureCall || next instanceof XBinaryOperation || next instanceof XUnaryOperation || next instanceof XAssignment) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) next;
@@ -229,10 +238,18 @@ public class OrganizeImports {
 		private JvmDeclaredType thisType = null;
 		
 		private Set<JvmType> knownTypesForStaticImports = null;
+
+		private List<JvmType> implicitStaticImportClasses;
+		private List<JvmType> implicitExtensionClasses;
 		
 		public void setThisType(JvmDeclaredType declaredType) {
 			this.thisType = declaredType;
 			knownTypesForStaticImports = null;
+		}
+
+		public void addImplicitlyImportedTypes(List<JvmType> implicitStaticImportClasses, List<JvmType> implicitExtensionClasses) {
+			this.implicitStaticImportClasses = implicitStaticImportClasses;
+			this.implicitExtensionClasses = implicitExtensionClasses;
 		}
 
 		public void acceptType(JvmTypeReference ref) {
@@ -240,20 +257,65 @@ public class OrganizeImports {
 				return;
 			if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
 				return;
-			acceptType(ref.getType());
+			acceptPreferredType(ref);
 			if (ref instanceof JvmParameterizedTypeReference) {
-				EList<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
+				List<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
 				for (JvmTypeReference jvmTypeReference : list) {
 					acceptType(jvmTypeReference);
 				}
 			} else if (ref instanceof JvmWildcardTypeReference) {
-				EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
+				List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
 				for (JvmTypeConstraint jvmTypeConstraint : constraints) {
 					acceptType(jvmTypeConstraint.getTypeReference());
 				}
 			}
 		}
-
+		
+		public void acceptPreferredType(JvmTypeReference ref) {
+			if (ref instanceof JvmParameterizedTypeReference) {
+				acceptPreferredType(ref, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			} else {
+				acceptType(ref.getType());
+			}
+		}
+		
+		/**
+		 * Tries to locate the syntax for the type reference that the user used in the original code.
+		 * Especially interesting for nested types, where one could prefer the (arguably) more explicit (or verbose)
+		 * {@code Resource$Factory} with an import of {@code org.eclipse.emf.core.Resource} over the probably shorter
+		 * {@code Factory} with an import of {@code org.eclipse.emf.core.Resource$Factory}.
+		 * 
+		 * The function relies on a node model to be available. Otherwise the actually referenced type is 
+		 * used as the preferred type.
+		 * 
+		 * @param owner the referrer to the JVM concept.
+		 * @param reference a reference to a {@link JvmType} or {@link JvmMember} that is declared in a type.
+		 * @return the referenced type or one of its containers.
+		 */
+		public JvmType findPreferredType(EObject owner, EReference reference) {
+			JvmIdentifiableElement referencedThing = (JvmIdentifiableElement) owner.eGet(reference);
+			JvmType referencedType = null;
+			if (referencedThing instanceof JvmType) {
+				referencedType = (JvmType) referencedThing;
+			} else if (referencedThing instanceof JvmMember) {
+				referencedType = ((JvmMember) referencedThing).getDeclaringType();
+			}
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
+			if (nodes.size() == 1) {
+				String text = NodeModelUtils.getTokenText(nodes.get(0));
+				int dollar = text.indexOf('$');
+				if (dollar >= 0 && referencedType instanceof JvmDeclaredType) {
+					JvmDeclaredType declaredType = (JvmDeclaredType) referencedType;
+					while(declaredType.getDeclaringType() != null && dollar >= 0) {
+						declaredType = declaredType.getDeclaringType();
+						dollar = text.indexOf('$', dollar + 1);
+					}
+					return declaredType;
+				}
+			}
+			return referencedType;
+		}
+		
 		public void addImplicitlyImportedPackages(Collection<? extends String> implicitlyImportedPackage) {
 			implicitPackageImports.addAll(implicitlyImportedPackage);
 		}
@@ -261,23 +323,16 @@ public class OrganizeImports {
 		public List<String> getListofStaticExtensionImports() {
 			List<String> result = newArrayList();
 			for (JvmType type : staticExtensionMembers) {
-				if (isMemberNeedsImport(type))
-					result.add(type.getIdentifier());
+				result.add(type.getIdentifier());
 			}
 			Collections.sort(result);
 			return result;
 		}
 
-		protected boolean isMemberNeedsImport(JvmType type) {
-			return type instanceof JvmEnumerationType || type instanceof JvmGenericType
-					&& !"org.eclipse.xtext.xbase.lib".equals(((JvmGenericType) type).getPackageName());
-		}
-
 		public List<String> getListofStaticImports() {
 			List<String> result = newArrayList();
 			for (JvmType type : staticMembers) {
-				if (isMemberNeedsImport(type))
-					result.add(type.getIdentifier());
+				result.add(type.getIdentifier());
 			}
 			// extension imports are static imports, so no need to have them twice.
 			List<String> staticExtensionImports = getListofStaticExtensionImports();
@@ -319,6 +374,10 @@ public class OrganizeImports {
 			}
 		}
 
+		public void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {
+			acceptType(findPreferredType(owner, referenceToTypeOrMember));
+		}
+		
 		public void acceptType(JvmType type) {
 			if (type != null && !type.equals(this.thisType)) {
 				types.add(type);
@@ -326,20 +385,24 @@ public class OrganizeImports {
 		}
 
 		public void acceptStaticImport(JvmMember member) {
-			if (thisType == member.getDeclaringType())
+			JvmDeclaredType declarator = member.getDeclaringType();
+			if (thisType == declarator || implicitStaticImportClasses.contains(declarator))
 				return;
 			if (knownTypesForStaticImports == null) {
 				JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 				reference.setType(thisType);
 				knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
 			}
-			if (knownTypesForStaticImports.contains(member.getDeclaringType()))
+			if (knownTypesForStaticImports.contains(declarator))
 				return;
-			staticMembers.add(member.getDeclaringType());
+			staticMembers.add(declarator);
 		}
 
 		public void acceptStaticExtensionImport(JvmMember member) {
-			staticExtensionMembers.add(member.getDeclaringType());
+			JvmDeclaredType declarator = member.getDeclaringType();
+			if (implicitExtensionClasses.contains(declarator))
+				return;
+			staticExtensionMembers.add(declarator);
 		}
 	}
 
