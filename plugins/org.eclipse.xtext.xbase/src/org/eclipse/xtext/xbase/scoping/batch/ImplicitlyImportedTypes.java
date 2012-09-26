@@ -40,12 +40,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
- * @author Sven Efftinge
- *
  * Used to contribute methods from Java types as
  * a) extension methods (see {@link #getExtensionClasses(Resource)}
  * b) statically imported methods (see {@link #getStaticImportClasses(Resource)}
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 @Singleton
 public class ImplicitlyImportedTypes {
