@@ -15,7 +15,7 @@ import org.junit.rules.Timeout;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
+public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Rule
   public final Timeout timeout = new Function0<Timeout>() {
     public Timeout apply() {
