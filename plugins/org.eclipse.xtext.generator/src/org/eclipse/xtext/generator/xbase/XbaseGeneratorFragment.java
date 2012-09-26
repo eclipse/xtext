@@ -17,6 +17,7 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
@@ -148,7 +149,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(ILocationInFileProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
 				.addTypeToType(IGlobalScopeProvider.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider");
+						TypesAwareDefaultGlobalScopeProvider.class.getName());
 			if(generateXtendInferrer) {
 				config = config
 					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",

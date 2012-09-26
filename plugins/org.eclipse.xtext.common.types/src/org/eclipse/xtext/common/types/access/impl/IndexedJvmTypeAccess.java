@@ -9,11 +9,13 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -35,7 +37,13 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-// TODO honor container configuration
+/*
+ * TODO honor container configuration
+ * Since the IJavaProject is configured for the complete resourceSet, this lack of
+ * support for IContainers is not critical for languages that reuse the visibility semantics
+ * of IJavaProjects. Nevertheless one may run into transitivity issues with types that are
+ * not properly re-exported but used on in the signatures of a given class.
+ */
 public class IndexedJvmTypeAccess {
 	
 	private final static Logger logger = Logger.getLogger(IndexedJvmTypeAccess.class);
@@ -43,17 +51,34 @@ public class IndexedJvmTypeAccess {
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
+	/**
+	 * Locate and resolve a {@link JvmType} in the context of the given resource set. It'll try to
+	 * decode the qualified name from the URI and find an instance with that name in the {@link IResourceDescriptions
+	 * index}. Short-circuits to a resource that is already available in the resource set.
+	 * 
+	 * @param javaObjectURI
+	 *            the uri of the to-be-loaded instance. It is expected to be a Java-scheme URI. May not be
+	 *            <code>null</code>.
+	 * @param resourceSet
+	 *            the context resource set. May not be <code>null</code>.
+	 * @return the located instance. May be <code>null</code>.
+	 */
 	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
-			if (resourceSet instanceof ResourceSetImpl 
-				&& ((ResourceSetImpl)resourceSet).getURIResourceMap() != null  
-				&& ((ResourceSetImpl)resourceSet).getURIResourceMap().containsKey(withoutFragment)) {
-				return resourceSet.getEObject(javaObjectURI, true);
+			if (resourceSet instanceof ResourceSetImpl) {
+				// if the resource uri is already available in the resource set, try to find it directly
+				Map<URI, Resource> resourceMap = ((ResourceSetImpl) resourceSet).getURIResourceMap();
+				if (resourceMap != null && resourceMap.containsKey(withoutFragment)) {
+					EObject result = resourceSet.getEObject(javaObjectURI, true);
+					if (result != null) {
+						return result;
+					}
+				}
 			}
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
 			List<String> fqnSegments = Strings.split(fqn, '.');
-			QualifiedName qualifiedName = QualifiedName.create(fqnSegments.toArray(new String[fqnSegments.size()]));
+			QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
 			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet);
 		}
 		return null;

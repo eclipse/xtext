@@ -70,6 +70,17 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 	public JvmType findTypeByName(String name) {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		try {
+			/*
+			 * TODO Since most types are top level types, we could try to find a dollar sign in the name
+			 * and only use the class loaded in that case (lastIndexOf('.') to and subsequent indexOf('$')). 
+			 * The uri for top level types is easily created from the FQN.
+			 * Important note: Primitives (esp boolean and int) are used quite often and identified
+			 * by the classFinder before the class loader is used. Thus the primitives URI has to be created propertly.
+			 * Otherwise we would suffer a performance penalty. 
+			 */
+			
+			// seems to be the only reliable way to locate nested types
+			// since dollar signs are a quite good indicator but not necessarily the best
 			Class<?> clazz = classFinder.forName(name);
 			URI resourceURI = uriHelper.createResourceURI(clazz);
 			if (indexedJvmTypeAccess != null) {
