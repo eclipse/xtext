@@ -61,6 +61,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -98,7 +99,12 @@ public class OrganizeImports {
 				XtendImportedNamespaceScopeProvider.JAVA_LANG.toString("."), 
 				XtendImportedNamespaceScopeProvider.XTEND_LIB.toString("."), 
 				xtendFile.getPackage()));
-		acceptor.addImplicitlyImportedTypes(implicitlyImportedTypes.getStaticImportClasses(state), implicitlyImportedTypes.getExtensionClasses(state));
+		acceptor.setImplicitlyImportedTypes(implicitlyImportedTypes.getStaticImportClasses(state), implicitlyImportedTypes.getExtensionClasses(state));
+		List<String> simpleNames = Lists.newArrayListWithExpectedSize(2);
+		for(XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
+			simpleNames.add(declaration.getName());
+		}
+		acceptor.setLocallyDefinedSimpleNames(simpleNames);
 		collectAllReferences(state, acceptor);
 		return acceptor;
 	}
@@ -241,13 +247,18 @@ public class OrganizeImports {
 
 		private List<JvmType> implicitStaticImportClasses;
 		private List<JvmType> implicitExtensionClasses;
+		private List<String> locallyDefinedTypes;
 		
 		public void setThisType(JvmDeclaredType declaredType) {
 			this.thisType = declaredType;
 			knownTypesForStaticImports = null;
 		}
 
-		public void addImplicitlyImportedTypes(List<JvmType> implicitStaticImportClasses, List<JvmType> implicitExtensionClasses) {
+		public void setLocallyDefinedSimpleNames(List<String> simpleNames) {
+			this.locallyDefinedTypes = simpleNames;
+		}
+
+		public void setImplicitlyImportedTypes(List<JvmType> implicitStaticImportClasses, List<JvmType> implicitExtensionClasses) {
 			this.implicitStaticImportClasses = implicitStaticImportClasses;
 			this.implicitExtensionClasses = implicitExtensionClasses;
 		}
@@ -261,12 +272,12 @@ public class OrganizeImports {
 			if (ref instanceof JvmParameterizedTypeReference) {
 				List<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
 				for (JvmTypeReference jvmTypeReference : list) {
-					acceptType(jvmTypeReference);
+					acceptPreferredType(jvmTypeReference);
 				}
 			} else if (ref instanceof JvmWildcardTypeReference) {
 				List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
 				for (JvmTypeConstraint jvmTypeConstraint : constraints) {
-					acceptType(jvmTypeConstraint.getTypeReference());
+					acceptPreferredType(jvmTypeConstraint.getTypeReference());
 				}
 			}
 		}
@@ -379,7 +390,7 @@ public class OrganizeImports {
 		}
 		
 		public void acceptType(JvmType type) {
-			if (type != null && !type.equals(this.thisType)) {
+			if (type != null && !type.equals(this.thisType) && !locallyDefinedTypes.contains(type.getSimpleName())) {
 				types.add(type);
 			}
 		}
