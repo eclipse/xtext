@@ -47,6 +47,7 @@ public class IndexedJvmTypeAccess {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
 			if (resourceSet instanceof ResourceSetImpl 
+				&& ((ResourceSetImpl)resourceSet).getURIResourceMap() != null  
 				&& ((ResourceSetImpl)resourceSet).getURIResourceMap().containsKey(withoutFragment)) {
 				return resourceSet.getEObject(javaObjectURI, true);
 			}
