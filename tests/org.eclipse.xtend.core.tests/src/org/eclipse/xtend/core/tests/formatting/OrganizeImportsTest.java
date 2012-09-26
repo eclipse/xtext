@@ -246,6 +246,42 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\nimport java.util.List", section);
 	}
 	
+	@Test public void testGetOrganizedImportSectionWithNameClash_03() throws Exception {
+		String model = 
+				"import org.eclipse.xtext.xbase.XbasePackage\n" +
+				"import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage\n" +
+				"\n" +
+				"class Foo {\n" +
+				"  def void test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) {\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.xtext.xbase.XbasePackage" +
+				"\nimport org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage", section);
+	}
+	
+	@Test public void testGetOrganizedImportSectionWithNameClash_04() throws Exception {
+		String model = 
+				"import org.eclipse.xtext.xbase.XbasePackage$Literals\n" +
+				"import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage\n" +
+				"\n" +
+				"class Foo {\n" +
+				"  def void test(Literals x, XAnnotationsPackage$Literals y) {\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport org.eclipse.xtext.xbase.XbasePackage$Literals" +
+				"\nimport org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage", section);
+	}
+	
 	@Test public void testGetOrganizedImportSectionWithStaticImport_01() throws Exception {
 		String model = 
 				"import static extension java.util.Collections.* \n" +
