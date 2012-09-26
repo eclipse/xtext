@@ -608,6 +608,30 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\nimport java.io.Serializable", section);
 	}
 	
+	@Test public void testAnnotationWithSameName() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"annotation Serializable {\n" +
+				"  Class<? extends java.io.Serializable> clazz\n" +
+				"}\n";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("", section);
+	}
+	
+	@Test public void testClassWithSameName() throws Exception {
+		String model = 
+				"package foo.bar\n" +
+				"class Serializable {\n" +
+				"  Class<? extends java.io.Serializable> clazz\n" +
+				"}\n";
+		XtendFile file = file(model, false);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals("", section);
+	}
+	
 	@Test public void testStaticImport_IterableExtensions() throws Exception {
 		String model = 
 				"package foo.bar\n" +
