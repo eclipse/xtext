@@ -87,7 +87,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 	private IReferenceUpdater referenceUpdater;
 
 	@Inject
-	private Provider<LocalResourceRefactoringUpdateAcceptor> udpateAcceptorProvider;
+	private Provider<LocalResourceRefactoringUpdateAcceptor> updateAcceptorProvider;
 
 	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
@@ -110,7 +110,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		String newName = renameStrategy.getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
-		LocalResourceRefactoringUpdateAcceptor updateAcceptor = udpateAcceptorProvider.get();
+		LocalResourceRefactoringUpdateAcceptor updateAcceptor = updateAcceptorProvider.get();
 		updateAcceptor.setLocalResourceURI(renameElementContext.getContextResourceURI());
 		renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		Map<URI, URI> original2newEObjectURI = renamedElementTracker.renameAndTrack(
