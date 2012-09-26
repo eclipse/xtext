@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XbaseFactory
-import org.eclipse.xtext.xbase.XbasePackage$Literals
+import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
