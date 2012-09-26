@@ -8,13 +8,12 @@
 package org.eclipse.xtend.ide.highlighting;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Sets.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -37,6 +36,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
@@ -56,6 +56,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -76,19 +77,18 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	@Inject
 	protected void setXtendGrammarAccess(IGrammarAccess grammarAccess) {
-		contextualKeywords = newLinkedHashSet();
-		EList<AbstractRule> rules = grammarAccess.getGrammar().getRules();
-		for (AbstractRule rule : rules) {
-			if (rule.getName().equals("ValidID")) {
-				TreeIterator<EObject> i = rule.eAllContents();
-				while (i.hasNext()) {
-					EObject o = i.next();
-					if (o instanceof Keyword) {
-						contextualKeywords.add((Keyword) o);
-					}
+		ImmutableSet.Builder<Keyword> builder = ImmutableSet.builder();
+		AbstractRule rule = GrammarUtil.findRuleForName(grammarAccess.getGrammar(), "ValidID");
+		if (!(rule instanceof TerminalRule)) { // if someone decides to override ValidID with a terminal rule
+			Iterator<EObject> i = rule.eAllContents();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (o instanceof Keyword) {
+					builder.add((Keyword) o);
 				}
 			}
 		}
+		contextualKeywords = builder.build();
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
 			TerminalRule idRule) {
 		super.highlightSpecialIdentifiers(leafNode, acceptor, idRule);
-		if (contextualKeywords.contains(leafNode.getGrammarElement())) {
+		if (contextualKeywords != null && contextualKeywords.contains(leafNode.getGrammarElement())) {
 			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(),
 					DefaultHighlightingConfiguration.DEFAULT_ID);
 		}
