@@ -88,11 +88,22 @@ public class MacroInterpreter extends XbaseInterpreter {
         String _simpleName = it.getSimpleName();
         boolean _equals_1 = Objects.equal(_simpleName, "type");
         if (_equals_1) {
+          boolean _and = false;
           EList<JvmFormalParameter> _parameters = it.getParameters();
-          JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-          String _name_1 = _head==null?(String)null:_head.getName();
-          boolean _equals_2 = Objects.equal(_name_1, "clazz");
-          if (_equals_2) {
+          int _size = _parameters.size();
+          boolean _equals_2 = (_size == 2);
+          if (!_equals_2) {
+            _and = false;
+          } else {
+            EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+            JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters_1);
+            JvmTypeReference _parameterType = _head.getParameterType();
+            JvmType _type = _parameterType.getType();
+            String _qualifiedName_1 = _type.getQualifiedName();
+            boolean _equals_3 = Objects.equal(_qualifiedName_1, "java.lang.Class");
+            _and = (_equals_2 && _equals_3);
+          }
+          if (_and) {
             final List<XExpression> arguments = this.featureCallToJavaMapping.getActualArguments(featureCall);
             XExpression _head_1 = IterableExtensions.<XExpression>head(arguments);
             final XExpression clazz = _head_1;
@@ -109,23 +120,23 @@ public class MacroInterpreter extends XbaseInterpreter {
                     }
                   };
                 final Iterable<Object> typerefs = IterableExtensions.<XExpression, Object>map(_drop, _function);
-                JvmType _type = _xTypeLiteral.getType();
-                return ((ProcessingContext) receiver).type(_type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(typerefs, JvmTypeReference.class))));
+                JvmType _type_1 = _xTypeLiteral.getType();
+                return ((ProcessingContext) receiver).type(_type_1, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(typerefs, JvmTypeReference.class))));
               }
             }
           }
-          boolean _and = false;
-          EList<JvmFormalParameter> _parameters_1 = it.getParameters();
-          boolean _isEmpty = _parameters_1.isEmpty();
+          boolean _and_1 = false;
+          EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+          boolean _isEmpty = _parameters_2.isEmpty();
           if (!_isEmpty) {
-            _and = false;
+            _and_1 = false;
           } else {
             EList<JvmTypeReference> _typeArguments = featureCall.getTypeArguments();
-            int _size = _typeArguments.size();
-            boolean _equals_3 = (_size == 1);
-            _and = (_isEmpty && _equals_3);
+            int _size_1 = _typeArguments.size();
+            boolean _equals_4 = (_size_1 == 1);
+            _and_1 = (_isEmpty && _equals_4);
           }
-          if (_and) {
+          if (_and_1) {
             EList<JvmTypeReference> _typeArguments_1 = featureCall.getTypeArguments();
             final JvmTypeReference typeArg = IterableExtensions.<JvmTypeReference>head(_typeArguments_1);
             EcoreUtil.resolveAll(typeArg);

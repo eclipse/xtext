@@ -8,7 +8,6 @@
 package org.eclipse.xtend.macro.lang.ui.quickfix;
 
 import org.eclipse.xtend.ide.quickfix.XtendQuickfixProvider;
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 
 public class MacroQuickfixProvider extends XtendQuickfixProvider {
 

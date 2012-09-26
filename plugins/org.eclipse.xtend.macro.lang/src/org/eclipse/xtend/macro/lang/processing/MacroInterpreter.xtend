@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext
 import org.eclipse.xtext.xbase.interpreter.impl.EvaluationException
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
-import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 /**
  * Specialization of the standard Xbase interpreter.
@@ -61,7 +60,7 @@ class MacroInterpreter extends XbaseInterpreter {
 				
 				// Special handling for "JvmTypeReference type(Class<?> clazz, JvmTypeReference ... ref)"
 				// because the typeLiteral might point to some type not on the compiler's classpath
-				if (parameters.head?.name == 'clazz') {
+				if (parameters.size == 2 && parameters.head.parameterType.type.qualifiedName == 'java.lang.Class') {
 					val arguments = featureCallToJavaMapping.getActualArguments(featureCall)
 					switch clazz : arguments.head {
 						XTypeLiteral : {
