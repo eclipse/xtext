@@ -1091,7 +1091,7 @@ class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingTypeResolverTest extends AbstractBatchTypeResolverTest {
+class RecomputingTypeResolverTest extends AbstractBatchTypeResolverTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver typeResolver;
@@ -1416,7 +1416,7 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
+class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 	
 	@Rule
 	public val timeout = new Timeout(400) // TODO improve - aim at something like 100
