@@ -54,6 +54,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.xtend.core" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.core.tests" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util" version="2.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend.macro.lang.ui"/>
    </requires>
 
    <plugin
@@ -85,12 +86,6 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.xtend.macro.lang.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-   <plugin
-         id="org.eclipse.xtend.macro.lang.tests.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
