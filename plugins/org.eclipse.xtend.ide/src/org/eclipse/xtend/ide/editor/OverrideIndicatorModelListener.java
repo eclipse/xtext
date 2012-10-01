@@ -60,8 +60,13 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		this.xtextEditor = xtextEditor;
-		asyncUpdateAnnotationModel();
-		xtextEditor.getDocument().addModelListener(this);
+		installModelListener(xtextEditor);
+	}
+
+	
+	@Override
+	public void afterSetInput(XtextEditor xtextEditor) {
+		installModelListener(xtextEditor);
 	}
 
 	@Override
@@ -188,6 +193,13 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			}
 		}
 		return true;
+	}
+	
+	private void installModelListener(XtextEditor xtextEditor) {
+		if (xtextEditor.getDocument() != null) {
+			asyncUpdateAnnotationModel();
+			xtextEditor.getDocument().addModelListener(this);
+		}
 	}
 
 }
