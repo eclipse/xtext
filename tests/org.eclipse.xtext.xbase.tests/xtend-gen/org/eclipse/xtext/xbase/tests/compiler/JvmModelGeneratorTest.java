@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -78,6 +79,80 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     this.javaCompiler.addClassPathOfClass(Functions.class);
     this.javaCompiler.addClassPathOfClass(Provider.class);
     this.javaCompiler.addClassPathOfClass(Supplier.class);
+  }
+  
+  @Test
+  public void bug390290InnerClassMemberImport() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            final JvmGenericType innerClass = JvmModelGeneratorTest.this.builder.toClass(it, "InnerClass");
+            final JvmGenericType innerClassString = JvmModelGeneratorTest.this.builder.toClass(it, "String");
+            EList<JvmMember> _members = it.getMembers();
+            JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members, innerClass);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members_1, innerClassString);
+            EList<JvmMember> _members_2 = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation fooMethod) {
+                  EList<JvmFormalParameter> _parameters = fooMethod.getParameters();
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(innerClass);
+                  JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(it, "p1", _createTypeRef);
+                  JvmModelGeneratorTest.this.builder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                  EList<JvmFormalParameter> _parameters_1 = fooMethod.getParameters();
+                  JvmParameterizedTypeReference _createTypeRef_1 = JvmModelGeneratorTest.this.references.createTypeRef(innerClassString);
+                  JvmFormalParameter _parameter_1 = JvmModelGeneratorTest.this.builder.toParameter(it, "p2", _createTypeRef_1);
+                  JvmModelGeneratorTest.this.builder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_1);
+                  JvmModelGeneratorTest.this.builder.setBody(fooMethod, expression);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(it, "foo", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_2, _method);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Outer", _function);
+      Resource _eResource = expression.eResource();
+      _eResource.eSetDeliver(false);
+      Resource _eResource_1 = expression.eResource();
+      EList<EObject> _contents = _eResource_1.getContents();
+      this.builder.<JvmGenericType>operator_add(_contents, clazz);
+      Resource _eResource_2 = expression.eResource();
+      _eResource_2.eSetDeliver(true);
+      InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
+      final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
+      Resource _eResource_3 = expression.eResource();
+      this.generator.doGenerate(_eResource_3, fsa);
+      Map<String,CharSequence> _files = fsa.getFiles();
+      String _identifier = clazz.getIdentifier();
+      String _replace = _identifier.replace(".", "/");
+      String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
+      String _plus_1 = (_plus + ".java");
+      CharSequence _get = _files.get(_plus_1);
+      final String code = _get.toString();
+      boolean _contains = code.contains("import");
+      Assert.assertFalse(_contains);
+      boolean _contains_1 = code.contains("java.lang.String foo");
+      Assert.assertTrue(_contains_1);
+      String _identifier_1 = clazz.getIdentifier();
+      final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
+      Resource _eResource_4 = expression.eResource();
+      EList<EObject> _contents_1 = _eResource_4.getContents();
+      EObject _head = IterableExtensions.<EObject>head(_contents_1);
+      this.helper.assertNoErrors(_head);
+      Class<? extends Object>[] _declaredClasses = compiledClass.getDeclaredClasses();
+      int _size = ((List<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)).size();
+      Assert.assertEquals(2, _size);
+      Class<? extends Object>[] _declaredClasses_1 = compiledClass.getDeclaredClasses();
+      Class<? extends Object> _head_1 = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses_1)));
+      Class<? extends Object>[] _declaredClasses_2 = compiledClass.getDeclaredClasses();
+      Class<? extends Object> _last = IterableExtensions.<Class<? extends Object>>last(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses_2)));
+      Method _method = compiledClass.getMethod("foo", _head_1, _last);
+      Assert.assertNotNull(_method);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
