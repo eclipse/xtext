@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -15,15 +16,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVoid;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,8 +41,8 @@ public class ImportManager {
 	private boolean organizeImports;
 	
 
-	private String thisTypeSimpleName;
-	private String thisTypeQualifiedName;
+	private Set<String> thisTypeSimpleNames = Sets.newHashSet();
+	private Set<String> thisTypeQualifiedNames = Sets.newHashSet();
 
 	private final char innerTypeSeparator;
 
@@ -56,9 +62,14 @@ public class ImportManager {
 		this.organizeImports = organizeImports;
 		this.innerTypeSeparator = innerTypeSeparator;
 		if (thisType != null) {
-			thisTypeSimpleName = thisType.getSimpleName();
-			thisTypeQualifiedName = thisType.getQualifiedName(innerTypeSeparator);
-			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisTypeSimpleName);
+			thisTypeSimpleNames.add(thisType.getSimpleName());
+			thisTypeQualifiedNames.add(thisType.getQualifiedName(innerTypeSeparator));
+			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisType.getSimpleName());
+			for (JvmMember jvmMember : filter(thisType.getMembers(), Predicates.instanceOf(JvmDeclaredType.class))) {
+				thisTypeSimpleNames.add(jvmMember.getSimpleName());
+				thisTypeQualifiedNames.add(jvmMember.getQualifiedName(innerTypeSeparator));
+				thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(jvmMember.getSimpleName());
+			}
 		}
 	}
 
@@ -101,14 +112,14 @@ public class ImportManager {
 	}
 
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return equal(qualifiedName, thisTypeQualifiedName)
+		return thisTypeQualifiedNames.contains(qualifiedName)
 				|| (!thisCollidesWithJavaLang && JAVA_LANG_PACK.matcher(qualifiedName).matches())
 				|| equal(qualifiedName, simpleName);
 	}
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
 		return !organizeImports
-				|| (equal(simpleName, thisTypeSimpleName) && !equal(qualifiedName, thisTypeQualifiedName))
+				|| (thisTypeSimpleNames.contains(simpleName) && !thisTypeQualifiedNames.contains(qualifiedName))
 				|| CodeGenUtil.isJavaLangType(simpleName);
 	}
 

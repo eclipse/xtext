@@ -47,6 +47,34 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	} 
 	
 	@Test
+	def void bug390290InnerClassMemberImport() {
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Outer") [
+			val innerClass = toClass('InnerClass')
+			val innerClassString = toClass('String')
+			members += innerClass
+			members += innerClassString
+			members += toMethod('foo', references.getTypeForName(typeof(String), expression), [fooMethod |
+				fooMethod.parameters += toParameter('p1', references.createTypeRef(innerClass))
+				fooMethod.parameters += toParameter('p2', references.createTypeRef(innerClassString))
+				fooMethod.setBody(expression)
+			])
+		]
+		expression.eResource.eSetDeliver(false)
+		expression.eResource.contents += clazz
+		expression.eResource.eSetDeliver(true)
+		val fsa = new InMemoryFileSystemAccess()
+		generator.doGenerate(expression.eResource, fsa)
+		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + clazz.identifier.replace('.','/')+".java").toString
+		assertFalse(code.contains("import"))
+		assertTrue(code.contains("java.lang.String foo"))
+		val compiledClass = javaCompiler.compileToClass(clazz.identifier, code)
+		helper.assertNoErrors(expression.eResource.contents.head)
+		assertEquals(2, compiledClass.declaredClasses.size)
+		assertNotNull(compiledClass.getMethod("foo",compiledClass.declaredClasses.head,compiledClass.declaredClasses.last))
+	}
+
+	@Test
 	def void testSimple() {
 		val expression = expression("return s.toUpperCase", false);
 		val clazz = expression.toClass("my.test.Foo") [
