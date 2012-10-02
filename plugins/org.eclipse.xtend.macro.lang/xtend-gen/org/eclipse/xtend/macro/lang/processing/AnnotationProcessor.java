@@ -72,6 +72,27 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class AnnotationProcessor implements IJvmModelInferrer {
+  public int hashCode() {
+    Class<? extends Object> _class = this.getClass();
+    int _hashCode = _class.hashCode();
+    return _hashCode;
+  }
+  
+  public boolean equals(final Object obj) {
+    boolean _xblockexpression = false;
+    {
+      Class<? extends Object> _class = obj==null?(Class<? extends Object>)null:obj.getClass();
+      Class<? extends Object> _class_1 = this.getClass();
+      boolean _equals = Objects.equal(_class, _class_1);
+      if (_equals) {
+        return true;
+      }
+      boolean _equals_1 = super.equals(obj);
+      _xblockexpression = (_equals_1);
+    }
+    return _xblockexpression;
+  }
+  
   private final static Logger LOG = new Function0<Logger>() {
     public Logger apply() {
       Logger _logger = Logger.getLogger(AnnotationProcessor.class);

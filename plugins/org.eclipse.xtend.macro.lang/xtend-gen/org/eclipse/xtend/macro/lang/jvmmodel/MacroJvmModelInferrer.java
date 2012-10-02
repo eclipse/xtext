@@ -457,7 +457,7 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
           ctx.newValue(_create, _value);
         }
       };
-    IterableExtensions.<Entry<String,Object>>forEach(_entrySet, _function);
+    if (_entrySet!=null) IterableExtensions.<Entry<String,Object>>forEach(_entrySet, _function);
     final IEvaluationResult result = this.interpreter.evaluate(expression, ctx, CancelIndicator.NullImpl);
     return result.getResult();
   }

@@ -220,7 +220,7 @@ class MacroJvmModelInferrer extends AbstractModelInferrer {
 	
 	def evaluate(XExpression expression, Map<String,Object> arguments) {
 		val ctx = new DefaultEvaluationContext
-		arguments?.entrySet.forEach [ ctx.newValue(QualifiedName::create(key), value)]
+		arguments?.entrySet?.forEach [ ctx.newValue(QualifiedName::create(key), value)]
 		val result = interpreter.evaluate(expression, ctx, CancelIndicator::NullImpl)
 		return result.result
 	}

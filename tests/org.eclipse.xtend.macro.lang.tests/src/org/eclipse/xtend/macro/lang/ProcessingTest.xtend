@@ -264,4 +264,74 @@ class ProcessingTest {
 		]	
 	}
 	
+	@Test def void testFields() {
+		resourceSet('''
+				package foo
+				
+				import anotherPack.MyService
+				
+				@MyService(specialClass=typeof(String))
+				class MyClass {
+					
+				}
+			'''.xtend,
+			'MyService.macro' -> '''
+				package anotherPack
+				
+				@MyService for class {
+				
+				  static Class<?> specialClass
+				  static String value = 'foo'
+				
+				  process {
+				  	elements.forEach [ e |
+						with('foo.MyClass') [
+						    field(value(e), type(specialClass(e)))
+						]
+				  	]
+				  }
+				}
+			'''
+		).compile [
+			val myClass = getCompiledClass('foo.MyClass')
+			assertNotNull(myClass)
+			assertTrue(myClass.getDeclaredField('foo').type == typeof(String))
+		]	
+	}
+	
+	@Test def void testFields_2() {
+		resourceSet('''
+				package foo
+				
+				import anotherPack.MyService
+				
+				@MyService("myField")
+				class MyClass {
+					
+				}
+			'''.xtend,
+			'MyService.macro' -> '''
+				package anotherPack
+				
+				@MyService for class {
+				
+				  static Class<?> specialClass = typeof(Boolean)
+				  static String value = 'foo'
+				
+				  process {
+				  	elements.forEach [ e |
+						with('foo.MyClass') [
+						    field(value(e), type(specialClass(e)))
+						]
+				  	]
+				  }
+				}
+			'''
+		).compile [
+			val myClass = getCompiledClass('foo.MyClass')
+			assertNotNull(myClass)
+			assertTrue(myClass.getDeclaredField('myField').type == typeof(Boolean))
+		]	
+	}
+	
 }

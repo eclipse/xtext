@@ -49,6 +49,17 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
  */
 public class AnnotationProcessor implements IJvmModelInferrer {
 	
+	override hashCode() {
+		getClass.hashCode
+	}
+	
+	override equals(Object obj) {
+		if (obj?.getClass == this.getClass) {
+			return true
+		}
+		super.equals(obj)
+	}
+	
 	static val LOG = Logger::getLogger(typeof(AnnotationProcessor))
 	
 	@Inject IJvmModelAssociator associator

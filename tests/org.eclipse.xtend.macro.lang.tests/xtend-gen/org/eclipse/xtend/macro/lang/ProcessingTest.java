@@ -1,5 +1,6 @@
 package org.eclipse.xtend.macro.lang;
 
+import com.google.common.base.Objects;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
@@ -581,6 +582,170 @@ public class ProcessingTest {
             Class<? extends Object>[] _interfaces = myClass.getInterfaces();
             Class<? extends Object> _get = ((List<Class<? extends Object>>)Conversions.doWrapArray(_interfaces)).get(0);
             Assert.assertSame(_get, interf);
+          }
+        };
+      this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
+          public void accept(Result t) {
+            _function.apply(t);
+          }
+      });
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFields() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import anotherPack.MyService");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@MyService(specialClass=typeof(String))");
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package anotherPack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyService for class {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("static Class<?> specialClass");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("static String value = \'foo\'");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("process {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [ e |");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("with(\'foo.MyClass\') [");
+      _builder_1.newLine();
+      _builder_1.append("\t\t    ");
+      _builder_1.append("field(value(e), type(specialClass(e)))");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyService.macro", _builder_1);
+      ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _mappedTo);
+      final Procedure1<Result> _function = new Procedure1<Result>() {
+          public void apply(final Result it) {
+            try {
+              final Class<? extends Object> myClass = it.getCompiledClass("foo.MyClass");
+              Assert.assertNotNull(myClass);
+              Field _declaredField = myClass.getDeclaredField("foo");
+              Class<? extends Object> _type = _declaredField.getType();
+              boolean _equals = Objects.equal(_type, String.class);
+              Assert.assertTrue(_equals);
+            } catch (Exception _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+      this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
+          public void accept(Result t) {
+            _function.apply(t);
+          }
+      });
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFields_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import anotherPack.MyService");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@MyService(\"myField\")");
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package anotherPack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@MyService for class {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("static Class<?> specialClass = typeof(Boolean)");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("static String value = \'foo\'");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("process {");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("elements.forEach [ e |");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("with(\'foo.MyClass\') [");
+      _builder_1.newLine();
+      _builder_1.append("\t\t    ");
+      _builder_1.append("field(value(e), type(specialClass(e)))");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  \t");
+      _builder_1.append("]");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyService.macro", _builder_1);
+      ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _mappedTo);
+      final Procedure1<Result> _function = new Procedure1<Result>() {
+          public void apply(final Result it) {
+            try {
+              final Class<? extends Object> myClass = it.getCompiledClass("foo.MyClass");
+              Assert.assertNotNull(myClass);
+              Field _declaredField = myClass.getDeclaredField("myField");
+              Class<? extends Object> _type = _declaredField.getType();
+              boolean _equals = Objects.equal(_type, Boolean.class);
+              Assert.assertTrue(_equals);
+            } catch (Exception _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
           }
         };
       this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
