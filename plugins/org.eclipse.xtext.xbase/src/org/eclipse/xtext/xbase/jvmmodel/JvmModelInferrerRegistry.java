@@ -75,10 +75,13 @@ public class JvmModelInferrerRegistry {
 			map.put(extension, new ArrayList<IJvmModelInferrer>());
 		}
 		List<IJvmModelInferrer> list = map.get(extension);
-		if (!list.contains(inferrer))
+		int index = list.indexOf(inferrer);
+		if (index == -1)
 			list.add(inferrer);
-		else 
-			log.error("Java translator "+inferrer+" for extension '"+extension+"' was already registered.");
+		else {
+			list.set(index, inferrer);
+			log.error("Java translator "+inferrer+" for extension '"+extension+"' was already registered. Replaced it.");
+		}
 	}
 	
 	public void deregister(String extension, IJvmModelInferrer inferrer) {
