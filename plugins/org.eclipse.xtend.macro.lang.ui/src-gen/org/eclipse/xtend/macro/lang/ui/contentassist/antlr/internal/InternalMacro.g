@@ -5130,7 +5130,7 @@ rule__Field__Group__3__Impl
 :
 (
 { before(grammarAccess.getFieldAccess().getGroup_3()); }
-(rule__Field__Group_3__0)
+(rule__Field__Group_3__0)?
 { after(grammarAccess.getFieldAccess().getGroup_3()); }
 )
 

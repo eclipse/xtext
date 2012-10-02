@@ -50,7 +50,7 @@ MacroAnnotationMember returns XtendMember :
 ;
 
 Field returns XtendField :
-	static?='static'? type=JvmTypeReference name=ValidID ('=' initialValue=XExpression)
+	static?='static'? type=JvmTypeReference name=ValidID ('=' initialValue=XExpression)?
 ;
 
 Registrator:

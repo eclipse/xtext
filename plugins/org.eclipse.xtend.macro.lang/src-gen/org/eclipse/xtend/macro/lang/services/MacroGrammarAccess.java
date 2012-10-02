@@ -286,10 +286,10 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInitialValueXExpressionParserRuleCall_3_1_0 = (RuleCall)cInitialValueAssignment_3_1.eContents().get(0);
 		
 		//Field returns XtendField:
-		//	static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression);
+		//	static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression)?;
 		public ParserRule getRule() { return rule; }
 
-		//static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression)
+		//static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression)?
 		public Group getGroup() { return cGroup; }
 
 		//static?="static"?
@@ -310,7 +310,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
 
-		//"=" initialValue=XExpression
+		//("=" initialValue=XExpression)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"="
@@ -545,7 +545,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Field returns XtendField:
-	//	static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression);
+	//	static?="static"? type=JvmTypeReference name=ValidID ("=" initialValue=XExpression)?;
 	public FieldElements getFieldAccess() {
 		return (pField != null) ? pField : (pField = new FieldElements());
 	}

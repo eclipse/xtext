@@ -1204,7 +1204,7 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (static?='static'? type=JvmTypeReference name=ValidID initialValue=XExpression)
+	 *     (static?='static'? type=JvmTypeReference name=ValidID initialValue=XExpression?)
 	 */
 	protected void sequence_Field(EObject context, XtendField semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

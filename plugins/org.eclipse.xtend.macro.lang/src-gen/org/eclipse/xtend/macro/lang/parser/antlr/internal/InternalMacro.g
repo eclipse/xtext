@@ -583,7 +583,7 @@ ruleField returns [EObject current=null]
 	    }
 
 )
-)))
+))?)
 ;
 
 
