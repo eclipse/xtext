@@ -73,7 +73,7 @@
 	</rm:searchPath>
 	<rm:searchPath name="maven">
     	<rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
-	      <rm:uri format="{0}/technology/m2e/releases/1.2/1.2.0.20120903-1050/">
+	      <rm:uri format="{0}/technology/m2e/releases/1.0/1.0.0.20110606-1526/">
 	        <bc:propertyRef key="eclipse.download"/>
 	      </rm:uri>
 	    </rm:provider>
