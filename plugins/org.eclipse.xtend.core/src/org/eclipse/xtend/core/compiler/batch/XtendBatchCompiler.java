@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.compiler.batch;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Arrays.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
