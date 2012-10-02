@@ -13,7 +13,7 @@
             icon="icons/xtend_file.png"
             id="org.eclipse.xtend.macro.lang.Macro"
             matchingStrategy="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
-            name="Macro Editor">
+            name="%editor.name">
         </editor>
     </extension>
     <extension
@@ -54,21 +54,21 @@
         <page
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro"
-            name="Macro">
+            name="%page.name">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
         </page>
         <page
             category="org.eclipse.xtend.macro.lang.Macro"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro.coloring"
-            name="Syntax Coloring">
+            name="%page.name.0">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
         </page>
         <page
             category="org.eclipse.xtend.macro.lang.Macro"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro.templates"
-            name="Templates">
+            name="%page.name.1">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
         </page>
     </extension>
@@ -77,7 +77,7 @@
         <page
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro"
-            name="Macro">
+            name="%page.name.2">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
@@ -89,14 +89,14 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"
-            label="Macro"/>
+            label="%keyword.label"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Trigger expensive validation"
+            description="%command.description"
             id="org.eclipse.xtend.macro.lang.Macro.validate"
-            name="Validate">
+            name="%command.name">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -105,7 +105,7 @@
              <command
                  commandId="org.eclipse.xtext.xbase.ui.organizeImports"
                  style="push"
-                 tooltip="Organize Imports">
+                 tooltip="%command.tooltip">
 	            <visibleWhen checkEnabled="false">
 	                <reference
 	                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
@@ -118,7 +118,7 @@
              <command
                  commandId="org.eclipse.xtend.macro.lang.Macro.validate"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="%command.tooltip.0">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
@@ -169,21 +169,21 @@
     <!-- marker definitions for org.eclipse.xtend.macro.lang.Macro -->
     <extension
             id="macro.check.fast"
-            name="Macro Problem"
+            name="%extension.name"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.fast"/>
         <persistent value="true"/>
     </extension>
     <extension
             id="macro.check.normal"
-            name="Macro Problem"
+            name="%extension.name.0"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.normal"/>
         <persistent value="true"/>
     </extension>
     <extension
             id="macro.check.expensive"
-            name="Macro Problem"
+            name="%extension.name.1"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.expensive"/>
         <persistent value="true"/>
@@ -201,7 +201,7 @@
             category="org.eclipse.xtend.macro.lang.Macro"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro.compiler.preferencePage"
-            name="Compiler">
+            name="%page.name.3">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
         </page>
     </extension>
@@ -211,7 +211,7 @@
             category="org.eclipse.xtend.macro.lang.Macro"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.xtend.macro.lang.Macro.compiler.propertyPage"
-            name="Compiler">
+            name="%page.name.4">
             <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
@@ -236,21 +236,21 @@
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
-			description="Open the quick outline."
+			description="%command.description.0"
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+			name="%command.name.0">
 		</command>
 		<command
-            description="Organize Imports"
+            description="%command.description.1"
             id="org.eclipse.xtext.xbase.ui.organizeImports"
-            name="Organize Imports"/>
+            name="%command.name.1"/>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
-				tooltip="Open Quick Outline">
+				tooltip="%command.tooltip.1">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
 				</visibleWhen>
@@ -408,7 +408,7 @@
 	        category="org.eclipse.xtend.macro.lang.Macro"
 	        class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
 	        id="org.eclipse.xtend.macro.lang.Macro.refactoring"
-	        name="Refactoring">
+	        name="%page.name.5">
 	        <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
 	    </page>
 	</extension>
@@ -440,7 +440,7 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
 				style="push"
-				tooltip="Open Type Hierarchy">
+				tooltip="%command.tooltip.2">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
 				</visibleWhen>
@@ -450,7 +450,7 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy"
 				style="push"
-				tooltip="Quick Type Hierarchy">
+				tooltip="%command.tooltip.3">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
 				</visibleWhen>
@@ -476,7 +476,7 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
 				style="push"
-				tooltip="Open Call Hierarchy">
+				tooltip="%command.tooltip.4">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
 				</visibleWhen>
@@ -494,7 +494,7 @@
       <editorContribution targetID="org.eclipse.xtend.macro.lang.Macro" 
                           id="org.eclipse.xtend.macro.lang.Macro.ide.rulerActions">
 	     <action
-	             label="Not Used"
+	             label="%action.label"
 	             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
 	             style="push"
 	             actionID="RulerDoubleClick"
@@ -506,7 +506,7 @@
          targetID="example.rulerContextMenuId"
          id="org.eclipse.xtend.macro.lang.Macro.ide.RulerPopupActions">
          <action
-            label="Toggle Breakpoint"
+            label="%action.label.0"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="additions"
             id="org.eclipse.xtend.macro.lang.Macro.ide.rulerContextMenu.toggleBreakpointAction">
@@ -523,7 +523,7 @@
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtend.macro.lang.Macro.compare.contentMergeViewers"
             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="macro" label="Macro Compare">
+            extensions="macro" label="%viewer.label">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
