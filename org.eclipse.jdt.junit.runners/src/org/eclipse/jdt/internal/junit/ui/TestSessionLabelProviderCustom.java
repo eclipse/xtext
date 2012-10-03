@@ -15,24 +15,20 @@ package org.eclipse.jdt.internal.junit.ui;
 
 import java.text.NumberFormat;
 
+import org.eclipse.jdt.internal.junit.BasicElementLabels;
+import org.eclipse.jdt.internal.junit.Messages;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestRunSession;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
-
-import org.eclipse.swt.graphics.Image;
-
+import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
+import org.eclipse.jdt.junit.runners.RunnerUIHandlerRegistry;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
-
-import org.eclipse.jdt.internal.junit.BasicElementLabels;
-import org.eclipse.jdt.internal.junit.Messages;
-import org.eclipse.jdt.internal.junit.model.TestCaseElement;
-import org.eclipse.jdt.internal.junit.model.TestSuiteElement;
-import org.eclipse.jdt.internal.junit.model.TestElement.Status;
+import org.eclipse.swt.graphics.Image;
 
 @SuppressWarnings("restriction")
 public class TestSessionLabelProviderCustom extends LabelProvider implements IStyledLabelProvider {
@@ -100,6 +96,14 @@ public class TestSessionLabelProviderCustom extends LabelProvider implements ISt
 	}
 
 	private String getSimpleLabel(Object element) {
+		if (element instanceof ITestElement) {
+			IRunnerUIHandler handler = RunnerUIHandlerRegistry.getHandler((ITestElement) element);
+			if (handler != null) {
+				String result = handler.getSimpleLabel(fTestRunnerPart, (ITestElement) element);
+				if (result != null)
+					return result;
+			}
+		}
 		if (element instanceof ITestCaseElement) {
 			return "foo" + BasicElementLabels.getJavaElementName(((ITestCaseElement) element).getTestMethodName());
 		} else if (element instanceof ITestSuiteElement) {

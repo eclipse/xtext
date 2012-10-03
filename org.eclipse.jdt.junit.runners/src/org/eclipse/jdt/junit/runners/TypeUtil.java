@@ -1,10 +1,10 @@
 package org.eclipse.jdt.junit.runners;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -23,8 +23,6 @@ import org.eclipse.jdt.internal.junit.ui.JUnitPlugin;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.ui.PlatformUI;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings("restriction")
@@ -82,11 +80,11 @@ public class TypeUtil {
 		final String dottedName = className.replace('$', '.'); // for nested
 																// classes...
 		try {
-			PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					try {
+//			PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new IRunnableWithProgress() {
+//				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+//					try {
 						if (project != null) {
-							result[0] = internalFindType(project, dottedName, new HashSet<IJavaProject>(), monitor);
+							result[0] = internalFindType(project, dottedName, new HashSet<IJavaProject>(), new NullProgressMonitor());
 						}
 						if (result[0] == null) {
 							int lastDot = dottedName.lastIndexOf('.');
@@ -101,17 +99,19 @@ public class TypeUtil {
 									(lastDot >= 0 ? dottedName.substring(lastDot + 1) : dottedName).toCharArray(),
 									SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE,
 									SearchEngine.createWorkspaceScope(), nameMatchRequestor,
-									IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, monitor);
+									IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
 						}
-					} catch (JavaModelException e) {
-						throw new InvocationTargetException(e);
-					}
-				}
-			});
-		} catch (InvocationTargetException e) {
-			JUnitPlugin.log(e);
-		} catch (InterruptedException e) {
+//					} catch (JavaModelException e) {
+//						throw new InvocationTargetException(e);
+//					}
+//				}
+//			});
+//		} catch (InvocationTargetException e) {
+//			JUnitPlugin.log(e);
+//		} catch (InterruptedException e) {
 			// user cancelled
+		} catch (JavaModelException e) {
+			JUnitPlugin.log(e);
 		}
 		return result[0];
 	}

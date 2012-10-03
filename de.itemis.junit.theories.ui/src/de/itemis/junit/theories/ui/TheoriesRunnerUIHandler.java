@@ -37,7 +37,7 @@ public class TheoriesRunnerUIHandler implements IRunnerUIHandler {
 	@Override
 	public String getSimpleLabel(ViewPart part, ITestElement element) {
 		if (element instanceof ITestCaseElement)
-			return ((ITestCaseElement) element).getTestMethodName();
+			return ((ITestCaseElement) element).getTestMethodName() + " theory";
 		if (element instanceof ITestSuiteElement)
 			return ((ITestSuiteElement) element).getSuiteTypeName();
 		return "unknown";
