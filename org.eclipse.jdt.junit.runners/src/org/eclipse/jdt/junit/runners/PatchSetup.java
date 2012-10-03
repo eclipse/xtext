@@ -15,7 +15,6 @@ import org.eclipse.jdt.internal.junit.ui.TestSessionLabelProviderCustom;
 import org.eclipse.jdt.internal.junit.ui.TestViewer;
 import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
 import org.eclipse.jdt.internal.ui.viewsupport.SelectionProviderMediator;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -58,7 +57,6 @@ public class PatchSetup implements IStartup {
 
 		@Override
 		public void widgetDefaultSelected(SelectionEvent e) {
-			System.out.println("Doubleclick!");
 			IStructuredSelection selection = (IStructuredSelection) fSelectionProvider.getSelection();
 			if (selection.size() != 1)
 				return;
@@ -66,7 +64,7 @@ public class PatchSetup implements IStartup {
 			TestElement testElement = (TestElement) selection.getFirstElement();
 
 			IRunnerUIHandler uiHandler = RunnerUIHandlerRegistry.getHandler(testElement);
-			if (uiHandler != null && uiHandler.handleDoubleClick(testElement))
+			if (uiHandler != null && uiHandler.handleDoubleClick(fTestRunnerPart, testElement))
 				return;
 
 			OpenTestActionCustom action;
@@ -175,22 +173,25 @@ public class PatchSetup implements IStartup {
 							oldListener = (IMenuListener) l;
 					if (oldListener != null) {
 						listeners.remove(oldListener);
-						listeners.add(new MenuExtension(selectionProvider));
+						listeners.add(new MenuExtension(testpart, selectionProvider));
 						listeners.add(oldListener);
 					}
 				}
-			System.out.println(menus);
+			// System.out.println(menus);
 
 		}
 	}
 
 	private static class MenuExtension implements IMenuListener {
 
+		private TestRunnerViewPart fTestRunnerPart;
+
 		private SelectionProviderMediator fSelectionProvider;
 
-		public MenuExtension(SelectionProviderMediator fSelectionProvider) {
+		public MenuExtension(TestRunnerViewPart fTestRunnerPart, SelectionProviderMediator fSelectionProvider) {
 			super();
 			this.fSelectionProvider = fSelectionProvider;
+			this.fTestRunnerPart = fTestRunnerPart;
 		}
 
 		@Override
@@ -203,7 +204,7 @@ public class PatchSetup implements IStartup {
 
 			IRunnerUIHandler uiHandler = RunnerUIHandlerRegistry.getHandler(testElement);
 			if (uiHandler != null)
-				uiHandler.contextMenuAboutToShow(testElement, manager);
+				uiHandler.contextMenuAboutToShow(fTestRunnerPart, testElement, manager);
 		}
 
 	}

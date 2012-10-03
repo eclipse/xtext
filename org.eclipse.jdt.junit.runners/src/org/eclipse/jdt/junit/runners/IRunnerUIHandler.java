@@ -2,13 +2,14 @@ package org.eclipse.jdt.junit.runners;
 
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.ui.part.ViewPart;
 
 public interface IRunnerUIHandler {
 
-	public void contextMenuAboutToShow(ITestElement element, IMenuManager menu);
+	public boolean contextMenuAboutToShow(ViewPart part, ITestElement element, IMenuManager menu);
 
-	public boolean handleDoubleClick(ITestElement element);
+	public boolean handleDoubleClick(ViewPart part, ITestElement element);
 
-	public String getSimpleLabel(ITestElement element);
+	public String getSimpleLabel(ViewPart part, ITestElement element);
 
 }

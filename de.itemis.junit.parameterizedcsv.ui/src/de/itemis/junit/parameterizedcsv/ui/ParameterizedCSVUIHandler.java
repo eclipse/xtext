@@ -8,6 +8,7 @@ import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.ui.part.ViewPart;
 
 @SuppressWarnings("restriction")
 public class ParameterizedCSVUIHandler implements IRunnerUIHandler {
@@ -36,12 +37,13 @@ public class ParameterizedCSVUIHandler implements IRunnerUIHandler {
 	}
 
 	@Override
-	public void contextMenuAboutToShow(ITestElement ctx, IMenuManager menu) {
+	public boolean contextMenuAboutToShow(ViewPart part, ITestElement ctx, IMenuManager menu) {
 		menu.add(new CompareAction(ctx));
+		return false;
 	}
 
 	@Override
-	public boolean handleDoubleClick(ITestElement ctx) {
+	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
 		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
 			FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx);
 			CompareUI.openCompareEditor(inp);
@@ -51,7 +53,7 @@ public class ParameterizedCSVUIHandler implements IRunnerUIHandler {
 	}
 
 	@Override
-	public String getSimpleLabel(ITestElement element) {
+	public String getSimpleLabel(ViewPart part, ITestElement element) {
 		if (element instanceof ITestCaseElement)
 			return ((ITestCaseElement) element).getTestMethodName();
 		if (element instanceof ITestSuiteElement)
