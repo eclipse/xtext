@@ -24,7 +24,7 @@ Lexicalspace_Setup returns XpectTest hidden(WS, ML_COMMENT, SL_COMMENT):
 ;
 	
 Assignment:
-	(target=[types::JvmMember|ID] "=" value=Value) | value=ComponentLong
+	(declaredTarget=[types::JvmOperation|ID] "=" value=Value) | value=ComponentLong
 ;
 
 Value:

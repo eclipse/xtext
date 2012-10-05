@@ -71,7 +71,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XpectPackage.Literals.XPECT_INVOCATION__ELEMENT)
 			return getScopeForXpectInvocationElement(EcoreUtil2.getContainerOfType(context, XpectFile.class));
-		if (reference == XpectPackage.Literals.ASSIGNMENT__TARGET)
+		if (reference == XpectPackage.Literals.ASSIGNMENT__DECLARED_TARGET)
 			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, Instance.class));
 		if (reference == XpectPackage.Literals.INSTANCE__TYPE) {
 			return getScopeForInstanceType(EcoreUtil2.getContainerOfType(context, Instance.class), reference);

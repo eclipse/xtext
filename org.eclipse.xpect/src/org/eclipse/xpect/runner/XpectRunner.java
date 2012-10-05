@@ -120,6 +120,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		SetupContext ctx = createSetupContext(setup);
 		ctx.setAllFiles(getFiles());
 		ctx.setTestClass(getTestClass().getJavaClass());
+		ctx.setUriProvider(uriProvider);
 		try {
 			if (setup != null)
 				setup.beforeClass(ctx);

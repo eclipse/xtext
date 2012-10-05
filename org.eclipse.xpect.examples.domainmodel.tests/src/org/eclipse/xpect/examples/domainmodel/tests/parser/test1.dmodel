@@ -1,0 +1,18 @@
+
+
+XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.parser.ParserTest
+	ResourceSet {
+		ThisFile {}
+	}
+END_CLASS
+
+
+XPECT ast ---
+
+
+---
+
+entity MyEntity {
+	id:int
+	name:String
+}

@@ -33,7 +33,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment">
     <eOperations name="getInstance" eType="#//Instance"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmMember"/>
+    <eOperations name="getTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         containment="true"/>
   </eClassifiers>

@@ -1,10 +1,12 @@
 package org.eclipse.xpect.setup;
 
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.runner.IXpectURIProvider;
 import org.eclipse.xpect.runner.XpectFrameworkMethod;
 import org.eclipse.xpect.util.ITypedAdapter;
 import org.eclipse.xpect.util.ITypedProvider;
@@ -18,6 +20,10 @@ public interface IXpectSetup<T, K, V> {
 		Class<?> getTestClass();
 
 		void installParameterAdapter(ITypedAdapter adapter);
+
+		void installParameterValue(Class<? extends Annotation> key, ITypedProvider provider);
+
+		IXpectURIProvider getURIProvider();
 	}
 
 	public interface IFileSetupContext extends IClassSetupContext {
@@ -28,7 +34,7 @@ public interface IXpectSetup<T, K, V> {
 		Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
 
 		XpectFrameworkMethod getMethod();
-		
+
 		ITypedProvider getProposedParameterValue(int parameterIndex);
 
 		Object getTestInstance();
@@ -38,15 +44,15 @@ public interface IXpectSetup<T, K, V> {
 		void setParameterValue(int parameterIndex, ITypedProvider value);
 	}
 
-	void afterClass(IClassSetupContext frameworkCtx, T userCtx);
+	void afterClass(IClassSetupContext frameworkCtx, T userCtx) throws Exception;
 
-	void afterFile(IFileSetupContext frameworkCtx, K userCtx);
+	void afterFile(IFileSetupContext frameworkCtx, K userCtx) throws Exception;
 
-	void afterTest(ITestSetupContext frameworkCtx, V userCtx);
+	void afterTest(ITestSetupContext frameworkCtx, V userCtx) throws Exception;
 
-	T beforeClass(IClassSetupContext frameworkCtx);
+	T beforeClass(IClassSetupContext frameworkCtx) throws Exception;
 
-	K beforeFile(IFileSetupContext frameworkCtx, T userCtx);
+	K beforeFile(IFileSetupContext frameworkCtx, T userCtx) throws Exception;
 
-	V beforeTest(ITestSetupContext frameworkCtx, K userCtx);
+	V beforeTest(ITestSetupContext frameworkCtx, K userCtx) throws Exception;
 }

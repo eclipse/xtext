@@ -1,32 +1,33 @@
 package org.eclipse.xpect.setup;
 
+
 public class AbstractXpectSetup<T, K, V> implements IXpectSetup<T, K, V> {
 
 	@Override
-	public T beforeClass(org.eclipse.xpect.setup.IXpectSetup.IClassSetupContext frameworkCtx) {
+	public T beforeClass(IClassSetupContext frameworkCtx) throws Exception{
 		return null;
 	}
 
 	@Override
-	public K beforeFile(org.eclipse.xpect.setup.IXpectSetup.IFileSetupContext frameworkCtx, T userCtx) {
+	public K beforeFile(IFileSetupContext frameworkCtx, T userCtx) throws Exception{
 		return null;
 	}
 
 	@Override
-	public V beforeTest(org.eclipse.xpect.setup.IXpectSetup.ITestSetupContext frameworkCtx, K userCtx) {
+	public V beforeTest(ITestSetupContext frameworkCtx, K userCtx) throws Exception {
 		return null;
 	}
 
 	@Override
-	public void afterTest(org.eclipse.xpect.setup.IXpectSetup.ITestSetupContext frameworkCtx, V userCtx) {
+	public void afterTest(ITestSetupContext frameworkCtx, V userCtx) throws Exception{
 	}
 
 	@Override
-	public void afterFile(org.eclipse.xpect.setup.IXpectSetup.IFileSetupContext frameworkCtx, K userCtx) {
+	public void afterFile(IFileSetupContext frameworkCtx, K userCtx) throws Exception{
 	}
 
 	@Override
-	public void afterClass(org.eclipse.xpect.setup.IXpectSetup.IClassSetupContext frameworkCtx, T userCtx) {
+	public void afterClass(IClassSetupContext frameworkCtx, T userCtx) throws Exception{
 	}
 
 }

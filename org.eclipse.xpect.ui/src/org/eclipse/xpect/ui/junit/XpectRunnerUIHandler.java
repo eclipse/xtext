@@ -11,6 +11,7 @@ import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xpect.util.TestDataUtil;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -29,7 +30,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	private IURIEditorOpener globalOpener;
 
 	@Override
-	public void contextMenuAboutToShow(ITestElement ctx, IMenuManager menu) {
+	public boolean contextMenuAboutToShow(ViewPart part, ITestElement ctx, IMenuManager menu) {
 		CompareAction compareAction = new CompareAction(ctx);
 		if (compareAction.isEnabled())
 			menu.add(compareAction);
@@ -40,6 +41,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		String method = parsed.get("method");
 		if (method != null)
 			menu.add(new OpenJavaMethodAction(ctx, method, "Go to Method", "Show Java Method declaration"));
+		return true;
 	}
 
 	protected Map<String, String> parse(ITestElement element) {
@@ -51,7 +53,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	}
 
 	@Override
-	public boolean handleDoubleClick(ITestElement ctx) {
+	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
 		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
 			FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx);
 			CompareUI.openCompareEditor(inp);
@@ -67,7 +69,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	}
 
 	@Override
-	public String getSimpleLabel(ITestElement element) {
+	public String getSimpleLabel(ViewPart part, ITestElement element) {
 		Map<String, String> parsed = parse(element);
 		String title = parsed.get("title");
 		if (!Strings.isEmpty(title))

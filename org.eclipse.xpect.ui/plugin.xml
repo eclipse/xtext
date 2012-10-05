@@ -298,7 +298,7 @@
         point="org.eclipse.jdt.junit.runners.junitRunnerUI">
      <junitRunnerUIHandler
            handlerClass="org.eclipse.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xpect.ui.junit.XpectRunnerUIHandler"
-           runnerClass="org.eclipse.xpect.lib.XpectRunner">
+           runnerClass="org.eclipse.xpect.runner.XpectRunner">
      </junitRunnerUIHandler>
   </extension>
 
