@@ -48,7 +48,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 				resourceSet.getResources().add(res);
 				res.load(file.createInputStream(frameworkCtx), null);
 				if (file instanceof ThisFile) {
-					EcoreUtil.resolveAll(res);
+//					EcoreUtil.resolveAll(res);
 					frameworkCtx.installParameterValue(ThisResource.class, new TypedProvider(res));
 					if (!res.getContents().isEmpty())
 						frameworkCtx.installParameterValue(ThisModel.class, new TypedProvider(res.getContents().get(0)));

@@ -1,0 +1,6 @@
+
+
+entity MyEntity2 {
+	id:int
+	name:String
+}

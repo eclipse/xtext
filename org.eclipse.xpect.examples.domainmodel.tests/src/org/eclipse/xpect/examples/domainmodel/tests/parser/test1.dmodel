@@ -5,6 +5,7 @@
 	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider {}
 	ResourceSet {
 		ThisFile {}
+		File "test2.dmodel" {}
 	}
 END_CLASS */
 
@@ -14,7 +15,7 @@ END_CLASS */
 
 --- */
 
-entity MyEntity {
+entity MyEntity extends MyEntity2 {
 	id:int
 	name:String
 }

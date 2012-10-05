@@ -132,12 +132,16 @@ public class XpectFileRunner {
 			try {
 				if (setup != null)
 					ctx.setUserFileCtx(setup.beforeFile(ctx, ctx.getUserClassCtx(), createSetupInitializer()));
-				for (XpectTestRunner child : getChildren())
-					try {
-						child.run(notifier, setup, ctx);
-					} catch (Throwable t) {
-						notifier.fireTestFailure(new Failure(getDescription(), t));
-					}
+				if (getChildren().isEmpty()) {
+					notifier.fireTestStarted(getDescription());
+					notifier.fireTestFinished(getDescription());
+				} else
+					for (XpectTestRunner child : getChildren())
+						try {
+							child.run(notifier, setup, ctx);
+						} catch (Throwable t) {
+							notifier.fireTestFailure(new Failure(getDescription(), t));
+						}
 			} catch (Throwable t) {
 				notifier.fireTestFailure(new Failure(getDescription(), t));
 			} finally {

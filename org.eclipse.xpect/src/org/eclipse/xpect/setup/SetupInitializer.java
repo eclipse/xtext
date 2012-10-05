@@ -1,5 +1,7 @@
 package org.eclipse.xpect.setup;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.xpect.AbstractComponent;
@@ -12,6 +14,8 @@ import org.eclipse.xpect.StringLiteral;
 import org.eclipse.xpect.Value;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+
+import com.google.common.base.Joiner;
 
 @SuppressWarnings("restriction")
 public class SetupInitializer<T> implements ISetupInitializer<T> {
@@ -30,15 +34,34 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 		return new JavaReflectAccess().getRawType(val.getType());
 	}
 
+	protected Constructor<?> findConstructor(Class<?> clazz, Object[] params) {
+		START: for (Constructor<?> c : clazz.getConstructors())
+			if (c.getParameterTypes().length == params.length) {
+				for (int i = 0; i < params.length; i++)
+					if (!c.getParameterTypes()[i].isInstance(params[i]))
+						continue START;
+				return c;
+			}
+		throw new RuntimeException("Type " + clazz + " has no constructor suitable for params " + Joiner.on(", ").join(params));
+	}
+
 	protected Object create(Component val) {
 		Class<?> type = new JavaReflectAccess().getRawType(val.getComponentClass());
 		try {
-			Object result = type.newInstance();
+			Object[] params = new Object[val.getParameters().size()];
+			for (int i = 0; i < val.getParameters().size(); i++)
+				params[i] = create(val.getParameters().get(i));
+			Constructor<?> constructor = findConstructor(type, params);
+			Object result = constructor.newInstance(params);
 			initialize(result, val);
 			return result;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -89,6 +112,7 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 
 	@Override
 	public void initialize(T object) {
-		initialize(object, rootInstance);
+		if (rootInstance != null)
+			initialize(object, rootInstance);
 	}
 }
