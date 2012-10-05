@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.XpectInvocation;
 import org.eclipse.xpect.XpectStandaloneSetup;
+import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.setup.IXpectSetup;
 import org.eclipse.xpect.setup.SetupContext;
+import org.eclipse.xpect.setup.SetupInitializer;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -89,63 +91,52 @@ public class XpectFileRunner {
 	}
 
 	protected XpectFile loadXpectFile(XtextResource res) throws IOException {
-		IResourceValidator validator = res.getResourceServiceProvider().get(
-				IResourceValidator.class);
-		List<Issue> issues = validator.validate(res, CheckMode.ALL,
-				CancelIndicator.NullImpl);
+		IResourceValidator validator = res.getResourceServiceProvider().get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
 		if (!issues.isEmpty())
-			throw new IllegalStateException("Errors in " + res.getURI() + "\n"
-					+ Joiner.on("\n").join(issues));
+			throw new IllegalStateException("Errors in " + res.getURI() + "\n" + Joiner.on("\n").join(issues));
 		if (res.getContents().isEmpty())
-			throw new IllegalStateException("Resource for " + res.getURI()
-					+ " is empty.");
+			throw new IllegalStateException("Resource for " + res.getURI() + " is empty.");
 		EObject obj = res.getContents().get(0);
 		if (!(obj instanceof XpectFile))
-			throw new IllegalStateException(
-					"Root type differs from expectation: "
-							+ obj.eClass().getName() + " instead of "
-							+ XpectFile.class.getSimpleName());
+			throw new IllegalStateException("Root type differs from expectation: " + obj.eClass().getName() + " instead of "
+					+ XpectFile.class.getSimpleName());
 		return (XpectFile) obj;
 	}
 
 	protected XtextResource loadXpectResource(URI uri) throws IOException {
-		IResourceServiceProvider rssp = IResourceServiceProvider.Registry.INSTANCE
-				.getResourceServiceProvider(URI.createURI("foo.xpect"));
+		IResourceServiceProvider rssp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI("foo.xpect"));
 		if (rssp == null) {
 			if (!EcorePlugin.IS_ECLIPSE_RUNNING)
-				rssp = new XpectStandaloneSetup()
-						.createInjectorAndDoEMFRegistration().getInstance(
-								IResourceServiceProvider.class);
+				rssp = new XpectStandaloneSetup().createInjectorAndDoEMFRegistration().getInstance(IResourceServiceProvider.class);
 			else
-				throw new IllegalStateException(
-						"The language *.xpect is not activated");
+				throw new IllegalStateException("The language *.xpect is not activated");
 		}
 		XtextResourceSet resourceSet = rssp.get(XtextResourceSet.class);
-		resourceSet.setClasspathURIContext(runner.getTestClass().getJavaClass()
-				.getClassLoader());
-		XtextResource resource = (XtextResource) rssp.get(
-				IResourceFactory.class).createResource(uri);
+		resourceSet.setClasspathURIContext(runner.getTestClass().getJavaClass().getClassLoader());
+		XtextResource resource = (XtextResource) rssp.get(IResourceFactory.class).createResource(uri);
 		resourceSet.getResources().add(resource);
 		resource.load(null);
 		return resource;
 	}
 
-	public void run(RunNotifier notifier,
-			IXpectSetup<Object, Object, Object> setup, SetupContext ctx) {
+	protected ISetupInitializer<Object> createSetupInitializer() {
+		return new SetupInitializer<Object>(xpectFile.getTest());
+	}
+
+	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		if (error != null) {
 			notifier.fireTestFailure(new Failure(getDescription(), error));
 		} else {
 			ctx.setXpectFile(xpectFile);
 			try {
 				if (setup != null)
-					ctx.setUserFileCtx(setup.beforeFile(ctx,
-							ctx.getUserClassCtx()));
+					ctx.setUserFileCtx(setup.beforeFile(ctx, ctx.getUserClassCtx(), createSetupInitializer()));
 				for (XpectTestRunner child : getChildren())
 					try {
 						child.run(notifier, setup, ctx);
 					} catch (Throwable t) {
-						notifier.fireTestFailure(new Failure(getDescription(),
-								t));
+						notifier.fireTestFailure(new Failure(getDescription(), t));
 					}
 			} catch (Throwable t) {
 				notifier.fireTestFailure(new Failure(getDescription(), t));

@@ -18,7 +18,7 @@ Text:
 ;
 	
 Lexicalspace_Setup returns XpectTest hidden(WS, ML_COMMENT, SL_COMMENT):
-	{XpectTest} "XPECT_CLASS" type=[types::JvmDeclaredType|QualifiedName] 
+	{XpectTest} "XPECT_CLASS" testClass=[types::JvmDeclaredType|QualifiedName] 
 	assignments+=Assignment*
 	"END_CLASS"
 ;
@@ -34,11 +34,11 @@ Value:
 ;
 
 ComponentLong returns Component:
-	{Component} type=[types::JvmDeclaredType|QualifiedName] parameters+=Literal* ("{" assignments+=Assignment* "}")
+	{Component} componentClass=[types::JvmDeclaredType|QualifiedName] parameters+=Literal* ("{" assignments+=Assignment* "}")
 ;
 
 ComponentInline returns Component:
-	{Component} (type=[types::JvmDeclaredType|QualifiedName] parameters+=Literal*)? ("{" assignments+=Assignment* "}")
+	{Component} (componentClass=[types::JvmDeclaredType|QualifiedName] parameters+=Literal*)? ("{" assignments+=Assignment* "}")
 ;
 
 Literal:

@@ -1,7 +1,7 @@
 package org.eclipse.xpect.model;
 
+import org.eclipse.xpect.AbstractComponent;
 import org.eclipse.xpect.Component;
-import org.eclipse.xpect.Instance;
 import org.eclipse.xpect.Value;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -16,8 +16,8 @@ import org.eclipse.xtext.resource.XtextResource;
 @SuppressWarnings("restriction")
 public class AssignmentImplCustom extends AssignmentImpl {
 	@Override
-	public Instance getInstance() {
-		return (Instance) eContainer();
+	public AbstractComponent getInstance() {
+		return (AbstractComponent) eContainer();
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class AssignmentImplCustom extends AssignmentImpl {
 			return result;
 		Value val = getValue();
 		if (val instanceof Component) {
-			JvmDeclaredType toBeAssigned = ((Component) val).getType();
-			JvmDeclaredType containerType = getInstance().getType();
+			JvmDeclaredType toBeAssigned = ((Component) val).getComponentClass();
+			JvmDeclaredType containerType = getInstance().getComponentClass();
 			if (toBeAssigned != null && !toBeAssigned.eIsProxy() && containerType != null && !containerType.eIsProxy()) {
 				for (JvmMember candidate : containerType.getAllFeatures())
 					if ("add".equals(candidate.getSimpleName()) && candidate instanceof JvmOperation) {

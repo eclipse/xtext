@@ -11,7 +11,7 @@ import org.eclipse.xpect.runner.XpectFrameworkMethod;
 import org.eclipse.xpect.util.ITypedAdapter;
 import org.eclipse.xpect.util.ITypedProvider;
 
-public interface IXpectSetup<T, K, V> {
+public interface IXpectSetup<T, K, V, X> {
 
 	public interface IClassSetupContext {
 
@@ -52,7 +52,7 @@ public interface IXpectSetup<T, K, V> {
 
 	T beforeClass(IClassSetupContext frameworkCtx) throws Exception;
 
-	K beforeFile(IFileSetupContext frameworkCtx, T userCtx) throws Exception;
+	K beforeFile(IFileSetupContext frameworkCtx, T userCtx, ISetupInitializer<X> initializer) throws Exception;
 
 	V beforeTest(ITestSetupContext frameworkCtx, K userCtx) throws Exception;
 }

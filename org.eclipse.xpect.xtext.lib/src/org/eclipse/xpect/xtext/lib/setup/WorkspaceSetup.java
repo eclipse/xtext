@@ -5,7 +5,7 @@ import org.eclipse.xpect.xtext.lib.setup.XtextSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextSetup.FileCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextSetup.TestCtx;
 
-public class WorkspaceSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx> {
+public class WorkspaceSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, Object> {
 	protected static class ClassCtx {
 	}
 

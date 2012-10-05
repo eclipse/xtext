@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xpect.AbstractComponent;
 import org.eclipse.xpect.Component;
-import org.eclipse.xpect.Instance;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.XpectPackage;
 import org.eclipse.xpect.XpectTest;
@@ -72,17 +72,18 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		if (reference == XpectPackage.Literals.XPECT_INVOCATION__ELEMENT)
 			return getScopeForXpectInvocationElement(EcoreUtil2.getContainerOfType(context, XpectFile.class));
 		if (reference == XpectPackage.Literals.ASSIGNMENT__DECLARED_TARGET)
-			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, Instance.class));
-		if (reference == XpectPackage.Literals.INSTANCE__TYPE) {
-			return getScopeForInstanceType(EcoreUtil2.getContainerOfType(context, Instance.class), reference);
+			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, AbstractComponent.class));
+		if (reference == XpectPackage.Literals.COMPONENT__COMPONENT_CLASS) {
+			return getScopeForInstanceType(EcoreUtil2.getContainerOfType(context, AbstractComponent.class), reference);
 		}
 		return delegate.getScope(context, reference);
 	}
 
-	private IScope getScopeForAssignmentTarget(Instance owner) {
-		if (owner.getType() == null || owner.getType().eIsProxy())
+	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
+		JvmDeclaredType componentClass = owner.getComponentClass();
+		if (componentClass == null || componentClass.eIsProxy())
 			return IScope.NULLSCOPE;
-		JvmDeclaredType type = owner.getType();
+		JvmDeclaredType type = componentClass;
 		List<IEObjectDescription> descs = Lists.newArrayList();
 		for (JvmFeature feature : type.getAllFeatures()) {
 			String name = getAssignmentTargetFeatureName(feature);
@@ -92,20 +93,21 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		return new SimpleScope(descs);
 	}
 
-	private IScope getScopeForInstanceType(Instance instance, EReference reference) {
+	private IScope getScopeForInstanceType(AbstractComponent instance, EReference reference) {
 		IScope scope = delegate.getScope(instance, reference);
 		if (instance instanceof XpectTest)
 			return scope;
 		if (instance instanceof Component) {
 			Set<String> packages = Sets.newLinkedHashSet();
-			Instance current = ((Component) instance).getAssignment().getInstance();
+			AbstractComponent current = ((Component) instance).getAssignment().getInstance();
 			while (true) {
-				if (current.getType() != null && !current.getType().eIsProxy())
-					packages.add(current.getType().getPackageName());
+				JvmDeclaredType componentClass = current.getComponentClass();
+				if (componentClass != null && !componentClass.eIsProxy())
+					packages.add(componentClass.getPackageName());
 				if (current instanceof Component)
 					current = ((Component) current).getAssignment().getInstance();
 				else if (current instanceof XpectTest) {
-					JvmDeclaredType setup = ((XpectTest) current).getSetup();
+					JvmDeclaredType setup = ((XpectTest) current).getSetupClass();
 					if (setup != null)
 						packages.add(setup.getPackageName());
 					break;
@@ -125,9 +127,12 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 
 	private IScope getScopeForXpectInvocationElement(XpectFile file) {
 		XpectTest test = file.getTest();
-		if (test == null || test.getType() == null || test.getType().eIsProxy())
+		if (test == null)
 			return IScope.NULLSCOPE;
-		JvmDeclaredType type = test.getType();
+		JvmDeclaredType testClass = test.getTestClass();
+		if (testClass == null || test.getTestClass().eIsProxy())
+			return IScope.NULLSCOPE;
+		JvmDeclaredType type = test.getTestClass();
 		List<IEObjectDescription> descs = Lists.newArrayList();
 		for (JvmFeature feature : type.getAllFeatures())
 			if (isXpectInvocationOperation(feature))

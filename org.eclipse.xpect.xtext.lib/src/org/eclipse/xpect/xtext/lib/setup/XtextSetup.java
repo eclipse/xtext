@@ -7,7 +7,7 @@ import org.eclipse.xpect.xtext.lib.setup.XtextSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextSetup.FileCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextSetup.TestCtx;
 
-public class XtextSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx> {
+public class XtextSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, Object> {
 
 	private IGuiceModuleProvider moduleProvider;
 
@@ -28,7 +28,7 @@ public class XtextSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx> {
 		this.moduleProvider = moduleProvider;
 	}
 
-	public void add(IXpectSetup<?, ?, ?> delegate) {
+	public void add(IXpectSetup<?, ?, ?, ?> delegate) {
 
 	}
 

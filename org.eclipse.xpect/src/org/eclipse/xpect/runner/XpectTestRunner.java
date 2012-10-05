@@ -64,34 +64,28 @@ public class XpectTestRunner {
 		this.uriRunner = uriRunner;
 		this.invocation = invocation;
 		try {
-			this.method = uriRunner.getRunner().getFrameworkMethod(
-					invocation.getElement());
+			this.method = uriRunner.getRunner().getFrameworkMethod(invocation.getElement());
 		} catch (Throwable e) {
 			this.error = e;
 		}
 	}
 
-	protected List<List<ITypedProvider>> collectAllParameters()
-			throws Exception {
+	protected List<List<ITypedProvider>> collectAllParameters() throws Exception {
 		List<IClaimedRegion> claimedRegions = collectClaimedRegions();
 		List<List<ITypedProvider>> result = Lists.newArrayList();
 		List<ITypedProvider> first = null;
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method
-					.getSingleParameterProvider().get(i);
+			IXpectSingleParameterProvider claimer = method.getSingleParameterProvider().get(i);
 			if (claimer != null) {
 				if (first == null)
-					first = Arrays.asList(new ITypedProvider[method
-							.getParameterCount()]);
-				ITypedProvider value = claimer.parseRegion(this, i,
-						claimedRegions);
+					first = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
+				ITypedProvider value = claimer.parseRegion(this, i, claimedRegions);
 				first.set(i, value);
 			}
 		}
 		if (first != null)
 			result.add(first);
-		for (IXpectMultiParameterProvider claimer : method
-				.getMultiParameterProvider())
+		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProvider())
 			result.add(claimer.parseRegion(this, claimedRegions));
 		return result;
 	}
@@ -99,23 +93,20 @@ public class XpectTestRunner {
 	protected List<IClaimedRegion> collectClaimedRegions() {
 		List<IClaimedRegion> result = Lists.newArrayList();
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method
-					.getSingleParameterProvider().get(i);
+			IXpectSingleParameterProvider claimer = method.getSingleParameterProvider().get(i);
 			if (claimer != null) {
 				IRegion claim = claimer.claimRegion(this, i);
 				result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
-		for (IXpectMultiParameterProvider claimer : method
-				.getMultiParameterProvider()) {
+		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProvider()) {
 			IRegion claim = claimer.claimRegion(this);
 			result.add(new ClaimedRegion(claimer, claim));
 		}
 		return result;
 	}
 
-	protected ITypedProvider collectProposedParameter(int paramIndex,
-			List<ITypedProvider> candidates, List<ITypedAdapter> adapter) {
+	protected ITypedProvider collectProposedParameter(int paramIndex, List<ITypedProvider> candidates, List<ITypedAdapter> adapter) {
 		Class<?> expectedType = method.getMethod().getParameterTypes()[paramIndex];
 		for (ITypedProvider tp : candidates)
 			if (tp.canProvide(expectedType))
@@ -127,10 +118,8 @@ public class XpectTestRunner {
 		return null;
 	}
 
-	protected List<ITypedProvider> collectProposedParameters(
-			List<List<ITypedProvider>> allParams, List<ITypedAdapter> adapter) {
-		List<ITypedProvider> result = Arrays.asList(new ITypedProvider[method
-				.getParameterCount()]);
+	protected List<ITypedProvider> collectProposedParameters(List<List<ITypedProvider>> allParams, List<ITypedAdapter> adapter) {
+		List<ITypedProvider> result = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			List<ITypedProvider> candidates = Lists.newArrayList();
 			for (List<ITypedProvider> col : allParams)
@@ -148,8 +137,7 @@ public class XpectTestRunner {
 	protected String getFullName() {
 		Map<String, String> result = Maps.newLinkedHashMap();
 		result.put("title", uriRunner.getRunner().getUniqueName(getTitle()));
-		if (invocation.getElement() != null
-				&& !invocation.getElement().eIsProxy())
+		if (invocation.getElement() != null && !invocation.getElement().eIsProxy())
 			result.put("method", invocation.getElement().getSimpleName());
 		result.put("file", EcoreUtil.getURI(invocation).toString());
 		return TestDataUtil.encode(result);
@@ -161,8 +149,7 @@ public class XpectTestRunner {
 		return Description.createTestDescription(javaClass, getFullName());
 	}
 
-	protected Object[] createParameterValues(
-			List<ITypedProvider> proposedParameters) {
+	protected Object[] createParameterValues(List<ITypedProvider> proposedParameters) {
 		Object[] params = new Object[method.getParameterCount()];
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			Class<?>[] expectedTypes = method.getMethod().getParameterTypes();
@@ -179,8 +166,7 @@ public class XpectTestRunner {
 	}
 
 	public String getDocument() {
-		return ((XtextResource) invocation.eResource()).getParseResult()
-				.getRootNode().getText();
+		return ((XtextResource) invocation.eResource()).getParseResult().getRootNode().getText();
 	}
 
 	public Throwable getError() {
@@ -199,8 +185,7 @@ public class XpectTestRunner {
 		return uriRunner;
 	}
 
-	public void run(RunNotifier notifier,
-			IXpectSetup<Object, Object, Object> setup, SetupContext ctx) {
+	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		notifier.fireTestStarted(getDescription());
 		try {
 			if (invocation.isIgnore())
@@ -217,13 +202,10 @@ public class XpectTestRunner {
 		}
 	}
 
-	protected void runInternal(IXpectSetup<Object, Object, Object> setup,
-			SetupContext ctx) throws Throwable {
+	protected void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
-		List<ITypedProvider> proposedParameters = collectProposedParameters(
-				allParameters, ctx.getParamAdapters());
-		Object test = uriRunner.getRunner().getTestClass().getJavaClass()
-				.newInstance();
+		List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamAdapters());
+		Object test = uriRunner.getRunner().getTestClass().getJavaClass().newInstance();
 		ctx.setProposedParameters(proposedParameters);
 		ctx.setAllParameters(allParameters);
 		ctx.setXpectInvocation(invocation);

@@ -1,6 +1,7 @@
 
 
 XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.parser.ParserTest
+	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider
 	ResourceSet {
 		ThisFile {}
 	}

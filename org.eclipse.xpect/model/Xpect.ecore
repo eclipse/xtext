@@ -12,8 +12,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//Member" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//Instance">
-    <eOperations name="getSetup" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//AbstractComponent">
+    <eOperations name="getSetupClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectIgnore" eSuperTypes="#//Member"/>
   <eClassifiers xsi:type="ecore:EClass" name="XpectInvocation" eSuperTypes="#//Member">
@@ -24,23 +25,24 @@
   <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Member">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Instance" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractComponent" abstract="true">
+    <eOperations name="getComponentClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Literal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
         eType="#//Assignment" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment">
-    <eOperations name="getInstance" eType="#//Instance"/>
+    <eOperations name="getInstance" eType="#//AbstractComponent"/>
     <eOperations name="getTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Value #//Instance">
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Value #//AbstractComponent">
     <eOperations name="getAssignment" eType="#//Assignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//Literal">

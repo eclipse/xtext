@@ -53,11 +53,11 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected IXpectSetup<Object, Object, Object> createSetup(Class<?> clazz) {
+	protected IXpectSetup<Object, Object, Object, Object> createSetup(Class<?> clazz) {
 		return AnnotationUtil.newInstanceViaAnnotation(clazz, XpectSetup.class, IXpectSetup.class);
 	}
 
-	protected SetupContext createSetupContext(IXpectSetup<Object, Object, Object> setup) {
+	protected SetupContext createSetupContext(IXpectSetup<Object, Object, Object, Object> setup) {
 		return new SetupContext();
 	}
 
@@ -116,7 +116,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 
 	@Override
 	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
-		IXpectSetup<Object, Object, Object> setup = createSetup(getTestClass().getJavaClass());
+		IXpectSetup<Object, Object, Object, Object> setup = createSetup(getTestClass().getJavaClass());
 		SetupContext ctx = createSetupContext(setup);
 		ctx.setAllFiles(getFiles());
 		ctx.setTestClass(getTestClass().getJavaClass());
@@ -136,5 +136,4 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 			}
 		}
 	}
-
 }
