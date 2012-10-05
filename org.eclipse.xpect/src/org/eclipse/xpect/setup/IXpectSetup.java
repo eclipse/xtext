@@ -31,17 +31,17 @@ public interface IXpectSetup<T, K, V, X> {
 	}
 
 	public interface ITestSetupContext extends IFileSetupContext {
-		Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
+//		Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
 
 		XpectFrameworkMethod getMethod();
 
-		ITypedProvider getProposedParameterValue(int parameterIndex);
+//		ITypedProvider getProposedParameterValue(int parameterIndex);
 
 		Object getTestInstance();
 
 		XpectInvocation getXpectInvocation();
 
-		void setParameterValue(int parameterIndex, ITypedProvider value);
+//		void setParameterValue(int parameterIndex, ITypedProvider value);
 	}
 
 	void afterClass(IClassSetupContext frameworkCtx, T userCtx) throws Exception;

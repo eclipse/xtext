@@ -22,7 +22,7 @@ public class SetupContext implements ITestSetupContext {
 
 	private Collection<URI> allFiles;
 
-	private List<List<ITypedProvider>> allParameters;
+	// private List<List<ITypedProvider>> allParameters;
 
 	private XpectFrameworkMethod method;
 
@@ -30,7 +30,7 @@ public class SetupContext implements ITestSetupContext {
 
 	private Map<Class<? extends Annotation>, ITypedProvider> paramValues;
 
-	private List<ITypedProvider> proposedParameters;
+	// private List<ITypedProvider> proposedParameters;
 
 	private Class<?> testClass;
 
@@ -53,14 +53,15 @@ public class SetupContext implements ITestSetupContext {
 		return allFiles;
 	}
 
-	public List<List<ITypedProvider>> getAllParameters() {
-		return allParameters;
-	}
-
-	@Override
-	public Collection<ITypedProvider> getAllParameterValues(int parameterIndex) {
-		return allParameters.get(parameterIndex);
-	}
+	// public List<List<ITypedProvider>> getAllParameters() {
+	// return allParameters;
+	// }
+	//
+	// @Override
+	// public Collection<ITypedProvider> getAllParameterValues(int
+	// parameterIndex) {
+	// return allParameters.get(parameterIndex);
+	// }
 
 	@Override
 	public XpectFrameworkMethod getMethod() {
@@ -74,17 +75,19 @@ public class SetupContext implements ITestSetupContext {
 	}
 
 	public Map<Class<? extends Annotation>, ITypedProvider> getParamValues() {
+		if (paramValues == null)
+			return Collections.emptyMap();
 		return paramValues;
 	}
 
-	public List<ITypedProvider> getProposedParameters() {
-		return proposedParameters;
-	}
-
-	@Override
-	public ITypedProvider getProposedParameterValue(int parameterIndex) {
-		return proposedParameters.get(parameterIndex);
-	}
+	// public List<ITypedProvider> getProposedParameters() {
+	// return proposedParameters;
+	// }
+	//
+	// @Override
+	// public ITypedProvider getProposedParameterValue(int parameterIndex) {
+	// return proposedParameters.get(parameterIndex);
+	// }
 
 	@Override
 	public Class<?> getTestClass() {
@@ -141,22 +144,23 @@ public class SetupContext implements ITestSetupContext {
 		this.allFiles = allFiles;
 	}
 
-	public void setAllParameters(List<List<ITypedProvider>> allParameters) {
-		this.allParameters = allParameters;
-	}
+	// public void setAllParameters(List<List<ITypedProvider>> allParameters) {
+	// this.allParameters = allParameters;
+	// }
 
 	public void setMethod(XpectFrameworkMethod method) {
 		this.method = method;
 	}
 
-	@Override
-	public void setParameterValue(int parameterIndex, ITypedProvider value) {
-		proposedParameters.set(parameterIndex, value);
-	}
+	// @Override
+	// public void setParameterValue(int parameterIndex, ITypedProvider value) {
+	// proposedParameters.set(parameterIndex, value);
+	// }
 
-	public void setProposedParameters(List<ITypedProvider> proposedParameters) {
-		this.proposedParameters = proposedParameters;
-	}
+	// public void setProposedParameters(List<ITypedProvider>
+	// proposedParameters) {
+	// this.proposedParameters = proposedParameters;
+	// }
 
 	public void setTestClass(Class<?> testClass) {
 		this.testClass = testClass;

@@ -55,7 +55,7 @@ public class AbstractExpectation {
 		if (nl < 0)
 			nl = 0;
 		StringBuilder result = new StringBuilder();
-		for (int i = nl + 1; i < document.length() && Character.isWhitespace(document.charAt(i)); i++)
+		for (int i = nl + 1; i < document.length() && Character.isWhitespace(document.charAt(i)) && document.charAt(i) != '\n'; i++)
 			result.append(document.charAt(i));
 		return result.toString();
 	}

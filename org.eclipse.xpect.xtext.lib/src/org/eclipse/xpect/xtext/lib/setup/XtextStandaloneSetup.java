@@ -9,6 +9,7 @@ import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.util.TypedProvider;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Guice;
@@ -43,7 +44,8 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		}
 		if (userCtx.getResourceSet() != null)
 			for (ISetupFile file : userCtx.getResourceSet().getFiles()) {
-				Resource res = resourceSet.getResource(file.getURI(frameworkCtx), false);
+				Resource res = injector.getInstance(IResourceFactory.class).createResource(file.getURI(frameworkCtx));
+				resourceSet.getResources().add(res);
 				res.load(file.createInputStream(frameworkCtx), null);
 				if (file instanceof ThisFile) {
 					EcoreUtil.resolveAll(res);

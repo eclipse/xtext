@@ -1,6 +1,5 @@
 package org.eclipse.xpect.setup;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.xpect.AbstractComponent;
@@ -77,14 +76,12 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 			JvmOperation target = a.getTarget();
 			if (target != null) {
 				Method m = jra.getMethod(target);
+				Object object = create(a.getValue());
 				try {
-					m.invoke(obj, create(a.getValue()));
-				} catch (IllegalArgumentException e) {
+					m.invoke(obj, object);
+				} catch (Exception e) {
+					System.err.println("Error calling " + m + " with +" + object);
 					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.getCause().printStackTrace();
 				}
 			}
 		}

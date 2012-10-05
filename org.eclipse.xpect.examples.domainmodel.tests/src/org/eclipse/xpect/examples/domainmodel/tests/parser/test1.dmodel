@@ -1,17 +1,18 @@
 
 
-XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.parser.ParserTest
-	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider
+
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.parser.ParserTest
+	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider {}
 	ResourceSet {
 		ThisFile {}
 	}
-END_CLASS
+END_CLASS */
 
 
-XPECT ast ---
+/* XPECT ast ---
 
 
----
+--- */
 
 entity MyEntity {
 	id:int

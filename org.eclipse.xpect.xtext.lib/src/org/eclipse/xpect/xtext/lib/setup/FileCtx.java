@@ -2,7 +2,7 @@ package org.eclipse.xpect.xtext.lib.setup;
 
 import org.eclipse.xpect.setup.IGuiceModuleProvider;
 
-class FileCtx {
+public class FileCtx {
 	private IGuiceModuleProvider moduleProvider;
 
 	private ResourceSet resourceSet = null;

@@ -1,5 +1,6 @@
 package org.eclipse.xpect.runner;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
@@ -118,13 +119,19 @@ public class XpectTestRunner {
 		return null;
 	}
 
-	protected List<ITypedProvider> collectProposedParameters(List<List<ITypedProvider>> allParams, List<ITypedAdapter> adapter) {
+	protected List<ITypedProvider> collectProposedParameters(List<List<ITypedProvider>> allParams,
+			Map<Class<? extends Annotation>, ITypedProvider> setupValues, List<ITypedAdapter> adapter) {
 		List<ITypedProvider> result = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			List<ITypedProvider> candidates = Lists.newArrayList();
 			for (List<ITypedProvider> col : allParams)
 				if (col.get(i) != null)
 					candidates.add(col.get(i));
+			for (Annotation ann : method.getMethod().getParameterAnnotations()[i]) {
+				ITypedProvider provider = setupValues.get(ann.annotationType());
+				if (provider != null)
+					candidates.add(provider);
+			}
 			result.set(i, collectProposedParameter(i, candidates, adapter));
 		}
 		return result;
@@ -204,16 +211,16 @@ public class XpectTestRunner {
 
 	protected void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
-		List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamAdapters());
 		Object test = uriRunner.getRunner().getTestClass().getJavaClass().newInstance();
-		ctx.setProposedParameters(proposedParameters);
-		ctx.setAllParameters(allParameters);
+		// ctx.setAllParameters(allParameters);
 		ctx.setXpectInvocation(invocation);
 		ctx.setMethod(method);
 		ctx.setTestInstance(test);
 		try {
 			if (setup != null)
 				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
+			List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(), ctx.getParamAdapters());
+			// ctx.setProposedParameters(proposedParameters);
 			Object[] params = createParameterValues(proposedParameters);
 			method.getMethod().invoke(test, params);
 		} catch (InvocationTargetException e) {
