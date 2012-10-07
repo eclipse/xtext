@@ -1,6 +1,9 @@
 
 
+package pkg2 {
+
 entity MyEntity2 {
 	id:int
 	name:String
+}
 }

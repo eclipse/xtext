@@ -15,7 +15,9 @@ END_CLASS */
 
 --- */
 
-entity MyEntity extends MyEntity2 {
-	id:int
-	name:String
+package pkg1 {
+	entity MyEntity extends pkg2.MyEntity2 {
+		id:int
+		name:String
+	}
 }
