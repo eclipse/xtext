@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xpect.setup.IXpectSetup.ITestSetupContext;
+import org.eclipse.xpect.setup.IXpectSetup.IFileSetupContext;
 
 public class File implements ISetupFile {
 	private String from;
@@ -17,7 +17,7 @@ public class File implements ISetupFile {
 	}
 
 	@Override
-	public InputStream createInputStream(ITestSetupContext ctx) throws IOException {
+	public InputStream createInputStream(IFileSetupContext ctx) throws IOException {
 		String from = this.from != null ? this.from : name;
 		Resource resource = ctx.getXpectFile().eResource();
 		URI uri = ctx.getURIProvider().resolveURI(resource.getURI(), from);
@@ -33,7 +33,7 @@ public class File implements ISetupFile {
 	}
 
 	@Override
-	public URI getURI(ITestSetupContext ctx) {
+	public URI getURI(IFileSetupContext ctx) {
 		return ctx.getURIProvider().resolveURI(ctx.getXpectFile().eResource().getURI(), name);
 	}
 

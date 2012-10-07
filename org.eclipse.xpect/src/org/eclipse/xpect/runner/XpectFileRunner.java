@@ -127,6 +127,8 @@ public class XpectFileRunner {
 	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		if (error != null) {
 			notifier.fireTestFailure(new Failure(getDescription(), error));
+		} else if (xpectFile.getTest() == null) {
+			notifier.fireTestIgnored(getDescription());
 		} else {
 			ctx.setXpectFile(xpectFile);
 			try {

@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xpect.setup.IXpectSetup.ITestSetupContext;
+import org.eclipse.xpect.setup.IXpectSetup.IFileSetupContext;
 
 public interface ISetupFile {
-	URI getURI(ITestSetupContext ctx);
+	URI getURI(IFileSetupContext ctx);
 
-	InputStream createInputStream(ITestSetupContext ctx) throws IOException;
+	InputStream createInputStream(IFileSetupContext ctx) throws IOException;
 }
