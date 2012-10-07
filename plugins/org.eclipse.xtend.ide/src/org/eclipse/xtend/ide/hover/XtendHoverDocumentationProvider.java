@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
@@ -48,7 +49,16 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 
 	@Inject
 	private XtendOverridesService overridesService;
-	
+
+	@Override
+	protected JvmDeclaredType getDeclaringType(EObject eObject) {
+		if (eObject instanceof XtendFunction) {
+			JvmOperation jvmOperation = associations.getDirectlyInferredOperation((XtendFunction) eObject);
+			return super.getDeclaringType(jvmOperation);
+		}
+		return super.getDeclaringType(eObject);
+	}
+
 	@Override
 	protected void addAnnotations(EObject object) {
 		if(object instanceof XtendAnnotationTarget){

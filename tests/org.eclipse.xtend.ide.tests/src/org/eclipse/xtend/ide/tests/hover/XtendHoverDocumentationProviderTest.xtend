@@ -27,6 +27,131 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	@Inject
 	private IEObjectHoverDocumentationProvider documentationProvider
 	
+	/**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+     */
+    @Test
+    def bug390429WithoutDeclaringTypeAndOneTargetMethod(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        
+        import java.util.List
+        
+        class Foo {
+            
+            def foo() {
+            }
+
+            /**
+            * {@link #foo}
+            */
+            def bar(String a, String b) {
+            }
+            
+        }
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val function = clazz.members.last as XtendFunction
+        val docu = documentationProvider.getDocumentation(function)
+        assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+    }
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+	 */
+	@Test
+    def bug390429WithoutDeclaringType(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        
+        import java.util.List
+        
+        class Foo {
+            
+            def foo(String string) {
+            }
+            
+            def foo(Object object) {
+            }
+
+            /**
+            * {@link #foo(Object)}
+            */
+            def bar(String a, String b) {
+            }
+            
+        }
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val function = clazz.members.last as XtendFunction
+        val docu = documentationProvider.getDocumentation(function)
+        assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2">#foo(Object)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+     */
+    @Test
+    def bug390429WithoutDeclaringTypeAndParameters(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        
+        import java.util.List
+        
+        class Foo {
+            
+            def foo(String string) {
+            }
+            
+            def foo(Object object) {
+            }
+
+            /**
+            * {@link #foo}
+            */
+            def bar(String a, String b) {
+            }
+            
+        }
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val function = clazz.members.last as XtendFunction
+        val docu = documentationProvider.getDocumentation(function)
+        assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+     */
+    @Test
+    def bug390429WithoutDeclaringTypeAndMissingClosingParenthesis(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        
+        import java.util.List
+        
+        class Foo {
+            
+            def foo(String string) {
+            }
+            
+            def foo(Object object) {
+            }
+
+            /**
+            * {@link #foo(}
+            */
+            def bar(String a, String b) {
+            }
+            
+        }
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val function = clazz.members.last as XtendFunction
+        val docu = documentationProvider.getDocumentation(function)
+        assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1"> #foo(</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+    }
+	
 	@Test
 	def testSimpleJavaDocWithMixedParameters(){
 	
