@@ -13,3 +13,6 @@ XPECT simpleString ---
 		is some Multiline
 	String
 ---
+
+
+XPECT simpleCSV --> foo, bar, baz, aa

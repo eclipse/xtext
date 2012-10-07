@@ -1,10 +1,11 @@
 package org.eclipse.xpect.parameters;
 
+import org.eclipse.xpect.util.ITypedProvider;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Joiner;
 
-public class AbstractExpectation {
+public class AbstractExpectation implements ITypedProvider {
 	private final String document;
 	private final int length;
 	private final int offset;
@@ -16,12 +17,17 @@ public class AbstractExpectation {
 		this.length = lenght;
 	}
 
-	public int getLength() {
-		return length;
+	@Override
+	public boolean canProvide(Class<?> expectedType) {
+		return expectedType.isInstance(this);
 	}
 
-	public int getOffset() {
-		return offset;
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T get(Class<T> expectedType) {
+		if (expectedType.isInstance(this))
+			return (T) this;
+		return null;
 	}
 
 	protected String getExpectation(String indentation) {
@@ -39,6 +45,24 @@ public class AbstractExpectation {
 		}
 	}
 
+	protected String getIndentation() {
+		int nl = document.lastIndexOf("\n", offset);
+		if (nl < 0)
+			nl = 0;
+		StringBuilder result = new StringBuilder();
+		for (int i = nl + 1; i < document.length() && Character.isWhitespace(document.charAt(i)) && document.charAt(i) != '\n'; i++)
+			result.append(document.charAt(i));
+		return result.toString();
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
 	protected String replaceInDocument(String indentation, String value) {
 		String indented;
 		if (!Strings.isEmpty(indentation))
@@ -48,15 +72,5 @@ public class AbstractExpectation {
 		String before = document.substring(0, offset);
 		String after = document.substring(offset + length, document.length());
 		return before + indented + after;
-	}
-
-	protected String getIndentation() {
-		int nl = document.lastIndexOf("\n", offset);
-		if (nl < 0)
-			nl = 0;
-		StringBuilder result = new StringBuilder();
-		for (int i = nl + 1; i < document.length() && Character.isWhitespace(document.charAt(i)) && document.charAt(i) != '\n'; i++)
-			result.append(document.charAt(i));
-		return result.toString();
 	}
 }

@@ -24,11 +24,11 @@ import org.junit.ComparisonFailure;
 @XpectSingleParameterProvider(StringExpectationParser.class)
 public @interface StringExpectation {
 
-	public class IStringExpectationImpl extends AbstractExpectation implements IStringExpectation, ITypedProvider {
+	public class StringExpectationImpl extends AbstractExpectation implements IStringExpectation {
 
 		private final StringExpectation annotation;
 
-		public IStringExpectationImpl(StringExpectation annotation, String document, int offset, int lenght) {
+		public StringExpectationImpl(StringExpectation annotation, String document, int offset, int lenght) {
 			super(document, offset, lenght);
 			this.annotation = annotation;
 		}
@@ -55,19 +55,6 @@ public @interface StringExpectation {
 
 		}
 
-		@Override
-		public boolean canProvide(Class<?> expectedType) {
-			return expectedType.isInstance(this);
-		}
-
-		@Override
-		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType) {
-			if (expectedType.isInstance(this))
-				return (T) this;
-			return null;
-		}
-
 		public StringExpectation getAnnotation() {
 			return annotation;
 		}
@@ -91,7 +78,7 @@ public @interface StringExpectation {
 		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)
-				return new IStringExpectationImpl(annotation, invocation.getDocument(), region.getOffset(), region.getLength());
+				return new StringExpectationImpl(annotation, invocation.getDocument(), region.getOffset(), region.getLength());
 			return null;
 		}
 
