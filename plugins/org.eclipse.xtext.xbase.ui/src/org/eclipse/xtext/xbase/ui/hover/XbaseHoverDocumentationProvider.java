@@ -72,12 +72,9 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
 
 /**
@@ -441,7 +438,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 
 	protected JvmDeclaredType getResolvedDeclarator(String name) {
 		JvmDeclaredType jvmDeclaredType = null;
-		if (Strings.isEmpty(name)) {
+		if (Strings.isEmpty(name) || name.trim().length() == 0) {
 			jvmDeclaredType = getDeclaringType(context);
 		} else {
 			HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
