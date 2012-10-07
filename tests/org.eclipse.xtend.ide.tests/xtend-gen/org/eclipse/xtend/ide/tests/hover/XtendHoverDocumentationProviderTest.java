@@ -43,6 +43,274 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   @Inject
   private IEObjectHoverDocumentationProvider documentationProvider;
   
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+   */
+  @Test
+  public void bug390429WithoutDeclaringTypeAndOneTargetMethod() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("* {@link #foo}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def bar(String a, String b) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      final XtendFunction function = ((XtendFunction) _last);
+      final String docu = this.documentationProvider.getDocumentation(function);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+   */
+  @Test
+  public void bug390429WithoutDeclaringType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(String string) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(Object object) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("* {@link #foo(Object)}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def bar(String a, String b) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      final XtendFunction function = ((XtendFunction) _last);
+      final String docu = this.documentationProvider.getDocumentation(function);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">#foo(Object)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+   */
+  @Test
+  public void bug390429WithoutDeclaringTypeAndParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(String string) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(Object object) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("* {@link #foo}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def bar(String a, String b) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      final XtendFunction function = ((XtendFunction) _last);
+      final String docu = this.documentationProvider.getDocumentation(function);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
+   */
+  @Test
+  public void bug390429WithoutDeclaringTypeAndMissingClosingParenthesis() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(String string) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def foo(Object object) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("* {@link #foo(}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def bar(String a, String b) {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      final XtendFunction function = ((XtendFunction) _last);
+      final String docu = this.documentationProvider.getDocumentation(function);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\"> #foo(</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Test
   public void testSimpleJavaDocWithMixedParameters() {
     try {
