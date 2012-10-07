@@ -52,7 +52,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -64,6 +64,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
@@ -71,9 +72,12 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
 
 /**
@@ -363,81 +367,100 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	}
 
 	protected void handleLink(List<?> fragments) {
-		if (fragments.size() > 0) {
-			URI elementURI = null;
-			String firstFragment = fragments.get(0).toString();
-			int hashIndex = firstFragment.indexOf("#");
-			HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
-			IScope scope = scopeProvider.getScope(context, reference);
-			if (hashIndex != -1) {
-				IEObjectDescription declarator = scope.getSingleElement(qualifiedNameConverter
-						.toQualifiedName(firstFragment.substring(0, hashIndex)));
-				if (declarator != null) {
-					EObject resolvedDeclarator = context.eResource().getResourceSet()
-							.getEObject(declarator.getEObjectURI(), true);
-					if (!resolvedDeclarator.eIsProxy() && resolvedDeclarator instanceof JvmGenericType) {
-						JvmGenericType castedDeclarator = (JvmGenericType) resolvedDeclarator;
-						String signature = firstFragment.substring(hashIndex + 1);
-						int indexOfOpenBracket = signature.indexOf("(");
-						int indexOfClosingBracket = signature.indexOf(")");
-						String[] splitedParameter = signature.substring(indexOfOpenBracket + 1, indexOfClosingBracket)
-								.split(",");
-						if (indexOfOpenBracket != -1) {
-							String simpleNameOfFeature = signature.substring(0, indexOfOpenBracket);
-							Iterable<JvmFeature> possibleCandidates = castedDeclarator
-									.findAllFeaturesByName(simpleNameOfFeature);
-							Iterator<JvmFeature> featureIterator = possibleCandidates.iterator();
-							while (elementURI == null && featureIterator.hasNext()) {
-								JvmFeature feature = featureIterator.next();
-								boolean valid = false;
-								if (feature instanceof JvmField) {
-									valid = true;
-								} else if (feature instanceof JvmExecutable) {
-									JvmExecutable executable = (JvmExecutable) feature;
-									EList<JvmFormalParameter> parameters = executable.getParameters();
-									if (parameters.size() == splitedParameter.length) {
-										valid = true;
-										for (int i = 0; (i < parameters.size() && valid); i++) {
-											URI parameterTypeURI = EcoreUtil
-													.getURI(parameters.get(i).getParameterType().getType());
-											IEObjectDescription expectedParameter = scopeProvider.getScope(context,
-													reference).getSingleElement(
-													qualifiedNameConverter.toQualifiedName(splitedParameter[i]));
-											if (expectedParameter == null
-													|| !expectedParameter.getEObjectURI().equals(parameterTypeURI)) {
-												valid = false;
-											}
-										}
-									}
+		if (fragments == null || fragments.isEmpty()) {
+			return;
+		}
+		URI elementURI = null;
+		String firstFragment = fragments.get(0).toString();
+		int hashIndex = firstFragment.indexOf("#");
+		if (hashIndex != -1) {
+			JvmDeclaredType resolvedDeclarator = getResolvedDeclarator(firstFragment.substring(0, hashIndex));
+			if (resolvedDeclarator!= null && !resolvedDeclarator.eIsProxy()) {
+				String signature = firstFragment.substring(hashIndex + 1);
+				int indexOfOpenBracket = signature.indexOf("(");
+				int indexOfClosingBracket = signature.indexOf(")");
+				String simpleNameOfFeature = indexOfOpenBracket != -1 ? signature.substring(0, indexOfOpenBracket) : signature;
+				Iterable<JvmFeature> possibleCandidates = resolvedDeclarator.findAllFeaturesByName(simpleNameOfFeature);
+				List<String> parameterNames = null;
+				if (indexOfOpenBracket != -1 && indexOfClosingBracket != -1) {
+					parameterNames = Strings.split(signature.substring(indexOfOpenBracket + 1, indexOfClosingBracket), ",");
+				}
+				Iterator<JvmFeature> featureIterator = possibleCandidates.iterator();
+				while (elementURI == null && featureIterator.hasNext()) {
+					JvmFeature feature = featureIterator.next();
+					boolean valid = false;
+					if (feature instanceof JvmField) {
+						valid = true;
+					} else if (feature instanceof JvmExecutable) {
+						JvmExecutable executable = (JvmExecutable) feature;
+						EList<JvmFormalParameter> parameters = executable.getParameters();
+						if (parameterNames == null) {
+							valid = true;
+						} else if (parameters.size() == parameterNames.size()) {
+							valid = true;
+							for (int i = 0; (i < parameterNames.size() && valid); i++) {
+								URI parameterTypeURI = EcoreUtil
+										.getURI(parameters.get(i).getParameterType().getType());
+								IEObjectDescription expectedParameter = scopeProvider.getScope(context,
+										new HoverReference(TypesPackage.Literals.JVM_TYPE)).getSingleElement(
+										qualifiedNameConverter.toQualifiedName(parameterNames.get(i)));
+								if (expectedParameter == null
+										|| !expectedParameter.getEObjectURI().equals(parameterTypeURI)) {
+									valid = false;
 								}
-								if (valid)
-									elementURI = EcoreUtil.getURI(feature);
 							}
 						}
 					}
+					if (valid)
+						elementURI = EcoreUtil.getURI(feature);
 				}
-			} else {
-				IEObjectDescription singleElement = scope.getSingleElement(qualifiedNameConverter
-						.toQualifiedName(firstFragment));
-				if (singleElement != null)
-					elementURI = singleElement.getEObjectURI();
 			}
-			String label = "";
-			if(fragments.size() > 1){
-				for(int i = 1 ; i < fragments.size() ; i++){
-					String portentialLabel = fragments.get(i).toString();
-					if(portentialLabel.trim().length() > 0)
-					label += portentialLabel;
-				}
-			} 
-			if(label.length() == 0)
-				label = firstFragment;
-			if (elementURI == null)
-				buffer.append(label);
-			else {
-				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, elementURI, label));
+		} else {
+			IScope scope = scopeProvider.getScope(context, new HoverReference(TypesPackage.Literals.JVM_TYPE));
+			IEObjectDescription singleElement = scope.getSingleElement(qualifiedNameConverter
+					.toQualifiedName(firstFragment));
+			if (singleElement != null)
+				elementURI = singleElement.getEObjectURI();
+		}
+		String label = "";
+		if(fragments.size() > 1){
+			for(int i = 1 ; i < fragments.size() ; i++){
+				String portentialLabel = fragments.get(i).toString();
+				if(portentialLabel.trim().length() > 0)
+				label += portentialLabel;
 			}
 		}
+		if(label.length() == 0)
+			label = firstFragment;
+		if (elementURI == null)
+			buffer.append(label);
+		else {
+			buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, elementURI, label));
+		}
+	}
+
+	protected JvmDeclaredType getResolvedDeclarator(String name) {
+		JvmDeclaredType jvmDeclaredType = null;
+		if (Strings.isEmpty(name)) {
+			jvmDeclaredType = getDeclaringType(context);
+		} else {
+			HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
+			IScope scope = scopeProvider.getScope(context, reference);
+			IEObjectDescription declarator = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(name));
+			if (declarator != null
+					&& EcoreUtil2.isAssignableFrom(TypesPackage.eINSTANCE.getJvmGenericType(), declarator.getEClass())) {
+				jvmDeclaredType = (JvmDeclaredType) context.eResource().getResourceSet()
+						.getEObject(declarator.getEObjectURI(), true);
+			}
+		}
+		return jvmDeclaredType;
+	}
+
+	protected JvmDeclaredType getDeclaringType(EObject eObject) {
+		if (eObject instanceof JvmMember) {
+			return ((JvmMember) eObject).getDeclaringType();
+		}
+		return null;
 	}
 
 	protected void handleBlockTags(List<TagElement> tags) {
