@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -105,18 +107,9 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	}
 
 	protected QualifiedName toQualifiedName(String packageName, String typeName) {
-		QualifiedName qn = QualifiedName.create();
-		if (packageName != null) {
-			int from = -1;
-			int to = packageName.indexOf('.');
-			while (to != -1) {
-				qn = qn.append(packageName.substring(from+1,  to));
-				from = to;
-				to = packageName.indexOf('.', from+1);
-			}
-			qn = qn.append(packageName.substring(from+1));
-		}
-		qn = qn.append(typeName);
+		List<String> splitPackage = Strings.split(packageName, '.');
+		splitPackage.add(typeName);
+		QualifiedName qn = QualifiedName.create(splitPackage);
 		return qn;
 	}
 	
