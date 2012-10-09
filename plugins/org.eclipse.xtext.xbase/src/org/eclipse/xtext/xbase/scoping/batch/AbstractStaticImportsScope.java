@@ -64,7 +64,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 	}
 
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		result.add(new BucketedEObjectDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket.getId(), getSession().isVisible(feature)));
+		result.add(createDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket));
 	}
 
 	protected abstract List<TypeBucket> getBuckets();
@@ -90,7 +90,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
 							for(JvmFeature feature: features) {
 								if (isStatic(feature))
-									result.add(createNamedDescription(name, feature, bucket));
+									result.add(createDescription(name, feature, bucket));
 							}
 							
 						}
@@ -104,8 +104,5 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 		return result;
 	}
 
-	protected BucketedEObjectDescription createNamedDescription(QualifiedName name, JvmFeature feature,
-			TypeBucket bucket) {
-		return new BucketedEObjectDescription(name, feature, bucket.getId(), getSession().isVisible(feature));
-	}
+	protected abstract BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket);
 }

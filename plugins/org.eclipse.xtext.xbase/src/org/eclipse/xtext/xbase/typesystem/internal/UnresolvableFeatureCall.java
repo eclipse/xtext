@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.FeatureLinkHelper;
 
 import com.google.common.collect.Lists;
 
@@ -63,5 +65,10 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableFeature impleme
 			result.add(getConverter().toLightweightReference(typeArgument));
 		}
 		return result;
+	}
+	
+	@Nullable
+	protected XExpression getSyntacticReceiver() {
+		return new FeatureLinkHelper().getSyntacticReceiver(getFeatureCall());
 	}
 }

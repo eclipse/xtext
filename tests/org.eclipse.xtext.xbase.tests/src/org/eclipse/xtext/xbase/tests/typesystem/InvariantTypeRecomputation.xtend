@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Assert
+import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 
 /**
  * @author Sebastian Zarnekow
@@ -97,37 +98,57 @@ class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	def dispatch void assertEqualLinkingData(ImplicitReceiver left, ImplicitReceiver right) {
 		Assert::assertEquals('feature', left.feature, right.feature)
 		Assert::assertEquals('featureCall', left.featureCall, right.featureCall)
-		Assert::assertEquals('typeArguments', left.typeArguments.map[ simpleName ] as Object /* TODO workaround for bug in linking */, right.typeArguments.map[ simpleName ])
+		assertEqualReferences('typeArguments', left.typeArguments, right.typeArguments)
+	}
+	
+	def dispatch void assertEqualLinkingData(ImplicitFirstArgument left, ImplicitFirstArgument right) {
+		Assert::assertEquals('feature', left.feature, right.feature)
+		Assert::assertEquals('featureCall', left.featureCall, right.featureCall)
+		assertEqualReferences('typeArguments', left.typeArguments, right.typeArguments)
 	}
 	
 	def dispatch void assertEqualLinkingData(IFeatureLinkingCandidate left, IFeatureLinkingCandidate right) {
 		Assert::assertEquals('feature', left.feature, right.feature)
 		Assert::assertEquals('featureCall', left.featureCall, right.featureCall)
 		doAssertEqualLinkingData(left, right)
+		
+		Assert::assertEquals('receiver', left.invoke('getReceiver'), right.invoke('getReceiver'))
+		assertEqualTypes('receiverType', left.invokeAndCast("getReceiverType"),	left.invokeAndCast("getReceiverType"))
+		
+		Assert::assertEquals('implicitReceiver', left.invoke('getImplicitReceiver'), right.invoke('getImplicitReceiver'))
+		assertEqualTypes('implicitReceiverType', left.invokeAndCast("getImplicitReceiverType"),	left.invokeAndCast("getImplicitReceiverType"))
+		
+		Assert::assertEquals('implicitFirstArgument', left.invoke('getImplicitFirstArgument'), right.invoke('getImplicitFirstArgument'))
+		assertEqualTypes('implicitFirstArgumentType', left.invokeAndCast("getImplicitFirstArgumentType"),	left.invokeAndCast("getImplicitFirstArgumentType"))
+		
+		Assert::assertEquals('syntacticReceiver', left.invoke('getSyntacticReceiver'), right.invoke('getSyntacticReceiver'))
+		assertEqualTypes('syntacticReceiverType', left.invokeAndCast("getSyntacticReceiverType"), left.invokeAndCast("getSyntacticReceiverType"))
+		
 		Assert::assertEquals('isStatic', left.isStatic, right.isStatic)
+		Assert::assertEquals('syntacticReceiver', left.invoke('getSyntacticReceiver'), right.invoke('getSyntacticReceiver'))
 		Assert::assertEquals('isExtension', left.isExtension, right.isExtension)
+		
+		Assert::assertEquals('syntacticArguments', left.invoke('getSyntacticArguments'), right.invoke('getSyntacticArguments'))
 	}
 	
 	def void doAssertEqualLinkingData(ILinkingCandidate left, ILinkingCandidate right) {
-		Assert::assertEquals('typeArguments', left.typeArguments.map[ simpleName ] as Object /* TODO workaround for bug in linking */, right.typeArguments.map[ simpleName ])
+		assertEqualReferences('typeArguments', left.typeArguments, right.typeArguments)
+		assertEqualReferences('syntacticTypeArguments', left.invokeAndCast('getSyntacticTypeArguments'), right.invokeAndCast('getSyntacticTypeArguments'))
+		
 		Assert::assertEquals('arguments', left.invoke('getArguments'), right.invoke('getArguments'))
-		Assert::assertEquals('explicitTypeArguments', 
-			left.<List<LightweightTypeReference>>invokeAndCast('getExplicitTypeArguments').map[toString] as Object, 
-			right.<List<LightweightTypeReference>>invokeAndCast('getExplicitTypeArguments').map[toString]
-		)
-		Assert::assertEquals('syntacticArguments', left.invoke('getSyntacticArguments'), right.invoke('getSyntacticArguments'))
-		Assert::assertEquals('receiver', left.invoke('getReceiver'), right.invoke('getReceiver'))
+		
 		Assert::assertEquals('declaredTypeParameters', left.invoke('getDeclaredTypeParameters'), right.invoke('getDeclaredTypeParameters'))
 		
-		assertEqualMapping('getTypeParameterMapping', 
-			left.invokeAndCast('getTypeParameterMapping'), 
-			right.invokeAndCast('getTypeParameterMapping')
-		)
-		
-		assertEqualMapping('getDeclaratorParameterMapping', 
-			left.invokeAndCast('getDeclaratorParameterMapping'), 
-			right.invokeAndCast('getDeclaratorParameterMapping')
-		)
+		assertEqualMapping('typeParameterMapping', left.invokeAndCast('getTypeParameterMapping'), right.invokeAndCast('getTypeParameterMapping'))
+		assertEqualMapping('declaratorParameterMapping', left.invokeAndCast('getDeclaratorParameterMapping'), right.invokeAndCast('getDeclaratorParameterMapping'))
+	}
+	
+	def void assertEqualTypes(String message, LightweightTypeReference left, LightweightTypeReference right) {
+		Assert::assertEquals(message, left?.toString, right?.toString)
+	}
+	
+	def void assertEqualReferences(String message, List<LightweightTypeReference> left, List<LightweightTypeReference> right) {
+		Assert::assertEquals(message, left.map[ toString ] as Object /* TODO workaround for bug in linking */, right.map[ toString ])
 	}
 	
 	def void assertEqualMapping(String message, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> left, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> right) {

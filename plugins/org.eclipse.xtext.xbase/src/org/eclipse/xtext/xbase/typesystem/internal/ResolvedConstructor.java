@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -42,12 +41,12 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 	}
 
 	@Override
-	protected List<XExpression> getSyntacticArguments() {
+	protected List<XExpression> getArguments() {
 		return getConstructorCall().getArguments();
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getExplicitTypeArguments() {
+	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
@@ -60,10 +59,10 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 		return Collections.emptyList();
 	}
 
-	@Override
-	@Nullable
-	protected XExpression getReceiver() {
-		return null;
-	}
+//	@Override
+//	@Nullable
+//	protected XExpression getReceiver() {
+//		return null;
+//	}
 	
 }

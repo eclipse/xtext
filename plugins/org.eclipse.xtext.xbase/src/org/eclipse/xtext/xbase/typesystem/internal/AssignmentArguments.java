@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -15,7 +16,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AssignmentArguments implements IExpressionArguments {
+@NonNullByDefault
+public class AssignmentArguments implements IFeatureCallArguments {
 
 	private LightweightTypeReference declaredType;
 	private XExpression value;

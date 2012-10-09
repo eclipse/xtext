@@ -9,12 +9,17 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
@@ -27,7 +32,10 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -47,6 +55,12 @@ public class ScopeProviderAccess {
 	@Inject
 	private LazyURIEncoder encoder;
 
+	/**
+	 * Returns a bunch of descriptions most of which are actually {@link IIdentifiableElementDescription describing identifiables}. 
+	 * The provided iterable is never empty but it may contain a single {@link ErrorDescription error description}.
+	 * 
+	 * @return the available descriptions.
+	 */
 	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, EObject toBeLinked,
 			IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
 		if (toBeLinked == null) {
@@ -83,7 +97,7 @@ public class ScopeProviderAccess {
 		}
 	}
 	
-	public static class ErrorDescription implements IEObjectDescription {
+	public static class ErrorDescription implements IIdentifiableElementDescription {
 
 		private QualifiedName name;
 		private INode node;
@@ -123,6 +137,77 @@ public class ScopeProviderAccess {
 
 		public String[] getUserDataKeys() {
 			return Strings.EMPTY_ARRAY;
+		}
+
+		@NonNull 
+		public JvmIdentifiableElement getElementOrProxy() {
+			throw new UnsupportedOperationException();
+		}
+
+		@NonNull 
+		public String getShadowingKey() {
+			return "ErrorDescription";
+		}
+
+		public int getBucketId() {
+			return 0;
+		}
+
+		@Nullable
+		public LightweightTypeReference getImplicitReceiverType() {
+			return null;
+		}
+
+		@Nullable
+		public XExpression getImplicitReceiver() {
+			return null;
+		}
+
+		@NonNull
+		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
+			return Collections.emptyMap();
+		}
+
+		@Nullable
+		public LightweightTypeReference getSyntacticReceiverType() {
+			return null;
+		}
+
+		@Nullable
+		public XExpression getSyntacticReceiver() {
+			return null;
+		}
+
+		@NonNull
+		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
+			return Collections.emptyMap();
+		}
+
+		@Nullable
+		public XExpression getImplicitFirstArgument() {
+			return null;
+		}
+
+		@Nullable
+		public LightweightTypeReference getImplicitFirstArgumentType() {
+			return null;
+		}
+
+		@NonNull 
+		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
+			return Collections.emptyMap();
+		}
+
+		public boolean isVisible() {
+			return true;
+		}
+
+		public boolean isStatic() {
+			return false;
+		}
+
+		public boolean isExtension() {
+			return false;
 		}
 		
 	}

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -21,7 +22,8 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FeatureCallArguments implements IExpressionArguments {
+@NonNullByDefault
+public class FeatureCallArguments implements IFeatureCallArguments {
 
 	private int nextArgument = 0;
 	private int fixedArityArgumentCount;
@@ -43,7 +45,7 @@ public class FeatureCallArguments implements IExpressionArguments {
 		}
 		arguments = candidate.getArguments();
 		converter = candidate.getState().getConverter();
-		argumentSizeFixup = candidate.getReceiver() == null || arguments.contains(candidate.getReceiver()) ? 0 : 1;
+		argumentSizeFixup = candidate.hasReceiver() ? 1 : 0;
 		nextArgument = argumentSizeFixup;
 		fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size()) + argumentSizeFixup;
 	}

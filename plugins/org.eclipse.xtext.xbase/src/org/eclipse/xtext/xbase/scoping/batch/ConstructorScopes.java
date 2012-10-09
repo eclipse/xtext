@@ -61,7 +61,7 @@ public class ConstructorScopes extends DelegatingScopes {
 										constructor = (JvmConstructor) resolved;
 								}
 								boolean visible = session.isVisible(constructor);
-								BucketedEObjectDescription result = new BucketedEObjectDescription(from.getName(), constructor, CONSTRUCTOR_BUCKET, visible);
+								ConstructorDescription result = new ConstructorDescription(from.getName(), constructor, CONSTRUCTOR_BUCKET, visible);
 								return result;
 							}
 						});

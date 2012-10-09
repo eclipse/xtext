@@ -15,10 +15,10 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
 
-	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
+	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IIdentifiableElementDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);
 	}
 
@@ -44,12 +44,12 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 
 	@Override
-	protected List<XExpression> getSyntacticArguments() {
+	protected List<XExpression> getArguments() {
 		return getConstructorCall().getArguments();
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getExplicitTypeArguments() {
+	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	

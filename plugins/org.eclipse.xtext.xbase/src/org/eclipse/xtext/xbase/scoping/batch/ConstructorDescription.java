@@ -5,24 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.internal;
+package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
-public class ImplicitReceiver extends AbstractImplicitFeature {
+public class ConstructorDescription extends BucketedEObjectDescription {
 
-	public ImplicitReceiver(XAbstractFeatureCall featureCall, XAbstractFeatureCall implicit,
-			ExpressionTypeComputationState state) {
-		super(featureCall, implicit, state);
-	}
-
-	public void resolveLinkingProxy() {
-		getOwner().setImplicitReceiver(getFeatureCall());
+	public ConstructorDescription(QualifiedName qualifiedName, JvmConstructor constructor, int bucketId,
+			boolean visible) {
+		super(qualifiedName, constructor, bucketId, visible);
 	}
 
 }

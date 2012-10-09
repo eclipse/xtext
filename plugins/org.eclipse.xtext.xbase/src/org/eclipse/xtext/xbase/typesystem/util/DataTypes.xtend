@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
+import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,6 +50,10 @@ class CommonTypeComputationServices {
 	@Property
 	BoundTypeArgumentMerger boundTypeArgumentMerger
 
+	@Inject
+	@Property
+	SynonymTypesProvider synonymTypesProvider
+	
 	@Inject(optional = true)
 	@Property
 	XtypeFactory xtypeFactory = XtypeFactory::eINSTANCE;

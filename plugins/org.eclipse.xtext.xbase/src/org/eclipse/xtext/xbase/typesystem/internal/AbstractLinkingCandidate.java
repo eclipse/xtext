@@ -14,7 +14,6 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.XExpression;
@@ -116,7 +115,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	private final ExpressionTypeComputationState state;
 	private final Expression expression;
 	private List<LightweightTypeReference> typeArguments;
-	protected IExpressionArguments arguments;
+	protected IFeatureCallArguments arguments;
 	
 	protected AbstractLinkingCandidate(Expression expression, ExpressionTypeComputationState state) {
 		this.expression = expression;
@@ -131,7 +130,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			typeParameterMapping = Collections.emptyMap();
 		} else {
 			typeParameterMapping = Maps.newLinkedHashMap();
-			List<LightweightTypeReference> explicitTypeArguments = getExplicitTypeArguments();
+			List<LightweightTypeReference> explicitTypeArguments = getSyntacticTypeArguments();
 			int size = Math.min(declaredTypeParameters.size(), explicitTypeArguments.size());
 			for(int i = 0; i < size; i++) {
 				JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
@@ -187,7 +186,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 	
 	public void apply() {
-		computeArgumentTypes();
+		preApply();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
 		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
@@ -212,6 +211,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		state.getResolvedTypes().mergeIntoParent();
 	}
 	
+	protected void preApply() {
+		computeArgumentTypes();
+	}
+	
 	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
@@ -234,7 +237,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			return;
 		arguments = state.getResolver().getExpressionArgumentFactory().createExpressionArguments(expression, this);
 	}
-
+	
 	protected void computeArgumentType(int argumentIndex) {
 		initializeArgumentTypeComputation();
 		if (arguments.isProcessed(argumentIndex))
@@ -318,21 +321,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		argumentState.computeTypes(argument);
 	}
 	
-	protected List<XExpression> getArguments() {
-		List<XExpression> arguments = getSyntacticArguments();
-		// TODO handle static feature etc
-		JvmIdentifiableElement feature = getFeature();
-		if (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic()) {
-			XExpression receiver = getReceiver();
-			if (receiver != null && !arguments.contains(receiver)) {
-				List<XExpression> result = Lists.newArrayListWithCapacity(1 + arguments.size());
-				result.add(receiver);
-				result.addAll(arguments);
-				return result;
-			}
-		}
-		return arguments;
-	}
+	protected abstract List<XExpression> getArguments();
 	
 	public abstract boolean isPreferredOver(ILinkingCandidate other);
 	
@@ -358,24 +347,24 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		XExpression expression = arguments.getArgument(argumentIndex);
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType != null) {
-			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
+			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+					getDeclaratorParameterMapping(), state.getReferenceOwner());
 			LightweightTypeReference result = substitutor.substitute(expectedType);
 			return result;
 		}
 		return null;
 	}
 
-	protected abstract List<LightweightTypeReference> getExplicitTypeArguments();
-
-	protected abstract List<XExpression> getSyntacticArguments();
+	protected abstract List<LightweightTypeReference> getSyntacticTypeArguments();
 	
 	public abstract JvmIdentifiableElement getFeature();
 	
-	@Nullable
-	protected abstract XExpression getReceiver();
-	
 	protected Expression getExpression() {
 		return expression;
+	}
+	
+	protected boolean hasReceiver() {
+		return false;
 	}
 	
 	protected ExpressionTypeComputationState getState() {

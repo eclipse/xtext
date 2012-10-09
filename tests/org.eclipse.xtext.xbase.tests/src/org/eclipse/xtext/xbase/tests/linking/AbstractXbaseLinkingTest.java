@@ -493,6 +493,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
 	}
 	
+	@Test public void testExtensionMethod_Map() throws Exception {
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) expression("newArrayList().map[42]");
+		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
+	}
+	
 	@Test public void testMemberCallOnNull_01() throws Exception {
 		XMemberFeatureCall toString = (XMemberFeatureCall) expression("null.toString");
 		assertTrue(toString.getFeature().eIsProxy());
