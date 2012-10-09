@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO measure whether this thing is worth the effort
  */
 public class SimpleAttributeResolver<K extends EObject, T> implements Function<K, T>{
 	
@@ -45,7 +46,7 @@ public class SimpleAttributeResolver<K extends EObject, T> implements Function<K
 
 	protected SimpleAttributeResolver(final Class<T> type, final String attributeName) {
 		this.attributeName = attributeName;
-		this.discardingAdapter = new DiscardingAdapter();
+		this.discardingAdapter = new DiscardingAdapter(this);
 		attributeCache = new SimpleCache<EClass, EAttribute>(new Function<EClass, EAttribute>() {
 			public EAttribute apply(EClass param) {
 				final EStructuralFeature structuralFeature = param.getEStructuralFeature(attributeName);
@@ -82,22 +83,28 @@ public class SimpleAttributeResolver<K extends EObject, T> implements Function<K
 		});
 	}
 
-	private class DiscardingAdapter implements Adapter {
+	private static class DiscardingAdapter implements Adapter {
 
+		private SimpleAttributeResolver<?, ?> resolver;
+
+		private DiscardingAdapter(SimpleAttributeResolver<?, ?> resolver) {
+			this.resolver = resolver;
+		}
+		
 		public Notifier getTarget() {
 			return null;
 		}
 
 		public boolean isAdapterForType(final Object type) {
-			return type instanceof EObject;
+			return type instanceof DiscardingAdapter;
 		}
 
 		public void notifyChanged(final Notification notification) {
 			if (!notification.isTouch() && Notification.SET == notification.getEventType()) {
 				final Object feature = notification.getFeature();
 				if (feature != null) {
-					if (attributeName.equals(((ENamedElement) feature).getName())) {
-						valueCache.discard((EObject) notification.getNotifier());
+					if (resolver.attributeName.equals(((ENamedElement) feature).getName())) {
+						resolver.valueCache.discard((EObject) notification.getNotifier());
 						((EObject) notification.getNotifier()).eAdapters().remove(this);
 					}
 				}
