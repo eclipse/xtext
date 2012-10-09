@@ -51,11 +51,35 @@
     </eOperations>
     <eOperations name="isExplicitOperationCallOrBuilderSyntax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
+    <eOperations name="getActualReceiver" eType="#//XExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the actual receiver of the feature call. The decision will be made according&#xA;to the linking of the feature. May not be used during linking itself.&#xA;&lt;p/>&#xA;&lt;p>Static features, constructor calls (this, super), references to local variables &#xA;or parameters will return &lt;code>null&lt;/code>.&lt;/p>&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getActualArguments" upperBound="-1" eType="#//XExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the actual arguments of the feature call. The decision will be made according&#xA;to the linking of the feature. May not be used during linking itself.&#xA;&lt;p/>&#xA;&lt;p>References to local variables, fields &#xA;or parameters will return an empty list. The result is never &lt;code>null&lt;/code>.&lt;/p>&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns &lt;code>true&lt;/code> if the featuer call links to a static field or a static &#xA;operation. Otherwise &lt;code>false&lt;/code>. May not be used during linking."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns &lt;code>true&lt;/code> if the feature was made available by an extension. &#xA;Otherwise &lt;code>false&lt;/code>. May not be used during linking."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XExpression"
-        transient="true" derived="true" containment="true"/>
+        transient="true" derived="true" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the implicit receiver of the feature call if any. Otherwise &lt;code>null&lt;/code>.&#xA;May not be used during linking."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidFeatureIssueCode"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -69,7 +93,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implicitFirstArgument"
-        eType="#//XExpression" transient="true" derived="true" containment="true"/>
+        eType="#//XExpression" transient="true" derived="true" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the implicit first argument of the feature call if any. Otherwise &lt;code>null&lt;/code>.&#xA;May not be used during linking."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XMemberFeatureCall" eSuperTypes="#//XAbstractFeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberCallTarget" eType="#//XExpression"
