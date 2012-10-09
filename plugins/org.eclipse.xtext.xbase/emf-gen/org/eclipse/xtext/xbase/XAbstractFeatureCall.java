@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getActualTypeArguments <em>Actual Type Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,11 +106,10 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invalid Feature Issue Code</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Invalid Feature Issue Code</em>' attribute.
 	 * @see #setInvalidFeatureIssueCode(String)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_InvalidFeatureIssueCode()
@@ -133,11 +131,10 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Valid Feature</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Valid Feature</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Valid Feature</em>' attribute.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ValidFeature()
 	 * @model transient="true" changeable="false" derived="true"
@@ -172,22 +169,6 @@ public interface XAbstractFeatureCall extends XExpression
 	void setImplicitFirstArgument(XExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Actual Type Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Actual Type Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actual Type Arguments</em>' containment reference list.
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ActualTypeArguments()
-	 * @model containment="true" transient="true" derived="true"
-	 * @generated
-	 */
-	EList<JvmTypeReference> getActualTypeArguments();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
@@ -198,6 +179,9 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @deprecated Will be removed shortly
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */

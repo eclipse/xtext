@@ -44,7 +44,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractFeatureCall" abstract="true"
       eSuperTypes="#//XExpression">
     <eOperations name="getConcreteSyntaxFeatureName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getExplicitArguments" upperBound="-1" eType="#//XExpression"/>
+    <eOperations name="getExplicitArguments" upperBound="-1" eType="#//XExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="@deprecated Will be removed shortly"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="isExplicitOperationCallOrBuilderSyntax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
@@ -53,14 +57,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XExpression"
         transient="true" derived="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidFeatureIssueCode"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="@deprecated Will be removed shortly"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="validFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" transient="true" derived="true"/>
+        changeable="false" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="@deprecated Will be removed shortly"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implicitFirstArgument"
         eType="#//XExpression" transient="true" derived="true" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actualTypeArguments" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
-        containment="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XMemberFeatureCall" eSuperTypes="#//XAbstractFeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberCallTarget" eType="#//XExpression"

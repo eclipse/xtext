@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getActualTypeArguments <em>Actual Type Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,16 +128,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * @ordered
 	 */
 	protected XExpression implicitFirstArgument;
-
-	/**
-	 * The cached value of the '{@link #getActualTypeArguments() <em>Actual Type Arguments</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getActualTypeArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<JvmTypeReference> actualTypeArguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -352,20 +341,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeReference> getActualTypeArguments()
-	{
-		if (actualTypeArguments == null)
-		{
-			actualTypeArguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS);
-		}
-		return actualTypeArguments;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getConcreteSyntaxFeatureName()
 	{
 		// TODO: implement this method
@@ -413,8 +388,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return basicSetImplicitReceiver(null, msgs);
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
 				return basicSetImplicitFirstArgument(null, msgs);
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS:
-				return ((InternalEList<?>)getActualTypeArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -442,8 +415,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return isValidFeature();
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
 				return getImplicitFirstArgument();
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS:
-				return getActualTypeArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -475,10 +446,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
 				setImplicitFirstArgument((XExpression)newValue);
 				return;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS:
-				getActualTypeArguments().clear();
-				getActualTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -508,9 +475,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
 				setImplicitFirstArgument((XExpression)null);
 				return;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS:
-				getActualTypeArguments().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -537,8 +501,6 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return validFeature != VALID_FEATURE_EDEFAULT;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT:
 				return implicitFirstArgument != null;
-			case XbasePackage.XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS:
-				return actualTypeArguments != null && !actualTypeArguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
