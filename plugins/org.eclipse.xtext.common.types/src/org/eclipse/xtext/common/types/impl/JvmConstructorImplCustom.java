@@ -21,4 +21,9 @@ public class JvmConstructorImplCustom extends JvmConstructorImpl {
 			return declaringType.getQualifiedName(innerClassDelimiter);
 		return getSimpleName();
 	}
+	
+	@Override
+	public boolean isStatic() {
+		return false;
+	}
 }

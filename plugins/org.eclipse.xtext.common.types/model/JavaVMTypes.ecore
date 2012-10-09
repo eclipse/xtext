@@ -194,7 +194,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember">
+    <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns &lt;code>true&lt;/code> if the feature is a static field or static operation.&lt;/p>&#xA;&#xA;@since 2.4"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JvmVisibility">
     <eLiterals name="DEFAULT"/>
     <eLiterals name="PRIVATE" value="1"/>
