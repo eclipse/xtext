@@ -111,7 +111,7 @@ import com.google.common.base.Preconditions;
 		Method compatible = null;
 		do {
 			for (Method candidate : clazz.getDeclaredMethods()) {
-				if (candidate != null && !candidate.isBridge() && isCompatible(candidate, methodName, arguments) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
+				if (candidate != null && !candidate.isBridge() && isCompatible(candidate, methodName, arguments)) {
 					if (compatible != null) 
 						throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
 					compatible = candidate;
