@@ -21,6 +21,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO double check the usage of {@link #isAdapterForType(Object)}
  */
 public class SourceAdapter extends AdapterImpl {
 
