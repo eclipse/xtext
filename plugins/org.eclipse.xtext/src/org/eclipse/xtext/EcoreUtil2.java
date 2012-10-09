@@ -404,8 +404,14 @@ public class EcoreUtil2 extends EcoreUtil {
 		return Collections.unmodifiableSet(allSuperTypes);
 	}
 
-	public static boolean isAssignableFrom(EClass target, EClass candidate) {
-		return (candidate != null && (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate)));
+	/**
+	 * Returns whether the given super type is the same as, or a super type of, some other class.
+	 * @param superType the super type
+	 * @param candidate the subtype
+	 * @return whether the super type is the same as, or a super type of, some other class.
+	 */
+	public static boolean isAssignableFrom(EClass superType, EClass candidate) {
+		return (candidate != null && (superType == EcorePackage.Literals.EOBJECT || superType.isSuperTypeOf(candidate)));
 	}
 
 	@SuppressWarnings("unchecked")
