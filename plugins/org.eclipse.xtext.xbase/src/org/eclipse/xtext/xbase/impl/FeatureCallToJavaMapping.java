@@ -26,7 +26,9 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Support for linking assumptions
+ * @deprecated Query the XAbstractFeatureCall directly
  */
+@Deprecated
 @Singleton
 public class FeatureCallToJavaMapping {
 	
