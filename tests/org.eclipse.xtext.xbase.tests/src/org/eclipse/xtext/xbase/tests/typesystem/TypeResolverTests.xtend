@@ -114,7 +114,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		
 	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
 		val type = types.getActualType(expression)
-		assertNotNull(expression.toString, type)
+		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
 		assertNotNull(expression.toString + " / " + type, type.identifier)	
 	}
 	

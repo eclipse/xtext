@@ -47,7 +47,7 @@ class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingBatchFeatureCallTypeTest extends BatchFeatureCallTypeTest {
+class RecomputingBatchFeatureCallTypeTest extends BatchFeatureCallTypeTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver recomputingResolver;

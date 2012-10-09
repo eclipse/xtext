@@ -84,7 +84,7 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingBatchClosureTypeTest extends BatchClosureTypeTest {
+class RecomputingBatchClosureTypeTest extends BatchClosureTypeTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver recomputingResolver;

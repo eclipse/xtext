@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * An injector provider for plain Xbase tests with the type system infrastructure.
+ * An injector provider for plain Xbase tests with the reworked type system infrastructure.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -97,7 +97,7 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 					return new DeclaredTypeFactory(getClassURIHelper()) {
 						@Override
 						protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
-							// disabled
+							// disabled for performance reasons
 						}
 					};
 				}

@@ -259,6 +259,13 @@ public abstract class LightweightTypeReference {
 		if (type == null) {
 			return false;
 		}
+		return isAssignableFrom(type);
+	}
+
+	public boolean isAssignableFrom(JvmType type) {
+		if (type == null) {
+			throw new IllegalArgumentException("type may not be null");
+		}
 		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
 		boolean result = isAssignableFrom(other);
 		return result;

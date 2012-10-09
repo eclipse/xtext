@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
@@ -80,6 +81,17 @@ public class CommonTypeComputationServices {
   
   public void setBoundTypeArgumentMerger(final BoundTypeArgumentMerger boundTypeArgumentMerger) {
     this._boundTypeArgumentMerger = boundTypeArgumentMerger;
+  }
+  
+  @Inject
+  private SynonymTypesProvider _synonymTypesProvider;
+  
+  public SynonymTypesProvider getSynonymTypesProvider() {
+    return this._synonymTypesProvider;
+  }
+  
+  public void setSynonymTypesProvider(final SynonymTypesProvider synonymTypesProvider) {
+    this._synonymTypesProvider = synonymTypesProvider;
   }
   
   @Inject(optional = true)

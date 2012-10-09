@@ -209,12 +209,13 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
     final LightweightTypeReference type = types.getActualType(expression);
     String _string = expression.toString();
-    Assert.assertNotNull(_string, type);
+    String _plus = ("Type is not resolved. Expression: " + _string);
+    Assert.assertNotNull(_plus, type);
     String _string_1 = expression.toString();
-    String _plus = (_string_1 + " / ");
-    String _plus_1 = (_plus + type);
+    String _plus_1 = (_string_1 + " / ");
+    String _plus_2 = (_plus_1 + type);
     String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_2, _identifier);
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {

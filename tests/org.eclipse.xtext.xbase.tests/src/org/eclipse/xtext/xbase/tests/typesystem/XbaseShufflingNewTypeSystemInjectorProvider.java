@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -24,7 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.AssignmentArguments;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionArgumentFactory;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureCallArguments;
-import org.eclipse.xtext.xbase.typesystem.internal.IExpressionArguments;
+import org.eclipse.xtext.xbase.typesystem.internal.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Guice;
@@ -79,9 +80,10 @@ public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSys
 		}
 	}
 	
+	@NonNullByDefault
 	public static class ShufflingExpressionArgumentFactory extends ExpressionArgumentFactory {
 		@Override
-		public IExpressionArguments createExpressionArguments(XExpression expression,
+		public IFeatureCallArguments createExpressionArguments(XExpression expression,
 				AbstractLinkingCandidate<?> candidate) {
 			if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable)) {
 				return new AssignmentArguments(candidate);

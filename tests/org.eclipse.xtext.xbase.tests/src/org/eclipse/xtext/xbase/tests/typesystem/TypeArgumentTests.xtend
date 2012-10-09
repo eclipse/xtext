@@ -74,7 +74,7 @@ class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingBatchTypeArgumentTest extends BatchTypeArgumentTest {
+class RecomputingBatchTypeArgumentTest extends BatchTypeArgumentTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver recomputingResolver;

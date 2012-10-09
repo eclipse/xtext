@@ -26,11 +26,15 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	private final OperatorMapping operatorMapping;
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
+	private final boolean implicit;
 
-	public StaticExtensionImportsScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, XAbstractFeatureCall context, OperatorMapping operatorMapping) {
+	public StaticExtensionImportsScope(IScope parent, IFeatureScopeSession session, 
+			XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
+			XAbstractFeatureCall context, OperatorMapping operatorMapping) {
 		super(parent, session, context);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
+		this.implicit = implicit;
 		this.operatorMapping = operatorMapping;
 	}
 
@@ -50,18 +54,21 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 	
 	@Override
-	protected BucketedEObjectDescription createNamedDescription(QualifiedName name, JvmFeature feature,
+	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature,
 			TypeBucket bucket) {
-		return new BucketedEObjectDescription(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+		if (implicit) {
+			return new StaticExtensionFeatureDescriptionWithImplicitFirstArgument(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+		}
+		return new StaticExtensionFeatureDescription(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
 	}
 	
 	@Override
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
 		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-		result.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature)));
+		result.add(createDescription(featureName, feature, bucket));
 		QualifiedName operator = operatorMapping.getOperator(featureName);
 		if (operator != null) {
-			result.add(new BucketedEObjectDescription(operator, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature)));
+			result.add(createDescription(operator, feature, bucket));
 		}
 	}
 }

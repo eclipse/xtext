@@ -22,8 +22,9 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -226,7 +227,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes);
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(featureCall, demandComputedTypes, description));
+			resultList.add(createCandidate(featureCall, demandComputedTypes, toIdentifiableDescription(description)));
 		}
 		if (resultList.isEmpty()) {
 			throw new IllegalStateException("Linking candidates may not be empty");
@@ -237,31 +238,38 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected IFeatureLinkingCandidate createResolvedLink(XAbstractFeatureCall featureCall, JvmIdentifiableElement resolvedTo) {
 		// TODO inject the helper ?
 		FeatureLinkHelper helper = new FeatureLinkHelper();
-		XExpression receiver = helper.getReceiver(featureCall);
-		if (receiver != null) {
+		XExpression syntacticReceiver = helper.getSyntacticReceiver(featureCall);
+		if (syntacticReceiver != null) {
 			AbstractTypeComputationState child = withNonVoidExpectation();
-			child.computeTypes(receiver);
+			child.computeTypes(syntacticReceiver);
+		}
+		XExpression implicitReceiver = featureCall.getImplicitReceiver();
+		if (implicitReceiver != null) {
+			AbstractTypeComputationState child = withNonVoidExpectation();
+			child.computeTypes(implicitReceiver);
+		}
+		XExpression implicitFirstArgument = featureCall.getImplicitFirstArgument();
+		if (implicitFirstArgument != null) {
+			AbstractTypeComputationState child = withNonVoidExpectation();
+			child.computeTypes(implicitFirstArgument);
 		}
 		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		return new ResolvedFeature(featureCall, resolvedTo, helper, state);
 	}
 	
-	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IEObjectDescription description) {
-		if (description instanceof BucketedEObjectDescription) {
-			BucketedEObjectDescription casted = (BucketedEObjectDescription) description;
-			if (casted.getReceiverType() != null) {
-				final ExpressionAwareStackedResolvedTypes resolvedTypes = demandComputedTypes.pushTypes(featureCall);
-				ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
-				return new FeatureLinkingCandidate(featureCall, description, state) {
-					@Override
-					public void apply() {
-						super.apply();
-						demandComputedTypes.mergeIntoParent();
-					}
-				};
-			}
-		} 
+	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IIdentifiableElementDescription description) {
+		if (description.getSyntacticReceiverType() != null) { // TOOD double check how we can deal with the demand computed types in an elegant manner
+			final ExpressionAwareStackedResolvedTypes resolvedTypes = demandComputedTypes.pushTypes(featureCall);
+			ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+			return new FeatureLinkingCandidate(featureCall, description, state) {
+				@Override
+				public void apply() {
+					super.apply();
+					demandComputedTypes.mergeIntoParent();
+				}
+			};
+		}
 		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		if (description instanceof ScopeProviderAccess.ErrorDescription) {
@@ -285,12 +293,21 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, proxyOrResolved, featureScopeSession, resolvedTypes);
 		List<IConstructorLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(constructorCall, description));
+			resultList.add(createCandidate(constructorCall, toIdentifiableDescription(description)));
 		}
 		if (resultList.isEmpty()) {
 			throw new IllegalStateException("Linking candidates may not be empty");
 		}
 		return resultList;
+	}
+
+	protected IIdentifiableElementDescription toIdentifiableDescription(IEObjectDescription description) {
+		if (description instanceof IIdentifiableElementDescription)
+			return (IIdentifiableElementDescription) description;
+		if (!(description.getEObjectOrProxy() instanceof JvmIdentifiableElement)) {
+			throw new IllegalStateException("Given description does not describe an identifable element");
+		}
+		return new SimpleIdentifiableElementDescription(description);
 	}
 
 	protected IConstructorLinkingCandidate createResolvedLink(XConstructorCall constructorCall, JvmConstructor resolvedTo) {
@@ -299,7 +316,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ResolvedConstructor(constructorCall, resolvedTo, state);
 	}
 	
-	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
+	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IIdentifiableElementDescription description) {
 		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
 		if (description instanceof ScopeProviderAccess.ErrorDescription) {

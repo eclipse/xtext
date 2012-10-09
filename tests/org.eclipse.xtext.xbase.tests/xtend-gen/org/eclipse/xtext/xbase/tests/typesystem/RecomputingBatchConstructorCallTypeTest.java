@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public abstract class RecomputingBatchConstructorCallTypeTest extends BatchConstructorCallTypeTest {
+public class RecomputingBatchConstructorCallTypeTest extends BatchConstructorCallTypeTest {
   @Inject
   private RecomputingBatchTypeResolver recomputingResolver;
   

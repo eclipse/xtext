@@ -64,11 +64,19 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		if (isImplicitReceiver(featureCall)) {
 			return new ResolvedImplicitReceiver((XAbstractFeatureCall) featureCall.eContainer(), featureCall, this);
 		}
+		if (isImplicitFirstArgument(featureCall)) {
+			return new ResolvedImplicitFirstArgument((XAbstractFeatureCall) featureCall.eContainer(), featureCall, this);
+		}
 		return super.createResolvedLink(featureCall, resolvedTo);
 	}
 	
 	protected boolean isImplicitReceiver(XAbstractFeatureCall featureCall) {
 		boolean result = featureCall.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
+		return result;
+	}
+	
+	protected boolean isImplicitFirstArgument(XAbstractFeatureCall featureCall) {
+		boolean result = featureCall.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 		return result;
 	}
 	

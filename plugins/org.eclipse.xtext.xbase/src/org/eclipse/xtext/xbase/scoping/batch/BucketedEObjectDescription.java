@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -38,34 +41,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BucketedEObjectDescription extends EObjectDescription {
+@NonNullByDefault
+public abstract class BucketedEObjectDescription extends EObjectDescription implements IIdentifiableElementDescription {
 
 	private final int bucketId;
-	private final LightweightTypeReference receiverType;
-	private final XExpression receiver;
-	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
 	private final boolean visible;
 
-	public BucketedEObjectDescription(
-			QualifiedName qualifiedName, EObject element, 
-			XExpression receiver, LightweightTypeReference receiverType, 
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
-			int bucketId, boolean visible) {
-		super(qualifiedName, element, null);
-		this.receiver = receiver;
-		this.receiverType = receiverType;
-		this.receiverTypeParameterMapping = receiverTypeParameterMapping;
+	protected BucketedEObjectDescription(QualifiedName qualifiedName, JvmIdentifiableElement feature, int bucketId,
+			boolean visible) {
+		super(qualifiedName, feature, null);
 		this.bucketId = bucketId;
 		this.visible = visible;
-	}
-	
-	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			LightweightTypeReference receiverType, int bucketId, boolean visible) {
-		this(qualifiedName, element, receiver, receiverType, null, bucketId, visible);
-	}
-	
-	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, int bucketId, boolean visible) {
-		this(qualifiedName, element, null, null, null, bucketId, visible);
 	}
 
 	public String getShadowingKey() {
@@ -99,27 +85,44 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return bucketId;
 	}
 
-	public LightweightTypeReference getReceiverType() {
-		return receiverType;
+	@Nullable
+	public LightweightTypeReference getImplicitReceiverType() {
+		return null;
 	}
 
-	public XExpression getReceiver() {
-		return receiver;
+	/**
+	 * Returns the actual receiver of this (potential) feature call. It may be <code>null</code>
+	 * even though there is a syntactic receiver available (in case of static features).
+	 */
+	@Nullable
+	public XExpression getImplicitReceiver() {
+		return null;
+	}
+	
+	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
+		return Collections.emptyMap();
+	}
+	
+	@Nullable
+	public LightweightTypeReference getSyntacticReceiverType() {
+		return null;
+	}
+	
+	@Nullable
+	public XExpression getSyntacticReceiver() {
+		return null;
+	}
+	
+	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
+		return Collections.emptyMap();
 	}
 	
 	public boolean isVisible() {
 		return visible;
 	}
 
-	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {
-		return receiverTypeParameterMapping;
-	}
-
-	public boolean isExtensionDescription() {
-		return receiverType != null && receiverTypeParameterMapping == null;
-	}
-	
-	public boolean isStatic(JvmIdentifiableElement identifiable) {
+	public boolean isStatic() {
+		JvmIdentifiableElement identifiable = getElementOrProxy();
 		if (identifiable instanceof JvmField)
 			return ((JvmField) identifiable).isStatic();
 		if (identifiable instanceof JvmOperation)
@@ -127,21 +130,31 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return false;
 	}
 	
-	public boolean isStaticDescription() {
-		EObject object = getEObjectOrProxy();
-		if (object instanceof JvmIdentifiableElement) {
-			return isStatic((JvmIdentifiableElement) object);
-		}
-		return receiverType == null;
-	}
-	
 	@Override
 	public String toString() {
-		EObject element = getEObjectOrProxy();
-		if (element instanceof JvmIdentifiableElement) {
-			return ((JvmIdentifiableElement) element).getIdentifier();
-		}
-		return String.valueOf(element);
+		return getElementOrProxy().getIdentifier();
+	}
+
+	public JvmIdentifiableElement getElementOrProxy() {
+		return (JvmIdentifiableElement) getEObjectOrProxy();
+	}
+
+	@Nullable
+	public XExpression getImplicitFirstArgument() {
+		return null;
+	}
+
+	@Nullable
+	public LightweightTypeReference getImplicitFirstArgumentType() {
+		return null;
+	}
+
+	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
+		return Collections.emptyMap();
+	}
+
+	public boolean isExtension() {
+		return false;
 	}
 
 }

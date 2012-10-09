@@ -42,7 +42,7 @@ class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingBatchConstructorCallTypeTest extends BatchConstructorCallTypeTest {
+class RecomputingBatchConstructorCallTypeTest extends BatchConstructorCallTypeTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver recomputingResolver;

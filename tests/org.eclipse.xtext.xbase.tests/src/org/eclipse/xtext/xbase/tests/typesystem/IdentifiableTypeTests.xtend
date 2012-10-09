@@ -48,7 +48,7 @@ class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class RecomputingBatchIdentifiableTypeTest extends BatchIdentifiableTypeTest {
+class RecomputingBatchIdentifiableTypeTest extends BatchIdentifiableTypeTest {
 	
 	@Inject
 	RecomputingBatchTypeResolver recomputingResolver;

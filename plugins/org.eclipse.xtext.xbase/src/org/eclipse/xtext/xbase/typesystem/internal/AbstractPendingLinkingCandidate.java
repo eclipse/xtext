@@ -18,14 +18,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -38,10 +36,10 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> { 
 	
-	protected final IEObjectDescription description;
+	protected final IIdentifiableElementDescription description;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
-	protected AbstractPendingLinkingCandidate(Expression expression, IEObjectDescription description,
+	protected AbstractPendingLinkingCandidate(Expression expression, IIdentifiableElementDescription description,
 			ExpressionTypeComputationState state) {
 		super(expression, state);
 		this.description = description;
@@ -78,9 +76,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected boolean isVisible() {
-		if (description instanceof BucketedEObjectDescription)
-			return ((BucketedEObjectDescription) description).isVisible();
-		return true;
+		return description.isVisible();
 	}
 	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
@@ -214,10 +210,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	public int getTypeArityMismatch() {
-		List<LightweightTypeReference> explicitTypeArguments = getExplicitTypeArguments();
-		if (explicitTypeArguments.size() == 0)
+		List<LightweightTypeReference> syntacticTypeArguments = getSyntacticTypeArguments();
+		if (syntacticTypeArguments.size() == 0)
 			return 0;
-		return getDeclaredTypeParameters().size() - explicitTypeArguments.size();
+		return getDeclaredTypeParameters().size() - syntacticTypeArguments.size();
 	}
 	
 	protected void resolveLinkingProxy(EReference structuralFeature, int featureId) {
@@ -254,24 +250,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return fixedArityParamCount - arguments.size();
 	}
 	
-	protected IEObjectDescription getDescription() {
-		return description;
-	}
-	
 	@Override
 	public JvmIdentifiableElement getFeature() {
-		return (JvmIdentifiableElement) getDescription().getEObjectOrProxy();
+		return description.getElementOrProxy();
 	}
-	
-	@Override
-	@Nullable
-	protected XExpression getReceiver() {
-		if (getDescription() instanceof BucketedEObjectDescription) {
-			return ((BucketedEObjectDescription) getDescription()).getReceiver();
-		}
-		return null;
-	}
-	
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [" + description.toString() + "]";

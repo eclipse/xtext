@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
@@ -25,4 +27,11 @@ public class StaticImportsScope extends AbstractStaticImportsScope {
 	protected List<TypeBucket> getBuckets() {
 		return getSession().getStaticallyImportedTypes();
 	}
+	
+	@Override
+	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
+		return new StaticFeatureDescription(name, feature, bucket.getId(), getSession().isVisible(feature));
+	}
+	
+	
 }

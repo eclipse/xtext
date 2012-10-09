@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
@@ -15,9 +16,10 @@ import org.eclipse.xtext.xbase.XExpression;
  * Externalized for testing purpose.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ExpressionArgumentFactory {
 
-	public IExpressionArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<? extends XExpression> candidate) {
+	public IFeatureCallArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<? extends XExpression> candidate) {
 		if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable))
 			return new AssignmentArguments(candidate);
 		else
