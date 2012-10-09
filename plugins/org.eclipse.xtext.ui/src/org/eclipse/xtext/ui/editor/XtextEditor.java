@@ -297,7 +297,8 @@ public class XtextEditor extends TextEditor {
 	}
 
 	private IContentOutlinePage getContentOutlinePage() {
-		if (outlinePage == null) {
+		// don't create outline page if the editor was already disposed
+		if (outlinePage == null && getSourceViewer() != null) {
 			outlinePage = createOutlinePage();
 		}
 		return outlinePage;
