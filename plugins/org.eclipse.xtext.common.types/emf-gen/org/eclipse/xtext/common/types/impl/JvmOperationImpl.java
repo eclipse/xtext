@@ -143,6 +143,7 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		return static_;

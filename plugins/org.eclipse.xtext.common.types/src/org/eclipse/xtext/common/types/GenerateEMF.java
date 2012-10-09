@@ -30,7 +30,7 @@ public class GenerateEMF {
 		}}.invoke(null);
 		
 		new DirectoryCleaner() {{
-			setDirectory("../"+projectName+".ui/emf-gen");
+			setDirectory("../"+projectName+".edit/emf-gen");
 		}}.invoke(null);
 		
 		new EcoreGenerator() {{

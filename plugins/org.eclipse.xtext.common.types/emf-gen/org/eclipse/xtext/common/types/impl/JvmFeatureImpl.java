@@ -42,4 +42,16 @@ public abstract class JvmFeatureImpl extends JvmMemberImplCustom implements JvmF
 		return TypesPackage.Literals.JVM_FEATURE;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStatic()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 } //JvmFeatureImpl

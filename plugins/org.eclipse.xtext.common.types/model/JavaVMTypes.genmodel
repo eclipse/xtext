@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.common.types/emf-gen"
-    editDirectory="/org.eclipse.xtext.common.types.ui/emf-gen" editorDirectory="/org.eclipse.xtext.types.editor/src"
-    modelPluginID="org.eclipse.xtext.common.types" forceOverwrite="true" modelName="Types"
-    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.common.types/emf-gen" editDirectory="/org.eclipse.xtext.common.types.edit/emf-gen"
+    editorDirectory="/org.eclipse.xtext.types.editor/src" modelPluginID="org.eclipse.xtext.common.types"
+    forceOverwrite="true" modelName="Types" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" containmentProxies="true" complianceLevel="5.0"
-    suppressGenModelAnnotations="false" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.ui"
+    suppressGenModelAnnotations="false" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit"
     editorPluginID="org.eclipse.xtext.types.editor">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.eclipse.xtext.common" disposableProviderFactory="true"
@@ -20,6 +18,14 @@
     <genDataTypes ecoreDataType="JavaVMTypes.ecore#//Iterable">
       <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//Iterable/E"/>
     </genDataTypes>
+    <genDataTypes ecoreDataType="JavaVMTypes.ecore#//ITypeReferenceVisitor">
+      <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//ITypeReferenceVisitor/Result"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="JavaVMTypes.ecore#//ITypeReferenceVisitorWithParameter">
+      <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//ITypeReferenceVisitorWithParameter/Parameter"/>
+      <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//ITypeReferenceVisitorWithParameter/Result"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="JavaVMTypes.ecore#//Exception"/>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmIdentifiableElement">
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmIdentifiableElement/getIdentifier"/>
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmIdentifiableElement/getSimpleName"/>
@@ -98,6 +104,16 @@
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmTypeReference/getQualifiedName.1">
         <genParameters ecoreParameter="JavaVMTypes.ecore#//JvmTypeReference/getQualifiedName.1/innerClassDelimiter"/>
       </genOperations>
+      <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmTypeReference/accept">
+        <genParameters ecoreParameter="JavaVMTypes.ecore#//JvmTypeReference/accept/visitor"/>
+        <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//JvmTypeReference/accept/Result"/>
+      </genOperations>
+      <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmTypeReference/accept.1">
+        <genParameters ecoreParameter="JavaVMTypes.ecore#//JvmTypeReference/accept.1/visitor"/>
+        <genParameters ecoreParameter="JavaVMTypes.ecore#//JvmTypeReference/accept.1/parameter"/>
+        <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//JvmTypeReference/accept.1/Parameter"/>
+        <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//JvmTypeReference/accept.1/Result"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmParameterizedTypeReference">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmParameterizedTypeReference/arguments"/>
@@ -112,10 +128,7 @@
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmAnyTypeReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmAnyTypeReference/type"/>
     </genClasses>
-    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmMultiTypeReference">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmMultiTypeReference/references"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmMultiTypeReference/type"/>
-    </genClasses>
+    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmMultiTypeReference"/>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmMember">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmMember/declaringType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmMember/visibility"/>
@@ -125,7 +138,9 @@
         <genParameters ecoreParameter="JavaVMTypes.ecore#//JvmMember/internalSetIdentifier/identifier"/>
       </genOperations>
     </genClasses>
-    <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmFeature"/>
+    <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmFeature">
+      <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmFeature/isStatic"/>
+    </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmField">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/static"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/final"/>
@@ -195,6 +210,23 @@
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmEnumAnnotationValue">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmEnumAnnotationValue/values"/>
+    </genClasses>
+    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmDelegateTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmDelegateTypeReference/delegate"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmSpecializedTypeReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmSpecializedTypeReference/equivalent"/>
+    </genClasses>
+    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmSynonymTypeReference"/>
+    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmUnknownTypeReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmUnknownTypeReference/exception"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmCompoundTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmCompoundTypeReference/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmCompoundTypeReference/references"/>
+    </genClasses>
+    <genClasses ecoreClass="JavaVMTypes.ecore#//JvmCustomAnnotationValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmCustomAnnotationValue/values"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
