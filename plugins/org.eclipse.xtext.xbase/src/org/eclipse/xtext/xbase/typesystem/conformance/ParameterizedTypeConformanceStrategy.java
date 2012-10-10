@@ -63,6 +63,15 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.SUBTYPE;
 		if (left.isType(Cloneable.class))
 			return TypeConformanceResult.SUBTYPE;
+		if (left.isSubtypeOf(Iterable.class)) {
+			ArrayTypeReference leftArray = left.toArrayIfIterable();
+			if (leftArray != null) {
+				TypeConformanceResult result = conformanceComputer.isConformant(leftArray, right, param);
+				if (result.isConformant()) {
+					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
+				}
+			}
+		}
 		return TypeConformanceResult.FAILED;
 	}
 

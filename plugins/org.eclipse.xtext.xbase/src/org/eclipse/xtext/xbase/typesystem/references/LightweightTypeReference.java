@@ -271,6 +271,26 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 	
+	public boolean isSubtypeOf(Class<?> clazz) {
+		if (isType(clazz)) {
+			return true;
+		}
+		JvmType type = findType(clazz);
+		if (type == null) {
+			return false;
+		}
+		return isSubtypeOf(type);
+	}
+	
+	public boolean isSubtypeOf(JvmType type) {
+		if (type == null) {
+			throw new IllegalArgumentException("type may not be null");
+		}
+		ParameterizedTypeReference other = new ParameterizedTypeReference(getOwner(), type);
+		boolean result = other.isAssignableFrom(this);
+		return result;
+	}
+	
 	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
 		if (isOwnedBy(owner)) {
 			return this;

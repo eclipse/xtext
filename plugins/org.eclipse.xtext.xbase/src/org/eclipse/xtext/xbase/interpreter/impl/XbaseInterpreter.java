@@ -579,7 +579,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 						java.lang.Iterable.class);
 			}
 		} else {
-			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+			XExpression receiver = getActualReceiver(featureCall); //, featureCall.getFeature(), featureCall.getImplicitReceiver());
 			Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 			if (featureCall.isNullSafe() && receiverObj==null) {
 				return getDefaultObjectValue(typeProvider.getType(featureCall));
@@ -679,8 +679,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				return true;
 			}
 			JvmOperation operation = (JvmOperation) featureCall.getFeature();
-			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
-			List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
+			XExpression receiver = getActualReceiver(featureCall);
+			List<XExpression> operationArguments = getActualArguments(featureCall);
 			List<Object> argumentValues = newArrayList();
 			for (XExpression expr : operationArguments) {
 				if (expr == leftOperand) {
@@ -691,9 +691,17 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 			return invokeOperation(operation, receiver, argumentValues, context, indicator);
 		}
-		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall);
+		XExpression receiver = getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 		return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
+	}
+
+	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+		return callToJavaMapping.getActualArguments(featureCall);
+	}
+
+	protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {
+		return callToJavaMapping.getActualReceiver(featureCall);
 	}
 
 	protected Object invokeFeature(JvmIdentifiableElement feature, XAbstractFeatureCall featureCall, Object receiverObj,
@@ -754,7 +762,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	protected Object _invokeFeature(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver,
 			IEvaluationContext context, CancelIndicator indicator) {
-		List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall);
+		List<XExpression> operationArguments = getActualArguments(featureCall);
 		List<Object> argumentValues = evaluateArgumentExpressions(operation, operationArguments, context, indicator);
 		return invokeOperation(operation, receiver, argumentValues, context, indicator);
 	}
@@ -956,7 +964,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
-		XExpression receiver = callToJavaMapping.getActualReceiver(assignment);
+		XExpression receiver = getActualReceiver(assignment);
 		Object result = receiver == null ? null : internalEvaluate(receiver, context, indicator);
 		return result;
 	}

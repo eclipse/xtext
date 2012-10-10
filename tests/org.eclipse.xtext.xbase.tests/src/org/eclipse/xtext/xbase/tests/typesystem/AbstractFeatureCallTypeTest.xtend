@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -204,6 +205,42 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 
 	@Test def void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		"'foo'.toCharArray.iterator".resolvesFeatureCallsTo("char[]", "Iterator<Character>")
+	}
+	
+	@Test def void testArray_01() throws Exception {
+		"'a,b,c'.split(',').tail".resolvesFeatureCallsTo("String[]", "Iterable<String>")
+	}
+	
+	@Test def void testArray_02() throws Exception {
+		"new testdata.ArrayClient().swap('a,b,c'.split(','))".resolvesFeatureCallsTo("String[]", "String[]")
+	}
+	
+	@Test def void testArray_03() throws Exception {
+		"new testdata.ArrayClient().swap('a,b,c'.split(',').tail)".resolvesFeatureCallsTo("String[]", "String[]", "Iterable<String>")
+	}
+	
+	@Test def void testArray_04() throws Exception {
+		"new testdata.ArrayClient().swap(null)".resolvesFeatureCallsTo("Object[]")
+	}
+	
+	@Test def void testArray_05() throws Exception {
+		"new testdata.ArrayClient().swap(null as Integer[])".resolvesFeatureCallsTo("Integer[]")
+	}
+	
+	@Test def void testArray_06() throws Exception {
+		"{ val Integer[] x = new testdata.ArrayClient().swap(null) }".resolvesFeatureCallsTo("Integer[]")
+	}
+	
+	@Test def void testArray_07() throws Exception {
+		"{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x }".resolvesFeatureCallsTo("Integer[]", "Integer[]")
+	}
+	
+	@Test def void testArray_08() throws Exception {
+		"{ val x = new testdata.ArrayClient().swap(null) val Integer y = x.head }".resolvesFeatureCallsTo("Integer[]", "Integer[]", "Integer")
+	}
+	
+	@Test @Ignore("Investigate why this fails for nested arrays") def void testArray_09() throws Exception {
+		"{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x.head }".resolvesFeatureCallsTo("Integer[][]", "Integer[][]", "Integer[]")
 	}
 	
 	@Test def void testReturnType_02() throws Exception {

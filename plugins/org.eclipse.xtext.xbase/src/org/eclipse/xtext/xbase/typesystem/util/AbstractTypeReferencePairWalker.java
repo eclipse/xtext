@@ -171,9 +171,9 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 		protected void doVisitMatchingTypeParameters(ParameterizedTypeReference reference,
 				ParameterizedTypeReference declaration) {
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> actualMapping = getTypeParameterMapping(reference);
 			TypeParameterSubstitutor<?> actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaredMapping = getTypeParameterMapping(declaration);
 			TypeParameterSubstitutor<?> declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
 			Set<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
 			Set<JvmTypeParameter> visited = Sets.newHashSet();
@@ -198,6 +198,12 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					}
 				}
 			}
+		}
+
+		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping(
+				ParameterizedTypeReference reference) {
+			DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
+			return collector.getTypeParameterMapping(reference);
 		}
 		
 		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
@@ -279,10 +285,6 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		return new ParameterizedTypeReferenceTraverser();
 	}
 	
-//	protected JvmType getTypeFromReference(JvmTypeReference reference) {
-//		return reference.getType();
-//	}
-	
 	@Override
 	protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference,
 			LightweightTypeReference param) {
@@ -315,7 +317,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		// nothing to do
 	}
 
-	protected void outerVisit(LightweightTypeReference reference, LightweightTypeReference parameter, Object origin, VarianceInfo expectedVariance, VarianceInfo actualVariance) {
+	protected void outerVisit(LightweightTypeReference declaredType, LightweightTypeReference actualType, Object origin, VarianceInfo expectedVariance, VarianceInfo actualVariance) {
 		VarianceInfo oldExpectedVariance = this.expectedVariance;
 		VarianceInfo oldActualVariance = this.actualVariance;
 		Object oldOrigin = this.origin;
@@ -323,7 +325,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			this.expectedVariance = expectedVariance;
 			this.actualVariance = actualVariance;
 			this.origin = origin;
-			outerVisit(reference, parameter);
+			outerVisit(declaredType, actualType);
 		} finally {
 			this.expectedVariance = oldExpectedVariance;
 			this.actualVariance = oldActualVariance;
@@ -331,8 +333,8 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 	}
 	
-	protected void outerVisit(LightweightTypeReference reference, LightweightTypeReference parameter) {
-		reference.accept(this, parameter);
+	protected void outerVisit(LightweightTypeReference declaredType, LightweightTypeReference actualType) {
+		declaredType.accept(this, actualType);
 	}
 
 	public void processPairedReferences(LightweightTypeReference declaredType, LightweightTypeReference actualType) {

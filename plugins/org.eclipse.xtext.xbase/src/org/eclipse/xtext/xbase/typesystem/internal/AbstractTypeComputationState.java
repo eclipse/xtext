@@ -266,6 +266,15 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				@Override
 				public void apply() {
 					super.apply();
+					XExpression receiver = getReceiver();
+					if (receiver != null) {
+						LightweightTypeReference receiverType = getReceiverType();
+						if (receiverType == null) {
+							throw new IllegalStateException("Cannot determine receiver's type");
+						}
+						TypeExpectation refinedExpectation = new TypeExpectation(receiverType, getState(), false);
+						demandComputedTypes.refineExpectedType(receiver, refinedExpectation);
+					}
 					demandComputedTypes.mergeIntoParent();
 				}
 			};

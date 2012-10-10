@@ -121,7 +121,8 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		if (original instanceof ArrayTypeReference) {
 			LightweightTypeReference componentType = original.getComponentType();
 			if (componentType instanceof UnboundTypeReference) {
-				return substitute(componentType);
+				LightweightTypeReference substitutedComponentType = substitute(componentType);
+				return new ArrayTypeReference(getOwner(), substitutedComponentType);
 			}
 		}
 		if (original instanceof UnboundTypeReference) {

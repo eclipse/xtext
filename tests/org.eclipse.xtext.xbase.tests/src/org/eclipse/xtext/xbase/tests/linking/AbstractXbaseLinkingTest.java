@@ -72,6 +72,69 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_plus(java.lang.Object,java.lang.String)",operation.getFeature().getIdentifier());
 	}
 	
+	@Test public void testBinaryOperation_5() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List list = null" +
+				" list += 'bar'" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,E)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_6() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List<String> list = null" +
+				" list += 'bar'" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,E)", operation.getFeature().getIdentifier());
+	}
+
+	@Test public void testBinaryOperation_7() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List<? super CharSequence> list = null" +
+				" list += null as Iterable<CharSequence>" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_8() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List<? super CharSequence> list = null" +
+				" list += null as Iterable<? extends CharSequence>" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_9() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List<CharSequence> list = null" +
+				" list += null as Iterable<? extends CharSequence>" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_10() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List<CharSequence> list = null" +
+				" list += null as Iterable<CharSequence>" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", operation.getFeature().getIdentifier());
+	}
+	
+	@Test public void testBinaryOperation_11() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{\n" +
+				" val java.util.List list = null" +
+				" list += null as Iterable<CharSequence>" +
+				"}", true);
+		XBinaryOperation operation = (XBinaryOperation) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.operator_add(java.util.Collection,java.lang.Iterable)", operation.getFeature().getIdentifier());
+	}
+	
 	@Test public void testAssignmentToInvisibleElements() throws Exception {
 		XAssignment expression = (XAssignment) expression("new testdata.GenericType1<String>().t = 'foo'");
 		assertEquals("testdata.GenericType1.t", expression.getFeature().getIdentifier());
