@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.xbase"
+      id="org.eclipse.xtext.xbase.lib"
       label="%featureName"
       version="2.4.0.qualifier"
       provider-name="%providerName">
@@ -22,26 +22,9 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       %license
    </license>
 
-   <includes
+ 
+   <plugin
          id="org.eclipse.xtext.xbase.lib"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.xtext.xbase"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xbase.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xbase.junit"
          download-size="0"
          install-size="0"
          version="0.0.0"
