@@ -36,4 +36,18 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 		return super.isExplicitOperationCall() || !getMemberCallArguments().isEmpty();
 	}
 	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return getActualArguments(getMemberCallTarget(), getMemberCallArguments());
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		return getActualReceiver(getMemberCallTarget());
+	}
+	
+	@Override
+	public boolean isExtension() {
+		return isExtension(getMemberCallTarget());
+	}
 }

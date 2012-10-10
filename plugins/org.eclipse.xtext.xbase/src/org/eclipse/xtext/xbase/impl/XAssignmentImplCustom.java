@@ -19,9 +19,10 @@ public class XAssignmentImplCustom extends XAssignmentImpl {
 	
 	@Override
 	public String toString() {
-		return getExpressionAsString(getAssignable())+" "+getConcreteSyntaxFeatureName()+" "+getExpressionAsString(getValue());
+		return getExpressionAsString(getAssignable())+"."+getConcreteSyntaxFeatureName()+" = "+getExpressionAsString(getValue());
 	}
 	
+	@Deprecated
 	@Override
 	public EList<XExpression> getExplicitArguments() {
 		BasicEList<XExpression> result = new BasicEList<XExpression>();
@@ -30,5 +31,20 @@ public class XAssignmentImplCustom extends XAssignmentImpl {
 		if (getValue()!=null)
 			result.add(getValue());
 		return result;
+	}
+	
+	@Override
+	public EList<XExpression> getActualArguments() {
+		return getActualArguments(getAssignable(), getValue());
+	}
+	
+	@Override
+	public XExpression getActualReceiver() {
+		return getActualReceiver(getAssignable());
+	}
+	
+	@Override
+	public boolean isExtension() {
+		return isExtension(getAssignable());
 	}
 }
