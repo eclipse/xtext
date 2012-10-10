@@ -10,7 +10,7 @@ resolve "${releng.project.location}/releng/xtext.cquery"
 
 build
 
-#perform -DtargetPlatformPath="${build.root}/target.platform" --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#create.javadoc"
+perform -DtargetPlatformPath="${build.root}/target.platform" --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#create.javadoc"
 #junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
 
 perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
