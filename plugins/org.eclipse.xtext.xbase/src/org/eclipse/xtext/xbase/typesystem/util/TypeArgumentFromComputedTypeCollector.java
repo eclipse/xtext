@@ -11,12 +11,14 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
@@ -25,12 +27,15 @@ import com.google.common.collect.ListMultimap;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterAwareTypeArgumentCollector {
 
-	public static void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType,
+	public static void resolveAgainstActualType(final LightweightTypeReference declaredType, LightweightTypeReference actualType,
 			Collection<JvmTypeParameter> typeParameters, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			BoundTypeArgumentSource source,
 			ITypeReferenceOwner owner) {
+		if (declaredType.isRawType() || actualType.isRawType())
+			return;
 		TypeArgumentFromComputedTypeCollector implementation = new TypeArgumentFromComputedTypeCollector(typeParameters, source, owner);
 		implementation.populateTypeParameterMapping(declaredType, actualType);
 		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> parameterMapping = implementation.rawGetTypeParameterMapping();
@@ -60,12 +65,10 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 	}
 
 	@Override
-	@NonNullByDefault
 	protected void acceptHint(UnboundTypeReference reference, LightweightTypeReference param) {
 		if (!shouldProcess(reference.getTypeParameter())) {
-			UnboundTypeReference casted = reference;
-			casted.tryResolve();
-			if (casted.internalIsResolved()) {
+			reference.tryResolve();
+			if (reference.internalIsResolved()) {
 				outerVisit(reference, param);
 			} else {
 				super.acceptHint(reference, param);
@@ -74,25 +77,52 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 			reference.acceptHint(boundByInference(param));
 		}
 	}
+	
 	@Override
-	@NonNullByDefault
-	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
-		return new UnboundTypeReferenceTraverser() {
+	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
+		return new ArrayTypeReferenceTraverser() {
 			@Override
-			protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
-				if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
-					declaration.tryResolve();
-					outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
-				} else {
-					acceptHint(declaration, reference);
+			protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ArrayTypeReference declaration) {
+				JvmType type = reference.getType();
+				if (type instanceof JvmTypeParameter) {
+					if (shouldProcess((JvmTypeParameter) type)) {
+						JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+						processTypeParameter(typeParameter, declaration);
+					}
+				} else if (reference.isSubtypeOf(Iterable.class)) {
+					ArrayTypeReference array = reference.toArrayIfIterable();
+					if (array != null) {
+						outerVisit(declaration, array);
+					}
 				}
 			}
-			
+		};
+	}
+	
+	@Override
+	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+		return new UnboundTypeParameterAwareParameterizedTypeReferenceTraverser() {
 			@Override
-			protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
-				doVisitTypeReference(reference, param);
+			protected void doVisitArrayTypeReference(ArrayTypeReference reference, ParameterizedTypeReference declaration) {
+				JvmType type = declaration.getType();
+				if (type instanceof JvmTypeParameter) {
+					if (shouldProcess((JvmTypeParameter) type)) {
+						JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+						processTypeParameter(typeParameter, reference);
+					}
+				} else if (declaration.isSubtypeOf(Iterable.class)) {
+					ArrayTypeReference array = declaration.toArrayIfIterable();
+					if (array != null) {
+						outerVisit(array, reference);
+					}
+				}
 			}
-			
+		};
+	}
+	
+	@Override
+	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+		return new UnboundTypeParameterAwareUnboundTypeReferenceTraverser() {
 			@Override
 			protected void doVisitWildcardTypeReference(WildcardTypeReference reference,
 					UnboundTypeReference declaration) {

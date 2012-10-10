@@ -40,9 +40,17 @@ public class SynonymTypesProvider {
 
 	@NonNullByDefault
 	public static abstract class Acceptor {
+		/**
+		 * @return <code>true</code> if the client is interested in more synonyms. <code>false</code> to skip
+		 *   further computation.
+		 */
 		protected boolean accept(LightweightTypeReference synonym, ConformanceHint hint) {
 			return accept(synonym, EnumSet.of(hint));
 		}
+		/**
+		 * @return <code>true</code> if the client is interested in more synonyms. <code>false</code> to skip
+		 *   further computation.
+		 */
 		protected abstract boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints);
 	}
 	

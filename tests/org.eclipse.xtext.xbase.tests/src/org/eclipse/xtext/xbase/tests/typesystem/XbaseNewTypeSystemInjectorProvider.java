@@ -4,6 +4,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.lang.reflect.AnnotatedElement;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -16,7 +17,11 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
@@ -72,8 +77,24 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
 			return XbaseBatchTypeProvider.class;
 		}
+		
+		@Override
+		public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
+			return XbaseInterpreter2.class;
+		}
 	}
 
+	public static class XbaseInterpreter2 extends XbaseInterpreter {
+		@Override
+		protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+			return featureCall.getActualArguments();
+		}
+		@Override
+		protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {
+			return featureCall.getActualReceiver();
+		}
+	}
+	
 	@SuppressWarnings("deprecation")
 	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
 		@Override

@@ -561,8 +561,18 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testFeatureCallWithArrayToIterableConversion() throws Exception {
+  public void testFeatureCallWithArrayToIterableConversion_01() throws Exception {
     this.resolvesTo("\'foo\'.toCharArray.iterator", "Iterator<Character>");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_02() throws Exception {
+    this.resolvesTo("(null as String[]).head", "String");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_03() throws Exception {
+    this.resolvesTo("(null as String[]).map[ it ]", "List<String>");
   }
   
   @Test
@@ -1686,6 +1696,26 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCall_38() throws Exception {
     this.resolvesTo("(null as Iterable<Integer>).fold(0) [ l, r | if (l > r) l else r]", "Integer");
+  }
+  
+  @Test
+  public void testFeatureCall_39() throws Exception {
+    this.resolvesTo("new testdata.ArrayClient().toStringArray(\'a\', \'b\').filter(e|e!=null)", "Iterable<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_40() throws Exception {
+    this.resolvesTo("new testdata.ArrayClient().toStringArray(\'a\', \'b\').map[ it ]", "List<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_41() throws Exception {
+    this.resolvesTo("new testdata.ArrayClient().toStringArray(\'a\', \'b\')", "String[]");
+  }
+  
+  @Test
+  public void testFeatureCall_42() throws Exception {
+    this.resolvesTo("new testdata.ArrayClient().toStringArray(\'a\', \'b\').head", "String");
   }
   
   @Test

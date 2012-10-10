@@ -27,6 +27,56 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeArgumentCollector {
 
+	protected class UnboundTypeParameterAwareUnboundTypeReferenceTraverser extends UnboundTypeReferenceTraverser {
+		@Override
+		protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+			if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+				declaration.tryResolve();
+				outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+			} else {
+				acceptHint(declaration, reference);
+			}
+			
+		}
+		@Override
+		protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
+			doVisitTypeReference(reference, param);
+		}
+	}
+
+	protected class UnboundTypeParameterAwareParameterizedTypeReferenceTraverser extends
+			ActualParameterizedTypeReferenceTraverser {
+		@Override
+		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+				ParameterizedTypeReference declaration) {
+			JvmType type = declaration.getType();
+			if (type instanceof JvmTypeParameter) {
+				JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
+				if (unboundTypeParameter != reference.getTypeParameter() && shouldProcess(unboundTypeParameter)) {
+					processTypeParameter(unboundTypeParameter, reference);
+				} else {
+					// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
+				}
+			} else {
+				acceptHint(reference, declaration);
+			}
+		}
+
+		@Override
+		protected void doVisitCompoundTypeReference(CompoundTypeReference reference,
+				ParameterizedTypeReference declaration) {
+			JvmType type = declaration.getType();
+			if (type instanceof JvmTypeParameter) {
+				JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
+				if (shouldProcess(unboundTypeParameter)) {
+					processTypeParameter(unboundTypeParameter, reference);
+				}
+			} else {
+				super.doVisitCompoundTypeReference(reference, declaration);
+			}
+		}
+	}
+
 	public UnboundTypeParameterAwareTypeArgumentCollector(Collection<JvmTypeParameter> parametersToBeMapped,
 			BoundTypeArgumentSource defaultSource, ITypeReferenceOwner owner) {
 		super(parametersToBeMapped, defaultSource, owner);
@@ -39,17 +89,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 
 	@Override
 	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
-		return new UnboundTypeReferenceTraverser() {
-			@Override
-			protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
-				if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
-					declaration.tryResolve();
-					outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
-				} else {
-					acceptHint(declaration, reference);
-				}
-			}	
-		};
+		return new UnboundTypeParameterAwareUnboundTypeReferenceTraverser();
 	}
 	
 	protected void acceptHint(UnboundTypeReference reference, LightweightTypeReference param) {
@@ -58,36 +98,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ActualParameterizedTypeReferenceTraverser() {
-			@Override
-			public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-					ParameterizedTypeReference declaration) {
-				JvmType type = declaration.getType();
-				if (type instanceof JvmTypeParameter) {
-					JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
-					if (unboundTypeParameter != reference.getTypeParameter() && shouldProcess(unboundTypeParameter)) {
-						processTypeParameter(unboundTypeParameter, reference);
-					} else {
-						// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
-					}
-				} else {
-					acceptHint(reference, declaration);
-				}
-			}
-			@Override
-			protected void doVisitCompoundTypeReference(CompoundTypeReference reference,
-					ParameterizedTypeReference declaration) {
-				JvmType type = declaration.getType();
-				if (type instanceof JvmTypeParameter) {
-					JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
-					if (shouldProcess(unboundTypeParameter)) {
-						processTypeParameter(unboundTypeParameter, reference);
-					}
-				} else {
-					super.doVisitCompoundTypeReference(reference, declaration);
-				}
-			}
-		};
+		return new UnboundTypeParameterAwareParameterizedTypeReferenceTraverser();
 	}
 
 	@Override

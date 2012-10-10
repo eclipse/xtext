@@ -13,8 +13,6 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -44,7 +42,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 				if (type instanceof JvmDeclaredType) {
 					Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
 					for(JvmFeature feature: features) {
-						if (isStatic(feature))
+						if (feature.isStatic())
 							addDescriptions(feature, bucket, result);
 					}
 				}
@@ -53,16 +51,6 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 		return result;
 	}
 	
-	protected boolean isStatic(JvmFeature feature) {
-		if (feature instanceof JvmField) {
-			return ((JvmField) feature).isStatic();
-		}
-		if (feature instanceof JvmOperation) {
-			return ((JvmOperation) feature).isStatic();
-		}
-		return false;
-	}
-
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
 		result.add(createDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket));
 	}
@@ -89,7 +77,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 						if (type instanceof JvmDeclaredType) {
 							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
 							for(JvmFeature feature: features) {
-								if (isStatic(feature))
+								if (feature.isStatic())
 									result.add(createDescription(name, feature, bucket));
 							}
 							

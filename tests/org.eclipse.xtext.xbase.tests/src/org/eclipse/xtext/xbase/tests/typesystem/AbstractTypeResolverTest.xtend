@@ -506,8 +506,16 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList('foo','bar').forEach []".resolvesTo("void")
 	}
 
-	@Test def void testFeatureCallWithArrayToIterableConversion() throws Exception {
+	@Test def void testFeatureCallWithArrayToIterableConversion_01() throws Exception {
 		"'foo'.toCharArray.iterator".resolvesTo("Iterator<Character>")
+	}
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_02() throws Exception {
+		"(null as String[]).head".resolvesTo("String")
+	}
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_03() throws Exception {
+		"(null as String[]).map[ it ]".resolvesTo("List<String>")
 	}
 	
 	@Test def void testReturnType_01() throws Exception {
@@ -1704,6 +1712,22 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testFeatureCall_38() throws Exception {
 		"(null as Iterable<Integer>).fold(0) [ l, r | if (l > r) l else r]".resolvesTo("Integer")
+	}
+	
+	@Test def void testFeatureCall_39() throws Exception {
+		"new testdata.ArrayClient().toStringArray('a', 'b').filter(e|e!=null)".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testFeatureCall_40() throws Exception {
+		"new testdata.ArrayClient().toStringArray('a', 'b').map[ it ]".resolvesTo("List<String>")
+	}
+	
+	@Test def void testFeatureCall_41() throws Exception {
+		"new testdata.ArrayClient().toStringArray('a', 'b')".resolvesTo("String[]")
+	}
+	
+	@Test def void testFeatureCall_42() throws Exception {
+		"new testdata.ArrayClient().toStringArray('a', 'b').head".resolvesTo("String")
 	}
 	
 	@Test def void testToList_01() throws Exception {

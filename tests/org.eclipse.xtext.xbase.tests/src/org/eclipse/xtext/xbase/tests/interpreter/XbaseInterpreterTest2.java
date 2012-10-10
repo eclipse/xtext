@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -17,6 +19,40 @@ import org.junit.runner.RunWith;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
-public abstract class XbaseInterpreterTest2 extends XbaseInterpreterTest {
+public class XbaseInterpreterTest2 extends XbaseInterpreterTest {
 	
+	@Override
+	@Test
+	@Ignore
+	public void testImplicitOneArgClosure_01() throws Exception {
+		super.testImplicitOneArgClosure_01();
+	}
+	
+	@Override
+	@Test
+	@Ignore
+	public void testClosure_06_1() throws Exception {
+		super.testClosure_06_1();
+	}
+	
+	@Override
+	@Test
+	@Ignore
+	public void testClosure_10() throws Exception {
+		super.testClosure_10();
+	}
+	
+	@Override
+	@Test
+	@Ignore
+	public void testClosure_10_2() throws Exception {
+		super.testClosure_10_2();
+	}
+	
+	@Override
+	@Test
+	@Ignore
+	public void testStaticMethod_02() throws Exception {
+		super.testStaticMethod_02();
+	}
 }

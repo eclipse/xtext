@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -207,6 +208,52 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   @Test
   public void testFeatureCallWithArrayToIterableConversion() throws Exception {
     this.resolvesFeatureCallsTo("\'foo\'.toCharArray.iterator", "char[]", "Iterator<Character>");
+  }
+  
+  @Test
+  public void testArray_01() throws Exception {
+    this.resolvesFeatureCallsTo("\'a,b,c\'.split(\',\').tail", "String[]", "Iterable<String>");
+  }
+  
+  @Test
+  public void testArray_02() throws Exception {
+    this.resolvesFeatureCallsTo("new testdata.ArrayClient().swap(\'a,b,c\'.split(\',\'))", "String[]", "String[]");
+  }
+  
+  @Test
+  public void testArray_03() throws Exception {
+    this.resolvesFeatureCallsTo("new testdata.ArrayClient().swap(\'a,b,c\'.split(\',\').tail)", "String[]", "String[]", "Iterable<String>");
+  }
+  
+  @Test
+  public void testArray_04() throws Exception {
+    this.resolvesFeatureCallsTo("new testdata.ArrayClient().swap(null)", "Object[]");
+  }
+  
+  @Test
+  public void testArray_05() throws Exception {
+    this.resolvesFeatureCallsTo("new testdata.ArrayClient().swap(null as Integer[])", "Integer[]");
+  }
+  
+  @Test
+  public void testArray_06() throws Exception {
+    this.resolvesFeatureCallsTo("{ val Integer[] x = new testdata.ArrayClient().swap(null) }", "Integer[]");
+  }
+  
+  @Test
+  public void testArray_07() throws Exception {
+    this.resolvesFeatureCallsTo("{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x }", "Integer[]", "Integer[]");
+  }
+  
+  @Test
+  public void testArray_08() throws Exception {
+    this.resolvesFeatureCallsTo("{ val x = new testdata.ArrayClient().swap(null) val Integer y = x.head }", "Integer[]", "Integer[]", "Integer");
+  }
+  
+  @Test
+  @Ignore(value = "Investigate why this fails for nested arrays")
+  public void testArray_09() throws Exception {
+    this.resolvesFeatureCallsTo("{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x.head }", "Integer[][]", "Integer[][]", "Integer[]");
   }
   
   @Test

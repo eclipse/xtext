@@ -259,6 +259,11 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   }
   
   @Test
+  public void testArrayVariable_01() throws Exception {
+    this.resolvesIdentifiablesTo("{ var a = \'a,b,c\'.split(\',\') }", "String[]");
+  }
+  
+  @Test
   public void testForExpression_01() throws Exception {
     this.resolvesIdentifiablesTo("for(String x : new java.util.ArrayList<String>()) x.length", "String");
     this.resolvesIdentifiablesTo("for(String x : newArrayList(\'foo\')) x.length", "String");

@@ -175,6 +175,10 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	@Test def void testTryCatchFinallyExpression_2() throws Exception {
 		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz' finally true".resolvesIdentifiablesTo("Exception", "RuntimeException")	
 	}
+	
+	@Test def void testArrayVariable_01() throws Exception {
+		"{ var a = 'a,b,c'.split(',') }".resolvesIdentifiablesTo("String[]")	
+	}
 
 	@Test def void testForExpression_01() throws Exception {
 		"for(String x : new java.util.ArrayList<String>()) x.length".resolvesIdentifiablesTo("String")

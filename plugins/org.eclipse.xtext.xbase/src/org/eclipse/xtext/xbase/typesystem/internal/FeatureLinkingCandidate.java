@@ -82,7 +82,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return result;
 	}
 	
-	public List<XExpression> getSyntacticArguments() {
+	protected List<XExpression> getSyntacticArguments() {
 		return new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
 	}
 	
@@ -116,7 +116,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return super.getSubstitutedExpectedType(idx);
 	}
 	
-	protected boolean hasExplicitArguments() {
+	protected boolean isExplicitOperationCall() {
 		return getFeatureCall().isExplicitOperationCallOrBuilderSyntax();
 	}
 	
@@ -131,7 +131,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 						return 1;
 					return -1;
 				} else {
-					if (hasExplicitArguments()) {
+					if (isExplicitOperationCall()) {
 						if (isExecutable)
 							return -1;
 						return 1;

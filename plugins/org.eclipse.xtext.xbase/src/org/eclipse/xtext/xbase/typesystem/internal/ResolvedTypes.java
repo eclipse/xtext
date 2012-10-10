@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -178,19 +179,30 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		
 		List<LightweightTypeReference> references = Lists.newArrayList();
+		ITypeExpectation expectation = null;
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 		for (TypeData value : values) {
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
 			references.add(reference);
 			mergedHints.addAll(value.getConformanceHints());
+			if (expectation == null) {
+				expectation = value.getExpectation();
+			} else if (expectation.getExpectedType() == null) {
+				ITypeExpectation knownExpectation = value.getExpectation();
+				if (knownExpectation.getExpectedType() != null) {
+					expectation = knownExpectation;
+				}
+			}
 		}
 		LightweightTypeReference mergedType = getMergedType(/*mergedHints, */references);
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
 		
-		/* TODO ensure that all expectations are the same */
-		TypeData result = new TypeData(expression, values.get(0).getExpectation(), mergedType, mergedHints , returnType);
+		if (expectation == null) {
+			throw new IllegalStateException("Expectation should never be null here");
+		}
+		TypeData result = new TypeData(expression, expectation, mergedType, mergedHints , returnType);
 		return result;
 	}
 
@@ -373,6 +385,17 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			expressionTypes = createExpressionTypesMap();
 		}
 		return expressionTypes;
+	}
+	
+
+	protected void refineExpectedType(XExpression receiver, TypeExpectation refinedExpectation) {
+		Collection<TypeData> typeData = ensureExpressionTypesMapExists().get(receiver);
+		List<TypeData> replaced = Lists.newArrayListWithCapacity(typeData.size());
+		for(TypeData existing: typeData) {
+			TypeData newTypeData = new TypeData(receiver, refinedExpectation, existing.getActualType(), existing.getConformanceHints(), existing.isReturnType());
+			replaced.add(newTypeData);
+		}
+		ensureExpressionTypesMapExists().replaceValues(receiver, replaced);
 	}
 	
 	private Multimap<XExpression, TypeData> createExpressionTypesMap() {

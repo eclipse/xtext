@@ -47,6 +47,24 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testArray_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testArray_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testArray_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testClosure_03() throws Exception {
     Assert.fail("fails in old implementation");
   }

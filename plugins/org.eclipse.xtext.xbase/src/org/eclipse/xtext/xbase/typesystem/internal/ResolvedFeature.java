@@ -88,7 +88,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	
 	@Override
 	protected List<XExpression> getArguments() {
-		return helper.getArguments(getFeatureCall());
+		return getFeatureCall().getActualArguments();
 	}
 
 	public XAbstractFeatureCall getFeatureCall() {
@@ -232,7 +232,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	
 	@Nullable
 	protected XExpression getReceiver() {
-		return helper.getReceiver(getFeatureCall());
+		return getFeatureCall().getActualReceiver();
 	}
 	
 	@Nullable
@@ -252,15 +252,15 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		return result;
 	}
 	
-	public List<XExpression> getSyntacticArguments() {
+	/**
+	 * For testing purpose
+	 */
+	protected List<XExpression> getSyntacticArguments() {
 		return helper.getSyntacticArguments(getFeatureCall());
 	}
 	
 	public boolean isExtension() {
-		if (isStatic()) {
-			return getSyntacticReceiver() != null || getImplicitFirstArgument() != null;
-		}
-		return getImplicitReceiver() != null && getSyntacticReceiver() != null;
+		return getFeatureCall().isExtension();
 	}
 	
 	@Override
@@ -269,6 +269,6 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	}
 	
 	public boolean isStatic() {
-		return helper.isStatic(getFeature());
+		return getFeatureCall().isStatic();
 	}
 }
