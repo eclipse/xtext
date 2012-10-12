@@ -18,6 +18,8 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
@@ -142,6 +144,11 @@ public abstract class LightweightTypeReference {
 	
 	public boolean isArray() {
 		return false;
+	}
+	
+	@Nullable
+	public LightweightTypeReference tryConvertToListType() {
+		return null;
 	}
 	
 	@Nullable
@@ -367,4 +374,51 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 
+	public boolean isFunctionType() {
+		return getFunctionTypeKind() != FunctionTypeKind.NONE;
+	}
+	
+	public FunctionTypeKind getFunctionTypeKind() {
+		return FunctionTypeKind.NONE;
+	}
+
+	/**
+	 * Returns the equivalent {@link FunctionTypeReference} if this reference
+	 * points to a {@link Functions function} or {@link Procedures procedure}
+	 * or if it is already a function type reference.
+	 * Otherwise returns <code>null</code>.
+	 * 
+	 * @see #tryConvertToFunctionTypeReference(boolean)
+	 */
+	@Nullable
+	public FunctionTypeReference getAsFunctionTypeReference() {
+		return null;
+	}
+	
+	/**
+	 * Converts this reference to a {@link FunctionTypeReference} if the referenced type is a SAM type.
+	 * Returns <code>null</code> if this reference does not point to a valid function type.
+	 * @param rawType if a raw view on the function type is sufficient.
+	 * @see #getAsFunctionTypeReference()
+	 */
+	@Nullable
+	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
+		return null;
+	}
+
+	/**
+	 * Returns the array representation of this reference if its represents a subtype of {@link Iterable}.
+	 * If the iterable's type is a primitive wrapper, the array is <em>not</em> the primitive array but
+	 * the wrapper array. May return <code>null</code> if the conversion is not possible.
+	 * 
+	 * @return an equivalent {@link ArrayTypeReference} or <code>null</code>.
+	 */
+	@Nullable
+	public ArrayTypeReference tryConvertToArray() {
+		return null;
+	}
+
+	public boolean isWildcard() {
+		return false;
+	}
 }

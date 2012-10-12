@@ -29,14 +29,9 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	}
 	
 	@Override
-	protected ExpressionTypeComputationState getParent() {
-		return (ExpressionTypeComputationState) super.getParent();
-	}
-	
-	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
 			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		if (getParent().getExpression() != getExpression()) {
+		if (((ExpressionTypeComputationState) getParent()).expression != expression) {
 			LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, returnType, hints);
 			getParent().acceptType(resolvedTypes, expectation, actualType, returnType, hints);
 			return actualType;
@@ -49,12 +44,12 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	@Override
 	public TypeAssigner assignTypes() {
 		final ExpressionTypeCheckpointComputationState state = new ChildExpressionTypeCheckpointComputationState(
-				getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, getExpression());
+				getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
 		return createTypeAssigner(state);
 	}
 	
 	@Override
 	public AbstractTypeComputationState withTypeCheckpoint() {
-		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, getExpression());
+		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
 	}
 }

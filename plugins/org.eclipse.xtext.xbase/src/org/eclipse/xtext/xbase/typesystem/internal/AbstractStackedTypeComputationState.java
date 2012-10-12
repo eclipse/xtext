@@ -37,18 +37,18 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	
 	@Override
 	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		return getParent().getImmediateExpectations(actualState);
+		return parent.getImmediateExpectations(actualState);
 	}
 	
 	@Override
 	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-		return getParent().getReturnExpectations(actualState);
+		return parent.getReturnExpectations(actualState);
 	}
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
 			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		return getParent().acceptType(types, expectation, type, returnType, hints);
+		return parent.acceptType(types, expectation, type, returnType, hints);
 	}
 	
 }

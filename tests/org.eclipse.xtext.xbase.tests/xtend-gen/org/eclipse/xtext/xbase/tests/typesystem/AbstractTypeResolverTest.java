@@ -481,6 +481,31 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testTryCatchFinallyExpression_3() throws Exception {
+    this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) \'caught\'", "Serializable & Comparable<?>");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_4() throws Exception {
+    this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) {\'caught\'}", "Serializable & Comparable<?>");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_5() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(NullPointerException e) \'second thing is thrown\'\t\t  \n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t", "Serializable & Comparable<?>");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_6() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "Serializable & Comparable<?>");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_7() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) null as Number\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "Serializable");
+  }
+  
+  @Test
   public void testForExpression_01() throws Exception {
     this.resolvesTo("for(String x : new java.util.ArrayList<String>()) x.length", "void");
     this.resolvesTo("for(String x : newArrayList(\'foo\')) x.length", "void");
@@ -1819,6 +1844,17 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBug_389512() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Object it = null\n\t\t\t^class.declaredFields.toMap[name].mapValues[get(it)]\n\t\t}", "Map<String, Object>");
+  }
+  
+  @Ignore(value = "TODO this should work")
+  @Test
+  public void testBug_391758() throws Exception {
+    this.resolvesTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "List<String>");
+  }
+  
+  @Test
   public void testBounds_01() throws Exception {
     this.resolvesTo("{ var java.util.List<Integer> list = null list.get(0) }", "Integer");
   }
@@ -1921,6 +1957,36 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testBounds_21() throws Exception {
     this.resolvesTo("{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last.last }", "Object");
+  }
+  
+  @Test
+  public void testBounds_22() throws Exception {
+    this.resolvesTo("(null as com.google.inject.Provider<? extends String>).get", "String");
+  }
+  
+  @Test
+  public void testBounds_23() throws Exception {
+    this.resolvesTo("(null as com.google.inject.Provider<? extends Iterable<String>[]>).get", "Iterable<String>[]");
+  }
+  
+  @Test
+  public void testBounds_24() throws Exception {
+    this.resolvesTo("new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends Iterable<String>[]>)", "Iterable<String>[]");
+  }
+  
+  @Test
+  public void testBounds_25() throws Exception {
+    this.resolvesTo("new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends String>)", "String");
+  }
+  
+  @Test
+  public void testBounds_26() throws Exception {
+    this.resolvesTo("new testdata.ClosureClient().useProvider(null as =>Iterable<String>[])", "Iterable<String>[]");
+  }
+  
+  @Test
+  public void testBounds_27() throws Exception {
+    this.resolvesTo("new testdata.ClosureClient().useProvider(null as =>String)", "String");
   }
   
   @Test

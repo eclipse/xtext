@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
-public class XbaseInterpreterTest2 extends XbaseInterpreterTest {
+public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest {
 	
 	@Override
 	@Test

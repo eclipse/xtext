@@ -291,6 +291,41 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public FunctionTypeKind getFunctionTypeKind() {
+		if (internalIsResolved()) {
+			return resolvedTo.getFunctionTypeKind();
+		}
+		return super.getFunctionTypeKind();
+	}
+	
+	@Override
+	@Nullable
+	public ArrayTypeReference tryConvertToArray() {
+		if (internalIsResolved()) {
+			return resolvedTo.tryConvertToArray();
+		}
+		return super.tryConvertToArray();
+	}
+	
+	@Override
+	@Nullable
+	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
+		if (internalIsResolved()) {
+			return resolvedTo.tryConvertToFunctionTypeReference(rawType);
+		}
+		return super.tryConvertToFunctionTypeReference(rawType);
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference tryConvertToListType() {
+		if (internalIsResolved()) {
+			return resolvedTo.tryConvertToListType();
+		}
+		return null;
+	}
+	
+	@Override
 	@Nullable
 	public LightweightTypeReference getComponentType() {
 		if (internalIsResolved()) {
@@ -449,4 +484,10 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return getHandle().equals(reference.getHandle());
 	}
 
+	@Override
+	public boolean isWildcard() {
+		if (resolvedTo != null)
+			return resolvedTo.isWildcard();
+		return false;
+	}
 }

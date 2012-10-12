@@ -440,6 +440,33 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testTryCatchFinallyExpression_2() throws Exception {
 		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz' finally true".resolvesTo("String")	
 	}
+	
+	@Test def void testTryCatchFinallyExpression_3() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_4() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_5() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(NullPointerException e) 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_6() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_7() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) null as Number
+		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable")	
+	}
 
 	@Test def void testForExpression_01() throws Exception {
 		"for(String x : new java.util.ArrayList<String>()) x.length".resolvesTo("void")
@@ -1810,6 +1837,22 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"<java.util.List<String>>newArrayList().flatten".resolvesTo("Iterable<String>")
 	}
 	
+	@Test def void testBug_389512() throws Exception {
+		"{
+			val Object it = null
+			^class.declaredFields.toMap[name].mapValues[get(it)]
+		}".resolvesTo("Map<String, Object>")
+	}
+
+	// TODO fix the following case
+	@Ignore("TODO this should work")	
+	@Test def void testBug_391758() throws Exception {
+		"{
+			val iterable = newArrayList
+			iterable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]
+		}".resolvesTo("List<String>")
+	}
+	
 	@Test def void testBounds_01() throws Exception {
 		"{ var java.util.List<Integer> list = null list.get(0) }".resolvesTo("Integer")
 	}
@@ -1892,6 +1935,30 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testBounds_21() throws Exception {
 		"{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last.last }".resolvesTo("Object")
+	}
+	
+	@Test def void testBounds_22() throws Exception {
+		"(null as com.google.inject.Provider<? extends String>).get".resolvesTo("String")
+	}
+	
+	@Test def void testBounds_23() throws Exception {
+		"(null as com.google.inject.Provider<? extends Iterable<String>[]>).get".resolvesTo("Iterable<String>[]")
+	}
+	
+	@Test def void testBounds_24() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends Iterable<String>[]>)".resolvesTo("Iterable<String>[]")
+	}
+	
+	@Test def void testBounds_25() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends String>)".resolvesTo("String")
+	}
+	
+	@Test def void testBounds_26() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as =>Iterable<String>[])".resolvesTo("Iterable<String>[]")
+	}
+	
+	@Test def void testBounds_27() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as =>String)".resolvesTo("String")
 	}
 	
 	@Test def void testImplicitReceiverBounds_01() throws Exception {

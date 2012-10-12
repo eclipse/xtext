@@ -805,4 +805,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return super.isVariableDeclarationRequired(expr, b);
 	}
 	
+	protected Closures getClosures() {
+		return closures;
+	}
 }

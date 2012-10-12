@@ -1,12 +1,14 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.xtype.XtypeFactory;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
  */
+@Singleton
 @SuppressWarnings("all")
 public class CommonTypeComputationServices {
   @Inject
@@ -70,6 +73,17 @@ public class CommonTypeComputationServices {
   
   public void setFunctionTypes(final FunctionTypes functionTypes) {
     this._functionTypes = functionTypes;
+  }
+  
+  @Inject
+  private ArrayTypes _arrayTypes;
+  
+  public ArrayTypes getArrayTypes() {
+    return this._arrayTypes;
+  }
+  
+  public void setArrayTypes(final ArrayTypes arrayTypes) {
+    this._arrayTypes = arrayTypes;
   }
   
   @Inject

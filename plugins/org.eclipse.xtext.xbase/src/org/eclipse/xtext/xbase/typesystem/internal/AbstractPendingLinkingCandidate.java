@@ -140,7 +140,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			computeArgumentType(arguments.getNextUnprocessedNextArgument());
 		}
 		XExpression argument = arguments.getArgument(idx);
-		return getState().getResolvedTypes().getConformanceHints(argument);
+		return getState().getStackedResolvedTypes().getConformanceHints(argument);
 	}
 
 	protected int compareDeclaredArgumentTypes(AbstractPendingLinkingCandidate<?> right) {

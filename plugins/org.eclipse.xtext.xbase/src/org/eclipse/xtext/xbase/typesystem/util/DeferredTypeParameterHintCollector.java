@@ -33,12 +33,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	
 	@Override
 	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-		return new StandardTypeParameterSubstitutor(mapping, getOwner()) {
-			@Override
-			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Object param) {
-				return reference.copyInto(getOwner());
-			}
-		};
+		return new UnboundTypeParameterPreservingSubstitutor(mapping, getOwner());
 	}
 
 	protected LightweightTypeReference copy(UnboundTypeReference reference) {

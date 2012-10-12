@@ -173,6 +173,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testBug_389512() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testTypeByTransitiveExpectation_02() throws Exception {
     Assert.fail("fails in old implementation");
   }

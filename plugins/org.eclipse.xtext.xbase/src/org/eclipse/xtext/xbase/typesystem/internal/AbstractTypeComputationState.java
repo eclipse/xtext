@@ -46,7 +46,7 @@ import com.google.common.collect.Lists;
  */
 @NonNullByDefault
 public abstract class AbstractTypeComputationState implements ITypeComputationState {
-	private final ResolvedTypes resolvedTypes;
+	protected final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
 	private List<AbstractTypeExpectation> immediateExpectations;

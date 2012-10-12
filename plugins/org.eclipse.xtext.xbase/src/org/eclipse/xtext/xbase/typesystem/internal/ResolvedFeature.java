@@ -66,7 +66,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	public void apply() {
 		XExpression receiver = getImplicitReceiver();
 		if (receiver != null) {
-			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			LightweightTypeReference receiverType = getImplicitReceiverType();
 			if (receiverType == null) {
@@ -124,7 +124,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		if (!(argumentState instanceof AbstractTypeComputationState))
 			throw new IllegalArgumentException("argumentState was " + argumentState);
 		AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
-		StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+		ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 		LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
 		TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 		LightweightTypeReference copiedReceiverType = knownType.copyInto(resolvedTypes.getReferenceOwner());

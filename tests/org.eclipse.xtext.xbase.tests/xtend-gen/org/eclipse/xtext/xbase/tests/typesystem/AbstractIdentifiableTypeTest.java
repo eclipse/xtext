@@ -727,6 +727,12 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     this.resolvesIdentifiablesTo("<String>newArrayList.map(e|newArrayList(e)).flatten", "String");
   }
   
+  @Ignore(value = "TODO this should work")
+  @Test
+  public void testBug_391758() throws Exception {
+    this.resolvesIdentifiablesTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "ArrayList<Object>", "List<String>", "Object");
+  }
+  
   @Test
   public void testDeferredTypeArgumentResolution_002() throws Exception {
     this.resolvesIdentifiablesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = list.get(0)\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");

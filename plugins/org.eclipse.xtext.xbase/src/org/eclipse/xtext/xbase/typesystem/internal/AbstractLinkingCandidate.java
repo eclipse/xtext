@@ -208,7 +208,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			deferredBindTypeArgument(expectation, substitutedFeatureType);
 			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
 		}
-		state.getResolvedTypes().mergeIntoParent();
+		state.getStackedResolvedTypes().mergeIntoParent();
 	}
 	
 	protected void preApply() {

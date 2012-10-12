@@ -25,6 +25,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -319,6 +320,41 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"}").bindTypeArgumentsTo("? super String", "Boolean").done
 	}
 
+	@Test
+	def void testClosure_05() throws Exception {
+		("{\n" + 
+		"  val func = [|'literal']\n" + 
+		"  new testdata.ClosureClient().useProvider(func)\n" +
+		"}").bindTypeArgumentsTo("String").done
+	}
+	
+	@Test 
+	def void testClosure_06() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends Iterable<String>[]>)".bindTypeArgumentsTo("? extends Iterable<String>[]").done
+	}
+	
+	@Test 
+	def void testClosure_07() throws Exception {
+		"new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends String>)".bindTypeArgumentsTo("? extends String").done
+	}
+	
+	@Test 
+	def void testClosure_08() throws Exception {
+		// due to demand conversion we end up with Provider<String> whereas the argument type was Function0<? extends Iterable<String[]>
+		"new testdata.ClosureClient().useProvider(null as =>Iterable<String>[])".bindTypeArgumentsTo("Iterable<String>[]").done
+	}
+	
+	@Test 
+	def void testClosure_09() throws Exception {
+		// due to demand conversion we end up with Provider<String> whereas the argument type was Function0<? extends String>
+		"new testdata.ClosureClient().useProvider(null as =>String)".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test 
+	def void testClosure_10() throws Exception {
+		"new testdata.ClosureClient().invoke0(null as =>String)".bindTypeArgumentsTo("? extends String").done
+	}
+	
 	@Test def void testClosure_13() throws Exception {
 		"{ 
 			val mapper = [ x | x ]
@@ -1020,6 +1056,15 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	
 	@Test def void testFeatureCall_Bug342134_10() throws Exception {
 		"<java.util.List<String>>newArrayList().flatten".bindTypeArgumentsTo("List<String>").and("String").done
+	}
+	
+	// TODO fix the following case
+	@Ignore("TODO this should work")
+	@Test def void testBug_391758() throws Exception {
+		"{
+			val iterable = newArrayList
+			iterable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]
+		}".bindTypeArgumentsTo("Object").and("Object", "List<String>").and("String").done
 	}
 	
 	@Test def void testBounds_07() throws Exception {

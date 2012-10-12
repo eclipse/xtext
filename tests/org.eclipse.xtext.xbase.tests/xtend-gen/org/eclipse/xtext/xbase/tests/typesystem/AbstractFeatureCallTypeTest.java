@@ -667,6 +667,17 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testBug_389512() throws Exception {
+    this.resolvesFeatureCallsTo("{\n\t\t\tval CharSequence s = null\n\t\t\ts.^class.declaredFields.toMap[name].mapValues[get(s)]\n\t\t}", "CharSequence", "Class<? extends CharSequence>", "Field[]", "Map<String, Field>", "String", "Map<String, Object>", "Object", "CharSequence");
+  }
+  
+  @Ignore(value = "TODO this should work")
+  @Test
+  public void testBug_391758() throws Exception {
+    this.resolvesFeatureCallsTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "ArrayList<Object>", "ArrayList<Object>", "List<String>", "ArrayList<String>");
+  }
+  
+  @Test
   public void testBounds_01() throws Exception {
     this.resolvesFeatureCallsTo("{ var java.util.List<Integer> list = null list.get(0) }", "List<Integer>", "Integer");
   }

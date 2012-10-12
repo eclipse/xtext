@@ -218,4 +218,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitWildcardTypeReference(this, param);
 	}
+	
+	@Override
+	public boolean isWildcard() {
+		return true;
+	}
 }

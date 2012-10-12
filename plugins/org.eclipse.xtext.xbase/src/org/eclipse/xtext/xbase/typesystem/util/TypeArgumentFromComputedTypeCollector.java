@@ -8,21 +8,29 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractTypeReferencePairWalker.ParameterizedTypeReferenceTraverser;
 
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -90,7 +98,7 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 						processTypeParameter(typeParameter, declaration);
 					}
 				} else if (reference.isSubtypeOf(Iterable.class)) {
-					ArrayTypeReference array = reference.toArrayIfIterable();
+					ArrayTypeReference array = reference.tryConvertToArray();
 					if (array != null) {
 						outerVisit(declaration, array);
 					}
@@ -111,11 +119,39 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 						processTypeParameter(typeParameter, reference);
 					}
 				} else if (declaration.isSubtypeOf(Iterable.class)) {
-					ArrayTypeReference array = declaration.toArrayIfIterable();
+					ArrayTypeReference array = declaration.tryConvertToArray();
 					if (array != null) {
 						outerVisit(array, reference);
 					}
 				}
+			}
+			
+			@Override
+			protected void doVisitMatchingTypeParameters(ParameterizedTypeReference actual,
+					ParameterizedTypeReference declaration) {
+				if (actual.isFunctionType() ^ declaration.isFunctionType() /* one or the other is a function type */) {
+					FunctionTypeReference actualFunctionType = actual.tryConvertToFunctionTypeReference(false);
+					if (actualFunctionType != null) {
+						FunctionTypeReference declarationFunctionType = declaration.tryConvertToFunctionTypeReference(false);
+						if (declarationFunctionType != null) {
+							List<LightweightTypeReference> actualParameterTypes = actualFunctionType.getParameterTypes();
+							List<LightweightTypeReference> declarationParameterTypes = declarationFunctionType.getParameterTypes();
+							int max = Math.min(actualParameterTypes.size(), declarationParameterTypes.size());
+							for(int i = 0; i < max; i++) {
+								LightweightTypeReference actualParameterType = actualParameterTypes.get(i);
+								LightweightTypeReference declarationParameterType = declarationParameterTypes.get(i);
+								outerVisit(declarationParameterType, actualParameterType, declaration, VarianceInfo.IN, VarianceInfo.IN);
+							}
+							LightweightTypeReference actualReturnType = actualFunctionType.getReturnType();
+							LightweightTypeReference declarationReturnType = declarationFunctionType.getReturnType();
+							if (actualReturnType != null && declarationReturnType != null) {
+								outerVisit(declarationReturnType, actualReturnType, declaration, VarianceInfo.OUT, VarianceInfo.OUT);
+							}
+							return;
+						}
+					}
+				}
+				super.doVisitMatchingTypeParameters(actual, declaration);
 			}
 		};
 	}

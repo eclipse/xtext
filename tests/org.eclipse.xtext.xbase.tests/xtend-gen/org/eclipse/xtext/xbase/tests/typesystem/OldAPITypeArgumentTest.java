@@ -206,6 +206,30 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testClosure_06() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testClosure_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testClosure_08() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testClosure_09() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testClosure_13() throws Exception {
     Assert.fail("fails in old implementation");
   }

@@ -29,12 +29,12 @@ public class FunctionTypeConformanceStrategy extends
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<FunctionTypeReference> param) {
 		if (!rightReference.isRawType()) {
-			FunctionTypeReference functionType = getFunctionTypeReference(rightReference);
+			FunctionTypeReference functionType = rightReference.getAsFunctionTypeReference();
 			if (functionType != null) {
 				return conformanceComputer.isConformant(leftReference, functionType, param);
 			}
-			if (conformanceComputer.isFunctionType(leftReference) != TypeConformanceComputer.FunctionTypeKind.NONE) {
-				FunctionTypeReference converted = convertToFunctionTypeReference(rightReference, param.rawType);
+			if (leftReference.isFunctionType()) {
+				FunctionTypeReference converted = rightReference.tryConvertToFunctionTypeReference(param.rawType);
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftReference, converted, param);
 					if (functionsAreConformant.isConformant()) {

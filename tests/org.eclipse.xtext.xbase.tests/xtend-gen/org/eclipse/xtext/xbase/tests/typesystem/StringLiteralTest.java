@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -95,6 +96,39 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   @Test
   public void testNoExpectation_03() throws Exception {
     this.resolvesStringLiteralsTo("\'11\'", "String");
+  }
+  
+  @Test
+  public void testMemberCall_01() throws Exception {
+    this.resolvesStringLiteralsTo("\'1\'.toString", "String");
+  }
+  
+  @Test
+  @Ignore(value = "Improve typing according to expectation")
+  public void testMemberCall_02() throws Exception {
+    this.resolvesStringLiteralsTo("\'1\'.charValue", "char");
+  }
+  
+  @Test
+  @Ignore(value = "Improve typing according to expectation")
+  public void testMemberCall_03() throws Exception {
+    this.resolvesStringLiteralsTo("\'1\'.compareTo(null as Character)", "char");
+  }
+  
+  @Test
+  @Ignore(value = "Improve typing according to expectation")
+  public void testBinaryOperation_01() throws Exception {
+    this.resolvesStringLiteralsTo("{ var char c = \'1\' \'1\' == c", "char", "char");
+  }
+  
+  @Test
+  public void testBinaryOperation_02() throws Exception {
+    this.resolvesStringLiteralsTo("{ var c = \'1\' \'1\' == c", "String", "String");
+  }
+  
+  @Test
+  public void testBinaryOperation_03() throws Exception {
+    this.resolvesStringLiteralsTo("{ var String c = \'1\' \'1\' == c", "String", "String");
   }
   
   @Test

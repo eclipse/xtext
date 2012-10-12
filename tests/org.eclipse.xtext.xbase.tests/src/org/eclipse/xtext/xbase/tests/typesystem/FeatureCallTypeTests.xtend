@@ -163,6 +163,10 @@ class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testBug_389512() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testTypeByTransitiveExpectation_02() throws Exception {
 		fail("fails in old implementation")
 	}

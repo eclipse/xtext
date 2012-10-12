@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import static com.google.common.collect.Iterables.*;
-
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -25,9 +28,15 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -77,7 +86,7 @@ public class FunctionTypes {
 		List<JvmType> rawTypes = functionType.getRawTypes();
 		for(JvmType rawType: rawTypes) {
 			if (rawType instanceof JvmDeclaredType) {
-				Iterable<JvmOperation> features = filter(((JvmDeclaredType)rawType).getAllFeatures(), JvmOperation.class);
+				Iterable<JvmOperation> features = Iterables.filter(((JvmDeclaredType)rawType).getAllFeatures(), JvmOperation.class);
 				JvmOperation result = null;
 				for (JvmOperation op : features) {
 					if (isValidFunction(op)) {
@@ -158,5 +167,123 @@ public class FunctionTypes {
 			throw new WrappedException(e);
 		}
 	}
+	
+	public FunctionTypeKind getFunctionTypeKind(ParameterizedTypeReference typeReference) {
+		JvmType type = typeReference.getType();
+		if (type instanceof JvmGenericType) {
+			JvmDeclaredType outerType = ((JvmGenericType) type).getDeclaringType();
+			if (outerType != null) {
+				if (Procedures.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+					return FunctionTypeKind.PROCEDURE;
+				}
+				if (Functions.class.getCanonicalName().equals(outerType.getQualifiedName())) {
+					return FunctionTypeKind.FUNCTION;
+				}
+			}
+		}
+		return FunctionTypeKind.NONE;
+	}
 
+	/**
+	 * Converts this reference to a {@link FunctionTypeReference} if the referenced type is a SAM type.
+	 * Returns <code>null</code> if this reference does not point to a valid function type.
+	 * This is the externalized and thereby
+	 * exchangeable implementation of {@link ParameterizedTypeReference#tryConvertToFunctionTypeReference(boolean)}.
+	 * @see #getAsFunctionTypeReference(ParameterizedTypeReference)
+	 */
+	@Nullable
+	protected FunctionTypeReference tryConvertToFunctionTypeReference(ParameterizedTypeReference typeReference, boolean rawType) {
+		JvmOperation operation = findImplementingOperation(typeReference);
+		if (operation == null)
+			return null;
+		OwnedConverter converter = new OwnedConverter(typeReference.getOwner());
+		LightweightTypeReference declaredReturnType = converter.toLightweightReference(operation.getReturnType());
+		if (rawType) {
+			FunctionTypeReference result = createRawFunctionTypeRef(typeReference.getOwner(), operation, operation.getParameters().size(), declaredReturnType.isPrimitiveVoid());
+			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+					Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), typeReference.getOwner());
+			for(JvmFormalParameter parameter: operation.getParameters()) {
+				LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
+				LightweightTypeReference lowerBound = lightweight.getLowerBoundSubstitute();
+				if (lowerBound instanceof AnyTypeReference)
+					return null;
+				result.addParameterType(lowerBound);
+			}
+			result.setReturnType(substitutor.substitute(declaredReturnType));
+			return result;
+		}
+		List<JvmTypeParameter> allTypeParameters = collectAllTypeParameters(typeReference, operation);
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.CONSTRAINT, typeReference.getOwner());
+		ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> typeParameterMapping = getFunctionTypeParameterMapping(
+				typeReference, operation, typeArgumentCollector, typeReference.getOwner());
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mergedTypeParameterMapping = Maps.newLinkedHashMap();
+		for(Map.Entry<JvmTypeParameter, Collection<LightweightBoundTypeArgument>> mapping: typeParameterMapping.asMap().entrySet()) {
+			mergedTypeParameterMapping.put(mapping.getKey(), typeReference.getServices().getBoundTypeArgumentMerger().merge(mapping.getValue(), typeReference.getOwner()));			
+		}
+		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner());
+		List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
+		for(JvmFormalParameter parameter: operation.getParameters()) {
+			LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
+			LightweightTypeReference lowerBound = lightweight.getLowerBoundSubstitute();
+			if (lowerBound instanceof AnyTypeReference)
+				return null;
+			parameterTypes.add(lowerBound);
+		}
+		LightweightTypeReference returnType = substitutor.substitute(declaredReturnType);
+		FunctionTypeReference result = createFunctionTypeRef(typeReference.getOwner(), typeReference, parameterTypes, returnType.getUpperBoundSubstitute());
+		return result;
+	}
+
+	/**
+	 * Returns the equivalent {@link FunctionTypeReference} if this reference
+	 * points to a {@link Functions function} or {@link Procedures procedure}.
+	 * Otherwise returns <code>null</code>. This is the externalized and thereby
+	 * exchangeable implementation of {@link ParameterizedTypeReference#getAsFunctionTypeReference()}.
+	 * @see #tryConvertToFunctionTypeReference(ParameterizedTypeReference, boolean)
+	 */
+	@Nullable
+	public FunctionTypeReference getAsFunctionTypeReference(ParameterizedTypeReference typeReference) {
+		FunctionTypeKind functionTypeKind = typeReference.getFunctionTypeKind();
+		if (functionTypeKind == FunctionTypeKind.PROCEDURE) {
+			return getAsProcedureOrNull(typeReference);
+		} else if (functionTypeKind == FunctionTypeKind.FUNCTION) {
+			return getAsFunctionOrNull(typeReference);
+		}
+		return null;
+	}
+
+	@Nullable
+	protected FunctionTypeReference getAsFunctionOrNull(ParameterizedTypeReference typeReference) {
+		FunctionTypeReference functionType = new FunctionTypeReference(typeReference.getOwner(), typeReference.getType());
+		List<LightweightTypeReference> allTypeArguments = typeReference.getTypeArguments();
+		if (!tryAssignTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))
+			return null;
+		LightweightTypeReference lastTypeArgument = allTypeArguments.get(allTypeArguments.size() - 1);
+		functionType.addTypeArgument(lastTypeArgument);
+		LightweightTypeReference returnType = lastTypeArgument.getUpperBoundSubstitute();
+		functionType.setReturnType(returnType);
+		return functionType;
+	}
+
+	@Nullable
+	protected FunctionTypeReference getAsProcedureOrNull(ParameterizedTypeReference typeReference) {
+		FunctionTypeReference functionType = new FunctionTypeReference(typeReference.getOwner(), typeReference.getType());
+		if (!tryAssignTypeArguments(typeReference.getTypeArguments(), functionType))
+			return null;
+		JvmType voidType = typeReference.getServices().getTypeReferences().findDeclaredType(Void.TYPE, typeReference.getType());
+		functionType.setReturnType(new ParameterizedTypeReference(typeReference.getOwner(), voidType));
+		return functionType;
+	}
+	
+	protected boolean tryAssignTypeArguments(List<LightweightTypeReference> typeArguments, FunctionTypeReference result) {
+		for(LightweightTypeReference typeArgument: typeArguments) {
+			result.addTypeArgument(typeArgument);
+			LightweightTypeReference lowerBound = typeArgument.getLowerBoundSubstitute();
+			if (lowerBound instanceof AnyTypeReference) {
+				return false;
+			}
+			result.addParameterType(lowerBound);
+		}
+		return true;
+	}
 }

@@ -34,6 +34,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -495,6 +496,48 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     String _plus_2 = (_plus_1 + 
       "}");
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "? super String", "Boolean");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_05() throws Exception {
+    String _plus = ("{\n" + 
+      "  val func = [|\'literal\']\n");
+    String _plus_1 = (_plus + 
+      "  new testdata.ClosureClient().useProvider(func)\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo(_plus_2, "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_06() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends Iterable<String>[]>)", "? extends Iterable<String>[]");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_07() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.ClosureClient().useProvider(null as com.google.inject.Provider<? extends String>)", "? extends String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_08() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.ClosureClient().useProvider(null as =>Iterable<String>[])", "Iterable<String>[]");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_09() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.ClosureClient().useProvider(null as =>String)", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testClosure_10() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.ClosureClient().invoke0(null as =>String)", "? extends String");
     this.done(_bindTypeArgumentsTo);
   }
   
@@ -1572,6 +1615,15 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("<java.util.List<String>>newArrayList().flatten", "List<String>");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
     this.done(_and);
+  }
+  
+  @Ignore(value = "TODO this should work")
+  @Test
+  public void testBug_391758() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "Object");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object", "List<String>");
+    Iterator<XExpression> _and_1 = this.and(_and, "String");
+    this.done(_and_1);
   }
   
   @Test

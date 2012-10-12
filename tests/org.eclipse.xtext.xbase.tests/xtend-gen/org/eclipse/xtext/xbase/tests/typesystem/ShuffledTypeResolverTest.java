@@ -320,4 +320,10 @@ public class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
   public void testFeatureCall_38() throws Exception {
     Assert.fail("TODO deferred closure typing");
   }
+  
+  @Test
+  @Ignore(value = "TODO deferred closure typing")
+  public void testBug_389512() throws Exception {
+    Assert.fail("TODO deferred closure typing");
+  }
 }

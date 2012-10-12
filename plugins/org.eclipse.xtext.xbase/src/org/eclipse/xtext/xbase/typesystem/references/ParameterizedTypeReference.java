@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -21,12 +20,9 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
@@ -236,37 +232,6 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	
-	/**
-	 * Returns the array representation of this reference if its represents a subtype of {@link Iterable}.
-	 * If the iterable's type is a primitive wrapper, the array is <em>not</em> the primitive array but
-	 * the wrapper array. May return <code>null</code> if the conversion is not possible.
-	 * 
-	 * @return an equivalent {@link ArrayTypeReference} or <code>null</code>.
-	 */
-	@Nullable
-	public ArrayTypeReference toArrayIfIterable() {
-		if (isSubtypeOf(Iterable.class)) {
-			DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> parameterMapping = collector.getTypeParameterMapping(this);
-			JvmType iterableType = getOwner().getServices().getTypeReferences().findDeclaredType(Iterable.class, getOwner().getContextResourceSet());
-			if (iterableType instanceof JvmTypeParameterDeclarator) {
-				JvmTypeParameter typeParameter = ((JvmTypeParameterDeclarator) iterableType).getTypeParameters().get(0);
-				StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(parameterMapping, getOwner()) {
-					@Override
-					protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
-							Object param) {
-						return reference;
-					}
-				};
-				ParameterizedTypeReference unboundTypeParameter = new ParameterizedTypeReference(getOwner(), typeParameter);
-				LightweightTypeReference componentType = substitutor.substitute(unboundTypeParameter).getUpperBoundSubstitute();
-				ArrayTypeReference array = new ArrayTypeReference(getOwner(), componentType);
-				return array;
-			}
-		}
-		return null;
-	}
-	
 	@Override
 	public void accept(TypeReferenceVisitor visitor) {
 		visitor.doVisitParameterizedTypeReference(this);
@@ -288,5 +253,62 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitParameterizedTypeReference(this, param);
 	}
+
+	@Override
+	public FunctionTypeKind getFunctionTypeKind() {
+		FunctionTypes functionTypes = getServices().getFunctionTypes();
+		return functionTypes.getFunctionTypeKind(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see FunctionTypes#getAsFunctionTypeReference(ParameterizedTypeReference)
+	 */
+	@Override
+	@Nullable
+	public FunctionTypeReference getAsFunctionTypeReference() {
+		FunctionTypes functionTypes = getServices().getFunctionTypes();
+		return functionTypes.getAsFunctionTypeReference(this);
+	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see FunctionTypes#tryConvertToFunctionTypeReference(ParameterizedTypeReference, boolean)
+	 */
+	@Override
+	@Nullable
+	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
+		FunctionTypes functionTypes = getServices().getFunctionTypes();
+		return functionTypes.tryConvertToFunctionTypeReference(this, rawType);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see ArrayTypes#tryConvertToArray(ParameterizedTypeReference)
+	 */
+	@Override
+	@Nullable
+	public ArrayTypeReference tryConvertToArray() {
+		ArrayTypes arrayTypes = getServices().getArrayTypes();
+		return arrayTypes.tryConvertToArray(this);
+	}
+	
+	/**
+	 * Returns a projection of this type to the instance level. That is, type arguments will 
+	 * be replaced by their invariant bounds.
+	 * 
+	 * The instance projection of <code>ArrayList&lt;? extends Iterable&lt;? extends String&gt;&gt;</code>
+	 * is <code>ArrayList&lt;Iterable&lt;? extends String&gt;&gt;</code> since it is possible to create instances
+	 * of <code>ArrayList&lt;Iterable&lt;? extends String&gt;&gt;</code>.
+	 */
+	public ParameterizedTypeReference toInstanceTypeReference() {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), getType());
+		for(LightweightTypeReference typeArgument: getTypeArguments()) {
+			result.addTypeArgument(typeArgument.getInvariantBoundSubstitute());
+		}
+		return result;
+	}
 }
