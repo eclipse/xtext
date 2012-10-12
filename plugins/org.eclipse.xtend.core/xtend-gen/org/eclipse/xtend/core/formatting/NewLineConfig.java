@@ -50,9 +50,8 @@ public class NewLineConfig {
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this._minNewLines, "");
-    _builder.append(", ");
+    _builder.append(",");
     _builder.append(this._maxNewLines, "");
-    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
 }

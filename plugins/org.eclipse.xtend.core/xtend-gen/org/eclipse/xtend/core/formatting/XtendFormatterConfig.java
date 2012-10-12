@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class XtendFormatterConfig {
   @Named(value = "line.separator")
-  private String _lineSeparator;
+  private String _lineSeparator = "\n";
   
   public String getLineSeparator() {
     return this._lineSeparator;
@@ -42,7 +42,7 @@ public class XtendFormatterConfig {
   }
   
   @Named(value = "indentation")
-  private String _indentation;
+  private String _indentation = "\t";
   
   public void setIndentation(final String indentation) {
     this._indentation = indentation;

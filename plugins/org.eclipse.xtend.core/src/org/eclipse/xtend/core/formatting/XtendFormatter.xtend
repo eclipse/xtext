@@ -24,7 +24,6 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.JvmFormalParameter
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.XtextResource
@@ -57,15 +56,11 @@ public class XtendFormatter {
 	@Inject extension FormatterExtensions
 	@Inject extension XtendGrammarAccess
 	
-	@Inject IWhitespaceInformationProvider whitespaeInfo
 	@Inject RichStringFormatter richStringFormatter
 	
 	@Property boolean allowIdentityEdits = false
 	
 	def List<TextReplacement> format(XtextResource res, int offset, int length, XtendFormatterConfig cfg) {
-		cfg.lineSeparator = whitespaeInfo.getLineSeparatorInformation(res.URI).lineSeparator
-		cfg.indentation = whitespaeInfo.getIndentationInformation(res.URI).indentString
-		
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head as XtendFile, format)

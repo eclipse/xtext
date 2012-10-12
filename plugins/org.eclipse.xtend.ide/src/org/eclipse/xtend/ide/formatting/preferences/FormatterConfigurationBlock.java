@@ -38,7 +38,7 @@ import com.google.inject.name.Named;
  */
 public abstract class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 
-	private static final String PREVIEW_CONTENT = "package testpackage class XtendClass { extension Extension def fooBarBaz(String it) { fooBarBaz } }";
+	private static final String PREVIEW_CONTENT = "package testpackage class XtendClass { extension Extension def fooBarBaz(String it) { fooBarBaz } }"; //$NON-NLS-1$
 
 	@Inject
 	private XtendPreviewFactory previewFactory;
@@ -57,12 +57,12 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 	@Override
 	protected ModifyDialog createModifyDialog(Shell shell, ProfileManager.Profile profile,
 			ProfileManager profileManager, ProfileStore profileStore, boolean newProfile) {
-		return formatterModifyDialogFactory.create(shell, profile, profileManager, profileStore, newProfile, "", "");
+		return formatterModifyDialogFactory.create(shell, profile, profileManager, profileStore, newProfile, "", ""); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
 	protected void configurePreview(Composite composite, int numColumns, ProfileManager profileManager) {
-		createLabel(composite, "Xtend code preview:", numColumns);
+		createLabel(composite, Messages.FormatterConfigurationBlock_XtendCodePreview, numColumns);
 		XtendFormatterPreview xtendPreview = previewFactory.createNewPreview(composite, PREVIEW_CONTENT);
 		final GridData gd = new GridData(GridData.FILL_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL);
 		gd.horizontalSpan = numColumns;
@@ -92,8 +92,7 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 
 			FormatterConfigurationBlock result = new FormatterConfigurationBlock(project, access, lastSaveLoadPathKey) {
 
-				private static final String DEFUALT_PROFILE_KEY = "org.eclipse.xtend.ide.default.eclipse_profile";
-				private static final String DEFAULT_PROFILE_LABEL = "Default [built-in]";
+				private static final String DEFUALT_PROFILE_KEY = "org.eclipse.xtend.ide.default.eclipse_profile"; //$NON-NLS-1$
 				private static final int FORMATTER_SETTINGS_VERSION = 1;
 
 				@Override
@@ -124,9 +123,11 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 				}
 
 				private List<Profile> addBuiltinProfiles(final List profiles, IProfileVersioner profileVersioner) {
-					final Profile profile = new BuiltInProfile(DEFUALT_PROFILE_KEY, DEFAULT_PROFILE_LABEL,
-							getDefaultProfileSettings(), FORMATTER_SETTINGS_VERSION,
-							profileVersioner.getCurrentVersion(), profileVersioner.getProfileKind());
+
+					final Profile profile = new BuiltInProfile(DEFUALT_PROFILE_KEY,
+							Messages.FormatterConfigurationBlock_DefaultProfileLabel, getDefaultProfileSettings(),
+							FORMATTER_SETTINGS_VERSION, profileVersioner.getCurrentVersion(),
+							profileVersioner.getProfileKind());
 					profiles.add(profile);
 					return profiles;
 				}

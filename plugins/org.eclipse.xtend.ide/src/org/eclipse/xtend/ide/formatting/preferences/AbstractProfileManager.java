@@ -24,15 +24,15 @@ import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jdt.internal.corext.util.JavaModelUtil;
-import org.eclipse.jdt.internal.corext.util.Messages;
 import org.eclipse.jdt.internal.ui.preferences.PreferencesAccess;
 import org.eclipse.jdt.internal.ui.preferences.formatter.IProfileVersioner;
+import org.eclipse.osgi.util.NLS;
 import org.osgi.service.prefs.BackingStoreException;
 
 /**
  * The model for the set of profiles which are available in the workbench.
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager {
 
 	/**
@@ -59,8 +59,6 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	 * The key of the preference where the version of the current settings is stored
 	 */
 	private final String fProfileVersionKey;
-
-	private final static String SHARED_PROFILE = "org.eclipse.jdt.ui.default.shared"; //$NON-NLS-1$
 
 	/**
 	 * A map containing the available profiles, using the IDs as keys.
@@ -156,10 +154,10 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 				if (matching == null) {
 					String name;
 					if (projProfileId != null && !fProfiles.containsKey(projProfileId)) {
-						name = formattedMessage("ProfileManager_unmanaged_profile_with_name",
+						name = NLS.bind(Messages.AbstractProfileManager_unmanaged_profile_with_name,
 								projProfileId.substring(ID_PREFIX.length()));
 					} else {
-						name = formattedMessage("ProfileManager_unmanaged_profile", null);
+						name = Messages.AbstractProfileManager_unmanaged_profile;
 					}
 					// current settings do not correspond to any profile -> create a 'team' profile
 					SharedProfile shared = new SharedProfile(name, map, fProfileVersioner.getCurrentVersion(),
@@ -172,10 +170,6 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 				fSelected = matching;
 			}
 		}
-	}
-
-	protected String formattedMessage(String key, String... replacement) {
-		return Messages.format(key, replacement);
 	}
 
 	@Override
@@ -575,7 +569,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	}
 
 	private static void setLatestCompliance(Map map) {
-//		JavaModelUtil.set50ComplianceOptions(map);
+		//		JavaModelUtil.set50ComplianceOptions(map);
 	}
 
 	@Override

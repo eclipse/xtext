@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
@@ -35,9 +34,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -84,9 +80,6 @@ public class XtendFormatter {
   private XtendGrammarAccess _xtendGrammarAccess;
   
   @Inject
-  private IWhitespaceInformationProvider whitespaeInfo;
-  
-  @Inject
   private RichStringFormatter richStringFormatter;
   
   private boolean _allowIdentityEdits = false;
@@ -102,14 +95,6 @@ public class XtendFormatter {
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final XtendFormatterConfig cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
-      URI _uRI = res.getURI();
-      ILineSeparatorInformation _lineSeparatorInformation = this.whitespaeInfo.getLineSeparatorInformation(_uRI);
-      String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
-      cfg.setLineSeparator(_lineSeparator);
-      URI _uRI_1 = res.getURI();
-      IIndentationInformation _indentationInformation = this.whitespaeInfo.getIndentationInformation(_uRI_1);
-      String _indentString = _indentationInformation.getIndentString();
-      cfg.setIndentation(_indentString);
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String doc = _rootNode.getText();
