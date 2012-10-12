@@ -21,3 +21,5 @@ package pkg1 {
 		name:String
 	}
 }
+
+// XPECT param foobar
