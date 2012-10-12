@@ -84,16 +84,21 @@ public class RawTypeHelper implements IRawTypeHelper {
 		@Override
 		protected List<JvmType> doVisitArrayTypeReference(ArrayTypeReference reference, ResourceSet resourceSet) {
 			LightweightTypeReference componentType = reference.getComponentType();
-			List<JvmType> rawComponentTypes = componentType.accept(this, resourceSet);
-			List<JvmType> result = Lists.newArrayListWithCapacity(rawComponentTypes.size());
-			for(JvmType rawComponentType: rawComponentTypes) {
-				if (!rawComponentType.eIsProxy() && rawComponentType instanceof JvmComponentType) {
-					JvmArrayType arrayType = ((JvmComponentType) rawComponentType).getArrayType();
-					if (arrayType == null) {
-						arrayType = factory.createJvmArrayType();
-						arrayType.setComponentType((JvmComponentType) rawComponentType);
+			List<JvmType> result;
+			if (!componentType.isResolved()) {
+				result = createObjectReference(resourceSet);
+			} else {
+				List<JvmType> rawComponentTypes = componentType.accept(this, resourceSet);
+				result = Lists.newArrayListWithCapacity(rawComponentTypes.size());
+				for(JvmType rawComponentType: rawComponentTypes) {
+					if (!rawComponentType.eIsProxy() && rawComponentType instanceof JvmComponentType) {
+						JvmArrayType arrayType = ((JvmComponentType) rawComponentType).getArrayType();
+						if (arrayType == null) {
+							arrayType = factory.createJvmArrayType();
+							arrayType.setComponentType((JvmComponentType) rawComponentType);
+						}
+						result.add(arrayType);
 					}
-					result.add(arrayType);
 				}
 			}
 			return result;

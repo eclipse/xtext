@@ -63,7 +63,7 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 						ConformanceHint.CHECKED);
 			}
 		}
-		state.getResolvedTypes().mergeIntoParent();
+		state.getStackedResolvedTypes().mergeIntoParent();
 	}
 
 	protected void computeArgumentTypes() {

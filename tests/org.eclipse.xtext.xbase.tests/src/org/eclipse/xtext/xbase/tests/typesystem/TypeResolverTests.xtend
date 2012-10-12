@@ -564,6 +564,14 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testBounds_24() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testBounds_26() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testPropertyAccess_05() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -1411,6 +1419,13 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 	override testFeatureCall_38() throws Exception {
 		fail("TODO deferred closure typing")
 	}
+	
+	@Test
+	@Ignore("TODO deferred closure typing")
+	override testBug_389512() throws Exception {
+		fail("TODO deferred closure typing")
+	}
+	
 }
 
 /**

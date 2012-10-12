@@ -20,11 +20,14 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes
+import com.google.inject.Singleton
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
  */
+@Singleton
 class CommonTypeComputationServices {
 	@Inject
 	@Property
@@ -45,6 +48,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	FunctionTypes functionTypes;
+	
+	@Inject
+	@Property
+	ArrayTypes arrayTypes;
 	
 	@Inject
 	@Property

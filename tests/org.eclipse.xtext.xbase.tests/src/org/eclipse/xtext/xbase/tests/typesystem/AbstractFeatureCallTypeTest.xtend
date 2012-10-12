@@ -664,6 +664,22 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"<java.util.List<String>>newArrayList().flatten".resolvesFeatureCallsTo("ArrayList<List<String>>", "Iterable<String>")
 	}
 	
+	@Test def void testBug_389512() throws Exception {
+		"{
+			val CharSequence s = null
+			s.^class.declaredFields.toMap[name].mapValues[get(s)]
+		}".resolvesFeatureCallsTo("CharSequence", "Class<? extends CharSequence>", "Field[]", "Map<String, Field>", "String", "Map<String, Object>", "Object", "CharSequence")
+	}
+	
+	// TODO fix the following case
+	@Ignore("TODO this should work")
+	@Test def void testBug_391758() throws Exception {
+		"{
+			val iterable = newArrayList
+			iterable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]
+		}".resolvesFeatureCallsTo("ArrayList<Object>", "ArrayList<Object>", "List<String>", "ArrayList<String>")
+	}
+	
 	@Test def void testBounds_01() throws Exception {
 		"{ var java.util.List<Integer> list = null list.get(0) }".resolvesFeatureCallsTo("List<Integer>", "Integer")
 	}

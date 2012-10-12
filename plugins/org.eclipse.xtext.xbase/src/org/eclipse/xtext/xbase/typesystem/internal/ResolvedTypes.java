@@ -179,11 +179,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		
 		List<LightweightTypeReference> references = Lists.newArrayList();
+		boolean voidSeen = false;
 		ITypeExpectation expectation = null;
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 		for (TypeData value : values) {
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
-			references.add(reference);
+			if (reference.isPrimitiveVoid()) {
+				voidSeen = true;
+			} else {
+				references.add(reference);
+			}
 			mergedHints.addAll(value.getConformanceHints());
 			if (expectation == null) {
 				expectation = value.getExpectation();
@@ -194,7 +199,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				}
 			}
 		}
-		LightweightTypeReference mergedType = getMergedType(/*mergedHints, */references);
+		LightweightTypeReference mergedType = !references.isEmpty() || !voidSeen ? getMergedType(/*mergedHints, */references) : values.get(0).getActualType();
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;

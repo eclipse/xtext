@@ -204,6 +204,18 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 	@Ignore("fails in old implementation") @Test override testClosure_03() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testClosure_06() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testClosure_07() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testClosure_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testClosure_09() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testClosure_13() throws Exception {
 		fail("fails in old implementation")
 	}

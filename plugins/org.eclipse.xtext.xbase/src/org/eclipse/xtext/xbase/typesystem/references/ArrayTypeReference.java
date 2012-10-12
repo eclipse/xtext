@@ -33,9 +33,10 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	public ArrayTypeReference(ITypeReferenceOwner owner, LightweightTypeReference component) {
 		super(owner);
 		this.component = Preconditions.checkNotNull(component, "component");
-		if (!(component.getType() instanceof JvmComponentType)) {
-			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
-		}
+		// TODO decide about the following constraint which prevents (Number & Serializable)[]
+//		if (!(component.getType() instanceof JvmComponentType)) {
+//			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
+//		}
 		if (!component.isOwnedBy(owner)) {
 			throw new IllegalArgumentException("component is not valid in current context");
 		}
@@ -91,6 +92,12 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isArray() {
 		return true;
+	}
+	
+	@Override
+	public ParameterizedTypeReference tryConvertToListType() {
+		ArrayTypes arrayTypes = getServices().getArrayTypes();
+		return arrayTypes.convertToList(this);
 	}
 	
 	@Override

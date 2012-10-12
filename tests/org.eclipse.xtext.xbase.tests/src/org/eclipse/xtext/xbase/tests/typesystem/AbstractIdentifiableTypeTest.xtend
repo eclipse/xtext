@@ -646,6 +646,15 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 		"<String>newArrayList.map(e|newArrayList(e)).flatten".resolvesIdentifiablesTo("String")
 	}
 	
+	// TODO fix the following case
+	@Ignore("TODO this should work")
+	@Test def void testBug_391758() throws Exception {
+		"{
+			val iterable = newArrayList
+			iterable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]
+		}".resolvesIdentifiablesTo("ArrayList<Object>", "List<String>", "Object")
+	}
+	
 	@Test def void testDeferredTypeArgumentResolution_002() throws Exception {
 		"{
 			val list = newArrayList

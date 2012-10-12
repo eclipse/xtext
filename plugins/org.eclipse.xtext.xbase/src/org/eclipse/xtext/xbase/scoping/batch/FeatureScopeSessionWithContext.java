@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,10 +49,12 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 			}
 		}
 		if (type != null && contextType instanceof JvmDeclaredType) {
-			 if (((JvmDeclaredType) contextType).getPackageName().equals(type.getPackageName())) {
-				 if (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)
-					 return true;
-			 }
+			String packageName = ((JvmDeclaredType) contextType).getPackageName();
+			if (Strings.isEmpty(packageName) && Strings.isEmpty(type.getPackageName())
+					|| (packageName != null && packageName.equals(type.getPackageName()))) {
+				if (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)
+					return true;
+			}
 		}
 		return super.isVisible(feature);
 	}

@@ -173,7 +173,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	protected void applyImplicitReceiver() {
 		XExpression implicitReceiver = getImplicitReceiver();
 		if (implicitReceiver != null && implicitReceiver.eResource() == null) {
-			StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			LightweightTypeReference receiverType = getImplicitReceiverType();
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			if (receiverType == null) {
@@ -231,7 +231,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (!(argumentState instanceof AbstractTypeComputationState))
 			throw new IllegalArgumentException("argumentState was " + argumentState);
 		AbstractTypeComputationState castedArgumentState = (AbstractTypeComputationState) argumentState;
-		StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+		ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 		LightweightTypeReference copiedDeclaredType = declaredType != null ? declaredType.copyInto(resolvedTypes.getReferenceOwner()) : null;
 		TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 		LightweightTypeReference copiedReceiverType = knownType.copyInto(resolvedTypes.getReferenceOwner());

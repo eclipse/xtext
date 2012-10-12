@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class ExpressionTypeComputationState extends AbstractStackedTypeComputationState {
 
-	private final XExpression expression;
+	protected final XExpression expression;
 
 	protected ExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -79,14 +79,9 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		boolean result = featureCall.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 		return result;
 	}
-	
-	protected XExpression getExpression() {
-		return expression;
-	}
-	
-	@Override
-	protected StackedResolvedTypes getResolvedTypes() {
-		return (StackedResolvedTypes) super.getResolvedTypes();
+
+	protected StackedResolvedTypes getStackedResolvedTypes() {
+		return (StackedResolvedTypes) resolvedTypes;
 	}
 	
 }

@@ -23,7 +23,7 @@ public class ResolvedImplicitReceiver extends ImplicitReceiver {
 
 	@Override
 	public void apply() {
-		StackedResolvedTypes resolvedTypes = getState().getResolvedTypes();
+		ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 		TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 		LightweightTypeReference actualType = resolvedTypes.getActualType(getFeature());
 		if (actualType == null)

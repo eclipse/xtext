@@ -3,14 +3,19 @@
  */
 package org.eclipse.xtext.purexbase;
 
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+
+import com.google.inject.Binder;
 
 
 /**
@@ -23,15 +28,26 @@ public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.Abstract
 		return XbaseBatchScopeProvider.class;
 	}
 	
-	public java.lang.Class<? extends ITypeProvider> bindITypeProvider() {
+	@Override
+	public void configureLinkingIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
+				.to(XbaseBatchScopeProvider.class);
+	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return BatchLinkableResource.class;
+	}
+	
+	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return XbaseBatchTypeProvider.class;
 	}
 	
-	public java.lang.Class<? extends IBatchTypeResolver> bindIBatchTypeResolver() {
+	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 		return LogicalContainerAwareBatchTypeResolver.class;
 	}
 	
-	public java.lang.Class<? extends IReentrantTypeResolver> bindIReentrantTypeResolver() {
+	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
 		return LogicalContainerAwareReentrantTypeResolver.class;
 	}
 }

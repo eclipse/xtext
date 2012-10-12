@@ -140,5 +140,15 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitFunctionTypeReference(this, param);
 	}
+	
+	@Override
+	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
+		return this;
+	}
+	
+	@Override
+	public FunctionTypeReference getAsFunctionTypeReference() {
+		return this;
+	}
 
 }

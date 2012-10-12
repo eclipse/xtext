@@ -19,6 +19,7 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.runner.RunWith
 import org.eclipse.xtext.junit4.InjectWith
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,6 +57,26 @@ class StringLiteralTest extends AbstractXbaseTestCase {
 	}
 	@Test def void testNoExpectation_03() throws Exception {
 		"'11'".resolvesStringLiteralsTo("String")
+	}
+	
+	@Test def void testMemberCall_01() throws Exception {
+		"'1'.toString".resolvesStringLiteralsTo("String")
+	}
+	@Test @Ignore("Improve typing according to expectation") def void testMemberCall_02() throws Exception {
+		"'1'.charValue".resolvesStringLiteralsTo("char")
+	}
+	@Test @Ignore("Improve typing according to expectation") def void testMemberCall_03() throws Exception {
+		"'1'.compareTo(null as Character)".resolvesStringLiteralsTo("char")
+	}
+	
+	@Test @Ignore("Improve typing according to expectation") def void testBinaryOperation_01() throws Exception {
+		"{ var char c = '1' '1' == c".resolvesStringLiteralsTo("char", "char")
+	}
+	@Test def void testBinaryOperation_02() throws Exception {
+		"{ var c = '1' '1' == c".resolvesStringLiteralsTo("String", "String")
+	}
+	@Test def void testBinaryOperation_03() throws Exception {
+		"{ var String c = '1' '1' == c".resolvesStringLiteralsTo("String", "String")
 	}
 	
 	@Test def void testCharExpectation_01() throws Exception {

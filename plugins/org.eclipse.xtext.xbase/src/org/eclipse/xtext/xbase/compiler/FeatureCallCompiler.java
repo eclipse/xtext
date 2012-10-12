@@ -120,11 +120,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (expressionHelper.isShortCircuiteBooleanOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
-			XExpression receiver = featureCallToJavaMapping.getActualReceiver(expr);
+			XExpression receiver = getActualReceiver(expr);
 			if (receiver != null) {
 				prepareExpression(receiver, b);
 			}
-			for (XExpression arg : featureCallToJavaMapping.getActualArguments(expr)) {
+			for (XExpression arg : getActualArguments(expr)) {
 				prepareExpression(arg, b);
 			}
 			if (!isReferenced) {
@@ -146,6 +146,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				declareFreshLocalVariable(expr, b, later);
 			}
 		}
+	}
+
+	protected List<XExpression> getActualArguments(final XAbstractFeatureCall expr) {
+		return featureCallToJavaMapping.getActualArguments(expr);
+	}
+
+	@Nullable
+	protected XExpression getActualReceiver(final XAbstractFeatureCall expr) {
+		return featureCallToJavaMapping.getActualReceiver(expr);
 	}
 
 	protected void _toJavaStatement(final XFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
@@ -306,11 +315,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if (call.getFeature() instanceof JvmExecutable) {
 			final JvmExecutable executable = (JvmExecutable) call.getFeature();
 			if (!executable.getTypeParameters().isEmpty()) {
-				XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
+				XExpression receiver = getActualReceiver(call);
 				final JvmTypeReference receiverType = receiver != null ? getTypeProvider().getType(receiver) : null;
 				final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 				final List<JvmTypeReference> argumentTypes = Lists.newArrayList();
-				for (XExpression argument : featureCallToJavaMapping.getActualArguments(call)) {
+				for (XExpression argument : getActualArguments(call)) {
 					argumentTypes.add(getTypeProvider().getType(argument));
 				}
 
@@ -561,7 +570,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				}
 			}
 		}
-		if (isStatic(call.getFeature())) {
+		if (call.isStatic()) {
 			if (expressionHelper.findInlineAnnotation(call) != null) {
 				return false;
 			}
@@ -580,7 +589,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 			return true;
 		}
-		XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
+		XExpression receiver = getActualReceiver(call);
 		if (receiver != null) {
 			internalToJavaExpression(receiver, b);
 			return true;
@@ -651,15 +660,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return featureCallToJavaMapping.isTargetsMemberSyntaxCall(call, call.getFeature(), call.getImplicitReceiver());
 	}
 
-	protected boolean isStatic(JvmIdentifiableElement feature) {
-		if (feature instanceof JvmOperation) {
-			return ((JvmOperation) feature).isStatic();
-		} else if (feature instanceof JvmField) {
-			return ((JvmField) feature).isStatic();
-		}
-		return false;
-	}
-
 	protected void assignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean isExpressionContext) {
 		final JvmIdentifiableElement feature = expr.getFeature();
 		if (feature instanceof JvmOperation) {
@@ -703,7 +703,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
-			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
+			List<XExpression> arguments = getActualArguments(call);
 			if (!arguments.isEmpty()) {
 				XExpression receiver = (call instanceof XMemberFeatureCall) ? ((XMemberFeatureCall)call).getMemberCallTarget() : null;
 				boolean shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
@@ -729,7 +729,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		if (formatString == null)
 			throw new IllegalStateException();
-		List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
+		List<XExpression> arguments = getActualArguments(call);
 		Matcher matcher = pattern.matcher(formatString);
 		int prevEnd = 0;
 		while(matcher.find()) {
