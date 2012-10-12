@@ -10,6 +10,8 @@ package org.eclipse.xtend.ide.formatting
 import java.util.List
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig
 import static org.eclipse.xtend.ide.formatting.SettingsData$WidgetType.*
+import org.eclipse.xtend.core.formatting.NewLineConfig
+import org.eclipse.xtend.ide.formatting.preferences.Messages
 
 class FormatterPreferenceInfra {
 	public static String PREFIX = "org.eclipse.xtend.formatter";
@@ -18,12 +20,13 @@ class FormatterPreferenceInfra {
 		return new FormatterSetting(category, name, label, NUMBER_FIELD, null)
 	}
 
-	def static createSetting(SettingsData$Category category, SettingsData$WidgetType type, String name, String label,
+	def static createSetting(SettingsData$Category category, SettingsData$WidgetType type, String name,
 		List<String> values) {
+		val label = Messages::bind(name, null)
 		return new FormatterSetting(category, name, label, type, values)
 	}
 
-	 def static Iterable<FormatterSetting> settingsByCategory(SettingsData$Category category, XtendFormatterConfig config) {
+	def static Iterable<FormatterSetting> settingsByCategory(SettingsData$Category category, XtendFormatterConfig config) {
 		return settings(config).filter([ it.category == category ])
 	}
 
@@ -33,10 +36,16 @@ class FormatterPreferenceInfra {
 			val key = entry.key
 			val category = key.split("\\.").head
 			var catEnum = SettingsData$Category::byName(category)
-			if (typeof(int).equals(entry.value.type))
-				settings.add(
-					createSetting(catEnum, SettingsData$WidgetType::NUMBER_FIELD, key, key.toFirstUpper,
-						newArrayList(entry.value.name)))
+			switch (entry.value.type) {
+				case typeof(int):
+					settings.add(
+						createSetting(catEnum, SettingsData$WidgetType::NUMBER_FIELD, key,
+							newArrayList(entry.value.name)))
+				case typeof(NewLineConfig):
+					settings.add(
+						createSetting(catEnum, SettingsData$WidgetType::MIN_MAX_FIELDS, key,
+							newArrayList(entry.value.name)))
+			}
 		}
 		return settings
 	}
@@ -50,12 +59,27 @@ class FormatterPreferenceInfra {
 			}
 			}'''
 			case SettingsData$Category::LINE_WRAPPING: '''
-			class Movies {
-			  def readMovies() {
-			    val movies = new FileReader('data.csv').readLines.map [ line |  val segments = line.split('  ').iterator
-			    return new Movie(segments.next, Integer::parseInt(segments.next), Double::parseDouble(segments.next), Long::parseLong(segments.next),  segments.toSet)]
-			  }
-			}'''
+			package test
+
+			import java.io.FileReader
+			import java.util.List
+			
+			class XtendClass {
+			
+				def testy() {
+				}
+			
+				def readMovies() {
+					val movies = new FileReader('data.csv').readLines.map[
+						line |line.toFirstUpper.toFirstLower.toFirstLower.toFirstUpper]
+					return movies
+				}
+			
+				def List<String> readLines(FileReader fr) {
+					return newArrayList("")
+				}
+			}
+'''
 		default: '''
 			class Movies {
 			def settings(XtendFormatterConfig config) {

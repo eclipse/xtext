@@ -60,7 +60,7 @@ public interface SettingsData {
 	 * @author Dennis Huebner - Initial contribution and API
 	 */
 	public static enum WidgetType {
-		COMBO_BOX, NUMBER_FIELD;
+		COMBO_BOX, NUMBER_FIELD, MIN_MAX_FIELDS;
 	}
 
 }

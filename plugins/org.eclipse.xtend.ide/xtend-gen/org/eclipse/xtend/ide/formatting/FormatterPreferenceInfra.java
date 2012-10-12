@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.ide.formatting.FormatterSetting;
 import org.eclipse.xtend.ide.formatting.SettingsData.Category;
 import org.eclipse.xtend.ide.formatting.SettingsData.WidgetType;
+import org.eclipse.xtend.ide.formatting.preferences.Messages;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class FormatterPreferenceInfra {
@@ -27,7 +28,8 @@ public class FormatterPreferenceInfra {
     return _formatterSetting;
   }
   
-  public static FormatterSetting createSetting(final Category category, final WidgetType type, final String name, final String label, final List<String> values) {
+  public static FormatterSetting createSetting(final Category category, final WidgetType type, final String name, final List<String> values) {
+    final String label = Messages.bind(name, null);
     FormatterSetting _formatterSetting = new FormatterSetting(category, name, label, type, values);
     return _formatterSetting;
   }
@@ -56,14 +58,27 @@ public class FormatterPreferenceInfra {
         Category catEnum = Category.byName(category);
         Field _value = entry.getValue();
         Class<? extends Object> _type = _value.getType();
-        boolean _equals = int.class.equals(_type);
-        if (_equals) {
-          String _firstUpper = StringExtensions.toFirstUpper(key);
-          Field _value_1 = entry.getValue();
-          String _name = _value_1.getName();
-          ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_name);
-          FormatterSetting _createSetting = FormatterPreferenceInfra.createSetting(catEnum, WidgetType.NUMBER_FIELD, key, _firstUpper, _newArrayList);
-          settings.add(_createSetting);
+        final Class<? extends Object> _switchValue = _type;
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,int.class)) {
+            _matched=true;
+            Field _value_1 = entry.getValue();
+            String _name = _value_1.getName();
+            ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_name);
+            FormatterSetting _createSetting = FormatterPreferenceInfra.createSetting(catEnum, WidgetType.NUMBER_FIELD, key, _newArrayList);
+            settings.add(_createSetting);
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_switchValue,NewLineConfig.class)) {
+            _matched=true;
+            Field _value_2 = entry.getValue();
+            String _name_1 = _value_2.getName();
+            ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList(_name_1);
+            FormatterSetting _createSetting_1 = FormatterPreferenceInfra.createSetting(catEnum, WidgetType.MIN_MAX_FIELDS, key, _newArrayList_1);
+            settings.add(_createSetting_1);
+          }
         }
       }
     }
@@ -93,21 +108,51 @@ public class FormatterPreferenceInfra {
       if (Objects.equal(category,Category.LINE_WRAPPING)) {
         _matched=true;
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("class Movies {");
+        _builder_1.append("package test");
         _builder_1.newLine();
-        _builder_1.append("  ");
+        _builder_1.newLine();
+        _builder_1.append("import java.io.FileReader");
+        _builder_1.newLine();
+        _builder_1.append("import java.util.List");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("class XtendClass {");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("def testy() {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("\t");
         _builder_1.append("def readMovies() {");
         _builder_1.newLine();
-        _builder_1.append("    ");
-        _builder_1.append("val movies = new FileReader(\'data.csv\').readLines.map [ line |  val segments = line.split(\'  \').iterator");
+        _builder_1.append("\t\t");
+        _builder_1.append("val movies = new FileReader(\'data.csv\').readLines.map[");
         _builder_1.newLine();
-        _builder_1.append("    ");
-        _builder_1.append("return new Movie(segments.next, Integer::parseInt(segments.next), Double::parseDouble(segments.next), Long::parseLong(segments.next),  segments.toSet)]");
+        _builder_1.append("\t\t\t");
+        _builder_1.append("line |line.toFirstUpper.toFirstLower.toFirstLower.toFirstUpper]");
         _builder_1.newLine();
-        _builder_1.append("  ");
+        _builder_1.append("\t\t");
+        _builder_1.append("return movies");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("def List<String> readLines(FileReader fr) {");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("return newArrayList(\"\")");
+        _builder_1.newLine();
+        _builder_1.append("\t");
         _builder_1.append("}");
         _builder_1.newLine();
         _builder_1.append("}");
+        _builder_1.newLine();
         _switchResult = _builder_1;
       }
     }
