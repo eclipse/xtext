@@ -306,7 +306,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 			minMaxRange = new NewLineConfig("0,0");
 			if (hasKey) {
 				try {
-					String s = getPreferences().get(getKey());
+					String s = (String) getPreferences().get(getKey());
 					minMaxRange = new NewLineConfig(s);
 				} catch (NumberFormatException e) {
 					//TODO log an error
