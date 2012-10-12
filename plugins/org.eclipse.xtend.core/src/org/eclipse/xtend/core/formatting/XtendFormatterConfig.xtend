@@ -88,6 +88,8 @@ class NewLineConfig {
 		}
 	}
 
+	//TODO implement equals method
+	
 	override toString() 
 		'''«_minNewLines»,«_maxNewLines»'''
 }
