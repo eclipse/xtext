@@ -4,17 +4,20 @@ import org.eclipse.xpect.util.ITypedProvider;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 
 public class AbstractExpectation implements ITypedProvider {
 	private final String document;
 	private final int length;
 	private final int offset;
 
-	public AbstractExpectation(String document, int offset, int lenght) {
+	public AbstractExpectation(String document, int offset, int length) {
 		super();
+		Preconditions.checkElementIndex(offset, document.length());
+		Preconditions.checkElementIndex(offset + length, document.length());
 		this.document = document;
 		this.offset = offset;
-		this.length = lenght;
+		this.length = length;
 	}
 
 	@Override
@@ -31,6 +34,8 @@ public class AbstractExpectation implements ITypedProvider {
 	}
 
 	protected String getExpectation(String indentation) {
+		if (length < 0)
+			return "";
 		String[] lines = document.substring(offset, offset + length).split("\\n");
 		if (lines.length == 1)
 			return lines[0];

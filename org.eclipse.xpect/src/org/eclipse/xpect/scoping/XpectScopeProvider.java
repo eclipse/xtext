@@ -101,12 +101,12 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 			Set<String> packages = Sets.newLinkedHashSet();
 			AbstractComponent current = ((Component) instance).getAssignment().getInstance();
 			while (true) {
-				JvmDeclaredType componentClass = current.getComponentClass();
-				if (componentClass != null && !componentClass.eIsProxy())
-					packages.add(componentClass.getPackageName());
-				if (current instanceof Component)
+				if (current instanceof Component) {
+					JvmDeclaredType componentClass = current.getComponentClass();
+					if (componentClass != null && !componentClass.eIsProxy())
+						packages.add(componentClass.getPackageName());
 					current = ((Component) current).getAssignment().getInstance();
-				else if (current instanceof XpectTest) {
+				} else if (current instanceof XpectTest) {
 					JvmDeclaredType setup = ((XpectTest) current).getSetupClass();
 					if (setup != null)
 						packages.add(setup.getPackageName());

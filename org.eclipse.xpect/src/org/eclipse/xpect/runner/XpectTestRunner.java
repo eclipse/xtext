@@ -97,12 +97,14 @@ public class XpectTestRunner {
 			IXpectSingleParameterProvider claimer = method.getSingleParameterProvider().get(i);
 			if (claimer != null) {
 				IRegion claim = claimer.claimRegion(this, i);
-				result.add(new ClaimedRegion(claimer, claim));
+				if (claim != null)
+					result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
 		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProvider()) {
 			IRegion claim = claimer.claimRegion(this);
-			result.add(new ClaimedRegion(claimer, claim));
+			if (claim != null)
+				result.add(new ClaimedRegion(claimer, claim));
 		}
 		return result;
 	}

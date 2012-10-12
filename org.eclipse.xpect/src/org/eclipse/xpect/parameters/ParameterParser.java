@@ -12,12 +12,12 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.xpect.parameters.Offset.OffsetProvider;
 import org.eclipse.xpect.parameters.ParameterParser.ParameterParserImpl;
 import org.eclipse.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
 import org.eclipse.xpect.runner.XpectFrameworkMethod;
 import org.eclipse.xpect.runner.XpectMultiParameterProvider;
 import org.eclipse.xpect.runner.XpectTestRunner;
+import org.eclipse.xpect.util.AbstractOffsetProvider;
 import org.eclipse.xpect.util.IRegion;
 import org.eclipse.xpect.util.ITypedProvider;
 import org.eclipse.xpect.util.IntegerProvider;
@@ -25,7 +25,6 @@ import org.eclipse.xpect.util.Region;
 import org.eclipse.xpect.util.TypedProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl;
@@ -147,20 +146,7 @@ public @interface ParameterParser {
 		protected ITypedProvider convertValue(XpectTestRunner invocation, Token token, String value) {
 			switch (token) {
 			case OFFSET:
-				int add = value.indexOf('|');
-				if (add >= 0)
-					value = value.substring(0, add) + value.substring(add + 1);
-				else
-					add = 0;
-				INode node = NodeModelUtils.getNode(invocation.getInvocation());
-				int offset = node.getOffset() + node.getLength();
-				String text = invocation.getDocument();
-				int result = text.indexOf(value, offset);
-				if (result >= 0) {
-					int off = result + add;
-					return new OffsetProvider((XtextResource) invocation.getInvocation().eResource(), off);
-				} else
-					throw new RuntimeException("OFFSET '" + value + "' not found");
+				return new MatchingOffsetProvider(invocation, value);
 			case INT:
 				return new IntegerProvider(value);
 			case ID:
@@ -255,6 +241,45 @@ public @interface ParameterParser {
 			Map<String, ITypedProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);
 			return associateParameterValues(invocation, parsedParams);
 		}
+	}
+
+	public static class MatchingOffsetProvider extends AbstractOffsetProvider {
+		protected final XpectTestRunner invocation;
+		protected final String value;
+
+		public MatchingOffsetProvider(XpectTestRunner invocation, String value) {
+			super();
+			this.invocation = invocation;
+			this.value = value;
+		}
+
+		public XpectTestRunner getInvocation() {
+			return invocation;
+		}
+
+		public String getStringValue() {
+			return value;
+		}
+
+		@Override
+		public int getOffset() {
+			String val = value;
+			int add = val.indexOf('|');
+			if (add >= 0)
+				val = val.substring(0, add) + val.substring(add + 1);
+			else
+				add = 0;
+			INode node = NodeModelUtils.getNode(invocation.getInvocation());
+			int offset = node.getOffset() + node.getLength();
+			String text = invocation.getDocument();
+			int result = text.indexOf(val, offset);
+			if (result >= 0) {
+				int off = result + add;
+				return off;
+			} else
+				throw new RuntimeException("OFFSET '" + val + "' not found");
+		}
+
 	}
 
 	public enum Token {

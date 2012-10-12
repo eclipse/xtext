@@ -6,9 +6,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xpect.setup.AbstractXpectSetup;
 import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.util.TypedProvider;
+import org.eclipse.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Guice;
@@ -31,22 +33,26 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 	public FileCtx beforeFile(IFileSetupContext frameworkCtx, ClassCtx userCtx, ISetupInitializer<FileCtx> initializer) throws IOException {
 		FileCtx ctx = new FileCtx();
 		initializer.initialize(ctx);
-		Resource resource = loadThisResource(frameworkCtx, ctx);
+		Injector injector = Guice.createInjector(ctx.getModuleProvider().getRuntimeModule());
+		Resource resource = loadThisResource(injector, frameworkCtx, ctx);
 		ctx.getValidate().validate(resource);
 		return ctx;
 	}
 
 	@Override
 	public TestCtx beforeTest(ITestSetupContext frameworkCtx, FileCtx userCtx) throws IOException {
-		Resource res = loadThisResource(frameworkCtx, userCtx);
+		Injector injector = Guice.createInjector(userCtx.getModuleProvider().getRuntimeModule());
+		injector.injectMembers(frameworkCtx.getTestInstance());
+		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
+		frameworkCtx.installParameterAdapter(new XtextOffsetAdapter(res));
 		frameworkCtx.installParameterValue(ThisResource.class, new TypedProvider(res));
+		frameworkCtx.installParameterValue(ThisOffset.class, new ThisOffsetProvider(frameworkCtx.getXpectInvocation(), res));
 		if (!res.getContents().isEmpty())
 			frameworkCtx.installParameterValue(ThisModel.class, new TypedProvider(res.getContents().get(0)));
 		return null;
 	}
 
-	public Resource loadThisResource(IFileSetupContext frameworkCtx, FileCtx userCtx) throws IOException {
-		Injector injector = Guice.createInjector(userCtx.getModuleProvider().getRuntimeModule());
+	public XtextResource loadThisResource(Injector injector, IFileSetupContext frameworkCtx, FileCtx userCtx) throws IOException {
 		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = injector.getInstance(org.eclipse.emf.ecore.resource.ResourceSet.class);
 		if (resourceSet instanceof XtextResourceSet) {
 			((XtextResourceSet) resourceSet).setClasspathURIContext(frameworkCtx.getTestClass());
@@ -60,7 +66,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 				if (file instanceof ThisFile)
 					result = res;
 			}
-		return result;
+		return (XtextResource) result;
 	}
 
 }

@@ -1,0 +1,21 @@
+
+
+
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest
+	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider {}
+	ResourceSet {
+		ThisFile {}
+	}
+END_CLASS */
+
+
+ 
+package pkg1 {
+	entity MyEntity {
+		// XPECT scopedElements at int --> foo, bar
+		id:int
+		name:String
+	}
+}
+
+

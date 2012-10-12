@@ -1,0 +1,58 @@
+
+
+
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.resourcedescription.DMResourceDescriptionTest
+	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider {}
+	ResourceSet {
+		ThisFile {}
+	}
+END_CLASS */
+
+
+/* XPECT exportedObjects ---
+	domainmodel::Entity: pkg1.MyEntity
+	domainmodel::PackageDeclaration: pkg1
+	domainmodel::Property: pkg1.MyEntity.id
+	domainmodel::Property: pkg1.MyEntity.name
+	types::JvmConstructor: pkg1.MyEntity
+	types::JvmConstructor: pkg1.MyEntity
+	types::JvmField: pkg1.MyEntity.id
+	types::JvmField: pkg1.MyEntity.name
+	types::JvmGenericType: pkg1.MyEntity
+	types::JvmOperation: pkg1.MyEntity.getId
+	types::JvmOperation: pkg1.MyEntity.getName
+	types::JvmOperation: pkg1.MyEntity.setId
+	types::JvmOperation: pkg1.MyEntity.setName
+	types::JvmOperation: pkg1.MyEntity.toString
+--- */
+
+/* XPECT importedNames ---
+--- */
+
+/* XPECT referenceDescriptions ---
+	/0/@elements.0/@elements.0/@features.0::/@type type       --> java:/Primitives#int
+	/0/@elements.0/@elements.0/@features.1::/@type type       --> java:/Objects/java.lang.String#java.lang.String
+	/1/@members.1::/@parameters.0/@parameterType   type       --> java:/Objects/org.eclipse.xtext.xbase.lib.Procedures#org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+	/1/@members.2::/@type                          type       --> java:/Primitives#int
+	/1/@members.3::/@returnType                    type       --> java:/Primitives#int
+	/1/@members.4::/@parameters.0/@parameterType   type       --> java:/Primitives#int
+	/1/@members.4::/@returnType                    type       --> java:/Primitives#void
+	/1/@members.5::/@type                          type       --> java:/Objects/java.lang.String#java.lang.String
+	/1/@members.6::/@returnType                    type       --> java:/Objects/java.lang.String#java.lang.String
+	/1/@members.7::/@parameters.0/@parameterType   type       --> java:/Objects/java.lang.String#java.lang.String
+	/1/@members.7::/@returnType                    type       --> java:/Primitives#void
+	/1/@members.8::/@annotations.0                 annotation --> java:/Objects/java.lang.Override#java.lang.Override
+	/1/@members.8::/@returnType                    type       --> java:/Objects/java.lang.String#java.lang.String
+	/1::/@superTypes.0                             type       --> java:/Objects/java.lang.Object#java.lang.Object
+--- */
+
+ 
+package pkg1 {
+	entity MyEntity {
+		
+		id:int
+		name:String
+	}
+}
+
+

@@ -13,6 +13,7 @@ import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.setup.IXpectSetup;
 import org.eclipse.xpect.setup.SetupContext;
 import org.eclipse.xpect.setup.SetupInitializer;
+import org.eclipse.xpect.util.IssueVisualizer;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -21,11 +22,11 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.ComparisonFailure;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class XpectFileRunner {
@@ -93,8 +94,11 @@ public class XpectFileRunner {
 	protected XpectFile loadXpectFile(XtextResource res) throws IOException {
 		IResourceValidator validator = res.getResourceServiceProvider().get(IResourceValidator.class);
 		List<Issue> issues = validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
-		if (!issues.isEmpty())
-			throw new IllegalStateException("Errors in " + res.getURI() + "\n" + Joiner.on("\n").join(issues));
+		if (!issues.isEmpty()) {
+			String document = res.getParseResult().getRootNode().getText();
+			String errors = new IssueVisualizer().visualize(document, issues);
+			throw new ComparisonFailure("Errors in " + res.getURI(), document.trim(), errors.trim());
+		}
 		if (res.getContents().isEmpty())
 			throw new IllegalStateException("Resource for " + res.getURI() + " is empty.");
 		EObject obj = res.getContents().get(0);
