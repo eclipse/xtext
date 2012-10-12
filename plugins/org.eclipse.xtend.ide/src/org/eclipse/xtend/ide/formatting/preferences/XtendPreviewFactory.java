@@ -11,11 +11,12 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
-import org.eclipse.xtend.ide.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
@@ -30,37 +31,35 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendPreviewFactory {
-	static class XtendFormatterPreview {
-		private final PreviewManager previewManager;
-		private final EmbeddedEditor editorHandle;
+	@Inject
+	private EmbeddedEditorFactory editorFactory;
+	@Inject
+	private IEditedResourceProvider resourceProvider;
+	@Inject
+	protected XtendFormatterFactory xtendFormatterFactory;
 
-		public XtendFormatterPreview(PreviewManager previewManager, EmbeddedEditor editorHandle, String previewContent) {
-			super();
-			this.previewManager = previewManager;
+	public XtendFormatterPreview createNewPreview(Composite composite, String previewContent) {
+		EmbeddedEditor embeddedEditor = editorFactory.newEditor(resourceProvider)
+				.withResourceValidator(IResourceValidator.NULL).readOnly().withParent(composite);
+		embeddedEditor.createPartialEditor().updateModel("", previewContent, "");
+		return new XtendFormatterPreview(embeddedEditor, xtendFormatterFactory);
+	}
+
+	static class XtendFormatterPreview implements Observer {
+		private final EmbeddedEditor editorHandle;
+		private final XtendFormatterFactory xtendFormatterFactory;
+
+		public XtendFormatterPreview(EmbeddedEditor editorHandle, XtendFormatterFactory xtendFormatterFactory) {
 			this.editorHandle = editorHandle;
-			this.editorHandle.createPartialEditor().updateModel("", previewContent, "");
+			this.xtendFormatterFactory = xtendFormatterFactory;
 		}
 
 		public EmbeddedEditor getEditor() {
 			return editorHandle;
 		}
 
-		public void doFormat(Map<String, String> settings) {
-			previewManager.doFormat(settings);
-		}
-
 		public Observer getObserver() {
-			return previewManager;
-		}
-	}
-
-	static class PreviewManager implements Observer {
-		private EmbeddedEditor handle;
-		private XtendFormatterFactory xtendFormatterFactory;
-
-		public PreviewManager(EmbeddedEditor handle, XtendFormatterFactory xtendFormatterFactory) {
-			this.handle = handle;
-			this.xtendFormatterFactory = xtendFormatterFactory;
+			return this;
 		}
 
 		public void update(Observable o, Object arg) {
@@ -76,31 +75,18 @@ public class XtendPreviewFactory {
 			}
 		}
 
-		public void doFormat(final Map<String, String> map) {
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		public void doFormat(final Map map) {
 			xtendFormatterFactory.setConfigurationProvider(new IFormatterConfigurationProvider() {
-				public XtendFormatterConfig rendererConfiguration() {
+				public XtendFormatterConfig getFormatterConfiguration(Resource resource) {
 					return new XtendFormatterConfig(map);
 				}
 			});
-			xtendFormatterFactory.createConfiguredFormatter(null, null).format(handle.getDocument(),
-					new Region(0, handle.getDocument().getLength()));
-			handle.getViewer().refresh();
+			xtendFormatterFactory.createConfiguredFormatter(null, null).format(editorHandle.getDocument(),
+					new Region(0, editorHandle.getDocument().getLength()));
+//			editorHandle.getViewer().refresh();
 		}
 
 	}
 
-	@Inject
-	private EmbeddedEditorFactory editorFactory;
-	@Inject
-	private IEditedResourceProvider resourceProvider;
-	@Inject
-	protected XtendFormatterFactory xtendFormatterFactory;
-
-	public XtendFormatterPreview createNewPreview(Composite composite, String previewContent) {
-		EmbeddedEditor embeddedEditor = editorFactory.newEditor(resourceProvider)
-				.withResourceValidator(IResourceValidator.NULL).readOnly().withParent(composite);
-		XtendPreviewFactory.PreviewManager updater = new XtendPreviewFactory.PreviewManager(embeddedEditor,
-				xtendFormatterFactory);
-		return new XtendFormatterPreview(updater, embeddedEditor, previewContent);
-	}
 }

@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.featurecalls.XtendIdentifiableSimpleNameProvider;
+import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
@@ -122,5 +123,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return XtendLinkingDiagnosticMessageProvider.class;
+	}
+	
+	public Class<? extends IFormatterConfigurationProvider> bindIFormatterConfigurationProvider() {
+		return RuntimeFormatterConfigurationProvider.class;
 	}
 }

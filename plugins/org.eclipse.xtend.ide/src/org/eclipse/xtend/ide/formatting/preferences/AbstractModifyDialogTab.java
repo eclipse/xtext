@@ -65,7 +65,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	protected Composite doCreatePreviewPane(Composite composite, int numColumns) {
 		createLabel(numColumns, composite, "Xtend formatterPreview");
 		formatterPreview = previewFactory.createNewPreview(composite, previewText());
-
+		formatterPreview.doFormat(fWorkingValues);
 		Control control = formatterPreview.getEditor().getViewer().getControl();
 
 		fDefaultFocusManager.add(control);

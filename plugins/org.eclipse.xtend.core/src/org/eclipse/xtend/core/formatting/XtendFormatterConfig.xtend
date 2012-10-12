@@ -5,9 +5,9 @@ import java.util.Map
 import org.eclipse.xtend.lib.Property
 
 class XtendFormatterConfig {
-	@Property @Named("line.separator") String lineSeparator
+	@Property @Named("line.separator") String lineSeparator ="\n"
 	@Property @Named("line.width.max") int maxLineWidth = 120
-	@Property @Named("indentation") String indentation
+	@Property @Named("indentation") String indentation ="\t"
 	@Property @Named("indentation.length") int indentationLength = 4
 	@Property @Named("newlines.after.packagename") NewLineConfig newLinesAfterPackageName = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.imports") NewLineConfig newLinesBetweenImports = new NewLineConfig(1, 2)
@@ -88,7 +88,6 @@ class NewLineConfig {
 		}
 	}
 
-	override toString() '''
-		«_minNewLines», «_maxNewLines»
-	'''
+	override toString() 
+		'''«_minNewLines»,«_maxNewLines»'''
 }

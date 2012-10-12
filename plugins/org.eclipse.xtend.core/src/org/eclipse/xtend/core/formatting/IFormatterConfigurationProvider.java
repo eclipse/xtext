@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.formatting;
+package org.eclipse.xtend.core.formatting;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 
 /**
@@ -14,6 +15,6 @@ import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
  */
 public interface IFormatterConfigurationProvider {
 	
-	XtendFormatterConfig rendererConfiguration();
+	XtendFormatterConfig getFormatterConfiguration(Resource resource);
 
 }
