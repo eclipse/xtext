@@ -24,7 +24,7 @@ public class SynonymConformanceStrategy extends TypeConformanceStrategy<Compound
 
 	@Override
 	protected TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
-		List<LightweightTypeReference> leftReferences = left.getComponents();
+		List<LightweightTypeReference> leftReferences = left.getMultiTypeComponents();
 		if (leftReferences.isEmpty())
 			return TypeConformanceResult.FAILED;
 		for(LightweightTypeReference reference: leftReferences) {

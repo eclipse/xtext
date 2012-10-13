@@ -26,7 +26,7 @@ public abstract class TypeReferenceVisitor {
 	}
 	
 	protected void doVisitCompoundTypeReference(CompoundTypeReference reference) {
-		List<LightweightTypeReference> components = reference.getComponents();
+		List<LightweightTypeReference> components = reference.getMultiTypeComponents();
 		if (components.isEmpty())
 			doVisitTypeReference(reference);
 		else

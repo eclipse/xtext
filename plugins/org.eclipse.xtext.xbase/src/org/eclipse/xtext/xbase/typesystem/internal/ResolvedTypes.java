@@ -720,7 +720,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			protected Boolean doVisitCompoundTypeReference(CompoundTypeReference reference) {
 				if (reference.isResolved())
 					return Boolean.FALSE;
-				for(LightweightTypeReference component: reference.getComponents()) {
+				for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
 					if (component.accept(this)) {
 						return Boolean.TRUE;
 					}

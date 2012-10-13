@@ -45,7 +45,7 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 	public Boolean doVisitCompoundTypeReference(CompoundTypeReference reference, LightweightTraversalData data) {
 		// TODO error message, cannot extend compound reference
 		boolean result = true;
-		for(LightweightTypeReference component: reference.getComponents()) {
+		for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
 			Boolean componentsDone = component.accept(this, data);
 			result &= componentsDone != null && componentsDone.booleanValue();
 		}

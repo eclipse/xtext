@@ -14,7 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -36,6 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.FeatureLinkHelper;
 
 import com.google.common.collect.Lists;
@@ -271,6 +275,22 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 						LightweightTypeReference receiverType = getReceiverType();
 						if (receiverType == null) {
 							throw new IllegalStateException("Cannot determine receiver's type");
+						}
+						if (receiverType.isMultiType()) {
+							// cast should be safe since only members can have a receiver type
+							JvmMember member = (JvmMember) getFeature();
+							JvmDeclaredType declaringType = member.getDeclaringType();
+							ParameterizedTypeReference declaratorReference = new ParameterizedTypeReference(receiverType.getOwner(), declaringType);
+							if (!declaratorReference.isAssignableFrom(receiverType.toJavaType())) {
+								for(LightweightTypeReference multiTypeComponent: receiverType.getMultiTypeComponents()) {
+									if (declaratorReference.isAssignableFrom(multiTypeComponent)) {
+										TypeExpectation refinedExpectation = new TypeExpectation(multiTypeComponent, getState(), false);
+										demandComputedTypes.refineExpectedType(receiver, refinedExpectation);
+										demandComputedTypes.mergeIntoParent();
+										return;
+									}
+								}
+							}
 						}
 						TypeExpectation refinedExpectation = new TypeExpectation(receiverType, getState(), false);
 						demandComputedTypes.refineExpectedType(receiver, refinedExpectation);
