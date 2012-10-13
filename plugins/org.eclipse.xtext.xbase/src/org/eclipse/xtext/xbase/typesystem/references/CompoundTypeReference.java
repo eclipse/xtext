@@ -111,10 +111,6 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		}
 	}
 	
-	public List<LightweightTypeReference> getComponents() {
-		return expose(components);
-	}
-
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		CompoundTypeReference result = new CompoundTypeReference(owner, synonym);
@@ -203,12 +199,31 @@ public class CompoundTypeReference extends LightweightTypeReference {
 				throw new NullPointerException("reference may not be null");
 			}
 			CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
-			for(LightweightTypeReference component: getComponents()) {
+			for(LightweightTypeReference component: getMultiTypeComponents()) {
 				result.addComponent(component);
 			}
 			result.addComponent(reference);
 			return result;
 		}
 		return super.toMultiType(reference);
+	}
+	
+	@Override
+	public boolean isMultiType() {
+		return !synonym;
+	}
+	
+	@Override
+	public LightweightTypeReference toJavaType() {
+		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(getMultiTypeComponents());
+		if (result == null) {
+			throw new IllegalStateException("Cannot expression " + this + " as Java type reference");
+		}
+		return result.toJavaType();
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getMultiTypeComponents() {
+		return expose(components);
 	}
 }

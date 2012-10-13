@@ -421,4 +421,21 @@ public abstract class LightweightTypeReference {
 	public boolean isWildcard() {
 		return false;
 	}
+
+	public boolean isMultiType() {
+		return false;
+	}
+	
+	/**
+	 * Converts types to references that can be expressed as Java type references
+	 * in source code.
+	 * Any types will be expressed as Object whereas multi types will be expressed as their common super type.
+	 */
+	public LightweightTypeReference toJavaType() {
+		return this;
+	}
+	
+	public List<LightweightTypeReference> getMultiTypeComponents() {
+		return Collections.emptyList();
+	}
 }

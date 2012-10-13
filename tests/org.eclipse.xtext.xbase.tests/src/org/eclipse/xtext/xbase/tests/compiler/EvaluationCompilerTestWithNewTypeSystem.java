@@ -39,6 +39,21 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 				"new testdata.ClosureClient().invoke0(null as =>String[])");
 	}
 	
+	// TODO move to AbstractXbaseEvaluationTests
+	@Test public void testSwitchExpression_21() throws Exception {
+		assertEvaluatesTo(Character.valueOf('b'), 
+				"{\n" + 
+				"    val Comparable<?> c = 'abc'\n" + 
+				"    switch c {\n" + 
+				"        CharSequence: switch(c) {\n" + 
+				"             java.io.Serializable: {\n" + 
+				"                 c.charAt(1)\n" + 
+				"             }\n" + 
+				"         }\n" + 
+				"    }\n" + 
+				"}");
+	}
+	
 	@Ignore("Work in progress")
 	@Override
 	@Test
@@ -58,55 +73,6 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 	@Test
 	public void testForLoop_02() throws Exception {
 		super.testForLoop_02();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_01() throws Exception {
-		super.testMemberCallOnMultiType_01();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_02() throws Exception {
-		super.testMemberCallOnMultiType_02();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_03() throws Exception {
-		super.testMemberCallOnMultiType_03();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_04() throws Exception {
-		super.testMemberCallOnMultiType_04();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_05() throws Exception {
-		super.testMemberCallOnMultiType_05();
-	}
-
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_06() throws Exception {
-		super.testMemberCallOnMultiType_06();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testMemberCallOnMultiType_09() throws Exception {
-		super.testMemberCallOnMultiType_09();
 	}
 	
 	@Override

@@ -109,12 +109,12 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 		return doVisitMultiTypeReference(getLeft(param), right, param);
 	}
 	protected TypeConformanceResult doVisitMultiTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
-		for(LightweightTypeReference reference: right.getComponents()) {
+		for(LightweightTypeReference reference: right.getMultiTypeComponents()) {
 			TypeConformanceResult result = reference.accept(this, param);
 			if (result.isConformant())
 				return result;
 		}
-		if (right.getComponents().isEmpty())
+		if (right.getMultiTypeComponents().isEmpty())
 			return TypeConformanceResult.SUCCESS;
 		return TypeConformanceResult.FAILED;
 	}
@@ -124,7 +124,7 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 		return doVisitSynonymTypeReference(getLeft(param), right, param);
 	}
 	protected TypeConformanceResult doVisitSynonymTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
-		List<LightweightTypeReference> rightComponents = right.getComponents();
+		List<LightweightTypeReference> rightComponents = right.getMultiTypeComponents();
 		if (rightComponents.isEmpty())
 			return TypeConformanceResult.FAILED;
 		for(int i = 0; i < rightComponents.size(); i++) {

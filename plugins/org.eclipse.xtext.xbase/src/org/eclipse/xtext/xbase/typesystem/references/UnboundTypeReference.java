@@ -490,4 +490,25 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return resolvedTo.isWildcard();
 		return false;
 	}
+	
+	@Override
+	public boolean isMultiType() {
+		if (resolvedTo != null)
+			return resolvedTo.isMultiType();
+		return super.isMultiType();
+	}
+	
+	@Override
+	public LightweightTypeReference toJavaType() {
+		if (resolvedTo != null)
+			return resolvedTo.toJavaType();
+		return super.toJavaType();
+	}
+	
+	@Override
+	public List<LightweightTypeReference> getMultiTypeComponents() {
+		if (resolvedTo != null)
+			return resolvedTo.getMultiTypeComponents();
+		return super.getMultiTypeComponents();
+	}
 }

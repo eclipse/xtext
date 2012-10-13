@@ -67,7 +67,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		protected List<JvmType> doVisitCompoundTypeReference(CompoundTypeReference reference, ResourceSet resourceSet) {
-			List<LightweightTypeReference> components = reference.getComponents();
+			List<LightweightTypeReference> components = reference.getMultiTypeComponents();
 			if (components.isEmpty())
 				throw new IllegalStateException("Components may not be empty");
 			return collectRawTypes(components, resourceSet);
@@ -189,7 +189,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 			if (reference.isRawType())
 				return reference;
 			CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), reference.isSynonym());
-			enhanceCompoundReference(reference.getComponents(), result, resourceSet);
+			enhanceCompoundReference(reference.getMultiTypeComponents(), result, resourceSet);
 			return result;
 		}
 

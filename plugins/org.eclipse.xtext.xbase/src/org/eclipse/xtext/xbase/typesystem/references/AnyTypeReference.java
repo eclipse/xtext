@@ -89,4 +89,10 @@ public class AnyTypeReference extends LightweightTypeReference {
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitAnyTypeReference(this, param);
 	}
+	
+	@Override
+	public LightweightTypeReference toJavaType() {
+		JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+		return new ParameterizedTypeReference(getOwner(), objectType);
+	}
 }
