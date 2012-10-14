@@ -68,6 +68,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	public void refineExpectedType(XExpression expression, LightweightTypeReference expectation) {
+		for (ITypeComputationState component : components) {
+			component.refineExpectedType(expression, expectation);
+		}
+	}
+	
 	public ITypeComputationState withRootExpectation(LightweightTypeReference expectation) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {

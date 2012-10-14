@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -116,6 +115,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	 */
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+	}
+	
+	public void refineExpectedType(XExpression expression, LightweightTypeReference expectation) {
+		TypeExpectation typeExpectation = new TypeExpectation(expectation, this, false);
+		getResolvedTypes().refineExpectedType(expression, typeExpectation);
 	}
 	
 	public TypeComputationStateWithExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {

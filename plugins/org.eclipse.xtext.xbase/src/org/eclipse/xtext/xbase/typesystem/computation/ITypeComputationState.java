@@ -38,6 +38,8 @@ public interface ITypeComputationState {
 	 */
 	ITypeComputationState withExpectation(LightweightTypeReference expectation);
 	
+	void refineExpectedType(XExpression expression, LightweightTypeReference expectation);
+	
 	ITypeComputationState withRootExpectation(LightweightTypeReference expectation);
 	
 	ITypeComputationState withNonVoidExpectation();

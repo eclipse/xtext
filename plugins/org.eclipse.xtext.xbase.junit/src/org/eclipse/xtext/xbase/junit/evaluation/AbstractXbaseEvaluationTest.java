@@ -1353,6 +1353,24 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testForLoop_14() throws Exception {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(char x: 'abc'.toCharArray.toList) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_15() throws Exception {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(x: 'abc'.toCharArray.toList) if (result == null) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
 	@Test public void testFunctionConversion_00() throws Exception {
 		assertEvaluatesTo("foo",
 				"([|newArrayList('foo').iterator] as Iterable<String>).iterator.next");

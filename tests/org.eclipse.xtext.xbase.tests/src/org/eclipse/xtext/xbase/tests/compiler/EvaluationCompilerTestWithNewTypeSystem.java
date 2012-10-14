@@ -61,20 +61,6 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 		super.testReturnExpression_06();
 	}
 	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testForLoop_01() throws Exception {
-		super.testForLoop_01();
-	}
-	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testForLoop_02() throws Exception {
-		super.testForLoop_02();
-	}
-	
 	@Override
 	@Test
 	@Ignore("To be implemented later")
