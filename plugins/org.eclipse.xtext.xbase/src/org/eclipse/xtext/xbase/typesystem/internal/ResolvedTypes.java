@@ -393,7 +393,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 
-	protected void refineExpectedType(XExpression receiver, TypeExpectation refinedExpectation) {
+	protected void refineExpectedType(XExpression receiver, ITypeExpectation refinedExpectation) {
 		Collection<TypeData> typeData = ensureExpressionTypesMapExists().get(receiver);
 		List<TypeData> replaced = Lists.newArrayListWithCapacity(typeData.size());
 		for(TypeData existing: typeData) {

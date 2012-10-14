@@ -346,6 +346,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationState iterableState = state.withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
+			if (forExpressionType.isResolved() && iterable.isAssignableFrom(forExpressionType)) {
+				iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+			}
 			parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
 				@Override
 				public LightweightTypeReference doVisitParameterizedTypeReference(@NonNull ParameterizedTypeReference reference) {
