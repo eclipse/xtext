@@ -16,26 +16,21 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * @author Sebastian Zarnekow - Initial contribution and API TODO JavaDoc, toString
  */
 @NonNullByDefault
 public class FieldTypeComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
-	public FieldTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
+	public FieldTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			JvmField field, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
 		super(resolvedTypes, featureScopeSession, field, reentrantTypeResolver);
 	}
 
 	@Override
-	protected JvmField getMember() {
-		return (JvmField) super.getMember();
-	}
-
-	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		LightweightTypeReference type = getResolvedTypes().getConverter().toLightweightReference(getMember().getType());
+		LightweightTypeReference type = getResolvedTypes().getActualType(getMember());
 		AbstractTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
 		return Collections.singletonList(result);
 	}
-	
+
 }

@@ -20,11 +20,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -471,6 +474,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			JvmTypeReference parameterType = ((JvmFormalParameter) identifiable).getParameterType();
 			if (parameterType != null)
 				return getConverter().toLightweightReference(parameterType);
+		}
+		if (identifiable instanceof JvmType) {
+			ParameterizedTypeReference result = new ParameterizedTypeReference(getConverter().getOwner(), (JvmType) identifiable);
+			if (identifiable instanceof JvmTypeParameterDeclarator) {
+				for(JvmTypeParameter param: ((JvmTypeParameterDeclarator) identifiable).getTypeParameters()) {
+					result.addTypeArgument(new ParameterizedTypeReference(getConverter().getOwner(), param));
+				}
+			}
+			return result;
 		}
 		return null;
 	}

@@ -93,7 +93,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturn) {
-		return getExpectedReturnType(expression, false);
+		return getType(expression, false);
 	}
 
 	@Override

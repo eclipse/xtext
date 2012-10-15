@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 @RunWith(XtextRunner.class)
 @InjectWith(PureXbaseInjectorProvider.class)
 @SuppressWarnings("restriction")
-public abstract class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
+public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject private CompilationTestHelper helper;
 
@@ -46,6 +46,20 @@ public abstract class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 			throw exception[0];
 		return result[0];
 	}
+	
+//	@Override
+//	@Test
+//	public void testSwitchExpression_20() throws Exception {
+//		// TODO Auto-generated method stub
+//		super.testSwitchExpression_20();
+//	}
+//	
+//	@Override
+//	@Test
+//	@Ignore("Disabled - PureXbase does not support sneaky throw")
+//	public void testThrowExpression_01() throws Exception {
+//		super.testThrowExpression_01();
+//	}
 	
 	@Override
 	@Test

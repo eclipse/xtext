@@ -89,4 +89,21 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		''')
 	}
+	
+	@Test def void testNewThread() throws Exception {
+		'''
+			new Thread [| ]
+		'''.compilesTo('''
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {
+			    public void apply() {
+			    }
+			  };
+			Thread _thread = new Thread(new Runnable() {
+			    public void run() {
+			      _function.apply();
+			    }
+			});
+			return _thread;
+		''')
+	}
 }
