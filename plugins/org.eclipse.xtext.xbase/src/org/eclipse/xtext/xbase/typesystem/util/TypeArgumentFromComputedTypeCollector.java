@@ -129,7 +129,7 @@ public class TypeArgumentFromComputedTypeCollector extends UnboundTypeParameterA
 			@Override
 			protected void doVisitMatchingTypeParameters(ParameterizedTypeReference actual,
 					ParameterizedTypeReference declaration) {
-				if (actual.isFunctionType() ^ declaration.isFunctionType() /* one or the other is a function type */) {
+				if (actual.isFunctionType() ^ declaration.isFunctionType() /* one or the other is a function type but not both */) {
 					FunctionTypeReference actualFunctionType = actual.tryConvertToFunctionTypeReference(false);
 					if (actualFunctionType != null) {
 						FunctionTypeReference declarationFunctionType = declaration.tryConvertToFunctionTypeReference(false);
