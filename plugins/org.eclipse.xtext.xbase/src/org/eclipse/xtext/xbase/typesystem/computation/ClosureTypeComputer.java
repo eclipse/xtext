@@ -257,7 +257,8 @@ public class ClosureTypeComputer {
 			LightweightTypeReference expectedReturnType = expectedClosureType.getReturnType();
 			if (expectedReturnType == null)
 				throw new IllegalStateException("expected return type may not be null");
-			deferredBindTypeArgument(expectedReturnType, expressionResultType);
+			if (!expressionResultType.isPrimitiveVoid())
+				deferredBindTypeArgument(expectedReturnType, expressionResultType);
 			if (expectedReturnType.isAssignableFrom(expressionResultType)) {
 				resultClosureType.setReturnType(expressionResultType);
 			} else {

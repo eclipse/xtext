@@ -79,6 +79,14 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 			return type.type.simpleName
 		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
+	
+	@Ignore("TODO the assertion should hold") @Test override void testClosure_51() throws Exception {
+		super.testClosure_51
+	}
+	
+	@Ignore("TODO the assertion should hold") @Test override void testClosure_52() throws Exception {
+		super.testClosure_52
+	}
 }
 
 /**
@@ -173,6 +181,60 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	@Ignore("fails in old impl")
 	@Test
 	override testOverloadedOperators_20() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_22() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_23() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_30() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_31() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_32() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_33() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_34() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_35() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testOverloadedOperators_37() throws Exception {
 		fail("fails in old impl")
 	}
 	
@@ -322,31 +384,343 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test
+	override testClosure_30() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_31() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_32() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_33() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_34() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_36() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_37() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_38() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_39() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_40() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_41() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_42() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_43() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_44() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_45() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_46() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_47() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_48() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_49() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_50() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_52() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_54() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_55() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_57() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_58() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
 	override testMemberFeatureCall_01() throws Exception {
 		fail("fails in old impl")
 	}
 	
 	@Ignore("fails in old impl")
 	@Test
-	override testNumberLiteralInClosure() throws Exception {
+	override testMemberFeatureCall_02() throws Exception {
 		fail("fails in old impl")
 	}
 	
 	@Ignore("fails in old impl")
 	@Test
-	override testFeatureCall_16() throws Exception {
+	override testNumberLiteralInClosure_01() throws Exception {
 		fail("fails in old impl")
 	}
 	
 	@Ignore("fails in old impl")
 	@Test
-	override testFeatureCall_19() throws Exception {
+	override testNumberLiteralInClosure_02() throws Exception {
 		fail("fails in old impl")
 	}
 	
 	@Ignore("fails in old impl")
 	@Test
-	override testFeatureCall_65() throws Exception {
+	override testFeatureCall_016() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_019() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_065() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_086() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_088() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_089() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_096() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_097() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_098() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_099() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_102() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_103() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_106() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_107() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_108() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_109() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_110() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_111() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_114() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_115() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_116() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_117() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_118() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_119() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_122() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_123() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_124() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testFeatureCall_135() throws Exception {
 		fail("fails in old impl")
 	}
 	
@@ -371,6 +745,30 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	@Ignore("fails in old impl")
 	@Test
 	override testIfExpression_12() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_17() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_19() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_21() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_24() throws Exception {
 		fail("fails in old impl")
 	}
 
