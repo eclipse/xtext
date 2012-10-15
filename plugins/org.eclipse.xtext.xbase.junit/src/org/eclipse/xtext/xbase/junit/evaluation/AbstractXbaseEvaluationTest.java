@@ -505,6 +505,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else 'zonk'");
 		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
 	}
+	
+	@Test public void testReturnExpression_09() throws Exception {
+		assertEvaluatesTo(null, "{ return null }");
+	}
 
 	@Test public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");
