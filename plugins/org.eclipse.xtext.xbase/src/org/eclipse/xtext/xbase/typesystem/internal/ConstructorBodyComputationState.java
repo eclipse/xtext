@@ -26,11 +26,6 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
 		super(resolvedTypes, featureScopeSession, constructor, reentrantTypeResolver);
 	}
-
-	@Override
-	protected JvmConstructor getMember() {
-		return (JvmConstructor) super.getMember();
-	}
 	
 	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {

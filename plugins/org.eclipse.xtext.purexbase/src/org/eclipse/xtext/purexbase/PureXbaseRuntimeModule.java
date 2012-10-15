@@ -6,6 +6,10 @@ package org.eclipse.xtext.purexbase;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
+import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
@@ -21,6 +25,7 @@ import com.google.inject.Binder;
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
+@SuppressWarnings("restriction")
 public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.AbstractPureXbaseRuntimeModule {
 	
 	@Override
@@ -50,4 +55,14 @@ public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.Abstract
 	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
 		return LogicalContainerAwareReentrantTypeResolver.class;
 	}
+	
+	public Class<? extends XbaseCompiler> bindCompiler() {
+		return XbaseCompiler2.class;
+	}
+	
+	@Override
+	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
+		return XbaseInterpreter2.class;
+	}
+	
 }

@@ -2,10 +2,11 @@ package org.eclipse.xtext.purexbase.validation;
 
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
  
 
-public class PureXbaseJavaValidator extends XbaseJavaValidator {
+@SuppressWarnings("restriction")
+public class PureXbaseJavaValidator extends XbaseJavaValidator2 {
 
 	@Override
 	@Check

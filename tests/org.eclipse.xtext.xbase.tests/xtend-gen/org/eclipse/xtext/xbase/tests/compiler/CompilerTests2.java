@@ -158,4 +158,39 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testNewThread() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("new Thread [| ]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void apply() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("Thread _thread = new Thread(new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_function.apply();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("});");
+    _builder_1.newLine();
+    _builder_1.append("return _thread;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
 }

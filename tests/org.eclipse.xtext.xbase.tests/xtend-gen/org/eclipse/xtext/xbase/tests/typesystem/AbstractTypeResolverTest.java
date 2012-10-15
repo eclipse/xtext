@@ -1050,6 +1050,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBlockExpression_05() throws Exception {
+    this.resolvesTo("{val Object s = \'\'}", "void");
+  }
+  
+  @Test
+  public void testBlockExpression_06() throws Exception {
+    this.resolvesTo("{val Object s = \'\' s.notify}", "void");
+  }
+  
+  @Test
   public void testEMap_01() throws Exception {
     this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getKey ].head\n         }", "Integer");
   }

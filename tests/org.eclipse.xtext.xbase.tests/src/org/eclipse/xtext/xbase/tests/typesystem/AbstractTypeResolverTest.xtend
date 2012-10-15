@@ -1014,6 +1014,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{val Object s = '' s}".resolvesTo("Object")
 	}
 	
+	@Test def void testBlockExpression_05() throws Exception {
+		"{val Object s = ''}".resolvesTo("void")
+	}
+	
+	@Test def void testBlockExpression_06() throws Exception {
+		"{val Object s = '' s.notify}".resolvesTo("void")
+	}
+	
 	@Test def void testEMap_01() throws Exception {
 		"{ 
           val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()

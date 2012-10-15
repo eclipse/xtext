@@ -30,14 +30,14 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 	}
 
 	@Override
-	protected JvmOperation getMember() {
-		return (JvmOperation) super.getMember();
-	}
-
-	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		LightweightTypeReference type = getResolvedTypes().getConverter().toLightweightReference(getMember().getReturnType());
-		AbstractTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
+		LightweightTypeReference type = getResolvedTypes().getActualType(getMember());
+		AbstractTypeExpectation result;
+		if (type != null) {
+			result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
+		} else {
+			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState);
+		}
 		return Collections.singletonList(result);
 	}
 }

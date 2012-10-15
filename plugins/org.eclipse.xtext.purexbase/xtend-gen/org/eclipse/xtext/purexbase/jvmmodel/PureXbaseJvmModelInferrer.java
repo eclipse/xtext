@@ -45,6 +45,9 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
           JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Object.class);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
               public void apply(final JvmOperation it) {
+                EList<JvmTypeReference> _exceptions = it.getExceptions();
+                JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Throwable.class);
+                PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _newTypeRef);
                 PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, e);
               }
             };

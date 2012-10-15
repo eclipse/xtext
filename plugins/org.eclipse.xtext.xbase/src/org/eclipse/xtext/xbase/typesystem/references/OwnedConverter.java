@@ -80,13 +80,11 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		IJvmTypeReferenceProvider typeProvider = reference.getTypeProvider();
 		if (typeProvider instanceof UnboundTypeReferenceResolver) {
 			UnboundTypeReference typeReference = ((UnboundTypeReferenceResolver) typeProvider).getUnboundTypeReference();
-			if (typeReference.isResolved()) {
-				LightweightTypeReference resolved = typeReference.getResolvedTo();
-				if (resolved != null)
-					return resolved.copyInto(owner);
-			}
 			return typeReference.copyInto(owner);
 		}
+		JvmTypeReference equivalent = reference.getEquivalent();
+		if (equivalent == null)
+			return null;
 		return super.doVisitComputedTypeReference(reference);
 	}
 

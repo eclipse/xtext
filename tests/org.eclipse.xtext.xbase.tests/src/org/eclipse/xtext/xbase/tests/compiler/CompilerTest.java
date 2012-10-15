@@ -298,7 +298,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
-	@Test public void testSwitchTypeGuards() throws Exception {
+	@Test public void testSwitchTypeGuards_01() throws Exception {
 		assertCompilesTo(
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
@@ -328,6 +328,47 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"switch x : 'foo' as CharSequence {" +
 				"  String : x.substring(3) + x " +
 				"  Comparable : '' + x.compareTo('jho') + x.toString" +
+				"}");
+	}
+	
+	/*
+	 * TODO output should be more straight forward, e.g. the cast of _comparable to CharSequence is unnecessary
+	 * it should more look like
+	 * int _compareTo = ..
+	 * int _plus = ..
+	 * int _length = x.length();
+	 * ..
+	 */
+	@Test public void testSwitchTypeGuards_02() throws Exception {
+		assertCompilesTo(
+				"String _switchResult = null;\n" + 
+				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (x instanceof String) {\n" + 
+				"    final String _string = (String)x;\n" + 
+				"    _matched=true;\n" + 
+				"    String _substring = _string.substring(3);\n" + 
+				"    String _plus = (_substring + _string);\n" + 
+				"    _switchResult = _plus;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (x instanceof Comparable) {\n" + 
+				"    final Comparable<String> _comparable = (Comparable<String>)x;\n" + 
+				"    _matched=true;\n" + 
+				"    int _compareTo = ((Comparable<String>)_comparable).compareTo(\"jho\");\n" + 
+				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
+				"    int _length = ((CharSequence)_comparable).length();\n" + 
+				"    String _plus_1 = (_plus + Integer.valueOf(_length));\n" + 
+				"    _switchResult = _plus_1;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;"
+				, 
+				"switch x : 'foo' as CharSequence {" +
+				"  String : x.substring(3) + x " +
+				"  Comparable<String> : '' + x.compareTo('jho') + x.length" +
 				"}");
 	}
 	
