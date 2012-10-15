@@ -54,13 +54,6 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 				"}");
 	}
 	
-	@Ignore("Work in progress")
-	@Override
-	@Test
-	public void testReturnExpression_06() throws Exception {
-		super.testReturnExpression_06();
-	}
-	
 	@Override
 	@Test
 	@Ignore("To be implemented later")

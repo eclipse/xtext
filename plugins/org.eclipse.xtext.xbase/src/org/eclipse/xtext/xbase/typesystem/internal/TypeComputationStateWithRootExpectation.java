@@ -66,6 +66,7 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 					@Override
 					public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 						acceptType(getResolvedTypes(), this, type, true, hints);
+						super.acceptActualType(type, hints);
 					}
 				}: new TypeExpectation(copied, actualState, returnType);
 			} else {

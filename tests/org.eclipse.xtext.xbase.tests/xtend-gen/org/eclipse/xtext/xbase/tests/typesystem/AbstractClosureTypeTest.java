@@ -157,8 +157,86 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testNumberLiteralInClosure() throws Exception {
+  public void testIfExpression_13() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [| return \'\'] else [| return \'\']", "()=>String", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>", "Function0<String>");
+  }
+  
+  @Test
+  public void testIfExpression_14() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [| return \'\'] else [| return null as CharSequence]", "()=>String", "()=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>", "Function0<CharSequence>");
+  }
+  
+  @Test
+  public void testIfExpression_15() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [| return null as Appendable] else [| return null as CharSequence]", "()=>Appendable", "()=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Appendable>", "Function0<CharSequence>");
+  }
+  
+  @Test
+  public void testIfExpression_16() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [ CharSequence c | return \'\'] else [ String s | return \'\']", "(CharSequence)=>String", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, String>", "Function1<String, String>");
+  }
+  
+  @Test
+  public void testIfExpression_17() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [return new StringBuilder()] else [return new StringBuffer()]", "(Object)=>StringBuilder", "(Object)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, StringBuilder>", "Function1<Object, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_18() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [return new StringBuilder()] else [return new StringBuffer()]).apply(\'\')", "(String)=>StringBuilder", "(String)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, StringBuilder>", "Function1<String, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_19() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [CharSequence c | return new StringBuilder()] else [return new StringBuffer()])", "(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_20() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [CharSequence c | return new StringBuilder()] else [return new StringBuffer()]).apply(\'\')", "(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_21() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [return new StringBuilder()] else [CharSequence c | return new StringBuffer()])", "(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_22() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [return new StringBuilder()] else [CharSequence c | return new StringBuffer()]).apply(\'\')", "(CharSequence)=>StringBuilder", "(CharSequence)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, StringBuilder>", "Function1<CharSequence, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_23() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(if (true) [Appendable a | return new StringBuilder()] else [CharSequence c | return new StringBuffer()])", "(Appendable)=>StringBuilder", "(CharSequence)=>StringBuffer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Appendable, StringBuilder>", "Function1<CharSequence, StringBuffer>");
+  }
+  
+  @Test
+  public void testIfExpression_24() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.io.FileFilter filter = (if (true) [return true] else [return false])", "(File)=>boolean", "(File)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "FileFilter", "FileFilter");
+  }
+  
+  @Test
+  public void testNumberLiteralInClosure_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList().map[42]", "(Object)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Integer>");
+  }
+  
+  @Test
+  public void testNumberLiteralInClosure_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList().map[return 42]", "(Object)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Integer>");
   }
   
@@ -285,6 +363,110 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testOverloadedOperators_21() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return toString ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>String", "(String, String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, String>", "Function2<String, String, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_22() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return toString.length ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_23() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2| return i1 + i2 ]", "(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
+  }
+  
+  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to String + Object")
+  @Test
+  public void testOverloadedOperators_24() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2 | return i1.toString + i2 ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<Object, Object, String>");
+  }
+  
+  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to Object + String")
+  @Test
+  public void testOverloadedOperators_25() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2| return i1 + String::valueOf(i2) ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<Object, Object, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_26() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].map[ i | return i.toString + i ]", "(Integer)=>BigInteger", "(BigInteger)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function1<BigInteger, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_27() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].map[ i | return i + String::valueOf(i) ]", "(Integer)=>BigInteger", "(BigInteger)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function1<BigInteger, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_28() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(0..Math::sqrt(1l).intValue).filter[ i | return 1l % i == 0 ].empty", "(Integer)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Boolean>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_29() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>String", "(String, String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, String>", "Function2<String, String, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_30() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_31() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>BigInteger", "(BigInteger, BigInteger)=>BigInteger");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_32() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_33() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return if (true) toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_34() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return 1 ]", "(Integer)=>Integer", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_35() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 else return null ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_36() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>String", "(String, String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, String>", "Function2<String, String, String>");
+  }
+  
+  @Test
+  public void testOverloadedOperators_37() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ if (true) return toString.length ].reduce[ i1, i2| if (true) return i1 + i2 ]", "(Integer)=>Integer", "(Integer, Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
   public void testMethodTypeParamInference_00() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().findFirst(e | true)", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
@@ -333,8 +515,62 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testTypeForVoidClosure() throws Exception {
+  public void testMethodTypeParamInference_08() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().findFirst(e | return true)", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_09() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().findFirst(e| return e == \'foo\')", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_10() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().<String>findFirst(e| return e == \'foo\')", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_11() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new java.util.ArrayList<String>().findFirst(Object e| return e == \'foo\')", "(Object)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_12() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$IterableExtensions::findFirst(new java.util.ArrayList<String>) [e | return true]", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_13() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$IterableExtensions::findFirst(new java.util.ArrayList<String>) [e| return e == \'foo\']", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_14() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$IterableExtensions::<String>findFirst(new java.util.ArrayList<String>) [e| return e == \'foo\']", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_15() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$IterableExtensions::<String>findFirst(new java.util.ArrayList<String>) [Object e| return e == \'foo\']", "(Object)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Boolean>");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'foo\',\'bar\').forEach []", "(String)=>void");
+    this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'foo\',\'bar\').forEach [ return ]", "(String)=>void");
     this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
   }
   
@@ -526,6 +762,205 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testClosure_28() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[| return \'literal\'].apply()", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>");
+  }
+  
+  @Test
+  public void testClosure_29() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var Closure = [| return \'literal\']\n\t\t  new testdata.ClosureClient().invoke0(Closure)\t}", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>");
+  }
+  
+  @Test
+  public void testClosure_30() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  list.map(e| return e)\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosure_31() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  list.map(e| return false)\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Boolean>");
+  }
+  
+  @Test
+  public void testClosure_32() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x ]\n\t\t\tnewArrayList(1).map(mapper)\n\t\t}", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testClosure_33() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x ]\n\t\t\tnewArrayList(1).map(mapper).head\n\t\t}", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testClosure_34() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x ]\n\t\t\tnewArrayList(1).map(mapper).findFirst [ true ]\n\t\t}", "(Integer)=>Integer", "(Integer)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
+  }
+  
+  @Ignore(value = "TODO deferred Closure body typing")
+  @Test
+  public void testClosure_35() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x.charAt(0) ]\n\t\t\tnewArrayList(\'\').map(mapper)\n\t\t}", "Function1<String, Character>");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Character>");
+  }
+  
+  @Test
+  public void testClosure_36() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_37() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_38() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_39() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_40() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_41() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_42() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_43() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_44() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_45() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_46() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_47() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval fun = [ x | return x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testClosure_48() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x ]\n\t\t\t$$ListExtensions::map(newArrayList(1), mapper)\n\t\t}", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testClosure_49() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[| return null].apply()", "()=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<Object>");
+  }
+  
+  @Test
+  public void testClosure_50() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[return null].apply()", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosure_51() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[| return ].apply()", "()=>void");
+    this.withEquivalents(_resolvesClosuresTo, "Procedure0");
+  }
+  
+  @Test
+  public void testClosure_52() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[return].apply()", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Procedure1<Object>");
+  }
+  
+  @Test
+  public void testClosure_54() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$ListExtensions::map(null as java.util.List<? super String>) [e| return e]", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosure_55() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  $$ListExtensions::map(list) [e| return e]\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosure_56() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[| return \'literal\']", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function0<String>");
+  }
+  
+  @Test
+  public void testClosure_57() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList(\'\')\n\t\t\tjava::util::Collections::sort(list) [ s1, s2 | return s1.compareTo(s2) ]\n\t\t\tlist\n\t\t}", "(String, String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Comparator<String>");
+  }
+  
+  @Test
+  public void testClosure_58() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<? super String>).map(e| return e)", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
   public void testEMap_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getKey ].head\n         }", "(Entry<Integer, String>)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, String>, Integer>");
@@ -580,6 +1015,60 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testEMap_10() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ return getKey ].head\n         }", "(Entry<Integer, String>)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, String>, Integer>");
+  }
+  
+  @Test
+  public void testEMap_11() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ return getValue ].head\n         }", "(Entry<Integer, String>)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, String>, String>");
+  }
+  
+  @Test
+  public void testEMap_12() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ return it ].head\n         }", "(Entry<Integer, String>)=>Entry<Integer, String>");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, String>, Entry<Integer, String>>");
+  }
+  
+  @Test
+  public void testEMap_13() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ return getKey ].head\n         }", "(Entry<? extends Integer, String>)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<? extends Integer, String>, Integer>");
+  }
+  
+  @Test
+  public void testEMap_14() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ return getValue ].head\n         }", "(Entry<? extends Integer, String>)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<? extends Integer, String>, String>");
+  }
+  
+  @Test
+  public void testEMap_15() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<? extends Integer, String> eMap = null\n\t\t  eMap.map[ return it ].head\n         }", "(Entry<? extends Integer, String>)=>Entry<? extends Integer, String>");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<? extends Integer, String>, Entry<? extends Integer, String>>");
+  }
+  
+  @Test
+  public void testEMap_16() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<Integer, ? extends String> eMap = null\n\t\t  eMap.map[ return getKey ].head\n         }", "(Entry<Integer, ? extends String>)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, ? extends String>, Integer>");
+  }
+  
+  @Test
+  public void testEMap_17() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<Integer, ? extends String> eMap = null\n\t\t  eMap.map[ return getValue ].head\n         }", "(Entry<Integer, ? extends String>)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, ? extends String>, String>");
+  }
+  
+  @Test
+  public void testEMap_18() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n          val org.eclipse.emf.common.util.BasicEMap<Integer, ? extends String> eMap = null\n\t\t  eMap.map[ return it ].head\n         }", "(Entry<Integer, ? extends String>)=>Entry<Integer, ? extends String>");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Entry<Integer, ? extends String>, Entry<Integer, ? extends String>>");
+  }
+  
+  @Test
   public void testIncompatibleExpression_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("new Thread [| return \'illegal\' ]", "()=>void");
     this.withEquivalents(_resolvesClosuresTo, "Runnable");
@@ -599,301 +1088,307 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testFeatureCall_01() throws Exception {
+  public void testMemberFeatureCall_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..20).map[ return toString.length ].reduce[ i1,  i2 | return i1 + i2 ]", "(Integer)=>int", "(Integer, Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function2<Integer, Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_001() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s)", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_02() throws Exception {
+  public void testFeatureCall_002() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map [it|it]", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_03() throws Exception {
+  public void testFeatureCall_003() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map [it]", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_04() throws Exception {
+  public void testFeatureCall_004() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<String>).map(s|s)", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_05() throws Exception {
+  public void testFeatureCall_005() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$ListExtensions::map(newArrayList(\'\')) [s|s]", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_06() throws Exception {
+  public void testFeatureCall_006() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s).head", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_07() throws Exception {
+  public void testFeatureCall_007() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.toString).head", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_08() throws Exception {
+  public void testFeatureCall_008() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1)", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_09() throws Exception {
+  public void testFeatureCall_009() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).head", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_10() throws Exception {
+  public void testFeatureCall_010() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length)", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_11() throws Exception {
+  public void testFeatureCall_011() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(s|s.length)", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_12() throws Exception {
+  public void testFeatureCall_012() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length).head", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_13() throws Exception {
+  public void testFeatureCall_013() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(s|s.length).head", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_14() throws Exception {
+  public void testFeatureCall_014() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s != null)", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_15() throws Exception {
+  public void testFeatureCall_015() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length+1)", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_16() throws Exception {
+  public void testFeatureCall_016() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).map(i|i+1)", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_17() throws Exception {
+  public void testFeatureCall_017() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).toList()", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_18() throws Exception {
+  public void testFeatureCall_018() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).toList().map(i|i)", "(String)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_19() throws Exception {
+  public void testFeatureCall_019() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).toList().map(i|i+1)", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_20() throws Exception {
+  public void testFeatureCall_020() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_21() throws Exception {
+  public void testFeatureCall_021() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s|1).toList() map(i|i+1) }", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_22() throws Exception {
+  public void testFeatureCall_022() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_23() throws Exception {
+  public void testFeatureCall_023() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.util.List<? extends Integer> it = null map(i|i+1) }", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_24() throws Exception {
+  public void testFeatureCall_024() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.util.List<? extends Integer> it = null map(i|i) }", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_25() throws Exception {
+  public void testFeatureCall_025() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s|1))", "(String)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
   }
   
   @Test
-  public void testFeatureCall_26() throws Exception {
+  public void testFeatureCall_026() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size())", "(String)=>int", "(List<Integer>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<List<Integer>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_27() throws Exception {
+  public void testFeatureCall_027() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e)", "(String)=>int", "(List<Integer>)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<List<Integer>, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_28() throws Exception {
+  public void testFeatureCall_028() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size())", "(String)=>int", "(Integer)=>Integer", "(List<Integer>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>", "Function1<List<Integer>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_29() throws Exception {
+  public void testFeatureCall_029() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).head", "(String)=>int", "(Integer)=>Integer", "(List<Integer>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>", "Function1<List<Integer>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_30() throws Exception {
+  public void testFeatureCall_030() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "(ArrayList<String>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_31() throws Exception {
+  public void testFeatureCall_031() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).head", "(ArrayList<String>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_32() throws Exception {
+  public void testFeatureCall_032() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "(ArrayList<String>)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_33() throws Exception {
+  public void testFeatureCall_033() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e).head", "(ArrayList<String>)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_34() throws Exception {
+  public void testFeatureCall_034() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).map(i|1)", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_35() throws Exception {
+  public void testFeatureCall_035() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|1).map(i|1).head", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_36() throws Exception {
+  public void testFeatureCall_036() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length).map(i|i)", "(String)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_37() throws Exception {
+  public void testFeatureCall_037() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length).map(i|i).head", "(String)=>int", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_38() throws Exception {
+  public void testFeatureCall_038() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b)", "(String)=>boolean", "(Boolean)=>Boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_39() throws Exception {
+  public void testFeatureCall_039() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b).head", "(String)=>boolean", "(Boolean)=>Boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_40() throws Exception {
+  public void testFeatureCall_040() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b })", "(String)=>boolean", "(Boolean)=>Boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_41() throws Exception {
+  public void testFeatureCall_041() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b }).head", "(String)=>boolean", "(Boolean)=>Boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_42() throws Exception {
+  public void testFeatureCall_042() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b)", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_43() throws Exception {
+  public void testFeatureCall_043() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b).head", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_44() throws Exception {
+  public void testFeatureCall_044() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| !!b )", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_45() throws Exception {
+  public void testFeatureCall_045() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| !!b ).head", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_46() throws Exception {
+  public void testFeatureCall_046() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } )", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_47() throws Exception {
+  public void testFeatureCall_047() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } ).head", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_48() throws Exception {
+  public void testFeatureCall_048() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } )", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_49() throws Exception {
+  public void testFeatureCall_049() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } ).head", "(String)=>boolean", "(Boolean)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_50() throws Exception {
+  public void testFeatureCall_050() throws Exception {
     String _plus = ("newArrayList(\'\').map(s|" + 
       "$$ObjectExtensions::operator_equals(");
     String _plus_1 = (_plus + 
@@ -905,7 +1400,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testFeatureCall_51() throws Exception {
+  public void testFeatureCall_051() throws Exception {
     String _plus = ("newArrayList(\'\').map(s|" + 
       "$$ObjectExtensions::operator_equals(");
     String _plus_1 = (_plus + 
@@ -917,117 +1412,544 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testFeatureCall_52() throws Exception {
+  public void testFeatureCall_052() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_53() throws Exception {
+  public void testFeatureCall_053() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 ).head", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_54() throws Exception {
+  public void testFeatureCall_054() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ length + 1 * 5 ].map [ it / 5 ).head", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Ignore(value = "Too slow")
   @Test
-  public void testFeatureCall_55() throws Exception {
+  public void testFeatureCall_055() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_56() throws Exception {
+  public void testFeatureCall_056() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_57() throws Exception {
+  public void testFeatureCall_057() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_58() throws Exception {
+  public void testFeatureCall_058() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_59() throws Exception {
+  public void testFeatureCall_059() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(null as Integer)) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_60() throws Exception {
+  public void testFeatureCall_060() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(null as Integer).map [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Integer)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
   }
   
   @Test
-  public void testFeatureCall_61() throws Exception {
+  public void testFeatureCall_061() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(null as Integer).map [ v|v.intValue ]\n           val Object o = list.head \n           list.findFirst [ intValue == 0 ]\n        }", "(Integer)=>int", "(Integer)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_62() throws Exception {
+  public void testFeatureCall_062() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[String s | s]\n\t\t\tlist\n\t\t}", "(String)=>void");
     this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
   }
   
   @Test
-  public void testFeatureCall_63() throws Exception {
+  public void testFeatureCall_063() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.findFirst[String s | true]\n\t\t\tlist\n\t\t}", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
   }
   
   @Test
-  public void testFeatureCall_64() throws Exception {
+  public void testFeatureCall_064() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map[String s | s.substring(1,1) ]", "(String)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
   }
   
   @Test
-  public void testFeatureCall_65() throws Exception {
+  public void testFeatureCall_065() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map[ s | s.toString ]", "(Object)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, String>");
   }
   
   @Test
-  public void testFeatureCall_66() throws Exception {
+  public void testFeatureCall_066() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | s.toString ]\n\t\t\tlist\n\t\t}", "(Object)=>void");
     this.withEquivalents(_resolvesClosuresTo, "Procedure1<Object>");
   }
   
   @Test
-  public void testFeatureCall_67() throws Exception {
+  public void testFeatureCall_067() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_68() throws Exception {
+  public void testFeatureCall_068() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
-  public void testFeatureCall_69() throws Exception {
+  public void testFeatureCall_069() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
   }
   
   @Test
+  public void testFeatureCall_070() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_071() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s)", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_072() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map [it| return it]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_073() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map [return it]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_074() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<String>).map(s| return s)", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_075() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("$$ListExtensions::map(newArrayList(\'\')) [s| return s]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_076() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s).head", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_077() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.toString).head", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_078() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1)", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_079() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).head", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_080() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length)", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_081() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(s| return s.length)", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_082() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length).head", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_083() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(s| return s.length).head", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_084() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s != null)", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_085() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length+1)", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_086() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).map(i| return i+1)", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_087() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).toList()", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_088() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).toList().map(i| return i)", "(String)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_089() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).toList().map(i| return i+1)", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_090() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s| return 1).toList() it.map(i| return i+1) }", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_091() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s| return 1).toList() map(i| return i+1) }", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_092() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var it = newArrayList(\'\').map(s| return 1).toList() it }", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_093() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.util.List<? extends Integer> it = null map(i| return i+1) }", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_094() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var java.util.List<? extends Integer> it = null map(i| return i) }", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_095() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s| return 1))", "(String)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_096() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s| return 1)).map(iterable| return iterable.size())", "(String)=>int", "(List<Integer>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<List<Integer>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_097() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s| return 1)).map(iterable| return iterable.size()).map(e| return e)", "(String)=>int", "(List<Integer>)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<List<Integer>, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_098() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s| return 1).map(e| return e)).map(iterable| return iterable.size())", "(String)=>int", "(Integer)=>Integer", "(List<Integer>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>", "Function1<List<Integer>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_099() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\').map(s| return 1).map(e| return e)).map(iterable| return iterable.size()).head", "(String)=>int", "(Integer)=>Integer", "(List<Integer>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>", "Function1<List<Integer>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_100() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable| return iterable.size())", "(ArrayList<String>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_101() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable| return iterable.size()).head", "(ArrayList<String>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_102() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable| return iterable.size()).map(e| return e)", "(ArrayList<String>)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_103() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(newArrayList(\'\')).map(iterable| return iterable.size()).map(e| return e).head", "(ArrayList<String>)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<ArrayList<String>, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_104() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).map(i| return 1)", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_105() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return 1).map(i| return 1).head", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_106() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length).map(i| return i)", "(String)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_107() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length).map(i| return i).head", "(String)=>int", "(Integer)=>Integer");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_108() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return b)", "(String)=>boolean", "(Boolean)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_109() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return b).head", "(String)=>boolean", "(Boolean)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_110() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return { \'length\'.length b })", "(String)=>boolean", "(Boolean)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_111() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return { \'length\'.length b }).head", "(String)=>boolean", "(Boolean)=>Boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_112() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(Boolean b| return !b)", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_113() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(Boolean b| return !b).head", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_114() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return !!b )", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_115() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return !!b ).head", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_116() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return { !b } )", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_117() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| { return !b } ).head", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_118() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return { b.operator_not } )", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_119() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 == 5).map(b| return { b.operator_not } ).head", "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_120() throws Exception {
+    String _plus = ("newArrayList(\'\').map(s|" + 
+      "return $$ObjectExtensions::operator_equals(");
+    String _plus_1 = (_plus + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
+    String _plus_2 = (_plus_1 + 
+      ").map(b| return $$BooleanExtensions::operator_not(b) )");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_121() throws Exception {
+    String _plus = ("newArrayList(\'\').map(s|" + 
+      "return $$ObjectExtensions::operator_equals(");
+    String _plus_1 = (_plus + 
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
+    String _plus_2 = (_plus_1 + 
+      ").map(b| return $$BooleanExtensions::operator_not(b) ).head");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo(_plus_2, "(String)=>boolean", "(Boolean)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>", "Function1<Boolean, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_122() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 * 5).map(b| return b / 5 )", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_123() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s.length + 1 * 5).map(b| return b / 5 ).head", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_124() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ return length + 1 * 5 ].map [ return it / 5 ).head", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Ignore(value = "Too slow")
+  @Test
+  public void testFeatureCall_125() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ return length + 1 * 5 - length + 1 * 5 ].map [ return it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_126() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_127() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_128() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_129() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(null as Integer)) [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_130() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(null as Integer).map [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Integer)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_131() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(null as Integer).map [ v| return v.intValue ]\n           val Object o = list.head \n           list.findFirst [return intValue == 0 ]\n        }", "(Integer)=>int", "(Integer)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_132() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[String s | return s]\n\t\t\tlist\n\t\t}", "(String)=>void");
+    this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_133() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.findFirst[String s | return true]\n\t\t\tlist\n\t\t}", "(String)=>boolean");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
+  }
+  
+  @Test
+  public void testFeatureCall_134() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map[String s | return s.substring(1,1) ]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_135() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map[ s | return s.toString ]", "(Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, String>");
+  }
+  
+  @Test
+  public void testFeatureCall_136() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | return s.toString ]\n\t\t\tlist\n\t\t}", "(Object)=>void");
+    this.withEquivalents(_resolvesClosuresTo, "Procedure1<Object>");
+  }
+  
+  @Test
+  public void testFeatureCall_137() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_138() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Number & Comparable<?>, Integer>");
+  }
+  
+  @Test
   public void testFeatureCall_Bug342134_00() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as java.util.List<String>).map(e|newArrayList(e)).flatten", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as java.util.List<String>).map(e| return newArrayList(e)).flatten", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
@@ -1039,43 +1961,43 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_Bug342134_02() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e| return newArrayList(e)).flatten", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_03() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e|newArrayList(e)).flatten.head", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e| return newArrayList(e)).flatten.head", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_04() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e|newArrayList(e))", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e| return newArrayList(e))", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_05() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e|newArrayList(e)).head", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e| return newArrayList(e)).head", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_06() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(e|newArrayList(e)).flatten", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("<String>newArrayList.map(e| return newArrayList(e)).flatten", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_07() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e|<String>newArrayList(e)).flatten", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(e| return <String>newArrayList(e)).flatten", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   
   @Test
   public void testFeatureCall_Bug342134_08() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map(String e|<String>newArrayList(e)).flatten", "(String)=>ArrayList<String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList.map(String e| return <String>newArrayList(e)).flatten", "(String)=>ArrayList<String>");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, ArrayList<String>>");
   }
   

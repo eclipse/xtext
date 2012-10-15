@@ -119,6 +119,60 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   
   @Ignore(value = "fails in old impl")
   @Test
+  public void testOverloadedOperators_22() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_23() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_30() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_31() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_32() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_33() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_34() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_35() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testOverloadedOperators_37() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
   public void testClosure_02() throws Exception {
     Assert.fail("fails in old impl");
   }
@@ -263,31 +317,343 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   
   @Ignore(value = "fails in old impl")
   @Test
+  public void testClosure_30() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_31() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_32() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_33() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_34() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_36() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_37() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_38() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_39() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_40() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_41() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_42() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_43() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_44() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_45() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_46() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_47() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_48() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_49() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_50() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_52() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_54() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_55() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_57() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testClosure_58() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
   public void testMemberFeatureCall_01() throws Exception {
     Assert.fail("fails in old impl");
   }
   
   @Ignore(value = "fails in old impl")
   @Test
-  public void testNumberLiteralInClosure() throws Exception {
+  public void testMemberFeatureCall_02() throws Exception {
     Assert.fail("fails in old impl");
   }
   
   @Ignore(value = "fails in old impl")
   @Test
-  public void testFeatureCall_16() throws Exception {
+  public void testNumberLiteralInClosure_01() throws Exception {
     Assert.fail("fails in old impl");
   }
   
   @Ignore(value = "fails in old impl")
   @Test
-  public void testFeatureCall_19() throws Exception {
+  public void testNumberLiteralInClosure_02() throws Exception {
     Assert.fail("fails in old impl");
   }
   
   @Ignore(value = "fails in old impl")
   @Test
-  public void testFeatureCall_65() throws Exception {
+  public void testFeatureCall_016() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_019() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_065() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_086() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_088() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_089() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_096() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_097() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_098() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_099() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_102() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_103() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_106() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_107() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_108() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_109() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_110() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_111() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_114() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_115() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_116() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_117() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_118() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_119() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_122() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_123() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_124() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testFeatureCall_135() throws Exception {
     Assert.fail("fails in old impl");
   }
   
@@ -312,6 +678,30 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   @Ignore(value = "fails in old impl")
   @Test
   public void testIfExpression_12() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIfExpression_17() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIfExpression_19() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIfExpression_21() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
+  public void testIfExpression_24() throws Exception {
     Assert.fail("fails in old impl");
   }
   

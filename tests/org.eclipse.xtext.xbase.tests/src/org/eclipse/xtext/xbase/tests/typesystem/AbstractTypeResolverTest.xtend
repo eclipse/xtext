@@ -553,6 +553,34 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"return try { if (true) 'foo' else 'bar' } finally { String::valueOf('zonk') }".resolvesTo("void")
 	}
 	
+	@Test def void testReturnType_03() throws Exception {
+		"{ val c = [ int i | return i ] c.apply(1) return null }".resolvesTo("void")
+	}
+	
+	@Test def void testReturnType_04() throws Exception {
+		"{ val c = [ int i | i ] c.apply(1) return null }".resolvesTo("void")
+	}
+	
+	@Test def void testReturnType_05() throws Exception {
+		"{ var closure = [| return 'literal'] closure.apply }".resolvesTo("String")
+	}
+	
+	@Test def void testReturnType_06() throws Exception {
+		"{ var closure = [| return 'literal'] return closure.apply }".resolvesTo("void")
+	}
+	
+	@Test def void testReturnType_07() throws Exception {
+		"[| return 'literal'].apply".resolvesTo("String")
+	}
+	
+	@Test def void testReturnType_08() throws Exception {
+		"return [| return 'literal'].apply".resolvesTo("void")
+	}
+	
+	@Test def void testReturnType_09() throws Exception {
+		"[| return 'literal']".resolvesTo("()=>String").isFunctionAndEquivalentTo("Function0<String>")
+	}
+	
 	@Test def void testClosure_00() throws Exception {
 		"[|'literal'].apply()".resolvesTo("String")
 	}
