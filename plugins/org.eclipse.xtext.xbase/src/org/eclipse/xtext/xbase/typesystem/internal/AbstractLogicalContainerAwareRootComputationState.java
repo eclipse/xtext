@@ -34,13 +34,8 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 	}
 	
 	@Override
-	protected LogicalContainerAwareReentrantTypeResolver getResolver() {
-		return (LogicalContainerAwareReentrantTypeResolver) super.getResolver();
-	}
-	
-	@Override
 	protected XExpression getRootExpression() {
-		return getResolver().getLogicalContainerProvider().getAssociatedExpression(getMember());
+		return ((LogicalContainerAwareReentrantTypeResolver) getResolver()).getLogicalContainerProvider().getAssociatedExpression(getMember());
 	}
 	
 }
