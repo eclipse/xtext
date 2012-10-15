@@ -199,6 +199,26 @@ public class OnTheFlyJavaCompiler {
 		}
 
 	}
+	
+	public static class ClassPathAssembler {
+		
+		@Inject
+		private ClassLoader parentClassLoader;
+		
+		public void assembleCompilerClassPath(OnTheFlyJavaCompiler compiler) {
+			if (parentClassLoader instanceof URLClassLoader) {
+				URL[] urLs = ((URLClassLoader) parentClassLoader).getURLs();
+				for (URL url : urLs) {
+					final String urlAsString = url.getFile();
+					compiler.addClassPath(urlAsString);
+				}
+			}
+		}
+		
+		public ClassLoader getClassLoader() {
+			return parentClassLoader;
+		}
+	}
 
 	private static PatchedFileSystem fileSystem;
 
@@ -207,15 +227,15 @@ public class OnTheFlyJavaCompiler {
 	private DelegateOutStream errorStream = new DelegateOutStream();
 
 	@Inject
-	private ClassLoader parentClassLoader;
-
+	private ClassPathAssembler classPathAssembler = new ClassPathAssembler();
+	
 	public void addClassPath(String classpath) {
 		this.classpath.add(classpath);
 	}
 
 	public void addClassPathOfClass(Class<?> clazz) {
 		final String classNameAsPath = "/"
-				+ clazz.getCanonicalName().replace('.', '/');
+				+ clazz.getName().replace('.', '/');
 		String resourceName = classNameAsPath + ".class";
 		URL url = clazz.getResource(resourceName);
 		if (url == null)
@@ -292,7 +312,7 @@ public class OnTheFlyJavaCompiler {
 						+ errorStream.toString() + "\n" + sources.keySet());
 			final URL url = tempDir.toURI().toURL();
 			final URLClassLoader loader = new URLClassLoader(new URL[] { url },
-					parentClassLoader);
+					classPathAssembler.getClassLoader());
 			Map<String,Class<?>> result = newHashMap();
 			for (String name : sources.keySet()) {
 				Class<?> clazz = loader.loadClass(name.replace('/','.'));
@@ -412,13 +432,7 @@ public class OnTheFlyJavaCompiler {
 
 	public void initializeClassPath() {
 		clearClassPath();
-		if (parentClassLoader instanceof URLClassLoader) {
-			URL[] urLs = ((URLClassLoader) parentClassLoader).getURLs();
-			for (URL url : urLs) {
-				final String urlAsString = url.getFile();
-				addClassPath(urlAsString);
-			}
-		}
+		classPathAssembler.assembleCompilerClassPath(this);
 	}
 
 	protected String getComplianceLevelArg() {
@@ -450,7 +464,7 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	public void setParentClassLoader(ClassLoader parentClassLoader) {
-		this.parentClassLoader = parentClassLoader;
+		this.classPathAssembler.parentClassLoader = parentClassLoader;
 	}
 
 	protected String toString(Type returnType) {
