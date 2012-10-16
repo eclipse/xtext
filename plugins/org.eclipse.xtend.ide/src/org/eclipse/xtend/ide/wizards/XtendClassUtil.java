@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Robert von Massow - Initial contribution and API
@@ -29,7 +30,7 @@ public class XtendClassUtil {
 			sb.append(lineSeparator);
 			sb.append(lineSeparator);
 		}
-		if(!superClass.equals("java.lang.Object")) {
+		if(!Strings.isEmpty(superClass) && !superClass.equals("java.lang.Object")) {
 			addImport(sb, superClass, lineSeparator);
 		}
 		for (Object object : superInterfaces) {
@@ -40,7 +41,7 @@ public class XtendClassUtil {
 		}
 		sb.append("class ");
 		sb.append(typeName);
-		if(!superClass.equals("java.lang.Object")) {
+		if(!Strings.isEmpty(superClass) && !superClass.equals("java.lang.Object")) {
 			sb.append(" extends ");
 			sb.append(stripPackage(superClass));
 		}
