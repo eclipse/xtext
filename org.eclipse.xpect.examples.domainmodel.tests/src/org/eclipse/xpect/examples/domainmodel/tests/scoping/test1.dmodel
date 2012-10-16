@@ -2,7 +2,6 @@
 
 
 /* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest
-	moduleProvider = org.eclipse.xpect.examples.domainmodel.tests.parser.DomainModelModuleProvider {}
 	ResourceSet {
 		ThisFile {}
 	}

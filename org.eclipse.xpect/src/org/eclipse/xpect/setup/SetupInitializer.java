@@ -56,15 +56,14 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 			initialize(result, val);
 			return result;
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		return null;
 	}
 
 	protected Object create(IntLiteral val) {
@@ -103,8 +102,7 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 				try {
 					m.invoke(obj, object);
 				} catch (Exception e) {
-					System.err.println("Error calling " + m + " with +" + object);
-					e.printStackTrace();
+					throw new RuntimeException(e);
 				}
 			}
 		}

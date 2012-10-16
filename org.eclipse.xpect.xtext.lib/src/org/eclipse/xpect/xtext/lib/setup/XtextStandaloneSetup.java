@@ -3,9 +3,11 @@ package org.eclipse.xpect.xtext.lib.setup;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.setup.AbstractXpectSetup;
 import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.util.TypedProvider;
+import org.eclipse.xpect.xtext.lib.registry.ILanguageInfo;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
@@ -13,7 +15,6 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, FileCtx> {
@@ -29,11 +30,19 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		return new ClassCtx();
 	}
 
+	protected Injector getInjector(XpectFile file) {
+		String ext = file.eResource().getURI().fileExtension();
+		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageInfo(ext);
+		if (info == null)
+			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
+		return info.getDefaultInjector();
+	}
+
 	@Override
 	public FileCtx beforeFile(IFileSetupContext frameworkCtx, ClassCtx userCtx, ISetupInitializer<FileCtx> initializer) throws IOException {
 		FileCtx ctx = new FileCtx();
 		initializer.initialize(ctx);
-		Injector injector = Guice.createInjector(ctx.getModuleProvider().getRuntimeModule());
+		Injector injector = getInjector(frameworkCtx.getXpectFile());
 		Resource resource = loadThisResource(injector, frameworkCtx, ctx);
 		ctx.getValidate().validate(resource);
 		return ctx;
@@ -41,7 +50,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 
 	@Override
 	public TestCtx beforeTest(ITestSetupContext frameworkCtx, FileCtx userCtx) throws IOException {
-		Injector injector = Guice.createInjector(userCtx.getModuleProvider().getRuntimeModule());
+		Injector injector = getInjector(frameworkCtx.getXpectFile());
 		injector.injectMembers(frameworkCtx.getTestInstance());
 		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
 		frameworkCtx.installParameterAdapter(new XtextOffsetAdapter(res));
