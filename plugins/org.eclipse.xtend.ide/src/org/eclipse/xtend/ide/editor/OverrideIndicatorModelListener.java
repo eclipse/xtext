@@ -8,8 +8,10 @@
 package org.eclipse.xtend.ide.editor;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.findNodesForFeature;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,11 +28,12 @@ import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback.NullImpl;
@@ -157,15 +160,17 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		XtendFile xtendFile = (XtendFile) eObject;
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMap();
 		for (XtendFunction xtendFunction : getXtendFunctions(xtendFile)) {
-			JvmOperation jvmOperation = xtendOverridesService.findOverriddenOperation(xtendFunction);
-			if (xtendFunction.isOverride() && jvmOperation != null) {
-				ICompositeNode compositeNode = NodeModelUtils.getNode(xtendFunction);
-				if (compositeNode != null) {
+			if (xtendFunction.isOverride()) {
+				INode node = NodeModelUtils.getNode(xtendFunction);
+				JvmOperation jvmOperation = xtendOverridesService.findOverriddenOperation(xtendFunction);
+				if (node != null && jvmOperation != null) {
 					boolean overwriteIndicator = isOverwriteIndicator(jvmOperation);
 					String text = (overwriteIndicator ? "overrides " : "implements ") + jvmOperation.getQualifiedName(); //$NON-NLS-1$ //$NON-NLS-2$
+					node = getFirst(findNodesForFeature(xtendFunction, XtendPackage.eINSTANCE.getXtendFunction_Name()),
+							node);
 					annotationToPosition.put(
 							new OverrideIndicatorAnnotation(overwriteIndicator, text, xtextResource
-									.getURIFragment(xtendFunction)), new Position(compositeNode.getOffset()));
+									.getURIFragment(xtendFunction)), new Position(node.getOffset()));
 				}
 			}
 		}
