@@ -301,5 +301,12 @@
            runnerClass="org.eclipse.xpect.runner.XpectRunner">
      </junitRunnerUIHandler>
   </extension>
+  <extension
+        point="org.eclipse.ui.ide.editorAssociationOverride">
+     <editorAssociationOverride
+           class="org.eclipse.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xpect.ui.editor.XpectEditorAssociationOverride"
+           id="org.eclipse.xpect.ui.editor.XpectEditorAssociationOverrideID">
+     </editorAssociationOverride>
+  </extension>
 
 </plugin>
