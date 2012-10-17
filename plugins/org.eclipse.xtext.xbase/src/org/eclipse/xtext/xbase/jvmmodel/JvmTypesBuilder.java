@@ -77,6 +77,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -224,6 +225,22 @@ public class JvmTypesBuilder {
 		DocumentationAdapter documentationAdapter = new DocumentationAdapter();
 		documentationAdapter.setDocumentation(documentation);
 		jvmElement.eAdapters().add(documentationAdapter);
+	}
+
+	/**
+	 * Attaches the given headText to the given {@link JvmDeclaredType}.
+	 */
+	public void setFileHeader(@Nullable JvmDeclaredType jvmDeclaredType, @Nullable String headerText) {
+		if (jvmDeclaredType == null || headerText == null) {
+			return;
+		}
+		FileHeaderAdapter fileHeaderAdapter = (FileHeaderAdapter) EcoreUtil.getAdapter(jvmDeclaredType.eAdapters(),
+				FileHeaderAdapter.class);
+		if (fileHeaderAdapter == null) {
+			fileHeaderAdapter = new FileHeaderAdapter();
+			jvmDeclaredType.eAdapters().add(fileHeaderAdapter);
+		}
+		fileHeaderAdapter.setHeaderText(headerText);
 	}
 
 	/**
