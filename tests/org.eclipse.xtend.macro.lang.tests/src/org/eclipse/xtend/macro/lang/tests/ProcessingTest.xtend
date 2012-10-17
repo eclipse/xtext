@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.macro.lang.tests
 
-import com.google.common.util.concurrent.FutureCallback
 import com.google.inject.Inject
+import java.util.concurrent.Future
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
@@ -103,7 +103,7 @@ class ProcessingTest {
 				package foo
 				
 				import org.eclipse.xtend.core.xtend.XtendFunction
-				import com.google.common.util.concurrent.FutureCallback
+				import java.util.concurrent.Future
 				
 				@GWTService for class {
 				
@@ -120,7 +120,7 @@ class ProcessingTest {
 						  for (m : members.filter(typeof(XtendFunction))) {
 						    method (m.name, type(Void::TYPE)) [
 						      m.parameters.forEach [ param(name, parameterType) ]
-						      param('result', type( typeof(FutureCallback), m.returnType))
+						      param('result', type( typeof(Future), m.returnType))
 						    ]
 						  }
 						]
@@ -146,7 +146,7 @@ class ProcessingTest {
 			assertSame( myClass.interfaces.get(0), interf )
 			
 			val asyncInterf = getCompiledClass('foo.AsyncTestInterfaceAsync')
-			assertNotNull(asyncInterf.getMethod("myService", newArrayList(typeof(String), typeof(FutureCallback)) as Class<?>[]))
+			assertNotNull(asyncInterf.getMethod("myService", newArrayList(typeof(String), typeof(Future)) as Class<?>[]))
 		]
 	}
 	
