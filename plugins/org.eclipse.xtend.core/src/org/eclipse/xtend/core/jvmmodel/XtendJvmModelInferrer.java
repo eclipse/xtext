@@ -47,6 +47,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -65,6 +66,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -124,6 +126,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private IScopeProvider scopeProvider;
 
+	@Inject
+	private IEObjectDocumentationProvider documentationProvider;
+
 	public void infer(@Nullable EObject xtendFile, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(xtendFile instanceof XtendFile))
 			return;
@@ -135,6 +140,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			final JvmAnnotationType inferredAnnotationType = typesFactory.createJvmAnnotationType();
 			inferredAnnotationType.setPackageName(xtendFile2.getPackage());
 			inferredAnnotationType.setSimpleName(annotationType.getName());
+			setFileHeader(xtendFile2, inferredAnnotationType);
 			DisableCodeGenerationAdapter.disableCodeGeneration(inferredAnnotationType);
 			associator.associatePrimary(annotationType, inferredAnnotationType);
 			acceptor.accept(inferredAnnotationType).initializeLater(new Procedure1<JvmAnnotationType>() {
@@ -149,12 +155,20 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
 			inferredJvmType.setPackageName(xtendFile2.getPackage());
 			inferredJvmType.setSimpleName(xtendClass.getName());
+			setFileHeader(xtendFile2, inferredJvmType);
 			associator.associatePrimary(xtendClass, inferredJvmType);
 			acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
 				public void apply(@Nullable JvmGenericType p) {
 					initialize(xtendClass, inferredJvmType);
 				}
 			});
+		}
+	}
+
+	protected void setFileHeader(final XtendFile xtendFile2, final JvmDeclaredType jvmDeclaredType) {
+		if (xtendFile2.getPackage() != null) {
+			String headerText = documentationProvider.getDocumentation(xtendFile2);
+			jvmTypesBuilder.setFileHeader(jvmDeclaredType, headerText);
 		}
 	}
 	
