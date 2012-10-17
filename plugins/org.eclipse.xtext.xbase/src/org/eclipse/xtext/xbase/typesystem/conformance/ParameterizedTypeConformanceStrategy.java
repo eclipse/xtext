@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
@@ -114,7 +115,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			JvmType leftType = leftReference.getType();
 			if (leftType instanceof JvmGenericType) {
 				JvmGenericType castedLeftType = (JvmGenericType) leftType;
-				if (castedLeftType.isFinal())
+				if (castedLeftType.isFinal() && !(rightReference.getType() instanceof JvmTypeParameter))
 					return TypeConformanceResult.FAILED;
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
