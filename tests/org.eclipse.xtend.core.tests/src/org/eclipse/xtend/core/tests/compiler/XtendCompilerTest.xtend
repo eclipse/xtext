@@ -1889,6 +1889,132 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test
+    def compileAnnotationWithFileHeader(){
+        assertCompilesTo(
+        ''' 
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo
+            
+            annotation bar { 
+                String name = 'foobar'
+            }
+        ''',
+        '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            public @interface bar {
+              public String name() default "foobar";
+            }
+        ''')
+    }
+    
+    @Test
+    def compileClassWithFileHeader(){
+        assertCompilesTo(
+        ''' 
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo
+            
+            class bar { 
+                String name = 'foobar'
+            }
+        ''',
+        '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            @SuppressWarnings("all")
+            public class bar {
+              private String name = "foobar";
+            }
+        ''')
+    }
+    
+    @Test
+    def compileAllClassesWithTheSameFileHeader(){
+        val input = ''' 
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo
+            
+            class bar { 
+                String name = 'foobar'
+            }
+
+            class baz { 
+                String name = 'foobaz'
+            }
+        '''
+        val expectedBarClass = '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            @SuppressWarnings("all")
+            public class bar {
+              private String name = "foobar";
+            }
+        '''
+        val expectedBazClass = '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            @SuppressWarnings("all")
+            public class baz {
+              private String name = "foobaz";
+            }
+        '''
+        val file = file(input.toString(), true)
+        val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
+        val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
+        val barJavaCode = generator.generateType(barType);
+        val bazJavaCode = generator.generateType(bazType);
+        XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
+        XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
+    }
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
