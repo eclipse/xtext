@@ -65,6 +65,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
@@ -159,6 +160,7 @@ public class JvmModelGenerator implements IGenerator {
     String _packageName = type.getPackageName();
     boolean _notEquals = (!Objects.equal(_packageName, null));
     if (_notEquals) {
+      this.generateFileHeader(type, importAppendable);
       ITreeAppendable _append = importAppendable.append("package ");
       String _packageName_1 = type.getPackageName();
       ITreeAppendable _append_1 = _append.append(_packageName_1);
@@ -951,6 +953,29 @@ public class JvmModelGenerator implements IGenerator {
           }
         }
       }
+    }
+  }
+  
+  public void generateFileHeader(final JvmDeclaredType it, final ITreeAppendable appendable) {
+    EList<Adapter> _eAdapters = it.eAdapters();
+    Iterable<FileHeaderAdapter> _filter = Iterables.<FileHeaderAdapter>filter(_eAdapters, FileHeaderAdapter.class);
+    final FileHeaderAdapter fileHeaderAdapter = IterableExtensions.<FileHeaderAdapter>head(_filter);
+    String _headerText = fileHeaderAdapter==null?(String)null:fileHeaderAdapter.getHeaderText();
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_headerText);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      final StringConcatenation text = ((StringConcatenation) _builder);
+      text.newLine();
+      text.append(" * ");
+      String _headerText_1 = fileHeaderAdapter.getHeaderText();
+      text.append(_headerText_1, " * ");
+      text.newLine();
+      text.append(" */");
+      String _string = text.toString();
+      ITreeAppendable _append = appendable.append(_string);
+      _append.newLine();
     }
   }
   

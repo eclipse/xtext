@@ -101,6 +101,7 @@ class JvmModelGenerator implements IGenerator {
 		generateBody(type, bodyAppendable)
 		val importAppendable = createAppendable(type, importManager)
 		if (type.packageName != null) {
+            generateFileHeader(type, importAppendable)
 			importAppendable.append("package ").append(type.packageName).append(";");
 			importAppendable.newLine.newLine
 		}
@@ -505,6 +506,19 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
+	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable) {
+        val fileHeaderAdapter = it.eAdapters.filter(typeof(FileHeaderAdapter)).head
+        if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
+            val text = '''/**''' as StringConcatenation;
+            text.newLine
+            text.append(" * ")
+            text.append(fileHeaderAdapter.headerText, " * ")
+            text.newLine
+            text.append(" */")
+            appendable.append(text.toString).newLine
+        }
+    }
+
 	def void generateJavaDoc(EObject it, ITreeAppendable appendable) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
