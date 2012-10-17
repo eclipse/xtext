@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
@@ -220,7 +222,25 @@ public class FunctionTypes {
 		for(Map.Entry<JvmTypeParameter, Collection<LightweightBoundTypeArgument>> mapping: typeParameterMapping.asMap().entrySet()) {
 			mergedTypeParameterMapping.put(mapping.getKey(), typeReference.getServices().getBoundTypeArgumentMerger().merge(mapping.getValue(), typeReference.getOwner()));			
 		}
-		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner());
+		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner()) {
+			@Override
+			@Nullable
+			@NonNullByDefault
+			protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
+					Object visiting) {
+				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
+				if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+					LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
+					if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
+						WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
+						wildcard.addUpperBound(boundReference);
+						boundReference = wildcard;
+					}
+					return boundReference.accept(this, visiting);
+				}
+				return null;
+			}
+		};
 		List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(operation.getParameters().size());
 		for(JvmFormalParameter parameter: operation.getParameters()) {
 			LightweightTypeReference lightweight = substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
