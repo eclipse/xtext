@@ -5,8 +5,7 @@ Bundle-Vendor: %Bundle-Vendor
 Bundle-Version: 2.4.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtend.macro.lang.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtend.macro.lang,
- org.eclipse.xtend.macro.lang.ui,
+Require-Bundle: org.eclipse.xtend.macro.lang.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;resolution:=optional,
@@ -20,4 +19,4 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtend.macro.lang
+Export-Package: org.eclipse.xtend.macro.lang.tests

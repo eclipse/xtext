@@ -1,14 +1,14 @@
-package org.eclipse.xtend.macro.lang
+package org.eclipse.xtend.macro.lang.tests
 
-import org.eclipse.xtext.junit4.InjectWith
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(MacroInjectorProvider))

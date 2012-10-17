@@ -1,4 +1,4 @@
-package org.eclipse.xtend.macro.lang
+package org.eclipse.xtend.macro.lang.tests
 
 import org.eclipse.xtext.xbase.lib.Pair
 
