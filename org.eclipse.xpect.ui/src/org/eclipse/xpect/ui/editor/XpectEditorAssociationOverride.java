@@ -2,6 +2,7 @@ package org.eclipse.xpect.ui.editor;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
@@ -20,19 +21,27 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 	@Inject
 	private ContentTypeHelper contentTypeHelper;
 
-	protected XpectContentType getContentType(IEditorInput input) {
+	private final IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();
+
+	private final IEditorDescriptor xpectEditor = registry.findEditor(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
+
+	protected IFile getFile(IEditorInput input) {
 		if (input instanceof IFileEditorInput)
-			return contentTypeHelper.getContentType(((IFileEditorInput) input).getFile());
+			return ((IFileEditorInput) input).getFile();
 		return null;
 	}
 
 	@Override
 	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
-		XpectContentType type = getContentType(editorInput);
+		IFile file = getFile(editorInput);
+		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
 		case XPECT:
-			IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();
-			return registry.findEditor(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
+			if (file != null)
+				for (IEditorDescriptor desc : registry.getEditors(file.getName()))
+					if (desc.getId().endsWith("withXpect"))
+						return desc;
+			return xpectEditor;
 		default:
 			return editorDescriptor;
 		}
@@ -45,17 +54,18 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 
 	@Override
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
-		XpectContentType type = getContentType(editorInput);
+		XpectContentType type = contentTypeHelper.getContentType(getFile(editorInput));
 		switch (type) {
-		case TEXT:
 		case XPECT:
-			IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();
-			IEditorDescriptor xpectEditor = registry.findEditor(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
 			List<IEditorDescriptor> editors = Lists.newArrayList(editorDescriptors);
 			editors.add(xpectEditor);
 			return editors.toArray(new IEditorDescriptor[editors.size()]);
 		default:
-			return editorDescriptors;
+			List<IEditorDescriptor> editors2 = Lists.newArrayList();
+			for (IEditorDescriptor desc : editorDescriptors)
+				if (!desc.getId().endsWith("withXpect"))
+					editors2.add(desc);
+			return editors2.toArray(new IEditorDescriptor[editors2.size()]);
 		}
 	}
 

@@ -26,4 +26,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xpect.ui.contentassist,
  org.eclipse.xpect.ui.contentassist.antlr,
  org.eclipse.xpect.ui.internal
-Bundle-Activator: org.eclipse.xpect.ui.internal.XpectActivator
+Bundle-Activator: org.eclipse.xpect.ui.XpectPluginActivator

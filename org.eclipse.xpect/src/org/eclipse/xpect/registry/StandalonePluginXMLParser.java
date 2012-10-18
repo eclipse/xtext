@@ -1,4 +1,4 @@
-package org.eclipse.xpect.xtext.lib.registry;
+package org.eclipse.xpect.registry;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,13 +7,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xpect.util.ExtensionFactoryUtil;
+import org.eclipse.xpect.util.ExtensionFactoryUtil.NameAndClass;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -21,33 +22,93 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class StandalonePluginXMLParser {
 
+	public static class EditorInfo implements ExtensionInfo {
+		private final String clazz;
+		private final Collection<String> fileExtensions;
+		private final String rtLang;
+		private final String uiLang;
+
+		public EditorInfo(String rtLang, String uiLang, String clazz, Collection<String> fileExtensions) {
+			super();
+			this.rtLang = rtLang;
+			this.uiLang = uiLang;
+			this.clazz = clazz;
+			this.fileExtensions = fileExtensions;
+		}
+
+		public String getClazz() {
+			return clazz;
+		}
+
+		public Collection<String> getFileExtensions() {
+			return fileExtensions;
+		}
+
+		public String getRtLang() {
+			return rtLang;
+		}
+
+		public String getUiLang() {
+			return uiLang;
+		}
+
+		@Override
+		public String toString() {
+			return "EMFExtensionParser exts=" + fileExtensions + " rtLang=" + rtLang + " uiLang=" + uiLang + " class" + clazz;
+		}
+
+	}
+
+	protected static class EditorsHandler extends ExtensionPointHandler {
+
+		@Override
+		public void beginElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+			if ("editor".equals(qName)) {
+				NameAndClass nameAndClass = ExtensionFactoryUtil.parseExtensionFactory(attributes.getValue("class"));
+				String exts = attributes.getValue("extensions");
+				String rtLang = attributes.getValue("id");
+				Set<String> extensions = exts != null ? Sets.newHashSet(exts.split(",")) : Collections.<String> emptySet();
+				info.add(new EditorInfo(rtLang, nameAndClass.getUiLangName(), nameAndClass.getClazz(), extensions));
+			}
+		}
+	}
+
+	// point="org.eclipse.ui.editors">
+	// <editor
+	// class="org.eclipse.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+	// contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+	// default="true"
+	// extensions="xpect"
+	// id="org.eclipse.xpect.Xpect"
+	// name="Xpect Editor">
+	// </editor>
+
 	protected static class EMFExtensionParserHandler extends ExtensionPointHandler {
 
 		@Override
 		public void beginElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			if ("parser".equals(qName)) {
-				Pair<String, String> pair = parseExtensionFactory(attributes.getValue("class"));
+				NameAndClass nameAndClass = ExtensionFactoryUtil.parseExtensionFactory(attributes.getValue("class"));
 				String type = attributes.getValue("type");
-				info.add(new EMFExtensionParserInfo(pair.getFirst(), pair.getSecond(), type));
+				info.add(new EMFExtensionParserInfo(nameAndClass.getUiLangName(), nameAndClass.getClazz(), type));
 			}
 		}
 	}
 
 	public static class EMFExtensionParserInfo implements ExtensionInfo {
 		private final String clazz;
-		private final String language;
 		private final String type;
+		private final String uiLangName;
 
-		public EMFExtensionParserInfo(String language, String clazz, String type) {
+		public EMFExtensionParserInfo(String uiLangName, String clazz, String type) {
 			super();
-			this.language = language;
+			this.uiLangName = uiLangName;
 			this.clazz = clazz;
 			this.type = type;
 		}
@@ -56,17 +117,17 @@ public class StandalonePluginXMLParser {
 			return clazz;
 		}
 
-		public String getLanguage() {
-			return language;
-		}
-
 		public String getType() {
 			return type;
 		}
 
+		public String getUiLangName() {
+			return uiLangName;
+		}
+
 		@Override
 		public String toString() {
-			return "EMFExtensionParser type=" + type + " language=" + language + " class" + clazz;
+			return "EMFExtensionParser type=" + type + " uiLangName=" + uiLangName + " class" + clazz;
 		}
 
 	}
@@ -146,25 +207,6 @@ public class StandalonePluginXMLParser {
 			return info;
 		}
 
-		protected Pair<String, String> parseExtensionFactory(String factAndClass) {
-			String[] segs = factAndClass.split(":");
-			if (segs.length == 2) {
-				String fact = segs[0];
-				String clazz = segs[1];
-				if (fact.endsWith(EXECUTABLE_EXTENSION_FACTORY)) {
-					String[] s = fact.substring(0, fact.length() - EXECUTABLE_EXTENSION_FACTORY.length()).split("\\.");
-					List<String> result = Lists.newArrayList();
-					if (s.length > 1 && "ui".equals(s[s.length - 2]))
-						for (int i = 0; i < s.length; i++)
-							if (i != s.length - 2)
-								result.add(s[i]);
-					String lang = Joiner.on(".").join(result);
-					return Tuples.create(lang, clazz);
-				}
-				return Tuples.create(null, clazz);
-			} else
-				return Tuples.create(null, factAndClass);
-		}
 	}
 
 	protected static class PluginXMLContentHandler extends DefaultHandler {
@@ -256,13 +298,13 @@ public class StandalonePluginXMLParser {
 	 * 
 	 * }
 	 */
-	protected static final String EXECUTABLE_EXTENSION_FACTORY = "ExecutableExtensionFactory";
 	protected static Map<String, Class<? extends ExtensionPointHandler>> handlers;
 
 	static {
 		handlers = Maps.newHashMap();
 		handlers.put("org.eclipse.emf.ecore.generated_package", EMFGeneratedPackageHandler.class);
 		handlers.put("org.eclipse.emf.ecore.extension_parser", EMFExtensionParserHandler.class);
+		handlers.put("org.eclipse.ui.editors", EditorsHandler.class);
 		// handlers.put("org.eclipse.xtext.extension_resourceServiceProvider",
 		// XtextResourceServiceProviderHandler.class);
 	}

@@ -13,6 +13,8 @@ public class ContentTypeHelper {
 	}
 
 	public XpectContentType getContentType(IFile file) {
+		if (file == null)
+			return XpectContentType.BINARY;
 		InputStream contents = null;
 		try {
 			contents = file.getContents();
