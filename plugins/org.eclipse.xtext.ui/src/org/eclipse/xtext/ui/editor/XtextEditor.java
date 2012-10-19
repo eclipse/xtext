@@ -92,6 +92,7 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -804,13 +805,12 @@ public class XtextEditor extends TextEditor {
 		 */
 		@Override
 		public void run() {
-			// TODO preferences
 			// Check whether we are in a java code partition and the preference is enabled
-			//			final IPreferenceStore store= getPreferenceStore();
-			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
-			//				super.run();
-			//				return;
-			//			}
+			final IPreferenceStore store= getPreferenceStore();
+			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+				super.run();
+				return;
+			}
 
 			final ISourceViewer viewer = getSourceViewer();
 			final IDocument document = viewer.getDocument();
@@ -1021,13 +1021,12 @@ public class XtextEditor extends TextEditor {
 		 */
 		@Override
 		public void run() {
-			// TODO preferences
 			// Check whether we are in a java code partition and the preference is enabled
-			//			final IPreferenceStore store= getPreferenceStore();
-			//			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
-			//				super.run();
-			//				return;
-			//			}
+			final IPreferenceStore store= getPreferenceStore();
+			if (!store.getBoolean(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION)) {
+				super.run();
+				return;
+			}
 
 			final ISourceViewer viewer = getSourceViewer();
 			final IDocument document = viewer.getDocument();

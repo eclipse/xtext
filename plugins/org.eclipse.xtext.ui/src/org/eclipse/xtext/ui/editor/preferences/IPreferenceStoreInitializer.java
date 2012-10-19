@@ -22,11 +22,20 @@ import com.google.inject.TypeLiteral;
  */
 public interface IPreferenceStoreInitializer {
 	/**
-	 * 
+	 * Initialize preference values with the given {@link IPreferenceStoreAccess}
 	 */
 	public void initialize(IPreferenceStoreAccess access);
 	
-	
+	/**
+	 * @since 2.4
+	 */
+	static class Default implements IPreferenceStoreInitializer {
+
+		public void initialize(IPreferenceStoreAccess access) {
+			access.getWritablePreferenceStore().setDefault(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION, true);
+		}
+		
+	}
 	/**
 	 * a composite initialize calling all registered {@link IPreferenceStoreInitializer}s
 	 */
