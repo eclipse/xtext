@@ -44,7 +44,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -558,7 +557,6 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     String _plus_1 = (_plus + ".java");
     CharSequence _get = _files.get(_plus_1);
     final String code = _get.toString();
-    InputOutput.<String>println(code);
     String _identifier_1 = type.getIdentifier();
     final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
     EList<EObject> _contents_1 = res.getContents();
