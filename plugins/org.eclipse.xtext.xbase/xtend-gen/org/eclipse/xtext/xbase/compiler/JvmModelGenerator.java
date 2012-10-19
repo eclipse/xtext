@@ -254,6 +254,12 @@ public class JvmModelGenerator implements IGenerator {
           }
         };
       IterableExtensions.<JvmEnumerationLiteral>forEach(_literals, _function);
+      EList<JvmEnumerationLiteral> _literals_1 = it.getLiterals();
+      boolean _isEmpty = _literals_1.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        appendable.append(";");
+      }
       EList<JvmMember> _members = it.getMembers();
       final Function1<JvmMember,Boolean> _function_1 = new Function1<JvmMember,Boolean>() {
           public Boolean apply(final JvmMember it) {

@@ -7,6 +7,7 @@ import com.google.inject.Provider;
 import foo.TestAnnotation;
 import foo.TestAnnotation2;
 import foo.TestAnnotations;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.AbstractList;
 import java.util.List;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -490,6 +492,48 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
+  public void testBug377002() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+          public void apply(final JvmEnumerationType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "WARN");
+            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "ERROR");
+            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+            EList<JvmMember> _members_2 = it.getMembers();
+            JvmEnumerationLiteral _enumerationLiteral_2 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "DEBUG");
+            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_2);
+            EList<JvmMember> _members_3 = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_3, _method);
+          }
+        };
+      final JvmEnumerationType clazz = this.builder.toEnumerationType(expression, "my.test.Level", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      Field _field = compiled.getField("WARN");
+      Assert.assertNotNull(_field);
+      Field _field_1 = compiled.getField("ERROR");
+      Assert.assertNotNull(_field_1);
+      Field _field_2 = compiled.getField("DEBUG");
+      Assert.assertNotNull(_field_2);
+      Method _method = compiled.getMethod("doStuff");
+      Assert.assertNotNull(_method);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public JvmTypeReference typeRef(final EObject ctx, final Class<? extends Object> clazz) {
     return this.references.getTypeForName(clazz, ctx);
   }
@@ -514,6 +558,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     String _plus_1 = (_plus + ".java");
     CharSequence _get = _files.get(_plus_1);
     final String code = _get.toString();
+    InputOutput.<String>println(code);
     String _identifier_1 = type.getIdentifier();
     final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
     EList<EObject> _contents_1 = res.getContents();
