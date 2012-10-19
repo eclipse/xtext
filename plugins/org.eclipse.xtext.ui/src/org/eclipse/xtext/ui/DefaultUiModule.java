@@ -345,6 +345,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return LanguageAwareMarkerTypeProvider.class;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends IPreferenceStoreInitializer> bindIPreferenceStoreInitializer() {
+		return IPreferenceStoreInitializer.Default.class;
+	}
 }
 
 
