@@ -1,13 +1,15 @@
 setpref targetPlatformPath="${build.root}/target.platform"
 
-importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
-addbaseline -A "xtend-api-baseline"
+#importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
+#addbaseline -A "xtend-api-baseline"
 
-import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtend-platform.mspec"
-resolve "${releng.project.location}/releng/xtend.cquery"
+#import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtend-platform.mspec"
+#resolve "${releng.project.location}/releng/xtend.cquery"
+
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtend.releng/releng/local/tests-Galileo-local.target
+
+resolve "${checkout.location}/releng/org.eclipse.xtend.releng/releng/tests/xtend-test.mspec"
 
 build
-#junit --launch "org.eclipse.xtend.core.tests/org.eclipse.xtend.core.tests.launch" --flatXML --output "${build.root}/xtend.test.results/org.eclipse.xtend.core.tests.xml"
+junit --launch "org.eclipse.xtend.macro.lang.tests/org.eclipse.xtend.macro.lang.tests.launch" --flatXML --output ${build.root}/xtend.test.results/org.eclipse.xtend.macro.lang.tests.xml
 
-perform --properties "${releng.project.location}/releng/xtend-build.properties" "org.eclipse.xtend.build#build"
-perform --properties "${releng.project.location}/releng/xtend-build.properties" "org.eclipse.xtend.releng#setup.promoter"
