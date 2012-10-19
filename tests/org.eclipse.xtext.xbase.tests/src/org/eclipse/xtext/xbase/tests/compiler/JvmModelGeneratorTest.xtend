@@ -219,6 +219,25 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		compile(expression.eResource, clazz)
 
 	}
+    
+    
+    @Test
+    def void testBug377002(){
+        val expression = expression("null")
+        val clazz = expression.toEnumerationType("my.test.Level") [
+            members += expression.toEnumerationLiteral("WARN")
+            members += expression.toEnumerationLiteral("ERROR")
+            members += expression.toEnumerationLiteral("DEBUG")
+            members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
+                setBody(expression)
+            ]
+        ]
+        val compiled = compile(expression.eResource, clazz)
+        assertNotNull(compiled.getField("WARN"))
+        assertNotNull(compiled.getField("ERROR"))
+        assertNotNull(compiled.getField("DEBUG"))
+        assertNotNull(compiled.getMethod("doStuff"))
+    }
 
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {
 		return references.getTypeForName(clazz, ctx)
@@ -234,6 +253,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(res, fsa)
 		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
+        println (code)
 		val compiledClass = javaCompiler.compileToClass(type.identifier, code)
 		helper.assertNoErrors(res.contents.head)
 		return compiledClass

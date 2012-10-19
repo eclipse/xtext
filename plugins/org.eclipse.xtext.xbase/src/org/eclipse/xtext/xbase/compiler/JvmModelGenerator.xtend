@@ -153,6 +153,9 @@ class JvmModelGenerator implements IGenerator {
 		appendable.append("{")
 		val b = Wrapper::wrap(true)
 		literals.forEach[b.set(generateEnumLiteral(appendable.trace(it), b.get()))]
+		if (!literals.empty) {
+		  appendable.append(";")    
+		}
 		members.filter[!(it instanceof JvmEnumerationLiteral)].forEach [ b.set(generateMember(appendable.trace(it), b.get())) ]
 		appendable.newLine.append("}").newLine
 	}
