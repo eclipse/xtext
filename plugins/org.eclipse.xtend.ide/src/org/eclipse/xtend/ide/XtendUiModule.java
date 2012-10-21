@@ -308,8 +308,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	@Override
-	public Class<? extends IPreferenceStoreInitializer> bindIPreferenceStoreInitializer() {
-		return XtendPreferenceStoreInitializer.class;
+	public void configureSmartCaretPreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
+				.to(XtendPreferenceStoreInitializer.class);
 	}
 
 }
