@@ -7,6 +7,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -19,6 +20,9 @@ public class AssimilatingModule extends AbstractDelegatingModule {
 		Class<? extends ISemanticHighlightingCalculator> originalType = getOriginalType(ISemanticHighlightingCalculator.class);
 		if (originalType != null)
 			binder.bind(ISemanticHighlightingCalculator.class).annotatedWith(DefaultBinding.class).to(originalType);
+		binder.bind(IResourceValidator.class).to(XpectResourceValidator.class);
+		Class<? extends IResourceValidator> originalValidator = getOriginalType(IResourceValidator.class);
+		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(originalValidator);
 	}
 
 	public static class SemCalc implements ISemanticHighlightingCalculator {
