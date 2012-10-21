@@ -1,5 +1,4 @@
-
-/* XPECT_CLASS org.eclipse.xpect.xtext.lib.tests.ValidationTest END_CLASS */
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.validation.DMValidationTest END_CLASS */
 
 package pkg1 {
 	entity MyEntity {

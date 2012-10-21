@@ -53,11 +53,11 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 					return Collections.emptyList();
 				XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
 				Set<Issue> matched = Sets.newHashSet();
-				for (XpectInvocation inv : xpectFile.getInvocations()) {
-					int offset = new ThisOffsetProvider(inv, xresource).getOffset();
-					addAll(matched, filter(issues, new IssueOverlapsRangePredicate(xresource, offset, getExpectedSeverity(inv))));
-				}
-				System.out.println("filtering " + matched);
+				for (XpectInvocation inv : xpectFile.getInvocations())
+					if (!inv.isIgnore()) {
+						int offset = new ThisOffsetProvider(inv, xresource).getOffset();
+						addAll(matched, filter(issues, new IssueOverlapsRangePredicate(xresource, offset, getExpectedSeverity(inv))));
+					}
 				issues.removeAll(matched);
 				issues.addAll(validateXpect(xresource, mode, indicator));
 				return newArrayList(issues);
