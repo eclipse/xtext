@@ -27,16 +27,6 @@ public interface IPreferenceStoreInitializer {
 	public void initialize(IPreferenceStoreAccess access);
 	
 	/**
-	 * @since 2.4
-	 */
-	static class Default implements IPreferenceStoreInitializer {
-
-		public void initialize(IPreferenceStoreAccess access) {
-			access.getWritablePreferenceStore().setDefault(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION, true);
-		}
-		
-	}
-	/**
 	 * a composite initialize calling all registered {@link IPreferenceStoreInitializer}s
 	 */
 	static class CompositeImpl implements IPreferenceStoreInitializer {

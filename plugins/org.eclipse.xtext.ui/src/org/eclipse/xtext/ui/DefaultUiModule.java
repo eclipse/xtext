@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
+import org.eclipse.xtext.ui.editor.SmartCaretPreferenceInitializer;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
@@ -348,8 +349,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.4
 	 */
-	public Class<? extends IPreferenceStoreInitializer> bindIPreferenceStoreInitializer() {
-		return IPreferenceStoreInitializer.Default.class;
+	public void configureSmartCaretPreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
+				.to(SmartCaretPreferenceInitializer.class);
 	}
 }
 
