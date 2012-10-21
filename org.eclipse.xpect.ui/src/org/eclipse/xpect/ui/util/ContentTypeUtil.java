@@ -1,4 +1,4 @@
-package org.eclipse.xpect.ui.editor;
+package org.eclipse.xpect.ui.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 
-public class ContentTypeHelper {
+public class ContentTypeUtil {
 
 	public enum XpectContentType {
 		BINARY, TEXT, XPECT
@@ -15,6 +15,8 @@ public class ContentTypeHelper {
 	public XpectContentType getContentType(IFile file) {
 		if (file == null)
 			return XpectContentType.BINARY;
+		if ("xpect".equals(file.getFileExtension()))
+			return XpectContentType.TEXT;
 		InputStream contents = null;
 		try {
 			contents = file.getContents();

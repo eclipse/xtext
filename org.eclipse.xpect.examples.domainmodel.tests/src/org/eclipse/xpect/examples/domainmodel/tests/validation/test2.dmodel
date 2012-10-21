@@ -1,0 +1,12 @@
+
+/* XPECT_CLASS org.eclipse.xpect.xtext.lib.tests.ValidationTest END_CLASS */
+
+
+package pkg1 {
+	entity MyEntity {
+		// XPECT errors --> "Couldn't resolve reference to JvmType 'integer'." at "integer"
+		id:integer
+	}
+}
+
+

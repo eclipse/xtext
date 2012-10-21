@@ -10,8 +10,9 @@ import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
-import org.eclipse.xpect.ui.editor.ContentTypeHelper.XpectContentType;
 import org.eclipse.xpect.ui.internal.XpectActivator;
+import org.eclipse.xpect.ui.util.ContentTypeUtil;
+import org.eclipse.xpect.ui.util.ContentTypeUtil.XpectContentType;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -19,7 +20,7 @@ import com.google.inject.Inject;
 public class XpectEditorAssociationOverride implements IEditorAssociationOverride {
 
 	@Inject
-	private ContentTypeHelper contentTypeHelper;
+	private ContentTypeUtil contentTypeHelper;
 
 	private final IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();
 

@@ -11,6 +11,28 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class IssueVisualizer {
+	protected String issueToString(Issue issue) {
+		StringBuffer result = new StringBuffer();
+		result.append(issue.getSeverity().toString().toLowerCase());
+		result.append(" - ");
+		result.append(issue.getMessage().replace("\n", "\\n"));
+		return result.toString();
+	}
+
+	/**
+	 * ... because string.split() ignores trailing whitespace (wtf!)
+	 */
+	protected List<String> splitIntoLines(String document) {
+		List<String> result = Lists.newArrayList();
+		int index, lastIndex = 0;
+		while ((index = document.indexOf('\n', lastIndex)) >= 0) {
+			result.add(document.substring(lastIndex, index));
+			lastIndex = index + 1;
+		}
+		result.add(document.substring(lastIndex, document.length()));
+		return result;
+	}
+
 	public String visualize(String document, List<Issue> issues) {
 		@SuppressWarnings("unchecked")
 		List<Issue>[] mapped = new List[document.length()];
@@ -35,7 +57,7 @@ public class IssueVisualizer {
 		}
 		boolean first = true;
 		int offset = 0;
-		for (String line : document.split("\\n")) {
+		for (String line : splitIntoLines(document)) {
 			if (first)
 				first = false;
 			else
@@ -67,14 +89,6 @@ public class IssueVisualizer {
 			}
 			offset += line.length() + 1;
 		}
-		return result.toString();
-	}
-
-	protected String issueToString(Issue issue) {
-		StringBuffer result = new StringBuffer();
-		result.append(issue.getSeverity().toString().toLowerCase());
-		result.append(" - ");
-		result.append(issue.getMessage().replace("\n", "\\n"));
 		return result.toString();
 	}
 

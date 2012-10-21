@@ -1,18 +1,23 @@
 package org.eclipse.xpect.ui.editor;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IContributor;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.registry.IWorkbenchRegistryConstants;
 import org.eclipse.xpect.registry.ILanguageInfo;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xpect.ui.util.XtextInjectorSetupUtil;
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 @SuppressWarnings("restriction")
 public class XpectEditorConfigurationElement implements IConfigurationElement {
@@ -34,13 +39,22 @@ public class XpectEditorConfigurationElement implements IConfigurationElement {
 		this.delegate = delegate;
 	}
 
+	protected IFile getFile() {
+		try {
+			IEditorReference[] references = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences();
+			IEditorInput input = references[0].getEditorInput();
+			if (input instanceof IFileEditorInput) {
+				return ((IFileEditorInput) input).getFile();
+			}
+			return null;
+		} catch (PartInitException e) {
+			throw new RuntimeException();
+		}
+	}
+
 	protected Object createEditor() {
 		ILanguageInfo language = ILanguageInfo.Registry.INSTANCE.getLanguageByName(this.language);
-		Module runtimeModule = language.getRuntimeModule();
-		Module sharedStateModuel = new SharedStateModule();
-		Module uiModule = language.getUIModule();
-		Module assimilatingModule = new AssimilatingModule();
-		Injector injector = language.getInjector(runtimeModule, sharedStateModuel, uiModule, assimilatingModule);
+		Injector injector = XtextInjectorSetupUtil.getWorkbenchInjector(language, getFile());
 		Bundle bundle = Platform.getBundle(this.pluginID);
 		try {
 			Class<?> editorClass = bundle.loadClass(this.clazz);

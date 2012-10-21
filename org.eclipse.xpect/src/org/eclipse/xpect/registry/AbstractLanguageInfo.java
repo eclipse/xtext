@@ -52,9 +52,7 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 			return injector;
 		} else {
 			Set<Class<? extends Module>> key = Sets.newHashSetWithExpectedSize(modules.length);
-			Injector defaultInjector = getInjector();
 			for (Module m : modules) {
-				defaultInjector.injectMembers(m);
 				key.add(m.getClass());
 			}
 			Injector result = injectors.get(key);

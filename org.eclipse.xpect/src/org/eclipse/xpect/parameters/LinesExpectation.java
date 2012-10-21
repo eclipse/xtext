@@ -43,6 +43,15 @@ public @interface LinesExpectation {
 
 		@Override
 		public void assertEquals(Iterable<?> actual) {
+			assertEquals("", actual, false);
+		}
+
+		@Override
+		public void assertEquals(String message, Iterable<?> actual) {
+			assertEquals(message, actual, false);
+		}
+
+		protected void assertEquals(String message, Iterable<?> actual, boolean forceFail) {
 			Assert.assertNotNull(actual);
 			String indentation = getIndentation();
 
@@ -77,8 +86,13 @@ public @interface LinesExpectation {
 				}
 				String expDoc = replaceInDocument(indentation, Joiner.on('\n').join(expString));
 				String actDoc = replaceInDocument(indentation, Joiner.on('\n').join(actString));
-				throw new ComparisonFailure("", expDoc, actDoc);
+				throw new ComparisonFailure(message, expDoc, actDoc);
 			}
+		}
+
+		@Override
+		public void fail(String message, Iterable<?> actual) {
+			assertEquals(message, actual, true);
 		}
 
 		public LinesExpectation getAnnotation() {

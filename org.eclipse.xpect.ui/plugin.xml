@@ -291,7 +291,7 @@
   <extension
         point="org.eclipse.xtext.ui.shared.overridingGuiceModule">
      <module
-           class="org.eclipse.xpect.ui.Overriding">
+           class="org.eclipse.xpect.ui.builder.XpectOverridingGuiceModule">
      </module>
   </extension>
   <extension
