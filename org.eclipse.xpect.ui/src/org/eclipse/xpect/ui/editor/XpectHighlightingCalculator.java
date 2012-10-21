@@ -15,25 +15,24 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
-public class XpectSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
+public class XpectHighlightingCalculator implements ISemanticHighlightingCalculator {
 
 	protected static Pattern ALPHANUMERIC = Pattern.compile("[a-zA-Z0-9_]+");
 
 	protected static final Map<String, String> RULE_TO_FOMRAT = Maps.newHashMap();
 
 	static {
-		RULE_TO_FOMRAT.put("ID", DefaultHighlightingConfiguration.DEFAULT_ID);
-		RULE_TO_FOMRAT.put("INVOCATION", DefaultHighlightingConfiguration.DEFAULT_ID);
-		RULE_TO_FOMRAT.put("ML_COMMENT", DefaultHighlightingConfiguration.COMMENT_ID);
-		RULE_TO_FOMRAT.put("SL_COMMENT", DefaultHighlightingConfiguration.COMMENT_ID);
-		RULE_TO_FOMRAT.put("INT", DefaultHighlightingConfiguration.NUMBER_ID);
+		RULE_TO_FOMRAT.put("ID", XpectHighlightingConfiguration.DEFAULT_ID);
+		RULE_TO_FOMRAT.put("INVOCATION", XpectHighlightingConfiguration.DEFAULT_ID);
+		RULE_TO_FOMRAT.put("ML_COMMENT", XpectHighlightingConfiguration.COMMENT_ID);
+		RULE_TO_FOMRAT.put("SL_COMMENT", XpectHighlightingConfiguration.COMMENT_ID);
+		RULE_TO_FOMRAT.put("INT", XpectHighlightingConfiguration.NUMBER_ID);
 	}
 
 	@DefaultBinding
@@ -49,9 +48,9 @@ public class XpectSemanticHighlightingCalculator implements ISemanticHighlightin
 
 	protected void provideHighlightingForKeyword(ILeafNode node, Keyword kw, IHighlightedPositionAcceptor acceptor) {
 		if (ALPHANUMERIC.matcher(kw.getValue()).matches())
-			acceptor.addPosition(node.getOffset(), node.getLength(), DefaultHighlightingConfiguration.KEYWORD_ID);
+			acceptor.addPosition(node.getOffset(), node.getLength(), XpectHighlightingConfiguration.KEYWORD_ID);
 		else
-			acceptor.addPosition(node.getOffset(), node.getLength(), DefaultHighlightingConfiguration.PUNCTUATION_ID);
+			acceptor.addPosition(node.getOffset(), node.getLength(), XpectHighlightingConfiguration.PUNCTUATION_ID);
 	}
 
 	protected void provideHighlightingForRule(ILeafNode node, TerminalRule rule, IHighlightedPositionAcceptor acceptor) {
