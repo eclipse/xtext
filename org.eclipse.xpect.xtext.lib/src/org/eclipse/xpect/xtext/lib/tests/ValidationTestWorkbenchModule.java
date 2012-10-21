@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.XpectInvocation;
 import org.eclipse.xpect.registry.DefaultBinding;
+import org.eclipse.xpect.ui.editor.XpectResourceValidator;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
 import org.eclipse.xpect.util.AbstractDelegatingModule;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
@@ -25,15 +26,10 @@ import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Binder;
-import com.google.inject.Inject;
 
 public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 
-	public static class TestingResourceValidator implements IResourceValidator {
-
-		@Inject
-		@DefaultBinding
-		private IResourceValidator delegate;
+	public static class TestingResourceValidator extends XpectResourceValidator {
 
 		protected Severity getExpectedSeverity(XpectInvocation inv) {
 			if (inv == null || inv.eIsProxy() || inv.getElement() == null || inv.getElement().eIsProxy())
@@ -52,7 +48,7 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 		public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 			if (resource instanceof XtextResource && ((XtextResource) resource).getParseResult() != null) {
 				XtextResource xresource = (XtextResource) resource;
-				Set<Issue> issues = Sets.newLinkedHashSet(delegate.validate(resource, mode, indicator));
+				Set<Issue> issues = Sets.newLinkedHashSet(validateDelegate(resource, mode, indicator));
 				if (issues.isEmpty())
 					return Collections.emptyList();
 				XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
@@ -63,9 +59,10 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 				}
 				System.out.println("filtering " + matched);
 				issues.removeAll(matched);
+				issues.addAll(validateXpect(xresource, mode, indicator));
 				return newArrayList(issues);
 			}
-			return delegate.validate(resource, mode, indicator);
+			return super.validate(resource, mode, indicator);
 		}
 	}
 

@@ -49,16 +49,17 @@ public class XpectFileAccess {
 	}
 
 	public static XpectFile getXpectFile(Resource resource) {
-		for (EObject contents : resource.getContents())
-			if (contents instanceof XpectFile)
-				return (XpectFile) contents;
+		return findXpectFile(getXpectResource(resource));
+	}
+
+	public static XtextResource getXpectResource(Resource resource) {
 		String document = ((XtextResource) resource).getParseResult().getRootNode().getText();
 		for (Adapter a : resource.eAdapters())
 			if (a instanceof XpectResourceAdapter) {
 				XtextResource xpectResource = ((XpectResourceAdapter) a).resource;
 				if (!xpectResource.getParseResult().getRootNode().getText().equals(document))
 					load(xpectResource, document);
-				return findXpectFile(xpectResource);
+				return xpectResource;
 			}
 		ResourceSet rs = cloneResourceSet(resource.getResourceSet());
 		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension("xpect").getInjector();
@@ -66,7 +67,7 @@ public class XpectFileAccess {
 		rs.getResources().add(xpectResource);
 		load(xpectResource, document);
 		resource.eAdapters().add(new XpectResourceAdapter(xpectResource));
-		return findXpectFile(xpectResource);
+		return xpectResource;
 
 	}
 

@@ -95,6 +95,8 @@ public class TypeUiUtil {
 			bundleName = getBundleNameFromDir(file);
 		else
 			return null;
+		if (bundleName == null)
+			return null;
 		Bundle bundle = Platform.getBundle(bundleName);
 		String className = jvmType.getQualifiedName();
 		try {
