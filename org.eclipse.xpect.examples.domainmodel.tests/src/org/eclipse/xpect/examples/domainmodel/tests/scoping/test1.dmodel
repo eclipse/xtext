@@ -1,11 +1,10 @@
-
-
-
-/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest
+/* 
+XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest
 	ResourceSet {
 		ThisFile {}
 	}
-END_CLASS */
+END_CLASS 
+*/
 
 
  

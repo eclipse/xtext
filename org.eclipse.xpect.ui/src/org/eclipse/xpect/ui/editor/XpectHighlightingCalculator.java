@@ -55,16 +55,24 @@ public class XpectHighlightingCalculator implements ISemanticHighlightingCalcula
 
 	protected void provideHighlightingForRule(ILeafNode node, TerminalRule rule, IHighlightedPositionAcceptor acceptor) {
 		String conf = RULE_TO_FOMRAT.get(rule.getName());
-		// System.out.println(rule.getName() + " -> " + conf);
 		if (conf != null)
 			acceptor.addPosition(node.getOffset(), node.getLength(), conf);
+	}
+
+	protected void provideHighlightingForHidden(ILeafNode node, EObject grammarEle, IHighlightedPositionAcceptor acceptor) {
+		if (node.getText().trim().length() == 0)
+			acceptor.addPosition(node.getOffset(), node.getLength(), XpectHighlightingConfiguration.WHITESPACE_ID);
+		else
+			acceptor.addPosition(node.getOffset(), node.getLength(), XpectHighlightingConfiguration.COMMENT_ID);
 	}
 
 	protected void provideHighlightingForXpect(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode rootNode = XpectFileAccess.getXpectResource(resource).getParseResult().getRootNode();
 		for (ILeafNode node : rootNode.getLeafNodes()) {
 			EObject ele = node.getGrammarElement();
-			if (ele instanceof Keyword)
+			if (node.isHidden())
+				provideHighlightingForHidden(node, ele, acceptor);
+			else if (ele instanceof Keyword)
 				provideHighlightingForKeyword(node, (Keyword) ele, acceptor);
 			else if (ele instanceof TerminalRule)
 				provideHighlightingForRule(node, (TerminalRule) ele, acceptor);

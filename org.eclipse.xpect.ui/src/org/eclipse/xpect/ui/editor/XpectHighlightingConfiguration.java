@@ -21,6 +21,7 @@ public class XpectHighlightingConfiguration implements IHighlightingConfiguratio
 	public static final String STRING_ID = "xpect.string";
 	public static final String NUMBER_ID = "xpect.number";
 	public static final String DEFAULT_ID = "xpect.default";
+	public static final String WHITESPACE_ID = "xpect.whitespace";
 	public static final String INVALID_TOKEN_ID = "xpect.error";
 
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -32,12 +33,13 @@ public class XpectHighlightingConfiguration implements IHighlightingConfiguratio
 		acceptor.acceptDefaultHighlighting(STRING_ID, "Xpect String", stringTextStyle());
 		acceptor.acceptDefaultHighlighting(NUMBER_ID, "Xpect Number", numberTextStyle());
 		acceptor.acceptDefaultHighlighting(DEFAULT_ID, "Xpect Default", defaultTextStyle());
+		acceptor.acceptDefaultHighlighting(WHITESPACE_ID, "Xpect Whitespace", whitespaceTextStyle());
 		acceptor.acceptDefaultHighlighting(INVALID_TOKEN_ID, "Xpect Invalid Symbol", errorTextStyle());
 	}
 
 	public TextStyle defaultTextStyle() {
 		TextStyle textStyle = new TextStyle();
-		textStyle.setBackgroundColor(new RGB(163, 227, 195));
+		textStyle.setBackgroundColor(new RGB(183, 247, 215));
 		textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}
@@ -73,6 +75,11 @@ public class XpectHighlightingConfiguration implements IHighlightingConfiguratio
 	}
 
 	public TextStyle punctuationTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		return textStyle;
+	}
+
+	public TextStyle whitespaceTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		return textStyle;
 	}
