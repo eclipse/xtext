@@ -216,9 +216,12 @@ public class PatchSetup implements IStartup {
 			public void run() {
 				workbench.addWindowListener(listener);
 				for (IWorkbenchWindow window : workbench.getWorkbenchWindows())
-					for (IWorkbenchPage page : window.getPages())
-						for (IViewReference part : page.getViewReferences())
+					for (IWorkbenchPage page : window.getPages()) {
+						page.addPartListener(listener);
+						for (IViewReference part : page.getViewReferences()) {
 							checkPart(part.getView(false));
+						}
+					}
 				// workbench.getActiveWorkbenchWindow().getSelectionService().addSelectionListener(new
 				// MyListener());
 			}
