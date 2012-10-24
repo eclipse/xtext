@@ -1,0 +1,34 @@
+/* 
+XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.linking.DMLinkingTest
+	ResourceSet {
+		ThisFile {}
+		File "test2.dmodel" {}
+	}
+END_CLASS 
+*/
+
+
+import pkg2.MyEntity2
+
+package pkg1 {
+	// XPECT linkedName at MyEntity2 --> pkg2.MyEntity2
+	entity MyEntity1 extends pkg2.MyEntity2 {
+		
+		// XPECT linkedName at id --> int
+		id:int
+		
+		// XPECT linkedName at String --> java.lang.String
+		name:String
+	}
+	
+	
+	// XPECT linkedFragment at MyEntity2 --> test2.dmodel#/1
+	entity MyEntity2 extends pkg2.MyEntity2 {
+		
+		// XPECT linkedFragment at id --> java:/Primitives#int
+		id:int
+		
+		// XPECT linkedFragment at String --> java:/Objects/java.lang.String#java.lang.String
+		name:String
+	}
+}
