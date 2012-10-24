@@ -1,0 +1,30 @@
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.jvmmodelinferrer.DMJvmModelInferrerTest END_CLASS */
+
+/*
+XPECT jvmModelSignatures ---
+package pkg1;
+
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+public class MyEntity {
+  public MyEntity() {...}
+  
+  public MyEntity(final Procedure1<MyEntity> initializer) {...}
+  
+  public String getName() {...}
+  
+  public void setName(final String name) {...}
+  
+  @Override
+  public String toString() {...}
+}
+----
+*/
+ 
+package pkg1 {
+	entity MyEntity {
+		name:String
+	}
+}
+
+
