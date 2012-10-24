@@ -10,7 +10,7 @@ END_CLASS
  
 package pkg1 {
 	entity MyEntity {
-		// XPECT scopedElements at int --> foo, bar, ...
+		// XPECT scope at int --> int, String, boolean, !foooobar, !innnnteger, ...
 		id:int
 		name:String
 	}

@@ -9,18 +9,18 @@ import java.util.List;
 
 import org.eclipse.xpect.parameters.ActualCollection.ActualItem;
 import org.eclipse.xpect.parameters.ActualCollection.ToString;
-import org.eclipse.xpect.parameters.ExpectationCollection.ExpectationItem;
 import org.eclipse.xpect.parameters.CommaSeparatedValuesExpectation.CommaSeparatedValuesExpectationParser;
+import org.eclipse.xpect.parameters.ExpectationCollection.ExpectationItem;
 import org.eclipse.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
 import org.eclipse.xpect.runner.XpectSingleParameterProvider;
 import org.eclipse.xpect.runner.XpectTestRunner;
 import org.eclipse.xpect.util.IRegion;
 import org.eclipse.xpect.util.ITypedProvider;
 import org.eclipse.xtext.util.Pair;
-import org.junit.Assert;
 import org.junit.ComparisonFailure;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -40,7 +40,11 @@ public @interface CommaSeparatedValuesExpectation {
 
 		@Override
 		public void assertEquals(Iterable<?> actual) {
-			Assert.assertNotNull(actual);
+			assertEquals(actual, null);
+		}
+
+		@Override
+		public void assertEquals(Iterable<?> actual, Predicate<String> predicate) {
 			String indentation = getIndentation();
 
 			ExpectationCollection exp = new ExpectationCollection();
@@ -57,7 +61,17 @@ public @interface CommaSeparatedValuesExpectation {
 			act.setQuoted(annotation.quoted());
 			act.setSeparator(',');
 			act.setWhitespaceSensitive(annotation.whitespaceSensitive());
-			act.init(actual, annotation.itemFormatter());
+			if (actual != null && predicate != null) {
+				if (exp.isWildcard())
+					act.init(exp.applyPredicate(predicate), annotation.itemFormatter());
+				else
+					act.init(actual, annotation.itemFormatter());
+			} else if (predicate != null)
+				act.init(exp.applyPredicate(predicate), annotation.itemFormatter());
+			else if (actual != null)
+				act.init(actual, annotation.itemFormatter());
+			else
+				throw new NullPointerException();
 
 			if (!exp.matches(act)) {
 				StringBuilder expString = new StringBuilder();
@@ -114,6 +128,11 @@ public @interface CommaSeparatedValuesExpectation {
 				String actDoc = replaceInDocument(indentation, actString.toString());
 				throw new ComparisonFailure("", expDoc, actDoc);
 			}
+		}
+
+		@Override
+		public void assertEquals(Predicate<String> predicate) {
+			assertEquals(null, predicate);
 		}
 
 		public CommaSeparatedValuesExpectation getAnnotation() {

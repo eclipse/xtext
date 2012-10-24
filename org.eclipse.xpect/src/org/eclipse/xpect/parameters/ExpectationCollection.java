@@ -12,6 +12,7 @@ import org.eclipse.xpect.parameters.ExpectationCollection.ExpectationItem;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -36,17 +37,88 @@ public class ExpectationCollection extends StringCollection<ExpectationItem> {
 			return negated;
 		}
 
-		public boolean isWildcard() {
-			return wildcard;
-		}
-
 		public boolean isPure() {
 			return !negated && !wildcard;
+		}
+
+		public boolean isWildcard() {
+			return wildcard;
 		}
 
 	}
 
 	final protected static String WILDCARD = "...";
+
+	public List<String> applyPredicate(Predicate<String> predicate) {
+		List<String> items = Lists.newArrayList();
+		for (ExpectationItem i : this)
+			if (!i.isWildcard() && predicate.apply(i.pure))
+				items.add(i.pure);
+		return items;
+	}
+
+	protected ExpectationItem createItem(String item, boolean negated, boolean quoted, boolean escaped) {
+		if (!escaped && !negated && !quoted && WILDCARD.equals(item))
+			return new ExpectationItem(item.toString(), false, true);
+		return new ExpectationItem(item.toString(), negated, false);
+	}
+
+	public void init(String expectation) {
+		items = createCollection();
+		boolean esc = false, escaped = true, quote = false, quoted = false, neg = false;
+		StringBuilder item = new StringBuilder();
+		StringBuilder ws = new StringBuilder();
+		for (int i = 0; i < expectation.length(); i++) {
+			char c = expectation.charAt(i);
+			if (!esc) {
+				if (!quote) {
+					if (c == separator) {
+						if (item.length() > 0)
+							items.add(createItem(item.toString(), neg, quoted, escaped));
+						neg = quoted = escaped = false;
+						item = new StringBuilder();
+						ws = new StringBuilder();
+						continue;
+					} else if (Character.isWhitespace(c)) {
+						ws.append(c);
+						continue;
+					} else if (c == '!' && item.length() == 0) {
+						neg = true;
+						continue;
+					}
+				}
+				if (this.quoted && c == this.quote) {
+					if (quote)
+						item.append(ws);
+					ws = new StringBuilder();
+					quote = !quote;
+					quoted = true;
+					continue;
+				} else if (c == '\\') {
+					escaped = esc = true;
+					continue;
+				}
+			} else {
+				esc = false;
+				switch (c) {
+				case 'n':
+					c = '\n';
+					break;
+				case 'r':
+					c = '\r';
+					break;
+				}
+			}
+			if (ws.length() > 0) {
+				if (item.length() > 0)
+					item.append(ws);
+				ws = new StringBuilder();
+			}
+			item.append(c);
+		}
+		if (item.length() > 0)
+			items.add(createItem(item.toString(), neg, quoted, escaped));
+	}
 
 	public boolean isPure() {
 		for (ExpectationItem i : this)
@@ -55,11 +127,11 @@ public class ExpectationCollection extends StringCollection<ExpectationItem> {
 		return true;
 	}
 
-	public boolean matches(ActualCollection actual) {
-		if (!isOrdered() || !actual.isOrdered())
-			return matchesUnordered(actual);
-		else
-			return matchesOrdered(actual);
+	public boolean isWildcard() {
+		for (ExpectationItem i : this)
+			if (i.isWildcard())
+				return true;
+		return false;
 	}
 
 	public List<Pair<Collection<ExpectationItem>, ActualItem>> map(ActualCollection actual) {
@@ -67,6 +139,72 @@ public class ExpectationCollection extends StringCollection<ExpectationItem> {
 			return mapUnordered(actual);
 		else
 			return mapOrdered(actual);
+	}
+
+	protected List<Pair<Collection<ExpectationItem>, ActualItem>> mapOrdered(ActualCollection actual) {
+		List<Pair<Collection<ExpectationItem>, ActualItem>> r = Lists.newArrayList();
+		List<ExpectationItem> exIt = Lists.newArrayList(this.iterator());
+		List<ActualItem> actIt = Lists.newArrayList(actual.iterator());
+		int exp = 0, act = 0;
+		while (exp < exIt.size() && act < actIt.size()) {
+			if (exIt.get(exp).isNegated() || exIt.get(exp).isWildcard()) {
+				Set<ExpectationItem> expectedNegated = Sets.newLinkedHashSet();
+				Set<ExpectationItem> expectedWildcard = Sets.newLinkedHashSet();
+				while (exp < exIt.size() && !exIt.get(exp).isPure()) {
+					if (exIt.get(exp).isNegated())
+						expectedNegated.add(exIt.get(exp));
+					else if (exIt.get(exp).isWildcard())
+						expectedWildcard.add(exIt.get(exp));
+					exp++;
+				}
+				while (act < actIt.size()) {
+					if (exp < exIt.size() && exIt.get(exp).isPure() && exIt.get(exp).equals(actIt.get(act))) {
+						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)), actIt.get(act)));
+						exp++;
+						act++;
+						break;
+					}
+					if (!expectedNegated.contains(actIt.get(act))) {
+						if (expectedWildcard.isEmpty())
+							r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(expectedNegated, actIt.get(act)));
+						else
+							r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(expectedWildcard, actIt.get(act)));
+					} else
+						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
+					act++;
+				}
+			} else if (exIt.get(exp).equals(actIt.get(act))) {
+				r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)), actIt.get(act)));
+				exp++;
+				act++;
+			} else {
+				int lact = act + 1;
+				while (lact < actIt.size() && !exIt.get(exp).equals(actIt.get(lact)))
+					lact++;
+				if (lact < actIt.size()) {
+					while (act < lact) {
+						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
+						act++;
+					}
+					r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)), actIt.get(lact)));
+					exp++;
+					act++;
+				} else {
+					r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)), null));
+					exp++;
+				}
+			}
+		}
+		while (act < actIt.size()) {
+			r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
+			act++;
+		}
+		while (exp < exIt.size()) {
+			if (exIt.get(exp).isPure())
+				r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)), null));
+			exp++;
+		}
+		return r;
 	}
 
 	protected List<Pair<Collection<ExpectationItem>, ActualItem>> mapUnordered(ActualCollection actual) {
@@ -111,77 +249,11 @@ public class ExpectationCollection extends StringCollection<ExpectationItem> {
 		return result;
 	}
 
-	protected List<Pair<Collection<ExpectationItem>, ActualItem>> mapOrdered(ActualCollection actual) {
-		List<Pair<Collection<ExpectationItem>, ActualItem>> r = Lists.newArrayList();
-		List<ExpectationItem> exIt = Lists.newArrayList(this.iterator());
-		List<ActualItem> actIt = Lists.newArrayList(actual.iterator());
-		int exp = 0, act = 0;
-		while (exp < exIt.size() && act < actIt.size()) {
-			if (exIt.get(exp).isNegated() || exIt.get(exp).isWildcard()) {
-				Set<ExpectationItem> expectedNegated = Sets.newLinkedHashSet();
-				Set<ExpectationItem> expectedWildcard = Sets.newLinkedHashSet();
-				while (exp < exIt.size() && !exIt.get(exp).isPure()) {
-					if (exIt.get(exp).isNegated())
-						expectedNegated.add(exIt.get(exp));
-					else if (exIt.get(exp).isWildcard())
-						expectedWildcard.add(exIt.get(exp));
-					exp++;
-				}
-				while (act < actIt.size()) {
-					if (exp < exIt.size() && exIt.get(exp).isPure() && exIt.get(exp).equals(actIt.get(act))) {
-						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(
-								Collections.singleton(exIt.get(exp)), actIt.get(act)));
-						exp++;
-						act++;
-						break;
-					}
-					if (!expectedNegated.contains(actIt.get(act))) {
-						if (expectedWildcard.isEmpty())
-							r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(expectedNegated,
-									actIt.get(act)));
-						else
-							r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(expectedWildcard,
-									actIt.get(act)));
-					} else
-						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
-					act++;
-				}
-			} else if (exIt.get(exp).equals(actIt.get(act))) {
-				r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)),
-						actIt.get(act)));
-				exp++;
-				act++;
-			} else {
-				int lact = act + 1;
-				while (lact < actIt.size() && !exIt.get(exp).equals(actIt.get(lact)))
-					lact++;
-				if (lact < actIt.size()) {
-					while (act < lact) {
-						r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
-						act++;
-					}
-					r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)),
-							actIt.get(lact)));
-					exp++;
-					act++;
-				} else {
-					r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)),
-							null));
-					exp++;
-				}
-			}
-		}
-		while (act < actIt.size()) {
-			r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(null, actIt.get(act)));
-			act++;
-		}
-		while (exp < exIt.size()) {
-			if (exIt.get(exp).isPure())
-				r.add(Tuples.<Collection<ExpectationItem>, ActualItem> create(Collections.singleton(exIt.get(exp)),
-						null));
-			exp++;
-		}
-		return r;
+	public boolean matches(ActualCollection actual) {
+		if (!isOrdered() || !actual.isOrdered())
+			return matchesUnordered(actual);
+		else
+			return matchesOrdered(actual);
 	}
 
 	protected boolean matchesOrdered(ActualCollection actual) {
@@ -250,68 +322,5 @@ public class ExpectationCollection extends StringCollection<ExpectationItem> {
 				return false;
 		}
 		return true;
-	}
-
-	public void init(String expectation) {
-		items = createCollection();
-		boolean esc = false, escaped = true, quote = false, quoted = false, neg = false;
-		StringBuilder item = new StringBuilder();
-		StringBuilder ws = new StringBuilder();
-		for (int i = 0; i < expectation.length(); i++) {
-			char c = expectation.charAt(i);
-			if (!esc) {
-				if (!quote) {
-					if (c == separator) {
-						if (item.length() > 0)
-							items.add(createItem(item.toString(), neg, quoted, escaped));
-						neg = quoted = escaped = false;
-						item = new StringBuilder();
-						ws = new StringBuilder();
-						continue;
-					} else if (Character.isWhitespace(c)) {
-						ws.append(c);
-						continue;
-					} else if (c == '!' && item.length() == 0) {
-						neg = true;
-						continue;
-					}
-				}
-				if (this.quoted && c == this.quote) {
-					if (quote)
-						item.append(ws);
-					ws = new StringBuilder();
-					quote = !quote;
-					quoted = true;
-					continue;
-				} else if (c == '\\') {
-					escaped = esc = true;
-					continue;
-				}
-			} else {
-				esc = false;
-				switch (c) {
-					case 'n':
-						c = '\n';
-						break;
-					case 'r':
-						c = '\r';
-						break;
-				}
-			}
-			if (ws.length() > 0) {
-				if (item.length() > 0)
-					item.append(ws);
-				ws = new StringBuilder();
-			}
-			item.append(c);
-		}
-		if (item.length() > 0)
-			items.add(createItem(item.toString(), neg, quoted, escaped));
-	}
-
-	protected ExpectationItem createItem(String item, boolean negated, boolean quoted, boolean escaped) {
-		if (!escaped && !negated && !quoted && WILDCARD.equals(item))
-			return new ExpectationItem(item.toString(), false, true);
-		return new ExpectationItem(item.toString(), negated, false);
 	}
 }
