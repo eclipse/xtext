@@ -31,6 +31,13 @@ public class OpenJavaMethodAction extends Action {
 		for (IMethod m : type.getMethods())
 			if (m.getElementName().equals(name))
 				return m;
+		String superType = type.getSuperclassName();
+		if (superType != null)
+			for (String[] resolved : type.resolveType(superType)) {
+				IType type2 = TypeUtil.findType(type.getJavaProject(), resolved[0] + "." + resolved[1]);
+				if (type2 != null)
+					return findMethod(type2, name);
+			}
 		return null;
 	}
 
