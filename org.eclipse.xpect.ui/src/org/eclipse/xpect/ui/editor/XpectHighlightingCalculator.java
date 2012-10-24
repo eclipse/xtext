@@ -33,6 +33,7 @@ public class XpectHighlightingCalculator implements ISemanticHighlightingCalcula
 		RULE_TO_FOMRAT.put("ML_COMMENT", XpectHighlightingConfiguration.COMMENT_ID);
 		RULE_TO_FOMRAT.put("SL_COMMENT", XpectHighlightingConfiguration.COMMENT_ID);
 		RULE_TO_FOMRAT.put("INT", XpectHighlightingConfiguration.NUMBER_ID);
+		RULE_TO_FOMRAT.put("STRING", XpectHighlightingConfiguration.STRING_ID);
 	}
 
 	@DefaultBinding
