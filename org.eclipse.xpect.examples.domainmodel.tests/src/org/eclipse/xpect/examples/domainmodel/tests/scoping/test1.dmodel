@@ -1,19 +1,17 @@
-/* 
-XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest
-	ResourceSet {
-		ThisFile {}
-	}
-END_CLASS 
-*/
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.scoping.DMScopingTest END_CLASS */
 
 
  
 package pkg1 {
 	entity MyEntity {
-		// XPECT scope at int --> int, String, boolean, !foooobar, !innnnteger, ...
+		// besides "int", we can reference... and we can not reference foooobar
+		// XPECT scope at int --> int, String, java.lang.String, boolean, !foooobar, !innnnteger, ...
 		id:int
 		name:String
 	}
+	
+	// XPECT scope at MyEntity --> MyEnt2, MyEntity, pkg1.MyEntity, ...
+	entity MyEnt2 extends MyEntity {}
 }
 
 

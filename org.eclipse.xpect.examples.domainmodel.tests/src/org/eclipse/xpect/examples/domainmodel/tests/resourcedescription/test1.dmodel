@@ -1,14 +1,10 @@
 
+/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.resourcedescription.DMResourceDescriptionTest END_CLASS */
 
 
-/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.resourcedescription.DMResourceDescriptionTest
-	ResourceSet {
-		ThisFile {}
-	}
-END_CLASS */
-
-
-/* XPECT exportedObjects ---
+/*
+these names are stored in the Xtext Index
+XPECT exportedObjects ---
 	domainmodel::Entity: pkg1.MyEntity
 	domainmodel::PackageDeclaration: pkg1
 	domainmodel::Property: pkg1.MyEntity.id
@@ -25,10 +21,14 @@ END_CLASS */
 	types::JvmOperation: pkg1.MyEntity.toString
 --- */
 
-/* XPECT importedNames ---
+/*
+these names have been imported from other files 
+XPECT importedNames ---
 --- */
 
-/* XPECT referenceDescriptions ---
+/*
+these references are stored in the Xtext Index
+XPECT referenceDescriptions ---
 	/0/@elements.0/@elements.0/@features.0::/@type type       --> java:/Primitives#int
 	/0/@elements.0/@elements.0/@features.1::/@type type       --> java:/Objects/java.lang.String#java.lang.String
 	/1/@members.1::/@parameters.0/@parameterType   type       --> java:/Objects/org.eclipse.xtext.xbase.lib.Procedures#org.eclipse.xtext.xbase.lib.Procedures$Procedure1

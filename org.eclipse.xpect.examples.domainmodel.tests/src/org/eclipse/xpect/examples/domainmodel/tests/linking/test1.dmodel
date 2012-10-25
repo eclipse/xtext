@@ -11,17 +11,20 @@ END_CLASS
 import pkg2.MyEntity2
 
 package pkg1 {
+	// MyEntity2 should be from the other file
 	// XPECT linkedName at MyEntity2 --> pkg2.MyEntity2
 	entity MyEntity1 extends pkg2.MyEntity2 {
 		
+		// int should be the java primitive
 		// XPECT linkedName at id --> int
 		id:int
 		
+		// String should be from java.lang 
 		// XPECT linkedName at String --> java.lang.String
 		name:String
 	}
 	
-	
+	// same test using fragments, because not all elements have qualified names
 	// XPECT linkedFragment at MyEntity2 --> test2.dmodel#/1
 	entity MyEntity2 extends pkg2.MyEntity2 {
 		
