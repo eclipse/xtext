@@ -81,6 +81,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testTypeLiteral_2() throws Exception {
+    this.resolvesTo("typeof(void)", "Class<Void>");
+  }
+  
+  @Test
+  public void testTypeLiteral_3() throws Exception {
+    this.resolvesTo("typeof(int)", "Class<Integer>");
+  }
+  
+  @Test
+  public void testTypeLiteral_4() throws Exception {
+    this.resolvesTo("typeof(int[])", "Class<int[]>");
+  }
+  
+  @Test
   public void testBooleanLiteral() throws Exception {
     this.resolvesTo("true", "boolean");
     this.resolvesTo("false", "boolean");
