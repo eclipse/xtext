@@ -397,6 +397,24 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\nimport java.util.List", section);
 	}
 
+	@Test public void testGetOrganizedImportSectionWithStaticExtensions() throws Exception {
+		String model = 
+						"import static extension java.util.Collections.*" +
+						"class Foo {\n" +
+						"  def void test() {" +
+						"    typeof(java.util.Collections).singleton\n" +
+						"  }\n" +
+						"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\n" +
+				"import java.util.Collections\n" +
+				"\n" +
+				"import static extension java.util.Collections.*", section);
+	}
 	
 	@Test public void testGetRegion_01() throws Exception {
 		String model = 

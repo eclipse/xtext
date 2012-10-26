@@ -100,6 +100,14 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 				"\n" +
 				"class Foo {List<?> foo}", document.get());
 	}
+	
+	@Test public void testImports_5() throws Exception {
+		final XtextDocument document = insertField("import static java.util.List.* class Foo {|}", "foo", List.class);
+		assertEqualsIgnoreWhitespace("import static java.util.List.*\n" +
+				"import java.util.List\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
+	}
 
 	@Test public void testImports_10() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {|}", "foo", List.class);

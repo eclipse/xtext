@@ -49,5 +49,13 @@ public class ImportOrganizingProposal extends ConfigurableCompletionProposal {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Public for testing purpose.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public ReplacingAppendable getAppendable() {
+		return appendable;
+	}
 
 }

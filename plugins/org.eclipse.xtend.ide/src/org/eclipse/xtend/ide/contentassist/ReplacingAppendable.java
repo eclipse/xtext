@@ -65,7 +65,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 				if (xtendFile != null) {
 					ImportManager importManager = new ImportManager(true, '$');
 					for (XtendImport xImport : xtendFile.getImports()) {
-						if (xImport.getImportedType() != null) {
+						if (!(xImport.isStatic() || xImport.isExtension()) && xImport.getImportedType() != null) {
 							importManager.addImportFor(xImport.getImportedType());
 						}
 					}

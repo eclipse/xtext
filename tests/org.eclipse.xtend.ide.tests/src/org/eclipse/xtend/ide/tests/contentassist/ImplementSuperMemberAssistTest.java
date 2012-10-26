@@ -7,7 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import java.util.List;
+
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
+import org.eclipse.xtend.ide.contentassist.ImportOrganizingProposal;
+import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.junit.Test;
 
@@ -52,6 +57,17 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 				indent + "override getId() {\n" + 
 				indent + indent + "super.getId()\n" + 
 				indent + "}");
+	}
+	
+	@Test public void testExistingStaticImport() throws Exception {
+		ICompletionProposal[] proposals = newBuilder().append("import static java.util.Collection.*" +
+				"class SpecialList extends java.util.ArrayList { removeAll").computeCompletionProposals();
+		assertEquals(1, proposals.length);
+		ImportOrganizingProposal proposal = (ImportOrganizingProposal) proposals[0];
+		ReplacingAppendable appendable = proposal.getAppendable();
+		List<String> imports = appendable.getImports();
+		assertEquals(1, imports.size());
+		assertEquals("java.util.Collection", imports.get(0));
 	}
 	
 	@Test public void testConstructor() throws Exception {
