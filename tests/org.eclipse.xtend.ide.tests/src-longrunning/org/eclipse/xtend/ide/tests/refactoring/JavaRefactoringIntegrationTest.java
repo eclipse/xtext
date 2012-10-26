@@ -341,6 +341,72 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameMethodCall_Getters_0() throws Exception {
+		String xtendModel = "class XtendClass { def getFoo() {null} def bar() { foo getFoo getFoo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("getFoo"), "getBaz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("getFoo", "getBaz").replace("foo", "baz"), editor.getDocument().get());
+	}
+
+	@Test
+	public void testRenameMethodCall_Getters_1() throws Exception {
+		String xtendModel = "class XtendClass { val baz = 1 def getFoo() {null} def bar() { foo getFoo getFoo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("getFoo"), "getBaz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("getFoo", "getBaz").replace("foo", "getBaz"), editor.getDocument().get());
+	}
+
+	@Test
+	public void testRenameMethodCall_BooleanIs_0() throws Exception {
+		String xtendModel = "class XtendClass { def isFoo() {false} def bar() { foo isFoo isFoo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("isFoo"), "isBaz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("isFoo", "isBaz").replace("foo", "baz"), editor.getDocument().get());
+	}
+	
+	@Test
+	public void testRenameMethodCall_BooleanIs_1() throws Exception {
+		String xtendModel = "class XtendClass { val baz = false def isFoo() {false} def bar() { foo isFoo isFoo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("isFoo"), "isBaz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("isFoo", "isBaz").replace("foo", "isBaz"), editor.getDocument().get());
+	}
+	
+	@Test
+	public void testRenameMethodCall_Setters_0() throws Exception {
+		String xtendModel = "class XtendClass { def setFoo(Object x) {} def bar() { foo=null setFoo(null) } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("setFoo"), "setBaz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("setFoo", "setBaz").replace("foo", "baz"), editor.getDocument().get());
+	}
+
+	@Test
+	public void testRenameMethodCall_Setters_1() throws Exception {
+		String xtendModel = "class XtendClass { val baz = null def setFoo(Object x) {} def bar() { foo=null } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElementWithError(editor, xtendModel.indexOf("setFoo"), "setBaz");
+	}
+
+	@Test
+	public void testRenameMethodCall_Setters_2() throws Exception {
+		String xtendModel = "class XtendClass { def setBaz(Object x) {} def setFoo(Object x) {} def bar() { setFoo(null) } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElementWithError(editor, xtendModel.indexOf("setFoo"), "setBaz");
+	}
+
+	@Test
 	public void testRenameOverriddenJavaMethod() throws Exception {
 		IFile javaInterface = testHelper.createFile("JavaInterface.java",
 				"public interface JavaInterface { void foo(); }");
@@ -678,12 +744,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String xtendModel = "class XtendClass { def dispatch foo(Object x) {} def dispatch foo(String x) {} }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, xtendModel.indexOf("foo"),
-				"bar");
-		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-		assertTrue(status.hasError());
-		//		assertEquals(1,status.getEntries().length);  // TODO: on hudson it's two !?
-		//		assertTrue(status.getEntryAt(0).getMessage().contains("Cannot rename single inferred element"));
+		renameXtendElementWithError(editor, xtendModel.indexOf("foo"), "bar");
 	}
 
 	@Test
@@ -765,6 +826,13 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());
 		Change undoChange = change.perform(new NullProgressMonitor());
 		return undoChange;
+	}
+
+	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
+		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
+		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
+		assertFalse("Expected an error", status.isOK());
+		return status;
 	}
 
 	protected ProcessorBasedRefactoring createXtendRenameRefactoring(final XtextEditor editor, final int offset,
