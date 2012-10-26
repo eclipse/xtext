@@ -169,8 +169,7 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 				return Guice.createInjector(getRuntimeModule());
 		}
 
-		@Override
-		public Module getUIModule() {
+		protected Module getUIModule() {
 			if (uiModule == null) {
 				try {
 					uiModule = (Module) getUIModuleClass().newInstance();

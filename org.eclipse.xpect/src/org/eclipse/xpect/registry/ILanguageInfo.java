@@ -25,7 +25,4 @@ public interface ILanguageInfo {
 
 	public String getLanguageName();
 
-	public Module getRuntimeModule();
-
-	public Module getUIModule();
 }

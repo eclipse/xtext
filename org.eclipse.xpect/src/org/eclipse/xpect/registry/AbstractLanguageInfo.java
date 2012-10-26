@@ -69,8 +69,7 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return rtLangName;
 	}
 
-	@Override
-	public Module getRuntimeModule() {
+	protected Module getRuntimeModule() {
 		if (runtimeModule == null) {
 			String className = rtLangName + "RuntimeModule";
 			try {

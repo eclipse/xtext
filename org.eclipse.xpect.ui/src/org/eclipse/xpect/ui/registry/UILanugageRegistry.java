@@ -53,8 +53,7 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 			return bundleID;
 		}
 
-		@Override
-		public Module getUIModule() {
+		protected Module getUIModule() {
 			if (uiModule == null) {
 				try {
 					Plugin plugin = Platform.getPlugin(bundleID);
