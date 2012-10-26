@@ -618,17 +618,19 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			Set<String> importedTypes = Sets.newHashSet();
 			final Set<String> seen = Sets.newHashSet();
 			for (XtendImport importedNamespace : xtendFile.getImports()) {
-				if (importedNamespace.getImportedNamespace() != null) {
-					String importedAsString = importedNamespace.getImportedNamespace();
-					if (importedNamespace.isWildcard()) {
-						importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
-						if (!importedNamespace.isStatic()) {
-							visiblePackages.add(importedAsString);
+				if (!(importedNamespace.isStatic() || importedNamespace.isExtension())) {
+					if (importedNamespace.getImportedNamespace() != null) {
+						String importedAsString = importedNamespace.getImportedNamespace();
+						if (importedNamespace.isWildcard()) {
+							importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
+							if (!importedNamespace.isStatic()) {
+								visiblePackages.add(importedAsString);
+							} else {
+								importedTypes.add(importedAsString);
+							}
 						} else {
 							importedTypes.add(importedAsString);
 						}
-					} else {
-						importedTypes.add(importedAsString);
 					}
 				}
 			}
