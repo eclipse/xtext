@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -387,17 +388,22 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XTypeLiteral object, ITypeComputationState state) {
-		JvmParameterizedTypeReference typeRef = services.getTypesFactory().createJvmParameterizedTypeReference();
-		typeRef.setType(object.getType());
-		JvmTypeReference result = typeRef;
+		LightweightTypeReference clazz = new ParameterizedTypeReference(state.getReferenceOwner(), object.getType());
 		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
-			JvmGenericArrayTypeReference arrayType = services.getTypesFactory().createJvmGenericArrayTypeReference();
-			arrayType.setComponentType(result);
-			result = arrayType;
+			clazz = new ArrayTypeReference(clazz.getOwner(), clazz);
 		}
-		JvmTypeReference classType = services.getTypeReferences().getTypeForName(Class.class, object, result);
-		LightweightTypeReference lightweightReference = state.getConverter().toLightweightReference(classType);
-		state.acceptActualType(lightweightReference);
+		if (object.getArrayDimensions().isEmpty()) {
+			if (clazz.isPrimitiveVoid()) {
+				JvmType voidType = services.getTypeReferences().findDeclaredType(Void.class, object);
+				clazz = new ParameterizedTypeReference(state.getReferenceOwner(), voidType);
+			} else {
+				clazz = clazz.getWrapperTypeIfPrimitive();
+			}
+		}
+		JvmType clazzType = services.getTypeReferences().findDeclaredType(Class.class, object);
+		ParameterizedTypeReference result = new ParameterizedTypeReference(state.getReferenceOwner(), clazzType);
+		result.addTypeArgument(clazz);
+		state.acceptActualType(result);
 	}
 	
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
