@@ -18,8 +18,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.ui.refactoring.impl.CrossReferenceSerializerFacade;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
@@ -32,23 +31,14 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
- * @deprecated test for a deprecated component
  */
-@Deprecated
-@SuppressWarnings("restriction")
-public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
-
-	@Inject
-	private TestableCrossReferenceSerializerFacade facade;
-
-	@Inject
-	private org.eclipse.xtext.parsetree.reconstr.Serializer oldSerializer;
-
-	@Inject
-	private org.eclipse.xtext.serializer.impl.Serializer newSerializer;
+public class RefactoringCrossReferenceSerializerTest extends AbstractXtextTests {
 
 	@Inject
 	private RefactoringTestLanguageGrammarAccess grammarAccess;
+	
+	@Inject
+	private RefactoringCrossReferenceSerializer facade;
 	
 	@Inject
 	private StatusWrapper status;
@@ -66,19 +56,16 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 	
-	@Test public void testOldSerializer() throws Exception {
-		facade.setSerializer(oldSerializer);
-		assertFalse(facade.useNewSerializer());
-		performTest();
-	}
-
-	@Test public void testNewSerializer() throws Exception {
-		facade.setSerializer(newSerializer);
-		assertTrue(facade.useNewSerializer());
-		performTest();
-	}
-
-	public void performTest() throws Exception {
+	@Test public void testSerializer() throws Exception {
+		RefactoringCrossReferenceSerializer.RefTextEvaluator evaluator = new RefactoringCrossReferenceSerializer.RefTextEvaluator() {
+			public boolean isValid(String newText) {
+				return true;
+			}
+			
+			public boolean isBetterThan(String newText, String currentText) {
+				return newText.length() < currentText.length();
+			}
+		};
 		String model = "bar { ref foo } foo";
 		String wsRelativePath = "test/test."+getCurrentFileExtension();
 		IFile file = createFile(wsRelativePath, model);
@@ -92,23 +79,23 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		
 		CrossReference crossref = GrammarUtil.containedCrossReferences(grammarAccess.getElementRule()).get(0);
 		TextRegion linkTextRegion = new TextRegion(model.lastIndexOf("foo"), 3);
-		String linkText = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
+		String linkText = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
 		assertEquals(linkText, "foo");
 		assertTrue(status.getRefactoringStatus().isOK());
 		
 		foo.setName("fooBar");
 		resource.getCache().clear(resource);
-		String linkText1 = facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
+		String linkText1 = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
 		assertEquals(linkText1, "fooBar");
 		assertTrue(status.getRefactoringStatus().isOK());
 
 		assertEquals(foo, ((Main) resource.getContents().get(0)).getElements().get(1));
 		foo.setName("bar");
 		resource.getCache().clear(resource);
-		facade.serializeCrossRef(bar, crossref, foo, linkTextRegion, status);
+		facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
 		assertTrue(status.getRefactoringStatus().hasError());
 		RefactoringStatusEntry fatalError = status.getRefactoringStatus().getEntryAt(0);
-		assertTrue(fatalError.getMessage().contains("cross-reference"));
+		assertTrue(fatalError.getMessage().contains("conflict"));
 		assertTrue(fatalError.getContext() instanceof FileStatusContext);
 		assertEquals(file, ((FileStatusContext)fatalError.getContext()).getFile());
 		IRegion contextRegion = ((FileStatusContext)fatalError.getContext()).getTextRegion();
@@ -116,10 +103,4 @@ public class CrossReferenceSerializerFacadeTest extends AbstractXtextTests {
 		assertEquals(linkTextRegion.getLength(), contextRegion.getLength());
 	}
 
-	static class TestableCrossReferenceSerializerFacade extends CrossReferenceSerializerFacade {
-		@Override
-		public void setSerializer(ISerializer serializer) {
-			super.setSerializer(serializer);
-		}
-	}
 }

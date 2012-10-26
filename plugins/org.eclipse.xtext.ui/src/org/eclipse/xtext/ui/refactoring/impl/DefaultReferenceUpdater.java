@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer.RefTextEvaluator;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Multimap;
@@ -49,8 +49,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	@Inject
 	private ITransientValueService transientValueService;
 
+	/**
+	 * @since 2.4 Replaces the obsolete {@link CrossReferenceSerializerFacade}
+	 */
 	@Inject
-	private CrossReferenceSerializerFacade crossReferenceSerializerFacade;
+	private RefactoringCrossReferenceSerializer crossReferenceSerializer;
 
 	@Override
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
@@ -106,12 +109,34 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 					indexInList);
 			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
 			if (crossReference != null) {
-				String newReferenceText = crossReferenceSerializerFacade.serializeCrossRef(referringElement,
-						crossReference, newTargetElement, referenceTextRegion, updateAcceptor.getRefactoringStatus());
+				RefTextEvaluator refTextComparator = getRefTextEvaluator(referringElement, referringResourceURI, reference,
+						indexInList, newTargetElement);
+				String newReferenceText = crossReferenceSerializer.getCrossRefText(referringElement,
+						crossReference, newTargetElement, refTextComparator, referenceTextRegion, updateAcceptor.getRefactoringStatus());
 				createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
 						referringResourceURI, updateAcceptor);
 			}
 		}
+	}
+	
+	/**
+	 * The result is used to determine the best new link text in case of multiple possibilities.
+	 * By default, the shortest text is chosen.
+	 * 
+	 * @since 2.4
+	 */
+	protected RefTextEvaluator getRefTextEvaluator(EObject referringElement, URI referringResourceURI, EReference reference,
+			int indexInList, EObject newTargetElement) {
+		// by default choose the shortest text
+		return new RefTextEvaluator() {
+			public boolean isValid(String newText) {
+				return true;
+			}
+			
+			public boolean isBetterThan(String newText, String currentText) {
+				return newText.length() < currentText.length();
+			}
+		};
 	}
 
 	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText,
@@ -145,7 +170,4 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		return transientValueService;
 	}
 
-	protected CrossReferenceSerializerFacade getCrossReferenceSerializerFacade() {
-		return crossReferenceSerializerFacade;
-	}
 }

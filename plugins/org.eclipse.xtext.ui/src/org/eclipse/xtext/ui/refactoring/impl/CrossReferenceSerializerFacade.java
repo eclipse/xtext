@@ -24,7 +24,9 @@ import com.google.inject.Inject;
  * A facade for the old and the new serializer. Subclasses can choose strategies to handle name collisions.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @deprecated since 2.4. Use {@link RefactoringCrossReferenceSerializer} instead
  */
+@Deprecated
 public class CrossReferenceSerializerFacade {
 
 	private static final Logger LOG = Logger.getLogger(CrossReferenceSerializerFacade.class);
@@ -65,7 +67,7 @@ public class CrossReferenceSerializerFacade {
 	}
 
 	protected String serializeCrossRefOld(EObject owner, CrossReference crossref, EObject target,
-			ITextRegion linkTextRegion, StatusWrapper status) {
+			 ITextRegion linkTextRegion, StatusWrapper status) {
 		String linkText = oldCrossRefSerializer.serializeCrossRef(owner, crossref, target, null);
 		if (linkText == null)
 			handleNameCollision(owner, linkTextRegion, status);
