@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xpect.runner.XpectTestFiles.XpectTestFileCollector;
+import org.eclipse.xpect.util.DotClasspath;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -97,7 +98,7 @@ public @interface XpectTestFiles {
 		protected File getBaseDir() {
 			switch (ctx.relativeTo()) {
 			case CLASS:
-				File base = getFolder(owner);
+				File base = getOwningJavaClassFolder(owner);
 				if (ctx.baseDir() != null && !"".equals(ctx.baseDir()))
 					return new File(base + "/" + ctx.baseDir());
 				else
@@ -107,10 +108,29 @@ public @interface XpectTestFiles {
 			throw new UnsupportedOperationException();
 		}
 
-		protected File getFolder(Class<?> clazz) {
+		protected File getOwningJavaClassFolder(Class<?> clazz) {
 			URL resource = clazz.getClassLoader().getResource(clazz.getName().replace(".", "/") + ".class");
 			try {
-				return new File(resource.toURI()).getParentFile();
+				File classFile = new File(resource.toURI());
+				File current = classFile.getParentFile();
+				File dotClasspathFile = null;
+				while (current != null && !(dotClasspathFile = new File(current + "/.classpath")).exists())
+					current = current.getParentFile();
+				if (dotClasspathFile == null)
+					return classFile.getParentFile();
+				DotClasspath cp = new DotClasspath(dotClasspathFile);
+				File project = dotClasspathFile.getParentFile();
+				File output = new File(project + "/" + cp.getOutput());
+				if (!output.isDirectory() || !classFile.toString().startsWith(output.toString()))
+					return classFile.getParentFile();
+				URI classFileInClasspath = URI.createURI(output.toURI().relativize(classFile.toURI()).toString());
+				File javaFileInClasspath = new File(classFileInClasspath.trimFileExtension().appendFileExtension("java").toString());
+				for (String path : cp.getSources()) {
+					File result = new File(project + "/" + path + "/" + javaFileInClasspath);
+					if (result.isFile())
+						return result.getParentFile();
+				}
+				return classFile.getParentFile();
 			} catch (URISyntaxException e) {
 				throw new RuntimeException(e);
 			}
@@ -130,7 +150,7 @@ public @interface XpectTestFiles {
 
 	String baseDir() default "";
 
-	String[] fileExtensions() default {};
+	String[] fileExtensions() default { "xt", "xpect" };
 
 	String[] files() default {};
 

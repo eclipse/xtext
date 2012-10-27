@@ -13,7 +13,6 @@ import org.eclipse.jdt.junit.runners.IRunnerUIHandler;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xpect.util.TestDataUtil;
-import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.util.Strings;
 
@@ -21,10 +20,6 @@ import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
 public class XpectRunnerUIHandler implements IRunnerUIHandler {
-
-	@Inject
-	@LanguageSpecific
-	private IURIEditorOpener xpectOpener;
 
 	@Inject
 	private IURIEditorOpener globalOpener;
@@ -37,7 +32,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
 		if (file != null)
-			menu.add(new OpenFileAction(xpectOpener, URI.createURI(file), "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
+			menu.add(new OpenFileAction(globalOpener, URI.createURI(file), "Go to XPECT", "Show XPECT statement in the Xpect file editor."));
 		String method = parsed.get("method");
 		if (method != null)
 			menu.add(new OpenJavaMethodAction(ctx, method, "Go to Method", "Show Java Method declaration"));
@@ -62,7 +57,7 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		Map<String, String> parsed = parse(ctx);
 		String file = parsed.get("file");
 		if (file != null) {
-			new OpenFileAction(xpectOpener, URI.createURI(file), "foo", "bar").run();
+			new OpenFileAction(globalOpener, URI.createURI(file), "foo", "bar").run();
 			return true;
 		}
 		return false;

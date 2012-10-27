@@ -1,5 +1,7 @@
 package org.eclipse.xpect.registry;
 
+import java.lang.annotation.Annotation;
+
 import org.eclipse.xpect.registry.DefaultBinding;
 
 import com.google.inject.Binder;
@@ -7,6 +9,7 @@ import com.google.inject.Binding;
 import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.spi.ConstructorBinding;
 import com.google.inject.spi.LinkedKeyBinding;
@@ -22,13 +25,20 @@ public abstract class AbstractDelegatingModule implements Module {
 
 	protected <T> void overrideAndBackup(Binder binder, Class<T> key, Class<? extends T> impl) {
 		binder.bind(key).to(impl);
-		Class<? extends T> original = getOriginalType(key);
+		Class<? extends T> original = getOriginalType(Key.get(key));
+		if (original != null)
+			binder.bind(key).annotatedWith(DefaultBinding.class).to(original);
+	}
+
+	protected <T> void overrideAndBackup(Binder binder, Class<T> key, Class<? extends Annotation> annotation, Class<? extends T> impl) {
+		binder.bind(key).annotatedWith(annotation).to(impl);
+		Class<? extends T> original = getOriginalType(Key.get(key, annotation));
 		if (original != null)
 			binder.bind(key).annotatedWith(DefaultBinding.class).to(original);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> Class<? extends T> getOriginalType(Class<T> type) {
+	protected <T> Class<? extends T> getOriginalType(Key<T> type) {
 		try {
 			Binding<T> binding = original.getBinding(type);
 			if (binding instanceof LinkedKeyBinding<?>)

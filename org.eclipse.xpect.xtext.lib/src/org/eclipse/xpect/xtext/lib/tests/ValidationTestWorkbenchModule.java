@@ -26,6 +26,7 @@ import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Binder;
+import com.google.inject.Key;
 
 public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 
@@ -69,6 +70,6 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 	@Override
 	public void configure(Binder binder) {
 		binder.bind(IResourceValidator.class).to(ValidationTestWorkbenchModule.TestingResourceValidator.class);
-		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(IResourceValidator.class));
+		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(Key.get(IResourceValidator.class)));
 	}
 }
