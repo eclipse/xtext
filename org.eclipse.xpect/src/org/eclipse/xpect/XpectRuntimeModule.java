@@ -3,6 +3,7 @@
  */
 package org.eclipse.xpect;
 
+import org.eclipse.xpect.services.XpectValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 
 /**
@@ -15,4 +16,5 @@ public class XpectRuntimeModule extends AbstractXpectRuntimeModule {
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return XpectValueConverter.class;
 	}
+
 }

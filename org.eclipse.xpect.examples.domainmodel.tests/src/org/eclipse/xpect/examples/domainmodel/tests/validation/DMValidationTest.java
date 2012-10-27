@@ -6,7 +6,7 @@ import org.eclipse.xpect.xtext.lib.tests.ValidationTest;
 import org.junit.runner.RunWith;
 
 @RunWith(XpectRunner.class)
-@XpectTestFiles(fileExtensions = "dmodel")
+@XpectTestFiles(fileExtensions = "xt")
 public class DMValidationTest extends ValidationTest {
 
 }

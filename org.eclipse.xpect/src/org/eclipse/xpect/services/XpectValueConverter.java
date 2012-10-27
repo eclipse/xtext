@@ -1,4 +1,4 @@
-package org.eclipse.xpect;
+package org.eclipse.xpect.services;
 
 import java.util.Set;
 

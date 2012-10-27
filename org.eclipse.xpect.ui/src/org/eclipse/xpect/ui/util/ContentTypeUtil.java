@@ -13,10 +13,8 @@ public class ContentTypeUtil {
 	}
 
 	public XpectContentType getContentType(IFile file) {
-		if (file == null)
+		if (file == null || !file.exists())
 			return XpectContentType.BINARY;
-		if ("xpect".equals(file.getFileExtension()))
-			return XpectContentType.TEXT;
 		InputStream contents = null;
 		try {
 			contents = file.getContents();

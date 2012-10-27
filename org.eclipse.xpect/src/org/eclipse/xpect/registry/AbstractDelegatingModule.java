@@ -1,12 +1,14 @@
-package org.eclipse.xpect.util;
+package org.eclipse.xpect.registry;
 
 import org.eclipse.xpect.registry.DefaultBinding;
 
 import com.google.inject.Binder;
 import com.google.inject.Binding;
+import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.spi.ConstructorBinding;
 import com.google.inject.spi.LinkedKeyBinding;
 
 public abstract class AbstractDelegatingModule implements Module {
@@ -27,9 +29,14 @@ public abstract class AbstractDelegatingModule implements Module {
 
 	@SuppressWarnings("unchecked")
 	protected <T> Class<? extends T> getOriginalType(Class<T> type) {
-		Binding<T> binding = original.getBinding(type);
-		if (binding instanceof LinkedKeyBinding<?>)
-			return (Class<? extends T>) ((LinkedKeyBinding<T>) binding).getLinkedKey().getTypeLiteral().getRawType();
-		throw new RuntimeException("no binding found for " + type);
+		try {
+			Binding<T> binding = original.getBinding(type);
+			if (binding instanceof LinkedKeyBinding<?>)
+				return (Class<? extends T>) ((LinkedKeyBinding<T>) binding).getLinkedKey().getTypeLiteral().getRawType();
+			if (binding instanceof ConstructorBinding<?>)
+				return (Class<T>) ((ConstructorBinding<T>) binding).getConstructor().getDeclaringType().getRawType();
+		} catch (ConfigurationException e) {
+		}
+		return null;
 	}
 }

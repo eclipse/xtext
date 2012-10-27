@@ -11,10 +11,10 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.registry.AbstractDelegatingModule;
 import org.eclipse.xpect.registry.DefaultBinding;
-import org.eclipse.xpect.ui.editor.XpectResourceValidator;
+import org.eclipse.xpect.ui.services.XtResourceValidator;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
-import org.eclipse.xpect.util.AbstractDelegatingModule;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.eclipse.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -29,7 +29,7 @@ import com.google.inject.Binder;
 
 public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 
-	public static class TestingResourceValidator extends XpectResourceValidator {
+	public static class TestingResourceValidator extends XtResourceValidator {
 
 		protected Severity getExpectedSeverity(XpectInvocation inv) {
 			if (inv == null || inv.eIsProxy() || inv.getElement() == null || inv.getElement().eIsProxy())

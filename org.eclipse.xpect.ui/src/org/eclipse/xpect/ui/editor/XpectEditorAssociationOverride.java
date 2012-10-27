@@ -1,6 +1,7 @@
 package org.eclipse.xpect.ui.editor;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.content.IContentType;
@@ -10,11 +11,13 @@ import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
-import org.eclipse.xpect.ui.internal.XpectActivator;
+import org.eclipse.xpect.registry.ILanguageInfo;
+import org.eclipse.xpect.ui.XpectPluginActivator;
 import org.eclipse.xpect.ui.util.ContentTypeUtil;
 import org.eclipse.xpect.ui.util.ContentTypeUtil.XpectContentType;
+import org.eclipse.xpect.util.URIDelegationHandler;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 public class XpectEditorAssociationOverride implements IEditorAssociationOverride {
@@ -24,12 +27,20 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 
 	private final IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();
 
-	private final IEditorDescriptor xpectEditor = registry.findEditor(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
+	@Inject
+	private URIDelegationHandler uriHandler;
+	private final IEditorDescriptor xpectEditor = registry.findEditor(XpectPluginActivator.XPECT_EDITOR_ID);
+	private final IEditorDescriptor xtEditor = registry.findEditor(XpectPluginActivator.XT_EDITOR_ID);
 
 	protected IFile getFile(IEditorInput input) {
 		if (input instanceof IFileEditorInput)
 			return ((IFileEditorInput) input).getFile();
 		return null;
+	}
+
+	protected boolean isXtFile(IFile file) {
+		String extension = uriHandler.getOriginalFileExtension(file.getName());
+		return extension != null && ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(extension) != null;
 	}
 
 	@Override
@@ -38,10 +49,8 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
 		case XPECT:
-			if (file != null)
-				for (IEditorDescriptor desc : registry.getEditors(file.getName()))
-					if (desc.getId().endsWith("withXpect"))
-						return desc;
+			if (isXtFile(file))
+				return xtEditor;
 			return xpectEditor;
 		default:
 			return editorDescriptor;
@@ -55,18 +64,18 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 
 	@Override
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
-		XpectContentType type = contentTypeHelper.getContentType(getFile(editorInput));
+		IFile file = getFile(editorInput);
+		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
 		case XPECT:
-			List<IEditorDescriptor> editors = Lists.newArrayList(editorDescriptors);
+			Set<IEditorDescriptor> editors = Sets.newLinkedHashSet();
+			Collections.addAll(editors, editorDescriptors);
+			if (isXtFile(file))
+				editors.add(xtEditor);
 			editors.add(xpectEditor);
 			return editors.toArray(new IEditorDescriptor[editors.size()]);
 		default:
-			List<IEditorDescriptor> editors2 = Lists.newArrayList();
-			for (IEditorDescriptor desc : editorDescriptors)
-				if (!desc.getId().endsWith("withXpect"))
-					editors2.add(desc);
-			return editors2.toArray(new IEditorDescriptor[editors2.size()]);
+			return editorDescriptors;
 		}
 	}
 

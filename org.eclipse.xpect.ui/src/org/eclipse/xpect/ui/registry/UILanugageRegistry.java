@@ -56,6 +56,7 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 		protected Module getUIModule() {
 			if (uiModule == null) {
 				try {
+					@SuppressWarnings("deprecation")
 					Plugin plugin = Platform.getPlugin(bundleID);
 					Constructor<?> constructor = getUIModuleClass().getConstructor(AbstractUIPlugin.class);
 					uiModule = (Module) constructor.newInstance(plugin);

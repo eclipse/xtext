@@ -14,9 +14,9 @@ import org.eclipse.xpect.setup.IXpectSetup;
 import org.eclipse.xpect.setup.SetupContext;
 import org.eclipse.xpect.setup.SetupInitializer;
 import org.eclipse.xpect.util.IssueVisualizer;
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -118,7 +118,7 @@ public class XpectFileRunner {
 		}
 		XtextResourceSet resourceSet = rssp.get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(runner.getTestClass().getJavaClass().getClassLoader());
-		XtextResource resource = (XtextResource) rssp.get(IResourceFactory.class).createResource(uri);
+		XtextResource resource = (XtextResource) rssp.get(XtextResourceFactory.class).createResource(uri);
 		resourceSet.getResources().add(resource);
 		resource.load(null);
 		return resource;

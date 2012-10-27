@@ -1,4 +1,3 @@
-
 /* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.validation.DMValidationTest END_CLASS */
 
 
@@ -6,14 +5,6 @@ package pkg1 {
 	entity MyEntity {
 		// XPECT errors --> "Couldn't resolve reference to JvmType 'integer'." at "integer"
 		id:integer
-		
-		op calc():int {
-			val x = 1
-			
-			// XPECT errors --> "Assignment to final variable" at "x = 2"
-			x = 2
-			return x
-		}
 	}
 }
 

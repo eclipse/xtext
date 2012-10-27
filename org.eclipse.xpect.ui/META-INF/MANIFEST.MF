@@ -27,5 +27,6 @@ Export-Package: org.eclipse.xpect.ui.contentassist,
  org.eclipse.xpect.ui.contentassist.antlr,
  org.eclipse.xpect.ui.editor,
  org.eclipse.xpect.ui.internal,
+ org.eclipse.xpect.ui.services,
  org.eclipse.xpect.ui.util
 Bundle-Activator: org.eclipse.xpect.ui.XpectPluginActivator

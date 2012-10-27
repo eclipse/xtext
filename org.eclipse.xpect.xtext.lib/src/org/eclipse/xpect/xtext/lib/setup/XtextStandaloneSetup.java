@@ -10,6 +10,7 @@ import org.eclipse.xpect.setup.AbstractXpectSetup;
 import org.eclipse.xpect.setup.ISetupInitializer;
 import org.eclipse.xpect.setup.XtextInjectorSetup;
 import org.eclipse.xpect.util.TypedProvider;
+import org.eclipse.xpect.util.URIDelegationHandler;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
@@ -48,7 +49,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 	}
 
 	protected Injector getInjector(XpectFile file) {
-		String ext = file.eResource().getURI().fileExtension();
+		String ext = new URIDelegationHandler().getOriginalFileExtension(file.eResource().getURI().lastSegment());
 		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
 		if (info == null)
 			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");

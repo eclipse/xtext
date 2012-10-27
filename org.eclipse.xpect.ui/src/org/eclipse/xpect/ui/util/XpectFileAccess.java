@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xpect.XpectFile;
 import org.eclipse.xpect.registry.ILanguageInfo;
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -63,7 +63,7 @@ public class XpectFileAccess {
 			}
 		ResourceSet rs = cloneResourceSet(resource.getResourceSet());
 		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension("xpect").getInjector();
-		XtextResource xpectResource = (XtextResource) injector.getInstance(IResourceFactory.class).createResource(resource.getURI());
+		XtextResource xpectResource = (XtextResource) injector.getInstance(XtextResourceFactory.class).createResource(resource.getURI());
 		rs.getResources().add(xpectResource);
 		load(xpectResource, document);
 		resource.eAdapters().add(new XpectResourceAdapter(xpectResource));

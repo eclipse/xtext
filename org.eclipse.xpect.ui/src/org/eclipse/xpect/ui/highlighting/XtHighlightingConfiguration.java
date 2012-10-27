@@ -1,4 +1,4 @@
-package org.eclipse.xpect.ui.editor;
+package org.eclipse.xpect.ui.highlighting;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
 import com.google.inject.Inject;
 
-public class XpectHighlightingConfiguration implements IHighlightingConfiguration {
+public class XtHighlightingConfiguration implements IHighlightingConfiguration {
 
 	@DefaultBinding
 	@Inject(optional = true)

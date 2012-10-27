@@ -1,4 +1,4 @@
-package org.eclipse.xpect.ui.editor;
+package org.eclipse.xpect.ui.services;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
-public class XpectResourceValidator implements IResourceValidator {
+public class XtResourceValidator implements IResourceValidator {
 
 	@Inject
 	@DefaultBinding

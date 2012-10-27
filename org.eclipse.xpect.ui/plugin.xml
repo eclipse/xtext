@@ -308,5 +308,29 @@
            id="org.eclipse.xpect.ui.editor.XpectEditorAssociationOverrideID">
      </editorAssociationOverride>
   </extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xpect.ui.services.XtResourceFactory"
+			type="xt">
+		</parser>
+	</extension>
+  	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xpect.ui.services.XtResourceUIServiceProviderProvider"
+            uriExtension="xt">
+        </resourceServiceProvider>
+    </extension>
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xpect.ui.editor.XtEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="Xt"
+            id="org.eclipse.xpect.Xt"
+            name="Xpect+Xtext Editor">
+        </editor>
+    </extension>
 
 </plugin>
