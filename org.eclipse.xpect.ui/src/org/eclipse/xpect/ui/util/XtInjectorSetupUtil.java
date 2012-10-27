@@ -49,14 +49,11 @@ public class XtInjectorSetupUtil {
 		for (Pair<IStorage, IProject> storage : Access.getIStorage2UriMapper().get().getStorages(uri))
 			if (storage.getFirst() instanceof IFile) {
 				IFile file = (IFile) storage.getFirst();
-				XpectContentType contentType = new ContentTypeUtil().getContentType(file);
-				if (contentType == XpectContentType.XPECT) {
-					ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(fileExtension);
-					if (info != null)
-						return XtInjectorSetupUtil.getWorkbenchInjector(info, file);
-					else
-						return null;
-				}
+				ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(fileExtension);
+				if (info != null)
+					return XtInjectorSetupUtil.getWorkbenchInjector(info, file);
+				else
+					return null;
 			}
 		return null;
 	}

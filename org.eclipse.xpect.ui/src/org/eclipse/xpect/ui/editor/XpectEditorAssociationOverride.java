@@ -70,8 +70,11 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		case XPECT:
 			Set<IEditorDescriptor> editors = Sets.newLinkedHashSet();
 			Collections.addAll(editors, editorDescriptors);
-			if (isXtFile(file))
+			String extension = uriHandler.getOriginalFileExtension(file.getName());
+			if (extension != null && ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(extension) != null) {
+				Collections.addAll(editors, registry.getEditors("*." + extension));
 				editors.add(xtEditor);
+			}
 			editors.add(xpectEditor);
 			return editors.toArray(new IEditorDescriptor[editors.size()]);
 		default:

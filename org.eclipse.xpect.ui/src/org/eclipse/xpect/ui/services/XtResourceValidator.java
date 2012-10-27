@@ -26,8 +26,12 @@ public class XtResourceValidator implements IResourceValidator {
 
 	public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 		List<Issue> issues = Lists.newArrayList();
-		issues.addAll(validateDelegate(resource, mode, indicator));
-		issues.addAll(validateXpect(resource, mode, indicator));
+		List<Issue> delegateIssues = validateDelegate(resource, mode, indicator);
+		if (delegateIssues != null)
+			issues.addAll(delegateIssues);
+		List<Issue> xpectIssues = validateXpect(resource, mode, indicator);
+		if (xpectIssues != null)
+			issues.addAll(xpectIssues);
 		return issues;
 	}
 

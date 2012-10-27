@@ -1,5 +1,6 @@
 package org.eclipse.xpect.ui.services;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xpect.ui.builder.IResourceServiceProviderProvider;
 import org.eclipse.xpect.ui.util.XtInjectorSetupUtil;
@@ -29,6 +30,11 @@ public class XtResourceUIServiceProviderProvider extends DefaultResourceUIServic
 
 	@Override
 	public boolean canHandle(URI uri) {
+		return false;
+	}
+	
+	@Override
+	public boolean canHandle(URI uri, IStorage storage) {
 		return false;
 	}
 

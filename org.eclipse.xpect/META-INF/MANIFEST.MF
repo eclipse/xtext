@@ -19,9 +19,9 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  de.itemis.statefullexer;bundle-version="1.0.0";resolution:=optional,
  org.junit;bundle-version="4.8.2";visibility:=reexport,
- org.eclipse.xtext.ecore;bundle-version="2.3.0";resolution:=optional
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.ecore;bundle-version="2.3.0";resolution:=optional,
+ org.apache.log4j;bundle-version="1.2.15";visibility:=reexport
+Import-Package: org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xpect,
  org.eclipse.xpect.formatting,
