@@ -54,5 +54,11 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 	protected XExpression getRootExpression() {
 		return expression;
 	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getExpectedType() {
+		return expectedType;
+	}
 
 }

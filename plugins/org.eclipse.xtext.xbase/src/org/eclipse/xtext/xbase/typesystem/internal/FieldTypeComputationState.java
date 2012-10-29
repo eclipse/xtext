@@ -11,12 +11,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API TODO JavaDoc, toString
+ * @author Sebastian Zarnekow - Initial contribution and API 
+ * TODO JavaDoc, toString
  */
 @NonNullByDefault
 public class FieldTypeComputationState extends AbstractLogicalContainerAwareRootComputationState {
@@ -28,9 +30,14 @@ public class FieldTypeComputationState extends AbstractLogicalContainerAwareRoot
 
 	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		LightweightTypeReference type = getResolvedTypes().getActualType(getMember());
+		LightweightTypeReference type = getExpectedType();
 		AbstractTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
 		return Collections.singletonList(result);
 	}
 
+	@Override
+	@Nullable
+	protected LightweightTypeReference getExpectedType() {
+		return getResolvedTypes().getActualType(getMember());
+	}
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -36,6 +37,9 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	protected abstract XExpression getRootExpression();
 	
+	@Nullable
+	protected abstract LightweightTypeReference getExpectedType();
+	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		return types.acceptType(getRootExpression(), expectation, type, returnType, hints);
@@ -52,5 +56,24 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	}
 	
 	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
+	
+	
+	@Override
+	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
+			StackedResolvedTypes typeResolution) {
+		return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+	}
+	
+	@Override
+	public TypeAssigner assignTypes() {
+		TypeCheckpointComputationState state = new TypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this) {
+			@Override
+			protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
+					StackedResolvedTypes typeResolution) {
+				return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+			}
+		};
+		return createTypeAssigner(state);
+	}
 	
 }
