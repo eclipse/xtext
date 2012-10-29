@@ -303,9 +303,13 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       final XtendFunction function = ((XtendFunction) _last);
       final String docu = this.documentationProvider.getDocumentation(function);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\"> #foo(</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
-      String _string = _builder_1.toString();
-      Assert.assertEquals(_string, docu);
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\"> #foo(");
+      boolean _startsWith = docu.startsWith(_builder_1.toString());
+      Assert.assertTrue(_startsWith);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      boolean _endsWith = docu.endsWith(_builder_2.toString());
+      Assert.assertTrue(_endsWith);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
