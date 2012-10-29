@@ -22,7 +22,7 @@ false
 // Class Literal (in java : String.class)
 typeof(String)
 
-// Collection literals are down using a library approach.
+// Collection literals are done using a library approach.
 newArrayList(3,5,7)
 newHashSet('foo','bar','baz')
 newHashMap( 1->'one', 2->'two', 3->'three' )
