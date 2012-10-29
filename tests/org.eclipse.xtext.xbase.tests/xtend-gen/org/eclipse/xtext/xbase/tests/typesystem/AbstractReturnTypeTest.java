@@ -44,4 +44,19 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   public void testReturnType_08() throws Exception {
     this.resolvesTo("return [| return \'literal\'].apply", "String");
   }
+  
+  @Test
+  public void testIfExpression_03() throws Exception {
+    this.resolvesTo("if (true) return \'foo\'", "String");
+  }
+  
+  @Test
+  public void testIfExpression_04() throws Exception {
+    this.resolvesTo("if (true) return \'\' else new StringBuilder", "Serializable & CharSequence");
+  }
+  
+  @Test
+  public void testSwitchExpression_1() throws Exception {
+    this.resolvesTo("switch true { case true : return \'s\' default: null}", "String");
+  }
 }

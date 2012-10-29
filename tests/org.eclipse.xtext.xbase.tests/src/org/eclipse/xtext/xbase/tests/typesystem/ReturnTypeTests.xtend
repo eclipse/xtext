@@ -56,6 +56,18 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"return [| return 'literal'].apply".resolvesTo("String")
 	}
 	
+	@Test override testIfExpression_03() throws Exception {
+		"if (true) return 'foo'".resolvesTo("String")
+	}
+	
+	@Test override testIfExpression_04() throws Exception {
+		"if (true) return '' else new StringBuilder".resolvesTo("Serializable & CharSequence")
+	}
+	
+	@Test override testSwitchExpression_1() throws Exception {
+		"switch true { case true : return 's' default: null}".resolvesTo("String")
+	}
+	
 }
 
 /**
@@ -81,7 +93,7 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		}
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
 		val resolvedType = resolvedTypes.getReturnType(xExpression)
-		assertEquals(type, resolvedType.simpleName);
+		assertEquals(replacedExpressionText, type, resolvedType.simpleName);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
@@ -156,7 +168,7 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 /**
  * @author Sebastian Zarnekow
  */
-abstract class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
+class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
 	
 	@Inject
 	IBatchTypeResolver typeResolver;

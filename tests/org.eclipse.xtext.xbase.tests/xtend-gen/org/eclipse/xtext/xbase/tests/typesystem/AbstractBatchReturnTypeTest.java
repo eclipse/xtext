@@ -108,7 +108,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(xExpression);
       String _simpleName = resolvedType.getSimpleName();
-      Assert.assertEquals(type, _simpleName);
+      Assert.assertEquals(replacedExpressionText, type, _simpleName);
       Resource _eResource_4 = xExpression.eResource();
       EList<Diagnostic> _errors_2 = _eResource_4.getErrors();
       String _string_2 = _errors_2.toString();

@@ -1,7 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.purexbase.test;
 
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider;
 import org.eclipse.xtext.purexbase.PureXbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
@@ -14,7 +20,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 
-@SuppressWarnings("restriction")
 public class RuntimeInjectorProvider extends PureXbaseInjectorProvider {
 
 	@Override
@@ -31,9 +36,14 @@ public class RuntimeInjectorProvider extends PureXbaseInjectorProvider {
 						return TestClassPathAssembler.class;
 					}
 					
+					@SuppressWarnings("unused")
 					public Class<? extends OnTheFlyJavaCompiler> bindOnTheFlyJavaCompiler() {
-						if (ResourcesPlugin.getWorkspace() != null)
-							return EclipseRuntimeDependentJavaCompiler.class;
+						try {
+							if (ResourcesPlugin.getWorkspace() != null)
+								return EclipseRuntimeDependentJavaCompiler.class;
+						} catch(Exception e) {
+							// ignore
+						}
 						return OnTheFlyJavaCompiler.class;
 					}
 				});

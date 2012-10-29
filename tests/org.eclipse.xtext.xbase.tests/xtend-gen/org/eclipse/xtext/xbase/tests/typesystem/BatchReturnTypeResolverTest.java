@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public abstract class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
+public class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   
