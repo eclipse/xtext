@@ -33,7 +33,11 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 			if (object instanceof JvmIdentifiableElement) {
 				logicalContainer = (JvmIdentifiableElement) object;
 			} else {
-				throw new IllegalStateException("expression is not contained in a logical container");
+				EObject container = object.eContainer();
+				if (container != null) {
+					return getEntryPoint(container);
+				}
+				throw new IllegalStateException("object is not contained in a logical container");
 			}
 		}
 		JvmDeclaredType declaredType = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);

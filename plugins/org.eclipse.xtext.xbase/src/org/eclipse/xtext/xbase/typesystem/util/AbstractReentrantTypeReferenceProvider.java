@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,20 +19,20 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 
 	private boolean computing = false;
 
-	public final JvmTypeReference getTypeReference() {
+	public final JvmTypeReference getTypeReference(XComputedTypeReferenceImplCustom context) {
 		if (computing)
-			return handleReentrantInvocation();
+			return handleReentrantInvocation(context);
 		try {
 			computing = true;
-			return doGetTypeReference();
+			return doGetTypeReference(context);
 		} finally {
 			computing = false;
 		}
 	}
 	
-	protected JvmTypeReference handleReentrantInvocation() {
+	protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
 		return null;
 	}
 
-	protected abstract JvmTypeReference doGetTypeReference();
+	protected abstract JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context);
 }

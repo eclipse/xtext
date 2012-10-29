@@ -25,15 +25,18 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -461,20 +464,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
-		if (identifiable instanceof JvmOperation) {
-			return getConverter().toLightweightReference(((JvmOperation) identifiable).getReturnType());
-		}
-		if (identifiable instanceof JvmField) {
-			return getConverter().toLightweightReference(((JvmField) identifiable).getType());
-		}
-		if (identifiable instanceof JvmConstructor) {
-			return getConverter().toLightweightReference(resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType()));
-		}
-		if (identifiable instanceof JvmFormalParameter) {
-			JvmTypeReference parameterType = ((JvmFormalParameter) identifiable).getParameterType();
-			if (parameterType != null)
-				return getConverter().toLightweightReference(parameterType);
-		}
 		if (identifiable instanceof JvmType) {
 			ParameterizedTypeReference result = new ParameterizedTypeReference(getConverter().getOwner(), (JvmType) identifiable);
 			if (identifiable instanceof JvmTypeParameterDeclarator) {
@@ -483,6 +472,29 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				}
 			}
 			return result;
+		}
+		JvmTypeReference type = getUnconvertedDeclaredType(identifiable);
+		if (type != null && !InferredTypeIndicator.isInferred(type)) {
+			LightweightTypeReference result = getConverter().toLightweightReference(type);
+			return result;
+		}
+		return null;
+	}
+	
+	@Nullable
+	protected JvmTypeReference getUnconvertedDeclaredType(JvmIdentifiableElement identifiable) {
+		if (identifiable instanceof JvmOperation) {
+			return ((JvmOperation) identifiable).getReturnType();
+		}
+		if (identifiable instanceof JvmField) {
+			return ((JvmField) identifiable).getType();
+		}
+		if (identifiable instanceof JvmConstructor) {
+			return resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType());
+		}
+		if (identifiable instanceof JvmFormalParameter) {
+			JvmTypeReference parameterType = ((JvmFormalParameter) identifiable).getParameterType();
+			return parameterType;
 		}
 		return null;
 	}
