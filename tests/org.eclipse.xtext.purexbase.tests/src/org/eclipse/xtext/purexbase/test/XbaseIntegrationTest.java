@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.purexbase.test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +25,6 @@ import com.google.inject.Inject;
 
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
-@SuppressWarnings("restriction")
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject private CompilationTestHelper helper;
@@ -44,104 +50,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		if (exception[0] != null)
 			throw exception[0];
 		return result[0];
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testGenerics_01() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testGenerics_03() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_01() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_02() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_03() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_04() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_05() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_06() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_07() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_08() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testReturnExpression_09() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testBug342434_01() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testBug342434_02() throws Exception {
-		fail("TODO: Implement return type properly");
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO: Implement return type properly")
-	public void testBug342434_05() throws Exception {
-		fail("TODO: Implement return type properly");
 	}
 	
 	@Override

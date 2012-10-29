@@ -18,6 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	BatchTypeResolverTest.class,
+	BatchReturnTypeResolverTest.class,
 	BatchFeatureCallTypeTest.class,
 	BatchClosureTypeTest.class,
 	BatchIdentifiableTypeTest.class,
