@@ -24,27 +24,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class TypeComputationStateWithRootExpectation extends TypeComputationStateWithExpectation {
 
-	protected class RootExpectationAwareExpressionTypeComputationState extends ExpressionTypeComputationState {
+	protected static class RootExpectationAwareExpressionTypeComputationState extends RootExpressionTypeComputationState {
 		protected RootExpectationAwareExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 				IFeatureScopeSession featureScopeSession, DefaultReentrantTypeResolver reentrantTypeResolver,
-				AbstractTypeComputationState parent, XExpression expression) {
-			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expression);
+				AbstractTypeComputationState parent, XExpression expression, @Nullable LightweightTypeReference expectation) {
+			super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expression, expectation);
 		}
-
-		@Override
-		public List<AbstractTypeExpectation> getImmediateExpectations(
-				AbstractTypeComputationState actualState) {
-			AbstractTypeExpectation result = createTypeExpectation(getExpectedType(), actualState, false);
-			return Collections.singletonList(result);
-		}
-
-		@Override
-		public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-			AbstractTypeExpectation result = createTypeExpectation(getExpectedType(), actualState, true);
-			return Collections.singletonList(result);
-		}
-		
-		boolean returnTypeSeen = false;
 		
 		@Override
 		protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
@@ -58,6 +43,7 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 			return super.acceptType(resolvedTypes, expectation, type, returnType, hints);
 		}
 
+		@Override
 		protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 			AbstractTypeExpectation result = null;
 			if (expectedType != null) {
@@ -95,7 +81,7 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 	@Override
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
-		return new RootExpectationAwareExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
+		return new RootExpectationAwareExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
 	}
 	
 	@Override
@@ -104,7 +90,7 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 			@Override
 			protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 					StackedResolvedTypes typeResolution) {
-				return new RootExpectationAwareExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
+				return new RootExpectationAwareExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
 			}
 		};
 		return createTypeAssigner(state);
