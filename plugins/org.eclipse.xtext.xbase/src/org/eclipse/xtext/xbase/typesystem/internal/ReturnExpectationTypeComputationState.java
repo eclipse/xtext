@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,7 +31,14 @@ public class ReturnExpectationTypeComputationState extends AbstractStackedTypeCo
 
 	@Override
 	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		return getReturnExpectations(actualState);
+		return getReturnExpectations(actualState, true);
 	}
 
+	@Override
+	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
+			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		if (returnType)
+			return super.acceptType(types, expectation, type, returnType, hints);
+		return type;
+	}
 }

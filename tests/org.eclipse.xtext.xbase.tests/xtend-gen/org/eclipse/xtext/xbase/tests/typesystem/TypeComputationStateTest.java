@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvid
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState;
@@ -89,39 +88,16 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       List<? extends ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
       ITypeExpectation _head = IterableExtensions.head(_immediateExpectations);
       final LightweightTypeReference expectedType = _head.getExpectedType();
-      if ((state instanceof ChildExpressionTypeComputationState)) {
-        final ChildExpressionTypeComputationState casted = ((ChildExpressionTypeComputationState) state);
-        final ResolvedTypes resolution = this._reflectExtensions.<ResolvedTypes>get(casted, "resolvedTypes");
-        ExpressionTypeComputationState _get = this._reflectExtensions.<ExpressionTypeComputationState>get(casted, "parent");
-        final ResolvedTypes parentResolution = this._reflectExtensions.<ResolvedTypes>get(_get, "resolvedTypes");
-        EObject _eContainer = expression.eContainer();
-        LightweightTypeReference _actualType = parentResolution.getActualType(((XExpression) _eContainer));
-        Assert.assertNull(_actualType);
-        EObject _eContainer_1 = expression.eContainer();
-        LightweightTypeReference _actualType_1 = parentResolution.getActualType(((XExpression) _eContainer_1));
-        Assert.assertNull(_actualType_1);
-        state.acceptActualType(expectedType);
-        LightweightTypeReference _actualType_2 = parentResolution.getActualType(expression);
-        Assert.assertNull(_actualType_2);
-        String _identifier = expectedType.getIdentifier();
-        LightweightTypeReference _actualType_3 = resolution.getActualType(expression);
-        String _identifier_1 = _actualType_3.getIdentifier();
-        Assert.assertEquals(_identifier, _identifier_1);
-        EObject _eContainer_2 = expression.eContainer();
-        LightweightTypeReference _actualType_4 = parentResolution.getActualType(((XExpression) _eContainer_2));
-        Assert.assertNull(_actualType_4);
-      } else {
-        Assert.assertTrue((expression instanceof XBlockExpression));
-        EList<EObject> _eContents = expression.eContents();
-        EObject _head_1 = IterableExtensions.<EObject>head(_eContents);
-        final XNullLiteral nullLiteral = ((XNullLiteral) _head_1);
-        state.computeTypes(nullLiteral);
-        final ResolvedTypes resolution_1 = this._reflectExtensions.<ResolvedTypes>get(state, "resolvedTypes");
-        String _identifier_2 = expectedType.getIdentifier();
-        LightweightTypeReference _actualType_5 = resolution_1.getActualType(nullLiteral);
-        String _identifier_3 = _actualType_5.getIdentifier();
-        Assert.assertEquals(_identifier_2, _identifier_3);
-      }
+      Assert.assertTrue((expression instanceof XBlockExpression));
+      EList<EObject> _eContents = expression.eContents();
+      EObject _head_1 = IterableExtensions.<EObject>head(_eContents);
+      final XNullLiteral nullLiteral = ((XNullLiteral) _head_1);
+      state.computeTypes(nullLiteral);
+      final ResolvedTypes resolution = this._reflectExtensions.<ResolvedTypes>get(state, "resolvedTypes");
+      String _identifier = expectedType.getIdentifier();
+      LightweightTypeReference _actualType = resolution.getActualType(nullLiteral);
+      String _identifier_1 = _actualType.getIdentifier();
+      Assert.assertEquals(_identifier, _identifier_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

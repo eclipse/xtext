@@ -22,6 +22,8 @@ public interface ITypeComputationResult {
 
 	LightweightTypeReference getActualExpressionType();
 	
+	LightweightTypeReference getReturnType();
+	
 	@Nullable LightweightTypeReference getExpectedExpressionType();
 	
 	@Nullable LightweightTypeReference getActualType(JvmIdentifiableElement element);

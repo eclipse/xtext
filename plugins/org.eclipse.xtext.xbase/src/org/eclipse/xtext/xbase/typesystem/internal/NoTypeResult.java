@@ -29,6 +29,10 @@ public class NoTypeResult implements ITypeComputationResult {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
+	public LightweightTypeReference getReturnType() {
+		throw new UnsupportedOperationException("TODO implement me");
+	}
+	
 	public LightweightTypeReference getExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}

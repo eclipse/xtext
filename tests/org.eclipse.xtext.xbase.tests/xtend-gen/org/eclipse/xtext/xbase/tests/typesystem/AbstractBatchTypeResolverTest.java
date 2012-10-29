@@ -262,49 +262,4 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   public void testIfExpression_10() throws Exception {
     super.testIfExpression_10();
   }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_01() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_02() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_03() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_04() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_06() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testReturnType_08() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testIfExpression_03() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testIfExpression_04() throws Exception {
-  }
-  
-  @Ignore(value = "Fix me")
-  @Test
-  public void testSwitchExpression_1() throws Exception {
-  }
 }

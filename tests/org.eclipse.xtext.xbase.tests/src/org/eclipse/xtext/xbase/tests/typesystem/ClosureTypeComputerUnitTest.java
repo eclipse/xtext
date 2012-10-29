@@ -469,7 +469,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		}
 
 		@Override
-		protected List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
+		protected List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
 			throw new UnsupportedOperationException();
 		}
 		

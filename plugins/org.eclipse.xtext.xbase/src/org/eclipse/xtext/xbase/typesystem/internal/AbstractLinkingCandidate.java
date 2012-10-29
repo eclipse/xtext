@@ -56,6 +56,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			this.expectedType = expectedType;
 			this.defaultHint = defaultHint;
 		}
+		
+		@Override
+		protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
+				LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+			// stop propagation
+			return type;
+		}
 
 		@Override
 		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {

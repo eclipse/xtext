@@ -37,25 +37,9 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		return resolvedTypes.acceptType(expression, expectation, type, returnType, hints);
-	}
-
-	@Override
-	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
-			StackedResolvedTypes typeResolution) {
-		return new ChildExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
-	}
-	
-	@Override
-	public TypeAssigner assignTypes() {
-		final ExpressionTypeCheckpointComputationState state = new ExpressionTypeCheckpointComputationState(
-				getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
-		return createTypeAssigner(state);
-	}
-	
-	@Override
-	public AbstractTypeComputationState withTypeCheckpoint() {
-		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
+		LightweightTypeReference result = resolvedTypes.acceptType(expression, expectation, type, returnType, hints);
+		super.acceptType(resolvedTypes, expectation, type, returnType, hints);
+		return result;
 	}
 	
 	@Override

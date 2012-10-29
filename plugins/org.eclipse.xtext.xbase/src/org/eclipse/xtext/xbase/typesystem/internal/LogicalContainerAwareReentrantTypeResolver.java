@@ -54,7 +54,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 		@Override
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			LightweightTypeReference actualType = resolvedTypes.getActualType(expression);
+			LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
 			if (actualType == null)
 				return null;
 			return actualType.toTypeReference();

@@ -46,8 +46,8 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	}
 	
 	@Override
-	protected final List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-		return getExpectations(actualState, true);
+	protected final List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
+		return getExpectations(actualState, !asImmediateExpectation);
 	}
 	
 	@Override

@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.EnumSet;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -31,16 +27,6 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 		this.expression = expression;
 	}
 
-	@Override
-	protected LightweightTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		LightweightTypeReference result = super.acceptType(expression, expectation, type, returnType, hints);
-		if (returnType) {
-			acceptType(expression, new TypeData(expression, expectation, result, EnumSet.copyOf(Arrays.asList(hints)), false));
-		}
-		return result;
-	}
-	
 	@Override
 	protected void prepareMergeIntoParent() {
 		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
