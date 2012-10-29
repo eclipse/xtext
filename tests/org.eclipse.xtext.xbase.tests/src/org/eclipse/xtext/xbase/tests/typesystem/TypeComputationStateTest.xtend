@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
-import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
@@ -52,23 +51,11 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		assertTrue("state is instanceof ExpressionTypeComputationState", state instanceof ExpressionTypeComputationState)
 		val expectedType = state.getImmediateExpectations.head.getExpectedType
-		if (state instanceof ChildExpressionTypeComputationState) {
-			val casted = state as ChildExpressionTypeComputationState
-			val resolution = casted.<ResolvedTypes>get("resolvedTypes")
-			val parentResolution = casted.<ExpressionTypeComputationState>get("parent").<ResolvedTypes>get("resolvedTypes")
-			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
-			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
-			state.acceptActualType(expectedType)
-			assertNull(parentResolution.getActualType(expression))
-			assertEquals(expectedType.identifier, resolution.getActualType(expression).identifier)
-			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
-		} else {
-			assertTrue(expression instanceof XBlockExpression)
-			val nullLiteral = expression.eContents.head as XNullLiteral
-			state.computeTypes(nullLiteral)
-			val resolution = state.<ResolvedTypes>get("resolvedTypes")
-			assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
-		}
+		assertTrue(expression instanceof XBlockExpression)
+		val nullLiteral = expression.eContents.head as XNullLiteral
+		state.computeTypes(nullLiteral)
+		val resolution = state.<ResolvedTypes>get("resolvedTypes")
+		assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
 	}
 	
 }

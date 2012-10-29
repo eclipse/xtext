@@ -146,41 +146,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		super.testIfExpression_10()
 	}
 	
-	@Ignore("Fix me")
-	@Test override void testReturnType_01() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override void testReturnType_02() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override void testReturnType_03() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override void testReturnType_04() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override void testReturnType_06() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override void testReturnType_08() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override testIfExpression_03() throws Exception {
-	}
-	
-	@Ignore("Fix me")
-	@Test override testIfExpression_04() throws Exception {
-	}
-
-	@Ignore("Fix me")	
-	@Test override testSwitchExpression_1() throws Exception {
-	}
 }
 
 /**

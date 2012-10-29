@@ -177,13 +177,13 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public final List<? extends ITypeExpectation> getReturnExpectations() {
 		if (returnExpectations == null)
-			returnExpectations = getReturnExpectations(this);
+			returnExpectations = getReturnExpectations(this, false);
 		return returnExpectations;
 	}
 	
 	protected abstract List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
 	
-	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation);
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(ITypeExpectation expectation: getImmediateExpectations()) {

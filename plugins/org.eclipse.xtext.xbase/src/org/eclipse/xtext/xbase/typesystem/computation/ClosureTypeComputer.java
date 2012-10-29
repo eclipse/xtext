@@ -247,7 +247,7 @@ public class ClosureTypeComputer {
 
 	@NonNullByDefault
 	protected void processExpressionType(ITypeComputationResult expressionResult) {
-		LightweightTypeReference expressionResultType = expressionResult.getActualExpressionType();
+		LightweightTypeReference expressionResultType = expressionResult.getReturnType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			LightweightTypeReference returnType = expectedClosureType.getReturnType();
 			if (returnType == null)

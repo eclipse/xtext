@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @NonNullByDefault
@@ -36,46 +35,18 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 	}
 
 	@Override
-	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, true);
+	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
+		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, !asImmediateExpectation);
 		return Collections.singletonList(result);
 	}
 	
-	protected boolean returnTypeSeen = false;
-	
-	@Override
-	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		if (returnTypeSeen) {
-			if (!returnType && type.isPrimitiveVoid())
-				return type;
-		}
-		if (returnType)
-			returnTypeSeen = true;
-		return super.acceptType(resolvedTypes, expectation, type, returnType, hints);
-	}
-
 	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, final boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
-			result = new TypeExpectation(copied, actualState, returnType) {
-				@Override
-				public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-					if (returnType)
-						acceptType(getResolvedTypes(), this, type, true, hints);
-					super.acceptActualType(type, hints);
-				}
-			};
+			result = new RootTypeExpectation(copied, actualState);
 		} else {
-			result = new RootNoExpectation(actualState) {
-				@Override
-				public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-					if (returnType)
-						acceptType(getResolvedTypes(), this, type, true, hints);
-					super.acceptActualType(type, hints);
-				}
-			};
+			result = new RootNoExpectation(actualState);
 		}
 		return result;
 	}

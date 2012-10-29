@@ -36,6 +36,10 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 	public LightweightTypeReference getActualType(JvmIdentifiableElement element) {
 		return resolution.getActualType(element);
 	}
+	
+	public LightweightTypeReference getReturnType() {
+		return resolution.getReturnType(expression);
+	}
 
 	public XExpression getExpression() {
 		return expression;
