@@ -82,7 +82,10 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XtypeFactory;
 
 import com.google.inject.Inject;
 
@@ -116,6 +119,9 @@ public class JvmTypesBuilder {
 
 	@Inject
 	private TypesFactory typesFactory;
+	
+	@Inject(optional = true)
+	private XtypeFactory xtypesFactory = XtypeFactory.eINSTANCE;
 	
 	@Inject
 	private VisibilityService visibilityService;
@@ -531,6 +537,30 @@ public class JvmTypesBuilder {
 		result.setReturnType(cloneWithProxies(returnType));
 		associate(sourceElement, result);
 		return initializeSafely(result, initializer);
+	}
+	
+	/**
+	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
+	 * this type during the model inference.
+	 * 
+	 * @return an inferred type.
+	 */
+	public JvmTypeReference inferredType() {
+		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
+		result.setTypeProvider(new InferredTypeIndicator(true));
+		return result;
+	}
+	
+	/**
+	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
+	 * this type during the model inference.
+	 * 
+	 * @return an inferred type.
+	 */
+	public JvmTypeReference inferredNonVoidType() {
+		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
+		result.setTypeProvider(new InferredTypeIndicator(false));
+		return result;
 	}
 
 	/**

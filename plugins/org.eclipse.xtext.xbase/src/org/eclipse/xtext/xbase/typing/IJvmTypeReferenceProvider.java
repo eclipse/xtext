@@ -8,12 +8,13 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IJvmTypeReferenceProvider {
 
-	JvmTypeReference getTypeReference();
+	JvmTypeReference getTypeReference(XComputedTypeReferenceImplCustom context);
 	
 }

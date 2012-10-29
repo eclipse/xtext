@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +22,7 @@ public class UnboundTypeReferenceResolver extends AbstractReentrantTypeReference
 	}
 
 	@Override
-	protected JvmTypeReference doGetTypeReference() {
+	protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 		LightweightTypeReference resolvedTo = unboundTypeReference.getResolvedTo();
 		if (resolvedTo != null)
 			return resolvedTo.toTypeReference();

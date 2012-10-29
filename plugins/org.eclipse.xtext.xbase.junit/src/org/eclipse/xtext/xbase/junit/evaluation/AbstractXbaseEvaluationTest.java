@@ -441,6 +441,22 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.TRUE,
 				"new java.util.ArrayList<Object>.addAll(typeof(String).declaredFields)");
 	}
+
+	@Test public void testGenerics_05() throws Exception {
+		assertEvaluatesTo("y",
+				"{" +
+				" val x = newArrayList('y',23,true)" +
+				" x.head" +
+				"}");
+	}
+	
+	@Test public void testGenerics_06() throws Exception {
+		assertEvaluatesTo("y",
+				"{" +
+				" val x = <Object>newArrayList('y',23,true)" +
+				" x.head" +
+				"}");
+	}
 	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
@@ -2632,6 +2648,36 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 			"    val arrayAccess = testdata::ArrayClient2::access(x)\n" + 
 			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
 			"    return arrayAccess.get(2)\n" + 
+			"}");
+	}
+
+	@Test public void testBug342434_06() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = new testdata.ArrayClient2<Object>(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    arrayAccess.get(2)\n" + 
+			"}");
+	}
+	
+	@Test public void testBug342434_07() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = new testdata.ArrayClient2(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    arrayAccess.get(2)\n" + 
+			"}");
+	}
+
+	@Test public void testBug342434_08() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = testdata::ArrayClient2::access(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    arrayAccess.get(2)\n" + 
 			"}");
 	}
 	
