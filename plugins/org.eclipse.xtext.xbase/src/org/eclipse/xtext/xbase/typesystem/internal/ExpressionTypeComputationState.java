@@ -38,8 +38,18 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		LightweightTypeReference result = resolvedTypes.acceptType(expression, expectation, type, returnType, hints);
-		super.acceptType(resolvedTypes, expectation, type, returnType, hints);
+		getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, hints);
 		return result;
+	}
+	
+	@Override
+	protected LightweightTypeReference acceptType(XExpression expression, ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		if (expression != this.expression) {
+			LightweightTypeReference result = resolvedTypes.acceptType(this.expression, expectation, type, returnType, hints);
+			getParent().acceptType(this.expression, resolvedTypes, expectation, type, returnType, hints);
+			return result;
+		}
+		return getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, hints);
 	}
 	
 	@Override

@@ -45,25 +45,18 @@ import com.google.common.collect.Maps;
 @NonNullByDefault
 public abstract class AbstractLinkingCandidate<Expression extends XExpression> implements ILinkingCandidate {
 
-	protected class LinkingTypeComputationState extends AbstractStackedTypeComputationState {
+	protected class ArgumentTypeComputationState extends AbstractStackedTypeComputationState {
 
 		private final LightweightTypeReference expectedType;
 		private final ConformanceHint defaultHint;
 
-		public LinkingTypeComputationState(AbstractTypeComputationState parent,
+		public ArgumentTypeComputationState(AbstractTypeComputationState parent,
 				LightweightTypeReference expectedType, @Nullable ConformanceHint defaultHint) {
 			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent.getResolver(), parent);
 			this.expectedType = expectedType;
 			this.defaultHint = defaultHint;
 		}
 		
-		@Override
-		protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-				LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-			// stop propagation
-			return type;
-		}
-
 		@Override
 		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, defaultHint);
@@ -261,9 +254,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 			if (arguments.isExactArity()) {
-				LinkingTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
+				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
 				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
-				LinkingTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
+				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
 				argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
 			} else {
 				argumentState = createVarArgTypeComputationState(substitutedComponentType);
@@ -290,12 +283,12 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		arguments.markProcessed(argumentIndex);
 	}
 
-	protected LinkingTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
-		return new LinkingTypeComputationState(state, expectedType.getLowerBoundSubstitute(), null);
+	protected ArgumentTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
+		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), null);
 	}
 	
-	protected LinkingTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
-		return new LinkingTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceHint.VAR_ARG);
+	protected ArgumentTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
+		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceHint.VAR_ARG);
 	}
 	
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {

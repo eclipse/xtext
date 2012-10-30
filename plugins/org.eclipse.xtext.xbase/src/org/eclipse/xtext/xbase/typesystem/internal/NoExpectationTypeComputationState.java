@@ -32,13 +32,6 @@ public class NoExpectationTypeComputationState extends AbstractStackedTypeComput
 	}
 	
 	@Override
-	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		// stop propagating to parent
-		return type;
-	}
-
-	@Override
 	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = createTypeExpectation(null, actualState, false);
 		return Collections.singletonList(result);

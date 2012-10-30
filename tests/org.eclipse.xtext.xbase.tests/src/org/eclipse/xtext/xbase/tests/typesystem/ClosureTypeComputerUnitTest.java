@@ -462,6 +462,13 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 				LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint) {
 			throw new UnsupportedOperationException();
 		}
+		
+		@Override
+		protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types,
+				AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType,
+				ConformanceHint... conformanceHint) {
+			throw new UnsupportedOperationException();
+		}
 
 		@Override
 		protected List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {

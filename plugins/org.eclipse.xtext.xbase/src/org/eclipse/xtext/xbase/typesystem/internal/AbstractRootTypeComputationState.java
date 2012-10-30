@@ -46,6 +46,13 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	}
 	
 	@Override
+	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		if (alreadyHandled != getRootExpression())
+			return types.acceptType(getRootExpression(), expectation, type, returnType, hints);
+		return type;
+	}
+	
+	@Override
 	protected final List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
 		return getExpectations(actualState, !asImmediateExpectation);
 	}

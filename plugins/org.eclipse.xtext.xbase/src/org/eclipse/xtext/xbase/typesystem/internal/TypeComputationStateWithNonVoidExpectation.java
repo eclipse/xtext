@@ -30,13 +30,6 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 			AbstractTypeComputationState parent) {
 		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 	}
-	
-	@Override
-	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		// stop propagation
-		return type;
-	}
 
 	@Override
 	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {

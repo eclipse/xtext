@@ -7,18 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class TypeCheckpointComputationState extends AbstractStackedTypeComputationState {
 
 	protected TypeCheckpointComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
 		super(resolvedTypes.pushReassigningTypes(), featureScopeSession, reentrantTypeResolver, parent);
+	}
+	
+	@Override
+	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
+			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+		return getParent().acceptType(types, expectation, type, returnType, hints);
+	}
+	
+	@Override
+	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types,
+			AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType,
+			ConformanceHint... hints) {
+		return getParent().acceptType(alreadyHandled, types, expectation, type, returnType, hints);
 	}
 
 }

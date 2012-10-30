@@ -7,12 +7,14 @@
  */
 package org.eclipse.xtext.xbase.junit.typesystem;
 
+import com.google.common.collect.Multimap;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
@@ -39,5 +41,10 @@ public class PublicResolvedTypes extends RootResolvedTypes {
   public List<LightweightBoundTypeArgument> getHints(final Object handle) {
     List<LightweightBoundTypeArgument> _hints = super.getHints(handle);
     return _hints;
+  }
+  
+  public Multimap<XExpression,TypeData> basicGetExpressionTypes() {
+    Multimap<XExpression,TypeData> _basicGetExpressionTypes = super.basicGetExpressionTypes();
+    return _basicGetExpressionTypes;
   }
 }
