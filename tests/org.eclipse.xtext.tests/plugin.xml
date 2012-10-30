@@ -780,6 +780,13 @@
        genModel = "org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.genmodel" /> 
 	
   </extension>
+  <extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderProvider"
+           uriExtension="TestResourceServiceProviderProvider">
+     </resourceServiceProvider>
+  </extension>
 
 
 </plugin>
