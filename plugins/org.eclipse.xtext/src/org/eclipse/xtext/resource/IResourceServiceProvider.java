@@ -108,9 +108,11 @@ public interface IResourceServiceProvider {
 	 * corresponding extension points.
 	 * 
 	 * Please don't use this interface as it is not guaranteed that clients of the Registry request a new
-	 * ResourceServiceProvider for every URI (even though they should).
+	 * ResourceServiceProvider for every URI.
 	 * 
 	 * @since 2.4
+	 * @noextend This interface is not intended to be extended by clients.
+	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	@Beta
 	interface Provider {
