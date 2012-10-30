@@ -38,6 +38,10 @@ class PublicResolvedTypes extends RootResolvedTypes {
 		super.getHints(handle)
 	}
 	
+	override public basicGetExpressionTypes() {
+		super.basicGetExpressionTypes()
+	}
+	
 }
 
 /**
