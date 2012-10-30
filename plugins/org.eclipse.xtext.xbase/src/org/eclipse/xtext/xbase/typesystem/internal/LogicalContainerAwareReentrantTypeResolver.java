@@ -46,15 +46,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	public static class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final XExpression expression;
 		private final ResolvedTypes resolvedTypes;
+		private final boolean returnType;
 
-		public DemandTypeReferenceProvider(XExpression expression, ResolvedTypes resolvedTypes) {
+		public DemandTypeReferenceProvider(XExpression expression, ResolvedTypes resolvedTypes, boolean returnType) {
 			this.expression = expression;
 			this.resolvedTypes = resolvedTypes;
+			this.returnType = returnType;
 		}
 
 		@Override
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
+			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			if (actualType == null)
 				return null;
 			return actualType.toTypeReference();
@@ -76,10 +78,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@NonNull
 	protected JvmType getRoot() {
 		return (JvmType) super.getRoot();
-	}
-	
-	protected LightweightTypeReference getComputedType(JvmMember member) {
-		throw new UnsupportedOperationException("member: " + member);
 	}
 	
 	/**
@@ -113,13 +111,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference knownType = field.getType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field, false);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
 			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
 			resolvedTypes.setType(field, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field, false);
 			field.setType(reference);
 		}
 	}
@@ -135,28 +133,28 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference knownType = operation.getReturnType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation, true);
 			casted.setEquivalent(reference);
 		} else if (operation.getReturnType() != null) {
 			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
 			resolvedTypes.setType(operation, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation, true);
 			operation.setReturnType(reference);
 		}
 	}
 	
-	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, JvmMember member) {
+	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, JvmMember member, boolean returnType) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-		result.setTypeProvider(createTypeProvider(resolvedTypes, member));
+		result.setTypeProvider(createTypeProvider(resolvedTypes, member, returnType));
 		// TODO do we need a lightweight computed type reference?
 //		resolvedTypes.setType(member, result);
 		return result;
 	}
 	
-	protected DemandTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, JvmMember member) {
+	protected DemandTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
-		return new DemandTypeReferenceProvider(expression, resolvedTypes);
+		return new DemandTypeReferenceProvider(expression, resolvedTypes, returnType);
 	}
 	
 	@Override

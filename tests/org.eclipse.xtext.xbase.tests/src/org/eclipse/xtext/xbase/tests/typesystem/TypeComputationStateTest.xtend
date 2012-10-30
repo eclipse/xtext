@@ -25,6 +25,12 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.InjectWith
 import org.junit.runner.RunWith
+import java.util.Set
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
+import org.eclipse.xtext.xbase.XbasePackage
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,15 +53,73 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		assertEquals(any.toString, resolution.getActualType(expression).toString)
 		assertEquals(any.toString, resolution.getActualType(expression.eContents.head as XNullLiteral).toString)
 	}
+	
+	@Test
+	def void testTypeOnlyRegisteredOnce_01() {
+		resolver.typeComputer = this 
+		val expression = expression("{ null }")
+		val resolution = new PublicResolvedTypes(resolver)
+		val any = new AnyTypeReference(resolution.getReferenceOwner())
+		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		val expressionTypes = resolution.basicGetExpressionTypes
+		val typesForNullLiteral = expressionTypes.get((expression as XBlockExpression).expressions.head)
+		assertEquals(typesForNullLiteral.toString, 1, typesForNullLiteral.filter[ returnType ].size)
+		assertEquals(typesForNullLiteral.toString, 1, typesForNullLiteral.filter[ !returnType ].size)
+		val typesForBlock = expressionTypes.get(expression)
+		assertEquals(typesForBlock.toString, 1, typesForBlock.filter[ returnType ].size)
+		assertEquals(typesForBlock.toString, 1, typesForBlock.filter[ !returnType ].size)
+	}
 
+	@Test
+	def void testTypeOnlyRegisteredOnce_02() {
+		val expression = expression("1.toString") as XMemberFeatureCall
+		resolver.initializeFrom(expression)
+		val resolution = new PublicResolvedTypes(resolver)
+		val any = new AnyTypeReference(resolution.getReferenceOwner())
+		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		val expressionTypes = resolution.basicGetExpressionTypes
+		expression.eAllContents.forEach [
+			val types = expressionTypes.get(it as XExpression)
+//			assertEquals(types.toString, 1, types.filter[ returnType ].size)
+			assertEquals(types.toString, 1, types.filter[ !returnType ].size)
+		]
+	}
+	
+	@Ignore("TODO FixMe")
+	@Test
+	def void testTypeOnlyRegisteredOnce_03() {
+		val expression = expression("<String>newArrayList.map[toUpperCase]") as XMemberFeatureCall
+		resolver.initializeFrom(expression)
+		val resolution = new PublicResolvedTypes(resolver)
+		val any = new AnyTypeReference(resolution.getReferenceOwner())
+		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		val expressionTypes = resolution.basicGetExpressionTypes
+		expression.eAllContents.forEach [
+			val typesForMemberFeatureCall = expressionTypes.get(it as XExpression)
+			assertEquals(it + " " + typesForMemberFeatureCall.toString, 1, typesForMemberFeatureCall.filter[ returnType ].size)
+			assertEquals(typesForMemberFeatureCall.toString, 1, typesForMemberFeatureCall.filter[ !returnType ].size)
+		]
+	}
+	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		assertTrue("state is instanceof ExpressionTypeComputationState", state instanceof ExpressionTypeComputationState)
 		val expectedType = state.getImmediateExpectations.head.getExpectedType
-		assertTrue(expression instanceof XBlockExpression)
-		val nullLiteral = expression.eContents.head as XNullLiteral
-		state.computeTypes(nullLiteral)
-		val resolution = state.<ResolvedTypes>get("resolvedTypes")
-		assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
+		if (expression instanceof XNullLiteral) {
+			val casted = state as ExpressionTypeComputationState
+			val resolution = casted.<ResolvedTypes>get("resolvedTypes")
+			val parentResolution = casted.<ExpressionTypeComputationState>get("parent").<ResolvedTypes>get("resolvedTypes")
+			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
+			state.acceptActualType(expectedType)
+			assertNull(parentResolution.getActualType(expression))
+			assertEquals(expectedType.identifier, resolution.getActualType(expression).identifier)
+			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
+		} else {
+			assertTrue(expression instanceof XBlockExpression)
+			val nullLiteral = expression.eContents.head as XNullLiteral
+			state.computeTypes(nullLiteral)
+			val resolution = state.<ResolvedTypes>get("resolvedTypes")
+			assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
+		}
 	}
 	
 }

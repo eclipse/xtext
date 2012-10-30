@@ -41,13 +41,6 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 		return Collections.singletonList(result);
 	}
 	
-	@Override
-	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		// don't propagate to parent
-		return type;
-	}
-	
 	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {

@@ -84,6 +84,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
+	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	
 	public final ITypeComputationResult computeTypes(@Nullable XExpression expression) {
 		if (expression != null) {
