@@ -332,5 +332,89 @@
             name="Xpect+Xtext Editor">
         </editor>
     </extension>
+    <extension point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            label="JUnit Test"
+            icon="$nl$/icons/julaunch.gif"
+            helpContextId="org.eclipse.jdt.junit.launch_shortcut"
+            class="org.eclipse.xpect.ui.launching.JUnitLaunchShortcut"
+            modes="run, debug"
+            id="org.eclipse.xpect.ui.launching.junitShortcut">
+        <contextualLaunch>
+           <enablement>
+              <with variable="selection">
+                 <count value="1"/>
+                   <iterate>
+               	     <and>
+               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                       <adapt type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
+	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
+			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
+			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.eclipse.xpect.runner.XpectRunner"/>
+			                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+			             </adapt>
+		               </adapt>
+		             </and>
+		          </iterate> 
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType id="org.eclipse.jdt.junit.launchconfig"/>
+         <description description="Debugs a set of JUnit tests" mode="debug"/>
+         <description description="Runs a set of JUnit tests" mode="run"/>
+      </shortcut>
+       <shortcut
+            class="org.eclipse.xpect.ui.launching.JUnitPDELaunchShortcut"
+            icon="$nl$/icons/julaunchpgn.gif"
+            id="org.eclipse.xtend.ide.launching.junitPdeShortcut"
+            label="JUnit Plug-in Test"
+            modes="run, debug">
+         <contextualLaunch>
+            <enablement>
+              <with variable="selection">
+                 <count value="1"/>
+                   <iterate>
+               	     <and>
+               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                       <adapt type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
+	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
+			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
+			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.eclipse.xpect.runner.XpectRunner"/>
+			                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+			             </adapt>
+		               </adapt>
+		             </and>
+		          </iterate> 
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType id="org.eclipse.pde.ui.JunitLaunchConfig" />
+         <description description="Run JUnit Plug-in Test" mode="run" />
+         <description description="Debug JUnit Plug-in Test" mode="debug" />
+      </shortcut>
+   </extension>
+   <extension point="org.eclipse.core.runtime.adapters">
+     <factory 
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IFileEditorInput">
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IEditorPart">
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory" 
+        adaptableType="org.eclipse.core.resources.IResource">
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
+        <adapter type="org.eclipse.jdt.core.IJavaElement"/>
+     </factory>
+   </extension>
+   
 
 </plugin>

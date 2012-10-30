@@ -49,10 +49,16 @@ public class XpectFileAccess {
 	}
 
 	public static XpectFile getXpectFile(Resource resource) {
+		for (EObject contents : resource.getContents())
+			if (contents instanceof XpectFile)
+				return (XpectFile) contents;
 		return findXpectFile(getXpectResource(resource));
 	}
 
 	public static XtextResource getXpectResource(Resource resource) {
+		for (EObject contents : resource.getContents())
+			if (contents instanceof XpectFile)
+				return (XtextResource) resource;
 		String document = ((XtextResource) resource).getParseResult().getRootNode().getText();
 		for (Adapter a : resource.eAdapters())
 			if (a instanceof XpectResourceAdapter) {
