@@ -1,0 +1,18 @@
+
+
+XPECT_CLASS org.xpect.examples.textile.SimpleTest END_CLASS
+
+XPECT simple
+
+String SingleLine Expectation
+XPECT simpleString --> foo bar
+
+String Multiline Expectation
+XPECT simpleString ---
+	Hello, this
+		is some Multiline
+	String
+---
+
+
+XPECT simpleCSV --> foo, bar, baz, aa

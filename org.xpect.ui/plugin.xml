@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="xpect"
+            id="org.xpect.Xpect"
+            name="Xpect Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.xpect.Xpect.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.xpect.Xpect.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.xpect.Xpect.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.xpect.Xpect.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.xpect.Xpect" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.xpect.Xpect"
+            name="Xpect">
+            <keywordReference id="org.xpect.ui.keyword_Xpect"/>
+        </page>
+        <page
+            category="org.xpect.Xpect"
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.xpect.Xpect.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.xpect.ui.keyword_Xpect"/>
+        </page>
+        <page
+            category="org.xpect.Xpect"
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.xpect.Xpect.templates"
+            name="Templates">
+            <keywordReference id="org.xpect.ui.keyword_Xpect"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.xpect.Xpect"
+            name="Xpect">
+            <keywordReference id="org.xpect.ui.keyword_Xpect"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.xpect.ui.keyword_Xpect"
+            label="Xpect"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.xpect.Xpect.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.xpect.Xpect.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.xpect.Xpect.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.xpect.Xpect.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.xpect.Xpect.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="xpect">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="xpect">
+        </resourceServiceProvider>
+    </extension>
+
+
+    <!-- marker definitions for org.xpect.Xpect -->
+    <extension
+            id="xpect.check.fast"
+            name="Xpect Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xpect.check.normal"
+            name="Xpect Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xpect.check.expensive"
+            name="Xpect Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.xpect.Xpect.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.xpect.Xpect.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+    <!-- quickfix marker resolution generator for org.xpect.Xpect -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.xpect.ui.xpect.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.xpect.ui.xpect.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.xpect.ui.xpect.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.xpect.Xpect.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.xpect.Xpect.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.xpect.Xpect"
+	        class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.xpect.Xpect.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.xpect.ui.keyword_Xpect"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.xpect.Xpect.compare.contentViewers"
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xpect">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.xpect.Xpect.compare.contentMergeViewers"
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xpect" label="Xpect Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.xpect.Xpect.editors.documentProviders"
+            class="org.xpect.ui.XpectExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="xpect">
+    </provider>
+  </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.overridingGuiceModule">
+     <module
+           class="org.xpect.ui.builder.XpectOverridingGuiceModule">
+     </module>
+  </extension>
+  <extension
+        point="org.eclipse.jdt.junit.runners.junitRunnerUI">
+     <junitRunnerUIHandler
+           handlerClass="org.xpect.ui.XpectExecutableExtensionFactory:org.xpect.ui.junit.XpectRunnerUIHandler"
+           runnerClass="org.xpect.runner.XpectRunner">
+     </junitRunnerUIHandler>
+  </extension>
+  <extension
+        point="org.eclipse.ui.ide.editorAssociationOverride">
+     <editorAssociationOverride
+           class="org.xpect.ui.XpectExecutableExtensionFactory:org.xpect.ui.editor.XpectEditorAssociationOverride"
+           id="org.xpect.ui.editor.XpectEditorAssociationOverrideID">
+     </editorAssociationOverride>
+  </extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.xpect.ui.services.XtResourceFactory"
+			type="xt">
+		</parser>
+	</extension>
+  	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.xpect.ui.services.XtResourceUIServiceProviderProvider"
+            uriExtension="xt">
+        </resourceServiceProvider>
+    </extension>
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.xpect.ui.editor.XtEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="xt"
+            id="org.xpect.Xt"
+            name="Xpect+Xtext Editor">
+        </editor>
+    </extension>
+    <extension point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            label="JUnit Test"
+            icon="$nl$/icons/julaunch.gif"
+            helpContextId="org.eclipse.jdt.junit.launch_shortcut"
+            class="org.xpect.ui.launching.JUnitLaunchShortcut"
+            modes="run, debug"
+            id="org.xpect.ui.launching.junitShortcut">
+        <contextualLaunch>
+           <enablement>
+              <with variable="selection">
+                 <count value="1"/>
+                   <iterate>
+               	     <and>
+               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                       <adapt type="org.xpect.ui.launching.JUnitJavaElementDelegate">
+	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
+			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
+			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.xpect.runner.XpectRunner"/>
+			                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+			             </adapt>
+		               </adapt>
+		             </and>
+		          </iterate> 
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType id="org.eclipse.jdt.junit.launchconfig"/>
+         <description description="Debugs a set of JUnit tests" mode="debug"/>
+         <description description="Runs a set of JUnit tests" mode="run"/>
+      </shortcut>
+       <shortcut
+            class="org.xpect.ui.launching.JUnitPDELaunchShortcut"
+            icon="$nl$/icons/julaunchpgn.gif"
+            id="org.eclipse.xtend.ide.launching.junitPdeShortcut"
+            label="JUnit Plug-in Test"
+            modes="run, debug">
+         <contextualLaunch>
+            <enablement>
+              <with variable="selection">
+                 <count value="1"/>
+                   <iterate>
+               	     <and>
+               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                       <adapt type="org.xpect.ui.launching.JUnitJavaElementDelegate">
+	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
+			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
+			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.xpect.runner.XpectRunner"/>
+			                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+			             </adapt>
+		               </adapt>
+		             </and>
+		          </iterate> 
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType id="org.eclipse.pde.ui.JunitLaunchConfig" />
+         <description description="Run JUnit Plug-in Test" mode="run" />
+         <description description="Debug JUnit Plug-in Test" mode="debug" />
+      </shortcut>
+   </extension>
+   <extension point="org.eclipse.core.runtime.adapters">
+     <factory 
+        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IFileEditorInput">
+        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IEditorPart">
+        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory" 
+        adaptableType="org.eclipse.core.resources.IResource">
+        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+     </factory>
+     <factory 
+        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.xpect.ui.launching.JUnitJavaElementDelegate">
+        <adapter type="org.eclipse.jdt.core.IJavaElement"/>
+     </factory>
+   </extension>
+   
+
+</plugin>

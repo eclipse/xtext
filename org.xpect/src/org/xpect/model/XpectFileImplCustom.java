@@ -1,0 +1,24 @@
+package org.xpect.model;
+
+import org.xpect.XpectIgnore;
+import org.xpect.XpectInvocation;
+import org.xpect.XpectTest;
+
+import com.google.common.collect.Iterables;
+
+public class XpectFileImplCustom extends XpectFileImpl {
+	@Override
+	public Iterable<XpectInvocation> getInvocations() {
+		return Iterables.filter(getMembers(), XpectInvocation.class);
+	}
+
+	@Override
+	public XpectTest getTest() {
+		return Iterables.getFirst(Iterables.filter(getMembers(), XpectTest.class), null);
+	}
+
+	@Override
+	public boolean isIgnore() {
+		return Iterables.isEmpty(Iterables.filter(getMembers(), XpectIgnore.class));
+	}
+}

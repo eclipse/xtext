@@ -1,0 +1,13 @@
+package org.xpect.examples.xtend
+
+
+/* XPECT_CLASS org.xpect.examples.xtend.XtendValidationTest END_CLASS */
+
+class MyXtendClass {
+
+	// XPECT warnings --> "The value of the field MyXtendClass.x is not used" at "x"	
+	val x = true
+	
+	// XPECT errors --> "This expression is not allowed in this context, since it doesn't cause any side effects." at "1"
+	def void foo() { 1 }	
+}
