@@ -247,9 +247,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		RenameElementProcessor processor = processorProvider.get();
 		processor.initialize(new IRenameElementContext.Impl(targetElementURI, RefactoringPackage.Literals.ELEMENT,
 				null, null, null));
+		processor.setNewName(newName);
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue("Initial RefactoringStatus is OK", initialStatus.isOK());
-		processor.setNewName(newName);
 		RefactoringStatus finalStatus = processor.checkFinalConditions(new NullProgressMonitor(), null);
 		assertTrue("Final RefactoringStatus is OK", finalStatus.isOK());
 		final Change change = processor.createChange(new NullProgressMonitor());

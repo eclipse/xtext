@@ -256,8 +256,8 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 						3), state);
 			}
 		});
-		controller.initialize(context);
 		waitForReconciler(contextEditor);
+		controller.initialize(context);
 		waitForDisplay();
 		controller.startRefactoring(RefactoringType.LINKED_EDITING);
 		waitForDisplay();
