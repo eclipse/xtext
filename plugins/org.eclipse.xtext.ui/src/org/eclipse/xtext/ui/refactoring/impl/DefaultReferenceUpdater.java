@@ -50,7 +50,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	private ITransientValueService transientValueService;
 
 	/**
-	 * @since 2.4 Replaces the obsolete {@link CrossReferenceSerializerFacade}
+	 * @since 2.4 Replaces the obsolete CrossReferenceSerializerFacade
 	 */
 	@Inject
 	private RefactoringCrossReferenceSerializer crossReferenceSerializer;
