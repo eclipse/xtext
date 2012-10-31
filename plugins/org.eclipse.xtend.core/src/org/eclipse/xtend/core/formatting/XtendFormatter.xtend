@@ -17,9 +17,8 @@ import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtend.core.xtend.XtendPackage$Literals
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.core.xtend.XtendParameter
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
@@ -237,7 +236,12 @@ public class XtendFormatter {
 		if(indented)
 			format += explicitParams.last.nodeForEObject.append[decreaseIndentation]
 		if(builder != null) {
-			format += builder.nodeForEObject.prepend[noSpace]
+			format += builder.nodeForEObject.prepend [
+				if (builder.useStyleMultiline(format))
+					oneSpace
+				else
+					noSpace
+			]
 			builder.format(format)
 		}
 	}
@@ -271,7 +275,12 @@ public class XtendFormatter {
 			node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
 		}
 		if(builder != null) {
-			format += builder.nodeForEObject.prepend[noSpace]
+			format += builder.nodeForEObject.prepend [
+				if (builder.useStyleMultiline(format))
+					oneSpace
+				else
+					noSpace
+			]
 			builder.format(format)
 		}
 	}
@@ -351,8 +360,17 @@ public class XtendFormatter {
 							format += op.append[increaseIndentation]
 						}
 					}
-					for(arg : call.memberCallArguments)
-						format(arg, format)
+					if (!call.memberCallArguments.empty) {
+						val builder = call.memberCallArguments.head
+						// add single space if lambda is multi-line
+						format += builder.nodeForEObject.prepend [
+							if (builder.useStyleMultiline(format))
+								oneSpace
+							else
+								noSpace
+						]
+						builder.format(format)
+					}
 				} 
 			}
 		}
@@ -485,10 +503,11 @@ public class XtendFormatter {
 	
 	def protected void formatClosureMultiLine(XClosure expr, INode open, Collection<XExpression> children, INode close, FormattableDocument format) {
 		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
-		if(explicit != null)
+		if(explicit != null) {
 			format += explicit.append[newLine; increaseIndentation]
-		else
+		} else {
 			format += open?.append[newLine; increaseIndentation]
+		}
 		for(c:children) {
 			c.format(format)
 			val node = c.nodeForEObject

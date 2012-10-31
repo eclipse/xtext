@@ -371,7 +371,22 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			val x = newArrayList("A", "b") val y = x.filter [
 				val z = it z.toUpperCase == z 
 			] y.join
-		''')	
+		''')
+	}
+	
+	@Test def formatClosuresMultiLine_02() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter [
+				val z = it
+				z.toUpperCase == z
+			]
+			y.join
+		''', '''
+			val x = newArrayList("A", "b") val y = x.filter[
+				val z = it z.toUpperCase == z 
+			] y.join
+		''')
 	}
 	
 	@Test def formatClosuresMultiLineSemicolon() {
@@ -392,7 +407,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	@Test def formatClosuresWrapIfNeeded() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
-			val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z
+			val y = x.filter[ val z = it z.toUpperCase == z z.toUpperCase == z
 				z.toUpperCase == z ]
 			y.join
 		''', '''
@@ -403,7 +418,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	@Test def formatClosuresParamMultiLine() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
-			val y = x.filter[ z |
+			val y = x.filter [ z |
 				val w = z
 				w.toUpperCase == w
 			]
@@ -873,11 +888,11 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatMemberFeatureCallBuilderMultiline2() {
 		assertFormattedExpression('''
-			newArrayList("x").map(length)[
-				lenght
+			newArrayList("x").map(length) [
+				length
 			]
 		''', '''
-			newArrayList("x")  .  map  (  length   )  [  lenght  
+			newArrayList("x")  .  map  (  length   )  [  length  
 			]
 		''')	
 	}

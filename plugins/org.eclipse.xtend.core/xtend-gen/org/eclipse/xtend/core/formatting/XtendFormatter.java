@@ -664,7 +664,12 @@ public class XtendFormatter {
       INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(builder);
       final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.noSpace();
+            boolean _useStyleMultiline = XtendFormatter.this.useStyleMultiline(builder, format);
+            if (_useStyleMultiline) {
+              it.oneSpace();
+            } else {
+              it.noSpace();
+            }
           }
         };
       Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(_nodeForEObject_1, _function_2);
@@ -781,7 +786,12 @@ public class XtendFormatter {
       INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(builder);
       final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.noSpace();
+            boolean _useStyleMultiline = XtendFormatter.this.useStyleMultiline(builder, format);
+            if (_useStyleMultiline) {
+              it.oneSpace();
+            } else {
+              it.noSpace();
+            }
           }
         };
       Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(_nodeForEObject, _function_1);
@@ -1015,8 +1025,25 @@ public class XtendFormatter {
               }
             }
             EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
-            for (final XExpression arg : _memberCallArguments_2) {
-              this.format(arg, format);
+            boolean _isEmpty = _memberCallArguments_2.isEmpty();
+            boolean _not_2 = (!_isEmpty);
+            if (_not_2) {
+              EList<XExpression> _memberCallArguments_3 = call.getMemberCallArguments();
+              final XExpression builder = IterableExtensions.<XExpression>head(_memberCallArguments_3);
+              INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(builder);
+              final Procedure1<FormattingDataInit> _function_11 = new Procedure1<FormattingDataInit>() {
+                  public void apply(final FormattingDataInit it) {
+                    boolean _useStyleMultiline = XtendFormatter.this.useStyleMultiline(builder, format);
+                    if (_useStyleMultiline) {
+                      it.oneSpace();
+                    } else {
+                      it.noSpace();
+                    }
+                  }
+                };
+              Iterable<FormattingData> _prepend_1 = this._formatterExtensions.prepend(_nodeForEObject, _function_11);
+              format.operator_add(_prepend_1);
+              this.format(builder, format);
             }
           }
         }
