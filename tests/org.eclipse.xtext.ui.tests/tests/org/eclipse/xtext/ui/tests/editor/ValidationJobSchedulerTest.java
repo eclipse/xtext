@@ -37,7 +37,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ValidationJobSchedulerTest extends AbstractXtextTests implements IResourceDescriptions, IDirtyResource {
 
 	private List<IReferenceDescription> referenceDescriptions;

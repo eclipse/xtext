@@ -39,7 +39,6 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest {
 
 	private static final String TEST_PROJECT = "refactoring.test";

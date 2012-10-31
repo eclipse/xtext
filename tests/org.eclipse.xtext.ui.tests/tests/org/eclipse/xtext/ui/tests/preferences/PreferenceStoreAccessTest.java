@@ -75,16 +75,19 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 		assertTrue(readable.getBoolean("someBoolean"));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testScope() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "org");
 		assertFalse("partial keys are not supported", scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"));
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testScopeWithAnotherInstance() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		assertTrue(scopedPreferenceStore.getBoolean("someBoolean"));
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testChainedPreferenceStore() {
 		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		configurationStore.setValue("someInt", 12);

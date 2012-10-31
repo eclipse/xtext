@@ -21,7 +21,6 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class UpdateAcceptorTest extends Assert {
 
 	private static final String CHANGE_NAME = "My change";

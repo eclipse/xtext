@@ -57,6 +57,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected IPreferenceStore preferenceStore;
 	protected IOutlineNodeComparer comparer;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();

@@ -31,7 +31,6 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class OutlineTreeProviderTest extends AbstractXtextTests {
 
 	private DefaultOutlineTreeProvider treeProvider;
