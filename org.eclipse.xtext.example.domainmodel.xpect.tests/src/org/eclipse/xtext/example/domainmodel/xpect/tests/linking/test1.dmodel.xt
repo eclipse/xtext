@@ -1,10 +1,10 @@
 /* 
-XPECT_CLASS org.eclipse.xtext.example.domainmodel.xpect.tests.linking.DMLinkingTest
+XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.linking.DMLinkingTest
 	ResourceSet {
 		ThisFile {}
 		File "test2.dmodel" {}
 	}
-END_CLASS 
+END_SETUP 
 */
 
 

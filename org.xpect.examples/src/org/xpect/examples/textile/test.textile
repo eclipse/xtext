@@ -1,6 +1,6 @@
 
 
-XPECT_CLASS org.xpect.examples.textile.SimpleTest END_CLASS
+XPECT_SETUP org.xpect.examples.textile.SimpleTest END_SETUP
 
 XPECT simple
 

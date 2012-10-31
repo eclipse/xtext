@@ -1,5 +1,5 @@
 
-/* XPECT_CLASS org.eclipse.xtext.example.domainmodel.xpect.tests.resourcedescription.DMResourceDescriptionTest END_CLASS */
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.resourcedescription.DMResourceDescriptionTest END_SETUP */
 
 
 /*

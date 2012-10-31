@@ -18,9 +18,9 @@ Text:
 ;
 	
 Lexicalspace_Setup returns XpectTest hidden(WS, ML_COMMENT, SL_COMMENT):
-	{XpectTest} "XPECT_CLASS" testClass=[types::JvmDeclaredType|QualifiedName] 
+	{XpectTest} "XPECT_SETUP" testClass=[types::JvmDeclaredType|QualifiedName] 
 	assignments+=Assignment*
-	"END_CLASS"
+	"END_SETUP"
 ;
 	
 Assignment:

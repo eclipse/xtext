@@ -1,4 +1,4 @@
-/* XPECT_CLASS org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_CLASS */
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_SETUP */
 
 
 package pkg1 {

@@ -1,12 +1,12 @@
 
 
 
-/* XPECT_CLASS org.eclipse.xtext.example.domainmodel.xpect.tests.parser.ParserTest
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.parser.ParserTest
 	ResourceSet {
 		ThisFile {}
 		File "test2.dmodel" {}
 	}
-END_CLASS */
+END_SETUP */
 
 
 /* XPECT ast ---
