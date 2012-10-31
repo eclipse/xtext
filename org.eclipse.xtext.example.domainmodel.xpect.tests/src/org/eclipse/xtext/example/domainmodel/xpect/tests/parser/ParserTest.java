@@ -15,7 +15,7 @@ import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 
 @RunWith(XpectRunner.class)
 @XpectSetup(XtextStandaloneSetup.class)
-@XpectTestFiles(fileExtensions = "dmodel")
+@XpectTestFiles(fileExtensions = "xt")
 public class ParserTest {
 
 	@Xpect

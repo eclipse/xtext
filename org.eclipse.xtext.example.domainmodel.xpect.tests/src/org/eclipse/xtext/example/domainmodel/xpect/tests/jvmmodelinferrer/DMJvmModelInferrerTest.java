@@ -6,7 +6,7 @@ import org.xpect.runner.XpectTestFiles;
 import org.xpect.xtext.lib.tests.JvmModelInferrerTest;
 
 @RunWith(XpectRunner.class)
-@XpectTestFiles(fileExtensions = "dmodel")
+@XpectTestFiles(fileExtensions = "xt")
 public class DMJvmModelInferrerTest extends JvmModelInferrerTest {
 
 }
