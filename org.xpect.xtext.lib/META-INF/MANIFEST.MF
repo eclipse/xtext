@@ -2,9 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lib
 Bundle-SymbolicName: org.xpect.xtext.lib
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.xpect;bundle-version="1.0.0",
- org.xpect.ui;bundle-version="1.0.0"
+Require-Bundle: org.xpect;bundle-version="0.1.0",
+ org.xpect.ui;bundle-version="0.1.0",
+ org.eclipse.xtext.xbase;bundle-version="2.3.1"
 Export-Package: org.xpect.xtext.lib.setup,
  org.xpect.xtext.lib.tests
+Bundle-Vendor: itemis AG
