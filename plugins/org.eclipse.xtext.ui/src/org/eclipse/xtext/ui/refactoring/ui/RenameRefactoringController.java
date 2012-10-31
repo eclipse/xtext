@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -150,19 +152,29 @@ public class RenameRefactoringController {
 	}
 
 	protected void startDirectRefactoring() throws InterruptedException {
-		if (Strings.isEmpty(newName))
+		if (Strings.isEmpty(newName)) {
 			restoreOriginalSelection();
-		else
-			createRenameSupport(renameElementContext, newName).startDirectRefactoring();
+		} else {
+			String originalName = getOriginalName(getXtextEditor());
+			if(!equal(originalName, newName)) {
+				IRenameSupport renameSupport = createRenameSupport(renameElementContext, newName);
+				if(renameSupport != null) 
+					renameSupport.startDirectRefactoring();
+			}
+		}
 	}
 
 	protected void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
 		if (Strings.isEmpty(newName))
 			newName = getOriginalName(getXtextEditor());
-		if (Strings.isEmpty(newName))
+		if (Strings.isEmpty(newName)) 
 			restoreOriginalSelection();
-		else
-			createRenameSupport(renameElementContext, newName).startRefactoringWithDialog(previewOnly);
+		else {
+			IRenameSupport renameSupport = createRenameSupport(renameElementContext, newName);
+			if(renameSupport != null) {
+				renameSupport.startRefactoringWithDialog(previewOnly);
+			}
+		}
 	}
 
 	protected String getOriginalName(final XtextEditor xtextEditor) {

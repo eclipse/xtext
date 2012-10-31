@@ -29,7 +29,7 @@ public abstract class AbstractRenameStrategy implements DefaultRenameStrategyPro
 	private URI targetElementOriginalURI;
 	private URI targetElementNewURI;
 	private EAttribute nameAttribute;
-
+	
 	public boolean initialize(EObject targetElement, IRenameElementContext context) {
 		this.nameAttribute = getNameAttribute(targetElement);
 		if(nameAttribute == null)
@@ -39,16 +39,14 @@ public abstract class AbstractRenameStrategy implements DefaultRenameStrategyPro
 		return !Strings.isEmpty(originalName);
 	}
 
+	
 	public String getOriginalName() {
 		return originalName;
 	}
 
 	public RefactoringStatus validateNewName(String newName) {
-		//TODO: Validate if name is valid in the meaning of the DataTypeRule / Terminal
-		RefactoringStatus newRefactoringStatus = new RefactoringStatus();
-		if (Strings.equal(newName, originalName))
-			newRefactoringStatus.addWarning("Name should be different");
-		return newRefactoringStatus;
+		RefactoringStatus status = new RefactoringStatus();
+		return status;
 	}
 
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {

@@ -7,15 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -53,18 +58,40 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 		return false;
 	}
 
+	@Override
+	public RefactoringStatus validateNewName(String newName) {
+		RefactoringStatus status = super.validateNewName(newName);
+		if(nameRuleName != null && valueConverterService != null) {
+			try {
+				String value = getNameAsValue(newName);
+				String text = getNameAsText(value);
+				if(!equal(text, newName)) {
+					status.addError("Illegal name: '" + newName + "'. Consider using '" + text + "' instead.");
+				}
+			} catch(ValueConverterException vce) {
+				status.addFatalError("Illegal name: " + notNull(vce.getMessage()));
+			}
+		}
+		return status;
+	}
+	
 	protected ITextRegion getOriginalNameRegion(final EObject targetElement, EAttribute nameAttribute) {
 		return locationInFileProvider.getFullTextRegion(targetElement, nameAttribute, 0);
 	}
 
 	protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
 		List<INode> nameNodes = NodeModelUtils.findNodesForFeature(targetElement, nameAttribute);
-		if (nameNodes.size() != 1 || !(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
-			return null;
+		if(nameNodes.size() == 1) {
+			EObject grammarElement = nameNodes.get(0).getGrammarElement();
+			if(grammarElement instanceof RuleCall) {
+				AbstractRule nameRule = ((RuleCall) grammarElement).getRule();
+				if(nameRule != null)
+					return nameRule.getName();
+			}
 		}
-		return ((RuleCall) nameNodes.get(0).getGrammarElement()).getRule().getName();
+		return null;
 	}
-
+	
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), getDeclarationTextEdit(newName));

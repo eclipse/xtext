@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
@@ -76,7 +78,7 @@ public class RenameElementWizard extends RefactoringWizard {
 				}
 			});
 			nameField.selectAll();
-			setPageComplete(renameProcessor.validateNewName(currentName));
+			validatePage();
 			setControl(composite);
 		}
 
@@ -92,6 +94,9 @@ public class RenameElementWizard extends RefactoringWizard {
 			String text = nameField.getText();
 			RefactoringStatus status = renameProcessor.validateNewName(text);
 			setPageComplete(status);
+			if(equal(renameProcessor.getOriginalName(), text)) {
+				setPageComplete(false);
+			}
 		}
 
 		@Override
