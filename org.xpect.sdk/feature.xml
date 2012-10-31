@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="org.xpect.sdk"
-	label="Xpect SDK Feature "
-	version="1.0.0.qualifier">
-	<plugin
-			id="org.xpect"
-			download-size="0"
-			install-size="0"
-			version="0.0.0"
-			unpack="false"/>
-	<plugin
-			id="org.xpect.ui"
-			download-size="0"
-			install-size="0"
-			version="0.0.0"
-			unpack="false"/>
+<feature
+      id="org.xpect.sdk"
+      label="Xpect SDK Feature "
+      version="0.1.0.qualifier">
+
+   <requires>
+      <import feature="org.eclipse.xtext.runtime" version="2.3.1.v201208210947"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.3.1.v201208210947"/>
+   </requires>
+
+   <plugin
+         id="org.xpect"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xpect.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xpect.xtext.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
