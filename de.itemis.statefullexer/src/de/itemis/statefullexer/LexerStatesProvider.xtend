@@ -364,15 +364,15 @@ class Util {
 	
 	override toString() '''
 		Solution {
-			ÇFOR t:ambiguousTransitionsÈ
-				Ambiguous Transition: Çt.source.nameÈ ---Çt.token.tokenNameÈ---> Çt.target.nameÈ
-			ÇENDFORÈ
-			ÇFOR s:allStatesÈ
-				State Çs.nameÈ: Çs.tokens.map[tokenName].join(", ")È
-			ÇENDFORÈ
-			ÇFOR t:new NfaUtil2().getAllTransitions(this)È
-				Transition: Çt.source.nameÈ ---Çt.token.tokenNameÈ---> Çt.target.nameÈ
-			ÇENDFORÈ
+			«FOR t:ambiguousTransitions»
+				Ambiguous Transition: «t.source.name» ---«t.token.tokenName»---> «t.target.name»
+			«ENDFOR»
+			«FOR s:allStates»
+				State «s.name»: «s.tokens.map[tokenName].join(", ")»
+			«ENDFOR»
+			«FOR t:new NfaUtil2().getAllTransitions(this)»
+				Transition: «t.source.name» ---«t.token.tokenName»---> «t.target.name»
+			«ENDFOR»
 		}
 	'''
 

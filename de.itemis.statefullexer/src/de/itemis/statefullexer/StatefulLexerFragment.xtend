@@ -19,8 +19,6 @@ import org.eclipse.xtext.xbase.lib.Pair
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import static extension org.eclipse.xtext.util.Strings.*
-import org.eclipse.xtext.generator.BindFactory
-import org.eclipse.xtext.parser.antlr.Lexer
 
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	
@@ -130,37 +128,37 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	}
 	
 	def genLexer(Grammar grammar, ILexerStatesProvider$ILexerStates nfa) '''
-		lexer grammar ÇlexerGrammar.lastToken(".")È;
+		lexer grammar «lexerGrammar.lastToken(".")»;
 		
 		options {
-			tokenVocab=InternalÇgrammar.name.lastToken(".") + "Lexer"È;
+			tokenVocab=Internal«grammar.name.lastToken(".") + "Lexer"»;
 		}
 		
 		@header {
-		package ÇlexerGrammar.skipLastToken(".")È;
+		package «lexerGrammar.skipLastToken(".")»;
 		
 		// Use our own Lexer superclass by means of import.
-		ÇIF contentAssistÈ
+		«IF contentAssist»
 			import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
-		ÇELSEÈ 
+		«ELSE» 
 			import org.eclipse.xtext.parser.antlr.Lexer;
-		ÇENDIFÈ
+		«ENDIF»
 		}
 		
 		@members{
-			ÇFOR s: nfa.allStatesÈ
-				// state Çs.nameÈ = Çs.IDÈ
-			ÇENDFORÈ
-			private int tokenstate = Çnfa.start.IDÈ;
+			«FOR s: nfa.allStates»
+				// state «s.name» = «s.ID»
+			«ENDFOR»
+			private int tokenstate = «nfa.start.ID»;
 		}
 		
-		ÇFOR s: getStateTokens(grammar, nfa)È
-			ÇgenToken(grammar, s.sources, s.token, s.target)È
-		ÇENDFORÈ
+		«FOR s: getStateTokens(grammar, nfa)»
+			«genToken(grammar, s.sources, s.token, s.target)»
+		«ENDFOR»
 		
-		ÇFOR rule:getStatelessTerminalRules(grammar, nfa)È
-			RULE_Çrule.nameÈ: Çrule.toLexerBodyÈ;
-		ÇENDFORÈ
+		«FOR rule:getStatelessTerminalRules(grammar, nfa)»
+			RULE_«rule.name»: «rule.toLexerBody»;
+		«ENDFOR»
 	'''
 	
 	def guardAction(Set<ILexerStatesProvider$ILexerState> sources) {
@@ -173,21 +171,21 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	}
 	
 	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, String keyword, Void NULL) '''
-		Çval keywords = KeywordHelper::getHelper(grammar)È
-		Çkeywords.getRuleName(keyword)È: Çsources.guardActionÈ 'ÇAntlrGrammarGenUtil::toAntlrString(keyword)È';
+		«val keywords = KeywordHelper::getHelper(grammar)»
+		«keywords.getRuleName(keyword)»: «sources.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»';
 	'''
 	
 	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, TerminalRule rule, Void NULL) '''
-		RULE_Çrule.nameÈ: Çif("ANY_OTHER" != rule.name) sources.guardActionÈ Çrule.toLexerBodyÈ;
+		RULE_«rule.name»: «if("ANY_OTHER" != rule.name) sources.guardAction» «rule.toLexerBody»;
 	'''
 	
 	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, String keyword, ILexerStatesProvider$ILexerState target) '''
-		Çval keywords = KeywordHelper::getHelper(grammar)È
-		Çkeywords.getRuleName(keyword)È: Çsources.guardActionÈ 'ÇAntlrGrammarGenUtil::toAntlrString(keyword)È' Çtarget.transitionActionÈ;
+		«val keywords = KeywordHelper::getHelper(grammar)»
+		«keywords.getRuleName(keyword)»: «sources.guardAction» '«AntlrGrammarGenUtil::toAntlrString(keyword)»' «target.transitionAction»;
 	'''
 	
 	def dispatch genToken(Grammar grammar, Set<ILexerStatesProvider$ILexerState> sources, TerminalRule rule, ILexerStatesProvider$ILexerState target) '''
-		RULE_Çrule.nameÈ: Çif("ANY_OTHER" != rule.name) sources.guardActionÈ Çrule.toLexerBodyÈ  Çtarget.transitionActionÈ;
+		RULE_«rule.name»: «if("ANY_OTHER" != rule.name) sources.guardAction» «rule.toLexerBody»  «target.transitionAction»;
 	'''
 }
 
