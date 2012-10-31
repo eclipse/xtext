@@ -366,7 +366,7 @@
        <shortcut
             class="org.xpect.ui.launching.JUnitPDELaunchShortcut"
             icon="$nl$/icons/julaunchpgn.gif"
-            id="org.eclipse.xtend.ide.launching.junitPdeShortcut"
+            id="org.xpect.ui.launching.junitPdeShortcut"
             label="JUnit Plug-in Test"
             modes="run, debug">
          <contextualLaunch>
