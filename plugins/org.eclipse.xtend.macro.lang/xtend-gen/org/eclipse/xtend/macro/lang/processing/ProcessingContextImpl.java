@@ -1,8 +1,18 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.macro.lang.processing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Stack;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -11,17 +21,25 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.macro.ProcessingContext;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
@@ -242,5 +260,94 @@ public class ProcessingContextImpl implements ProcessingContext {
       IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Only EObjects are supported atm.");
       throw _illegalArgumentException;
     }
+  }
+  
+  public JvmAnnotationReference annotate(final JvmTypeReference reference, final Map<String,Object> values) {
+    JvmType _type = reference==null?(JvmType)null:reference.getType();
+    boolean _not = (!(_type instanceof JvmAnnotationType));
+    if (_not) {
+      JvmType _type_1 = reference==null?(JvmType)null:reference.getType();
+      String _identifier = _type_1==null?(String)null:_type_1.getIdentifier();
+      String _plus = ("Reference must point to an annotation type but was " + _identifier);
+      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
+      throw _illegalArgumentException;
+    }
+    JvmType _type_2 = reference.getType();
+    final JvmAnnotationType annotationType = ((JvmAnnotationType) _type_2);
+    final JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+    result.setAnnotation(annotationType);
+    boolean _notEquals = (!Objects.equal(values, null));
+    if (_notEquals) {
+      Set<Entry<String,Object>> _entrySet = values.entrySet();
+      for (final Entry<String,Object> entry : _entrySet) {
+        {
+          Iterable<JvmFeature> _allFeatures = annotationType.getAllFeatures();
+          Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_allFeatures, JvmOperation.class);
+          final Function1<JvmOperation,Boolean> _function = new Function1<JvmOperation,Boolean>() {
+              public Boolean apply(final JvmOperation it) {
+                String _simpleName = it.getSimpleName();
+                String _key = entry.getKey();
+                boolean _equals = Objects.equal(_simpleName, _key);
+                return Boolean.valueOf(_equals);
+              }
+            };
+          final JvmOperation feature = IterableExtensions.<JvmOperation>findFirst(_filter, _function);
+          Object _value = entry.getValue();
+          final Object value = _value;
+          boolean _matched = false;
+          if (!_matched) {
+            if (value instanceof String) {
+              final String _string = (String)value;
+              _matched=true;
+              final JvmStringAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+              EList<String> _values = annotationValue.getValues();
+              _values.add(_string);
+              annotationValue.setOperation(feature);
+            }
+          }
+          if (!_matched) {
+            if (value instanceof Boolean) {
+              final Boolean _boolean = (Boolean)value;
+              _matched=true;
+              final JvmBooleanAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+              EList<Boolean> _values = annotationValue.getValues();
+              _values.add(_boolean);
+              annotationValue.setOperation(feature);
+            }
+          }
+          if (!_matched) {
+            if (value instanceof Integer) {
+              final Integer _integer = (Integer)value;
+              _matched=true;
+              final JvmIntAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+              EList<Integer> _values = annotationValue.getValues();
+              _values.add(_integer);
+              annotationValue.setOperation(feature);
+            }
+          }
+          if (!_matched) {
+            if (value instanceof JvmTypeReference) {
+              final JvmTypeReference _jvmTypeReference = (JvmTypeReference)value;
+              _matched=true;
+              final JvmTypeAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+              EList<JvmTypeReference> _values = annotationValue.getValues();
+              _values.add(_jvmTypeReference);
+              annotationValue.setOperation(feature);
+            }
+          }
+          if (!_matched) {
+            String _key = entry.getKey();
+            String _plus_1 = ("Annotation value must either be a String, Boolean, Integer, or JvmTypeReference (Class). Was " + _key);
+            String _plus_2 = (_plus_1 + " -> ");
+            Object _value_1 = entry.getValue();
+            String _plus_3 = (_plus_2 + _value_1);
+            String _plus_4 = (_plus_3 + ".");
+            IllegalArgumentException _illegalArgumentException_1 = new IllegalArgumentException(_plus_4);
+            throw _illegalArgumentException_1;
+          }
+        }
+      }
+    }
+    return result;
   }
 }

@@ -8,6 +8,9 @@
 
 package org.eclipse.xtend.macro;
 
+import java.util.Map;
+
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -36,6 +39,8 @@ public interface ProcessingContext {
 	JvmConstructor constructor(Procedures.Procedure1<JvmConstructor> initializer);
 	
 	JvmFormalParameter param(String name, JvmTypeReference type);
+	
+	JvmAnnotationReference annotate(JvmTypeReference reference, Map<String, Object> values);
 	
 	/**
 	 * adds a compile-time error to the given element with the given message

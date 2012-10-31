@@ -8,12 +8,14 @@
 package org.eclipse.xtend.macro.lang.processing
 
 import java.util.List
+import java.util.Map
 import java.util.Stack
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.Property
 import org.eclipse.xtend.macro.ProcessingContext
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
@@ -22,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
@@ -145,6 +148,46 @@ class ProcessingContextImpl implements ProcessingContext {
 			}
 			default : throw new IllegalArgumentException("Only EObjects are supported atm.")
 		}
+	}
+	
+
+	override annotate(JvmTypeReference reference, Map<String,Object> values) {
+		if (!(reference?.type instanceof JvmAnnotationType)) {
+			throw new IllegalArgumentException('Reference must point to an annotation type but was '+reference?.type?.identifier)
+		}
+		val annotationType = reference.type as JvmAnnotationType
+		val result = TypesFactory::eINSTANCE.createJvmAnnotationReference
+		result.annotation = annotationType
+		if (values != null) {
+			for (entry : values.entrySet) {
+				val feature = annotationType.allFeatures.filter(typeof(JvmOperation)).findFirst[ simpleName == entry.key ]
+				switch value : entry.value {
+					String : {
+						val annotationValue = TypesFactory::eINSTANCE.createJvmStringAnnotationValue
+						annotationValue.values += value
+						annotationValue.operation = feature
+					}
+					Boolean : {
+						val annotationValue = TypesFactory::eINSTANCE.createJvmBooleanAnnotationValue
+						annotationValue.values += value
+						annotationValue.operation = feature
+					}
+					Integer : {
+						val annotationValue = TypesFactory::eINSTANCE.createJvmIntAnnotationValue
+						annotationValue.values += value
+						annotationValue.operation = feature
+					}
+					JvmTypeReference : {
+						val annotationValue = TypesFactory::eINSTANCE.createJvmTypeAnnotationValue
+						annotationValue.values += value
+						annotationValue.operation = feature
+					}
+					
+					default : throw new IllegalArgumentException("Annotation value must either be a String, Boolean, Integer, or JvmTypeReference (Class). Was "+entry.key+" -> "+entry.value+".")
+				}
+			}
+		}
+		return result
 	}
 	
 }
