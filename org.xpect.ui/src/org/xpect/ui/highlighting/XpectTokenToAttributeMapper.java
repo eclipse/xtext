@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.xpect.ui.highlighting;
 
 import java.util.Set;
@@ -7,11 +14,12 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfigurati
 
 import com.google.common.collect.ImmutableSet;
 
-public class XpectTokenToAttributeMapper extends
-		DefaultAntlrTokenToAttributeIdMapper {
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+public class XpectTokenToAttributeMapper extends DefaultAntlrTokenToAttributeIdMapper {
 
-	private final Set<String> keywords = ImmutableSet.of("KEYWORD_11",
-			"KEYWORD_10", "KEYWORD_7", "KEYWORD_6", "KEYWORD_8", "KEYWORD_9");
+	private final Set<String> keywords = ImmutableSet.of("KEYWORD_11", "KEYWORD_10", "KEYWORD_7", "KEYWORD_6", "KEYWORD_8", "KEYWORD_9");
 
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {

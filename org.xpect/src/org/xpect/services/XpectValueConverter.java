@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.xpect.services;
 
 import java.util.Set;
@@ -11,12 +18,14 @@ import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.ImmutableSet;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class XpectValueConverter extends DefaultTerminalConverters {
 
 	public class IDConverter extends AbstractNullSafeConverter<String> {
 
-		private Set<String> allKeywords = ImmutableSet.copyOf(GrammarUtil
-				.getAllKeywords(getGrammar()));
+		private Set<String> allKeywords = ImmutableSet.copyOf(GrammarUtil.getAllKeywords(getGrammar()));
 
 		@Override
 		protected String internalToValue(String string, INode node) {

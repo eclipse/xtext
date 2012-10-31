@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.xpect.util;
 
 import java.io.UnsupportedEncodingException;
@@ -13,6 +20,9 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class TestDataUtil {
 
 	public final static String ENCODING = "UTF-8";
@@ -43,7 +53,7 @@ public class TestDataUtil {
 		try {
 			List<String> result = Lists.newArrayList();
 			for (Map.Entry<String, String> e : data.entrySet())
-				result.add(e.getKey()	 + KEY_VALUE_SEPARATOR + URLEncoder.encode(e.getValue(), ENCODING));
+				result.add(e.getKey() + KEY_VALUE_SEPARATOR + URLEncoder.encode(e.getValue(), ENCODING));
 			return Joiner.on(SEGMENT_SEPARATOR).join(result);
 		} catch (UnsupportedEncodingException e1) {
 			throw new RuntimeException(e1);

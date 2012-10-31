@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.xpect.setup;
 
 import java.lang.annotation.Annotation;
@@ -11,6 +18,9 @@ import org.xpect.runner.XpectFrameworkMethod;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public interface IXpectSetup<T, K, V, X> {
 
 	public interface IClassSetupContext {
@@ -31,17 +41,17 @@ public interface IXpectSetup<T, K, V, X> {
 	}
 
 	public interface ITestSetupContext extends IFileSetupContext {
-//		Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
+		// Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
 
 		XpectFrameworkMethod getMethod();
 
-//		ITypedProvider getProposedParameterValue(int parameterIndex);
+		// ITypedProvider getProposedParameterValue(int parameterIndex);
 
 		Object getTestInstance();
 
 		XpectInvocation getXpectInvocation();
 
-//		void setParameterValue(int parameterIndex, ITypedProvider value);
+		// void setParameterValue(int parameterIndex, ITypedProvider value);
 	}
 
 	void afterClass(IClassSetupContext frameworkCtx, T userCtx) throws Exception;
