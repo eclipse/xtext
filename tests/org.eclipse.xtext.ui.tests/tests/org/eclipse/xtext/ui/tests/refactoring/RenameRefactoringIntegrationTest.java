@@ -54,7 +54,6 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	@Inject

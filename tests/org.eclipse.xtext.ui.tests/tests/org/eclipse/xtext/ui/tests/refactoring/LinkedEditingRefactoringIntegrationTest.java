@@ -40,7 +40,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditingIntegrationTest {
 
 	private static final String TEST_CLASS = "TestClass";

@@ -24,7 +24,6 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class GlobalDescriptionLabelProviderTest extends Assert {
 
 	private GlobalDescriptionLabelProvider globalDescriptionLabelProvider;

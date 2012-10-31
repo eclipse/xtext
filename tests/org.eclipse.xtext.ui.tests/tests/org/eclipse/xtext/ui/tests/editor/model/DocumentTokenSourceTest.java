@@ -37,7 +37,6 @@ public class DocumentTokenSourceTest extends Assert {
 	public void setUp() throws Exception {
 		tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
-			@SuppressWarnings("restriction")
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}

@@ -15,7 +15,6 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 
 	@Test public void testEmptyDocs() throws Exception {

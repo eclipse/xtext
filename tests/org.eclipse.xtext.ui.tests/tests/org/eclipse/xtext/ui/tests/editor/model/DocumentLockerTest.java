@@ -28,7 +28,6 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
 		final List<String> s = Lists.newArrayList();
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
-			@SuppressWarnings("restriction")
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}

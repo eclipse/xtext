@@ -32,7 +32,6 @@ import com.google.inject.Injector;
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 
 	public ISetup getTestLanguageSetup(final IEObjectDocumentationProvider ieObjectDocumentationProvider) {

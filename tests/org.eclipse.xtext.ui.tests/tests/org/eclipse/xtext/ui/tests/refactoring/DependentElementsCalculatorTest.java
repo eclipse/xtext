@@ -20,7 +20,6 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class DependentElementsCalculatorTest extends AbstractXtextTests {
 
 	private XtextResource resource;

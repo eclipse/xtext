@@ -37,7 +37,6 @@ import com.google.inject.Injector;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 	private static final String TEST_PROJECT = "refactore.linkedtest";
 	private static final String pathToFile1 = TEST_PROJECT + "/file1.refactoringtestlanguage";
