@@ -1,17 +1,17 @@
-package org.eclipse.xpect.examples.domainmodel.tests.parser;
+package org.eclipse.xtext.example.domainmodel.xpect.tests.parser;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xpect.parameters.IStringExpectation;
-import org.eclipse.xpect.parameters.ParameterParser;
-import org.eclipse.xpect.parameters.StringExpectation;
-import org.eclipse.xpect.runner.Xpect;
-import org.eclipse.xpect.runner.XpectRunner;
-import org.eclipse.xpect.runner.XpectTestFiles;
-import org.eclipse.xpect.setup.XpectSetup;
-import org.eclipse.xpect.xtext.lib.setup.ThisModel;
-import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.runner.RunWith;
+import org.xpect.parameters.IStringExpectation;
+import org.xpect.parameters.ParameterParser;
+import org.xpect.parameters.StringExpectation;
+import org.xpect.runner.Xpect;
+import org.xpect.runner.XpectRunner;
+import org.xpect.runner.XpectTestFiles;
+import org.xpect.setup.XpectSetup;
+import org.xpect.xtext.lib.setup.ThisModel;
+import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 
 @RunWith(XpectRunner.class)
 @XpectSetup(XtextStandaloneSetup.class)

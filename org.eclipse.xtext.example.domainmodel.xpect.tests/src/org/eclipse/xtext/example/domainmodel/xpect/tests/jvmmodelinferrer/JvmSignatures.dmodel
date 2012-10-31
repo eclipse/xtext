@@ -1,4 +1,4 @@
-/* XPECT_CLASS org.eclipse.xpect.examples.domainmodel.tests.jvmmodelinferrer.DMJvmModelInferrerTest END_CLASS */
+/* XPECT_CLASS org.eclipse.xtext.example.domainmodel.xpect.tests.jvmmodelinferrer.DMJvmModelInferrerTest END_CLASS */
 
 /*
 Test the signatures of public and protected members.  
