@@ -84,56 +84,44 @@ public class PatchSetup implements IStartup {
 
 	private class WorkbenchListener implements IWindowListener, IPageListener, IPartListener {
 
-		@Override
 		public void pageActivated(IWorkbenchPage page) {
 		}
 
-		@Override
 		public void pageClosed(IWorkbenchPage page) {
 			page.removePartListener(listener);
 		}
 
-		@Override
 		public void pageOpened(IWorkbenchPage page) {
 			page.addPartListener(listener);
 		}
 
-		@Override
 		public void partActivated(IWorkbenchPart part) {
 		}
 
-		@Override
 		public void partBroughtToTop(IWorkbenchPart part) {
 		}
 
-		@Override
 		public void partClosed(IWorkbenchPart part) {
 		}
 
-		@Override
 		public void partDeactivated(IWorkbenchPart part) {
 
 		}
 
-		@Override
 		public void partOpened(IWorkbenchPart part) {
 			checkPart(part);
 		}
 
-		@Override
 		public void windowActivated(IWorkbenchWindow window) {
 		}
 
-		@Override
 		public void windowClosed(IWorkbenchWindow window) {
 			window.removePageListener(listener);
 		}
 
-		@Override
 		public void windowDeactivated(IWorkbenchWindow window) {
 		}
 
-		@Override
 		public void windowOpened(IWorkbenchWindow window) {
 			window.addPageListener(listener);
 		}
@@ -194,7 +182,6 @@ public class PatchSetup implements IStartup {
 			this.fTestRunnerPart = fTestRunnerPart;
 		}
 
-		@Override
 		public void menuAboutToShow(IMenuManager manager) {
 			IStructuredSelection selection = (IStructuredSelection) fSelectionProvider.getSelection();
 			if (selection.size() != 1)
@@ -209,7 +196,6 @@ public class PatchSetup implements IStartup {
 
 	}
 
-	@Override
 	public void earlyStartup() {
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		workbench.getDisplay().asyncExec(new Runnable() {

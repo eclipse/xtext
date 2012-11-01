@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.jdt.junit.runners.feature"
-      label="Feature"
+      label="JDT JUnit UI Runner Extension"
       version="0.1.0.qualifier">
 
    <description url="http://www.example.com/description">

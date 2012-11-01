@@ -9,7 +9,6 @@ public class RegistryTestRunListener extends TestRunListener {
 	@Override
 	public void testCaseStarted(final ITestCaseElement testCaseElement) {
 		Display.getDefault().asyncExec(new Runnable() {
-			@Override
 			public void run() {
 				RunnerUIHandlerRegistry.getHandler(testCaseElement);
 			}
