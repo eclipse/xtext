@@ -70,13 +70,16 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			return provider.get();
 		}
 		CacheAdapter adapter = getOrCreate(resource);
-		T element = adapter.<T>get(key);
+		T element = adapter.<T>internalGet(key);
 		if (element==null) {
 			element = provider.get();
 			cacheMiss(adapter);
 			adapter.set(key, element);
 		} else {
 			cacheHit(adapter);
+		}
+		if (element == CacheAdapter.NULL) {
+			return null;
 		}
 		return element;
 	}
@@ -235,10 +238,15 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 		
 		@SuppressWarnings("unchecked")
-		public <T> T get(Object name) {
+		private <T> T internalGet(Object name) {
 			if (empty)
 				return null;
-			T result = (T) this.values.get(name);
+			return (T) this.values.get(name);
+			
+		}
+		
+		public <T> T get(Object name) {
+			T result = internalGet(name);
 			if (result != NULL)
 				return result;
 			return null;
