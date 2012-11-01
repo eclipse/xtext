@@ -14,9 +14,6 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.Profile;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
-import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra;
-import org.eclipse.xtend.ide.formatting.SettingsData.Category;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -25,6 +22,7 @@ import com.google.inject.MembersInjector;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class FormatterModifyDialog extends ModifyDialog {
+
 	public static class Factory {
 
 		@Inject
@@ -51,12 +49,9 @@ public class FormatterModifyDialog extends ModifyDialog {
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void addPages(final Map values) {
-		for (Category category : Category.values()) {
-			if (FormatterPreferenceInfra.settingsByCategory(category, new XtendFormatterConfig(values)).iterator()
-					.hasNext()) {
-				addTabPage(category.getLabel(), tabFactory.createGenericTab(this, values, category));
-			}
-		}
+		addTabPage("Indentation", tabFactory.createIndentationTab(this, values));
+		addTabPage("New Lines", tabFactory.createNewLineTab(this, values));
+		addTabPage("Line Wrapping", tabFactory.createLineWrapTab(this, values));
 	}
 
 	@Override
