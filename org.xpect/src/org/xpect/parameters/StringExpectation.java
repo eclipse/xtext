@@ -40,7 +40,6 @@ public @interface StringExpectation {
 			this.annotation = annotation;
 		}
 
-		@Override
 		public void assertEquals(Object string) {
 			if (string == null)
 				throw new NullPointerException("Object is null");
@@ -81,7 +80,6 @@ public @interface StringExpectation {
 			return annotation;
 		}
 
-		@Override
 		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)

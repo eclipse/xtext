@@ -40,7 +40,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			super(resource, offset);
 		}
 
-		@Override
 		public EReference getCrossEReference() {
 			return (EReference) getEStructuralFeature();
 		}
@@ -57,7 +56,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			super(resource, offset);
 		}
 
-		@Override
 		public EAttribute getEAttribute() {
 			return (EAttribute) getEStructuralFeature();
 		}
@@ -76,7 +74,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			this.object = find(res, offset, expectedType);
 		}
 
-		@Override
 		public boolean canProvide(Class<?> expectedType) {
 			return expectedType.isInstance(object);
 		}
@@ -107,7 +104,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			return null;
 		}
 
-		@Override
 		@SuppressWarnings("unchecked")
 		public <T> T get(Class<T> expectedType) {
 			if (expectedType.isInstance(object))
@@ -123,7 +119,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			super(resource, offset);
 		}
 
-		@Override
 		public EReference getEReference() {
 			return (EReference) getEStructuralFeature();
 		}
@@ -163,12 +158,10 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 			throw new RuntimeException("No EStructuralFeature found at offset " + offset);
 		}
 
-		@Override
 		public EObject getEObject() {
 			return object;
 		}
 
-		@Override
 		public EStructuralFeature getEStructuralFeature() {
 			return feature;
 		}
@@ -213,7 +206,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 		this.resource = resource;
 	}
 
-	@Override
 	public ITypedProvider adapt(ITypedProvider provider, Class<?> expectedType) {
 		if (provider instanceof AbstractOffsetProvider) {
 			int offset = provider.get(Integer.TYPE);
@@ -244,7 +236,6 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 
 	}
 
-	@Override
 	public boolean canAdapt(ITypedProvider provider, Class<?> expectedType) {
 		return provider instanceof AbstractOffsetProvider && canAdapt(expectedType);
 	}

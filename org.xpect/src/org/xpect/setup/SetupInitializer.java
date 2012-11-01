@@ -118,7 +118,6 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 		}
 	}
 
-	@Override
 	public void initialize(T object) {
 		if (rootInstance != null)
 			initialize(object, rootInstance);

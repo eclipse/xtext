@@ -61,7 +61,6 @@ public class JUnitJavaElementDelegate implements IAdaptable {
 		this.editorPart = null;
 	}
 
-	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (getClass().equals(adapter))
 			return this;

@@ -17,7 +17,6 @@ import org.xpect.XpectPackage;
  */
 public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 
-	@Override
 	public String getTitle(XpectTestRunner runner) {
 		XpectInvocation invocation = runner.getInvocation();
 		INode node = NodeModelUtils.findActualNodeFor(invocation);

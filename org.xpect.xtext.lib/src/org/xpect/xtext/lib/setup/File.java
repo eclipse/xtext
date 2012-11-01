@@ -26,7 +26,6 @@ public class File implements ISetupFile {
 		this.name = name;
 	}
 
-	@Override
 	public InputStream createInputStream(IFileSetupContext ctx) throws IOException {
 		String from = this.from != null ? this.from : name;
 		Resource resource = ctx.getXpectFile().eResource();
@@ -42,7 +41,6 @@ public class File implements ISetupFile {
 		return name;
 	}
 
-	@Override
 	public URI getURI(IFileSetupContext ctx) {
 		return ctx.getURIProvider().resolveURI(ctx.getXpectFile().eResource().getURI(), name);
 	}

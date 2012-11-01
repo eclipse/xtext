@@ -30,12 +30,10 @@ public class Region implements IRegion {
 		return length == other.length && offset == other.offset;
 	}
 
-	@Override
 	public int getLength() {
 		return length;
 	}
 
-	@Override
 	public int getOffset() {
 		return offset;
 	}

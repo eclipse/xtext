@@ -50,7 +50,6 @@ public class XtHighlightingCalculator implements ISemanticHighlightingCalculator
 	@Inject(optional = true)
 	private ISemanticHighlightingCalculator original;
 
-	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (original != null)
 			original.provideHighlightingFor(resource, acceptor);

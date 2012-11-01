@@ -24,7 +24,6 @@ import com.google.inject.Module;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface XtextInjectorSetup {
 	public class NullModule implements Module {
-		@Override
 		public void configure(Binder binder) {
 		}
 	}

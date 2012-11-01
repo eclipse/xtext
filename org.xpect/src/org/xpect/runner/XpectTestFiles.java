@@ -97,7 +97,6 @@ public @interface XpectTestFiles {
 			return URI.createFileURI(file.getAbsolutePath());
 		}
 
-		@Override
 		public Collection<URI> getAllURIs() {
 			List<URI> result = Lists.newArrayList();
 			result.addAll(collectFilesWithExt(getBaseDir(), ctx.fileExtensions()));
@@ -146,12 +145,10 @@ public @interface XpectTestFiles {
 			}
 		}
 
-		@Override
 		public String getTitle(URI uri) {
 			return uri.lastSegment();
 		}
 
-		@Override
 		public URI resolveURI(URI base, String newURI) {
 			return URI.createURI(newURI).resolve(base);
 		}

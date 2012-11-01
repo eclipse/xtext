@@ -47,17 +47,14 @@ public class XpectTestRunner {
 			this.delegate = delegate;
 		}
 
-		@Override
 		public IXpectParameterProvider getClaminer() {
 			return claimer;
 		}
 
-		@Override
 		public int getLength() {
 			return delegate.getLength();
 		}
 
-		@Override
 		public int getOffset() {
 			return delegate.getOffset();
 		}

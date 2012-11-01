@@ -68,7 +68,6 @@ public class ScopingTest {
 			this.scope = scope;
 		}
 
-		@Override
 		public Iterator<String> iterator() {
 			return Iterators.transform(scope.getAllElements().iterator(), new EObjectDescriptionToStringMapper());
 		}

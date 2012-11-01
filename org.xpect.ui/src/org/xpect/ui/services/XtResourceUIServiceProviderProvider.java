@@ -27,7 +27,6 @@ public class XtResourceUIServiceProviderProvider extends DefaultResourceUIServic
 		super(null);
 	}
 
-	@Override
 	public IResourceServiceProvider get(URI uri, String contentType) {
 		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
 		if (ext != null) {

@@ -114,17 +114,14 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 			fileExtension2language.put(ext, info);
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
 		return fileExtension2language.get(fileExtension);
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByName(String name) {
 		return name2language.get(name);
 	}
 
-	@Override
 	public Collection<ILanguageInfo> getLanguages() {
 		return name2language.values();
 	}

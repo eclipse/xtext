@@ -58,7 +58,6 @@ public class SetupContext implements ITestSetupContext {
 
 	private XpectInvocation xpectInvocation;
 
-	@Override
 	public Collection<URI> getAllFiles() {
 		return allFiles;
 	}
@@ -73,7 +72,6 @@ public class SetupContext implements ITestSetupContext {
 	// return allParameters.get(parameterIndex);
 	// }
 
-	@Override
 	public XpectFrameworkMethod getMethod() {
 		return method;
 	}
@@ -99,17 +97,14 @@ public class SetupContext implements ITestSetupContext {
 	// return proposedParameters.get(parameterIndex);
 	// }
 
-	@Override
 	public Class<?> getTestClass() {
 		return testClass;
 	}
 
-	@Override
 	public Object getTestInstance() {
 		return testInstance;
 	}
 
-	@Override
 	public IXpectURIProvider getURIProvider() {
 		return uriProvider;
 	}
@@ -126,24 +121,20 @@ public class SetupContext implements ITestSetupContext {
 		return userTestCtx;
 	}
 
-	@Override
 	public XpectFile getXpectFile() {
 		return xpectFile;
 	}
 
-	@Override
 	public XpectInvocation getXpectInvocation() {
 		return xpectInvocation;
 	}
 
-	@Override
 	public void installParameterAdapter(ITypedAdapter adapter) {
 		if (paramAdapters == null)
 			paramAdapters = Lists.newArrayList();
 		paramAdapters.add(adapter);
 	}
 
-	@Override
 	public void installParameterValue(Class<? extends Annotation> key, ITypedProvider provider) {
 		if (paramValues == null)
 			paramValues = Maps.newLinkedHashMap();

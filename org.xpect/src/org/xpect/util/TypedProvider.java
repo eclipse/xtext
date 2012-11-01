@@ -19,7 +19,6 @@ public class TypedProvider implements ITypedProvider {
 		this.value = value;
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> expectedType) {
 		if (expectedType.isInstance(value))
@@ -27,7 +26,6 @@ public class TypedProvider implements ITypedProvider {
 		return null;
 	}
 
-	@Override
 	public boolean canProvide(Class<?> expectedType) {
 		return expectedType.isInstance(value);
 	}

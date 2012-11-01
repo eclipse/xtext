@@ -140,7 +140,6 @@ public @interface ParameterParser {
 			return Arrays.asList(result);
 		}
 
-		@Override
 		public IRegion claimRegion(XpectTestRunner invocation) {
 			INode node = NodeModelUtils.getNode(invocation.getInvocation());
 			int start = node.getOffset() + node.getLength();
@@ -242,7 +241,6 @@ public @interface ParameterParser {
 			throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");
 		}
 
-		@Override
 		public List<ITypedProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims) {
 			String paramString = findParameterString(invocation, claims);
 			Map<String, ITypedProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);

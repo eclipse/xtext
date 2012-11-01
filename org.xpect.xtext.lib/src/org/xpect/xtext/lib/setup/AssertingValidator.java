@@ -42,7 +42,6 @@ public class AssertingValidator {
 			this.list = list;
 		}
 
-		@Override
 		public void accept(T t) {
 			list.add(t);
 		}

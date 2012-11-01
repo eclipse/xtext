@@ -17,7 +17,6 @@ import com.google.inject.Module;
  */
 public class XpectOverridingGuiceModule implements Module {
 
-	@Override
 	public void configure(Binder binder) {
 		binder.bind(IResourceServiceProvider.Registry.class).toInstance(XpectResourceServiceProviderRegistry.INSTANCE);
 	}

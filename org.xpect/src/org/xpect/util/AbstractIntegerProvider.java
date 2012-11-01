@@ -14,7 +14,6 @@ import java.math.BigInteger;
  */
 public abstract class AbstractIntegerProvider implements ITypedProvider {
 
-	@Override
 	public boolean canProvide(Class<?> expectedType) {
 		return expectedType == Byte.class || //
 				expectedType == Byte.TYPE || //
@@ -28,7 +27,6 @@ public abstract class AbstractIntegerProvider implements ITypedProvider {
 				expectedType == String.class;
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> expectedType) {
 		if (expectedType == Byte.class || expectedType == Byte.TYPE)

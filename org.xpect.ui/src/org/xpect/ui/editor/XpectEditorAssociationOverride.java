@@ -53,7 +53,6 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		return extension != null && ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(extension) != null;
 	}
 
-	@Override
 	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
 		IFile file = getFile(editorInput);
 		XpectContentType type = contentTypeHelper.getContentType(file);
@@ -67,12 +66,10 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		}
 	}
 
-	@Override
 	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType, IEditorDescriptor editorDescriptor) {
 		return editorDescriptor;
 	}
 
-	@Override
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
 		IFile file = getFile(editorInput);
 		XpectContentType type = contentTypeHelper.getContentType(file);
@@ -92,7 +89,6 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		}
 	}
 
-	@Override
 	public IEditorDescriptor[] overrideEditors(String fileName, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
 		return editorDescriptors;
 	}

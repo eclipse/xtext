@@ -77,7 +77,6 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 		}
 	}
 
-	@Override
 	public void configure(Binder binder) {
 		binder.bind(IResourceValidator.class).to(ValidationTestWorkbenchModule.TestingResourceValidator.class);
 		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(Key.get(IResourceValidator.class)));

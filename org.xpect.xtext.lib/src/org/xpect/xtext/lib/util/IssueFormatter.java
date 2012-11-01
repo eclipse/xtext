@@ -26,7 +26,6 @@ public class IssueFormatter implements Function<Object, String> {
 		this.showSeverity = showSeverity;
 	}
 
-	@Override
 	public String apply(Object input) {
 		if (input instanceof Issue) {
 			Issue issue = (Issue) input;

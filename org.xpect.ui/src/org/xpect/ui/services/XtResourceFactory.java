@@ -20,7 +20,6 @@ import com.google.inject.Injector;
  */
 public class XtResourceFactory implements IResourceFactory {
 
-	@Override
 	public Resource createResource(URI uri) {
 		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
 		if (ext != null) {

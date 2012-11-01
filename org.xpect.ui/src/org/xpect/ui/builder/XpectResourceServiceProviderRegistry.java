@@ -22,7 +22,6 @@ public class XpectResourceServiceProviderRegistry implements IResourceServicePro
 	protected XpectResourceServiceProviderRegistry() {
 	}
 
-	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri, contentType);
 		if (serviceProvider instanceof IResourceServiceProviderProvider)
@@ -30,7 +29,6 @@ public class XpectResourceServiceProviderRegistry implements IResourceServicePro
 		return IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri, contentType);
 	}
 
-	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
 		if (serviceProvider instanceof IResourceServiceProviderProvider)
@@ -38,17 +36,14 @@ public class XpectResourceServiceProviderRegistry implements IResourceServicePro
 		return IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
 	}
 
-	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap();
 	}
 
-	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap();
 	}
 
-	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap();
 	}

@@ -49,12 +49,10 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return rtLangName.equals(((AbstractLanguageInfo) obj).rtLangName);
 	}
 
-	@Override
 	public Set<String> getFileExtensions() {
 		return fileExtensions;
 	}
 
-	@Override
 	public Injector getInjector(Module... modules) {
 		if (modules.length == 0) {
 			if (injector == null)
@@ -74,7 +72,6 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		}
 	}
 
-	@Override
 	public String getLanguageName() {
 		return rtLangName;
 	}

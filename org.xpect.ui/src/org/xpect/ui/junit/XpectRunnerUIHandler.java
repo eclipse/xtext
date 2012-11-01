@@ -34,7 +34,6 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 	@Inject
 	private IURIEditorOpener globalOpener;
 
-	@Override
 	public boolean contextMenuAboutToShow(ViewPart part, ITestElement ctx, IMenuManager menu) {
 		CompareAction compareAction = new CompareAction(ctx);
 		if (compareAction.isEnabled())
@@ -57,7 +56,6 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		return Collections.emptyMap();
 	}
 
-	@Override
 	public boolean handleDoubleClick(ViewPart part, ITestElement ctx) {
 		if (ctx instanceof TestElement && ((TestElement) ctx).isComparisonFailure()) {
 			FailureCompareEditorInput inp = new FailureCompareEditorInput(ctx);
@@ -73,7 +71,6 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 		return false;
 	}
 
-	@Override
 	public String getSimpleLabel(ViewPart part, ITestElement element) {
 		Map<String, String> parsed = parse(element);
 		String title = parsed.get("title");

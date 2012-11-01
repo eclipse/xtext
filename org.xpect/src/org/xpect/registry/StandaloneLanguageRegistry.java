@@ -49,14 +49,12 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 			this.info = info;
 		}
 
-		@Override
 		public EFactory getEFactory() {
 			if (pkg != null)
 				return pkg.getEFactoryInstance();
 			return null;
 		}
 
-		@Override
 		public EPackage getEPackage() {
 			if (pkg == null)
 				try {
@@ -91,7 +89,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 			this.clazz = clazz;
 		}
 
-		@Override
 		public Factory createFactory() {
 			if (factory == null)
 				try {
@@ -123,7 +120,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 			this.info = info;
 		}
 
-		@Override
 		public Factory createFactory() {
 			if (factory == null)
 				try {
@@ -155,7 +151,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 			this.info = info;
 		}
 
-		@Override
 		public IResourceServiceProvider get() {
 			if (provider == null)
 				provider = info.getInjector().getInstance(IResourceServiceProvider.class);
@@ -243,17 +238,14 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		}
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
 		return ext2language.get(fileExtension);
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByName(String name) {
 		return name2language.get(name);
 	}
 
-	@Override
 	public Collection<ILanguageInfo> getLanguages() {
 		return name2language.values();
 	}

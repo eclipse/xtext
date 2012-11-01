@@ -20,17 +20,14 @@ public class DelegatingLanguageRegistry implements ILanguageInfo.Registry {
 		return delegate;
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByFileExtension(String fileExtension) {
 		return delegate.getLanguageByFileExtension(fileExtension);
 	}
 
-	@Override
 	public ILanguageInfo getLanguageByName(String languageName) {
 		return delegate.getLanguageByName(languageName);
 	}
 
-	@Override
 	public Collection<ILanguageInfo> getLanguages() {
 		return delegate.getLanguages();
 	}

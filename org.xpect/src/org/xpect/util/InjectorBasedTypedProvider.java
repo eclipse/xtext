@@ -31,7 +31,6 @@ public class InjectorBasedTypedProvider implements ITypedProvider {
 		this.paramIndex = paramIndex;
 	}
 
-	@Override
 	public boolean canProvide(Class<?> expectedType) {
 		return get(expectedType) != null;
 	}
@@ -43,7 +42,6 @@ public class InjectorBasedTypedProvider implements ITypedProvider {
 		return null;
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> expectedType) {
 		TypeLiteral<?> classType = TypeLiteral.get(method.getDeclaringClass());

@@ -30,12 +30,10 @@ public class AbstractExpectation implements ITypedProvider {
 		this.length = length;
 	}
 
-	@Override
 	public boolean canProvide(Class<?> expectedType) {
 		return expectedType.isInstance(this);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> expectedType) {
 		if (expectedType.isInstance(this))

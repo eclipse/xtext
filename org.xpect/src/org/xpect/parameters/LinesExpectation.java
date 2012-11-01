@@ -48,12 +48,10 @@ public @interface LinesExpectation {
 			this.annotation = annotation;
 		}
 
-		@Override
 		public void assertEquals(Iterable<?> actual) {
 			assertEquals("", actual, false);
 		}
 
-		@Override
 		public void assertEquals(String message, Iterable<?> actual) {
 			assertEquals(message, actual, false);
 		}
@@ -97,7 +95,6 @@ public @interface LinesExpectation {
 			}
 		}
 
-		@Override
 		public void fail(String message, Iterable<?> actual) {
 			assertEquals(message, actual, true);
 		}
@@ -120,7 +117,6 @@ public @interface LinesExpectation {
 			return annotation;
 		}
 
-		@Override
 		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)

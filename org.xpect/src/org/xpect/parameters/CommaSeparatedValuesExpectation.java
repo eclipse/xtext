@@ -45,12 +45,10 @@ public @interface CommaSeparatedValuesExpectation {
 			this.annotation = annotation;
 		}
 
-		@Override
 		public void assertEquals(Iterable<?> actual) {
 			assertEquals(actual, null);
 		}
 
-		@Override
 		public void assertEquals(Iterable<?> actual, Predicate<String> predicate) {
 			String indentation = getIndentation();
 
@@ -137,7 +135,6 @@ public @interface CommaSeparatedValuesExpectation {
 			}
 		}
 
-		@Override
 		public void assertEquals(Predicate<String> predicate) {
 			assertEquals(null, predicate);
 		}
@@ -168,7 +165,6 @@ public @interface CommaSeparatedValuesExpectation {
 			return annotation;
 		}
 
-		@Override
 		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)

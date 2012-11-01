@@ -18,7 +18,6 @@ import com.google.inject.Binder;
  */
 public class XtRuntimeModule extends AbstractDelegatingModule {
 
-	@Override
 	public void configure(Binder binder) {
 		overrideAndBackup(binder, FileExtensionProvider.class, XtFileExtensionProvider.class);
 	}

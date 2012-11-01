@@ -67,7 +67,6 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		return null;
 	}
 
-	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XpectPackage.Literals.XPECT_INVOCATION__ELEMENT)
 			return getScopeForXpectInvocationElement(EcoreUtil2.getContainerOfType(context, XpectFile.class));

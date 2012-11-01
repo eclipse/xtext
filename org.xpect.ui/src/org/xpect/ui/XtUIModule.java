@@ -25,7 +25,6 @@ import com.google.inject.Binder;
  */
 public class XtUIModule extends AbstractDelegatingModule {
 
-	@Override
 	public void configure(Binder binder) {
 		overrideAndBackup(binder, IHighlightingConfiguration.class, XtHighlightingConfiguration.class);
 		overrideAndBackup(binder, ISemanticHighlightingCalculator.class, XtHighlightingCalculator.class);
