@@ -45,17 +45,13 @@ public class TextChangeCombiner {
 	public Change combineChanges(Change masterChange) {
 		if (!(masterChange instanceof CompositeChange))
 			return masterChange;
-		Map<Object, MultiTextEdit> resource2edits = newLinkedHashMap();
+		Map<Object, TextChange> resource2textChange = newLinkedHashMap();
 		List<Change> otherChanges = newArrayList();
-		visitCompositeChange((CompositeChange) masterChange, resource2edits, otherChanges);
+		visitCompositeChange((CompositeChange) masterChange, resource2textChange, otherChanges);
 		CompositeChange compositeChange = new CompositeChange(masterChange.getName());
-		for (Map.Entry<Object, MultiTextEdit> resource2edit : resource2edits.entrySet()) {
-			Object key = resource2edit.getKey();
-			TextChange combinedTextChange = createChange(key);
-			if (combinedTextChange != null) {
-				combinedTextChange.setEdit(resource2edit.getValue());
+		for (TextChange combinedTextChange : resource2textChange.values()) {
+			if(((MultiTextEdit) combinedTextChange.getEdit()).getChildrenSize() >0)
 				compositeChange.add(combinedTextChange);
-			}
 		}
 		for(Change otherChange: otherChanges) 
 			compositeChange.add(otherChange);
@@ -64,33 +60,34 @@ public class TextChangeCombiner {
 		return compositeChange;
 	}
 
-	private void visitCompositeChange(CompositeChange sourceChange, Map<Object, MultiTextEdit> resource2edits,
+	protected void visitCompositeChange(CompositeChange sourceChange, Map<Object, TextChange> resource2textChange,
 			List<Change> otherChanges) {
 		for (Change sourceSubChange : sourceChange.getChildren()) {
-			visitChange(sourceSubChange, resource2edits, otherChanges);
+			visitChange(sourceSubChange, resource2textChange, otherChanges);
 		}
 	}
 
-	protected void visitChange(Change sourceChange, Map<Object, MultiTextEdit> resource2edits, List<Change> otherChanges) {
+	protected void visitChange(Change sourceChange, Map<Object, TextChange> resource2textChange, List<Change> otherChanges) {
 		if (sourceChange instanceof DisplayChangeWrapper)
-			visitChange(((DisplayChangeWrapper) sourceChange).getDelegate(), resource2edits, otherChanges);
+			visitChange(((DisplayChangeWrapper) sourceChange).getDelegate(), resource2textChange, otherChanges);
 		else if (sourceChange instanceof CompositeChange) {
-			visitCompositeChange((CompositeChange) sourceChange, resource2edits, otherChanges);
+			visitCompositeChange((CompositeChange) sourceChange, resource2textChange, otherChanges);
 		} else if (sourceChange instanceof TextChange) {
 			Object key = getKey((TextChange) sourceChange);
 			if (key != null) {
-				MultiTextEdit multiTextEdit = resource2edits.get(key);
-				if (multiTextEdit == null) {
-					multiTextEdit = new MultiTextEdit();
-					resource2edits.put(key, multiTextEdit);
+				TextChange textChange = resource2textChange.get(key);
+				if (textChange == null) {
+					textChange = createTextChange(key, ((TextChange) sourceChange).getTextType());
+					resource2textChange.put(key, textChange);
 				}
-				TextEdit edit = ((TextChange) sourceChange).getEdit().copy();
-				if (edit instanceof MultiTextEdit) {
-					for (TextEdit textEdit : ((MultiTextEdit) edit).getChildren()) {
-						addIfNotDuplicate(multiTextEdit, textEdit);
+				MultiTextEdit combinedEdits = (MultiTextEdit) textChange.getEdit();
+				TextEdit newEdit = ((TextChange) sourceChange).getEdit().copy();
+				if (newEdit instanceof MultiTextEdit) {
+					for (TextEdit newTextEdit : ((MultiTextEdit) newEdit).getChildren()) {
+						addIfNotDuplicate(combinedEdits, newTextEdit);
 					}
 				} else {
-					addIfNotDuplicate(multiTextEdit, edit);
+					addIfNotDuplicate(combinedEdits, newEdit);
 				}
 			}
 		} else {
@@ -125,20 +122,28 @@ public class TextChangeCombiner {
 			} catch (CoreException e) {
 				LOG.error("Error getting document for change.", e);
 			}
-		} else
+		} else {
 			LOG.error("Unhandled TextChange type: " + change.getClass().getName());
+		}
 		return null;
 	}
 
-	protected TextChange createChange(Object key) {
+	protected TextChange createTextChange(Object key, String textType) {
+		TextChange change = null;
 		if (key instanceof ICompilationUnit)
-			return new CompilationUnitChange("Combined CompilationUnitChange", (ICompilationUnit) key);
+			change = new CompilationUnitChange("Combined CompilationUnitChange", (ICompilationUnit) key);
 		else if (key instanceof IFile)
-			return new TextFileChange("Combined TextFileChange", (IFile) key);
+			change = new TextFileChange("Combined TextFileChange", (IFile) key);
 		else if (key instanceof IDocument)
-			return new DocumentChange("Combined DocumentChange", (IDocument) key);
+			change = new DocumentChange("Combined DocumentChange", (IDocument) key);
 		else
 			LOG.error("Error creating change for " + key.getClass().getName());
-		return null;
+		if(change != null) {
+			MultiTextEdit edits = new MultiTextEdit();
+			change.setEdit(edits);
+			change.setTextType(textType);
+		}
+		return change;
 	}
+	
 }
