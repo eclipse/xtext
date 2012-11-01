@@ -63,8 +63,8 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		workbenchTestHelper.createFile("test/Bar.java", "package test; public class Bar { public int bar; }");
-		workbenchTestHelper.createFile("test/Foo.xtend", "package test class Foo extends Bar { public int foo }");
+		workbenchTestHelper.createFile("outlinetest/Bar.java", "package outlinetest; public class Bar { public int bar; }");
+		workbenchTestHelper.createFile("outlinetest/Foo.xtend", "package outlinetest class Foo extends Bar { public int foo }");
 		IResourcesSetupUtil.waitForAutoBuild();
 		javaProject = JavaCore.create(workbenchTestHelper.getProject());
 	}
@@ -76,11 +76,11 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testOpenEditors() throws Exception {
-		IType bar = javaProject.findType("test.Bar");
+		IType bar = javaProject.findType("outlinetest.Bar");
 		IEditorPart barEditor = globalURIEditorOpener.open(null, bar, true);
 		assertEquals(JavaUI.ID_CU_EDITOR, barEditor.getEditorSite().getId());
 
-		IType foo = javaProject.findType("test.Foo");
+		IType foo = javaProject.findType("outlinetest.Foo");
 		IEditorPart fooJavaEditor = globalURIEditorOpener.open(null, bar, true);
 		assertEquals(JavaUI.ID_CU_EDITOR, fooJavaEditor.getEditorSite().getId());
 
@@ -95,8 +95,8 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testOpenFromOutline() throws Exception {
-		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("test.Baz.xtend",
-				"package test class Baz extends Foo { int baz }");
+		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("outlinetest.Baz.xtend",
+				"package outlinetest class Baz extends Foo { int baz }");
 		ModeAwareOutlineTreeProvider tp = (ModeAwareOutlineTreeProvider) treeProvider;
 		tp.setCurrentMode(tp.getOutlineModes().get(1));
 		IOutlineNode outlineRoot = tp.createRoot(bazXtendEditor.getDocument());
@@ -108,11 +108,11 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		outlineNodeElementOpener.open(baz, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor("org.eclipse.xtend.core.Xtend", "baz");
 		IOutlineNode foo = bazNode.getChildren().get(3);
-		assertEquals("foo : int - test.Foo", foo.getText().toString());
+		assertEquals("foo : int - outlinetest.Foo", foo.getText().toString());
 		outlineNodeElementOpener.open(foo, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor("org.eclipse.xtend.core.Xtend", "foo");
 		IOutlineNode bar = bazNode.getChildren().get(5);
-		assertEquals("bar : int - test.Bar", bar.getText().toString());
+		assertEquals("bar : int - outlinetest.Bar", bar.getText().toString());
 		outlineNodeElementOpener.open(bar, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor(JavaUI.ID_CU_EDITOR, "bar");
 	}
