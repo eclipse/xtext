@@ -556,7 +556,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
     _builder.newLine();
-    _builder.append("val y = x.filter[ toUpperCase == it ]");
+    _builder.append("val y = x.filter[toUpperCase == it]");
     _builder.newLine();
     _builder.append("y.join");
     _builder.newLine();
@@ -566,7 +566,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatClosuresSemicolon() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("newArrayList(\"A\", \"b\").filter[ val b = it; b.toUpperCase == b ]");
+    _builder.append("newArrayList(\"A\", \"b\").filter[val b = it; b.toUpperCase == b]");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("newArrayList(\"A\", \"b\").filter[ val b = it  ;   b.toUpperCase == b ]");
@@ -594,7 +594,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
     _builder.newLine();
-    _builder.append("val y = x.filter[ z | z.toUpperCase == z ]");
+    _builder.append("val y = x.filter[z | z.toUpperCase == z]");
     _builder.newLine();
     _builder.append("y.join");
     _builder.newLine();
@@ -690,10 +690,10 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
     _builder.newLine();
-    _builder.append("val y = x.filter[ val z = it z.toUpperCase == z z.toUpperCase == z");
+    _builder.append("val y = x.filter[val z = it z.toUpperCase == z z.toUpperCase == z");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("z.toUpperCase == z ]");
+    _builder.append("z.toUpperCase == z]");
     _builder.newLine();
     _builder.append("y.join");
     _builder.newLine();
@@ -752,6 +752,30 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("append(\"y\")");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMultiLineClosureWithAssignment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("x += foo.myBuilder [");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("x += foo.myBuilder [");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("foo bar");
     _builder_1.newLine();
     _builder_1.append("]");
     _builder_1.newLine();
