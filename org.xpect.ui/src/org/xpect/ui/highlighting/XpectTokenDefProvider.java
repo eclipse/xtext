@@ -42,7 +42,7 @@ public class XpectTokenDefProvider implements ITokenDefProvider, IAntlrTokenFile
 
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		String resourcePath = "org/eclipse/xpect/lexer/XpectHI.tokens";
+		String resourcePath = "org/xpect/lexer/XpectHI.tokens";
 		InputStream result = classLoader.getResourceAsStream(resourcePath);
 		return result;
 	}
