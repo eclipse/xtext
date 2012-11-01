@@ -145,18 +145,6 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatClassAnnotation() {
-		assertFormatted('''
-			package foo
-
-			@Deprecated
-			class bar {
-				def baz() {
-				}
-			}
-		''')	
-	}
-	
 	@Test def formatImports1() {
 		assertFormatted('''
 			package foo

@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.formatting
 
 import com.google.inject.name.Named
 import java.util.Map
-import org.eclipse.xtend.lib.Property
 
 class XtendFormatterConfig {
 	@Property @Named("line.separator") String lineSeparator ="\n"
@@ -19,10 +18,11 @@ class XtendFormatterConfig {
 	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)
 	@Property @Named("newlines.between.classes") NewLineConfig newLinesBetweenClasses = new NewLineConfig(2, 3)
 	@Property @Named("newlines.around.expressions") NewLineConfig newLinesAroundExpression = new NewLineConfig(1, 2)
+	@Property @Named("newlines.after.annotations") NewLineConfig newLinesAfterAnnotations = new NewLineConfig(0, 1)
 
 	new() {
 	}
-
+	
 	new(Map<String, String> properties) {
 		for(property:namedProperties.entrySet) {
 			val str = properties.get(property.key)
@@ -93,3 +93,4 @@ class NewLineConfig {
 	override toString() 
 		'''«_minNewLines»,«_maxNewLines»'''
 }
+

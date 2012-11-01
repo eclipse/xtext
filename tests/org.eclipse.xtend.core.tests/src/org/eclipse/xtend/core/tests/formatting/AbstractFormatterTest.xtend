@@ -35,12 +35,24 @@ abstract class AbstractFormatterTest {
 		}
 	'''
 	
+	def private toMember(CharSequence expression) '''
+		package foo
+		
+		class bar {
+			«expression»
+		}
+	'''
+	
 	def assertFormattedExpression(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted.toFile, toBeFormatted.toFile.parse.flattenWhitespace)
 	}
 	
 	def assertFormattedExpression(String expectation, CharSequence toBeFormatted) {
 		assertFormatted(expectation.toFile, toBeFormatted.toFile)
+	}
+	
+	def assertFormattedMember(String expectation, CharSequence toBeFormatted) {
+		assertFormatted(expectation.toMember, toBeFormatted.toMember)
 	}
 	
 	def private flattenWhitespace(EObject obj) {
@@ -55,7 +67,7 @@ abstract class AbstractFormatterTest {
 	
 	def assertFormatted(CharSequence expectation, CharSequence toBeFormatted) {
 		val parsed = toBeFormatted.parse
-		Assert::assertEquals(0, parsed.eResource.errors.size)
+		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
 		val rc = new XtendFormatterConfig() => [
 			maxLineWidth = 80
