@@ -9,13 +9,14 @@ package org.eclipse.xtend.ide.formatting.preferences;
 
 import org.eclipse.jdt.internal.ui.preferences.formatter.IProfileVersioner;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.CustomProfile;
-import org.eclipse.xtend.ide.formatting.FormatterPreferenceInfra;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class FormatterProfileVersioner implements IProfileVersioner {
-	public static String VERSION_KEY = FormatterPreferenceInfra.PREFIX + ".version";
+	public static String PREFIX = "org.eclipse.xtend.formatter";
+
+	public static String VERSION_KEY = ".version";
 
 	public int getFirstVersion() {
 		return 1;

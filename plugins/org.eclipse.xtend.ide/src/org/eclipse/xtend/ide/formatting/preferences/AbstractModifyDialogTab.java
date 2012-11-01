@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.formatting.preferences;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
@@ -28,8 +27,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
-import org.eclipse.xtend.ide.formatting.FormatterSetting;
-import org.eclipse.xtend.ide.formatting.SettingsData.Category;
 import org.eclipse.xtend.ide.formatting.preferences.XtendPreviewFactory.XtendFormatterPreview;
 
 import com.google.inject.Inject;
@@ -46,9 +43,22 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		@Inject
 		MembersInjector<AbstractModifyDialogTab> injector;
 
-		public IModifyDialogTabPage createGenericTab(IModificationListener modifyListener,
-				Map<String, String> workingValues, Category category) {
-			GenericTab tab = new GenericTab(modifyListener, workingValues, category);
+		public IModifyDialogTabPage createIndentationTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new IndentationTab(modifyListener, workingValues));
+		}
+
+		public IModifyDialogTabPage createNewLineTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new NewLineTab(modifyListener, workingValues));
+		}
+
+		public IModifyDialogTabPage createLineWrapTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new LineWrapTab(modifyListener, workingValues));
+		}
+
+		private <T extends AbstractModifyDialogTab> T injectMembers(T tab) {
 			injector.injectMembers(tab);
 			return tab;
 		}
@@ -89,33 +99,33 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		return composite;
 	}
 
-	protected final void createPref(FormatterSetting formatterSetting, Composite composite, int numColumns) {
-		switch (formatterSetting.getType()) {
-			case NUMBER_FIELD:
-				createNumberPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName());
-				break;
-			case MIN_MAX_FIELDS:
-				createMinMaxPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName());
-				break;
-			case COMBO_BOX:
-				createComboPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName(),
-						asStringArray(formatterSetting.getPosibleValues()),
-						asStringArray(formatterSetting.getPosibleValuesLabels()));
-				break;
-			default:
-				break;
-		}
-	}
+	//	protected final void createPref(FormatterSetting formatterSetting, Composite composite, int numColumns) {
+	//		switch (formatterSetting.getType()) {
+	//			case NUMBER_FIELD:
+	//				createNumberPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName());
+	//				break;
+	//			case MIN_MAX_FIELDS:
+	//				createMinMaxPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName());
+	//				break;
+	//			case COMBO_BOX:
+	//				createComboPref(composite, numColumns, formatterSetting.getLabel(), formatterSetting.getName(),
+	//						asStringArray(formatterSetting.getPosibleValues()),
+	//						asStringArray(formatterSetting.getPosibleValuesLabels()));
+	//				break;
+	//			default:
+	//				break;
+	//		}
+	//	}
+	//	
+	//	private static String[] asStringArray(List<String> strings) {
+	//		return strings.toArray(new String[] {});
+	//	}
 
 	protected Preference createMinMaxPref(Composite composite, int numColumns, String label, String name) {
 		final MinMaxPreference pref = new MinMaxPreference(composite, numColumns, fWorkingValues, name, label);
 		fDefaultFocusManager.add(pref);
 		pref.addObserver(fUpdater);
 		return pref;
-	}
-
-	private static String[] asStringArray(List<String> strings) {
-		return strings.toArray(new String[] {});
 	}
 
 	protected abstract String previewText();
