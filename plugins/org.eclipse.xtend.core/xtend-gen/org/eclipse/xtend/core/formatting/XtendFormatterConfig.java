@@ -219,6 +219,22 @@ public class XtendFormatterConfig {
     this._newLinesAroundExpression = newLinesAroundExpression;
   }
   
+  @Named(value = "newlines.after.annotations")
+  private NewLineConfig _newLinesAfterAnnotations = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig(0, 1);
+      return _newLineConfig;
+    }
+  }.apply();
+  
+  public NewLineConfig getNewLinesAfterAnnotations() {
+    return this._newLinesAfterAnnotations;
+  }
+  
+  public void setNewLinesAfterAnnotations(final NewLineConfig newLinesAfterAnnotations) {
+    this._newLinesAfterAnnotations = newLinesAfterAnnotations;
+  }
+  
   public XtendFormatterConfig() {
   }
   

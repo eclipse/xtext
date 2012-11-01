@@ -126,10 +126,18 @@ public class FormatterExtensions {
                   int _minus = (newLines - 1);
                   newLines = _minus;
                 }
-                int _offset_2 = _whitespaceInfo.getOffset();
-                int _length_1 = _whitespaceInfo.getLength();
-                NewLineData _newLineData = new NewLineData(_offset_2, _length_1, indentationChange, newLines);
-                result.add(_newLineData);
+                boolean _equals_1 = (newLines == 0);
+                if (_equals_1) {
+                  int _offset_2 = _whitespaceInfo.getOffset();
+                  int _length_1 = _whitespaceInfo.getLength();
+                  WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, indentationChange, " ");
+                  result.add(_whitespaceData_1);
+                } else {
+                  int _offset_3 = _whitespaceInfo.getOffset();
+                  int _length_2 = _whitespaceInfo.getLength();
+                  NewLineData _newLineData = new NewLineData(_offset_3, _length_2, indentationChange, newLines);
+                  result.add(_newLineData);
+                }
                 applied = true;
               } else {
                 int newLines_1 = 1;
@@ -139,9 +147,9 @@ public class FormatterExtensions {
                   int _minus_1 = (newLines_1 - 1);
                   newLines_1 = _minus_1;
                 }
-                int _offset_3 = _whitespaceInfo.getOffset();
-                int _length_2 = _whitespaceInfo.getLength();
-                NewLineData _newLineData_1 = new NewLineData(_offset_3, _length_2, indentationChange, newLines_1);
+                int _offset_4 = _whitespaceInfo.getOffset();
+                int _length_3 = _whitespaceInfo.getLength();
+                NewLineData _newLineData_1 = new NewLineData(_offset_4, _length_3, indentationChange, newLines_1);
                 result.add(_newLineData_1);
               }
             }

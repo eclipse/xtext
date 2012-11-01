@@ -70,6 +70,21 @@ public abstract class AbstractFormatterTest {
     return _builder;
   }
   
+  private CharSequence toMember(final CharSequence expression) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(expression, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public void assertFormattedExpression(final CharSequence toBeFormatted) {
     try {
       CharSequence _file = this.toFile(toBeFormatted);
@@ -86,6 +101,12 @@ public abstract class AbstractFormatterTest {
     CharSequence _file = this.toFile(expectation);
     CharSequence _file_1 = this.toFile(toBeFormatted);
     this.assertFormatted(_file, _file_1);
+  }
+  
+  public void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
+    CharSequence _member = this.toMember(expectation);
+    CharSequence _member_1 = this.toMember(toBeFormatted);
+    this.assertFormatted(_member, _member_1);
   }
   
   private String flattenWhitespace(final EObject obj) {
@@ -121,10 +142,13 @@ public abstract class AbstractFormatterTest {
       final XtendFile parsed = this._parseHelper.parse(toBeFormatted);
       Resource _eResource = parsed.eResource();
       EList<Diagnostic> _errors = _eResource.getErrors();
-      int _size = _errors.size();
-      Assert.assertEquals(0, _size);
+      String _join = IterableExtensions.join(_errors, "\n");
       Resource _eResource_1 = parsed.eResource();
-      IParseResult _parseResult = ((XtextResource) _eResource_1).getParseResult();
+      EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+      int _size = _errors_1.size();
+      Assert.assertEquals(_join, 0, _size);
+      Resource _eResource_2 = parsed.eResource();
+      IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String oldDocument = _rootNode.getText();
       XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
@@ -135,9 +159,9 @@ public abstract class AbstractFormatterTest {
         };
       final XtendFormatterConfig rc = ObjectExtensions.<XtendFormatterConfig>operator_doubleArrow(_xtendFormatterConfig, _function);
       this.formatter.setAllowIdentityEdits(true);
-      Resource _eResource_2 = parsed.eResource();
+      Resource _eResource_3 = parsed.eResource();
       int _length = oldDocument.length();
-      final List<TextReplacement> edits = this.formatter.format(((XtextResource) _eResource_2), 0, _length, rc);
+      final List<TextReplacement> edits = this.formatter.format(((XtextResource) _eResource_3), 0, _length, rc);
       final String newDocument = this.applyEdits(oldDocument, edits);
       try {
         String _string = expectation.toString();
@@ -155,13 +179,13 @@ public abstract class AbstractFormatterTest {
         }
       }
       final XtendFile parsed2 = this._parseHelper.parse(newDocument);
-      Resource _eResource_3 = parsed2.eResource();
-      EList<Diagnostic> _errors_1 = _eResource_3.getErrors();
-      int _size_1 = _errors_1.size();
-      Assert.assertEquals(0, _size_1);
       Resource _eResource_4 = parsed2.eResource();
+      EList<Diagnostic> _errors_2 = _eResource_4.getErrors();
+      int _size_1 = _errors_2.size();
+      Assert.assertEquals(0, _size_1);
+      Resource _eResource_5 = parsed2.eResource();
       int _length_1 = newDocument.length();
-      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_4), 0, _length_1, rc);
+      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_5), 0, _length_1, rc);
       final String newDocument2 = this.applyEdits(newDocument, edits2);
       try {
         String _string_2 = newDocument.toString();

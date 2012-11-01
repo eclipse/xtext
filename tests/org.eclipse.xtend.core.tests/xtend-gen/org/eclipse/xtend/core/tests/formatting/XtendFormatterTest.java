@@ -248,27 +248,6 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatClassAnnotation() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("@Deprecated");
-    _builder.newLine();
-    _builder.append("class bar {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def baz() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.assertFormatted(_builder);
-  }
-  
-  @Test
   public void formatImports1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
