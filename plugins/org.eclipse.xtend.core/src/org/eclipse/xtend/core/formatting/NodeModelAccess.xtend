@@ -12,7 +12,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 
 class NodeModelAccess {
-		def INode nodeForEObject(EObject obj) {
+	def INode nodeForEObject(EObject obj) {
 		NodeModelUtils::findActualNodeFor(obj)
 	}
 	
