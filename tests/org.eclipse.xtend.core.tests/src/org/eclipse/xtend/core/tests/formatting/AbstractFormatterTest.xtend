@@ -70,7 +70,7 @@ abstract class AbstractFormatterTest {
 		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
 		val rc = new XtendFormatterConfig() => [
-			maxLineWidth = 80
+			maxLineWidth.value = 80
 		]
 		formatter.allowIdentityEdits = true
 		

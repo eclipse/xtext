@@ -1081,6 +1081,8 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	
 	
-// - annotations
+//	new(String key) {
+//	super(key)
+//}
 	
 }

@@ -14,7 +14,7 @@ class FormatterExtensions {
 		if(leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
 			return newFormattingData(leafs, space, indentationChange)
 		else
-			return newFormattingData(leafs, new NewLineConfig(newLine, newLine), indentationChange)
+			return newFormattingData(leafs, newLine, newLine, indentationChange)
 	}
 	
 	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, String space, int indentationChange) {
@@ -30,6 +30,10 @@ class FormatterExtensions {
 	}
 	
 	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineConfig configuration, int indentationChange) {
+		newFormattingData(leafs, configuration.minNewLines.value, configuration.maxNewLines.value, indentationChange)
+	}
+	
+	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange) {
 		val result = <FormattingData>newArrayList
 		var applied = false
 		for(leaf : leafs.leafs) 
@@ -40,7 +44,7 @@ class FormatterExtensions {
 						val space = if(leaf.offset == 0) "" else " "
 						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, space)
 					} else if (!applied) {
-						var newLines = Math::min(Math::max(leafs.newLines, configuration.minNewLines), configuration.maxNewLines)
+						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
 						if(leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
 						if(!leaf.leadingComment?.endsWithNewLine && newLines == 0)
@@ -72,7 +76,7 @@ class FormatterExtensions {
 			return false
 		} else {
 			val line = fmt.lineLengthBefore(offset) + lookahead.length
-			return line <= fmt.cfg.maxLineWidth
+			return line <= fmt.cfg.maxLineWidth.value
 		}
 	}
 	

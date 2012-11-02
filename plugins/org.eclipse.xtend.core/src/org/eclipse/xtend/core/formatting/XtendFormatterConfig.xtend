@@ -1,96 +1,58 @@
 package org.eclipse.xtend.core.formatting
 
-import com.google.inject.name.Named
 import java.util.Map
 
-class XtendFormatterConfig {
-	@Property @Named("line.separator") String lineSeparator ="\n"
-	@Property @Named("line.width.max") int maxLineWidth = 120
-	@Property @Named("indentation") String indentation ="\t"
-	@Property @Named("indentation.length") int indentationLength = 4
-	@Property @Named("newlines.after.packagename") NewLineConfig newLinesAfterPackageName = new NewLineConfig(2, 2)
-	@Property @Named("newlines.between.imports") NewLineConfig newLinesBetweenImports = new NewLineConfig(1, 2)
-	@Property @Named("newlines.after.importsection") NewLineConfig newLinesAfterImportSection = new NewLineConfig(2, 3)
-	@Property @Named("newlines.before.first.member") NewLineConfig newLinesBeforeFirstMember = new NewLineConfig(1, 2)
-	@Property @Named("newlines.after.last.member") NewLineConfig newLinesAfterLastMember = new NewLineConfig(1, 2)
-	@Property @Named("newlines.between.fields") NewLineConfig newLinesBetweenFields = new NewLineConfig(1, 2)
-	@Property @Named("newlines.between.fields.and.methods") NewLineConfig newLinesBetweenFieldsAndMethods = new NewLineConfig(2, 2)
-	@Property @Named("newlines.between.methods") NewLineConfig newLinesBetweenMethods = new NewLineConfig(2, 2)
-	@Property @Named("newlines.between.classes") NewLineConfig newLinesBetweenClasses = new NewLineConfig(2, 3)
-	@Property @Named("newlines.around.expressions") NewLineConfig newLinesAroundExpression = new NewLineConfig(1, 2)
-	@Property @Named("newlines.after.annotations") NewLineConfig newLinesAfterAnnotations = new NewLineConfig(0, 1)
+class XtendFormatterConfig extends AbstractConfiguration {
+	@Property val lineSeparator = new StringEntry("line.separator", "\n")
+	@Property val maxLineWidth = new IntegerEntry("line.width.max", 120)
+	@Property val indentation = new StringEntry ("indentation", "\t")
+	@Property val indentationLength = new IntegerEntry("indentation.length", 4) 
+	@Property val newLinesAfterPackageName = new NewLineConfig("newlines.after.packagename", 2, 2)
+	@Property val newLinesBetweenImports = new NewLineConfig("newlines.between.imports", 1, 2)
+	@Property val newLinesAfterImportSection = new NewLineConfig("newlines.after.importsection", 2, 3)
+	@Property val newLinesBeforeFirstMember = new NewLineConfig("newlines.before.first.member", 1, 2)
+	@Property val newLinesAfterLastMember = new NewLineConfig("newlines.after.last.member", 1, 2)
+	@Property val newLinesBetweenFields = new NewLineConfig("newlines.between.fields", 1, 2)
+	@Property val newLinesBetweenFieldsAndMethods = new NewLineConfig("newlines.between.fields.and.methods", 2, 2)
+	@Property val newLinesBetweenMethods = new NewLineConfig("newlines.between.methods", 2, 2)
+	@Property val newLinesBetweenClasses = new NewLineConfig("newlines.between.classes", 2, 3)
+	@Property val newLinesAroundExpression = new NewLineConfig("newlines.around.expressions",1, 2)
+	@Property val newLinesAfterAnnotations = new NewLineConfig("newlines.after.annotations", 0, 1)
 
 	new() {
+		super(null as String)
 	}
 	
 	new(Map<String, String> properties) {
-		for(property:namedProperties.entrySet) {
-			val str = properties.get(property.key)
-			if(str != null) {
-				val value = switch property.value.type {
-					case typeof(int): if(str.nullOrEmpty) 0 else Integer::parseInt(str)
-					case typeof(String): str
-					case typeof(NewLineConfig): new NewLineConfig(str)
-				}
-				property.value.set(this, value)
-			}
-		}
+		super(properties)
 	}
-
-	def Map<String, String> asMap() {
-		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=389512
-		namedProperties.mapValues[
-			try {
-				it.setAccessible(true)
-				it.get(this)?.toString ?: ""
-			} catch (Exception e) {
-				""
-			}]
-	}
-
-	def getNamedProperties() {
-		^class.declaredFields.filter[ getAnnotation(typeof(Named)) != null].toMap[ getAnnotation(typeof(Named)).value]
-	}
-
+	
 	def getIndentation(int levels) {
 		if (levels > 0)
-			(0 .. levels - 1).map[_indentation].join
+			(0 .. levels - 1).map[_indentation.value].join
 		else
 			""
 	}
 
 	def getIndentationLenght(int levels) {
-		levels * indentationLength
+		levels * indentationLength.value
 	}
 
 	def getWrap(int levels) {
 		if (levels > 0)
-			(0 .. levels - 1).map[_lineSeparator].join
+			(0 .. levels - 1).map[_lineSeparator.value].join
 		else
 			""
 	}
 }
 
-class NewLineConfig {
-	@Property int minNewLines = 1
-	@Property int maxNewLines = 1
-
-	new(int min, int max) {
-		_minNewLines = min
-		_maxNewLines = max
-	}
-
-	new(String data) {
-		val parsed = data.split(",")
-		if(parsed.size == 2) {
-			_minNewLines = Integer::parseInt(parsed.get(0).trim)
-			_maxNewLines = Integer::parseInt(parsed.get(1).trim)
-		}
-	}
-
-	//TODO implement equals method
+class NewLineConfig extends AbstractConfiguration {
+	@Property val minNewLines = new IntegerEntry("minNewLines")
+	@Property val maxNewLines = new IntegerEntry("maxNewLines")
 	
-	override toString() 
-		'''«_minNewLines»,«_maxNewLines»'''
+	new(String key, int minNewLines, int maxNewLines) {
+		super(key)
+		_minNewLines.value = minNewLines
+		_maxNewLines.value = maxNewLines
+	}
 }
-

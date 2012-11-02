@@ -395,13 +395,13 @@ public class XtendFormatter {
 
 					val lineLength = format.lineLengthBefore(callOffset)
 					if (call.isMultiParamInOwnLine(format)) {
-						if (lineLength + featureNode.length < format.cfg.maxLineWidth)
+						if (lineLength + featureNode.length < format.cfg.maxLineWidth.value)
 							format += op.append[noSpace]
 						else
 							format += op.append[newLine]
 						formatFeatureCallParamsMultiline(open, call.memberCallArguments, format)
 					} else {
-						if (lineLength + (featureNode.length * 2) < format.cfg.maxLineWidth || format.fitsIntoLine(callOffset, callLength, [ f |
+						if (lineLength + (featureNode.length * 2) < format.cfg.maxLineWidth.value || format.fitsIntoLine(callOffset, callLength, [ f |
 							f += op.append[noSpace] 
 							formatFeatureCallParamsWrapIfNeeded(open, call.memberCallArguments, f)
 						])) {
@@ -417,7 +417,7 @@ public class XtendFormatter {
 					}
 				} else {
 					val shortLenght = format.lineLengthBefore(callOffset) + featureNode.length
-					if (shortLenght < format.cfg.maxLineWidth) {
+					if (shortLenght < format.cfg.maxLineWidth.value) {
 						format += op.append[noSpace]
 					} else {
 						format += op.append[newLine]
@@ -880,7 +880,7 @@ public class XtendFormatter {
 			return false
 		} else {
 			val length = fmt.lineLengthBefore(node.offset) + lookahead.length
-			return length <= fmt.cfg.maxLineWidth
+			return length <= fmt.cfg.maxLineWidth.value
 		}
 	}
 
