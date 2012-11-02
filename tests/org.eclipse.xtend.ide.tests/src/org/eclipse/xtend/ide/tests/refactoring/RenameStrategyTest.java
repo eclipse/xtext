@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import static com.google.common.collect.Iterators.*;
+import static com.google.common.collect.Iterables.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
@@ -37,6 +38,7 @@ import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -65,7 +67,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
 			public OverrideIndicatorAnnotation get() {
-				annotationBeforeFileRename[0] = getOnlyElement(filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
+				annotationBeforeFileRename[0] = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
 				return annotationBeforeFileRename[0];
 			}
 		},TimeUnit.SECONDS.toMillis(10));
@@ -81,7 +83,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
 			public OverrideIndicatorAnnotation get() {
-				annotationAfterFileRename[0] = getOnlyElement(filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
+				annotationAfterFileRename[0] = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
 				return annotationAfterFileRename[0];
 			}
 		},TimeUnit.SECONDS.toMillis(10));
@@ -136,6 +138,27 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 				.getXtendTypes().get(0)).getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(constructor, null);
 		assertNull(renameStrategy);
+	}
+	
+	@Test public void testDispatchMethods() throws Exception {
+		XtendClass fooClass = (XtendClass) testHelper.xtendFile("Foo", 
+				"class Foo { def dispatch foo(Number it) {} def dispatch foo(String it) {} }")
+				.getXtendTypes().get(0);
+		XtendFunction fooMethod0 = (XtendFunction) fooClass.getMembers().get(0);
+		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod0, null);
+		assertNotNull(renameStrategy);
+		renameStrategy.applyDeclarationChange("bar", fooMethod0.eResource().getResourceSet());
+		for(XtendFunction f: filter(fooClass.getMembers(), XtendFunction.class)) { 
+			assertEquals("bar", f.getName());
+			assertEquals("_bar", associations.getDirectlyInferredOperation(f));
+			assertEquals("bar", associations.getDispatchOperation(f));
+		}
+		renameStrategy.revertDeclarationChange(fooMethod0.eResource().getResourceSet());
+		for(XtendFunction f: filter(fooClass.getMembers(), XtendFunction.class)) { 
+			assertEquals("foo", f.getName());
+			assertEquals("_foo", associations.getDirectlyInferredOperation(f));
+			assertEquals("foo", associations.getDispatchOperation(f));
+		}
 	}
 
 }
