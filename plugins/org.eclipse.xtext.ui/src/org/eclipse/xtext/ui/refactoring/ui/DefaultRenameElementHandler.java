@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -104,7 +105,12 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 				}
 				IRenameStrategy.Provider renameStrategyProvider = globalServiceProvider.findService(targetElement,
 						IRenameStrategy.Provider.class);
-				return renameStrategyProvider.get(targetElement, renameElementContext) != null;
+				try {
+					return renameStrategyProvider.get(targetElement, renameElementContext) != null;
+				} catch (NoSuchStrategyException e) {
+					MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Cannot rename element",
+							e.getMessage());
+				}
 			}
 		}
 		return false;

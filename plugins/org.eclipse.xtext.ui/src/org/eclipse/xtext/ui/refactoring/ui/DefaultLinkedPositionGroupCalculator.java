@@ -43,6 +43,7 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
@@ -103,8 +104,13 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			throw new IllegalStateException("Target element could not be loaded");
 		IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
 				IRenameStrategy.Provider.class);
-		IRenameStrategy renameStrategy = strategyProvider.get(targetElement, renameElementContext);
-		if (renameStrategy == null)
+		IRenameStrategy renameStrategy = null;
+		try {
+			renameStrategy = strategyProvider.get(targetElement, renameElementContext);
+		} catch(NoSuchStrategyException exc) {
+			// handle in next line
+		}
+		if(renameStrategy == null) 
 			throw new IllegalArgumentException("Cannot find a rename strategy for "
 					+ notNull(renameElementContext.getTargetElementURI()));
 		String newName = renameStrategy.getOriginalName();
