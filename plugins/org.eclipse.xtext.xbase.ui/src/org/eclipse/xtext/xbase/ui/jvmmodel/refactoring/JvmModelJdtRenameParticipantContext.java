@@ -31,6 +31,9 @@ import com.google.inject.Inject;
  */
 public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.Impl {
 
+	/**
+	 * @since 2.4
+	 */
 	private JdtRenameParticipant participant;
 
 	public JvmModelJdtRenameParticipantContext(JdtRenameParticipant participant, 
@@ -39,6 +42,9 @@ public class JvmModelJdtRenameParticipantContext extends IRenameElementContext.I
 		this.participant = participant;
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	public JdtRenameParticipant getJdtRenameParticipant() {
 		return participant;
 	}

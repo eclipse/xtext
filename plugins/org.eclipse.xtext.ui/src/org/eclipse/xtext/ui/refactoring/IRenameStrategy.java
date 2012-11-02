@@ -50,6 +50,9 @@ public interface IRenameStrategy {
 		 */
 		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException;
 		
+		/**
+		 * @since 2.4
+		 */
 		class NoSuchStrategyException extends Exception {
 			private static final long serialVersionUID = 5167954119728880001L;
 
