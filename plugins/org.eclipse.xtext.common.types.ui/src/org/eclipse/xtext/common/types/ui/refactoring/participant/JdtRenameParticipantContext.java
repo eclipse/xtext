@@ -22,13 +22,22 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 
 	private IJavaElement renamedJavaElement;
+	
+	private JdtRenameParticipant participant;
 
-	public JdtRenameParticipantContext(JvmMember renamedJvmMember, IJavaElement referencedJavaElement) {
+	public JdtRenameParticipantContext(JdtRenameParticipant participant, 
+			JvmMember renamedJvmMember, 
+			IJavaElement referencedJavaElement) {
 		super(getURI(renamedJvmMember), renamedJvmMember.eClass());
+		this.participant = participant;
 		this.renamedJavaElement = referencedJavaElement;
 	}
 
 	public IJavaElement getRenamedJavaElement() {
 		return renamedJavaElement;
+	}
+	
+	public JdtRenameParticipant getJdtRenameParticipant() {
+		return participant;
 	}
 }
