@@ -43,7 +43,7 @@ class FormatterExtensions {
 						var newLines = Math::min(Math::max(leafs.newLines, configuration.minNewLines), configuration.maxNewLines)
 						if(leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
-						if(newLines == 0)
+						if(!leaf.leadingComment?.endsWithNewLine && newLines == 0)
 							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, " ")
 						else 
 							result += new NewLineData(leaf.offset, leaf.length, indentationChange, newLines)
