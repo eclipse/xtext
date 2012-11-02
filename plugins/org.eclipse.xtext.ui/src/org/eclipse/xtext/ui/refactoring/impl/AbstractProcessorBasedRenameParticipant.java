@@ -134,9 +134,10 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		try {
 			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
 				if (!disabledTargets.containsAll(Arrays.asList(wrappedProcessor.getElements()))) {
-					status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
 					setNewName(wrappedProcessor, getNewName());
-					status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
+					status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
+					if(!status.getRefactoringStatus().hasFatalError())
+						status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
 				}
 			}
 		} catch (Exception ce) {
@@ -158,7 +159,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 					Change processorChange = wrappedProcessor.createChange(pm);
 					if (processorChange != null) {
 						if (compositeChange == null)
-							compositeChange = new CompositeChange("Changes form participant: " + getName());
+							compositeChange = new CompositeChange("Changes from participant: " + getName());
 						compositeChange.add(processorChange);
 					}
 				}
