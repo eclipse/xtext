@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.formatting;
 
 import com.google.common.base.Objects;
@@ -13,6 +20,7 @@ import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
+import org.eclipse.xtend.core.formatting.IntegerEntry;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
@@ -1097,8 +1105,9 @@ public class XtendFormatter {
               int _length_2 = featureNode.getLength();
               int _plus_1 = (lineLength + _length_2);
               XtendFormatterConfig _cfg = format.getCfg();
-              int _maxLineWidth = _cfg.getMaxLineWidth();
-              boolean _lessThan = (_plus_1 < _maxLineWidth);
+              IntegerEntry _maxLineWidth = _cfg.getMaxLineWidth();
+              int _value = _maxLineWidth.getValue();
+              boolean _lessThan = (_plus_1 < _value);
               if (_lessThan) {
                 final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
@@ -1124,8 +1133,9 @@ public class XtendFormatter {
               int _multiply = (_length_3 * 2);
               int _plus_2 = (lineLength + _multiply);
               XtendFormatterConfig _cfg_1 = format.getCfg();
-              int _maxLineWidth_1 = _cfg_1.getMaxLineWidth();
-              boolean _lessThan_1 = (_plus_2 < _maxLineWidth_1);
+              IntegerEntry _maxLineWidth_1 = _cfg_1.getMaxLineWidth();
+              int _value_1 = _maxLineWidth_1.getValue();
+              boolean _lessThan_1 = (_plus_2 < _value_1);
               if (_lessThan_1) {
                 _or = true;
               } else {
@@ -1181,8 +1191,9 @@ public class XtendFormatter {
             int _length_4 = featureNode.getLength();
             final int shortLenght = (_lineLengthBefore + _length_4);
             XtendFormatterConfig _cfg_2 = format.getCfg();
-            int _maxLineWidth_2 = _cfg_2.getMaxLineWidth();
-            boolean _lessThan_2 = (shortLenght < _maxLineWidth_2);
+            IntegerEntry _maxLineWidth_2 = _cfg_2.getMaxLineWidth();
+            int _value_2 = _maxLineWidth_2.getValue();
+            boolean _lessThan_2 = (shortLenght < _value_2);
             if (_lessThan_2) {
               final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -2820,8 +2831,9 @@ public class XtendFormatter {
       int _length = lookahead.length();
       final int length = (_lineLengthBefore + _length);
       XtendFormatterConfig _cfg = fmt.getCfg();
-      int _maxLineWidth = _cfg.getMaxLineWidth();
-      return (length <= _maxLineWidth);
+      IntegerEntry _maxLineWidth = _cfg.getMaxLineWidth();
+      int _value = _maxLineWidth.getValue();
+      return (length <= _value);
     }
   }
   

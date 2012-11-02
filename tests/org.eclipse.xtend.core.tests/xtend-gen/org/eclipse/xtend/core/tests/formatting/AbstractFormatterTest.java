@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtend.core.formatting.IntegerEntry;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
@@ -154,7 +155,8 @@ public abstract class AbstractFormatterTest {
       XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
       final Procedure1<XtendFormatterConfig> _function = new Procedure1<XtendFormatterConfig>() {
           public void apply(final XtendFormatterConfig it) {
-            it.setMaxLineWidth(80);
+            IntegerEntry _maxLineWidth = it.getMaxLineWidth();
+            _maxLineWidth.setValue(80);
           }
         };
       final XtendFormatterConfig rc = ObjectExtensions.<XtendFormatterConfig>operator_doubleArrow(_xtendFormatterConfig, _function);

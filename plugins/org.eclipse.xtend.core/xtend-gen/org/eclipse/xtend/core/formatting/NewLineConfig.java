@@ -1,57 +1,36 @@
 package org.eclipse.xtend.core.formatting;
 
-import java.util.List;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtend.core.formatting.AbstractConfiguration;
+import org.eclipse.xtend.core.formatting.IntegerEntry;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
-public class NewLineConfig {
-  private int _minNewLines = 1;
+public class NewLineConfig extends AbstractConfiguration {
+  private final IntegerEntry _minNewLines = new Function0<IntegerEntry>() {
+    public IntegerEntry apply() {
+      IntegerEntry _integerEntry = new IntegerEntry("minNewLines");
+      return _integerEntry;
+    }
+  }.apply();
   
-  public int getMinNewLines() {
+  public IntegerEntry getMinNewLines() {
     return this._minNewLines;
   }
   
-  public void setMinNewLines(final int minNewLines) {
-    this._minNewLines = minNewLines;
-  }
+  private final IntegerEntry _maxNewLines = new Function0<IntegerEntry>() {
+    public IntegerEntry apply() {
+      IntegerEntry _integerEntry = new IntegerEntry("maxNewLines");
+      return _integerEntry;
+    }
+  }.apply();
   
-  private int _maxNewLines = 1;
-  
-  public int getMaxNewLines() {
+  public IntegerEntry getMaxNewLines() {
     return this._maxNewLines;
   }
   
-  public void setMaxNewLines(final int maxNewLines) {
-    this._maxNewLines = maxNewLines;
-  }
-  
-  public NewLineConfig(final int min, final int max) {
-    this._minNewLines = min;
-    this._maxNewLines = max;
-  }
-  
-  public NewLineConfig(final String data) {
-    final String[] parsed = data.split(",");
-    int _size = ((List<String>)Conversions.doWrapArray(parsed)).size();
-    boolean _equals = (_size == 2);
-    if (_equals) {
-      String _get = ((List<String>)Conversions.doWrapArray(parsed)).get(0);
-      String _trim = _get.trim();
-      int _parseInt = Integer.parseInt(_trim);
-      this._minNewLines = _parseInt;
-      String _get_1 = ((List<String>)Conversions.doWrapArray(parsed)).get(1);
-      String _trim_1 = _get_1.trim();
-      int _parseInt_1 = Integer.parseInt(_trim_1);
-      this._maxNewLines = _parseInt_1;
-    }
-  }
-  
-  public String toString() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this._minNewLines, "");
-    _builder.append(",");
-    _builder.append(this._maxNewLines, "");
-    return _builder.toString();
+  public NewLineConfig(final String key, final int minNewLines, final int maxNewLines) {
+    super(key);
+    this._minNewLines.setValue(minNewLines);
+    this._maxNewLines.setValue(maxNewLines);
   }
 }

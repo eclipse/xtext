@@ -9,6 +9,7 @@ import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
+import org.eclipse.xtend.core.formatting.IntegerEntry;
 import org.eclipse.xtend.core.formatting.LeafInfo;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NewLineData;
@@ -50,8 +51,7 @@ public class FormatterExtensions {
     } else {
       int _newLine = it.newLine();
       int _newLine_1 = it.newLine();
-      NewLineConfig _newLineConfig = new NewLineConfig(_newLine, _newLine_1);
-      return this.newFormattingData(leafs, _newLineConfig, it.indentationChange);
+      return this.newFormattingData(leafs, _newLine, _newLine_1, it.indentationChange);
     }
   }
   
@@ -85,6 +85,15 @@ public class FormatterExtensions {
   }
   
   public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final NewLineConfig configuration, final int indentationChange) {
+    IntegerEntry _minNewLines = configuration.getMinNewLines();
+    int _value = _minNewLines.getValue();
+    IntegerEntry _maxNewLines = configuration.getMaxNewLines();
+    int _value_1 = _maxNewLines.getValue();
+    Iterable<FormattingData> _newFormattingData = this.newFormattingData(leafs, _value, _value_1, indentationChange);
+    return _newFormattingData;
+  }
+  
+  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final int minNewLines, final int maxNewLines, final int indentationChange) {
     ArrayList<FormattingData> _xblockexpression = null;
     {
       final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
@@ -116,10 +125,8 @@ public class FormatterExtensions {
               boolean _not = (!applied);
               if (_not) {
                 Integer _newLines = leafs.getNewLines();
-                int _minNewLines = configuration.getMinNewLines();
-                int _max = Math.max((_newLines).intValue(), _minNewLines);
-                int _maxNewLines = configuration.getMaxNewLines();
-                int newLines = Math.min(_max, _maxNewLines);
+                int _max = Math.max((_newLines).intValue(), minNewLines);
+                int newLines = Math.min(_max, maxNewLines);
                 CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
                 boolean _endsWithNewLine = _leadingComment==null?false:_leadingComment.endsWithNewLine();
                 if (_endsWithNewLine) {
@@ -198,8 +205,9 @@ public class FormatterExtensions {
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
       XtendFormatterConfig _cfg = fmt.getCfg();
-      int _maxLineWidth = _cfg.getMaxLineWidth();
-      return (line <= _maxLineWidth);
+      IntegerEntry _maxLineWidth = _cfg.getMaxLineWidth();
+      int _value = _maxLineWidth.getValue();
+      return (line <= _value);
     }
   }
   
