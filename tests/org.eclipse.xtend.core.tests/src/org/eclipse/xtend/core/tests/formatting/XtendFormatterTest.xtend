@@ -185,6 +185,45 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatConstructor() {
+		assertFormatted('''
+			class bar {
+				new() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatConstructor1() {
+		assertFormatted('''
+			class bar {
+				new() {
+					super()
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatConstructor2() {
+		assertFormatted('''
+			class bar {
+				new(String x) {
+					super(x)
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatConstructor3() {
+		assertFormatted('''
+			class bar {
+				new(String x, String y) {
+					super(x, y)
+				}
+			}
+		''')	
+	}
+	
 	@Test def formatMethod() {
 		assertFormatted('''
 			package foo
@@ -748,7 +787,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatConstructor1() {
+	@Test def formatConstructorCall1() {
 		assertFormattedExpression('''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
 				new ArrayList(5, 6, 7, 8), new ArrayList(9, 10, 11, 12),
@@ -758,7 +797,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatConstructor2() {
+	@Test def formatConstructorCall2() {
 		assertFormattedExpression('''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
 				new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108,
@@ -769,7 +808,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatConstructorMultiline() {
+	@Test def formatConstructorCallMultiline() {
 		assertFormattedExpression('''
 			val ML2 = new ArrayList(
 				new ArrayList(1, 2, 3, 4),

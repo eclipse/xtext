@@ -309,6 +309,79 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatConstructor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatConstructor1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatConstructor2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(String x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(x)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatConstructor3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(String x, String y) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(x, y)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void formatMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -1286,7 +1359,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatConstructor1() {
+  public void formatConstructorCall1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
     _builder.newLine();
@@ -1303,7 +1376,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatConstructor2() {
+  public void formatConstructorCall2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
     _builder.newLine();
@@ -1323,7 +1396,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatConstructorMultiline() {
+  public void formatConstructorCallMultiline() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = new ArrayList(");
     _builder.newLine();
