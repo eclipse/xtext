@@ -222,18 +222,18 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				minMaxRange = oldMinMaxRange;
 			} else {
 				if (isMax) {
-					minMaxRange = new NewLineConfig(minMaxRange.getMinNewLines(), Integer.parseInt(input));
+//					minMaxRange = new NewLineConfig(minMaxRange.getMinNewLines(), Integer.parseInt(input));
 				} else {
-					minMaxRange = new NewLineConfig(Integer.parseInt(input), minMaxRange.getMaxNewLines());
+//					minMaxRange = new NewLineConfig(Integer.parseInt(input), minMaxRange.getMaxNewLines());
 				}
 			}
 			if (!minMaxRange.equals(oldMinMaxRange)) {
 				saveSelected(minMaxRange);
 				int valToSet = 0;
-				if (isMax)
-					valToSet = minMaxRange.getMaxNewLines();
-				else
-					valToSet = minMaxRange.getMinNewLines();
+//				if (isMax)
+//					valToSet = minMaxRange.getMaxNewLines();
+//				else
+//					valToSet = minMaxRange.getMinNewLines();
 				text.setText(Integer.toString(valToSet));
 			}
 		}
@@ -251,9 +251,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				//Check range
 				if (valid) {
 					if (isMax) {
-						valid = number >= minMaxRange.getMinNewLines();
+//						valid = number >= minMaxRange.getMinNewLines();
 					} else {
-						valid = number <= minMaxRange.getMaxNewLines();
+//						valid = number <= minMaxRange.getMaxNewLines();
 					}
 				}
 			} catch (NumberFormatException x) {
@@ -273,15 +273,15 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				final int number = Integer.parseInt(trimInput);
 				boolean changed = false;
 				if (isMax) {
-					if (minMaxRange.getMaxNewLines() != number) {
-						minMaxRange = new NewLineConfig(minMaxRange.getMinNewLines(), number);
-						changed = true;
-					}
+//					if (minMaxRange.getMaxNewLines() != number) {
+//						minMaxRange = new NewLineConfig(minMaxRange.getMinNewLines(), number);
+//						changed = true;
+//					}
 				} else {
-					if (minMaxRange.getMinNewLines() != number) {
-						minMaxRange = new NewLineConfig(number, minMaxRange.getMaxNewLines());
-						changed = true;
-					}
+//					if (minMaxRange.getMinNewLines() != number) {
+//						minMaxRange = new NewLineConfig(number, minMaxRange.getMaxNewLines());
+//						changed = true;
+//					}
 				}
 				if (changed)
 					saveSelected(minMaxRange);
@@ -313,22 +313,22 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 			minText.setEnabled(enabled);
 			maxText.setEnabled(enabled);
 
-			minMaxRange = new NewLineConfig("0,0");
-			if (hasKey) {
-				try {
-					String s = (String) getPreferences().get(getKey());
-					minMaxRange = new NewLineConfig(s);
-				} catch (NumberFormatException e) {
-					//TODO log an error
-				}
-			}
-			fillFields(minMaxRange);
+//			minMaxRange = new NewLineConfig("0,0");
+//			if (hasKey) {
+//				try {
+//					String s = getPreferences().get(getKey());
+//					minMaxRange = new NewLineConfig(s);
+//				} catch (NumberFormatException e) {
+//					//TODO log an error
+//				}
+//			}
+//			fillFields(minMaxRange);
 
 		}
 
 		private void fillFields(NewLineConfig minMaxRange) {
-			minText.setText(Integer.toString(minMaxRange.getMinNewLines())); //$NON-NLS-1$
-			maxText.setText(Integer.toString(minMaxRange.getMaxNewLines())); //$NON-NLS-1$
+//			minText.setText(Integer.toString(minMaxRange.getMinNewLines())); //$NON-NLS-1$
+//			maxText.setText(Integer.toString(minMaxRange.getMaxNewLines())); //$NON-NLS-1$
 		}
 
 	}
