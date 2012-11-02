@@ -71,7 +71,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def meth2(){");
+    _builder.append("def meth2() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -140,7 +140,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def meth2(){");
+    _builder.append("def meth2() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -646,7 +646,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
     _builder.newLine();
-    _builder.append("val y = x.filter[z | z.toUpperCase == z]");
+    _builder.append("val y = x.filter[z|z.toUpperCase == z]");
     _builder.newLine();
     _builder.append("y.join");
     _builder.newLine();

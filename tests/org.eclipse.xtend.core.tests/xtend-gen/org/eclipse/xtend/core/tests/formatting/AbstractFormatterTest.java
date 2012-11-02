@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
@@ -111,31 +110,29 @@ public abstract class AbstractFormatterTest {
   }
   
   private String flattenWhitespace(final EObject obj) {
-    StringBuilder _stringBuilder = new StringBuilder();
-    final StringBuilder result = _stringBuilder;
-    Resource _eResource = obj.eResource();
-    IParseResult _parseResult = ((XtextResource) _eResource).getParseResult();
-    ICompositeNode _rootNode = _parseResult.getRootNode();
-    Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
-    for (final ILeafNode node : _leafNodes) {
-      boolean _and = false;
-      boolean _isHidden = node.isHidden();
-      if (!_isHidden) {
-        _and = false;
-      } else {
+    String _xblockexpression = null;
+    {
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder result = _stringBuilder;
+      Resource _eResource = obj.eResource();
+      IParseResult _parseResult = ((XtextResource) _eResource).getParseResult();
+      ICompositeNode _rootNode = _parseResult.getRootNode();
+      Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
+      for (final ILeafNode node : _leafNodes) {
         String _text = node.getText();
         String _trim = _text.trim();
-        boolean _equals = Objects.equal(_trim, "");
-        _and = (_isHidden && _equals);
+        int _length = _trim.length();
+        boolean _greaterThan = (_length > 0);
+        if (_greaterThan) {
+          result.append("  ");
+          String _text_1 = node.getText();
+          result.append(_text_1);
+        }
       }
-      if (_and) {
-        result.append(" ");
-      } else {
-        String _text_1 = node.getText();
-        result.append(_text_1);
-      }
+      String _string = result.toString();
+      _xblockexpression = (_string);
     }
-    return result.toString();
+    return _xblockexpression;
   }
   
   public void assertFormatted(final CharSequence expectation, final CharSequence toBeFormatted) {

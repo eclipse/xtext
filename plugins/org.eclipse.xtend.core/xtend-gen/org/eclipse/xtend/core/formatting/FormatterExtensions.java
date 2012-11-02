@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.formatting;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -242,6 +243,42 @@ public class FormatterExtensions {
       _xifexpression = _newFormattingData;
     }
     return _xifexpression;
+  }
+  
+  public Iterable<FormattingData> surround(final INode node, final Procedure1<? super FormattingDataInit> init) {
+    ArrayList<FormattingData> _xblockexpression = null;
+    {
+      final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+      boolean _notEquals = (!Objects.equal(node, null));
+      if (_notEquals) {
+        HiddenLeafs _hiddenLeafsBefore = this._nodeModelAccess.getHiddenLeafsBefore(node);
+        Iterable<FormattingData> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, init);
+        Iterables.<FormattingData>addAll(result, _newFormattingData);
+        HiddenLeafs _hiddenLeafsAfter = this._nodeModelAccess.getHiddenLeafsAfter(node);
+        Iterable<FormattingData> _newFormattingData_1 = this.newFormattingData(_hiddenLeafsAfter, init);
+        Iterables.<FormattingData>addAll(result, _newFormattingData_1);
+      }
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
+  public Iterable<FormattingData> surround(final INode node, final Procedure1<? super FormattingDataInit> before, final Procedure1<? super FormattingDataInit> after) {
+    ArrayList<FormattingData> _xblockexpression = null;
+    {
+      final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+      boolean _notEquals = (!Objects.equal(node, null));
+      if (_notEquals) {
+        HiddenLeafs _hiddenLeafsBefore = this._nodeModelAccess.getHiddenLeafsBefore(node);
+        Iterable<FormattingData> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, before);
+        Iterables.<FormattingData>addAll(result, _newFormattingData);
+        HiddenLeafs _hiddenLeafsAfter = this._nodeModelAccess.getHiddenLeafsAfter(node);
+        Iterable<FormattingData> _newFormattingData_1 = this.newFormattingData(_hiddenLeafsAfter, after);
+        Iterables.<FormattingData>addAll(result, _newFormattingData_1);
+      }
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public Iterable<FormattingData> prepend(final INode node, final NewLineConfig configuration) {

@@ -98,6 +98,24 @@ class FormatterExtensions {
 		}
 	}
 	
+	def Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void init) {
+		val result = <FormattingData>newArrayList()
+		if(node != null) {
+			result += node.hiddenLeafsBefore.newFormattingData(init)
+			result += node.hiddenLeafsAfter.newFormattingData(init)
+		}
+		result
+	}
+	
+	def Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void before, (FormattingDataInit)=>void after) {
+		val result = <FormattingData>newArrayList()
+		if(node != null) {
+			result += node.hiddenLeafsBefore.newFormattingData(before)
+			result += node.hiddenLeafsAfter.newFormattingData(after)
+		}
+		result
+	}
+	
 	def Iterable<FormattingData> prepend(INode node, NewLineConfig configuration) {
 		if(node != null) {
 			node.hiddenLeafsBefore.newFormattingData(configuration, 0)

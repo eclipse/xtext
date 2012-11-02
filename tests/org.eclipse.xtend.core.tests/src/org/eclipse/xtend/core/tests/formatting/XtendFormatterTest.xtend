@@ -42,7 +42,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 				def meth1() {
 				}
 			
-				def meth2(){
+				def meth2() {
 				}
 			
 				int member3
@@ -82,7 +82,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 				def meth1() {
 				}
 			
-				def meth2(){
+				def meth2() {
 				}
 			
 				int member3
@@ -381,7 +381,7 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	@Test def formatClosuresParam() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
-			val y = x.filter[z | z.toUpperCase == z]
+			val y = x.filter[z|z.toUpperCase == z]
 			y.join
 		''')	
 	}
