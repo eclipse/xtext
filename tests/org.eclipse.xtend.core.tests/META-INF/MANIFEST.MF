@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.xtend.core,
 Import-Package: javax.inject;version="1.0.0",
  org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0"
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0"
 Bundle-ClassPath: .
 Export-Package: .;x-internal:=true,
  org.eclipse.xtend.core.tests.annotations;x-internal:=true,
