@@ -58,11 +58,11 @@ abstract class AbstractFormatterTest {
 	def private flattenWhitespace(EObject obj) {
 		val result = new StringBuilder()
 		for(node: (obj.eResource as XtextResource).parseResult.rootNode.leafNodes)
-			if(node.hidden && node.text.trim == "")
-				result.append(" ")
-			else 
+			if(node.text.trim.length > 0) {
+				result.append("  ")
 				result.append(node.text)
-		return result.toString
+			}
+		result.toString
 	}
 	
 	def assertFormatted(CharSequence expectation, CharSequence toBeFormatted) {

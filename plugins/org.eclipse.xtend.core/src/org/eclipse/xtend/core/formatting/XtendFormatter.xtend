@@ -46,11 +46,20 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XWhileExpression
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
+import org.eclipse.xtext.xtype.XFunctionTypeRef
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
+import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
+import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference
+import org.eclipse.xtext.common.types.JvmUpperBound
+import org.eclipse.xtext.common.types.JvmTypeConstraint
+import org.eclipse.xtend.core.xtend.XtendImport
 
 
 @SuppressWarnings("restriction")
@@ -78,7 +87,7 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XtendFile xtendFile, FormattableDocument format) {
-		format += xtendFile.nodeForKeyword("package").prepend[noSpace]
+		format += xtendFile.nodeForEObject.prepend[noSpace]
 		val pkg = xtendFile.nodeForFeature(XTEND_FILE__PACKAGE)
 		format += pkg.prepend[oneSpace]
 		val pkgSemicolon = pkg.immediatelyFollowingKeyword(";")
@@ -88,11 +97,13 @@ public class XtendFormatter {
 		} else {
 			format += pkg.append(format.cfg.newLinesAfterPackageName)
 		}
-		for (imp : xtendFile.imports)
+		for (imp : xtendFile.imports) {
+			imp.format(format)
 			if (imp != xtendFile.imports.last)
 				format += imp.nodeForEObject.append(format.cfg.newLinesBetweenImports)
 			else
 				format += imp.nodeForEObject.append(format.cfg.newLinesAfterImportSection)
+		}
 		for (clazz : xtendFile.xtendTypes) {
 			clazz.format(format)
 			if (clazz != xtendFile.xtendTypes.last)
@@ -100,6 +111,15 @@ public class XtendFormatter {
 		}
 
 		format += xtendFile.nodeForEObject.append[newLine]
+	}
+	
+	def protected dispatch void format(XtendImport imp, FormattableDocument document) {
+		document += imp.nodeForKeyword("import").append[oneSpace]
+		document += imp.nodeForFeature(XTEND_IMPORT__STATIC).append[oneSpace]
+		document += imp.nodeForFeature(XTEND_IMPORT__EXTENSION).append[oneSpace]
+		for(node:imp.nodesForKeyword("."))
+			document += node.surround[noSpace]
+		document += imp.nodeForKeyword(";").prepend[noSpace]
 	}
 	
 	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document) {
@@ -142,7 +162,15 @@ public class XtendFormatter {
 	
 	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
 		formatAnnotations(clazz, format)
+		format += clazz.nodeForKeyword("abstract").append[oneSpace]
 		format += clazz.nodeForKeyword("class").append[oneSpace]
+		format += clazz.nodeForKeyword("extends").surround[oneSpace]
+		clazz.^extends.format(format)
+		format += clazz.nodeForKeyword("implements").surround[oneSpace]
+		for(imp:clazz.^implements) {
+			format += imp.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace],[oneSpace])
+			imp.format(format)
+		}
 		val clazzOpenBrace = clazz.nodeForKeyword("{")
 		format += clazzOpenBrace.prepend[ space=" "]
 		if (!clazz.members.empty) {
@@ -172,10 +200,18 @@ public class XtendFormatter {
 
 	def protected dispatch void format(XtendConstructor func, FormattableDocument format) {
 		formatAnnotations(func, format)
+		format += func.nodeForKeyword("new").append[noSpace]
+		if (!func.typeParameters.empty) {
+			format += func.nodeForKeyword("<").append[noSpace]
+			for (arg : func.typeParameters)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			format += func.nodeForKeyword(">").surround[noSpace]
+		}
 		val open = func.nodeForKeyword("(")
 		val close = func.nodeForKeyword(")")
+		format += close.append[oneSpace]
 		formatMemberParameter(func.parameters, open, close, format)
-		
+
 		func.expression.format(format)
 	}
 	
@@ -194,6 +230,7 @@ public class XtendFormatter {
 						format += param.nodeForEObject.append[ newLine; decreaseIndentation]
 					param.format(format)
 					comma = param.nodeForEObject.immediatelyFollowingKeyword(",")
+					format += comma.prepend[noSpace]
 				}
 		} else {
 			var INode comma = null
@@ -213,6 +250,7 @@ public class XtendFormatter {
 				}
 				param.format(format)
 				comma = param.nodeForEObject.immediatelyFollowingKeyword(",")
+				format += comma.prepend[noSpace]
 			}
 			if (parameters.size > 0) {
 				val last = parameters.last.nodeForEObject
@@ -226,17 +264,69 @@ public class XtendFormatter {
 	
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
 		formatAnnotations(func, format)
-		val nameNode = func.nodeForFeature(XtendPackage$Literals::XTEND_FUNCTION__NAME)
+		val nameNode = func.nodeForFeature(XTEND_FUNCTION__NAME)
 		val open = nameNode.immediatelyFollowingKeyword("(")
 		val close = func.nodeForKeyword(")")
+		format += func.nodeForKeyword("def").append[oneSpace]
+		format += func.nodeForFeature(XTEND_FUNCTION__RETURN_TYPE).append[oneSpace]
+		format += open.prepend[noSpace]
+		format += close.append[oneSpace]
 		formatMemberParameter(func.parameters, open, close, format)
+		func.returnType.format(format)
 		func.expression.format(format)
+	}
+	
+	def protected dispatch void format(XtendField field, FormattableDocument document) {
+		formatAnnotations(field, document)
+		document += field.nodeForFeature(XTEND_FIELD__TYPE).append[oneSpace]
+		field.type.format(document)
+		field.initialValue.format(document)
 	}
 
 	def protected dispatch void format(XtendParameter param, FormattableDocument format) {
 		formatAnnotations(param, format)
+		param.parameterType.format(format)
 		val nameNode = param.nodeForFeature(XTEND_PARAMETER__NAME)
 		format += nameNode.prepend[oneSpace]
+	}
+	
+	def protected dispatch void format(JvmGenericArrayTypeReference array, FormattableDocument document) {
+		document += array.nodeForKeyword("[").prepend[noSpace]
+		document += array.nodeForKeyword("]").prepend[noSpace]
+		array.componentType.format(document)
+	}
+	
+	def protected dispatch void format(XFunctionTypeRef func, FormattableDocument document) {
+		document += func.nodeForKeyword("(").append[noSpace]
+		for(param:func.paramTypes) {
+			param.format(document)
+			document += param.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace],[oneSpace])
+		}
+		document += func.nodeForKeyword(")").surround([if(!func.paramTypes.empty) noSpace],[noSpace])
+		document += func.nodeForKeyword("=>").append[noSpace]
+		func.returnType.format(document)
+	}
+	
+	def protected dispatch void format(JvmParameterizedTypeReference ref, FormattableDocument document) {
+		document += ref.nodeForKeyword("<").surround[noSpace]
+		for(arg:ref.arguments) {
+			arg.format(document)
+			document += arg.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace],[oneSpace])
+		}
+		if(!ref.arguments.empty)
+			document += ref.nodeForKeyword(">").prepend[noSpace]
+	}
+	
+	def protected dispatch void format(JvmWildcardTypeReference ref, FormattableDocument document) {
+		if(!ref.constraints.empty)
+			document += ref.nodeForKeyword("?").append[oneSpace]
+		for(c:ref.constraints)
+			c.format(document)
+	}
+	
+	def protected dispatch void format(JvmTypeConstraint constraint, FormattableDocument document) {
+		document += constraint.nodeForFeature(JVM_TYPE_CONSTRAINT__TYPE_REFERENCE).prepend[oneSpace]
+		constraint.typeReference.format(document)
 	}
 
 	def protected dispatch void format(RichString rs, FormattableDocument format) {
@@ -244,11 +334,11 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XVariableDeclaration expr, FormattableDocument format) {
-		val nameNode = expr.nodeForFeature(XVARIABLE_DECLARATION__NAME)
-		val rightNode = expr.nodeForFeature(XVARIABLE_DECLARATION__RIGHT)
-		format += nameNode.prepend[oneSpace]
-		format += nameNode.append[oneSpace]
-		format += rightNode.prepend[oneSpace]
+		format += expr.nodeForKeyword("val").append[oneSpace]
+		format += expr.nodeForKeyword("var").append[oneSpace]
+		format += expr.nodeForFeature(XVARIABLE_DECLARATION__TYPE).append[oneSpace]
+		format += expr.nodeForKeyword("=").surround[oneSpace]
+		expr.type.format(format)
 		expr.right.format(format)
 	}
 
@@ -294,6 +384,7 @@ public class XtendFormatter {
 				}
 				arg.format(format)
 				node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
+				format += node.prepend[noSpace]
 			}
 		if (indented)
 			format += explicitParams.last.nodeForEObject.append[decreaseIndentation]
@@ -352,6 +443,14 @@ public class XtendFormatter {
 
 	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
 		format += expr.nodeForKeyword("new").append[oneSpace]
+		if (!expr.typeArguments.empty) {
+			format += expr.nodeForKeyword("<").surround[noSpace]
+			for (arg : expr.typeArguments) {
+				arg.format(format)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += expr.nodeForKeyword(">").prepend[noSpace]
+		}
 		if (expr.isMultiParamInOwnLine(format))
 			formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.arguments, format)
 		else
@@ -360,11 +459,21 @@ public class XtendFormatter {
 
 	def protected dispatch void format(XFeatureCall expr, FormattableDocument format) {
 		format += expr.nodeForFeature(XFEATURE_CALL__DECLARING_TYPE).append[noSpace]
+		if(!expr.typeArguments.empty) {
+			format += expr.nodeForKeyword("<").append[noSpace]
+			for(arg:expr.typeArguments) {
+				arg.format(format)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += expr.nodeForKeyword(">").surround[noSpace]
+		}
 		if (expr.explicitOperationCall) {
+			val open = expr.nodeForKeyword("(")
+			format += open.prepend[noSpace]
 			if (expr.isMultiParamInOwnLine(format))
-				formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.featureCallArguments, format)
+				formatFeatureCallParamsMultiline(open, expr.featureCallArguments, format)
 			else
-				formatFeatureCallParamsWrapIfNeeded(expr.nodeForKeyword("("), expr.featureCallArguments, format)
+				formatFeatureCallParamsWrapIfNeeded(open, expr.featureCallArguments, format)
 		} else
 			for (arg : expr.featureCallArguments)
 				format(arg, format)
@@ -381,6 +490,12 @@ public class XtendFormatter {
 
 		var indented = false
 		for (call : calls.reverse) {
+			if(!call.typeArguments.empty) {
+				format += call.nodeForKeyword("<").append[noSpace]
+				for(arg:call.typeArguments)
+					format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+				format += call.nodeForKeyword(">").surround[noSpace]
+			}
 			val featureNode = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 			val targetNode = call.memberCallTarget.nodeForEObject
 			if (targetNode != null) {
@@ -589,13 +704,20 @@ public class XtendFormatter {
 
 	def protected void formatClosureWrapIfNeeded(XClosure expr, INode open, Collection<XExpression> children,
 		INode close, FormattableDocument format) {
-		format += open.append[noSpace]
-		var INode last = open
+		var INode last = open 
+		if(expr.explicitSyntax) {
+			format += open.append[noSpace]
+			last = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX) 
+			for(param:expr.declaredFormalParameters) {
+				param.format(format)
+				format += param.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += last.prepend[noSpace]
+		}
 		var indented = false
 		for (c : children) {
 			if (format.fitsIntoLine(c)) {
-				if (children.head != c)
-					format += last.append[oneSpace]
+				format += last.append[if (children.head == c) noSpace else oneSpace]
 			} else {
 				if (!indented) {
 					indented = true
@@ -683,6 +805,7 @@ public class XtendFormatter {
 		val elsenode = expr.^else?.nodeForEObject
 		val multiline = thennode.text.trim.contains("\n") || thennode.whitespaceBefore?.text?.contains("\n") ||
 			elsenode?.text?.trim?.contains("\n")
+		format += expr.nodeForFeature(XIF_EXPRESSION__IF).surround[noSpace]
 		if (expr.then instanceof XBlockExpression || multiline)
 			format += expr.nodeForKeyword("if").append[oneSpace]
 		else

@@ -21,12 +21,21 @@ class NodeModelAccess {
 		node.asTreeIterable.findFirst[semanticElement == obj && grammarElement instanceof Keyword && text == kw] as ILeafNode
 	}
 	
+	def Iterable<ILeafNode> nodesForKeyword(EObject obj, String kw) {
+		val node = NodeModelUtils::findActualNodeFor(obj)
+		node.asTreeIterable.filter(typeof(ILeafNode)).filter[semanticElement == obj && grammarElement instanceof Keyword && text == kw]
+	}
+	
 	def INode nodeForFeature(EObject obj, EStructuralFeature feature) {
 		NodeModelUtils::findNodesForFeature(obj, feature).head
 	}
 	
 	def Iterable<INode> features(EObject obj, EStructuralFeature feature) {
 		NodeModelUtils::findNodesForFeature(obj, feature)
+	}
+	
+	def ILeafNode immediatelyFollowingKeyword(EObject obj, String kw) {
+		obj.nodeForEObject.immediatelyFollowingKeyword(kw)
 	}
 	
 	def ILeafNode immediatelyFollowingKeyword(INode node, String kw) {
