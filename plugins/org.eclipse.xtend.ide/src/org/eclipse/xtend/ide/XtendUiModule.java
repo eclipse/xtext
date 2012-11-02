@@ -43,6 +43,8 @@ import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
+import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
+import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementHandler;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
@@ -50,6 +52,7 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -78,6 +81,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
+import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
@@ -86,6 +90,7 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.validation.PreferenceAwareDiagnosticConverter;
 
 import com.google.inject.Binder;
@@ -257,10 +262,26 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 
 	@Override
+	public java.lang.Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return XtendDependentElementsCalculator.class;
+	}
+	
+	@Override
+	public void configureJvmMemberRenameStrategy$Provider$Delegate(Binder binder) {
+		binder.bind(IRenameStrategy.Provider.class)
+			.annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class)
+			.to(XtendRenameStrategy.Provider.class);
+	}
+		
+	@Override
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
 		return XtendReferenceUpdater.class;
 	}
-
+	
+	public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
+		return XtendJdtRenameParticipantProcessor.class;
+	}
+	
 	public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider() {
 		return XtendHoverSignatureProvider.class;
 	}
@@ -312,5 +333,5 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
 				.to(XtendPreferenceStoreInitializer.class);
 	}
-
+	
 }

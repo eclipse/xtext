@@ -7,17 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.refactoring;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.dispatch.DispatchingSupport;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator;
 
 import com.google.inject.Inject;
@@ -28,16 +32,32 @@ import com.google.inject.Inject;
 public class XtendDependentElementsCalculator extends JvmModelDependentElementsCalculator {
 
 	@Inject
-	private DispatchUtil dispatchUtil;
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private DispatchingSupport dispatchingSupport;
 	
 	@Override
 	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
-		if (baseElement instanceof XtendFunction) {
-			for (JvmOperation inferredOperation : filter(getJvmModelAssociations().getJvmElements(baseElement),
-					JvmOperation.class)) {
-				if (dispatchUtil.isDispatcherFunction(inferredOperation))
-					throw new RefactoringException("Cannot refactor polymorphic dispatch method");
+		if (baseElement instanceof XtendFunction && ((XtendFunction) baseElement).isDispatch()) {
+			JvmOperation dispatchOperation = associations.getDispatchOperation((XtendFunction) baseElement);
+			Collection<JvmOperation> dispatchCaseOperations = dispatchingSupport
+					.getDispatcher2dispatched(((XtendClass)baseElement.eContainer()), false)
+					.get(dispatchOperation); 
+			final List<URI> result = newArrayList();
+			IAcceptor<EObject> safeResult = new IAcceptor<EObject>() {
+				public void accept(EObject element) {
+					if(element != null && !element.eIsProxy()) {
+						result.add(EcoreUtil.getURI(element));
+					}
+				}
+			};
+			safeResult.accept(dispatchOperation);
+			for(JvmOperation dispatchCaseOperation: dispatchCaseOperations) {
+				safeResult.accept(dispatchCaseOperation);
+				safeResult.accept(associations.getXtendFunction(dispatchCaseOperation));
 			}
+			return result;
 		}
 		return super.getDependentElementURIs(baseElement, monitor);
 	}
