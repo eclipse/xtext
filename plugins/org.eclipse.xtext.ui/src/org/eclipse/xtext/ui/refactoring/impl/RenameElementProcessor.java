@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -115,6 +116,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 						return false;
 				}
 			}
+		} catch (NoSuchStrategyException e) {
+			status.add(FATAL, e.getMessage());
 		} catch (Exception e) {
 			handleException(e, status);
 			throw (e instanceof RuntimeException) ? (RuntimeException) e : new WrappedException(e);
@@ -146,7 +149,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	}
 
 	protected IRenameStrategy createRenameElementStrategy(EObject targetElement,
-			IRenameElementContext renameElementContext) {
+			IRenameElementContext renameElementContext) throws NoSuchStrategyException {
 		IRenameStrategy result = strategyProvider.get(targetElement, renameElementContext);
 		return result;
 	}

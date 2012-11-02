@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -180,14 +181,18 @@ public class RenameRefactoringController {
 	protected String getOriginalName(final XtextEditor xtextEditor) {
 		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
 			public String exec(XtextResource state) throws Exception {
-				EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
+				try {
+					EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
 						false);
-				IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
-						IRenameStrategy.Provider.class);
-				if (strategyProvider != null) {
-					IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
-					if (strategy != null)
-						return strategy.getOriginalName();
+					IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
+							IRenameStrategy.Provider.class);
+					if (strategyProvider != null) {
+						IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
+						if (strategy != null)
+							return strategy.getOriginalName();
+					}
+				} catch(NoSuchStrategyException e) {
+					// null
 				}
 				return null;
 			}

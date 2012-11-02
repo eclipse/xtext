@@ -27,7 +27,7 @@ public class DefaultRenameStrategyProvider implements IRenameStrategy.Provider {
 	@Inject(optional = true)
 	private com.google.inject.Provider<IRenameStrategy> guiceStrategyProvider;
 
-	public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
+	public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
 		IRenameStrategy renameStrategy = createRenameStrategy(targetEObject, renameElementContext);
 		if (renameStrategy instanceof DefaultRenameStrategyProvider.IInitializable
 				&& ((DefaultRenameStrategyProvider.IInitializable) renameStrategy).initialize(targetEObject,
@@ -36,7 +36,7 @@ public class DefaultRenameStrategyProvider implements IRenameStrategy.Provider {
 		}
 		return null;
 	}
-
+	
 	protected IRenameStrategy createRenameStrategy(EObject targetEObject, IRenameElementContext renameElementContext) {
 		return guiceStrategyProvider == null ? null : guiceStrategyProvider.get();
 	}

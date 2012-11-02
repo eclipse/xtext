@@ -111,7 +111,7 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		@Inject(optional=true)@Delegate
 		private IRenameStrategy.Provider delegate;
 
-		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) {
+		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
 			if(targetEObject instanceof JvmMember) 
 				return new JvmMemberRenameStrategy((JvmMember) targetEObject);
 			return delegate == null ? null : delegate.get(targetEObject, renameElementContext);
