@@ -126,8 +126,17 @@ public class FormatterExtensions {
                   int _minus = (newLines - 1);
                   newLines = _minus;
                 }
-                boolean _equals_1 = (newLines == 0);
-                if (_equals_1) {
+                boolean _and = false;
+                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine_1 = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
+                boolean _not_1 = (!_endsWithNewLine_1);
+                if (!_not_1) {
+                  _and = false;
+                } else {
+                  boolean _equals_1 = (newLines == 0);
+                  _and = (_not_1 && _equals_1);
+                }
+                if (_and) {
                   int _offset_2 = _whitespaceInfo.getOffset();
                   int _length_1 = _whitespaceInfo.getLength();
                   WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, indentationChange, " ");
@@ -141,9 +150,9 @@ public class FormatterExtensions {
                 applied = true;
               } else {
                 int newLines_1 = 1;
-                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine_1 = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
-                if (_endsWithNewLine_1) {
+                CommentInfo _leadingComment_2 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine_2 = _leadingComment_2==null?false:_leadingComment_2.endsWithNewLine();
+                if (_endsWithNewLine_2) {
                   int _minus_1 = (newLines_1 - 1);
                   newLines_1 = _minus_1;
                 }
