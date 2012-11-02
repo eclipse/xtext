@@ -35,14 +35,14 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 /**
- * Participant for JDT refactorings.
+ * Participant for JDT refactorings. 
  * 
  * Is based on refactoring processors which are created using an
  * {@link org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider}. The participant is registered by the plug-in
  * org.eclipse.xtext.common.types.shared, and delegates to the declaring language if the equivalent JVM target element
  * is contained in the index.
  * 
- * Languages that do not define own JVM elements but refer to existing Java artifacts only don't have to implement
+ * Languages that do not define own JVM elements but refer to existing Java artifacts only, don't have to implement
  * anything additional to get their references updated. Languages that define own JvmElements should implement and bind
  * a {@link ContextFactory}.
  * 
@@ -80,7 +80,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 					if (indexedJvmElement != null)
 						// jvmElement is indexed, thus contained in an XtextResurce and likely inferred from some Xtext-based elements
 						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(
-								indexedJvmElement);
+								this, indexedJvmElement);
 					else if (directJvmElement instanceof JvmMember)
 						// jvmElement could only be cross referenced by Xtext-based elements
 						return createJdtRenameParticipantContext((JvmMember) directJvmElement, javaElement);
@@ -106,7 +106,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 
 	protected List<? extends IRenameElementContext> createJdtRenameParticipantContext(JvmMember renamedJvmMember,
 			IJavaElement javaElement) {
-		return singletonList(new JdtRenameParticipantContext(renamedJvmMember, javaElement));
+		return singletonList(new JdtRenameParticipantContext(this, renamedJvmMember, javaElement));
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 
 	public static class ContextFactory {
 		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContexts(
-				EObject indexedJvmElement) {
+				JdtRenameParticipant participant, EObject indexedJvmElement) {
 			return Collections.emptyList();
 		}
 	}
