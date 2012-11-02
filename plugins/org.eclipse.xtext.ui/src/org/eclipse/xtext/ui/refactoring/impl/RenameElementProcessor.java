@@ -205,7 +205,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
-		status.merge(validateNewName(newName));
+		if(!status.getRefactoringStatus().hasFatalError())
+			status.merge(validateNewName(newName));
 		return status.getRefactoringStatus();
 	}
 

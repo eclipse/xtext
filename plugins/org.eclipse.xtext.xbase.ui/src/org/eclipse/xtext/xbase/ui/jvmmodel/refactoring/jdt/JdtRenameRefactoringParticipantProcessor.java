@@ -19,20 +19,17 @@ import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.OperatorMappingUtil;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * TODO: introduce a binding annotation XbaseRenameParticipant 
  */
 public class JdtRenameRefactoringParticipantProcessor extends RenameElementProcessor {
 
 	@Inject
 	private IJvmModelAssociations associations;
-
-	@Inject
-	private OperatorMappingUtil operatorMappingUtil;
 
 	@Override
 	public boolean initialize(IRenameElementContext renameElementContext) {
@@ -43,14 +40,21 @@ public class JdtRenameRefactoringParticipantProcessor extends RenameElementProce
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
+		RefactoringStatus status = preCheckInitialConditions(pm);
+		if(status.hasError())
+			return status;
+		return super.checkInitialConditions(pm);
+	}
+
+	protected RefactoringStatus preCheckInitialConditions(IProgressMonitor pm) throws CoreException {
 		if (associations.getJvmElements(getTargetElement()).size() > 1) {
 			StatusWrapper statusWrapper = getStatusProvider().get();
 			statusWrapper.add(ERROR,
-					"Cannot rename single inferred element. Please rename source element {0} instead",
+					"Rename from here will not be complete. Try to rename {0} instead.",
 					getTargetElement());
 			statusWrapper.merge(super.checkInitialConditions(pm));
 			return statusWrapper.getRefactoringStatus();
 		}
-		return super.checkInitialConditions(pm);
+		return new RefactoringStatus();
 	}
 }
