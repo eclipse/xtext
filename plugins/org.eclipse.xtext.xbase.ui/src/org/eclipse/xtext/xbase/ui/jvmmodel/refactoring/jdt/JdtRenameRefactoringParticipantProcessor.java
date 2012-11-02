@@ -46,6 +46,11 @@ public class JdtRenameRefactoringParticipantProcessor extends RenameElementProce
 		return super.checkInitialConditions(pm);
 	}
 
+	/**
+	 * Subclasses can decide to override this to allow specific multi-refactorings.
+	 * 
+	 * @since 2.4
+	 */
 	protected RefactoringStatus preCheckInitialConditions(IProgressMonitor pm) throws CoreException {
 		if (associations.getJvmElements(getTargetElement()).size() > 1) {
 			StatusWrapper statusWrapper = getStatusProvider().get();

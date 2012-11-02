@@ -23,6 +23,9 @@ public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 
 	private IJavaElement renamedJavaElement;
 	
+	/**
+	 * @since 2.4
+	 */
 	private JdtRenameParticipant participant;
 
 	public JdtRenameParticipantContext(JdtRenameParticipant participant, 
@@ -37,6 +40,9 @@ public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 		return renamedJavaElement;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	public JdtRenameParticipant getJdtRenameParticipant() {
 		return participant;
 	}
