@@ -124,9 +124,9 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 		RenameElementProcessor processor = processorProvider.get();
 		processor
 				.initialize(new IRenameElementContext.Impl(targetElementURI, targetElement.eClass(), null, null, null));
+		processor.setNewName(newName);
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
 		assertTrue(initialStatus.isOK());
-		processor.setNewName(newName);
 		RefactoringStatus finalStatus = processor.checkFinalConditions(new NullProgressMonitor(), null);
 		assertTrue(finalStatus.toString(), finalStatus.isOK());
 		final Change change = processor.createChange(new NullProgressMonitor());

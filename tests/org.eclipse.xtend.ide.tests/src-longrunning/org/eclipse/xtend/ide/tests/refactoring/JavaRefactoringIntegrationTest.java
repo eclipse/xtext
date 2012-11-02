@@ -72,7 +72,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.tearDown();
 		super.tearDown();
 	}
-
+	
 	@Test
 	public void testRenameJavaClass() throws Exception {
 		try {
@@ -426,6 +426,38 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendDispatchMethod() throws Exception {
+		String xtendModel = "class XtendClass { def dispatch foo(String x) {} def dispatch foo(Object x) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		String javaCallerModel = "public class JavaCaller { void bar(XtendClass x) { x.foo(null); x._foo(\"\"); } }";
+		IFile javaCaller = testHelper.createFile("JavaCaller.java", javaCallerModel);
+		String xtendCallerModel = "class XtendCaller { def bar(XtendClass x) { x.foo(null) } }";
+		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
+		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
+	}
+
+	@Test
+	public void testRenameRefToXtendDispatchMethod() throws Exception {
+		String xtendModel = "class XtendClass { def dispatch foo(Object x) {} def dispatch foo(String x) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		String javaCallerModel = "public class JavaCaller { void bar(XtendClass x) { x.foo(null); x._foo(\"\"); } }";
+		IFile javaCaller = testHelper.createFile("JavaCaller.java", javaCallerModel);
+		String xtendCallerModel = "class XtendCaller { def bar(XtendClass x) { x.foo(null) } }";
+		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
+		final XtextEditor editor = testHelper.openEditor(xtendCaller);
+		renameXtendElement(editor, xtendCallerModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendCallerModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(xtendClass, xtendModel.replace("foo", "baz"));
+		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
+	}
+
+	@Test
 	public void testDontRenameOperator() throws Exception {
 		String xtendModel = "class XtendClass { def bar() { 1 + 2 } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
@@ -737,14 +769,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		synchronize(editor);
 		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(javaClass, "{ setBaz(getBaz()); }");
-	}
-
-	@Test
-	public void testDontRenameXtendDispatchMethod() throws Exception {
-		String xtendModel = "class XtendClass { def dispatch foo(Object x) {} def dispatch foo(String x) {} }";
-		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		renameXtendElementWithError(editor, xtendModel.indexOf("foo"), "bar");
 	}
 
 	@Test
