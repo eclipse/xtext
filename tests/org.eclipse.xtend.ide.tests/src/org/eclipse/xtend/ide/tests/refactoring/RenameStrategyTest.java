@@ -150,14 +150,14 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		renameStrategy.applyDeclarationChange("bar", fooMethod0.eResource().getResourceSet());
 		for(XtendFunction f: filter(fooClass.getMembers(), XtendFunction.class)) { 
 			assertEquals("bar", f.getName());
-			assertEquals("_bar", associations.getDirectlyInferredOperation(f));
-			assertEquals("bar", associations.getDispatchOperation(f));
+			assertEquals("_bar", associations.getDirectlyInferredOperation(f).getSimpleName());
+			assertEquals("bar", associations.getDispatchOperation(f).getSimpleName());
 		}
 		renameStrategy.revertDeclarationChange(fooMethod0.eResource().getResourceSet());
 		for(XtendFunction f: filter(fooClass.getMembers(), XtendFunction.class)) { 
 			assertEquals("foo", f.getName());
-			assertEquals("_foo", associations.getDirectlyInferredOperation(f));
-			assertEquals("foo", associations.getDispatchOperation(f));
+			assertEquals("_foo", associations.getDirectlyInferredOperation(f).getSimpleName());
+			assertEquals("foo", associations.getDispatchOperation(f).getSimpleName());
 		}
 	}
 
