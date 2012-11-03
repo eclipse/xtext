@@ -68,9 +68,9 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		IFile fooFile = IResourcesSetupUtil.createFile(TEST_PROJECT + "/foo.refactoringtestlanguage", "foo");
 		IFile barFile = IResourcesSetupUtil
 				.createFile(TEST_PROJECT + "/bar.refactoringtestlanguage", "bar { ref foo }");
+		waitForAutoBuild();
 		fooEditor = openEditor(fooFile);
 		barEditor = openEditor(barFile);
-		waitForAutoBuild();
 		assertTrue(refactoringPreferences.useInlineRefactoring());
 	}
 
@@ -83,6 +83,10 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		for (ITextEditor editor : editors) {
 			IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 			document.replace(document.getLength(), 0, " ");
+			if(editor instanceof XtextEditor) {
+				waitForReconciler((XtextEditor) editor);
+			}
+			waitForDisplay();
 			assertTrue(editor.isDirty());
 		}
 	}
@@ -245,9 +249,11 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 
 	protected void renameFooToFooBar(final XtextEditor contextEditor) throws Exception {
 		contextEditor.getEditorSite().getPage().activate(contextEditor);
+		waitForDisplay();
 		IXtextDocument document = contextEditor.getDocument();
 		final int offset = document.get().indexOf("foo");
 		contextEditor.selectAndReveal(offset, 3);
+		waitForDisplay();
 		IRenameElementContext context = document.readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
 			public IRenameElementContext exec(XtextResource state) throws Exception {
 				EObject target = eObjectAtOffsetHelper.resolveElementAt(state, offset);
@@ -255,7 +261,6 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 						3), state);
 			}
 		});
-		waitForReconciler(contextEditor);
 		controller.initialize(context);
 		waitForDisplay();
 		controller.startRefactoring(RefactoringType.LINKED_EDITING);
