@@ -25,8 +25,8 @@ import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Ignore;
@@ -52,10 +52,10 @@ public class RefactoringTest extends AbstractEditorTest {
 		IRenameSupport.Factory renameSupportFactory;
 
 		@Inject(optional=true)
-		IRenameElementHandler renameElementHandler;
+		IRenameContextFactory renameContextFactory;
 		
 		public boolean hasRefactoring() {
-			return renameSupportFactory != null && renameElementHandler != null;
+			return renameSupportFactory != null && renameContextFactory != null;
 		}
 	}
 
@@ -198,7 +198,7 @@ public class RefactoringTest extends AbstractEditorTest {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						JvmType defaultReference = model.getReferenceHolder().get(0).getDefaultReference();
-						return languageServices.renameElementHandler.createRenameElementContext(defaultReference,
+						return languageServices.renameContextFactory.createRenameElementContext(defaultReference,
 								editor, null, state);
 					}
 				});
@@ -215,7 +215,7 @@ public class RefactoringTest extends AbstractEditorTest {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						ReferenceHolder referenceHolder = model.getReferenceHolder().get(0);
-						return languageServices.renameElementHandler.createRenameElementContext(referenceHolder,
+						return languageServices.renameContextFactory.createRenameElementContext(referenceHolder,
 								editor, null, state);
 					}
 				});
