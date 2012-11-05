@@ -16,7 +16,7 @@ public abstract class AbstractEntry {
     this._key = key;
   }
   
-  protected String fullPrefix(final String prefix) {
+  public String fullPrefix(final String prefix) {
     String _xifexpression = null;
     boolean _equals = Objects.equal(prefix, null);
     if (_equals) {
