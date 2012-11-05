@@ -453,13 +453,13 @@ public class HtmlExtensions {
         } else {
           boolean _switchResult = false;
           EObject _eContainer_1 = it.eContainer();
-          final EObject eContainer = _eContainer_1;
+          final EObject x = _eContainer_1;
           boolean _matched = false;
           if (!_matched) {
-            if (eContainer instanceof TextOrMarkup) {
-              final TextOrMarkup _textOrMarkup = (TextOrMarkup)eContainer;
+            if (x instanceof TextOrMarkup) {
+              final TextOrMarkup _textOrMarkup = (TextOrMarkup)x;
               _matched=true;
-              EList<EObject> _contents_1 = ((TextOrMarkup) _textOrMarkup).getContents();
+              EList<EObject> _contents_1 = _textOrMarkup.getContents();
               int _size = _contents_1.size();
               boolean _equals_1 = (_size == 1);
               _switchResult = _equals_1;
