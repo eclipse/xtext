@@ -46,7 +46,7 @@ import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
-import org.eclipse.xtend.ide.refactoring.XtendRenameElementHandler;
+import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -85,7 +85,7 @@ import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
@@ -247,9 +247,8 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
 	}
 
-	@Override
-	public Class<? extends IRenameElementHandler> bindIRenameElementHandler() {
-		return XtendRenameElementHandler.class;
+	public Class<? extends IRenameContextFactory> bindIRenameContextFactory() {
+		return XtendRenameContextFactory.class;
 	}
 
 	public Class<? extends RenameElementProcessor> bindRenameElementProcessor() {
