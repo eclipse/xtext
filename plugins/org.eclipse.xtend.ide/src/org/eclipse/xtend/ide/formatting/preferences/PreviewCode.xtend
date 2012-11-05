@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.formatting.preferences
 
 class PreviewCode {
+
 	def static String lineWrappingPreviewText() {
 		'''
 			package test

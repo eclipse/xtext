@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -29,9 +30,10 @@ public class IndentationTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		createComboPref(generalGroup, numColumns, "Tab policy:", "indentation", new String[] { "\t", " " }, new String[] {
-				"Tabs only", "Spaces" });
-		createNumberPref(generalGroup, numColumns, "Indentation length:", "indentation.length");
+		createComboPref(generalGroup, numColumns, "Tab policy:", "indentation", new String[] { "\t", " " },
+				new String[] { "Tabs only", "Spaces" });
+		createNumberPref(generalGroup, numColumns, "Indentation length:",
+				new XtendFormatterConfig().getIndentationLength());
 	}
 
 }

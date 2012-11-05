@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -29,7 +30,7 @@ public class NewLineTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, "Insert new line");
-		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", "newlines.after.packagename");
+		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", new XtendFormatterConfig().getNewLinesAfterPackageName());
 	}
 
 }
