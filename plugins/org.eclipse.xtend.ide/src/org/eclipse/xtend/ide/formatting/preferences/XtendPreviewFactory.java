@@ -14,12 +14,15 @@ import java.util.Observer;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.text.Region;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
+import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -41,21 +44,25 @@ public class XtendPreviewFactory {
 	public XtendFormatterPreview createNewPreview(Composite composite, String previewContent) {
 		EmbeddedEditor embeddedEditor = editorFactory.newEditor(resourceProvider)
 				.withResourceValidator(IResourceValidator.NULL).readOnly().withParent(composite);
-		embeddedEditor.createPartialEditor().updateModel("", previewContent, "");
-		return new XtendFormatterPreview(embeddedEditor, xtendFormatterFactory);
+		return new XtendFormatterPreview(embeddedEditor, previewContent, xtendFormatterFactory);
 	}
 
 	static class XtendFormatterPreview implements Observer {
 		private final EmbeddedEditor editorHandle;
 		private final XtendFormatterFactory xtendFormatterFactory;
+		private String previewContent;
+		private EmbeddedEditorModelAccess modelAccess;
 
-		public XtendFormatterPreview(EmbeddedEditor editorHandle, XtendFormatterFactory xtendFormatterFactory) {
+		public XtendFormatterPreview(EmbeddedEditor editorHandle, String previewContent,
+				XtendFormatterFactory xtendFormatterFactory) {
 			this.editorHandle = editorHandle;
+			this.previewContent = previewContent;
+			this.modelAccess = editorHandle.createPartialEditor();
 			this.xtendFormatterFactory = xtendFormatterFactory;
 		}
 
-		public EmbeddedEditor getEditor() {
-			return editorHandle;
+		public XtextSourceViewer getEditorViewer() {
+			return editorHandle.getViewer();
 		}
 
 		public Observer getObserver() {
@@ -82,11 +89,19 @@ public class XtendPreviewFactory {
 					return new XtendFormatterConfig(map);
 				}
 			});
-			xtendFormatterFactory.createConfiguredFormatter(null, null).format(editorHandle.getDocument(),
-					new Region(0, editorHandle.getDocument().getLength()));
-//			editorHandle.getViewer().refresh();
+			StyledText widget = null;
+			try {
+				widget = (StyledText) editorHandle.getViewer().getControl();
+				widget.setRedraw(false);
+				this.modelAccess.updateModel("", previewContent, "");
+				xtendFormatterFactory.createConfiguredFormatter(null, null).format(editorHandle.getDocument(),
+						new Region(0, editorHandle.getDocument().getLength()));
+				editorHandle.getViewer().setSelection(null);
+			} finally {
+				if (widget != null)
+					widget.setRedraw(true);
+			}
 		}
-
 	}
 
 }

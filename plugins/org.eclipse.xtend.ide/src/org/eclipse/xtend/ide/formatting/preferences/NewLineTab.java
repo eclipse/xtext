@@ -30,7 +30,17 @@ public class NewLineTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, "Insert new line");
-		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", new XtendFormatterConfig().getNewLinesAfterPackageName());
+		XtendFormatterConfig xtendFormatterConfig = new XtendFormatterConfig();
+		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", xtendFormatterConfig.getNewLinesAfterPackageName());
+		createMinMaxPref(generalGroup, numColumns, "Between imports (min/max):", xtendFormatterConfig.getNewLinesBetweenImports());
+		createMinMaxPref(generalGroup, numColumns, "After import section (min/max):", xtendFormatterConfig.getNewLinesAfterImportSection());
+		createMinMaxPref(generalGroup, numColumns, "Before first member (min/max):", xtendFormatterConfig.getNewLinesBeforeFirstMember());
+		createMinMaxPref(generalGroup, numColumns, "After last member (min/max):", xtendFormatterConfig.getNewLinesAfterLastMember());
+		createMinMaxPref(generalGroup, numColumns, "Between fields (min/max):", xtendFormatterConfig.getNewLinesBetweenFields());
+		createMinMaxPref(generalGroup, numColumns, "Between fields and methods (min/max):", xtendFormatterConfig.getNewLinesBetweenFieldsAndMethods());
+		createMinMaxPref(generalGroup, numColumns, "Between methods (min/max):", xtendFormatterConfig.getNewLinesBetweenMethods());
+		createMinMaxPref(generalGroup, numColumns, "Between classes (min/max):", xtendFormatterConfig.getNewLinesBetweenClasses());
+		createMinMaxPref(generalGroup, numColumns, "Around expressions (min/max):", xtendFormatterConfig.getNewLinesAroundExpression());
+		createMinMaxPref(generalGroup, numColumns, "After aannotations (min/max):", xtendFormatterConfig.getNewLinesAfterAnnotations());
 	}
-
 }

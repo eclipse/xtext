@@ -92,7 +92,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		createLabel(numColumns, composite, "Xtend formatterPreview");
 		formatterPreview = previewFactory.createNewPreview(composite, previewText());
 		formatterPreview.doFormat(fWorkingValues);
-		Control control = formatterPreview.getEditor().getViewer().getControl();
+		Control control = formatterPreview.getEditorViewer().getControl();
 
 		fDefaultFocusManager.add(control);
 
@@ -176,6 +176,15 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 			public Integer getMin() {
 				return min;
+			}
+
+			@Override
+			public boolean equals(Object obj) {
+				if (obj instanceof MinMaxRangeHolder) {
+					MinMaxRangeHolder other = (MinMaxRangeHolder) obj;
+					return min.equals(other.min) && max.equals(other.max);
+				}
+				return false;
 			}
 		}
 
@@ -276,9 +285,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				//Check range
 				if (valid) {
 					if (isMax) {
-						//						valid = number >= minMaxRange.getMin();
+						valid = number >= minMaxRange.getMin();
 					} else {
-						//						valid = number <= minMaxRange.getMax();
+						valid = number <= minMaxRange.getMax();
 					}
 				}
 			} catch (NumberFormatException x) {
@@ -357,8 +366,8 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		}
 
 		private void fillFields(MinMaxRangeHolder minMaxRange) {
-			minText.setText(Integer.toString(minMaxRange.getMin())); //$NON-NLS-1$
-			maxText.setText(Integer.toString(minMaxRange.getMax())); //$NON-NLS-1$
+			minText.setText(Integer.toString(minMaxRange.getMin()));
+			maxText.setText(Integer.toString(minMaxRange.getMax()));
 		}
 
 	}
