@@ -11,13 +11,11 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
@@ -54,6 +52,9 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	@Inject
 	protected RefactoringPreferences preferences;
 	
+	@Inject
+	protected IRenameContextFactory renameContextFactory;
+	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -67,7 +68,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 								EObject selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource,
 										selection.getOffset());
 								if (selectedElement != null) {
-									IRenameElementContext renameElementContext = createRenameElementContext(
+									IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(
 											selectedElement, editor, selection, resource);
 									if (isRefactoringEnabled(renameElementContext, resource))
 										return renameElementContext;
@@ -85,6 +86,14 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 					exc.getMessage() + "\nSee log for details");
 		}
 		return null;
+	}
+	
+	/** 
+	 * To maintain binary compatibility only.
+	 */
+	public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor triggeringEditor,
+			final ITextSelection selection, XtextResource triggeringResource) {
+		return renameContextFactory.createRenameElementContext(targetElement, triggeringEditor, selection, triggeringResource);
 	}
 
 	protected boolean isRefactoringEnabled(IRenameElementContext renameElementContext, XtextResource resource) {
@@ -114,14 +123,6 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 			}
 		}
 		return false;
-	}
-
-	public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
-			final ITextSelection selection, XtextResource resource) {
-		final URI targetElementURI = EcoreUtil2.getNormalizedURI(targetElement);
-		IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(targetElementURI,
-				targetElement.eClass(), editor, selection, resource.getURI());
-		return renameElementContext;
 	}
 
 	protected void startRenameElement(IRenameElementContext renameElementContext) throws InterruptedException {

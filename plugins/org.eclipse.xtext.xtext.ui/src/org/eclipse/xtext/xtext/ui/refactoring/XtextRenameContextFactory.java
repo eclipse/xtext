@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 
 import com.google.inject.Inject;
 
@@ -27,7 +27,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XtextRenameElementHandler extends DefaultRenameElementHandler {
+public class XtextRenameContextFactory extends IRenameContextFactory.Default {
 	
 	@Inject
 	private RuleOverrideUtil ruleOverrideUtil;

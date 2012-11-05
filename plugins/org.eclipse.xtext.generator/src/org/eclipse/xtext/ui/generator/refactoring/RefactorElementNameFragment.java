@@ -52,8 +52,8 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 							+ "org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class)");
 		if (isUseJdtRefactoring(grammar))
 			return bindFactory
-					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
-							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory",
+							"org.eclipse.xtext.common.types.ui.refactoring.JdtRefactoringContextFactory")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
 							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
@@ -75,8 +75,6 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 							"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider")
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
 							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory")
-					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
-							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler")
 					.getBindings();
 	}
 

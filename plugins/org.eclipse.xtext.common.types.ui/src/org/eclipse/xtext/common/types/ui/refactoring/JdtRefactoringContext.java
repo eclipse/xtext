@@ -43,4 +43,5 @@ public class JdtRefactoringContext extends IRenameElementContext.Impl {
 	public boolean isRealJvmElement() {
 		return isRealJvmElement;
 	}
+	
 }
