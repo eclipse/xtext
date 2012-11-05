@@ -47,7 +47,7 @@ public final class FormatterConfigurationProvider implements IFormatterConfigura
 		Map<String, String> storedValues = new HashMap<String, String>();
 		for (String key : new XtendFormatterConfig().asMap().keySet()) {
 			String value = store.getString(key);
-			if (value != null && value.length()!=0)
+			if (value != null && value.length() != 0)
 				storedValues.put(key, value);
 		}
 		return new XtendFormatterConfig(storedValues);

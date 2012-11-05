@@ -49,7 +49,7 @@ abstract class AbstractEntry {
 
 	new(String key) { this._key = key }
 
-	def protected String fullPrefix(String prefix) {
+	def String fullPrefix(String prefix) {
 		if(prefix == null) key else prefix + "." + key
 	}
 

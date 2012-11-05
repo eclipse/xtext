@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -29,7 +30,7 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		createNumberPref(generalGroup, numColumns, "Maximum line width:", "line.width.max");
+		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfig().getMaxLineWidth());
 	}
 
 }
