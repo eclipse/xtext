@@ -24,8 +24,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
@@ -44,7 +44,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 	private static final String TEST_PROJECT = "refactoring.test";
 
 	@Inject
-	private IRenameElementHandler renameElementHandler;
+	private IRenameContextFactory renameContextFactory;
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
@@ -257,7 +257,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		IRenameElementContext context = document.readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
 			public IRenameElementContext exec(XtextResource state) throws Exception {
 				EObject target = eObjectAtOffsetHelper.resolveElementAt(state, offset);
-				return renameElementHandler.createRenameElementContext(target, contextEditor, new TextSelection(offset,
+				return renameContextFactory.createRenameElementContext(target, contextEditor, new TextSelection(offset,
 						3), state);
 			}
 		});
