@@ -21,11 +21,6 @@ public class AbstractConfiguration extends AbstractEntry {
     super(key);
   }
   
-  public AbstractConfiguration(final Map<String,String> values) {
-    super(null);
-    this.load(null, values);
-  }
-  
   public List<AbstractEntry> getEntries() {
     Class<? extends Object> _class = this.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();

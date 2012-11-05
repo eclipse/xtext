@@ -29,10 +29,17 @@ class XtendFormatterConfigurationTest {
 	}
 	
 	@Test def testLoad() {
-		val cfg = new TestConfig1()
-		val map = cfg.asMap
-		val cfg2 = new TestConfig1(map)
-		assertEquals(cfg, cfg2)
+		val data = '''
+			intval = 4
+			strval = bar
+			child1.nested1 = bar
+			child1.child2.nested2 = bar
+		'''.toString.trim
+		val map = <String, String>newLinkedHashMap
+		data.split("\\\n").forEach[val x = it.split("="); map.put(x.get(0).trim, x.get(1).trim) ]
+		val cfg = new TestConfig1(map)
+		val actual = cfg.asMap.entrySet.join("\n", [ '''«key» = «value»'''])
+		assertEquals(data, actual)
 	}
 }
 
@@ -46,7 +53,8 @@ class TestConfig1 extends AbstractConfiguration {
 	}
 	
 	new(Map<String,String> values) {
-		super(values)
+		this()
+		load(null, values)
 	}
 }
 

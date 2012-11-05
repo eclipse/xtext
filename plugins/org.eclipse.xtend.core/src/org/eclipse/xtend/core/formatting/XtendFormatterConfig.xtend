@@ -24,7 +24,8 @@ class XtendFormatterConfig extends AbstractConfiguration {
 	}
 	
 	new(Map<String, String> properties) {
-		super(properties)
+		this()
+		load(null, properties)
 	}
 	
 	def getIndentation(int levels) {

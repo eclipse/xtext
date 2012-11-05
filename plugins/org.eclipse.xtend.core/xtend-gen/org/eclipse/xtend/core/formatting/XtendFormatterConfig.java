@@ -178,7 +178,8 @@ public class XtendFormatterConfig extends AbstractConfiguration {
   }
   
   public XtendFormatterConfig(final Map<String,String> properties) {
-    super(properties);
+    this();
+    this.load(null, properties);
   }
   
   public String getIndentation(final int levels) {

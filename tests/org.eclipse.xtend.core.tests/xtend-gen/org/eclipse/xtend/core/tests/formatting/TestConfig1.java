@@ -47,6 +47,7 @@ public class TestConfig1 extends AbstractConfiguration {
   }
   
   public TestConfig1(final Map<String,String> values) {
-    super(values);
+    this();
+    this.load(null, values);
   }
 }
