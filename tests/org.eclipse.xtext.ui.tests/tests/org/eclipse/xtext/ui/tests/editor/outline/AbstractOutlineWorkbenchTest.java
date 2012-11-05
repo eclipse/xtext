@@ -13,10 +13,12 @@ import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jdt.internal.launching.EECompilationParticipant;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
@@ -68,16 +70,17 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		editor = openEditor(file);
 		document = editor.getDocument();
 		outlineView = editor.getEditorSite().getPage().showView("org.eclipse.ui.views.ContentOutline");
+		executeAsyncDisplayJobs();
 		Object adapter = editor.getAdapter(IContentOutlinePage.class);
 		assertTrue(adapter instanceof SyncableOutlinePage);
 		outlinePage = (SyncableOutlinePage) adapter;
-		treeViewer = outlinePage.getTreeViewer();
 		outlinePage.resetSyncer();
 		try {
 			outlinePage.waitForUpdate(EXPECTED_TIMEOUT);
 		} catch (TimeoutException e) {
 			System.out.println("Expected timeout exceeded: "+EXPECTED_TIMEOUT);// timeout is OK here
 		}
+		treeViewer = outlinePage.getTreeViewer();
 		assertSelected(treeViewer);
 		assertExpanded(treeViewer);
 		assertTrue(treeViewer.getInput() instanceof IOutlineNode);
@@ -98,6 +101,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		super.tearDown();
 		editor.close(false);
 		outlineView.getSite().getPage().hideView(outlineView);
+		executeAsyncDisplayJobs();
 	}
 
 	@Override
@@ -142,4 +146,8 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		editor.getSite().getPage().activate(part);
 	}
 
+	protected void executeAsyncDisplayJobs() {
+		while(Display.getCurrent().readAndDispatch()) {
+		}
+	}
 }
