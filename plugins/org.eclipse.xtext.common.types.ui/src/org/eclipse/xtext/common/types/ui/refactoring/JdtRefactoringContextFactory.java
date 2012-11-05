@@ -48,7 +48,7 @@ public class JdtRefactoringContextFactory extends IRenameContextFactory.Default 
 	}
 
 	/** 
-	 * @return true, iff the targetElement belongs to an IMember 
+	 * @return true, iff the targetElement is a JvmMember.
 	 */
 	protected boolean isJvmMember(EObject targetElement) {
 		return targetElement.eClass() != null && targetElement.eClass().getEPackage() == TypesPackage.eINSTANCE

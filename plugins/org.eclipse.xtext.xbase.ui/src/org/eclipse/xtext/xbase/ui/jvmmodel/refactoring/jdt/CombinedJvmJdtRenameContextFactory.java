@@ -51,6 +51,15 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 	private OperatorMappingUtil operatorMappingUtil;
 
 	@Override
+	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
+			ITextSelection selection, XtextResource resource) {
+		if(operatorMappingUtil.isMappedOperator(targetElement) && selection.getLength() < "operator".length()) 
+			return null;
+		else
+			return super.createRenameElementContext(targetElement, editor, selection, resource);
+	}
+	
+	@Override
 	public IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
 		if (!isJvmMember(targetElement) || !isTypeResource(targetElement)) {
@@ -71,12 +80,10 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 				}
 			}
 		}
-		if (operatorMappingUtil.isMappedOperator(targetElement))
-			return null;
 		if (targetElement instanceof JvmFormalParameter || targetElement instanceof JvmTypeParameter) {
 			EObject sourceParameter = associations.getPrimarySourceElement(targetElement);
 			if (sourceParameter != null)
-				return super.createRenameElementContext(sourceParameter, editor, selection, resource);
+				return super.createLocalRenameElementContext(sourceParameter, editor, selection, resource);
 		}
 		return super.createLocalRenameElementContext(targetElement, editor, selection, resource);
 	}
