@@ -30,18 +30,25 @@ class XtypeFormatterTest extends AbstractFormatterTest {
 		assertFormatted('''
 			import java.util.*
 			
-			abstract class Foo extends AbstractList<String> implements List<String>, Collection<String> {
+			abstract class Foo extends AbstractMap<String, Collection<?>> implements List<String>, Map<String, Collection<?>> {
 				String[] field
 			
 				def String[] methode(String[] param) {
 					val String[] valTypes = null
 					val featureCall1 = <String>newArrayList
-					val featureCall2 = <String, String>newHashMap
+					val featureCall2 = <String, Collection<?>>newHashMap
 					val memberFeatureCall1 = featureCall1.<String>toList
-					val memberFeatureCall2 = featureCall1.<String, String>toMap[it]
-					val constructorCallTypes = new ArrayList<String>
-					val closure1 = [Collection<String> x|x]
-					val closure2 = [Collection<String> x, Collection<String> y|x]
+					val memberFeatureCall2 = featureCall1.<String, Collection<?>>toMap[it]
+					val constructorCall1 = new ArrayList<String>
+					val constructorCall2 = new HashMap<String, Collection<?>>
+					val slclosure1 = [Collection<String> x|x]
+					val slclosure2 = [Collection<String> x, Map<String, Collection<?>> y|x]
+					val mlclosure1 = [ Collection<String> x |
+						x
+					]
+					val mlclosure2 = [ Collection<String> x, Map<String, Collection<?>> y |
+						x
+					]
 					null
 				}
 			}

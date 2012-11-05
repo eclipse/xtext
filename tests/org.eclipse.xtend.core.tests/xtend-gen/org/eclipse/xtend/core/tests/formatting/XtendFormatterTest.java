@@ -1171,10 +1171,10 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatSwitchSLParenthesis() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("switch (\'x\') { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
+    _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("switch  (\'x\')  {   case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')    }");
+    _builder_1.append("switch  \'x\'  {   case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')    }");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
@@ -1206,7 +1206,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatSwitchCaseSLParenthesis() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("switch (\'x\') {");
+    _builder.append("switch \'x\' {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("case \'x\': println(\'x\')");
@@ -1217,7 +1217,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("switch   (\'x\')  {   ");
+    _builder_1.append("switch   \'x\'  {   ");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')");
@@ -1343,15 +1343,15 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("newArrayList(9, 10, 11, 12),");
+    _builder.append("newArrayList(9),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("newArrayList(13, 14, 15, 16)");
+    _builder.append("newArrayList(10)");
     _builder.newLine();
     _builder.append(")");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), newArrayList(9, 10, 11, 12), newArrayList(13, 14, 15, 16)");
+    _builder_1.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4), newArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), newArrayList(9), newArrayList(10)");
     _builder_1.newLine();
     _builder_1.append(")");
     _builder_1.newLine();
@@ -1906,5 +1906,57 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.append("try  {   println(\"x\")  }   catch   (   Exception   e   )  {  println(\"y\")  } catch   (   Exception   f  )  {  println(\"z\")  } finally  {  println(\"a\")  }");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatPreferencesExample() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Movies {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def settings(XtendFormatterConfig config) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<FormatterSetting> settings = newArrayList()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (entry : config.namedProperties.entrySet) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val key = entry.key");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val category = key.split(\".\").head");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("var catEnum = Category::byName(category)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if (catEnum == null)");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("catEnum = Category::OTHER");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("settings.add(");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("createSetting(catEnum, SettingsData$WidgetType::NUMBER_FIELD,");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("key, key.toFirstUpper, newArrayList(entry.value.name)))");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return settings");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
   }
 }

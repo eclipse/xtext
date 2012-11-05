@@ -3,15 +3,16 @@ package org.eclipse.xtend.core.formatting;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.RichStringFormatterImpl;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
-import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 @SuppressWarnings("all")
 public class RichStringFormatter {
@@ -21,7 +22,7 @@ public class RichStringFormatter {
   @Inject
   private RichStringProcessor richStringProcessor;
   
-  public FormattingData format(final XtendFormatter formatter, final FormattableDocument doc, final RichString richString) {
+  public FormattingData format(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString richString) {
     FormattingData _xblockexpression = null;
     {
       final RichStringFormatterImpl impl = this.provider.get();

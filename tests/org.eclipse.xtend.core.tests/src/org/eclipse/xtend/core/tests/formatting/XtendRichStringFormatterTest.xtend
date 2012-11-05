@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
-import org.junit.Ignore
 
 class XtendRichStringFormatterTest extends AbstractFormatterTest {
 	

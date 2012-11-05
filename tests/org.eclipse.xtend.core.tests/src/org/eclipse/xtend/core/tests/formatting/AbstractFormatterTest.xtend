@@ -1,9 +1,11 @@
 package org.eclipse.xtend.core.tests.formatting
 
+import java.util.Collection
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig
+import org.eclipse.xtend.core.formatting.TextReplacement
 import org.eclipse.xtend.core.formatting.XtendFormatter
+import org.eclipse.xtend.core.formatting.XtendFormatterConfig
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.InjectWith
@@ -12,8 +14,6 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Assert
 import org.junit.runner.RunWith
-import java.util.List
-import org.eclipse.xtend.core.formatting.TextReplacement
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
@@ -22,7 +22,7 @@ abstract class AbstractFormatterTest {
 	@Inject XtendFormatter formatter
 	
 	def assertFormatted(CharSequence toBeFormatted) {
-		assertFormatted(toBeFormatted, toBeFormatted.parse.flattenWhitespace)
+		assertFormatted(toBeFormatted, toBeFormatted /* .parse.flattenWhitespace  */)
 	}
 	
 	def private toFile(CharSequence expression) '''
@@ -65,6 +65,19 @@ abstract class AbstractFormatterTest {
 		result.toString
 	}
 	
+	def createMissingEditReplacements(XtextResource res, Collection<TextReplacement> edits) {
+		val offsets = edits.map[offset].toSet
+		val result = <TextReplacement>newArrayList
+		var lastOffset = 0
+		for(leaf:res.parseResult.rootNode.leafNodes) 
+			if(!leaf.hidden || !leaf.text.trim.empty) {
+				if(!offsets.contains(lastOffset))
+					result += new TextReplacement(lastOffset, leaf.offset - lastOffset, "!!")
+				lastOffset = leaf.offset + leaf.length
+			}
+		result
+	}
+	
 	def assertFormatted(CharSequence expectation, CharSequence toBeFormatted) {
 		val parsed = toBeFormatted.parse
 		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
@@ -75,7 +88,9 @@ abstract class AbstractFormatterTest {
 		formatter.allowIdentityEdits = true
 		
 		// Step 1: Ensure formatted document equals expectation 
-		val edits = formatter.format(parsed.eResource as XtextResource, 0, oldDocument.length, rc)
+		val edits = <TextReplacement>newLinkedHashSet
+		edits += formatter.format(parsed.eResource as XtextResource, 0, oldDocument.length, rc)
+		edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits)
 		val newDocument = oldDocument.applyEdits(edits)
 		try {
 			Assert::assertEquals(expectation.toString, newDocument.toString)
@@ -100,7 +115,7 @@ abstract class AbstractFormatterTest {
 		}
 	}
 	
-	def protected String applyEdits(String oldDocument, List<TextReplacement> edits) {
+	def protected String applyEdits(String oldDocument, Collection<TextReplacement> edits) {
 		var lastOffset = 0
 		val newDocument = new StringBuilder()
 		for(edit:edits.sortBy[offset]) {
@@ -112,7 +127,7 @@ abstract class AbstractFormatterTest {
 		newDocument.toString
 	}
 	
-	def protected String applyDebugEdits(String oldDocument, List<TextReplacement> edits) {
+	def protected String applyDebugEdits(String oldDocument, Collection<TextReplacement> edits) {
 		var lastOffset = 0
 		val debugTrace = new StringBuilder()
 		for(edit:edits.sortBy[offset]) {

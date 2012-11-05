@@ -4,20 +4,24 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
-import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor.ForLoopOnce;
+import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 @SuppressWarnings("all")
 public class RichStringFormatterImpl extends ForLoopOnce {
@@ -27,13 +31,13 @@ public class RichStringFormatterImpl extends ForLoopOnce {
   @Inject
   private FormatterExtensions _formatterExtensions;
   
-  private XtendFormatter _formatter;
+  private Procedure2<? super EObject,? super FormattableDocument> _formatter;
   
-  public XtendFormatter getFormatter() {
+  public Procedure2<? super EObject,? super FormattableDocument> getFormatter() {
     return this._formatter;
   }
   
-  public void setFormatter(final XtendFormatter formatter) {
+  public void setFormatter(final Procedure2<? super EObject,? super FormattableDocument> formatter) {
     this._formatter = formatter;
   }
   
@@ -242,5 +246,31 @@ public class RichStringFormatterImpl extends ForLoopOnce {
     int _length_5 = text.length();
     int _plus_3 = (this.offset + _length_5);
     this.offset = _plus_3;
+  }
+  
+  public void acceptIfCondition(final XExpression condition) {
+    EObject _eContainer = condition.eContainer();
+    if ((_eContainer instanceof RichStringIf)) {
+      EObject _eContainer_1 = condition.eContainer();
+      final RichStringIf rsif = ((RichStringIf) _eContainer_1);
+      FormattableDocument _document = this.getDocument();
+      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(rsif, "IF");
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      Iterable<FormattingData> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+      _document.operator_add(_append);
+    }
+    Procedure2<? super EObject,? super FormattableDocument> _formatter = this.getFormatter();
+    FormattableDocument _document_1 = this.getDocument();
+    _formatter.apply(condition, _document_1);
+  }
+  
+  public void acceptExpression(final XExpression expression, final CharSequence indentation) {
+    Procedure2<? super EObject,? super FormattableDocument> _formatter = this.getFormatter();
+    FormattableDocument _document = this.getDocument();
+    _formatter.apply(expression, _document);
   }
 }

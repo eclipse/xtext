@@ -11,12 +11,15 @@ import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.XbasePackage$Literals
 import java.util.List
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtend.core.xtend.RichStringIf
+import org.eclipse.emf.ecore.EObject
 
 class RichStringFormatter {
 	@Inject Provider<RichStringFormatterImpl> provider
 	@Inject RichStringProcessor richStringProcessor
 	
-	def format(XtendFormatter formatter, FormattableDocument doc, RichString richString) {
+	def format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
 		val impl = provider.get
 		impl.formatter = formatter
 		impl.document = doc
@@ -34,7 +37,7 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 	
 	@Inject extension NodeModelAccess
 	@Inject extension FormatterExtensions
-	@Property XtendFormatter formatter
+	@Property var (EObject, FormattableDocument)=>void formatter
 	@Property FormattableDocument document
 	
 	int offset
@@ -107,6 +110,18 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 			afterNewLine = false
 		}
 		offset = offset + text.length
+	}
+	
+	override acceptIfCondition(XExpression condition) {
+		if(condition.eContainer instanceof RichStringIf) {
+			val rsif = condition.eContainer as RichStringIf
+			document += rsif.nodeForKeyword("IF").append[oneSpace]
+		}
+		formatter.apply(condition, document)
+	}
+	
+	override acceptExpression(XExpression expression, CharSequence indentation) {
+		formatter.apply(expression, document)
 	}
 	
 }

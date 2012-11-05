@@ -1,6 +1,11 @@
 package org.eclipse.xtend.core.tests.formatting;
 
+import com.google.common.collect.Iterables;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -20,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -40,13 +46,7 @@ public abstract class AbstractFormatterTest {
   private XtendFormatter formatter;
   
   public void assertFormatted(final CharSequence toBeFormatted) {
-    try {
-      XtendFile _parse = this._parseHelper.parse(toBeFormatted);
-      String _flattenWhitespace = this.flattenWhitespace(_parse);
-      this.assertFormatted(toBeFormatted, _flattenWhitespace);
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    this.assertFormatted(toBeFormatted, toBeFormatted);
   }
   
   private CharSequence toFile(final CharSequence expression) {
@@ -135,6 +135,55 @@ public abstract class AbstractFormatterTest {
     return _xblockexpression;
   }
   
+  public ArrayList<TextReplacement> createMissingEditReplacements(final XtextResource res, final Collection<TextReplacement> edits) {
+    ArrayList<TextReplacement> _xblockexpression = null;
+    {
+      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
+          public Integer apply(final TextReplacement it) {
+            int _offset = it.getOffset();
+            return Integer.valueOf(_offset);
+          }
+        };
+      Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
+      final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
+      final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
+      int lastOffset = 0;
+      IParseResult _parseResult = res.getParseResult();
+      ICompositeNode _rootNode = _parseResult.getRootNode();
+      Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
+      for (final ILeafNode leaf : _leafNodes) {
+        boolean _or = false;
+        boolean _isHidden = leaf.isHidden();
+        boolean _not = (!_isHidden);
+        if (_not) {
+          _or = true;
+        } else {
+          String _text = leaf.getText();
+          String _trim = _text.trim();
+          boolean _isEmpty = _trim.isEmpty();
+          boolean _not_1 = (!_isEmpty);
+          _or = (_not || _not_1);
+        }
+        if (_or) {
+          boolean _contains = offsets.contains(Integer.valueOf(lastOffset));
+          boolean _not_2 = (!_contains);
+          if (_not_2) {
+            int _offset = leaf.getOffset();
+            int _minus = (_offset - lastOffset);
+            TextReplacement _textReplacement = new TextReplacement(lastOffset, _minus, "!!");
+            result.add(_textReplacement);
+          }
+          int _offset_1 = leaf.getOffset();
+          int _length = leaf.getLength();
+          int _plus = (_offset_1 + _length);
+          lastOffset = _plus;
+        }
+      }
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
   public void assertFormatted(final CharSequence expectation, final CharSequence toBeFormatted) {
     try {
       final XtendFile parsed = this._parseHelper.parse(toBeFormatted);
@@ -158,9 +207,14 @@ public abstract class AbstractFormatterTest {
         };
       final XtendFormatterConfig rc = ObjectExtensions.<XtendFormatterConfig>operator_doubleArrow(_xtendFormatterConfig, _function);
       this.formatter.setAllowIdentityEdits(true);
+      final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();
       int _length = oldDocument.length();
-      final List<TextReplacement> edits = this.formatter.format(((XtextResource) _eResource_3), 0, _length, rc);
+      List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), 0, _length, rc);
+      Iterables.<TextReplacement>addAll(edits, _format);
+      Resource _eResource_4 = parsed.eResource();
+      ArrayList<TextReplacement> _createMissingEditReplacements = this.createMissingEditReplacements(((XtextResource) _eResource_4), edits);
+      Iterables.<TextReplacement>addAll(edits, _createMissingEditReplacements);
       final String newDocument = this.applyEdits(oldDocument, edits);
       try {
         String _string = expectation.toString();
@@ -178,13 +232,13 @@ public abstract class AbstractFormatterTest {
         }
       }
       final XtendFile parsed2 = this._parseHelper.parse(newDocument);
-      Resource _eResource_4 = parsed2.eResource();
-      EList<Diagnostic> _errors_2 = _eResource_4.getErrors();
+      Resource _eResource_5 = parsed2.eResource();
+      EList<Diagnostic> _errors_2 = _eResource_5.getErrors();
       int _size_1 = _errors_2.size();
       Assert.assertEquals(0, _size_1);
-      Resource _eResource_5 = parsed2.eResource();
+      Resource _eResource_6 = parsed2.eResource();
       int _length_1 = newDocument.length();
-      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_5), 0, _length_1, rc);
+      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_6), 0, _length_1, rc);
       final String newDocument2 = this.applyEdits(newDocument, edits2);
       try {
         String _string_2 = newDocument.toString();
@@ -206,7 +260,7 @@ public abstract class AbstractFormatterTest {
     }
   }
   
-  protected String applyEdits(final String oldDocument, final List<TextReplacement> edits) {
+  protected String applyEdits(final String oldDocument, final Collection<TextReplacement> edits) {
     String _xblockexpression = null;
     {
       int lastOffset = 0;
@@ -241,7 +295,7 @@ public abstract class AbstractFormatterTest {
     return _xblockexpression;
   }
   
-  protected String applyDebugEdits(final String oldDocument, final List<TextReplacement> edits) {
+  protected String applyDebugEdits(final String oldDocument, final Collection<TextReplacement> edits) {
     String _xblockexpression = null;
     {
       int lastOffset = 0;
