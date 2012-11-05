@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import org.apache.log4j.Logger;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.TextReplacement;
@@ -13,6 +14,7 @@ import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -21,6 +23,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FormattableDocument {
+  private final static Logger log = new Function0<Logger>() {
+    public Logger apply() {
+      Logger _logger = Logger.getLogger(FormattableDocument.class);
+      return _logger;
+    }
+  }.apply();
+  
   private final XtendFormatterConfig _cfg;
   
   public XtendFormatterConfig getCfg() {
@@ -86,8 +95,6 @@ public class FormattableDocument {
         TreeMap<Integer,FormattingData> _formattings = this.getFormattings();
         int _offset_2 = data.getOffset();
         final FormattingData old = _formattings.get(Integer.valueOf(_offset_2));
-        TreeMap<Integer,FormattingData> _formattings_1 = this.getFormattings();
-        int _offset_3 = data.getOffset();
         FormattingData _xifexpression_1 = null;
         boolean _equals = Objects.equal(old, null);
         if (_equals) {
@@ -96,8 +103,16 @@ public class FormattableDocument {
           FormattingData _merge = this.merge(old, data);
           _xifexpression_1 = _merge;
         }
-        FormattingData _put = _formattings_1.put(Integer.valueOf(_offset_3), _xifexpression_1);
-        _xblockexpression = (_put);
+        final FormattingData newData = _xifexpression_1;
+        FormattingData _xifexpression_2 = null;
+        boolean _notEquals_1 = (!Objects.equal(newData, null));
+        if (_notEquals_1) {
+          TreeMap<Integer,FormattingData> _formattings_1 = this.getFormattings();
+          int _offset_3 = data.getOffset();
+          FormattingData _put = _formattings_1.put(Integer.valueOf(_offset_3), newData);
+          _xifexpression_2 = _put;
+        }
+        _xblockexpression = (_xifexpression_2);
       }
       _xifexpression = _xblockexpression;
     }
@@ -163,14 +178,19 @@ public class FormattableDocument {
         }
         _xifexpression = _switchResult;
       } else {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Can not merge ");
-        _builder.append(data1, "");
-        _builder.append(" and ");
-        _builder.append(data2, "");
-        _builder.append(".");
-        IllegalStateException _illegalStateException = new IllegalStateException(_builder.toString());
-        throw _illegalStateException;
+        FormattingData _xblockexpression_1 = null;
+        {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Can not merge ");
+          _builder.append(data1, "");
+          _builder.append(" and ");
+          _builder.append(data2, "");
+          _builder.append(".");
+          IllegalStateException _illegalStateException = new IllegalStateException(_builder.toString());
+          FormattableDocument.log.error(_illegalStateException);
+          _xblockexpression_1 = (null);
+        }
+        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }

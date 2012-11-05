@@ -4,8 +4,10 @@ import org.eclipse.xtend.lib.Property
 import java.util.List
 import java.util.TreeMap
 import org.eclipse.xtend.core.formatting.WhitespaceData
+import org.apache.log4j.Logger
 
 class FormattableDocument {
+	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
 	@Property val XtendFormatterConfig cfg
 	@Property val String document
 	@Property TreeMap<Integer, FormattingData> formattings
@@ -30,7 +32,9 @@ class FormattableDocument {
 					throw new IllegalStateException("Can non format non-whitespace: "+oldText)
 			}
 			val old = formattings.get(data.offset)
-			formattings.put(data.offset, if(old == null) data else merge(old, data))
+			val newData = if(old == null) data else merge(old, data)
+			if(newData != null)
+				formattings.put(data.offset, newData)
 		}
 	}
 	
@@ -49,8 +53,10 @@ class FormattableDocument {
 				NewLineData: new NewLineData(old.offset, old.length, indentationChange, old.newLines)
 				WhitespaceData: new WhitespaceData(old.offset, old.length, indentationChange, old.space)
 			}
-		else 
-			throw new IllegalStateException('''Can not merge «data1» and «data2».''')
+		else {
+			log.error(new IllegalStateException('''Can not merge «data1» and «data2».'''))
+			null
+		}
 	}
 	
 	def operator_add(FormattingData data) {
