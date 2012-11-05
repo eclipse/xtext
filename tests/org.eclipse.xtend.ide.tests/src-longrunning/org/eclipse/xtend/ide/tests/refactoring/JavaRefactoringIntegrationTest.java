@@ -29,6 +29,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -39,9 +40,9 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -59,7 +60,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	protected IRenameRefactoringProvider renameRefactoringProvider;
 
 	@Inject
-	protected JvmModelRenameElementHandler renameElementHandler;
+	protected IRenameContextFactory renameContextFactory;
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
@@ -434,7 +435,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String xtendCallerModel = "class XtendCaller { def bar(XtendClass x) { x.foo(null) } }";
 		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		// on Galileo, _foo is a discouraged method name
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
 		synchronize(editor);
 		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
@@ -450,7 +452,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String xtendCallerModel = "class XtendCaller { def bar(XtendClass x) { x.foo(null) } }";
 		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
 		final XtextEditor editor = testHelper.openEditor(xtendCaller);
-		renameXtendElement(editor, xtendCallerModel.indexOf("foo"), "baz");
+		// on Galileo, _foo is a discouraged method name
+		renameXtendElement(editor, xtendCallerModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
 		synchronize(editor);
 		assertEquals(xtendCallerModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(xtendClass, xtendModel.replace("foo", "baz"));
@@ -843,13 +846,19 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertTrue(fileContents, fileContents.contains(contents));
 	}
 
-	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
+	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName, int allowedSeverity) throws Exception {
+		while(Display.getCurrent().readAndDispatch()) {}
 		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-		assertTrue(status.toString(), status.isOK());
+		assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());
 		Change undoChange = change.perform(new NullProgressMonitor());
+		while(Display.getCurrent().readAndDispatch()) {}
 		return undoChange;
+	}
+
+	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
+		return renameXtendElement(editor, offset, newName, RefactoringStatus.OK);
 	}
 
 	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
@@ -878,7 +887,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, offset);
-						return renameElementHandler.createRenameElementContext(element, editor, new TextSelection(
+						return renameContextFactory.createRenameElementContext(element, editor, new TextSelection(
 								offset, 1), state);
 					}
 				});
