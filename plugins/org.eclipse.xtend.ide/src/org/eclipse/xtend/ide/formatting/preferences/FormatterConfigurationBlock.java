@@ -38,7 +38,6 @@ import com.google.inject.name.Named;
  */
 public abstract class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 
-	private static final String PREVIEW_CONTENT = "package testpackage class XtendClass { extension Extension def fooBarBaz(String it) { fooBarBaz } }"; //$NON-NLS-1$
 
 	@Inject
 	private XtendPreviewFactory previewFactory;
@@ -63,14 +62,15 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 	@Override
 	protected void configurePreview(Composite composite, int numColumns, ProfileManager profileManager) {
 		createLabel(composite, Messages.FormatterConfigurationBlock_XtendCodePreview, numColumns);
-		XtendFormatterPreview xtendPreview = previewFactory.createNewPreview(composite, PREVIEW_CONTENT);
+		XtendFormatterPreview xtendPreview = previewFactory.createNewPreview(composite,
+				PreviewCode.defaultPreviewText());
 		final GridData gd = new GridData(GridData.FILL_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL);
 		gd.horizontalSpan = numColumns;
 		gd.verticalSpan = 7;
 		gd.widthHint = 0;
 		gd.heightHint = 0;
 
-		xtendPreview.getEditor().getViewer().getControl().setLayoutData(gd);
+		xtendPreview.getEditorViewer().getControl().setLayoutData(gd);
 		profileManager.addObserver(xtendPreview.getObserver());
 		xtendPreview.doFormat(profileManager.getSelected().getSettings());
 	}
