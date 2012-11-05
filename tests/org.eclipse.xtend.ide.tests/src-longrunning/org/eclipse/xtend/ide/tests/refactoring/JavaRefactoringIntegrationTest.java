@@ -461,13 +461,33 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	public void testDontRenameOperator() throws Exception {
+	public void testDontRenameOperatorCall() throws Exception {
 		String xtendModel = "class XtendClass { def bar() { 1 + 2 } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf('+');
 		IRenameElementContext renameElementContext = createRenameElementContext(editor, offset);
 		assertNull(renameElementContext);
+	}
+
+	@Test
+	public void testDontRenameOperatorDefWhenReferenced() throws Exception {
+		String xtendModel = "class XtendClass { def operator_plus(int i) {} def bar() { this + 2 } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.indexOf("operator_plus");
+		renameXtendElementWithError(editor, offset, "operator_minus");
+	}
+
+	@Test
+	public void testRenameOperatorDefWhenNotReferenced() throws Exception {
+		String xtendModel = "class XtendClass { def operator_plus(int i) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.indexOf("operator_plus");
+		renameXtendElement(editor, offset, "operator_minus");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("operator_plus", "operator_minus"), editor.getDocument().get());
 	}
 
 	@Test
