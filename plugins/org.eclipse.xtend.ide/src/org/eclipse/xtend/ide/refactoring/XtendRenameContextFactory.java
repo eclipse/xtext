@@ -27,16 +27,16 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContext;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContextFactory;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendRenameElementHandler extends JvmModelRenameElementHandler {
-
+public class XtendRenameContextFactory extends CombinedJvmJdtRenameContextFactory {
+	
 	@Inject
 	private IXtendJvmAssociations associations;
 
@@ -44,7 +44,7 @@ public class XtendRenameElementHandler extends JvmModelRenameElementHandler {
 	private DispatchingSupport dispatchingSupport;
 
 	@Override
-	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
+	public IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
 		if (!isJvmMember(targetElement) || !isTypeResource(targetElement)) {
 			EObject declarationTarget = getDeclarationTarget(targetElement);
@@ -64,7 +64,7 @@ public class XtendRenameElementHandler extends JvmModelRenameElementHandler {
 				}
 			}
 		}
-		return super.createRenameElementContext(targetElement, editor, selection, resource);
+		return super.createLocalRenameElementContext(targetElement, editor, selection, resource);
 	}
 
 	@Override
