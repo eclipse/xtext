@@ -10,11 +10,6 @@ class AbstractConfiguration extends AbstractEntry {
 		super(key)
 	}
 
-	new(Map<String, String> values) {
-		super(null)
-		load(null, values)
-	}
-
 	def List<AbstractEntry> getEntries() {
 		getClass.declaredFields.map[
 			if (typeof(AbstractEntry).isAssignableFrom(it.type))
