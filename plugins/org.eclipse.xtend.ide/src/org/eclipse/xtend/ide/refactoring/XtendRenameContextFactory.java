@@ -7,27 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.refactoring;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
-import static java.util.Collections.*;
 
-import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContext;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContextFactory;
 
 import com.google.inject.Inject;
@@ -36,32 +36,41 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendRenameContextFactory extends CombinedJvmJdtRenameContextFactory {
-	
+
 	@Inject
 	private IXtendJvmAssociations associations;
 
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	private DispatchRenameSupport dispatchRenameSupport;
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+
+	@Inject
+	private ProjectUtil projectUtil;
 
 	@Override
 	public IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (!isJvmMember(targetElement) || !isTypeResource(targetElement)) {
-			EObject declarationTarget = getDeclarationTarget(targetElement);
-			if (declarationTarget instanceof XtendFunction && ((XtendFunction) declarationTarget).isDispatch()) {
-				JvmOperation dispatcher = associations.getDispatchOperation((XtendFunction) declarationTarget);
-				XtendClass xtendClass = ((XtendClass) declarationTarget.eContainer());
-				Collection<JvmOperation> dispatchCases = dispatchingSupport.getDispatcher2dispatched(xtendClass, true)
-						.get(dispatcher);
-				Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
-				for (JvmOperation jvmOperation : concat(dispatchCases, singleton(dispatcher))) {
-					IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmOperation);
-					if (javaElement != null)
-						addDeclaringMethod(jvmOperation, javaElement, jvm2javaElement);
+		EObject declarationTarget = getDeclarationTarget(targetElement);
+		if (declarationTarget instanceof XtendFunction && ((XtendFunction) declarationTarget).isDispatch()) {
+			IProject project = projectUtil.getProject(declarationTarget.eResource().getURI());
+			ResourceSet resourceSet = resourceSetProvider.get(project);
+			XtendFunction relaodedDispatchFunction = (XtendFunction) resourceSet.getEObject(
+					EcoreUtil2.getNormalizedURI(declarationTarget), true);
+			Iterable<JvmOperation> allDispatchOperations = dispatchRenameSupport
+					.getAllDispatchOperations(relaodedDispatchFunction);
+			Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
+			for (JvmOperation jvmOperation : allDispatchOperations) {
+				IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmOperation);
+				if (javaElement != null) {
+					URI jvmOperationURI = EcoreUtil.getURI(jvmOperation);
+					jvm2javaElement.put(jvmOperationURI, javaElement);
 				}
-				if (!jvm2javaElement.isEmpty()) {
-					return new CombinedJvmJdtRenameContext(declarationTarget, jvm2javaElement, editor, selection, resource);
-				}
+			}
+			if (!jvm2javaElement.isEmpty()) {
+				return new DispatchMethodRenameContext(relaodedDispatchFunction, jvm2javaElement, editor, selection,
+						resource);
 			}
 		}
 		return super.createLocalRenameElementContext(targetElement, editor, selection, resource);

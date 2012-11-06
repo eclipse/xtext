@@ -8,17 +8,19 @@
 package org.eclipse.xtend.ide.refactoring;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.util.Strings.*;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -45,26 +47,32 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 	
 	private List<IRenameStrategy> children = newArrayList(); 
 	
+	private List<JvmOperation> dispatchers = newArrayList();
+	
 	public boolean initialize(EObject xtendMethod, IRenameElementContext context) {
 		Assert.isLegal(xtendMethod instanceof XtendFunction);
 		Assert.isLegal(((XtendFunction) xtendMethod).isDispatch());
+		Assert.isLegal(context instanceof DispatchMethodRenameContext);
 
-		JvmOperation dispatcher = associations.getDispatchOperation((XtendFunction)xtendMethod);
-		XtendClass xtendClass = ((XtendClass)xtendMethod.eContainer());
-		Collection<JvmOperation> dispatchCases = support.getDispatcher2dispatched(xtendClass, false).get(dispatcher);
-		for(JvmOperation dispatchCase: dispatchCases) {
-			XtendFunction xtendDispatchMethod = associations.getXtendFunction(dispatchCase);
+		System.out.println();
+		ResourceSet resourceSet = xtendMethod.eResource().getResourceSet();
+		Map<URI, IJavaElement> jvm2JavaElements = ((DispatchMethodRenameContext)context).getJvm2JavaElements();
+		for(URI dispatchOperationURI: jvm2JavaElements.keySet()) {
+			JvmOperation dispatchOperation = (JvmOperation) resourceSet.getEObject(dispatchOperationURI, true);
+			XtendFunction xtendDispatchMethod = associations.getXtendFunction(dispatchOperation);
 			if(xtendDispatchMethod != null) {
-				DispatchMethodChildStrategy childStrategy = childStrategyProvider.get();
-				childStrategy.initialize(xtendDispatchMethod, context);
-				children.add(childStrategy);
-			} else {
-				// TODO non local cases
+				if(equal(xtendDispatchMethod.getName(),dispatchOperation.getSimpleName())) {
+					dispatchers.add(dispatchOperation);
+				} else {
+					DispatchMethodChildStrategy childStrategy = childStrategyProvider.get();
+					childStrategy.initialize(xtendDispatchMethod, context);
+					children.add(childStrategy);
+				}
 			}
 		}
 		return !children.isEmpty();
 	}
-	
+
 	public static class DispatchMethodChildStrategy extends DefaultJvmModelRenameStrategy {
 		@Override
 		protected void setInferredJvmElementName(String name, EObject renamedElement) {
@@ -86,11 +94,17 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		for(IRenameStrategy child: children)
 			child.applyDeclarationChange(newName, resourceSet);
+		for(JvmOperation dispatcher: dispatchers) {
+			dispatcher.setSimpleName(newName);
+		}
 	}
 
 	public void revertDeclarationChange(ResourceSet resourceSet) {
 		for(IRenameStrategy child: children)
 			child.revertDeclarationChange(resourceSet);
+		for(JvmOperation dispatcher: dispatchers) {
+			dispatcher.setSimpleName(getOriginalName());
+		}
 	}
 
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,

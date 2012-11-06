@@ -444,6 +444,46 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendDispatchMethod_1() throws Exception {
+		String superModel = "class Super { def dispatch foo(Integer x) {} }";
+		IFile superClass = testHelper.createFile("Super.xtend", superModel);
+		String subModel = "class Sub extends Super { def dispatch foo(String x) {} }";
+		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
+		String javaCallerModel = "public class JavaCaller { void bar(Sub x) { x.foo(new Object()); x._foo(\"\"); } }";
+		IFile javaCaller = testHelper.createFile("JavaCaller.java", javaCallerModel);
+		String xtendCallerModel = "class XtendCaller { def bar(Super x) { x.foo(1) } }";
+		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
+		final XtextEditor editor = testHelper.openEditor(superClass);
+		// on Galileo, _foo is a discouraged method name
+		renameXtendElement(editor, superModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
+		synchronize(editor);
+		assertEquals(superModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
+		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
+		assertFileContains(subClass, subModel.replace("foo", "baz"));
+	}
+
+	@Test
+	public void testRenameXtendDispatchMethod_2() throws Exception {
+		String superModel = "class Super { def dispatch foo(Integer x) {} }";
+		IFile superClass = testHelper.createFile("Super.xtend", superModel);
+		String subModel = "class Sub extends Super { def dispatch foo(String x) {} }";
+		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
+		String javaCallerModel = "public class JavaCaller { void bar(Sub x) { x.foo(new Object()); x._foo(\"\"); } }";
+		IFile javaCaller = testHelper.createFile("JavaCaller.java", javaCallerModel);
+		String xtendCallerModel = "class XtendCaller { def bar(Super x) { x.foo(1) } }";
+		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
+		final XtextEditor editor = testHelper.openEditor(subClass);
+		// on Galileo, _foo is a discouraged method name
+		renameXtendElement(editor, subModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
+		synchronize(editor);
+		assertEquals(subModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
+		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
+		assertFileContains(superClass, superModel.replace("foo", "baz"));
+	}
+
+	@Test
 	public void testRenameRefToXtendDispatchMethod() throws Exception {
 		String xtendModel = "class XtendClass { def dispatch foo(Object x) {} def dispatch foo(String x) {} }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
@@ -874,6 +914,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());
 		Change undoChange = change.perform(new NullProgressMonitor());
 		while(Display.getCurrent().readAndDispatch()) {}
+		IResourcesSetupUtil.waitForAutoBuild();
 		return undoChange;
 	}
 
