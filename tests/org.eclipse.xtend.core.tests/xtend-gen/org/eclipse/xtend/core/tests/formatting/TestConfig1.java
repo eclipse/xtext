@@ -1,53 +1,47 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import java.util.Map;
-import org.eclipse.xtend.core.formatting.AbstractConfiguration;
-import org.eclipse.xtend.core.formatting.IntegerEntry;
-import org.eclipse.xtend.core.formatting.StringEntry;
-import org.eclipse.xtend.core.tests.formatting.TestNestedConfig1;
+import org.eclipse.xtend.core.formatting.AbstractConfigurationKeys;
+import org.eclipse.xtend.core.formatting.BooleanKey;
+import org.eclipse.xtend.core.formatting.IntegerKey;
+import org.eclipse.xtend.core.formatting.NewLineConfig;
+import org.eclipse.xtend.core.formatting.StringKey;
+import org.eclipse.xtend.core.formatting.TransientKey;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
-public class TestConfig1 extends AbstractConfiguration {
-  private final IntegerEntry _intval = new Function0<IntegerEntry>() {
-    public IntegerEntry apply() {
-      IntegerEntry _integerEntry = new IntegerEntry("intval", Integer.valueOf(42));
-      return _integerEntry;
+public class TestConfig1 extends AbstractConfigurationKeys {
+  public final IntegerKey intval = new Function0<IntegerKey>() {
+    public IntegerKey apply() {
+      IntegerKey _integerKey = new IntegerKey("intval", Integer.valueOf(42));
+      return _integerKey;
     }
   }.apply();
   
-  public IntegerEntry getIntval() {
-    return this._intval;
-  }
-  
-  private final StringEntry _strval = new Function0<StringEntry>() {
-    public StringEntry apply() {
-      StringEntry _stringEntry = new StringEntry("strval", "foo");
-      return _stringEntry;
+  public final StringKey strval = new Function0<StringKey>() {
+    public StringKey apply() {
+      StringKey _stringKey = new StringKey("strval", "foo");
+      return _stringKey;
     }
   }.apply();
   
-  public StringEntry getStrval() {
-    return this._strval;
-  }
-  
-  private final TestNestedConfig1 _child1 = new Function0<TestNestedConfig1>() {
-    public TestNestedConfig1 apply() {
-      TestNestedConfig1 _testNestedConfig1 = new TestNestedConfig1("child1");
-      return _testNestedConfig1;
+  public final BooleanKey boolval = new Function0<BooleanKey>() {
+    public BooleanKey apply() {
+      BooleanKey _booleanKey = new BooleanKey("boolval", Boolean.valueOf(true));
+      return _booleanKey;
     }
   }.apply();
   
-  public TestNestedConfig1 getChild1() {
-    return this._child1;
-  }
+  public final TransientKey<String> transientval = new Function0<TransientKey<String>>() {
+    public TransientKey<String> apply() {
+      TransientKey<String> _transientKey = new TransientKey<String>("transientval", "foo");
+      return _transientKey;
+    }
+  }.apply();
   
-  public TestConfig1() {
-    super(((String) null));
-  }
-  
-  public TestConfig1(final Map<String,String> values) {
-    this();
-    this.load(null, values);
-  }
+  public final NewLineConfig child1 = new Function0<NewLineConfig>() {
+    public NewLineConfig apply() {
+      NewLineConfig _newLineConfig = new NewLineConfig("newLineConfig", 2, 3);
+      return _newLineConfig;
+    }
+  }.apply();
 }

@@ -8,10 +8,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.core.formatting.FormattingData;
+import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.TextReplacement;
+import org.eclipse.xtend.core.formatting.TransientKey;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -30,9 +32,9 @@ public class FormattableDocument {
     }
   }.apply();
   
-  private final XtendFormatterConfig _cfg;
+  private final IConfigurationValues<XtendFormatterConfigKeys> _cfg;
   
-  public XtendFormatterConfig getCfg() {
+  public IConfigurationValues<XtendFormatterConfigKeys> getCfg() {
     return this._cfg;
   }
   
@@ -52,7 +54,7 @@ public class FormattableDocument {
     this._formattings = formattings;
   }
   
-  public FormattableDocument(final XtendFormatterConfig cfg, final String document) {
+  public FormattableDocument(final IConfigurationValues<XtendFormatterConfigKeys> cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
     TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
@@ -60,7 +62,7 @@ public class FormattableDocument {
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    XtendFormatterConfig _cfg = fmt.getCfg();
+    IConfigurationValues<XtendFormatterConfigKeys> _cfg = fmt.getCfg();
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
@@ -270,11 +272,9 @@ public class FormattableDocument {
               if (f instanceof NewLineData) {
                 final NewLineData _newLineData = (NewLineData)f;
                 _matched=true;
-                XtendFormatterConfig _cfg = this.getCfg();
                 int _newLines = _newLineData.getNewLines();
-                String _wrap = _cfg.getWrap(_newLines);
-                XtendFormatterConfig _cfg_1 = this.getCfg();
-                String _indentation = _cfg_1.getIndentation(indentation);
+                String _wrap = this.getWrap(_newLines);
+                String _indentation = this.getIndentation(indentation);
                 final String replacement = (_wrap + _indentation);
                 int _offset_3 = _newLineData.getOffset();
                 int _length_1 = _newLineData.getLength();
@@ -418,8 +418,7 @@ public class FormattableDocument {
         }
       }
       int _minus_1 = (offset - lineStart);
-      XtendFormatterConfig _cfg = this.getCfg();
-      int _indentationLenght = _cfg.getIndentationLenght(currentIndentation);
+      int _indentationLenght = this.getIndentationLenght(currentIndentation);
       int _plus_4 = (_minus_1 + _indentationLenght);
       int _plus_5 = (_plus_4 + lengthDiff);
       _xblockexpression = (_plus_5);
@@ -469,5 +468,73 @@ public class FormattableDocument {
       _xblockexpression = (_string);
     }
     return _xblockexpression;
+  }
+  
+  protected String getIndentation(final int levels) {
+    String _xifexpression = null;
+    boolean _greaterThan = (levels > 0);
+    if (_greaterThan) {
+      String _xblockexpression = null;
+      {
+        IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
+        IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
+        XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+        TransientKey<String> _indentation = _keys.getIndentation();
+        final String indent = _cfg.<String>get(_indentation);
+        int _minus = (levels - 1);
+        IntegerRange _upTo = new IntegerRange(0, _minus);
+        final Function1<Integer,String> _function = new Function1<Integer,String>() {
+            public String apply(final Integer it) {
+              return indent;
+            }
+          };
+        Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
+        String _join = IterableExtensions.join(_map);
+        _xblockexpression = (_join);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
+  }
+  
+  protected int getIndentationLenght(final int levels) {
+    IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
+    IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
+    XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+    TransientKey<Integer> _indentationLength = _keys.getIndentationLength();
+    Integer _get = _cfg.<Integer>get(_indentationLength);
+    int _multiply = (levels * (_get).intValue());
+    return _multiply;
+  }
+  
+  protected String getWrap(final int levels) {
+    String _xifexpression = null;
+    boolean _greaterThan = (levels > 0);
+    if (_greaterThan) {
+      String _xblockexpression = null;
+      {
+        IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
+        IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
+        XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+        TransientKey<String> _lineSeparator = _keys.getLineSeparator();
+        final String sep = _cfg.<String>get(_lineSeparator);
+        int _minus = (levels - 1);
+        IntegerRange _upTo = new IntegerRange(0, _minus);
+        final Function1<Integer,String> _function = new Function1<Integer,String>() {
+            public String apply(final Integer it) {
+              return sep;
+            }
+          };
+        Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
+        String _join = IterableExtensions.join(_map);
+        _xblockexpression = (_join);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
   }
 }

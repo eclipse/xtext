@@ -10,14 +10,15 @@ import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
-import org.eclipse.xtend.core.formatting.IntegerEntry;
+import org.eclipse.xtend.core.formatting.IConfigurationValues;
+import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.LeafInfo;
-import org.eclipse.xtend.core.formatting.NewLineConfig;
+import org.eclipse.xtend.core.formatting.NewLineConfigValue;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.formatting.WhitespaceInfo;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -26,6 +27,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class FormatterExtensions {
   @Inject
   private NodeModelAccess _nodeModelAccess;
+  
+  @Inject
+  private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
   
   public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
     FormattingDataInit _formattingDataInit = new FormattingDataInit();
@@ -85,12 +89,10 @@ public class FormatterExtensions {
     return _xblockexpression;
   }
   
-  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final NewLineConfig configuration, final int indentationChange) {
-    IntegerEntry _minNewLines = configuration.getMinNewLines();
-    int _value = _minNewLines.getValue();
-    IntegerEntry _maxNewLines = configuration.getMaxNewLines();
-    int _value_1 = _maxNewLines.getValue();
-    Iterable<FormattingData> _newFormattingData = this.newFormattingData(leafs, _value, _value_1, indentationChange);
+  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final NewLineConfigValue configuration, final int indentationChange) {
+    int _minNewLines = configuration.getMinNewLines();
+    int _maxNewLines = configuration.getMaxNewLines();
+    Iterable<FormattingData> _newFormattingData = this.newFormattingData(leafs, _minNewLines, _maxNewLines, indentationChange);
     return _newFormattingData;
   }
   
@@ -205,10 +207,10 @@ public class FormatterExtensions {
       int _lineLengthBefore = fmt.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      XtendFormatterConfig _cfg = fmt.getCfg();
-      IntegerEntry _maxLineWidth = _cfg.getMaxLineWidth();
-      int _value = _maxLineWidth.getValue();
-      return (line <= _value);
+      IConfigurationValues<XtendFormatterConfigKeys> _cfg = fmt.getCfg();
+      IntegerKey _maxLineWidth = this._xtendFormatterConfigKeys.getMaxLineWidth();
+      Integer _get = _cfg.<Integer>get(_maxLineWidth);
+      return (line <= (_get).intValue());
     }
   }
   
@@ -223,7 +225,7 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public Iterable<FormattingData> append(final INode node, final NewLineConfig configuration) {
+  public Iterable<FormattingData> append(final INode node, final NewLineConfigValue configuration) {
     Iterable<FormattingData> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
@@ -281,7 +283,7 @@ public class FormatterExtensions {
     return _xblockexpression;
   }
   
-  public Iterable<FormattingData> prepend(final INode node, final NewLineConfig configuration) {
+  public Iterable<FormattingData> prepend(final INode node, final NewLineConfigValue configuration) {
     Iterable<FormattingData> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {

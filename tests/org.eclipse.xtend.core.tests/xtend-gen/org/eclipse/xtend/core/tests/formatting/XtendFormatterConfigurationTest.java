@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.tests.formatting.TestConfig1;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -19,20 +19,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendFormatterConfigurationTest {
   @Test
-  public void testEquals() {
-    XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
-    final XtendFormatterConfig cfg = _xtendFormatterConfig;
-    final Map<String,String> map = cfg.asMap();
-    XtendFormatterConfig _xtendFormatterConfig_1 = new XtendFormatterConfig(map);
-    final XtendFormatterConfig cfg2 = _xtendFormatterConfig_1;
-    Assert.assertEquals(cfg, cfg2);
-  }
-  
-  @Test
-  public void testAsMap() {
+  public void testDefaultValues() {
     TestConfig1 _testConfig1 = new TestConfig1();
-    Map<String,String> _asMap = _testConfig1.asMap();
-    Set<Entry<String,String>> _entrySet = _asMap.entrySet();
+    MapBasedConfigurationValues<TestConfig1> _mapBasedConfigurationValues = new MapBasedConfigurationValues<TestConfig1>(_testConfig1);
+    Map<String,String> _store = _mapBasedConfigurationValues.store();
+    Set<Entry<String,String>> _entrySet = _store.entrySet();
     final Function1<Entry<String,String>,CharSequence> _function = new Function1<Entry<String,String>,CharSequence>() {
         public CharSequence apply(final Entry<String,String> it) {
           StringConcatenation _builder = new StringConcatenation();
@@ -50,9 +41,11 @@ public class XtendFormatterConfigurationTest {
     _builder.newLine();
     _builder.append("strval = foo");
     _builder.newLine();
-    _builder.append("child1.nested1 = foo");
+    _builder.append("boolval = true");
     _builder.newLine();
-    _builder.append("child1.child2.nested2 = foo");
+    _builder.append("newLineConfig.minNewLines = 2");
+    _builder.newLine();
+    _builder.append("newLineConfig.maxNewLines = 3");
     _builder.newLine();
     String _string = _builder.toString();
     String _trim = _string.trim();
@@ -62,13 +55,15 @@ public class XtendFormatterConfigurationTest {
   @Test
   public void testLoad() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("intval = 4");
+    _builder.append("intval = 420");
     _builder.newLine();
-    _builder.append("strval = bar");
+    _builder.append("strval = baz");
     _builder.newLine();
-    _builder.append("child1.nested1 = bar");
+    _builder.append("boolval = false");
     _builder.newLine();
-    _builder.append("child1.child2.nested2 = bar");
+    _builder.append("newLineConfig.minNewLines = 20");
+    _builder.newLine();
+    _builder.append("newLineConfig.maxNewLines = 30");
     _builder.newLine();
     String _string = _builder.toString();
     final String data = _string.trim();
@@ -85,10 +80,12 @@ public class XtendFormatterConfigurationTest {
         }
       };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(_split)), _function);
-    TestConfig1 _testConfig1 = new TestConfig1(map);
-    final TestConfig1 cfg = _testConfig1;
-    Map<String,String> _asMap = cfg.asMap();
-    Set<Entry<String,String>> _entrySet = _asMap.entrySet();
+    TestConfig1 _testConfig1 = new TestConfig1();
+    MapBasedConfigurationValues<TestConfig1> _mapBasedConfigurationValues = new MapBasedConfigurationValues<TestConfig1>(_testConfig1);
+    final MapBasedConfigurationValues<TestConfig1> cfg = _mapBasedConfigurationValues;
+    cfg.load(map);
+    Map<String,String> _store = cfg.store();
+    Set<Entry<String,String>> _entrySet = _store.entrySet();
     final Function1<Entry<String,String>,CharSequence> _function_1 = new Function1<Entry<String,String>,CharSequence>() {
         public CharSequence apply(final Entry<String,String> it) {
           StringConcatenation _builder = new StringConcatenation();

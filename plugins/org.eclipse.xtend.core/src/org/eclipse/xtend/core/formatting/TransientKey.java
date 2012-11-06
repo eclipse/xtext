@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.emf.ecore.resource.Resource;
-
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IFormatterConfigurationProvider {
+public class TransientKey<T> extends AbstractConfigurationKey<T> {
 
-	IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource);
+	public TransientKey(String name, T defaultValue) {
+		super(name, defaultValue);
+	}
 
 }

@@ -7,13 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.emf.ecore.resource.Resource;
-
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IFormatterConfigurationProvider {
+public abstract class AbstractConfigurationValues<K extends IConfigurationKeys> implements IConfigurationValues<K> {
 
-	IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource);
+	private final K keys;
+
+	public AbstractConfigurationValues(K keys) {
+		super();
+		this.keys = keys;
+	}
+
+	public K getKeys() {
+		return keys;
+	}
 
 }

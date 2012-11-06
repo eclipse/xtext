@@ -1,54 +1,56 @@
 package org.eclipse.xtend.core.formatting;
 
-import java.util.Map;
-import org.eclipse.xtend.core.formatting.AbstractConfiguration;
-import org.eclipse.xtend.core.formatting.IntegerEntry;
+import javax.inject.Singleton;
+import org.eclipse.xtend.core.formatting.AbstractConfigurationKeys;
+import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
-import org.eclipse.xtend.core.formatting.StringEntry;
+import org.eclipse.xtend.core.formatting.TransientKey;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerRange;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+@Singleton
 @SuppressWarnings("all")
-public class XtendFormatterConfig extends AbstractConfiguration {
-  private final StringEntry _lineSeparator = new Function0<StringEntry>() {
-    public StringEntry apply() {
-      StringEntry _stringEntry = new StringEntry("line.separator", "\n");
-      return _stringEntry;
+public class XtendFormatterConfigKeys extends AbstractConfigurationKeys {
+  private final TransientKey<String> _lineSeparator = new Function0<TransientKey<String>>() {
+    public TransientKey<String> apply() {
+      TransientKey<String> _transientKey = new TransientKey<String>("line.separator", "\n");
+      return _transientKey;
     }
   }.apply();
   
-  public StringEntry getLineSeparator() {
+  public TransientKey<String> getLineSeparator() {
     return this._lineSeparator;
   }
   
-  private final IntegerEntry _maxLineWidth = new Function0<IntegerEntry>() {
-    public IntegerEntry apply() {
-      IntegerEntry _integerEntry = new IntegerEntry("line.width.max", Integer.valueOf(120));
-      return _integerEntry;
+  private final IntegerKey _maxLineWidth = new Function0<IntegerKey>() {
+    public IntegerKey apply() {
+      IntegerKey _integerKey = new IntegerKey("line.width.max", Integer.valueOf(120));
+      return _integerKey;
     }
   }.apply();
   
-  public IntegerEntry getMaxLineWidth() {
+  public IntegerKey getMaxLineWidth() {
     return this._maxLineWidth;
   }
   
-  private final StringEntry _indentation = new Function0<StringEntry>() {
-    public StringEntry apply() {
-      StringEntry _stringEntry = new StringEntry("indentation", "\t");
-      return _stringEntry;
+  private final TransientKey<String> _indentation = new Function0<TransientKey<String>>() {
+    public TransientKey<String> apply() {
+      TransientKey<String> _transientKey = new TransientKey<String>("indentation", "\t");
+      return _transientKey;
     }
   }.apply();
   
-  private final IntegerEntry _indentationLength = new Function0<IntegerEntry>() {
-    public IntegerEntry apply() {
-      IntegerEntry _integerEntry = new IntegerEntry("indentation.length", Integer.valueOf(4));
-      return _integerEntry;
+  public TransientKey<String> getIndentation() {
+    return this._indentation;
+  }
+  
+  private final TransientKey<Integer> _indentationLength = new Function0<TransientKey<Integer>>() {
+    public TransientKey<Integer> apply() {
+      TransientKey<Integer> _transientKey = new TransientKey<Integer>("indentation.length", Integer.valueOf(4));
+      return _transientKey;
     }
   }.apply();
   
-  public IntegerEntry getIndentationLength() {
+  public TransientKey<Integer> getIndentationLength() {
     return this._indentationLength;
   }
   
@@ -171,63 +173,5 @@ public class XtendFormatterConfig extends AbstractConfiguration {
   
   public NewLineConfig getNewLinesAfterAnnotations() {
     return this._newLinesAfterAnnotations;
-  }
-  
-  public XtendFormatterConfig() {
-    super(((String) null));
-  }
-  
-  public XtendFormatterConfig(final Map<String,String> properties) {
-    this();
-    this.load(null, properties);
-  }
-  
-  public String getIndentation(final int levels) {
-    String _xifexpression = null;
-    boolean _greaterThan = (levels > 0);
-    if (_greaterThan) {
-      int _minus = (levels - 1);
-      IntegerRange _upTo = new IntegerRange(0, _minus);
-      final Function1<Integer,String> _function = new Function1<Integer,String>() {
-          public String apply(final Integer it) {
-            String _value = XtendFormatterConfig.this._indentation.getValue();
-            return _value;
-          }
-        };
-      Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
-      String _join = IterableExtensions.join(_map);
-      _xifexpression = _join;
-    } else {
-      _xifexpression = "";
-    }
-    return _xifexpression;
-  }
-  
-  public int getIndentationLenght(final int levels) {
-    IntegerEntry _indentationLength = this.getIndentationLength();
-    int _value = _indentationLength.getValue();
-    int _multiply = (levels * _value);
-    return _multiply;
-  }
-  
-  public String getWrap(final int levels) {
-    String _xifexpression = null;
-    boolean _greaterThan = (levels > 0);
-    if (_greaterThan) {
-      int _minus = (levels - 1);
-      IntegerRange _upTo = new IntegerRange(0, _minus);
-      final Function1<Integer,String> _function = new Function1<Integer,String>() {
-          public String apply(final Integer it) {
-            String _value = XtendFormatterConfig.this._lineSeparator.getValue();
-            return _value;
-          }
-        };
-      Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
-      String _join = IterableExtensions.join(_map);
-      _xifexpression = _join;
-    } else {
-      _xifexpression = "";
-    }
-    return _xifexpression;
   }
 }

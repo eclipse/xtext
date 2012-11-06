@@ -11,10 +11,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtend.core.formatting.IntegerEntry;
+import org.eclipse.xtend.core.formatting.IntegerKey;
+import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -30,8 +31,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -44,6 +43,9 @@ public abstract class AbstractFormatterTest {
   
   @Inject
   private XtendFormatter formatter;
+  
+  @Inject
+  private XtendFormatterConfigKeys keys;
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
@@ -198,14 +200,10 @@ public abstract class AbstractFormatterTest {
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String oldDocument = _rootNode.getText();
-      XtendFormatterConfig _xtendFormatterConfig = new XtendFormatterConfig();
-      final Procedure1<XtendFormatterConfig> _function = new Procedure1<XtendFormatterConfig>() {
-          public void apply(final XtendFormatterConfig it) {
-            IntegerEntry _maxLineWidth = it.getMaxLineWidth();
-            _maxLineWidth.setValue(80);
-          }
-        };
-      final XtendFormatterConfig rc = ObjectExtensions.<XtendFormatterConfig>operator_doubleArrow(_xtendFormatterConfig, _function);
+      MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(this.keys);
+      final MapBasedConfigurationValues<XtendFormatterConfigKeys> rc = _mapBasedConfigurationValues;
+      IntegerKey _maxLineWidth = this.keys.getMaxLineWidth();
+      rc.<Integer>put(_maxLineWidth, Integer.valueOf(80));
       this.formatter.setAllowIdentityEdits(true);
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();

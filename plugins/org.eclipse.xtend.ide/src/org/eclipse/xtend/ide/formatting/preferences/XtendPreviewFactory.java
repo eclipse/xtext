@@ -16,8 +16,10 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
@@ -85,8 +87,8 @@ public class XtendPreviewFactory {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void doFormat(final Map map) {
 			xtendFormatterFactory.setConfigurationProvider(new IFormatterConfigurationProvider() {
-				public XtendFormatterConfig getFormatterConfiguration(Resource resource) {
-					return new XtendFormatterConfig(map);
+				public IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource) {
+					return new MapBasedConfigurationValues<XtendFormatterConfigKeys>(new XtendFormatterConfigKeys(), map);
 				}
 			});
 			StyledText widget = null;
