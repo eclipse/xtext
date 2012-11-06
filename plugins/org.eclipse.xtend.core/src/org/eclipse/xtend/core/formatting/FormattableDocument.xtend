@@ -8,11 +8,11 @@ import org.apache.log4j.Logger
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
-	@Property val XtendFormatterConfig cfg
+	@Property val IConfigurationValues<XtendFormatterConfigKeys> cfg
 	@Property val String document
 	@Property TreeMap<Integer, FormattingData> formattings
 	
-	new(XtendFormatterConfig cfg, String document){
+	new(IConfigurationValues<XtendFormatterConfigKeys> cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()
@@ -88,7 +88,7 @@ class FormattableDocument {
 						}
 					}
 					NewLineData: {
-						val replacement = cfg.getWrap(f.newLines) + cfg.getIndentation(indentation)
+						val replacement = getWrap(f.newLines) + getIndentation(indentation)
 						replacements += new TextReplacement(f.offset, f.length, replacement)
 					}
 				}
@@ -155,7 +155,7 @@ class FormattableDocument {
 		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) 
 			if(f instanceof WhitespaceData)
 				lengthDiff = lengthDiff + (((f as WhitespaceData).space?.length ?: 0) - f.length)
-		(offset - lineStart) + cfg.getIndentationLenght(currentIndentation) + lengthDiff  
+		(offset - lineStart) + getIndentationLenght(currentIndentation) + lengthDiff  
 	}
 	
 	override toString() {
@@ -171,5 +171,26 @@ class FormattableDocument {
 		debugTrace.append(text)
 		debugTrace.toString
 	}
+	
+	def protected getIndentation(int levels) {
+		if (levels > 0) {
+			val indent = cfg.get(cfg.keys.indentation)
+			(0 .. levels - 1).map[indent].join
+		} else
+			""
+	}
+
+	def protected getIndentationLenght(int levels) {
+		levels * cfg.get(cfg.keys.indentationLength)
+	}
+
+	def protected getWrap(int levels) {
+		if (levels > 0) {
+			val sep = cfg.get(cfg.keys.lineSeparator)
+			(0 .. levels - 1).map[sep].join
+		} else
+			""
+	}
+	
 	
 }

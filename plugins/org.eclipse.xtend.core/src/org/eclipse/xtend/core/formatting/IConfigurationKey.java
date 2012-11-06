@@ -7,13 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.emf.ecore.resource.Resource;
-
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * Implementers of this interface represent a key in {@link IConfigurationValues}.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IFormatterConfigurationProvider {
+public interface IConfigurationKey<T> {
 
-	IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource);
+	/**
+	 * @return the default value which should be returned by {@link IConfigurationValues#get(IConfigurationKey)} in case
+	 *         no explicit value us set.
+	 */
+	T getDefaultValue();
 
+	/**
+	 * @return name for this key which is unique among all keys from the same {@link IConfigurationKeys}.
+	 */
+	String getName();
 }

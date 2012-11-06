@@ -8,6 +8,7 @@ import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.featurecalls.XtendIdentifiableSimpleNameProvider;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
+import org.eclipse.xtend.core.formatting.RuntimeFormatterConfigurationProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;

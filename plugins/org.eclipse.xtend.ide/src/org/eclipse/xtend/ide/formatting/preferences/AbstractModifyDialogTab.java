@@ -27,8 +27,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.IntegerEntry;
+import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
+import org.eclipse.xtend.core.formatting.NewLineConfigValue;
 import org.eclipse.xtend.ide.formatting.preferences.XtendPreviewFactory.XtendFormatterPreview;
 
 import com.google.inject.Inject;
@@ -156,41 +157,41 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	 * Min value is set to 0 and max value to 9999.
 	 */
 	protected NumberPreference createNumberPref(Composite composite, int numColumns, String name,
-			IntegerEntry integerEntry) {
-		return super.createNumberPref(composite, numColumns, name, integerEntry.getKey(), 0, 9999);
+			IntegerKey integerEntry) {
+		return super.createNumberPref(composite, numColumns, name, integerEntry.getName(), 0, 9999);
 	}
 
 	protected class MinMaxPreference extends Preference {
-		private class MinMaxRangeHolder {
-			private Integer min = 0;
-			private Integer max = 0;
-
-			public MinMaxRangeHolder(Integer min, Integer max) {
-				this.min = min;
-				this.max = max;
-			}
-
-			public Integer getMax() {
-				return max;
-			}
-
-			public Integer getMin() {
-				return min;
-			}
-
-			@Override
-			public boolean equals(Object obj) {
-				if (obj instanceof MinMaxRangeHolder) {
-					MinMaxRangeHolder other = (MinMaxRangeHolder) obj;
-					return min.equals(other.min) && max.equals(other.max);
-				}
-				return false;
-			}
-		}
+//		private class MinMaxRangeHolder {
+//			private Integer min = 0;
+//			private Integer max = 0;
+//
+//			public MinMaxRangeHolder(Integer min, Integer max) {
+//				this.min = min;
+//				this.max = max;
+//			}
+//
+//			public Integer getMax() {
+//				return max;
+//			}
+//
+//			public Integer getMin() {
+//				return min;
+//			}
+//
+//			@Override
+//			public boolean equals(Object obj) {
+//				if (obj instanceof MinMaxRangeHolder) {
+//					MinMaxRangeHolder other = (MinMaxRangeHolder) obj;
+//					return min.equals(other.min) && max.equals(other.max);
+//				}
+//				return false;
+//			}
+//		}
 
 		private static final int MAX_VALUE = 9999;
-		private MinMaxRangeHolder minMaxRange;
-		private MinMaxRangeHolder oldMinMaxRange;
+		private NewLineConfigValue minMaxRange;
+		private NewLineConfigValue oldMinMaxRange;
 
 		private final Text minText;
 		private final Text maxText;
@@ -201,7 +202,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		@SuppressWarnings("rawtypes")
 		public MinMaxPreference(Composite composite, int numColumns, Map preferences, NewLineConfig newLineConfig,
 				String txt) {
-			super(preferences, newLineConfig.getKey());
+			super(preferences, newLineConfig.getName());
 			this.newLineConfig = newLineConfig;
 			label = createLabel(numColumns - 1, composite, txt, GridData.FILL_HORIZONTAL);
 			minMaxContainer = new Composite(composite, SWT.NONE);
@@ -256,18 +257,18 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				minMaxRange = oldMinMaxRange;
 			} else {
 				if (isMax) {
-					minMaxRange = new MinMaxRangeHolder(minMaxRange.getMin(), Integer.parseInt(input));
+					minMaxRange = new NewLineConfigValue(minMaxRange.getMinNewLines(), Integer.parseInt(input));
 				} else {
-					minMaxRange = new MinMaxRangeHolder(Integer.parseInt(input), minMaxRange.getMax());
+					minMaxRange = new NewLineConfigValue(Integer.parseInt(input), minMaxRange.getMaxNewLines());
 				}
 			}
 			if (!minMaxRange.equals(oldMinMaxRange)) {
 				saveSelected(minMaxRange);
 				int valToSet = 0;
 				if (isMax)
-					valToSet = minMaxRange.getMax();
+					valToSet = minMaxRange.getMaxNewLines();
 				else
-					valToSet = minMaxRange.getMin();
+					valToSet = minMaxRange.getMinNewLines();
 				text.setText(Integer.toString(valToSet));
 			}
 		}
@@ -285,9 +286,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				//Check range
 				if (valid) {
 					if (isMax) {
-						valid = number >= minMaxRange.getMin();
+						valid = number >= minMaxRange.getMinNewLines();
 					} else {
-						valid = number <= minMaxRange.getMax();
+						valid = number <= minMaxRange.getMaxNewLines();
 					}
 				}
 			} catch (NumberFormatException x) {
@@ -307,13 +308,13 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				final int number = Integer.parseInt(trimInput);
 				boolean changed = false;
 				if (isMax) {
-					if (minMaxRange.getMax() != number) {
-						minMaxRange = new MinMaxRangeHolder(minMaxRange.getMin(), number);
+					if (minMaxRange.getMaxNewLines() != number) {
+						minMaxRange = new NewLineConfigValue(minMaxRange.getMinNewLines(), number);
 						changed = true;
 					}
 				} else {
-					if (minMaxRange.getMin() != number) {
-						minMaxRange = new MinMaxRangeHolder(number, minMaxRange.getMax());
+					if (minMaxRange.getMinNewLines() != number) {
+						minMaxRange = new NewLineConfigValue(number, minMaxRange.getMaxNewLines());
 						changed = true;
 					}
 				}
@@ -326,12 +327,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 			return new Status(IStatus.ERROR, JavaPlugin.getPluginId(), 0, "Invalid input", null);
 		}
 
-		private void saveSelected(MinMaxRangeHolder minMaxRangeHolder) {
-			String prefix = getKey();
-			getPreferences().put(newLineConfig.getMinNewLines().fullPrefix(prefix),
-					minMaxRangeHolder.getMin().toString());
-			getPreferences().put(newLineConfig.getMaxNewLines().fullPrefix(prefix),
-					minMaxRangeHolder.getMax().toString());
+		private void saveSelected(NewLineConfigValue minMaxRangeHolder) {
+			getPreferences().put(newLineConfig.getMinName(), minMaxRangeHolder.getMinNewLines() + "");
+			getPreferences().put(newLineConfig.getMaxName(), minMaxRangeHolder.getMaxNewLines() + "");
 			setChanged();
 			notifyObservers();
 		}
@@ -351,12 +349,12 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 			minText.setEnabled(enabled);
 			maxText.setEnabled(enabled);
 
-			minMaxRange = new MinMaxRangeHolder(0, 0);
+			minMaxRange = new NewLineConfigValue(0, 0);
 			if (hasKey) {
 				try {
-					String min = (String) getPreferences().get(newLineConfig.getMinNewLines().fullPrefix(getKey()));
-					String max = (String) getPreferences().get(newLineConfig.getMaxNewLines().fullPrefix(getKey()));
-					minMaxRange = new MinMaxRangeHolder(Integer.parseInt(min), Integer.parseInt(max));
+					String min = getPreferences().get(newLineConfig.getMinName());
+					String max = getPreferences().get(newLineConfig.getMaxName());
+					minMaxRange = new NewLineConfigValue(Integer.parseInt(min), Integer.parseInt(max));
 				} catch (NumberFormatException e) {
 					//TODO log an error
 				}
@@ -365,9 +363,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 		}
 
-		private void fillFields(MinMaxRangeHolder minMaxRange) {
-			minText.setText(Integer.toString(minMaxRange.getMin()));
-			maxText.setText(Integer.toString(minMaxRange.getMax()));
+		private void fillFields(NewLineConfigValue minMaxRange) {
+			minText.setText(Integer.toString(minMaxRange.getMinNewLines()));
+			maxText.setText(Integer.toString(minMaxRange.getMaxNewLines()));
 		}
 
 	}

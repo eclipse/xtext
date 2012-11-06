@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -30,7 +30,7 @@ public class NewLineTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, "Insert new line");
-		XtendFormatterConfig xtendFormatterConfig = new XtendFormatterConfig();
+		XtendFormatterConfigKeys xtendFormatterConfig = new XtendFormatterConfigKeys();
 		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", xtendFormatterConfig.getNewLinesAfterPackageName());
 		createMinMaxPref(generalGroup, numColumns, "Between imports (min/max):", xtendFormatterConfig.getNewLinesBetweenImports());
 		createMinMaxPref(generalGroup, numColumns, "After import section (min/max):", xtendFormatterConfig.getNewLinesAfterImportSection());

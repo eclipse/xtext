@@ -3,9 +3,10 @@ package org.eclipse.xtend.core.tests.formatting
 import java.util.Collection
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues
 import org.eclipse.xtend.core.formatting.TextReplacement
 import org.eclipse.xtend.core.formatting.XtendFormatter
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.InjectWith
@@ -20,6 +21,7 @@ import org.junit.runner.RunWith
 abstract class AbstractFormatterTest {
 	@Inject extension ParseHelper<XtendFile>
 	@Inject XtendFormatter formatter
+	@Inject XtendFormatterConfigKeys keys
 	
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted /* .parse.flattenWhitespace  */)
@@ -82,9 +84,10 @@ abstract class AbstractFormatterTest {
 		val parsed = toBeFormatted.parse
 		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
-		val rc = new XtendFormatterConfig() => [
-			maxLineWidth.value = 80
-		]
+		val rc = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys)
+
+		rc.put(keys.maxLineWidth, 80)
+
 		formatter.allowIdentityEdits = true
 		
 		// Step 1: Ensure formatted document equals expectation 

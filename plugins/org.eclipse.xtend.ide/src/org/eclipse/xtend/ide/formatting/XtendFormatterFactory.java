@@ -19,10 +19,11 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
@@ -73,7 +74,7 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 				return null;
 			final MultiTextEdit mte = new MultiTextEdit();
 			try {
-				XtendFormatterConfig cfg = cfgProvider.getFormatterConfiguration(state);
+				IConfigurationValues<XtendFormatterConfigKeys> cfg = cfgProvider.getFormatterConfiguration(state);
 				//	long start = System.currentTimeMillis();
 				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), cfg);
 				//	long time = System.currentTimeMillis() - start;

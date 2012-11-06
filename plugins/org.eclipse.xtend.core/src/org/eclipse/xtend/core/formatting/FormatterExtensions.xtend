@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 class FormatterExtensions {
 	
 	@Inject extension NodeModelAccess
+	@Inject extension XtendFormatterConfigKeys
 	
 	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
 		val it = new FormattingDataInit()
@@ -29,8 +30,8 @@ class FormatterExtensions {
 		result
 	}
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineConfig configuration, int indentationChange) {
-		newFormattingData(leafs, configuration.minNewLines.value, configuration.maxNewLines.value, indentationChange)
+	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineConfigValue configuration, int indentationChange) {
+		newFormattingData(leafs, configuration.minNewLines, configuration.maxNewLines, indentationChange)
 	}
 	
 	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange) {
@@ -76,7 +77,7 @@ class FormatterExtensions {
 			return false
 		} else {
 			val line = fmt.lineLengthBefore(offset) + lookahead.length
-			return line <= fmt.cfg.maxLineWidth.value
+			return line <= fmt.cfg.get(maxLineWidth)
 		}
 	}
 	
@@ -86,7 +87,7 @@ class FormatterExtensions {
 		}
 	}
 	
-	def Iterable<FormattingData> append(INode node, NewLineConfig configuration) {
+	def Iterable<FormattingData> append(INode node, NewLineConfigValue configuration) {
 		if(node != null) {
 			node.hiddenLeafsAfter.newFormattingData(configuration, 0)
 		}
@@ -116,13 +117,11 @@ class FormatterExtensions {
 		result
 	}
 	
-	def Iterable<FormattingData> prepend(INode node, NewLineConfig configuration) {
+	def Iterable<FormattingData> prepend(INode node, NewLineConfigValue configuration) {
 		if(node != null) {
 			node.hiddenLeafsBefore.newFormattingData(configuration, 0)
 		}
 	}
-	
-	
 }
 
 class FormattingDataInit {

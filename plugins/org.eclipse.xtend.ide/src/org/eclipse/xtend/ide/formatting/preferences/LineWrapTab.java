@@ -13,7 +13,7 @@ import java.util.Observer;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfig;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 
 import com.google.common.collect.Maps;
 
@@ -42,7 +42,7 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfig().getMaxLineWidth());
+		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfigKeys().getMaxLineWidth());
 	}
 
 	@Override
