@@ -8,20 +8,18 @@
 package org.eclipse.xtend.ide.refactoring;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator;
 
 import com.google.inject.Inject;
@@ -35,29 +33,20 @@ public class XtendDependentElementsCalculator extends JvmModelDependentElementsC
 	private IXtendJvmAssociations associations;
 	
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	private DispatchRenameSupport dispatchRenameSupport;
 	
 	@Override
 	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		if (baseElement instanceof XtendFunction && ((XtendFunction) baseElement).isDispatch()) {
-			JvmOperation dispatchOperation = associations.getDispatchOperation((XtendFunction) baseElement);
-			Collection<JvmOperation> dispatchCaseOperations = dispatchingSupport
-					.getDispatcher2dispatched(((XtendClass)baseElement.eContainer()), false)
-					.get(dispatchOperation); 
-			final List<URI> result = newArrayList();
-			IAcceptor<EObject> safeResult = new IAcceptor<EObject>() {
-				public void accept(EObject element) {
-					if(element != null && !element.eIsProxy()) {
-						result.add(EcoreUtil.getURI(element));
-					}
+			Set<URI> result = newHashSet();
+			for(JvmOperation dispatchOperation: dispatchRenameSupport.getAllDispatchOperations((XtendFunction) baseElement)) {
+				result.add(EcoreUtil2.getNormalizedURI(dispatchOperation));
+				XtendFunction xtendFunction = associations.getXtendFunction(dispatchOperation);
+				if(xtendFunction != null) {
+					result.add(EcoreUtil2.getNormalizedURI(xtendFunction));
 				}
-			};
-			safeResult.accept(dispatchOperation);
-			for(JvmOperation dispatchCaseOperation: dispatchCaseOperations) {
-				safeResult.accept(dispatchCaseOperation);
-				safeResult.accept(associations.getXtendFunction(dispatchCaseOperation));
 			}
-			return result;
+			return newArrayList(result);
 		}
 		return super.getDependentElementURIs(baseElement, monitor);
 	}

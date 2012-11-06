@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
-import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -68,7 +67,7 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 		
 		@Override
 		protected IRenameStrategy createRenameStrategy(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if (targetEObject instanceof XtendFunction && ((XtendFunction) targetEObject).isDispatch()) 
+			if (renameElementContext instanceof DispatchMethodRenameContext) 
 				return dispatchStartegyProvider.get();
 			else
 				return super.createRenameStrategy(targetEObject, renameElementContext);
