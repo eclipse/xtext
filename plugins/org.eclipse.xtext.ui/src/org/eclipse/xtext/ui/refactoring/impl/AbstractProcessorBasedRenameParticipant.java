@@ -133,7 +133,8 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		SubMonitor progress = SubMonitor.convert(pm).setWorkRemaining(100);
 		try {
 			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
-				if (!disabledTargets.containsAll(Arrays.asList(wrappedProcessor.getElements()))) {
+				List<Object> targetElements = Arrays.asList(wrappedProcessor.getElements());
+				if (!disabledTargets.containsAll(targetElements)) {
 					setNewName(wrappedProcessor, getNewName());
 					status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
 					if(!status.getRefactoringStatus().hasFatalError())

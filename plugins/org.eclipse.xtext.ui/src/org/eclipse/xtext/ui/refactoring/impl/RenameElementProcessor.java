@@ -8,9 +8,11 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -43,6 +45,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyE
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -162,7 +165,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public Object[] getElements() {
 		return new Object[] { targetElementURI };
 	}
-
+	
 	@Override
 	public String getOriginalName() {
 		return renameStrategy.getOriginalName();
@@ -210,6 +213,15 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return status.getRefactoringStatus();
 	}
 
+	protected Iterable<URI> getElementURIs() {
+		List<URI> elementURIs = newArrayList();
+		for(Object element: getElements()) {
+			if(element instanceof URI) 
+				elementURIs.add((URI) element);
+		}
+		return elementURIs;
+	}
+	
 	@Override
 	public RefactoringStatus checkFinalConditions(IProgressMonitor monitor, CheckConditionsContext context)
 			throws CoreException, OperationCanceledException {
@@ -220,7 +232,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 					progress.newChild(1));
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
-					concat(Collections.singleton(targetElementURI), dependentElementURIs), newName, resourceSet,
+					concat(getElementURIs(), dependentElementURIs), newName, resourceSet,
 					renameStrategy, progress.newChild(1));
 			renameStrategy.createDeclarationUpdates(newName, resourceSet, currentUpdateAcceptor);
 

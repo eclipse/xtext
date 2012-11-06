@@ -75,8 +75,9 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 				ResourceSet resourceSet = resourceSetProvider.get(project);
 				EObject directJvmElement = jvmElementFinder.getCorrespondingJvmElement(javaElement, resourceSet);
 				if (directJvmElement != null && expectedJvmType.isSuperTypeOf(directJvmElement.eClass())) {
+					ResourceSet resourceSet2 = resourceSetProvider.get(project);
 					EObject indexedJvmElement = jvmElementFinder.findJvmElementDeclarationInIndex(directJvmElement,
-							project);
+							project, resourceSet2);
 					if (indexedJvmElement != null)
 						// jvmElement is indexed, thus contained in an XtextResurce and likely inferred from some Xtext-based elements
 						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(

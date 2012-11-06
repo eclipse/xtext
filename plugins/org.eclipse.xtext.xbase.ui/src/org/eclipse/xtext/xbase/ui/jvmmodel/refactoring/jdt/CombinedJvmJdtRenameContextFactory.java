@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +16,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
@@ -53,31 +51,29 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if(operatorMappingUtil.isMappedOperator(targetElement) && selection.getLength() < "operator".length()) 
+		if (operatorMappingUtil.isMappedOperator(targetElement) && selection.getLength() < "operator".length())
 			return null;
 		else
 			return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
-	
+
 	@Override
 	public IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (!isJvmMember(targetElement) || !isTypeResource(targetElement)) {
-			EObject declarationTarget = getDeclarationTarget(targetElement);
-			Set<EObject> jvmElements = associations.getJvmElements(declarationTarget);
-			if (!jvmElements.isEmpty()) {
-				Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
-				for (JvmIdentifiableElement jvmElement : filter(jvmElements, JvmIdentifiableElement.class)) {
-					IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmElement);
-					if (javaElement != null)
-						if (javaElement instanceof IMethod)
-							addDeclaringMethod(jvmElement, javaElement, jvm2javaElement);
-						else 
-							jvm2javaElement.put(EcoreUtil.getURI(jvmElement), javaElement);
-				}
-				if (!jvm2javaElement.isEmpty()) {
-					return new CombinedJvmJdtRenameContext(declarationTarget, jvm2javaElement, editor, selection, resource);
-				}
+		EObject declarationTarget = getDeclarationTarget(targetElement);
+		Set<EObject> jvmElements = associations.getJvmElements(declarationTarget);
+		if (!jvmElements.isEmpty()) {
+			Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
+			for (JvmIdentifiableElement jvmElement : filter(jvmElements, JvmIdentifiableElement.class)) {
+				IJavaElement javaElement = getJavaElementFinder().findExactElementFor(jvmElement);
+				if (javaElement != null)
+					if (javaElement instanceof IMethod)
+						addDeclaringMethod(jvmElement, javaElement, jvm2javaElement);
+					else
+						jvm2javaElement.put(EcoreUtil.getURI(jvmElement), javaElement);
+			}
+			if (!jvm2javaElement.isEmpty()) {
+				return new CombinedJvmJdtRenameContext(declarationTarget, jvm2javaElement, editor, selection, resource);
 			}
 		}
 		if (targetElement instanceof JvmFormalParameter || targetElement instanceof JvmTypeParameter) {
@@ -88,19 +84,11 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 		return super.createLocalRenameElementContext(targetElement, editor, selection, resource);
 	}
 
-	protected boolean isTypeResource(EObject jvmElement) {
-		Resource eResource = jvmElement.eResource();
-		if(eResource != null)
-			return equal("java", eResource.getURI().scheme());
-		else 
-			return false;
-	}
-	
 	protected EObject getDeclarationTarget(EObject targetElement) {
 		EObject target;
-		if(targetElement instanceof JvmConstructor)
+		if (targetElement instanceof JvmConstructor)
 			target = ((JvmConstructor) targetElement).getDeclaringType();
-		else 
+		else
 			target = targetElement;
 		EObject declarationTarget = associations.getPrimarySourceElement(target);
 		return (declarationTarget != null) ? declarationTarget : target;
@@ -113,9 +101,9 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 			ITypeHierarchy typeHierarchy = declaringType.newSupertypeHierarchy(new NullProgressMonitor());
 			MethodOverrideTester methodOverrideTester = new MethodOverrideTester(declaringType, typeHierarchy);
 			IMethod declaringMethod = methodOverrideTester.findDeclaringMethod((IMethod) javaElement, true);
-			if (declaringMethod != null) 
+			if (declaringMethod != null)
 				jvm2javaElement.put(EcoreUtil.getURI(jvmElement), declaringMethod);
-			else 
+			else
 				jvm2javaElement.put(EcoreUtil.getURI(jvmElement), javaElement);
 		} catch (JavaModelException e) {
 			throw new RuntimeException(e);

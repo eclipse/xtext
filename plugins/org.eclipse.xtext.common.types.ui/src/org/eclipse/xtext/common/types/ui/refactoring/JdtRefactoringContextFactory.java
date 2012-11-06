@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -34,7 +37,7 @@ public class JdtRefactoringContextFactory extends IRenameContextFactory.Default 
 	@Override
 	public IRenameElementContext createExternalRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (isJvmMember(targetElement)) {
+		if (isJvmMember(targetElement) && isTypeResource(targetElement)) {
 			IJavaElement javaElement;
 			if(targetElement instanceof JvmConstructor)
 				javaElement = getJavaElementFinder().findExactElementFor(((JvmConstructor) targetElement).getDeclaringType());
@@ -55,6 +58,14 @@ public class JdtRefactoringContextFactory extends IRenameContextFactory.Default 
 				&& targetElement instanceof JvmMember;
 	}
 	
+	protected boolean isTypeResource(EObject jvmElement) {
+		Resource eResource = jvmElement.eResource();
+		if(eResource != null)
+			return equal("java", eResource.getURI().scheme());
+		else 
+			return false;
+	}
+
 	protected IJavaElementFinder getJavaElementFinder() {
 		return javaElementFinder;
 	}
