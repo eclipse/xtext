@@ -50,7 +50,7 @@ public class JvmElementFinder {
 		return (jvmElementURI != null) ? resourceSet.getEObject(jvmElementURI, true) : null;
 	}
 
-	public EObject findJvmElementDeclarationInIndex(EObject jvmElement, IProject project) {
+	public EObject findJvmElementDeclarationInIndex(EObject jvmElement, IProject project, ResourceSet resourceSet) {
 		// TODO lookup top level type container in index instead? 
 		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(jvmElement);
 		if (qualifiedName != null) {
@@ -59,12 +59,15 @@ public class JvmElementFinder {
 						&& Strings.equal(project.getName(), resourceDescription.getURI().segment(1))) {
 					Iterator<IEObjectDescription> matches = resourceDescription.getExportedObjects(jvmElement.eClass(),
 							qualifiedName, true).iterator();
-					if(matches.hasNext())
-						return jvmElement.eResource().getResourceSet().getEObject(matches.next().getEObjectURI(), true);
+					if(matches.hasNext()) {
+						URI eObjectURI = matches.next().getEObjectURI();
+						return resourceSet.getEObject(eObjectURI, true);
+					}
 				}
 			}
 		}
 		return null;
 	}
-
+	
+	
 }
