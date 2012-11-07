@@ -1,17 +1,19 @@
 package org.eclipse.xtend.ide.tests.refactoring
 
 import com.google.inject.Inject
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtend.ide.refactoring.DispatchRenameSupport
+import org.eclipse.core.resources.IFile
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtend.core.xtend.XtendFunction
-import org.junit.Test
-import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.ide.refactoring.DispatchRenameSupport
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.JvmOperation
+import org.junit.Test
+
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension com.google.common.collect.Iterables.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	
@@ -26,13 +28,13 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def testSimple() {
-		val fooFile = xtendFile("Foo", '''
+		val fooFile = createFile("Foo", '''
 			class Foo {
 				def dispatch foo(String x) {}
 				def dispatch foo(Integer x) {}
 			}
 		''')
-		checkDispatchOperations(fooFile.firstMethod, 
+		checkDispatchOperations(fooFile, 
 			'Foo._foo(String)', 'Foo._foo(Integer)', 'Foo.foo(Object)')
 	}
 	
@@ -43,20 +45,20 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Double x) {}
 			}
 		''')
-		val subFile = xtendFile("Sub", '''
+		val subFile = createFile("Sub", '''
 			class Sub extends Super {
 				def dispatch foo(String x) {}
 				def dispatch foo(Integer x) {}
 			}
 		''')
-		checkDispatchOperations(subFile.firstMethod, 
+		checkDispatchOperations(subFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(String)', 'Sub._foo(Integer)', 'Sub.foo(Object)')
 	}
 	
 	@Test
 	def testSuperClass() {
-		val superFile = xtendFile('Super', '''
+		val superFile = createFile('Super', '''
 			class Super {
 				def dispatch foo(Double x) {}
 			}
@@ -67,9 +69,42 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Integer x) {}
 			}
 		''')
-		checkDispatchOperations(superFile.firstMethod, 
+		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(String)', 'Sub._foo(Integer)', 'Sub.foo(Object)')
+	}
+	
+	@Test
+	def testDisconnectedJavaSubClass() {
+		val superFile = createFile('Super', '''
+			class Super {
+				def dispatch foo(Double x) {}
+			}
+		''')
+		createFile("Sub", '''
+			public class Sub extends Super {
+				public void _foo(Integer x) {}
+			}
+		''')
+		checkDispatchOperations(superFile, 
+			'Super._foo(Double)', 'Super.foo(Double)')
+	}
+	
+	@Test
+	def testJavaSuperClass() {
+		createFile('Super.java', '''
+			public class Super {
+				publc void _foo(Double x) {}
+			}
+		''')
+		val subFile = createFile("Sub", '''
+			class Sub extends Super {
+				def dispatch foo(Integer x) {}
+			}
+		''')
+		checkDispatchOperations(subFile, 
+			'Super._foo(Double)',
+			'Sub._foo(Integer)', 'Sub.foo(Object)')
 	}
 	
 	@Test
@@ -79,20 +114,20 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Double x) {}
 			}
 		''')
-		val subFile = xtendFile("Sub", '''
+		val subFile = createFile("Sub", '''
 			class Sub extends Super {
 				def dispatch foo(String x) {}
 				override dispatch foo(Double x) {}
 			}
 		''')
-		checkDispatchOperations(subFile.firstMethod, 
+		checkDispatchOperations(subFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(String)', 'Sub._foo(Double)', 'Sub.foo(Object)')
 	}
 	
 	@Test
 	def testSuperClassOverride() {
-		val superFile = xtendFile('Super', '''
+		val superFile = createFile('Super', '''
 			class Super {
 				def dispatch foo(Double x) {}
 			}
@@ -103,7 +138,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				override dispatch foo(Double x) {}
 			}
 		''')
-		checkDispatchOperations(superFile.firstMethod, 
+		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(String)', 'Sub._foo(Double)', 'Sub.foo(Object)')
 	}
@@ -120,12 +155,12 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Integer x) {}
 			}
 		''')
-		val subSubFile = xtendFile("SubSub", '''
+		val subSubFile = createFile("SubSub", '''
 			class SubSub extends Sub {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(subSubFile.firstMethod, 
+		checkDispatchOperations(subSubFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
@@ -138,7 +173,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Double x) {}
 			}
 		''')
-		val subFile = xtendFile('Sub', '''
+		val subFile = createFile('Sub', '''
 			class Sub extends Super {
 				def dispatch foo(Integer x) {}
 			}
@@ -148,7 +183,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(subFile.firstMethod, 
+		checkDispatchOperations(subFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
@@ -156,7 +191,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def testSubSubClass_2() {
-		val superFile = xtendFile('Super.xtend', '''
+		val superFile = createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
 			}
@@ -171,15 +206,61 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(superFile.firstMethod, 
+		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
 	@Test
+	def testJavaInTheMiddle_0() {
+		val superFile = createFile('Super.xtend', '''
+			class Super {
+				def dispatch foo(Double x) {}
+			}
+		''')
+		createFile('Sub.java', '''
+			public class Sub extends Super {
+				public void _foo(Integer x) {}
+			}
+		''')
+		createFile("SubSub", '''
+			class SubSub extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(superFile, 
+			'Super.foo(Double)', 'Super._foo(Double)',
+			'Sub._foo(Integer)', 
+			'SubSub._foo(String)', 'SubSub.foo(Object)')
+	}
+	
+	@Test
+	def testJavaInTheMiddle_1() {
+		createFile('Super.xtend', '''
+			class Super {
+				def dispatch foo(Double x) {}
+			}
+		''')
+		createFile('Sub.java', '''
+			public class Sub extends Super {
+				public void _foo(Integer x) {}
+			}
+		''')
+		val subsubFile = createFile("SubSub", '''
+			class SubSub extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(subsubFile, 
+			'Super.foo(Double)', 'Super._foo(Double)',
+			'Sub._foo(Integer)', 
+			'SubSub._foo(String)', 'SubSub.foo(Object)')
+	}
+	
+	@Test
 	def testConnectedSubclasses_0() {
-		val superFile = xtendFile('Super.xtend', '''
+		val superFile = createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
 			}
@@ -194,7 +275,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(superFile.firstMethod, 
+		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
 			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
@@ -207,7 +288,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Double x) {}
 			}
 		''')
-		val sub0File = xtendFile('Sub0', '''
+		val sub0File = createFile('Sub0', '''
 			class Sub0 extends Super {
 				def dispatch foo(Integer x) {}
 			}
@@ -217,8 +298,31 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(sub0File.firstMethod, 
+		checkDispatchOperations(sub0File, 
 			'Super.foo(Double)', 'Super._foo(Double)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
+			'Sub1._foo(String)', 'Sub1.foo(Object)')
+	}
+
+	@Test
+	def testJavaConnectedSubclasses() {
+		createFile('Super.java', '''
+			class Super {
+				public void _foo(Double x) {}
+			}
+		''')
+		val sub0File = createFile('Sub0', '''
+			class Sub0 extends Super {
+				def dispatch foo(Integer x) {}
+			}
+		''')
+		createFile("Sub1", '''
+			class Sub1 extends Super {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(sub0File, 
+			'Super._foo(Double)',
 			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
@@ -229,7 +333,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			class Super {
 			}
 		''')
-		val sub0File = xtendFile('Sub0', '''
+		val sub0File = createFile('Sub0', '''
 			class Sub0 extends Super {
 				def dispatch foo(Integer x) {}
 			}
@@ -239,7 +343,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(sub0File.firstMethod, 
+		checkDispatchOperations(sub0File, 
 			'Sub0._foo(Integer)', 'Sub0.foo(Integer)')
 	}
 
@@ -254,28 +358,113 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 				def dispatch foo(Integer x) {}
 			}
 		''')
-		val sub1File = xtendFile("Sub1", '''
+		val sub1File = createFile("Sub1", '''
 			class Sub1 extends Super {
 				def dispatch foo(String x) {}
 			}
 		''')
-		checkDispatchOperations(sub1File.firstMethod, 
+		checkDispatchOperations(sub1File, 
 			'Sub1._foo(String)', 'Sub1.foo(String)')
 	}
 
-
-	def firstMethod(XtendFile file) {
-		val xtendClass = file.xtendTypes.get(0) as XtendClass
-		xtendClass.members.get(0) as XtendFunction
+	@Test
+	def testTreeConnected() {
+		createFile('Super.xtend', '''
+			class Super {
+				def dispatch foo(Double x) {}
+			}
+		''')
+		createFile('Sub', '''
+			class Sub extends Super {
+			}
+		''')
+		createFile("SubSub0", '''
+			class SubSub0 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		val subsub1File = createFile("SubSub1", '''
+			class SubSub1 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(subsub1File, 
+			'Super.foo(Double)', 'Super._foo(Double)',
+			'SubSub1._foo(String)', 'SubSub1.foo(Object)',
+			'SubSub0._foo(String)', 'SubSub0.foo(Object)')
 	}
 	
-	def checkDispatchOperations(XtendFunction targetMethod, String... signatures) {
+	@Test
+	def testTreeConnected_1() {
+		createFile('Super.xtend', '''
+			class Super {
+				def dispatch foo(Double x) {}
+			}
+		''')
+		createFile('Sub.java', '''
+			public class Sub extends Super {
+			}
+		''')
+		createFile("SubSub0", '''
+			class SubSub0 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		val subsub1File = createFile("SubSub1", '''
+			class SubSub1 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(subsub1File, 
+			'Super.foo(Double)', 'Super._foo(Double)',
+			'SubSub1._foo(String)', 'SubSub1.foo(Object)',
+			'SubSub0._foo(String)', 'SubSub0.foo(Object)')
+	}
+	
+	@Test
+	def testTreeConnected_2() {
+		createFile('Super.java', '''
+			public class Super {
+				public void _foo(Double x) {}
+			}
+		''')
+		createFile('Sub', '''
+			class Sub extends Super {
+			}
+		''')
+		createFile("SubSub0", '''
+			class SubSub0 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		val subsub1File = createFile("SubSub1", '''
+			class SubSub1 extends Sub {
+				def dispatch foo(String x) {}
+			}
+		''')
+		checkDispatchOperations(subsub1File, 
+			'Super._foo(Double)',
+			'SubSub1._foo(String)', 'SubSub1.foo(Object)',
+			'SubSub0._foo(String)', 'SubSub0.foo(Object)')
+	}
+	
+	def firstMethod(IFile targetFile) {
+		val resource = resourceSet.getResource(targetFile.uri, true)
+		val createFile = resource.contents.get(0)
+		assertTrue(createFile instanceof XtendFile)
+		val xtendClass = (createFile as XtendFile).xtendTypes.get(0) as XtendClass
+		xtendClass.members.filter(typeof(XtendFunction)).get(0)
+	}
+	
+	def checkDispatchOperations(IFile targetFile, String... signatures) {
 		waitForAutoBuild
-		val dispatchOperations = dispatchRenameSupport.getAllDispatchOperations(targetMethod).map[signature]
-		assertEquals(signatures.size, dispatchOperations.size)
+		val dispatchOperations = dispatchRenameSupport.getAllDispatchOperations(targetFile.firstMethod).map[signature]
 		for(signature: signatures) {
 			assertTrue(signature + " not found. Only got" + dispatchOperations.join('\n'), dispatchOperations.contains(signature))
 		}
+		assertEquals("Expected " + signatures.join('\n') + 'but got '+dispatchOperations.join('\n'), 
+			signatures.size, dispatchOperations.size
+		)
 	}
 	
 	def signature(JvmOperation it) {

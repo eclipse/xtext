@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.IInitializable;
@@ -40,7 +41,10 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 	private IXtendJvmAssociations associations;
 	
 	@Inject
-	private com.google.inject.Provider<DispatchMethodChildStrategy> childStrategyProvider; 
+	private com.google.inject.Provider<XtendDispatchMethodChildStrategy> childStrategyProvider; 
+	
+	@Inject
+	private com.google.inject.Provider<JavaDispatchMethodChildStrategy> javaStrategyProvider; 
 	
 	@Inject
 	private DispatchingSupport support;
@@ -62,24 +66,38 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 			XtendFunction xtendDispatchMethod = associations.getXtendFunction(dispatchOperation);
 			if(xtendDispatchMethod != null) {
 				if(equal(xtendDispatchMethod.getName(),dispatchOperation.getSimpleName())) {
+					// synthetic dispatcher
 					dispatchers.add(dispatchOperation);
 				} else {
-					DispatchMethodChildStrategy childStrategy = childStrategyProvider.get();
-					childStrategy.initialize(xtendDispatchMethod, context);
-					children.add(childStrategy);
+					// xtend dispatch method
+					XtendDispatchMethodChildStrategy xtendChildStrategy = childStrategyProvider.get();
+					xtendChildStrategy.initialize(xtendDispatchMethod, context);
+					children.add(xtendChildStrategy);
 				}
+			} else {
+				// a dispatch method form a Java class
+				JavaDispatchMethodChildStrategy jvmChildStrategy = javaStrategyProvider.get();
+				jvmChildStrategy.initialize(dispatchOperation, context);
+				children.add(jvmChildStrategy);
 			}
 		}
 		return !children.isEmpty();
 	}
 
-	public static class DispatchMethodChildStrategy extends DefaultJvmModelRenameStrategy {
+	public static class XtendDispatchMethodChildStrategy extends DefaultJvmModelRenameStrategy {
 		@Override
 		protected void setInferredJvmElementName(String name, EObject renamedElement) {
 			super.setInferredJvmElementName("_" + name, renamedElement);
 		}
 	}
 
+	public static class JavaDispatchMethodChildStrategy extends JvmMemberRenameStrategy {
+		@Override
+		public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
+			super.applyDeclarationChange("_" + newName, resourceSet);
+		}
+	}
+	
 	public String getOriginalName() {
 		return children.get(0).getOriginalName();
 	}
