@@ -45,7 +45,7 @@ public interface IRenameElementContext {
 
 		private final ISelection triggeringEditorSelection;
 
-		private IChangeRedirector changeRedirector;
+		private IChangeRedirector changeRedirector = IChangeRedirector.NULL;
 
 		public Impl(URI targetElementURI, EClass targetElementEClass) {
 			this(targetElementURI, targetElementEClass, null, null, null);
