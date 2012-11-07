@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IField;
@@ -31,6 +32,7 @@ import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -891,6 +893,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected void assertFileContains(IFile file, String contents) throws Exception {
+		
 		file.refreshLocal(IResource.DEPTH_ZERO, null);
 		String fileContents = testHelper.getContents(file);
 		assertTrue(fileContents, fileContents.contains(contents));
@@ -913,21 +916,26 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		while(Display.getCurrent().readAndDispatch()) {}
 	}
 
-	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName, int allowedSeverity) throws Exception {
+	protected void renameXtendElement(final XtextEditor editor, final int offset, final String newName, final int allowedSeverity) throws Exception {
 		waitForAutoBuild();
 		executeAsyncDisplayJobs();
-		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
-		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-		assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
-		Change change = renameRefactoring.createChange(new NullProgressMonitor());
-		Change undoChange = change.perform(new NullProgressMonitor());
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
+				RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
+				assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
+				Change change = renameRefactoring.createChange(new NullProgressMonitor());
+				change.perform(new NullProgressMonitor());
+			}
+		}.execute(new NullProgressMonitor());
 		waitForAutoBuild();
 		executeAsyncDisplayJobs();
-		return undoChange;
 	}
 
-	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
-		return renameXtendElement(editor, offset, newName, RefactoringStatus.OK);
+	protected void renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
+		renameXtendElement(editor, offset, newName, RefactoringStatus.OK);
 	}
 
 	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
