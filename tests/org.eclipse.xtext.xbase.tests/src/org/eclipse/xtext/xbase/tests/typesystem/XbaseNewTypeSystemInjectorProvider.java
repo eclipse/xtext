@@ -67,9 +67,9 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 					.to(XbaseBatchScopeProvider.class);
 		}
 
-//		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
-//			return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
-//		}
+		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+			return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
+		}
 
 		@Override
 		public Class<? extends XtextResource> bindXtextResource() {
@@ -105,27 +105,39 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		}
 	}
 
-//	public static class ClasspathTypeProviderFactoryWithoutAnnotationValues extends ClasspathTypeProviderFactory {
-//
-//		@Inject
-//		public ClasspathTypeProviderFactoryWithoutAnnotationValues(ClassLoader classLoader) {
-//			super(classLoader);
-//		}
-//
-//		@Override
-//		protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-//			return new ClasspathTypeProvider(getClassLoader(), resourceSet, getIndexedJvmTypeAccess()) {
-//				@Override
-//				protected DeclaredTypeFactory createDeclaredTypeFactory() {
-//					return new DeclaredTypeFactory(getClassURIHelper()) {
-//						@Override
-//						protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
-//							// disabled for performance reasons
-//						}
-//					};
-//				}
-//			};
-//		}
-//	}
+	public static class ClasspathTypeProviderFactoryWithoutAnnotationValues extends ClasspathTypeProviderFactory {
+
+		private static boolean skipAnnotationValues = false;
+		
+		public static void skipAnnotationValues() {
+			skipAnnotationValues = true;	
+		}
+		
+		public static void readAnnotationValues() {
+			skipAnnotationValues = false;	
+		}
+		
+		@Inject
+		public ClasspathTypeProviderFactoryWithoutAnnotationValues(ClassLoader classLoader) {
+			super(classLoader);
+		}
+
+		@Override
+		protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
+			return new ClasspathTypeProvider(getClassLoader(), resourceSet, getIndexedJvmTypeAccess()) {
+				@Override
+				protected DeclaredTypeFactory createDeclaredTypeFactory() {
+					return new DeclaredTypeFactory(getClassURIHelper()) {
+						@Override
+						protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
+							if (skipAnnotationValues)
+								return;
+							super.createAnnotationValues(annotated, result);
+						}
+					};
+				}
+			};
+		}
+	}
 
 }

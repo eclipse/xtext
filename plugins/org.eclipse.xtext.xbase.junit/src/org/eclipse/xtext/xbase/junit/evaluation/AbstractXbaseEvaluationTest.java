@@ -2381,13 +2381,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testCollectionExtensions_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{ var x = newArrayList('') var result = x.unmodifiableView() x.clear() result.empty }");
-//		assertEvaluatesWithException(UnsupportedOperationException.class, "newArrayList('').unmodifiableView().clear()");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "newArrayList('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').unmodifiableView().clear() null }");
 	}
 	
 	@Test public void testCollectionExtensions_02() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{ var x = newHashSet('') var result = x.unmodifiableView() x.clear() result.empty }");
-//		assertEvaluatesWithException(UnsupportedOperationException.class, "newHashSet('').unmodifiableView().clear()");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "newHashSet('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').unmodifiableView().clear null }");
 	}
 	
@@ -2499,25 +2499,25 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"{" +
 			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
-//			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)]);" +
 			"}"
 		);
 		}

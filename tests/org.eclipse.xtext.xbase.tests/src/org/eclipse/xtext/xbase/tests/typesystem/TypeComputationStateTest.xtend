@@ -8,29 +8,25 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNullLiteral
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.junit.runner.RunWith
-import java.util.Set
-import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.XMemberFeatureCall
-import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
-import org.eclipse.xtext.xbase.XbasePackage
 import org.junit.Ignore
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

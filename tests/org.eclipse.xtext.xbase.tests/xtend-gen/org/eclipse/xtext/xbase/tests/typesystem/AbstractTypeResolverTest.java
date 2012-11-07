@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider.ClasspathTypeProviderFactoryWithoutAnnotationValues;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -32,6 +33,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
+    ClasspathTypeProviderFactoryWithoutAnnotationValues.skipAnnotationValues();
     HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
     AbstractTypeResolverTest.seenExpressions = _newHashSet;
   }
@@ -39,6 +41,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @AfterClass
   public static void discardSeenExpressions() {
     AbstractTypeResolverTest.seenExpressions = null;
+    ClasspathTypeProviderFactoryWithoutAnnotationValues.readAnnotationValues();
   }
   
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {

@@ -1451,29 +1451,6 @@ abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 		return lightweight
 	}
 	
-//	@Test
-//	@Ignore("Performance") 
-//	override testFeatureCall_15_n() throws Exception {
-//		super.testFeatureCall_15_n()
-//	}
-//	
-//	@Test
-//	@Ignore("Performance") 
-//	override testFeatureCall_25_a() throws Exception {
-//		super.testFeatureCall_25_a()
-//	}
-//	
-//	@Test
-//	@Ignore("Performance") 
-//	override testFeatureCall_25_b() throws Exception {
-//		super.testFeatureCall_25_b()
-//	}
-//	
-//	@Test
-//	@Ignore("Performance") 
-//	override testFeatureCall_25_c() throws Exception {
-//		super.testFeatureCall_25_c()
-//	}
 }
 
 /**
