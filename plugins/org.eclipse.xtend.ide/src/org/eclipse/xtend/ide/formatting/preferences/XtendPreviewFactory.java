@@ -88,17 +88,18 @@ public class XtendPreviewFactory {
 		public void doFormat(final Map map) {
 			xtendFormatterFactory.setConfigurationProvider(new IFormatterConfigurationProvider() {
 				public IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource) {
-					return new MapBasedConfigurationValues<XtendFormatterConfigKeys>(new XtendFormatterConfigKeys(), map);
+					return new MapBasedConfigurationValues<XtendFormatterConfigKeys>(new XtendFormatterConfigKeys(),
+							map);
 				}
 			});
 			StyledText widget = null;
 			try {
 				widget = (StyledText) editorHandle.getViewer().getControl();
-				widget.setRedraw(false);
+				widget.setRedraw(false); // disable redraw, otherwise this would causes funny animation effects during formating.
 				this.modelAccess.updateModel("", previewContent, "");
 				xtendFormatterFactory.createConfiguredFormatter(null, null).format(editorHandle.getDocument(),
 						new Region(0, editorHandle.getDocument().getLength()));
-				editorHandle.getViewer().setSelection(null);
+				editorHandle.getViewer().setSelection(null); // reset selection, otherwise the whole new content will be selected
 			} finally {
 				if (widget != null)
 					widget.setRedraw(true);

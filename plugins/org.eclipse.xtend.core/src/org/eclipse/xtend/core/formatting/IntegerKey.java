@@ -22,6 +22,9 @@ public class IntegerKey extends SingleValueConfigurationKey<Integer> {
 
 	@Override
 	protected Integer load(String storedValue) {
+		if(storedValue == null) {
+			return getDefaultValue();
+		}
 		try {
 			return Integer.parseInt(storedValue);
 		} catch (NumberFormatException e) {

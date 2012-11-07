@@ -46,7 +46,7 @@ public class MapBasedConfigurationValues<K extends IConfigurationKeys> extends A
 	}
 
 	public void load(Map<String, String> values) {
-		Function<String, String> map = Functions.forMap(values);
+		Function<String, String> map = Functions.forMap(values,null);
 		for (IConfigurationKey<?> key : getKeys().getKeys())
 			if (key instanceof IConfigurationKeyWithStorage<?>)
 				key2value.put(key, ((IConfigurationKeyWithStorage<?>) key).load(map));

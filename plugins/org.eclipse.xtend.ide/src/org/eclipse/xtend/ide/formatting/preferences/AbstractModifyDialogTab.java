@@ -24,12 +24,14 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.NewLineConfig;
 import org.eclipse.xtend.core.formatting.NewLineConfigValue;
+import org.eclipse.xtend.core.formatting.NewLineKey;
 import org.eclipse.xtend.ide.formatting.preferences.XtendPreviewFactory.XtendFormatterPreview;
 
 import com.google.inject.Inject;
@@ -51,6 +53,11 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 			return injectMembers(new IndentationTab(modifyListener, workingValues));
 		}
 
+		public IModifyDialogTabPage createBlankLinesTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new BlankLinesTab(modifyListener, workingValues));
+		}
+		
 		public IModifyDialogTabPage createNewLineTab(IModificationListener modifyListener,
 				Map<String, String> workingValues) {
 			return injectMembers(new NewLineTab(modifyListener, workingValues));
@@ -92,7 +99,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	protected Composite doCreatePreviewPane(Composite composite, int numColumns) {
 		createLabel(numColumns, composite, "Xtend formatterPreview");
 		formatterPreview = previewFactory.createNewPreview(composite, previewText());
-		formatterPreview.doFormat(fWorkingValues);
+		doUpdatePreview();
 		Control control = formatterPreview.getEditorViewer().getControl();
 
 		fDefaultFocusManager.add(control);
@@ -158,36 +165,44 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	 */
 	protected NumberPreference createNumberPref(Composite composite, int numColumns, String name,
 			IntegerKey integerEntry) {
-		return super.createNumberPref(composite, numColumns, name, integerEntry.getName(), 0, 9999);
+		return createNumberPref(composite, numColumns, name, integerEntry.getName());
+	}
+
+	protected NumberPreference createNumberPref(Composite composite, int numColumns, String name, String key) {
+		return super.createNumberPref(composite, numColumns, name, key, 0, 999);
+	}
+
+	protected void createCheckboxPref(Group annotationGroup, int numColumns, String label, NewLineKey nlKey) {
+		createCheckboxPref(annotationGroup, numColumns, label, nlKey.getName(), new String[] { "true", "false" });
 	}
 
 	protected class MinMaxPreference extends Preference {
-//		private class MinMaxRangeHolder {
-//			private Integer min = 0;
-//			private Integer max = 0;
-//
-//			public MinMaxRangeHolder(Integer min, Integer max) {
-//				this.min = min;
-//				this.max = max;
-//			}
-//
-//			public Integer getMax() {
-//				return max;
-//			}
-//
-//			public Integer getMin() {
-//				return min;
-//			}
-//
-//			@Override
-//			public boolean equals(Object obj) {
-//				if (obj instanceof MinMaxRangeHolder) {
-//					MinMaxRangeHolder other = (MinMaxRangeHolder) obj;
-//					return min.equals(other.min) && max.equals(other.max);
-//				}
-//				return false;
-//			}
-//		}
+		//		private class MinMaxRangeHolder {
+		//			private Integer min = 0;
+		//			private Integer max = 0;
+		//
+		//			public MinMaxRangeHolder(Integer min, Integer max) {
+		//				this.min = min;
+		//				this.max = max;
+		//			}
+		//
+		//			public Integer getMax() {
+		//				return max;
+		//			}
+		//
+		//			public Integer getMin() {
+		//				return min;
+		//			}
+		//
+		//			@Override
+		//			public boolean equals(Object obj) {
+		//				if (obj instanceof MinMaxRangeHolder) {
+		//					MinMaxRangeHolder other = (MinMaxRangeHolder) obj;
+		//					return min.equals(other.min) && max.equals(other.max);
+		//				}
+		//				return false;
+		//			}
+		//		}
 
 		private static final int MAX_VALUE = 9999;
 		private NewLineConfigValue minMaxRange;
