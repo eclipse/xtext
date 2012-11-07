@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +37,7 @@ import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -45,7 +45,6 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyE
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -229,6 +228,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		status = statusProvider.get();
 		try {
 			currentUpdateAcceptor = updateAcceptorProvider.get();
+			transferChangeRedirector(currentUpdateAcceptor);
 			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 					progress.newChild(1));
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
@@ -245,6 +245,12 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			handleException(exc, status);
 		}
 		return status.getRefactoringStatus();
+	}
+
+	protected void transferChangeRedirector(IRefactoringUpdateAcceptor currentUpdateAcceptor2) {
+		if(currentUpdateAcceptor instanceof IChangeRedirector.Aware && renameElementContext instanceof IChangeRedirector.Aware) 
+			((IChangeRedirector.Aware) currentUpdateAcceptor).setChangeRedirector(
+					((IChangeRedirector.Aware)getRenameElementContext()).getChangeRedirector());
 	}
 
 	@Override
