@@ -68,6 +68,11 @@ class FormattableDocument {
 			data.forEach[addFormatting]
 	}
 	
+	def operator_add((IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> data) {
+		if(data != null)
+			operator_add(data.apply(cfg))
+	}
+	
 	def List<TextReplacement> renderToEdits() {
 		renderToEdits(0, document.length)
 	}

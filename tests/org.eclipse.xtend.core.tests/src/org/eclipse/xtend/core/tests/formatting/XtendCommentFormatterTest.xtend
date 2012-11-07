@@ -53,7 +53,6 @@ class XtendCommentFormatterTest extends AbstractFormatterTest {
 			
 			import java.util.Map
 			
-			
 			// my comment
 			class bar {
 			}
@@ -97,7 +96,6 @@ class XtendCommentFormatterTest extends AbstractFormatterTest {
 	@Test def formatMLCommentBeforeStatement2() {
 		assertFormatted('''
 			import java.util.Map
-			
 			
 			/* my comment */
 			class bar {

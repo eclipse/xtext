@@ -31,16 +31,16 @@ public class NewLineTab extends AbstractModifyDialogTab {
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, "Insert new line");
 		XtendFormatterConfigKeys xtendFormatterConfig = new XtendFormatterConfigKeys();
-		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", xtendFormatterConfig.newLinesAfterPackageName);
-		createMinMaxPref(generalGroup, numColumns, "Between imports (min/max):", xtendFormatterConfig.newLinesBetweenImports);
-		createMinMaxPref(generalGroup, numColumns, "After import section (min/max):", xtendFormatterConfig.newLinesAfterImportSection);
-		createMinMaxPref(generalGroup, numColumns, "Before first member (min/max):", xtendFormatterConfig.newLinesBeforeFirstMember);
-		createMinMaxPref(generalGroup, numColumns, "After last member (min/max):", xtendFormatterConfig.newLinesAfterLastMember);
-		createMinMaxPref(generalGroup, numColumns, "Between fields (min/max):", xtendFormatterConfig.newLinesBetweenFields);
-		createMinMaxPref(generalGroup, numColumns, "Between fields and methods (min/max):", xtendFormatterConfig.newLinesBetweenFieldsAndMethods);
-		createMinMaxPref(generalGroup, numColumns, "Between methods (min/max):", xtendFormatterConfig.newLinesBetweenMethods);
-		createMinMaxPref(generalGroup, numColumns, "Between classes (min/max):", xtendFormatterConfig.newLinesBetweenClasses);
-		createMinMaxPref(generalGroup, numColumns, "Around expressions (min/max):", xtendFormatterConfig.newLinesAroundExpression);
-		createMinMaxPref(generalGroup, numColumns, "After aannotations (min/max):", xtendFormatterConfig.newLinesAfterAnnotations);
+//		createMinMaxPref(generalGroup, numColumns, "After package name (min/max):", xtendFormatterConfig.newLinesAfterPackageName);
+//		createMinMaxPref(generalGroup, numColumns, "Between imports (min/max):", xtendFormatterConfig.newLinesBetweenImports);
+//		createMinMaxPref(generalGroup, numColumns, "After import section (min/max):", xtendFormatterConfig.newLinesAfterImportSection);
+//		createMinMaxPref(generalGroup, numColumns, "Before first member (min/max):", xtendFormatterConfig.newLinesBeforeFirstMember);
+//		createMinMaxPref(generalGroup, numColumns, "After last member (min/max):", xtendFormatterConfig.newLinesAfterLastMember);
+//		createMinMaxPref(generalGroup, numColumns, "Between fields (min/max):", xtendFormatterConfig.newLinesBetweenFields);
+//		createMinMaxPref(generalGroup, numColumns, "Between fields and methods (min/max):", xtendFormatterConfig.newLinesBetweenFieldsAndMethods);
+//		createMinMaxPref(generalGroup, numColumns, "Between methods (min/max):", xtendFormatterConfig.newLinesBetweenMethods);
+//		createMinMaxPref(generalGroup, numColumns, "Between classes (min/max):", xtendFormatterConfig.newLinesBetweenClasses);
+//		createMinMaxPref(generalGroup, numColumns, "Around expressions (min/max):", xtendFormatterConfig.newLinesAroundExpression);
+//		createMinMaxPref(generalGroup, numColumns, "After aannotations (min/max):", xtendFormatterConfig.newLinesAfterAnnotations);
 	}
 }

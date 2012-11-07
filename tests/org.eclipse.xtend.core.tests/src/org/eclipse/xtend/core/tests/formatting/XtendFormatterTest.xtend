@@ -129,7 +129,6 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			class bar {
 			}
 			
-			
 			class baz {
 			}
 		''', '''
@@ -166,7 +165,6 @@ class XtendFormatterTest extends AbstractFormatterTest {
 			import java.util.Map
 			
 			import java.util.Set
-
 			
 			class bar {
 			}
