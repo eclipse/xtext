@@ -40,9 +40,10 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	protected URI targetMemberNewURI;
 	protected String originalName;
 
-	public JvmMemberRenameStrategy(JvmMember targetMember) {
+	public boolean initialize(JvmMember targetMember, IRenameElementContext context) {
 		targetMemberOriginalURI = EcoreUtil.getURI(targetMember);
 		originalName = targetMember.getSimpleName();
+		return true;
 	}
 
 	public void applyDeclarationChange(final String newName, ResourceSet resourceSet) {
@@ -103,6 +104,9 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	}
 	
 	public static class Provider implements IRenameStrategy.Provider {
+		@Inject
+		private com.google.inject.Provider<JvmMemberRenameStrategy> guiceStartegyProvider;
+		
 		@Retention(RetentionPolicy.RUNTIME)
 		@BindingAnnotation
 		public @interface Delegate {
@@ -112,8 +116,11 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		private IRenameStrategy.Provider delegate;
 
 		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
-			if(targetEObject instanceof JvmMember) 
-				return new JvmMemberRenameStrategy((JvmMember) targetEObject);
+			if(targetEObject instanceof JvmMember) {
+				JvmMemberRenameStrategy jvmMemberRenameStrategy = guiceStartegyProvider.get();
+				jvmMemberRenameStrategy.initialize((JvmMember) targetEObject, renameElementContext);
+				return jvmMemberRenameStrategy;
+			}
 			return delegate == null ? null : delegate.get(targetEObject, renameElementContext);
 		}
 	}
