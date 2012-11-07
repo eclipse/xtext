@@ -21,6 +21,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -109,6 +110,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile fooFile = this.testHelper.xtendFile("Foo", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
       EList<XtendTypeDeclaration> _xtendTypes = fooFile.getXtendTypes();
       XtendTypeDeclaration _get = _xtendTypes.get(0);
       final XtendClass fooClass = ((XtendClass) _get);

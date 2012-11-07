@@ -12,6 +12,7 @@ import org.junit.Test
 import static extension com.google.common.collect.Iterables.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -49,6 +50,7 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 				}
 			}
 		''');
+		IResourcesSetupUtil::waitForAutoBuild
 		val fooClass = fooFile.xtendTypes.get(0) as XtendClass
 		val fooMethod1 = fooClass.members.get(1)
 		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, null)

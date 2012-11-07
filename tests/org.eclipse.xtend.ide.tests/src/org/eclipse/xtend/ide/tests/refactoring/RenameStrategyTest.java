@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -32,8 +33,12 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -49,6 +54,9 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private IRenameStrategy.Provider renameStrategyProvider;
+
+	@Inject
+	private IRenameContextFactory renameContextFactory;
 
 	@Inject
 	private IXtendJvmAssociations associations;
@@ -104,7 +112,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 
 	@Test public void testInferredClassRenamed() throws Exception {
 		XtendClass fooClass = (XtendClass) testHelper.xtendFile("Foo", "class Foo { }").getXtendTypes().get(0);
-		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooClass, null);
+		IRenameStrategy renameStrategy = createRenameStrategy(fooClass);
 		renameStrategy.applyDeclarationChange("Bar", fooClass.eResource().getResourceSet());
 		JvmGenericType inferredType = associations.getInferredType(fooClass);
 		JvmConstructor inferredConstructor = associations.getInferredConstructor(fooClass);
@@ -122,7 +130,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	@Test public void testInferredMethodRenamed() throws Exception {
 		XtendFunction fooMethod = (XtendFunction) ((XtendClass)testHelper.xtendFile("Foo", "class Foo { def Foo foo() {this} }")
 				.getXtendTypes().get(0)).getMembers().get(0);
-		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
+		IRenameStrategy renameStrategy = createRenameStrategy(fooMethod);
 		renameStrategy.applyDeclarationChange("bar", fooMethod.eResource().getResourceSet());
 		assertEquals("bar", fooMethod.getName());
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
@@ -136,7 +144,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	@Test public void testXtendConstructorIgnored() throws Exception {
 		XtendConstructor constructor = (XtendConstructor) ((XtendClass)testHelper.xtendFile("Foo", "class Foo { new() {} }")
 				.getXtendTypes().get(0)).getMembers().get(0);
-		IRenameStrategy renameStrategy = renameStrategyProvider.get(constructor, null);
+		IRenameStrategy renameStrategy = createRenameStrategy(constructor);
 		assertNull(renameStrategy);
 	}
 	
@@ -144,8 +152,9 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		XtendClass fooClass = (XtendClass) testHelper.xtendFile("Foo", 
 				"class Foo { def dispatch foo(Number it) {} def dispatch foo(String it) {} }")
 				.getXtendTypes().get(0);
+		IResourcesSetupUtil.waitForAutoBuild();
 		XtendFunction fooMethod0 = (XtendFunction) fooClass.getMembers().get(0);
-		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod0, null);
+		IRenameStrategy renameStrategy = createRenameStrategy(fooMethod0);
 		assertNotNull(renameStrategy);
 		renameStrategy.applyDeclarationChange("bar", fooMethod0.eResource().getResourceSet());
 		for(XtendFunction f: filter(fooClass.getMembers(), XtendFunction.class)) { 
@@ -161,4 +170,9 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		}
 	}
 
+	protected IRenameStrategy createRenameStrategy(EObject target) throws NoSuchStrategyException {
+		IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(target, null, null, 
+				(XtextResource) target.eResource());
+		return renameStrategyProvider.get(target, renameElementContext);
+	}
 }

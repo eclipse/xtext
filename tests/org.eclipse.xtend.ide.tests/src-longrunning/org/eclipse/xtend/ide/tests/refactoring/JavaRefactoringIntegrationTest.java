@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -34,7 +34,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -98,7 +97,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IType javaClass = findJavaType("test.JavaClass");
 			assertNotNull(javaClass);
 			renameJavaElement(javaClass, "NewJavaClass");
-			IResourcesSetupUtil.waitForAutoBuild();
 			assertFileContains(xtendClass, "import test.NewJavaClass");
 			assertFileContains(xtendClass, "List<NewJavaClass> x");
 		} finally {
@@ -114,9 +112,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
 			renameXtendElement(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/NewJavaClass.java");
-			IResourcesSetupUtil.waitForAutoBuild();
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaClass"));
+			assertDocumentContains(editor, "NewJavaClass");
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -131,10 +127,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			final XtextEditor editor = testHelper.openEditor(xtendClass);
 			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/test/NewJavaClass.java");
-			IResourcesSetupUtil.waitForAutoBuild();
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(),
-					equalsIgnoreWhitespace(xtendModel.replace("JavaClass", "NewJavaClass"), editor.getDocument().get()));
+			assertDocumentContainsIgnoreWhitespace(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -149,8 +142,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 			XtextEditor editor = testHelper.openEditor(xtendClass);
 			renameJavaElement(findJavaType("JavaClass"), "NewJavaClass");
-			synchronize(editor);
-			assertEquals(xtendModel.replace("JavaClass", "NewJavaClass"), editor.getDocument().get());
+			assertDocumentContains(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -180,10 +172,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
 			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/test/NewJavaClass.java");
-			IResourcesSetupUtil.waitForAutoBuild();
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(),
-					editor.getDocument().get().contains("{ NewJavaClass x = new NewJavaClass() }"));
+			assertDocumentContains(editor, "{ NewJavaClass x = new NewJavaClass() }");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -197,10 +186,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
 			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/test/NewJavaClass.java");
-			IResourcesSetupUtil.waitForAutoBuild();
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(),
-					editor.getDocument().get().contains("NewJavaClass x = new NewJavaClass()"));
+			assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -230,10 +216,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
 			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/NewJavaClass.java");
-			IResourcesSetupUtil.waitForAutoBuild();
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(),
-					editor.getDocument().get().contains("NewJavaClass x = new NewJavaClass()"));
+			assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -244,7 +227,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
 		String xtendModel = "class XtendClass extends JavaClass { int bar = foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		IField javaField = findJavaType("JavaClass").getField("foo");
 		assertNotNull(javaField);
 		renameJavaElement(javaField, "baz");
@@ -256,10 +238,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
 		String xtendModel = "class XtendClass extends JavaClass { int bar = foo }";
 		XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
-		synchronize(editor);
-		assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("bar = baz"));
+		assertDocumentContains(editor, "bar = baz");
 	}
 
 	@Test
@@ -268,7 +248,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
 			String xtendModel = "class XtendClass { JavaEnum fooBar }";
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
 			IType javaEnum = findJavaType("JavaEnum");
 			assertNotNull(javaEnum);
 			renameJavaElement(javaEnum, "NewJavaEnum");
@@ -284,11 +263,9 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
 			String xtendModel = "class XtendClass { JavaEnum fooBar }";
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
 			renameXtendElement(editor, xtendModel.indexOf("JavaEnum"), "NewJavaEnum");
 			assertFileExists("src/NewJavaEnum.java");
-			synchronize(editor);
-			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaEnum fooBar"));
+			assertDocumentContains(editor, "NewJavaEnum fooBar");
 		} finally {
 			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
 		}
@@ -299,7 +276,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
 		String xtendModel = "class XtendClass { JavaEnum fooBar = JavaEnum::BAR }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		IField javaEnumLiteral = findJavaType("JavaEnum").getField("BAR");
 		assertNotNull(javaEnumLiteral);
 		renameJavaElement(javaEnumLiteral, "BAZ");
@@ -311,10 +287,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
 		String xtendModel = "class XtendClass { JavaEnum fooBar = JavaEnum::BAR }";
 		XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		renameXtendElement(editor, xtendModel.indexOf("BAR"), "BAZ");
-		synchronize(editor);
-		assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("JavaEnum fooBar = JavaEnum::BAZ"));
+		assertDocumentContains(editor, "JavaEnum fooBar = JavaEnum::BAZ");
 	}
 
 	@Test
@@ -322,7 +296,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
 		String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IResourcesSetupUtil.waitForAutoBuild();
 		IMethod foo = findJavaType("JavaClass").getMethod("foo", new String[0]);
 		assertNotNull(foo);
 		renameJavaElement(foo, "baz");
@@ -336,7 +309,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
-		synchronize(editor);
 		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(javaFile, "public void baz()");
 	}
@@ -347,8 +319,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("getFoo"), "getBaz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("getFoo", "getBaz").replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("getFoo", "getBaz").replace("foo", "baz"));
 	}
 
 	@Test
@@ -357,8 +328,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("getFoo"), "getBaz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("getFoo", "getBaz").replace("foo", "getBaz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("getFoo", "getBaz").replace("foo", "getBaz"));
 	}
 
 	@Test
@@ -367,8 +337,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("isFoo"), "isBaz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("isFoo", "isBaz").replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("isFoo", "isBaz").replace("foo", "baz"));
 	}
 	
 	@Test
@@ -377,8 +346,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("isFoo"), "isBaz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("isFoo", "isBaz").replace("foo", "isBaz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("isFoo", "isBaz").replace("foo", "isBaz"));
 	}
 	
 	@Test
@@ -387,8 +355,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("setFoo"), "setBaz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("setFoo", "setBaz").replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("setFoo", "setBaz").replace("foo", "baz"));
 	}
 
 	@Test
@@ -422,8 +389,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertFileContains(javaInterface, "void foobar()");
 		assertFileContains(javaClass, "void foobar()");
 		assertFileContains(referringJavaClass, "new XtendClass().foobar()");
-		synchronize(editor);
-		assertTrue(editor.getDocument().get().contains("foobar()"));
+		assertDocumentContains(editor, "foobar()");
 	}
 
 	@Test
@@ -437,8 +403,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		// on Galileo, _foo is a discouraged method name
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
 		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
 	}
@@ -456,8 +421,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(superClass);
 		// on Galileo, _foo is a discouraged method name
 		renameXtendElement(editor, superModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
-		synchronize(editor);
-		assertEquals(superModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, superModel.replace("foo", "baz"));
 		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
 		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
 		assertFileContains(subClass, subModel.replace("foo", "baz"));
@@ -476,8 +440,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(subClass);
 		// on Galileo, _foo is a discouraged method name
 		renameXtendElement(editor, subModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
-		synchronize(editor);
-		assertEquals(subModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, subModel.replace("foo", "baz"));
 		assertFileContains(xtendCaller, xtendCallerModel.replace("foo", "baz"));
 		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
 		assertFileContains(superClass, superModel.replace("foo", "baz"));
@@ -491,11 +454,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile javaCaller = testHelper.createFile("JavaCaller.java", javaCallerModel);
 		String xtendCallerModel = "class XtendCaller { def bar(XtendClass x) { x.foo(null) } }";
 		IFile xtendCaller = testHelper.createFile("XtendCaller.xtend", xtendCallerModel);
+		waitForAutoBuild();
 		final XtextEditor editor = testHelper.openEditor(xtendCaller);
 		// on Galileo, _foo is a discouraged method name
 		renameXtendElement(editor, xtendCallerModel.indexOf("foo"), "baz", RefactoringStatus.WARNING);
-		synchronize(editor);
-		assertEquals(xtendCallerModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendCallerModel.replace("foo", "baz"));
 		assertFileContains(xtendClass, xtendModel.replace("foo", "baz"));
 		assertFileContains(javaCaller, javaCallerModel.replace("foo", "baz"));
 	}
@@ -506,6 +469,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf('+');
+		waitForAutoBuild();
 		IRenameElementContext renameElementContext = createRenameElementContext(editor, offset);
 		assertNull(renameElementContext);
 	}
@@ -526,8 +490,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf("operator_plus");
 		renameXtendElement(editor, offset, "operator_minus");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("operator_plus", "operator_minus"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("operator_plus", "operator_minus"));
 	}
 
 	@Test
@@ -537,8 +500,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf("foo");
 		renameXtendElement(editor, offset, "baz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 	}
 
 	@Test
@@ -548,8 +510,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.lastIndexOf("foo");
 		renameXtendElement(editor, offset, "baz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 	}
 
 	@Test
@@ -559,8 +520,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf("T");
 		renameXtendElement(editor, offset, "U");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("T", "U"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("T", "U"));
 	}
 
 	@Test
@@ -570,8 +530,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.lastIndexOf("T");
 		renameXtendElement(editor, offset, "U");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("T", "U"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("T", "U"));
 	}
 
 	@Test
@@ -583,8 +542,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "bar");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "bar"));
 		assertFileContains(javaBase, "public void bar()");
 		assertFileContains(javaSub, "public void bar()");
 	}
@@ -598,8 +556,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.lastIndexOf("foo"), "bar");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "bar"));
 		assertFileContains(javaBase, "public void bar()");
 		assertFileContains(javaSub, "public void bar()");
 	}
@@ -612,11 +569,10 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String xtendModel = "class XtendClass implements JavaBase { override foo() { new JavaSub().foo }}";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		IResourcesSetupUtil.waitForAutoBuild();
+		waitForAutoBuild();
 		IMethod fooMethod = findJavaType("JavaBase").getMethod("foo", new String[] {});
 		renameJavaElement(fooMethod, "bar");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "bar"));
 		assertFileContains(javaBase, "public void bar()");
 		assertFileContains(javaSub, "public void bar()");
 	}
@@ -633,8 +589,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		IMethod fooMethod = findJavaType("JavaSub").getMethod("foo", new String[] {});
 		renameJavaElement(fooMethod, "bar");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "bar"));
 		assertFileContains(javaBase, "public void bar()");
 		assertFileContains(javaSub, "public void bar()");
 	}
@@ -645,14 +600,13 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			String xtendModel = "class XtendClass { }";
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
-			IResourcesSetupUtil.waitForAutoBuild();
 			final XtextEditor editor = testHelper.openEditor(xtendClass);
 			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
 			assertFileExists("src/NewXtendClass.xtend");
 			assertFileContains(javaClass, "JavaClass extends NewXtendClass");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 
@@ -662,16 +616,15 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
 			String xtendModel = "class XtendRef { XtendClass foo }";
 			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 			final XtextEditor editor = testHelper.openEditor(xtendRef);
 			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			synchronize(editor);
-			assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
 			IFile newXtendClass = assertFileExists("src/NewXtendClass.xtend");
 			assertFileContains(newXtendClass, "class NewXtendClass {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 
@@ -681,16 +634,15 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
 			String xtendModel = "class XtendRef { def foo() { val bar = new XtendClass } }";
 			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 			final XtextEditor editor = testHelper.openEditor(xtendRef);
 			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			synchronize(editor);
-			assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
 			IFile newXtendClass = assertFileExists("src/NewXtendClass.xtend");
 			assertFileContains(newXtendClass, "class NewXtendClass {}");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 
@@ -702,13 +654,12 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
 			final XtextEditor editor = testHelper.openEditor(xtendRef);
 			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			synchronize(editor);
-			assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
 			IFile newXtendClass = assertFileExists("src/NewXtendClass.xtend");
 			assertFileContains(newXtendClass, "class NewXtendClass {");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 
@@ -720,8 +671,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				"public class JavaClass extends XtendClass { int bar = foo; }");
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 		assertFileContains(javaClass, "int bar = baz");
 	}
 
@@ -733,8 +683,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				"public class JavaClass extends XtendClass { public void bar() { foo(); } }");
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 		assertFileContains(javaClass, "{ baz(); }");
 	}
 
@@ -746,10 +695,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String subModel = "class Sub extends Super { def bar() { ''.foo } }";
 		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
 		final XtextEditor editor = testHelper.openEditor(subClass);
-		IResourcesSetupUtil.waitForAutoBuild();
 		renameXtendElement(editor, subModel.indexOf("foo"), "newFoo");
-		synchronize(editor);
-		assertEquals(subModel.replace("foo", "newFoo"), editor.getDocument().get());
+		assertDocumentContains(editor, subModel.replace("foo", "newFoo"));
 		assertFileContains(superClass, "public void newFoo(");
 	}
 
@@ -761,12 +708,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			String refModel = "import static test.Extension.* class XtendRef { def bar() { foo('') } }";
 			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			IResourcesSetupUtil.waitForAutoBuild();
 			assertFileExists("src/test/NewExtension.java");
 			assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 	
@@ -778,12 +724,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			String refModel = "import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
 			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			IResourcesSetupUtil.waitForAutoBuild();
 			assertFileExists("src/test/NewExtension.java");
 			assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 	
@@ -795,12 +740,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			String refModel = "package test import static test.Extension.* class XtendRef { def bar() { foo('') } }";
 			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			IResourcesSetupUtil.waitForAutoBuild();
 			assertFileExists("src/test/NewExtension.java");
 			assertFileContains(refXtendClass, "import static test.NewExtension.*");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 	
@@ -812,12 +756,11 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			String refModel = "package test import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
 			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			IResourcesSetupUtil.waitForAutoBuild();
 			assertFileExists("src/test/NewExtension.java");
 			assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			IResourcesSetupUtil.waitForAutoBuild();
+			waitForAutoBuild();
 		}
 	}
 	
@@ -829,8 +772,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				"public class JavaClass extends XtendClass { public void bar() { setFoo(getFoo()); } }");
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 		assertFileContains(javaClass, "{ setBaz(getBaz()); }");
 	}
 
@@ -840,8 +782,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("class Secondary") + 6, "NewSecondary");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("Secondary", "NewSecondary"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("Secondary", "NewSecondary"));
 	}
 
 	@Test
@@ -850,8 +791,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("Secondary"), "NewSecondary");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("Secondary", "NewSecondary"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("Secondary", "NewSecondary"));
 	}
 
 	@Test
@@ -860,8 +800,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("new Secondary") + 5, "NewSecondary");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("Secondary", "NewSecondary"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("Secondary", "NewSecondary"));
 	}
 
 	@Test
@@ -870,8 +809,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("new Secondary") + 5, "NewSecondary");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("Secondary", "NewSecondary"), editor.getDocument().get());
+		assertDocumentContains(editor, xtendModel.replace("Secondary", "NewSecondary"));
 	}
 
 	@Test
@@ -880,8 +818,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
-		synchronize(editor);
-		assertTrue(equalsIgnoreWhitespace(xtendModel.replace("bar", "baz"), editor.getDocument().get()));
+		assertDocumentContains(editor, xtendModel.replace("bar", "baz"));
 	}
 
 	@Test
@@ -890,8 +827,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
-		synchronize(editor);
-		assertTrue(equalsIgnoreWhitespace(xtendModel.replace("bar", "baz"), editor.getDocument().get()));
+		assertDocumentContains(editor, xtendModel.replace("bar", "baz"));
 	}
 
 	protected IFile assertFileExists(String fileName) throws Exception {
@@ -902,19 +838,38 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected void assertFileContains(IFile file, String contents) throws Exception {
+		file.refreshLocal(IResource.DEPTH_ZERO, null);
 		String fileContents = testHelper.getContents(file);
 		assertTrue(fileContents, fileContents.contains(contents));
 	}
+	
+	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
+		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
+		String editorContent = editor.getDocument().get();
+		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, editorContent.contains(expectedContent));
+	}
+
+	protected void assertDocumentContainsIgnoreWhitespace(XtextEditor editor, String expectedContent) throws CoreException {
+		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
+		String editorContent = editor.getDocument().get();
+		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, 
+				editorContent.replaceAll("\\s*", " ").contains(expectedContent.replaceAll("\\s*",  " ")));
+	}
+
+	protected void executeAsyncDisplayJobs() {
+		while(Display.getCurrent().readAndDispatch()) {}
+	}
 
 	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName, int allowedSeverity) throws Exception {
-		while(Display.getCurrent().readAndDispatch()) {}
+		waitForAutoBuild();
+		executeAsyncDisplayJobs();
 		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 		assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
 		Change change = renameRefactoring.createChange(new NullProgressMonitor());
 		Change undoChange = change.perform(new NullProgressMonitor());
-		while(Display.getCurrent().readAndDispatch()) {}
-		IResourcesSetupUtil.waitForAutoBuild();
+		waitForAutoBuild();
+		executeAsyncDisplayJobs();
 		return undoChange;
 	}
 
@@ -923,6 +878,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
+		waitForAutoBuild();
+		executeAsyncDisplayJobs();
 		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 		assertFalse("Expected an error", status.isOK());
@@ -943,7 +900,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected IRenameElementContext createRenameElementContext(final XtextEditor editor, final int offset) {
-		IResourcesSetupUtil.waitForAutoBuild();
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
 					public IRenameElementContext exec(XtextResource state) throws Exception {
@@ -955,30 +911,31 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		return renameElementContext;
 	}
 
-	protected void synchronize(XtextEditor editor) throws CoreException {
-		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
-	}
-
 	protected void renameJavaElement(IType javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
+		waitForAutoBuild();
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+		waitForAutoBuild();
 	}
 
 	protected void renameJavaElement(IMethod javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
+		waitForAutoBuild();
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+		waitForAutoBuild();
 	}
 
 	protected void renameJavaElement(IField javaElement, String newName) throws CoreException, InterruptedException,
 			InvocationTargetException {
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+		waitForAutoBuild();
 	}
 
 	protected IType findJavaType(String typeName) throws JavaModelException {
-		IResourcesSetupUtil.waitForAutoBuild();
+		waitForAutoBuild();
 		IJavaProject javaProject = JavaCore.create(testHelper.getProject());
 		IType javaClass = javaProject.findType(typeName);
 		return javaClass;
