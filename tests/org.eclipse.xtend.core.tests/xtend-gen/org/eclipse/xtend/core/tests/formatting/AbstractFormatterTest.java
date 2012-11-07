@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
@@ -202,8 +201,7 @@ public abstract class AbstractFormatterTest {
       final String oldDocument = _rootNode.getText();
       MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(this.keys);
       final MapBasedConfigurationValues<XtendFormatterConfigKeys> rc = _mapBasedConfigurationValues;
-      IntegerKey _maxLineWidth = this.keys.getMaxLineWidth();
-      rc.<Integer>put(_maxLineWidth, Integer.valueOf(80));
+      rc.<Integer>put(this.keys.maxLineWidth, Integer.valueOf(80));
       this.formatter.setAllowIdentityEdits(true);
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.tests.formatting.TestConfig1;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -18,6 +19,16 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendFormatterConfigurationTest {
+  @Test
+  public void testXtendDefaultValues() {
+    XtendFormatterConfigKeys _xtendFormatterConfigKeys = new XtendFormatterConfigKeys();
+    final XtendFormatterConfigKeys keys = _xtendFormatterConfigKeys;
+    MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys);
+    final MapBasedConfigurationValues<XtendFormatterConfigKeys> actual = _mapBasedConfigurationValues;
+    Integer _get = actual.<Integer>get(keys.maxLineWidth);
+    Assert.assertEquals(120, (_get).intValue());
+  }
+  
   @Test
   public void testDefaultValues() {
     TestConfig1 _testConfig1 = new TestConfig1();

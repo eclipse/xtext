@@ -11,7 +11,6 @@ import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.LeafInfo;
 import org.eclipse.xtend.core.formatting.NewLineConfigValue;
 import org.eclipse.xtend.core.formatting.NewLineData;
@@ -208,8 +207,7 @@ public class FormatterExtensions {
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
       IConfigurationValues<XtendFormatterConfigKeys> _cfg = fmt.getCfg();
-      IntegerKey _maxLineWidth = this._xtendFormatterConfigKeys.getMaxLineWidth();
-      Integer _get = _cfg.<Integer>get(_maxLineWidth);
+      Integer _get = _cfg.<Integer>get(this._xtendFormatterConfigKeys.maxLineWidth);
       return (line <= (_get).intValue());
     }
   }

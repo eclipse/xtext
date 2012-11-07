@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
-import org.eclipse.xtend.core.formatting.TransientKey;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
@@ -40,14 +39,11 @@ public class RuntimeFormatterConfigurationProvider implements IFormatterConfigur
       final IIndentationInformation indentationInfo = this.whitespaceInfo.getIndentationInformation(_uRI);
       URI _uRI_1 = resource.getURI();
       final ILineSeparatorInformation lineSeparatorInfo = this.whitespaceInfo.getLineSeparatorInformation(_uRI_1);
-      TransientKey<String> _lineSeparator = this.keys.getLineSeparator();
-      String _lineSeparator_1 = lineSeparatorInfo.getLineSeparator();
-      cfg.<String>put(_lineSeparator, _lineSeparator_1);
-      TransientKey<String> _indentation = this.keys.getIndentation();
+      String _lineSeparator = lineSeparatorInfo.getLineSeparator();
+      cfg.<String>put(this.keys.lineSeparator, _lineSeparator);
       String _indentString = indentationInfo.getIndentString();
-      cfg.<String>put(_indentation, _indentString);
-      TransientKey<Integer> _indentationLength = this.keys.getIndentationLength();
-      cfg.<Integer>put(_indentationLength, Integer.valueOf(4));
+      cfg.<String>put(this.keys.indentation, _indentString);
+      cfg.<Integer>put(this.keys.indentationLength, Integer.valueOf(4));
       _xblockexpression = (cfg);
     }
     return _xblockexpression;

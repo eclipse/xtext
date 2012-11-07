@@ -11,7 +11,6 @@ import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.TextReplacement;
-import org.eclipse.xtend.core.formatting.TransientKey;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -479,8 +478,7 @@ public class FormattableDocument {
         IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
         IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
         XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
-        TransientKey<String> _indentation = _keys.getIndentation();
-        final String indent = _cfg.<String>get(_indentation);
+        final String indent = _cfg.<String>get(_keys.indentation);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
@@ -503,8 +501,7 @@ public class FormattableDocument {
     IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
     IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
     XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
-    TransientKey<Integer> _indentationLength = _keys.getIndentationLength();
-    Integer _get = _cfg.<Integer>get(_indentationLength);
+    Integer _get = _cfg.<Integer>get(_keys.indentationLength);
     int _multiply = (levels * (_get).intValue());
     return _multiply;
   }
@@ -518,8 +515,7 @@ public class FormattableDocument {
         IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
         IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
         XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
-        TransientKey<String> _lineSeparator = _keys.getLineSeparator();
-        final String sep = _cfg.<String>get(_lineSeparator);
+        final String sep = _cfg.<String>get(_keys.lineSeparator);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
