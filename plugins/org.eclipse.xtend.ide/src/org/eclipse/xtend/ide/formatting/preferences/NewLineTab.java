@@ -32,10 +32,10 @@ public class NewLineTab extends AbstractModifyDialogTab {
 		XtendFormatterConfigKeys xtendFormatterConfig = new XtendFormatterConfigKeys();
 
 		Group generalGroup = createGroup(col, composite, "Expressions");
-		createCheckboxPref(generalGroup, col, "Around expressions:", xtendFormatterConfig.newLineAroundExpression);
+		createCheckboxPref(generalGroup, col, "Around expressions", xtendFormatterConfig.newLineAroundExpression);
 
 		Group annoGr = createGroup(col, composite, "Annotations");
-		createCheckboxPref(annoGr, col, "Insert new line after aannotations on ???",
+		createCheckboxPref(annoGr, col, "Insert new line after annotations",
 				xtendFormatterConfig.newLineAfterAnnotations);
 
 	}

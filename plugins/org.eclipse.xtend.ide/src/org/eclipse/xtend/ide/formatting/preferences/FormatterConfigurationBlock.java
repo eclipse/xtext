@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
-import org.eclipse.xtend.ide.formatting.preferences.XtendPreviewFactory.XtendFormatterPreview;
 import org.eclipse.xtext.Constants;
 
 import com.google.inject.Inject;
@@ -73,7 +72,7 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 
 		xtendPreview.getEditorViewer().getControl().setLayoutData(gd);
 		profileManager.addObserver(xtendPreview.getObserver());
-		xtendPreview.doFormat(profileManager.getSelected().getSettings());
+		xtendPreview.doUpdate(profileManager.getSelected().getSettings());
 	}
 
 	@Override
