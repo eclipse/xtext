@@ -43,6 +43,7 @@ import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
+import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
@@ -269,7 +270,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public void configureJvmMemberRenameStrategy$Provider$Delegate(Binder binder) {
 		binder.bind(IRenameStrategy.Provider.class)
 			.annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class)
-			.to(XtendRenameStrategy.Provider.class);
+			.to(XtendRenameStrategyProvider.class);
 	}
 		
 	@Override
