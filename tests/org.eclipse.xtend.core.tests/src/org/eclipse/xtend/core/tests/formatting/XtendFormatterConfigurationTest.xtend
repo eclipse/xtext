@@ -10,9 +10,16 @@ import org.eclipse.xtend.core.formatting.TransientKey
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 
 class XtendFormatterConfigurationTest {
 
+	@Test def testXtendDefaultValues() {
+		val keys = new XtendFormatterConfigKeys()
+		val actual = new MapBasedConfigurationValues(keys)
+		assertEquals(120, actual.get(keys.maxLineWidth))
+	}
+	
 	@Test def testDefaultValues() {
 		val actual = new MapBasedConfigurationValues(new TestConfig1()).store.entrySet.join("\n", [ '''«key» = «value»'''])
 		assertEquals('''

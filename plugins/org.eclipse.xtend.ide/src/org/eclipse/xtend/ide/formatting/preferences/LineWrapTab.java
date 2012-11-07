@@ -42,7 +42,7 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfigKeys().getMaxLineWidth());
+		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfigKeys().maxLineWidth);
 	}
 
 	@Override
