@@ -174,6 +174,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		public List<String> getAdditionalImportedNames() {
 			return additionalImportedNames;
 		}
+
 	}
 
 	public static class RefactoringImports implements IImportCollection {

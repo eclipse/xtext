@@ -10,24 +10,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy;
-
-import com.google.inject.Inject;
 
 /**
  * Encapsulates the model changes of a rename refactoring.
  */
 public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 
+	private IRenameElementContext context;
+	
 	@Override
 	public boolean initialize(EObject targetElement, IRenameElementContext context) {
+		this.context = context;
 		return super.initialize(targetElement, context);
 	}
 	
@@ -48,29 +47,12 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 			if (!resourceURI.isPlatformResource())
 				throw new RefactoringException("Renamed class does not reside in the workspace");
 			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));
+			if(context instanceof IChangeRedirector.Aware) { 
+				if(((IChangeRedirector.Aware) context).getChangeRedirector().getRedirectedPath(path) != path)
+					return null;
+			}
 			return path;
 		}
 		return null;
-	}
-	
-	public static class Provider extends DefaultRenameStrategyProvider {
-		@Inject
-		private com.google.inject.Provider<DispatchMethodRenameStrategy> dispatchStartegyProvider;
-		
-		@Override
-		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
-			if(targetEObject instanceof XtendConstructor)
-				// Xtend constructors can be ignored in rename refactorings
-				return null;
-			return super.get(targetEObject, renameElementContext);
-		}
-		
-		@Override
-		protected IRenameStrategy createRenameStrategy(EObject targetEObject, IRenameElementContext renameElementContext) {
-			if (renameElementContext instanceof DispatchMethodRenameContext) 
-				return dispatchStartegyProvider.get();
-			else
-				return super.createRenameStrategy(targetEObject, renameElementContext);
-		}
 	}
 }

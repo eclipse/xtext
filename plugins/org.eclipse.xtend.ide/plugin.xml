@@ -913,30 +913,19 @@
             label="%JavaApplicationShortcut.label"
             modes="run, debug">
          <contextualLaunch>
-           <enablement>
-             <with variable="selection">
-               <count value="1"/>
-               <iterate>
-                 <and>
-                   <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                   <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch">
-                     <and>
-                       <adapt type="org.eclipse.jdt.core.IJavaElement">
-                         <test property="org.eclipse.jdt.core.isInJavaProject"/>
-                       </adapt>
-                       <or>
-                         <test property="org.eclipse.jdt.launching.hasMain"/>
-                         <test property="org.eclipse.jdt.launching.isContainer"/>
-                         <test property="org.eclipse.jdt.launching.isPackageFragment"/>
-                         <test property="org.eclipse.jdt.launching.isPackageFragmentRoot"/>
-                       </or>
-                     </and> 
-                   </adapt>
-                 </and>
-               </iterate>
-             </with>
-           </enablement>
-           </contextualLaunch>
+            <enablement>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <test
+                        property="org.eclipse.core.resources.extension"
+                        value="*.xtend">
+                  </test>
+               </with>
+            </enablement>
+         </contextualLaunch>
          <configurationType
                id="org.eclipse.jdt.launching.localJavaApplication">
          </configurationType>
@@ -1028,6 +1017,23 @@
             %DerivedSourceViewBackgroundColor.description
          </description>
       </colorDefinition>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.XtendFileRenameParticipant"
+            id="org.eclipse.xtend.ide.resourceRenameParticipant"
+            name="Xtend File Rename Participant">
+         <enablement>
+           <adapt
+                 type="org.eclipse.core.resources.IFile">
+              <test
+                    property="org.eclipse.core.resources.extension"
+                    value="xtend">
+              </test>
+           </adapt>
+         </enablement>
+      </renameParticipant>
    </extension>
    
 </plugin>
