@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -73,6 +74,9 @@ public class DispatchRenameSupport {
 	 */
 	public Iterable<JvmOperation> getAllDispatchOperations(XtendFunction dispatchFunction) {
 		Assert.isLegal(dispatchFunction.isDispatch());
+		IProject project = projectUtil.getProject(dispatchFunction.eResource().getURI());
+		final ResourceSet tempResourceSet = resourceSetProvider.get(project);
+
 		JvmOperation localDispatcher = associations.getDispatchOperation(dispatchFunction);
 		XtendClass xtendClass = (XtendClass) dispatchFunction.eContainer();
 
@@ -85,12 +89,12 @@ public class DispatchRenameSupport {
 		final Set<JvmGenericType> processedTypes = newHashSet();
 		addDispatcher(associations.getInferredType(xtendClass),
 				Tuples.create(localDispatcher.getSimpleName(), localDispatcher.getParameters().size()),
-				operationAcceptor, processedTypes);
+				operationAcceptor, processedTypes, tempResourceSet);
 		return dispatchCases;
 	}
 
 	protected boolean addDispatcher(JvmGenericType type, final Pair<String, Integer> signature,
-			final IAcceptor<JvmOperation> acceptor, final Set<JvmGenericType> processedTypes) {
+			final IAcceptor<JvmOperation> acceptor, final Set<JvmGenericType> processedTypes, ResourceSet tempResourceSet) {
 		if (processedTypes.contains(type))
 			return false;
 		processedTypes.add(type);
@@ -112,30 +116,32 @@ public class DispatchRenameSupport {
 		for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
 			JvmType superType = superTypeRef.getType();
 			if (superType instanceof JvmGenericType)
-				needProcessSubclasses |= addDispatcher((JvmGenericType) superType, signature, acceptor, processedTypes);
+				needProcessSubclasses |= addDispatcher((JvmGenericType) superType, signature, acceptor, processedTypes, tempResourceSet);
 		}
 		if (needProcessSubclasses) {
-			for (JvmGenericType subType : getAllSubTypes(type))
-				addDispatcher(subType, signature, acceptor, processedTypes);
+			for (JvmGenericType subType : getSubTypes(type, tempResourceSet))
+				needProcessSubclasses |= addDispatcher(subType, signature, acceptor, processedTypes, tempResourceSet);
 		}
 		return needProcessSubclasses;
 	}
 
-	protected Iterable<JvmGenericType> getAllSubTypes(JvmGenericType type) {
-		IProject project = projectUtil.getProject(type.eResource().getURI());
-		final ResourceSet resourceSet = resourceSetProvider.get(project);
+	protected Iterable<JvmGenericType> getSubTypes(JvmGenericType type, ResourceSet tempResourceSet) {
 		IType javaType = (IType) javaElementFinder.findExactElementFor(type);
 		List<JvmGenericType> allSubTypes = newArrayList();
 		try {
 			ITypeHierarchy typeHierarchy = javaType.newTypeHierarchy(javaType.getJavaProject(),
 					new NullProgressMonitor());
 			for (IType subType : typeHierarchy.getSubtypes(javaType)) {
-				EObject jvmSubType = jvmElementFinder.getCorrespondingJvmElement(subType, resourceSet);
-				if (jvmSubType != null) {
+				EObject jvmSubType = jvmElementFinder.getCorrespondingJvmElement(subType, tempResourceSet);
+				if (jvmSubType instanceof JvmGenericType) {
 					EObject indexJvmSubType = jvmElementFinder.findJvmElementDeclarationInIndex(jvmSubType, subType
 							.getJavaProject().getProject(), type.eResource().getResourceSet());
 					if (indexJvmSubType instanceof JvmGenericType) {
 						allSubTypes.add((JvmGenericType) indexJvmSubType);
+					} else {
+						EObject jvmSubTypeInOtherResourceSet = type.eResource().getResourceSet().getEObject(EcoreUtil2.getNormalizedURI(jvmSubType), true);
+						if(jvmSubTypeInOtherResourceSet instanceof JvmGenericType)
+							allSubTypes.add((JvmGenericType) jvmSubTypeInOtherResourceSet);
 					}
 				}
 			}
