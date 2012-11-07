@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 
 /**
@@ -32,7 +33,7 @@ public interface IRenameElementContext {
 
 	ISelection getTriggeringEditorSelection();
 
-	class Impl implements IRenameElementContext {
+	class Impl implements IRenameElementContext, IChangeRedirector.Aware {
 
 		private URI targetElementURI;
 
@@ -43,6 +44,8 @@ public interface IRenameElementContext {
 		private IEditorPart triggeringEditor;
 
 		private final ISelection triggeringEditorSelection;
+
+		private IChangeRedirector changeRedirector;
 
 		public Impl(URI targetElementURI, EClass targetElementEClass) {
 			this(targetElementURI, targetElementEClass, null, null, null);
@@ -75,6 +78,14 @@ public interface IRenameElementContext {
 
 		public ISelection getTriggeringEditorSelection() {
 			return triggeringEditorSelection;
+		}
+
+		public IChangeRedirector getChangeRedirector() {
+			return changeRedirector;
+		}
+
+		public void setChangeRedirector(IChangeRedirector changeRedirector) {
+			this.changeRedirector = changeRedirector;
 		}
 
 	}
