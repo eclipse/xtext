@@ -30,8 +30,21 @@ class FormatterExtensions {
 		result
 	}
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineConfigValue configuration, int indentationChange) {
-		newFormattingData(leafs, configuration.minNewLines, configuration.maxNewLines, indentationChange)
+	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, IConfigurationKey<?> key, int indentationChange) {
+		switch key {
+			BlankLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
+				val blankline = cfg.get(key)
+				val preserve = cfg.get(cfg.keys.preserveBlankLines)
+				newFormattingData(leafs, blankline + 1, preserve + 1, indentationChange)
+			]
+			NewLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
+				val newLine = cfg.get(key)
+				val preserve = cfg.get(cfg.keys.preserveBlankLines)
+				newFormattingData(leafs, if(newLine) 1 else 0, preserve + 1, indentationChange)
+			]
+			default:
+				throw new RuntimeException("can't handle configuration key")
+		} 
 	}
 	
 	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange) {
@@ -87,9 +100,9 @@ class FormatterExtensions {
 		}
 	}
 	
-	def Iterable<FormattingData> append(INode node, NewLineConfigValue configuration) {
+	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> append(INode node, IConfigurationKey<?> key) {
 		if(node != null) {
-			node.hiddenLeafsAfter.newFormattingData(configuration, 0)
+			node.hiddenLeafsAfter.newFormattingData(key, 0)
 		}
 	}
 	
@@ -117,9 +130,9 @@ class FormatterExtensions {
 		result
 	}
 	
-	def Iterable<FormattingData> prepend(INode node, NewLineConfigValue configuration) {
+	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> prepend(INode node, IConfigurationKey<?> key) {
 		if(node != null) {
-			node.hiddenLeafsBefore.newFormattingData(configuration, 0)
+			node.hiddenLeafsBefore.newFormattingData(key, 0)
 		}
 	}
 }

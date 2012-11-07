@@ -21,7 +21,6 @@ import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.NewLineConfigValue;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.TextReplacement;
@@ -183,14 +182,10 @@ public class XtendFormatter {
         };
       Iterable<FormattingData> _append = this._formatterExtensions.append(pkg, _function_2);
       format.operator_add(_append);
-      IConfigurationValues<XtendFormatterConfigKeys> _cfg = format.getCfg();
-      NewLineConfigValue _get = _cfg.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAfterPackageName);
-      Iterable<FormattingData> _append_1 = this._formatterExtensions.append(pkgSemicolon, _get);
+      Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_1 = this._formatterExtensions.append(pkgSemicolon, this._xtendFormatterConfigKeys.blankLinesAfterPackageDecl);
       format.operator_add(_append_1);
     } else {
-      IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = format.getCfg();
-      NewLineConfigValue _get_1 = _cfg_1.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAfterPackageName);
-      Iterable<FormattingData> _append_2 = this._formatterExtensions.append(pkg, _get_1);
+      Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(pkg, this._xtendFormatterConfigKeys.blankLinesAfterPackageDecl);
       format.operator_add(_append_2);
     }
     EList<XtendImport> _imports = xtendFile.getImports();
@@ -202,15 +197,11 @@ public class XtendFormatter {
         boolean _notEquals_1 = (!Objects.equal(imp, _last));
         if (_notEquals_1) {
           INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
-          IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = format.getCfg();
-          NewLineConfigValue _get_2 = _cfg_2.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBetweenImports);
-          Iterable<FormattingData> _append_3 = this._formatterExtensions.append(_nodeForEObject_1, _get_2);
+          Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(_nodeForEObject_1, this._xtendFormatterConfigKeys.blankLinesBetweenImports);
           format.operator_add(_append_3);
         } else {
           INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(imp);
-          IConfigurationValues<XtendFormatterConfigKeys> _cfg_3 = format.getCfg();
-          NewLineConfigValue _get_3 = _cfg_3.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAfterImportSection);
-          Iterable<FormattingData> _append_4 = this._formatterExtensions.append(_nodeForEObject_2, _get_3);
+          Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(_nodeForEObject_2, this._xtendFormatterConfigKeys.blankLinesAfterImports);
           format.operator_add(_append_4);
         }
       }
@@ -224,9 +215,7 @@ public class XtendFormatter {
         boolean _notEquals_1 = (!Objects.equal(clazz, _last));
         if (_notEquals_1) {
           INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(clazz);
-          IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = format.getCfg();
-          NewLineConfigValue _get_2 = _cfg_2.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBetweenClasses);
-          Iterable<FormattingData> _append_3 = this._formatterExtensions.append(_nodeForEObject_1, _get_2);
+          Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(_nodeForEObject_1, this._xtendFormatterConfigKeys.blankLinesBetweenClasses);
           format.operator_add(_append_3);
         }
       }
@@ -297,9 +286,7 @@ public class XtendFormatter {
       {
         this.format(a, document);
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(a);
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg = document.getCfg();
-        NewLineConfigValue _get = _cfg.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAfterAnnotations);
-        Iterable<FormattingData> _append = this._formatterExtensions.append(_nodeForEObject, _get);
+        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForEObject, this._xtendFormatterConfigKeys.newLineAfterAnnotations);
         document.operator_add(_append);
       }
     }
@@ -539,9 +526,7 @@ public class XtendFormatter {
         };
       Iterable<FormattingData> _append_2 = this._formatterExtensions.append(clazzOpenBrace, _function_5);
       format.operator_add(_append_2);
-      IConfigurationValues<XtendFormatterConfigKeys> _cfg = format.getCfg();
-      NewLineConfigValue _get = _cfg.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBeforeFirstMember);
-      Iterable<FormattingData> _append_3 = this._formatterExtensions.append(clazzOpenBrace, _get);
+      Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(clazzOpenBrace, this._xtendFormatterConfigKeys.blankLinesBeforeFirstMember);
       format.operator_add(_append_3);
       EList<XtendMember> _members_1 = clazz.getMembers();
       int _size = _members_1.size();
@@ -568,9 +553,7 @@ public class XtendFormatter {
             }
             if (_and) {
               INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(current);
-              IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = format.getCfg();
-              NewLineConfigValue _get_1 = _cfg_1.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBetweenFields);
-              Iterable<FormattingData> _append_4 = this._formatterExtensions.append(_nodeForEObject, _get_1);
+              Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(_nodeForEObject, this._xtendFormatterConfigKeys.blankLinesBetweenFields);
               format.operator_add(_append_4);
             } else {
               boolean _and_1 = false;
@@ -581,22 +564,18 @@ public class XtendFormatter {
               }
               if (_and_1) {
                 INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(current);
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = format.getCfg();
-                NewLineConfigValue _get_2 = _cfg_2.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBetweenMethods);
-                Iterable<FormattingData> _append_5 = this._formatterExtensions.append(_nodeForEObject_1, _get_2);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_5 = this._formatterExtensions.append(_nodeForEObject_1, this._xtendFormatterConfigKeys.blankLinesBetweenMethods);
                 format.operator_add(_append_5);
               } else {
                 INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(current);
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_3 = format.getCfg();
-                NewLineConfigValue _get_3 = _cfg_3.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesBetweenFieldsAndMethods);
-                Iterable<FormattingData> _append_6 = this._formatterExtensions.append(_nodeForEObject_2, _get_3);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_6 = this._formatterExtensions.append(_nodeForEObject_2, this._xtendFormatterConfigKeys.blankLinesBetweenFieldsAndMethods);
                 format.operator_add(_append_6);
               }
             }
           } else {
             EList<XtendMember> _members_5 = clazz.getMembers();
-            XtendMember _get_4 = _members_5.get((i).intValue());
-            final INode node = this._nodeModelAccess.nodeForEObject(_get_4);
+            XtendMember _get = _members_5.get((i).intValue());
+            final INode node = this._nodeModelAccess.nodeForEObject(_get);
             final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.decreaseIndentation();
@@ -604,9 +583,7 @@ public class XtendFormatter {
               };
             Iterable<FormattingData> _append_7 = this._formatterExtensions.append(node, _function_6);
             format.operator_add(_append_7);
-            IConfigurationValues<XtendFormatterConfigKeys> _cfg_4 = format.getCfg();
-            NewLineConfigValue _get_5 = _cfg_4.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAfterLastMember);
-            Iterable<FormattingData> _append_8 = this._formatterExtensions.append(node, _get_5);
+            Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_8 = this._formatterExtensions.append(node, this._xtendFormatterConfigKeys.blankLinesAfterLastMember);
             format.operator_add(_append_8);
           }
         }
@@ -3064,9 +3041,7 @@ public class XtendFormatter {
           };
         Iterable<FormattingData> _append_1 = this._formatterExtensions.append(open, _function_1);
         format.operator_add(_append_1);
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg = format.getCfg();
-        NewLineConfigValue _get = _cfg.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAroundExpression);
-        Iterable<FormattingData> _append_2 = this._formatterExtensions.append(open, _get);
+        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(open, this._xtendFormatterConfigKeys.newLineAroundExpression);
         format.operator_add(_append_2);
         EList<XExpression> _expressions_1 = expr.getExpressions();
         for (final XExpression child : _expressions_1) {
@@ -3094,14 +3069,10 @@ public class XtendFormatter {
                   };
                 Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(sem, _function_2);
                 format.operator_add(_prepend);
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = format.getCfg();
-                NewLineConfigValue _get_1 = _cfg_1.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAroundExpression);
-                Iterable<FormattingData> _append_3 = this._formatterExtensions.append(sem, _get_1);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(sem, this._xtendFormatterConfigKeys.newLineAroundExpression);
                 format.operator_add(_append_3);
               } else {
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = format.getCfg();
-                NewLineConfigValue _get_2 = _cfg_2.<NewLineConfigValue>get(this._xtendFormatterConfigKeys.newLinesAroundExpression);
-                Iterable<FormattingData> _append_4 = this._formatterExtensions.append(childNode, _get_2);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(childNode, this._xtendFormatterConfigKeys.newLineAroundExpression);
                 format.operator_add(_append_4);
               }
             }

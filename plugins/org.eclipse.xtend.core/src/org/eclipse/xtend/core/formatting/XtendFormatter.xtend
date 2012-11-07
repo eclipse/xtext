@@ -94,21 +94,21 @@ public class XtendFormatter {
 		val pkgSemicolon = pkg.immediatelyFollowingKeyword(";")
 		if (pkgSemicolon != null) {
 			format += pkg.append[ space = ""]
-			format += pkgSemicolon.append(format.cfg.get(newLinesAfterPackageName))
+			format += pkgSemicolon.append(blankLinesAfterPackageDecl)
 		} else {
-			format += pkg.append(format.cfg.get(newLinesAfterPackageName))
+			format += pkg.append(blankLinesAfterPackageDecl)
 		}
 		for (imp : xtendFile.imports) {
 			imp.format(format)
 			if (imp != xtendFile.imports.last)
-				format += imp.nodeForEObject.append(format.cfg.get(newLinesBetweenImports))
+				format += imp.nodeForEObject.append(blankLinesBetweenImports)
 			else
-				format += imp.nodeForEObject.append(format.cfg.get(newLinesAfterImportSection))
+				format += imp.nodeForEObject.append(blankLinesAfterImports)
 		}
 		for (clazz : xtendFile.xtendTypes) {
 			clazz.format(format)
 			if (clazz != xtendFile.xtendTypes.last)
-				format += clazz.nodeForEObject.append(format.cfg.get(newLinesBetweenClasses))
+				format += clazz.nodeForEObject.append(blankLinesBetweenClasses)
 		}
 
 		format += xtendFile.nodeForEObject.append[newLine]
@@ -128,7 +128,7 @@ public class XtendFormatter {
 			return;
 		for(a : target.annotations) {
 			a.format(document)
-			document += a.nodeForEObject.append(document.cfg.get(newLinesAfterAnnotations))
+			document += a.nodeForEObject.append(newLineAfterAnnotations)
 		}
 	}
 	
@@ -176,22 +176,22 @@ public class XtendFormatter {
 		format += clazzOpenBrace.prepend[ space=" "]
 		if (!clazz.members.empty) {
 			format += clazzOpenBrace.append[increaseIndentation]
-			format += clazzOpenBrace.append(format.cfg.get(newLinesBeforeFirstMember))
+			format += clazzOpenBrace.append(blankLinesBeforeFirstMember)
 			for (i : 0 .. (clazz.members.size - 1)) {
 				val current = clazz.members.get(i)
 				current.format(format)
 				if (i < clazz.members.size - 1) {
 					val next = clazz.members.get(i + 1)
 					if (current instanceof XtendField && next instanceof XtendField)
-						format += current.nodeForEObject.append(format.cfg.get(newLinesBetweenFields))
+						format += current.nodeForEObject.append(blankLinesBetweenFields)
 					else if (current instanceof XtendFunction && next instanceof XtendFunction)
-						format += current.nodeForEObject.append(format.cfg.get(newLinesBetweenMethods))
+						format += current.nodeForEObject.append(blankLinesBetweenMethods)
 					else
-						format += current.nodeForEObject.append(format.cfg.get(newLinesBetweenFieldsAndMethods))
+						format += current.nodeForEObject.append(blankLinesBetweenFieldsAndMethods)
 				} else {
 					val node = clazz.members.get(i).nodeForEObject
 					format += node.append[decreaseIndentation]
-					format += node.append(format.cfg.get(newLinesAfterLastMember))
+					format += node.append(blankLinesAfterLastMember)
 				}
 			}
 		} else {
@@ -911,7 +911,7 @@ public class XtendFormatter {
 				format += open.append[newLine]
 			} else {
 				format += open.append[increaseIndentation]
-				format += open.append(format.cfg.get(newLinesAroundExpression))
+				format += open.append(newLineAroundExpression)
 				for (child : expr.expressions) {
 					child.format(format)
 					if (child != expr.expressions.last || close != null) {
@@ -919,9 +919,9 @@ public class XtendFormatter {
 						val sem = childNode.immediatelyFollowingKeyword(";")
 						if (sem != null) {
 							format += sem.prepend[noSpace]
-							format += sem.append(format.cfg.get(newLinesAroundExpression))
+							format += sem.append(newLineAroundExpression)
 						} else {
-							format += childNode.append(format.cfg.get(newLinesAroundExpression))
+							format += childNode.append(newLineAroundExpression)
 						}
 					}
 				}

@@ -215,6 +215,15 @@ public class FormattableDocument {
     }
   }
   
+  public void operator_add(final Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> data) {
+    boolean _notEquals = (!Objects.equal(data, null));
+    if (_notEquals) {
+      IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
+      Iterable<FormattingData> _apply = data.apply(_cfg);
+      this.operator_add(_apply);
+    }
+  }
+  
   public List<TextReplacement> renderToEdits() {
     String _document = this.getDocument();
     int _length = _document.length();

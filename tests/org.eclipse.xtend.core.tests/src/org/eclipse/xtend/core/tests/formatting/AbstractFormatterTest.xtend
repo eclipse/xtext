@@ -100,7 +100,6 @@ abstract class AbstractFormatterTest {
 		} catch(AssertionError e) {
 			println(oldDocument.applyDebugEdits(edits))
 			println()
-//			println(NodeModelUtils::compactDump(root, true))
 			throw e
 		}
 		

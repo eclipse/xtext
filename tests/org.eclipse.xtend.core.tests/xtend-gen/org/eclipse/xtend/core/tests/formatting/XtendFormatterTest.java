@@ -226,7 +226,6 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.newLine();
     _builder.append("class baz {");
     _builder.newLine();
     _builder.append("}");
@@ -281,7 +280,6 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("import java.util.Set");
-    _builder.newLine();
     _builder.newLine();
     _builder.newLine();
     _builder.append("class bar {");

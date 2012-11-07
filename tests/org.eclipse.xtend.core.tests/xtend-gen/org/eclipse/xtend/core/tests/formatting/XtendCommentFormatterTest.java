@@ -87,7 +87,6 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
     _builder.append("import java.util.Map");
     _builder.newLine();
     _builder.newLine();
-    _builder.newLine();
     _builder.append("// my comment");
     _builder.newLine();
     _builder.append("class bar {");
@@ -152,7 +151,6 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
   public void formatMLCommentBeforeStatement2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map");
-    _builder.newLine();
     _builder.newLine();
     _builder.newLine();
     _builder.append("/* my comment */");
