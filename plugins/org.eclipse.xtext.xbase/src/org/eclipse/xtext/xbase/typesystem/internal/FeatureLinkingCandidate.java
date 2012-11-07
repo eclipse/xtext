@@ -78,7 +78,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		// TODO investigate in optimized List impls like HEAD, syntacticArguments
 		List<XExpression> result = Lists.newArrayListWithExpectedSize(tail.size() + 1);
 		result.add(head);
-		result.addAll(tail);
+		for(XExpression expression: tail) {
+			// addAll will convert the tail to an array, first
+			result.add(expression);
+		}
 		return result;
 	}
 	
