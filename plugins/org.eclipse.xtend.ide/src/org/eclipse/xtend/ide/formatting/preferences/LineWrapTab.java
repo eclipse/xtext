@@ -21,7 +21,6 @@ import com.google.common.collect.Maps;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class LineWrapTab extends AbstractModifyDialogTab {
-	protected static final String PREF_PREVIEW_LINE_WIDTH = "preview.line.width";
 	private Map<String, String> fPreviewPreferences;
 	private static final String DEFAULT_PREVIEW_LINE_WRAP = "40";
 	private Integer previewLineWidth = Integer.valueOf(DEFAULT_PREVIEW_LINE_WRAP);
@@ -29,7 +28,7 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	public LineWrapTab(IModificationListener modifyListener, Map<String, String> workingValues) {
 		super(modifyListener, workingValues);
 		fPreviewPreferences = Maps.newHashMap();
-		fPreviewPreferences.put(PREF_PREVIEW_LINE_WIDTH, previewLineWidth != null ? previewLineWidth.toString()
+		fPreviewPreferences.put(XtendFormatterPreview.PREF_PREVIEW_LINE_WIDTH, previewLineWidth != null ? previewLineWidth.toString()
 				: DEFAULT_PREVIEW_LINE_WRAP);
 
 	}
@@ -48,9 +47,9 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	@Override
 	protected Composite doCreatePreviewPane(Composite composite, int numColumns) {
 		super.doCreatePreviewPane(composite, numColumns);
-
+		formatterPreview.getMarginPainter().setMarginRulerColumn(previewLineWidth);
 		final NumberPreference previewLineWidth = new NumberPreference(composite, numColumns / 2, fPreviewPreferences,
-				PREF_PREVIEW_LINE_WIDTH, 0, 9999, "Line width for preview");
+				XtendFormatterPreview.PREF_PREVIEW_LINE_WIDTH, 0, 999, "Line width for preview");
 		fDefaultFocusManager.add(previewLineWidth);
 		previewLineWidth.addObserver(fUpdater);
 		previewLineWidth.addObserver(new Observer() {
