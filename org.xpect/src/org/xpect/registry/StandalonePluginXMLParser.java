@@ -337,7 +337,7 @@ public class StandalonePluginXMLParser {
 						java.io.File f = new java.io.File(u.toURI());
 						if (f.isDirectory()) {
 							int levels = 5;
-							while (levels >= 0) {
+							while (levels >= 0 && f != null) {
 								java.io.File pl = new java.io.File(f + "/" + "plugin.xml");
 								if (pl.isFile()) {
 									result.add(pl.toURI().toURL());
