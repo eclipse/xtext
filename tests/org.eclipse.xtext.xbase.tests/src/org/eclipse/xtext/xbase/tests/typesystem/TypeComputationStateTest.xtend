@@ -99,7 +99,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		assertTrue("state is instanceof ExpressionTypeComputationState", state instanceof ExpressionTypeComputationState)
-		val expectedType = state.getImmediateExpectations.head.getExpectedType
+		val expectedType = state.getExpectations.head.getExpectedType
 		if (expression instanceof XNullLiteral) {
 			val casted = state as ExpressionTypeComputationState
 			val resolution = casted.<ResolvedTypes>get("resolvedTypes")

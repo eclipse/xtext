@@ -54,7 +54,7 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 	public void apply() {
 		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		computeArgumentTypes();
-		for (ITypeExpectation expectation : state.getImmediateExpectations()) {
+		for (ITypeExpectation expectation : state.getExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
 				expectation.acceptActualType(expectedType, ConformanceHint.CHECKED);

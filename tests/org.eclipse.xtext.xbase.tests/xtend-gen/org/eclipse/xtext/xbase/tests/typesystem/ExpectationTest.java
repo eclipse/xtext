@@ -159,9 +159,9 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   public void recordExpectation(final ITypeComputationState state) {
-    List<? extends ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
-    Iterables.<ITypeExpectation>addAll(this.finalExpectations, _immediateExpectations);
-    List<? extends ITypeExpectation> _immediateExpectations_1 = state.getImmediateExpectations();
+    List<? extends ITypeExpectation> _expectations = state.getExpectations();
+    Iterables.<ITypeExpectation>addAll(this.finalExpectations, _expectations);
+    List<? extends ITypeExpectation> _expectations_1 = state.getExpectations();
     final Function1<ITypeExpectation,String> _function = new Function1<ITypeExpectation,String>() {
         public String apply(final ITypeExpectation it) {
           LightweightTypeReference _expectedType = it.getExpectedType();
@@ -169,7 +169,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
           return _simpleName;
         }
       };
-    List<String> _map = ListExtensions.map(_immediateExpectations_1, _function);
+    List<String> _map = ListExtensions.map(_expectations_1, _function);
     Iterables.<String>addAll(this.expectations, _map);
   }
   

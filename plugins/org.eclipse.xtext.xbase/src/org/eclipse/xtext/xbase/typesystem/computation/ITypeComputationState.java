@@ -45,13 +45,7 @@ public interface ITypeComputationState {
 	ITypeComputationState withNonVoidExpectation();
 	
 	/**
-	 * Discards the current expectation and allows to use return and throw 
-	 * independently from the parent's state.
-	 */
-	ITypeComputationState withoutExpectation();
-	
-	/**
-	 * Transfers the available return type expectation to the immediate expectation of this
+	 * Transfers the available return type expectation to the actual expectation of this
 	 * computation step. 
 	 */
 	ITypeComputationState withReturnExpectation();
@@ -59,7 +53,7 @@ public interface ITypeComputationState {
 	/**
 	 * Keeps the return type expectation. Otherwise the state is free of expectations.
 	 */
-	ITypeComputationState withoutImmediateExpectation();
+	ITypeComputationState withoutExpectation();
 
 	ITypeComputationState withTypeCheckpoint();
 
@@ -77,12 +71,7 @@ public interface ITypeComputationState {
 	/**
 	 * The result is never empty.
 	 */
-	List<? extends ITypeExpectation> getImmediateExpectations();
-	
-	/**
-	 * The result is never empty.
-	 */
-	List<? extends ITypeExpectation> getReturnExpectations();
+	List<? extends ITypeExpectation> getExpectations();
 	
 	/**
 	 * The result is never empty.

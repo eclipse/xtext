@@ -58,7 +58,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 		
 		@Override
-		public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState) {
 			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, defaultHint);
 			return Collections.singletonList(result);
 		}
@@ -189,7 +189,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		preApply();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
-		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
+		for(ITypeExpectation expectation: state.getExpectations()) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();

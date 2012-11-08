@@ -254,8 +254,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
     try {
       Assert.assertTrue("state is instanceof ExpressionTypeComputationState", (state instanceof ExpressionTypeComputationState));
-      List<? extends ITypeExpectation> _immediateExpectations = state.getImmediateExpectations();
-      ITypeExpectation _head = IterableExtensions.head(_immediateExpectations);
+      List<? extends ITypeExpectation> _expectations = state.getExpectations();
+      ITypeExpectation _head = IterableExtensions.head(_expectations);
       final LightweightTypeReference expectedType = _head.getExpectedType();
       if ((expression instanceof XNullLiteral)) {
         final ExpressionTypeComputationState casted = ((ExpressionTypeComputationState) state);

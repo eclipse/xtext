@@ -37,13 +37,13 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	}
 	
 	@Override
-	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		return parent.getImmediateExpectations(actualState);
+	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState) {
+		return parent.getExpectations(actualState);
 	}
 	
 	@Override
-	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
-		return parent.getReturnExpectations(actualState, asImmediateExpectation);
+	protected List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation) {
+		return parent.getReturnExpectations(actualState, asActualExpectation);
 	}
 	
 	@Override
