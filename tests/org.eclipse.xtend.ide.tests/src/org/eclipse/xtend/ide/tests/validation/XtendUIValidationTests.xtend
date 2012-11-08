@@ -15,8 +15,6 @@ import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import org.junit.BeforeClass
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -24,29 +22,6 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
-	@BeforeClass
-	def static copyJavaFiles() {
-		createFile(WorkbenchTestHelper::TESTPROJECT_NAME + '/src/org/eclipse/xtend/core/tests/restricted/RestrictedClass', '''
-			package org.eclipse.xtend.core.tests.restricted;
-
-			public class RestrictedClass<T> {
-			
-				public class InnerRestrictedClass {
-					
-				}
-			}
-		''')
-		createFile(WorkbenchTestHelper::TESTPROJECT_NAME + '/src/org/eclipse/xtend/core/tests/restricted/RestrictedClass', '''
-			package org.eclipse.xtend.core.tests.internal;
-
-			public class InternalClass<T> {
-				public class InnerInternalClass {
-					
-				}
-			}
-		''')
-	}
-
 	override tearDown() throws Exception {
 		testHelper.tearDown
 	}
