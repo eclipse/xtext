@@ -57,8 +57,6 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 		Assert.isLegal(xtendMethod instanceof XtendFunction);
 		Assert.isLegal(((XtendFunction) xtendMethod).isDispatch());
 		Assert.isLegal(context instanceof DispatchMethodRenameContext);
-
-		System.out.println();
 		ResourceSet resourceSet = xtendMethod.eResource().getResourceSet();
 		Map<URI, IJavaElement> jvm2JavaElements = ((DispatchMethodRenameContext)context).getJvm2JavaElements();
 		for(URI dispatchOperationURI: jvm2JavaElements.keySet()) {
