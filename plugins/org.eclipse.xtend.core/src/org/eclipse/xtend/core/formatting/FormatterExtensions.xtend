@@ -39,10 +39,15 @@ class FormatterExtensions {
 				val max = Math::max(preserve + 1, min)
 				newFormattingData(leafs, min, max, indentationChange)
 			]
-			NewLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
+			NewLineOrPreserveKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
 				val newLine = cfg.get(key)
 				val preserve = cfg.get(cfg.keys.preserveNewLines)
 				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange)
+			]
+			NewLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
+				val newLine = cfg.get(key)
+				val minmax = if(newLine) 1 else 0
+				newFormattingData(leafs, minmax, minmax, indentationChange)
 			]
 			WhitespaceKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
 				val space = cfg.get(key)

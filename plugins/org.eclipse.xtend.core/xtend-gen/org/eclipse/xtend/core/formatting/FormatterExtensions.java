@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.LeafInfo;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NewLineKey;
+import org.eclipse.xtend.core.formatting.NewLineOrPreserveKey;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.formatting.WhitespaceInfo;
@@ -119,14 +120,14 @@ public class FormatterExtensions {
       }
     }
     if (!_matched) {
-      if (key instanceof NewLineKey) {
-        final NewLineKey _newLineKey = (NewLineKey)key;
+      if (key instanceof NewLineOrPreserveKey) {
+        final NewLineOrPreserveKey _newLineOrPreserveKey = (NewLineOrPreserveKey)key;
         _matched=true;
         final Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>> _function = new Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>>() {
             public Iterable<FormattingData> apply(final IConfigurationValues<XtendFormatterConfigKeys> cfg) {
               Iterable<FormattingData> _xblockexpression = null;
               {
-                final Boolean newLine = cfg.<Boolean>get(_newLineKey);
+                final Boolean newLine = cfg.<Boolean>get(_newLineOrPreserveKey);
                 XtendFormatterConfigKeys _keys = cfg.getKeys();
                 final Boolean preserve = cfg.<Boolean>get(_keys.preserveNewLines);
                 int _xifexpression = (int) 0;
@@ -148,6 +149,31 @@ public class FormatterExtensions {
                   _xifexpression_1 = 0;
                 }
                 Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, _xifexpression_1, indentationChange);
+                _xblockexpression = (_newFormattingData);
+              }
+              return _xblockexpression;
+            }
+          };
+        _switchResult = _function;
+      }
+    }
+    if (!_matched) {
+      if (key instanceof NewLineKey) {
+        final NewLineKey _newLineKey = (NewLineKey)key;
+        _matched=true;
+        final Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>> _function = new Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>>() {
+            public Iterable<FormattingData> apply(final IConfigurationValues<XtendFormatterConfigKeys> cfg) {
+              Iterable<FormattingData> _xblockexpression = null;
+              {
+                final Boolean newLine = cfg.<Boolean>get(_newLineKey);
+                int _xifexpression = (int) 0;
+                if ((newLine).booleanValue()) {
+                  _xifexpression = 1;
+                } else {
+                  _xifexpression = 0;
+                }
+                final int minmax = _xifexpression;
+                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, minmax, minmax, indentationChange);
                 _xblockexpression = (_newFormattingData);
               }
               return _xblockexpression;

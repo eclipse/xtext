@@ -173,7 +173,7 @@ public class XtendFormatter {
 			imp.format(format)
 		}
 		val clazzOpenBrace = clazz.nodeForKeyword("{")
-		format += clazzOpenBrace.prepend[ space=" "]
+		format += clazzOpenBrace.prepend(bracesInNewLine)
 		if (!clazz.members.empty) {
 			format += clazzOpenBrace.append[increaseIndentation]
 			format += clazzOpenBrace.append(blankLinesBeforeFirstMember)
@@ -210,7 +210,7 @@ public class XtendFormatter {
 		}
 		val open = func.nodeForKeyword("(")
 		val close = func.nodeForKeyword(")")
-		format += close.append[oneSpace]
+		format += close.append(bracesInNewLine)
 		formatMemberParameter(func.parameters, open, close, format)
 
 		func.expression.format(format)
@@ -271,7 +271,7 @@ public class XtendFormatter {
 		format += func.nodeForKeyword("def").append[oneSpace]
 		format += func.nodeForFeature(XTEND_FUNCTION__RETURN_TYPE).append[oneSpace]
 		format += open.prepend[noSpace]
-		format += close.append[oneSpace]
+		format += close.append(bracesInNewLine)
 		formatMemberParameter(func.parameters, open, close, format)
 		func.returnType.format(format)
 		func.expression.format(format)
@@ -633,7 +633,7 @@ public class XtendFormatter {
 				format += cnode.append[ space=" "]
 			}
 		} else if (caseSL) {
-			format += open.prepend[ space=" "]
+			format += open.prepend(bracesInNewLine)
 			format += open.append[ newLine; increaseIndentation]
 			for (c : expr.cases) {
 				format += c.then.nodeForEObject.prepend[ space=" "]
@@ -642,12 +642,12 @@ public class XtendFormatter {
 			}
 			format += close.prepend[ newLine; decreaseIndentation]
 		} else {
-			format += open.prepend[ space=" "]
+			format += open.prepend(bracesInNewLine)
 			format += open.append[ newLine; increaseIndentation]
 			for (c : expr.cases) {
 				val cnode = c.then.nodeForEObject
 				if (c.then instanceof XBlockExpression) {
-					format += cnode.prepend[ space = " "]
+					format += cnode.prepend(bracesInNewLine)
 					if (c != expr.cases.last)
 						format += cnode.append[newLine]
 					else
@@ -836,10 +836,14 @@ public class XtendFormatter {
 			format += expr.nodeForKeyword("if").append(whitespaceBetweenKeywordAndParenthesisML)
 		else
 			format += expr.nodeForKeyword("if").append(whitespaceBetweenKeywordAndParenthesisSL)
-		if (expr.then instanceof XBlockExpression || !multiline) {
-			format += thennode.prepend[ space = " "]
+		if (expr.then instanceof XBlockExpression) {
+			format += thennode.prepend(bracesInNewLine)
 			if (expr.^else != null)
-				format += thennode.append[ space = " "]
+				format += thennode.append(bracesInNewLine)
+		} else if (!multiline) {
+			format += thennode.prepend[oneSpace]
+			if (expr.^else != null)
+				format += thennode.append[oneSpace]
 		} else {
 			format += thennode.prepend[ newLine increaseIndentation]
 			if (expr.^else != null)
@@ -847,8 +851,10 @@ public class XtendFormatter {
 			else
 				format += thennode.append[decreaseIndentation]
 		}
-		if (expr.^else instanceof XIfExpression || expr.^else instanceof XBlockExpression || !multiline) {
-			format += elsenode.prepend[ space = " "]
+		if (expr.^else instanceof XBlockExpression) {
+			format += elsenode.prepend(bracesInNewLine)
+		} else if (expr.^else instanceof XIfExpression || !multiline) {
+			format += elsenode.prepend[oneSpace]
 		} else {
 			format += elsenode.prepend[ newLine increaseIndentation]
 			format += elsenode.append[decreaseIndentation]
@@ -865,7 +871,7 @@ public class XtendFormatter {
 		expr.forExpression.nodeForEObject => [ format += prepend[oneSpace] format += append[noSpace] ]
 		val each = expr.eachExpression.nodeForEObject
 		if (expr.eachExpression instanceof XBlockExpression) {
-			format += each.prepend[oneSpace]
+			format += each.prepend(bracesInNewLine)
 		} else {
 			format += each.prepend[ newLine increaseIndentation]
 			format += each.append[decreaseIndentation]
@@ -879,7 +885,7 @@ public class XtendFormatter {
 		format += expr.predicate.nodeForEObject.surround([noSpace], [noSpace])
 		val body = expr.body.nodeForEObject
 		if (expr.body instanceof XBlockExpression) {
-			format += body.prepend[oneSpace]
+			format += body.prepend(bracesInNewLine)
 		} else {
 			format += body.prepend[ newLine increaseIndentation]
 			format += body.append[decreaseIndentation]
@@ -893,8 +899,8 @@ public class XtendFormatter {
 		format += expr.predicate.nodeForEObject.surround([noSpace], [noSpace])
 		val body = expr.body.nodeForEObject
 		if (expr.body instanceof XBlockExpression) {
-			format += body.prepend[oneSpace]
-			format += body.append[oneSpace]
+			format += body.prepend(bracesInNewLine)
+			format += body.append(bracesInNewLine)
 		} else {
 			format += body.prepend[ newLine increaseIndentation]
 			format += body.append[ newLine decreaseIndentation]
@@ -961,8 +967,8 @@ public class XtendFormatter {
 	def protected dispatch void format(XTryCatchFinallyExpression expr, FormattableDocument format) {
 		val body = expr.expression.nodeForEObject
 		if (expr.expression instanceof XBlockExpression) {
-			format += body.prepend[oneSpace]
-			format += body.append[oneSpace]
+			format += body.prepend(bracesInNewLine)
+			format += body.append(bracesInNewLine)
 		} else {
 			format += body.prepend[ newLine increaseIndentation]
 			format += body.append[ newLine decreaseIndentation]
@@ -972,7 +978,7 @@ public class XtendFormatter {
 			cc.format(format)
 			if (cc != expr.catchClauses.last || expr.finallyExpression != null) {
 				if (cc.expression instanceof XBlockExpression)
-					format += cc.nodeForEObject.append[oneSpace]
+					format += cc.nodeForEObject.append(bracesInNewLine)
 				else
 					format += cc.nodeForEObject.append[newLine]
 			}
@@ -980,7 +986,7 @@ public class XtendFormatter {
 		if (expr.finallyExpression != null) {
 			val fin = expr.finallyExpression.nodeForEObject
 			if (expr.finallyExpression instanceof XBlockExpression) {
-				format += fin.prepend[oneSpace]
+				format += fin.prepend(bracesInNewLine)
 			} else {
 				format += fin.prepend[ newLine increaseIndentation]
 				format += fin.append[decreaseIndentation]
@@ -994,7 +1000,7 @@ public class XtendFormatter {
 		expr.declaredParam.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace]]
 		val body = expr.expression.nodeForEObject
 		if (expr.expression instanceof XBlockExpression)
-			format += body.prepend[oneSpace]
+			format += body.prepend(bracesInNewLine)
 		else {
 			format += body.prepend[ newLine increaseIndentation]
 			format += body.append[decreaseIndentation]

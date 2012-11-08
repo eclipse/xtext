@@ -14,7 +14,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
   
   @Test
-  public void formatClass1() {
+  public void formatClass11() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -23,14 +28,75 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package  foo  class  bar  {  }");
-    _builder_1.newLine();
-    this.assertFormatted(_builder, _builder_1);
+    this.assertFormatted(_function, _builder);
   }
   
   @Test
-  public void formatClass11() {
+  public void formatClass12() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatClass112() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatClass122() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int member1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatClass111() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -314,7 +380,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatConstructor() {
+  public void formatConstructor01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class bar {");
     _builder.newLine();
@@ -326,7 +397,33 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatConstructor02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
   }
   
   @Test
@@ -387,7 +484,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatMethod() {
+  public void formatMethod01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -402,7 +504,36 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatMethod02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
   }
   
   @Test
@@ -1023,6 +1154,35 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatIfElse3() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if (true)");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"bar\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
   public void formatIfElseIf1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (true)");
@@ -1117,6 +1277,11 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFor2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("for (i : 1 .. 2) {");
     _builder.newLine();
@@ -1125,10 +1290,27 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("for  (  i  :  1   ..   2  )   {   println(i)  }");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatFor3() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (i : 1 .. 2)");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(i)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1165,6 +1347,11 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatWhile2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while (true) {");
     _builder.newLine();
@@ -1173,10 +1360,27 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("while  (  true  )   {   println(\"x\")  }");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatWhile21() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("while (true)");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1217,6 +1421,11 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatDoWhile2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do {");
     _builder.newLine();
@@ -1225,38 +1434,81 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("} while (true)");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("do  {  println(\"x\")   } while  (  true  ) ");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatDoWhile3() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("do");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("while (true)");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
   public void formatSwitchSL() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("switch \'x\'  {   case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')    }");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
-  public void formatSwitchSLParenthesis() {
+  public void formatSwitchSL1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("switch  \'x\'  {   case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')    }");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
   public void formatSwitchCaseSL() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("switch \'x\' {");
+    _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatSwitchCaseSL1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\'");
+    _builder.newLine();
+    _builder.append("{");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("case \'x\': println(\'x\')");
@@ -1266,15 +1518,7 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("switch \'x\'  {   ");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1336,6 +1580,11 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchMLBlock() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' {");
     _builder.newLine();
@@ -1362,7 +1611,51 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("switch \'x\'  { case \'x\': { println(\'x\') }  case   \'y\':  {  println(\'y\') } }");
     _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSwitchMLBlock1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\'");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\':");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\':");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch \'x\'  { case \'x\': { println(\'x\') }  case   \'y\':  {  println(\'y\') } }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_function, _builder, _builder_1);
   }
   
   @Test
@@ -1921,6 +2214,11 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatTryCatchFinallyExpression2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try {");
     _builder.newLine();
@@ -1942,7 +2240,48 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("try  {   println(\"x\")  }   catch   (   Exception   e   )  {  println(\"y\")  } finally  {  println(\"z\")  }");
     _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder, _builder_1);
+  }
+  
+  @Test
+  public void formatTryCatchFinallyExpression3() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("catch (Exception e)");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("finally");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"z\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try  {   println(\"x\")  }   catch   (   Exception   e   )  {  println(\"y\")  } finally  {  println(\"z\")  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_function, _builder, _builder_1);
   }
   
   @Test

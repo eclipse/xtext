@@ -26,16 +26,6 @@ abstract class AbstractFormatterTest {
 		assertFormatted(toBeFormatted, toBeFormatted /* .parse.flattenWhitespace  */)
 	}
 	
-	def private toFile(CharSequence expression) '''
-		package foo
-		
-		class bar {
-			def baz() {
-				«expression»
-			}
-		}
-	'''
-	
 	def private toMember(CharSequence expression) '''
 		package foo
 		
@@ -45,15 +35,19 @@ abstract class AbstractFormatterTest {
 	'''
 	
 	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence toBeFormatted) {
-		assertFormatted(cfg, toBeFormatted.toFile, toBeFormatted.toFile)
+		assertFormattedExpression(cfg, toBeFormatted, toBeFormatted)
 	}
 	
 	def assertFormattedExpression(CharSequence toBeFormatted) {
-		assertFormatted(toBeFormatted.toFile, toBeFormatted.toFile)
+		assertFormattedExpression(null, toBeFormatted, toBeFormatted)
 	}
 	
 	def assertFormattedExpression(String expectation, CharSequence toBeFormatted) {
-		assertFormatted(expectation.toFile, toBeFormatted.toFile)
+		assertFormattedExpression(null, expectation, toBeFormatted)
+	}
+	
+	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
+		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}")
 	}
 	
 	def assertFormattedMember(String expectation, CharSequence toBeFormatted) {
@@ -72,13 +66,13 @@ abstract class AbstractFormatterTest {
 		assertFormatted(expectation.toMember, expectation.toMember)
 	}
 	
-	def createMissingEditReplacements(XtextResource res, Collection<TextReplacement> edits) {
-		val offsets = edits.map[offset].toSet
+	def createMissingEditReplacements(XtextResource res, Collection<TextReplacement> edits, int offset, int length) {
+		val offsets = edits.map[it.offset].toSet
 		val result = <TextReplacement>newArrayList
 		var lastOffset = 0
 		for(leaf:res.parseResult.rootNode.leafNodes) 
 			if(!leaf.hidden || !leaf.text.trim.empty) {
-				if(!offsets.contains(lastOffset))
+				if((lastOffset >= offset) && (leaf.offset <= offset + length) && !offsets.contains(lastOffset))
 					result += new TextReplacement(lastOffset, leaf.offset - lastOffset, "!!")
 				lastOffset = leaf.offset + leaf.length
 			}
@@ -94,7 +88,12 @@ abstract class AbstractFormatterTest {
 	}
 	
 	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
-		val parsed = toBeFormatted.parse
+		assertFormatted(cfg, expectation, toBeFormatted, "", "")	
+	}
+	
+	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, String prefix, String postfix) {
+		val fullToBeParsed = (prefix + toBeFormatted + postfix)
+		val parsed = fullToBeParsed.parse
 		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
 		val rc = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys)
@@ -105,13 +104,15 @@ abstract class AbstractFormatterTest {
 
 		formatter.allowIdentityEdits = true
 		
-		// Step 1: Ensure formatted document equals expectation 
+		// Step 1: Ensure formatted document equals expectation
+		val start = prefix.length
+		val length = toBeFormatted.length
 		val edits = <TextReplacement>newLinkedHashSet
-		edits += formatter.format(parsed.eResource as XtextResource, 0, oldDocument.length, rc)
-		edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits)
+		edits += formatter.format(parsed.eResource as XtextResource, start, length, rc)
+		edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits, start, length)
 		val newDocument = oldDocument.applyEdits(edits)
 		try {
-			Assert::assertEquals(expectation.toString, newDocument.toString)
+			Assert::assertEquals((prefix + expectation + postfix).toString, newDocument.toString)
 		} catch(AssertionError e) {
 			println(oldDocument.applyDebugEdits(edits))
 			println()
@@ -119,12 +120,13 @@ abstract class AbstractFormatterTest {
 		}
 		
 		// Step 2: Ensure formatting the document again doesn't change the document
-		val parsed2 = newDocument.parse
+		val parsed2Doc = fullToBeParsed.applyEdits(formatter.format(parsed.eResource as XtextResource, 0, fullToBeParsed.length, rc))
+		val parsed2 = parsed2Doc.parse
 		Assert::assertEquals(0, parsed2.eResource.errors.size)
-		val edits2 = formatter.format(parsed2.eResource as XtextResource, 0, newDocument.length, rc)
-		val newDocument2 = newDocument.applyEdits(edits2)
+		val edits2 = formatter.format(parsed2.eResource as XtextResource, 0, parsed2Doc.length, rc)
+		val newDocument2 = parsed2Doc.applyEdits(edits2)
 		try {
-			Assert::assertEquals(newDocument.toString, newDocument2.toString)
+			Assert::assertEquals(parsed2Doc, newDocument2.toString)
 		} catch(AssertionError e) {
 			println(newDocument.applyDebugEdits(edits2))
 			println()
