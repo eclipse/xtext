@@ -35,6 +35,9 @@ public class SaveHelper {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
+	
+	@Inject  
+	private SyncUtil syncUtil;
 
 	public void saveEditors(final IRenameElementContext context) {
 		new DisplayRunnable() {
@@ -48,7 +51,7 @@ public class SaveHelper {
 				
 			}
 		}.syncExec();
-		waitForAutoBuild();
+		syncUtil.waitForAutoBuild(null);
 	}
 
 	protected IWorkbenchPage getWorkbenchPage(IRenameElementContext context) {
@@ -72,19 +75,5 @@ public class SaveHelper {
 		return null;
 	}
 	
-	protected static void waitForAutoBuild() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD,
-						null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
-	}
 
 }

@@ -55,10 +55,14 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	@Inject
 	protected IRenameContextFactory renameContextFactory;
 	
+	@Inject
+	protected SyncUtil syncUtil;
+	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
+			syncUtil.ueberSync(false);
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
