@@ -44,6 +44,10 @@ class FormatterExtensions {
 				val preserve = cfg.get(cfg.keys.preserveNewLines)
 				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange)
 			]
+			WhitespaceKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
+				val space = cfg.get(key)
+				newFormattingData(leafs, if(space) " " else "", indentationChange)
+			]
 			default:
 				throw new RuntimeException("can't handle configuration key")
 		} 
