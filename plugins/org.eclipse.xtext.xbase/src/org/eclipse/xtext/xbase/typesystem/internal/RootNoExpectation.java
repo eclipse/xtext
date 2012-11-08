@@ -38,19 +38,20 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 		return true;
 	}
 	
-	@Override
-	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-		// TODO resolve all unbound type parameters
-//		AbstractTypeComputationState state = getState();
-//		if (hint contains RAW) {
-//		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
-//				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
-//		LightweightTypeReference substitute = substitutor.substitute(type);
-//		}
-		super.acceptActualType(type, hints);
-	}
+//	@Override
+//	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+//		// TODO resolve all unbound type parameters
+////		AbstractTypeComputationState state = getState();
+////		if (hint contains RAW) {
+////		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
+////				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
+////		LightweightTypeReference substitute = substitutor.substitute(type);
+////		}
+//		super.acceptActualType(type, hints);
+//	}
 	
 	public RootNoExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return this;
 	}
+	
 }
