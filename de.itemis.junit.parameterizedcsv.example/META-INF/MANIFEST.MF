@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Example
 Bundle-SymbolicName: de.itemis.junit.parameterizedcsv.example
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: de.itemis.junit.parameterizedcsv;bundle-version="1.0.0",
+Require-Bundle: de.itemis.junit.parameterizedcsv;bundle-version="0.1.0",
  org.junit;bundle-version="4.10.0"
