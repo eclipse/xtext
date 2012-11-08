@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.formatting.NewLineKey;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.formatting.WhitespaceInfo;
+import org.eclipse.xtend.core.formatting.WhitespaceKey;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -147,6 +148,30 @@ public class FormatterExtensions {
                   _xifexpression_1 = 0;
                 }
                 Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, _xifexpression_1, indentationChange);
+                _xblockexpression = (_newFormattingData);
+              }
+              return _xblockexpression;
+            }
+          };
+        _switchResult = _function;
+      }
+    }
+    if (!_matched) {
+      if (key instanceof WhitespaceKey) {
+        final WhitespaceKey _whitespaceKey = (WhitespaceKey)key;
+        _matched=true;
+        final Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>> _function = new Function1<IConfigurationValues<XtendFormatterConfigKeys>,Iterable<FormattingData>>() {
+            public Iterable<FormattingData> apply(final IConfigurationValues<XtendFormatterConfigKeys> cfg) {
+              Iterable<FormattingData> _xblockexpression = null;
+              {
+                final Boolean space = cfg.<Boolean>get(_whitespaceKey);
+                String _xifexpression = null;
+                if ((space).booleanValue()) {
+                  _xifexpression = " ";
+                } else {
+                  _xifexpression = "";
+                }
+                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, indentationChange);
                 _xblockexpression = (_newFormattingData);
               }
               return _xblockexpression;

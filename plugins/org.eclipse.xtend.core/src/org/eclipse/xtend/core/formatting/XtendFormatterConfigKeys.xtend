@@ -28,6 +28,8 @@ class XtendFormatterConfigKeys extends AbstractConfigurationKeys {
 	public val newLineAfterConstructorAnnotations = new NewLineKey("newline.after.constructor.annotations", false)
 	public val newLineAfterParameterAnnotations = new NewLineKey("newline.after.parameter.annotations", false)
 	
+	public val whitespaceBetweenKeywordAndParenthesisSL = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", false)
+	public val whitespaceBetweenKeywordAndParenthesisML = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", true)
 }
 
 class BlankLineKey extends IntegerKey {
@@ -37,6 +39,12 @@ class BlankLineKey extends IntegerKey {
 }
 
 class NewLineKey extends BooleanKey {
+	new(String name, Boolean defaultValue) {
+		super(name, defaultValue)
+	}
+}
+
+class WhitespaceKey extends BooleanKey {
 	new(String name, Boolean defaultValue) {
 		super(name, defaultValue)
 	}

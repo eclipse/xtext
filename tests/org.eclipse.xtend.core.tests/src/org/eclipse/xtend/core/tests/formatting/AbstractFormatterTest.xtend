@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.formatting
 
 import java.util.Collection
 import javax.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues
 import org.eclipse.xtend.core.formatting.TextReplacement
 import org.eclipse.xtend.core.formatting.XtendFormatter
@@ -45,8 +44,12 @@ abstract class AbstractFormatterTest {
 		}
 	'''
 	
+	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence toBeFormatted) {
+		assertFormatted(cfg, toBeFormatted.toFile, toBeFormatted.toFile)
+	}
+	
 	def assertFormattedExpression(CharSequence toBeFormatted) {
-		assertFormatted(toBeFormatted.toFile, toBeFormatted.toFile.parse.flattenWhitespace)
+		assertFormatted(toBeFormatted.toFile, toBeFormatted.toFile)
 	}
 	
 	def assertFormattedExpression(String expectation, CharSequence toBeFormatted) {
@@ -67,16 +70,6 @@ abstract class AbstractFormatterTest {
 	
 	def assertFormattedMember(String expectation) {
 		assertFormatted(expectation.toMember, expectation.toMember)
-	}
-	
-	def private flattenWhitespace(EObject obj) {
-		val result = new StringBuilder()
-		for(node: (obj.eResource as XtextResource).parseResult.rootNode.leafNodes)
-			if(node.text.trim.length > 0) {
-				result.append("  ")
-				result.append(node.text)
-			}
-		result.toString
 	}
 	
 	def createMissingEditReplacements(XtextResource res, Collection<TextReplacement> edits) {

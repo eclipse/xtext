@@ -1,8 +1,12 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
+import com.google.inject.Inject
 
 class XtendFormatterTest extends AbstractFormatterTest {
+	
+	@Inject extension XtendFormatterConfigKeys
 	
 	@Test def formatClass1() {
 		assertFormatted('''
@@ -482,21 +486,37 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatIf1SL() {
-		assertFormattedExpression('''
-			if(true) println("foo")
-		''', '''
-			if(true)println("foo")
+	@Test def formatIf1SL1() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisSL, true)
+		],'''
+			if (true) println("foo")
 		''')	
 	}
 	
-	@Test def formatIf1ML() {
-		assertFormattedExpression('''
+	@Test def formatIf1SL2() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisSL, false)
+		],'''
+			if(true) println("foo")
+		''')	
+	}
+	
+	@Test def formatIf1ML1() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, true)
+		],'''
 			if (true)
 				println("foo")
-		''', '''
+		''')	
+	}
+	
+	@Test def formatIf1ML2() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, false)
+		],'''
 			if(true)
-			println("foo")
+				println("foo")
 		''')	
 	}
 	
@@ -637,12 +657,21 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatWhile1() {
-		assertFormattedExpression('''
+	@Test def formatWhile11() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, true)
+		],'''
 			while (true)
 				println("x")
-		''', '''
-			while  (  true  )  println("x")
+		''')	
+	}
+	
+	@Test def formatWhile12() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, false)
+		],'''
+			while(true)
+				println("x")
 		''')	
 	}
 	
@@ -656,13 +685,23 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatDoWhile1() {
-		assertFormattedExpression('''
+	@Test def formatDoWhile11() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, true)
+		],'''
 			do
 				println("x")
 			while (true)
-		''', '''
-			do  println("x")   while  (  true  ) 
+		''')	
+	}
+	
+	@Test def formatDoWhile12() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, false)
+		],'''
+			do
+				println("x")
+			while(true)
 		''')	
 	}
 	
@@ -1035,14 +1074,25 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatTryCatchExpression1() {
-		assertFormattedExpression('''
+	@Test def formatTryCatchExpression11() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, true)
+		],'''
 			try
 				println("x")
 			catch (Exception e)
 				println("y")
-		''', '''
-			try   println("x")   catch (  Exception   e  )   println("y")
+		''')	
+	}
+	
+	@Test def formatTryCatchExpression12() {
+		assertFormattedExpression([
+			put(whitespaceBetweenKeywordAndParenthesisML, false)
+		],'''
+			try
+				println("x")
+			catch(Exception e)
+				println("y")
 		''')	
 	}
 	

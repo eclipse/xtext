@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
@@ -88,16 +87,16 @@ public abstract class AbstractFormatterTest {
     return _builder;
   }
   
+  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence toBeFormatted) {
+    CharSequence _file = this.toFile(toBeFormatted);
+    CharSequence _file_1 = this.toFile(toBeFormatted);
+    this.assertFormatted(cfg, _file, _file_1);
+  }
+  
   public void assertFormattedExpression(final CharSequence toBeFormatted) {
-    try {
-      CharSequence _file = this.toFile(toBeFormatted);
-      CharSequence _file_1 = this.toFile(toBeFormatted);
-      XtendFile _parse = this._parseHelper.parse(_file_1);
-      String _flattenWhitespace = this.flattenWhitespace(_parse);
-      this.assertFormatted(_file, _flattenWhitespace);
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    CharSequence _file = this.toFile(toBeFormatted);
+    CharSequence _file_1 = this.toFile(toBeFormatted);
+    this.assertFormatted(_file, _file_1);
   }
   
   public void assertFormattedExpression(final String expectation, final CharSequence toBeFormatted) {
@@ -128,32 +127,6 @@ public abstract class AbstractFormatterTest {
     CharSequence _member = this.toMember(expectation);
     CharSequence _member_1 = this.toMember(expectation);
     this.assertFormatted(_member, _member_1);
-  }
-  
-  private String flattenWhitespace(final EObject obj) {
-    String _xblockexpression = null;
-    {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder result = _stringBuilder;
-      Resource _eResource = obj.eResource();
-      IParseResult _parseResult = ((XtextResource) _eResource).getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
-      for (final ILeafNode node : _leafNodes) {
-        String _text = node.getText();
-        String _trim = _text.trim();
-        int _length = _trim.length();
-        boolean _greaterThan = (_length > 0);
-        if (_greaterThan) {
-          result.append("  ");
-          String _text_1 = node.getText();
-          result.append(_text_1);
-        }
-      }
-      String _string = result.toString();
-      _xblockexpression = (_string);
-    }
-    return _xblockexpression;
   }
   
   public ArrayList<TextReplacement> createMissingEditReplacements(final XtextResource res, final Collection<TextReplacement> edits) {

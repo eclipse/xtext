@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.formatting.BooleanKey;
 import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.NewLineKey;
 import org.eclipse.xtend.core.formatting.TransientKey;
+import org.eclipse.xtend.core.formatting.WhitespaceKey;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @Singleton
@@ -156,6 +157,20 @@ public class XtendFormatterConfigKeys extends AbstractConfigurationKeys {
     public NewLineKey apply() {
       NewLineKey _newLineKey = new NewLineKey("newline.after.parameter.annotations", Boolean.valueOf(false));
       return _newLineKey;
+    }
+  }.apply();
+  
+  public final WhitespaceKey whitespaceBetweenKeywordAndParenthesisSL = new Function0<WhitespaceKey>() {
+    public WhitespaceKey apply() {
+      WhitespaceKey _whitespaceKey = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", Boolean.valueOf(false));
+      return _whitespaceKey;
+    }
+  }.apply();
+  
+  public final WhitespaceKey whitespaceBetweenKeywordAndParenthesisML = new Function0<WhitespaceKey>() {
+    public WhitespaceKey apply() {
+      WhitespaceKey _whitespaceKey = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", Boolean.valueOf(true));
+      return _whitespaceKey;
     }
   }.apply();
 }

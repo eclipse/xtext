@@ -833,9 +833,9 @@ public class XtendFormatter {
 			elsenode?.text?.trim?.contains("\n")
 		format += expr.nodeForFeature(XIF_EXPRESSION__IF).surround[noSpace]
 		if (expr.then instanceof XBlockExpression || multiline)
-			format += expr.nodeForKeyword("if").append[oneSpace]
+			format += expr.nodeForKeyword("if").append(whitespaceBetweenKeywordAndParenthesisML)
 		else
-			format += expr.nodeForKeyword("if").append[noSpace]
+			format += expr.nodeForKeyword("if").append(whitespaceBetweenKeywordAndParenthesisSL)
 		if (expr.then instanceof XBlockExpression || !multiline) {
 			format += thennode.prepend[ space = " "]
 			if (expr.^else != null)
@@ -875,8 +875,8 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XWhileExpression expr, FormattableDocument format) {
-		expr.nodeForKeyword("while") => [ format += append[oneSpace] ]
-		expr.predicate.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
+		format += expr.nodeForKeyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
+		format += expr.predicate.nodeForEObject.surround([noSpace], [noSpace])
 		val body = expr.body.nodeForEObject
 		if (expr.body instanceof XBlockExpression) {
 			format += body.prepend[oneSpace]
@@ -889,8 +889,8 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XDoWhileExpression expr, FormattableDocument format) {
-		expr.nodeForKeyword("while") => [ format += append[oneSpace] ]
-		expr.predicate.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace] ]
+		format += expr.nodeForKeyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
+		format += expr.predicate.nodeForEObject.surround([noSpace], [noSpace])
 		val body = expr.body.nodeForEObject
 		if (expr.body instanceof XBlockExpression) {
 			format += body.prepend[oneSpace]
@@ -990,7 +990,7 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XCatchClause expr, FormattableDocument format) {
-		format += expr.nodeForKeyword("catch").append[oneSpace]
+		format += expr.nodeForKeyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
 		expr.declaredParam.nodeForEObject => [ format += prepend[noSpace] format += append[noSpace]]
 		val body = expr.expression.nodeForEObject
 		if (expr.expression instanceof XBlockExpression)

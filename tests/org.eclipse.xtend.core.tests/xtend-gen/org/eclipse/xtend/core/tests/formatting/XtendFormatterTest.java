@@ -1,11 +1,18 @@
 package org.eclipse.xtend.core.tests.formatting;
 
+import com.google.inject.Inject;
+import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendFormatterTest extends AbstractFormatterTest {
+  @Inject
+  private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
+  
   @Test
   public void formatClass1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -833,30 +840,61 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatIf1SL() {
+  public void formatIf1SL1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if(true) println(\"foo\")");
+    _builder.append("if (true) println(\"foo\")");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("if(true)println(\"foo\")");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
-  public void formatIf1ML() {
+  public void formatIf1SL2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true) println(\"foo\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatIf1ML1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"foo\")");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("if(true)");
-    _builder_1.newLine();
-    _builder_1.append("println(\"foo\")");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatIf1ML2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1094,17 +1132,35 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatWhile1() {
+  public void formatWhile11() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("while (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"x\")");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("while  (  true  )  println(\"x\")");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatWhile12() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("while(true)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1124,7 +1180,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatDoWhile1() {
+  public void formatDoWhile11() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("do");
     _builder.newLine();
@@ -1133,10 +1194,25 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("while (true)");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("do  println(\"x\")   while  (  true  ) ");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatDoWhile12() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("do");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("while(true)");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
@@ -1757,7 +1833,12 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void formatTryCatchExpression1() {
+  public void formatTryCatchExpression11() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
+        }
+      };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try");
     _builder.newLine();
@@ -1769,10 +1850,28 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder.append("\t");
     _builder.append("println(\"y\")");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("try   println(\"x\")   catch (  Exception   e  )   println(\"y\")");
-    _builder_1.newLine();
-    this.assertFormattedExpression(_builder.toString(), _builder_1);
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatTryCatchExpression12() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"x\")");
+    _builder.newLine();
+    _builder.append("catch(Exception e)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"y\")");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
   }
   
   @Test
