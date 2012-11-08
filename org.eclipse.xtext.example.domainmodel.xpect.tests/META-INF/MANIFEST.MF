@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.xpect;bundle-version="0.1.0",
  org.xpect.ui;bundle-version="0.1.0",
  org.xpect.xtext.lib;bundle-version="0.1.0",
- org.eclipse.emf.codegen;bundle-version="2.6.0"
+ org.eclipse.emf.codegen;bundle-version="2.6.0",
+ org.eclipse.xtext.xbase;bundle-version="2.3.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
