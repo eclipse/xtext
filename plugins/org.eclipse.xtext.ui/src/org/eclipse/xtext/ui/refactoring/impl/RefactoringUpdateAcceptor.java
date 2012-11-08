@@ -21,8 +21,8 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -44,8 +44,8 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 	private StatusWrapper status;
 	
 	private Map<URI, IRefactoringDocument> uri2document = newHashMap();
-	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = HashMultimap.create();
-	private Multimap<IRefactoringDocument, Change> document2change = HashMultimap.create();
+	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = LinkedHashMultimap.create();
+	private Multimap<IRefactoringDocument, Change> document2change = LinkedHashMultimap.create();
 
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		IRefactoringDocument document = getDocument(resourceURI);
