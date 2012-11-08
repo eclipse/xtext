@@ -14,6 +14,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.GenericDeclaration;
+import java.lang.reflect.GenericSignatureFormatError;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -86,8 +87,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		createConstructors(clazz, result);
 		createFields(clazz, result);
 		setSuperTypes(clazz, result);
-		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
-			result.getTypeParameters().add(createTypeParameter(variable, result));
+		try {
+			for (TypeVariable<?> variable : clazz.getTypeParameters()) {
+				result.getTypeParameters().add(createTypeParameter(variable, result));
+			}
+		} catch(GenericSignatureFormatError error) {
+			if (log.isDebugEnabled())
+				log.debug("Invalid class file for: " + result.getIdentifier(), error);
 		}
 		createAnnotationValues(clazz, result);
 		return result;
@@ -266,10 +272,22 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected void setSuperTypes(Class<?> clazz, JvmDeclaredType result) {
-		if (clazz.getGenericSuperclass() != null) {
-			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
+		try {
+			if (clazz.getGenericSuperclass() != null) {
+				result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
+			}
+		} catch(GenericSignatureFormatError error) {
+			if (clazz.getSuperclass() != null) {
+				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
+			}
 		}
-		for (Type type : clazz.getGenericInterfaces()) {
+		Type[] interfaces = null;
+		try {
+			interfaces = clazz.getGenericInterfaces();
+		} catch(GenericSignatureFormatError error) {
+			interfaces = clazz.getInterfaces();
+		}
+		for (Type type : interfaces) {
 			result.getSuperTypes().add(createTypeReference(type));
 		}
 		if (result.getSuperTypes().isEmpty() && !Object.class.equals(clazz)) {
@@ -500,14 +518,25 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmOperation createOperation(Method method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(),
-				method.getParameterAnnotations());
+		Type[] genericParameterTypes = null;
+		try {
+			genericParameterTypes = method.getGenericParameterTypes();
+		} catch(GenericSignatureFormatError error) {
+			genericParameterTypes = method.getParameterTypes();
+		}
+		enhanceExecutable(result, method, method.getName(), genericParameterTypes, method.getParameterAnnotations());
 		result.setVarArgs(method.isVarArgs());
 		enhanceGenericDeclaration(result, method);
 		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
-		result.setReturnType(createTypeReference(method.getGenericReturnType()));
+		Type returnType = null;
+		try {
+			returnType = method.getGenericReturnType();
+		} catch(GenericSignatureFormatError error) {
+			returnType = method.getReturnType();
+		}
+		result.setReturnType(createTypeReference(returnType));
 		for (Type parameterType : method.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
 		}
