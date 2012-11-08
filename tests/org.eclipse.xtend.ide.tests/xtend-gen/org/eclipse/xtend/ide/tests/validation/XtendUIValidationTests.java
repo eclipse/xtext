@@ -2,6 +2,7 @@ package org.eclipse.xtend.ide.tests.validation;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -17,12 +18,14 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -33,6 +36,60 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   
   @Inject
   private ValidationTestHelper helper;
+  
+  @BeforeClass
+  public static IFile copyJavaFiles() {
+    try {
+      IFile _xblockexpression = null;
+      {
+        String _plus = (WorkbenchTestHelper.TESTPROJECT_NAME + "/src/org/eclipse/xtend/core/tests/restricted/RestrictedClass");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("package org.eclipse.xtend.core.tests.restricted;");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("public class RestrictedClass<T> {");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public class InnerRestrictedClass {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        IResourcesSetupUtil.createFile(_plus, _builder.toString());
+        String _plus_1 = (WorkbenchTestHelper.TESTPROJECT_NAME + "/src/org/eclipse/xtend/core/tests/restricted/RestrictedClass");
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("package org.eclipse.xtend.core.tests.internal;");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("public class InternalClass<T> {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("public class InnerInternalClass {");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        IFile _createFile = IResourcesSetupUtil.createFile(_plus_1, _builder_1.toString());
+        _xblockexpression = (_createFile);
+      }
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void tearDown() throws Exception {
+    this.testHelper.tearDown();
+  }
   
   @Test
   public void testForbiddenImport() {
