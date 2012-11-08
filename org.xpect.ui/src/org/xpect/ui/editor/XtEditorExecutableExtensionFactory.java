@@ -71,14 +71,21 @@ public class XtEditorExecutableExtensionFactory extends AbstractGuiceAwareExecut
 			IWorkbenchPage page = getActiveWorkbenchPage();
 			if (page != null) {
 				IEditorReference[] references = page.getEditorReferences();
-				IEditorInput input = references[0].getEditorInput();
-				if (input instanceof IFileEditorInput)
-					return ((IFileEditorInput) input).getFile();
+
+				// iterate backwards, because the new editor is likely to be at
+				// the end of the list
+				for (int i = references.length - 1; i >= 0; i--)
+
+					// only care about Xt-Editors that are *not* yet initialized
+					if (references[i].getId().equals(XpectPluginActivator.XT_EDITOR_ID) && references[i].getPart(false) != null) {
+						IEditorInput input = references[i].getEditorInput();
+						if (input instanceof IFileEditorInput)
+							return ((IFileEditorInput) input).getFile();
+					}
 			}
 			return null;
 		} catch (PartInitException e) {
 			throw new RuntimeException();
 		}
 	}
-
 }
