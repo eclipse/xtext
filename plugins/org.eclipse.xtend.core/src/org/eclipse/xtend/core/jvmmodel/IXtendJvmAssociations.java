@@ -13,10 +13,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -34,6 +36,8 @@ import com.google.inject.Singleton;
 public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 	JvmGenericType getInferredType(XtendClass xtendClass);
+
+	JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation);
 	
 	JvmConstructor getInferredConstructor(XtendClass xtendClass);
 
@@ -56,6 +60,11 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 		public JvmGenericType getInferredType(XtendClass xtendClass) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
+			return firstOrNull;
+		}
+
+		public JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation) {
+			final JvmAnnotationType firstOrNull = getFirstOrNull(getJvmElements(xtendAnnotation), JvmAnnotationType.class);
 			return firstOrNull;
 		}
 

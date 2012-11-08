@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -45,9 +44,6 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 	
 	@Inject
 	private com.google.inject.Provider<JavaDispatchMethodChildStrategy> javaStrategyProvider; 
-	
-	@Inject
-	private DispatchingSupport support;
 	
 	private List<IRenameStrategy> children = newArrayList(); 
 	
