@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
+import org.junit.Ignore
 
 class XtendRichStringFormatterTest extends AbstractFormatterTest {
 	
@@ -18,6 +19,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		)
 	}
 	
+	@Ignore
 	@Test def testIndentation1() {
 		assertFormattedExpression(
 			"val x = '''\n" +
@@ -29,6 +31,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		)
 	}
 	
+	@Ignore
 	@Test def testIndentation2() {
 		assertFormattedExpression(
 			"val x = '''x\n" +
@@ -40,6 +43,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		)
 	}
 	
+	@Ignore
 	@Test def testIndentation3() {
 		assertFormattedExpression(
 			"val x = '''x\n" +
@@ -51,6 +55,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		)
 	}
 	
+	@Ignore
 	@Test def testIndentation4() {
 		assertFormattedExpression(
 			"val x = '''\n" +
@@ -62,6 +67,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		)
 	}
 	
+	@Ignore
 	@Test def testIndentation5() {
 		val x = '''
 				foo

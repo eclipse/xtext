@@ -8,18 +8,55 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	
 	@Inject extension XtendFormatterConfigKeys
 	
-	@Test def formatClass1() {
-		assertFormatted('''
+	@Test def formatClass11() {
+		assertFormatted([
+			put(bracesInNewLine, false)
+		],'''
 			package foo
 			
 			class bar {
 			}
-		''', '''
-			package  foo  class  bar  {  }
 		''')	
 	}
 	
-	@Test def formatClass11() {
+	@Test def formatClass12() {
+		assertFormatted([
+			put(bracesInNewLine, true)
+		],'''
+			package foo
+			
+			class bar
+			{
+			}
+		''')	
+	}
+	
+	@Test def formatClass112() {
+		assertFormatted([
+			put(bracesInNewLine, false)
+		],'''
+			package foo
+			
+			class bar {
+				int member1
+			}
+		''')	
+	}
+	
+	@Test def formatClass122() {
+		assertFormatted([
+			put(bracesInNewLine, true)
+		],'''
+			package foo
+			
+			class bar
+			{
+				int member1
+			}
+		''')	
+	}
+	
+	@Test def formatClass111() {
 		assertFormatted('''
 			package foo
 			
@@ -187,10 +224,25 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatConstructor() {
-		assertFormatted('''
+	@Test def formatConstructor01() {
+		assertFormatted([
+			put(bracesInNewLine, false)
+		],'''
 			class bar {
 				new() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatConstructor02() {
+		assertFormatted([
+			put(bracesInNewLine, true)
+		],'''
+			class bar
+			{
+				new()
+				{
 				}
 			}
 		''')	
@@ -226,12 +278,29 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatMethod() {
-		assertFormatted('''
+	@Test def formatMethod01() {
+		assertFormatted([
+			put(bracesInNewLine, false)
+		],'''
 			package foo
 			
 			class bar {
 				def baz() {
+				}
+			}
+		''')	
+	}
+	
+	@Test def formatMethod02() {
+		assertFormatted([
+			put(bracesInNewLine, true)
+		],'''
+			package foo
+			
+			class bar
+			{
+				def baz()
+				{
 				}
 			}
 		''')	
@@ -594,6 +663,21 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')
 	}
 	
+	@Test def formatIfElse3() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			if (true)
+			{
+				println("foo")
+			}
+			else
+			{
+				println("bar")
+			}
+		''')
+	}
+	
 	@Test def formatIfElseIf1() {
 		assertFormattedExpression('''
 			if (true)
@@ -648,12 +732,23 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatFor2() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			for (i : 1 .. 2) {
 				println(i)
 			}
-		''', '''
-			for  (  i  :  1   ..   2  )   {   println(i)  }
+		''')	
+	}
+	
+	@Test def formatFor3() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			for (i : 1 .. 2)
+			{
+				println(i)
+			}
 		''')	
 	}
 	
@@ -676,12 +771,23 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatWhile2() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			while (true) {
 				println("x")
 			}
-		''', '''
-			while  (  true  )   {   println("x")  }
+		''')	
+	}
+	
+	@Test def formatWhile21() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			while (true)
+			{
+				println("x")
+			}
 		''')	
 	}
 	
@@ -706,40 +812,60 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatDoWhile2() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			do {
 				println("x")
 			} while (true)
-		''', '''
-			do  {  println("x")   } while  (  true  ) 
+		''')		
+	}
+	
+	@Test def formatDoWhile3() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			do
+			{
+				println("x")
+			}
+			while (true)
 		''')		
 	}
 	
 	@Test def formatSwitchSL() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			switch 'x' { case 'x': println('x') case 'y': println('y') }
-		''', '''
-			switch 'x'  {   case 'x':   println('x')   case   'y':    println('y')    }
 		''')	
 	}
 	
-	@Test def formatSwitchSLParenthesis() {
-		assertFormattedExpression('''
+	@Test def formatSwitchSL1() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
 			switch 'x' { case 'x': println('x') case 'y': println('y') }
-		''', '''
-			switch  'x'  {   case 'x':   println('x')   case   'y':    println('y')    }
 		''')	
 	}
+	
 	
 	@Test def formatSwitchCaseSL() {
-		assertFormattedExpression('''
-			switch 'x' {
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
+			switch 'x' { case 'x': println('x') case 'y': println('y') }
+		''')	
+	}
+	
+	@Test def formatSwitchCaseSL1() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			switch 'x'
+			{
 				case 'x': println('x')
 				case 'y': println('y')
-			}
-		''', '''
-			switch 'x'  {   
-				case 'x':   println('x')   case   'y':    println('y')
 			}
 		''')	
 	}
@@ -774,12 +900,34 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatSwitchMLBlock() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			switch 'x' {
 				case 'x': {
 					println('x')
 				}
 				case 'y': {
+					println('y')
+				}
+			}
+		''', '''
+			switch 'x'  { case 'x': { println('x') }  case   'y':  {  println('y') } }
+		''')	
+	}
+	
+	@Test def formatSwitchMLBlock1() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			switch 'x'
+			{
+				case 'x':
+				{
+					println('x')
+				}
+				case 'y':
+				{
 					println('y')
 				}
 			}
@@ -1122,12 +1270,35 @@ class XtendFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatTryCatchFinallyExpression2() {
-		assertFormattedExpression('''
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
 			try {
 				println("x")
 			} catch (Exception e) {
 				println("y")
 			} finally {
+				println("z")
+			}
+		''', '''
+			try  {   println("x")  }   catch   (   Exception   e   )  {  println("y")  } finally  {  println("z")  }
+		''')	
+	}
+	
+	@Test def formatTryCatchFinallyExpression3() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			try
+			{
+				println("x")
+			}
+			catch (Exception e)
+			{
+				println("y")
+			}
+			finally
+			{
 				println("z")
 			}
 		''', '''

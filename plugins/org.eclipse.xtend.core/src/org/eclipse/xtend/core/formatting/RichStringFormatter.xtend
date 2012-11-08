@@ -80,7 +80,7 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 	
 	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 //				println('''acceptTemplateLineBreak(offset=«offset», charCount=«charCount», origin=«origin.hashCode»)''')
-		//		document += newFormattingData(offset -> charCount, [newLine])
+//		document += new NewLineData(offset, charCount, 0, 1)
 		if(!semanticSeen)
 			indentOffset = offset
 		offset = offset + charCount
