@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
+import org.eclipse.xtend.core.formatting.IConfigurationKey;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
@@ -275,7 +276,7 @@ public class XtendFormatter {
     document.operator_add(_prepend);
   }
   
-  protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document) {
+  protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document, final IConfigurationKey<? extends Object> configKey) {
     EList<XAnnotation> _annotations = target.getAnnotations();
     boolean _isEmpty = _annotations.isEmpty();
     if (_isEmpty) {
@@ -286,7 +287,7 @@ public class XtendFormatter {
       {
         this.format(a, document);
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(a);
-        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForEObject, this._xtendFormatterConfigKeys.newLineAfterAnnotations);
+        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForEObject, configKey);
         document.operator_add(_append);
       }
     }
@@ -452,7 +453,7 @@ public class XtendFormatter {
   }
   
   protected void _format(final XtendClass clazz, final FormattableDocument format) {
-    this.formatAnnotations(clazz, format);
+    this.formatAnnotations(clazz, format, this._xtendFormatterConfigKeys.newLineAfterClassAnnotations);
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(clazz, "abstract");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -600,7 +601,7 @@ public class XtendFormatter {
   }
   
   protected void _format(final XtendConstructor func, final FormattableDocument format) {
-    this.formatAnnotations(func, format);
+    this.formatAnnotations(func, format, this._xtendFormatterConfigKeys.newLineAfterConstructorAnnotations);
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(func, "new");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -829,7 +830,7 @@ public class XtendFormatter {
   }
   
   protected void _format(final XtendFunction func, final FormattableDocument format) {
-    this.formatAnnotations(func, format);
+    this.formatAnnotations(func, format, this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations);
     final INode nameNode = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__NAME);
     final ILeafNode open = this._nodeModelAccess.immediatelyFollowingKeyword(nameNode, "(");
     final ILeafNode close = this._nodeModelAccess.nodeForKeyword(func, ")");
@@ -872,7 +873,7 @@ public class XtendFormatter {
   }
   
   protected void _format(final XtendField field, final FormattableDocument document) {
-    this.formatAnnotations(field, document);
+    this.formatAnnotations(field, document, this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(field, Literals.XTEND_FIELD__TYPE);
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -888,7 +889,7 @@ public class XtendFormatter {
   }
   
   protected void _format(final XtendParameter param, final FormattableDocument format) {
-    this.formatAnnotations(param, format);
+    this.formatAnnotations(param, format, this._xtendFormatterConfigKeys.newLineAfterParameterAnnotations);
     JvmTypeReference _parameterType = param.getParameterType();
     this.format(_parameterType, format);
     final INode nameNode = this._nodeModelAccess.nodeForFeature(param, Literals.XTEND_PARAMETER__NAME);
@@ -3041,7 +3042,7 @@ public class XtendFormatter {
           };
         Iterable<FormattingData> _append_1 = this._formatterExtensions.append(open, _function_1);
         format.operator_add(_append_1);
-        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(open, this._xtendFormatterConfigKeys.newLineAroundExpression);
+        Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(open, this._xtendFormatterConfigKeys.blankLinesAroundExpression);
         format.operator_add(_append_2);
         EList<XExpression> _expressions_1 = expr.getExpressions();
         for (final XExpression child : _expressions_1) {
@@ -3069,10 +3070,10 @@ public class XtendFormatter {
                   };
                 Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(sem, _function_2);
                 format.operator_add(_prepend);
-                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(sem, this._xtendFormatterConfigKeys.newLineAroundExpression);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(sem, this._xtendFormatterConfigKeys.blankLinesAroundExpression);
                 format.operator_add(_append_3);
               } else {
-                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(childNode, this._xtendFormatterConfigKeys.newLineAroundExpression);
+                Function1<? super IConfigurationValues<XtendFormatterConfigKeys>,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(childNode, this._xtendFormatterConfigKeys.blankLinesAroundExpression);
                 format.operator_add(_append_4);
               }
             }

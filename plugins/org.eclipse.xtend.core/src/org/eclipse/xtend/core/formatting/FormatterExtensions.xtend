@@ -35,12 +35,14 @@ class FormatterExtensions {
 			BlankLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
 				val blankline = cfg.get(key)
 				val preserve = cfg.get(cfg.keys.preserveBlankLines)
-				newFormattingData(leafs, blankline + 1, preserve + 1, indentationChange)
+				val min = blankline + 1
+				val max = Math::max(preserve + 1, min)
+				newFormattingData(leafs, min, max, indentationChange)
 			]
 			NewLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
 				val newLine = cfg.get(key)
-				val preserve = cfg.get(cfg.keys.preserveBlankLines)
-				newFormattingData(leafs, if(newLine) 1 else 0, preserve + 1, indentationChange)
+				val preserve = cfg.get(cfg.keys.preserveNewLines)
+				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange)
 			]
 			default:
 				throw new RuntimeException("can't handle configuration key")

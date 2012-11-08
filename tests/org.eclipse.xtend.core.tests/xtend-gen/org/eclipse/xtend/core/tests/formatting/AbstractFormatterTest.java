@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -110,6 +112,24 @@ public abstract class AbstractFormatterTest {
     this.assertFormatted(_member, _member_1);
   }
   
+  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final String expectation, final CharSequence toBeFormatted) {
+    CharSequence _member = this.toMember(expectation);
+    CharSequence _member_1 = this.toMember(toBeFormatted);
+    this.assertFormatted(cfg, _member, _member_1);
+  }
+  
+  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final String expectation) {
+    CharSequence _member = this.toMember(expectation);
+    CharSequence _member_1 = this.toMember(expectation);
+    this.assertFormatted(cfg, _member, _member_1);
+  }
+  
+  public void assertFormattedMember(final String expectation) {
+    CharSequence _member = this.toMember(expectation);
+    CharSequence _member_1 = this.toMember(expectation);
+    this.assertFormatted(_member, _member_1);
+  }
+  
   private String flattenWhitespace(final EObject obj) {
     String _xblockexpression = null;
     {
@@ -185,7 +205,15 @@ public abstract class AbstractFormatterTest {
     return _xblockexpression;
   }
   
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation) {
+    this.assertFormatted(cfg, expectation, expectation);
+  }
+  
   public void assertFormatted(final CharSequence expectation, final CharSequence toBeFormatted) {
+    this.assertFormatted(null, expectation, toBeFormatted);
+  }
+  
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     try {
       final XtendFile parsed = this._parseHelper.parse(toBeFormatted);
       Resource _eResource = parsed.eResource();
@@ -202,6 +230,10 @@ public abstract class AbstractFormatterTest {
       MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(this.keys);
       final MapBasedConfigurationValues<XtendFormatterConfigKeys> rc = _mapBasedConfigurationValues;
       rc.<Integer>put(this.keys.maxLineWidth, Integer.valueOf(80));
+      boolean _notEquals = (!Objects.equal(cfg, null));
+      if (_notEquals) {
+        cfg.apply(rc);
+      }
       this.formatter.setAllowIdentityEdits(true);
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();

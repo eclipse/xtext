@@ -123,12 +123,12 @@ public class XtendFormatter {
 		document += imp.nodeForKeyword(";").prepend[noSpace]
 	}
 	
-	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document) {
+	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document, IConfigurationKey<?> configKey) {
 		if(target.annotations.isEmpty)
 			return;
 		for(a : target.annotations) {
 			a.format(document)
-			document += a.nodeForEObject.append(newLineAfterAnnotations)
+			document += a.nodeForEObject.append(configKey)
 		}
 	}
 	
@@ -162,7 +162,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
-		formatAnnotations(clazz, format)
+		formatAnnotations(clazz, format, newLineAfterClassAnnotations)
 		format += clazz.nodeForKeyword("abstract").append[oneSpace]
 		format += clazz.nodeForKeyword("class").append[oneSpace]
 		format += clazz.nodeForKeyword("extends").surround[oneSpace]
@@ -200,7 +200,7 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XtendConstructor func, FormattableDocument format) {
-		formatAnnotations(func, format)
+		formatAnnotations(func, format, newLineAfterConstructorAnnotations)
 		format += func.nodeForKeyword("new").append[noSpace]
 		if (!func.typeParameters.empty) {
 			format += func.nodeForKeyword("<").append[noSpace]
@@ -264,7 +264,7 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
-		formatAnnotations(func, format)
+		formatAnnotations(func, format, newLineAfterMethodAnnotations)
 		val nameNode = func.nodeForFeature(XTEND_FUNCTION__NAME)
 		val open = nameNode.immediatelyFollowingKeyword("(")
 		val close = func.nodeForKeyword(")")
@@ -278,14 +278,14 @@ public class XtendFormatter {
 	}
 	
 	def protected dispatch void format(XtendField field, FormattableDocument document) {
-		formatAnnotations(field, document)
+		formatAnnotations(field, document, newLineAfterFieldAnnotations)
 		document += field.nodeForFeature(XTEND_FIELD__TYPE).append[oneSpace]
 		field.type.format(document)
 		field.initialValue.format(document)
 	}
 
 	def protected dispatch void format(XtendParameter param, FormattableDocument format) {
-		formatAnnotations(param, format)
+		formatAnnotations(param, format, newLineAfterParameterAnnotations)
 		param.parameterType.format(format)
 		val nameNode = param.nodeForFeature(XTEND_PARAMETER__NAME)
 		format += nameNode.prepend[oneSpace]
@@ -911,7 +911,7 @@ public class XtendFormatter {
 				format += open.append[newLine]
 			} else {
 				format += open.append[increaseIndentation]
-				format += open.append(newLineAroundExpression)
+				format += open.append(blankLinesAroundExpression)
 				for (child : expr.expressions) {
 					child.format(format)
 					if (child != expr.expressions.last || close != null) {
@@ -919,9 +919,9 @@ public class XtendFormatter {
 						val sem = childNode.immediatelyFollowingKeyword(";")
 						if (sem != null) {
 							format += sem.prepend[noSpace]
-							format += sem.append(newLineAroundExpression)
+							format += sem.append(blankLinesAroundExpression)
 						} else {
-							format += childNode.append(newLineAroundExpression)
+							format += childNode.append(blankLinesAroundExpression)
 						}
 					}
 				}

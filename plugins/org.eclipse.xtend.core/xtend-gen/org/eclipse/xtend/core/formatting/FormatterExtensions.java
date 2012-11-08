@@ -105,9 +105,10 @@ public class FormatterExtensions {
                 final Integer blankline = cfg.<Integer>get(_blankLineKey);
                 XtendFormatterConfigKeys _keys = cfg.getKeys();
                 final Integer preserve = cfg.<Integer>get(_keys.preserveBlankLines);
-                int _plus = ((blankline).intValue() + 1);
-                int _plus_1 = ((preserve).intValue() + 1);
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _plus, _plus_1, indentationChange);
+                final int min = ((blankline).intValue() + 1);
+                int _plus = ((preserve).intValue() + 1);
+                final int max = Math.max(_plus, min);
+                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, min, max, indentationChange);
                 _xblockexpression = (_newFormattingData);
               }
               return _xblockexpression;
@@ -126,15 +127,26 @@ public class FormatterExtensions {
               {
                 final Boolean newLine = cfg.<Boolean>get(_newLineKey);
                 XtendFormatterConfigKeys _keys = cfg.getKeys();
-                final Integer preserve = cfg.<Integer>get(_keys.preserveBlankLines);
+                final Boolean preserve = cfg.<Boolean>get(_keys.preserveNewLines);
                 int _xifexpression = (int) 0;
                 if ((newLine).booleanValue()) {
                   _xifexpression = 1;
                 } else {
                   _xifexpression = 0;
                 }
-                int _plus = ((preserve).intValue() + 1);
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, _plus, indentationChange);
+                int _xifexpression_1 = (int) 0;
+                boolean _or = false;
+                if ((preserve).booleanValue()) {
+                  _or = true;
+                } else {
+                  _or = ((preserve).booleanValue() || (newLine).booleanValue());
+                }
+                if (_or) {
+                  _xifexpression_1 = 1;
+                } else {
+                  _xifexpression_1 = 0;
+                }
+                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, _xifexpression_1, indentationChange);
                 _xblockexpression = (_newFormattingData);
               }
               return _xblockexpression;

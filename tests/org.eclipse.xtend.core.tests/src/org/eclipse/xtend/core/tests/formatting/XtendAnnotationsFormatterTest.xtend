@@ -2,8 +2,12 @@ package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
+import com.google.inject.Inject
 
 class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
+	
+	@Inject extension XtendFormatterConfigKeys
 	
 	def protected toFile(CharSequence ann) '''
 		package foo
@@ -21,26 +25,44 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 	}
 	
 	@Test def formatClassSingleAnnotationSL() {
-		assertFormatted('''
+		assertFormatted([
+			put(newLineAfterClassAnnotations, false)
+			put(preserveNewLines, true)
+		], '''
 			package foo
 			
 			@Deprecated class bar {
 			}
 		''', '''
-			package  foo  @Deprecated  class  bar  {  }
+			package foo @Deprecated class bar { }
 		''')	
 	}
 	
-	@Test def formatClassSingleAnnotationML() {
-		assertFormatted('''
+	@Test def formatClassSingleAnnotationML1() {
+		assertFormatted([
+			put(newLineAfterClassAnnotations, false)
+			put(preserveNewLines, true)
+		],'''
+			package foo
+			
+			@Deprecated
+			class bar {
+			}
+		''')	
+	}
+	
+	@Test def formatClassSingleAnnotationML2() {
+		assertFormatted([
+			put(newLineAfterClassAnnotations, true)
+			put(preserveNewLines, true)
+		],'''
 			package foo
 			
 			@Deprecated
 			class bar {
 			}
 		''', '''
-			package  foo  @Deprecated  
-			class  bar  {  }
+			package foo @Deprecated class bar { }
 		''')	
 	}
 	
@@ -50,8 +72,6 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 			
 			@Override @Deprecated class bar {
 			}
-		''', '''
-			package  foo  @Override  @Deprecated  class  bar  {  }
 		''')	
 	}
 	
@@ -63,10 +83,6 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 			@Deprecated
 			class bar {
 			}
-		''', '''
-			package  foo  @Override  
-			@Deprecated  
-			class  bar  {  }
 		''')	
 	}
 	
@@ -77,37 +93,67 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 			@Override @Deprecated
 			class bar {
 			}
+		''')	
+	}
+	
+	@Test def formatConstructorTwoAnnotations1() {
+		assertFormattedMember([
+			put(newLineAfterConstructorAnnotations, false)
+			put(preserveNewLines, true)
+		], '''
+			@Override
+			@Deprecated
+			new() {
+			}
+		''')	
+	}
+	
+	@Test def formatConstructorTwoAnnotations2() {
+		assertFormattedMember([
+			put(newLineAfterConstructorAnnotations, true)
+			put(preserveNewLines, true)
+		], '''
+			@Override
+			@Deprecated
+			new() {
+			}
+		''')	
+	}
+	
+	@Test def formatConstructorTwoAnnotationsSL1() {
+		assertFormattedMember([
+			put(newLineAfterConstructorAnnotations, false)
+			put(preserveNewLines, false)
+		], '''
+			@Override @Deprecated new() {
+			}
 		''', '''
-			package  foo  @Override @Deprecated  
-			class  bar  {  }
+			@Override 
+			@Deprecated 
+			new() {
+			}
+		''')	
+	}
+	
+	@Test def formatConstructorTwoAnnotationsSL2() {
+		assertFormattedMember([
+			put(newLineAfterConstructorAnnotations, false)
+			put(preserveNewLines, true)
+		], '''
+			@Override @Deprecated new() {
+			}
 		''')	
 	}
 	
 	@Test def formatConstructorSingleAnnotations() {
 		assertFormattedMember('''
-			@Override
 			@Deprecated
 			new() {
 			}
-		''', '''
-			@Override  
-			@Deprecated  
-			new() {  }
 		''')	
 	}
 	
-	@Test def formatConstructorTwoAnnotations() {
-		assertFormattedMember('''
-			@Deprecated
-			new() {
-			}
-		''', '''
-			@Deprecated  
-			new() {  }
-		''')	
-	}
-	
-	@Test def formatConstructorParameterSingleAnnotations() {
+	@Test def formatConstructorParameterTwoAnnotations() {
 		assertFormattedMember('''
 			new(@Override @Deprecated String p) {
 			}
@@ -116,7 +162,7 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatConstructorParameterTwoAnnotations() {
+	@Test def formatConstructorParameterSingleAnnotations() {
 		assertFormattedMember('''
 			new(@Deprecated String p) {
 			}
@@ -126,11 +172,48 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 	}
 	
 	
-	@Test def formatMethodSingleAnnotations() {
-		assertFormattedMember('''
+	@Test def formatMethodTwoAnnotations1() {
+		assertFormattedMember([
+			put(newLineAfterMethodAnnotations, true)
+			put(preserveNewLines, true)
+		],'''
 			@Override
 			@Deprecated
 			def foo() {
+			}
+		''')	
+	}
+	
+	@Test def formatMethodTwoAnnotations2() {
+		assertFormattedMember([
+			put(newLineAfterMethodAnnotations, true)
+			put(preserveNewLines, false)
+		],'''
+			@Override
+			@Deprecated
+			def foo() {
+			}
+		''')	
+	}
+	
+	@Test def formatMethodTwoAnnotations3() {
+		assertFormattedMember([
+			put(newLineAfterMethodAnnotations, false)
+			put(preserveNewLines, true)
+		],'''
+			@Override
+			@Deprecated
+			def foo() {
+			}
+		''')	
+	}
+	
+	@Test def formatMethodTwoAnnotations4() {
+		assertFormattedMember([
+			put(newLineAfterMethodAnnotations, false)
+			put(preserveNewLines, false)
+		],'''
+			@Override @Deprecated def foo() {
 			}
 		''', '''
 			@Override  
@@ -139,7 +222,7 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatMethodTwoAnnotations() {
+	@Test def formatMethodSingleAnnotations() {
 		assertFormattedMember('''
 			@Deprecated
 			def foo() {
@@ -150,8 +233,11 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatMethodParameterSingleAnnotations() {
-		assertFormattedMember('''
+	@Test def formatMethodParameterTwoAnnotations1() {
+		assertFormattedMember([
+			put(newLineAfterParameterAnnotations, false)
+			put(preserveNewLines, true)
+		],'''
 			def foo(@Override @Deprecated String p) {
 			}
 		''', '''
@@ -159,7 +245,22 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
-	@Test def formatMethodParameterTwoAnnotations() {
+	@Test def formatMethodParameterTwoAnnotations2() {
+		assertFormattedMember([
+			put(newLineAfterParameterAnnotations, true)
+			put(preserveNewLines, true)
+		],'''
+			def foo(
+				@Override
+				@Deprecated
+				String p) {
+			}
+		''', '''
+			def foo(  @Override  @Deprecated  String  p  ) {  }
+		''')	
+	}
+	
+	@Test def formatMethodParameterSingleAnnotations() {
 		assertFormattedMember('''
 			def foo(@Deprecated String p) {
 			}

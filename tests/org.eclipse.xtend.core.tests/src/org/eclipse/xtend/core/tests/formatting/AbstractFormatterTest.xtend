@@ -57,6 +57,18 @@ abstract class AbstractFormatterTest {
 		assertFormatted(expectation.toMember, toBeFormatted.toMember)
 	}
 	
+	def assertFormattedMember((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, String expectation, CharSequence toBeFormatted) {
+		assertFormatted(cfg, expectation.toMember, toBeFormatted.toMember)
+	}
+	
+	def assertFormattedMember((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, String expectation) {
+		assertFormatted(cfg, expectation.toMember, expectation.toMember)
+	}
+	
+	def assertFormattedMember(String expectation) {
+		assertFormatted(expectation.toMember, expectation.toMember)
+	}
+	
 	def private flattenWhitespace(EObject obj) {
 		val result = new StringBuilder()
 		for(node: (obj.eResource as XtextResource).parseResult.rootNode.leafNodes)
@@ -80,13 +92,23 @@ abstract class AbstractFormatterTest {
 		result
 	}
 	
+	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation) {
+		assertFormatted(cfg, expectation, expectation)
+	}
+	
 	def assertFormatted(CharSequence expectation, CharSequence toBeFormatted) {
+		assertFormatted(null, expectation, toBeFormatted)
+	}
+	
+	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
 		val parsed = toBeFormatted.parse
 		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
 		val rc = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys)
 
 		rc.put(keys.maxLineWidth, 80)
+		if(cfg != null)
+			cfg.apply(rc)
 
 		formatter.allowIdentityEdits = true
 		

@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.formatting;
 import javax.inject.Singleton;
 import org.eclipse.xtend.core.formatting.AbstractConfigurationKeys;
 import org.eclipse.xtend.core.formatting.BlankLineKey;
+import org.eclipse.xtend.core.formatting.BooleanKey;
 import org.eclipse.xtend.core.formatting.IntegerKey;
 import org.eclipse.xtend.core.formatting.NewLineKey;
 import org.eclipse.xtend.core.formatting.TransientKey;
@@ -62,14 +63,14 @@ public class XtendFormatterConfigKeys extends AbstractConfigurationKeys {
   
   public final BlankLineKey blankLinesAfterImports = new Function0<BlankLineKey>() {
     public BlankLineKey apply() {
-      BlankLineKey _blankLineKey = new BlankLineKey("blank.lines.after.imports", Integer.valueOf(2));
+      BlankLineKey _blankLineKey = new BlankLineKey("blank.lines.after.imports", Integer.valueOf(1));
       return _blankLineKey;
     }
   }.apply();
   
   public final BlankLineKey blankLinesBetweenClasses = new Function0<BlankLineKey>() {
     public BlankLineKey apply() {
-      BlankLineKey _blankLineKey = new BlankLineKey("blank.lines.between.classes", Integer.valueOf(2));
+      BlankLineKey _blankLineKey = new BlankLineKey("blank.lines.between.classes", Integer.valueOf(1));
       return _blankLineKey;
     }
   }.apply();
@@ -109,16 +110,51 @@ public class XtendFormatterConfigKeys extends AbstractConfigurationKeys {
     }
   }.apply();
   
-  public final NewLineKey newLineAfterAnnotations = new Function0<NewLineKey>() {
+  public final BlankLineKey blankLinesAroundExpression = new Function0<BlankLineKey>() {
+    public BlankLineKey apply() {
+      BlankLineKey _blankLineKey = new BlankLineKey("blank.line.around.expressions", Integer.valueOf(0));
+      return _blankLineKey;
+    }
+  }.apply();
+  
+  public final BooleanKey preserveNewLines = new Function0<BooleanKey>() {
+    public BooleanKey apply() {
+      BooleanKey _booleanKey = new BooleanKey("preserve.new.lines", Boolean.valueOf(true));
+      return _booleanKey;
+    }
+  }.apply();
+  
+  public final NewLineKey newLineAfterClassAnnotations = new Function0<NewLineKey>() {
     public NewLineKey apply() {
-      NewLineKey _newLineKey = new NewLineKey("newline.after.annotations", Boolean.valueOf(false));
+      NewLineKey _newLineKey = new NewLineKey("newline.after.class.annotations", Boolean.valueOf(false));
       return _newLineKey;
     }
   }.apply();
   
-  public final NewLineKey newLineAroundExpression = new Function0<NewLineKey>() {
+  public final NewLineKey newLineAfterFieldAnnotations = new Function0<NewLineKey>() {
     public NewLineKey apply() {
-      NewLineKey _newLineKey = new NewLineKey("newlines.around.expressions", Boolean.valueOf(true));
+      NewLineKey _newLineKey = new NewLineKey("newline.after.field.annotations", Boolean.valueOf(false));
+      return _newLineKey;
+    }
+  }.apply();
+  
+  public final NewLineKey newLineAfterMethodAnnotations = new Function0<NewLineKey>() {
+    public NewLineKey apply() {
+      NewLineKey _newLineKey = new NewLineKey("newline.after.method.annotations", Boolean.valueOf(false));
+      return _newLineKey;
+    }
+  }.apply();
+  
+  public final NewLineKey newLineAfterConstructorAnnotations = new Function0<NewLineKey>() {
+    public NewLineKey apply() {
+      NewLineKey _newLineKey = new NewLineKey("newline.after.constructor.annotations", Boolean.valueOf(false));
+      return _newLineKey;
+    }
+  }.apply();
+  
+  public final NewLineKey newLineAfterParameterAnnotations = new Function0<NewLineKey>() {
+    public NewLineKey apply() {
+      NewLineKey _newLineKey = new NewLineKey("newline.after.parameter.annotations", Boolean.valueOf(false));
       return _newLineKey;
     }
   }.apply();
