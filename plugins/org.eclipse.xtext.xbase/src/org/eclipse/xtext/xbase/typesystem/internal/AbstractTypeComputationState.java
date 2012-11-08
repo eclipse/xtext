@@ -52,7 +52,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
-	private List<AbstractTypeExpectation> immediateExpectations;
+	private List<AbstractTypeExpectation> expectations;
 	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
@@ -135,15 +135,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithNonVoidExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 	}
 
-	public AbstractTypeComputationState withoutExpectation() {
-		return new NoExpectationTypeComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
-	}
-
 	public AbstractTypeComputationState withReturnExpectation() {
 		return new ReturnExpectationTypeComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 	}
 
-	public AbstractTypeComputationState withoutImmediateExpectation() {
+	public AbstractTypeComputationState withoutExpectation() {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, null);
 	}
 	
@@ -170,24 +166,24 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeAssigner(state);
 	}
 
-	public final List<? extends ITypeExpectation> getImmediateExpectations() {
-		if (immediateExpectations == null)
-			immediateExpectations = getImmediateExpectations(this);
-		return immediateExpectations;
+	public final List<? extends ITypeExpectation> getExpectations() {
+		if (expectations == null)
+			expectations = getExpectations(this);
+		return expectations;
 	}
 	
-	public final List<? extends ITypeExpectation> getReturnExpectations() {
+	protected final List<? extends ITypeExpectation> getReturnExpectations() {
 		if (returnExpectations == null)
 			returnExpectations = getReturnExpectations(this, false);
 		return returnExpectations;
 	}
 	
-	protected abstract List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState);
 	
-	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation);
+	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation);
 	
 	public void acceptActualType(LightweightTypeReference type) {
-		for(ITypeExpectation expectation: getImmediateExpectations()) {
+		for(ITypeExpectation expectation: getExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.EXPECTATION_INDEPENDENT);
 		}
 	}

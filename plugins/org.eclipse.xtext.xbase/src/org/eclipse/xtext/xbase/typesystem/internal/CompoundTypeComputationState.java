@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -90,14 +91,6 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public ITypeComputationState withoutExpectation() {
-		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
-		for (int i = 0; i < components.length; i++) {
-			result[i] = components[i].withoutExpectation();
-		}
-		return new CompoundTypeComputationState(owner, result);
-	}
-
 	public ITypeComputationState withReturnExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -106,10 +99,10 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public ITypeComputationState withoutImmediateExpectation() {
+	public ITypeComputationState withoutExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
-			result[i] = components[i].withoutImmediateExpectation();
+			result[i] = components[i].withoutExpectation();
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
@@ -176,18 +169,10 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 	}
 
-	public List<? extends ITypeExpectation> getImmediateExpectations() {
+	public List<? extends ITypeExpectation> getExpectations() {
 		List<ITypeExpectation> result = Lists.newArrayList();
 		for (int i = 0; i < components.length; i++) {
-			result.addAll(components[i].getImmediateExpectations());
-		}
-		return result;
-	}
-
-	public List<? extends ITypeExpectation> getReturnExpectations() {
-		List<ITypeExpectation> result = Lists.newArrayList();
-		for (int i = 0; i < components.length; i++) {
-			result.addAll(components[i].getReturnExpectations());
+			result.addAll(components[i].getExpectations());
 		}
 		return result;
 	}
@@ -209,5 +194,5 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			components[i].discardReassignedTypes(refinable);
 		}
 	}
-
+	
 }

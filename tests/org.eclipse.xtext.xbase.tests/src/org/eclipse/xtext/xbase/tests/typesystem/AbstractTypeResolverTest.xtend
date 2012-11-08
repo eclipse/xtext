@@ -1464,6 +1464,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).head").resolvesTo("Integer");
 	}
 	
+	@Ignore("slightly too slow")
 	@Test def void testFeatureCall_15_n() throws Exception {
 		("newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)
 		.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)
@@ -1510,7 +1511,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		.map(e|e).map(e|e).map(e|e).map(e|e).head").resolvesTo("Integer");
 	}
 	
-	@Ignore("timeout")
+	@Ignore("too slow")
 	@Test def void testFeatureCall_15_n_1() throws Exception {
 		("newArrayList(newArrayList('').map(s|1).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)
 		.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e)
@@ -1557,7 +1558,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		.map(e|e+e).map(e|e+e).map(e|e+e).map(e|e+e).head").resolvesTo("Integer");
 	}
 	
-	@Ignore("timeout")
+	@Ignore("way too slow")
 	@Test def void testFeatureCall_15_n_2() throws Exception {
 		("newArrayList(newArrayList('').map(s|1).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))
 		.map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e)).map(e|(e+e)+(e+e))
@@ -1895,13 +1896,51 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 
 	// TODO fix the following case
-	@Ignore("TODO this should work")	
+	@Ignore("TODO this should work")
 	@Test def void testBug_391758() throws Exception {
 		"{
 			val iterable = newArrayList
 			iterable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]
 		}".resolvesTo("List<String>")
 	}
+    
+    @Test def void testBug_381466_01() throws Exception {
+        "{
+            val map = com::google::common::collect::HashMultimap::create
+            val com.google.common.collect.HashMultimap<String, Integer> stringToInts = null
+            stringToInts.putAll(map)
+            map
+        }".resolvesTo("HashMultimap<String, Integer>")
+    }
+    
+    @Test def void testBug_381466_02() throws Exception {
+        "{
+            val map = com::google::common::collect::HashMultimap::create
+            val java.util.Map<String, java.util.Collection<Integer>> stringToInts = null
+            stringToInts.putAll(map.asMap)
+            map
+        }".resolvesTo("HashMultimap<String, Integer>")
+    }
+    
+    @Test def void testBug_381466_03() throws Exception {
+        "{
+            val map = com::google::common::collect::HashMultimap::create
+            val java.util.Map<String, Iterable<Integer>> stringToInts = null
+            stringToInts.putAll(map.asMap)
+            map
+        }".resolvesTo("HashMultimap<String, Integer>")
+    }
+    
+    @Test def void testBug_381466_04() throws Exception {
+        "{
+            val map = com::google::common::collect::HashMultimap::create
+            val stringToInts = newHashMap
+            stringToInts.keySet.addAll(map.asMap.keySet)
+            stringToInts.values.add(map.values.head)
+            stringToInts.put('', 1)
+            map
+        }".resolvesTo("HashMultimap<String, Integer>")
+    }
 	
 	@Test def void testBounds_01() throws Exception {
 		"{ var java.util.List<Integer> list = null list.get(0) }".resolvesTo("Integer")

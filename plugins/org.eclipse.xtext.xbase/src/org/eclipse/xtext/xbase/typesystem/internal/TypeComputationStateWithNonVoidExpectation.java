@@ -32,7 +32,7 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 	}
 
 	@Override
-	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	public List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = createTypeExpectation(null, actualState);
 		return Collections.singletonList(result);
 	}

@@ -33,8 +33,8 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 	}
 	
 	@Override
-	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asImmediateExpectation) {
-		AbstractTypeExpectation result = createTypeExpectation(getExpectedType(), actualState, !asImmediateExpectation);
+	public List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation) {
+		AbstractTypeExpectation result = createTypeExpectation(getExpectedType(), actualState, !asActualExpectation);
 		return Collections.singletonList(result);
 	}
 	

@@ -31,7 +31,7 @@ public class ReturnExpectationTypeComputationState extends AbstractStackedTypeCo
 	}
 
 	@Override
-	public List<AbstractTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	public List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState) {
 		return getReturnExpectations(actualState, true);
 	}
 

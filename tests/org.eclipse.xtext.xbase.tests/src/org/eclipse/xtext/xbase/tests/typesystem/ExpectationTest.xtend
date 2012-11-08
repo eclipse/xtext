@@ -104,8 +104,8 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	}
 	
 	def void recordExpectation(ITypeComputationState state) {
-		finalExpectations += state.immediateExpectations
-		expectations += state.immediateExpectations.map [ expectedType?.simpleName ]	
+		finalExpectations += state.expectations
+		expectations += state.expectations.map [ expectedType?.simpleName ]	
 	}
 
 	@Test

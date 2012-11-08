@@ -210,13 +210,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {
-		for (ITypeExpectation expectation: state.getImmediateExpectations()) {
+		for (ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null && expectedType.isPrimitiveVoid()) {
 				List<XExpression> expressions = object.getExpressions();
 				if (!expressions.isEmpty()) {
 					for(XExpression expression: expressions) {
-						ITypeComputationState expressionState = state.withoutImmediateExpectation(); // no expectation
+						ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
 						expressionState.computeTypes(expression);
 						if (expression instanceof XVariableDeclaration) {
 							state.addLocalToCurrentScope((XVariableDeclaration)expression);
@@ -228,7 +228,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				List<XExpression> expressions = object.getExpressions();
 				if (!expressions.isEmpty()) {
 					for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
-						ITypeComputationState expressionState = state.withoutImmediateExpectation();
+						ITypeComputationState expressionState = state.withoutExpectation();
 						expressionState.computeTypes(expression);
 						if (expression instanceof XVariableDeclaration) {
 							state.addLocalToCurrentScope((XVariableDeclaration)expression);
@@ -289,7 +289,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			LightweightTypeReference result = getTypeForName(String.class, state);
 			state.acceptActualType(result);
 		} else {
-			for(ITypeExpectation expectation: state.getImmediateExpectations()) {
+			for(ITypeExpectation expectation: state.getExpectations()) {
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null) {
 					if (expectedType.isType(Character.TYPE) || expectedType.isType(Character.class)) {
@@ -308,7 +308,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XClosure object, ITypeComputationState state) {
-		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
+		for(ITypeExpectation expectation: state.getExpectations()) {
 			new ClosureTypeComputer(object, expectation, state).computeTypes();
 		}
 	}
@@ -370,7 +370,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (parameterType == null) {
 			throw new IllegalStateException("Should not be possible");
 		}
-		ITypeComputationState eachState = state.withoutImmediateExpectation().assignType(declaredParam, parameterType);
+		ITypeComputationState eachState = state.withoutExpectation().assignType(declaredParam, parameterType);
 		eachState.computeTypes(object.getEachExpression());
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
@@ -381,7 +381,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
 		conditionExpectation.computeTypes(object.getPredicate());
 		// TODO reassign type if instanceof clause is present and cannot be ignored due to binary boolean operations
-		state.withoutImmediateExpectation().computeTypes(object.getBody());
+		state.withoutExpectation().computeTypes(object.getBody());
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
@@ -435,7 +435,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
 		// TODO validate / handle return / throw in finally block
-		state.withoutImmediateExpectation().computeTypes(object.getFinallyExpression());
+		state.withoutExpectation().computeTypes(object.getFinallyExpression());
 	}
 	
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
