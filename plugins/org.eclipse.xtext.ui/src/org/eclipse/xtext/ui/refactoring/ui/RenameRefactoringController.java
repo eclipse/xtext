@@ -49,6 +49,9 @@ public class RenameRefactoringController {
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
+	@Inject
+	private Provider<LinkedEditingUndoSupport> undoSupportProvider;
+	
 	private RenameLinkedMode activeLinkedMode;
 
 	private IRenameElementContext renameElementContext;
@@ -120,7 +123,8 @@ public class RenameRefactoringController {
 						RenameLinkedMode newLinkedMode = renameLinkedModeProvider.get();
 						if (newLinkedMode.start(renameElementContext, monitor)) {
 							activeLinkedMode = newLinkedMode;
-							undoSupport = new LinkedEditingUndoSupport(xtextEditor);
+							undoSupport = undoSupportProvider.get();
+							undoSupport.startRecording(xtextEditor);
 						}
 					}
 				});
