@@ -170,18 +170,27 @@ public class NodeModelAccess {
         };
       final ILeafNode start = this.findNextLeaf(node, _function);
       final List<ILeafNode> nodes = this.findPreviousHiddenLeafs(start);
-      int _xifexpression = (int) 0;
-      boolean _isEmpty = nodes.isEmpty();
-      if (_isEmpty) {
-        int _offset = start.getOffset();
-        _xifexpression = _offset;
+      HiddenLeafs _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(start, null));
+      if (_notEquals) {
+        int _xifexpression_1 = (int) 0;
+        boolean _isEmpty = nodes.isEmpty();
+        if (_isEmpty) {
+          int _offset = start.getOffset();
+          _xifexpression_1 = _offset;
+        } else {
+          ILeafNode _head = IterableExtensions.<ILeafNode>head(nodes);
+          int _offset_1 = _head.getOffset();
+          _xifexpression_1 = _offset_1;
+        }
+        HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_xifexpression_1, nodes);
+        _xifexpression = _newHiddenLeafs;
       } else {
-        ILeafNode _head = IterableExtensions.<ILeafNode>head(nodes);
-        int _offset_1 = _head.getOffset();
-        _xifexpression = _offset_1;
+        int _offset_2 = node==null?0:node.getOffset();
+        HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset_2);
+        _xifexpression = _hiddenLeafs;
       }
-      HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_xifexpression, nodes);
-      _xblockexpression = (_newHiddenLeafs);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -219,12 +228,21 @@ public class NodeModelAccess {
           }
         };
       final ILeafNode start = this.findPreviousLeaf(node, _function);
-      int _offset = start.getOffset();
-      int _length = start.getLength();
-      int _plus = (_offset + _length);
-      List<ILeafNode> _findNextHiddenLeafs = this.findNextHiddenLeafs(start);
-      HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_plus, _findNextHiddenLeafs);
-      _xblockexpression = (_newHiddenLeafs);
+      HiddenLeafs _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(start, null));
+      if (_notEquals) {
+        int _offset = start.getOffset();
+        int _length = start.getLength();
+        int _plus = (_offset + _length);
+        List<ILeafNode> _findNextHiddenLeafs = this.findNextHiddenLeafs(start);
+        HiddenLeafs _newHiddenLeafs = this.newHiddenLeafs(_plus, _findNextHiddenLeafs);
+        _xifexpression = _newHiddenLeafs;
+      } else {
+        int _offset_1 = node==null?0:node.getOffset();
+        HiddenLeafs _hiddenLeafs = new HiddenLeafs(_offset_1);
+        _xifexpression = _hiddenLeafs;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -423,26 +441,29 @@ public class NodeModelAccess {
     if (_and) {
       return ((ILeafNode) current);
     }
-    NodeIterator _nodeIterator = new NodeIterator(current);
-    final NodeIterator ni = _nodeIterator;
-    boolean _hasPrevious = ni.hasPrevious();
-    boolean _while_1 = _hasPrevious;
-    while (_while_1) {
-      {
-        final INode previous = ni.previous();
-        boolean _and_1 = false;
-        if (!(previous instanceof ILeafNode)) {
-          _and_1 = false;
-        } else {
-          Boolean _apply_1 = matches.apply(((ILeafNode) previous));
-          _and_1 = ((previous instanceof ILeafNode) && (_apply_1).booleanValue());
+    boolean _notEquals = (!Objects.equal(current, null));
+    if (_notEquals) {
+      NodeIterator _nodeIterator = new NodeIterator(current);
+      final NodeIterator ni = _nodeIterator;
+      boolean _hasPrevious = ni.hasPrevious();
+      boolean _while_1 = _hasPrevious;
+      while (_while_1) {
+        {
+          final INode previous = ni.previous();
+          boolean _and_1 = false;
+          if (!(previous instanceof ILeafNode)) {
+            _and_1 = false;
+          } else {
+            Boolean _apply_1 = matches.apply(((ILeafNode) previous));
+            _and_1 = ((previous instanceof ILeafNode) && (_apply_1).booleanValue());
+          }
+          if (_and_1) {
+            return ((ILeafNode) previous);
+          }
         }
-        if (_and_1) {
-          return ((ILeafNode) previous);
-        }
+        boolean _hasPrevious_1 = ni.hasPrevious();
+        _while_1 = _hasPrevious_1;
       }
-      boolean _hasPrevious_1 = ni.hasPrevious();
-      _while_1 = _hasPrevious_1;
     }
     return null;
   }
@@ -490,31 +511,34 @@ public class NodeModelAccess {
         _while = (current instanceof ICompositeNode);
       }
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
-      NodeIterator _nodeIterator = new NodeIterator(current);
-      final NodeIterator ni = _nodeIterator;
-      boolean _hasPrevious = ni.hasPrevious();
-      boolean _while_1 = _hasPrevious;
-      while (_while_1) {
-        {
-          final INode previous = ni.previous();
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(previous, current));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            _and = (_notEquals && (previous instanceof ILeafNode));
-          }
-          if (_and) {
-            boolean _isHidden = ((ILeafNode) previous).isHidden();
-            if (_isHidden) {
-              result.add(((ILeafNode) previous));
+      boolean _notEquals = (!Objects.equal(current, null));
+      if (_notEquals) {
+        NodeIterator _nodeIterator = new NodeIterator(current);
+        final NodeIterator ni = _nodeIterator;
+        boolean _hasPrevious = ni.hasPrevious();
+        boolean _while_1 = _hasPrevious;
+        while (_while_1) {
+          {
+            final INode previous = ni.previous();
+            boolean _and = false;
+            boolean _notEquals_1 = (!Objects.equal(previous, current));
+            if (!_notEquals_1) {
+              _and = false;
             } else {
-              return ListExtensions.<ILeafNode>reverse(result);
+              _and = (_notEquals_1 && (previous instanceof ILeafNode));
+            }
+            if (_and) {
+              boolean _isHidden = ((ILeafNode) previous).isHidden();
+              if (_isHidden) {
+                result.add(((ILeafNode) previous));
+              } else {
+                return ListExtensions.<ILeafNode>reverse(result);
+              }
             }
           }
+          boolean _hasPrevious_1 = ni.hasPrevious();
+          _while_1 = _hasPrevious_1;
         }
-        boolean _hasPrevious_1 = ni.hasPrevious();
-        _while_1 = _hasPrevious_1;
       }
       List<ILeafNode> _reverse = ListExtensions.<ILeafNode>reverse(result);
       _xblockexpression = (_reverse);

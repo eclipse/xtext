@@ -149,36 +149,39 @@ public class RichStringFormatterImpl extends ForLoopOnce {
   
   public void announceNextLiteral(final RichStringLiteral object) {
     final INode node = this._nodeModelAccess.nodeForFeature(object, Literals.XSTRING_LITERAL__VALUE);
-    String _text = node.getText();
-    boolean _startsWith = _text.startsWith("\u00BB");
-    if (_startsWith) {
-      FormattableDocument _document = this.getDocument();
-      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.noSpace();
-          }
-        };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(node, _function);
-      _document.operator_add(_prepend);
+    boolean _notEquals = (!Objects.equal(node, null));
+    if (_notEquals) {
+      String _text = node.getText();
+      boolean _startsWith = _text.startsWith("\u00BB");
+      if (_startsWith) {
+        FormattableDocument _document = this.getDocument();
+        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.noSpace();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(node, _function);
+        _document.operator_add(_prepend);
+      }
+      String _text_1 = node.getText();
+      boolean _endsWith = _text_1.endsWith("\u00AB");
+      if (_endsWith) {
+        FormattableDocument _document_1 = this.getDocument();
+        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.noSpace();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(node, _function_1);
+        _document_1.operator_add(_append);
+      }
+      this.lastLiteral = object;
+      int _offset = node.getOffset();
+      int _literalPrefixLenght = this.literalPrefixLenght(node);
+      int _plus = (_offset + _literalPrefixLenght);
+      this.offset = _plus;
+      this.afterNewLine = false;
     }
-    String _text_1 = node.getText();
-    boolean _endsWith = _text_1.endsWith("\u00AB");
-    if (_endsWith) {
-      FormattableDocument _document_1 = this.getDocument();
-      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.noSpace();
-          }
-        };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(node, _function_1);
-      _document_1.operator_add(_append);
-    }
-    this.lastLiteral = object;
-    int _offset = node.getOffset();
-    int _literalPrefixLenght = this.literalPrefixLenght(node);
-    int _plus = (_offset + _literalPrefixLenght);
-    this.offset = _plus;
-    this.afterNewLine = false;
   }
   
   public void acceptSemanticLineBreak(final int charCount, final RichStringLiteral origin, final boolean controlStructureSeen) {
@@ -257,23 +260,26 @@ public class RichStringFormatterImpl extends ForLoopOnce {
   }
   
   public void acceptIfCondition(final XExpression condition) {
-    EObject _eContainer = condition.eContainer();
-    if ((_eContainer instanceof RichStringIf)) {
-      EObject _eContainer_1 = condition.eContainer();
-      final RichStringIf rsif = ((RichStringIf) _eContainer_1);
-      FormattableDocument _document = this.getDocument();
-      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(rsif, "IF");
-      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.oneSpace();
-          }
-        };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
-      _document.operator_add(_append);
+    boolean _notEquals = (!Objects.equal(condition, null));
+    if (_notEquals) {
+      EObject _eContainer = condition.eContainer();
+      if ((_eContainer instanceof RichStringIf)) {
+        EObject _eContainer_1 = condition.eContainer();
+        final RichStringIf rsif = ((RichStringIf) _eContainer_1);
+        FormattableDocument _document = this.getDocument();
+        ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(rsif, "IF");
+        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.oneSpace();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+        _document.operator_add(_append);
+      }
+      Procedure2<? super EObject,? super FormattableDocument> _formatter = this.getFormatter();
+      FormattableDocument _document_1 = this.getDocument();
+      _formatter.apply(condition, _document_1);
     }
-    Procedure2<? super EObject,? super FormattableDocument> _formatter = this.getFormatter();
-    FormattableDocument _document_1 = this.getDocument();
-    _formatter.apply(condition, _document_1);
   }
   
   public void acceptExpression(final XExpression expression, final CharSequence indentation) {

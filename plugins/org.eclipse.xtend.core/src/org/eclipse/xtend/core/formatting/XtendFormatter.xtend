@@ -72,12 +72,13 @@ public class XtendFormatter {
 	@Inject RichStringFormatter richStringFormatter
 
 	@Property boolean allowIdentityEdits = false
+	@Property boolean diagnoseConflicts = true
 
 	def List<TextReplacement> format(XtextResource res, int offset, int length, IConfigurationValues<XtendFormatterConfigKeys> cfg) {
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head as XtendFile, format)
-		if(format.conflictOccurred) {
+		if(diagnoseConflicts && format.conflictOccurred) {
 			val debug = new FormattableDocument(cfg, doc)
 			debug.rootTrace = new RuntimeException
 			format(res.contents.head as XtendFile, debug)
@@ -779,7 +780,7 @@ public class XtendFormatter {
 
 	def protected boolean isMultiline(XExpression expression, FormattableDocument doc) {
 		val node = expression.nodeForEObject
-		return node.startLine != node.endLine
+		return node != null && node.startLine != node.endLine
 	}
 
 	/**
@@ -842,7 +843,7 @@ public class XtendFormatter {
 		}
 		val thennode = expr.then.nodeForEObject
 		val elsenode = expr.^else?.nodeForEObject
-		val multiline = thennode.text.trim.contains("\n") || thennode.whitespaceBefore?.text?.contains("\n") ||
+		val multiline = thennode?.text?.trim?.contains("\n") || thennode?.whitespaceBefore?.text?.contains("\n") ||
 			elsenode?.text?.trim?.contains("\n")
 		format += expr.nodeForFeature(XIF_EXPRESSION__IF).surround[noSpace]
 		if (expr.then instanceof XBlockExpression || multiline)
@@ -1039,13 +1040,16 @@ public class XtendFormatter {
 		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
-		lookahead.renderToString(node.offset, node.length)
+		if(node != null)
+			lookahead.renderToString(node.offset, node.length)
+		else 
+			""
 	}
 
 	def protected boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
 		val node = expression.nodeForEObject
 		val lookahead = fmt.lookahead(expression)
-		if (lookahead.contains("\n")) {
+		if (node == null || lookahead.contains("\n")) {
 			return false
 		} else {
 			val length = fmt.lineLengthBefore(node.offset) + lookahead.length
