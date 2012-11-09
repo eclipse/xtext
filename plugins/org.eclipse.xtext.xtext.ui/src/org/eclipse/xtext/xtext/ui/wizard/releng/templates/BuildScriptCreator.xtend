@@ -44,15 +44,22 @@ class BuildScriptCreator {
 				<condition property="executable.file" value="buckminster.bat" else="buckminster">
 					<os family="windows"/>
 				</condition>
-				<exec executable="${buckminster.home}/${executable.file}">
-					<arg value="-Dprojects.location=${projects.location}" />
-					<arg value="-Dbuckminster.output.root=${build.root}/buckminster.output" />
-					<arg value="-Dbuckminster.temp.root=${build.root}/buckminster.temp" />
-					<arg value="-Dtarget.platform=${build.root}/${target.platform}" />
-					<arg line="-data '${build.root}/buckminster.workspace'" />
-					<arg line="-configuration '${build.root}/configuration'" />
-					<arg line="-S '${commands.file}'" />
-				</exec>
+				<java fork="true" dir="${buckminster.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+					<classpath>
+						<fileset dir="${buckminster.home}/plugins">
+							<include name="org.eclipse.equinox.launcher_*.jar" />
+						</fileset>
+					</classpath>
+					<arg line='-update' />
+					<arg line='-data "${build.root}/buckminster.workspace"' />
+					<arg line='-configuration "${build.root}/configuration"' />
+					<arg line='--script "${commands.file}"' />
+					<sysproperty key="projects.location" value="${projects.location}" />
+					<sysproperty key="buckminster.output.root" value="${build.root}/buckminster.output" />
+					<sysproperty key="buckminster.temp.root" value="${build.root}/buckminster.temp" />
+					<sysproperty key="target.platform" value="${build.root}/${target.platform}" />
+					<jvmarg line=" -Xms256m -Xmx512m" />
+				</java>
 				<echo message=" "/>
 				<echo message="Updatesite output in: ${build.root}/buckminster.output/«projectInfo.siteFeatureProjectName»_*-eclipse.feature/site.p2/"/>
 			</target>
