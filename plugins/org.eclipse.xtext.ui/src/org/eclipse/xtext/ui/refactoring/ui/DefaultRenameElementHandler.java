@@ -62,7 +62,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			syncUtil.ueberSync(false);
+			syncUtil.totalSync(false);
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
