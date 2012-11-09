@@ -54,11 +54,13 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		int i = 1; // TODO sz: investigate how to speed things up here (parallelism)?
+		int i = 0; // TODO sz: investigate how to speed things up here (parallelism)?
 		smokeTestModels = Lists.newArrayList();
-		while(true) {
-			String location = "/" + SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend";
+		while (true) {
+			String location = SmokeTest.class.getPackage().getName().replace('.', '/') + "/Case_" + i + ".xtend";
 			URL resource = getClass().getClassLoader().getResource(location);
+			if (resource == null)
+				resource = getClass().getClassLoader().getResource("/" + location);
 			if (resource == null)
 				break;
 			final InputStream resourceAsStream = resource.openStream();
