@@ -24,8 +24,8 @@ class RichStringFormatter {
 		impl.formatter = formatter
 		impl.document = doc
 		richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
-		for(offs:impl.indentOffsets)
-			doc += new NewLineData(offs, impl.bodyIndent, 0, if(doc.debugConflicts) new RuntimeException, 0)
+//		for(offs:impl.indentOffsets)
+//			doc += new NewLineData(offs, impl.bodyIndent, 0, if(doc.debugConflicts) new RuntimeException, 0)
 		if(impl.indentOffset > 0 && impl.outdentOffset > 0) {
 			doc += new WhitespaceData(impl.indentOffset, 0, 1, if(doc.debugConflicts) new RuntimeException, null)
 			doc += new WhitespaceData(impl.outdentOffset, 0, -1, if(doc.debugConflicts) new RuntimeException, null)
@@ -60,15 +60,16 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 	
 	override announceNextLiteral(RichStringLiteral object) {
 		val node = object.nodeForFeature(XbasePackage$Literals::XSTRING_LITERAL__VALUE)
-		if(node.text.startsWith("»"))
-			document += node.prepend[noSpace]
-		if(node.text.endsWith("«"))
-			document += node.append[noSpace]
-			
-		lastLiteral = object
-		offset = node.offset + node.literalPrefixLenght
-//					println('''announceNextLiteral(offset=«offset», object=«object.hashCode»)''')
-		afterNewLine = false
+		if(node != null) {
+			if(node.text.startsWith("»"))
+				document += node.prepend[noSpace]
+			if(node.text.endsWith("«"))
+				document += node.append[noSpace]
+			lastLiteral = object
+			offset = node.offset + node.literalPrefixLenght
+	//					println('''announceNextLiteral(offset=«offset», object=«object.hashCode»)''')
+			afterNewLine = false
+		}
 	}
 	
 	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
@@ -113,11 +114,13 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 	}
 	
 	override acceptIfCondition(XExpression condition) {
-		if(condition.eContainer instanceof RichStringIf) {
-			val rsif = condition.eContainer as RichStringIf
-			document += rsif.nodeForKeyword("IF").append[oneSpace]
+		if(condition != null) {
+			if(condition.eContainer instanceof RichStringIf) {
+				val rsif = condition.eContainer as RichStringIf
+				document += rsif.nodeForKeyword("IF").append[oneSpace]
+			}
+			formatter.apply(condition, document)
 		}
-		formatter.apply(condition, document)
 	}
 	
 	override acceptExpression(XExpression expression, CharSequence indentation) {

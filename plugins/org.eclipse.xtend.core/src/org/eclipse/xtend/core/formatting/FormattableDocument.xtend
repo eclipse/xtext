@@ -71,7 +71,7 @@ class FormattableDocument {
 		val back = (0..5).fold(data1.offset, [last, i| if(last > 0) document.lastIndexOf("\n", last - 1) else -1 ])
 		val forward = (0..5).fold(data1.offset, [last, i| if(last > 0) document.indexOf("\n", last + 1) else -1 ])
 		val fiveLinesBackOffset = if(back >= 0) back else 0
-		val fiveLinesForwardOffset = if(forward >= 0) forward else document.length -1
+		val fiveLinesForwardOffset = if(forward >= 0) forward else document.length
 		val prefix = document.substring(fiveLinesBackOffset, data1.offset)
 		val postfix = document.substring(data1.offset + Math::max(data1.length, data2.length), fiveLinesForwardOffset)
 		val traceStart = rootTrace.stackTrace.size - 1
