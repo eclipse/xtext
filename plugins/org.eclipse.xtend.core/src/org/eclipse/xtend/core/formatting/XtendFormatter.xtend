@@ -78,7 +78,11 @@ public class XtendFormatter {
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head as XtendFile, format)
-
+		if(format.conflictOccurred) {
+			val debug = new FormattableDocument(cfg, doc)
+			debug.rootTrace = new RuntimeException
+			format(res.contents.head as XtendFile, debug)
+		}
 		val edits = format.renderToEdits(offset, length)
 
 		if (allowIdentityEdits)
@@ -163,6 +167,7 @@ public class XtendFormatter {
 	
 	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
 		formatAnnotations(clazz, format, newLineAfterClassAnnotations)
+		format += clazz.nodeForKeyword("public").append[oneSpace]
 		format += clazz.nodeForKeyword("abstract").append[oneSpace]
 		format += clazz.nodeForKeyword("class").append[oneSpace]
 		format += clazz.nodeForKeyword("extends").surround[oneSpace]
@@ -279,7 +284,13 @@ public class XtendFormatter {
 	
 	def protected dispatch void format(XtendField field, FormattableDocument document) {
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
-		document += field.nodeForFeature(XTEND_FIELD__TYPE).append[oneSpace]
+		if(field.name != null)
+			document += field.nodeForFeature(XTEND_FIELD__TYPE).append[oneSpace]
+		document += field.nodeForKeyword("static").append[oneSpace]
+		document += field.nodeForKeyword("extension").append[oneSpace]
+		document += field.nodeForKeyword("val").append[oneSpace]
+		document += field.nodeForKeyword("var").append[oneSpace]
+		document += field.nodeForKeyword("=").surround([oneSpace], [oneSpace])
 		field.type.format(document)
 		field.initialValue.format(document)
 	}
@@ -707,19 +718,17 @@ public class XtendFormatter {
 			format += explicit.prepend[oneSpace]
 			format += explicit.append[ newLine; increaseIndentation]
 		} else {
-			format += open?.append[ newLine; increaseIndentation]
+			format += open.append[ newLine; increaseIndentation]
 		}
 		for (c : children) {
 			c.format(format)
 			val node = c.nodeForEObject
 			val semicolon = node.immediatelyFollowingKeyword(";")
-			format += semicolon?.prepend[
-				noSpace
-			]
+			format += semicolon.prepend[noSpace]
 			if (c != children.last)
 				format += (semicolon ?: node).append[newLine]
 		}
-		format += close?.prepend[ newLine; decreaseIndentation ]
+		format += close.prepend[ newLine; decreaseIndentation ]
 	}
 	
 	def protected formatClosureParameters(XClosure expr, FormattableDocument format) {

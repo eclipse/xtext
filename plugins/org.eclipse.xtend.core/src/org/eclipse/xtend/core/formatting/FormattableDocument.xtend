@@ -10,7 +10,9 @@ class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
 	@Property val IConfigurationValues<XtendFormatterConfigKeys> cfg
 	@Property val String document
-	@Property TreeMap<Integer, FormattingData> formattings
+	@Property val TreeMap<Integer, FormattingData> formattings
+	@Property Throwable rootTrace = null
+	@Property boolean conflictOccurred = false
 	
 	new(IConfigurationValues<XtendFormatterConfigKeys> cfg, String document){
 		this._cfg = cfg
@@ -22,6 +24,10 @@ class FormattableDocument {
 		this._cfg = fmt.cfg
 		this._document = fmt.document
 		this._formattings = new TreeMap(fmt.formattings)
+	}
+	
+	def boolean isDebugConflicts() {
+		rootTrace != null
 	}
 	
 	def protected addFormatting(FormattingData data) {
@@ -41,22 +47,51 @@ class FormattableDocument {
 	def protected FormattingData merge(FormattingData data1, FormattingData data2) {
 		var FormattingData old = null
 		var indentationChange = 0 
-		if(!data1.empty && data2.empty) {
+		if(data2.empty) {
 			indentationChange = data1.indentationChange + data2.indentationChange
 			old = data1
 		} else if(data1.empty) {
 			indentationChange = data2.indentationChange + data1.indentationChange
 			old = data2
 		}
-		if(old != null)
+		if(old != null) {
 			switch old {
-				NewLineData: new NewLineData(old.offset, old.length, indentationChange, old.newLines)
-				WhitespaceData: new WhitespaceData(old.offset, old.length, indentationChange, old.space)
+				NewLineData: new NewLineData(old.offset, old.length, indentationChange, old.trace, old.newLines)
+				WhitespaceData: new WhitespaceData(old.offset, old.length, indentationChange, old.trace, old.space)
 			}
-		else {
-			log.error(new IllegalStateException('''Can not merge «data1» and «data2».'''))
+		} else {
+			conflictOccurred = true
+			if(debugConflicts)
+				reportConflict(data1, data2)
 			null
 		}
+	}
+	
+	def protected void reportConflict(FormattingData data1, FormattingData data2) {
+		val back = (0..5).fold(data1.offset, [last, i| if(last > 0) document.lastIndexOf("\n", last - 1) else -1 ])
+		val forward = (0..5).fold(data1.offset, [last, i| if(last > 0) document.indexOf("\n", last + 1) else -1 ])
+		val fiveLinesBackOffset = if(back >= 0) back else 0
+		val fiveLinesForwardOffset = if(forward >= 0) forward else document.length -1
+		val prefix = document.substring(fiveLinesBackOffset, data1.offset)
+		val postfix = document.substring(data1.offset + Math::max(data1.length, data2.length), fiveLinesForwardOffset)
+		val traceStart = rootTrace.stackTrace.size - 1
+		val fullTrace1 = data1.trace.stackTrace
+		val shortTrace1 = fullTrace1.subList(0, fullTrace1.size - traceStart).join("\n") 
+		val fullTrace2 = data2.trace.stackTrace
+		val shortTrace2 = fullTrace2.subList(0, fullTrace2.size - traceStart).join("\n")
+		log.error('''
+			Conflicting TextEdits during formatting:
+			------------------------------------- document snippet ---------------------------------------
+			«prefix»[!!!]«postfix»
+			----------------------------------------------------------------------------------------------
+			TextEdit1: «data1.toString.replaceAll("\\n\\s*"," ")»
+			TextEdit2: «data2.toString.replaceAll("\\n\\s*"," ")»
+			------------------------------------------ Trace 1 -------------------------------------------
+			«shortTrace1»
+			------------------------------------------ Trace 2 -------------------------------------------
+			«shortTrace2»
+			----------------------------------------------------------------------------------------------
+		''')
 	}
 	
 	def operator_add(FormattingData data) {
@@ -68,9 +103,9 @@ class FormattableDocument {
 			data.forEach[addFormatting]
 	}
 	
-	def operator_add((IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> data) {
+	def operator_add((FormattableDocument) => Iterable<FormattingData> data) {
 		if(data != null)
-			operator_add(data.apply(cfg))
+			operator_add(data.apply(this))
 	}
 	
 	def List<TextReplacement> renderToEdits() {

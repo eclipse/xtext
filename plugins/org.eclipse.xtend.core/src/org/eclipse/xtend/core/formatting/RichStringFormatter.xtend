@@ -25,10 +25,10 @@ class RichStringFormatter {
 		impl.document = doc
 		richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
 		for(offs:impl.indentOffsets)
-			doc += new NewLineData(offs, impl.bodyIndent, 0, 0)
+			doc += new NewLineData(offs, impl.bodyIndent, 0, if(doc.debugConflicts) new RuntimeException, 0)
 		if(impl.indentOffset > 0 && impl.outdentOffset > 0) {
-			doc += new WhitespaceData(impl.indentOffset, 0, 1, null)
-			doc += new WhitespaceData(impl.outdentOffset, 0, -1, null)
+			doc += new WhitespaceData(impl.indentOffset, 0, 1, if(doc.debugConflicts) new RuntimeException, null)
+			doc += new WhitespaceData(impl.outdentOffset, 0, -1, if(doc.debugConflicts) new RuntimeException, null)
 		}
 	}
 }
@@ -100,7 +100,7 @@ class RichStringFormatterImpl extends AbstractRichStringPartAcceptor$ForLoopOnce
 			if(afterNewLine && lastLiteral != null) {
 				val node = lastLiteral.nodeForFeature(XbasePackage$Literals::XSTRING_LITERAL__VALUE)
 				if(offset + text.length + 3 == node.offset + node.length) {
-					document += new NewLineData(offset, text.length, 0, 0)
+					document += new NewLineData(offset, text.length, 0, if(document.debugConflicts) new RuntimeException, 0)
 					outdentOffset = offset - 2
 				} else {
 					bodyIndent = Math::min(bodyIndent, text.length)

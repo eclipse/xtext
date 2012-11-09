@@ -82,7 +82,7 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 				for (TextReplacement tr : edits)
 					mte.addChild(new ReplaceEdit(tr.getOffset(), tr.getLength(), tr.getText()));
 			} catch (Throwable e) {
-				e.printStackTrace();
+				e.printStackTrace();// dialog
 			}
 			return mte;
 		}

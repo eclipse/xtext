@@ -278,6 +278,145 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatField01() {
+		assertFormatted([
+		],'''
+			class bar {
+				int foo
+			}
+		''')	
+	}
+	
+	@Test def formatField02() {
+		assertFormatted([
+		],'''
+			class bar {
+				int foo
+				int baz
+			}
+		''')	
+	}
+	
+	@Test def formatFieldInit01() {
+		assertFormatted([
+		],'''
+			class bar {
+				int foo = 1 + 1
+			}
+		''')	
+	}
+	
+	@Test def formatFieldInit02() {
+		assertFormatted([
+		],'''
+			class bar {
+				int foo = 1 + 1
+				int baz = 1 + 1
+			}
+		''')	
+	}
+	
+	@Test def formatFieldVal() {
+		assertFormatted([
+		],'''
+			class bar {
+				val int foo
+			}
+		''')	
+	}
+	
+	@Test def formatFieldVar() {
+		assertFormatted([
+		],'''
+			class bar {
+				var int foo
+			}
+		''')	
+	}
+	
+	@Test def formatFieldStatic02() {
+		assertFormatted([
+		],'''
+			class bar {
+				static int bar
+			}
+		''')	
+	}
+	
+	@Test def formatFieldStaticVal() {
+		assertFormatted([
+		],'''
+			class bar {
+				static val int foo
+			}
+		''')	
+	}
+	
+	@Test def formatFieldStaticVar() {
+		assertFormatted([
+		],'''
+			class bar {
+				static var int foo
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtension01() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension String
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtensionInit01() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension String = "a" + "b"
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtensionInit02() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension String = "a" + "b"
+				extension Integer = 1 + 2
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtensionVal01() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension val String
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtensionVar01() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension var String
+			}
+		''')	
+	}
+	
+	@Test def formatFieldExtension02() {
+		assertFormatted([
+		],'''
+			class bar {
+				extension String
+				extension Integer
+			}
+		''')	
+	}
+	
 	@Test def formatMethod01() {
 		assertFormatted([
 			put(bracesInNewLine, false)

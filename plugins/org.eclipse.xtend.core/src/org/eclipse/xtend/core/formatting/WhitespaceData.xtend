@@ -6,6 +6,7 @@ import org.eclipse.xtend.lib.Data
 	int offset
 	int length
 	int indentationChange
+	Throwable trace
 	def boolean isEmpty() 
 }
 
