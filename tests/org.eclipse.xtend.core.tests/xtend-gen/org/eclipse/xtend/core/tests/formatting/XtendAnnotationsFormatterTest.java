@@ -83,6 +83,21 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatClassSingleAnnotationML11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"restriction\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void formatClassSingleAnnotationML2() {
     final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
         public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
@@ -268,6 +283,68 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
     _builder_1.append("new(  @Deprecated  String   p  ) {  }");
     _builder_1.newLine();
     this.assertFormattedMember(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatFieldTwoAnnotations1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("int value");
+    _builder.newLine();
+    this.assertFormattedMember(_function, _builder.toString());
+  }
+  
+  @Test
+  public void formatFieldTwoAnnotations2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Override @Deprecated int value");
+    _builder.newLine();
+    this.assertFormattedMember(_function, _builder.toString());
+  }
+  
+  @Test
+  public void formatFieldSingleAnnotations1() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("int value");
+    _builder.newLine();
+    this.assertFormattedMember(_function, _builder.toString());
+  }
+  
+  @Test
+  public void formatFieldSingleAnnotations2() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
+          it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Override int value");
+    _builder.newLine();
+    this.assertFormattedMember(_function, _builder.toString());
   }
   
   @Test

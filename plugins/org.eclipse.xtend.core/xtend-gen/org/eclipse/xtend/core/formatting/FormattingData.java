@@ -24,13 +24,20 @@ public abstract class FormattingData {
     return this._indentationChange;
   }
   
+  private final Throwable _trace;
+  
+  public Throwable getTrace() {
+    return this._trace;
+  }
+  
   public abstract boolean isEmpty();
   
-  public FormattingData(final int offset, final int length, final int indentationChange) {
+  public FormattingData(final int offset, final int length, final int indentationChange, final Throwable trace) {
     super();
     this._offset = offset;
     this._length = length;
     this._indentationChange = indentationChange;
+    this._trace = trace;
   }
   
   @Override
@@ -40,6 +47,7 @@ public abstract class FormattingData {
     result = prime * result + _offset;
     result = prime * result + _length;
     result = prime * result + _indentationChange;
+    result = prime * result + ((_trace== null) ? 0 : _trace.hashCode());
     return result;
   }
   
@@ -57,6 +65,11 @@ public abstract class FormattingData {
     if (other._length != _length)
       return false;
     if (other._indentationChange != _indentationChange)
+      return false;
+    if (_trace == null) {
+      if (other._trace != null)
+        return false;
+    } else if (!_trace.equals(other._trace))
       return false;
     return true;
   }

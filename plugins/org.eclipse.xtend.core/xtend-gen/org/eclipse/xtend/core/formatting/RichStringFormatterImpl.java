@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
@@ -157,7 +158,7 @@ public class RichStringFormatterImpl extends ForLoopOnce {
             it.noSpace();
           }
         };
-      Iterable<FormattingData> _prepend = this._formatterExtensions.prepend(node, _function);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(node, _function);
       _document.operator_add(_prepend);
     }
     String _text_1 = node.getText();
@@ -169,7 +170,7 @@ public class RichStringFormatterImpl extends ForLoopOnce {
             it.noSpace();
           }
         };
-      Iterable<FormattingData> _append = this._formatterExtensions.append(node, _function_1);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(node, _function_1);
       _document_1.operator_add(_append);
     }
     this.lastLiteral = object;
@@ -228,7 +229,14 @@ public class RichStringFormatterImpl extends ForLoopOnce {
         if (_equals) {
           FormattableDocument _document = this.getDocument();
           int _length_3 = text.length();
-          NewLineData _newLineData = new NewLineData(this.offset, _length_3, 0, 0);
+          RuntimeException _xifexpression = null;
+          FormattableDocument _document_1 = this.getDocument();
+          boolean _isDebugConflicts = _document_1.isDebugConflicts();
+          if (_isDebugConflicts) {
+            RuntimeException _runtimeException = new RuntimeException();
+            _xifexpression = _runtimeException;
+          }
+          NewLineData _newLineData = new NewLineData(this.offset, _length_3, 0, _xifexpression, 0);
           _document.operator_add(_newLineData);
           int _minus = (this.offset - 2);
           this.setOutdentOffset(_minus);
@@ -260,7 +268,7 @@ public class RichStringFormatterImpl extends ForLoopOnce {
             it.oneSpace();
           }
         };
-      Iterable<FormattingData> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
       _document.operator_add(_append);
     }
     Procedure2<? super EObject,? super FormattableDocument> _formatter = this.getFormatter();

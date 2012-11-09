@@ -19,8 +19,8 @@ public class NewLineData extends FormattingData {
     return _equals;
   }
   
-  public NewLineData(final int offset, final int length, final int indentationChange, final int newLines) {
-    super(offset, length, indentationChange);
+  public NewLineData(final int offset, final int length, final int indentationChange, final Throwable trace, final int newLines) {
+    super(offset, length, indentationChange, trace);
     this._newLines = newLines;
   }
   

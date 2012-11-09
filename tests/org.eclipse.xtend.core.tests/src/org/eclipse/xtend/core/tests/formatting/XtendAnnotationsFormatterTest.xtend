@@ -51,6 +51,16 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClassSingleAnnotationML11() {
+		assertFormatted('''
+			package foo
+			
+			@SuppressWarnings("restriction")
+			public class Foo {
+			}
+		''')	
+	}
+	
 	@Test def formatClassSingleAnnotationML2() {
 		assertFormatted([
 			put(newLineAfterClassAnnotations, true)
@@ -171,6 +181,45 @@ class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	
+	@Test def formatFieldTwoAnnotations1() {
+		assertFormattedMember([
+			put(newLineAfterFieldAnnotations, true)
+			put(preserveNewLines, true)
+		],'''
+			@Override
+			@Deprecated
+			int value
+		''')	
+	}
+	
+	@Test def formatFieldTwoAnnotations2() {
+		assertFormattedMember([
+			put(newLineAfterFieldAnnotations, false)
+			put(preserveNewLines, false)
+		],'''
+			@Override @Deprecated int value
+		''')	
+	}
+	
+	@Test def formatFieldSingleAnnotations1() {
+		assertFormattedMember([
+			put(newLineAfterFieldAnnotations, true)
+			put(preserveNewLines, true)
+		],'''
+			@Override
+			int value
+		''')	
+	}
+	
+	@Test def formatFieldSingleAnnotations2() {
+		assertFormattedMember([
+			put(newLineAfterFieldAnnotations, false)
+			put(preserveNewLines, false)
+		],'''
+			@Override int value
+		''')	
+	}
 	
 	@Test def formatMethodTwoAnnotations1() {
 		assertFormattedMember([

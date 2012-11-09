@@ -20,8 +20,8 @@ public class WhitespaceData extends FormattingData {
     return _equals;
   }
   
-  public WhitespaceData(final int offset, final int length, final int indentationChange, final String space) {
-    super(offset, length, indentationChange);
+  public WhitespaceData(final int offset, final int length, final int indentationChange, final Throwable trace, final String space) {
+    super(offset, length, indentationChange, trace);
     this._space = space;
   }
   

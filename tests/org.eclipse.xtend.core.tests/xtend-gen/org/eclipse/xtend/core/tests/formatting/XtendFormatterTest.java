@@ -484,6 +484,273 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatField01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatField02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int baz");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldInit01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int foo = 1 + 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldInit02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int foo = 1 + 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int baz = 1 + 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldVal() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val int foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldVar() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var int foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldStatic02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static int bar");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldStaticVal() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static val int foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldStaticVar() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static var int foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtension01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension String");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtensionInit01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension String = \"a\" + \"b\"");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtensionInit02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension String = \"a\" + \"b\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension Integer = 1 + 2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtensionVal01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension val String");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtensionVar01() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension var String");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatFieldExtension02() {
+    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
+        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension String");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension Integer");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
   public void formatMethod01() {
     final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
         public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {

@@ -33,10 +33,16 @@ public class RichStringFormatter {
       List<Integer> _indentOffsets = impl.getIndentOffsets();
       for (final Integer offs : _indentOffsets) {
         int _bodyIndent = impl.getBodyIndent();
-        NewLineData _newLineData = new NewLineData((offs).intValue(), _bodyIndent, 0, 0);
+        RuntimeException _xifexpression = null;
+        boolean _isDebugConflicts = doc.isDebugConflicts();
+        if (_isDebugConflicts) {
+          RuntimeException _runtimeException = new RuntimeException();
+          _xifexpression = _runtimeException;
+        }
+        NewLineData _newLineData = new NewLineData((offs).intValue(), _bodyIndent, 0, _xifexpression, 0);
         doc.operator_add(_newLineData);
       }
-      FormattingData _xifexpression = null;
+      FormattingData _xifexpression_1 = null;
       boolean _and = false;
       int _indentOffset = impl.getIndentOffset();
       boolean _greaterThan = (_indentOffset > 0);
@@ -51,17 +57,29 @@ public class RichStringFormatter {
         FormattingData _xblockexpression_1 = null;
         {
           int _indentOffset_1 = impl.getIndentOffset();
-          WhitespaceData _whitespaceData = new WhitespaceData(_indentOffset_1, 0, 1, null);
+          RuntimeException _xifexpression_2 = null;
+          boolean _isDebugConflicts_1 = doc.isDebugConflicts();
+          if (_isDebugConflicts_1) {
+            RuntimeException _runtimeException_1 = new RuntimeException();
+            _xifexpression_2 = _runtimeException_1;
+          }
+          WhitespaceData _whitespaceData = new WhitespaceData(_indentOffset_1, 0, 1, _xifexpression_2, null);
           doc.operator_add(_whitespaceData);
           int _outdentOffset_1 = impl.getOutdentOffset();
           int _minus = (-1);
-          WhitespaceData _whitespaceData_1 = new WhitespaceData(_outdentOffset_1, 0, _minus, null);
+          RuntimeException _xifexpression_3 = null;
+          boolean _isDebugConflicts_2 = doc.isDebugConflicts();
+          if (_isDebugConflicts_2) {
+            RuntimeException _runtimeException_2 = new RuntimeException();
+            _xifexpression_3 = _runtimeException_2;
+          }
+          WhitespaceData _whitespaceData_1 = new WhitespaceData(_outdentOffset_1, 0, _minus, _xifexpression_3, null);
           FormattingData _add = doc.operator_add(_whitespaceData_1);
           _xblockexpression_1 = (_add);
         }
-        _xifexpression = _xblockexpression_1;
+        _xifexpression_1 = _xblockexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (_xifexpression_1);
     }
     return _xblockexpression;
   }

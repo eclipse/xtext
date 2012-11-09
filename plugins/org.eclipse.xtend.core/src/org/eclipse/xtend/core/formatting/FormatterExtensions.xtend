@@ -9,56 +9,58 @@ class FormatterExtensions {
 	@Inject extension NodeModelAccess
 	@Inject extension XtendFormatterConfigKeys
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
-		val it = new FormattingDataInit()
-		init.apply(it)
-		if(leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
-			return newFormattingData(leafs, space, indentationChange)
-		else
-			return newFormattingData(leafs, newLine, newLine, indentationChange)
+	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
+		[ FormattableDocument doc |
+			val it = new FormattingDataInit()
+			init.apply(it)
+			if(leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
+				return newFormattingData(leafs, space, indentationChange, doc.debugConflicts)
+			else
+				return newFormattingData(leafs, newLine, newLine, indentationChange, doc.debugConflicts)
+		]
 	}
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, String space, int indentationChange) {
+	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, String space, int indentationChange, boolean trace) {
 		val result = <FormattingData>newArrayList
 		for(leaf : leafs.leafs) 
 			switch leaf {
 				WhitespaceInfo: {
-					result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, space)
+					result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException, space)
 				}
 				CommentInfo: {} 
 			}
 		result
 	}
 	
-	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, IConfigurationKey<?> key, int indentationChange) {
+	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, IConfigurationKey<?> key, int indentationChange) {
 		switch key {
-			BlankLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
-				val blankline = cfg.get(key)
-				val preserve = cfg.get(cfg.keys.preserveBlankLines)
+			BlankLineKey: [ FormattableDocument doc |
+				val blankline = doc.cfg.get(key)
+				val preserve = doc.cfg.get(doc.cfg.keys.preserveBlankLines)
 				val min = blankline + 1
 				val max = Math::max(preserve + 1, min)
-				newFormattingData(leafs, min, max, indentationChange)
+				newFormattingData(leafs, min, max, indentationChange, doc.debugConflicts)
 			]
-			NewLineOrPreserveKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
-				val newLine = cfg.get(key)
-				val preserve = cfg.get(cfg.keys.preserveNewLines)
-				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange)
+			NewLineOrPreserveKey: [ FormattableDocument doc |
+				val newLine = doc.cfg.get(key)
+				val preserve = doc.cfg.get(doc.cfg.keys.preserveNewLines)
+				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange, doc.debugConflicts)
 			]
-			NewLineKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
-				val newLine = cfg.get(key)
+			NewLineKey: [ FormattableDocument doc |
+				val newLine = doc.cfg.get(key)
 				val minmax = if(newLine) 1 else 0
-				newFormattingData(leafs, minmax, minmax, indentationChange)
+				newFormattingData(leafs, minmax, minmax, indentationChange, doc.debugConflicts)
 			]
-			WhitespaceKey: [ IConfigurationValues<XtendFormatterConfigKeys> cfg |
-				val space = cfg.get(key)
-				newFormattingData(leafs, if(space) " " else "", indentationChange)
+			WhitespaceKey: [ FormattableDocument doc |
+				val space = doc.cfg.get(key)
+				newFormattingData(leafs, if(space) " " else "", indentationChange, doc.debugConflicts)
 			]
 			default:
 				throw new RuntimeException("can't handle configuration key")
 		} 
 	}
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange) {
+	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange, boolean trace) {
 		val result = <FormattingData>newArrayList
 		var applied = false
 		for(leaf : leafs.leafs) 
@@ -67,21 +69,21 @@ class FormatterExtensions {
 					val next = leaf.trailingComment
 					if(next?.trailing) {
 						val space = if(leaf.offset == 0) "" else " "
-						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, space)
+						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), space)
 					} else if (!applied) {
 						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
 						if(leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
 						if(!leaf.leadingComment?.endsWithNewLine && newLines == 0)
-							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, " ")
+							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), " ")
 						else 
-							result += new NewLineData(leaf.offset, leaf.length, indentationChange, newLines)
+							result += new NewLineData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), newLines)
 						applied = true
 					} else {
 						var newLines = 1
 						if(leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
-						result += new NewLineData(leaf.offset, leaf.length, indentationChange, newLines)
+						result += new NewLineData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), newLines)
 					}
 				}
 				CommentInfo: {} 
@@ -105,43 +107,47 @@ class FormatterExtensions {
 		}
 	}
 	
-	def Iterable<FormattingData> append(INode node, (FormattingDataInit)=>void init) {
+	def (FormattableDocument) => Iterable<FormattingData> append(INode node, (FormattingDataInit)=>void init) {
 		if(node != null) {
 			node.hiddenLeafsAfter.newFormattingData(init)
 		}
 	}
 	
-	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> append(INode node, IConfigurationKey<?> key) {
+	def (FormattableDocument) => Iterable<FormattingData> append(INode node, IConfigurationKey<?> key) {
 		if(node != null) {
 			node.hiddenLeafsAfter.newFormattingData(key, 0)
 		}
 	}
 	
-	def Iterable<FormattingData> prepend(INode node, (FormattingDataInit)=>void init) {
+	def (FormattableDocument) => Iterable<FormattingData> prepend(INode node, (FormattingDataInit)=>void init) {
 		if(node != null) {
 			node.hiddenLeafsBefore.newFormattingData(init)
 		}
 	}
 	
-	def Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void init) {
-		val result = <FormattingData>newArrayList()
-		if(node != null) {
-			result += node.hiddenLeafsBefore.newFormattingData(init)
-			result += node.hiddenLeafsAfter.newFormattingData(init)
-		}
-		result
+	def (FormattableDocument) => Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void init) {
+		[ FormattableDocument doc |
+			val result = <FormattingData>newArrayList()
+			if(node != null) {
+				result += node.hiddenLeafsBefore.newFormattingData(init)?.apply(doc) ?: emptyList
+				result += node.hiddenLeafsAfter.newFormattingData(init)?.apply(doc) ?: emptyList
+			}
+			result
+		]
 	}
 	
-	def Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void before, (FormattingDataInit)=>void after) {
-		val result = <FormattingData>newArrayList()
-		if(node != null) {
-			result += node.hiddenLeafsBefore.newFormattingData(before)
-			result += node.hiddenLeafsAfter.newFormattingData(after)
-		}
-		result
+	def (FormattableDocument) => Iterable<FormattingData> surround(INode node, (FormattingDataInit)=>void before, (FormattingDataInit)=>void after) {
+		[ FormattableDocument doc |
+			val result = <FormattingData>newArrayList()
+			if(node != null) {
+				result += node.hiddenLeafsBefore.newFormattingData(before)?.apply(doc) ?: emptyList
+				result += node.hiddenLeafsAfter.newFormattingData(after)?.apply(doc) ?: emptyList
+			}
+			result
+		]
 	}
 	
-	def (IConfigurationValues<XtendFormatterConfigKeys>) => Iterable<FormattingData> prepend(INode node, IConfigurationKey<?> key) {
+	def (FormattableDocument) => Iterable<FormattingData> prepend(INode node, IConfigurationKey<?> key) {
 		if(node != null) {
 			node.hiddenLeafsBefore.newFormattingData(key, 0)
 		}
