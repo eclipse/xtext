@@ -1183,8 +1183,8 @@ public class XtendFormatter {
   
   protected void formatStaticQualifier(final INode node, final FormattableDocument document) {
     if ((node instanceof ICompositeNode)) {
-      Iterable<ILeafNode> _leafNodes = ((ICompositeNode) node).getLeafNodes();
-      for (final ILeafNode n : _leafNodes) {
+      final Iterable<ILeafNode> leafs = ((ICompositeNode) node).getLeafNodes();
+      for (final ILeafNode n : leafs) {
         boolean _and = false;
         EObject _grammarElement = n.getGrammarElement();
         if (!(_grammarElement instanceof Keyword)) {
@@ -1200,8 +1200,19 @@ public class XtendFormatter {
                 it.noSpace();
               }
             };
-          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(n, _function);
-          document.operator_add(_surround);
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(n, _function);
+          document.operator_add(_prepend);
+          ILeafNode _last = IterableExtensions.<ILeafNode>last(leafs);
+          boolean _notEquals = (!Objects.equal(n, _last));
+          if (_notEquals) {
+            final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+                public void apply(final FormattingDataInit it) {
+                  it.noSpace();
+                }
+              };
+            Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(n, _function_1);
+            document.operator_add(_append);
+          }
         }
       }
     }

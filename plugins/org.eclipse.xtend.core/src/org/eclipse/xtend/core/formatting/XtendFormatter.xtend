@@ -61,7 +61,6 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
 
-
 @SuppressWarnings("restriction")
 public class XtendFormatter {
 
@@ -368,10 +367,15 @@ public class XtendFormatter {
 	}
 	
 	def protected void formatStaticQualifier(INode node, FormattableDocument document) {
-		if(node instanceof ICompositeNode)
-			for(n:(node as ICompositeNode).leafNodes)
-				if(n.grammarElement instanceof Keyword && n.text == "::")
-					document += n.surround[noSpace]
+		if(node instanceof ICompositeNode) {
+			val leafs = (node as ICompositeNode).leafNodes
+			for(n:leafs)
+				if(n.grammarElement instanceof Keyword && n.text == "::") {
+					document += n.prepend[noSpace]
+					if(n != leafs.last)
+						document += n.append[noSpace]
+				}
+		}
 	}
 
 	def protected void formatFeatureCallParamsWrapIfNeeded(INode open, List<XExpression> params,
