@@ -51,12 +51,15 @@ public class ExtractVariableWizard extends RefactoringWizard {
 
 		public void createControl(Composite parent) {
 			Composite composite= new Composite(parent, SWT.NONE);
-			composite.setLayout(new GridLayout(2, false));
+			GridLayout layout = new GridLayout(2, false);
+			layout.verticalSpacing = 16;
+			composite.setLayout(layout);
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			composite.setFont(parent.getFont());
 
 			Label label= new Label(composite, SWT.NONE);
 			label.setText("Variable name:");
+			label.setFont(composite.getFont());
 			label.setLayoutData(new GridData());
 
 			nameField= new Text(composite, SWT.BORDER);
