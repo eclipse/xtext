@@ -8,7 +8,8 @@
 package org.xpect.ui.util;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -25,17 +26,17 @@ public class ContentTypeUtil {
 	public XpectContentType getContentType(IFile file) {
 		if (file == null || !file.exists())
 			return XpectContentType.BINARY;
-		InputStream contents = null;
+		Reader contents = null;
 		try {
-			contents = file.getContents();
-			byte[] buf = new byte[1024];
+			contents = new InputStreamReader(file.getContents(), file.getCharset());
+			char[] buf = new char[1024];
 			int len = contents.read(buf);
 			for (int i = 0; i < len; i++) {
-				byte c = buf[i];
+				char c = buf[i];
 				if (c < ' ' && c != '\n' && c != '\r' && c != '\t')
 					return XpectContentType.BINARY;
 			}
-			String stringBuf = new String(buf, file.getCharset());
+			String stringBuf = new String(buf);
 			if (stringBuf.contains("XPECT"))
 				return XpectContentType.XPECT;
 			return XpectContentType.TEXT;
