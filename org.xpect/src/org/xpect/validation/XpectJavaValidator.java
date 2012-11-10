@@ -7,10 +7,21 @@
  *******************************************************************************/
 package org.xpect.validation;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.xpect.XpectPackage;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectJavaValidator extends AbstractXpectJavaValidator {
+
+	@Override
+	protected List<EPackage> getEPackages() {
+		return Collections.<EPackage> singletonList(XpectPackage.eINSTANCE);
+	}
 
 	// @Check
 	// public void checkGreetingStartsWithCapital(Greeting greeting) {
