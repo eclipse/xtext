@@ -62,8 +62,8 @@
    <extension point="org.eclipse.ui.commands">
       <command
               id="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
-              name="Extract Local Variable"
-              description="Replaces the given expression with a newly declared local variable">
+              name="%ExtractLocalVariableRefactoring_name"
+              description="%ExtractLocalVariableRefactoring_description">
       </command>
    </extension>
     
