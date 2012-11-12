@@ -118,6 +118,16 @@ public class XtendFormatter {
     this._allowIdentityEdits = allowIdentityEdits;
   }
   
+  private boolean _diagnoseConflicts = true;
+  
+  public boolean isDiagnoseConflicts() {
+    return this._diagnoseConflicts;
+  }
+  
+  public void setDiagnoseConflicts(final boolean diagnoseConflicts) {
+    this._diagnoseConflicts = diagnoseConflicts;
+  }
+  
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IConfigurationValues<XtendFormatterConfigKeys> cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
@@ -129,8 +139,15 @@ public class XtendFormatter {
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(((XtendFile) _head), format);
-      boolean _isConflictOccurred = format.isConflictOccurred();
-      if (_isConflictOccurred) {
+      boolean _and = false;
+      boolean _isDiagnoseConflicts = this.isDiagnoseConflicts();
+      if (!_isDiagnoseConflicts) {
+        _and = false;
+      } else {
+        boolean _isConflictOccurred = format.isConflictOccurred();
+        _and = (_isDiagnoseConflicts && _isConflictOccurred);
+      }
+      if (_and) {
         FormattableDocument _formattableDocument_1 = new FormattableDocument(cfg, doc);
         final FormattableDocument debug = _formattableDocument_1;
         RuntimeException _runtimeException = new RuntimeException();
@@ -2503,9 +2520,17 @@ public class XtendFormatter {
   
   protected boolean isMultiline(final XExpression expression, final FormattableDocument doc) {
     final INode node = this._nodeModelAccess.nodeForEObject(expression);
-    int _startLine = node.getStartLine();
-    int _endLine = node.getEndLine();
-    return (_startLine != _endLine);
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(node, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      int _startLine = node.getStartLine();
+      int _endLine = node.getEndLine();
+      boolean _notEquals_1 = (_startLine != _endLine);
+      _and = (_notEquals && _notEquals_1);
+    }
+    return _and;
   }
   
   /**
@@ -2661,13 +2686,13 @@ public class XtendFormatter {
     final INode elsenode = _else==null?(INode)null:this._nodeModelAccess.nodeForEObject(_else);
     boolean _or = false;
     boolean _or_1 = false;
-    String _text = thennode.getText();
-    String _trim = _text.trim();
-    boolean _contains = _trim.contains("\n");
+    String _text = thennode==null?(String)null:thennode.getText();
+    String _trim = _text==null?(String)null:_text.trim();
+    boolean _contains = _trim==null?false:_trim.contains("\n");
     if (_contains) {
       _or_1 = true;
     } else {
-      ILeafNode _whitespaceBefore = this._nodeModelAccess.whitespaceBefore(thennode);
+      ILeafNode _whitespaceBefore = thennode==null?(ILeafNode)null:this._nodeModelAccess.whitespaceBefore(thennode);
       String _text_1 = _whitespaceBefore==null?(String)null:_whitespaceBefore.getText();
       boolean _contains_1 = _text_1==null?false:_text_1.contains("\n");
       _or_1 = (_contains || _contains_1);
@@ -3352,10 +3377,17 @@ public class XtendFormatter {
       final FormattableDocument lookahead = _formattableDocument;
       this.format(expression, lookahead);
       final INode node = this._nodeModelAccess.nodeForEObject(expression);
-      int _offset = node.getOffset();
-      int _length = node.getLength();
-      String _renderToString = lookahead.renderToString(_offset, _length);
-      _xblockexpression = (_renderToString);
+      String _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(node, null));
+      if (_notEquals) {
+        int _offset = node.getOffset();
+        int _length = node.getLength();
+        String _renderToString = lookahead.renderToString(_offset, _length);
+        _xifexpression = _renderToString;
+      } else {
+        _xifexpression = "";
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -3363,8 +3395,15 @@ public class XtendFormatter {
   protected boolean fitsIntoLine(final FormattableDocument fmt, final EObject expression) {
     final INode node = this._nodeModelAccess.nodeForEObject(expression);
     final String lookahead = this.lookahead(fmt, expression);
-    boolean _contains = lookahead.contains("\n");
-    if (_contains) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(node, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _contains = lookahead.contains("\n");
+      _or = (_equals || _contains);
+    }
+    if (_or) {
       return false;
     } else {
       int _offset = node.getOffset();

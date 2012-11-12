@@ -267,8 +267,7 @@ public class FormattableDocument {
     } else {
       String _document = this.getDocument();
       int _length = _document.length();
-      int _minus = (_length - 1);
-      _xifexpression_1 = _minus;
+      _xifexpression_1 = _length;
     }
     final Integer fiveLinesForwardOffset = _xifexpression_1;
     String _document_1 = this.getDocument();
@@ -288,14 +287,14 @@ public class FormattableDocument {
     Throwable _trace = data1.getTrace();
     final StackTraceElement[] fullTrace1 = _trace.getStackTrace();
     int _size_1 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace1)).size();
-    int _minus_1 = (_size_1 - traceStart);
-    List<StackTraceElement> _subList = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace1)).subList(0, _minus_1);
+    int _minus = (_size_1 - traceStart);
+    List<StackTraceElement> _subList = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace1)).subList(0, _minus);
     final String shortTrace1 = IterableExtensions.join(_subList, "\n");
     Throwable _trace_1 = data2.getTrace();
     final StackTraceElement[] fullTrace2 = _trace_1.getStackTrace();
     int _size_2 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace2)).size();
-    int _minus_2 = (_size_2 - traceStart);
-    List<StackTraceElement> _subList_1 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace2)).subList(0, _minus_2);
+    int _minus_1 = (_size_2 - traceStart);
+    List<StackTraceElement> _subList_1 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace2)).subList(0, _minus_1);
     final String shortTrace2 = IterableExtensions.join(_subList_1, "\n");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Conflicting TextEdits during formatting:");

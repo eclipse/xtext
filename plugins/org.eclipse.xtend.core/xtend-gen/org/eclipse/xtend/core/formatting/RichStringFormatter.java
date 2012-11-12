@@ -2,11 +2,9 @@ package org.eclipse.xtend.core.formatting;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
-import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.RichStringFormatterImpl;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
@@ -30,19 +28,7 @@ public class RichStringFormatter {
       impl.setDocument(doc);
       DefaultIndentationHandler _defaultIndentationHandler = new DefaultIndentationHandler();
       this.richStringProcessor.process(richString, impl, _defaultIndentationHandler);
-      List<Integer> _indentOffsets = impl.getIndentOffsets();
-      for (final Integer offs : _indentOffsets) {
-        int _bodyIndent = impl.getBodyIndent();
-        RuntimeException _xifexpression = null;
-        boolean _isDebugConflicts = doc.isDebugConflicts();
-        if (_isDebugConflicts) {
-          RuntimeException _runtimeException = new RuntimeException();
-          _xifexpression = _runtimeException;
-        }
-        NewLineData _newLineData = new NewLineData((offs).intValue(), _bodyIndent, 0, _xifexpression, 0);
-        doc.operator_add(_newLineData);
-      }
-      FormattingData _xifexpression_1 = null;
+      FormattingData _xifexpression = null;
       boolean _and = false;
       int _indentOffset = impl.getIndentOffset();
       boolean _greaterThan = (_indentOffset > 0);
@@ -57,29 +43,29 @@ public class RichStringFormatter {
         FormattingData _xblockexpression_1 = null;
         {
           int _indentOffset_1 = impl.getIndentOffset();
+          RuntimeException _xifexpression_1 = null;
+          boolean _isDebugConflicts = doc.isDebugConflicts();
+          if (_isDebugConflicts) {
+            RuntimeException _runtimeException = new RuntimeException();
+            _xifexpression_1 = _runtimeException;
+          }
+          WhitespaceData _whitespaceData = new WhitespaceData(_indentOffset_1, 0, 1, _xifexpression_1, null);
+          doc.operator_add(_whitespaceData);
+          int _outdentOffset_1 = impl.getOutdentOffset();
+          int _minus = (-1);
           RuntimeException _xifexpression_2 = null;
           boolean _isDebugConflicts_1 = doc.isDebugConflicts();
           if (_isDebugConflicts_1) {
             RuntimeException _runtimeException_1 = new RuntimeException();
             _xifexpression_2 = _runtimeException_1;
           }
-          WhitespaceData _whitespaceData = new WhitespaceData(_indentOffset_1, 0, 1, _xifexpression_2, null);
-          doc.operator_add(_whitespaceData);
-          int _outdentOffset_1 = impl.getOutdentOffset();
-          int _minus = (-1);
-          RuntimeException _xifexpression_3 = null;
-          boolean _isDebugConflicts_2 = doc.isDebugConflicts();
-          if (_isDebugConflicts_2) {
-            RuntimeException _runtimeException_2 = new RuntimeException();
-            _xifexpression_3 = _runtimeException_2;
-          }
-          WhitespaceData _whitespaceData_1 = new WhitespaceData(_outdentOffset_1, 0, _minus, _xifexpression_3, null);
+          WhitespaceData _whitespaceData_1 = new WhitespaceData(_outdentOffset_1, 0, _minus, _xifexpression_2, null);
           FormattingData _add = doc.operator_add(_whitespaceData_1);
           _xblockexpression_1 = (_add);
         }
-        _xifexpression_1 = _xblockexpression_1;
+        _xifexpression = _xblockexpression_1;
       }
-      _xblockexpression = (_xifexpression_1);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

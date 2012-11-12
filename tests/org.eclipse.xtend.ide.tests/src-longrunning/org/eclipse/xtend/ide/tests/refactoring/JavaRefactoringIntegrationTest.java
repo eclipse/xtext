@@ -29,7 +29,6 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
@@ -901,16 +900,12 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 				editorContent.replaceAll("\\s*", " ").contains(expectedContent.replaceAll("\\s*",  " ")));
 	}
 
-	protected void executeAsyncDisplayJobs() {
-		while(Display.getCurrent().readAndDispatch()) {}
-	}
-
 	protected XtextEditor openEditorSafely(IFile file) throws Exception {
 		waitForAutoBuild();
-		executeAsyncDisplayJobs();
+		syncUtil.yieldToQueuedDisplayJobs(null);
 		XtextEditor editor = testHelper.openEditor(file);
 		syncUtil.waitForReconciler(editor);
-		executeAsyncDisplayJobs();
+		syncUtil.yieldToQueuedDisplayJobs(null);
 		return editor;
 	}
 	
@@ -921,7 +916,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	
 	protected void renameXtendElement(final XtextEditor editor, final int offset, final String newName, final int allowedSeverity) throws Exception {
 		waitForAutoBuild();
-		executeAsyncDisplayJobs();
+		syncUtil.yieldToQueuedDisplayJobs(null);
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
@@ -934,7 +929,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			}
 		}.run(new NullProgressMonitor());
 		waitForAutoBuild();
-		executeAsyncDisplayJobs();
+		syncUtil.yieldToQueuedDisplayJobs(null);
 	}
 
 	protected void renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
@@ -943,7 +938,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
 		waitForAutoBuild();
-		executeAsyncDisplayJobs();
+		syncUtil.yieldToQueuedDisplayJobs(null);
 		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
 		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 		assertFalse("Expected an error", status.isOK());
