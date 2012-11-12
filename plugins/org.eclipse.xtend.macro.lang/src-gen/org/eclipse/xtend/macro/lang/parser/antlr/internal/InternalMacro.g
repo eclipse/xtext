@@ -653,17 +653,50 @@ ruleProcessor returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getProcessorAccess().getExpressionXBlockExpressionParserRuleCall_1_0()); 
+		lv_each_1_0=	'each' 
+    {
+        newLeafNode(lv_each_1_0, grammarAccess.getProcessorAccess().getEachEachKeyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getProcessorRule());
+	        }
+       		setWithLastConsumed($current, "each", true, "each");
 	    }
-		lv_expression_1_0=ruleXBlockExpression		{
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getProcessorAccess().getVariableNameValidIDParserRuleCall_2_0()); 
+	    }
+		lv_variableName_2_0=ruleValidID		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getProcessorRule());
+	        }
+       		set(
+       			$current, 
+       			"variableName",
+        		lv_variableName_2_0, 
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getProcessorAccess().getExpressionXBlockExpressionParserRuleCall_3_0()); 
+	    }
+		lv_expression_3_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getProcessorRule());
 	        }
        		set(
        			$current, 
        			"expression",
-        		lv_expression_1_0, 
+        		lv_expression_3_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }

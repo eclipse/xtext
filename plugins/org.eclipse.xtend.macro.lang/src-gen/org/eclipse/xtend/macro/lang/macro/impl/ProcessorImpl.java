@@ -24,6 +24,8 @@ import org.eclipse.xtext.xbase.XExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtend.macro.lang.macro.impl.ProcessorImpl#isEach <em>Each</em>}</li>
+ *   <li>{@link org.eclipse.xtend.macro.lang.macro.impl.ProcessorImpl#getVariableName <em>Variable Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.macro.lang.macro.impl.ProcessorImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +34,46 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public class ProcessorImpl extends XtendMemberImpl implements Processor
 {
+  /**
+   * The default value of the '{@link #isEach() <em>Each</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isEach()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean EACH_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isEach() <em>Each</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isEach()
+   * @generated
+   * @ordered
+   */
+  protected boolean each = EACH_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getVariableName() <em>Variable Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVariableName()
+   * @generated
+   * @ordered
+   */
+  protected static final String VARIABLE_NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getVariableName() <em>Variable Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVariableName()
+   * @generated
+   * @ordered
+   */
+  protected String variableName = VARIABLE_NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -61,6 +103,52 @@ public class ProcessorImpl extends XtendMemberImpl implements Processor
   protected EClass eStaticClass()
   {
     return MacroPackage.Literals.PROCESSOR;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isEach()
+  {
+    return each;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEach(boolean newEach)
+  {
+    boolean oldEach = each;
+    each = newEach;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MacroPackage.PROCESSOR__EACH, oldEach, each));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getVariableName()
+  {
+    return variableName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setVariableName(String newVariableName)
+  {
+    String oldVariableName = variableName;
+    variableName = newVariableName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MacroPackage.PROCESSOR__VARIABLE_NAME, oldVariableName, variableName));
   }
 
   /**
@@ -137,6 +225,10 @@ public class ProcessorImpl extends XtendMemberImpl implements Processor
   {
     switch (featureID)
     {
+      case MacroPackage.PROCESSOR__EACH:
+        return isEach();
+      case MacroPackage.PROCESSOR__VARIABLE_NAME:
+        return getVariableName();
       case MacroPackage.PROCESSOR__EXPRESSION:
         return getExpression();
     }
@@ -153,6 +245,12 @@ public class ProcessorImpl extends XtendMemberImpl implements Processor
   {
     switch (featureID)
     {
+      case MacroPackage.PROCESSOR__EACH:
+        setEach((Boolean)newValue);
+        return;
+      case MacroPackage.PROCESSOR__VARIABLE_NAME:
+        setVariableName((String)newValue);
+        return;
       case MacroPackage.PROCESSOR__EXPRESSION:
         setExpression((XExpression)newValue);
         return;
@@ -170,6 +268,12 @@ public class ProcessorImpl extends XtendMemberImpl implements Processor
   {
     switch (featureID)
     {
+      case MacroPackage.PROCESSOR__EACH:
+        setEach(EACH_EDEFAULT);
+        return;
+      case MacroPackage.PROCESSOR__VARIABLE_NAME:
+        setVariableName(VARIABLE_NAME_EDEFAULT);
+        return;
       case MacroPackage.PROCESSOR__EXPRESSION:
         setExpression((XExpression)null);
         return;
@@ -187,10 +291,33 @@ public class ProcessorImpl extends XtendMemberImpl implements Processor
   {
     switch (featureID)
     {
+      case MacroPackage.PROCESSOR__EACH:
+        return each != EACH_EDEFAULT;
+      case MacroPackage.PROCESSOR__VARIABLE_NAME:
+        return VARIABLE_NAME_EDEFAULT == null ? variableName != null : !VARIABLE_NAME_EDEFAULT.equals(variableName);
       case MacroPackage.PROCESSOR__EXPRESSION:
         return expression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (each: ");
+    result.append(each);
+    result.append(", variableName: ");
+    result.append(variableName);
+    result.append(')');
+    return result.toString();
   }
 
 } //ProcessorImpl

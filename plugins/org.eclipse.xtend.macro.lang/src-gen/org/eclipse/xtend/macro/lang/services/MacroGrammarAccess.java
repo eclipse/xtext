@@ -351,24 +351,40 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Processor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cProcessKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpressionXBlockExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		private final Assignment cEachAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cEachEachKeyword_1_0 = (Keyword)cEachAssignment_1.eContents().get(0);
+		private final Assignment cVariableNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cVariableNameValidIDParserRuleCall_2_0 = (RuleCall)cVariableNameAssignment_2.eContents().get(0);
+		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cExpressionXBlockExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Processor:
-		//	"process" expression=XBlockExpression;
+		//	"process" each?="each"? variableName=ValidID? expression=XBlockExpression;
 		public ParserRule getRule() { return rule; }
 
-		//"process" expression=XBlockExpression
+		//"process" each?="each"? variableName=ValidID? expression=XBlockExpression
 		public Group getGroup() { return cGroup; }
 
 		//"process"
 		public Keyword getProcessKeyword_0() { return cProcessKeyword_0; }
 
+		//each?="each"?
+		public Assignment getEachAssignment_1() { return cEachAssignment_1; }
+
+		//"each"
+		public Keyword getEachEachKeyword_1_0() { return cEachEachKeyword_1_0; }
+
+		//variableName=ValidID?
+		public Assignment getVariableNameAssignment_2() { return cVariableNameAssignment_2; }
+
+		//ValidID
+		public RuleCall getVariableNameValidIDParserRuleCall_2_0() { return cVariableNameValidIDParserRuleCall_2_0; }
+
 		//expression=XBlockExpression
-		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
 
 		//XBlockExpression
-		public RuleCall getExpressionXBlockExpressionParserRuleCall_1_0() { return cExpressionXBlockExpressionParserRuleCall_1_0; }
+		public RuleCall getExpressionXBlockExpressionParserRuleCall_3_0() { return cExpressionXBlockExpressionParserRuleCall_3_0; }
 	}
 	
 	
@@ -565,7 +581,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Processor:
-	//	"process" expression=XBlockExpression;
+	//	"process" each?="each"? variableName=ValidID? expression=XBlockExpression;
 	public ProcessorElements getProcessorAccess() {
 		return (pProcessor != null) ? pProcessor : (pProcessor = new ProcessorElements());
 	}

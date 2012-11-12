@@ -198,13 +198,31 @@ public interface MacroPackage extends EPackage
   int PROCESSOR__ANNOTATION_INFO = XtendPackage.XTEND_MEMBER__ANNOTATION_INFO;
 
   /**
+   * The feature id for the '<em><b>Each</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCESSOR__EACH = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Variable Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCESSOR__VARIABLE_NAME = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROCESSOR__EXPRESSION = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 0;
+  int PROCESSOR__EXPRESSION = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Processor</em>' class.
@@ -213,7 +231,7 @@ public interface MacroPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROCESSOR_FEATURE_COUNT = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 1;
+  int PROCESSOR_FEATURE_COUNT = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtend.macro.lang.macro.TargetType <em>Target Type</em>}' enum.
@@ -288,6 +306,28 @@ public interface MacroPackage extends EPackage
    * @generated
    */
   EClass getProcessor();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtend.macro.lang.macro.Processor#isEach <em>Each</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Each</em>'.
+   * @see org.eclipse.xtend.macro.lang.macro.Processor#isEach()
+   * @see #getProcessor()
+   * @generated
+   */
+  EAttribute getProcessor_Each();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtend.macro.lang.macro.Processor#getVariableName <em>Variable Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Variable Name</em>'.
+   * @see org.eclipse.xtend.macro.lang.macro.Processor#getVariableName()
+   * @see #getProcessor()
+   * @generated
+   */
+  EAttribute getProcessor_VariableName();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtend.macro.lang.macro.Processor#getExpression <em>Expression</em>}'.
@@ -386,6 +426,22 @@ public interface MacroPackage extends EPackage
      * @generated
      */
     EClass PROCESSOR = eINSTANCE.getProcessor();
+
+    /**
+     * The meta object literal for the '<em><b>Each</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCESSOR__EACH = eINSTANCE.getProcessor_Each();
+
+    /**
+     * The meta object literal for the '<em><b>Variable Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCESSOR__VARIABLE_NAME = eINSTANCE.getProcessor_VariableName();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

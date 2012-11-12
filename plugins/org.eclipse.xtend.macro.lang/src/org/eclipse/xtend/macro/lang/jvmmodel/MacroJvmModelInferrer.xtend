@@ -126,8 +126,12 @@ class MacroJvmModelInferrer extends AbstractModelInferrer {
 				members +=
 					p.toMethod('process', annotation.newTypeRef(Void::TYPE))[
 						visibility = JvmVisibility::PUBLIC
-						parameters +=
-							p.toParameter("elements", p.newTypeRef(typeof(List), getAnnotatedElementsType(annotation)))
+						val paramType = if (p.isEach) {
+							getAnnotatedElementsType(annotation)
+						} else {
+							p.newTypeRef(typeof(List), getAnnotatedElementsType(annotation))
+						}
+						parameters += p.toParameter(p.variableName ?: 'it', paramType)
 						parameters +=
 							p.toParameter("source", p.newTypeRef(typeof(XtendFile)))
 						body = p.expression

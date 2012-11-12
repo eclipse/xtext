@@ -22,6 +22,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//Registrator/expression"/>
     </genClasses>
     <genClasses ecoreClass="Macro.ecore#//Processor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Processor/each"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Processor/variableName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//Processor/expression"/>
     </genClasses>
   </genPackages>

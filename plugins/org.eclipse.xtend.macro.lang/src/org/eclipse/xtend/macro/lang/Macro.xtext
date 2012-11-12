@@ -58,5 +58,5 @@ Registrator:
 ;
 
 Processor:
-	'process' expression=XBlockExpression
+	'process' each?='each'? variableName=ValidID? expression=XBlockExpression
 ;

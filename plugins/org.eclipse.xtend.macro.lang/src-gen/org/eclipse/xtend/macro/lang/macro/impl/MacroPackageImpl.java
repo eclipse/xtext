@@ -188,9 +188,29 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getProcessor_Each()
+  {
+    return (EAttribute)processorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProcessor_VariableName()
+  {
+    return (EAttribute)processorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getProcessor_Expression()
   {
-    return (EReference)processorEClass.getEStructuralFeatures().get(0);
+    return (EReference)processorEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -241,6 +261,8 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
     createEReference(registratorEClass, REGISTRATOR__EXPRESSION);
 
     processorEClass = createEClass(PROCESSOR);
+    createEAttribute(processorEClass, PROCESSOR__EACH);
+    createEAttribute(processorEClass, PROCESSOR__VARIABLE_NAME);
     createEReference(processorEClass, PROCESSOR__EXPRESSION);
 
     // Create enums
@@ -293,6 +315,8 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
     initEReference(getRegistrator_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, Registrator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProcessor_Each(), ecorePackage.getEBoolean(), "each", null, 0, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProcessor_VariableName(), ecorePackage.getEString(), "variableName", null, 0, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProcessor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
