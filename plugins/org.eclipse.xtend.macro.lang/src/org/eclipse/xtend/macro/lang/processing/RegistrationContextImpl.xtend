@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.macro.lang.processing
 
-import java.util.List
-import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtend.macro.RegistrationContext
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
@@ -26,26 +23,26 @@ class RegistrationContextImpl implements RegistrationContext {
 	@Property IJvmDeclaredTypeAcceptor acceptor
 	@Property extension JvmTypesBuilder typesBuilder
 	@Property XtendFile source
-	@Property List<XtendAnnotationTarget> annotatedElements
 	@Property IJvmModelAssociator associator
 
+	//TODO improve tracing
 	override registerAnnotation(String name) {
-		val annoType = annotatedElements.head.toAnnotationType(name) []
+		val annoType = source.toAnnotationType(name) []
 		acceptor.accept(annoType)
 	}
 	
 	override registerClass(String name) {
-		val annoType = annotatedElements.head.toClass(name)
+		val annoType = source.toClass(name)
 		acceptor.accept(annoType)
 	}
 	
 	override registerEnum(String name) {
-		val annoType = annotatedElements.head.toEnumerationType(name)[]
+		val annoType = source.toEnumerationType(name)[]
 		acceptor.accept(annoType)
 	}
 	
 	override registerInterface(String name) {
-		val annoType = annotatedElements.head.toInterface(name)[]
+		val annoType = source.toInterface(name)[]
 		acceptor.accept(annoType)
 	}
 	

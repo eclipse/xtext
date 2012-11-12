@@ -105,11 +105,9 @@ class ProcessingTest {
 				
 				@GWTService for class {
 				
-				  register {
-				  	elements.forEach [
-					  	registerInterface(source.^package + "." + name + "InterfaceAsync")
-						registerInterface(source.^package + "." + name + "Interface")
-				  	]
+				  register each {
+				  	registerInterface(source.^package + "." + name + "InterfaceAsync")
+					registerInterface(source.^package + "." + name + "Interface")
 				  }
 				
 				  process each {
@@ -177,10 +175,8 @@ class ProcessingTest {
 				
 				@MyService for class {
 				
-				  register {
-				  	elements.forEach [e |
-					  	registerInterface(e.interfaceName)
-				  	]
+				  register each e {
+					 registerInterface(e.interfaceName)
 				  }
 				
 				  process elements {
@@ -219,7 +215,7 @@ class ProcessingTest {
 				
 				@MyService for class {
 				
-				  register {
+				  register elements {
 				  	elements.forEach [e |
 					  	registerInterface(e.interfaceName)
 				  	]

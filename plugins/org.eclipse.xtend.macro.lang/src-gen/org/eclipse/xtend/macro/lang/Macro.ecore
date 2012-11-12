@@ -17,6 +17,8 @@
     <eLiterals name="constructor" value="4" literal="constructor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Registrator" eSuperTypes="../../../../../../../org.eclipse.xtend.core/model/Xtend.ecore#//XtendMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="each" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>

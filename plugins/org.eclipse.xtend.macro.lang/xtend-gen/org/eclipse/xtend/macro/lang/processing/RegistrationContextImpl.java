@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.macro.lang.processing;
 
-import java.util.List;
-import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.macro.RegistrationContext;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -17,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -57,16 +54,6 @@ public class RegistrationContextImpl implements RegistrationContext {
     this._source = source;
   }
   
-  private List<XtendAnnotationTarget> _annotatedElements;
-  
-  public List<XtendAnnotationTarget> getAnnotatedElements() {
-    return this._annotatedElements;
-  }
-  
-  public void setAnnotatedElements(final List<XtendAnnotationTarget> annotatedElements) {
-    this._annotatedElements = annotatedElements;
-  }
-  
   private IJvmModelAssociator _associator;
   
   public IJvmModelAssociator getAssociator() {
@@ -78,45 +65,41 @@ public class RegistrationContextImpl implements RegistrationContext {
   }
   
   public void registerAnnotation(final String name) {
-    List<XtendAnnotationTarget> _annotatedElements = this.getAnnotatedElements();
-    XtendAnnotationTarget _head = IterableExtensions.<XtendAnnotationTarget>head(_annotatedElements);
+    XtendFile _source = this.getSource();
     final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
         public void apply(final JvmAnnotationType it) {
         }
       };
-    final JvmAnnotationType annoType = this._typesBuilder.toAnnotationType(_head, name, _function);
+    final JvmAnnotationType annoType = this._typesBuilder.toAnnotationType(_source, name, _function);
     IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
     _acceptor.<JvmAnnotationType>accept(annoType);
   }
   
   public void registerClass(final String name) {
-    List<XtendAnnotationTarget> _annotatedElements = this.getAnnotatedElements();
-    XtendAnnotationTarget _head = IterableExtensions.<XtendAnnotationTarget>head(_annotatedElements);
-    final JvmGenericType annoType = this._typesBuilder.toClass(_head, name);
+    XtendFile _source = this.getSource();
+    final JvmGenericType annoType = this._typesBuilder.toClass(_source, name);
     IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
     _acceptor.<JvmGenericType>accept(annoType);
   }
   
   public void registerEnum(final String name) {
-    List<XtendAnnotationTarget> _annotatedElements = this.getAnnotatedElements();
-    XtendAnnotationTarget _head = IterableExtensions.<XtendAnnotationTarget>head(_annotatedElements);
+    XtendFile _source = this.getSource();
     final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
         public void apply(final JvmEnumerationType it) {
         }
       };
-    final JvmEnumerationType annoType = this._typesBuilder.toEnumerationType(_head, name, _function);
+    final JvmEnumerationType annoType = this._typesBuilder.toEnumerationType(_source, name, _function);
     IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
     _acceptor.<JvmEnumerationType>accept(annoType);
   }
   
   public void registerInterface(final String name) {
-    List<XtendAnnotationTarget> _annotatedElements = this.getAnnotatedElements();
-    XtendAnnotationTarget _head = IterableExtensions.<XtendAnnotationTarget>head(_annotatedElements);
+    XtendFile _source = this.getSource();
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
         }
       };
-    final JvmGenericType annoType = this._typesBuilder.toInterface(_head, name, _function);
+    final JvmGenericType annoType = this._typesBuilder.toInterface(_source, name, _function);
     IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
     _acceptor.<JvmGenericType>accept(annoType);
   }

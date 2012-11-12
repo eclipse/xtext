@@ -324,7 +324,9 @@ public class MacroParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFieldAccess().getTypeAssignment_1(), "rule__Field__TypeAssignment_1");
 					put(grammarAccess.getFieldAccess().getNameAssignment_2(), "rule__Field__NameAssignment_2");
 					put(grammarAccess.getFieldAccess().getInitialValueAssignment_3_1(), "rule__Field__InitialValueAssignment_3_1");
-					put(grammarAccess.getRegistratorAccess().getExpressionAssignment_1(), "rule__Registrator__ExpressionAssignment_1");
+					put(grammarAccess.getRegistratorAccess().getEachAssignment_1(), "rule__Registrator__EachAssignment_1");
+					put(grammarAccess.getRegistratorAccess().getVariableNameAssignment_2(), "rule__Registrator__VariableNameAssignment_2");
+					put(grammarAccess.getRegistratorAccess().getExpressionAssignment_3(), "rule__Registrator__ExpressionAssignment_3");
 					put(grammarAccess.getProcessorAccess().getEachAssignment_1(), "rule__Processor__EachAssignment_1");
 					put(grammarAccess.getProcessorAccess().getVariableNameAssignment_2(), "rule__Processor__VariableNameAssignment_2");
 					put(grammarAccess.getProcessorAccess().getExpressionAssignment_3(), "rule__Processor__ExpressionAssignment_3");

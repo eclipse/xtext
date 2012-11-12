@@ -208,10 +208,21 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
                 final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                     public void apply(final JvmOperation it) {
                       it.setVisibility(JvmVisibility.PUBLIC);
+                      JvmTypeReference _xifexpression = null;
+                      boolean _isEach = r.isEach();
+                      if (_isEach) {
+                        JvmTypeReference _annotatedElementsType = MacroJvmModelInferrer.this.getAnnotatedElementsType(annotation);
+                        _xifexpression = _annotatedElementsType;
+                      } else {
+                        JvmTypeReference _annotatedElementsType_1 = MacroJvmModelInferrer.this.getAnnotatedElementsType(annotation);
+                        JvmTypeReference _newTypeRef = MacroJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(r, List.class, _annotatedElementsType_1);
+                        _xifexpression = _newTypeRef;
+                      }
+                      final JvmTypeReference paramType = _xifexpression;
                       EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _annotatedElementsType = MacroJvmModelInferrer.this.getAnnotatedElementsType(annotation);
-                      JvmTypeReference _newTypeRef = MacroJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(r, List.class, _annotatedElementsType);
-                      JvmFormalParameter _parameter = MacroJvmModelInferrer.this._jvmTypesBuilder.toParameter(r, "elements", _newTypeRef);
+                      String _variableName = r.getVariableName();
+                      String _elvis = ObjectExtensions.<String>operator_elvis(_variableName, "it");
+                      JvmFormalParameter _parameter = MacroJvmModelInferrer.this._jvmTypesBuilder.toParameter(r, _elvis, paramType);
                       MacroJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
                       EList<JvmFormalParameter> _parameters_1 = it.getParameters();
                       JvmTypeReference _newTypeRef_1 = MacroJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(r, XtendFile.class);

@@ -610,17 +610,50 @@ ruleRegistrator returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getRegistratorAccess().getExpressionXBlockExpressionParserRuleCall_1_0()); 
+		lv_each_1_0=	'each' 
+    {
+        newLeafNode(lv_each_1_0, grammarAccess.getRegistratorAccess().getEachEachKeyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRegistratorRule());
+	        }
+       		setWithLastConsumed($current, "each", true, "each");
 	    }
-		lv_expression_1_0=ruleXBlockExpression		{
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRegistratorAccess().getVariableNameValidIDParserRuleCall_2_0()); 
+	    }
+		lv_variableName_2_0=ruleValidID		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRegistratorRule());
+	        }
+       		set(
+       			$current, 
+       			"variableName",
+        		lv_variableName_2_0, 
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRegistratorAccess().getExpressionXBlockExpressionParserRuleCall_3_0()); 
+	    }
+		lv_expression_3_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRegistratorRule());
 	        }
        		set(
        			$current, 
        			"expression",
-        		lv_expression_1_0, 
+        		lv_expression_3_0, 
         		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }

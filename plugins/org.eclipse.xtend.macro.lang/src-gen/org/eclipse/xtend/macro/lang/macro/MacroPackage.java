@@ -152,13 +152,31 @@ public interface MacroPackage extends EPackage
   int REGISTRATOR__ANNOTATION_INFO = XtendPackage.XTEND_MEMBER__ANNOTATION_INFO;
 
   /**
+   * The feature id for the '<em><b>Each</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REGISTRATOR__EACH = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Variable Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REGISTRATOR__VARIABLE_NAME = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REGISTRATOR__EXPRESSION = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 0;
+  int REGISTRATOR__EXPRESSION = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Registrator</em>' class.
@@ -167,7 +185,7 @@ public interface MacroPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REGISTRATOR_FEATURE_COUNT = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 1;
+  int REGISTRATOR_FEATURE_COUNT = XtendPackage.XTEND_MEMBER_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtend.macro.lang.macro.impl.ProcessorImpl <em>Processor</em>}' class.
@@ -285,6 +303,28 @@ public interface MacroPackage extends EPackage
    * @generated
    */
   EClass getRegistrator();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtend.macro.lang.macro.Registrator#isEach <em>Each</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Each</em>'.
+   * @see org.eclipse.xtend.macro.lang.macro.Registrator#isEach()
+   * @see #getRegistrator()
+   * @generated
+   */
+  EAttribute getRegistrator_Each();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtend.macro.lang.macro.Registrator#getVariableName <em>Variable Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Variable Name</em>'.
+   * @see org.eclipse.xtend.macro.lang.macro.Registrator#getVariableName()
+   * @see #getRegistrator()
+   * @generated
+   */
+  EAttribute getRegistrator_VariableName();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtend.macro.lang.macro.Registrator#getExpression <em>Expression</em>}'.
@@ -408,6 +448,22 @@ public interface MacroPackage extends EPackage
      * @generated
      */
     EClass REGISTRATOR = eINSTANCE.getRegistrator();
+
+    /**
+     * The meta object literal for the '<em><b>Each</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REGISTRATOR__EACH = eINSTANCE.getRegistrator_Each();
+
+    /**
+     * The meta object literal for the '<em><b>Variable Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REGISTRATOR__VARIABLE_NAME = eINSTANCE.getRegistrator_VariableName();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

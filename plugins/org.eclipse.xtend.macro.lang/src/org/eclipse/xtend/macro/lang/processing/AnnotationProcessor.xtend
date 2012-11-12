@@ -167,25 +167,32 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	def private void invokeRegistrators(XtendFile xtendFile, Map<MacroAnnotation, List<XtendAnnotationTarget>> annotatedElements, IJvmDeclaredTypeAcceptor acceptor, CancelIndicator cancelIndicator) {
 		for (macroAnnotation :  annotatedElements.keySet.filter[registrator != null]) {
 			val elements = macroAnnotation.getElements(annotatedElements)
-			val ctx = new DefaultEvaluationContext
-			
-			val regstratorCtx = registratorContextProvider.get
-			regstratorCtx.source = xtendFile
-			regstratorCtx.typesBuilder = jvmTypesBuilder
-			regstratorCtx.acceptor = acceptor
-			regstratorCtx.associator = this.associator
-			regstratorCtx.annotatedElements = elements
-			
-			ctx.newValue(QualifiedName::create('this'), regstratorCtx)
-			ctx.newValue(QualifiedName::create('elements'), elements)
-			ctx.newValue(QualifiedName::create('source'), xtendFile)
-			
-			try {
-				val result = interpreter.evaluate(macroAnnotation.registrator?.expression, ctx, cancelIndicator)
-				if (result.exception != null)
-					throw result.exception
-			} catch (Exception e) {
-				LOG.error(e.message, e)
+			val Iterable<?> each = if (macroAnnotation.registrator.each) {
+					elements
+				} else {
+					newArrayList(elements)
+				}
+			for (element : each) {
+				val ctx = new DefaultEvaluationContext
+				
+				val regstratorCtx = registratorContextProvider.get
+				regstratorCtx.source = xtendFile
+				regstratorCtx.typesBuilder = jvmTypesBuilder
+				regstratorCtx.acceptor = acceptor
+				regstratorCtx.associator = this.associator
+				
+				ctx.newValue(QualifiedName::create('this'), regstratorCtx)
+				val varName = macroAnnotation.registrator.variableName ?: 'it'
+				ctx.newValue(QualifiedName::create(varName), element)
+				ctx.newValue(QualifiedName::create('source'), xtendFile)
+				
+				try {
+					val result = interpreter.evaluate(macroAnnotation.registrator?.expression, ctx, cancelIndicator)
+					if (result.exception != null)
+						throw result.exception
+				} catch (Exception e) {
+					LOG.error(e.message, e)
+				}
 			}
 		}
 	}

@@ -54,7 +54,7 @@ Field returns XtendField :
 ;
 
 Registrator:
-	'register' expression=XBlockExpression
+	'register' each?='each'? variableName=ValidID? expression=XBlockExpression
 ;
 
 Processor:

@@ -168,9 +168,29 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getRegistrator_Each()
+  {
+    return (EAttribute)registratorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRegistrator_VariableName()
+  {
+    return (EAttribute)registratorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getRegistrator_Expression()
   {
-    return (EReference)registratorEClass.getEStructuralFeatures().get(0);
+    return (EReference)registratorEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -258,6 +278,8 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
     createEReference(macroAnnotationEClass, MACRO_ANNOTATION__MEMBERS);
 
     registratorEClass = createEClass(REGISTRATOR);
+    createEAttribute(registratorEClass, REGISTRATOR__EACH);
+    createEAttribute(registratorEClass, REGISTRATOR__VARIABLE_NAME);
     createEReference(registratorEClass, REGISTRATOR__EXPRESSION);
 
     processorEClass = createEClass(PROCESSOR);
@@ -312,6 +334,8 @@ public class MacroPackageImpl extends EPackageImpl implements MacroPackage
     initEReference(getMacroAnnotation_Members(), theXtendPackage.getXtendMember(), null, "members", null, 0, -1, MacroAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(registratorEClass, Registrator.class, "Registrator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRegistrator_Each(), ecorePackage.getEBoolean(), "each", null, 0, 1, Registrator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRegistrator_VariableName(), ecorePackage.getEString(), "variableName", null, 0, 1, Registrator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRegistrator_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, Registrator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

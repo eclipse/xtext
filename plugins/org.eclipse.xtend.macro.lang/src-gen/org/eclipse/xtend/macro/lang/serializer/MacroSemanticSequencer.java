@@ -1240,7 +1240,7 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     expression=XBlockExpression
+	 *     (each?='each'? variableName=ValidID? expression=XBlockExpression)
 	 */
 	protected void sequence_Registrator(EObject context, Registrator semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

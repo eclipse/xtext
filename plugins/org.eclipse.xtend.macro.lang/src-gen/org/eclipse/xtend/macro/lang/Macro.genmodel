@@ -19,6 +19,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//MacroAnnotation/members"/>
     </genClasses>
     <genClasses ecoreClass="Macro.ecore#//Registrator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Registrator/each"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Registrator/variableName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//Registrator/expression"/>
     </genClasses>
     <genClasses ecoreClass="Macro.ecore#//Processor">
