@@ -497,65 +497,105 @@ public class XtendFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formatterExtensions.append(_nodeForKeyword_1, _function_1);
     format.operator_add(_append_1);
-    ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(clazz, "class");
-    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
+    EList<JvmTypeParameter> _typeParameters = clazz.getTypeParameters();
+    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(clazz, "<");
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword_2, _function_2);
+      format.operator_add(_surround);
+      EList<JvmTypeParameter> _typeParameters_1 = clazz.getTypeParameters();
+      for (final JvmTypeParameter arg : _typeParameters_1) {
+        {
+          this.format(arg, format);
+          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(arg, ",");
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.oneSpace();
+              }
+            };
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_3, _function_4);
+          format.operator_add(_surround_1);
         }
-      };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(_nodeForKeyword_2, _function_2);
-    format.operator_add(_append_2);
-    ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(clazz, "extends");
-    final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.oneSpace();
-        }
-      };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword_3, _function_3);
-    format.operator_add(_surround);
-    JvmTypeReference _extends = clazz.getExtends();
-    this.format(_extends, format);
-    ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(clazz, "implements");
+      }
+      ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(clazz, ">");
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(_nodeForKeyword_3, _function_3);
+      format.operator_add(_prepend);
+    }
+    ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(clazz, "class");
     final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_4, _function_4);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(_nodeForKeyword_4, _function_4);
+    format.operator_add(_append_2);
+    ILeafNode _nodeForKeyword_5 = this._nodeModelAccess.nodeForKeyword(clazz, "extends");
+    final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_5, _function_5);
     format.operator_add(_surround_1);
+    JvmTypeReference _extends = clazz.getExtends();
+    this.format(_extends, format);
+    ILeafNode _nodeForKeyword_6 = this._nodeModelAccess.nodeForKeyword(clazz, "implements");
+    final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formatterExtensions.surround(_nodeForKeyword_6, _function_6);
+    format.operator_add(_surround_2);
     EList<JvmTypeReference> _implements = clazz.getImplements();
     for (final JvmTypeReference imp : _implements) {
       {
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(imp);
         ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
-        final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+        final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
               it.noSpace();
             }
           };
-        final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+        final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
               it.oneSpace();
             }
           };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_5, _function_6);
-        format.operator_add(_surround_2);
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_7, _function_8);
+        format.operator_add(_surround_3);
         this.format(imp, format);
       }
     }
     final ILeafNode clazzOpenBrace = this._nodeModelAccess.nodeForKeyword(clazz, "{");
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(clazzOpenBrace, this._xtendFormatterConfigKeys.bracesInNewLine);
-    format.operator_add(_prepend);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_1 = this._formatterExtensions.prepend(clazzOpenBrace, this._xtendFormatterConfigKeys.bracesInNewLine);
+    format.operator_add(_prepend_1);
     EList<XtendMember> _members = clazz.getMembers();
-    boolean _isEmpty = _members.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+    boolean _isEmpty_1 = _members.isEmpty();
+    boolean _not_1 = (!_isEmpty_1);
+    if (_not_1) {
+      final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.increaseIndentation();
           }
         };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(clazzOpenBrace, _function_5);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(clazzOpenBrace, _function_7);
       format.operator_add(_append_3);
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formatterExtensions.append(clazzOpenBrace, this._xtendFormatterConfigKeys.blankLinesBeforeFirstMember);
       format.operator_add(_append_4);
@@ -607,12 +647,12 @@ public class XtendFormatter {
             EList<XtendMember> _members_5 = clazz.getMembers();
             XtendMember _get = _members_5.get((i).intValue());
             final INode node = this._nodeModelAccess.nodeForEObject(_get);
-            final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+            final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.decreaseIndentation();
                 }
               };
-            Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_8 = this._formatterExtensions.append(node, _function_6);
+            Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_8 = this._formatterExtensions.append(node, _function_8);
             format.operator_add(_append_8);
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_9 = this._formatterExtensions.append(node, this._xtendFormatterConfigKeys.blankLinesAfterLastMember);
             format.operator_add(_append_9);
@@ -620,12 +660,12 @@ public class XtendFormatter {
         }
       }
     } else {
-      final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+      final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.newLine();
           }
         };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_5 = this._formatterExtensions.append(clazzOpenBrace, _function_6);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_5 = this._formatterExtensions.append(clazzOpenBrace, _function_8);
       format.operator_add(_append_5);
     }
   }
@@ -654,28 +694,31 @@ public class XtendFormatter {
       format.operator_add(_append_1);
       EList<JvmTypeParameter> _typeParameters_1 = func.getTypeParameters();
       for (final JvmTypeParameter arg : _typeParameters_1) {
-        ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(arg, ",");
-        final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.noSpace();
-            }
-          };
-        final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-            public void apply(final FormattingDataInit it) {
-              it.oneSpace();
-            }
-          };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_2, _function_3);
-        format.operator_add(_surround);
+        {
+          this.format(arg, format);
+          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(arg, ",");
+          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.oneSpace();
+              }
+            };
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_2, _function_3);
+          format.operator_add(_surround);
+        }
       }
       ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(func, ">");
-      final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.noSpace();
           }
         };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_2, _function_4);
-      format.operator_add(_surround_1);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword_2, _function_2);
+      format.operator_add(_surround);
     }
     final ILeafNode open = this._nodeModelAccess.nodeForKeyword(func, "(");
     final ILeafNode close = this._nodeModelAccess.nodeForKeyword(func, ")");
@@ -856,9 +899,6 @@ public class XtendFormatter {
   
   protected void _format(final XtendFunction func, final FormattableDocument format) {
     this.formatAnnotations(func, format, this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations);
-    final INode nameNode = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__NAME);
-    final ILeafNode open = this._nodeModelAccess.immediatelyFollowingKeyword(nameNode, "(");
-    final ILeafNode close = this._nodeModelAccess.nodeForKeyword(func, ")");
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(func, "def");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -867,23 +907,71 @@ public class XtendFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForKeyword, _function);
     format.operator_add(_append);
+    EList<JvmTypeParameter> _typeParameters = func.getTypeParameters();
+    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(func, "<");
+      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formatterExtensions.append(_nodeForKeyword_1, _function_1);
+      format.operator_add(_append_1);
+      EList<JvmTypeParameter> _typeParameters_1 = func.getTypeParameters();
+      for (final JvmTypeParameter arg : _typeParameters_1) {
+        {
+          this.format(arg, format);
+          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(arg, ",");
+          final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.noSpace();
+              }
+            };
+          final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.oneSpace();
+              }
+            };
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_immediatelyFollowingKeyword, _function_2, _function_3);
+          format.operator_add(_surround);
+        }
+      }
+      ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(func, ">");
+      final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.noSpace();
+          }
+        };
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword_2, _function_2, _function_3);
+      format.operator_add(_surround);
+    }
+    final INode nameNode = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__NAME);
+    final ILeafNode open = this._nodeModelAccess.immediatelyFollowingKeyword(nameNode, "(");
+    final ILeafNode close = this._nodeModelAccess.nodeForKeyword(func, ")");
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(func, Literals.XTEND_FUNCTION__RETURN_TYPE);
-    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+    final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formatterExtensions.append(_nodeForFeature, _function_1);
-    format.operator_add(_append_1);
-    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(_nodeForFeature, _function_4);
+    format.operator_add(_append_2);
+    final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(open, _function_2);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(open, _function_5);
     format.operator_add(_prepend);
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formatterExtensions.append(close, this._xtendFormatterConfigKeys.bracesInNewLine);
-    format.operator_add(_append_2);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formatterExtensions.append(close, this._xtendFormatterConfigKeys.bracesInNewLine);
+    format.operator_add(_append_3);
     EList<XtendParameter> _parameters = func.getParameters();
     this.formatMemberParameter(_parameters, open, close, format);
     JvmTypeReference _returnType = func.getReturnType();
@@ -1049,6 +1137,23 @@ public class XtendFormatter {
     document.operator_add(_append_1);
     JvmTypeReference _returnType = func.getReturnType();
     this.format(_returnType, document);
+  }
+  
+  protected void _format(final JvmTypeParameter ref, final FormattableDocument document) {
+    EList<JvmTypeConstraint> _constraints = ref.getConstraints();
+    for (final JvmTypeConstraint c : _constraints) {
+      {
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(c);
+        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.oneSpace();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(_nodeForEObject, _function);
+        document.operator_add(_prepend);
+        this.format(c, document);
+      }
+    }
   }
   
   protected void _format(final JvmParameterizedTypeReference ref, final FormattableDocument document) {
@@ -3419,6 +3524,9 @@ public class XtendFormatter {
   protected void format(final EObject clazz, final FormattableDocument format) {
     if (clazz instanceof XtendClass) {
       _format((XtendClass)clazz, format);
+      return;
+    } else if (clazz instanceof JvmTypeParameter) {
+      _format((JvmTypeParameter)clazz, format);
       return;
     } else if (clazz instanceof RichString) {
       _format((RichString)clazz, format);

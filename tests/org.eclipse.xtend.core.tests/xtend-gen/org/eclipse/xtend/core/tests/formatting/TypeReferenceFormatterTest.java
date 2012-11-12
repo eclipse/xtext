@@ -5,8 +5,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtypeFormatterTest extends AbstractFormatterTest {
-  public CharSequence refToFile(final CharSequence string) {
+public class TypeReferenceFormatterTest extends AbstractFormatterTest {
+  public void assertTypeRef(final CharSequence toBeFormatted) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");
     _builder.newLine();
@@ -14,38 +14,12 @@ public class XtypeFormatterTest extends AbstractFormatterTest {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append(string, "	");
+    _builder.append(toBeFormatted, "	");
     _builder.append(" x");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence paramToFile(final CharSequence string) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class Foo");
-    _builder.append(string, "");
-    _builder.append(" {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public void assertTypeRef(final CharSequence expectation, final CharSequence toBeFormatted) {
-    CharSequence _refToFile = this.refToFile(expectation);
-    CharSequence _refToFile_1 = this.refToFile(toBeFormatted);
-    this.assertFormatted(_refToFile, _refToFile_1);
-  }
-  
-  public void assertTypeParam(final CharSequence expectation, final CharSequence toBeFormatted) {
-    CharSequence _paramToFile = this.paramToFile(expectation);
-    CharSequence _paramToFile_1 = this.paramToFile(toBeFormatted);
-    this.assertFormatted(_paramToFile, _paramToFile_1);
+    this.assertFormatted(_builder);
   }
   
   @Test
@@ -121,73 +95,71 @@ public class XtypeFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void simple() {
-    this.assertTypeRef("String", "String");
+    this.assertTypeRef("String");
   }
   
   @Test
   public void array1() {
-    this.assertTypeRef("String[]", "String  []");
+    this.assertTypeRef("String[]");
   }
   
   @Test
   public void array2() {
-    this.assertTypeRef("String[][]", "String  []  []");
+    this.assertTypeRef("String[][]");
   }
   
   @Test
   public void function0() {
-    this.assertTypeRef("=>void", "=>  void");
+    this.assertTypeRef("=>void");
   }
   
   @Test
   public void function1() {
-    this.assertTypeRef("()=>void", "(  )  =>  void");
+    this.assertTypeRef("()=>void");
   }
   
   @Test
   public void function2() {
-    this.assertTypeRef("(String)=>String", "(  String  )  =>  String");
+    this.assertTypeRef("(String)=>String");
   }
   
   @Test
   public void function3() {
-    this.assertTypeRef("(Collection<?>)=>Collection<?>", "(  Collection  <  ?  >  )  =>  Collection  <  ?  >");
+    this.assertTypeRef("(Collection<?>)=>Collection<?>");
   }
   
   @Test
   public void function4() {
-    this.assertTypeRef("(Collection<? extends String>)=>Collection<? extends String>", 
-      "(  Collection  <  ?  extends  String  >  )  =>  Collection  <  ?  extends  String  >");
+    this.assertTypeRef("(Collection<? extends String>)=>Collection<? extends String>");
   }
   
   @Test
   public void function5() {
-    this.assertTypeRef("(String, String)=>String", "(  String  ,  String)  =>  String");
+    this.assertTypeRef("(String, String)=>String");
   }
   
   @Test
   public void parameters1() {
-    this.assertTypeRef("Collection<String>", "Collection  <  String  >");
+    this.assertTypeRef("Collection<String>");
   }
   
   @Test
   public void parameters2() {
-    this.assertTypeRef("Map<String, String>", "Map  <  String  , String  >");
+    this.assertTypeRef("Map<String, String>");
   }
   
   @Test
   public void parametersNested() {
-    this.assertTypeRef("Map<Collection<String>, Collection<String>>", 
-      "Map  <  Collection  <  String  >  , Collection  <  String  >  >");
+    this.assertTypeRef("Map<Collection<String>, Collection<String>>");
   }
   
   @Test
   public void parametersUpperBound() {
-    this.assertTypeRef("Collection<? extends String>", "Collection  <  ?  extends  String  >");
+    this.assertTypeRef("Collection<? extends String>");
   }
   
   @Test
   public void parametersLowerBound() {
-    this.assertTypeRef("Collection<? super String>", "Collection  <  ?  super  String  >");
+    this.assertTypeRef("Collection<? super String>");
   }
 }

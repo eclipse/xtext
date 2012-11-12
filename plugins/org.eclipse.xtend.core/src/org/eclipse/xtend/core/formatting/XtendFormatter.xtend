@@ -60,6 +60,7 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
+import org.eclipse.xtext.common.types.JvmTypeParameter
 
 @SuppressWarnings("restriction")
 public class XtendFormatter {
@@ -169,6 +170,14 @@ public class XtendFormatter {
 		formatAnnotations(clazz, format, newLineAfterClassAnnotations)
 		format += clazz.nodeForKeyword("public").append[oneSpace]
 		format += clazz.nodeForKeyword("abstract").append[oneSpace]
+		if(!clazz.typeParameters.empty) {
+			format += clazz.nodeForKeyword("<").surround[noSpace]
+			for(arg:clazz.typeParameters) {
+				arg.format(format)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += clazz.nodeForKeyword(">").prepend[noSpace]
+		}
 		format += clazz.nodeForKeyword("class").append[oneSpace]
 		format += clazz.nodeForKeyword("extends").surround[oneSpace]
 		clazz.^extends.format(format)
@@ -207,11 +216,13 @@ public class XtendFormatter {
 	def protected dispatch void format(XtendConstructor func, FormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterConstructorAnnotations)
 		format += func.nodeForKeyword("new").append[noSpace]
-		if (!func.typeParameters.empty) {
+		if(!func.typeParameters.empty) {
 			format += func.nodeForKeyword("<").append[noSpace]
-			for (arg : func.typeParameters)
+			for(arg:func.typeParameters) {
+				arg.format(format)
 				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
-			format += func.nodeForKeyword(">").surround[noSpace]
+			}
+			format += func.nodeForKeyword(">").surround([noSpace])
 		}
 		val open = func.nodeForKeyword("(")
 		val close = func.nodeForKeyword(")")
@@ -270,10 +281,18 @@ public class XtendFormatter {
 	
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterMethodAnnotations)
+		format += func.nodeForKeyword("def").append[oneSpace]
+		if(!func.typeParameters.empty) {
+			format += func.nodeForKeyword("<").append[noSpace]
+			for(arg:func.typeParameters) {
+				arg.format(format)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += func.nodeForKeyword(">").surround([noSpace], [oneSpace])
+		}
 		val nameNode = func.nodeForFeature(XTEND_FUNCTION__NAME)
 		val open = nameNode.immediatelyFollowingKeyword("(")
 		val close = func.nodeForKeyword(")")
-		format += func.nodeForKeyword("def").append[oneSpace]
 		format += func.nodeForFeature(XTEND_FUNCTION__RETURN_TYPE).append[oneSpace]
 		format += open.prepend[noSpace]
 		format += close.append(bracesInNewLine)
@@ -317,6 +336,13 @@ public class XtendFormatter {
 		document += func.nodeForKeyword(")").surround([if(!func.paramTypes.empty) noSpace],[noSpace])
 		document += func.nodeForKeyword("=>").append[noSpace]
 		func.returnType.format(document)
+	}
+	
+	def protected dispatch void format(JvmTypeParameter ref, FormattableDocument document) {
+		for(c:ref.constraints) {
+			document += c.nodeForEObject.prepend[oneSpace]
+			c.format(document) 
+		}
 	}
 	
 	def protected dispatch void format(JvmParameterizedTypeReference ref, FormattableDocument document) {
