@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -413,6 +414,7 @@ public class OnTheFlyJavaCompiler {
 				Tuples.pair((Type) paramType2, "p2"));
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getClasspathArgs() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("-classpath ");
@@ -422,11 +424,13 @@ public class OnTheFlyJavaCompiler {
 		// no classpath
 		if (classpath.isEmpty())
 			return "";
+		sb.append('"');
 		for (int i = 0; i < classpath.size(); i++) {
-			sb.append(classpath.get(i));
+			sb.append(URLDecoder.decode(classpath.get(i)));
 			if (i + 1 < classpath.size())
 				sb.append(File.pathSeparator);
 		}
+		sb.append('"');
 		return sb.toString();
 	}
 
