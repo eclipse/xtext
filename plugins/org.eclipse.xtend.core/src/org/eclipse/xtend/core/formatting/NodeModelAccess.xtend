@@ -12,6 +12,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 
 class NodeModelAccess {
+	
 	def INode nodeForEObject(EObject obj) {
 		NodeModelUtils::findActualNodeFor(obj)
 	}
@@ -50,7 +51,10 @@ class NodeModelAccess {
 	def HiddenLeafs getHiddenLeafsBefore(INode node) {
 		val start = node.findNextLeaf[!hidden]
 		val nodes = start.findPreviousHiddenLeafs
-		newHiddenLeafs(if(nodes.empty) start.offset else nodes.head.offset, nodes)
+		if(start != null)
+			newHiddenLeafs(if(nodes.empty) start.offset else nodes.head.offset, nodes)
+		else 
+			new HiddenLeafs(node?.offset)
 	}
 	
 	def whitespaceBefore(INode node) {
@@ -62,7 +66,10 @@ class NodeModelAccess {
 	
 	def HiddenLeafs getHiddenLeafsAfter(INode node) {
 		val start = node.findPreviousLeaf[!hidden]
-		newHiddenLeafs(start.offset + start.length, start.findNextHiddenLeafs)
+		if(start != null)
+			newHiddenLeafs(start.offset + start.length, start.findNextHiddenLeafs)
+		else 
+			new HiddenLeafs(node?.offset)
 	}
 	
 	def protected newHiddenLeafs(int offset, List<ILeafNode> nodes) {
@@ -136,11 +143,13 @@ class NodeModelAccess {
 			current = (current as ICompositeNode).lastChild
 		if(current instanceof ILeafNode && matches.apply(current as ILeafNode))
 			return current as ILeafNode
-		val ni = new NodeIterator(current)
-		while(ni.hasPrevious) {
-			val previous = ni.previous
-			if(previous instanceof ILeafNode && matches.apply(previous as ILeafNode))
-				return previous as ILeafNode
+		if(current != null) {
+			val ni = new NodeIterator(current)
+			while(ni.hasPrevious) {
+				val previous = ni.previous
+				if(previous instanceof ILeafNode && matches.apply(previous as ILeafNode))
+					return previous as ILeafNode
+			}
 		}
 	}
 	
@@ -161,15 +170,17 @@ class NodeModelAccess {
 		while(current instanceof ICompositeNode)
 			current = (current as ICompositeNode).lastChild
 		val result = <ILeafNode>newArrayList
-		val ni = new NodeIterator(current)
-		while(ni.hasPrevious) {
-			val previous = ni.previous
-			if(previous != current && previous instanceof ILeafNode) {
-				if((previous as ILeafNode).hidden)
-					result += previous as ILeafNode
-				else //if(!result.empty)
-					return result.reverse
-			}		
+		if(current != null) {
+			val ni = new NodeIterator(current)
+			while(ni.hasPrevious) {
+				val previous = ni.previous
+				if(previous != current && previous instanceof ILeafNode) {
+					if((previous as ILeafNode).hidden)
+						result += previous as ILeafNode
+					else //if(!result.empty)
+						return result.reverse
+				}		
+			}
 		}
 		result.reverse
 	}
