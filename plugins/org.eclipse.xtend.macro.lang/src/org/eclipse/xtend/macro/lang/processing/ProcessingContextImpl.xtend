@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.macro.lang.processing
 
-import java.util.List
 import java.util.Map
 import java.util.Stack
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtend.macro.ProcessingContext
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
@@ -43,7 +40,6 @@ class ProcessingContextImpl implements ProcessingContext {
 	
 	@Property JvmTypesBuilder typesBuilder
 	@Property XtendFile source
-	@Property List<XtendAnnotationTarget> elements
 	
 	private Stack<JvmIdentifiableElement> currentContainer = new Stack
 

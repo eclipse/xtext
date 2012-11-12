@@ -192,7 +192,6 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	
 	def private void invokeProcessors(XtendFile xtendFile, Map<MacroAnnotation, List<XtendAnnotationTarget>> annotatedElements, CancelIndicator cancelIndicator) {
 		for (macroAnnotation : annotatedElements.keySet) {
-			val ctx = new DefaultEvaluationContext
 			val elements = macroAnnotation.getElements(annotatedElements)
 			
 			val Iterable<?> each = if (macroAnnotation.processor.each) {
@@ -203,10 +202,10 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 			
 			for (element : each) {
 				val processingCtx = processingContextProvider.get
-				processingCtx.elements = elements
 				processingCtx.source = xtendFile
 				processingCtx.typesBuilder = jvmTypesBuilder
 				
+				val ctx = new DefaultEvaluationContext
 				ctx.newValue(QualifiedName::create('this'), processingCtx)
 				val varName = macroAnnotation.processor.variableName ?: 'it'
 				ctx.newValue(QualifiedName::create(varName), element)

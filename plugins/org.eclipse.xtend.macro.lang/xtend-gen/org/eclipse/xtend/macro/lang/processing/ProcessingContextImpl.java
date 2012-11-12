@@ -9,7 +9,6 @@ package org.eclipse.xtend.macro.lang.processing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -18,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.macro.ProcessingContext;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -76,16 +74,6 @@ public class ProcessingContextImpl implements ProcessingContext {
   
   public void setSource(final XtendFile source) {
     this._source = source;
-  }
-  
-  private List<XtendAnnotationTarget> _elements;
-  
-  public List<XtendAnnotationTarget> getElements() {
-    return this._elements;
-  }
-  
-  public void setElements(final List<XtendAnnotationTarget> elements) {
-    this._elements = elements;
   }
   
   private Stack<JvmIdentifiableElement> currentContainer = new Function0<Stack<JvmIdentifiableElement>>() {

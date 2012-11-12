@@ -97,7 +97,7 @@ public class ValidationTest {
       _builder_1.append("process {");
       _builder_1.newLine();
       _builder_1.append("\t\t");
-      _builder_1.append("throw new NullPointerException(\"name : \"+elements.head.name)");
+      _builder_1.append("throw new NullPointerException(\"name : \"+ it.head.name)");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("}");
@@ -209,10 +209,10 @@ public class ValidationTest {
       _builder_1.append("@MyAnnotation for class {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("process {");
+      _builder_1.append("process each {");
       _builder_1.newLine();
       _builder_1.append("\t\t");
-      _builder_1.append("error(elements.head, \'Bad name \'+elements.head.name)");
+      _builder_1.append("error( it , \'Bad name \'+ name)");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("}");

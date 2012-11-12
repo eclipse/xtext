@@ -411,8 +411,6 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     Set<MacroAnnotation> _keySet = annotatedElements.keySet();
     for (final MacroAnnotation macroAnnotation : _keySet) {
       {
-        DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
-        final DefaultEvaluationContext ctx = _defaultEvaluationContext;
         final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
         List<? extends Object> _xifexpression = null;
         Processor _processor = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
@@ -427,9 +425,10 @@ public class AnnotationProcessor implements IJvmModelInferrer {
         for (final Object element : each) {
           {
             final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
-            processingCtx.setElements(elements);
             processingCtx.setSource(xtendFile);
             processingCtx.setTypesBuilder(this.jvmTypesBuilder);
+            DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
+            final DefaultEvaluationContext ctx = _defaultEvaluationContext;
             QualifiedName _create = QualifiedName.create("this");
             ctx.newValue(_create, processingCtx);
             Processor _processor_1 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);

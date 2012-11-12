@@ -33,7 +33,7 @@ class ProcessingTest {
 			'''.xtend,
 			'''
 				@AsInterface for class {
-					process {
+					process elements {
 						for (e : elements) {
 							with(e.name) [
 								interface = true
@@ -66,12 +66,10 @@ class ProcessingTest {
 					
 					static String value = 'foo'
 					
-					process {
-						for (e : elements) {
-							with(e.name) [
-								field(value(e), <String>type)
-							]
-						}
+					process each e {
+						with(e.name) [
+							field(value(e), <String>type)
+						]
 					}
 				}
 			'''.macro
@@ -114,28 +112,26 @@ class ProcessingTest {
 				  	]
 				  }
 				
-				  process {
-				  	elements.forEach [
-						with(source.^package + "." + name + "InterfaceAsync") [ asyncInterface |
-						  for (m : members.filter(typeof(XtendFunction))) {
-						    method (m.name, type(Void::TYPE)) [
-						      m.parameters.forEach [ param(name, parameterType) ]
-						      param('result', type( typeof(Future), m.returnType))
-						    ]
-						  }
+				  process each {
+					with(source.^package + "." + name + "InterfaceAsync") [ asyncInterface |
+					  for (m : members.filter(typeof(XtendFunction))) {
+					    method (m.name, type(Void::TYPE)) [
+					      m.parameters.forEach [ param(name, parameterType) ]
+					      param('result', type( typeof(Future), m.returnType))
+					    ]
+					  }
+					]
+					
+					with(source.^package + "." + name + "Interface") [ interface |
+						for (m : members.filter(typeof(XtendFunction))) {
+							method (m.name, m.returnType) [
+						    	m.parameters.forEach [ param(name, parameterType) ]
+						  	]
+						}
+						with(source.^package + "." + name) [ mainType |
+							mainType.superTypes += type(interface)
 						]
-						
-						with(source.^package + "." + name + "Interface") [ interface |
-							for (m : members.filter(typeof(XtendFunction))) {
-								method (m.name, m.returnType) [
-							    	m.parameters.forEach [ param(name, parameterType) ]
-							  	]
-							}
-							with(source.^package + "." + name) [ mainType |
-								mainType.superTypes += type(interface)
-							]
-						]
-				  	]
+					]
 				  }
 				}
 			'''.macro
@@ -187,7 +183,7 @@ class ProcessingTest {
 				  	]
 				  }
 				
-				  process {
+				  process elements {
 				  	elements.forEach [ e |
 						with(e.qualifiedName) [
 						  superTypes += type(e.interfaceName)
@@ -229,12 +225,10 @@ class ProcessingTest {
 				  	]
 				  }
 				
-				  process {
-				  	elements.forEach [ e |
-						with(e.qualifiedName) [
-						  superTypes += type(e.interfaceName)
-						]
-				  	]
+				  process each e {
+					with(e.qualifiedName) [
+					  superTypes += type(e.interfaceName)
+					]
 				  }
 				}
 			''',
@@ -283,12 +277,10 @@ class ProcessingTest {
 				  static Class<?> specialClass
 				  static String value = 'foo'
 				
-				  process {
-				  	elements.forEach [ e |
-						with('foo.MyClass') [
-						    field(value(e), type(specialClass(e)))
-						]
-				  	]
+				  process each e {
+					with('foo.MyClass') [
+					    field(value(e), type(specialClass(e)))
+					]
 				  }
 				}
 			'''
@@ -318,12 +310,10 @@ class ProcessingTest {
 				  static Class<?> specialClass = typeof(Boolean)
 				  static String value = 'foo'
 				
-				  process {
-				  	elements.forEach [ e |
-						with('foo.MyClass') [
-						    field(value(e), type(specialClass(e)))
-						]
-				  	]
+				  process each e {
+					with('foo.MyClass') [
+					    field(value(e), type(specialClass(e)))
+					]
 				  }
 				}
 			'''

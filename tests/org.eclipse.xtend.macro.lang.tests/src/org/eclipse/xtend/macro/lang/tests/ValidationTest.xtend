@@ -40,7 +40,7 @@ class ValidationTest {
 		'''
 			@MyAnnotation for class {
 				process {
-					throw new NullPointerException("name : "+elements.head.name)
+					throw new NullPointerException("name : "+ it.head.name)
 				}
 			}
 		'''.macro)
@@ -76,8 +76,8 @@ class ValidationTest {
 		'''.xtend, 
 		'''
 			@MyAnnotation for class {
-				process {
-					error(elements.head, 'Bad name '+elements.head.name)
+				process each {
+					error( it , 'Bad name '+ name)
 				}
 			}
 		'''.macro)
