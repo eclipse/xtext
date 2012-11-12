@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -77,20 +79,49 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
 
 		issue.setCode(getIssueCode(diagnostic));
-		
-		if (diagnostic instanceof AbstractValidationDiagnostic) {
-			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
-			issue.setType(diagnosticImpl.getCheckType());
-			issue.setData(diagnosticImpl.getIssueData());
-		} else {
-			// default to FAST
-			issue.setType(CheckType.FAST);
-		}
+		issue.setType(getIssueType(diagnostic));
+		issue.setData(getIssueData(diagnostic));
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		issue.setMessage(diagnostic.getMessage());
 		//		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		acceptor.accept(issue);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected CheckType getIssueType(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getCheckType();
+		} else {
+			// default to FAST
+			return CheckType.FAST;
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String[] getIssueData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		if (diagnostic instanceof AbstractValidationDiagnostic) {
+			AbstractValidationDiagnostic diagnosticImpl = (AbstractValidationDiagnostic) diagnostic;
+			return diagnosticImpl.getIssueData();
+		} else {
+			// replace any EObjects by their URIs
+			EObject causer = getCauser(diagnostic);
+			List<String> issueData = newArrayList();
+			for (Object object : diagnostic.getData()) {
+				if (object != causer && object instanceof EObject) {
+					EObject eObject = (EObject)object;
+					issueData.add(EcoreUtil.getURI(eObject).toString());
+				} else if (object instanceof String) {
+					issueData.add( (String) object);
+				}
+		    }
+			return issueData.toArray(new String[issueData.size()]);
+		}
 	}
 	
 	/**
