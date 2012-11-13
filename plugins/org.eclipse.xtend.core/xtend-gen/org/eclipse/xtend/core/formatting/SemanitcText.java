@@ -12,8 +12,8 @@ public class SemanitcText extends Chunk {
     return _string;
   }
   
-  public SemanitcText(final int offset, final CharSequence text) {
-    super(offset, text);
+  public SemanitcText(final CharSequence text) {
+    super(text);
   }
   
   @Override

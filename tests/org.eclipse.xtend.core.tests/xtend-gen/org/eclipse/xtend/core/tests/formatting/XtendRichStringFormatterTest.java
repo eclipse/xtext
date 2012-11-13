@@ -100,7 +100,7 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
-  public void testIndentation5() {
+  public void testIf1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = ```");
     _builder.newLine();
@@ -108,7 +108,7 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     _builder.append("foo");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<<IF true>>");
+    _builder.append("<<IF 1 == 1>>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("bar");
@@ -123,7 +123,7 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("foo");
     _builder_1.newLine();
-    _builder_1.append("<<IF true>>");
+    _builder_1.append("<<IF 1 == 1>>");
     _builder_1.newLine();
     _builder_1.append("bar");
     _builder_1.newLine();
@@ -132,5 +132,297 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     _builder_1.append("```");
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIf2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<<IF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t  \t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("baz");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = ```");
+    _builder_1.newLine();
+    _builder_1.append("foo");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("<<IF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("baz");
+    _builder_1.newLine();
+    _builder_1.append("```");
+    _builder_1.newLine();
+    this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIfElse() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<IF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ELSE>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("baz");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = ```");
+    _builder_1.newLine();
+    _builder_1.append("foo");
+    _builder_1.newLine();
+    _builder_1.append("<<IF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("<<ELSE>>");
+    _builder_1.newLine();
+    _builder_1.append("baz");
+    _builder_1.newLine();
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("```");
+    _builder_1.newLine();
+    this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIfElseIfElse() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<IF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ELSEIF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("baz");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ELSE>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("buz");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = ```");
+    _builder_1.newLine();
+    _builder_1.append("foo");
+    _builder_1.newLine();
+    _builder_1.append("<<IF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("<<ELSEIF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("baz");
+    _builder_1.newLine();
+    _builder_1.append("<<ELSE>>");
+    _builder_1.newLine();
+    _builder_1.append("buz");
+    _builder_1.newLine();
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("```");
+    _builder_1.newLine();
+    this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIfElseIfElseInline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo<<IF 1 == 1>>bar<<ELSEIF 1 == 1>>baz<<ELSE>>buz<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = ```");
+    _builder_1.newLine();
+    _builder_1.append("foo<<IF 1 == 1>>bar<<ELSEIF 1 == 1>>baz<<ELSE>>buz<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("```");
+    _builder_1.newLine();
+    this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIfNested() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<IF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<<IF 1 == 1>>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("baz");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = ```");
+    _builder_1.newLine();
+    _builder_1.append("foo");
+    _builder_1.newLine();
+    _builder_1.append("<<IF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("<<IF 1 == 1>>");
+    _builder_1.newLine();
+    _builder_1.append("baz");
+    _builder_1.newLine();
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("```");
+    _builder_1.newLine();
+    this.assertFormattedRichStringExpression(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoop() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<FOR String y : newArrayList(\"a\")>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void testForLoopInline() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<FOR String y : newArrayList(\"a\")>>foo<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void testForLoopNested() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<FOR String y : newArrayList(\"a\")>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t\t  ");
+    _builder.append("<<FOR String y : newArrayList(\"a\")>>");
+    _builder.newLine();
+    _builder.append("\t\t  \t");
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t\t  ");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void testForLoopParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<FOR String y : newArrayList(\"a\") BEFORE 1 + 1 SEPARATOR 1 + 1 AFTER 1 + 1>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
   }
 }

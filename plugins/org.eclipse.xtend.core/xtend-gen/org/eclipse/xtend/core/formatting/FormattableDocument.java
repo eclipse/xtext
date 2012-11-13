@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -112,6 +113,23 @@ public class FormattableDocument {
           boolean _isWhitespace = this.isWhitespace(oldText);
           boolean _not = (!_isWhitespace);
           if (_not) {
+            final Pair<String,String> text = this.getTextAround(data);
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Can not edit non-whitespace:");
+            _builder.newLine();
+            _builder.append("------------------------------------- document snippet ---------------------------------------");
+            _builder.newLine();
+            String _key = text.getKey();
+            _builder.append(_key, "");
+            _builder.append("[[[");
+            _builder.append(oldText, "");
+            _builder.append("]]]");
+            String _value = text.getValue();
+            _builder.append(_value, "");
+            _builder.newLineIfNotEmpty();
+            _builder.append("----------------------------------------------------------------------------------------------");
+            _builder.newLine();
+            FormattableDocument.log.error(_builder);
             String _plus_1 = ("Can non format non-whitespace: " + oldText);
             IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
             throw _illegalStateException;
@@ -213,73 +231,81 @@ public class FormattableDocument {
     return _xblockexpression;
   }
   
+  protected Pair<String,String> getTextAround(final FormattingData data1) {
+    Pair<String,String> _xblockexpression = null;
+    {
+      IntegerRange _upTo = new IntegerRange(0, 5);
+      int _offset = data1.getOffset();
+      final Function2<Integer,Integer,Integer> _function = new Function2<Integer,Integer,Integer>() {
+          public Integer apply(final Integer last, final Integer i) {
+            int _xifexpression = (int) 0;
+            boolean _greaterThan = ((last).intValue() > 0);
+            if (_greaterThan) {
+              String _document = FormattableDocument.this.getDocument();
+              int _minus = ((last).intValue() - 1);
+              int _lastIndexOf = _document.lastIndexOf("\n", _minus);
+              _xifexpression = _lastIndexOf;
+            } else {
+              int _minus_1 = (-1);
+              _xifexpression = _minus_1;
+            }
+            return Integer.valueOf(_xifexpression);
+          }
+        };
+      final Integer back = IterableExtensions.<Integer, Integer>fold(_upTo, Integer.valueOf(_offset), _function);
+      IntegerRange _upTo_1 = new IntegerRange(0, 5);
+      int _offset_1 = data1.getOffset();
+      final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
+          public Integer apply(final Integer last, final Integer i) {
+            int _xifexpression = (int) 0;
+            boolean _greaterThan = ((last).intValue() > 0);
+            if (_greaterThan) {
+              String _document = FormattableDocument.this.getDocument();
+              int _plus = ((last).intValue() + 1);
+              int _indexOf = _document.indexOf("\n", _plus);
+              _xifexpression = _indexOf;
+            } else {
+              int _minus = (-1);
+              _xifexpression = _minus;
+            }
+            return Integer.valueOf(_xifexpression);
+          }
+        };
+      final Integer forward = IterableExtensions.<Integer, Integer>fold(_upTo_1, Integer.valueOf(_offset_1), _function_1);
+      Integer _xifexpression = null;
+      boolean _greaterEqualsThan = ((back).intValue() >= 0);
+      if (_greaterEqualsThan) {
+        _xifexpression = back;
+      } else {
+        _xifexpression = 0;
+      }
+      final Integer fiveLinesBackOffset = _xifexpression;
+      Integer _xifexpression_1 = null;
+      boolean _greaterEqualsThan_1 = ((forward).intValue() >= 0);
+      if (_greaterEqualsThan_1) {
+        _xifexpression_1 = forward;
+      } else {
+        String _document = this.getDocument();
+        int _length = _document.length();
+        _xifexpression_1 = _length;
+      }
+      final Integer fiveLinesForwardOffset = _xifexpression_1;
+      String _document_1 = this.getDocument();
+      int _offset_2 = data1.getOffset();
+      final String prefix = _document_1.substring((fiveLinesBackOffset).intValue(), _offset_2);
+      String _document_2 = this.getDocument();
+      int _offset_3 = data1.getOffset();
+      int _length_1 = data1.getLength();
+      int _plus = (_offset_3 + _length_1);
+      final String postfix = _document_2.substring(_plus, (fiveLinesForwardOffset).intValue());
+      Pair<String,String> _mappedTo = Pair.<String, String>of(prefix, postfix);
+      _xblockexpression = (_mappedTo);
+    }
+    return _xblockexpression;
+  }
+  
   protected void reportConflict(final FormattingData data1, final FormattingData data2) {
-    IntegerRange _upTo = new IntegerRange(0, 5);
-    int _offset = data1.getOffset();
-    final Function2<Integer,Integer,Integer> _function = new Function2<Integer,Integer,Integer>() {
-        public Integer apply(final Integer last, final Integer i) {
-          int _xifexpression = (int) 0;
-          boolean _greaterThan = ((last).intValue() > 0);
-          if (_greaterThan) {
-            String _document = FormattableDocument.this.getDocument();
-            int _minus = ((last).intValue() - 1);
-            int _lastIndexOf = _document.lastIndexOf("\n", _minus);
-            _xifexpression = _lastIndexOf;
-          } else {
-            int _minus_1 = (-1);
-            _xifexpression = _minus_1;
-          }
-          return Integer.valueOf(_xifexpression);
-        }
-      };
-    final Integer back = IterableExtensions.<Integer, Integer>fold(_upTo, Integer.valueOf(_offset), _function);
-    IntegerRange _upTo_1 = new IntegerRange(0, 5);
-    int _offset_1 = data1.getOffset();
-    final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
-        public Integer apply(final Integer last, final Integer i) {
-          int _xifexpression = (int) 0;
-          boolean _greaterThan = ((last).intValue() > 0);
-          if (_greaterThan) {
-            String _document = FormattableDocument.this.getDocument();
-            int _plus = ((last).intValue() + 1);
-            int _indexOf = _document.indexOf("\n", _plus);
-            _xifexpression = _indexOf;
-          } else {
-            int _minus = (-1);
-            _xifexpression = _minus;
-          }
-          return Integer.valueOf(_xifexpression);
-        }
-      };
-    final Integer forward = IterableExtensions.<Integer, Integer>fold(_upTo_1, Integer.valueOf(_offset_1), _function_1);
-    Integer _xifexpression = null;
-    boolean _greaterEqualsThan = ((back).intValue() >= 0);
-    if (_greaterEqualsThan) {
-      _xifexpression = back;
-    } else {
-      _xifexpression = 0;
-    }
-    final Integer fiveLinesBackOffset = _xifexpression;
-    Integer _xifexpression_1 = null;
-    boolean _greaterEqualsThan_1 = ((forward).intValue() >= 0);
-    if (_greaterEqualsThan_1) {
-      _xifexpression_1 = forward;
-    } else {
-      String _document = this.getDocument();
-      int _length = _document.length();
-      _xifexpression_1 = _length;
-    }
-    final Integer fiveLinesForwardOffset = _xifexpression_1;
-    String _document_1 = this.getDocument();
-    int _offset_2 = data1.getOffset();
-    final String prefix = _document_1.substring((fiveLinesBackOffset).intValue(), _offset_2);
-    String _document_2 = this.getDocument();
-    int _offset_3 = data1.getOffset();
-    int _length_1 = data1.getLength();
-    int _length_2 = data2.getLength();
-    int _max = Math.max(_length_1, _length_2);
-    int _plus = (_offset_3 + _max);
-    final String postfix = _document_2.substring(_plus, (fiveLinesForwardOffset).intValue());
+    final Pair<String,String> text = this.getTextAround(data1);
     Throwable _rootTrace = this.getRootTrace();
     StackTraceElement[] _stackTrace = _rootTrace.getStackTrace();
     int _size = ((List<StackTraceElement>)Conversions.doWrapArray(_stackTrace)).size();
@@ -301,9 +327,11 @@ public class FormattableDocument {
     _builder.newLine();
     _builder.append("------------------------------------- document snippet ---------------------------------------");
     _builder.newLine();
-    _builder.append(prefix, "");
+    String _key = text.getKey();
+    _builder.append(_key, "");
     _builder.append("[!!!]");
-    _builder.append(postfix, "");
+    String _value = text.getValue();
+    _builder.append(_value, "");
     _builder.newLineIfNotEmpty();
     _builder.append("----------------------------------------------------------------------------------------------");
     _builder.newLine();

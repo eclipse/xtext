@@ -14,6 +14,10 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtend.core.xtend.RichStringElseIf
+import java.util.Stack
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtend.core.xtend.RichStringForLoop
 
 /**
  * cases to distinguish:
@@ -27,46 +31,51 @@ class RichStringFormatter {
 	@Inject extension NodeModelAccess
 	@Inject extension FormatterExtensions
 	
-	def format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
+	def void format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
 		if(EcoreUtil2::getContainerOfType(richString.eContainer, typeof(RichString)) != null)
 			return;
 		val impl  = new RichStringToLineModel(_nodeModelAccess, richString)
 		richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
+		impl.finish()
 //		println()
 //		println("-------------------------")
 //		println(richString.nodeForEObject.text)
 //		println("-------------------------")
 //		println(impl.model)
 //		println("-------------------------")
-		val lines = impl.model.otherLines
-		if(!lines.empty && lines.forall[chunks.head instanceof TemplateWhitespace && chunks.head.length > 0]) {
-			val canIndent = lines.last.chunks.forall[it instanceof TemplateWhitespace]
-			for(line:lines) {
+		fmt(formatter, doc, richString)
+		val lines = impl.model.lines 
+		val canIndent = !lines.empty && lines.last.content.nullOrEmpty
+		for(line:lines) {
+			if(impl.model.rootIndentLenght > 0) {
 				val indentChange = if(canIndent && line == lines.head) 1 else if(canIndent && line == lines.last) -1 else 0
+				val nloffset = if(line.leadingSemanticNewLine) line.offset + line.newLineCharCount else line.offset
+				val i = Math::min(line.indentLength, impl.model.rootIndentLenght)
+				val nllength = if(line.leadingSemanticNewLine) i else line.newLineCharCount + i  
 				if(line.leadingSemanticNewLine) 
-					doc += new NewLineData(line.offset + line.newLineCharCount, line.chunks.head.length, indentChange, if(doc.debugConflicts) new RuntimeException, 0)
+					doc += new NewLineData(nloffset, nllength, indentChange, if(doc.debugConflicts) new RuntimeException, 0)
 				else {
-					doc += new NewLineData(line.offset, line.newLineCharCount + line.chunks.head.length, indentChange, if(doc.debugConflicts) new RuntimeException, 1)
+					doc += new NewLineData(nloffset, nllength, indentChange, if(doc.debugConflicts) new RuntimeException, 1)
+				}
+				if(!line.chunks.empty) {
+					val offset = nloffset + nllength
+					val length = line.indentLength - impl.model.rootIndentLenght
+					val text = line.chunks.map[chunk | switch chunk { SemanticWhitespace: chunk.text TemplateWhitespace: doc.getIndentation(1) }].join
+					doc += new WhitespaceData(offset, length, 0, if(doc.debugConflicts) new RuntimeException, text)
 				}
 			}
 		}
-		if(!lines.empty) 
-			for(col:(1.. (lines.fold(0, [seed, it | Math::max(seed, it.chunks.size)]))))   
-				for(line:lines) {
-					if(col < line.chunks.size && line.chunks.subList(0, col).forall[it instanceof TemplateWhitespace || it instanceof SemanitcWhitespace]) {
-						val chunk = line.chunks.get(col)
-						if(chunk instanceof TemplateWhitespace) {
-							val space = doc.getIndentation(1)
-							doc += new WhitespaceData(chunk.offset, chunk.length, 0, if(doc.debugConflicts) new RuntimeException, space)
-						}
-					}
-				}
-		for(chunk: impl.model.firstLine + lines.map[chunks].flatten) 
-			switch chunk {
-				Expression: {
-					fmt(formatter, doc, chunk.expr)
-				}
-			}
+	}
+	
+	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString expr) {
+		for(e:expr.expressions)
+			fmt(formatter, doc, e)		
+	}
+	
+	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichStringLiteral expr) {
+	}
+	
+	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, Void expr) {
 	}
 	
 	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, XExpression expr) {
@@ -78,27 +87,69 @@ class RichStringFormatter {
 		doc += expr.nodeForKeyword("IF").surround([noSpace],[oneSpace])
 		doc += expr.nodeForFeature(XtendPackage$Literals::RICH_STRING_ELSE_IF__IF).append[noSpace]
 		formatter.apply(expr.^if, doc)
+		fmt(formatter, doc, expr.then)
+		for(elseif:expr.elseIfs)
+			fmt(formatter, doc, elseif)
 		doc += expr.nodeForKeyword("ELSE").surround[noSpace]
+		fmt(formatter, doc, expr.^else)
 		doc += expr.nodeForKeyword("ENDIF").surround[noSpace]
+	}
+	
+	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichStringElseIf expr) {
+		doc += expr.nodeForKeyword("ELSEIF").surround([noSpace],[oneSpace])
+		doc += expr.nodeForFeature(XtendPackage$Literals::RICH_STRING_ELSE_IF__IF).append[noSpace]
+		formatter.apply(expr.^if, doc)
+	}
+	
+	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichStringForLoop expr) {
+		doc += expr.nodeForKeyword("FOR").surround([noSpace],[oneSpace])
+		doc += expr.nodeForKeyword(":").surround([oneSpace],[oneSpace])
+		formatter.apply(expr.declaredParam, doc)
+		formatter.apply(expr.forExpression, doc)
+		fmt(formatter, doc, expr.eachExpression)
+		doc += expr.nodeForKeyword("BEFORE").surround[oneSpace]
+		formatter.apply(expr.before, doc)
+		doc += expr.nodeForKeyword("SEPARATOR").surround[oneSpace]
+		formatter.apply(expr.separator, doc)
+		doc += expr.nodeForKeyword("AFTER").surround[oneSpace]
+		formatter.apply(expr.after, doc)
+		doc += expr.nodeForFeature(XbasePackage$Literals::XFOR_LOOP_EXPRESSION__EACH_EXPRESSION).prepend[noSpace]
+		doc += expr.nodeForKeyword("ENDFOR").surround[noSpace]
 	}
 }
 
 class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	private val RichString string
+	private val String document
 	private val NodeModelAccess nodeModelAccess
-	@Property val LineModel model = new LineModel(string)
-	int offset
+	@Property val LineModel model = new LineModel
+	int offset = - 1
+	int contentStartOffset = - 1
+	int contentStartColumn = - 1
+	private Stack<Chunk> indentationStack = new Stack
+	private boolean content = false
+	private boolean indentNextLine = false
+	private boolean outdentThisLine = false
 	
 	new(NodeModelAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess
 		this.string = string
+		this.document = nodeModelAccess.nodeForEObject(string).rootNode.text
 	}
 	
-	def protected List<Chunk> currentLine() {
-		if(model.otherLines.empty) 
-			model.firstLine
-		else 
-			model.otherLines.last.chunks
+	def finish() {
+		if(contentStartOffset > 0) {
+			val lastLinesContent = document.substring(contentStartOffset, offset)
+			if(model.lines.empty) 
+				model.leadingText = lastLinesContent
+			else 
+				model.lines.last.content = lastLinesContent
+		}
+		if(!model.lines.empty) {
+			val lastLine = model.lines.last
+			lastLine.indentLength = offset - (lastLine.offset + lastLine.newLineCharCount)
+		}
+		contentStartOffset = -1
 	}
 	
 	def protected literalPrefixLenght(INode node) {
@@ -114,76 +165,156 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 		val node = nodeModelAccess.nodeForFeature(object, XbasePackage$Literals::XSTRING_LITERAL__VALUE)
 		if(node != null) 
 			offset = node.offset + node.literalPrefixLenght
+		if(contentStartOffset < 0)
+			contentStartOffset = offset
+		content = true
 	}
 	
 	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
-		model.otherLines += new Line(offset, true, charCount)
+		acceptLineBreak(charCount, true)
 		offset = offset + charCount
 	}
 	
 	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
-		model.otherLines += new Line(offset, false, charCount)
-		offset = offset + charCount 
+		acceptLineBreak(charCount, false)
+		offset = offset + charCount
+	}
+	
+	def acceptLineBreak(int charCount, boolean semantic) {
+		if(contentStartOffset > 0) {
+			val lastLinesContent = document.substring(contentStartOffset, offset)
+			if(model.lines.empty) { 
+				model.leadingText = lastLinesContent
+				contentStartColumn = 0
+			} else {
+				val lastLine = model.lines.last
+				lastLine.content = lastLinesContent
+				val newContentStartColumn = contentStartOffset - (lastLine.offset + lastLine.newLineCharCount)
+				if(lastLine.leadingSemanticNewLine) {
+					if(newContentStartColumn > contentStartColumn) {
+						val length = newContentStartColumn - contentStartColumn
+						val text = document.substring(contentStartOffset - length, contentStartOffset)
+						indentationStack.push(new SemanticWhitespace(text, newContentStartColumn))
+					}
+				}
+				if(newContentStartColumn < contentStartColumn)
+					for(ws:indentationStack.filter(typeof(SemanticWhitespace)).toList)
+						if(ws.column > newContentStartColumn)
+							indentationStack.remove(ws)
+				if(outdentThisLine) {
+					if(!indentationStack.empty)
+						indentationStack.pop()
+					outdentThisLine = false
+				}
+				lastLine.indentLength = newContentStartColumn
+				contentStartColumn = newContentStartColumn
+				model.lines.last.chunks += indentationStack
+			}
+		}
+		if(indentNextLine) {
+			indentationStack.push(new TemplateWhitespace(""))
+			indentNextLine = false
+		}
+		contentStartOffset = -1
+		model.lines += new Line(offset, semantic, charCount)
+		content = false
+	}
+	
+	def void startContent(){
+		if(!content) {
+			contentStartOffset = offset
+			content = true
+		}
 	}
 	
 	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
-		if(text.length > 0 && (0..(text.length - 1)).fold(false, [v, i | v || !Character::isWhitespace(text.charAt(i))]))
-			currentLine += new SemanitcText(offset, text)
-		else 
-			currentLine += new SemanitcWhitespace(offset, text)
+		if(!content) {
+			if(text.length > 0 && (0..(text.length - 1)).fold(false, [v, i | v || !Character::isWhitespace(text.charAt(i))]))
+				startContent()
+		}
 		offset = offset + text.length
 	}
 	
 	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
-		currentLine += new TemplateWhitespace(offset, text)
+		if(!content) {
+			if(model.rootIndentLenght < 0) {
+				model.rootIndentLenght = text.length
+				contentStartColumn = text.length
+			}
+		}
 		offset = offset + text.length
 	}
 	
 	override acceptExpression(XExpression expression, CharSequence indentation) {
-//		val text = nodeModelAccess.nodeForEObject(expression)?.text 
-		currentLine += new Expression(offset, null, expression)		
+		startContent()		
 	}
 	
 	override void acceptIfCondition(XExpression condition) {
-		currentLine += new Expression(offset, null, (condition.eContainer() as XExpression))
+		startContent()
+		indentNextLine = true
 	}
 
 	override void acceptElseIfCondition(XExpression condition) {
-		currentLine += new Dummy(offset, null)
+		outdentThisLine = true
+		startContent()
+		indentNextLine = true
 	}
 
 	override void acceptElse() {
-		currentLine += new Dummy(offset, null)
+		outdentThisLine = true
+		startContent()
+		indentNextLine = true
 	}
 
 	override void acceptEndIf() {
-		currentLine += new Dummy(offset, null)
+		outdentThisLine = true
+		startContent()
+	}
+	
+	override void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+		startContent()
+		indentNextLine = true
+		super.acceptForLoop(parameter, expression)
+	}
+	
+	override void acceptEndFor(XExpression after, CharSequence indentation) {
+		outdentThisLine = true
+		startContent()
+		super.acceptEndFor(after, indentation)
 	}
 }
 
-@Data class LineModel {
-	RichString richString
-	List<Chunk> firstLine = newArrayList 
-	List<Line> otherLines = newArrayList
+class LineModel {
+	@Property String leadingText
+	@Property int rootIndentLenght = -1
+	@Property val List<Line> lines = newArrayList
 	
-	override toString() {
-		firstLine.join + otherLines.map["\n" + it].join 
-	}
+	override toString() '''
+		rootIndentLenght=«rootIndentLenght»
+		«leadingText»«lines.join»
+	'''
 }
 
-@Data class Line {
-	int offset
-	boolean leadingSemanticNewLine
-	int newLineCharCount
-	List<Chunk> chunks = newArrayList
+class Line {
+	@Property val int offset
+	@Property val boolean leadingSemanticNewLine
+	@Property val int newLineCharCount
+	@Property val List<Chunk> chunks = newArrayList
+	@Property String content
+	@Property int indentLength
+	
+	new (int offset, boolean leadingSemanticNewLine, int newLineCharCount) {
+		this._offset = offset
+		this._leadingSemanticNewLine = leadingSemanticNewLine
+		this._newLineCharCount = newLineCharCount
+	}
 	
 	override toString() {
-		(if(leadingSemanticNewLine) "SN" else "TN") + chunks.join
+		(if(leadingSemanticNewLine) "SN" else "") + "\n" + chunks.join + content
 	}
 }
 
 @Data abstract class Chunk {
-	int offset
 	CharSequence text
 	def int getLength() {
 		text.length
@@ -196,7 +327,8 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	}	
 }
 
-@Data class SemanitcWhitespace extends Chunk {
+@Data class SemanticWhitespace extends Chunk {
+	int column
 	override toString() {
 		"S" + text.length
 	}
@@ -205,19 +337,5 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 @Data class SemanitcText extends Chunk {
 	override toString() {
 		text.toString
-	}
-}
-
-@Data class Expression extends Chunk {
-	XExpression expr
-	
-	override toString() {
-		"<<" + text?.toString + ">>"
-	}
-}
-
-@Data class Dummy extends Chunk {
-	override toString() {
-		"<<" + text?.toString + ">>"
 	}
 }

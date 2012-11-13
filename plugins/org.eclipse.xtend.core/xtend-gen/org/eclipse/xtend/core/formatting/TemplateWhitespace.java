@@ -13,8 +13,8 @@ public class TemplateWhitespace extends Chunk {
     return _plus;
   }
   
-  public TemplateWhitespace(final int offset, final CharSequence text) {
-    super(offset, text);
+  public TemplateWhitespace(final CharSequence text) {
+    super(text);
   }
   
   @Override

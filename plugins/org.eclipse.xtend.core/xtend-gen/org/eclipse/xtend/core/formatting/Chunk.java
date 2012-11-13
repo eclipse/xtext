@@ -6,12 +6,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 @Data
 @SuppressWarnings("all")
 public abstract class Chunk {
-  private final int _offset;
-  
-  public int getOffset() {
-    return this._offset;
-  }
-  
   private final CharSequence _text;
   
   public CharSequence getText() {
@@ -24,9 +18,8 @@ public abstract class Chunk {
     return _length;
   }
   
-  public Chunk(final int offset, final CharSequence text) {
+  public Chunk(final CharSequence text) {
     super();
-    this._offset = offset;
     this._text = text;
   }
   
@@ -34,7 +27,6 @@ public abstract class Chunk {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _offset;
     result = prime * result + ((_text== null) ? 0 : _text.hashCode());
     return result;
   }
@@ -48,8 +40,6 @@ public abstract class Chunk {
     if (getClass() != obj.getClass())
       return false;
     Chunk other = (Chunk) obj;
-    if (other._offset != _offset)
-      return false;
     if (_text == null) {
       if (other._text != null)
         return false;

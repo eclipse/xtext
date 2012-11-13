@@ -1,13 +1,12 @@
 package org.eclipse.xtend.core.formatting;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.Chunk;
-import org.eclipse.xtend.core.formatting.Expression;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
@@ -17,25 +16,28 @@ import org.eclipse.xtend.core.formatting.LineModel;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RichStringToLineModel;
-import org.eclipse.xtend.core.formatting.SemanitcWhitespace;
+import org.eclipse.xtend.core.formatting.SemanticWhitespace;
 import org.eclipse.xtend.core.formatting.TemplateWhitespace;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.RichStringElseIf;
+import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
+import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * cases to distinguish:
@@ -66,190 +68,162 @@ public class RichStringFormatter {
     final RichStringToLineModel impl = _richStringToLineModel;
     DefaultIndentationHandler _defaultIndentationHandler = new DefaultIndentationHandler();
     this.richStringProcessor.process(richString, impl, _defaultIndentationHandler);
+    impl.finish();
+    this.fmt(formatter, doc, richString);
     LineModel _model = impl.getModel();
-    final List<Line> lines = _model.getOtherLines();
+    final List<Line> lines = _model.getLines();
     boolean _and = false;
     boolean _isEmpty = lines.isEmpty();
     boolean _not = (!_isEmpty);
     if (!_not) {
       _and = false;
     } else {
-      final Function1<Line,Boolean> _function = new Function1<Line,Boolean>() {
-          public Boolean apply(final Line it) {
-            boolean _and = false;
-            List<Chunk> _chunks = it.getChunks();
-            Chunk _head = IterableExtensions.<Chunk>head(_chunks);
-            if (!(_head instanceof TemplateWhitespace)) {
-              _and = false;
-            } else {
-              List<Chunk> _chunks_1 = it.getChunks();
-              Chunk _head_1 = IterableExtensions.<Chunk>head(_chunks_1);
-              int _length = _head_1.getLength();
-              boolean _greaterThan = (_length > 0);
-              _and = ((_head instanceof TemplateWhitespace) && _greaterThan);
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-      boolean _forall = IterableExtensions.<Line>forall(lines, _function);
-      _and = (_not && _forall);
-    }
-    if (_and) {
       Line _last = IterableExtensions.<Line>last(lines);
-      List<Chunk> _chunks = _last.getChunks();
-      final Function1<Chunk,Boolean> _function_1 = new Function1<Chunk,Boolean>() {
-          public Boolean apply(final Chunk it) {
-            return Boolean.valueOf((it instanceof TemplateWhitespace));
-          }
-        };
-      final boolean canIndent = IterableExtensions.<Chunk>forall(_chunks, _function_1);
-      for (final Line line : lines) {
-        {
-          int _xifexpression = (int) 0;
-          boolean _and_1 = false;
+      String _content = _last.getContent();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_content);
+      _and = (_not && _isNullOrEmpty);
+    }
+    final boolean canIndent = _and;
+    for (final Line line : lines) {
+      LineModel _model_1 = impl.getModel();
+      int _rootIndentLenght = _model_1.getRootIndentLenght();
+      boolean _greaterThan = (_rootIndentLenght > 0);
+      if (_greaterThan) {
+        int _xifexpression = (int) 0;
+        boolean _and_1 = false;
+        if (!canIndent) {
+          _and_1 = false;
+        } else {
+          Line _head = IterableExtensions.<Line>head(lines);
+          boolean _equals = Objects.equal(line, _head);
+          _and_1 = (canIndent && _equals);
+        }
+        if (_and_1) {
+          _xifexpression = 1;
+        } else {
+          int _xifexpression_1 = (int) 0;
+          boolean _and_2 = false;
           if (!canIndent) {
-            _and_1 = false;
+            _and_2 = false;
           } else {
-            Line _head = IterableExtensions.<Line>head(lines);
-            boolean _equals = Objects.equal(line, _head);
-            _and_1 = (canIndent && _equals);
+            Line _last_1 = IterableExtensions.<Line>last(lines);
+            boolean _equals_1 = Objects.equal(line, _last_1);
+            _and_2 = (canIndent && _equals_1);
           }
-          if (_and_1) {
-            _xifexpression = 1;
+          if (_and_2) {
+            int _minus = (-1);
+            _xifexpression_1 = _minus;
           } else {
-            int _xifexpression_1 = (int) 0;
-            boolean _and_2 = false;
-            if (!canIndent) {
-              _and_2 = false;
-            } else {
-              Line _last_1 = IterableExtensions.<Line>last(lines);
-              boolean _equals_1 = Objects.equal(line, _last_1);
-              _and_2 = (canIndent && _equals_1);
-            }
-            if (_and_2) {
-              int _minus = (-1);
-              _xifexpression_1 = _minus;
-            } else {
-              _xifexpression_1 = 0;
-            }
-            _xifexpression = _xifexpression_1;
+            _xifexpression_1 = 0;
           }
-          final int indentChange = _xifexpression;
-          boolean _isLeadingSemanticNewLine = line.isLeadingSemanticNewLine();
-          if (_isLeadingSemanticNewLine) {
-            int _offset = line.getOffset();
-            int _newLineCharCount = line.getNewLineCharCount();
-            int _plus = (_offset + _newLineCharCount);
-            List<Chunk> _chunks_1 = line.getChunks();
-            Chunk _head_1 = IterableExtensions.<Chunk>head(_chunks_1);
-            int _length = _head_1.getLength();
-            RuntimeException _xifexpression_2 = null;
-            boolean _isDebugConflicts = doc.isDebugConflicts();
-            if (_isDebugConflicts) {
-              RuntimeException _runtimeException = new RuntimeException();
-              _xifexpression_2 = _runtimeException;
-            }
-            NewLineData _newLineData = new NewLineData(_plus, _length, indentChange, _xifexpression_2, 0);
-            doc.operator_add(_newLineData);
-          } else {
-            int _offset_1 = line.getOffset();
-            int _newLineCharCount_1 = line.getNewLineCharCount();
-            List<Chunk> _chunks_2 = line.getChunks();
-            Chunk _head_2 = IterableExtensions.<Chunk>head(_chunks_2);
-            int _length_1 = _head_2.getLength();
-            int _plus_1 = (_newLineCharCount_1 + _length_1);
-            RuntimeException _xifexpression_3 = null;
-            boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-            if (_isDebugConflicts_1) {
-              RuntimeException _runtimeException_1 = new RuntimeException();
-              _xifexpression_3 = _runtimeException_1;
-            }
-            NewLineData _newLineData_1 = new NewLineData(_offset_1, _plus_1, indentChange, _xifexpression_3, 1);
-            doc.operator_add(_newLineData_1);
-          }
+          _xifexpression = _xifexpression_1;
         }
-      }
-    }
-    boolean _isEmpty_1 = lines.isEmpty();
-    boolean _not_1 = (!_isEmpty_1);
-    if (_not_1) {
-      final Function2<Integer,Line,Integer> _function_2 = new Function2<Integer,Line,Integer>() {
-          public Integer apply(final Integer seed, final Line it) {
-            List<Chunk> _chunks = it.getChunks();
-            int _size = _chunks.size();
-            int _max = Math.max((seed).intValue(), _size);
-            return Integer.valueOf(_max);
+        final int indentChange = _xifexpression;
+        int _xifexpression_2 = (int) 0;
+        boolean _isLeadingSemanticNewLine = line.isLeadingSemanticNewLine();
+        if (_isLeadingSemanticNewLine) {
+          int _offset = line.getOffset();
+          int _newLineCharCount = line.getNewLineCharCount();
+          int _plus = (_offset + _newLineCharCount);
+          _xifexpression_2 = _plus;
+        } else {
+          int _offset_1 = line.getOffset();
+          _xifexpression_2 = _offset_1;
+        }
+        final int nloffset = _xifexpression_2;
+        int _indentLength = line.getIndentLength();
+        LineModel _model_2 = impl.getModel();
+        int _rootIndentLenght_1 = _model_2.getRootIndentLenght();
+        final int i = Math.min(_indentLength, _rootIndentLenght_1);
+        int _xifexpression_3 = (int) 0;
+        boolean _isLeadingSemanticNewLine_1 = line.isLeadingSemanticNewLine();
+        if (_isLeadingSemanticNewLine_1) {
+          _xifexpression_3 = i;
+        } else {
+          int _newLineCharCount_1 = line.getNewLineCharCount();
+          int _plus_1 = (_newLineCharCount_1 + i);
+          _xifexpression_3 = _plus_1;
+        }
+        final int nllength = _xifexpression_3;
+        boolean _isLeadingSemanticNewLine_2 = line.isLeadingSemanticNewLine();
+        if (_isLeadingSemanticNewLine_2) {
+          RuntimeException _xifexpression_4 = null;
+          boolean _isDebugConflicts = doc.isDebugConflicts();
+          if (_isDebugConflicts) {
+            RuntimeException _runtimeException = new RuntimeException();
+            _xifexpression_4 = _runtimeException;
           }
-        };
-      Integer _fold = IterableExtensions.<Line, Integer>fold(lines, Integer.valueOf(0), _function_2);
-      IntegerRange _upTo = new IntegerRange(1, (_fold).intValue());
-      for (final Integer col : _upTo) {
-        for (final Line line_1 : lines) {
-          boolean _and_1 = false;
-          List<Chunk> _chunks_1 = line_1.getChunks();
-          int _size = _chunks_1.size();
-          boolean _lessThan = ((col).intValue() < _size);
-          if (!_lessThan) {
-            _and_1 = false;
-          } else {
-            List<Chunk> _chunks_2 = line_1.getChunks();
-            List<Chunk> _subList = _chunks_2.subList(0, (col).intValue());
-            final Function1<Chunk,Boolean> _function_3 = new Function1<Chunk,Boolean>() {
-                public Boolean apply(final Chunk it) {
-                  boolean _or = false;
-                  if ((it instanceof TemplateWhitespace)) {
-                    _or = true;
-                  } else {
-                    _or = ((it instanceof TemplateWhitespace) || (it instanceof SemanitcWhitespace));
+          NewLineData _newLineData = new NewLineData(nloffset, nllength, indentChange, _xifexpression_4, 0);
+          doc.operator_add(_newLineData);
+        } else {
+          RuntimeException _xifexpression_5 = null;
+          boolean _isDebugConflicts_1 = doc.isDebugConflicts();
+          if (_isDebugConflicts_1) {
+            RuntimeException _runtimeException_1 = new RuntimeException();
+            _xifexpression_5 = _runtimeException_1;
+          }
+          NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, indentChange, _xifexpression_5, 1);
+          doc.operator_add(_newLineData_1);
+        }
+        List<Chunk> _chunks = line.getChunks();
+        boolean _isEmpty_1 = _chunks.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          final int offset = (nloffset + nllength);
+          int _indentLength_1 = line.getIndentLength();
+          LineModel _model_3 = impl.getModel();
+          int _rootIndentLenght_2 = _model_3.getRootIndentLenght();
+          final int length = (_indentLength_1 - _rootIndentLenght_2);
+          List<Chunk> _chunks_1 = line.getChunks();
+          final Function1<Chunk,CharSequence> _function = new Function1<Chunk,CharSequence>() {
+              public CharSequence apply(final Chunk chunk) {
+                CharSequence _switchResult = null;
+                boolean _matched = false;
+                if (!_matched) {
+                  if (chunk instanceof SemanticWhitespace) {
+                    final SemanticWhitespace _semanticWhitespace = (SemanticWhitespace)chunk;
+                    _matched=true;
+                    CharSequence _text = _semanticWhitespace.getText();
+                    _switchResult = _text;
                   }
-                  return Boolean.valueOf(_or);
                 }
-              };
-            boolean _forall_1 = IterableExtensions.<Chunk>forall(_subList, _function_3);
-            _and_1 = (_lessThan && _forall_1);
-          }
-          if (_and_1) {
-            List<Chunk> _chunks_3 = line_1.getChunks();
-            final Chunk chunk = _chunks_3.get((col).intValue());
-            if ((chunk instanceof TemplateWhitespace)) {
-              final String space = doc.getIndentation(1);
-              int _offset = chunk.getOffset();
-              int _length = chunk.getLength();
-              RuntimeException _xifexpression = null;
-              boolean _isDebugConflicts = doc.isDebugConflicts();
-              if (_isDebugConflicts) {
-                RuntimeException _runtimeException = new RuntimeException();
-                _xifexpression = _runtimeException;
+                if (!_matched) {
+                  if (chunk instanceof TemplateWhitespace) {
+                    final TemplateWhitespace _templateWhitespace = (TemplateWhitespace)chunk;
+                    _matched=true;
+                    String _indentation = doc.getIndentation(1);
+                    _switchResult = _indentation;
+                  }
+                }
+                return _switchResult;
               }
-              WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, 0, _xifexpression, space);
-              doc.operator_add(_whitespaceData);
-            }
+            };
+          List<CharSequence> _map = ListExtensions.<Chunk, CharSequence>map(_chunks_1, _function);
+          final String text = IterableExtensions.join(_map);
+          RuntimeException _xifexpression_6 = null;
+          boolean _isDebugConflicts_2 = doc.isDebugConflicts();
+          if (_isDebugConflicts_2) {
+            RuntimeException _runtimeException_2 = new RuntimeException();
+            _xifexpression_6 = _runtimeException_2;
           }
+          WhitespaceData _whitespaceData = new WhitespaceData(offset, length, 0, _xifexpression_6, text);
+          doc.operator_add(_whitespaceData);
         }
       }
     }
-    LineModel _model_1 = impl.getModel();
-    List<Chunk> _firstLine = _model_1.getFirstLine();
-    final Function1<Line,List<Chunk>> _function_4 = new Function1<Line,List<Chunk>>() {
-        public List<Chunk> apply(final Line it) {
-          List<Chunk> _chunks = it.getChunks();
-          return _chunks;
-        }
-      };
-    List<List<Chunk>> _map = ListExtensions.<Line, List<Chunk>>map(lines, _function_4);
-    Iterable<Chunk> _flatten = Iterables.<Chunk>concat(_map);
-    Iterable<Chunk> _plus = Iterables.<Chunk>concat(_firstLine, _flatten);
-    for (final Chunk chunk_1 : _plus) {
-      boolean _matched = false;
-      if (!_matched) {
-        if (chunk_1 instanceof Expression) {
-          final Expression _expression = (Expression)chunk_1;
-          _matched=true;
-          XExpression _expr = _expression.getExpr();
-          this.fmt(formatter, doc, _expr);
-        }
-      }
+  }
+  
+  protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString expr) {
+    EList<XExpression> _expressions = expr.getExpressions();
+    for (final XExpression e : _expressions) {
+      this.fmt(formatter, doc, e);
     }
+  }
+  
+  protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringLiteral expr) {
+  }
+  
+  protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final Void expr) {
   }
   
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final XExpression expr) {
@@ -288,6 +262,12 @@ public class RichStringFormatter {
     doc.operator_add(_append);
     XExpression _if = expr.getIf();
     formatter.apply(_if, doc);
+    XExpression _then = expr.getThen();
+    this.fmt(formatter, doc, _then);
+    EList<RichStringElseIf> _elseIfs = expr.getElseIfs();
+    for (final RichStringElseIf elseif : _elseIfs) {
+      this.fmt(formatter, doc, elseif);
+    }
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "ELSE");
     final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -296,6 +276,8 @@ public class RichStringFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_1, _function_3);
     doc.operator_add(_surround_1);
+    XExpression _else = expr.getElse();
+    this.fmt(formatter, doc, _else);
     ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "ENDIF");
     final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -306,12 +288,134 @@ public class RichStringFormatter {
     doc.operator_add(_surround_2);
   }
   
-  protected void fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final XExpression expr) {
-    if (expr instanceof RichStringIf) {
+  protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringElseIf expr) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "ELSEIF");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword, _function, _function_1);
+    doc.operator_add(_surround);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
+    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForFeature, _function_2);
+    doc.operator_add(_append);
+    XExpression _if = expr.getIf();
+    formatter.apply(_if, doc);
+  }
+  
+  protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichStringForLoop expr) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "FOR");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword, _function, _function_1);
+    doc.operator_add(_surround);
+    ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, ":");
+    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_1, _function_2, _function_3);
+    doc.operator_add(_surround_1);
+    JvmFormalParameter _declaredParam = expr.getDeclaredParam();
+    formatter.apply(_declaredParam, doc);
+    XExpression _forExpression = expr.getForExpression();
+    formatter.apply(_forExpression, doc);
+    XExpression _eachExpression = expr.getEachExpression();
+    this.fmt(formatter, doc, _eachExpression);
+    ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "BEFORE");
+    final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formatterExtensions.surround(_nodeForKeyword_2, _function_4);
+    doc.operator_add(_surround_2);
+    XExpression _before = expr.getBefore();
+    formatter.apply(_before, doc);
+    ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(expr, "SEPARATOR");
+    final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formatterExtensions.surround(_nodeForKeyword_3, _function_5);
+    doc.operator_add(_surround_3);
+    XExpression _separator = expr.getSeparator();
+    formatter.apply(_separator, doc);
+    ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(expr, "AFTER");
+    final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.oneSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_4 = this._formatterExtensions.surround(_nodeForKeyword_4, _function_6);
+    doc.operator_add(_surround_4);
+    XExpression _after = expr.getAfter();
+    formatter.apply(_after, doc);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
+    final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(_nodeForFeature, _function_7);
+    doc.operator_add(_prepend);
+    ILeafNode _nodeForKeyword_5 = this._nodeModelAccess.nodeForKeyword(expr, "ENDFOR");
+    final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_5 = this._formatterExtensions.surround(_nodeForKeyword_5, _function_8);
+    doc.operator_add(_surround_5);
+  }
+  
+  protected void fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final EObject expr) {
+    if (expr instanceof RichString) {
+      _fmt(formatter, doc, (RichString)expr);
+      return;
+    } else if (expr instanceof RichStringForLoop) {
+      _fmt(formatter, doc, (RichStringForLoop)expr);
+      return;
+    } else if (expr instanceof RichStringLiteral) {
+      _fmt(formatter, doc, (RichStringLiteral)expr);
+      return;
+    } else if (expr instanceof RichStringIf) {
       _fmt(formatter, doc, (RichStringIf)expr);
       return;
-    } else if (expr != null) {
-      _fmt(formatter, doc, expr);
+    } else if (expr instanceof RichStringElseIf) {
+      _fmt(formatter, doc, (RichStringElseIf)expr);
+      return;
+    } else if (expr instanceof XExpression) {
+      _fmt(formatter, doc, (XExpression)expr);
+      return;
+    } else if (expr == null) {
+      _fmt(formatter, doc, (Void)null);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

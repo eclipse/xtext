@@ -5,7 +5,13 @@ import org.eclipse.xtend.lib.Data;
 
 @Data
 @SuppressWarnings("all")
-public class SemanitcWhitespace extends Chunk {
+public class SemanticWhitespace extends Chunk {
+  private final int _column;
+  
+  public int getColumn() {
+    return this._column;
+  }
+  
   public String toString() {
     CharSequence _text = this.getText();
     int _length = _text.length();
@@ -13,14 +19,16 @@ public class SemanitcWhitespace extends Chunk {
     return _plus;
   }
   
-  public SemanitcWhitespace(final int offset, final CharSequence text) {
-    super(offset, text);
+  public SemanticWhitespace(final CharSequence text, final int column) {
+    super(text);
+    this._column = column;
   }
   
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
+    result = prime * result + _column;
     return result;
   }
   
@@ -34,7 +42,9 @@ public class SemanitcWhitespace extends Chunk {
       return false;
     if (!super.equals(obj))
       return false;
-    SemanitcWhitespace other = (SemanitcWhitespace) obj;
+    SemanticWhitespace other = (SemanticWhitespace) obj;
+    if (other._column != _column)
+      return false;
     return true;
   }
 }
