@@ -64,20 +64,165 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		''')
 	}
 	
-	@Test def testIndentation5() {
+	@Test def testIf1() {
 		assertFormattedRichStringExpression('''
 			val x = ```
 				foo
-				<<IF true>>
+				<<IF 1 == 1>>
 					bar
 				<<ENDIF>>
 			```
 		''', '''
 			val x = ```
 			foo
-			<<IF true>>
+			<<IF 1 == 1>>
 			bar
 			<<ENDIF>>
+			```
+		''')
+	}
+	
+	@Test def testIf2() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				  <<IF 1 == 1>>
+				  	bar
+				  <<ENDIF>>
+				baz
+			```
+		''', '''
+			val x = ```
+			foo
+			  <<IF 1 == 1>>
+			  bar
+			  <<ENDIF>>
+			baz
+			```
+		''')
+	}
+	
+	@Test def testIfElse() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				<<IF 1 == 1>>
+					bar
+				<<ELSE>>
+					baz
+				<<ENDIF>>
+			```
+		''', '''
+			val x = ```
+			foo
+			<<IF 1 == 1>>
+			bar
+			<<ELSE>>
+			baz
+			<<ENDIF>>
+			```
+		''')
+	}
+	
+	@Test def testIfElseIfElse() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				<<IF 1 == 1>>
+					bar
+				<<ELSEIF 1 == 1>>
+					baz
+				<<ELSE>>
+					buz
+				<<ENDIF>>
+			```
+		''', '''
+			val x = ```
+			foo
+			<<IF 1 == 1>>
+			bar
+			<<ELSEIF 1 == 1>>
+			baz
+			<<ELSE>>
+			buz
+			<<ENDIF>>
+			```
+		''')
+	}
+	
+	@Test def testIfElseIfElseInline() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo<<IF 1 == 1>>bar<<ELSEIF 1 == 1>>baz<<ELSE>>buz<<ENDIF>>
+			```
+		''', '''
+			val x = ```
+			foo<<IF 1 == 1>>bar<<ELSEIF 1 == 1>>baz<<ELSE>>buz<<ENDIF>>
+			```
+		''')
+	}
+	
+	@Test def testIfNested() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				<<IF 1 == 1>>
+					bar
+					<<IF 1 == 1>>
+						baz
+					<<ENDIF>>
+				<<ENDIF>>
+			```
+		''', '''
+			val x = ```
+			foo
+			<<IF 1 == 1>>
+			bar
+			<<IF 1 == 1>>
+			baz
+			<<ENDIF>>
+			<<ENDIF>>
+			```
+		''')
+	}
+	
+	@Test def testForLoop() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<<FOR String y : newArrayList("a")>>
+					foo
+				<<ENDFOR>>
+			```
+		''')
+	}
+	
+	@Test def testForLoopInline() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<<FOR String y : newArrayList("a")>>foo<<ENDFOR>>
+			```
+		''')
+	}
+	
+	@Test def testForLoopNested() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<<FOR String y : newArrayList("a")>>
+					foo
+					  <<FOR String y : newArrayList("a")>>
+					  	bar
+					  <<ENDFOR>>
+				<<ENDFOR>>
+			```
+		''')
+	}
+	
+	@Test def testForLoopParams() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<<FOR String y : newArrayList("a") BEFORE 1 + 1 SEPARATOR 1 + 1 AFTER 1 + 1>>
+					foo
+				<<ENDFOR>>
 			```
 		''')
 	}

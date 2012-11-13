@@ -1,10 +1,9 @@
 package org.eclipse.xtend.core.formatting
 
-import org.eclipse.xtend.lib.Property
 import java.util.List
 import java.util.TreeMap
-import org.eclipse.xtend.core.formatting.WhitespaceData
 import org.apache.log4j.Logger
+import org.eclipse.xtext.xbase.lib.Pair
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
@@ -34,8 +33,16 @@ class FormattableDocument {
 		if(data != null) {
 			if(data.length > 0) {
 				val oldText = document.substring(data.offset, data.offset + data.length)
-				if(!oldText.whitespace)
+				if(!oldText.whitespace) {
+					val text = getTextAround(data)
+					log.error('''
+						Can not edit non-whitespace:
+						------------------------------------- document snippet ---------------------------------------
+						«text.key»[[[«oldText»]]]«text.value»
+						----------------------------------------------------------------------------------------------
+					''')
 					throw new IllegalStateException("Can non format non-whitespace: "+oldText)
+				}
 			}
 			val old = formattings.get(data.offset)
 			val newData = if(old == null) data else merge(old, data)
@@ -67,13 +74,18 @@ class FormattableDocument {
 		}
 	}
 	
-	def protected void reportConflict(FormattingData data1, FormattingData data2) {
+	def protected Pair<String, String> getTextAround(FormattingData data1) {
 		val back = (0..5).fold(data1.offset, [last, i| if(last > 0) document.lastIndexOf("\n", last - 1) else -1 ])
 		val forward = (0..5).fold(data1.offset, [last, i| if(last > 0) document.indexOf("\n", last + 1) else -1 ])
 		val fiveLinesBackOffset = if(back >= 0) back else 0
 		val fiveLinesForwardOffset = if(forward >= 0) forward else document.length
 		val prefix = document.substring(fiveLinesBackOffset, data1.offset)
-		val postfix = document.substring(data1.offset + Math::max(data1.length, data2.length), fiveLinesForwardOffset)
+		val postfix = document.substring(data1.offset + data1.length, fiveLinesForwardOffset)
+		prefix -> postfix		
+	}
+	
+	def protected void reportConflict(FormattingData data1, FormattingData data2) {
+		val text = getTextAround(data1)
 		val traceStart = rootTrace.stackTrace.size - 1
 		val fullTrace1 = data1.trace.stackTrace
 		val shortTrace1 = fullTrace1.subList(0, fullTrace1.size - traceStart).join("\n") 
@@ -82,7 +94,7 @@ class FormattableDocument {
 		log.error('''
 			Conflicting TextEdits during formatting:
 			------------------------------------- document snippet ---------------------------------------
-			«prefix»[!!!]«postfix»
+			«text.key»[!!!]«text.value»
 			----------------------------------------------------------------------------------------------
 			TextEdit1: «data1.toString.replaceAll("\\n\\s*"," ")»
 			TextEdit2: «data2.toString.replaceAll("\\n\\s*"," ")»
