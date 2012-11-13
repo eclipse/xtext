@@ -1075,6 +1075,20 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatFeatureCallNoParenthesis() {
+		assertFormattedExpression('''
+			val v1 = newArrayList
+			val v2 = newArrayList
+		''')	
+	}
+	
+	@Test def formatFeatureCallNoParams() {
+		assertFormattedExpression('''
+			val v1 = newArrayList()
+			val v2 = newArrayList()
+		''')	
+	}
+	
 	@Test def formatFeatureCall1() {
 		assertFormattedExpression('''
 			val ML2 = newArrayList(newArrayList(1, 2, 3, 4),
@@ -1111,6 +1125,20 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatConstructorCallNoParenthesis() {
+		assertFormattedExpression('''
+			val v1 = new ArrayList
+			val v2 = new ArrayList
+		''')
+	}
+	
+	@Test def formatConstructorCallNoParams() {
+		assertFormattedExpression('''
+			val v1 = new ArrayList()
+			val v2 = new ArrayList()
+		''')
+	}
+	
 	@Test def formatConstructorCall1() {
 		assertFormattedExpression('''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),
@@ -1144,6 +1172,20 @@ class XtendFormatterTest extends AbstractFormatterTest {
 		''', '''
 			val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4), new ArrayList(5, 6, 7, 8, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120), new ArrayList(9, 10, 11, 12), new ArrayList(13, 14, 15, 16)
 			)
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallNoParenthesis() {
+		assertFormattedExpression('''
+			val v1 = "x".toString
+			val v2 = "x".toString
+		''')	
+	}
+	
+	@Test def formatMemberFeatureCallNoParams() {
+		assertFormattedExpression('''
+			val v1 = "x".toString()
+			val v2 = "x".toString()
 		''')	
 	}
 	
