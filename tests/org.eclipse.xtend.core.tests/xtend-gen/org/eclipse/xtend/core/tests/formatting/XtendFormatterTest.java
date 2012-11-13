@@ -1926,6 +1926,26 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatFeatureCallNoParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = newArrayList");
+    _builder.newLine();
+    _builder.append("val v2 = newArrayList");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatFeatureCallNoParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = newArrayList()");
+    _builder.newLine();
+    _builder.append("val v2 = newArrayList()");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
   public void formatFeatureCall1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4),");
@@ -1993,6 +2013,26 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatConstructorCallNoParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = new ArrayList");
+    _builder.newLine();
+    _builder.append("val v2 = new ArrayList");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatConstructorCallNoParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = new ArrayList()");
+    _builder.newLine();
+    _builder.append("val v2 = new ArrayList()");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
   public void formatConstructorCall1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
@@ -2057,6 +2097,26 @@ public class XtendFormatterTest extends AbstractFormatterTest {
     _builder_1.append(")");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallNoParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = \"x\".toString");
+    _builder.newLine();
+    _builder.append("val v2 = \"x\".toString");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatMemberFeatureCallNoParams() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val v1 = \"x\".toString()");
+    _builder.newLine();
+    _builder.append("val v2 = \"x\".toString()");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
   }
   
   @Test

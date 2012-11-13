@@ -500,19 +500,21 @@ public class XtendFormatter {
 	}
 
 	def protected dispatch void format(XConstructorCall expr, FormattableDocument format) {
-		format += expr.nodeForFeature(XCONSTRUCTOR_CALL__CONSTRUCTOR).surround([oneSpace],[noSpace])
+		format += expr.nodeForFeature(XCONSTRUCTOR_CALL__CONSTRUCTOR).prepend[oneSpace]
 		if (!expr.typeArguments.empty) {
-			format += expr.nodeForKeyword("<").append[noSpace]
+			format += expr.nodeForKeyword("<").surround[noSpace]
 			for (arg : expr.typeArguments) {
 				arg.format(format)
 				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
 			}
 			format += expr.nodeForKeyword(">").prepend[noSpace]
 		}
+		val open = expr.nodeForKeyword("(")
+		format += open.prepend[noSpace]
 		if (expr.isMultiParamInOwnLine(format))
-			formatFeatureCallParamsMultiline(expr.nodeForKeyword("("), expr.arguments, format)
+			formatFeatureCallParamsMultiline(open, expr.arguments, format)
 		else
-			formatFeatureCallParamsWrapIfNeeded(expr.nodeForKeyword("("), expr.arguments, format)
+			formatFeatureCallParamsWrapIfNeeded(open, expr.arguments, format)
 	}
 	
 	def protected void formatFeatureCallTypeParameters(XAbstractFeatureCall expr, FormattableDocument format) {
