@@ -47,7 +47,7 @@ abstract class AbstractFormatterTest {
 	}
 	
 	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
-		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}")
+		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim.replace("\n", "\n\t\t"), "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}")
 	}
 	
 	def assertFormattedMember(String expectation, CharSequence toBeFormatted) {

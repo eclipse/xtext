@@ -609,7 +609,7 @@ public class FormattableDocument {
     return _xblockexpression;
   }
   
-  protected String getIndentation(final int levels) {
+  public String getIndentation(final int levels) {
     String _xifexpression = null;
     boolean _greaterThan = (levels > 0);
     if (_greaterThan) {
@@ -637,7 +637,7 @@ public class FormattableDocument {
     return _xifexpression;
   }
   
-  protected int getIndentationLenght(final int levels) {
+  public int getIndentationLenght(final int levels) {
     IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
     IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
     XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
@@ -646,7 +646,7 @@ public class FormattableDocument {
     return _multiply;
   }
   
-  protected String getWrap(final int levels) {
+  public String getWrap(final int levels) {
     String _xifexpression = null;
     boolean _greaterThan = (levels > 0);
     if (_greaterThan) {

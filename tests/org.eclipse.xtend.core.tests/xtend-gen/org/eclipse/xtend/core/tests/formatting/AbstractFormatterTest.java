@@ -84,7 +84,8 @@ public abstract class AbstractFormatterTest {
     String _replace = _trim.replace("\n", "\n\t\t");
     String _string_1 = toBeFormatted.toString();
     String _trim_1 = _string_1.trim();
-    this.assertFormatted(cfg, _replace, _trim_1, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}");
+    String _replace_1 = _trim_1.replace("\n", "\n\t\t");
+    this.assertFormatted(cfg, _replace, _replace_1, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}");
   }
   
   public void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {

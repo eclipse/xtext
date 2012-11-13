@@ -1,94 +1,84 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
-import org.junit.Ignore
 
 class XtendRichStringFormatterTest extends AbstractFormatterTest {
 	
+	def private String decode(CharSequence seq) {
+		seq.toString.replace("<<", "«").replace(">>", "»").replace("```", "'''")
+	}
+	
+	def void assertFormattedRichStringExpression(CharSequence seq) {
+		assertFormattedExpression(seq.decode) 
+	}
+	
+	def void assertFormattedRichStringExpression(CharSequence expected, CharSequence actual) {
+		assertFormattedExpression(expected.decode, actual.decode) 
+	}
+	
 	@Test def testSimple() {
-		assertFormattedExpression(
-			"val x = '''foo''';", 
-			"val  x  =  '''foo''' ;"
-		)
+		assertFormattedRichStringExpression('''
+			val x = ```foo```;
+		''')
 	}
 	
 	@Test def testSimpleVar() {
-		assertFormattedExpression(
-			"val x = '''foo«newArrayList()»bar''';", 
-			"val  x  =  '''foo«  newArrayList()  »bar''' ;"
-		)
+		assertFormattedRichStringExpression('''
+			val x = ```foo<<newArrayList()>>>bar```
+		''')
 	}
 	
-	@Ignore
 	@Test def testIndentation1() {
-		assertFormattedExpression(
-			"val x = '''\n" +
-            "	foo\n" +
-            "''';",
-            "val  x  = '''\n" +
-            "foo\n" +
-            "''' ;"
-		)
-	}
-	
-	@Ignore
-	@Test def testIndentation2() {
-		assertFormattedExpression(
-			"val x = '''x\n" +
-            "foo\n" +
-            "''';",
-            "val  x  = '''x\n" +
-            "foo\n" +
-            "''' ;"
-		)
-	}
-	
-	@Ignore
-	@Test def testIndentation3() {
-		assertFormattedExpression(
-			"val x = '''x\n" +
-            "  foo\n" +
-            "''';",
-            "val  x  = '''x\n" +
-            "  foo\n" +
-            "  ''' ;"
-		)
-	}
-	
-	@Ignore
-	@Test def testIndentation4() {
-		assertFormattedExpression(
-			"val x = '''\n" +
-            "  foo\n" +
-            "x''';",
-            "val  x  = '''\n" +
-            "  foo\n" +
-            "x''' ;"
-		)
-	}
-	
-	@Ignore
-	@Test def testIndentation5() {
-		val x = '''
+		assertFormattedRichStringExpression('''
+			val x = ```
 				foo
-					«IF true»
-						bar
-					«ENDIF»
-		''' 
-		
-		assertFormattedExpression(
-			"'''\n"+
-			"	foo\n"+
-			"	   «IF true»\n"+
-			"	      bar\n"+
-			"	   «ENDIF»\n"+
-			"'''",
-			"'''\n"+
-			"foo\n"+
-			"   «IF true»\n"+
-			"      bar\n"+
-			"   «ENDIF»\n"+
-			"'''"
-		)
+			```
+		''', '''
+			val x = ```
+			foo
+			```
+		''')
+	}
+	
+	@Test def testIndentation2() {
+		assertFormattedRichStringExpression('''
+			val x = ```x
+			foo
+			```
+		''')
+	}
+	
+	@Test def testIndentation3() {
+		assertFormattedRichStringExpression('''
+			val x = ```x
+			  foo
+			```
+		''')
+	}
+	
+	@Test def testIndentation4() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+			  foo
+			x```
+		''')
+	}
+	
+	@Test def testIndentation5() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				<<IF true>>
+					bar
+				<<ENDIF>>
+			```
+		''', '''
+			val x = ```
+			foo
+			<<IF true>>
+			bar
+			<<ENDIF>>
+			```
+		''')
 	}
 }

@@ -212,7 +212,7 @@ class FormattableDocument {
 		debugTrace.toString
 	}
 	
-	def protected getIndentation(int levels) {
+	def getIndentation(int levels) {
 		if (levels > 0) {
 			val indent = cfg.get(cfg.keys.indentation)
 			(0 .. levels - 1).map[indent].join
@@ -220,11 +220,11 @@ class FormattableDocument {
 			""
 	}
 
-	def protected getIndentationLenght(int levels) {
+	def getIndentationLenght(int levels) {
 		levels * cfg.get(cfg.keys.indentationLength)
 	}
 
-	def protected getWrap(int levels) {
+	def getWrap(int levels) {
 		if (levels > 0) {
 			val sep = cfg.get(cfg.keys.lineSeparator)
 			(0 .. levels - 1).map[sep].join
