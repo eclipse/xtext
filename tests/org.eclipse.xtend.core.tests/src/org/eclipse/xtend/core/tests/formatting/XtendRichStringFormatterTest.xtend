@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
+import org.junit.Ignore
 
 class XtendRichStringFormatterTest extends AbstractFormatterTest {
 	
@@ -231,6 +232,7 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		''')
 	}
 	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
 	@Test def testForEmpty() {
 		assertFormattedRichStringExpression('''
 			val x = ```

@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting;
 
 import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -431,6 +432,7 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     this.assertFormattedRichStringExpression(_builder);
   }
   
+  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
   @Test
   public void testForEmpty() {
     StringConcatenation _builder = new StringConcatenation();
