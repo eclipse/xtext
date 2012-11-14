@@ -31,6 +31,16 @@ class FormattableDocument {
 	
 	def protected addFormatting(FormattingData data) {
 		if(data != null) {
+			if(data.length < 0) {
+				val text = getTextAround(data)
+				log.error('''
+					lenght of text-edit can not be negative:
+					------------------------------------- document snippet ---------------------------------------
+					«text.key»[[[!!]]]«text.value»
+					----------------------------------------------------------------------------------------------
+				''')
+				throw new IllegalStateException("Length of text edit can not be negative")
+			}
 			if(data.length > 0) {
 				val oldText = document.substring(data.offset, data.offset + data.length)
 				if(!oldText.whitespace) {

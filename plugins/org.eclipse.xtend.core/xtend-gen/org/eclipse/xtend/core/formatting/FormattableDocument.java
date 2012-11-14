@@ -102,37 +102,58 @@ public class FormattableDocument {
       FormattingData _xblockexpression = null;
       {
         int _length = data.getLength();
-        boolean _greaterThan = (_length > 0);
+        boolean _lessThan = (_length < 0);
+        if (_lessThan) {
+          final Pair<String,String> text = this.getTextAround(data);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("lenght of text-edit can not be negative:");
+          _builder.newLine();
+          _builder.append("------------------------------------- document snippet ---------------------------------------");
+          _builder.newLine();
+          String _key = text.getKey();
+          _builder.append(_key, "");
+          _builder.append("[[[!!]]]");
+          String _value = text.getValue();
+          _builder.append(_value, "");
+          _builder.newLineIfNotEmpty();
+          _builder.append("----------------------------------------------------------------------------------------------");
+          _builder.newLine();
+          FormattableDocument.log.error(_builder);
+          IllegalStateException _illegalStateException = new IllegalStateException("Length of text edit can not be negative");
+          throw _illegalStateException;
+        }
+        int _length_1 = data.getLength();
+        boolean _greaterThan = (_length_1 > 0);
         if (_greaterThan) {
           String _document = this.getDocument();
           int _offset = data.getOffset();
           int _offset_1 = data.getOffset();
-          int _length_1 = data.getLength();
-          int _plus = (_offset_1 + _length_1);
+          int _length_2 = data.getLength();
+          int _plus = (_offset_1 + _length_2);
           final String oldText = _document.substring(_offset, _plus);
           boolean _isWhitespace = this.isWhitespace(oldText);
           boolean _not = (!_isWhitespace);
           if (_not) {
-            final Pair<String,String> text = this.getTextAround(data);
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("Can not edit non-whitespace:");
-            _builder.newLine();
-            _builder.append("------------------------------------- document snippet ---------------------------------------");
-            _builder.newLine();
-            String _key = text.getKey();
-            _builder.append(_key, "");
-            _builder.append("[[[");
-            _builder.append(oldText, "");
-            _builder.append("]]]");
-            String _value = text.getValue();
-            _builder.append(_value, "");
-            _builder.newLineIfNotEmpty();
-            _builder.append("----------------------------------------------------------------------------------------------");
-            _builder.newLine();
-            FormattableDocument.log.error(_builder);
+            final Pair<String,String> text_1 = this.getTextAround(data);
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("Can not edit non-whitespace:");
+            _builder_1.newLine();
+            _builder_1.append("------------------------------------- document snippet ---------------------------------------");
+            _builder_1.newLine();
+            String _key_1 = text_1.getKey();
+            _builder_1.append(_key_1, "");
+            _builder_1.append("[[[");
+            _builder_1.append(oldText, "");
+            _builder_1.append("]]]");
+            String _value_1 = text_1.getValue();
+            _builder_1.append(_value_1, "");
+            _builder_1.newLineIfNotEmpty();
+            _builder_1.append("----------------------------------------------------------------------------------------------");
+            _builder_1.newLine();
+            FormattableDocument.log.error(_builder_1);
             String _plus_1 = ("Can non format non-whitespace: " + oldText);
-            IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
-            throw _illegalStateException;
+            IllegalStateException _illegalStateException_1 = new IllegalStateException(_plus_1);
+            throw _illegalStateException_1;
           }
         }
         TreeMap<Integer,FormattingData> _formattings = this.getFormattings();

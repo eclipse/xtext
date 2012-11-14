@@ -129,7 +129,8 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	private Stack<Chunk> indentationStack = new Stack
 	private boolean content = false
 	private boolean indentNextLine = false
-	private boolean outdentThisLine = false
+	private boolean _outdentThisLine = false
+	private int lastLiteralEndOffset
 	
 	new(NodeModelAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess
@@ -137,19 +138,15 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 		this.document = nodeModelAccess.nodeForEObject(string).rootNode.text
 	}
 	
+	def outdentThisLine() {
+		if(indentNextLine)
+			indentNextLine = false
+		else 
+			_outdentThisLine = true
+	}
+	
 	def finish() {
-		if(contentStartOffset > 0) {
-			val lastLinesContent = document.substring(contentStartOffset, offset)
-			if(model.lines.empty) 
-				model.leadingText = lastLinesContent
-			else 
-				model.lines.last.content = lastLinesContent
-		}
-		if(!model.lines.empty) {
-			val lastLine = model.lines.last
-			lastLine.indentLength = offset - (lastLine.offset + lastLine.newLineCharCount)
-		}
-		contentStartOffset = -1
+		acceptLineBreak(0, false, false)
 	}
 	
 	def protected literalPrefixLenght(INode node) {
@@ -161,26 +158,44 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 		}
 	}
 	
+	def protected literalPostfixLenght(INode node) {
+		switch t:node.text {
+			case t.endsWith("'''"): 3
+			case t.endsWith('««'): 2
+			case t.endsWith("«"): 1
+			default: 1
+		}
+	}
+	
 	override announceNextLiteral(RichStringLiteral object) {
+		super.announceNextLiteral(object)
+//		println("announceNextLiteral()")
+		if(lastLiteralEndOffset > 0 && contentStartOffset < 0) 
+			contentStartOffset = lastLiteralEndOffset
 		val node = nodeModelAccess.nodeForFeature(object, XbasePackage$Literals::XSTRING_LITERAL__VALUE)
-		if(node != null) 
+		if(node != null) {
 			offset = node.offset + node.literalPrefixLenght
-		if(contentStartOffset < 0)
-			contentStartOffset = offset
+			lastLiteralEndOffset = (node.offset + node.length) - node.literalPostfixLenght
+		}
 		content = true
 	}
 	
 	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
-		acceptLineBreak(charCount, true)
+		super.acceptSemanticLineBreak(charCount, origin, controlStructureSeen)
+//		println("acceptSemanticLineBreak()")
+		acceptLineBreak(charCount, true, true)
 		offset = offset + charCount
 	}
 	
 	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
-		acceptLineBreak(charCount, false)
+		super.acceptTemplateLineBreak(charCount, origin)
+//		println("acceptTemplateLineBreak()")
+		acceptLineBreak(charCount, false, true)
 		offset = offset + charCount
 	}
 	
-	def acceptLineBreak(int charCount, boolean semantic) {
+	def acceptLineBreak(int charCount, boolean semantic, boolean startNewLine) {
+		startContent()
 		if(contentStartOffset > 0) {
 			val lastLinesContent = document.substring(contentStartOffset, offset)
 			if(model.lines.empty) { 
@@ -201,10 +216,10 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 					for(ws:indentationStack.filter(typeof(SemanticWhitespace)).toList)
 						if(ws.column > newContentStartColumn)
 							indentationStack.remove(ws)
-				if(outdentThisLine) {
+				if(_outdentThisLine) {
 					if(!indentationStack.empty)
 						indentationStack.pop()
-					outdentThisLine = false
+					_outdentThisLine = false
 				}
 				lastLine.indentLength = newContentStartColumn
 				contentStartColumn = newContentStartColumn
@@ -216,8 +231,9 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 			indentNextLine = false
 		}
 		contentStartOffset = -1
-		model.lines += new Line(offset, semantic, charCount)
 		content = false
+		if(startNewLine)
+			model.lines += new Line(offset, semantic, charCount)
 	}
 	
 	def void startContent(){
@@ -228,6 +244,8 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	}
 	
 	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+		super.acceptSemanticText(text, origin)
+//		println('''acceptSemanticText("«text»")''')
 		if(!content) {
 			if(text.length > 0 && (0..(text.length - 1)).fold(false, [v, i | v || !Character::isWhitespace(text.charAt(i))]))
 				startContent()
@@ -236,6 +254,8 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	}
 	
 	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
+		super.acceptTemplateText(text, origin)
+//		println('''acceptTemplateText("«text»")''')
 		if(!content) {
 			if(model.rootIndentLenght < 0) {
 				model.rootIndentLenght = text.length
@@ -246,41 +266,47 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 	}
 	
 	override acceptExpression(XExpression expression, CharSequence indentation) {
+//		println("acceptExpression()")
+		super.acceptExpression(expression, indentation)
 		startContent()		
 	}
 	
 	override void acceptIfCondition(XExpression condition) {
+		super.acceptIfCondition(condition)
 		startContent()
 		indentNextLine = true
 	}
 
 	override void acceptElseIfCondition(XExpression condition) {
-		outdentThisLine = true
+		super.acceptElseIfCondition(condition)
+		outdentThisLine()
 		startContent()
 		indentNextLine = true
 	}
 
 	override void acceptElse() {
-		outdentThisLine = true
+		super.acceptElse()
+		outdentThisLine()
 		startContent()
 		indentNextLine = true
 	}
 
 	override void acceptEndIf() {
-		outdentThisLine = true
+		super.acceptEndIf()
+		outdentThisLine()
 		startContent()
 	}
 	
 	override void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+		super.acceptForLoop(parameter, expression)
 		startContent()
 		indentNextLine = true
-		super.acceptForLoop(parameter, expression)
 	}
 	
 	override void acceptEndFor(XExpression after, CharSequence indentation) {
-		outdentThisLine = true
-		startContent()
 		super.acceptEndFor(after, indentation)
+		outdentThisLine()
+		startContent()
 	}
 }
 
