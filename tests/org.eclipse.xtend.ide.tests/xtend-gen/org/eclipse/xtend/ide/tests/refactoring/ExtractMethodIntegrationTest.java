@@ -667,6 +667,114 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testRenameParameter() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int shrinkMe, int expandMe) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$shrinkMe + expandMe - shrinkMe-  expandMe$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+        public void apply(final ExtractMethodRefactoring it) {
+          List<ParameterInfo> _parameterInfos = it.getParameterInfos();
+          ParameterInfo _get = _parameterInfos.get(0);
+          _get.setNewName("s");
+          List<ParameterInfo> _parameterInfos_1 = it.getParameterInfos();
+          ParameterInfo _get_1 = _parameterInfos_1.get(1);
+          _get_1.setNewName("expandMeMore");
+        }
+      };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int shrinkMe, int expandMe) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar(shrinkMe, expandMe)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(int s, int expandMeMore) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("s + expandMeMore - s-  expandMeMore");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testReorderParameter() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i, int j) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$i + j$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+        public void apply(final ExtractMethodRefactoring it) {
+          List<ParameterInfo> _parameterInfos = it.getParameterInfos();
+          final ParameterInfo i = _parameterInfos.get(0);
+          List<ParameterInfo> _parameterInfos_1 = it.getParameterInfos();
+          List<ParameterInfo> _parameterInfos_2 = it.getParameterInfos();
+          ParameterInfo _get = _parameterInfos_2.get(1);
+          _parameterInfos_1.set(0, _get);
+          List<ParameterInfo> _parameterInfos_3 = it.getParameterInfos();
+          _parameterInfos_3.set(1, i);
+        }
+      };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int i, int j) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar(j, i)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(int j, int i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("i + j");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
   public void testFailOnMultipleCallins() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -810,16 +918,22 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
                   IXtextDocument _document = editor.getDocument();
                   refactoring.initialize(_document, selection);
                   refactoring.setMethodName("bar");
-                  initializer.apply(refactoring);
                   NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                  final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
+                  RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
                   String _string = status.toString();
                   boolean _isOK = status.isOK();
                   Assert.assertTrue(_string, _isOK);
+                  initializer.apply(refactoring);
                   NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-                  Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
+                  RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
+                  status = _checkFinalConditions;
+                  String _string_1 = status.toString();
+                  boolean _isOK_1 = status.isOK();
+                  Assert.assertTrue(_string_1, _isOK_1);
                   NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-                  Change _perform = _createChange.perform(_nullProgressMonitor_2);
+                  Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
+                  NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
+                  Change _perform = _createChange.perform(_nullProgressMonitor_3);
                   _xblockexpression = (_perform);
                 }
                 return _xblockexpression;

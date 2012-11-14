@@ -279,6 +279,53 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test def testRenameParameter() {
+		'''
+			class Foo {
+				def foo(int shrinkMe, int expandMe) {
+					$shrinkMe + expandMe - shrinkMe-  expandMe$
+				}
+			}
+		'''.assertAfterExtract([
+			parameterInfos.get(0).newName = 's'
+			parameterInfos.get(1).newName = 'expandMeMore'
+		], '''
+			class Foo {
+				def foo(int shrinkMe, int expandMe) {
+					bar(shrinkMe, expandMe)
+				}
+			
+				def bar(int s, int expandMeMore) {
+					s + expandMeMore - s-  expandMeMore
+				}
+			}
+		''')
+	}
+	
+	@Test def testReorderParameter() {
+		'''
+			class Foo {
+				def foo(int i, int j) {
+					$i + j$
+				}
+			}
+		'''.assertAfterExtract([
+			val i = parameterInfos.get(0)
+			parameterInfos.set(0, parameterInfos.get(1))
+			parameterInfos.set(1, i)
+		], '''
+			class Foo {
+				def foo(int i, int j) {
+					bar(j, i)
+				}
+			
+				def bar(int j, int i) {
+					i + j
+				}
+			}
+		''')
+	}
+	
 	@Test def testFailOnMultipleCallins() {
 		'''
 			class Foo {
@@ -342,8 +389,10 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				val refactoring = refactoringProvider.get()
 				refactoring.initialize(editor.document, selection)
 				refactoring.setMethodName('bar')
+				var status = refactoring.checkInitialConditions(new NullProgressMonitor)
+				assertTrue(status.toString, status.OK)
 				initializer.apply(refactoring)
-				val status = refactoring.checkAllConditions(new NullProgressMonitor)
+				status = refactoring.checkFinalConditions(new NullProgressMonitor)
 				assertTrue(status.toString, status.OK)
 				refactoring.createChange(new NullProgressMonitor).perform(new NullProgressMonitor)
 			]
