@@ -1,17 +1,16 @@
 package org.eclipse.xtend.ide.tests.refactoring
 
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import com.google.inject.Inject
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import com.google.inject.Provider
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.jface.text.TextSelection
+import org.eclipse.ltk.core.refactoring.RefactoringStatus
 import org.eclipse.xtend.ide.refactoring.ExtractMethodRefactoring
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.junit.After
-import org.eclipse.jface.text.TextSelection
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.junit.Test
-import org.eclipse.ltk.core.refactoring.RefactoringStatus
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Jan Koehnlein
