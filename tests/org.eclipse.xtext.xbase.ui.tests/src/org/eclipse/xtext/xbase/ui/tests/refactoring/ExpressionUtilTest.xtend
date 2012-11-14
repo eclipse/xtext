@@ -32,7 +32,7 @@ class ExpressionUtilTest {
 	@Inject ILocationInFileProvider locationInFileProvider
 	
 	@Test
-	def testSelectedExpressions() {
+	def testSelectedExpression() {
 		assertExpressionSelected('$$123+456', '123')
 		assertExpressionSelected('$1$23+456', '123')
 		assertExpressionSelected('$12$3+456', '123')
@@ -50,6 +50,41 @@ class ExpressionUtilTest {
 		assertExpressionSelected('if(true)$$ null', 'if(true) null')
 		assertExpressionSelected('if(true) null$$ else null', 'null')
 		assertExpressionSelected('if(true) null $$else null', 'if(true) null else null')
+
+		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map[$it|toFirstUpper]$", '[it|toFirstUpper]')
+		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map[it$|$toFirstUpper]", '[it|toFirstUpper]')
+		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper]$", '[it|toFirstUpper]')
+		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper$]", '[it|toFirstUpper]')
+	}
+
+	@Test
+	def testSelectedExpressions() {
+		assertSiblingExpressionsSelected('$$123+456', '123')
+		assertSiblingExpressionsSelected('$1$23+456', '123')
+		assertSiblingExpressionsSelected('$12$3+456', '123')
+		assertSiblingExpressionsSelected('$123$+456', '123')
+		assertSiblingExpressionsSelected('1$$23+456', '123')
+		assertSiblingExpressionsSelected('12$$3+456', '123')
+		assertSiblingExpressionsSelected('123$$+456', '123')
+		assertSiblingExpressionsSelected('123+$$456', '456')
+		assertSiblingExpressionsSelected('123$+$456', '123+456')
+		assertSiblingExpressionsSelected('12$3+$456', '123+456')
+		assertSiblingExpressionsSelected('123$+4$56', '123+456')
+		
+		assertSiblingExpressionsSelected('if($$true) null', 'true')
+		assertSiblingExpressionsSelected('if(true$$) null', 'true')
+		assertSiblingExpressionsSelected('if(true)$$ null', 'if(true) null')
+		assertSiblingExpressionsSelected('if(true) null$$ else null', 'null')
+		assertSiblingExpressionsSelected('if(true) null $$else null', 'if(true) null else null')
+	}
+	
+	@Test
+	def testSelectedExpressions_1() {
+		assertSiblingExpressionsSelected('{ val x=$1 val y=3$ val z=5 }', 'val x=1 val y=3')
+		assertSiblingExpressionsSelected('{ val x=1$ val y=3 $val z=5 }', 'val y=3')
+		assertSiblingExpressionsSelected('{ val x=1 $val y=3$ val z=5 }', 'val y=3')
+		assertSiblingExpressionsSelected('{ val x=1 $val y=3 $val z=5 }', 'val y=3')
+		assertSiblingExpressionsSelected('{ val x=1 $val y=3 v$al z=5 }', 'val y=3 val z=5')
 	}
 
 	@Test
@@ -113,18 +148,31 @@ class ExpressionUtilTest {
 		assertEquals(expectedSelection, cleanedModel.substring(selectedRegion.offset, selectedRegion.offset + selectedRegion.length))
 	}
 
+	def protected assertSiblingExpressionsSelected(String modelWithSelectionMarkup, String expectedSelection) {
+		val cleanedModel = modelWithSelectionMarkup.replaceAll("\\$", "")
+		val expression = cleanedModel.parse()
+		val selectionOffset = modelWithSelectionMarkup.indexOf("$")
+		val selectionLength = modelWithSelectionMarkup.lastIndexOf("$")- selectionOffset - 1
+		val selectedExpressions = util.findSelectedSiblingExpressions(expression.eResource as XtextResource, 
+			new TextSelection(selectionOffset, selectionLength))
+		val selectedRegion = selectedExpressions
+			.map[locationInFileProvider.getFullTextRegion(it)]
+			.reduce[a,b| a.merge(b)]
+		assertEquals(expectedSelection, cleanedModel.substring(selectedRegion.offset, selectedRegion.offset + selectedRegion.length))
+	}
+
 	def protected assertInsertionPoint(String modelWithInsertionMarkup, String expectedSuccessor) {
 		val cleanedModel = modelWithInsertionMarkup.replaceAll("\\$", "")
 		val expression = cleanedModel.parse()
 		val selectionOffset = modelWithInsertionMarkup.indexOf("$") 
 		val selectedExpression = util.findSelectedExpression(expression.eResource as XtextResource, 
 			new TextSelection(selectionOffset, 0))
-		val point = util.findInsertionPointForVariableDeclaration(selectedExpression)
+		val successor = util.findSuccessorExpressionForVariableDeclaration(selectedExpression)
 		if(expectedSuccessor == null) 
-			assertNull(point)
+			assertNull(successor)
 		else {
-			assertNotNull(point)
-			val selectedRegion = locationInFileProvider.getFullTextRegion(point.second)
+			assertNotNull(successor)
+			val selectedRegion = locationInFileProvider.getFullTextRegion(successor)
 			assertEquals(expectedSuccessor, cleanedModel.substring(selectedRegion.offset, selectedRegion.offset + selectedRegion.length))
 		}
 	}
@@ -135,4 +183,3 @@ class ExpressionUtilTest {
 		expression
 	}
 }
-

@@ -11,22 +11,24 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
-import org.eclipse.xtext.xbase.ui.refactoring.NewVariableNameUtil
+import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.ltk.core.refactoring.RefactoringStatus
 
 import static org.junit.Assert.*
+import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*
 
 /**
  * @author Jan Koehnlein
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseInjectorProvider))
-class NewVariableNameUtilTest {
+class NewFeatureNameUtilTest {
 
 	@Inject ExpressionUtil util
 	
-	@Inject Provider<NewVariableNameUtil> nameUtilProvider 
+	@Inject Provider<NewFeatureNameUtil> nameUtilProvider 
 	
 	@Inject ParseHelper<XExpression> parseHelper
 	
@@ -63,6 +65,50 @@ class NewVariableNameUtilTest {
 		assertDefaultName('{{val j=2+$3} val i=1 }', 'i')
 	}
 
+	@Test
+	def testDefaultNameClosure() {
+		assertDefaultName('{newArrayList("").map[toFirstUpper]$$}', 'function')
+	}
+		
+	@Test 
+	def testInvalidNameNull() {
+		assertInvalidName(null, FATAL, "Choose a name")
+		"".assertInvalidName(FATAL, "Choose a name")
+	}
+
+	@Test 
+	def testInvalidNameSyntax() {
+		"%".assertInvalidName(FATAL, "character")
+		"gürkenbröd".assertInvalidName(FATAL, "character")
+		"&".assertInvalidName(FATAL, "character")
+	}
+
+	@Test 
+	def testInvalidNameKeyword() {
+		"if".assertInvalidName(FATAL, "keyword")
+		"else".assertInvalidName(FATAL, "keyword")
+		"while".assertInvalidName(FATAL, "keyword")
+		"do".assertInvalidName(FATAL, "keyword")
+		"switch".assertInvalidName(FATAL, "keyword")
+		"case".assertInvalidName(FATAL, "keyword")
+	}
+
+	@Test 
+	def testInvalidNamePrimitive() {
+		"boolean".assertInvalidName(FATAL, "reserved")
+		"short".assertInvalidName(FATAL, "reserved")
+		"char".assertInvalidName(FATAL, "reserved")
+		"int".assertInvalidName(FATAL, "reserved")
+		"long".assertInvalidName(FATAL, "reserved")
+		"float".assertInvalidName(FATAL, "reserved")
+		"double".assertInvalidName(FATAL, "reserved")
+	}
+
+	@Test 
+	def testInvalidNameUpperCase() {
+		"CamelCase".assertInvalidName(ERROR, "lowercase")
+	}
+
 	def protected assertDefaultName(String modelWithSelectionMarkup, String expectedName) {
 		val cleanedModel = modelWithSelectionMarkup.replaceAll("\\$", "")
 		val expression = cleanedModel.parse()
@@ -70,11 +116,20 @@ class NewVariableNameUtilTest {
 		val selectionLength = modelWithSelectionMarkup.lastIndexOf("$")- selectionOffset - 1
 		val selectedExpression = util.findSelectedExpression(expression.eResource as XtextResource, 
 			new TextSelection(selectionOffset, selectionLength))
-		val point = util.findInsertionPointForVariableDeclaration(selectedExpression)
+		val successor = util.findSuccessorExpressionForVariableDeclaration(selectedExpression)
 		val nameUtil = nameUtilProvider.get()
-		nameUtil.initialize(point.second, point.first)
+		nameUtil.setFeatureScopeContext(successor)
 		val defaultName = nameUtil.getDefaultName(selectedExpression)
 		assertEquals(expectedName, defaultName)
+	}
+	
+	def protected assertInvalidName(String name, int severity, String messageFragment) {
+		val status = new RefactoringStatus
+		val nameUtil = nameUtilProvider.get()
+		nameUtil.checkNewFeatureName(name, false, status)
+		assertEquals(severity, status.severity)
+		val message = status.entryWithHighestSeverity.message
+		assertTrue(message, message.contains(messageFragment))
 	}
 
 	def protected parse(CharSequence string)  {
