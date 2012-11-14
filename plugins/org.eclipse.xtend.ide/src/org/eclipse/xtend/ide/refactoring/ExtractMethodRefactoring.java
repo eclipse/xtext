@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.refactoring;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -48,6 +51,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -56,12 +60,16 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.IndentationUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -125,6 +133,8 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private MultiTextEdit textEdit;
 
 	private List<String> localFeatureNames = newArrayList();
+	
+	private Multimap<String, XFeatureCall> externalFeatureCalls = HashMultimap.create();
 
 	private XExpression returnExpression;
 	
@@ -251,14 +261,15 @@ public class ExtractMethodRefactoring extends Refactoring {
 					boolean isLocalFeature = EcoreUtil.isAncestor(expressions, feature);
 					if (!isLocalFeature && isLocalExpression) {
 						// call-out
-						if (!calledExternalFeatureNames.contains(feature.getSimpleName())) {
-							if (feature instanceof JvmFormalParameter || feature instanceof XVariableDeclaration) {
+						if (feature instanceof JvmFormalParameter || feature instanceof XVariableDeclaration) {
+							if (!calledExternalFeatureNames.contains(feature.getSimpleName())) {
 								calledExternalFeatureNames.add(feature.getSimpleName());
 								parameterInfos.add(
 										new ParameterInfo(typeUtil.serialize(featureType, firstExpression), 
 										feature.getSimpleName(), 
 										parameterInfos.size()));
 							}
+							externalFeatureCalls.put(feature.getSimpleName(), featureCall);
 						}
 					} else if (isLocalFeature && !isLocalExpression) {
 						// call-in
@@ -334,13 +345,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 	}
 
 	protected TextEdit createMethodDeclarationEdit(ITextRegion expressionsRegion) throws BadLocationException {
-		String expressionsAsString = document.get(expressionsRegion.getOffset(), expressionsRegion.getLength());
-		if(expressions.size() == 1 
-				&& firstExpression instanceof XClosure 
-				&& (!expressionsAsString.startsWith("[") || !expressionsAsString.endsWith("]"))) {
-			// legacy closure argument syntax
-			expressionsAsString = "[" + expressionsAsString + "]";
-		}
+		String expressionsAsString = getExtractedMethodBody(expressionsRegion);
 		ITextRegion predecessorRegion = locationInFileProvider.getFullTextRegion(originalMethod);
 		int methodIndentLevel = indentationUtil.getIndentationLevelAtOffset(predecessorRegion.getOffset());
 		int expressionIndentLevel = indentationUtil.getIndentationLevelAtOffset(
@@ -363,6 +368,48 @@ public class ExtractMethodRefactoring extends Refactoring {
 				.append("}");
 
 		return new InsertEdit(predecessorRegion.getOffset() + predecessorRegion.getLength(), declaration.toString());
+	}
+
+	private String getExtractedMethodBody(ITextRegion expressionsRegion) throws BadLocationException {
+		String methodBody = getMethodBodyWithRenamedParameters(expressionsRegion);
+		if(expressions.size() == 1 
+				&& firstExpression instanceof XClosure 
+				&& (!methodBody.startsWith("[") || !methodBody.endsWith("]"))) {
+			// legacy closure argument syntax
+			return "[" + methodBody + "]";
+		}
+		return methodBody;
+	}
+
+	protected String getMethodBodyWithRenamedParameters(ITextRegion expressionsRegion) throws BadLocationException {
+		String expressionsAsString = document.get(expressionsRegion.getOffset(), expressionsRegion.getLength());
+		List<ReplaceRegion> parameterRenames = newArrayList();
+		for(final String parameterName: externalFeatureCalls.keySet()) {
+			ParameterInfo parameter = find(parameterInfos, new Predicate<ParameterInfo>() {
+				public boolean apply(ParameterInfo info) {
+					return equal(info.getOldName(), parameterName);
+				}
+			});
+			if(parameter.isRenamed()) {
+				for(XFeatureCall featureCall: externalFeatureCalls.get(parameterName)) {
+					ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1);
+					parameterRenames.add(new ReplaceRegion(textRegion, parameter.getNewName()));
+				}
+			}
+		}
+		sort(parameterRenames, new Comparator<ReplaceRegion>() {
+			public int compare(ReplaceRegion o1, ReplaceRegion o2) {
+				return o2.getOffset() - o1.getOffset();
+			}
+		});
+		StringBuffer buffer = new StringBuffer(expressionsAsString);
+		for(ReplaceRegion parameterRename: parameterRenames) {
+			buffer.replace(parameterRename.getOffset() - expressionsRegion.getOffset(), 
+					parameterRename.getEndOffset() - expressionsRegion.getOffset(), 
+					parameterRename.getText());
+		}
+		expressionsAsString = buffer.toString();
+		return expressionsAsString;
 	}
 
 	protected ReplaceEdit createMethodCallEdit(ITextRegion expressionRegion) throws BadLocationException {
