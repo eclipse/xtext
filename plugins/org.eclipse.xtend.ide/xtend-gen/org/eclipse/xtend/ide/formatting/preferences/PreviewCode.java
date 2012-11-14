@@ -99,4 +99,9 @@ public class PreviewCode {
     String _string = _builder.toString();
     return _string;
   }
+  
+  public static String bracesPreviewText() {
+    String _defaultPreviewText = PreviewCode.defaultPreviewText();
+    return _defaultPreviewText;
+  }
 }
