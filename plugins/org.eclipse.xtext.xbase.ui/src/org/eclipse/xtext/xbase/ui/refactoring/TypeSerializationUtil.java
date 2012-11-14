@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xbase.ui.refactoring;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -23,6 +25,13 @@ public class TypeSerializationUtil {
 
 	@Inject 
 	private TypeReferenceSerializer serializer;
+
+	@Inject
+	private TypeReferences typeReferences;
+	
+	public String serialize(JvmType type, EObject context) {
+		return serialize(typeReferences.createTypeRef(type), context);
+	}
 	
 	@SuppressWarnings("null")
 	public String serialize(JvmTypeReference typeRef, EObject context) {
