@@ -4,18 +4,18 @@ import com.google.inject.Provider;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
+import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
-import org.eclipse.xtext.xbase.ui.refactoring.NewVariableNameUtil;
+import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,12 +26,12 @@ import org.junit.runner.RunWith;
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = XbaseInjectorProvider.class)
 @SuppressWarnings("all")
-public class NewVariableNameUtilTest {
+public class NewFeatureNameUtilTest {
   @Inject
   private ExpressionUtil util;
   
   @Inject
-  private Provider<NewVariableNameUtil> nameUtilProvider;
+  private Provider<NewFeatureNameUtil> nameUtilProvider;
   
   @Inject
   private ParseHelper<XExpression> parseHelper;
@@ -70,6 +70,50 @@ public class NewVariableNameUtilTest {
     this.assertDefaultName("{{val j=2+$3} val i=1 }", "i");
   }
   
+  @Test
+  public void testDefaultNameClosure() {
+    this.assertDefaultName("{newArrayList(\"\").map[toFirstUpper]$$}", "function");
+  }
+  
+  @Test
+  public void testInvalidNameNull() {
+    this.assertInvalidName(null, RefactoringStatus.FATAL, "Choose a name");
+    this.assertInvalidName("", RefactoringStatus.FATAL, "Choose a name");
+  }
+  
+  @Test
+  public void testInvalidNameSyntax() {
+    this.assertInvalidName("%", RefactoringStatus.FATAL, "character");
+    this.assertInvalidName("g\u00FCrkenbr\u00F6d", RefactoringStatus.FATAL, "character");
+    this.assertInvalidName("&", RefactoringStatus.FATAL, "character");
+  }
+  
+  @Test
+  public void testInvalidNameKeyword() {
+    this.assertInvalidName("if", RefactoringStatus.FATAL, "keyword");
+    this.assertInvalidName("else", RefactoringStatus.FATAL, "keyword");
+    this.assertInvalidName("while", RefactoringStatus.FATAL, "keyword");
+    this.assertInvalidName("do", RefactoringStatus.FATAL, "keyword");
+    this.assertInvalidName("switch", RefactoringStatus.FATAL, "keyword");
+    this.assertInvalidName("case", RefactoringStatus.FATAL, "keyword");
+  }
+  
+  @Test
+  public void testInvalidNamePrimitive() {
+    this.assertInvalidName("boolean", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("short", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("char", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("int", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("long", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("float", RefactoringStatus.FATAL, "reserved");
+    this.assertInvalidName("double", RefactoringStatus.FATAL, "reserved");
+  }
+  
+  @Test
+  public void testInvalidNameUpperCase() {
+    this.assertInvalidName("CamelCase", RefactoringStatus.ERROR, "lowercase");
+  }
+  
   protected void assertDefaultName(final String modelWithSelectionMarkup, final String expectedName) {
     final String cleanedModel = modelWithSelectionMarkup.replaceAll("\\$", "");
     final XExpression expression = this.parse(cleanedModel);
@@ -80,13 +124,24 @@ public class NewVariableNameUtilTest {
     Resource _eResource = expression.eResource();
     TextSelection _textSelection = new TextSelection(selectionOffset, selectionLength);
     final XExpression selectedExpression = this.util.findSelectedExpression(((XtextResource) _eResource), _textSelection);
-    final Pair<XBlockExpression,XExpression> point = this.util.findInsertionPointForVariableDeclaration(selectedExpression);
-    final NewVariableNameUtil nameUtil = this.nameUtilProvider.get();
-    XExpression _second = point.getSecond();
-    XBlockExpression _first = point.getFirst();
-    nameUtil.initialize(_second, _first);
+    final XExpression successor = this.util.findSuccessorExpressionForVariableDeclaration(selectedExpression);
+    final NewFeatureNameUtil nameUtil = this.nameUtilProvider.get();
+    nameUtil.setFeatureScopeContext(successor);
     final String defaultName = nameUtil.getDefaultName(selectedExpression);
     Assert.assertEquals(expectedName, defaultName);
+  }
+  
+  protected void assertInvalidName(final String name, final int severity, final String messageFragment) {
+    RefactoringStatus _refactoringStatus = new RefactoringStatus();
+    final RefactoringStatus status = _refactoringStatus;
+    final NewFeatureNameUtil nameUtil = this.nameUtilProvider.get();
+    nameUtil.checkNewFeatureName(name, false, status);
+    int _severity = status.getSeverity();
+    Assert.assertEquals(severity, _severity);
+    RefactoringStatusEntry _entryWithHighestSeverity = status.getEntryWithHighestSeverity();
+    final String message = _entryWithHighestSeverity.getMessage();
+    boolean _contains = message.contains(messageFragment);
+    Assert.assertTrue(message, _contains);
   }
   
   protected XExpression parse(final CharSequence string) {

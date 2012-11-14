@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring;
 
 import com.google.common.base.Objects;
+import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
@@ -11,10 +12,12 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.junit.Assert;
@@ -41,7 +44,7 @@ public class ExpressionUtilTest {
   private ILocationInFileProvider locationInFileProvider;
   
   @Test
-  public void testSelectedExpressions() {
+  public void testSelectedExpression() {
     this.assertExpressionSelected("$$123+456", "123");
     this.assertExpressionSelected("$1$23+456", "123");
     this.assertExpressionSelected("$12$3+456", "123");
@@ -58,6 +61,39 @@ public class ExpressionUtilTest {
     this.assertExpressionSelected("if(true)$$ null", "if(true) null");
     this.assertExpressionSelected("if(true) null$$ else null", "null");
     this.assertExpressionSelected("if(true) null $$else null", "if(true) null else null");
+    this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[$it|toFirstUpper]$", "[it|toFirstUpper]");
+    this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[it$|$toFirstUpper]", "[it|toFirstUpper]");
+    this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper]$", "[it|toFirstUpper]");
+    this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
+  }
+  
+  @Test
+  public void testSelectedExpressions() {
+    this.assertSiblingExpressionsSelected("$$123+456", "123");
+    this.assertSiblingExpressionsSelected("$1$23+456", "123");
+    this.assertSiblingExpressionsSelected("$12$3+456", "123");
+    this.assertSiblingExpressionsSelected("$123$+456", "123");
+    this.assertSiblingExpressionsSelected("1$$23+456", "123");
+    this.assertSiblingExpressionsSelected("12$$3+456", "123");
+    this.assertSiblingExpressionsSelected("123$$+456", "123");
+    this.assertSiblingExpressionsSelected("123+$$456", "456");
+    this.assertSiblingExpressionsSelected("123$+$456", "123+456");
+    this.assertSiblingExpressionsSelected("12$3+$456", "123+456");
+    this.assertSiblingExpressionsSelected("123$+4$56", "123+456");
+    this.assertSiblingExpressionsSelected("if($$true) null", "true");
+    this.assertSiblingExpressionsSelected("if(true$$) null", "true");
+    this.assertSiblingExpressionsSelected("if(true)$$ null", "if(true) null");
+    this.assertSiblingExpressionsSelected("if(true) null$$ else null", "null");
+    this.assertSiblingExpressionsSelected("if(true) null $$else null", "if(true) null else null");
+  }
+  
+  @Test
+  public void testSelectedExpressions_1() {
+    this.assertSiblingExpressionsSelected("{ val x=$1 val y=3$ val z=5 }", "val x=1 val y=3");
+    this.assertSiblingExpressionsSelected("{ val x=1$ val y=3 $val z=5 }", "val y=3");
+    this.assertSiblingExpressionsSelected("{ val x=1 $val y=3$ val z=5 }", "val y=3");
+    this.assertSiblingExpressionsSelected("{ val x=1 $val y=3 $val z=5 }", "val y=3");
+    this.assertSiblingExpressionsSelected("{ val x=1 $val y=3 v$al z=5 }", "val y=3 val z=5");
   }
   
   @Test
@@ -129,6 +165,38 @@ public class ExpressionUtilTest {
     Assert.assertEquals(expectedSelection, _substring);
   }
   
+  protected void assertSiblingExpressionsSelected(final String modelWithSelectionMarkup, final String expectedSelection) {
+    final String cleanedModel = modelWithSelectionMarkup.replaceAll("\\$", "");
+    final XExpression expression = this.parse(cleanedModel);
+    final int selectionOffset = modelWithSelectionMarkup.indexOf("$");
+    int _lastIndexOf = modelWithSelectionMarkup.lastIndexOf("$");
+    int _minus = (_lastIndexOf - selectionOffset);
+    final int selectionLength = (_minus - 1);
+    Resource _eResource = expression.eResource();
+    TextSelection _textSelection = new TextSelection(selectionOffset, selectionLength);
+    final List<XExpression> selectedExpressions = this.util.findSelectedSiblingExpressions(((XtextResource) _eResource), _textSelection);
+    final Function1<XExpression,ITextRegion> _function = new Function1<XExpression,ITextRegion>() {
+        public ITextRegion apply(final XExpression it) {
+          ITextRegion _fullTextRegion = ExpressionUtilTest.this.locationInFileProvider.getFullTextRegion(it);
+          return _fullTextRegion;
+        }
+      };
+    List<ITextRegion> _map = ListExtensions.<XExpression, ITextRegion>map(selectedExpressions, _function);
+    final Function2<ITextRegion,ITextRegion,ITextRegion> _function_1 = new Function2<ITextRegion,ITextRegion,ITextRegion>() {
+        public ITextRegion apply(final ITextRegion a, final ITextRegion b) {
+          ITextRegion _merge = a.merge(b);
+          return _merge;
+        }
+      };
+    final ITextRegion selectedRegion = IterableExtensions.<ITextRegion>reduce(_map, _function_1);
+    int _offset = selectedRegion.getOffset();
+    int _offset_1 = selectedRegion.getOffset();
+    int _length = selectedRegion.getLength();
+    int _plus = (_offset_1 + _length);
+    String _substring = cleanedModel.substring(_offset, _plus);
+    Assert.assertEquals(expectedSelection, _substring);
+  }
+  
   protected void assertInsertionPoint(final String modelWithInsertionMarkup, final String expectedSuccessor) {
     final String cleanedModel = modelWithInsertionMarkup.replaceAll("\\$", "");
     final XExpression expression = this.parse(cleanedModel);
@@ -136,14 +204,13 @@ public class ExpressionUtilTest {
     Resource _eResource = expression.eResource();
     TextSelection _textSelection = new TextSelection(selectionOffset, 0);
     final XExpression selectedExpression = this.util.findSelectedExpression(((XtextResource) _eResource), _textSelection);
-    final Pair<XBlockExpression,XExpression> point = this.util.findInsertionPointForVariableDeclaration(selectedExpression);
+    final XExpression successor = this.util.findSuccessorExpressionForVariableDeclaration(selectedExpression);
     boolean _equals = Objects.equal(expectedSuccessor, null);
     if (_equals) {
-      Assert.assertNull(point);
+      Assert.assertNull(successor);
     } else {
-      Assert.assertNotNull(point);
-      XExpression _second = point.getSecond();
-      final ITextRegion selectedRegion = this.locationInFileProvider.getFullTextRegion(_second);
+      Assert.assertNotNull(successor);
+      final ITextRegion selectedRegion = this.locationInFileProvider.getFullTextRegion(successor);
       int _offset = selectedRegion.getOffset();
       int _offset_1 = selectedRegion.getOffset();
       int _length = selectedRegion.getLength();

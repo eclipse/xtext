@@ -25,15 +25,17 @@ import org.eclipse.text.edits.InsertEdit;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.DisplayChangeWrapper;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -51,7 +53,7 @@ public class ExtractVariableRefactoring extends Refactoring {
 
 	private String variableName;
 
-	private boolean isFinal;
+	private boolean isFinal = true;
 
 	@Inject
 	private Provider<StatusWrapper> statusProvider;
@@ -59,19 +61,25 @@ public class ExtractVariableRefactoring extends Refactoring {
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 
-	@Inject
-	private IWhitespaceInformationProvider whitespaceInformationProvider;
-	
 	@Inject 
 	private ExpressionUtil expressionUtil;
 
 	@Inject 
-	private NewVariableNameUtil nameUtil;
+	private NewFeatureNameUtil nameUtil;
+	
+	@Inject 
+	private IndentationUtil indentationUtil;
+	
+	@Inject 
+	private ITypeProvider typeProvider;
+
+	@Inject 
+	private TypeSerializationUtil serializer;
 
 	private URI resourceURI;
 
-	private XBlockExpression containerBlock;
-
+	private boolean isNeedsNewBlock;
+	
 	private XExpression successor;
 
 	private MultiTextEdit textEdit;
@@ -79,14 +87,13 @@ public class ExtractVariableRefactoring extends Refactoring {
 	public boolean initialize(IXtextDocument document, XExpression expression) {
 		this.document = document;
 		this.expression = expression;
-		isFinal = true;
 		resourceURI = EcoreUtil2.getNormalizedResourceURI(expression);
-		Pair<XBlockExpression, XExpression> blockAndSuccessor = expressionUtil.findInsertionPointForVariableDeclaration(expression);
-		if(blockAndSuccessor == null)
+		successor = expressionUtil.findSuccessorExpressionForVariableDeclaration(expression);
+		if(successor == null)
 			return false;
-		containerBlock = blockAndSuccessor.getFirst();
-		successor = blockAndSuccessor.getSecond();
-		nameUtil.initialize(expression, containerBlock);
+		isNeedsNewBlock = !(successor.eContainer() instanceof XBlockExpression);
+		indentationUtil.initialize(document, resourceURI);
+		nameUtil.setFeatureScopeContext(successor);
 		variableName = nameUtil.getDefaultName(expression);
 		return true;
 	}
@@ -97,6 +104,12 @@ public class ExtractVariableRefactoring extends Refactoring {
 
 	public void setVariableName(String variableName) {
 		this.variableName = variableName;
+	}
+
+	public RefactoringStatus validateNewVariableName(String newVariableName) {
+		RefactoringStatus status = new RefactoringStatus();
+		nameUtil.checkNewFeatureName(newVariableName, true, status);
+		return status;
 	}
 
 	public boolean isFinal() {
@@ -123,103 +136,30 @@ public class ExtractVariableRefactoring extends Refactoring {
 		return status.getRefactoringStatus();
 	}
 
-	protected void createInsertInBlockEdits(String expressionAsString, ITextRegion successorRegion, int indentationLevel) {
-		StringBuilder declaration = new StringBuilder();
-		declaration.append(getDeclarationString(expressionAsString))
-			.append(getLineSeparator())
-			.append(indent(indentationLevel));
-		textEdit.addChild(new InsertEdit(successorRegion.getOffset(), declaration.toString()));
-	}
-
-	protected void createInsertNewBlockEdits(String expressionAsString, ITextRegion successorRegion,
-			int indentationLevel) throws BadLocationException {
-		StringBuilder declaration = new StringBuilder();
-		IRegion lineInformation = document.getLineInformationOfOffset(successorRegion.getOffset());
-		int previousLineEnd = lineInformation.getOffset() - getLineSeparator().length();
-		if(previousLineEnd > 0 && !Character.isWhitespace(document.getChar(previousLineEnd-1))) 
-			declaration.append(" ");
-		declaration.append("{")
-			.append(getLineSeparator())
-			.append(indent(indentationLevel)) 
-		    .append(getDeclarationString(expressionAsString))
-			.append(getIndentString());
-		textEdit.addChild(new InsertEdit(Math.max(0, previousLineEnd), declaration.toString()));
-		
-		StringBuilder blockClosing = new StringBuilder();
-		blockClosing.append(getLineSeparator())
-			.append(indent(indentationLevel - 1))
-			.append("}");
-		textEdit.addChild(new InsertEdit(successorRegion.getOffset() + successorRegion.getLength(), blockClosing.toString()));
-	}
-
-	protected String indent(int level) {
-		String indentString = getIndentString();
-		StringBuilder indentBuilder = new StringBuilder();
-		for(int i=0; i<level; ++i) 
-			indentBuilder.append(indentString);
-		return indentBuilder.toString();
-	}
-	
- 	protected String getDeclarationString(String expressionAsString) {
-		StringBuilder builder = new StringBuilder();
-		if (isFinal)
-			builder.append("val ");
-		else
-			builder.append("var ");
-		builder.append(variableName).append(" = ").append(expressionAsString);
-		return builder.toString();
-	}
-
-	protected void handleException(Exception exc, StatusWrapper status) {
-		status.add(FATAL, "Error during refactoring: {0}", exc, LOG);
-	}
-
-	protected int getIndentationLevelAtOffset(int offset) {
-		try {
-			if (offset <= 0)
-				return 0;
-			int currentOffset = offset - 1;
-			char currentChr = document.getChar(currentOffset);
-			int indentationOffset = 0;
-			while (currentChr != '\n' && currentChr != '\r' && currentOffset > 0) {
-				if (Character.isWhitespace(currentChr))
-					++indentationOffset;
-				else
-					indentationOffset = 0;
-				--currentOffset;
-				currentChr = document.getChar(currentOffset);
-			}
-			return indentationOffset / getIndentString().length();
-		} catch (BadLocationException e) {
-			LOG.error("Error calculating indentation at offset", e);
-		}
-		return 0;
-	}
-
-	protected String getIndentString() {
-		return whitespaceInformationProvider.getIndentationInformation(resourceURI).getIndentString();
-	}
-
-	protected String getLineSeparator() {
-		return whitespaceInformationProvider.getLineSeparatorInformation(resourceURI)
-				.getLineSeparator();
-	}
-
 	@Override
 	public RefactoringStatus checkFinalConditions(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		StatusWrapper status = statusProvider.get();
 		try {
+			status.merge(validateNewVariableName(variableName));
 			ITextRegion expressionRegion = locationInFileProvider.getFullTextRegion(expression);
-			String expressionAsString = document.get(expressionRegion.getOffset(), expressionRegion.getLength());
+			String expressionAsString = createInsertExpression(expressionRegion);
 			ITextRegion successorRegion = locationInFileProvider.getFullTextRegion(successor);
-			int indentationLevel = getIndentationLevelAtOffset(successorRegion.getOffset());
+			int indentationLevel = indentationUtil.getIndentationLevelAtOffset(successorRegion.getOffset());
 			textEdit = new MultiTextEdit();
-			if (containerBlock == null) {
+			if (isNeedsNewBlock) {
 				createInsertNewBlockEdits(expressionAsString, successorRegion, indentationLevel);
 			} else {
 				createInsertInBlockEdits(expressionAsString, successorRegion, indentationLevel);
 			}
-			textEdit.addChild(new ReplaceEdit(expressionRegion.getOffset(), expressionRegion.getLength(), variableName));
+			String callerText = variableName;
+			if(expression.eContainer() instanceof XMemberFeatureCall) {
+				if(((XMemberFeatureCall) expression.eContainer()).getMemberCallArguments().size() == 1) {
+					String expressionExpanded = document.get(expressionRegion.getOffset()-1, expressionRegion.getLength() + 2);
+					if(!expressionExpanded.startsWith("(") || !expressionExpanded.endsWith(")")) 
+						callerText = "(" + callerText + ")";
+				}
+			}
+			textEdit.addChild(new ReplaceEdit(expressionRegion.getOffset(), expressionRegion.getLength(), callerText));
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}
@@ -228,15 +168,82 @@ public class ExtractVariableRefactoring extends Refactoring {
 
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		DocumentChange change = new DocumentChange("Introduce variable", document);
+		DocumentChange change = new DocumentChange("Extract local variable", document);
 		change.setEdit(textEdit);
 		change.setTextType(resourceURI.fileExtension());
 		return new DisplayChangeWrapper(change);
 	}
 
-	public RefactoringStatus validateNewVariableName(String newVariableName) {
-		RefactoringStatus status = new RefactoringStatus();
-		nameUtil.checkNewVariable(newVariableName, successor, containerBlock, status);
-		return status;
+	protected void handleException(Exception exc, StatusWrapper status) {
+		status.add(FATAL, "Error during refactoring: {0}", exc, LOG);
 	}
+
+	protected void createInsertInBlockEdits(String expressionAsString, ITextRegion successorRegion, int indentationLevel) {
+		StringBuilder declaration = new StringBuilder();
+		declaration.append(createDeclarationString(expressionAsString))
+			.append(indentationUtil.getLineSeparator())
+			.append(indentationUtil.indent(indentationLevel));
+		textEdit.addChild(new InsertEdit(successorRegion.getOffset(), declaration.toString()));
+	}
+
+	protected void createInsertNewBlockEdits(String expressionAsString, ITextRegion successorRegion,
+			int indentationLevel) throws BadLocationException {
+		StringBuilder declaration = new StringBuilder();
+		IRegion lineInformation = document.getLineInformationOfOffset(successorRegion.getOffset());
+		int previousLineEnd = lineInformation.getOffset() - indentationUtil.getLineSeparator().length();
+		if(previousLineEnd > 0 && !Character.isWhitespace(document.getChar(previousLineEnd-1))) 
+			declaration.append(" ");
+		declaration.append("{")
+			.append(indentationUtil.getLineSeparator())
+			.append(indentationUtil.indent(indentationLevel)) 
+		    .append(createDeclarationString(expressionAsString));
+		textEdit.addChild(new InsertEdit(Math.max(0, previousLineEnd), declaration.toString()));
+		
+		StringBuilder blockClosing = new StringBuilder();
+		blockClosing.append(indentationUtil.getLineSeparator())
+			.append(indentationUtil.indent(indentationLevel - 1))
+			.append("}");
+		textEdit.addChild(new InsertEdit(successorRegion.getOffset() + successorRegion.getLength(), blockClosing.toString()));
+	}
+
+ 	protected String createInsertExpression(ITextRegion expressionRegion) throws BadLocationException {
+		String expressionAsString = document.get(expressionRegion.getOffset(), expressionRegion.getLength());
+		if(expression instanceof XClosure) {
+			XClosure closure = (XClosure) expression;
+			StringBuilder builder = new StringBuilder();
+			if(expressionAsString.startsWith("[") && expressionAsString.endsWith("]")) {
+				expressionAsString = expressionAsString.substring(1, expressionAsString.length()-1);
+			} 
+			builder.append("[");
+			boolean isFirst = true;
+			for(JvmFormalParameter parameter: closure.getFormalParameters()) {
+				if(!isFirst)
+					builder.append(", ");
+				isFirst = false;
+				builder
+					.append(serializer.serialize(typeProvider.getTypeForIdentifiable(parameter), expression))
+					.append(" ")
+					.append(parameter.getIdentifier());
+			}
+			builder.append(" | ");
+			if(!closure.getDeclaredFormalParameters().isEmpty())
+				builder.append(expressionAsString.substring(expressionAsString.indexOf("|")+1));
+			else 
+				builder.append(expressionAsString);
+			builder.append("]");
+			return builder.toString();
+		}
+		return expressionAsString;
+	}
+
+	protected String createDeclarationString(String expressionAsString) {
+		StringBuilder builder = new StringBuilder();
+		if (isFinal)
+			builder.append("val ");
+		else
+			builder.append("var ");
+		builder.append(variableName).append(" = ").append(expressionAsString);
+		return builder.toString();
+	}
+	
 }

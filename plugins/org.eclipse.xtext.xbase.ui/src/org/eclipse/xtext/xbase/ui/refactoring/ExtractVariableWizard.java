@@ -98,17 +98,17 @@ public class ExtractVariableWizard extends RefactoringWizard {
 
 		@Override
 		protected boolean performFinish() {
-			initializeRefactoring();
+			updateRefactoring();
 			return super.performFinish();
 		}
 
 		@Override
 		public IWizardPage getNextPage() {
-			initializeRefactoring();
+			updateRefactoring();
 			return super.getNextPage();
 		}
 
-		protected void initializeRefactoring() {
+		protected void updateRefactoring() {
 			refactoring.setVariableName(nameField.getText());
 			refactoring.setFinal(finalButton.getSelection());
 		}
