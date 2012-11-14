@@ -22,15 +22,13 @@ public class IntegerKey extends SingleValueConfigurationKey<Integer> {
 
 	@Override
 	protected Integer load(String storedValue) {
-		if(storedValue == null) {
-			return getDefaultValue();
-		}
 		try {
-			return Integer.parseInt(storedValue);
+			if (storedValue != null && !"".equals(storedValue))
+				return Integer.parseInt(storedValue);
 		} catch (NumberFormatException e) {
 			log.error("error parsing configuration as integer. Key:" + getName() + " Value:" + storedValue, e);
-			return getDefaultValue();
 		}
+		return getDefaultValue();
 	}
 
 	@Override

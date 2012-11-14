@@ -22,15 +22,13 @@ public class BooleanKey extends SingleValueConfigurationKey<Boolean> {
 
 	@Override
 	protected Boolean load(String storedValue) {
-		if(storedValue == null) {
-			return getDefaultValue();
-		}
 		try {
-			return Boolean.parseBoolean(storedValue);
+			if (storedValue != null && !"".equals(storedValue))
+				return Boolean.parseBoolean(storedValue);
 		} catch (NumberFormatException e) {
 			log.error("error parsing configuration as Boolean. Key:" + getName() + " Value:" + storedValue, e);
-			return getDefaultValue();
 		}
+		return getDefaultValue();
 	}
 
 	@Override
