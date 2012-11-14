@@ -50,6 +50,8 @@ public class FormatterModifyDialog extends ModifyDialog {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void addPages(final Map values) {
 //		addTabPage("Indentation", tabFactory.createIndentationTab(this, values));
+		addTabPage("Braces", tabFactory.createBracesTab(this, values));
+		addTabPage("White Space", tabFactory.createWhiteSpaceTab(this, values));
 		addTabPage("Blank Lines", tabFactory.createBlankLinesTab(this, values));
 		addTabPage("New Lines", tabFactory.createNewLineTab(this, values));
 		addTabPage("Line Wrapping", tabFactory.createLineWrapTab(this, values));

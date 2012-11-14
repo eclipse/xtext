@@ -16,9 +16,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.xtend.core.formatting.BooleanKey;
 import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.IntegerKey;
-import org.eclipse.xtend.core.formatting.NewLineKey;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -37,6 +37,16 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		public IModifyDialogTabPage createIndentationTab(IModificationListener modifyListener,
 				Map<String, String> workingValues) {
 			return injectMembers(new IndentationTab(modifyListener, workingValues));
+		}
+
+		public IModifyDialogTabPage createBracesTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new BracesTab(modifyListener, workingValues));
+		}
+
+		public IModifyDialogTabPage createWhiteSpaceTab(IModificationListener modifyListener,
+				Map<String, String> workingValues) {
+			return injectMembers(new WhiteSpaceTab(modifyListener, workingValues));
 		}
 
 		public IModifyDialogTabPage createBlankLinesTab(IModificationListener modifyListener,
@@ -129,8 +139,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 		return super.createNumberPref(composite, numColumns, name, key, 0, 999);
 	}
 
-	protected void createCheckboxPref(Group annotationGroup, int numColumns, String label, NewLineKey nlKey) {
-		createCheckboxPref(annotationGroup, numColumns, label, nlKey.getName(), new String[] { Boolean.TRUE.toString(),  Boolean.FALSE.toString() });
+	protected void createCheckboxPref(Group annotationGroup, int numColumns, String label, BooleanKey nlKey) {
+		createCheckboxPref(annotationGroup, numColumns, label, nlKey.getName(), new String[] { Boolean.TRUE.toString(),
+				Boolean.FALSE.toString() });
 	}
 
 }

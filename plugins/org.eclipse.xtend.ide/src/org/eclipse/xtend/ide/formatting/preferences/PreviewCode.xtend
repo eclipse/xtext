@@ -54,4 +54,8 @@ class PreviewCode {
 			}
 		'''.toString
 	}
+	
+	def static String bracesPreviewText() {
+		defaultPreviewText
+	}
 }
