@@ -67,6 +67,8 @@ public class XtendFileRenameParticipant extends AbstractProcessorBasedRenamePart
 	}
 	
 	protected String trimFileExtension(String fileName) {
+		if (fileName.lastIndexOf('.') == -1)
+			return fileName;
 		return fileName.substring(0, fileName.lastIndexOf('.'));
 	}
 	
