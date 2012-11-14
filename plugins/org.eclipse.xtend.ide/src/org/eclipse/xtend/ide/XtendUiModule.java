@@ -50,6 +50,7 @@ import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
+import org.eclipse.xtend.ide.refactoring.XtendTypeSerializationUtil;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
@@ -92,6 +93,7 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
+import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
 import org.eclipse.xtext.xbase.ui.validation.PreferenceAwareDiagnosticConverter;
 
 import com.google.inject.Binder;
@@ -248,6 +250,11 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
 	}
 
+	public Class<? extends TypeSerializationUtil> bindTypeSerializationUtil() {
+		return XtendTypeSerializationUtil.class;
+	}
+	
+	@Override
 	public Class<? extends IRenameContextFactory> bindIRenameContextFactory() {
 		return XtendRenameContextFactory.class;
 	}

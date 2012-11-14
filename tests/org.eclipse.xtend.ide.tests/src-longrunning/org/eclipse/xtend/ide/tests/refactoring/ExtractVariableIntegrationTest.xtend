@@ -1,15 +1,15 @@
 package org.eclipse.xtend.ide.tests.refactoring
 
+import com.google.inject.Provider
 import javax.inject.Inject
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.jface.text.TextSelection
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.junit.Test
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
-import com.google.inject.Provider
 import org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableRefactoring
-import org.eclipse.jface.text.TextSelection
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.junit.After
+import org.junit.Test
 
 class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 	
@@ -20,7 +20,7 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 	@Inject ExpressionUtil util
 	
 	@After
-	def myTearDown() throws Exception {
+	def tiraMiGiu() throws Exception {
 		workbenchTestHelper.tearDown()
 	}
 	
@@ -116,13 +116,14 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 		'''.assertAfterExtract('''
 			class Foo {
 				def bar() {
-					foo = getFoo('bar')
+					val foo = getFoo('bar')
 					foo
 				}
 				
 				def getFoo(String x) {
 					x
 				}
+			}
 		''', true)
 	}
 	
@@ -146,19 +147,121 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 		''', true)
 	}
 	
+	@Test
+	def void testClosureBody() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map[
+						$toFirstUpper$
+					]
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map[
+						val toFirstUpper1 = toFirstUpper
+						toFirstUpper1
+					]
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testClosure() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map[$toFirstUpper]$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val function = [String it | toFirstUpper]
+					newArrayList('jan','hein','claas','pit').map(function)
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testClosure_1() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map[$it|toFirstUpper]$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val function = [String it | toFirstUpper]
+					newArrayList('jan','hein','claas','pit').map(function)
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testClosure_2() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map[$String it|toFirstUpper]$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val function = [String it | toFirstUpper]
+					newArrayList('jan','hein','claas','pit').map(function)
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testClosure_3() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					newArrayList('jan','hein','claas','pit').map($String it|toFirstUpper$)
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val function = [String it | toFirstUpper]
+					newArrayList('jan','hein','claas','pit').map(function)
+				}
+			}
+		''', true)
+	}
+	
 	def protected assertAfterExtract(CharSequence input, CharSequence expected, boolean isFinal) {
 		val inputString = input.toString
-		val editor = openEditor('Foo', inputString.replace('$',''))
-		editor.document.readOnly[
-			val selection = util.findSelectedExpression(it, 
-				new TextSelection(inputString.indexOf('$'), inputString.lastIndexOf('$') - inputString.indexOf('$') - 1)
-			)
-			val refactoring = refactoringProvider.get()
-			refactoring.final = isFinal
-			refactoring.initialize(editor.document, selection)
-			refactoring.checkAllConditions(new NullProgressMonitor)
-			refactoring.createChange(new NullProgressMonitor).perform(new NullProgressMonitor)
-		]
-		editor.close(false)
+		val model = inputString.replace('$','')
+		val file = createFile('Foo', model)
+		val editor = openEditor(file)
+		try {
+			editor.document.readOnly[
+				val int offset = inputString.indexOf('$')
+				val length = inputString.lastIndexOf('$') - 1 - offset
+				val textSelection = new TextSelection(offset, length)
+				val selection = util.findSelectedExpression(it, textSelection)
+				val refactoring = refactoringProvider.get()
+				refactoring.final = isFinal
+				refactoring.initialize(editor.document, selection)
+				val status = refactoring.checkAllConditions(new NullProgressMonitor)
+				assertTrue(status.toString, status.OK)
+				refactoring.createChange(new NullProgressMonitor).perform(new NullProgressMonitor)
+			]
+			assertEquals(expected.toString, editor.document.get)
+		} finally {
+			editor.close(false)
+		}
 	}		
 }

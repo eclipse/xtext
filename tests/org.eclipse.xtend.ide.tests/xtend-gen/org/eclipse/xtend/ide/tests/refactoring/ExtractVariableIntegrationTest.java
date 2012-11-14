@@ -2,9 +2,11 @@ package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Provider;
 import javax.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ltk.core.refactoring.Change;
+import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -18,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableRefactoring;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -32,7 +35,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
   private ExpressionUtil util;
   
   @After
-  public void myTearDown() throws Exception {
+  public void tiraMiGiu() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
   
@@ -229,7 +232,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("foo = getFoo(\'bar\')");
+    _builder_1.append("val foo = getFoo(\'bar\')");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("foo");
@@ -246,6 +249,8 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("x");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
@@ -291,48 +296,251 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     this.assertAfterExtract(_builder, _builder_1, true);
   }
   
+  @Test
+  public void testClosureBody() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("$toFirstUpper$");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("val toFirstUpper1 = toFirstUpper");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("toFirstUpper1");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("]");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testClosure() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[$toFirstUpper]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val function = [String it | toFirstUpper]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map(function)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testClosure_1() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[$it|toFirstUpper]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val function = [String it | toFirstUpper]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map(function)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testClosure_2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[$String it|toFirstUpper]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val function = [String it | toFirstUpper]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map(function)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testClosure_3() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map($String it|toFirstUpper$)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val function = [String it | toFirstUpper]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map(function)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
   protected void assertAfterExtract(final CharSequence input, final CharSequence expected, final boolean isFinal) {
     try {
       final String inputString = input.toString();
-      String _replace = inputString.replace("$", "");
-      final XtextEditor editor = this.workbenchTestHelper.openEditor("Foo", _replace);
-      IXtextDocument _document = editor.getDocument();
-      final Function1<XtextResource,Change> _function = new Function1<XtextResource,Change>() {
-          public Change apply(final XtextResource it) {
-            try {
-              Change _xblockexpression = null;
-              {
-                int _indexOf = inputString.indexOf("$");
-                int _lastIndexOf = inputString.lastIndexOf("$");
-                int _indexOf_1 = inputString.indexOf("$");
-                int _minus = (_lastIndexOf - _indexOf_1);
-                int _minus_1 = (_minus - 1);
-                TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
-                final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, _textSelection);
-                final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
-                refactoring.setFinal(isFinal);
-                IXtextDocument _document = editor.getDocument();
-                refactoring.initialize(_document, selection);
-                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                refactoring.checkAllConditions(_nullProgressMonitor);
-                NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-                Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
-                NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-                Change _perform = _createChange.perform(_nullProgressMonitor_2);
-                _xblockexpression = (_perform);
+      final String model = inputString.replace("$", "");
+      final IFile file = this.workbenchTestHelper.createFile("Foo", model);
+      final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
+      try {
+        IXtextDocument _document = editor.getDocument();
+        final Function1<XtextResource,Change> _function = new Function1<XtextResource,Change>() {
+            public Change apply(final XtextResource it) {
+              try {
+                Change _xblockexpression = null;
+                {
+                  final int offset = inputString.indexOf("$");
+                  int _lastIndexOf = inputString.lastIndexOf("$");
+                  int _minus = (_lastIndexOf - 1);
+                  final int length = (_minus - offset);
+                  TextSelection _textSelection = new TextSelection(offset, length);
+                  final TextSelection textSelection = _textSelection;
+                  final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
+                  final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
+                  refactoring.setFinal(isFinal);
+                  IXtextDocument _document = editor.getDocument();
+                  refactoring.initialize(_document, selection);
+                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+                  final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
+                  String _string = status.toString();
+                  boolean _isOK = status.isOK();
+                  Assert.assertTrue(_string, _isOK);
+                  NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+                  Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
+                  NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+                  Change _perform = _createChange.perform(_nullProgressMonitor_2);
+                  _xblockexpression = (_perform);
+                }
+                return _xblockexpression;
+              } catch (Exception _e) {
+                throw Exceptions.sneakyThrow(_e);
               }
-              return _xblockexpression;
-            } catch (Exception _e) {
-              throw Exceptions.sneakyThrow(_e);
             }
-          }
-        };
-      _document.<Change>readOnly(new IUnitOfWork<Change,XtextResource>() {
-          public Change exec(XtextResource state) {
-            return _function.apply(state);
-          }
-      });
-      editor.close(false);
+          };
+        _document.<Change>readOnly(new IUnitOfWork<Change,XtextResource>() {
+            public Change exec(XtextResource state) {
+              return _function.apply(state);
+            }
+        });
+        String _string = expected.toString();
+        IXtextDocument _document_1 = editor.getDocument();
+        String _get = _document_1.get();
+        Assert.assertEquals(_string, _get);
+      } finally {
+        editor.close(false);
+      }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
