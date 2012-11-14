@@ -29,14 +29,18 @@ public class NewLineTab extends AbstractModifyDialogTab {
 
 	@Override
 	protected void doCreatePreferences(Composite composite, int col) {
-		XtendFormatterConfigKeys xtendFormatterConfig = new XtendFormatterConfigKeys();
+		XtendFormatterConfigKeys keys = new XtendFormatterConfigKeys();
 
-		Group generalGroup = createGroup(col, composite, "Expressions");
-//		createCheckboxPref(generalGroup, col, "Around expressions", xtendFormatterConfig.newLineAroundExpression);
+		//		Group generalGroup = createGroup(col, composite, "Expressions");
+		//		createCheckboxPref(generalGroup, col, "Around expressions", xtendFormatterConfig.newLineAroundExpression);
 
 		Group annoGr = createGroup(col, composite, "Annotations");
-//		createCheckboxPref(annoGr, col, "Insert new line after annotations",
-//				xtendFormatterConfig.newLineAfterAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on types", keys.newLineAfterClassAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on fields", keys.newLineAfterFieldAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on constructors", keys.newLineAfterConstructorAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on methods", keys.newLineAfterMethodAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on parameters", keys.newLineAfterParameterAnnotations);
+		createCheckboxPref(annoGr, col, "Preserve new lines", keys.preserveNewLines);
 
 	}
 }
