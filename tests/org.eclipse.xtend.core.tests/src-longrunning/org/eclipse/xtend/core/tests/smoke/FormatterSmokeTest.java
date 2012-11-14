@@ -12,6 +12,8 @@ import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -29,5 +31,17 @@ public class FormatterSmokeTest extends AbstractSmokeTest {
 				new XtendFormatterConfigKeys());
 		formatter.setDiagnoseConflicts(false);
 		formatter.format(resource, 0, model.length(), cfg);
+	}
+	
+	@Test
+	@Override
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
+	public void testSkipNodesInBetween() throws Exception {
+	}
+	
+	@Test
+	@Override
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
+	public void testSkipNodesInBetweenWithoutResourceSet() throws Exception {
 	}
 }
