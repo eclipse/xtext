@@ -140,8 +140,8 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	}
 
 	protected void createCheckboxPref(Group annotationGroup, int numColumns, String label, BooleanKey nlKey) {
-		createCheckboxPref(annotationGroup, numColumns, label, nlKey.getName(), new String[] { Boolean.TRUE.toString(),
-				Boolean.FALSE.toString() });
+		createCheckboxPref(annotationGroup, numColumns, label, nlKey.getName(), new String[] {
+				Boolean.FALSE.toString(), Boolean.TRUE.toString() });
 	}
 
 }

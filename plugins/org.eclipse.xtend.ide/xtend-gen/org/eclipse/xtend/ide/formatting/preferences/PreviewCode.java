@@ -100,6 +100,27 @@ public class PreviewCode {
     return _string;
   }
   
+  public static String newLinePreviewText() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test");
+    _builder.newLine();
+    _builder.append("import java.io.FileReader");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("@Data class PersonClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property String name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property String vorname");
+    _builder.newLine();
+    _builder.append("}\t");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
   public static String bracesPreviewText() {
     String _defaultPreviewText = PreviewCode.defaultPreviewText();
     return _defaultPreviewText;
