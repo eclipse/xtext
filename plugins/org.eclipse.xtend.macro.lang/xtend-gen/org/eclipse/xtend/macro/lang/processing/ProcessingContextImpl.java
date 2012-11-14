@@ -252,8 +252,9 @@ public class ProcessingContextImpl implements ProcessingContext {
           final Function2<String,String,String> _function = new Function2<String,String,String>() {
               public String apply(final String a, final String b) {
                 final String indent = ProcessingContextImpl.this.indentation(b);
-                boolean _isEmpty = a.isEmpty();
-                if (_isEmpty) {
+                int _length = a.length();
+                boolean _equals = (_length == 0);
+                if (_equals) {
                   return indent;
                 }
                 boolean _startsWith = a.startsWith(indent);

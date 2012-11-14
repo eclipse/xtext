@@ -131,7 +131,7 @@ class ProcessingContextImpl implements ProcessingContext {
 			val indentation = lines.fold('') [
 				a, b | 
 				val indent = b.indentation
-				if (a.empty)
+				if (a.length == 0)
 					return indent
 				if (a.startsWith(indent))
 					return indent
