@@ -22,6 +22,9 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.junit.Test;
 
+import com.google.inject.Key;
+import com.google.inject.TypeLiteral;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -108,4 +111,9 @@ public class ValidatorTesterTest extends AbstractXtextTests {
 		tester.diagnose().assertWarning("102", "someWarning");
 	}
 
+	@Test public void testInjection() {
+		Key<ValidatorTester<TestingValidator>> key = Key.get(new TypeLiteral<ValidatorTester<TestingValidator>>() {});
+		ValidatorTester<TestingValidator> injectedTester = get(key);
+		assertNotNull(injectedTester);
+	}
 }
