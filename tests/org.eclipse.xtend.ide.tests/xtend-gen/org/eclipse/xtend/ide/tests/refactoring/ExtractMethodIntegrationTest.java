@@ -720,7 +720,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testReorderParameter() {
+  public void testSwapParameterNames() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -728,7 +728,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("def foo(int i, int j) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("$i + j$");
+    _builder.append("$i-j$");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -738,13 +738,11 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
         public void apply(final ExtractMethodRefactoring it) {
           List<ParameterInfo> _parameterInfos = it.getParameterInfos();
-          final ParameterInfo i = _parameterInfos.get(0);
+          ParameterInfo _get = _parameterInfos.get(0);
+          _get.setNewName("j");
           List<ParameterInfo> _parameterInfos_1 = it.getParameterInfos();
-          List<ParameterInfo> _parameterInfos_2 = it.getParameterInfos();
-          ParameterInfo _get = _parameterInfos_2.get(1);
-          _parameterInfos_1.set(0, _get);
-          List<ParameterInfo> _parameterInfos_3 = it.getParameterInfos();
-          _parameterInfos_3.set(1, i);
+          ParameterInfo _get_1 = _parameterInfos_1.get(1);
+          _get_1.setNewName("i");
         }
       };
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -754,7 +752,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("def foo(int i, int j) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("bar(j, i)");
+    _builder_1.append("bar(i, j)");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -764,7 +762,184 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar(int j, int i) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("i + j");
+    _builder_1.append("j-i");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTypeParameter_0() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T> foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$<T>newArrayList$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+        public void apply(final ExtractMethodRefactoring it) {
+        }
+      };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T> foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T> bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("<T>newArrayList");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTypeParameter_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, U> foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(true) ");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("$<T>newArrayList$");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<U>newArrayList");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+        public void apply(final ExtractMethodRefactoring it) {
+        }
+      };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T, U> foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if(true) ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("else");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<U>newArrayList");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T> bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("<T>newArrayList");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTypeParameter_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, U> foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$if(true) ");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<T>newArrayList");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<U>newArrayList$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+        public void apply(final ExtractMethodRefactoring it) {
+        }
+      };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T, U> foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T, U> bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if(true) ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<T>newArrayList");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("else");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<U>newArrayList");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
