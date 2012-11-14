@@ -12,6 +12,10 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression(seq.decode) 
 	}
 	
+	def void assertFormattedRichString(CharSequence seq) {
+		assertFormatted(seq.decode) 
+	}
+	
 	def void assertFormattedRichStringExpression(CharSequence expected, CharSequence actual) {
 		assertFormattedExpression(expected.decode, actual.decode) 
 	}
@@ -223,6 +227,14 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 				<<FOR String y : newArrayList("a") BEFORE 1 + 1 SEPARATOR 1 + 1 AFTER 1 + 1>>
 					foo
 				<<ENDFOR>>
+			```
+		''')
+	}
+	
+	@Test def testForEmpty() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<<>>
 			```
 		''')
 	}
