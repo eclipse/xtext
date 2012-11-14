@@ -10,7 +10,9 @@ package org.eclipse.xtend.macro.lang.processing
 import java.util.Map
 import java.util.Stack
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.macro.ProcessingContext
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
@@ -28,6 +30,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions$Function1
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 
 /**
  * Basic implementation of processing context.
@@ -39,10 +42,32 @@ import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
 class ProcessingContextImpl implements ProcessingContext {
 	
 	@Property JvmTypesBuilder typesBuilder
+	@Property IXtendJvmAssociations associations
 	@Property XtendFile source
 	
 	private Stack<JvmIdentifiableElement> currentContainer = new Stack
 
+	override inDerivedJavaClass(XtendMember member, Procedure1<JvmGenericType> initializer) {
+		with(member.declaringXtendClass.qualifiedName, initializer)
+	}
+	
+	def private XtendClass getDeclaringXtendClass(EObject member) {
+		switch member {
+			XtendClass : member
+			case member.eContainer == null : null 
+			default : getDeclaringXtendClass(member.eContainer)
+		}
+	}
+	
+	def private getQualifiedName(XtendClass clazz) {
+		val p = (clazz.eContainer as XtendFile).getPackage
+		if (p == null) {
+			clazz.name
+		} else {
+			p + '.' + clazz.name
+		}
+	}
+	
 	/**
 	 * 
 	 */
@@ -91,6 +116,48 @@ class ProcessingContextImpl implements ProcessingContext {
 		return result
 	}
 	
+	override setBody(CharSequence javaCode) {
+		val declarator = currentContainer.peek as JvmExecutable
+		typesBuilder.setBody(declarator) [
+			append(trimIndentation(javaCode))
+		]
+	}
+	
+	def private trimIndentation(CharSequence seq) {
+		val lines = seq.toString.split('\n')
+		if (lines.size == 1) {
+			return lines.head
+		} else {
+			val indentation = lines.fold('') [
+				a, b | 
+				val indent = b.indentation
+				if (a.empty)
+					return indent
+				if (a.startsWith(indent))
+					return indent
+				return a
+			]
+			lines.map[ s |
+				if (s.startsWith(indentation)) {
+					println(s.substring(indentation.length, s.length))
+				} else {
+					s
+				}].join('\n')
+		}
+	}
+	
+	def private indentation(String s) {
+		val b = new StringBuilder
+		for (c : s.toCharArray) {
+			if (Character::isWhitespace(c)) {
+				b.append(c)
+			} else {
+				return b.toString
+			}
+		}
+		return b.toString
+	}
+	
 	override param(String name, JvmTypeReference type) {
 		val declarator = currentContainer.peek as JvmExecutable
 		val result = typesBuilder.toParameter(source, name, type)
@@ -131,7 +198,7 @@ class ProcessingContextImpl implements ProcessingContext {
 	override error(Object target, String message) {
 		switch target {
 			EObject : {
-				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, target, null, -1, null)
+				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, associations?.getPrimarySourceElement(target) ?: target, null, -1, null)
 			}
 			default : throw new IllegalArgumentException("Only EObjects are supported atm.")
 		}
@@ -140,7 +207,7 @@ class ProcessingContextImpl implements ProcessingContext {
 	override warning(Object target, String message) {
 		switch target {
 			EObject : {
-				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, target, null, -1, null)
+				target.eResource.errors += new EObjectDiagnosticImpl(Severity::ERROR, 'macro_error', message, associations?.getPrimarySourceElement(target) ?: target, null, -1, null)
 			}
 			default : throw new IllegalArgumentException("Only EObjects are supported atm.")
 		}

@@ -32,7 +32,7 @@ class MacroAnnotationExtensions {
 	}
 	
 	def String getQualifiedName(MacroAnnotation it) {
-		fullyQualifiedName.toString
+		it?.fullyQualifiedName?.toString
 	}
 	
 	def Processor getProcessor(MacroAnnotation macro) {
@@ -40,7 +40,7 @@ class MacroAnnotationExtensions {
 	}
 	
 	def String getProcessorClassName(MacroAnnotation it) {
-		qualifiedName+"Processor"
+		''+it?.qualifiedName+"Processor"
 	}
 	
 	def JvmGenericType getProcessorClass(MacroAnnotation macro) {
@@ -52,7 +52,7 @@ class MacroAnnotationExtensions {
 	}
 	
 	def String getRegistratorClassName(MacroAnnotation it) {
-		qualifiedName+"Registrator"
+		''+it?.qualifiedName+"Registrator"
 	}
 	
 	def JvmGenericType getRegistratorClass(MacroAnnotation macro) {

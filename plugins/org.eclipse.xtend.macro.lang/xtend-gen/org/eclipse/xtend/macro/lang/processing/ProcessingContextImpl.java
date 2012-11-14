@@ -9,6 +9,7 @@ package org.eclipse.xtend.macro.lang.processing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,7 +18,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.macro.ProcessingContext;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -41,10 +45,16 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -66,6 +76,16 @@ public class ProcessingContextImpl implements ProcessingContext {
     this._typesBuilder = typesBuilder;
   }
   
+  private IXtendJvmAssociations _associations;
+  
+  public IXtendJvmAssociations getAssociations() {
+    return this._associations;
+  }
+  
+  public void setAssociations(final IXtendJvmAssociations associations) {
+    this._associations = associations;
+  }
+  
   private XtendFile _source;
   
   public XtendFile getSource() {
@@ -82,6 +102,59 @@ public class ProcessingContextImpl implements ProcessingContext {
       return _stack;
     }
   }.apply();
+  
+  public void inDerivedJavaClass(final XtendMember member, final Procedure1<JvmGenericType> initializer) {
+    XtendClass _declaringXtendClass = this.getDeclaringXtendClass(member);
+    String _qualifiedName = this.getQualifiedName(_declaringXtendClass);
+    this.with(_qualifiedName, initializer);
+  }
+  
+  private XtendClass getDeclaringXtendClass(final EObject member) {
+    XtendClass _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (member instanceof XtendClass) {
+        final XtendClass _xtendClass = (XtendClass)member;
+        _matched=true;
+        _switchResult = _xtendClass;
+      }
+    }
+    if (!_matched) {
+      EObject _eContainer = member.eContainer();
+      boolean _equals = Objects.equal(_eContainer, null);
+      if (_equals) {
+        _matched=true;
+        _switchResult = null;
+      }
+    }
+    if (!_matched) {
+      EObject _eContainer_1 = member.eContainer();
+      XtendClass _declaringXtendClass = this.getDeclaringXtendClass(_eContainer_1);
+      _switchResult = _declaringXtendClass;
+    }
+    return _switchResult;
+  }
+  
+  private String getQualifiedName(final XtendClass clazz) {
+    String _xblockexpression = null;
+    {
+      EObject _eContainer = clazz.eContainer();
+      final String p = ((XtendFile) _eContainer).getPackage();
+      String _xifexpression = null;
+      boolean _equals = Objects.equal(p, null);
+      if (_equals) {
+        String _name = clazz.getName();
+        _xifexpression = _name;
+      } else {
+        String _plus = (p + ".");
+        String _name_1 = clazz.getName();
+        String _plus_1 = (_plus + _name_1);
+        _xifexpression = _plus_1;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
   
   public JvmDeclaredType with(final String name, final Procedure1<JvmGenericType> initializer) {
     XtendFile _source = this.getSource();
@@ -148,6 +221,89 @@ public class ProcessingContextImpl implements ProcessingContext {
       this.currentContainer.pop();
     }
     return result;
+  }
+  
+  public void setBody(final CharSequence javaCode) {
+    JvmIdentifiableElement _peek = this.currentContainer.peek();
+    final JvmExecutable declarator = ((JvmExecutable) _peek);
+    JvmTypesBuilder _typesBuilder = this.getTypesBuilder();
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          String _trimIndentation = ProcessingContextImpl.this.trimIndentation(javaCode);
+          it.append(_trimIndentation);
+        }
+      };
+    _typesBuilder.setBody(declarator, _function);
+  }
+  
+  private String trimIndentation(final CharSequence seq) {
+    String _xblockexpression = null;
+    {
+      String _string = seq.toString();
+      final String[] lines = _string.split("\n");
+      String _xifexpression = null;
+      int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
+      boolean _equals = (_size == 1);
+      if (_equals) {
+        return IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(lines)));
+      } else {
+        String _xblockexpression_1 = null;
+        {
+          final Function2<String,String,String> _function = new Function2<String,String,String>() {
+              public String apply(final String a, final String b) {
+                final String indent = ProcessingContextImpl.this.indentation(b);
+                boolean _isEmpty = a.isEmpty();
+                if (_isEmpty) {
+                  return indent;
+                }
+                boolean _startsWith = a.startsWith(indent);
+                if (_startsWith) {
+                  return indent;
+                }
+                return a;
+              }
+            };
+          final String indentation = IterableExtensions.<String, String>fold(((Iterable<String>)Conversions.doWrapArray(lines)), "", _function);
+          final Function1<String,String> _function_1 = new Function1<String,String>() {
+              public String apply(final String s) {
+                String _xifexpression = null;
+                boolean _startsWith = s.startsWith(indentation);
+                if (_startsWith) {
+                  int _length = indentation.length();
+                  int _length_1 = s.length();
+                  String _substring = s.substring(_length, _length_1);
+                  String _println = InputOutput.<String>println(_substring);
+                  _xifexpression = _println;
+                } else {
+                  _xifexpression = s;
+                }
+                return _xifexpression;
+              }
+            };
+          List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(lines)), _function_1);
+          String _join = IterableExtensions.join(_map, "\n");
+          _xblockexpression_1 = (_join);
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  private String indentation(final String s) {
+    StringBuilder _stringBuilder = new StringBuilder();
+    final StringBuilder b = _stringBuilder;
+    char[] _charArray = s.toCharArray();
+    for (final char c : _charArray) {
+      boolean _isWhitespace = Character.isWhitespace(c);
+      if (_isWhitespace) {
+        b.append(c);
+      } else {
+        return b.toString();
+      }
+    }
+    return b.toString();
   }
   
   public JvmFormalParameter param(final String name, final JvmTypeReference type) {
@@ -220,8 +376,11 @@ public class ProcessingContextImpl implements ProcessingContext {
         _matched=true;
         Resource _eResource = _eObject.eResource();
         EList<Diagnostic> _errors = _eResource.getErrors();
+        IXtendJvmAssociations _associations = this.getAssociations();
+        EObject _primarySourceElement = _associations==null?(EObject)null:_associations.getPrimarySourceElement(_eObject);
+        EObject _elvis = ObjectExtensions.<EObject>operator_elvis(_primarySourceElement, _eObject);
         int _minus = (-1);
-        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _eObject, null, _minus, null);
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _elvis, null, _minus, null);
         _errors.add(_eObjectDiagnosticImpl);
       }
     }
@@ -239,8 +398,11 @@ public class ProcessingContextImpl implements ProcessingContext {
         _matched=true;
         Resource _eResource = _eObject.eResource();
         EList<Diagnostic> _errors = _eResource.getErrors();
+        IXtendJvmAssociations _associations = this.getAssociations();
+        EObject _primarySourceElement = _associations==null?(EObject)null:_associations.getPrimarySourceElement(_eObject);
+        EObject _elvis = ObjectExtensions.<EObject>operator_elvis(_primarySourceElement, _eObject);
         int _minus = (-1);
-        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _eObject, null, _minus, null);
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "macro_error", message, _elvis, null, _minus, null);
         _errors.add(_eObjectDiagnosticImpl);
       }
     }

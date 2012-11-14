@@ -21,9 +21,11 @@ import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.typing.XtendTypeProvider;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
+import org.eclipse.xtend.macro.lang.resource.MacroResourceDescriptionStrategy;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IndexingOrderer.IndexingPriorityProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -44,6 +46,10 @@ import com.google.inject.name.Names;
  */
 public class MacroRuntimeModule extends org.eclipse.xtend.macro.lang.AbstractMacroRuntimeModule {
 
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return MacroResourceDescriptionStrategy.class;
+	}
+		
 	public Class<? extends XExpressionHelper> bindXExpressionHelper() {
 		return XtendExpressionHelper.class;
 	}

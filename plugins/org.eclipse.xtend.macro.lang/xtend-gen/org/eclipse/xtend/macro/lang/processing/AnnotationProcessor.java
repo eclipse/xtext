@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -121,6 +122,9 @@ public class AnnotationProcessor implements IJvmModelInferrer {
   
   @Inject
   private JvmTypesBuilder jvmTypesBuilder;
+  
+  @Inject
+  private IXtendJvmAssociations associations;
   
   @Inject
   private XAnnotationExtensions _xAnnotationExtensions;
@@ -443,6 +447,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
             final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
             processingCtx.setSource(xtendFile);
             processingCtx.setTypesBuilder(this.jvmTypesBuilder);
+            processingCtx.setAssociations(this.associations);
             DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
             final DefaultEvaluationContext ctx = _defaultEvaluationContext;
             QualifiedName _create = QualifiedName.create("this");

@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 
 /**
  * The annotation processor is registered with the compilation-particpant extenions point
@@ -67,6 +68,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	@Inject Provider<ProcessingContextImpl> processingContextProvider
 	@Inject Provider<RegistrationContextImpl> registratorContextProvider
 	@Inject JvmTypesBuilder jvmTypesBuilder
+	@Inject IXtendJvmAssociations associations
 
 	@Inject extension XAnnotationExtensions
 	@Inject extension MacroAnnotationExtensions
@@ -211,6 +213,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 				val processingCtx = processingContextProvider.get
 				processingCtx.source = xtendFile
 				processingCtx.typesBuilder = jvmTypesBuilder
+				processingCtx.associations = associations
 				
 				val ctx = new DefaultEvaluationContext
 				ctx.newValue(QualifiedName::create('this'), processingCtx)

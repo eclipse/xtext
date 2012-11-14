@@ -50,8 +50,8 @@ public class MacroAnnotationExtensions {
   }
   
   public String getQualifiedName(final MacroAnnotation it) {
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(it);
-    String _string = _fullyQualifiedName.toString();
+    QualifiedName _fullyQualifiedName = it==null?(QualifiedName)null:this._iQualifiedNameProvider.getFullyQualifiedName(it);
+    String _string = _fullyQualifiedName==null?(String)null:_fullyQualifiedName.toString();
     return _string;
   }
   
@@ -63,9 +63,10 @@ public class MacroAnnotationExtensions {
   }
   
   public String getProcessorClassName(final MacroAnnotation it) {
-    String _qualifiedName = this.getQualifiedName(it);
-    String _plus = (_qualifiedName + "Processor");
-    return _plus;
+    String _qualifiedName = it==null?(String)null:this.getQualifiedName(it);
+    String _plus = ("" + _qualifiedName);
+    String _plus_1 = (_plus + "Processor");
+    return _plus_1;
   }
   
   public JvmGenericType getProcessorClass(final MacroAnnotation macro) {
@@ -91,9 +92,10 @@ public class MacroAnnotationExtensions {
   }
   
   public String getRegistratorClassName(final MacroAnnotation it) {
-    String _qualifiedName = this.getQualifiedName(it);
-    String _plus = (_qualifiedName + "Registrator");
-    return _plus;
+    String _qualifiedName = it==null?(String)null:this.getQualifiedName(it);
+    String _plus = ("" + _qualifiedName);
+    String _plus_1 = (_plus + "Registrator");
+    return _plus_1;
   }
   
   public JvmGenericType getRegistratorClass(final MacroAnnotation macro) {

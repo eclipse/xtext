@@ -10,6 +10,7 @@ package org.eclipse.xtend.macro;
 
 import java.util.Map;
 
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -30,6 +31,8 @@ import org.eclipse.xtext.xbase.lib.Procedures;
  */
 public interface ProcessingContext {
 	
+	void inDerivedJavaClass(XtendMember member, Procedures.Procedure1<JvmGenericType> initializer);
+	
 	JvmDeclaredType with(String name, Procedures.Procedure1<JvmGenericType> initializer);
 
 	JvmField field(String name, JvmTypeReference type);
@@ -37,6 +40,8 @@ public interface ProcessingContext {
 	JvmOperation method(String name, JvmTypeReference returnType, Procedures.Procedure1<JvmOperation> initializer);
 	
 	JvmConstructor constructor(Procedures.Procedure1<JvmConstructor> initializer);
+	
+	void setBody(CharSequence javaCode);
 	
 	JvmFormalParameter param(String name, JvmTypeReference type);
 	
