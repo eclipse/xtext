@@ -38,11 +38,14 @@ import org.eclipse.text.edits.InsertEdit;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
@@ -104,6 +107,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 	@Inject
 	private IndentationUtil indentationUtil;
 
+	@Inject
+	private IXtendJvmAssociations associations;
+
 	
 	private IDocument document;
 
@@ -139,6 +145,8 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private XExpression returnExpression;
 	
 	private JvmTypeReference returnType;
+	
+	private Set<JvmTypeParameter> neededTypeParameters = newHashSet();
 	
 
 	public boolean initialize(IXtextDocument document, List<XExpression> expressions) {
@@ -227,6 +235,19 @@ public class ExtractMethodRefactoring extends Refactoring {
 			builder.append(getVisibility().getName().toLowerCase()).append(" ");
 		if (isStatic)
 			builder.append("static ");
+		if(!neededTypeParameters.isEmpty()) {
+			builder.append("<");
+			boolean isFirst = true;
+			for(JvmTypeParameter typeParameter: associations.getDirectlyInferredOperation(originalMethod).getTypeParameters()) {
+				if(neededTypeParameters.contains(typeParameter)) {
+					if(!isFirst)
+						builder.append(", ");
+					isFirst = false;
+					builder.append(typeUtil.serialize(typeParameter, firstExpression));
+				}
+			}
+			builder.append("> ");
+		}
 		if (isExplicitlyDeclareReturnType) {
 			builder.append(typeUtil.serialize(returnType, firstExpression)).append(" ");
 		}
@@ -286,6 +307,14 @@ public class ExtractMethodRefactoring extends Refactoring {
 						status.add(RefactoringStatus.FATAL,
 							"Extracting method would break control flow due to return statements.");
 						break;
+					}  else if(element instanceof JvmTypeReference) {
+						JvmType type = ((JvmTypeReference) element).getType();
+						if(type instanceof JvmTypeParameter) {
+							List<JvmTypeParameter> typeParameters = 
+									associations.getDirectlyInferredOperation(originalMethod).getTypeParameters();
+							if(typeParameters.contains(type)) 
+								neededTypeParameters.add((JvmTypeParameter) type);
+						}
 					} else if (element instanceof JvmFormalParameter)
 						localFeatureNames.add(((JvmFormalParameter) element).getName());
 					else if (element instanceof XVariableDeclaration)
@@ -370,7 +399,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		return new InsertEdit(predecessorRegion.getOffset() + predecessorRegion.getLength(), declaration.toString());
 	}
 
-	private String getExtractedMethodBody(ITextRegion expressionsRegion) throws BadLocationException {
+	protected String getExtractedMethodBody(ITextRegion expressionsRegion) throws BadLocationException {
 		String methodBody = getMethodBodyWithRenamedParameters(expressionsRegion);
 		if(expressions.size() == 1 
 				&& firstExpression instanceof XClosure 

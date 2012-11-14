@@ -11,6 +11,7 @@ import org.eclipse.jface.text.TextSelection
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.junit.Test
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Jan Koehnlein
@@ -302,25 +303,99 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Test def testReorderParameter() {
+	@Test def testSwapParameterNames() {
 		'''
 			class Foo {
 				def foo(int i, int j) {
-					$i + j$
+					$i-j$
 				}
 			}
 		'''.assertAfterExtract([
-			val i = parameterInfos.get(0)
-			parameterInfos.set(0, parameterInfos.get(1))
-			parameterInfos.set(1, i)
+			parameterInfos.get(0).newName = 'j'
+			parameterInfos.get(1).newName = 'i'
 		], '''
 			class Foo {
 				def foo(int i, int j) {
-					bar(j, i)
+					bar(i, j)
 				}
 			
 				def bar(int j, int i) {
-					i + j
+					j-i
+				}
+			}
+		''')
+	}
+	
+	@Test def testTypeParameter_0() {
+		'''
+			class Foo {
+				def <T> foo() {
+					$<T>newArrayList$
+				}
+			}
+		'''.assertAfterExtract([
+		], '''
+			class Foo {
+				def <T> foo() {
+					bar()
+				}
+			
+				def <T> bar() {
+					<T>newArrayList
+				}
+			}
+		''')
+	}
+	
+	@Test def testTypeParameter_1() {
+		'''
+			class Foo {
+				def <T, U> foo() {
+					if(true) 
+						$<T>newArrayList$
+					else
+						<U>newArrayList
+				}
+			}
+		'''.assertAfterExtract([
+		], '''
+			class Foo {
+				def <T, U> foo() {
+					if(true) 
+						bar()
+					else
+						<U>newArrayList
+				}
+			
+				def <T> bar() {
+					<T>newArrayList
+				}
+			}
+		''')
+	}
+	
+	@Test def testTypeParameter_2() {
+		'''
+			class Foo {
+				def <T, U> foo() {
+					$if(true) 
+						<T>newArrayList
+					else
+						<U>newArrayList$
+				}
+			}
+		'''.assertAfterExtract([
+		], '''
+			class Foo {
+				def <T, U> foo() {
+					bar()
+				}
+			
+				def <T, U> bar() {
+					if(true) 
+						<T>newArrayList
+					else
+						<U>newArrayList
 				}
 			}
 		''')
