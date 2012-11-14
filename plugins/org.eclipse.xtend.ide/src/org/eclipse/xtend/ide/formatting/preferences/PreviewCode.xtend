@@ -55,6 +55,18 @@ class PreviewCode {
 		'''.toString
 	}
 	
+	def static String newLinePreviewText() {
+	'''
+		package test
+		import java.io.FileReader
+		import java.util.List
+		@Data class PersonClass {
+			@Property String name
+			@Property String vorname
+		}	
+	'''
+	}
+	
 	def static String bracesPreviewText() {
 		defaultPreviewText
 	}

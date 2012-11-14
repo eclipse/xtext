@@ -24,7 +24,7 @@ public class NewLineTab extends AbstractModifyDialogTab {
 
 	@Override
 	protected String previewText() {
-		return PreviewCode.lineWrappingPreviewText();
+		return PreviewCode.newLinePreviewText();
 	}
 
 	@Override
