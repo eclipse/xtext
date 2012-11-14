@@ -93,7 +93,7 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 	protected void createNameField(Composite result) {
 		Label label = new Label(result, SWT.NONE);
 		label.setText("Method name:");
-		Text textField = new Text(result, SWT.BORDER);
+		textField = new Text(result, SWT.BORDER);
 		textField.setText(refactoring.getMethodName());
 		textField.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
