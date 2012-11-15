@@ -29,8 +29,10 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -62,6 +64,10 @@ public class RichStringFormatter {
     RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(_eContainer, RichString.class);
     boolean _notEquals = (!Objects.equal(_containerOfType, null));
     if (_notEquals) {
+      return;
+    }
+    boolean _hasSyntaxError = this.hasSyntaxError(richString);
+    if (_hasSyntaxError) {
       return;
     }
     RichStringToLineModel _richStringToLineModel = new RichStringToLineModel(this._nodeModelAccess, richString);
@@ -211,6 +217,36 @@ public class RichStringFormatter {
         }
       }
     }
+  }
+  
+  protected boolean hasSyntaxError(final EObject obj) {
+    boolean _xblockexpression = false;
+    {
+      final INode node = this._nodeModelAccess.nodeForEObject(obj);
+      boolean _or = false;
+      boolean _equals = Objects.equal(node, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        SyntaxErrorMessage _syntaxErrorMessage = node.getSyntaxErrorMessage();
+        boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
+        _or = (_equals || _notEquals);
+      }
+      if (_or) {
+        return true;
+      }
+      BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
+      final Function1<INode,Boolean> _function = new Function1<INode,Boolean>() {
+          public Boolean apply(final INode it) {
+            SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
+            boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
+            return Boolean.valueOf(_notEquals);
+          }
+        };
+      boolean _exists = IterableExtensions.<INode>exists(_asTreeIterable, _function);
+      _xblockexpression = (_exists);
+    }
+    return _xblockexpression;
   }
   
   protected void _fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString expr) {

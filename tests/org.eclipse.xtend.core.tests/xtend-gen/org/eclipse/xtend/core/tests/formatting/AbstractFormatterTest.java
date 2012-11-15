@@ -79,13 +79,17 @@ public abstract class AbstractFormatterTest {
   }
   
   public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
+    this.assertFormattedExpression(cfg, expectation, toBeFormatted, false);
+  }
+  
+  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
     String _string = expectation.toString();
     String _trim = _string.trim();
     String _replace = _trim.replace("\n", "\n\t\t");
     String _string_1 = toBeFormatted.toString();
     String _trim_1 = _string_1.trim();
     String _replace_1 = _trim_1.replace("\n", "\n\t\t");
-    this.assertFormatted(cfg, _replace, _replace_1, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}");
+    this.assertFormatted(cfg, _replace, _replace_1, "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}", allowErrors);
   }
   
   public void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
@@ -122,7 +126,7 @@ public abstract class AbstractFormatterTest {
           }
         };
       Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
-      final Set offsets = IterableExtensions.<Integer>toSet(_map);
+      final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
       IParseResult _parseResult = res.getParseResult();
@@ -186,21 +190,24 @@ public abstract class AbstractFormatterTest {
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
-    this.assertFormatted(cfg, expectation, toBeFormatted, "", "");
+    this.assertFormatted(cfg, expectation, toBeFormatted, "", "", false);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix) {
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     try {
       String _plus = (prefix + toBeFormatted);
       final String fullToBeParsed = (_plus + postfix);
       final XtendFile parsed = this._parseHelper.parse(fullToBeParsed);
-      Resource _eResource = parsed.eResource();
-      EList<Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = parsed.eResource();
-      EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
-      int _size = _errors_1.size();
-      Assert.assertEquals(_join, 0, _size);
+      boolean _not = (!allowErrors);
+      if (_not) {
+        Resource _eResource = parsed.eResource();
+        EList<Diagnostic> _errors = _eResource.getErrors();
+        String _join = IterableExtensions.join(_errors, "\n");
+        Resource _eResource_1 = parsed.eResource();
+        EList<Diagnostic> _errors_1 = _eResource_1.getErrors();
+        int _size = _errors_1.size();
+        Assert.assertEquals(_join, 0, _size);
+      }
       Resource _eResource_2 = parsed.eResource();
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
@@ -219,9 +226,12 @@ public abstract class AbstractFormatterTest {
       Resource _eResource_3 = parsed.eResource();
       List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), start, length, rc);
       Iterables.<TextReplacement>addAll(edits, _format);
-      Resource _eResource_4 = parsed.eResource();
-      ArrayList<TextReplacement> _createMissingEditReplacements = this.createMissingEditReplacements(((XtextResource) _eResource_4), edits, start, length);
-      Iterables.<TextReplacement>addAll(edits, _createMissingEditReplacements);
+      boolean _not_1 = (!allowErrors);
+      if (_not_1) {
+        Resource _eResource_4 = parsed.eResource();
+        ArrayList<TextReplacement> _createMissingEditReplacements = this.createMissingEditReplacements(((XtextResource) _eResource_4), edits, start, length);
+        Iterables.<TextReplacement>addAll(edits, _createMissingEditReplacements);
+      }
       final String newDocument = this.applyEdits(oldDocument, edits);
       try {
         String _plus_1 = (prefix + expectation);

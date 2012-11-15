@@ -21,6 +21,10 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		assertFormattedExpression(expected.decode, actual.decode) 
 	}
 	
+	def void assertFormattedRichStringExpressionWithErrors(CharSequence actual) {
+		assertFormattedExpression(null, actual.decode, actual.decode, true) 
+	}
+	
 	@Test def testSimple() {
 		assertFormattedRichStringExpression('''
 			val x = ```foo```;
@@ -237,6 +241,14 @@ class XtendRichStringFormatterTest extends AbstractFormatterTest {
 		assertFormattedRichStringExpression('''
 			val x = ```
 				<<>>
+			```
+		''')
+	}
+	
+	@Test def testForSyntaxErrors() {
+		assertFormattedRichStringExpressionWithErrors('''
+			val x = ```
+				<<
 			```
 		''')
 	}

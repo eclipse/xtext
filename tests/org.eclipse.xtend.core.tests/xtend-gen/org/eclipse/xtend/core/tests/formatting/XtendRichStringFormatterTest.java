@@ -31,6 +31,12 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     this.assertFormattedExpression(_decode, _decode_1);
   }
   
+  public void assertFormattedRichStringExpressionWithErrors(final CharSequence actual) {
+    String _decode = this.decode(actual);
+    String _decode_1 = this.decode(actual);
+    this.assertFormattedExpression(null, _decode, _decode_1, true);
+  }
+  
   @Test
   public void testSimple() {
     StringConcatenation _builder = new StringConcatenation();
@@ -444,5 +450,18 @@ public class XtendRichStringFormatterTest extends AbstractFormatterTest {
     _builder.append("```");
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void testForSyntaxErrors() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpressionWithErrors(_builder);
   }
 }
