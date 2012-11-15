@@ -34,6 +34,8 @@ class RichStringFormatter {
 	def void format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
 		if(EcoreUtil2::getContainerOfType(richString.eContainer, typeof(RichString)) != null)
 			return;
+		if(richString.hasSyntaxError)
+			return;
 		val impl  = new RichStringToLineModel(_nodeModelAccess, richString)
 		richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
 		impl.finish()
@@ -65,6 +67,13 @@ class RichStringFormatter {
 				}
 			}
 		}
+	}
+	
+	def protected boolean hasSyntaxError(EObject obj) {
+		val node = obj.nodeForEObject
+		if(node == null || node.syntaxErrorMessage != null)
+			return true;
+		node.asTreeIterable.exists[syntaxErrorMessage != null]
 	}
 	
 	def protected dispatch void fmt((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString expr) {

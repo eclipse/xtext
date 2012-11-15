@@ -47,7 +47,11 @@ abstract class AbstractFormatterTest {
 	}
 	
 	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
-		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim.replace("\n", "\n\t\t"), "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}")
+		assertFormattedExpression(cfg, expectation, toBeFormatted, false)		
+	}
+	
+	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, boolean allowErrors) {
+		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim.replace("\n", "\n\t\t"), "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}", allowErrors)
 	}
 	
 	def assertFormattedMember(String expectation, CharSequence toBeFormatted) {
@@ -88,13 +92,14 @@ abstract class AbstractFormatterTest {
 	}
 	
 	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
-		assertFormatted(cfg, expectation, toBeFormatted, "", "")	
+		assertFormatted(cfg, expectation, toBeFormatted, "", "", false)	
 	}
 	
-	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, String prefix, String postfix) {
+	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, String prefix, String postfix, boolean allowErrors) {
 		val fullToBeParsed = (prefix + toBeFormatted + postfix)
 		val parsed = fullToBeParsed.parse
-		Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
+		if(!allowErrors)
+			Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
 		val rc = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys)
 
@@ -109,7 +114,8 @@ abstract class AbstractFormatterTest {
 		val length = toBeFormatted.length
 		val edits = <TextReplacement>newLinkedHashSet
 		edits += formatter.format(parsed.eResource as XtextResource, start, length, rc)
-		edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits, start, length)
+		if(!allowErrors)
+			edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits, start, length)
 		val newDocument = oldDocument.applyEdits(edits)
 		try {
 			Assert::assertEquals((prefix + expectation + postfix).toString, newDocument.toString)
