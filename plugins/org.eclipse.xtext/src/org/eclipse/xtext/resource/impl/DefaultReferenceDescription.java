@@ -32,6 +32,20 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 		this.containerEObjectURI = containerEObjectURI;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public DefaultReferenceDescription(URI sourceEObjectUri, URI targetEObjectUri, EReference eReference,
+			int indexInList, URI containerEObjectURI) {
+		super();
+		this.sourceEObjectUri = sourceEObjectUri;
+		this.targetEObjectUri = targetEObjectUri;
+		this.eReference = eReference;
+		this.indexInList = indexInList;
+		this.containerEObjectURI = containerEObjectURI;
+	}
+
+
 	public int getIndexInList() {
 		return indexInList;
 	}

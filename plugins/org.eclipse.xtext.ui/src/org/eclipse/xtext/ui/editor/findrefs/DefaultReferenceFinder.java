@@ -10,12 +10,8 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
-import static org.eclipse.xtext.util.Strings.*;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,15 +21,15 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
@@ -41,6 +37,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -134,44 +131,70 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 
 	protected void findLocalReferencesInResource(final Iterable<URI> targetURIs, Resource resource,
 			final IAcceptor<IReferenceDescription> acceptor) {
-		Map<EObject, Collection<Setting>> localCrossRefs = CrossReferencer.find(singleton(resource));
-		Map<EObject, URI> exportedElementsMap = null;
-		for (URI targetURI : targetURIs) {
-			try {
-				EObject target = resource.getEObject(targetURI.fragment());
-				if (target != null) {
-					Collection<Setting> crossRefSettings = localCrossRefs.get(target);
-					if (crossRefSettings != null) {
-						for (Setting crossRefSetting : crossRefSettings) {
-							EObject source = crossRefSetting.getEObject();
-							if (crossRefSetting.getEStructuralFeature() instanceof EReference) {
-								EReference reference = (EReference) crossRefSetting.getEStructuralFeature();
-								int index = -1;
-								if (reference.isMany()) {
-									List<?> values = (List<?>) source.eGet(reference);
-									for (int i = 0; i < values.size(); ++i) {
-										if (target == values.get(i)) {
-											index = i;
-											break;
-										}
-									}
-								}
-								if (exportedElementsMap == null)
-									exportedElementsMap = createExportedElementsMap(resource);
-								IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(
-										source, target, reference, index, findClosestExportedContainerURI(source,
-												exportedElementsMap));
-								acceptor.accept(localReferenceDescription);
-							}
+		Set<URI> targetURISet = ImmutableSet.copyOf(targetURIs);
+		Map<EObject, URI> exportedElementsMap = createExportedElementsMap(resource);
+		for(EObject content: resource.getContents()) {
+			findLocalReferencesFromElement(targetURISet, content, resource, acceptor, null, exportedElementsMap);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void findLocalReferencesFromElement(final Set<URI> targetURISet, EObject sourceCandidate,
+			Resource localResource,
+			final IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI, 
+			Map<EObject, URI> exportedElementsMap) {
+		URI sourceURI = null; 
+		if(exportedElementsMap.containsKey(sourceCandidate)) { 
+			currentExportedContainerURI = exportedElementsMap.get(sourceCandidate);
+			sourceURI = currentExportedContainerURI;
+		}
+		for(EReference ref: sourceCandidate.eClass().getEAllReferences()) {
+			if(ref.isContainment()) {
+				Object content = sourceCandidate.eGet(ref, false);
+				if(ref.isMany()) {
+					InternalEList<EObject> contentList = (InternalEList<EObject>) content;
+					for(int i=0; i<contentList.size(); ++i) {
+						EObject childElement = contentList.basicGet(i);
+						if(!childElement.eIsProxy())
+							findLocalReferencesFromElement(targetURISet, childElement, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
+					}
+				} else {
+					EObject childElement = (EObject) content;
+					if(!childElement.eIsProxy())
+						findLocalReferencesFromElement(targetURISet, childElement, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
+				}
+			} else if (!ref.isContainer() && sourceCandidate.eIsSet(ref)) {
+				Object value = sourceCandidate.eGet(ref, false);
+				if(ref.isMany()) {
+					InternalEList<EObject> values = (InternalEList<EObject>) value;
+					for(int i=0; i< values.size(); ++i) {
+						EObject refElement = resolveInternalProxy(values.basicGet(i), localResource);
+						URI refURI= EcoreUtil2.getNormalizedURI(refElement);
+						if(targetURISet.contains(refURI)) {
+							sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
+							acceptor.accept(new DefaultReferenceDescription(
+									sourceURI, refURI, ref, i, currentExportedContainerURI));
 						}
 					}
+				} else {
+					URI refURI= EcoreUtil2.getNormalizedURI((EObject) value);
+					if(targetURISet.contains(refURI)) {
+						sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
+						acceptor.accept(new DefaultReferenceDescription(
+								sourceURI, refURI, ref, -1, currentExportedContainerURI));
+					}
 				}
-			} catch (Exception exc) {
-				LOG.error("Error finding reference to " + notNull(targetURI), exc);
 			}
 		}
 	}
-
+	
+	protected EObject resolveInternalProxy(EObject elementOrProxy, Resource resource) {
+		if(elementOrProxy.eIsProxy() && ((InternalEObject) elementOrProxy).eProxyURI().trimFragment().equals(resource.getURI()))
+			return EcoreUtil.resolve(elementOrProxy, resource);
+		else
+			return elementOrProxy;
+	}
+	
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
 		URI uri = EcoreUtil2.getNormalizedURI(resource);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
@@ -194,6 +217,10 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		return exportedElementMap;
 	}
 
+	/**
+	 * @deprecated no longer used
+	 */
+	@Deprecated
 	protected URI findClosestExportedContainerURI(EObject element, Map<EObject, URI> exportedElementsMap) {
 		EObject current = element;
 		while (current != null) {
