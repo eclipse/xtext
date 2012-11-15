@@ -169,31 +169,33 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	def private void invokeRegistrators(XtendFile xtendFile, Map<MacroAnnotation, List<XtendAnnotationTarget>> annotatedElements, IJvmDeclaredTypeAcceptor acceptor, CancelIndicator cancelIndicator) {
 		for (macroAnnotation :  annotatedElements.keySet.filter[registrator != null]) {
 			val elements = macroAnnotation.getElements(annotatedElements)
-			val Iterable<?> each = if (macroAnnotation.registrator.each) {
-					elements
-				} else {
-					newArrayList(elements)
-				}
-			for (element : each) {
-				val ctx = new DefaultEvaluationContext
-				
-				val regstratorCtx = registratorContextProvider.get
-				regstratorCtx.source = xtendFile
-				regstratorCtx.typesBuilder = jvmTypesBuilder
-				regstratorCtx.acceptor = acceptor
-				regstratorCtx.associator = this.associator
-				
-				ctx.newValue(QualifiedName::create('this'), regstratorCtx)
-				val varName = macroAnnotation.registrator.variableName ?: 'it'
-				ctx.newValue(QualifiedName::create(varName), element)
-				ctx.newValue(QualifiedName::create('source'), xtendFile)
-				
-				try {
-					val result = interpreter.evaluate(macroAnnotation.registrator?.expression, ctx, cancelIndicator)
-					if (result.exception != null)
-						throw result.exception
-				} catch (Exception e) {
-					LOG.error(e.message, e)
+			if (macroAnnotation.registrator != null) {
+				val Iterable<?> each = if (macroAnnotation.registrator.each) {
+						elements
+					} else {
+						newArrayList(elements)
+					}
+				for (element : each) {
+					val ctx = new DefaultEvaluationContext
+					
+					val regstratorCtx = registratorContextProvider.get
+					regstratorCtx.source = xtendFile
+					regstratorCtx.typesBuilder = jvmTypesBuilder
+					regstratorCtx.acceptor = acceptor
+					regstratorCtx.associator = this.associator
+					
+					ctx.newValue(QualifiedName::create('this'), regstratorCtx)
+					val varName = macroAnnotation.registrator.variableName ?: 'it'
+					ctx.newValue(QualifiedName::create(varName), element)
+					ctx.newValue(QualifiedName::create('source'), xtendFile)
+					
+					try {
+						val result = interpreter.evaluate(macroAnnotation.registrator?.expression, ctx, cancelIndicator)
+						if (result.exception != null)
+							throw result.exception
+					} catch (Exception e) {
+						LOG.error(e.message, e)
+					}
 				}
 			}
 		}
@@ -202,31 +204,32 @@ public class AnnotationProcessor implements IJvmModelInferrer {
 	def private void invokeProcessors(XtendFile xtendFile, Map<MacroAnnotation, List<XtendAnnotationTarget>> annotatedElements, CancelIndicator cancelIndicator) {
 		for (macroAnnotation : annotatedElements.keySet) {
 			val elements = macroAnnotation.getElements(annotatedElements)
-			
-			val Iterable<?> each = if (macroAnnotation.processor.each) {
-					elements
-				} else {
-					newArrayList(elements)
-				}
-			
-			for (element : each) {
-				val processingCtx = processingContextProvider.get
-				processingCtx.source = xtendFile
-				processingCtx.typesBuilder = jvmTypesBuilder
-				processingCtx.associations = associations
+			if (macroAnnotation.processor != null) {
+				val Iterable<?> each = if (macroAnnotation.processor.each) {
+						elements
+					} else {
+						newArrayList(elements)
+					}
 				
-				val ctx = new DefaultEvaluationContext
-				ctx.newValue(QualifiedName::create('this'), processingCtx)
-				val varName = macroAnnotation.processor.variableName ?: 'it'
-				ctx.newValue(QualifiedName::create(varName), element)
-				ctx.newValue(QualifiedName::create('source'), xtendFile)
-				
-				try {
-					val result = interpreter.evaluate(macroAnnotation.processor.expression, ctx, cancelIndicator)
-					if (result.exception != null)
-						handleError(xtendFile.eResource, elements, macroAnnotation, result.exception)
-				} catch (Exception e) {
-					LOG.error(e.message, e)
+				for (element : each) {
+					val processingCtx = processingContextProvider.get
+					processingCtx.source = xtendFile
+					processingCtx.typesBuilder = jvmTypesBuilder
+					processingCtx.associations = associations
+					
+					val ctx = new DefaultEvaluationContext
+					ctx.newValue(QualifiedName::create('this'), processingCtx)
+					val varName = macroAnnotation.processor.variableName ?: 'it'
+					ctx.newValue(QualifiedName::create(varName), element)
+					ctx.newValue(QualifiedName::create('source'), xtendFile)
+					
+					try {
+						val result = interpreter.evaluate(macroAnnotation.processor.expression, ctx, cancelIndicator)
+						if (result.exception != null)
+							handleError(xtendFile.eResource, elements, macroAnnotation, result.exception)
+					} catch (Exception e) {
+						LOG.error(e.message, e)
+					}
 				}
 			}
 		}

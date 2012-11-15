@@ -372,50 +372,54 @@ public class AnnotationProcessor implements IJvmModelInferrer {
       for (final MacroAnnotation macroAnnotation : _filter) {
         {
           final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
-          List<? extends Object> _xifexpression = null;
           Registrator _registrator = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
-          boolean _isEach = _registrator.isEach();
-          if (_isEach) {
-            _xifexpression = elements;
-          } else {
-            ArrayList<List<XtendAnnotationTarget>> _newArrayList = CollectionLiterals.<List<XtendAnnotationTarget>>newArrayList(elements);
-            _xifexpression = _newArrayList;
-          }
-          final Iterable<?> each = _xifexpression;
-          for (final Object element : each) {
-            {
-              DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
-              final DefaultEvaluationContext ctx = _defaultEvaluationContext;
-              final RegistrationContextImpl regstratorCtx = this.registratorContextProvider.get();
-              regstratorCtx.setSource(xtendFile);
-              regstratorCtx.setTypesBuilder(this.jvmTypesBuilder);
-              regstratorCtx.setAcceptor(acceptor);
-              regstratorCtx.setAssociator(this.associator);
-              QualifiedName _create = QualifiedName.create("this");
-              ctx.newValue(_create, regstratorCtx);
-              Registrator _registrator_1 = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
-              String _variableName = _registrator_1.getVariableName();
-              final String varName = ObjectExtensions.<String>operator_elvis(_variableName, "it");
-              QualifiedName _create_1 = QualifiedName.create(varName);
-              ctx.newValue(_create_1, element);
-              QualifiedName _create_2 = QualifiedName.create("source");
-              ctx.newValue(_create_2, xtendFile);
-              try {
+          boolean _notEquals = (!Objects.equal(_registrator, null));
+          if (_notEquals) {
+            List<? extends Object> _xifexpression = null;
+            Registrator _registrator_1 = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
+            boolean _isEach = _registrator_1.isEach();
+            if (_isEach) {
+              _xifexpression = elements;
+            } else {
+              ArrayList<List<XtendAnnotationTarget>> _newArrayList = CollectionLiterals.<List<XtendAnnotationTarget>>newArrayList(elements);
+              _xifexpression = _newArrayList;
+            }
+            final Iterable<?> each = _xifexpression;
+            for (final Object element : each) {
+              {
+                DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
+                final DefaultEvaluationContext ctx = _defaultEvaluationContext;
+                final RegistrationContextImpl regstratorCtx = this.registratorContextProvider.get();
+                regstratorCtx.setSource(xtendFile);
+                regstratorCtx.setTypesBuilder(this.jvmTypesBuilder);
+                regstratorCtx.setAcceptor(acceptor);
+                regstratorCtx.setAssociator(this.associator);
+                QualifiedName _create = QualifiedName.create("this");
+                ctx.newValue(_create, regstratorCtx);
                 Registrator _registrator_2 = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
-                XExpression _expression = _registrator_2==null?(XExpression)null:_registrator_2.getExpression();
-                final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
-                Throwable _exception = result.getException();
-                boolean _notEquals = (!Objects.equal(_exception, null));
-                if (_notEquals) {
-                  throw result.getException();
-                }
-              } catch (final Throwable _t) {
-                if (_t instanceof Exception) {
-                  final Exception e = (Exception)_t;
-                  String _message = e.getMessage();
-                  AnnotationProcessor.LOG.error(_message, e);
-                } else {
-                  throw Exceptions.sneakyThrow(_t);
+                String _variableName = _registrator_2.getVariableName();
+                final String varName = ObjectExtensions.<String>operator_elvis(_variableName, "it");
+                QualifiedName _create_1 = QualifiedName.create(varName);
+                ctx.newValue(_create_1, element);
+                QualifiedName _create_2 = QualifiedName.create("source");
+                ctx.newValue(_create_2, xtendFile);
+                try {
+                  Registrator _registrator_3 = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
+                  XExpression _expression = _registrator_3==null?(XExpression)null:_registrator_3.getExpression();
+                  final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
+                  Throwable _exception = result.getException();
+                  boolean _notEquals_1 = (!Objects.equal(_exception, null));
+                  if (_notEquals_1) {
+                    throw result.getException();
+                  }
+                } catch (final Throwable _t) {
+                  if (_t instanceof Exception) {
+                    final Exception e = (Exception)_t;
+                    String _message = e.getMessage();
+                    AnnotationProcessor.LOG.error(_message, e);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
                 }
               }
             }
@@ -432,51 +436,55 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     for (final MacroAnnotation macroAnnotation : _keySet) {
       {
         final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
-        List<? extends Object> _xifexpression = null;
         Processor _processor = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
-        boolean _isEach = _processor.isEach();
-        if (_isEach) {
-          _xifexpression = elements;
-        } else {
-          ArrayList<List<XtendAnnotationTarget>> _newArrayList = CollectionLiterals.<List<XtendAnnotationTarget>>newArrayList(elements);
-          _xifexpression = _newArrayList;
-        }
-        final Iterable<?> each = _xifexpression;
-        for (final Object element : each) {
-          {
-            final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
-            processingCtx.setSource(xtendFile);
-            processingCtx.setTypesBuilder(this.jvmTypesBuilder);
-            processingCtx.setAssociations(this.associations);
-            DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
-            final DefaultEvaluationContext ctx = _defaultEvaluationContext;
-            QualifiedName _create = QualifiedName.create("this");
-            ctx.newValue(_create, processingCtx);
-            Processor _processor_1 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
-            String _variableName = _processor_1.getVariableName();
-            final String varName = ObjectExtensions.<String>operator_elvis(_variableName, "it");
-            QualifiedName _create_1 = QualifiedName.create(varName);
-            ctx.newValue(_create_1, element);
-            QualifiedName _create_2 = QualifiedName.create("source");
-            ctx.newValue(_create_2, xtendFile);
-            try {
+        boolean _notEquals = (!Objects.equal(_processor, null));
+        if (_notEquals) {
+          List<? extends Object> _xifexpression = null;
+          Processor _processor_1 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
+          boolean _isEach = _processor_1.isEach();
+          if (_isEach) {
+            _xifexpression = elements;
+          } else {
+            ArrayList<List<XtendAnnotationTarget>> _newArrayList = CollectionLiterals.<List<XtendAnnotationTarget>>newArrayList(elements);
+            _xifexpression = _newArrayList;
+          }
+          final Iterable<?> each = _xifexpression;
+          for (final Object element : each) {
+            {
+              final ProcessingContextImpl processingCtx = this.processingContextProvider.get();
+              processingCtx.setSource(xtendFile);
+              processingCtx.setTypesBuilder(this.jvmTypesBuilder);
+              processingCtx.setAssociations(this.associations);
+              DefaultEvaluationContext _defaultEvaluationContext = new DefaultEvaluationContext();
+              final DefaultEvaluationContext ctx = _defaultEvaluationContext;
+              QualifiedName _create = QualifiedName.create("this");
+              ctx.newValue(_create, processingCtx);
               Processor _processor_2 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
-              XExpression _expression = _processor_2.getExpression();
-              final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
-              Throwable _exception = result.getException();
-              boolean _notEquals = (!Objects.equal(_exception, null));
-              if (_notEquals) {
-                Resource _eResource = xtendFile.eResource();
-                Throwable _exception_1 = result.getException();
-                this.handleError(_eResource, elements, macroAnnotation, _exception_1);
-              }
-            } catch (final Throwable _t) {
-              if (_t instanceof Exception) {
-                final Exception e = (Exception)_t;
-                String _message = e.getMessage();
-                AnnotationProcessor.LOG.error(_message, e);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
+              String _variableName = _processor_2.getVariableName();
+              final String varName = ObjectExtensions.<String>operator_elvis(_variableName, "it");
+              QualifiedName _create_1 = QualifiedName.create(varName);
+              ctx.newValue(_create_1, element);
+              QualifiedName _create_2 = QualifiedName.create("source");
+              ctx.newValue(_create_2, xtendFile);
+              try {
+                Processor _processor_3 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
+                XExpression _expression = _processor_3.getExpression();
+                final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
+                Throwable _exception = result.getException();
+                boolean _notEquals_1 = (!Objects.equal(_exception, null));
+                if (_notEquals_1) {
+                  Resource _eResource = xtendFile.eResource();
+                  Throwable _exception_1 = result.getException();
+                  this.handleError(_eResource, elements, macroAnnotation, _exception_1);
+                }
+              } catch (final Throwable _t) {
+                if (_t instanceof Exception) {
+                  final Exception e = (Exception)_t;
+                  String _message = e.getMessage();
+                  AnnotationProcessor.LOG.error(_message, e);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
               }
             }
           }
