@@ -149,39 +149,41 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			sourceURI = currentExportedContainerURI;
 		}
 		for(EReference ref: sourceCandidate.eClass().getEAllReferences()) {
-			if(ref.isContainment()) {
-				Object content = sourceCandidate.eGet(ref, false);
-				if(ref.isMany()) {
-					InternalEList<EObject> contentList = (InternalEList<EObject>) content;
-					for(int i=0; i<contentList.size(); ++i) {
-						EObject childElement = contentList.basicGet(i);
+			if(sourceCandidate.eIsSet(ref)) {
+				if(ref.isContainment()) {
+					Object content = sourceCandidate.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> contentList = (InternalEList<EObject>) content;
+						for(int i=0; i<contentList.size(); ++i) {
+							EObject childElement = contentList.basicGet(i);
+							if(!childElement.eIsProxy())
+								findLocalReferencesFromElement(targetURISet, childElement, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
+						}
+					} else {
+						EObject childElement = (EObject) content;
 						if(!childElement.eIsProxy())
 							findLocalReferencesFromElement(targetURISet, childElement, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
 					}
-				} else {
-					EObject childElement = (EObject) content;
-					if(!childElement.eIsProxy())
-						findLocalReferencesFromElement(targetURISet, childElement, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
-				}
-			} else if (!ref.isContainer() && sourceCandidate.eIsSet(ref)) {
-				Object value = sourceCandidate.eGet(ref, false);
-				if(ref.isMany()) {
-					InternalEList<EObject> values = (InternalEList<EObject>) value;
-					for(int i=0; i< values.size(); ++i) {
-						EObject refElement = resolveInternalProxy(values.basicGet(i), localResource);
-						URI refURI= EcoreUtil2.getNormalizedURI(refElement);
+				} else if (!ref.isContainer()) {
+					Object value = sourceCandidate.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> values = (InternalEList<EObject>) value;
+						for(int i=0; i< values.size(); ++i) {
+							EObject refElement = resolveInternalProxy(values.basicGet(i), localResource);
+							URI refURI= EcoreUtil2.getNormalizedURI(refElement);
+							if(targetURISet.contains(refURI)) {
+								sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
+								acceptor.accept(new DefaultReferenceDescription(
+										sourceURI, refURI, ref, i, currentExportedContainerURI));
+							}
+						}
+					} else {
+						URI refURI= EcoreUtil2.getNormalizedURI((EObject) value);
 						if(targetURISet.contains(refURI)) {
 							sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
 							acceptor.accept(new DefaultReferenceDescription(
-									sourceURI, refURI, ref, i, currentExportedContainerURI));
+									sourceURI, refURI, ref, -1, currentExportedContainerURI));
 						}
-					}
-				} else {
-					URI refURI= EcoreUtil2.getNormalizedURI((EObject) value);
-					if(targetURISet.contains(refURI)) {
-						sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
-						acceptor.accept(new DefaultReferenceDescription(
-								sourceURI, refURI, ref, -1, currentExportedContainerURI));
 					}
 				}
 			}
