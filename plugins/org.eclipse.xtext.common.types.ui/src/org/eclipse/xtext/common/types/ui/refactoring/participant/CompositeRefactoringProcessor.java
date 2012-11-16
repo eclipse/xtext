@@ -14,6 +14,7 @@ import static com.google.common.collect.Sets.*;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -46,7 +47,7 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 
 	@Singleton
 	public static class Access {
-		
+
 		private CompositeRefactoringProcessor current;
 
 		private RefactoringProcessor currentJdtSourceRefactoringProcessor;
@@ -55,11 +56,20 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 		private Provider<CompositeRefactoringProcessor> compositeRefactoringProvider;
 
 		public CompositeRefactoringProcessor getCurrent(RefactoringProcessor jdtSourceRefactoring) {
-			if (currentJdtSourceRefactoringProcessor != jdtSourceRefactoring) {
+			if (current == null || currentJdtSourceRefactoringProcessor != jdtSourceRefactoring) {
 				current = compositeRefactoringProvider.get();
 				currentJdtSourceRefactoringProcessor = jdtSourceRefactoring;
 			}
 			return current;
+		}
+
+		public void disposeCurrent() {
+			current = null;
+			currentJdtSourceRefactoringProcessor = null;
+		}
+		
+		public boolean isDisposed() {
+			return current == null && currentJdtSourceRefactoringProcessor == null;
 		}
 	}
 

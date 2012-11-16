@@ -152,4 +152,10 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 			return Collections.emptyList();
 		}
 	}
+	
+	@Override
+	protected void dispose() {
+		super.dispose();
+		compositeRefactoringProcessorAccess.disposeCurrent();
+	}
 }
