@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/AbstractSimpleExpressionsRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule">
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="bindClassLoaderToInstance()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/services/SimpleExpressionsGrammarAccess.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess">
+        <filter comment="Cannot use @since in generated code" id="1143996420">
+            <message_arguments>
+                <message_argument value="internalFindGrammar(GrammarProvider)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
         <filter comment="Make API tooling happy" id="305324134">
             <message_arguments>
