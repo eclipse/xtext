@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.grammarAccess;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,9 +52,15 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming())).getBindings();
+		BindFactory bindFactory = new BindFactory();
+		// generating this binding for terminals will break existing languages
+		if(!equal("org.eclipse.xtext.common.Terminals", grammar.getName())) {
+			bindFactory
+				.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()");
+		}
+		bindFactory.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming()));
+		return bindFactory.getBindings();
+			
 	}
 
 	@Override
