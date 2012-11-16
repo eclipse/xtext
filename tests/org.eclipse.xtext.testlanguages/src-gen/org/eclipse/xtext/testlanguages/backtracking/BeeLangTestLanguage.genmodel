@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.testlanguages" forceOverwrite="true" modelName="BeeLangTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.testlanguages.edit"
-    editorPluginID="org.eclipse.xtext.testlanguages.editor">
+    editorPluginID="org.eclipse.xtext.testlanguages.editor" runtimeVersion="2.5">
   <genPackages prefix="BeeLangTestLanguage" basePackage="org.eclipse.xtext.testlanguages.backtracking"
       disposableProviderFactory="true" ecorePackage="BeeLangTestLanguage.ecore#/">
     <genClasses ecoreClass="BeeLangTestLanguage.ecore#//Model">
