@@ -26,5 +26,7 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.backtracking.validation,
- org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer
+ org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer,
+ org.eclipse.xtext.testlanguages.backtracking.scoping,
+ org.eclipse.xtext.testlanguages.backtracking.formatting
 
