@@ -20,6 +20,8 @@ var runtimeProject = "../${projectName}"
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
+		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.genmodel"
 	} 
 	
 	component = DirectoryCleaner {
