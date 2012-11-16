@@ -178,7 +178,8 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 							}
 						}
 					} else {
-						URI refURI= EcoreUtil2.getNormalizedURI((EObject) value);
+						EObject refElement = resolveInternalProxy((EObject) value, localResource);
+						URI refURI= EcoreUtil2.getNormalizedURI(refElement);
 						if(targetURISet.contains(refURI)) {
 							sourceURI = (sourceURI == null) ? EcoreUtil2.getNormalizedURI(sourceCandidate) : sourceURI;
 							acceptor.accept(new DefaultReferenceDescription(
