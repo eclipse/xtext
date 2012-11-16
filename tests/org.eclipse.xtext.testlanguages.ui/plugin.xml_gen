@@ -71,6 +71,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+            name="BeeLangTestLanguage">
+            <keywordReference id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_BeeLangTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_BeeLangTestLanguage"
@@ -138,6 +151,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage -->
+    <extension
+            id="beelangtestlanguage.check.fast"
+            name="BeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="beelangtestlanguage.check.normal"
+            name="BeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="beelangtestlanguage.check.expensive"
+            name="BeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -172,13 +207,34 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
 
     <extension
             point="org.eclipse.ui.editors">
@@ -245,6 +301,19 @@
             id="org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_SimpleBeeLangTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage"
+            name="SimpleBeeLangTestLanguage">
+            <keywordReference id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_SimpleBeeLangTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -315,6 +384,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage -->
+    <extension
+            id="simplebeelangtestlanguage.check.fast"
+            name="SimpleBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="simplebeelangtestlanguage.check.normal"
+            name="SimpleBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="simplebeelangtestlanguage.check.expensive"
+            name="SimpleBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -349,13 +440,34 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
 
     <extension
             point="org.eclipse.ui.editors">
@@ -422,6 +534,19 @@
             id="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_ExBeeLangTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
+            name="ExBeeLangTestLanguage">
+            <keywordReference id="org.eclipse.xtext.testlanguages.backtracking.ui.keyword_ExBeeLangTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -492,6 +617,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage -->
+    <extension
+            id="exbeelangtestlanguage.check.fast"
+            name="ExBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="exbeelangtestlanguage.check.normal"
+            name="ExBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="exbeelangtestlanguage.check.expensive"
+            name="ExBeeLangTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -526,12 +673,33 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
 
 </plugin>
