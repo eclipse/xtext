@@ -112,11 +112,9 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			if (targetElement == null) {
 				status.add(FATAL, "Rename target element {0} can not be resolved", targetElementURI);
 			} else {
-				if (isValidTargetFile(targetElement.eResource(), status)) {
-					this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
-					if (this.renameStrategy == null)
-						return false;
-				}
+				this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
+				if (this.renameStrategy == null)
+					return false;
 			}
 		} catch (NoSuchStrategyException e) {
 			status.add(FATAL, e.getMessage());
@@ -146,7 +144,10 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		IFile targetFile = projectUtil.findFileStorage(resource.getURI(), true);
 		if (targetFile != null)
 			return true;
-		status.add(FATAL, "Rename target file cannot be accessed");
+		String path = (resource.getURI().isPlatformResource()) 
+				? resource.getURI().toPlatformString(true)
+				: resource.getURI().toString();
+		status.add(FATAL, "Rename target file '" + path + "' cannot be accessed", resource.getURI());
 		return false;
 	}
 
@@ -207,6 +208,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
+		isValidTargetFile(targetElement.eResource(), status);
 		if(!status.getRefactoringStatus().hasFatalError())
 			status.merge(validateNewName(newName));
 		return status.getRefactoringStatus();
