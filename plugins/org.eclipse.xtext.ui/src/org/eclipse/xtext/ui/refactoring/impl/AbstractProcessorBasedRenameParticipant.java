@@ -167,8 +167,19 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 			}
 		} catch (Exception e) {
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error creating change", e));
+		} finally {
+			dispose();
 		}
 		return compositeChange;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void dispose() {
+		status = null;
+		wrappedProcessors = null;
+		disabledTargets.clear();
 	}
 
 	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {
