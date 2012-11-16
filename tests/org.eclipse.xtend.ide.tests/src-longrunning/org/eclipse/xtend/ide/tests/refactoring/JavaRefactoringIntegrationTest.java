@@ -34,6 +34,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -73,6 +74,9 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	
 	@Inject 
 	private SyncUtil syncUtil;
+	
+	@Inject 
+	private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
 	
 	@Override
 	public void tearDown() throws Exception {
@@ -929,6 +933,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			}
 		}.run(new NullProgressMonitor());
 		waitForAutoBuild();
+		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 		syncUtil.yieldToQueuedDisplayJobs(null);
 	}
 
@@ -976,6 +981,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
 		waitForAutoBuild();
+		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
 	protected void renameJavaElement(IMethod javaElement, String newName) throws CoreException, InterruptedException,
@@ -984,6 +990,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
 		waitForAutoBuild();
+		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
 	protected void renameJavaElement(IField javaElement, String newName) throws CoreException, InterruptedException,
@@ -991,6 +998,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
 		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
 		waitForAutoBuild();
+		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
 	}
 
 	protected IType findJavaType(String typeName) throws JavaModelException {
