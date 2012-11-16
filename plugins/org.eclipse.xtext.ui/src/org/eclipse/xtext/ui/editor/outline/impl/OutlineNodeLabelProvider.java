@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -69,6 +70,7 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 	}
 
 	public String getText(Object element) {
-		return getStyledText(element).toString();
+		final StyledString styledText = getStyledText(element);
+		return styledText != null? styledText.toString() : null;
 	}
 }
