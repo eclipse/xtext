@@ -174,7 +174,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 	protected Predicate<EObject> getPredicate(final String uriContains) {
 		return new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				return input.eResource().getURI().toString().contains("%20"+uriContains);
+				return input.eResource().getURI().toString().contains("folder%20"+uriContains);
 			}
 		};
 	}
