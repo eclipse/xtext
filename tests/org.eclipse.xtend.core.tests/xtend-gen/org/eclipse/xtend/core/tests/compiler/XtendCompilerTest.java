@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,9 +19,6 @@ import org.junit.Test;
 public class XtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private JvmModelGenerator generator;
-  
-  @Inject
-  private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Test
   public void testBug383568() {

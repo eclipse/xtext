@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
@@ -11,8 +10,6 @@ import org.junit.Test
 class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
-	
-	@Inject extension IXtendJvmAssociations
 	
 	@Test def testBug383568() {
 		'''
