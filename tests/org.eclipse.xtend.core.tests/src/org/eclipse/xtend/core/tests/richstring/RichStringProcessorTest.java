@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
+import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.common.util.URI;
@@ -14,18 +15,26 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
+import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.IRichStringIndentationHandler;
 import org.eclipse.xtend.core.richstring.IRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -75,6 +84,89 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		
 	}
 	
+	public static class RecordingRichStringPartAcceptor extends AbstractRichStringPartAcceptor.ForLoopOnce {
+
+		private List<String> record = Lists.newArrayList();
+
+		@Override
+		public void acceptForLoop(JvmFormalParameter parameter, @Nullable XExpression expression) {
+			record.add("acceptForLoop()");
+			super.acceptForLoop(parameter, expression);
+		}
+
+		@Override
+		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
+			record.add("acceptEndFor()");
+			super.acceptEndFor(after, indentation);
+		}
+
+		@Override
+		public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
+			record.add("acceptSemanticText(" + text + ")");
+			super.acceptSemanticText(text, origin);
+		}
+
+		@Override
+		public void acceptTemplateText(CharSequence text, @Nullable RichStringLiteral origin) {
+			record.add("acceptTemplateText(" + text + ")");
+			super.acceptTemplateText(text, origin);
+		}
+
+		@Override
+		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
+			record.add("acceptSemanticLineBreak()");
+			super.acceptSemanticLineBreak(charCount, origin, controlStructureSeen);
+		}
+
+		@Override
+		public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
+			record.add("acceptTemplateLineBreak()");
+			super.acceptTemplateLineBreak(charCount, origin);
+		}
+
+		@Override
+		public void acceptIfCondition(XExpression condition) {
+			record.add("acceptIfCondition()");
+			super.acceptIfCondition(condition);
+		}
+
+		@Override
+		public void acceptElseIfCondition(XExpression condition) {
+			record.add("acceptElseIfCondition()");
+			super.acceptElseIfCondition(condition);
+		}
+
+		@Override
+		public void acceptElse() {
+			record.add("acceptElse()");
+			super.acceptElse();
+		}
+
+		@Override
+		public void acceptEndIf() {
+			record.add("acceptEndIf()");
+			super.acceptEndIf();
+		}
+
+		@Override
+		public void acceptExpression(XExpression expression, CharSequence indentation) {
+			record.add("acceptExpression(«" + NodeModelUtils.getNode(expression).getText() + "»)");
+			super.acceptExpression(expression, indentation);
+		}
+
+		@Override
+		public void announceNextLiteral(RichStringLiteral object) {
+			record.add("announceNextLiteral()");
+			super.announceNextLiteral(object);
+		}
+		
+		@Override
+		public String toString() {
+			return Joiner.on("\n").join(record);
+		}
+
+	}
+	
 	public static class ForLoopSkipped extends AbstractRichStringPartAcceptor {
 
 		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, @NonNull CharSequence indentation) {
@@ -122,6 +214,14 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		public String toString() {
 			return "FixedCountForLoops: " + count; 
 		}
+	}
+	
+	protected String recordRichStringProcessorEvents(String string) throws Exception {
+		RichString richString = richString(string);
+		RichStringProcessor processor = new RichStringProcessor();
+		RecordingRichStringPartAcceptor acceptor = new RecordingRichStringPartAcceptor();
+		processor.process(richString, acceptor, new DefaultIndentationHandler());
+		return acceptor.toString();
 	}
 	
 	protected void doTestStackIsConsistent(String string) throws Exception {
@@ -897,6 +997,47 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 			"'''" +
 			"    «\n  »" +
 			"'''");
+	}
+	
+	@Test public void testProcessorEvents1() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"'''\n" +
+				"    «true»\n" +
+				"'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(    )\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticText()\n"+
+				"acceptExpression(«true»)\n"+
+				"announceNextLiteral()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticLineBreak()\n"+
+				"acceptTemplateText()";
+		Assert.assertEquals(expected, events);
+	}
+	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
+	@Test public void testProcessorEventsBug394277() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"'''\n" +
+						"    «»\n" +
+				"'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(    )\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticText()\n"+
+//				"acceptExpression(«true»)\n"+
+				"announceNextLiteral()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticLineBreak()\n"+
+				"acceptTemplateText()";
+		Assert.assertEquals(expected, events);
 	}
 
 	@Test public void testBug342556_01() throws Exception {
