@@ -25,9 +25,9 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;

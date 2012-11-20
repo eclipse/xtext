@@ -1,6 +1,8 @@
 package org.eclipse.xtend.core.formatting
 
-import javax.inject.Singleton
+import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys
+import org.eclipse.xtext.xbase.formatting.BlankLineKey
+import com.google.inject.Singleton
 
 @Singleton
 class XtendFormatterConfigKeys extends XbaseFormatterConfigKeys {
@@ -15,20 +17,3 @@ class XtendFormatterConfigKeys extends XbaseFormatterConfigKeys {
 	public val blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", 1)
 }
 
-class NewLineOrPreserveKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}
-
-class NewLineKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}
-
-class WhitespaceKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}

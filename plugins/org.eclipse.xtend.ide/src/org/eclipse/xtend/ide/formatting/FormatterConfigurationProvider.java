@@ -11,12 +11,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 import com.google.inject.Inject;
 

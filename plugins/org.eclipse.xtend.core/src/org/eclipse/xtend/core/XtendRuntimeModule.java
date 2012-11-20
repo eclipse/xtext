@@ -7,8 +7,7 @@ import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.featurecalls.XtendIdentifiableSimpleNameProvider;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.RuntimeFormatterConfigurationProvider;
+import org.eclipse.xtend.core.formatting.XtendFormatterRuntimeConfigProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -127,6 +127,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 	
 	public Class<? extends IFormatterConfigurationProvider> bindIFormatterConfigurationProvider() {
-		return RuntimeFormatterConfigurationProvider.class;
+		return XtendFormatterRuntimeConfigProvider.class;
 	}
 }

@@ -16,14 +16,14 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.text.MarginPainter;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 public class XtendFormatterPreview implements Observer {
 	private final EmbeddedEditor editorHandle;

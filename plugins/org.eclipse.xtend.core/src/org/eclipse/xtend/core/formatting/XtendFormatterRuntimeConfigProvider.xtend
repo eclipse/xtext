@@ -10,12 +10,15 @@ package org.eclipse.xtend.core.formatting
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  * @author Moritz Eysholdt
  */
-class RuntimeFormatterConfigurationProvider implements IFormatterConfigurationProvider {
+class XtendFormatterRuntimeConfigProvider implements IFormatterConfigurationProvider {
 
 	@Inject XtendFormatterConfigKeys keys;
 	@Inject IWhitespaceInformationProvider whitespaceInfo

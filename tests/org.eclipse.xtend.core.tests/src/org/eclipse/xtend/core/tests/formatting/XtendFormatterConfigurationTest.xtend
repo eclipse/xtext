@@ -1,12 +1,12 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.formatting.AbstractConfigurationKeys
-import org.eclipse.xtend.core.formatting.BooleanKey
-import org.eclipse.xtend.core.formatting.IntegerKey
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues
-import org.eclipse.xtend.core.formatting.StringKey
-import org.eclipse.xtend.core.formatting.TransientKey
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
+import org.eclipse.xtext.xbase.configuration.AbstractConfigurationKeys
+import org.eclipse.xtext.xbase.configuration.BooleanKey
+import org.eclipse.xtext.xbase.configuration.IntegerKey
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
+import org.eclipse.xtext.xbase.configuration.StringKey
+import org.eclipse.xtext.xbase.configuration.TransientKey
 import org.junit.Test
 
 import static org.junit.Assert.*

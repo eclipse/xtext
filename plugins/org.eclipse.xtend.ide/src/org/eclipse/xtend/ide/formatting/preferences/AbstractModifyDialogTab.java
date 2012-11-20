@@ -16,9 +16,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.BooleanKey;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.IntegerKey;
+import org.eclipse.xtext.xbase.configuration.BooleanKey;
+import org.eclipse.xtext.xbase.configuration.IntegerKey;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;

@@ -19,15 +19,15 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
+import org.eclipse.xtext.xbase.formatting.TextReplacement;
 
 import com.google.inject.Inject;
 
