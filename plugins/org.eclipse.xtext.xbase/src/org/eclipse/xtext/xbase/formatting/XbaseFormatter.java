@@ -32,10 +32,11 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XWhileExpressionEleme
 import com.google.inject.Inject;
 
 /**
- * This class contains custom formatting description.
+ * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting on how and when to use it
+ * use XbaseFormatter2.xtend
  */
+@Deprecated()
 public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	@Inject
