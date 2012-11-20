@@ -106,8 +106,10 @@ public class Activator extends Plugin {
 	protected void registerListeners() {
 		workspace.addResourceChangeListener(resourceChangeListener);
 	}
+	
 	protected void unregisterListeners() {
-		workspace.removeResourceChangeListener(resourceChangeListener);
+		if (resourceChangeListener != null)
+			workspace.removeResourceChangeListener(resourceChangeListener);
 	}
 
 	@Override
