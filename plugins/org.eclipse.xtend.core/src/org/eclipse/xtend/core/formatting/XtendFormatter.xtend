@@ -1084,48 +1084,4 @@ public class XtendFormatter {
 			return length <= fmt.cfg.get(maxLineWidth)
 		}
 	}
-
 }
-/* class RichStringFormatter extends AbstractRichStringPartAcceptor$ForLoopOnce {
-	
-	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
-		println('''super.acceptSemanticLineBreak(charCount=«charCount», origin, controlStructureSeen=«controlStructureSeen»)''')
-		
-	}
-	
-	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
-		println('''super.acceptSemanticText(text=«text», origin)''')
-	}
-	
-	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
-		println('''super.acceptTemplateLineBreak(charCount=«charCount», origin)''')
-		
-	}
-	
-	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
-		println('''super.acceptTemplateText(text=«text», origin)''')
-	}
-} */
-// problem: Format is not being filled sequentially, therefore lookahead operations on it may be affected 
-/*
- * def dispatch void genExpression(ExpCtx it, ForStmt forStmt) {
-		genExpression("loop", forStmt.source,
-			forStmt.
-				newTypeRef(typeof(Iterable),
-					wildCardExtends(forStmt.parameterType)))
-	}
- */
-/*
-				members +=
-					element.
-						toMethod("toString", element.newTypeRef(typeof(String))) [
-							body = [
-								val type = findDeclaredType(typeof(ToStringHelper),
-									element)
-								append("return new ")
-								append(type)
-								append("().toString(this);");
-							]
-						]
-
-  */
