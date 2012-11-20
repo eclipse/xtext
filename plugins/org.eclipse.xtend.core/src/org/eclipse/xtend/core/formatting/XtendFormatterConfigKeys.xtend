@@ -15,7 +15,6 @@ class XtendFormatterConfigKeys extends XbaseFormatterConfigKeys {
 	public val blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", 1)
 }
 
-
 class NewLineOrPreserveKey extends BooleanKey {
 	new(String name, Boolean defaultValue) {
 		super(name, defaultValue)

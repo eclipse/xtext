@@ -35,9 +35,9 @@ class FormattableDocument {
 				val text = getTextAround(data)
 				log.error('''
 					lenght of text-edit can not be negative:
-					------------------------------------- document snippet ---------------------------------------
+					--------------------------------- document snippet ------------------------------
 					«text.key»[[[!!]]]«text.value»
-					----------------------------------------------------------------------------------------------
+					---------------------------------------------------------------------------------
 				''')
 				throw new IllegalStateException("Length of text edit can not be negative")
 			}
@@ -47,9 +47,9 @@ class FormattableDocument {
 					val text = getTextAround(data)
 					log.error('''
 						Can not edit non-whitespace:
-						------------------------------------- document snippet ---------------------------------------
+						------------------------------- document snippet --------------------------------
 						«text.key»[[[«oldText»]]]«text.value»
-						----------------------------------------------------------------------------------------------
+						---------------------------------------------------------------------------------
 					''')
 					throw new IllegalStateException("Can non format non-whitespace: "+oldText)
 				}
@@ -103,16 +103,16 @@ class FormattableDocument {
 		val shortTrace2 = fullTrace2.subList(0, fullTrace2.size - traceStart).join("\n")
 		log.error('''
 			Conflicting TextEdits during formatting:
-			------------------------------------- document snippet ---------------------------------------
+			------------------------------- document snippet --------------------------------
 			«text.key»[!!!]«text.value»
-			----------------------------------------------------------------------------------------------
+			---------------------------------------------------------------------------------
 			TextEdit1: «data1.toString.replaceAll("\\n\\s*"," ")»
 			TextEdit2: «data2.toString.replaceAll("\\n\\s*"," ")»
-			------------------------------------------ Trace 1 -------------------------------------------
+			---------------------------------- Trace 1 --------------------------------------
 			«shortTrace1»
-			------------------------------------------ Trace 2 -------------------------------------------
+			---------------------------------- Trace 2 --------------------------------------
 			«shortTrace2»
-			----------------------------------------------------------------------------------------------
+			---------------------------------------------------------------------------------
 		''')
 	}
 	
@@ -138,13 +138,13 @@ class FormattableDocument {
 		val replacements = <TextReplacement>newArrayList
 		var oldOffset = offset
 		var indentation = 0
-		for(f:formattings.values) {
+		for (f : formattings.values) {
 			indentation = indentation + f.indentationChange
-			if(f.offset >= offset && f.offset + f.length <= offset + length) {
+			if (f.offset >= offset && f.offset + f.length <= offset + length) {
 				val textlength = f.offset - oldOffset
 				switch f {
 					WhitespaceData: {
-						if(f.space != null) {
+						if (f.space != null) {
 							val replacement = f.space
 							replacements += new TextReplacement(f.offset, f.length, replacement)
 						}

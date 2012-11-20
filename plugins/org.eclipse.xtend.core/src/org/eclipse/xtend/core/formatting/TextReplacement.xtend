@@ -7,4 +7,3 @@ import org.eclipse.xtend.lib.Data
 	int length
 	String text
 }
-

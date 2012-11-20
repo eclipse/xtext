@@ -108,7 +108,7 @@ public class FormattableDocument {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("lenght of text-edit can not be negative:");
           _builder.newLine();
-          _builder.append("------------------------------------- document snippet ---------------------------------------");
+          _builder.append("--------------------------------- document snippet ------------------------------");
           _builder.newLine();
           String _key = text.getKey();
           _builder.append(_key, "");
@@ -116,7 +116,7 @@ public class FormattableDocument {
           String _value = text.getValue();
           _builder.append(_value, "");
           _builder.newLineIfNotEmpty();
-          _builder.append("----------------------------------------------------------------------------------------------");
+          _builder.append("---------------------------------------------------------------------------------");
           _builder.newLine();
           FormattableDocument.log.error(_builder);
           IllegalStateException _illegalStateException = new IllegalStateException("Length of text edit can not be negative");
@@ -138,7 +138,7 @@ public class FormattableDocument {
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("Can not edit non-whitespace:");
             _builder_1.newLine();
-            _builder_1.append("------------------------------------- document snippet ---------------------------------------");
+            _builder_1.append("------------------------------- document snippet --------------------------------");
             _builder_1.newLine();
             String _key_1 = text_1.getKey();
             _builder_1.append(_key_1, "");
@@ -148,7 +148,7 @@ public class FormattableDocument {
             String _value_1 = text_1.getValue();
             _builder_1.append(_value_1, "");
             _builder_1.newLineIfNotEmpty();
-            _builder_1.append("----------------------------------------------------------------------------------------------");
+            _builder_1.append("---------------------------------------------------------------------------------");
             _builder_1.newLine();
             FormattableDocument.log.error(_builder_1);
             String _plus_1 = ("Can non format non-whitespace: " + oldText);
@@ -346,7 +346,7 @@ public class FormattableDocument {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Conflicting TextEdits during formatting:");
     _builder.newLine();
-    _builder.append("------------------------------------- document snippet ---------------------------------------");
+    _builder.append("------------------------------- document snippet --------------------------------");
     _builder.newLine();
     String _key = text.getKey();
     _builder.append(_key, "");
@@ -354,7 +354,7 @@ public class FormattableDocument {
     String _value = text.getValue();
     _builder.append(_value, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("----------------------------------------------------------------------------------------------");
+    _builder.append("---------------------------------------------------------------------------------");
     _builder.newLine();
     _builder.append("TextEdit1: ");
     String _string = data1.toString();
@@ -366,15 +366,15 @@ public class FormattableDocument {
     String _replaceAll_1 = _string_1.replaceAll("\\n\\s*", " ");
     _builder.append(_replaceAll_1, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("------------------------------------------ Trace 1 -------------------------------------------");
+    _builder.append("---------------------------------- Trace 1 --------------------------------------");
     _builder.newLine();
     _builder.append(shortTrace1, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("------------------------------------------ Trace 2 -------------------------------------------");
+    _builder.append("---------------------------------- Trace 2 --------------------------------------");
     _builder.newLine();
     _builder.append(shortTrace2, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("----------------------------------------------------------------------------------------------");
+    _builder.append("---------------------------------------------------------------------------------");
     _builder.newLine();
     FormattableDocument.log.error(_builder);
   }
