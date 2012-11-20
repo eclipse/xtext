@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.core.formatting.BlankLineKey;
 import org.eclipse.xtend.core.formatting.CommentInfo;
@@ -34,11 +35,20 @@ public class FormatterExtensions {
   private HiddenLeafAccess _hiddenLeafAccess;
   
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xblockexpression = null;
+    {
+      FormattingDataInit _formattingDataInit = new FormattingDataInit();
+      final FormattingDataInit data = _formattingDataInit;
+      init.apply(data);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(leafs, data.key, data);
+      _xblockexpression = (_newFormattingData);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataInit it) {
     final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
-          FormattingDataInit _formattingDataInit = new FormattingDataInit();
-          final FormattingDataInit it = _formattingDataInit;
-          init.apply(it);
           boolean _and = false;
           Integer _newLinesInComments = leafs.getNewLinesInComments();
           boolean _equals = ((_newLinesInComments).intValue() == 0);
@@ -57,17 +67,134 @@ public class FormatterExtensions {
           }
           if (_and) {
             boolean _isDebugConflicts = doc.isDebugConflicts();
-            return FormatterExtensions.this.newFormattingData(leafs, it.space, it.indentationChange, _isDebugConflicts);
+            return FormatterExtensions.this.newWhitespaceData(leafs, it.space, it.indentationChange, _isDebugConflicts);
           } else {
             boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-            return FormatterExtensions.this.newFormattingData(leafs, it.newLines, it.newLines, it.indentationChange, _isDebugConflicts_1);
+            return FormatterExtensions.this.newNewLineData(leafs, it.newLines, it.newLines, it.indentationChange, _isDebugConflicts_1);
           }
         }
       };
     return _function;
   }
   
-  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final String space, final int indentationChange, final boolean trace) {
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataInit it) {
+    final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
+        public Iterable<FormattingData> apply(final FormattableDocument doc) {
+          Iterable<FormattingData> _xblockexpression = null;
+          {
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
+            final Integer blankline = _cfg.<Integer>get(key);
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = doc.getCfg();
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = doc.getCfg();
+            XtendFormatterConfigKeys _keys = _cfg_2.getKeys();
+            final Integer preserve = _cfg_1.<Integer>get(_keys.preserveBlankLines);
+            final int min = ((blankline).intValue() + 1);
+            int _plus = ((preserve).intValue() + 1);
+            final int max = Math.max(_plus, min);
+            boolean _isDebugConflicts = doc.isDebugConflicts();
+            Iterable<FormattingData> _newNewLineData = FormatterExtensions.this.newNewLineData(leafs, min, max, it.indentationChange, _isDebugConflicts);
+            _xblockexpression = (_newNewLineData);
+          }
+          return _xblockexpression;
+        }
+      };
+    return _function;
+  }
+  
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataInit it) {
+    final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
+        public Iterable<FormattingData> apply(final FormattableDocument doc) {
+          Iterable<FormattingData> _xblockexpression = null;
+          {
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
+            final Boolean newLine = _cfg.<Boolean>get(key);
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = doc.getCfg();
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = doc.getCfg();
+            XtendFormatterConfigKeys _keys = _cfg_2.getKeys();
+            final Boolean preserve = _cfg_1.<Boolean>get(_keys.preserveNewLines);
+            int _xifexpression = (int) 0;
+            if ((newLine).booleanValue()) {
+              _xifexpression = 1;
+            } else {
+              _xifexpression = 0;
+            }
+            int _xifexpression_1 = (int) 0;
+            boolean _or = false;
+            if ((preserve).booleanValue()) {
+              _or = true;
+            } else {
+              _or = ((preserve).booleanValue() || (newLine).booleanValue());
+            }
+            if (_or) {
+              _xifexpression_1 = 1;
+            } else {
+              _xifexpression_1 = 0;
+            }
+            boolean _isDebugConflicts = doc.isDebugConflicts();
+            Iterable<FormattingData> _newNewLineData = FormatterExtensions.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.indentationChange, _isDebugConflicts);
+            _xblockexpression = (_newNewLineData);
+          }
+          return _xblockexpression;
+        }
+      };
+    return _function;
+  }
+  
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataInit it) {
+    final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
+        public Iterable<FormattingData> apply(final FormattableDocument doc) {
+          Iterable<FormattingData> _xblockexpression = null;
+          {
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
+            final Boolean newLine = _cfg.<Boolean>get(key);
+            int _xifexpression = (int) 0;
+            if ((newLine).booleanValue()) {
+              _xifexpression = 1;
+            } else {
+              _xifexpression = 0;
+            }
+            final int minmax = _xifexpression;
+            boolean _isDebugConflicts = doc.isDebugConflicts();
+            Iterable<FormattingData> _newNewLineData = FormatterExtensions.this.newNewLineData(leafs, minmax, minmax, it.indentationChange, _isDebugConflicts);
+            _xblockexpression = (_newNewLineData);
+          }
+          return _xblockexpression;
+        }
+      };
+    return _function;
+  }
+  
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final IConfigurationKey<? extends Object> key, final FormattingDataInit it) {
+    Class<? extends Object> _class = key.getClass();
+    String _plus = ("Unknown configuration key kind: " + _class);
+    RuntimeException _runtimeException = new RuntimeException(_plus);
+    throw _runtimeException;
+  }
+  
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataInit it) {
+    final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
+        public Iterable<FormattingData> apply(final FormattableDocument doc) {
+          Iterable<FormattingData> _xblockexpression = null;
+          {
+            IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
+            final Boolean space = _cfg.<Boolean>get(key);
+            String _xifexpression = null;
+            if ((space).booleanValue()) {
+              _xifexpression = " ";
+            } else {
+              _xifexpression = "";
+            }
+            boolean _isDebugConflicts = doc.isDebugConflicts();
+            Iterable<FormattingData> _newWhitespaceData = FormatterExtensions.this.newWhitespaceData(leafs, _xifexpression, it.indentationChange, _isDebugConflicts);
+            _xblockexpression = (_newWhitespaceData);
+          }
+          return _xblockexpression;
+        }
+      };
+    return _function;
+  }
+  
+  protected Iterable<FormattingData> newWhitespaceData(final HiddenLeafs leafs, final String space, final int indentationChange, final boolean trace) {
     ArrayList<FormattingData> _xblockexpression = null;
     {
       final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
@@ -101,139 +228,7 @@ public class FormatterExtensions {
     return _xblockexpression;
   }
   
-  public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final IConfigurationKey<? extends Object> key, final int indentationChange) {
-    Function1<FormattableDocument,Iterable<FormattingData>> _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (key instanceof BlankLineKey) {
-        final BlankLineKey _blankLineKey = (BlankLineKey)key;
-        _matched=true;
-        final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
-            public Iterable<FormattingData> apply(final FormattableDocument doc) {
-              Iterable<FormattingData> _xblockexpression = null;
-              {
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
-                final Integer blankline = _cfg.<Integer>get(_blankLineKey);
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = doc.getCfg();
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = doc.getCfg();
-                XtendFormatterConfigKeys _keys = _cfg_2.getKeys();
-                final Integer preserve = _cfg_1.<Integer>get(_keys.preserveBlankLines);
-                final int min = ((blankline).intValue() + 1);
-                int _plus = ((preserve).intValue() + 1);
-                final int max = Math.max(_plus, min);
-                boolean _isDebugConflicts = doc.isDebugConflicts();
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, min, max, indentationChange, _isDebugConflicts);
-                _xblockexpression = (_newFormattingData);
-              }
-              return _xblockexpression;
-            }
-          };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (key instanceof NewLineOrPreserveKey) {
-        final NewLineOrPreserveKey _newLineOrPreserveKey = (NewLineOrPreserveKey)key;
-        _matched=true;
-        final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
-            public Iterable<FormattingData> apply(final FormattableDocument doc) {
-              Iterable<FormattingData> _xblockexpression = null;
-              {
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
-                final Boolean newLine = _cfg.<Boolean>get(_newLineOrPreserveKey);
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = doc.getCfg();
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg_2 = doc.getCfg();
-                XtendFormatterConfigKeys _keys = _cfg_2.getKeys();
-                final Boolean preserve = _cfg_1.<Boolean>get(_keys.preserveNewLines);
-                int _xifexpression = (int) 0;
-                if ((newLine).booleanValue()) {
-                  _xifexpression = 1;
-                } else {
-                  _xifexpression = 0;
-                }
-                int _xifexpression_1 = (int) 0;
-                boolean _or = false;
-                if ((preserve).booleanValue()) {
-                  _or = true;
-                } else {
-                  _or = ((preserve).booleanValue() || (newLine).booleanValue());
-                }
-                if (_or) {
-                  _xifexpression_1 = 1;
-                } else {
-                  _xifexpression_1 = 0;
-                }
-                boolean _isDebugConflicts = doc.isDebugConflicts();
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, _xifexpression_1, indentationChange, _isDebugConflicts);
-                _xblockexpression = (_newFormattingData);
-              }
-              return _xblockexpression;
-            }
-          };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (key instanceof NewLineKey) {
-        final NewLineKey _newLineKey = (NewLineKey)key;
-        _matched=true;
-        final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
-            public Iterable<FormattingData> apply(final FormattableDocument doc) {
-              Iterable<FormattingData> _xblockexpression = null;
-              {
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
-                final Boolean newLine = _cfg.<Boolean>get(_newLineKey);
-                int _xifexpression = (int) 0;
-                if ((newLine).booleanValue()) {
-                  _xifexpression = 1;
-                } else {
-                  _xifexpression = 0;
-                }
-                final int minmax = _xifexpression;
-                boolean _isDebugConflicts = doc.isDebugConflicts();
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, minmax, minmax, indentationChange, _isDebugConflicts);
-                _xblockexpression = (_newFormattingData);
-              }
-              return _xblockexpression;
-            }
-          };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      if (key instanceof WhitespaceKey) {
-        final WhitespaceKey _whitespaceKey = (WhitespaceKey)key;
-        _matched=true;
-        final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
-            public Iterable<FormattingData> apply(final FormattableDocument doc) {
-              Iterable<FormattingData> _xblockexpression = null;
-              {
-                IConfigurationValues<XtendFormatterConfigKeys> _cfg = doc.getCfg();
-                final Boolean space = _cfg.<Boolean>get(_whitespaceKey);
-                String _xifexpression = null;
-                if ((space).booleanValue()) {
-                  _xifexpression = " ";
-                } else {
-                  _xifexpression = "";
-                }
-                boolean _isDebugConflicts = doc.isDebugConflicts();
-                Iterable<FormattingData> _newFormattingData = FormatterExtensions.this.newFormattingData(leafs, _xifexpression, indentationChange, _isDebugConflicts);
-                _xblockexpression = (_newFormattingData);
-              }
-              return _xblockexpression;
-            }
-          };
-        _switchResult = _function;
-      }
-    }
-    if (!_matched) {
-      RuntimeException _runtimeException = new RuntimeException("can\'t handle configuration key");
-      throw _runtimeException;
-    }
-    return _switchResult;
-  }
-  
-  public Iterable<FormattingData> newFormattingData(final HiddenLeafs leafs, final int minNewLines, final int maxNewLines, final int indentationChange, final boolean trace) {
+  protected Iterable<FormattingData> newNewLineData(final HiddenLeafs leafs, final int minNewLines, final int maxNewLines, final int indentationChange, final boolean trace) {
     ArrayList<FormattingData> _xblockexpression = null;
     {
       final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
@@ -428,17 +423,6 @@ public class FormatterExtensions {
     return _xifexpression;
   }
   
-  public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> append(final INode node, final IConfigurationKey<? extends Object> key) {
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(node, null));
-    if (_notEquals) {
-      HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, key, 0);
-      _xifexpression = _newFormattingData;
-    }
-    return _xifexpression;
-  }
-  
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
@@ -508,14 +492,22 @@ public class FormatterExtensions {
     return _function;
   }
   
-  public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> prepend(final INode node, final IConfigurationKey<? extends Object> key) {
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(node, null));
-    if (_notEquals) {
-      HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, key, 0);
-      _xifexpression = _newFormattingData;
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final IConfigurationKey<? extends Object> key, final FormattingDataInit it) {
+    if (key instanceof BlankLineKey) {
+      return _newFormattingData(leafs, (BlankLineKey)key, it);
+    } else if (key instanceof NewLineKey) {
+      return _newFormattingData(leafs, (NewLineKey)key, it);
+    } else if (key instanceof NewLineOrPreserveKey) {
+      return _newFormattingData(leafs, (NewLineOrPreserveKey)key, it);
+    } else if (key instanceof WhitespaceKey) {
+      return _newFormattingData(leafs, (WhitespaceKey)key, it);
+    } else if (key == null) {
+      return _newFormattingData(leafs, (Void)null, it);
+    } else if (key != null) {
+      return _newFormattingData(leafs, key, it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(leafs, key, it).toString());
     }
-    return _xifexpression;
   }
 }
