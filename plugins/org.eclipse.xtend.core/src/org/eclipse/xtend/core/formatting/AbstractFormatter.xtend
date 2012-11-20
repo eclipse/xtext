@@ -1,10 +1,7 @@
 package org.eclipse.xtend.core.formatting
 
-import org.eclipse.xtext.formatting.IFormatter
-import org.eclipse.xtend.core.formatting.IConfigurationValues
-import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.emf.ecore.EObject
-import com.google.inject.Inject
+import org.eclipse.xtext.resource.XtextResource
 
 abstract class AbstractFormatter<T extends AbstractFormatterConfigurationKeys> implements IFormatter<T> {
 
