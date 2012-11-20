@@ -79,6 +79,34 @@ class XtendCommentFormatterTest extends AbstractFormatterTest {
 		''')	
 	}
 	
+	@Test def formatSLCommentInStatement() {
+		assertFormatted('''
+			package /* my comment */ foo
+			
+			class bar {
+			}
+		''', '''
+			package  /* my comment */  foo
+			class bar{}
+		''')	
+	}
+	
+	@Test def formatMLCommentInStatement() {
+		assertFormatted('''
+			package
+			/* my 
+			comment */
+			foo
+			
+			class bar {
+			}
+		''', '''
+			package  /* my 
+			comment */  foo
+			class bar{}
+		''')	
+	}
+	
 	@Test def formatMLCommentBeforeStatement1() {
 		assertFormatted('''
 			package foo

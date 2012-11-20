@@ -163,10 +163,14 @@ class HiddenLeafAccess {
 }
 
 @Data class CommentInfo extends LeafInfo {
-	boolean trailing
+	boolean trailing // true if this comment is in the first line of its HiddenLeafs
 	
 	def endsWithNewLine() {
 		node.text.endsWith("\n")
+	}
+	
+	def isMultiline() {
+		!endsWithNewLine && node.text.contains("\n")
 	}
 	
 	override toString() '''
