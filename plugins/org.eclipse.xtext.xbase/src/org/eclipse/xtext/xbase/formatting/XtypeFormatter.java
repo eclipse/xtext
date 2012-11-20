@@ -10,10 +10,11 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.JvmParameterizedTypeR
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XFunctionTypeRefElements;
 
 /**
- * This class contains custom formatting description.
+ * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting on how and when to use it
+ * use XbaseFormatter2.xtend
  */
+@Deprecated
 public class XtypeFormatter extends AbstractDeclarativeFormatter {
 
 	@Override
