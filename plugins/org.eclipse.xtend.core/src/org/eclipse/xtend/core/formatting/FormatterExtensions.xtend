@@ -9,17 +9,58 @@ class FormatterExtensions {
 	@Inject extension HiddenLeafAccess
 	
 	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
+		val data = new FormattingDataInit()
+		init.apply(data)
+		newFormattingData(leafs, data.key, data)
+	}
+	
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, Void key, FormattingDataInit it) {
 		[ FormattableDocument doc |
-			val it = new FormattingDataInit()
-			init.apply(it)
 			if(leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
-				return newFormattingData(leafs, space, indentationChange, doc.debugConflicts)
+				return newWhitespaceData(leafs, space, indentationChange, doc.debugConflicts)
 			else
-				return newFormattingData(leafs, newLines, newLines, indentationChange, doc.debugConflicts)
+				return newNewLineData(leafs, newLines, newLines, indentationChange, doc.debugConflicts)
 		]
 	}
 	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, String space, int indentationChange, boolean trace) {
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, BlankLineKey key, FormattingDataInit it) {
+	 	[ FormattableDocument doc |
+			val blankline = doc.cfg.get(key)
+			val preserve = doc.cfg.get(doc.cfg.keys.preserveBlankLines)
+			val min = blankline + 1
+			val max = Math::max(preserve + 1, min)
+			newNewLineData(leafs, min, max, indentationChange, doc.debugConflicts)
+		]	
+	}
+	
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineOrPreserveKey key, FormattingDataInit it) {
+		[ FormattableDocument doc |
+			val newLine = doc.cfg.get(key)
+			val preserve = doc.cfg.get(doc.cfg.keys.preserveNewLines)
+			newNewLineData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange, doc.debugConflicts)
+		]		
+	}
+	
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineKey key, FormattingDataInit it) {
+		[ FormattableDocument doc |
+			val newLine = doc.cfg.get(key)
+			val minmax = if(newLine) 1 else 0
+			newNewLineData(leafs, minmax, minmax, indentationChange, doc.debugConflicts)
+		]
+	}
+	
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, IConfigurationKey<?> key, FormattingDataInit it) {
+		throw new RuntimeException("Unknown configuration key kind: " + key.^class)	
+	}
+	
+	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, WhitespaceKey key, FormattingDataInit it) {
+		[ FormattableDocument doc |
+			val space = doc.cfg.get(key)
+			newWhitespaceData(leafs, if(space) " " else "", indentationChange, doc.debugConflicts)
+		]
+	}
+	
+	def protected Iterable<FormattingData> newWhitespaceData(HiddenLeafs leafs, String space, int indentationChange, boolean trace) {
 		val result = <FormattingData>newArrayList
 		for(leaf : leafs.leafs) 
 			switch leaf {
@@ -31,35 +72,7 @@ class FormatterExtensions {
 		result
 	}
 	
-	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, IConfigurationKey<?> key, int indentationChange) {
-		switch key {
-			BlankLineKey: [ FormattableDocument doc |
-				val blankline = doc.cfg.get(key)
-				val preserve = doc.cfg.get(doc.cfg.keys.preserveBlankLines)
-				val min = blankline + 1
-				val max = Math::max(preserve + 1, min)
-				newFormattingData(leafs, min, max, indentationChange, doc.debugConflicts)
-			]
-			NewLineOrPreserveKey: [ FormattableDocument doc |
-				val newLine = doc.cfg.get(key)
-				val preserve = doc.cfg.get(doc.cfg.keys.preserveNewLines)
-				newFormattingData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange, doc.debugConflicts)
-			]
-			NewLineKey: [ FormattableDocument doc |
-				val newLine = doc.cfg.get(key)
-				val minmax = if(newLine) 1 else 0
-				newFormattingData(leafs, minmax, minmax, indentationChange, doc.debugConflicts)
-			]
-			WhitespaceKey: [ FormattableDocument doc |
-				val space = doc.cfg.get(key)
-				newFormattingData(leafs, if(space) " " else "", indentationChange, doc.debugConflicts)
-			]
-			default:
-				throw new RuntimeException("can't handle configuration key")
-		} 
-	}
-	
-	def Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange, boolean trace) {
+	def protected Iterable<FormattingData> newNewLineData(HiddenLeafs leafs, int minNewLines, int maxNewLines, int indentationChange, boolean trace) {
 		val result = <FormattingData>newArrayList
 		var applied = false
 		for(leaf : leafs.leafs) 
@@ -113,12 +126,6 @@ class FormatterExtensions {
 		}
 	}
 	
-	def (FormattableDocument) => Iterable<FormattingData> append(INode node, IConfigurationKey<?> key) {
-		if(node != null) {
-			node.hiddenLeafsAfter.newFormattingData(key, 0)
-		}
-	}
-	
 	def (FormattableDocument) => Iterable<FormattingData> prepend(INode node, (FormattingDataInit)=>void init) {
 		if(node != null) {
 			node.hiddenLeafsBefore.newFormattingData(init)
@@ -145,12 +152,6 @@ class FormatterExtensions {
 			}
 			result
 		]
-	}
-	
-	def (FormattableDocument) => Iterable<FormattingData> prepend(INode node, IConfigurationKey<?> key) {
-		if(node != null) {
-			node.hiddenLeafsBefore.newFormattingData(key, 0)
-		}
 	}
 }
 
