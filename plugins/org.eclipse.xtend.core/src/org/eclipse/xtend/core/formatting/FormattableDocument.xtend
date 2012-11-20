@@ -7,13 +7,13 @@ import org.eclipse.xtext.xbase.lib.Pair
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
-	@Property val IConfigurationValues<XtendFormatterConfigKeys> cfg
+	@Property val IConfigurationValues<? extends AbstractFormatterConfigurationKeys> cfg
 	@Property val String document
 	@Property val TreeMap<Integer, FormattingData> formattings
 	@Property Throwable rootTrace = null
 	@Property boolean conflictOccurred = false
 	
-	new(IConfigurationValues<XtendFormatterConfigKeys> cfg, String document){
+	new(IConfigurationValues<? extends AbstractFormatterConfigurationKeys> cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()

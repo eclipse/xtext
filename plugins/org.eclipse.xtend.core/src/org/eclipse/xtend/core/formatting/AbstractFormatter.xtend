@@ -1,0 +1,37 @@
+package org.eclipse.xtend.core.formatting
+
+import org.eclipse.xtext.formatting.IFormatter
+import org.eclipse.xtend.core.formatting.IConfigurationValues
+import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.emf.ecore.EObject
+import com.google.inject.Inject
+
+abstract class AbstractFormatter<T extends AbstractFormatterConfigurationKeys> implements IFormatter<T> {
+
+	@Property boolean allowIdentityEdits = false
+	@Property boolean diagnoseConflicts = true
+
+	override format(XtextResource res, int offset, int length, IConfigurationValues<T> cfg) {
+		val doc = res.parseResult.rootNode.text
+		val format = new FormattableDocument(cfg, doc)
+		format(res.contents.head, format)
+		if (diagnoseConflicts && format.conflictOccurred) {
+			val debug = new FormattableDocument(cfg, doc)
+			debug.rootTrace = new RuntimeException
+			format(res.contents.head, debug)
+		}
+		val edits = format.renderToEdits(offset, length)
+
+		if (allowIdentityEdits)
+			edits
+		else
+			edits.filter[doc.substring(it.offset, it.offset + it.length) != text].toList
+	}
+
+	def protected dispatch void format(Void expr, FormattableDocument format) {
+	}
+
+	def protected dispatch void format(EObject expr, FormattableDocument format) {
+	}
+
+}
