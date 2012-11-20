@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
+import org.eclipse.xtend.core.formatting.HiddenLeafAccess;
 import org.eclipse.xtend.core.formatting.HiddenLeafs;
 import org.eclipse.xtend.core.formatting.IConfigurationKey;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
@@ -95,6 +96,9 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 public class XtendFormatter {
   @Inject
   private NodeModelAccess _nodeModelAccess;
+  
+  @Inject
+  private HiddenLeafAccess _hiddenLeafAccess;
   
   @Inject
   private FormatterExtensions _formatterExtensions;
@@ -731,10 +735,10 @@ public class XtendFormatter {
   }
   
   protected void formatMemberParameter(final Collection<XtendParameter> parameters, final INode open, final INode close, final FormattableDocument format) {
-    ILeafNode _whitespaceBefore = close==null?(ILeafNode)null:this._nodeModelAccess.whitespaceBefore(close);
-    String _text = _whitespaceBefore==null?(String)null:_whitespaceBefore.getText();
-    boolean _contains = _text==null?false:_text.contains("\n");
-    if (_contains) {
+    HiddenLeafs _hiddenLeafsBefore = close==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(close);
+    Integer _newLines = _hiddenLeafsBefore==null?(Integer)null:_hiddenLeafsBefore.getNewLines();
+    boolean _greaterThan = ((_newLines).intValue() > 0);
+    if (_greaterThan) {
       INode comma = null;
       boolean _isEmpty = parameters.isEmpty();
       if (_isEmpty) {
@@ -865,8 +869,8 @@ public class XtendFormatter {
         }
       }
       int _size = parameters.size();
-      boolean _greaterThan = (_size > 0);
-      if (_greaterThan) {
+      boolean _greaterThan_1 = (_size > 0);
+      if (_greaterThan_1) {
         XtendParameter _last = IterableExtensions.<XtendParameter>last(parameters);
         final INode last = this._nodeModelAccess.nodeForEObject(_last);
         final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
@@ -2645,10 +2649,10 @@ public class XtendFormatter {
    */
   protected boolean isMultilineLambda(final XClosure closure) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(closure, "]");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
-      HiddenLeafs _hiddenLeafsBefore_1 = this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+      HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
       Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
       return ((_newLines).intValue() > 0);
     }
@@ -2682,10 +2686,10 @@ public class XtendFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XMemberFeatureCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
-      HiddenLeafs _hiddenLeafsBefore_1 = this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+      HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
       Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
       return ((_newLines).intValue() > 0);
     }
@@ -2705,10 +2709,10 @@ public class XtendFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XFeatureCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
-      HiddenLeafs _hiddenLeafsBefore_1 = this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+      HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
       Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
       return ((_newLines).intValue() > 0);
     }
@@ -2728,10 +2732,10 @@ public class XtendFormatter {
   
   protected boolean _isMultiParamInOwnLine(final XConstructorCall fc, final FormattableDocument doc) {
     final ILeafNode closingBracket = this._nodeModelAccess.nodeForKeyword(fc, ")");
-    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+    HiddenLeafs _hiddenLeafsBefore = closingBracket==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
-      HiddenLeafs _hiddenLeafsBefore_1 = this._nodeModelAccess.getHiddenLeafsBefore(closingBracket);
+      HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
       Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
       return ((_newLines).intValue() > 0);
     }
@@ -2798,18 +2802,18 @@ public class XtendFormatter {
     if (_contains) {
       _or_1 = true;
     } else {
-      ILeafNode _whitespaceBefore = thennode==null?(ILeafNode)null:this._nodeModelAccess.whitespaceBefore(thennode);
-      String _text_1 = _whitespaceBefore==null?(String)null:_whitespaceBefore.getText();
-      boolean _contains_1 = _text_1==null?false:_text_1.contains("\n");
-      _or_1 = (_contains || _contains_1);
+      HiddenLeafs _hiddenLeafsBefore = thennode==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(thennode);
+      Integer _newLines = _hiddenLeafsBefore==null?(Integer)null:_hiddenLeafsBefore.getNewLines();
+      boolean _greaterThan = ((_newLines).intValue() > 0);
+      _or_1 = (_contains || _greaterThan);
     }
     if (_or_1) {
       _or = true;
     } else {
-      String _text_2 = elsenode==null?(String)null:elsenode.getText();
-      String _trim_1 = _text_2==null?(String)null:_text_2.trim();
-      boolean _contains_2 = _trim_1==null?false:_trim_1.contains("\n");
-      _or = (_or_1 || _contains_2);
+      String _text_1 = elsenode==null?(String)null:elsenode.getText();
+      String _trim_1 = _text_1==null?(String)null:_text_1.trim();
+      boolean _contains_1 = _trim_1==null?false:_trim_1.contains("\n");
+      _or = (_or_1 || _contains_1);
     }
     final boolean multiline = _or;
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, org.eclipse.xtext.xbase.XbasePackage.Literals.XIF_EXPRESSION__IF);

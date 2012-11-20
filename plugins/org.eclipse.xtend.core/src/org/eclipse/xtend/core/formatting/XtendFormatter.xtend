@@ -66,6 +66,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 public class XtendFormatter {
 
 	@Inject extension NodeModelAccess
+	@Inject extension HiddenLeafAccess
 	@Inject extension FormatterExtensions
 	@Inject extension XtendGrammarAccess
 	@Inject extension XtendFormatterConfigKeys
@@ -233,7 +234,7 @@ public class XtendFormatter {
 	}
 	
 	def protected formatMemberParameter(Collection<XtendParameter> parameters, INode open, INode close, FormattableDocument format) {
-		if (close?.whitespaceBefore?.text?.contains("\n")) {
+		if (close?.hiddenLeafsBefore?.newLines > 0) {
 			var INode comma = null
 			if (parameters.empty)
 				format += open.append[noSpace]
@@ -871,7 +872,7 @@ public class XtendFormatter {
 		}
 		val thennode = expr.then.nodeForEObject
 		val elsenode = expr.^else?.nodeForEObject
-		val multiline = thennode?.text?.trim?.contains("\n") || thennode?.whitespaceBefore?.text?.contains("\n") ||
+		val multiline = thennode?.text?.trim?.contains("\n") || thennode?.hiddenLeafsBefore?.newLines > 0 ||
 			elsenode?.text?.trim?.contains("\n")
 		format += expr.nodeForFeature(XIF_EXPRESSION__IF).surround[noSpace]
 		if (expr.then instanceof XBlockExpression || multiline)
