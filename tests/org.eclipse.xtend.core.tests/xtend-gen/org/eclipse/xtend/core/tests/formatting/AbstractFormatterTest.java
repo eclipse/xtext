@@ -250,6 +250,36 @@ public abstract class AbstractFormatterTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
+      Resource _eResource_5 = parsed.eResource();
+      int _length = fullToBeParsed.length();
+      List<TextReplacement> _format_1 = this.formatter.format(((XtextResource) _eResource_5), 0, _length, rc);
+      final String parsed2Doc = this.applyEdits(fullToBeParsed, _format_1);
+      final XtendFile parsed2 = this._parseHelper.parse(parsed2Doc);
+      boolean _not_2 = (!allowErrors);
+      if (_not_2) {
+        Resource _eResource_6 = parsed2.eResource();
+        EList<Diagnostic> _errors_2 = _eResource_6.getErrors();
+        int _size_1 = _errors_2.size();
+        Assert.assertEquals(0, _size_1);
+      }
+      Resource _eResource_7 = parsed2.eResource();
+      int _length_1 = parsed2Doc.length();
+      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_7), 0, _length_1, rc);
+      final String newDocument2 = this.applyEdits(parsed2Doc, edits2);
+      try {
+        String _string_2 = newDocument2.toString();
+        Assert.assertEquals(parsed2Doc, _string_2);
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof AssertionError) {
+          final AssertionError e_1 = (AssertionError)_t_1;
+          String _applyDebugEdits_1 = this.applyDebugEdits(newDocument, edits2);
+          InputOutput.<String>println(_applyDebugEdits_1);
+          InputOutput.println();
+          throw e_1;
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
+        }
+      }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

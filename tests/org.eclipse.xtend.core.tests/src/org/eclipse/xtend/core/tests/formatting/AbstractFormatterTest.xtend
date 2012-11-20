@@ -126,18 +126,19 @@ abstract class AbstractFormatterTest {
 		}
 		
 		// Step 2: Ensure formatting the document again doesn't change the document
-//		val parsed2Doc = fullToBeParsed.applyEdits(formatter.format(parsed.eResource as XtextResource, 0, fullToBeParsed.length, rc))
-//		val parsed2 = parsed2Doc.parse
-//		Assert::assertEquals(0, parsed2.eResource.errors.size)
-//		val edits2 = formatter.format(parsed2.eResource as XtextResource, 0, parsed2Doc.length, rc)
-//		val newDocument2 = parsed2Doc.applyEdits(edits2)
-//		try {
-//			Assert::assertEquals(parsed2Doc, newDocument2.toString)
-//		} catch(AssertionError e) {
-//			println(newDocument.applyDebugEdits(edits2))
-//			println()
-//			throw e
-//		}
+		val parsed2Doc = fullToBeParsed.applyEdits(formatter.format(parsed.eResource as XtextResource, 0, fullToBeParsed.length, rc))
+		val parsed2 = parsed2Doc.parse
+		if(!allowErrors)
+			Assert::assertEquals(0, parsed2.eResource.errors.size)
+		val edits2 = formatter.format(parsed2.eResource as XtextResource, 0, parsed2Doc.length, rc)
+		val newDocument2 = parsed2Doc.applyEdits(edits2)
+		try {
+			Assert::assertEquals(parsed2Doc, newDocument2.toString)
+		} catch(AssertionError e) {
+			println(newDocument.applyDebugEdits(edits2))
+			println()
+			throw e
+		}
 	}
 	
 	def protected String applyEdits(String oldDocument, Collection<TextReplacement> edits) {
