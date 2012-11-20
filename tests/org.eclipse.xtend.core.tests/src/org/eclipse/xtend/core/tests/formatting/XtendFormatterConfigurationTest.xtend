@@ -4,13 +4,12 @@ import org.eclipse.xtend.core.formatting.AbstractConfigurationKeys
 import org.eclipse.xtend.core.formatting.BooleanKey
 import org.eclipse.xtend.core.formatting.IntegerKey
 import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues
-import org.eclipse.xtend.core.formatting.NewLineConfig
 import org.eclipse.xtend.core.formatting.StringKey
 import org.eclipse.xtend.core.formatting.TransientKey
+import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 
 class XtendFormatterConfigurationTest {
 
@@ -26,8 +25,6 @@ class XtendFormatterConfigurationTest {
 			intval = 42
 			strval = foo
 			boolval = true
-			newLineConfig.minNewLines = 2
-			newLineConfig.maxNewLines = 3
 		'''.toString.trim, actual)
 	}
 
@@ -36,8 +33,6 @@ class XtendFormatterConfigurationTest {
 			intval = 420
 			strval = baz
 			boolval = false
-			newLineConfig.minNewLines = 20
-			newLineConfig.maxNewLines = 30
 		'''.toString.trim
 		val map = <String, String>newLinkedHashMap
 		data.split("\\\n").forEach[ val x = it.split("="); map.put(x.get(0).trim, x.get(1).trim) ]
@@ -53,5 +48,4 @@ class TestConfig1 extends AbstractConfigurationKeys {
 	public val strval = new StringKey("strval", "foo")
 	public val boolval = new BooleanKey("boolval", true)
 	public val transientval = new TransientKey("transientval", "foo")
-	public val child1 = new NewLineConfig("newLineConfig", 2, 3)
 }
