@@ -4,11 +4,11 @@ import com.google.inject.Inject
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
-class FormatterExtensions {
+class FormattingDataFactory {
 	
 	@Inject extension HiddenLeafAccess
 	
-	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
+	def protected (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
 		val data = new FormattingDataInit()
 		init.apply(data)
 		newFormattingData(leafs, data.key, data)
@@ -102,22 +102,6 @@ class FormatterExtensions {
 				CommentInfo: {} 
 			}
 		result
-	}
-	
-	def String lookahead(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
-		val lookahead = new FormattableDocument(fmt)
-		format.apply(lookahead)
-		lookahead.renderToString(offset, length)
-	}
-	
-	def boolean fitsIntoLine(FormattableDocument fmt, int offset, int length, (FormattableDocument)=>void format) {
-		val lookahead = fmt.lookahead(offset, length, format)
-		if(lookahead.contains("\n")) {
-			return false
-		} else {
-			val line = fmt.lineLengthBefore(offset) + lookahead.length
-			return line <= fmt.cfg.get(fmt.cfg.keys.maxLineWidth)
-		}
 	}
 	
 	def (FormattableDocument) => Iterable<FormattingData> append(INode node, (FormattingDataInit)=>void init) {

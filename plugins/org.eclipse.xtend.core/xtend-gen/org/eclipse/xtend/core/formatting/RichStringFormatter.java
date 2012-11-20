@@ -8,8 +8,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.Chunk;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
-import org.eclipse.xtend.core.formatting.FormatterExtensions;
 import org.eclipse.xtend.core.formatting.FormattingData;
+import org.eclipse.xtend.core.formatting.FormattingDataFactory;
 import org.eclipse.xtend.core.formatting.FormattingDataInit;
 import org.eclipse.xtend.core.formatting.Line;
 import org.eclipse.xtend.core.formatting.LineModel;
@@ -57,7 +57,7 @@ public class RichStringFormatter {
   private NodeModelAccess _nodeModelAccess;
   
   @Inject
-  private FormatterExtensions _formatterExtensions;
+  private FormattingDataFactory _formattingDataFactory;
   
   public void format(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString richString) {
     EObject _eContainer = richString.eContainer();
@@ -269,7 +269,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForEObject, _function);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForEObject, _function);
     doc.operator_add(_surround);
     formatter.apply(expr, doc);
   }
@@ -286,7 +286,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword, _function, _function_1);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
@@ -294,7 +294,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForFeature, _function_2);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForFeature, _function_2);
     doc.operator_add(_append);
     XExpression _if = expr.getIf();
     formatter.apply(_if, doc);
@@ -310,7 +310,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_1, _function_3);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formattingDataFactory.surround(_nodeForKeyword_1, _function_3);
     doc.operator_add(_surround_1);
     XExpression _else = expr.getElse();
     this.fmt(formatter, doc, _else);
@@ -320,7 +320,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formatterExtensions.surround(_nodeForKeyword_2, _function_4);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formattingDataFactory.surround(_nodeForKeyword_2, _function_4);
     doc.operator_add(_surround_2);
   }
   
@@ -336,7 +336,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword, _function, _function_1);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, Literals.RICH_STRING_ELSE_IF__IF);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
@@ -344,7 +344,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formatterExtensions.append(_nodeForFeature, _function_2);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForFeature, _function_2);
     doc.operator_add(_append);
     XExpression _if = expr.getIf();
     formatter.apply(_if, doc);
@@ -362,7 +362,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formatterExtensions.surround(_nodeForKeyword, _function, _function_1);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function, _function_1);
     doc.operator_add(_surround);
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, ":");
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
@@ -375,7 +375,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formatterExtensions.surround(_nodeForKeyword_1, _function_2, _function_3);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_1 = this._formattingDataFactory.surround(_nodeForKeyword_1, _function_2, _function_3);
     doc.operator_add(_surround_1);
     JvmFormalParameter _declaredParam = expr.getDeclaredParam();
     formatter.apply(_declaredParam, doc);
@@ -389,7 +389,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formatterExtensions.surround(_nodeForKeyword_2, _function_4);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_2 = this._formattingDataFactory.surround(_nodeForKeyword_2, _function_4);
     doc.operator_add(_surround_2);
     XExpression _before = expr.getBefore();
     formatter.apply(_before, doc);
@@ -399,7 +399,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formatterExtensions.surround(_nodeForKeyword_3, _function_5);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formattingDataFactory.surround(_nodeForKeyword_3, _function_5);
     doc.operator_add(_surround_3);
     XExpression _separator = expr.getSeparator();
     formatter.apply(_separator, doc);
@@ -409,7 +409,7 @@ public class RichStringFormatter {
           it.oneSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_4 = this._formatterExtensions.surround(_nodeForKeyword_4, _function_6);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_4 = this._formattingDataFactory.surround(_nodeForKeyword_4, _function_6);
     doc.operator_add(_surround_4);
     XExpression _after = expr.getAfter();
     formatter.apply(_after, doc);
@@ -419,7 +419,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formatterExtensions.prepend(_nodeForFeature, _function_7);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForFeature, _function_7);
     doc.operator_add(_prepend);
     ILeafNode _nodeForKeyword_5 = this._nodeModelAccess.nodeForKeyword(expr, "ENDFOR");
     final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
@@ -427,7 +427,7 @@ public class RichStringFormatter {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_5 = this._formatterExtensions.surround(_nodeForKeyword_5, _function_8);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_5 = this._formattingDataFactory.surround(_nodeForKeyword_5, _function_8);
     doc.operator_add(_surround_5);
   }
   

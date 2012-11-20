@@ -614,6 +614,35 @@ public class FormattableDocument {
     return _xblockexpression;
   }
   
+  public String lookahead(final int offset, final int length, final Procedure1<? super FormattableDocument> format) {
+    String _xblockexpression = null;
+    {
+      FormattableDocument _formattableDocument = new FormattableDocument(this);
+      final FormattableDocument lookahead = _formattableDocument;
+      format.apply(lookahead);
+      String _renderToString = lookahead.renderToString(offset, length);
+      _xblockexpression = (_renderToString);
+    }
+    return _xblockexpression;
+  }
+  
+  public boolean fitsIntoLine(final int offset, final int length, final Procedure1<? super FormattableDocument> format) {
+    final String lookahead = this.lookahead(offset, length, format);
+    boolean _contains = lookahead.contains("\n");
+    if (_contains) {
+      return false;
+    } else {
+      int _lineLengthBefore = this.lineLengthBefore(offset);
+      int _length = lookahead.length();
+      final int line = (_lineLengthBefore + _length);
+      IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
+      IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
+      XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+      Integer _get = _cfg.<Integer>get(_keys.maxLineWidth);
+      return (line <= (_get).intValue());
+    }
+  }
+  
   public String toString() {
     String _xblockexpression = null;
     {

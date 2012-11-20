@@ -29,7 +29,7 @@ import org.eclipse.xtend.core.xtend.RichStringForLoop
 class RichStringFormatter {
 	@Inject RichStringProcessor richStringProcessor
 	@Inject extension NodeModelAccess
-	@Inject extension FormatterExtensions
+	@Inject extension FormattingDataFactory
 	
 	def void format((EObject, FormattableDocument)=>void formatter, FormattableDocument doc, RichString richString) {
 		if(EcoreUtil2::getContainerOfType(richString.eContainer, typeof(RichString)) != null)
