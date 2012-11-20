@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 class FormattingDataFactory {
 	
 	@Inject extension HiddenLeafAccess
+	@Inject extension XbaseFormatterConfigKeys
 	
 	def protected (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
 		val data = new FormattingDataInit()
@@ -26,7 +27,7 @@ class FormattingDataFactory {
 	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, BlankLineKey key, FormattingDataInit it) {
 	 	[ FormattableDocument doc |
 			val blankline = doc.cfg.get(key)
-			val preserve = doc.cfg.get(doc.cfg.keys.preserveBlankLines)
+			val preserve = doc.cfg.get(preserveBlankLines)
 			val min = blankline + 1
 			val max = Math::max(preserve + 1, min)
 			newNewLineData(leafs, min, max, indentationChange, doc.debugConflicts)
@@ -36,7 +37,7 @@ class FormattingDataFactory {
 	def protected dispatch (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, NewLineOrPreserveKey key, FormattingDataInit it) {
 		[ FormattableDocument doc |
 			val newLine = doc.cfg.get(key)
-			val preserve = doc.cfg.get(doc.cfg.keys.preserveNewLines)
+			val preserve = doc.cfg.get(preserveNewLines)
 			newNewLineData(leafs, if(newLine) 1 else 0, if(preserve || newLine) 1 else 0, indentationChange, doc.debugConflicts)
 		]		
 	}

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
+import org.eclipse.xtend.core.formatting.AbstractFormatterConfigurationKeys;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.NewLineData;
 import org.eclipse.xtend.core.formatting.TextReplacement;
 import org.eclipse.xtend.core.formatting.WhitespaceData;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -34,9 +34,9 @@ public class FormattableDocument {
     }
   }.apply();
   
-  private final IConfigurationValues<XtendFormatterConfigKeys> _cfg;
+  private final IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg;
   
-  public IConfigurationValues<XtendFormatterConfigKeys> getCfg() {
+  public IConfigurationValues<? extends AbstractFormatterConfigurationKeys> getCfg() {
     return this._cfg;
   }
   
@@ -72,7 +72,7 @@ public class FormattableDocument {
     this._conflictOccurred = conflictOccurred;
   }
   
-  public FormattableDocument(final IConfigurationValues<XtendFormatterConfigKeys> cfg, final String document) {
+  public FormattableDocument(final IConfigurationValues<? extends AbstractFormatterConfigurationKeys> cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
     TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
@@ -80,7 +80,7 @@ public class FormattableDocument {
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    IConfigurationValues<XtendFormatterConfigKeys> _cfg = fmt.getCfg();
+    IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = fmt.getCfg();
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
@@ -635,9 +635,9 @@ public class FormattableDocument {
       int _lineLengthBefore = this.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
-      IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
-      XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+      IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = this.getCfg();
+      IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = this.getCfg();
+      AbstractFormatterConfigurationKeys _keys = _cfg_1.getKeys();
       Integer _get = _cfg.<Integer>get(_keys.maxLineWidth);
       return (line <= (_get).intValue());
     }
@@ -693,9 +693,9 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
-        XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+        IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = this.getCfg();
+        IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = this.getCfg();
+        AbstractFormatterConfigurationKeys _keys = _cfg_1.getKeys();
         final String indent = _cfg.<String>get(_keys.indentation);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
@@ -716,9 +716,9 @@ public class FormattableDocument {
   }
   
   public int getIndentationLenght(final int levels) {
-    IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
-    IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
-    XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+    IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = this.getCfg();
+    IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = this.getCfg();
+    AbstractFormatterConfigurationKeys _keys = _cfg_1.getKeys();
     Integer _get = _cfg.<Integer>get(_keys.indentationLength);
     int _multiply = (levels * (_get).intValue());
     return _multiply;
@@ -730,9 +730,9 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg = this.getCfg();
-        IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = this.getCfg();
-        XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+        IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = this.getCfg();
+        IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = this.getCfg();
+        AbstractFormatterConfigurationKeys _keys = _cfg_1.getKeys();
         final String sep = _cfg.<String>get(_keys.lineSeparator);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
