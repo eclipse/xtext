@@ -62,7 +62,7 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		return fallback.getFragment(obj);
 	}
 
-	private static final String PREFIX = "XtextFragmentProvider::";
+	private static final String PREFIX = "XtextFragmentProvider_";
 	
 	public String caseGrammar(Grammar obj) {
 		return PREFIX + obj.getName();
