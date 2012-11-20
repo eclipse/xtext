@@ -391,13 +391,13 @@ public class Bug250313Test extends AbstractXtextTests {
 		// tests only, if crossrefs in alternatives work
 		Model model = (Model) getModel("content str ref 'str'");
 		assertEquals("str", model.getRef().getName());
-		assertEquals(lexerRule, 3, convertCallCount);
+		assertEquals(lexerRule, 2, convertCallCount);
 	}
 
 	@Test public void testChild2_01() throws Exception {
 		// tests only, if crossrefs in alternatives work
 		Model model = (Model) getModel("content 'str' ref str");
 		assertEquals("str", model.getRef().getName());
-		assertEquals(lexerRule, 3, convertCallCount);
+		assertEquals(lexerRule, 2, convertCallCount);
 	}
 }
