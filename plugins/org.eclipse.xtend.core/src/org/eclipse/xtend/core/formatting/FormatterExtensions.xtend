@@ -6,7 +6,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 class FormatterExtensions {
 	
-	@Inject extension NodeModelAccess
+	@Inject extension HiddenLeafAccess
 	@Inject extension XtendFormatterConfigKeys
 	
 	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
