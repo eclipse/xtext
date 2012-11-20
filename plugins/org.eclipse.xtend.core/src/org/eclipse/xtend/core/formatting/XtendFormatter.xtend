@@ -23,7 +23,7 @@ import org.eclipse.xtext.nodemodel.INode
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
 @SuppressWarnings("restriction")
-public class XtendFormatter extends XbaseFormatter<XtendFormatterConfigKeys> {
+public class XtendFormatter extends XbaseFormatter {
 
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess

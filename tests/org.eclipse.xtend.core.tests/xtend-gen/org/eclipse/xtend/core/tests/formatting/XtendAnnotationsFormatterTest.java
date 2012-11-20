@@ -41,8 +41,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationSL() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -63,8 +63,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationML1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -99,8 +99,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationML2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterClassAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -168,8 +168,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotations1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -188,8 +188,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotations2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -208,8 +208,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotationsSL1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
         }
@@ -233,8 +233,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotationsSL2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -287,8 +287,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldTwoAnnotations1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -305,8 +305,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldTwoAnnotations2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
         }
@@ -319,8 +319,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldSingleAnnotations1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -335,8 +335,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldSingleAnnotations2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
         }
@@ -349,8 +349,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -369,8 +369,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
         }
@@ -389,8 +389,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations3() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -409,8 +409,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations4() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(false));
         }
@@ -449,8 +449,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodParameterTwoAnnotations1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterParameterAnnotations, Boolean.valueOf(false));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }
@@ -468,8 +468,8 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethodParameterTwoAnnotations2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.newLineAfterParameterAnnotations, Boolean.valueOf(true));
           it.<Boolean>put(XtendAnnotationsFormatterTest.this._xtendFormatterConfigKeys.preserveNewLines, Boolean.valueOf(true));
         }

@@ -3,12 +3,12 @@ package org.eclipse.xtend.core.formatting
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.XtextResource
 
-abstract class AbstractFormatter<T extends AbstractFormatterConfigurationKeys> implements IFormatter<T> {
+abstract class AbstractFormatter implements IFormatter {
 
 	@Property boolean allowIdentityEdits = false
 	@Property boolean diagnoseConflicts = true
 
-	override format(XtextResource res, int offset, int length, IConfigurationValues<T> cfg) {
+	override format(XtextResource res, int offset, int length, IConfigurationValues cfg) {
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head, format)

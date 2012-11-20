@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.xtend.core.formatting.AbstractFormatterConfigurationKeys;
 import org.eclipse.xtend.core.formatting.BlankLineKey;
 import org.eclipse.xtend.core.formatting.CommentInfo;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
@@ -86,9 +85,9 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = doc.getCfg();
+            IConfigurationValues _cfg = doc.getCfg();
             final Integer blankline = _cfg.<Integer>get(key);
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = doc.getCfg();
+            IConfigurationValues _cfg_1 = doc.getCfg();
             final Integer preserve = _cfg_1.<Integer>get(FormattingDataFactory.this._xbaseFormatterConfigKeys.preserveBlankLines);
             final int min = ((blankline).intValue() + 1);
             int _plus = ((preserve).intValue() + 1);
@@ -108,9 +107,9 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = doc.getCfg();
+            IConfigurationValues _cfg = doc.getCfg();
             final Boolean newLine = _cfg.<Boolean>get(key);
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = doc.getCfg();
+            IConfigurationValues _cfg_1 = doc.getCfg();
             final Boolean preserve = _cfg_1.<Boolean>get(FormattingDataFactory.this._xbaseFormatterConfigKeys.preserveNewLines);
             int _xifexpression = (int) 0;
             if ((newLine).booleanValue()) {
@@ -145,7 +144,7 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = doc.getCfg();
+            IConfigurationValues _cfg = doc.getCfg();
             final Boolean newLine = _cfg.<Boolean>get(key);
             int _xifexpression = (int) 0;
             if ((newLine).booleanValue()) {
@@ -176,7 +175,7 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = doc.getCfg();
+            IConfigurationValues _cfg = doc.getCfg();
             final Boolean space = _cfg.<Boolean>get(key);
             String _xifexpression = null;
             if ((space).booleanValue()) {

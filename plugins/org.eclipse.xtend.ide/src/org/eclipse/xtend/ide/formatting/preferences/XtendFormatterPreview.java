@@ -73,8 +73,8 @@ public class XtendFormatterPreview implements Observer {
 	public void doUpdate(final Map map) {
 		marginPainter.setMarginRulerColumn(intValue(map.get(PREF_PREVIEW_LINE_WIDTH)));
 		xtendFormatterFactory.setConfigurationProvider(new IFormatterConfigurationProvider() {
-			public IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource) {
-				return new MapBasedConfigurationValues<XtendFormatterConfigKeys>(new XtendFormatterConfigKeys(), map);
+			public IConfigurationValues getFormatterConfiguration(Resource resource) {
+				return new MapBasedConfigurationValues(new XtendFormatterConfigKeys(), map);
 			}
 		});
 		StyledText widget = null;

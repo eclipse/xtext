@@ -23,7 +23,7 @@ package org.eclipse.xtend.core.formatting;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IConfigurationValues<K extends IConfigurationKeys> {
+public interface IConfigurationValues {
 
 	/**
 	 * @return returns the values represented by this key.
@@ -33,5 +33,5 @@ public interface IConfigurationValues<K extends IConfigurationKeys> {
 	/**
 	 * @return the {@link IConfigurationKeys} for which this instance can hold values.
 	 */
-	K getKeys();
+	IConfigurationKeys getKeys();
 }

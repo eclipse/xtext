@@ -133,7 +133,7 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 				}
 
 				protected Map getDefaultProfileSettings() {
-					return new MapBasedConfigurationValues<XtendFormatterConfigKeys>(new XtendFormatterConfigKeys()).store();
+					return new MapBasedConfigurationValues(new XtendFormatterConfigKeys()).store();
 				}
 
 			};

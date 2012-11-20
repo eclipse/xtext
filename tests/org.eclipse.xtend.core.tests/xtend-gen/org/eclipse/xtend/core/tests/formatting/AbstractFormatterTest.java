@@ -66,7 +66,7 @@ public abstract class AbstractFormatterTest {
     return _builder;
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence toBeFormatted) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, toBeFormatted, toBeFormatted);
   }
   
@@ -78,11 +78,11 @@ public abstract class AbstractFormatterTest {
     this.assertFormattedExpression(null, expectation, toBeFormatted);
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, expectation, toBeFormatted, false);
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
     String _string = expectation.toString();
     String _trim = _string.trim();
     String _replace = _trim.replace("\n", "\n\t\t");
@@ -98,13 +98,13 @@ public abstract class AbstractFormatterTest {
     this.assertFormatted(_member, _member_1);
   }
   
-  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final String expectation, final CharSequence toBeFormatted) {
+  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues> cfg, final String expectation, final CharSequence toBeFormatted) {
     CharSequence _member = this.toMember(expectation);
     CharSequence _member_1 = this.toMember(toBeFormatted);
     this.assertFormatted(cfg, _member, _member_1);
   }
   
-  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final String expectation) {
+  public void assertFormattedMember(final Procedure1<? super MapBasedConfigurationValues> cfg, final String expectation) {
     CharSequence _member = this.toMember(expectation);
     CharSequence _member_1 = this.toMember(expectation);
     this.assertFormatted(cfg, _member, _member_1);
@@ -181,7 +181,7 @@ public abstract class AbstractFormatterTest {
     return _xblockexpression;
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation) {
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation) {
     this.assertFormatted(cfg, expectation, expectation);
   }
   
@@ -189,11 +189,11 @@ public abstract class AbstractFormatterTest {
     this.assertFormatted(null, expectation, toBeFormatted);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(cfg, expectation, toBeFormatted, "", "", false);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues<XtendFormatterConfigKeys>> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
+  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     try {
       String _plus = (prefix + toBeFormatted);
       final String fullToBeParsed = (_plus + postfix);
@@ -212,8 +212,8 @@ public abstract class AbstractFormatterTest {
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String oldDocument = _rootNode.getText();
-      MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(this.keys);
-      final MapBasedConfigurationValues<XtendFormatterConfigKeys> rc = _mapBasedConfigurationValues;
+      MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(this.keys);
+      final MapBasedConfigurationValues rc = _mapBasedConfigurationValues;
       rc.<Integer>put(this.keys.maxLineWidth, Integer.valueOf(80));
       boolean _notEquals = (!Objects.equal(cfg, null));
       if (_notEquals) {

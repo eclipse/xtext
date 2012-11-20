@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.formatting.AbstractFormatterConfigurationKeys;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.IConfigurationValues;
 import org.eclipse.xtend.core.formatting.IFormatter;
@@ -17,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public abstract class AbstractFormatter<T extends AbstractFormatterConfigurationKeys> implements IFormatter<T> {
+public abstract class AbstractFormatter implements IFormatter {
   private boolean _allowIdentityEdits = false;
   
   public boolean isAllowIdentityEdits() {
@@ -38,7 +37,7 @@ public abstract class AbstractFormatter<T extends AbstractFormatterConfiguration
     this._diagnoseConflicts = diagnoseConflicts;
   }
   
-  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IConfigurationValues<T> cfg) {
+  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IConfigurationValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
       IParseResult _parseResult = res.getParseResult();

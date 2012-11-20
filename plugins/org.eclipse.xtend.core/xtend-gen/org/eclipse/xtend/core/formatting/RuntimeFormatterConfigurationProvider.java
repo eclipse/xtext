@@ -31,10 +31,10 @@ public class RuntimeFormatterConfigurationProvider implements IFormatterConfigur
   private IWhitespaceInformationProvider whitespaceInfo;
   
   public IConfigurationValues getFormatterConfiguration(final Resource resource) {
-    MapBasedConfigurationValues<XtendFormatterConfigKeys> _xblockexpression = null;
+    MapBasedConfigurationValues _xblockexpression = null;
     {
-      MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(this.keys);
-      final MapBasedConfigurationValues<XtendFormatterConfigKeys> cfg = _mapBasedConfigurationValues;
+      MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(this.keys);
+      final MapBasedConfigurationValues cfg = _mapBasedConfigurationValues;
       URI _uRI = resource.getURI();
       final IIndentationInformation indentationInfo = this.whitespaceInfo.getIndentationInformation(_uRI);
       URI _uRI_1 = resource.getURI();

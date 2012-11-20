@@ -23,8 +23,8 @@ public class XtendFormatterConfigurationTest {
   public void testXtendDefaultValues() {
     XtendFormatterConfigKeys _xtendFormatterConfigKeys = new XtendFormatterConfigKeys();
     final XtendFormatterConfigKeys keys = _xtendFormatterConfigKeys;
-    MapBasedConfigurationValues<XtendFormatterConfigKeys> _mapBasedConfigurationValues = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys);
-    final MapBasedConfigurationValues<XtendFormatterConfigKeys> actual = _mapBasedConfigurationValues;
+    MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(keys);
+    final MapBasedConfigurationValues actual = _mapBasedConfigurationValues;
     Integer _get = actual.<Integer>get(keys.maxLineWidth);
     Assert.assertEquals(120, (_get).intValue());
   }
@@ -32,7 +32,7 @@ public class XtendFormatterConfigurationTest {
   @Test
   public void testDefaultValues() {
     TestConfig1 _testConfig1 = new TestConfig1();
-    MapBasedConfigurationValues<TestConfig1> _mapBasedConfigurationValues = new MapBasedConfigurationValues<TestConfig1>(_testConfig1);
+    MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(_testConfig1);
     Map<String,String> _store = _mapBasedConfigurationValues.store();
     Set<Entry<String,String>> _entrySet = _store.entrySet();
     final Function1<Entry<String,String>,CharSequence> _function = new Function1<Entry<String,String>,CharSequence>() {
@@ -84,8 +84,8 @@ public class XtendFormatterConfigurationTest {
       };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(_split)), _function);
     TestConfig1 _testConfig1 = new TestConfig1();
-    MapBasedConfigurationValues<TestConfig1> _mapBasedConfigurationValues = new MapBasedConfigurationValues<TestConfig1>(_testConfig1);
-    final MapBasedConfigurationValues<TestConfig1> cfg = _mapBasedConfigurationValues;
+    MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(_testConfig1);
+    final MapBasedConfigurationValues cfg = _mapBasedConfigurationValues;
     cfg.load(map);
     Map<String,String> _store = cfg.store();
     Set<Entry<String,String>> _entrySet = _store.entrySet();

@@ -72,7 +72,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 @SuppressWarnings(value = "restriction")
-public class XtendFormatter extends XbaseFormatter<XtendFormatterConfigKeys> {
+public class XtendFormatter extends XbaseFormatter {
   @Inject
   private NodeModelAccess _nodeModelAccess;
   

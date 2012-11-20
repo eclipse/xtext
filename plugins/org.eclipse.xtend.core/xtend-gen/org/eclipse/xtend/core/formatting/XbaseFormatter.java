@@ -9,7 +9,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.AbstractFormatter;
-import org.eclipse.xtend.core.formatting.AbstractFormatterConfigurationKeys;
 import org.eclipse.xtend.core.formatting.FormattableDocument;
 import org.eclipse.xtend.core.formatting.FormattingData;
 import org.eclipse.xtend.core.formatting.FormattingDataFactory;
@@ -72,7 +71,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallEle
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 @SuppressWarnings("all")
-public abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends AbstractFormatter<T> {
+public abstract class XbaseFormatter extends AbstractFormatter {
   @Inject
   private NodeModelAccess _nodeModelAccess;
   
@@ -552,7 +551,7 @@ public abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends
       int _lineLengthBefore = fmt.lineLengthBefore(_offset);
       int _length = lookahead.length();
       final int length = (_lineLengthBefore + _length);
-      IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = fmt.getCfg();
+      IConfigurationValues _cfg = fmt.getCfg();
       Integer _get = _cfg.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
       return (length <= (_get).intValue());
     }
@@ -1184,7 +1183,7 @@ public abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends
             if (_isMultiParamInOwnLine) {
               int _length_2 = featureNode.getLength();
               int _plus_1 = (lineLength + _length_2);
-              IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg = format.getCfg();
+              IConfigurationValues _cfg = format.getCfg();
               Integer _get = _cfg.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
               boolean _lessThan = (_plus_1 < (_get).intValue());
               if (_lessThan) {
@@ -1211,7 +1210,7 @@ public abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends
               int _length_3 = featureNode.getLength();
               int _multiply = (_length_3 * 2);
               int _plus_2 = (lineLength + _multiply);
-              IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_1 = format.getCfg();
+              IConfigurationValues _cfg_1 = format.getCfg();
               Integer _get_1 = _cfg_1.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
               boolean _lessThan_1 = (_plus_2 < (_get_1).intValue());
               if (_lessThan_1) {
@@ -1268,7 +1267,7 @@ public abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
             int _length_4 = featureNode.getLength();
             final int shortLenght = (_lineLengthBefore + _length_4);
-            IConfigurationValues<? extends AbstractFormatterConfigurationKeys> _cfg_2 = format.getCfg();
+            IConfigurationValues _cfg_2 = format.getCfg();
             Integer _get_2 = _cfg_2.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
             boolean _lessThan_2 = (shortLenght < (_get_2).intValue());
             if (_lessThan_2) {

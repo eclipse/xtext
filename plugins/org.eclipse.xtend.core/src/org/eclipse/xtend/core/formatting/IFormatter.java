@@ -20,5 +20,5 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public interface IFormatter<T extends IConfigurationKeys> {
 
-	List<TextReplacement> format(XtextResource res, int offset, int length, IConfigurationValues<T> cfg);
+	List<TextReplacement> format(XtextResource res, int offset, int length, IConfigurationValues cfg);
 }

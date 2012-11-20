@@ -15,8 +15,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClass11() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -33,8 +33,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClass12() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -53,8 +53,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClass112() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -74,8 +74,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatClass122() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -381,8 +381,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructor01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -402,8 +402,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatConstructor02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -485,8 +485,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatField01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -502,8 +502,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatField02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -522,8 +522,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldInit01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -539,8 +539,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldInit02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -559,8 +559,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldVal() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -576,8 +576,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldVar() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -593,8 +593,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldStatic02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -610,8 +610,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldStaticVal() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -627,8 +627,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldStaticVar() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -644,8 +644,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtension01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -661,8 +661,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtensionInit01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -678,8 +678,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtensionInit02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -698,8 +698,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtensionVal01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -715,8 +715,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtensionVar01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -732,8 +732,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFieldExtension02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -752,8 +752,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethod01() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -776,8 +776,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatMethod02() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1239,8 +1239,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatIf1SL1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(true));
         }
       };
@@ -1252,8 +1252,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatIf1SL2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(false));
         }
       };
@@ -1265,8 +1265,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatIf1ML1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
         }
       };
@@ -1281,8 +1281,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatIf1ML2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
         }
       };
@@ -1422,8 +1422,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatIfElse3() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1544,8 +1544,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFor2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1562,8 +1562,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatFor3() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1582,8 +1582,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatWhile11() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
         }
       };
@@ -1598,8 +1598,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatWhile12() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
         }
       };
@@ -1614,8 +1614,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatWhile2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1632,8 +1632,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatWhile21() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1652,8 +1652,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatDoWhile11() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
         }
       };
@@ -1670,8 +1670,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatDoWhile12() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
         }
       };
@@ -1688,8 +1688,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatDoWhile2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1706,8 +1706,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatDoWhile3() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1728,8 +1728,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchSL() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1741,8 +1741,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchSL1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1754,8 +1754,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchCaseSL() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1767,8 +1767,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchCaseSL1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -1847,8 +1847,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchMLBlock() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -1883,8 +1883,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatSwitchMLBlock1() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
@@ -2454,8 +2454,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatTryCatchExpression11() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
         }
       };
@@ -2475,8 +2475,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatTryCatchExpression12() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
         }
       };
@@ -2541,8 +2541,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatTryCatchFinallyExpression2() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
@@ -2572,8 +2572,8 @@ public class XtendFormatterTest extends AbstractFormatterTest {
   
   @Test
   public void formatTryCatchFinallyExpression3() {
-    final Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>> _function = new Procedure1<MapBasedConfigurationValues<XtendFormatterConfigKeys>>() {
-        public void apply(final MapBasedConfigurationValues<XtendFormatterConfigKeys> it) {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XtendFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
