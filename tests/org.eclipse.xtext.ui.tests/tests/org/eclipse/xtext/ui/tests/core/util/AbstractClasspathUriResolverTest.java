@@ -13,6 +13,7 @@ public abstract class AbstractClasspathUriResolverTest extends Assert {
 	protected IProject _project;
 	protected static final String MODEL_FILE = "simple.ecore";
 	protected static final String JAR_FILE = "simple.jar";
+	protected static final String JAR_FILE2 = "simpleroot.jar";
 	protected static final String TEST_PROJECT_NAME = "test";
 
 	@After
