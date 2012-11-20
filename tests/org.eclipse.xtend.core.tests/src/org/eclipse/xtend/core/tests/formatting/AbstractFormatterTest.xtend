@@ -34,7 +34,7 @@ abstract class AbstractFormatterTest {
 		}
 	'''
 	
-	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence toBeFormatted) {
+	def assertFormattedExpression((MapBasedConfigurationValues) => void cfg, CharSequence toBeFormatted) {
 		assertFormattedExpression(cfg, toBeFormatted, toBeFormatted)
 	}
 	
@@ -46,11 +46,11 @@ abstract class AbstractFormatterTest {
 		assertFormattedExpression(null, expectation, toBeFormatted)
 	}
 	
-	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
+	def assertFormattedExpression((MapBasedConfigurationValues) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
 		assertFormattedExpression(cfg, expectation, toBeFormatted, false)		
 	}
 	
-	def assertFormattedExpression((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, boolean allowErrors) {
+	def assertFormattedExpression((MapBasedConfigurationValues) => void cfg, CharSequence expectation, CharSequence toBeFormatted, boolean allowErrors) {
 		assertFormatted(cfg, expectation.toString.trim.replace("\n", "\n\t\t"), toBeFormatted.toString.trim.replace("\n", "\n\t\t"), "class bar {\n\tdef baz() {\n\t\t", "\n\t}\n}", allowErrors)
 	}
 	
@@ -58,11 +58,11 @@ abstract class AbstractFormatterTest {
 		assertFormatted(expectation.toMember, toBeFormatted.toMember)
 	}
 	
-	def assertFormattedMember((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, String expectation, CharSequence toBeFormatted) {
+	def assertFormattedMember((MapBasedConfigurationValues) => void cfg, String expectation, CharSequence toBeFormatted) {
 		assertFormatted(cfg, expectation.toMember, toBeFormatted.toMember)
 	}
 	
-	def assertFormattedMember((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, String expectation) {
+	def assertFormattedMember((MapBasedConfigurationValues) => void cfg, String expectation) {
 		assertFormatted(cfg, expectation.toMember, expectation.toMember)
 	}
 	
@@ -83,7 +83,7 @@ abstract class AbstractFormatterTest {
 		result
 	}
 	
-	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation) {
+	def assertFormatted((MapBasedConfigurationValues) => void cfg, CharSequence expectation) {
 		assertFormatted(cfg, expectation, expectation)
 	}
 	
@@ -91,17 +91,17 @@ abstract class AbstractFormatterTest {
 		assertFormatted(null, expectation, toBeFormatted)
 	}
 	
-	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
+	def assertFormatted((MapBasedConfigurationValues) => void cfg, CharSequence expectation, CharSequence toBeFormatted) {
 		assertFormatted(cfg, expectation, toBeFormatted, "", "", false)	
 	}
 	
-	def assertFormatted((MapBasedConfigurationValues<XtendFormatterConfigKeys>) => void cfg, CharSequence expectation, CharSequence toBeFormatted, String prefix, String postfix, boolean allowErrors) {
+	def assertFormatted((MapBasedConfigurationValues) => void cfg, CharSequence expectation, CharSequence toBeFormatted, String prefix, String postfix, boolean allowErrors) {
 		val fullToBeParsed = (prefix + toBeFormatted + postfix)
 		val parsed = fullToBeParsed.parse
 		if(!allowErrors)
 			Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
 		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
-		val rc = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(keys)
+		val rc = new MapBasedConfigurationValues(keys)
 
 		rc.put(keys.maxLineWidth, 80)
 		if(cfg != null)

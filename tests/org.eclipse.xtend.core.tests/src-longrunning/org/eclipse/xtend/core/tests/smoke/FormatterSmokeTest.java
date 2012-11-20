@@ -27,18 +27,17 @@ public class FormatterSmokeTest extends AbstractSmokeTest {
 
 	@Override
 	protected void checkForSmoke(String model, LazyLinkingResource resource) {
-		IConfigurationValues<XtendFormatterConfigKeys> cfg = new MapBasedConfigurationValues<XtendFormatterConfigKeys>(
-				new XtendFormatterConfigKeys());
+		IConfigurationValues cfg = new MapBasedConfigurationValues(new XtendFormatterConfigKeys());
 		formatter.setDiagnoseConflicts(false);
 		formatter.format(resource, 0, model.length(), cfg);
 	}
-	
+
 	@Test
 	@Override
 	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
 	public void testSkipNodesInBetween() throws Exception {
 	}
-	
+
 	@Test
 	@Override
 	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")

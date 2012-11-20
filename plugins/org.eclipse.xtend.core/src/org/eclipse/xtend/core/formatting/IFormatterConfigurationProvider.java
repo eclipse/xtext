@@ -14,6 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public interface IFormatterConfigurationProvider {
 
-	IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource);
+	IConfigurationValues getFormatterConfiguration(Resource resource);
 
 }

@@ -21,17 +21,16 @@ import com.google.common.collect.Maps;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class PreferenceStoreBasedConfigurationValues<K extends IConfigurationKeys> extends
-		AbstractConfigurationValues<K> {
+public class PreferenceStoreBasedConfigurationValues extends AbstractConfigurationValues {
 
 	private final Map<IConfigurationKey<?>, ? super Object> key2value;
 
-	public PreferenceStoreBasedConfigurationValues(K keys) {
+	public PreferenceStoreBasedConfigurationValues(IConfigurationKeys keys) {
 		super(keys);
 		this.key2value = Maps.newLinkedHashMap();
 	}
 
-	public PreferenceStoreBasedConfigurationValues(K keys, IPreferenceStore store) {
+	public PreferenceStoreBasedConfigurationValues(IConfigurationKeys keys, IPreferenceStore store) {
 		this(keys);
 		load(store);
 	}

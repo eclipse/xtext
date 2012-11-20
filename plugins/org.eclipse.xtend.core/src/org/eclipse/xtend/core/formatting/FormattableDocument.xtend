@@ -7,13 +7,13 @@ import org.eclipse.xtext.xbase.lib.Pair
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
-	@Property val IConfigurationValues<? extends AbstractFormatterConfigurationKeys> cfg
+	@Property val IConfigurationValues cfg
 	@Property val String document
 	@Property val TreeMap<Integer, FormattingData> formattings
 	@Property Throwable rootTrace = null
 	@Property boolean conflictOccurred = false
 	
-	new(IConfigurationValues<? extends AbstractFormatterConfigurationKeys> cfg, String document){
+	new(IConfigurationValues cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()
@@ -27,6 +27,10 @@ class FormattableDocument {
 	
 	def boolean isDebugConflicts() {
 		rootTrace != null
+	}
+	
+	def protected AbstractFormatterConfigurationKeys getKeys() {
+		cfg.keys as AbstractFormatterConfigurationKeys
 	}
 	
 	def protected addFormatting(FormattingData data) {
@@ -232,7 +236,7 @@ class FormattableDocument {
 			return false
 		} else {
 			val line = lineLengthBefore(offset) + lookahead.length
-			return line <= cfg.get(cfg.keys.maxLineWidth)
+			return line <= cfg.get(keys.maxLineWidth)
 		}
 	}
 	
@@ -252,19 +256,19 @@ class FormattableDocument {
 	
 	def getIndentation(int levels) {
 		if (levels > 0) {
-			val indent = cfg.get(cfg.keys.indentation)
+			val indent = cfg.get(keys.indentation)
 			(0 .. levels - 1).map[indent].join
 		} else
 			""
 	}
 
 	def getIndentationLenght(int levels) {
-		levels * cfg.get(cfg.keys.indentationLength)
+		levels * cfg.get(keys.indentationLength)
 	}
 
 	def getWrap(int levels) {
 		if (levels > 0) {
-			val sep = cfg.get(cfg.keys.lineSeparator)
+			val sep = cfg.get(keys.lineSeparator)
 			(0 .. levels - 1).map[sep].join
 		} else
 			""

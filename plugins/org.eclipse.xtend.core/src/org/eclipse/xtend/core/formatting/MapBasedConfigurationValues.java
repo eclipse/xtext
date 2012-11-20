@@ -19,16 +19,16 @@ import com.google.common.collect.Maps;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class MapBasedConfigurationValues<K extends IConfigurationKeys> extends AbstractConfigurationValues<K> {
+public class MapBasedConfigurationValues extends AbstractConfigurationValues {
 
 	private final Map<IConfigurationKey<?>, ? super Object> key2value;
 
-	public MapBasedConfigurationValues(K keys) {
+	public MapBasedConfigurationValues(IConfigurationKeys keys) {
 		super(keys);
 		this.key2value = Maps.newLinkedHashMap();
 	}
 
-	public MapBasedConfigurationValues(K keys, Map<String, String> values) {
+	public MapBasedConfigurationValues(IConfigurationKeys keys, Map<String, String> values) {
 		this(keys);
 		load(values);
 	}
@@ -46,7 +46,7 @@ public class MapBasedConfigurationValues<K extends IConfigurationKeys> extends A
 	}
 
 	public void load(Map<String, String> values) {
-		Function<String, String> map = Functions.forMap(values,null);
+		Function<String, String> map = Functions.forMap(values, null);
 		for (IConfigurationKey<?> key : getKeys().getKeys())
 			if (key instanceof IConfigurationKeyWithStorage<?>)
 				key2value.put(key, ((IConfigurationKeyWithStorage<?>) key).load(map));

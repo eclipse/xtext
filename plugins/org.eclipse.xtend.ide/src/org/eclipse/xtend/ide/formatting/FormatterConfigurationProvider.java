@@ -34,10 +34,10 @@ public final class FormatterConfigurationProvider implements IFormatterConfigura
 	@Inject
 	private XtendFormatterConfigKeys keys;
 
-	public IConfigurationValues<XtendFormatterConfigKeys> getFormatterConfiguration(Resource resource) {
+	public IConfigurationValues getFormatterConfiguration(Resource resource) {
 		IProject project = findProject(resource);
 		IPreferenceStore store = preferenceStoreAccess.getContextPreferenceStore(project);
-		return new PreferenceStoreBasedConfigurationValues<XtendFormatterConfigKeys>(keys, store);
+		return new PreferenceStoreBasedConfigurationValues(keys, store);
 	}
 
 	private IProject findProject(Resource resource) {

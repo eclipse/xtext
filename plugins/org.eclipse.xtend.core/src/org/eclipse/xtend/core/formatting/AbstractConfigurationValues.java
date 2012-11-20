@@ -10,16 +10,16 @@ package org.eclipse.xtend.core.formatting;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractConfigurationValues<K extends IConfigurationKeys> implements IConfigurationValues<K> {
+public abstract class AbstractConfigurationValues implements IConfigurationValues {
 
-	private final K keys;
+	private final IConfigurationKeys keys;
 
-	public AbstractConfigurationValues(K keys) {
+	public AbstractConfigurationValues(IConfigurationKeys keys) {
 		super();
 		this.keys = keys;
 	}
 
-	public K getKeys() {
+	public IConfigurationKeys getKeys() {
 		return keys;
 	}
 

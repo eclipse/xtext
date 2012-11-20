@@ -45,7 +45,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 
-abstract class XbaseFormatter<T extends XbaseFormatterConfigKeys> extends AbstractFormatter<T> {
+abstract class XbaseFormatter extends AbstractFormatter {
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
 	@Inject extension FormattingDataFactory
