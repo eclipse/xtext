@@ -312,6 +312,9 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected void removeDiagnostic(Triple<EObject, EReference, INode> triple) {
+		// return early if there's nothing to remove
+		if (getErrors().isEmpty() && getWarnings().isEmpty())
+			return;
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		List<Diagnostic> list = getDiagnosticList(message);
 		if (!list.isEmpty()) {
