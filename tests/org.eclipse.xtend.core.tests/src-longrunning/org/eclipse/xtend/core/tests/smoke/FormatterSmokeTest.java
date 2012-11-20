@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.smoke;
 
-import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 import org.junit.Ignore;
 import org.junit.Test;
 

@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.formatting;
 
-import javax.inject.Singleton;
-import org.eclipse.xtend.core.formatting.BlankLineKey;
-import org.eclipse.xtend.core.formatting.XbaseFormatterConfigKeys;
+import com.google.inject.Singleton;
+import org.eclipse.xtext.xbase.formatting.BlankLineKey;
+import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @Singleton

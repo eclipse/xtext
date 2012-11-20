@@ -18,6 +18,11 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf
 import java.util.Stack
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtend.core.xtend.RichStringForLoop
+import org.eclipse.xtext.xbase.formatting.NodeModelAccess
+import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
+import org.eclipse.xtext.xbase.formatting.FormattableDocument
+import org.eclipse.xtext.xbase.formatting.NewLineData
+import org.eclipse.xtext.xbase.formatting.WhitespaceData
 
 /**
  * cases to distinguish:

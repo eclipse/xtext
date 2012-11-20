@@ -2,8 +2,6 @@ package org.eclipse.xtend.core.tests.formatting
 
 import java.util.Collection
 import javax.inject.Inject
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues
-import org.eclipse.xtend.core.formatting.TextReplacement
 import org.eclipse.xtend.core.formatting.XtendFormatter
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
@@ -12,6 +10,8 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
+import org.eclipse.xtext.xbase.formatting.TextReplacement
 import org.junit.Assert
 import org.junit.runner.RunWith
 

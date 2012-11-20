@@ -13,17 +13,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.formatting.FormattableDocument;
-import org.eclipse.xtend.core.formatting.FormattingData;
-import org.eclipse.xtend.core.formatting.FormattingDataFactory;
-import org.eclipse.xtend.core.formatting.FormattingDataInit;
-import org.eclipse.xtend.core.formatting.HiddenLeafAccess;
-import org.eclipse.xtend.core.formatting.HiddenLeafs;
-import org.eclipse.xtend.core.formatting.NodeModelAccess;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
-import org.eclipse.xtend.core.formatting.XbaseFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -64,6 +57,15 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
+import org.eclipse.xtext.xbase.configuration.IConfigurationKey;
+import org.eclipse.xtext.xbase.formatting.FormattableDocument;
+import org.eclipse.xtext.xbase.formatting.FormattingData;
+import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
+import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
+import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
+import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
+import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
+import org.eclipse.xtext.xbase.formatting.XbaseFormatter2;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -72,7 +74,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 @SuppressWarnings(value = "restriction")
-public class XtendFormatter extends XbaseFormatter {
+public class XtendFormatter extends XbaseFormatter2 {
   @Inject
   private NodeModelAccess _nodeModelAccess;
   
@@ -186,6 +188,28 @@ public class XtendFormatter extends XbaseFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForEObject_1, _function_5);
     format.operator_add(_append_3);
+  }
+  
+  protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document, final IConfigurationKey<? extends Object> configKey) {
+    EList<XAnnotation> _annotations = target.getAnnotations();
+    boolean _isEmpty = _annotations.isEmpty();
+    if (_isEmpty) {
+      return;
+    }
+    EList<XAnnotation> _annotations_1 = target.getAnnotations();
+    for (final XAnnotation a : _annotations_1) {
+      {
+        this.format(a, document);
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(a);
+        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.cfg(configKey);
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForEObject, _function);
+        document.operator_add(_append);
+      }
+    }
   }
   
   protected void _format(final XtendImport imp, final FormattableDocument document) {

@@ -10,10 +10,10 @@ package org.eclipse.xtend.ide.formatting;
 import java.util.Map;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.xtend.core.formatting.AbstractConfigurationValues;
-import org.eclipse.xtend.core.formatting.IConfigurationKey;
-import org.eclipse.xtend.core.formatting.IConfigurationKeyWithStorage;
-import org.eclipse.xtend.core.formatting.IConfigurationKeys;
+import org.eclipse.xtext.xbase.configuration.AbstractConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.IConfigurationKey;
+import org.eclipse.xtext.xbase.configuration.IConfigurationKeyWithStorage;
+import org.eclipse.xtext.xbase.configuration.IConfigurationKeys;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;

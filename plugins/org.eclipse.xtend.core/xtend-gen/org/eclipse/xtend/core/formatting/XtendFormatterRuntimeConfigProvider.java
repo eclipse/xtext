@@ -10,20 +10,20 @@ package org.eclipse.xtend.core.formatting;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.formatting.IConfigurationValues;
-import org.eclipse.xtend.core.formatting.IFormatterConfigurationProvider;
-import org.eclipse.xtend.core.formatting.MapBasedConfigurationValues;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  * @author Moritz Eysholdt
  */
 @SuppressWarnings("all")
-public class RuntimeFormatterConfigurationProvider implements IFormatterConfigurationProvider {
+public class XtendFormatterRuntimeConfigProvider implements IFormatterConfigurationProvider {
   @Inject
   private XtendFormatterConfigKeys keys;
   

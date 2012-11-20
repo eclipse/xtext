@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.RichString
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
@@ -19,11 +20,17 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendImport
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.xbase.configuration.IConfigurationKey
+import org.eclipse.xtext.xbase.formatting.FormattableDocument
+import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
+import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
+import org.eclipse.xtext.xbase.formatting.NodeModelAccess
+import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
 @SuppressWarnings("restriction")
-public class XtendFormatter extends XbaseFormatter {
+public class XtendFormatter extends XbaseFormatter2 {
 
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
@@ -57,6 +64,16 @@ public class XtendFormatter extends XbaseFormatter {
 		}
 
 		format += xtendFile.nodeForEObject.append[newLine]
+	}
+	
+	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document,
+		IConfigurationKey<?> configKey) {
+		if (target.annotations.isEmpty)
+			return;
+		for (a : target.annotations) {
+			a.format(document)
+			document += a.nodeForEObject.append[cfg(configKey)]
+		}
 	}
 
 	def protected dispatch void format(XtendImport imp, FormattableDocument document) {
