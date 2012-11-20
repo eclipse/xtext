@@ -67,7 +67,7 @@ public class XtendFormatter {
 
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
-	@Inject extension FormatterExtensions
+	@Inject extension FormattingDataFactory
 	@Inject extension XtendGrammarAccess
 	@Inject extension XtendFormatterConfigKeys
 

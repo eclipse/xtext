@@ -220,6 +220,22 @@ class FormattableDocument {
 		(offset - lineStart) + getIndentationLenght(currentIndentation) + lengthDiff  
 	}
 	
+	def String lookahead(int offset, int length, (FormattableDocument)=>void format) {
+		val lookahead = new FormattableDocument(this)
+		format.apply(lookahead)
+		lookahead.renderToString(offset, length)
+	}
+	
+	def boolean fitsIntoLine(int offset, int length, (FormattableDocument)=>void format) {
+		val lookahead = lookahead(offset, length, format)
+		if(lookahead.contains("\n")) {
+			return false
+		} else {
+			val line = lineLengthBefore(offset) + lookahead.length
+			return line <= cfg.get(cfg.keys.maxLineWidth)
+		}
+	}
+	
 	override toString() {
 		var lastOffset = 0
 		val debugTrace = new StringBuilder()
@@ -255,4 +271,28 @@ class FormattableDocument {
 	}
 	
 	
+}
+
+@Data abstract class FormattingData {
+	int offset
+	int length
+	int indentationChange
+	Throwable trace
+	def boolean isEmpty() 
+}
+
+@Data class WhitespaceData extends FormattingData {
+	String space
+
+	override isEmpty() {
+		space == null
+	}
+}
+
+@Data class NewLineData extends FormattingData {
+	int newLines
+	
+	override isEmpty() {
+		newLines == 0
+	}
 }
