@@ -33,9 +33,6 @@ public class FormatterExtensions {
   @Inject
   private HiddenLeafAccess _hiddenLeafAccess;
   
-  @Inject
-  private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
-  
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
     final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
@@ -62,10 +59,8 @@ public class FormatterExtensions {
             boolean _isDebugConflicts = doc.isDebugConflicts();
             return FormatterExtensions.this.newFormattingData(leafs, it.space, it.indentationChange, _isDebugConflicts);
           } else {
-            int _newLine = it.newLine();
-            int _newLine_1 = it.newLine();
             boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-            return FormatterExtensions.this.newFormattingData(leafs, _newLine, _newLine_1, it.indentationChange, _isDebugConflicts_1);
+            return FormatterExtensions.this.newFormattingData(leafs, it.newLines, it.newLines, it.indentationChange, _isDebugConflicts_1);
           }
         }
       };
@@ -250,9 +245,18 @@ public class FormatterExtensions {
           if (leaf instanceof WhitespaceInfo) {
             final WhitespaceInfo _whitespaceInfo = (WhitespaceInfo)leaf;
             _matched=true;
-            final CommentInfo next = _whitespaceInfo.trailingComment();
-            boolean _isTrailing = next==null?false:next.isTrailing();
-            if (_isTrailing) {
+            boolean _and = false;
+            CommentInfo _trailingComment = _whitespaceInfo.trailingComment();
+            boolean _isTrailing = _trailingComment==null?false:_trailingComment.isTrailing();
+            if (!_isTrailing) {
+              _and = false;
+            } else {
+              CommentInfo _trailingComment_1 = _whitespaceInfo.trailingComment();
+              boolean _isMultiline = _trailingComment_1==null?false:_trailingComment_1.isMultiline();
+              boolean _not = (!_isMultiline);
+              _and = (_isTrailing && _not);
+            }
+            if (_and) {
               String _xifexpression = null;
               int _offset = _whitespaceInfo.getOffset();
               boolean _equals = (_offset == 0);
@@ -272,65 +276,101 @@ public class FormatterExtensions {
               WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, indentationChange, _xifexpression_1, space);
               result.add(_whitespaceData);
             } else {
-              boolean _not = (!applied);
-              if (_not) {
+              boolean _not_1 = (!applied);
+              if (_not_1) {
                 Integer _newLines = leafs.getNewLines();
                 int _max = Math.max((_newLines).intValue(), minNewLines);
                 int newLines = Math.min(_max, maxNewLines);
-                CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine = _leadingComment==null?false:_leadingComment.endsWithNewLine();
+                boolean _and_1 = false;
+                boolean _and_2 = false;
+                boolean _lessThan = (newLines < 1);
+                if (!_lessThan) {
+                  _and_2 = false;
+                } else {
+                  int _offset_2 = _whitespaceInfo.getOffset();
+                  boolean _greaterThan = (_offset_2 > 0);
+                  _and_2 = (_lessThan && _greaterThan);
+                }
+                if (!_and_2) {
+                  _and_1 = false;
+                } else {
+                  boolean _or = false;
+                  CommentInfo _leadingComment = _whitespaceInfo.leadingComment();
+                  boolean _isMultiline_1 = _leadingComment==null?false:_leadingComment.isMultiline();
+                  if (_isMultiline_1) {
+                    _or = true;
+                  } else {
+                    CommentInfo _trailingComment_2 = _whitespaceInfo.trailingComment();
+                    boolean _isMultiline_2 = _trailingComment_2==null?false:_trailingComment_2.isMultiline();
+                    _or = (_isMultiline_1 || _isMultiline_2);
+                  }
+                  _and_1 = (_and_2 && _or);
+                }
+                if (_and_1) {
+                  newLines = 1;
+                }
+                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
                 if (_endsWithNewLine) {
                   int _minus = (newLines - 1);
                   newLines = _minus;
                 }
-                boolean _and = false;
-                CommentInfo _leadingComment_1 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine_1 = _leadingComment_1==null?false:_leadingComment_1.endsWithNewLine();
-                boolean _not_1 = (!_endsWithNewLine_1);
-                if (!_not_1) {
-                  _and = false;
+                boolean _and_3 = false;
+                CommentInfo _leadingComment_2 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine_1 = _leadingComment_2==null?false:_leadingComment_2.endsWithNewLine();
+                boolean _not_2 = (!_endsWithNewLine_1);
+                if (!_not_2) {
+                  _and_3 = false;
                 } else {
                   boolean _equals_1 = (newLines == 0);
-                  _and = (_not_1 && _equals_1);
+                  _and_3 = (_not_2 && _equals_1);
                 }
-                if (_and) {
-                  int _offset_2 = _whitespaceInfo.getOffset();
+                if (_and_3) {
+                  int _offset_3 = _whitespaceInfo.getOffset();
                   int _length_1 = _whitespaceInfo.getLength();
                   RuntimeException _xifexpression_2 = null;
                   if (trace) {
                     RuntimeException _runtimeException_1 = new RuntimeException();
                     _xifexpression_2 = _runtimeException_1;
                   }
-                  WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, indentationChange, _xifexpression_2, " ");
+                  String _xifexpression_3 = null;
+                  int _offset_4 = _whitespaceInfo.getOffset();
+                  boolean _equals_2 = (_offset_4 == 0);
+                  if (_equals_2) {
+                    _xifexpression_3 = "";
+                  } else {
+                    _xifexpression_3 = " ";
+                  }
+                  WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_3, _length_1, indentationChange, _xifexpression_2, _xifexpression_3);
                   result.add(_whitespaceData_1);
                 } else {
-                  int _offset_3 = _whitespaceInfo.getOffset();
+                  int _offset_5 = _whitespaceInfo.getOffset();
                   int _length_2 = _whitespaceInfo.getLength();
-                  RuntimeException _xifexpression_3 = null;
+                  RuntimeException _xifexpression_4 = null;
                   if (trace) {
                     RuntimeException _runtimeException_2 = new RuntimeException();
-                    _xifexpression_3 = _runtimeException_2;
+                    _xifexpression_4 = _runtimeException_2;
                   }
-                  NewLineData _newLineData = new NewLineData(_offset_3, _length_2, indentationChange, _xifexpression_3, newLines);
+                  NewLineData _newLineData = new NewLineData(_offset_5, _length_2, indentationChange, _xifexpression_4, newLines);
                   result.add(_newLineData);
                 }
                 applied = true;
               } else {
                 int newLines_1 = 1;
-                CommentInfo _leadingComment_2 = _whitespaceInfo.leadingComment();
-                boolean _endsWithNewLine_2 = _leadingComment_2==null?false:_leadingComment_2.endsWithNewLine();
+                CommentInfo _leadingComment_3 = _whitespaceInfo.leadingComment();
+                boolean _endsWithNewLine_2 = _leadingComment_3==null?false:_leadingComment_3.endsWithNewLine();
                 if (_endsWithNewLine_2) {
                   int _minus_1 = (newLines_1 - 1);
                   newLines_1 = _minus_1;
                 }
-                int _offset_4 = _whitespaceInfo.getOffset();
+                int _offset_6 = _whitespaceInfo.getOffset();
                 int _length_3 = _whitespaceInfo.getLength();
-                RuntimeException _xifexpression_4 = null;
+                RuntimeException _xifexpression_5 = null;
                 if (trace) {
                   RuntimeException _runtimeException_3 = new RuntimeException();
-                  _xifexpression_4 = _runtimeException_3;
+                  _xifexpression_5 = _runtimeException_3;
                 }
-                NewLineData _newLineData_1 = new NewLineData(_offset_4, _length_3, indentationChange, _xifexpression_4, newLines_1);
+                NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, indentationChange, _xifexpression_5, newLines_1);
                 result.add(_newLineData_1);
               }
             }
@@ -370,7 +410,9 @@ public class FormatterExtensions {
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
       IConfigurationValues<XtendFormatterConfigKeys> _cfg = fmt.getCfg();
-      Integer _get = _cfg.<Integer>get(this._xtendFormatterConfigKeys.maxLineWidth);
+      IConfigurationValues<XtendFormatterConfigKeys> _cfg_1 = fmt.getCfg();
+      XtendFormatterConfigKeys _keys = _cfg_1.getKeys();
+      Integer _get = _cfg.<Integer>get(_keys.maxLineWidth);
       return (line <= (_get).intValue());
     }
   }

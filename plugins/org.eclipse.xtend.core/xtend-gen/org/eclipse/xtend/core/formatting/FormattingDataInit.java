@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.formatting;
 
+import org.eclipse.xtend.core.formatting.IConfigurationKey;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @SuppressWarnings("all")
@@ -10,31 +11,32 @@ public class FormattingDataInit {
   
   public int indentationChange = 0;
   
-  public int newLine() {
-    int _newLines = this.newLines = 1;
-    return _newLines;
+  public IConfigurationKey<? extends Object> key = null;
+  
+  public void cfg(final IConfigurationKey<? extends Object> key) {
+    this.key = key;
   }
   
-  public String noSpace() {
-    String _space = this.space = "";
-    return _space;
+  public void newLine() {
+    this.newLines = 1;
   }
   
-  public String oneSpace() {
-    String _space = this.space = " ";
-    return _space;
+  public void noSpace() {
+    this.space = "";
   }
   
-  public int increaseIndentation() {
+  public void oneSpace() {
+    this.space = " ";
+  }
+  
+  public void increaseIndentation() {
     int _plus = (this.indentationChange + 1);
-    int _indentationChange = this.indentationChange = _plus;
-    return _indentationChange;
+    this.indentationChange = _plus;
   }
   
-  public int decreaseIndentation() {
+  public void decreaseIndentation() {
     int _minus = (this.indentationChange - 1);
-    int _indentationChange = this.indentationChange = _minus;
-    return _indentationChange;
+    this.indentationChange = _minus;
   }
   
   public String toString() {

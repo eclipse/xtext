@@ -126,6 +126,50 @@ public class XtendCommentFormatterTest extends AbstractFormatterTest {
   }
   
   @Test
+  public void formatSLCommentInStatement() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package /* my comment */ foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package  /* my comment */  foo");
+    _builder_1.newLine();
+    _builder_1.append("class bar{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentInStatement() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package");
+    _builder.newLine();
+    _builder.append("/* my ");
+    _builder.newLine();
+    _builder.append("comment */");
+    _builder.newLine();
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package  /* my ");
+    _builder_1.newLine();
+    _builder_1.append("comment */  foo");
+    _builder_1.newLine();
+    _builder_1.append("class bar{}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void formatMLCommentBeforeStatement1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

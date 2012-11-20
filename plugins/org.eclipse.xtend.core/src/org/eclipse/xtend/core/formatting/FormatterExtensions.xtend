@@ -7,7 +7,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 class FormatterExtensions {
 	
 	@Inject extension HiddenLeafAccess
-	@Inject extension XtendFormatterConfigKeys
 	
 	def (FormattableDocument) => Iterable<FormattingData> newFormattingData(HiddenLeafs leafs, (FormattingDataInit)=>void init) {
 		[ FormattableDocument doc |
@@ -16,7 +15,7 @@ class FormatterExtensions {
 			if(leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
 				return newFormattingData(leafs, space, indentationChange, doc.debugConflicts)
 			else
-				return newFormattingData(leafs, newLine, newLine, indentationChange, doc.debugConflicts)
+				return newFormattingData(leafs, newLines, newLines, indentationChange, doc.debugConflicts)
 		]
 	}
 	
@@ -66,16 +65,17 @@ class FormatterExtensions {
 		for(leaf : leafs.leafs) 
 			switch leaf {
 				WhitespaceInfo: {
-					val next = leaf.trailingComment
-					if(next?.trailing) {
+					if(leaf.trailingComment?.trailing && !leaf.trailingComment?.multiline) {
 						val space = if(leaf.offset == 0) "" else " "
 						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), space)
 					} else if (!applied) {
 						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
+						if(newLines < 1 && leaf.offset > 0 && (leaf.leadingComment?.multiline || leaf.trailingComment?.multiline))
+							newLines = 1
 						if(leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
 						if(!leaf.leadingComment?.endsWithNewLine && newLines == 0)
-							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), " ")
+							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), if(leaf.offset == 0) "" else " ")
 						else 
 							result += new NewLineData(leaf.offset, leaf.length, indentationChange, if(trace) new RuntimeException(), newLines)
 						applied = true
@@ -103,7 +103,7 @@ class FormatterExtensions {
 			return false
 		} else {
 			val line = fmt.lineLengthBefore(offset) + lookahead.length
-			return line <= fmt.cfg.get(maxLineWidth)
+			return line <= fmt.cfg.get(fmt.cfg.keys.maxLineWidth)
 		}
 	}
 	
@@ -158,28 +158,33 @@ class FormattingDataInit {
 	public String space = null
 	public int newLines = 0
 	public int indentationChange = 0
+	public IConfigurationKey<?> key = null
 	
-	def newLine() {
+	def void cfg(IConfigurationKey<?> key) {
+		this.key = key
+	}
+	
+	def void newLine() {
 		newLines = 1
 	}
 	
-	def noSpace() {
+	def void noSpace() {
 		space = ""
 	}
 	
-	def oneSpace() {
+	def void oneSpace() {
 		space = " "
 	}
 	
-	def increaseIndentation() {
+	def void increaseIndentation() {
 		indentationChange = indentationChange + 1
 	}
 	
-	def decreaseIndentation() {
+	def void decreaseIndentation() {
 		indentationChange = indentationChange - 1
 	}
 	
-	override toString() {
+	override String toString() {
 		new ToStringHelper().toString(this)
 	}
 	
