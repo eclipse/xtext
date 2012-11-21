@@ -118,7 +118,9 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef) {
-		if (crossRef.isDerived())
+		if (crossRef.isDerived() 
+				|| (crossRef instanceof EReference && !((EReference)crossRef).isResolveProxies())
+				|| crossRef.isTransient())
 			return;
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
