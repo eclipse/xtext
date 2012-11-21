@@ -12,13 +12,12 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.OnChangeEvictingCache
-import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 /** 
  * @author Jan Koehnlein
@@ -29,12 +28,12 @@ class ErrorSafeExtensions {
 
 	@Inject OnChangeEvictingCache cache
 
-	def Iterable<Issue> getErrors(EObject element, boolean includeContents) {
+	def boolean hasErrors(EObject element, boolean includeContents) {
 		val IElementIssueProvider issueProvider = cache.get(typeof(IElementIssueProvider).name, element.eResource, [|null])
 		if(issueProvider==null)
-			<Issue>emptyList
+			return false
 		else 
-			issueProvider.getIssues(element, includeContents).filter[it.severity == Severity::ERROR]
+			issueProvider.getIssues(element, includeContents).exists[it.severity == Severity::ERROR]
 	}
 	
 	def appendSafely(ITreeAppendable appendable, EObject element, (ITreeAppendable)=>void procedure) {
@@ -42,8 +41,7 @@ class ErrorSafeExtensions {
 	}
 	
 	def appendSafely(ITreeAppendable appendable, EObject element, String surrogateCode, (ITreeAppendable)=>void procedure) {
-		val issues = element.getErrors(true)
-		if(issues.empty) {
+		if(!element.hasErrors(true)) {
 			appendable => procedure
 		} else {
 			val errorChild = appendable.errorChild(element)
@@ -61,7 +59,7 @@ class ErrorSafeExtensions {
 		if(elements.empty)
 			return
 		val loopParams = new LoopParams => loopInitializer
-		val allElementsBroken = elements.filter[!it.getErrors(true).empty].size == elements.size
+		val allElementsBroken = elements.filter[it.hasErrors(true)].size == elements.size
 		var currentAppendable = if(allElementsBroken) 
 				appendable.errorChild(elements.head)
 			else 
@@ -70,14 +68,14 @@ class ErrorSafeExtensions {
 		var isFirst = true
 		var isFirstBroken = true
 		for(element: elements) {
-			val errors = element.getErrors(true)
-			if(errors.empty) {
+			if(!element.hasErrors(true)) {
 				if(!isFirst)
 					loopParams.appendSeparator(appendable)
 				isFirst = false
 				body.apply(element, appendable)
 			} else {
-				currentAppendable = appendable.errorChild(element)
+				if(!allElementsBroken)
+					currentAppendable = appendable.errorChild(element)
 				if(!isFirst || !isFirstBroken)
 					loopParams.appendSeparator(currentAppendable)
 				isFirstBroken = false
@@ -87,7 +85,7 @@ class ErrorSafeExtensions {
 			}
 		}
 		currentAppendable = if(allElementsBroken) 
-				appendable.errorChild(elements.head)
+				currentAppendable
 			else 
 				appendable
 		loopParams.appendSuffix(currentAppendable)
