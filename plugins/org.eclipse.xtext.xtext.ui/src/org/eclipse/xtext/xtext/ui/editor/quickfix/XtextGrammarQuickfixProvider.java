@@ -125,7 +125,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						StringBuilder builder = new StringBuilder("\n\n");
 						if (abstractRule instanceof TerminalRule)
 							builder.append("terminal ");
-						String newRule = builder.append(ruleName).append(":\n\t\n;\n").toString();
+						String newRule = builder.append(ruleName).append(":\n\t\n;").toString();
 						context.getXtextDocument().replace(offset, 0, newRule);
 					}
 				});
