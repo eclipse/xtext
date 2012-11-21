@@ -57,7 +57,7 @@ public class HiddenLeafs {
     return _or;
   }
   
-  public Integer getLenght() {
+  public int getLenght() {
     List<LeafInfo> _leafs = this.getLeafs();
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
         public Integer apply(final Integer x, final LeafInfo i) {
@@ -68,10 +68,10 @@ public class HiddenLeafs {
         }
       };
     Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
-    return _fold;
+    return (_fold).intValue();
   }
   
-  public Integer getNewLines() {
+  public int getNewLines() {
     List<LeafInfo> _leafs = this.getLeafs();
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
         public Integer apply(final Integer x, final LeafInfo i) {
@@ -81,10 +81,10 @@ public class HiddenLeafs {
         }
       };
     Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
-    return _fold;
+    return (_fold).intValue();
   }
   
-  public Integer getNewLinesInComments() {
+  public int getNewLinesInComments() {
     List<LeafInfo> _leafs = this.getLeafs();
     Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
     final Function2<Integer,CommentInfo,Integer> _function = new Function2<Integer,CommentInfo,Integer>() {
@@ -95,7 +95,7 @@ public class HiddenLeafs {
         }
       };
     Integer _fold = IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
-    return _fold;
+    return (_fold).intValue();
   }
   
   public HiddenLeafs(final int offset) {

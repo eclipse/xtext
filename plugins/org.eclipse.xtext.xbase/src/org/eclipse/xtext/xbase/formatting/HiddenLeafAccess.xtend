@@ -119,15 +119,15 @@ class HiddenLeafAccess {
 		leafs.empty || (leafs.size == 1 && leafs.head instanceof WhitespaceInfo)
 	}
 	
-	def getLenght() {
+	def int getLenght() {
 		leafs.fold(0, [x, i | x + i.node?.length])
 	}
 	
-	def getNewLines() {
+	def int getNewLines() {
 		leafs.fold(0, [x, i | x + i.newLines])
 	}
 	
-	def getNewLinesInComments() {
+	def int getNewLinesInComments() {
 		leafs.filter(typeof(CommentInfo)).fold(0, [x, i | x + i.newLines])
 	}
 }

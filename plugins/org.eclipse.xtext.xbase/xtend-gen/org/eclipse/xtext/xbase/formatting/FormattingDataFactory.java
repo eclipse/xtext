@@ -53,8 +53,8 @@ public class FormattingDataFactory {
     final Function1<FormattableDocument,Iterable<FormattingData>> _function = new Function1<FormattableDocument,Iterable<FormattingData>>() {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           boolean _and = false;
-          Integer _newLinesInComments = leafs.getNewLinesInComments();
-          boolean _equals = ((_newLinesInComments).intValue() == 0);
+          int _newLinesInComments = leafs.getNewLinesInComments();
+          boolean _equals = (_newLinesInComments == 0);
           if (!_equals) {
             _and = false;
           } else {
@@ -272,8 +272,8 @@ public class FormattingDataFactory {
             } else {
               boolean _not_1 = (!applied);
               if (_not_1) {
-                Integer _newLines = leafs.getNewLines();
-                int _max = Math.max((_newLines).intValue(), minNewLines);
+                int _newLines = leafs.getNewLines();
+                int _max = Math.max(_newLines, minNewLines);
                 int newLines = Math.min(_max, maxNewLines);
                 boolean _and_1 = false;
                 boolean _and_2 = false;

@@ -834,8 +834,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
-      Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
-      return ((_newLines).intValue() > 0);
+      int _newLines = _hiddenLeafsBefore_1.getNewLines();
+      return (_newLines > 0);
     }
     boolean _switchResult = false;
     XExpression _expression = closure.getExpression();
@@ -1035,8 +1035,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
-      Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
-      return ((_newLines).intValue() > 0);
+      int _newLines = _hiddenLeafsBefore_1.getNewLines();
+      return (_newLines > 0);
     }
     EList<XExpression> _memberCallArguments = fc.getMemberCallArguments();
     final Iterable<XExpression> params = this.explicitParams(_memberCallArguments);
@@ -1058,8 +1058,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
-      Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
-      return ((_newLines).intValue() > 0);
+      int _newLines = _hiddenLeafsBefore_1.getNewLines();
+      return (_newLines > 0);
     }
     EList<XExpression> _featureCallArguments = fc.getFeatureCallArguments();
     final Iterable<XExpression> params = this.explicitParams(_featureCallArguments);
@@ -1081,8 +1081,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _notEquals = (!Objects.equal(_hiddenLeafsBefore, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore_1 = this._hiddenLeafAccess.getHiddenLeafsBefore(closingBracket);
-      Integer _newLines = _hiddenLeafsBefore_1.getNewLines();
-      return ((_newLines).intValue() > 0);
+      int _newLines = _hiddenLeafsBefore_1.getNewLines();
+      return (_newLines > 0);
     }
     EList<XExpression> _arguments = fc.getArguments();
     final Iterable<XExpression> params = this.explicitParams(_arguments);
@@ -1465,8 +1465,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _or_1 = true;
     } else {
       HiddenLeafs _hiddenLeafsBefore = thennode==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(thennode);
-      Integer _newLines = _hiddenLeafsBefore==null?(Integer)null:_hiddenLeafsBefore.getNewLines();
-      boolean _greaterThan = ((_newLines).intValue() > 0);
+      int _newLines = _hiddenLeafsBefore==null?0:_hiddenLeafsBefore.getNewLines();
+      boolean _greaterThan = (_newLines > 0);
       _or_1 = (_contains || _greaterThan);
     }
     if (_or_1) {
