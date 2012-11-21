@@ -52,7 +52,7 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 		}
 		ITemplateAcceptor templateAcceptor = state.decorateAcceptor((ITemplateAcceptor) this);
 		for (ContentAssistContext context: contexts) {
-			if (templateAcceptor.canAcceptMoreTemplates())
+			if (templateAcceptor.canAcceptMoreTemplates() && context.getReplaceRegion().getOffset() >= 0)
 				state.getTemplateProposalProvider().createTemplates(context, templateAcceptor);
 			
 		}
