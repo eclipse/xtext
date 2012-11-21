@@ -64,17 +64,19 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 		if(object instanceof XtendAnnotationTarget){
 			for(XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()){
 				JvmAnnotationType annotationType = annotation.getAnnotationType();
-				buffer.append("@");
-				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
-				EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
-				if(elementValuePairs.size() > 0){
-					buffer.append("(");
-					List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(annotation, XAnnotationsPackage.eINSTANCE.getXAnnotation_ElementValuePairs());
-					if(findNodesForFeature.size() > 0)
-						buffer.append(findNodesForFeature.get(0).getText());
-					buffer.append(")");
+				if(annotationType != null) {
+					buffer.append("@");
+					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
+					EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
+					if(elementValuePairs.size() > 0){
+						buffer.append("(");
+						List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(annotation, XAnnotationsPackage.eINSTANCE.getXAnnotation_ElementValuePairs());
+						if(findNodesForFeature.size() > 0)
+							buffer.append(findNodesForFeature.get(0).getText());
+						buffer.append(")");
+					}
+					buffer.append("<br>");
 				}
-				buffer.append("<br>");
 			}
 		} else {
 			super.addAnnotations(object);
