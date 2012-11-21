@@ -62,6 +62,7 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import com.google.common.collect.Sets
 
 /**
  * A generator implementation that processes the 
@@ -133,7 +134,7 @@ class JvmModelGenerator implements IGenerator {
 		if (typeParameters.empty)
 			childAppendable.append(" ")
 		generateExtendsClause(childAppendable)
-		childAppendable.append('{')
+		childAppendable.append('{').increaseIndentation
 		appendable.forEach(members, [
 				separator = [ITreeAppendable it | newLine]
 			], [
@@ -143,7 +144,7 @@ class JvmModelGenerator implements IGenerator {
 				memberAppendable.closeScope
 				hasGenerated
 			])
-		childAppendable.newLine.append('}')
+		childAppendable.decreaseIndentation.newLine.append('}')
 		appendable.newLine
 	}
 	
@@ -155,7 +156,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.traceSignificant(it).append(simpleName)
 		appendable.append(" ")
 		generateExtendsClause(appendable)
-		appendable.append("{")
+		appendable.append("{").increaseIndentation
 		appendable.forEach(literals, [
 				separator = [ITreeAppendable it | append(',').newLine]  suffix = ';'
 			], [
@@ -166,7 +167,7 @@ class JvmModelGenerator implements IGenerator {
 			], [ 
 				generateMember(appendable.trace(it)) 
 			])
-		appendable.newLine.append("}").newLine
+		appendable.decreaseIndentation.newLine.append("}").newLine
 	}
 	
 	def boolean generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable) {
@@ -307,14 +308,13 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch boolean generateMember(JvmGenericType it, ITreeAppendable appendable) {
-		appendable.increaseIndentation.newLine
+		appendable.newLine
 		generateBody(it, appendable)
-		appendable.decreaseIndentation
 		return true
 	}
 	
 	def dispatch boolean generateMember(JvmField it, ITreeAppendable appendable) {
-		appendable.increaseIndentation.newLine
+		appendable.newLine
 		generateJavaDoc(appendable)
 		val tracedAppendable = appendable.trace(it)
 		generateAnnotations(tracedAppendable, true)
@@ -324,12 +324,11 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.traceSignificant(it).append(simpleName)
 		generateInitialization(tracedAppendable)
 		tracedAppendable.append(";")
-		appendable.decreaseIndentation
 		return true
 	}
 	
 	def dispatch boolean generateMember(JvmOperation it, ITreeAppendable appendable) {
-		appendable.increaseIndentation.newLine
+		appendable.newLine
 		appendable.openScope
 		generateJavaDoc(appendable)
 		val tracedAppendable = appendable.trace(it)
@@ -353,14 +352,13 @@ class JvmModelGenerator implements IGenerator {
 			tracedAppendable.append(" ")
 			generateExecutableBody(tracedAppendable)
 		}
-		appendable.decreaseIndentation
 		appendable.closeScope
 		return true
 	}
 	
 	def dispatch boolean generateMember(JvmConstructor it, ITreeAppendable appendable) {
 		if(!isSingleSyntheticDefaultConstructor) {
-			appendable.increaseIndentation.newLine
+			appendable.newLine
 			appendable.openScope
 			generateJavaDoc(appendable)
 			val tracedAppendable = appendable.trace(it)
@@ -374,7 +372,6 @@ class JvmModelGenerator implements IGenerator {
 			generateThrowsClause(tracedAppendable)
 			tracedAppendable.append(" ")
 			generateExecutableBody(tracedAppendable)
-			appendable.decreaseIndentation
 			appendable.closeScope
 			return true
 		}
@@ -401,7 +398,7 @@ class JvmModelGenerator implements IGenerator {
 		
 	def void generateTypeParameterDeclaration(JvmTypeParameterDeclarator it, ITreeAppendable appendable) {
 		appendable.forEachSafely(typeParameters, [
-				prefix = '<' separator = ', ' suffix = '>'
+				prefix = '<' separator = ', ' suffix = '> '
 			], [
 				it, app | generateTypeParameterDeclaration(it, app)
 			])
@@ -423,11 +420,10 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable) {
-		val seenExceptions = <JvmType>newHashSet
-		appendable.forEachSafely(exceptions, [
+		appendable.forEachSafely(Sets::newLinkedHashSet(exceptions), [
 				prefix = ' throws ' separator = ', '
 			], [
-				it, app | if(seenExceptions.add(it.type)) app.trace(it).append(it.type)
+				it, app | app.trace(it).append(it.type)
 			])
 	}
 	
@@ -575,14 +571,8 @@ class JvmModelGenerator implements IGenerator {
 		toJavaLiteral(appendable)
 	}
 		
-	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue it, ITreeAppendable appendable) {
-		if (values.size != 1) {
-			appendable.append("{ ")
-			generateAnnotations(appendable, false)
-			appendable.append("} ")
-		} else {
-			generateAnnotations(appendable, false)
-		}
+	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue value, ITreeAppendable appendable) {
+		appendable.forEachWithShortcut(value.values, [value.generateAnnotations(appendable, false)])
 	}
 		
 	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable) {
@@ -658,11 +648,9 @@ class JvmModelGenerator implements IGenerator {
 	} 
 	
 	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, ITreeAppendable appendable) {
-		appendable.forEach(values.filter(typeof(XExpression)), [ 
-				prefix='{' separator = ', ' suffix ='}'
-			], [
-				compiler.toJavaExpression(it, appendable)
-			])
+		appendable.forEachWithShortcut(values.filter(typeof(XExpression)), [
+			compiler.toJavaExpression(it, appendable)
+		])
 	}
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager) {

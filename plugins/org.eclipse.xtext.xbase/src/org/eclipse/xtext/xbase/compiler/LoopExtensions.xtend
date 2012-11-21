@@ -43,11 +43,11 @@ class LoopExtensions {
 		val params = new LoopParams => loopInitializer
 		params.appendPrefix(appendable)
 		val iter = elements.iterator
-		var noElementSoFar = true
+		var isFirst = true
 		while(iter.hasNext) {
-			if(!noElementSoFar)
+			if(!isFirst)
 				params.appendSeparator(appendable)
-			noElementSoFar = function.apply(iter.next) || noElementSoFar
+			isFirst = !function.apply(iter.next) && isFirst
 		}	
 		params.appendSuffix(appendable)
 	}
