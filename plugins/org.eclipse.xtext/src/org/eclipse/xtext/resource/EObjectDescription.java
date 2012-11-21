@@ -64,7 +64,7 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	}
 	
 	protected URI normalize(EObject element, URI uri) {
-		if (element!=null && element.eResource()!=null && element.eResource().getResourceSet() != null)
+		if (!uri.isPlatform() && element!=null && element.eResource()!=null && element.eResource().getResourceSet() != null)
 			return element.eResource().getResourceSet().getURIConverter().normalize(uri);
 		else
 			return uri;

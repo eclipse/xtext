@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.SourceAttachmentPackageFragmentRootWalker;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.util.Pair;
 
@@ -91,75 +92,83 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			final Set<String> previouslyBuilt = Sets.newHashSet();
 			final Set<String> subsequentlyBuilt = Sets.newHashSet();
 			final JarEntryLocator locator = new JarEntryLocator();
+			final Map<String, Long> updated = Maps.newHashMap();
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
 					return toBeBuilt;
 				if (shouldHandle(root)) {
 					try {
-						final Map<String, Long> updated = Maps.newHashMap();
-						new PackageFragmentRootWalker<Boolean>() {
+						new SourceAttachmentPackageFragmentRootWalker<Boolean>() {
 							@Override
-							protected Boolean handle(IJarEntryResource jarEntry, TraversalState state) {
-								URI uri = locator.getURI(root, jarEntry, state);
-								if (isValid(uri, jarEntry)) {
-									if (wasFragmentRootAlreadyProcessed(uri))
-										return Boolean.TRUE; // abort traversal
-									if (log.isDebugEnabled())
-										log.debug("Scheduling: " + project.getName() + " - " + uri);
-									toBeBuilt.getToBeDeleted().add(uri);
-									toBeBuilt.getToBeUpdated().add(uri);
-								}
+							protected Boolean handle(URI uri, IStorage storage, TraversalState state) {
+								if (wasFragmentRootAlreadyProcessed(uri))
+									return Boolean.TRUE; // abort traversal
+								if (log.isDebugEnabled())
+									log.debug("Scheduling: " + project.getName() + " - " + uri);
+								toBeBuilt.getToBeDeleted().add(uri);
+								toBeBuilt.getToBeUpdated().add(uri);
 								return null;
+							}
+
+							@Override
+							protected URI getURI(IJarEntryResource jarEntry, PackageFragmentRootWalker.TraversalState state)
+							{
+								return locator.getURI(root, jarEntry, state);
+							}
+
+							@Override
+							protected boolean isValid(URI uri, IStorage storage) {
+								return JdtToBeBuiltComputer.this.isValid(uri, storage);
 							}
 							
 							protected boolean wasFragmentRootAlreadyProcessed(URI uri) {
 								Iterable<Pair<IStorage, IProject>> storages = getMapper().getStorages(uri);
 								for(Pair<IStorage, IProject> pair: storages) {
-									IProject otherProject = pair.getSecond();
-									if (!pair.getSecond().equals(project) && !pair.getSecond().getProject().getName().equals(".org.eclipse.jdt.core.external.folders")) {
-										if (previouslyBuilt.contains(otherProject.getName()))
-											return true;
-										if (!subsequentlyBuilt.contains(otherProject.getName())) {
-											boolean process = XtextProjectHelper.hasNature(otherProject);
-											String otherName = otherProject.getName();
-											if (!process) {
-												process = otherProject.isAccessible() && otherProject.isHidden();
-												if (process) {
-													Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
-													if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
-														process = false;
-														updated.put(otherName, otherProject.getModificationStamp());
+										IProject otherProject = pair.getSecond();
+										if (!pair.getSecond().equals(project) && !pair.getSecond().getProject().getName().equals(".org.eclipse.jdt.core.external.folders")) {
+											if (previouslyBuilt.contains(otherProject.getName()))
+												return true;
+											if (!subsequentlyBuilt.contains(otherProject.getName())) {
+												boolean process = XtextProjectHelper.hasNature(otherProject);
+												String otherName = otherProject.getName();
+												if (!process) {
+													process = otherProject.isAccessible() && otherProject.isHidden();
+													if (process) {
+														Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
+														if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
+															process = false;
+															updated.put(otherName, otherProject.getModificationStamp());
+														}
 													}
 												}
-											}
-											if (process) {
-												ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
-												if (!projectOrder.hasCycles) {
-													if (otherProject.equals(projectOrder.projects[0])) {
-														previouslyBuilt.add(otherName);
-														return true; 
+												if (process) {
+													ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
+													if (!projectOrder.hasCycles) {
+														if (otherProject.equals(projectOrder.projects[0])) {
+															previouslyBuilt.add(otherName);
+															return true; 
+														} else {
+															subsequentlyBuilt.add(otherName);
+														}
 													} else {
 														subsequentlyBuilt.add(otherName);
 													}
-												} else {
-													subsequentlyBuilt.add(otherName);
 												}
 											}
 										}
 									}
-								}
 								return false;
 							}
 						}.traverse(root,true);
-						synchronized (modificationStampCache) {
-							modificationStampCache.projectToModificationStamp.putAll(updated);
-						}
 					} catch (JavaModelException ex) {
 						if (!ex.isDoesNotExist())
 							log.error(ex.getMessage(), ex);
 					}
 				}
 				progress.worked(1);
+			}
+			synchronized (modificationStampCache) {
+				modificationStampCache.projectToModificationStamp.putAll(updated);
 			}
 		}
 		return toBeBuilt;
@@ -209,7 +218,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		Delta delta = new ChangedResourceDescriptionDelta(oldDescription, null);
 		queuedBuildData.queueChanges(Collections.singleton(delta));
 	}
-	
+
 	@Override
 	protected boolean isHandled(IStorage resource) {
 		return (resource instanceof IJarEntryResource) || super.isHandled(resource);

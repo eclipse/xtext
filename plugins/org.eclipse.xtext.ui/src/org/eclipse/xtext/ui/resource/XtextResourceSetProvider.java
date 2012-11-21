@@ -10,7 +10,9 @@ package org.eclipse.xtext.ui.resource;
 import static com.google.common.collect.Maps.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.JarFile;
@@ -61,35 +63,44 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 			IClasspathEntry[] classpath = javaProject.getResolvedClasspath(true);
 			for (IClasspathEntry classPathEntry : classpath) {
 				IPath path = classPathEntry.getPath();
-				if (path != null && "jar".equals(path.getFileExtension())) {
-					try {
-						final File file = path.toFile();
-						if (file != null && file.exists()) {
-							JarFile jarFile = new JarFile(file);
-							try {
-								Manifest manifest = jarFile.getManifest();
-								if (manifest != null) {
-									String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-									if (name != null) {
-										final int indexOf = name.indexOf(';');
-										if (indexOf > 0)
-											name = name.substring(0, indexOf);
-										if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
-											String p = "archive:" + file.toURI() + "!/";
-											URI uri = URI.createURI(p);
-											final URI platformResourceKey = URI.createPlatformResourceURI(name + "/", false);
-											final URI platformPluginKey = URI.createPlatformPluginURI(name + "/", false);
-											hashMap.put(platformResourceKey, uri);
-											hashMap.put(platformPluginKey, uri);
-										}
-									}
+				if (path != null) { 
+					if ("jar".equals(path.getFileExtension())) {
+						try {
+							final File file = path.toFile();
+							if (file != null && file.exists()) {
+								JarFile jarFile = new JarFile(file);
+								try {
+									Manifest manifest = jarFile.getManifest();
+									if (manifest != null)
+										handleManifest(hashMap, URI.createURI("archive:" + file.toURI() + "!/"), manifest);
+								} finally {
+									jarFile.close();
 								}
-							} finally {
-								jarFile.close();
+							}
+						} catch (IOException e) {
+							LOG.error(e.getMessage(), e);
+						}
+					} else {
+						IPath sourceAttachmentPath = classPathEntry.getSourceAttachmentPath();
+						if (sourceAttachmentPath != null && sourceAttachmentPath.isPrefixOf(path)) {
+							File manifestFile = sourceAttachmentPath.append("META-INF/MANIFEST.MF").toFile();
+							if (manifestFile.exists()) {
+								try {
+									InputStream inputStream = null;
+									try {
+										inputStream = new FileInputStream(manifestFile);
+										Manifest manifest = new Manifest(inputStream);
+										handleManifest(hashMap, URI.createFileURI(sourceAttachmentPath.toString()).appendSegment(""), manifest);
+									} 
+									finally {
+										if (inputStream != null)
+											inputStream.close();
+									}
+								} catch (IOException e) {
+									LOG.error(e.getMessage(), e);
+								}
 							}
 						}
-					} catch (IOException e) {
-						LOG.error(e.getMessage(), e);
 					}
 				}
 			}
@@ -97,6 +108,23 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 			LOG.error(e.getMessage(), e);
 		}
 		return hashMap;
+	}
+
+	private void handleManifest(HashMap<URI, URI> hashMap, URI uri, Manifest manifest) {
+		{
+			String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
+			if (name != null) {
+				final int indexOf = name.indexOf(';');
+				if (indexOf > 0)
+					name = name.substring(0, indexOf);
+				if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
+					final URI platformResourceKey = URI.createPlatformResourceURI(name + "/", false);
+					final URI platformPluginKey = URI.createPlatformPluginURI(name + "/", false);
+					hashMap.put(platformResourceKey, uri);
+					hashMap.put(platformPluginKey, uri);
+				}
+			}
+		}
 	}
 
 }
