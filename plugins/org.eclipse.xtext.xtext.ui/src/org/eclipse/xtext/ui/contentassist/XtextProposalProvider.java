@@ -477,7 +477,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			proposal.append("enum ");
 		proposal.append(overrideMe.getName());
 		boolean foundPack = appendReturnType(overrideMe, grammar, proposal);
-		proposal = proposal.append(":\n\t\n;\n");
+		proposal = proposal.append(":\n\t\n;");
 		ConfigurableCompletionProposal completionProposal = (ConfigurableCompletionProposal) createCompletionProposal(
 				proposal.toString(), overrideMe.getName() + " - override rule " + overrideMe.getName(),
 				getImage(overrideMe), context.copy().setMatcher(new PrefixMatcher() {
