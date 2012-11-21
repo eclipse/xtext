@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 
 @SuppressWarnings(value = "restriction")
@@ -264,8 +265,8 @@ public class FormatterTester {
         } else {
           String _text = leaf.getText();
           String _trim = _text.trim();
-          boolean _isEmpty = _trim.isEmpty();
-          boolean _not_1 = (!_isEmpty);
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_trim);
+          boolean _not_1 = (!_isNullOrEmpty);
           _or = (_not || _not_1);
         }
         if (_or) {
