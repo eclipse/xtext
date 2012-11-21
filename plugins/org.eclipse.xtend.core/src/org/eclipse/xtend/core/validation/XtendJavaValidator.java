@@ -1064,7 +1064,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected boolean isValueExpectedRecursive(XExpression expr) {
 		EObject container = expr.eContainer();
 		if (container instanceof RichString 
-			|| container instanceof RichStringForLoop) {
+			|| container instanceof RichStringForLoop
+			|| container instanceof XtendField) {
 			return true;
 		}
 		return super.isValueExpectedRecursive(expr);
