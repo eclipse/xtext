@@ -505,7 +505,7 @@ public class JvmTypesBuilder {
 	 * @return the target for convenience.
 	 */
 	@Nullable
-	public <T extends JvmIdentifiableElement> T associate(@Nullable EObject sourceElement, @Nullable T target) {
+	public <T extends EObject> T associate(@Nullable EObject sourceElement, @Nullable T target) {
 		if(sourceElement != null && target != null)
 			associator.associate(sourceElement, target);
 		return target;
@@ -1132,8 +1132,10 @@ public class JvmTypesBuilder {
 			return;
 		for (XAnnotation anno : annotations) {
 			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
-			if(annotationReference != null)
+			if(annotationReference != null) {
 				target.getAnnotations().add(annotationReference);
+				associate(anno, annotationReference);
+			}
 		}
 	}
 

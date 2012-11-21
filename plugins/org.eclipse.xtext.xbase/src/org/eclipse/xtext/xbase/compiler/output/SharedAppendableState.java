@@ -109,5 +109,12 @@ public class SharedAppendableState {
 	public boolean hasObject(String name) {
 		return scopes.get(name) != null;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public String getLineSeparator() {
+		return lineSeparator;
+	}
 
 }

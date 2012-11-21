@@ -115,6 +115,16 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		this.locationData = sourceLocations;
 		this.useForDebugging = useForDebugging;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public ErrorTreeAppendable errorChild(EObject context) {
+		ErrorTreeAppendable errorChild = new ErrorTreeAppendable(state, locationProvider, jvmModelAssociations, getLocationData(), useForDebugging, 
+				context);
+		children.add(errorChild);
+		return errorChild;
+	}
 
 	public TreeAppendable trace(EObject object) {
 		return trace(object, false);
@@ -136,9 +146,18 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		if (this.useForDebugging == useForDebugging && newData.equals(locationData)) {
 			return this;
 		}
-		TreeAppendable result = new TreeAppendable(state, locationProvider, jvmModelAssociations, newData, useForDebugging);
-		children.add(result);
+		TreeAppendable result = createChild(state, locationProvider, jvmModelAssociations, newData, useForDebugging);
+		if(result != this)
+			children.add(result);
 		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected TreeAppendable createChild(SharedAppendableState state, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {
+		return new TreeAppendable(state, locationProvider, 
+				jvmModelAssociations, newData, useForDebugging);
 	}
 	
 	public ITreeAppendable trace(ILocationData location) {
@@ -442,4 +461,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return false;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected SharedAppendableState getState() {
+		return state;
+	}
 }
