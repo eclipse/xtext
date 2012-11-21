@@ -184,6 +184,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover")
 				.addTypeToType("org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider", 
 						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider")
+				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider.CrossRefResolutionConverter",
+						"org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter")
 				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator",
 						"org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator");
 		if (useInferredJvmModel) {
