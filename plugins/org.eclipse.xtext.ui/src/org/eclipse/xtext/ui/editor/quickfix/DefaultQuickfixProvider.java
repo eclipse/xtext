@@ -67,11 +67,26 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Inject
-	private IValueConverterService valueConverter;
-	
-	@Inject
 	private ICaseInsensitivityHelper caseInsensitivityHelper;
 	
+	@Inject
+	private CrossRefResolutionConverter converter;
+
+	/**
+	 *
+	 * Can be sub classed to supress usage of value converter for e.g. operators.
+	 *
+	 * @since 2.4
+	 */
+	public static class CrossRefResolutionConverter {
+		@Inject
+		private IValueConverterService valueConverter;
+
+		public String convertToString(String replacement, String ruleName) {
+			return valueConverter.toString(replacement, ruleName);
+		}
+	}
+
 	private CrossReference findCrossReference(EObject context, INode node) {
 		if (node == null || (node.hasDirectSemanticElement() && context.equals(node.getSemanticElement())))
 			return null;
@@ -143,7 +158,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				if (node == null)
 					throw new IllegalStateException("Cannot happen since we found a reference");
 				ICompositeNode rootNode = node.getRootNode();
-				ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
+				ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset());
 				CrossReference crossReference = findCrossReference(target, leaf);
 				return crossReference.getTerminal();
 			}
@@ -157,7 +172,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 					if (!caseInsensitive && !replacement.equals(keyword.getValue()))
 						return;
 				} else if (ruleName != null) {
-					replacement = valueConverter.toString(replacement, ruleName);
+					replacement = converter.convertToString(replacement, ruleName);
 				} else {
 					logger.error("either keyword or ruleName have to present", new IllegalStateException());
 				}
