@@ -126,7 +126,7 @@ public abstract class AbstractFormatterTest {
           }
         };
       Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
-      final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
+      final Set offsets = IterableExtensions.<Integer>toSet(_map);
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
       IParseResult _parseResult = res.getParseResult();
