@@ -153,7 +153,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected formatMemberParameter(Collection<XtendParameter> parameters, INode open, INode close,
 		FormattableDocument format) {
-		if (close?.hiddenLeafsBefore?.newLines > 0) {
+		if (close?.hiddenLeafsBefore?.newLines ?: 0 > 0) {
 			var INode comma = null
 			if (parameters.empty)
 				format += open.append[noSpace]
