@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
 
-class TypeVariableFormatterTest extends AbstractFormatterTest {
+class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
 	def CharSequence refToFile(CharSequence string) '''
 		import java.util.*
 		

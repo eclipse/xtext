@@ -3,7 +3,7 @@ package org.eclipse.xtend.core.tests.formatting
 import org.junit.Test
 import org.junit.Ignore
 
-class XtendRichStringFormatterTest extends AbstractFormatterTest {
+class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 	
 	def private String decode(CharSequence seq) {
 		seq.toString.replace("<<", "«").replace(">>", "»").replace("```", "'''")

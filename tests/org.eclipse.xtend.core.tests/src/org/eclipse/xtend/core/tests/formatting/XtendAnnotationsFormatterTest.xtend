@@ -5,7 +5,7 @@ import org.junit.Ignore
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
 import com.google.inject.Inject
 
-class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
+class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 	
 	@Inject extension XtendFormatterConfigKeys
 	

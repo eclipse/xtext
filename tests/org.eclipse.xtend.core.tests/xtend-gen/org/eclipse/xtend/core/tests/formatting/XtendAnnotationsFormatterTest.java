@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.formatting;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
-import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
+import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -10,7 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
+public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   @Inject
   private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
   

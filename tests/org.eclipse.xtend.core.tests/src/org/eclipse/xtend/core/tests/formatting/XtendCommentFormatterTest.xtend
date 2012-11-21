@@ -1,9 +1,9 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest
+import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
 import org.junit.Test
 
-class XtendCommentFormatterTest extends AbstractFormatterTest {
+class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatSLCommentAfterpackage() {
 		assertFormatted('''
 			/***********

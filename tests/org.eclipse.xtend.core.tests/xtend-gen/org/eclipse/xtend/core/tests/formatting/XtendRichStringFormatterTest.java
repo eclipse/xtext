@@ -1,12 +1,12 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
+import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendRichStringFormatterTest extends AbstractFormatterTest {
+public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
   private String decode(final CharSequence seq) {
     String _string = seq.toString();
     String _replace = _string.replace("<<", "\u00AB");

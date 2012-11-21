@@ -1,11 +1,11 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
+import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class TypeVariableFormatterTest extends AbstractFormatterTest {
+public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
   public CharSequence refToFile(final CharSequence string) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");

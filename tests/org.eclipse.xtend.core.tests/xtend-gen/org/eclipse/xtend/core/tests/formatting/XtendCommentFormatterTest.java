@@ -1,11 +1,11 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.tests.formatting.AbstractFormatterTest;
+import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendCommentFormatterTest extends AbstractFormatterTest {
+public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatSLCommentAfterpackage() {
     StringConcatenation _builder = new StringConcatenation();
