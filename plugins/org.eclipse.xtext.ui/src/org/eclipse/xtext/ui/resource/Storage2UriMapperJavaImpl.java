@@ -103,7 +103,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			}
 		} else if (uri.isPlatformResource() && !getWorkspaceRoot().getProject(uri.segment(1)).isAccessible()) {
 			// This must be a logical URI because it doesn't physically exist in the workspace.
-			//
 			for (IProject project : projects) {
 				if (project.isAccessible()) {
 					IJavaProject javaProject = JavaCore.create(project);
@@ -122,8 +121,10 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return result;
 	}
 
-	protected void findLogicalStoragesOfProject(URI uri, IJavaProject project,
-			Set<Pair<IStorage, IProject>> storages) {
+	/**
+	 * @since 2.4
+	 */
+	protected void findLogicalStoragesOfProject(URI uri, IJavaProject project, Set<Pair<IStorage, IProject>> storages) {
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();

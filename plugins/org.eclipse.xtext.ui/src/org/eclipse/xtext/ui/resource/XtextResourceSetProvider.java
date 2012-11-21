@@ -63,7 +63,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 			IClasspathEntry[] classpath = javaProject.getResolvedClasspath(true);
 			for (IClasspathEntry classPathEntry : classpath) {
 				IPath path = classPathEntry.getPath();
-				if (path != null) { 
+				if (path != null) {
 					if ("jar".equals(path.getFileExtension())) {
 						try {
 							final File file = path.toFile();
@@ -91,8 +91,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 										inputStream = new FileInputStream(manifestFile);
 										Manifest manifest = new Manifest(inputStream);
 										handleManifest(hashMap, URI.createFileURI(sourceAttachmentPath.toString()).appendSegment(""), manifest);
-									} 
-									finally {
+									} finally {
 										if (inputStream != null)
 											inputStream.close();
 									}
@@ -111,18 +110,16 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	}
 
 	private void handleManifest(HashMap<URI, URI> hashMap, URI uri, Manifest manifest) {
-		{
-			String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-			if (name != null) {
-				final int indexOf = name.indexOf(';');
-				if (indexOf > 0)
-					name = name.substring(0, indexOf);
-				if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
-					final URI platformResourceKey = URI.createPlatformResourceURI(name + "/", false);
-					final URI platformPluginKey = URI.createPlatformPluginURI(name + "/", false);
-					hashMap.put(platformResourceKey, uri);
-					hashMap.put(platformPluginKey, uri);
-				}
+		String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
+		if (name != null) {
+			final int indexOf = name.indexOf(';');
+			if (indexOf > 0)
+				name = name.substring(0, indexOf);
+			if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
+				final URI platformResourceKey = URI.createPlatformResourceURI(name + "/", false);
+				final URI platformPluginKey = URI.createPlatformPluginURI(name + "/", false);
+				hashMap.put(platformResourceKey, uri);
+				hashMap.put(platformPluginKey, uri);
 			}
 		}
 	}

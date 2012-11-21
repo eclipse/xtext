@@ -123,40 +123,40 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 							
 							protected boolean wasFragmentRootAlreadyProcessed(URI uri) {
 								Iterable<Pair<IStorage, IProject>> storages = getMapper().getStorages(uri);
-								for(Pair<IStorage, IProject> pair: storages) {
-										IProject otherProject = pair.getSecond();
-										if (!pair.getSecond().equals(project) && !pair.getSecond().getProject().getName().equals(".org.eclipse.jdt.core.external.folders")) {
-											if (previouslyBuilt.contains(otherProject.getName()))
-												return true;
-											if (!subsequentlyBuilt.contains(otherProject.getName())) {
-												boolean process = XtextProjectHelper.hasNature(otherProject);
-												String otherName = otherProject.getName();
-												if (!process) {
-													process = otherProject.isAccessible() && otherProject.isHidden();
-													if (process) {
-														Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
-														if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
-															process = false;
-															updated.put(otherName, otherProject.getModificationStamp());
-														}
+								for (Pair<IStorage, IProject> pair : storages) {
+									IProject otherProject = pair.getSecond();
+									if (!pair.getSecond().equals(project) && !pair.getSecond().getProject().getName().equals(".org.eclipse.jdt.core.external.folders")) {
+										if (previouslyBuilt.contains(otherProject.getName()))
+											return true;
+										if (!subsequentlyBuilt.contains(otherProject.getName())) {
+											boolean process = XtextProjectHelper.hasNature(otherProject);
+											String otherName = otherProject.getName();
+											if (!process) {
+												process = otherProject.isAccessible() && otherProject.isHidden();
+												if (process) {
+													Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
+													if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
+														process = false;
+														updated.put(otherName, otherProject.getModificationStamp());
 													}
 												}
-												if (process) {
-													ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
-													if (!projectOrder.hasCycles) {
-														if (otherProject.equals(projectOrder.projects[0])) {
-															previouslyBuilt.add(otherName);
-															return true; 
-														} else {
-															subsequentlyBuilt.add(otherName);
-														}
+											}
+											if (process) {
+												ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] { project, otherProject });
+												if (!projectOrder.hasCycles) {
+													if (otherProject.equals(projectOrder.projects[0])) {
+														previouslyBuilt.add(otherName);
+														return true;
 													} else {
 														subsequentlyBuilt.add(otherName);
 													}
+												} else {
+													subsequentlyBuilt.add(otherName);
 												}
 											}
 										}
 									}
+								}
 								return false;
 							}
 						}.traverse(root,true);
