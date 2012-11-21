@@ -13,8 +13,15 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 import org.junit.After;
 import org.junit.Assert;
@@ -319,6 +326,31 @@ public class DeclarativeValidatorTest extends Assert {
 		assertTrue(diag instanceof FeatureBasedDiagnostic);
 		assertEquals("42", ((FeatureBasedDiagnostic)diag).getIssueCode());
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
+	}
+	
+	@Test public void testExceptionWhenGivenWrongEObject() {
+		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
+			@Check
+			public void foo(Object x) {
+				warning(
+						"Error Message", 
+						EcorePackage.Literals.EANNOTATION,
+						EcorePackage.Literals.ENAMED_ELEMENT__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						"42");
+			}
+		};
+		BasicDiagnostic chain = new BasicDiagnostic();
+		Resource r = new ResourceImpl(URI.createURI("http://foo"));
+		EObject x = EcoreFactory.eINSTANCE.createEAttribute();
+		r.getContents().add(x);
+		try {
+			test.validate(x, chain, Collections.emptyMap());
+			fail("expected exception");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+		
 	}
 
 }
