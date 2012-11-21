@@ -98,9 +98,12 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	
 	protected void generateComment(Later expr, ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced) {
-			b.newLine().append("/* ");
-			expr.exec(b);
-			b.append(" */");
+			b.newLine().append("// ");
+			try {
+				expr.exec(b);
+			} finally {
+				b.newLine();
+			}
 		}
 	}
 
