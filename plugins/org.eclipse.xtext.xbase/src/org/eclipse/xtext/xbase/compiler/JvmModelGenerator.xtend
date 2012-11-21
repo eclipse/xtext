@@ -62,7 +62,8 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
-import com.google.common.collect.Sets
+import com.google.common.collect.ImmutableMap
+import org.eclipse.xtext.common.types.JvmTypeReference
 
 /**
  * A generator implementation that processes the 
@@ -420,10 +421,12 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable) {
-		appendable.forEachSafely(Sets::newLinkedHashSet(exceptions), [
+		val toBeGenerated = <JvmType, JvmTypeReference> newLinkedHashMap
+		exceptions.forEach[if(!toBeGenerated.containsKey(type)) toBeGenerated.put(type, it)]
+		appendable.forEachSafely(toBeGenerated.values, [
 				prefix = ' throws ' separator = ', '
 			], [
-				it, app | app.trace(it).append(it.type)
+				it, app |  app.trace(it).append(it.type)
 			])
 	}
 	

@@ -37,18 +37,18 @@ class ErrorSafeExtensions {
 			issueProvider.getIssues(element, includeContents).filter[it.severity == Severity::ERROR]
 	}
 	
-	def appendSafely(ITreeAppendable appendable, EObject element, (ITreeAppendable)=>void generator) {
-		appendSafely(appendable, element, null, generator)
+	def appendSafely(ITreeAppendable appendable, EObject element, (ITreeAppendable)=>void procedure) {
+		appendSafely(appendable, element, null, procedure)
 	}
 	
-	def appendSafely(ITreeAppendable appendable, EObject element, String surrogateCode, (ITreeAppendable)=>void generator) {
+	def appendSafely(ITreeAppendable appendable, EObject element, String surrogateCode, (ITreeAppendable)=>void procedure) {
 		val issues = element.getErrors(true)
 		if(issues.empty) {
-			appendable => generator
+			appendable => procedure
 		} else {
 			val errorChild = appendable.errorChild(element)
 			try {
-				errorChild => generator
+				errorChild => procedure
 			} catch (Exception ignoreMe) {}
 			if(surrogateCode != null)
 				appendable.append(surrogateCode);
@@ -57,7 +57,7 @@ class ErrorSafeExtensions {
 	
 	def <T extends EObject> void forEachSafely(ITreeAppendable appendable, Iterable<T> elements, 
 			(LoopParams)=>void loopInitializer, 
-			(T, ITreeAppendable)=>void generator) {
+			(T, ITreeAppendable)=>void body) {
 		if(elements.empty)
 			return
 		val loopParams = new LoopParams => loopInitializer
@@ -75,14 +75,14 @@ class ErrorSafeExtensions {
 				if(!isFirst)
 					loopParams.appendSeparator(appendable)
 				isFirst = false
-				generator.apply(element, appendable)
+				body.apply(element, appendable)
 			} else {
 				currentAppendable = appendable.errorChild(element)
 				if(!isFirst || !isFirstBroken)
 					loopParams.appendSeparator(currentAppendable)
 				isFirstBroken = false
 				try {
-					generator.apply(element, currentAppendable)
+					body.apply(element, currentAppendable)
 				} catch(Exception ignoreMe) {} 
 			}
 		}
