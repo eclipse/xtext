@@ -97,7 +97,7 @@ class FormatterTester {
 		val result = <TextReplacement>newArrayList
 		var lastOffset = 0
 		for (leaf : res.parseResult.rootNode.leafNodes)
-			if (!leaf.hidden || !leaf.text.trim.empty) {
+			if (!leaf.hidden || !leaf.text.trim.nullOrEmpty) {
 				if ((lastOffset >= offset) && (leaf.offset <= offset + length) && !offsets.contains(lastOffset))
 					result += new TextReplacement(lastOffset, leaf.offset - lastOffset, "!!")
 				lastOffset = leaf.offset + leaf.length
