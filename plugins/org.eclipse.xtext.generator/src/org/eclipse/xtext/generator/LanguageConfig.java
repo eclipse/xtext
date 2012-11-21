@@ -134,9 +134,18 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			issues.addError("property 'uri' is mandatory for element 'language'.", this);
 		}
 	}
+	
+	private boolean shouldCheckFileExtension = true;
 
 	protected boolean isCheckFileExtension() {
-		return true;
+		return this.shouldCheckFileExtension;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setCheckFileExtension(boolean shouldCheckFileExtension) {
+		this.shouldCheckFileExtension = shouldCheckFileExtension;
 	}
 
 	public void setFileExtensions(String fileExtensions) {
