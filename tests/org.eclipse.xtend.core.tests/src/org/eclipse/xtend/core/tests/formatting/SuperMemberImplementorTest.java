@@ -13,6 +13,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -102,19 +103,19 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideConstructor_0() {
-		checkImplementConstructor(0, "new(String p0) { super(p0) }");
+		checkImplementConstructor("String", "new(String p0) { super(p0) }");
 	}
 
 	@Test public void testOverrideConstructor_1() {
-		checkImplementConstructor(1, "new(U p0) { super(p0) }");
+		checkImplementConstructor("U", "new(U p0) { super(p0) }");
 	}
 
 	@Test public void testOverrideConstructor_2() {
-		checkImplementConstructor(2, "protected new(int p0) { super(p0) }");
+		checkImplementConstructor("int", "protected new(int p0) { super(p0) }");
 	}
 
 	@Test public void testOverrideConstructor_3() {
-		checkImplementConstructor(3, "new() { }");
+		checkImplementConstructor(null, "new() { }");
 	}
 
 	protected void checkOverrideMethodCode(String operationName, String overrideCode) {
@@ -126,10 +127,20 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 			assertEquals(overrideCode, code);
 	}
 
-	protected void checkImplementConstructor(int index, String implementCode) {
+	protected void checkImplementConstructor(final String firstParamType, String implementCode) {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-		implementor.appendConstructorFromSuper(xtendClass,
-				Iterables.get(superClass.getDeclaredConstructors(), index), appendable);
+		
+		JvmConstructor constructor = Iterables.find(superClass.getDeclaredConstructors(), new Predicate<JvmConstructor>() {
+			public boolean apply(JvmConstructor c) {
+				if (firstParamType == null)
+					return c.getParameters().isEmpty();
+				if (c.getParameters().size() >= 1) {
+					return firstParamType.equals(c.getParameters().get(0).getParameterType().getSimpleName());
+				}
+				return false;
+			}
+		});
+		implementor.appendConstructorFromSuper(xtendClass, constructor, appendable);
 		String code = appendable.toString();
 		if (!equalsIgnoreWhitespace(implementCode, code))
 			assertEquals(implementCode, code);
