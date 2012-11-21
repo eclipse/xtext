@@ -105,13 +105,21 @@ public class XExpressionHelper {
 		if (expr instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expr;
 			final JvmIdentifiableElement feature = featureCall.getFeature();
+			if (feature.eIsProxy())
+				return true; // linking problems ... could be anything
 			if (feature instanceof JvmConstructor) { //super() and this()
 				return true;
 			}
 			if (feature instanceof JvmOperation) {
 				JvmOperation jvmOperation = (JvmOperation) feature;
-				if (findPureAnnotation(jvmOperation) == null)
+				if (findPureAnnotation(jvmOperation) != null) {
 					return true;
+				} else {
+					for (XExpression param : featureCall.getActualArguments()) {
+						if (hasSideEffects(param))
+							return true;
+					}
+				}
 			}
 			return false;
 		}
