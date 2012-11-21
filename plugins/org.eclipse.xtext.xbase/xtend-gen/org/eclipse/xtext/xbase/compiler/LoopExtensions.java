@@ -59,24 +59,25 @@ public class LoopExtensions {
     final LoopParams params = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
     params.appendPrefix(appendable);
     final Iterator<T> iter = elements.iterator();
-    boolean noElementSoFar = true;
+    boolean isFirst = true;
     boolean _hasNext = iter.hasNext();
     boolean _while = _hasNext;
     while (_while) {
       {
-        boolean _not = (!noElementSoFar);
+        boolean _not = (!isFirst);
         if (_not) {
           params.appendSeparator(appendable);
         }
-        boolean _or = false;
+        boolean _and = false;
         T _next = iter.next();
         Boolean _apply = function.apply(_next);
-        if ((_apply).booleanValue()) {
-          _or = true;
+        boolean _not_1 = (!_apply);
+        if (!_not_1) {
+          _and = false;
         } else {
-          _or = ((_apply).booleanValue() || noElementSoFar);
+          _and = (_not_1 && isFirst);
         }
-        noElementSoFar = _or;
+        isFirst = _and;
       }
       boolean _hasNext_1 = iter.hasNext();
       _while = _hasNext_1;

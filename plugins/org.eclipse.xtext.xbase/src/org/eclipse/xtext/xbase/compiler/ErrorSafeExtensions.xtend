@@ -18,6 +18,7 @@ import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 
 /** 
  * @author Jan Koehnlein
@@ -101,7 +102,7 @@ class ErrorSafeExtensions {
 			val errorChild = appendable.asErrorAppendable(typeRef.eContainer)
 			errorChild.append("type reference is 'null'")
 		} else {
-			if(typeRef.accept(new TypeRefProxyDetector)) {
+			if(typeRef.accept(new BrokenTypeRefDetector)) {
 				val errorChild = appendable.asErrorAppendable(typeRef.eContainer)
 				try {
 					serialize(typeRef, typeRef.eContainer, errorChild)
@@ -122,12 +123,12 @@ class ErrorSafeExtensions {
 	}
 }
 
-class TypeRefProxyDetector extends AbstractTypeReferenceVisitor$InheritanceAware<Boolean> {
+class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor$InheritanceAware<Boolean> {
 	
 	override doVisitTypeReference(JvmTypeReference it) {
-		type.eIsProxy
+		type==null || type.eIsProxy
 	}
-
+	
 	override doVisitCompoundTypeReference(JvmCompoundTypeReference it) {
 		doVisitTypeReference || references.exists[visit]
 	}
@@ -135,4 +136,9 @@ class TypeRefProxyDetector extends AbstractTypeReferenceVisitor$InheritanceAware
 	override doVisitParameterizedTypeReference(JvmParameterizedTypeReference it) {
 		doVisitTypeReference || arguments.exists[visit]
 	}
+	
+	override doVisitWildcardTypeReference(JvmWildcardTypeReference it) {
+		constraints.exists[typeReference.visit]
+	}
+	
 }

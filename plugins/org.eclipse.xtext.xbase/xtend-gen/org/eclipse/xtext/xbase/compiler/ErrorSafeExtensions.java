@@ -17,9 +17,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
-import org.eclipse.xtext.xbase.compiler.TypeRefProxyDetector;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -214,8 +214,8 @@ public class ErrorSafeExtensions {
       final ErrorTreeAppendable errorChild = this.asErrorAppendable(appendable, _eContainer);
       errorChild.append("type reference is \'null\'");
     } else {
-      TypeRefProxyDetector _typeRefProxyDetector = new TypeRefProxyDetector();
-      Boolean _accept = typeRef.<Boolean>accept(_typeRefProxyDetector);
+      BrokenTypeRefDetector _brokenTypeRefDetector = new BrokenTypeRefDetector();
+      Boolean _accept = typeRef.<Boolean>accept(_brokenTypeRefDetector);
       if ((_accept).booleanValue()) {
         EObject _eContainer_1 = typeRef.eContainer();
         final ErrorTreeAppendable errorChild_1 = this.asErrorAppendable(appendable, _eContainer_1);
