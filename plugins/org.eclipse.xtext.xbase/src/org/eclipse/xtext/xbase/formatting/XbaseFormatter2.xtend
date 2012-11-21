@@ -577,6 +577,8 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected dispatch void format(XBlockExpression expr, FormattableDocument format) {
 		val open = expr.nodeForKeyword("{")
+		if(expr.eContainer == null)
+			format += open.prepend[noSpace]
 		val close = expr.nodeForKeyword("}")
 		if (open != null && close != null) {
 			if (expr.expressions.empty) {

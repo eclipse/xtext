@@ -7,19 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.formatting;
 
-import java.util.List;
-
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.IConfigurationKeys;
 
 /**
- * A formatter creates a list of TextReplacements that are applicable on the XtextResource's underlying document (i.e.
- * the string that has been parsed). The TextReplacements are only allowed to replace characters for with
- * {@link Character#isWhitespace(char)} is true.
- * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IFormatter {
+public interface IFormatterConfigKeys extends IConfigurationKeys {
 
-	List<TextReplacement> format(XtextResource res, int offset, int length, IConfigurationValues cfg);
 }
