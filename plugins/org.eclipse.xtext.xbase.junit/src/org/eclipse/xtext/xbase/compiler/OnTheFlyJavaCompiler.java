@@ -251,8 +251,10 @@ public class OnTheFlyJavaCompiler {
 		}
 		if (url.getProtocol().startsWith("jar")) {
 			try {
-				pathToFolderOrJar = new URL(url.getPath().substring(0,
-						url.getPath().indexOf('!'))).toURI().getRawPath();
+				final String path = url.getPath().substring(0,
+						url.getPath().indexOf('!'));
+				String encodedPath = path.replace(" ","%20");
+				pathToFolderOrJar = new URL(encodedPath).toURI().getRawPath();
 			} catch (Exception e) {
 				throw new WrappedException(e);
 			}
