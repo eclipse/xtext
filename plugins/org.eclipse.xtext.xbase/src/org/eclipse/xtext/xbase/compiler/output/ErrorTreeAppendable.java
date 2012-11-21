@@ -1,0 +1,85 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.compiler.output;
+
+import static org.eclipse.xtext.util.Strings.*;
+
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+
+/**
+ * A tree appendable for erroneous code. The output is commented out in a multi-line comment
+ * in order to avoid broken Java code.
+ * 
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+public class ErrorTreeAppendable extends TreeAppendable {
+	
+	private EObject context;
+	
+	private LazyURIEncoder encoder;
+
+	public ErrorTreeAppendable(SharedAppendableState state, 
+			ILocationInFileProvider locationProvider,
+			IJvmModelAssociations jvmModelAssociations,
+			Set<ILocationData> sourceLocations, 
+			boolean useForDebugging,
+			EObject context) {
+		super(state, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
+		this.context = context;
+		encoder = new LazyURIEncoder();
+	}
+
+	@Override
+	public TreeAppendable append(JvmType type) {
+		if(type.eIsProxy()) {
+			String fragment = ((InternalEObject)type).eProxyURI().fragment();
+			Triple<EObject, EReference, INode> unresolvedLink = encoder.decode(context.eResource(), fragment);
+			if(unresolvedLink != null) {
+				INode linkNode = unresolvedLink.getThird();
+				if(linkNode != null) {
+					append(linkNode.getText().trim());
+					return this;
+				}
+			}
+			append("unresolvedType");
+			return this;
+		}
+		return super.append(type);
+	}
+	
+	@Override
+	protected void doGetContent(@NonNull StringBuilder result) {
+		StringBuilder temp = new StringBuilder();
+		super.doGetContent(temp);
+		String content = temp.toString();
+		if(!isEmpty(content.trim())) {
+			result
+				.append("/* ")
+				.append(content)
+				.append(" */");
+		}
+	}
+	
+	@Override
+	protected TreeAppendable createChild(SharedAppendableState state, ILocationInFileProvider locationProvider, 
+			IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {
+		return this;
+	}
+}
