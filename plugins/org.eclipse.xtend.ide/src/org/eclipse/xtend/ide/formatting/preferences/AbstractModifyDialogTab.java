@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.configuration.IntegerKey;
 import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.MembersInjector;
+import com.google.inject.Injector;
 
 /**
  * Abstract super class for all Xtend {@link FormatterModifyDialog} tab pages.
@@ -32,7 +32,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	public static class Factory {
 
 		@Inject
-		MembersInjector<AbstractModifyDialogTab> injector;
+		Injector injector;
 
 		public IModifyDialogTabPage createIndentationTab(IModificationListener modifyListener,
 				Map<String, String> workingValues) {
@@ -61,7 +61,9 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 		public IModifyDialogTabPage createLineWrapTab(IModificationListener modifyListener,
 				Map<String, String> workingValues) {
-			return injectMembers(new LineWrapTab(modifyListener, workingValues));
+			LineWrapTab lineWrapTab = injectMembers(new LineWrapTab(modifyListener, workingValues));
+			lineWrapTab.initPrefs();
+			return lineWrapTab;
 		}
 
 		private <T extends AbstractModifyDialogTab> T injectMembers(T tab) {

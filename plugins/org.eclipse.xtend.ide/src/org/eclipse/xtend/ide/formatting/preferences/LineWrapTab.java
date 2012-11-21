@@ -11,11 +11,13 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -24,13 +26,23 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	private Map<String, String> fPreviewPreferences;
 	private static final String DEFAULT_PREVIEW_LINE_WRAP = "40";
 	private Integer previewLineWidth = Integer.valueOf(DEFAULT_PREVIEW_LINE_WRAP);
+	@Inject
+	private IDialogSettings fDialogSettings;
+	@Inject
+	private XtendFormatterConfigKeys keys;
+
+	public static final String PREF_PREVIEW_LINE_WIDTH = "preview.line.width";
 
 	public LineWrapTab(IModificationListener modifyListener, Map<String, String> workingValues) {
 		super(modifyListener, workingValues);
-		fPreviewPreferences = Maps.newHashMap();
-		fPreviewPreferences.put(XtendFormatterPreview.PREF_PREVIEW_LINE_WIDTH, previewLineWidth != null ? previewLineWidth.toString()
-				: DEFAULT_PREVIEW_LINE_WRAP);
+	}
 
+	public void initPrefs() {
+		String previewLineWidth = fDialogSettings.get(PREF_PREVIEW_LINE_WIDTH);
+
+		fPreviewPreferences = Maps.newHashMap();
+		fPreviewPreferences.put(PREF_PREVIEW_LINE_WIDTH, previewLineWidth != null
+				&& previewLineWidth.trim().length() > 0 ? previewLineWidth.toString() : DEFAULT_PREVIEW_LINE_WRAP);
 	}
 
 	@Override
@@ -45,19 +57,32 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	}
 
 	@Override
+	protected void doUpdatePreview() {
+		String maxLineWidthKey = keys.maxLineWidth.getName();
+		final Object normalSetting = fWorkingValues.get(maxLineWidthKey);
+		String previewLineWidth = fPreviewPreferences.get(PREF_PREVIEW_LINE_WIDTH);
+		formatterPreview.moveMarginToColumn(previewLineWidth);
+		fWorkingValues.put(maxLineWidthKey, previewLineWidth);
+		super.doUpdatePreview();
+		fWorkingValues.put(maxLineWidthKey, normalSetting!=null?normalSetting.toString():"");
+	}
+
+	@Override
 	protected Composite doCreatePreviewPane(Composite composite, int numColumns) {
 		super.doCreatePreviewPane(composite, numColumns);
-		formatterPreview.getMarginPainter().setMarginRulerColumn(previewLineWidth);
+		formatterPreview.moveMarginToColumn(previewLineWidth.toString());
 		final NumberPreference previewLineWidth = new NumberPreference(composite, numColumns / 2, fPreviewPreferences,
-				XtendFormatterPreview.PREF_PREVIEW_LINE_WIDTH, 0, 999, "Line width for preview");
+				PREF_PREVIEW_LINE_WIDTH, 0, 999, "Line width for preview");
 		fDefaultFocusManager.add(previewLineWidth);
 		previewLineWidth.addObserver(fUpdater);
 		previewLineWidth.addObserver(new Observer() {
 			public void update(Observable o, Object arg) {
-				//TODO store in dialog settings
-				//fDialogSettings.put(PREF_PREVIEW_LINE_WIDTH, (String) fPreviewPreferences.get(LINE_SPLIT));
+				if (fDialogSettings != null)
+					fDialogSettings.put(PREF_PREVIEW_LINE_WIDTH, fPreviewPreferences.get(PREF_PREVIEW_LINE_WIDTH));
 			}
 		});
 		return composite;
 	}
+
+	
 }
