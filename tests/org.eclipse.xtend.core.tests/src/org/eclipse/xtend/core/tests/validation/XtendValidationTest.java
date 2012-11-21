@@ -1207,4 +1207,23 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     			"}");
     	helper.assertError(file, XRETURN_EXPRESSION, INCOMPATIBLE_TYPES);
     }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=394813
+     */
+    @Test public void testBug394813() throws Exception {
+    	XtendFile file  = file(
+    			"class foo {\n" +
+    			"  val (String)=>void myFunction = []\n" +
+    			"}");
+    	helper.assertNoErrors(file);
+    }
+    
+    @Test public void testBug394813_01() throws Exception {
+    	XtendFile file  = file(
+    			"class foo {\n" +
+    					"  val (String)=>void myFunction = [null]\n" +
+    			"}");
+    	helper.assertError(file, XNULL_LITERAL, INVALID_INNER_EXPRESSION);
+    }
 }
