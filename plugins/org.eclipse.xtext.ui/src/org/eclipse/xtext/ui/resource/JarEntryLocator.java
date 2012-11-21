@@ -57,6 +57,9 @@ public class JarEntryLocator {
 		return null;
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	public IStorage getStorage(final URI uri, final IPackageFragmentRoot root) {
 		try {
 			return new SourceAttachmentPackageFragmentRootWalker<IStorage>() {
