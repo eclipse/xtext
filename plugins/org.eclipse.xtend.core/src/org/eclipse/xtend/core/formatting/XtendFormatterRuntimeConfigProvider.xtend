@@ -30,7 +30,7 @@ class XtendFormatterRuntimeConfigProvider implements IFormatterConfigurationProv
 		cfg.put(keys.lineSeparator, lineSeparatorInfo.lineSeparator)
 		cfg.put(keys.indentation, indentationInfo.indentString)
 		cfg.put(keys.indentationLength, 4) // TODO: read from preferences
-		cfg
+		return cfg
 	}
 
 }

@@ -13,39 +13,67 @@ import java.util.Observer;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.text.MarginPainter;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
 import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
+import com.google.inject.Inject;
+
 public class XtendFormatterPreview implements Observer {
-	private final EmbeddedEditor editorHandle;
-	private final XtendFormatterFactory xtendFormatterFactory;
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
+	@Inject
+	private XtendFormatterFactory xtendFormatterFactory;
+	@Inject
+	private XtendFormatterConfigKeys keys;
+
+	private EmbeddedEditor editorHandle;
 	private String previewContent;
 	private EmbeddedEditorModelAccess modelAccess;
 	private MarginPainter marginPainter;
-	public static final String PREF_PREVIEW_LINE_WIDTH = "preview.line.width";
 
-	public XtendFormatterPreview(EmbeddedEditor editorHandle, String previewContent,
-			XtendFormatterFactory xtendFormatterFactory) {
+	public XtendFormatterPreview forEmbeddedEditor(EmbeddedEditor editorHandle) {
+		if (this.editorHandle != null) {
+			throw new IllegalStateException("This formatter preview is already binded to an embedet editor");
+		}
 		this.editorHandle = editorHandle;
-		this.previewContent = previewContent;
 		this.modelAccess = editorHandle.createPartialEditor();
-		this.xtendFormatterFactory = xtendFormatterFactory;
-		marginPainter = new MarginPainter(editorHandle.getViewer());
-		marginPainter.setMarginRulerColor(editorHandle.getViewer().getControl().getForeground());
+		this.marginPainter = new MarginPainter(editorHandle.getViewer());
+		final RGB rgb = PreferenceConverter.getColor(preferenceStoreAccess.getPreferenceStore(),
+				AbstractDecoratedTextEditorPreferenceConstants.EDITOR_PRINT_MARGIN_COLOR);
+		marginPainter.setMarginRulerColor(EditorUtils.colorFromRGB(rgb));
 		editorHandle.getViewer().addPainter(marginPainter);
+		return this;
+	}
+
+	public XtendFormatterPreview withPreviewContent(String previewContent) {
+		this.previewContent = previewContent;
+		return this;
 	}
 
 	public XtextSourceViewer getEditorViewer() {
+		checkEditorHandleIsSet();
 		return editorHandle.getViewer();
+	}
+
+	private void checkEditorHandleIsSet() {
+		if (editorHandle == null) {
+			throw new IllegalStateException(
+					"This preview should be bind to an EmbeddedEditor, call XtendFormatterPreview#forEmbeddedEditor(EmbeddedEditor) first");
+		}
 	}
 
 	public Observer getObserver() {
@@ -65,13 +93,15 @@ public class XtendFormatterPreview implements Observer {
 		}
 	}
 
-	public MarginPainter getMarginPainter() {
-		return marginPainter;
-	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doUpdate(final Map map) {
-		marginPainter.setMarginRulerColumn(intValue(map.get(PREF_PREVIEW_LINE_WIDTH)));
+		checkEditorHandleIsSet();
+
+		Object object = map.get(keys.maxLineWidth.getName());
+		if (object instanceof String) {
+			moveMarginToColumn(object.toString());
+		}
+
 		xtendFormatterFactory.setConfigurationProvider(new IFormatterConfigurationProvider() {
 			public IConfigurationValues getFormatterConfiguration(Resource resource) {
 				return new MapBasedConfigurationValues(new XtendFormatterConfigKeys(), map);
@@ -91,13 +121,13 @@ public class XtendFormatterPreview implements Observer {
 		}
 	}
 
-	private int intValue(Object object) {
-		if (object != null) {
-			try {
-				return Integer.parseInt(object.toString());
-			} catch (NumberFormatException nfe) {
-			}
+	public void moveMarginToColumn(String string) {
+		checkEditorHandleIsSet();
+		int parsedColumn = 99999;
+		try {
+			parsedColumn = Integer.parseInt(string);
+		} catch (NumberFormatException nfe) {
 		}
-		return 99999;
+		marginPainter.setMarginRulerColumn(parsedColumn);
 	}
 }
