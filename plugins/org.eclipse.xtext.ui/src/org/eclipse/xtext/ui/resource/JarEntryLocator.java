@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.resource;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -55,7 +56,29 @@ public class JarEntryLocator {
 		}
 		return null;
 	}
+
+	public IStorage getStorage(final URI uri, final IPackageFragmentRoot root) {
+		try {
+			return new SourceAttachmentPackageFragmentRootWalker<IStorage>() {
+				@Override
+				protected URI getURI(IJarEntryResource jarEntry, TraversalState state) {
+					return JarEntryLocator.this.getURI(root, jarEntry, state);
+				}
 	
+				@Override
+				protected IStorage handle(URI logicalURI, IStorage storage, TraversalState state) {
+					if (logicalURI.equals(uri))
+						return storage;
+					return null;
+				}
+			}.traverse(root, true);
+		} catch(JavaModelException ex) {
+			if (!ex.isDoesNotExist())
+				log.error(ex.getMessage(), ex);
+		}
+		return null;
+	}
+
 	public IJarEntryResource getJarEntry(final URI uri, final IPackageFragmentRoot root) {
 		try {
 			try {

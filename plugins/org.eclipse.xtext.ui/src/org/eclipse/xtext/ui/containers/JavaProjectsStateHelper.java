@@ -30,7 +30,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.SourceAttachmentPackageFragmentRootWalker;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
@@ -79,14 +79,21 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 			final List<URI> uris = Lists.newArrayList();
 			if (root.isArchive() || root.isExternal()) {
 				try {
-					new PackageFragmentRootWalker<Void>() {
+					new SourceAttachmentPackageFragmentRootWalker<Void>() {
 						@Override
-						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
-							URI uri = getUri(jarEntry);
-							if (uri != null) {
-								uris.add(uri);	
-							}
+						protected Void handle(URI uri, IStorage storage, TraversalState state) {
+							uris.add(uri);	
 							return null;
+						}
+
+						@Override
+						protected URI getURI(IFile file, TraversalState state) {
+							return getUri(file);
+						}
+
+						@Override
+						protected URI getURI(IJarEntryResource jarEntry, TraversalState state) {
+							return getUri(jarEntry);
 						}
 					}.traverse(root, false);
 					return uris;

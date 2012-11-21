@@ -28,19 +28,19 @@ public abstract class PackageFragmentRootWalker<T> {
 		
 		private List<Object> parents;
 
-		private TraversalState(IPackageFragmentRoot start) {
-			parents = Lists.<Object>newArrayList(start);
+		TraversalState(Object obj) {
+			parents = Lists.<Object>newArrayList(obj);
 		}
 		
 		public List<?> getParents() {
 			return Collections.unmodifiableList(parents);
 		}
 		
-		private void pop() {
+		void pop() {
 			parents.remove(parents.size() - 1);
 		}
 		
-		private void push(Object obj) {
+		void push(Object obj) {
 			parents.add(obj);
 		}
 		

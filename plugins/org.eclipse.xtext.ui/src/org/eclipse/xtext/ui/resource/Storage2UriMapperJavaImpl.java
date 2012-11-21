@@ -92,17 +92,26 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 
 	protected Iterable<Pair<IStorage, IProject>> findStoragesInJarsOrExternalClassFolders(URI uri) {
 		Set<Pair<IStorage, IProject>> result = Sets.newHashSet();
+		IProject[] projects = getWorkspaceRoot().getProjects();
 		if (uri.isArchive()) {
 			URI toArchive = getPathToArchive(uri);
-			IProject[] projects = getWorkspaceRoot().getProjects();
 			for (IProject iProject : projects) {
 				if (iProject.isAccessible()) {
 					IJavaProject project = JavaCore.create(iProject);
 					findStoragesInJarsOfProject(toArchive, uri, project, result);
 				}
 			}
+		} else if (uri.isPlatformResource() && !getWorkspaceRoot().getProject(uri.segment(1)).isAccessible()) {
+			// This must be a logical URI because it doesn't physically exist in the workspace.
+			//
+			for (IProject project : projects) {
+				if (project.isAccessible()) {
+					IJavaProject javaProject = JavaCore.create(project);
+					findLogicalStoragesOfProject(uri, javaProject, result);
+				}
+			}
+			return result;
 		} else {
-			IProject[] projects = getWorkspaceRoot().getProjects();
 			for (IProject project : projects) {
 				if (project.isAccessible()) {
 					IJavaProject javaProject = JavaCore.create(project);
@@ -111,6 +120,25 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			}
 		}
 		return result;
+	}
+
+	protected void findLogicalStoragesOfProject(URI uri, IJavaProject project,
+			Set<Pair<IStorage, IProject>> storages) {
+		if (project.exists()) {
+			try {
+				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
+				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
+					if (!JavaRuntime.newDefaultJREContainerPath().isPrefixOf(fragRoot.getRawClasspathEntry().getPath())) {
+						IStorage storage = locator.getStorage(uri, fragRoot);
+						if (storage != null)
+							storages.add(Tuples.create(storage, project.getProject()));
+					}
+				}
+			} catch (JavaModelException e) {
+				if (!e.isDoesNotExist())
+					log.error(e.getMessage(), e);
+			}
+		}
 	}
 
 	protected void findStoragesInExternalFoldersOfProject(URI uri, IJavaProject project,
