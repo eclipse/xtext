@@ -80,26 +80,26 @@ public class ErrorSafeExtensions {
     return _xblockexpression;
   }
   
-  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final Procedure1<? super ITreeAppendable> generator) {
-    ITreeAppendable _appendSafely = this.appendSafely(appendable, element, null, generator);
+  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final Procedure1<? super ITreeAppendable> procedure) {
+    ITreeAppendable _appendSafely = this.appendSafely(appendable, element, null, procedure);
     return _appendSafely;
   }
   
-  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final String surrogateCode, final Procedure1<? super ITreeAppendable> generator) {
+  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final String surrogateCode, final Procedure1<? super ITreeAppendable> procedure) {
     ITreeAppendable _xblockexpression = null;
     {
       final Iterable<Issue> issues = this.getErrors(element, true);
       ITreeAppendable _xifexpression = null;
       boolean _isEmpty = IterableExtensions.isEmpty(issues);
       if (_isEmpty) {
-        ITreeAppendable _doubleArrow = ObjectExtensions.<ITreeAppendable>operator_doubleArrow(appendable, generator);
+        ITreeAppendable _doubleArrow = ObjectExtensions.<ITreeAppendable>operator_doubleArrow(appendable, procedure);
         _xifexpression = _doubleArrow;
       } else {
         ITreeAppendable _xblockexpression_1 = null;
         {
           final ErrorTreeAppendable errorChild = appendable.errorChild(element);
           try {
-            ObjectExtensions.<ErrorTreeAppendable>operator_doubleArrow(errorChild, generator);
+            ObjectExtensions.<ErrorTreeAppendable>operator_doubleArrow(errorChild, procedure);
           } catch (final Throwable _t) {
             if (_t instanceof Exception) {
               final Exception ignoreMe = (Exception)_t;
@@ -122,7 +122,7 @@ public class ErrorSafeExtensions {
     return _xblockexpression;
   }
   
-  public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T,? super ITreeAppendable> generator) {
+  public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T,? super ITreeAppendable> body) {
     boolean _isEmpty = IterableExtensions.isEmpty(elements);
     if (_isEmpty) {
       return;
@@ -163,7 +163,7 @@ public class ErrorSafeExtensions {
             loopParams.appendSeparator(appendable);
           }
           isFirst = false;
-          generator.apply(element, appendable);
+          body.apply(element, appendable);
         } else {
           ErrorTreeAppendable _errorChild_1 = appendable.errorChild(element);
           currentAppendable = _errorChild_1;
@@ -180,7 +180,7 @@ public class ErrorSafeExtensions {
           }
           isFirstBroken = false;
           try {
-            generator.apply(element, currentAppendable);
+            body.apply(element, currentAppendable);
           } catch (final Throwable _t) {
             if (_t instanceof Exception) {
               final Exception ignoreMe = (Exception)_t;

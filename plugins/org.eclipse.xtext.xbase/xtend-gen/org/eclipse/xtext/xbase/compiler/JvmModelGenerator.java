@@ -9,10 +9,10 @@ package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
@@ -84,6 +84,7 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -772,22 +773,35 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateThrowsClause(final JvmExecutable it, final ITreeAppendable appendable) {
+    final LinkedHashMap<JvmType,JvmTypeReference> toBeGenerated = CollectionLiterals.<JvmType, JvmTypeReference>newLinkedHashMap();
     EList<JvmTypeReference> _exceptions = it.getExceptions();
-    LinkedHashSet<JvmTypeReference> _newLinkedHashSet = Sets.<JvmTypeReference>newLinkedHashSet(_exceptions);
-    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+    final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+        public void apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          boolean _containsKey = toBeGenerated.containsKey(_type);
+          boolean _not = (!_containsKey);
+          if (_not) {
+            JvmType _type_1 = it.getType();
+            toBeGenerated.put(_type_1, it);
+          }
+        }
+      };
+    IterableExtensions.<JvmTypeReference>forEach(_exceptions, _function);
+    Collection<JvmTypeReference> _values = toBeGenerated.values();
+    final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
         public void apply(final LoopParams it) {
           it.setPrefix(" throws ");
           it.setSeparator(", ");
         }
       };
-    final Procedure2<JvmTypeReference,ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
+    final Procedure2<JvmTypeReference,ITreeAppendable> _function_2 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
         public void apply(final JvmTypeReference it, final ITreeAppendable app) {
           ITreeAppendable _trace = app.trace(it);
           JvmType _type = it.getType();
           _trace.append(_type);
         }
       };
-    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, _newLinkedHashSet, _function, _function_1);
+    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, _values, _function_1, _function_2);
   }
   
   public void generateParameters(final JvmExecutable it, final ITreeAppendable appendable) {
