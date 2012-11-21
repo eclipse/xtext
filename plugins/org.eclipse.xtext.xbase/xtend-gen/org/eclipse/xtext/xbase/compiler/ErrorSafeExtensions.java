@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -43,8 +42,8 @@ public class ErrorSafeExtensions {
   @Inject
   private OnChangeEvictingCache cache;
   
-  public Iterable<Issue> getErrors(final EObject element, final boolean includeContents) {
-    Iterable<Issue> _xblockexpression = null;
+  public boolean hasErrors(final EObject element, final boolean includeContents) {
+    boolean _xblockexpression = false;
     {
       String _name = IElementIssueProvider.class.getName();
       Resource _eResource = element.eResource();
@@ -58,11 +57,10 @@ public class ErrorSafeExtensions {
             return _function.apply();
           }
       });
-      Iterable<Issue> _xifexpression = null;
+      boolean _xifexpression = false;
       boolean _equals = Objects.equal(issueProvider, null);
       if (_equals) {
-        List<Issue> _emptyList = CollectionLiterals.<Issue>emptyList();
-        _xifexpression = _emptyList;
+        return false;
       } else {
         List<Issue> _issues = issueProvider.getIssues(element, includeContents);
         final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
@@ -72,8 +70,8 @@ public class ErrorSafeExtensions {
               return Boolean.valueOf(_equals);
             }
           };
-        Iterable<Issue> _filter = IterableExtensions.<Issue>filter(_issues, _function_1);
-        _xifexpression = _filter;
+        boolean _exists = IterableExtensions.<Issue>exists(_issues, _function_1);
+        _xifexpression = _exists;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -86,40 +84,36 @@ public class ErrorSafeExtensions {
   }
   
   public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final String surrogateCode, final Procedure1<? super ITreeAppendable> procedure) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      final Iterable<Issue> issues = this.getErrors(element, true);
-      ITreeAppendable _xifexpression = null;
-      boolean _isEmpty = IterableExtensions.isEmpty(issues);
-      if (_isEmpty) {
-        ITreeAppendable _doubleArrow = ObjectExtensions.<ITreeAppendable>operator_doubleArrow(appendable, procedure);
-        _xifexpression = _doubleArrow;
-      } else {
-        ITreeAppendable _xblockexpression_1 = null;
-        {
-          final ErrorTreeAppendable errorChild = appendable.errorChild(element);
-          try {
-            ObjectExtensions.<ErrorTreeAppendable>operator_doubleArrow(errorChild, procedure);
-          } catch (final Throwable _t) {
-            if (_t instanceof Exception) {
-              final Exception ignoreMe = (Exception)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+    ITreeAppendable _xifexpression = null;
+    boolean _hasErrors = this.hasErrors(element, true);
+    boolean _not = (!_hasErrors);
+    if (_not) {
+      ITreeAppendable _doubleArrow = ObjectExtensions.<ITreeAppendable>operator_doubleArrow(appendable, procedure);
+      _xifexpression = _doubleArrow;
+    } else {
+      ITreeAppendable _xblockexpression = null;
+      {
+        final ErrorTreeAppendable errorChild = appendable.errorChild(element);
+        try {
+          ObjectExtensions.<ErrorTreeAppendable>operator_doubleArrow(errorChild, procedure);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception ignoreMe = (Exception)_t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
-          ITreeAppendable _xifexpression_1 = null;
-          boolean _notEquals = (!Objects.equal(surrogateCode, null));
-          if (_notEquals) {
-            ITreeAppendable _append = appendable.append(surrogateCode);
-            _xifexpression_1 = _append;
-          }
-          _xblockexpression_1 = (_xifexpression_1);
         }
-        _xifexpression = _xblockexpression_1;
+        ITreeAppendable _xifexpression_1 = null;
+        boolean _notEquals = (!Objects.equal(surrogateCode, null));
+        if (_notEquals) {
+          ITreeAppendable _append = appendable.append(surrogateCode);
+          _xifexpression_1 = _append;
+        }
+        _xblockexpression = (_xifexpression_1);
       }
-      _xblockexpression = (_xifexpression);
+      _xifexpression = _xblockexpression;
     }
-    return _xblockexpression;
+    return _xifexpression;
   }
   
   public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T,? super ITreeAppendable> body) {
@@ -131,10 +125,8 @@ public class ErrorSafeExtensions {
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
     final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
         public Boolean apply(final T it) {
-          Iterable<Issue> _errors = ErrorSafeExtensions.this.getErrors(it, true);
-          boolean _isEmpty = IterableExtensions.isEmpty(_errors);
-          boolean _not = (!_isEmpty);
-          return Boolean.valueOf(_not);
+          boolean _hasErrors = ErrorSafeExtensions.this.hasErrors(it, true);
+          return Boolean.valueOf(_hasErrors);
         }
       };
     Iterable<T> _filter = IterableExtensions.<T>filter(elements, _function);
@@ -154,48 +146,47 @@ public class ErrorSafeExtensions {
     boolean isFirst = true;
     boolean isFirstBroken = true;
     for (final T element : elements) {
-      {
-        final Iterable<Issue> errors = this.getErrors(element, true);
-        boolean _isEmpty_1 = IterableExtensions.isEmpty(errors);
-        if (_isEmpty_1) {
-          boolean _not = (!isFirst);
-          if (_not) {
-            loopParams.appendSeparator(appendable);
-          }
-          isFirst = false;
-          body.apply(element, appendable);
-        } else {
+      boolean _hasErrors = this.hasErrors(element, true);
+      boolean _not = (!_hasErrors);
+      if (_not) {
+        boolean _not_1 = (!isFirst);
+        if (_not_1) {
+          loopParams.appendSeparator(appendable);
+        }
+        isFirst = false;
+        body.apply(element, appendable);
+      } else {
+        boolean _not_2 = (!allElementsBroken);
+        if (_not_2) {
           ErrorTreeAppendable _errorChild_1 = appendable.errorChild(element);
           currentAppendable = _errorChild_1;
-          boolean _or = false;
-          boolean _not_1 = (!isFirst);
-          if (_not_1) {
-            _or = true;
+        }
+        boolean _or = false;
+        boolean _not_3 = (!isFirst);
+        if (_not_3) {
+          _or = true;
+        } else {
+          boolean _not_4 = (!isFirstBroken);
+          _or = (_not_3 || _not_4);
+        }
+        if (_or) {
+          loopParams.appendSeparator(currentAppendable);
+        }
+        isFirstBroken = false;
+        try {
+          body.apply(element, currentAppendable);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception ignoreMe = (Exception)_t;
           } else {
-            boolean _not_2 = (!isFirstBroken);
-            _or = (_not_1 || _not_2);
-          }
-          if (_or) {
-            loopParams.appendSeparator(currentAppendable);
-          }
-          isFirstBroken = false;
-          try {
-            body.apply(element, currentAppendable);
-          } catch (final Throwable _t) {
-            if (_t instanceof Exception) {
-              final Exception ignoreMe = (Exception)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+            throw Exceptions.sneakyThrow(_t);
           }
         }
       }
     }
     ITreeAppendable _xifexpression_1 = null;
     if (allElementsBroken) {
-      T _head_1 = IterableExtensions.<T>head(elements);
-      ErrorTreeAppendable _errorChild_1 = appendable.errorChild(_head_1);
-      _xifexpression_1 = _errorChild_1;
+      _xifexpression_1 = currentAppendable;
     } else {
       _xifexpression_1 = appendable;
     }
