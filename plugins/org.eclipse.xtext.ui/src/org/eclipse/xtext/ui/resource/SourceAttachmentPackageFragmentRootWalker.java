@@ -28,6 +28,9 @@ import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
 
 import com.google.common.collect.Sets;
 
+/**
+ * @since 2.4
+ */
 public abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragmentRootWalker<T> {
 
 	private final static Logger LOG = Logger.getLogger(SourceAttachmentPackageFragmentRootWalker.class);
@@ -72,7 +75,7 @@ public abstract class SourceAttachmentPackageFragmentRootWalker<T> extends Packa
 		if (!stopOnFirstResult || result == null) {
 			IPath sourceAttachmentPath = root.getSourceAttachmentPath();
 			if (sourceAttachmentPath != null && sourceAttachmentPath.isPrefixOf(path)) {
-				// This is no a package fragment root we can actually walk because it's not on the project's class path.
+				// This is not a package fragment root we can actually walk because it's not on the project's class path.
 				//
 				IPackageFragmentRoot packageFragmentRoot = root.getJavaProject().getPackageFragmentRoot(sourceAttachmentPath.toOSString());
 				if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
