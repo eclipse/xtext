@@ -69,7 +69,6 @@ import org.eclipse.xtext.xbase.formatting.XbaseFormatter2;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -546,9 +545,8 @@ public class XtendFormatter extends XbaseFormatter2 {
   
   protected void formatMemberParameter(final Collection<XtendParameter> parameters, final INode open, final INode close, final FormattableDocument format) {
     HiddenLeafs _hiddenLeafsBefore = close==null?(HiddenLeafs)null:this._hiddenLeafAccess.getHiddenLeafsBefore(close);
-    Integer _newLines = _hiddenLeafsBefore==null?(Integer)null:_hiddenLeafsBefore.getNewLines();
-    Integer _elvis = ObjectExtensions.<Integer>operator_elvis(_newLines, Integer.valueOf(0));
-    boolean _greaterThan = ((_elvis).intValue() > 0);
+    int _newLines = _hiddenLeafsBefore==null?0:_hiddenLeafsBefore.getNewLines();
+    boolean _greaterThan = (_newLines > 0);
     if (_greaterThan) {
       INode comma = null;
       boolean _isEmpty = parameters.isEmpty();
