@@ -183,6 +183,18 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expr = expression("{val x = try { 'foo' } finally { typeof(String).name } x}");
 		helper.assertNoErrors(expr);
 	}
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391451
+	 */
+	@Test public void testNonStatementExpression_20() throws Exception {
+		XExpression expr = expression(
+				"{" +
+				"  val x = newArrayList(1,2) " +
+				"  x.add(3) && x.add(4) " +
+				"  x" +
+				"}");
+		helper.assertNoErrors(expr);
+	}
 	
 	@Test public void testLocalVarWithArguments() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42) }");
