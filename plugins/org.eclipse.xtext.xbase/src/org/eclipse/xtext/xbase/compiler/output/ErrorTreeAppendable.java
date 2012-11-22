@@ -58,7 +58,7 @@ public class ErrorTreeAppendable extends TreeAppendable {
 					return this;
 				}
 			}
-			append("unresolvedType");
+			append("unresolved type");
 			return this;
 		}
 		return super.append(type);
