@@ -2,7 +2,6 @@ package org.eclipse.xtext.xbase.ui.validation
 
 import com.google.inject.Inject
 import java.util.Map
-import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.diagnostics.Severity

@@ -399,7 +399,36 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			String... issueData) {
 		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
 	}
-
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void notification(IssueCode issueCode, String message, EObject source,
+			EStructuralFeature feature, int index, String... issueData) {
+		switch (issueCode.getSeverity()) {
+			case WARNING:
+				getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(),
+						issueData);
+				break;
+			case INFO:
+				getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(),
+						issueData);
+				break;
+			case ERROR:
+			default:
+				getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(),
+						issueData);
+				break;
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void notification(IssueCode issueCode, String message, EStructuralFeature feature) {
+		notification(issueCode, message, state.get().currentObject, feature,  ValidationMessageAcceptor.INSIGNIFICANT_INDEX, (String[]) null);
+	}
+	
 	protected void guard(boolean guardExpression) {
 		if (!guardExpression) {
 			throw guardException;
