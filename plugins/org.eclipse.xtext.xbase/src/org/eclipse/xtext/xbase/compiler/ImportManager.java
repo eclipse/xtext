@@ -50,6 +50,10 @@ public class ImportManager {
 		this(organizeImports, null, innerTypeSeparator);
 	}
 
+	public ImportManager() {
+		this(true, null);
+	}
+	
 	public ImportManager(boolean organizeImports) {
 		this(organizeImports, null);
 	}
