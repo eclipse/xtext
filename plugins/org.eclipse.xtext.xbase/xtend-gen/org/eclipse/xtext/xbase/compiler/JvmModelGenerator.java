@@ -606,7 +606,7 @@ public class JvmModelGenerator implements IGenerator {
     throw _unsupportedOperationException;
   }
   
-  protected ITreeAppendable _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -616,7 +616,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmField it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmField it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -637,7 +637,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -684,7 +684,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -1462,7 +1462,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable) {
+  public Object generateMember(final JvmMember it, final ITreeAppendable appendable) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable);
     } else if (it instanceof JvmGenericType) {
