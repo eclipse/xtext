@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.mwe;
 
-import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.MWEDiagnostic;
-import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
+import org.eclipse.xtext.validation.Issue;
 import org.junit.Test;
 
 /**
@@ -37,21 +36,17 @@ public class ValidatorTest extends AbstractReaderTest {
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=322645
 	 */
 	@Test public void testBugFix322645() throws Exception {
-		Reader reader = getReader();
-		reader.addPath(pathTo("nonemptyFolder"));
-		reader.addRegister(new IndexTestLanguageStandaloneSetup());
-
-		SlotEntry entry = createSlotEntry();
-		entry.setName("foo:bar:Person");
-		entry.setFirstOnly(true);
-		entry.setNamespaceDelimiter(":");
-
-		reader.addLoad(entry);
-		WorkflowContext ctx = ctx();
 		Issues issues = issues();
-		reader.invoke(ctx, monitor(), issues);
+		Issue a = new Issue.IssueImpl();
+		Issue b = new Issue.IssueImpl();
+		issues.addError("foo", a);
+		issues.addWarning(null, a);
+		issues.addError(null, b);
 		MWEDiagnostic[] errors = issues.getErrors();
 		assertEquals(2, errors.length);
+		final Validator validator = new Validator();
+		final String string = validator.toString(issues);
+		assert(string.contains("foo"));
 	}
 
 }

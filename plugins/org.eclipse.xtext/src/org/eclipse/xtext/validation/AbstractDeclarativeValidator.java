@@ -459,7 +459,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 				&& this.state.get().currentObject != null
 				&& object.eResource() != this.state.get().currentObject.eResource()) {
 			URI uriGiven = null;
-			if (object.eResource() == null)
+			if (object.eResource() != null)
 				uriGiven = object.eResource().getURI();
 			URI uri = null;
 			if (this.state.get().currentObject.eResource() != null)
