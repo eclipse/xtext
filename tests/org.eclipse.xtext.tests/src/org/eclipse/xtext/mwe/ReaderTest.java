@@ -17,6 +17,7 @@ import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.junit.Test;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -147,5 +148,13 @@ public class ReaderTest extends AbstractReaderTest {
 		assertEquals(bool1, ent3.getProperties().get(1).getType());
 		assertEquals(ent3,ent3.getProperties().get(2).getType());
 		
+	}
+	
+	protected Predicate<EObject> getPredicate(final String uriContains) {
+		return new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				return input.eResource().getURI().toString().contains("folder%20"+uriContains);
+			}
+		};
 	}
 }
