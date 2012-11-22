@@ -90,6 +90,18 @@
                  id="org.eclipse.jdt.ui.formatter">
            </keywordReference>
         </page>
+        <page
+              category="org.eclipse.xtend.core.Xtend"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.validator.preferences.ValidatorPreferencePage"
+              id="org.eclipse.xtend.core.Xtend.validator.preferencePage"
+              name="Errors/Warnings">
+           <keywordReference
+                 id="org.eclipse.xtend.ide.keyword_Xtend">
+           </keywordReference>
+           <keywordReference
+                 id="org.eclipse.jdt.ui.severities">
+           </keywordReference>
+        </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
@@ -108,6 +120,27 @@
               class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.formatting.preferences.FormatterPreferencePage"
               id="org.eclipse.xtend.core.Xtend.formatter.propertyPage"
               name="Formatter">
+           <keywordReference
+                 id="org.eclipse.xtend.ide.keyword_Xtend">
+           </keywordReference>
+           <enabledWhen>
+              <adapt
+                    type="org.eclipse.core.resources.IProject">
+              </adapt>
+           </enabledWhen>
+           <filter
+                 name="projectNature"
+                 value="org.eclipse.xtext.ui.shared.xtextNature">
+           </filter>
+           <keywordReference
+                 id="org.eclipse.jdt.ui.formatter">
+           </keywordReference>
+        </page>
+        <page
+              category="org.eclipse.xtend.core.Xtend"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.validator.preferences.ValidatorPreferencePage"
+              id="org.eclipse.xtend.core.Xtend.validator.propertyPage"
+              name="Errors/Warnings">
            <keywordReference
                  id="org.eclipse.xtend.ide.keyword_Xtend">
            </keywordReference>
