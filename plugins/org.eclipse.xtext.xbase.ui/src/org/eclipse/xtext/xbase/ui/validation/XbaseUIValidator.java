@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.IssueCodes;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -54,6 +55,8 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	private IJavaElementFinder javaElementFinder;
+	@Inject
+	private IssueCodes issueCodes;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -61,19 +64,20 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check
-	public void checkRestrictedType(XConstructorCall constructorCall){
+	public void checkRestrictedType(XConstructorCall constructorCall) {
 		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
 		checkRestrictedType(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, declaringType);
 	}
 
-
 	@Check
 	public void checkRestrictedType(JvmTypeReference typeReference) {
-		if (typeReference != null && typeReference.eResource() != null && typeReference.eResource().getResourceSet() != null) {
+		if (typeReference != null && typeReference.eResource() != null
+				&& typeReference.eResource().getResourceSet() != null) {
 			JvmType type = typeReference.getType();
 			if (type instanceof JvmDeclaredType) {
-				if(typeReference instanceof JvmParameterizedTypeReference)
-					checkRestrictedType(typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, (JvmDeclaredType) type);
+				if (typeReference instanceof JvmParameterizedTypeReference)
+					checkRestrictedType(typeReference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
+							(JvmDeclaredType) type);
 				else
 					checkRestrictedType(typeReference, null, (JvmDeclaredType) type);
 			}
@@ -124,11 +128,10 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		Object element = getContext().get(typeToCheck);
 		if(element != null){
 			if(element.equals(FORBIDDENREFERENCEID)){
-				error("Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, FORBIDDEN_REFERENCE);
+				notification(issueCodes.forbiddenReference, "Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature);
 			} else if(element.equals(DISCOURAGEDREFERENCEID)){
 				warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
 			}
 		}
 	}
-
 }
