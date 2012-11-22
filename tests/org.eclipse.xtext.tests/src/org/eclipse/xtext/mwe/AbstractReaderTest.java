@@ -171,14 +171,6 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 
 	protected abstract SlotEntry createSlotEntry();
 	
-	protected Predicate<EObject> getPredicate(final String uriContains) {
-		return new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return input.eResource().getURI().toString().contains("folder%20"+uriContains);
-			}
-		};
-	}
-
 	@Test public void testParseClassPath() throws Exception {
 		Reader reader = getReader();
 		assertEquals(0, reader.getPathes().size());
