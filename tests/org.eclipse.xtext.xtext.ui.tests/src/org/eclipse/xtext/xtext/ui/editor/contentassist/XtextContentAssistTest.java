@@ -828,14 +828,14 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("ST")
-	        .assertText("terminal STRING:\n\t\n;\n", ":");
+	        .assertText("terminal STRING:\n\t\n;", ":");
     }
     
     @Test public void testOverrideRule_02() throws Exception {
     	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("IN")
-	        .assertText("terminal INT returns ecore::EInt:\n\t\n;\n", ":");
+	        .assertText("terminal INT returns ecore::EInt:\n\t\n;", ":");
     }
     
     @Test public void testOverrideRule_03() throws Exception {
@@ -843,7 +843,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ec")
 	        .append("IN")
-	        .assertText("terminal INT returns ec::EInt:\n\t\n;\n", ":");
+	        .assertText("terminal INT returns ec::EInt:\n\t\n;", ":");
     }
     
     @Test public void testOverrideRule_04() throws Exception {
@@ -851,14 +851,14 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"")
 	        .append("IN")
-	        .assertText("terminal INT returns EInt:\n\t\n;\n", ":");
+	        .assertText("terminal INT returns EInt:\n\t\n;", ":");
     }
     
     @Test public void testOverrideRule_05() throws Exception {
     	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
 	    	.append("ESC")
-	    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;\n", ":");
+	    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;", ":");
     }
     
     @Test public void testCompleteHiddenTokens_01() throws Exception {
