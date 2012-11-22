@@ -386,6 +386,24 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void bug394655() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { public void setFoo() {} public void addFoo(int x) {} }");
+		String xtendModel = "class XtendClass { def bar(JavaClass java) { java.addFoo(1) java.setFoo()  }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.indexOf("addFoo"), "setFoo");
+		assertDocumentContains(editor, xtendModel.replace("addFoo", "setFoo"));
+	}
+
+	@Test
+	public void bug394655_2() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { public void setFoo() {} public void addFoo(int x) {} }");
+		String xtendModel = "class XtendClass { def bar(JavaClass java) { java.addFoo(1) java.setFoo()  }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.indexOf("setFoo"), "addFoo");
+		assertDocumentContains(editor, xtendModel.replace("setFoo", "addFoo"));
+	}
+
+	@Test
 	public void testRenameOverriddenJavaMethod() throws Exception {
 		IFile javaInterface = testHelper.createFile("JavaInterface.java",
 				"public interface JavaInterface { void foo(); }");
