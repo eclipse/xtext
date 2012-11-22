@@ -99,35 +99,41 @@ public class XExpressionHelper {
 			|| expr instanceof XNullLiteral
 			)
 			return false;
-		if (expr instanceof XAssignment) {
-			return true;
-		}
 		if (expr instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expr;
-			final JvmIdentifiableElement feature = featureCall.getFeature();
-			if (feature.eIsProxy())
-				return true; // linking problems ... could be anything
-			if (feature instanceof JvmConstructor) { //super() and this()
-				return true;
-			}
-			if (feature instanceof JvmOperation) {
-				JvmOperation jvmOperation = (JvmOperation) feature;
-				if (findPureAnnotation(jvmOperation) == null) {
-					return true;
-				} else {
-					for (XExpression param : featureCall.getActualArguments()) {
-						if (hasSideEffects(param))
-							return true;
-					}
-				}
-			}
-			return false;
+			return hasSideEffects(featureCall, true);
 		}
 		if (expr instanceof XConstructorCall) {
 			XConstructorCall constrCall = (XConstructorCall) expr;
 			return findPureAnnotation(constrCall.getConstructor()) == null;
 		}
 		return true;
+	}
+
+	public boolean hasSideEffects(XAbstractFeatureCall featureCall, boolean inspectContents) {
+		if (featureCall instanceof XAssignment) {
+			return true;
+		}
+		final JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature.eIsProxy())
+			return true; // linking problems ... could be anything
+		if (feature instanceof JvmConstructor) { //super() and this()
+			return true;
+		}
+		if (feature instanceof JvmOperation) {
+			JvmOperation jvmOperation = (JvmOperation) feature;
+			if (findPureAnnotation(jvmOperation) == null) {
+				return true;
+			} else {
+				if(inspectContents) {
+					for (XExpression param : featureCall.getActualArguments()) {
+						if (hasSideEffects(param))
+							return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public JvmAnnotationReference findInlineAnnotation(XAbstractFeatureCall featureCall) {
