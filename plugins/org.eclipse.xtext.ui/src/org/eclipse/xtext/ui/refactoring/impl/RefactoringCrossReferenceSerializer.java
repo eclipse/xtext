@@ -70,7 +70,7 @@ public class RefactoringCrossReferenceSerializer {
 				try {
 					String unconvertedRefText = qualifiedNameConverter.toString(desc.getName());
 					String convertedRefText = valueConverter.toString(unconvertedRefText, ruleName);
-					if (refTextEvaluator.isValid(convertedRefText) && (bestRefText == null || refTextEvaluator.isBetterThan(convertedRefText, bestRefText)))
+					if (refTextEvaluator.isValid(desc) && (bestRefText == null || refTextEvaluator.isBetterThan(convertedRefText, bestRefText)))
 						bestRefText = convertedRefText;
 				} catch (ValueConverterException e) {
 					status.add(RefactoringStatus.WARNING,
@@ -91,6 +91,6 @@ public class RefactoringCrossReferenceSerializer {
 		
 		boolean isBetterThan(String newText, String currentText);
 		
-		boolean isValid(String newText);
+		boolean isValid(IEObjectDescription target);
 	}
 }

@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -129,7 +130,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			int indexInList, EObject newTargetElement) {
 		// by default choose the shortest text
 		return new RefTextEvaluator() {
-			public boolean isValid(String newText) {
+			public boolean isValid(IEObjectDescription target) {
 				return true;
 			}
 			

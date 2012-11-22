@@ -17,6 +17,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
@@ -58,7 +59,7 @@ public class RefactoringCrossReferenceSerializerTest extends AbstractXtextTests 
 	
 	@Test public void testSerializer() throws Exception {
 		RefactoringCrossReferenceSerializer.RefTextEvaluator evaluator = new RefactoringCrossReferenceSerializer.RefTextEvaluator() {
-			public boolean isValid(String newText) {
+			public boolean isValid(IEObjectDescription target) {
 				return true;
 			}
 			
