@@ -112,7 +112,7 @@ public class XExpressionHelper {
 			}
 			if (feature instanceof JvmOperation) {
 				JvmOperation jvmOperation = (JvmOperation) feature;
-				if (findPureAnnotation(jvmOperation) != null) {
+				if (findPureAnnotation(jvmOperation) == null) {
 					return true;
 				} else {
 					for (XExpression param : featureCall.getActualArguments()) {
