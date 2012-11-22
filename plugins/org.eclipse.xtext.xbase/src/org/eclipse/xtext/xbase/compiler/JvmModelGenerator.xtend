@@ -42,6 +42,7 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
@@ -62,8 +63,6 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
-import com.google.common.collect.ImmutableMap
-import org.eclipse.xtext.common.types.JvmTypeReference
 
 /**
  * A generator implementation that processes the 
@@ -136,14 +135,13 @@ class JvmModelGenerator implements IGenerator {
 			childAppendable.append(" ")
 		generateExtendsClause(childAppendable)
 		childAppendable.append('{').increaseIndentation
-		appendable.forEach(members, [
+		appendable.forEach(membersToBeCompiled, [
 				separator = [ITreeAppendable it | newLine]
 			], [
 				val memberAppendable = childAppendable.traceWithComments(it)
 				memberAppendable.openScope
-				val hasGenerated = generateMember(memberAppendable)
+				generateMember(memberAppendable)
 				memberAppendable.closeScope
-				hasGenerated
 			])
 		childAppendable.decreaseIndentation.newLine.append('}')
 		appendable.newLine
@@ -163,7 +161,7 @@ class JvmModelGenerator implements IGenerator {
 			], [
 				generateEnumLiteral(appendable.trace(it))
 			])
-		appendable.forEach(members.filter[!(it instanceof JvmEnumerationLiteral)], [
+		appendable.forEach(membersToBeCompiled.filter[!(it instanceof JvmEnumerationLiteral)], [
 				separator = [ITreeAppendable it | newLine]
 			], [ 
 				generateMember(appendable.trace(it)) 
@@ -302,19 +300,18 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def dispatch boolean generateMember(JvmMember it, ITreeAppendable appendable) {
+	def dispatch ITreeAppendable generateMember(JvmMember it, ITreeAppendable appendable) {
 		throw new UnsupportedOperationException("generateMember not implemented for elements of type "
 			+ it?.^class?.name
 		)
 	}
 	
-	def dispatch boolean generateMember(JvmGenericType it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmGenericType it, ITreeAppendable appendable) {
 		appendable.newLine
 		generateBody(it, appendable)
-		return true
 	}
 	
-	def dispatch boolean generateMember(JvmField it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmField it, ITreeAppendable appendable) {
 		appendable.newLine
 		generateJavaDoc(appendable)
 		val tracedAppendable = appendable.trace(it)
@@ -325,10 +322,9 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.traceSignificant(it).append(simpleName)
 		generateInitialization(tracedAppendable)
 		tracedAppendable.append(";")
-		return true
 	}
 	
-	def dispatch boolean generateMember(JvmOperation it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmOperation it, ITreeAppendable appendable) {
 		appendable.newLine
 		appendable.openScope
 		generateJavaDoc(appendable)
@@ -354,29 +350,26 @@ class JvmModelGenerator implements IGenerator {
 			generateExecutableBody(tracedAppendable)
 		}
 		appendable.closeScope
-		return true
+		appendable
 	}
 	
-	def dispatch boolean generateMember(JvmConstructor it, ITreeAppendable appendable) {
-		if(!isSingleSyntheticDefaultConstructor) {
-			appendable.newLine
-			appendable.openScope
-			generateJavaDoc(appendable)
-			val tracedAppendable = appendable.trace(it)
-			generateAnnotations(tracedAppendable, true)
-			generateModifier(tracedAppendable)
-			generateTypeParameterDeclaration(tracedAppendable)
-			tracedAppendable.traceSignificant(it).append(simpleName)
-			tracedAppendable.append("(")
-			generateParameters(tracedAppendable)
-			tracedAppendable.append(")")
-			generateThrowsClause(tracedAppendable)
-			tracedAppendable.append(" ")
-			generateExecutableBody(tracedAppendable)
-			appendable.closeScope
-			return true
-		}
-		return false
+	def dispatch generateMember(JvmConstructor it, ITreeAppendable appendable) {
+		appendable.newLine
+		appendable.openScope
+		generateJavaDoc(appendable)
+		val tracedAppendable = appendable.trace(it)
+		generateAnnotations(tracedAppendable, true)
+		generateModifier(tracedAppendable)
+		generateTypeParameterDeclaration(tracedAppendable)
+		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.append("(")
+		generateParameters(tracedAppendable)
+		tracedAppendable.append(")")
+		generateThrowsClause(tracedAppendable)
+		tracedAppendable.append(" ")
+		generateExecutableBody(tracedAppendable)
+		appendable.closeScope
+		appendable
 	}
 	
 	def void generateInitialization(JvmField it, ITreeAppendable appendable) {
@@ -548,9 +541,9 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak) {
-		val sep = [ITreeAppendable it |  if(withLineBreak) newLine else append(' ') ]
 		appendable.forEachSafely(annotations, [
-				separator = sep suffix = sep
+				separator = [ITreeAppendable it |  if(withLineBreak) append(',').newLine else append(', ') ]
+				suffix = [ITreeAppendable it |  if(withLineBreak) newLine ]
 			], [
 				it, app | it.generateAnnotation(app)
 			])
@@ -682,5 +675,9 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			name
 		}
+	}
+	
+	def Iterable<JvmMember> getMembersToBeCompiled(JvmDeclaredType it) {
+		members.filter[!(it instanceof JvmConstructor && (it as JvmConstructor).singleSyntheticDefaultConstructor)]
 	}
 }
