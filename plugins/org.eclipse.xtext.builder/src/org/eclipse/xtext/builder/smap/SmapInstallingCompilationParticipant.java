@@ -12,22 +12,21 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.BuildContext;
 import org.eclipse.jdt.core.compiler.CompilationParticipant;
 import org.eclipse.jdt.internal.core.Region;
+import org.eclipse.xtext.builder.trace.AbstractTrace;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.util.Files;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -74,23 +73,12 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 				try {
 					IJavaElement element = JavaCore.create(ctx.getFile());
 					if (element != null && element.exists()) {
-						IFile smapFile = findSmapFile(ctx);
-						if (smapFile != null && smapFile.exists()) {
-							try {
-								String smapAsString = Files.readStreamIntoString(smapFile.getContents());
-								Region region = new Region();
-								region.add(element);
-								// install into bytecode
-								installSmapInformation(smapAsString, JavaCore.getGeneratedResources(region, false));
-							} catch (Exception e) {
-								log.error(String.format("Could not read and install smap information from %s: %s", smapFile.getFullPath().toString(), e.getMessage()), e);
-							} finally {
-								try {
-									smapFile.delete(true, null);
-								} catch(CoreException e) {
-									log.error(e.getMessage(), e);
-								}
-							}
+						String smapAsString = findSmapInformation(ctx);
+						if (smapAsString != null) {
+							Region region = new Region();
+							region.add(element);
+							// install into bytecode
+							installSmapInformation(smapAsString, JavaCore.getGeneratedResources(region, false));
 						}
 					}
 				} catch (Exception e) {
@@ -119,12 +107,22 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 		}
 	}
 
-	protected IFile findSmapFile(BuildContext ctx) {
+	@SuppressWarnings("null")
+	protected String findSmapInformation(BuildContext ctx) {
 		IFile compiledFile = ctx.getFile();
-		IPath smapPath = compiledFile.getFullPath().removeFileExtension().addFileExtension("smap");
-		IContainer container = compiledFile.getParent();
-		IFile result = container.getFile(smapPath.removeFirstSegments(smapPath.segmentCount() - 1));
-		return result;
+		ITrace traceToSource = traceInformation.getTraceToSource(compiledFile);
+		if (traceToSource instanceof AbstractTrace) {
+			final AbstractTraceRegion rootTraceRegion = ((AbstractTrace) traceToSource).getRootTraceRegion();
+			if (rootTraceRegion == null) {
+				return null;
+			}
+			// check if the language for the source is actually installed
+			if (serviceProviderRegistry.getResourceServiceProvider(rootTraceRegion.getAssociatedPath()) == null)
+				return null;
+			return smapSupport.generateSmap(rootTraceRegion, compiledFile.getName());
+		}
+		return null;
 	}
 
 }
+

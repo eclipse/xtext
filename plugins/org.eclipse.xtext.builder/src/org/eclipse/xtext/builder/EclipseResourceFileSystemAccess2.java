@@ -134,7 +134,6 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		
 		IFile file = getFile(fileName, outputName);
 		IFile traceFile = getTraceFile(file);
-		IFile smapFile = getSmapFile(file);
 		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
 		String contentsAsString = postProcessedContent.toString(); 
 		if (file.exists()) {
@@ -149,12 +148,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
 							setDerived(file, outputConfig.isSetDerivedProperty());
 						}
-					} else {
-						if (smapFile != null)
-							file.touch(monitor);
 					}
-					if (smapFile != null)
-						updateSmapInformation(smapFile, postProcessedContent, file);
 					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
@@ -337,40 +331,12 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	/**
 	 * @since 2.3
 	 */
+	@Deprecated
 	protected IFile getSmapFile(IFile javaSourceFile) {
-		if (!javaSourceFile.getName().endsWith(".java"))
-			return null;
-		IContainer folder = javaSourceFile.getParent();
-		IFile file = folder.getFile(new Path(javaSourceFile.getName().replace(".java", ".smap")));
-		return file;
+		log.warn("Smap files are no longer generated on disk.");
+		return null;
 	}
 
-	/**
-	 * @since 2.3
-	 * @noreference This method is not intended to be referenced by clients.
-	 * @nooverride This method is not intended to be re-implemented or extended by clients.
-	 */
-	protected void updateSmapInformation(IFile smapFile, CharSequence postProcessedContent, IFile javaSource) {
-		if (!(postProcessedContent instanceof ITraceRegionProvider))
-			return;
-		AbstractTraceRegion traceRegion = ((ITraceRegionProvider)postProcessedContent).getTraceRegion();
-		String smap = smapSupport.generateSmap(traceRegion, javaSource.getName());
-		try {
-			if (smap == null) {
-				if (smapFile.exists())
-					smapFile.delete(true, null);
-			} else {
-				final StringInputStream smapAsStream = new StringInputStream(smap);
-				if (!smapFile.exists()) {
-					smapFile.create(smapAsStream, true, monitor);
-				} else {
-					smapFile.setContents(smapAsStream, true, true, monitor);
-				}
-			}
-		} catch (CoreException e) {
-			log.error(e);
-		}
-	}
 
 	/**
 	 * Can be used to announce that a builder participant is done with this file system access and
