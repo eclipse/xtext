@@ -28,7 +28,8 @@ import com.google.common.base.Objects;
 	 * @return <code>true</code> if {@code a} and {@code b} are not equal.
 	 */
 	@Pure
-	@Inline(value="(!$3.equal($1, $2))", imported=Objects.class)
+//	disabled inlining, since Findbugs is too loud about warnings when b is null.
+//	@Inline(value="(!$3.equal($1, $2))", imported=Objects.class)
 	public static boolean operator_notEquals(Object a, Object b) {
 		return !Objects.equal(a, b);
 	}
@@ -44,7 +45,8 @@ import com.google.common.base.Objects;
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
 	@Pure
-	@Inline(value="$3.equal($1, $2)", imported=Objects.class)
+//	disabled inlining, since Findbugs is too loud about warnings when b is null.
+//	@Inline(value="$3.equal($1, $2)", imported=Objects.class)
 	public static boolean operator_equals(Object a, Object b) {
 		return Objects.equal(a, b);
 	}
