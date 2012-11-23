@@ -37,9 +37,9 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.IssueCodes;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.validation.XbaseIssueCodes;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
@@ -56,7 +56,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IJavaElementFinder javaElementFinder;
 	@Inject
-	private IssueCodes issueCodes;
+	private XbaseIssueCodes issueCodes;
 
 	@Override
 	protected List<EPackage> getEPackages() {

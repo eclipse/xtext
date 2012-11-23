@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.preferences;
+package org.eclipse.xtext.ui.preferences;
 
 import java.util.Set;
 
@@ -35,7 +35,6 @@ import org.eclipse.ui.dialogs.SelectionStatusDialog;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
-import org.eclipse.xtext.builder.internal.Activator;
 
 /**
  * Initially copied from Jdt.
@@ -50,9 +49,11 @@ public class ProjectSelectionDialog extends SelectionStatusDialog {
 	private TableViewer tableViewer;
 	private Set<IProject> projectsWithSpecifics;
 	private ViewerFilter viewerFilter;
+	private final IDialogSettings dialogSettings;
 
-	public ProjectSelectionDialog(Shell parentShell, Set<IProject> projectsWithSpecifics) {
+	public ProjectSelectionDialog(Shell parentShell, Set<IProject> projectsWithSpecifics, IDialogSettings dialogSettings) {
 		super(parentShell);
+		this.dialogSettings = dialogSettings;
 		setTitle(Messages.ProjectSelectionDialog_title);
 		setMessage(Messages.ProjectSelectionDialog_desciption);
 		this.projectsWithSpecifics = projectsWithSpecifics;
@@ -101,7 +102,6 @@ public class ProjectSelectionDialog extends SelectionStatusDialog {
 				updateFilter(((Button) e.widget).getSelection());
 			}
 		});
-		IDialogSettings dialogSettings = Activator.getDefault().getDialogSettings();
 		boolean doFilter = !dialogSettings.getBoolean(DIALOG_SETTINGS_SHOW_ALL) && !projectsWithSpecifics.isEmpty();
 		checkbox.setSelection(doFilter);
 		updateFilter(doFilter);
@@ -117,7 +117,7 @@ public class ProjectSelectionDialog extends SelectionStatusDialog {
 		} else {
 			tableViewer.removeFilter(viewerFilter);
 		}
-		Activator.getDefault().getDialogSettings().put(DIALOG_SETTINGS_SHOW_ALL, !selected);
+		dialogSettings.put(DIALOG_SETTINGS_SHOW_ALL, !selected);
 	}
 
 	private void doSelectionChanged(Object[] objects) {
