@@ -5,11 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.preferences;
+package org.eclipse.xtext.ui.preferences;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.xtext.builder.internal.Activator;
 
 /**
  * Initially copied from Jdt.
@@ -89,7 +88,8 @@ public class StatusInfo implements IStatus {
 	}
 
 	public String getPlugin() {
-		return Activator.PLUGIN_ID;
+		//FIXME pull from DefaultuiModule
+		return "org.eclipse.xtext.ui";
 	}
 
 	public Throwable getException() {

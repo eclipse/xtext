@@ -5,13 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.preferences;
+package org.eclipse.xtext.ui.preferences;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -36,14 +38,15 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.validation.IssueCode;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * Initially copied from jdt's OptionsConfigurationBlock
@@ -52,6 +55,8 @@ import com.google.common.collect.Maps;
  * @since 2.1
  */
 public abstract class OptionsConfigurationBlock {
+	@Inject
+	AbstractUIPlugin uiPlugin;
 
 	public static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
 	private static final String SETTINGS_EXPANDED = "expanded"; //$NON-NLS-1$
@@ -225,6 +230,31 @@ public abstract class OptionsConfigurationBlock {
 		updateCombo(comboBox);
 
 		comboBoxes.add(comboBox);
+		return comboBox;
+	}
+
+	
+	protected Combo addComboBox(IssueCode issueCode, String label, Composite parent, int indent) {
+		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
+		gd.horizontalIndent = indent;
+
+		Label labelControl = new Label(parent, SWT.LEFT);
+		labelControl.setFont(JFaceResources.getDialogFont());
+		labelControl.setText(label);
+		labelControl.setLayoutData(gd);
+
+		String[] values = new String[] { "Error", "Warning", "Ignore" };
+		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
+		if (issueCode.hasJavaEqivalent()) {
+			values = new String[] { "Error", "Warning", "Ignore", "Java" };
+			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
+		}
+
+		Combo comboBox = newComboControl(parent, issueCode.getCode(), values, valueLabels);
+		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+
+		labels.put(comboBox, labelControl);
+
 		return comboBox;
 	}
 
@@ -445,7 +475,9 @@ public abstract class OptionsConfigurationBlock {
 				((IPersistentPreferenceStore) preferenceStore).save();
 			}
 		} catch (IOException e) {
-			Activator.log(e);
+			IStatus status = new Status(IStatus.ERROR, uiPlugin.getBundle().getSymbolicName(),
+					"Unexpected internal error: ", e); //$NON-NLS-1$
+			uiPlugin.getLog().log(status);
 		}
 	}
 

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.preferences;
+package org.eclipse.xtext.ui.preferences;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;

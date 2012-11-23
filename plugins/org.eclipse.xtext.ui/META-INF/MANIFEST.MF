@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.core.expressions,
  com.ibm.icu,
  org.eclipse.search;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.ltk.core.refactoring;resolution:=optional;x-installation:=greedy;visibility:=reexport,
+ org.eclipse.ltk.core.refactoring;resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.ltk.ui.refactoring;resolution:=optional;x-installation:=greedy,
  org.eclipse.compare;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.team.core;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
@@ -27,7 +27,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.core.filesystem;bundle-version="1.2.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.ui.forms;bundle-version="3.5.200"
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
@@ -72,6 +73,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.guice,
  org.eclipse.xtext.ui.label,
  org.eclipse.xtext.ui.notification,
+ org.eclipse.xtext.ui.preferences;x-internal:=true,
  org.eclipse.xtext.ui.refactoring;x-internal:=true,
  org.eclipse.xtext.ui.refactoring.impl;x-internal:=true,
  org.eclipse.xtext.ui.refactoring.ui;x-internal:=true,

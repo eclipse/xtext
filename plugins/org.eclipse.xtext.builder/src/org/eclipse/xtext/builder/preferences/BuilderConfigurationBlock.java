@@ -33,6 +33,8 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
+import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 
 import com.google.common.collect.Sets;
 

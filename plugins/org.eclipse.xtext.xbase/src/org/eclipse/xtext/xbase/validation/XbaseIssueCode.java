@@ -5,48 +5,36 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.xbase.validation;
 
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.IssueCode;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
- * @since 2.4
  */
-public class IssueCode {
+public class XbaseIssueCode extends IssueCode {
 
-	private String code;
-	private Severity severity;
+	private int javaId = -1;
 
-	/**
-	 * TODO we need Severityless (always ERROR) issue code too.
-	 */
-	public static IssueCode create(String code, Severity severity) {
-		IssueCode iCode = new IssueCode();
-		iCode.setCode(code);
-		iCode.setSeverity(severity);
-		return iCode;
+	public static XbaseIssueCode create(String code, Severity severity, int javaId) {
+		XbaseIssueCode issueCode = new XbaseIssueCode();
+		issueCode.setCode(code);
+		issueCode.setSeverity(severity);
+		issueCode.setJavaId(javaId);
+		return issueCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setJavaId(int javaId) {
+		this.javaId = javaId;
 	}
 
-	public void setSeverity(Severity severity) {
-		this.severity = severity;
-
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public Severity getSeverity() {
-		return severity;
-	}
-
+	@Override
 	public boolean hasJavaEqivalent() {
-		return false;
+		return javaId >= 0;
 	}
 
+	public int getJavaId() {
+		return javaId;
+	}
 }

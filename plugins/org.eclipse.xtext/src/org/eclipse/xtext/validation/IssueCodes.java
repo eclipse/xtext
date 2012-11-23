@@ -7,16 +7,49 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import java.lang.reflect.Field;
+import java.util.Collection;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.4
  */
 public class IssueCodes {
 
-	//TODO should we keep the old prefix? or change it to higher level org.eclipse.xtext.validation.IssueCodes.
-	private static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
+	private Map<String, IssueCode> issueCodesMap;
 
-	//public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
-	public final IssueCode forbiddenReference = new IssueCode(ISSUE_CODE_PREFIX + "forbidden_reference");
+	protected Map<String, IssueCode> collectKeys() {
+		Map<String, IssueCode> result = Maps.newLinkedHashMap();
+		for (Field field : getClass().getFields()) {
+			if (IssueCode.class.isAssignableFrom(field.getType())) {
+				try {
+					IssueCode key = (IssueCode) field.get(this);
+					result.put(key.getCode(), key);
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+
+	public IssueCode getIssueCode(String code) {
+		return issueCodesMap().get(code);
+	}
+
+	public Collection<IssueCode> getIssueCodes() {
+		return issueCodesMap().values();
+	}
+
+	protected Map<String, IssueCode> issueCodesMap() {
+		if (issueCodesMap == null)
+			issueCodesMap = collectKeys();
+		return issueCodesMap;
+	}
 
 }

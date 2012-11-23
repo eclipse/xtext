@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.preferences;
+package org.eclipse.xtext.ui.preferences;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.ControlEnableState;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.DialogPage;
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.preference.IPreferencePageContainer;
 import org.eclipse.jface.preference.PreferencePage;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.ui.editor.tasks.dialogfields.LayoutUtil;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.SelectionButtonDialogField;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * Initially copied from Jdt.
@@ -64,7 +66,8 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 	private Composite parentComposite;
 	private IProject project;
 	private Map<Object, Object> pageData;
-
+	@Inject
+	private IDialogSettings dialogSettings;
 
 	public PropertyAndPreferencePage() {
 		blockStatus = new StatusInfo();
@@ -208,7 +211,8 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 					projectsWithSpecifics.add(project);
 				}
 			}
-			ProjectSelectionDialog dialog = new ProjectSelectionDialog(getShell(), projectsWithSpecifics);
+			ProjectSelectionDialog dialog = new ProjectSelectionDialog(getShell(), projectsWithSpecifics,
+					dialogSettings);
 			if (dialog.open() == Window.OK) {
 				IProject project = (IProject) dialog.getFirstResult();
 				openProjectProperties(project, data);
