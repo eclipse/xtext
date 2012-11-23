@@ -56,6 +56,8 @@ public class ImportNormalizer {
 	}
 
 	public QualifiedName resolve(QualifiedName relativeName) {
+		if (relativeName.isEmpty())
+			return null;
 		if (hasWildCard) {
 			return importedNamespacePrefix.append(relativeName);
 		} else {
