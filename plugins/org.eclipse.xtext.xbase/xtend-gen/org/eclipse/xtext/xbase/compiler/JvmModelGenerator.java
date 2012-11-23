@@ -237,7 +237,7 @@ public class JvmModelGenerator implements IGenerator {
             memberAppendable.closeScope();
           }
         };
-      this._loopExtensions.<JvmMember>forEach(appendable, _membersToBeCompiled, _function, _function_1);
+      this._loopExtensions.<JvmMember>forEach(childAppendable, _membersToBeCompiled, _function, _function_1);
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
@@ -251,15 +251,16 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       this.generateJavaDoc(it, appendable);
-      this.generateAnnotations(it, appendable, true);
-      this.generateModifier(it, appendable);
-      appendable.append("enum ");
-      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(appendable, it);
+      final ITreeAppendable childAppendable = appendable.trace(it);
+      this.generateAnnotations(it, childAppendable, true);
+      this.generateModifier(it, childAppendable);
+      childAppendable.append("enum ");
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
-      appendable.append(" ");
-      this.generateExtendsClause(it, appendable);
-      ITreeAppendable _append = appendable.append("{");
+      childAppendable.append(" ");
+      this.generateExtendsClause(it, childAppendable);
+      ITreeAppendable _append = childAppendable.append("{");
       _append.increaseIndentation();
       EList<JvmEnumerationLiteral> _literals = it.getLiterals();
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
@@ -275,14 +276,13 @@ public class JvmModelGenerator implements IGenerator {
             it.setSuffix(";");
           }
         };
-      final Function1<JvmEnumerationLiteral,Boolean> _function_1 = new Function1<JvmEnumerationLiteral,Boolean>() {
-          public Boolean apply(final JvmEnumerationLiteral it) {
-            ITreeAppendable _trace = appendable.trace(it);
-            boolean _generateEnumLiteral = JvmModelGenerator.this.generateEnumLiteral(it, _trace);
-            return Boolean.valueOf(_generateEnumLiteral);
+      final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+          public void apply(final JvmEnumerationLiteral it) {
+            ITreeAppendable _trace = childAppendable.trace(it);
+            JvmModelGenerator.this.generateEnumLiteral(it, _trace);
           }
         };
-      this._loopExtensions.<JvmEnumerationLiteral>forEach(appendable, _literals, _function, _function_1);
+      this._loopExtensions.<JvmEnumerationLiteral>forEach(childAppendable, _literals, _function, _function_1);
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       final Function1<JvmMember,Boolean> _function_2 = new Function1<JvmMember,Boolean>() {
           public Boolean apply(final JvmMember it) {
@@ -304,21 +304,21 @@ public class JvmModelGenerator implements IGenerator {
         };
       final Procedure1<JvmMember> _function_4 = new Procedure1<JvmMember>() {
           public void apply(final JvmMember it) {
-            ITreeAppendable _trace = appendable.trace(it);
+            ITreeAppendable _trace = childAppendable.trace(it);
             JvmModelGenerator.this.generateMember(it, _trace);
           }
         };
-      this._loopExtensions.<JvmMember>forEach(appendable, _filter, _function_3, _function_4);
-      ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
+      this._loopExtensions.<JvmMember>forEach(childAppendable, _filter, _function_3, _function_4);
+      ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
-      ITreeAppendable _append_1 = _newLine.append("}");
-      ITreeAppendable _newLine_1 = _append_1.newLine();
+      _newLine.append("}");
+      ITreeAppendable _newLine_1 = appendable.newLine();
       _xblockexpression = (_newLine_1);
     }
     return _xblockexpression;
   }
   
-  public boolean generateEnumLiteral(final JvmEnumerationLiteral it, final ITreeAppendable appendable) {
+  public void generateEnumLiteral(final JvmEnumerationLiteral it, final ITreeAppendable appendable) {
     ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
     _increaseIndentation.newLine();
     this.generateJavaDoc(it, appendable);
@@ -326,28 +326,28 @@ public class JvmModelGenerator implements IGenerator {
     String _simpleName = it.getSimpleName();
     appendable.append(_simpleName);
     appendable.decreaseIndentation();
-    return true;
   }
   
   protected ITreeAppendable _generateBody(final JvmAnnotationType it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       this.generateJavaDoc(it, appendable);
-      this.generateAnnotations(it, appendable, true);
-      this.generateModifier(it, appendable);
-      appendable.append("@interface ");
-      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(appendable, it);
+      final ITreeAppendable childAppendable = appendable.trace(it);
+      this.generateAnnotations(it, childAppendable, true);
+      this.generateModifier(it, childAppendable);
+      childAppendable.append("@interface ");
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
-      appendable.append(" {");
+      childAppendable.append(" {");
       EList<JvmMember> _members = it.getMembers();
       Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
       for (final JvmOperation operation : _filter) {
-        this.generateAnnotationMethod(operation, appendable);
+        this.generateAnnotationMethod(operation, childAppendable);
       }
-      ITreeAppendable _newLine = appendable.newLine();
-      ITreeAppendable _append = _newLine.append("}");
-      ITreeAppendable _newLine_1 = _append.newLine();
+      ITreeAppendable _newLine = childAppendable.newLine();
+      _newLine.append("}");
+      ITreeAppendable _newLine_1 = appendable.newLine();
       _xblockexpression = (_newLine_1);
     }
     return _xblockexpression;

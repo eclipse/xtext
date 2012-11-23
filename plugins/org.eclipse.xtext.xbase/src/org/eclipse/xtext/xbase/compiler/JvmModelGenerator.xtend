@@ -135,7 +135,7 @@ class JvmModelGenerator implements IGenerator {
 			childAppendable.append(" ")
 		generateExtendsClause(childAppendable)
 		childAppendable.append('{').increaseIndentation
-		appendable.forEach(membersToBeCompiled, [
+		childAppendable.forEach(membersToBeCompiled, [
 				separator = [ITreeAppendable it | newLine]
 			], [
 				val memberAppendable = childAppendable.traceWithComments(it)
@@ -149,47 +149,50 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable) {
 		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
-		generateModifier(appendable)
-		appendable.append("enum ")
-		appendable.traceSignificant(it).append(simpleName)
-		appendable.append(" ")
-		generateExtendsClause(appendable)
-		appendable.append("{").increaseIndentation
-		appendable.forEach(literals, [
+		val childAppendable = appendable.trace(it)
+		generateAnnotations(childAppendable, true)
+		generateModifier(childAppendable)
+		childAppendable.append("enum ")
+		childAppendable.traceSignificant(it).append(simpleName)
+		childAppendable.append(" ")
+		generateExtendsClause(childAppendable)
+		childAppendable.append("{").increaseIndentation
+		childAppendable.forEach(literals, [
 				separator = [ITreeAppendable it | append(',').newLine]  suffix = ';'
 			], [
-				generateEnumLiteral(appendable.trace(it))
+				generateEnumLiteral(childAppendable.trace(it))
 			])
-		appendable.forEach(membersToBeCompiled.filter[!(it instanceof JvmEnumerationLiteral)], [
+		childAppendable.forEach(membersToBeCompiled.filter[!(it instanceof JvmEnumerationLiteral)], [
 				separator = [ITreeAppendable it | newLine]
 			], [ 
-				generateMember(appendable.trace(it)) 
+				generateMember(childAppendable.trace(it)) 
 			])
-		appendable.decreaseIndentation.newLine.append("}").newLine
+		childAppendable.decreaseIndentation.newLine.append("}")
+		appendable.newLine
 	}
 	
-	def boolean generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable) {
+	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable) {
 		appendable.increaseIndentation.newLine
 		generateJavaDoc(appendable)
 		generateAnnotations(appendable, true)
 		appendable.append(simpleName)
 		// TODO: constructor args
 		appendable.decreaseIndentation
-		return true
 	}
 	
 	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable) {
 		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
-		generateModifier(appendable)
-		appendable.append("@interface ")
-		appendable.traceSignificant(it).append(simpleName)
-		appendable.append(" {")
+		val childAppendable = appendable.trace(it)
+		generateAnnotations(childAppendable, true)
+		generateModifier(childAppendable)
+		childAppendable.append("@interface ")
+		childAppendable.traceSignificant(it).append(simpleName)
+		childAppendable.append(" {")
 		for (operation : members.filter(typeof(JvmOperation))) {
-			generateAnnotationMethod(operation, appendable)
+			generateAnnotationMethod(operation, childAppendable)
 		}
-		appendable.newLine.append("}").newLine
+		childAppendable.newLine.append("}")
+		appendable.newLine
 	}
 	
 	def generateAnnotationMethod(JvmOperation it, ITreeAppendable appendable) {
@@ -508,7 +511,7 @@ class JvmModelGenerator implements IGenerator {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
-			val doc = '''/**''' as StringConcatenation;
+			val doc = '''/**''' as StringConcatenation
 			doc.newLine
 			doc.append(" * ")
 			doc.append(adapter.documentation, " * ")
