@@ -141,7 +141,7 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 					String 					// 7..9
 						case 
 							x.length > 4 : {// 10..12
-						""					// 14
+						val y=''			// 14
 					}
 				}
 			}
