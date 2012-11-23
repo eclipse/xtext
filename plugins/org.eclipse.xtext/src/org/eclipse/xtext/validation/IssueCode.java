@@ -18,13 +18,23 @@ public class IssueCode {
 	private String code;
 	private Severity severity;
 
-	public IssueCode(String code) {
-		this(code, Severity.ERROR);
+	/**
+	 * TODO we need Severityless (always ERROR) issue code too.
+	 */
+	public static IssueCode create(String code, Severity severity) {
+		IssueCode iCode = new IssueCode();
+		iCode.setCode(code);
+		iCode.setSeverity(severity);
+		return iCode;
 	}
 
-	public IssueCode(String code, Severity severity) {
+	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public void setSeverity(Severity severity) {
 		this.severity = severity;
+
 	}
 
 	public String getCode() {
@@ -33,6 +43,10 @@ public class IssueCode {
 
 	public Severity getSeverity() {
 		return severity;
+	}
+
+	public boolean hasJavaEqivalent() {
+		return false;
 	}
 
 }
