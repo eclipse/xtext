@@ -32,27 +32,6 @@ class LoopExtensions {
 	}
 
 	/**
-	 * Iterates elements and execute the function. The function should return true if it has 
-	 * produced some output, thus requiring a separator before the follow-up element. 
-	 * A prefix, a separator and a suffix can be initialized with the loopInitializer lambda. 
-	 */
-	def <T> void forEach(ITreeAppendable appendable, Iterable<T> elements,  
-			(LoopParams)=>void loopInitializer, (T)=>boolean function) {
-		if(elements.empty)
-			return
-		val params = new LoopParams => loopInitializer
-		params.appendPrefix(appendable)
-		val iter = elements.iterator
-		var isFirst = true
-		while(iter.hasNext) {
-			if(!isFirst)
-				params.appendSeparator(appendable)
-			isFirst = !function.apply(iter.next) && isFirst
-		}	
-		params.appendSuffix(appendable)
-	}
-
-	/**
 	 * Uses curly braces and comma as delimiters. Doesn't use them for single valued iterables.
 	 */
 	def <T> void forEachWithShortcut(ITreeAppendable appendable, Iterable<T> elements,  

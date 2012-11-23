@@ -467,4 +467,40 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	protected SharedAppendableState getState() {
 		return state;
 	}
+	
+	
+	/**
+	 * @since 2.4
+	 */
+	public void dump() {
+		dump("");
+		System.out.println();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void dump(String indent) {
+		if(closed) 
+			System.out.println(indent + "<closed>");
+		StringBuilder currentChildren = null;
+		for(Object child: children) {
+			if(child instanceof TreeAppendable) {
+				if(currentChildren != null)
+					System.out.println(indent + currentChildren.toString());
+				currentChildren = null; 
+				((TreeAppendable) child).dump("  " + indent);
+			}
+			else {
+				if(currentChildren == null)
+					currentChildren = new StringBuilder();
+				currentChildren.append(child.toString().replace(state.getLineSeparator(), "\\n"));
+			}
+		}
+		if(currentChildren != null)
+			System.out.println(indent + currentChildren.toString());
+		if(closed) 
+			System.out.println(indent + "</closed>");
+	}
+	
 }
