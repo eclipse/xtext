@@ -92,7 +92,7 @@
         </page>
         <page
               category="org.eclipse.xtend.core.Xtend"
-              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.validator.preferences.ValidatorPreferencePage"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.validator.preferences.XtendValidatorPreferencePage"
               id="org.eclipse.xtend.core.Xtend.validator.preferencePage"
               name="Errors/Warnings">
            <keywordReference
