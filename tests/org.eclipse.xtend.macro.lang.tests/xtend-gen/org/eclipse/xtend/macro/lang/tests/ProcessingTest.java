@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.macro.lang.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -630,7 +630,7 @@ public class ProcessingTest {
               Assert.assertNotNull(myClass);
               Field _declaredField = myClass.getDeclaredField("foo");
               Class<? extends Object> _type = _declaredField.getType();
-              boolean _equals = Objects.equal(_type, String.class);
+              boolean _equals = ObjectExtensions.operator_equals(_type, String.class);
               Assert.assertTrue(_equals);
             } catch (Exception _e) {
               throw Exceptions.sneakyThrow(_e);
@@ -706,7 +706,7 @@ public class ProcessingTest {
               Assert.assertNotNull(myClass);
               Field _declaredField = myClass.getDeclaredField("myField");
               Class<? extends Object> _type = _declaredField.getType();
-              boolean _equals = Objects.equal(_type, Boolean.class);
+              boolean _equals = ObjectExtensions.operator_equals(_type, Boolean.class);
               Assert.assertTrue(_equals);
             } catch (Exception _e) {
               throw Exceptions.sneakyThrow(_e);

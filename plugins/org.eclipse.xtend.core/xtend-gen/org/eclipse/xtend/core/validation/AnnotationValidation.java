@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class AnnotationValidation extends AbstractDeclarativeValidator {
@@ -85,13 +85,13 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     boolean _or = false;
     JvmType _type_3 = toCheck.getType();
     String _qualifiedName = _type_3.getQualifiedName();
-    boolean _equals = Objects.equal(_qualifiedName, "java.lang.String");
+    boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, "java.lang.String");
     if (_equals) {
       _or = true;
     } else {
       JvmType _type_4 = toCheck.getType();
       String _qualifiedName_1 = _type_4.getQualifiedName();
-      boolean _equals_1 = Objects.equal(_qualifiedName_1, "java.lang.Class");
+      boolean _equals_1 = ObjectExtensions.operator_equals(_qualifiedName_1, "java.lang.Class");
       _or = (_equals || _equals_1);
     }
     if (_or) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
@@ -68,7 +68,7 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       JvmTypeReference _xifexpression = null;
       String _key_1 = lhsAndParams.getKey();
-      boolean _notEquals = (!Objects.equal(_key_1, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_key_1, null);
       if (_notEquals) {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
@@ -80,7 +80,7 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       }
       final JvmTypeReference lhsType = _xifexpression;
       JvmTypeReference _xifexpression_1 = null;
-      boolean _notEquals_1 = (!Objects.equal(rhs, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(rhs, null);
       if (_notEquals_1) {
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);

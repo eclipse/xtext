@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.formatting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Collection;
@@ -69,6 +68,7 @@ import org.eclipse.xtext.xbase.formatting.XbaseFormatter2;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -108,7 +108,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_1 = this._formattingDataFactory.prepend(pkg, _function_1);
     format.operator_add(_prepend_1);
     final ILeafNode pkgSemicolon = this._nodeModelAccess.immediatelyFollowingKeyword(pkg, ";");
-    boolean _notEquals = (!Objects.equal(pkgSemicolon, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(pkgSemicolon, null);
     if (_notEquals) {
       final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
@@ -139,7 +139,7 @@ public class XtendFormatter extends XbaseFormatter2 {
         this.format(imp, format);
         EList<XtendImport> _imports_1 = xtendFile.getImports();
         XtendImport _last = IterableExtensions.<XtendImport>last(_imports_1);
-        boolean _notEquals_1 = (!Objects.equal(imp, _last));
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(imp, _last);
         if (_notEquals_1) {
           INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
           final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
@@ -167,7 +167,7 @@ public class XtendFormatter extends XbaseFormatter2 {
         this.format(clazz, format);
         EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
         XtendTypeDeclaration _last = IterableExtensions.<XtendTypeDeclaration>last(_xtendTypes_1);
-        boolean _notEquals_1 = (!Objects.equal(clazz, _last));
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(clazz, _last);
         if (_notEquals_1) {
           INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(clazz);
           final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
@@ -562,7 +562,7 @@ public class XtendFormatter extends XbaseFormatter2 {
         for (final XtendParameter param : parameters) {
           {
             XtendParameter _head = IterableExtensions.<XtendParameter>head(parameters);
-            boolean _equals = Objects.equal(param, _head);
+            boolean _equals = ObjectExtensions.operator_equals(param, _head);
             if (_equals) {
               final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -573,7 +573,7 @@ public class XtendFormatter extends XbaseFormatter2 {
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(open, _function_1);
               format.operator_add(_append_1);
             } else {
-              boolean _notEquals = (!Objects.equal(comma, null));
+              boolean _notEquals = ObjectExtensions.operator_notEquals(comma, null);
               if (_notEquals) {
                 final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
@@ -585,7 +585,7 @@ public class XtendFormatter extends XbaseFormatter2 {
               }
             }
             XtendParameter _last = IterableExtensions.<XtendParameter>last(parameters);
-            boolean _equals_1 = Objects.equal(param, _last);
+            boolean _equals_1 = ObjectExtensions.operator_equals(param, _last);
             if (_equals_1) {
               INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(param);
               final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
@@ -618,7 +618,7 @@ public class XtendFormatter extends XbaseFormatter2 {
         {
           boolean _fitsIntoLine = this.fitsIntoLine(format, param_1);
           if (_fitsIntoLine) {
-            boolean _equals = Objects.equal(comma_1, null);
+            boolean _equals = ObjectExtensions.operator_equals(comma_1, null);
             if (_equals) {
               final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -638,7 +638,7 @@ public class XtendFormatter extends XbaseFormatter2 {
             }
           } else {
             INode _xifexpression = null;
-            boolean _equals_1 = Objects.equal(comma_1, null);
+            boolean _equals_1 = ObjectExtensions.operator_equals(comma_1, null);
             if (_equals_1) {
               _xifexpression = open;
             } else {
@@ -801,7 +801,7 @@ public class XtendFormatter extends XbaseFormatter2 {
   protected void _format(final XtendField field, final FormattableDocument document) {
     this.formatAnnotations(field, document, this._xtendFormatterConfigKeys.newLineAfterFieldAnnotations);
     String _name = field.getName();
-    boolean _notEquals = (!Objects.equal(_name, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_name, null);
     if (_notEquals) {
       INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(field, Literals.XTEND_FIELD__TYPE);
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {

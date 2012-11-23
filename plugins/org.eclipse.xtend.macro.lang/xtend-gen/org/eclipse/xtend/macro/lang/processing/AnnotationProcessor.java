@@ -91,7 +91,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     {
       Class<? extends Object> _class = obj==null?(Class<? extends Object>)null:obj.getClass();
       Class<? extends Object> _class_1 = this.getClass();
-      boolean _equals = Objects.equal(_class, _class_1);
+      boolean _equals = ObjectExtensions.operator_equals(_class, _class_1);
       if (_equals) {
         return true;
       }
@@ -261,7 +261,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     for (final XAnnotation annotation : _filter) {
       {
         final MacroAnnotation macroAnno = this._xAnnotationExtensions.getMacroAnnotation(annotation);
-        boolean _notEquals = (!Objects.equal(macroAnno, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(macroAnno, null);
         if (_notEquals) {
           boolean _hasErrors = this._macroAnnotationExtensions.hasErrors(macroAnno);
           if (_hasErrors) {
@@ -364,7 +364,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
       final Function1<MacroAnnotation,Boolean> _function = new Function1<MacroAnnotation,Boolean>() {
           public Boolean apply(final MacroAnnotation it) {
             Registrator _registrator = AnnotationProcessor.this._macroAnnotationExtensions.getRegistrator(it);
-            boolean _notEquals = (!Objects.equal(_registrator, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_registrator, null);
             return Boolean.valueOf(_notEquals);
           }
         };
@@ -373,7 +373,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
         {
           final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
           Registrator _registrator = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
-          boolean _notEquals = (!Objects.equal(_registrator, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_registrator, null);
           if (_notEquals) {
             List<? extends Object> _xifexpression = null;
             Registrator _registrator_1 = this._macroAnnotationExtensions.getRegistrator(macroAnnotation);
@@ -408,7 +408,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
                   XExpression _expression = _registrator_3==null?(XExpression)null:_registrator_3.getExpression();
                   final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
                   Throwable _exception = result.getException();
-                  boolean _notEquals_1 = (!Objects.equal(_exception, null));
+                  boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_exception, null);
                   if (_notEquals_1) {
                     throw result.getException();
                   }
@@ -437,7 +437,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
       {
         final List<XtendAnnotationTarget> elements = this.getElements(macroAnnotation, annotatedElements);
         Processor _processor = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
-        boolean _notEquals = (!Objects.equal(_processor, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(_processor, null);
         if (_notEquals) {
           List<? extends Object> _xifexpression = null;
           Processor _processor_1 = this._macroAnnotationExtensions.getProcessor(macroAnnotation);
@@ -471,7 +471,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
                 XExpression _expression = _processor_3.getExpression();
                 final IEvaluationResult result = this.interpreter.evaluate(_expression, ctx, cancelIndicator);
                 Throwable _exception = result.getException();
-                boolean _notEquals_1 = (!Objects.equal(_exception, null));
+                boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_exception, null);
                 if (_notEquals_1) {
                   Resource _eResource = xtendFile.eResource();
                   Throwable _exception_1 = result.getException();
@@ -502,7 +502,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
                 JvmAnnotationType _annotationType = it.getAnnotationType();
                 String _simpleName = _annotationType.getSimpleName();
                 String _name = annotation.getName();
-                boolean _equals = Objects.equal(_simpleName, _name);
+                boolean _equals = ObjectExtensions.operator_equals(_simpleName, _name);
                 return Boolean.valueOf(_equals);
               }
             };
@@ -590,7 +590,7 @@ public class AnnotationProcessor implements IJvmModelInferrer {
     final Function2<StringBuilder,ILeafNode,StringBuilder> _function_1 = new Function2<StringBuilder,ILeafNode,StringBuilder>() {
         public StringBuilder apply(final StringBuilder result, final ILeafNode leafNode) {
           ILeafNode _head = IterableExtensions.<ILeafNode>head(leafNodes);
-          boolean _equals = Objects.equal(leafNode, _head);
+          boolean _equals = ObjectExtensions.operator_equals(leafNode, _head);
           if (_equals) {
             result.append("\u2588");
           }

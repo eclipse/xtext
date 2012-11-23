@@ -31,21 +31,17 @@ public class XtendFormatterRuntimeConfigProvider implements IFormatterConfigurat
   private IWhitespaceInformationProvider whitespaceInfo;
   
   public IConfigurationValues getFormatterConfiguration(final Resource resource) {
-    MapBasedConfigurationValues _xblockexpression = null;
-    {
-      MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(this.keys);
-      final MapBasedConfigurationValues cfg = _mapBasedConfigurationValues;
-      URI _uRI = resource.getURI();
-      final IIndentationInformation indentationInfo = this.whitespaceInfo.getIndentationInformation(_uRI);
-      URI _uRI_1 = resource.getURI();
-      final ILineSeparatorInformation lineSeparatorInfo = this.whitespaceInfo.getLineSeparatorInformation(_uRI_1);
-      String _lineSeparator = lineSeparatorInfo.getLineSeparator();
-      cfg.<String>put(this.keys.lineSeparator, _lineSeparator);
-      String _indentString = indentationInfo.getIndentString();
-      cfg.<String>put(this.keys.indentation, _indentString);
-      cfg.<Integer>put(this.keys.indentationLength, Integer.valueOf(4));
-      _xblockexpression = (cfg);
-    }
-    return _xblockexpression;
+    MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(this.keys);
+    final MapBasedConfigurationValues cfg = _mapBasedConfigurationValues;
+    URI _uRI = resource.getURI();
+    final IIndentationInformation indentationInfo = this.whitespaceInfo.getIndentationInformation(_uRI);
+    URI _uRI_1 = resource.getURI();
+    final ILineSeparatorInformation lineSeparatorInfo = this.whitespaceInfo.getLineSeparatorInformation(_uRI_1);
+    String _lineSeparator = lineSeparatorInfo.getLineSeparator();
+    cfg.<String>put(this.keys.lineSeparator, _lineSeparator);
+    String _indentString = indentationInfo.getIndentString();
+    cfg.<String>put(this.keys.indentation, _indentString);
+    cfg.<Integer>put(this.keys.indentationLength, Integer.valueOf(4));
+    return cfg;
   }
 }

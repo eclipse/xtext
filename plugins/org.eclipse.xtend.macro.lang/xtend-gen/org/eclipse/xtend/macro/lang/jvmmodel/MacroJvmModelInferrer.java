@@ -199,7 +199,7 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
           Registrator _registrator = MacroJvmModelInferrer.this._macroAnnotationExtensions.getRegistrator(annotation);
           final Procedure1<Registrator> _function = new Procedure1<Registrator>() {
               public void apply(final Registrator r) {
-                boolean _equals = Objects.equal(r, null);
+                boolean _equals = ObjectExtensions.operator_equals(r, null);
                 if (_equals) {
                   return;
                 }
@@ -254,7 +254,7 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
           Processor _processor = MacroJvmModelInferrer.this._macroAnnotationExtensions.getProcessor(annotation);
           final Procedure1<Processor> _function = new Procedure1<Processor>() {
               public void apply(final Processor p) {
-                boolean _equals = Objects.equal(p, null);
+                boolean _equals = ObjectExtensions.operator_equals(p, null);
                 if (_equals) {
                   return;
                 }
@@ -310,7 +310,7 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
                 final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                     public void apply(final JvmOperation it) {
                       XExpression _initialValue = field.getInitialValue();
-                      boolean _notEquals = (!Objects.equal(_initialValue, null));
+                      boolean _notEquals = ObjectExtensions.operator_notEquals(_initialValue, null);
                       if (_notEquals) {
                         XExpression _initialValue_1 = field.getInitialValue();
                         JvmAnnotationValue _jvmAnnotationValue = MacroJvmModelInferrer.this._jvmTypesBuilder.toJvmAnnotationValue(_initialValue_1);
@@ -438,19 +438,19 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
         public Boolean apply(final XAnnotation it) {
           JvmAnnotationType _annotationType = it.getAnnotationType();
           MacroAnnotation _macroAnnotation = MacroJvmModelInferrer.this._xAnnotationExtensions.getMacroAnnotation(_annotationType);
-          boolean _equals = Objects.equal(_macroAnnotation, macroAnnotation);
+          boolean _equals = ObjectExtensions.operator_equals(_macroAnnotation, macroAnnotation);
           return Boolean.valueOf(_equals);
         }
       };
     final XAnnotation a = IterableExtensions.<XAnnotation>findFirst(_annotations, _function);
     boolean _and = false;
     String _name = field.getName();
-    boolean _equals = Objects.equal(_name, "value");
+    boolean _equals = ObjectExtensions.operator_equals(_name, "value");
     if (!_equals) {
       _and = false;
     } else {
       XExpression _value = a.getValue();
-      boolean _notEquals = (!Objects.equal(_value, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_value, null);
       _and = (_equals && _notEquals);
     }
     if (_and) {
@@ -461,7 +461,7 @@ public class MacroJvmModelInferrer extends AbstractModelInferrer {
       JvmOperation _element = valuePair.getElement();
       String _simpleName = _element.getSimpleName();
       String _name_1 = field.getName();
-      boolean _equals_1 = Objects.equal(_simpleName, _name_1);
+      boolean _equals_1 = ObjectExtensions.operator_equals(_simpleName, _name_1);
       if (_equals_1) {
         return valuePair.getValue();
       }

@@ -1,6 +1,5 @@
 package org.eclipse.xtend.macro.lang.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xtend");
             return Boolean.valueOf(_equals);
           }
         };
@@ -70,7 +70,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "macro");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "macro");
             return Boolean.valueOf(_equals);
           }
         };
@@ -112,7 +112,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xtend");
             return Boolean.valueOf(_equals);
           }
         };
@@ -129,7 +129,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "macro");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "macro");
             return Boolean.valueOf(_equals);
           }
         };
@@ -168,7 +168,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xtend");
             return Boolean.valueOf(_equals);
           }
         };
@@ -185,7 +185,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "macro");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "macro");
             return Boolean.valueOf(_equals);
           }
         };
@@ -227,7 +227,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xtend");
             return Boolean.valueOf(_equals);
           }
         };
@@ -242,7 +242,7 @@ public class ValidationTest {
           public Boolean apply(final Resource it) {
             URI _uRI = it.getURI();
             String _fileExtension = _uRI.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "macro");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "macro");
             return Boolean.valueOf(_equals);
           }
         };

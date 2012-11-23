@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.macro.lang.processing;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -42,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * Specialization of the standard Xbase interpreter.
@@ -90,10 +90,10 @@ public class MacroInterpreter extends XbaseInterpreter {
       JvmDeclaredType _declaringType = it.getDeclaringType();
       String _qualifiedName = _declaringType.getQualifiedName();
       String _name = ProcessingContext.class.getName();
-      boolean _equals = Objects.equal(_qualifiedName, _name);
+      boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, _name);
       if (_equals) {
         String _simpleName = it.getSimpleName();
-        boolean _equals_1 = Objects.equal(_simpleName, "type");
+        boolean _equals_1 = ObjectExtensions.operator_equals(_simpleName, "type");
         if (_equals_1) {
           boolean _and = false;
           EList<JvmFormalParameter> _parameters = it.getParameters();
@@ -107,7 +107,7 @@ public class MacroInterpreter extends XbaseInterpreter {
             JvmTypeReference _parameterType = _head.getParameterType();
             JvmType _type = _parameterType.getType();
             String _qualifiedName_1 = _type.getQualifiedName();
-            boolean _equals_3 = Objects.equal(_qualifiedName_1, "java.lang.Class");
+            boolean _equals_3 = ObjectExtensions.operator_equals(_qualifiedName_1, "java.lang.Class");
             _and = (_equals_2 && _equals_3);
           }
           if (_and) {
@@ -173,7 +173,7 @@ public class MacroInterpreter extends XbaseInterpreter {
     Object _xblockexpression = null;
     {
       Method _method = this.javaReflectAccess.getMethod(operation);
-      boolean _equals = Objects.equal(_method, null);
+      boolean _equals = ObjectExtensions.operator_equals(_method, null);
       if (_equals) {
         EList<Adapter> _eAdapters = operation.eAdapters();
         final Adapter adapter = EcoreUtil.getAdapter(_eAdapters, FunctionAdapter.class);

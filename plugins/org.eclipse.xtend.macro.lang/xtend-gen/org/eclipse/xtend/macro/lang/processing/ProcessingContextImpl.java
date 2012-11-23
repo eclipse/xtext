@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.macro.lang.processing;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +120,7 @@ public class ProcessingContextImpl implements ProcessingContext {
     }
     if (!_matched) {
       EObject _eContainer = member.eContainer();
-      boolean _equals = Objects.equal(_eContainer, null);
+      boolean _equals = ObjectExtensions.operator_equals(_eContainer, null);
       if (_equals) {
         _matched=true;
         _switchResult = null;
@@ -141,7 +140,7 @@ public class ProcessingContextImpl implements ProcessingContext {
       EObject _eContainer = clazz.eContainer();
       final String p = ((XtendFile) _eContainer).getPackage();
       String _xifexpression = null;
-      boolean _equals = Objects.equal(p, null);
+      boolean _equals = ObjectExtensions.operator_equals(p, null);
       if (_equals) {
         String _name = clazz.getName();
         _xifexpression = _name;
@@ -164,7 +163,7 @@ public class ProcessingContextImpl implements ProcessingContext {
     final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
         public Boolean apply(final JvmGenericType it) {
           String _qualifiedName = it.getQualifiedName();
-          boolean _equals = Objects.equal(_qualifiedName, name);
+          boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -354,12 +353,12 @@ public class ProcessingContextImpl implements ProcessingContext {
     final Function1<JvmDeclaredType,Boolean> _function = new Function1<JvmDeclaredType,Boolean>() {
         public Boolean apply(final JvmDeclaredType type) {
           String _identifier = type.getIdentifier();
-          boolean _equals = Objects.equal(name, _identifier);
+          boolean _equals = ObjectExtensions.operator_equals(name, _identifier);
           return Boolean.valueOf(_equals);
         }
       };
     final JvmDeclaredType local = IterableExtensions.<JvmDeclaredType>findFirst(_filter, _function);
-    boolean _notEquals = (!Objects.equal(local, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(local, null);
     if (_notEquals) {
       JvmTypesBuilder _typesBuilder = this.getTypesBuilder();
       return _typesBuilder.newTypeRef(local, typeRef);
@@ -427,7 +426,7 @@ public class ProcessingContextImpl implements ProcessingContext {
     final JvmAnnotationType annotationType = ((JvmAnnotationType) _type_2);
     final JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
     result.setAnnotation(annotationType);
-    boolean _notEquals = (!Objects.equal(values, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(values, null);
     if (_notEquals) {
       Set<Entry<String,Object>> _entrySet = values.entrySet();
       for (final Entry<String,Object> entry : _entrySet) {
@@ -438,7 +437,7 @@ public class ProcessingContextImpl implements ProcessingContext {
               public Boolean apply(final JvmOperation it) {
                 String _simpleName = it.getSimpleName();
                 String _key = entry.getKey();
-                boolean _equals = Objects.equal(_simpleName, _key);
+                boolean _equals = ObjectExtensions.operator_equals(_simpleName, _key);
                 return Boolean.valueOf(_equals);
               }
             };

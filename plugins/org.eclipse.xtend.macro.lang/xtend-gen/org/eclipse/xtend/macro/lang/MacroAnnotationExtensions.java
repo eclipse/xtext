@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.macro.lang;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class MacroAnnotationExtensions {
@@ -76,7 +76,7 @@ public class MacroAnnotationExtensions {
         public Boolean apply(final JvmGenericType it) {
           String _identifier = it.getIdentifier();
           String _processorClassName = MacroAnnotationExtensions.this.getProcessorClassName(macro);
-          boolean _equals = Objects.equal(_identifier, _processorClassName);
+          boolean _equals = ObjectExtensions.operator_equals(_identifier, _processorClassName);
           return Boolean.valueOf(_equals);
         }
       };
@@ -105,7 +105,7 @@ public class MacroAnnotationExtensions {
         public Boolean apply(final JvmGenericType it) {
           String _identifier = it.getIdentifier();
           String _registratorClassName = MacroAnnotationExtensions.this.getRegistratorClassName(macro);
-          boolean _equals = Objects.equal(_identifier, _registratorClassName);
+          boolean _equals = ObjectExtensions.operator_equals(_identifier, _registratorClassName);
           return Boolean.valueOf(_equals);
         }
       };
@@ -119,7 +119,7 @@ public class MacroAnnotationExtensions {
     final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
+          boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
           return Boolean.valueOf(_equals);
         }
       };
