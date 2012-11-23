@@ -59,6 +59,10 @@
 		<Package name="org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument" />
 		<Bug pattern="EC_NULL_ARG" />
 	</Match>
+	<Match>
+		<Class name="org.eclipse.xtext.xbase.formatting.XbaseFormatter2" />
+		<Bug pattern="EC_NULL_ARG" />
+	</Match>
 	
 	<!-- API base line, can't workaround -->
 	<Match>
