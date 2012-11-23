@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
+import org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl;
+import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,6 +18,13 @@ import com.google.common.base.Function;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class QualifiedNameTest extends Assert {
+	
+	@Test public void testBug354473() {
+		DefaultImpl impl = new IQualifiedNameConverter.DefaultImpl();
+		QualifiedName name = impl.toQualifiedName(".");
+		ImportNormalizer normalizer = new ImportNormalizer(QualifiedName.create("Test"), true, false);
+		assertNull(normalizer.resolve(name));
+	}
 
 	@Test public void testCreateNull() {
 		assertEquals(QualifiedName.EMPTY, QualifiedName.create());
