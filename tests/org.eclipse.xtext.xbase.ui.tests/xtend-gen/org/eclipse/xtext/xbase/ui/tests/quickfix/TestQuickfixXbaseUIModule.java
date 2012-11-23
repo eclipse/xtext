@@ -10,7 +10,7 @@ public class TestQuickfixXbaseUIModule extends XbaseUiModule {
   public TestQuickfixXbaseUIModule(final AbstractUIPlugin plugin) {
     super(plugin);
   }
-
+  
   public Class<? extends IssueModificationContext> bindIssueModificationContext() {
     return TestIssueModificationContext.class;
   }

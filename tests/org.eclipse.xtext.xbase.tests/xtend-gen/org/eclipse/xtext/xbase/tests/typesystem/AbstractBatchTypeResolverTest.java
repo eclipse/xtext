@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -85,7 +85,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             _matched=true;
             this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
             String _localVarName = _xSwitchExpression.getLocalVarName();
-            boolean _notEquals = (!Objects.equal(_localVarName, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_localVarName, null);
             if (_notEquals) {
               this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
             }
@@ -97,7 +97,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             _matched=true;
             this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
             XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
-            boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_implicitReceiver, null);
             if (_notEquals) {
               XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
               this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
@@ -154,7 +154,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             boolean _eIsProxy = feature.eIsProxy();
             Assert.assertFalse(_string_3, _eIsProxy);
             XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
-            boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_implicitReceiver, null);
             if (_notEquals) {
               XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
               Object _eGet_1 = _implicitReceiver_1.eGet(Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);

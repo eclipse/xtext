@@ -87,6 +87,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -147,7 +148,7 @@ public class JvmModelGenerator implements IGenerator {
       return;
     }
     String _qualifiedName = type.getQualifiedName();
-    boolean _notEquals = (!Objects.equal(_qualifiedName, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_qualifiedName, null);
     if (_notEquals) {
       String _qualifiedName_1 = type.getQualifiedName();
       String _replace = _qualifiedName_1.replace(".", "/");
@@ -164,7 +165,7 @@ public class JvmModelGenerator implements IGenerator {
     this.generateBody(type, bodyAppendable);
     final TreeAppendable importAppendable = this.createAppendable(type, importManager);
     String _packageName = type.getPackageName();
-    boolean _notEquals = (!Objects.equal(_packageName, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_packageName, null);
     if (_notEquals) {
       this.generateFileHeader(type, importAppendable);
       ITreeAppendable _append = importAppendable.append("package ");
@@ -375,7 +376,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateDefaultExpression(final JvmOperation it, final ITreeAppendable appendable) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
       appendable.append(" default ");
       appendable.increaseIndentation();
@@ -384,7 +385,7 @@ public class JvmModelGenerator implements IGenerator {
       appendable.decreaseIndentation();
     } else {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
         final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
             public void apply(final ITreeAppendable safeAppendable) {
@@ -480,7 +481,7 @@ public class JvmModelGenerator implements IGenerator {
    * Returns the visibility modifier and a space as suffix if not empty
    */
   public String javaName(final JvmVisibility visibility) {
-    boolean _notEquals = (!Objects.equal(visibility, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {
       String _switchResult = null;
       boolean _matched = false;
@@ -542,7 +543,7 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             String _identifier = typeRef.getIdentifier();
-            boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_identifier, "java.lang.Object");
             return Boolean.valueOf(_notEquals);
           }
         };
@@ -566,12 +567,12 @@ public class JvmModelGenerator implements IGenerator {
       final JvmTypeReference superClazz = IterableExtensions.<JvmTypeReference>head(_filter);
       final Function1<JvmTypeReference,Boolean> _function_4 = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
-            boolean _notEquals = (!Objects.equal(typeRef, superClazz));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(typeRef, superClazz);
             return Boolean.valueOf(_notEquals);
           }
         };
       final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_4);
-      boolean _notEquals = (!Objects.equal(superClazz, null));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
       if (_notEquals) {
         final Procedure1<ITreeAppendable> _function_5 = new Procedure1<ITreeAppendable>() {
             public void apply(final ITreeAppendable app) {
@@ -606,7 +607,7 @@ public class JvmModelGenerator implements IGenerator {
     throw _unsupportedOperationException;
   }
   
-  protected ITreeAppendable _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -616,7 +617,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmField it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmField it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -637,7 +638,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -648,7 +649,7 @@ public class JvmModelGenerator implements IGenerator {
       this.generateModifier(it, tracedAppendable);
       this.generateTypeParameterDeclaration(it, tracedAppendable);
       JvmTypeReference _returnType = it.getReturnType();
-      boolean _equals = Objects.equal(_returnType, null);
+      boolean _equals = ObjectExtensions.operator_equals(_returnType, null);
       if (_equals) {
         tracedAppendable.append("void");
       } else {
@@ -684,7 +685,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
+  protected Object _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -711,7 +712,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateInitialization(final JvmField it, final ITreeAppendable appendable) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
       appendable.append(" = ");
       appendable.increaseIndentation();
@@ -720,7 +721,7 @@ public class JvmModelGenerator implements IGenerator {
       appendable.decreaseIndentation();
     } else {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
         final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
             public void apply(final ITreeAppendable safeAppendable) {
@@ -849,12 +850,12 @@ public class JvmModelGenerator implements IGenerator {
   public boolean hasBody(final JvmExecutable op) {
     boolean _or = false;
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
       _or = true;
     } else {
       XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(op);
-      boolean _notEquals_1 = (!Objects.equal(_associatedExpression, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_associatedExpression, null);
       _or = (_notEquals || _notEquals_1);
     }
     return _or;
@@ -863,7 +864,7 @@ public class JvmModelGenerator implements IGenerator {
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable) {
     final String surrogateCode = "throw new Error(\"Unresolved compilation problem\");";
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
       ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
       ITreeAppendable _append = _increaseIndentation.append("{");
@@ -880,7 +881,7 @@ public class JvmModelGenerator implements IGenerator {
       _newLine.append("}");
     } else {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
         JvmTypeReference _switchResult = null;
         boolean _matched = false;
@@ -1144,7 +1145,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public void toJava(final JvmAnnotationValue it, final ITreeAppendable appendable) {
     JvmOperation _operation = it.getOperation();
-    boolean _notEquals = (!Objects.equal(_operation, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_operation, null);
     if (_notEquals) {
       JvmOperation _operation_1 = it.getOperation();
       String _simpleName = _operation_1.getSimpleName();
@@ -1356,13 +1357,13 @@ public class JvmModelGenerator implements IGenerator {
     TreeAppendable _treeAppendable = new TreeAppendable(importManager, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
     final TreeAppendable appendable = _treeAppendable;
     final JvmGenericType type = this.containerType(context);
-    boolean _notEquals = (!Objects.equal(type, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(type, null);
     if (_notEquals) {
       JvmGenericType _containerType = this.containerType(context);
       appendable.declareVariable(_containerType, "this");
       JvmGenericType _containerType_1 = this.containerType(context);
       final JvmTypeReference superType = _containerType_1.getExtendedClass();
-      boolean _notEquals_1 = (!Objects.equal(superType, null));
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(superType, null);
       if (_notEquals_1) {
         JvmType _type = superType.getType();
         appendable.declareVariable(_type, "super");
@@ -1373,7 +1374,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public JvmGenericType containerType(final EObject context) {
     JvmGenericType _xifexpression = null;
-    boolean _equals = Objects.equal(context, null);
+    boolean _equals = ObjectExtensions.operator_equals(context, null);
     if (_equals) {
       _xifexpression = null;
     } else {
@@ -1462,7 +1463,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable) {
+  public Object generateMember(final JvmMember it, final ITreeAppendable appendable) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable);
     } else if (it instanceof JvmGenericType) {

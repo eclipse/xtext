@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
-import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
@@ -10,6 +9,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
@@ -117,7 +117,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       for(final EPackageInfo ePackageInfo : _ePackageInfos) {
         {
           String _ePackageJavaFQN = ePackageInfo.getEPackageJavaFQN();
-          boolean _notEquals = (!Objects.equal(_ePackageJavaFQN, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_ePackageJavaFQN, null);
           if (_notEquals) {
             _builder.append("\t");
             _builder.append("registerGeneratedEPackage = \"");

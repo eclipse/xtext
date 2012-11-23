@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.DiagnosticConverterImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -38,20 +39,20 @@ public class PreferenceAwareDiagnosticConverter extends DiagnosticConverterImpl 
   
   protected Severity getSeverity(final Diagnostic diagnostic) {
     final Severity original = super.getSeverity(diagnostic);
-    boolean _equals = Objects.equal(original, null);
+    boolean _equals = ObjectExtensions.operator_equals(original, null);
     if (_equals) {
       return null;
     }
     final String issueCode = this.getIssueCode(diagnostic);
     final String javaCoreCode = this.issueCodeToJavaCoreCode.get(issueCode);
-    boolean _equals_1 = Objects.equal(javaCoreCode, null);
+    boolean _equals_1 = ObjectExtensions.operator_equals(javaCoreCode, null);
     if (_equals_1) {
       return original;
     }
     final EObject object = this.getCauser(diagnostic);
     Resource _eResource = object==null?(Resource)null:object.eResource();
     ResourceSet _resourceSet = _eResource==null?(ResourceSet)null:_eResource.getResourceSet();
-    boolean _equals_2 = Objects.equal(_resourceSet, null);
+    boolean _equals_2 = ObjectExtensions.operator_equals(_resourceSet, null);
     if (_equals_2) {
       return original;
     }

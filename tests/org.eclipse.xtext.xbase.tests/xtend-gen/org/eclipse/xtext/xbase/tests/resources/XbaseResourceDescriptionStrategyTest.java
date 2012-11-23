@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.tests.resources;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -10,6 +9,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -41,7 +41,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
           String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
-          boolean _equals = Objects.equal("true", _userData);
+          boolean _equals = ObjectExtensions.operator_equals("true", _userData);
           return Boolean.valueOf(_equals);
         }
       };
@@ -69,7 +69,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
           String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
-          boolean _equals = Objects.equal("true", _userData);
+          boolean _equals = ObjectExtensions.operator_equals("true", _userData);
           return Boolean.valueOf(_equals);
         }
       };

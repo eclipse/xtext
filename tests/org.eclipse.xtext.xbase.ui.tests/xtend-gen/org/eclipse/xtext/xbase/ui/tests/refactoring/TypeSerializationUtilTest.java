@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Iterator;
@@ -15,6 +14,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
@@ -68,7 +68,7 @@ public class TypeSerializationUtilTest {
       final Function1<XVariableDeclaration,Boolean> _function = new Function1<XVariableDeclaration,Boolean>() {
           public Boolean apply(final XVariableDeclaration it) {
             String _identifier = it.getIdentifier();
-            boolean _equals = Objects.equal(_identifier, "foo");
+            boolean _equals = ObjectExtensions.operator_equals(_identifier, "foo");
             return Boolean.valueOf(_equals);
           }
         };

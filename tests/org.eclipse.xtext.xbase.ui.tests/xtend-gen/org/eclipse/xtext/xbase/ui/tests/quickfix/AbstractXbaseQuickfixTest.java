@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.tests.quickfix;
 
-import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -20,6 +19,7 @@ import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.TestQuickfixXbaseUIModule;
@@ -28,7 +28,7 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
   private IProject demandCreateProject;
-
+  
   private static Injector injector = new Function0<Injector>() {
     public Injector apply() {
       XbaseRuntimeModule _xbaseRuntimeModule = new XbaseRuntimeModule();
@@ -40,20 +40,20 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
       return _createInjector;
     }
   }.apply();
-
+  
   public void tearDown() throws Exception {
-    boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(this.demandCreateProject, null);
     if (_notEquals) {
       JavaProjectSetupUtil.deleteProject(this.demandCreateProject);
     }
     super.tearDown();
   }
-
+  
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
     boolean _or = false;
-    boolean _equals = Objects.equal(javaProject, null);
+    boolean _equals = ObjectExtensions.operator_equals(javaProject, null);
     if (_equals) {
       _or = true;
     } else {
@@ -82,13 +82,13 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     }
     return javaProject;
   }
-
+  
   protected String getProjectName() {
     Class<? extends Object> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
     return (_simpleName + "Project");
   }
-
+  
   public XtextResource getResourceFor(final InputStream stream) {
     try {
       XtextResourceSet _resourceSet = this.getResourceSet();
@@ -108,7 +108,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
       }
     }
   }
-
+  
   public XtextResourceSet getResourceSet() {
     XtextResourceSet _xblockexpression = null;
     {
@@ -119,7 +119,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     }
     return _xblockexpression;
   }
-
+  
   public Injector getInjector() {
     return AbstractXbaseQuickfixTest.injector;
   }

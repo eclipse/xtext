@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +9,7 @@ import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
@@ -195,21 +195,21 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
     final ArrayList<String> all = CollectionLiterals.<String>newArrayList("jan", "hein", "class", "pit");
     final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _equals = Objects.equal(it, "jan");
+          boolean _equals = ObjectExtensions.operator_equals(it, "jan");
           return Boolean.valueOf(_equals);
         }
       };
     this.assertForEachWithSkip(all, _function, "{hein, class, pit}");
     final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _equals = Objects.equal(it, "hein");
+          boolean _equals = ObjectExtensions.operator_equals(it, "hein");
           return Boolean.valueOf(_equals);
         }
       };
     this.assertForEachWithSkip(all, _function_1, "{jan, class, pit}");
     final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _equals = Objects.equal(it, "pit");
+          boolean _equals = ObjectExtensions.operator_equals(it, "pit");
           return Boolean.valueOf(_equals);
         }
       };

@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.tests.configuration;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -13,6 +12,7 @@ import org.eclipse.xtext.xbase.configuration.IConfigurationKeyWithStorage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.configuration.NewLineConfigValue;
 
 @SuppressWarnings("all")
@@ -55,7 +55,7 @@ public class NewLineConfig extends AbstractConfigurationKey<NewLineConfigValue> 
     Integer _xblockexpression = null;
     {
       try {
-        boolean _notEquals = (!Objects.equal(value, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(value, null);
         if (_notEquals) {
           return Integer.valueOf(Integer.parseInt(value));
         }

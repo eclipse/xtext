@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.notify.Adapter;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -41,14 +41,14 @@ public class JvmTypeExtensions {
       _and_2 = false;
     } else {
       XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _equals = Objects.equal(_associatedExpression, null);
+      boolean _equals = ObjectExtensions.operator_equals(_associatedExpression, null);
       _and_2 = (_isEmpty && _equals);
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
       Procedure1<? super ITreeAppendable> _compilationStrategy = this.getCompilationStrategy(it);
-      boolean _equals_1 = Objects.equal(_compilationStrategy, null);
+      boolean _equals_1 = ObjectExtensions.operator_equals(_compilationStrategy, null);
       _and_1 = (_and_2 && _equals_1);
     }
     if (!_and_1) {
@@ -79,7 +79,7 @@ public class JvmTypeExtensions {
     EList<Adapter> _eAdapters = element.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, JvmIdentifiableMetaData.class);
     JvmIdentifiableMetaData metaData = ((JvmIdentifiableMetaData) _adapter);
-    boolean _equals = Objects.equal(metaData, null);
+    boolean _equals = ObjectExtensions.operator_equals(metaData, null);
     if (_equals) {
       JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
       metaData = _jvmIdentifiableMetaData;

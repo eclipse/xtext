@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import java.io.InputStream;
 import org.eclipse.core.resources.IProject;
@@ -14,6 +13,7 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -38,7 +38,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   }
   
   public void tearDown() throws Exception {
-    boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(this.demandCreateProject, null);
     if (_notEquals) {
       JavaProjectSetupUtil.deleteProject(this.demandCreateProject);
     }
@@ -53,7 +53,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
     boolean _or = false;
-    boolean _equals = Objects.equal(javaProject, null);
+    boolean _equals = ObjectExtensions.operator_equals(javaProject, null);
     if (_equals) {
       _or = true;
     } else {

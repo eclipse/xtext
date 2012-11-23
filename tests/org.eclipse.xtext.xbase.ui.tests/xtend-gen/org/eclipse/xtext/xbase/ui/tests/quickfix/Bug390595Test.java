@@ -21,29 +21,29 @@ import org.junit.Test;
 public class Bug390595Test extends AbstractXbaseQuickfixTest {
   @Inject
   private IResourceValidator resourceValidator;
-
+  
   @Inject
   private DefaultQuickfixProvider quickfixProvider;
-
+  
   @Inject
   private TestIssueModificationContext modificationContext;
-
+  
   @Inject
   private XtextDocument document;
-
+  
   @Test
   public void testNoExceptionDuringResolutionCreation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("{");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("val n = newHashSet ( ) ");
+    _builder.append("val n = newHashSet ( )");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("val m = newHashSet ( ) ");
+    _builder.append("val m = newHashSet ( )");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("if ( n < m ) { } ");
+    _builder.append("if ( n < m ) { }");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -58,7 +58,7 @@ public class Bug390595Test extends AbstractXbaseQuickfixTest {
     List<IssueResolution> _resolutionsForLinkingIssue = this.quickfixProvider.getResolutionsForLinkingIssue(issue);
     IterableExtensions.<IssueResolution>head(_resolutionsForLinkingIssue);
   }
-
+  
   public XtextDocument getDocument(final XtextResource xtextResource, final String code) {
     XtextDocument _xblockexpression = null;
     {

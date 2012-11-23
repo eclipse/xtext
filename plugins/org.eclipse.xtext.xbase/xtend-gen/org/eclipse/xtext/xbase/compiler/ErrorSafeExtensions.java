@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Provider;
 import java.util.List;
 import javax.inject.Inject;
@@ -58,7 +57,7 @@ public class ErrorSafeExtensions {
           }
       });
       boolean _xifexpression = false;
-      boolean _equals = Objects.equal(issueProvider, null);
+      boolean _equals = ObjectExtensions.operator_equals(issueProvider, null);
       if (_equals) {
         return false;
       } else {
@@ -66,7 +65,7 @@ public class ErrorSafeExtensions {
         final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
             public Boolean apply(final Issue it) {
               Severity _severity = it.getSeverity();
-              boolean _equals = Objects.equal(_severity, Severity.ERROR);
+              boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
               return Boolean.valueOf(_equals);
             }
           };
@@ -104,7 +103,7 @@ public class ErrorSafeExtensions {
           }
         }
         ITreeAppendable _xifexpression_1 = null;
-        boolean _notEquals = (!Objects.equal(surrogateCode, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateCode, null);
         if (_notEquals) {
           ITreeAppendable _append = appendable.append(surrogateCode);
           _xifexpression_1 = _append;
@@ -199,7 +198,7 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmTypeReference typeRef, final String surrogateType, final ITreeAppendable appendable) {
-    boolean _equals = Objects.equal(typeRef, null);
+    boolean _equals = ObjectExtensions.operator_equals(typeRef, null);
     if (_equals) {
       EObject _eContainer = typeRef.eContainer();
       final ErrorTreeAppendable errorChild = this.asErrorAppendable(appendable, _eContainer);
@@ -220,7 +219,7 @@ public class ErrorSafeExtensions {
             throw Exceptions.sneakyThrow(_t);
           }
         }
-        boolean _notEquals = (!Objects.equal(surrogateType, null));
+        boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateType, null);
         if (_notEquals) {
           appendable.append(surrogateType);
         }

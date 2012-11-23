@@ -1,6 +1,5 @@
 package org.eclipse.xtext.generator.serializer;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.HashSet;
@@ -38,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
@@ -273,7 +273,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       }
       final Assignment ass = GrammarUtil.containingAssignment(c);
       boolean _or = false;
-      boolean _equals = Objects.equal(ass, null);
+      boolean _equals = ObjectExtensions.operator_equals(ass, null);
       if (_equals) {
         _or = true;
       } else {

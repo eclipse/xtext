@@ -138,7 +138,13 @@ public class SmapSupport {
 
 	protected String getStratumName(final URI path) {
 		IResourceServiceProvider provider = serviceProviderRegistry.getResourceServiceProvider(path.trimFragment());
-		String name = provider.get(LanguageInfo.class).getShortName();
+		if (provider == null) {
+			// it might happen that trace data is in the workspace but the corresponding language is not installed.
+			// we use the file extension then.
+			return path.fileExtension() != null ? path.fileExtension() : "unknown";
+		}
+		final LanguageInfo languageInfo = provider.get(LanguageInfo.class);
+		String name = languageInfo.getShortName();
 		return name;
 	}
 

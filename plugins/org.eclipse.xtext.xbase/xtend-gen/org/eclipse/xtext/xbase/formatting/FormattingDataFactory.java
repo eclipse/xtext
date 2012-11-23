@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class FormattingDataFactory {
             if (_equals_1) {
               _or = true;
             } else {
-              boolean _equals_2 = Objects.equal(it.space, "");
+              boolean _equals_2 = ObjectExtensions.operator_equals(it.space, "");
               _or = (_equals_1 || _equals_2);
             }
             _and = (_equals && _or);
@@ -384,7 +383,7 @@ public class FormattingDataFactory {
   
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(node, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, init);
@@ -395,7 +394,7 @@ public class FormattingDataFactory {
   
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(node, null));
+    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, init);
@@ -410,7 +409,7 @@ public class FormattingDataFactory {
           ArrayList<FormattingData> _xblockexpression = null;
           {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-            boolean _notEquals = (!Objects.equal(node, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
             if (_notEquals) {
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, init);
@@ -439,7 +438,7 @@ public class FormattingDataFactory {
           ArrayList<FormattingData> _xblockexpression = null;
           {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-            boolean _notEquals = (!Objects.equal(node, null));
+            boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
             if (_notEquals) {
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, before);
