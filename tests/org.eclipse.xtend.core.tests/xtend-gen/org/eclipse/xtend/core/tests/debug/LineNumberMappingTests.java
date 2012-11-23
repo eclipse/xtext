@@ -265,7 +265,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.append("x.length > 4 : {// 10..12");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("\"\"\t\t\t\t\t// 14");
+    _builder.append("val y=\'\'\t\t\t// 14");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
