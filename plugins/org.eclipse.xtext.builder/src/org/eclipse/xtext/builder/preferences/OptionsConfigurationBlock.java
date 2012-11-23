@@ -38,6 +38,7 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.builder.internal.Activator;
+import org.eclipse.xtext.validation.IssueCode;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapDifference;
@@ -92,6 +93,7 @@ public abstract class OptionsConfigurationBlock {
 
 	protected final List<Button> checkBoxes = Lists.newArrayList();
 	protected final List<Text> textBoxes = Lists.newArrayList();
+	protected final List<Combo> comboBoxes = Lists.newArrayList();
 	protected final Map<Control, Label> labels = Maps.newHashMap();
 	protected final List<ExpandableComposite> expandedComposites = Lists.newArrayList();
 	private SelectionListener selectionListener;
@@ -181,6 +183,56 @@ public abstract class OptionsConfigurationBlock {
 		textBox.setLayoutData(data);
 		textBoxes.add(textBox);
 		return textBox;
+	}
+	
+	protected Combo addComboBox(Composite parent, String label, String code, String[] errorWarningIgnore,
+			String[] errorWarningIgnoreLabels, int indent) {
+		
+		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
+		gd.horizontalIndent = indent;
+
+		Label labelControl = new Label(parent, SWT.LEFT);
+		labelControl.setFont(JFaceResources.getDialogFont());
+		labelControl.setText(label);
+		labelControl.setLayoutData(gd);
+		
+		String[] values = new String[] { "Error", "Warning", "Ignore" };
+		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
+//		if (issueCode.hasJavaEqivalent()) {
+//			values = new String[] { "Error", "Warning", "Ignore", "Java" };
+//			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
+//		}
+
+		Combo comboBox = newComboControl(parent, code, values, valueLabels);
+		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+
+		labels.put(comboBox, labelControl);
+
+		return comboBox;
+	}
+
+	protected Combo newComboControl(Composite composite, String key, String[] values, String[] valueLabels) {
+		ControlData data = new ControlData(key, values);
+
+		Combo comboBox = new Combo(composite, SWT.READ_ONLY);
+		comboBox.setItems(valueLabels);
+		comboBox.setData(data);
+		comboBox.addSelectionListener(getSelectionListener());
+		comboBox.setFont(JFaceResources.getDialogFont());
+
+		makeScrollableCompositeAware(comboBox);
+
+		updateCombo(comboBox);
+
+		comboBoxes.add(comboBox);
+		return comboBox;
+	}
+
+	protected void updateCombo(Combo curr) {
+		ControlData data = (ControlData) curr.getData();
+
+		String currValue = getValue(data.getKey());
+		curr.select(data.getSelection(currValue));
 	}
 
 	private ScrolledPageContent getParentScrolledComposite(Control control) {
@@ -425,6 +477,9 @@ public abstract class OptionsConfigurationBlock {
 	}
 
 	protected void updateControls() {
+		for (int i = comboBoxes.size() - 1; i >= 0; i--) {
+			updateCombo(comboBoxes.get(i));
+		}
 		for (int i = checkBoxes.size() - 1; i >= 0; i--) {
 			updateCheckBox(checkBoxes.get(i));
 		}
