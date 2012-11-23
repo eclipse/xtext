@@ -15,7 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * Allows to access the nodes that contain the documentation of an {@link EObject}
- * and are considered by hte {@link IEObjectDocumentationProvider}.
+ * and are considered by the {@link IEObjectDocumentationProvider}.
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
