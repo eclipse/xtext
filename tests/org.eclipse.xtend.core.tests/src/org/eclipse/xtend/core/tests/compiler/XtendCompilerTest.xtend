@@ -1224,14 +1224,14 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			package x;
-
-			import com.google.common.base.Objects;
-
+			
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
 			@SuppressWarnings("all")
 			public class Y {
 			  public boolean equals(final Object p) {
 			    boolean _xifexpression = false;
-			    boolean _equals = Objects.equal("foo", p);
+			    boolean _equals = ObjectExtensions.operator_equals("foo", p);
 			    if (_equals) {
 			      return true;
 			    } else {
@@ -1241,6 +1241,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    return _xifexpression;
 			  }
 			}
+
 		''')
 	}
 	

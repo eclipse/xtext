@@ -2713,7 +2713,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("package x;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -2727,7 +2727,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("boolean _xifexpression = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(\"foo\", p);");
+    _builder_1.append("boolean _equals = ObjectExtensions.operator_equals(\"foo\", p);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");
@@ -2754,6 +2754,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
+    _builder_1.newLine();
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
