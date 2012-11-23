@@ -7,10 +7,8 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import java.util.Iterator;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -42,46 +40,6 @@ public class LoopExtensions {
         }
       };
     IterableExtensions.<T>forEach(_tail, _function);
-    params.appendSuffix(appendable);
-  }
-  
-  /**
-   * Iterates elements and execute the function. The function should return true if it has
-   * produced some output, thus requiring a separator before the follow-up element.
-   * A prefix, a separator and a suffix can be initialized with the loopInitializer lambda.
-   */
-  public <T extends Object> void forEach(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Function1<? super T,? extends Boolean> function) {
-    boolean _isEmpty = IterableExtensions.isEmpty(elements);
-    if (_isEmpty) {
-      return;
-    }
-    LoopParams _loopParams = new LoopParams();
-    final LoopParams params = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
-    params.appendPrefix(appendable);
-    final Iterator<T> iter = elements.iterator();
-    boolean isFirst = true;
-    boolean _hasNext = iter.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
-      {
-        boolean _not = (!isFirst);
-        if (_not) {
-          params.appendSeparator(appendable);
-        }
-        boolean _and = false;
-        T _next = iter.next();
-        Boolean _apply = function.apply(_next);
-        boolean _not_1 = (!_apply);
-        if (!_not_1) {
-          _and = false;
-        } else {
-          _and = (_not_1 && isFirst);
-        }
-        isFirst = _and;
-      }
-      boolean _hasNext_1 = iter.hasNext();
-      _while = _hasNext_1;
-    }
     params.appendSuffix(appendable);
   }
   
