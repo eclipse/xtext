@@ -15,8 +15,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.builder.preferences.PropertyAndPreferencePage;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
+import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
+import org.eclipse.xtext.validation.IssueCodes;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -27,8 +29,12 @@ import com.google.inject.name.Named;
 public class ValidatorPreferencePage extends PropertyAndPreferencePage {
 
 	private PreferenceStoreAccessImpl preferenceStoreAccessImpl;
-	private ValidatorConfigurationBlock validatorConfigurationBlock;
+	private AbstractValidatorConfigurationBlock validatorConfigurationBlock;
 	private String languageName;
+	@Inject
+	private IssueCodes issueCodes;
+	@Inject
+	private XtendValidatorConfigurationBlock.Factory configurationBlockFactory;
 
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String languageName) {
@@ -44,7 +50,8 @@ public class ValidatorPreferencePage extends PropertyAndPreferencePage {
 	public void createControl(Composite parent) {
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
 		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
-		validatorConfigurationBlock = new ValidatorConfigurationBlock(getProject(), preferenceStore, container);
+		validatorConfigurationBlock = configurationBlockFactory.createValidatorConfigurationBlock(getProject(),
+				preferenceStore, container, issueCodes);
 		validatorConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
 		super.createControl(parent);
 	}
