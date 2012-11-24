@@ -25,6 +25,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	protected Integer fifth = Integer.valueOf(5);
 	
 	protected abstract IterableOrIterator[] testData(Integer... elements);
+	protected abstract IterableOrIterator[] nullableTestData(Integer... elements);
 	protected abstract IterableOrIterator dummy();
 	protected abstract boolean is(IterableOrIterator input, Integer... elements);
 
@@ -293,7 +294,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	}
 	
 	@Test public void testLast_entryIsNull() {
-		for(IterableOrIterator testMe: testData((Integer)null)) {
+		for(IterableOrIterator testMe: nullableTestData((Integer)null)) {
 			Integer last = last(testMe);
 			assertEquals(null, last);
 		}
@@ -332,7 +333,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	}
 	
 	@Test public void testHead_entryIsNull() {
-		for(IterableOrIterator testMe: testData((Integer)null)) {
+		for(IterableOrIterator testMe: nullableTestData((Integer)null)) {
 			Integer head = head(testMe);
 			assertEquals(null, head);
 		}
@@ -401,7 +402,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	}
 	
 	@Test public void testForEachWithIndex_entryIsNull() {
-		for(IterableOrIterator testMe: testData((Integer)null)) {
+		for(IterableOrIterator testMe: nullableTestData((Integer)null)) {
 			ForEachLoopCounter counter = new ForEachLoopCounter((Integer)null);
 			forEach(testMe, counter);
 			assertEquals(1, counter.expectedIndex);

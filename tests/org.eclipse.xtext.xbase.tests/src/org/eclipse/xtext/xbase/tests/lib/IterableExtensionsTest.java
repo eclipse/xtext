@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -37,6 +37,18 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 			Lists.newLinkedList(Lists.newArrayList(elements)),
 			Sets.newLinkedHashSet(Lists.newArrayList(elements)),
 			Sets.newTreeSet(Lists.newArrayList(elements))
+		};
+		return result;
+	}
+	
+	@Override
+	protected Iterable<Integer>[] nullableTestData(Integer... elements) {
+		@SuppressWarnings("unchecked")
+		Iterable<Integer>[] result = new Iterable[] {
+			Lists.newArrayList(elements),
+			Lists.newLinkedList(Lists.newArrayList(elements)),
+			Sets.newLinkedHashSet(Lists.newArrayList(elements)),
+//			Sets.newTreeSet(Lists.newArrayList(elements)) null is not allowed
 		};
 		return result;
 	}

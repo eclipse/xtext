@@ -42,6 +42,12 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 	protected Iterator<Integer>[] testData(Integer... elements) {
 		return new Iterator[] { Iterators.forArray(elements) };
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Iterator<Integer>[] nullableTestData(Integer... elements) {
+		return new Iterator[] { Iterators.forArray(elements) };
+	}
 
 	@Override
 	protected Iterator<Integer> dummy() {
