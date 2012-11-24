@@ -119,8 +119,7 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 				}
 				Iterable<JvmFeature> remainingFeatures;
 				if (getCurrentMode() == SHOW_INHERITED_MODE) {
-					remainingFeatures = filter(
-							featureOverridesService.getAllJvmFeatures(typeReferences.createTypeRef(inferredType)),
+					remainingFeatures = filter(inferredType.getAllFeatures(),
 							new Predicate<JvmMember>() {
 								public boolean apply(JvmMember input) {
 									return visibilityService.isVisible(input, inferredType);
