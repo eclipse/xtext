@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
@@ -159,7 +160,7 @@ public class FeatureOverridesService {
 	}
 
 	protected boolean isNameEqual(JvmFeature overriding, JvmFeature overridden) {
-		return overriding.getSimpleName().equals(overridden.getSimpleName());
+		return Objects.equal(overriding.getSimpleName(), overridden.getSimpleName());
 	}
 
 	protected boolean hasSameTypeParameters(JvmOperation overriding, JvmOperation overridden, final ITypeArgumentContext context){
