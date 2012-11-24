@@ -75,11 +75,12 @@ public class XtendOverridesService {
 	
 	protected Iterable<JvmOperation> allSuperOperations(final JvmDeclaredType type) {
 		Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(type);
-		superTypes.add(typeReferences.getTypeForName(Object.class, type));
+		if (superTypes.isEmpty())
+			superTypes.add(typeReferences.getTypeForName(Object.class, type));
 		Iterable<JvmOperation> result = filter(concat(transform(
 			superTypes, new Function<JvmTypeReference, Iterable<JvmFeature>>() {
 				public Iterable<JvmFeature> apply(JvmTypeReference from) {
-					return featureOverridesService.getAllJvmFeatures(from);
+					return ((JvmDeclaredType)from.getType()).getAllFeatures();
 				}
 			})), JvmOperation.class);
 		return result;
