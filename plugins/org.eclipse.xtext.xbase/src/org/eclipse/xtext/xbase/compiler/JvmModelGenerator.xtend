@@ -439,11 +439,15 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateParameters(JvmExecutable it, ITreeAppendable appendable) {
-		appendable.forEach(parameters, [
-				separator = ', '
-			], [
-				p | p.generateParameter(appendable, varArgs)
-			])
+		if (!parameters.isEmpty) {
+			for (i : 0 .. parameters.size - 1) {
+				val last = i + 1 == parameters.size
+				val p = parameters.get(i)
+				p.generateParameter(appendable, last && it.varArgs)
+				if (!last)
+					appendable.append(", ")
+			}
+		}
 	}
 	
 	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable, boolean vararg) {
