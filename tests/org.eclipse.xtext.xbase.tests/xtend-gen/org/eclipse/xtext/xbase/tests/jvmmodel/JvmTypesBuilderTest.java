@@ -14,15 +14,14 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -107,9 +108,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<String> _values_1 = ((JvmStringAnnotationValue) _head_2).getValues();
-      String _head_3 = IterableExtensions.<String>head(_values_1);
-      Assert.assertEquals("Foo", _head_3);
+      EList<Object> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
+      Object _head_3 = IterableExtensions.<Object>head(_values_1);
+      Assert.assertTrue((_head_3 instanceof XStringLiteral));
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -136,9 +137,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<String> _values_1 = ((JvmStringAnnotationValue) _head_2).getValues();
-      String _head_3 = IterableExtensions.<String>head(_values_1);
-      Assert.assertEquals("Foo", _head_3);
+      EList<Object> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
+      Object _head_3 = IterableExtensions.<Object>head(_values_1);
+      Assert.assertTrue((_head_3 instanceof XStringLiteral));
       EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
       JvmAnnotationReference _head_4 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
       EList<JvmAnnotationValue> _values_2 = _head_4.getValues();
@@ -214,10 +215,10 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_3 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
       EList<JvmAnnotationValue> _values_1 = _head_3.getValues();
       JvmAnnotationValue _head_4 = IterableExtensions.<JvmAnnotationValue>head(_values_1);
-      final JvmIntAnnotationValue value = ((JvmIntAnnotationValue) _head_4);
-      EList<Integer> _values_2 = value.getValues();
-      Integer _head_5 = IterableExtensions.<Integer>head(_values_2);
-      Assert.assertEquals(10, (_head_5).intValue());
+      final JvmCustomAnnotationValue value = ((JvmCustomAnnotationValue) _head_4);
+      EList<Object> _values_2 = value.getValues();
+      Object _head_5 = IterableExtensions.<Object>head(_values_2);
+      Assert.assertTrue((_head_5 instanceof XNumberLiteral));
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -250,16 +251,16 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
       EList<JvmAnnotationValue> _values_2 = _head_1.getValues();
       JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values_2);
-      EList<String> _values_3 = ((JvmStringAnnotationValue) _head_2).getValues();
-      String _head_3 = IterableExtensions.<String>head(_values_3);
-      Assert.assertEquals("Foo", _head_3);
+      EList<Object> _values_3 = ((JvmCustomAnnotationValue) _head_2).getValues();
+      Object _head_3 = IterableExtensions.<Object>head(_values_3);
+      Assert.assertTrue((_head_3 instanceof XStringLiteral));
       EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
       JvmAnnotationReference _head_4 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
       EList<JvmAnnotationValue> _values_4 = _head_4.getValues();
       JvmAnnotationValue _head_5 = IterableExtensions.<JvmAnnotationValue>head(_values_4);
-      EList<String> _values_5 = ((JvmStringAnnotationValue) _head_5).getValues();
-      String _get = _values_5.get(1);
-      Assert.assertEquals("Bar", _get);
+      EList<Object> _values_5 = ((JvmCustomAnnotationValue) _head_5).getValues();
+      Object _get = _values_5.get(1);
+      Assert.assertTrue((_get instanceof XStringLiteral));
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

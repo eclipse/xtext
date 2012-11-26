@@ -2,7 +2,7 @@ package org.eclipse.xtext.example.domainmodel.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
+import org.eclipse.xtext.example.domainmodel.tests.InjectorProviderCustom;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = DomainmodelInjectorProvider.class)
+@InjectWith(value = InjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class CompilerTest {
   @Inject

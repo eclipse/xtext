@@ -1004,7 +1004,7 @@ public abstract class AbstractDomainmodelSemanticSequencer extends XbaseSemantic
 	
 	/**
 	 * Constraint:
-	 *     (name=ValidID (params+=FullJvmFormalParameter params+=FullJvmFormalParameter*)? type=JvmTypeReference body=XBlockExpression)
+	 *     (name=ValidID (params+=FullJvmFormalParameter params+=FullJvmFormalParameter*)? type=JvmTypeReference? body=XBlockExpression)
 	 */
 	protected void sequence_Operation(EObject context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

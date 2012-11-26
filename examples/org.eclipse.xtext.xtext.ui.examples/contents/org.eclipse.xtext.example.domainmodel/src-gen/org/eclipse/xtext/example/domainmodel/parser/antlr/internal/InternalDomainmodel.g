@@ -540,14 +540,14 @@ ruleOperation returns [EObject current=null]
     {
     	newLeafNode(otherlv_6, grammarAccess.getOperationAccess().getRightParenthesisKeyword_4());
     }
-	otherlv_7=':' 
+(	otherlv_7=':' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getOperationAccess().getColonKeyword_5());
+    	newLeafNode(otherlv_7, grammarAccess.getOperationAccess().getColonKeyword_5_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getTypeJvmTypeReferenceParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getOperationAccess().getTypeJvmTypeReferenceParserRuleCall_5_1_0()); 
 	    }
 		lv_type_8_0=ruleJvmTypeReference		{
 	        if ($current==null) {
@@ -562,10 +562,10 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)(
+))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getBodyXBlockExpressionParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getOperationAccess().getBodyXBlockExpressionParserRuleCall_6_0()); 
 	    }
 		lv_body_9_0=ruleXBlockExpression		{
 	        if ($current==null) {

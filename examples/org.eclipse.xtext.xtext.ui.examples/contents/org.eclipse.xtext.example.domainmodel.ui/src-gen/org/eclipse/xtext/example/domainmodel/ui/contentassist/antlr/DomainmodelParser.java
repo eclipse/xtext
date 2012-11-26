@@ -79,6 +79,7 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getGroup(), "rule__Operation__Group__0");
 					put(grammarAccess.getOperationAccess().getGroup_3(), "rule__Operation__Group_3__0");
 					put(grammarAccess.getOperationAccess().getGroup_3_1(), "rule__Operation__Group_3_1__0");
+					put(grammarAccess.getOperationAccess().getGroup_5(), "rule__Operation__Group_5__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup_1(), "rule__QualifiedNameWithWildCard__Group_1__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
@@ -236,8 +237,8 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getNameAssignment_1(), "rule__Operation__NameAssignment_1");
 					put(grammarAccess.getOperationAccess().getParamsAssignment_3_0(), "rule__Operation__ParamsAssignment_3_0");
 					put(grammarAccess.getOperationAccess().getParamsAssignment_3_1_1(), "rule__Operation__ParamsAssignment_3_1_1");
-					put(grammarAccess.getOperationAccess().getTypeAssignment_6(), "rule__Operation__TypeAssignment_6");
-					put(grammarAccess.getOperationAccess().getBodyAssignment_7(), "rule__Operation__BodyAssignment_7");
+					put(grammarAccess.getOperationAccess().getTypeAssignment_5_1(), "rule__Operation__TypeAssignment_5_1");
+					put(grammarAccess.getOperationAccess().getBodyAssignment_6(), "rule__Operation__BodyAssignment_6");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 					put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

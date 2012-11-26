@@ -1,6 +1,5 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -46,7 +46,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
           DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
           JvmParameterizedTypeReference _superType = entity.getSuperType();
-          boolean _notEquals = (!Objects.equal(_superType, null));
+          boolean _notEquals = ObjectExtensions.operator_notEquals(_superType, null);
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
             JvmParameterizedTypeReference _superType_1 = entity.getSuperType();
@@ -111,6 +111,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 EList<JvmMember> _members_2 = it.getMembers();
                 String _name = _operation.getName();
                 JvmTypeReference _type = _operation.getType();
+                JvmTypeReference _inferredType = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.inferredType();
+                JvmTypeReference _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _inferredType);
                 final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
                     public void apply(final JvmOperation it) {
                       String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_operation);
@@ -127,7 +129,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                       DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
                     }
                   };
-                JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toMethod(_operation, _name, _type, _function_2);
+                JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toMethod(_operation, _name, _elvis, _function_2);
                 DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method);
               }
             }

@@ -247,19 +247,20 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cParamsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cParamsFullJvmFormalParameterParserRuleCall_3_1_1_0 = (RuleCall)cParamsAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_6_0 = (RuleCall)cTypeAssignment_6.eContents().get(0);
-		private final Assignment cBodyAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cBodyXBlockExpressionParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cTypeAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_5_1_0 = (RuleCall)cTypeAssignment_5_1.eContents().get(0);
+		private final Assignment cBodyAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cBodyXBlockExpressionParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
 		
 		//Operation:
-		//	"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" ":"
-		//	type=JvmTypeReference body=XBlockExpression;
+		//	"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" (":"
+		//	type=JvmTypeReference)? body=XBlockExpression;
 		public ParserRule getRule() { return rule; }
 
-		//"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" ":"
-		//type=JvmTypeReference body=XBlockExpression
+		//"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" (":"
+		//type=JvmTypeReference)? body=XBlockExpression
 		public Group getGroup() { return cGroup; }
 
 		//"op"
@@ -298,20 +299,23 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
+		//(":" type=JvmTypeReference)?
+		public Group getGroup_5() { return cGroup_5; }
+
 		//":"
-		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
+		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
 
 		//type=JvmTypeReference
-		public Assignment getTypeAssignment_6() { return cTypeAssignment_6; }
+		public Assignment getTypeAssignment_5_1() { return cTypeAssignment_5_1; }
 
 		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_6_0() { return cTypeJvmTypeReferenceParserRuleCall_6_0; }
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_5_1_0() { return cTypeJvmTypeReferenceParserRuleCall_5_1_0; }
 
 		//body=XBlockExpression
-		public Assignment getBodyAssignment_7() { return cBodyAssignment_7; }
+		public Assignment getBodyAssignment_6() { return cBodyAssignment_6; }
 
 		//XBlockExpression
-		public RuleCall getBodyXBlockExpressionParserRuleCall_7_0() { return cBodyXBlockExpressionParserRuleCall_7_0; }
+		public RuleCall getBodyXBlockExpressionParserRuleCall_6_0() { return cBodyXBlockExpressionParserRuleCall_6_0; }
 	}
 
 	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
@@ -462,8 +466,8 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Operation:
-	//	"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" ":"
-	//	type=JvmTypeReference body=XBlockExpression;
+	//	"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" (":"
+	//	type=JvmTypeReference)? body=XBlockExpression;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
