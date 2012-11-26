@@ -11,22 +11,26 @@ package org.eclipse.xtext.validation;
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.4
  */
-public class IssueCode {
+public class ConfigurableIssueCode extends IssueCode {
 
-	private final String code;
+	public final static String SEVERITY_WARNING = "warning";
+	public final static String SEVERITY_IGNORE = "ignore";
 
-	public final static String SEVERITY_ERROR = "error";
+	private final String defaultSeverity;
 
-	public IssueCode(String code) {
-		this.code = code;
+	public ConfigurableIssueCode(String code, String defaultSeverity) {
+		super(code);
+		this.defaultSeverity = defaultSeverity;
 	}
 
-	public String getCode() {
-		return code;
+	public static ConfigurableIssueCode create(String code, String defaultSeverity) {
+		ConfigurableIssueCode iCode = new ConfigurableIssueCode(code, defaultSeverity);
+		return iCode;
 	}
 
+	@Override
 	public String getDefaultSeverity() {
-		return SEVERITY_ERROR;
+		return defaultSeverity;
 	}
 
 }
