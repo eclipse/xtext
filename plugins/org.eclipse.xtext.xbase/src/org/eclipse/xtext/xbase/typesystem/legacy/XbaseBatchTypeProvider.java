@@ -73,7 +73,10 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getType(XExpression expression, boolean rawType) {
-		return getResolvedTypes(expression).getActualType(expression).toTypeReference();
+		LightweightTypeReference actualType = getResolvedTypes(expression).getActualType(expression);
+		if (actualType == null)
+			return null;
+		return actualType.toTypeReference();
 	}
 
 	@Override
@@ -100,7 +103,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	public ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
 			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
 			JvmIdentifiableElement feature) {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override

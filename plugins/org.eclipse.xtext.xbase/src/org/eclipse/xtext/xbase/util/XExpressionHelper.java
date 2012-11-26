@@ -115,7 +115,7 @@ public class XExpressionHelper {
 			return true;
 		}
 		final JvmIdentifiableElement feature = featureCall.getFeature();
-		if (feature.eIsProxy())
+		if (feature == null || feature.eIsProxy())
 			return true; // linking problems ... could be anything
 		if (feature instanceof JvmConstructor) { //super() and this()
 			return true;

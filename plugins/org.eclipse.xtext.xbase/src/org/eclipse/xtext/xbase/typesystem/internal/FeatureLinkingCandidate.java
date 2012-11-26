@@ -213,16 +213,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	protected void resolveArgumentType(XExpression argument, @Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		if (argument == getSyntacticReceiver()) {
 			LightweightTypeReference receiverType = getSyntacticReceiverType();
-			if (receiverType == null) {
-				throw new IllegalStateException("Cannot determine the receiver's type");
+			if (receiverType != null) {
+				resolveKnownArgumentType(argument, receiverType, declaredType, argumentState);
 			}
-			resolveKnownArgumentType(argument, receiverType, declaredType, argumentState);
 		} else if (argument == description.getImplicitFirstArgument()) {
 			LightweightTypeReference argumentType = getImplicitFirstArgumentType();
-			if (argumentType == null) {
-				throw new IllegalStateException("Cannot determine the implicit argument's type");
+			if (argumentType != null) {
+				resolveKnownArgumentType(argument, argumentType, declaredType, argumentState);
 			}
-			resolveKnownArgumentType(argument, argumentType, declaredType, argumentState);
 		} else {
 			super.resolveArgumentType(argument, declaredType, argumentState);
 		}
