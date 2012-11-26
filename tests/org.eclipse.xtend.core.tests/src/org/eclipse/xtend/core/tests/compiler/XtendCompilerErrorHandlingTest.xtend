@@ -11,7 +11,6 @@ import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Test
-import java.util.regex.Pattern
 
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
@@ -32,7 +31,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo /* implements Unresolved  */{
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -44,7 +43,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo /* implements Unresolved  */{
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -56,7 +55,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo implements Cloneable/* , Unresolved */ {
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -68,7 +67,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo implements /* Unresolved */Cloneable {
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -81,7 +80,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			/* @Unresolved */@SuppressWarnings("all")
 			public class Foo {
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -97,7 +96,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo {
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -111,7 +110,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			public class Foo {
 			  private /* Unresolved */Object bar;
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -125,11 +124,12 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		'''.assertCompilesTo( '''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public /* Unresolved */Object bar() {/* 
-			    return null; */throw new Error("Unresolved compilation problem");
+			  public /* Unresolved */Object bar() {
+			    throw new Error("Unresolved compilation problems"
+			      + "Incompatible implicit return type. Expected void but was null");
 			  }
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -145,7 +145,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			  public void bar(final /* Unresolved */Object p) {
 			  }
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -161,7 +161,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			  public void bar()/*  throws Unresolved */ {
 			  }
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -177,7 +177,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			  public void bar() throws /* Unresolved */RuntimeException {
 			  }
 			}
-		''', false)
+		''')
 	}
 		
 	@Test
@@ -193,8 +193,19 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			  public void bar() throws RuntimeException/* , Unresolved */ {
 			  }
 			}
-		''', false)
+		''')
 	}	
+
+	@Test
+	def testUnresolvedTypeConstraint() {
+		'''
+			class Foo <T extends Unresolved> {}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo<T/*  extends Unresolved */> {
+			}
+		''')
+	}
 	
 	@Test
 	def testFieldInitializerTypeError() {
@@ -205,9 +216,9 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		'''.assertCompilesTo( '''
 			@SuppressWarnings("all")
 			public class Foo {
-			  private final int bar;
+			  private final int bar /* Skipped initializer because of errors */;
 			}
-		''', true)
+		''')
 	}
 
 	@Test
@@ -217,13 +228,11 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 				val bar = foo()
 			}
 		'''.assertCompilesTo( '''
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-
 			@SuppressWarnings("all")
 			public class Foo {
-			  private final Object bar;
+			  private final /* type is 'null' */ bar /* Skipped initializer because of errors */;
 			}
-		''', true)
+		''')
 	}
 
 	@Test
@@ -237,10 +246,12 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		'''.assertCompilesTo( '''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public int bar() {throw new Error("Unresolved compilation problem");
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems"
+			      + "Incompatible implicit return type. Expected int or java.lang.Integer but was null");
 			  }
 			}
-		''', true)
+		''')
 	}
 	
 	@Test
@@ -254,14 +265,17 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		'''.assertCompilesTo( '''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public int bar() {throw new Error("Unresolved compilation problem");
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems"
+			      + "The method or field foo is undefined for the type Foo"
+			      + "Incompatible implicit return type. Expected int or java.lang.Integer but was void");
 			  }
 			}
-		''', true)
+		''')
 	}
 		
 	
-	def assertCompilesTo(CharSequence input, CharSequence expected, boolean skipComments) {
+	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), false)
 		val resource = file.eResource
 		cache.get(typeof(IElementIssueProvider).name, file.eResource, [|
@@ -270,11 +284,6 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		])
 		val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
 		val javaCode = generator.generateType(inferredType);
-		if(skipComments) {
-			val pattern = Pattern::compile('/\\*.*?\\*/', Pattern::DOTALL)
-			assertEquals(expected.toString, pattern.matcher(javaCode.toString).replaceAll(''))
-		} else {
-			assertEquals(expected.toString, javaCode.toString)
-		}
+		assertEquals(expected.toString, javaCode.toString)
 	}
 }
