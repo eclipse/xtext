@@ -12,19 +12,22 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
-import org.eclipse.xtext.validation.IssueCodes;
+import org.eclipse.xtext.validation.ConfigurableIssueCode;
+import org.eclipse.xtext.validation.IssueCode;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.eclipse.xtext.xbase.validation.XbaseIssueCode;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigurationBlock {
 
 	protected XtendValidatorConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			IWorkbenchPreferenceContainer container, IssueCodes issueCodes) {
-		super(project, preferenceStore, container, issueCodes);
+			IWorkbenchPreferenceContainer container) {
+		super(project, preferenceStore, container);
 	}
 
 	public static class Factory {
@@ -32,19 +35,28 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 		private MembersInjector<XtendValidatorConfigurationBlock> injector;
 
 		public XtendValidatorConfigurationBlock createValidatorConfigurationBlock(IProject project,
-				IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container, IssueCodes issueCodes) {
+				IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container) {
 			XtendValidatorConfigurationBlock configurationBlock = new XtendValidatorConfigurationBlock(project,
-					preferenceStore, container, issueCodes);
+					preferenceStore, container);
 			injector.injectMembers(configurationBlock);
 			return configurationBlock;
 		}
 	}
 
 	@Override
-	protected void fillSettingsPage(IssueCodes issueCodes, Composite composite, int nColumns, int defaultIndent) {
-
+	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 		Composite inner = createSection("Deprecated and restricted API", composite, nColumns);
-//		addComboBox(issueCodes.forbiddenReference, "Forbidden reference:", inner, defaultIndent);
+		String[] values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
+				ConfigurableIssueCode.SEVERITY_IGNORE };
+		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
+		if (IssueCodes.IC_FORBIDDEN_REFERENCE.hasJavaEqivalent()) {
+			values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
+					ConfigurableIssueCode.SEVERITY_IGNORE, XbaseIssueCode.SEVERITY_JAVA };
+			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
+		}
+
+		addComboBox(IssueCodes.IC_FORBIDDEN_REFERENCE, "Forbidden reference:", inner, defaultIndent, values,
+				valueLabels);
 
 	}
 
