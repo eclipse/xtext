@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.typing;
 
 import static com.google.common.collect.Iterables.*;
+import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Set;
@@ -80,6 +81,8 @@ public class XtendOverridesService {
 		Iterable<JvmOperation> result = filter(concat(transform(
 			superTypes, new Function<JvmTypeReference, Iterable<JvmFeature>>() {
 				public Iterable<JvmFeature> apply(JvmTypeReference from) {
+					if (from == null || from.getType() == null)
+						return emptyList();
 					return ((JvmDeclaredType)from.getType()).getAllFeatures();
 				}
 			})), JvmOperation.class);
