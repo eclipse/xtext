@@ -63,6 +63,8 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import static org.eclipse.xtext.util.Strings.*
+import org.eclipse.xtext.validation.Issue
 
 /**
  * A generator implementation that processes the 
@@ -221,11 +223,12 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			val expression = associatedExpression
 			if (expression != null) {
-				appendable.appendSafely(expression, 
-					[ safeAppendable |
-						safeAppendable.append(" default ")
-						compiler.compileAsJavaExpression(expression, safeAppendable, returnType)
-					])
+				if(expression.hasErrors(true)) {
+					appendable.append("/* skipped default expression with errors */")
+				} else {
+					appendable.append(" default ")
+					compiler.compileAsJavaExpression(expression, appendable, returnType)
+				}
 			}
 		}
 	}
@@ -289,11 +292,16 @@ class JvmModelGenerator implements IGenerator {
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).isInterface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
 			if (superClazz != null) {
-				appendable.appendSafely(superClazz, [ app |
-					app.append('extends ')
-					superClazz.serializeSafely(app)
-					app.append(' ')
-				])
+				val hasErrors = superClazz.hasErrors(true)
+				if(hasErrors) 
+					appendable.append('/* ')
+				try {
+					appendable.append('extends ')
+					superClazz.serializeSafely(appendable)
+					appendable.append(' ')
+				} catch (Exception ignoreMe) {}
+				if(hasErrors) 
+					appendable.append(' */')
 			} 
 			appendable.forEachSafely(superInterfaces, [
 					prefix = 'implements ' separator = ', ' suffix = ' '
@@ -384,20 +392,21 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			val expression = associatedExpression
 			if (expression != null) {
-				appendable.appendSafely(expression, 
-					[ safeAppendable |
-						safeAppendable.append(" = ")
-						compiler.compileAsJavaExpression(expression, safeAppendable, type)
-					])
+				if(expression.hasErrors(true)) {
+					appendable.append(" /* Skipped initializer because of errors */")
+				} else {
+					appendable.append(" = ")
+					compiler.compileAsJavaExpression(expression, appendable, type)
+				}
 			}
 		}
 	}
 		
 	def void generateTypeParameterDeclaration(JvmTypeParameterDeclarator it, ITreeAppendable appendable) {
-		appendable.forEachSafely(typeParameters, [
+		appendable.forEach(typeParameters, [
 				prefix = '<' separator = ', ' suffix = '> '
 			], [
-				it, app | generateTypeParameterDeclaration(it, app)
+				it| generateTypeParameterDeclaration(appendable)
 			])
 	}
 	
@@ -409,10 +418,10 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateTypeParameterConstraints(JvmTypeParameter it, ITreeAppendable appendable) {
 		val upperBounds = constraints.filter(typeof(JvmUpperBound))
-		appendable.forEach(upperBounds, [
+		appendable.forEachSafely(upperBounds, [
 				prefix = ' extends ' separator = ' & '
 			], [
-				it | typeReference.serializeSafely(appendable)
+				it, app | typeReference.serializeSafely(app)
 			])
 	}
 	
@@ -454,32 +463,39 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
-		val surrogateCode = 'throw new Error("Unresolved compilation problem");'
 		if (op.compilationStrategy != null) {
-			appendable.increaseIndentation.append("{").newLine
-			appendable.appendSafely(op, surrogateCode, [op.compilationStrategy.apply(it)])
-			appendable.decreaseIndentation.newLine.append("}")
+			val errors = op.getErrors(true)
+			if(errors.empty) {
+				appendable.increaseIndentation.append("{").newLine
+				op.compilationStrategy.apply(appendable)
+				appendable.decreaseIndentation.newLine.append("}")
+			} else {
+				generateBodyWithIssues(appendable, errors)
+			}
 		} else {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
-				val returnType = switch(op) { 
-					JvmOperation: op.returnType
-					JvmConstructor: Void::TYPE.getTypeForName(op) 
-					default: null
-				}
-				if (expression instanceof XBlockExpression && (expression as XBlockExpression).expressions.size != 1 && returnType instanceof JvmVoid) {
-					val block = expression as XBlockExpression
-					if (block.expressions.isEmpty()) {
-						appendable.append("{}")		
+				val errors = expression.getErrors(true)
+				if(errors.empty) {
+					val returnType = switch(op) { 
+						JvmOperation: op.returnType
+						JvmConstructor: Void::TYPE.getTypeForName(op) 
+						default: null
+					}
+					if (expression instanceof XBlockExpression && (expression as XBlockExpression).expressions.size != 1 && returnType instanceof JvmVoid) {
+						val block = expression as XBlockExpression
+						if (block.expressions.isEmpty()) {
+							appendable.append("{}")		
+						} else {
+							compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+						}
 					} else {
-						appendable.appendSafely(expression, surrogateCode,
-							[compiler.compile(expression, it, returnType, op.exceptions.toSet)])
+						appendable.append("{").increaseIndentation
+						compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+						appendable.decreaseIndentation.newLine.append("}")
 					}
 				} else {
-					appendable.append("{").increaseIndentation
-					appendable.appendSafely(expression, surrogateCode,
-						[compiler.compile(expression, it, returnType, op.exceptions.toSet)])
-					appendable.decreaseIndentation.newLine.append("}")
+					generateBodyWithIssues(appendable, errors)	
 				}
 			} else if(op instanceof JvmOperation) {
 				appendable.increaseIndentation.append("{").newLine
@@ -491,6 +507,15 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append("{").newLine.append("}")
 			}
 		}
+	}
+
+	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {
+		appendable.append('{').increaseIndentation.newLine
+			.append('throw new Error("Unresolved compilation problems"')
+		appendable.increaseIndentation
+		errors.forEach[appendable.newLine.append('+ "').append(convertToJavaString(message)).append('"')]
+		appendable.append(');').decreaseIndentation.decreaseIndentation.newLine
+		    .append('}')
 	}
 	
 	

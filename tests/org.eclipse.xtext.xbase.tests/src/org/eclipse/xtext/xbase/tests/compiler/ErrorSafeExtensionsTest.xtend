@@ -35,32 +35,6 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	@Inject extension ErrorSafeExtensions 
 
 	@Test
-	def testAppendSafely_NoError() {
-		val e = validatedExpression('42')
-		val app = createTreeAppendable(e)
-		app.appendSafely(e, [app.append('fine')])
-		assertEquals('fine', app.content)
-	}
-	
-	@Test
-	def testAppendSafely_Error() {
-		val e = validatedExpression('new Foo()')
-		val app = createTreeAppendable(e)
-		assertTrue(e.hasErrors(true))
-		app.appendSafely(e, [append('error')])
-		assertEquals('/* error */', app.content)
-	}
-	
-	@Test
-	def testAppendSafely_ErrorWithSurrogate() {
-		val e = validatedExpression('new Foo()')
-		assertTrue(e.hasErrors(true))
-		val app = createTreeAppendable(e)
-		app.appendSafely(e, 'surrogate', [append('error')])
-		assertEquals('/* error */surrogate', app.content)
-	}
-	
-	@Test
 	def testAppendForEachSafely() {
 		val e = validatedExpression('{ val x=42 val y=42 }') as XBlockExpression
 		val app = createTreeAppendable(e)

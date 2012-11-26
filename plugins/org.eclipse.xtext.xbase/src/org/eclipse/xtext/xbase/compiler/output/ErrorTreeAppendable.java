@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
-import static org.eclipse.xtext.util.Strings.*;
-
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
@@ -24,8 +21,7 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 /**
- * A tree appendable for erroneous code. The output is commented out in a multi-line comment
- * in order to avoid broken Java code.
+ * A tree appendable capable of serializing broken type references.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -45,7 +41,7 @@ public class ErrorTreeAppendable extends TreeAppendable {
 		this.context = context;
 		encoder = new LazyURIEncoder();
 	}
-
+	
 	@Override
 	public TreeAppendable append(JvmType type) {
 		if(type.eIsProxy()) {
@@ -63,20 +59,7 @@ public class ErrorTreeAppendable extends TreeAppendable {
 		}
 		return super.append(type);
 	}
-	
-	@Override
-	protected void doGetContent(@NonNull StringBuilder result) {
-		StringBuilder temp = new StringBuilder();
-		super.doGetContent(temp);
-		String content = temp.toString();
-		if(!isEmpty(content.trim())) {
-			result
-				.append("/* ")
-				.append(content)
-				.append(" */");
-		}
-	}
-	
+		
 	@Override
 	protected TreeAppendable createChild(SharedAppendableState state, ILocationInFileProvider locationProvider, 
 			IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {

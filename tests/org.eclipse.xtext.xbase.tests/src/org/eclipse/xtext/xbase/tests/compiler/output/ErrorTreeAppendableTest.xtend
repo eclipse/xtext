@@ -19,14 +19,6 @@ class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 	@Inject IJvmModelAssociations jvmModelAssociations
 	
 	@Test
-	def testCommentContent() {
-		val e = expression('42')
-		val app = e.createErrorTreeAppendable
-		app.append('42').newLine.append('foo')
-		assertEquals('/* 42<newline>foo */', app.content)
-	}
-
-	@Test
 	def testTraceChildIsSelf() {
 		val e = expression('42')
 		val app = e.createErrorTreeAppendable
@@ -40,7 +32,7 @@ class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 		val e = expression('typeof(  \tUnresolved\n)') as XTypeLiteral
 		val app = e.createErrorTreeAppendable
 		app.append(e.type)
-		assertEquals('/* Unresolved */', app.content)
+		assertEquals('Unresolved', app.content)
 	}
 	
 	def createErrorTreeAppendable(EObject source) {
