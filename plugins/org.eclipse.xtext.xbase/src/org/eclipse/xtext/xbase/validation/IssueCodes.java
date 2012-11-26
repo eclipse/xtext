@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase.validation;
 
 import java.util.List;
 
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.validation.IssueCode;
+
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -64,8 +67,10 @@ public class IssueCodes {
 	public static final String INVALID_TYPE = ISSUE_CODE_PREFIX + "invalid_type";
 	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX + "discouraged_reference";
-	
-	
+
+	public static final XbaseIssueCode IC_FORBIDDEN_REFERENCE = XbaseIssueCode.create(ISSUE_CODE_PREFIX + "forbidden_reference",
+			IssueCode.SEVERITY_ERROR, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
 	private static final List<String> sortedIssueCodes = ImmutableList.of(

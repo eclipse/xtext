@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.validation;
 
-import java.util.Collection;
-import java.util.Set;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -25,10 +22,7 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 import org.eclipse.xtext.ui.util.PixelConverter;
-import org.eclipse.xtext.validation.IssueCode;
-import org.eclipse.xtext.validation.IssueCodes;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -39,26 +33,14 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	@Inject
 	private IDialogSettings section;
 	private PixelConverter fPixelConverter;
-	private IssueCodes issueCodes;
-
 
 	protected AbstractValidatorConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			IWorkbenchPreferenceContainer container, IssueCodes issueCodes) {
-		super(project, getKeys(project, issueCodes), preferenceStore, container);
-		this.issueCodes = issueCodes;
-	}
-
-	private static String[] getKeys(IProject project, IssueCodes issueCodes) {
-		Set<String> keys = Sets.newHashSet();
-		Collection<IssueCode> coll = issueCodes.getIssueCodes();
-		for (IssueCode issueCode : coll) {
-			keys.add(issueCode.getCode());
-		}
-		return keys.toArray(new String[] {});
+			IWorkbenchPreferenceContainer container) {
+		super(project, preferenceStore, container);
 	}
 
 	@Override
-	public Control createContents(Composite parent) {
+	public Control doCreateContents(Composite parent) {
 		fPixelConverter = new PixelConverter(parent);
 		setShell(parent.getShell());
 
@@ -98,17 +80,16 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 
 		int defaultIndent = indentStep * 0;
 		//		int extraIndent = indentStep * 2;
-		fillSettingsPage(issueCodes, composite, nColumns, defaultIndent);
-
+		
+		fillSettingsPage(composite, nColumns, defaultIndent);
 		new Label(composite, SWT.NONE);
-
 		restoreSectionExpansionStates(section);
 
 		return sc1;
 
 	}
 
-	protected abstract void fillSettingsPage(IssueCodes issueCodes, Composite composite, int nColumns, int defaultIndent);
+	protected abstract void fillSettingsPage(Composite composite, int nColumns, int defaultIndent);
 
 	protected Composite createSection(String label, Composite composite, int nColumns) {
 		ExpandableComposite excomposite = createStyleSection(composite, label, nColumns);

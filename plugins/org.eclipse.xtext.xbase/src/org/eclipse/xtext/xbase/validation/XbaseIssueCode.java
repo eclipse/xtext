@@ -7,34 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.validation.IssueCode;
+import org.eclipse.xtext.validation.ConfigurableIssueCode;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public class XbaseIssueCode extends IssueCode {
+public class XbaseIssueCode extends ConfigurableIssueCode {
 
-	private int javaId = -1;
+	public final static String SEVERITY_JAVA = "java";
 
-	public static XbaseIssueCode create(String code, Severity severity, int javaId) {
-		XbaseIssueCode issueCode = new XbaseIssueCode();
-		issueCode.setCode(code);
-		issueCode.setSeverity(severity);
+	private String javaId;
+
+	public XbaseIssueCode(String code, String defaultSeverity) {
+		super(code, defaultSeverity);
+	}
+
+	public static XbaseIssueCode create(String code, String defaultSeverity, String javaId) {
+		XbaseIssueCode issueCode = new XbaseIssueCode(code, defaultSeverity);
 		issueCode.setJavaId(javaId);
 		return issueCode;
 	}
 
-	public void setJavaId(int javaId) {
+	public void setJavaId(String javaId) {
 		this.javaId = javaId;
 	}
 
-	@Override
 	public boolean hasJavaEqivalent() {
-		return javaId >= 0;
+		return javaId != null;
 	}
 
-	public int getJavaId() {
+	public String getJavaId() {
 		return javaId;
 	}
 }

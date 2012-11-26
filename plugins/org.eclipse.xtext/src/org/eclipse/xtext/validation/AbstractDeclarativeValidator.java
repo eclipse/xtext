@@ -399,36 +399,46 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			String... issueData) {
 		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
-	protected void notification(IssueCode issueCode, String message, EObject source,
-			EStructuralFeature feature, int index, String... issueData) {
-		switch (issueCode.getSeverity()) {
+	protected void notification(IssueCode issueCode, String message, EObject source, EStructuralFeature feature,
+			int index, String... issueData) {
+		switch (translate(issueCode.getDefaultSeverity())) {
 			case WARNING:
-				getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(),
-						issueData);
+				getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(), issueData);
 				break;
 			case INFO:
-				getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(),
-						issueData);
+				getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(), issueData);
 				break;
 			case ERROR:
 			default:
-				getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(),
-						issueData);
+				getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(), issueData);
 				break;
 		}
 	}
-	
+
+	private Severity translate(String defaultSeverity) {
+		Severity retVal = Severity.ERROR;
+		if (IssueCode.SEVERITY_ERROR.equals(defaultSeverity)) {
+			retVal = Severity.ERROR;
+		} else if (ConfigurableIssueCode.SEVERITY_WARNING.equals(defaultSeverity)) {
+			retVal = Severity.WARNING;
+		} else if (ConfigurableIssueCode.SEVERITY_IGNORE.equals(defaultSeverity)) {
+			retVal = Severity.INFO;
+		}
+		return retVal;
+	}
+
 	/**
 	 * @since 2.4
 	 */
 	protected void notification(IssueCode issueCode, String message, EStructuralFeature feature) {
-		notification(issueCode, message, state.get().currentObject, feature,  ValidationMessageAcceptor.INSIGNIFICANT_INDEX, (String[]) null);
+		notification(issueCode, message, state.get().currentObject, feature,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, (String[]) null);
 	}
-	
+
 	protected void guard(boolean guardExpression) {
 		if (!guardExpression) {
 			throw guardException;
@@ -454,9 +464,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	 * @since 2.4
 	 */
 	protected void checkIsFromCurrentlyCheckedResource(EObject object) {
-		if (object != null 
-				&& this.state.get() != null 
-				&& this.state.get().currentObject != null
+		if (object != null && this.state.get() != null && this.state.get().currentObject != null
 				&& object.eResource() != this.state.get().currentObject.eResource()) {
 			URI uriGiven = null;
 			if (object.eResource() != null)

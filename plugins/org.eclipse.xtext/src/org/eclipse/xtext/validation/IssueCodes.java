@@ -19,14 +19,14 @@ import com.google.common.collect.Maps;
  */
 public class IssueCodes {
 
-	private Map<String, IssueCode> issueCodesMap;
+	private Map<String, ConfigurableIssueCode> issueCodesMap;
 
-	protected Map<String, IssueCode> collectKeys() {
-		Map<String, IssueCode> result = Maps.newLinkedHashMap();
+	protected Map<String, ConfigurableIssueCode> collectKeys() {
+		Map<String, ConfigurableIssueCode> result = Maps.newLinkedHashMap();
 		for (Field field : getClass().getFields()) {
-			if (IssueCode.class.isAssignableFrom(field.getType())) {
+			if (ConfigurableIssueCode.class.isAssignableFrom(field.getType())) {
 				try {
-					IssueCode key = (IssueCode) field.get(this);
+					ConfigurableIssueCode key = (ConfigurableIssueCode) field.get(this);
 					result.put(key.getCode(), key);
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
@@ -42,11 +42,11 @@ public class IssueCodes {
 		return issueCodesMap().get(code);
 	}
 
-	public Collection<IssueCode> getIssueCodes() {
+	public Collection<ConfigurableIssueCode> getIssueCodes() {
 		return issueCodesMap().values();
 	}
 
-	protected Map<String, IssueCode> issueCodesMap() {
+	protected Map<String, ConfigurableIssueCode> issueCodesMap() {
 		if (issueCodesMap == null)
 			issueCodesMap = collectKeys();
 		return issueCodesMap;
