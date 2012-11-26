@@ -24,12 +24,16 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -42,7 +46,6 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -79,6 +82,9 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
 
 	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
 		if (xtendFile.getPackage() != null)
@@ -117,18 +123,19 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 						}
 					}
 				}
-				Iterable<JvmFeature> remainingFeatures;
+				List<JvmMember> remainingFeatures = newArrayList();
+				remainingFeatures.addAll(inferredType.getMembers());
 				if (getCurrentMode() == SHOW_INHERITED_MODE) {
-					remainingFeatures = filter(inferredType.getAllFeatures(),
-							new Predicate<JvmMember>() {
-								public boolean apply(JvmMember input) {
-									return visibilityService.isVisible(input, inferredType);
-								}
-							});
-				} else {
-					remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
-				}
-				for (JvmFeature feature : remainingFeatures) {
+					Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(inferredType);
+					for (JvmTypeReference superType : superTypes) {
+						JvmDeclaredType type = (JvmDeclaredType) superType.getType();
+						for (JvmMember member : type.getMembers()) {
+							if (member.getVisibility() != JvmVisibility.PRIVATE)
+								remainingFeatures.add(member);
+						}
+					}
+				} 
+				for (JvmFeature feature : filter(remainingFeatures, JvmFeature.class)) {
 					if (!processedFeatures.contains(feature)) {
 						EObject primarySourceElement = associations.getPrimarySourceElement(feature);
 						createNodeForFeature(parentNode, inferredType, feature, 

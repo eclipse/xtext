@@ -71,11 +71,10 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	}
 	
 	@Test public void testConstructor() throws Exception {
-		newBuilder().append("class Foo extends Exception { new").assertText(
+		newBuilder().append("class Foo extends java.util.ArrayList<String> { new").assertText(
 				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}",
-				"\n" + indent + "\n" + indent + "new(String message) {\n"+ indent + indent + "super(message)\n" + indent + "}",
-				"\n" + indent + "\n" + indent + "new(String message, Throwable cause) {\n"+ indent + indent + "super(message, cause)\n" + indent + "}",
-				"\n" + indent + "\n" + indent + "new(Throwable cause) {\n"+ indent + indent + "super(cause)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(Collection<? extends String> c) {\n"+ indent + indent + "super(c)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(int initialCapacity) {\n"+ indent + indent + "super(initialCapacity)\n" + indent + "}",
 				"new"
 				);
 	}

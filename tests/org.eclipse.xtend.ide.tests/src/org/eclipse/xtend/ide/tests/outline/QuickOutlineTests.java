@@ -12,7 +12,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import java.util.List;
 
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtend.ide.tests.outline.AbstractOutlineTests.AssertBuilder;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
