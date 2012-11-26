@@ -55,52 +55,6 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   private ErrorSafeExtensions _errorSafeExtensions;
   
   @Test
-  public void testAppendSafely_NoError() {
-    final XExpression e = this.validatedExpression("42");
-    final TreeAppendable app = this.createTreeAppendable(e);
-    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-        public void apply(final ITreeAppendable it) {
-          app.append("fine");
-        }
-      };
-    this._errorSafeExtensions.appendSafely(app, e, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("fine", _content);
-  }
-  
-  @Test
-  public void testAppendSafely_Error() {
-    final XExpression e = this.validatedExpression("new Foo()");
-    final TreeAppendable app = this.createTreeAppendable(e);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(e, true);
-    Assert.assertTrue(_hasErrors);
-    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-        public void apply(final ITreeAppendable it) {
-          it.append("error");
-        }
-      };
-    this._errorSafeExtensions.appendSafely(app, e, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("/* error */", _content);
-  }
-  
-  @Test
-  public void testAppendSafely_ErrorWithSurrogate() {
-    final XExpression e = this.validatedExpression("new Foo()");
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(e, true);
-    Assert.assertTrue(_hasErrors);
-    final TreeAppendable app = this.createTreeAppendable(e);
-    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-        public void apply(final ITreeAppendable it) {
-          it.append("error");
-        }
-      };
-    this._errorSafeExtensions.appendSafely(app, e, "surrogate", _function);
-    String _content = app.getContent();
-    Assert.assertEquals("/* error */surrogate", _content);
-  }
-  
-  @Test
   public void testAppendForEachSafely() {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);

@@ -16,8 +16,11 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.OnChangeEvictingCache
+import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+
+import static java.util.Collections.*
 
 /** 
  * @author Jan Koehnlein
@@ -28,29 +31,20 @@ class ErrorSafeExtensions {
 
 	@Inject OnChangeEvictingCache cache
 
+	def Iterable<Issue> getErrors(EObject element, boolean includeContents) {
+		val IElementIssueProvider issueProvider = cache.get(typeof(IElementIssueProvider).name, element.eResource, [|null])
+		if(issueProvider==null)
+			return emptyList
+		else 
+			issueProvider.getIssues(element, includeContents).filter[severity == Severity::ERROR]
+	}
+
 	def boolean hasErrors(EObject element, boolean includeContents) {
 		val IElementIssueProvider issueProvider = cache.get(typeof(IElementIssueProvider).name, element.eResource, [|null])
 		if(issueProvider==null)
 			return false
 		else 
 			issueProvider.getIssues(element, includeContents).exists[it.severity == Severity::ERROR]
-	}
-	
-	def appendSafely(ITreeAppendable appendable, EObject element, (ITreeAppendable)=>void procedure) {
-		appendSafely(appendable, element, null, procedure)
-	}
-	
-	def appendSafely(ITreeAppendable appendable, EObject element, String surrogateCode, (ITreeAppendable)=>void procedure) {
-		if(!element.hasErrors(true)) {
-			appendable => procedure
-		} else {
-			val errorChild = appendable.errorChild(element)
-			try {
-				errorChild => procedure
-			} catch (Exception ignoreMe) {}
-			if(surrogateCode != null)
-				appendable.append(surrogateCode);
-		}
 	}
 	
 	def <T extends EObject> void forEachSafely(ITreeAppendable appendable, Iterable<T> elements, 
@@ -61,7 +55,7 @@ class ErrorSafeExtensions {
 		val loopParams = new LoopParams => loopInitializer
 		val allElementsBroken = elements.filter[it.hasErrors(true)].size == elements.size
 		var currentAppendable = if(allElementsBroken) 
-				appendable.errorChild(elements.head)
+				appendable.openErrorAppendable(null, elements.head)
 			else 
 				appendable
 		loopParams.appendPrefix(currentAppendable)
@@ -69,13 +63,14 @@ class ErrorSafeExtensions {
 		var isFirstBroken = true
 		for(element: elements) {
 			if(!element.hasErrors(true)) {
+				currentAppendable = appendable.closeErrorAppendable(currentAppendable)
 				if(!isFirst)
 					loopParams.appendSeparator(appendable)
 				isFirst = false
 				body.apply(element, appendable)
 			} else {
 				if(!allElementsBroken)
-					currentAppendable = appendable.errorChild(element)
+					currentAppendable = openErrorAppendable(appendable, currentAppendable, element)
 				if(!isFirst || !isFirstBroken)
 					loopParams.appendSeparator(currentAppendable)
 				isFirstBroken = false
@@ -87,36 +82,45 @@ class ErrorSafeExtensions {
 		currentAppendable = if(allElementsBroken) 
 				currentAppendable
 			else 
-				appendable
+				appendable.closeErrorAppendable(currentAppendable)
 		loopParams.appendSuffix(currentAppendable)
+		appendable.closeErrorAppendable(currentAppendable)
 	}	
 	
+	def protected openErrorAppendable(ITreeAppendable parent, ITreeAppendable child, EObject context) {
+		if(!(child instanceof ErrorTreeAppendable))
+			parent.errorChild(context).append("/* ")
+		else 
+			child
+	}
+
+	def protected closeErrorAppendable(ITreeAppendable parent, ITreeAppendable child) {
+		if(child instanceof ErrorTreeAppendable && child != parent)
+			child.append(" */")
+		parent
+	}
+
 	def void serializeSafely(JvmTypeReference typeRef, ITreeAppendable appendable) {
 		serializeSafely(typeRef, null, appendable)
 	}
 	
 	def void serializeSafely(JvmTypeReference typeRef, String surrogateType, ITreeAppendable appendable) {
-		if(typeRef == null) {
-			val errorChild = appendable.asErrorAppendable(typeRef.eContainer)
-			errorChild.append("type reference is 'null'")
+		if(typeRef == null || typeRef.type == null) {
+			val errorChild = appendable.openErrorAppendable(appendable, typeRef.eContainer)
+			errorChild.append("type is 'null'")
+			appendable.closeErrorAppendable(errorChild)
 		} else {
 			if(typeRef.accept(new BrokenTypeRefDetector)) {
-				val errorChild = appendable.asErrorAppendable(typeRef.eContainer)
+				val errorChild = appendable.openErrorAppendable(appendable, typeRef.eContainer)
 				try {
 					serialize(typeRef, typeRef.eContainer, errorChild)
 				} catch(Exception ignoreMe) {}
+				appendable.closeErrorAppendable(errorChild)
 				if(surrogateType != null) 
 					appendable.append(surrogateType)
 			} else {
 				serialize(typeRef, typeRef.eContainer, appendable)
 			}
-		}
-	}
-
-	def protected asErrorAppendable(ITreeAppendable appendable, EObject context) {
-		switch appendable {
-			ErrorTreeAppendable: appendable
-			default: appendable.errorChild(context)
 		}
 	}
 }

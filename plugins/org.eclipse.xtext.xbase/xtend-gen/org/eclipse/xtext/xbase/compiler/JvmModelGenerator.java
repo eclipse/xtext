@@ -67,6 +67,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -85,6 +86,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -387,14 +389,14 @@ public class JvmModelGenerator implements IGenerator {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
       boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
-        final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-            public void apply(final ITreeAppendable safeAppendable) {
-              safeAppendable.append(" default ");
-              JvmTypeReference _returnType = it.getReturnType();
-              JvmModelGenerator.this.compiler.compileAsJavaExpression(expression, safeAppendable, _returnType);
-            }
-          };
-        this._errorSafeExtensions.appendSafely(appendable, expression, _function);
+        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression, true);
+        if (_hasErrors) {
+          appendable.append("/* skipped default expression with errors */");
+        } else {
+          appendable.append(" default ");
+          JvmTypeReference _returnType = it.getReturnType();
+          this.compiler.compileAsJavaExpression(expression, appendable, _returnType);
+        }
       }
     }
   }
@@ -574,28 +576,38 @@ public class JvmModelGenerator implements IGenerator {
       final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_4);
       boolean _notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
       if (_notEquals) {
-        final Procedure1<ITreeAppendable> _function_5 = new Procedure1<ITreeAppendable>() {
-            public void apply(final ITreeAppendable app) {
-              app.append("extends ");
-              JvmModelGenerator.this._errorSafeExtensions.serializeSafely(superClazz, app);
-              app.append(" ");
-            }
-          };
-        this._errorSafeExtensions.appendSafely(appendable, superClazz, _function_5);
+        final boolean hasErrors = this._errorSafeExtensions.hasErrors(superClazz, true);
+        if (hasErrors) {
+          appendable.append("/* ");
+        }
+        try {
+          appendable.append("extends ");
+          this._errorSafeExtensions.serializeSafely(superClazz, appendable);
+          appendable.append(" ");
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception ignoreMe = (Exception)_t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        if (hasErrors) {
+          appendable.append(" */");
+        }
       }
-      final Procedure1<LoopParams> _function_6 = new Procedure1<LoopParams>() {
+      final Procedure1<LoopParams> _function_5 = new Procedure1<LoopParams>() {
           public void apply(final LoopParams it) {
             it.setPrefix("implements ");
             it.setSeparator(", ");
             it.setSuffix(" ");
           }
         };
-      final Procedure2<JvmTypeReference,ITreeAppendable> _function_7 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
+      final Procedure2<JvmTypeReference,ITreeAppendable> _function_6 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
           public void apply(final JvmTypeReference it, final ITreeAppendable app) {
             JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
           }
         };
-      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, superInterfaces, _function_6, _function_7);
+      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, superInterfaces, _function_5, _function_6);
     }
   }
   
@@ -607,7 +619,7 @@ public class JvmModelGenerator implements IGenerator {
     throw _unsupportedOperationException;
   }
   
-  protected Object _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
+  protected ITreeAppendable _generateMember(final JvmGenericType it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -617,7 +629,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected Object _generateMember(final JvmField it, final ITreeAppendable appendable) {
+  protected ITreeAppendable _generateMember(final JvmField it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -638,7 +650,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected Object _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
+  protected ITreeAppendable _generateMember(final JvmOperation it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -685,7 +697,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected Object _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
+  protected ITreeAppendable _generateMember(final JvmConstructor it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
@@ -723,14 +735,14 @@ public class JvmModelGenerator implements IGenerator {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
       boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
-        final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-            public void apply(final ITreeAppendable safeAppendable) {
-              safeAppendable.append(" = ");
-              JvmTypeReference _type = it.getType();
-              JvmModelGenerator.this.compiler.compileAsJavaExpression(expression, safeAppendable, _type);
-            }
-          };
-        this._errorSafeExtensions.appendSafely(appendable, expression, _function);
+        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression, true);
+        if (_hasErrors) {
+          appendable.append(" /* Skipped initializer because of errors */");
+        } else {
+          appendable.append(" = ");
+          JvmTypeReference _type = it.getType();
+          this.compiler.compileAsJavaExpression(expression, appendable, _type);
+        }
       }
     }
   }
@@ -744,12 +756,12 @@ public class JvmModelGenerator implements IGenerator {
           it.setSuffix("> ");
         }
       };
-    final Procedure2<JvmTypeParameter,ITreeAppendable> _function_1 = new Procedure2<JvmTypeParameter,ITreeAppendable>() {
-        public void apply(final JvmTypeParameter it, final ITreeAppendable app) {
-          JvmModelGenerator.this.generateTypeParameterDeclaration(it, app);
+    final Procedure1<JvmTypeParameter> _function_1 = new Procedure1<JvmTypeParameter>() {
+        public void apply(final JvmTypeParameter it) {
+          JvmModelGenerator.this.generateTypeParameterDeclaration(it, appendable);
         }
       };
-    this._errorSafeExtensions.<JvmTypeParameter>forEachSafely(appendable, _typeParameters, _function, _function_1);
+    this._loopExtensions.<JvmTypeParameter>forEach(appendable, _typeParameters, _function, _function_1);
   }
   
   public void generateTypeParameterDeclaration(final JvmTypeParameter it, final ITreeAppendable appendable) {
@@ -769,13 +781,13 @@ public class JvmModelGenerator implements IGenerator {
           it.setSeparator(" & ");
         }
       };
-    final Procedure1<JvmUpperBound> _function_1 = new Procedure1<JvmUpperBound>() {
-        public void apply(final JvmUpperBound it) {
+    final Procedure2<JvmUpperBound,ITreeAppendable> _function_1 = new Procedure2<JvmUpperBound,ITreeAppendable>() {
+        public void apply(final JvmUpperBound it, final ITreeAppendable app) {
           JvmTypeReference _typeReference = it.getTypeReference();
-          JvmModelGenerator.this._errorSafeExtensions.serializeSafely(_typeReference, appendable);
+          JvmModelGenerator.this._errorSafeExtensions.serializeSafely(_typeReference, app);
         }
       };
-    this._loopExtensions.<JvmUpperBound>forEach(appendable, upperBounds, _function, _function_1);
+    this._errorSafeExtensions.<JvmUpperBound>forEachSafely(appendable, upperBounds, _function, _function_1);
   }
   
   public void generateThrowsClause(final JvmExecutable it, final ITreeAppendable appendable) {
@@ -862,94 +874,90 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable) {
-    final String surrogateCode = "throw new Error(\"Unresolved compilation problem\");";
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
-      ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
-      ITreeAppendable _append = _increaseIndentation.append("{");
-      _append.newLine();
-      final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-          public void apply(final ITreeAppendable it) {
-            Procedure1<? super ITreeAppendable> _compilationStrategy = JvmModelGenerator.this._jvmTypeExtensions.getCompilationStrategy(op);
-            _compilationStrategy.apply(it);
-          }
-        };
-      this._errorSafeExtensions.appendSafely(appendable, op, surrogateCode, _function);
-      ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
-      ITreeAppendable _newLine = _decreaseIndentation.newLine();
-      _newLine.append("}");
+      final Iterable<Issue> errors = this._errorSafeExtensions.getErrors(op, true);
+      boolean _isEmpty = IterableExtensions.isEmpty(errors);
+      if (_isEmpty) {
+        ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
+        ITreeAppendable _append = _increaseIndentation.append("{");
+        _append.newLine();
+        Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(op);
+        _compilationStrategy_1.apply(appendable);
+        ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
+        ITreeAppendable _newLine = _decreaseIndentation.newLine();
+        _newLine.append("}");
+      } else {
+        this.generateBodyWithIssues(appendable, errors);
+      }
     } else {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
       boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
       if (_notEquals_1) {
-        JvmTypeReference _switchResult = null;
-        boolean _matched = false;
-        if (!_matched) {
-          if (op instanceof JvmOperation) {
-            final JvmOperation _jvmOperation = (JvmOperation)op;
-            _matched=true;
-            JvmTypeReference _returnType = _jvmOperation.getReturnType();
-            _switchResult = _returnType;
+        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(expression, true);
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
+        if (_isEmpty_1) {
+          JvmTypeReference _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (op instanceof JvmOperation) {
+              final JvmOperation _jvmOperation = (JvmOperation)op;
+              _matched=true;
+              JvmTypeReference _returnType = _jvmOperation.getReturnType();
+              _switchResult = _returnType;
+            }
           }
-        }
-        if (!_matched) {
-          if (op instanceof JvmConstructor) {
-            final JvmConstructor _jvmConstructor = (JvmConstructor)op;
-            _matched=true;
-            JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
-            _switchResult = _typeForName;
+          if (!_matched) {
+            if (op instanceof JvmConstructor) {
+              final JvmConstructor _jvmConstructor = (JvmConstructor)op;
+              _matched=true;
+              JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
+              _switchResult = _typeForName;
+            }
           }
-        }
-        if (!_matched) {
-          _switchResult = null;
-        }
-        final JvmTypeReference returnType = _switchResult;
-        boolean _and = false;
-        boolean _and_1 = false;
-        if (!(expression instanceof XBlockExpression)) {
-          _and_1 = false;
-        } else {
-          EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
-          int _size = _expressions.size();
-          boolean _notEquals_2 = (_size != 1);
-          _and_1 = ((expression instanceof XBlockExpression) && _notEquals_2);
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          _and = (_and_1 && (returnType instanceof JvmVoid));
-        }
-        if (_and) {
-          final XBlockExpression block = ((XBlockExpression) expression);
-          EList<XExpression> _expressions_1 = block.getExpressions();
-          boolean _isEmpty = _expressions_1.isEmpty();
-          if (_isEmpty) {
-            appendable.append("{}");
+          if (!_matched) {
+            _switchResult = null;
+          }
+          final JvmTypeReference returnType = _switchResult;
+          boolean _and = false;
+          boolean _and_1 = false;
+          if (!(expression instanceof XBlockExpression)) {
+            _and_1 = false;
           } else {
-            final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
-                public void apply(final ITreeAppendable it) {
-                  EList<JvmTypeReference> _exceptions = op.getExceptions();
-                  Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-                  JvmModelGenerator.this.compiler.compile(expression, it, returnType, _set);
-                }
-              };
-            this._errorSafeExtensions.appendSafely(appendable, expression, surrogateCode, _function_1);
+            EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
+            int _size = _expressions.size();
+            boolean _notEquals_2 = (_size != 1);
+            _and_1 = ((expression instanceof XBlockExpression) && _notEquals_2);
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            _and = (_and_1 && (returnType instanceof JvmVoid));
+          }
+          if (_and) {
+            final XBlockExpression block = ((XBlockExpression) expression);
+            EList<XExpression> _expressions_1 = block.getExpressions();
+            boolean _isEmpty_2 = _expressions_1.isEmpty();
+            if (_isEmpty_2) {
+              appendable.append("{}");
+            } else {
+              EList<JvmTypeReference> _exceptions = op.getExceptions();
+              Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
+              this.compiler.compile(expression, appendable, returnType, _set);
+            }
+          } else {
+            ITreeAppendable _append_1 = appendable.append("{");
+            _append_1.increaseIndentation();
+            EList<JvmTypeReference> _exceptions_1 = op.getExceptions();
+            Set<JvmTypeReference> _set_1 = IterableExtensions.<JvmTypeReference>toSet(_exceptions_1);
+            this.compiler.compile(expression, appendable, returnType, _set_1);
+            ITreeAppendable _decreaseIndentation_1 = appendable.decreaseIndentation();
+            ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
+            _newLine_1.append("}");
           }
         } else {
-          ITreeAppendable _append_1 = appendable.append("{");
-          _append_1.increaseIndentation();
-          final Procedure1<ITreeAppendable> _function_2 = new Procedure1<ITreeAppendable>() {
-              public void apply(final ITreeAppendable it) {
-                EList<JvmTypeReference> _exceptions = op.getExceptions();
-                Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-                JvmModelGenerator.this.compiler.compile(expression, it, returnType, _set);
-              }
-            };
-          this._errorSafeExtensions.appendSafely(appendable, expression, surrogateCode, _function_2);
-          ITreeAppendable _decreaseIndentation_1 = appendable.decreaseIndentation();
-          ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
-          _newLine_1.append("}");
+          this.generateBodyWithIssues(appendable, errors_1);
         }
       } else {
         if ((op instanceof JvmOperation)) {
@@ -972,6 +980,35 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
     }
+  }
+  
+  public ITreeAppendable generateBodyWithIssues(final ITreeAppendable appendable, final Iterable<Issue> errors) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      ITreeAppendable _append = appendable.append("{");
+      ITreeAppendable _increaseIndentation = _append.increaseIndentation();
+      ITreeAppendable _newLine = _increaseIndentation.newLine();
+      _newLine.append("throw new Error(\"Unresolved compilation problems\"");
+      appendable.increaseIndentation();
+      final Procedure1<Issue> _function = new Procedure1<Issue>() {
+          public void apply(final Issue it) {
+            ITreeAppendable _newLine = appendable.newLine();
+            ITreeAppendable _append = _newLine.append("+ \"");
+            String _message = it.getMessage();
+            String _convertToJavaString = Strings.convertToJavaString(_message);
+            ITreeAppendable _append_1 = _append.append(_convertToJavaString);
+            _append_1.append("\"");
+          }
+        };
+      IterableExtensions.<Issue>forEach(errors, _function);
+      ITreeAppendable _append_1 = appendable.append(");");
+      ITreeAppendable _decreaseIndentation = _append_1.decreaseIndentation();
+      ITreeAppendable _decreaseIndentation_1 = _decreaseIndentation.decreaseIndentation();
+      ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
+      ITreeAppendable _append_2 = _newLine_1.append("}");
+      _xblockexpression = (_append_2);
+    }
+    return _xblockexpression;
   }
   
   public void generateFileHeader(final JvmDeclaredType it, final ITreeAppendable appendable) {
@@ -1463,7 +1500,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  public Object generateMember(final JvmMember it, final ITreeAppendable appendable) {
+  public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable);
     } else if (it instanceof JvmGenericType) {

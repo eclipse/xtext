@@ -26,21 +26,6 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
   private IJvmModelAssociations jvmModelAssociations;
   
   @Test
-  public void testCommentContent() {
-    try {
-      final XExpression e = this.expression("42");
-      final ErrorTreeAppendable app = this.createErrorTreeAppendable(e);
-      ITreeAppendable _append = app.append("42");
-      ITreeAppendable _newLine = _append.newLine();
-      _newLine.append("foo");
-      String _content = app.getContent();
-      Assert.assertEquals("/* 42<newline>foo */", _content);
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
   public void testTraceChildIsSelf() {
     try {
       final XExpression e = this.expression("42");
@@ -66,7 +51,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       JvmType _type = e.getType();
       app.append(_type);
       String _content = app.getContent();
-      Assert.assertEquals("/* Unresolved */", _content);
+      Assert.assertEquals("Unresolved", _content);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

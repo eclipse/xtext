@@ -289,6 +289,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		}
 	}
 
+	protected boolean isClosed() {
+		return closed;
+	}
+	
 	public TreeAppendable append(JvmType type) {
 		closeLastChild();
 		state.appendType(type, this);

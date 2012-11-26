@@ -8,10 +8,12 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.inject.Provider;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -40,6 +42,42 @@ public class ErrorSafeExtensions {
   
   @Inject
   private OnChangeEvictingCache cache;
+  
+  public Iterable<Issue> getErrors(final EObject element, final boolean includeContents) {
+    Iterable<Issue> _xblockexpression = null;
+    {
+      String _name = IElementIssueProvider.class.getName();
+      Resource _eResource = element.eResource();
+      final Function0<IElementIssueProvider> _function = new Function0<IElementIssueProvider>() {
+          public IElementIssueProvider apply() {
+            return null;
+          }
+        };
+      final IElementIssueProvider issueProvider = this.cache.<IElementIssueProvider>get(_name, _eResource, new Provider<IElementIssueProvider>() {
+          public IElementIssueProvider get() {
+            return _function.apply();
+          }
+      });
+      Iterable<Issue> _xifexpression = null;
+      boolean _equals = ObjectExtensions.operator_equals(issueProvider, null);
+      if (_equals) {
+        return Collections.<Issue>emptyList();
+      } else {
+        List<Issue> _issues = issueProvider.getIssues(element, includeContents);
+        final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
+            public Boolean apply(final Issue it) {
+              Severity _severity = it.getSeverity();
+              boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+              return Boolean.valueOf(_equals);
+            }
+          };
+        Iterable<Issue> _filter = IterableExtensions.<Issue>filter(_issues, _function_1);
+        _xifexpression = _filter;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
   
   public boolean hasErrors(final EObject element, final boolean includeContents) {
     boolean _xblockexpression = false;
@@ -77,44 +115,6 @@ public class ErrorSafeExtensions {
     return _xblockexpression;
   }
   
-  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final Procedure1<? super ITreeAppendable> procedure) {
-    ITreeAppendable _appendSafely = this.appendSafely(appendable, element, null, procedure);
-    return _appendSafely;
-  }
-  
-  public ITreeAppendable appendSafely(final ITreeAppendable appendable, final EObject element, final String surrogateCode, final Procedure1<? super ITreeAppendable> procedure) {
-    ITreeAppendable _xifexpression = null;
-    boolean _hasErrors = this.hasErrors(element, true);
-    boolean _not = (!_hasErrors);
-    if (_not) {
-      ITreeAppendable _doubleArrow = ObjectExtensions.<ITreeAppendable>operator_doubleArrow(appendable, procedure);
-      _xifexpression = _doubleArrow;
-    } else {
-      ITreeAppendable _xblockexpression = null;
-      {
-        final ErrorTreeAppendable errorChild = appendable.errorChild(element);
-        try {
-          ObjectExtensions.<ErrorTreeAppendable>operator_doubleArrow(errorChild, procedure);
-        } catch (final Throwable _t) {
-          if (_t instanceof Exception) {
-            final Exception ignoreMe = (Exception)_t;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        ITreeAppendable _xifexpression_1 = null;
-        boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateCode, null);
-        if (_notEquals) {
-          ITreeAppendable _append = appendable.append(surrogateCode);
-          _xifexpression_1 = _append;
-        }
-        _xblockexpression = (_xifexpression_1);
-      }
-      _xifexpression = _xblockexpression;
-    }
-    return _xifexpression;
-  }
-  
   public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T,? super ITreeAppendable> body) {
     boolean _isEmpty = IterableExtensions.isEmpty(elements);
     if (_isEmpty) {
@@ -135,8 +135,8 @@ public class ErrorSafeExtensions {
     ITreeAppendable _xifexpression = null;
     if (allElementsBroken) {
       T _head = IterableExtensions.<T>head(elements);
-      ErrorTreeAppendable _errorChild = appendable.errorChild(_head);
-      _xifexpression = _errorChild;
+      ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, null, _head);
+      _xifexpression = _openErrorAppendable;
     } else {
       _xifexpression = appendable;
     }
@@ -148,6 +148,8 @@ public class ErrorSafeExtensions {
       boolean _hasErrors = this.hasErrors(element, true);
       boolean _not = (!_hasErrors);
       if (_not) {
+        ITreeAppendable _closeErrorAppendable = this.closeErrorAppendable(appendable, currentAppendable);
+        currentAppendable = _closeErrorAppendable;
         boolean _not_1 = (!isFirst);
         if (_not_1) {
           loopParams.appendSeparator(appendable);
@@ -157,8 +159,8 @@ public class ErrorSafeExtensions {
       } else {
         boolean _not_2 = (!allElementsBroken);
         if (_not_2) {
-          ErrorTreeAppendable _errorChild_1 = appendable.errorChild(element);
-          currentAppendable = _errorChild_1;
+          ITreeAppendable _openErrorAppendable_1 = this.openErrorAppendable(appendable, currentAppendable, element);
+          currentAppendable = _openErrorAppendable_1;
         }
         boolean _or = false;
         boolean _not_3 = (!isFirst);
@@ -187,10 +189,43 @@ public class ErrorSafeExtensions {
     if (allElementsBroken) {
       _xifexpression_1 = currentAppendable;
     } else {
-      _xifexpression_1 = appendable;
+      ITreeAppendable _closeErrorAppendable_1 = this.closeErrorAppendable(appendable, currentAppendable);
+      _xifexpression_1 = _closeErrorAppendable_1;
     }
     currentAppendable = _xifexpression_1;
     loopParams.appendSuffix(currentAppendable);
+    this.closeErrorAppendable(appendable, currentAppendable);
+  }
+  
+  protected ITreeAppendable openErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child, final EObject context) {
+    ITreeAppendable _xifexpression = null;
+    boolean _not = (!(child instanceof ErrorTreeAppendable));
+    if (_not) {
+      ErrorTreeAppendable _errorChild = parent.errorChild(context);
+      ITreeAppendable _append = _errorChild.append("/* ");
+      _xifexpression = _append;
+    } else {
+      _xifexpression = child;
+    }
+    return _xifexpression;
+  }
+  
+  protected ITreeAppendable closeErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      boolean _and = false;
+      if (!(child instanceof ErrorTreeAppendable)) {
+        _and = false;
+      } else {
+        boolean _notEquals = ObjectExtensions.operator_notEquals(child, parent);
+        _and = ((child instanceof ErrorTreeAppendable) && _notEquals);
+      }
+      if (_and) {
+        child.append(" */");
+      }
+      _xblockexpression = (parent);
+    }
+    return _xblockexpression;
   }
   
   public void serializeSafely(final JvmTypeReference typeRef, final ITreeAppendable appendable) {
@@ -198,17 +233,26 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmTypeReference typeRef, final String surrogateType, final ITreeAppendable appendable) {
+    boolean _or = false;
     boolean _equals = ObjectExtensions.operator_equals(typeRef, null);
     if (_equals) {
+      _or = true;
+    } else {
+      JvmType _type = typeRef.getType();
+      boolean _equals_1 = ObjectExtensions.operator_equals(_type, null);
+      _or = (_equals || _equals_1);
+    }
+    if (_or) {
       EObject _eContainer = typeRef.eContainer();
-      final ErrorTreeAppendable errorChild = this.asErrorAppendable(appendable, _eContainer);
-      errorChild.append("type reference is \'null\'");
+      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, _eContainer);
+      errorChild.append("type is \'null\'");
+      this.closeErrorAppendable(appendable, errorChild);
     } else {
       BrokenTypeRefDetector _brokenTypeRefDetector = new BrokenTypeRefDetector();
       Boolean _accept = typeRef.<Boolean>accept(_brokenTypeRefDetector);
       if ((_accept).booleanValue()) {
         EObject _eContainer_1 = typeRef.eContainer();
-        final ErrorTreeAppendable errorChild_1 = this.asErrorAppendable(appendable, _eContainer_1);
+        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer_1);
         try {
           EObject _eContainer_2 = typeRef.eContainer();
           this._typeReferenceSerializer.serialize(typeRef, _eContainer_2, errorChild_1);
@@ -219,6 +263,7 @@ public class ErrorSafeExtensions {
             throw Exceptions.sneakyThrow(_t);
           }
         }
+        this.closeErrorAppendable(appendable, errorChild_1);
         boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateType, null);
         if (_notEquals) {
           appendable.append(surrogateType);
@@ -228,22 +273,5 @@ public class ErrorSafeExtensions {
         this._typeReferenceSerializer.serialize(typeRef, _eContainer_3, appendable);
       }
     }
-  }
-  
-  protected ErrorTreeAppendable asErrorAppendable(final ITreeAppendable appendable, final EObject context) {
-    ErrorTreeAppendable _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (appendable instanceof ErrorTreeAppendable) {
-        final ErrorTreeAppendable _errorTreeAppendable = (ErrorTreeAppendable)appendable;
-        _matched=true;
-        _switchResult = _errorTreeAppendable;
-      }
-    }
-    if (!_matched) {
-      ErrorTreeAppendable _errorChild = appendable.errorChild(context);
-      _switchResult = _errorChild;
-    }
-    return _switchResult;
   }
 }
