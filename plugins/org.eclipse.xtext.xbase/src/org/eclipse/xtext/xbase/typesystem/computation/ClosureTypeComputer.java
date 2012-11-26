@@ -206,7 +206,7 @@ public class ClosureTypeComputer {
 		List<LightweightTypeReference> operationParameterTypes = expectedClosureType.getParameterTypes();
 		List<JvmFormalParameter> closureParameters = closure.getFormalParameters();
 		
-		// just in case we have more than 6 closrue parameters
+		// just in case we have more than 6 closure parameters
 		int paramCount = Math.min(closureParameters.size(), operationParameterTypes.size());
 		// TODO validate parameter count - check against operation if available
 		for(int i = 0; i < paramCount; i++) {
