@@ -117,8 +117,7 @@ class FormattingDataFactory {
 				WhitespaceInfo: {
 					if (leaf.trailingComment?.trailing && !leaf.trailingComment?.multiline) {
 						val space = if (leaf.offset == 0) "" else " "
-						result += new WhitespaceData(leaf.offset, leaf.length, indentationChange,
-							if (trace) new RuntimeException(), space)
+						result += new WhitespaceData(leaf.offset, leaf.length, 0, if (trace) new RuntimeException(), space)
 					} else if (!applied) {
 						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
 						if (newLines < 1 && leaf.offset > 0 &&
@@ -130,15 +129,13 @@ class FormattingDataFactory {
 							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange,
 								if (trace) new RuntimeException(), if (leaf.offset == 0) "" else " ")
 						else
-							result += new NewLineData(leaf.offset, leaf.length, indentationChange,
-								if (trace) new RuntimeException(), newLines)
+							result += new NewLineData(leaf.offset, leaf.length, indentationChange, if (trace) new RuntimeException(), newLines)
 						applied = true
 					} else {
 						var newLines = 1
 						if (leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
-						result += new NewLineData(leaf.offset, leaf.length, indentationChange,
-							if (trace) new RuntimeException(), newLines)
+						result += new NewLineData(leaf.offset, leaf.length, 0, if (trace) new RuntimeException(), newLines)
 					}
 				}
 				CommentInfo: {
