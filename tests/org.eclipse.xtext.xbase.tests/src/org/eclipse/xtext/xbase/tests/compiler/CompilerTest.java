@@ -29,13 +29,13 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 
 	@Test public void testNull() throws Exception {
 		assertCompilesToStatement(
-				"\n// null\n", 
+				"\n/* null */", 
 				"null");
 	}
 	
 	@Test public void testStringLiteralInComment() throws Exception {
 		assertCompilesToStatement(
-				"\n// \"* /\"\n", 
+				"\n/* \"* /\" */", 
 				"'*/'");
 	}
 	
