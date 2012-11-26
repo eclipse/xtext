@@ -881,6 +881,39 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo(_plus_2, "List<Object>");
   }
   
+  @Ignore(value = "TODO deferred closure body typing")
+  @Test
+  public void testClosure_32() throws Exception {
+    this.resolvesTo("[ x, i | x.charAt(i) ].apply(\'\', 0)", "Character");
+  }
+  
+  @Test
+  public void testNewTreeSet_01() throws Exception {
+    this.resolvesTo("new java.util.TreeSet(newArrayList(\'\'))", "TreeSet<String>");
+  }
+  
+  @Test
+  public void testNewTreeSet_02() throws Exception {
+    this.resolvesTo("newTreeSet[a, b|0]", "TreeSet<Object>");
+  }
+  
+  @Test
+  public void testNewTreeSet_03() throws Exception {
+    this.resolvesTo("newTreeSet([a, b|0], \'a\', \'b\')", "TreeSet<String>");
+  }
+  
+  @Ignore(value = "TODO deferred closure body typing")
+  @Test
+  public void testNewTreeSet_04() throws Exception {
+    this.resolvesTo("newTreeSet([a, b|a.length.compareTo(b.length)], \'a\', \'b\')", "TreeSet<String>");
+  }
+  
+  @Ignore(value = "TODO deferred closure body typing")
+  @Test
+  public void testNewTreeSet_05() throws Exception {
+    this.resolvesTo("newTreeSet([a, b|a.toString.compareTo(b.toString)], \'a\', \'b\')", "TreeSet<String>");
+  }
+  
   @Test
   public void testTypeArgs() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>() += \'foo\'", "boolean");

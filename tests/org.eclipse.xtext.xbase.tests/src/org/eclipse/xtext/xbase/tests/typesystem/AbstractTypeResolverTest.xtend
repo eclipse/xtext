@@ -809,6 +809,33 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"}").resolvesTo("List<Object>")
 	}
 	
+	@Ignore("TODO deferred closure body typing")
+	@Test def void testClosure_32() throws Exception {
+        "[ x, i | x.charAt(i) ].apply('', 0)".resolvesTo("Character")
+    }
+	
+	@Test def void testNewTreeSet_01() throws Exception {
+        "new java.util.TreeSet(newArrayList(''))".resolvesTo("TreeSet<String>")
+    }
+    
+    @Test def void testNewTreeSet_02() throws Exception {
+        "newTreeSet[a, b|0]".resolvesTo("TreeSet<Object>")
+    }
+    
+    @Test def void testNewTreeSet_03() throws Exception {
+        "newTreeSet([a, b|0], 'a', 'b')".resolvesTo("TreeSet<String>") /* character? */
+    }
+    
+    @Ignore("TODO deferred closure body typing")
+    @Test def void testNewTreeSet_04() throws Exception {
+        "newTreeSet([a, b|a.length.compareTo(b.length)], 'a', 'b')".resolvesTo("TreeSet<String>")
+    }
+    
+    @Ignore("TODO deferred closure body typing")
+    @Test def void testNewTreeSet_05() throws Exception {
+        "newTreeSet([a, b|a.toString.compareTo(b.toString)], 'a', 'b')".resolvesTo("TreeSet<String>")
+    }
+    
 	@Test def void testTypeArgs() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
 	}
