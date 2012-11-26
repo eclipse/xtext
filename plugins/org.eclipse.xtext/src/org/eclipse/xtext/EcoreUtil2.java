@@ -94,13 +94,17 @@ public class EcoreUtil2 extends EcoreUtil {
 		return previous;
 	}
 
-
+	/**
+	 * Returns the closest {@link EObject#eContainer() container object} of the requested type. If the given object is
+	 * an instance of the requested type, then the object itself will be returned. If no container object is of the
+	 * requested type, then {@code null} will be returned.
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T getContainerOfType(EObject ele, Class<T> type) {
-		if (type.isAssignableFrom(ele.getClass()))
-			return (T) ele;
-		if (ele.eContainer() != null)
-			return getContainerOfType(ele.eContainer(), type);
+		for (EObject e = ele; e != null; e = e.eContainer())
+			if (type.isInstance(e))
+				return (T) e;
+
 		return null;
 	}
 	
