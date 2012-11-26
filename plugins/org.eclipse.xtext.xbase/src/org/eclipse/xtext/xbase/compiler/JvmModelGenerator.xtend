@@ -65,6 +65,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import static org.eclipse.xtext.util.Strings.*
 import org.eclipse.xtext.validation.Issue
+import org.apache.log4j.Logger
 
 /**
  * A generator implementation that processes the 
@@ -72,6 +73,8 @@ import org.eclipse.xtext.validation.Issue
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
+	
+	static val LOG = Logger::getLogger(typeof(JvmModelGenerator))
 	
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
@@ -448,7 +451,11 @@ class JvmModelGenerator implements IGenerator {
 		generateAnnotations(tracedAppendable, false)
 		tracedAppendable.append("final ")
 		if (vararg) {
-			(parameterType as JvmGenericArrayTypeReference).componentType.serializeSafely("Object", tracedAppendable)
+			if (! (parameterType instanceof JvmGenericArrayTypeReference)) {
+				tracedAppendable.append("/* Internal Error: Parameter was vararg but not an array type. */");
+			} else {
+				(parameterType as JvmGenericArrayTypeReference).componentType.serializeSafely("Object", tracedAppendable)
+			}
 			tracedAppendable.append("...")
 		} else {
 			parameterType.serializeSafely("Object", tracedAppendable)

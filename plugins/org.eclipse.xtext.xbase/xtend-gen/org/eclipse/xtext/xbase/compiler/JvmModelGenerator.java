@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -87,6 +88,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -101,6 +103,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
+  private final static Logger LOG = new Function0<Logger>() {
+    public Logger apply() {
+      Logger _logger = Logger.getLogger(JvmModelGenerator.class);
+      return _logger;
+    }
+  }.apply();
+  
   @Inject
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
@@ -844,12 +853,18 @@ public class JvmModelGenerator implements IGenerator {
     tracedAppendable.append("final ");
     if (vararg) {
       JvmTypeReference _parameterType = it.getParameterType();
-      JvmTypeReference _componentType = ((JvmGenericArrayTypeReference) _parameterType).getComponentType();
-      this._errorSafeExtensions.serializeSafely(_componentType, "Object", tracedAppendable);
+      boolean _not = (!(_parameterType instanceof JvmGenericArrayTypeReference));
+      if (_not) {
+        tracedAppendable.append("/* Internal Error: Parameter was vararg but not an array type. */");
+      } else {
+        JvmTypeReference _parameterType_1 = it.getParameterType();
+        JvmTypeReference _componentType = ((JvmGenericArrayTypeReference) _parameterType_1).getComponentType();
+        this._errorSafeExtensions.serializeSafely(_componentType, "Object", tracedAppendable);
+      }
       tracedAppendable.append("...");
     } else {
-      JvmTypeReference _parameterType_1 = it.getParameterType();
-      this._errorSafeExtensions.serializeSafely(_parameterType_1, "Object", tracedAppendable);
+      JvmTypeReference _parameterType_2 = it.getParameterType();
+      this._errorSafeExtensions.serializeSafely(_parameterType_2, "Object", tracedAppendable);
     }
     tracedAppendable.append(" ");
     String _simpleName = it.getSimpleName();
