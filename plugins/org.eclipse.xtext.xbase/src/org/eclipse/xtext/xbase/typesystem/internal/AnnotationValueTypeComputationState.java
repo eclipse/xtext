@@ -12,46 +12,49 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API 
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class OperationBodyComputationState extends AbstractLogicalContainerAwareRootComputationState {
+public class AnnotationValueTypeComputationState extends AbstractRootTypeComputationState {
 
-	public OperationBodyComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			JvmOperation operation,
-			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, operation, reentrantTypeResolver);
-		OwnedConverter converter = getConverter();
-		for(JvmFormalParameter parameter: operation.getParameters()) {
-			resolvedTypes.setType(parameter, converter.toLightweightReference(parameter.getParameterType()));
-			addLocalToCurrentScope(parameter);
-		}
+	private final JvmAnnotationValue annotationValue;
+	private final XExpression expression;
+
+	public AnnotationValueTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			JvmAnnotationValue annotationValue, XExpression expression, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+		this.annotationValue = annotationValue;
+		this.expression = expression;
 	}
 
 	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
 		LightweightTypeReference type = getExpectedType();
-		AbstractTypeExpectation result;
-		if (type != null) {
-			result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
-		} else {
-			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState);
-		}
+		AbstractTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
 		return Collections.singletonList(result);
 	}
-	
+
 	@Override
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getActualType(getMember());
+		JvmOperation operation = annotationValue.getOperation();
+		LightweightTypeReference result = getResolvedTypes().getActualType(operation);
+		if (result.isArray()) {
+			return result.getComponentType();
+		}
+		return result;
+	}
+
+	@Override
+	protected XExpression getRootExpression() {
+		return expression;
 	}
 }

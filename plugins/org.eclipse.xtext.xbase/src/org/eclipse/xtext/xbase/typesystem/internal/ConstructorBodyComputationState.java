@@ -14,8 +14,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,6 +29,11 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 	public ConstructorBodyComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor,
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
 		super(resolvedTypes, featureScopeSession, constructor, reentrantTypeResolver);
+		OwnedConverter converter = getConverter();
+		for(JvmFormalParameter parameter: constructor.getParameters()) {
+			resolvedTypes.setType(parameter, converter.toLightweightReference(parameter.getParameterType()));
+			addLocalToCurrentScope(parameter);
+		}
 	}
 	
 	@Override

@@ -26,6 +26,10 @@ import org.eclipse.xtext.common.types.JvmEnumerationType
 import com.google.inject.name.Named
 import foo.TestAnnotation3
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.XNumberLiteral
+import org.eclipse.xtext.xbase.XStringLiteral
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -62,7 +66,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		newArrayList(anno).translateAnnotationsTo(type)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
+		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
 	}
 	
 	@Test
@@ -77,7 +81,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		newArrayList(anno).translateAnnotationsTo(type)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
+		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
 		assertEquals("value", type.annotations.head.values.head.operation.simpleName)
 	}
 	
@@ -114,8 +118,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertEquals(1,type.annotations.head.values.size)
-		val value = type.annotations.head.values.head as JvmIntAnnotationValue
-		assertEquals(10, value.values.head)
+		val value = type.annotations.head.values.head as JvmCustomAnnotationValue
+		assertTrue(value.values.head instanceof XNumberLiteral)
 	}
 
 	@Test
@@ -135,8 +139,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		newArrayList(anno).translateAnnotationsTo(type)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
-		assertEquals("Bar", (type.annotations.head.values.head as JvmStringAnnotationValue).values.get(1))
+		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
+		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.get(1) instanceof XStringLiteral)
 	}
 	
 	@Test

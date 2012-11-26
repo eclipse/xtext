@@ -12,8 +12,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -200,8 +204,20 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmAnnotationTarget annotable) {
-		if (!annotable.getAnnotations().isEmpty()) {
-			throw new UnsupportedOperationException(resolvedTypes + " " + annotable + " " + featureScopeSession);
+		for(JvmAnnotationReference annotation: annotable.getAnnotations()) {
+			for(JvmAnnotationValue value: annotation.getValues()) {
+				if (value instanceof JvmCustomAnnotationValue) {
+					JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
+					for(Object object: custom.getValues()) {
+						if (object instanceof XExpression) {
+							AnnotationValueTypeComputationState state = new AnnotationValueTypeComputationState(resolvedTypes, featureScopeSession, value, (XExpression) object, this);
+							state.computeTypes();
+						}
+					}
+				} else if (value instanceof JvmAnnotationAnnotationValue) {
+					computeAnnotationTypes(resolvedTypes, featureScopeSession, (JvmAnnotationAnnotationValue) value);
+				}
+			}
 		}
 	}
 	
