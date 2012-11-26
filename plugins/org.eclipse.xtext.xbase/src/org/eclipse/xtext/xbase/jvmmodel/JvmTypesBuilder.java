@@ -1134,7 +1134,6 @@ public class JvmTypesBuilder {
 			JvmAnnotationReference annotationReference = getJvmAnnotationReference(anno);
 			if(annotationReference != null) {
 				target.getAnnotations().add(annotationReference);
-				associate(anno, annotationReference);
 			}
 		}
 	}
@@ -1170,6 +1169,7 @@ public class JvmTypesBuilder {
 				reference.getValues().add(value);
 			}
 		}
+		associate(anno, reference);
 		return reference;
 	}
 
