@@ -215,7 +215,8 @@ public class XtendFormatter extends XbaseFormatter2 {
 		val close = func.nodeForKeyword(")")
 		format += func.nodeForFeature(XTEND_FUNCTION__RETURN_TYPE).append[oneSpace]
 		format += open.prepend[noSpace]
-		format += close.append[cfg(bracesInNewLine)]
+		if(func.expression != null)
+			format += close.append[cfg(bracesInNewLine)]
 		formatMemberParameter(func.parameters, open, close, format)
 		func.returnType.format(format)
 		func.expression.format(format)

@@ -501,6 +501,36 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
+  public void formatAbstractMethod1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void formatAbstractMethod2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo()");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void formatMethodMultiline() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

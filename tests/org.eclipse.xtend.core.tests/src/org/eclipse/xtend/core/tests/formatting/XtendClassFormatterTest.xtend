@@ -263,6 +263,25 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Test def formatAbstractMethod1() {
+		assertFormatted('''
+			abstract class bar {
+				def baz()
+			}
+		''')	
+	}
+	
+	@Test def formatAbstractMethod2() {
+		assertFormatted('''
+			abstract class bar {
+				def foo()
+
+				def baz()
+			}
+		''')	
+	}
+	
+	
 	@Test def formatMethodMultiline() {
 		assertFormatted('''
 			package foo

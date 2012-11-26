@@ -783,19 +783,23 @@ public class XtendFormatter extends XbaseFormatter2 {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(open, _function_5);
     format.operator_add(_prepend);
-    final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
-        public void apply(final FormattingDataInit it) {
-          it.cfg(XtendFormatter.this._xtendFormatterConfigKeys.bracesInNewLine);
-        }
-      };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(close, _function_6);
-    format.operator_add(_append_3);
+    XExpression _expression = func.getExpression();
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_expression, null);
+    if (_notEquals) {
+      final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.cfg(XtendFormatter.this._xtendFormatterConfigKeys.bracesInNewLine);
+          }
+        };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(close, _function_6);
+      format.operator_add(_append_3);
+    }
     EList<XtendParameter> _parameters = func.getParameters();
     this.formatMemberParameter(_parameters, open, close, format);
     JvmTypeReference _returnType = func.getReturnType();
     this.format(_returnType, format);
-    XExpression _expression = func.getExpression();
-    this.format(_expression, format);
+    XExpression _expression_1 = func.getExpression();
+    this.format(_expression_1, format);
   }
   
   protected void _format(final XtendField field, final FormattableDocument document) {
