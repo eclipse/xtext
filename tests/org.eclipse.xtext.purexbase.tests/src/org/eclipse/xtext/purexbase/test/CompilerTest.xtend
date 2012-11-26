@@ -20,7 +20,6 @@ class CompilerTest {
 	
 	@Inject extension CompilationTestHelper
 	
-	
 	@Test
 	def void literals() {
 		'''
@@ -67,31 +66,20 @@ class CompilerTest {
 			  public BigDecimal myMethod() throws Throwable {
 			    BigDecimal _specialblockexpression = null;
 			    {
-			      // null
-			      
-			      // "Hello World"
-			      
-			      // 42
-			      
-			      // 0.42e2
-			      
-			      // true
-			      
-			      // false
-			      
-			      // String.class
-			      
-			      //CollectionLiterals.<Integer>newArrayList(Integer.valueOf(3), Integer.valueOf(5), Integer.valueOf(7));
-			      
-			      //CollectionLiterals.<String>newHashSet("foo", "bar", "baz");
-			      
+			      /* null */
+			      /* "Hello World" */
+			      /* 42 */
+			      /* 0.42e2 */
+			      /* true */
+			      /* false */
+			      /* String.class */
+			      /* CollectionLiterals.<Integer>newArrayList(Integer.valueOf(3), Integer.valueOf(5), Integer.valueOf(7)); */
+			      /* CollectionLiterals.<String>newHashSet("foo", "bar", "baz"); */
 			      Pair<Integer,String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");
 			      Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), "two");
 			      Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
-			      //CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
-			      
-			      // new BigInteger("beefbeefbeefbeefbeef", 16)
-			      
+			      /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
+			      /* new BigInteger("beefbeefbeefbeefbeef", 16) */
 			      _specialblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
 			    }
 			    return _specialblockexpression;
@@ -136,8 +124,7 @@ class CompilerTest {
 			    String _forename = person.getForename();
 			    String _plus = (_forename + " ");
 			    String _name = person.getName();
-			    //(_plus + _name);
-			    
+			    /* (_plus + _name); */
 			    Collections.<String>singleton("So lonely");
 			    System.err.println();
 			  }
@@ -304,8 +291,7 @@ class CompilerTest {
 			            return _upperCase;
 			          }
 			        };
-			      //ListExtensions.<String, String>map(list, _function_1);
-			      
+			      /* ListExtensions.<String, String>map(list, _function_1); */
 			      final Function1<String,String> _function_2 = new Function1<String,String>() {
 			          public String apply(final String e) {
 			            String _upperCase = e.toUpperCase();
@@ -363,17 +349,14 @@ class CompilerTest {
 			      int _length = "foo".length();
 			      boolean _greaterThan = (_length > 3);
 			      if (_greaterThan) {
-			        // "never true!"
-			        
+			        /* "never true!" */
 			      } else {
-			        // "always true!"
-			        
+			        /* "always true!" */
 			      }
 			      int _length_1 = "foo".length();
 			      boolean _greaterThan_1 = (_length_1 > 3);
 			      if (_greaterThan_1) {
-			        // "never true!"
-			        
+			        /* "never true!" */
 			      }
 			      String _xifexpression = null;
 			      boolean _xifexpression_1 = false;
@@ -474,8 +457,7 @@ class CompilerTest {
 			        String _upperCase = x.toUpperCase();
 			        result.add(_upperCase);
 			      }
-			      //result;
-			      
+			      /* result; */
 			      int i = 0;
 			      int _size = list.size();
 			      boolean _lessThan = (i < _size);
@@ -613,20 +595,17 @@ class CompilerTest {
 			      if (!_matched) {
 			        if (Objects.equal(_switchValue,"foo")) {
 			          _matched=true;
-			          // "it\'s foo"
-			          
+			          /* "it\'s foo" */
 			        }
 			      }
 			      if (!_matched) {
 			        if (Objects.equal(_switchValue,"bar")) {
 			          _matched=true;
-			          // "a bar"
-			          
+			          /* "a bar" */
 			        }
 			      }
 			      if (!_matched) {
-			        // "don\'t know"
-			        
+			        /* "don\'t know" */
 			      }
 			      Rectangle _rectangle = new Rectangle(5, 5);
 			      Circle _circle = new Circle(4);
@@ -732,8 +711,7 @@ class CompilerTest {
 			  public void myMethod() throws Throwable {
 			    "string".length();
 			    final Integer i = Integer.valueOf("string".length());
-			    //i;
-			    
+			    /* i; */
 			    int _length = "string".length();
 			    Integer.valueOf(_length).toString();
 			    "string".toCharArray();
