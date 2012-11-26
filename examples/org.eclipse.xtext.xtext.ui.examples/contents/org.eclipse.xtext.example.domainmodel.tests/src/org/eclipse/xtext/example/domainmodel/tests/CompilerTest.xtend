@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
@@ -12,7 +11,7 @@ import org.junit.runner.RunWith
 import static org.junit.Assert.*
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(DomainmodelInjectorProvider))
+@InjectWith(typeof(InjectorProviderCustom))
 class CompilerTest {
 	
 	@Inject extension CompilationTestHelper

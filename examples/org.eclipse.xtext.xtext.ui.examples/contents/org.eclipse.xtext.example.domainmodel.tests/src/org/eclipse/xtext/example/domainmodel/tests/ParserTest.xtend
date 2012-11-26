@@ -12,6 +12,9 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.common.types.JvmOperation
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))
@@ -19,6 +22,7 @@ class ParserTest {
 	
 	@Inject extension ParseHelper<DomainModel>
 	@Inject extension ValidationTestHelper
+	@Inject extension IJvmModelAssociations
 
 	@Test
 	def void testParsing() {
@@ -54,5 +58,24 @@ class ParserTest {
 			  }
 			}
 		'''.parse.assertNoErrors
+	}
+	
+	@Test
+	def void testReturnTypeInference() {
+		val model = '''
+			package example {
+			  entity MyEntity {
+			    property : String
+			    op foo(String s) {
+			    	return property.toUpperCase + s
+			    }
+			  }
+			}
+		'''.parse
+		val pack = model.elements.head as PackageDeclaration
+		val entity = pack.elements.head as Entity
+		val op = entity.features.last as Operation
+		val method = op.jvmElements.head as JvmOperation
+		Assert::assertEquals("String", method.returnType.simpleName)
 	}
 }
