@@ -90,6 +90,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -833,18 +834,36 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateParameters(final JvmExecutable it, final ITreeAppendable appendable) {
     EList<JvmFormalParameter> _parameters = it.getParameters();
-    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-        public void apply(final LoopParams it) {
-          it.setSeparator(", ");
+    boolean _isEmpty = _parameters.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+      int _size = _parameters_1.size();
+      int _minus = (_size - 1);
+      IntegerRange _upTo = new IntegerRange(0, _minus);
+      for (final Integer i : _upTo) {
+        {
+          int _plus = ((i).intValue() + 1);
+          EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+          int _size_1 = _parameters_2.size();
+          final boolean last = (_plus == _size_1);
+          EList<JvmFormalParameter> _parameters_3 = it.getParameters();
+          final JvmFormalParameter p = _parameters_3.get((i).intValue());
+          boolean _and = false;
+          if (!last) {
+            _and = false;
+          } else {
+            boolean _isVarArgs = it.isVarArgs();
+            _and = (last && _isVarArgs);
+          }
+          this.generateParameter(p, appendable, _and);
+          boolean _not_1 = (!last);
+          if (_not_1) {
+            appendable.append(", ");
+          }
         }
-      };
-    final Procedure1<JvmFormalParameter> _function_1 = new Procedure1<JvmFormalParameter>() {
-        public void apply(final JvmFormalParameter p) {
-          boolean _isVarArgs = it.isVarArgs();
-          JvmModelGenerator.this.generateParameter(p, appendable, _isVarArgs);
-        }
-      };
-    this._loopExtensions.<JvmFormalParameter>forEach(appendable, _parameters, _function, _function_1);
+      }
+    }
   }
   
   public void generateParameter(final JvmFormalParameter it, final ITreeAppendable appendable, final boolean vararg) {
