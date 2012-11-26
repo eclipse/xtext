@@ -42,6 +42,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.validation.IssueCode;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
@@ -105,13 +106,15 @@ public abstract class OptionsConfigurationBlock {
 	private ModifyListener textModifyListener;
 	protected IStatusChangeListener statusChangeListener;
 	protected final IProject project;
-	protected final String[] keys;
+	protected String[] keys;
 	private Shell shell;
 	private Map<String, String> disabledProjectSettings;
 	private Map<String, String> originalSettings;
 	private int rebuildCount;
 	private IPreferenceStore preferenceStore;
 	private IWorkbenchPreferenceContainer workbenchPreferenceContainer;
+
+	private List<String> keysToRegister = Lists.newArrayList();
 
 	public IProject getProject() {
 		return project;
@@ -121,13 +124,16 @@ public abstract class OptionsConfigurationBlock {
 		this.statusChangeListener = fContext;
 	}
 
-	public OptionsConfigurationBlock(IProject project, String[] allKeys, IPreferenceStore preferenceStore,
+	public OptionsConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
 			IWorkbenchPreferenceContainer container) {
 		this.project = project;
-		this.keys = allKeys;
+		this.keys = new String[] {};
 		this.preferenceStore = preferenceStore;
 		this.rebuildCount = getRebuildCount();
 		this.workbenchPreferenceContainer = container;
+	}
+
+	private void updateDisabledProjSettings(IProject project, IPreferenceStore preferenceStore, String[] allKeys) {
 		if (project == null || hasProjectSpecificOptions(project)) {
 			disabledProjectSettings = null;
 		} else {
@@ -136,7 +142,6 @@ public abstract class OptionsConfigurationBlock {
 				disabledProjectSettings.put(key, preferenceStore.getString(key));
 			}
 		}
-		captureOriginalSettings();
 	}
 
 	public boolean hasProjectSpecificOptions(IProject project) {
@@ -147,7 +152,15 @@ public abstract class OptionsConfigurationBlock {
 		this.shell = shell;
 	}
 
-	protected abstract Control createContents(Composite parent);
+	public final Control createContents(Composite parent) {
+		Control content = doCreateContents(parent);
+		collectRegistredKeys();
+		updateDisabledProjSettings(project, preferenceStore, keys);
+		captureOriginalSettings(keys);
+		return content;
+	}
+
+	protected abstract Control doCreateContents(Composite parent);
 
 	protected Button addCheckBox(Composite parent, String label, String key, String[] values, int indent) {
 		ControlData data = new ControlData(key, values);
@@ -189,10 +202,10 @@ public abstract class OptionsConfigurationBlock {
 		textBoxes.add(textBox);
 		return textBox;
 	}
-	
+
 	protected Combo addComboBox(Composite parent, String label, String code, String[] errorWarningIgnore,
 			String[] errorWarningIgnoreLabels, int indent) {
-		
+
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
 
@@ -200,13 +213,13 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setFont(JFaceResources.getDialogFont());
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
-		
+
 		String[] values = new String[] { "Error", "Warning", "Ignore" };
 		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
-//		if (issueCode.hasJavaEqivalent()) {
-//			values = new String[] { "Error", "Warning", "Ignore", "Java" };
-//			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
-//		}
+		//		if (issueCode.hasJavaEqivalent()) {
+		//			values = new String[] { "Error", "Warning", "Ignore", "Java" };
+		//			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
+		//		}
 
 		Combo comboBox = newComboControl(parent, code, values, valueLabels);
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
@@ -233,8 +246,8 @@ public abstract class OptionsConfigurationBlock {
 		return comboBox;
 	}
 
-	
-	protected Combo addComboBox(IssueCode issueCode, String label, Composite parent, int indent) {
+	protected Combo addComboBox(IssueCode issueCode, String label, Composite parent, int indent, String[] values,
+			String[] valueLabels) {
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
 
@@ -243,26 +256,12 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
 
-		String[] values = new String[] { "Error", "Warning", "Ignore" };
-		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
-		if (issueCode.hasJavaEqivalent()) {
-			values = new String[] { "Error", "Warning", "Ignore", "Java" };
-			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
-		}
-
 		Combo comboBox = newComboControl(parent, issueCode.getCode(), values, valueLabels);
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 
 		labels.put(comboBox, labelControl);
 
 		return comboBox;
-	}
-
-	protected void updateCombo(Combo curr) {
-		ControlData data = (ControlData) curr.getData();
-
-		String currValue = getValue(data.getKey());
-		curr.select(data.getSelection(currValue));
 	}
 
 	private ScrolledPageContent getParentScrolledComposite(Control control) {
@@ -465,7 +464,7 @@ public abstract class OptionsConfigurationBlock {
 				getBuildJob(getProject()).schedule();
 			}
 		}
-		captureOriginalSettings();
+		captureOriginalSettings(keys);
 		return true;
 	}
 
@@ -520,10 +519,39 @@ public abstract class OptionsConfigurationBlock {
 		}
 	}
 
-	protected void updateCheckBox(Button curr) {
+	protected void collectRegistredKeys() {
+		List<String> collectedKeys = Lists.newArrayList();
+		for (Combo combo : comboBoxes) {
+			ControlData data = (ControlData) combo.getData();
+			collectedKeys.add(data.getKey());
+		}
+		for (Button button : checkBoxes) {
+			ControlData data = (ControlData) button.getData();
+			collectedKeys.add(data.getKey());
+		}
+		for (Text textField : textBoxes) {
+			collectedKeys.add((String) textField.getData());
+		}
+		collectedKeys.addAll(keysToRegister);
+		this.keys = Iterables.toArray(collectedKeys, String.class);
+	}
+
+	protected void updateCombo(Combo curr) {
 		ControlData data = (ControlData) curr.getData();
 		String currValue = getValue(data.getKey());
-		curr.setSelection(data.getSelection(currValue) == 0);
+		int selection = data.getSelection(currValue);
+		curr.select(selection);
+	}
+
+	protected void updateCheckBox(Button curr) {
+		ControlData data = (ControlData) curr.getData();
+		curr.setSelection(checkBoxValue(data));
+	}
+
+	private boolean checkBoxValue(ControlData data) {
+		String currValue = getValue(data.getKey());
+		boolean selection = data.getSelection(currValue) == 0;
+		return selection;
 	}
 
 	protected void updateText(Text curr) {
@@ -536,11 +564,15 @@ public abstract class OptionsConfigurationBlock {
 
 	protected abstract void validateSettings(String changedKey, String oldValue, String newValue);
 
-	private void captureOriginalSettings() {
+	private void captureOriginalSettings(String[] keys) {
 		originalSettings = Maps.newHashMapWithExpectedSize(keys.length);
 		for (String key : keys) {
 			originalSettings.put(key, preferenceStore.getString(key));
 		}
+	}
+
+	protected void registerKey(String key) {
+		keysToRegister.add(key);
 	}
 
 }

@@ -39,7 +39,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.validation.XbaseIssueCodes;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
@@ -55,8 +55,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	private IJavaElementFinder javaElementFinder;
-	@Inject
-	private XbaseIssueCodes issueCodes;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -126,11 +124,17 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			}
 		}
 		Object element = getContext().get(typeToCheck);
-		if(element != null){
-			if(element.equals(FORBIDDENREFERENCEID)){
-				notification(issueCodes.forbiddenReference, "Access restriction: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature);
-			} else if(element.equals(DISCOURAGEDREFERENCEID)){
-				warning("Discouraged access: The type " + simpleName + " is not accessible due to restriction on required project " + declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
+		if (element != null) {
+			if (element.equals(FORBIDDENREFERENCEID)) {
+				notification(
+						IssueCodes.IC_FORBIDDEN_REFERENCE,
+						"Access restriction: The type " + simpleName
+								+ " is not accessible due to restriction on required project "
+								+ declaringJavaProject.getElementName(), feature);
+			} else if (element.equals(DISCOURAGEDREFERENCEID)) {
+				warning("Discouraged access: The type " + simpleName
+						+ " is not accessible due to restriction on required project "
+						+ declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
 			}
 		}
 	}
