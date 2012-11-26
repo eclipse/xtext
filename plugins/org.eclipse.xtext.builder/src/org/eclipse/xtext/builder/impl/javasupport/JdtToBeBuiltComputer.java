@@ -125,7 +125,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 								Iterable<Pair<IStorage, IProject>> storages = getMapper().getStorages(uri);
 								for (Pair<IStorage, IProject> pair : storages) {
 									IProject otherProject = pair.getSecond();
-									if (!pair.getSecond().equals(project) && !pair.getSecond().getProject().getName().equals(".org.eclipse.jdt.core.external.folders")) {
+									if (!pair.getSecond().equals(project)) {
 										if (previouslyBuilt.contains(otherProject.getName()))
 											return true;
 										if (!subsequentlyBuilt.contains(otherProject.getName())) {
