@@ -266,7 +266,7 @@ public class FormattingDataFactory {
                 RuntimeException _runtimeException = new RuntimeException();
                 _xifexpression_1 = _runtimeException;
               }
-              WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, indentationChange, _xifexpression_1, space);
+              WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, 0, _xifexpression_1, space);
               result.add(_whitespaceData);
             } else {
               boolean _not_1 = (!applied);
@@ -363,7 +363,7 @@ public class FormattingDataFactory {
                   RuntimeException _runtimeException_3 = new RuntimeException();
                   _xifexpression_5 = _runtimeException_3;
                 }
-                NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, indentationChange, _xifexpression_5, newLines_1);
+                NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, 0, _xifexpression_5, newLines_1);
                 result.add(_newLineData_1);
               }
             }
