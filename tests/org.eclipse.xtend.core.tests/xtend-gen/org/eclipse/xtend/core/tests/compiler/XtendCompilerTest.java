@@ -2955,7 +2955,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
   

@@ -4,8 +4,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -55,7 +53,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -72,7 +70,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -89,7 +87,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -106,7 +104,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -125,7 +123,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -150,7 +148,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -173,7 +171,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -198,17 +196,20 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public /* Unresolved */Object bar() {/* ");
+    _builder_1.append("public /* Unresolved */Object bar() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return null; */throw new Error(\"Unresolved compilation problem\");");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"Incompatible implicit return type. Expected void but was null\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -237,7 +238,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -266,7 +267,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -295,7 +296,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -324,7 +325,22 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, false);
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testUnresolvedTypeConstraint() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo <T extends Unresolved> {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T/*  extends Unresolved */> {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -343,11 +359,11 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final int bar;");
+    _builder_1.append("private final int bar /* Skipped initializer because of errors */;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, true);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -361,19 +377,16 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final Object bar;");
+    _builder_1.append("private final /* type is \'null\' */ bar /* Skipped initializer because of errors */;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, true);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -398,14 +411,20 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public int bar() {throw new Error(\"Unresolved compilation problem\");");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"Incompatible implicit return type. Expected int or java.lang.Integer but was null\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, true);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -430,17 +449,26 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public int bar() {throw new Error(\"Unresolved compilation problem\");");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"The method or field foo is undefined for the type Foo\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"Incompatible implicit return type. Expected int or java.lang.Integer but was void\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, true);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
-  public void assertCompilesTo(final CharSequence input, final CharSequence expected, final boolean skipComments) {
+  public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
       final XtendFile file = this.file(_string, false);
@@ -467,18 +495,9 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
       Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
       final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
       final CharSequence javaCode = this.generator.generateType(inferredType);
-      if (skipComments) {
-        final Pattern pattern = Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL);
-        String _string_1 = expected.toString();
-        String _string_2 = javaCode.toString();
-        Matcher _matcher = pattern.matcher(_string_2);
-        String _replaceAll = _matcher.replaceAll("");
-        Assert.assertEquals(_string_1, _replaceAll);
-      } else {
-        String _string_3 = expected.toString();
-        String _string_4 = javaCode.toString();
-        Assert.assertEquals(_string_3, _string_4);
-      }
+      String _string_1 = expected.toString();
+      String _string_2 = javaCode.toString();
+      Assert.assertEquals(_string_1, _string_2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

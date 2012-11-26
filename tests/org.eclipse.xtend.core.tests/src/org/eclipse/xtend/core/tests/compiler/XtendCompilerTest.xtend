@@ -1303,9 +1303,9 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			package x;
-			
+
 			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-			
+
 			@SuppressWarnings("all")
 			public class Y {
 			  public boolean equals(final Object p) {
@@ -1320,7 +1320,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    return _xifexpression;
 			  }
 			}
-
 		''')
 	}
 	
