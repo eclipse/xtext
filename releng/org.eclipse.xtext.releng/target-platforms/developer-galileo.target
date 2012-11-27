@@ -30,6 +30,7 @@
 <unit id="org.antlr.runtime" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
 <unit id="org.junit" version="4.7.0.v4_7_0_v20100427-1100"/>
+<unit id="org.objectweb.asm" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">

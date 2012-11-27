@@ -99,24 +99,32 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          unpack="false"/>
 
-	<plugin
-	      id="com.google.guava"
-	      download-size="0"
-	      install-size="0"
-	      version="0.0.0"
-	      unpack="false"/>
-	
-	<plugin
-	      id="javax.inject"
-	      download-size="0"
-	      install-size="0"
-	      version="0.0.0"
-	      unpack="false"/>
+   <plugin
+         id="com.google.guava"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
-	<plugin
-	      id="com.google.inject"
-	      download-size="0"
-	      install-size="0"
-	      version="0.0.0"
-	      unpack="false"/>
+   <plugin
+         id="javax.inject"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.inject"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.objectweb.asm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
