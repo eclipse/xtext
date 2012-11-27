@@ -18,7 +18,7 @@
 <unit id="org.eclipse.emf.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.9milestones/"/>
 </location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1"/>
 </location>
