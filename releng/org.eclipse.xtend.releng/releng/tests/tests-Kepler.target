@@ -10,15 +10,15 @@
 <unit id="org.eclipse.ui.cheatsheets" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.2/"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.3milestones/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.8.x/"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/1.3"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="com.google.guava" version="0.0.0"/>
@@ -36,7 +36,7 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/"/>
+<repository location="http://download.eclipse.org/modeling/m2t/xpand/updates/nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
