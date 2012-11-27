@@ -5,6 +5,8 @@
         <cs:dependency name="com.google.guava.source" componentType="osgi.bundle" versionDesignator="[10.0.0,12.0.0)"/>
         <cs:dependency name="com.google.inject" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
+        <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="3.2.0"/>
+        <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="3.2.0"/>
         <cs:dependency name="javax.inject" componentType="osgi.bundle"/>
         <cs:dependency name="javax.inject.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle"/>

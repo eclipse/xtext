@@ -28,6 +28,7 @@
 <unit id="org.aopalliance" version="0.0.0"/>
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
+<unit id="org.objectweb.asm" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
 </location>
