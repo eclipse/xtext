@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.debug;
 
 import com.google.inject.Inject;
-import java.util.LinkedHashSet;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -11,9 +10,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
-import org.eclipse.xtext.generator.trace.SmapSupport;
-import org.eclipse.xtext.generator.trace.SmapSupport.LineMapping;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.generator.trace.LineMappingProvider;
+import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -27,7 +25,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   private IGenerator generator;
   
   @Inject
-  private SmapSupport smapSupport;
+  private LineMappingProvider lineMappingProvider;
   
   @Test
   public void testLineMapping_01() {
@@ -283,9 +281,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   
   public void assertLineNumbers(final CharSequence xtendCodeWithLineNumbers) {
     final AbstractTraceRegion region = this.getTraceRegion(xtendCodeWithLineNumbers);
-    final LinkedHashSet<LineMapping> lineMappings = CollectionLiterals.<LineMapping>newLinkedHashSet();
-    this.smapSupport.createSmapInfo(region, lineMappings);
-    final List<LineMapping> normalizedMappings = this.smapSupport.normalizeLineInfo(lineMappings);
+    final List<LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);
     String _string = xtendCodeWithLineNumbers.toString();
     final String[] lines = _string.split("\n");
     int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
