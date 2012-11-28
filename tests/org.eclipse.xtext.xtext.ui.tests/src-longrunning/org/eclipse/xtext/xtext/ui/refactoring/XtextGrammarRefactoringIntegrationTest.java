@@ -182,7 +182,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 
 	
 	/**
-	 *	FIXME (dennis) Reactivate Testcase if fixed
+	 * FIXME (dennis) Re-activate this test!
 	 */
 	@Test public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
