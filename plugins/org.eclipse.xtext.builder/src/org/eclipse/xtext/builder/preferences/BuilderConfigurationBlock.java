@@ -136,6 +136,9 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
+			addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE), trueFalseValues, 0);
 		}
 		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
@@ -209,7 +212,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 				if (project != null) {
 					monitor.beginTask(String.format(
 							Messages.BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName,
-							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$
+							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$ //$NON-NLS-1$
 							2);
 					project.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 1));
 					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD,

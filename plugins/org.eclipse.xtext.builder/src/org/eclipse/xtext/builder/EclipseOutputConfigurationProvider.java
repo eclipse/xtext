@@ -34,6 +34,11 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	public static final String OUTPUT_OVERRIDE = "override";
 	public static final String OUTPUT_CLEANUP_DERIVED = "cleanupDerived";
 	public static final String OUTPUT_DERIVED = "derived";
+	/**
+	 * @since 2.4
+	 */
+	public static final String INSTALL_DSL_AS_PRIMARY_SOURCE = "installDslAsPrimarySource";
+	
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
 	public IPreferenceStoreAccess getPreferenceStoreAccess() {
@@ -62,20 +67,18 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 
 	protected OutputConfiguration createAndOverlayOutputConfiguration(IPreferenceStore store, OutputConfiguration output) {
 		OutputConfiguration result = new OutputConfiguration(output.getName());
-		boolean clearOutputDirectory = getBoolean(output, OUTPUT_CLEAN_DIRECTORY, store,
-				output.isCanClearOutputDirectory());
+		boolean clearOutputDirectory = getBoolean(output, OUTPUT_CLEAN_DIRECTORY, store, output.isCanClearOutputDirectory());
 		result.setCanClearOutputDirectory(clearOutputDirectory);
-		boolean cleanUpDerivedResources = getBoolean(output, OUTPUT_CLEANUP_DERIVED, store,
-				output.isCleanUpDerivedResources());
+		boolean cleanUpDerivedResources = getBoolean(output, OUTPUT_CLEANUP_DERIVED, store, output.isCleanUpDerivedResources());
 		result.setCleanUpDerivedResources(cleanUpDerivedResources);
-		boolean createOutputDirectory = getBoolean(output, OUTPUT_CREATE_DIRECTORY, store,
-				output.isCreateOutputDirectory());
+		boolean createOutputDirectory = getBoolean(output, OUTPUT_CREATE_DIRECTORY, store, output.isCreateOutputDirectory());
 		result.setCreateOutputDirectory(createOutputDirectory);
-		boolean overrideExistingResources = getBoolean(output, OUTPUT_OVERRIDE, store,
-				output.isOverrideExistingResources());
+		boolean overrideExistingResources = getBoolean(output, OUTPUT_OVERRIDE, store, output.isOverrideExistingResources());
 		result.setOverrideExistingResources(overrideExistingResources);
 		boolean setDerivedProperty = getBoolean(output, OUTPUT_DERIVED, store, output.isSetDerivedProperty());
 		result.setSetDerivedProperty(setDerivedProperty);
+		boolean installDslAsPrimarySource = getBoolean(output, INSTALL_DSL_AS_PRIMARY_SOURCE, store, output.isInstallDslAsPrimarySource());
+		result.setInstallDslAsPrimarySource(installDslAsPrimarySource);
 		String description = getString(output, OUTPUT_DESCRIPTION, store, output.getDescription());
 		result.setDescription(description);
 		String directory = getString(output, OUTPUT_DIRECTORY, store, output.getOutputDirectory());
