@@ -11,11 +11,24 @@
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<property name="xtend.sourcesLocation" value="${xtend.checkoutLocation}/plugins/" />
-
+		<condition property="build.stable" value="yes">
+			<or>
+				<matches string="${build.id}" pattern="[S|R](d)*" />
+				<istrue value="${force.javadoc}"/>
+			</or>
+		</condition>
 
 		<echo message="Source code location ${sourcesLocation}" />
 		<echo message="Javadoc output location ${output}" />
 		<echo message="Target platform path ${targetPlatform}" />
+
+		<echo message="Build id ${build.id}" />
+		<echo message="Build stable? ${build.stable}" />
+		<echo message="Force javadoc generation? ${force.javadoc}" />
+		<antcall target="-generate.javadoc" inheritall="true" />
+	</target>
+
+	<target name="-generate.javadoc" if="build.stable">
 
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
@@ -23,7 +36,7 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-		
+
 		<!-- Prepare dirs -->
 		<delete dir="${output}" />
 		<mkdir dir="${output}" />
