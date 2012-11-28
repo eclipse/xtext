@@ -19,6 +19,7 @@ public class Messages extends NLS {
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName;
 	public static String BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName;
 	public static String BuilderConfigurationBlock_GeneralSection_Label;
+	public static String BuilderConfigurationBlock_InstallDslAsPrimarySource;
 	public static String BuilderConfigurationBlock_SettingsChanged_ProjectBuild;
 	public static String BuilderConfigurationBlock_SettingsChanged_Title;
 	public static String BuilderConfigurationBlock_SettingsChanged_WorkspaceBuild;

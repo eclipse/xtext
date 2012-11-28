@@ -58,13 +58,11 @@ public class BuilderPreferenceAccess {
 				store.setDefault(getKey(configuration, OUTPUT_DESCRIPTION), configuration.getDescription());
 				store.setDefault(getKey(configuration, OUTPUT_DERIVED), configuration.isSetDerivedProperty());
 				store.setDefault(getKey(configuration, OUTPUT_DIRECTORY), configuration.getOutputDirectory());
-				store.setDefault(getKey(configuration, OUTPUT_CREATE_DIRECTORY),
-						configuration.isCreateOutputDirectory());
-				store.setDefault(getKey(configuration, OUTPUT_CLEAN_DIRECTORY),
-						configuration.isCanClearOutputDirectory());
+				store.setDefault(getKey(configuration, OUTPUT_CREATE_DIRECTORY), configuration.isCreateOutputDirectory());
+				store.setDefault(getKey(configuration, OUTPUT_CLEAN_DIRECTORY), configuration.isCanClearOutputDirectory());
 				store.setDefault(getKey(configuration, OUTPUT_OVERRIDE), configuration.isOverrideExistingResources());
-				store.setDefault(getKey(configuration, OUTPUT_CLEANUP_DERIVED),
-						configuration.isCleanUpDerivedResources());
+				store.setDefault(getKey(configuration, OUTPUT_CLEANUP_DERIVED), configuration.isCleanUpDerivedResources());
+				store.setDefault(getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE), configuration.isInstallDslAsPrimarySource());
 			}
 		}
 
