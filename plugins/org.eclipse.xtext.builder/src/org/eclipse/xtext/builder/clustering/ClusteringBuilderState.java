@@ -186,6 +186,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     }
 
                     URI changedURI = null;
+                    URI actualResourceURI = null;
                     Resource resource = null;
                     Delta newDelta = null;
 
@@ -193,6 +194,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         // Load the resource and create a new resource description
                         LoadResult loadResult = loadOperation.next();
                         changedURI = loadResult.getUri();
+                        actualResourceURI = loadResult.getResource().getURI();
                         resource = addResource(loadResult.getResource(), resourceSet);
 
                         subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
@@ -201,16 +203,16 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                             break;
                         }
 
-                        final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
+                        final IResourceDescription.Manager manager = getResourceDescriptionManager(actualResourceURI);
                         if (manager != null) {
                             // Resolve links here!
                         	try {
 	                            EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
 	                            final IResourceDescription description = manager.getResourceDescription(resource);
 	                            final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
-	                            newDelta = manager.createDelta(this.getResourceDescription(changedURI), copiedDescription);
+	                            newDelta = manager.createDelta(this.getResourceDescription(actualResourceURI), copiedDescription);
                         	} catch (RuntimeException e) {
-                        		LOGGER.error("Error resolving cross references on resource '"+resource.getURI()+"'", e);
+                        		LOGGER.error("Error resolving cross references on resource '"+actualResourceURI+"'", e);
                         	}
                         }
                     } catch (final WrappedException ex) {
