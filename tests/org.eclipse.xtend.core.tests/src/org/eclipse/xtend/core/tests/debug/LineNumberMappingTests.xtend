@@ -6,8 +6,8 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider
-import org.eclipse.xtext.generator.trace.SmapSupport
-import org.eclipse.xtext.generator.trace.SmapSupport$LineMapping
+import org.eclipse.xtext.generator.trace.LineMappingProvider
+import org.eclipse.xtext.generator.trace.LineMappingProvider$LineMapping
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -15,7 +15,7 @@ import static org.junit.Assert.*
 class LineNumberMappingTests extends AbstractXtendTestCase {
 	
 	@Inject IGenerator generator
-	@Inject SmapSupport smapSupport
+	@Inject LineMappingProvider lineMappingProvider
 	
 	@Test
 	def void testLineMapping_01() {
@@ -151,9 +151,7 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 	
 	def assertLineNumbers(CharSequence xtendCodeWithLineNumbers) {
 		val region = xtendCodeWithLineNumbers.traceRegion
-		val lineMappings = <LineMapping>newLinkedHashSet()
-		smapSupport.createSmapInfo(region, lineMappings)
-		val normalizedMappings = smapSupport.normalizeLineInfo(lineMappings);
+		val normalizedMappings = lineMappingProvider.getLineMapping(region)
 		val lines = xtendCodeWithLineNumbers.toString.split('\n')
 		for (lineNumber : 0..lines.size-1) {
 			val mapping = findMapping(normalizedMappings, lineNumber)
