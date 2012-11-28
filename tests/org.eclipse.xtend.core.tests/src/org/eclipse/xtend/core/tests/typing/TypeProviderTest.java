@@ -100,6 +100,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testTypeOfRichStringWithExpectedString_1() throws Exception {
 		XtendFunction function = function("def String foo(String x) {" +
 				"foo('''someString''')" +
@@ -110,6 +111,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testTypeOfRichStringWithExpectedString_2() throws Exception {
 		XtendFunction function = function("def String foo(String x) {" +
 				"println('''someString''')" +
@@ -138,6 +140,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testTypeOfRichStringWithNoExpectedString_1() throws Exception {
 		XtendFunction function = function("def foo(String x) {" +
 				"println('''someString''')" +

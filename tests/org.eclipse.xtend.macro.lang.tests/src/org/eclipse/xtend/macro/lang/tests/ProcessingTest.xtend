@@ -320,4 +320,30 @@ class ProcessingTest {
 		]	
 	}
 	
+	@Test def void testAnnotationIsNotCopiedToJava_01() {
+        resourceSet('''
+                package classPack
+                
+                import annoPack.ProcessedParameterAnnotation
+                
+                class MyClass {
+                    def void method(@ProcessedParameterAnnotation String s) {}
+                }
+            '''.xtend,
+            'MyService.macro' -> '''
+                package annoPack
+                
+                @ProcessedParameterAnnotation for parameter {
+                }
+            '''
+        ).compile [
+            val myClass = getCompiledClass('classPack.MyClass')
+            assertNotNull(myClass)
+            val method = myClass.getDeclaredMethod('method', typeof(String))
+            val parameterAnnotations = method.parameterAnnotations
+            val firstParameterAnnotations = parameterAnnotations.get(0)
+            assertTrue(firstParameterAnnotations.isEmpty)
+        ]   
+    }
+	
 }

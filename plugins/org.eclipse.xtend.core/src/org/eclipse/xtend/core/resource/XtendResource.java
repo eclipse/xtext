@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.typing.ReturnTypeProvider;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -125,9 +127,9 @@ public class XtendResource extends XbaseResource {
 	
 	protected JvmTypeReference inferReturnType(JvmOperation jvmOperation) {
 		List<JvmTypeReference> associatedReturnTypes = newArrayList();
-		final Iterable<XtendFunction> associatedElements = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
+		final Iterable<XtendFunction> associatedFunctions = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
 		boolean wasDispatch = false;
-		for (XtendFunction func : associatedElements) {
+		for (XtendFunction func : associatedFunctions) {
 			JvmTypeReference type = returnTypeProvider.computeReturnType(func);
 			if (type != null && !(type instanceof JvmAnyTypeReference))
 				associatedReturnTypes.add(type);
@@ -135,7 +137,7 @@ public class XtendResource extends XbaseResource {
 		}
 		if (wasDispatch) {
 			if (jvmOperation.getSimpleName().startsWith("_")) {
-				for(XtendFunction func: associatedElements) {
+				for(XtendFunction func: associatedFunctions) {
 					if (func.getReturnType() != null) {
 						return EcoreUtil2.cloneWithProxies(func.getReturnType());	
 					}
@@ -155,6 +157,15 @@ public class XtendResource extends XbaseResource {
 				if (overriddenOperation != null) {
 					JvmTypeReference result = overriddenOperation.getReturnType();
 					return EcoreUtil2.cloneWithProxies(result);
+				}
+			}
+		} else {
+			final Iterable<XtendField> associatedFields = filter(associations.getSourceElements(jvmOperation), XtendField.class);
+			XtendField field = Iterables.getFirst(associatedFields, null);
+			if (field != null) {
+				XExpression initialValue = field.getInitialValue();
+				if (initialValue != null) {
+					return EcoreUtil2.cloneIfContained(typeProvider.getType(initialValue));
 				}
 			}
 		}

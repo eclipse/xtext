@@ -9,9 +9,11 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -1354,7 +1356,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testFoo() {
+  public void testSwitchOverNull() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Foo  {");
     _builder.newLine();
@@ -2885,6 +2887,44 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testAnnotationOnAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("@java.lang.annotation.Documented");
+    _builder.newLine();
+    _builder.append("annotation Bar {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@com.google.inject.Inject String string");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import com.google.inject.Inject;");
+    _builder_1.newLine();
+    _builder_1.append("import java.lang.annotation.Documented;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Documented");
+    _builder_1.newLine();
+    _builder_1.append("public @interface Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Inject");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String string();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testSuperCall() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y extends Object {");
@@ -4250,6 +4290,12 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("String annotation = \'foo\'");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val inferred = \'bar\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val inferredClass = typeof(StringBuilder)");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -4257,6 +4303,12 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String annotation() default \"foo\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String inferred() default \"bar\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Class<StringBuilder> inferredClass() default StringBuilder.class;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -4541,6 +4593,8 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       EList<EObject> _contents = _eResource.getContents();
       Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
       final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
+      boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(inferredType);
+      Assert.assertFalse(_isDisabled);
       final CharSequence javaCode = this.generator.generateType(inferredType);
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();

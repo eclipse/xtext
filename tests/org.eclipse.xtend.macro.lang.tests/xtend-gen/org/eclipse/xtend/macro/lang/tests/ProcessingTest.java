@@ -8,6 +8,7 @@
 package org.eclipse.xtend.macro.lang.tests;
 
 import com.google.inject.Inject;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -708,6 +709,59 @@ public class ProcessingTest {
               Class<? extends Object> _type = _declaredField.getType();
               boolean _equals = ObjectExtensions.operator_equals(_type, Boolean.class);
               Assert.assertTrue(_equals);
+            } catch (Exception _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+      this._compilationTestHelper.compile(_resourceSet, new IAcceptor<Result>() {
+          public void accept(Result t) {
+            _function.apply(t);
+          }
+      });
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotationIsNotCopiedToJava_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package classPack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import annoPack.ProcessedParameterAnnotation");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def void method(@ProcessedParameterAnnotation String s) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,CharSequence> _xtend = this._macroTestExtensions.xtend(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package annoPack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@ProcessedParameterAnnotation for parameter {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("MyService.macro", _builder_1);
+      ResourceSet _resourceSet = this._compilationTestHelper.resourceSet(_xtend, _mappedTo);
+      final Procedure1<Result> _function = new Procedure1<Result>() {
+          public void apply(final Result it) {
+            try {
+              final Class<? extends Object> myClass = it.getCompiledClass("classPack.MyClass");
+              Assert.assertNotNull(myClass);
+              final Method method = myClass.getDeclaredMethod("method", String.class);
+              final Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+              final Annotation[] firstParameterAnnotations = ((List<Annotation[]>)Conversions.doWrapArray(parameterAnnotations)).get(0);
+              boolean _isEmpty = ((List<Annotation>)Conversions.doWrapArray(firstParameterAnnotations)).isEmpty();
+              Assert.assertTrue(_isEmpty);
             } catch (Exception _e) {
               throw Exceptions.sneakyThrow(_e);
             }
