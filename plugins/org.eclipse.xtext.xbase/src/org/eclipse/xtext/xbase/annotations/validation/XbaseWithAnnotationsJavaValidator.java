@@ -107,6 +107,13 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 			}
 		}
 	}
+	
+	@Override
+	protected boolean isImplicitReturn(XExpression expr) {
+		if (expr instanceof XAnnotation)
+			return false;
+		return super.isImplicitReturn(expr);
+	}
 
 	/*
 	 * validations :
