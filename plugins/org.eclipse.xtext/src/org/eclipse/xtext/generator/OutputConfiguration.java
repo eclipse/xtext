@@ -55,6 +55,13 @@ public class OutputConfiguration {
 	 */
 	private boolean canClearOutputDirectory = false;
 	
+	/**
+	 * whether the DSL files should be registered as primary source files for debugging in the generated
+	 * Java-class-files. If false, the Java source is registered as primary source and the DSL files are registered as
+	 * secondary source via JSR-045 (SMAP).
+	 */
+	private boolean installDslAsPrimarySource = false;
+	
 	public OutputConfiguration(String name) {
 		super();
 		this.name = name;
@@ -118,6 +125,20 @@ public class OutputConfiguration {
 	
 	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
 		this.canClearOutputDirectory = canClearOutputDirectory;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean isInstallDslAsPrimarySource() {
+		return installDslAsPrimarySource;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void setInstallDslAsPrimarySource(boolean installDslAsPrimarySource) {
+		this.installDslAsPrimarySource = installDslAsPrimarySource;
 	}
 
 	@Override

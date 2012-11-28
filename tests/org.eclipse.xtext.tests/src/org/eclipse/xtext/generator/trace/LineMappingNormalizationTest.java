@@ -14,26 +14,24 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.trace.SmapSupport.LineMapping;
+import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholdt
  */
-public class SmapSupportTest {
+public class LineMappingNormalizationTest {
 	
 	private URI source = URI.createURI("fake://source.dsl");
 	
-	private SmapSupport support = new SmapSupport() {
+	private class TestableLineMappingProvider extends LineMappingProvider {
 		@Override
-		protected String getStratumName(URI path) {
-			return "myLang";
+		public List<LineMapping> normalizeLineInfo(Set<LineMapping> lineData) {
+			return super.normalizeLineInfo(lineData);
 		}
-		
-		@Override
-		protected String getPath(URI path) {
-			return "source.dsl";
-		}
-	};
+	}
+	
+	private TestableLineMappingProvider support = new TestableLineMappingProvider() ;
 	
 	@Test
 	public void testNomalization() {
