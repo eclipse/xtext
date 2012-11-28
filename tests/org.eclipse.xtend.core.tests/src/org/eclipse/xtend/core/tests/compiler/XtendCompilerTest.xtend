@@ -6,6 +6,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 
 class XtendCompilerTest extends AbstractXtendTestCase {
 	
@@ -90,6 +91,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
 	@Test def testBug383568() {
 		'''
 			@Data class UsesExtension {
@@ -559,7 +561,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	@Test
-	def testFoo() { 
+	def testSwitchOverNull() { 
 		assertCompilesTo('''
 			public class Foo  {
 			    def foo() {
@@ -1291,6 +1293,28 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+    def testAnnotationOnAnnotation() {
+        assertCompilesTo('''
+            package foo
+            @java.lang.annotation.Documented
+            annotation Bar {
+                @com.google.inject.Inject String string
+            }
+        ''', '''
+            package foo;
+
+            import com.google.inject.Inject;
+            import java.lang.annotation.Documented;
+
+            @Documented
+            public @interface Bar {
+              @Inject
+              public String string();
+            }
+        ''')
+    }
+	
+	@Test
 	def testSuperCall() {
 		assertCompilesTo('''
 			package x class Y extends Object {
@@ -1958,10 +1982,14 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		'''
 			annotation annotation { 
 				String annotation = 'foo'
+				val inferred = 'bar'
+				val inferredClass = typeof(StringBuilder)
 			}
 		''','''
 			public @interface annotation {
 			  public String annotation() default "foo";
+			  public String inferred() default "bar";
+			  public Class<StringBuilder> inferredClass() default StringBuilder.class;
 			}
 		''')
 	}
@@ -2095,6 +2123,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
+		assertFalse(DisableCodeGenerationAdapter::isDisabled(inferredType))
 		val javaCode = generator.generateType(inferredType);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
 	}
