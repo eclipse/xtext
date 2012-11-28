@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.builderState;
+package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
