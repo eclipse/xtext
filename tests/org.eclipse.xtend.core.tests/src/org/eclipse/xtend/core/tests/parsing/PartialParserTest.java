@@ -35,6 +35,7 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.junit.Test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,6 +44,9 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private InvariantChecker invariantChecker;
+	
+	@Inject
+	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
 	@Test public void testNoClassCastException() throws Exception {
 		String model =
@@ -605,9 +609,8 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	}
 	
 	protected void validateWithoutException(XtextResource resource) {
-		ResourceValidatorImpl validator = new ResourceValidatorImpl();
+		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
-		getInjector().injectMembers(validator);
 		validator.setDiagnosticConverter(new IDiagnosticConverter() {
 			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof BasicDiagnostic) {
@@ -647,7 +650,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	}
 
 	protected XtextResource createResource(String model, String fileName) throws IOException {
-		XtextResourceSet resourceSet = get(XtextResourceSet.class);
+		XtextResourceSet resourceSet = getResourceSet();
 		XtextResource resource = (XtextResource) resourceSet.createResource(URI.createURI(fileName));
 		resource.load(new StringInputStream(model), null);
 		return resource;
@@ -656,7 +659,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	protected void compareWithNewResource(XtextResource resource, String model, int offset, int length, String newText,
 			String fileName) throws IOException {
 		resource.update(offset, length, newText);
-		XtextResourceSet secondResourceSet = get(XtextResourceSet.class);
+		XtextResourceSet secondResourceSet = getResourceSet();
 		XtextResource newResource = (XtextResource) secondResourceSet.createResource(URI.createURI(fileName));
 		String newModel = new StringBuilder(model).replace(offset, offset + length, newText).toString();
 		assertEquals(newModel, resource.getParseResult().getRootNode().getText());

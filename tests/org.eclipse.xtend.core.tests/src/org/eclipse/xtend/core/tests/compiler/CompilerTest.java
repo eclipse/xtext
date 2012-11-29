@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -2662,9 +2663,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Inject
 	private IXtendJvmAssociations associations;
 	
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(StringExtensions.class);

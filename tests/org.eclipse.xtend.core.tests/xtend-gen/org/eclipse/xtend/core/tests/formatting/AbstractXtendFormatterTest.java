@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting;
 
 import javax.inject.Inject;
-import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = XtendInjectorProvider.class)
+@InjectWith(value = RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public abstract class AbstractXtendFormatterTest {
   @Inject

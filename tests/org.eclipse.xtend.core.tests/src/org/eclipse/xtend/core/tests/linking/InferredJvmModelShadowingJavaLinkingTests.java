@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -37,12 +38,12 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtendTest
 	@Inject 
 	protected IXtendJvmAssociations associations;
 	
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		resourceSet.getResources().clear();
 		resourceSet.setClasspathURIContext(this);
 	}
+	
 	@Test public void testLinkJavaClass() throws Exception {
 		XtendClass bar = classFile("test/Bar", "package test class Bar extends Foo {}");
 		assertTrue(isJavaElement(bar.getExtends().getType()));

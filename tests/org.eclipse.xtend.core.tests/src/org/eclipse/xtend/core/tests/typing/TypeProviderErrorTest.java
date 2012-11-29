@@ -199,7 +199,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		if (validate)
 			return super.file(string, validate);
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);

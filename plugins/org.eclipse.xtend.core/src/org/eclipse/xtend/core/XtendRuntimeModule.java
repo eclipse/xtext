@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -51,6 +52,10 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModule {
+	
+	public XbaseFactory bindXbaseFactory() {
+		return XbaseFactory.eINSTANCE;
+	}
 	
 	public Class<? extends XExpressionHelper> bindXExpressionHelper() {
 		return XtendExpressionHelper.class;

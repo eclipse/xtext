@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.Before;
 import org.junit.Test;
 
 import testdata.Annotation1;
@@ -65,6 +66,12 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 		final String text = "class Foo { @com.google.inject.Inject(optional = true) String string }";
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertTrue(inject.optional());
+	}
+	
+	@Test public void testKeyValueParameterizedAnnotationOnMethod() throws Exception {
+		final String text = "class Foo { @org.junit.Test(timeout = 400) def String string() {} }";
+		Test test = getAnnotationOnMethod(text, Test.class);
+		assertEquals(400, test.timeout());
 	}
 	
 	@Test public void testMarkerAnnotationOnField() throws Exception {
@@ -147,11 +154,11 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	@Inject
 	private JvmModelGenerator generator;
 	
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(Check.class);
+		javaCompiler.addClassPathOfClass(Test.class);
 		javaCompiler.addClassPathOfClass(StringExtensions.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);

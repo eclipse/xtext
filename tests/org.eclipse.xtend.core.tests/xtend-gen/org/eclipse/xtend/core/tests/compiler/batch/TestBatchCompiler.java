@@ -1,10 +1,17 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.compiler.batch;
 
 import com.google.inject.Inject;
 import java.io.File;
 import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
@@ -16,8 +23,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Batch compiler tests.
+ * @see org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+ */
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = XtendInjectorProvider.class)
+@InjectWith(value = RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class TestBatchCompiler {
   @Inject

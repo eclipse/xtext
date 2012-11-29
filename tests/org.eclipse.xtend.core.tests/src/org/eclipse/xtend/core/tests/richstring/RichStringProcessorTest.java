@@ -30,7 +30,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -235,7 +234,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 	}
 	
 	protected RichString richStringWithError(String string) throws Exception {
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(getPrefix()+string+"}"), null);
@@ -1019,20 +1018,34 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		Assert.assertEquals(expected, events);
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
-	@Test public void testProcessorEventsBug394277() throws Exception {
+	@Test public void testProcessorEventsBug394277_01() throws Exception {
 		String events = recordRichStringProcessorEvents(
 				"'''\n" +
-						"    «»\n" +
+				"    «»\n" +
 				"'''");
 		String expected = 
 				"announceNextLiteral()\n"+
 				"acceptTemplateText()\n"+
 				"acceptTemplateLineBreak()\n"+
-				"acceptTemplateText(    )\n"+
+				"acceptTemplateText()\n"+
+				"acceptSemanticText(    )\n"+
 				"acceptSemanticText()\n"+
+				"announceNextLiteral()\n"+
 				"acceptSemanticText()\n"+
-//				"acceptExpression(«true»)\n"+
+				"acceptSemanticLineBreak()\n"+
+				"acceptTemplateText()";
+		Assert.assertEquals(expected, events);
+	}
+	
+	@Test public void testProcessorEventsBug394277_02() throws Exception {
+		String events = recordRichStringProcessorEvents("'''  «\n  »  '''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText()\n"+
+				"acceptSemanticText(    )\n"+
+				"acceptSemanticText()\n"+
 				"announceNextLiteral()\n"+
 				"acceptSemanticText()\n"+
 				"acceptSemanticLineBreak()\n"+

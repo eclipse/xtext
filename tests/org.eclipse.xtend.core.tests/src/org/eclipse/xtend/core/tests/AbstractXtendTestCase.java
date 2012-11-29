@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
 import static com.google.common.collect.Lists.*;
@@ -10,68 +17,45 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
+/**
+ * Abstract base for Xtend tests.
+ */
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractXtendTestCase extends Assert {
 
-	private static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
-
-	public static class TestSetup extends XtendStandaloneSetup {
-		
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new XtendRuntimeModule() {
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return AbstractXtendTestCase.class.getClassLoader();
-				}
-				
-				@SuppressWarnings("unused")
-				public XtendFactory bindFactory() {
-					return XtendFactory.eINSTANCE;
-				}
-
-			});
-		}
-	}
-
-	@Before
-	public void setUp() throws Exception {
-		doGetInjector().injectMembers(this);
-	}
-
-	public static Injector getInjector() {
-//		if (injector == null)
-//			injector = new TestSetup().createInjectorAndDoEMFRegistration();
-		return injector;
-	}
-	
-	protected Injector doGetInjector() {
-		return getInjector();
-	}
-
-	public <T> T get(Class<T> clazz) {
-		return doGetInjector().getInstance(clazz);
-	}
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
@@ -101,7 +85,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 	}
 
 	protected XtextResourceSet getResourceSet() {
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = resourceSetProvider.get();
 		return set;
 	}
 	

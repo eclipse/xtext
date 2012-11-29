@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -36,6 +35,9 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -242,6 +244,9 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 	}
 	
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
+	
 	@Override
 	public void assertOutput(String expectedOutput, String richString) throws Exception {
 		RichString parsedString = richString(richString);
@@ -268,7 +273,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 	}
 
 	protected XtendFile file(String string, boolean validate) throws Exception {
-		XtextResourceSet set = AbstractXtendTestCase.getInjector().getInstance(XtextResourceSet.class);
+		XtextResourceSet set = resourceSetProvider.get();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);

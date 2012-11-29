@@ -17,11 +17,21 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class RichTextValueConverterTest extends AbstractXtendTestCase {
 
+	@Inject
+	private Injector injector;
+	
+	private <T> T get(Class<T> clazz) {
+		return injector.getInstance(clazz);
+	}
+	
 	@Test public void testRichText() {
 		String text = "''' foobar '''";
 		String expectation = " foobar ";

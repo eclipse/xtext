@@ -56,8 +56,8 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 	@Test public void testConstructor() throws Exception {
 		String modelAsString =
 			"class Foo {\n"
-				+ "  def bar() { new Foo() }\n"
-				+ "}";
+			+ "  def bar() { new Foo() }\n"
+			+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("Foo", 10), true);
 		assertEquals(1, hyperlinks.length);

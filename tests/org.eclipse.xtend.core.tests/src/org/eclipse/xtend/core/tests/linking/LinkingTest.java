@@ -58,10 +58,14 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class LinkingTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private IXtendJvmAssociations associator;
+	
+	@Inject
+	private ITypeProvider typeProvider;
 	
 	@Test public void testDeclaredConstructor_01() throws Exception {
 		XtendClass clazz = clazz(
@@ -854,7 +858,6 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(1);
 		XExpression body = function.getExpression();
-		ITypeProvider typeProvider = get(ITypeProvider.class);
 		JvmTypeReference bodyType = typeProvider.getType(body);
 		assertEquals("java.lang.Iterable<org.eclipse.xtext.AbstractRule>", bodyType.getIdentifier());
 		XBlockExpression block = (XBlockExpression) body;
