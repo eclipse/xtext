@@ -10,8 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -45,6 +45,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrantTypeResolver {
 
 	public static class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
@@ -59,6 +60,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 
 		@Override
+		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			if (actualType == null)
@@ -71,7 +73,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
-	public void initializeFrom(@NonNull EObject root) {
+	public void initializeFrom(EObject root) {
 		if (!(root instanceof JvmType)) {
 			throw new IllegalArgumentException("only JvmTypes are supported as root by this resolver");
 		}
@@ -79,7 +81,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
-	@NonNull
 	protected JvmType getRoot() {
 		return (JvmType) super.getRoot();
 	}
@@ -95,11 +96,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		if (element instanceof JvmDeclaredType) {
 			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element);
 		} else if (element instanceof JvmConstructor) {
-			_doPrepare(resolvedTypes, (JvmConstructor) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmConstructor) element);
 		} else if (element instanceof JvmField) {
-			_doPrepare(resolvedTypes, (JvmField) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmField) element);
 		} else if (element instanceof JvmOperation) {
-			_doPrepare(resolvedTypes, (JvmOperation) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmOperation) element);
 		}
 	}
 	
@@ -111,58 +112,57 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 
-	protected void _doPrepare(ResolvedTypes resolvedTypes, JvmField field) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		JvmTypeReference knownType = field.getType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field, false);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
 			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
 			resolvedTypes.setType(field, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field, false);
 			field.setType(reference);
 		}
 	}
 	
-	protected void _doPrepare(ResolvedTypes resolvedTypes, JvmConstructor constructor) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
 		JvmDeclaredType producedType = constructor.getDeclaringType();
 		JvmParameterizedTypeReference asReference = getServices().getTypeReferences().createTypeRef(producedType);
 		LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(asReference);
 		resolvedTypes.setType(constructor, lightweightReference);
 	}
 	
-	protected void _doPrepare(ResolvedTypes resolvedTypes, JvmOperation operation) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		JvmTypeReference knownType = operation.getReturnType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation, true);
 			casted.setEquivalent(reference);
-		} else if (operation.getReturnType() != null) {
+		} else if (knownType != null) {
 			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
 			resolvedTypes.setType(operation, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation, true);
 			operation.setReturnType(reference);
 		}
 	}
 	
-	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, JvmMember member, boolean returnType) {
+	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-		result.setTypeProvider(createTypeProvider(resolvedTypes, member, returnType));
+		result.setTypeProvider(createTypeProvider(resolvedTypes, featureScopeSession, member, returnType));
 		// TODO do we need a lightweight computed type reference?
 //		resolvedTypes.setType(member, result);
 		return result;
 	}
 	
-	protected DemandTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, JvmMember member, boolean returnType) {
+	protected AbstractReentrantTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
 		return new DemandTypeReferenceProvider(expression, resolvedTypes, returnType);
 	}
 	
 	@Override
-	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		prepare(resolvedTypes, session);
 		super.computeTypes(resolvedTypes, session);
@@ -170,7 +170,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
-	@NonNullByDefault
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmConstructor) {
 			_computeTypes(resolvedTypes, featureScopeSession, (JvmConstructor) element);
@@ -241,12 +240,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmParameterizedTypeReference thisType = getServices().getTypeReferences().createTypeRef(type);
 		LightweightTypeReference lightweightThisType = resolvedTypes.getConverter().toLightweightReference(thisType);
 		childResolvedTypes.reassignType(type, lightweightThisType);
-		List<JvmMember> members = type.getMembers();
-		for(int i = 0; i < members.size(); i++) {
-			computeTypes(childResolvedTypes, childSession, members.get(i));
-		}
+		computeMemberTypes(childResolvedTypes, childSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
 		childResolvedTypes.mergeIntoParent();
+	}
+
+	protected void computeMemberTypes(StackedResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			JvmDeclaredType type) {
+		List<JvmMember> members = type.getMembers();
+		for(int i = 0; i < members.size(); i++) {
+			computeTypes(resolvedTypes, featureScopeSession, members.get(i));
+		}
 	}
 	
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType type) {
@@ -255,7 +259,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType thisType,
-			JvmTypeReference superType) {
+			@Nullable JvmTypeReference superType) {
 		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
@@ -268,6 +272,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return childSession;
 	}
 	
+	@Nullable
 	public JvmTypeReference getExtendedClass(JvmDeclaredType type) {
 		for(JvmTypeReference candidate: type.getSuperTypes()) {
 			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())

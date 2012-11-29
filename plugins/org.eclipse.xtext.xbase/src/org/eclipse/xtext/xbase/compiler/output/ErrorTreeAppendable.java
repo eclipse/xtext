@@ -12,6 +12,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@NonNullByDefault
 public class ErrorTreeAppendable extends TreeAppendable {
 	
 	private EObject context;

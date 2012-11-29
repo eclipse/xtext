@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -19,7 +20,7 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 
 	private boolean computing = false;
 
-	public final JvmTypeReference getTypeReference(XComputedTypeReferenceImplCustom context) {
+	public final JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
 		if (computing)
 			return handleReentrantInvocation(context);
 		try {
@@ -30,9 +31,9 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 		}
 	}
 	
-	protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
+	protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
 		return null;
 	}
 
-	protected abstract JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context);
+	protected abstract JvmTypeReference doGetTypeReference(@NonNull XComputedTypeReferenceImplCustom context);
 }

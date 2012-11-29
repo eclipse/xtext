@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -15,6 +16,6 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
  */
 public interface IJvmTypeReferenceProvider {
 
-	JvmTypeReference getTypeReference(XComputedTypeReferenceImplCustom context);
+	JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context);
 	
 }

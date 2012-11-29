@@ -64,7 +64,6 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType);
 	
-	
 	@Override
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {

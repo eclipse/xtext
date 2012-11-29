@@ -47,7 +47,7 @@ public class AnnotationValueTypeComputationState extends AbstractRootTypeComputa
 	protected LightweightTypeReference getExpectedType() {
 		JvmOperation operation = annotationValue.getOperation();
 		LightweightTypeReference result = getResolvedTypes().getActualType(operation);
-		if (result.isArray()) {
+		if (result != null && result.isArray()) {
 			return result.getComponentType();
 		}
 		return result;

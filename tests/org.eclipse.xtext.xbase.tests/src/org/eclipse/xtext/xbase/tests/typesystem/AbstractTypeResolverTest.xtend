@@ -559,6 +559,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"(null as String[]).map[ it ]".resolvesTo("List<String>")
 	}
 	
+	@Test def void testFeatureCallWithArrayToIterableConversion_04() throws Exception {
+        "(null as String[][]).head".resolvesTo("String[]")
+    }
+	
 	@Test def void testReturnType_01() throws Exception {
 		"return 'foo'".resolvesTo("void")
 	}
