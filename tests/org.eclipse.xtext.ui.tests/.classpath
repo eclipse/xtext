@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="emf-gen"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests-longrunning"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
