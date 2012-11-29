@@ -326,7 +326,7 @@ public abstract class AbstractTraceRegion {
 			} else {
 				if (data.getPath() == null) {
 					if (!allNull)
-						throw new IllegalStateException("If multiple associated locations are present, the path has to be set");
+						throw new IllegalStateException("Iff multiple associated locations are present, the path has to be set");
 				} else {
 					allNull = false;
 					path = data.getPath();
