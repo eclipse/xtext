@@ -11,11 +11,16 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DatatypeRuleConverterTest extends AbstractXtendTestCase {
 
+	@Inject 
+	private IValueConverterService converter;
+	
 	@Test public void testValidID() {
 		doTestConverter("create", "create", "ValidID");
 		doTestConverter("doStuff", "doStuff", "ValidID");
@@ -33,7 +38,6 @@ public class DatatypeRuleConverterTest extends AbstractXtendTestCase {
 	}
 
 	protected void doTestConverter(String text, String expectation, String ruleName) {
-		IValueConverterService converter = get(IValueConverterService.class);
 		String actual = (String) converter.toValue(text, ruleName, null);
 		assertEquals(expectation, actual);
 		String reverse = converter.toString(actual, ruleName);

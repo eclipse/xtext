@@ -45,6 +45,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * A brute-force test class to ensure that parsing, linking and validation 
@@ -65,6 +66,12 @@ public class SmokeTest extends AbstractSmokeTest {
 	
 	@Inject
 	private ITypeProvider typeProvider;
+	
+	@Inject
+	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
+	
+	@Inject
+	private Provider<Lexer> lexerProvider;
 	
 	@Test public void testResourceUpdateSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
@@ -100,7 +107,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{
-				Lexer lexer = get(Lexer.class);
+				Lexer lexer = lexerProvider.get();
 				lexer.setCharStream(new ANTLRStringStream(string));
 				Token token = lexer.nextToken();
 				while(token != Token.EOF_TOKEN) {
@@ -227,9 +234,8 @@ public class SmokeTest extends AbstractSmokeTest {
 	}
 
 	protected void checkNoErrorsInValidator(final String model, LazyLinkingResource resource) {
-		ResourceValidatorImpl validator = new ResourceValidatorImpl();
+		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
-		doGetInjector().injectMembers(validator);
 		validator.setDiagnosticConverter(new IDiagnosticConverter() {
 			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof BasicDiagnostic) {

@@ -1,16 +1,16 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import javax.inject.Inject
-import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
 import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XtendInjectorProvider))
+@InjectWith(typeof(RuntimeInjectorProvider))
 abstract class AbstractXtendFormatterTest {
 	@Inject FormatterTester tester
 	@Inject XbaseFormatterConfigKeys keys

@@ -7,12 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractRichStringEvaluationTest extends Assert {
 
 	public abstract void assertOutput(String expectedOutput, String richString) throws Exception;

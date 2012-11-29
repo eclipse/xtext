@@ -36,6 +36,7 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.junit.Test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,6 +45,9 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
 	@Test public void testNoException_01() throws Exception {
 		XtendFunction function = function("def noException() {\n" + 
@@ -410,9 +414,8 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 	}
 
 	protected void validateWithoutException(XtextResource resource) {
-		ResourceValidatorImpl validator = new ResourceValidatorImpl();
+		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
-		getInjector().injectMembers(validator);
 		validator.setDiagnosticConverter(new IDiagnosticConverter() {
 			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof BasicDiagnostic) {
@@ -442,7 +445,7 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		if (validate)
 			return super.file(string, validate);
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);

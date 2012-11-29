@@ -30,11 +30,14 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,10 +53,12 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 	
 	@Inject
 	protected IResourceFactory resourceFactory;
+
+	@Inject
+	private Provider<Lexer> lexerProvider;
 	
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		int i = 0; // TODO sz: investigate how to speed things up here (parallelism)?
 		smokeTestModels = Lists.newArrayList();
 		while (true) {
@@ -150,7 +155,7 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{
-				Lexer lexer = get(Lexer.class);
+				Lexer lexer = lexerProvider.get();
 				lexer.setCharStream(new ANTLRStringStream(string));
 				Token token = lexer.nextToken();
 				while(token != Token.EOF_TOKEN) {
@@ -216,7 +221,7 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 		for(String string: smokeTestModels) {
 			List<CommonToken> tokenList = Lists.newArrayList();
 			{
-				Lexer lexer = get(Lexer.class);
+				Lexer lexer = lexerProvider.get();
 				lexer.setCharStream(new ANTLRStringStream(string));
 				Token token = lexer.nextToken();
 				while(token != Token.EOF_TOKEN) {

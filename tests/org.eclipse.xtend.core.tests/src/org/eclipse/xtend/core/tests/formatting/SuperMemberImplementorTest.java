@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -43,9 +44,8 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 
 	private String model;
 
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		model = "class Foo<U> extends test.Constructor<U> implements test.OverrideFunctions<U, CharSequence> {}";
 		xtendClass = clazz(model);
 		implementedInterface = (JvmGenericType) xtendClass.getImplements().get(0).getType();

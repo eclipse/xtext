@@ -55,6 +55,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 	XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor);
 	
+	XtendField getXtendField(JvmField jvmField);
+	
 	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtendJvmAssociations {
 
@@ -130,6 +132,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 		public JvmField getJvmField(XtendField field) {
 			return getFirstOrNull(getJvmElements(field), JvmField.class);
+		}
+
+		public XtendField getXtendField(JvmField jvmField) {
+			return (XtendField) getPrimarySourceElement(jvmField);
 		}
 
 	}
