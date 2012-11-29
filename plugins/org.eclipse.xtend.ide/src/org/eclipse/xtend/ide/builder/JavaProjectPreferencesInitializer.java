@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.launching.LaunchingPlugin;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -30,13 +31,16 @@ public class JavaProjectPreferencesInitializer {
 
 	@Inject
 	public void addOwnFileExtensionsToJavaBuildResourceCopyFilter(FileExtensionProvider extensionProvider) {
+		@SuppressWarnings("deprecation")
+		IScopeContext defaultScope = new DefaultScope();
+
 		// The class org.eclipse.jdt.internal.launching.LaunchingPreferenceInitializer has this very nasty habit 
 		// of replacing all RESOURCE_COPY_FILTERs with its own filter. Calling getNode(LaunchingPlugin.ID_PLUGIN) 
 		// causes LaunchingPreferenceInitializer to be executed that afterwards we can append our filters safely.    
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395366
-		DefaultScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN);
+		defaultScope.getNode(LaunchingPlugin.ID_PLUGIN);
 
-		IEclipsePreferences dnode = DefaultScope.INSTANCE.getNode(JavaCore.PLUGIN_ID);
+		IEclipsePreferences dnode = defaultScope.getNode(JavaCore.PLUGIN_ID);
 		if (dnode == null)
 			return;
 		Set<String> filters = Sets.newLinkedHashSet();
