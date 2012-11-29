@@ -243,19 +243,18 @@ public class ErrorSafeExtensions {
       _or = (_equals || _equals_1);
     }
     if (_or) {
-      EObject _eContainer = typeRef.eContainer();
-      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, _eContainer);
+      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, typeRef);
       errorChild.append("type is \'null\'");
       this.closeErrorAppendable(appendable, errorChild);
     } else {
       BrokenTypeRefDetector _brokenTypeRefDetector = new BrokenTypeRefDetector();
       Boolean _accept = typeRef.<Boolean>accept(_brokenTypeRefDetector);
       if ((_accept).booleanValue()) {
-        EObject _eContainer_1 = typeRef.eContainer();
-        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer_1);
+        EObject _eContainer = typeRef.eContainer();
+        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer);
         try {
-          EObject _eContainer_2 = typeRef.eContainer();
-          this._typeReferenceSerializer.serialize(typeRef, _eContainer_2, errorChild_1);
+          EObject _eContainer_1 = typeRef.eContainer();
+          this._typeReferenceSerializer.serialize(typeRef, _eContainer_1, errorChild_1);
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
             final Exception ignoreMe = (Exception)_t;
@@ -269,8 +268,8 @@ public class ErrorSafeExtensions {
           appendable.append(surrogateType);
         }
       } else {
-        EObject _eContainer_3 = typeRef.eContainer();
-        this._typeReferenceSerializer.serialize(typeRef, _eContainer_3, appendable);
+        EObject _eContainer_2 = typeRef.eContainer();
+        this._typeReferenceSerializer.serialize(typeRef, _eContainer_2, appendable);
       }
     }
   }
