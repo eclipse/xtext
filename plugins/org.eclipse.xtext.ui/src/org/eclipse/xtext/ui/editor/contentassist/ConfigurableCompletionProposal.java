@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -46,6 +48,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
  * @author Christoph Kulla - Added support for hovers
+ * @author Holger Schill - Resolve proxies against context for hover
  */
 public class ConfigurableCompletionProposal implements 
 		Comparable<ConfigurableCompletionProposal>, 
@@ -224,6 +227,7 @@ public class ConfigurableCompletionProposal implements
 	private PrefixMatcher matcher;
 	private int replaceContextLength;
 	private int priority;
+	private Resource contextResource;
 	
 	public boolean isAutoInsertable() {
 		return autoInsertable;
@@ -283,6 +287,12 @@ public class ConfigurableCompletionProposal implements
 
 	public void setAdditionalProposalInfo(Object additionalProposalInfo) {
 		this.additionalProposalInfo = additionalProposalInfo;
+	}
+	/**
+	 * @since 2.4
+	 */
+	public void setProposalContextResource(Resource contextResource){
+		this.contextResource = contextResource;
 	}
 
 	public int getSelectionStart() {
@@ -537,6 +547,9 @@ public class ConfigurableCompletionProposal implements
 				}
 			}
 			if (eObject != null) {
+				if(eObject.eIsProxy()){
+					eObject = EcoreUtil.resolve(eObject, contextResource);
+				}
 				return hover.getHoverInfo(eObject, viewer, null);
 			}
 		}
