@@ -334,7 +334,7 @@
 	<target name="-publish.javadoc" if="build.stable">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true">
+		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true" >
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>

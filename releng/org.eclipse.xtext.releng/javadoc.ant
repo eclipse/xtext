@@ -12,8 +12,11 @@
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<property name="xtend.sourcesLocation" value="${xtend.checkoutLocation}/plugins/" />
 		<condition property="build.stable" value="yes">
-			<or>
 				<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
+		<condition property="generate.javadoc" value="yes">
+			<or>
+				<istrue value="${build.stable}"/>
 				<istrue value="${force.javadoc}"/>
 			</or>
 		</condition>
@@ -28,7 +31,7 @@
 		<antcall target="-generate.javadoc" inheritall="true" />
 	</target>
 
-	<target name="-generate.javadoc" if="build.stable">
+	<target name="-generate.javadoc" if="generate.javadoc">
 
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
@@ -64,6 +67,7 @@
 			<tag name="noreference" description="This method is not intended to be referenced by clients." />
 			<tag name="nooverride" description="This method is not intended to be extended (re-implement with a call to the overridden parent) or re-implemented (with no call to the overridden parent) by clients." />
 		</javadoc>
+		
 		<!-- Compress the output javadoc in a zip file -->
 		<zip destfile="${output}/javadoc.zip" basedir="${output}">
 			<exclude name="*.zip" />
