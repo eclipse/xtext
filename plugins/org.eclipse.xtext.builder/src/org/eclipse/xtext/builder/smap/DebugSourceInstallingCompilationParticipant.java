@@ -146,7 +146,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	protected void installSmapInformation(IFile compiledFile, String smap) {
 		try {
 			InputStream newByteCode = smapSupport.getModifiedByteCode(smap, compiledFile.getContents());
-			compiledFile.setContents(newByteCode, IResource.KEEP_HISTORY, null);
+			compiledFile.setContents(newByteCode, 0, null);
 		} catch (Exception e) {
 			String msg = "Could not install smap information into %s: %s";
 			log.error(String.format(msg, compiledFile.getFullPath().toString(), e.getMessage()), e);
