@@ -92,6 +92,30 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395043
+	 */
+	@Test def testOverriddenVarArgs() {
+		'''
+			class B extends A {
+				override foo(String x, String...args) {
+					return x
+				}
+			}
+			abstract class A {
+				def String foo(String x, String...args)
+			}
+			
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B extends A {
+			  public String foo(final String x, final String... args) {
+			    return x;
+			  }
+			}
+		''')
+	}
+	
 	@Test def testBug383568() {
 		'''
 			@Data class UsesExtension {
