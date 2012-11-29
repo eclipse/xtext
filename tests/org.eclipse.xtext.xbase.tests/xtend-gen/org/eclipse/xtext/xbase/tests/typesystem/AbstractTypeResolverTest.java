@@ -626,6 +626,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testFeatureCallWithArrayToIterableConversion_04() throws Exception {
+    this.resolvesTo("(null as String[][]).head", "String[]");
+  }
+  
+  @Test
   public void testReturnType_01() throws Exception {
     this.resolvesTo("return \'foo\'", "void");
   }

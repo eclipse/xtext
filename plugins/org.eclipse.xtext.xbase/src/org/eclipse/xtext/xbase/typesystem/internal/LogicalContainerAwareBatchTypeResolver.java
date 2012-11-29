@@ -37,7 +37,7 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 				if (container != null) {
 					return getEntryPoint(container);
 				}
-				throw new IllegalStateException("object is not contained in a logical container");
+				throw new IllegalStateException("object is not contained in a logical container: " + object);
 			}
 		}
 		JvmDeclaredType declaredType = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);

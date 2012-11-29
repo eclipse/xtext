@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,7 +34,7 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		return false;
 	}
 	
-	public JvmTypeReference getTypeReference(XComputedTypeReferenceImplCustom context) {
+	public JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
 		Resource resource = context.eResource();
 		if (resource instanceof XtextResource) {
 			IBatchTypeResolver typeResolver = ((XtextResource) resource).getResourceServiceProvider().get(IBatchTypeResolver.class);

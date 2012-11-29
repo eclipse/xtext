@@ -14,10 +14,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -118,13 +116,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 			throw new UnsupportedOperationException("Missing type computation for expression type: " + expression.eClass().getName() + " / " + state);
 		}
 	}
-	
+
+	@NonNull
 	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
 		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
 		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
+		if (typeReference == null)
+			throw new IllegalStateException("Cannot find type " + clazz.getCanonicalName());
 		return state.getConverter().toLightweightReference(typeReference);
 	}
 	
+	@NonNull
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
 		return getTypeForName(Void.TYPE, state);
 	}
@@ -284,7 +286,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @param object used for dispatching
 	 */
 	protected void _computeTypes(XStringLiteral object, ITypeComputationState state) {
-		// TODO evaluate expectation to allow string literals with length == 1 to appear like a char or a Character
 		if (object.getValue().length() != 1) {
 			LightweightTypeReference result = getTypeForName(String.class, state);
 			state.acceptActualType(result);
@@ -320,6 +321,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(final XForLoopExpression object, final ITypeComputationState state) {
+		LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
+		ITypeComputationState eachState = state.withoutExpectation().assignType(object.getDeclaredParam(), parameterType);
+		eachState.computeTypes(object.getEachExpression());
+		
+		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+		state.acceptActualType(primitiveVoid);
+	}
+
+	@NonNull
+	protected LightweightTypeReference computeForLoopParameterType(final XForLoopExpression object,
+			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
 		LightweightTypeReference parameterType = null;
 		if (declaredParam.getParameterType() != null) {
@@ -370,11 +382,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (parameterType == null) {
 			throw new IllegalStateException("Should not be possible");
 		}
-		ITypeComputationState eachState = state.withoutExpectation().assignType(declaredParam, parameterType);
-		eachState.computeTypes(object.getEachExpression());
-		
-		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
-		state.acceptActualType(primitiveVoid);
+		return parameterType;
 	}
 
 	protected void _computeTypes(XAbstractWhileExpression object, ITypeComputationState state) {
