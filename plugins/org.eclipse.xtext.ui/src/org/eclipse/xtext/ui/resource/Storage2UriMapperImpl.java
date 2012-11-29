@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.Tuples;
@@ -39,6 +41,8 @@ import com.google.inject.Singleton;
 public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChangeListener {
 
 	private ResourceFactoryRegistryImpl resourceFactoryRegistry;
+	
+	@Inject private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	public Storage2UriMapperImpl() {
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
@@ -77,10 +81,25 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 
 	public final URI getUri(IStorage storage) {
+		if (!isPossiblyManaged(storage))
+			return null;
 		URI uri = internalGetUri(storage);
 		if (uri!=null && isValidUri(uri,storage))
 			return uri;
 		return null;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected boolean isPossiblyManaged(IStorage storage) {
+		IPath path = storage.getFullPath();
+		if (path == null)
+			return true;
+		// if content type based resource service provider is registered give up.
+		if (!resourceServiceProviderRegistry.getContentTypeToFactoryMap().isEmpty())
+			return true;
+		return resourceServiceProviderRegistry.getExtensionToFactoryMap().containsKey(path.getFileExtension());
 	}
 
 	protected URI internalGetUri(IStorage storage) {
