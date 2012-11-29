@@ -222,6 +222,52 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395043
+   */
+  @Test
+  public void testOverriddenVarArgs() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override foo(String x, String...args) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("abstract class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String foo(String x, String...args)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String foo(final String x, final String... args) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return x;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testBug383568() {
     StringConcatenation _builder = new StringConcatenation();
