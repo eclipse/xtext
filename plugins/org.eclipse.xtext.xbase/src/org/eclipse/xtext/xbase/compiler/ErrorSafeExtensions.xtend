@@ -106,7 +106,7 @@ class ErrorSafeExtensions {
 	
 	def void serializeSafely(JvmTypeReference typeRef, String surrogateType, ITreeAppendable appendable) {
 		if(typeRef == null || typeRef.type == null) {
-			val errorChild = appendable.openErrorAppendable(appendable, typeRef.eContainer)
+			val errorChild = appendable.openErrorAppendable(appendable, typeRef)
 			errorChild.append("type is 'null'")
 			appendable.closeErrorAppendable(errorChild)
 		} else {
