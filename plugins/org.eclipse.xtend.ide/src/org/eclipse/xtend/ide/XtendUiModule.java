@@ -11,6 +11,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
+import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.XtendBuilderParticipant;
 import org.eclipse.xtend.ide.contentassist.ImportingTypesProposalProvider;
@@ -42,13 +43,13 @@ import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
-import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
+import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.refactoring.XtendTypeSerializationUtil;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -56,6 +57,7 @@ import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -325,6 +327,11 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@org.eclipse.xtext.service.SingletonBinding(eager = true)
 	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
 		return org.eclipse.xtend.ide.validator.XtendUIValidator.class;
+	}
+	
+	@SingletonBinding(eager = true)
+	public Class<? extends JavaProjectPreferencesInitializer> bindJavaProjectPreferencesInitializer() {
+		return JavaProjectPreferencesInitializer.class;
 	}
 
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
