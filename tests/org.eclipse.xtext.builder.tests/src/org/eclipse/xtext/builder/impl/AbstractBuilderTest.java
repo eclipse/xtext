@@ -12,6 +12,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.util.List;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.xtext.builder.tests.Activator;
@@ -36,9 +37,14 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
 		if (PlatformUI.isWorkbenchRunning()) {
-			IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
+			final IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
 			if (introManager.getIntro() != null) {
-				introManager.closeIntro(introManager.getIntro());
+				Display.getDefault().asyncExec(new Runnable() {
+					
+					public void run() {
+						introManager.closeIntro(introManager.getIntro());
+					}
+				});
 			}
 		}
 	}
