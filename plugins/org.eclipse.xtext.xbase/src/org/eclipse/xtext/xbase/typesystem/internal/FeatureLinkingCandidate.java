@@ -175,7 +175,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	protected void applyImplicitReceiver() {
 		XExpression implicitReceiver = getImplicitReceiver();
-		if (implicitReceiver != null && implicitReceiver.eResource() == null) {
+		if (implicitReceiver != null) {
 			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
 			LightweightTypeReference receiverType = getImplicitReceiverType();
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);

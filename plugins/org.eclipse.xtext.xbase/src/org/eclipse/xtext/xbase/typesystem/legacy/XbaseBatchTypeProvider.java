@@ -11,12 +11,14 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -46,6 +48,10 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getExpectedReturnType(XExpression expression, boolean rawType) {
+		XClosure containingClosure = EcoreUtil2.getContainerOfType(expression, XClosure.class);
+		if (containingClosure != null) {
+			return getExpectedType(containingClosure.getExpression());
+		}
 		JvmIdentifiableElement container = containerProvider.getNearestLogicalContainer(expression);
 		if (container instanceof JvmOperation) {
 			return ((JvmOperation) container).getReturnType();

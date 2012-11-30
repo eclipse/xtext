@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -48,14 +49,18 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrantTypeResolver {
 
-	public static class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
-		private final XExpression expression;
+	public class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
 		private final boolean returnType;
+		private IFeatureScopeSession session;
+		private XExpression expression;
 
-		public DemandTypeReferenceProvider(XExpression expression, ResolvedTypes resolvedTypes, boolean returnType) {
+		public DemandTypeReferenceProvider(JvmMember member, XExpression expression, ResolvedTypes resolvedTypes, IFeatureScopeSession session, boolean returnType) {
+			this.member = member;
 			this.expression = expression;
 			this.resolvedTypes = resolvedTypes;
+			this.session = session;
 			this.returnType = returnType;
 		}
 
@@ -63,6 +68,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+			if (actualType == null) {
+				computeTypes(resolvedTypes, session, member);
+				actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+			}
 			if (actualType == null)
 				return null;
 			return actualType.toTypeReference();
@@ -106,6 +115,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
+		prepareMembers(resolvedTypes, childSession, type);
+	}
+
+	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession childSession, JvmDeclaredType type) {
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
 			doPrepare(resolvedTypes, childSession, members.get(i));
@@ -159,7 +172,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
-		return new DemandTypeReferenceProvider(expression, resolvedTypes, returnType);
+		resolvedTypes.markToBeInferred(expression);
+		return new DemandTypeReferenceProvider(member, expression, resolvedTypes, featureScopeSession, returnType);
 	}
 	
 	@Override
@@ -186,7 +200,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		FieldTypeComputationState state = new FieldTypeComputationState(resolvedTypes, featureScopeSession, field, this);
-		state.computeTypes();
+		ITypeComputationResult result = state.computeTypes();
+		if (InferredTypeIndicator.isInferred(field.getType())) {
+			LightweightTypeReference fieldType = result.getActualExpressionType();
+			if (fieldType != null)
+				InferredTypeIndicator.resolveTo(field.getType(), fieldType.toTypeReference());
+		}
 		computeAnnotationTypes(resolvedTypes, featureScopeSession, field);
 	}
 	
@@ -198,7 +217,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		OperationBodyComputationState state = new OperationBodyComputationState(resolvedTypes, featureScopeSession, operation, this);
-		state.computeTypes();
+		ITypeComputationResult result = state.computeTypes();
+		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			LightweightTypeReference returnType = result.getReturnType();
+			if (returnType != null)
+				InferredTypeIndicator.resolveTo(operation.getReturnType(), returnType.toTypeReference());
+		}
 		computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
 	}
 	

@@ -29,9 +29,7 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 	public ConstructorBodyComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor,
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
 		super(resolvedTypes, featureScopeSession, constructor, reentrantTypeResolver);
-		OwnedConverter converter = getConverter();
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
-			resolvedTypes.setType(parameter, converter.toLightweightReference(parameter.getParameterType()));
 			addLocalToCurrentScope(parameter);
 		}
 	}

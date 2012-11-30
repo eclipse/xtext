@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -24,13 +23,28 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeatureDescription {
+public class InstanceExtensionDescription extends InstanceFeatureDescription {
 
-	protected InstanceFeatureDescriptionWithImplicitReceiver(QualifiedName qualifiedName,
-			JvmIdentifiableElement feature, XExpression receiver, LightweightTypeReference receiverType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, int bucketId,
+	private final XExpression firstArgument;
+	private final LightweightTypeReference firstArgumentType;
+	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping;
+
+	protected InstanceExtensionDescription(QualifiedName qualifiedName, JvmIdentifiableElement feature,
+			XExpression receiver, LightweightTypeReference receiverType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			XExpression firstArgument, LightweightTypeReference firstArgumentType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping, 
+			int bucketId,
 			boolean visible) {
 		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible);
+		this.firstArgument = firstArgument;
+		this.firstArgumentType = firstArgumentType;
+		this.argumentTypeParameterMapping = argumentTypeParameterMapping;
+	}
+	
+	@Override
+	public boolean isExtension() {
+		return true;
 	}
 	
 	@Override
@@ -53,18 +67,18 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 	@Override
 	@Nullable
 	public XExpression getSyntacticReceiver() {
-		return null;
+		return firstArgument;
 	}
 	
 	@Override
 	@Nullable
 	public LightweightTypeReference getSyntacticReceiverType() {
-		return null;
+		return firstArgumentType;
 	}
 	
 	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
-		return Collections.emptyMap();
+		return argumentTypeParameterMapping;
 	}
 
 }

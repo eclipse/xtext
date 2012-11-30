@@ -12,7 +12,10 @@ import java.util.Set
 import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
+import java.util.Map
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -26,6 +29,20 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 class TypeBucket {
 	int id
 	List<JvmType> types
+}
+
+/**
+ * A type bucket collects a number of types that originate in the 
+ * very same source, e.g. all imported types are contained in the 
+ * same bucket where all types that are available via wildcard imports
+ * are contained in a different bucket.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Data
+class ExpressionBucket {
+    int id
+    Map<XExpression, LightweightTypeReference> extensionProviders
 }
 
 /**

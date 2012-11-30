@@ -30,9 +30,7 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 			JvmOperation operation,
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
 		super(resolvedTypes, featureScopeSession, operation, reentrantTypeResolver);
-		OwnedConverter converter = getConverter();
 		for(JvmFormalParameter parameter: operation.getParameters()) {
-			resolvedTypes.setType(parameter, converter.toLightweightReference(parameter.getParameterType()));
 			addLocalToCurrentScope(parameter);
 		}
 	}
@@ -52,6 +50,6 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 	@Override
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getActualType(getMember());
+		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getRootExpression());
 	}
 }

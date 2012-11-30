@@ -118,6 +118,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
+			// TODO property names?
 			allDescriptions.add(createDescription(featureName, feature, bucket));
 			QualifiedName operator = operatorMapping.getOperator(featureName);
 			if (operator != null) {

@@ -25,12 +25,13 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * A feature scope session allows to successively enhance the reachable features
- * by added local variables, parameters from the context or the list of imports.
+ * by adding local variables, parameters from the context or the list of imports.
  * Afterwards it's possible to ask for an {@link IScope} by means of 
  * {@link #getScope(EObject, EReference, IResolvedTypes)}. 
  * 
@@ -67,7 +68,14 @@ public interface IFeatureScopeSession {
 	 * @param extensionProviders the expressions that yield extension receivers.
 	 * @return a configured session.
 	 */
-	IFeatureScopeSession addToExtensionScope(List<XExpression> extensionProviders);
+	IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders);
+	
+	/**
+	 * All extension providers as expression buckets.
+	 * 
+	 * @return the list of extension providers.
+	 */
+	List<ExpressionBucket> getExtensionProviders();
 	
 	/**
 	 * Add a locally defined identifiable to this scope. It will shadow previously registered locals.
