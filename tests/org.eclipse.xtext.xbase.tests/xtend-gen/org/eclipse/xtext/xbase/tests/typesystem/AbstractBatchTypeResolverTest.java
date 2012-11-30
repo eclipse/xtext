@@ -223,6 +223,10 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     String _plus_2 = (_plus_1 + type);
     String _identifier = type.getIdentifier();
     Assert.assertNotNull(_plus_2, _identifier);
+    final LightweightTypeReference expectedType = types.getExpectedType(expression);
+    String _string_2 = expression.toString();
+    String _valueOf = String.valueOf(expectedType);
+    Assert.assertNotNull(_string_2, _valueOf);
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {

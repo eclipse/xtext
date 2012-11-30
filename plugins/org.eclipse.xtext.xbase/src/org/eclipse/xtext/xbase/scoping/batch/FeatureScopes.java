@@ -76,6 +76,7 @@ public class FeatureScopes implements IFeatureNames {
 			IScope result = createSimpleFeatureCallScope(call, reference, session, resolvedTypes);
 			return result;
 		}
+		
 		IScope result = createFeatureCallScopeForReceiver(call, syntacticalReceiver, reference, session, resolvedTypes);
 		return result;
 	}
@@ -104,7 +105,8 @@ public class FeatureScopes implements IFeatureNames {
 		
 		IScope staticImports = createStaticFeaturesScope(context, IScope.NULLSCOPE, session);
 		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticImports, session, resolvedTypes);
-		IScope implicitReceivers = createImplicitFeatureCallScope(context, staticExtensions, session, resolvedTypes);
+		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
+		IScope implicitReceivers = createImplicitFeatureCallScope(context, dynamicExtensions, session, resolvedTypes);
 		IScope localVariables = new LocalVariableScope(implicitReceivers, session, asAbstractFeatureCall(context));
 		return localVariables;
 	}
@@ -156,8 +158,9 @@ public class FeatureScopes implements IFeatureNames {
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
 		if (receiverType != null) {
-			IScope result = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
-			return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, result);
+			IScope staticExtensionScope = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
+			IScope extensionScope = createDynamicExtensionsScope(receiver, receiverType, featureCall, staticExtensionScope, session, resolvedTypes);
+			return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, extensionScope);
 		} else {
 			return IScope.NULLSCOPE;
 		}
@@ -173,6 +176,40 @@ public class FeatureScopes implements IFeatureNames {
 			result = createStaticExtensionsScope(receiver, receiverType, false, featureCall, parent, session);
 		}
 		return result;
+	}
+	
+	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		List<ExpressionBucket> extensionProviders = session.getExtensionProviders();
+		if (extensionProviders.isEmpty()) {
+			return parent;
+		}
+		IScope result = parent;
+		if (firstArgument == null) {
+			result = createDynamicExtensionsScope(IT, featureCall, session, resolvedTypes, result);
+			return result;
+		} else {
+			result = createDynamicExtensionsScope(firstArgument, firstArgumentType, false, featureCall, parent, session);
+		}
+		return result;
+	}
+	
+	protected IScope createDynamicExtensionsScope(QualifiedName implicitFirstArgumentName, EObject featureCall,
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
+		IEObjectDescription firstArgumentDescription = session.getLocalElement(implicitFirstArgumentName);
+		if (firstArgumentDescription != null) {
+			JvmIdentifiableElement feature = (JvmIdentifiableElement) firstArgumentDescription.getEObjectOrProxy();
+			LightweightTypeReference type = resolvedTypes.getActualType(feature);
+			XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
+			implicitArgument.setFeature(feature);
+			return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, session);
+		} else {
+			return createDynamicExtensionsScope(null, null, true, featureCall, parent, session);
+		}
+	}
+	
+	protected DynamicExtensionsScope createDynamicExtensionsScope(XExpression firstArgument,
+			LightweightTypeReference argumentType, boolean implicit, EObject featureCall, IScope parent, IFeatureScopeSession session) {
+		return new DynamicExtensionsScope(parent, session, firstArgument, argumentType, implicit, asAbstractFeatureCall(featureCall), operatorMapping);
 	}
 
 	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver,

@@ -8,10 +8,17 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+
+import com.google.common.collect.Sets;
 
 /**
  * The root resolved types are the effective result of a type computation.
@@ -25,6 +32,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  */
 public class RootResolvedTypes extends ResolvedTypes {
 
+	private Set<XExpression> toBeInferredRootExpressions;
+	
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
 	}
@@ -40,6 +49,23 @@ public class RootResolvedTypes extends ResolvedTypes {
 		for(ILinkingCandidate candidate: candidates.values()) {
 			candidate.resolveLinkingProxy();
 		}
+	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(@NonNull JvmMember member, @NonNull XExpression expression) {
+		if (toBeInferredRootExpressions != null && toBeInferredRootExpressions.contains(expression)) {
+			return null;
+		}
+		return getActualType(member);
+	}
+	
+	@Override
+	protected void markToBeInferred(@NonNull XExpression expression) {
+		if (toBeInferredRootExpressions == null) {
+			toBeInferredRootExpressions = Sets.newHashSet();
+		}
+		toBeInferredRootExpressions.add(expression);
 	}
 
 }

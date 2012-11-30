@@ -1067,6 +1067,28 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{val Object s = '' s.notify}".resolvesTo("void")
 	}
 	
+	@Test def void testBlockExpression_07() throws Exception {
+		"{
+            val (Integer, Double, Boolean) => void fun1 = null
+            val (byte[], Object) => double[] fun2 = null
+            val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList
+            test3
+        }".resolvesTo("List<Pair<Integer, Pair<(Integer, Double, Boolean)=>void, (byte[], Object)=>double[]>>>")
+	}
+	
+	@Test def void testBlockExpression_08() throws Exception {
+        "{
+            val (Integer, Double, Boolean) => void fun1 = null
+            val (byte[], Object) => double[] fun2 = null
+            val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList
+            test3.head.value.value.apply(null, null).last
+        }".resolvesTo("Double")
+    }
+	
 	@Test def void testEMap_01() throws Exception {
 		"{ 
           val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()

@@ -131,7 +131,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
 	override getExpectedType(XExpression expression) {
 		val result = super.getExpectedType(expression)
-		if (!result.isOwnedBy(getReferenceOwner()))
+		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}

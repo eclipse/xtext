@@ -24,32 +24,18 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeatureDescription {
+public class InstanceExtensionDescriptionWithImplicitFirstArgument extends InstanceExtensionDescription {
 
-	protected InstanceFeatureDescriptionWithImplicitReceiver(QualifiedName qualifiedName,
+	protected InstanceExtensionDescriptionWithImplicitFirstArgument(QualifiedName qualifiedName,
 			JvmIdentifiableElement feature, XExpression receiver, LightweightTypeReference receiverType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, int bucketId,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, 
+			XExpression firstArgument, LightweightTypeReference firstArgumentType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping, int bucketId,
 			boolean visible) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible);
-	}
-	
-	@Override
-	@Nullable
-	public XExpression getImplicitReceiver() {
-		return super.getSyntacticReceiver();
-	}
-	
-	@Override
-	@Nullable
-	public LightweightTypeReference getImplicitReceiverType() {
-		return super.getSyntacticReceiverType();
+		super(qualifiedName, feature, receiver, receiverType, typeParameterMapping, EcoreUtil2.clone(firstArgument), firstArgumentType,
+				argumentTypeParameterMapping, bucketId, visible);
 	}
 
-	@Override
-	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
-		return super.getSyntacticReceiverTypeParameterMapping();
-	}
-	
 	@Override
 	@Nullable
 	public XExpression getSyntacticReceiver() {
@@ -65,6 +51,23 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
+	}
+	
+	@Override
+	@Nullable
+	public XExpression getImplicitFirstArgument() {
+		return super.getSyntacticReceiver();
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getImplicitFirstArgumentType() {
+		return super.getSyntacticReceiverType();
+	}
+	
+	@Override
+	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
+		return super.getSyntacticReceiverTypeParameterMapping();
 	}
 
 }

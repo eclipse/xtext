@@ -189,10 +189,17 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   
   public LightweightTypeReference getExpectedType(final XExpression expression) {
     final LightweightTypeReference result = super.getExpectedType(expression);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
-    boolean _not = (!_isOwnedBy);
-    if (_not) {
+    boolean _and = false;
+    boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+      boolean _not = (!_isOwnedBy);
+      _and = (_notEquals && _not);
+    }
+    if (_and) {
       IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
       throw _illegalArgumentException;
     }

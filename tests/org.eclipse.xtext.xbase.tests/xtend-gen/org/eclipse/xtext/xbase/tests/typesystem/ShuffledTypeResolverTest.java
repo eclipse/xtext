@@ -36,6 +36,18 @@ public class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
   
   @Test
   @Ignore(value = "TODO deferred closure typing")
+  public void testBlockExpression_07() throws Exception {
+    Assert.fail("TODO deferred closure typing");
+  }
+  
+  @Test
+  @Ignore(value = "TODO deferred closure typing")
+  public void testBlockExpression_08() throws Exception {
+    Assert.fail("TODO deferred closure typing");
+  }
+  
+  @Test
+  @Ignore(value = "TODO deferred closure typing")
   public void testOverloadedOperators_08() throws Exception {
     Assert.fail("TODO deferred closure typing");
   }

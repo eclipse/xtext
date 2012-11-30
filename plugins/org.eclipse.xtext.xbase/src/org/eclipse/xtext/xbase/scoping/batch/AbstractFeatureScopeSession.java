@@ -17,12 +17,14 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -71,7 +73,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	 */
 	protected abstract int getId();
 
-	public IFeatureScopeSession addToExtensionScope(List<XExpression> extensionProviders) {
+	public IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return this;
 		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, extensionProviders);
@@ -111,7 +113,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	}
 	
 	public Collection<IEObjectDescription> getLocalElements() {
-		List<IEObjectDescription> result = Lists.newArrayList();
+		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		addLocalElements(result);
 		return result;
 	}
@@ -128,6 +130,13 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	
 	public List<TypeBucket> getStaticallyImportedExtensionTypes() {
 		return Collections.emptyList();
+	}
+	
+	public List<ExpressionBucket> getExtensionProviders() {
+		return Collections.emptyList();
+	}
+	
+	protected void addExtensionProviders(List<ExpressionBucket> result) {
 	}
 	
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
 /**

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -292,5 +293,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		result.append("\n" + indentation + "parent: [");
 		parent.appendContent(result, indentation + "  ");
 		closeBracket(result, indentation);
+	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression) {
+		return parent.getExpectedTypeForAssociatedExpression(member, expression);
+	}
+	
+	@Override
+	protected void markToBeInferred(XExpression expression) {
+		parent.markToBeInferred(expression);
 	}
 }

@@ -73,12 +73,20 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 					builder.append("null");
 			}
 			builder.append(')');
+			if (getImplicitFirstArgument() != null) {
+				builder.append(":implicitFirstArgument");
+			}
+			if (isVisible()) {
+				builder.append('+');
+			} else {
+				builder.append('-');
+			}
 			return builder.toString();
 		}
 		if (object instanceof JvmIdentifiableElement) {
-			return ((JvmIdentifiableElement) object).getSimpleName();
+			return ((JvmIdentifiableElement) object).getSimpleName() + (isVisible() ? '+' : '-');
 		}
-		return getName().toString();
+		return getName().toString() + (isVisible() ? '+' : '-');
 	}
 	
 	public int getBucketId() {

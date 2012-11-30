@@ -8,20 +8,40 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class FeatureScopeSessionWithDynamicExtensions extends AbstractNestedFeatureScopeSession {
 
-	private final List<XExpression> extensionProviders;
+	private final Map<XExpression, LightweightTypeReference> extensionProviders;
 
 	public FeatureScopeSessionWithDynamicExtensions(AbstractFeatureScopeSession parent,
-			List<XExpression> extensionProviders) {
+			Map<XExpression, LightweightTypeReference> extensionProviders) {
 		super(parent);
 		this.extensionProviders = extensionProviders;
+	}
+	
+	@Override
+	protected void addExtensionProviders(List<ExpressionBucket> result) {
+		ExpressionBucket bucket = new ExpressionBucket(getId(), extensionProviders);
+		result.add(bucket);
+		super.addExtensionProviders(result);
+	}
+	
+	@Override
+	public List<ExpressionBucket> getExtensionProviders() {
+		List<ExpressionBucket> result = Lists.newArrayListWithCapacity(3);
+		addExtensionProviders(result);
+		return result;
 	}
 
 }

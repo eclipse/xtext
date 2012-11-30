@@ -117,6 +117,10 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
     String _plus_1 = (_plus + type);
     String _identifier = type.getIdentifier();
     Assert.assertNotNull(_plus_1, _identifier);
+    final JvmTypeReference expectedType = this.typeProvider.getExpectedType(expression);
+    String _string_2 = expression.toString();
+    String _valueOf = String.valueOf(expectedType);
+    Assert.assertNotNull(_string_2, _valueOf);
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable) {
@@ -134,6 +138,11 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   @Test
   public void testBlockExpression_03() throws Exception {
     Assert.fail("not a timeout but too slow");
+  }
+  
+  @Test
+  public void testBlockExpression_07() throws Exception {
+    this.resolvesTo("{\n            val (Integer, Double, Boolean) => void fun1 = null\n            val (byte[], Object) => double[] fun2 = null\n            val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n            val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n            val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList\n            test3\n        }", "List<Pair<Integer, Pair<Procedure3<? super Integer, ? super Double, ? super Boolean>, Function2<? super byte[], ? super Object, ? extends double[]>>>>");
   }
   
   @Ignore(value = "not a timeout but too slow")

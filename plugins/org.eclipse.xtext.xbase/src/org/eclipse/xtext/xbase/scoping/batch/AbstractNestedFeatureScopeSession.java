@@ -87,6 +87,16 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	}
 	
 	@Override
+	public List<ExpressionBucket> getExtensionProviders() {
+		return parent.getExtensionProviders();
+	}
+	
+	@Override
+	protected void addExtensionProviders(List<ExpressionBucket> result) {
+		parent.addExtensionProviders(result);
+	}
+	
+	@Override
 	protected int getId() {
 		return id;
 	}

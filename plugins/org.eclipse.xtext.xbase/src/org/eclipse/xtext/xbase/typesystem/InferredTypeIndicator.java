@@ -34,6 +34,14 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		return false;
 	}
 	
+	public static void resolveTo(JvmTypeReference inferred, JvmTypeReference resolved) {
+		if (isInferred(inferred)) {
+			((XComputedTypeReference) inferred).setEquivalent(resolved);
+		} else {
+			throw new IllegalStateException("Cannot resolve a reference that is not inferred");
+		}
+	}
+	
 	public JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
 		Resource resource = context.eResource();
 		if (resource instanceof XtextResource) {

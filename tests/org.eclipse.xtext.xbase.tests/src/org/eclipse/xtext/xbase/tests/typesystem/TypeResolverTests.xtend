@@ -115,7 +115,9 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
 		val type = types.getActualType(expression)
 		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
-		assertNotNull(expression.toString + " / " + type, type.identifier)	
+		assertNotNull(expression.toString + " / " + type, type.identifier)
+		val expectedType = types.getExpectedType(expression)
+        assertNotNull(expression.toString, String::valueOf(expectedType))	
 	}
 	
 	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
@@ -192,7 +194,9 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	def void assertExpressionTypeIsResolved(XExpression expression) {
 		val type = typeProvider.getType(expression)
 		assertNotNull(expression.toString, type)
-		assertNotNull(expression.toString + " / " + type, type.identifier)	
+		assertNotNull(expression.toString + " / " + type, type.identifier)
+		val expectedType = typeProvider.getExpectedType(expression)
+		assertNotNull(expression.toString, String::valueOf(expectedType))	
 	}
 	
 	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable) {
@@ -206,6 +210,18 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	override testBlockExpression_03() throws Exception {
 		fail("not a timeout but too slow")
 	}
+	
+	@Test
+    override testBlockExpression_07() throws Exception {
+        "{
+            val (Integer, Double, Boolean) => void fun1 = null
+            val (byte[], Object) => double[] fun2 = null
+            val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]
+            val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList
+            test3
+        }".resolvesTo("List<Pair<Integer, Pair<Procedure3<? super Integer, ? super Double, ? super Boolean>, Function2<? super byte[], ? super Object, ? extends double[]>>>>")
+    }
 	
 	@Ignore("not a timeout but too slow")
 	@Test
@@ -1149,6 +1165,18 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 	override getTypeResolver() {
 		typeResolver
 	}
+	
+	@Test
+    @Ignore("TODO deferred closure typing")
+    override testBlockExpression_07() throws Exception {
+        fail("TODO deferred closure typing")
+    }
+    
+    @Test
+    @Ignore("TODO deferred closure typing")
+    override testBlockExpression_08() throws Exception {
+        fail("TODO deferred closure typing")
+    }
 	
 	@Test
 	@Ignore("TODO deferred closure typing")

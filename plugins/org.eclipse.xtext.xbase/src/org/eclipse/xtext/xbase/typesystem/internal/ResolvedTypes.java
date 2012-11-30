@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -249,6 +249,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		LightweightTypeReference result = doGetActualType(expression);
 		return toOwnedReference(result);
 	}
+	
+	@Nullable
+	protected abstract LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression);
 	
 	@Nullable
 	public LightweightTypeReference getReturnType(XExpression expression) {
@@ -471,7 +474,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return result;
 		}
 		JvmTypeReference type = getUnconvertedDeclaredType(identifiable);
-		if (type != null && !InferredTypeIndicator.isInferred(type)) {
+		if (type != null) {
 			LightweightTypeReference result = getConverter().toLightweightReference(type);
 			return result;
 		}
@@ -507,8 +510,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
-		if (ensureLinkingMapExists().put(expression, candidate) != null) {
-			throw new IllegalStateException("Expression " + expression + " was already linked");
+		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
+		if (prev != null) {
+			throw new IllegalStateException("Expression " + expression + " was already linked to: " + prev + "\nCannot relink to: " + candidate);
 		}
 	}
 
@@ -864,5 +868,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected StackedResolvedTypes pushReassigningTypes() {
 		return new ReassigningStackedResolvedTypes(this);
 	}
+
+	protected abstract void markToBeInferred(XExpression expression);
 
 }
