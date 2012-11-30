@@ -78,6 +78,12 @@ public class PrimarySourceInstaller {
 		}
 
 		@Override
+		public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
+			if (!name.startsWith("_"))
+				super.visitLocalVariable(name, desc, signature, start, end, index);
+		}
+
+		@Override
 		public void visitLineNumber(int line, Label start) {
 			int[] target2source = context.getTarget2source();
 			if (target2source == null || line < 0 || line >= target2source.length)
