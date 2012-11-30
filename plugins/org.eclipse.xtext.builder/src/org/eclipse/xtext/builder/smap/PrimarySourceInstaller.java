@@ -107,11 +107,11 @@ public class PrimarySourceInstaller {
 		for (LineMapping lineMapping : lineInfo)
 			if (maxLineEnd < lineMapping.targetEndLine)
 				maxLineEnd = lineMapping.targetEndLine;
-		int[] target2source = new int[maxLineEnd + 1];
+		int[] target2source = new int[maxLineEnd + 2];
 		Arrays.fill(target2source, -1);
 		for (LineMapping lineMapping : lineInfo)
-			for (int targetLine = lineMapping.targetStartLine; targetLine <= lineMapping.targetEndLine; targetLine++) {
-				int startLine = lineMapping.sourceStartLine - 1;
+			for (int targetLine = lineMapping.targetStartLine + 1; targetLine <= lineMapping.targetEndLine + 1; targetLine++) {
+				int startLine = lineMapping.sourceStartLine;
 				if (target2source[targetLine] == -1 || startLine < target2source[targetLine])
 					target2source[targetLine] = startLine;
 			}
