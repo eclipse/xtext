@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -136,24 +138,43 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	@Override
 	protected void computeMemberTypes(StackedResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmDeclaredType type) {
+		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
+		super.computeMemberTypes(resolvedTypes, childSession, type);
+	}
+	
+	@Override
+	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
+		super.prepareMembers(resolvedTypes, childSession, type);
+	}
+
+	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
 		Iterable<JvmField> fields = type.getDeclaredFields();
 		IEObjectDescription thisDescription = featureScopeSession.getLocalElement(IFeatureNames.THIS);
 		if (thisDescription == null) {
 			throw new IllegalStateException("Cannot find feature 'THIS'");
 		}
 		JvmIdentifiableElement thisFeature = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-		List<XExpression> extensionProviders = Lists.newArrayListWithCapacity(3);
+		Map<XExpression, LightweightTypeReference> extensionProviders = null;
 		for(JvmField field: fields) {
 			if (isExtensionField(field)) {
+				if (extensionProviders == null)
+					extensionProviders = Maps.newHashMapWithExpectedSize(3);
 				XMemberFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
-				extensionProviders.add(extensionProvider);
+				LightweightTypeReference fieldType = resolvedTypes.getActualType(field);
+				extensionProviders.put(extensionProvider, fieldType);
 			}
 		}
 		IFeatureScopeSession childSession = featureScopeSession;
-		if (!extensionProviders.isEmpty()) {
+		if (extensionProviders != null) {
 			childSession = featureScopeSession.addToExtensionScope(extensionProviders);
 		}
-		super.computeMemberTypes(resolvedTypes, childSession, type);
+		XFeatureCall thisAccess = xbaseFactory.createXFeatureCall();
+		thisAccess.setFeature(thisFeature);
+		LightweightTypeReference thisType = resolvedTypes.getActualType(thisFeature);
+		childSession = childSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(thisAccess, thisType));
+		return childSession;
 	}
 
 	protected XMemberFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {

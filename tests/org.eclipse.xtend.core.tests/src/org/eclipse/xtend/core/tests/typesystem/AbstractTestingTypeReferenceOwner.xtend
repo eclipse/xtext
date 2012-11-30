@@ -16,10 +16,16 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.junit.After
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements ITypeReferenceOwner {
 	
 	@Inject
