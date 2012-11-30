@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -59,6 +60,10 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 			public void configureLinkingIScopeProvider(Binder binder) {
 				binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
 						.to(ExtensionAwareScopeProvider.class);
+			}
+			
+			public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
+				return ExtensionAwareScopeProvider.class;
 			}
 			
 			@Override

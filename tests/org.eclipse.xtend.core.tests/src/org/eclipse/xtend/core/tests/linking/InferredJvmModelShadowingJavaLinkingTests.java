@@ -78,7 +78,15 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtendTest
 	}
 	
 	@Test public void testLinkInferredJvmOperation() throws Exception {
-		XtendClass foo = classFile("test/Foo", "package test class Foo { def foo() :this; }");
+		XtendClass foo = classFile("test/Foo", "package test class Foo { def foo() { this } }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
+		final XBlockExpression block = (XBlockExpression) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XMemberFeatureCall methodCall = (XMemberFeatureCall) block.getExpressions().get(0);
+		assertEquals(associations.getDirectlyInferredOperation((XtendFunction)foo.getMembers().get(0)), methodCall.getFeature());
+	}
+	
+	@Test public void testLinkInferredJvmOperationWithSyntaxError() throws Exception {
+		XtendClass foo = classFile("test/Foo", "package test class Foo { def foo() :this; }"); // syntax error is intentional
 		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
 		final XBlockExpression block = (XBlockExpression) ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XMemberFeatureCall methodCall = (XMemberFeatureCall) block.getExpressions().get(0);

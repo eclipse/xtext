@@ -173,6 +173,20 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("testdata.Properties1.setProp1(java.lang.String)", call.getFeature().getIdentifier());
 	}
 	
+	@Test public void testExtensionMethodCall_Bug351827_04() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  extension testdata.Properties1 p\n" +
+				"  def setProp1(String s) { s }" +
+				"  def foo(String s) {\n" +
+				"    s.setProp1()\n" +
+				"  }\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(2);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("Foo.setProp1(java.lang.String)", call.getFeature().getIdentifier());
+	}
+	
 	@Test public void testExtensionMethodCall_01() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
@@ -198,6 +212,21 @@ public class LinkingTest extends AbstractXtendTestCase {
 		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
 		assertEquals("Foo.doSomething(java.lang.Object)", call.getFeature().getIdentifier());
 		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
+	}
+	
+	@Test public void testExtensionMethodCall_03() throws Exception {
+		XtendClass clazz = clazz("" +
+				"abstract class MyIterable implements Iterable<String> {" +
+				"  def doSomething() {\n" + 
+				"    filter [ s.toUpperCase != null ]\n" +
+				"  }\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XFeatureCall call = (XFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
+		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		assertEquals("Iterable<String>", operation.getReturnType().getSimpleName());
 	}
 	
 	@Test public void testCaseFunction_00() throws Exception {
@@ -958,6 +987,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 		JvmOperation firstFeature = (JvmOperation) first.getFeature();
 		assertEquals("prependHello", firstFeature.getSimpleName());
 		assertNull(first.getInvalidFeatureIssueCode(), first.getInvalidFeatureIssueCode());
+		assertNotNull(first.getImplicitFirstArgument());
 	}
 	
 	@Test public void testImplicitFirstArgument_01() throws Exception {
