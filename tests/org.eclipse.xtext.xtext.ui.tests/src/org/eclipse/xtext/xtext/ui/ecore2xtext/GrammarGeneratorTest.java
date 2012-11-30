@@ -47,7 +47,8 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 			"http://simple/formattertestlanguage", "http://www.w3.org/XML/1998/namespace" });
 
 	private static final List<String> BROKEN_PACKAGE_NS_URIS = Arrays
-			.asList(new String[] { "http://www.eclipse.org/ocl/1.1.0/Ecore" });
+			.asList(new String[] { "http://www.eclipse.org/ocl/1.1.0/Ecore",
+			"http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" /* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395457 */});
 
 	private static final List<String> WARNING_PACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/OCL2/1.0.0/ocl/uml" });
