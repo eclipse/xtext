@@ -132,9 +132,11 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 								+ " is not accessible due to restriction on required project "
 								+ declaringJavaProject.getElementName(), feature);
 			} else if (element.equals(DISCOURAGEDREFERENCEID)) {
-				warning("Discouraged access: The type " + simpleName
-						+ " is not accessible due to restriction on required project "
-						+ declaringJavaProject.getElementName(), feature, DISCOURAGED_REFERENCE);
+				notification(
+						IssueCodes.IC_DISCOURAGED_REFERENCE,
+						"Discouraged access: The type " + simpleName
+								+ " is not accessible due to restriction on required project "
+								+ declaringJavaProject.getElementName(), feature);
 			}
 		}
 	}
