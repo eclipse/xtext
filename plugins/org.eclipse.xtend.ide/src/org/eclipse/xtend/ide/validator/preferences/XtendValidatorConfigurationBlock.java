@@ -15,7 +15,6 @@ import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.ConfigurableIssueCode;
 import org.eclipse.xtext.validation.IssueCode;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
-import org.eclipse.xtext.xbase.validation.XbaseIssueCode;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -49,9 +48,9 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 		String[] values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
 				ConfigurableIssueCode.SEVERITY_IGNORE };
 		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
-		if (IssueCodes.IC_FORBIDDEN_REFERENCE.hasJavaEqivalent()) {
+		if (IssueCodes.IC_FORBIDDEN_REFERENCE.isDerived()) {
 			values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
-					ConfigurableIssueCode.SEVERITY_IGNORE, XbaseIssueCode.SEVERITY_JAVA };
+					ConfigurableIssueCode.SEVERITY_IGNORE, ConfigurableIssueCode.SEVERITY_DERIVED };
 			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
 		}
 

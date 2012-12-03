@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
 
 import com.google.inject.Inject;
@@ -35,9 +36,15 @@ public final class FormatterConfigurationProvider implements IFormatterConfigura
 	private XtendFormatterConfigKeys keys;
 
 	public IConfigurationValues getFormatterConfiguration(Resource resource) {
+		IConfigurationValues values = null;
 		IProject project = findProject(resource);
-		IPreferenceStore store = preferenceStoreAccess.getContextPreferenceStore(project);
-		return new PreferenceStoreBasedConfigurationValues(keys, store);
+		if (project != null) {
+			IPreferenceStore store = preferenceStoreAccess.getContextPreferenceStore(project);
+			values = new PreferenceStoreBasedConfigurationValues(keys, store);
+		} else {
+			values = new MapBasedConfigurationValues(keys);
+		}
+		return values;
 	}
 
 	private IProject findProject(Resource resource) {
