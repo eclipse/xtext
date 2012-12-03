@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -117,7 +116,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 
 	public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
 		if (expression == null) {
-			return new NoTypeResult();
+			throw new IllegalArgumentException("XExpression may not be null");
 		}
 		StackedResolvedTypes resolvedTypes = components[0].doComputeTypes(expression);
 		EnumSet<ConformanceHint> conformanceHints = resolvedTypes.getConformanceHints(expression);

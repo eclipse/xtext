@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -38,6 +39,11 @@ public class FieldTypeComputationState extends AbstractLogicalContainerAwareRoot
 	@Override
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getRootExpression());
+		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getDefiniteRootExpression());
+	}
+	
+	@Override
+	protected ITypeComputationResult createNoTypeResult() {
+		return new NoTypeResult(getMember(), resolvedTypes.getReferenceOwner());
 	}
 }
