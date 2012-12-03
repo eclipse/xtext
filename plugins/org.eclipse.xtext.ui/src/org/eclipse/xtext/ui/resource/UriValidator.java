@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
@@ -19,7 +20,7 @@ import com.google.inject.Inject;
 public class UriValidator {
 	
 	@Inject
-	private IResourceServiceProvider.Registry registry;
+	private IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
 
 	public boolean isValid(URI uri, IStorage storage) {
 		if (uri==null)
@@ -33,6 +34,20 @@ public class UriValidator {
 			}
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * @return whether there's possibly an {@link IResourceServiceProvider} for the given storage
+	 * @since 2.4
+	 */
+	public boolean isPossiblyManaged(IStorage storage) {
+		IPath fullPath = storage.getFullPath();
+		if (fullPath == null)
+			return true;
+		if (!registry.getContentTypeToFactoryMap().isEmpty())
+			return true;
+		return registry.getExtensionToFactoryMap().containsKey(fullPath.getFileExtension());
 	}
 
 }

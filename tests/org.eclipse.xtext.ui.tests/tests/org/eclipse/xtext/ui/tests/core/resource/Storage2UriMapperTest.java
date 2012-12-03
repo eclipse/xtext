@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,6 +32,17 @@ public class Storage2UriMapperTest extends Assert {
 				return true;
 			}
 		};
+		mapper.setUriValidator(new UriValidator() {
+			@Override
+			public boolean isValid(URI uri, IStorage storage) {
+				return true;
+			}
+			
+			@Override
+			public boolean isPossiblyManaged(IStorage storage) {
+				return true;
+			}
+		});
 		URI uri = mapper.getUri(file);
 		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(),true),uri);
 		assertEquals(file,mapper.getStorages(uri).iterator().next().getFirst());
