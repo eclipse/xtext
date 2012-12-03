@@ -78,8 +78,9 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
         assertFalse(set.contains(findOperation("java.util.AbstractList","add(int,E)")));
         assertFalse(set.contains(findOperation("java.util.List","add(int,E)")));
         assertTrue(set.contains(findOperation("java.util.ArrayList","add(int,E)")));
-        assertTrue(set.contains(findOperation("java.util.AbstractList","iterator()")));
         assertFalse(set.contains(findOperation("java.util.List","iterator()")));
+        //TODO use our own types, since ArrayList has changed in Java7
+        assertTrue(set.contains(findOperation("java.util.AbstractList","iterator()")));
     }
     
     @Test public void testContainsFields() throws Exception {
