@@ -754,8 +754,8 @@ class XbaseFormatter2 extends AbstractFormatter {
 	}
 
 	def protected dispatch void format(XClosure expr, FormattableDocument format) {
-		val open = expr.nodeForKeyword("[") ?: expr.eContainer.nodeForKeyword("(")
-		val close = expr.nodeForKeyword("]") ?: expr.eContainer.nodeForKeyword(")")
+		val open = expr.nodeForKeyword("[") 
+		val close = expr.nodeForKeyword("]")
 		val children = switch x:expr.expression {
 			XBlockExpression: x.expressions
 			XExpression: newArrayList(x)

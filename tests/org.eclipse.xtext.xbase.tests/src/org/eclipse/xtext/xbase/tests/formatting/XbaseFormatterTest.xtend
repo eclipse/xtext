@@ -60,6 +60,22 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatClosuresParenthesis() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter(toUpperCase == it)
+			y.join
+		''')	
+	}
+	
+	@Test def formatClosuresParenthesis2() {
+		assertFormattedExpression('''
+			val x = newArrayList("A", "b")
+			val y = x.filter(foo|foo.toUpperCase == foo)
+			y.join
+		''')	
+	}
+	
 	@Test def formatClosuresSemicolon() {
 		assertFormattedExpression('''
 			newArrayList("A", "b").filter[val b = it; b.toUpperCase == b]
