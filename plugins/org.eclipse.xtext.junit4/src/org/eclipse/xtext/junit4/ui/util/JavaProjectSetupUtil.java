@@ -43,8 +43,8 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
-@SuppressWarnings("restriction")
 public class JavaProjectSetupUtil {
 
 	private static final String JRE_CONTAINER_1_5 = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5";
@@ -272,7 +272,7 @@ public class JavaProjectSetupUtil {
 	}
 	
 	public static IClasspathEntry addExternalFolderToClasspath(IJavaProject javaProject, IFolder folder) throws JavaModelException {
-		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(folder.getFullPath(), null, null);
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(folder.getLocation(), null, null);
 		addToClasspath(javaProject, newLibraryEntry);
 		return newLibraryEntry;
 	}
