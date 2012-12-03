@@ -22,8 +22,11 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.junit.Test;
 
 /**
@@ -49,7 +52,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 		uri3 = createFileAndRegisterResource(project2, "src2/file3");
 		IResource member = javaProject1.getProject().findMember("src");
 		srcRoot = javaProject1.getPackageFragmentRoot(member);
-		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
+		Storage2UriMapperJavaImpl mapper = new Storage2UriMapperJavaImpl() {
 			@Override
 			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri != null 
@@ -57,7 +60,19 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 					&& !uri.toString().endsWith("/.classpath");
 			}
 		};
-		mapper.setUriValidator(new UriValidator());
+		mapper.setUriValidator(new UriValidator() {
+			@Override
+			public boolean isValid(URI uri, IStorage storage) {
+				return "name".equals(uri.fileExtension());
+			}
+			
+			@Override
+			public boolean isPossiblyManaged(IStorage storage) {
+				return "name".equals(storage.getFullPath().getFileExtension());
+			}
+		});
+		mapper.setJdtHelper(new JdtHelper());
+		mapper.setLocator(new JarEntryLocator());
 		projectsState = createProjectsState(mapper);
 	}
 

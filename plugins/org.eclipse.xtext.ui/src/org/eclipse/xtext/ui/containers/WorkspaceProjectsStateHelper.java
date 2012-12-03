@@ -23,7 +23,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -39,8 +38,6 @@ public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClien
 	
 	@Inject
 	private IWorkspace workspace;
-	
-	@Inject private IStorage2UriMapper storage2UriMapper;
 	
 	public String initHandle(URI uri) {
 		if (!uri.isPlatform())
@@ -60,7 +57,7 @@ public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClien
 				return Collections.emptySet();
 			IProject project = getWorkspaceRoot().getProject(containerHandle);
 			if (project != null && isAccessibleXtextProject(project)) {
-				Map<URI, IStorage> entries = storage2UriMapper.getAllEntries(project);
+				Map<URI, IStorage> entries = getMapper().getAllEntries(project);
 				return entries.keySet();
 			}
 		} catch (IllegalArgumentException e) {
