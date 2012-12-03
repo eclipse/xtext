@@ -13,14 +13,36 @@ package org.eclipse.xtext.validation;
  */
 public class ConfigurableIssueCode extends IssueCode {
 
+	public final static String SEVERITY_INFO = "info";
 	public final static String SEVERITY_WARNING = "warning";
+	public final static String SEVERITY_DERIVED = "derived";
 	public final static String SEVERITY_IGNORE = "ignore";
 
 	private final String defaultSeverity;
+	private String derivedFromCode;
 
-	public ConfigurableIssueCode(String code, String defaultSeverity) {
+	private ConfigurableIssueCode(String code, String defaultSeverity) {
 		super(code);
 		this.defaultSeverity = defaultSeverity;
+	}
+
+	@Override
+	public String getDefaultSeverity() {
+		return defaultSeverity;
+	}
+
+	private void setDerivedFromCode(String derivedCode) {
+		this.derivedFromCode = derivedCode;
+	}
+
+	public String getDerivedFromCode() {
+		return derivedFromCode;
+	}
+
+	public static ConfigurableIssueCode createDerivedIssueCode(String code, String derivedFromId) {
+		ConfigurableIssueCode issueCode = new ConfigurableIssueCode(code, SEVERITY_DERIVED);
+		issueCode.setDerivedFromCode(derivedFromId);
+		return issueCode;
 	}
 
 	public static ConfigurableIssueCode create(String code, String defaultSeverity) {
@@ -29,8 +51,7 @@ public class ConfigurableIssueCode extends IssueCode {
 	}
 
 	@Override
-	public String getDefaultSeverity() {
-		return defaultSeverity;
+	public boolean isDerived() {
+		return SEVERITY_DERIVED.equals(defaultSeverity);
 	}
-
 }

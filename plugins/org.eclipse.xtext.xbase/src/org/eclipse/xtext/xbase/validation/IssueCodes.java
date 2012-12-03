@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.validation;
 import java.util.List;
 
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.validation.ConfigurableIssueCode;
 import org.eclipse.xtext.validation.IssueCode;
 
 import com.google.common.collect.ImmutableList;
@@ -68,8 +69,6 @@ public class IssueCodes {
 	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX + "discouraged_reference";
 
-	public static final XbaseIssueCode IC_FORBIDDEN_REFERENCE = XbaseIssueCode.create(ISSUE_CODE_PREFIX + "forbidden_reference",
-			IssueCode.SEVERITY_ERROR, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
 
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
@@ -84,6 +83,9 @@ public class IssueCodes {
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
+
+	public static final IssueCode IC_FORBIDDEN_REFERENCE = ConfigurableIssueCode.createDerivedIssueCode(FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+	public static final IssueCode IC_DISCOURAGED_REFERENCE = ConfigurableIssueCode.createDerivedIssueCode(DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
 
 
 	
