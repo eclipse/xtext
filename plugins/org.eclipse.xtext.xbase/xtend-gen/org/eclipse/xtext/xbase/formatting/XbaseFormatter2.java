@@ -2554,14 +2554,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected void _format(final XClosure expr, final FormattableDocument format) {
-    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "[");
-    EObject _eContainer = expr.eContainer();
-    ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(_eContainer, "(");
-    final ILeafNode open = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword, _nodeForKeyword_1);
-    ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "]");
-    EObject _eContainer_1 = expr.eContainer();
-    ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(_eContainer_1, ")");
-    final ILeafNode close = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_2, _nodeForKeyword_3);
+    final ILeafNode open = this._nodeModelAccess.nodeForKeyword(expr, "[");
+    final ILeafNode close = this._nodeModelAccess.nodeForKeyword(expr, "]");
     List<XExpression> _switchResult = null;
     XExpression _expression = expr.getExpression();
     final XExpression x = _expression;
@@ -2597,13 +2591,13 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = (_isEmpty && _isEmpty_1);
     }
     if (_and) {
-      ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(expr, "[");
+      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "[");
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
             it.noSpace();
           }
         };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword_4, _function);
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
       format.operator_add(_append);
     } else {
       boolean _isMultilineLambda = this.isMultilineLambda(expr);

@@ -94,6 +94,30 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatClosuresParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = newArrayList(\"A\", \"b\")");
+    _builder.newLine();
+    _builder.append("val y = x.filter(toUpperCase == it)");
+    _builder.newLine();
+    _builder.append("y.join");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
+  public void formatClosuresParenthesis2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = newArrayList(\"A\", \"b\")");
+    _builder.newLine();
+    _builder.append("val y = x.filter(foo|foo.toUpperCase == foo)");
+    _builder.newLine();
+    _builder.append("y.join");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+  
+  @Test
   public void formatClosuresSemicolon() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("newArrayList(\"A\", \"b\").filter[val b = it; b.toUpperCase == b]");
