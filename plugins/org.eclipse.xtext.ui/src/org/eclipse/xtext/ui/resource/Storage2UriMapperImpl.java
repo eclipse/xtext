@@ -62,7 +62,8 @@ import com.google.inject.Singleton;
 					if (resource instanceof IFile) {
 						final IFile storage = (IFile) resource;
 						URI uri = getUri(storage);
-						result.put(uri, storage);
+						if (uri != null)
+							result.put(uri, storage);
 					}
 					if (resource instanceof IFolder) {
 						return isHandled((IFolder)resource);
