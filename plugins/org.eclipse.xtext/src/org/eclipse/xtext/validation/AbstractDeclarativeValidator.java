@@ -52,6 +52,9 @@ import com.google.inject.Injector;
 public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements
 		ValidationMessageAcceptor {
 
+	@Inject
+	private IValidatorConfigurationProvider validatorConfigurationProvider;
+
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 
 	private static final GuardException guardException = new GuardException();
@@ -405,30 +408,24 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	 */
 	protected void notification(IssueCode issueCode, String message, EObject source, EStructuralFeature feature,
 			int index, String... issueData) {
-		switch (translate(issueCode.getDefaultSeverity())) {
-			case WARNING:
-				getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(), issueData);
-				break;
-			case INFO:
-				getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(), issueData);
-				break;
-			case ERROR:
-			default:
-				getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(), issueData);
-				break;
+		IValidatorConfiguration validatorConfiguration = validatorConfigurationProvider
+				.getValidatorConfiguration(source.eResource());
+		Severity severity = validatorConfiguration.getSeverity(issueCode);
+		if (severity != null) {
+			switch (severity) {
+				case WARNING:
+					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(), issueData);
+					break;
+				case INFO:
+					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(), issueData);
+					break;
+				case ERROR:
+					getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(), issueData);
+					break;
+				default:
+					break;
+			}
 		}
-	}
-
-	private Severity translate(String defaultSeverity) {
-		Severity retVal = Severity.ERROR;
-		if (IssueCode.SEVERITY_ERROR.equals(defaultSeverity)) {
-			retVal = Severity.ERROR;
-		} else if (ConfigurableIssueCode.SEVERITY_WARNING.equals(defaultSeverity)) {
-			retVal = Severity.WARNING;
-		} else if (ConfigurableIssueCode.SEVERITY_IGNORE.equals(defaultSeverity)) {
-			retVal = Severity.INFO;
-		}
-		return retVal;
 	}
 
 	/**

@@ -7,29 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author dhuebner - Initial contribution and API
  * @since 2.4
  */
-public class IssueCode {
+public interface IValidatorConfigurationProvider {
 
-	private final String code;
+	IValidatorConfiguration getValidatorConfiguration(Resource resource);
 
-	public final static String SEVERITY_ERROR = "error";
-
-	public IssueCode(String code) {
-		this.code = code;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public String getDefaultSeverity() {
-		return SEVERITY_ERROR;
-	}
-	
-	public boolean isDerived() {
-		return false;
-	}
 }

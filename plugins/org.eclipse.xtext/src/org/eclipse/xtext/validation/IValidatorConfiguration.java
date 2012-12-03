@@ -7,29 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import org.eclipse.xtext.diagnostics.Severity;
+
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * 
+ * @author dhuebner - Initial contribution and API
  * @since 2.4
  */
-public class IssueCode {
+public interface IValidatorConfiguration {
 
-	private final String code;
+	Severity getSeverity(IssueCode code);
 
-	public final static String SEVERITY_ERROR = "error";
-
-	public IssueCode(String code) {
-		this.code = code;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public String getDefaultSeverity() {
-		return SEVERITY_ERROR;
-	}
-	
-	public boolean isDerived() {
-		return false;
-	}
+	boolean isIgnore(IssueCode code);
 }

@@ -56,7 +56,9 @@ import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
+import org.eclipse.xtext.validation.IValidatorConfigurationProvider;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.eclipse.xtext.validation.impl.RuntimeValidatorConfigurationProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -217,5 +219,13 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	 */
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
+	}
+	
+
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends IValidatorConfigurationProvider> bindIValidatorConfigurationProvider() {
+		return RuntimeValidatorConfigurationProvider.class;
 	}
 }
