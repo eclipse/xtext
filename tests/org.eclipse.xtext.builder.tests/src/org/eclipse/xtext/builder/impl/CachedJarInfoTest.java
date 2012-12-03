@@ -33,8 +33,8 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.junit.Test;
 
-import com.yourkit.api.Controller;
-import com.yourkit.api.ProfilingModes;
+//import com.yourkit.api.Controller;
+//import com.yourkit.api.ProfilingModes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
