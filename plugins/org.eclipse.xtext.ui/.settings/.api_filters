@@ -40,4 +40,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/JarEntryLocator.java" type="org.eclipse.xtext.ui.resource.JarEntryLocator">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.JarEntryLocator"/>
+                <message_argument value="getJarEntry(URI, IPackageFragmentRoot)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.JarEntryLocator"/>
+                <message_argument value="getURI(IJarEntryResource)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

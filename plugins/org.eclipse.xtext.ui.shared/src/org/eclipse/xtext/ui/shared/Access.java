@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.inject.Provider;
@@ -51,6 +52,13 @@ public class Access {
 	
 	public static Provider<IStorage2UriMapper> getIStorage2UriMapper() {
 		return provider(IStorage2UriMapper.class);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static Provider<IStorage2UriMapperJdtExtensions> getIStorage2UriMapperJdtExtensions() {
+		return provider(IStorage2UriMapperJdtExtensions.class);
 	}
 	
 	public static Provider<IStateChangeEventBroker> getIStateChangeEventBroker() {

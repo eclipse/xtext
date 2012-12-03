@@ -10,18 +10,19 @@ package org.eclipse.xtext.ui.tests.core.resource;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
-import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,43 +35,83 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 	@Test public void testResourceInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/bar.txt", "...")), true, monitor());
+		file.create(jarInputStream(new TextFile("foo/bar.indexed", "//empty"), new TextFile("foo/bar.notIndexed", "//empty")), true, monitor());
 		addJarToClasspath(project, file);
 		
-		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
-			@Override
-			public boolean isValidUri(URI uri, IStorage storage) {
-				return uri!=null;
-			}
-		};
-		impl.setLocator(new JarEntryLocator());
-		URI uri = URI.createURI("archive:platform:/resource/foo/foo.jar!/foo/bar.txt");
-		Iterable<Pair<IStorage, IProject>> storages = impl.getStorages(uri);
-		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
-		Pair<IStorage, IProject> next = iterator.next();
-		assertFalse(iterator.hasNext());
-		assertEquals(uri, impl.getUri(next.getFirst()));
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
+		Map<URI, IStorage> rootData = impl.getAllEntries(root);
+		assertEquals(1, rootData.size());
+		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/bar.indexed", rootData.keySet().iterator().next().toString());
+		file.setContents(jarInputStream(new TextFile("foo/bar.notindexed", "//empty"), new TextFile("foo/bar.notIndexed", "//empty")), IResource.FORCE, monitor());
+		rootData = impl.getAllEntries(root);
+		assertTrue(rootData.isEmpty());
+	}
+	
+	@Test public void testJaredBundle() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(
+				new TextFile("foo/bar.indexed", "//empty"), 
+				new TextFile("foo/bar.notIndexed", "//empty"),
+				new TextFile("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nBundle-SymbolicName: hubba.bubba\n")
+				), true, monitor());
+		addJarToClasspath(project, file);
+		
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(file);
+		Map<URI, IStorage> rootData = impl.getAllEntries(root);
+		assertEquals(1, rootData.size());
+		assertEquals("platform:/resource/hubba.bubba/foo/bar.indexed", rootData.keySet().iterator().next().toString());
+		
+		// let's change the bundle name
+		file.setContents(jarInputStream(
+				new TextFile("foo/bar.indexed", "//empty"), 
+				new TextFile("foo/bar.notIndexed", "//empty"),
+				new TextFile("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nBundle-SymbolicName: other.bundle.name;singleton:=true\n")
+				), IResource.FORCE, monitor());
+		rootData = impl.getAllEntries(root);
+		assertEquals(1, rootData.size());
+		assertEquals("platform:/resource/other.bundle.name/foo/bar.indexed", rootData.keySet().iterator().next().toString());
 	}
 	
 	@Test public void testResourceInExternalFolder() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
-		IFile file = externalFolder.getFile("someFile.ext");
+		
+		IFile file = externalFolder.getFile("a.indexed");
 		file.create(new StringInputStream("content"), true, monitor());
+		IFile file2 = externalFolder.getFile("b.nonindexed");
+		file2.create(new StringInputStream("content"), true, monitor());
 		addExternalFolderToClasspath(project, externalFolder);
 		
-		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
+		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
+		
+		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
+		Map<URI, IStorage> rootData = impl.getAllEntries(root);
+		assertEquals(1, rootData.size());
+		assertEquals("platform:/resource/.org.eclipse.jdt.core.external.folders/externalFolder/a.indexed", rootData.keySet().iterator().next().toString());
+		IFile file3 = externalFolder.getFile("c.indexed");
+		file3.create(new StringInputStream("content"), true, monitor());
+		rootData = impl.getAllEntries(root);
+		assertEquals(2, rootData.size());
+	}
+	
+	protected Storage2UriMapperJavaImpl getStorage2UriMapper() {
+		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl();
+		impl.setUriValidator(new UriValidator() {
 			@Override
-			public boolean isValidUri(URI uri, IStorage storage) {
-				return uri!=null;
+			public boolean isPossiblyManaged(IStorage storage) {
+				return "indexed".equals(storage.getFullPath().getFileExtension());
 			}
-		};
+			@Override
+			public boolean isValid(URI uri, IStorage storage) {
+				return "indexed".equals(storage.getFullPath().getFileExtension());
+			}
+		});
 		impl.setLocator(new JarEntryLocator());
-		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		Iterable<Pair<IStorage, IProject>> storages = impl.getStorages(uri);
-		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
-		Pair<IStorage, IProject> next = iterator.next();
-		assertFalse(iterator.hasNext());
-		assertEquals(uri, impl.getUri(next.getFirst()));
+		return impl;
 	}
 }

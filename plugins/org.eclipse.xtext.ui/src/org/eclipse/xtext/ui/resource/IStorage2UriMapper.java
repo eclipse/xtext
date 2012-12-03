@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
+import java.util.Map;
+
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
@@ -16,6 +19,7 @@ import org.eclipse.xtext.util.Pair;
  * A bi directional mapping service that allows to find the EMF {@link URI} for an {@link IStorage}
  * and vice versa.
  * @author Sven Efftinge - Initial contribution and API
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface IStorage2UriMapper {
 
@@ -35,4 +39,8 @@ public interface IStorage2UriMapper {
 	 */
 	URI getUri(IStorage storage);
 
+	/**
+	 * @since 2.4
+	 */
+	Map<URI, IStorage> getAllEntries(IContainer container);
 }

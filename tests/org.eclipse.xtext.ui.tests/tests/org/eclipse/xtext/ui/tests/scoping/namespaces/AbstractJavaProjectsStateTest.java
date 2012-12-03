@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.junit.Test;
 
 /**
@@ -48,7 +49,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 		uri3 = createFileAndRegisterResource(project2, "src2/file3");
 		IResource member = javaProject1.getProject().findMember("src");
 		srcRoot = javaProject1.getPackageFragmentRoot(member);
-		IStorage2UriMapper mapper = new Storage2UriMapperImpl() {
+		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
 			@Override
 			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri != null 
@@ -56,6 +57,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 					&& !uri.toString().endsWith("/.classpath");
 			}
 		};
+		mapper.setUriValidator(new UriValidator());
 		projectsState = createProjectsState(mapper);
 	}
 

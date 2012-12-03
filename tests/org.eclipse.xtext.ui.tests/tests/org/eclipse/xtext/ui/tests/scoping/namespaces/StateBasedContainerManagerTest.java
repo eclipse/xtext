@@ -22,8 +22,8 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.UriValidator;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -47,12 +47,13 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		uri1 = createFileAndRegisterResource(project1, "file1");
 		uri2 = createFileAndRegisterResource(project1, "file2");
 		uri3 = createFileAndRegisterResource(project2, "file3");
-		IStorage2UriMapper mapper = new Storage2UriMapperImpl() {
+		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
 			@Override
 			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri != null && !uri.toString().endsWith("/.project");
 			}
 		};
+		mapper.setUriValidator(new UriValidator());
 		projectsState = new WorkspaceProjectsState();
 		projectsState.setMapper(mapper);
 		WorkspaceProjectsStateHelper helper = new WorkspaceProjectsStateHelper();

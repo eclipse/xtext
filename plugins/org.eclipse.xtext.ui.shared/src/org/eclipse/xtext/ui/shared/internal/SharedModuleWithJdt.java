@@ -14,6 +14,7 @@ import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
@@ -28,7 +29,8 @@ public class SharedModuleWithJdt extends AbstractModule {
 	protected void configure() {
 		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
 		bind(ProjectClasspathChangeListener.class).asEagerSingleton();
-		bind(IStorage2UriMapper.class).to(Storage2UriMapperJavaImpl.class);
+		bind(IStorage2UriMapper.class).to(IStorage2UriMapperJdtExtensions.class);
+		bind(IStorage2UriMapperJdtExtensions.class).to(Storage2UriMapperJavaImpl.class);
 		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		bind(TypeResourceUnloader.class).asEagerSingleton();
 		bind(JavaChangeQueueFiller.class).asEagerSingleton();
