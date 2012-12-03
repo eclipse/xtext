@@ -32,23 +32,35 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	public ITypeComputationResult computeTypes() {
 		XExpression rootExpression = getRootExpression();
+		if (rootExpression == null)
+			return createNoTypeResult();
 		return computeTypes(rootExpression);
 	}
 	
+	protected abstract ITypeComputationResult createNoTypeResult();
+	
+	@Nullable
 	protected abstract XExpression getRootExpression();
+	
+	protected XExpression getDefiniteRootExpression() {
+		XExpression result = getRootExpression();
+		if (result == null)
+			throw new IllegalStateException("root expression was null");
+		return result;
+	}
 	
 	@Nullable
 	protected abstract LightweightTypeReference getExpectedType();
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		return types.acceptType(getRootExpression(), expectation, type, returnType, hints);
+		return types.acceptType(getDefiniteRootExpression(), expectation, type, returnType, hints);
 	}
 	
 	@Override
 	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (alreadyHandled != getRootExpression())
-			return types.acceptType(getRootExpression(), expectation, type, returnType, hints);
+			return types.acceptType(getDefiniteRootExpression(), expectation, type, returnType, hints);
 		return type;
 	}
 	

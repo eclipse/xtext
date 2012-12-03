@@ -15,8 +15,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,6 +50,11 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 	@Override
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getRootExpression());
+		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getDefiniteRootExpression());
+	}
+	
+	@Override
+	protected ITypeComputationResult createNoTypeResult() {
+		return new NoTypeResult(getMember(), resolvedTypes.getReferenceOwner());
 	}
 }

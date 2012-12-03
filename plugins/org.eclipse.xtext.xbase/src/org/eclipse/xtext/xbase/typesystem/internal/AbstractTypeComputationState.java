@@ -94,11 +94,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			stackedResolvedTypes.performMergeIntoParent();
 			return new ResolutionBasedComputationResult(expression, resolvedTypes);
 		} else {
-			// create diagnostics if necessary
-			return new NoTypeResult();
+			return new NoTypeResult(null, getReferenceOwner());
 		}
 	}
-
+	
 	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
 		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
@@ -372,7 +371,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	public ITypeReferenceOwner getReferenceOwner() {
-		return getResolvedTypes().getReferenceOwner();
+		return resolvedTypes.getReferenceOwner();
 	}
 	
 	public OwnedConverter getConverter() {

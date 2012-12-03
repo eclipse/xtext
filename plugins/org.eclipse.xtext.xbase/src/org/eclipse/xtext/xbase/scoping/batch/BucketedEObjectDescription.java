@@ -56,23 +56,26 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 
 	public String getShadowingKey() {
 		EObject object = getEObjectOrProxy();
-		if (object instanceof JvmExecutable) {
-			JvmExecutable executable = (JvmExecutable) object;
-			StringBuilder builder = new StringBuilder(executable.getSimpleName());
-			builder.append('(');
-			boolean first = true;
-			for(JvmFormalParameter parameter: executable.getParameters()) {
-				if (!first) {
-					builder.append(',');
-				} else {
-					first = false;
+		if (object instanceof JvmIdentifiableElement) {
+			JvmIdentifiableElement identifiable = (JvmIdentifiableElement) object;
+			StringBuilder builder = new StringBuilder(identifiable.getSimpleName());
+			if (object instanceof JvmExecutable) {
+				JvmExecutable executable = (JvmExecutable) object;
+				builder.append('(');
+				boolean first = true;
+				for(JvmFormalParameter parameter: executable.getParameters()) {
+					if (!first) {
+						builder.append(',');
+					} else {
+						first = false;
+					}
+					if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
+						builder.append(parameter.getParameterType().getType().getIdentifier());
+					else
+						builder.append("null");
 				}
-				if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
-					builder.append(parameter.getParameterType().getType().getIdentifier());
-				else
-					builder.append("null");
+				builder.append(')');
 			}
-			builder.append(')');
 			if (getImplicitFirstArgument() != null) {
 				builder.append(":implicitFirstArgument");
 			}
@@ -82,9 +85,6 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 				builder.append('-');
 			}
 			return builder.toString();
-		}
-		if (object instanceof JvmIdentifiableElement) {
-			return ((JvmIdentifiableElement) object).getSimpleName() + (isVisible() ? '+' : '-');
 		}
 		return getName().toString() + (isVisible() ? '+' : '-');
 	}

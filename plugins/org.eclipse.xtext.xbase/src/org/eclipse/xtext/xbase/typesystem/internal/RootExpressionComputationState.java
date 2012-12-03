@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -59,6 +60,11 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
 		return expectedType;
+	}
+	
+	@Override
+	protected ITypeComputationResult createNoTypeResult() {
+		return new NoTypeResult(null, resolvedTypes.getReferenceOwner());
 	}
 
 }
