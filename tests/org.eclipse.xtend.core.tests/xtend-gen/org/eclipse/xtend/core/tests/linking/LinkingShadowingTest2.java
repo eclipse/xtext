@@ -16,7 +16,6 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,30 +33,6 @@ public class LinkingShadowingTest2 extends LinkingShadowingTest {
     Assert.assertEquals(identifier, _identifier);
     boolean _isInstance = type.isInstance(linked);
     Assert.assertTrue(_isInstance);
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testField_noConflicts_publicStaticExtension() throws Exception {
-    super.testField_noConflicts_publicStaticExtension();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testField_noConflicts_protectedStaticExtension() throws Exception {
-    super.testField_noConflicts_protectedStaticExtension();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testField_staticExtension_shadows_sugarOnIt() throws Exception {
-    super.testField_staticExtension_shadows_sugarOnIt();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testStaticImport_overloaded() throws Exception {
-    super.testStaticImport_overloaded();
   }
   
   @Test

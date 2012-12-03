@@ -22,19 +22,12 @@ import org.eclipse.emf.ecore.EClass
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-public class AssignmentLinkingTest2 extends AssignmentLinkingTest {
+class AssignmentLinkingTest2 extends AssignmentLinkingTest {
 }
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class InferredJvmModelShadowingJavaLinkingTests2 extends InferredJvmModelShadowingJavaLinkingTests {
-    
-    @Test
-    @Ignore("TODO")
-    override testLinkInferredJvmOperationWithSyntaxError() throws Exception {
-        super.testLinkInferredJvmOperationWithSyntaxError()
-    }
-    
 }
 
 @RunWith(typeof(XtextRunner))
@@ -53,30 +46,6 @@ class LinkingShadowingTest2 extends LinkingShadowingTest {
         assertFalse("is resolved", linked.eIsProxy());
         assertEquals(identifier, linked.getIdentifier());
         assertTrue(type.isInstance(linked));
-    }
-    
-    @Test
-    @Ignore("TODO")
-    override testField_noConflicts_publicStaticExtension() throws Exception {
-        super.testField_noConflicts_publicStaticExtension()
-    }
-    
-    @Test
-    @Ignore("TODO")
-    override testField_noConflicts_protectedStaticExtension() throws Exception {
-        super.testField_noConflicts_protectedStaticExtension()
-    }
-    
-    @Test
-    @Ignore("TODO")
-    override testField_staticExtension_shadows_sugarOnIt() throws Exception {
-        super.testField_staticExtension_shadows_sugarOnIt()
-    }
-    
-    @Test
-    @Ignore("TODO")
-    override testStaticImport_overloaded() throws Exception {
-        super.testStaticImport_overloaded()
     }
     
     @Test 
