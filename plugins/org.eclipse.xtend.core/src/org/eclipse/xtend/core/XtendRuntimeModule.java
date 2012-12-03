@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.typing.XtendTypeProvider;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
+import org.eclipse.xtend.core.validation.XtendValidatorConfigurationProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.validation.IValidatorConfigurationProvider;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
@@ -145,5 +147,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends IFormatterConfigKeys> bindIFormatterConfigKeys() {
 		return XtendFormatterConfigKeys.class;
+	}
+	
+	@Override
+	public Class<? extends IValidatorConfigurationProvider> bindIValidatorConfigurationProvider() {
+		return XtendValidatorConfigurationProvider.class;
 	}
 }
