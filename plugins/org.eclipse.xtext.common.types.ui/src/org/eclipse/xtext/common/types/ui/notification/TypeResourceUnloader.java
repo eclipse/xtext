@@ -41,6 +41,7 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 	
 	public void elementChanged(ElementChangedEvent event) {
 		IResourceDescription.Event resourceDescriptionEvent = getAsResourceDescriptionChange(event.getDelta());
+		System.out.println("TypeResourceUnloader: "+event + " --> "+resourceDescriptionEvent);
 		if (resourceDescriptionEvent != null)
 			notifyListeners(resourceDescriptionEvent);
 	}
