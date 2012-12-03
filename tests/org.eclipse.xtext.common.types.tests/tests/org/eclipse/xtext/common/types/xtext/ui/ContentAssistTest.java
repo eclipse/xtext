@@ -59,10 +59,12 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	@Test public void testDefaultArrayList_01() throws Exception {
+		//TODO use our own types, since ArrayList has changed in Java7
 		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	@Test public void testDefaultArrayList_02() throws Exception {
+		//TODO use our own types, since ArrayList has changed in Java7
 		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 
