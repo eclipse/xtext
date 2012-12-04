@@ -15,7 +15,10 @@
 
 
 «DEFINE pre FOR Grammar-»
-«FILE setup().asPath()+".java" SRC»
+«FILE setup().asPath()+".java" SRC-»
+/*
+«fileHeader()»
+*/
 package «setup().toJavaPackage()»;
 
 /**
@@ -29,7 +32,10 @@ public class «setup().toSimpleName()» extends «setupImpl().toJavaPackage()==setu
 	}
 }
 
-«ENDFILE»
+«ENDFILE-»
+/*
+«fileHeader()»
+*/
 package «setupImpl().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;

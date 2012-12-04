@@ -27,7 +27,6 @@
 /*
 «fileHeader()»
 */
-
 package «gaFQName().toJavaPackage()»;
 
 import com.google.inject.Singleton;

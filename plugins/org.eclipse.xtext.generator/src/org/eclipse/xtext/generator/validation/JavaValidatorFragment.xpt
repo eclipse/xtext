@@ -18,6 +18,9 @@
 
 «DEFINE generate(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
 package «getValidatorName("Abstract").toJavaPackage()»;
  
 import java.util.ArrayList;
@@ -40,9 +43,16 @@ public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSup
 «ENDFILE»
 
 «FILE getValidatorName("").asPath()+".java" SRC-»
+/*
+«fileHeader()»
+*/
 package «getValidatorName("").toJavaPackage()»;
- 
 
+/**
+ * Custom validation rules. 
+ *
+ * see http://www.eclipse.org/Xtext/documentation.html#validation
+ */
 public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Abstract").toSimpleName()» {
 
 //	@Check
@@ -51,7 +61,6 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 //			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
 //		}
 //	}
-
 }
 «ENDFILE»
 «ENDDEFINE»
