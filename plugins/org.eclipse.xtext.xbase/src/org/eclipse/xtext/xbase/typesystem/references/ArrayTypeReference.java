@@ -50,6 +50,13 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		JvmGenericArrayTypeReference result = getTypesFactory().createJvmGenericArrayTypeReference();
+		result.setComponentType(component.toJavaCompliantTypeReference());
+		return result;
+	}
+	
+	@Override
 	public JvmArrayType getType() {
 		JvmType componentType = component.getType();
 		if (componentType instanceof JvmComponentType) {

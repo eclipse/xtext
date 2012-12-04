@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -19,13 +20,16 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -34,8 +38,12 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -204,7 +212,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		if (InferredTypeIndicator.isInferred(field.getType())) {
 			LightweightTypeReference fieldType = result.getActualExpressionType();
 			if (fieldType != null)
-				InferredTypeIndicator.resolveTo(field.getType(), fieldType.toTypeReference());
+				InferredTypeIndicator.resolveTo(field.getType(), fieldType.toJavaCompliantTypeReference());
 		}
 		computeAnnotationTypes(resolvedTypes, featureScopeSession, field);
 	}
@@ -217,13 +225,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		OperationBodyComputationState state = new OperationBodyComputationState(resolvedTypes, featureScopeSession, operation, this);
-		ITypeComputationResult result = state.computeTypes();
-		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
-			LightweightTypeReference returnType = result.getReturnType();
-			if (returnType != null)
-				InferredTypeIndicator.resolveTo(operation.getReturnType(), returnType.toTypeReference());
-		}
+		setReturnType(operation, state.computeTypes());
 		computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
+	}
+
+	protected void setReturnType(JvmOperation operation, ITypeComputationResult computedType) {
+		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			LightweightTypeReference returnType = computedType.getReturnType();
+			if (returnType != null) {
+				InferredTypeIndicator.resolveTo(operation.getReturnType(), returnType.toJavaCompliantTypeReference());
+			}
+		}
 	}
 	
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmAnnotationTarget annotable) {
@@ -311,6 +323,54 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return logicalContainerProvider;
+	}
+	
+	/**
+	 * Returns <code>null</code> if the given operation declares it's own return type or if it does not override
+	 * another operation.
+	 */
+	@Nullable
+	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes) {
+		int parameterSize = operation.getParameters().size();
+		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			LightweightTypeReference declaringType = resolvedTypes.getActualType(operation.getDeclaringType());
+			if (declaringType == null) {
+				throw new IllegalStateException("Cannot determine declaring type of operation: " + operation);
+			}
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> parameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaringType);
+			StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(parameterMapping, resolvedTypes.getReferenceOwner());
+			List<LightweightTypeReference> superTypes = declaringType.getSuperTypes();
+			OwnedConverter converter = resolvedTypes.getConverter();
+			for(LightweightTypeReference superType: superTypes) {
+				JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
+				if (declaredSuperType != null) {
+					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
+					for(JvmFeature feature: equallyNamedFeatures) {
+						if (feature instanceof JvmOperation) {
+							JvmOperation candidate = (JvmOperation) feature;
+							if (parameterSize == candidate.getParameters().size()) {
+								boolean matchesSignature = true;
+								for(int i = 0; i < parameterSize && matchesSignature; i++) {
+									JvmFormalParameter parameter = operation.getParameters().get(i);
+									String identifier = parameter.getParameterType().getIdentifier();
+									
+									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
+									LightweightTypeReference candidateParameterType =
+											substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
+									if (!identifier.equals(candidateParameterType.getIdentifier())) {
+										matchesSignature = false;
+									}
+								}
+								if (matchesSignature) {
+									return substitutor.substitute(converter.toLightweightReference(candidate.getReturnType()));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 }

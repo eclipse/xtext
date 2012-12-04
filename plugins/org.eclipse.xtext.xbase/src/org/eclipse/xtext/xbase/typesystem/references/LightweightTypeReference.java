@@ -107,6 +107,8 @@ public abstract class LightweightTypeReference {
 	
 	public abstract JvmTypeReference toTypeReference();
 	
+	public abstract JvmTypeReference toJavaCompliantTypeReference();
+	
 	@Nullable
 	public abstract JvmType getType();
 	
@@ -432,6 +434,7 @@ public abstract class LightweightTypeReference {
 	 * Any types will be expressed as Object whereas multi types will be expressed as their common super type.
 	 */
 	public LightweightTypeReference toJavaType() {
+		// TODO this needs more refinement, e.g. arrays, parameter types et al
 		return this;
 	}
 	

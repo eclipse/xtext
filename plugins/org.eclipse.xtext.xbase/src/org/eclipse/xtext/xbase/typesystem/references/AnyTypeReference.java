@@ -36,6 +36,11 @@ public class AnyTypeReference extends LightweightTypeReference {
 	public JvmTypeReference toTypeReference() {
 		return getTypesFactory().createJvmAnyTypeReference();
 	}
+	
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+	}
 
 	@Override
 	public String getSimpleName() {

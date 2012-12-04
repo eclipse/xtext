@@ -144,6 +144,25 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return result;
 	}
 	
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		TypesFactory typesFactory = getTypesFactory();
+		JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
+		if (upperBounds != null && !upperBounds.isEmpty()) {
+			for(LightweightTypeReference typeArgument: upperBounds) {
+				JvmUpperBound constraint = typesFactory.createJvmUpperBound();
+				constraint.setTypeReference(typeArgument.toJavaCompliantTypeReference());
+				result.getConstraints().add(constraint);
+			}
+		}
+		if (lowerBound != null) {
+			JvmLowerBound constraint = typesFactory.createJvmLowerBound();
+			constraint.setTypeReference(lowerBound.toJavaCompliantTypeReference());
+			result.getConstraints().add(constraint);
+		}
+		return result;
+	}
+	
 	public void addUpperBound(LightweightTypeReference upperBound) {
 		if (upperBound == null) {
 			throw new NullPointerException("upperBound may not be null");
