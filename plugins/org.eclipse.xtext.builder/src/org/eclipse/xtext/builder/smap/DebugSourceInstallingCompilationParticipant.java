@@ -99,8 +99,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 						continue;
 
 					if (outputConfiguration.isInstallDslAsPrimarySource()) {
-						for (IFile javaClassFile : findGeneratedJavaClassFiles(element))
-							traceAsPrimarySource.install(javaClassFile, traceToSource);
+						boolean hideSyntheticLocalVariables = outputConfiguration.isHideSyntheticLocalVariables();
+						for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
+							traceAsPrimarySource.install(javaClassFile, traceToSource, hideSyntheticLocalVariables);
+						}
 					} else {
 						String smap = smapSupport.generateSmap(traceToSource, generatedJavaFile.getName());
 						for (IFile javaClassFile : findGeneratedJavaClassFiles(element))

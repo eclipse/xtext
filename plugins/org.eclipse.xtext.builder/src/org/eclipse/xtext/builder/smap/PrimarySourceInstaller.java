@@ -35,14 +35,17 @@ public class PrimarySourceInstaller {
 
 	public static class XtextClassAdapter extends ClassAdapter {
 
+		private final boolean hideSyntheticVariables;
+
 		private final String sourceFile;
 
 		private final int[] target2source;
 
-		public XtextClassAdapter(ClassVisitor cv, String sourceFile, int[] target2source) {
+		public XtextClassAdapter(ClassVisitor cv, String sourceFile, int[] target2source, boolean hideSyntheticVariables) {
 			super(cv);
 			this.sourceFile = sourceFile;
 			this.target2source = target2source;
+			this.hideSyntheticVariables = hideSyntheticVariables;
 		}
 
 		public String getSourceFile() {
@@ -51,6 +54,10 @@ public class PrimarySourceInstaller {
 
 		public int[] getTarget2source() {
 			return target2source;
+		}
+
+		public boolean isHideSyntheticVariables() {
+			return hideSyntheticVariables;
 		}
 
 		@Override
@@ -78,12 +85,6 @@ public class PrimarySourceInstaller {
 		}
 
 		@Override
-		public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
-			if (!name.startsWith("_"))
-				super.visitLocalVariable(name, desc, signature, start, end, index);
-		}
-
-		@Override
 		public void visitLineNumber(int line, Label start) {
 			int[] target2source = context.getTarget2source();
 			if (target2source == null || line < 0 || line >= target2source.length)
@@ -91,6 +92,18 @@ public class PrimarySourceInstaller {
 			int sourceLine = target2source[line];
 			if (sourceLine >= 0)
 				super.visitLineNumber(sourceLine, start);
+		}
+
+		@Override
+		public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
+			if (context.isHideSyntheticVariables()) {
+				boolean isMethodParameter = start.getOffset() == 0;
+				boolean isSynthetic = name.startsWith("_");
+				if (isMethodParameter || !isSynthetic)
+					super.visitLocalVariable(name, desc, signature, start, end, index);
+			} else {
+				super.visitLocalVariable(name, desc, signature, start, end, index);
+			}
 		}
 	}
 
@@ -119,7 +132,7 @@ public class PrimarySourceInstaller {
 	}
 
 	@SuppressWarnings("null")
-	public void install(IFile classFile, AbstractTraceRegion rootTraceRegion) {
+	public void install(IFile classFile, AbstractTraceRegion rootTraceRegion, boolean hideSyntheticVariables) {
 		try {
 			InputStream inputStream = classFile.getContents();
 			try {
@@ -127,7 +140,8 @@ public class PrimarySourceInstaller {
 				ClassWriter writer = new ClassWriter(0);
 				String sourceFile = rootTraceRegion.getAssociatedPath().lastSegment();
 				int[] target2source = getTargetToSourceLineMapping(rootTraceRegion);
-				XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFile, target2source);
+				XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFile, target2source,
+						hideSyntheticVariables);
 				reader.accept(adapter, 0);
 				classFile.setContents(new ByteArrayInputStream(writer.toByteArray()), 0, new NullProgressMonitor());
 			} finally {
