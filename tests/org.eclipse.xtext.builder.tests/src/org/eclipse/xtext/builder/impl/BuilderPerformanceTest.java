@@ -10,14 +10,9 @@ package org.eclipse.xtext.builder.impl;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -28,25 +23,22 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.StopWatches;
+import org.junit.Ignore;
 import org.junit.Test;
-
-//import com.yourkit.api.Controller;
-//import com.yourkit.api.ProfilingModes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CachedJarInfoTest extends AbstractBuilderTest {
+public class BuilderPerformanceTest extends AbstractBuilderTest {
 	
-	@Test public void testSecondBuildRunIsMuchFaster() throws Exception {
+	@Ignore @Test public void testSecondBuildRunIsMuchFaster() throws Exception {
 		final String project1name = "project1";
 		IJavaProject javaProject1 = createJavaProject(project1name);
 		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
 		
-		InputStream inputStream = CachedJarInfoTest.class.getResourceAsStream("XtendExample.jar");
+		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
 		file.create(inputStream, IResource.FORCE, null);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
 		addToClasspath(javaProject1, libraryEntry);
@@ -65,7 +57,7 @@ public class CachedJarInfoTest extends AbstractBuilderTest {
 //		controller.stopCPUProfiling();
 	}
 	
-	@Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
+	@Ignore @Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
 		IProject project1 = createPluginProject(project1name, 
@@ -88,7 +80,7 @@ public class CachedJarInfoTest extends AbstractBuilderTest {
 		
 		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
 		
-		InputStream inputStream = CachedJarInfoTest.class.getResourceAsStream("XtendExample.jar");
+		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
 		file.create(inputStream, IResource.FORCE, null);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
 		addToClasspath(javaProject1, libraryEntry);
@@ -104,7 +96,7 @@ public class CachedJarInfoTest extends AbstractBuilderTest {
 		
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.clearCPUData();
-		
+//		
 		System.out.println("Clean Xtext first - "+cleanBuildTakes());
 		printAndClearStopWatchData();
 		
@@ -115,47 +107,15 @@ public class CachedJarInfoTest extends AbstractBuilderTest {
 		
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.clearCPUData();
-//		System.out.println("Clean Xtext third - "+cleanBuildTakes());
-//		System.out.println("Clean Xtext fourth - "+cleanBuildTakes());
-//		System.out.println("Clean Xtext fith - "+cleanBuildTakes());
+		System.out.println("Clean Xtext third - "+cleanBuildTakes());
+		System.out.println("Clean Xtext fourth - "+cleanBuildTakes());
+		System.out.println("Clean Xtext fith - "+cleanBuildTakes());
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.stopCPUProfiling();
 		printAndClearStopWatchData();
 	}
 	
-	private void printAndClearStopWatchData() {
-		for (String task : StopWatches.allTasks()) {
-			System.out.println("Task '"+task+"' took "+StopWatches.forTask(task).getMilliSeconds()+"ms ("+StopWatches.forTask(task).getNumberOfStopEvents()+" captures).");
-		}
-		StopWatches.resetAll();
-	}
-
-	@Test public void testOpenJar() {
-		File dir = new File("/Volumes/Macintosh HD 2/Eclipse/eclipse-4.2M7/plugins");
-		for (int i =0; i< 10 ; i++) {
-			long foundJarsWithName = 0;
-			long before =System.currentTimeMillis();
-			for (File jar : dir.listFiles(new FilenameFilter() {
-				
-				public boolean accept(File dir, String name) {
-					return name.endsWith("jar");
-				}
-			})) {
-				try {
-					Manifest manifest = new JarFile(jar).getManifest();
-					String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-					if (name != null) {
-						foundJarsWithName++;
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			System.out.println("Scanning "+foundJarsWithName+" jars took : "+(System.currentTimeMillis() - before)+"ms");
-		}
-	}
-	
-	@Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
+	@Ignore @Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
 		IProject project1 = createPluginProject(project1name, 
@@ -197,8 +157,15 @@ public class CachedJarInfoTest extends AbstractBuilderTest {
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.stopCPUProfiling();
 	}
+	
+	private void printAndClearStopWatchData() {
+		for (String task : StopWatches.allTasks()) {
+			System.out.println("Task '"+task+"' took "+StopWatches.forTask(task).getMilliSeconds()+"ms ("+StopWatches.forTask(task).getNumberOfStopEvents()+" captures).");
+		}
+		StopWatches.resetAll();
+	}
 
-	protected void toggleNature(IJavaProject javaProject1) {
+	private void toggleNature(IJavaProject javaProject1) {
 		long before = System.currentTimeMillis();
 		new ToggleXtextNatureAction().toggleNature(javaProject1.getProject());
 		waitForAutoBuild();
