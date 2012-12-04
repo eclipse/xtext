@@ -25,8 +25,6 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
 
 import com.google.common.collect.Sets;
 
@@ -58,8 +56,6 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 		IPath path = root.isExternal() ? root.getPath() : root.getUnderlyingResource().getLocation();
 		if (path != null) {
 			if ("jar".equals(path.getFileExtension())) {
-				StopWatchForTask watchForTask = StopWatches.forTask("getting manifest.");
-				watchForTask.start();
 				try {
 					final File file = path.toFile();
 					if (file != null && file.exists()) {
@@ -75,7 +71,6 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 				} catch (IOException e) {
 					LOG.error(e.getMessage(), e);
 				}
-				watchForTask.stop();
 			}
 		}
 

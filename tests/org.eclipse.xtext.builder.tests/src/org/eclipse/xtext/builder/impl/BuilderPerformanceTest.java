@@ -13,6 +13,7 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -25,6 +26,9 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.NumbersForTask;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -32,6 +36,20 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BuilderPerformanceTest extends AbstractBuilderTest {
+	
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		StopWatches.setEnabled(true);
+		super.setUp();
+	}
+	
+	@Override
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+		printAndClearStopWatchData();
+	}
 	
 	@Ignore @Test public void testSecondBuildRunIsMuchFaster() throws Exception {
 		final String project1name = "project1";
@@ -112,7 +130,6 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 		System.out.println("Clean Xtext fith - "+cleanBuildTakes());
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.stopCPUProfiling();
-		printAndClearStopWatchData();
 	}
 	
 	@Ignore @Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
@@ -159,8 +176,8 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	}
 	
 	private void printAndClearStopWatchData() {
-		for (String task : StopWatches.allTasks()) {
-			System.out.println("Task '"+task+"' took "+StopWatches.forTask(task).getMilliSeconds()+"ms ("+StopWatches.forTask(task).getNumberOfStopEvents()+" captures).");
+		for (Entry<String, NumbersForTask> task : StopWatches.allNumbers().entrySet()) {
+			System.out.println("Task '"+task.getKey()+"' took "+task.getValue().getMilliseconds()+"ms ("+task.getValue().getNumberOfMeasurements()+" measurements).");
 		}
 		StopWatches.resetAll();
 	}
