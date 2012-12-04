@@ -11,6 +11,7 @@ import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -58,7 +59,7 @@ public class StopWatches {
 			return milliseconds;
 		}
 		
-		public synchronized void addMilliseconds(long milliseconds) {
+		synchronized void addMilliseconds(long milliseconds) {
 			this.milliseconds += milliseconds;
 		}
 		
@@ -66,7 +67,7 @@ public class StopWatches {
 			return numberOfMeasurements;
 		}
 		
-		public synchronized void increaseMeasurements() {
+		synchronized void increaseMeasurements() {
 			this.numberOfMeasurements++;
 		}
 	}
@@ -105,6 +106,17 @@ public class StopWatches {
 		synchronized (data) {
 			return unmodifiableMap(data);
 		}
+	}
+	
+	public static String getPrintableStopWatchData() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n");
+		sb.append("-------------------------------------------------------------------------------------------------------------------------\n");
+		for (Entry<String, NumbersForTask> task : StopWatches.allNumbers().entrySet()) {
+			sb.append("Task '"+task.getKey()+"' took "+task.getValue().getMilliseconds()+"ms ("+task.getValue().getNumberOfMeasurements()+" measurements).\n");
+		}
+		sb.append("-------------------------------------------------------------------------------------------------------------------------\n");
+		return sb.toString();
 	}
 	
 }
