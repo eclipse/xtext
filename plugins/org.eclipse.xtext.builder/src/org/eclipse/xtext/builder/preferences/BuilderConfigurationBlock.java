@@ -24,8 +24,11 @@ import org.eclipse.jface.layout.PixelConverter;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.osgi.util.TextProcessor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
@@ -136,9 +139,22 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
+			final Button installAsPrimaryButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE), trueFalseValues, 0);
+			final Button hideLocalButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_hideSyntheticLocalVariables,
+					BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES), trueFalseValues, 0);
+			hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+			installAsPrimaryButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+				}
+			});
+			GridData hideLocalButtonData = new GridData();
+			hideLocalButtonData.horizontalIndent = 32;
+			hideLocalButton.setLayoutData(hideLocalButtonData);
 		}
 		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
@@ -212,7 +228,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 				if (project != null) {
 					monitor.beginTask(String.format(
 							Messages.BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName,
-							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$ //$NON-NLS-1$
+							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-1$
 							2);
 					project.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 1));
 					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD,

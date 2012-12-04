@@ -39,6 +39,11 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	 */
 	public static final String INSTALL_DSL_AS_PRIMARY_SOURCE = "installDslAsPrimarySource";
 	
+	/**
+	 * @since 2.4
+	 */
+	public static final String HIDE_LOCAL_SYNTHETIC_VARIABLES = "hideLocalSyntheticVariables";
+	
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
 	public IPreferenceStoreAccess getPreferenceStoreAccess() {
@@ -79,6 +84,8 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 		result.setSetDerivedProperty(setDerivedProperty);
 		boolean installDslAsPrimarySource = getBoolean(output, INSTALL_DSL_AS_PRIMARY_SOURCE, store, output.isInstallDslAsPrimarySource());
 		result.setInstallDslAsPrimarySource(installDslAsPrimarySource);
+		boolean hideSyntheticLocalVariables = getBoolean(output, HIDE_LOCAL_SYNTHETIC_VARIABLES, store, output.isHideSyntheticLocalVariables());
+		result.setHideSyntheticLocalVariables(hideSyntheticLocalVariables);
 		String description = getString(output, OUTPUT_DESCRIPTION, store, output.getDescription());
 		result.setDescription(description);
 		String directory = getString(output, OUTPUT_DIRECTORY, store, output.getOutputDirectory());
