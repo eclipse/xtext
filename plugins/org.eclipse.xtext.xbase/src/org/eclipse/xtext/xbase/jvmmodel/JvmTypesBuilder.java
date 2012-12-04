@@ -70,7 +70,7 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
-import org.eclipse.xtext.xbase.typing.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 

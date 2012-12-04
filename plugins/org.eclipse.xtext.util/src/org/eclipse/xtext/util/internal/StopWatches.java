@@ -8,21 +8,29 @@
 package org.eclipse.xtext.util.internal;
 
 import static com.google.common.collect.Maps.*;
+import static java.util.Collections.*;
 
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class StopWatches {
 	
-	public static class StopWatchForTask {
+	public interface StoppedTask {
+		public void start();
+		public void stop();
+	}
+	
+	public static class StopWatchForTask implements StoppedTask {
 		final static long notRunning = -1;
 		
-		long milliseconds = 0;
-		long lastStart = notRunning;
-		int numberOfStopEvents = 0;
+		private NumbersForTask numbers;
+		private long lastStart = notRunning;
+		
+		StopWatchForTask(NumbersForTask numbers) {
+			this.numbers = numbers;
+		}
 		
 		public void start() {
 			if (!isRunning())
@@ -33,26 +41,59 @@ public class StopWatches {
 			return lastStart != notRunning;
 		}
 		
-		public long stop() {
+		public void stop() {
 			if (isRunning()) {
 				long currentTimeMillis = System.currentTimeMillis();
-				milliseconds += currentTimeMillis - lastStart;
-				lastStart = notRunning;
-				numberOfStopEvents++;
+				numbers.addMilliseconds(currentTimeMillis - lastStart);
+				numbers.increaseMeasurements();
 			}
+		}
+	}
+	
+	public static class NumbersForTask {
+		long milliseconds = 0;
+		int numberOfMeasurements = 0;
+		
+		public long getMilliseconds() {
 			return milliseconds;
 		}
 		
-		public long getMilliSeconds() {
-			return milliseconds;
+		public synchronized void addMilliseconds(long milliseconds) {
+			this.milliseconds += milliseconds;
 		}
 		
-		public int getNumberOfStopEvents() {
-			return numberOfStopEvents;
+		public int getNumberOfMeasurements() {
+			return numberOfMeasurements;
+		}
+		
+		public synchronized void increaseMeasurements() {
+			this.numberOfMeasurements++;
 		}
 	}
 
-	private static Map<String, StopWatchForTask> data = newLinkedHashMap();
+	private static Map<String, NumbersForTask> data = newLinkedHashMap();
+	private static boolean enabled = false;
+	private static StoppedTask NULLIMPL = new StoppedTask() {
+		public void start() {}
+		public void stop() {}
+	};
+	
+	public static StoppedTask forTask(String task) {
+		if (!enabled)
+			return NULLIMPL;
+		synchronized (data) {
+			NumbersForTask numbers = data.get(task);
+			if (numbers == null) {
+				numbers = new NumbersForTask();
+				data.put(task, numbers);
+			}
+			return new StopWatchForTask(numbers);
+		}
+	}
+	
+	public static void setEnabled(boolean isEnabled) {
+		enabled = isEnabled;
+	}
 	
 	public static void resetAll() {
 		synchronized (data) {
@@ -60,20 +101,9 @@ public class StopWatches {
 		}
 	}
 	
-	public static StopWatchForTask forTask(String task) {
+	public static Map<String, NumbersForTask> allNumbers() {
 		synchronized (data) {
-			StopWatchForTask stopWatch = data.get(task);
-			if (stopWatch == null) {
-				stopWatch = new StopWatchForTask();
-				data.put(task, stopWatch);
-			}
-			return stopWatch;
-		}
-	}
-	
-	public static Set<String> allTasks() {
-		synchronized (data) {
-			return data.keySet();
+			return unmodifiableMap(data);
 		}
 	}
 	

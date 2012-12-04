@@ -24,7 +24,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -117,7 +117,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			if (logger.isDebugEnabled()) {
 				logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
 			}
-			StopWatchForTask task = StopWatches.forTask("Crosslink resolution");
+			StoppedTask task = StopWatches.forTask("Crosslink resolution");
 			try {
 				task.start();
 				final IScope scope = getScope(context, ref);
