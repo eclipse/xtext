@@ -82,30 +82,12 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("foo")
-						&& input.getParameters().get(0).getParameterType().getIdentifier()
-								.equals(Object.class.getName());
-			}
-		});
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName());
-			}
-		});
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(String.class.getName());
-			}
-		});
+		findByNameAndFirstParameterType(operations, "_foo", Object.class);
+		findByNameAndFirstParameterType(operations, "_foo", String.class);
 		for(JvmMember member: inferredType.getMembers()) {
 			if (member instanceof JvmExecutable) {
 				if (member.getSimpleName().startsWith("_"))
@@ -124,44 +106,17 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// two dispatch methods
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName());
-			}
-		});
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 		assertEquals(2, dispatch.getParameters().size());
 		
-		dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(String.class.getName());
-			}
-		});
+		dispatch = findByNameAndFirstParameterType(operations, "foo", String.class);
 		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 		assertEquals(1, dispatch.getParameters().size());
 		
 		// two internal case methods
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName())
-				&& input.getParameters().get(1).getParameterType().getIdentifier()
-				.equals(String.class.getName())
-				;
-			}
-		});
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(String.class.getName());
-			}
-		});
+		findByNameAndFirstParameterType(operations, "_foo", Object.class);
+		findByNameAndFirstParameterType(operations, "_foo", String.class);
 	}
 	
 	@Test public void testDispatchFunction_02() throws Exception {
@@ -170,30 +125,12 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName());
-			}
-		});
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals(String.class.getName(), dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName());
-			}
-		});
-		find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(String.class.getName());
-			}
-		});
+		findByNameAndFirstParameterType(operations, "_foo", Object.class);
+		findByNameAndFirstParameterType(operations, "_foo", String.class);
 	}
 	
 	@Test
@@ -215,42 +152,18 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("doStuff")
-					&& input.getParameters().get(0).getParameterType().getIdentifier()
-					.equals(ENamedElement.class.getName());
-			}
-		});
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "doStuff", ENamedElement.class);
 		// TODO why does this assertion fail with validate==false? (see above TODO)
 		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
 
 		// three internal case methods
-		JvmOperation eClassParam = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_doStuff")
-					&& input.getParameters().get(0).getParameterType().getIdentifier()
-					.equals(EClass.class.getName());
-			}
-		});
+		JvmOperation eClassParam = findByNameAndFirstParameterType(operations, "_doStuff", EClass.class);
 		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
 		
-		JvmOperation ePackageParam = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_doStuff")
-					&& input.getParameters().get(0).getParameterType().getIdentifier()
-					.equals(EPackage.class.getName());
-			}
-		});
+		JvmOperation ePackageParam = findByNameAndFirstParameterType(operations, "_doStuff", EPackage.class);
 		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
 		
-		JvmOperation eStructuralFeatureParam = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_doStuff")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(EStructuralFeature.class.getName());
-			}
-		});
+		JvmOperation eStructuralFeatureParam = findByNameAndFirstParameterType(operations, "_doStuff", EStructuralFeature.class);
 		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
 	}
 	
@@ -260,34 +173,15 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				// parameter type is resolved multitype of Number and Comparable
-				return input.getSimpleName().equals("foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Object.class.getName());
-			}
-		});
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		// return type is specialized
 		assertEquals("java.lang.Number & java.lang.Comparable<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
-		JvmOperation internal = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Double.class.getName());
-			}
-		});
+		JvmOperation internal = findByNameAndFirstParameterType(operations, "_foo", Double.class);
 		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
 		
-		internal = find(operations, new Predicate<JvmOperation>() {
-			public boolean apply(JvmOperation input) {
-				return input.getSimpleName().equals("_foo")
-				&& input.getParameters().get(0).getParameterType().getIdentifier()
-				.equals(Integer.class.getName());
-			}
-		});
+		internal = findByNameAndFirstParameterType(operations, "_foo", Integer.class);
 		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
 	}
 	
@@ -334,7 +228,8 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 				"def dispatch foo(Object o) throws Exception " +
 				"def dispatch foo(Integer i) throws RuntimeException " +
 				"}");
-		JvmOperation dispatcher = find(getInferredType(xtendFile).getDeclaredOperations(), new Predicate<JvmOperation>() {
+		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
+		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return equal("foo", input.getSimpleName());
 			}
@@ -365,14 +260,14 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = findSingleParamOperation(operations, "foo", Object.class);
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals("java.lang.String", dispatch.getReturnType().getIdentifier());
 
 		// two internal case methods
-		JvmOperation stringParam = findSingleParamOperation(operations, "_foo", String.class);
+		JvmOperation stringParam = findByNameAndFirstParameterType(operations, "_foo", String.class);
 		assertEquals("java.lang.String", stringParam.getReturnType().getIdentifier());
 		
-		JvmOperation objectParam = findSingleParamOperation(operations, "_foo", Object.class);
+		JvmOperation objectParam = findByNameAndFirstParameterType(operations, "_foo", Object.class);
 		assertEquals("java.lang.String", objectParam.getReturnType().getIdentifier());
 	}
 	
@@ -392,14 +287,14 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = findSingleParamOperation(operations, "foo", CharSequence.class);
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", CharSequence.class);
 		assertEquals("java.lang.CharSequence", dispatch.getReturnType().getIdentifier());
 
 		// two internal case methods
-		JvmOperation stringParam = findSingleParamOperation(operations, "_foo", String.class);
+		JvmOperation stringParam = findByNameAndFirstParameterType(operations, "_foo", String.class);
 		assertEquals("java.lang.CharSequence", stringParam.getReturnType().getIdentifier());
 		
-		JvmOperation objectParam = findSingleParamOperation(operations, "_foo", CharSequence.class);
+		JvmOperation objectParam = findByNameAndFirstParameterType(operations, "_foo", CharSequence.class);
 		assertEquals("java.lang.CharSequence", objectParam.getReturnType().getIdentifier());
 	}
 	
@@ -419,14 +314,14 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = findSingleParamOperation(operations, "foo", Object.class);
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 
 		// two internal case methods
-		JvmOperation stringParam = findSingleParamOperation(operations, "_foo", Appendable.class);
+		JvmOperation stringParam = findByNameAndFirstParameterType(operations, "_foo", Appendable.class);
 		assertEquals("java.lang.Object", stringParam.getReturnType().getIdentifier());
 		
-		JvmOperation objectParam = findSingleParamOperation(operations, "_foo", CharSequence.class);
+		JvmOperation objectParam = findByNameAndFirstParameterType(operations, "_foo", CharSequence.class);
 		assertEquals("java.lang.Object", objectParam.getReturnType().getIdentifier());
 	}
 	
@@ -446,14 +341,14 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = findSingleParamOperation(operations, "foo", Object.class);
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 
 		// two internal case methods
-		JvmOperation stringParam = findSingleParamOperation(operations, "_foo", Appendable.class);
+		JvmOperation stringParam = findByNameAndFirstParameterType(operations, "_foo", Appendable.class);
 		assertEquals("java.lang.Appendable", stringParam.getReturnType().getIdentifier());
 		
-		JvmOperation objectParam = findSingleParamOperation(operations, "_foo", CharSequence.class);
+		JvmOperation objectParam = findByNameAndFirstParameterType(operations, "_foo", CharSequence.class);
 		assertEquals("java.lang.Object", objectParam.getReturnType().getIdentifier());
 	}
 	
@@ -461,7 +356,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFile xtendFile = file(
 				"class Bug340611 extends test.Dispatching {\n" + 
 				"    override dispatch doDispatch(StringBuilder sb) {\n" + 
-				"        sb\n" + 
+				"        null\n" + 
 				"    }\n" + 
 				"    def dispatch doDispatch(String s) {\n" + 
 				"        s\n" + 
@@ -472,18 +367,18 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals(3, IterableExtensions.size(inferredType.getDeclaredOperations()));
 		
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-		JvmOperation dispatch = findSingleParamOperation(operations, "doDispatch", Object.class);
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "doDispatch", Object.class);
 		assertEquals("java.lang.CharSequence", dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
-		JvmOperation stringParam = findSingleParamOperation(operations, "_doDispatch", StringBuilder.class);
+		JvmOperation stringParam = findByNameAndFirstParameterType(operations, "_doDispatch", StringBuilder.class);
 		assertEquals("java.lang.StringBuilder", stringParam.getReturnType().getIdentifier());
 		
-		JvmOperation objectParam = findSingleParamOperation(operations, "_doDispatch", String.class);
+		JvmOperation objectParam = findByNameAndFirstParameterType(operations, "_doDispatch", String.class);
 		assertEquals("java.lang.CharSequence", objectParam.getReturnType().getIdentifier());
 	}
 
-	protected JvmOperation findSingleParamOperation(Iterable<JvmOperation> operations, final String name, final Class<?> paramType) {
+	protected JvmOperation findByNameAndFirstParameterType(Iterable<JvmOperation> operations, final String name, final Class<?> paramType) {
 		return find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals(name)
@@ -628,6 +523,55 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertFalse(xtendFunction.getReturnType() == jvmOperation.getReturnType());
 		assertEquals(xtendFunction.getReturnType().getType(), jvmOperation.getReturnType().getType());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_03() throws Exception {
+		XtendFile xtendFile = file("class Foo { def bar() { null } }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.lang.Object", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_04() throws Exception {
+		XtendFile xtendFile = file("class Foo { def bar() { if (true) null as Double else null as Integer } }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.lang.Number & java.lang.Comparable<? extends java.lang.Object>", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_05() throws Exception {
+		XtendFile xtendFile = file("class Foo { def bar() { newArrayList(if (true) null as Double else null as Integer) } }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.util.ArrayList<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_06() throws Exception {
+		XtendFile xtendFile = file("abstract class Foo implements Iterable<String> { override iterator() }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.util.Iterator<java.lang.String>", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_07() throws Exception {
+		XtendFile xtendFile = file("abstract class Foo<T> implements Iterable<Iterable<T>> { override iterator() }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.util.Iterator<java.lang.Iterable<T>>", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_08() throws Exception {
+		XtendFile xtendFile = file("abstract class Foo implements java.util.Comparator<String> { override compare(String a, String b) }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("int", jvmOperation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testInferredFunctionWithReturnType_09() throws Exception {
+		XtendFile xtendFile = file("abstract class Foo<X> implements java.util.Comparator<X> { override compare(X a, X b) }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("int", jvmOperation.getReturnType().getIdentifier());
 	}
 
 	@Test public void testInferredFunctionWithParameter() throws Exception {

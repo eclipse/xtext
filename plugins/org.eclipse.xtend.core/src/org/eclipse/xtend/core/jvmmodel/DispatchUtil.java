@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.util.Strings;
@@ -38,19 +39,46 @@ public class DispatchUtil {
 		return !inferredOperation.getSimpleName().startsWith("_") && xtendFunction.isDispatch();
 	}
 	
+	public boolean isDispatchFunction(JvmOperation inferredOperation) {
+		if (inferredOperation.getSimpleName().startsWith("_")) {
+			EObject sourceElement = associations.getPrimarySourceElement(inferredOperation);
+			if (sourceElement instanceof XtendFunction && ((XtendFunction) sourceElement).isDispatch()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Nullable
+	public JvmOperation getDispatcherOperation(JvmOperation dispatchCase) {
+		EObject sourceElement = associations.getPrimarySourceElement(dispatchCase);
+		if (sourceElement instanceof XtendFunction) {
+			XtendFunction function = (XtendFunction) sourceElement;
+			if (function.isDispatch()) {
+				Iterable<JvmOperation> operations = filter(associations.getJvmElements(sourceElement), JvmOperation.class);
+				for(JvmOperation operation: operations) {
+					if (Strings.equal(operation.getSimpleName(), function.getName())) {
+						return operation;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Return the local cases that are associated with the given dispatch operation.
 	 */
-	public List<JvmOperation> getDispatchCases(JvmOperation dispatchOperation) {
-		Set<EObject> sourceElements = associations.getSourceElements(dispatchOperation);
+	public List<JvmOperation> getDispatchCases(JvmOperation dispatcherOperation) {
+		Set<EObject> sourceElements = associations.getSourceElements(dispatcherOperation);
 		List<JvmOperation> result = Lists.newArrayList();
 		for(EObject sourceElement: sourceElements) {
 			if (sourceElement instanceof XtendFunction) {
 				XtendFunction function = (XtendFunction) sourceElement;
-				if (Strings.equal(function.getName(), dispatchOperation.getSimpleName())) {
+				if (Strings.equal(function.getName(), dispatcherOperation.getSimpleName())) {
 					Set<EObject> jvmElements = associations.getJvmElements(function);
 					for(EObject jvmElement: jvmElements) {
-						if (jvmElement != dispatchOperation && jvmElement instanceof JvmOperation) {
+						if (jvmElement != dispatcherOperation && jvmElement instanceof JvmOperation) {
 							JvmOperation candidate = (JvmOperation) jvmElement;
 							if (Strings.equal(candidate.getSimpleName(), '_' + function.getName())) {
 								result.add(candidate);

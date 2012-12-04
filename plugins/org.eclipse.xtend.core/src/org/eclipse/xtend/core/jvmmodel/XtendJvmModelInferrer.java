@@ -388,8 +388,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			Collection<JvmOperation> operations = methods.get(key);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations),
 					target);
-			if (operation != null)
+			if (operation != null) {
 				operation.setSimpleName(key.getFirst());
+			}
 		}
 	}
 

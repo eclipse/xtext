@@ -31,8 +31,10 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -57,17 +59,23 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	public class DispatchReturnTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmOperation operation;
 		private final ResolvedTypes resolvedTypes;
+		private final IFeatureScopeSession session;
 
-		public DispatchReturnTypeReferenceProvider(JvmOperation operation, ResolvedTypes resolvedTypes) {
+		public DispatchReturnTypeReferenceProvider(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
+			this.session = session;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
+			LightweightTypeReference expectedType = getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
+			if (expectedType != null) {
+				return expectedType.toJavaCompliantTypeReference();
+			}
+			
 			List<JvmOperation> cases = dispatchUtil.getDispatchCases(operation);
-			// TODO type parameters on dispatch operations
 			List<LightweightTypeReference> types = Lists.newArrayListWithCapacity(cases.size());
 			for(JvmOperation operation: cases) {
 				LightweightTypeReference caseType = resolvedTypes.getActualType(operation);
@@ -77,7 +85,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types);
 			if (result == null)
 				return null;
-			return result.toTypeReference();
+			return result.toJavaCompliantTypeReference();
 		}
 	}
 	
@@ -108,7 +116,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			if (parameterType == null) {
 				throw new IllegalStateException("TODO: handle broken models properly");
 			}
-			return parameterType.toTypeReference();
+			return parameterType.toJavaCompliantTypeReference();
 		}
 	}
 	
@@ -130,6 +138,39 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			// no associated expression, we just resolve it to the common super type of all associated cases
 			// see #createTypeProvider and #_doPrepare
 			computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
+		} else if (dispatchUtil.isDispatchFunction(operation) && InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			JvmOperation dispatcher = dispatchUtil.getDispatcherOperation(operation);
+			LightweightTypeReference declaredDispatcherType = null;
+			if (dispatcher != null) {
+				declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, resolvedTypes, featureScopeSession);
+			}
+			List<JvmOperation> dispatchCases = dispatchUtil.getDispatchCases(dispatcher);
+			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
+			boolean hasInferredCase = false;
+			for(JvmOperation dispatchCase: dispatchCases) {
+				OperationBodyComputationState state = new DispatchOperationBodyComputationState(resolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
+				ITypeComputationResult dispatchCaseResult = state.computeTypes();
+				if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+					if (declaredDispatcherType == null) {
+						dispatchCaseResults.add(dispatchCaseResult.getReturnType());
+					}
+					hasInferredCase = true;
+				} else {
+					dispatchCaseResults.add(resolvedTypes.getActualType(dispatchCase));
+				}
+				computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
+			}
+			if (hasInferredCase) {
+				LightweightTypeReference commonDispatchType = declaredDispatcherType != null ? declaredDispatcherType : getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults);
+				if (commonDispatchType != null) {
+					for(JvmOperation dispatchCase: dispatchCases) {
+						JvmTypeReference returnType = dispatchCase.getReturnType();
+						if (InferredTypeIndicator.isInferred(returnType)) {
+							InferredTypeIndicator.resolveTo(returnType, commonDispatchType.toJavaCompliantTypeReference());
+						}
+					}
+				}
+			}
 		} else {
 			super._computeTypes(resolvedTypes, featureScopeSession, operation);
 		}
@@ -220,10 +261,14 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		if (member instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) member;
 			if (dispatchUtil.isDispatcherFunction(operation)) {
-				return new DispatchReturnTypeReferenceProvider(operation, resolvedTypes);
+				return new DispatchReturnTypeReferenceProvider(operation, resolvedTypes, featureScopeSession);
 			}
 		}
 		return super.createTypeProvider(resolvedTypes, featureScopeSession, member, returnType);
+	}
+
+	protected DispatchUtil getDispatchUtil() {
+		return dispatchUtil;
 	}
 	
 }

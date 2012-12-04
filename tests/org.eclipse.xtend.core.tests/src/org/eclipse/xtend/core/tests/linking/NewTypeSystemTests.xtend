@@ -32,8 +32,52 @@ class InferredJvmModelShadowingJavaLinkingTests2 extends InferredJvmModelShadowi
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-abstract class InferredJvmModelTest2 extends InferredJvmModelTest {
-    // TODO fix the dispatch case and create stuff
+class InferredJvmModelTest2 extends InferredJvmModelTest {
+    
+    @Test
+    @Ignore("TODO")
+    override testDispatchFunction_03() throws Exception {
+        super.testDispatchFunction_03()
+    }
+    
+    @Test
+    @Ignore("TODO")
+    override testInferredFunction_02() throws Exception {
+        super.testInferredFunction_02()
+    }
+    
+    @Test override testDispatchFunction_04() throws Exception {
+        val xtendFile = file("class Foo { def dispatch foo(Integer x) {x} def dispatch foo(Double x) {x}}")
+        val inferredType = getInferredType(xtendFile)
+        
+        // one main dispatch
+        val operations = inferredType.getDeclaredOperations()
+        val dispatcher = findByNameAndFirstParameterType(operations, "foo", typeof(Object))
+        // return type is specialized
+        assertEquals("java.lang.Object", dispatcher.getReturnType().getIdentifier())
+        
+        // two internal case methods
+        var internal = findByNameAndFirstParameterType(operations, "_foo", typeof(Double))
+        assertEquals(dispatcher.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
+        
+        internal = findByNameAndFirstParameterType(operations, "_foo", typeof(Integer))
+        assertEquals(dispatcher.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
+    }
+    
+    @Test override testInferredFunctionWithReturnType_04() throws Exception {
+        val xtendFile = file("class Foo { def bar() { if (true) null as Double else null as Integer } }")
+        val inferredType = getInferredType(xtendFile)
+        val jvmOperation = inferredType.getMembers().get(1) as JvmOperation
+        assertEquals("java.lang.Object", jvmOperation.getReturnType().getIdentifier());
+    }
+    
+    @Test override testInferredFunctionWithReturnType_05() throws Exception {
+        val xtendFile = file("class Foo { def bar() { newArrayList(if (true) null as Double else null as Integer) } }");
+        val inferredType = getInferredType(xtendFile);
+        val jvmOperation = inferredType.getMembers().get(1) as JvmOperation
+        assertEquals("java.util.ArrayList<java.lang.Object>", jvmOperation.getReturnType().getIdentifier());
+    }
+    
 }
 
 @RunWith(typeof(XtextRunner))
