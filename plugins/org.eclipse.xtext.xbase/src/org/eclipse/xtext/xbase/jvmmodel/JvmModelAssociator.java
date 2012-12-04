@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -50,7 +50,6 @@ import com.google.inject.name.Named;
 @Singleton
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer {
 	
-	@SuppressWarnings("unused")
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
 	
 	@Inject
@@ -233,7 +232,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return;
 		EObject eObject = resource.getContents().get(0);
 		
-		StopWatchForTask task = StopWatches.forTask("primary JVM Model inference");
+		StoppedTask task = StopWatches.forTask("primary JVM Model inference");
 		task.start();
 		// call primary inferrer
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
