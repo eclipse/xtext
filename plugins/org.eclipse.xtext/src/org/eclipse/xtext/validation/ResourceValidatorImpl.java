@@ -22,6 +22,8 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Lists;
@@ -58,69 +60,75 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	private IDiagnosticConverter converter;
 
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
-		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
-		resolveProxies(resource, monitor);
-		if (monitor.isCanceled())
-			return null;
-
-		final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
-				+ resource.getWarnings().size());
+		StopWatchForTask task = StopWatches.forTask("validation");
 		try {
-			IAcceptor<Issue> acceptor = createAcceptor(result);
-			// Syntactical and linking errors
-			// Collect EMF Resource Diagnostics
-			if (mode.shouldCheck(CheckType.FAST)) {
-				for (int i = 0; i < resource.getErrors().size(); i++) {
-					if (monitor.isCanceled())
-						return null;
-					issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
-				}
-
-				for (int i = 0; i < resource.getWarnings().size(); i++) {
-					if (monitor.isCanceled())
-						return null;
-					issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
-				}
-			}
-
+			task.start();
+			final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
+			resolveProxies(resource, monitor);
 			if (monitor.isCanceled())
 				return null;
-			boolean syntaxDiagFail = !result.isEmpty();
-			logCheckStatus(resource, syntaxDiagFail, "Syntax");
-
-			// Validation errors
-			// Collect validator Diagnostics
-			for (EObject ele : resource.getContents()) {
-				try {
-					if (monitor.isCanceled())
-						return null;
-					Map<Object, Object> options = Maps.newHashMap();
-					options.put(CheckMode.KEY, mode);
-					options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
-					// disable concrete syntax validation, since a semantic model that has been parsed 
-					// from the concrete syntax always complies with it - otherwise there are parse errors.
-					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
-					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-					options.put(EValidator.class, diagnostician);
-					if (resource instanceof XtextResource) {
-						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
+	
+			final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
+					+ resource.getWarnings().size());
+			try {
+				IAcceptor<Issue> acceptor = createAcceptor(result);
+				// Syntactical and linking errors
+				// Collect EMF Resource Diagnostics
+				if (mode.shouldCheck(CheckType.FAST)) {
+					for (int i = 0; i < resource.getErrors().size(); i++) {
+						if (monitor.isCanceled())
+							return null;
+						issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 					}
-					Diagnostic diagnostic = diagnostician.validate(ele, options);
-					if (!diagnostic.getChildren().isEmpty()) {
-						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
-						}
-					} else {
-						issueFromEValidatorDiagnostic(diagnostic, acceptor);
+	
+					for (int i = 0; i < resource.getWarnings().size(); i++) {
+						if (monitor.isCanceled())
+							return null;
+						issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 					}
-				} catch (RuntimeException e) {
-					log.error(e.getMessage(), e);
 				}
+	
+				if (monitor.isCanceled())
+					return null;
+				boolean syntaxDiagFail = !result.isEmpty();
+				logCheckStatus(resource, syntaxDiagFail, "Syntax");
+	
+				// Validation errors
+				// Collect validator Diagnostics
+				for (EObject ele : resource.getContents()) {
+					try {
+						if (monitor.isCanceled())
+							return null;
+						Map<Object, Object> options = Maps.newHashMap();
+						options.put(CheckMode.KEY, mode);
+						options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
+						// disable concrete syntax validation, since a semantic model that has been parsed 
+						// from the concrete syntax always complies with it - otherwise there are parse errors.
+						options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+						// see EObjectValidator.getRootEValidator(Map<Object, Object>)
+						options.put(EValidator.class, diagnostician);
+						if (resource instanceof XtextResource) {
+							options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
+						}
+						Diagnostic diagnostic = diagnostician.validate(ele, options);
+						if (!diagnostic.getChildren().isEmpty()) {
+							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+								issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
+							}
+						} else {
+							issueFromEValidatorDiagnostic(diagnostic, acceptor);
+						}
+					} catch (RuntimeException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+			} catch (RuntimeException e) {
+				log.error(e.getMessage(), e);
 			}
-		} catch (RuntimeException e) {
-			log.error(e.getMessage(), e);
+			return result;
+		} finally {
+			task.stop();
 		}
-		return result;
 	}
 
 	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
