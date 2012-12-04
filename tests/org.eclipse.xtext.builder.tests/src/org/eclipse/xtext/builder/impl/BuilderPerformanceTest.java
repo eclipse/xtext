@@ -33,6 +33,75 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+/*
+
+2012-12-04 / Sebastian
+==========================
+
+Clean Java first - Took 968ms
+Clean Java second - Took 1076ms
+Toggle Nature - Took 3009ms
+Clean Xtext first - Took 1391ms
+Clean Xtext second - Took 1056ms
+Clean Xtext third - Took 969ms
+
+-------------------------------------------------------------------------------------------------------------------------
+Task 'build' took 5444ms (4 measurements).
+Task 'parsing' took 288ms (36 measurements).
+Task 'primary JVM Model inference' took 385ms (72 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 186ms (72 measurements).
+Task 'Crosslink resolution' took 6948ms (5264 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+Clean Java first - Took 1106ms
+Clean Java second - Took 964ms
+Toggle Nature - Took 2921ms
+
+-------------------------------------------------------------------------------------------------------------------------
+Task 'build' took 2679ms (1 measurements).
+Task 'parsing' took 23ms (9 measurements).
+Task 'primary JVM Model inference' took 200ms (18 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 41ms (18 measurements).
+Task 'Crosslink resolution' took 4287ms (809 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+Clean Xtext first - Took 1495ms
+
+-------------------------------------------------------------------------------------------------------------------------
+Task 'build' took 1223ms (1 measurements).
+Task 'parsing' took 33ms (9 measurements).
+Task 'primary JVM Model inference' took 50ms (18 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 28ms (18 measurements).
+Task 'Crosslink resolution' took 2017ms (809 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+Clean Xtext second - Took 1239ms
+Clean Xtext third - Took 1030ms
+Clean Xtext fourth - Took 983ms
+Clean Xtext fith - Took 937ms
+
+-------------------------------------------------------------------------------------------------------------------------
+Task 'build' took 3104ms (4 measurements).
+Task 'parsing' took 88ms (36 measurements).
+Task 'primary JVM Model inference' took 165ms (72 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 53ms (72 measurements).
+Task 'Crosslink resolution' took 4716ms (3236 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+Clean Java first - Took 970ms
+Clean Java second - Took 1075ms
+Toggle Nature - Took 968ms
+Clean Xtext first - Took 974ms
+Clean Xtext second - Took 976ms
+Clean Xtext third - Took 1079ms
+Clean Xtext fourth - Took 973ms
+Clean Xtext fith - Took 980ms
+
+-------------------------------------------------------------------------------------------------------------------------
+Task 'build' took 7ms (6 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+
+ */
 public class BuilderPerformanceTest extends AbstractBuilderTest {
 	
 	@Override
@@ -47,9 +116,10 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	public void tearDown() throws Exception {
 		super.tearDown();
 		printAndClearStopWatchData();
+		StopWatches.setEnabled(false);
 	}
 	
-	@Ignore @Test public void testSecondBuildRunIsMuchFaster() throws Exception {
+	@Test public void testSecondBuildRunIsMuchFaster() throws Exception {
 		final String project1name = "project1";
 		IJavaProject javaProject1 = createJavaProject(project1name);
 		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
@@ -73,7 +143,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 //		controller.stopCPUProfiling();
 	}
 	
-	@Ignore @Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
+	@Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
 		IProject project1 = createPluginProject(project1name, 
@@ -130,7 +200,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 //		controller.stopCPUProfiling();
 	}
 	
-	@Ignore @Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
+	@Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
 		IProject project1 = createPluginProject(project1name, 
