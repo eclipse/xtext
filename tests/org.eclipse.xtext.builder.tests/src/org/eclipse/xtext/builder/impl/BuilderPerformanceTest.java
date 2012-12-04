@@ -13,7 +13,6 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -26,7 +25,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.NumbersForTask;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -176,9 +174,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	}
 	
 	private void printAndClearStopWatchData() {
-		for (Entry<String, NumbersForTask> task : StopWatches.allNumbers().entrySet()) {
-			System.out.println("Task '"+task.getKey()+"' took "+task.getValue().getMilliseconds()+"ms ("+task.getValue().getNumberOfMeasurements()+" measurements).");
-		}
+		System.out.println(StopWatches.getPrintableStopWatchData());
 		StopWatches.resetAll();
 	}
 
