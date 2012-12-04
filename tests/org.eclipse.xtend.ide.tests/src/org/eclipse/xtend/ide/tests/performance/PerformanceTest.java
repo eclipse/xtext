@@ -21,9 +21,11 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.junit4.internal.StopWatchRule;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -44,38 +46,24 @@ Task 'validation' took 16913ms (250 measurements).
 
 2012-12-04 / Sven
 
-Task 'build' took 91296ms (10 measurements).
-Task 'parsing' took 3364ms (439 measurements).
-Task 'primary JVM Model inference' took 2947ms (567 measurements).
-Task 'secondary (i.e. Macros) JVM Model inference' took 953ms (567 measurements).
-Task 'Crosslink resolution' took 53835ms (68346 measurements).
-Task 'validation' took 27938ms (250 measurements).
+Task 'build' took 82157ms (10 measurements).
+Task 'parsing' took 2533ms (250 measurements).
+Task 'primary JVM Model inference' took 2306ms (500 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 670ms (500 measurements).
+Task 'Crosslink resolution' took 45668ms (55750 measurements).
+Task 'validation' took 28262ms (250 measurements).
 
  */
 
 public class PerformanceTest extends AbstractXtendUITestCase {
+	
+	@Rule public static StopWatchRule stopWatch = new StopWatchRule(true);
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
 	
 	@Inject
 	private XtendFileGenerator fileGenerator;
-	
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		StopWatches.setEnabled(true);
-		super.setUp();
-	}
-	
-	@Override
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-		System.out.println(StopWatches.getPrintableStopWatchData());
-		StopWatches.resetAll();
-		StopWatches.setEnabled(false);
-	}
 	
 	
 	@Test public void testBuildProject() throws Exception {
