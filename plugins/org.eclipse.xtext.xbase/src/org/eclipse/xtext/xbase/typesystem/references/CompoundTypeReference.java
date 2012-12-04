@@ -50,6 +50,15 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		LightweightTypeReference type = getServices().getTypeConformanceComputer().getCommonSuperType(components);
+		if (type == null) {
+			return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+		}
+		return type.toJavaCompliantTypeReference();
+	}
+	
+	@Override
 	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {
 			if (component.isRawType())

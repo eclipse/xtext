@@ -66,6 +66,18 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
+		result.setType(type);
+		if (typeArguments != null) {
+			for(LightweightTypeReference typeArgument: typeArguments) {
+				result.getArguments().add(typeArgument.toJavaCompliantTypeReference());
+			}
+		}
+		return result;
+	}
+	
+	@Override
 	public JvmType getType() {
 		return type;
 	}
@@ -197,7 +209,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	public void addTypeArgument(LightweightTypeReference argument) {
 		if (argument == null) {
-			throw new NullPointerException("argument may not be null");
+			return;
+//			throw new NullPointerException("argument may not be null");
 		}
 		if (!argument.isOwnedBy(getOwner())) {
 			throw new IllegalArgumentException("argument is not valid in current context");

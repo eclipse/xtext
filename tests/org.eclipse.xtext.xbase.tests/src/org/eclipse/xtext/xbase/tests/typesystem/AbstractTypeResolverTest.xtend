@@ -902,6 +902,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"if (true) newArrayList else newHashSet".resolvesTo("AbstractCollection<Object> & Serializable & Cloneable")
 	}
 	
+	@Test def void testIfExpression_15() throws Exception {
+        "if (true) null else null".resolvesTo("null")
+    }
+	
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
 		"switch true { case true : 's' case false : new Object() default: 'bar'}".resolvesTo("Object")

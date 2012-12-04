@@ -127,6 +127,11 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		return resolve().toJavaCompliantTypeReference();
+	}
+	
+	@Override
 	public boolean isRawType() {
 		if (internalGetResolvedTo() != null)
 			return resolvedTo.isRawType();

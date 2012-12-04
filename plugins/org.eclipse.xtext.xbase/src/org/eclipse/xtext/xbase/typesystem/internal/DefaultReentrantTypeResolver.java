@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -57,11 +59,14 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");
 		}
+		StoppedTask task = StopWatches.forTask("DefaultReentrantTypeResolver.resolve");
 		try {
+			task.start();
 			resolving = true;
 			return resolve();
 		} finally {
 			resolving = false;
+			task.stop();
 		}
 	}
 	

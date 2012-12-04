@@ -22,6 +22,7 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 
 	private boolean voidAllowed;
+	private boolean resolved = false;
 
 	public InferredTypeIndicator(boolean voidAllowed) {
 		this.voidAllowed = voidAllowed;
@@ -29,14 +30,19 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 
 	public static boolean isInferred(JvmTypeReference typeReference) {
 		if (typeReference instanceof XComputedTypeReference) {
-			return ((XComputedTypeReference) typeReference).getTypeProvider() instanceof InferredTypeIndicator;
+			IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) typeReference).getTypeProvider();
+			if (typeProvider instanceof InferredTypeIndicator && !((InferredTypeIndicator)typeProvider).resolved) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public static void resolveTo(JvmTypeReference inferred, JvmTypeReference resolved) {
 		if (isInferred(inferred)) {
-			((XComputedTypeReference) inferred).setEquivalent(resolved);
+			XComputedTypeReference casted = (XComputedTypeReference) inferred;
+			casted.setEquivalent(resolved);
+			((InferredTypeIndicator)casted.getTypeProvider()).resolved = true;
 		} else {
 			throw new IllegalStateException("Cannot resolve a reference that is not inferred");
 		}
