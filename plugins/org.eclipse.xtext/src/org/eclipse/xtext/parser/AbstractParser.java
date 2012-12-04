@@ -12,7 +12,7 @@ import java.io.Reader;
 
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,7 +26,7 @@ public abstract class AbstractParser implements IParser {
 	}
 
 	public final IParseResult parse(Reader reader) {
-		StopWatchForTask task = StopWatches.forTask("parsing");
+		StoppedTask task = StopWatches.forTask("parsing");
 		try {
 			task.start();
 			return doParse(reader);
