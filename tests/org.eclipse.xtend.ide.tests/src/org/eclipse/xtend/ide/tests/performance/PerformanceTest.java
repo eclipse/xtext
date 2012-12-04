@@ -31,6 +31,28 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+/*
+
+2012-12-04 / Sebastian
+
+Task 'build' took 49446ms (10 measurements).
+Task 'parsing' took 1491ms (250 measurements).
+Task 'primary JVM Model inference' took 1236ms (500 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 397ms (500 measurements).
+Task 'Crosslink resolution' took 26765ms (55750 measurements).
+Task 'validation' took 16913ms (250 measurements).
+
+2012-12-04 / Sven
+
+Task 'build' took 91296ms (10 measurements).
+Task 'parsing' took 3364ms (439 measurements).
+Task 'primary JVM Model inference' took 2947ms (567 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 953ms (567 measurements).
+Task 'Crosslink resolution' took 53835ms (68346 measurements).
+Task 'validation' took 27938ms (250 measurements).
+
+ */
+
 public class PerformanceTest extends AbstractXtendUITestCase {
 
 	@Inject 
@@ -52,6 +74,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 		super.tearDown();
 		System.out.println(StopWatches.getPrintableStopWatchData());
 		StopWatches.resetAll();
+		StopWatches.setEnabled(false);
 	}
 	
 	
