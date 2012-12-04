@@ -21,6 +21,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -35,6 +38,21 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private XtendFileGenerator fileGenerator;
+	
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		StopWatches.setEnabled(true);
+		super.setUp();
+	}
+	
+	@Override
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+		System.out.println(StopWatches.getPrintableStopWatchData());
+		StopWatches.resetAll();
+	}
 	
 	
 	@Test public void testBuildProject() throws Exception {
