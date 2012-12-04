@@ -15,7 +15,12 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(Boolean inherit) FOR Grammar-»
+«DEFINE generate(Boolean inherit) FOR Grammar»
+	«EXPAND GenProposalProvider(inherit)»
+	«EXPAND ProposalProvider(inherit)»
+«ENDDEFINE»
+
+«DEFINE GenProposalProvider(Boolean inherit) FOR Grammar»
 «FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
 /*
 «fileHeader()»
@@ -80,7 +85,9 @@ public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && us
 	«ENDLET-»
 }
 «ENDFILE»
+«ENDDEFINE»
 
+«DEFINE ProposalProvider(Boolean inherit) FOR Grammar»
 «FILE getProposalProvider().asPath()+".java" SRC_UI-»
 /*
 «fileHeader()»

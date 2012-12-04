@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
+import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.util.Strings;
@@ -29,30 +31,48 @@ import org.eclipse.xtext.util.Strings;
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
  *
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
-public class GeneratorFragment extends AbstractGeneratorFragment {
+public class GeneratorFragment extends AbstractGeneratorFragment implements IStubGenerating {
 	
+	private boolean generateStub = true;
 	private boolean generateMwe = false;
 	private boolean generateJavaMain = false;
-	private boolean generatorStub = true;
-	
-	public void setGeneratorStub(boolean generatorStub) {
-		this.generatorStub = generatorStub;
-	}
+	private boolean generateXtendMain = false;
 	
 	public void setGenerateJavaMain(boolean generateJavaMain) {
 		this.generateJavaMain = generateJavaMain;
+	}
+	
+	public void setGenerateXtendMain(boolean generateXtendMain) {
+		this.generateXtendMain = generateXtendMain;
 	}
 	
 	public void setGenerateMwe(boolean generateMwe) {
 		this.generateMwe = generateMwe;
 	}
 	
+	/**
+	 * @deprecated use {@link #setGenerateStub(boolean)} instead
+	 */
+	@Deprecated
+	public void setGeneratorStub(boolean isGenerateStub) {
+		setGenerateStub(isGenerateStub);
+	}		
+	
+	public void setGenerateStub(boolean isGenerateStub) {
+		this.generateStub = isGenerateStub;
+	}
+	
+	public boolean isGenerateStub() {
+		return generateStub;
+	}
+	
 	public boolean isGenerateStub(Grammar grammar) {
 		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
 			return false;
 		}
-		return generatorStub;
+		return isGenerateStub();
 	}
 	
 	public boolean isGenerateJavaMain(Grammar grammar) {
@@ -60,6 +80,13 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 			return false;
 		}
 		return generateJavaMain;
+	}
+	
+	public boolean isGenerateXtendMain(Grammar grammar) {
+		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+			return false;
+		}
+		return generateXtendMain;
 	}
 	
 	public boolean isGenerateMwe(Grammar grammar) {
@@ -70,8 +97,17 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	}
 	
 	@Override
+	public void checkConfiguration(Issues issues) {
+		super.checkConfiguration(issues);
+		if(generateJavaMain && generateXtendMain) {
+			issues.addWarning("Options 'generateJavaMain' and 'generateXtendMain' are mutually exclusive. Generating Xtend only.");
+			generateJavaMain = false;
+		}
+	}
+	
+	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return newArrayList((Object)isGenerateStub(grammar), (Object)isGenerateMwe(grammar), (Object)isGenerateJavaMain(grammar));
+		return newArrayList((Object)isGenerateStub(grammar), (Object)isGenerateMwe(grammar), (Object)isGenerateJavaMain(grammar), (Object)isGenerateXtendMain(grammar));
 	}
 	
 	@Override

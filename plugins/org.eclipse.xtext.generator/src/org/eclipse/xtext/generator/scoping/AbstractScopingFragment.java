@@ -12,11 +12,13 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -28,36 +30,50 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractScopingFragment extends AbstractInheritingGeneratorFragment {
+public abstract class AbstractScopingFragment extends AbstractInheritingGeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 
 	public static String getScopeProviderName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
 	}
 	
-	private boolean generateStub = true;
+	private boolean isGenerateStub = true;
 	
+	private boolean isGenerateXtendStub;
+
 	/**
-	 * @since 2.0
+	 * @since 2.4
 	 */
+	public boolean isGenerateXtendStub() {
+		return isGenerateXtendStub;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setGenerateXtendStub(boolean isGenerateXtendStub) {
+		this.isGenerateXtendStub = isGenerateXtendStub;
+	}
+
 	public boolean isGenerateStub() {
-		return generateStub;
+		return isGenerateStub;
+	}
+
+	public void setGenerateStub(boolean isGenerateStub) {
+		this.isGenerateStub = isGenerateStub;
 	}
 	
 	/**
 	 * @since 2.1
 	 */
 	public boolean isGenerateStub(Grammar grammar) {
-		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-			return false;
+		if(isGenerateStub()) {
+			if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
+				Logger.getLogger(this.getClass()).warn("Skipping stub generation as Xbase is used");
+				return false;
+			}
+			return true;
 		}
-		return isGenerateStub();
-	}
-	
-	/**
-	 * @since 2.0
-	 */
-	public void setGenerateStub(boolean generateStub) {
-		this.generateStub = generateStub;
+		return false;
 	}
 	
 	private boolean ignoreCase;
@@ -76,15 +92,19 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		BindFactory factory = new BindFactory()
-				.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar, getNaming()))
-				.addConfiguredBinding(
-						IScopeProvider.class.getName() + "Delegate",
-						"binder.bind(" + IScopeProvider.class.getName() + ".class"
-								+ ").annotatedWith(com.google.inject.name.Names.named("
-								+ AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" + ")).to("
-								+ getLocalScopeProvider().getName() + ".class)")
-				.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
+		BindFactory factory = new BindFactory();
+		if(isGenerateStub) {
+			factory.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar, getNaming()))
+					.addConfiguredBinding(
+							IScopeProvider.class.getName() + "Delegate",
+							"binder.bind(" + IScopeProvider.class.getName() + ".class"
+									+ ").annotatedWith(com.google.inject.name.Names.named("
+									+ AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" + ")).to("
+									+ getLocalScopeProvider().getName() + ".class)");
+		} else {
+			factory.addTypeToType(IScopeProvider.class.getName(), getLocalScopeProvider().getName());
+		}
+		factory.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
 		factory.addConfiguredBinding(IgnoreCaseLinking.class.getSimpleName(), "binder.bindConstant().annotatedWith("
 				+ IgnoreCaseLinking.class.getName() + ".class).to(" + isIgnoreCase() + ")");
 		return factory.getBindings();
@@ -105,7 +125,7 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		boolean genStub = isGenerateStub(grammar);
-		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)genStub);
+		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)genStub, (Object) isGenerateXtendStub());
 	}
 	
 	@Override
@@ -114,4 +134,18 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 			return new String[0];
 		return new String[] { Strings.skipLastToken(getScopeProviderName(grammar, getNaming()),".") };
 	}
+	
+	@Override
+	public String[] getImportedPackagesRt(Grammar grammar) {
+		if(isGenerateXtendStub)
+			return new String[] { "org.eclipse.xtext.xbase.lib" };
+		else
+			return null;
+	}
+	
+	@Override
+	protected String getTemplate() {
+		return super.getTemplate();
+	}
+
 }

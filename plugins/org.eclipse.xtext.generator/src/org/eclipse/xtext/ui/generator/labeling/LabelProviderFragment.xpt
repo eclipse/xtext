@@ -14,9 +14,16 @@
 «EXTENSION org::eclipse::xtext::ui::generator::labeling::Extensions»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate FOR Grammar-»
-	«EXPAND eObjectLabelProvider-»
-	«EXPAND descriptionLabelProvider-» 
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendEObjectLabelProvider»
+			«EXPAND xtendDescriptionLabelProvider»
+		«ELSE»
+			«EXPAND eObjectLabelProvider»
+			«EXPAND descriptionLabelProvider»
+		«ENDIF»
+	«ENDIF» 
 «ENDDEFINE»
 
 «DEFINE eObjectLabelProvider FOR Grammar-»
@@ -43,17 +50,52 @@ public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF us
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
+	// Labels and icons can be computed like this:
 	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
-	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
+//	String text(Greeting ele) {
+//		return "A greeting to " + ele.getName();
+//	}
+//
+//	String image(Greeting ele) {
+//		return "Greeting.gif";
+//	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendEObjectLabelProvider FOR Grammar-»
+«FILE eObjectLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
+/*
+«fileHeader()»
 */
+package «eObjectLabelProviderQualifiedName().toJavaPackage()»
+
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
+«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider«ELSE»import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider«ENDIF» 
+ 
+import com.google.inject.Inject
+
+/**
+ * Provides labels for a EObjects.
+ * 
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ */
+class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseLabelProvider«ELSE»DefaultEObjectLabelProvider«ENDIF» {
+
+	@Inject
+	new(AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
+
+	// Labels and icons can be computed like this:
+	
+//	def text(Greeting ele) {
+//		'A greeting to ' + ele.name
+//	}
+//
+//	def image(Greeting ele) {
+//		'Greeting.gif'
+//	}
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -74,24 +116,51 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
  */
 public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseDescriptionLabelProvider«ELSE»DefaultDescriptionLabelProvider«ENDIF» {
 
-/*
-	//Labels and icons can be computed like this:
+	// Labels and icons can be computed like this:
 	
-	String text(IEObjectDescription ele) {
-	  return "my "+ele.getName();
-	}
-	 
-    String image(IEObjectDescription ele) {
-      return ele.getEClass().getName() + ".gif";
-    }	 
-*/
-
+//	String text(IEObjectDescription ele) {
+//	   return ele.getName();
+//	}
+//	 
+//  String image(IEObjectDescription ele) {
+//     return ele.getEClass().getName() + ".gif";
+//  }	 
 }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE xtendDescriptionLabelProvider FOR Grammar-»
+«FILE descriptionLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
+/*
+«fileHeader()»
+*/
+package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider«ELSE»import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider«ENDIF»
+//import org.eclipse.xtext.resource.IEObjectDescription
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+/**
+ * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ * 
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ */
+class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseDescriptionLabelProvider«ELSE»DefaultDescriptionLabelProvider«ENDIF» {
+
+	// Labels and icons can be computed like this:
+	
+//	override text(IEObjectDescription ele) {
+//		ele.name
+//	}
+//	 
+//	override image(IEObjectDescription ele) {
+//		ele.EClass.name + '.gif'
+//	}	 
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»

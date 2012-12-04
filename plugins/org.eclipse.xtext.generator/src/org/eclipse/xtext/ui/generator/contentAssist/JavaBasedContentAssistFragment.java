@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
@@ -25,9 +25,7 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  *
  * @author Jan Koehnlein
  */
-public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
-
-	private boolean inherit = true;
+public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
@@ -60,20 +58,26 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(inherit);
+		return Collections.<Object>singletonList(isInheritImplementation());
 	}
 
 	/**
 	 * Decide whether to inherit content assist from the super language.
 	 *
 	 * @param inherit
+	 * @deprecated use {@link #setInheritImplementation(boolean)} instead
 	 */
+	@Deprecated
 	public void setInherit(boolean inherit) {
-		this.inherit = inherit;
+		this.setInheritImplementation(inherit);
 	}
 
+	/**
+	 * @deprecated use {@link #isInheritImplementation()} instead
+	 */
+	@Deprecated
 	public boolean isInherit() {
-		return inherit;
+		return isInheritImplementation();
 	}
 
 	@Override

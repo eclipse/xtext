@@ -10,6 +10,8 @@ package org.eclipse.xtext.generator;
 import org.eclipse.xpand2.XpandExecutionContext;
 
 /**
+ * @author Moritz Eysholdt - Initial contribution and API
+ * @author Jan Koehnlein
  * @since 2.0
  */
 public class Xtend2ExecutionContext {
@@ -28,4 +30,19 @@ public class Xtend2ExecutionContext {
 		legacyContext.getOutput().write(contents.toString());
 		legacyContext.getOutput().closeFile();
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void append(CharSequence contents) {
+		legacyContext.getOutput().write(contents.toString());
+	}
+		
+	/**
+	 * @since 2.4
+	 */
+	public XpandExecutionContext getXpandExecutionContext() {
+		return legacyContext;
+	}
+	
 }

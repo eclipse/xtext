@@ -11,6 +11,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Naming;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -74,9 +75,10 @@ public class SerializerGenFileNames {
 	private GenFileName syntacticSequencer;
 
 	@Inject
-	public SerializerGenFileNames(Naming naming, Grammar grammar) {
-		semanticSequencer = new GenFileName(grammar, naming, false, "SemanticSequencer", "java");
-		syntacticSequencer = new GenFileName(grammar, naming, false, "SyntacticSequencer", "java");
+	public SerializerGenFileNames(Naming naming, Grammar grammar, @Named("generateXtendStub")Boolean generateXtendStub) {
+		String stubExtension = (generateXtendStub) ? "xtend" : "java";
+		semanticSequencer = new GenFileName(grammar, naming, false, "SemanticSequencer", stubExtension);
+		syntacticSequencer = new GenFileName(grammar, naming, false, "SyntacticSequencer", stubExtension);
 		abstractSemanticSequencer = new GenFileName(grammar, naming, true, "SemanticSequencer", "java");
 		abstractSyntacticSequencer = new GenFileName(grammar, naming, true, "SyntacticSequencer", "java");
 		grammarConstraints = new GenFileName(grammar, naming, false, "GrammarConstraints", "xtext");

@@ -20,8 +20,12 @@ import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
+import com.google.inject.Binder
+import com.google.inject.name.Names
+import org.eclipse.xtext.generator.IStubGenerating
+import static java.util.Collections.*
 
-class SerializerFragment extends Xtend2GeneratorFragment {
+class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating$XtendOption {
 	
 	@Inject AbstractSemanticSequencer abstractSemanticSequencer
 	
@@ -41,6 +45,13 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	boolean srcGenOnly = false;
 	
+	@Property boolean generateXtendStub
+	
+	override protected addLocalBindings(Binder binder) {
+		binder
+			.bind(typeof(Boolean)).annotatedWith(Names::named("generateXtendStub")).toInstance(generateXtendStub && generateStub)
+	}
+	
 	def setGenerateDebugData(boolean doGenerate) {
 		generateDebugData = doGenerate
 	}
@@ -49,8 +60,12 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 		srcGenOnly = srcGen;
 	}
 	
-	def setGenerateStub(boolean generateStub) {
+	override setGenerateStub(boolean generateStub) {
 		srcGenOnly = !generateStub
+	}
+	
+	override isGenerateStub() {
+		!srcGenOnly
 	}
 	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
@@ -81,4 +96,12 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	override getExportedPackagesRtList(Grammar grammar) {
 		return newArrayList(names.semanticSequencer.packageName)
 	}
+	
+	override getImportedPackagesRt(Grammar grammar) {
+		if(generateXtendStub) 
+			singletonList('org.eclipse.xtext.xbase.lib')
+		else 
+			null
+	}
+	
 }

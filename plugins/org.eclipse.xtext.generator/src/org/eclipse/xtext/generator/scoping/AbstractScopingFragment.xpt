@@ -14,6 +14,17 @@
 «EXTENSION org::eclipse::xtext::generator::scoping::AbstractScopingFragment»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
+«DEFINE generateScopeProvider(String scopeProviderSuperClassName, Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND XtendScopeProvider(scopeProviderSuperClassName)»
+		«ELSE»
+			«EXPAND JavaScopeProvider(scopeProviderSuperClassName)»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+
 «DEFINE JavaScopeProvider(String scopeProviderSuperClassName) FOR Grammar»
 «FILE scopeProviderName().asPath()+".java" SRC-»
 /*
@@ -31,6 +42,29 @@ import «scopeProviderSuperClassName»;
  *
  */
 public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName.toSimpleName()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE XtendScopeProvider(String scopeProviderSuperClassName) FOR Grammar»
+«FILE scopeProviderName().asPath()+".xtend" SRC-»
+/*
+ «fileHeader()»
+ */
+package «scopeProviderName().toJavaPackage()»
+
+import «scopeProviderSuperClassName»
+
+/**
+ * This class contains custom scoping description.
+ * 
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
+ * on how and when to use it 
+ *
+ */
+class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName.toSimpleName()» {
 
 }
 «ENDFILE»
