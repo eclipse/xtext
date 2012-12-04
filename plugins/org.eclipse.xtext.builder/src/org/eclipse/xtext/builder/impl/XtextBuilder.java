@@ -30,6 +30,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StopWatchForTask;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -58,7 +60,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private RegistryBuilderParticipant participant;
-	
+
 	@Inject
 	private QueuedBuildData queuedBuildData;
 
@@ -70,7 +72,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		long startTime = System.currentTimeMillis();
+		StopWatchForTask task = StopWatches.forTask("build");
 		try {
+			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
 				monitor = new ProgressMonitorWrapper(monitor) {
@@ -103,6 +107,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			if (monitor != null)
 				monitor.done();
 			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
+			task.stop();
 		}
 		return getProject().getReferencedProjects();
 	}
