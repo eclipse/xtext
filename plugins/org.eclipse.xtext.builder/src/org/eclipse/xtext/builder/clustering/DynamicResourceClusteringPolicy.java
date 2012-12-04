@@ -40,17 +40,17 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
 		if (alreadyProcessed == 0)
 			return true;
-
+		final long maxMemory = Runtime.getRuntime().maxMemory();
+		if (maxMemory > Runtime.getRuntime().totalMemory() + MINIMUM_FREE_MEMORY)
+			return true;
 		final long freeMemory = Runtime.getRuntime().freeMemory();
-		final long totalMemory = Runtime.getRuntime().totalMemory();
-
 		if (freeMemory < MINIMUM_FREE_MEMORY) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, totalMemory);
+			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
 			return false;
 		} else if (alreadyProcessed < minimumClusterSize) {
 			return true;
-		} else if (freeMemory < totalMemory / 100 * minimumPercentFreeMemory) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, totalMemory);
+		} else if (freeMemory < maxMemory / 100 * minimumPercentFreeMemory) {
+			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
 			return false;
 		}
 
