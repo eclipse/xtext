@@ -80,7 +80,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append(_languageNameAbbreviation_1, "");
     _builder.append(".xtext\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("var file.extensions = \"");
+    _builder.append("var fileExtensions = \"");
     String _fileExtension = this.projectInfo.getFileExtension();
     _builder.append(_fileExtension, "");
     _builder.append("\"");
@@ -91,6 +91,8 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("var runtimeProject = \"../${projectName}\"");
+    _builder.newLine();
+    _builder.append("var generateXtendStub = true");
     _builder.newLine();
     _builder.newLine();
     _builder.append("Workflow {");

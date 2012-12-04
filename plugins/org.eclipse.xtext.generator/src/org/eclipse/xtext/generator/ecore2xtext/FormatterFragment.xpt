@@ -16,18 +16,24 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate FOR Grammar»
-	«EXPAND Formatter»
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendFormatter»
+		«ELSE»
+			«EXPAND javaFormatter»
+		«ENDIF»
+	«ENDIF»
 «ENDDEFINE»
 
 
-«DEFINE Formatter FOR Grammar»
+«DEFINE javaFormatter FOR Grammar»
 «FILE formatterName().asPath()+".java" SRC-»
 /*
  «fileHeader()»
@@ -66,6 +72,50 @@ public class «formatterName().toSimpleName()» extends AbstractDeclarativeFormatt
 		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
 		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
 		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendFormatter FOR Grammar»
+«FILE formatterName().asPath()+".xtend" SRC-»
+/*
+ «fileHeader()»
+ */
+package «formatterName().toJavaPackage()»
+
+import com.google.inject.Inject
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter
+import org.eclipse.xtext.formatting.impl.FormattingConfig
+import «gaFQName()»
+
+/**
+ * This class contains custom formatting description.
+ * 
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
+ * on how and when to use it 
+ * 
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ */
+public class «formatterName().toSimpleName()» extends AbstractDeclarativeFormatter {
+	
+	@Inject extension «gaFQName().toSimpleName()»
+	
+	override protected configureFormatting(FormattingConfig c) {
+		for(pair: findKeywordPairs('{', '}')) {
+			c.setIndentation(pair.first, pair.second)
+			c.setLinewrap(1).after(pair.first)
+			c.setLinewrap(1).before(pair.second)
+			c.setLinewrap(1).after(pair.second)
+		}
+		for(comma: findKeywords(',')) {
+			c.setNoLinewrap().before(comma)
+			c.setNoSpace().before(comma)
+			c.setLinewrap().after(comma)
+		}
+		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
 	}
 }
 «ENDFILE»

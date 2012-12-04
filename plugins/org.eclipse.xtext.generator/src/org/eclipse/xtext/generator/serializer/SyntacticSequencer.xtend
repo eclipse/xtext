@@ -9,16 +9,34 @@
 package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 
 class SyntacticSequencer extends GeneratedFile {
 	
 	@Inject SerializerGenFileNames names
 	
-	override getFileContents(SerializerGenFileNames$GenFileName filename) '''
-		package «filename.packageName»;
-		
-		public class «filename.simpleName» extends «names.abstractSyntacticSequencer.simpleName» {
-		}
-	'''
+	@Inject@Named("generateXtendStub") Boolean generateXtendStub
+	
+	@Inject@Named("fileHeader") String fileHeader
+	
+	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+		if (generateXtendStub) '''
+			/*
+			 «fileHeader»
+			 */
+			package «filename.packageName»
+			
+			class «filename.simpleName» extends «names.abstractSyntacticSequencer.simpleName» {
+			}
+		''' else '''
+			/*
+			 «fileHeader»
+			 */
+			package «filename.packageName»;
+			
+			public class «filename.simpleName» extends «names.abstractSyntacticSequencer.simpleName» {
+			}
+		'''
+	}
 
 }

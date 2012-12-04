@@ -39,9 +39,10 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		import org.eclipse.xtext.ui.generator.*
 		
 		var grammarURI = "classpath:/«projectInfo.basePackagePath»/«projectInfo.languageNameAbbreviation».xtext"
-		var file.extensions = "«projectInfo.fileExtension»"
+		var fileExtensions = "«projectInfo.fileExtension»"
 		var projectName = "«projectInfo.projectName»"
 		var runtimeProject = "../${projectName}"
+		var generateXtendStub = true
 		
 		Workflow {
 		    «projectInfo.wizardContribution.mweSnippet»

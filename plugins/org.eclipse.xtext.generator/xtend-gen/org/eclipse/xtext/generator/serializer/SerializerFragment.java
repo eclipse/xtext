@@ -1,12 +1,27 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.inject.Binder;
 import com.google.inject.Inject;
+import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IStubGenerating;
+import org.eclipse.xtext.generator.IStubGenerating.XtendOption;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
@@ -22,10 +37,11 @@ import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
-public class SerializerFragment extends Xtend2GeneratorFragment {
+public class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, XtendOption {
   @Inject
   private AbstractSemanticSequencer abstractSemanticSequencer;
   
@@ -51,6 +67,31 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   private boolean srcGenOnly = false;
   
+  private boolean _generateXtendStub;
+  
+  public boolean isGenerateXtendStub() {
+    return this._generateXtendStub;
+  }
+  
+  public void setGenerateXtendStub(final boolean generateXtendStub) {
+    this._generateXtendStub = generateXtendStub;
+  }
+  
+  protected void addLocalBindings(final Binder binder) {
+    AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
+    Named _named = Names.named("generateXtendStub");
+    LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
+    boolean _and = false;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (!_isGenerateXtendStub) {
+      _and = false;
+    } else {
+      boolean _isGenerateStub = this.isGenerateStub();
+      _and = (_isGenerateXtendStub && _isGenerateStub);
+    }
+    _annotatedWith.toInstance(Boolean.valueOf(_and));
+  }
+  
   public boolean setGenerateDebugData(final boolean doGenerate) {
     boolean _generateDebugData = this.generateDebugData = doGenerate;
     return _generateDebugData;
@@ -61,10 +102,14 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     return _srcGenOnly;
   }
   
-  public boolean setGenerateStub(final boolean generateStub) {
+  public void setGenerateStub(final boolean generateStub) {
     boolean _not = (!generateStub);
-    boolean _srcGenOnly = this.srcGenOnly = _not;
-    return _srcGenOnly;
+    this.srcGenOnly = _not;
+  }
+  
+  public boolean isGenerateStub() {
+    boolean _not = (!this.srcGenOnly);
+    return _not;
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
@@ -137,5 +182,17 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     GenFileName _semanticSequencer = this.names.getSemanticSequencer();
     String _packageName = _semanticSequencer.getPackageName();
     return CollectionLiterals.<String>newArrayList(_packageName);
+  }
+  
+  public String[] getImportedPackagesRt(final Grammar grammar) {
+    List<String> _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      List<String> _singletonList = Collections.<String>singletonList("org.eclipse.xtext.xbase.lib");
+      _xifexpression = _singletonList;
+    } else {
+      _xifexpression = null;
+    }
+    return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
 }

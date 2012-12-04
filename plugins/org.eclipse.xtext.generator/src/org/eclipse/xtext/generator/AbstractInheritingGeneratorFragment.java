@@ -15,7 +15,7 @@ import org.eclipse.xtext.Grammar;
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragment {
+public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragment implements IInheriting {
 
 	private boolean isInheritImplementation = true;
 
