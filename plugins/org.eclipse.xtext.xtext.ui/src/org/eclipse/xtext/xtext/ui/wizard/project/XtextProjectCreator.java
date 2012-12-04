@@ -50,7 +50,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	};
 
 	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { JavaCore.NATURE_ID,
-			"org.eclipse.pde.PluginNature" //$NON-NLS-1$
+			"org.eclipse.pde.PluginNature",//$NON-NLS-1$
+			XtextProjectHelper.NATURE_ID
 	};
 
 	protected static final String[] BUILDERS = new String[] { JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
