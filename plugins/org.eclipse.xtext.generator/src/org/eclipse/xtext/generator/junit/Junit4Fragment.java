@@ -25,12 +25,16 @@ import com.google.common.collect.Lists;
  */
 public class Junit4Fragment extends AbstractGeneratorFragment implements IGeneratorFragmentExtension {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
+
+	@Deprecated
 	private boolean genContentAssistTest;
 
+	@Deprecated
 	public boolean isGenContentAssistTest() {
 		return genContentAssistTest;
 	}
 
+	@Deprecated
 	public void setGenContentAssistTest(boolean genUiTest) {
 		this.genContentAssistTest = genUiTest;
 	}
