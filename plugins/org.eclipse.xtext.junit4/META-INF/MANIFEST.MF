@@ -6,6 +6,7 @@ Bundle-Version: 2.4.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.junit4,
+ org.eclipse.xtext.junit4.internal;x-internal:=true,
  org.eclipse.xtext.junit4.parameterized;x-internal:=true,
  org.eclipse.xtext.junit4.serializer;x-internal:=true,
  org.eclipse.xtext.junit4.smoketest,
@@ -14,6 +15,7 @@ Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.util,
  org.eclipse.xtext.junit4.validation
 Import-Package: org.junit;version="4.5.0",
+ org.junit.rules;version="4.5.0",
  org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
