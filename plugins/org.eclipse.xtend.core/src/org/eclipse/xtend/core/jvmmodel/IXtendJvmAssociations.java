@@ -135,7 +135,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 		}
 
 		public XtendField getXtendField(JvmField jvmField) {
-			return (XtendField) getPrimarySourceElement(jvmField);
+			EObject primarySourceElement = getPrimarySourceElement(jvmField);
+			if (primarySourceElement instanceof XtendField)
+				return (XtendField) primarySourceElement;
+			return null;
 		}
 
 	}

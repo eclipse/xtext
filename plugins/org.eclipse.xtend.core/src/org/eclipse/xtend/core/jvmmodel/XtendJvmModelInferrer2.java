@@ -381,8 +381,11 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 			Collection<JvmOperation> operations = methods.get(key);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations),
 					target);
-			if (operation != null)
+			if (operation != null) {
 				operation.setSimpleName(key.getFirst());
+				// TODO look for inherited return type
+				operation.setReturnType(jvmTypesBuilder.inferredType());
+			}
 		}
 	}
 
