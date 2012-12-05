@@ -56,6 +56,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.TextRegionWithLineInformation
+import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
@@ -63,9 +64,8 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+
 import static org.eclipse.xtext.util.Strings.*
-import org.eclipse.xtext.validation.Issue
-import org.apache.log4j.Logger
 
 /**
  * A generator implementation that processes the 
@@ -73,8 +73,6 @@ import org.apache.log4j.Logger
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
-	
-	static val LOG = Logger::getLogger(typeof(JvmModelGenerator))
 	
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
@@ -522,9 +520,9 @@ class JvmModelGenerator implements IGenerator {
 
 	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {
 		appendable.append('{').increaseIndentation.newLine
-			.append('throw new Error("Unresolved compilation problems"')
+			.append('throw new Error("Unresolved compilation problems:"')
 		appendable.increaseIndentation
-		errors.forEach[appendable.newLine.append('+ "').append(convertToJavaString(message)).append('"')]
+		errors.forEach[appendable.newLine.append('+ "\\n').append(convertToJavaString(message)).append('"')]
 		appendable.append(');').decreaseIndentation.decreaseIndentation.newLine
 		    .append('}')
 	}
