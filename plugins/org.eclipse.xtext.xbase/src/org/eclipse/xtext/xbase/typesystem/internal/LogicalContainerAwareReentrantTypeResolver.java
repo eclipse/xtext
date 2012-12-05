@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -330,7 +331,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 * another operation.
 	 */
 	@Nullable
-	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes) {
+	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		if (operation.getVisibility() == JvmVisibility.PRIVATE)
+			return null;
 		int parameterSize = operation.getParameters().size();
 		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			LightweightTypeReference declaringType = resolvedTypes.getActualType(operation.getDeclaringType());
@@ -346,23 +349,24 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				if (declaredSuperType != null) {
 					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
 					for(JvmFeature feature: equallyNamedFeatures) {
-						if (feature instanceof JvmOperation) {
-							JvmOperation candidate = (JvmOperation) feature;
-							if (parameterSize == candidate.getParameters().size()) {
-								boolean matchesSignature = true;
-								for(int i = 0; i < parameterSize && matchesSignature; i++) {
-									JvmFormalParameter parameter = operation.getParameters().get(i);
-									String identifier = parameter.getParameterType().getIdentifier();
-									
-									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
-									LightweightTypeReference candidateParameterType =
-											substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
-									if (!identifier.equals(candidateParameterType.getIdentifier())) {
-										matchesSignature = false;
+						if (session.isVisible(feature)) {
+							if (feature instanceof JvmOperation) {
+								JvmOperation candidate = (JvmOperation) feature;
+								if (parameterSize == candidate.getParameters().size()) {
+									boolean matchesSignature = true;
+									for(int i = 0; i < parameterSize && matchesSignature; i++) {
+										JvmFormalParameter parameter = operation.getParameters().get(i);
+										String identifier = parameter.getParameterType().getIdentifier();
+										JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
+										LightweightTypeReference candidateParameterType =
+												substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
+										if (!identifier.equals(candidateParameterType.getIdentifier())) {
+											matchesSignature = false;
+										}
 									}
-								}
-								if (matchesSignature) {
-									return substitutor.substitute(converter.toLightweightReference(candidate.getReturnType()));
+									if (matchesSignature) {
+										return substitutor.substitute(converter.toLightweightReference(candidate.getReturnType()));
+									}
 								}
 							}
 						}
