@@ -59,6 +59,7 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
+import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -130,6 +131,9 @@ public class JvmModelGenerator implements IGenerator {
   private IEObjectDocumentationProvider documentationProvider;
   
   @Inject
+  private IFileHeaderProvider fileHeaderProvider;
+  
+  @Inject
   private IJvmModelAssociations jvmModelAssociations;
   
   @Inject
@@ -167,10 +171,10 @@ public class JvmModelGenerator implements IGenerator {
     final TreeAppendable bodyAppendable = this.createAppendable(type, importManager);
     this.generateBody(type, bodyAppendable);
     final TreeAppendable importAppendable = this.createAppendable(type, importManager);
+    this.generateFileHeader(type, importAppendable);
     String _packageName = type.getPackageName();
     boolean _notEquals = ObjectExtensions.operator_notEquals(_packageName, null);
     if (_notEquals) {
-      this.generateFileHeader(type, importAppendable);
       ITreeAppendable _append = importAppendable.append("package ");
       String _packageName_1 = type.getPackageName();
       ITreeAppendable _append_1 = _append.append(_packageName_1);
@@ -1044,18 +1048,10 @@ public class JvmModelGenerator implements IGenerator {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_headerText);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/**");
-      final StringConcatenation text = ((StringConcatenation) _builder);
-      text.newLine();
-      text.append(" * ");
       String _headerText_1 = fileHeaderAdapter.getHeaderText();
-      text.append(_headerText_1, " * ");
-      text.newLine();
-      text.append(" */");
-      String _string = text.toString();
-      ITreeAppendable _append = appendable.append(_string);
-      _append.newLine();
+      Resource _eResource = it.eResource();
+      List<INode> _fileHeaderNodes = this.fileHeaderProvider.getFileHeaderNodes(_eResource);
+      this.generateDocumentation(_headerText_1, _fileHeaderNodes, appendable);
     }
   }
   
@@ -1067,15 +1063,6 @@ public class JvmModelGenerator implements IGenerator {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/**");
-      final StringConcatenation doc = ((StringConcatenation) _builder);
-      doc.newLine();
-      doc.append(" * ");
-      String _documentation_1 = adapter.getDocumentation();
-      doc.append(_documentation_1, " * ");
-      doc.newLine();
-      doc.append(" */");
       final Set<EObject> sourceElements = this.jvmModelAssociations.getSourceElements(it);
       boolean _and = false;
       int _size = sourceElements.size();
@@ -1088,9 +1075,33 @@ public class JvmModelGenerator implements IGenerator {
       if (_and) {
         EObject _head = IterableExtensions.<EObject>head(sourceElements);
         final List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) this.documentationProvider).getDocumentationNodes(_head);
-        boolean _isEmpty = documentationNodes.isEmpty();
-        boolean _not_1 = (!_isEmpty);
-        if (_not_1) {
+        String _documentation_1 = adapter.getDocumentation();
+        this.generateDocumentation(_documentation_1, documentationNodes, appendable);
+      } else {
+        String _documentation_2 = adapter.getDocumentation();
+        List<INode> _emptyList = CollectionLiterals.<INode>emptyList();
+        this.generateDocumentation(_documentation_2, _emptyList, appendable);
+      }
+    }
+  }
+  
+  protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      final StringConcatenation doc = ((StringConcatenation) _builder);
+      doc.newLine();
+      doc.append(" * ");
+      doc.append(text, " * ");
+      doc.newLine();
+      doc.append(" */");
+      ITreeAppendable _xifexpression = null;
+      boolean _isEmpty = documentationNodes.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        ITreeAppendable _xblockexpression_1 = null;
+        {
           ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
           for (final INode node : documentationNodes) {
             int _offset = node.getOffset();
@@ -1105,14 +1116,19 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _trace = appendable.trace(_locationData);
           String _string = doc.toString();
           _trace.append(_string);
-          appendable.newLine();
-          return;
+          ITreeAppendable _newLine = appendable.newLine();
+          _xblockexpression_1 = (_newLine);
         }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        String _string = doc.toString();
+        ITreeAppendable _append = appendable.append(_string);
+        ITreeAppendable _newLine = _append.newLine();
+        _xifexpression = _newLine;
       }
-      String _string_1 = doc.toString();
-      ITreeAppendable _append = appendable.append(_string_1);
-      _append.newLine();
+      _xblockexpression = (_xifexpression);
     }
+    return _xblockexpression;
   }
   
   public void generateAnnotations(final JvmAnnotationTarget it, final ITreeAppendable appendable, final boolean withLineBreak) {
