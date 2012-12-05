@@ -66,6 +66,9 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.util.Strings.*
+import org.eclipse.xtext.documentation.IFileHeaderProvider
+import java.util.List
+import org.eclipse.xtext.nodemodel.INode
 
 /**
  * A generator implementation that processes the 
@@ -84,6 +87,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject XbaseCompiler compiler
 	@Inject ILocationInFileProvider locationProvider
 	@Inject IEObjectDocumentationProvider documentationProvider
+	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject IJvmModelAssociations jvmModelAssociations
 	@Inject JavaKeywords keywords
 	
@@ -107,8 +111,8 @@ class JvmModelGenerator implements IGenerator {
 		val bodyAppendable = createAppendable(type, importManager)
 		generateBody(type, bodyAppendable)
 		val importAppendable = createAppendable(type, importManager)
+        generateFileHeader(type, importAppendable)
 		if (type.packageName != null) {
-            generateFileHeader(type, importAppendable)
 			importAppendable.append("package ").append(type.packageName).append(";");
 			importAppendable.newLine.newLine
 		}
@@ -531,13 +535,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable) {
         val fileHeaderAdapter = it.eAdapters.filter(typeof(FileHeaderAdapter)).head
         if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
-            val text = '''/**''' as StringConcatenation;
-            text.newLine
-            text.append(" * ")
-            text.append(fileHeaderAdapter.headerText, " * ")
-            text.newLine
-            text.append(" */")
-            appendable.append(text.toString).newLine
+        	generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable)
         }
     }
 
@@ -545,28 +543,34 @@ class JvmModelGenerator implements IGenerator {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
-			val doc = '''/**''' as StringConcatenation
-			doc.newLine
-			doc.append(" * ")
-			doc.append(adapter.documentation, " * ")
-			doc.newLine
-			doc.append(" */")
 			val sourceElements = jvmModelAssociations.getSourceElements(it)
 			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
 				val documentationNodes = (documentationProvider as IEObjectDocumentationProviderExtension).getDocumentationNodes(sourceElements.head)
-				if (!documentationNodes.empty) {
-					var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
-					for(node: documentationNodes) {
-						documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
-					}
-					appendable.trace(new LocationData(documentationTrace, null, null)).append(doc.toString)
-					appendable.newLine
-					return
-				}
-			} 
-			appendable.append(doc.toString).newLine
+				generateDocumentation(adapter.documentation, documentationNodes, appendable)
+			} else {
+				generateDocumentation(adapter.documentation, emptyList, appendable)
+			}
 		}
 	} 
+	
+	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable) {
+		val doc = '''/**''' as StringConcatenation
+		doc.newLine
+		doc.append(" * ")
+		doc.append(text, " * ")
+		doc.newLine
+		doc.append(" */")
+		if (!documentationNodes.empty) {
+			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
+			for(node: documentationNodes) {
+				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
+			}
+			appendable.trace(new LocationData(documentationTrace, null, null)).append(doc.toString)
+			appendable.newLine
+		} else {
+			appendable.append(doc.toString).newLine
+		}
+	}
 	
 	def void generateAnnotations(JvmAnnotationTarget it, ITreeAppendable appendable, boolean withLineBreak) {
 		val sep = [ITreeAppendable it |  if(withLineBreak) newLine else append(' ') ]
