@@ -26,16 +26,10 @@ import org.junit.runner.RunWith;
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class InferredJvmModelTest2 extends InferredJvmModelTest {
+  @Ignore(value = "TODO: implement solution for recursive functions, e.g. doStuff in this test case")
   @Test
-  @Ignore(value = "TODO")
   public void testDispatchFunction_03() throws Exception {
     super.testDispatchFunction_03();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testInferredFunction_02() throws Exception {
-    super.testInferredFunction_02();
   }
   
   @Test

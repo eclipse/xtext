@@ -7,18 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.linking
 
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
-import org.junit.Test
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XFeatureCall
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.junit.Ignore
-import org.eclipse.emf.ecore.EClass
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
@@ -34,16 +34,9 @@ class InferredJvmModelShadowingJavaLinkingTests2 extends InferredJvmModelShadowi
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class InferredJvmModelTest2 extends InferredJvmModelTest {
     
-    @Test
-    @Ignore("TODO")
-    override testDispatchFunction_03() throws Exception {
+    @Ignore("TODO: implement solution for recursive functions, e.g. doStuff in this test case")
+    @Test override testDispatchFunction_03() throws Exception {
         super.testDispatchFunction_03()
-    }
-    
-    @Test
-    @Ignore("TODO")
-    override testInferredFunction_02() throws Exception {
-        super.testInferredFunction_02()
     }
     
     @Test override testDispatchFunction_04() throws Exception {
@@ -116,12 +109,6 @@ class LinkingShadowingTest2 extends LinkingShadowingTest {
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class LinkingTest2 extends LinkingTest {
-    
-    @Test
-    @Ignore("TODO")
-    override testCreateExtension_00() throws Exception {
-        fail('Implement create extensions properly')
-    }
     
     @Test 
     override testImplicitFirstArgument_07() throws Exception {

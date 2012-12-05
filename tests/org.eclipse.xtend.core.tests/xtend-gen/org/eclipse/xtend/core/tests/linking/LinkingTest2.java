@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,12 +29,6 @@ import org.junit.runner.RunWith;
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class LinkingTest2 extends LinkingTest {
-  @Test
-  @Ignore(value = "TODO")
-  public void testCreateExtension_00() throws Exception {
-    Assert.fail("Implement create extensions properly");
-  }
-  
   @Test
   public void testImplicitFirstArgument_07() throws Exception {
     final XtendClass clazz = this.clazz(

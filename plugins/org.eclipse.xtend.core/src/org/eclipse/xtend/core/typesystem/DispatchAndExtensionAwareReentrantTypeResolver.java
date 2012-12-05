@@ -7,22 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -36,8 +43,11 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -120,6 +130,63 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		}
 	}
 	
+	public class InitializerParameterTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+		private final ResolvedTypes resolvedTypes;
+		private final XtendFunction createFunction;
+		private final IFeatureScopeSession featureScopeSession;
+
+		public InitializerParameterTypeReferenceProvider(XtendFunction createFunction, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+			this.createFunction = createFunction;
+			this.resolvedTypes = resolvedTypes;
+			this.featureScopeSession = featureScopeSession;
+		}
+
+		@Override
+		@Nullable
+		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
+			CreateExtensionInfo createExtensionInfo = createFunction.getCreateExtensionInfo();
+			XExpression expression = createExtensionInfo.getCreateExpression();
+			LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
+			if (actualType == null) {
+				JvmOperation operation = associations.getDirectlyInferredOperation(createFunction);
+				computeTypes(resolvedTypes, featureScopeSession, operation);
+				actualType = resolvedTypes.getReturnType(expression);
+			}
+			if (actualType == null)
+				return null;
+			return actualType.toJavaCompliantTypeReference();
+		}
+	}
+	
+	public class CreateCacheFieldTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+		private final JvmOperation createOperation;
+		private final ResolvedTypes resolvedTypes;
+
+		public CreateCacheFieldTypeReferenceProvider(JvmOperation createOperation, ResolvedTypes resolvedTypes) {
+			this.createOperation = createOperation;
+			this.resolvedTypes = resolvedTypes;
+		}
+
+		@Override
+		@Nullable
+		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
+			JvmTypeReference declaredReturnType = createOperation.getReturnType();
+			TypeReferences typeReferences = resolvedTypes.getServices().getTypeReferences();
+			ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
+			JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, createOperation);
+			ParameterizedTypeReference arrayListReference = new ParameterizedTypeReference(owner, arrayList);
+			JvmType objectType = typeReferences.findDeclaredType(Object.class, createOperation);
+			WildcardTypeReference wildcard = new WildcardTypeReference(owner);
+			wildcard.addUpperBound(new ParameterizedTypeReference(owner, objectType));
+			arrayListReference.addTypeArgument(wildcard);
+			JvmType hashMap = typeReferences.findDeclaredType(HashMap.class, createOperation);
+			ParameterizedTypeReference hashMapReference = new ParameterizedTypeReference(owner, hashMap);
+			hashMapReference.addTypeArgument(arrayListReference);
+			hashMapReference.addTypeArgument(new OwnedConverter(owner).toLightweightReference(declaredReturnType));
+			return hashMapReference.toJavaCompliantTypeReference();
+		}
+	}
+	
 	@Inject
 	private DispatchUtil dispatchUtil;
 	
@@ -177,16 +244,39 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	}
 	
 	@Override
-	protected void computeMemberTypes(StackedResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+	protected void computeMemberTypes(Map<JvmDeclaredType, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmDeclaredType type) {
 		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
-		super.computeMemberTypes(resolvedTypes, childSession, type);
+		super.computeMemberTypes(preparedResolvedTypes, resolvedTypes, childSession, type);
 	}
 	
 	@Override
-	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmDeclaredType, ResolvedTypes> resolvedTypesByType) {
 		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
-		super.prepareMembers(resolvedTypes, childSession, type);
+		super.prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
+	}
+	
+	/**
+	 * Initializes the type inference strategy for the cache field for create extensions.
+	 */
+	@Override
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
+		JvmTypeReference knownType = field.getType();
+		if (InferredTypeIndicator.isInferred(knownType)) {
+			XComputedTypeReference castedKnownType = (XComputedTypeReference) knownType;
+			EObject sourceElement = associations.getPrimarySourceElement(field);
+			if (sourceElement instanceof XtendFunction) {
+				XtendFunction function = (XtendFunction) sourceElement;
+				if (function.getCreateExtensionInfo() != null) {
+					JvmOperation operation = associations.getDirectlyInferredOperation(function);
+					XComputedTypeReference fieldType = getServices().getXtypeFactory().createXComputedTypeReference();
+					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes));
+					castedKnownType.setEquivalent(fieldType);
+					return;
+				}
+			}
+		}
+		super._doPrepare(resolvedTypes, featureScopeSession, field);
 	}
 
 	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
@@ -249,6 +339,21 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
 					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes));
 					parameter.setParameterType(computedParameterType);
+				}
+			}
+		} else if (operation.getParameters().size() >= 1){
+			EObject sourceElement = associations.getPrimarySourceElement(operation);
+			if (sourceElement instanceof XtendFunction) {
+				XtendFunction function = (XtendFunction) sourceElement;
+				if (function.getCreateExtensionInfo() != null) {
+					JvmFormalParameter firstParameter = operation.getParameters().get(0);
+					JvmTypeReference parameterType = firstParameter.getParameterType();
+					if (InferredTypeIndicator.isInferred(parameterType)) {
+						XComputedTypeReference casted = (XComputedTypeReference) parameterType;
+						XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
+						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function, resolvedTypes, featureScopeSession));
+						casted.setEquivalent(computedParameterType);
+					}
 				}
 			}
 		}
