@@ -372,6 +372,66 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=371306
+	 */
+	@Test public void testSwitchEarlyExits() throws Exception {
+		assertCompilesTo(
+				"final boolean _switchValue = true;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (true) {\n" + 
+				"    _matched=true;\n" + 
+				"    return 1;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (false) {\n" + 
+				"    _matched=true;\n" + 
+				"    return (-1);\n" + 
+				"  }\n" + 
+				"}\n" +
+				"return 0;" 
+				, 
+				"switch true {" +
+				"  case true: return 1" +
+				"  case false: return -1" +
+				"  default: return 0" +
+				"}");
+	}
+	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=371306
+	 */
+	@Test public void testSwitchEarlyExits_1() throws Exception {
+		assertCompilesTo(
+				"int _switchResult = (int) 0;\n" + 
+				"final boolean _switchValue = true;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (true) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = 1;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (false) {\n" + 
+				"    _matched=true;\n" + 
+				"    return (-1);\n" + 
+				"  }\n" + 
+				"}\n" +
+				"if (!_matched) {\n" + 
+				"  return 0;\n" + 
+				"}\n" + 
+				"return _switchResult;" 
+				, 
+				"switch true {" +
+				"  case true: 1" +
+				"  case false: return -1" +
+				"  default: return 0" +
+				"}");
+	}
+	
 	@Test public void testNewLines_withinline() throws Exception {
 		assertCompilesTo(
 				"java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 

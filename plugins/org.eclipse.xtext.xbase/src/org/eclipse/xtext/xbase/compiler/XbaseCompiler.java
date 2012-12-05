@@ -636,8 +636,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getDefault()!=null) {
 			ILocationData location = getLocationOfDefault(expr);
 			ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
-			defaultAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
-			defaultAppendable.increaseIndentation();
+			boolean needsMatcherIf = isReferenced || !allCasesAreExitedEarly(expr);
+			if(needsMatcherIf) {
+				defaultAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
+				defaultAppendable.increaseIndentation();
+			}
 			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getDefault());
 			internalToJavaStatement(expr.getDefault(), defaultAppendable, canBeReferenced);
 			if (canBeReferenced) {
@@ -645,9 +648,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToConvertedExpression(expr.getDefault(), defaultAppendable, null);
 				defaultAppendable.append(";");
 			}
-			defaultAppendable.decreaseIndentation();
-			defaultAppendable.newLine().append("}");
+			if(needsMatcherIf) {
+				defaultAppendable.decreaseIndentation();
+				defaultAppendable.newLine().append("}");
+			}
 		}
+	}
+	
+	protected boolean allCasesAreExitedEarly(XSwitchExpression expr) {
+		for(XCasePart casePart: expr.getCases()) {
+			if(!earlyExitComputer.isEarlyExit(casePart.getThen())) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	protected boolean isSimpleFeatureCall(XExpression switch1) {
