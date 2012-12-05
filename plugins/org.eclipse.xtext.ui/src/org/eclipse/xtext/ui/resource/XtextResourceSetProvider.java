@@ -14,8 +14,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -73,22 +71,6 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 				} catch (JavaModelException e) {
 					LOG.error(e.getMessage(), e);
 				}
-			}
-			try {
-				final IProject project = javaProject.getProject();
-				IPath location = project.getLocation();
-				if (location != null)
-					hashMap.put(URI.createPlatformResourceURI(project.getName(), true), URI.createFileURI(location.toFile().getPath()));
-				else 
-					System.out.println(project);
-				IProject[] projects = project.getReferencedProjects();
-				for (IProject iProject : projects) {
-					location = iProject.getLocation();
-					if (location != null)
-						hashMap.put(URI.createPlatformResourceURI(iProject.getName(), true), URI.createFileURI(location.toFile().getPath()));
-				}
-			} catch (CoreException e) {
-				LOG.error(e.getMessage(), e);
 			}
 		} catch (JavaModelException e) {
 			LOG.error(e.getMessage(), e);
