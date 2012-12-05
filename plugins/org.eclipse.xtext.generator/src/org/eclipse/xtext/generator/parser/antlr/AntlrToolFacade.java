@@ -3,6 +3,7 @@ package org.eclipse.xtext.generator.parser.antlr;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -105,6 +106,14 @@ public class AntlrToolFacade {
 				in.close();
 			}
 			log.info("finished downloading.");
+		} catch (IOException e) {
+			System.err.println("Downloading ANTLR parser generator failed: " + e.getMessage());
+			System.err.println("Please install the feature 'Xtext Antlr SDK' manually using the external updatesite:");
+			System.err.println();
+			System.err.println("\t\t'http://download.itemis.com/updates/'."); 
+			System.err.println();
+			System.err.println("(see http://www.eclipse.org/Xtext/download.html for details)");
+			return false;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 			return false;

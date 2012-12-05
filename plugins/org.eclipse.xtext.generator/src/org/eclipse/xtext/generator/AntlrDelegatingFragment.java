@@ -51,9 +51,9 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 	private String getMessage() {
 		StringBuffer buff = new StringBuffer();
 		buff.append("\n\nATTENTION!\nThe Antlr generator fragment couldn't be found on the classpath.\n");
-		buff.append("It is highly recommended to install it using the external updatesite:\n\n");
+		buff.append("It is highly recommended to install the feature 'Xtext Antlr SDK' using the external updatesite:\n\n");
 		buff.append("\t\t'http://download.itemis.com/updates/'.\n\n");
-		buff.append("(see the corresponding section in the documentation for details).\n\n");
+		buff.append("(see http://www.eclipse.org/Xtext/download.html for details).\n\n");
 		return buff.toString();
 	}
 
