@@ -21,8 +21,7 @@ public class P2DirectorLaunch {
         "org.eclipse.buckminster.core.headless.feature.feature.group", 
         "org.eclipse.buckminster.cvs.headless.feature.feature.group", 
         "org.eclipse.buckminster.git.headless.feature.feature.group", 
-        "org.eclipse.buckminster.maven.headless.feature.feature.group", 
-        "org.eclipse.buckminster.emma.headless.feature.feature.group");
+        "org.eclipse.buckminster.maven.headless.feature.feature.group");
       return _newArrayList;
     }
   }.apply();
