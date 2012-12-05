@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -88,7 +87,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -104,13 +102,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
-  private final static Logger LOG = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(JvmModelGenerator.class);
-      return _logger;
-    }
-  }.apply();
-  
   @Inject
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
@@ -1022,12 +1013,12 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _append = appendable.append("{");
       ITreeAppendable _increaseIndentation = _append.increaseIndentation();
       ITreeAppendable _newLine = _increaseIndentation.newLine();
-      _newLine.append("throw new Error(\"Unresolved compilation problems\"");
+      _newLine.append("throw new Error(\"Unresolved compilation problems:\"");
       appendable.increaseIndentation();
       final Procedure1<Issue> _function = new Procedure1<Issue>() {
           public void apply(final Issue it) {
             ITreeAppendable _newLine = appendable.newLine();
-            ITreeAppendable _append = _newLine.append("+ \"");
+            ITreeAppendable _append = _newLine.append("+ \"\\n");
             String _message = it.getMessage();
             String _convertToJavaString = Strings.convertToJavaString(_message);
             ITreeAppendable _append_1 = _append.append(_convertToJavaString);
