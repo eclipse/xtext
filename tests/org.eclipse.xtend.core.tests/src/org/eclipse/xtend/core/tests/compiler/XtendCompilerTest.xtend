@@ -2086,6 +2086,110 @@ class XtendCompilerTest extends AbstractXtendTestCase {
     }
     
     @Test
+    def compileClassInDefaultPackageWithFileHeader(){
+        assertCompilesTo(
+        ''' 
+            /**
+             * Xtend can't decide whether this is a header or a javadoc
+             */
+
+            class bar { 
+            }
+        ''',
+        '''
+            /**
+             * Xtend can't decide whether this is a header or a javadoc
+             */
+            /**
+             * Xtend can't decide whether this is a header or a javadoc
+             */
+            @SuppressWarnings("all")
+            public class bar {
+            }
+        ''')
+    }
+    
+    @Test
+    def compileClassInDefaultPackageWithFileHeaderAndJavaDoc(){
+        assertCompilesTo(
+        ''' 
+			/**
+			 * header
+			 */
+
+			/**
+			 * javadoc
+			 */
+			class bar { 
+			}
+        ''',
+        '''
+			/**
+			 * header
+			 */
+			/**
+			 * javadoc
+			 */
+			@SuppressWarnings("all")
+			public class bar {
+			}
+        ''')
+    }
+    
+    @Test
+    def compileClassInDefaultPackageWithFileHeaderAndImport(){
+        assertCompilesTo(
+        ''' 
+			/**
+			 * header
+			 */
+			 
+			import java.util.Date
+			
+			class bar {
+				Date d
+			}
+        ''',
+        '''
+			/**
+			 * header
+			 */
+			import java.util.Date;
+			
+			@SuppressWarnings("all")
+			public class bar {
+			  private Date d;
+			}
+        ''')
+    }
+    
+    @Test
+    def compileClassInDefaultPackageWithJavadDocAndImport(){
+        assertCompilesTo(
+        ''' 
+			import java.util.Date
+			
+			/**
+			 * javadoc
+			 */
+			class bar {
+				Date d
+			}
+        ''',
+        '''
+			import java.util.Date;
+			
+			/**
+			 * javadoc
+			 */
+			@SuppressWarnings("all")
+			public class bar {
+			  private Date d;
+			}
+        ''')
+    }
+    
+    @Test
     def compileAllClassesWithTheSameFileHeader(){
         val input = ''' 
             /**
@@ -2143,7 +2247,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
         XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
         XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
     }
-
+    
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
