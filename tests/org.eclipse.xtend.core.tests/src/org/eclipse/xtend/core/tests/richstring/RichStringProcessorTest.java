@@ -30,6 +30,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -1018,6 +1019,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		Assert.assertEquals(expected, events);
 	}
 	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
 	@Test public void testProcessorEventsBug394277_01() throws Exception {
 		String events = recordRichStringProcessorEvents(
 				"'''\n" +
@@ -1037,6 +1039,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		Assert.assertEquals(expected, events);
 	}
 	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
 	@Test public void testProcessorEventsBug394277_02() throws Exception {
 		String events = recordRichStringProcessorEvents("'''  «\n  »  '''");
 		String expected = 
