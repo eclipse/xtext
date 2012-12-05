@@ -4498,6 +4498,190 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void compileClassInDefaultPackageWithFileHeader() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Xtend can\'t decide whether this is a header or a javadoc");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar { ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* Xtend can\'t decide whether this is a header or a javadoc");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* Xtend can\'t decide whether this is a header or a javadoc");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void compileClassInDefaultPackageWithFileHeaderAndJavaDoc() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* header");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* javadoc");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("class bar { ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* header");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* javadoc");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void compileClassInDefaultPackageWithFileHeaderAndImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* header");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.newLine();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Date d");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* header");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Date;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Date d;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void compileClassInDefaultPackageWithJavadDocAndImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* javadoc");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Date d");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Date;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* javadoc");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Date d;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void compileAllClassesWithTheSameFileHeader() {
     try {
       StringConcatenation _builder = new StringConcatenation();

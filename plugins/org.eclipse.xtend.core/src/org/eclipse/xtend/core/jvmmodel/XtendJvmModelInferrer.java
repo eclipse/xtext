@@ -68,6 +68,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
@@ -126,6 +127,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
+	
+	@Inject
+	private IFileHeaderProvider fileHeaderProvider;
 
 	public void infer(@Nullable EObject object, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
@@ -163,11 +167,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		associator.associatePrimary(xtendType, javaType);
 	}
 
-	protected void setFileHeader(final XtendFile xtendFile2, final JvmDeclaredType jvmDeclaredType) {
-		if (xtendFile2.getPackage() != null) {
-			String headerText = documentationProvider.getDocumentation(xtendFile2);
-			jvmTypesBuilder.setFileHeader(jvmDeclaredType, headerText);
-		}
+	protected void setFileHeader(final XtendFile xtendFile, final JvmDeclaredType jvmDeclaredType) {
+		String headerText = fileHeaderProvider.getFileHeader(xtendFile.eResource());
+		jvmTypesBuilder.setFileHeader(jvmDeclaredType, headerText);
 	}
 	
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
