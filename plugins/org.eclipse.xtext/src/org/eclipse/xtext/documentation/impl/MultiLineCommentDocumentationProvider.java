@@ -28,6 +28,11 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
+ * The default implementation of the documentation provider for {@link EObject emf objects} based
+ * on Xtext languages.
+ * 
+ * It uses a single ML_COMMENT token by default to return the contained text as the documentation.
+ * 
  * @author Christoph Kulla - Initial contribution and API
  */
 @Singleton
@@ -92,7 +97,7 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 	}
 	
 	/**
-	 * Returns the nearest multi line comment node that precedes the given object.
+	 * Returns the nearest multi line comment node that precedes the given object. 
 	 * @since 2.3
 	 * @return a list with exactly one node or an empty list if the object is undocumented.
 	 */
