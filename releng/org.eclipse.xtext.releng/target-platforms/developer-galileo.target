@@ -18,7 +18,6 @@
 <unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
-<unit id="org.junit" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -29,7 +28,7 @@
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
-<unit id="org.junit" version="4.7.0.v4_7_0_v20100427-1100"/>
+<unit id="org.junit" version="0.0.0"/>
 <unit id="org.objectweb.asm" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
 </location>
@@ -48,7 +47,6 @@
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jdt.annotation"  version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
-<unit id="org.junit" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
 </location>
 </locations>
