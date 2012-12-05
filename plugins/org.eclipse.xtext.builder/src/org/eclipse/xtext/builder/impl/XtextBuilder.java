@@ -240,9 +240,4 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
-	@Override
-	public ISchedulingRule getRule() {
-		return getProject();
-	}
 }
