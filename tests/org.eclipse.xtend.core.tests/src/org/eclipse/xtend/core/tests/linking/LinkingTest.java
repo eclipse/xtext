@@ -91,7 +91,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"class Foo { " +
 				"  def create list: newArrayList('foo') getListWithFooAnd(String s) {" +
-				"    list" +
+				"	list" +
+				"   this.getListWithFooAnd('')" +
 				"  }" +
 				"}");
 		assertEquals(1, clazz.getMembers().size());
@@ -106,6 +107,33 @@ public class LinkingTest extends AbstractXtendTestCase {
 			}
 		}).iterator().next();
 		assertEquals(initializer.getParameters().get(0), featureCall.getFeature());
+		XAbstractFeatureCall recursiveFeatureCall = (XAbstractFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(1);
+		assertEquals("Foo.getListWithFooAnd(java.lang.String)", recursiveFeatureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testCreateExtension_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  def create list: newArrayList(s) getListWithFooAnd(String s) {" +
+				"	 s" +
+				"  }" +
+				"}");
+		assertEquals(1, clazz.getMembers().size());
+		
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) func.getCreateExtensionInfo().getCreateExpression();
+		List<XExpression> arguments = featureCall.getActualArguments();
+		XFeatureCall argument = (XFeatureCall) arguments.get(0);
+		JvmFormalParameter parameter = (JvmFormalParameter) argument.getFeature();
+		assertEquals("s", parameter.getIdentifier());
+		JvmOperation operation = (JvmOperation) parameter.eContainer();
+		assertEquals("Foo.getListWithFooAnd(java.lang.String)", operation.getIdentifier());
+		
+		XFeatureCall featureCallInInitializer = (XFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmFormalParameter parameterInInitializer = (JvmFormalParameter) featureCallInInitializer.getFeature();
+		assertEquals("s", parameterInInitializer.getIdentifier());
+		JvmOperation initializer = (JvmOperation) parameterInInitializer.eContainer();
+		assertEquals("Foo._init_getListWithFooAnd(java.util.ArrayList,java.lang.String)", initializer.getIdentifier());
 	}
 	
 	@Test public void testXtendField_00() throws Exception {

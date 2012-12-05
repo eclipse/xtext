@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +38,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -507,13 +504,8 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 
 	protected void transformCreateExtension(XtendFunction source, CreateExtensionInfo createExtensionInfo,
 			JvmGenericType container, JvmOperation operation, @Nullable JvmTypeReference returnType) {
-		JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container,
-				typeReferences.wildCard());
-		JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList,
-				jvmTypesBuilder.cloneWithProxies(returnType));
-
-		JvmField cacheVar = jvmTypesBuilder.toField(source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(),
-				hashMap);
+		JvmField cacheVar = jvmTypesBuilder.toField(
+				source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), jvmTypesBuilder.inferredNonVoidType());
 		if (cacheVar != null) {
 			cacheVar.setFinal(true);
 			jvmTypesBuilder.setInitializer(cacheVar, compileStrategies.forCacheVariable(source));
@@ -535,9 +527,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(createExtensionInfo.getName());
 			// TODO consider type parameters
-			JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-			delegate.setDelegate(operation.getReturnType());
-			jvmParam.setParameterType(delegate);
+			jvmParam.setParameterType(jvmTypesBuilder.inferredNonVoidType());
 			
 			initializer.getParameters().add(jvmParam);
 			associator.associate(createExtensionInfo, jvmParam);

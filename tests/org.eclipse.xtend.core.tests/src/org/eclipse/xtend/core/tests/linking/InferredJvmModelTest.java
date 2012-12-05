@@ -496,13 +496,38 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
 		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
 	}
-	
+
 	@Test public void testInferredFunction_03() throws Exception {
 		XtendFile xtendFile = file("class Foo {def publicMethod(Object dummy) {} def public publicMethod() {} def protected protectedMethod() {} def private privateMethod() {} }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		for(JvmOperation op: inferredType.getDeclaredOperations()) {
 			assertEquals(JvmVisibility.get(op.getSimpleName().replace("Method", "").toUpperCase()), op.getVisibility());
 		}
+	}
+	
+	@Test public void testInferredFunction_04() throws Exception {
+		XtendFile xtendFile = file("class Foo { def Iterable<CharSequence> create result: newArrayList(s) newList(String s) {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		XtendClass xtendClass = (XtendClass) xtendFile.getXtendTypes().get(0);
+		EList<JvmMember> jvmMembers = inferredType.getMembers();
+		assertEquals(4, jvmMembers.size());
+		JvmMember jvmMember = jvmMembers.get(1);
+		assertTrue(jvmMember instanceof JvmOperation);
+		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
+		assertEquals(xtendFunction.getName(), jvmMember.getSimpleName());
+		assertEquals(JvmVisibility.PUBLIC, jvmMember.getVisibility());
+		assertEquals("java.lang.Iterable<java.lang.CharSequence>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
+		
+		JvmField cacheVar = (JvmField) jvmMembers.get(2);
+		assertEquals("_createCache_" + xtendFunction.getName(), cacheVar.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, cacheVar.getVisibility());
+		assertEquals("java.util.HashMap<java.util.ArrayList<? extends java.lang.Object>, java.lang.Iterable<java.lang.CharSequence>>", cacheVar.getType().getIdentifier());
+		
+		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
+		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
+		assertEquals(JvmVisibility.PRIVATE, privateInitializer.getVisibility());
+		assertEquals("java.util.ArrayList<java.lang.String>", privateInitializer.getParameters().get(0).getParameterType().getIdentifier());
+		assertEquals("java.lang.String", privateInitializer.getParameters().get(1).getParameterType().getIdentifier());
 	}
 
 	@Test public void testInferredFunctionWithReturnType_01() throws Exception {
