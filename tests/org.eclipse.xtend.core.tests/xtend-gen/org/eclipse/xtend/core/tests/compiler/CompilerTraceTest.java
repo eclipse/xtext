@@ -46,6 +46,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -57,6 +59,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("class Zonk {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("#/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -77,6 +82,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -88,6 +95,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("class Z#o#nk {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -108,6 +118,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassKeyword() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -119,6 +131,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("cl#a#ss Zonk {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -139,6 +154,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassWithComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -150,7 +167,10 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("cla#ss Zonk {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("#/**");
+    _builder_1.append("#package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("* my comment");
@@ -172,6 +192,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Ignore(value = "This one should succeed as soon as the case above is fixed")
   public void testClassWithComment_Ignored() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -183,6 +205,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("cla#ss Zonk {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
     _builder_1.append("#/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -203,6 +227,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassTypeParamWithConstraint() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -214,6 +240,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("class Zonk<P#ara#m extends Object> {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -234,6 +263,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassTypeParamUpperBound() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -245,6 +276,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("class Zonk<Param extends O#bje#ct> {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");
@@ -265,6 +299,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Test
   public void testClassTypeParamWithoutConstraint() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
     _builder.append(" ");
@@ -276,6 +312,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder.append("class Zonk<P#ara#m> {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("/**");
     _builder_1.newLine();
     _builder_1.append(" ");

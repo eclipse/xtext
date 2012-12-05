@@ -27,11 +27,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassComment() throws Exception {
 		'''
+			package pack
 			/**
 			 * # my comment #
 			 */
 			class Zonk {}
 		'''.tracesTo('''
+			package pack;
+			
 			#/**
 			 * my comment
 			 */#
@@ -44,11 +47,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassName() throws Exception {
 		'''
+			package pack
 			/**
 			 * my comment
 			 */
 			class Z#o#nk {}
 		'''.tracesTo('''
+			package pack;
+			
 			/**
 			 * my comment
 			 */
@@ -61,11 +67,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassKeyword() throws Exception {
 		'''
+			package pack
 			/**
 			 * my comment
 			 */
 			cl#a#ss Zonk {}
 		'''.tracesTo('''
+			package pack;
+			
 			/**
 			 * my comment
 			 */
@@ -79,12 +88,15 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassWithComment() throws Exception {
 		'''
+			package pack
 			/**
 			 *# my comment
 			 */
 			cla#ss Zonk {}
 		'''.tracesTo('''
-			#/**
+			#package pack;
+			
+			/**
 			 * my comment
 			 */
 			@SuppressWarnings("all")
@@ -97,11 +109,13 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Ignore("This one should succeed as soon as the case above is fixed")
 	def void testClassWithComment_Ignored() throws Exception {
 		'''
+			package pack
 			/**
 			 *# my comment
 			 */
 			cla#ss Zonk {}
 		'''.tracesTo('''
+			package pack;
 			#/**
 			 * my comment
 			 */
@@ -114,11 +128,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassTypeParamWithConstraint() throws Exception {
 		'''
+			package pack
 			/**
 			 * my comment
 			 */
 			class Zonk<P#ara#m extends Object> {}
 		'''.tracesTo('''
+			package pack;
+			
 			/**
 			 * my comment
 			 */
@@ -131,11 +148,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassTypeParamUpperBound() throws Exception {
 		'''
+			package pack
 			/**
 			 * my comment
 			 */
 			class Zonk<Param extends O#bje#ct> {}
 		'''.tracesTo('''
+			package pack;
+			
 			/**
 			 * my comment
 			 */
@@ -149,11 +169,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	@Test
 	def void testClassTypeParamWithoutConstraint() throws Exception {
 		'''
+			package pack
 			/**
 			 * my comment
 			 */
 			class Zonk<P#ara#m> {}
 		'''.tracesTo('''
+			package pack;
+			
 			/**
 			 * my comment
 			 */
