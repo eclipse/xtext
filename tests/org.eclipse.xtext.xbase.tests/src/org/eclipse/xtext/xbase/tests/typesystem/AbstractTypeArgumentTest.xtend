@@ -2469,6 +2469,13 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		}".bindTypeArgumentsTo("String").and("String").done
 	}
 	
+	@Test def void testFeatureCallWithOperatorOverloading_1() throws Exception {
+		"{ 
+			val java.util.List<? super CharSequence> list = null
+			list += null as Iterable<CharSequence>
+		}".bindTypeArgumentsTo("? super CharSequence").done
+	}
+	
 	@Test def void testFeatureCallWithOperatorOverloading_2() throws Exception {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next".bindTypeArgumentsTo("Byte").and("Byte").done
 	}

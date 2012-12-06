@@ -1080,6 +1080,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testFeatureCallWithOperatorOverloading_3() throws Exception {
+    this.resolvesFeatureCallsTo("{ \n\t\t\tval java.util.List<? super CharSequence> list = null\n\t\t\tlist += null as Iterable<CharSequence>\n\t\t}", "List<? super CharSequence>", "boolean");
+  }
+  
+  @Test
   public void testFeatureCallWithOperatorOverloading_5() throws Exception {
     this.resolvesFeatureCallsTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes()", "boolean", "byte[]");
   }

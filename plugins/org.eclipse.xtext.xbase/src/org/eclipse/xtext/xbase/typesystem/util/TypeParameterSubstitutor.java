@@ -110,7 +110,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		WildcardTypeReference result = new WildcardTypeReference(getOwner());
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		if (lowerBound != null) {
-			result.setLowerBound(visitTypeArgument(lowerBound, visiting));
+			result.setLowerBound(visitTypeArgument(lowerBound, visiting).getInvariantBoundSubstitute());
 		}
 		for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
 			result.addUpperBound(visitTypeArgument(upperBound, visiting));
