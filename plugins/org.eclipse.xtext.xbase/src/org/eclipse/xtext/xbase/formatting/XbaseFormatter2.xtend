@@ -692,25 +692,33 @@ class XbaseFormatter2 extends AbstractFormatter {
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.nodeForEObject.text.trim.contains("\n")
-		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")]
+		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr?.^default?.nodeForEObject?.text?.contains("\n")
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
 		format += expr.nodeForKeyword("switch").append[oneSpace]
 		if (switchSL) {
-			format += open.prepend[space = " "]
-			format += open.append[space = " "]
+			format += open.prepend[oneSpace]
+			format += open.append[oneSpace]
 			for (c : expr.cases) {
 				val cnode = c.then.nodeForEObject
-				format += cnode.prepend[space = " "]
-				format += cnode.append[space = " "]
+				format += cnode.prepend[oneSpace]
+				format += cnode.append[oneSpace]
+			}
+			if(expr.^default != null) {
+				format += expr.nodeForKeyword("default").append[noSpace]
+				format += expr.^default.nodeForEObject.surround[oneSpace]
 			}
 		} else if (caseSL) {
 			format += open.prepend[cfg(bracesInNewLine)]
 			format += open.append[newLine; increaseIndentation]
 			for (c : expr.cases) {
-				format += c.then.nodeForEObject.prepend[space = " "]
+				format += c.then.nodeForEObject.prepend[oneSpace]
 				if (c != expr.cases.last)
 					format += c.nodeForEObject.append[newLine]
+			}
+			if(expr.^default != null) {
+				format += expr.nodeForKeyword("default").surround([newLine], [noSpace])
+				format += expr.^default.nodeForEObject.prepend[oneSpace]
 			}
 			format += close.prepend[newLine; decreaseIndentation]
 		} else {
@@ -720,16 +728,24 @@ class XbaseFormatter2 extends AbstractFormatter {
 				val cnode = c.then.nodeForEObject
 				if (c.then instanceof XBlockExpression) {
 					format += cnode.prepend[cfg(bracesInNewLine)]
-					if (c != expr.cases.last)
+					if (expr.^default != null || c != expr.cases.last)
 						format += cnode.append[newLine]
 					else
 						format += cnode.append[newLine; decreaseIndentation]
 				} else {
 					format += cnode.prepend[newLine; increaseIndentation]
-					if (c != expr.cases.last)
+					if (expr.^default != null || c != expr.cases.last)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
 						format += cnode.append[newLine; indentationChange = -2]
+				}
+			}
+			if(expr.^default != null) {
+				format += expr.nodeForKeyword("default").append[noSpace]
+				if (expr.^default instanceof XBlockExpression) {
+					format += expr.^default.nodeForEObject.surround([cfg(bracesInNewLine)], [newLine; decreaseIndentation])
+				} else {
+					format += expr.^default.nodeForEObject.surround([newLine; increaseIndentation], [newLine; indentationChange = -2])
 				}
 			}
 		}
@@ -737,20 +753,22 @@ class XbaseFormatter2 extends AbstractFormatter {
 			if (c.typeGuard != null && c.^case != null) {
 				val typenode = c.nodeForFeature(XCASE_PART__TYPE_GUARD)
 				val casenode = c.nodeForFeature(XCASE_PART__CASE)
-				format += typenode.append[space = " "]
-				format += casenode.prepend[space = " "]
+				format += typenode.append[oneSpace]
+				format += casenode.prepend[oneSpace]
 				format += casenode.append[noSpace]
 			} else if (c.typeGuard != null) {
 				val typenode = c.nodeForFeature(XCASE_PART__TYPE_GUARD)
 				format += typenode.append[noSpace]
 			} else if (c.^case != null) {
 				val casenode = c.nodeForFeature(XCASE_PART__CASE)
-				format += casenode.prepend[space = " "]
+				format += casenode.prepend[oneSpace]
 				format += casenode.append[noSpace]
 			}
 			c.^case.format(format)
 			c.then.format(format)
 		}
+		if(expr.^default != null)
+			expr.^default.format(format)
 	}
 
 	def protected dispatch void format(XClosure expr, FormattableDocument format) {

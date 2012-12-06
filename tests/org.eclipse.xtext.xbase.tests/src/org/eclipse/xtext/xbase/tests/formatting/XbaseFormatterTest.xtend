@@ -494,12 +494,19 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
-	
-	@Test def formatSwitchCaseSL() {
+	@Test def formatSwitchDefaultSL() {
 		assertFormattedExpression([
 			put(bracesInNewLine, false)
 		],'''
-			switch 'x' { case 'x': println('x') case 'y': println('y') }
+			switch 'x' { case 'y': println('y') default: println('z') }
+		''')	
+	}
+	
+	@Test def formatSwitchDefaultSL1() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			switch 'x' { case 'y': println('y') default: println('z') }
 		''')	
 	}
 	
@@ -528,6 +535,33 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatSwitchCaseDefaultSL1() {
+		assertFormattedExpression([
+			put(bracesInNewLine, true)
+		],'''
+			switch 'x'
+			{
+				case 'x': println('x')
+				case 'y': println('y')
+				default: println('z')
+			}
+		''')	
+	}
+	
+	@Test def formatSwitchCaseDefaultSLParenthesis() {
+		assertFormattedExpression('''
+			switch 'x' {
+				case 'x': println('x')
+				case 'y': println('y')
+				default: println('z')
+			}
+		''', '''
+			switch   'x'  {   
+				case 'x':   println('x')   case   'y':    println('y')  default  :    println('z')
+			}
+		''')	
+	}
+	
 	@Test def formatSwitchML() {
 		assertFormattedExpression('''
 			switch 'x' {
@@ -540,6 +574,43 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 			switch 'x'  {   
 				case 'x':   
 					println('x')   case   'y':    println('y')
+			}
+		''')	
+	}
+	
+	@Test def formatSwitchDefaultML() {
+		assertFormattedExpression('''
+			switch 'x' {
+				case 'x':
+					println('x')
+				case 'y':
+					println('y')
+				default:
+					println('z')
+			}
+		''', '''
+			switch 'x'  {   
+				case 'x':   
+					println('x')   case   'y':    println('y')     default  :    println('z')
+			}
+		''')	
+	}
+	
+	@Test def formatSwitchDefault2ML() {
+		assertFormattedExpression('''
+			switch 'x' {
+				case 'x':
+					println('x')
+				case 'y':
+					println('y')
+				default:
+					println('z')
+			}
+		''', '''
+			switch 'x'  {   
+				case 'x': println('x')   case   'y':    println('y')     
+				default  :    
+					println('z')
 			}
 		''')	
 	}
@@ -558,6 +629,26 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 			}
 		''', '''
 			switch 'x'  { case 'x': { println('x') }  case   'y':  {  println('y') } }
+		''')	
+	}
+	
+	@Test def formatSwitchDefaultMLBlock() {
+		assertFormattedExpression([
+			put(bracesInNewLine, false)
+		],'''
+			switch 'x' {
+				case 'x': {
+					println('x')
+				}
+				case 'y': {
+					println('y')
+				}
+				default: {
+					println('z')
+				}
+			}
+		''', '''
+			switch 'x'  { case 'x': { println('x') }  case   'y':  {  println('y') } default: { println('z') } }
 		''')	
 	}
 	
