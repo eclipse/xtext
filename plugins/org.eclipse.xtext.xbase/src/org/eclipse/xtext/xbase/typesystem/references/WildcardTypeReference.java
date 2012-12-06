@@ -73,11 +73,12 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		if (upperBounds != null && !upperBounds.isEmpty()) {
 			for(LightweightTypeReference upperBound: upperBounds) {
-				result.addUpperBound(upperBound.copyInto(owner));
+				result.addUpperBound(upperBound.copyInto(owner).getInvariantBoundSubstitute());
 			}
 		}
 		if (lowerBound != null) {
-			result.setLowerBound(lowerBound.copyInto(owner));
+			LightweightTypeReference copiedLowerBound = lowerBound.copyInto(owner);
+			result.setLowerBound(copiedLowerBound.getInvariantBoundSubstitute());
 		}
 		return result;
 	}
@@ -170,6 +171,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (!upperBound.isOwnedBy(getOwner())) {
 			throw new NullPointerException("upperBound is not valid in current context");
 		}
+		if (upperBound instanceof WildcardTypeReference) {
+			throw new IllegalArgumentException("Wildcards are not supported as upper bounds");
+		}
 		if (upperBounds == null)
 			upperBounds = Lists.newArrayListWithCapacity(2);
 		upperBounds.add(upperBound);
@@ -182,6 +186,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		}
 		if (!lowerBound.isOwnedBy(getOwner())) {
 			throw new NullPointerException("lowerBound is not valid in current context");
+		}
+		if (lowerBound instanceof WildcardTypeReference) {
+			throw new IllegalArgumentException("Wildcards are not supported as lower bounds");
 		}
 		if (this.lowerBound != null && this.lowerBound != lowerBound) {
 			throw new IllegalStateException("only one lower bound is supported");

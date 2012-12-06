@@ -1176,6 +1176,13 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next".resolvesFeatureCallsTo("boolean", "byte[]", "Iterator<Byte>", "Byte")
 	}
 	
+	@Test def void testFeatureCallWithOperatorOverloading_3() throws Exception {
+		"{ 
+			val java.util.List<? super CharSequence> list = null
+			list += null as Iterable<CharSequence>
+		}".resolvesFeatureCallsTo("List<? super CharSequence>", "boolean")
+	}
+	
 	@Test def void testFeatureCallWithOperatorOverloading_5() throws Exception {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes()".resolvesFeatureCallsTo("boolean", "byte[]")
 	}
