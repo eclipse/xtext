@@ -537,4 +537,21 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_63() {
     this.isSuperTypeOf("Object", "java.util.Comparator<? extends String>", "(CharSequence, CharSequence)=>int");
   }
+  
+  @Test
+  public void testCommonSuperType_64() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "(String)=>String", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+  }
+  
+  @Test
+  public void testCommonSuperType_65() {
+    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "$Function1<? super Object, ? extends Object>", "$Function1<? super String, ? extends String>");
+    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+  }
+  
+  @Test
+  public void testCommonSuperType_66() {
+    this.isSuperTypeOf("Function1<?, ?>", "$Function1<Object, Object>", "$Function1<String, String>");
+  }
 }
