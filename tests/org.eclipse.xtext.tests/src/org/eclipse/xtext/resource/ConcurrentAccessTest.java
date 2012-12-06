@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
@@ -138,6 +139,74 @@ public class ConcurrentAccessTest extends Assert {
 		boolean wasOk = resolveAllSupertypesStateAccess((EPackage) resource.getContents().get(0));
 		assertEquals(101, resourceSet.getResources().size());
 		assertTrue("unresolvedProxy", wasOk);
+	}
+	
+	@Ignore @Test public void testMultiThreadedListAccess() throws InterruptedException {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		final List<Resource> resources = resourceSet.getResources();
+		List<List<Resource>> resourcesToAdd = Lists.newArrayList();
+		for(int i = 0; i < 5; i++) {
+			List<Resource> threadList = Lists.newArrayList();
+			for(int j = 0; j < 500; j++) {
+				threadList.add((new ResourceImpl(URI.createURI("file:/" + i + "_" + j + ".xmi"))));
+			}
+			resourcesToAdd.add(threadList);
+		}
+		List<Thread> threads = Lists.newArrayList();
+		for (int i = 0; i < 5; i++) {
+			final List<Resource> addUs = resourcesToAdd.get(i);
+			threads.add(new Thread() {
+				@Override
+				public void run() {
+					for(Resource addMe: addUs) {
+						resources.add(addMe);
+					}
+				}
+			});
+		}
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(2500, resources.size());
+		assertEquals(2500, resourceSet.getURIResourceMap().size());
+	}
+	
+	@Test public void testMultiThreadedSynchronizedListAccess() throws InterruptedException {
+		XtextResourceSet resourceSet = new SynchronizedXtextResourceSet();
+		final List<Resource> resources = resourceSet.getResources();
+		List<List<Resource>> resourcesToAdd = Lists.newArrayList();
+		for(int i = 0; i < 5; i++) {
+			List<Resource> threadList = Lists.newArrayList();
+			for(int j = 0; j < 500; j++) {
+				threadList.add((new ResourceImpl(URI.createURI("file:/" + i + "_" + j + ".xmi"))));
+			}
+			resourcesToAdd.add(threadList);
+		}
+		List<Thread> threads = Lists.newArrayList();
+		for (int i = 0; i < 5; i++) {
+			final List<Resource> addUs = resourcesToAdd.get(i);
+			threads.add(new Thread() {
+				@Override
+				public void run() {
+					for(Resource addMe: addUs) {
+						resources.add(addMe);
+					}
+				}
+			});
+		}
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(2500, resources.size());
+		assertEquals(2500, resourceSet.getURIResourceMap().size());
 	}
 
 	/**
