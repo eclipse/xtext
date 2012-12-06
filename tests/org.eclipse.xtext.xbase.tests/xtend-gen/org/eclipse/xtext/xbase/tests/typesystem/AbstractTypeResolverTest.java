@@ -1058,6 +1058,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testSwitchExpression_10() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("switch null {\n            case null : [Object it | it]\n            case null : [Integer it | it]\n        }", "(Integer)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<? super Integer, ?>");
+  }
+  
+  @Test
   public void testTypeGuardedCase_0() throws Exception {
     this.resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
   }

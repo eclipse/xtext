@@ -180,6 +180,14 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.withEquivalents("FileFilter", "FileFilter")
 	}
 	
+	@Test def void testSwitchExpression_01() throws Exception {
+		"switch null {
+            case null : [Object it | it]
+            case null : [Integer it | it]
+        }".resolvesClosuresTo("(Object)=>Object", "(Integer)=>Integer")
+		  .withEquivalents("Function1<Object, Object>", "Function1<Integer, Integer>")
+	}
+	
 	@Test def void testNumberLiteralInClosure_01() throws Exception {
 		"newArrayList().map[42]".resolvesClosuresTo("(Object)=>int").withEquivalents("Function1<Object, Integer>")
 	}
