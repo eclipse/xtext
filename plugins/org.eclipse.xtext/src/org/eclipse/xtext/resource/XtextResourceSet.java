@@ -58,7 +58,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 	 * @since 2.3
 	 */
 	protected UriChangeListener getUriChangeListener() {
-		return uriChangeListener ;
+		return uriChangeListener;
 	}
 	
 	/**
@@ -111,8 +111,16 @@ public class XtextResourceSet extends ResourceSetImpl {
 
     public XtextResourceSet() {
     	setURIResourceMap(new HashMap<URI,Resource>());
-    	resources = new ResourcesList();
+		resources = createResourceList();
     }
+
+	/**
+	 * Create the concrete list that will contain the resources. 
+	 * @since 2.4
+	 */
+	protected ResourcesList createResourceList() {
+		return new ResourcesList();
+	}
 
     private URI resolveClasspathURI(URI uri) {
         return getClasspathUriResolver().resolve(getClasspathURIContext(), uri);

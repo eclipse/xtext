@@ -1,14 +1,47 @@
 package org.eclipse.xtext.resource
 
+import java.io.IOException
+import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.junit.Test
+
 import static org.junit.Assert.*
 
-class XtextResourceSetTest {
+abstract class AbstractResourceSetTest {
+	
+	def protected ResourceSetImpl createEmptyResourceSet()
+	
+	@Test
+	def void testDemandLoadedResourcesAreInMap() {
+		val rs = createEmptyResourceSet
+		val Resource$Factory nullFactory = [ uri | 
+			val result = new NullResource
+			result.URI = uri
+			result
+		]
+		rs.resourceFactoryRegistry.extensionToFactoryMap.put('xmi', nullFactory)
+		assertEquals(0, rs.URIResourceMap.size)
+		val uri = URI::createURI('file:/does/not/exist.xmi')
+		val demandLoaded = rs.getResource(uri, true)
+		assertNotNull(demandLoaded)
+		val second = rs.getResource(uri, true)
+		assertSame(demandLoaded, second)
+		
+		assertEquals(1, rs.URIResourceMap.size)
+	}
+	
+}
+
+abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
+	
+	override protected XtextResourceSet createEmptyResourceSet()
 	
 	@Test
 	def void testResourcesAreInMap() {
-		val rs = new XtextResourceSet
+		val rs = createEmptyResourceSet
 		
 		assertEquals(0, rs.URIResourceMap.size)
 		
@@ -26,7 +59,7 @@ class XtextResourceSetTest {
 	
 	@Test
 	def void testResourcesAreInMap_02() {
-		val rs = new XtextResourceSet
+		val rs = createEmptyResourceSet
 		
 		assertEquals(0, rs.URIResourceMap.size)
 		
@@ -44,7 +77,7 @@ class XtextResourceSetTest {
 	
 	@Test
 	def void testResourcesAreInMap_03() {
-		val rs = new XtextResourceSet
+		val rs = createEmptyResourceSet
 		
 		assertEquals(0, rs.URIResourceMap.size)
 		
@@ -78,4 +111,36 @@ class XtextResourceSetTest {
 		
 		assertEquals(0, rs.URIResourceMap.size)
 	}
+}
+
+class NullResource extends ResourceImpl {
+	
+	override load(Map<? extends Object,? extends Object> options) throws IOException {
+		// don't try to load me
+	}
+	
+}
+
+class ResourceSetTest extends AbstractResourceSetTest {
+	
+	override protected createEmptyResourceSet() {
+		return new ResourceSetImpl => [ URIResourceMap = newHashMap ]
+	}
+	
+}
+
+class XtextResourceSetTest extends AbstractXtextResourceSetTest {
+	
+	override protected createEmptyResourceSet() {
+		new XtextResourceSet
+	}
+	
+}
+
+class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {
+	
+	override protected createEmptyResourceSet() {
+		new SynchronizedXtextResourceSet
+	}
+	
 }
