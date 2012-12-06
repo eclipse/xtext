@@ -1008,6 +1008,13 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("Integer")
 	}
 	
+	@Test def void testSwitchExpression_10() throws Exception {
+		"switch null {
+            case null : [Object it | it]
+            case null : [Integer it | it]
+        }".resolvesTo("(Integer)=>Object").isFunctionAndEquivalentTo("Function1<? super Integer, ?>")
+	}
+	
 	@Test def void testTypeGuardedCase_0() throws Exception {
 		"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & CharSequence")
 //		assertEquals("Object", toString(typeProvider.getType(expression.getSwitch())));

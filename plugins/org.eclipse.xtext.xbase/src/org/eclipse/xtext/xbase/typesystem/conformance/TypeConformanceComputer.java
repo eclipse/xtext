@@ -272,7 +272,22 @@ public class TypeConformanceComputer {
 							return parameterized;
 						}
 						LightweightTypeReference parameterReference = parameterized.getTypeArguments().get(i);
-						parameterReferences.add(parameterReference);
+						if (parameterized instanceof FunctionTypeReference && !(parameterReference instanceof WildcardTypeReference)) {
+							FunctionTypeReference functionType = (FunctionTypeReference) parameterized;
+							if (i == typeParameters.size() - 1 && parameterReference.equals(functionType.getReturnType())) { 
+								WildcardTypeReference wildcard = new WildcardTypeReference(owner);
+								wildcard.addUpperBound(parameterReference);
+								parameterReferences.add(wildcard);
+							} else if (functionType.getParameterTypes().contains(parameterReference)) {
+								WildcardTypeReference wildcard = createObjectWildcardReference(owner);
+								wildcard.setLowerBound(parameterReference);
+								parameterReferences.add(wildcard);
+							} else {
+								parameterReferences.add(parameterReference);	
+							}
+						} else {
+							parameterReferences.add(parameterReference);
+						}
 					} else {
 						return null;
 					}
@@ -393,8 +408,10 @@ public class TypeConformanceComputer {
 	}
 	
 	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
-		LightweightTypeReference mostSpecialTypeIfAllWildcards = getMostSpecialTypeIfAllWildcards(types);
+		LightweightTypeReference mostSpecialTypeIfAllWildcards = getMostSpecialTypeIfAllWildcards(types, owner);
 		if (mostSpecialTypeIfAllWildcards != null) {
+			if (mostSpecialTypeIfAllWildcards instanceof WildcardTypeReference)
+				return mostSpecialTypeIfAllWildcards;
 			WildcardTypeReference result = createObjectWildcardReference(owner);
 			result.setLowerBound(mostSpecialTypeIfAllWildcards);
 			return result;
@@ -402,7 +419,7 @@ public class TypeConformanceComputer {
 		Set<String> allNames = Sets.newHashSet();
 		Set<String> allBoundNames = Sets.newHashSet();
 		for(int i = 0; i < types.size(); i++) {
-			LightweightTypeReference type = types.get(i).getUpperBoundSubstitute();
+			LightweightTypeReference type = types.get(i).getInvariantBoundSubstitute();
 			types.set(i, type);
 			addIdentifier(type, allNames, allBoundNames);
 		}
@@ -455,15 +472,25 @@ public class TypeConformanceComputer {
 		return type.getIdentifier();
 	}
 
-	private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types) {
+	private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
+		boolean objectIsCandidate = false;
+		boolean lowerBoundSeen = false;
 		for(LightweightTypeReference type: types) {
 			if (type instanceof WildcardTypeReference) {
-				if (((WildcardTypeReference) type).getLowerBound() == null)
-					return null;
+				if (((WildcardTypeReference) type).getLowerBound() == null) {
+					objectIsCandidate = true;
+				} else {
+					lowerBoundSeen = true;
+				}
 			} else {
 				return null;
 			}
 		}
+		if (!lowerBoundSeen) {
+			return null;
+		}
+		if (objectIsCandidate)
+			return createObjectWildcardReference(owner);
 		return getMostSpecialType(types);
 	}
 	
