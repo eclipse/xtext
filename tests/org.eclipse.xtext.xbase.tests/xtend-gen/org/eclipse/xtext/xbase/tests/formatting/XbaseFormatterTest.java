@@ -852,14 +852,27 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
-  public void formatSwitchCaseSL() {
+  public void formatSwitchDefaultSL() {
     final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
         public void apply(final MapBasedConfigurationValues it) {
           it.<Boolean>put(XbaseFormatterTest.this._xbaseFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("switch \'x\' { case \'x\': println(\'x\') case \'y\': println(\'y\') }");
+    _builder.append("switch \'x\' { case \'y\': println(\'y\') default: println(\'z\') }");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatSwitchDefaultSL1() {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
+          it.<Boolean>put(XbaseFormatterTest.this._xbaseFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' { case \'y\': println(\'y\') default: println(\'z\') }");
     _builder.newLine();
     this.assertFormattedExpression(_function, _builder);
   }
@@ -912,6 +925,59 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatSwitchCaseDefaultSL1() {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
+          it.<Boolean>put(XbaseFormatterTest.this._xbaseFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\'");
+    _builder.newLine();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\': println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\': println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default: println(\'z\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_function, _builder);
+  }
+  
+  @Test
+  public void formatSwitchCaseDefaultSLParenthesis() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\': println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\': println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default: println(\'z\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   \'x\'  {   ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("case \'x\':   println(\'x\')   case   \'y\':    println(\'y\')  default  :    println(\'z\')");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatSwitchML() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("switch \'x\' {");
@@ -938,6 +1004,87 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("println(\'x\')   case   \'y\':    println(\'y\')");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatSwitchDefaultML() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\':");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\':");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'z\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch \'x\'  {   ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("case \'x\':   ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("println(\'x\')   case   \'y\':    println(\'y\')     default  :    println(\'z\')");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatSwitchDefault2ML() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\':");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\':");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'z\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch \'x\'  {   ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("case \'x\': println(\'x\')   case   \'y\':    println(\'y\')     ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("default  :    ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("println(\'z\')");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -976,6 +1123,51 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("switch \'x\'  { case \'x\': { println(\'x\') }  case   \'y\':  {  println(\'y\') } }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_function, _builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSwitchDefaultMLBlock() {
+    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
+        public void apply(final MapBasedConfigurationValues it) {
+          it.<Boolean>put(XbaseFormatterTest.this._xbaseFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\': {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'x\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\': {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default: {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'z\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch \'x\'  { case \'x\': { println(\'x\') }  case   \'y\':  {  println(\'y\') } default: { println(\'z\') } }");
     _builder_1.newLine();
     this.assertFormattedExpression(_function, _builder, _builder_1);
   }
