@@ -233,6 +233,8 @@ public class XtextEditor extends TextEditor {
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 
+		sourceViewerConfiguration.setEditor(this);
+
 		setPreferenceStore(preferenceStoreAccess.getContextPreferenceStore(input));
 
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
