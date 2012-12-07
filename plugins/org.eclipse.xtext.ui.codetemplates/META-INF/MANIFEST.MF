@@ -12,13 +12,13 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
- com.ibm.icu;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime
-Import-Package: org.apache.log4j;version="1.2.15",
- org.apache.commons.logging
+Import-Package: com.ibm.icu.text;version="4.0.0";resolution:=optional,
+ org.apache.commons.logging,
+ org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.conversion;x-internal:=true,

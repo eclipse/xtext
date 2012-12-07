@@ -77,6 +77,6 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=option
  org.eclipse.xtend.lib;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Import-Package: com.ibm.icu.text,
+Import-Package: com.ibm.icu.text;version="4.0.0",
  org.apache.commons.logging;version="1.0.4";resolution:=optional;x-installation:=greedy,
  org.apache.log4j;version="1.2.15"

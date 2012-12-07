@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.xtext.util,
  org.eclipse.jdt.core;bundle-version="3.4.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.expressions,
- com.ibm.icu,
  org.eclipse.search;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.ltk.core.refactoring;resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.ltk.ui.refactoring;resolution:=optional;x-installation:=greedy,
@@ -87,5 +86,6 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Import-Package: org.apache.commons.lang,
+Import-Package: com.ibm.icu.text;version="4.0.0",
+ org.apache.commons.lang,
  org.apache.log4j;version="1.2.15"

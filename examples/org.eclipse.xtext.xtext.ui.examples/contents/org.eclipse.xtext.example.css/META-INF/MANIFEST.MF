@@ -10,14 +10,14 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;resolution:=optional;x-installation:=greedy,
- com.ibm.icu;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase;bundle-version="1.0.1",
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.antlr.runtime
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.ibm.icu.text;version="4.0.0";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.css,
  org.eclipse.xtext.example.css.conversion,

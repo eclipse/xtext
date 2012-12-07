@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
- com.ibm.icu;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
@@ -29,5 +28,6 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.scoping,
  org.eclipse.xtext.example.arithmetics.formatting,
  org.eclipse.xtext.example.arithmetics.serializer
-Import-Package: org.apache.log4j;version="1.2.15",
- org.apache.commons.logging
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j;version="1.2.15",
+ org.ibm.icu.text;version="4.0.0";resolution:=optional
