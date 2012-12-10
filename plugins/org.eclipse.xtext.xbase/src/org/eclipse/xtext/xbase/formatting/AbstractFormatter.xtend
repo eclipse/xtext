@@ -1,15 +1,15 @@
 package org.eclipse.xtext.xbase.formatting
 
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.preferences.IPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues
 
-abstract class AbstractFormatter implements IFormatter {
+abstract class AbstractFormatter implements IBasicFormatter {
 
 	@Property boolean allowIdentityEdits = false
 	@Property boolean diagnoseConflicts = true
 
-	override format(XtextResource res, int offset, int length, IConfigurationValues cfg) {
+	override format(XtextResource res, int offset, int length, IPreferenceValues cfg) {
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head, format)

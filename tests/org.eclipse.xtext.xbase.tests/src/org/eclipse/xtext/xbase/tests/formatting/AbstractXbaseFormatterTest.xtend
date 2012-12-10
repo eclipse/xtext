@@ -3,22 +3,22 @@ package org.eclipse.xtext.xbase.tests.formatting
 import javax.inject.Inject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.junit.runner.RunWith
+import org.eclipse.xtext.preferences.IPreferenceValues
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseFormatterTestInjectorProvider))
 abstract class AbstractXbaseFormatterTest {
 	@Inject FormatterTester tester
-	@Inject XbaseFormatterConfigKeys keys
 
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted)
 	}
 
-	def assertFormattedExpression((MapBasedConfigurationValues)=>void cfg, CharSequence toBeFormatted) {
+	def assertFormattedExpression((MapBasedPreferenceValues)=>void cfg, CharSequence toBeFormatted) {
 		assertFormattedExpression(cfg, toBeFormatted, toBeFormatted)
 	}
 
@@ -30,12 +30,12 @@ abstract class AbstractXbaseFormatterTest {
 		assertFormattedExpression(null, expectation, toBeFormatted)
 	}
 
-	def assertFormattedExpression((MapBasedConfigurationValues)=>void cfg, CharSequence expectation,
+	def assertFormattedExpression((MapBasedPreferenceValues)=>void cfg, CharSequence expectation,
 		CharSequence toBeFormatted) {
 		assertFormattedExpression(cfg, expectation, toBeFormatted, false)
 	}
 
-	def assertFormattedExpression((MapBasedConfigurationValues)=>void cfg, CharSequence expectation,
+	def assertFormattedExpression((MapBasedPreferenceValues)=>void cfg, CharSequence expectation,
 		CharSequence toBeFormatted, boolean allowErrors) {
 		assertFormatted(
 			cfg,
@@ -47,7 +47,7 @@ abstract class AbstractXbaseFormatterTest {
 		)
 	}
 
-	def assertFormatted((MapBasedConfigurationValues)=>void cfg, CharSequence expectation) {
+	def assertFormatted((MapBasedPreferenceValues)=>void cfg, CharSequence expectation) {
 		assertFormatted(cfg, expectation, expectation)
 	}
 
@@ -55,12 +55,12 @@ abstract class AbstractXbaseFormatterTest {
 		assertFormatted(null, expectation, toBeFormatted)
 	}
 
-	def assertFormatted((MapBasedConfigurationValues)=>void cfg, CharSequence expectation, CharSequence toBeFormatted) {
+	def assertFormatted((MapBasedPreferenceValues)=>void cfg, CharSequence expectation, CharSequence toBeFormatted) {
 		assertFormatted(cfg, expectation, toBeFormatted, "", "", false)
 	}
 
 	def assertFormatted(
-		(MapBasedConfigurationValues)=>void cfg,
+		(MapBasedPreferenceValues)=>void cfg,
 		CharSequence expectation,
 		CharSequence toBeFormatted,
 		String prefix,
@@ -77,8 +77,8 @@ abstract class AbstractXbaseFormatterTest {
 		]
 	}
 
-	def initConfig(MapBasedConfigurationValues target, (MapBasedConfigurationValues)=>void cfg) {
-		target.put(keys.maxLineWidth, 80)
+	def initConfig(MapBasedPreferenceValues target, (MapBasedPreferenceValues)=>void cfg) {
+		target.put(maxLineWidth, 80)
 		if (cfg != null)
 			cfg.apply(target)
 	}

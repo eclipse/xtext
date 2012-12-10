@@ -9,8 +9,9 @@ package org.eclipse.xtext.xbase.formatting;
 
 import java.util.List;
 
+import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.xbase.formatting.TextReplacement;
 
 /**
  * A formatter creates a list of TextReplacements that are applicable on the XtextResource's underlying document (i.e.
@@ -18,8 +19,9 @@ import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
  * {@link Character#isWhitespace(char)} is true.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.4
  */
-public interface IFormatter {
+public interface IBasicFormatter {
 
-	List<TextReplacement> format(XtextResource res, int offset, int length, IConfigurationValues cfg);
+	List<TextReplacement> format(XtextResource res, int offset, int length, IPreferenceValues cfg);
 }

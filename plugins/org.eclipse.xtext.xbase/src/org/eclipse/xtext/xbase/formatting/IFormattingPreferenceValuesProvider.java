@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public interface IFormatterConfigurationProvider {
-
-	IConfigurationValues getFormatterConfiguration(Resource resource);
+public interface IFormattingPreferenceValuesProvider extends IPreferenceValuesProvider {
 
 }

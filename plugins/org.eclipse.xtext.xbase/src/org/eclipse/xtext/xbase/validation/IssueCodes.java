@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.validation;
 import java.util.List;
 
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.IssueCode;
 
 import com.google.common.collect.ImmutableList;
@@ -66,9 +66,6 @@ public class IssueCodes {
 	public static final String INVALID_NUMBER_FORMAT = ISSUE_CODE_PREFIX + "invalidNumberFormat";
 	public static final String FIELD_ALREADY_INITIALIZED = ISSUE_CODE_PREFIX + "field_already_initialized";
 	public static final String INVALID_TYPE = ISSUE_CODE_PREFIX + "invalid_type";
-	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
-	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX + "discouraged_reference";
-
 
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
@@ -84,8 +81,11 @@ public class IssueCodes {
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
 
-	public static final IssueCode IC_FORBIDDEN_REFERENCE = ConfigurableIssueCode.createDerivedIssueCode(FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
-	public static final IssueCode IC_DISCOURAGED_REFERENCE = ConfigurableIssueCode.createDerivedIssueCode(DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
+	public static final IssueCode JAVA_COMPILER_PB_FORBIDDEN_REFERENCE = new IssueCode(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, Severity.ERROR);
+	public static final IssueCode JAVA_COMPILER_PB_DISCOURAGED_REFERENCE = new IssueCode(JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE, Severity.WARNING);
+	
+	public static final IssueCode FORBIDDEN_REFERENCE = new IssueCode(ISSUE_CODE_PREFIX	+ "forbidden_reference", JAVA_COMPILER_PB_FORBIDDEN_REFERENCE);
+	public static final IssueCode DISCOURAGED_REFERENCE = new IssueCode(ISSUE_CODE_PREFIX + "discouraged_reference", JAVA_COMPILER_PB_DISCOURAGED_REFERENCE);
 
 
 	
