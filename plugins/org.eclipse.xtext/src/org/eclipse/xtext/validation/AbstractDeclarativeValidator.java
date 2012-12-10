@@ -406,26 +406,26 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, IssueCode issueCode, String message, EStructuralFeature feature, String... issueData) {
+	protected void addIssue(EObject source, String issueCode, String message, EStructuralFeature feature, String... issueData) {
 		addIssue(source, issueCode, message, feature, INSIGNIFICANT_INDEX, issueData);
 	}
 	
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, IssueCode issueCode, String message, EStructuralFeature feature,
+	protected void addIssue(EObject source, String issueCode, String message, EStructuralFeature feature,
 			int index, String... issueData) {
 		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
 		if (severity != null) {
 			switch (severity) {
 				case WARNING:
-					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getId(), issueData);
+					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode, issueData);
 					break;
 				case INFO:
-					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getId(), issueData);
+					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode, issueData);
 					break;
 				case ERROR:
-					getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getId(), issueData);
+					getMessageAcceptor().acceptError(message, source, feature, index, issueCode, issueData);
 					break;
 				default:
 					break;
@@ -436,7 +436,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	/**
 	 * @since 2.4
 	 */
-	protected boolean isIgnored(IssueCode issueCode) {
+	protected boolean isIgnored(String issueCode) {
 		IssueSeverities severities = getIssueSeverities(getContext(), getCurrentObject());
 		return severities.isIgnored(issueCode);
 	}

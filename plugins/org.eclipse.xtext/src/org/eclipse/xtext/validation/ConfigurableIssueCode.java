@@ -14,7 +14,7 @@ import org.eclipse.xtext.preferences.IPreferenceKey;
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.4
  */
-public class IssueCode extends IPreferenceKey.AbstractKey<Severity>{
+public class ConfigurableIssueCode extends IPreferenceKey.AbstractKey<Severity>{
 	
 	public final static String SEVERITY_ERROR = "error";
 	public final static String SEVERITY_WARNING = "warning";
@@ -23,16 +23,16 @@ public class IssueCode extends IPreferenceKey.AbstractKey<Severity>{
 
 	public final Severity severity;
 
-	public IssueCode(String code) {
+	public ConfigurableIssueCode(String code) {
 		this(code, Severity.ERROR);
 	}
 	
-	public IssueCode(String code, Severity defaultSeverity) {
+	public ConfigurableIssueCode(String code, Severity defaultSeverity) {
 		super(code);
 		this.severity = defaultSeverity;
 	}
 	
-	public IssueCode(String code, IssueCode delegateTo) {
+	public ConfigurableIssueCode(String code, ConfigurableIssueCode delegateTo) {
 		super(code, delegateTo);
 		severity = null;
 	}
@@ -81,4 +81,6 @@ public class IssueCode extends IPreferenceKey.AbstractKey<Severity>{
 		}
 		throw new IllegalArgumentException("Unknown severity '"+severityAsString+"'.");
 	}
+	
+	
 }

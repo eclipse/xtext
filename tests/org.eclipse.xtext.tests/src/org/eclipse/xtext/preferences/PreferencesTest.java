@@ -47,25 +47,25 @@ public class PreferencesTest {
 		return null;
 	}
 
+	public static class PrefsA {
+		public static StringKey INHERITED_KEY = new StringKey("my.inherited.key","inherited");
+	}
+	
+	public static class PrefsB extends PrefsA {
+		public static Integer myInt = 42;
+		public static IntegerKey INT_KEY = new IntegerKey("my.int", myInt);
+		@SuppressWarnings("unused")
+		private static StringKey PRIVATE_KEY = new StringKey("my.private.key","private");
+		public static BooleanKey BOOL_KEY = new BooleanKey("foo.bar", true);
+	}
+	
+	public static class PrefsC {
+		public static StringKey DELEGATING_KEY = new StringKey("delegating.key", null) {
+			@Override
+			public org.eclipse.xtext.preferences.IPreferenceKey<String> getDelegationKey() {
+				return PrefsA.INHERITED_KEY;
+			}
+		};
+	}
 }
 
-class PrefsA {
-	public static StringKey INHERITED_KEY = new StringKey("my.inherited.key","inherited");
-}
-
-class PrefsB extends PrefsA {
-	public static Integer myInt = 42;
-	public static IntegerKey INT_KEY = new IntegerKey("my.int", myInt);
-	@SuppressWarnings("unused")
-	private static StringKey PRIVATE_KEY = new StringKey("my.private.key","private");
-	public static BooleanKey BOOL_KEY = new BooleanKey("foo.bar", true);
-}
-
-class PrefsC {
-	public static StringKey DELEGATING_KEY = new StringKey("delegating.key", null) {
-		@Override
-		public org.eclipse.xtext.preferences.IPreferenceKey<String> getDelegationKey() {
-			return PrefsA.INHERITED_KEY;
-		}
-	};
-}
