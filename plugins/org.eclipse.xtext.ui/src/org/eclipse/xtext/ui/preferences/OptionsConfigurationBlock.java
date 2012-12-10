@@ -40,7 +40,7 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-import org.eclipse.xtext.validation.IssueCode;
+import org.eclipse.xtext.validation.ConfigurableIssueCode;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -246,7 +246,7 @@ public abstract class OptionsConfigurationBlock {
 		return comboBox;
 	}
 
-	protected Combo addComboBox(IssueCode issueCode, String label, Composite parent, int indent, String[] values,
+	protected Combo addComboBox(ConfigurableIssueCode issueCode, String label, Composite parent, int indent, String[] values,
 			String[] valueLabels) {
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
