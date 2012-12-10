@@ -29,6 +29,10 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	@Inject
 	extension IXtendJvmAssociations
 	
+	override getDeclaredTypeParameters() {
+		emptyList
+	}
+	
 	def isAssignableFrom(Class<?> lhs, String rhs) {
 		(lhs.canonicalName->null).isAssignableFrom(rhs, true)
 	}

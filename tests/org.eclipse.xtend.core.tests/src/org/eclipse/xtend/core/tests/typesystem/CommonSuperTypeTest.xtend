@@ -412,6 +412,16 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_66() {
 		"Function1<?, ?>".isSuperTypeOf("$Function1<Object, Object>", "$Function1<String, String>")
 	}
+	
+	@Test
+	def void testCommonSuperType_67() {
+		"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String")
+	}
+	
+	@Test
+	def void testCommonSuperType_68() {
+		"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String", "String")
+	}
 }
 
 /**
@@ -532,5 +542,17 @@ class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
 	@Test
 	override testCommonSuperType_65() {
 		super.testCommonSuperType_65()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_67() {
+		super.testCommonSuperType_67()
+	}
+	
+	@Ignore
+	@Test
+	override testCommonSuperType_68() {
+		super.testCommonSuperType_68()
 	}
 }
