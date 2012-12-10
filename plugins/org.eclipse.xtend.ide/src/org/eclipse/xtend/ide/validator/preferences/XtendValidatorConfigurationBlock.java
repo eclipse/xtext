@@ -12,7 +12,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
 import org.eclipse.xtext.validation.IssueCode;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -45,16 +44,16 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 		Composite inner = createSection("Deprecated and restricted API", composite, nColumns);
-		String[] values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
-				ConfigurableIssueCode.SEVERITY_IGNORE };
+		String[] values = new String[] { IssueCode.SEVERITY_ERROR, IssueCode.SEVERITY_WARNING,
+				IssueCode.SEVERITY_IGNORE };
 		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
-		if (IssueCodes.IC_FORBIDDEN_REFERENCE.isDerived()) {
-			values = new String[] { IssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
-					ConfigurableIssueCode.SEVERITY_IGNORE, ConfigurableIssueCode.SEVERITY_DERIVED };
-			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
-		}
+//		if (IssueCodes.IC_FORBIDDEN_REFERENCE.isDerived()) {
+//			values = new String[] { IssueCode.SEVERITY_ERROR, DelegatingIssueCode.SEVERITY_WARNING,
+//					DelegatingIssueCode.SEVERITY_IGNORE, DelegatingIssueCode.SEVERITY_DERIVED };
+//			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
+//		}
 
-		addComboBox(IssueCodes.IC_FORBIDDEN_REFERENCE, "Forbidden reference:", inner, defaultIndent, values,
+		addComboBox(IssueCodes.FORBIDDEN_REFERENCE, "Forbidden reference:", inner, defaultIndent, values,
 				valueLabels);
 
 	}

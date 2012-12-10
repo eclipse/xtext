@@ -2,11 +2,9 @@ package org.eclipse.xtend.core.tests.formatting
 
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
 import org.junit.Test
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
-import com.google.inject.Inject
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 
 class XtendFileFormatter extends AbstractXtendFormatterTest {
-	@Inject extension XtendFormatterConfigKeys
 	
 	@Test def formatClass11() {
 		assertFormatted([

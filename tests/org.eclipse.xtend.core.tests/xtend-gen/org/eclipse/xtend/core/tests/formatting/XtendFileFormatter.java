@@ -1,23 +1,19 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import com.google.inject.Inject;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendFileFormatter extends AbstractXtendFormatterTest {
-  @Inject
-  private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
-  
   @Test
   public void formatClass11() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendFileFormatter.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -33,9 +29,9 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClass12() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendFileFormatter.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -53,9 +49,9 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClass112() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendFileFormatter.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -74,9 +70,9 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClass122() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendFileFormatter.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();

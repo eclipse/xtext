@@ -9,6 +9,7 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
@@ -26,8 +27,7 @@ import org.eclipse.xtend.ide.editor.SingleLineCommentHelper;
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
-import org.eclipse.xtend.ide.formatting.FormatterConfigurationProvider;
-import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
+import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtend.ide.formatting.preferences.FormatterResourceProvider;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtend.ide.highlighting.ShowWhitespaceCharactersActionContributor;
@@ -90,13 +90,11 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
-import org.eclipse.xtext.validation.IDiagnosticConverter;
-import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
+import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
-import org.eclipse.xtext.xbase.ui.validation.PreferenceAwareDiagnosticConverter;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -123,6 +121,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 				.to(OverrideIndicatorModelListener.class);
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("OverrideIndicatorRulerAction")).to( //$NON-NLS-1$
 				OverrideIndicatorRulerAction.class);
+	}
+	
+	public Class<? extends IFormattingPreferenceValuesProvider> bindIFormattingPreferenceValuesProvider() {
+		return FormatterPreferenceValuesProvider.class;
 	}
 
 	@Override
@@ -230,7 +232,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=361385
-		return XtendFormatterFactory.class;
+		return FormatterFactory.class;
 	}
 
 	@Override
@@ -334,14 +336,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return JavaProjectPreferencesInitializer.class;
 	}
 
-	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
-		return PreferenceAwareDiagnosticConverter.class;
-	}
-
-	public Class<? extends IFormatterConfigurationProvider> bindIFormatterConfigurationProvider() {
-		return FormatterConfigurationProvider.class;
-	}
-	
 	@Override
 	public void configureSmartCaretPreferenceInitializer(Binder binder) {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$

@@ -1,13 +1,11 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.junit.Test
 import org.junit.Ignore
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
-import com.google.inject.Inject
+import org.junit.Test
+
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
-	
-	@Inject extension XtendFormatterConfigKeys
 	
 	def protected toFile(CharSequence ann) '''
 		package foo

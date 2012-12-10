@@ -1,23 +1,19 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import com.google.inject.Inject;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
-  @Inject
-  private XtendFormatterConfigKeys _xtendFormatterConfigKeys;
-  
   @Test
   public void formatConstructor01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendClassFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -36,9 +32,9 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatConstructor02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendClassFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -119,8 +115,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatField01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -136,8 +132,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatField02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -156,8 +152,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldInit01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -173,8 +169,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldInit02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -193,8 +189,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldVal() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -210,8 +206,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldVar() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -227,8 +223,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldStatic02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -244,8 +240,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldStaticVal() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -261,8 +257,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldStaticVar() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -278,8 +274,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtension01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -295,8 +291,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtensionInit01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -312,8 +308,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtensionInit02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -332,8 +328,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtensionVal01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -349,8 +345,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtensionVar01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -366,8 +362,8 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldExtension02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -386,9 +382,9 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethod01() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendClassFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(false));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -410,9 +406,9 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethod02() {
-    final Procedure1<MapBasedConfigurationValues> _function = new Procedure1<MapBasedConfigurationValues>() {
-        public void apply(final MapBasedConfigurationValues it) {
-          it.<Boolean>put(XtendClassFormatterTest.this._xtendFormatterConfigKeys.bracesInNewLine, Boolean.valueOf(true));
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();

@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.formatting.preferences;
 
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
+
 import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
-
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
@@ -29,24 +29,23 @@ public class BlankLinesTab extends AbstractModifyDialogTab {
 
 	@Override
 	protected void doCreatePreferences(Composite composite, int col) {
-		XtendFormatterConfigKeys xtendFormatterConfig = new XtendFormatterConfigKeys();
 
 		Group cuGroup = createGroup(col, composite, "Blank lines in compilation unit");
-		createNumberPref(cuGroup, col, "After package declaration:", xtendFormatterConfig.blankLinesAfterPackageDecl);
-		createNumberPref(cuGroup, col, "Between imports:", xtendFormatterConfig.blankLinesBetweenImports);
-		createNumberPref(cuGroup, col, "After import declaration:", xtendFormatterConfig.blankLinesAfterImports);
-		createNumberPref(cuGroup, col, "Between class declarations:", xtendFormatterConfig.blankLinesBetweenClasses);
+		createNumberPref(cuGroup, col, "After package declaration:", blankLinesAfterPackageDecl);
+		createNumberPref(cuGroup, col, "Between imports:", blankLinesBetweenImports);
+		createNumberPref(cuGroup, col, "After import declaration:", blankLinesAfterImports);
+		createNumberPref(cuGroup, col, "Between class declarations:", blankLinesBetweenClasses);
 		
 		Group cdGr = createGroup(col, composite, "Blank lines within class declarations");
 			
-		createNumberPref(cdGr, col, "Before first declaration:", xtendFormatterConfig.blankLinesBeforeFirstMember);
-		createNumberPref(cdGr, col, "After last member declaration:", xtendFormatterConfig.blankLinesAfterLastMember);
-		createNumberPref(cdGr, col, "Between fields:", xtendFormatterConfig.blankLinesBetweenFields);
-		createNumberPref(cdGr, col, "Between fields and methods:", xtendFormatterConfig.blankLinesBetweenFieldsAndMethods);
-		createNumberPref(cdGr, col, "Between methods:", xtendFormatterConfig.blankLinesBetweenMethods);
+		createNumberPref(cdGr, col, "Before first declaration:", blankLinesBeforeFirstMember);
+		createNumberPref(cdGr, col, "After last member declaration:", blankLinesAfterLastMember);
+		createNumberPref(cdGr, col, "Between fields:", blankLinesBetweenFields);
+		createNumberPref(cdGr, col, "Between fields and methods:", blankLinesBetweenFieldsAndMethods);
+		createNumberPref(cdGr, col, "Between methods:", blankLinesBetweenMethods);
 		
 		Group eblGroup = createGroup(col, composite, "Existing blank lines");
-		createNumberPref(eblGroup, col, "Number of empty lines to preserve:", xtendFormatterConfig.preserveBlankLines);
+		createNumberPref(eblGroup, col, "Number of empty lines to preserve:", preserveBlankLines);
 
 	}
 }

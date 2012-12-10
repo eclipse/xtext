@@ -20,7 +20,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendImport
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.xbase.configuration.IConfigurationKey
 import org.eclipse.xtext.xbase.formatting.FormattableDocument
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
@@ -28,6 +27,8 @@ import org.eclipse.xtext.xbase.formatting.NodeModelAccess
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
+import org.eclipse.xtext.preferences.IPreferenceKey
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -35,7 +36,6 @@ public class XtendFormatter extends XbaseFormatter2 {
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
 	@Inject extension FormattingDataFactory
-	@Inject extension XtendFormatterConfigKeys
 
 	@Inject RichStringFormatter richStringFormatter
 
@@ -67,7 +67,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 	}
 	
 	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document,
-		IConfigurationKey<?> configKey) {
+		IPreferenceKey<?> configKey) {
 		if (target.annotations.isEmpty)
 			return;
 		for (a : target.annotations) {

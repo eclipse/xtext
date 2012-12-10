@@ -19,14 +19,15 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
-import org.eclipse.xtext.xbase.formatting.IFormatterConfigurationProvider;
+import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
+import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 
 import com.google.inject.Inject;
@@ -34,17 +35,21 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtendFormatterFactory implements IContentFormatterFactory {
+//TODO move me to Xtext
+public class FormatterFactory implements IContentFormatterFactory {
 
-	@Inject
-	protected XtendFormatter formatter;
-	@Inject
-	private IFormatterConfigurationProvider cfgProvider;
-
-	public class ContentFormatter implements IContentFormatter {
+	//TODO move me to Xtext
+	public static class ContentFormatter implements IContentFormatter {
+		@Inject
+		protected IBasicFormatter formatter;
+		
+		@Inject
+		private IFormattingPreferenceValuesProvider cfgProvider;
+		
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
-			TextEdit r = doc.readOnly(new FormattingUnitOfWork(region));
+			
+			TextEdit r = doc.readOnly(new FormattingUnitOfWork(formatter, region, cfgProvider));
 			try {
 				if (r != null)
 					r.apply(document);
@@ -58,24 +63,29 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 		}
 	}
 
-	public class FormattingUnitOfWork implements IUnitOfWork<TextEdit, XtextResource> {
+	//TODO move me to Xtext
+	public static class FormattingUnitOfWork implements IUnitOfWork<TextEdit, XtextResource> {
 
-		protected final IRegion region;
+		private final IRegion region;
+		private final IPreferenceValuesProvider configurationProvider;
+		private final IBasicFormatter formatter;
 
-		public FormattingUnitOfWork(IRegion region) {
+		public FormattingUnitOfWork(IBasicFormatter formatter, IRegion region, IPreferenceValuesProvider configurationProvider) {
 			super();
+			this.configurationProvider = configurationProvider;
 			this.region = region;
+			this.formatter = formatter;
 		}
 
 		public TextEdit exec(XtextResource state) throws Exception {
 			IParseResult parseResult = state.getParseResult();
 			if (parseResult == null)
 				return null;
+			IPreferenceValues configuration = configurationProvider.getPreferenceValues(state);
 			final MultiTextEdit mte = new MultiTextEdit();
 			try {
-				IConfigurationValues cfg = cfgProvider.getFormatterConfiguration(state);
 				//	long start = System.currentTimeMillis();
-				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), cfg);
+				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), configuration);
 				//	long time = System.currentTimeMillis() - start;
 				//	System.out.println(String.format("Formatting: Time to create text edits: %.3f sec. Applied edits: %d", time / 1000.0, edits.size()));
 				for (TextReplacement tr : edits)
@@ -86,14 +96,12 @@ public class XtendFormatterFactory implements IContentFormatterFactory {
 			return mte;
 		}
 	}
-
-	public void setConfigurationProvider(IFormatterConfigurationProvider provider) {
-		this.cfgProvider = provider;
-	}
+	
+	@Inject private ContentFormatter formatter;
 
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
-		return new ContentFormatter();
+		return formatter;
 	}
 
 }

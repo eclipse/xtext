@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -29,8 +29,7 @@ public class BracesTab extends AbstractModifyDialogTab {
 
 	@Override
 	protected void doCreatePreferences(Composite composite, int col) {
-		XtendFormatterConfigKeys keys = new XtendFormatterConfigKeys();
 		Group bracesGr = createGroup(col, composite, "Brace positions");
-		createCheckboxPref(bracesGr, col, "Braces in new line", keys.bracesInNewLine);
+		createCheckboxPref(bracesGr, col, "Braces in new line", bracesInNewLine);
 	}
 }

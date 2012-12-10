@@ -34,7 +34,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE.id)
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE.id)
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE.id)
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE.id)
 	}
 
 	@Test
@@ -91,10 +91,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE.id)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
-		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
-		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
+		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE.id)
+		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE.id)
 	}
 	
 	@Test
@@ -106,10 +106,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE.id)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
-		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
-		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
+		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE.id)
+		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE.id)
 	}
 	
 
@@ -122,10 +122,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE.id)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
-		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
-		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
+		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE.id)
+		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE.id)
 	}
 	
 	@Test
@@ -137,10 +137,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE.id)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
-		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
-		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
+		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE.id)
+		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE.id)
 	}
 	
 	@Test
@@ -152,7 +152,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
-		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE.id)
 	}
 
 	@Test
@@ -165,7 +165,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		''')
 
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
-		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
+		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE.id)
 	}
 	
 	@Test
@@ -177,7 +177,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
-		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE.id)
 	}
 	
 		@Test
@@ -191,8 +191,8 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		val parameter = function.parameters.get(0)
 		val type = parameter.parameterType as JvmParameterizedTypeReference
 		val typeParameter = type.arguments.get(0)
-		helper.assertError(type, JVM_PARAMETERIZED_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
-		helper.assertWarning(typeParameter, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
+		helper.assertError(type, JVM_PARAMETERIZED_TYPE_REFERENCE, FORBIDDEN_REFERENCE.id)
+		helper.assertWarning(typeParameter, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE.id)
 	}
 	
 	@Test@Ignore("Enable on demand")
