@@ -22,7 +22,7 @@ public interface IXtextDocumentContentObserver extends IDocumentListener {
 	}
 
 	/**
-	 * Called by the document before when any client requests access to an IXtextDocument's state via
+	 * Called by the document before any client requests access to an IXtextDocument's state via
 	 * {@link IXtextDocument#readOnly(IUnitOfWork)} or {@link IXtextDocument#modify(IUnitOfWork)}
 	 * 
 	 * Implementers get the chance to do any work using the passed {@link Processor}

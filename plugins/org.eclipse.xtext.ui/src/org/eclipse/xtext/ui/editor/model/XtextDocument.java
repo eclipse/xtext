@@ -77,8 +77,15 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.readOnly(work);
 	}
+	
+	private final static IUnitOfWork.Void<XtextResource> noWork = new IUnitOfWork.Void<XtextResource>() {
+		@Override
+		public void process(XtextResource state) throws Exception {}
+	};
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+		// do a dummy read only, to make sure any scheduled changes get applied.
+		readOnly(noWork);
 		IUnitOfWork<T, XtextResource> reconcilingUnitOfWork = new ReconcilingUnitOfWork<T>(work, this, composer);
 		return internalModify(reconcilingUnitOfWork);
 	}
