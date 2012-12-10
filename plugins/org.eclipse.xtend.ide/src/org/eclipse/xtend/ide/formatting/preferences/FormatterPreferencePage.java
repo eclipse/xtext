@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.formatting.preferences;
 import org.eclipse.jdt.internal.ui.preferences.PreferencesAccess;
 import org.eclipse.jdt.internal.ui.preferences.ProfilePreferencePage;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileConfigurationBlock;
+import org.eclipse.swt.widgets.Composite;
 
 import com.google.inject.Inject;
 
@@ -36,6 +37,11 @@ public class FormatterPreferencePage extends ProfilePreferencePage {
 	@Override
 	protected String getPropertyPageID() {
 		return PROP_PAGE_ID;
+	}
+	
+	@Override
+	public void createControl(Composite parent) {
+		super.createControl(parent);
 	}
 
 }

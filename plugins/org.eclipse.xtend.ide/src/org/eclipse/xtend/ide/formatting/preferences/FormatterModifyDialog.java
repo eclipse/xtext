@@ -39,7 +39,7 @@ public class FormatterModifyDialog extends ModifyDialog {
 	}
 
 	@Inject
-	private AbstractModifyDialogTab.Factory tabFactory;
+	private TabFactory tabFactory;
 
 	public FormatterModifyDialog(Shell parentShell, Profile profile, ProfileManager profileManager,
 			ProfileStore profileStore, boolean newProfile, String dialogPreferencesKey, String lastSavePathKey) {
@@ -56,7 +56,7 @@ public class FormatterModifyDialog extends ModifyDialog {
 		addTabPage("New Lines", tabFactory.createNewLineTab(this, values));
 		addTabPage("Line Wrapping", tabFactory.createLineWrapTab(this, values));
 	}
-
+	
 	@Override
 	protected String getHelpContextId() {
 		return null;

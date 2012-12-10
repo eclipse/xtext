@@ -8,8 +8,10 @@
 package org.eclipse.xtend.ide.formatting.preferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.preferences.IScopeContext;
@@ -25,9 +27,10 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.preferences.IPreferenceKey;
+import org.eclipse.xtext.preferences.PreferenceKeysProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -41,6 +44,7 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 
 	@Inject
 	private XtendPreviewFactory previewFactory;
+	
 	@Inject
 	private FormatterModifyDialog.Factory formatterModifyDialogFactory;
 
@@ -132,8 +136,13 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 					return profiles;
 				}
 
-				protected Map getDefaultProfileSettings() {
-					return new MapBasedConfigurationValues(new XtendFormatterConfigKeys()).store();
+				protected Map<String,String> getDefaultProfileSettings() {
+					Set<? extends IPreferenceKey<?>> keys = PreferenceKeysProvider.allConstantKeys(XtendFormatterPreferenceKeys.class);
+					final HashMap<String, String> hashMap = new HashMap<String, String>();
+					for (IPreferenceKey<?> key : keys) {
+						hashMap.put(key.getId(), ((IPreferenceKey<Object>)key).valueToString(key.getDefaultValue()));
+					}
+					return hashMap;
 				}
 
 			};

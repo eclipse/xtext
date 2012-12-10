@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.smoke;
 
+import java.util.HashMap;
+
 import org.eclipse.xtend.core.formatting.XtendFormatter;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class FormatterSmokeTest extends AbstractSmokeTest {
 
 	@Override
 	protected void checkForSmoke(String model, LazyLinkingResource resource) {
-		IConfigurationValues cfg = new MapBasedConfigurationValues(new XtendFormatterConfigKeys());
+		IPreferenceValues cfg = new MapBasedPreferenceValues(new HashMap<String, String>());
 		formatter.setDiagnoseConflicts(false);
 		formatter.format(resource, 0, model.length(), cfg);
 	}

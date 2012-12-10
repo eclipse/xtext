@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.formatting.preferences;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtend.ide.formatting.XtendFormatterFactory;
+import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
@@ -26,7 +26,7 @@ public class XtendPreviewFactory {
 	@Inject
 	private IEditedResourceProvider resourceProvider;
 	@Inject
-	private XtendFormatterFactory xtendFormatterFactory;
+	private FormatterFactory xtendFormatterFactory;
 	@Inject
 	private MembersInjector<XtendFormatterPreview> memberInjector;
 

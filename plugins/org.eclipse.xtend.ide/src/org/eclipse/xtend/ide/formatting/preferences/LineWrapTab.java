@@ -14,7 +14,7 @@ import java.util.Observer;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -28,8 +28,6 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	private Integer previewLineWidth = Integer.valueOf(DEFAULT_PREVIEW_LINE_WRAP);
 	@Inject
 	private IDialogSettings fDialogSettings;
-	@Inject
-	private XtendFormatterConfigKeys keys;
 
 	public static final String PREF_PREVIEW_LINE_WIDTH = "preview.line.width";
 
@@ -53,12 +51,12 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 	@Override
 	protected void doCreatePreferences(Composite composite, int numColumns) {
 		Group generalGroup = createGroup(numColumns, composite, GENERAL_SETTINGS);
-		createNumberPref(generalGroup, numColumns, "Maximum line width:", new XtendFormatterConfigKeys().maxLineWidth);
+		createNumberPref(generalGroup, numColumns, "Maximum line width:", maxLineWidth);
 	}
 
 	@Override
 	protected void doUpdatePreview() {
-		String maxLineWidthKey = keys.maxLineWidth.getName();
+		String maxLineWidthKey = maxLineWidth.getId();
 		final Object normalSetting = fWorkingValues.get(maxLineWidthKey);
 		String previewLineWidth = fPreviewPreferences.get(PREF_PREVIEW_LINE_WIDTH);
 		formatterPreview.moveMarginToColumn(previewLineWidth);

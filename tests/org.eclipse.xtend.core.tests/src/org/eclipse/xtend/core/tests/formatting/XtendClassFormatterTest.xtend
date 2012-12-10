@@ -1,12 +1,10 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
 import org.junit.Test
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys
-import com.google.inject.Inject
+
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 class XtendClassFormatterTest extends AbstractXtendFormatterTest {
-	@Inject extension XtendFormatterConfigKeys
 	@Test def formatConstructor01() {
 		assertFormatted([
 			put(bracesInNewLine, false)

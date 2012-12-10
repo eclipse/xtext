@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtend.core.formatting.XtendFormatterConfigKeys;
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -29,18 +29,16 @@ public class NewLineTab extends AbstractModifyDialogTab {
 
 	@Override
 	protected void doCreatePreferences(Composite composite, int col) {
-		XtendFormatterConfigKeys keys = new XtendFormatterConfigKeys();
-
 		//		Group generalGroup = createGroup(col, composite, "Expressions");
 		//		createCheckboxPref(generalGroup, col, "Around expressions", xtendFormatterConfig.newLineAroundExpression);
 
 		Group annoGr = createGroup(col, composite, "Annotations");
-		createCheckboxPref(annoGr, col, "Insert new line after annotations on types", keys.newLineAfterClassAnnotations);
-		createCheckboxPref(annoGr, col, "Insert new line after annotations on fields", keys.newLineAfterFieldAnnotations);
-		createCheckboxPref(annoGr, col, "Insert new line after annotations on constructors", keys.newLineAfterConstructorAnnotations);
-		createCheckboxPref(annoGr, col, "Insert new line after annotations on methods", keys.newLineAfterMethodAnnotations);
-		createCheckboxPref(annoGr, col, "Insert new line after annotations on parameters", keys.newLineAfterParameterAnnotations);
-		createCheckboxPref(annoGr, col, "Preserve new lines", keys.preserveNewLines);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on types", newLineAfterClassAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on fields", newLineAfterFieldAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on constructors", newLineAfterConstructorAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on methods", newLineAfterMethodAnnotations);
+		createCheckboxPref(annoGr, col, "Insert new line after annotations on parameters", newLineAfterParameterAnnotations);
+		createCheckboxPref(annoGr, col, "Preserve new lines", preserveNewLines);
 
 	}
 }
