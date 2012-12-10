@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 public class IssueSeveritiesProvider {
 	
 	@Inject private IPreferenceValuesProvider valuesProvider;
+	@Inject private ConfigurableIssueCodesProvider issueCodesProvider;
 	
 	protected IPreferenceValuesProvider getValuesProvider() {
 		return valuesProvider;
@@ -27,6 +28,6 @@ public class IssueSeveritiesProvider {
 	
 	public IssueSeverities getIssueSeverities(Resource context) {
 		IPreferenceValues preferenceValues = valuesProvider.getPreferenceValues(context);
-		return new IssueSeverities(preferenceValues);
+		return new IssueSeverities(preferenceValues, issueCodesProvider.getConfigurableIssueCodes());
 	}
 }

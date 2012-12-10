@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import java.util.Map;
+
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.preferences.IPreferenceValues;
 
@@ -17,16 +19,20 @@ import org.eclipse.xtext.preferences.IPreferenceValues;
 public class IssueSeverities {
 	
 	private IPreferenceValues preferenceValues;
+	private Map<String, ConfigurableIssueCode> configurableIssueCodes;
 
-	public IssueSeverities(IPreferenceValues preferenceValues) {
+	public IssueSeverities(IPreferenceValues preferenceValues, Map<String, ConfigurableIssueCode> configurableIssueCodes) {
 		this.preferenceValues = preferenceValues;
+		this.configurableIssueCodes = configurableIssueCodes;
 	}
 
-	public Severity getSeverity(IssueCode code) {
-		return preferenceValues.getPreference(code);
+	public Severity getSeverity(String code) {
+		if (!configurableIssueCodes.containsKey(code))
+			return Severity.ERROR;
+		return preferenceValues.getPreference(configurableIssueCodes.get(code));
 	}
 	
-	public boolean isIgnored(IssueCode code) {
+	public boolean isIgnored(String code) {
 		return getSeverity(code) == null;
 	}
 }
