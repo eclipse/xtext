@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -186,6 +188,16 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	public void acceptActualType(LightweightTypeReference type) {
 		for(ITypeExpectation expectation: getExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.EXPECTATION_INDEPENDENT);
+		}
+	}
+	
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		EnumSet<ConformanceHint> actualHints = EnumSet.copyOf(Arrays.asList(hints));
+		actualHints.add(ConformanceHint.UNCHECKED);
+		actualHints.add(ConformanceHint.EXPECTATION_INDEPENDENT);
+		ConformanceHint[] actualHintsAsArray = actualHints.toArray(new ConformanceHint[actualHints.size()]);
+		for(ITypeExpectation expectation: getExpectations()) {
+			expectation.acceptActualType(type, actualHintsAsArray);
 		}
 	}
 

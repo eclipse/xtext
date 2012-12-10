@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -171,6 +172,25 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Nullable
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		return null;
+	}
+	
+	@Override
+	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+		List<JvmTypeParameter> result = basicGetDeclardTypeParameters();
+		if (result != null)
+			return result;
+		return parent.getDeclaredTypeParameters();
+	}
+	
+	@Override
+	public void addDeclaredTypeParameters(List<JvmTypeParameter> typeParameters) {
+		List<JvmTypeParameter> list = basicGetDeclardTypeParameters();
+		if (list == null) {
+			super.addDeclaredTypeParameters(parent.getDeclaredTypeParameters());
+			getDeclaredTypeParameters().addAll(typeParameters);
+		} else { 
+			list.addAll(typeParameters);
+		}
 	}
 	
 	@Override

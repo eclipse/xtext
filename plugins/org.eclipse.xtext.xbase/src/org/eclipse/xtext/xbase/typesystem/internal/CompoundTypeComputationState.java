@@ -181,6 +181,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			components[i].acceptActualType(type);
 		}
 	}
+	
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].acceptActualType(type, hints);
+		}
+	}
 
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		for (int i = 0; i < components.length; i++) {

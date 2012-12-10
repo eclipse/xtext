@@ -536,6 +536,12 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	@Ignore("fails in old implementation") @Test override testIfExpression_12() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_17() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_18() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_4() throws Exception {
 		fail("fails in old implementation")

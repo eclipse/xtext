@@ -85,6 +85,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"true".resolvesTo("boolean")
 		"false".resolvesTo("boolean")
 	}
+	
+	@Test def void testBooleanLiteral_02() throws Exception {
+		"return true".resolvesTo("void")
+	}
 
 	@Test def void testStringLiteral_01() throws Exception {
 		"'foo'".resolvesTo("String")
@@ -443,43 +447,160 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"throw new Exception()".resolvesTo("void")
 	}
 
-	@Test def void testTryCatchFinallyExpression_0() throws Exception {
+	@Test def void testTryCatchFinallyExpression_00() throws Exception {
 		"try 'foo' catch (Exception e) 'bar'".resolvesTo("String") 
 	}
 	
-	@Test def void testTryCatchFinallyExpression_1() throws Exception {
+	@Test def void testTryCatchFinallyExpression_01() throws Exception {
 		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz'".resolvesTo("String")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_2() throws Exception {
+	@Test def void testTryCatchFinallyExpression_02() throws Exception {
 		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz' finally true".resolvesTo("String")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_3() throws Exception {
+	@Test def void testTryCatchFinallyExpression_03() throws Exception {
 		"try { 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'".resolvesTo("Serializable & Comparable<?>")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_4() throws Exception {
+	@Test def void testTryCatchFinallyExpression_04() throws Exception {
 		"try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}".resolvesTo("Serializable & Comparable<?>")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_5() throws Exception {
+	@Test def void testTryCatchFinallyExpression_05() throws Exception {
 		"try 'literal' as Object as Boolean
 		  catch(NullPointerException e) 'second thing is thrown'		  
 		  catch(ClassCastException e) throw new NullPointerException()
 		".resolvesTo("Serializable & Comparable<?>")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_6() throws Exception {
+	@Test def void testTryCatchFinallyExpression_06() throws Exception {
 		"try 'literal' as Object as Boolean
 		  catch(ClassCastException e) throw new NullPointerException()
 		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable & Comparable<?>")	
 	}
 	
-	@Test def void testTryCatchFinallyExpression_7() throws Exception {
+	@Test def void testTryCatchFinallyExpression_07() throws Exception {
 		"try 'literal' as Object as Boolean
 		  catch(ClassCastException e) null as Number
 		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_08() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar'".resolvesTo("void") 
+	}
+	
+	@Test def void testTryCatchFinallyExpression_09() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_10() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz' finally true".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_11() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_12() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_13() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(NullPointerException e) return 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_14() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_15() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) return null as Number
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("void")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_16() throws Exception {
+		"try return 'foo' catch (Exception e) 'bar'".resolvesTo("String") 
+	}
+	
+	@Test def void testTryCatchFinallyExpression_17() throws Exception {
+		"try return 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz'".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_18() throws Exception {
+		"try return 'foo' catch (Exception e) 'bar' catch(RuntimeException e) 'baz' finally true".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_19() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_20() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_21() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(NullPointerException e) 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_22() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_23() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) null as Number
+		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_24() throws Exception {
+		"try 'foo' catch (Exception e) return 'bar'".resolvesTo("String") 
+	}
+	
+	@Test def void testTryCatchFinallyExpression_25() throws Exception {
+		"try 1 catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'".resolvesTo("int")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_26() throws Exception {
+		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return 1 finally true".resolvesTo("String")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_27() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'".resolvesTo("Boolean")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_28() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}".resolvesTo("Boolean")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_29() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(NullPointerException e) return 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("Boolean")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_30() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Boolean")	
+	}
+	
+	@Test def void testTryCatchFinallyExpression_31() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) return null as Number
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Boolean")	
 	}
 
 	@Test def void testForExpression_01() throws Exception {
@@ -501,7 +622,39 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testForExpression_04() throws Exception {
 		"for(x : null as String[]) x.length".resolvesTo("void")
 	}
-
+	
+	@Test def void testForExpression_05() throws Exception {
+		"for(String x : new java.util.ArrayList<String>()) return x.length".resolvesTo("void")
+		"for(String x : newArrayList('foo')) return x.length".resolvesTo("void")
+		"for(String x : <String>newArrayList()) return x.length".resolvesTo("void")
+	}
+	
+	@Test def void testForExpression_06() throws Exception {
+		"for(x : new java.util.ArrayList<String>()) return x.length".resolvesTo("void")
+		"for(x : <String>newArrayList()) return x.length".resolvesTo("void")
+		"for(x : newArrayList('foo')) return x.length".resolvesTo("void")
+	}
+	
+	@Test def void testForExpression_07() throws Exception {
+		"for(String x : null as String[]) return x.length".resolvesTo("void")
+	}
+	
+	@Test def void testForExpression_08() throws Exception {
+		"for(x : null as String[]) return x.length".resolvesTo("void")
+	}
+	
+	@Test def void testForExpression_09() throws Exception {
+		"for(x : null as String[]) return".resolvesTo("void")
+	}
+	
+	@Test def void testWhileExpression_01() throws Exception {
+		"while(true) ''.length".resolvesTo("void")
+	}
+	
+	@Test def void testWhileExpression_02() throws Exception {
+		"while(true) return ''.length".resolvesTo("void")
+	}
+	
 	@Test def void testImplicitImportPrintln_01() throws Exception {
 		"println(null)".resolvesTo("Object")
 	}
@@ -562,6 +715,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testFeatureCallWithArrayToIterableConversion_04() throws Exception {
         "(null as String[][]).head".resolvesTo("String[]")
     }
+    
+    @Test def void testReturnType_00() throws Exception {
+		"return".resolvesTo("void")
+	}
 	
 	@Test def void testReturnType_01() throws Exception {
 		"return 'foo'".resolvesTo("void")
@@ -905,6 +1062,26 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testIfExpression_15() throws Exception {
         "if (true) null else null".resolvesTo("null")
     }
+    
+    @Test def void testIfExpression_16() throws Exception {
+		"if (true) return 1 else 0".resolvesTo("int")
+	}
+	
+	@Test def void testIfExpression_17() throws Exception {
+		"if (true) return 1".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_18() throws Exception {
+		"if (true) return".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_19() throws Exception {
+		"if (true) return else null".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_20() throws Exception {
+		"if (true) return else return".resolvesTo("void")
+	}
 	
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
@@ -1013,6 +1190,19 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
             case null : [Object it | it]
             case null : [Integer it | it]
         }".resolvesTo("(Integer)=>Object").isFunctionAndEquivalentTo("Function1<? super Integer, ?>")
+	}
+	
+	@Test def void testSwitchExpression_11() throws Exception {
+		"switch null {
+		  Object : return 
+		}".resolvesTo("null")
+	}
+	
+	@Test def void testSwitchExpression_12() throws Exception {
+		"switch null {
+		  Object : return
+		  default: return
+		}".resolvesTo("void")
 	}
 	
 	@Test def void testTypeGuardedCase_0() throws Exception {

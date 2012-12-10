@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -50,6 +51,16 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 			return result;
 		}
 		return getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, hints);
+	}
+	
+	@Override
+	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
+		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expectation);
+	}
+	
+	@Override
+	public AbstractTypeComputationState withoutExpectation() {
+		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, null);
 	}
 	
 	@Override

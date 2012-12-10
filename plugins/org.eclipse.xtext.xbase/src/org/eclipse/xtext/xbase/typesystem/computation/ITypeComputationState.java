@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -84,6 +85,8 @@ public interface ITypeComputationState {
 	List<? extends IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall);
 	
 	void acceptActualType(LightweightTypeReference type);
+	
+	void acceptActualType(LightweightTypeReference type, ConformanceHint... hints);
 	
 	// TODO implement this better, especially for instanceof in conditions
 	
