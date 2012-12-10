@@ -5,25 +5,32 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.configuration;
+package org.eclipse.xtext.preferences;
+
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class StringKey extends SingleValueConfigurationKey<String> {
+public class BooleanKey extends IPreferenceKey.AbstractKey<Boolean> {
 
-	public StringKey(String name, String defaultValue) {
-		super(name, defaultValue);
+	private final boolean defaultValue;
+
+	public BooleanKey(String name, boolean defaultValue) {
+		super(name);
+		this.defaultValue = defaultValue;
+	}
+	
+	public Boolean stringToValue(String value) {
+		return Boolean.parseBoolean(value);
 	}
 
-	@Override
-	protected String load(String storedValue) {
-		return storedValue;
+	public String valueToString(Boolean value) {
+		return String.valueOf(value);
 	}
 
-	@Override
-	protected String store(String value) {
-		return value;
+	public Boolean getDefaultValue() {
+		return defaultValue;
 	}
 
 }

@@ -6,17 +6,17 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
-import org.eclipse.xtext.xbase.formatting.IFormatter;
+import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public abstract class AbstractFormatter implements IFormatter {
+public abstract class AbstractFormatter implements IBasicFormatter {
   private boolean _allowIdentityEdits = false;
   
   public boolean isAllowIdentityEdits() {
@@ -37,7 +37,7 @@ public abstract class AbstractFormatter implements IFormatter {
     this._diagnoseConflicts = diagnoseConflicts;
   }
   
-  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IConfigurationValues cfg) {
+  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IPreferenceValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
       IParseResult _parseResult = res.getParseResult();

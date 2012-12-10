@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,11 +17,10 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
-import org.eclipse.xtext.xbase.formatting.IFormatter;
-import org.eclipse.xtext.xbase.formatting.IFormatterConfigKeys;
+import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -38,16 +38,14 @@ public class FormatterTester {
   private ParseHelper<EObject> _parseHelper;
   
   @Inject
-  private IFormatter formatter;
-  
-  @Inject
-  private IFormatterConfigKeys keys;
+  private IBasicFormatter formatter;
   
   public void assertFormatted(final Procedure1<? super AssertingFormatterData> init) {
     AssertingFormatterData _assertingFormatterData = new AssertingFormatterData();
     final AssertingFormatterData data = _assertingFormatterData;
-    MapBasedConfigurationValues _mapBasedConfigurationValues = new MapBasedConfigurationValues(this.keys);
-    data.setCfg(_mapBasedConfigurationValues);
+    HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
+    MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(_newHashMap);
+    data.setCfg(_mapBasedPreferenceValues);
     init.apply(data);
     this.assertFormatted(data);
   }
@@ -75,7 +73,7 @@ public class FormatterTester {
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String oldDocument = _rootNode.getText();
-      final IFormatter formatter = this.formatter;
+      final IBasicFormatter formatter = this.formatter;
       boolean _matched = false;
       if (!_matched) {
         if (formatter instanceof AbstractFormatter) {
@@ -90,7 +88,7 @@ public class FormatterTester {
       final int length = _toBeFormatted_1.length();
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();
-      MapBasedConfigurationValues _cfg = it.getCfg();
+      MapBasedPreferenceValues _cfg = it.getCfg();
       List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), start, length, _cfg);
       Iterables.<TextReplacement>addAll(edits, _format);
       boolean _isAllowErrors_1 = it.isAllowErrors();
@@ -123,7 +121,7 @@ public class FormatterTester {
       }
       Resource _eResource_5 = parsed.eResource();
       int _length = fullToBeParsed.length();
-      MapBasedConfigurationValues _cfg_1 = it.getCfg();
+      MapBasedPreferenceValues _cfg_1 = it.getCfg();
       List<TextReplacement> _format_1 = this.formatter.format(((XtextResource) _eResource_5), 0, _length, _cfg_1);
       final String parsed2Doc = this.applyEdits(fullToBeParsed, _format_1);
       final EObject parsed2 = this._parseHelper.parse(parsed2Doc);
@@ -137,7 +135,7 @@ public class FormatterTester {
       }
       Resource _eResource_7 = parsed2.eResource();
       int _length_1 = parsed2Doc.length();
-      MapBasedConfigurationValues _cfg_2 = it.getCfg();
+      MapBasedPreferenceValues _cfg_2 = it.getCfg();
       final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_7), 0, _length_1, _cfg_2);
       final String newDocument2 = this.applyEdits(parsed2Doc, edits2);
       try {

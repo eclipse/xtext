@@ -1,12 +1,11 @@
 package org.eclipse.xtext.xbase.tests.formatting
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys
 import org.junit.Test
 
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+
 class XbaseFormatterTest extends AbstractXbaseFormatterTest {
-	
-	@Inject extension XbaseFormatterConfigKeys
 	
 	@Test def formatGenerics() {
 		assertFormattedExpression('''

@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.xbase.configuration.IntegerKey;
+import org.eclipse.xtext.preferences.IntegerKey;
 
 @SuppressWarnings("all")
 public class BlankLineKey extends IntegerKey {

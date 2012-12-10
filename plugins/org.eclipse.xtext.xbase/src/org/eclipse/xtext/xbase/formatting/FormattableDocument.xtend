@@ -3,18 +3,20 @@ package org.eclipse.xtext.xbase.formatting
 import java.util.List
 import java.util.TreeMap
 import org.apache.log4j.Logger
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues
+import org.eclipse.xtext.preferences.IPreferenceValues
 import org.eclipse.xtext.xbase.lib.Pair
+
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
-	@Property val IConfigurationValues cfg
+	@Property val IPreferenceValues cfg
 	@Property val String document
 	@Property val TreeMap<Integer, FormattingData> formattings
 	@Property Throwable rootTrace = null
 	@Property boolean conflictOccurred = false
 	
-	new(IConfigurationValues cfg, String document){
+	new(IPreferenceValues cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()
@@ -28,10 +30,6 @@ class FormattableDocument {
 	
 	def boolean isDebugConflicts() {
 		rootTrace != null
-	}
-	
-	def protected AbstractFormatterConfigurationKeys getKeys() {
-		cfg.keys as AbstractFormatterConfigurationKeys
 	}
 	
 	def protected addFormatting(FormattingData data) {
@@ -237,7 +235,7 @@ class FormattableDocument {
 			return false
 		} else {
 			val line = lineLengthBefore(offset) + lookahead.length
-			return line <= cfg.get(keys.maxLineWidth)
+			return line <= cfg.getPreference(maxLineWidth)
 		}
 	}
 	
@@ -257,24 +255,23 @@ class FormattableDocument {
 	
 	def getIndentation(int levels) {
 		if (levels > 0) {
-			val indent = cfg.get(keys.indentation)
+			val indent = cfg.getPreference(indentation)
 			(0 .. levels - 1).map[indent].join
 		} else
 			""
 	}
 
 	def getIndentationLenght(int levels) {
-		levels * cfg.get(keys.indentationLength)
+		levels * cfg.getPreference(indentationLength)
 	}
 
 	def getWrap(int levels) {
 		if (levels > 0) {
-			val sep = cfg.get(keys.lineSeparator)
+			val sep = cfg.getPreference(lineSeparator)
 			(0 .. levels - 1).map[sep].join
 		} else
 			""
 	}
-	
 	
 }
 

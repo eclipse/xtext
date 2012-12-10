@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.xbase.configuration.BooleanKey;
+import org.eclipse.xtext.preferences.BooleanKey;
 
 @SuppressWarnings("all")
 public class WhitespaceKey extends BooleanKey {

@@ -5,35 +5,36 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.configuration;
+package org.eclipse.xtext.preferences;
 
-import org.apache.log4j.Logger;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class IntegerKey extends SingleValueConfigurationKey<Integer> {
+public class IntegerKey extends IPreferenceKey.AbstractKey<Integer> {
 
-	private static Logger log = Logger.getLogger(IntegerKey.class);
+	private Integer defaultValue;
 
 	public IntegerKey(String name, Integer defaultValue) {
-		super(name, defaultValue);
+		super(name);
+		this.defaultValue = defaultValue;
 	}
-
-	@Override
-	protected Integer load(String storedValue) {
+	
+	public Integer stringToValue(String value) {
 		try {
-			if (storedValue != null && !"".equals(storedValue))
-				return Integer.parseInt(storedValue);
+			return Integer.parseInt(value);
 		} catch (NumberFormatException e) {
-			log.error("error parsing configuration as integer. Key:" + getName() + " Value:" + storedValue, e);
+			throw new IllegalArgumentException(e);
 		}
-		return getDefaultValue();
+	}
+	
+	public String valueToString(Integer value) {
+		return String.valueOf(value);
 	}
 
-	@Override
-	protected String store(Integer value) {
-		return String.valueOf(value);
+	public Integer getDefaultValue() {
+		return defaultValue;
 	}
 
 }

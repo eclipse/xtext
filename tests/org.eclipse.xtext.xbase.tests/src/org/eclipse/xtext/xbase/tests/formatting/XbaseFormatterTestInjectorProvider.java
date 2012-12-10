@@ -8,10 +8,8 @@
 package org.eclipse.xtext.xbase.tests.formatting;
 
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.formatting.IFormatter;
-import org.eclipse.xtext.xbase.formatting.IFormatterConfigKeys;
+import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2;
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 
 import com.google.inject.Guice;
@@ -33,8 +31,7 @@ public class XbaseFormatterTestInjectorProvider extends XbaseInjectorProvider {
 				@Override
 				public void configure(com.google.inject.Binder binder) {
 					super.configure(binder);
-					binder.bind(IFormatter.class).to(XbaseFormatter2.class);
-					binder.bind(IFormatterConfigKeys.class).to(XbaseFormatterConfigKeys.class);
+					binder.bind(IBasicFormatter.class).to(XbaseFormatter2.class);
 				}
 			});
 		}

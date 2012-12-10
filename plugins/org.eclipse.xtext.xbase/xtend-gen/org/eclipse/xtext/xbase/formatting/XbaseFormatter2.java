@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.TypesPackage.Literals;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -47,8 +48,8 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
+import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
@@ -56,7 +57,7 @@ import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys;
+import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -77,9 +78,6 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   @Inject
   private FormattingDataFactory _formattingDataFactory;
-  
-  @Inject
-  private XbaseFormatterConfigKeys _xbaseFormatterConfigKeys;
   
   @Inject
   private XbaseGrammarAccess _xbaseGrammarAccess;
@@ -526,9 +524,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
       int _lineLengthBefore = fmt.lineLengthBefore(_offset);
       int _length = lookahead.length();
       final int length = (_lineLengthBefore + _length);
-      IConfigurationValues _cfg = fmt.getCfg();
-      Integer _get = _cfg.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
-      return (length <= (_get).intValue());
+      IPreferenceValues _cfg = fmt.getCfg();
+      Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
+      return (length <= (_preference).intValue());
     }
   }
   
@@ -1158,9 +1156,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
             if (_isMultiParamInOwnLine) {
               int _length_2 = featureNode.getLength();
               int _plus_1 = (lineLength + _length_2);
-              IConfigurationValues _cfg = format.getCfg();
-              Integer _get = _cfg.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
-              boolean _lessThan = (_plus_1 < (_get).intValue());
+              IPreferenceValues _cfg = format.getCfg();
+              Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
+              boolean _lessThan = (_plus_1 < (_preference).intValue());
               if (_lessThan) {
                 final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
@@ -1185,9 +1183,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
               int _length_3 = featureNode.getLength();
               int _multiply = (_length_3 * 2);
               int _plus_2 = (lineLength + _multiply);
-              IConfigurationValues _cfg_1 = format.getCfg();
-              Integer _get_1 = _cfg_1.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
-              boolean _lessThan_1 = (_plus_2 < (_get_1).intValue());
+              IPreferenceValues _cfg_1 = format.getCfg();
+              Integer _preference_1 = _cfg_1.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
+              boolean _lessThan_1 = (_plus_2 < (_preference_1).intValue());
               if (_lessThan_1) {
                 _or = true;
               } else {
@@ -1242,9 +1240,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
             int _length_4 = featureNode.getLength();
             final int shortLenght = (_lineLengthBefore + _length_4);
-            IConfigurationValues _cfg_2 = format.getCfg();
-            Integer _get_2 = _cfg_2.<Integer>get(this._xbaseFormatterConfigKeys.maxLineWidth);
-            boolean _lessThan_2 = (shortLenght < (_get_2).intValue());
+            IPreferenceValues _cfg_2 = format.getCfg();
+            Integer _preference_2 = _cfg_2.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
+            boolean _lessThan_2 = (shortLenght < (_preference_2).intValue());
             if (_lessThan_2) {
               final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
@@ -1496,7 +1494,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "if");
       final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML);
+            it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(_nodeForKeyword_1, _function_3);
@@ -1505,7 +1503,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "if");
       final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisSL);
+            it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForKeyword_2, _function_4);
@@ -1515,7 +1513,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_then_2 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(thennode, _function_5);
@@ -1525,7 +1523,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if (_notEquals) {
         final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+              it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
             }
           };
         Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formattingDataFactory.append(thennode, _function_6);
@@ -1587,7 +1585,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_else_4 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_12 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_3 = this._formattingDataFactory.prepend(elsenode, _function_12);
@@ -1701,7 +1699,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_eachExpression_1 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(each, _function_3);
@@ -1733,7 +1731,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "while");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
-          it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML);
+          it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
         }
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
@@ -1758,7 +1756,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_body_1 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(body, _function_3);
@@ -1790,7 +1788,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "while");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
-          it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML);
+          it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
         }
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
@@ -1815,14 +1813,14 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_body_1 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(body, _function_3);
       format.operator_add(_prepend);
       final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(body, _function_4);
@@ -1887,7 +1885,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       } else {
         final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.blankLinesAroundExpression);
+              it.cfg(XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
               it.increaseIndentation();
             }
           };
@@ -1921,7 +1919,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 format.operator_add(_prepend_1);
                 final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
-                      it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.blankLinesAroundExpression);
+                      it.cfg(XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
                     }
                   };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(sem, _function_4);
@@ -1929,7 +1927,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               } else {
                 final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
-                      it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.blankLinesAroundExpression);
+                      it.cfg(XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
                     }
                   };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(childNode, _function_5);
@@ -2043,14 +2041,14 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_expression_1 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(body, _function);
       format.operator_add(_prepend);
       final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(body, _function_1);
@@ -2096,7 +2094,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(cc);
             final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
-                  it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+                  it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
                 }
               };
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(_nodeForEObject, _function_4);
@@ -2123,7 +2121,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if ((_finallyExpression_2 instanceof XBlockExpression)) {
         final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+              it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
             }
           };
         Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_2 = this._formattingDataFactory.prepend(fin, _function_4);
@@ -2154,7 +2152,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "catch");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
-          it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.whitespaceBetweenKeywordAndParenthesisML);
+          it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
         }
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
@@ -2186,7 +2184,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_expression_1 instanceof XBlockExpression)) {
       final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
           public void apply(final FormattingDataInit it) {
-            it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+            it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
           }
         };
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(body, _function_2);
@@ -2370,7 +2368,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if (caseSL) {
         final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+              it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
             }
           };
         Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_1 = this._formattingDataFactory.prepend(open, _function_7);
@@ -2447,7 +2445,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       } else {
         final Procedure1<FormattingDataInit> _function_13 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+              it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
             }
           };
         Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_4 = this._formattingDataFactory.prepend(open, _function_13);
@@ -2469,7 +2467,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             if ((_then_1 instanceof XBlockExpression)) {
               final Procedure1<FormattingDataInit> _function_15 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {
-                    it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+                    it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
                   }
                 };
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_5 = this._formattingDataFactory.prepend(cnode, _function_15);
@@ -2563,7 +2561,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             INode _nodeForEObject_4 = this._nodeModelAccess.nodeForEObject(_default_7);
             final Procedure1<FormattingDataInit> _function_16 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
-                  it.cfg(XbaseFormatter2.this._xbaseFormatterConfigKeys.bracesInNewLine);
+                  it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
                 }
               };
             final Procedure1<FormattingDataInit> _function_17 = new Procedure1<FormattingDataInit>() {

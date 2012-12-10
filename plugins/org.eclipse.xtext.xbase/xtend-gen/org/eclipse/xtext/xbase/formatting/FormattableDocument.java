@@ -7,9 +7,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.configuration.IConfigurationKeys;
-import org.eclipse.xtext.xbase.configuration.IConfigurationValues;
-import org.eclipse.xtext.xbase.formatting.AbstractFormatterConfigurationKeys;
+import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.NewLineData;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
@@ -34,9 +33,9 @@ public class FormattableDocument {
     }
   }.apply();
   
-  private final IConfigurationValues _cfg;
+  private final IPreferenceValues _cfg;
   
-  public IConfigurationValues getCfg() {
+  public IPreferenceValues getCfg() {
     return this._cfg;
   }
   
@@ -72,7 +71,7 @@ public class FormattableDocument {
     this._conflictOccurred = conflictOccurred;
   }
   
-  public FormattableDocument(final IConfigurationValues cfg, final String document) {
+  public FormattableDocument(final IPreferenceValues cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
     TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
@@ -80,7 +79,7 @@ public class FormattableDocument {
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    IConfigurationValues _cfg = fmt.getCfg();
+    IPreferenceValues _cfg = fmt.getCfg();
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
@@ -93,12 +92,6 @@ public class FormattableDocument {
     Throwable _rootTrace = this.getRootTrace();
     boolean _notEquals = ObjectExtensions.operator_notEquals(_rootTrace, null);
     return _notEquals;
-  }
-  
-  protected AbstractFormatterConfigurationKeys getKeys() {
-    IConfigurationValues _cfg = this.getCfg();
-    IConfigurationKeys _keys = _cfg.getKeys();
-    return ((AbstractFormatterConfigurationKeys) _keys);
   }
   
   protected FormattingData addFormatting(final FormattingData data) {
@@ -641,10 +634,9 @@ public class FormattableDocument {
       int _lineLengthBefore = this.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      IConfigurationValues _cfg = this.getCfg();
-      AbstractFormatterConfigurationKeys _keys = this.getKeys();
-      Integer _get = _cfg.<Integer>get(_keys.maxLineWidth);
-      return (line <= (_get).intValue());
+      IPreferenceValues _cfg = this.getCfg();
+      Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
+      return (line <= (_preference).intValue());
     }
   }
   
@@ -698,9 +690,8 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IConfigurationValues _cfg = this.getCfg();
-        AbstractFormatterConfigurationKeys _keys = this.getKeys();
-        final String indent = _cfg.<String>get(_keys.indentation);
+        IPreferenceValues _cfg = this.getCfg();
+        final String indent = _cfg.<String>getPreference(BasicFormatterPreferenceKeys.indentation);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
@@ -720,10 +711,9 @@ public class FormattableDocument {
   }
   
   public int getIndentationLenght(final int levels) {
-    IConfigurationValues _cfg = this.getCfg();
-    AbstractFormatterConfigurationKeys _keys = this.getKeys();
-    Integer _get = _cfg.<Integer>get(_keys.indentationLength);
-    int _multiply = (levels * (_get).intValue());
+    IPreferenceValues _cfg = this.getCfg();
+    Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.indentationLength);
+    int _multiply = (levels * (_preference).intValue());
     return _multiply;
   }
   
@@ -733,9 +723,8 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IConfigurationValues _cfg = this.getCfg();
-        AbstractFormatterConfigurationKeys _keys = this.getKeys();
-        final String sep = _cfg.<String>get(_keys.lineSeparator);
+        IPreferenceValues _cfg = this.getCfg();
+        final String sep = _cfg.<String>getPreference(BasicFormatterPreferenceKeys.lineSeparator);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {

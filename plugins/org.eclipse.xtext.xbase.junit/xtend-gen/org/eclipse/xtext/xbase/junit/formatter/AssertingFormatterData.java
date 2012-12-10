@@ -1,16 +1,16 @@
 package org.eclipse.xtext.xbase.junit.formatter;
 
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 
 @SuppressWarnings("all")
 public class AssertingFormatterData {
-  private MapBasedConfigurationValues _cfg;
+  private MapBasedPreferenceValues _cfg;
   
-  public MapBasedConfigurationValues getCfg() {
+  public MapBasedPreferenceValues getCfg() {
     return this._cfg;
   }
   
-  public void setCfg(final MapBasedConfigurationValues cfg) {
+  public void setCfg(final MapBasedPreferenceValues cfg) {
     this._cfg = cfg;
   }
   

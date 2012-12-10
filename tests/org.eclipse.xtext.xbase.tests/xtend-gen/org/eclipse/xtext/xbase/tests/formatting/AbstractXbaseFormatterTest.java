@@ -3,8 +3,8 @@ package org.eclipse.xtext.xbase.tests.formatting;
 import javax.inject.Inject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues;
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterConfigKeys;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -19,14 +19,11 @@ public abstract class AbstractXbaseFormatterTest {
   @Inject
   private FormatterTester tester;
   
-  @Inject
-  private XbaseFormatterConfigKeys keys;
-  
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence toBeFormatted) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, toBeFormatted, toBeFormatted);
   }
   
@@ -38,11 +35,11 @@ public abstract class AbstractXbaseFormatterTest {
     this.assertFormattedExpression(null, expectation, toBeFormatted);
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, expectation, toBeFormatted, false);
   }
   
-  public void assertFormattedExpression(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
+  public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
     String _string = expectation.toString();
     String _trim = _string.trim();
     String _replace = _trim.replace("\n", "\n\t");
@@ -54,7 +51,7 @@ public abstract class AbstractXbaseFormatterTest {
       "\n}", allowErrors);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation) {
+  public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {
     this.assertFormatted(cfg, expectation, expectation);
   }
   
@@ -62,14 +59,14 @@ public abstract class AbstractXbaseFormatterTest {
     this.assertFormatted(null, expectation, toBeFormatted);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
+  public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(cfg, expectation, toBeFormatted, "", "", false);
   }
   
-  public void assertFormatted(final Procedure1<? super MapBasedConfigurationValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
+  public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
         public void apply(final AssertingFormatterData it) {
-          MapBasedConfigurationValues _cfg = it.getCfg();
+          MapBasedPreferenceValues _cfg = it.getCfg();
           AbstractXbaseFormatterTest.this.initConfig(_cfg, cfg);
           it.setExpectation(expectation);
           it.setToBeFormatted(toBeFormatted);
@@ -81,8 +78,8 @@ public abstract class AbstractXbaseFormatterTest {
     this.tester.assertFormatted(_function);
   }
   
-  public void initConfig(final MapBasedConfigurationValues target, final Procedure1<? super MapBasedConfigurationValues> cfg) {
-    target.<Integer>put(this.keys.maxLineWidth, Integer.valueOf(80));
+  public void initConfig(final MapBasedPreferenceValues target, final Procedure1<? super MapBasedPreferenceValues> cfg) {
+    target.<Integer>put(BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
     boolean _notEquals = ObjectExtensions.operator_notEquals(cfg, null);
     if (_notEquals) {
       cfg.apply(target);

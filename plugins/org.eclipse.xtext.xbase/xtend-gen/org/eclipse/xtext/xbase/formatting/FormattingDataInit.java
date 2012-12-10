@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.xbase.configuration.IConfigurationKey;
+import org.eclipse.xtext.preferences.IPreferenceKey;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @SuppressWarnings("all")
@@ -11,9 +11,9 @@ public class FormattingDataInit {
   
   public int indentationChange = 0;
   
-  public IConfigurationKey<? extends Object> key = null;
+  public IPreferenceKey<? extends Object> key = null;
   
-  public void cfg(final IConfigurationKey<? extends Object> key) {
+  public void cfg(final IPreferenceKey<? extends Object> key) {
     this.key = key;
   }
   

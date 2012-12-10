@@ -256,7 +256,7 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
 
-		Combo comboBox = newComboControl(parent, issueCode.getCode(), values, valueLabels);
+		Combo comboBox = newComboControl(parent, issueCode.getId(), values, valueLabels);
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 
 		labels.put(comboBox, labelControl);

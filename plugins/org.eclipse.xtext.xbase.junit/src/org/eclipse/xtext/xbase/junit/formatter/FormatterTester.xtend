@@ -4,23 +4,21 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.xbase.configuration.MapBasedConfigurationValues
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter
-import org.eclipse.xtext.xbase.formatting.IFormatter
-import org.eclipse.xtext.xbase.formatting.IFormatterConfigKeys
+import org.eclipse.xtext.xbase.formatting.IBasicFormatter
 import org.eclipse.xtext.xbase.formatting.TextReplacement
 import org.junit.Assert
 
 @SuppressWarnings("restriction")
 class FormatterTester {
 	@Inject extension ParseHelper<EObject>
-	@Inject IFormatter formatter
-	@Inject IFormatterConfigKeys keys
+	@Inject IBasicFormatter formatter
 
 	def assertFormatted((AssertingFormatterData)=>void init) {
 		val data = new AssertingFormatterData
-		data.cfg = new MapBasedConfigurationValues(keys)
+		data.cfg = new MapBasedPreferenceValues(newHashMap)
 		init.apply(data)
 		assertFormatted(data)
 	}
@@ -107,7 +105,7 @@ class FormatterTester {
 }
 
 class AssertingFormatterData {
-	@Property MapBasedConfigurationValues cfg
+	@Property MapBasedPreferenceValues cfg
 	@Property CharSequence expectation
 	@Property CharSequence toBeFormatted
 	@Property String prefix

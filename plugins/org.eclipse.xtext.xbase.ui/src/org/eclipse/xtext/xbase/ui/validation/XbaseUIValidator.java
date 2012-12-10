@@ -87,6 +87,9 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	private static final int VALIDREFERENCEID = 0;
 
 	protected void checkRestrictedType(EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
+		if (isIgnored(DISCOURAGED_REFERENCE) && isIgnored(FORBIDDEN_REFERENCE))
+			return;
+		
 		IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 		
 		if(javaProject == null)
@@ -126,14 +129,13 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		Object element = getContext().get(typeToCheck);
 		if (element != null) {
 			if (element.equals(FORBIDDENREFERENCEID)) {
-				notification(
-						IssueCodes.IC_FORBIDDEN_REFERENCE,
+				addIssue(context, IssueCodes.FORBIDDEN_REFERENCE,
 						"Access restriction: The type " + simpleName
 								+ " is not accessible due to restriction on required project "
 								+ declaringJavaProject.getElementName(), feature);
 			} else if (element.equals(DISCOURAGEDREFERENCEID)) {
-				notification(
-						IssueCodes.IC_DISCOURAGED_REFERENCE,
+				addIssue(context,
+						IssueCodes.DISCOURAGED_REFERENCE,
 						"Discouraged access: The type " + simpleName
 								+ " is not accessible due to restriction on required project "
 								+ declaringJavaProject.getElementName(), feature);

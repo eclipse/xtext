@@ -5,15 +5,31 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.configuration;
+package org.eclipse.xtext.preferences;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class TransientKey<T> extends AbstractConfigurationKey<T> {
+public class StringKey extends IPreferenceKey.AbstractKey<String> {
 
-	public TransientKey(String name, T defaultValue) {
-		super(name, defaultValue);
+	private String defaultValue;
+
+	public StringKey(String name, String defaultValue) {
+		super(name);
+		this.defaultValue = defaultValue;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	public String valueToString(String value) {
+		return value;
+	}
+
+	public String stringToValue(String value) {
+		return value;
 	}
 
 }
