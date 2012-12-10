@@ -30,17 +30,17 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 	@Override
 	public List<AbstractTypeExpectation> getExpectations(
 			AbstractTypeComputationState actualState) {
-		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false);
+		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState);
 		return Collections.singletonList(result);
 	}
 
 	@Override
 	protected List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation) {
-		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, !asActualExpectation);
+		AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState);
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, final boolean returnType) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());

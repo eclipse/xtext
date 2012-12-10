@@ -84,9 +84,9 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
         _builder_2.append("}");
         this.doResolvesTo(_builder_2.toString(), type);
         StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("{ { return { if (true) ");
+        _builder_3.append("{ { return { ( if (true) ");
         _builder_3.append(replacedExpressionText, "");
-        _builder_3.append(" {");
+        _builder_3.append(" ) {");
         _builder_3.append(replacedExpressionText, "");
         _builder_3.append("} }");
         this.doResolvesTo(_builder_3.toString(), type);
@@ -97,9 +97,9 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
         _builder_4.append(" }");
         this.doResolvesTo(_builder_4.toString(), type);
         StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append("{ if (true) ");
+        _builder_5.append("{ ( if (true) ");
         _builder_5.append(replacedExpressionText, "");
-        _builder_5.append(" {");
+        _builder_5.append(" ) {");
         _builder_5.append(replacedExpressionText, "");
         _builder_5.append("} }");
         this.doResolvesTo(_builder_5.toString(), type);

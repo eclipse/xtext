@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -50,6 +52,10 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 
 	public boolean isResolved(Object handle) {
 		throw new UnsupportedOperationException();
+	}
+	
+	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+		return Collections.emptyList();
 	}
 	
 }

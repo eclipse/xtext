@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -108,13 +109,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 * Assign computed type references to the identifiable structural elements in the processed type.
 	 * @return the stacked resolved types that shall be used in the computation.
 	 */
-	protected Map<JvmDeclaredType, ResolvedTypes> prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
-		Map<JvmDeclaredType, ResolvedTypes> resolvedTypesByType = Maps.newHashMapWithExpectedSize(3); 
+	protected Map<JvmIdentifiableElement, ResolvedTypes> prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+		Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType = Maps.newHashMapWithExpectedSize(3); 
 		doPrepare(resolvedTypes, featureScopeSession, getRoot(), resolvedTypesByType);
 		return resolvedTypesByType;
 	}
 	
-	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element, Map<JvmDeclaredType, ResolvedTypes> resolvedTypesByType) {
+	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
 		if (element instanceof JvmDeclaredType) {
 			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element, resolvedTypesByType);
 		} else if (element instanceof JvmConstructor) {
@@ -126,13 +127,16 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
-	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmDeclaredType, ResolvedTypes> resolvedTypesByType) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
 		prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
 	}
 
-	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession childSession, JvmDeclaredType type, Map<JvmDeclaredType, ResolvedTypes> resolvedTypesByType) {
+	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession childSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
 		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
+		if (type instanceof JvmGenericType) {
+			childResolvedTypes.addDeclaredTypeParameters(((JvmGenericType) type).getTypeParameters());
+		}
 		resolvedTypesByType.put(type, childResolvedTypes);
 		
 		JvmTypeReference superType = getExtendedClass(type);
@@ -213,12 +217,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
-		Map<JvmDeclaredType, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);
+		Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);
 		computeTypes(preparedResolvedTypes, resolvedTypes, session, getRoot());
 		processResult(resolvedTypes);
 	}
 	
-	protected void computeTypes(Map<JvmDeclaredType, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
+	protected void computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmDeclaredType) {
 			_computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, (JvmDeclaredType) element);
 		} else {
@@ -291,7 +295,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
-	protected void _computeTypes(Map<JvmDeclaredType, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(type);
 		if (childResolvedTypes == null)
 			throw new IllegalStateException("No resolved type found. Type was: " + type.getIdentifier());
@@ -302,7 +306,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			((StackedResolvedTypes) childResolvedTypes).mergeIntoParent();
 	}
 
-	protected void computeMemberTypes(Map<JvmDeclaredType, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmDeclaredType type) {
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {

@@ -74,7 +74,10 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getType(XExpression expression) {
-		return getResolvedTypes(expression).getActualType(expression).toTypeReference();
+		LightweightTypeReference type = getResolvedTypes(expression).getActualType(expression);
+		if (type == null)
+			return null;
+		return type.toTypeReference();
 	}
 
 	@Override

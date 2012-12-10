@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -36,6 +37,10 @@ public abstract class TypeParameterByUnboundSubstitutor extends CustomTypeParame
 	
 	@Override
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
+		List<JvmTypeParameter> declaredTypeParameters = getOwner().getDeclaredTypeParameters();
+		if (declaredTypeParameters.contains(type)) {
+			return reference;
+		}
 		UnboundTypeReference result = createUnboundTypeReference(type);
 		return result;
 	}

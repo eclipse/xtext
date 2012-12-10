@@ -112,6 +112,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBooleanLiteral_02() throws Exception {
+    this.resolvesTo("return true", "void");
+  }
+  
+  @Test
   public void testStringLiteral_01() throws Exception {
     this.resolvesTo("\'foo\'", "String");
     this.resolvesTo("\"foo\"", "String");
@@ -491,43 +496,163 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testTryCatchFinallyExpression_0() throws Exception {
+  public void testTryCatchFinallyExpression_00() throws Exception {
     this.resolvesTo("try \'foo\' catch (Exception e) \'bar\'", "String");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_1() throws Exception {
+  public void testTryCatchFinallyExpression_01() throws Exception {
     this.resolvesTo("try \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\'", "String");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_2() throws Exception {
+  public void testTryCatchFinallyExpression_02() throws Exception {
     this.resolvesTo("try \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\' finally true", "String");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_3() throws Exception {
+  public void testTryCatchFinallyExpression_03() throws Exception {
     this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) \'caught\'", "Serializable & Comparable<?>");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_4() throws Exception {
+  public void testTryCatchFinallyExpression_04() throws Exception {
     this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) {\'caught\'}", "Serializable & Comparable<?>");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_5() throws Exception {
+  public void testTryCatchFinallyExpression_05() throws Exception {
     this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(NullPointerException e) \'second thing is thrown\'\t\t  \n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t", "Serializable & Comparable<?>");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_6() throws Exception {
+  public void testTryCatchFinallyExpression_06() throws Exception {
     this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "Serializable & Comparable<?>");
   }
   
   @Test
-  public void testTryCatchFinallyExpression_7() throws Exception {
+  public void testTryCatchFinallyExpression_07() throws Exception {
     this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) null as Number\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "Serializable");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_08() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) return \'bar\'", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_09() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) return \'bar\' catch(RuntimeException e) return \'baz\'", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_10() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) return \'bar\' catch(RuntimeException e) return \'baz\' finally true", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_11() throws Exception {
+    this.resolvesTo("try { return \'literal\' as Object as Boolean } catch(ClassCastException e) return \'caught\'", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_12() throws Exception {
+    this.resolvesTo("try { return \'literal\' as Object as Boolean } catch(ClassCastException e) {return \'caught\'}", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_13() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(NullPointerException e) return \'second thing is thrown\'\t\t  \n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_14() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t  catch(NullPointerException e) return \'dont catch subsequent exceptions\'", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_15() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) return null as Number\n\t\t  catch(NullPointerException e) return \'dont catch subsequent exceptions\'", "void");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_16() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) \'bar\'", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_17() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\'", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_18() throws Exception {
+    this.resolvesTo("try return \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\' finally true", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_19() throws Exception {
+    this.resolvesTo("try { return \'literal\' as Object as Boolean } catch(ClassCastException e) \'caught\'", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_20() throws Exception {
+    this.resolvesTo("try { return \'literal\' as Object as Boolean } catch(ClassCastException e) {\'caught\'}", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_21() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(NullPointerException e) \'second thing is thrown\'\t\t  \n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_22() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_23() throws Exception {
+    this.resolvesTo("try return \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) null as Number\n\t\t  catch(NullPointerException e) \'dont catch subsequent exceptions\'", "Serializable");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_24() throws Exception {
+    this.resolvesTo("try \'foo\' catch (Exception e) return \'bar\'", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_25() throws Exception {
+    this.resolvesTo("try 1 catch (Exception e) return \'bar\' catch(RuntimeException e) return \'baz\'", "int");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_26() throws Exception {
+    this.resolvesTo("try \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) return 1 finally true", "String");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_27() throws Exception {
+    this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) return \'caught\'", "Boolean");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_28() throws Exception {
+    this.resolvesTo("try { \'literal\' as Object as Boolean } catch(ClassCastException e) {return \'caught\'}", "Boolean");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_29() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(NullPointerException e) return \'second thing is thrown\'\t\t  \n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t", "Boolean");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_30() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) throw new NullPointerException()\n\t\t  catch(NullPointerException e) return \'dont catch subsequent exceptions\'", "Boolean");
+  }
+  
+  @Test
+  public void testTryCatchFinallyExpression_31() throws Exception {
+    this.resolvesTo("try \'literal\' as Object as Boolean\n\t\t  catch(ClassCastException e) return null as Number\n\t\t  catch(NullPointerException e) return \'dont catch subsequent exceptions\'", "Boolean");
   }
   
   @Test
@@ -552,6 +677,45 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testForExpression_04() throws Exception {
     this.resolvesTo("for(x : null as String[]) x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_05() throws Exception {
+    this.resolvesTo("for(String x : new java.util.ArrayList<String>()) return x.length", "void");
+    this.resolvesTo("for(String x : newArrayList(\'foo\')) return x.length", "void");
+    this.resolvesTo("for(String x : <String>newArrayList()) return x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_06() throws Exception {
+    this.resolvesTo("for(x : new java.util.ArrayList<String>()) return x.length", "void");
+    this.resolvesTo("for(x : <String>newArrayList()) return x.length", "void");
+    this.resolvesTo("for(x : newArrayList(\'foo\')) return x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_07() throws Exception {
+    this.resolvesTo("for(String x : null as String[]) return x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_08() throws Exception {
+    this.resolvesTo("for(x : null as String[]) return x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_09() throws Exception {
+    this.resolvesTo("for(x : null as String[]) return", "void");
+  }
+  
+  @Test
+  public void testWhileExpression_01() throws Exception {
+    this.resolvesTo("while(true) \'\'.length", "void");
+  }
+  
+  @Test
+  public void testWhileExpression_02() throws Exception {
+    this.resolvesTo("while(true) return \'\'.length", "void");
   }
   
   @Test
@@ -628,6 +792,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testFeatureCallWithArrayToIterableConversion_04() throws Exception {
     this.resolvesTo("(null as String[][]).head", "String[]");
+  }
+  
+  @Test
+  public void testReturnType_00() throws Exception {
+    this.resolvesTo("return", "void");
   }
   
   @Test
@@ -1007,6 +1176,31 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_16() throws Exception {
+    this.resolvesTo("if (true) return 1 else 0", "int");
+  }
+  
+  @Test
+  public void testIfExpression_17() throws Exception {
+    this.resolvesTo("if (true) return 1", "null");
+  }
+  
+  @Test
+  public void testIfExpression_18() throws Exception {
+    this.resolvesTo("if (true) return", "null");
+  }
+  
+  @Test
+  public void testIfExpression_19() throws Exception {
+    this.resolvesTo("if (true) return else null", "null");
+  }
+  
+  @Test
+  public void testIfExpression_20() throws Exception {
+    this.resolvesTo("if (true) return else return", "void");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");
@@ -1061,6 +1255,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   public void testSwitchExpression_10() throws Exception {
     Reference _resolvesTo = this.resolvesTo("switch null {\n            case null : [Object it | it]\n            case null : [Integer it | it]\n        }", "(Integer)=>Object");
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<? super Integer, ?>");
+  }
+  
+  @Test
+  public void testSwitchExpression_11() throws Exception {
+    this.resolvesTo("switch null {\n\t\t  Object : return \n\t\t}", "null");
+  }
+  
+  @Test
+  public void testSwitchExpression_12() throws Exception {
+    this.resolvesTo("switch null {\n\t\t  Object : return\n\t\t  default: return\n\t\t}", "void");
   }
   
   @Test

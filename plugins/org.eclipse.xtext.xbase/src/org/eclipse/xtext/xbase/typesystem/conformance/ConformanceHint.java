@@ -35,7 +35,15 @@ public enum ConformanceHint {
 	
 	RAW, // only raw conformance computed
 	MERGED, // merged from different conformance sets
-	EXPECTATION_INDEPENDENT; // does not depend on the expectation
+	EXPECTATION_INDEPENDENT, // does not depend on the expectation
+	
+	/**
+	 * Indicates that the announced type is not an implicit return type.
+	 * 
+	 * E.g. the type of a return expression is 'void' but this is not the implicit return type of the 
+	 * return expression itself. The return type was computed properly from the children of the return expression.
+	 */
+	NO_IMPLICIT_RETURN;  
 	
 	private static ConformanceHint[] shallowCheckedHints = { ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG };
 	

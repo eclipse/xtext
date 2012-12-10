@@ -394,6 +394,11 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		state.getResolvedTypes().acceptHint(handle, boundTypeArgument);
 	}
 	
+	@NonNull
+	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+		return state.getResolvedTypes().getDeclaredTypeParameters();
+	}
+	
 	@NonNullByDefault
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
 		return state.getResolvedTypes().getAllHints(handle);
