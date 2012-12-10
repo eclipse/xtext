@@ -234,6 +234,11 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 										@NonNull LightweightBoundTypeArgument boundTypeArgument) {
 									throw new UnsupportedOperationException();
 								}
+								
+								@NonNull 
+								public List<JvmTypeParameter> getDeclaredTypeParameters() {
+									throw new UnsupportedOperationException();
+								}
 
 								@NonNull
 								public ResourceSet getContextResourceSet() {
