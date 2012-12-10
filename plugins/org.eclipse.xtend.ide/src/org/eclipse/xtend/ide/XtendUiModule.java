@@ -90,11 +90,13 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
+import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -340,6 +342,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public void configureSmartCaretPreferenceInitializer(Binder binder) {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
 				.to(XtendPreferenceStoreInitializer.class);
+	}
+	
+	public Class<? extends IssueSeveritiesProvider> bindIssueSeverityServiceProvider() {
+		return XbaseIssueSeveritiesProvider.class;
 	}
 	
 }
