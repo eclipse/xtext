@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,5 +56,25 @@ public class LinkingTest2 extends LinkingTest {
     JvmIdentifiableElement _feature_1 = ((XAbstractFeatureCall) _implicitFirstArgument_1).getFeature();
     String _simpleName = _feature_1.getSimpleName();
     Assert.assertEquals("it", _simpleName);
+  }
+  
+  @Test
+  @Ignore(value = "TBD")
+  public void testTypeParameterReference_4() throws Exception {
+  }
+  
+  @Test
+  @Ignore(value = "TBD")
+  public void testTypeParameterReference_5() throws Exception {
+  }
+  
+  @Test
+  @Ignore(value = "TBD")
+  public void testTypeParameterReference_6() throws Exception {
+  }
+  
+  @Test
+  @Ignore(value = "TBD")
+  public void testTypeParameterReference_8() throws Exception {
   }
 }

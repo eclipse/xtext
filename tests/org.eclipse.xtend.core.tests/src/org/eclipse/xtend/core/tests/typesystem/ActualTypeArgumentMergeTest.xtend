@@ -67,6 +67,10 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 		merged.key
 	}
 	
+	override getDeclaredTypeParameters() {
+		emptyList
+	}
+	
 	@Test def void testUnusedParam() {
 		'T'.mappedBy('CharSequence', 'String').merge('T').to('Object', INVARIANT)
 	}

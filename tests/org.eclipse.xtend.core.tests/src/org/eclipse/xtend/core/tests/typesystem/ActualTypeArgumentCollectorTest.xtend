@@ -74,7 +74,11 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
 		operation
-	} 
+	}
+	
+	override getDeclaredTypeParameters() {
+		emptyList
+	}
 	
 	def operator_mappedTo(Pair<String, VarianceInfo> pair, VarianceInfo third) {
 		Tuples::create(pair.key, pair.value, third)

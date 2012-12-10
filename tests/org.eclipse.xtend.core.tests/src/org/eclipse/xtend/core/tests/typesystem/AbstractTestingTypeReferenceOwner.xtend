@@ -58,6 +58,10 @@ abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase i
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
+	override getDeclaredTypeParameters() {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
 	override getContextResourceSet() {
 		contextResourceSet
 	}

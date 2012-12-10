@@ -225,4 +225,16 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   public void testCommonSuperType_65() {
     super.testCommonSuperType_65();
   }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_67() {
+    super.testCommonSuperType_67();
+  }
+  
+  @Ignore
+  @Test
+  public void testCommonSuperType_68() {
+    super.testCommonSuperType_68();
+  }
 }

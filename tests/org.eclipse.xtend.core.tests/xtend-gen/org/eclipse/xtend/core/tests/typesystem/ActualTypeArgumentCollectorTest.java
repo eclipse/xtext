@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -195,6 +196,11 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public List<JvmTypeParameter> getDeclaredTypeParameters() {
+    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
+    return _emptyList;
   }
   
   public Triple<String,VarianceInfo,VarianceInfo> operator_mappedTo(final Pair<String,VarianceInfo> pair, final VarianceInfo third) {

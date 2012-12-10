@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -149,6 +150,11 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       _xblockexpression = (_key);
     }
     return _xblockexpression;
+  }
+  
+  public List<JvmTypeParameter> getDeclaredTypeParameters() {
+    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
+    return _emptyList;
   }
   
   @Test

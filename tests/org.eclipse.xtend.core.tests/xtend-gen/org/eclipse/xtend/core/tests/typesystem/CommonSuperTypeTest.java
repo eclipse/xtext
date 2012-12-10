@@ -554,4 +554,14 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_66() {
     this.isSuperTypeOf("Function1<?, ?>", "$Function1<Object, Object>", "$Function1<String, String>");
   }
+  
+  @Test
+  public void testCommonSuperType_67() {
+    this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String");
+  }
+  
+  @Test
+  public void testCommonSuperType_68() {
+    this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String", "String");
+  }
 }
