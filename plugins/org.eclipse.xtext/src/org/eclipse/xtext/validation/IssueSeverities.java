@@ -8,15 +8,25 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.preferences.IPreferenceValues;
 
 /**
- * 
- * @author dhuebner - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public interface IValidatorConfiguration {
+public class IssueSeverities {
+	
+	private IPreferenceValues preferenceValues;
 
-	Severity getSeverity(IssueCode code);
+	public IssueSeverities(IPreferenceValues preferenceValues) {
+		this.preferenceValues = preferenceValues;
+	}
 
-	boolean isIgnore(IssueCode code);
+	public Severity getSeverity(IssueCode code) {
+		return preferenceValues.getPreference(code);
+	}
+	
+	public boolean isIgnored(IssueCode code) {
+		return getSeverity(code) == null;
+	}
 }

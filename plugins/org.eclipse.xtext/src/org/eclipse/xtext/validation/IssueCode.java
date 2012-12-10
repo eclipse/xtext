@@ -7,29 +7,78 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.preferences.IPreferenceKey;
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.4
  */
-public class IssueCode {
-
-	private final String code;
-
+public class IssueCode extends IPreferenceKey.AbstractKey<Severity>{
+	
 	public final static String SEVERITY_ERROR = "error";
+	public final static String SEVERITY_WARNING = "warning";
+	public final static String SEVERITY_INFO = "info";
+	public final static String SEVERITY_IGNORE = "ignore";
+
+	public final Severity severity;
 
 	public IssueCode(String code) {
-		this.code = code;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public String getDefaultSeverity() {
-		return SEVERITY_ERROR;
+		this(code, Severity.ERROR);
 	}
 	
-	public boolean isDerived() {
-		return false;
+	public IssueCode(String code, Severity defaultSeverity) {
+		super(code);
+		this.severity = defaultSeverity;
+	}
+	
+	public IssueCode(String code, IssueCode delegateTo) {
+		super(code, delegateTo);
+		severity = null;
+	}
+
+	public Severity getDefaultValue() {
+		return severity;
+	}
+
+	public String valueToString(Severity value) {
+		return severityToString(value);
+	}
+
+	public Severity stringToValue(String severityAsString) {
+		return stringToSeverity(severityAsString);
+	}
+	
+	public static String severityToString(Severity value) {
+		if (value == null) {
+			return SEVERITY_IGNORE;
+		}
+		switch (value) {
+			case ERROR:
+				return SEVERITY_ERROR;
+			case WARNING:
+				return SEVERITY_WARNING;
+			case INFO:
+				return SEVERITY_INFO;
+		}
+		throw new IllegalArgumentException("Unknown severity "+value);
+	}
+
+	public static Severity stringToSeverity(String severityAsString) {
+		if (severityAsString == null)
+			throw new IllegalArgumentException("Severity as string was null");
+		if (severityAsString.equals(SEVERITY_ERROR)) {
+			return Severity.ERROR;
+		}
+		if (severityAsString.equals(SEVERITY_WARNING)) {
+			return Severity.WARNING;
+		}
+		if (severityAsString.equals(SEVERITY_INFO)) {
+			return Severity.INFO;
+		}
+		if (severityAsString.equals(SEVERITY_IGNORE)) {
+			return null;
+		}
+		throw new IllegalArgumentException("Unknown severity '"+severityAsString+"'.");
 	}
 }

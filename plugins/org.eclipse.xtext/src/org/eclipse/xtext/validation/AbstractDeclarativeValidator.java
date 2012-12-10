@@ -53,7 +53,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		ValidationMessageAcceptor {
 
 	@Inject
-	private IValidatorConfigurationProvider validatorConfigurationProvider;
+	private IssueSeveritiesProvider issueSeveritiesProvider;
 
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 
@@ -406,34 +406,51 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	/**
 	 * @since 2.4
 	 */
-	protected void notification(IssueCode issueCode, String message, EObject source, EStructuralFeature feature,
+	protected void addIssue(EObject source, IssueCode issueCode, String message, EStructuralFeature feature, String... issueData) {
+		addIssue(source, issueCode, message, feature, INSIGNIFICANT_INDEX, issueData);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(EObject source, IssueCode issueCode, String message, EStructuralFeature feature,
 			int index, String... issueData) {
-		IValidatorConfiguration validatorConfiguration = validatorConfigurationProvider
-				.getValidatorConfiguration(source.eResource());
-		Severity severity = validatorConfiguration.getSeverity(issueCode);
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
 		if (severity != null) {
 			switch (severity) {
 				case WARNING:
-					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getCode(), issueData);
+					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode.getId(), issueData);
 					break;
 				case INFO:
-					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getCode(), issueData);
+					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode.getId(), issueData);
 					break;
 				case ERROR:
-					getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getCode(), issueData);
+					getMessageAcceptor().acceptError(message, source, feature, index, issueCode.getId(), issueData);
 					break;
 				default:
 					break;
 			}
 		}
 	}
-
+	
 	/**
 	 * @since 2.4
 	 */
-	protected void notification(IssueCode issueCode, String message, EStructuralFeature feature) {
-		notification(issueCode, message, state.get().currentObject, feature,
-				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, (String[]) null);
+	protected boolean isIgnored(IssueCode issueCode) {
+		IssueSeverities severities = getIssueSeverities(getContext(), getCurrentObject());
+		return severities.isIgnored(issueCode);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected IssueSeverities getIssueSeverities(Map<Object, Object> context, EObject eObject) {
+		if (context.containsKey(ISSUE_SEVERITIES)) {
+			return (IssueSeverities) context.get(ISSUE_SEVERITIES);
+		}
+		IssueSeverities issueSeverities = issueSeveritiesProvider.getIssueSeverities(eObject.eResource());
+		context.put(ISSUE_SEVERITIES, issueSeverities);
+		return issueSeverities;
 	}
 
 	protected void guard(boolean guardExpression) {
@@ -545,5 +562,5 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	public ValidationMessageAcceptor getMessageAcceptor() {
 		return messageAcceptor;
 	}
-
+	
 }
