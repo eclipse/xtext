@@ -43,11 +43,12 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 
 	public <T> T modify(IUnitOfWork<T, P> work) {
 		writeLock.lock();
+		P state = null;
+		T exec = null;
 		try {
-			P state = getState();
+			state = getState();
 			beforeModify(state, work);
-			T exec = work.exec(state);
-			afterModify(state,exec,work);
+			exec = work.exec(state);
 			return exec;
 		} catch (RuntimeException e) {
 			throw e;
@@ -55,6 +56,12 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 			throw new WrappedException(e);
 		} finally {
 			writeLock.unlock();
+			try {
+				readLock.lock();
+				afterModify(state, exec, work);
+			} finally {
+				readLock.unlock();
+			}
 		}
 	}
 	
