@@ -93,7 +93,17 @@ public class TypeResource extends ResourceImpl {
 				mirror.initialize(this);
 			}
 		} catch(Exception e) {
-			throw new IOException(e.getMessage(), e);
+			throw new CannotLoadTypeResourceException(e);
+		}
+	}
+	
+	protected static class CannotLoadTypeResourceException extends IOException {
+
+		private static final long serialVersionUID = 1L;
+
+		public CannotLoadTypeResourceException(Exception e) {
+			super(e.getMessage());
+			initCause(e);
 		}
 	}
 	
