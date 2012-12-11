@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -122,12 +121,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	@Test public void testSecondBuildRunIsMuchFaster() throws Exception {
 		final String project1name = "project1";
 		IJavaProject javaProject1 = createJavaProject(project1name);
-		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
-		
-		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
-		file.create(inputStream, IResource.FORCE, null);
-		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
-		addToClasspath(javaProject1, libraryEntry);
+		addJarToClasspath(javaProject1, copyAndGetXtendExampleJar(javaProject1));
 		
 		System.out.println("Clean Java first - "+cleanBuildTakes());
 		System.out.println("Clean Java second - "+cleanBuildTakes());
@@ -142,7 +136,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.stopCPUProfiling();
 	}
-	
+
 	@Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
@@ -164,10 +158,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 				"org.eclipse.xtend.lib");
 		IJavaProject javaProject1 = JavaCore.create(project1);
 		
-		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
-		
-		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
-		file.create(inputStream, IResource.FORCE, null);
+		IFile file = copyAndGetXtendExampleJar(javaProject1);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
 		addToClasspath(javaProject1, libraryEntry);
 		
@@ -246,6 +237,13 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	private void printAndClearStopWatchData() {
 		System.out.println(StopWatches.getPrintableStopWatchData());
 		StopWatches.resetAll();
+	}
+	
+	private IFile copyAndGetXtendExampleJar(IJavaProject javaProject1) throws CoreException {
+		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
+		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
+		file.create(inputStream, IResource.FORCE, null);
+		return file;
 	}
 
 	private void toggleNature(IJavaProject javaProject1) {
