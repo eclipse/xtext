@@ -582,7 +582,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak) {
-		appendable.forEachSafely(annotations, [
+		appendable.forEachSafely(values, [
 				separator = [ITreeAppendable it |  if(withLineBreak) append(',').newLine else append(', ') ]
 				suffix = [ITreeAppendable it |  if(withLineBreak) newLine ]
 			], [

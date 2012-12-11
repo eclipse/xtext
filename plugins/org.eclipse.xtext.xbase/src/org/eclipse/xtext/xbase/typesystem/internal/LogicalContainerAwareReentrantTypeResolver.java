@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -278,7 +279,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmAnnotationTarget annotable) {
-		for(JvmAnnotationReference annotation: annotable.getAnnotations()) {
+		final EList<JvmAnnotationReference> annotations = annotable.getAnnotations();
+		computeAnnotationTypes(resolvedTypes, featureScopeSession, annotations);
+	}
+
+	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			final EList<JvmAnnotationReference> annotations) {
+		for(JvmAnnotationReference annotation: annotations) {
 			for(JvmAnnotationValue value: annotation.getValues()) {
 				if (value instanceof JvmCustomAnnotationValue) {
 					JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
@@ -289,7 +296,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 						}
 					}
 				} else if (value instanceof JvmAnnotationAnnotationValue) {
-					computeAnnotationTypes(resolvedTypes, featureScopeSession, (JvmAnnotationAnnotationValue) value);
+					computeAnnotationTypes(resolvedTypes, featureScopeSession, ((JvmAnnotationAnnotationValue) value).getValues());
 				}
 			}
 		}

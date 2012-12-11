@@ -24,11 +24,6 @@ public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 	}
 	
 	@Override
-	public final String getQualifiedName() {
-		return getQualifiedName('$');
-	}
-	
-	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
 		if (simpleName == null)
 			return null;

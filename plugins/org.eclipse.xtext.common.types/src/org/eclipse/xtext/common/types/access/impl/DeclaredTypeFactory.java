@@ -28,6 +28,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -66,7 +67,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		this.uriHelper = uriHelper;
 	}
 
-	public JvmDeclaredType createType(Class<?> clazz) {
+	public JvmDeclaredType createType(final Class<?> clazz) {
 		if (clazz.isAnonymousClass() || clazz.isSynthetic())
 			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 		if (clazz.isAnnotation())
@@ -74,7 +75,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (clazz.isEnum())
 			return createEnumerationType(clazz);
 
-		JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
+		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 		result.setInterface(clazz.isInterface());
 		setTypeModifiers(clazz, result);
 		setVisibility(clazz, result);
@@ -82,10 +83,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setSimpleName(clazz.getSimpleName());
 		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
 			result.setPackageName(clazz.getPackage().getName());
+		
 		createNestedTypes(clazz, result);
 		createMethods(clazz, result);
 		createConstructors(clazz, result);
 		createFields(clazz, result);
+		
 		setSuperTypes(clazz, result);
 		try {
 			for (TypeVariable<?> variable : clazz.getTypeParameters()) {
@@ -98,18 +101,17 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		createAnnotationValues(clazz, result);
 		return result;
 	}
-
+	
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 
-	protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
+	protected void createAnnotationValues(final AnnotatedElement annotated, final JvmAnnotationTarget result) {
 		for (Annotation annotation : annotated.getDeclaredAnnotations()) {
-			createAnnotationReference(result, annotation);
+			result.getAnnotations().add(createAnnotationReference(annotation));
 		}
 	}
 
-	protected JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, Annotation annotation) {
+	protected JvmAnnotationReference createAnnotationReference(Annotation annotation) {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		result.getAnnotations().add(annotationReference);
 		Class<? extends Annotation> type = annotation.annotationType();
 		annotationReference.setAnnotation(createAnnotationProxy(type));
 		for (Method method : type.getDeclaredMethods()) {
@@ -165,7 +167,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			} else if (componentType.isAnnotation()) {
 				for (int i = 0; i < length; i++) {
 					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
-					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+					((JvmAnnotationAnnotationValue)result).getValues().add(createAnnotationReference(nestedAnnotation));
 				}
 			} else if (componentType.isEnum()) {
 				for (int i = 0; i < length; i++) {
@@ -190,7 +192,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(reference));
 		} else if (type.isAnnotation()) {
 			Annotation nestedAnnotation = (Annotation) value;
-			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+			((JvmAnnotationAnnotationValue)result).getValues().add(createAnnotationReference(nestedAnnotation));
 		} else if (type.isEnum()) {
 			Enum<?> e = (Enum<?>) value;
 			JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
@@ -550,7 +552,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
 		for (Annotation annotation : annotations) {
-			createAnnotationReference(result, annotation);
+			result.getAnnotations().add(createAnnotationReference(annotation));
 		}
 		return result;
 	}

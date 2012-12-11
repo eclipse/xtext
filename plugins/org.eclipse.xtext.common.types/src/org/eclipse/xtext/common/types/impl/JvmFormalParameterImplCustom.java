@@ -7,24 +7,43 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import com.google.inject.Provider;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
+	
+	private Provider<String> nameProvider;
+	
+	public void setNameProvider(Provider<String> nameProvider) {
+		if (this.name != null)
+			throw new IllegalStateException("Name has already been set.");
+		this.nameProvider = nameProvider;
+	}
+	
+	@Override
+	public String getName() {
+		if (nameProvider != null) {
+			setName(nameProvider.get());
+			nameProvider = null;
+		}
+		return super.getName();
+	}
 
 	@Override
 	public String getIdentifier() {
-		return name;
+		return getName();
 	}
 	
 	@Override
 	public String getSimpleName() {
-		return name;
+		return getName();
 	}
 	
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
-		return name;
+		return getName();
 	}
 
 }

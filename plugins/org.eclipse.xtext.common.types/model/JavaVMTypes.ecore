@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types"
-    nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes" nsPrefix="types">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types" nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes"
+    nsPrefix="types">
   <eClassifiers xsi:type="ecore:EClass" name="JvmIdentifiableElement" abstract="true">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -183,7 +182,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmMultiTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget #//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget">
     <eOperations name="internalSetIdentifier">
       <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -234,12 +233,13 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFormalParameter" eSuperTypes="#//JvmIdentifiableElement #//JvmAnnotationTarget">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFormalParameter" eSuperTypes="#//JvmAnnotationTarget">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="#//JvmTypeReference"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationTarget" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationTarget" abstract="true"
+      eSuperTypes="#//JvmIdentifiableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="#//JvmAnnotationReference" containment="true" eOpposite="#//JvmAnnotationReference/target"/>
   </eClassifiers>
@@ -297,9 +297,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//JvmTypeReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationAnnotationValue" eSuperTypes="#//JvmAnnotationValue #//JvmAnnotationTarget">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
-        upperBound="-1" eType="#//JvmAnnotationReference" changeable="false" derived="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmAnnotationReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmEnumAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
