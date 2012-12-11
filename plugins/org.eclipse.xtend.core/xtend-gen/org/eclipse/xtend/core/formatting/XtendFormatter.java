@@ -908,6 +908,9 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (clazz instanceof XtendFunction) {
       _format((XtendFunction)clazz, format);
       return;
+    } else if (clazz instanceof JvmFormalParameter) {
+      _format((JvmFormalParameter)clazz, format);
+      return;
     } else if (clazz instanceof XAssignment) {
       _format((XAssignment)clazz, format);
       return;
@@ -931,9 +934,6 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (clazz instanceof XtendParameter) {
       _format((XtendParameter)clazz, format);
-      return;
-    } else if (clazz instanceof JvmFormalParameter) {
-      _format((JvmFormalParameter)clazz, format);
       return;
     } else if (clazz instanceof JvmGenericArrayTypeReference) {
       _format((JvmGenericArrayTypeReference)clazz, format);

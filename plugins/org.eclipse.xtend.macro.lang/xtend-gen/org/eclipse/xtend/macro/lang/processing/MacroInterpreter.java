@@ -193,22 +193,22 @@ public class MacroInterpreter extends XbaseInterpreter {
     return _xblockexpression;
   }
   
-  public Object invokeFeature(final JvmIdentifiableElement identifiable, final XAbstractFeatureCall featureCall, final Object receiver, final IEvaluationContext context, final CancelIndicator indicator) {
-    if (identifiable instanceof JvmGenericType
+  public Object invokeFeature(final JvmIdentifiableElement it, final XAbstractFeatureCall featureCall, final Object receiver, final IEvaluationContext context, final CancelIndicator indicator) {
+    if (it instanceof JvmOperation
+         && featureCall != null) {
+      return _invokeFeature((JvmOperation)it, featureCall, receiver, context, indicator);
+    } else if (it instanceof JvmGenericType
          && featureCall instanceof XFeatureCall) {
-      return _invokeFeature((JvmGenericType)identifiable, (XFeatureCall)featureCall, receiver, context, indicator);
-    } else if (identifiable instanceof JvmOperation
+      return _invokeFeature((JvmGenericType)it, (XFeatureCall)featureCall, receiver, context, indicator);
+    } else if (it instanceof JvmField
          && featureCall != null) {
-      return _invokeFeature((JvmOperation)identifiable, featureCall, receiver, context, indicator);
-    } else if (identifiable instanceof JvmField
+      return _invokeFeature((JvmField)it, featureCall, receiver, context, indicator);
+    } else if (it != null
          && featureCall != null) {
-      return _invokeFeature((JvmField)identifiable, featureCall, receiver, context, indicator);
-    } else if (identifiable != null
-         && featureCall != null) {
-      return _invokeFeature(identifiable, featureCall, receiver, context, indicator);
+      return _invokeFeature(it, featureCall, receiver, context, indicator);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(identifiable, featureCall, receiver, context, indicator).toString());
+        Arrays.<Object>asList(it, featureCall, receiver, context, indicator).toString());
     }
   }
 }
