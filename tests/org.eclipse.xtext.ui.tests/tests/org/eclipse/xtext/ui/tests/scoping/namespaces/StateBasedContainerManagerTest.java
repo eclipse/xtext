@@ -53,7 +53,16 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 				return uri != null && !uri.toString().endsWith("/.project");
 			}
 		};
-		mapper.setUriValidator(new UriValidator());
+		mapper.setUriValidator(new UriValidator() {
+			@Override
+			public boolean isPossiblyManaged(IStorage storage) {
+				return true;
+			}
+			@Override
+			public boolean isValid(URI uri, IStorage storage) {
+				return true;
+			}
+		});
 		projectsState = new WorkspaceProjectsState();
 		projectsState.setMapper(mapper);
 		WorkspaceProjectsStateHelper helper = new WorkspaceProjectsStateHelper();
