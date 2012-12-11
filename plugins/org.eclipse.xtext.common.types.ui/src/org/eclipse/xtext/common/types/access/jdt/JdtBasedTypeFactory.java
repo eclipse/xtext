@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.jdt.core.dom.AST;
@@ -67,7 +68,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
-import org.eclipse.xtext.common.types.impl.JvmFormalParameterImplCustom;
+import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
@@ -75,7 +76,6 @@ import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -86,7 +86,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	private final TypeURIHelper uriHelper;
 	private WorkingCopyOwner workingCopyOwner;
 	
-	private StoppedTask resolveParamNames = StopWatches.forTask("resolve param names");
+	private static StoppedTask resolveParamNames = StopWatches.forTask("resolve param names");
 	private StoppedTask resolveAnnotations = StopWatches.forTask("resolve annotations");
 	private StoppedTask resolveMembers = StopWatches.forTask("resolve members");
 	private StoppedTask resolveTypeParams = StopWatches.forTask("resolve typeParams");
@@ -590,23 +590,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 	
-	private static class NameProvider implements Provider<String>{
-		
-		private Function<Integer,String> paramNames;
-		private int index;
-		
-		public NameProvider(Function<Integer,String> paramNames, int index) {
-			super();
-			this.paramNames = paramNames;
-			this.index = index;
-		}
-
-		public String get() {
-			return paramNames.apply(index);
-		}
-		
-	}
-
 	public void enhanceExecutable(JvmExecutable result, IMethodBinding method) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(getQualifiedName(method.getDeclaringClass()));
@@ -630,7 +613,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		} catch(IllegalArgumentException e) {
 			log.debug("Cannot locate javaMethod for: " + fqName);
 		}
-		Function<Integer, String> parameterNames = fastGetParameterNames(javaMethod);
+		if (javaMethod != null) {
+			ParameterNameInitializer initializer = new ParameterNameInitializer(result, javaMethod.getHandleIdentifier());
+			((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
+		}
 		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {
 			IAnnotationBinding[] parameterAnnotations = null;
@@ -639,19 +625,61 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			} catch(AbortCompilation aborted) {
 				parameterAnnotations = null;
 			}
-			final JvmFormalParameter formalParameter = createFormalParameter(parameterTypes[i], null, parameterAnnotations);
-			((JvmFormalParameterImplCustom)formalParameter).setNameProvider(new NameProvider(parameterNames, i));
+			String parameterName = javaMethod == null ? "arg"+i : null /* null ==> lazy */;
+			final JvmFormalParameter formalParameter = createFormalParameter(parameterTypes[i], parameterName, parameterAnnotations);
 			result.getParameters().add(formalParameter);
 		}
 		for (ITypeBinding exceptionType : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionType));
 		}
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static class ParameterNameInitializer implements Runnable {
+		
+		private JvmExecutable executable;
+		private String iMethodIdentifier;
+		
+		public ParameterNameInitializer(JvmExecutable executable, String iMethodIdentifier) {
+			super();
+			this.executable = executable;
+			this.iMethodIdentifier = iMethodIdentifier;
+		}
+
+		public void run() {
+			try {
+				resolveParamNames.start();
+				IMethod javaMethod = (IMethod) JavaCore.create(iMethodIdentifier);
+				if (javaMethod != null ) {
+					int numberOfParameters = javaMethod.getNumberOfParameters();
+					if (numberOfParameters != 0) {
+						if (javaMethod.exists()) {
+							try {
+								String[] parameterNames = javaMethod.getParameterNames();
+								for (int i = 0; i < parameterNames.length; i++) {
+									String string = parameterNames[i];
+									executable.getParameters().get(i).setName(string);
+								}
+							} catch (JavaModelException ex) {
+								if (!ex.isDoesNotExist())
+									log.warn("IMethod.getParameterNames failed", ex);
+							}
+						}
+					}
+				}
+			} finally {
+				resolveParamNames.stop();
+			}
+		}
+		
+	}
 
 	/**
 	 * @since 2.4
 	 */
-	protected Function<Integer, String> fastGetParameterNames(final IMethod javaMethod) {
+	protected Function<Integer, String> fastGetParameterNames(final String javaMethodHandleId) {
 		return new Function<Integer, String> () {
 			
 			private String[] parameterNames = null;
@@ -661,7 +689,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					resolveParamNames.start();
 					if (parameterNames != null)
 						return parameterNames;
-					if (javaMethod != null) {
+					IMethod javaMethod = (IMethod) JavaCore.create(javaMethodHandleId);
+					if (javaMethod != null && javaMethod.exists()) {
 						parameterNames = Strings.EMPTY_ARRAY;
 						int numberOfParameters = javaMethod.getNumberOfParameters();
 						if (numberOfParameters != 0) {

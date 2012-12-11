@@ -93,7 +93,7 @@ public class TypeResource extends ResourceImpl {
 				mirror.initialize(this);
 			}
 		} catch(Exception e) {
-			throw new IOException(e.getMessage());
+			throw new IOException(e.getMessage(), e);
 		}
 	}
 	
