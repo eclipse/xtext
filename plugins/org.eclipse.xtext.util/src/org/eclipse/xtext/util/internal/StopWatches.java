@@ -28,6 +28,7 @@ public class StopWatches {
 		
 		private NumbersForTask numbers;
 		private long lastStart = notRunning;
+		private int reentrant = 0;
 		
 		StopWatchForTask(NumbersForTask numbers) {
 			this.numbers = numbers;
@@ -36,6 +37,7 @@ public class StopWatches {
 		public void start() {
 			if (!isRunning())
 				lastStart = System.currentTimeMillis();
+			reentrant++;
 		}
 		
 		public boolean isRunning() {
@@ -44,9 +46,13 @@ public class StopWatches {
 		
 		public void stop() {
 			if (isRunning()) {
-				long currentTimeMillis = System.currentTimeMillis();
-				numbers.addMilliseconds(currentTimeMillis - lastStart);
-				numbers.increaseMeasurements();
+				reentrant--;
+				if (reentrant == 0) {
+					long currentTimeMillis = System.currentTimeMillis();
+					numbers.addMilliseconds(currentTimeMillis - lastStart);
+					numbers.increaseMeasurements();
+					lastStart = notRunning;
+				}
 			}
 		}
 	}
