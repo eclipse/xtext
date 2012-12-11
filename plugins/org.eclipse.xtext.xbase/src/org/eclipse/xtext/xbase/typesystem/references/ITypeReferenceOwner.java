@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
@@ -24,13 +25,15 @@ public interface ITypeReferenceOwner {
 	
 	ResourceSet getContextResourceSet();
 
-	// TODO move these to *somewhere* else
+	/*
+	 * TODO move the following methods to a more suitable location if possible
+	 */
 	void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument);
 	
-	// TODO move these to *somewhere* else
 	List<LightweightBoundTypeArgument> getAllHints(Object handle);
 
-	// TODO move these to *somewhere* else
 	boolean isResolved(Object handle);
+
+	List<JvmTypeParameter> getDeclaredTypeParameters();
 	
 }

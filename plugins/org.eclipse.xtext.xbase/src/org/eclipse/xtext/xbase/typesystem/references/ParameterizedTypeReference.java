@@ -209,8 +209,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	public void addTypeArgument(LightweightTypeReference argument) {
 		if (argument == null) {
-			return;
-//			throw new NullPointerException("argument may not be null");
+			throw new NullPointerException("argument may not be null");
 		}
 		if (!argument.isOwnedBy(getOwner())) {
 			throw new IllegalArgumentException("argument is not valid in current context");

@@ -425,13 +425,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 		LightweightTypeReference throwable = getTypeForName(Throwable.class, state);
 		ITypeComputationState expressionState = state.withExpectation(throwable);
 		expressionState.computeTypes(object.getExpression());
-		state.acceptActualType(getPrimitiveVoid(state));
+		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
 	}
 
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
 		ITypeComputationState expressionState = state.withReturnExpectation();
 		expressionState.computeTypes(object.getExpression());
-		state.acceptActualType(getPrimitiveVoid(state));
+		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
 	}
 	
 	protected void _computeTypes(XTryCatchFinallyExpression object, ITypeComputationState state) {

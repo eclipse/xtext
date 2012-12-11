@@ -2900,6 +2900,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testFeatureCallWithOperatorOverloading_1() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ \n\t\t\tval java.util.List<? super CharSequence> list = null\n\t\t\tlist += null as Iterable<CharSequence>\n\t\t}", "? super CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testFeatureCallWithOperatorOverloading_2() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes().iterator.next", "Byte");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Byte");

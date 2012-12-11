@@ -101,6 +101,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return ResolvedTypes.this.isResolved(handle);
 		}
 		
+		public List<JvmTypeParameter> getDeclaredTypeParameters() {
+			return ResolvedTypes.this.getDeclaredTypeParameters();
+		}
+		
 	}
 	
 	private final OwnedConverter converter;
@@ -113,6 +117,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
+	private List<JvmTypeParameter> declaredTypeParameters;
 	private Map<XExpression, ILinkingCandidate> featureLinking;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
@@ -170,14 +175,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				values.add(value);
 			}
 		}
-		if (values.isEmpty() && nullIfEmpty) {
-			return null;
+		if (values.isEmpty()) {
+			if (nullIfEmpty || allValues.isEmpty())
+				return null;
+			if (returnType) {
+				values.addAll(allValues);
+			}
 		}
 		if (values.size() == 1) {
 			TypeData typeData = values.get(0);
 			LightweightTypeReference upperBoundSubstitute = typeData.getActualType().getUpperBoundSubstitute();
 			if (upperBoundSubstitute != typeData.getActualType())
-				return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), typeData.isReturnType());
+				return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), returnType);
 			return typeData;
 		}
 		
@@ -206,9 +215,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
-		
 		if (expectation == null) {
 			throw new IllegalStateException("Expectation should never be null here");
+		}
+		if (voidSeen && returnType && !references.isEmpty()) {
+			mergedType = mergedType.getWrapperTypeIfPrimitive();
 		}
 		TypeData result = new TypeData(expression, expectation, mergedType, mergedHints , returnType);
 		return result;
@@ -791,6 +802,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	public boolean isResolved(Object handle) {
 		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
+	}
+	
+	@Nullable
+	protected List<JvmTypeParameter> basicGetDeclardTypeParameters() {
+		return declaredTypeParameters;
+	}
+	
+	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+		return declaredTypeParameters != null ? declaredTypeParameters : Collections.<JvmTypeParameter>emptyList();
+	}
+	
+	public void addDeclaredTypeParameters(List<JvmTypeParameter> typeParameters) {
+		if (declaredTypeParameters == null) {
+			declaredTypeParameters = Lists.newArrayList(typeParameters);
+		} else {
+			declaredTypeParameters.addAll(typeParameters);
+		}
 	}
 
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {

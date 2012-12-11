@@ -56,6 +56,10 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"return [| return 'literal'].apply".resolvesTo("String")
 	}
 	
+	@Test override void testBooleanLiteral_02() throws Exception {
+		"return true".resolvesTo("boolean")
+	}
+	
 	@Test override testIfExpression_03() throws Exception {
 		"if (true) return 'foo'".resolvesTo("String")
 	}
@@ -64,10 +68,170 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"if (true) return '' else new StringBuilder".resolvesTo("Serializable & CharSequence")
 	}
 	
+	@Test override testIfExpression_17() throws Exception {
+		"if (true) return 1".resolvesTo("Integer")
+	}
+	
 	@Test override testSwitchExpression_1() throws Exception {
 		"switch true { case true : return 's' default: null}".resolvesTo("String")
 	}
 	
+	@Test override testForExpression_05() throws Exception {
+		"for(String x : new java.util.ArrayList<String>()) return x.length".resolvesTo("Integer")
+		"for(String x : newArrayList('foo')) return x.length".resolvesTo("Integer")
+		"for(String x : <String>newArrayList()) return x.length".resolvesTo("Integer")
+	}
+	
+	@Test override testForExpression_06() throws Exception {
+		"for(x : new java.util.ArrayList<String>()) return x.length".resolvesTo("Integer")
+		"for(x : <String>newArrayList()) return x.length".resolvesTo("Integer")
+		"for(x : newArrayList('foo')) return x.length".resolvesTo("Integer")
+	}
+	
+	@Test override testForExpression_07() throws Exception {
+		"for(String x : null as String[]) return x.length".resolvesTo("Integer")
+	}
+	
+	@Test override testForExpression_08() throws Exception {
+		"for(x : null as String[]) return x.length".resolvesTo("Integer")
+	}
+	
+	@Test def void testForExpression_10() throws Exception {
+		"{ for(x : null as String[]) return x.length 1 }".resolvesTo("int")
+	}
+	
+	@Test def void testForExpression_11() throws Exception {
+		"for(x : null as String[]) if (true) return 1".resolvesTo("Integer")
+	}
+	
+	@Test def void testForExpression_12() throws Exception {
+		"for(x : null as String[]) if (true) return 1 else return 2".resolvesTo("Integer")
+	}
+	
+	@Test override testWhileExpression_02() throws Exception {
+		"while(true) return 1".resolvesTo("Integer")
+	}
+	
+	@Test def void testWhileExpression_03() throws Exception {
+		"while(if (true) return 1 else false) ''.length".resolvesTo("Integer")
+	}
+	
+	@Test override testTryCatchFinallyExpression_08() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar'".resolvesTo("String") 
+	}
+	
+	@Test override testTryCatchFinallyExpression_09() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'".resolvesTo("String")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_10() throws Exception {
+		"try return 'foo' catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz' finally true".resolvesTo("String")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_11() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_12() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_13() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(NullPointerException e) return 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_14() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_15() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) return null as Number
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Serializable")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_19() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_20() throws Exception {
+		"try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_21() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(NullPointerException e) 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_22() throws Exception {
+		"try return 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) 'dont catch subsequent exceptions'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_25() throws Exception {
+		"try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_26() throws Exception {
+		"try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return true finally true".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_27() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_28() throws Exception {
+		"try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_29() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(NullPointerException e) return 'second thing is thrown'		  
+		  catch(ClassCastException e) throw new NullPointerException()
+		".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_30() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) throw new NullPointerException()
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Serializable & Comparable<?>")	
+	}
+	
+	@Test override testTryCatchFinallyExpression_31() throws Exception {
+		"try 'literal' as Object as Boolean
+		  catch(ClassCastException e) return null as Number
+		  catch(NullPointerException e) return 'dont catch subsequent exceptions'".resolvesTo("Serializable")	
+	}
+
+	@Test def void testThrowExpressionAfterLoop_01() throws Exception {
+		"{
+			while(true) ''.toString
+			throw new RuntimeException()
+		}".resolvesTo("void")
+	}
+
+	@Test def void testThrowExpressionAfterLoop_02() throws Exception {
+		"{
+			while(true) return 1
+			throw new RuntimeException()
+		}".resolvesTo("int")
+	}
+
+	@Test def void testThrowExpressionAfterLoop_03() throws Exception {
+		"{
+			while(true) if (true) return 1 else ''
+			throw new RuntimeException()
+		}".resolvesTo("int")
+	}
+		
 }
 
 /**
@@ -86,10 +250,10 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 			doResolvesTo('''return («replacedExpressionText»)''', type);
 			doResolvesTo('''{ { return («replacedExpressionText») } }''', type);
 			doResolvesTo('''return {«replacedExpressionText»}''', type);
-			doResolvesTo('''{ { return { if (true) «replacedExpressionText» {«replacedExpressionText»} }''', type);
+			doResolvesTo('''{ { return { ( if (true) «replacedExpressionText» ) {«replacedExpressionText»} }''', type);
 		} else {
 			doResolvesTo('''{ «replacedExpressionText» }''', type);
-			doResolvesTo('''{ if (true) «replacedExpressionText» {«replacedExpressionText»} }''', type);
+			doResolvesTo('''{ ( if (true) «replacedExpressionText» ) {«replacedExpressionText»} }''', type);
 		}
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
 		val resolvedType = resolvedTypes.getReturnType(xExpression)

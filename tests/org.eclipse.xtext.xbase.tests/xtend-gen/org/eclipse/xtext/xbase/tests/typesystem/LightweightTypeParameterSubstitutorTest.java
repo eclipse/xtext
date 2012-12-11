@@ -69,6 +69,11 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
     throw _unsupportedOperationException;
   }
   
+  public List<JvmTypeParameter> getDeclaredTypeParameters() {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
+    throw _unsupportedOperationException;
+  }
+  
   public ResourceSet getContextResourceSet() {
     return this.getContextResourceSet();
   }
