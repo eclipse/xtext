@@ -606,7 +606,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		} catch(IllegalArgumentException e) {
 			log.debug("Cannot locate javaMethod for: " + fqName);
 		}
-		if (javaMethod != null) {
+		if (javaMethod != null && parameterTypes.length != 0) {
 			ParameterNameInitializer initializer = new ParameterNameInitializer(result, javaMethod.getHandleIdentifier());
 			((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
 		}
