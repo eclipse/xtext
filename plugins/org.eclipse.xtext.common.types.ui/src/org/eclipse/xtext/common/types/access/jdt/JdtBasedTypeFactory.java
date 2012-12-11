@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
@@ -68,10 +67,15 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
+import org.eclipse.xtext.common.types.impl.JvmFormalParameterImplCustom;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -81,6 +85,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
 	private final TypeURIHelper uriHelper;
 	private WorkingCopyOwner workingCopyOwner;
+	
+	private StoppedTask resolveParamNames = StopWatches.forTask("resolve param names");
+	private StoppedTask resolveAnnotations = StopWatches.forTask("resolve annotations");
+	private StoppedTask resolveMembers = StopWatches.forTask("resolve members");
+	private StoppedTask resolveTypeParams = StopWatches.forTask("resolve typeParams");
+	private StoppedTask resolveBinding = StopWatches.forTask("resolve binding");
 
 	@Deprecated
 	public JdtBasedTypeFactory(TypeURIHelper uriHelper) {
@@ -99,12 +109,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		if (jdtType.getDeclaringType() != null)
 			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
 					+ jdtType.getFullyQualifiedName() + "'.");
+		resolveBinding.start();
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setWorkingCopyOwner(workingCopyOwner);
 		parser.setProject(jdtType.getJavaProject());
 		parser.setIgnoreMethodBodies(true);
 		
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
+		resolveBinding.stop();
 		if (bindings[0] == null)
 			throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "'.");
 		IBinding binding = bindings[0];
@@ -144,10 +156,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	protected void createFields(ITypeBinding typeBinding, JvmDeclaredType result) {
+		resolveMembers.start();
 		for (IVariableBinding field : typeBinding.getDeclaredFields()) {
 			if (!field.isSynthetic())
 				result.getMembers().add(createField(field));
 		}
+		resolveMembers.stop();
 	}
 
 	public String getQualifiedName(ITypeBinding binding) {
@@ -156,19 +170,25 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public void createAnnotationValues(IBinding annotated, JvmAnnotationTarget result) {
 		try {
+			resolveAnnotations.start();
 			if (annotated.getAnnotations().length == 0)
 				return;
 			for (IAnnotationBinding annotation : annotated.getAnnotations()) {
-				createAnnotationReference(result, annotation);
+				result.getAnnotations().add(createAnnotationReference(annotation));
 			}
 		} catch(AbortCompilation aborted) {
 			log.info("Couldn't resolve annotations of "+annotated, aborted);
+		} finally {
+			resolveAnnotations.stop();
 		}
+			
 	}
 
-	public JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, IAnnotationBinding annotation) {
+	/**
+	 * @since 2.4
+	 */
+	public JvmAnnotationReference createAnnotationReference(IAnnotationBinding annotation) {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		result.getAnnotations().add(annotationReference);
 		annotationReference.setAnnotation(createAnnotationProxy(annotation.getAnnotationType()));
 		try {
 			IMemberValuePairBinding[] allMemberValuePairs = annotation.getAllMemberValuePairs();
@@ -233,10 +253,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					valuesAsList.add(typeReference);
 				}
 			} else if (result instanceof JvmAnnotationAnnotationValue) {
+				JvmAnnotationAnnotationValue annotationAnnotationValue = (JvmAnnotationAnnotationValue) result;
 				for (int i = 0; i < length; i++) {
 					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i)
 							: value);
-					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+					annotationAnnotationValue.getValues().add(createAnnotationReference(nestedAnnotation));
 				}
 			} else if (result instanceof JvmEnumAnnotationValue) {
 				for (int i = 0; i < length; i++) {
@@ -289,8 +310,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			JvmTypeReference typeReference = createTypeReference(referencedType);
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(typeReference));
 		} else if (result instanceof JvmAnnotationAnnotationValue) {
+			JvmAnnotationAnnotationValue annotationAnnotationValue = (JvmAnnotationAnnotationValue) result;
 			IAnnotationBinding nestedAnnotation = (IAnnotationBinding) value;
-			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+			annotationAnnotationValue.getValues().add(createAnnotationReference(nestedAnnotation));
 		} else if (result instanceof JvmEnumAnnotationValue) {
 			IVariableBinding variableBinding = (IVariableBinding) value;
 			JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
@@ -367,6 +389,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public void createMethods(ITypeBinding typeBinding, JvmDeclaredType result) {
+		resolveMembers.start();
 		for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
 			if (!method.isSynthetic() && !"<clinit>".equals(method.getName())) {
 				if (method.isConstructor()) {
@@ -380,6 +403,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				}
 			}
 		}
+		resolveMembers.stop();
 	}
 	
 	private void setDefaultValue(JvmOperation operation, IMethodBinding method) {
@@ -401,11 +425,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public void createNestedTypes(ITypeBinding typeBinding, JvmDeclaredType result) {
+		resolveMembers.start();
 		for (ITypeBinding declaredType : typeBinding.getDeclaredTypes()) {
 			if (!declaredType.isAnonymous() && !declaredType.isSynthetic()) {
 				result.getMembers().add(createType(declaredType));
 			}
 		}
+		resolveMembers.stop();
 	}
 
 	public void setTypeModifiers(ITypeBinding binding, JvmDeclaredType result) {
@@ -446,6 +472,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public JvmTypeParameter createTypeParameter(ITypeBinding parameter, JvmMember container) {
+		resolveTypeParams.start();
 		JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
 		result.setName(parameter.getName());
 		if (parameter.getTypeBounds().length != 0) {
@@ -459,6 +486,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			upperBound.setTypeReference(createTypeReference(Object.class.getName()));
 			result.getConstraints().add(upperBound);
 		}
+		resolveTypeParams.stop();
 		return result;
 	}
 
@@ -561,6 +589,23 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		createAnnotationValues(method, result);
 		return result;
 	}
+	
+	private static class NameProvider implements Provider<String>{
+		
+		private Function<Integer,String> paramNames;
+		private int index;
+		
+		public NameProvider(Function<Integer,String> paramNames, int index) {
+			super();
+			this.paramNames = paramNames;
+			this.index = index;
+		}
+
+		public String get() {
+			return paramNames.apply(index);
+		}
+		
+	}
 
 	public void enhanceExecutable(JvmExecutable result, IMethodBinding method) {
 		StringBuilder fqName = new StringBuilder(48);
@@ -585,71 +630,94 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		} catch(IllegalArgumentException e) {
 			log.debug("Cannot locate javaMethod for: " + fqName);
 		}
-		String[] parameterNames = fastGetParameterNames(javaMethod);
+		Function<Integer, String> parameterNames = fastGetParameterNames(javaMethod);
 		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {
-			String parameterName = parameterNames != null ? parameterNames[i] : "p" + i;
 			IAnnotationBinding[] parameterAnnotations = null;
 			try {
 				parameterAnnotations = method.getParameterAnnotations(i);
 			} catch(AbortCompilation aborted) {
 				parameterAnnotations = null;
 			}
-			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterName, parameterAnnotations));
+			final JvmFormalParameter formalParameter = createFormalParameter(parameterTypes[i], null, parameterAnnotations);
+			((JvmFormalParameterImplCustom)formalParameter).setNameProvider(new NameProvider(parameterNames, i));
+			result.getParameters().add(formalParameter);
 		}
 		for (ITypeBinding exceptionType : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionType));
 		}
 	}
 
-	protected String[] fastGetParameterNames(IMethod javaMethod) {
-		String[] parameterNames = null;
-		if (javaMethod != null) {
-			parameterNames = Strings.EMPTY_ARRAY;
-			int numberOfParameters = javaMethod.getNumberOfParameters();
-			if (numberOfParameters != 0) {
-				if (javaMethod.exists()) {
-					try {
-						if (javaMethod instanceof SourceMethod) {
-							parameterNames = javaMethod.getParameterNames();
-							return parameterNames;
-						}
-						if (javaMethod instanceof JavaElement) {
-							JavaElement casted = (JavaElement) javaMethod;
-							SourceMapper mapper = casted.getSourceMapper();
-							if (mapper != null) {
-								char[][] parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
-								if (parameterNamesAsChars != null) {
-									parameterNames = toStringArray(parameterNamesAsChars);
-									return parameterNames;
-								}
-								IType type = (IType) javaMethod.getParent();
-								IBinaryType info = (IBinaryType) ((BinaryType) javaMethod
-										.getDeclaringType()).getElementInfo();
-								char[] source = mapper.findSource(type, info);
-								if (source != null) {
-									mapper.mapSource(type, source, info);
-									parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
-									if (parameterNamesAsChars != null) {
-										parameterNames = toStringArray(parameterNamesAsChars);
+	/**
+	 * @since 2.4
+	 */
+	protected Function<Integer, String> fastGetParameterNames(final IMethod javaMethod) {
+		return new Function<Integer, String> () {
+			
+			private String[] parameterNames = null;
+			
+			private String[] getParameterNames() {
+				try {
+					resolveParamNames.start();
+					if (parameterNames != null)
+						return parameterNames;
+					if (javaMethod != null) {
+						parameterNames = Strings.EMPTY_ARRAY;
+						int numberOfParameters = javaMethod.getNumberOfParameters();
+						if (numberOfParameters != 0) {
+							if (javaMethod.exists()) {
+								try {
+									if (javaMethod instanceof SourceMethod) {
+										parameterNames = javaMethod.getParameterNames();
 										return parameterNames;
 									}
+									if (javaMethod instanceof JavaElement) {
+										JavaElement casted = (JavaElement) javaMethod;
+										SourceMapper mapper = casted.getSourceMapper();
+										if (mapper != null) {
+											char[][] parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
+											if (parameterNamesAsChars != null) {
+												parameterNames = toStringArray(parameterNamesAsChars);
+												return parameterNames;
+											}
+											IType type = (IType) javaMethod.getParent();
+											IBinaryType info = (IBinaryType) ((BinaryType) javaMethod
+													.getDeclaringType()).getElementInfo();
+											char[] source = mapper.findSource(type, info);
+											if (source != null) {
+												mapper.mapSource(type, source, info);
+												parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
+												if (parameterNamesAsChars != null) {
+													parameterNames = toStringArray(parameterNamesAsChars);
+													return parameterNames;
+												}
+											}
+										}
+									}
+								} catch (JavaModelException ex) {
+									if (!ex.isDoesNotExist())
+										log.warn("IMethod.getParameterNames failed", ex);
 								}
 							}
+							// same as #getRawParameterNames but without throwing a JavaModelException
+							parameterNames = new String[numberOfParameters];
+							for (int i = 0; i < numberOfParameters; i++) {
+								parameterNames[i] = "arg" + i;
+							}
 						}
-					} catch (JavaModelException ex) {
-						if (!ex.isDoesNotExist())
-							log.warn("IMethod.getParameterNames failed", ex);
 					}
-				}
-				// same as #getRawParameterNames but without throwing a JavaModelException
-				parameterNames = new String[numberOfParameters];
-				for (int i = 0; i < numberOfParameters; i++) {
-					parameterNames[i] = "arg" + i;
+					return parameterNames;
+				} finally {
+					resolveParamNames.stop();
 				}
 			}
-		}
-		return parameterNames;
+			
+			public String apply(Integer i) {
+				final String[] names = getParameterNames();
+				return names != null ? names[i] : "arg"+i;
+			}
+		};
+		
 	}
 	
 	private String[] toStringArray(char[][] chars) {
@@ -680,11 +748,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmFormalParameter createFormalParameter(ITypeBinding parameterType, String paramName, IAnnotationBinding[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
-		result.setName(paramName);
+		if (paramName != null)
+			result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
 		if (annotations != null) {
 			for (IAnnotationBinding annotation : annotations) {
-				createAnnotationReference(result, annotation);
+				result.getAnnotations().add(createAnnotationReference(annotation));
 			}
 		}
 		return result;

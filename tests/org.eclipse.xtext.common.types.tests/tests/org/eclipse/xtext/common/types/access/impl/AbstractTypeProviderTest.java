@@ -1850,7 +1850,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testAnnotationAnnotationValue_01() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
-		assertEquals(1, value.getAnnotations().size());
 		JvmAnnotationReference annotationReference = value.getValues().get(0);
 		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), annotationReference.getAnnotation().getIdentifier());
 		assertEquals(1, annotationReference.getValues().size());
@@ -1862,7 +1861,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testAnnotationAnnotationValue_02() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getConstructorParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
-		assertEquals(1, value.getAnnotations().size());
 		JvmAnnotationReference annotationReference = value.getValues().get(0);
 		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), annotationReference.getAnnotation().getIdentifier());
 		assertEquals(1, annotationReference.getValues().size());
@@ -1874,7 +1872,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testAnnotationAnnotationValue_03() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getMethodParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
-		assertEquals(1, value.getAnnotations().size());
 		JvmAnnotationReference annotationReference = value.getValues().get(0);
 		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), annotationReference.getAnnotation().getIdentifier());
 		assertEquals(1, annotationReference.getValues().size());

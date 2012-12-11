@@ -18,13 +18,19 @@
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory"/>
-                <message_argument value="createAnnotationValue(IMemberValuePairBinding, JvmAnnotationValue)"/>
+                <message_argument value="createAnnotationReference(JvmAnnotationTarget, IAnnotationBinding)"/>
             </message_arguments>
         </filter>
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory"/>
-                <message_argument value="createArrayAnnotationValue(IMemberValuePairBinding, JvmAnnotationValue)"/>
+                <message_argument value="fastGetParameterNames(IMethod)"/>
+            </message_arguments>
+        </filter>
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="ITypeFactory&lt;Arg&gt;"/>
+                <message_argument value="JdtBasedTypeFactory"/>
             </message_arguments>
         </filter>
     </resource>
