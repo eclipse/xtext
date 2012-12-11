@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.internal;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -36,10 +40,30 @@ public class StopWatchRule implements TestRule {
 	}
 
 	public void printStopWatchData(Description description, Map<String, StopWatches.NumbersForTask> data) {
-		System.out
-				.println("-------------------------------------------------------------------------------------------------------------------------\n");
-		System.out.println("Test '" + description.getDisplayName() + "' :");
-		System.out.println(getStopWatchDataAsReadableString(data));
+		String property = System.getProperty("stopwatch.file");
+		PrintStream out = System.out;
+		FileOutputStream outputStream = null;
+		if (property != null) {
+			try {
+				outputStream = new FileOutputStream(new File(property), true);
+				out = new PrintStream(outputStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			out.println("-------------------------------------------------------------------------------------------------------------------------\n");
+			out.println("Test '" + description.getDisplayName() + "' :");
+			out.println(getStopWatchDataAsReadableString(data));
+		} finally {
+//			out.flush();
+			if (outputStream != null)
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
 	}
 
 	public String getStopWatchDataAsReadableString(Map<String, NumbersForTask> data) {
@@ -63,8 +87,8 @@ public class StopWatchRule implements TestRule {
 					StopWatches.setEnabled(true);
 					StopWatches.resetAll();
 					base.evaluate();
-					printStopWatchData(description, StopWatches.allNumbers());
 				} finally {
+					printStopWatchData(description, StopWatches.allNumbers());
 					StopWatches.resetAll();
 					StopWatches.setEnabled(false);
 				}
