@@ -33,13 +33,8 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
-import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
-import org.eclipse.jdt.internal.core.BinaryType;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
-import org.eclipse.jdt.internal.core.JavaElement;
-import org.eclipse.jdt.internal.core.SourceMapper;
-import org.eclipse.jdt.internal.core.SourceMethod;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -69,11 +64,9 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -674,87 +667,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			}
 		}
 		
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected Function<Integer, String> fastGetParameterNames(final String javaMethodHandleId) {
-		return new Function<Integer, String> () {
-			
-			private String[] parameterNames = null;
-			
-			private String[] getParameterNames() {
-				try {
-					resolveParamNames.start();
-					if (parameterNames != null)
-						return parameterNames;
-					IMethod javaMethod = (IMethod) JavaCore.create(javaMethodHandleId);
-					if (javaMethod != null && javaMethod.exists()) {
-						parameterNames = Strings.EMPTY_ARRAY;
-						int numberOfParameters = javaMethod.getNumberOfParameters();
-						if (numberOfParameters != 0) {
-							if (javaMethod.exists()) {
-								try {
-									if (javaMethod instanceof SourceMethod) {
-										parameterNames = javaMethod.getParameterNames();
-										return parameterNames;
-									}
-									if (javaMethod instanceof JavaElement) {
-										JavaElement casted = (JavaElement) javaMethod;
-										SourceMapper mapper = casted.getSourceMapper();
-										if (mapper != null) {
-											char[][] parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
-											if (parameterNamesAsChars != null) {
-												parameterNames = toStringArray(parameterNamesAsChars);
-												return parameterNames;
-											}
-											IType type = (IType) javaMethod.getParent();
-											IBinaryType info = (IBinaryType) ((BinaryType) javaMethod
-													.getDeclaringType()).getElementInfo();
-											char[] source = mapper.findSource(type, info);
-											if (source != null) {
-												mapper.mapSource(type, source, info);
-												parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
-												if (parameterNamesAsChars != null) {
-													parameterNames = toStringArray(parameterNamesAsChars);
-													return parameterNames;
-												}
-											}
-										}
-									}
-								} catch (JavaModelException ex) {
-									if (!ex.isDoesNotExist())
-										log.warn("IMethod.getParameterNames failed", ex);
-								}
-							}
-							// same as #getRawParameterNames but without throwing a JavaModelException
-							parameterNames = new String[numberOfParameters];
-							for (int i = 0; i < numberOfParameters; i++) {
-								parameterNames[i] = "arg" + i;
-							}
-						}
-					}
-					return parameterNames;
-				} finally {
-					resolveParamNames.stop();
-				}
-			}
-			
-			public String apply(Integer i) {
-				final String[] names = getParameterNames();
-				return names != null ? names[i] : "arg"+i;
-			}
-		};
-		
-	}
-	
-	private String[] toStringArray(char[][] chars) {
-		String[] result = new String[chars.length];
-		for (int i = 0; i < chars.length; i++) {
-			result[i] = new String(chars[i]);
-		}
-		return result;
 	}
 
 	public void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
