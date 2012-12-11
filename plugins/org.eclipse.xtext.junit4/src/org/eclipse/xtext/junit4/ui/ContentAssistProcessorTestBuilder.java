@@ -181,20 +181,25 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse));
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
-		ISourceViewer sourceViewer = getSourceViewer(xtextDocument, configuration);
-		IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
-		String contentType = xtextDocument.getContentType(currentModelToParse.length());
-		if (contentAssistant.getContentAssistProcessor(contentType) != null) {
-			ContentAssistContext.Factory factory = get(ContentAssistContext.Factory.class);
-			ContentAssistContext[] contexts = factory.create(sourceViewer, currentModelToParse.length(), xtextResource);
-			for(ContentAssistContext context: contexts) {
-				Assert.assertTrue("matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'",
-						"".equals(context.getPrefix()) || matchString.equals(context.getPrefix()));
+		Shell shell = new Shell();
+		try {
+			ISourceViewer sourceViewer = getSourceViewer(shell, xtextDocument, configuration);
+			IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
+			String contentType = xtextDocument.getContentType(currentModelToParse.length());
+			if (contentAssistant.getContentAssistProcessor(contentType) != null) {
+				ContentAssistContext.Factory factory = get(ContentAssistContext.Factory.class);
+				ContentAssistContext[] contexts = factory.create(sourceViewer, currentModelToParse.length(), xtextResource);
+				for(ContentAssistContext context: contexts) {
+					Assert.assertTrue("matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'",
+							"".equals(context.getPrefix()) || matchString.equals(context.getPrefix()));
+				}
+			} else {
+				Assert.fail("No content assistant for content type " + contentType);
 			}
-		} else {
-			Assert.fail("No content assistant for content type " + contentType);
+			return this;
+		} finally {
+			shell.dispose();
 		}
-		return this;
 	}
 
 	protected String getModel() {
@@ -246,20 +251,25 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		
 		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
-		ISourceViewer sourceViewer = getSourceViewer(xtextDocument, configuration);
-		IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
-		String contentType = xtextDocument.getContentType(cursorPosition);
-		IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
-		if (processor != null) {
-			return processor.computeCompletionProposals(sourceViewer, cursorPosition);
+		Shell shell = new Shell();
+		try {
+			ISourceViewer sourceViewer = getSourceViewer(shell, xtextDocument, configuration);
+			IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
+			String contentType = xtextDocument.getContentType(cursorPosition);
+			IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
+			if (processor != null) {
+				return processor.computeCompletionProposals(sourceViewer, cursorPosition);
+			}
+			return new ICompletionProposal[0];
+		} finally {
+			shell.dispose();
 		}
-		return new ICompletionProposal[0];
 	}
 
-	protected ISourceViewer getSourceViewer(final IXtextDocument xtextDocument,
+	protected ISourceViewer getSourceViewer(Shell shell, final IXtextDocument xtextDocument,
 			XtextSourceViewerConfiguration configuration) {
 		XtextSourceViewer.Factory factory = get(XtextSourceViewer.Factory.class);
-		ISourceViewer sourceViewer = factory.createSourceViewer(new Shell(), null, null, false, 0);
+		ISourceViewer sourceViewer = factory.createSourceViewer(shell, null, null, false, 0);
 		sourceViewer.configure(configuration);
 		sourceViewer.setDocument(xtextDocument);
 		return sourceViewer;
