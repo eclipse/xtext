@@ -1969,15 +1969,14 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmAnyTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmMultiTypeReferenceEClass.getESuperTypes().add(this.getJvmCompoundTypeReference());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
-		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmFeatureEClass.getESuperTypes().add(this.getJvmMember());
 		jvmFieldEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmExecutableEClass.getESuperTypes().add(this.getJvmFeature());
 		jvmExecutableEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
 		jvmConstructorEClass.getESuperTypes().add(this.getJvmExecutable());
 		jvmOperationEClass.getESuperTypes().add(this.getJvmExecutable());
-		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmFormalParameterEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
+		jvmAnnotationTargetEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmIntAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmBooleanAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmByteAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
@@ -1989,7 +1988,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmStringAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmTypeAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmAnnotationAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
-		jvmAnnotationAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmEnumAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
 		jvmDelegateTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmSpecializedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
@@ -2247,7 +2245,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEReference(getJvmTypeAnnotationValue_Values(), this.getJvmTypeReference(), null, "values", null, 0, -1, JvmTypeAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmAnnotationAnnotationValueEClass, JvmAnnotationAnnotationValue.class, "JvmAnnotationAnnotationValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmAnnotationAnnotationValue_Values(), this.getJvmAnnotationReference(), null, "values", null, 0, -1, JvmAnnotationAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmAnnotationAnnotationValue_Values(), this.getJvmAnnotationReference(), null, "values", null, 0, -1, JvmAnnotationAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmEnumAnnotationValueEClass, JvmEnumAnnotationValue.class, "JvmEnumAnnotationValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmEnumAnnotationValue_Values(), this.getJvmEnumerationLiteral(), null, "values", null, 0, -1, JvmEnumAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

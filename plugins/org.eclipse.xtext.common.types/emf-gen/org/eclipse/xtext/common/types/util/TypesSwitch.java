@@ -381,8 +381,8 @@ public class TypesSwitch<T>
 			{
 				JvmFormalParameter jvmFormalParameter = (JvmFormalParameter)theEObject;
 				T result = caseJvmFormalParameter(jvmFormalParameter);
-				if (result == null) result = caseJvmIdentifiableElement(jvmFormalParameter);
 				if (result == null) result = caseJvmAnnotationTarget(jvmFormalParameter);
+				if (result == null) result = caseJvmIdentifiableElement(jvmFormalParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -390,6 +390,7 @@ public class TypesSwitch<T>
 			{
 				JvmAnnotationTarget jvmAnnotationTarget = (JvmAnnotationTarget)theEObject;
 				T result = caseJvmAnnotationTarget(jvmAnnotationTarget);
+				if (result == null) result = caseJvmIdentifiableElement(jvmAnnotationTarget);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -492,7 +493,6 @@ public class TypesSwitch<T>
 				JvmAnnotationAnnotationValue jvmAnnotationAnnotationValue = (JvmAnnotationAnnotationValue)theEObject;
 				T result = caseJvmAnnotationAnnotationValue(jvmAnnotationAnnotationValue);
 				if (result == null) result = caseJvmAnnotationValue(jvmAnnotationAnnotationValue);
-				if (result == null) result = caseJvmAnnotationTarget(jvmAnnotationAnnotationValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

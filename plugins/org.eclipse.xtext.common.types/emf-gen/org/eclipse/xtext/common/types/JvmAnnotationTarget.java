@@ -1,13 +1,8 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface JvmAnnotationTarget extends EObject
+public interface JvmAnnotationTarget extends JvmIdentifiableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.

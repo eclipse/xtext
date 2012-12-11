@@ -1162,7 +1162,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateAnnotations(final JvmAnnotationAnnotationValue it, final ITreeAppendable appendable, final boolean withLineBreak) {
-    EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+    EList<JvmAnnotationReference> _values = it.getValues();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
         public void apply(final LoopParams it) {
           final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
@@ -1198,7 +1198,7 @@ public class JvmModelGenerator implements IGenerator {
           JvmModelGenerator.this.generateAnnotation(it, app);
         }
       };
-    this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, _annotations, _function, _function_1);
+    this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, _values, _function, _function_1);
   }
   
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable) {
@@ -1531,10 +1531,10 @@ public class JvmModelGenerator implements IGenerator {
       return _generateModifier((JvmConstructor)it, appendable);
     } else if (it instanceof JvmOperation) {
       return _generateModifier((JvmOperation)it, appendable);
-    } else if (it instanceof JvmDeclaredType) {
-      return _generateModifier((JvmDeclaredType)it, appendable);
     } else if (it instanceof JvmField) {
       return _generateModifier((JvmField)it, appendable);
+    } else if (it instanceof JvmDeclaredType) {
+      return _generateModifier((JvmDeclaredType)it, appendable);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, appendable).toString());
@@ -1544,12 +1544,12 @@ public class JvmModelGenerator implements IGenerator {
   public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable);
-    } else if (it instanceof JvmGenericType) {
-      return _generateMember((JvmGenericType)it, appendable);
     } else if (it instanceof JvmOperation) {
       return _generateMember((JvmOperation)it, appendable);
     } else if (it instanceof JvmField) {
       return _generateMember((JvmField)it, appendable);
+    } else if (it instanceof JvmGenericType) {
+      return _generateMember((JvmGenericType)it, appendable);
     } else if (it != null) {
       return _generateMember(it, appendable);
     } else {

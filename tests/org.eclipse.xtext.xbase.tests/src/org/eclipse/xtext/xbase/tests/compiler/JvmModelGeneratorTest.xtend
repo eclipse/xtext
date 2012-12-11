@@ -193,9 +193,9 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 				val annotation = expression.toAnnotation(typeof(TestAnnotations))
 				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
 
-				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
 				annotation.values += annotationAnnotationValue
 				annotations += annotation
 			]

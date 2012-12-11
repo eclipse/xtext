@@ -14,8 +14,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,7 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmAnnotationTargetImpl extends MinimalEObjectImpl.Container implements JvmAnnotationTarget
+public abstract class JvmAnnotationTargetImpl extends JvmIdentifiableElementImplCustom implements JvmAnnotationTarget
 {
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.

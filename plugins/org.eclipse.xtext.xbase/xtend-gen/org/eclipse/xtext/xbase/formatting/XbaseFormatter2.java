@@ -2934,6 +2934,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);
       return;
+    } else if (ref instanceof JvmFormalParameter) {
+      _format((JvmFormalParameter)ref, document);
+      return;
     } else if (ref instanceof XAssignment) {
       _format((XAssignment)ref, document);
       return;
@@ -2954,9 +2957,6 @@ public class XbaseFormatter2 extends AbstractFormatter {
       return;
     } else if (ref instanceof XFunctionTypeRef) {
       _format((XFunctionTypeRef)ref, document);
-      return;
-    } else if (ref instanceof JvmFormalParameter) {
-      _format((JvmFormalParameter)ref, document);
       return;
     } else if (ref instanceof JvmGenericArrayTypeReference) {
       _format((JvmGenericArrayTypeReference)ref, document);

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.4.0"/>
+                <message_argument value="2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java" type="org.eclipse.xtext.common.types.JvmTypeReference">
         <filter comment="Since this is not 'really' API, it's ok to have a non API argument" id="643846161">
             <message_arguments>
@@ -13,6 +21,28 @@
                 <message_argument value="ITypeReferenceVisitorWithParameter&lt;Parameter, Result&gt;"/>
                 <message_argument value="JvmTypeReference"/>
                 <message_argument value="accept(ITypeReferenceVisitorWithParameter&lt;Parameter,Result&gt;, Parameter)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ANNOTATION_ANNOTATION_VALUE_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ANNOTATION_ANNOTATION_VALUE__VALUES"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS"/>
             </message_arguments>
         </filter>
     </resource>

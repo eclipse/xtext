@@ -1201,7 +1201,7 @@ public class JvmTypesBuilder {
 				public void appendValue(JvmAnnotationValue value, XExpression expr) {
 					JvmAnnotationAnnotationValue annotationValue = (JvmAnnotationAnnotationValue) value;
 					JvmAnnotationReference annotationReference = getJvmAnnotationReference((XAnnotation) expr);
-					annotationValue.getAnnotations().add(annotationReference);
+					annotationValue.getValues().add(annotationReference);
 				}
 			};
 		} else {

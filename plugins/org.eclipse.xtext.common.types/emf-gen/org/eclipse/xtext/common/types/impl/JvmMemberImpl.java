@@ -36,7 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements JvmMember
+public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implements JvmMember
 {
 	/**
 	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
@@ -237,30 +237,6 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImpl implements J
 	 * @generated
 	 */
 	public void internalSetIdentifier(String identifier)
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName(char innerClassDelimiter)
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

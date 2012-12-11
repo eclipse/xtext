@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types;
 
@@ -23,7 +20,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmFormalParameter extends JvmIdentifiableElement, JvmAnnotationTarget
+public interface JvmFormalParameter extends JvmAnnotationTarget
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

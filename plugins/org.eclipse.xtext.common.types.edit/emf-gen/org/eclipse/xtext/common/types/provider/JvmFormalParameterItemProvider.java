@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -35,7 +32,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public class JvmFormalParameterItemProvider
-	extends JvmIdentifiableElementItemProvider
+	extends JvmAnnotationTargetItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -109,7 +106,6 @@ public class JvmFormalParameterItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE);
 		}
 		return childrenFeatures;
@@ -173,7 +169,6 @@ public class JvmFormalParameterItemProvider
 			case TypesPackage.JVM_FORMAL_PARAMETER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TypesPackage.JVM_FORMAL_PARAMETER__ANNOTATIONS:
 			case TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -192,11 +187,6 @@ public class JvmFormalParameterItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS,
-				 TypesFactory.eINSTANCE.createJvmAnnotationReference()));
 
 		newChildDescriptors.add
 			(createChildParameter

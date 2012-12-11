@@ -194,14 +194,14 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   public JvmTypeReference typeForIdentifiable(final JvmIdentifiableElement constructor, final boolean rawType) {
     if (constructor instanceof JvmConstructor) {
       return _typeForIdentifiable((JvmConstructor)constructor, rawType);
-    } else if (constructor instanceof JvmGenericType) {
-      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
     } else if (constructor instanceof JvmOperation) {
       return _typeForIdentifiable((JvmOperation)constructor, rawType);
-    } else if (constructor instanceof JvmDeclaredType) {
-      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
     } else if (constructor instanceof JvmField) {
       return _typeForIdentifiable((JvmField)constructor, rawType);
+    } else if (constructor instanceof JvmGenericType) {
+      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
+    } else if (constructor instanceof JvmDeclaredType) {
+      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
     } else if (constructor instanceof JvmFormalParameter) {
       return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
     } else if (constructor instanceof JvmType) {
