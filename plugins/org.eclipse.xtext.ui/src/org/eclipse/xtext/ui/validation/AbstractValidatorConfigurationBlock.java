@@ -19,11 +19,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 import org.eclipse.xtext.ui.util.PixelConverter;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -33,6 +35,9 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	@Inject
 	private IDialogSettings section;
 	private PixelConverter fPixelConverter;
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
 
 	protected AbstractValidatorConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
 			IWorkbenchPreferenceContainer container) {
@@ -73,20 +78,30 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 
 		Label description = new Label(composite, SWT.LEFT | SWT.WRAP);
 		description.setFont(description.getFont());
-		description.setText("Errors/Warnings");
+		description.setText("Select the severity level for the following optional " + lastSegment(languageName)
+				+ " compiler problems:");
 		description.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, true, false, nColumns - 1, 1));
 
 		int indentStep = fPixelConverter.convertWidthInCharsToPixels(1);
 
 		int defaultIndent = indentStep * 0;
 		//		int extraIndent = indentStep * 2;
-		
+
 		fillSettingsPage(composite, nColumns, defaultIndent);
 		new Label(composite, SWT.NONE);
 		restoreSectionExpansionStates(section);
 
 		return sc1;
 
+	}
+
+	private String lastSegment(String languageFQN) {
+		String simplename = languageFQN;
+		int lastDot = languageFQN.lastIndexOf('.');
+		if (lastDot >= 0 && lastDot < languageFQN.length() - 1) {
+			simplename = languageFQN.substring(lastDot + 1, languageFQN.length());
+		}
+		return simplename;
 	}
 
 	protected abstract void fillSettingsPage(Composite composite, int nColumns, int defaultIndent);

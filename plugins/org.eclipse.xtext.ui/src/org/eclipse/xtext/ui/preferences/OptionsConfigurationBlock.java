@@ -40,7 +40,6 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -167,6 +166,10 @@ public abstract class OptionsConfigurationBlock {
 		GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
 		gd.horizontalSpan = 3;
 		gd.horizontalIndent = indent;
+		return addCheckboxWithData(parent, label, data, gd);
+	}
+
+	protected Button addCheckboxWithData(Composite parent, String label, ControlData data, GridData gd) {
 		Button checkBox = new Button(parent, SWT.CHECK);
 		checkBox.setFont(JFaceResources.getDialogFont());
 		checkBox.setText(label);
@@ -203,8 +206,8 @@ public abstract class OptionsConfigurationBlock {
 		return textBox;
 	}
 
-	protected Combo addComboBox(Composite parent, String label, String code, String[] errorWarningIgnore,
-			String[] errorWarningIgnoreLabels, int indent) {
+	protected Combo addComboBox(Composite parent, String label, String code, int indent, String[] values,
+			String[] valueLabels) {
 
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
@@ -214,14 +217,7 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
 
-		String[] values = new String[] { "Error", "Warning", "Ignore" };
-		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
-		//		if (issueCode.hasJavaEqivalent()) {
-		//			values = new String[] { "Error", "Warning", "Ignore", "Java" };
-		//			valueLabels = new String[] { "Error", "Warning", "Ignore", "reuse Java" };
-		//		}
-
-		Combo comboBox = newComboControl(parent, code, values, valueLabels);
+		Combo comboBox = addComboControl(parent, code, values, valueLabels);
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 
 		labels.put(comboBox, labelControl);
@@ -229,9 +225,11 @@ public abstract class OptionsConfigurationBlock {
 		return comboBox;
 	}
 
-	protected Combo newComboControl(Composite composite, String key, String[] values, String[] valueLabels) {
-		ControlData data = new ControlData(key, values);
+	private Combo addComboControl(Composite composite, String key, String[] values, String[] valueLabels) {
+		return addComboControlWithData(composite, valueLabels, new ControlData(key, values));
+	}
 
+	protected Combo addComboControlWithData(Composite composite, String[] valueLabels, ControlData data) {
 		Combo comboBox = new Combo(composite, SWT.READ_ONLY);
 		comboBox.setItems(valueLabels);
 		comboBox.setData(data);
@@ -243,24 +241,6 @@ public abstract class OptionsConfigurationBlock {
 		updateCombo(comboBox);
 
 		comboBoxes.add(comboBox);
-		return comboBox;
-	}
-
-	protected Combo addComboBox(ConfigurableIssueCode issueCode, String label, Composite parent, int indent, String[] values,
-			String[] valueLabels) {
-		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
-		gd.horizontalIndent = indent;
-
-		Label labelControl = new Label(parent, SWT.LEFT);
-		labelControl.setFont(JFaceResources.getDialogFont());
-		labelControl.setText(label);
-		labelControl.setLayoutData(gd);
-
-		Combo comboBox = newComboControl(parent, issueCode.getId(), values, valueLabels);
-		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
-
-		labels.put(comboBox, labelControl);
-
 		return comboBox;
 	}
 
