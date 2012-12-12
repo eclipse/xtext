@@ -18,9 +18,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class TokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMapper {
 
+	public final static String JAVA_DOC_PARTITION = "__java_javadoc";
+
 	public final static String RICH_STRING_LITERAL_PARTITION = "__rich_string";
 	public static final String[] SUPPORTED_TOKEN_TYPES = new String[] { 
-		COMMENT_PARTITION, 
+		JAVA_DOC_PARTITION,
 		SL_COMMENT_PARTITION, 
 		STRING_LITERAL_PARTITION, 
 		RICH_STRING_LITERAL_PARTITION,
@@ -37,6 +39,9 @@ public class TokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMap
 				"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
 				"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
 			return RICH_STRING_LITERAL_PARTITION;
+		}
+		if ("RULE_ML_COMMENT".equals(tokenName)) {
+			return JAVA_DOC_PARTITION;
 		}
 		return super.calculateId(tokenName, tokenType);
 	}
