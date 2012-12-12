@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.core.JarEntryResource;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
@@ -35,6 +36,9 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 	
 	@Override
 	public boolean canHandle(URI uri, IStorage storage) {
+		if (storage instanceof JarEntryResource) {
+			return false;
+		}
 		final boolean canHandle = super.canHandle(uri, storage);
 		if (canHandle && (storage instanceof IResource)) {
 			IResource resource = (IResource) storage;
