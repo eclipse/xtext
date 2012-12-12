@@ -13,6 +13,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
+import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -32,9 +33,16 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	@Override
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
 		super.configureIndentationEditStrategy(acceptor);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
 		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
 	}
 	
+	@Override
+	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
+		super.configureMultilineComments(acceptor);
+		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
+	}
+
 	@Override
 	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
 		super.configureCurlyBracesBlock(acceptor);
