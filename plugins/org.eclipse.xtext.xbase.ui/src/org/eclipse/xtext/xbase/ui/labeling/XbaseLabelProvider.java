@@ -6,8 +6,10 @@ package org.eclipse.xtext.xbase.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -45,7 +47,18 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public Image image(JvmGenericType genericType){
-		return images.forClass(genericType.getVisibility());
+		if(genericType.isInterface())
+			return images.forInterface(genericType.getVisibility());
+		else 
+			return images.forClass(genericType.getVisibility());
+	}
+	
+	public Image image(JvmEnumerationType genericType){
+		return images.forEnum(genericType.getVisibility());
+	}
+	
+	public Image image(JvmAnnotationType genericType){
+		return images.forAnnotation(genericType.getVisibility());
 	}
 	
 	public String test(JvmGenericType genericType){
