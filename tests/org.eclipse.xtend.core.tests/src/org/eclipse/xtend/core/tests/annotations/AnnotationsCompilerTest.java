@@ -69,9 +69,9 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testKeyValueParameterizedAnnotationOnMethod() throws Exception {
-		final String text = "class Foo { @org.junit.Test(timeout = 400) def String string() {} }";
-		Test test = getAnnotationOnMethod(text, Test.class);
-		assertEquals(400, test.timeout());
+		final String text = "class Foo { @com.google.inject.Inject(optional = true) def String string() {} }";
+		Inject inject = getAnnotationOnMethod(text, Inject.class);
+		assertTrue(inject.optional());
 	}
 	
 	@Test public void testMarkerAnnotationOnField() throws Exception {
