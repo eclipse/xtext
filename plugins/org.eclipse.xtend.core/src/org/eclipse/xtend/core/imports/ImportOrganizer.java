@@ -49,22 +49,27 @@ public class ImportOrganizer {
 	private ImportSectionSerializer importSectionSerializer;
 	
 	@Inject
-	private VisibleTypesFromHierarchy typesFromHierarchy;
+	private NonOverridableTypesProvider nonOverridableTypesProvider;
+	
+	@Inject(optional=true)
+	private IUnresolvedTypeResolver unresolvedTypeResolver;
 	
 	public List<ReplaceRegion> getOrganizedImportChanges(XtextResource state) {
 		XtendFile xtendFile = getXtendFile(state);
 		Set<JvmDeclaredType> locallyDeclaredTypes = getDeclaredTypes(xtendFile);
 		TypeUsageCollector typeUsageCollector = typeUsageCollectorProvider.get();
 		TypeUsages typeUsages = typeUsageCollector.collectTypeUsages(xtendFile);
-		Map<JvmDeclaredType, String> type2name = conflictResolver.resolveConflicts(typeUsages, typesFromHierarchy, xtendFile);
+		if(unresolvedTypeResolver != null) 
+			unresolvedTypeResolver.resolve(typeUsages, state);
+		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, xtendFile);
 		Set<String> implicitlyImportedPackages = getImplicitlyImportedPackages(xtendFile);
 		ImportSection newImportSection = new ImportSection();
 		List<ReplaceRegion> replaceRegions = newArrayList();
-		for(Map.Entry<JvmDeclaredType, String> entry: type2name.entrySet()) {
-			JvmDeclaredType type = entry.getKey();
-			String text = entry.getValue();
+		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
+			String text = entry.getKey();
+			JvmDeclaredType type = entry.getValue();
 			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			if(needsImport(type, text, xtendFile, locallyDeclaredTypes, implicitlyImportedPackages, typesFromHierarchy, usages)) {
+			if(needsImport(type, text, xtendFile, locallyDeclaredTypes, implicitlyImportedPackages, nonOverridableTypesProvider, usages)) {
 				newImportSection.getImportedTypes().add(type);
 			}
 			for(TypeUsage usage: usages) {
@@ -81,16 +86,17 @@ public class ImportOrganizer {
 
 	protected boolean needsImport(JvmDeclaredType type, String name, XtendFile xtendFile,
 			Set<JvmDeclaredType> locallyDefinedTypes, Set<String> implicitlyImportedPackages, 
-			VisibleTypesFromHierarchy typesFromHierarchy, Iterable<TypeUsage> usages)  {
+			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
 		return !((type.getIdentifier().equals(name))
 			|| implicitlyImportedPackages.contains(type.getPackageName())
 			|| locallyDefinedTypes.contains(type)
-			|| isVisibleFromHierarchyEverywhere(usages, typesFromHierarchy, name));
+			|| isUsedInNonOverridableContextOnly(usages, nonOverridableTypesProvider, name));
 	}
 	
-	protected boolean isVisibleFromHierarchyEverywhere(Iterable<TypeUsage> usages, VisibleTypesFromHierarchy typesFromHierarchy, String name) {
+	protected boolean isUsedInNonOverridableContextOnly(Iterable<TypeUsage> usages, 
+			NonOverridableTypesProvider nonOverridableTypesProvider, String name) {
 		for(TypeUsage usage: usages) {
-			if(typesFromHierarchy.getVisibleType(usage.getContext(), name) == null) 
+			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null) 
 				return false;
 		}
 		return true;

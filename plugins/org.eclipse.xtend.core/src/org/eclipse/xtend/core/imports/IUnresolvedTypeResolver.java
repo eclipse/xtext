@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package types;
+package org.eclipse.xtend.core.imports;
+
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OuterParamClass<T> {
-	public class MiddleClass<U> {
-		protected class InnerMostClass<V> {
-		}
-	}
+public interface IUnresolvedTypeResolver {
+
+	void resolve(TypeUsages usages, XtextResource resource);
 }

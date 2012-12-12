@@ -11,8 +11,11 @@ package types;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class OuterClass {
-	class MiddleClass {
-		class InnerMostClass {
+	public class MiddleClass {
+		protected class InnerMostClass {
 		}
+	}
+	@SuppressWarnings("unused")
+	private class PrivateMiddleClass {
 	}
 }

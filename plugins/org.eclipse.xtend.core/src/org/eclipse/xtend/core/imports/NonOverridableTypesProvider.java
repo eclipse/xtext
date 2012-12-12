@@ -20,19 +20,26 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 
 import com.google.inject.Inject;
 
 /**
+ * This class detects visible inner classes of the supertype and local type parameters. These cannot be overriden by
+ * means of an import so they need special treatment.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class VisibleTypesFromHierarchy {
+public class NonOverridableTypesProvider {
 
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 
 	@Inject
 	private TypeReferences typeReferences;
+
+	@Inject
+	private VisibilityService visibilityService;
 
 	private Map<JvmMember, Map<String, JvmIdentifiableElement>> visibleElements = newHashMap();
 
@@ -55,11 +62,11 @@ public class VisibleTypesFromHierarchy {
 			if (!result.containsKey(context.getSimpleName()))
 				result.put(context.getSimpleName(), context);
 			JvmDeclaredType contextType = (JvmDeclaredType) context;
-			addInnerTypes(contextType, "", result);
+			addInnerTypes(contextType, "", contextType, result);
 			JvmParameterizedTypeReference contextTypeRef = typeReferences.createTypeRef(contextType);
 			for (JvmType superType : superTypeCollector.collectSuperTypesAsRawTypes(contextTypeRef)) {
 				if (superType instanceof JvmDeclaredType)
-					addInnerTypes((JvmDeclaredType) superType, "", result);
+					addInnerTypes((JvmDeclaredType) superType, "", contextType, result);
 			}
 		}
 		if (context instanceof JvmTypeParameterDeclarator)
@@ -69,14 +76,15 @@ public class VisibleTypesFromHierarchy {
 			process(declaringType, result);
 	}
 
-	protected void addInnerTypes(JvmDeclaredType type, String prefix, Map<String, JvmIdentifiableElement> result) {
+	protected void addInnerTypes(JvmDeclaredType type, String prefix, JvmDeclaredType contextType,
+			Map<String, JvmIdentifiableElement> result) {
 		for (JvmMember member : type.getMembers()) {
-			if (member instanceof JvmDeclaredType) {
+			if (member instanceof JvmDeclaredType && visibilityService.isVisible(member, contextType)) {
 				String localName = prefix + member.getSimpleName();
 				if (!result.containsKey(localName)) {
 					result.put(localName, member);
 				}
-				addInnerTypes((JvmDeclaredType) member, prefix + member.getSimpleName() + ".", result);
+				addInnerTypes((JvmDeclaredType) member, prefix + member.getSimpleName() + ".", contextType, result);
 			}
 		}
 	}

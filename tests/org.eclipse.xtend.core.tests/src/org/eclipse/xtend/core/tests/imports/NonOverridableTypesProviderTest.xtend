@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.imports
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.imports.VisibleTypesFromHierarchy
+import org.eclipse.xtend.core.imports.NonOverridableTypesProvider
 import com.google.inject.Inject
 import org.junit.Test
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
@@ -13,10 +13,10 @@ import org.eclipse.xtext.common.types.JvmMember
 /** 
  * TODO: Write more of these tests as soon as Xtend provides inner classes 
  */
-class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
+class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
 	
 	@Inject
-	private VisibleTypesFromHierarchy typesFromHierarchy
+	private NonOverridableTypesProvider typesFromHierarchy
 
 	@Inject
 	private IXtendJvmAssociations associations
@@ -34,14 +34,16 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		val inferredType = associations.getInferredType(xtendClass)
 		assertTypeInScope("Foo", inferredType)
 		assertTypeInScope("MiddleClass", inferredType)
-		assertTypeInScope("MiddleClass.InnerMostClass", inferredType)
+		assertNotInScope("MiddleClass.InnerMostClass", inferredType)
 		assertNotInScope("OuterClass", inferredType)
+		assertNotInScope("PrivateMiddleClass", inferredType)
 		val method = xtendClass.members.get(0)
 		val operation = associations.getDirectlyInferredOperation(method as XtendFunction)
 		assertTypeInScope("Foo", operation)
 		assertTypeInScope("MiddleClass", operation)
-		assertTypeInScope("MiddleClass.InnerMostClass", operation)
+		assertNotInScope("MiddleClass.InnerMostClass", operation)
 		assertNotInScope("OuterClass", inferredType)
+		assertNotInScope("PrivateMiddleClass", inferredType)
 	}
 	
 	@Test def testInheritMiddle() {
@@ -60,6 +62,7 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		assertNotInScope("OuterClass.MiddleClass", inferredType)
 		assertNotInScope("MiddleClass", inferredType)
 		assertNotInScope("OuterClass", inferredType)
+		assertNotInScope("PrivateMiddleClass", inferredType)
 
 		val method = xtendClass.members.get(0)
 		val operation = associations.getDirectlyInferredOperation(method as XtendFunction)
@@ -68,6 +71,7 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		assertNotInScope("OuterClass.MiddleClass", operation)
 		assertNotInScope("MiddleClass", operation)
 		assertNotInScope("OuterClass", operation)
+		assertNotInScope("PrivateMiddleClass", inferredType)
 	}
 	
 	@Test def testInheritOuterTypeParam() {
@@ -84,7 +88,7 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		val inferredType = associations.getInferredType(xtendClass)
 		assertTypeInScope("Foo", inferredType)
 		assertTypeInScope("MiddleClass", inferredType)
-		assertTypeInScope("MiddleClass.InnerMostClass", inferredType)
+		assertNotInScope("MiddleClass.InnerMostClass", inferredType)
 		assertTypeParameterInScope("T", inferredType)
 		assertNotInScope("OuterClass", inferredType)
 		
@@ -93,7 +97,7 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		assertTypeInScope("Foo", operation)
 		assertTypeParameterInScope("MiddleClass", operation)
 		assertTypeParameterInScope("T", operation)
-		assertTypeInScope("MiddleClass.InnerMostClass", operation)
+		assertNotInScope("MiddleClass.InnerMostClass", operation)
 		assertNotInScope("OuterClass", operation)
 
 		val method2 = xtendClass.members.get(0)
@@ -101,7 +105,7 @@ class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
 		assertTypeInScope("Foo", operation2)
 		assertTypeParameterInScope("MiddleClass", operation2)
 		assertTypeParameterInScope("T", operation2)
-		assertTypeInScope("MiddleClass.InnerMostClass", operation2)
+		assertNotInScope("MiddleClass.InnerMostClass", operation2)
 		assertNotInScope("OuterClass", operation2)
 	}
 	
