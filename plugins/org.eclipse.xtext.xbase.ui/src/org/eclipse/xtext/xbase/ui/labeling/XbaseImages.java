@@ -25,6 +25,18 @@ public class XbaseImages {
 		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, toFlags(visibility), false));
 	}
 
+	public Image forInterface(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccInterface, false));
+	}
+
+	public Image forEnum(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, toFlags(visibility) | Flags.AccEnum, false));
+	}
+
+	public Image forAnnotation(JvmVisibility visibility) {
+		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccAnnotation, false));
+	}
+
 	public Image forConstructor(JvmVisibility visibility) {
 		return getDecoratedJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility)),
 				JavaElementImageDescriptor.CONSTRUCTOR);
