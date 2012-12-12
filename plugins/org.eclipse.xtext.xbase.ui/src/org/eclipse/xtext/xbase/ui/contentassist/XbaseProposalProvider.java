@@ -604,8 +604,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		} else if (feature instanceof JvmField) {
 			JvmField field = (JvmField) feature;
 			result.append(" : ");
-			if (field.getType() != null)
-				result.append(field.getType().getSimpleName());
+			if (field.getType() != null) {
+				String fieldType = field.getType().getSimpleName();
+				if (fieldType != null)
+					result.append(fieldType);
+			}
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
 			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
 		} else if (feature instanceof JvmConstructor) {
