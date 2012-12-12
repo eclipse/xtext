@@ -58,6 +58,7 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -81,11 +82,13 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -176,6 +179,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private ReturnTypeProvider returnTypeProvider;
+
+	@Inject
+	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -1178,6 +1184,14 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
+		for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeReferenceRegions(file.eResource())){
+			String simpleName = region.getText().trim();
+			if (importedNames.containsKey(simpleName)) {
+				JvmType type = importedNames.remove(simpleName);
+				imports.remove(type);
+			}
+		}
+
 		for (XtendImport imp : imports.values()) {
 			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
 					IssueCodes.IMPORT_UNUSED);
