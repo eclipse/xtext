@@ -26,7 +26,6 @@ import org.eclipse.jface.text.IDelayedInputChangeProvider;
 import org.eclipse.jface.text.IInformationControlExtension2;
 import org.eclipse.jface.text.IInputChangedListener;
 import org.eclipse.jface.text.TextPresentation;
-import org.eclipse.pde.internal.ui.SWTFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
@@ -129,7 +128,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		}); 
 		// Replace browser's built-in context menu with none
 		fSashForm.setMenu(new Menu(getShell(), SWT.NONE));
-		detailPaneComposite = SWTFactory.createComposite(fSashForm, 1, 1, GridData.FILL_BOTH);
+		detailPaneComposite = createComposite(fSashForm, 1, 1, GridData.FILL_BOTH);
 		Layout layout = detailPaneComposite.getLayout();
 		if (layout instanceof GridLayout) {
 			GridLayout gl = (GridLayout) layout;
@@ -152,6 +151,17 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		embeddedEditorAccess = embeddedEditor.createPartialEditor("", "a", "", false);
 		embeddedEditor.getDocument().setValidationJob(null);
 		createTextLayout();
+	}
+	
+	protected Composite createComposite(Composite parent, int columns, int hspan, int fill) {
+		Composite g = new Composite(parent, SWT.NONE);
+		g.setLayout(new GridLayout(columns, false));
+		g.setFont(parent.getFont());
+		GridData gd = new GridData(fill);
+		gd.horizontalSpan = hspan;
+		gd.grabExcessHorizontalSpace = true;
+		g.setLayoutData(gd);
+		return g;
 	}
 
 	/**
