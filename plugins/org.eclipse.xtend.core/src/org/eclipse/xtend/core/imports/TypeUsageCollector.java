@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -32,6 +31,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
@@ -212,20 +212,22 @@ public class TypeUsageCollector {
 			referencedType = (JvmDeclaredType) referencedThing;
 		} else if (referencedThing instanceof JvmMember) {
 			referencedType = ((JvmMember) referencedThing).getDeclaringType();
-		}
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
-		if (nodes.size() == 1) {
-			String text = NodeModelUtils.getTokenText(nodes.get(0));
-			int dollar = text.lastIndexOf('$');
-			String preferredTypeText = text; 
-			if (dollar >= 0) {
-				JvmDeclaredType declaredType = referencedType;
-				while(declaredType.getDeclaringType() != null && dollar >= 0) {
-					declaredType = declaredType.getDeclaringType();
-					preferredTypeText = text.substring(0, dollar);
-					dollar = text.lastIndexOf('$', dollar-1);
+		} 
+		if (referencedType != null) {
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
+			if (nodes.size() == 1) {
+				String text = NodeModelUtils.getTokenText(nodes.get(0));
+				int dollar = text.lastIndexOf('$');
+				String preferredTypeText = text; 
+				if (dollar >= 0) {
+					JvmDeclaredType declaredType = referencedType;
+					while(declaredType.getDeclaringType() != null && dollar >= 0) {
+						declaredType = declaredType.getDeclaringType();
+						preferredTypeText = text.substring(0, dollar);
+						dollar = text.lastIndexOf('$', dollar-1);
+					}
+					return Tuples.create(declaredType, preferredTypeText);
 				}
-				return Tuples.create(declaredType, preferredTypeText);
 			}
 		}
 		return Tuples.create(referencedType, null);
@@ -233,20 +235,26 @@ public class TypeUsageCollector {
 	
 	protected void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {
 		ITextRegion refRegion = locationInFileProvider.getSignificantTextRegion(owner, referenceToTypeOrMember, 0);
-		String refText = resource.getParseResult().getRootNode().getText().substring(
-				refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
-		Pair<JvmDeclaredType, String> preferredType = findPreferredType(owner, referenceToTypeOrMember);
-		if(preferredType.getSecond() != null) {
-			refRegion = new TextRegion(refRegion.getOffset(), refRegion.getLength() - refText.length() + preferredType.getSecond().length());
-			refText = preferredType.getSecond();
+		IParseResult parseResult = resource.getParseResult();
+		if(parseResult != null) {
+			String refText = parseResult.getRootNode().getText().substring(
+					refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
+			Pair<JvmDeclaredType, String> preferredType = findPreferredType(owner, referenceToTypeOrMember);
+			if (preferredType.getFirst() != null) {
+				if (preferredType.getSecond() != null) {
+					refRegion = new TextRegion(refRegion.getOffset(), refRegion.getLength() - refText.length() + preferredType.getSecond().length());
+					refText = preferredType.getSecond();
+				}
+				acceptType(preferredType.getFirst(), refText, refRegion);
+			}
 		}
-		acceptType(preferredType.getFirst(), refText, refRegion);
 	}
 	
 	protected void acceptType(JvmType type, String refText, ITextRegion refRegion) {
-		if (type instanceof JvmDeclaredType && !type.equals(currentThisType)) {
-			String simpleName = type.getSimpleName();
-				typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
+		if (type == null || type.eIsProxy()) {
+			typeUsages.addUnresolved(refText, refRegion, currentContext);
+		} else if (type instanceof JvmDeclaredType && !type.equals(currentThisType)) {
+			typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
 		}
 	}
 	

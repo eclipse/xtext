@@ -2,7 +2,7 @@ package org.eclipse.xtend.core.tests.imports;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.imports.VisibleTypesFromHierarchy;
+import org.eclipse.xtend.core.imports.NonOverridableTypesProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -23,9 +23,9 @@ import org.junit.Test;
  * TODO: Write more of these tests as soon as Xtend provides inner classes
  */
 @SuppressWarnings("all")
-public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
+public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
   @Inject
-  private VisibleTypesFromHierarchy typesFromHierarchy;
+  private NonOverridableTypesProvider typesFromHierarchy;
   
   @Inject
   private IXtendJvmAssociations associations;
@@ -51,15 +51,17 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       final JvmGenericType inferredType = this.associations.getInferredType(xtendClass);
       this.assertTypeInScope("Foo", inferredType);
       this.assertTypeInScope("MiddleClass", inferredType);
-      this.assertTypeInScope("MiddleClass.InnerMostClass", inferredType);
+      this.assertNotInScope("MiddleClass.InnerMostClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
+      this.assertNotInScope("PrivateMiddleClass", inferredType);
       EList<XtendMember> _members = xtendClass.getMembers();
       final XtendMember method = _members.get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeInScope("MiddleClass", operation);
-      this.assertTypeInScope("MiddleClass.InnerMostClass", operation);
+      this.assertNotInScope("MiddleClass.InnerMostClass", operation);
       this.assertNotInScope("OuterClass", inferredType);
+      this.assertNotInScope("PrivateMiddleClass", inferredType);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -89,6 +91,7 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", inferredType);
       this.assertNotInScope("MiddleClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
+      this.assertNotInScope("PrivateMiddleClass", inferredType);
       EList<XtendMember> _members = xtendClass.getMembers();
       final XtendMember method = _members.get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
@@ -97,6 +100,7 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", operation);
       this.assertNotInScope("MiddleClass", operation);
       this.assertNotInScope("OuterClass", operation);
+      this.assertNotInScope("PrivateMiddleClass", inferredType);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -126,7 +130,7 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       final JvmGenericType inferredType = this.associations.getInferredType(xtendClass);
       this.assertTypeInScope("Foo", inferredType);
       this.assertTypeInScope("MiddleClass", inferredType);
-      this.assertTypeInScope("MiddleClass.InnerMostClass", inferredType);
+      this.assertNotInScope("MiddleClass.InnerMostClass", inferredType);
       this.assertTypeParameterInScope("T", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
       EList<XtendMember> _members = xtendClass.getMembers();
@@ -135,7 +139,7 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       this.assertTypeInScope("Foo", operation);
       this.assertTypeParameterInScope("MiddleClass", operation);
       this.assertTypeParameterInScope("T", operation);
-      this.assertTypeInScope("MiddleClass.InnerMostClass", operation);
+      this.assertNotInScope("MiddleClass.InnerMostClass", operation);
       this.assertNotInScope("OuterClass", operation);
       EList<XtendMember> _members_1 = xtendClass.getMembers();
       final XtendMember method2 = _members_1.get(0);
@@ -143,7 +147,7 @@ public class VisibleTypesFromHierarchyTest extends AbstractXtendTestCase {
       this.assertTypeInScope("Foo", operation2);
       this.assertTypeParameterInScope("MiddleClass", operation2);
       this.assertTypeParameterInScope("T", operation2);
-      this.assertTypeInScope("MiddleClass.InnerMostClass", operation2);
+      this.assertNotInScope("MiddleClass.InnerMostClass", operation2);
       this.assertNotInScope("OuterClass", operation2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

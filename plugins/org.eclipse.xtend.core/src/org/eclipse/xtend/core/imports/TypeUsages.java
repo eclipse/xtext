@@ -29,9 +29,15 @@ public class TypeUsages {
 	private List<JvmDeclaredType> staticImports = newArrayList();
 	private List<JvmDeclaredType> extensionImports = newArrayList();
 	
+	private List<TypeUsage> unresolvedTypes = newArrayList();
+	
 	public void addTypeUsage(JvmDeclaredType type, String text, ITextRegion textRegion, JvmMember context) {
 		simpleName2types.put(type.getSimpleName(), type);
 		types2usages.put(type, new TypeUsage(text, textRegion, context));
+	}
+	
+	public void addUnresolved(String text, ITextRegion textRegion, JvmMember context) {
+		unresolvedTypes.add(new TypeUsage(text, textRegion, context));
 	}
 	
 	public Multimap<String, JvmDeclaredType> getSimpleName2Types() {
@@ -42,6 +48,10 @@ public class TypeUsages {
 		return types2usages.get(type);
 	}
 
+	public List<TypeUsage> getUnresolvedTypeUsages() {
+		return unresolvedTypes;
+	}
+	
 	public void addStaticImport(JvmDeclaredType declarator) {
 		staticImports.add(declarator);
 	}

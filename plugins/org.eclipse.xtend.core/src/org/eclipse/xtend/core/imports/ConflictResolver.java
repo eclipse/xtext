@@ -33,30 +33,30 @@ public class ConflictResolver {
 	@Inject
 	private IJvmModelAssociations associations;
 	
-	public Map<JvmDeclaredType, String> resolveConflicts(TypeUsages usages, VisibleTypesFromHierarchy typesFromHierarchy, XtendFile xtendFile) {
+	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtendFile xtendFile) {
 		String packageName = xtendFile.getPackage();
 		ImportSection importSection = new ImportSection(xtendFile);
 		Map<String, JvmDeclaredType> locallyDeclaredTypes = getLocallyDeclaredTypes(xtendFile);
-		Map<JvmDeclaredType, String> result = newLinkedHashMap();
+		Map<String, JvmDeclaredType> result = newLinkedHashMap();
 		Multimap<String, JvmDeclaredType> simpleName2Types = usages.getSimpleName2Types();
 		for (String simpleName : simpleName2Types.keySet()) {
 			Collection<JvmDeclaredType> types = simpleName2Types.get(simpleName);
 			JvmDeclaredType locallyDeclaredType = locallyDeclaredTypes.get(simpleName);
-			if (locallyDeclaredType != null || isConflictsWithVisibleTypes(types, usages, typesFromHierarchy, simpleName)) {
+			if (locallyDeclaredType != null || isConflictsWithVisibleTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
 				for (JvmDeclaredType type : types) {
 					if (type != locallyDeclaredType)
-						result.put(type, type.getIdentifier());
+						result.put(type.getIdentifier(), type);
 				}
 			} else {
 				if (types.size() == 1) {
-					result.put(types.iterator().next(), simpleName);
+					result.put(simpleName, types.iterator().next());
 				} else {
 					JvmDeclaredType bestMatch = findBestMatch(types, usages, packageName, importSection);
 					for (JvmDeclaredType type : types) {
 						if (type == bestMatch)
-							result.put(type, simpleName);
+							result.put(simpleName, type);
 						else
-							result.put(type, type.getIdentifier());
+							result.put(type.getIdentifier(), type);
 					}
 				}
 			}
@@ -65,10 +65,10 @@ public class ConflictResolver {
 	}
 	
 	protected boolean isConflictsWithVisibleTypes(Iterable<JvmDeclaredType> types, TypeUsages usages, 
-			VisibleTypesFromHierarchy typesFromHierarchy, String simpleName) {
+			NonOverridableTypesProvider nonOverridableTypesProvider, String simpleName) {
 		for(JvmDeclaredType type: types) {
 			for(TypeUsage usage: usages.getUsages(type)) {
-				JvmIdentifiableElement visibleType = typesFromHierarchy.getVisibleType(usage.getContext(), simpleName);
+				JvmIdentifiableElement visibleType = nonOverridableTypesProvider.getVisibleType(usage.getContext(), simpleName);
 				if(visibleType != null && !visibleType.equals(type))
 					return true;
 			}

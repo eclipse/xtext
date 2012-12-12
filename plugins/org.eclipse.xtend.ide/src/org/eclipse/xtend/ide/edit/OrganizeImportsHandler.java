@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.edit;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Region;
-import org.eclipse.xtend.core.formatting.OrganizeImports;
+import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.xtend.core.imports.ImportOrganizer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -30,7 +31,7 @@ import com.google.inject.Inject;
 public class OrganizeImportsHandler extends AbstractHandler {
 	
 	@Inject
-	private OrganizeImports organizeImports;
+	private ImportOrganizer importOrganizer;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
@@ -42,24 +43,19 @@ public class OrganizeImportsHandler extends AbstractHandler {
 	}
 	
 	public void doOrganizeImports(final IXtextDocument document) {
-		Pair<Region, String> result = document.readOnly(new IUnitOfWork<Pair<Region,String>, XtextResource>() {
-			public Pair<Region,String> exec(XtextResource state) throws Exception {
-				final TextRegion computeRegion = organizeImports.computeRegion(state);
-				if (computeRegion == null)
-					return null;
-				final String organizedImportSection = organizeImports.getOrganizedImportSection(state);
-				if (organizedImportSection == null)
-					return null;
-				return Tuples.create(new Region(computeRegion.getOffset(), computeRegion.getLength()) , organizedImportSection);
+		List<ReplaceRegion> result = document.readOnly(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
+			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
+				return importOrganizer.getOrganizedImportChanges(state);
 			}
 		});
 		if (result == null)
 			return;
 		try {
-			String string = document.get(result.getFirst().getOffset(), result.getFirst().getLength());
-			if (!string.equals(result.getSecond())) {
-				document.replace(result.getFirst().getOffset(), result.getFirst().getLength(), result.getSecond());
+			MultiTextEdit multiTextEdit = new MultiTextEdit();
+			for(ReplaceRegion replaceRegion: result) {
+				multiTextEdit.addChild(new ReplaceEdit(replaceRegion.getOffset(), replaceRegion.getLength(), replaceRegion.getText()));
 			}
+			multiTextEdit.apply(document);
 		} catch (BadLocationException e) {
 			// ignore
 		}
