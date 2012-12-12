@@ -8,11 +8,6 @@
 package org.eclipse.xtend.ide.refactoring;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
-
-import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -22,21 +17,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.formatting.IImportCollection;
-import org.eclipse.xtend.core.formatting.OrganizeImports;
+import org.eclipse.xtend.core.imports.ImportSection;
+import org.eclipse.xtend.core.imports.ImportSectionSerializer;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
@@ -44,7 +35,7 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater;
 
 import com.google.common.base.Predicate;
@@ -65,10 +56,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
-	private OrganizeImports organizeImports;
-
-	@Inject
-	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	private ImportSectionSerializer importSectionSerializer;
 
 	@Override
 	protected void processReferringResource(Resource referringResource,
@@ -80,25 +68,18 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 						return !isImportTypeReference(input);
 					}
 				});
-		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor);
+		XtendFile xtendFile = (XtendFile) referringResource.getContents().get(0);
+		ImportSection importSection = new ImportSection(xtendFile);
+		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor, importSection);
 		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
 				importAwareUpdateAcceptor);
-		RefactoringImports importCollection = createRefactoringImports(referringResource);
-		importCollection.addImportedNames(importAwareUpdateAcceptor.getAdditionalImportedNames());
-		TextRegion importRegion = organizeImports.computeRegion((XtextResource) referringResource);
-		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(referringResource.getURI())
-				.getLineSeparator();
-		String importSection = organizeImports.serializeImports(importCollection, lineSeparator);
-		TextEdit importChange = new ReplaceEdit(importRegion.getOffset(), importRegion.getLength(), importSection);
-		updateAcceptor.accept(referringResource.getURI(), importChange);
+		ReplaceRegion importSectionReplace = importSectionSerializer.serialize(xtendFile, importSection);
+		ReplaceEdit replaceEdit = new ReplaceEdit(importSectionReplace.getOffset(), importSectionReplace.getLength(), importSectionReplace.getText());
+		updateAcceptor.accept(referringResource.getURI(), replaceEdit);
 	}
 
-	protected RefactoringImports createRefactoringImports(Resource referringResource) {
-		return new RefactoringImports(referringResource);
-	}
-
-	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
-		return new ImportAwareUpdateAcceptor(updateAcceptor);
+	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor, ImportSection importSection) {
+		return new ImportAwareUpdateAcceptor(updateAcceptor, importSection);
 	}
 
 	protected boolean isImportTypeReference(IReferenceDescription input) {
@@ -122,7 +103,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 								qualifiedNameConverter.toQualifiedName(shortName));
 						if (singleElement == null) {
 							newReferenceText = shortName;
-							((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(targetContainerType.getIdentifier());
+							((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(targetContainerType);
 						} else if(singleElement.getQualifiedName().equals(qualifiedNameProvider.getFullyQualifiedName(newTargetElement))) {
 							// same element on scope with simple name
 							newReferenceText = shortName;
@@ -139,10 +120,11 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 
 		private IRefactoringUpdateAcceptor delegate;
 
-		private List<String> additionalImportedNames;
+		private ImportSection importSection;
 
-		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate) {
+		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate, ImportSection importSection) {
 			this.delegate = delegate;
+			this.importSection = importSection;
 		}
 
 		public void accept(URI resourceURI, TextEdit textEdit) {
@@ -165,78 +147,71 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 			return delegate.createCompositeChange(name, monitor);
 		}
 
-		public void acceptImport(String qualifiedName) {
-			if (additionalImportedNames == null)
-				additionalImportedNames = newArrayList();
-			additionalImportedNames.add(qualifiedName);
-		}
-
-		public List<String> getAdditionalImportedNames() {
-			return additionalImportedNames;
-		}
-
-	}
-
-	public static class RefactoringImports implements IImportCollection {
-
-		private Set<String> plainImports = newLinkedHashSet();
-
-		private Set<String> staticImports = newLinkedHashSet();
-
-		private Set<String> staticExtensionImports = newLinkedHashSet();
-
-		public RefactoringImports(Resource xtendResource) {
-			XtendFile xtendFile = (XtendFile) xtendResource.getContents().get(0);
-			for (XtendImport xtendImport : xtendFile.getImports()) {
-				if (xtendImport.getImportedNamespace() == null) {
-					JvmType importedType = xtendImport.getImportedType();
-					if (importedType != null && !importedType.eIsProxy()) {
-						String importedTypeName = xtendImport.getImportedTypeName();
-						if (importedType.getIdentifier().equals(importedTypeName))
-							getSet(xtendImport).add(importedTypeName);
-					}
-				} else {
-					getSet(xtendImport).add(xtendImport.getImportedNamespace());
-				}
-			}
-		}
-
-		public List<String> getListofImportedTypeNames() {
-			return newArrayList(plainImports);
-		}
-
-		public List<String> getListofStaticImports() {
-			return newArrayList(staticImports);
-		}
-
-		public List<String> getListofStaticExtensionImports() {
-			return newArrayList(staticExtensionImports);
-		}
-
-		public void addImportedNames(List<String> importedNames) {
-			if (importedNames != null)
-				plainImports.addAll(importedNames);
-		}
-
-		public void remove(XtendImport xtendImport) {
-			getSet(xtendImport).remove(getImportedName(xtendImport));
-		}
-
-		protected Set<String> getSet(XtendImport xtendImport) {
-			if (xtendImport.isStatic())
-				if (xtendImport.isExtension())
-					return staticExtensionImports;
-				else
-					return staticImports;
-			else
-				return plainImports;
-		}
-
-		protected String getImportedName(XtendImport xtendImport) {
-			if (xtendImport.getImportedNamespace() == null)
-				return xtendImport.getImportedTypeName();
-			else
-				return xtendImport.getImportedNamespace();
+		public void acceptImport(JvmDeclaredType type) {
+			importSection.getImportedTypes().add(type);
 		}
 	}
+
+//	public static class RefactoringImports implements IImportCollection {
+//
+//		private Set<String> plainImports = newLinkedHashSet();
+//
+//		private Set<String> staticImports = newLinkedHashSet();
+//
+//		private Set<String> staticExtensionImports = newLinkedHashSet();
+//
+//		public RefactoringImports(Resource xtendResource) {
+//			XtendFile xtendFile = (XtendFile) xtendResource.getContents().get(0);
+//			for (XtendImport xtendImport : xtendFile.getImports()) {
+//				if (xtendImport.getImportedNamespace() == null) {
+//					JvmType importedType = xtendImport.getImportedType();
+//					if (importedType != null && !importedType.eIsProxy()) {
+//						String importedTypeName = xtendImport.getImportedTypeName();
+//						if (importedType.getIdentifier().equals(importedTypeName))
+//							getSet(xtendImport).add(importedTypeName);
+//					}
+//				} else {
+//					getSet(xtendImport).add(xtendImport.getImportedNamespace());
+//				}
+//			}
+//		}
+//
+//		public List<String> getListofImportedTypeNames() {
+//			return newArrayList(plainImports);
+//		}
+//
+//		public List<String> getListofStaticImports() {
+//			return newArrayList(staticImports);
+//		}
+//
+//		public List<String> getListofStaticExtensionImports() {
+//			return newArrayList(staticExtensionImports);
+//		}
+//
+//		public void addImportedNames(List<String> importedNames) {
+//			if (importedNames != null)
+//				plainImports.addAll(importedNames);
+//		}
+//
+//		public void remove(XtendImport xtendImport) {
+//			getSet(xtendImport).remove(getImportedName(xtendImport));
+//		}
+//
+//		protected Set<String> getSet(XtendImport xtendImport) {
+//			if (xtendImport.isStatic())
+//				if (xtendImport.isExtension())
+//					return staticExtensionImports;
+//				else
+//					return staticImports;
+//			else
+//				return plainImports;
+//		}
+//
+//		protected String getImportedName(XtendImport xtendImport) {
+//			if (xtendImport.getImportedNamespace() == null)
+//				return xtendImport.getImportedTypeName();
+//			else
+//				return xtendImport.getImportedNamespace();
+//		}
+//	}
 }

@@ -786,7 +786,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
 			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
+			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
 			waitForAutoBuild();
@@ -802,7 +802,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
 			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
 			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, refModel.replace("Extension", "NewExtension"));
+			fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 		} finally {
 			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
 			waitForAutoBuild();
@@ -895,7 +895,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = openEditorSafely(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
-		assertDocumentContains(editor, xtendModel.replace("bar", "baz"));
+		assertDocumentContains(editor, "import static java.util.Collections.*");
 	}
 
 	@Test
@@ -904,7 +904,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = openEditorSafely(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
-		assertDocumentContains(editor, xtendModel.replace("bar", "baz"));
+		assertDocumentContains(editor, "import static extension java.util.Collections.*");
 	}
 
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {

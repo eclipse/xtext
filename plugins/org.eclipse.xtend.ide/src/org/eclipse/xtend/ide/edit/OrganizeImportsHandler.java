@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.edit;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -29,6 +30,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OrganizeImportsHandler extends AbstractHandler {
+	
+	private static final Logger LOG = Logger.getLogger(OrganizeImportsHandler.class);
 	
 	@Inject
 	private ImportOrganizer importOrganizer;
@@ -57,7 +60,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 			}
 			multiTextEdit.apply(document);
 		} catch (BadLocationException e) {
-			// ignore
+			LOG.error("Error organizing imports:", e);
 		}
 	}
 
