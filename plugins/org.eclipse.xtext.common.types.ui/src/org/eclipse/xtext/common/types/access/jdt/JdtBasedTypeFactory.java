@@ -631,7 +631,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	 * @since 2.4
 	 */
 	public static class ParameterNameInitializer implements Runnable {
-		
+		private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.ParameterNameInitializer.class);
 		private JvmExecutable executable;
 		private String iMethodIdentifier;
 		
@@ -653,7 +653,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 								String[] parameterNames = javaMethod.getParameterNames();
 								for (int i = 0; i < parameterNames.length; i++) {
 									String string = parameterNames[i];
-									executable.getParameters().get(i).setName(string);
+									if (executable.getParameters().size() <= i) {
+										log.error("unmatching arity for java method "+javaMethod.toString()+" and "+executable.getIdentifier());
+									} else {
+										executable.getParameters().get(i).setName(string);
+									}
 								}
 							} catch (JavaModelException ex) {
 								if (!ex.isDoesNotExist())
