@@ -1067,6 +1067,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 	@Test def testDontOverrideInheritedInnerClass() {
 		// 'OuterClass' has an inner class 'MiddleClass'
+		// that cannot be shadowed by an import
 		'''
 			class Foo extends types.OuterClass {
 				types.MiddleClass foo
@@ -1080,4 +1081,19 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testJavaDoc() {
+		'''
+			/**
+			 * {@link java.util.List}
+			 */
+			class Foo {}
+		'''.assertIsOrganizedTo('''
+			import java.util.List
+			
+			/**
+			 * {@link List}
+			 */
+			class Foo {}
+		''')
+	}
 }
