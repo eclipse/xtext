@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -44,7 +45,7 @@ public class XtendUIValidator extends XbaseUIValidator {
 	public void checkRestrictedType(XtendImport xtendImport){
 		JvmType importedType = xtendImport.getImportedType();
 		if(importedType instanceof JvmDeclaredType)
-			checkRestrictedType(xtendImport, XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE, (JvmDeclaredType) importedType);
+			checkRestrictedType(xtendImport, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, (JvmDeclaredType) importedType);
 	}
 	
 	@Check

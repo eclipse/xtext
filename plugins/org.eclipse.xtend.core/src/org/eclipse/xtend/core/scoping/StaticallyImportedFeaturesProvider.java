@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.scoping;
 
+import static java.util.Collections.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +17,6 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractStaticMethodsFeatureForTypeProvider;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -40,9 +42,9 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 		if (hierarchy == null || Iterables.isEmpty(hierarchy)) {
 			extension = false;
 		}
-		List<XtendImport> imports = getImports();
+		List<XImportDeclaration> imports = getImports();
 		Collection<String> result = Lists.newArrayList();
-		for(XtendImport imported: imports) {
+		for(XImportDeclaration imported: imports) {
 			if (imported.isStatic() && (!extension || imported.isExtension()) && imported.isWildcard()) {
 				String typeName = imported.getImportedTypeName();
 				if (!Strings.isEmpty(typeName))
@@ -98,12 +100,15 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 		}
 	}
 
-	protected List<XtendImport> getImports() {
+	protected List<XImportDeclaration> getImports() {
 		Resource resource = getContext();
 		if (resource.getContents().isEmpty() || !(resource.getContents().get(0) instanceof XtendFile))
 			return Collections.emptyList();
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		return file.getImports();
+		if(file.getImportSection() == null) 
+			return emptyList();
+		else
+			return file.getImportSection().getImportDeclarations();
 	}
 	
 }

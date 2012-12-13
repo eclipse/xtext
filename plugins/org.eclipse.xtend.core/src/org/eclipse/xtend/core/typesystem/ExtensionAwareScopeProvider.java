@@ -12,10 +12,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.collect.Lists;
 
@@ -30,14 +30,14 @@ public class ExtensionAwareScopeProvider extends XbaseBatchScopeProvider {
 		if (context.getContents().isEmpty())
 			return result;
 		EObject rootInstance = context.getContents().get(0);
-		if (!(rootInstance instanceof XtendFile)) {
+		if (!(rootInstance instanceof XtendFile) || ((XtendFile)rootInstance).getImportSection() == null) {
 			return result;
 		}
 		XtendFile file = (XtendFile) rootInstance;
-		List<XtendImport> imports = file.getImports();
+		List<XImportDeclaration> imports = file.getImportSection().getImportDeclarations();
 		List<JvmType> staticFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
 		List<JvmType> staticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
-		for(XtendImport _import: imports) {
+		for(XImportDeclaration _import: imports) {
 			if (_import.isWildcard() && _import.isStatic()) {
 				staticFeatureProviders.add(_import.getImportedType());
 				if (_import.isExtension()) {

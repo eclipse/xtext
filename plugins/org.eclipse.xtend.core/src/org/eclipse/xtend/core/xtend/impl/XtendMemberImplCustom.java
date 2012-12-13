@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.xtend.impl;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.xtend.impl.XtendMemberImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 
 /**

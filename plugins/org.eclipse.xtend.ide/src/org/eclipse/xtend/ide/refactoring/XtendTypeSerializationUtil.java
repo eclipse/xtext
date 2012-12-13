@@ -9,10 +9,10 @@ package org.eclipse.xtend.ide.refactoring;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -23,8 +23,8 @@ public class XtendTypeSerializationUtil extends TypeSerializationUtil {
 	public ImportManager getImportManager(EObject context) {
 		ImportManager importManager = new ImportManager(true);
 		XtendFile xtendFile = EcoreUtil2.getContainerOfType(context, XtendFile.class);
-		if(xtendFile != null) {
-			for(XtendImport ximport: xtendFile.getImports()) 
+		if(xtendFile != null && xtendFile.getImportSection() != null) {
+			for(XImportDeclaration ximport: xtendFile.getImportSection().getImportDeclarations()) 
 				importManager.addImportFor(ximport.getImportedType());
 		}
 		return importManager;

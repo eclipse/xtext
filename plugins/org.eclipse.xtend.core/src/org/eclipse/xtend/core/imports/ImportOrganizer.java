@@ -63,7 +63,7 @@ public class ImportOrganizer {
 			unresolvedTypeResolver.resolve(typeUsages, state);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, xtendFile);
 		Set<String> implicitlyImportedPackages = getImplicitlyImportedPackages(xtendFile);
-		ImportSection newImportSection = new ImportSection();
+		SortedImportSection newImportSection = new SortedImportSection();
 		List<ReplaceRegion> replaceRegions = newArrayList();
 		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
 			String text = entry.getKey();

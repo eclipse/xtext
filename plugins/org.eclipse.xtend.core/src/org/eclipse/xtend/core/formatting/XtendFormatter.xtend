@@ -26,9 +26,11 @@ import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
 
+import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import org.eclipse.xtext.preferences.IPreferenceKey
+import org.eclipse.xtext.xtype.XImportSection
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -50,13 +52,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 		} else {
 			format += pkg.append[cfg(blankLinesAfterPackageDecl)]
 		}
-		for (imp : xtendFile.imports) {
-			imp.format(format)
-			if (imp != xtendFile.imports.last)
-				format += imp.nodeForEObject.append[cfg(blankLinesBetweenImports)]
-			else
-				format += imp.nodeForEObject.append[cfg(blankLinesAfterImports)]
-		}
+		xtendFile.importSection?.format(format)
 		for (clazz : xtendFile.xtendTypes) {
 			clazz.format(format)
 			if (clazz != xtendFile.xtendTypes.last)
@@ -64,6 +60,17 @@ public class XtendFormatter extends XbaseFormatter2 {
 		}
 
 		format += xtendFile.nodeForEObject.append[newLine]
+	}
+	
+	def protected dispatch format(XImportSection section, FormattableDocument format) {
+		for (imp : section.importDeclarations) {
+			imp.format(format)
+			if (imp != section.importDeclarations.last)
+				format += imp.nodeForEObject.append[cfg(blankLinesBetweenImports)]
+			else
+				format += imp.nodeForEObject.append[cfg(blankLinesAfterImports)]
+		}
+		
 	}
 	
 	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document,
@@ -78,8 +85,8 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected dispatch void format(XtendImport imp, FormattableDocument document) {
 		document += imp.nodeForKeyword("import").append[oneSpace]
-		document += imp.nodeForFeature(XTEND_IMPORT__STATIC).append[oneSpace]
-		document += imp.nodeForFeature(XTEND_IMPORT__EXTENSION).append[oneSpace]
+		document += imp.nodeForFeature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
+		document += imp.nodeForFeature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
 		for (node : imp.nodesForKeyword("."))
 			document += node.surround[noSpace]
 		document += imp.nodeForKeyword(";").prepend[noSpace]

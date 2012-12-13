@@ -8,16 +8,15 @@
 package org.eclipse.xtend.ide.editor;
 
 import java.util.Collection;
-import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,30 +52,19 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	}
 	
 	protected void computeImportFolding(XtextResource xtextResource, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		IParseResult parseResult = xtextResource.getParseResult();
-		if(parseResult != null){
-			EObject rootASTElement = parseResult.getRootASTElement();
-			if(rootASTElement != null){
-				ITextRegion textRegion =getFullTextRegionForFeature(rootASTElement, XtendPackage.Literals.XTEND_FILE__IMPORTS);
-				if(textRegion != null)
-					foldingRegionAcceptor.accept(textRegion.getOffset(), textRegion.getLength());
+		EList<EObject> contents = xtextResource.getContents();
+		if(!contents.isEmpty()) {
+			XtendFile xtendFile = (XtendFile) contents.get(0);
+			// Only if we have at least 2 imports
+			if(xtendFile.getImportSection() != null 
+				&& xtendFile.getImportSection().getImportDeclarations().size() >1) {
+					ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
+					if(node != null)
+						foldingRegionAcceptor.accept(node.getOffset(), node.getLength());
 			}
 		}
 	}
 	
-	protected ITextRegion getFullTextRegionForFeature(EObject owner, EStructuralFeature feature){
-		List<INode> childs = NodeModelUtils.findNodesForFeature(owner, feature);
-		//Only if we have at least 2 childs
-		if(childs.size() > 1){
-			INode firstChild = childs.get(0);
-			INode lastChild = childs.get(childs.size() -1);
-				int offset = firstChild.getOffset();
-				int length = lastChild.getOffset() + lastChild.getLength() - offset;
-				return new TextRegion(offset,length);
-		}
-		return null;
-	}
-
 	protected IFoldingRegionAcceptor<ITextRegion> createAcceptor(IXtextDocument xtextDocument, Collection<FoldedPosition> foldedPositions, final boolean initiallyCollapsed) {
 		return new DefaultFoldingRegionAcceptor(xtextDocument, foldedPositions){
 			@Override

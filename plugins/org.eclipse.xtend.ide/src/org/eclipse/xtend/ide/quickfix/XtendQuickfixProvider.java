@@ -103,13 +103,14 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -622,19 +623,21 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			}
 			Set<String> importedTypes = Sets.newHashSet();
 			final Set<String> seen = Sets.newHashSet();
-			for (XtendImport importedNamespace : xtendFile.getImports()) {
-				if (!(importedNamespace.isStatic() || importedNamespace.isExtension())) {
-					if (importedNamespace.getImportedNamespace() != null) {
-						String importedAsString = importedNamespace.getImportedNamespace();
-						if (importedNamespace.isWildcard()) {
-							importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
-							if (!importedNamespace.isStatic()) {
-								visiblePackages.add(importedAsString);
+			if(xtendFile.getImportSection() != null) {
+				for (XImportDeclaration importDeclaration : xtendFile.getImportSection().getImportDeclarations()) {
+					if (!(importDeclaration.isStatic() || importDeclaration.isExtension())) {
+						if (importDeclaration instanceof XtendImport && ((XtendImport) importDeclaration).getImportedNamespace() != null) {
+							String importedAsString = ((XtendImport) importDeclaration).getImportedNamespace();
+							if (importDeclaration.isWildcard()) {
+								importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
+								if (!importDeclaration.isStatic()) {
+									visiblePackages.add(importedAsString);
+								} else {
+									importedTypes.add(importedAsString);
+								}
 							} else {
 								importedTypes.add(importedAsString);
 							}
-						} else {
-							importedTypes.add(importedAsString);
 						}
 					}
 				}

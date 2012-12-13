@@ -34,7 +34,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
 	}
 
 	@Test
@@ -79,7 +79,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertNoIssues(xtendFile.imports.get(0))
+		helper.assertNoIssues(xtendFile.importSection.importDeclarations.get(0))
 	}
 
 	@Test
@@ -91,7 +91,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
@@ -106,7 +106,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
@@ -122,7 +122,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.imports.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
@@ -137,7 +137,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.imports.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)

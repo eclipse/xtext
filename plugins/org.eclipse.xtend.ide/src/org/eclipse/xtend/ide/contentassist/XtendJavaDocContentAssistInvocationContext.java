@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.contentassist;
 
+import static java.util.Collections.*;
+
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.core.CompletionContext;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IImportDeclaration;
 import org.eclipse.jdt.core.IJavaProject;
@@ -24,7 +25,6 @@ import org.eclipse.jdt.internal.core.PackageFragment;
 import org.eclipse.jdt.internal.ui.javaeditor.EditorUtility;
 import org.eclipse.jdt.ui.text.java.JavaContentAssistInvocationContext;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.ui.IEditorPart;
@@ -33,6 +33,7 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.collect.Lists;
 
@@ -95,13 +96,19 @@ public class XtendJavaDocContentAssistInvocationContext extends JavaContentAssis
 		return document.readOnly(new IUnitOfWork<List<String>, XtextResource>() {
 			public List<String> exec(XtextResource state) throws Exception {
 				XtendFile xtendFile = (XtendFile) state.getContents().get(0);
-				EList<XtendImport> xtendImports = xtendFile.getImports();
-				List<String> imports = Lists.newArrayList();
-				for (XtendImport imp : xtendImports) {
-					imports.add(imp.getImportedNamespace() != null ? imp.getImportedNamespace() : imp
-							.getImportedTypeName());
+				if(xtendFile.getImportSection() == null) {
+					return emptyList();
+				} else {
+					EList<XImportDeclaration> xtendImports = xtendFile.getImportSection().getImportDeclarations();
+					List<String> imports = Lists.newArrayList();
+					for (XImportDeclaration imp : xtendImports) {
+						if(imp instanceof XtendImport && ((XtendImport)imp).getImportedNamespace() != null) 
+							imports.add(((XtendImport)imp).getImportedNamespace());
+						else
+							imports.add(imp.getImportedTypeName());
+					}
+					return imports;
 				}
-				return imports;
 			}
 		});
 	}

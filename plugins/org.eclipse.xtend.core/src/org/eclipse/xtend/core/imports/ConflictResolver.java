@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -35,7 +36,7 @@ public class ConflictResolver {
 	
 	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtendFile xtendFile) {
 		String packageName = xtendFile.getPackage();
-		ImportSection importSection = new ImportSection(xtendFile);
+		SortedImportSection importSection = getImportSection(xtendFile.getImportSection());
 		Map<String, JvmDeclaredType> locallyDeclaredTypes = getLocallyDeclaredTypes(xtendFile);
 		Map<String, JvmDeclaredType> result = newLinkedHashMap();
 		Multimap<String, JvmDeclaredType> simpleName2Types = usages.getSimpleName2Types();
@@ -88,12 +89,12 @@ public class ConflictResolver {
 		return locallyDeclaredTypes;
 	}
 
-	protected ImportSection getImportSection(XtendFile xtendFile) {
-		return new ImportSection(xtendFile);
+	protected SortedImportSection getImportSection(XImportSection xImportSection) {
+		return new SortedImportSection(xImportSection);
 	}
 
 	protected JvmDeclaredType findBestMatch(Collection<JvmDeclaredType> types, TypeUsages usages, String packageName,
-			ImportSection importSection) {
+			SortedImportSection importSection) {
 		Iterator<JvmDeclaredType> iterator = types.iterator();
 		JvmDeclaredType currentBestMatch = iterator.next();
 		while (iterator.hasNext()) {
@@ -106,7 +107,7 @@ public class ConflictResolver {
 	}
 
 	protected boolean isBetter(JvmDeclaredType candidate, JvmDeclaredType currentBestMatch, TypeUsages usages, String packageName,
-			ImportSection importSection) {
+			SortedImportSection importSection) {
 		if (equal(packageName,candidate.getPackageName()) && !equal(packageName, currentBestMatch.getPackageName()))
 			return true;
 		if (importSection.getImportedTypes().contains(candidate)

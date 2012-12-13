@@ -124,7 +124,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				int offset = 0;
 				boolean startWithLineBreak = true;
 				boolean endWithLineBreak = false;
-				if (file.getImports().isEmpty()) {
+				if (file.getImportSection() == null || file.getImportSection().getImportDeclarations().isEmpty()) {
 					startWithLineBreak = false;
 					if (clazz == null) {
 						offset = document.getLength();
@@ -137,7 +137,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 						endWithLineBreak = true;
 					}
 				} else {
-					ICompositeNode node = NodeModelUtils.getNode(file.getImports().get(file.getImports().size() - 1));
+					ICompositeNode node = NodeModelUtils.getNode(file.getImportSection());
 					if (node == null) {
 						throw new IllegalStateException("node may not be null");
 					}

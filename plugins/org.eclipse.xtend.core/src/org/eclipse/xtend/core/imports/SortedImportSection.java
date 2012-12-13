@@ -11,17 +11,18 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Set;
 
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * Provides access to all imported types in an XtendFile. Namespace imports are ignored.
  *  
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ImportSection  {
+public class SortedImportSection  {
 	
 	private Set<JvmDeclaredType> plainImports = newLinkedHashSet();
 
@@ -29,14 +30,14 @@ public class ImportSection  {
 
 	private Set<JvmDeclaredType> staticExtensionImports = newLinkedHashSet();
 
-	public ImportSection() {}
+	public SortedImportSection() {}
 	
-	public ImportSection(XtendFile xtendFile) {
-		for (XtendImport xtendImport : xtendFile.getImports()) {
-			if (xtendImport.getImportedNamespace() == null) {
-				JvmType importedType = xtendImport.getImportedType();
+	public SortedImportSection(XImportSection section) {
+		for (XImportDeclaration importDeclaration : section.getImportDeclarations()) {
+			if(!(importDeclaration instanceof XtendImport) || ((XtendImport) importDeclaration).getImportedNamespace()==null) {
+				JvmType importedType = importDeclaration.getImportedType();
 				if (importedType instanceof JvmDeclaredType && !importedType.eIsProxy()) {
-					getSet(xtendImport).add((JvmDeclaredType) importedType);
+					getSet(importDeclaration).add((JvmDeclaredType) importedType);
 				}
 			}
 		}
@@ -54,9 +55,9 @@ public class ImportSection  {
 		return staticExtensionImports;
 	}
 
-	protected Set<JvmDeclaredType> getSet(XtendImport xtendImport) {
-		if (xtendImport.isStatic())
-			if (xtendImport.isExtension())
+	protected Set<JvmDeclaredType> getSet(XImportDeclaration importDeclaration) {
+		if (importDeclaration.isStatic())
+			if (importDeclaration.isExtension())
 				return staticExtensionImports;
 			else
 				return staticImports;
