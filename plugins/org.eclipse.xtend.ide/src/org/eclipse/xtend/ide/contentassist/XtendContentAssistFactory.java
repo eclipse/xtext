@@ -28,16 +28,11 @@ public class XtendContentAssistFactory extends DefaultContentAssistantFactory {
 	@Override
 	protected void setContentAssistProcessor(ContentAssistant assistant, SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
+		super.setContentAssistProcessor(assistant, configuration, sourceViewer);
 		if (contentAssistProcessor != null) {
-			for (String contentType : configuration.getConfiguredContentTypes(sourceViewer)) {
-				if (contentType.equals(TokenTypeToPartitionMapper.JAVA_DOC_PARTITION)
-						&& configuration instanceof XtextSourceViewerConfiguration) {
-					XtendJavaDocCompletionProposalProcessor processor = new XtendJavaDocCompletionProposalProcessor(((XtextSourceViewerConfiguration) configuration).getEditor(), assistant);
-					assistant.setContentAssistProcessor(processor, contentType);
-				} else
-					assistant.setContentAssistProcessor(contentAssistProcessor, contentType);
-			}
-
+			XtendJavaDocCompletionProposalProcessor processor = new XtendJavaDocCompletionProposalProcessor(
+					((XtextSourceViewerConfiguration) configuration).getEditor(), assistant);
+			assistant.setContentAssistProcessor(processor, TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
 		}
 	}
 }
