@@ -9,44 +9,21 @@ package org.eclipse.xtext.documentation.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  * @since 2.4
  */
-public class DefaultJavaDocTypeReferenceProvider implements IJavaDocTypeReferenceProvider {
+public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeReferenceProvider {
 
-	public List<ReplaceRegion> computeTypeReferenceRegions(Resource resource) {
-		List<ReplaceRegion> regions = Lists.newArrayList();
-		if (resource instanceof XtextResource) {
-			IParseResult parseResult = ((XtextResource) resource).getParseResult();
-			if (parseResult != null) {
-				ICompositeNode rootNode = parseResult.getRootNode();
-				for (INode node : rootNode.getAsTreeIterable()) {
-					if (node.getGrammarElement() instanceof TerminalRule) {
-						TerminalRule tRule = (TerminalRule) node.getGrammarElement();
-						if (tRule.getName().equals("ML_COMMENT")) {
-							regions.addAll(searchAndCreateReplaceRegion(node));
-						}
-					}
-				}
-			}
-		}
-		return regions;
-	}
-
-	protected List<ReplaceRegion> searchAndCreateReplaceRegion(INode node) {
+	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
 		for (ILeafNode leafNode : leafNodes) {

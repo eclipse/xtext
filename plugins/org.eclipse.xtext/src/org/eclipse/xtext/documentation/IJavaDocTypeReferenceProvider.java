@@ -9,17 +9,19 @@ package org.eclipse.xtext.documentation;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.documentation.impl.DefaultJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.documentation.impl.MultiLineJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  * @since 2.4
  */
-@ImplementedBy(DefaultJavaDocTypeReferenceProvider.class)
+@ImplementedBy(MultiLineJavaDocTypeReferenceProvider.class)
 public interface IJavaDocTypeReferenceProvider {
-	public List<ReplaceRegion> computeTypeReferenceRegions(Resource resource);
+	
+	public List<ReplaceRegion> computeTypeRefRegions(INode commentNode);
 }
