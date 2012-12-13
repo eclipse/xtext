@@ -56,11 +56,13 @@ public class DefaultJavaDocTypeReferenceProvider implements IJavaDocTypeReferenc
 			while (link != -1) {
 				int beginIndex = link + 6;
 				int endLink = text.indexOf("}", beginIndex);
-				if (endLink != -1) {
+				if (endLink == -1) { 
+					break;
+				} else {
 					String simpleName = text.substring(beginIndex, endLink);
 					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, endLink - beginIndex, simpleName);
 					regions.add(region);
-				}
+				} 
 				link = text.indexOf("@link ", endLink);
 			}
 		}
