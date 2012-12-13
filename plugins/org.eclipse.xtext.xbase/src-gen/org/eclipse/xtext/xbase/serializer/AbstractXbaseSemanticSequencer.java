@@ -50,6 +50,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.serializer.XtypeSemanticSequencer;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -911,6 +913,18 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_DECLARATION:
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_SECTION:
+				if(context == grammarAccess.getXImportSectionRule()) {
+					sequence_XImportSection(context, (XImportSection) semanticObject); 
 					return; 
 				}
 				else break;

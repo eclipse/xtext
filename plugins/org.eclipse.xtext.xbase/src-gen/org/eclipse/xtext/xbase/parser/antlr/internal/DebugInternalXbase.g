@@ -605,6 +605,14 @@ ruleValidID :
 	RULE_ID
 ;
 
+// Rule XImportDeclaration
+ruleXImportDeclaration :
+	'import' (
+		'static' 'extension'? ruleQualifiedName '.' '*' |
+		ruleQualifiedName
+	) ';'?
+;
+
 RULE_HEX :
 	(
 		'0x' |

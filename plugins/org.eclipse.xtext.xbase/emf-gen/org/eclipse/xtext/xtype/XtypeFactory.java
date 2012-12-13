@@ -46,6 +46,24 @@ public interface XtypeFactory extends EFactory
 	XComputedTypeReference createXComputedTypeReference();
 
 	/**
+	 * Returns a new object of class '<em>XImport Section</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XImport Section</em>'.
+	 * @generated
+	 */
+	XImportSection createXImportSection();
+
+	/**
+	 * Returns a new object of class '<em>XImport Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XImport Declaration</em>'.
+	 * @generated
+	 */
+	XImportDeclaration createXImportDeclaration();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

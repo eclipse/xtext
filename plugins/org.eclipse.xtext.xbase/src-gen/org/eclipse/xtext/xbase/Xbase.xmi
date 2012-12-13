@@ -1149,7 +1149,7 @@
           </type>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.13"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.15"/>
         </elements>
       </alternatives>
     </rules>
@@ -1400,7 +1400,7 @@
       </alternatives>
     </rules>
   </xtext:Grammar>
-  <xtext:Grammar name="org.eclipse.xtext.xbase.Xtype" definesHiddenTokens="true" hiddenTokens="/1/@rules.16 /1/@rules.14 /1/@rules.15">
+  <xtext:Grammar name="org.eclipse.xtext.xbase.Xtype" definesHiddenTokens="true" hiddenTokens="/1/@rules.18 /1/@rules.16 /1/@rules.17">
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel">
       <ePackage href="http://www.eclipse.org/xtext/xbase/Xtype#/"/>
     </metamodelDeclarations>
@@ -1596,7 +1596,52 @@
       <type metamodel="/1/@metamodelDeclarations.2">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/1/@rules.12"/>
+      <alternatives xsi:type="xtext:RuleCall" rule="/1/@rules.14"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="XImportSection">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XImportSection"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="importDeclarations" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.13"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="XImportDeclaration">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XImportDeclaration"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="import"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="static" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="static"/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" cardinality="?" feature="extension" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="extension"/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="importedType" operator="=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/1/@metamodelDeclarations.1">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmDeclaredType"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.52"/>
+              </terminal>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="."/>
+            <elements xsi:type="xtext:Keyword" value="*"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="importedType" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmDeclaredType"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.52"/>
+            </terminal>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" cardinality="?" value=";"/>
+      </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ID">
       <type metamodel="/1/@metamodelDeclarations.2">

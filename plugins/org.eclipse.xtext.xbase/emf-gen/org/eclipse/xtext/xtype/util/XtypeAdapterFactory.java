@@ -93,6 +93,16 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 				return createXComputedTypeReferenceAdapter();
 			}
 			@Override
+			public Adapter caseXImportSection(XImportSection object)
+			{
+				return createXImportSectionAdapter();
+			}
+			@Override
+			public Adapter caseXImportDeclaration(XImportDeclaration object)
+			{
+				return createXImportDeclarationAdapter();
+			}
+			@Override
 			public Adapter caseJvmTypeReference(JvmTypeReference object)
 			{
 				return createJvmTypeReferenceAdapter();
@@ -150,6 +160,36 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXComputedTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XImportSection <em>XImport Section</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtype.XImportSection
+	 * @generated
+	 */
+	public Adapter createXImportSectionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XImportDeclaration <em>XImport Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration
+	 * @generated
+	 */
+	public Adapter createXImportDeclarationAdapter()
 	{
 		return null;
 	}

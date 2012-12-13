@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtype"
-    nsURI="http://www.eclipse.org/xtext/xbase/Xtype" nsPrefix="xtype">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtype" nsURI="http://www.eclipse.org/xtext/xbase/Xtype" nsPrefix="xtype">
   <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmSpecializedTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
@@ -19,4 +17,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IJvmTypeReferenceProvider" instanceClassName="org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XImportSection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarations" upperBound="-1"
+        eType="#//XImportDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XImportDeclaration">
+    <eOperations name="isWildcard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getImportedTypeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  </eClassifiers>
 </ecore:EPackage>

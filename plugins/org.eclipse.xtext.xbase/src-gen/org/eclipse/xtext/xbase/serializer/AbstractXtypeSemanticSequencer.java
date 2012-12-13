@@ -22,6 +22,8 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -85,6 +87,18 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_DECLARATION:
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_SECTION:
+				if(context == grammarAccess.getXImportSectionRule()) {
+					sequence_XImportSection(context, (XImportSection) semanticObject); 
 					return; 
 				}
 				else break;
@@ -167,6 +181,24 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
 	 */
 	protected void sequence_XFunctionTypeRef(EObject context, XFunctionTypeRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | importedType=[JvmDeclaredType|QualifiedName])
+	 */
+	protected void sequence_XImportDeclaration(EObject context, XImportDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     importDeclarations+=XImportDeclaration+
+	 */
+	protected void sequence_XImportSection(EObject context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }
