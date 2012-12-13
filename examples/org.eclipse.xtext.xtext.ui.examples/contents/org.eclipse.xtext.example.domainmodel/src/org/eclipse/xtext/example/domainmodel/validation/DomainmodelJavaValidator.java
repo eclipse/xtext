@@ -28,7 +28,7 @@ public class DomainmodelJavaValidator extends XbaseJavaValidator {
     public void checkTypeNameStartsWithCapital(Entity entity) {
         if (!Character.isUpperCase(entity.getName().charAt(0))) {
             warning("Name should start with a capital", 
-            		DomainmodelPackage.Literals.ENTITY__NAME,
+            		DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME,
             		ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
             		IssueCodes.INVALID_TYPE_NAME, 
             		entity.getName());
@@ -49,11 +49,11 @@ public class DomainmodelJavaValidator extends XbaseJavaValidator {
     @Check
     public void checkPackage(PackageDeclaration packages) {
     	if(Strings.isEmpty(packages.getName())) {
-    		error("Name cannot be empty", DomainmodelPackage.Literals.PACKAGE_DECLARATION__NAME);
+    		error("Name cannot be empty", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     	}
         if (packages.getName().equals("java")) {
             error("Invalid package name", 
-            		DomainmodelPackage.Literals.PACKAGE_DECLARATION__NAME);
+            		DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
         }
     }
     

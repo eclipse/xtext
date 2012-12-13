@@ -6,22 +6,20 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.domainmodel.edit"
     editorPluginID="org.eclipse.xtext.example.domainmodel.editor" runtimeVersion="2.5"
-    usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example.domainmodel"
       disposableProviderFactory="true" ecorePackage="Domainmodel.ecore#/">
     <genClasses ecoreClass="Domainmodel.ecore#//DomainModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//DomainModel/importSection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//DomainModel/elements"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//AbstractElement/name"/>
     </genClasses>
     <genClasses ecoreClass="Domainmodel.ecore#//PackageDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//PackageDeclaration/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//PackageDeclaration/elements"/>
     </genClasses>
     <genClasses ecoreClass="Domainmodel.ecore#//Entity">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Entity/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/superType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/features"/>
     </genClasses>
