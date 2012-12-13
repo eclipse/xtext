@@ -20,7 +20,6 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected MacroGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AnnotationField_SemicolonKeyword_4_q;
 	protected AbstractElementAlias match_File_SemicolonKeyword_0_2_q;
-	protected AbstractElementAlias match_Import_SemicolonKeyword_2_q;
 	protected AbstractElementAlias match_MacroFile_SemicolonKeyword_0_2_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_0_4_q;
 	protected AbstractElementAlias match_Member_VarKeyword_2_0_2_0_1_1_q;
@@ -31,6 +30,7 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q;
 	protected AbstractElementAlias match_XExpressionInClosure_SemicolonKeyword_1_1_q;
 	protected AbstractElementAlias match_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q;
+	protected AbstractElementAlias match_XImportDeclaration_SemicolonKeyword_2_q;
 	protected AbstractElementAlias match_XParenthesizedExpression_LeftParenthesisKeyword_0_a;
 	protected AbstractElementAlias match_XParenthesizedExpression_LeftParenthesisKeyword_0_p;
 	
@@ -39,7 +39,6 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 		grammarAccess = (MacroGrammarAccess) access;
 		match_AnnotationField_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getAnnotationFieldAccess().getSemicolonKeyword_4());
 		match_File_SemicolonKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
-		match_Import_SemicolonKeyword_2_q = new TokenAlias(false, true, grammarAccess.getImportAccess().getSemicolonKeyword_2());
 		match_MacroFile_SemicolonKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getMacroFileAccess().getSemicolonKeyword_0_2());
 		match_Member_SemicolonKeyword_2_0_4_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4());
 		match_Member_VarKeyword_2_0_2_0_1_1_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getVarKeyword_2_0_2_0_1_1());
@@ -50,6 +49,7 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2()));
 		match_XExpressionInClosure_SemicolonKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getXExpressionInClosureAccess().getSemicolonKeyword_1_1());
 		match_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_2()));
+		match_XImportDeclaration_SemicolonKeyword_2_q = new TokenAlias(false, true, grammarAccess.getXImportDeclarationAccess().getSemicolonKeyword_2());
 		match_XParenthesizedExpression_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getXParenthesizedExpressionAccess().getLeftParenthesisKeyword_0());
 		match_XParenthesizedExpression_LeftParenthesisKeyword_0_p = new TokenAlias(true, false, grammarAccess.getXParenthesizedExpressionAccess().getLeftParenthesisKeyword_0());
 	}
@@ -95,8 +95,6 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_AnnotationField_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_File_SemicolonKeyword_0_2_q.equals(syntax))
 				emit_File_SemicolonKeyword_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Import_SemicolonKeyword_2_q.equals(syntax))
-				emit_Import_SemicolonKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_MacroFile_SemicolonKeyword_0_2_q.equals(syntax))
 				emit_MacroFile_SemicolonKeyword_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Member_SemicolonKeyword_2_0_4_q.equals(syntax))
@@ -117,6 +115,8 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_XExpressionInClosure_SemicolonKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q.equals(syntax))
 				emit_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_XImportDeclaration_SemicolonKeyword_2_q.equals(syntax))
+				emit_XImportDeclaration_SemicolonKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XParenthesizedExpression_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_XParenthesizedExpression_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XParenthesizedExpression_LeftParenthesisKeyword_0_p.equals(syntax))
@@ -138,14 +138,6 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ';'?
 	 */
 	protected void emit_File_SemicolonKeyword_0_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     ';'?
-	 */
-	protected void emit_Import_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -226,6 +218,14 @@ public class MacroSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('(' ')')?
 	 */
 	protected void emit_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Syntax:
+	 *     ';'?
+	 */
+	protected void emit_XImportDeclaration_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

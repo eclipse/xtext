@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xtype.XtypePackage;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -74,13 +76,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_FILE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Import Section</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FILE__IMPORTS = 0;
+	int XTEND_FILE__IMPORT_SECTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Xtend Types</b></em>' containment reference list.
@@ -120,13 +122,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_IMPORT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT__IMPORTED_NAMESPACE = 0;
+	int XTEND_IMPORT__EXTENSION = XtypePackage.XIMPORT_DECLARATION__EXTENSION;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -135,16 +137,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT__STATIC = 1;
-
-	/**
-	 * The feature id for the '<em><b>Extension</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT__EXTENSION = 2;
+	int XTEND_IMPORT__STATIC = XtypePackage.XIMPORT_DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Imported Type</b></em>' reference.
@@ -153,7 +146,16 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT__IMPORTED_TYPE = 3;
+	int XTEND_IMPORT__IMPORTED_TYPE = XtypePackage.XIMPORT_DECLARATION__IMPORTED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_IMPORT__IMPORTED_NAMESPACE = XtypePackage.XIMPORT_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Import</em>' class.
@@ -162,7 +164,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT_FEATURE_COUNT = 4;
+	int XTEND_IMPORT_FEATURE_COUNT = XtypePackage.XIMPORT_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTargetImpl <em>Annotation Target</em>}' class.
@@ -1073,15 +1075,15 @@ public interface XtendPackage extends EPackage
 	EClass getXtendFile();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFile#getImports <em>Imports</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFile#getImportSection <em>Import Section</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFile#getImports()
+	 * @return the meta object for the containment reference '<em>Import Section</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendFile#getImportSection()
 	 * @see #getXtendFile()
 	 * @generated
 	 */
-	EReference getXtendFile_Imports();
+	EReference getXtendFile_ImportSection();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendTypes <em>Xtend Types</em>}'.
@@ -1125,39 +1127,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXtendImport_ImportedNamespace();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendImport#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendImport#isStatic()
-	 * @see #getXtendImport()
-	 * @generated
-	 */
-	EAttribute getXtendImport_Static();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendImport#isExtension <em>Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Extension</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendImport#isExtension()
-	 * @see #getXtendImport()
-	 * @generated
-	 */
-	EAttribute getXtendImport_Extension();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtend.core.xtend.XtendImport#getImportedType <em>Imported Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Imported Type</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendImport#getImportedType()
-	 * @see #getXtendImport()
-	 * @generated
-	 */
-	EReference getXtendImport_ImportedType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendClass <em>Class</em>}'.
@@ -1860,12 +1829,12 @@ public interface XtendPackage extends EPackage
 		EClass XTEND_FILE = eINSTANCE.getXtendFile();
 
 		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Import Section</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XTEND_FILE__IMPORTS = eINSTANCE.getXtendFile_Imports();
+		EReference XTEND_FILE__IMPORT_SECTION = eINSTANCE.getXtendFile_ImportSection();
 
 		/**
 		 * The meta object literal for the '<em><b>Xtend Types</b></em>' containment reference list feature.
@@ -1900,30 +1869,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getXtendImport_ImportedNamespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_IMPORT__STATIC = eINSTANCE.getXtendImport_Static();
-
-		/**
-		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_IMPORT__EXTENSION = eINSTANCE.getXtendImport_Extension();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XTEND_IMPORT__IMPORTED_TYPE = eINSTANCE.getXtendImport_ImportedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl <em>Class</em>}' class.

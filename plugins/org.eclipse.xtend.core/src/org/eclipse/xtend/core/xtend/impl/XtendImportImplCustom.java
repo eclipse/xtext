@@ -7,22 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
-import java.util.List;
-
-import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.core.xtend.impl.XtendImportImpl;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class XtendImportImplCustom extends XtendImportImpl {
 
 	@Override
 	public boolean isWildcard() {
-		if (isStatic()) // static imports only work with wildcards atm
+		if (super.isWildcard()) 
 			return true;
 		if (importedNamespace == null)
 			return false;
@@ -33,19 +27,7 @@ public class XtendImportImplCustom extends XtendImportImpl {
 	public String getImportedTypeName() {
 		String result = getImportedNamespace();
 		if (result == null) {
-			if (this.eIsSet(XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE)) {
-				JvmType unresolvedType = (JvmType) this.eGet(XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE, false);
-				if(!unresolvedType.eIsProxy())
-					return unresolvedType.getIdentifier();
-				List<INode> list = NodeModelUtils.findNodesForFeature(this,
-						XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE);
-				StringBuilder sb = new StringBuilder();
-				for (INode iNode : list) {
-					sb.append(NodeModelUtils.getTokenText(iNode).replace("^", ""));
-				}
-				return sb.toString().replace(" ", "");
-			}
-			return null;
+			return super.getImportedTypeName();
 		}
 		if (isWildcard()) {
 			if (result.length() > 2)
@@ -54,5 +36,4 @@ public class XtendImportImplCustom extends XtendImportImpl {
 		}
 		return result;
 	}
-
 }

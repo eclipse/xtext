@@ -73,6 +73,8 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings(value = "restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -131,34 +133,8 @@ public class XtendFormatter extends XbaseFormatter2 {
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(pkg, _function_4);
       format.operator_add(_append_2);
     }
-    EList<XtendImport> _imports = xtendFile.getImports();
-    for (final XtendImport imp : _imports) {
-      {
-        this.format(imp, format);
-        EList<XtendImport> _imports_1 = xtendFile.getImports();
-        XtendImport _last = IterableExtensions.<XtendImport>last(_imports_1);
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(imp, _last);
-        if (_notEquals_1) {
-          INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
-          final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
-              public void apply(final FormattingDataInit it) {
-                it.cfg(XtendFormatterPreferenceKeys.blankLinesBetweenImports);
-              }
-            };
-          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForEObject_1, _function_5);
-          format.operator_add(_append_3);
-        } else {
-          INode _nodeForEObject_2 = this._nodeModelAccess.nodeForEObject(imp);
-          final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
-              public void apply(final FormattingDataInit it) {
-                it.cfg(XtendFormatterPreferenceKeys.blankLinesAfterImports);
-              }
-            };
-          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formattingDataFactory.append(_nodeForEObject_2, _function_6);
-          format.operator_add(_append_4);
-        }
-      }
-    }
+    XImportSection _importSection = xtendFile.getImportSection();
+    if (_importSection!=null) this.format(_importSection, format);
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     for (final XtendTypeDeclaration clazz : _xtendTypes) {
       {
@@ -186,6 +162,37 @@ public class XtendFormatter extends XbaseFormatter2 {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForEObject_1, _function_5);
     format.operator_add(_append_3);
+  }
+  
+  protected void _format(final XImportSection section, final FormattableDocument format) {
+    EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
+    for (final XImportDeclaration imp : _importDeclarations) {
+      {
+        this.format(imp, format);
+        EList<XImportDeclaration> _importDeclarations_1 = section.getImportDeclarations();
+        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(_importDeclarations_1);
+        boolean _notEquals = ObjectExtensions.operator_notEquals(imp, _last);
+        if (_notEquals) {
+          INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(imp);
+          final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.cfg(XtendFormatterPreferenceKeys.blankLinesBetweenImports);
+              }
+            };
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForEObject, _function);
+          format.operator_add(_append);
+        } else {
+          INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(imp);
+          final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+              public void apply(final FormattingDataInit it) {
+                it.cfg(XtendFormatterPreferenceKeys.blankLinesAfterImports);
+              }
+            };
+          Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(_nodeForEObject_1, _function_1);
+          format.operator_add(_append_1);
+        }
+      }
+    }
   }
   
   protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document, final IPreferenceKey<? extends Object> configKey) {
@@ -219,7 +226,7 @@ public class XtendFormatter extends XbaseFormatter2 {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
     document.operator_add(_append);
-    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(imp, Literals.XTEND_IMPORT__STATIC);
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(imp, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.oneSpace();
@@ -227,7 +234,7 @@ public class XtendFormatter extends XbaseFormatter2 {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(_nodeForFeature, _function_1);
     document.operator_add(_append_1);
-    INode _nodeForFeature_1 = this._nodeModelAccess.nodeForFeature(imp, Literals.XTEND_IMPORT__EXTENSION);
+    INode _nodeForFeature_1 = this._nodeModelAccess.nodeForFeature(imp, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
     final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.oneSpace();
@@ -932,6 +939,9 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (clazz instanceof XFunctionTypeRef) {
       _format((XFunctionTypeRef)clazz, format);
       return;
+    } else if (clazz instanceof XtendImport) {
+      _format((XtendImport)clazz, format);
+      return;
     } else if (clazz instanceof XtendParameter) {
       _format((XtendParameter)clazz, format);
       return;
@@ -986,9 +996,6 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (clazz instanceof XtendFile) {
       _format((XtendFile)clazz, format);
       return;
-    } else if (clazz instanceof XtendImport) {
-      _format((XtendImport)clazz, format);
-      return;
     } else if (clazz instanceof JvmTypeConstraint) {
       _format((JvmTypeConstraint)clazz, format);
       return;
@@ -997,6 +1004,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (clazz instanceof XExpression) {
       _format((XExpression)clazz, format);
+      return;
+    } else if (clazz instanceof XImportSection) {
+      _format((XImportSection)clazz, format);
       return;
     } else if (clazz != null) {
       _format(clazz, format);

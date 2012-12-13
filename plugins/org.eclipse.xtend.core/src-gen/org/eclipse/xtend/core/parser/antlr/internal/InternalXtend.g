@@ -107,22 +107,22 @@ ruleFile returns [EObject current=null]
 )?)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFileAccess().getImportsImportParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getFileAccess().getImportSectionXImportSectionParserRuleCall_1_0()); 
 	    }
-		lv_imports_3_0=ruleImport		{
+		lv_importSection_3_0=ruleXImportSection		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFileRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"imports",
-        		lv_imports_3_0, 
-        		"Import");
+       			"importSection",
+        		lv_importSection_3_0, 
+        		"XImportSection");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*(
+)?(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getFileAccess().getXtendTypesTypeParserRuleCall_2_0()); 
@@ -147,34 +147,34 @@ ruleFile returns [EObject current=null]
 
 
 
-// Entry rule entryRuleImport
-entryRuleImport returns [EObject current=null] 
+// Entry rule entryRuleXImportDeclaration
+entryRuleXImportDeclaration returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getImportRule()); }
-	 iv_ruleImport=ruleImport 
-	 { $current=$iv_ruleImport.current; } 
+	{ newCompositeNode(grammarAccess.getXImportDeclarationRule()); }
+	 iv_ruleXImportDeclaration=ruleXImportDeclaration 
+	 { $current=$iv_ruleXImportDeclaration.current; } 
 	 EOF 
 ;
 
-// Rule Import
-ruleImport returns [EObject current=null] 
+// Rule XImportDeclaration
+ruleXImportDeclaration returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (	otherlv_0='import' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getXImportDeclarationAccess().getImportKeyword_0());
     }
 (((
 (
 		lv_static_1_0=	'static' 
     {
-        newLeafNode(lv_static_1_0, grammarAccess.getImportAccess().getStaticStaticKeyword_1_0_0_0());
+        newLeafNode(lv_static_1_0, grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportRule());
+	            $current = createModelElement(grammarAccess.getXImportDeclarationRule());
 	        }
        		setWithLastConsumed($current, "static", true, "static");
 	    }
@@ -184,12 +184,12 @@ ruleImport returns [EObject current=null]
 (
 		lv_extension_2_0=	'extension' 
     {
-        newLeafNode(lv_extension_2_0, grammarAccess.getImportAccess().getExtensionExtensionKeyword_1_0_1_0());
+        newLeafNode(lv_extension_2_0, grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportRule());
+	            $current = createModelElement(grammarAccess.getXImportDeclarationRule());
 	        }
        		setWithLastConsumed($current, "extension", true, "extension");
 	    }
@@ -199,11 +199,11 @@ ruleImport returns [EObject current=null]
 (
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportRule());
+	            $current = createModelElement(grammarAccess.getXImportDeclarationRule());
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getImportAccess().getImportedTypeJvmTypeCrossReference_1_0_2_0()); 
+	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0()); 
 	    }
 		ruleQualifiedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -212,22 +212,22 @@ ruleImport returns [EObject current=null]
 )
 )	otherlv_4='.' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getImportAccess().getFullStopKeyword_1_0_3());
+    	newLeafNode(otherlv_4, grammarAccess.getXImportDeclarationAccess().getFullStopKeyword_1_0_3());
     }
 	otherlv_5='*' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getImportAccess().getAsteriskKeyword_1_0_4());
+    	newLeafNode(otherlv_5, grammarAccess.getXImportDeclarationAccess().getAsteriskKeyword_1_0_4());
     }
 )
     |(
 (
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportRule());
+	            $current = createModelElement(grammarAccess.getXImportDeclarationRule());
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getImportAccess().getImportedTypeJvmTypeCrossReference_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0()); 
 	    }
 		ruleQualifiedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -238,11 +238,11 @@ ruleImport returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
 	    }
 		lv_importedNamespace_7_0=ruleQualifiedNameWithWildCard		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getImportRule());
+	            $current = createModelElementForParent(grammarAccess.getXImportDeclarationRule());
 	        }
        		set(
        			$current, 
@@ -255,7 +255,7 @@ ruleImport returns [EObject current=null]
 )
 ))(	otherlv_8=';' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getImportAccess().getSemicolonKeyword_2());
+    	newLeafNode(otherlv_8, grammarAccess.getXImportDeclarationAccess().getSemicolonKeyword_2());
     }
 )?)
 ;
@@ -8010,6 +8010,45 @@ ruleJvmTypeParameter returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleXImportSection
+entryRuleXImportSection returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getXImportSectionRule()); }
+	 iv_ruleXImportSection=ruleXImportSection 
+	 { $current=$iv_ruleXImportSection.current; } 
+	 EOF 
+;
+
+// Rule XImportSection
+ruleXImportSection returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXImportSectionAccess().getImportDeclarationsXImportDeclarationParserRuleCall_0()); 
+	    }
+		lv_importDeclarations_0_0=ruleXImportDeclaration		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXImportSectionRule());
+	        }
+       		add(
+       			$current, 
+       			"importDeclarations",
+        		lv_importDeclarations_0_0, 
+        		"XImportDeclaration");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)+
 ;
 
 

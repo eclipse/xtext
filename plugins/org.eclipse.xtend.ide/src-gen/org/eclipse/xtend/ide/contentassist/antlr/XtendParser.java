@@ -37,7 +37,7 @@ public class XtendParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
+					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
 					put(grammarAccess.getTypeAccess().getAlternatives_2(), "rule__Type__Alternatives_2");
 					put(grammarAccess.getAnnotationFieldAccess().getAlternatives_1(), "rule__AnnotationField__Alternatives_1");
 					put(grammarAccess.getAnnotationFieldAccess().getAlternatives_1_1_0(), "rule__AnnotationField__Alternatives_1_1_0");
@@ -92,8 +92,8 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVisibilityAccess().getAlternatives(), "rule__Visibility__Alternatives");
 					put(grammarAccess.getFileAccess().getGroup(), "rule__File__Group__0");
 					put(grammarAccess.getFileAccess().getGroup_0(), "rule__File__Group_0__0");
-					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
+					put(grammarAccess.getXImportDeclarationAccess().getGroup(), "rule__XImportDeclaration__Group__0");
+					put(grammarAccess.getXImportDeclarationAccess().getGroup_1_0(), "rule__XImportDeclaration__Group_1_0__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_2_0(), "rule__Type__Group_2_0__0");
@@ -308,13 +308,13 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup(), "rule__JvmTypeParameter__Group__0");
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup_1_0(), "rule__JvmTypeParameter__Group_1_0__0");
 					put(grammarAccess.getFileAccess().getPackageAssignment_0_1(), "rule__File__PackageAssignment_0_1");
-					put(grammarAccess.getFileAccess().getImportsAssignment_1(), "rule__File__ImportsAssignment_1");
+					put(grammarAccess.getFileAccess().getImportSectionAssignment_1(), "rule__File__ImportSectionAssignment_1");
 					put(grammarAccess.getFileAccess().getXtendTypesAssignment_2(), "rule__File__XtendTypesAssignment_2");
-					put(grammarAccess.getImportAccess().getStaticAssignment_1_0_0(), "rule__Import__StaticAssignment_1_0_0");
-					put(grammarAccess.getImportAccess().getExtensionAssignment_1_0_1(), "rule__Import__ExtensionAssignment_1_0_1");
-					put(grammarAccess.getImportAccess().getImportedTypeAssignment_1_0_2(), "rule__Import__ImportedTypeAssignment_1_0_2");
-					put(grammarAccess.getImportAccess().getImportedTypeAssignment_1_1(), "rule__Import__ImportedTypeAssignment_1_1");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_2(), "rule__Import__ImportedNamespaceAssignment_1_2");
+					put(grammarAccess.getXImportDeclarationAccess().getStaticAssignment_1_0_0(), "rule__XImportDeclaration__StaticAssignment_1_0_0");
+					put(grammarAccess.getXImportDeclarationAccess().getExtensionAssignment_1_0_1(), "rule__XImportDeclaration__ExtensionAssignment_1_0_1");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_0_2(), "rule__XImportDeclaration__ImportedTypeAssignment_1_0_2");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_1(), "rule__XImportDeclaration__ImportedTypeAssignment_1_1");
+					put(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceAssignment_1_2(), "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2");
 					put(grammarAccess.getTypeAccess().getAnnotationsAssignment_1(), "rule__Type__AnnotationsAssignment_1");
 					put(grammarAccess.getTypeAccess().getAbstractAssignment_2_0_2(), "rule__Type__AbstractAssignment_2_0_2");
 					put(grammarAccess.getTypeAccess().getNameAssignment_2_0_4(), "rule__Type__NameAssignment_2_0_4");
@@ -533,6 +533,7 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_0(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_0");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_1");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_1");
+					put(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment(), "rule__XImportSection__ImportDeclarationsAssignment");
 				}
 			};
 		}

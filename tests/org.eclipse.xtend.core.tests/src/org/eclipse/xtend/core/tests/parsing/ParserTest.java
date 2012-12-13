@@ -495,8 +495,8 @@ public class ParserTest extends AbstractXtendTestCase {
 	
 	protected XtendImport importDeclaration(String importAsString) throws Exception {
 		XtendFile file = file(importAsString + "\nclass Foo{}");
-		if (file.getImports().isEmpty())
+		if (file.getImportSection() == null || file.getImportSection().getImportDeclarations().isEmpty())
 			return null;
-		return file.getImports().get(0);
+		return (XtendImport) file.getImportSection().getImportDeclarations().get(0);
 	}
 }

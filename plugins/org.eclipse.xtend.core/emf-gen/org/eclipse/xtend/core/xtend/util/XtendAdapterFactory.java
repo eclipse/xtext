@@ -21,6 +21,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 
+import org.eclipse.xtext.xtype.XImportDeclaration;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -168,6 +170,11 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseXtendAnnotationType(XtendAnnotationType object)
 			{
 				return createXtendAnnotationTypeAdapter();
+			}
+			@Override
+			public Adapter caseXImportDeclaration(XImportDeclaration object)
+			{
+				return createXImportDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseXExpression(XExpression object)
@@ -462,6 +469,21 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendAnnotationTypeAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XImportDeclaration <em>XImport Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtype.XImportDeclaration
+	 * @generated
+	 */
+	public Adapter createXImportDeclarationAdapter()
 	{
 		return null;
 	}

@@ -111,6 +111,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -1101,17 +1102,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkImports(XtendFile file) {
-		final Map<JvmType, XtendImport> imports = newHashMap();
-		final Map<JvmType, XtendImport> staticImports = newHashMap();
+		if(file.getImportSection() == null)
+			return;
+		final Map<JvmType, XImportDeclaration> imports = newHashMap();
+		final Map<JvmType, XImportDeclaration> staticImports = newHashMap();
 		final Map<String, JvmType> importedNames = newHashMap();
 		
-		for (XtendImport imp : file.getImports()) {
-			if (imp.getImportedNamespace() != null) {
+		for (XImportDeclaration imp : file.getImportSection().getImportDeclarations()) {
+			if (imp instanceof XtendImport && ((XtendImport)imp).getImportedNamespace() != null) {
 				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
-					Map<JvmType, XtendImport> map = imp.isStatic() ? staticImports : imports;
+					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
 					if (map.containsKey(importedType)) {
 						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
 								IssueCodes.IMPORT_DUPLICATE);
@@ -1143,7 +1146,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if(importedNames.containsKey(clazzName)){
 				JvmType importedType = importedNames.get(clazzName);
 				if(importedType != null){
-					XtendImport xtendImport = imports.get(importedType);
+					XImportDeclaration xtendImport = imports.get(importedType);
 					if(xtendImport != null)
 						error("The import '" + importedType.getIdentifier() + "' conflicts with a type defined in the same file", xtendImport, null, IssueCodes.IMPORT_CONFLICT );
 				}
@@ -1202,7 +1205,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		}
 
-		for (XtendImport imp : imports.values()) {
+		for (XImportDeclaration imp : imports.values()) {
 			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
 					IssueCodes.IMPORT_UNUSED);
 		}

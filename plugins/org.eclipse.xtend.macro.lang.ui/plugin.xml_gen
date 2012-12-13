@@ -371,6 +371,32 @@
          </action>
       </viewerContribution>
    </extension>
+   
+    <!-- Introduce Local Variable Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
+			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>  
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtend.macro.lang.Macro.compare.contentViewers"

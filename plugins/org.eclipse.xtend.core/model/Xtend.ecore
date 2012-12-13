@@ -2,19 +2,14 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtend" nsURI="http://www.eclipse.org/xtend" nsPrefix="xtend">
   <eClassifiers xsi:type="ecore:EClass" name="XtendFile">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//XtendImport" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importSection" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore#//XImportSection"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="xtendTypes" upperBound="-1"
         eType="#//XtendTypeDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XtendImport">
-    <eOperations name="isWildcard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getImportedTypeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendImport" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore#//XImportDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importedType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendClass" eSuperTypes="#//XtendTypeDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

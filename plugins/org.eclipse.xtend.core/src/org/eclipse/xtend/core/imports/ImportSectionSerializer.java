@@ -35,7 +35,7 @@ public class ImportSectionSerializer {
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 	
-	public ReplaceRegion serialize(XtendFile xtendFile, ImportSection importSection) {
+	public ReplaceRegion serialize(XtendFile xtendFile, SortedImportSection importSection) {
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource().getURI()).getLineSeparator();
 		String serializedImports = serializeImports(importSection, lineSeparator);
 		TextRegion importSectionRegion = computeRegion(xtendFile);
@@ -48,7 +48,7 @@ public class ImportSectionSerializer {
 		return new ReplaceRegion(importSectionRegion.getOffset(), importSectionRegion.getLength(), sectionText.toString());
 	}
 	
-	public String serializeImports(ImportSection importSection, String lineSeparator) {
+	public String serializeImports(SortedImportSection importSection, String lineSeparator) {
 		StringBuilder importsSection = new StringBuilder();
 		boolean needNewline = false;
 		if (!importSection.getImportedTypes().isEmpty()) {

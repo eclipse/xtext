@@ -40,6 +40,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
 
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 
+import org.eclipse.xtext.xtype.XtypePackage;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -218,6 +220,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		// Initialize simple dependencies
 		XAnnotationsPackage.eINSTANCE.eClass();
 		XbasePackage.eINSTANCE.eClass();
+		XtypePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theXtendPackage.createPackageContents();
@@ -249,7 +252,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendFile_Imports()
+	public EReference getXtendFile_ImportSection()
 	{
 		return (EReference)xtendFileEClass.getEStructuralFeatures().get(0);
 	}
@@ -292,36 +295,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	public EAttribute getXtendImport_ImportedNamespace()
 	{
 		return (EAttribute)xtendImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getXtendImport_Static()
-	{
-		return (EAttribute)xtendImportEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getXtendImport_Extension()
-	{
-		return (EAttribute)xtendImportEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXtendImport_ImportedType()
-	{
-		return (EReference)xtendImportEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -975,15 +948,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		// Create classes and their features
 		xtendFileEClass = createEClass(XTEND_FILE);
-		createEReference(xtendFileEClass, XTEND_FILE__IMPORTS);
+		createEReference(xtendFileEClass, XTEND_FILE__IMPORT_SECTION);
 		createEReference(xtendFileEClass, XTEND_FILE__XTEND_TYPES);
 		createEAttribute(xtendFileEClass, XTEND_FILE__PACKAGE);
 
 		xtendImportEClass = createEClass(XTEND_IMPORT);
 		createEAttribute(xtendImportEClass, XTEND_IMPORT__IMPORTED_NAMESPACE);
-		createEAttribute(xtendImportEClass, XTEND_IMPORT__STATIC);
-		createEAttribute(xtendImportEClass, XTEND_IMPORT__EXTENSION);
-		createEReference(xtendImportEClass, XTEND_IMPORT__IMPORTED_TYPE);
 
 		xtendClassEClass = createEClass(XTEND_CLASS);
 		createEAttribute(xtendClassEClass, XTEND_CLASS__ABSTRACT);
@@ -1088,6 +1058,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 		XAnnotationsPackage theXAnnotationsPackage = (XAnnotationsPackage)EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI);
 		XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
@@ -1097,6 +1068,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		xtendImportEClass.getESuperTypes().add(theXtypePackage.getXImportDeclaration());
 		xtendClassEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 		xtendMemberEClass.getESuperTypes().add(this.getXtendAnnotationTarget());
 		xtendFunctionEClass.getESuperTypes().add(this.getXtendMember());
@@ -1112,19 +1084,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXtendFile_Imports(), this.getXtendImport(), null, "imports", null, 0, -1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendFile_ImportSection(), theXtypePackage.getXImportSection(), null, "importSection", null, 0, 1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendFile_XtendTypes(), this.getXtendTypeDeclaration(), null, "xtendTypes", null, 0, -1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendFile_Package(), ecorePackage.getEString(), "package", null, 0, 1, XtendFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendImportEClass, XtendImport.class, "XtendImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXtendImport_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXtendImport_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendImport_ImportedType(), theTypesPackage.getJvmType(), null, "importedType", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(xtendImportEClass, ecorePackage.getEBoolean(), "isWildcard", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(xtendImportEClass, ecorePackage.getEString(), "getImportedTypeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(xtendClassEClass, XtendClass.class, "XtendClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -71,6 +71,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -1160,8 +1161,8 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 				}
 				else break;
 			case XtendPackage.XTEND_IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (XtendImport) semanticObject); 
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XtendImport) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1186,6 +1187,12 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_SECTION:
+				if(context == grammarAccess.getXImportSectionRule()) {
+					sequence_XImportSection(context, (XImportSection) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1222,7 +1229,7 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (package=QualifiedName? imports+=Import* xtendTypes+=Type*)
+	 *     (package=QualifiedName? importSection=XImportSection xtendTypes+=Type*)
 	 */
 	protected void sequence_MacroFile(EObject context, XtendFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

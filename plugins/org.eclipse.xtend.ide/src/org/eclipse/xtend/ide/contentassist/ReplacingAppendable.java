@@ -19,7 +19,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -29,6 +28,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -64,9 +64,11 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 				XtendFile xtendFile = EcoreUtil2.getContainerOfType(context, XtendFile.class);
 				if (xtendFile != null) {
 					ImportManager importManager = new ImportManager(true, '$');
-					for (XtendImport xImport : xtendFile.getImports()) {
-						if (!(xImport.isStatic() || xImport.isExtension()) && xImport.getImportedType() != null) {
-							importManager.addImportFor(xImport.getImportedType());
+					if(xtendFile.getImportSection() != null) {
+						for (XImportDeclaration xImport : xtendFile.getImportSection().getImportDeclarations()) {
+							if (!(xImport.isStatic() || xImport.isExtension()) && xImport.getImportedType() != null) {
+								importManager.addImportFor(xImport.getImportedType());
+							}
 						}
 					}
 					WhitespaceHelper whitespaceHelper = whitespaceHelperProvider.get();
@@ -170,40 +172,39 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 	public int insertNewImports() throws BadLocationException {
 		List<String> newImports = getNewImports();
 		if (!newImports.isEmpty()) {
-			StringBuilder importSection = new StringBuilder();
+			StringBuilder newImportSection = new StringBuilder();
 			for (String newImport : newImports) {
-				importSection.append("import ");
-				importSection.append(newImport);
-				importSection.append(getLineSeparator());
+				newImportSection.append("import ");
+				newImportSection.append(newImport);
+				newImportSection.append(getLineSeparator());
 			}
-			importSection.append(getLineSeparator());
+			newImportSection.append(getLineSeparator());
 			int offset;
-			if (xtendFile.getImports().isEmpty()) {
+			if (xtendFile.getImportSection() == null || xtendFile.getImportSection().getImportDeclarations().isEmpty()) {
 				if(xtendFile.getPackage() != null) {
 					List<INode> packageDeclarationNodes = NodeModelUtils.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
 					if(packageDeclarationNodes.isEmpty())
 						throw new IllegalStateException("Package declaration nodes must not be null");
 					INode packageDeclNode = packageDeclarationNodes.get(packageDeclarationNodes.size()-1);
 					offset = packageDeclNode.getOffset() + packageDeclNode.getLength();
-					importSection.insert(0, getLineSeparator() + getLineSeparator());
+					newImportSection.insert(0, getLineSeparator() + getLineSeparator());
 				} else {
 					offset = 0;
 				}
 			} else {
-				ICompositeNode lastImportNode = NodeModelUtils.findActualNodeFor(xtendFile.getImports().get(
-						xtendFile.getImports().size() - 1));
-				if (lastImportNode == null) {
+				ICompositeNode importSectionNode = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
+				if (importSectionNode == null) {
 					throw new IllegalStateException("Last XtendImport node may not be null");
 				}
-				importSection.insert(0, getLineSeparator());
-				offset = lastImportNode.getOffset() + lastImportNode.getLength();
+				newImportSection.insert(0, getLineSeparator());
+				offset = importSectionNode.getOffset() + importSectionNode.getLength();
 			}
 			int replaceLength = 0;
 			while(Character.isWhitespace(document.get(offset + replaceLength, 1).charAt(0))){
 				++replaceLength;
 			}
-			document.replace(offset, replaceLength, importSection.toString());
-			return importSection.length() - replaceLength;
+			document.replace(offset, replaceLength, newImportSection.toString());
+			return newImportSection.length() - replaceLength;
 		}
 		return 0;
 	}

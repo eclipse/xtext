@@ -1,14 +1,14 @@
 package org.eclipse.xtend.core.tests.imports
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.imports.NonOverridableTypesProvider
 import com.google.inject.Inject
-import org.junit.Test
+import org.eclipse.xtend.core.imports.NonOverridableTypesProvider
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmMember
+import org.junit.Test
 
 /** 
  * TODO: Write more of these tests as soon as Xtend provides inner classes 

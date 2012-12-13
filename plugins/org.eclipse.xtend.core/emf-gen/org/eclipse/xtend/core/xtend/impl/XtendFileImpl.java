@@ -24,9 +24,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+
+import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +36,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getXtendTypes <em>Xtend Types</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getPackage <em>Package</em>}</li>
  * </ul>
@@ -46,14 +47,14 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 public class XtendFileImpl extends MinimalEObjectImpl.Container implements XtendFile
 {
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * The cached value of the '{@link #getImportSection() <em>Import Section</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImports()
+	 * @see #getImportSection()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XtendImport> imports;
+	protected XImportSection importSection;
 
 	/**
 	 * The cached value of the '{@link #getXtendTypes() <em>Xtend Types</em>}' containment reference list.
@@ -111,13 +112,47 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XtendImport> getImports()
+	public XImportSection getImportSection()
 	{
-		if (imports == null)
+		return importSection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetImportSection(XImportSection newImportSection, NotificationChain msgs)
+	{
+		XImportSection oldImportSection = importSection;
+		importSection = newImportSection;
+		if (eNotificationRequired())
 		{
-			imports = new EObjectContainmentEList<XtendImport>(XtendImport.class, this, XtendPackage.XTEND_FILE__IMPORTS);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FILE__IMPORT_SECTION, oldImportSection, newImportSection);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return imports;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImportSection(XImportSection newImportSection)
+	{
+		if (newImportSection != importSection)
+		{
+			NotificationChain msgs = null;
+			if (importSection != null)
+				msgs = ((InternalEObject)importSection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FILE__IMPORT_SECTION, null, msgs);
+			if (newImportSection != null)
+				msgs = ((InternalEObject)newImportSection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FILE__IMPORT_SECTION, null, msgs);
+			msgs = basicSetImportSection(newImportSection, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FILE__IMPORT_SECTION, newImportSection, newImportSection));
 	}
 
 	/**
@@ -167,8 +202,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_FILE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+			case XtendPackage.XTEND_FILE__IMPORT_SECTION:
+				return basicSetImportSection(null, msgs);
 			case XtendPackage.XTEND_FILE__XTEND_TYPES:
 				return ((InternalEList<?>)getXtendTypes()).basicRemove(otherEnd, msgs);
 		}
@@ -185,8 +220,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_FILE__IMPORTS:
-				return getImports();
+			case XtendPackage.XTEND_FILE__IMPORT_SECTION:
+				return getImportSection();
 			case XtendPackage.XTEND_FILE__XTEND_TYPES:
 				return getXtendTypes();
 			case XtendPackage.XTEND_FILE__PACKAGE:
@@ -206,9 +241,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_FILE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends XtendImport>)newValue);
+			case XtendPackage.XTEND_FILE__IMPORT_SECTION:
+				setImportSection((XImportSection)newValue);
 				return;
 			case XtendPackage.XTEND_FILE__XTEND_TYPES:
 				getXtendTypes().clear();
@@ -231,8 +265,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_FILE__IMPORTS:
-				getImports().clear();
+			case XtendPackage.XTEND_FILE__IMPORT_SECTION:
+				setImportSection((XImportSection)null);
 				return;
 			case XtendPackage.XTEND_FILE__XTEND_TYPES:
 				getXtendTypes().clear();
@@ -254,8 +288,8 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_FILE__IMPORTS:
-				return imports != null && !imports.isEmpty();
+			case XtendPackage.XTEND_FILE__IMPORT_SECTION:
+				return importSection != null;
 			case XtendPackage.XTEND_FILE__XTEND_TYPES:
 				return xtendTypes != null && !xtendTypes.isEmpty();
 			case XtendPackage.XTEND_FILE__PACKAGE:

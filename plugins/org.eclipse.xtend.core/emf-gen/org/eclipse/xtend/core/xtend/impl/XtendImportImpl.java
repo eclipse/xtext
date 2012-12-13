@@ -10,15 +10,13 @@ package org.eclipse.xtend.core.xtend.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xtype.impl.XImportDeclarationImplCustom;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,15 +26,12 @@ import org.eclipse.xtext.common.types.JvmType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl#isExtension <em>Extension</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl#getImportedType <em>Imported Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XtendImportImpl extends MinimalEObjectImpl.Container implements XtendImport
+public class XtendImportImpl extends XImportDeclarationImplCustom implements XtendImport
 {
 	/**
 	 * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
@@ -57,56 +52,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * @ordered
 	 */
 	protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean STATIC_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean static_ = STATIC_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isExtension() <em>Extension</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExtension()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean EXTENSION_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isExtension() <em>Extension</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExtension()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean extension = EXTENSION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getImportedType() <em>Imported Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImportedType()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmType importedType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,119 +102,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isStatic()
-	{
-		return static_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatic(boolean newStatic)
-	{
-		boolean oldStatic = static_;
-		static_ = newStatic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_IMPORT__STATIC, oldStatic, static_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isExtension()
-	{
-		return extension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExtension(boolean newExtension)
-	{
-		boolean oldExtension = extension;
-		extension = newExtension;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_IMPORT__EXTENSION, oldExtension, extension));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmType getImportedType()
-	{
-		if (importedType != null && importedType.eIsProxy())
-		{
-			InternalEObject oldImportedType = (InternalEObject)importedType;
-			importedType = (JvmType)eResolveProxy(oldImportedType);
-			if (importedType != oldImportedType)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtendPackage.XTEND_IMPORT__IMPORTED_TYPE, oldImportedType, importedType));
-			}
-		}
-		return importedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmType basicGetImportedType()
-	{
-		return importedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setImportedType(JvmType newImportedType)
-	{
-		JvmType oldImportedType = importedType;
-		importedType = newImportedType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_IMPORT__IMPORTED_TYPE, oldImportedType, importedType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isWildcard()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getImportedTypeName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -277,13 +109,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		{
 			case XtendPackage.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				return getImportedNamespace();
-			case XtendPackage.XTEND_IMPORT__STATIC:
-				return isStatic();
-			case XtendPackage.XTEND_IMPORT__EXTENSION:
-				return isExtension();
-			case XtendPackage.XTEND_IMPORT__IMPORTED_TYPE:
-				if (resolve) return getImportedType();
-				return basicGetImportedType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,15 +125,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		{
 			case XtendPackage.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				setImportedNamespace((String)newValue);
-				return;
-			case XtendPackage.XTEND_IMPORT__STATIC:
-				setStatic((Boolean)newValue);
-				return;
-			case XtendPackage.XTEND_IMPORT__EXTENSION:
-				setExtension((Boolean)newValue);
-				return;
-			case XtendPackage.XTEND_IMPORT__IMPORTED_TYPE:
-				setImportedType((JvmType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -327,15 +143,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 			case XtendPackage.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
 				return;
-			case XtendPackage.XTEND_IMPORT__STATIC:
-				setStatic(STATIC_EDEFAULT);
-				return;
-			case XtendPackage.XTEND_IMPORT__EXTENSION:
-				setExtension(EXTENSION_EDEFAULT);
-				return;
-			case XtendPackage.XTEND_IMPORT__IMPORTED_TYPE:
-				setImportedType((JvmType)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -352,12 +159,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		{
 			case XtendPackage.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
-			case XtendPackage.XTEND_IMPORT__STATIC:
-				return static_ != STATIC_EDEFAULT;
-			case XtendPackage.XTEND_IMPORT__EXTENSION:
-				return extension != EXTENSION_EDEFAULT;
-			case XtendPackage.XTEND_IMPORT__IMPORTED_TYPE:
-				return importedType != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -375,10 +176,6 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (importedNamespace: ");
 		result.append(importedNamespace);
-		result.append(", static: ");
-		result.append(static_);
-		result.append(", extension: ");
-		result.append(extension);
 		result.append(')');
 		return result.toString();
 	}

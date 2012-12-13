@@ -1,10 +1,10 @@
 package org.eclipse.xtend.core.tests.imports
 
 import javax.inject.Inject
-import org.eclipse.xtend.core.imports.ImportOrganizer
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
 import org.eclipse.xtext.resource.XtextResource
+import org.junit.Test
+import org.eclipse.xtend.core.imports.ImportOrganizer
 
 class ImportOrganizerTest extends AbstractXtendTestCase {
 

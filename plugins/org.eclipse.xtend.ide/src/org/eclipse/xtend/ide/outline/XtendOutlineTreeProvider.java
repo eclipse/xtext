@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -90,8 +91,8 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		if (xtendFile.getPackage() != null)
 			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
 					images.forPackage(), xtendFile.getPackage(), true);
-		if (!xtendFile.getImports().isEmpty())
-			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__IMPORTS,
+		if (xtendFile.getImportSection() != null && !xtendFile.getImportSection().getImportDeclarations().isEmpty())
+			createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(), XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS,
 					images.forImportContainer(), "import declarations", false);
 		for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
 			EObjectNode classNode = createEObjectNode(parentNode, xtendType);

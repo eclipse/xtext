@@ -7,11 +7,11 @@ grammar DebugInternalXtend ;
 ruleFile :
 	(
 		'package' ruleQualifiedName ';'?
-	)? ruleImport* ruleType*
+	)? ruleXImportSection? ruleType*
 ;
 
-// Rule Import
-ruleImport :
+// Rule XImportDeclaration
+ruleXImportDeclaration :
 	'import' (
 		'static' 'extension'? ruleQualifiedName '.' '*' |
 		ruleQualifiedName |
@@ -870,6 +870,11 @@ ruleJvmTypeParameter :
 		ruleJvmUpperBound ruleJvmUpperBoundAnded* |
 		ruleJvmLowerBound
 	)?
+;
+
+// Rule XImportSection
+ruleXImportSection :
+	ruleXImportDeclaration+
 ;
 
 // Rule Visibility

@@ -17,10 +17,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.imports.ImportSection;
 import org.eclipse.xtend.core.imports.ImportSectionSerializer;
+import org.eclipse.xtend.core.imports.SortedImportSection;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -69,7 +69,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 					}
 				});
 		XtendFile xtendFile = (XtendFile) referringResource.getContents().get(0);
-		ImportSection importSection = new ImportSection(xtendFile);
+		SortedImportSection importSection = new SortedImportSection(xtendFile.getImportSection());
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor, importSection);
 		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
 				importAwareUpdateAcceptor);
@@ -78,12 +78,12 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		updateAcceptor.accept(referringResource.getURI(), replaceEdit);
 	}
 
-	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor, ImportSection importSection) {
+	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor, SortedImportSection importSection) {
 		return new ImportAwareUpdateAcceptor(updateAcceptor, importSection);
 	}
 
 	protected boolean isImportTypeReference(IReferenceDescription input) {
-		return input.getEReference() == XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE;
+		return input.getEReference() == XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE;
 	}
 
 	@Override
@@ -120,9 +120,9 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 
 		private IRefactoringUpdateAcceptor delegate;
 
-		private ImportSection importSection;
+		private SortedImportSection importSection;
 
-		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate, ImportSection importSection) {
+		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate, SortedImportSection importSection) {
 			this.delegate = delegate;
 			this.importSection = importSection;
 		}

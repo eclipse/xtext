@@ -2137,12 +2137,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:16: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:18: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:16: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:18: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             {
             match("'''"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:27: ( RULE_IN_RICH_STRING )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:27: ( RULE_IN_RICH_STRING )*
             loop1:
             do {
                 int alt1=2;
@@ -2173,7 +2173,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:27: RULE_IN_RICH_STRING
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:27: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2185,7 +2185,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:48: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:48: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -2208,7 +2208,7 @@ public class InternalMacroLexer extends Lexer {
                 alt4=2;}
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:49: '\\'\\'\\''
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:49: '\\'\\'\\''
                     {
                     match("'''"); 
 
@@ -2216,9 +2216,9 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:58: ( '\\'' ( '\\'' )? )? EOF
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:58: ( '\\'' ( '\\'' )? )? EOF
                     {
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:58: ( '\\'' ( '\\'' )? )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:58: ( '\\'' ( '\\'' )? )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -2227,10 +2227,10 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:59: '\\'' ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:59: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:64: ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:64: ( '\\'' )?
                             int alt2=2;
                             int LA2_0 = input.LA(1);
 
@@ -2239,7 +2239,7 @@ public class InternalMacroLexer extends Lexer {
                             }
                             switch (alt2) {
                                 case 1 :
-                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8211:64: '\\''
+                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8250:64: '\\''
                                     {
                                     match('\''); 
 
@@ -2277,12 +2277,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_START;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:22: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:24: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:22: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:24: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
             {
             match("'''"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:33: ( RULE_IN_RICH_STRING )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:33: ( RULE_IN_RICH_STRING )*
             loop5:
             do {
                 int alt5=2;
@@ -2313,7 +2313,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:33: RULE_IN_RICH_STRING
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:33: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2325,7 +2325,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:54: ( '\\'' ( '\\'' )? )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:54: ( '\\'' ( '\\'' )? )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2334,10 +2334,10 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:55: '\\'' ( '\\'' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:55: '\\'' ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:60: ( '\\'' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:60: ( '\\'' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2346,7 +2346,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8213:60: '\\''
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8252:60: '\\''
                             {
                             match('\''); 
 
@@ -2378,11 +2378,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:20: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:22: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:20: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:22: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             {
             match('\u00BB'); 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:31: ( RULE_IN_RICH_STRING )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:31: ( RULE_IN_RICH_STRING )*
             loop8:
             do {
                 int alt8=2;
@@ -2413,7 +2413,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:31: RULE_IN_RICH_STRING
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:31: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2425,7 +2425,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:52: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:52: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2448,7 +2448,7 @@ public class InternalMacroLexer extends Lexer {
                 alt11=2;}
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:53: '\\'\\'\\''
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:53: '\\'\\'\\''
                     {
                     match("'''"); 
 
@@ -2456,9 +2456,9 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:62: ( '\\'' ( '\\'' )? )? EOF
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:62: ( '\\'' ( '\\'' )? )? EOF
                     {
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:62: ( '\\'' ( '\\'' )? )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:62: ( '\\'' ( '\\'' )? )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -2467,10 +2467,10 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:63: '\\'' ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:63: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:68: ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:68: ( '\\'' )?
                             int alt9=2;
                             int LA9_0 = input.LA(1);
 
@@ -2479,7 +2479,7 @@ public class InternalMacroLexer extends Lexer {
                             }
                             switch (alt9) {
                                 case 1 :
-                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8215:68: '\\''
+                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8254:68: '\\''
                                     {
                                     match('\''); 
 
@@ -2517,11 +2517,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_INBETWEEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:26: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:28: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:26: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:28: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
             {
             match('\u00BB'); 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:37: ( RULE_IN_RICH_STRING )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:37: ( RULE_IN_RICH_STRING )*
             loop12:
             do {
                 int alt12=2;
@@ -2552,7 +2552,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:37: RULE_IN_RICH_STRING
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:37: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2564,7 +2564,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:58: ( '\\'' ( '\\'' )? )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:58: ( '\\'' ( '\\'' )? )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2573,10 +2573,10 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:59: '\\'' ( '\\'' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:59: '\\'' ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:64: ( '\\'' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:64: ( '\\'' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -2585,7 +2585,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8217:64: '\\''
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8256:64: '\\''
                             {
                             match('\''); 
 
@@ -2617,12 +2617,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_COMMENT_RICH_TEXT_INBETWEEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:34: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )? )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:36: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:34: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )? )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:36: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
             {
             match("\u00AB\u00AB"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:51: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:51: (~ ( ( '\\n' | '\\r' ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -2635,7 +2635,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt15) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:51: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:51: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2655,7 +2655,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:67: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:67: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -2664,9 +2664,9 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:68: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:68: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
                     {
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:68: ( '\\r' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:68: ( '\\r' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -2675,7 +2675,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:68: '\\r'
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:68: '\\r'
                             {
                             match('\r'); 
 
@@ -2685,7 +2685,7 @@ public class InternalMacroLexer extends Lexer {
                     }
 
                     match('\n'); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:79: ( RULE_IN_RICH_STRING )*
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:79: ( RULE_IN_RICH_STRING )*
                     loop17:
                     do {
                         int alt17=2;
@@ -2716,7 +2716,7 @@ public class InternalMacroLexer extends Lexer {
 
                         switch (alt17) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:79: RULE_IN_RICH_STRING
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:79: RULE_IN_RICH_STRING
                     	    {
                     	    mRULE_IN_RICH_STRING(); 
 
@@ -2728,7 +2728,7 @@ public class InternalMacroLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:100: ( '\\'' ( '\\'' )? )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:100: ( '\\'' ( '\\'' )? )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -2737,10 +2737,10 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt19) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:101: '\\'' ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:101: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:106: ( '\\'' )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:106: ( '\\'' )?
                             int alt18=2;
                             int LA18_0 = input.LA(1);
 
@@ -2749,7 +2749,7 @@ public class InternalMacroLexer extends Lexer {
                             }
                             switch (alt18) {
                                 case 1 :
-                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8219:106: '\\''
+                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8258:106: '\\''
                                     {
                                     match('\''); 
 
@@ -2787,12 +2787,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_COMMENT_RICH_TEXT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:28: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF ) )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:30: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:28: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:30: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
             {
             match("\u00AB\u00AB"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:45: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:45: (~ ( ( '\\n' | '\\r' ) ) )*
             loop21:
             do {
                 int alt21=2;
@@ -2805,7 +2805,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt21) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:45: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:45: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2825,7 +2825,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:61: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:61: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -2836,9 +2836,9 @@ public class InternalMacroLexer extends Lexer {
                 alt27=2;}
             switch (alt27) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:62: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:62: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
                     {
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:62: ( '\\r' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:62: ( '\\r' )?
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -2847,7 +2847,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt22) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:62: '\\r'
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:62: '\\r'
                             {
                             match('\r'); 
 
@@ -2857,7 +2857,7 @@ public class InternalMacroLexer extends Lexer {
                     }
 
                     match('\n'); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:73: ( RULE_IN_RICH_STRING )*
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:73: ( RULE_IN_RICH_STRING )*
                     loop23:
                     do {
                         int alt23=2;
@@ -2888,7 +2888,7 @@ public class InternalMacroLexer extends Lexer {
 
                         switch (alt23) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:73: RULE_IN_RICH_STRING
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:73: RULE_IN_RICH_STRING
                     	    {
                     	    mRULE_IN_RICH_STRING(); 
 
@@ -2900,7 +2900,7 @@ public class InternalMacroLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:94: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:94: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
                     int alt26=2;
                     int LA26_0 = input.LA(1);
 
@@ -2923,7 +2923,7 @@ public class InternalMacroLexer extends Lexer {
                         alt26=2;}
                     switch (alt26) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:95: '\\'\\'\\''
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:95: '\\'\\'\\''
                             {
                             match("'''"); 
 
@@ -2931,9 +2931,9 @@ public class InternalMacroLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:104: ( '\\'' ( '\\'' )? )? EOF
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:104: ( '\\'' ( '\\'' )? )? EOF
                             {
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:104: ( '\\'' ( '\\'' )? )?
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:104: ( '\\'' ( '\\'' )? )?
                             int alt25=2;
                             int LA25_0 = input.LA(1);
 
@@ -2942,10 +2942,10 @@ public class InternalMacroLexer extends Lexer {
                             }
                             switch (alt25) {
                                 case 1 :
-                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:105: '\\'' ( '\\'' )?
+                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:105: '\\'' ( '\\'' )?
                                     {
                                     match('\''); 
-                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:110: ( '\\'' )?
+                                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:110: ( '\\'' )?
                                     int alt24=2;
                                     int LA24_0 = input.LA(1);
 
@@ -2954,7 +2954,7 @@ public class InternalMacroLexer extends Lexer {
                                     }
                                     switch (alt24) {
                                         case 1 :
-                                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:110: '\\''
+                                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:110: '\\''
                                             {
                                             match('\''); 
 
@@ -2980,7 +2980,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8221:123: EOF
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8260:123: EOF
                     {
                     match(EOF); 
 
@@ -3003,10 +3003,10 @@ public class InternalMacroLexer extends Lexer {
     // $ANTLR start "RULE_IN_RICH_STRING"
     public final void mRULE_IN_RICH_STRING() throws RecognitionException {
         try {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             int alt28=3;
             int LA28_0 = input.LA(1);
 
@@ -3037,7 +3037,7 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt28) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match("''"); 
 
@@ -3054,7 +3054,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match('\''); 
                     if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
@@ -3070,7 +3070,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8223:83: ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8262:83: ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
@@ -3101,10 +3101,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:12: ( '0x' | '0X' )
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -3132,7 +3132,7 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt29) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:13: '0x'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:13: '0x'
                     {
                     match("0x"); 
 
@@ -3140,7 +3140,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:18: '0X'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:18: '0X'
                     {
                     match("0X"); 
 
@@ -3150,7 +3150,7 @@ public class InternalMacroLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt30=0;
             loop30:
             do {
@@ -3188,7 +3188,7 @@ public class InternalMacroLexer extends Lexer {
                 cnt30++;
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -3197,10 +3197,10 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt32) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt31=2;
                     int LA31_0 = input.LA(1);
 
@@ -3218,7 +3218,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt31) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -3242,7 +3242,7 @@ public class InternalMacroLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8225:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8264:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -3281,11 +3281,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8227:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8227:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8266:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8266:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8227:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8266:21: ( '0' .. '9' | '_' )*
             loop33:
             do {
                 int alt33=2;
@@ -3334,11 +3334,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -3347,7 +3347,7 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt35) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -3358,7 +3358,7 @@ public class InternalMacroLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:36: ( '+' | '-' )?
                     int alt34=2;
                     int LA34_0 = input.LA(1);
 
@@ -3391,7 +3391,7 @@ public class InternalMacroLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt36=3;
             int LA36_0 = input.LA(1);
 
@@ -3403,7 +3403,7 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -3427,7 +3427,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8229:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8268:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -3460,10 +3460,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8231:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8231:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8270:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8270:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8231:11: ( '^' )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8270:11: ( '^' )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -3472,7 +3472,7 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8231:11: '^'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8270:11: '^'
                     {
                     match('^'); 
 
@@ -3490,7 +3490,7 @@ public class InternalMacroLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8231:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8270:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop38:
             do {
                 int alt38=2;
@@ -3539,10 +3539,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt41=2;
             int LA41_0 = input.LA(1);
 
@@ -3560,10 +3560,10 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt41) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop39:
                     do {
                         int alt39=3;
@@ -3579,7 +3579,7 @@ public class InternalMacroLexer extends Lexer {
 
                         switch (alt39) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3595,7 +3595,7 @@ public class InternalMacroLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3620,10 +3620,10 @@ public class InternalMacroLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop40:
                     do {
                         int alt40=3;
@@ -3639,7 +3639,7 @@ public class InternalMacroLexer extends Lexer {
 
                         switch (alt40) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3655,7 +3655,7 @@ public class InternalMacroLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8233:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8272:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3698,12 +3698,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8235:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8235:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8274:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8274:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8235:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8274:24: ( options {greedy=false; } : . )*
             loop42:
             do {
                 int alt42=2;
@@ -3728,7 +3728,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt42) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8235:52: .
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8274:52: .
             	    {
             	    matchAny(); 
 
@@ -3758,12 +3758,12 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop43:
             do {
                 int alt43=2;
@@ -3776,7 +3776,7 @@ public class InternalMacroLexer extends Lexer {
 
                 switch (alt43) {
             	case 1 :
-            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3796,7 +3796,7 @@ public class InternalMacroLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:40: ( ( '\\r' )? '\\n' )?
             int alt45=2;
             int LA45_0 = input.LA(1);
 
@@ -3805,9 +3805,9 @@ public class InternalMacroLexer extends Lexer {
             }
             switch (alt45) {
                 case 1 :
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:41: ( '\\r' )?
+                    // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:41: ( '\\r' )?
                     int alt44=2;
                     int LA44_0 = input.LA(1);
 
@@ -3816,7 +3816,7 @@ public class InternalMacroLexer extends Lexer {
                     }
                     switch (alt44) {
                         case 1 :
-                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8237:41: '\\r'
+                            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8276:41: '\\r'
                             {
                             match('\r'); 
 
@@ -3848,10 +3848,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8239:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8239:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8278:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8278:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8239:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8278:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt46=0;
             loop46:
             do {
@@ -3905,8 +3905,8 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8241:16: ( . )
-            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8241:18: .
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8280:16: ( . )
+            // ../org.eclipse.xtend.macro.lang/src-gen/org/eclipse/xtend/macro/lang/parser/antlr/internal/InternalMacro.g:8280:18: .
             {
             matchAny(); 
 
