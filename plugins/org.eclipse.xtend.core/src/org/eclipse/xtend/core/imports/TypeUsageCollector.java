@@ -29,6 +29,8 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -36,6 +38,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -60,9 +63,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TypeUsageCollector {
-
-	@Inject
-	private TypeUsages typeUsages;
 	
 	@Inject
 	private IJvmModelAssociations associations;
@@ -75,6 +75,15 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	@Inject
+	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+
+	@Inject
+	private TypeReferences typeReferences;
+	
+	@Inject
+	private TypeUsages typeUsages;
 	
 	private JvmDeclaredType currentThisType;
 	
@@ -96,7 +105,19 @@ public class TypeUsageCollector {
 		this.implicitStaticImports = implicitImports.getStaticImportClasses(resource);
 		this.implicitExtensionImports = implicitImports.getExtensionClasses(resource);
 		collectAllReferences();
+		addJavaDocReferences(xtendFile);
 		return typeUsages; 
+	}
+
+	protected void addJavaDocReferences(XtendFile xtendFile) {
+		for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeReferenceRegions(xtendFile.eResource())) {
+			JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeReference.getText(), currentThisType);
+			ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
+			if(typeRef == null || !(typeRef.getType() instanceof JvmDeclaredType)) 
+				typeUsages.addUnresolved(docTypeReference.getText(), textRegion, currentThisType);
+			else
+				typeUsages.addTypeUsage((JvmDeclaredType) typeRef.getType(), docTypeReference.getText(), textRegion, currentThisType);
+		}
 	}
 	
 	protected void collectAllReferences() {
