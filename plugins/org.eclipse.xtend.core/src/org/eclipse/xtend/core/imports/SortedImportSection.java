@@ -19,25 +19,29 @@ import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * Provides access to all imported types in an XtendFile. Namespace imports are ignored.
- *  
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SortedImportSection  {
-	
+public class SortedImportSection {
+
 	private Set<JvmDeclaredType> plainImports = newLinkedHashSet();
 
 	private Set<JvmDeclaredType> staticImports = newLinkedHashSet();
 
 	private Set<JvmDeclaredType> staticExtensionImports = newLinkedHashSet();
 
-	public SortedImportSection() {}
-	
+	public SortedImportSection() {
+	}
+
 	public SortedImportSection(XImportSection section) {
-		for (XImportDeclaration importDeclaration : section.getImportDeclarations()) {
-			if(!(importDeclaration instanceof XtendImport) || ((XtendImport) importDeclaration).getImportedNamespace()==null) {
-				JvmType importedType = importDeclaration.getImportedType();
-				if (importedType instanceof JvmDeclaredType && !importedType.eIsProxy()) {
-					getSet(importDeclaration).add((JvmDeclaredType) importedType);
+		if (section != null) {
+			for (XImportDeclaration importDeclaration : section.getImportDeclarations()) {
+				if (!(importDeclaration instanceof XtendImport)
+						|| ((XtendImport) importDeclaration).getImportedNamespace() == null) {
+					JvmType importedType = importDeclaration.getImportedType();
+					if (importedType instanceof JvmDeclaredType && !importedType.eIsProxy()) {
+						getSet(importDeclaration).add((JvmDeclaredType) importedType);
+					}
 				}
 			}
 		}
