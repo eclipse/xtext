@@ -30,6 +30,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -75,7 +77,7 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
+
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 
@@ -84,7 +86,7 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private TypeUsages typeUsages;
-	
+
 	private JvmDeclaredType currentThisType;
 	
 	private JvmMember currentContext;
@@ -99,27 +101,23 @@ public class TypeUsageCollector {
 
 	private XtendFile xtendFile;
 	
+	private IEObjectDocumentationProviderExtension documentationProvider;
+
+	@Inject
+	private void setDocumentationProvider(IEObjectDocumentationProvider documentationProvider) {
+		if(documentationProvider instanceof IEObjectDocumentationProviderExtension) 
+			this.documentationProvider = (IEObjectDocumentationProviderExtension) documentationProvider;
+	}
+	
 	public TypeUsages collectTypeUsages(XtendFile xtendFile) {
 		this.xtendFile = xtendFile;
 		this.resource = (XtextResource) xtendFile.eResource();
 		this.implicitStaticImports = implicitImports.getStaticImportClasses(resource);
 		this.implicitExtensionImports = implicitImports.getExtensionClasses(resource);
 		collectAllReferences();
-		addJavaDocReferences(xtendFile);
 		return typeUsages; 
 	}
 
-	protected void addJavaDocReferences(XtendFile xtendFile) {
-		for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeReferenceRegions(xtendFile.eResource())) {
-			JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeReference.getText(), currentThisType);
-			ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
-			if(typeRef == null || !(typeRef.getType() instanceof JvmDeclaredType)) 
-				typeUsages.addUnresolved(docTypeReference.getText(), textRegion, currentThisType);
-			else
-				typeUsages.addTypeUsage((JvmDeclaredType) typeRef.getType(), docTypeReference.getText(), textRegion, currentThisType);
-		}
-	}
-	
 	protected void collectAllReferences() {
 		TreeIterator<EObject> contents = EcoreUtil.getAllContents(xtendFile, true);
 		while (contents.hasNext()) {
@@ -181,6 +179,22 @@ public class TypeUsageCollector {
 				if (member instanceof JvmField) {
 					if (((JvmField) member).isStatic())
 						acceptStaticExtensionImport((JvmMember) member);
+				}
+			}
+			addJavaDocReferences(next);
+		}
+	}
+	
+	protected void addJavaDocReferences(EObject element) {
+		if(element != null && documentationProvider != null) {
+			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {
+				for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeRefRegions(documentationNode)) {
+					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeReference.getText(), currentThisType);
+					ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
+					if(typeRef == null || !(typeRef.getType() instanceof JvmDeclaredType)) 
+						typeUsages.addUnresolved(docTypeReference.getText(), textRegion, currentThisType);
+					else
+						typeUsages.addTypeUsage((JvmDeclaredType) typeRef.getType(), docTypeReference.getText(), textRegion, currentThisType);
 				}
 			}
 		}

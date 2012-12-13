@@ -1184,11 +1184,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
-		for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeReferenceRegions(file.eResource())){
-			String simpleName = region.getText().trim();
-			if (importedNames.containsKey(simpleName)) {
-				JvmType type = importedNames.remove(simpleName);
-				imports.remove(type);
+		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(file);
+		if(rootNode != null) {
+			for (INode node : rootNode.getAsTreeIterable()) {
+				if (node.getGrammarElement() instanceof TerminalRule) {
+					TerminalRule tRule = (TerminalRule) node.getGrammarElement();
+					if (tRule.getName().equals("ML_COMMENT")) {
+						for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)){
+							String simpleName = region.getText().trim();
+							if (importedNames.containsKey(simpleName)) {
+								JvmType type = importedNames.remove(simpleName);
+								imports.remove(type);
+							}
+						}
+					}
+				}
 			}
 		}
 
