@@ -41,6 +41,16 @@
     <genClasses ecoreClass="Xtype.ecore#//XComputedTypeReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XComputedTypeReference/typeProvider"/>
     </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XImportSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XImportSection/importDeclarations"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XImportDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/static"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XImportDeclaration/importedType"/>
+      <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/isWildcard"/>
+      <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/getImportedTypeName"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Xbase" basePackage="org.eclipse.xtext" ecorePackage="Xbase.ecore#/">
     <genClasses image="false" ecoreClass="Xbase.ecore#//XExpression"/>
@@ -76,10 +86,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAbstractFeatureCall/invalidFeatureIssueCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAbstractFeatureCall/validFeature"/>
       <genFeatures property="None" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/implicitFirstArgument"/>
-      <genFeatures property="None" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/actualTypeArguments"/>
       <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getConcreteSyntaxFeatureName"/>
       <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getExplicitArguments"/>
       <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isExplicitOperationCallOrBuilderSyntax"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getActualReceiver"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getActualArguments"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isStatic"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isExtension"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XMemberFeatureCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XMemberFeatureCall/memberCallTarget"/>
@@ -141,6 +154,7 @@
     <genClasses ecoreClass="Xbase.ecore#//XWhileExpression"/>
     <genClasses ecoreClass="Xbase.ecore#//XTypeLiteral">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTypeLiteral/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XTypeLiteral/arrayDimensions"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XInstanceOfExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XInstanceOfExpression/type"/>
