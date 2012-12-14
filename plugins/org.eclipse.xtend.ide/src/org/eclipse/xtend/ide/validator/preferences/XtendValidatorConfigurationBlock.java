@@ -8,8 +8,6 @@
 package org.eclipse.xtend.ide.validator.preferences;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
@@ -22,8 +20,9 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
+import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 import com.google.inject.Inject;
@@ -64,26 +63,22 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 				defaultIndent);
 	}
 
-	protected Combo addJavaAwareComboBox(ConfigurableIssueCode issueCode, String label, Composite parent, int indent) {
+	protected Combo addJavaAwareComboBox(PreferenceKey issueCode, String label, Composite parent, int indent) {
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
-
 		Label labelControl = new Label(parent, SWT.LEFT);
 		labelControl.setFont(JFaceResources.getDialogFont());
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
-
 		Combo comboBox = createComboControl(issueCode, parent, indent, "delegate to Java");
-
 		labels.put(comboBox, labelControl);
-
 		return comboBox;
 	}
 
-	private Combo createComboControl(final ConfigurableIssueCode issueCode, final Composite parent, int indent,
+	private Combo createComboControl(final PreferenceKey issueCode, final Composite parent, int indent,
 			String delegateLabel) {
-		String[] values = new String[] { ConfigurableIssueCode.SEVERITY_ERROR, ConfigurableIssueCode.SEVERITY_WARNING,
-				ConfigurableIssueCode.SEVERITY_IGNORE };
+		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
+				SeverityConverter.SEVERITY_IGNORE };
 		String[] valueLabels = new String[] { "Error", "Warning", "Ignore" };
 
 		Composite container = new Composite(parent, SWT.NONE);
@@ -95,51 +90,39 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 		gd.horizontalIndent = indent;
 		container.setLayout(layout);
 		container.setLayoutData(gd);
-		final Button checkBox = addCheckBox(container, delegateLabel, issueCode.getId(), new String[] { DELEGATE, "" },
-				indent);
-		checkBox.setData(new ControlData(issueCode.getId(), new String[] { DELEGATE, "" }) {
-			@Override
-			public String getValue(boolean selection) {
-				return selection ? super.getValue(selection) : ConfigurableIssueCode.severityToString(issueCode
-						.getDefaultValue());
-			}
 
-			@Override
-			public int getSelection(String value) {
-				return DELEGATE.equals(value) ? 0 : 1;
-			}
-
-			@Override
-			public String getValue(int index) {
-				return super.getValue(index);
-			}
-		});
-
-		final Combo comboBox = addComboControlWithData(container, valueLabels, new ControlData(issueCode.getId(),
-				values));
-
-		comboBox.setData(new ControlData(issueCode.getId(), values) {
-			@Override
-			public int getSelection(String value) {
-				if (DELEGATE.equals(value)) {
-					String delegationKey = issueCode.getDelegationKey().getId();
-					if (delegationKey.startsWith(JavaCore.PLUGIN_ID)) {
-						if (project != null && project.isOpen() && JavaProject.hasJavaNature(project)) {
-							String delegatedValue = JavaCore.create(getProject()).getOption(delegationKey, true);
-							return super.getSelection(delegatedValue);
+		GridData checkBoxGd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+		checkBoxGd.horizontalSpan = 3;
+		checkBoxGd.horizontalIndent = indent;
+		final String javaOption = issueCode.getDefaultValue();
+		final Button checkBox = addCheckboxWithData(container, delegateLabel, 
+				new ControlData(issueCode.getId(), new String[] { javaOption, "" }) {
+					@Override
+					public String getValue(boolean selection) {
+						if (selection) {
+							return javaOption;
 						} else {
-							return super.getSelection(JavaCore.getOption(delegationKey));
+							return computeSeverity(javaOption, getProject());
 						}
 					}
-				}
-				return super.getSelection(value);
-			}
+					
+					@Override
+					public String getValue(int index) {
+						if (index == 0) {
+							return javaOption;
+						} else {
+							return computeSeverity(javaOption, getProject());
+						}
+					}
+		
+					@Override
+					public int getSelection(String value) {
+						return javaOption.equals(value) ? 0 : 1;
+					}
+		
+				}, checkBoxGd);
 
-			@Override
-			public String getValue(int index) {
-				return super.getValue(index);
-			}
-		});
+		final Combo comboBox = addComboControlWithData(container, valueLabels, new ControlData(issueCode.getId(), values));
 
 		checkBox.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -148,12 +131,46 @@ public class XtendValidatorConfigurationBlock extends AbstractValidatorConfigura
 				updateCombo(comboBox);
 			}
 		});
+		comboBox.setEnabled(true);
 		updateCheckBox(checkBox);
-		comboBox.setEnabled(!checkBox.getSelection());
-		
 		updateCombo(comboBox);
 		checkBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 		return comboBox;
+	}
+	
+	protected String computeSeverity(String javaOption, IProject project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static class DelegateIssueCodeControlData extends ControlData {
+
+		public DelegateIssueCodeControlData(String key, String delegationKey) {
+			super(key, new String[] { delegationKey, SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
+					SeverityConverter.SEVERITY_IGNORE });
+		}
+
+		@Override
+		public String getValue(boolean selection) {
+			if (selection) {
+				
+			}
+			return super.getValue(selection);
+		}
+
+		@Override
+		public String getValue(int index) {
+			// TODO Auto-generated method stub
+			return super.getValue(index);
+		}
+
+		@Override
+		public int getSelection(String value) {
+			
+			return super.getSelection(value);
+		}
+		
+		
 	}
 }

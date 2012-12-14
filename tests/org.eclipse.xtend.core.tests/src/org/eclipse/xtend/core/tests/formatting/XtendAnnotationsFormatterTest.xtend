@@ -24,8 +24,8 @@ class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 	
 	@Test def formatClassSingleAnnotationSL() {
 		assertFormatted([
-			put(newLineAfterClassAnnotations, false)
-			put(preserveNewLines, true)
+			it.put(newLineAfterClassAnnotations, false)
+			it.put(preserveNewLines, true)
 		], '''
 			package foo
 			
@@ -61,8 +61,8 @@ class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 	
 	@Test def formatClassSingleAnnotationML2() {
 		assertFormatted([
-			put(newLineAfterClassAnnotations, true)
-			put(preserveNewLines, true)
+			it.put(newLineAfterClassAnnotations, true)
+			it.put(preserveNewLines, true)
 		],'''
 			package foo
 			

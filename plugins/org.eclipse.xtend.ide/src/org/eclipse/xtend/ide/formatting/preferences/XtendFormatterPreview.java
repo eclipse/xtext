@@ -110,9 +110,9 @@ public class XtendFormatterPreview implements Observer {
 	public void doUpdate(final Map<String,String> map) {
 		checkEditorHandleIsSet();
 		final MapBasedPreferenceValues values = new MapBasedPreferenceValues(map);
-		Integer integer = values.getPreference(maxLineWidth);
-		if (integer != null) {
-			moveMarginToColumn(integer.toString());
+		String maxLineWidthValue = values.getPreference(maxLineWidth);
+		if (maxLineWidthValue != null) {
+			moveMarginToColumn(maxLineWidthValue);
 		}
 		
 		StyledText widget = null;

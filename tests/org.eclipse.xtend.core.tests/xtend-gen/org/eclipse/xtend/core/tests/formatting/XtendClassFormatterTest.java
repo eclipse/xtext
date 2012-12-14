@@ -13,7 +13,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatConstructor01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
         public void apply(final MapBasedPreferenceValues it) {
-          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+          XtendClassFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -34,7 +34,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatConstructor02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
         public void apply(final MapBasedPreferenceValues it) {
-          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+          XtendClassFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -384,7 +384,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
         public void apply(final MapBasedPreferenceValues it) {
-          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+          XtendClassFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
         }
       };
     StringConcatenation _builder = new StringConcatenation();
@@ -408,7 +408,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
         public void apply(final MapBasedPreferenceValues it) {
-          it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+          XtendClassFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
         }
       };
     StringConcatenation _builder = new StringConcatenation();

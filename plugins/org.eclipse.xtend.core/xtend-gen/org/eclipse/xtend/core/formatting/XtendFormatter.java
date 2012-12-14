@@ -35,7 +35,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.preferences.IPreferenceKey;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -195,7 +195,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     }
   }
   
-  protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document, final IPreferenceKey<? extends Object> configKey) {
+  protected void formatAnnotations(final XtendAnnotationTarget target, final FormattableDocument document, final PreferenceKey configKey) {
     EList<XAnnotation> _annotations = target.getAnnotations();
     boolean _isEmpty = _annotations.isEmpty();
     if (_isEmpty) {

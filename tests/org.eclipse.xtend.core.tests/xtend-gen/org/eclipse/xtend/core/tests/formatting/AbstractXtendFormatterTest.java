@@ -6,6 +6,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
@@ -22,6 +23,12 @@ public abstract class AbstractXtendFormatterTest {
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
+  }
+  
+  public void put(final MapBasedPreferenceValues basedPreferenceValues, final PreferenceKey key, final Object value) {
+    String _id = key.getId();
+    String _string = value.toString();
+    basedPreferenceValues.put(_id, _string);
   }
   
   private CharSequence toMember(final CharSequence expression) {
@@ -106,12 +113,12 @@ public abstract class AbstractXtendFormatterTest {
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
         public void apply(final AssertingFormatterData it) {
-          MapBasedPreferenceValues _cfg = it.getCfg();
-          _cfg.<Integer>put(BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+          MapBasedPreferenceValues _config = it.getConfig();
+          AbstractXtendFormatterTest.this.put(_config, BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
           boolean _notEquals = ObjectExtensions.operator_notEquals(cfg, null);
           if (_notEquals) {
-            MapBasedPreferenceValues _cfg_1 = it.getCfg();
-            cfg.apply(_cfg_1);
+            MapBasedPreferenceValues _config_1 = it.getConfig();
+            cfg.apply(_config_1);
           }
           it.setExpectation(expectation);
           it.setToBeFormatted(toBeFormatted);
