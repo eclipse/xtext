@@ -10,10 +10,13 @@ package org.eclipse.xtext.ui.validation;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.preference.IPreferencePageContainer;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
+import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
 
 import com.google.inject.Inject;
@@ -26,12 +29,27 @@ import com.google.inject.name.Named;
 public abstract class AbstractValidatorPreferencePage extends PropertyAndPreferencePage {
 
 	protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
-	protected AbstractValidatorConfigurationBlock validatorConfigurationBlock;
+	protected OptionsConfigurationBlock validatorConfigurationBlock;
 	private String languageName;
 
 	public AbstractValidatorPreferencePage() {
 		super();
 	}
+
+	@Override
+	public void createControl(Composite parent) {
+		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
+		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
+		validatorConfigurationBlock = createConfigurationBlock(getProject(), preferenceStore, container);
+		validatorConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
+		super.createControl(parent);
+	}
+
+	/**
+	 * May not return <code>null</code>
+	 */
+	abstract protected OptionsConfigurationBlock createConfigurationBlock(IProject iProject,
+			IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container);
 
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String languageName) {
