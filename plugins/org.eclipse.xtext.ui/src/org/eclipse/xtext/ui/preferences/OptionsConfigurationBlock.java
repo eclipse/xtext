@@ -206,9 +206,8 @@ public abstract class OptionsConfigurationBlock {
 		return textBox;
 	}
 
-	protected Combo addComboBox(Composite parent, String label, String code, int indent, String[] values,
+	protected Combo addComboBox(Composite parent, String label, String key, int indent, String[] values,
 			String[] valueLabels) {
-
 		GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1);
 		gd.horizontalIndent = indent;
 
@@ -217,7 +216,7 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setText(label);
 		labelControl.setLayoutData(gd);
 
-		Combo comboBox = addComboControl(parent, code, values, valueLabels);
+		Combo comboBox = newComboControl(parent, key, values, valueLabels);
 		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 
 		labels.put(comboBox, labelControl);
@@ -225,16 +224,15 @@ public abstract class OptionsConfigurationBlock {
 		return comboBox;
 	}
 
-	private Combo addComboControl(Composite composite, String key, String[] values, String[] valueLabels) {
-		return addComboControlWithData(composite, valueLabels, new ControlData(key, values));
-	}
+	protected Combo newComboControl(Composite composite, String key, String[] values, String[] valueLabels) {
+		ControlData data = new ControlData(key, values);
 
-	protected Combo addComboControlWithData(Composite composite, String[] valueLabels, ControlData data) {
 		Combo comboBox = new Combo(composite, SWT.READ_ONLY);
 		comboBox.setItems(valueLabels);
 		comboBox.setData(data);
 		comboBox.addSelectionListener(getSelectionListener());
 		comboBox.setFont(JFaceResources.getDialogFont());
+		comboBox.setVisibleItemCount(30);
 
 		makeScrollableCompositeAware(comboBox);
 

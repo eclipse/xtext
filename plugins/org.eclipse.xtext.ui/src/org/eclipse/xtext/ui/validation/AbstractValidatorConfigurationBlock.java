@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.validation;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
@@ -85,7 +84,6 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		int indentStep = fPixelConverter.convertWidthInCharsToPixels(1);
 
 		int defaultIndent = indentStep * 0;
-		//		int extraIndent = indentStep * 2;
 
 		fillSettingsPage(composite, nColumns, defaultIndent);
 		new Label(composite, SWT.NONE);
@@ -116,20 +114,5 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		return inner;
 	}
 
-	@Override
-	protected Job getBuildJob(IProject project) {
-		return null;
-	}
-
-	@Override
-	protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {
-		return null;
-	}
-
-	@Override
-	protected void validateSettings(String changedKey, String oldValue, String newValue) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
