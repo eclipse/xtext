@@ -29,6 +29,8 @@ import org.eclipse.xtend.ide.editor.SingleLineCommentHelper;
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
+import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration;
+import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtend.ide.formatting.preferences.FormatterResourceProvider;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
@@ -64,6 +66,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -77,6 +80,7 @@ import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
@@ -359,5 +363,13 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends IUnresolvedTypeResolver> bindIUnresolvedTypeResolver() {
 		return InteractiveUnresolvedTypeResolver.class;
+	}
+
+	public Class<? extends XtextSourceViewerConfiguration> bindSourceViewerConfiguration(){
+		return XtendSourceViewerConfiguration.class;
+	}
+
+	public Class<? extends DocumentTokenSource> bindDocumentTokenSource(){
+		return XtendDocumentTokenSource.class;
 	}
 }

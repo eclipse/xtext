@@ -7,15 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.highlighting;
 
+import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
 @Singleton
 public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
+
+	@Override
+	protected String getMappedValue(int tokenType) {
+		if(tokenType == XtendDocumentTokenSource.JAVA_DOC_TOKEN_TYPE){
+			return DefaultHighlightingConfiguration.COMMENT_ID;
+		}
+		return super.getMappedValue(tokenType);
+	}
 
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
