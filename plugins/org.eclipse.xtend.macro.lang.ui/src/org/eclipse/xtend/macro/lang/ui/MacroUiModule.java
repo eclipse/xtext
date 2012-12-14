@@ -53,8 +53,10 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -244,6 +246,10 @@ public class MacroUiModule extends org.eclipse.xtend.macro.lang.ui.AbstractMacro
 	@Override
 	public Class<? extends org.eclipse.xtext.ui.editor.XtextEditor> bindXtextEditor() {
 		return XbaseEditor.class;
+	}
+	
+	public Class<? extends IssueSeveritiesProvider> bindIssueSeverityServiceProvider() {
+		return XbaseIssueSeveritiesProvider.class;
 	}
 //	
 //	@Override
