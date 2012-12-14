@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.formatting;
 
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
-import org.eclipse.xtext.preferences.IPreferenceKey;
 import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 
 import com.google.inject.Inject;
-
-import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,13 +33,13 @@ public class FormatterPreferenceValuesProvider implements IFormattingPreferenceV
 		final String lineSep = whitespaceInfo.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
 		
 		return new IPreferenceValues() {
-			@SuppressWarnings("unchecked")
-			public <T> T getPreference(IPreferenceKey<T> key) {
+			
+			public String getPreference(PreferenceKey key) {
 				if (key == indentation) {
-					return (T) indent;
+					return indent;
 				}
 				if (key == lineSeparator) {
-					return (T) lineSep;
+					return lineSep;
 				}
 				return preferenceValues.getPreference(key);
 			}

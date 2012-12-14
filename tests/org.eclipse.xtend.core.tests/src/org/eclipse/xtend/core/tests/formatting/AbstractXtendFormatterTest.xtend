@@ -8,6 +8,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import org.eclipse.xtext.preferences.PreferenceKey
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -16,6 +17,10 @@ abstract class AbstractXtendFormatterTest {
 
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted/* .parse.flattenWhitespace  */)
+	}
+	
+	def void put(MapBasedPreferenceValues basedPreferenceValues, PreferenceKey key, Object value) {
+		basedPreferenceValues.put(key.id, value.toString)
 	}
 
 	def private toMember(CharSequence expression) '''
@@ -92,8 +97,8 @@ abstract class AbstractXtendFormatterTest {
 		boolean allowErrors
 	) {
 		tester.assertFormatted [
-			it.cfg.put(maxLineWidth, 80)
-			if (cfg != null) cfg.apply(it.cfg)
+			it.config.put(maxLineWidth, 80)
+			if (cfg != null) cfg.apply(it.config)
 			it.expectation = expectation
 			it.toBeFormatted = toBeFormatted
 			it.prefix = prefix

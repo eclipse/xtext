@@ -13,6 +13,7 @@ import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class FormatterSmokeTest extends AbstractSmokeTest {
 	protected void checkForSmoke(String model, LazyLinkingResource resource) {
 		IPreferenceValues cfg = new MapBasedPreferenceValues(new HashMap<String, String>());
 		formatter.setDiagnoseConflicts(false);
-		formatter.format(resource, 0, model.length(), cfg);
+		formatter.format(resource, 0, model.length(), new FormattingPreferenceValues(cfg));
 	}
 
 	@Test

@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.preferences.IPreferenceKey;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.preferences.PreferenceKeysProvider;
 
 import com.google.inject.Inject;
@@ -137,10 +137,10 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 				}
 
 				protected Map<String,String> getDefaultProfileSettings() {
-					Set<? extends IPreferenceKey<?>> keys = PreferenceKeysProvider.allConstantKeys(XtendFormatterPreferenceKeys.class);
+					Set<? extends PreferenceKey> keys = PreferenceKeysProvider.allConstantKeys(XtendFormatterPreferenceKeys.class);
 					final HashMap<String, String> hashMap = new HashMap<String, String>();
-					for (IPreferenceKey<?> key : keys) {
-						hashMap.put(key.getId(), ((IPreferenceKey<Object>)key).valueToString(key.getDefaultValue()));
+					for (PreferenceKey key : keys) {
+						hashMap.put(key.getId(), key.getDefaultValue());
 					}
 					return hashMap;
 				}

@@ -20,17 +20,18 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendImport
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.preferences.PreferenceKey
 import org.eclipse.xtext.xbase.formatting.FormattableDocument
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
-
-import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
-import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
-import org.eclipse.xtext.preferences.IPreferenceKey
 import org.eclipse.xtext.xtype.XImportSection
+
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
+import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -73,8 +74,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 		
 	}
 	
-	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document,
-		IPreferenceKey<?> configKey) {
+	def protected void formatAnnotations(XtendAnnotationTarget target, FormattableDocument document, PreferenceKey configKey) {
 		if (target.annotations.isEmpty)
 			return;
 		for (a : target.annotations) {

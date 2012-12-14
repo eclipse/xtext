@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
@@ -85,7 +86,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 			final MultiTextEdit mte = new MultiTextEdit();
 			try {
 				//	long start = System.currentTimeMillis();
-				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), configuration);
+				List<TextReplacement> edits = formatter.format(state, region.getOffset(), region.getLength(), new FormattingPreferenceValues(configuration));
 				//	long time = System.currentTimeMillis() - start;
 				//	System.out.println(String.format("Formatting: Time to create text edits: %.3f sec. Applied edits: %d", time / 1000.0, edits.size()));
 				for (TextReplacement tr : edits)
