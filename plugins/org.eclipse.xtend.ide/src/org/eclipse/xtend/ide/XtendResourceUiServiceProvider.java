@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.core.JarEntryResource;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
@@ -36,17 +38,34 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 	
 	@Override
 	public boolean canHandle(URI uri, IStorage storage) {
-		if (storage instanceof JarEntryResource) {
+		if (!(storage instanceof IFile)) {
 			return false;
 		}
-		final boolean canHandle = super.canHandle(uri, storage);
-		if (canHandle && (storage instanceof IResource)) {
-			IResource resource = (IResource) storage;
-			IProject project = resource.getProject();
-			IJavaProject javaProject = JavaCore.create(project);
-			return javaProject.isOnClasspath(resource);
-		}
-		return canHandle;
+		IFile file = (IFile) storage;
+		if (!super.canHandle(uri, storage))
+			return false;
+		IProject project = file.getProject();
+		IJavaProject javaProject = JavaCore.create(project);
+		return isInSourceFolder(javaProject, file);
 	}
 
+	public boolean isInSourceFolder(IJavaProject javaProject, IFile resource) {
+		IPath path = resource.getFullPath();
+		IClasspathEntry[] classpath;
+		try {
+			classpath = javaProject.getResolvedClasspath(true);
+		} catch(JavaModelException e){
+			return false; // not a Java project
+		}
+		for (int i = 0; i < classpath.length; i++) {
+			IClasspathEntry entry = classpath[i];
+			if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+				IPath entryPath = entry.getPath();
+				if (entryPath.isPrefixOf(path)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
