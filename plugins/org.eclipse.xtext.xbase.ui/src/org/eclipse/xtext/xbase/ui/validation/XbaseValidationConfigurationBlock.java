@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
@@ -45,10 +46,10 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				Messages.XbaseValidationConfigurationBlock_discouraged_ref_label, inner, defaultIndent);
 	}
 
-	protected Combo addJavaDelegatingComboBox(PreferenceKey issueCode, String label, Composite parent, int indent) {
-		String javaIssueCode = issueCode.getDefaultValue();
+	protected Combo addJavaDelegatingComboBox(PreferenceKey prefKey, String label, Composite parent, int indent) {
+		String javaIssueCode = prefKey.getDefaultValue();
 		if (!javaIssueCode.startsWith(JavaCore.PLUGIN_ID)) {
-			throw new IllegalArgumentException(issueCode.toString()
+			throw new IllegalArgumentException(prefKey.toString()
 					+ Messages.XbaseValidationConfigurationBlock_not_java_message);
 		}
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
@@ -58,9 +59,8 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				Messages.XbaseValidationConfigurationBlock_error,
 				Messages.XbaseValidationConfigurationBlock_warning,
 				Messages.XbaseValidationConfigurationBlock_ignore,
-				Messages.XbaseValidationConfigurationBlock_java_label0 + javaValue
-						+ Messages.XbaseValidationConfigurationBlock_Javalabel_1 };
-		Combo comboBox = addComboBox(parent, label, issueCode.getId(), indent, values, valueLabels);
+				NLS.bind(Messages.XbaseValidationConfigurationBlock_java_label, javaValue)};
+		Combo comboBox = addComboBox(parent, label, prefKey.getId(), indent, values, valueLabels);
 		return comboBox;
 	}
 
