@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.validator.preferences;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.validation.AbstractValidatorPreferencePage;
 
 import com.google.inject.Inject;
@@ -23,13 +24,9 @@ public class XtendValidatorPreferencePage extends AbstractValidatorPreferencePag
 	private XtendValidatorConfigurationBlock.Factory configurationBlockFactory;
 
 	@Override
-	public void createControl(Composite parent) {
-		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
-		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
-		validatorConfigurationBlock = configurationBlockFactory.createValidatorConfigurationBlock(getProject(),
-				preferenceStore, container);
-		validatorConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
-		super.createControl(parent);
+	protected OptionsConfigurationBlock createConfigurationBlock(IProject iProject,
+			IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container) {
+		return configurationBlockFactory.createValidatorConfigurationBlock(getProject(), preferenceStore, container);
 	}
 
 }

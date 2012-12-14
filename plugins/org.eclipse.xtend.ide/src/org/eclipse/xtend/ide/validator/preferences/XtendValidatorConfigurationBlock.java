@@ -37,4 +37,5 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 			IWorkbenchPreferenceContainer container) {
 		super(project, preferenceStore, container);
 	}
+	
 }
