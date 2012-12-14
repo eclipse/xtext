@@ -22,8 +22,7 @@ public class Messages extends NLS {
 	public static String XbaseValidationConfigurationBlock_error;
 	public static String XbaseValidationConfigurationBlock_forbidden_ref_label;
 	public static String XbaseValidationConfigurationBlock_ignore;
-	public static String XbaseValidationConfigurationBlock_java_label0;
-	public static String XbaseValidationConfigurationBlock_Javalabel_1;
+	public static String XbaseValidationConfigurationBlock_java_label;
 	public static String XbaseValidationConfigurationBlock_not_java_message;
 	public static String XbaseValidationConfigurationBlock_restricted_api_section_title;
 	public static String XbaseValidationConfigurationBlock_warning;
