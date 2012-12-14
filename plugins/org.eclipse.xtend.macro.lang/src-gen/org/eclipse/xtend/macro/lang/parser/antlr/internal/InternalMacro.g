@@ -122,7 +122,7 @@ ruleMacroFile returns [EObject current=null]
 	    }
 
 )
-)(
+)?(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getMacroFileAccess().getXtendTypesTypeParserRuleCall_2_0()); 
@@ -8178,7 +8178,7 @@ ruleXImportSection returns [EObject current=null]
 	    }
 
 )
-)
+)+
 ;
 
 

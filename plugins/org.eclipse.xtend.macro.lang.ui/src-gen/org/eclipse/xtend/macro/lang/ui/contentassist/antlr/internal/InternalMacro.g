@@ -2760,9 +2760,16 @@ ruleXImportSection
     }
 	:
 (
+(
 { before(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment()); }
 (rule__XImportSection__ImportDeclarationsAssignment)
 { after(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment()); }
+)
+(
+{ before(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment()); }
+(rule__XImportSection__ImportDeclarationsAssignment)*
+{ after(grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment()); }
+)
 )
 
 ;
@@ -4405,7 +4412,7 @@ rule__MacroFile__Group__1__Impl
 :
 (
 { before(grammarAccess.getMacroFileAccess().getImportSectionAssignment_1()); }
-(rule__MacroFile__ImportSectionAssignment_1)
+(rule__MacroFile__ImportSectionAssignment_1)?
 { after(grammarAccess.getMacroFileAccess().getImportSectionAssignment_1()); }
 )
 

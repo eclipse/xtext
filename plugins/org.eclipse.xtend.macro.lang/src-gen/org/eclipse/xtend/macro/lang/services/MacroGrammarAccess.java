@@ -35,10 +35,10 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cXtendTypesTypeParserRuleCall_2_0 = (RuleCall)cXtendTypesAssignment_2.eContents().get(0);
 		
 		//MacroFile returns XtendFile:
-		//	("package" package=QualifiedName ";"?)? importSection=XImportSection xtendTypes+=Type*;
+		//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 		public ParserRule getRule() { return rule; }
 
-		//("package" package=QualifiedName ";"?)? importSection=XImportSection xtendTypes+=Type*
+		//("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*
 		public Group getGroup() { return cGroup; }
 
 		//("package" package=QualifiedName ";"?)?
@@ -56,7 +56,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		//";"?
 		public Keyword getSemicolonKeyword_0_2() { return cSemicolonKeyword_0_2; }
 
-		//importSection=XImportSection
+		//importSection=XImportSection?
 		public Assignment getImportSectionAssignment_1() { return cImportSectionAssignment_1; }
 
 		//XImportSection
@@ -505,7 +505,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//MacroFile returns XtendFile:
-	//	("package" package=QualifiedName ";"?)? importSection=XImportSection xtendTypes+=Type*;
+	//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 	public MacroFileElements getMacroFileAccess() {
 		return (pMacroFile != null) ? pMacroFile : (pMacroFile = new MacroFileElements());
 	}
@@ -606,7 +606,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//File returns XtendFile:
-	//	("package" package=QualifiedName ";"?)? importSection=XImportSection xtendTypes+=Type*;
+	//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 	public XtendGrammarAccess.FileElements getFileAccess() {
 		return gaXtend.getFileAccess();
 	}
@@ -1611,7 +1611,7 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XImportSection:
-	//	importDeclarations+=XImportDeclaration;
+	//	importDeclarations+=XImportDeclaration+;
 	public XtypeGrammarAccess.XImportSectionElements getXImportSectionAccess() {
 		return gaXtend.getXImportSectionAccess();
 	}

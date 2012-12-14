@@ -1229,7 +1229,7 @@ public class MacroSemanticSequencer extends XtendSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (package=QualifiedName? importSection=XImportSection xtendTypes+=Type*)
+	 *     (package=QualifiedName? importSection=XImportSection? xtendTypes+=Type*)
 	 */
 	protected void sequence_MacroFile(EObject context, XtendFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

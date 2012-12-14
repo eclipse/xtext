@@ -13,7 +13,7 @@ import "http://www.eclipse.org/xtend"
 
 MacroFile returns XtendFile:
 	('package' package=QualifiedName ';'?)?
-	importSection=XImportSection
+	importSection=XImportSection?
 	(xtendTypes+=Type)*
 ;
 	
