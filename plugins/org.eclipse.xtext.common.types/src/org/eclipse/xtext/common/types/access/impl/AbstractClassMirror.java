@@ -68,18 +68,19 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				} 
 			}
 		} else {
-			if (getTypeName().equals(fragment)) {
-				if (resource.getContents().isEmpty()) {
-					logger.error("resource is empty: " + resource.getURI());
-					if (logger.isDebugEnabled()) {
-						logger.debug(getClass().getName(), new Exception());
-					}
-					return null;
+			if (resource.getContents().isEmpty()) {
+				logger.error("resource is empty: " + resource.getURI());
+				if (logger.isDebugEnabled()) {
+					logger.debug(getClass().getName(), new Exception());
 				}
-				return resource.getContents().get(0);
+				return null;
+			}
+			final EObject type = resource.getContents().get(0);
+			if (getTypeName().equals(fragment)) {
+				return type;
 			}
 			if(fragment.startsWith(getTypeName())) {
-				EObject member = findMember(resource.getContents().get(0), fragment);
+				EObject member = findMember(type, fragment);
 				if(member != null)
 					return member;
 			}
