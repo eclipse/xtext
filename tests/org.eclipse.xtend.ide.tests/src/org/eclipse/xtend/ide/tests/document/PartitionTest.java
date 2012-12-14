@@ -100,7 +100,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 		assertEquals(input.length() + 3 /*ллл*/, forth.getLength() + forth.getOffset());
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, forth.getType());
 	}
-	
+
 	@Test public void testPartitioningAfterModify_02() throws BadLocationException {
 		String input = "class SomeType {\n" + 
 				"	def someOperation() '''\n" + 
@@ -135,5 +135,22 @@ public class PartitionTest extends AbstractXtendUITestCase {
 		assertEquals(document.getLength(), forth.getLength() + forth.getOffset());
 		assertEquals(input.length() + 4 /*ллл + \t*/, forth.getLength() + forth.getOffset());
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, forth.getType());
+	}
+
+	@Test public void testJavaDoc_ML_COMMENTPartitions() throws BadLocationException {
+		String input = "/* some comment */class Foo {}";
+		document.set(input);
+		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length());
+		assertEquals(2, partitions.length);
+		assertEquals("__comment", partitions[0].getType());
+		document.replace(input.indexOf("/* some comment */"), "/* some comment */".length(), "/** some comment */");
+		partitions = document.getDocumentPartitioner().computePartitioning(0, input.length() + 1/* * */);
+		assertEquals(2, partitions.length);
+		assertEquals("__java_javadoc", partitions[0].getType());
+		document.replace(input.indexOf("/* some comment */"), "/** some comment */".length(), "/*** some comment */");
+		partitions = document.getDocumentPartitioner().computePartitioning(0, input.length() + 2/* ** */);
+		assertEquals(2, partitions.length);
+		assertEquals("__comment", partitions[0].getType());
+
 	}
 }
