@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.formatting.AbstractFormatter
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter
 import org.eclipse.xtext.xbase.formatting.TextReplacement
 import org.junit.Assert
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues
 
 @SuppressWarnings("restriction")
 class FormatterTester {
@@ -18,7 +19,7 @@ class FormatterTester {
 
 	def assertFormatted((AssertingFormatterData)=>void init) {
 		val data = new AssertingFormatterData
-		data.cfg = new MapBasedPreferenceValues(newHashMap)
+		data.config = new MapBasedPreferenceValues(newHashMap)
 		init.apply(data)
 		assertFormatted(data)
 	}
@@ -105,7 +106,10 @@ class FormatterTester {
 }
 
 class AssertingFormatterData {
-	@Property MapBasedPreferenceValues cfg
+	@Property MapBasedPreferenceValues config
+	def getCfg() {
+		return new FormattingPreferenceValues(config);
+	}
 	@Property CharSequence expectation
 	@Property CharSequence toBeFormatted
 	@Property String prefix

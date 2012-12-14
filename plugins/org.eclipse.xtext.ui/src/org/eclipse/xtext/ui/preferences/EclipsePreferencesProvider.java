@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.common.base.Function;
@@ -47,14 +48,14 @@ public class EclipsePreferencesProvider implements IPreferenceValuesProvider {
 					}
 				}));
 		
-		return new IPreferenceValues.AbstractPreferenceValues() {
-			@Override
-			protected String internalGet(String id) {
+		return new IPreferenceValues() {
+			public String getPreference(PreferenceKey key) {
 				try {
-					return computingMap.get(id);
+					final String string = computingMap.get(key.getId());
+					return org.eclipse.jface.preference.IPreferenceStore.STRING_DEFAULT_DEFAULT.equals(string) ? key.getDefaultValue() : string;
 				} catch (ExecutionException e) {
-					log.error("Error getting preference for key '"+id+"'.", e);
-					return null;
+					log.error("Error getting preference for key '"+key.getId()+"'.", e);
+					return key.getDefaultValue();
 				}
 			}
 		};
