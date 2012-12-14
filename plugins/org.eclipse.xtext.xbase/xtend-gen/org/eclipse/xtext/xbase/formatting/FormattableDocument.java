@@ -7,9 +7,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.NewLineData;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.formatting.WhitespaceData;
@@ -33,9 +33,9 @@ public class FormattableDocument {
     }
   }.apply();
   
-  private final IPreferenceValues _cfg;
+  private final FormattingPreferenceValues _cfg;
   
-  public IPreferenceValues getCfg() {
+  public FormattingPreferenceValues getCfg() {
     return this._cfg;
   }
   
@@ -71,7 +71,7 @@ public class FormattableDocument {
     this._conflictOccurred = conflictOccurred;
   }
   
-  public FormattableDocument(final IPreferenceValues cfg, final String document) {
+  public FormattableDocument(final FormattingPreferenceValues cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
     TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer,FormattingData>();
@@ -79,7 +79,7 @@ public class FormattableDocument {
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    IPreferenceValues _cfg = fmt.getCfg();
+    FormattingPreferenceValues _cfg = fmt.getCfg();
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
@@ -634,9 +634,9 @@ public class FormattableDocument {
       int _lineLengthBefore = this.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      IPreferenceValues _cfg = this.getCfg();
-      Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
-      return (line <= (_preference).intValue());
+      FormattingPreferenceValues _cfg = this.getCfg();
+      int _get = _cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
+      return (line <= _get);
     }
   }
   
@@ -690,8 +690,8 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IPreferenceValues _cfg = this.getCfg();
-        final String indent = _cfg.<String>getPreference(BasicFormatterPreferenceKeys.indentation);
+        FormattingPreferenceValues _cfg = this.getCfg();
+        final String indent = _cfg.get(BasicFormatterPreferenceKeys.indentation);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {
@@ -711,9 +711,9 @@ public class FormattableDocument {
   }
   
   public int getIndentationLenght(final int levels) {
-    IPreferenceValues _cfg = this.getCfg();
-    Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.indentationLength);
-    int _multiply = (levels * (_preference).intValue());
+    FormattingPreferenceValues _cfg = this.getCfg();
+    int _get = _cfg.get(BasicFormatterPreferenceKeys.indentationLength);
+    int _multiply = (levels * _get);
     return _multiply;
   }
   
@@ -723,8 +723,8 @@ public class FormattableDocument {
     if (_greaterThan) {
       String _xblockexpression = null;
       {
-        IPreferenceValues _cfg = this.getCfg();
-        final String sep = _cfg.<String>getPreference(BasicFormatterPreferenceKeys.lineSeparator);
+        FormattingPreferenceValues _cfg = this.getCfg();
+        final String sep = _cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
         int _minus = (levels - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function1<Integer,String> _function = new Function1<Integer,String>() {

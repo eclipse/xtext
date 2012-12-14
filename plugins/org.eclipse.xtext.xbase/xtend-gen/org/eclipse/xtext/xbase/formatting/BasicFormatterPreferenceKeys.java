@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.preferences.IntegerKey;
-import org.eclipse.xtext.preferences.StringKey;
+import org.eclipse.xtext.xbase.formatting.IntegerKey;
+import org.eclipse.xtext.xbase.formatting.StringKey;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.preferences.IPreferenceKey;
-import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.formatting.BlankLineKey;
 import org.eclipse.xtext.xbase.formatting.CommentInfo;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
@@ -81,12 +81,12 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IPreferenceValues _cfg = doc.getCfg();
-            final Integer blankline = _cfg.<Integer>getPreference(key);
-            IPreferenceValues _cfg_1 = doc.getCfg();
-            final Integer preserve = _cfg_1.<Integer>getPreference(XbaseFormatterPreferenceKeys.preserveBlankLines);
-            final int min = ((blankline).intValue() + 1);
-            int _plus = ((preserve).intValue() + 1);
+            FormattingPreferenceValues _cfg = doc.getCfg();
+            final int blankline = _cfg.get(key);
+            FormattingPreferenceValues _cfg_1 = doc.getCfg();
+            final int preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveBlankLines);
+            final int min = (blankline + 1);
+            int _plus = (preserve + 1);
             final int max = Math.max(_plus, min);
             boolean _isDebugConflicts = doc.isDebugConflicts();
             Iterable<FormattingData> _newNewLineData = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.indentationChange, _isDebugConflicts);
@@ -103,22 +103,22 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IPreferenceValues _cfg = doc.getCfg();
-            final Boolean newLine = _cfg.<Boolean>getPreference(key);
-            IPreferenceValues _cfg_1 = doc.getCfg();
-            final Boolean preserve = _cfg_1.<Boolean>getPreference(XbaseFormatterPreferenceKeys.preserveNewLines);
+            FormattingPreferenceValues _cfg = doc.getCfg();
+            final boolean newLine = _cfg.get(key);
+            FormattingPreferenceValues _cfg_1 = doc.getCfg();
+            final boolean preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveNewLines);
             int _xifexpression = (int) 0;
-            if ((newLine).booleanValue()) {
+            if (newLine) {
               _xifexpression = 1;
             } else {
               _xifexpression = 0;
             }
             int _xifexpression_1 = (int) 0;
             boolean _or = false;
-            if ((preserve).booleanValue()) {
+            if (preserve) {
               _or = true;
             } else {
-              _or = ((preserve).booleanValue() || (newLine).booleanValue());
+              _or = (preserve || newLine);
             }
             if (_or) {
               _xifexpression_1 = 1;
@@ -140,10 +140,10 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IPreferenceValues _cfg = doc.getCfg();
-            final Boolean newLine = _cfg.<Boolean>getPreference(key);
+            FormattingPreferenceValues _cfg = doc.getCfg();
+            final boolean newLine = _cfg.get(key);
             int _xifexpression = (int) 0;
-            if ((newLine).booleanValue()) {
+            if (newLine) {
               _xifexpression = 1;
             } else {
               _xifexpression = 0;
@@ -159,7 +159,7 @@ public class FormattingDataFactory {
     return _function;
   }
   
-  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final IPreferenceKey<? extends Object> key, final FormattingDataInit it) {
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     Class<? extends Object> _class = key.getClass();
     String _plus = ("Unknown configuration key kind: " + _class);
     RuntimeException _runtimeException = new RuntimeException(_plus);
@@ -171,10 +171,10 @@ public class FormattingDataFactory {
         public Iterable<FormattingData> apply(final FormattableDocument doc) {
           Iterable<FormattingData> _xblockexpression = null;
           {
-            IPreferenceValues _cfg = doc.getCfg();
-            final Boolean space = _cfg.<Boolean>getPreference(key);
+            FormattingPreferenceValues _cfg = doc.getCfg();
+            final boolean space = _cfg.get(key);
             String _xifexpression = null;
-            if ((space).booleanValue()) {
+            if (space) {
               _xifexpression = " ";
             } else {
               _xifexpression = "";
@@ -458,7 +458,7 @@ public class FormattingDataFactory {
     return _function;
   }
   
-  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final IPreferenceKey<? extends Object> key, final FormattingDataInit it) {
+  protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     if (key instanceof BlankLineKey) {
       return _newFormattingData(leafs, (BlankLineKey)key, it);
     } else if (key instanceof NewLineKey) {

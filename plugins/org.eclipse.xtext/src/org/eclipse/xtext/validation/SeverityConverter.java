@@ -8,63 +8,19 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.preferences.IPreferenceKey;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public class ConfigurableIssueCode extends IPreferenceKey.AbstractKey<Severity>{
+public class SeverityConverter {
 	
 	public final static String SEVERITY_ERROR = "error";
 	public final static String SEVERITY_WARNING = "warning";
 	public final static String SEVERITY_INFO = "info";
 	public final static String SEVERITY_IGNORE = "ignore";
 
-	public final Severity severity;
-
-	public ConfigurableIssueCode(String code) {
-		this(code, Severity.ERROR);
-	}
-	
-	public ConfigurableIssueCode(String code, Severity defaultSeverity) {
-		super(code);
-		this.severity = defaultSeverity;
-	}
-	
-	public ConfigurableIssueCode(String code, ConfigurableIssueCode delegateTo) {
-		super(code, delegateTo);
-		severity = null;
-	}
-
-	public Severity getDefaultValue() {
-		return severity;
-	}
-
-	public String valueToString(Severity value) {
-		return severityToString(value);
-	}
-
-	public Severity stringToValue(String severityAsString) {
-		return stringToSeverity(severityAsString);
-	}
-	
-	public static String severityToString(Severity value) {
-		if (value == null) {
-			return SEVERITY_IGNORE;
-		}
-		switch (value) {
-			case ERROR:
-				return SEVERITY_ERROR;
-			case WARNING:
-				return SEVERITY_WARNING;
-			case INFO:
-				return SEVERITY_INFO;
-		}
-		throw new IllegalArgumentException("Unknown severity "+value);
-	}
-
-	public static Severity stringToSeverity(String severityAsString) {
+	public Severity stringToSeverity(String severityAsString) {
 		if (severityAsString == null)
 			throw new IllegalArgumentException("Severity as string was null");
 		if (severityAsString.equals(SEVERITY_ERROR)) {
@@ -81,6 +37,4 @@ public class ConfigurableIssueCode extends IPreferenceKey.AbstractKey<Severity>{
 		}
 		throw new IllegalArgumentException("Unknown severity '"+severityAsString+"'.");
 	}
-	
-	
 }

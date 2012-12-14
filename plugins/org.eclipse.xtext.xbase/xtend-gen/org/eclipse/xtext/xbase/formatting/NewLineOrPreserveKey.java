@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.preferences.BooleanKey;
+import org.eclipse.xtext.xbase.formatting.BooleanKey;
 
 @SuppressWarnings("all")
 public class NewLineOrPreserveKey extends BooleanKey {

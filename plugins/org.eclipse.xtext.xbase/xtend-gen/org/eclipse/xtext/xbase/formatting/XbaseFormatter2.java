@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.TypesPackage.Literals;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -54,6 +53,7 @@ import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
 import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
@@ -524,9 +524,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
       int _lineLengthBefore = fmt.lineLengthBefore(_offset);
       int _length = lookahead.length();
       final int length = (_lineLengthBefore + _length);
-      IPreferenceValues _cfg = fmt.getCfg();
-      Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
-      return (length <= (_preference).intValue());
+      FormattingPreferenceValues _cfg = fmt.getCfg();
+      int _get = _cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
+      return (length <= _get);
     }
   }
   
@@ -1156,9 +1156,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
             if (_isMultiParamInOwnLine) {
               int _length_2 = featureNode.getLength();
               int _plus_1 = (lineLength + _length_2);
-              IPreferenceValues _cfg = format.getCfg();
-              Integer _preference = _cfg.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
-              boolean _lessThan = (_plus_1 < (_preference).intValue());
+              FormattingPreferenceValues _cfg = format.getCfg();
+              int _get = _cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
+              boolean _lessThan = (_plus_1 < _get);
               if (_lessThan) {
                 final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
@@ -1183,9 +1183,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
               int _length_3 = featureNode.getLength();
               int _multiply = (_length_3 * 2);
               int _plus_2 = (lineLength + _multiply);
-              IPreferenceValues _cfg_1 = format.getCfg();
-              Integer _preference_1 = _cfg_1.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
-              boolean _lessThan_1 = (_plus_2 < (_preference_1).intValue());
+              FormattingPreferenceValues _cfg_1 = format.getCfg();
+              int _get_1 = _cfg_1.get(BasicFormatterPreferenceKeys.maxLineWidth);
+              boolean _lessThan_1 = (_plus_2 < _get_1);
               if (_lessThan_1) {
                 _or = true;
               } else {
@@ -1240,9 +1240,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
             int _length_4 = featureNode.getLength();
             final int shortLenght = (_lineLengthBefore + _length_4);
-            IPreferenceValues _cfg_2 = format.getCfg();
-            Integer _preference_2 = _cfg_2.<Integer>getPreference(BasicFormatterPreferenceKeys.maxLineWidth);
-            boolean _lessThan_2 = (shortLenght < (_preference_2).intValue());
+            FormattingPreferenceValues _cfg_2 = format.getCfg();
+            int _get_2 = _cfg_2.get(BasicFormatterPreferenceKeys.maxLineWidth);
+            boolean _lessThan_2 = (shortLenght < _get_2);
             if (_lessThan_2) {
               final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
                   public void apply(final FormattingDataInit it) {

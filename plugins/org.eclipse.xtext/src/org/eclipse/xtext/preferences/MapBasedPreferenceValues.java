@@ -9,25 +9,19 @@ package org.eclipse.xtext.preferences;
 
 import java.util.Map;
 
-import org.eclipse.xtext.preferences.IPreferenceValues.AbstractPreferenceValues;
-
-public class MapBasedPreferenceValues extends AbstractPreferenceValues {
+public class MapBasedPreferenceValues implements IPreferenceValues {
 	private final Map<String,String> values ;
 	
 	public MapBasedPreferenceValues(Map<String, String> values) {
 		this.values = values;
 	}
+	
+	public String getPreference(PreferenceKey key) {
+		return values.get(key.getId());
+	}
 
-	@Override
-	protected String internalGet(String id) {
-		return values.get(id);
-	}
-	
-	public <T> void put(IPreferenceKey<T> key, T value) {
-		this.put(key.getId(), key.valueToString(value));
-	}
-	
 	public void put(String key, String value) {
 		values.put(key, value);
 	}
+	
 }

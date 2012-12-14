@@ -21,6 +21,7 @@ public class IssueSeveritiesProvider {
 	
 	@Inject private IPreferenceValuesProvider valuesProvider;
 	@Inject private ConfigurableIssueCodesProvider issueCodesProvider;
+	@Inject private SeverityConverter severityConverter;
 	
 	protected IPreferenceValuesProvider getValuesProvider() {
 		return valuesProvider;
@@ -28,6 +29,6 @@ public class IssueSeveritiesProvider {
 	
 	public IssueSeverities getIssueSeverities(Resource context) {
 		IPreferenceValues preferenceValues = valuesProvider.getPreferenceValues(context);
-		return new IssueSeverities(preferenceValues, issueCodesProvider.getConfigurableIssueCodes());
+		return new IssueSeverities(preferenceValues, issueCodesProvider.getConfigurableIssueCodes(), severityConverter);
 	}
 }

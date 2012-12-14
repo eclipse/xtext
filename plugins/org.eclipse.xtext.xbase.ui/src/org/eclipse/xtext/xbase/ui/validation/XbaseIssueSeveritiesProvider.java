@@ -13,9 +13,9 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.preferences.IPreferenceValues;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
+import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 import com.google.inject.Inject;
@@ -32,15 +32,14 @@ public class XbaseIssueSeveritiesProvider extends IssueSeveritiesProvider {
 	public IssueSeverities getIssueSeverities(Resource context) {
 		final IJavaProject project = projectProvider.getJavaProject(context.getResourceSet());
 		IPreferenceValues preferenceValues = getValuesProvider().getPreferenceValues(context);
-		return new IssueSeverities(preferenceValues, configurableIssueCodes.getConfigurableIssueCodes()) {
+		return new IssueSeverities(preferenceValues, configurableIssueCodes.getConfigurableIssueCodes(), new SeverityConverter() {
 			@Override
-			public Severity getSeverity(String code) {
-				// delegate to java
-				if (code.startsWith(JavaCore.PLUGIN_ID)) {
-					return ConfigurableIssueCode.stringToSeverity(project.getOption(code, true));
+			public Severity stringToSeverity(String severityAsString) {
+				if (severityAsString.startsWith(JavaCore.PLUGIN_ID)) {
+					return super.stringToSeverity(project.getOption(severityAsString, true));
 				}
-				return super.getSeverity(code);
+				return super.stringToSeverity(severityAsString);
 			}
-		};
+		});
 	}
 }

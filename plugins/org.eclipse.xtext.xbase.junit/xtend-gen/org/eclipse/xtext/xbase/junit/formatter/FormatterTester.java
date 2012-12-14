@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
@@ -45,7 +46,7 @@ public class FormatterTester {
     final AssertingFormatterData data = _assertingFormatterData;
     HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
     MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(_newHashMap);
-    data.setCfg(_mapBasedPreferenceValues);
+    data.setConfig(_mapBasedPreferenceValues);
     init.apply(data);
     this.assertFormatted(data);
   }
@@ -88,7 +89,7 @@ public class FormatterTester {
       final int length = _toBeFormatted_1.length();
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
       Resource _eResource_3 = parsed.eResource();
-      MapBasedPreferenceValues _cfg = it.getCfg();
+      FormattingPreferenceValues _cfg = it.getCfg();
       List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), start, length, _cfg);
       Iterables.<TextReplacement>addAll(edits, _format);
       boolean _isAllowErrors_1 = it.isAllowErrors();
@@ -121,7 +122,7 @@ public class FormatterTester {
       }
       Resource _eResource_5 = parsed.eResource();
       int _length = fullToBeParsed.length();
-      MapBasedPreferenceValues _cfg_1 = it.getCfg();
+      FormattingPreferenceValues _cfg_1 = it.getCfg();
       List<TextReplacement> _format_1 = this.formatter.format(((XtextResource) _eResource_5), 0, _length, _cfg_1);
       final String parsed2Doc = this.applyEdits(fullToBeParsed, _format_1);
       final EObject parsed2 = this._parseHelper.parse(parsed2Doc);
@@ -135,7 +136,7 @@ public class FormatterTester {
       }
       Resource _eResource_7 = parsed2.eResource();
       int _length_1 = parsed2Doc.length();
-      MapBasedPreferenceValues _cfg_2 = it.getCfg();
+      FormattingPreferenceValues _cfg_2 = it.getCfg();
       final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_7), 0, _length_1, _cfg_2);
       final String newDocument2 = this.applyEdits(parsed2Doc, edits2);
       try {

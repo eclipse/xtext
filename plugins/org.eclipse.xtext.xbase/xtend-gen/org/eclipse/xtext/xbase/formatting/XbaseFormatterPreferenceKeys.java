@@ -1,9 +1,9 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtext.preferences.BooleanKey;
-import org.eclipse.xtext.preferences.IntegerKey;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.BlankLineKey;
+import org.eclipse.xtext.xbase.formatting.BooleanKey;
+import org.eclipse.xtext.xbase.formatting.IntegerKey;
 import org.eclipse.xtext.xbase.formatting.NewLineKey;
 import org.eclipse.xtext.xbase.formatting.NewLineOrPreserveKey;
 import org.eclipse.xtext.xbase.formatting.WhitespaceKey;

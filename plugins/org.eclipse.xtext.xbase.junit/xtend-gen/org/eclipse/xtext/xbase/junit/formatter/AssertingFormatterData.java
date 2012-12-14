@@ -1,17 +1,24 @@
 package org.eclipse.xtext.xbase.junit.formatter;
 
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 
 @SuppressWarnings("all")
 public class AssertingFormatterData {
-  private MapBasedPreferenceValues _cfg;
+  private MapBasedPreferenceValues _config;
   
-  public MapBasedPreferenceValues getCfg() {
-    return this._cfg;
+  public MapBasedPreferenceValues getConfig() {
+    return this._config;
   }
   
-  public void setCfg(final MapBasedPreferenceValues cfg) {
-    this._cfg = cfg;
+  public void setConfig(final MapBasedPreferenceValues config) {
+    this._config = config;
+  }
+  
+  public FormattingPreferenceValues getCfg() {
+    MapBasedPreferenceValues _config = this.getConfig();
+    FormattingPreferenceValues _formattingPreferenceValues = new FormattingPreferenceValues(_config);
+    return _formattingPreferenceValues;
   }
   
   private CharSequence _expectation;

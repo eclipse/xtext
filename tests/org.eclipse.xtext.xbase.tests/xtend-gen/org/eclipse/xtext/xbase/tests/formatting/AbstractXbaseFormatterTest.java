@@ -66,8 +66,8 @@ public abstract class AbstractXbaseFormatterTest {
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
         public void apply(final AssertingFormatterData it) {
-          MapBasedPreferenceValues _cfg = it.getCfg();
-          AbstractXbaseFormatterTest.this.initConfig(_cfg, cfg);
+          MapBasedPreferenceValues _config = it.getConfig();
+          AbstractXbaseFormatterTest.this.initConfig(_config, cfg);
           it.setExpectation(expectation);
           it.setToBeFormatted(toBeFormatted);
           it.setPrefix(prefix);
@@ -79,7 +79,9 @@ public abstract class AbstractXbaseFormatterTest {
   }
   
   public void initConfig(final MapBasedPreferenceValues target, final Procedure1<? super MapBasedPreferenceValues> cfg) {
-    target.<Integer>put(BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+    String _id = BasicFormatterPreferenceKeys.maxLineWidth.getId();
+    String _string = Integer.valueOf(80).toString();
+    target.put(_id, _string);
     boolean _notEquals = ObjectExtensions.operator_notEquals(cfg, null);
     if (_notEquals) {
       cfg.apply(target);

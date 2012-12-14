@@ -22,8 +22,8 @@ public class PreferenceKeysProvider {
 	
 	private final static Logger log = Logger.getLogger(PreferenceKeysProvider.class);
 
-	public static Set<? extends IPreferenceKey<?>> allConstantKeys(Class<?>...constantsContainer) {
-		Set<IPreferenceKey<?>> result = newLinkedHashSet();
+	public static Set<? extends PreferenceKey> allConstantKeys(Class<?>...constantsContainer) {
+		Set<PreferenceKey> result = newLinkedHashSet();
 		for (Class<?> container : constantsContainer) {
 			Field[] fields = container.getFields();
 			for (Field field : fields) {
@@ -31,8 +31,8 @@ public class PreferenceKeysProvider {
 					Object fieldValue;
 					try {
 						fieldValue = field.get(null);
-						if (fieldValue instanceof IPreferenceKey) {
-							result.add((IPreferenceKey<?>) fieldValue);
+						if (fieldValue instanceof PreferenceKey) {
+							result.add((PreferenceKey) fieldValue);
 						}
 					} catch (IllegalArgumentException e) {
 						log.error(e.getMessage(),e);

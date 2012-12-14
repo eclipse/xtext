@@ -5,24 +5,32 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.xbase.formatting;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.eclipse.xtext.preferences.PreferenceKey;
+import org.eclipse.xtext.preferences.IPreferenceValues;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.4
  */
-public class ConfigurableIssueCodesProvider {
+public class FormattingPreferenceValues {
 
-	/**
-	 * @return all configurable issue codes.
-	 */
-	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return Collections.emptyMap();
+	private IPreferenceValues values;
+
+	public FormattingPreferenceValues(IPreferenceValues values) {
+		super();
+		this.values = values;
+	}
+	
+	public int get(IntegerKey key) {
+		return Integer.valueOf(values.getPreference(key));
+	}
+	
+	public boolean get(BooleanKey key) {
+		return Boolean.valueOf(values.getPreference(key));
+	}
+	
+	public String get(StringKey key) {
+		return values.getPreference(key);
 	}
 	
 }

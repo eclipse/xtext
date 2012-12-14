@@ -6,9 +6,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -37,7 +37,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
     this._diagnoseConflicts = diagnoseConflicts;
   }
   
-  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final IPreferenceValues cfg) {
+  public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final FormattingPreferenceValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
       IParseResult _parseResult = res.getParseResult();
