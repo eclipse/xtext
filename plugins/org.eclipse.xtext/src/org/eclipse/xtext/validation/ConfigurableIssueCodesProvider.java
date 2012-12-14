@@ -10,6 +10,8 @@ package org.eclipse.xtext.validation;
 import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.xtext.preferences.PreferenceKey;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
@@ -19,7 +21,7 @@ public class ConfigurableIssueCodesProvider {
 	/**
 	 * @return all configurable issue codes.
 	 */
-	public Map<String, ConfigurableIssueCode> getConfigurableIssueCodes() {
+	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
 		return Collections.emptyMap();
 	}
 	

@@ -9,8 +9,10 @@ package org.eclipse.xtext.validation;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.PreferenceKey;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -18,18 +20,28 @@ import org.eclipse.xtext.preferences.IPreferenceValues;
  */
 public class IssueSeverities {
 	
+	private final static Logger log = Logger.getLogger(IssueSeverities.class);
+	
 	private IPreferenceValues preferenceValues;
-	private Map<String, ConfigurableIssueCode> configurableIssueCodes;
+	private Map<String, PreferenceKey> configurableIssueCodes;
+	private SeverityConverter converter;
 
-	public IssueSeverities(IPreferenceValues preferenceValues, Map<String, ConfigurableIssueCode> configurableIssueCodes) {
+	public IssueSeverities(IPreferenceValues preferenceValues, Map<String, PreferenceKey> configurableIssueCodes, SeverityConverter converter) {
 		this.preferenceValues = preferenceValues;
 		this.configurableIssueCodes = configurableIssueCodes;
+		this.converter = converter;
 	}
 
 	public Severity getSeverity(String code) {
 		if (!configurableIssueCodes.containsKey(code))
 			return Severity.ERROR;
-		return preferenceValues.getPreference(configurableIssueCodes.get(code));
+		final String value = preferenceValues.getPreference(configurableIssueCodes.get(code));
+		try {
+			return converter.stringToSeverity(value);
+		} catch (IllegalArgumentException e) {
+			log.error(e.getMessage(), e);
+			return Severity.ERROR;
+		}
 	}
 	
 	public boolean isIgnored(String code) {
