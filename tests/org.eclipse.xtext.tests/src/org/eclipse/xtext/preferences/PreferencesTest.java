@@ -7,40 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.preferences;
 
-import java.util.HashMap;
+import static org.junit.Assert.*;
+
 import java.util.Set;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class PreferencesTest {
 	
 	@Test public void testPreferenceKeysProvider_01() {
-		final Set<? extends IPreferenceKey<?>> keys = PreferenceKeysProvider.allConstantKeys(PrefsA.class);
+		final Set<? extends PreferenceKey> keys = PreferenceKeysProvider.allConstantKeys(PrefsA.class);
 		assertEquals(1, keys.size());
 		assertEquals("my.inherited.key", keys.iterator().next().getId());
 		assertEquals("inherited", keys.iterator().next().getDefaultValue());
 	}
 	
 	@Test public void testPreferenceKeysProvider_02() {
-		final Set<? extends IPreferenceKey<?>> keys = PreferenceKeysProvider.allConstantKeys(PrefsB.class);
+		final Set<? extends PreferenceKey> keys = PreferenceKeysProvider.allConstantKeys(PrefsB.class);
 		assertEquals(3, keys.size());
-		assertEquals(true, find(keys, "foo.bar").getDefaultValue());
-		assertEquals(42, find(keys, "my.int").getDefaultValue());
+		assertEquals("true", find(keys, "foo.bar").getDefaultValue());
+		assertEquals("42", find(keys, "my.int").getDefaultValue());
 		assertEquals("inherited", find(keys, "my.inherited.key").getDefaultValue());
 	}
 	
-	@Test public void testPreferenceKeysProvider_03() {
-		final Set<? extends IPreferenceKey<?>> keys = PreferenceKeysProvider.allConstantKeys(PrefsC.class);
-		assertEquals(1, keys.size());
-		MapBasedPreferenceValues values = new MapBasedPreferenceValues(new HashMap<String, String>());
-		assertEquals(PrefsA.INHERITED_KEY.getDefaultValue(), values.getPreference(find(keys, "delegating.key")));
-	}
-
-	private IPreferenceKey<?> find(Set<? extends IPreferenceKey<?>> keys, String string) {
-		for (IPreferenceKey<?> iPreferenceKey : keys) {
+	private PreferenceKey find(Set<? extends PreferenceKey> keys, String string) {
+		for (PreferenceKey iPreferenceKey : keys) {
 			if (iPreferenceKey.getId().equals(string))
 				return iPreferenceKey;
 		}
@@ -48,24 +41,16 @@ public class PreferencesTest {
 	}
 
 	public static class PrefsA {
-		public static StringKey INHERITED_KEY = new StringKey("my.inherited.key","inherited");
+		public static PreferenceKey INHERITED_KEY = new PreferenceKey("my.inherited.key","inherited");
 	}
 	
 	public static class PrefsB extends PrefsA {
-		public static Integer myInt = 42;
-		public static IntegerKey INT_KEY = new IntegerKey("my.int", myInt);
+		public static String myInt = "42";
+		public static PreferenceKey INT_KEY = new PreferenceKey("my.int", myInt);
 		@SuppressWarnings("unused")
-		private static StringKey PRIVATE_KEY = new StringKey("my.private.key","private");
-		public static BooleanKey BOOL_KEY = new BooleanKey("foo.bar", true);
+		private static PreferenceKey PRIVATE_KEY = new PreferenceKey("my.private.key","private");
+		public static PreferenceKey BOOL_KEY = new PreferenceKey("foo.bar", Boolean.TRUE.toString());
 	}
 	
-	public static class PrefsC {
-		public static StringKey DELEGATING_KEY = new StringKey("delegating.key", null) {
-			@Override
-			public org.eclipse.xtext.preferences.IPreferenceKey<String> getDelegationKey() {
-				return PrefsA.INHERITED_KEY;
-			}
-		};
-	}
 }
 

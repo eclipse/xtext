@@ -68,7 +68,7 @@ abstract class AbstractXbaseFormatterTest {
 		boolean allowErrors
 	) {
 		tester.assertFormatted [
-			initConfig(it.cfg, cfg)
+			initConfig(it.config, cfg)
 			it.expectation = expectation
 			it.toBeFormatted = toBeFormatted
 			it.prefix = prefix
@@ -78,7 +78,7 @@ abstract class AbstractXbaseFormatterTest {
 	}
 
 	def initConfig(MapBasedPreferenceValues target, (MapBasedPreferenceValues)=>void cfg) {
-		target.put(maxLineWidth, 80)
+		target.put(maxLineWidth.id, 80.toString)
 		if (cfg != null)
 			cfg.apply(target)
 	}

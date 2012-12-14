@@ -9,7 +9,7 @@ abstract class AbstractFormatter implements IBasicFormatter {
 	@Property boolean allowIdentityEdits = false
 	@Property boolean diagnoseConflicts = true
 
-	override format(XtextResource res, int offset, int length, IPreferenceValues cfg) {
+	override format(XtextResource res, int offset, int length, FormattingPreferenceValues cfg) {
 		val doc = res.parseResult.rootNode.text
 		val format = new FormattableDocument(cfg, doc)
 		format(res.contents.head, format)

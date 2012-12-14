@@ -9,9 +9,7 @@ package org.eclipse.xtext.xbase.formatting;
 
 import java.util.List;
 
-import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.formatting.TextReplacement;
 
 /**
  * A formatter creates a list of TextReplacements that are applicable on the XtextResource's underlying document (i.e.
@@ -23,5 +21,5 @@ import org.eclipse.xtext.xbase.formatting.TextReplacement;
  */
 public interface IBasicFormatter {
 
-	List<TextReplacement> format(XtextResource res, int offset, int length, IPreferenceValues cfg);
+	List<TextReplacement> format(XtextResource res, int offset, int length, FormattingPreferenceValues cfg);
 }

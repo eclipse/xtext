@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.formatting
 
-import org.eclipse.xtext.preferences.StringKey
-import org.eclipse.xtext.preferences.IntegerKey
+import org.eclipse.xtext.preferences.PreferenceKey
 
 class BasicFormatterPreferenceKeys {
 	public static val lineSeparator = new StringKey("line.separator", "\n")
@@ -9,3 +8,4 @@ class BasicFormatterPreferenceKeys {
 	public static val indentationLength = new IntegerKey("indentation.length", 4)
 	public static val maxLineWidth = new IntegerKey("line.width.max", 120)
 }
+

@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.formatting
 
-import org.eclipse.xtext.preferences.IntegerKey
-import org.eclipse.xtext.preferences.BooleanKey
+import org.eclipse.xtext.preferences.PreferenceKey
 
 class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
 	public static val preserveBlankLines = new IntegerKey("preserve.blank.lines", 1)
@@ -20,26 +19,4 @@ class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
 	public static val bracesInNewLine = new NewLineKey("braces.in.new.line", false)
 }
 
-class BlankLineKey extends IntegerKey {
-	new(String name, Integer defaultValue) {
-		super(name, defaultValue)
-	}
-}
 
-class NewLineOrPreserveKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}
-
-class NewLineKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}
-
-class WhitespaceKey extends BooleanKey {
-	new(String name, Boolean defaultValue) {
-		super(name, defaultValue)
-	}
-}

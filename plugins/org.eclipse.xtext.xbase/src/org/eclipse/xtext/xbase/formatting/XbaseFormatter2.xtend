@@ -160,7 +160,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 			return false
 		} else {
 			val length = fmt.lineLengthBefore(node.offset) + lookahead.length
-			return length <= fmt.cfg.getPreference(maxLineWidth)
+			return length <= fmt.cfg.get(maxLineWidth)
 		}
 	}
 
@@ -392,13 +392,13 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 					val lineLength = format.lineLengthBefore(callOffset)
 					if (call.isMultiParamInOwnLine(format)) {
-						if (lineLength + featureNode.length < format.cfg.getPreference(maxLineWidth))
+						if (lineLength + featureNode.length < format.cfg.get(maxLineWidth))
 							format += op.append[noSpace]
 						else
 							format += op.append[newLine]
 						formatFeatureCallParamsMultiline(open, call.memberCallArguments, format)
 					} else {
-						if (lineLength + (featureNode.length * 2) < format.cfg.getPreference(maxLineWidth) || format.
+						if (lineLength + (featureNode.length * 2) < format.cfg.get(maxLineWidth) || format.
 							fitsIntoLine(callOffset, callLength,
 								[ f |
 									f += op.append[noSpace]
@@ -416,7 +416,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 					}
 				} else {
 					val shortLenght = format.lineLengthBefore(callOffset) + featureNode.length
-					if (shortLenght < format.cfg.getPreference(maxLineWidth)) {
+					if (shortLenght < format.cfg.get(maxLineWidth)) {
 						format += op.append[noSpace]
 					} else {
 						format += op.append[newLine]

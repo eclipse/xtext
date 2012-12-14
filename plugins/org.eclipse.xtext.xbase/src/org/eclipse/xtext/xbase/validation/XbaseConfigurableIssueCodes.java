@@ -12,8 +12,7 @@ import static com.google.common.collect.Maps.*;
 import java.util.Map;
 
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.validation.ConfigurableIssueCode;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
 /**
@@ -21,12 +20,10 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
  */
 public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
 
-	private static final ConfigurableIssueCode JAVA_COMPILER_PB_FORBIDDEN_REFERENCE = new ConfigurableIssueCode(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, Severity.ERROR);
-	private static final ConfigurableIssueCode JAVA_COMPILER_PB_DISCOURAGED_REFERENCE = new ConfigurableIssueCode(JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE, Severity.WARNING);
-	public static final ConfigurableIssueCode FORBIDDEN_REFERENCE = new ConfigurableIssueCode(IssueCodes.FORBIDDEN_REFERENCE, JAVA_COMPILER_PB_FORBIDDEN_REFERENCE);
-	public static final ConfigurableIssueCode DISCOURAGED_REFERENCE = new ConfigurableIssueCode(IssueCodes.DISCOURAGED_REFERENCE, JAVA_COMPILER_PB_DISCOURAGED_REFERENCE);
+	public static final PreferenceKey FORBIDDEN_REFERENCE = new PreferenceKey(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+	public static final PreferenceKey DISCOURAGED_REFERENCE = new PreferenceKey(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
 	
-	private static final Map<String, ConfigurableIssueCode> allConfigurableCodes = newLinkedHashMap();
+	private static final Map<String, PreferenceKey> allConfigurableCodes = newLinkedHashMap();
 	
 	static {
 		allConfigurableCodes.put(FORBIDDEN_REFERENCE.getId(), FORBIDDEN_REFERENCE);
@@ -34,7 +31,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	}
 	
 	@Override
-	public Map<String, ConfigurableIssueCode> getConfigurableIssueCodes() {
+	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
 		return allConfigurableCodes;
 	}
 }

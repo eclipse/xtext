@@ -3,9 +3,9 @@ package org.eclipse.xtext.xbase.formatting
 import com.google.inject.Inject
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
-import org.eclipse.xtext.preferences.IPreferenceKey
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.preferences.PreferenceKey
 
 class FormattingDataFactory {
 
@@ -36,8 +36,8 @@ class FormattingDataFactory {
 		FormattingDataInit it
 	) {
 		[ FormattableDocument doc |
-			val blankline = doc.cfg.getPreference(key)
-			val preserve = doc.cfg.getPreference(preserveBlankLines)
+			val blankline = doc.cfg.get(key)
+			val preserve = doc.cfg.get(preserveBlankLines)
 			val min = blankline + 1
 			val max = Math::max(preserve + 1, min)
 			newNewLineData(leafs, min, max, indentationChange, doc.debugConflicts)
@@ -50,8 +50,8 @@ class FormattingDataFactory {
 		FormattingDataInit it
 	) {
 		[ FormattableDocument doc |
-			val newLine = doc.cfg.getPreference(key)
-			val preserve = doc.cfg.getPreference(preserveNewLines)
+			val newLine = doc.cfg.get(key)
+			val preserve = doc.cfg.get(preserveNewLines)
 			newNewLineData(leafs, if (newLine) 1 else 0, if (preserve || newLine) 1 else 0, indentationChange,
 				doc.debugConflicts)
 		]
@@ -63,7 +63,7 @@ class FormattingDataFactory {
 		FormattingDataInit it
 	) {
 		[ FormattableDocument doc |
-			val newLine = doc.cfg.getPreference(key)
+			val newLine = doc.cfg.get(key)
 			val minmax = if (newLine) 1 else 0
 			newNewLineData(leafs, minmax, minmax, indentationChange, doc.debugConflicts)
 		]
@@ -71,7 +71,7 @@ class FormattingDataFactory {
 
 	def protected dispatch (FormattableDocument)=>Iterable<FormattingData> newFormattingData(
 		HiddenLeafs leafs,
-		IPreferenceKey<?> key,
+		PreferenceKey key,
 		FormattingDataInit it
 	) {
 		throw new RuntimeException("Unknown configuration key kind: " + key.^class)
@@ -80,7 +80,7 @@ class FormattingDataFactory {
 	def protected dispatch (FormattableDocument)=>Iterable<FormattingData> newFormattingData(HiddenLeafs leafs,
 		WhitespaceKey key, FormattingDataInit it) {
 		[ FormattableDocument doc |
-			val space = doc.cfg.getPreference(key)
+			val space = doc.cfg.get(key)
 			newWhitespaceData(leafs, if (space) " " else "", indentationChange, doc.debugConflicts)
 		]
 	}
@@ -197,9 +197,9 @@ class FormattingDataInit {
 	public String space = null
 	public int newLines = 0
 	public int indentationChange = 0
-	public IPreferenceKey<?> key = null
+	public PreferenceKey key = null
 
-	def void cfg(IPreferenceKey<?> key) {
+	def void cfg(PreferenceKey key) {
 		this.key = key
 	}
 

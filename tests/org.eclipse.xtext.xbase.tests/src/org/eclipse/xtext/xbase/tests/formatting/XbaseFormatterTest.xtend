@@ -4,8 +4,14 @@ import com.google.inject.Inject
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import org.eclipse.xtext.preferences.PreferenceKey
 
 class XbaseFormatterTest extends AbstractXbaseFormatterTest {
+	
+	def void put(MapBasedPreferenceValues values, PreferenceKey key, Object value) {
+		values.put(key.id, value.toString)
+	}
 	
 	@Test def formatGenerics() {
 		assertFormattedExpression('''
@@ -616,7 +622,7 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatSwitchMLBlock() {
 		assertFormattedExpression([
-			put(bracesInNewLine, false)
+			it.put(bracesInNewLine, false)
 		],'''
 			switch 'x' {
 				case 'x': {
@@ -633,7 +639,7 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatSwitchDefaultMLBlock() {
 		assertFormattedExpression([
-			put(bracesInNewLine, false)
+			it.put(bracesInNewLine, false)
 		],'''
 			switch 'x' {
 				case 'x': {
@@ -653,7 +659,7 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatSwitchMLBlock1() {
 		assertFormattedExpression([
-			put(bracesInNewLine, true)
+			it.put(bracesInNewLine, true)
 		],'''
 			switch 'x'
 			{
@@ -1048,7 +1054,7 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatTryCatchFinallyExpression2() {
 		assertFormattedExpression([
-			put(bracesInNewLine, false)
+			it.put(bracesInNewLine, false)
 		],'''
 			try {
 				println("x")
@@ -1064,7 +1070,7 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatTryCatchFinallyExpression3() {
 		assertFormattedExpression([
-			put(bracesInNewLine, true)
+			it.put(bracesInNewLine, true)
 		],'''
 			try
 			{

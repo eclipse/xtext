@@ -10,13 +10,13 @@ import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 class FormattableDocument {
 	private static val Logger log = Logger::getLogger(typeof(FormattableDocument))
-	@Property val IPreferenceValues cfg
+	@Property val FormattingPreferenceValues cfg
 	@Property val String document
 	@Property val TreeMap<Integer, FormattingData> formattings
 	@Property Throwable rootTrace = null
 	@Property boolean conflictOccurred = false
 	
-	new(IPreferenceValues cfg, String document){
+	new(FormattingPreferenceValues cfg, String document){
 		this._cfg = cfg
 		this._document = document
 		this._formattings = new TreeMap()
@@ -235,7 +235,7 @@ class FormattableDocument {
 			return false
 		} else {
 			val line = lineLengthBefore(offset) + lookahead.length
-			return line <= cfg.getPreference(maxLineWidth)
+			return line <= cfg.get(maxLineWidth)
 		}
 	}
 	
@@ -255,19 +255,19 @@ class FormattableDocument {
 	
 	def getIndentation(int levels) {
 		if (levels > 0) {
-			val indent = cfg.getPreference(indentation)
+			val indent = cfg.get(indentation)
 			(0 .. levels - 1).map[indent].join
 		} else
 			""
 	}
 
 	def getIndentationLenght(int levels) {
-		levels * cfg.getPreference(indentationLength)
+		levels * cfg.get(indentationLength)
 	}
 
 	def getWrap(int levels) {
 		if (levels > 0) {
-			val sep = cfg.getPreference(lineSeparator)
+			val sep = cfg.get(lineSeparator)
 			(0 .. levels - 1).map[sep].join
 		} else
 			""
