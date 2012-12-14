@@ -12,8 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -21,6 +27,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.osgi.util.TextProcessor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -93,6 +100,67 @@ public abstract class OptionsConfigurationBlock {
 				}
 			}
 			return values.length - 1; // assume the last option is the least severe
+		}
+	}
+
+	public static final class BuildJob extends Job {
+		private final IProject project;
+	
+		public BuildJob(String name, IProject project) {
+			super(name);
+			this.project = project;
+		}
+	
+		public boolean isCoveredBy(BuildJob other) {
+			if (other.project == null) {
+				return true;
+			}
+			return project != null && project.equals(other.project);
+		}
+	
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			synchronized (getClass()) {
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				Job[] buildJobs = Job.getJobManager().find(ResourcesPlugin.FAMILY_MANUAL_BUILD);
+				for (int i = 0; i < buildJobs.length; i++) {
+					if (buildJobs[i] != this && buildJobs[i] instanceof BuildJob) {
+						BuildJob job = (BuildJob) buildJobs[i];
+						if (job.isCoveredBy(this)) {
+							buildJobs[i].cancel();
+						}
+					}
+				}
+			}
+			try {
+				if (project != null) {
+					monitor.beginTask(String.format(
+							Messages.BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName,
+							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-1$
+							2);
+					project.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 1));
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
+							new SubProgressMonitor(monitor, 1));
+				} else {
+					monitor.beginTask(Messages.BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName, 2);
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD,
+							new SubProgressMonitor(monitor, 2));
+				}
+			} catch (CoreException e) {
+				return e.getStatus();
+			} catch (OperationCanceledException e) {
+				return Status.CANCEL_STATUS;
+			} finally {
+				monitor.done();
+			}
+			return Status.OK_STATUS;
+		}
+	
+		@Override
+		public boolean belongsTo(Object family) {
+			return ResourcesPlugin.FAMILY_MANUAL_BUILD == family;
 		}
 	}
 

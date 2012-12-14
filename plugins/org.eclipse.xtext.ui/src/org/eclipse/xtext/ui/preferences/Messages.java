@@ -23,6 +23,9 @@ public class Messages extends NLS {
 	public static String OutputConfigurationPage_OverrideExistingResources;
 	public static String ProjectDirectoryFieldEditor_OutputDirectory;
 
+	public static String BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName;
+	public static String BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName;
+	
 	public static String PropertyAndPreferencePage_useworkspacesettings_change;
 	public static String PropertyAndPreferencePage_showprojectspecificsettings_label;
 	public static String PropertyAndPreferencePage_useprojectsettings_label;
