@@ -109,7 +109,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eObject, diagnostics, context);
+				result &= val.getDelegate().validate(eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
@@ -124,7 +124,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eClass, eObject, diagnostics, context);
+				result &= val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
@@ -139,7 +139,7 @@ public class CompositeEValidator implements EValidator {
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
-				result = result && val.getDelegate().validate(eDataType, value, diagnostics, context);
+				result &= val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
