@@ -7,35 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.validator.preferences;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
-
-import com.google.inject.Inject;
-import com.google.inject.MembersInjector;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurationBlock {
 
-	public static class Factory {
-		@Inject
-		private MembersInjector<XtendValidatorConfigurationBlock> injector;
-
-		public XtendValidatorConfigurationBlock createValidatorConfigurationBlock(IProject project,
-				IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container) {
-			XtendValidatorConfigurationBlock configurationBlock = new XtendValidatorConfigurationBlock(project,
-					preferenceStore, container);
-			injector.injectMembers(configurationBlock);
-			return configurationBlock;
-		}
-	}
-
-	protected XtendValidatorConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			IWorkbenchPreferenceContainer container) {
-		super(project, preferenceStore, container);
+	@Override
+	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
+		// using keys from xbase for now.
+		super.fillSettingsPage(composite, nColumns, defaultIndent);
 	}
 	
 }
