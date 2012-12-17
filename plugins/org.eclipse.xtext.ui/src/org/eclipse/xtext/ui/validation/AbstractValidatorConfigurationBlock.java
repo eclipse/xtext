@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.validation;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -17,7 +15,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
-import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
@@ -38,9 +35,8 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
-	protected AbstractValidatorConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			IWorkbenchPreferenceContainer container) {
-		super(project, preferenceStore, container);
+	protected AbstractValidatorConfigurationBlock() {
+		super();
 	}
 
 	@Override
