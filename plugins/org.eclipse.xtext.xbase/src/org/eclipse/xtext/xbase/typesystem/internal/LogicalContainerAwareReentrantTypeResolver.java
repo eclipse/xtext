@@ -65,12 +65,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
 		private final boolean returnType;
-		private IFeatureScopeSession session;
-		private XExpression expression;
+		private final IFeatureScopeSession session;
+		private final XExpression expression;
+		private final Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
 
-		public DemandTypeReferenceProvider(JvmMember member, XExpression expression, ResolvedTypes resolvedTypes, IFeatureScopeSession session, boolean returnType) {
+		public DemandTypeReferenceProvider(JvmMember member, XExpression expression, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession session, boolean returnType) {
 			this.member = member;
 			this.expression = expression;
+			this.resolvedTypesByContext = resolvedTypesByContext;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
 			this.returnType = returnType;
@@ -81,7 +83,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			if (actualType == null) {
-				computeTypes(resolvedTypes, session, member);
+				computeTypes(resolvedTypesByContext, resolvedTypes, session, member);
 				actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			}
 			if (actualType == null)
@@ -111,20 +113,20 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 * @return the stacked resolved types that shall be used in the computation.
 	 */
 	protected Map<JvmIdentifiableElement, ResolvedTypes> prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
-		Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType = Maps.newHashMapWithExpectedSize(3); 
-		doPrepare(resolvedTypes, featureScopeSession, getRoot(), resolvedTypesByType);
-		return resolvedTypesByType;
+		Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext = Maps.newHashMapWithExpectedSize(3); 
+		doPrepare(resolvedTypes, featureScopeSession, getRoot(), resolvedTypesByContext);
+		return resolvedTypesByContext;
 	}
 	
-	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
+	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		if (element instanceof JvmDeclaredType) {
-			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element, resolvedTypesByType);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element, resolvedTypesByContext);
 		} else if (element instanceof JvmConstructor) {
-			_doPrepare(resolvedTypes, featureScopeSession, (JvmConstructor) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmConstructor) element, resolvedTypesByContext);
 		} else if (element instanceof JvmField) {
-			_doPrepare(resolvedTypes, featureScopeSession, (JvmField) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmField) element, resolvedTypesByContext);
 		} else if (element instanceof JvmOperation) {
-			_doPrepare(resolvedTypes, featureScopeSession, (JvmOperation) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmOperation) element, resolvedTypesByContext);
 		}
 	}
 	
@@ -134,11 +136,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 
 	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession childSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
-		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
-		if (type instanceof JvmGenericType) {
-			childResolvedTypes.addDeclaredTypeParameters(((JvmGenericType) type).getTypeParameters());
-		}
-		resolvedTypesByType.put(type, childResolvedTypes);
+		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, type, resolvedTypesByType);
 		
 		JvmTypeReference superType = getExtendedClass(type);
 		if (superType != null) {
@@ -158,62 +156,76 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		LightweightTypeReference lightweightThisType = resolvedTypes.getConverter().toLightweightReference(thisType);
 		childResolvedTypes.reassignType(type, lightweightThisType);
 		
-		
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
 			doPrepare(childResolvedTypes, childSession, members.get(i), resolvedTypesByType);
 		}
 	}
 
-	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
+	protected StackedResolvedTypes declareTypeParameters(ResolvedTypes resolvedTypes, JvmIdentifiableElement declarator,
+			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
+		if (declarator instanceof JvmTypeParameterDeclarator)
+			childResolvedTypes.addDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+		resolvedTypesByContext.put(declarator, childResolvedTypes);
+		return childResolvedTypes;
+	}
+
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, field, resolvedTypesByContext);
+		
 		JvmTypeReference knownType = field.getType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, false);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
-			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
-			resolvedTypes.setType(field, lightweightReference);
+			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
+			childResolvedTypes.setType(field, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, false);
 			field.setType(reference);
 		}
 	}
 	
-	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, constructor, resolvedTypesByContext);
+		
 		JvmDeclaredType producedType = constructor.getDeclaringType();
 		JvmParameterizedTypeReference asReference = getServices().getTypeReferences().createTypeRef(producedType);
-		LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(asReference);
-		resolvedTypes.setType(constructor, lightweightReference);
+		LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(asReference);
+		childResolvedTypes.setType(constructor, lightweightReference);
 	}
 	
-	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, operation, resolvedTypesByContext);
+		
 		JvmTypeReference knownType = operation.getReturnType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, true);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
-			LightweightTypeReference lightweightReference = resolvedTypes.getConverter().toLightweightReference(knownType);
-			resolvedTypes.setType(operation, lightweightReference);
+			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
+			childResolvedTypes.setType(operation, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, true);
 			operation.setReturnType(reference);
 		}
 	}
 	
-	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
+	protected JvmTypeReference createComputedTypeReference(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-		result.setTypeProvider(createTypeProvider(resolvedTypes, featureScopeSession, member, returnType));
+		result.setTypeProvider(createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType));
 		// TODO do we need a lightweight computed type reference?
 //		resolvedTypes.setType(member, result);
 		return result;
 	}
 	
-	protected AbstractReentrantTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
+	protected AbstractReentrantTypeReferenceProvider createTypeProvider(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
 		resolvedTypes.markToBeInferred(expression);
-		return new DemandTypeReferenceProvider(member, expression, resolvedTypes, featureScopeSession, returnType);
+		return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
 	}
 	
 	@Override
@@ -226,6 +238,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected void computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmDeclaredType) {
 			_computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, (JvmDeclaredType) element);
+		} else if (element instanceof JvmConstructor) {
+			_computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, (JvmConstructor) element);
+		} else if (element instanceof JvmField) {
+			_computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, (JvmField) element);
+		} else if (element instanceof JvmOperation) {
+			_computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, (JvmOperation) element);
 		} else {
 			computeTypes(resolvedTypes, featureScopeSession, element);
 		}
@@ -234,11 +252,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmConstructor) {
-			_computeTypes(resolvedTypes, featureScopeSession, (JvmConstructor) element);
+			throw new IllegalStateException();
 		} else if (element instanceof JvmField) {
-			_computeTypes(resolvedTypes, featureScopeSession, (JvmField) element);
+			throw new IllegalStateException();
 		} else if (element instanceof JvmOperation) {
-			_computeTypes(resolvedTypes, featureScopeSession, (JvmOperation) element);
+			throw new IllegalStateException();
 		} else if (element instanceof JvmDeclaredType) {
 			throw new IllegalStateException();
 		} else {
@@ -246,27 +264,54 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 
-	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
-		FieldTypeComputationState state = new FieldTypeComputationState(resolvedTypes, featureScopeSession, field, this);
+	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
+		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(field);
+		if (childResolvedTypes == null)
+			throw new IllegalStateException("No resolved type found. Type was: " + field.getIdentifier());
+		
+		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, featureScopeSession, field, this);
 		ITypeComputationResult result = state.computeTypes();
 		if (InferredTypeIndicator.isInferred(field.getType())) {
 			LightweightTypeReference fieldType = result.getActualExpressionType();
 			if (fieldType != null)
 				InferredTypeIndicator.resolveTo(field.getType(), fieldType.toJavaCompliantTypeReference());
 		}
-		computeAnnotationTypes(resolvedTypes, featureScopeSession, field);
+		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
+		
+		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, field);
 	}
 	
-	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
-		ConstructorBodyComputationState state = new ConstructorBodyComputationState(resolvedTypes, featureScopeSession, constructor, this);
+	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
+		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(constructor);
+		if (childResolvedTypes == null)
+			throw new IllegalStateException("No resolved type found. Type was: " + constructor.getIdentifier());
+		
+		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession, constructor, this);
 		state.computeTypes();
-		computeAnnotationTypes(resolvedTypes, featureScopeSession, constructor);
+		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
+		
+		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, constructor);
 	}
 	
-	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
-		OperationBodyComputationState state = new OperationBodyComputationState(resolvedTypes, featureScopeSession, operation, this);
+	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
+		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(operation);
+		if (childResolvedTypes == null) {
+			if (preparedResolvedTypes.containsKey(operation))
+				return;
+			throw new IllegalStateException("No resolved type found. Type was: " + operation.getIdentifier());
+		}
+		
+		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, featureScopeSession, operation, this);
 		setReturnType(operation, state.computeTypes());
-		computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
+		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
+		
+		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
+	}
+
+	protected void mergeChildTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes childResolvedTypes, JvmIdentifiableElement element) {
+		if (childResolvedTypes instanceof StackedResolvedTypes)
+			((StackedResolvedTypes) childResolvedTypes).mergeIntoParent();
+		preparedResolvedTypes.put(element, null);
 	}
 
 	protected void setReturnType(JvmOperation operation, ITypeComputationResult computedType) {
@@ -309,8 +354,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
 		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, childSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
-		if (childResolvedTypes instanceof StackedResolvedTypes)
-			((StackedResolvedTypes) childResolvedTypes).mergeIntoParent();
+		
+		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, type);
 	}
 
 	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,

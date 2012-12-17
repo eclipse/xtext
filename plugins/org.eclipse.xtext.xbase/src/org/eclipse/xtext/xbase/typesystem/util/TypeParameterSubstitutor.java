@@ -137,7 +137,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 			return reference;
 		CompoundTypeReference result = new CompoundTypeReference(getOwner(), reference.isSynonym());
 		for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
-			reference.addComponent(visitTypeArgument(component, visiting));
+			result.addComponent(visitTypeArgument(component, visiting));
 		}
 		return result;
 	}

@@ -105,7 +105,10 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturn) {
-		return getType(expression, false);
+		LightweightTypeReference returnType = getResolvedTypes(expression).getReturnType(expression);
+		if (returnType == null)
+			return null;
+		return returnType.toTypeReference();
 	}
 
 	@Override
