@@ -89,9 +89,12 @@ public class DocumentBasedDirtyResource implements IDirtyResource, Provider<IRes
 		return result;
 	}
 	
-	public synchronized void copyState(IResourceDescription original) {
-		description = new StatefulResourceDescription(original, this);
-		content = getUnderlyingDocument().get();
+	public void copyState(IResourceDescription original) {
+		StatefulResourceDescription copy = new StatefulResourceDescription(original, this);
+		synchronized(this) {
+			description = copy;
+			content = getUnderlyingDocument().get();
+		}
 	}
 	
 	public IXtextDocument getUnderlyingDocument() {
