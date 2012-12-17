@@ -697,6 +697,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "{ 'literal'.length; null; }");
 	}
 	
+	@Test public void testBlock_01() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{\n" + 
+				"  val (Integer, Double, Boolean) => void fun1 = null\n" + 
+				"  val (byte[], Object) => double[] fun2 = null\n" + 
+				"  val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n" + 
+				"  val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n" + 
+				"  val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList\n" +
+				"  test3 != null" + 
+				"}");
+	}
+	
 	@Test public void testStringLiteral_01() throws Exception {
 		assertEvaluatesTo("", "''");
 	}
