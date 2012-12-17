@@ -54,6 +54,7 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.refactoring.XtendTypeSerializationUtil;
+import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
@@ -96,6 +97,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
@@ -371,5 +373,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends DocumentTokenSource> bindDocumentTokenSource(){
 		return XtendDocumentTokenSource.class;
+	}
+	
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return XtendValidatorConfigurationBlock.class;
 	}
 }
