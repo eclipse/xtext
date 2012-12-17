@@ -48,11 +48,14 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import testdata.OverloadedMethods;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -60,6 +63,24 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("deprecation")
 public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
+	
+	private static Set<String> files;
+	
+	@BeforeClass
+	public static void recordFiles() {
+		files = Sets.newHashSet();
+	}
+	
+	@AfterClass
+	public static void clearRecording() {
+		files = null;
+	}
+	
+	@Override
+	protected XtendFile file(String string) throws Exception {
+		assertTrue(string, files.add(string));
+		return file(string, false);
+	}
 	
 	@Inject
 	private IXtendJvmAssociations associator;
@@ -316,7 +337,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_2() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Y y) { y }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Y y) { return y }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -327,7 +348,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_3() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Iterable<Y> ys) { newArrayList(ys.head) }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -338,7 +359,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_4() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Y y) { y }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Y y) { return y }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -349,7 +370,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_5() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Iterable<Y> ys) { newArrayList(ys.head) }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -360,7 +381,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_6() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { new X }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { val result = new X return result }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -368,7 +389,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_7() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { new X<String> }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X<String> }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -376,7 +397,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_8() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { new X<Z> }}")
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X<Z> }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
@@ -403,6 +424,107 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 		
 		JvmTypeReference paramType = operation.getParameters().get(0).getParameterType();
 		assertEquals("java.lang.Iterable<Y>", paramType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_11() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<Z> foo() { val result = new X result }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("java.lang.Iterable<Z>", returnType.getIdentifier());
+		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		assertEquals("X<Z>", bodyType.getIdentifier());
+		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		assertEquals("X<Z>", bodyReturnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_12() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X return result }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
+		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		assertEquals("void", bodyType.getIdentifier());
+		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		assertEquals("X<java.lang.String>", bodyReturnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_13() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X return r }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
+		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		assertEquals("void", bodyType.getIdentifier());
+		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		assertEquals("X<Y>", bodyReturnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_14() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def <Y> foo() { new X<Y> }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("X<Y>", returnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_15() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X result }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
+		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		assertEquals("X<java.lang.String>", bodyType.getIdentifier());
+		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		assertEquals("X<java.lang.String>", bodyReturnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_16() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X r }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
+		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		assertEquals("X<Y>", bodyType.getIdentifier());
+		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		assertEquals("X<Y>", bodyReturnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_17() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { val result = new X result }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_18() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { new X }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
+	}
+	
+	@Test public void testTypeParameterReference_19() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
+	}
+	
+
+	@Test public void testTypeParameterReference_20() throws Exception {
+		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def <Y> foo() { return new X<Y> }}")
+				.getXtendTypes().get(0)).getMembers().get(0);
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		JvmTypeReference returnType = operation.getReturnType();
+		assertEquals("X<Y>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterShadowsType_1() throws Exception {

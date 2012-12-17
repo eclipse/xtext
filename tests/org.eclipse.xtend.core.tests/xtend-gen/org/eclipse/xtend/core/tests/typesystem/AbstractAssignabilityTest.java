@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -780,5 +781,36 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom("java.util.Comparator<? super String>", "(String, String)=>int");
     this.isAssignableFrom("java.util.Comparator<String>", "(CharSequence, CharSequence)=>int");
     this.isAssignableFrom("java.util.Comparator<? super String>", "(CharSequence, CharSequence)=>int");
+  }
+  
+  @Test
+  public void testBug395002_01() {
+    String _selfBound = this.selfBound("$<?, A>");
+    String _selfBound_1 = this.selfBound("A extends $<?,A>");
+    Pair<String,String> _mappedTo = Pair.<String, String>of(_selfBound, _selfBound_1);
+    this.isAssignableFrom(_mappedTo, "A");
+  }
+  
+  @Ignore(value = "Substitutions are not applied recursively according to JLS - see ticket 395002")
+  @Test
+  public void testBug395002_02() {
+    String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");
+    String _selfBound_1 = this.selfBound("A extends $<?,A>");
+    Pair<String,String> _mappedTo = Pair.<String, String>of(_selfBound, _selfBound_1);
+    this.isAssignableFrom(_mappedTo, "$<?, A>");
+  }
+  
+  @Ignore(value = "Substitutions are not applied recursively according to JLS - see ticket 395002")
+  @Test
+  public void testBug395002_03() {
+    String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");
+    String _selfBound_1 = this.selfBound("A extends $<?,A>");
+    Pair<String,String> _mappedTo = Pair.<String, String>of(_selfBound, _selfBound_1);
+    this.isAssignableFrom(_mappedTo, "A");
+  }
+  
+  private String selfBound(final String typeName) {
+    String _replace = typeName.replace("$", "org.eclipse.xtend.core.tests.validation.ScenarioBug395002$SelfBound");
+    return _replace;
   }
 }

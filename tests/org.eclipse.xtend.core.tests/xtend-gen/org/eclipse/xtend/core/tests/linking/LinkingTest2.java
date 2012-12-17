@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.linking;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.linking.LinkingTest;
+import org.eclipse.xtend.core.tests.linking.AbstractLinkingTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -22,14 +22,13 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class LinkingTest2 extends LinkingTest {
+public class LinkingTest2 extends AbstractLinkingTest {
   @Test
   public void testImplicitFirstArgument_07() throws Exception {
     final XtendClass clazz = this.clazz(
@@ -56,25 +55,5 @@ public class LinkingTest2 extends LinkingTest {
     JvmIdentifiableElement _feature_1 = ((XAbstractFeatureCall) _implicitFirstArgument_1).getFeature();
     String _simpleName = _feature_1.getSimpleName();
     Assert.assertEquals("it", _simpleName);
-  }
-  
-  @Test
-  @Ignore(value = "TBD")
-  public void testTypeParameterReference_4() throws Exception {
-  }
-  
-  @Test
-  @Ignore(value = "TBD")
-  public void testTypeParameterReference_5() throws Exception {
-  }
-  
-  @Test
-  @Ignore(value = "TBD")
-  public void testTypeParameterReference_6() throws Exception {
-  }
-  
-  @Test
-  @Ignore(value = "TBD")
-  public void testTypeParameterReference_8() throws Exception {
   }
 }

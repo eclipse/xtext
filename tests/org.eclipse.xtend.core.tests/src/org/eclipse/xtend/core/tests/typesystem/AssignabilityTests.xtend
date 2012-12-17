@@ -646,6 +646,27 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		"java.util.Comparator<String>".isAssignableFrom("(CharSequence, CharSequence)=>int")
 		"java.util.Comparator<? super String>".isAssignableFrom("(CharSequence, CharSequence)=>int")
 	}
+	
+	@Test
+	def void testBug395002_01() {
+		("$<?, A>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("A")
+	}
+	
+	@Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
+	@Test
+	def void testBug395002_02() {
+		("$<? extends $<?, A>, ?>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("$<?, A>")
+	}
+	
+	@Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
+	@Test
+	def void testBug395002_03() {
+		("$<? extends $<?, A>, ?>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("A")
+	}
+	
+	def private selfBound(String typeName) {
+		typeName.replace("$", "org.eclipse.xtend.core.tests.validation.ScenarioBug395002$SelfBound")
+	}
 }
 
 /**

@@ -18,6 +18,13 @@ public class LinkingTest extends AbstractLinkingTest {
 	@Ignore("Fails in old impl")
 	@Override
 	@Test
+	public void testTypeParameterReference_2() throws Exception {
+		fail("Fails in old impl");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Override
+	@Test
 	public void testTypeParameterReference_3() throws Exception {
 		fail("Fails in old impl");
 	}
@@ -40,6 +47,27 @@ public class LinkingTest extends AbstractLinkingTest {
 	@Override
 	@Test
 	public void testTypeParameterReference_10() throws Exception {
+		fail("Fails in old impl");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Override
+	@Test
+	public void testTypeParameterReference_17() throws Exception {
+		fail("Fails in old impl");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Override
+	@Test
+	public void testTypeParameterReference_18() throws Exception {
+		fail("Fails in old impl");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Override
+	@Test
+	public void testTypeParameterReference_19() throws Exception {
 		fail("Fails in old impl");
 	}
 	
