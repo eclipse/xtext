@@ -108,7 +108,7 @@ class LinkingShadowingTest2 extends LinkingShadowingTest {
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class LinkingTest2 extends LinkingTest {
+class LinkingTest2 extends AbstractLinkingTest {
     
     @Test 
     override testImplicitFirstArgument_07() throws Exception {
@@ -131,26 +131,6 @@ class LinkingTest2 extends LinkingTest {
         assertNull(seventh.getInvalidFeatureIssueCode(), seventh.getInvalidFeatureIssueCode());
         assertEquals("it", (seventh.getImplicitFirstArgument() as XAbstractFeatureCall).getFeature().getSimpleName());
     }
-    
-    @Test
-    @Ignore("TBD")
-	override testTypeParameterReference_4() throws Exception {
-	}
-	
-	@Test
-    @Ignore("TBD")
-	override testTypeParameterReference_5() throws Exception {
-	}
-	
-	@Test
-    @Ignore("TBD")
-	override testTypeParameterReference_6() throws Exception {
-	}
-	
-	@Test
-    @Ignore("TBD")
-	override testTypeParameterReference_8() throws Exception {
-	}
     
 }
 

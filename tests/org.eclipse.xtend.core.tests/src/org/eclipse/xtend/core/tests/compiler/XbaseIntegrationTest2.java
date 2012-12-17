@@ -21,6 +21,13 @@ import org.junit.runner.RunWith;
 @InjectWith(NewTypeSystemRuntimeInjectorProvider.class)
 public class XbaseIntegrationTest2 extends XbaseIntegrationTest {
 
+	// disabled in super class and re-enabled here
+	@Override
+	@Test
+	public void testBlock_01() throws Exception {
+		super.testBlock_01();
+	}
+	
 	@Override
 	@Test
 	@Ignore("To be implemented later")
