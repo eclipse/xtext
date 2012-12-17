@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.Collections;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,6 +30,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
@@ -40,10 +41,12 @@ import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.ScopeBasedSelectable;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -58,6 +61,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	@Inject private IResourceScopeCache cache;
 	@Inject private IQualifiedNameProvider qualifiedNameProvider;
 	@Inject private IQualifiedNameConverter qualifiedNameConverter;
+	@Inject private IImportsConfiguration importsConfiguration;
 	
 	public IQualifiedNameProvider getQualifiedNameProvider() {
 		return qualifiedNameProvider;
@@ -79,6 +83,9 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	}
 	
 	protected IScope internalGetScope(IScope parent, IScope globalScope, EObject context, EReference reference) {
+		if(context instanceof XImportDeclaration) {
+			return globalScope;
+		}
 		IScope result = parent;
 		if (context.eContainer() == null) {
 			if (parent != globalScope)
@@ -159,7 +166,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	}
 	
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return singletonList(new ImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
+		return newArrayList(
+				new ImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
 	}
 	
 	protected ImportScope createImportScope(IScope parent, List<ImportNormalizer> namespaceResolvers, ISelectable importFrom, EClass type, boolean ignoreCase) {
@@ -195,20 +203,24 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 			}
 		});
 	}
-
-	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
+	
+	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
+		if(EcoreUtil.getRootContainer(context) != context) 
+			return Collections.emptyList();
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
-		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
-				"importedNamespace");
-		EList<EObject> eContents = context.eContents();
-		for (EObject child : eContents) {
-			String value = importResolver.getValue(child);
-			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
-			if (resolver != null)
-				importedNamespaceResolvers.add(resolver);
+		XImportSection importSection = importsConfiguration.getImportSection((XtextResource) context.eResource());
+		if(importSection != null) {
+			for (XImportDeclaration imp: importSection.getImportDeclarations()) {
+				if (!imp.isStatic()) {
+					ImportNormalizer resolver = createImportedNamespaceResolver(imp.getImportedTypeName(), ignoreCase);
+					if (resolver != null)
+						importedNamespaceResolvers.add(resolver);
+				}
+			}
 		}
 		return importedNamespaceResolvers;
 	}
+	
 
 	/**
 	 * Create a new {@link ImportNormalizer} for the given namespace.
