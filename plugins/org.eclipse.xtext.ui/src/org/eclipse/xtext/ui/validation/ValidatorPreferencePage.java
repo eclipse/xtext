@@ -16,7 +16,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
-import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
 
 import com.google.inject.Inject;
@@ -26,41 +25,25 @@ import com.google.inject.name.Named;
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.4
  */
-public abstract class AbstractValidatorPreferencePage extends PropertyAndPreferencePage {
+public class ValidatorPreferencePage extends PropertyAndPreferencePage {
 
-	protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
-	protected OptionsConfigurationBlock validatorConfigurationBlock;
-	private String languageName;
-
-	public AbstractValidatorPreferencePage() {
-		super();
-	}
+	@Inject protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
+	
+	@Inject private AbstractValidatorConfigurationBlock validatorConfigurationBlock;
+	
+	@Inject @Named(Constants.LANGUAGE_NAME) private String languageName;
 
 	@Override
 	public void createControl(Composite parent) {
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
 		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
-		validatorConfigurationBlock = createConfigurationBlock(getProject(), preferenceStore, container);
+		validatorConfigurationBlock.setProject(getProject());
+		validatorConfigurationBlock.setPreferenceStore(preferenceStore);
+		validatorConfigurationBlock.setWorkbenchPreferenceContainer(container);
 		validatorConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
 		super.createControl(parent);
 	}
-
-	/**
-	 * May not return <code>null</code>
-	 */
-	abstract protected OptionsConfigurationBlock createConfigurationBlock(IProject iProject,
-			IPreferenceStore preferenceStore, IWorkbenchPreferenceContainer container);
-
-	@Inject
-	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String languageName) {
-		this.languageName = languageName;
-	}
-
-	@Inject
-	public void setPreferenceStoreAccessImpl(PreferenceStoreAccessImpl preferenceStoreAccessImpl) {
-		this.preferenceStoreAccessImpl = preferenceStoreAccessImpl;
-	}
-
+	
 	@Override
 	protected Control createPreferenceContent(Composite composite, IPreferencePageContainer preferencePageContainer) {
 		return validatorConfigurationBlock.createContents(composite);

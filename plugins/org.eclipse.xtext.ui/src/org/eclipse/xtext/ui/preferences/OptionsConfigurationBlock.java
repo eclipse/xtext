@@ -172,7 +172,7 @@ public abstract class OptionsConfigurationBlock {
 	private SelectionListener selectionListener;
 	private ModifyListener textModifyListener;
 	protected IStatusChangeListener statusChangeListener;
-	protected final IProject project;
+	protected IProject project;
 	protected String[] keys;
 	private Shell shell;
 	private Map<String, String> disabledProjectSettings;
@@ -195,9 +195,25 @@ public abstract class OptionsConfigurationBlock {
 			IWorkbenchPreferenceContainer container) {
 		this.project = project;
 		this.keys = new String[] {};
+		this.setPreferenceStore(preferenceStore);
+		this.workbenchPreferenceContainer = container;
+	}
+	
+	public OptionsConfigurationBlock() {
+		this.keys = new String[] {};
+	}
+	
+	public void setWorkbenchPreferenceContainer(IWorkbenchPreferenceContainer workbenchPreferenceContainer) {
+		this.workbenchPreferenceContainer = workbenchPreferenceContainer;
+	}
+	
+	public void setProject(IProject project) {
+		this.project = project;
+	}
+	
+	public void setPreferenceStore(IPreferenceStore preferenceStore) {
 		this.preferenceStore = preferenceStore;
 		this.rebuildCount = getRebuildCount();
-		this.workbenchPreferenceContainer = container;
 	}
 
 	private void updateDisabledProjSettings(IProject project, IPreferenceStore preferenceStore, String[] allKeys) {

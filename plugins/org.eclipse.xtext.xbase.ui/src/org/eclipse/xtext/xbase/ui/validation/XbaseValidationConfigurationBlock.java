@@ -12,11 +12,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.core.JavaProject;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
@@ -29,11 +27,6 @@ import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
-
-	protected XbaseValidationConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			IWorkbenchPreferenceContainer container) {
-		super(project, preferenceStore, container);
-	}
 
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
