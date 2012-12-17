@@ -26,8 +26,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -57,8 +55,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -83,12 +79,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -1104,110 +1095,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkImports(XtendFile file) {
 		if(file.getImportSection() == null)
 			return;
-		final Map<JvmType, XImportDeclaration> imports = newHashMap();
-		final Map<JvmType, XImportDeclaration> staticImports = newHashMap();
-		final Map<String, JvmType> importedNames = newHashMap();
-		
 		for (XImportDeclaration imp : file.getImportSection().getImportDeclarations()) {
-			if (imp instanceof XtendImport && ((XtendImport)imp).getImportedNamespace() != null) {
+			if (imp instanceof XtendImport && ((XtendImport)imp).getImportedNamespace() != null) 
 				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
-			} else {
-				JvmType importedType = imp.getImportedType();
-				if (importedType != null && !importedType.eIsProxy()) {
-					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
-					if (map.containsKey(importedType)) {
-						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
-								IssueCodes.IMPORT_DUPLICATE);
-					} else {
-						map.put(importedType, imp);
-						if (!imp.isStatic()) {
-							JvmType currentType = importedType;
-							String currentSuffix = currentType.getSimpleName();
-							JvmType collidingImport = importedNames.put(currentSuffix, importedType);
-							if(collidingImport != null)
-								error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-										+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
-							while (currentType.eContainer() instanceof JvmType) {
-								currentType = (JvmType) currentType.eContainer();
-								currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
-								JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
-								if(collidingImport2 != null)
-									error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-											+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		for (final XtendTypeDeclaration xtendType : file.getXtendTypes()) {
-			String clazzName = xtendType.getName();
-			if(importedNames.containsKey(clazzName)){
-				JvmType importedType = importedNames.get(clazzName);
-				if(importedType != null){
-					XImportDeclaration xtendImport = imports.get(importedType);
-					if(xtendImport != null)
-						error("The import '" + importedType.getIdentifier() + "' conflicts with a type defined in the same file", xtendImport, null, IssueCodes.IMPORT_CONFLICT );
-				}
-			}
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendType);
-			if (node != null) {
-				for (INode n : node.getAsTreeIterable()) {
-					if (n.getGrammarElement() instanceof CrossReference) {
-						EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
-						if (classifier instanceof EClass
-								&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
-										.isSuperTypeOf((EClass) classifier))) {
-							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
-							StringBuilder builder = new StringBuilder();
-							for(ILeafNode leafNode : n.getLeafNodes()){
-								if(!leafNode.isHidden()){
-									builder.append(leafNode.getText());
-								}
-							}
-							String simpleName = builder.toString().trim();
-							// handle StaticQualifier Workaround (see Xbase grammar)
-							if (simpleName.endsWith("::"))
-								simpleName = simpleName.substring(0, simpleName.length() - 2);
-							if (importedNames.containsKey(simpleName)) {
-								JvmType type = importedNames.remove(simpleName);
-								imports.remove(type);
-							} else {
-								while (simpleName.contains("$")) {
-									simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-									if (importedNames.containsKey(simpleName)) {
-										imports.remove(importedNames.remove(simpleName));
-										break;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(file);
-		if(rootNode != null) {
-			for (INode node : rootNode.getAsTreeIterable()) {
-				if (node.getGrammarElement() instanceof TerminalRule) {
-					TerminalRule tRule = (TerminalRule) node.getGrammarElement();
-					if (tRule.getName().equals("ML_COMMENT")) {
-						for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)){
-							String simpleName = region.getText().trim();
-							if (importedNames.containsKey(simpleName)) {
-								JvmType type = importedNames.remove(simpleName);
-								imports.remove(type);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		for (XImportDeclaration imp : imports.values()) {
-			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
-					IssueCodes.IMPORT_UNUSED);
 		}
 	}
 	

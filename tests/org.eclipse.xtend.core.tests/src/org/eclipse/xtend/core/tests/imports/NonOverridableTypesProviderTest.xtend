@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.imports
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.imports.NonOverridableTypesProvider
+import org.eclipse.xtext.xbase.imports.NonOverridableTypesProvider
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFunction

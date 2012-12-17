@@ -543,10 +543,6 @@
             description="Inserts an closing french quote"
             id="org.eclipse.xtend.ide.insertRightGuillemet"
             name="Insert right guillemet"/>
-   	  <command
-            description="Organize Imports"
-            id="org.eclipse.xtext.xbase.ui.organizeImports"
-            name="Organize Imports"/>
       <command
             name="%JavaApplicationShortcut.description.debug"
             description="%JavaApplicationShortcut.description.debug"
@@ -618,12 +614,6 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M4+&gt;"
             commandId="org.eclipse.xtend.ide.insertRightGuillemet">
-      </key>
-      <key
-            contextId="org.eclipse.xtend.ide.XtendEditorScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+M2+O"
-            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
       </key>
 <!--
       <key
@@ -774,7 +764,7 @@
 			</activeWhen>
       </handler>
       <handler
-            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.OrganizeImportsHandler"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
             commandId="org.eclipse.xtext.xbase.ui.organizeImports">
            	<activeWhen>
 				<reference

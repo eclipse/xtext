@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.imports;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.imports.NonOverridableTypesProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -15,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.imports.NonOverridableTypesProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
