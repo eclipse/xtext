@@ -64,6 +64,8 @@ public class DomainmodelJavaValidator extends XbaseJavaValidator {
     
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(DomainmodelPackage.eINSTANCE, XbasePackage.eINSTANCE);
+		List<EPackage> ePackages = super.getEPackages();
+		ePackages.add(DomainmodelPackage.eINSTANCE);
+		return ePackages;
 	}
 }

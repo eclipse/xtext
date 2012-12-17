@@ -29,12 +29,22 @@
         <handler
             class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.example.domainmodel.Domainmodel.validate">
-         <activeWhen>
-            <reference
+           <activeWhen>
+              <reference
                     definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
-            </reference>
-         </activeWhen>
+              </reference>
+           </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+           	<activeWhen>
+				<reference
+                    definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
+				</reference>
+			</activeWhen>
       </handler>
+        
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">

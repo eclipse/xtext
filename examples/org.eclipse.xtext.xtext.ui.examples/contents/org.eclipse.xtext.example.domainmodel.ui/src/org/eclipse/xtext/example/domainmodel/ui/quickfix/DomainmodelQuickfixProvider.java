@@ -8,13 +8,13 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
-public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
+public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
 
 	@Fix(IssueCodes.INVALID_TYPE_NAME)
 	public void fixTypeName(final Issue issue, IssueResolutionAcceptor acceptor) {
