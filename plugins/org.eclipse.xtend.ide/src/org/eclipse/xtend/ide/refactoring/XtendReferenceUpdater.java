@@ -17,9 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtend.core.imports.ImportSectionSerializer;
-import org.eclipse.xtend.core.imports.SortedImportSection;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
@@ -27,6 +24,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
@@ -35,7 +33,11 @@ import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.imports.ImportSectionSerializer;
+import org.eclipse.xtext.xbase.imports.ImportCollection;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Predicate;
@@ -58,6 +60,8 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 	@Inject
 	private ImportSectionSerializer importSectionSerializer;
 
+	@Inject
+	private IImportsConfiguration importsConfiguration;	
 	@Override
 	protected void processReferringResource(Resource referringResource,
 			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
@@ -68,18 +72,18 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 						return !isImportTypeReference(input);
 					}
 				});
-		XtendFile xtendFile = (XtendFile) referringResource.getContents().get(0);
-		SortedImportSection importSection = new SortedImportSection(xtendFile.getImportSection());
+		XImportSection originalImportCollection = importsConfiguration.getImportSection((XtextResource) referringResource);
+		ImportCollection importSection = new ImportCollection(originalImportCollection);
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor, importSection);
 		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
 				importAwareUpdateAcceptor);
-		ReplaceRegion importSectionReplace = importSectionSerializer.serialize(xtendFile, importSection);
+		ReplaceRegion importSectionReplace = importSectionSerializer.serialize((XtextResource) referringResource, importSection);
 		ReplaceEdit replaceEdit = new ReplaceEdit(importSectionReplace.getOffset(), importSectionReplace.getLength(), importSectionReplace.getText());
 		updateAcceptor.accept(referringResource.getURI(), replaceEdit);
 	}
 
-	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor, SortedImportSection importSection) {
-		return new ImportAwareUpdateAcceptor(updateAcceptor, importSection);
+	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor, ImportCollection importCollection) {
+		return new ImportAwareUpdateAcceptor(updateAcceptor, importCollection);
 	}
 
 	protected boolean isImportTypeReference(IReferenceDescription input) {
@@ -120,11 +124,11 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 
 		private IRefactoringUpdateAcceptor delegate;
 
-		private SortedImportSection importSection;
+		private ImportCollection importCollection;
 
-		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate, SortedImportSection importSection) {
+		public ImportAwareUpdateAcceptor(IRefactoringUpdateAcceptor delegate, ImportCollection importCollection) {
 			this.delegate = delegate;
-			this.importSection = importSection;
+			this.importCollection = importCollection;
 		}
 
 		public void accept(URI resourceURI, TextEdit textEdit) {
@@ -148,7 +152,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		}
 
 		public void acceptImport(JvmDeclaredType type) {
-			importSection.getImportedTypes().add(type);
+			importCollection.getImportedTypes().add(type);
 		}
 	}
 

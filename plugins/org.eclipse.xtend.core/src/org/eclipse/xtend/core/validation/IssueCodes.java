@@ -55,10 +55,6 @@ public final class IssueCodes {
 	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
 
 	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
-	public static final String IMPORT_DUPLICATE = ISSUE_CODE_PREFIX + "import_duplicate";
-	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
-	public static final String IMPORT_COLLISION = ISSUE_CODE_PREFIX + "import_collision";
-	public static final String IMPORT_CONFLICT = ISSUE_CODE_PREFIX + "import_conflict";
 	public static final String FIELD_LOCALLY_NEVER_READ = "field_locally_never_read";
 	public static final String FIELD_NOT_INITIALIZED = "field_not_initialized";
 	public static final String FUNCTION_LOCALLY_NEVER_USED = "function_locally_never_used";

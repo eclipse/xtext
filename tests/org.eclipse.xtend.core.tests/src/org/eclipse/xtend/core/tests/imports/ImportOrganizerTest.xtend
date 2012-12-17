@@ -4,7 +4,7 @@ import javax.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
-import org.eclipse.xtend.core.imports.ImportOrganizer
+import org.eclipse.xtext.xbase.imports.ImportOrganizer
 
 class ImportOrganizerTest extends AbstractXtendTestCase {
 

@@ -13,12 +13,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
@@ -38,15 +36,6 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 	
 	@Inject
 	private IQualifiedNameConverter nameConverter;
-	
-	@Override
-	protected IScope internalGetScope(IScope parent, IScope globalScope, EObject context, EReference reference) {
-		if (context instanceof XtendImport) {
-			return globalScope;
-		} else {
-			return super.internalGetScope(parent, globalScope, context, reference);
-		}
-	}
 	
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
@@ -75,7 +64,8 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 	
 	@Override
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
-		return newArrayList(new ImportNormalizer(JAVA_LANG, true, false),
+		return newArrayList(
+				new ImportNormalizer(JAVA_LANG, true, false),
 				new ImportNormalizer(XTEND_LIB, true, false));
 	}
 

@@ -53,7 +53,6 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
-import org.eclipse.xtend.ide.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -85,7 +84,6 @@ import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
@@ -110,6 +108,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.collect.Lists;
@@ -122,7 +121,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Quickfixes for misspelled types and constructors
  * @author Holger Schill - Quickfixes for missing methods / fields / localVars
  */
-public class XtendQuickfixProvider extends DefaultQuickfixProvider {
+public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	private static final Logger logger = Logger.getLogger(XtendQuickfixProvider.class);
 	@Inject
@@ -131,8 +130,6 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	private MemberFromSuperImplementor superMemberImplementor;
 	@Inject
 	private XtendGrammarAccess grammarAccess;
-	@Inject
-	private OrganizeImportsHandler organizeImportsHandler;
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 	@Inject
@@ -778,30 +775,10 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				});
 	}
-
-	@Fix(IssueCodes.IMPORT_DUPLICATE)
-	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
-		organizeImports(issue, acceptor);
-	}
-
+	
 	@Fix(IssueCodes.IMPORT_WILDCARD_DEPRECATED)
 	public void fixDuplicateWildcardUse(final Issue issue, IssueResolutionAcceptor acceptor) {
 		organizeImports(issue, acceptor);
-	}
-
-	@Fix(IssueCodes.IMPORT_UNUSED)
-	public void fixUnusedImport(final Issue issue, IssueResolutionAcceptor acceptor) {
-		organizeImports(issue, acceptor);
-	}
-
-	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Organize Imports.",
-				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
-				"fix_indent.gif", new IModification() {
-					public void apply(IModificationContext context) throws Exception {
-						organizeImportsHandler.doOrganizeImports(context.getXtextDocument());
-					}
-				});
 	}
 
 	@Fix(IssueCodes.MISSING_OVERRIDE)
