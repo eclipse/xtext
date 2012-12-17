@@ -16,6 +16,8 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
+import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
 
 import com.google.inject.Binder;
@@ -55,5 +57,9 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 					.to(DerivedMemberAwareEditorOpener.class);
 			binder.bind(IDerivedMemberAwareEditorOpener.class).to(DerivedMemberAwareEditorOpener.class);
 		}
+	}
+	
+	public Class<? extends IUnresolvedTypeResolver> bindIUnresolvedTypeResolver() {
+		return InteractiveUnresolvedTypeResolver.class;
 	}
 }
