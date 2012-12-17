@@ -45,35 +45,38 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		if (type instanceof JvmTypeParameter) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 			if (!visiting.tryVisit(typeParameter)) {
-				LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
-				getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
-				return mappedReference;
-			}
-			try {
-				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
-				if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
-					LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
-					if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
-						WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
-						wildcard.addUpperBound(result);
-						result = wildcard;
-					} else if (boundTypeArgument.getVariance() == VarianceInfo.IN) {
-						WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
-						JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, type);
-						wildcard.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
-						wildcard.setLowerBound(result);
-						result = wildcard;
-					}
-					return result;
-				} else {
-					LightweightTypeReference mappedReference = getUnmappedSubstitute(reference, (JvmTypeParameter) type, visiting);
-					if (mappedReference != null) {
-						getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
-						return mappedReference;
-					}
+				if (!getOwner().getDeclaredTypeParameters().contains(typeParameter)) {
+					LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+					getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+					return mappedReference;
 				}
-			} finally {
-				visiting.didVisit(typeParameter);
+			} else {
+				try {
+					LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
+					if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+						LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
+						if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
+							WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
+							wildcard.addUpperBound(result);
+							result = wildcard;
+						} else if (boundTypeArgument.getVariance() == VarianceInfo.IN) {
+							WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
+							JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, type);
+							wildcard.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+							wildcard.setLowerBound(result);
+							result = wildcard;
+						}
+						return result;
+					} else {
+						LightweightTypeReference mappedReference = getUnmappedSubstitute(reference, (JvmTypeParameter) type, visiting);
+						if (mappedReference != null) {
+							getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+							return mappedReference;
+						}
+					}
+				} finally {
+					visiting.didVisit(typeParameter);
+				}
 			}
 		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);

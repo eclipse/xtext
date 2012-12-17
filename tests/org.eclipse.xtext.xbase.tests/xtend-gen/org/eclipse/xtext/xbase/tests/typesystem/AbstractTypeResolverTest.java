@@ -1062,6 +1062,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testClosure_33() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[ String it | val bytes = new String bytes ]", "(String)=>String");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+  }
+  
+  @Test
   public void testNewTreeSet_01() throws Exception {
     this.resolvesTo("new java.util.TreeSet(newArrayList(\'\'))", "TreeSet<String>");
   }

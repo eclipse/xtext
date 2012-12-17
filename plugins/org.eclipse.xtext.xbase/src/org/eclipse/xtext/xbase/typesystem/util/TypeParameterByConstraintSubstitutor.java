@@ -27,9 +27,17 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSubstitutor {
 
+	private final boolean ignoreDeclaredTypeParameters;
+
 	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			ITypeReferenceOwner owner) {
+		this(typeParameterMapping, owner, false);
+	}
+	
+	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			ITypeReferenceOwner owner, boolean ignoreDeclaredTypeParameters) {
 		super(typeParameterMapping, owner);
+		this.ignoreDeclaredTypeParameters = ignoreDeclaredTypeParameters;
 	}
 	
 	@Override
@@ -60,9 +68,11 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 	@Override
 	@Nullable
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
-		List<JvmTypeParameter> typeParameters = getOwner().getDeclaredTypeParameters();
-		if (typeParameters.contains(type)) {
-			return reference;
+		if (!ignoreDeclaredTypeParameters) {
+			List<JvmTypeParameter> typeParameters = getOwner().getDeclaredTypeParameters();
+			if (typeParameters.contains(type)) {
+				return reference;
+			}
 		}
 		ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getOwner());
 		LightweightTraversalData data = new LightweightTraversalData();

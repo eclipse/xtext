@@ -39,6 +39,8 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 		@Override
 		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
 				Set<JvmTypeParameter> visited) {
+			if (getOwner().getDeclaredTypeParameters().contains(declaredTypeParameter))
+				return true;
 			if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
 				return false;
 			}

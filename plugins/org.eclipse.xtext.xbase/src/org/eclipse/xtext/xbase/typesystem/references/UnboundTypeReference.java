@@ -204,7 +204,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 
 	protected void resolveAgainstConstraints() {
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
-				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getOwner());
+				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getOwner(), true);
 		LightweightTypeReference substitute = unboundSubstitutor.substitute(new ParameterizedTypeReference(getOwner(), typeParameter));
 		getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(substitute, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT));
 		resolvedTo = substitute;
