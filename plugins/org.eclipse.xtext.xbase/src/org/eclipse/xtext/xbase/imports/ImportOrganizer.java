@@ -1,0 +1,102 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.imports;
+
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.util.Strings.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+public class ImportOrganizer {
+
+	@Inject
+	private IImportsConfiguration config;
+	
+	@Inject
+	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	
+	@Inject
+	private IJvmModelAssociations associations;
+	
+	@Inject
+	private Provider<TypeUsageCollector> typeUsageCollectorProvider;
+	
+	@Inject 
+	private ConflictResolver conflictResolver;
+	
+	@Inject
+	private ImportSectionSerializer importSectionSerializer;
+	
+	@Inject
+	private NonOverridableTypesProvider nonOverridableTypesProvider;
+	
+	@Inject(optional=true)
+	private IUnresolvedTypeResolver unresolvedTypeResolver;
+	
+	public List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource) {
+		Set<JvmDeclaredType> locallyDeclaredTypes = newHashSet(config.getLocallyDefinedTypes(resource).values());
+		TypeUsageCollector typeUsageCollector = typeUsageCollectorProvider.get();
+		TypeUsages typeUsages = typeUsageCollector.collectTypeUsages(resource);
+		if(unresolvedTypeResolver != null) 
+			unresolvedTypeResolver.resolve(typeUsages, resource);
+		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
+		Set<String> implicitlyImportedPackages = config.getImplicitlyImportedPackages(resource);
+		ImportCollection newImportCollection = new ImportCollection();
+		List<ReplaceRegion> replaceRegions = newArrayList();
+		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
+			String text = entry.getKey();
+			JvmDeclaredType type = entry.getValue();
+			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
+			if(needsImport(type, text, locallyDeclaredTypes, implicitlyImportedPackages, nonOverridableTypesProvider, usages)) {
+				newImportCollection.getImportedTypes().add(type);
+			}
+			for(TypeUsage usage: usages) {
+				if(!equal(usage.getText(), text)) {
+					replaceRegions.add(new ReplaceRegion(usage.getTextRegion(), text));
+				}
+			}
+		}
+		newImportCollection.getStaticImports().addAll(typeUsages.getStaticImports());
+		newImportCollection.getExtensionImports().addAll(typeUsages.getExtensionImports());
+		replaceRegions.add(importSectionSerializer.serialize(resource, newImportCollection));
+		return replaceRegions; 
+	}
+
+	protected boolean needsImport(JvmDeclaredType type, String name, 
+			Set<JvmDeclaredType> locallyDefinedTypes, Set<String> implicitlyImportedPackages, 
+			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
+		return !((type.getIdentifier().equals(name))
+			|| implicitlyImportedPackages.contains(type.getPackageName())
+			|| locallyDefinedTypes.contains(type)
+			|| isUsedInNonOverridableContextOnly(usages, nonOverridableTypesProvider, name));
+	}
+	
+	protected boolean isUsedInNonOverridableContextOnly(Iterable<TypeUsage> usages, 
+			NonOverridableTypesProvider nonOverridableTypesProvider, String name) {
+		for(TypeUsage usage: usages) {
+			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null) 
+				return false;
+		}
+		return true;
+	}
+}
