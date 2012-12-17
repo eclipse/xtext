@@ -1,8 +1,9 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
@@ -11,17 +12,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
@@ -51,7 +56,12 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
@@ -81,7 +91,10 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
@@ -93,6 +106,9 @@ import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -151,6 +167,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
+	@Inject
+	private IImportsConfiguration importsConfiguration;
+	
+	@Inject
+	private IJvmModelAssociations associations;
+	
+	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -1149,14 +1172,109 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
-
+	@Check
+	public void checkImports(XImportSection importSection) {
+		final Map<JvmType, XImportDeclaration> imports = newHashMap();
+		final Map<JvmType, XImportDeclaration> staticImports = newHashMap();
+		final Map<String, JvmType> importedNames = newHashMap();
+		
+		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
+			JvmType importedType = imp.getImportedType();
+			if (importedType != null && !importedType.eIsProxy()) {
+				Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
+				if (map.containsKey(importedType)) {
+					warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
+							IssueCodes.IMPORT_DUPLICATE);
+				} else {
+					map.put(importedType, imp);
+					if (!imp.isStatic()) {
+						JvmType currentType = importedType;
+						String currentSuffix = currentType.getSimpleName();
+						JvmType collidingImport = importedNames.put(currentSuffix, importedType);
+						if(collidingImport != null)
+							error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+									+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+						while (currentType.eContainer() instanceof JvmType) {
+							currentType = (JvmType) currentType.eContainer();
+							currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
+							JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
+							if(collidingImport2 != null)
+								error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+										+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+						}
+					}
+				}
+			}
+		}
+		Set<EObject> primarySourceElements = newHashSet();
+		for (Map.Entry<String, JvmDeclaredType> declaredType : 
+				importsConfiguration.getLocallyDefinedTypes((XtextResource) importSection.eResource()).entrySet()) {
+			if(importedNames.containsKey(declaredType.getKey())){
+				JvmType importedType = importedNames.get(declaredType.getKey());
+				if(importedType != declaredType.getValue()){
+					XImportDeclaration xtendImport = imports.get(importedType);
+					if(xtendImport != null)
+						error("The import '" 
+								+ importedType.getIdentifier() 
+								+ "' conflicts with a type defined in the same file", 
+								xtendImport, null, IssueCodes.IMPORT_CONFLICT );
+				}
+			}
+			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType.getValue());
+			if(primarySourceElement != null)
+				primarySourceElements.add(primarySourceElement);
+		}
+		for(EObject primarySourceElement: primarySourceElements) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(primarySourceElement);
+			if (node != null) {
+				for (INode n : node.getAsTreeIterable()) {
+					if (n.getGrammarElement() instanceof CrossReference) {
+						EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
+						if (classifier instanceof EClass
+								&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
+										|| TypesPackage.Literals.JVM_CONSTRUCTOR
+										.isSuperTypeOf((EClass) classifier))) {
+							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
+							StringBuilder builder = new StringBuilder();
+							for(ILeafNode leafNode : n.getLeafNodes()){
+								if(!leafNode.isHidden()){
+									builder.append(leafNode.getText());
+								}
+							}
+							String simpleName = builder.toString().trim();
+							// handle StaticQualifier Workaround (see Xbase grammar)
+							if (simpleName.endsWith("::"))
+								simpleName = simpleName.substring(0, simpleName.length() - 2);
+							if (importedNames.containsKey(simpleName)) {
+								JvmType type = importedNames.remove(simpleName);
+								imports.remove(type);
+							} else {
+								while (simpleName.contains("$")) {
+									simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+									if (importedNames.containsKey(simpleName)) {
+										imports.remove(importedNames.remove(simpleName));
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (XImportDeclaration imp : imports.values()) {
+			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
+					IssueCodes.IMPORT_UNUSED);
+		}
+	}
+	
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
 		return !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
 	}
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return singletonList((EPackage) eINSTANCE);
+		return newArrayList(eINSTANCE, XtypePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
 	}
 
 	protected String canonicalName(JvmTypeReference typeRef) {
