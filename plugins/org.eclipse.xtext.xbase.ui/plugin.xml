@@ -65,9 +65,19 @@
               name="%ExtractLocalVariableRefactoring_name"
               description="%ExtractLocalVariableRefactoring_description">
       </command>
+      <command
+            id="org.eclipse.xtext.xbase.ui.organizeImports"
+            name="Organize Imports">
+            description="Organize Imports"
+      </command>
    </extension>
     
    <extension point="org.eclipse.ui.bindings">
+        <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+O"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports"/>
         <key 
             sequence="M2+M3+L"
             commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
