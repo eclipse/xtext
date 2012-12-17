@@ -103,6 +103,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -186,7 +187,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
+		return newArrayList(XtendPackage.eINSTANCE, XtypePackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
 	}
 
 	@Override
