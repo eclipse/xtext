@@ -79,7 +79,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 	}
 
 	public void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
-		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring) {
+		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, saveHelper, renameElementContext) {
 			@Override
 			protected void addUserInputPages() {
 				if (!previewOnly) {
