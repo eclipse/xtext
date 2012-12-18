@@ -717,6 +717,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testBlock_02() throws Exception {
+		assertEvaluatesTo("Length: 3", 
+				"{\n" + 
+				"  val map = newHashMap\n" + 
+				"  map.put(1, 'abc')\n" + 
+				"  val x = map.get(1)\n" + 
+				"  println('Length: ' + x.length)" + 
+				"}");
+	}
+	
 	@Test public void testStringLiteral_01() throws Exception {
 		assertEvaluatesTo("", "''");
 	}
