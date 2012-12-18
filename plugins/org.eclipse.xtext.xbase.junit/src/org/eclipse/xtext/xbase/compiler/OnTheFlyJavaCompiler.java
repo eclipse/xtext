@@ -312,7 +312,7 @@ public class OnTheFlyJavaCompiler {
 			boolean compile = compile(sb.toString());
 			if (!compile)
 				throw new IllegalArgumentException("Couldn't compile : "
-						+ errorStream.toString() + "\n" + sources.keySet());
+						+ errorStream.toString() + "\n" + sources);
 			final URL url = tempDir.toURI().toURL();
 			final URLClassLoader loader = new URLClassLoader(new URL[] { url },
 					classPathAssembler.getClassLoader());
@@ -322,6 +322,8 @@ public class OnTheFlyJavaCompiler {
 				result.put(name, clazz);
 			}
 			return result;
+		} catch (IllegalArgumentException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
