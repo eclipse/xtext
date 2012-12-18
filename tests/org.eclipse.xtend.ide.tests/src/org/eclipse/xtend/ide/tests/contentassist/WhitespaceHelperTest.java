@@ -10,7 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
-import org.eclipse.xtend.ide.contentassist.WhitespaceHelper;
+import org.eclipse.xtext.xbase.ui.contentassist.WhitespaceHelper;
 import org.junit.Test;
 
 import com.google.inject.Inject;

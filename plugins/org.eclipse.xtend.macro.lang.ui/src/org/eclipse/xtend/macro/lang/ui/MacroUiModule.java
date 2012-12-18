@@ -14,7 +14,6 @@ import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
-import org.eclipse.xtend.ide.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
@@ -54,6 +53,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
+import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;

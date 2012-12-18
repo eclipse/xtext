@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.junit.Test;
 
 import com.google.inject.Inject;

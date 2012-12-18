@@ -37,7 +37,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -65,13 +64,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		super.completeKeyword(keyword, contentAssistContext, acceptor);
 	}
 	
-	@Override
-	public void completeXImportDeclaration_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true,
-				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
-	}
-
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {

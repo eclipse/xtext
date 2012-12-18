@@ -52,7 +52,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
-import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -88,6 +87,7 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
@@ -108,8 +108,10 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -418,7 +420,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getDefaultValueLiteral(JvmTypeReference type){
+	protected String getDefaultValueLiteral(JvmTypeReference type) {
 		if (primitives.isPrimitive(type)) {
 			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
 			if (primitiveKind == Primitive.Boolean) 
@@ -507,6 +509,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			return "";
 		}
 	}
+	
 	/**
 	 * @since 2.3
 	 */
@@ -524,245 +527,24 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			appendable.append(">").append(" ");
 		}
 	}
-
-	/**
-	 * Filter quickfixes for types and constructors.
-	 */
+	
 	@Override
-	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-				issue);
-		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
-		if (xtextDocument != null) {
-			xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
-				@Override
-				public void process(XtextResource state) throws Exception {
-					EObject target = state.getEObject(issue.getUriToProblem().fragment());
-					EReference reference = getUnresolvedEReference(issue, target);
-					if (reference == null)
-						return;
-
-					String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
-					IScope scope = getScopeProvider().getScope(target, reference);
-					boolean useJavaSearch = false;
-					if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType()))
-						useJavaSearch = true;
-					if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(reference.getEReferenceType()))
-						useJavaSearch = true;
-					if (useJavaSearch) {
-						XtendClass xtendClass = EcoreUtil2.getContainerOfType(target, XtendClass.class);
-						JvmDeclaredType jvmType = xtendClass != null ? associations.getInferredType(xtendClass) : null;
-						IJavaSearchScope javaSearchScope = getJavaSearchScope(target);
-						createImportProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
-						scope = getImportedTypesScope(target, issueString, scope, javaSearchScope);
+	protected void parseImportSection(XImportSection importSection, IAcceptor<String> visiblePackages,
+			IAcceptor<String> importedTypes) {
+		for (XImportDeclaration importDeclaration : importSection.getImportDeclarations()) {
+			if (!importDeclaration.isStatic()) {
+				if (importDeclaration instanceof XtendImport && ((XtendImport) importDeclaration).getImportedNamespace() != null) {
+					String importedAsString = ((XtendImport) importDeclaration).getImportedNamespace();
+					if (importDeclaration.isWildcard()) {
+						importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
+						visiblePackages.accept(importedAsString);
+					} else {
+						importedTypes.accept(importedAsString);
 					}
-					List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
-					Set<String> qualifiedNames = Sets.newHashSet();
-					int addedDescriptions = 0;
-					int checkedDescriptions = 0;
-					for (IEObjectDescription referableElement : queryScope(scope)) {
-						String referableElementQualifiedName = getQualifiedNameConverter().toString(
-								referableElement.getQualifiedName());
-						if (useJavaSearch
-								|| getSimilarityMatcher().isSimilar(issueString,
-										getQualifiedNameConverter().toString(referableElement.getName()))) {
-							addedDescriptions++;
-							createResolution(issueString, referableElement);
-							qualifiedNames.add(referableElementQualifiedName);
-						} else {
-							if (qualifiedNames.add(referableElementQualifiedName))
-								discardedDescriptions.add(referableElement);
-						}
-						checkedDescriptions++;
-						if (checkedDescriptions > 100)
-							break;
-					}
-					if (discardedDescriptions.size() + addedDescriptions <= 5) {
-						for (IEObjectDescription referableElement : discardedDescriptions) {
-							createResolution(issueString, referableElement);
-						}
-					}
-				}
-
-				public void createResolution(String issueString, IEObjectDescription solution) {
-					String replacement = getQualifiedNameConverter().toString(solution.getName());
-					String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
-					issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel,
-							fixCrossReferenceImage(issueString, replacement), new ReplaceModification(issue,
-									replacement));
-				}
-
-			});
-		}
-	}
-
-	protected IJavaSearchScope getJavaSearchScope(EObject model) {
-		if (model == null || model.eResource() == null || model.eResource().getResourceSet() == null) {
-			return null;
-		} else {
-			IJavaProject javaProject = projectProvider.getJavaProject(model.eResource().getResourceSet());
-			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
-			return searchScope;
-		}
-	}
-
-	protected IScope getImportedTypesScope(EObject model, final String misspelled, final IScope actualScope,
-			IJavaSearchScope scope) {
-		if (scope == null) {
-			return IScope.NULLSCOPE;
-		}
-		try {
-			XtendFile xtendFile = EcoreUtil2.getContainerOfType(model, XtendFile.class);
-			Set<String> visiblePackages = Sets.newHashSet("java.lang");
-			visiblePackages.add("");
-			if (xtendFile.getPackage() != null) {
-				visiblePackages.add(xtendFile.getPackage());
-			}
-			Set<String> importedTypes = Sets.newHashSet();
-			final Set<String> seen = Sets.newHashSet();
-			if(xtendFile.getImportSection() != null) {
-				for (XImportDeclaration importDeclaration : xtendFile.getImportSection().getImportDeclarations()) {
-					if (!(importDeclaration.isStatic() || importDeclaration.isExtension())) {
-						if (importDeclaration instanceof XtendImport && ((XtendImport) importDeclaration).getImportedNamespace() != null) {
-							String importedAsString = ((XtendImport) importDeclaration).getImportedNamespace();
-							if (importDeclaration.isWildcard()) {
-								importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
-								if (!importDeclaration.isStatic()) {
-									visiblePackages.add(importedAsString);
-								} else {
-									importedTypes.add(importedAsString);
-								}
-							} else {
-								importedTypes.add(importedAsString);
-							}
-						}
-					}
+				} else {
+					importedTypes.accept(importDeclaration.getImportedTypeName());
 				}
 			}
-			SearchEngine searchEngine = new SearchEngine();
-			final List<IEObjectDescription> validProposals = Lists.newArrayList();
-			for (String importedType : importedTypes) {
-				if (validProposals.size() <= 5 && seen.add(importedType)) {
-					int dot = importedType.lastIndexOf('.');
-					if (dot != -1) {
-						importedType = importedType.substring(dot + 1);
-					}
-					if (isSimilarTypeName(misspelled, importedType)) {
-						QualifiedName qualifiedName = getQualifiedNameConverter().toQualifiedName(importedType);
-						for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
-							validProposals.add(new AliasedEObjectDescription(qualifiedName, element));
-							break;
-						}
-					}
-				}
-			}
-			for (String visiblePackage : visiblePackages) {
-				if (validProposals.size() <= 5) {
-					searchEngine.searchAllTypeNames(visiblePackage.toCharArray(), SearchPattern.R_EXACT_MATCH, null,
-							SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, scope, new TypeNameRequestor() {
-								@Override
-								public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-										char[][] enclosingTypeNames, String path) {
-									StringBuilder typeNameBuilder = new StringBuilder(simpleTypeName.length);
-									for (char[] enclosingType : enclosingTypeNames) {
-										typeNameBuilder.append(enclosingType);
-										typeNameBuilder.append('$');
-									}
-									typeNameBuilder.append(simpleTypeName);
-									String typeName = typeNameBuilder.toString();
-									if (isSimilarTypeName(misspelled, typeName)) {
-										String fqNameAsString = getQualifiedTypeName(packageName, enclosingTypeNames,
-												simpleTypeName);
-										if (seen.add(fqNameAsString)) {
-											QualifiedName qualifiedName = getQualifiedNameConverter().toQualifiedName(
-													typeName);
-											for (IEObjectDescription element : actualScope.getElements(qualifiedName)) {
-												validProposals
-														.add(new AliasedEObjectDescription(qualifiedName, element));
-												break;
-											}
-										}
-									}
-								}
-
-							}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor() {
-								@Override
-								public boolean isCanceled() {
-									return validProposals.size() > 5;
-								}
-							});
-				}
-			}
-			return new SimpleScope(validProposals);
-		} catch (JavaModelException jme) {
-			return IScope.NULLSCOPE;
-		}
-	}
-
-	protected boolean isSimilarTypeName(String s0, String s1) {
-		double levenshteinDistance = StringUtils.getLevenshteinDistance(s0, s1);
-		return levenshteinDistance <= 3;
-	}
-
-	protected String getQualifiedTypeName(char[] packageName, char[][] enclosingTypeNames, char[] simpleTypeName) {
-		StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-		if (packageName.length != 0) {
-			fqName.append(packageName);
-			fqName.append('.');
-		}
-		for (char[] enclosingType : enclosingTypeNames) {
-			fqName.append(enclosingType);
-			fqName.append('$');
-		}
-		fqName.append(simpleTypeName);
-		String fqNameAsString = fqName.toString();
-		return fqNameAsString;
-	}
-
-	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, final String typeSimpleName, IJavaSearchScope searchScope,
-			final IssueResolutionAcceptor acceptor) throws JavaModelException {
-		if(contextType != null){
-			BasicSearchEngine searchEngine = new BasicSearchEngine();
-			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
-					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
-						
-						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
-								String path, AccessRestriction access) {
-							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
-									simpleTypeName);
-							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
-								JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
-								if(importType instanceof JvmDeclaredType
-										&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
-									StringBuilder label = new StringBuilder("Import '");
-									label.append(new String(simpleTypeName));
-									label.append("' (");
-									label.append(new String(packageName));
-									if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
-										boolean isFirst = true;
-										for(char[] enclosingTypeName: enclosingTypeNames) {
-											if(isFirst) 
-												label.append(".");
-											else 
-												label.append("$");
-											isFirst = false;
-											label.append(new String(enclosingTypeName));
-										}
-									}
-									label.append(")");
-									acceptor.accept(issue, label.toString(), label.toString(), "fix_indent.gif", new ISemanticModification() {
-										@SuppressWarnings("null")
-										public void apply(EObject element, IModificationContext context) throws Exception {
-											ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
-													element, 0, 0);
-											appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
-											appendable.insertNewImports();
-										}
-									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, typeSimpleName) + 100);
-								}
-							}
-						}
-					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
 		}
 	}
 

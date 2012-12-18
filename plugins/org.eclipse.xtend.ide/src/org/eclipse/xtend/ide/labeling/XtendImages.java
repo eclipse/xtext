@@ -20,7 +20,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-public class XtendImages extends XbaseImages{
+public class XtendImages extends XbaseImages {
 
 	@Inject
 	private IImageHelper imageHelper;
@@ -39,14 +39,6 @@ public class XtendImages extends XbaseImages{
 
 	public Image forPackage() {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_PACKDECL);
-	}
-
-	public Image forImportContainer() {
-		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPCONT);
-	}
-
-	public Image forImport() {
-		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPDECL);
 	}
 
 	public Image forDispatcherFunction(JvmVisibility visibility, boolean isStatic) {
