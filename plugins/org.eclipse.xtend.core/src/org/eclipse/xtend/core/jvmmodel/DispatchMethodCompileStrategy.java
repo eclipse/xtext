@@ -12,7 +12,6 @@ import static com.google.common.collect.Lists.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
@@ -71,7 +71,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			for (JvmOperation operation : sortedDispatchOperations) {
 				JvmFormalParameter parameter = operation.getParameters().get(i);
 				JvmTypeReference caseParameterType = parameter.getParameterType();
-				if (!EcoreUtil.equals(dispatchParameterType, caseParameterType)) {
+				if (!Strings.equal(dispatchParameterType.getIdentifier(), caseParameterType.getIdentifier())) {
 					allCasesSameType[i] = false;
 					break;
 				}
