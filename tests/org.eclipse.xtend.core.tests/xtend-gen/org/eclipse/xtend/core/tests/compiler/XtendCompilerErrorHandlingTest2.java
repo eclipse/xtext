@@ -12,11 +12,40 @@ import org.eclipse.xtend.core.tests.compiler.XtendCompilerErrorHandlingTest;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@Ignore(value = "TBD")
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class XtendCompilerErrorHandlingTest2 extends XtendCompilerErrorHandlingTest {
+  @Test
+  @Ignore(value = "TODO")
+  public void testUnresolvedReturnType() {
+    super.testUnresolvedReturnType();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testFieldInitializerTypeError() {
+    super.testFieldInitializerTypeError();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testFieldInitializerLinkError() {
+    super.testFieldInitializerLinkError();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testMethodBodyTypeError() {
+    super.testMethodBodyTypeError();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testMethodBodyLinkError() {
+    super.testMethodBodyLinkError();
+  }
 }

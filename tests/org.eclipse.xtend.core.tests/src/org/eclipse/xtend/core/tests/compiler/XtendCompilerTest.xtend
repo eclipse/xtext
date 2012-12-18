@@ -8,7 +8,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 
-class XtendCompilerTest extends AbstractXtendTestCase {
+abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	
@@ -1185,7 +1185,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	def testNoUncessaryCastInDispatchMethods() {
+	def testNoUnnecessaryCastInDispatchMethods() {
 		assertCompilesTo('''
 			package foo
 			class MyType {
@@ -1222,7 +1222,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	@Ignore
 	def testExtendsArrayList_01()  {
 		assertCompilesTo('''
 			package foo
@@ -1233,13 +1232,12 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			import java.util.ArrayList;
 			
 			@SuppressWarnings("all")
-			public class MyList<T> extends ArrayList<T> {
+			public class MyList<T extends Object> extends ArrayList<T> {
 			}
 		''')
 	}
 
 	@Test
-	@Ignore
 	def testExtendsArrayList_02() {
 		assertCompilesTo('''
 			package foo
@@ -1251,7 +1249,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			import java.util.ArrayList;
 			
 			@SuppressWarnings("all")
-			public class StringList<T> extends ArrayList<String> {
+			public class StringList extends ArrayList<String> {
 			}
 		''')
 	}
@@ -1908,58 +1906,156 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 
-		@Test
-	def testRichStringAutoConversionToString(){
+	@Test
+	def testRichStringAutoConversionToString_01(){
 		assertCompilesTo(
-		"class Foo { def String test()'''SomeString''' }
-		",'''
-		import org.eclipse.xtend2.lib.StringConcatenation;
-
-		@SuppressWarnings("all")
-		public class Foo {
-		  public String test() {
-		    StringConcatenation _builder = new StringConcatenation();
-		    _builder.append("SomeString");
-		    return _builder.toString();
-		  }
-		}
-		''')
+			"class Foo { def String test() '''SomeString''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public String test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    return _builder.toString();
+				  }
+				}
+			''')
+	}
+	
+	@Test
+	def testRichStringAutoConversionToString_02(){
+		assertCompilesTo(
+			"class Foo { def String test() { println('''SomeString''') } }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public String test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    String _println = InputOutput.<String>println(_builder.toString());
+				    return _println;
+				  }
+				}
+			''')
+	}
+	
+	@Ignore("TODO implement deferred expectations for untyped local variables")
+	@Test
+	def testRichStringAutoConversionToString_03(){
+		assertCompilesTo(
+			"class Foo { def String test() { val x = println('''SomeString''') x } }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	
+	@Ignore("TODO implement deferred expectations for untyped local variables")
+	@Test
+	def testRichStringAutoConversionToString_04(){
+		assertCompilesTo(
+			"class Foo { def String test() { val x = '''SomeString''' x } }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    return _builder;
+				  }
+				}
+			''')
 	}
 
 	@Test
-	def testRichStringNoAutoConversionToString(){
+	def testRichStringNoAutoConversionToString_01(){
 		assertCompilesTo(
-		"class Foo { def test()'''SomeString''' }
-		",'''
-		import org.eclipse.xtend2.lib.StringConcatenation;
-
-		@SuppressWarnings("all")
-		public class Foo {
-		  public CharSequence test() {
-		    StringConcatenation _builder = new StringConcatenation();
-		    _builder.append("SomeString");
-		    return _builder;
-		  }
-		}
-		''')
+			"class Foo { def test() '''SomeString''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	
+	@Test
+	def testRichStringNoAutoConversionToString_02(){
+		assertCompilesTo(
+			"class Foo { def test() { println('''SomeString''') } }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    CharSequence _println = InputOutput.<CharSequence>println(_builder);
+				    return _println;
+				  }
+				}
+			''')
 	}
 
 	@Test
-	def testRichStringNoAutoConversionToString_1(){
+	def testRichStringNoAutoConversionToString_03(){
 		assertCompilesTo(
-		"class Foo { def test(){System::out.println('''SomeString''')} }
-		",'''
-		import org.eclipse.xtend2.lib.StringConcatenation;
-
-		@SuppressWarnings("all")
-		public class Foo {
-		  public void test() {
-		    StringConcatenation _builder = new StringConcatenation();
-		    _builder.append("SomeString");
-		    System.out.println(_builder.toString());
-		  }
-		}
-		''')
+			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public void test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    System.out.println(_builder);
+				  }
+				}
+			''')
+	}
+	
+	@Test
+	def testRichStringNoAutoConversionToString_04(){
+		assertCompilesTo(
+			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public void test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    CharSequence _println = InputOutput.<CharSequence>println(_builder);
+				    System.out.println(_println);
+				  }
+				}
+			''')
 	}
 
 	@Test
@@ -2254,6 +2350,54 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		assertFalse(DisableCodeGenerationAdapter::isDisabled(inferredType))
 		val javaCode = generator.generateType(inferredType);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
+	}
+	
+}
+
+class XtendCompilerTest extends AbstractXtendCompilerTest {
+	
+	/*
+	 * Refined questionable expectation.
+	 */
+	@Test
+	override testRichStringNoAutoConversionToString_03(){
+		assertCompilesTo(
+			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public void test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    System.out.println(_builder.toString());
+				  }
+				}
+			''')
+	}
+	
+	/*
+	 * Refined questionable expectation.
+	 */
+	@Test
+	override testRichStringNoAutoConversionToString_04(){
+		assertCompilesTo(
+			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public void test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    String _println = InputOutput.<String>println(_builder.toString());
+				    System.out.println(_println);
+				  }
+				}
+			''')
 	}
 	
 }

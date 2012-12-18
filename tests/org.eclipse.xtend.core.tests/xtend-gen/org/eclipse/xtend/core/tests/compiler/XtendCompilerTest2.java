@@ -8,19 +8,119 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
+import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@Ignore(value = "TBD")
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class XtendCompilerTest2 extends XtendCompilerTest {
+public class XtendCompilerTest2 extends AbstractXtendCompilerTest {
+  @Test
+  @Ignore(value = "TODO")
+  public void testNoUnnecessaryCastInDispatchMethods() {
+    super.testNoUnnecessaryCastInDispatchMethods();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testReturnType() {
+    super.testReturnType();
+  }
+  
+  @Test
+  @Ignore(value = "TODO")
+  public void testReturnType_02() {
+    super.testReturnType_02();
+  }
+  
+  @Test
+  @Ignore(value = "TODO implement better expectation computation for unresolved type parameters")
+  public void testRichStringAutoConversionToString_02() {
+    Assert.fail("TODO implement better expectation computation for unresolved type parameters");
+  }
+  
+  @Test
+  public void testBug380062_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def Object foo(Foo ^new) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("foo(^new)");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final Foo new_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = this.foo(new_);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testExplicitBoxingUnboxing() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class X {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object foo(int p0, Integer p1) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo(p1,p0)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class X {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final int p0, final Integer p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testThreeDataClassesExtendingEachOther() {
     StringConcatenation _builder = new StringConcatenation();

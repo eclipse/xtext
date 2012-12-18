@@ -14,16 +14,179 @@ import org.junit.runner.RunWith
 import org.junit.Test
 import org.junit.Ignore
 
-@Ignore("TBD")
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class CompilerTest2 extends CompilerTest {
+class CompilerTest2 extends AbstractCompilerTest {
+	
+	@Test
+	@Ignore("TODO")
+	override testDispatchSignatureWithPrimitives() throws Exception {
+		super.testDispatchSignatureWithPrimitives()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testDispatchedCreateMethods() throws Exception {
+		super.testDispatchedCreateMethods()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_345828_05() throws Exception {
+		super.testBug_345828_05()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_350932_13() throws Exception {
+		super.testBug_350932_13()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_350932_14() throws Exception {
+		super.testBug_350932_14()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352844_02() throws Exception {
+		super.testBug_352844_02()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352849_01() throws Exception {
+		super.testBug_352849_01()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352849_02() throws Exception {
+		super.testBug_352849_02()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352849_05() throws Exception {
+		super.testBug_352849_05()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352849_06() throws Exception {
+		super.testBug_352849_06()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug_352849_06_b() throws Exception {
+		super.testBug_352849_06_b()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testEscapeCharacterForReservedNames() throws Exception {
+		super.testEscapeCharacterForReservedNames()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testGenericFunction_01() throws Exception {
+		super.testGenericFunction_01()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug343096_01() throws Exception {
+		super.testBug343096_01()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testBug343096_02() throws Exception {
+		super.testBug343096_02()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testData_01() throws Exception {
+		super.testData_01()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testData_02() throws Exception {
+		super.testData_02()
+	}
+	
 }
 
-@Ignore("TBD")
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class XtendCompilerTest2 extends XtendCompilerTest {
+class XtendCompilerTest2 extends AbstractXtendCompilerTest {
+	
+	@Test
+	@Ignore("TODO")
+	override testNoUnnecessaryCastInDispatchMethods() {
+		super.testNoUnnecessaryCastInDispatchMethods()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testReturnType() {
+		super.testReturnType()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testReturnType_02() {
+		super.testReturnType_02()
+	}
+	
+	@Test
+	@Ignore("TODO implement better expectation computation for unresolved type parameters")
+	override testRichStringAutoConversionToString_02() {
+		fail("TODO implement better expectation computation for unresolved type parameters")
+	}
+	
+	@Test 
+	override testBug380062_01() {
+		assertCompilesTo('''
+			class Foo<T> {
+			    def Object foo(Foo ^new) {
+			        foo(^new)
+			    }
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public Object foo(final Foo new_) {
+			    Object _foo = this.foo(new_);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	override testExplicitBoxingUnboxing() {
+		assertCompilesTo('''
+			class X {
+				def Object foo(int p0, Integer p1) {
+					foo(p1,p0)
+				}
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class X {
+			  public Object foo(final int p0, final Integer p1) {
+			    Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));
+			    return _foo;
+			  }
+			}
+		''')
+	}
 	
 	@Test override testThreeDataClassesExtendingEachOther() {
 		'''
@@ -60,7 +223,7 @@ class XtendCompilerTest2 extends XtendCompilerTest {
 			  }
 			  
 			  public String tagName() {
-			    Class<? extends Node> _class = this.getClass();«/* super impl assert Class<? extends Object> */»
+			    Class<? extends Node> _class = this.getClass();«/* super impl asserts Class<? extends Object> */»
 			    String _simpleName = _class.getSimpleName();
 			    String _lowerCase = _simpleName.toLowerCase();
 			    return _lowerCase;
@@ -154,8 +317,38 @@ class XtendCompilerTest2 extends XtendCompilerTest {
 	
 }
 
-@Ignore("TBD")
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class XtendCompilerErrorHandlingTest2 extends XtendCompilerErrorHandlingTest {
+	
+	@Test
+	@Ignore("TODO")
+	override testUnresolvedReturnType() {
+		super.testUnresolvedReturnType()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testFieldInitializerTypeError() {
+		super.testFieldInitializerTypeError()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testFieldInitializerLinkError() {
+		super.testFieldInitializerLinkError()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testMethodBodyTypeError() {
+		super.testMethodBodyTypeError()
+	}
+	
+	@Test
+	@Ignore("TODO")
+	override testMethodBodyLinkError() {
+		super.testMethodBodyLinkError()
+	}
+	
 }
