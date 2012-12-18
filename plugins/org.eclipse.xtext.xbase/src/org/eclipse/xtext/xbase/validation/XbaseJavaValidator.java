@@ -1076,6 +1076,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						error("Cannot reference the field '" + feature.getSimpleName() + "' before it is defined", 
 								object, null, INSIGNIFICANT_INDEX, ILLEGAL_FORWARD_REFERENCE);
 					}
+				} else if (object instanceof XClosure) {
+					iterator.prune();
 				}
 			}
 		}
