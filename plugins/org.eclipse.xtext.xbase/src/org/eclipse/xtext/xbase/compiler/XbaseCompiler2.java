@@ -13,9 +13,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -171,6 +173,21 @@ public class XbaseCompiler2 extends XbaseCompiler {
 		appendable.newLine().append("}");
 		appendable.decreaseIndentation().decreaseIndentation();
 		appendable.newLine().append("}");
+	}
+	
+	@Override
+	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
+		if (type instanceof JvmAnyTypeReference) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType == null) {
+				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
+			}
+			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
+				type = expectedType;
+		}
+		return type;
 	}
 	
 }

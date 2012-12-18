@@ -1207,6 +1207,31 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_21() throws Exception {
+    this.resolvesTo("{ val x = if (true) null else null x }", "null");
+  }
+  
+  @Test
+  public void testIfExpression_2() throws Exception {
+    this.resolvesTo("{ val x = if (true) return 1 else 0 x }", "int");
+  }
+  
+  @Test
+  public void testIfExpression_23() throws Exception {
+    this.resolvesTo("{ val x = if (true) return 1 x }", "null");
+  }
+  
+  @Test
+  public void testIfExpression_24() throws Exception {
+    this.resolvesTo("{ val x = if (true) return; x }", "null");
+  }
+  
+  @Test
+  public void testIfExpression_25() throws Exception {
+    this.resolvesTo("{ val x = if (true) return else null x }", "null");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");

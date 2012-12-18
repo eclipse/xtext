@@ -169,7 +169,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			throw new NullPointerException("upperBound may not be null");
 		}
 		if (!upperBound.isOwnedBy(getOwner())) {
-			throw new NullPointerException("upperBound is not valid in current context");
+			throw new IllegalArgumentException("upperBound is not valid in current context");
 		}
 		if (upperBound instanceof WildcardTypeReference) {
 			throw new IllegalArgumentException("Wildcards are not supported as upper bounds");

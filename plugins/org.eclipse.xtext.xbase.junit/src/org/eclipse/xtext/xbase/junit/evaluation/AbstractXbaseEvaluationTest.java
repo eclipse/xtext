@@ -477,8 +477,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.FALSE, "Boolean::FALSE");
 	}
 	
-	@Test public void testPrimitiveConversion() throws Exception {
+	@Test public void testPrimitiveConversion_01() throws Exception {
 		assertEvaluatesTo("2","'ab'.length.toString");
+	}
+	
+	@Test public void testPrimitiveConversion_02() throws Exception {
+		assertEvaluatesTo("123","123.toString");
+	}
+	
+	@Test public void testPrimitiveConversion_03() throws Exception {
+		assertEvaluatesTo("123","return 123.toString");
 	}
 	
 	@Test public void testReturnExpression_01() throws Exception {
