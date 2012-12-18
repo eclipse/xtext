@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Test;
 
@@ -40,7 +41,17 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		return file(string, true);
 	}
 	
-	@Test public void testReturnTypeInConstructor() throws Exception {
+	protected ITypeProvider getTypeProvider() {
+		return typeProvider;
+	}
+	
+	protected XtendConstructor constructor(String string, boolean validate) throws Exception {
+		String clazzString = "class Foo { " + string + "}";
+		XtendClass clazz = (XtendClass) file(clazzString, validate).getXtendTypes().get(0);
+		return (XtendConstructor) clazz.getMembers().get(0);
+	}
+	
+	@Test public void testReturnTypeInConstructor_01() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 
 				"	''.toString\n" + 
@@ -53,6 +64,20 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("void", typeProvider.getExpectedReturnType(toString, true).getIdentifier());
 	}
 	
+	@Test public void testReturnTypeInConstructor_02() throws Exception {
+		XtendConstructor constructor = constructor(
+				"new() {\n" + 
+				"	return ''.toString\n" + 
+				"}\n", false);
+		XBlockExpression body = (XBlockExpression) constructor.getExpression();
+		assertEquals("void", typeProvider.getExpectedType(body).getIdentifier());
+		assertEquals("void", typeProvider.getExpectedReturnType(body, true).getIdentifier());
+		XReturnExpression returnExpression = (XReturnExpression) body.getExpressions().get(0);
+		XMemberFeatureCall toString = (XMemberFeatureCall) returnExpression.getExpression();
+		assertEquals("void", typeProvider.getExpectedType(toString).getIdentifier());
+		assertEquals("void", typeProvider.getExpectedReturnType(toString, true).getIdentifier());
+	}
+	
 	@Test public void testTypeOfSuperInConstructor() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 
@@ -60,9 +85,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n");
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall superCall = (XFeatureCall) body.getExpressions().get(0);
+		assertEquals("void", typeProvider.getType(superCall).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedType(superCall).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedReturnType(superCall, true).getIdentifier());
-		assertEquals("void", typeProvider.getType(superCall).getIdentifier());
 	}
 	
 	@Test public void testTypeOfThisInConstructor() throws Exception {
@@ -73,9 +98,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"new() {}");
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall thisCall = (XFeatureCall) body.getExpressions().get(0);
+		assertEquals("void", typeProvider.getType(thisCall).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedType(thisCall).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedReturnType(thisCall, true).getIdentifier());
-		assertEquals("void", typeProvider.getType(thisCall).getIdentifier());
 	}
 
 	@Test public void testBug380063NoException() throws Exception {
