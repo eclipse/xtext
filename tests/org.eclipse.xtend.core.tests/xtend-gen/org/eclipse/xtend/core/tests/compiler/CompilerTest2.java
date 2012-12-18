@@ -21,12 +21,6 @@ import org.junit.runner.RunWith;
 public class CompilerTest2 extends AbstractCompilerTest {
   @Test
   @Ignore(value = "TODO")
-  public void testDispatchSignatureWithPrimitives() throws Exception {
-    super.testDispatchSignatureWithPrimitives();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
   public void testDispatchedCreateMethods() throws Exception {
     super.testDispatchedCreateMethods();
   }

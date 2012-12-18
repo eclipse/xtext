@@ -243,7 +243,22 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertTrue(contains(exceptionTypeNames, "java.lang.Exception")); 
 		assertTrue(contains(exceptionTypeNames, "java.lang.RuntimeException")); 
 	}
-		
+
+	@Test public void testDispatchFunction_07() throws Exception {
+		XtendFile xtendFile = file("class Foo {" +
+				"def dispatch foo(Object o, boolean b) " +
+				"def dispatch foo(Integer i, boolean b) " +
+				"}");
+		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
+		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return equal("foo", input.getSimpleName());
+			}
+		});
+		JvmFormalParameter parameter = dispatcher.getParameters().get(1);
+		assertEquals("boolean", parameter.getParameterType().getIdentifier());
+	}
+	
 	@Test public void testBug_340611() throws Exception {
 		XtendFile xtendFile = file(
 				"class Bug340611 {\n" + 

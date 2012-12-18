@@ -20,12 +20,6 @@ class CompilerTest2 extends AbstractCompilerTest {
 	
 	@Test
 	@Ignore("TODO")
-	override testDispatchSignatureWithPrimitives() throws Exception {
-		super.testDispatchSignatureWithPrimitives()
-	}
-	
-	@Test
-	@Ignore("TODO")
 	override testDispatchedCreateMethods() throws Exception {
 		super.testDispatchedCreateMethods()
 	}
