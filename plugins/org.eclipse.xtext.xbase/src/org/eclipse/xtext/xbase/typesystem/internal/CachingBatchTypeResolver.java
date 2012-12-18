@@ -17,7 +17,9 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -36,7 +38,7 @@ import com.google.inject.Provider;
 public class CachingBatchTypeResolver implements IBatchTypeResolver {
 
 	@Inject
-	private IResourceScopeCache cache;
+	private OnChangeEvictingCache cache;
 	
 	@Inject
 	private DefaultBatchTypeResolver delegate;
@@ -48,12 +50,17 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 		}
 		Resource resource = object.eResource();
 		final EObject entryPoint = delegate.getEntryPoint(object);
-		LazyResolvedTypes result = cache.get(Tuples.create(CachingBatchTypeResolver.class, entryPoint), resource, new Provider<LazyResolvedTypes>() {
+		final LazyResolvedTypes result = cache.get(Tuples.create(CachingBatchTypeResolver.class, entryPoint), resource, new Provider<LazyResolvedTypes>() {
 			public LazyResolvedTypes get() {
 				return new LazyResolvedTypes(entryPoint);
 			}
 		});
-		result.delegate(); // trigger the actual resolution after the thing was cached
+		cache.execWithoutCacheClear(resource, new IUnitOfWork.Void<Resource>() {
+			@Override
+			public void process(Resource state) throws Exception {
+				result.delegate(); // trigger the actual resolution after the thing was cached
+			}
+		});
 		return result;
 	}
 	
