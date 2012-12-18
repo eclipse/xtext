@@ -27,7 +27,7 @@ public class ImportSectionRegionUtil {
 	@Inject
 	private IImportsConfiguration config;
 
-	public TextRegion computeRegion(XtextResource resource) {
+	public ITextRegion computeRegion(XtextResource resource) {
 		XImportSection xImportSection = config.getImportSection(resource);
 		if (xImportSection != null) {
 			INode node = NodeModelUtils.findActualNodeFor(xImportSection);
@@ -39,7 +39,7 @@ public class ImportSectionRegionUtil {
 		return new TextRegion(config.getImportSectionOffset(resource), 0);
 	}
 
-	public TextRegion addLeadingWhitespace(ITextRegion textRegion, XtextResource resource) {
+	public ITextRegion addLeadingWhitespace(ITextRegion textRegion, XtextResource resource) {
 		String text = resource.getParseResult().getRootNode().getText();
 		int offset = textRegion.getOffset();
 		int length = textRegion.getLength();
@@ -50,7 +50,7 @@ public class ImportSectionRegionUtil {
 		return new TextRegion(offset, length);
 	}
 	
-	public TextRegion addTrailingWhitespace(ITextRegion textRegion, XtextResource resource) {
+	public ITextRegion addTrailingWhitespace(ITextRegion textRegion, XtextResource resource) {
 		String text = resource.getParseResult().getRootNode().getText();
 		int offset = textRegion.getOffset();
 		int length = textRegion.getLength();
@@ -60,4 +60,14 @@ public class ImportSectionRegionUtil {
 		return new TextRegion(offset, length);
 	}
 
+	public ITextRegion addTrailingSingleWhitespace(ITextRegion textRegion, String lineSeparator, XtextResource resource) {
+		String text = resource.getParseResult().getRootNode().getText();
+		String theFollowing = text.substring(textRegion.getOffset() + textRegion.getLength());
+		if(theFollowing.startsWith(lineSeparator)) 
+			return new TextRegion(textRegion.getOffset(), textRegion.getLength() + lineSeparator.length());
+		else if(Character.isWhitespace(theFollowing.charAt(0)))
+			return new TextRegion(textRegion.getOffset(), textRegion.getLength() + 1);
+		else
+			return textRegion;
+	}
 }

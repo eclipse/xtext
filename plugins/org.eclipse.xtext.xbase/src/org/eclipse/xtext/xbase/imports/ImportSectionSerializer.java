@@ -17,8 +17,8 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 
@@ -42,7 +42,7 @@ public class ImportSectionSerializer {
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
 		String serializedImports = serializeImports(newImportCollection, lineSeparator);
 		String newImportSectionText = addLineBreaks(serializedImports, resource, lineSeparator);
-		TextRegion importSectionRegion = regionUtil.computeRegion(resource);
+		ITextRegion importSectionRegion = regionUtil.computeRegion(resource);
 		importSectionRegion = regionUtil.addLeadingWhitespace(importSectionRegion, resource);
 		importSectionRegion = regionUtil.addTrailingWhitespace(importSectionRegion, resource);
 		return new ReplaceRegion(importSectionRegion.getOffset(), importSectionRegion.getLength(), newImportSectionText);
