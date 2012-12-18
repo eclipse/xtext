@@ -23,12 +23,6 @@ import org.junit.runner.RunWith;
 public class XtendCompilerTest2 extends AbstractXtendCompilerTest {
   @Test
   @Ignore(value = "TODO")
-  public void testNoUnnecessaryCastInDispatchMethods() {
-    super.testNoUnnecessaryCastInDispatchMethods();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
   public void testReturnType() {
     super.testReturnType();
   }

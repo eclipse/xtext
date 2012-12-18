@@ -329,7 +329,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
   public void testUsedTwice_12() {
     ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> _mappedBy = this.mappedBy("T", "T", "String", "Iterable<? super T>", "Iterable<CharSequence>");
     Pair<ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument>,LightweightMergedBoundTypeArgument> _merge = this.merge(_mappedBy, "T");
-    this.to(_merge, "String", null);
+    this.to(_merge, "CharSequence", null);
   }
   
   @Test

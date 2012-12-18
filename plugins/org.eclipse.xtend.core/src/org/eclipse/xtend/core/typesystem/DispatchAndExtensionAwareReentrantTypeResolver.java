@@ -226,17 +226,34 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
 			for(JvmOperation dispatchCase: dispatchCases) {
-				OperationBodyComputationState state = new DispatchOperationBodyComputationState(childResolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
-				ITypeComputationResult dispatchCaseResult = state.computeTypes();
-				if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
-					if (declaredDispatcherType == null) {
-						dispatchCaseResults.add(dispatchCaseResult.getReturnType());
+				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
+				if (dispatchCaseResolvedTypes == null) {
+					if (preparedResolvedTypes.containsKey(dispatchCase)) {
+						if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+							if (declaredDispatcherType == null) {
+								dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
+							}
+							hasInferredCase = true;
+						} else {
+							dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
+						}
+					} else {
+						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
 					}
-					hasInferredCase = true;
 				} else {
-					dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
+					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
+					ITypeComputationResult dispatchCaseResult = state.computeTypes();
+					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+						if (declaredDispatcherType == null) {
+							dispatchCaseResults.add(dispatchCaseResult.getReturnType());
+						}
+						hasInferredCase = true;
+					} else {
+						dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
+					}
+					computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
+					mergeChildTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, dispatchCase); 
 				}
-				computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 			}
 			if (hasInferredCase) {
 				LightweightTypeReference commonDispatchType = declaredDispatcherType != null ? declaredDispatcherType : getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults);
@@ -249,8 +266,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					}
 				}
 			}
-			
-			mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
 		} else {
 			super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 		}
@@ -339,6 +354,8 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	@Override
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmOperation operation, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		super._doPrepare(resolvedTypes, featureScopeSession, operation, resolvedTypesByContext);
+		resolvedTypes = resolvedTypesByContext.get(operation);
 		if (dispatchUtil.isDispatcherFunction(operation)) {
 			List<JvmFormalParameter> parameters = operation.getParameters();
 			for(int i = 0; i < parameters.size(); i++) {
@@ -371,7 +388,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				}
 			}
 		}
-		super._doPrepare(resolvedTypes, featureScopeSession, operation, resolvedTypesByContext);
 	}
 	
 	@Override

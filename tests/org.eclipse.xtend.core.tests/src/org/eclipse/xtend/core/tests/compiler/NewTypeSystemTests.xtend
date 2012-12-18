@@ -13,39 +13,51 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.runner.RunWith
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.xbase.lib.Functions$Function1
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class CompilerTest2 extends AbstractCompilerTest {
-	
 	@Test
-	@Ignore("TODO")
-	override testDispatchedCreateMethods() throws Exception {
-		super.testDispatchedCreateMethods()
+	@Ignore("TODO: detect recursion that does not provide any meaningful hints")
+	override testBug343096_01() throws Exception {
+		super.testBug343096_01()
 	}
 	
 	@Test
-	@Ignore("TODO")
-	override testBug_345828_05() throws Exception {
-		super.testBug_345828_05()
+	// TODO recursion
+	override testBug343096_02() throws Exception {
+		invokeAndExpect2(
+				typeof(Functions$Function1).canonicalName,
+				"def <T> String bug343096() {
+				  [T t|switch t { 
+				    case t : bug343096 
+				  }].getClass.interfaces.head.canonicalName 
+				}", "bug343096");
 	}
 	
 	@Test
-	@Ignore("TODO")
+	// TODO recursion
+	override testBug343096_03() throws Exception {
+		invokeAndExpect2(
+				typeof(Object).canonicalName,
+				"def <T> String bug343096() {
+				  [T t|switch t { 
+				    case t : bug343096 
+				  }].getClass.superclass.canonicalName 
+				}", "bug343096");
+	}
+	
+	@Test
+	@Ignore("TODO deferred typing of local vars which are currently 'any'")
 	override testBug_350932_13() throws Exception {
 		super.testBug_350932_13()
 	}
 	
 	@Test
-	@Ignore("TODO")
+	@Ignore("TODO deferred typing of local vars which are currently 'any'")
 	override testBug_350932_14() throws Exception {
 		super.testBug_350932_14()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testBug_352844_02() throws Exception {
-		super.testBug_352844_02()
 	}
 	
 	@Test
@@ -66,40 +78,16 @@ class CompilerTest2 extends AbstractCompilerTest {
 		super.testBug_352849_05()
 	}
 	
+	// overridden variant eliminates recursion
 	@Test
-	@Ignore("TODO")
-	override testBug_352849_06() throws Exception {
-		super.testBug_352849_06()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testBug_352849_06_b() throws Exception {
-		super.testBug_352849_06_b()
-	}
-	
-	@Test
-	@Ignore("TODO")
 	override testEscapeCharacterForReservedNames() throws Exception {
-		super.testEscapeCharacterForReservedNames()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testGenericFunction_01() throws Exception {
-		super.testGenericFunction_01()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testBug343096_01() throws Exception {
-		super.testBug343096_01()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testBug343096_02() throws Exception {
-		super.testBug343096_02()
+		val code = 'package x class Z {
+			  def Object create(Object x) {
+			    create(x)
+			  }
+			}'
+		val javaCode = compileToJavaCode(code)
+		javaCompiler.compileToClass("x.Z", javaCode)
 	}
 	
 	@Test
@@ -119,12 +107,6 @@ class CompilerTest2 extends AbstractCompilerTest {
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class XtendCompilerTest2 extends AbstractXtendCompilerTest {
-	
-	@Test
-	@Ignore("TODO")
-	override testNoUnnecessaryCastInDispatchMethods() {
-		super.testNoUnnecessaryCastInDispatchMethods()
-	}
 	
 	@Test
 	@Ignore("TODO")

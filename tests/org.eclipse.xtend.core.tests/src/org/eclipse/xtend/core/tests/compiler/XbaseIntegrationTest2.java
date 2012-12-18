@@ -28,6 +28,13 @@ public class XbaseIntegrationTest2 extends XbaseIntegrationTest {
 		super.testBlock_01();
 	}
 	
+	// disabled in super class and re-enabled here
+	@Override
+	@Test
+	public void testBlock_02() throws Exception {
+		super.testBlock_02();
+	}
+	
 	@Override
 	@Test
 	@Ignore("To be implemented later")
