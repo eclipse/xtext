@@ -47,6 +47,7 @@ import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
+import org.eclipse.xtend.ide.refactoring.XtendRefactoringPreferences;
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
@@ -270,6 +271,13 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendTypeSerializationUtil.class;
 	}
 	
+	@Override
+	public void configureIPreferenceStoreInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class)
+			.annotatedWith(Names.named("RefactoringPreferences"))
+			.to(XtendRefactoringPreferences.Initializer.class);
+	}
+
 	@Override
 	public Class<? extends IRenameContextFactory> bindIRenameContextFactory() {
 		return XtendRenameContextFactory.class;
