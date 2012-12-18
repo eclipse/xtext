@@ -296,6 +296,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isAny() {
+		if (internalIsResolved()) {
+			return resolvedTo.isAny();
+		}
+		return false;
+	}
+	
+	@Override
 	public FunctionTypeKind getFunctionTypeKind() {
 		if (internalIsResolved()) {
 			return resolvedTo.getFunctionTypeKind();

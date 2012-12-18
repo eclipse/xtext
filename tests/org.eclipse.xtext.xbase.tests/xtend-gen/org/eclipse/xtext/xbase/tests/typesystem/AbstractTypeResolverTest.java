@@ -106,6 +106,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testTypeLiteral_5() throws Exception {
+    this.resolvesTo("typeof(int[]).superclass", "Class<? super int[]>");
+  }
+  
+  @Test
   public void testBooleanLiteral() throws Exception {
     this.resolvesTo("true", "boolean");
     this.resolvesTo("false", "boolean");
@@ -1589,6 +1594,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   public void testMemberFeatureCall_03() throws Exception {
     this.resolvesTo("newArrayList(\'\').get(0)", "String");
     this.resolvesTo("<String>newArrayList().get(0)", "String");
+  }
+  
+  @Test
+  public void testMemberFeatureCall_04() throws Exception {
+    this.resolvesTo("\'\'.^class", "Class<? extends String>");
+  }
+  
+  @Test
+  public void testMemberFeatureCall_05() throws Exception {
+    this.resolvesTo("\'\'.^class.superclass", "Class<?>");
   }
   
   @Test

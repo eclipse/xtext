@@ -39,7 +39,7 @@ public abstract class TypeParameterByUnboundSubstitutor extends CustomTypeParame
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 		List<JvmTypeParameter> declaredTypeParameters = getOwner().getDeclaredTypeParameters();
 		if (declaredTypeParameters.contains(type)) {
-			return reference;
+			return reference.copyInto(getOwner());
 		}
 		UnboundTypeReference result = createUnboundTypeReference(type);
 		return result;

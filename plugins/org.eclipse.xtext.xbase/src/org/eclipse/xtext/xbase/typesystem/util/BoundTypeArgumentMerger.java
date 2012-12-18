@@ -107,8 +107,19 @@ public class BoundTypeArgumentMerger {
 			if (!inVariances.isEmpty()) {
 				LightweightTypeReference inType = getMostSpecialType(inTypes);
 				boolean conformant = type.isAssignableFrom(inType, new TypeConformanceComputationArgument(false, true, false, false, true));
-				VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
-				variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
+				if (conformant) {
+					VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
+					variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
+				} else {
+					boolean reverseConformant = inType.isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, false, true));
+					if (reverseConformant && variance == VarianceInfo.INVARIANT && VarianceInfo.IN.mergeDeclaredWithActuals(inVariances) == VarianceInfo.INVARIANT) {
+						type = inType;
+						variance = null;
+					} else {
+						VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
+						variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
+					}
+				}
 			}
 		} else if (!inTypes.isEmpty()) {
 			type = getMostSpecialType(inTypes);

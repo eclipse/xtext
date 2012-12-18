@@ -43,6 +43,11 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
+	public boolean isAny() {
+		return true;
+	}
+	
+	@Override
 	public String getSimpleName() {
 		return "null";
 	}

@@ -407,6 +407,13 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testMemberFeatureCall_04() throws Exception {
+		fail("fails in old implementation") 
+	}
+	@Ignore("fails in old implementation") @Test override testMemberFeatureCall_05() throws Exception {
+		fail("fails in old implementation") 
+	}
+	
 	@Ignore("fails in old implementation") @Test override testFeatureCallWithArrayToIterableConversion_04() throws Exception {
         fail("fails in old implementation")
     }
