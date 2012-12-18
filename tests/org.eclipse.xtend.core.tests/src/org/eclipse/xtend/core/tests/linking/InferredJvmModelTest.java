@@ -259,6 +259,21 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals("boolean", parameter.getParameterType().getIdentifier());
 	}
 	
+	@Test public void testDispatchFunction_08() throws Exception {
+		XtendFile xtendFile = file("class Z {\n" +
+			"  def dispatch create newArrayList foo(Object x) {}\n" +
+			"  def dispatch create newArrayList foo(String x) {}\n" +
+			"}\n");
+		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
+		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return equal("foo", input.getSimpleName());
+			}
+		});
+		String identifier = dispatcher.getReturnType().getIdentifier();
+		assertEquals("java.util.ArrayList<java.lang.Object>", identifier);
+	}
+	
 	@Test public void testBug_340611() throws Exception {
 		XtendFile xtendFile = file(
 				"class Bug340611 {\n" + 

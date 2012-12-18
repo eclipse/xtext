@@ -186,8 +186,11 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testUsedTwice_12() {
+		// JDT uses 'String' here but neither CharSequence nor String are valid substitutions
+		// since other use cases benefit from T being bound to CharSequence, we're in favor of that one
+		// see org.eclipse.xtend.core.tests.compiler.AbstractCompilerTest.testBug_352849_06_b()
 		'T'.mappedBy('T', 'String', 'Iterable<? super T>', 'Iterable<CharSequence>')
-			.merge('T').to('String', null)
+			.merge('T').to('CharSequence', null) 
 	}
 	
 	@Test def void testUsedTwice_13() {

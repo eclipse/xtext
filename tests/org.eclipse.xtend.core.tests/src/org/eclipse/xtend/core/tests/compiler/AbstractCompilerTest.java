@@ -498,7 +498,24 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	 */
 	@Test public void testDispatchedCreateMethods() throws Exception {
 		String code = 
-				"package x class Z {" +
+				"package x class Z {\n" +
+				"  def dispatch create newArrayList foo(Object x) {}\n" +
+				"  def dispatch create newArrayList foo(String x) {}\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
+		assertNotNull(method);
+		List<?> list = (List<?>) method.invoke(class1.newInstance(), "foo");
+		assertEquals(0, list.size());
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=382208
+	 */
+	@Test public void testDispatchedCreateMethods_02() throws Exception {
+		String code = 
+				"package x class Z {\n" +
 				"  def dispatch create new StringBuilder foo(Object x) { for (y : 1..2) append(y) }\n" +
 				"  def dispatch create new StringBuilder foo(String x) { append(2) }\n" +
 				"}\n";
@@ -2221,7 +2238,18 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"def <T> bug343096() {\n" + 
 				"  [T t|switch t {\n" + 
 				"    case t : bug343096\n" + 
-				"  }].getClass.canonicalName" + 
+				"  }].getClass.interfaces.head.canonicalName" + 
+				"}", "bug343096");
+	}
+	
+	@Test
+	public void testBug343096_03() throws Exception {
+		invokeAndExpect2(
+				Object.class.getCanonicalName(),
+				"def <T> bug343096() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t : bug343096\n" + 
+				"  }].getClass.superclass.canonicalName" + 
 				"}", "bug343096");
 	}
 	
@@ -2680,7 +2708,7 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Inject
-	private EclipseRuntimeDependentJavaCompiler javaCompiler;
+	protected EclipseRuntimeDependentJavaCompiler javaCompiler;
 
 	@Inject
 	protected ParseHelper<XtendFile> parseHelper;

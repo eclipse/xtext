@@ -42,6 +42,13 @@ public class CompilerTest extends AbstractCompilerTest {
 	
 	@Override
 	@Test
+	@Ignore("TODO Produces code that cannot be compiled")
+	public void testBug343096_03() throws Exception {
+		super.testBug343096_03();
+	}
+	
+	@Override
+	@Test
 	@Ignore("TODO Fix this case - see also deactivated tests in XbaseIdentifiableTypeProviderTest and XbaseTypeProviderTest")
 	public void testBug346763_07() throws Exception {
 		super.testBug346763_07();
