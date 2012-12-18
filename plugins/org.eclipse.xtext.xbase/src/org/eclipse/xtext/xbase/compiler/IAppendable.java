@@ -28,6 +28,10 @@ public interface IAppendable {
 
 	IAppendable decreaseIndentation();
 	
+	/**
+	 * @deprecated imports are handled by external components 
+	 */
+	@Deprecated
 	List<String> getImports();
 
 	/**

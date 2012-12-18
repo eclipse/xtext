@@ -14,15 +14,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.inject.Inject;
 
@@ -30,8 +26,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ImportSectionSerializer {
-
-	private static final Logger LOG = Logger.getLogger(ImportSectionSerializer.class);
 	
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
@@ -39,13 +33,18 @@ public class ImportSectionSerializer {
 	@Inject
 	private IImportsConfiguration config;
 	
+	@Inject
+	private ImportSectionRegionUtil regionUtil;
+	
 	public ReplaceRegion serialize(XtextResource resource, ImportCollection newImportCollection) {
 		if(resource == null)
 			return null;
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
 		String serializedImports = serializeImports(newImportCollection, lineSeparator);
 		String newImportSectionText = addLineBreaks(serializedImports, resource, lineSeparator);
-		TextRegion importSectionRegion = computeRegion(resource);
+		TextRegion importSectionRegion = regionUtil.computeRegion(resource);
+		importSectionRegion = regionUtil.addLeadingWhitespace(importSectionRegion, resource);
+		importSectionRegion = regionUtil.addTrailingWhitespace(importSectionRegion, resource);
 		return new ReplaceRegion(importSectionRegion.getOffset(), importSectionRegion.getLength(), newImportSectionText);
 	}
 
@@ -97,27 +96,4 @@ public class ImportSectionSerializer {
 		return sortMe;
 	}
 
-	public TextRegion computeRegion(XtextResource resource) {
-		XImportSection xImportSection = config.getImportSection(resource);
-		if (xImportSection != null) {
-			INode node = NodeModelUtils.findActualNodeFor(xImportSection);
-			if(node == null) 
-				LOG.error("Cannot detect node for original import section");
-			else 
-				return addSurroundingWhitespace(node.getOffset(), node.getLength(), resource);
-		} 
-		return addSurroundingWhitespace(config.getImportSectionOffset(resource), 0, resource);
-	}
-
-	protected TextRegion addSurroundingWhitespace(int offset, int length, XtextResource resource) {
-		String text = resource.getParseResult().getRootNode().getText();
-		while(offset > 0 && Character.isWhitespace(text.charAt(offset-1)) ){
-			--offset;
-			++length;
-		}
-		while(offset + length < text.length() && Character.isWhitespace(text.charAt(offset+length))) {
-			++length;
-		}
-		return new TextRegion(offset, length);
-	}
 }

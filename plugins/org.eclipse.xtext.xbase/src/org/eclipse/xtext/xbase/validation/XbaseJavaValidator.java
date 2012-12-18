@@ -1274,7 +1274,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(eINSTANCE, XtypePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
+		return newArrayList(eINSTANCE, XtypePackage.eINSTANCE);
 	}
 
 	protected String canonicalName(JvmTypeReference typeRef) {
