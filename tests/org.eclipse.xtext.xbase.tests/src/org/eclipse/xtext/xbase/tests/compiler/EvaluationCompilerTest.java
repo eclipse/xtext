@@ -138,5 +138,12 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	public void testBlock_01() throws Exception {
 		super.testBlock_01();
 	}
+	
+	@Override
+	@Test
+	@Ignore("Produces code that cannot be compiled with old type system")
+	public void testBlock_02() throws Exception {
+		super.testBlock_02();
+	}
 
 }

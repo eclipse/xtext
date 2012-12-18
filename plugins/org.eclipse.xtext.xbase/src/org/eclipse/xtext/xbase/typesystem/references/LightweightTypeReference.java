@@ -148,6 +148,10 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	public boolean isAny() {
+		return false;
+	}
+	
 	@Nullable
 	public LightweightTypeReference tryConvertToListType() {
 		return null;

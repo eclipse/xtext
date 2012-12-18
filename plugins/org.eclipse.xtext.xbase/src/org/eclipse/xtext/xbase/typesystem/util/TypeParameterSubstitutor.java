@@ -110,10 +110,27 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		WildcardTypeReference result = new WildcardTypeReference(getOwner());
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		if (lowerBound != null) {
-			result.setLowerBound(visitTypeArgument(lowerBound, visiting).getInvariantBoundSubstitute());
-		}
+			LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting);
+			if (visited.isWildcard()) {
+				LightweightTypeReference lowerBoundSubstitute = visited.getLowerBoundSubstitute();
+				if (lowerBoundSubstitute.isAny()) {
+					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+					result.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+					return result;
+				} else {
+					result.setLowerBound(lowerBoundSubstitute);
+				}
+			} else {
+				result.setLowerBound(visited);
+			}
+		} 
 		for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
-			result.addUpperBound(visitTypeArgument(upperBound, visiting));
+			LightweightTypeReference visitedArgument = visitTypeArgument(upperBound, visiting);
+			LightweightTypeReference upperBoundSubstitute = visitedArgument.getUpperBoundSubstitute();
+			result.addUpperBound(upperBoundSubstitute);
+		}
+		if (result.getUpperBounds().isEmpty()) {
+			throw new IllegalStateException("UpperBounds may not be empty");
 		}
 		return result;
 	}

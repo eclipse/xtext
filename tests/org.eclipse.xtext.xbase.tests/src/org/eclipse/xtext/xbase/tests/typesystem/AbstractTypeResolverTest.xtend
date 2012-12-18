@@ -80,6 +80,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testTypeLiteral_4() throws Exception {
 		"typeof(int[])".resolvesTo("Class<int[]>")
 	}
+	
+	@Test def void testTypeLiteral_5() throws Exception {
+		"typeof(int[]).superclass".resolvesTo("Class<? super int[]>")
+	}
 
 	@Test def void testBooleanLiteral() throws Exception {
 		"true".resolvesTo("boolean")
@@ -1520,6 +1524,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testMemberFeatureCall_03() throws Exception {
 		"newArrayList('').get(0)".resolvesTo("String")
 		"<String>newArrayList().get(0)".resolvesTo("String")
+	}
+	
+	@Test def void testMemberFeatureCall_04() throws Exception {
+		"''.^class".resolvesTo("Class<? extends String>")
+	}
+	
+	@Test def void testMemberFeatureCall_05() throws Exception {
+		"''.^class.superclass".resolvesTo("Class<?>")
 	}
 	
 	@Test def void testFeatureCall_04() throws Exception {

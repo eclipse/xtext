@@ -21,6 +21,19 @@ import org.junit.runner.RunWith;
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerTest {
 
+	// re-enabled
+	@Override
+	@Test
+	public void testBlock_01() throws Exception {
+		super.testBlock_01();
+	}
+	// re-enabled
+	@Override
+	@Test
+	public void testBlock_02() throws Exception {
+		super.testBlock_02();
+	}
+	
 	// TODO move to AbstractXbaseEvaluationTests
 	@Test public void testClosure_07_02() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, 
@@ -40,6 +53,7 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 	}
 	
 	// TODO move to AbstractXbaseEvaluationTests
+	@Override
 	@Test public void testSwitchExpression_21() throws Exception {
 		assertEvaluatesTo(Character.valueOf('b'), 
 				"{\n" + 

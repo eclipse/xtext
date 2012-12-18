@@ -115,9 +115,12 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 			}
 		}
 		if (!upperBoundSeen) {
-			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, reference);
+			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
 			ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
 			result.addUpperBound(upperBound);
+		}
+		if (result.getUpperBounds().isEmpty()) {
+			throw new IllegalStateException("UpperBounds may not be empty");
 		}
 		return result;
 	}

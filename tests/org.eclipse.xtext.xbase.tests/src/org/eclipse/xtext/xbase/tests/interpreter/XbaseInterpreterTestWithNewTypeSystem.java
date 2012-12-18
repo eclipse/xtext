@@ -23,6 +23,13 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 	
 	@Override
 	@Test
+	// re-enabled
+	public void testBlock_02() throws Exception {
+		super.testBlock_02();
+	}
+	
+	@Override
+	@Test
 	@Ignore
 	public void testImplicitOneArgClosure_01() throws Exception {
 		super.testImplicitOneArgClosure_01();
