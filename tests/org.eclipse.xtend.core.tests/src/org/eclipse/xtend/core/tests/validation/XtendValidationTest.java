@@ -169,6 +169,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(clazz);
 	}
 	
+	@Test public void testForwardReferenceInFieldInitializer_09() throws Exception {
+		XtendClass clazz = clazz("class Z { static val x = [| y] static val y = [|''] }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	@Test public void testCircularConstructor_01() throws Exception {
 		XtendClass clazz = clazz("class Z { new() { this() }}");
 		helper.assertError(clazz, XFEATURE_CALL, CIRCULAR_CONSTRUCTOR_INVOCATION);
