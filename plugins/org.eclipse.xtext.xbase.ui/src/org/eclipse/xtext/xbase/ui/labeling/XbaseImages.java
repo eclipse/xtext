@@ -21,6 +21,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  */
 public class XbaseImages {
 	
+	public Image forImportContainer() {
+		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPCONT);
+	}
+
+	public Image forImport() {
+		return getJdtImage(JavaPluginImages.DESC_OBJS_IMPDECL);
+	}
+
 	public Image forClass(JvmVisibility visibility) {
 		return getJdtImage(JavaElementImageProvider.getTypeImageDescriptor(false, false, toFlags(visibility), false));
 	}

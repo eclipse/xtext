@@ -25,11 +25,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -61,6 +64,9 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	
 	@Inject
 	private IGrammarAccess grammarAccess;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 
 	public XImportSection getImportSection(XtextResource resource) {
 		for (Iterator<EObject> i = resource.getAllContents(); i.hasNext();) {
@@ -92,6 +98,23 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 			}
 		}
 		return locallyDefinedTypes;
+	}
+	
+	public JvmDeclaredType getContextJvmDeclaredType(EObject model) {
+		if(model != null) {
+			JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(model);
+			if(logicalContainer != null) 
+				return EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+			EObject currentElement = model;
+			do {
+				for(EObject jvmElement: associations.getJvmElements(currentElement)) {
+					if(jvmElement instanceof JvmDeclaredType) 
+						return (JvmDeclaredType) jvmElement;
+				}
+				currentElement = currentElement.eContainer();
+			} while (currentElement != null);
+		}
+		return null;
 	}
 
 	protected void addInnerTypes(JvmDeclaredType containerType, String prefix, Map<String, JvmDeclaredType> result) {

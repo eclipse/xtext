@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.imports;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -34,4 +35,5 @@ public interface IImportsConfiguration {
 
 	Map<String, JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource);
 	
+	JvmDeclaredType getContextJvmDeclaredType(EObject model);
 }

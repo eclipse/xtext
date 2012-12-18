@@ -24,6 +24,8 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.inject.Inject;
 
@@ -44,6 +46,14 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	@Inject
 	public XbaseLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+	}
+	
+	public Image image(XImportSection importSection) {
+		return images.forImportContainer();
+	}
+	
+	public Image image(XImportDeclaration importDeclaration) {
+		return images.forImport();
 	}
 	
 	public Image image(JvmGenericType genericType){

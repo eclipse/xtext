@@ -17,7 +17,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
 /**
- * Provides access to all imported types in an XtendFile. Namespace imports are ignored.
+ * Provides access to all imported types in XImportSection.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

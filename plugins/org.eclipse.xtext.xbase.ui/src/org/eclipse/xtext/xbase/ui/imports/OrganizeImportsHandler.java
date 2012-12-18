@@ -14,8 +14,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.text.edits.MultiTextEdit;
-import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -36,6 +34,9 @@ public class OrganizeImportsHandler extends AbstractHandler {
 	@Inject
 	private ImportOrganizer importOrganizer;
 
+	@Inject
+	private ReplaceConverter replaceConverter;
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {
@@ -54,11 +55,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 		if (result == null)
 			return;
 		try {
-			MultiTextEdit multiTextEdit = new MultiTextEdit();
-			for(ReplaceRegion replaceRegion: result) {
-				multiTextEdit.addChild(new ReplaceEdit(replaceRegion.getOffset(), replaceRegion.getLength(), replaceRegion.getText()));
-			}
-			multiTextEdit.apply(document);
+			replaceConverter.convertToTextEdit(result).apply(document);
 		} catch (BadLocationException e) {
 			LOG.error("Error organizing imports:", e);
 		}
