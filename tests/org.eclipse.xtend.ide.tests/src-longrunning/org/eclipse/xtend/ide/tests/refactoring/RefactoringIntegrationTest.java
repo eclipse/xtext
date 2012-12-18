@@ -61,7 +61,7 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 		performRenameTest("Foo", "class Foo { def foo() { val bar = 7; bar + 1 }}", "bar", "baz");
 	}
 
-	@Test public void testRenameParamter() throws Exception {
+	@Test public void testRenameParameter() throws Exception {
 		performRenameTest("Foo", "class Foo { def foo(int bar) { bar + 1 }}", "bar", "baz");
 	}
 
