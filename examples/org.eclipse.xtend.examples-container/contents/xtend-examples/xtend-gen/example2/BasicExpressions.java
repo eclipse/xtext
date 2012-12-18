@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package example2;
 
 import com.google.common.base.Objects;
@@ -12,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -69,7 +77,7 @@ public class BasicExpressions {
     boolean _equals = (_length == 4);
     if (_equals) {
       int _xifexpression = (int) 0;
-      boolean _notEquals = (!Objects.equal("foo", "bar"));
+      boolean _notEquals = ObjectExtensions.operator_notEquals("foo", "bar");
       if (_notEquals) {
         _xifexpression = 42;
       } else {
