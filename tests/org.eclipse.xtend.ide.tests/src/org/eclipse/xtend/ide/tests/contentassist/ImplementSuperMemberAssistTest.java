@@ -11,9 +11,11 @@ import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
-import org.eclipse.xtend.ide.contentassist.ImportOrganizingProposal;
-import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.ui.contentassist.ImportOrganizingProposal;
+import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -65,7 +67,8 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 		assertEquals(1, proposals.length);
 		ImportOrganizingProposal proposal = (ImportOrganizingProposal) proposals[0];
 		ReplacingAppendable appendable = proposal.getAppendable();
-		List<String> imports = appendable.getImports();
+		RewritableImportSection importSection = appendable.getImportSection();
+		List<ReplaceRegion> imports = importSection.rewrite();
 		assertEquals(1, imports.size());
 		assertEquals("java.util.Collection", imports.get(0));
 	}

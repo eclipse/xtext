@@ -9,16 +9,23 @@ package org.eclipse.xtend.core.imports;
 
 import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -80,16 +87,22 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 		return implicitlyImportedPackages;
 	}
 	
-//	@Override
-//	public int getImportSectionOffset(XtextResource resource) {
-//		XtendFile xtendFile = getXtendFile(resource);
-//		if(xtendFile != null) {
-//			if(!isEmpty(xtendFile.getPackage())) {
-//				List<INode> nodes = NodeModelUtils.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
-//				if(!nodes.isEmpty())
-//					return nodes.get(nodes.size()-1).getTotalEndOffset();
-//			}
-//		}
-//		return 0;
-//	}
+	@Override
+	public int getImportSectionOffset(XtextResource resource) {
+		XtendFile xtendFile = getXtendFile(resource);
+		if(xtendFile != null) {
+			if(!isEmpty(xtendFile.getPackage())) {
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
+				if(!nodes.isEmpty())
+					return nodes.get(nodes.size()-1).getTotalEndOffset();
+			}
+		}
+		return 0;
+	}
+	
+	@Override
+	public JvmDeclaredType getContextJvmDeclaredType(EObject model) {
+		XtendClass xtendClass = EcoreUtil2.getContainerOfType(model, XtendClass.class);
+		return associations.getInferredType(xtendClass);
+	}
 }
