@@ -102,6 +102,9 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 		return list == null ? null : list.toArray(new String[list.size()]);
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		addToPluginXmlRt(new Xtend2ExecutionContext(ctx));
@@ -113,6 +116,9 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 	public void addToPluginXmlRt(Xtend2ExecutionContext xtend2ExecutionContext) {
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		addToPluginXmlUi(new Xtend2ExecutionContext(ctx));
