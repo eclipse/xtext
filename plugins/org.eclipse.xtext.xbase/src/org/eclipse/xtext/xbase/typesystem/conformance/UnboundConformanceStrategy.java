@@ -77,7 +77,23 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
 			LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
 			if (mergeResult != null && mergeResult.getVariance() != null) {
-				TypeConformanceResult result = conformanceComputer.isConformant(mergeResult.getTypeReference(), right, param);
+				TypeConformanceComputationArgument newParam = param;
+				LightweightTypeReference mergeResultReference = mergeResult.getTypeReference();
+				if (right.isWildcard() && mergeResultReference.isWildcard()) {
+					if (right.getLowerBoundSubstitute().isAny()) {
+						LightweightTypeReference lowerBoundMergeResult = mergeResultReference.getLowerBoundSubstitute();
+						if (!lowerBoundMergeResult.isAny()) {
+							mergeResultReference = lowerBoundMergeResult;
+						}
+					} else {
+						newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
+								param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+					}
+				} else if (mergeResultReference.isWildcard()) {
+					newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
+							param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+				}
+				TypeConformanceResult result = conformanceComputer.isConformant(mergeResultReference, right, newParam);
 				return result;
 			}
 		}

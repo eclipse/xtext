@@ -470,6 +470,30 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testMethodTypeParamInference_14() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.Collection<? super String>).addAll(null as Iterable<? extends String>)", "? super String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_15() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.Collection<? super String>).addAll(null as Iterable<String>)", "? super String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_16() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.Collection<String>).addAll(null as Iterable<? extends String>)", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_17() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.Collection<String>).addAll(null as Iterable<String>)", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testTypeForVoidClosure() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'foo\',\'bar\').forEach []", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");

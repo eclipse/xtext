@@ -17,6 +17,20 @@ public class CompilerTest extends AbstractCompilerTest {
 
 	@Override
 	@Test
+	@Ignore("Fails with old impl")
+	public void testBug_396879_04() throws Exception {
+		super.testBug_396879_04();
+	}
+	
+	@Override
+	@Test
+	@Ignore("Fails with old impl")
+	public void testBug_396879_05() throws Exception {
+		super.testBug_396879_05();
+	}
+	
+	@Override
+	@Test
 	@Ignore("TODO this one should be valid, too since we could infer the CharSequence from the expected type")
 	public void testBug_352849_06_b() throws Exception {
 		super.testBug_352849_06_b();

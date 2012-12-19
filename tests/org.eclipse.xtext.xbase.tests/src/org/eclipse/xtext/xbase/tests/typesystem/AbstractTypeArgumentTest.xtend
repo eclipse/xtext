@@ -295,6 +295,22 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"(null as Iterable<? super String>).map(null)".bindTypeArgumentsTo("? super String", "Object").done
 	}
 	
+	@Test def void testMethodTypeParamInference_14() throws Exception {
+		"(null as java.util.Collection<? super String>).addAll(null as Iterable<? extends String>)".bindTypeArgumentsTo("? super String").done
+	}
+	
+	@Test def void testMethodTypeParamInference_15() throws Exception {
+		"(null as java.util.Collection<? super String>).addAll(null as Iterable<String>)".bindTypeArgumentsTo("? super String").done
+	}
+	
+	@Test def void testMethodTypeParamInference_16() throws Exception {
+		"(null as java.util.Collection<String>).addAll(null as Iterable<? extends String>)".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testMethodTypeParamInference_17() throws Exception {
+		"(null as java.util.Collection<String>).addAll(null as Iterable<String>)".bindTypeArgumentsTo("String").done
+	}
+	
 	@Test def void testTypeForVoidClosure() throws Exception {
 		"newArrayList('foo','bar').forEach []".bindTypeArgumentsTo("String").and("String").done
 	}

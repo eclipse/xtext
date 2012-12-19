@@ -827,12 +827,12 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	@Test public void testOverloadedMethods_11() throws Exception {
 		XtendFile file = file(
 				"import java.util.List\n" +
-						"class X {\n" +
-						"  def foo() {\n" +
-						"    var Integer i = 0\n" +
-						"    var testdata.OverloadedMethods<Object> receiver = null\n" +
-						"    receiver.overloadedInt(i)\n" +
-						"  }\n" +
+				"class X {\n" +
+				"  def foo() {\n" +
+				"    var Integer i = 0\n" +
+				"    var testdata.OverloadedMethods<Object> receiver = null\n" +
+				"    receiver.overloadedInt(i)\n" +
+				"  }\n" +
 				"}");
 		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
@@ -848,6 +848,143 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 		Integer integer = null;
 		assertEquals("overloadedInt(int)", new OverloadedMethods<Object>().overloadedInt(i));
 		assertEquals("overloadedInt(Integer)", new OverloadedMethods<Object>().overloadedInt(integer));
+	}
+	
+	@Test public void testOverloadedMethods_12() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Collection<T> elements) {\n" +
+				"    collection.addAll(elements)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("java.util.Collection.addAll(java.util.Collection)", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_13() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Iterable<T> elements) {\n" +
+				"    collection.addAll(elements)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,java.lang.Iterable)", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_14() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Iterable<? extends T> elements) {\n" +
+				"    collection.addAll(elements)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,java.lang.Iterable)", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_15() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<T> collection, Iterable<? extends T> elements) {\n" +
+				"    collection.addAll(elements)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,java.lang.Iterable)", addAll.getIdentifier());
+	}
+	
+
+	@Test public void testOverloadedMethods_16() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Iterable<T> elements) {\n" +
+				"    collection.addAll(elements.head)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_17() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Iterable<? extends T> elements) {\n" +
+				"    collection.addAll(elements.head)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_18() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<T> collection, Iterable<? extends T> elements) {\n" +
+				"    collection.addAll(elements.head)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_19() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<? super T> collection, Iterable<? extends T> elements) {\n" +
+				"    collection.<T>addAll(elements)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
 	}
 	
 	@Test public void testMemberFeatureScope_0() throws Exception {

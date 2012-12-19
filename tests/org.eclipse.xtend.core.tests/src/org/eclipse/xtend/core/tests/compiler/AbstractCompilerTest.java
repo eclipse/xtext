@@ -1375,10 +1375,81 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		System.out.println(javaCode);
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+	@Test public void testBug_396879_01() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Comparator\n" +
+				"class Z {\n" +
+				"  	def overloaded(String s) {\n" +
+				"		overloaded[ a,b | a.toUpperCase.compareTo(b.toUpperCase) ]\n" + 
+				"		overloaded[ it.length ]\n" + 
+				"	}\n" + 
+				"	def void overloaded(Comparable<String> comparable){\n" +
+				"	}\n" +
+				"	def void overloaded(Comparator<String> comparator){\n" +
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_396879_02() throws Exception {
+		String code =
+				"package x\n" +
+				"import bug396879.*\n" +
+				"class Z {\n" +
+				"  	def addListeners(BooleanProperty prop) {\n" +
+				"		val ChangeListener<Boolean> listener = [ p, oldValue, newValue | ]" +
+				"		prop.addListener(listener)\n" + 
+				"	}\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_396879_03() throws Exception {
+		String code =
+				"package x\n" +
+				"import bug396879.*\n" +
+				"class Z {\n" +
+				"  	def addListeners(BooleanProperty prop) {\n" +
+				"		val InvalidationListener listener = []" +
+				"		prop.addListener(listener)\n" + 
+				"	}\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_396879_04() throws Exception {
+		String code =
+				"package x\n" +
+				"import bug396879.*\n" +
+				"class Z {\n" +
+				"  	def addListeners(BooleanProperty prop) {\n" +
+				"		prop.addListener[ p, Boolean oldValue, Boolean newValue | ]\n" + 
+				"	}\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_396879_05() throws Exception {
+		String code =
+				"package x\n" +
+				"import bug396879.*\n" +
+				"class Z {\n" +
+				"  	def addListeners(BooleanProperty prop) {\n" +
+				"		prop.addListener[ p, oldValue, newValue | ]\n" + 
+				"		prop.addListener[]\n" + 
+				"	}\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
 	
 //	static class Z {
 //		void generate() {
