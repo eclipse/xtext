@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtend.macro.lang/src-gen" editDirectory="/org.eclipse.xtend.macro.lang.edit/src"
+    editorDirectory="/org.eclipse.xtend.macro.lang.editor/src" modelPluginID="org.eclipse.xtend.macro.lang"
+    forceOverwrite="true" modelName="Macro" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtend.macro.lang.edit"
+    editorPluginID="org.eclipse.xtend.macro.lang.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../../org.eclipse.xtend.core/model/Xtend.genmodel#//xtend ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+  <genPackages prefix="Macro" basePackage="org.eclipse.xtend.macro.lang" disposableProviderFactory="true"
+      ecorePackage="Macro.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Macro.ecore#//TargetType">
+      <genEnumLiterals ecoreEnumLiteral="Macro.ecore#//TargetType/class"/>
+      <genEnumLiterals ecoreEnumLiteral="Macro.ecore#//TargetType/field"/>
+      <genEnumLiterals ecoreEnumLiteral="Macro.ecore#//TargetType/method"/>
+      <genEnumLiterals ecoreEnumLiteral="Macro.ecore#//TargetType/parameter"/>
+      <genEnumLiterals ecoreEnumLiteral="Macro.ecore#//TargetType/constructor"/>
+    </genEnums>
+    <genClasses ecoreClass="Macro.ecore#//MacroAnnotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//MacroAnnotation/targetType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//MacroAnnotation/members"/>
+    </genClasses>
+    <genClasses ecoreClass="Macro.ecore#//Registrator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Registrator/each"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Registrator/variableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//Registrator/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Macro.ecore#//Processor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Processor/each"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Macro.ecore#//Processor/variableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Macro.ecore#//Processor/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

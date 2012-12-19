@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.maven</artifactId>
+	<packaging>pom</packaging>
+	<version>2.4.0-SNAPSHOT</version>
+	<modules>
+		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
+		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.gwt</module>
+		<module>../org.eclipse.xtend.lib.maven</module>
+		<module>../org.eclipse.xtend.lib.gwt</module>
+		<module>../org.eclipse.xtend.maven.plugin</module>
+	</modules>
+	<distributionManagement>
+		<repository>
+			<id>local-repository</id>
+			<url>${deployment.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>local-repository</id>
+			<url>${deployment.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<properties>
+		<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
+		<deployment.url>file://${deployment.folder}</deployment.url>
+		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<id>Reindex nexus</id>
+						<phase>deploy</phase>
+						<goals><goal>exec</goal></goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>java</executable>
+					<workingDirectory>${deployment.folder}/../</workingDirectory>
+					<arguments>
+						<argument>-jar</argument>
+						<argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument>
+						<argument>-t</argument>
+						<argument>min</argument>
+						<argument>-i</argument>
+						<argument>maven-index</argument>
+						<argument>-r</argument>
+						<argument>maven</argument>
+						<argument>-n</argument>
+						<argument>${xtend.repo.name}</argument>
+						<argument>-d</argument>
+						<argument>maven/.index</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<name>Xtend Parent/Container</name>
+	<repositories>
+		<repository>
+			<id>build-eclipse-org-xtend</id>
+			<name>${xtend.repo.name}</name>
+			<url>http://build.eclipse.org/common/xtend/maven/</url>
+		</repository>
+		<repository>
+			<id>local-org-xtend</id>
+			<name>Xtext-Xtend local repository</name>
+			<url>file:///shared/common/xtend/maven/</url>
+		</repository>
+	</repositories>
+</project>

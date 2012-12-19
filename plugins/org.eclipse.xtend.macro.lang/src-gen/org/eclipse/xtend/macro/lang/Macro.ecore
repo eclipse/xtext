@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="macro" nsURI="http://www.eclipse.org/xtend/macro/lang/Macro"
+    nsPrefix="macro">
+  <eClassifiers xsi:type="ecore:EClass" name="MacroAnnotation" eSuperTypes="../../../../../../../org.eclipse.xtend.core/model/Xtend.ecore#//XtendTypeDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetType" unique="false"
+        upperBound="-1" eType="#//TargetType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="ecore:EClass ../../../../../../../org.eclipse.xtend.core/model/Xtend.ecore#//XtendMember"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TargetType">
+    <eLiterals name="class" literal="class"/>
+    <eLiterals name="field" value="1" literal="field"/>
+    <eLiterals name="method" value="2" literal="method"/>
+    <eLiterals name="parameter" value="3" literal="parameter"/>
+    <eLiterals name="constructor" value="4" literal="constructor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Registrator" eSuperTypes="../../../../../../../org.eclipse.xtend.core/model/Xtend.ecore#//XtendMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="each" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="../../../../../../../org.eclipse.xtend.core/model/Xtend.ecore#//XtendMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="each" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

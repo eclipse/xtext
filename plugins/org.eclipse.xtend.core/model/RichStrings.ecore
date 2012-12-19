@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="richstring"
+    nsURI="http://www.eclipse.org/xtend/RichString" nsPrefix="richstring">
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessedRichString">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richString" eType="ecore:EClass Xtend.ecore#//RichString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lines" upperBound="-1"
+        eType="#//Line" containment="true" eOpposite="#//Line/richString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Line">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+        eType="#//LinePart" containment="true" eOpposite="#//LinePart/line"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richString" eType="#//ProcessedRichString"
+        eOpposite="#//ProcessedRichString/lines"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="line" eType="#//Line" eOpposite="#//Line/parts"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="ecore:EClass Xtend.ecore#//RichStringLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineBreak" eSuperTypes="#//Literal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ForLoopStart" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loop" eType="ecore:EClass Xtend.ecore#//RichStringForLoop"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//ForLoopEnd"
+        eOpposite="#//ForLoopEnd/start"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForLoopEnd" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//ForLoopStart"
+        eOpposite="#//ForLoopStart/end"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrintedExpression" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfConditionStart" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richStringIf" eType="ecore:EClass Xtend.ecore#//RichStringIf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseStart" eType="#//ElseStart"
+        eOpposite="#//ElseStart/ifConditionStart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseIfConditions" upperBound="-1"
+        eType="#//ElseIfCondition" eOpposite="#//ElseIfCondition/ifConditionStart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endIf" eType="#//EndIf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseIfCondition" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richStringElseIf" eType="ecore:EClass Xtend.ecore#//RichStringElseIf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifConditionStart" eType="#//IfConditionStart"
+        eOpposite="#//IfConditionStart/elseIfConditions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElseStart" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifConditionStart" eType="#//IfConditionStart"
+        eOpposite="#//IfConditionStart/elseStart"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndIf" eSuperTypes="#//LinePart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifConditionStart" eType="#//IfConditionStart"/>
+  </eClassifiers>
+</ecore:EPackage>

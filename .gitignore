@@ -3,3 +3,4 @@ bin
 target
 *.java._trace
 *.java_trace
+*.smap

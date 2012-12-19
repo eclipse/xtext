@@ -1,0 +1,62 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+ 
+grammar org.eclipse.xtend.macro.lang.Macro with org.eclipse.xtend.core.Xtend
+
+generate macro "http://www.eclipse.org/xtend/macro/lang/Macro"
+import "http://www.eclipse.org/xtend"
+
+MacroFile returns XtendFile:
+	('package' package=QualifiedName ';'?)?
+	importSection=XImportSection?
+	(xtendTypes+=Type)*
+;
+	
+Type returns XtendTypeDeclaration :
+	ClassDeclaration | MacroAnnotation
+;
+
+ClassDeclaration returns XtendClass :
+	'class' name=ValidID '{'
+		members+=Member*
+	'}'
+;
+
+MacroAnnotation returns MacroAnnotation : 
+	'@' name=ValidID ('for' targetType+=TargetType (',' targetType+=TargetType )*)? '{'
+	   members+=MacroAnnotationMember*
+   	'}'
+;
+
+enum TargetType :
+	class 
+	| field 
+	| method 
+	| parameter 
+	| constructor
+;
+
+ValidID:
+	ID | 'create' | 'annotation' |'field' |'method' |'parameter' |'constructor' | 'macro'
+;
+
+MacroAnnotationMember returns XtendMember : 
+	Processor | Field | Registrator
+;
+
+Field returns XtendField :
+	static?='static'? type=JvmTypeReference name=ValidID ('=' initialValue=XExpression)?
+;
+
+Registrator:
+	'register' each?='each'? variableName=ValidID? expression=XBlockExpression
+;
+
+Processor:
+	'process' each?='each'? variableName=ValidID? expression=XBlockExpression
+;

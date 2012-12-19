@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="macro"
+            icon="icons/xtend_file.png"
+            id="org.eclipse.xtend.macro.lang.Macro"
+            matchingStrategy="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
+            name="%editor.name">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtend.macro.lang.Macro.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtend.macro.lang.Macro" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro"
+            name="%page.name">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+        </page>
+        <page
+            category="org.eclipse.xtend.macro.lang.Macro"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro.coloring"
+            name="%page.name.0">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+        </page>
+        <page
+            category="org.eclipse.xtend.macro.lang.Macro"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro.templates"
+            name="%page.name.1">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro"
+            name="%page.name.2">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"
+            label="%keyword.label"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="%command.description"
+            id="org.eclipse.xtend.macro.lang.Macro.validate"
+            name="%command.name">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+                 style="push"
+                 tooltip="%command.tooltip">
+	            <visibleWhen checkEnabled="false">
+	                <reference
+	                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+	                </reference>
+	            </visibleWhen>
+	         </command>  
+         </menuContribution>
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtend.macro.lang.Macro.validate"
+                 style="push"
+                 tooltip="%command.tooltip.0">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="macro">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="macro">
+        </resourceServiceProvider>
+    </extension>
+
+
+    <!-- marker definitions for org.eclipse.xtend.macro.lang.Macro -->
+    <extension
+            id="macro.check.fast"
+            name="%extension.name"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="macro.check.normal"
+            name="%extension.name.0"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="macro.check.expensive"
+            name="%extension.name.1"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.xtend.macro.lang.Macro"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro.compiler.preferencePage"
+            name="%page.name.3">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.xtend.macro.lang.Macro"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtend.macro.lang.Macro.compiler.propertyPage"
+            name="%page.name.4">
+            <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="%command.description.0"
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="%command.name.0">
+		</command>
+		<command
+            description="%command.description.1"
+            id="org.eclipse.xtext.xbase.ui.organizeImports"
+            name="%command.name.1"/>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="%command.tooltip.1">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="%XtendContext_description"
+            id="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            name="%XtendContext_name"
+            parentId="org.eclipse.xtend.ide.XtendEditorScope">
+      </context>
+   </extension>
+	<extension
+         point="org.eclipse.ui.bindings">
+<!--      <key
+            contextId="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+&lt;"
+            commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+&gt;"
+            commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M4+&lt;"
+            commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+      </key>
+      <key
+            contextId="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M4+&gt;"
+            commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+      </key> -->
+      <key
+            contextId="org.eclipse.xtend.macro.ui.MacroEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+O"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+      </key>
+<!--
+      <key
+            contextId="org.eclipse.xtend.ide.XtendEditorScope"
+            sequence="M1+M2+T"
+            commandId="org.eclipse.jdt.ui.navigate.open.type"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            contextId="org.eclipse.xtend.ide.XtendEditorScope"
+            sequence="M1+M2+H"
+            commandId="org.eclipse.jdt.ui.navigate.open.type.in.hierarchy"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+-->
+
+		<!--
+			known bug in JDT:
+			Launch using shortcut key Alt+Shift+X doesn't work until launch actions are loaded
+			https://bugs.eclipse.org/bugs/show_bug.cgi?id=218881
+		-->
+
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+<!--      <handler
+            class="org.eclipse.xtend.ide.edit.InsertStringHandler$LeftGuillemet"
+            commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+      <handler
+            class="org.eclipse.xtend.ide.edit.InsertStringHandler$RightGuillemet"
+            commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+           	<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>-->
+      <handler
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtend.ide.edit.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+           	<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtend.macro.lang.Macro -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtend.macro.lang.ui.macro.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtend.macro.lang.ui.macro.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtend.macro.lang.ui.macro.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtend.macro.lang.Macro"
+	        class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtend.macro.lang.Macro.refactoring"
+	        name="%page.name.5">
+	        <keywordReference id="org.eclipse.xtend.macro.lang.ui.keyword_Macro"/>
+	    </page>
+	</extension>
+
+<!-- Type Hierarchy  -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
+			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
+				style="push"
+				tooltip="%command.tooltip.2">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy"
+				style="push"
+				tooltip="%command.tooltip.3">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- Call Hierachy -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+				style="push"
+				tooltip="%command.tooltip.4">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.macro.lang.Macro.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+         adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+         <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+      </factory> 
+   </extension>
+   <extension point="org.eclipse.ui.editorActions">
+      <editorContribution targetID="org.eclipse.xtend.macro.lang.Macro" 
+                          id="org.eclipse.xtend.macro.lang.Macro.ide.rulerActions">
+	     <action
+	             label="%action.label"
+	             class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+	             style="push"
+	             actionID="RulerDoubleClick"
+	             id="org.eclipse.xtend.macro.lang.Macro.doubleClickBreakpointAction"/>
+	  </editorContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+         targetID="example.rulerContextMenuId"
+         id="org.eclipse.xtend.macro.lang.Macro.ide.RulerPopupActions">
+         <action
+            label="%action.label.0"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+            menubarPath="additions"
+            id="org.eclipse.xtend.macro.lang.Macro.ide.rulerContextMenu.toggleBreakpointAction">
+         </action>
+      </viewerContribution>
+   </extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtend.macro.lang.Macro.compare.contentViewers"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="macro">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtend.macro.lang.Macro.compare.contentMergeViewers"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="macro" label="%viewer.label">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtend.macro.lang.Macro.editors.documentProviders"
+            class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="macro">
+    </provider>
+  </extension>
+  <extension
+        point="org.eclipse.xtext.xbase.java_translation_participant">
+     <javaTranslator
+           class="org.eclipse.xtend.macro.lang.ui.MacroExecutableExtensionFactory:org.eclipse.xtend.macro.lang.processing.AnnotationProcessor"
+           fileExtension="xtend">
+     </javaTranslator>
+  </extension>
+
+</plugin>
