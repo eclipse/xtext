@@ -135,6 +135,9 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 		return new String[] { Strings.skipLastToken(getScopeProviderName(grammar, getNaming()),".") };
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		if(isGenerateXtendStub)
@@ -143,6 +146,9 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 			return null;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected String getTemplate() {
 		return super.getTemplate();
