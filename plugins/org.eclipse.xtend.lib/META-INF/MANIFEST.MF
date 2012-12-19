@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.xtend.lib
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Version: 2.4.0.qualifier
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtend.lib
+Import-Package: com.google.common.annotations;version="10.0.1"
