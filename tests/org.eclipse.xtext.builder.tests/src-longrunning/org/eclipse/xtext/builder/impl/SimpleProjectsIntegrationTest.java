@@ -336,6 +336,54 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	}
 	
 	@Test
+	public void testNewlyAddedReexportedSource() throws Exception {
+		IJavaProject foo = createJavaProject("foo");
+		IJavaProject bar = createJavaProject("bar");
+		IJavaProject baz = createJavaProject("baz");
+		addNature(foo.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
+		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
+		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
+		addSourceFolder(baz, "src");
+		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
+		waitForAutoBuild();
+		assertEquals(1,countMarkers(bazFile));
+		IFile file = foo.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
+		addToClasspath(foo, newLibraryEntry);
+		waitForAutoBuild();
+		assertEquals(0,countMarkers(bazFile));
+	}
+	
+	@Test
+	public void testReexportedJarRemoved() throws Exception {
+		IJavaProject foo = createJavaProject("foo");
+		IJavaProject bar = createJavaProject("bar");
+		IJavaProject baz = createJavaProject("baz");
+		addNature(foo.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
+		IFile file = foo.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
+		addToClasspath(foo, newLibraryEntry);
+		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
+		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
+		addSourceFolder(baz, "src");
+		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
+		waitForAutoBuild();
+		assertEquals(0,countMarkers(bazFile));
+		deleteClasspathEntry(foo, newLibraryEntry.getPath());
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(bazFile));
+		assertEquals(1, countResourcesInIndex());
+		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
+		assertFalse(references.hasNext());
+	}
+	
+	@Test
 	public void testFullBuild() throws Exception {
 		IProject project = createSimpleProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);

@@ -120,8 +120,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			if (XtextProjectHelper.hasNature(p)) {
 				IJavaProject javaProject = JavaCore.create(p);
 				if (javaProject.exists()) {
-					IPackageFragmentRoot fragmentRoot = javaProject.getPackageFragmentRoot(path.toFile().getAbsolutePath());
-					if (fragmentRoot.exists()) {
+					if (javaProject.isOnClasspath(root)) {
 						if (log.isTraceEnabled())
 							log.trace("Build of project '"+project.getName()+"' skips indexing classpath entry '"+path+"' because it already indexed by "+javaProject.getElementName());
 						return true;
