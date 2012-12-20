@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
 	
-	<rm:property key="xtend.checkout.location" value="${user.home}/git/org.eclipse.xtend.git" />
+	<rm:property key="xtend.checkout.location" value="${checkout.location}" />
 	
 	<rm:locator pattern="org.eclipse.xtend.releng" searchPathRef="xtend.releng" />
 	<rm:locator pattern="org.eclipse.xtend.examples" searchPathRef="xtend.examples" />
