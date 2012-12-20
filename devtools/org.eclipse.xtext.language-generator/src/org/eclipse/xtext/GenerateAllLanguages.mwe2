@@ -16,7 +16,7 @@ Workflow {
 	component = @xtext.ui.GenerateTestLanguages {}
 	
 	// examples
-	component = @example.arithmetics.Arithmetics {}
-	component = @example.domainmodel.GenerateDomainmodelLanguage {}
-	component = @example.fowlerdsl.GenerateStatemachine {}
+//	component = @example.arithmetics.Arithmetics {}
+//	component = @example.domainmodel.GenerateDomainmodelLanguage {}
+//	component = @example.fowlerdsl.GenerateStatemachine {}
 }
