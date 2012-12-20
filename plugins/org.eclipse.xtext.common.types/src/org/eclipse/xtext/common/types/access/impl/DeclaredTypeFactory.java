@@ -467,8 +467,15 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
 		JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
+		Class<T> declaringClass = constructor.getDeclaringClass();
+		int offset = 0;
+		if (declaringClass.isEnum()) {
+			offset = 2;
+		} else if (declaringClass.isMemberClass() && !Modifier.isStatic(declaringClass.getModifiers())) {
+			offset = 1;
+		}
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
-				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
+				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations(), offset);
 		result.setVarArgs(constructor.isVarArgs());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
@@ -490,26 +497,23 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
-			Annotation[][] annotations) {
+			Annotation[][] annotations, int offset) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
 		fqName.append(simpleName);
 		fqName.append('(');
-		for (int i = 0; i < parameterTypes.length; i++) {
-			if (i != 0)
+		for (int i = offset; i < parameterTypes.length; i++) {
+			if (i != offset)
 				fqName.append(',');
-			uriHelper.computeTypeName(parameterTypes[i], fqName);
+			Type parameterType = parameterTypes[i];
+			uriHelper.computeTypeName(parameterType, fqName);
+			result.getParameters().add(createFormalParameter(parameterType, "p" + (i - offset), result, annotations[i]));
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());
 		result.setSimpleName(simpleName);
 		setVisibility(result, member.getModifiers());
-		int i = 0;
-		for (Type parameterType : parameterTypes) {
-			result.getParameters().add(createFormalParameter(parameterType, "p" + i, result, annotations[i]));
-			i++;
-		}
 	}
 
 	public void enhanceGenericDeclaration(JvmExecutable result, GenericDeclaration declaration) {
@@ -526,7 +530,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} catch(GenericSignatureFormatError error) {
 			genericParameterTypes = method.getParameterTypes();
 		}
-		enhanceExecutable(result, method, method.getName(), genericParameterTypes, method.getParameterAnnotations());
+		enhanceExecutable(result, method, method.getName(), genericParameterTypes, method.getParameterAnnotations(), 0);
 		result.setVarArgs(method.isVarArgs());
 		enhanceGenericDeclaration(result, method);
 		result.setAbstract(Modifier.isAbstract(method.getModifiers()));

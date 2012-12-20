@@ -868,7 +868,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
-	@Test public void test_nestedTypes_Outer() {
+	@Test public void test_nestedTypes_Outer_01() {
 		String typeName = NestedTypes.Outer.class.getName();
 		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName();
 		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
@@ -878,8 +878,17 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmType outerType = (JvmType) type.eContainer();
 		assertEquals(NestedTypes.class.getName(), outerType.getIdentifier());
 	}
+	
+	@Test public void test_nestedTypes_Outer_02() {
+		String typeName = NestedTypes.Outer.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmConstructor> constructors = Lists.newArrayList(type.getDeclaredConstructors());
+		assertEquals(1, constructors.size());
+		JvmConstructor parameterlessConstructor = constructors.get(0);
+		assertEquals(0, parameterlessConstructor.getParameters().size());
+	}
 
-	@Test public void test_nestedTypes_Outer_Inner() {
+	@Test public void test_nestedTypes_Outer_Inner_01() {
 		String typeName = NestedTypes.Outer.Inner.class.getName();
 		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName() + "$"
 				+ NestedTypes.Outer.Inner.class.getSimpleName();
@@ -890,12 +899,40 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmType outerType = (JvmType) type.eContainer();
 		assertEquals(NestedTypes.Outer.class.getName(), outerType.getIdentifier());
 	}
+	
+	@Test public void test_nestedTypes_Outer_Inner_02() {
+		String typeName = NestedTypes.Outer.Inner.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmConstructor> constructors = Lists.newArrayList(type.getDeclaredConstructors());
+		assertEquals(1, constructors.size());
+		JvmConstructor parameterlessConstructor = constructors.get(0);
+		assertEquals(1, parameterlessConstructor.getParameters().size());
+	}
 
 	@Test public void test_staticNestedTypes_method() {
 		String typeName = StaticNestedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, StaticNestedTypes.class, "method()");
 		assertEquals("boolean", operation.getReturnType().getIdentifier());
+	}
+	
+	@Test public void test_staticNestedTypes_constructor() {
+		String typeName = Bug347739.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmMember> members = type.getMembers();
+		for(JvmMember member: members) {
+			if (member instanceof JvmGenericType) {
+				if ("StackItem".equals(member.getSimpleName())) {
+					JvmGenericType stackItem = (JvmGenericType) member;
+					Iterable<JvmConstructor> constructors = stackItem.getDeclaredConstructors();
+					for(JvmConstructor constructor: constructors) {
+						assertEquals(2, constructor.getParameters().size());
+					}
+					return;
+				}
+			}
+		}
+		fail("could not find inner class");
 	}
 
 	@Test public void test_staticNestedTypes_Outer() {
@@ -1551,6 +1588,21 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			assertEquals(JvmVisibility.PUBLIC, literal.getVisibility());
 		}
 		assertTrue(expectedLiterals.toString(), expectedLiterals.isEmpty());
+	}
+	
+	@Test public void testEnum_04() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		List<JvmMember> members = type.getMembers();
+		boolean constructorFound = false;
+		for(JvmMember member: members) {
+			if (member instanceof JvmConstructor) {
+				assertFalse(constructorFound);
+				constructorFound = true;
+				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
+				assertEquals(1, parameters.size()); // synthetic parameters are not returned
+			}
+		}
 	}
 	
 	@Test public void testAnnotations_01() throws Exception {
