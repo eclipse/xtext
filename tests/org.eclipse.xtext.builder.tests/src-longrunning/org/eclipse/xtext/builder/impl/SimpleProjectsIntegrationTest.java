@@ -384,6 +384,32 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	}
 	
 	@Test
+	public void testJarOnTwoProjectsRemovedFromOne() throws Exception {
+		IJavaProject foo = createJavaProject("foo");
+		IJavaProject bar = createJavaProject("bar");
+		IJavaProject baz = createJavaProject("baz");
+		addNature(foo.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
+		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
+		IFile file = foo.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
+		addToClasspath(foo, newLibraryEntry);
+		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
+		addToClasspath(bar, JavaCore.newLibraryEntry(file.getFullPath(), null, null,true));
+		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
+		addSourceFolder(baz, "src");
+		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
+		waitForAutoBuild();
+		assertEquals(0,countMarkers(bazFile));
+		assertEquals(2, countResourcesInIndex());
+		deleteClasspathEntry(foo, newLibraryEntry.getPath());
+		waitForAutoBuild();
+		assertEquals(0,countMarkers(bazFile));
+		assertEquals(2, countResourcesInIndex());
+	}
+	
+	@Test
 	public void testFullBuild() throws Exception {
 		IProject project = createSimpleProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
