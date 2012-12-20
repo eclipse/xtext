@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="xtend.rmap">
-    <cq:rootRequest name="org.eclipse.xtend.build" componentType="eclipse.feature"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.xtend?(?:\..*)?\.source$" skipComponent="true"/>
-</cq:componentQuery>

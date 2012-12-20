@@ -1,7 +1,0 @@
-importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtend.releng/releng/local/tests-${eclipse.target.platform}-local.target
-
-resolve "${checkout.location}/releng/org.eclipse.xtend.releng/releng/tests/xtend-test.mspec"
-
-build
-junit --launch "org.eclipse.xtend.core.tests/org.eclipse.xtend.core.tests.launch" --flatXML --output "${build.root}/xtend.test.results/org.eclipse.xtend.core.tests.xml"
-junit --launch "org.eclipse.xtend.ide.tests/org.eclipse.xtend.ide.tests.launch" --flatXML --output "${build.root}/xtend.test.results/org.eclipse.xtend.ide.tests.xml"
