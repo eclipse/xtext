@@ -508,7 +508,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				fqName.append(',');
 			Type parameterType = parameterTypes[i];
 			uriHelper.computeTypeName(parameterType, fqName);
-			result.getParameters().add(createFormalParameter(parameterType, "p" + (i - offset), result, annotations[i]));
+			result.getParameters().add(createFormalParameter(parameterType, "arg" + (i - offset), result, annotations[i]));
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());
