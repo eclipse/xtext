@@ -111,7 +111,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertEquals("java:/Objects/" + NESTED_TYPES, delta.getUri().toString());
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
-		assertEquals(6, allNames.size());
+		assertEquals(7, allNames.size());
 	}
 
 	protected void assertOriginalValues(Collection<String> allNames) {
@@ -121,6 +121,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
+		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner.Inner"));
 	}
 	
 	@Test public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
@@ -132,7 +133,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
-		assertEquals(6, allNames.size());
+		assertEquals(7, allNames.size());
 	}
 	
 	@Test public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -146,7 +147,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
 		assertTrue(allNames.contains(NESTED_TYPES + ".foobar"));
-		assertEquals(7, allNames.size());
+		assertEquals(8, allNames.size());
 	}
 	
 	@Test public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -159,7 +160,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
 		assertTrue(allNames.contains(NESTED_TYPES + ".method2"));
-		assertEquals(7, allNames.size());
+		assertEquals(8, allNames.size());
 	}
 	
 	@Test public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
@@ -172,7 +173,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		Collection<String> allNames = getNames(delta);
 		assertOriginalValues(allNames);
 		assertTrue(allNames.contains(NESTED_TYPES + "$Outer$Inner.method2"));
-		assertEquals(7, allNames.size());
+		assertEquals(8, allNames.size());
 	}
 	
 	@Test public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
@@ -198,8 +199,9 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertTrue(allNames.toString(), allNames.contains(foobar));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner"));
+		assertTrue(allNames.toString(), allNames.contains(foobar + "$Outer$Inner.Inner"));
 		assertTrue(allNames.contains(NESTED_TYPES));
-		assertEquals(7, allNames.size());
+		assertEquals(8, allNames.size());
 	}
 	
 	protected Collection<String> getNames(IResourceDescription.Delta delta) {
@@ -219,7 +221,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	protected void waitForEvent() throws InterruptedException {
-		int counter = 5000;
+		int counter = 50;
 		while(event == null && counter > 0) {
 			counter--;
 			Thread.sleep(15);
