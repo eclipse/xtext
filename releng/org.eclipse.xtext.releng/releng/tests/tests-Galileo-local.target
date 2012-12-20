@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="tests-galileo" sequenceNumber="1">
+<target name="tests-galileo-local" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.jdt.feature.group" version="3.5.2.r352_v20100108-7r88FEwFI0WTuoBl0iaG0tyhfZH6"/>
