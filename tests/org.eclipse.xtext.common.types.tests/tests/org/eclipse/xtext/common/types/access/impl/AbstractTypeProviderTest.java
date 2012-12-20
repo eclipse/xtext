@@ -144,6 +144,11 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			assertNotNull(computed);
 			assertEquals(identifier, computed);
 		}
+		Iterator<JvmFormalParameter> params = Iterators.filter(EcoreUtil.getAllContents(resource, false), JvmFormalParameter.class);
+		while(params.hasNext()) {
+			JvmFormalParameter parameter = params.next();
+			assertNotNull(parameter.eContainer().toString(), parameter.getName());
+		}
 	}
 
 	protected void getAndResolveAllFragments(Resource resource) {

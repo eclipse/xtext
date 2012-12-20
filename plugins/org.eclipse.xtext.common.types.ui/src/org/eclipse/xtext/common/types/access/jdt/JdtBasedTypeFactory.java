@@ -648,21 +648,26 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				if (javaMethod != null ) {
 					int numberOfParameters = javaMethod.getNumberOfParameters();
 					if (numberOfParameters != 0) {
-						if (javaMethod.exists()) {
-							try {
-								String[] parameterNames = javaMethod.getParameterNames();
-								for (int i = 0; i < parameterNames.length; i++) {
-									String string = parameterNames[i];
-									if (executable.getParameters().size() <= i) {
-										log.error("unmatching arity for java method "+javaMethod.toString()+" and "+executable.getIdentifier());
-									} else {
-										executable.getParameters().get(i).setName(string);
-									}
+						try {
+							String[] parameterNames = javaMethod.getParameterNames();
+							for (int i = 0; i < parameterNames.length; i++) {
+								String string = parameterNames[i];
+								if (executable.getParameters().size() <= i) {
+									log.error("unmatching arity for java method "+javaMethod.toString()+" and "+executable.getIdentifier());
+								} else {
+									executable.getParameters().get(i).setName(string);
 								}
-							} catch (JavaModelException ex) {
-								if (!ex.isDoesNotExist())
-									log.warn("IMethod.getParameterNames failed", ex);
 							}
+						} catch (JavaModelException ex) {
+							int i = 1;
+							for (JvmFormalParameter p : executable.getParameters()) {
+								if (p.getName() == null) {
+									p.setName("arg"+i);
+								}
+								i++;
+							}
+							if (!ex.isDoesNotExist())
+								log.warn("IMethod.getParameterNames failed", ex);
 						}
 					}
 				}
