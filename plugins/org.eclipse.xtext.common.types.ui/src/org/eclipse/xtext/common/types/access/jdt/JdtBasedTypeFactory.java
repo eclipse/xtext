@@ -659,7 +659,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 								}
 							}
 						} catch (JavaModelException ex) {
-							int i = 1;
+							int i = 0;
 							for (JvmFormalParameter p : executable.getParameters()) {
 								if (p.getName() == null) {
 									p.setName("arg"+i);
