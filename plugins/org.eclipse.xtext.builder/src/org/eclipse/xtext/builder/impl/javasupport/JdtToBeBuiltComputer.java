@@ -15,7 +15,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace.ProjectOrder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -35,6 +38,7 @@ import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
@@ -90,10 +94,11 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
 			progress.setWorkRemaining(roots.length);
 			final Map<String, Long> updated = Maps.newHashMap();
+			ProjectOrder orderedProjects = ResourcesPlugin.getWorkspace().computeProjectOrder(ResourcesPlugin.getWorkspace().getRoot().getProjects());
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
 					return toBeBuilt;
-				if (shouldHandle(root)) {
+				if (shouldHandle(root) && !isBuiltByUpstream(root, project, orderedProjects.projects)) {
 					Map<URI, IStorage> rootData = storage2UriMapperJavaImpl.getAllEntries(root);
 					toBeBuilt.getToBeDeleted().addAll(rootData.keySet());
 					toBeBuilt.getToBeUpdated().addAll(rootData.keySet());
@@ -105,6 +110,26 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			}
 		}
 		return toBeBuilt;
+	}
+	
+	protected boolean isBuiltByUpstream(IPackageFragmentRoot root, IProject project, IProject[] projectsInCorrectBuildOrder) {
+		IPath path = root.getPath();
+		for (IProject p : projectsInCorrectBuildOrder) {
+			if (p.equals(project))
+				return false;
+			if (XtextProjectHelper.hasNature(p)) {
+				IJavaProject javaProject = JavaCore.create(p);
+				if (javaProject.exists()) {
+					IPackageFragmentRoot fragmentRoot = javaProject.getPackageFragmentRoot(path.toFile().getAbsolutePath());
+					if (fragmentRoot.exists()) {
+						if (log.isTraceEnabled())
+							log.trace("Build of project '"+project.getName()+"' skips indexing classpath entry '"+path+"' because it already indexed by "+javaProject.getElementName());
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
