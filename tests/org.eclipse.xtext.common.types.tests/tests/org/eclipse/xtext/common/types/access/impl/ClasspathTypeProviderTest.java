@@ -216,7 +216,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	
 	@Override
 	protected String getCollectionParamName() {
-		return "p0";
+		return "arg0";
 	}
 	
 }
