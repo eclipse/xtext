@@ -22,7 +22,8 @@ Export-Package: org.eclipse.xtext.xbase.compiler;x-internal:=true,
  org.eclipse.xtext.xbase.junit.ui;x-internal:=true,
  testdata,
  testdata.a,
- testdata.b
+ testdata.b,
+ testdata.ordersensitivity
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.15",
