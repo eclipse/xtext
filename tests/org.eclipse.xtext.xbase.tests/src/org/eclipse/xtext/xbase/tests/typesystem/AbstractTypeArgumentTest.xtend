@@ -311,6 +311,59 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"(null as java.util.Collection<String>).addAll(null as Iterable<String>)".bindTypeArgumentsTo("String").done
 	}
 	
+	@Test def void testMethodTypeParamInference_18() throws Exception {
+		"testdata::OverloadedMethods::addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)".bindTypeArgumentsTo("CharSequence").done
+	}
+	
+	@Test def void testMethodTypeParamInference_19() throws Exception {
+		"{
+			val Iterable<String> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)
+		}".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testMethodTypeParamInference_20() throws Exception {
+		"{
+			val Iterable<CharSequence> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)
+		}".bindTypeArgumentsTo("CharSequence").done
+	}
+	
+	@Test def void testMethodTypeParamInference_21() throws Exception {
+		"testdata::OverloadedMethods::<CharSequence>addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)".bindTypeArgumentsTo("CharSequence").done
+	}
+
+	@Test def void testMethodTypeParamInference_22() throws Exception {
+		"testdata::OverloadedMethods::<String>addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)".bindTypeArgumentsTo("String").done
+	}
+	
+	@Ignore("TODO")
+	@Test def void testMethodTypeParamInference_23() throws Exception {
+		"{
+			val actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)
+			val Iterable<String> expectation = actual
+		}".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testMethodTypeParamInference_24() throws Exception {
+		"{
+			val actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)
+			val Iterable<CharSequence> expectation = actual
+		}".bindTypeArgumentsTo("CharSequence").done
+	}
+	
+	@Test def void testMethodTypeParamInference_25() throws Exception {
+		"{
+			val Iterable<CharSequence> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<Object>, null as java.util.List<String>)
+		}".bindTypeArgumentsTo("CharSequence").done
+	}
+	
+	@Ignore("TODO")
+	@Test def void testMethodTypeParamInference_26() throws Exception {
+		"{
+			val actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<Object>, null as java.util.List<String>)
+			val Iterable<CharSequence> expectation = actual
+		}".bindTypeArgumentsTo("CharSequence").done
+	}
+		
 	@Test def void testTypeForVoidClosure() throws Exception {
 		"newArrayList('foo','bar').forEach []".bindTypeArgumentsTo("String").and("String").done
 	}

@@ -367,6 +367,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return false;
 	}
 	
+	protected boolean isExtension() {
+		return false;
+	}
+	
 	protected ExpressionTypeComputationState getState() {
 		return state;
 	}

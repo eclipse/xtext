@@ -114,7 +114,7 @@ public class BoundTypeArgumentMerger {
 					boolean reverseConformant = inType.isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, false, true));
 					if (reverseConformant && variance == VarianceInfo.INVARIANT && VarianceInfo.IN.mergeDeclaredWithActuals(inVariances) == VarianceInfo.INVARIANT) {
 						type = inType;
-						variance = null;
+						variance = VarianceInfo.OUT;
 					} else {
 						VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 						variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);
@@ -126,6 +126,25 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
 		return new LightweightMergedBoundTypeArgument(type, variance);
+	}
+	
+	public boolean isPossibleMergeResult(Collection<LightweightBoundTypeArgument> allArguments, LightweightTypeReference candidate) {
+		if (allArguments.isEmpty())
+			return false;
+		LightweightMergedBoundTypeArgument merged = merge(allArguments, candidate.getOwner());
+		if (merged == null)
+			return false;
+		VarianceInfo variance = merged.getVariance();
+		LightweightTypeReference type = merged.getTypeReference();
+		if (variance == null || type == null) {
+			return false;
+		}
+		switch(variance) {
+			case INVARIANT: return candidate.isAssignableFrom(type, new TypeConformanceComputationArgument(false, true, true, true, false));
+			case OUT: return type.isAssignableFrom(candidate, new TypeConformanceComputationArgument());
+			case IN: return candidate.isAssignableFrom(type, new TypeConformanceComputationArgument());
+			default: throw new IllegalStateException("Unknown variance info: " + variance);
+		}
 	}
 
 	protected LightweightTypeReference getMostSpecialType(List<LightweightTypeReference> candidates) {

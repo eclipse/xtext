@@ -83,12 +83,29 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
+		int result = compareByArgumentTypes(right, false);
+		if (result != 0)
+			return result;
+		result = compareDeclaredArgumentTypes(right);
+		if (result != 0)
+			return result;
+		// subsequent parameters may have altered the bound type arguments
+		// TODO this is more of a workaround than a real solution
+		// actually the order of added hints and their sources should take care of that case
+		// in a way that UnboundTypeConformance returns false for invalid combinations
+		result = compareByArgumentTypes(right, true);
+		if (result != 0)
+			return result;
+		return result;
+	}
+	
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
 		for(int i = 0; i < upTo; i++) {
-			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i);
-			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i);
+			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
+			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
 			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 			if (hintCompareResult != 0)
 				return hintCompareResult;
@@ -104,10 +121,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				return -1;
 			return 1;
 		}
-		int result = compareDeclaredArgumentTypes(right);
-		if (result != 0)
-			return result;
-		return result;
+		return 0;
 	}
 	
 	protected int compareByConformanceHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
@@ -135,12 +149,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return 0;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
+	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
 		while(!arguments.isProcessed(idx)) {
 			computeArgumentType(arguments.getNextUnprocessedNextArgument());
 		}
 		XExpression argument = arguments.getArgument(idx);
-		return getState().getStackedResolvedTypes().getConformanceHints(argument);
+		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
 	protected int compareDeclaredArgumentTypes(AbstractPendingLinkingCandidate<?> right) {

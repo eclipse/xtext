@@ -283,18 +283,23 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return withParentHints;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(XExpression expression) {
+	protected EnumSet<ConformanceHint> getConformanceHints(XExpression expression, boolean recompute) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData == null) {
 			return EnumSet.of(ConformanceHint.EXCEPTION);
 		}
 		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
+		if (recompute) {
+			conformanceHints.add(ConformanceHint.UNCHECKED);
+			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
+			conformanceHints.remove(ConformanceHint.SUCCESS);
+		}
 		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
-				TypeConformanceResult conformanceResult = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
+				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
 				conformanceHints.addAll(conformanceResult.getConformanceHints());
 				conformanceHints.remove(ConformanceHint.UNCHECKED);
 				conformanceHints.add(ConformanceHint.CHECKED);

@@ -65,12 +65,6 @@ public class CompilerTest2 extends AbstractCompilerTest {
   }
   
   @Test
-  @Ignore(value = "TODO")
-  public void testBug_352849_05() throws Exception {
-    super.testBug_352849_05();
-  }
-  
-  @Test
   public void testEscapeCharacterForReservedNames() throws Exception {
     final String code = "package x class Z {\n\t\t\t  def Object create(Object x) {\n\t\t\t    create(x)\n\t\t\t  }\n\t\t\t}";
     final String javaCode = this.compileToJavaCode(code);

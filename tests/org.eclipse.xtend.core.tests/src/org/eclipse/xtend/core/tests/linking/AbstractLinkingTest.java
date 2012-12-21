@@ -987,6 +987,41 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
 	}
 	
+	@Test public void testOverloadedMethods_20() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<T> collection, T head) {\n" +
+				"    collection.addAll(head)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethods_21() throws Exception {
+		XtendFile file = file(
+				"import java.util.Collection\n" +
+				"class X {\n" +
+				"  def <T> foo(Collection<T> collection, Iterable<? extends T> elements) {\n" +
+				"    val t = elements.head\n" +
+				"    collection.addAll(t)\n" +
+				"  }\n" +
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction func  = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression) func.getExpression()).getExpressions().get(1);
+		JvmIdentifiableElement addAll = featureCall.getFeature();
+		assertNotNull(addAll);
+		assertFalse(addAll.eIsProxy());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions.addAll(java.util.Collection,T[])", addAll.getIdentifier());
+	}
+	
 	@Test public void testMemberFeatureScope_0() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { def String foo(String foo) {foo.length()}}");
 		XtendClass xClass = (XtendClass) file.getXtendTypes().get(0);

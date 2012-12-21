@@ -588,16 +588,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected void appendContent(@Nullable Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
-			MapJoiner joiner = Joiner.on("\n" + indentation).withKeyValueSeparator(" -> ");
-			result.append("\n" + indentation).append(prefix).append(": ");
+			MapJoiner joiner = Joiner.on("\n  " + indentation).withKeyValueSeparator(" -> ");
+			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
 			joiner.appendTo(result, map);
 		}
 	}
 	
 	protected void appendContent(@Nullable Multimap<?, ?> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
-			MultimapJoiner joiner = new MultimapJoiner(Joiner.on("\n  " + indentation), "\n" + indentation, " -> ");
-			result.append("\n" + indentation).append(prefix).append(": ");
+			MultimapJoiner joiner = new MultimapJoiner(
+					Joiner.on("\n    " + indentation), 
+					"\n  " + indentation, 
+					" ->\n" + indentation + "    ");
+			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
 			joiner.appendTo(result, map);
 		}
 	}

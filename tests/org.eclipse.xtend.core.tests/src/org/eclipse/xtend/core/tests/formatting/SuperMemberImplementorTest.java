@@ -62,21 +62,21 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassTypeParam() {
-		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U p0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U arg0) { " + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam2() {
 		checkOverrideMethodCode("classTypeParameter2",
-				"override classTypeParameter2(Iterable<? extends CharSequence> p0) { " + throwsExpression + "}");
+				"override classTypeParameter2(Iterable<? extends CharSequence> arg0) { " + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam3() {
 		checkOverrideMethodCode("classTypeParameter3",
-				"override classTypeParameter3(Iterable<? super CharSequence> p0) { " + throwsExpression + "}");
+				"override classTypeParameter3(Iterable<? super CharSequence> arg0) { " + throwsExpression + "}");
 	}
 
 	@Test public void testMethodTypeParam() {
-		checkOverrideMethodCode("methodTypeParameter", "override <V> methodTypeParameter(V p0) { " + throwsExpression
+		checkOverrideMethodCode("methodTypeParameter", "override <V> methodTypeParameter(V arg0) { " + throwsExpression
 				+ "}");
 	}
 
@@ -94,24 +94,24 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 
 	@Test public void testClassTypeParam_1() {
 		checkOverrideMethodCode("concreteClassTypeParameter",
-				"override concreteClassTypeParameter(U p0) { super.concreteClassTypeParameter(p0) }");
+				"override concreteClassTypeParameter(U arg0) { super.concreteClassTypeParameter(arg0) }");
 	}
 
 	@Test public void testMethodTypeParam_1() {
 		checkOverrideMethodCode("concreteMethodTypeParameter",
-				"override <V> concreteMethodTypeParameter(V p0) { super.<V>concreteMethodTypeParameter(p0)}");
+				"override <V> concreteMethodTypeParameter(V arg0) { super.<V>concreteMethodTypeParameter(arg0)}");
 	}
 
 	@Test public void testOverrideConstructor_0() {
-		checkImplementConstructor("String", "new(String p0) { super(p0) }");
+		checkImplementConstructor("String", "new(String arg0) { super(arg0) }");
 	}
 
 	@Test public void testOverrideConstructor_1() {
-		checkImplementConstructor("U", "new(U p0) { super(p0) }");
+		checkImplementConstructor("U", "new(U arg0) { super(arg0) }");
 	}
 
 	@Test public void testOverrideConstructor_2() {
-		checkImplementConstructor("int", "protected new(int p0) { super(p0) }");
+		checkImplementConstructor("int", "protected new(int arg0) { super(arg0) }");
 	}
 
 	@Test public void testOverrideConstructor_3() {

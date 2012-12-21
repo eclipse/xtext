@@ -57,6 +57,13 @@ public class OverloadedMethods<V> {
 		return "overloaded(List,List)";
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public <T> String overloaded(Object object, Object otherObject) {
+		return "overloaded(Object,Object)";
+	}
+	
 	public <T> String overloaded(Iterable<? extends T> iterable, Iterable<? extends T> otherIterable) {
 		return "overloaded(Iterable,Iterable)";
 	}
@@ -104,14 +111,14 @@ public class OverloadedMethods<V> {
 	 * @since 2.4
 	 */
 	public static <K> String addAllOverloaded(Collection<? super K> collection, Iterable<K> elements) {
-		return OverloadedMethods.addAll(collection, elements);
+		return OverloadedMethods.addAllExtends(collection, elements);
 	}
 	
 	/**
 	 * @since 2.4
 	 */
 	public static <K> String addAllOverloaded(Iterable<K> elements, Collection<? super K> collection) {
-		return addAll(collection, elements);
+		return addAllExtends(collection, elements);
 	}
 	
 	/**
@@ -124,11 +131,18 @@ public class OverloadedMethods<V> {
 	/**
 	 * @since 2.4
 	 */
-	public static <K> String addAllOverloaded_(Collection<? super K> collection, Iterable<? extends K> elements) {
-		return OverloadedMethods.addAll(collection, elements);
+	public static <K> String addAllSuperExtends(Collection<? super K> collection, Iterable<? extends K> elements) {
+		return OverloadedMethods.addAllExtends(collection, elements);
 	}
 	
-	private static  <T> String addAll(Collection<T> collection, Iterable<? extends T> elements) {
+	/**
+	 * @since 2.4
+	 */
+	public static <K> Collection<K> addAllSuperExtends2(Collection<? super K> collection, Iterable<? extends K> elements) {
+		return null;
+	}
+	
+	private static  <T> String addAllExtends(Collection<T> collection, Iterable<? extends T> elements) {
 		return "addAll(Collection,Iterable)";
 	}
 	

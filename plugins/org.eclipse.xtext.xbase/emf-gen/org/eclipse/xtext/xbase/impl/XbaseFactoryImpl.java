@@ -206,7 +206,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XNullLiteral createXNullLiteral()
 	{
-		XNullLiteralImpl xNullLiteral = new XNullLiteralImpl();
+		XNullLiteralImplCustom xNullLiteral = new XNullLiteralImplCustom();
 		return xNullLiteral;
 	}
 
@@ -316,7 +316,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XTypeLiteral createXTypeLiteral()
 	{
-		XTypeLiteralImpl xTypeLiteral = new XTypeLiteralImpl();
+		XTypeLiteralImplCustom xTypeLiteral = new XTypeLiteralImplCustom();
 		return xTypeLiteral;
 	}
 

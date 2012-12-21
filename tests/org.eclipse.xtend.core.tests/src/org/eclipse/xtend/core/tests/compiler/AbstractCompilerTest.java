@@ -1179,7 +1179,7 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"  	def generate() {\n" + 
 				"		val List<CharSequence> seq = null\n" + 
 				"		val List<String> strings = null\n" + 
-				"		val result1 = seq.addAll2(strings)\n" + 
+				"		val result1 = seq.addAll2(strings)\n" +
 				"		val Collection<String> test1 = result1\n" + 
 				"		val result2 = strings.addAll3(seq)\n" + 
 				"		val Collection<String> test2 = result2\n" + 
@@ -1187,6 +1187,65 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"		val Collection<String> test3 = result3\n" + 
 				"		val result4 = strings.addAllOverloaded(seq)\n" + 
 				"		val Collection<String> test4 = result4\n" + 
+				"	}\n" + 
+				"	def <K> Collection<K> addAll2(Collection<? super K> collection, Iterable<K> elements){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"	def <K> Collection<K> addAll3(Iterable<K> elements, Collection<? super K> collection){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"	def <K> Collection<K> addAllOverloaded(Collection<? super K> collection, Iterable<K> elements){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"	def <K> Collection<K> addAllOverloaded(Iterable<K> elements, Collection<? super K> collection){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+//	static class Z {
+//		void generate() {
+//			List<CharSequence> seq = null;
+//			List<String> strings = null;
+//			Collection<String> result1 = addAll2(seq, strings);
+//			Collection<String> result2 = addAll3(strings, seq);
+//			Collection<String> result3 = addAllOverloaded(seq, strings);
+//			Collection<String> result4 = addAllOverloaded(strings, seq);
+//		}
+//		public <K extends Object> Collection<K> addAll2(final Collection<? super K> collection,
+//				final Iterable<K> elements) {
+//			return null;
+//		}
+//		public <K extends Object> Collection<K> addAll3(final Iterable<K> elements, final Collection<? super K> collection) {
+//			return null;
+//		}
+//		public <K extends Object> Collection<K> addAllOverloaded(final Collection<? super K> collection,
+//				final Iterable<K> elements) {
+//			return null;
+//		}
+//		public <K extends Object> Collection<K> addAllOverloaded(final Iterable<K> elements, final Collection<? super K> collection) {
+//			return null;
+//		}
+//	}
+	@Test public void testBug_352849_01_b() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<String> result1 = seq.addAll2(strings)\n" +
+				"		val Collection<String> result2 = strings.addAll3(seq)\n" + 
+				"		val Collection<String> result3 = seq.addAllOverloaded(strings)\n" + 
+				"		val Collection<String> result4 = strings.addAllOverloaded(seq)\n" + 
 				"	}\n" + 
 				"	def <K> Collection<K> addAll2(Collection<? super K> collection, Iterable<K> elements){\n" +
 				"	    collection.addAll(elements)\n" + 
@@ -1233,6 +1292,31 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"		val Collection<String> test1 = result1\n" + 
 				"		val result2 = strings.addAll3(seq)\n" +
 				"		val Collection<String> test2 = result2\n" + 
+				"	}\n" + 
+				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"	def <T> Collection<T> addAll3(Iterable<? extends T> elements, Collection<? super T> collection){\n" +
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_352849_02_b() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<String> result1 = seq.addAll2(strings)\n" +
+				"		val Collection<String> result2 = strings.addAll3(seq)\n" +
 				"	}\n" + 
 				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" +
 				"	    collection.addAll(elements)\n" + 
@@ -1296,6 +1380,18 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testBug_352849_05() throws Exception {
+//		class Z {
+//			void generate() {
+//				List<CharSequence> seq = null;
+//				List<String> strings = null;
+//				java.util.Collection<String> result = 
+//						this.addAll2(seq, strings);
+//			}
+//			<T> java.util.Collection<T> addAll2(java.util.Collection<? super T> collection, Iterable<? extends T> elements) {
+//				CollectionExtensions.addAll(collection, elements);
+//				return null;
+//			}
+//		}
 		String code =
 				"package x\n" +
 				"import java.util.Collection\n" + 
@@ -1368,6 +1464,60 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 				"		val List<CharSequence> seq = null\n" + 
 				"		val List<String> strings = null\n" + 
 				"		val Collection<CharSequence> test = seq.addAll2(strings)\n" +
+				"	}\n" + 
+				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	@Test
+	public void testBug_352849_06_c() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<String> test = seq.addAll2(strings)\n" +
+				"	}\n" + 
+				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+//	static class Z {
+//		void generate() {
+//			List<Object> seq = null;
+//			List<String> strings = null;
+//			java.util.Collection<CharSequence> result = this.<CharSequence> addAll2(seq, strings);
+//		}
+//
+//		<T> java.util.Collection<T> addAll2(java.util.Collection<? super T> collection, Iterable<? extends T> elements) {
+//			CollectionExtensions.addAll(collection, elements);
+//			return null;
+//		}
+//	}
+	@Test
+	public void testBug_352849_06_d() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<Object> obj = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<CharSequence> test = obj.addAll2(strings)\n" +
 				"	}\n" + 
 				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
 				"	    collection.addAll(elements)\n" + 

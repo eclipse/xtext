@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,11 +20,14 @@ public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
 	
 	@Override
 	public String getName() {
-		if (name == null && eContainer() instanceof JvmExecutableImplCustom) {
-			JvmExecutableImplCustom jvmExecutableImplCustom = (JvmExecutableImplCustom) eContainer();
-			jvmExecutableImplCustom.runInitializer();
+		if (name == null) {
+			EObject executable = eContainer();
+			if (executable instanceof JvmExecutableImplCustom) {
+				JvmExecutableImplCustom jvmExecutableImplCustom = (JvmExecutableImplCustom) executable;
+				jvmExecutableImplCustom.runInitializer();
+			}
 		}
-		return super.getName();
+		return name;
 	}
 
 	@Override
@@ -37,4 +45,22 @@ public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
 		return getName();
 	}
 
+	@Override
+	public String toString() {
+		if (name != null) {
+			return "param " + name;
+		}
+		String result = "param [name not computed]";
+		EObject executable = eContainer();
+		if (executable != null) {
+			EReference containmentFeature = eContainmentFeature();
+			result = result + "@" + containmentFeature.getName();
+			if (containmentFeature.isMany()) {
+				List<?> siblings = (List<?>) executable.eGet(eContainmentFeature());
+				int idx = siblings.indexOf(this);
+				result = result + "[" + idx + "]";
+			}
+		}
+		return result; 
+	}
 }

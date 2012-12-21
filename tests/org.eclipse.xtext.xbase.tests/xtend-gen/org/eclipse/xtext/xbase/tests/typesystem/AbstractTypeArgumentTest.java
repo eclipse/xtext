@@ -494,6 +494,62 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testMethodTypeParamInference_18() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("testdata::OverloadedMethods::addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_19() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval Iterable<String> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t}", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_20() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval Iterable<CharSequence> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t}", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_21() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("testdata::OverloadedMethods::<CharSequence>addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_22() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("testdata::OverloadedMethods::<String>addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Ignore(value = "TODO")
+  @Test
+  public void testMethodTypeParamInference_23() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t\tval Iterable<String> expectation = actual\n\t\t}", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_24() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t\tval Iterable<CharSequence> expectation = actual\n\t\t}", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_25() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval Iterable<CharSequence> expectation = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<Object>, null as java.util.List<String>)\n\t\t}", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Ignore(value = "TODO")
+  @Test
+  public void testMethodTypeParamInference_26() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<Object>, null as java.util.List<String>)\n\t\t\tval Iterable<CharSequence> expectation = actual\n\t\t}", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testTypeForVoidClosure() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'foo\',\'bar\').forEach []", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");

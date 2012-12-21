@@ -259,6 +259,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		return helper.getSyntacticArguments(getFeatureCall());
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return getFeatureCall().isExtension();
 	}

@@ -4052,10 +4052,10 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("return new Inner<LocalName>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public void useProcedure(Procedure1<? super LocalName> p0) {");
+    _builder_1.append("public void useProcedure(Procedure1<? super LocalName> arg0) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_function.apply(p0);");
+    _builder_1.append("_function.apply(arg0);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
