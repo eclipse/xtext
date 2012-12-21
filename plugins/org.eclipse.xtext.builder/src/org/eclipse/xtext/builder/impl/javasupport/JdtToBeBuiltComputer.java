@@ -18,7 +18,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -113,7 +112,6 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	}
 	
 	protected boolean isBuiltByUpstream(IPackageFragmentRoot root, IProject project, IProject[] projectsInCorrectBuildOrder) {
-		IPath path = root.getPath();
 		for (IProject p : projectsInCorrectBuildOrder) {
 			if (p.equals(project))
 				return false;
@@ -122,7 +120,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 				if (javaProject.exists()) {
 					if (javaProject.isOnClasspath(root)) {
 						if (log.isTraceEnabled())
-							log.trace("Build of project '"+project.getName()+"' skips indexing classpath entry '"+path+"' because it already indexed by "+javaProject.getElementName());
+							log.trace("Build of project '"+project.getName()+"' skips indexing classpath entry '"+root.getPath()+"' because it already indexed by "+javaProject.getElementName());
 						return true;
 					}
 				}
