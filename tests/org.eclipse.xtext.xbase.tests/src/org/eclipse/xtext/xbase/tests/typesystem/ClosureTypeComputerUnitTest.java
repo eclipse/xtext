@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.After;
 import org.junit.Before;
@@ -302,6 +303,25 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	}
 	
 	@Test
+	public void testPrepareComputation_14() throws Exception {
+		JvmType iterableType = getTypeForName(Iterable.class, state);
+		JvmType elementType = getTypeForName(String.class, state);
+		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		WildcardTypeReference wildcard = new WildcardTypeReference(this);
+		wildcard.addUpperBound(new ParameterizedTypeReference(this, elementType));
+		iterableTypeReference.addTypeArgument(wildcard);
+		assertTrue(iterableTypeReference.isResolved());
+		
+		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
+		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
+		computer.prepareComputation();
+		LightweightTypeReference closureType = computer.getExpectedClosureType();
+		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
+		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
+		assertEquals("()=>Iterator<Unbound[T]>", closureType.getSimpleName());
+	}
+	
+	@Test
 	public void testHintsAfterPrepareComputation_01() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("ELEMENT", state);
@@ -346,6 +366,30 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		UnboundTypeReference closureTypeArgument = (UnboundTypeReference) closureType.getTypeArguments().get(0);
 		List<LightweightBoundTypeArgument> hints = state.getResolvedTypes().getHints(closureTypeArgument.getHandle());
 		assertEquals(hints.toString(), 1, hints.size());
+	}
+	
+	@Test
+	public void testHintsAfterPrepareComputation_03() throws Exception {
+		JvmType iterableType = getTypeForName(Iterable.class, state);
+		JvmType appendableType = getTypeForName(Appendable.class, state);
+		JvmType charSequenceType = getTypeForName(CharSequence.class, state);
+		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		WildcardTypeReference typeArgument = new WildcardTypeReference(this);
+		typeArgument.addUpperBound(new ParameterizedTypeReference(this, appendableType));
+		typeArgument.addUpperBound(new ParameterizedTypeReference(this, charSequenceType));
+		iterableTypeReference.addTypeArgument(typeArgument);
+		
+		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
+		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
+		computer.prepareComputation();
+		FunctionTypeReference closureType = computer.getExpectedClosureType();
+		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
+		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
+		assertEquals("()=>Iterator<Unbound[T]>", closureType.getSimpleName());
+		
+		UnboundTypeReference closureTypeArgument = (UnboundTypeReference) closureType.getTypeArguments().get(0);
+		List<LightweightBoundTypeArgument> hints = state.getResolvedTypes().getHints(closureTypeArgument.getHandle());
+		assertEquals(hints.toString(), 2, hints.size());
 	}
 	
 	protected XClosure closure(String string, ResourceSet contextResourceSet) throws Exception {

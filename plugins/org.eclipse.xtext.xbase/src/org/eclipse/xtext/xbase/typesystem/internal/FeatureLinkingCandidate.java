@@ -89,6 +89,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return description.isExtension();
 	}
@@ -103,11 +104,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx) {
-		if (idx == 0 && !isStatic()) {
-			return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
+		if (idx == 0 && hasReceiver()) {
+			if (!isExtension() || getImplicitReceiver() != null)
+				return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+			XExpression argument = getReceiver();
+			return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 		}
-		return super.getConformanceHints(idx);
+		return super.getConformanceHints(idx, recompute);
 	}
 	
 	@Override

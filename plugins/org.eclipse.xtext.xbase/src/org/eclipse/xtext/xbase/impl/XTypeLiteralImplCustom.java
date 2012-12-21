@@ -5,24 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.internal;
+package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
-public class ImplicitFirstArgument extends AbstractImplicitFeature {
+public class XTypeLiteralImplCustom extends XTypeLiteralImpl {
 
-	protected ImplicitFirstArgument(XAbstractFeatureCall featureCall, XAbstractFeatureCall implicit,
-			ExpressionTypeComputationState state) {
-		super(featureCall, implicit, state);
+	@Override
+	public String toString() {
+		return String.format("typeof(%s%s)", String.valueOf(type), Strings.concat("", getArrayDimensions()));
 	}
-
-	public void resolveLinkingProxy() {
-		getOwner().setImplicitFirstArgument(getFeatureCall());
-	}
-
+	
 }

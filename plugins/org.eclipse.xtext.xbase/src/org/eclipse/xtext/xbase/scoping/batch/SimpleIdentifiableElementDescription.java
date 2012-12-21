@@ -75,6 +75,11 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%s[%s]", getClass().getSimpleName(), delegate);
+	}
+	
 	@Nullable
 	public LightweightTypeReference getImplicitReceiverType() {
 		return null;

@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -98,6 +99,19 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		}
 	}
 
+	/**
+	 * Returns true if the existing hints would allow to resolve to the given reference.
+	 */
+	public boolean canResolveTo(LightweightTypeReference reference) {
+		if (internalIsResolved())
+			return reference.isAssignableFrom(resolvedTo, new TypeConformanceComputationArgument(false, true, true, true, false));
+		List<LightweightBoundTypeArgument> hints = getAllHints();
+		if (!hints.isEmpty() && hasSignificantHints(hints)) {
+			return canResolveTo(reference, hints);
+		}
+		return false;
+	}
+	
 	public boolean hasSignificantHints() {
 		if (internalIsResolved())
 			return true;
@@ -208,6 +222,26 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		LightweightTypeReference substitute = unboundSubstitutor.substitute(new ParameterizedTypeReference(getOwner(), typeParameter));
 		getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(substitute, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT));
 		resolvedTo = substitute;
+	}
+	
+	protected boolean canResolveTo(LightweightTypeReference reference, List<LightweightBoundTypeArgument> allHints) {
+		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
+		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
+		EnumSet<VarianceInfo> varianceHints = EnumSet.noneOf(VarianceInfo.class);
+		for(LightweightBoundTypeArgument hint: allHints) {
+			if (hint.getOrigin() instanceof VarianceInfo) {
+				varianceHints.add((VarianceInfo) hint.getOrigin());
+			} else {
+				effectiveHints.add(hint);
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					inferredHints.add(hint);
+				}
+			}
+		}
+		if (effectiveHints.isEmpty())
+			return false;
+		boolean result = getServices().getBoundTypeArgumentMerger().isPossibleMergeResult(!inferredHints.isEmpty() ? inferredHints : effectiveHints, reference);
+		return result;
 	}
 
 	protected boolean resolveWithHints(List<LightweightBoundTypeArgument> allHints) {

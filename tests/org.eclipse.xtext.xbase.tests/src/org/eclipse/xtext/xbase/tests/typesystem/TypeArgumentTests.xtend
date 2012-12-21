@@ -193,6 +193,26 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_18() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_20() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_24() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_25() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testMethodTypeParamInference_26() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testImplicitImportPrintln_01() throws Exception {
 		fail("fails in old implementation")
 	}

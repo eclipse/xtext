@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor
  * Externalized strategy for closure type computation which allows for easier unit testing.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ClosureTypeComputer {
 
 	private final XClosure closure;
@@ -140,7 +142,6 @@ public class ClosureTypeComputer {
 		return operation;
 	}
 	
-	@NonNullByDefault
 	protected FunctionTypeReference initKnownClosureType(JvmType type, JvmOperation operation) {
 		ITypeReferenceOwner owner = expectation.getReferenceOwner();
 		FunctionTypeReference result = new FunctionTypeReference(owner, type);
@@ -175,7 +176,6 @@ public class ClosureTypeComputer {
 		return result;
 	}
 
-	@NonNullByDefault
 	protected void initClosureType(FunctionTypeReference result, JvmOperation operation) {
 		ITypeReferenceOwner owner = result.getOwner();
 		OwnedConverter converter = new OwnedConverter(owner);
@@ -216,7 +216,6 @@ public class ClosureTypeComputer {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				new DeferredTypeParameterHintCollector(expectation.getReferenceOwner()) {
 					@Override
-					@NonNullByDefault
 					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 						LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
 						typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.RESOLVED, getOrigin(), getExpectedVariance(), getActualVariance());
@@ -245,7 +244,6 @@ public class ClosureTypeComputer {
 		return typeAssigner.getForkedState();
 	}
 
-	@NonNullByDefault
 	protected void processExpressionType(ITypeComputationResult expressionResult) {
 		LightweightTypeReference expressionResultType = expressionResult.getReturnType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
@@ -267,9 +265,28 @@ public class ClosureTypeComputer {
 		}
 	}
 	
-	protected void deferredBindTypeArgument(LightweightTypeReference declared, LightweightTypeReference actual) {
+	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual) {
 		if (declared != null) { 
-			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(expectation.getReferenceOwner());
+			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(expectation.getReferenceOwner()) {
+				
+				class UnboundTypeReferencePreserver extends DeferredParameterizedTypeReferenceTraverser {
+					@Override
+					public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+							ParameterizedTypeReference declaration) {
+						if (reference.internalIsResolved() || getOwner().isResolved(reference.getHandle())) {
+							reference.tryResolve();
+							outerVisit(reference, declaration);
+						} else {
+							addHint(reference, declaration);
+						}
+					}
+				}
+				
+				@Override
+				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+					return new UnboundTypeReferencePreserver();
+				}
+			};
 			collector.processPairedReferences(declared, actual);
 		}
 	}

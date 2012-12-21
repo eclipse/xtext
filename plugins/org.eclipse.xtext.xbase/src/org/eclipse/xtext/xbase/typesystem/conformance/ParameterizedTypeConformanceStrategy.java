@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -266,6 +265,9 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.SUCCESS;
 		if (left.isType(Object.class))
 			return TypeConformanceResult.SUCCESS;
+		if (!param.isRawType() && right.canResolveTo(left)) {
+			return TypeConformanceResult.SUCCESS;
+		}
 		right.tryResolve();
 		LightweightTypeReference resolvedTo = right.getResolvedTo();
 		if (resolvedTo != null) {

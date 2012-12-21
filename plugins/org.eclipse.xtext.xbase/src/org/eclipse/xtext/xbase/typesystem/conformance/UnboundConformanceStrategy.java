@@ -117,6 +117,9 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		}
 		if (left.getAllHints().equals(right.getAllHints()))
 			return TypeConformanceResult.SUCCESS;
+		TypeConformanceResult result = tryResolveAndCheckConformance(left, right, param);
+		if (result != null)
+			return result;
 		return TypeConformanceResult.FAILED;
 	}
 }

@@ -119,10 +119,10 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			throw new IllegalArgumentException("XExpression may not be null");
 		}
 		StackedResolvedTypes resolvedTypes = components[0].doComputeTypes(expression);
-		EnumSet<ConformanceHint> conformanceHints = resolvedTypes.getConformanceHints(expression);
+		EnumSet<ConformanceHint> conformanceHints = resolvedTypes.getConformanceHints(expression, false);
 		for(int i = 1; i < components.length; i++) {
 			StackedResolvedTypes candidate = components[i].doComputeTypes(expression);
-			EnumSet<ConformanceHint> candidateHints = candidate.getConformanceHints(expression);
+			EnumSet<ConformanceHint> candidateHints = candidate.getConformanceHints(expression, false);
 			int compareResult = ConformanceHint.compareHints(conformanceHints, candidateHints);
 			if (compareResult == 1) {
 				resolvedTypes = candidate;
