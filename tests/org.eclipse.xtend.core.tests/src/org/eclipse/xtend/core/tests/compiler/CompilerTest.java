@@ -38,6 +38,13 @@ public class CompilerTest extends AbstractCompilerTest {
 	
 	@Override
 	@Test
+	@Ignore("TODO this one should be valid, too since we could infer the CharSequence from the expected type")
+	public void testBug_352849_06_d() throws Exception {
+		super.testBug_352849_06_d();
+	}
+	
+	@Override
+	@Test
 	@Ignore("TODO these used to cause a stackoverflow " + 
 			"currently they fail with dangling references which is a lot better but " +
 			"there's still room for improvements")

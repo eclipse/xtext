@@ -1850,8 +1850,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 				        }
 				      };
 				    return new Inner<LocalName>() {
-				        public void useProcedure(Procedure1<? super LocalName> p0) {
-				          _function.apply(p0);
+				        public void useProcedure(Procedure1<? super LocalName> arg0) {
+				          _function.apply(arg0);
 				        }
 				    };
 				  }

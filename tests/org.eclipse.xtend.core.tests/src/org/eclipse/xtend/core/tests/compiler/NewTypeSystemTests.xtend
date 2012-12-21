@@ -72,12 +72,6 @@ class CompilerTest2 extends AbstractCompilerTest {
 		super.testBug_352849_02()
 	}
 	
-	@Test
-	@Ignore("TODO")
-	override testBug_352849_05() throws Exception {
-		super.testBug_352849_05()
-	}
-	
 	// overridden variant eliminates recursion
 	@Test
 	override testEscapeCharacterForReservedNames() throws Exception {
