@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.quickfix;
 
+import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -26,9 +27,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.internal.ui.wizards.NewClassCreationWizard;
+import org.eclipse.jdt.internal.ui.wizards.NewElementWizard;
+import org.eclipse.jdt.internal.ui.wizards.NewInterfaceCreationWizard;
+import org.eclipse.jdt.ui.wizards.NewClassWizardPage;
+import org.eclipse.jdt.ui.wizards.NewInterfaceWizardPage;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
@@ -37,7 +48,8 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
-import org.eclipse.xtend.ide.validator.XtendUIValidator;
+import org.eclipse.xtend.ide.wizards.NewXtendClassWizard;
+import org.eclipse.xtend.ide.wizards.NewXtendClassWizardPage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -75,6 +87,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
@@ -134,6 +147,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private CommonTypeComputationServices computationServices;
 	@Inject
 	private JdtTypeRelevance jdtTypeRelevance;
+	@Inject
+	private NewTypePageConfigurer newTypePageConfigurer;
+	@Inject Provider<NewXtendClassWizard> newXtendClassWizardProvider;
+	@Inject UndefinedMethodFix createMissingMethod;
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
@@ -164,16 +181,128 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 	
+	@Override
+	public void createLinkingIssueResolutions(final Issue issue,
+			final IssueResolutionAcceptor issueResolutionAcceptor) {
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
+				issue);
+		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		if (xtextDocument != null) {
+			xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource state) throws Exception {
+					EObject target = state.getEObject(issue.getUriToProblem().fragment());
+					EReference reference = getUnresolvedEReference(issue, target);
+					if (reference == null)
+						return;
+					
+					if( reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR ||
+						reference == XbasePackage.Literals.XTYPE_LITERAL__TYPE ||
+						reference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE){
+						URI context = state.getURI();
+						String issueString = getIssueString(issue, xtextDocument);
+						issueResolutionAcceptor.accept(
+								issue, 
+								"Create Xtend class", 
+								"Opens the new Xtend class wizard to create the type '" + issueString + "'", 
+								"xtend_file.png", openNewXtendClassWizardFor(context, issueString));
+						issueResolutionAcceptor.accept(issue, 
+								"Create Java class", 
+								"Opens the new Java class wizard to create the type '" + issueString + "'", 
+								"java_file.gif", 
+								openNewJavaClassWizardFor(context, issueString));
+						issueResolutionAcceptor.accept(issue, 
+								"Create Java Interface", 
+								"Opens the new Java interface wizard to create the type '" + issueString + "'", 
+								"java_interface.gif", 
+								openNewJavaInterfaceWizardFor(context, issueString));
+					}
+				}
+
+
+			});
+			super.createLinkingIssueResolutions(issue, issueResolutionAcceptor);
+		}
+	}
+	
+	protected String getIssueString(Issue issue, IXtextDocument xtextDocument)
+			throws BadLocationException {
+		return xtextDocument.get(issue.getOffset(), issue.getLength());
+	}
+	
+	private IModification openNewJavaInterfaceWizardFor(final URI contextUri, final String typeName) {
+		return new IModification() {
+			public void apply(IModificationContext context) throws Exception {
+				runAsyncInDisplayThread(new Runnable(){
+
+					public void run() {
+						NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
+						NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, false);
+						WizardDialog dialog = createWizardDialog(wizard); 
+						newTypePageConfigurer.configure(classWizardPage, contextUri, typeName);
+						dialog.open(); 
+					}
+				});
+			}
+		};
+	}
+	
+	private IModification openNewJavaClassWizardFor(final URI contextUri, final String typeName) {
+		return new IModification() {
+			public void apply(IModificationContext context) throws Exception {
+				runAsyncInDisplayThread(new Runnable(){
+
+					public void run() {
+						NewClassWizardPage classWizardPage = new NewClassWizardPage();
+						NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, false);
+						WizardDialog dialog = createWizardDialog(wizard); 
+						newTypePageConfigurer.configure(classWizardPage, contextUri, typeName);
+						dialog.open(); 
+					}
+				});
+			}
+		};
+	}
+
+	private IModification openNewXtendClassWizardFor(final URI contextUri, final String typeName) {
+		return new IModification() {
+			public void apply(IModificationContext context) throws Exception {
+				runAsyncInDisplayThread(new Runnable(){
+
+					public void run() {
+						NewElementWizard newXtendClassWizard = newXtendClassWizardProvider.get();
+						WizardDialog dialog = createWizardDialog(newXtendClassWizard); 
+						NewXtendClassWizardPage page = (NewXtendClassWizardPage) newXtendClassWizard.getStartingPage();
+						newTypePageConfigurer.configure(page, contextUri, typeName);
+						dialog.open(); 
+					}
+				});
+			}
+		};
+	}
+	
+	private WizardDialog createWizardDialog(
+			NewElementWizard newXtendClassWizard) {
+		IWorkbench workbench = PlatformUI.getWorkbench(); 
+		Shell shell = workbench.getActiveWorkbenchWindow().getShell(); 
+		newXtendClassWizard.init(workbench, new StructuredSelection());
+		WizardDialog dialog = new WizardDialog(shell, newXtendClassWizard);
+		dialog.create(); 
+		return dialog;
+	}
+	
 	/**
 	 * @since 2.3
 	 */
 	protected void createXtendLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		fixUndefinedMethod(issue, issueResolutionAcceptor);
 		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		if(issue.getData() != null && xtextDocument != null){
 			final String elementName = issue.getData()[0];
 			if(elementName != null)
 				xtextDocument.modify(new IUnitOfWork.Void<XtextResource>(){
+
 					@Override
 					public void process(final XtextResource state) throws Exception {
 						EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
@@ -182,6 +311,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							XExpression target = ((XMemberFeatureCall) eObject).getMemberCallTarget();
 							if(target != null && isExpressionWithName(target, XbaseScopeProvider.SUPER))
 								return;
+						}
+						XMemberFeatureCall memberFeatureCall = EcoreUtil2.getContainerOfType(eObject, XMemberFeatureCall.class);
+						if(memberFeatureCall == null){
+							return;
 						}
 						if(eObject instanceof XAbstractFeatureCall){
 							XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
@@ -261,6 +394,49 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								}
 							}
 						}
+					}
+
+					private JvmTypeReference resolveExpectedType(final XtextResource state, XAbstractFeatureCall call) {
+						JvmTypeReference expectedType = typeProvider.getExpectedType(call);
+						ITypeReferenceOwner owner = new ITypeReferenceOwner() {
+
+							@NonNull
+							public CommonTypeComputationServices getServices() {
+								return computationServices;
+							}
+
+							@NonNull
+							public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
+								throw new UnsupportedOperationException();
+							}
+
+							public void acceptHint(@NonNull Object handle,
+									@NonNull LightweightBoundTypeArgument boundTypeArgument) {
+								throw new UnsupportedOperationException();
+							}
+
+							@NonNull
+							public ResourceSet getContextResourceSet() {
+								return state.getResourceSet();
+							}
+							
+							public boolean isResolved(@NonNull Object handle) {
+								throw new UnsupportedOperationException();
+							}
+
+							public @NonNull List<JvmTypeParameter> getDeclaredTypeParameters() {
+								throw new UnsupportedOperationException();
+							}
+						};
+						TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+								Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
+								owner);
+						if(expectedType == null){
+							return null;
+						}
+						JvmTypeReference resolvedExpectedType = substitutor.substitute(
+								new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
+						return resolvedExpectedType;
 					}
 				});
 		}
@@ -728,6 +904,30 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			return (XExpression) expr;
 		else
 			return findContainerExpressionInBlockExpression(container);
+	}
+	
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS)
+	public void fixInvalidNumberOfArguments(final Issue issue, IssueResolutionAcceptor acceptor) {
+		fixUndefinedMethod(issue, acceptor);
+	}
+	
+	protected void fixUndefinedMethod(final Issue issue,
+			final IssueResolutionAcceptor issueResolutionAcceptor) {
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
+		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		if(xtextDocument != null){
+			xtextDocument.modify(new IUnitOfWork.Void<XtextResource>(){
+				@Override
+				public void process(XtextResource state) throws Exception {
+					EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
+					XMemberFeatureCall memberFeatureCall = EcoreUtil2.getContainerOfType(eObject, XMemberFeatureCall.class);
+					if(memberFeatureCall == null){
+						return;
+					}
+					createMissingMethod.apply(issue, issueResolutionAcceptor, memberFeatureCall);
+				}
+			});
+		}
 	}
 	
 	@Fix(IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH)
