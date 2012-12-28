@@ -7,9 +7,6 @@
 	<rm:locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
 	<rm:locator pattern="^org\.eclipse\.xtext\..*?(?:tests|testlanguages)(?:\..+)?$" searchPathRef="xtext.tests"/>
 
-	<rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
-	<rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
-
 	<rm:locator searchPathRef="platform" />
 
 	<rm:searchPath name="local.releng">
@@ -60,16 +57,4 @@
 		</rm:provider>
 	</rm:searchPath>
 
-	<rm:searchPath name="eclipse.test">
-		<rm:provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
-			<rm:uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}">
-				<bc:propertyRef key="buckminster.component" />
-			</rm:uri>
-		</rm:provider>
-		<rm:provider componentTypes="eclipse.feature" readerType="cvs" source="true" mutable="false">
-			<rm:uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}-feature">
-				<bc:propertyRef key="buckminster.component" />
-			</rm:uri>
-		</rm:provider>
-	</rm:searchPath>
 </rm:rmap>

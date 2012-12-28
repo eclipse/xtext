@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-  <rm:property key="xtend.git.clone.dest" value="${user.home}/git/org.eclipse.xtend"/>
+  <rm:property key="xtend.git.clone.dest" value="${user.home}/git/org.eclipse.xtext"/>
   <rm:locator pattern="org.eclipse.xtend.releng" searchPathRef="xtend.releng"/>
   <rm:locator pattern="org.eclipse.xtend.examples" searchPathRef="xtend.examples"/>
   <rm:locator pattern="^org\.eclipse\.xtend(?:\..+)\.tests$" searchPathRef="xtend.tests"/>
