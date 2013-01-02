@@ -81,18 +81,11 @@ public class FeatureOverridesService {
 	public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, ITypeArgumentContext ctx) {
 		Multimap<Triple<EClass, String, Integer>, JvmFeature> featureIndex = LinkedHashMultimap.create();
 		indexFeatures(type, featureIndex);
-		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
-		for (JvmTypeReference jvmTypeReference : types) {
-			JvmType jvmType = jvmTypeReference.getType();
-			if (jvmType instanceof JvmDeclaredType) {
-				indexFeatures((JvmDeclaredType) jvmType, featureIndex);
-			}
-		}
 		return removeOverridden(featureIndex, ctx);
 	}
 
 	protected void indexFeatures(JvmDeclaredType type, Multimap<Triple<EClass, String, Integer>, JvmFeature> index) {
-		for (JvmMember member : type.getMembers()) {
+		for (JvmMember member : type.getAllFeatures()) {
 			if (member instanceof JvmExecutable) {
 				Triple<EClass, String, Integer> key = Tuples.create(member.eClass(), member.getSimpleName(),
 						((JvmExecutable) member).getParameters().size());

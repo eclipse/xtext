@@ -139,31 +139,35 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			while(iter.hasNext()) {
 				JvmFeature next = iter.next();
 				if (next instanceof JvmOperation) {
-					/* 
-					 * TODO use upper bound information for cases like
-					 * class MyStringList extends ArrayList<String>
-					 * where add(String) actually overrides add(T/Object)
-					 */
-					List<JvmFormalParameter> parameters = ((JvmOperation) next).getParameters();
-					StringBuilder signature = new StringBuilder(next.getSimpleName());
-					if (parameters.isEmpty()) {
-						signature.append("()");
-					} else {
-						signature.append("(");
-						for(JvmFormalParameter parameter: parameters) {
-							JvmType parameterType = getRawType(parameter.getParameterType());
-							if (parameterType != null) {
-								signature.append(parameterType.getIdentifier());
-								signature.append(",");
+					JvmOperation operation = (JvmOperation) next;
+					if (!operation.isStatic()) {
+						/* 
+						 * TODO use upper bound information for cases like
+						 * class MyStringList extends ArrayList<String>
+						 * where add(String) actually overrides add(T/Object)
+						 */
+						List<JvmFormalParameter> parameters = operation.getParameters();
+						StringBuilder signature = new StringBuilder(operation.getSimpleName());
+						if (parameters.isEmpty()) {
+							signature.append("()");
+						} else {
+							signature.append("(");
+							for(JvmFormalParameter parameter: parameters) {
+								JvmType parameterType = getRawType(parameter.getParameterType());
+								if (parameterType != null) {
+									signature.append(parameterType.getIdentifier());
+									signature.append(",");
+								}
 							}
+							signature.replace(signature.length() - 1, signature.length(), ")");
 						}
-						signature.replace(signature.length() - 1, signature.length(), ")");
-					}
-					if (!signatures.add(signature.toString())) {
-						iter.remove();
+						if (!signatures.add(signature.toString())) {
+							iter.remove();
+						}
 					}
 				} else if (next instanceof JvmField) {
-					if (!signatures.add(next.getSimpleName())) {
+					JvmField field = (JvmField) next;
+					if (!field.isStatic() && !signatures.add(field.getSimpleName())) {
 						iter.remove();
 					}
 				}
