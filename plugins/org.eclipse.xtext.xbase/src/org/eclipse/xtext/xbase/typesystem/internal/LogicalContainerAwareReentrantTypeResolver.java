@@ -267,7 +267,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(field);
 		if (childResolvedTypes == null)
-			throw new IllegalStateException("No resolved type found. Type was: " + field.getIdentifier());
+			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
 		
 		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, featureScopeSession, field, this);
 		ITypeComputationResult result = state.computeTypes();
@@ -284,7 +284,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(constructor);
 		if (childResolvedTypes == null)
-			throw new IllegalStateException("No resolved type found. Type was: " + constructor.getIdentifier());
+			throw new IllegalStateException("No resolved type found. Constructor was: " + constructor.getIdentifier());
 		
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession, constructor, this);
 		state.computeTypes();
@@ -298,7 +298,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		if (childResolvedTypes == null) {
 			if (preparedResolvedTypes.containsKey(operation))
 				return;
-			throw new IllegalStateException("No resolved type found. Type was: " + operation.getIdentifier());
+			throw new IllegalStateException("No resolved type found. Operation was: " + operation.getIdentifier());
 		}
 		
 		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, featureScopeSession, operation, this);
