@@ -34,6 +34,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFeatureForTypeProvider {
 
 	@Override

@@ -42,6 +42,7 @@ import com.google.inject.Singleton;
 /**
  * Type provider that is aware of Xtend specific expressions and the inferred JVM model.
  */
+@Deprecated
 @Singleton
 public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 

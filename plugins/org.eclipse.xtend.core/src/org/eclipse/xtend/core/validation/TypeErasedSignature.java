@@ -19,12 +19,14 @@ import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TypeErasedSignature {
 
+	@Singleton
 	public static class Provider {
 		
 		@Inject
