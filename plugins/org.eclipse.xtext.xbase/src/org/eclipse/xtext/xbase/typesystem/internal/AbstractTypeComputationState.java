@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.FeatureLinkHelper;
 
 import com.google.common.collect.Lists;
 
