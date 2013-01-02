@@ -71,9 +71,13 @@ public class JvmVisibilityServiceTest extends Assert {
 			}
 		});
 
-		provider = new VisibilityService();
+		provider = createVisibilityService();
 		provider.setSuperTypeCollector(new SuperTypeCollector());
 		provider.setTypesFactory(TypesFactory.eINSTANCE);
+	}
+
+	protected VisibilityService createVisibilityService() {
+		return new VisibilityService();
 	}
 
 	@Test public void testNoContext() throws Exception {
