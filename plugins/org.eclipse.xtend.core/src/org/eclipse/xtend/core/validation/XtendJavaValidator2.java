@@ -34,8 +34,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.typing.ReturnTypeProvider;
-import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
@@ -99,7 +97,8 @@ import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+import org.eclipse.xtext.xbase.typesystem.util.OverrideHelper;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 
@@ -136,7 +135,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	private IXtendJvmAssociations associations;
 
 	@Inject
-	private XtendOverridesService overridesService;
+	private OverrideHelper overrideHelper;
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
@@ -168,9 +167,6 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Inject
 	private JvmTypeExtensions typeExtensions;
 	
-	@Inject
-	private ReturnTypeProvider returnTypeProvider;
-
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
 			ImmutableSet.of(
@@ -613,7 +609,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Check
 	protected void checkFunctionOverride(XtendFunction function) {
 		JvmOperation operation = associations.getDirectlyInferredOperation(function);
-		JvmOperation overriddenOperation = overridesService.findOverriddenOperation(function);
+		JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(operation);
 		if (overriddenOperation == null) {
 			if (function.isOverride()) {
 				error("The method "+ uiStrings.signature(operation) +" of type "+operation.getDeclaringType().getSimpleName()+" must override a superclass method.", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
@@ -864,7 +860,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 			for (Pair<String, Integer> key : dispatchMethods.keySet()) {
 				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(key);
 				JvmOperation syntheticDispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, key);
-				JvmOperation overriddenOperation = overridesService.findOverriddenOperation(syntheticDispatchMethod);
+				JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(syntheticDispatchMethod);
 				Boolean expectStatic = null;
 				if(overriddenOperation != null) { 
 					if (isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) {
@@ -909,19 +905,20 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 								}
 							}
 						}
-						XtendFunction function = associations.getXtendFunction(jvmOperation);
-						if (function != null) {
-							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
-							if (functionReturnType != null) {
-								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
-									error("Incompatible return type of dispatch method. Expected "
-											+ getNameOfTypes(jvmOperation.getReturnType()) + " but was "
-											+ canonicalName(functionReturnType), function,
-											XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
-											ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
-								}
-							}
-						}
+						// TODO move validation to type computation
+//						XtendFunction function = associations.getXtendFunction(jvmOperation);
+//						if (function != null) {
+//							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
+//							if (functionReturnType != null) {
+//								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
+//									error("Incompatible return type of dispatch method. Expected "
+//											+ getNameOfTypes(jvmOperation.getReturnType()) + " but was "
+//											+ canonicalName(functionReturnType), function,
+//											XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
+//											ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
+//								}
+//							}
+//						}
 					}
 					if (commonVisibility == null) {
 						addDispatchError(type, dispatchOperations, "All local dispatch methods must have the same visibility.", 
@@ -1186,7 +1183,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Check
     public void checkLeftHandSideIsVariable(XAssignment assignment){
         String concreteSyntaxFeatureName = assignment.getConcreteSyntaxFeatureName();
-        if(concreteSyntaxFeatureName.equals(XbaseScopeProvider.THIS.toString()))
+        if(concreteSyntaxFeatureName.equals(IFeatureNames.THIS.toString()))
             error("Left-hand side of an assignment must be an variable", XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, LEFT_HAND_SIDE_MUST_BE_VARIABLE);
     }
 	
