@@ -95,12 +95,15 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement) {
-		return getResolvedTypes(identifiableElement).getActualType(identifiableElement).toTypeReference();
+		LightweightTypeReference actualType = getResolvedTypes(identifiableElement).getActualType(identifiableElement);
+		if (actualType == null)
+			return null;
+		return actualType.toTypeReference();
 	}
 
 	@Override
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType) {
-		return getResolvedTypes(identifiableElement).getActualType(identifiableElement).toTypeReference();
+		return getTypeForIdentifiable(identifiableElement);
 	}
 
 	@Override
