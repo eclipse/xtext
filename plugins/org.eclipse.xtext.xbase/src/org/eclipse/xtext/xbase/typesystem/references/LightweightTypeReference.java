@@ -162,11 +162,28 @@ public abstract class LightweightTypeReference {
 		return null;
 	}
 	
+	/**
+	 * Returns the list of immediate super types which includes the super class and the 
+	 * implemented interfaces. The type parameters of the provided super types are resolved.
+	 * That means, the super type of <code>List&lt;String&gt;</code> is <code>Collection&lt;String&gt;</code> 
+	 * rather than <code>Collection&lt;E&gt;</code>.
+	 * 
+	 * @return the list of super types, can be empty.
+	 */
 	public List<LightweightTypeReference> getSuperTypes() {
 		TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 		return getSuperTypes(substitutor);
 	}
 	
+	/**
+	 * Returns the list of all super types which includes the super class and the 
+	 * implemented interfaces. The type parameters of the provided super types are resolved.
+	 * That means, the super types of <code>ArrayList&lt;String&gt;</code> includes
+	 * <code>List&lt;String&gt;</code> and <code>Collection&lt;String&gt;</code> 
+	 * rather than <code>Collection&lt;E&gt;</code>.
+	 * 
+	 * @return the list of all super types, can be empty.
+	 */
 	public List<LightweightTypeReference> getAllSuperTypes() {
 		final List<LightweightTypeReference> result = Lists.newArrayList();
 		final Multiset<JvmType> distances = HashMultiset.create(7);
