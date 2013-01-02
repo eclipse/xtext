@@ -9,11 +9,8 @@ package org.eclipse.xtext.common.types.util;
 
 import java.util.HashSet;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -53,8 +50,6 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
 	@Before
     public void setUp() throws Exception {
         ResourceSet resourceSet = new ResourceSetImpl();
-        Resource syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
-        resourceSet.getResources().add(syntheticResource);
         Injector injector = Guice.createInjector(getModule());
         injector.injectMembers(this);
         typeProvider = injector.getInstance(IJvmTypeProvider.Factory.class).findOrCreateTypeProvider(resourceSet);
@@ -92,6 +87,7 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
         assertTrue(set.contains(findOperation(SubClass.class.getName(),"protectedField")));
         assertTrue(set.contains(findOperation(SubClass.class.getName(),"publicField")));
         
+        // #privateField is public and static in the super class
         assertTrue(set.contains(findOperation(SuperClass.class.getName(),"privateField")));
         assertFalse(set.contains(findOperation(SuperClass.class.getName(),"protectedField")));
         assertFalse(set.contains(findOperation(SuperClass.class.getName(),"publicField")));
@@ -104,6 +100,15 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
         assertFalse(set.contains(findOperation(SuperClass.class.getName(),"privateMethod(java.lang.String)")));
         assertTrue(set.contains(findOperation(SubClass.class.getName(),"privateMethod(java.lang.Object)")));
         assertTrue(set.contains(findOperation(SubClass.class.getName(),"privateMethod(java.lang.String)")));
+    }
+    
+    @Test public void testPrivateFieldShadowsInheritedPublicField() throws Exception {
+        JvmTypeReference reference = typeRefs.typeReference(SubClass.class.getName()).create();
+        Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
+        HashSet<JvmFeature> set = Sets.newHashSet(iterable);
+        
+        assertTrue(set.contains(findOperation(SubClass.class.getName(),"shadowedByPrivateField")));
+        assertFalse(set.contains(findOperation(SuperClass.class.getName(),"shadowedByPrivateField")));
     }
     
     @Test public void testGenerics_00() throws Exception {

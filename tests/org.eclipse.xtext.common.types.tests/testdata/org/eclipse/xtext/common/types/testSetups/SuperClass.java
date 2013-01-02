@@ -13,6 +13,7 @@ package org.eclipse.xtext.common.types.testSetups;
 @SuppressWarnings("unused")
 public class SuperClass {
 	public static String privateField;
+	public String shadowedByPrivateField;
 	protected String protectedField;
 	public String publicField;
 	
