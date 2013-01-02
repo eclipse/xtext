@@ -67,4 +67,9 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		return voidAllowed;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("InferredTypeIndicator[resolved=%s, voidAllowed=%s]", resolved, voidAllowed);
+	}
+	
 }
