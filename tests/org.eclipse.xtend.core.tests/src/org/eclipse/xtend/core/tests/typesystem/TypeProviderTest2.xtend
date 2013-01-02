@@ -57,13 +57,13 @@ class TypeProviderTest2 extends TypeProviderTest {
 	}
 	
 	@Test
-	@Ignore("TODO improve expectation due to unresolved type parameters")
+	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter")
 	override testTypeOfRichStringWithExpectedString_2() throws Exception {
 		super.testTypeOfRichStringWithExpectedString_2()
 	}
 	
 	@Test
-	@Ignore("TODO improve expectation due to unresolved type parameters") 
+	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter") 
 	override testTypeOfRichStringWithExpectedString_3() throws Exception {
 		super.testTypeOfRichStringWithExpectedString_3()
 	}
