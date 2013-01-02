@@ -156,7 +156,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
-		featureScopeSession = featureScopeSession.addLocalElement(QualifiedName.create(element.getSimpleName()), element);
+		featureScopeSession = featureScopeSession.addLocalElement(QualifiedName.create(element.getSimpleName()), element, getReferenceOwner());
 	}
 
 	public TypeAssigner assignTypes() {
