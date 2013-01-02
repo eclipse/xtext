@@ -122,6 +122,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  * @author Holger Schill
  */
+@Deprecated
 @ComposedChecks(validators = { AnnotationValidation.class })
 public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 

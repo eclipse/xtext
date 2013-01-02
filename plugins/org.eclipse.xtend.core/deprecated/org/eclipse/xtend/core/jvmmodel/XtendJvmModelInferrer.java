@@ -92,6 +92,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
+@Deprecated
 public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	public static final String CREATE_INITIALIZER_PREFIX = "_init_";

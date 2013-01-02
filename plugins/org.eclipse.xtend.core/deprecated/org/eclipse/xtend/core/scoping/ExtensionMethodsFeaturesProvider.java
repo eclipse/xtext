@@ -27,6 +27,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypeProvider {
 	
 	private JvmTypeReference extensionProvidingType;

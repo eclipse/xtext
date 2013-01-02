@@ -37,6 +37,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow - Implicit first argument
  */
+@Deprecated
 public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	private static final int IMPORTED_STATIC_FEATURE_PRIORITY = 50;

@@ -35,11 +35,11 @@ public class XtendCompileStrategies {
 	}
 
 	@Inject
-	private Provider<CacheMethodCompileStrategy> cacheMathodProvider;
+	private Provider<CacheMethodCompileStrategy> cacheMethodProvider;
 
 	public Procedures.Procedure1<ITreeAppendable> forCacheMethod(CreateExtensionInfo createExtensionInfo,
 			JvmField cacheField, JvmOperation initializerMethod) {
-		CacheMethodCompileStrategy strategy = cacheMathodProvider.get();
+		CacheMethodCompileStrategy strategy = cacheMethodProvider.get();
 		strategy.init(createExtensionInfo, cacheField, initializerMethod);
 		return strategy;
 	}
