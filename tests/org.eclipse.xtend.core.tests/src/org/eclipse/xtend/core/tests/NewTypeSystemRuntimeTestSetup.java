@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.validation.XtendJavaValidator;
 import org.eclipse.xtend.core.validation.XtendJavaValidator2;
 import org.eclipse.xtend.core.xtend.XtendFactory;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -111,6 +113,10 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 			@SingletonBinding(eager = true)
 			public Class<? extends XtendJavaValidator2> bindXtendJavaValidator2() {
 				return XtendJavaValidator2.class;
+			}
+			
+			public Class<? extends VisibilityService> bindVisibilityService() {
+				return LegacyVisibilityService.class;
 			}
 		});
 	}
