@@ -12,11 +12,11 @@ import java.util.Collections;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.inject.Inject;
 
@@ -40,6 +40,9 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	
 	@Inject
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IVisibilityHelper visibilityHelper;
 
 	@Override
 	protected FeatureScopes getFeatureScopes() {
@@ -81,8 +84,8 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
-	public boolean isVisible(JvmFeature feature) {
-		return feature.getVisibility() == JvmVisibility.PUBLIC;
+	public boolean isVisible(JvmMember member) {
+		return visibilityHelper.isVisible(member);
 	}
 	
 }

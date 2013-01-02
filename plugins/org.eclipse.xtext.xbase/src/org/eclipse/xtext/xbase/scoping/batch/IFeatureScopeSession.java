@@ -15,17 +15,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.inject.ImplementedBy;
 
@@ -42,7 +42,7 @@ import com.google.inject.ImplementedBy;
  */
 @NonNullByDefault
 @ImplementedBy(RootFeatureScopeSession.class)
-public interface IFeatureScopeSession {
+public interface IFeatureScopeSession extends IVisibilityHelper {
 
 	/**
 	 * Return the scope for the given {@code context} and {@code reference} based on the
@@ -83,7 +83,7 @@ public interface IFeatureScopeSession {
 	 * @param element the element itself.
 	 * @return a configured session.
 	 */
-	IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element);
+	IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner);
 	
 	/**
 	 * Add locally defined identifiables to this scope. Since the elements have unique names, they cannot shadow
@@ -91,14 +91,7 @@ public interface IFeatureScopeSession {
 	 * @param elements the local elements.
 	 * @return a configured session.
 	 */
-	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements);
-	
-	/**
-	 * Returns <code>true</code> if the feature is visible according to the {@link JvmVisibility} and the current context.
-	 * @param feature the feature that shall be accessed.
-	 * @return <code>true</code> if the feature can be accessed.
-	 */
-	boolean isVisible(JvmFeature feature);
+	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner);
 	
 	/**
 	 * Find a local element with the given qualified name.

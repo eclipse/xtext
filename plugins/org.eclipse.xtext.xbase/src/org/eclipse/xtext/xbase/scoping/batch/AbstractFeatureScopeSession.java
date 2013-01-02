@@ -17,14 +17,15 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -80,18 +81,19 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 
-	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element) {
-		IFeatureScopeSession result = addLocalElements(Collections.singletonMap(name, element));
+	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner) {
+		IFeatureScopeSession result = addLocalElements(Collections.singletonMap(name, element), owner);
 		return result;
 	}
 	
-	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements) {
+	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner) {
 		if (elements.isEmpty())
 			return this;
 		if (elements.containsKey(IFeatureNames.THIS)) {
 			JvmIdentifiableElement associatedWithThis = elements.get(IFeatureNames.THIS);
 			if (associatedWithThis instanceof JvmType) {
-				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, (JvmType) associatedWithThis);
+				LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
+				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context);
 				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
 				return result;
 			}

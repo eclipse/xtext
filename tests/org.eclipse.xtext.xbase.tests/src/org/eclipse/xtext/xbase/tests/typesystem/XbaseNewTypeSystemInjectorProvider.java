@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
@@ -93,6 +95,10 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		@SingletonBinding(eager=true)	
 		public Class<? extends XbaseJavaValidator> bindXbaseJavaValidator() {
 			return XbaseJavaValidator2.class;
+		}
+		
+		public Class<? extends VisibilityService> bindVisibilityService() {
+			return LegacyVisibilityService.class;
 		}
 		
 	}

@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -131,7 +132,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
-		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
+		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, resolvedTypes.getReferenceOwner(), type);
 		prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
 	}
 
@@ -351,7 +352,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(type);
 		if (childResolvedTypes == null)
 			throw new IllegalStateException("No resolved type found. Type was: " + type.getIdentifier());
-		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
+		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, childResolvedTypes.getReferenceOwner(), type);
 		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, childSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
 		
@@ -366,21 +367,21 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
-	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType type) {
+	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, ITypeReferenceOwner owner, JvmDeclaredType type) {
 		JvmTypeReference superType = getExtendedClass(type);
-		return addThisAndSuper(session, type, superType);
+		return addThisAndSuper(session, owner, type, superType);
 	}
 
-	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType thisType,
+	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, ITypeReferenceOwner owner, JvmDeclaredType thisType,
 			@Nullable JvmTypeReference superType) {
 		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
 			builder.put(IFeatureNames.THIS, thisType);
 			builder.put(IFeatureNames.SUPER, superType.getType());
-			childSession = session.addLocalElements(builder.build());
+			childSession = session.addLocalElements(builder.build(), owner);
 		} else {
-			childSession = session.addLocalElement(IFeatureNames.THIS, thisType);
+			childSession = session.addLocalElement(IFeatureNames.THIS, thisType, owner);
 		}
 		return childSession;
 	}
