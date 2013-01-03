@@ -15,31 +15,31 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::ui::generator::quickfix::QuickfixProviderFragment»
 
-«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar»
 	«IF generateStub»
 		«IF generateXtendStub»
-			«EXPAND xtendQuickfixProvider»
+			«EXPAND xtendQuickfixProvider(superClassName)»
 		«ELSE»
-			«EXPAND javaQuickfixProvider»
+			«EXPAND javaQuickfixProvider(superClassName)»
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE javaQuickfixProvider FOR Grammar»
+«DEFINE javaQuickfixProvider(String superClassName) FOR Grammar»
 «FILE getQuickfixProviderName().asPath()+".java" SRC_UI-»
 /*
 «fileHeader()»
 */
 package «getQuickfixProviderName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import «superClassName»;
 
 /**
  * Custom quickfixes.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider {
+public class «getQuickfixProviderName().toSimpleName()» extends «superClassName.toSimpleName()» {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -57,14 +57,14 @@ public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixP
 «ENDDEFINE»
 
 
-«DEFINE xtendQuickfixProvider FOR Grammar»
+«DEFINE xtendQuickfixProvider(String superClassName) FOR Grammar»
 «FILE getQuickfixProviderName().asPath()+".xtend" SRC_UI-»
 /*
 «fileHeader()»
 */
 package «getQuickfixProviderName().toJavaPackage()»
 
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import «superClassName»
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 //import org.eclipse.xtext.validation.Issue
@@ -74,7 +74,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider {
+class «getQuickfixProviderName().toSimpleName()» extends «superClassName.toSimpleName()» {
 
 //	@Fix(MyDslValidator::INVALID_NAME)
 //	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -89,9 +89,9 @@ class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar-»
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»
     <!-- quickfix marker resolution generator for «name» -->
     <extension
             point="org.eclipse.ui.ide.markerResolution">
@@ -122,4 +122,4 @@ class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider
     </extension>
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar-»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub, String superClassName) FOR Grammar-»«ENDDEFINE»

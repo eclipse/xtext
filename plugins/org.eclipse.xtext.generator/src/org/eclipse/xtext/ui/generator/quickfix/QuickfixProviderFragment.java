@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.generator.quickfix;
 
 import static java.util.Collections.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.generator.AbstractStubGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
+import org.eclipse.xtext.generator.IInheriting;
 import org.eclipse.xtext.generator.Naming;
 
 /**
@@ -26,12 +28,23 @@ import org.eclipse.xtext.generator.Naming;
  * @author Knut Wannheden - Initial contribution and API
  * @author Heiko Behrens
  */
-public class QuickfixProviderFragment extends AbstractStubGeneratorFragment {
+public class QuickfixProviderFragment extends AbstractStubGeneratorFragment implements IInheriting {
 
+	private boolean isInheritImplementation = true;
+	
 	public static String getQuickfixProviderName(Grammar g, Naming n) {
 		return n.basePackageUi(g) + ".quickfix." + GrammarUtil.getName(g) + "QuickfixProvider";
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public String getQuickfixProviderSuperClassName(Grammar g) {
+		if(isInheritImplementation && !g.getUsedGrammars().isEmpty()) 
+			return getQuickfixProviderName(g.getUsedGrammars().get(0), getNaming());
+		return "org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider";
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if(isGenerateStub())
@@ -41,4 +54,26 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment {
 		else
 			return emptySet();
 	}
+
+	/**
+	 * @since 2.4
+	 */
+	public boolean isInheritImplementation() {
+		return isInheritImplementation;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setInheritImplementation(boolean isInheritImplementation) {
+		this.isInheritImplementation = isInheritImplementation;
+	}
+
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		List<Object> parameters = super.getParameters(grammar);
+		parameters.add(getQuickfixProviderSuperClassName(grammar));
+		return parameters;
+	}
+
 }
