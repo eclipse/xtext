@@ -723,7 +723,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  val map = newHashMap\n" + 
 				"  map.put(1, 'abc')\n" + 
 				"  val x = map.get(1)\n" + 
-				"  println('Length: ' + x.length)" + 
+				"  'Length: ' + x.length" + 
 				"}");
 	}
 	
