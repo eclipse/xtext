@@ -78,7 +78,7 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 				XtextResource resource = (XtextResource) context.eResource();
 				String indentString = indentInformation.getIndentString();
 				String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
-				RewritableImportSection rewritableImportSection = rewritableImportSectionFactory.create(resource);
+				RewritableImportSection rewritableImportSection = rewritableImportSectionFactory.parse(resource);
 				WhitespaceHelper whitespaceHelper = whitespaceHelperProvider.get();
 				whitespaceHelper.initialize(document, offset, length, ensureEmptyLinesAround);
 				ReplacingAppendable appendable = new ReplacingAppendable(rewritableImportSection,
@@ -197,7 +197,7 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 		} else {
 			final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
 			final String simpleName = type.getSimpleName();
-			JvmDeclaredType importedType = importSection.getType(simpleName);
+			JvmDeclaredType importedType = importSection.getImportedType(simpleName);
 			if(importedType == type) {
 				builder.append(simpleName);
 			} else if(importedType == null) {

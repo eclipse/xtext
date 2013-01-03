@@ -79,7 +79,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 						return !isImportTypeReference(input);
 					}
 				});
-		RewritableImportSection importSection = importSectionFactory.create((XtextResource) referringResource);
+		RewritableImportSection importSection = importSectionFactory.parse((XtextResource) referringResource);
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor, importSection);
 		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
 				importAwareUpdateAcceptor);
