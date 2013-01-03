@@ -34,7 +34,7 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 		LightweightTypeReference leftComponent = left.getComponentType();
 		LightweightTypeReference rightComponent = right.getComponentType();
 		return conformanceComputer.isConformant(leftComponent, rightComponent, 
-				new TypeConformanceComputationArgument(param.rawType, param.asTypeArgument, false, false, param.unboundComputationAddsHints));
+				new TypeConformanceComputationArgument(param.rawType, param.asTypeArgument, false, false, param.unboundComputationAddsHints, false));
 	}
 	
 	@Override
@@ -58,11 +58,25 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 			JvmType type = right.getType();
 			if (type instanceof JvmTypeParameter) {
 				TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
-						param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+						param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
 				for(LightweightTypeReference rightSuperTypes: right.getAllSuperTypes()) {
 					TypeConformanceResult result = conformanceComputer.isConformant(left, rightSuperTypes, paramWithoutSuperTypeCheck);
 					if (result.isConformant()) {
 						return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
+					}
+				}
+			} else if (param.allowSynonyms){
+				ArrayTypeReference rightAsArray = right.tryConvertToArray();
+				if (rightAsArray != null) {
+					if (left.getComponentType().isPrimitive()) {
+						if (rightAsArray.getComponentType().isWrapper()) {
+							LightweightTypeReference primitive = rightAsArray.getComponentType().getPrimitiveIfWrapperType();
+							rightAsArray = new ArrayTypeReference(rightAsArray.getOwner(), primitive);
+						}
+					}
+					TypeConformanceResult result = conformanceComputer.isConformant(left, rightAsArray, param);
+					if (result.isConformant()) {
+						return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
 					}
 				}
 			}

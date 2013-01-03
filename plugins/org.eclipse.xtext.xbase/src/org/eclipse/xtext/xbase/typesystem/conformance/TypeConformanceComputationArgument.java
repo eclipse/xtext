@@ -20,18 +20,21 @@ public class TypeConformanceComputationArgument {
 	protected final boolean allowPrimitiveConversion;
 	protected final boolean allowPrimitiveWidening;
 	protected final boolean unboundComputationAddsHints;
+	protected final boolean allowSynonyms;
 	
 	public TypeConformanceComputationArgument() {
-		this(false, false, true, true, false);
+		this(false, false, true, true, false, true);
 	}
 	
 	public TypeConformanceComputationArgument(boolean rawType, boolean asTypeArgument,
-			boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
+			boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints,
+			boolean allowSynonyms) {
 		this.rawType = rawType;
 		this.asTypeArgument = asTypeArgument;
 		this.allowPrimitiveConversion = allowPrimitiveConversion;
 		this.allowPrimitiveWidening = allowPrimitiveWidening;
 		this.unboundComputationAddsHints = unboundComputationAddsHints;
+		this.allowSynonyms = allowSynonyms;
 	}
 	
 	public boolean isAllowPrimitiveConversion() {
@@ -51,7 +54,9 @@ public class TypeConformanceComputationArgument {
 				"asTypeArgument=" + String.valueOf(asTypeArgument).toUpperCase() + ",\n\t" +
 				"allowPrimitiveConversion=" + String.valueOf(allowPrimitiveConversion).toUpperCase() + ",\n\t" +
 				"allowPrimitiveWidening=" + String.valueOf(allowPrimitiveWidening).toUpperCase() + ",\n\t" +
-				"unboundComputationAddsHints=" + String.valueOf(unboundComputationAddsHints).toUpperCase();
+				"unboundComputationAddsHints=" + String.valueOf(unboundComputationAddsHints).toUpperCase() + ",\n\t" +
+				"allowSynonyms=" + String.valueOf(allowSynonyms).toUpperCase();
+				
 	}
 
 	@Override
@@ -65,12 +70,12 @@ public class TypeConformanceComputationArgument {
 		protected final T reference;
 		
 		protected static <T extends LightweightTypeReference> Internal<T> create(T reference, 
-				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
-			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints);
+				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints, boolean allowSynonyms) {
+			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints, allowSynonyms);
 		}
 		
-		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints) {
-			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints);
+		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints, boolean allowSynonyms) {
+			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints, allowSynonyms);
 			this.reference = reference;
 		}
 

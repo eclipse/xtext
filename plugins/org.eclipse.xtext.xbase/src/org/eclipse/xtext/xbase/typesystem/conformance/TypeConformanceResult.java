@@ -45,6 +45,10 @@ public class TypeConformanceResult {
 		this(EnumSet.of(hint), null);
 	}
 	
+	public TypeConformanceResult(ConformanceHint hint, ConformanceHint... hints) {
+		this(EnumSet.of(hint, hints), null);
+	}
+	
 	public TypeConformanceResult(ConformanceHint hint, Exception trace) {
 		this(EnumSet.of(hint), trace);
 	}

@@ -156,8 +156,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       if (expectation) {
         List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
         for (final LightweightTypeReference superType : _allSuperTypes) {
+          String _string_1 = superType.toString();
           boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
-          Assert.assertEquals(Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+          Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
         }
       }
     } catch (Exception _e) {
@@ -341,6 +342,33 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom("Object", "CharSequence[]");
     this.isAssignableFrom("Cloneable", "CharSequence[]");
     this.isAssignableFrom("java.io.Serializable", "CharSequence[]");
+  }
+  
+  @Test
+  public void testIterableToArrayType_01() {
+    this.isAssignableFrom("int[]", "Iterable<Integer>");
+    this.isAssignableFrom("int[]", "Iterable<? extends Integer>");
+  }
+  
+  @Test
+  public void testIterableToArrayType_02() {
+    this.isAssignableFrom("Integer[]", "Iterable<Integer>");
+    this.isAssignableFrom("Integer[]", "Iterable<? extends Integer>");
+  }
+  
+  @Test
+  public void testListToArrayType_01() {
+    this.isAssignableFrom("int[]", "Iterable<Integer>");
+    this.isAssignableFrom("int[]", "Iterable<? extends Integer>");
+    this.isNotAssignableFrom("int[]", "Iterable<? super Integer>");
+  }
+  
+  @Test
+  public void testListToArrayType_02() {
+    this.isAssignableFrom("Integer[]", "java.util.List<Integer>");
+    this.isAssignableFrom("Integer[]", "java.util.List<? extends Integer>");
+    this.isAssignableFrom("Object[]", "java.util.List<? super Integer>");
+    this.isNotAssignableFrom("Integer[]", "java.util.List<? super Integer>");
   }
   
   @Test

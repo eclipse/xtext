@@ -64,7 +64,7 @@ public class TypeConformanceComputer {
 	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right, boolean ignoreGenerics) {
 		if (left == right && left != null)
 			return true;
-		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true, false));
+		TypeConformanceResult result = isConformant(left, right, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true, false, false));
 		return result.isConformant();
 	}
 	
@@ -73,7 +73,7 @@ public class TypeConformanceComputer {
 		if (left == right && left != null)
 			return TypeConformanceResult.SUCCESS;
 		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(
-				right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening, flags.unboundComputationAddsHints));
+				right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening, flags.unboundComputationAddsHints, flags.allowSynonyms));
 	}
 	
 	/**
@@ -521,12 +521,11 @@ public class TypeConformanceComputer {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
 				// if we stumble accross unbound references without any hints, assume they are compatible and add respective hints
-				TypeConformanceResult conformance = isConformant(result, other, new TypeConformanceComputationArgument(false, false, true, true, true));
+				TypeConformanceResult conformance = isConformant(result, other, new TypeConformanceComputationArgument(false, false, true, true, true, false));
 				if (conformance.isConformant()) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
 					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) &&
-							// we explicitly don't want to add the conformance hints twice; #isConformant(other, result) is sufficient 
-							isConformant(other, result)) {
+							other.isAssignableFrom(result)) {
 						result = other;
 					}
 				} else {

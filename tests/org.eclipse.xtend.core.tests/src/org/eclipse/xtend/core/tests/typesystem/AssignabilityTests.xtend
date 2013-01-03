@@ -20,6 +20,10 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputation
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer
 import org.eclipse.xtext.common.types.TypesFactory
 import org.junit.Ignore
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.InjectWith
 
 /**
  * @author Sebastian Zarnekow
@@ -85,7 +89,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		assertEquals(expectation, lhsType.testIsAssignable(rhsType))
 		if (expectation) {
 			for(superType: lhsType.allSuperTypes) {
-				assertEquals(expectation, superType.testIsAssignable(rhsType))		
+				assertEquals(superType.toString, expectation, superType.testIsAssignable(rhsType))		
 			}
 		}
 	}
@@ -257,6 +261,33 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		"Object".isAssignableFrom("CharSequence[]")
 		"Cloneable".isAssignableFrom("CharSequence[]")
 		"java.io.Serializable".isAssignableFrom("CharSequence[]")
+	}
+	
+	@Test
+	def void testIterableToArrayType_01() {
+		"int[]".isAssignableFrom("Iterable<Integer>")
+		"int[]".isAssignableFrom("Iterable<? extends Integer>")
+	}
+	
+	@Test
+	def void testIterableToArrayType_02() {
+		"Integer[]".isAssignableFrom("Iterable<Integer>")
+		"Integer[]".isAssignableFrom("Iterable<? extends Integer>")
+	}
+	
+	@Test
+	def void testListToArrayType_01() {
+		"int[]".isAssignableFrom("Iterable<Integer>")
+		"int[]".isAssignableFrom("Iterable<? extends Integer>")
+		"int[]".isNotAssignableFrom("Iterable<? super Integer>")
+	}
+	
+	@Test
+	def void testListToArrayType_02() {
+		"Integer[]".isAssignableFrom("java.util.List<Integer>")
+		"Integer[]".isAssignableFrom("java.util.List<? extends Integer>")
+		"Object[]".isAssignableFrom("java.util.List<? super Integer>")
+		"Integer[]".isNotAssignableFrom("java.util.List<? super Integer>")
 	}
 	
 	@Test
@@ -1024,6 +1055,8 @@ class AssignabilityTest extends AbstractAssignabilityTest {
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(RuntimeInjectorProvider))
 class OldAPIAssignabilityTest extends AssignabilityTest {
 	
 	@Inject
@@ -1082,7 +1115,7 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 class RawAssignabilityTest extends AbstractAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false))
+		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
 	}
 	
 	@Test 
