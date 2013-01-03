@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -63,6 +66,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 
 	public static class FQNImporter extends FQNShortener {
 
+		private static final Logger LOG = Logger.getLogger(FQNShortener.class);
 		private final ITextViewer viewer;
 
 		private RewritableImportSection.Factory importSectionFactory;
@@ -134,6 +138,10 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			
 			RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context);
 			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
+			if(typeToImport == null) {
+				LOG.error("Could not find unique type named '" + notNull(qualifiedName) + "' in scope");
+				return;
+			}
 			EObject resolved = EcoreUtil.resolve(typeToImport.getEObjectOrProxy(), context);
 			Assert.isTrue(!resolved.eIsProxy() && resolved instanceof JvmDeclaredType);
 			importSection.addImport((JvmDeclaredType) resolved);
