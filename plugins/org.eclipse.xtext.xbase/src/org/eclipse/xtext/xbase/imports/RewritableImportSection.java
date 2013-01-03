@@ -7,11 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,9 +34,12 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
+ * Model of an import section that can be changed. 
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class RewritableImportSection {
@@ -46,10 +54,22 @@ public class RewritableImportSection {
 		@Inject
 		private ImportSectionRegionUtil regionUtil;
 		
-		public RewritableImportSection create(XtextResource resource) {
-			RewritableImportSection reWritableImportSection = new RewritableImportSection(resource,
-					importsConfiguration, whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI())
-							.getLineSeparator(), regionUtil);
+		public RewritableImportSection parse(XtextResource resource) {
+			RewritableImportSection reWritableImportSection = new RewritableImportSection(
+					resource,
+					importsConfiguration,
+					importsConfiguration.getImportSection(resource), 
+					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
+					regionUtil);
+			return reWritableImportSection;
+		}
+
+		public RewritableImportSection createNewEmpty(XtextResource resource) {
+			RewritableImportSection reWritableImportSection = new RewritableImportSection(
+					resource,
+					importsConfiguration,
+					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
+					regionUtil);
 			return reWritableImportSection;
 		}
 	}
@@ -70,14 +90,15 @@ public class RewritableImportSection {
 
 	private XtextResource resource;
 	
-	private ImportSectionRegionUtil regionUtil;
+	private IImportsConfiguration importsConfiguration;
 
-	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration,
-				String lineSeparator, ImportSectionRegionUtil regionUtil) {
-		this.lineSeparator = lineSeparator;
-		this.resource = resource;
-		this.regionUtil = regionUtil;
-		XImportSection originalImportSection = importsConfiguration.getImportSection(resource);
+	private ImportSectionRegionUtil regionUtil;
+	
+	private boolean isSort;
+
+	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
+			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil) {
+		this(resource, importsConfiguration, lineSeparator, regionUtil);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
@@ -86,7 +107,7 @@ public class RewritableImportSection {
 						staticExtensionImports.add(originalImportDeclaration.getImportedType());
 					else
 						staticImports.add(originalImportDeclaration.getImportedType());
-				} else {
+				} else if(originalImportDeclaration.getImportedType() != null) {
 					plainImports.put(originalImportDeclaration.getImportedType().getSimpleName(),
 							originalImportDeclaration.getImportedType());
 				}
@@ -94,6 +115,23 @@ public class RewritableImportSection {
 		}
 	}
 
+	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
+			String lineSeparator, ImportSectionRegionUtil regionUtil) {
+		this.resource = resource;
+		this.importsConfiguration = importsConfiguration;
+		this.lineSeparator = lineSeparator;
+		this.regionUtil = regionUtil;
+		setSort(true);
+	}
+
+	public void setSort(boolean isSort) {
+		this.isSort = isSort;
+	}
+	
+	public boolean isSort() {
+		return isSort;
+	}
+	
 	public boolean addImport(JvmDeclaredType type) {
 		if (plainImports.containsKey(type.getSimpleName()))
 			return false;
@@ -135,7 +173,7 @@ public class RewritableImportSection {
 		return null;
 	}
 
-	public JvmDeclaredType getType(String simpleName) {
+	public JvmDeclaredType getImportedType(String simpleName) {
 		return plainImports.get(simpleName);
 	}
 
@@ -191,22 +229,34 @@ public class RewritableImportSection {
 
 	public List<ReplaceRegion> rewrite() {
 		final List<ReplaceRegion> replaceRegions = newArrayList();
-		for(XImportDeclaration removedImportDeclaration: removedImportDeclarations) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(removedImportDeclaration);
-			if(node != null) {
-				ITextRegion textRegion = new TextRegion(node.getOffset(), node.getLength());
-				if(removedImportDeclaration!=originalImportDeclarations.get(originalImportDeclarations.size()-1) 
-						|| addedImportDeclarations.isEmpty()) {
-					textRegion = regionUtil.addTrailingSingleWhitespace(textRegion, lineSeparator, resource);
+		if(isSort) {
+			List<XImportDeclaration> allImportDeclarations = newArrayList();
+			allImportDeclarations.addAll(originalImportDeclarations);
+			allImportDeclarations.addAll(addedImportDeclarations);
+			allImportDeclarations.removeAll(removedImportDeclarations);
+			String newImportSection = serializeImports(allImportDeclarations);
+			ITextRegion region = regionUtil.computeRegion(resource);
+			region = regionUtil.addLeadingWhitespace(region, resource);
+			region = regionUtil.addTrailingWhitespace(region, resource);
+			return singletonList(new ReplaceRegion(region, newImportSection));
+		} else {
+			for(XImportDeclaration removedImportDeclaration: removedImportDeclarations) {
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(removedImportDeclaration);
+				if(node != null) {
+					ITextRegion textRegion = new TextRegion(node.getOffset(), node.getLength());
+					if(removedImportDeclaration!=originalImportDeclarations.get(originalImportDeclarations.size()-1) 
+							|| addedImportDeclarations.isEmpty()) {
+						textRegion = regionUtil.addTrailingSingleWhitespace(textRegion, lineSeparator, resource);
+					}
+					replaceRegions.add(new ReplaceRegion(textRegion, ""));
 				}
-				replaceRegions.add(new ReplaceRegion(textRegion, ""));
 			}
+			addSectionToAppend(new IAcceptor<ReplaceRegion>() {
+				public void accept(ReplaceRegion t) {
+					replaceRegions.add(t);
+				}
+			});
 		}
-		addSectionToAppend(new IAcceptor<ReplaceRegion>() {
-			public void accept(ReplaceRegion t) {
-				replaceRegions.add(t);
-			}
-		});
 		return replaceRegions;
 	}
 
@@ -250,4 +300,51 @@ public class RewritableImportSection {
 			builder.append(".*");
 		builder.append(lineSeparator);
 	}
+	
+	protected String serializeImports(List<XImportDeclaration> allDeclarations) {
+		StringBuilder builder = new StringBuilder();
+		if(!isEmpty(importsConfiguration.getCommonPackageName(resource)))
+			builder.append(lineSeparator).append(lineSeparator);
+		boolean needNewline = appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			public boolean apply(XImportDeclaration input) {
+				return !input.isStatic();
+			}
+		}), false);
+		needNewline = appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			public boolean apply(XImportDeclaration input) {
+				return input.isStatic() && !input.isExtension();
+			}
+		}), needNewline);
+		appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			public boolean apply(XImportDeclaration input) {
+				return input.isStatic() && input.isExtension();
+			}
+		}), needNewline);
+		if(!isEmpty(allDeclarations)) 
+			builder.append(lineSeparator);
+		return builder.toString();
+	}
+
+	protected boolean appendSubsection(StringBuilder builder, Iterable<XImportDeclaration> subSection, boolean needsNewline) {
+		if (!isEmpty(subSection)) {
+			if(needsNewline)
+				builder.append(lineSeparator);
+			for (XImportDeclaration declaration: isSort() ? sort(subSection) : subSection) {
+				appendImport(builder, declaration);
+			}
+			return true;
+		}
+		return needsNewline;
+	}
+	
+	protected List<XImportDeclaration> sort(Iterable<XImportDeclaration> declarations) {
+		List<XImportDeclaration> sortMe = newArrayList(declarations);
+		Collections.sort(sortMe, new Comparator<XImportDeclaration>() {
+			public int compare(XImportDeclaration o1, XImportDeclaration o2) {
+				return o1.getImportedType().getIdentifier().compareTo(o2.getImportedType().getIdentifier());
+			}
+		});
+		return sortMe;
+	}
+
 }

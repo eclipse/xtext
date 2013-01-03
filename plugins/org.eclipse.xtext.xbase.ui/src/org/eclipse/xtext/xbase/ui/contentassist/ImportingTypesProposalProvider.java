@@ -132,7 +132,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				viewerExtension.setRedraw(false);
 			}
 			
-			RewritableImportSection importSection = importSectionFactory.create((XtextResource) context);
+			RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context);
 			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
 			EObject resolved = EcoreUtil.resolve(typeToImport.getEObjectOrProxy(), context);
 			Assert.isTrue(!resolved.eIsProxy() && resolved instanceof JvmDeclaredType);
