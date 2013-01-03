@@ -218,60 +218,62 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								expectedFieldType = typeProvider.getType(xExpression);
 							}
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-							ITypeReferenceOwner owner = new ITypeReferenceOwner() {
-
-								@NonNull
-								public CommonTypeComputationServices getServices() {
-									return computationServices;
+							if(expectedType != null) {
+								ITypeReferenceOwner owner = new ITypeReferenceOwner() {
+	
+									@NonNull
+									public CommonTypeComputationServices getServices() {
+										return computationServices;
+									}
+	
+									@NonNull
+									public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
+										throw new UnsupportedOperationException();
+									}
+	
+									public void acceptHint(@NonNull Object handle,
+											@NonNull LightweightBoundTypeArgument boundTypeArgument) {
+										throw new UnsupportedOperationException();
+									}
+									
+									@NonNull 
+									public List<JvmTypeParameter> getDeclaredTypeParameters() {
+										throw new UnsupportedOperationException();
+									}
+	
+									@NonNull
+									public ResourceSet getContextResourceSet() {
+										return state.getResourceSet();
+									}
+									
+									public boolean isResolved(@NonNull Object handle) {
+										throw new UnsupportedOperationException();
+									}
+								};
+								TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+										Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
+										owner);
+								JvmTypeReference resolvedExpectedType = substitutor.substitute(
+										new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
+								if (resolvedExpectedType != null && resolvedExpectedType.getType() != null) {
+									typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
+									appendable.append(" ");
 								}
-
-								@NonNull
-								public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
-									throw new UnsupportedOperationException();
+								if(expectedFieldType == null)
+									expectedFieldType = resolvedExpectedType;
+								boolean isSetter = false;
+								if(call instanceof XAssignment){
+									isSetter = true;
+									appendable.append("set" + StringExtensions.toFirstUpper(elementName));
+								} else
+									appendable.append(elementName);
+								computeArgumentString(call, false, appendable, isExtension);
+								createNewXtendFunction(isSetter?"set" + StringExtensions.toFirstUpper(elementName): elementName, appendable.toString(), isExtension, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
+								if (!isExtension && (arguments.size() == 0 || call instanceof XAssignment)){
+									createNewXtendField(elementName, expectedFieldType, call, issue, issueResolutionAcceptor, modificationContext);
+									if(!(call instanceof XAssignment))
+										createNewLocalVariable(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
 								}
-
-								public void acceptHint(@NonNull Object handle,
-										@NonNull LightweightBoundTypeArgument boundTypeArgument) {
-									throw new UnsupportedOperationException();
-								}
-								
-								@NonNull 
-								public List<JvmTypeParameter> getDeclaredTypeParameters() {
-									throw new UnsupportedOperationException();
-								}
-
-								@NonNull
-								public ResourceSet getContextResourceSet() {
-									return state.getResourceSet();
-								}
-								
-								public boolean isResolved(@NonNull Object handle) {
-									throw new UnsupportedOperationException();
-								}
-							};
-							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
-									Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
-									owner);
-							JvmTypeReference resolvedExpectedType = substitutor.substitute(
-									new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
-							if (resolvedExpectedType != null && resolvedExpectedType.getType() != null) {
-								typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
-								appendable.append(" ");
-							}
-							if(expectedFieldType == null)
-								expectedFieldType = resolvedExpectedType;
-							boolean isSetter = false;
-							if(call instanceof XAssignment){
-								isSetter = true;
-								appendable.append("set" + StringExtensions.toFirstUpper(elementName));
-							} else
-								appendable.append(elementName);
-							computeArgumentString(call, false, appendable, isExtension);
-							createNewXtendFunction(isSetter?"set" + StringExtensions.toFirstUpper(elementName): elementName, appendable.toString(), isExtension, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
-							if (!isExtension && (arguments.size() == 0 || call instanceof XAssignment)){
-								createNewXtendField(elementName, expectedFieldType, call, issue, issueResolutionAcceptor, modificationContext);
-								if(!(call instanceof XAssignment))
-									createNewLocalVariable(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
 							}
 						}
 					}
