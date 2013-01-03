@@ -91,7 +91,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -1308,6 +1307,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected TypeReferences getTypeRefs() {
 		return typeRefs;
+	}
+	
+	protected Primitives getPrimitives() {
+		return primitives;
 	}
 
 	protected TypesFactory getTypesFactory() {

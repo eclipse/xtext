@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.typesystem.CommonSuperTypeTest;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -24,6 +25,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -35,10 +38,13 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Inject

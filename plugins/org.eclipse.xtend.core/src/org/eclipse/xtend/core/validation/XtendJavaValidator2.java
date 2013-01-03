@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
+import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -98,7 +99,13 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 
@@ -138,7 +145,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	private OverrideHelper overrideHelper;
 
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	private DispatchUtil dispatchUtil;
 
 	@Inject
 	private Primitives primitives;
@@ -633,20 +640,17 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		JvmTypeReference returnType = function.getReturnType();
 		if (returnType == null)
 			return;
-		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
-				.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(getTypeRefs().createTypeRef(
-						inferredOperation.getDeclaringType())));
-		JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(overriddenOperation.getReturnType(),
-				function);
-		//TODO: Rethink about this 80% fix when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed
-		// T[] and List<T> will result in an error as before but T is fixed with this small workaround
-		// There are two failing ignored tests in org.eclipse.xtend.core.tests.validation.OverrideValidationTest that should be green after the fix
-		// org.eclipse.xtend.core.tests.validation.OverrideValidationTest.testOverrideReturnType_1()
-		// org.eclipse.xtend.core.tests.validation.OverrideValidationTest.testOverrideReturnType_2()
-		if(returnType.getType() instanceof JvmTypeParameter && returnTypeUpperBound.getType() instanceof JvmTypeParameter)
-			return;
-
-		if (!isConformant(returnTypeUpperBound, returnType)) {
+		
+		// TODO: Move this validation into the type computation
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), function.eResource().getResourceSet());
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference declaringType = converter.toLightweightReference(getTypeRefs().createTypeRef(
+				inferredOperation.getDeclaringType()));
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaringType);
+		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(declaratorMapping, owner);
+		LightweightTypeReference overriddenReturnType = substitutor.substitute(converter.toLightweightReference(overriddenOperation.getReturnType()));
+		LightweightTypeReference lightweightReturnType = converter.toLightweightReference(returnType);
+		if (!overriddenReturnType.isAssignableFrom(lightweightReturnType)) {
 			error("The return type is incompatible with " + overriddenOperation.getIdentifier(), function,
 					XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
 		}
@@ -855,91 +859,93 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	public void checkDispatchFunctions(XtendClass clazz) {
 		JvmGenericType type = associations.getInferredType(clazz);
 		if (type != null) {
-			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
+			Multimap<DispatchUtil.DispatchSignature, JvmOperation> dispatchMethods = dispatchUtil.getDeclaredDispatchMethods(type);
 			checkDispatchNonDispatchConflict(clazz, dispatchMethods);
-			for (Pair<String, Integer> key : dispatchMethods.keySet()) {
-				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(key);
-				JvmOperation syntheticDispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, key);
-				JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(syntheticDispatchMethod);
-				Boolean expectStatic = null;
-				if(overriddenOperation != null) { 
-					if (isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) {
-						String msg = "Synthetic dispatch method reduces visibility of overridden method " + overriddenOperation.getIdentifier();
-						addDispatchError(type, dispatchOperations, msg, XTEND_FUNCTION__VISIBILITY, OVERRIDE_REDUCES_VISIBILITY);
-					}
-					expectStatic = overriddenOperation.isStatic();
-				} 
-				if (dispatchOperations.size() == 1) {
-					JvmOperation singleOp = dispatchOperations.iterator().next();
-					XtendFunction function = associations.getXtendFunction(singleOp);
-					warning("Single dispatch method.", function, XTEND_FUNCTION__DISPATCH,
-							IssueCodes.SINGLE_DISPATCH_FUNCTION);
-				} else {
-					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
-					boolean isFirstLocalOperation = true;
-					JvmVisibility commonVisibility = null;
-					Boolean commonStatic = null;
-					for (JvmOperation jvmOperation : dispatchOperations) {
-						signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
-						if(jvmOperation.getDeclaringType() == type) {
-							if(expectStatic != null) {
-								if (expectStatic && !jvmOperation.isStatic()) {
-									String msg = "The dispatch method must be static because the dispatch methods in the superclass are static.";
-									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_STATIC_EXPECTED);
-								}
-								if (!expectStatic && jvmOperation.isStatic()) {
-									String msg = "The dispatch method must not be static because the dispatch methods in the superclass are not static.";
-									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED);
-								}
-							}
-							if (isFirstLocalOperation) {
-								commonVisibility = jvmOperation.getVisibility();
-								commonStatic = jvmOperation.isStatic();
-								isFirstLocalOperation = false;
-							} else {
-								if (jvmOperation.getVisibility() != commonVisibility) {
-									commonVisibility = null;
-								}
-								if (commonStatic != null && commonStatic != jvmOperation.isStatic()) {
-									commonStatic = null;
-								}
-							}
+			for (DispatchUtil.DispatchSignature signature : dispatchMethods.keySet()) {
+				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(signature);
+				JvmOperation syntheticDispatchMethod = dispatchUtil.getDispatcherOperation(type, signature);
+				if (syntheticDispatchMethod != null) {
+					JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(syntheticDispatchMethod);
+					Boolean expectStatic = null;
+					if(overriddenOperation != null) { 
+						if (isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) {
+							String msg = "Synthetic dispatch method reduces visibility of overridden method " + overriddenOperation.getIdentifier();
+							addDispatchError(type, dispatchOperations, msg, XTEND_FUNCTION__VISIBILITY, OVERRIDE_REDUCES_VISIBILITY);
 						}
-						// TODO move validation to type computation
-//						XtendFunction function = associations.getXtendFunction(jvmOperation);
-//						if (function != null) {
-//							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
-//							if (functionReturnType != null) {
-//								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
-//									error("Incompatible return type of dispatch method. Expected "
-//											+ getNameOfTypes(jvmOperation.getReturnType()) + " but was "
-//											+ canonicalName(functionReturnType), function,
-//											XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
-//											ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
-//								}
-//							}
-//						}
-					}
-					if (commonVisibility == null) {
-						addDispatchError(type, dispatchOperations, "All local dispatch methods must have the same visibility.", 
-								XTEND_FUNCTION__VISIBILITY, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
-					}
-					if (expectStatic == null && commonStatic == null) {
-						addDispatchError(type, dispatchOperations, "Static and non-static dispatch methods can not be mixed.", 
-								XTEND_FUNCTION__STATIC,	DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC);
-					}
-					for (final List<JvmType> paramTypes : signatures.keySet()) {
-						Collection<JvmOperation> ops = signatures.get(paramTypes);
-						if (ops.size() > 1) {
-							if (Iterables.any(ops, new Predicate<JvmOperation>() {
-								public boolean apply(JvmOperation input) {
-									return !getParamTypes(input, false).equals(paramTypes);
+						expectStatic = overriddenOperation.isStatic();
+					} 
+					if (dispatchOperations.size() == 1) {
+						JvmOperation singleOp = dispatchOperations.iterator().next();
+						XtendFunction function = associations.getXtendFunction(singleOp);
+						warning("Single dispatch method.", function, XTEND_FUNCTION__DISPATCH,
+								IssueCodes.SINGLE_DISPATCH_FUNCTION);
+					} else {
+						Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
+						boolean isFirstLocalOperation = true;
+						JvmVisibility commonVisibility = null;
+						Boolean commonStatic = null;
+						for (JvmOperation jvmOperation : dispatchOperations) {
+							signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
+							if(jvmOperation.getDeclaringType() == type) {
+								if(expectStatic != null) {
+									if (expectStatic && !jvmOperation.isStatic()) {
+										String msg = "The dispatch method must be static because the dispatch methods in the superclass are static.";
+										addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_STATIC_EXPECTED);
+									}
+									if (!expectStatic && jvmOperation.isStatic()) {
+										String msg = "The dispatch method must not be static because the dispatch methods in the superclass are not static.";
+										addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED);
+									}
 								}
-							})) {
-								for (JvmOperation jvmOperation : ops) {
-									XtendFunction function = associations.getXtendFunction(jvmOperation);
-									error("Duplicate dispatch methods. Primitives cannot overload their wrapper types in dispatch methods.",
-											function, null, DUPLICATE_METHOD);
+								if (isFirstLocalOperation) {
+									commonVisibility = jvmOperation.getVisibility();
+									commonStatic = jvmOperation.isStatic();
+									isFirstLocalOperation = false;
+								} else {
+									if (jvmOperation.getVisibility() != commonVisibility) {
+										commonVisibility = null;
+									}
+									if (commonStatic != null && commonStatic != jvmOperation.isStatic()) {
+										commonStatic = null;
+									}
+								}
+							}
+							// TODO move validation to type computation
+	//						XtendFunction function = associations.getXtendFunction(jvmOperation);
+	//						if (function != null) {
+	//							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
+	//							if (functionReturnType != null) {
+	//								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
+	//									error("Incompatible return type of dispatch method. Expected "
+	//											+ getNameOfTypes(jvmOperation.getReturnType()) + " but was "
+	//											+ canonicalName(functionReturnType), function,
+	//											XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
+	//											ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
+	//								}
+	//							}
+	//						}
+						}
+						if (commonVisibility == null) {
+							addDispatchError(type, dispatchOperations, "All local dispatch methods must have the same visibility.", 
+									XTEND_FUNCTION__VISIBILITY, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+						}
+						if (expectStatic == null && commonStatic == null) {
+							addDispatchError(type, dispatchOperations, "Static and non-static dispatch methods can not be mixed.", 
+									XTEND_FUNCTION__STATIC,	DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC);
+						}
+						for (final List<JvmType> paramTypes : signatures.keySet()) {
+							Collection<JvmOperation> ops = signatures.get(paramTypes);
+							if (ops.size() > 1) {
+								if (Iterables.any(ops, new Predicate<JvmOperation>() {
+									public boolean apply(JvmOperation input) {
+										return !getParamTypes(input, false).equals(paramTypes);
+									}
+								})) {
+									for (JvmOperation jvmOperation : ops) {
+										XtendFunction function = associations.getXtendFunction(jvmOperation);
+										error("Duplicate dispatch methods. Primitives cannot overload their wrapper types in dispatch methods.",
+												function, null, DUPLICATE_METHOD);
+									}
 								}
 							}
 						}
@@ -950,14 +956,14 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 
 	protected void checkDispatchNonDispatchConflict(XtendClass clazz,
-			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods) {
-		Multimap<Pair<String, Integer>, XtendFunction> nonDispatchMethods = HashMultimap.create();
+			Multimap<DispatchUtil.DispatchSignature, JvmOperation> dispatchMethods) {
+		Multimap<DispatchUtil.DispatchSignature, XtendFunction> nonDispatchMethods = HashMultimap.create();
 		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
 			if(!method.isDispatch()) {
-				nonDispatchMethods.put(Tuples.create(method.getName(), method.getParameters().size()), method);
+				nonDispatchMethods.put(new DispatchUtil.DispatchSignature("_" + method.getName(), method.getParameters().size()), method);
 			}
 		}
-		for(Pair<String, Integer> dispatchSignature: dispatchMethods.keySet()) {
+		for(DispatchUtil.DispatchSignature dispatchSignature: dispatchMethods.keySet()) {
 			if(nonDispatchMethods.containsKey(dispatchSignature)) {
 				for(XtendFunction function: nonDispatchMethods.get(dispatchSignature)) 
 					warning("Non-dispatch method has same name and number of parameters as dispatch method", 

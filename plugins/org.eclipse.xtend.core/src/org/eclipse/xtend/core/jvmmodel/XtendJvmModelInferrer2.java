@@ -74,6 +74,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -100,7 +101,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	private IXtendJvmAssociations associations;
 
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	private DispatchUtil dispatchUtil;
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -375,14 +376,12 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	}
 
 	protected void appendSyntheticDispatchMethods(XtendClass source, JvmGenericType target) {
-		Multimap<Pair<String, Integer>, JvmOperation> methods = dispatchingSupport.getDispatchMethods(target);
-		for (Pair<String, Integer> key : methods.keySet()) {
-			Collection<JvmOperation> operations = methods.get(key);
-			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations),
-					target);
+		ListMultimap<DispatchUtil.DispatchSignature, JvmOperation> methods = dispatchUtil.getDeclaredDispatchMethods(target);
+		for (DispatchUtil.DispatchSignature signature : methods.keySet()) {
+			List<JvmOperation> operations = methods.get(signature);
+			JvmOperation operation = deriveGenericDispatchOperationSignature(operations, target);
 			if (operation != null) {
-				operation.setSimpleName(key.getFirst());
-				// TODO look for inherited return type
+				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
 			}
 		}

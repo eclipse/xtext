@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -43,7 +43,7 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Inject
-	private XtendCompiler compiler;
+	private XbaseCompiler compiler;
 	
 	private CreateExtensionInfo createExtensionInfo;
 

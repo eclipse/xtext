@@ -24,6 +24,10 @@ import org.junit.Ignore
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xtype.XFunctionTypeRef
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
+import org.junit.runner.RunWith
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 
 /**
  * @author Sebastian Zarnekow
@@ -427,6 +431,8 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 /**
  * @author Sebastian Zarnekow
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(RuntimeInjectorProvider))
 class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
 	
 	@Inject

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class DispatchOperationBodyComputationState extends OperationBodyComputationState {
 
 	private JvmOperation dispatcher;

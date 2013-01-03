@@ -66,7 +66,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
       final JvmTypeReference subtype = _head.getParameterType();
       final Set<JvmTypeReference> computedSuperTypes = this.superTypeCollector.collectSuperTypes(subtype);
-      Set _set = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
+      Set<String> _set = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
       final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
           public String apply(final JvmTypeReference it) {
             String _simpleName = it.getSimpleName();
@@ -74,7 +74,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
           }
         };
       Iterable<String> _map = IterableExtensions.<JvmTypeReference, String>map(computedSuperTypes, _function);
-      Set _set_1 = IterableExtensions.<String>toSet(_map);
+      Set<String> _set_1 = IterableExtensions.<String>toSet(_map);
       Assert.assertEquals(_set, ((Object) _set_1));
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
