@@ -14,8 +14,10 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -26,8 +28,10 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -198,6 +202,27 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				@Override
 				protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 					UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
+					return result;
+				}
+				
+				@Override
+				@Nullable
+				protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
+						ConstraintVisitingInfo info) {
+					LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
+					if (result != null && result.getVariance() == VarianceInfo.INVARIANT) {
+						LightweightTypeReference typeReference = result.getTypeReference();
+						if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
+							// assume unbound wildcard
+							if (!typeParameter.getConstraints().isEmpty()) {
+								JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+								if (constraint instanceof JvmUpperBound) {
+									LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+									return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.INVARIANT);
+								}
+							}
+						}
+					}
 					return result;
 				}
 				
