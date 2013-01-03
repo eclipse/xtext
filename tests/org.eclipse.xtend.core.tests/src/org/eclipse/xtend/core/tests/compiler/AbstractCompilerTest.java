@@ -68,6 +68,44 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	
+	@Test public void testRecursiveTypeParameter_01() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes::ConcreteBuilder::create.append(s).append(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_02() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   selftypes::ConcreteSubBuilder::create.append(s).appendTwice(s).build\n" + 
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
+	@Test public void testRecursiveTypeParameter_03() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes::ConcreteBuilder::create.append(s).append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonk",code,"produceString", "zonk");
+	}
+
+	@Test public void testRecursiveTypeParameter_04() throws Exception {
+		String code = 
+				" def String produceString(String s) {\n" + 
+				"   s.inferReturnType.appendTwice(s).build\n" + 
+				" }\n" +
+				" def inferReturnType(String s) {\n" +
+				"   selftypes::ConcreteSubBuilder::create.append(s)" +
+				" }";
+		invokeAndExpect2("zonkzonkzonk",code,"produceString", "zonk");
+	}
+	
 	@Test public void testBug372864() throws Exception {
 		String code = 
 				" def String testSwitch(Object e) {\n" + 

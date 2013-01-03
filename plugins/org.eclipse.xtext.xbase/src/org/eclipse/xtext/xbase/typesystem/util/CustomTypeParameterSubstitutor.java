@@ -52,7 +52,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 				}
 			} else {
 				try {
-					LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
+					LightweightMergedBoundTypeArgument boundTypeArgument = getBoundTypeArgument(typeParameter, visiting);
 					if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
 						LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
 						if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
@@ -88,6 +88,15 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		}
 		return result;
 	}
+
+	/**
+	 * @param type the type parameter that is bound
+	 * @param info the current traversal state
+	 */
+	@Nullable
+	protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter type, ConstraintVisitingInfo info) {
+		return getTypeParameterMapping().get(type);
+	}
 	
 	@Nullable
 	protected abstract LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting);
@@ -113,7 +122,12 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 			JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
 			if (constraint instanceof JvmUpperBound) {
 				LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-				return reference.accept(this, visiting);
+				if (visiting.getCurrentDeclarator() != reference.getType()) {
+					return reference.accept(this, visiting);
+				}
+				WildcardTypeReference result = new WildcardTypeReference(getOwner());
+				result.addUpperBound(getObjectReference(typeParameter));
+				return result;
 			}
 		}
 		return null;
