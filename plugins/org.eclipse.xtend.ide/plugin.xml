@@ -173,19 +173,6 @@
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
-        <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-             <command
-                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
-                 style="push"
-                 tooltip="Organize Imports">
-            <visibleWhen checkEnabled="false">
-                <reference
-                    definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
-                </reference>
-            </visibleWhen>
-         </command>  
-         </menuContribution>
          <menuContribution locationURI="popup:org.eclipse.ui.menus.showInMenu">
             <command commandId="org.eclipse.ui.views.showView" style="push"
                     icon="icons/generated_code_view.png" label="%DerivedSourceView">
@@ -389,8 +376,30 @@
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+           	<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+        </handler>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
+	    <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+                 style="push"
+                 tooltip="Organize Imports">
+                <visibleWhen checkEnabled="false">
+                    <reference
+                        definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+                    </reference>
+                </visibleWhen>
+            </command>  
+        </menuContribution>
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
@@ -757,15 +766,6 @@
       <handler
             class="org.eclipse.xtend.ide.edit.InsertStringHandler$RightGuillemet"
             commandId="org.eclipse.xtend.ide.insertRightGuillemet">
-           	<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
-				</reference>
-			</activeWhen>
-      </handler>
-      <handler
-            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
-            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
            	<activeWhen>
 				<reference
 					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
