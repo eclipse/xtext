@@ -32,6 +32,7 @@ public class ConstructorScopes extends DelegatingScopes {
 	/**
 	 * creates the constructor scope for {@link XConstructorCall}.
 	 * @param session the currently available session data
+	 * @param resolvedTypes the currently known resolved types
 	 */
 	public IScope createConstructorScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (!(context instanceof XConstructorCall)) {

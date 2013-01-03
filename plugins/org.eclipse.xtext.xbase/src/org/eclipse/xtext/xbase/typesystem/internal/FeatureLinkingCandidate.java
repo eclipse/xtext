@@ -107,8 +107,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (idx == 0 && hasReceiver()) {
 			if (!isExtension() || getImplicitReceiver() != null)
 				return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-			XExpression argument = getReceiver();
-			return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
+			XExpression receiver = getReceiver();
+			if (receiver == null) {
+				throw new IllegalStateException("receiver may not be null");
+			}
+			return getState().getStackedResolvedTypes().getConformanceHints(receiver, recompute);
 		}
 		return super.getConformanceHints(idx, recompute);
 	}

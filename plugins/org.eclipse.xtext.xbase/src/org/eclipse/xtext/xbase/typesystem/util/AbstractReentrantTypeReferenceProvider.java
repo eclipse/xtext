@@ -31,6 +31,10 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 		}
 	}
 	
+	/**
+	 * Allows to deal with reentrant invocation for the given context.
+	 * @param context the reference that is part of a recursive call graph..
+	 */
 	protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
 		return null;
 	}
