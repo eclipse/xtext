@@ -48,12 +48,10 @@ import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRefactoringPreferences;
-import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
-import org.eclipse.xtend.ide.refactoring.XtendTypeSerializationUtil;
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -106,7 +104,7 @@ import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
-import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
+import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
@@ -267,10 +265,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
 	}
 
-	public Class<? extends TypeSerializationUtil> bindTypeSerializationUtil() {
-		return XtendTypeSerializationUtil.class;
-	}
-	
 	@Override
 	public void configureIPreferenceStoreInitializer(Binder binder) {
 		binder.bind(IPreferenceStoreInitializer.class)
@@ -306,7 +300,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		
 	@Override
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-		return XtendReferenceUpdater.class;
+		return XbaseReferenceUpdater.class;
 	}
 	
 	public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
