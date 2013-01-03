@@ -231,7 +231,7 @@ public class MacroUiModule extends org.eclipse.xtend.macro.lang.ui.AbstractMacro
 //	
 //	@Override
 //	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-//		return XtendReferenceUpdater.class;
+//		return XbaseReferenceUpdater.class;
 //	}
 //
 	public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider(){

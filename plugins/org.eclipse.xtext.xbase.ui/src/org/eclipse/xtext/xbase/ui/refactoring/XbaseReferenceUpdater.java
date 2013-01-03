@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.refactoring;
+package org.eclipse.xtext.xbase.ui.refactoring;
 
 import static com.google.common.collect.Iterables.*;
 
@@ -52,7 +52,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
+public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 
 	@Inject@LinkingScopeProviderBinding
 	private IScopeProvider scopeProvider;
