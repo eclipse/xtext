@@ -57,7 +57,6 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
-import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -90,7 +89,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
@@ -98,13 +96,9 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
-import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
-import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
-import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
-import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
@@ -192,11 +186,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
 		return XtendFoldingRegionProvider.class;
-	}
-
-	@Override
-	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
-		return ImportingTypesProposalProvider.class;
 	}
 
 	@Override
@@ -298,11 +287,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 			.to(XtendRenameStrategyProvider.class);
 	}
 		
-	@Override
-	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-		return XbaseReferenceUpdater.class;
-	}
-	
 	public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
 		return XtendJdtRenameParticipantProcessor.class;
 	}
@@ -365,10 +349,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendContentAssistFactory.class;
 	}
 	
-	public Class<? extends IUnresolvedTypeResolver> bindIUnresolvedTypeResolver() {
-		return InteractiveUnresolvedTypeResolver.class;
-	}
-
 	public Class<? extends XtextSourceViewerConfiguration> bindSourceViewerConfiguration(){
 		return XtendSourceViewerConfiguration.class;
 	}
