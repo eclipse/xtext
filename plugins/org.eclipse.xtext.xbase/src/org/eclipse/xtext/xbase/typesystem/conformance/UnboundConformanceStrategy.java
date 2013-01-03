@@ -87,11 +87,11 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 						}
 					} else {
 						newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
-								param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+								param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
 					}
 				} else if (mergeResultReference.isWildcard()) {
 					newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
-							param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+							param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
 				}
 				TypeConformanceResult result = conformanceComputer.isConformant(mergeResultReference, right, newParam);
 				return result;

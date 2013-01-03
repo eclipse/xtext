@@ -28,7 +28,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 			LightweightTypeReference lowerBound = leftWildcard.getLowerBound();
 			if (lowerBound != null) {
 				TypeConformanceResult result = conformanceComputer.isConformant(right, lowerBound, new TypeConformanceComputationArgument(
-						false, false, false, false, param.unboundComputationAddsHints));
+						false, false, false, false, param.unboundComputationAddsHints, false));
 				if (!result.isConformant()) {
 					return result;
 				}
@@ -36,7 +36,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(upperBound, right, new TypeConformanceComputationArgument(
-						false, false, false, false, param.unboundComputationAddsHints));
+						false, false, false, false, param.unboundComputationAddsHints, false));
 				if (!result.isConformant()) {
 					return result;
 				}
@@ -60,7 +60,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 				LightweightTypeReference rightLowerBound = rightWildcard.getLowerBound();
 				if (rightLowerBound != null) {
 					TypeConformanceResult result = conformanceComputer.isConformant(rightLowerBound, leftLowerBound, new TypeConformanceComputationArgument(
-							false, false, false, false, param.unboundComputationAddsHints));
+							false, false, false, false, param.unboundComputationAddsHints, false));
 					if (!result.isConformant()) {
 						return TypeConformanceResult.FAILED;
 					}
@@ -75,7 +75,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(upperBound, rightWildcard, new TypeConformanceComputationArgument(
-						false, false, false, false, param.unboundComputationAddsHints));
+						false, false, false, false, param.unboundComputationAddsHints, false));
 				if (!result.isConformant()) {
 					return result;
 				}

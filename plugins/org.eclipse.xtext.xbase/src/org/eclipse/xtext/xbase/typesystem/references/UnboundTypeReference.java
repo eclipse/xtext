@@ -104,7 +104,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 */
 	public boolean canResolveTo(LightweightTypeReference reference) {
 		if (internalIsResolved())
-			return reference.isAssignableFrom(resolvedTo, new TypeConformanceComputationArgument(false, true, true, true, false));
+			return reference.isAssignableFrom(resolvedTo, new TypeConformanceComputationArgument(false, true, true, true, false, false /* TODO do we need to support synonmys here? */));
 		List<LightweightBoundTypeArgument> hints = getAllHints();
 		if (!hints.isEmpty() && hasSignificantHints(hints)) {
 			return canResolveTo(reference, hints);

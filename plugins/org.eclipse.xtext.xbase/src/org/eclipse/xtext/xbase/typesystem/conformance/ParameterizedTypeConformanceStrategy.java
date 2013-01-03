@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -48,13 +47,11 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.SUBTYPE;
 		if (left.isType(Cloneable.class))
 			return TypeConformanceResult.SUBTYPE;
-		if (left.isSubtypeOf(Iterable.class)) {
-			ArrayTypeReference leftArray = left.tryConvertToArray();
-			if (leftArray != null) {
-				TypeConformanceResult result = conformanceComputer.isConformant(leftArray, right, param);
-				if (result.isConformant()) {
-					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
-				}
+		if (left.isSubtypeOf(Iterable.class) && param.allowSynonyms) {
+			ParameterizedTypeReference rightAsList = right.tryConvertToListType();
+			TypeConformanceResult result = conformanceComputer.isConformant(left, rightAsList, param);
+			if (result.isConformant()) {
+				return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
 			}
 		}
 		return TypeConformanceResult.FAILED;
@@ -118,11 +115,17 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 					return TypeConformanceResult.FAILED;
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
-					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints);
+					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
 			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
 					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
+				}
+			}
+			if (param.allowSynonyms && (leftReference.isType(Serializable.class) || leftReference.isType(Cloneable.class))) {
+				ArrayTypeReference rightAsArray = rightReference.tryConvertToArray();
+				if (rightAsArray != null) {
+					return new TypeConformanceResult(ConformanceHint.SUCCESS, ConformanceHint.SUBTYPE, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM);
 				}
 			}
 		}
@@ -242,7 +245,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftTypeArguments.size() != rightTypeArguments.size()) {
 			return TypeConformanceResult.FAILED;
 		}
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false, unboundAddsHints);
+		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false, unboundAddsHints, false);
 		for(int i = 0; i < leftTypeArguments.size(); i++) {
 			if (!conformanceComputer.isConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argument).isConformant()) {
 				return TypeConformanceResult.FAILED;

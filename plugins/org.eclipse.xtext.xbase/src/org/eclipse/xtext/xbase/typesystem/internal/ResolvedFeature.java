@@ -142,13 +142,11 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 			if (receiverType == null) {
 				throw new IllegalStateException("Cannot determine type of receiver "+ getReceiver());
 			}
-			// TODO if the feature is defined in a synonym type, we have to lookup the right one
-			
 			JvmIdentifiableElement feature = getFeature();
 			if (feature instanceof JvmFeature) {
 				JvmDeclaredType declaringType = ((JvmFeature) feature).getDeclaringType();
 				final ParameterizedTypeReference declaringTypeReference = new ParameterizedTypeReference(receiverType.getOwner(), declaringType);
-				final TypeConformanceComputationArgument rawConformanceCheck = new TypeConformanceComputationArgument(true, false, false, false, false);
+				final TypeConformanceComputationArgument rawConformanceCheck = new TypeConformanceComputationArgument(true, false, false, false, false, false);
 				if (declaringTypeReference.isAssignableFrom(receiverType, rawConformanceCheck)) {
 					receiverTypeParameterMapping.set(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType));
 				} else {
