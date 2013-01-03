@@ -113,8 +113,30 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+            class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+           	<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+        </handler>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
+	    <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+                 style="push"
+                 tooltip="Organize Imports">
+                <visibleWhen checkEnabled="false">
+                    <reference
+                        definitionId="«name».Editor.opened">
+                    </reference>
+                </visibleWhen>
+            </command>  
+        </menuContribution>
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"

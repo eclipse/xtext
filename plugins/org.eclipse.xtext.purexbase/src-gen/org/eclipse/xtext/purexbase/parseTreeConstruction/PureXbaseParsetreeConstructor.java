@@ -83,6 +83,8 @@ protected class ThisRootNode extends RootToken {
 			case 49: return new JvmUpperBoundAnded_Group(this, this, 49, inst);
 			case 50: return new JvmLowerBound_Group(this, this, 50, inst);
 			case 51: return new JvmTypeParameter_Group(this, this, 51, inst);
+			case 52: return new XImportSection_ImportDeclarationsAssignment(this, this, 52, inst);
+			case 53: return new XImportDeclaration_Group(this, this, 53, inst);
 			default: return null;
 		}	
 	}	
@@ -14586,5 +14588,359 @@ protected class JvmTypeParameter_ConstraintsAssignment_1_1 extends AssignmentTok
 
 /************ end Rule JvmTypeParameter ****************/
 
+
+
+/************ begin Rule XImportSection ****************
+ *
+ * XImportSection:
+ * 	importDeclarations+=XImportDeclaration+;
+ *
+ **/
+
+// importDeclarations+=XImportDeclaration+
+protected class XImportSection_ImportDeclarationsAssignment extends AssignmentToken  {
+	
+	public XImportSection_ImportDeclarationsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXImportSectionAccess().getImportDeclarationsAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("importDeclarations",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importDeclarations");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXImportDeclarationRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXImportSectionAccess().getImportDeclarationsXImportDeclarationParserRuleCall_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XImportSection_ImportDeclarationsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+/************ end Rule XImportSection ****************/
+
+
+/************ begin Rule XImportDeclaration ****************
+ *
+ * XImportDeclaration:
+ * 	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
+ * 	importedType=[JvmDeclaredType|QualifiedName]) ";"?;
+ *
+ **/
+
+// "import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
+// importedType=[JvmDeclaredType|QualifiedName]) ";"?
+protected class XImportDeclaration_Group extends GroupToken {
+	
+	public XImportDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getXImportDeclarationRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "import"
+protected class XImportDeclaration_ImportKeyword_0 extends KeywordToken  {
+	
+	public XImportDeclaration_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getImportKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
+// importedType=[JvmDeclaredType|QualifiedName]
+protected class XImportDeclaration_Alternatives_1 extends AlternativesToken {
+
+	public XImportDeclaration_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_Group_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XImportDeclaration_ImportedTypeAssignment_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*"
+protected class XImportDeclaration_Group_1_0 extends GroupToken {
+	
+	public XImportDeclaration_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_AsteriskKeyword_1_0_4(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// static?="static"
+protected class XImportDeclaration_StaticAssignment_1_0_0 extends AssignmentToken  {
+	
+	public XImportDeclaration_StaticAssignment_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getStaticAssignment_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_ImportKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("static",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// extension?="extension"?
+protected class XImportDeclaration_ExtensionAssignment_1_0_1 extends AssignmentToken  {
+	
+	public XImportDeclaration_ExtensionAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getExtensionAssignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_StaticAssignment_1_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("extension",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("extension");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// importedType=[JvmDeclaredType|QualifiedName]
+protected class XImportDeclaration_ImportedTypeAssignment_1_0_2 extends AssignmentToken  {
+	
+	public XImportDeclaration_ImportedTypeAssignment_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_ExtensionAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XImportDeclaration_StaticAssignment_1_0_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("importedType",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importedType");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// "."
+protected class XImportDeclaration_FullStopKeyword_1_0_3 extends KeywordToken  {
+	
+	public XImportDeclaration_FullStopKeyword_1_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getFullStopKeyword_1_0_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_ImportedTypeAssignment_1_0_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "*"
+protected class XImportDeclaration_AsteriskKeyword_1_0_4 extends KeywordToken  {
+	
+	public XImportDeclaration_AsteriskKeyword_1_0_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getAsteriskKeyword_1_0_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_FullStopKeyword_1_0_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+// importedType=[JvmDeclaredType|QualifiedName]
+protected class XImportDeclaration_ImportedTypeAssignment_1_1 extends AssignmentToken  {
+	
+	public XImportDeclaration_ImportedTypeAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XImportDeclaration_ImportKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("importedType",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importedType");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule XImportDeclaration ****************/
 
 }
