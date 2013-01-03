@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class TypeConformanceComputationArgument {
 
 	protected final boolean rawType;

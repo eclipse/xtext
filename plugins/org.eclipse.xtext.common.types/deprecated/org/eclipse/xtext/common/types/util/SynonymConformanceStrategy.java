@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class SynonymConformanceStrategy extends TypeConformanceStrategy<JvmSynonymTypeReference> {
 	protected SynonymConformanceStrategy(TypeConformanceComputer conformanceComputer) {
 		super(conformanceComputer);

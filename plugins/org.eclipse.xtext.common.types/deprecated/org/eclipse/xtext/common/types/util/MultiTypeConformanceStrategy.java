@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class MultiTypeConformanceStrategy extends TypeConformanceStrategy<JvmMultiTypeReference> {
 	public MultiTypeConformanceStrategy(TypeConformanceComputer conformanceComputer) {
 		super(conformanceComputer);

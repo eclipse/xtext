@@ -7,22 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ITypeArgumentContext {
+@Deprecated
+public abstract class AbstractConformanceVisitor<T extends JvmTypeReference> extends 
+		AbstractTypeReferenceVisitorWithParameter.InheritanceAware<TypeConformanceComputationArgument.Internal<T>, TypeConformanceResult> {
 	
-	JvmTypeReference getBoundArgument(JvmTypeParameter parameter);
+	@Override
+	protected TypeConformanceResult handleNullReference(TypeConformanceComputationArgument.Internal<T> parameter) {
+		return new TypeConformanceResult(
+				TypeConformanceResult.Kind.EXCEPTION, 
+				new NullPointerException("Reference was null. Arguments were: " + parameter));
+	}
 	
-	JvmTypeReference getLowerBound(JvmTypeReference reference);
-	
-	JvmTypeReference getUpperBound(JvmTypeReference element, Notifier context);
-	
-	JvmTypeReference resolve(JvmTypeReference reference);
-	
-	boolean isRawTypeContext();
 }

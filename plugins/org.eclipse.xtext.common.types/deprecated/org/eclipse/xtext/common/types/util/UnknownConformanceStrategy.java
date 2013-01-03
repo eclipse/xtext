@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 class UnknownConformanceStrategy extends TypeConformanceStrategy<JvmUnknownTypeReference> {
 	protected UnknownConformanceStrategy(TypeConformanceComputer conformanceComputer) {
 		super(conformanceComputer);

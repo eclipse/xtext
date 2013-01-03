@@ -116,6 +116,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
+@SuppressWarnings("deprecation")
 @ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 

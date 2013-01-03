@@ -86,6 +86,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class XbaseTypeProvider extends AbstractTypeProvider {
 

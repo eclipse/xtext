@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument.In
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class WildcardConformanceStrategy extends TypeConformanceStrategy<JvmWildcardTypeReference> {
 	
 	public WildcardConformanceStrategy(TypeConformanceComputer conformanceComputer) {

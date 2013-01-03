@@ -37,6 +37,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class TypeArgumentContext implements ITypeArgumentContext {
 	
 	private final Map<JvmTypeParameter, JvmTypeReference> boundParameters;

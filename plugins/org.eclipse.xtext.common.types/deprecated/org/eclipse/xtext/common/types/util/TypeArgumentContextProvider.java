@@ -51,6 +51,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 @Singleton
 public class TypeArgumentContextProvider {
 

@@ -62,6 +62,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractTypeProvider implements ITypeProvider {
 
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);

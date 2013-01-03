@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceResult;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class JvmOnlyTypeConformanceComputer extends TypeConformanceComputer {
 	
 	@Override

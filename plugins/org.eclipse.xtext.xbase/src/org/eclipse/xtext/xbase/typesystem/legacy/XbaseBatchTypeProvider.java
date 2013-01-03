@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -114,15 +113,17 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 		return returnType.toTypeReference();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
+	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
 			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
 			JvmIdentifiableElement feature) {
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
+	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
 		throw new UnsupportedOperationException();
 	}
 

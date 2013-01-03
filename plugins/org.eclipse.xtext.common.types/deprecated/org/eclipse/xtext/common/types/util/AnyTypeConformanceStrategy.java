@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * Only the any type can be assigned to the any type.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class AnyTypeConformanceStrategy extends TypeConformanceStrategy<JvmAnyTypeReference> {
 	protected AnyTypeConformanceStrategy(TypeConformanceComputer conformanceComputer) {
 		super(conformanceComputer);

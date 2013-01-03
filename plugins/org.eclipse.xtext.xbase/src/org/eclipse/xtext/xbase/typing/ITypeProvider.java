@@ -23,6 +23,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @ImplementedBy(XbaseTypeProvider.class)
 public interface ITypeProvider {
 
