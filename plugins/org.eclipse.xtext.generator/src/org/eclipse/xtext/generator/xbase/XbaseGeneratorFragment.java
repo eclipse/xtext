@@ -200,7 +200,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameRefactoringProvider")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
-						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
+						"org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater")
 				.addfinalTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContextFactory")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory",
@@ -220,7 +220,12 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"\t\t\tbinder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class)" +
 						".to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n" +
 						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
-						"\t\t}");
+						"\t\t}")
+				.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
+						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider")
+				.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver", 
+						"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
+
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
