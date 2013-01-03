@@ -53,7 +53,7 @@ public class FunctionTypes {
 
 	public List<JvmTypeParameter> collectAllTypeParameters(LightweightTypeReference closureType,
 			JvmOperation operation) {
-		// common case is worth optimizing
+		// common case is worthy optimizing
 		List<JvmType> rawTypes = closureType.getRawTypes();
 		if (rawTypes.size() == 1 && operation.getTypeParameters().isEmpty()) {
 			JvmType type = rawTypes.get(0);
@@ -76,7 +76,20 @@ public class FunctionTypes {
 	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getFunctionTypeParameterMapping(
 			LightweightTypeReference functionType, JvmOperation operation,
 			ActualTypeArgumentCollector typeArgumentCollector, ITypeReferenceOwner owner) {
-		// TODO we should use the function type instead of the operationTypeDeclarator, shouldn't we?
+		/* 
+		 * The mapping is populated from by means of the function type to declarator mapping, though a method
+		 * 
+		 * m(Zonk zonk) { .. }
+		 * 
+		 * with
+		 * 
+		 * interface Foo<X> {
+		 *   void bar(X x);
+		 * }
+		 * interface Zonk extends Foo<CharSequence> {}
+		 * 
+		 * infers the parameter type CharSequence for the lamba param
+		 */
 		JvmParameterizedTypeReference operationTypeDeclarator = typeReferences.createTypeRef(operation.getDeclaringType());
 		LightweightTypeReference lightweightTypeReference = new OwnedConverter(owner).toLightweightReference(operationTypeDeclarator);
 		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, functionType);

@@ -92,6 +92,48 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testSpecializedSubInterface_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeSubIntf [ length.toString ]", "(CharSequence)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "SubIntf");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeIntf [ it ]", "(Object)=>Object");
+    this.withEquivalents(_resolvesClosuresTo, "Intf<Object>");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_03() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeIntf [ String it | it ]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Intf<String>");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_04() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::<String>invokeIntf [ it ]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Intf<String>");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_05() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeConstrainedIntf [ it ]", "(CharSequence)=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "Intf<CharSequence>");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_06() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeParameterizedSubIntf [ it ]", "(CharSequence)=>CharSequence");
+    this.withEquivalents(_resolvesClosuresTo, "ParameterizedSubIntf<CharSequence>");
+  }
+  
+  @Test
+  public void testSpecializedSubInterface_07() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeConcreteParameterizedSubIntf [ it ]", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "ParameterizedSubIntf<String>");
+  }
+  
+  @Test
   public void testIfExpression_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("if (true) [|\'\'] else [|\'\']", "()=>String", "()=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function0<String>", "Function0<String>");
