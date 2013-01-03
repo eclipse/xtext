@@ -135,6 +135,7 @@ public class ConfigurableCompletionProposal implements
 	 * @see ICompletionProposal#apply(IDocument)
 	 */
 	public void apply(IDocument document) {
+		String original = document.get();
 		try {
 			if (getTextApplier() == null) {
 				document.replace(getReplacementOffset(), getReplacementLength(), getReplacementString());
@@ -143,8 +144,9 @@ public class ConfigurableCompletionProposal implements
 			}
 			if (linkedMode)
 				setUpLinkedMode(document);
-		} catch (BadLocationException x) {
-			// ignore
+		} catch (Exception exc) {
+			log.error("Error applying completion proposal", exc);
+			document.set(original);
 		}
 	}
 	
