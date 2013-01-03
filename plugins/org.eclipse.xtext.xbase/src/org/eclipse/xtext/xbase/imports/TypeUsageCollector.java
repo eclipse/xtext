@@ -279,8 +279,8 @@ public class TypeUsageCollector {
 					refRegion = new TextRegion(refRegion.getOffset(), refRegion.getLength() - refText.length() + preferredType.getSecond().length());
 					refText = preferredType.getSecond();
 				}
-				acceptType(preferredType.getFirst(), refText, refRegion);
 			}
+			acceptType(preferredType.getFirst(), refText, refRegion);
 		}
 	}
 	
