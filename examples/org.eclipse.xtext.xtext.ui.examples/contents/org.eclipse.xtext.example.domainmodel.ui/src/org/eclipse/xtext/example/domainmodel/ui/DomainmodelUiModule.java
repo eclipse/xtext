@@ -6,7 +6,6 @@ package org.eclipse.xtext.example.domainmodel.ui;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
-import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider;
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
@@ -17,12 +16,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
-import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
-import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
-import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
-import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -61,19 +55,5 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 					.to(DerivedMemberAwareEditorOpener.class);
 			binder.bind(IDerivedMemberAwareEditorOpener.class).to(DerivedMemberAwareEditorOpener.class);
 		}
-	}
-	
-	public Class<? extends IUnresolvedTypeResolver> bindIUnresolvedTypeResolver() {
-		return InteractiveUnresolvedTypeResolver.class;
-	}
-	
-	@Override
-	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
-		return ImportingTypesProposalProvider.class;
-	}
-	
-	@Override
-	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-		return XbaseReferenceUpdater.class;
 	}
 }
