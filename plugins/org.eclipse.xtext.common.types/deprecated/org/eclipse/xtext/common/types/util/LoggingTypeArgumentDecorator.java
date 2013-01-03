@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LoggingTypeArgumentDecorator extends TypeArgumentContextProvider implements TypeArgumentContextProvider.IInitializableTypeArgumentContext, TypeArgumentContextProvider.Request {
 
 	private static final Logger primaryLog = Logger.getLogger(LoggingTypeArgumentDecorator.class.getCanonicalName() + ".Primary");

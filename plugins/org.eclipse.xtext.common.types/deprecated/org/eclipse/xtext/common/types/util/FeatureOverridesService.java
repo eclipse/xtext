@@ -49,6 +49,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge Initial contribution and API
  * @author Holger Schill
  */
+@Deprecated
 @Singleton
 public class FeatureOverridesService {
 
@@ -70,8 +71,8 @@ public class FeatureOverridesService {
 	public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
 		if (type == null)
 			return Collections.emptyList();
-		ITypeArgumentContext context = contextProvider
-				.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(type));
+		ITypeArgumentContext context = contextProvider.getTypeArgumentContext(
+				new TypeArgumentContextProvider.ReceiverRequest(type));
 		JvmType rawType = type.getType();
 		if (rawType == null || rawType.eIsProxy() || !(rawType instanceof JvmDeclaredType))
 			return Collections.emptyList();
@@ -81,11 +82,18 @@ public class FeatureOverridesService {
 	public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, ITypeArgumentContext ctx) {
 		Multimap<Triple<EClass, String, Integer>, JvmFeature> featureIndex = LinkedHashMultimap.create();
 		indexFeatures(type, featureIndex);
+		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
+		for (JvmTypeReference jvmTypeReference : types) {
+			JvmType jvmType = jvmTypeReference.getType();
+			if (jvmType instanceof JvmDeclaredType) {
+				indexFeatures((JvmDeclaredType) jvmType, featureIndex);
+			}
+		}
 		return removeOverridden(featureIndex, ctx);
 	}
 
 	protected void indexFeatures(JvmDeclaredType type, Multimap<Triple<EClass, String, Integer>, JvmFeature> index) {
-		for (JvmMember member : type.getAllFeatures()) {
+		for (JvmMember member : type.getMembers()) {
 			if (member instanceof JvmExecutable) {
 				Triple<EClass, String, Integer> key = Tuples.create(member.eClass(), member.getSimpleName(),
 						((JvmExecutable) member).getParameters().size());

@@ -30,6 +30,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IdentifiableSimpleNameProvider nameProvider;
 
+	@SuppressWarnings("deprecation")
 	@Check
 	public void checkInvalidFeatureLinked(XAbstractFeatureCall featureCall) {
 		if (!featureCall.isValidFeature()) {

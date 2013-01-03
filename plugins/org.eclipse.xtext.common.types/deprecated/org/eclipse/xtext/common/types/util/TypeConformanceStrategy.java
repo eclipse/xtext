@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public abstract class TypeConformanceStrategy<T extends JvmTypeReference> extends AbstractConformanceVisitor<T> {
 	
 	protected final TypeConformanceComputer conformanceComputer;

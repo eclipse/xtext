@@ -26,6 +26,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein
  */
 @Singleton
+@Deprecated
 public class VisibilityService {
 
 	@Inject

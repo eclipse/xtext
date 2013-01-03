@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class TypeConformanceResult {
 	
 	private static final Logger log = Logger.getLogger(TypeConformanceResult.class);

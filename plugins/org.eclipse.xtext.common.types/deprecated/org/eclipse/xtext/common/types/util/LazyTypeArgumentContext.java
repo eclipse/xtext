@@ -37,6 +37,7 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LazyTypeArgumentContext implements TypeArgumentContextProvider.IInitializableTypeArgumentContext {
 
 	private TypeArgumentContextProvider.Request request;

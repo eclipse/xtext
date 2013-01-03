@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class GenericArrayConformanceStrategy extends
 		TypeConformanceStrategy<JvmGenericArrayTypeReference> {
 	public GenericArrayConformanceStrategy(TypeConformanceComputer conformanceComputer) {

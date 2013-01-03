@@ -53,6 +53,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 @Singleton
 public class TypeConformanceComputer {
 

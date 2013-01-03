@@ -41,6 +41,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
+@SuppressWarnings("deprecation")
 public class TypeReferences {
 
 	private final static Logger log = Logger.getLogger(TypeReferences.class);

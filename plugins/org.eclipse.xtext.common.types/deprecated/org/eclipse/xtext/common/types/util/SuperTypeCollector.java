@@ -36,6 +36,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
+@Deprecated
 @Singleton
 public class SuperTypeCollector {
 

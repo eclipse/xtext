@@ -122,15 +122,14 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	
 	protected Map<String, Set<JvmFeature>> allFeaturesByName;
 	
-	// TODO HashSet is not threadsafe
-	protected Set<String> removedOverridden = Sets.newHashSet();
+	protected Set<String> removedOverridden;
 	
 	@Override
 	public Iterable<JvmFeature> findAllFeaturesByName(String simpleName) {
 		Map<String, Set<JvmFeature>> allFeaturesByName = getAllFeaturesMap(); 
 		Set<JvmFeature> result = allFeaturesByName.get(simpleName);
 		if (result != null) {
-			if (result.size() <= 1 || removedOverridden.contains(simpleName)) {
+			if (result.size() <= 1 || (removedOverridden != null && removedOverridden.contains(simpleName))) {
 				return result;
 			}
 			// TODO use the number of parameters as a first fast criteria
@@ -172,7 +171,12 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 					}
 				}
 			}
-			removedOverridden.add(simpleName);
+			// TODO HashSet is not threadsafe
+			if (removedOverridden == null) {
+				removedOverridden = Sets.newHashSet(simpleName);
+			} else {
+				removedOverridden.add(simpleName);
+			}
 			return result;
 		}
 		return Collections.emptyList();
@@ -200,7 +204,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			}
 			Runnable runnable = new Runnable() {
 				public void run() {
-					removedOverridden.clear();
+					removedOverridden = null;
 					allFeaturesByName = null;
 				}
 			};

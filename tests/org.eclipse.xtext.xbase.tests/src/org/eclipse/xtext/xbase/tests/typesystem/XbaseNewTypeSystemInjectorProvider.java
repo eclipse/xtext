@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
@@ -26,6 +28,8 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
@@ -42,6 +46,7 @@ import com.google.inject.Injector;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 
 	@Override
@@ -101,9 +106,17 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 			return LegacyVisibilityService.class;
 		}
 		
+		public Class<? extends FeatureOverridesService> bindFeatureOverridesService() {
+			return LegacyFeatureOverridesService.class;
+		}
+		
+		@Override
+		public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
+			return LegacyTypeArgumentContextProvider.class;
+		}
+		
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
 		@Override
 		public IScope getScope(EObject context, EReference reference) {

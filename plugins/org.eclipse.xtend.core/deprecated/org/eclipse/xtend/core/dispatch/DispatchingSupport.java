@@ -40,6 +40,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class DispatchingSupport {
 
 	@Inject
@@ -118,7 +119,12 @@ public class DispatchingSupport {
 			return;
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(typeRefs.createTypeRef(type)),
 				JvmOperation.class);
-		for (JvmOperation operation : features) {
+		collectDispatchMethods(type, features, result);
+	}
+
+	public void collectDispatchMethods(final JvmGenericType type, Iterable<JvmOperation> operations,
+			Multimap<Pair<String, Integer>, JvmOperation> result) {
+		for (JvmOperation operation : operations) {
 			if (isDispatchOperation(operation, type)) {
 				final Pair<String, Integer> signatureTuple = Tuples.create(operation.getSimpleName().substring(1),
 						operation.getParameters().size());
