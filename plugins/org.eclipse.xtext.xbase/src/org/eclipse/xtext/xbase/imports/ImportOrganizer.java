@@ -33,6 +33,9 @@ public class ImportOrganizer {
 	private IImportsConfiguration config;
 	
 	@Inject
+	private RewritableImportSection.Factory importSectionFactory;
+	
+	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 	
 	@Inject
@@ -43,9 +46,6 @@ public class ImportOrganizer {
 	
 	@Inject 
 	private ConflictResolver conflictResolver;
-	
-	@Inject
-	private ImportSectionSerializer importSectionSerializer;
 	
 	@Inject
 	private NonOverridableTypesProvider nonOverridableTypesProvider;
@@ -61,24 +61,25 @@ public class ImportOrganizer {
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
 		Set<String> implicitlyImportedPackages = config.getImplicitlyImportedPackages(resource);
-		ImportCollection newImportCollection = new ImportCollection();
+		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
 		List<ReplaceRegion> replaceRegions = newArrayList();
 		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
 			String text = entry.getKey();
 			JvmDeclaredType type = entry.getValue();
 			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
 			if(needsImport(type, text, locallyDeclaredTypes, implicitlyImportedPackages, nonOverridableTypesProvider, usages)) {
-				newImportCollection.getImportedTypes().add(type);
+				newImportSection.addImport(type);
 			}
 			for(TypeUsage usage: usages) {
-				if(!equal(usage.getText(), text)) {
+				if(!equal(usage.getText(), text)) 
 					replaceRegions.add(new ReplaceRegion(usage.getTextRegion(), text));
-				}
 			}
 		}
-		newImportCollection.getStaticImports().addAll(typeUsages.getStaticImports());
-		newImportCollection.getExtensionImports().addAll(typeUsages.getExtensionImports());
-		replaceRegions.add(importSectionSerializer.serialize(resource, newImportCollection));
+		for(JvmDeclaredType staticImport: typeUsages.getStaticImports()) 
+			newImportSection.addStaticImport(staticImport);
+		for(JvmDeclaredType extensionImport: typeUsages.getExtensionImports()) 
+			newImportSection.addStaticExtensionImport(extensionImport);
+		replaceRegions.addAll(newImportSection.rewrite());
 		return replaceRegions; 
 	}
 

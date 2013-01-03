@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -35,9 +34,12 @@ public class ConflictResolver {
 	@Inject
 	private IImportsConfiguration config;
 	
+	@Inject
+	private RewritableImportSection.Factory importSectionFactory;
+	
 	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtextResource resource) {
 		String packageName = config.getCommonPackageName(resource);
-		ImportCollection importSection = getImportSection(config.getImportSection(resource));
+		RewritableImportSection importSection = importSectionFactory.parse(resource);
 		Map<String, JvmDeclaredType> locallyDefinedTypes = config.getLocallyDefinedTypes(resource);
 		Map<String, JvmDeclaredType> result = newLinkedHashMap();
 		Multimap<String, JvmDeclaredType> simpleName2Types = usages.getSimpleName2Types();
@@ -78,17 +80,13 @@ public class ConflictResolver {
 		return false;
 	}
 
-	protected ImportCollection getImportSection(XImportSection xImportSection) {
-		return new ImportCollection(xImportSection);
-	}
-
 	protected JvmDeclaredType findBestMatch(Collection<JvmDeclaredType> types, TypeUsages usages, String packageName,
-			ImportCollection importCollection) {
+			RewritableImportSection importSection) {
 		Iterator<JvmDeclaredType> iterator = types.iterator();
 		JvmDeclaredType currentBestMatch = iterator.next();
 		while (iterator.hasNext()) {
 			JvmDeclaredType nextType = iterator.next();
-			if (isBetter(nextType, currentBestMatch, usages, packageName, importCollection)) {
+			if (isBetter(nextType, currentBestMatch, usages, packageName, importSection)) {
 				currentBestMatch = nextType;
 			}
 		}
@@ -96,11 +94,11 @@ public class ConflictResolver {
 	}
 
 	protected boolean isBetter(JvmDeclaredType candidate, JvmDeclaredType currentBestMatch, TypeUsages usages, String packageName,
-			ImportCollection importSection) {
+			RewritableImportSection importSection) {
 		if (equal(packageName,candidate.getPackageName()) && !equal(packageName, currentBestMatch.getPackageName()))
 			return true;
-		if (importSection.getImportedTypes().contains(candidate)
-				&& !importSection.getImportedTypes().contains(currentBestMatch))
+		if (importSection.getImportedType(candidate.getSimpleName()) == candidate 
+				&& importSection.getImportedType(currentBestMatch.getSimpleName()) != currentBestMatch)
 			return true;
 		return size(usages.getUsages(candidate)) > size(usages.getUsages(currentBestMatch));
 	}
