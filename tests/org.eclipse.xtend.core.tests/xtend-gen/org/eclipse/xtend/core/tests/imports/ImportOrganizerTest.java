@@ -21,10 +21,10 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   @Inject
   private ImportOrganizer importOrganizer;
   
-  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
+  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected, final boolean validate) {
     try {
       String _string = model.toString();
-      final XtendFile xtendFile = this.file(_string, true);
+      final XtendFile xtendFile = this.file(_string, validate);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       StringBuilder _stringBuilder = new StringBuilder(model);
@@ -51,6 +51,10 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
+    this.assertIsOrganizedTo(model, expected, true);
   }
   
   @Test
