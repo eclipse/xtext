@@ -11,10 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.inject.Inject;
 
@@ -28,6 +32,9 @@ public class TypeSerializationUtil {
 
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IImportsConfiguration importsConfig;
 	
 	public String serialize(JvmType type, EObject context) {
 		return serialize(typeReferences.createTypeRef(type), context);
@@ -57,7 +64,13 @@ public class TypeSerializationUtil {
 	}
 
 	public ImportManager getImportManager(EObject context) {
-		return new ImportManager(false);
+		ImportManager importManager = new ImportManager(true);
+		XImportSection importSection = importsConfig.getImportSection((XtextResource) context.eResource());
+		if(importSection != null) {
+			for(XImportDeclaration ximport: importSection.getImportDeclarations()) 
+				importManager.addImportFor(ximport.getImportedType());
+		}
+		return importManager;
 	}
 
 }

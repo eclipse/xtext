@@ -17,10 +17,12 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
+import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -68,5 +70,10 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return ImportingTypesProposalProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+		return XbaseReferenceUpdater.class;
 	}
 }
