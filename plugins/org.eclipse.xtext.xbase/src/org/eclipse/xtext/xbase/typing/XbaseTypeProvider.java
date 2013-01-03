@@ -1234,7 +1234,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	/**
+	 * {@link XCasePart} are no longer considered to be identifiables. Therefore this one throws an exception.
+	 * @param object the case part.
 	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 * @throws IllegalStateException always.
 	 */
 	protected JvmTypeReference _typeForIdentifiable(XCasePart object, boolean rawType) {
 		throw new IllegalStateException();

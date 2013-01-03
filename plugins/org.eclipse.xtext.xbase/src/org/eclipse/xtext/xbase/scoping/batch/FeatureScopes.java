@@ -98,7 +98,7 @@ public class FeatureScopes implements IFeatureNames {
 		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticImports, session, resolvedTypes);
 		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
 		IScope implicitReceivers = createImplicitFeatureCallScope(context, dynamicExtensions, session, resolvedTypes);
-		IScope constructors = new ConstructorDelegateScope(implicitReceivers, session, asAbstractFeatureCall(context), resolvedTypes);
+		IScope constructors = new ConstructorDelegateScope(implicitReceivers, session, asAbstractFeatureCall(context));
 		IScope localVariables = new LocalVariableScope(constructors, session, asAbstractFeatureCall(context));
 		return localVariables;
 	}

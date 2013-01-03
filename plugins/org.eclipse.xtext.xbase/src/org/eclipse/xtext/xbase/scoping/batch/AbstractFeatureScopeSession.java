@@ -138,6 +138,9 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return Collections.emptyList();
 	}
 	
+	/**
+	 * @param result an aggregating parameter that accepts the extension providers.
+	 */
 	protected void addExtensionProviders(List<ExpressionBucket> result) {
 	}
 	

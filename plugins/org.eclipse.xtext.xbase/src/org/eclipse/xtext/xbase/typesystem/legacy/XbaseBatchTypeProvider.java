@@ -68,7 +68,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public JvmTypeReference getExpectedType(XExpression expression, boolean rawType) {
-		return getResolvedTypes(expression).getExpectedType(expression).toTypeReference();
+		return getExpectedType(expression);
 	}
 
 	@Override

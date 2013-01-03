@@ -206,7 +206,12 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			return collector.getTypeParameterMapping(reference);
 		}
 		
-		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
+		/**
+		 * @param typeParameter the considered type parameter.
+		 * @param boundParameters all bound type parameters.
+		 * @param visited the parameters that were already visited.
+		 */
+		protected boolean shouldProcessInContextOf(JvmTypeParameter typeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
 			return true;
 		}
 
@@ -258,10 +263,19 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		unboundTypeReferenceTraverser = createUnboundTypeReferenceTraverser();
 	}
 	
+	/**
+	 * @param typeParameter the to-be-processed type parameter.
+	 * @param reference the reference that is bound to the given type parameter.
+	 */
 	protected void processTypeParameter(JvmTypeParameter typeParameter, LightweightTypeReference reference) {
 	}
 	
-	protected boolean shouldProcess(JvmTypeParameter type) {
+	/**
+	 * Allows to veto the processing of a given type parameter.
+	 * @param typeParameter the to-be-processed type parameter.
+	 * @return always <code>true</code>.
+	 */
+	protected boolean shouldProcess(JvmTypeParameter typeParameter) {
 		return true;
 	}
 	

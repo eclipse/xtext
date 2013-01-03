@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -19,8 +18,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 
 import com.google.common.collect.Lists;
 
@@ -29,11 +26,8 @@ import com.google.common.collect.Lists;
  */
 public class ConstructorDelegateScope extends AbstractSessionBasedScope implements IFeatureNames {
 	
-	private IResolvedTypes resolvedType;
-
-	public ConstructorDelegateScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, IResolvedTypes resolvedType) {
+	public ConstructorDelegateScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall) {
 		super(parent, session, featureCall);
-		this.resolvedType = resolvedType;
 	}
 	
 	@Override
@@ -64,11 +58,6 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 		return result;
 	}
 
-	@Override
-	protected Iterable<IEObjectDescription> getLocalElementsByEObject(EObject object, URI uri) {
-		return super.getLocalElementsByEObject(object, uri);
-	}
-	
 	protected IEObjectDescription createDescription(QualifiedName name, JvmConstructor constructor) {
 		return new ConstructorDescription(name, constructor, 0, getSession().isVisible(constructor));
 	}

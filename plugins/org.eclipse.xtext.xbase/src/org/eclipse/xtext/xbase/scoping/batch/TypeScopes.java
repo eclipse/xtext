@@ -22,14 +22,20 @@ public class TypeScopes extends DelegatingScopes {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
 
+	/**
+	 * @param resolvedTypes the currently known resolved types
+	 */
 	public IScope createTypeScope(EObject context, EReference reference,
 			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		return doCreateTypeScope(context, reference, session);
 	}
 	
+	/**
+	 * @param session the currently available session data
+	 */
 	protected IScope doCreateTypeScope(final EObject context, EReference reference, final IFeatureScopeSession session) {
 		final IScope delegateScope = getDelegate().getScope(context, reference);
-		// TODO visibility
+		// TODO visibility information should be attached to the given type descriptions
 		return delegateScope;
 //		return new IScope() {
 //
