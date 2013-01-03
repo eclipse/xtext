@@ -16,6 +16,34 @@ import org.junit.Test;
 public class CompilerTest extends AbstractCompilerTest {
 
 	@Override
+	@Ignore("Fails with old impl")
+	@Test
+	public void testRecursiveTypeParameter_01() throws Exception {
+		super.testRecursiveTypeParameter_01();
+	}
+	
+	@Override
+	@Ignore("Fails with old impl")
+	@Test
+	public void testRecursiveTypeParameter_02() throws Exception {
+		super.testRecursiveTypeParameter_02();
+	}
+	
+	@Override
+	@Ignore("Fails with old impl")
+	@Test
+	public void testRecursiveTypeParameter_03() throws Exception {
+		super.testRecursiveTypeParameter_03();
+	}
+	
+	@Override
+	@Ignore("Fails with old impl")
+	@Test
+	public void testRecursiveTypeParameter_04() throws Exception {
+		super.testRecursiveTypeParameter_04();
+	}
+	
+	@Override
 	@Test
 	@Ignore("Fails with old impl")
 	public void testBug_396879_04() throws Exception {
