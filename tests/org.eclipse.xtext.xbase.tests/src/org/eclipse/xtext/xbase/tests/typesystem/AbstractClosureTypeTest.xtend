@@ -56,6 +56,34 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		super.expression(expression, resolve)
 	}
 	
+	@Test def void testSpecializedSubInterface_01() throws Exception {
+		"closures::Client::invokeSubIntf [ length.toString ]".resolvesClosuresTo("(CharSequence)=>String").withEquivalents("SubIntf")
+	}
+	
+	@Test def void testSpecializedSubInterface_02() throws Exception {
+		"closures::Client::invokeIntf [ it ]".resolvesClosuresTo("(Object)=>Object").withEquivalents("Intf<Object>")
+	}
+	
+	@Test def void testSpecializedSubInterface_03() throws Exception {
+		"closures::Client::invokeIntf [ String it | it ]".resolvesClosuresTo("(String)=>String").withEquivalents("Intf<String>")
+	}
+	
+	@Test def void testSpecializedSubInterface_04() throws Exception {
+		"closures::Client::<String>invokeIntf [ it ]".resolvesClosuresTo("(String)=>String").withEquivalents("Intf<String>")
+	}
+	
+	@Test def void testSpecializedSubInterface_05() throws Exception {
+		"closures::Client::invokeConstrainedIntf [ it ]".resolvesClosuresTo("(CharSequence)=>CharSequence").withEquivalents("Intf<CharSequence>")
+	}
+	
+	@Test def void testSpecializedSubInterface_06() throws Exception {
+		"closures::Client::invokeParameterizedSubIntf [ it ]".resolvesClosuresTo("(CharSequence)=>CharSequence").withEquivalents("ParameterizedSubIntf<CharSequence>")
+	}
+	
+	@Test def void testSpecializedSubInterface_07() throws Exception {
+		"closures::Client::invokeConcreteParameterizedSubIntf [ it ]".resolvesClosuresTo("(String)=>String").withEquivalents("ParameterizedSubIntf<String>")
+	}
+	
 	@Test def void testIfExpression_01() throws Exception {
 		"if (true) [|''] else [|'']".resolvesClosuresTo("()=>String", "()=>String").withEquivalents("Function0<String>", "Function0<String>")
 	}
