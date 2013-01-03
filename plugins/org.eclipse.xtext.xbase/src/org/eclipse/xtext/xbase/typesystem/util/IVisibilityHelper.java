@@ -32,4 +32,19 @@ public interface IVisibilityHelper {
 	 */
 	boolean isVisible(@NonNull JvmMember member);
 	
+	/**
+	 * Treats all members as visible members independently from their own visibility or 
+	 * the visibility of their containers. 
+	 */
+	IVisibilityHelper ALL = new IVisibilityHelper() {
+		
+		/**
+		 * @return always <code>true</code>.
+		 */
+		public boolean isVisible(@NonNull JvmMember member) {
+			return true;
+		}
+		
+	};
+	
 }

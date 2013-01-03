@@ -741,7 +741,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		try {
 			b.openScope();
 			JvmOperation operation = closures.findImplementingOperation(type, closure.eResource());
-			final JvmTypeReference returnType = context.resolve(operation.getReturnType());
+			final JvmTypeReference returnType = getClosureOperationReturnType(type, context, operation);
 			b.newLine().append("public ");
 			serialize(returnType, closure, b, false, false, true, true);
 			b.append(" ").append(operation.getSimpleName());
@@ -750,8 +750,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			List<JvmFormalParameter> operationParams = operation.getParameters();
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
-				JvmFormalParameter operationParam = operationParams.get(i);
-				JvmTypeReference parameterType = context.resolve(operationParam.getParameterType());
+				JvmTypeReference parameterType = getClosureOperationParameterType(type, context, operation, i);
 				b.append("final ");
 				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
@@ -785,6 +784,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation();
 		b.newLine().append("}");
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
+	}
+
+	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, ITypeArgumentContext context,
+			JvmOperation operation, int i) {
+		JvmFormalParameter operationParam = operation.getParameters().get(i);
+		JvmTypeReference parameterType = context.resolve(operationParam.getParameterType());
+		return parameterType;
+	}
+
+	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, ITypeArgumentContext context, JvmOperation operation) {
+		return context.resolve(operation.getReturnType());
 	}
 	
 	protected void _toJavaExpression(final XClosure call, final ITreeAppendable b) {

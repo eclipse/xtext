@@ -158,7 +158,7 @@ public class TypeReferenceSerializer {
 		} else if (type instanceof JvmAnyTypeReference) {
 			tracedAppendable.append("Object");
 		} else if (type instanceof JvmMultiTypeReference) {
-			serialize(resolveMultiType(type), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			serialize(resolveMultiType(type, context), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmDelegateTypeReference) {
 			JvmTypeReference delegate = ((JvmDelegateTypeReference) type).getDelegate();
 			if(delegate != null)
@@ -172,11 +172,11 @@ public class TypeReferenceSerializer {
 		}
 	}
 	
-	public JvmTypeReference resolveMultiType(JvmTypeReference reference) {
+	public JvmTypeReference resolveMultiType(JvmTypeReference reference, EObject context) {
 		if (reference instanceof JvmMultiTypeReference) {
 			JvmTypeReference result = typeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) reference).getReferences());
 			if (result instanceof JvmMultiTypeReference)
-				return resolveMultiType(result);
+				return resolveMultiType(result, context);
 			return result;
 		}
 		return reference;

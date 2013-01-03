@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -27,9 +29,13 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -80,7 +86,7 @@ public class XbaseCompiler2 extends XbaseCompiler {
 				if (typeArgument.isWildcard()) {
 					return completeFeatureCallAppendable;
 				}
-				JvmTypeReference jvmTypeReference = resolveMultiType(typeArgument.toTypeReference());
+				JvmTypeReference jvmTypeReference = typeArgument.toJavaCompliantTypeReference();
 				resolvedTypeArguments.add(jvmTypeReference);
 			}
 			completeFeatureCallAppendable.append("<");
@@ -173,6 +179,27 @@ public class XbaseCompiler2 extends XbaseCompiler {
 		appendable.newLine().append("}");
 		appendable.decreaseIndentation().decreaseIndentation();
 		appendable.newLine().append("}");
+	}
+	
+	@Override
+	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, ITypeArgumentContext context,
+			JvmOperation operation, int i) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getParameters().get(i).getParameterType());
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
+	}
+
+	@Override
+	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, ITypeArgumentContext context, JvmOperation operation) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
 	}
 	
 	@Override

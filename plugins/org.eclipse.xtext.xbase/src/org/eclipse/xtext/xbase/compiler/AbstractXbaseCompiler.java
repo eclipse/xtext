@@ -342,8 +342,8 @@ public abstract class AbstractXbaseCompiler {
 		return false;
 	}
 
-	protected JvmTypeReference resolveMultiType(JvmTypeReference typeRef) {
-		return referenceSerializer.resolveMultiType(typeRef);
+	protected JvmTypeReference resolveMultiType(JvmTypeReference typeRef, EObject context) {
+		return referenceSerializer.resolveMultiType(typeRef, context);
 	}
 	
 	protected String getVarName(Object ex, ITreeAppendable appendable) {

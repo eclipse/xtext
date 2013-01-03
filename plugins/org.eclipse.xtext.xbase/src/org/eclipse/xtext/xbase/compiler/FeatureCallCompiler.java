@@ -397,7 +397,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 							typeArgument = getPrimitives().asWrapperTypeIfPrimitive(typeArgument);
 							if (typeArgument == null)
 								throw new IllegalStateException("typeArgument may not be null");
-							typeArgument = resolveMultiType(typeArgument);
+							typeArgument = resolveMultiType(typeArgument, call);
 							resolvedTypeArguments.add(typeArgument);
 						}
 					} else {
