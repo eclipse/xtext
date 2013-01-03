@@ -17,11 +17,15 @@ import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.validation.XtendJavaValidator;
 import org.eclipse.xtend.core.validation.XtendJavaValidator2;
 import org.eclipse.xtend.core.xtend.XtendFactory;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
@@ -32,6 +36,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService;
+import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -43,6 +49,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 	
 	@Override
@@ -64,6 +71,7 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 						.to(ExtensionAwareScopeProvider.class);
 			}
 			
+			@SuppressWarnings("unused")
 			public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
 				return ExtensionAwareScopeProvider.class;
 			}
@@ -78,14 +86,17 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return XbaseBatchTypeProvider.class;
 			}
 			
+			@SuppressWarnings("unused")
 			public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 				return LogicalContainerAwareBatchTypeResolver.class;
 			}
 			
+			@SuppressWarnings("unused")
 			public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
 				return DispatchAndExtensionAwareReentrantTypeResolver.class;
 			}
 			
+			@SuppressWarnings("unused")
 			public Class<? extends ITypeComputer> bindTypeComputer() {
 				return XtendTypeComputer.class;
 			}
@@ -115,8 +126,24 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return XtendJavaValidator2.class;
 			}
 			
+			@SuppressWarnings("unused")
 			public Class<? extends VisibilityService> bindVisibilityService() {
 				return LegacyVisibilityService.class;
+			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends FeatureOverridesService> bindFeatureOverridesService() {
+				return LegacyFeatureOverridesService.class;
+			}
+			
+			@Override
+			public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
+				return LegacyTypeArgumentContextProvider.class;
+			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends TypeReferenceSerializer> bindTypeReferenceSerializer() {
+				return TypeReferenceSerializer2.class;
 			}
 		});
 	}

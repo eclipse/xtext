@@ -134,14 +134,14 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideGenericMethod_10() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T extends String> foo1() {}"+
 									"}");
 		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD);
 	}
 
 	@Test public void testOverrideGenericMethod_11() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T extends CharSequence> foo1() {}"+
 									"}");
 		helper.assertNoErrors(xtendClass);
@@ -186,7 +186,7 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
 	@Test public void testOverrideReturnType_2() throws Exception {
 		XtendClass xtendClass = clazz("import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
-									"<T3> List<T3> List<T3> getValue3(final List<T3> t) {}" +
+									"override <T3> List<T3> getValue3(List<T3> t) {}" +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}

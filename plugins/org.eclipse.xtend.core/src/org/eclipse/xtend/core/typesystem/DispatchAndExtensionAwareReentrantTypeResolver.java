@@ -218,10 +218,10 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
 		} else if (dispatchUtil.isDispatchFunction(operation) && InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			JvmOperation dispatcher = dispatchUtil.getDispatcherOperation(operation);
-			LightweightTypeReference declaredDispatcherType = null;
-			if (dispatcher != null) {
-				declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);
+			if (dispatcher == null) {
+				throw new IllegalStateException("Cannot locate dispatcher for operation " + operation.getIdentifier());
 			}
+			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);;
 			List<JvmOperation> dispatchCases = dispatchUtil.getDispatchCases(dispatcher);
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
