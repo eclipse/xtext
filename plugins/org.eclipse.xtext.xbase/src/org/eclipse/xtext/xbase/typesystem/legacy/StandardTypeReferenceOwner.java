@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.legacy;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -32,6 +34,14 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	public StandardTypeReferenceOwner(CommonTypeComputationServices services, ResourceSet context) {
 		this.services = services;
 		this.context = context;
+	}
+	
+	public StandardTypeReferenceOwner(CommonTypeComputationServices services, EObject context) {
+		this(services, context.eResource());
+	}
+	
+	public StandardTypeReferenceOwner(CommonTypeComputationServices services, Resource context) {
+		this(services, context.getResourceSet());
 	}
 	
 	public CommonTypeComputationServices getServices() {

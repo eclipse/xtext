@@ -68,6 +68,13 @@ public interface IResolvedTypes {
 	LightweightTypeReference getExpectedType(XExpression expression);
 	
 	/**
+	 * Returns the expected return type for the given expression or <code>null</code> if none.
+	 * @param expression expression whose expected return type is queried.
+	 */
+	@Nullable
+	LightweightTypeReference getExpectedReturnType(XExpression expression);
+	
+	/**
 	 * @param expression may either be an {@link XAbstractFeatureCall} or {@link XConstructorCall}. May not be <code>null</code>. 
 	 */
 	List<LightweightTypeReference> getActualTypeArguments(XExpression expression);
@@ -91,6 +98,11 @@ public interface IResolvedTypes {
 		
 		@Nullable
 		public LightweightTypeReference getExpectedType(XExpression expression) {
+			return null;
+		}
+		
+		@Nullable
+		public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 			return null;
 		}
 		

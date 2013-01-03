@@ -23,6 +23,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
+@Deprecated
 @Singleton
 @SuppressWarnings("deprecation")
 public class XbaseTypeConformanceComputer extends TypeConformanceComputer {

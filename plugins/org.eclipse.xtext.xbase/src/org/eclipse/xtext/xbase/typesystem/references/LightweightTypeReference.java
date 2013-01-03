@@ -391,8 +391,8 @@ public abstract class LightweightTypeReference {
 		if (reference == null) {
 			throw new NullPointerException("reference may not be null");
 		}
-		CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
-		result.addComponent(this);
+		CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), false);
+		result.addComponent(copyInto(result.getOwner()));
 		result.addComponent(reference);
 		return result;
 	}

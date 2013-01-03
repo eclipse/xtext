@@ -48,6 +48,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow
  */
 @Singleton
+@Deprecated
 @SuppressWarnings("deprecation")
 public class Closures {
 
