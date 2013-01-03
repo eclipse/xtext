@@ -99,6 +99,11 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		@Override
 		@SingletonBinding(eager=true)	
 		public Class<? extends XbaseJavaValidator> bindXbaseJavaValidator() {
+			return null;
+		}
+		
+		@SingletonBinding(eager=true)	
+		public Class<? extends XbaseJavaValidator2> bindXbaseJavaValidator2() {
 			return XbaseJavaValidator2.class;
 		}
 		

@@ -111,6 +111,11 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 		public LightweightTypeReference getExpectedType(XExpression expression) {
 			return delegate().getExpectedType(expression);
 		}
+		
+		@Nullable
+		public LightweightTypeReference getExpectedReturnType(XExpression expression) {
+			return delegate().getExpectedReturnType(expression);
+		}
 
 		public List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 			return delegate().getActualTypeArguments(expression);

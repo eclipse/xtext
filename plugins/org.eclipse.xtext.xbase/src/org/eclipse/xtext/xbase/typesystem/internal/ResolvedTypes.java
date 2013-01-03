@@ -293,13 +293,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	public LightweightTypeReference getExpectedType(XExpression expression) {
-		LightweightTypeReference result = doGetExpectedType(expression);
+		LightweightTypeReference result = doGetExpectedType(expression, false);
+		return toOwnedReference(result);
+	}
+	
+	@Nullable
+	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
+		LightweightTypeReference result = doGetExpectedType(expression, true);
 		return toOwnedReference(result);
 	}
 
 	@Nullable
-	protected LightweightTypeReference doGetExpectedType(XExpression expression) {
-		TypeData typeData = getTypeData(expression, false);
+	protected LightweightTypeReference doGetExpectedType(XExpression expression, boolean returnType) {
+		TypeData typeData = getTypeData(expression, returnType);
 		if (typeData != null)
 			return typeData.getExpectation().getExpectedType();
 		return null;
