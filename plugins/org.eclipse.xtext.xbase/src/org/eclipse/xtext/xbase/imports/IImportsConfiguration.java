@@ -33,7 +33,7 @@ public interface IImportsConfiguration {
 
 	Set<String> getImplicitlyImportedPackages(XtextResource resource);
 
-	Map<String, JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource);
+	Map<String, JvmDeclaredType> getPrivilegedLocalTypes(XtextResource resource);
 	
 	JvmDeclaredType getContextJvmDeclaredType(EObject model);
 }
