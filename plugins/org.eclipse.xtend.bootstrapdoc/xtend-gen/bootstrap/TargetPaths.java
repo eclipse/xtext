@@ -2,7 +2,6 @@ package bootstrap;
 
 import bootstrap.TargetPathAdapter;
 import bootstrap.XdocExtensions;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ public class TargetPaths {
     String thisPath = parentPath;
     if ((element instanceof AbstractSection)) {
       final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) element));
-      boolean _notEquals = (!Objects.equal(resolved, element));
+      boolean _notEquals = ObjectExtensions.operator_notEquals(resolved, element);
       if (_notEquals) {
         return this.traverseChildren(resolved, adapter, prefix, parentPath, predicate);
       }
