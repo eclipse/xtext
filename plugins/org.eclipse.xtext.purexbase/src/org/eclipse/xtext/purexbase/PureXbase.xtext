@@ -10,7 +10,3 @@ SpecialBlockExpression returns xbase::XBlockExpression:
 	{xbase::XBlockExpression}
 	(expressions+=XExpressionInsideBlock ';'?)*
 ;
-
-QualifiedNameWithWildCard : 
-	QualifiedName ('.*')?
-;
