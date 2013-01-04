@@ -8,6 +8,7 @@
 package org.eclipse.xtend.lib.macro.declaration;
 
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend.lib.macro.type.TypeReference;
 
 import com.google.common.annotations.Beta;
 
@@ -15,6 +16,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface AnnotationTypeElementDeclaration extends MemberDeclaration, TypedElement {
+public interface AnnotationTypeElementDeclaration extends MemberDeclaration {
 	Expression getDefaultValue();
+	TypeReference getType();
 }

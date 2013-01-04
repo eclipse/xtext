@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import java.util.List;
+
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend.lib.macro.type.TypeReference;
 
 import com.google.common.annotations.Beta;
 
@@ -15,7 +18,9 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface ExecutableDeclaration extends MemberDeclaration, TypedElement, TypeParameterDeclarator {
+public interface ExecutableDeclaration extends MemberDeclaration, TypeParameterDeclarator {
 	boolean isVarArgs();
 	Expression getBody();
+	List<ParameterDeclaration> getParameters();
+	List<TypeReference> getExceptions();
 }

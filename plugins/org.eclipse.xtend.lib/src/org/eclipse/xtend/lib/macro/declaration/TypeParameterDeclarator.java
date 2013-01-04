@@ -16,5 +16,5 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TypeParameterDeclarator {
-	List<TypeParameterDeclaration> getFormalTypeParameters();
+	List<TypeParameterDeclaration> getTypeParameters();
 }
