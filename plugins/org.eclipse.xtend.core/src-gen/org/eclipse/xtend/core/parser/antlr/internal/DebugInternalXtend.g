@@ -10,20 +10,6 @@ ruleFile :
 	)? ruleXImportSection? ruleType*
 ;
 
-// Rule XImportDeclaration
-ruleXImportDeclaration :
-	'import' (
-		'static' 'extension'? ruleQualifiedName '.' '*' |
-		ruleQualifiedName |
-		ruleQualifiedNameWithWildCard
-	) ';'?
-;
-
-// Rule QualifiedNameWithWildCard
-ruleQualifiedNameWithWildCard :
-	ruleQualifiedName '.' '*'
-;
-
 // Rule Type
 ruleType :
 	ruleXAnnotation* (
@@ -872,9 +858,23 @@ ruleJvmTypeParameter :
 	)?
 ;
 
+// Rule QualifiedNameWithWildCard
+ruleQualifiedNameWithWildCard :
+	ruleQualifiedName '.' '*'
+;
+
 // Rule XImportSection
 ruleXImportSection :
 	ruleXImportDeclaration+
+;
+
+// Rule XImportDeclaration
+ruleXImportDeclaration :
+	'import' (
+		'static' 'extension'? ruleQualifiedName '.' '*' |
+		ruleQualifiedName |
+		ruleQualifiedNameWithWildCard
+	) ';'?
 ;
 
 // Rule Visibility

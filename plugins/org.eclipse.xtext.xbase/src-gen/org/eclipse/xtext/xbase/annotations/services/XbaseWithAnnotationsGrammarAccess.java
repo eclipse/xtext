@@ -1136,6 +1136,16 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		return getJvmTypeParameterAccess().getRule();
 	}
 
+	//QualifiedNameWithWildCard:
+	//	QualifiedName "." "*";
+	public XtypeGrammarAccess.QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
+		return gaXbase.getQualifiedNameWithWildCardAccess();
+	}
+	
+	public ParserRule getQualifiedNameWithWildCardRule() {
+		return getQualifiedNameWithWildCardAccess().getRule();
+	}
+
 	//ValidID:
 	//	ID;
 	public XtypeGrammarAccess.ValidIDElements getValidIDAccess() {
@@ -1158,7 +1168,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 
 	//XImportDeclaration:
 	//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
-	//	importedType=[JvmDeclaredType|QualifiedName]) ";"?;
+	//	importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
 	public XtypeGrammarAccess.XImportDeclarationElements getXImportDeclarationAccess() {
 		return gaXbase.getXImportDeclarationAccess();
 	}

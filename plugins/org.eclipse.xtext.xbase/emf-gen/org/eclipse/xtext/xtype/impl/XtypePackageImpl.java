@@ -286,6 +286,16 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXImportDeclaration_ImportedNamespace()
+	{
+		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIJvmTypeReferenceProvider()
 	{
 		return iJvmTypeReferenceProviderEDataType;
@@ -337,6 +347,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__EXTENSION);
 		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__STATIC);
 		createEReference(xImportDeclarationEClass, XIMPORT_DECLARATION__IMPORTED_TYPE);
+		createEAttribute(xImportDeclarationEClass, XIMPORT_DECLARATION__IMPORTED_NAMESPACE);
 
 		// Create data types
 		iJvmTypeReferenceProviderEDataType = createEDataType(IJVM_TYPE_REFERENCE_PROVIDER);
@@ -394,6 +405,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		initEAttribute(getXImportDeclaration_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXImportDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXImportDeclaration_ImportedType(), theTypesPackage.getJvmDeclaredType(), null, "importedType", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXImportDeclaration_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, XImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xImportDeclarationEClass, ecorePackage.getEBoolean(), "isWildcard", 0, 1, IS_UNIQUE, IS_ORDERED);
 

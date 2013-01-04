@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedType <em>Imported Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,6 +109,32 @@ public interface XImportDeclaration extends EObject
 	 * @generated
 	 */
 	void setImportedType(JvmDeclaredType value);
+
+	/**
+	 * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Namespace</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imported Namespace</em>' attribute.
+	 * @see #setImportedNamespace(String)
+	 * @see org.eclipse.xtext.xtype.XtypePackage#getXImportDeclaration_ImportedNamespace()
+	 * @model
+	 * @generated
+	 */
+	String getImportedNamespace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace <em>Imported Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Imported Namespace</em>' attribute.
+	 * @see #getImportedNamespace()
+	 * @generated
+	 */
+	void setImportedNamespace(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

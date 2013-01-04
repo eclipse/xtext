@@ -68,117 +68,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getXtendTypesTypeParserRuleCall_2_0() { return cXtendTypesTypeParserRuleCall_2_0; }
 	}
 
-	public class XImportDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XImportDeclaration");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Assignment cStaticAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final Keyword cStaticStaticKeyword_1_0_0_0 = (Keyword)cStaticAssignment_1_0_0.eContents().get(0);
-		private final Assignment cExtensionAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final Keyword cExtensionExtensionKeyword_1_0_1_0 = (Keyword)cExtensionAssignment_1_0_1.eContents().get(0);
-		private final Assignment cImportedTypeAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
-		private final CrossReference cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0 = (CrossReference)cImportedTypeAssignment_1_0_2.eContents().get(0);
-		private final RuleCall cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1 = (RuleCall)cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_1_0_3 = (Keyword)cGroup_1_0.eContents().get(3);
-		private final Keyword cAsteriskKeyword_1_0_4 = (Keyword)cGroup_1_0.eContents().get(4);
-		private final Assignment cImportedTypeAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final CrossReference cImportedTypeJvmDeclaredTypeCrossReference_1_1_0 = (CrossReference)cImportedTypeAssignment_1_1.eContents().get(0);
-		private final RuleCall cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1 = (RuleCall)cImportedTypeJvmDeclaredTypeCrossReference_1_1_0.eContents().get(1);
-		private final Assignment cImportedNamespaceAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0 = (RuleCall)cImportedNamespaceAssignment_1_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//XImportDeclaration returns XtendImport:
-		//	"import" (static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*" |
-		//	importedType=[types::JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
-		public ParserRule getRule() { return rule; }
-
-		//"import" (static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*" |
-		//importedType=[types::JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?
-		public Group getGroup() { return cGroup; }
-
-		//"import"
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-
-		//static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*" |
-		//importedType=[types::JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
-		//static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*"
-		public Group getGroup_1_0() { return cGroup_1_0; }
-
-		//static?="static"
-		public Assignment getStaticAssignment_1_0_0() { return cStaticAssignment_1_0_0; }
-
-		//"static"
-		public Keyword getStaticStaticKeyword_1_0_0_0() { return cStaticStaticKeyword_1_0_0_0; }
-
-		//extension?="extension"?
-		public Assignment getExtensionAssignment_1_0_1() { return cExtensionAssignment_1_0_1; }
-
-		//"extension"
-		public Keyword getExtensionExtensionKeyword_1_0_1_0() { return cExtensionExtensionKeyword_1_0_1_0; }
-
-		//importedType=[types::JvmDeclaredType|QualifiedName]
-		public Assignment getImportedTypeAssignment_1_0_2() { return cImportedTypeAssignment_1_0_2; }
-
-		//[types::JvmDeclaredType|QualifiedName]
-		public CrossReference getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0() { return cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0; }
-
-		//QualifiedName
-		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1; }
-
-		//"."
-		public Keyword getFullStopKeyword_1_0_3() { return cFullStopKeyword_1_0_3; }
-
-		//"*"
-		public Keyword getAsteriskKeyword_1_0_4() { return cAsteriskKeyword_1_0_4; }
-
-		//importedType=[types::JvmDeclaredType|QualifiedName]
-		public Assignment getImportedTypeAssignment_1_1() { return cImportedTypeAssignment_1_1; }
-
-		//[types::JvmDeclaredType|QualifiedName]
-		public CrossReference getImportedTypeJvmDeclaredTypeCrossReference_1_1_0() { return cImportedTypeJvmDeclaredTypeCrossReference_1_1_0; }
-
-		//QualifiedName
-		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1; }
-
-		//importedNamespace=QualifiedNameWithWildCard
-		public Assignment getImportedNamespaceAssignment_1_2() { return cImportedNamespaceAssignment_1_2; }
-
-		//QualifiedNameWithWildCard
-		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0; }
-
-		//";"?
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
-	}
-
-	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildCard");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cAsteriskKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//QualifiedNameWithWildCard:
-		//	QualifiedName "." "*";
-		public ParserRule getRule() { return rule; }
-
-		//QualifiedName "." "*"
-		public Group getGroup() { return cGroup; }
-
-		//QualifiedName
-		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
-
-		//"."
-		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-
-		//"*"
-		public Keyword getAsteriskKeyword_2() { return cAsteriskKeyword_2; }
-	}
-
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1774,8 +1663,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	private FileElements pFile;
-	private XImportDeclarationElements pXImportDeclaration;
-	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
 	private TypeElements pType;
 	private AnnotationFieldElements pAnnotationField;
 	private MemberElements pMember;
@@ -1849,27 +1736,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getFileRule() {
 		return getFileAccess().getRule();
-	}
-
-	//XImportDeclaration returns XtendImport:
-	//	"import" (static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*" |
-	//	importedType=[types::JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
-	public XImportDeclarationElements getXImportDeclarationAccess() {
-		return (pXImportDeclaration != null) ? pXImportDeclaration : (pXImportDeclaration = new XImportDeclarationElements());
-	}
-	
-	public ParserRule getXImportDeclarationRule() {
-		return getXImportDeclarationAccess().getRule();
-	}
-
-	//QualifiedNameWithWildCard:
-	//	QualifiedName "." "*";
-	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
-		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
-	}
-	
-	public ParserRule getQualifiedNameWithWildCardRule() {
-		return getQualifiedNameWithWildCardAccess().getRule();
 	}
 
 	//Type returns XtendTypeDeclaration:
@@ -2870,6 +2736,16 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmTypeParameterAccess().getRule();
 	}
 
+	//QualifiedNameWithWildCard:
+	//	QualifiedName "." "*";
+	public XtypeGrammarAccess.QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
+		return gaXbaseWithAnnotations.getQualifiedNameWithWildCardAccess();
+	}
+	
+	public ParserRule getQualifiedNameWithWildCardRule() {
+		return getQualifiedNameWithWildCardAccess().getRule();
+	}
+
 	//XImportSection:
 	//	importDeclarations+=XImportDeclaration+;
 	public XtypeGrammarAccess.XImportSectionElements getXImportSectionAccess() {
@@ -2878,6 +2754,17 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXImportSectionRule() {
 		return getXImportSectionAccess().getRule();
+	}
+
+	//XImportDeclaration:
+	//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
+	//	importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
+	public XtypeGrammarAccess.XImportDeclarationElements getXImportDeclarationAccess() {
+		return gaXbaseWithAnnotations.getXImportDeclarationAccess();
+	}
+	
+	public ParserRule getXImportDeclarationRule() {
+		return getXImportDeclarationAccess().getRule();
 	}
 
 	//terminal ID:

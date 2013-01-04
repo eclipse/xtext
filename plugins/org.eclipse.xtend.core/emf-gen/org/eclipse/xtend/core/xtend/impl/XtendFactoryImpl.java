@@ -70,7 +70,6 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 		switch (eClass.getClassifierID())
 		{
 			case XtendPackage.XTEND_FILE: return createXtendFile();
-			case XtendPackage.XTEND_IMPORT: return createXtendImport();
 			case XtendPackage.XTEND_CLASS: return createXtendClass();
 			case XtendPackage.XTEND_MEMBER: return createXtendMember();
 			case XtendPackage.XTEND_FUNCTION: return createXtendFunction();
@@ -99,17 +98,6 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		XtendFileImpl xtendFile = new XtendFileImpl();
 		return xtendFile;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XtendImport createXtendImport()
-	{
-		XtendImportImplCustom xtendImport = new XtendImportImplCustom();
-		return xtendImport;
 	}
 
 	/**

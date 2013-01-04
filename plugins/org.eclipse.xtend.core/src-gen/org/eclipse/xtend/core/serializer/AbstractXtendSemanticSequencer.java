@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -72,6 +71,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -1134,12 +1134,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					return; 
 				}
 				else break;
-			case XtendPackage.XTEND_IMPORT:
-				if(context == grammarAccess.getXImportDeclarationRule()) {
-					sequence_XImportDeclaration(context, (XtendImport) semanticObject); 
-					return; 
-				}
-				else break;
 			case XtendPackage.XTEND_MEMBER:
 				if(context == grammarAccess.getMemberAccess().getXtendConstructorAnnotationInfoAction_2_2_0() ||
 				   context == grammarAccess.getMemberAccess().getXtendFieldAnnotationInfoAction_2_0_0() ||
@@ -1168,6 +1162,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtypePackage.XIMPORT_DECLARATION:
+				if(context == grammarAccess.getXImportDeclarationRule()) {
+					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1474,19 +1474,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     )
 	 */
 	protected void sequence_Type(EObject context, XtendClass semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (
-	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | 
-	 *         importedType=[JvmDeclaredType|QualifiedName] | 
-	 *         importedNamespace=QualifiedNameWithWildCard
-	 *     )
-	 */
-	protected void sequence_XImportDeclaration(EObject context, XtendImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

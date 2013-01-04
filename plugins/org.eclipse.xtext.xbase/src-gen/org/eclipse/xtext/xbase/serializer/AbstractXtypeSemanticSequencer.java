@@ -187,7 +187,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	
 	/**
 	 * Constraint:
-	 *     ((static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | importedType=[JvmDeclaredType|QualifiedName])
+	 *     (
+	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | 
+	 *         importedType=[JvmDeclaredType|QualifiedName] | 
+	 *         importedNamespace=QualifiedNameWithWildCard
+	 *     )
 	 */
 	protected void sequence_XImportDeclaration(EObject context, XImportDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

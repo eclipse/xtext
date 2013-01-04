@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
-import org.eclipse.xtext.xtype.XtypePackage;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -112,61 +110,6 @@ public interface XtendPackage extends EPackage
 	int XTEND_FILE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtend.core.xtend.impl.XtendImportImpl
-	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendImport()
-	 * @generated
-	 */
-	int XTEND_IMPORT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Extension</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT__EXTENSION = XtypePackage.XIMPORT_DECLARATION__EXTENSION;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT__STATIC = XtypePackage.XIMPORT_DECLARATION__STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Imported Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT__IMPORTED_TYPE = XtypePackage.XIMPORT_DECLARATION__IMPORTED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT__IMPORTED_NAMESPACE = XtypePackage.XIMPORT_DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_IMPORT_FEATURE_COUNT = XtypePackage.XIMPORT_DECLARATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTargetImpl <em>Annotation Target</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,7 +117,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendAnnotationTarget()
 	 * @generated
 	 */
-	int XTEND_ANNOTATION_TARGET = 3;
+	int XTEND_ANNOTATION_TARGET = 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -202,7 +145,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendMember()
 	 * @generated
 	 */
-	int XTEND_MEMBER = 4;
+	int XTEND_MEMBER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -239,7 +182,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendTypeDeclaration()
 	 * @generated
 	 */
-	int XTEND_TYPE_DECLARATION = 15;
+	int XTEND_TYPE_DECLARATION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -285,7 +228,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendClass()
 	 * @generated
 	 */
-	int XTEND_CLASS = 2;
+	int XTEND_CLASS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -376,7 +319,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendFunction()
 	 * @generated
 	 */
-	int XTEND_FUNCTION = 5;
+	int XTEND_FUNCTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -512,7 +455,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendField()
 	 * @generated
 	 */
-	int XTEND_FIELD = 6;
+	int XTEND_FIELD = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -612,7 +555,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendParameter()
 	 * @generated
 	 */
-	int XTEND_PARAMETER = 7;
+	int XTEND_PARAMETER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -667,7 +610,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getRichString()
 	 * @generated
 	 */
-	int RICH_STRING = 8;
+	int RICH_STRING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -695,7 +638,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getRichStringLiteral()
 	 * @generated
 	 */
-	int RICH_STRING_LITERAL = 9;
+	int RICH_STRING_LITERAL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -723,7 +666,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getRichStringForLoop()
 	 * @generated
 	 */
-	int RICH_STRING_FOR_LOOP = 10;
+	int RICH_STRING_FOR_LOOP = 9;
 
 	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
@@ -796,7 +739,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getRichStringIf()
 	 * @generated
 	 */
-	int RICH_STRING_IF = 11;
+	int RICH_STRING_IF = 10;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -851,7 +794,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getRichStringElseIf()
 	 * @generated
 	 */
-	int RICH_STRING_ELSE_IF = 12;
+	int RICH_STRING_ELSE_IF = 11;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -888,7 +831,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getCreateExtensionInfo()
 	 * @generated
 	 */
-	int CREATE_EXTENSION_INFO = 13;
+	int CREATE_EXTENSION_INFO = 12;
 
 	/**
 	 * The feature id for the '<em><b>Create Expression</b></em>' containment reference.
@@ -925,7 +868,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendConstructor()
 	 * @generated
 	 */
-	int XTEND_CONSTRUCTOR = 14;
+	int XTEND_CONSTRUCTOR = 13;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1016,7 +959,7 @@ public interface XtendPackage extends EPackage
 	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendAnnotationType()
 	 * @generated
 	 */
-	int XTEND_ANNOTATION_TYPE = 16;
+	int XTEND_ANNOTATION_TYPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1106,27 +1049,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXtendFile_Package();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendImport <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendImport
-	 * @generated
-	 */
-	EClass getXtendImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendImport#getImportedNamespace <em>Imported Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendImport#getImportedNamespace()
-	 * @see #getXtendImport()
-	 * @generated
-	 */
-	EAttribute getXtendImport_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendClass <em>Class</em>}'.
@@ -1851,24 +1773,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FILE__PACKAGE = eINSTANCE.getXtendFile_Package();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtend.core.xtend.impl.XtendImportImpl
-		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendImport()
-		 * @generated
-		 */
-		EClass XTEND_IMPORT = eINSTANCE.getXtendImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getXtendImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl <em>Class</em>}' class.

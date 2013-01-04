@@ -19,8 +19,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 
-import org.eclipse.xtext.xtype.XImportDeclaration;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -108,14 +106,6 @@ public class XtendSwitch<T>
 			{
 				XtendFile xtendFile = (XtendFile)theEObject;
 				T result = caseXtendFile(xtendFile);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtendPackage.XTEND_IMPORT:
-			{
-				XtendImport xtendImport = (XtendImport)theEObject;
-				T result = caseXtendImport(xtendImport);
-				if (result == null) result = caseXImportDeclaration(xtendImport);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -263,22 +253,6 @@ public class XtendSwitch<T>
 	 * @generated
 	 */
 	public T caseXtendFile(XtendFile object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXtendImport(XtendImport object)
 	{
 		return null;
 	}
@@ -519,22 +493,6 @@ public class XtendSwitch<T>
 	 * @generated
 	 */
 	public T caseXtendAnnotationType(XtendAnnotationType object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XImport Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XImport Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXImportDeclaration(XImportDeclaration object)
 	{
 		return null;
 	}

@@ -650,6 +650,11 @@ ruleJvmLowerBound :
 	'super' ruleJvmTypeReference
 ;
 
+// Rule QualifiedNameWithWildCard
+ruleQualifiedNameWithWildCard :
+	ruleQualifiedName '.' '*'
+;
+
 // Rule ValidID
 ruleValidID :
 	RULE_ID
@@ -659,7 +664,8 @@ ruleValidID :
 ruleXImportDeclaration :
 	'import' (
 		'static' 'extension'? ruleQualifiedName '.' '*' |
-		ruleQualifiedName
+		ruleQualifiedName |
+		ruleQualifiedNameWithWildCard
 	) ';'?
 ;
 
