@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.resource;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
+import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionStrategy {
 
 	@Inject
-	private DispatchUtil dispatchUtil;
+	private DispatchHelper dispatchHelper;
 
 	@Inject
 	private DescriptionFlags descriptionFlags;
@@ -49,7 +49,7 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 
 	protected int getFlags(JvmOperation operation) {
 		int flags = 0;
-		if (dispatchUtil.isDispatcherFunction(operation))
+		if (dispatchHelper.isDispatcherFunction(operation))
 			flags = descriptionFlags.setDispatcherOperation(flags);
 		if (operation.isStatic())
 			flags = descriptionFlags.setStatic(flags);

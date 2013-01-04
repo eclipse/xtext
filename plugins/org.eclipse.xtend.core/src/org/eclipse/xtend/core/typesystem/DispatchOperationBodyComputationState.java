@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.typesystem;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
@@ -52,10 +51,6 @@ public class DispatchOperationBodyComputationState extends OperationBodyComputat
 			}
 		}
 		return null;
-	}
-
-	protected DispatchUtil getDispatchUtil() {
-		return ((DispatchAndExtensionAwareReentrantTypeResolver)getResolver()).getDispatchUtil();
 	}
 
 }

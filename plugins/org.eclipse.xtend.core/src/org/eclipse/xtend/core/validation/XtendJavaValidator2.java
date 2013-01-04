@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
+import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -127,7 +127,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	private OverrideHelper overrideHelper;
 
 	@Inject
-	private DispatchUtil dispatchUtil;
+	private DispatchHelper dispatchHelper;
 
 	@Inject
 	private TypeErasedSignature.Provider signatureProvider; 
@@ -811,11 +811,11 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	public void checkDispatchFunctions(XtendClass clazz) {
 		JvmGenericType type = associations.getInferredType(clazz);
 		if (type != null) {
-			Multimap<DispatchUtil.DispatchSignature, JvmOperation> dispatchMethods = dispatchUtil.getDeclaredDispatchMethods(type);
+			Multimap<DispatchHelper.DispatchSignature, JvmOperation> dispatchMethods = dispatchHelper.getDeclaredDispatchMethods(type);
 			checkDispatchNonDispatchConflict(clazz, dispatchMethods);
-			for (DispatchUtil.DispatchSignature signature : dispatchMethods.keySet()) {
+			for (DispatchHelper.DispatchSignature signature : dispatchMethods.keySet()) {
 				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(signature);
-				JvmOperation syntheticDispatchMethod = dispatchUtil.getDispatcherOperation(type, signature);
+				JvmOperation syntheticDispatchMethod = dispatchHelper.getDispatcherOperation(type, signature);
 				if (syntheticDispatchMethod != null) {
 					JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(syntheticDispatchMethod);
 					Boolean expectStatic = null;
@@ -908,14 +908,14 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 
 	protected void checkDispatchNonDispatchConflict(XtendClass clazz,
-			Multimap<DispatchUtil.DispatchSignature, JvmOperation> dispatchMethods) {
-		Multimap<DispatchUtil.DispatchSignature, XtendFunction> nonDispatchMethods = HashMultimap.create();
+			Multimap<DispatchHelper.DispatchSignature, JvmOperation> dispatchMethods) {
+		Multimap<DispatchHelper.DispatchSignature, XtendFunction> nonDispatchMethods = HashMultimap.create();
 		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
 			if(!method.isDispatch()) {
-				nonDispatchMethods.put(new DispatchUtil.DispatchSignature("_" + method.getName(), method.getParameters().size()), method);
+				nonDispatchMethods.put(new DispatchHelper.DispatchSignature(method.getName(), method.getParameters().size()), method);
 			}
 		}
-		for(DispatchUtil.DispatchSignature dispatchSignature: dispatchMethods.keySet()) {
+		for(DispatchHelper.DispatchSignature dispatchSignature: dispatchMethods.keySet()) {
 			if(nonDispatchMethods.containsKey(dispatchSignature)) {
 				for(XtendFunction function: nonDispatchMethods.get(dispatchSignature)) 
 					warning("Non-dispatch method has same name and number of parameters as dispatch method", 
