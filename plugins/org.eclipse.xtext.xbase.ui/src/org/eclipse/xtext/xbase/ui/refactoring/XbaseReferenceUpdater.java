@@ -125,7 +125,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 						((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(targetContainerType,
 								isStaticFeatureCall,
 								isStaticExtensionFeatureCall);
-						newReferenceText = shortName;
+							newReferenceText = shortName;
 					} else {
 						QualifiedName newTargetQualifiedName = qualifiedNameProvider.getFullyQualifiedName(newTargetElement);
 						// same element on scope with simple name, so use FQNs
@@ -188,25 +188,25 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 			return delegate.createCompositeChange(name, monitor);
 		}
 
-		public void acceptImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
+		public boolean acceptImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
 			if(isStatic) {
 				if(isExtension)
-					importSection.addStaticExtensionImport(type);
+					return importSection.addStaticExtensionImport(type);
 				else
-					importSection.addStaticImport(type);
+					return importSection.addStaticImport(type);
 			} else {
-				importSection.addImport(type);
+				return importSection.addImport(type);
 			}
 		}
 
-		public void removeImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
+		public boolean removeImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
 			if(isStatic) {
 				if(isExtension)
-					importSection.removeStaticExtensionImport(type);
+					return importSection.removeStaticExtensionImport(type);
 				else
-					importSection.removeStaticImport(type);
+					return importSection.removeStaticImport(type);
 			} else {
-				importSection.removeImport(type);
+				return importSection.removeImport(type);
 			}
 		}
 	}
