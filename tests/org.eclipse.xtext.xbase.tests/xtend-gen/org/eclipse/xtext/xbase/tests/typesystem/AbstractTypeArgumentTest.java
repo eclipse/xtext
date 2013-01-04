@@ -523,7 +523,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     this.done(_bindTypeArgumentsTo);
   }
   
-  @Ignore(value = "TODO")
+  @Ignore(value = "TODO subsequent usages of local vars should contribute to the expectation")
   @Test
   public void testMethodTypeParamInference_23() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t\tval Iterable<String> expectation = actual\n\t\t}", "String");
