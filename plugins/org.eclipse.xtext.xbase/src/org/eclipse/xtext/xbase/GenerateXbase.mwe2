@@ -101,7 +101,9 @@ Workflow {
 			fragment = DebugAntlrGeneratorFragment {
 				options = auto-inject {}
 			}
-			fragment = validation.JavaValidatorFragment {}
+			fragment = validation.JavaValidatorFragment {
+				inheritImplementation = false
+			}
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {
