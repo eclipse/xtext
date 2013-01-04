@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage;
-import org.eclipse.xtext.purexbase.pureXbase.XBlockExpression;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -64,12 +64,6 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 			case PureXbasePackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
-			case PureXbasePackage.XBLOCK_EXPRESSION:
-				if(context == grammarAccess.getSpecialBlockExpressionRule()) {
-					sequence_SpecialBlockExpression(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
 				else break;
@@ -198,7 +192,11 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XBLOCK_EXPRESSION:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getSpecialBlockExpressionRule()) {
+					sequence_SpecialBlockExpression(context, (XBlockExpression) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
@@ -226,11 +224,11 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_XBlockExpression(context, (org.eclipse.xtext.xbase.XBlockExpression) semanticObject); 
+					sequence_XBlockExpression(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getXExpressionInClosureRule()) {
-					sequence_XExpressionInClosure(context, (org.eclipse.xtext.xbase.XBlockExpression) semanticObject); 
+					sequence_XExpressionInClosure(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
 				else break;

@@ -65,7 +65,6 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
     switch (eClass.getClassifierID())
     {
       case PureXbasePackage.MODEL: return createModel();
-      case PureXbasePackage.XBLOCK_EXPRESSION: return createXBlockExpression();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -80,17 +79,6 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
   {
     ModelImpl model = new ModelImpl();
     return model;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XBlockExpression createXBlockExpression()
-  {
-    XBlockExpressionImpl xBlockExpression = new XBlockExpressionImpl();
-    return xBlockExpression;
   }
 
   /**

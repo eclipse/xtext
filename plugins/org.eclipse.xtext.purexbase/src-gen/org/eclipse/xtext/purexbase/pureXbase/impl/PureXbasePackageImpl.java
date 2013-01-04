@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbaseFactory;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage;
-import org.eclipse.xtext.purexbase.pureXbase.XBlockExpression;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -31,13 +30,6 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * @generated
    */
   private EClass modelEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass xBlockExpressionEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -141,16 +133,6 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getXBlockExpression()
-  {
-    return xBlockExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public PureXbaseFactory getPureXbaseFactory()
   {
     return (PureXbaseFactory)getEFactoryInstance();
@@ -179,8 +161,6 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     modelEClass = createEClass(MODEL);
     createEReference(modelEClass, MODEL__IMPORT_SECTION);
     createEReference(modelEClass, MODEL__BLOCK);
-
-    xBlockExpressionEClass = createEClass(XBLOCK_EXPRESSION);
   }
 
   /**
@@ -216,14 +196,11 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    xBlockExpressionEClass.getESuperTypes().add(theXbasePackage.getXBlockExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_ImportSection(), theXtypePackage.getXImportSection(), null, "importSection", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Block(), theXbasePackage.getXBlockExpression(), null, "block", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(xBlockExpressionEClass, XBlockExpression.class, "XBlockExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

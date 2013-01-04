@@ -57,13 +57,13 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//SpecialBlockExpression returns xbase::XBlockExpression:
-		//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+		//	{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
 		public ParserRule getRule() { return rule; }
 
-		//{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*
+		//{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*
 		public Group getGroup() { return cGroup; }
 
-		//{XBlockExpression}
+		//{xbase::XBlockExpression}
 		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 
 		//(expressions+=XExpressionInsideBlock ";"?)*
@@ -153,7 +153,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SpecialBlockExpression returns xbase::XBlockExpression:
-	//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+	//	{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
 	public SpecialBlockExpressionElements getSpecialBlockExpressionAccess() {
 		return (pSpecialBlockExpression != null) ? pSpecialBlockExpression : (pSpecialBlockExpression = new SpecialBlockExpressionElements());
 	}

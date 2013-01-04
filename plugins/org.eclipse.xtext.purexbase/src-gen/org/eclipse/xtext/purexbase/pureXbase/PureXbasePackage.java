@@ -6,8 +6,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.eclipse.xtext.xbase.XbasePackage;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -94,34 +92,6 @@ public interface PureXbasePackage extends EPackage
    */
   int MODEL_FEATURE_COUNT = 2;
 
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.purexbase.pureXbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.purexbase.pureXbase.impl.XBlockExpressionImpl
-   * @see org.eclipse.xtext.purexbase.pureXbase.impl.PureXbasePackageImpl#getXBlockExpression()
-   * @generated
-   */
-  int XBLOCK_EXPRESSION = 1;
-
-  /**
-   * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XBLOCK_EXPRESSION__EXPRESSIONS = XbasePackage.XBLOCK_EXPRESSION__EXPRESSIONS;
-
-  /**
-   * The number of structural features of the '<em>XBlock Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XBLOCK_EXPRESSION_FEATURE_COUNT = XbasePackage.XBLOCK_EXPRESSION_FEATURE_COUNT + 0;
-
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.purexbase.pureXbase.Model <em>Model</em>}'.
@@ -154,16 +124,6 @@ public interface PureXbasePackage extends EPackage
    * @generated
    */
   EReference getModel_Block();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.purexbase.pureXbase.XBlockExpression <em>XBlock Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>XBlock Expression</em>'.
-   * @see org.eclipse.xtext.purexbase.pureXbase.XBlockExpression
-   * @generated
-   */
-  EClass getXBlockExpression();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -213,16 +173,6 @@ public interface PureXbasePackage extends EPackage
      * @generated
      */
     EReference MODEL__BLOCK = eINSTANCE.getModel_Block();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.purexbase.pureXbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.purexbase.pureXbase.impl.XBlockExpressionImpl
-     * @see org.eclipse.xtext.purexbase.pureXbase.impl.PureXbasePackageImpl#getXBlockExpression()
-     * @generated
-     */
-    EClass XBLOCK_EXPRESSION = eINSTANCE.getXBlockExpression();
 
   }
 

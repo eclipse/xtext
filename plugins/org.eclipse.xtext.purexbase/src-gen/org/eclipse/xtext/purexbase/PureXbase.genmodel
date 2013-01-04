@@ -11,6 +11,5 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PureXbase.ecore#//Model/importSection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PureXbase.ecore#//Model/block"/>
     </genClasses>
-    <genClasses ecoreClass="PureXbase.ecore#//XBlockExpression"/>
   </genPackages>
 </genmodel:GenModel>

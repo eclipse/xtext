@@ -8,5 +8,4 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="ecore:EClass ../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XBlockExpression" eSuperTypes="../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"/>
 </ecore:EPackage>

@@ -32,15 +32,6 @@ public interface PureXbaseFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>XBlock Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XBlock Expression</em>'.
-   * @generated
-   */
-  XBlockExpression createXBlockExpression();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
