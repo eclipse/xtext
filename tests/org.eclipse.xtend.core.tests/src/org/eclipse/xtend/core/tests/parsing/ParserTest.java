@@ -12,7 +12,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -28,6 +27,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -426,12 +426,12 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testImport_01() throws Exception {
-		XtendImport importDeclaration = importDeclaration("");
+		XImportDeclaration importDeclaration = importDeclaration("");
 		assertNull(importDeclaration);
 	}
 	
 	@Test public void testImport_02() throws Exception {
-		XtendImport importDeclaration = importDeclaration("import java . util . /*comment*/ List");
+		XImportDeclaration importDeclaration = importDeclaration("import java . util . /*comment*/ List");
 		assertNotNull(importDeclaration);
 		assertEquals("java.util.List", importDeclaration.getImportedTypeName());
 		assertFalse(importDeclaration.isWildcard());
@@ -440,7 +440,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testImport_03() throws Exception {
-		XtendImport importDeclaration = importDeclaration("import static java.util.Collections. * // foobar");
+		XImportDeclaration importDeclaration = importDeclaration("import static java.util.Collections. * // foobar");
 		assertNotNull(importDeclaration);
 		assertEquals("java.util.Collections", importDeclaration.getImportedTypeName());
 		assertTrue(importDeclaration.isWildcard());
@@ -449,7 +449,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testImport_04() throws Exception {
-		XtendImport importDeclaration = importDeclaration("import static extension java.lang.reflect.\nArrays.*");
+		XImportDeclaration importDeclaration = importDeclaration("import static extension java.lang.reflect.\nArrays.*");
 		assertNotNull(importDeclaration);
 		assertEquals("java.lang.reflect.Arrays", importDeclaration.getImportedTypeName());
 		assertTrue(importDeclaration.isWildcard());
@@ -458,7 +458,7 @@ public class ParserTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testBug367949() throws Exception {
-		XtendImport importDeclaration = importDeclaration("import org.eclipse.xtext.^create");
+		XImportDeclaration importDeclaration = importDeclaration("import org.eclipse.xtext.^create");
 		assertNotNull(importDeclaration);
 		assertEquals("org.eclipse.xtext.create", importDeclaration.getImportedTypeName());
 	}
@@ -493,10 +493,10 @@ public class ParserTest extends AbstractXtendTestCase {
 		assertEquals(2, file.getXtendTypes().size());
 	}
 	
-	protected XtendImport importDeclaration(String importAsString) throws Exception {
+	protected XImportDeclaration importDeclaration(String importAsString) throws Exception {
 		XtendFile file = file(importAsString + "\nclass Foo{}");
 		if (file.getImportSection() == null || file.getImportSection().getImportDeclarations().isEmpty())
 			return null;
-		return (XtendImport) file.getImportSection().getImportDeclarations().get(0);
+		return file.getImportSection().getImportDeclarations().get(0);
 	}
 }

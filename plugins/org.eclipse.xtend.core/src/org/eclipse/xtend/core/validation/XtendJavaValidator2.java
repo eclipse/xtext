@@ -44,7 +44,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -97,7 +96,6 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.validation.UIStrings;
-import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -1043,16 +1041,6 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		for (XtendTypeDeclaration clazz : file.getXtendTypes()) {	
 			if (!names.add(clazz.getName()))
 				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_CLASS);
-		}
-	}
-	
-	@Check
-	public void checkImports(XtendFile file) {
-		if(file.getImportSection() == null)
-			return;
-		for (XImportDeclaration imp : file.getImportSection().getImportDeclarations()) {
-			if (imp instanceof XtendImport && ((XtendImport) imp).getImportedNamespace() != null) 
-				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
 		}
 	}
 	

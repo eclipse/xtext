@@ -17,7 +17,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtend.core.xtend.XtendImport
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.preferences.PreferenceKey
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
+import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
 
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
@@ -83,7 +83,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XtendImport imp, FormattableDocument document) {
+	def protected dispatch void format(XImportDeclaration imp, FormattableDocument document) {
 		document += imp.nodeForKeyword("import").append[oneSpace]
 		document += imp.nodeForFeature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
 		document += imp.nodeForFeature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
