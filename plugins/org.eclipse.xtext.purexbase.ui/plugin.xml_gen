@@ -152,27 +152,58 @@
     </extension>
 
 
-    <!-- marker definitions for org.eclipse.xtext.purexbase.PureXbase -->
-    <extension
-            id="purexbase.check.fast"
-            name="PureXbase Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
+	<!-- marker definitions for org.eclipse.xtext.purexbase.PureXbase -->
+	<extension
+	        id="purexbase.check.fast"
+	        name="PureXbase Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="purexbase.check.normal"
+	        name="PureXbase Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="purexbase.check.expensive"
+	        name="PureXbase Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.xtext.purexbase.PureXbase"
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.purexbase.PureXbase.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
+        </page>
     </extension>
     <extension
-            id="purexbase.check.normal"
-            name="PureXbase Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="purexbase.check.expensive"
-            name="PureXbase Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.xtext.purexbase.PureXbase"
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.purexbase.PureXbase.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
     </extension>
 
 	<!-- Quick Outline -->
@@ -419,5 +450,24 @@
          </command>
       </menuContribution>
    </extension>  
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtext.purexbase.PureXbase.compare.contentViewers"
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xbase">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtext.purexbase.PureXbase.compare.contentMergeViewers"
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xbase" label="PureXbase Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtext.purexbase.PureXbase.editors.documentProviders"
+            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="xbase">
+    </provider>
+  </extension>
 
 </plugin>

@@ -1,4 +1,4 @@
-import helper.*
+import helper.Amount
 /*
  * Although the operators in Xbase are syntactically predefined, the 
  * semantics are given by a simple operator overloading mechanism.

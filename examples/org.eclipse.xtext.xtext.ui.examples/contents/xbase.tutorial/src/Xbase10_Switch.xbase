@@ -1,4 +1,5 @@
-import helper.*
+import helper.Rectangle
+import helper.Circle
 /*
  * The switch expression is different and much more powerful than the
  * switch statement in Java.
