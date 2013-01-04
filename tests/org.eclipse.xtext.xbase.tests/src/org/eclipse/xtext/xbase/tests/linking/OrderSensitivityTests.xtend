@@ -15,6 +15,8 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
@@ -23,25 +25,49 @@ abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testOverloadedMethods_01() {
-		doTestAndExpect("testdata.ordersensitivity.CaseA", "overloaded(chars, strings)", "overloaded(java.util.Collection,java.lang.Iterable)")
+		doTestOverloadedAndExpect("testdata.ordersensitivity.CaseA", "overloaded(chars, strings)", "overloaded(java.util.Collection,java.lang.Iterable)")
 	}
 	
 	@Test
 	def void testOverloadedMethods_02() {
-		doTestAndExpect("testdata.ordersensitivity.CaseB", "overloaded(chars, strings)", "overloaded(java.util.Collection,java.lang.Iterable)")
+		doTestOverloadedAndExpect("testdata.ordersensitivity.CaseB", "overloaded(chars, strings)", "overloaded(java.util.Collection,java.lang.Iterable)")
 	}
 	
 	@Test
 	def void testOverloadedMethods_03() {
-		doTestAndExpect("testdata.ordersensitivity.CaseA", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)")
+		doTestOverloadedAndExpect("testdata.ordersensitivity.CaseA", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)")
 	}
 	
 	@Test
 	def void testOverloadedMethods_04() {
-		doTestAndExpect("testdata.ordersensitivity.CaseB", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)")
+		doTestOverloadedAndExpect("testdata.ordersensitivity.CaseB", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)")
 	}
 	
-	def protected void doTestAndExpect(String declarator, String invocation, String expectation) {
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+	@Test
+	def void testOverloadedClosureMethods_01() {
+		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "'hello'", "RunnerWithResult")
+	}
+	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+	@Test
+	def void testOverloadedClosureMethods_02() {
+		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "'hello'", "RunnerWithResult")
+	}
+	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+	@Test
+	def void testOverloadedClosureMethods_03() {
+		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "System::out.println()", "Runner")
+	}
+	
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+	@Test
+	def void testOverloadedClosureMethods_04() {
+		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "System::out.println()", "Runner")
+	}
+	
+	def protected void doTestOverloadedAndExpect(String declarator, String invocation, String expectation) {
 		val block = expression('''
 			{
 				var java.util.List<CharSequence> chars = null
@@ -55,6 +81,15 @@ abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase {
 		assertNotNull('feature is not null', feature)
 		assertFalse('feature is resolved', feature.eIsProxy)
 		assertEquals('''«declarator».«expectation»'''.toString, feature.identifier)
+	}
+	
+	def protected void doTestClosureMethodAndExpect(String declarator, String expression, String expectation) {
+		val featureCall = expression('''new «declarator»().run [| «expression» ]''') as XMemberFeatureCall
+		val feature = featureCall.feature
+		assertNotNull('feature is not null', feature)
+		assertFalse('feature is resolved', feature.eIsProxy)
+		assertEquals('''«declarator».run(«declarator»$«expectation»)'''.toString, feature.identifier)
+		
 	}
 	
 //	override protected expression(CharSequence string) throws Exception {
