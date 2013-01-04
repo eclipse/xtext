@@ -108,7 +108,7 @@ public class CompilerTest {
       _builder_1.append("public BigDecimal myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("BigDecimal _specialblockexpression = null;");
+      _builder_1.append("BigDecimal _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -156,13 +156,13 @@ public class CompilerTest {
       _builder_1.append("/* new BigInteger(\"beefbeefbeefbeefbeef\", 16) */");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (new BigDecimal(\"0.123456789123456789123456789123456789e4242\"));");
+      _builder_1.append("_xblockexpression = (new BigDecimal(\"0.123456789123456789123456789123456789e4242\"));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -179,7 +179,7 @@ public class CompilerTest {
   public void featureCalls() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.purexbase.test.data.*");
+      _builder.append("import org.eclipse.xtext.purexbase.test.data.Person");
       _builder.newLine();
       _builder.append("/*");
       _builder.newLine();
@@ -376,7 +376,7 @@ public class CompilerTest {
       _builder_1.append("public String myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("String _specialblockexpression = null;");
+      _builder_1.append("String _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -394,7 +394,7 @@ public class CompilerTest {
       _builder_1.append("final String s = \"my String\";");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("String _xblockexpression = null;");
+      _builder_1.append("String _xblockexpression_1 = null;");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("{");
@@ -406,19 +406,19 @@ public class CompilerTest {
       _builder_1.append("String _plus = (s + s1);");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("_xblockexpression = (_plus);");
+      _builder_1.append("_xblockexpression_1 = (_plus);");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_xblockexpression);");
+      _builder_1.append("_xblockexpression = (_xblockexpression_1);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -477,7 +477,7 @@ public class CompilerTest {
       _builder_1.append("public int myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("int _specialblockexpression = (int) 0;");
+      _builder_1.append("int _xblockexpression = (int) 0;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -489,13 +489,13 @@ public class CompilerTest {
       _builder_1.append("int _length = ((String) s).length();");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_length);");
+      _builder_1.append("_xblockexpression = (_length);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -593,7 +593,7 @@ public class CompilerTest {
       _builder_1.append("public String myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("String _specialblockexpression = null;");
+      _builder_1.append("String _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -674,13 +674,13 @@ public class CompilerTest {
       _builder_1.append("String _apply = f2.apply(\"simsalabim\");");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_apply);");
+      _builder_1.append("_xblockexpression = (_apply);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -778,7 +778,7 @@ public class CompilerTest {
       _builder_1.append("public String myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("String _specialblockexpression = null;");
+      _builder_1.append("String _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -856,13 +856,13 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_xifexpression);");
+      _builder_1.append("_xblockexpression = (_xifexpression);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -879,7 +879,7 @@ public class CompilerTest {
   public void operators() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.purexbase.test.data.*");
+      _builder.append("import org.eclipse.xtext.purexbase.test.data.Amount");
       _builder.newLine();
       _builder.append("/*");
       _builder.newLine();
@@ -917,7 +917,7 @@ public class CompilerTest {
       _builder_1.append("public Amount myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Amount _specialblockexpression = null;");
+      _builder_1.append("Amount _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -941,13 +941,13 @@ public class CompilerTest {
       _builder_1.append("Amount _plus = a.operator_plus(_multiply);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_plus);");
+      _builder_1.append("_xblockexpression = (_plus);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -1030,7 +1030,7 @@ public class CompilerTest {
       _builder_1.append("public ArrayList<String> myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("ArrayList<String> _specialblockexpression = null;");
+      _builder_1.append("ArrayList<String> _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -1111,13 +1111,13 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (result);");
+      _builder_1.append("_xblockexpression = (result);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -1199,7 +1199,7 @@ public class CompilerTest {
       _builder_1.append("public Object myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Object _specialblockexpression = null;");
+      _builder_1.append("Object _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -1241,13 +1241,13 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (null);");
+      _builder_1.append("_xblockexpression = (null);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -1264,7 +1264,9 @@ public class CompilerTest {
   public void switchExpression() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtext.purexbase.test.data.*");
+      _builder.append("import org.eclipse.xtext.purexbase.test.data.Circle");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtext.purexbase.test.data.Rectangle");
       _builder.newLine();
       _builder.append("/*");
       _builder.newLine();
@@ -1382,7 +1384,7 @@ public class CompilerTest {
       _builder_1.append("public List<String> myMethod() throws Throwable {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("List<String> _specialblockexpression = null;");
+      _builder_1.append("List<String> _xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("{");
@@ -1568,13 +1570,13 @@ public class CompilerTest {
       _builder_1.append("List<String> _map = ListExtensions.<Shape, String>map(list2, _function);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_specialblockexpression = (_map);");
+      _builder_1.append("_xblockexpression = (_map);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return _specialblockexpression;");
+      _builder_1.append("return _xblockexpression;");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");

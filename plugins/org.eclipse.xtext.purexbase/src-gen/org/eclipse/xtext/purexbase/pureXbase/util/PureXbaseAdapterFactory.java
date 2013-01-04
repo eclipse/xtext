@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.purexbase.pureXbase.*;
 
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -83,14 +82,9 @@ public class PureXbaseAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseImport(Import object)
+      public Adapter caseXBlockExpression(XBlockExpression object)
       {
-        return createImportAdapter();
-      }
-      @Override
-      public Adapter caseSpecialBlockExpression(SpecialBlockExpression object)
-      {
-        return createSpecialBlockExpressionAdapter();
+        return createXBlockExpressionAdapter();
       }
       @Override
       public Adapter caseXExpression(XExpression object)
@@ -98,9 +92,9 @@ public class PureXbaseAdapterFactory extends AdapterFactoryImpl
         return createXExpressionAdapter();
       }
       @Override
-      public Adapter caseXBlockExpression(XBlockExpression object)
+      public Adapter caseXbase_XBlockExpression(org.eclipse.xtext.xbase.XBlockExpression object)
       {
-        return createXBlockExpressionAdapter();
+        return createXbase_XBlockExpressionAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -140,31 +134,16 @@ public class PureXbaseAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.purexbase.pureXbase.Import <em>Import</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.purexbase.pureXbase.XBlockExpression <em>XBlock Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.purexbase.pureXbase.Import
+   * @see org.eclipse.xtext.purexbase.pureXbase.XBlockExpression
    * @generated
    */
-  public Adapter createImportAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.purexbase.pureXbase.SpecialBlockExpression <em>Special Block Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.purexbase.pureXbase.SpecialBlockExpression
-   * @generated
-   */
-  public Adapter createSpecialBlockExpressionAdapter()
+  public Adapter createXBlockExpressionAdapter()
   {
     return null;
   }
@@ -194,7 +173,7 @@ public class PureXbaseAdapterFactory extends AdapterFactoryImpl
    * @see org.eclipse.xtext.xbase.XBlockExpression
    * @generated
    */
-  public Adapter createXBlockExpressionAdapter()
+  public Adapter createXbase_XBlockExpressionAdapter()
   {
     return null;
   }

@@ -21,86 +21,62 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cBlockAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cBlockSpecialBlockExpressionParserRuleCall_0 = (RuleCall)cBlockAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cImportSectionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportSectionXImportSectionParserRuleCall_0_0 = (RuleCall)cImportSectionAssignment_0.eContents().get(0);
+		private final Assignment cBlockAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBlockSpecialBlockExpressionParserRuleCall_1_0 = (RuleCall)cBlockAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	block=SpecialBlockExpression;
+		//	importSection=XImportSection? block=SpecialBlockExpression;
 		public ParserRule getRule() { return rule; }
 
+		//importSection=XImportSection? block=SpecialBlockExpression
+		public Group getGroup() { return cGroup; }
+
+		//importSection=XImportSection?
+		public Assignment getImportSectionAssignment_0() { return cImportSectionAssignment_0; }
+
+		//XImportSection
+		public RuleCall getImportSectionXImportSectionParserRuleCall_0_0() { return cImportSectionXImportSectionParserRuleCall_0_0; }
+
 		//block=SpecialBlockExpression
-		public Assignment getBlockAssignment() { return cBlockAssignment; }
+		public Assignment getBlockAssignment_1() { return cBlockAssignment_1; }
 
 		//SpecialBlockExpression
-		public RuleCall getBlockSpecialBlockExpressionParserRuleCall_0() { return cBlockSpecialBlockExpressionParserRuleCall_0; }
+		public RuleCall getBlockSpecialBlockExpressionParserRuleCall_1_0() { return cBlockSpecialBlockExpressionParserRuleCall_1_0; }
 	}
 
 	public class SpecialBlockExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SpecialBlockExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cSpecialBlockExpressionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cXBlockExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Alternatives cAlternatives_1_0 = (Alternatives)cGroup_1.eContents().get(0);
-		private final Assignment cExpressionsAssignment_1_0_0 = (Assignment)cAlternatives_1_0.eContents().get(0);
-		private final RuleCall cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0_0 = (RuleCall)cExpressionsAssignment_1_0_0.eContents().get(0);
-		private final Assignment cImportsAssignment_1_0_1 = (Assignment)cAlternatives_1_0.eContents().get(1);
-		private final RuleCall cImportsImportParserRuleCall_1_0_1_0 = (RuleCall)cImportsAssignment_1_0_1.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//SpecialBlockExpression returns xbase::XBlockExpression:
-		//	{SpecialBlockExpression} ((expressions+=XExpressionInsideBlock | imports+=Import) ";"?)*;
+		//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
 		public ParserRule getRule() { return rule; }
 
-		//{SpecialBlockExpression} ((expressions+=XExpressionInsideBlock | imports+=Import) ";"?)*
+		//{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*
 		public Group getGroup() { return cGroup; }
 
-		//{SpecialBlockExpression}
-		public Action getSpecialBlockExpressionAction_0() { return cSpecialBlockExpressionAction_0; }
+		//{XBlockExpression}
+		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 
-		//((expressions+=XExpressionInsideBlock | imports+=Import) ";"?)*
+		//(expressions+=XExpressionInsideBlock ";"?)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//expressions+=XExpressionInsideBlock | imports+=Import
-		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
-
 		//expressions+=XExpressionInsideBlock
-		public Assignment getExpressionsAssignment_1_0_0() { return cExpressionsAssignment_1_0_0; }
+		public Assignment getExpressionsAssignment_1_0() { return cExpressionsAssignment_1_0; }
 
 		//XExpressionInsideBlock
-		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0_0; }
-
-		//imports+=Import
-		public Assignment getImportsAssignment_1_0_1() { return cImportsAssignment_1_0_1; }
-
-		//Import
-		public RuleCall getImportsImportParserRuleCall_1_0_1_0() { return cImportsImportParserRuleCall_1_0_1_0; }
+		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0; }
 
 		//";"?
 		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
-	}
-
-	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		
-		//Import:
-		//	"import" importedNamespace=QualifiedNameWithWildCard;
-		public ParserRule getRule() { return rule; }
-
-		//"import" importedNamespace=QualifiedNameWithWildCard
-		public Group getGroup() { return cGroup; }
-
-		//"import"
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-
-		//importedNamespace=QualifiedNameWithWildCard
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
-
-		//QualifiedNameWithWildCard
-		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
 	}
 
 	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
@@ -126,7 +102,6 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private ModelElements pModel;
 	private SpecialBlockExpressionElements pSpecialBlockExpression;
-	private ImportElements pImport;
 	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
 	
 	private final Grammar grammar;
@@ -168,7 +143,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	block=SpecialBlockExpression;
+	//	importSection=XImportSection? block=SpecialBlockExpression;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -178,23 +153,13 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SpecialBlockExpression returns xbase::XBlockExpression:
-	//	{SpecialBlockExpression} ((expressions+=XExpressionInsideBlock | imports+=Import) ";"?)*;
+	//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
 	public SpecialBlockExpressionElements getSpecialBlockExpressionAccess() {
 		return (pSpecialBlockExpression != null) ? pSpecialBlockExpression : (pSpecialBlockExpression = new SpecialBlockExpressionElements());
 	}
 	
 	public ParserRule getSpecialBlockExpressionRule() {
 		return getSpecialBlockExpressionAccess().getRule();
-	}
-
-	//Import:
-	//	"import" importedNamespace=QualifiedNameWithWildCard;
-	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
-	}
-	
-	public ParserRule getImportRule() {
-		return getImportAccess().getRule();
 	}
 
 	//QualifiedNameWithWildCard:

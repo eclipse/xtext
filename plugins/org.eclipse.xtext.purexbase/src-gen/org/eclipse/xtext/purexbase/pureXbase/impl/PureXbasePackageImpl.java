@@ -2,20 +2,20 @@
  */
 package org.eclipse.xtext.purexbase.pureXbase.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.purexbase.pureXbase.Import;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbaseFactory;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage;
-import org.eclipse.xtext.purexbase.pureXbase.SpecialBlockExpression;
+import org.eclipse.xtext.purexbase.pureXbase.XBlockExpression;
 
 import org.eclipse.xtext.xbase.XbasePackage;
+
+import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,14 +37,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass importEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass specialBlockExpressionEClass = null;
+  private EClass xBlockExpressionEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -96,6 +89,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
 
     // Initialize simple dependencies
     XbasePackage.eINSTANCE.eClass();
+    XtypePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     thePureXbasePackage.createPackageContents();
@@ -127,7 +121,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Block()
+  public EReference getModel_ImportSection()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -137,9 +131,9 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
+  public EReference getModel_Block()
   {
-    return importEClass;
+    return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -147,29 +141,9 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImport_ImportedNamespace()
+  public EClass getXBlockExpression()
   {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSpecialBlockExpression()
-  {
-    return specialBlockExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSpecialBlockExpression_Imports()
-  {
-    return (EReference)specialBlockExpressionEClass.getEStructuralFeatures().get(0);
+    return xBlockExpressionEClass;
   }
 
   /**
@@ -203,13 +177,10 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
+    createEReference(modelEClass, MODEL__IMPORT_SECTION);
     createEReference(modelEClass, MODEL__BLOCK);
 
-    importEClass = createEClass(IMPORT);
-    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
-
-    specialBlockExpressionEClass = createEClass(SPECIAL_BLOCK_EXPRESSION);
-    createEReference(specialBlockExpressionEClass, SPECIAL_BLOCK_EXPRESSION__IMPORTS);
+    xBlockExpressionEClass = createEClass(XBLOCK_EXPRESSION);
   }
 
   /**
@@ -237,6 +208,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
+    XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
     XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
@@ -244,17 +216,14 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    specialBlockExpressionEClass.getESuperTypes().add(theXbasePackage.getXBlockExpression());
+    xBlockExpressionEClass.getESuperTypes().add(theXbasePackage.getXBlockExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModel_ImportSection(), theXtypePackage.getXImportSection(), null, "importSection", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Block(), theXbasePackage.getXBlockExpression(), null, "block", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(specialBlockExpressionEClass, SpecialBlockExpression.class, "SpecialBlockExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSpecialBlockExpression_Imports(), this.getImport(), null, "imports", null, 0, -1, SpecialBlockExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(xBlockExpressionEClass, XBlockExpression.class, "XBlockExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

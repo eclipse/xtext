@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.purexbase.pureXbase.*;
 
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -102,19 +101,12 @@ public class PureXbaseSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PureXbasePackage.IMPORT:
+      case PureXbasePackage.XBLOCK_EXPRESSION:
       {
-        Import import_ = (Import)theEObject;
-        T result = caseImport(import_);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PureXbasePackage.SPECIAL_BLOCK_EXPRESSION:
-      {
-        SpecialBlockExpression specialBlockExpression = (SpecialBlockExpression)theEObject;
-        T result = caseSpecialBlockExpression(specialBlockExpression);
-        if (result == null) result = caseXBlockExpression(specialBlockExpression);
-        if (result == null) result = caseXExpression(specialBlockExpression);
+        XBlockExpression xBlockExpression = (XBlockExpression)theEObject;
+        T result = caseXBlockExpression(xBlockExpression);
+        if (result == null) result = caseXbase_XBlockExpression(xBlockExpression);
+        if (result == null) result = caseXExpression(xBlockExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -139,33 +131,17 @@ public class PureXbaseSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+   * @return the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseImport(Import object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Special Block Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Special Block Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSpecialBlockExpression(SpecialBlockExpression object)
+  public T caseXBlockExpression(XBlockExpression object)
   {
     return null;
   }
@@ -197,7 +173,7 @@ public class PureXbaseSwitch<T>
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseXBlockExpression(XBlockExpression object)
+  public T caseXbase_XBlockExpression(org.eclipse.xtext.xbase.XBlockExpression object)
   {
     return null;
   }

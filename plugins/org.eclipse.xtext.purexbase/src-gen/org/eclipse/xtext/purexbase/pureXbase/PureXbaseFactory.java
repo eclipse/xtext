@@ -32,22 +32,13 @@ public interface PureXbaseFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>Import</em>'.
+   * Returns a new object of class '<em>XBlock Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import</em>'.
+   * @return a new object of class '<em>XBlock Expression</em>'.
    * @generated
    */
-  Import createImport();
-
-  /**
-   * Returns a new object of class '<em>Special Block Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Special Block Expression</em>'.
-   * @generated
-   */
-  SpecialBlockExpression createSpecialBlockExpression();
+  XBlockExpression createXBlockExpression();
 
   /**
    * Returns the package supported by this factory.

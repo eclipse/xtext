@@ -64,7 +64,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public BigDecimal myMethod() throws Throwable {
-			    BigDecimal _specialblockexpression = null;
+			    BigDecimal _xblockexpression = null;
 			    {
 			      /* null */
 			      /* "Hello World" */
@@ -80,9 +80,9 @@ class CompilerTest {
 			      Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
 			      /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
 			      /* new BigInteger("beefbeefbeefbeefbeef", 16) */
-			      _specialblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
+			      _xblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -91,7 +91,7 @@ class CompilerTest {
 	@Test
 	def void featureCalls() {
 		'''
-			import org.eclipse.xtext.purexbase.test.data.*
+			import org.eclipse.xtext.purexbase.test.data.Person
 			/*
 			 * Xbase comes with sugared accessor syntax for getter and setter 
 			 * methods
@@ -178,21 +178,21 @@ class CompilerTest {
 		'''.assertCompilesTo('''
 			public class MyFile {
 			  public String myMethod() throws Throwable {
-			    String _specialblockexpression = null;
+			    String _xblockexpression = null;
 			    {
 			      final String x = "A final value";
 			      String y = "A non-final variable";
 			      y = "can be modified";
 			      final String s = "my String";
-			      String _xblockexpression = null;
+			      String _xblockexpression_1 = null;
 			      {
 			        final String s1 = "foo";
 			        String _plus = (s + s1);
-			        _xblockexpression = (_plus);
+			        _xblockexpression_1 = (_plus);
 			      }
-			      _specialblockexpression = (_xblockexpression);
+			      _xblockexpression = (_xblockexpression_1);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -218,13 +218,13 @@ class CompilerTest {
 		'''.assertCompilesTo('''
 			public class MyFile {
 			  public int myMethod() throws Throwable {
-			    int _specialblockexpression = (int) 0;
+			    int _xblockexpression = (int) 0;
 			    {
 			      final CharSequence s = "foo";
 			      int _length = ((String) s).length();
-			      _specialblockexpression = (_length);
+			      _xblockexpression = (_length);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -273,7 +273,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public String myMethod() throws Throwable {
-			    String _specialblockexpression = null;
+			    String _xblockexpression = null;
 			    {
 			      final String x = "Hello ";
 			      final Function1<String,String> _function = new Function1<String,String>() {
@@ -300,9 +300,9 @@ class CompilerTest {
 			        };
 			      final Function1<? super String,? extends String> f2 = _function_2;
 			      String _apply = f2.apply("simsalabim");
-			      _specialblockexpression = (_apply);
+			      _xblockexpression = (_apply);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -344,7 +344,7 @@ class CompilerTest {
 		'''.assertCompilesTo('''
 			public class MyFile {
 			  public String myMethod() throws Throwable {
-			    String _specialblockexpression = null;
+			    String _xblockexpression = null;
 			    {
 			      int _length = "foo".length();
 			      boolean _greaterThan = (_length > 3);
@@ -370,9 +370,9 @@ class CompilerTest {
 			      if (_xifexpression_1) {
 			        _xifexpression = "Xbase doesn\'t need the ternary operator";
 			      }
-			      _specialblockexpression = (_xifexpression);
+			      _xblockexpression = (_xifexpression);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -381,7 +381,7 @@ class CompilerTest {
 	@Test
 	def void operators() {
 		'''
-			import org.eclipse.xtext.purexbase.test.data.*
+			import org.eclipse.xtext.purexbase.test.data.Amount
 			/*
 			 * Although the operators in Xbase are syntactically predefined, the 
 			 * semantics are given by a simple operator overloading mechanism.
@@ -398,7 +398,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public Amount myMethod() throws Throwable {
-			    Amount _specialblockexpression = null;
+			    Amount _xblockexpression = null;
 			    {
 			      Amount _amount = new Amount("12.80");
 			      final Amount a = _amount;
@@ -406,9 +406,9 @@ class CompilerTest {
 			      final Amount b = _amount_1;
 			      Amount _multiply = b.operator_multiply(3);
 			      Amount _plus = a.operator_plus(_multiply);
-			      _specialblockexpression = (_plus);
+			      _xblockexpression = (_plus);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -447,7 +447,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public ArrayList<String> myMethod() throws Throwable {
-			    ArrayList<String> _specialblockexpression = null;
+			    ArrayList<String> _xblockexpression = null;
 			    {
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
 			      ArrayList<String> _arrayList = new ArrayList<String>();
@@ -474,9 +474,9 @@ class CompilerTest {
 			        boolean _lessThan_1 = (i < _size_1);
 			        _while = _lessThan_1;
 			      }
-			      _specialblockexpression = (result);
+			      _xblockexpression = (result);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -512,7 +512,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public Object myMethod() throws Throwable {
-			    Object _specialblockexpression = null;
+			    Object _xblockexpression = null;
 			    {
 			      try {
 			        ((Object) null).toString();
@@ -526,9 +526,9 @@ class CompilerTest {
 			        }
 			      } finally {
 			      }
-			      _specialblockexpression = (null);
+			      _xblockexpression = (null);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')
@@ -537,7 +537,8 @@ class CompilerTest {
 	@Test
 	def void switchExpression() {
 		'''
-			import org.eclipse.xtext.purexbase.test.data.*
+			import org.eclipse.xtext.purexbase.test.data.Circle
+			import org.eclipse.xtext.purexbase.test.data.Rectangle
 			/*
 			 * The switch expression is different and much more powerful than the
 			 * switch statement in Java.
@@ -586,7 +587,7 @@ class CompilerTest {
 			
 			public class MyFile {
 			  public List<String> myMethod() throws Throwable {
-			    List<String> _specialblockexpression = null;
+			    List<String> _xblockexpression = null;
 			    {
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
 			      String _head = IterableExtensions.<String>head(list);
@@ -648,9 +649,9 @@ class CompilerTest {
 			          }
 			        };
 			      List<String> _map = ListExtensions.<Shape, String>map(list2, _function);
-			      _specialblockexpression = (_map);
+			      _xblockexpression = (_map);
 			    }
-			    return _specialblockexpression;
+			    return _xblockexpression;
 			  }
 			}
 		''')

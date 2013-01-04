@@ -4,17 +4,13 @@
     editorDirectory="/org.eclipse.xtext.purexbase.editor/src" modelPluginID="org.eclipse.xtext.purexbase"
     forceOverwrite="true" modelName="PureXbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.purexbase.edit"
-    editorPluginID="org.eclipse.xtext.purexbase.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    editorPluginID="org.eclipse.xtext.purexbase.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="PureXbase" basePackage="org.eclipse.xtext.purexbase" disposableProviderFactory="true"
-      ecorePackage="PureXbase.ecore#/">
+      fileExtensions="xbase" ecorePackage="PureXbase.ecore#/">
     <genClasses ecoreClass="PureXbase.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PureXbase.ecore#//Model/importSection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PureXbase.ecore#//Model/block"/>
     </genClasses>
-    <genClasses ecoreClass="PureXbase.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PureXbase.ecore#//Import/importedNamespace"/>
-    </genClasses>
-    <genClasses ecoreClass="PureXbase.ecore#//SpecialBlockExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PureXbase.ecore#//SpecialBlockExpression/imports"/>
-    </genClasses>
+    <genClasses ecoreClass="PureXbase.ecore#//XBlockExpression"/>
   </genPackages>
 </genmodel:GenModel>

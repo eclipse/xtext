@@ -37,7 +37,6 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getSpecialBlockExpressionAccess().getAlternatives_1_0(), "rule__SpecialBlockExpression__Alternatives_1_0");
 					put(grammarAccess.getXAssignmentAccess().getAlternatives(), "rule__XAssignment__Alternatives");
 					put(grammarAccess.getOpEqualityAccess().getAlternatives(), "rule__OpEquality__Alternatives");
 					put(grammarAccess.getXRelationalExpressionAccess().getAlternatives_1(), "rule__XRelationalExpression__Alternatives_1");
@@ -71,9 +70,9 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2(), "rule__JvmWildcardTypeReference__Alternatives_2");
 					put(grammarAccess.getJvmTypeParameterAccess().getAlternatives_1(), "rule__JvmTypeParameter__Alternatives_1");
 					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
+					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getSpecialBlockExpressionAccess().getGroup(), "rule__SpecialBlockExpression__Group__0");
 					put(grammarAccess.getSpecialBlockExpressionAccess().getGroup_1(), "rule__SpecialBlockExpression__Group_1__0");
-					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
@@ -220,10 +219,9 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup_1_0(), "rule__JvmTypeParameter__Group_1_0__0");
 					put(grammarAccess.getXImportDeclarationAccess().getGroup(), "rule__XImportDeclaration__Group__0");
 					put(grammarAccess.getXImportDeclarationAccess().getGroup_1_0(), "rule__XImportDeclaration__Group_1_0__0");
-					put(grammarAccess.getModelAccess().getBlockAssignment(), "rule__Model__BlockAssignment");
-					put(grammarAccess.getSpecialBlockExpressionAccess().getExpressionsAssignment_1_0_0(), "rule__SpecialBlockExpression__ExpressionsAssignment_1_0_0");
-					put(grammarAccess.getSpecialBlockExpressionAccess().getImportsAssignment_1_0_1(), "rule__SpecialBlockExpression__ImportsAssignment_1_0_1");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
+					put(grammarAccess.getModelAccess().getImportSectionAssignment_0(), "rule__Model__ImportSectionAssignment_0");
+					put(grammarAccess.getModelAccess().getBlockAssignment_1(), "rule__Model__BlockAssignment_1");
+					put(grammarAccess.getSpecialBlockExpressionAccess().getExpressionsAssignment_1_0(), "rule__SpecialBlockExpression__ExpressionsAssignment_1_0");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 					put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

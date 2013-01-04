@@ -1,4 +1,4 @@
-import helper.*
+import helper.Person
 /*
  * Xbase comes with sugared accessor syntax for getter and setter 
  * methods
