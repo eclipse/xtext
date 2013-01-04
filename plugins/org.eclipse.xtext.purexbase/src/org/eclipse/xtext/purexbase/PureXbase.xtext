@@ -7,7 +7,7 @@ Model:
 	importSection=XImportSection? block=SpecialBlockExpression;
 	
 SpecialBlockExpression returns xbase::XBlockExpression:
-	{XBlockExpression}
+	{xbase::XBlockExpression}
 	(expressions+=XExpressionInsideBlock ';'?)*
 ;
 
