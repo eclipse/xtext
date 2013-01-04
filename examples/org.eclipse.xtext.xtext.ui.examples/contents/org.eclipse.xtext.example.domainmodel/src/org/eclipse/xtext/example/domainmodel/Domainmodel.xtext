@@ -35,6 +35,3 @@ Property:
 Operation:
 	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)? 
 		body=XBlockExpression;
-
-QualifiedNameWithWildCard :
-	QualifiedName  ('.' '*')?;
