@@ -2,7 +2,9 @@ package org.eclipse.xtext.xbase.ui.tests.refactoring;
 
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -11,6 +13,8 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -19,6 +23,7 @@ import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -44,10 +49,11 @@ public class TypeSerializationUtilTest {
     this.assertSerializedTypeOfFoo("val foo = 1", "int");
   }
   
+  @Ignore
   @Test
   public void testGenerics() {
-    this.assertSerializedTypeOfFoo("val foo = newArrayList(new java.util.Date)", "java.util.ArrayList<java.util.Date>");
-    this.assertSerializedTypeOfFoo("val foo = newHashMap(\'x\'->1, \'y\'->2)", "java.util.HashMap<String,Integer>");
+    this.assertSerializedTypeOfFoo("val foo = newArrayList(new java.util.Date)", "ArrayList<Date>", "java.util.ArrayList", "java.util.Date");
+    this.assertSerializedTypeOfFoo("val foo = newHashMap(\'x\'->1, \'y\'->2)", "HashMap<String,Integer>", "java.util.HashMap");
   }
   
   @Test
@@ -58,7 +64,7 @@ public class TypeSerializationUtilTest {
     this.assertSerializedTypeOfFoo("val foo = [String x|System.out.println(x)]", "(String)=>void");
   }
   
-  protected void assertSerializedTypeOfFoo(final CharSequence model, final String expectedOutput) {
+  protected void assertSerializedTypeOfFoo(final CharSequence model, final String expectedOutput, final String... expectedImports) {
     try {
       String _plus = ("{" + model);
       String _plus_1 = (_plus + "}");
@@ -79,6 +85,13 @@ public class TypeSerializationUtilTest {
       final JvmTypeReference type = this._iTypeProvider.getType(_right);
       final String serialized = this.util.serialize(type, expression);
       Assert.assertEquals(expectedOutput, serialized);
+      ImportManager _importManager = this.util.getImportManager(expression);
+      final List<String> actualImports = _importManager.getImports();
+      int _size = actualImports.size();
+      int _size_1 = ((List<String>)Conversions.doWrapArray(expectedImports)).size();
+      Assert.assertEquals(_size, _size_1);
+      boolean _containsAll = actualImports.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(expectedImports)));
+      Assert.assertTrue(_containsAll);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
