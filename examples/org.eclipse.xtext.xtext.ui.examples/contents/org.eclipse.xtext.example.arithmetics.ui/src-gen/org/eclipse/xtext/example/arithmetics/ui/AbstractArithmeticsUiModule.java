@@ -88,7 +88,7 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.example.arithmetics.ui.quickfix.ArithmeticsQuickfixProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment
+	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.arithmetics.ui.contentassist.ArithmeticsProposalProvider.class;
 	}
