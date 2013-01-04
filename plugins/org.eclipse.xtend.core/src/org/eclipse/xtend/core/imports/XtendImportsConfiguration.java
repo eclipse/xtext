@@ -56,7 +56,7 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 	}
 	
 	@Override
-	public Map<String, JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
+	public Map<String, JvmDeclaredType> getPrivilegedLocalTypes(XtextResource resource) {
 		XtendFile xtendFile = getXtendFile(resource);
 		if(xtendFile == null)
 			return emptyMap();
