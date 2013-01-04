@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -60,7 +58,6 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -76,7 +73,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -101,7 +97,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	private IXtendJvmAssociations associations;
 
 	@Inject
-	private DispatchUtil dispatchUtil;
+	private DispatchHelper dispatchHelper;
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -376,8 +372,8 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	}
 
 	protected void appendSyntheticDispatchMethods(XtendClass source, JvmGenericType target) {
-		ListMultimap<DispatchUtil.DispatchSignature, JvmOperation> methods = dispatchUtil.getDeclaredDispatchMethods(target);
-		for (DispatchUtil.DispatchSignature signature : methods.keySet()) {
+		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredDispatchMethods(target);
+		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(operations, target);
 			if (operation != null) {

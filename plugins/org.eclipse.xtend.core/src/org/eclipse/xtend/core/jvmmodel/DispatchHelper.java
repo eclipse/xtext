@@ -34,40 +34,65 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
+/*
+ * TODO In case we deal with a Java class: should we check for an associated
+ * dispatcher?
+ */
 /**
+ * Helpers to deal with {@link XtendFunction#isDispatch() dispatch methods}.
+ * Methods are considered to be dispatch methods, if they 
+ * are derived from an {@link XtendFunction} that is marked as such
+ * or if they are defined in a Java type and their name starts with an
+ * underscore.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DispatchUtil {
+public class DispatchHelper {
 	
+	/**
+	 * A dispatch signature is a pair of a simple name
+	 * and an arity. In that sense it's different from a common understanding
+	 * of a method signature, since the dispatch signature does not take
+	 * the parameter types into account but only the number of parameters.
+	 */
 	public static class DispatchSignature {
 		private final String simpleName;
-		private final int parameterCount;
+		private final int arity;
 		
-		public DispatchSignature(String simpleName, int parameterCount) {
-			if (!simpleName.startsWith("_")) {
+		/**
+		 * Creates a new {@link DispatchSignature} from a method name and parameter count.
+		 * The method name may not include the synthesized underscore.
+		 * @param simpleName the simple name of the associated dispatcher function.
+		 * @param arity the number of parameters (zero or more)
+		 */
+		public DispatchSignature(String simpleName, int arity) {
+			if (simpleName.startsWith("_")) {
 				throw new IllegalArgumentException("Dispatch signature is expected to start with an underscore");
 			}
-			this.simpleName = simpleName;
-			this.parameterCount = parameterCount;
+			if (arity < 0) {
+				throw new IllegalArgumentException("The number of parameters may not be smaller than zero, was: " + arity);
+			}
+			this.simpleName = "_" + simpleName;
+			this.arity = arity;
 		}
 		
-		public int getParameterCount() {
-			return parameterCount;
+		public int getArity() {
+			return arity;
 		}
 		
 		public String getSimpleName() {
 			return simpleName.substring(1);
 		}
 		
-		public boolean matches(JvmOperation operation) {
-			return parameterCount == operation.getParameters().size() && simpleName.equals(operation.getSimpleName());
+		public boolean isDispatchCase(JvmOperation operation) {
+			return arity == operation.getParameters().size() && simpleName.equals(operation.getSimpleName());
 		}
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + parameterCount;
+			result = prime * result + arity;
 			result = prime * result + ((simpleName == null) ? 0 : simpleName.hashCode());
 			return result;
 		}
@@ -81,7 +106,7 @@ public class DispatchUtil {
 			if (getClass() != obj.getClass())
 				return false;
 			DispatchSignature other = (DispatchSignature) obj;
-			if (parameterCount != other.parameterCount)
+			if (arity != other.arity)
 				return false;
 			if (simpleName == null) {
 				if (other.simpleName != null)
@@ -96,8 +121,8 @@ public class DispatchUtil {
 			StringBuilder builder = new StringBuilder();
 			builder.append("DispatchSignature [simpleName=");
 			builder.append(simpleName);
-			builder.append(", parameterCount=");
-			builder.append(parameterCount);
+			builder.append(", arity=");
+			builder.append(arity);
 			builder.append("]");
 			return builder.toString();
 		}
@@ -170,7 +195,7 @@ public class DispatchUtil {
 	public JvmOperation getDispatcherOperation(JvmDeclaredType type, DispatchSignature signature) {
 		Iterable<JvmFeature> allByName = type.findAllFeaturesByName(signature.getSimpleName());
 		for(JvmFeature feature: allByName) {
-			if (feature instanceof JvmOperation && signature.getParameterCount() == ((JvmOperation) feature).getParameters().size()) {
+			if (feature instanceof JvmOperation && signature.getArity() == ((JvmOperation) feature).getParameters().size()) {
 				return (JvmOperation) feature;
 			}
 		}
@@ -202,19 +227,35 @@ public class DispatchUtil {
 		return result;
 	}
 	
+	/**
+	 * Computes all the dispatch methods that are declared in the given type or altered
+	 * by additional cases in this type. The associated operations are sorted by according their parameter types
+	 * from left to right where the most special types occur before more common types. Ambiguous
+	 * ordering is resolved alphabetically.
+	 * 
+     * An exemplary order would look like this
+	 * <pre>
+	 *   method(String)
+	 *   method(Serializable)
+	 *   method(CharSequence)
+	 *   method(Object)
+	 * </pre>
+	 * 
+	 * @return a mapping from {@link DispatchSignature signature} to sorted operations.
+	 */
 	public ListMultimap<DispatchSignature, JvmOperation> getDeclaredDispatchMethods(JvmDeclaredType type) {
 		ListMultimap<DispatchSignature, JvmOperation> result = ArrayListMultimap.create();
 		Iterable<JvmOperation> operations = type.getDeclaredOperations();
 		for(JvmOperation operation: operations) {
 			if (isDispatchFunction(operation)) {
-				DispatchSignature signature = new DispatchSignature(operation.getSimpleName(), operation.getParameters().size());
+				DispatchSignature signature = new DispatchSignature(operation.getSimpleName().substring(1), operation.getParameters().size());
 				if (!result.containsKey(signature)) {
 					List<JvmOperation> allOperations = Lists.newArrayListWithExpectedSize(5);
 					Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(operation.getSimpleName());
 					for(JvmFeature feature: allFeatures) {
 						if (feature instanceof JvmOperation) {
 							JvmOperation operationByName = (JvmOperation) feature;
-							if (signature.matches(operationByName)) {
+							if (signature.isDispatchCase(operationByName)) {
 								allOperations.add(operationByName);
 							}
 						}
@@ -230,7 +271,7 @@ public class DispatchUtil {
 	protected void sort(List<JvmOperation> operations) {
 		Collections.sort(operations, new Comparator<JvmOperation>() {
 			public int compare(JvmOperation o1, JvmOperation o2) {
-				return DispatchUtil.this.compare(o1, o2);
+				return DispatchHelper.this.compare(o1, o2);
 			}
 		});
 	}
