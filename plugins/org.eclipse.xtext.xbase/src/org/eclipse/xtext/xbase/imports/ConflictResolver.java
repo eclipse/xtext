@@ -40,7 +40,7 @@ public class ConflictResolver {
 	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtextResource resource) {
 		String packageName = config.getCommonPackageName(resource);
 		RewritableImportSection importSection = importSectionFactory.parse(resource);
-		Map<String, JvmDeclaredType> locallyDefinedTypes = config.getLocallyDefinedTypes(resource);
+		Map<String, JvmDeclaredType> locallyDefinedTypes = config.getPrivilegedLocalTypes(resource);
 		Map<String, JvmDeclaredType> result = newLinkedHashMap();
 		Multimap<String, JvmDeclaredType> simpleName2Types = usages.getSimpleName2Types();
 		for (String simpleName : simpleName2Types.keySet()) {
