@@ -6,5 +6,9 @@ Bundle-Vendor: %providerName
 Bundle-Version: 2.4.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtend.lib
+Export-Package: org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.eclipse.xtend.lib.macro.declaration,
+ org.eclipse.xtend.lib.macro.expression,
+ org.eclipse.xtend.lib.macro.type
 Import-Package: com.google.common.annotations;version="10.0.1"
