@@ -29,7 +29,6 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -102,10 +101,9 @@ public class XtendJavaDocContentAssistInvocationContext extends JavaContentAssis
 					EList<XImportDeclaration> xtendImports = xtendFile.getImportSection().getImportDeclarations();
 					List<String> imports = Lists.newArrayList();
 					for (XImportDeclaration imp : xtendImports) {
-						if(imp instanceof XtendImport && ((XtendImport)imp).getImportedNamespace() != null) 
-							imports.add(((XtendImport)imp).getImportedNamespace());
-						else
-							imports.add(imp.getImportedTypeName());
+						String importedTypeName = imp.getImportedTypeName();
+						if(importedTypeName != null) 
+							imports.add(importedTypeName);
 					}
 					return imports;
 				}

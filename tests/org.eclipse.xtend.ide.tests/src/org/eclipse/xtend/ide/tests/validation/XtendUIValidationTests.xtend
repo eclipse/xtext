@@ -14,6 +14,7 @@ import org.junit.Test
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
@@ -34,7 +35,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 	}
 
 	@Test
@@ -45,7 +46,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 	}
 	
 	@Test
@@ -56,7 +57,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 	}
 
 	@Test
@@ -67,7 +68,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 	}
 
 	@Test
@@ -91,7 +92,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)
@@ -106,7 +107,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
@@ -122,7 +123,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, DISCOURAGED_REFERENCE)
+		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertWarning(field.type, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 		helper.assertWarning(field.initialValue, XCONSTRUCTOR_CALL, DISCOURAGED_REFERENCE)
@@ -137,7 +138,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		}
 
 		''')
-		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XTEND_IMPORT, FORBIDDEN_REFERENCE)
+		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
 		helper.assertError(field.type, JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		helper.assertError(field.initialValue, XCONSTRUCTOR_CALL, FORBIDDEN_REFERENCE)

@@ -19,7 +19,6 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -45,6 +44,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.collect.Multimap;
@@ -203,8 +203,8 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		return true;
 	}
 
-	protected Object _text(XtendImport xtendImport) {
-		return (xtendImport.getImportedNamespace() != null) ? xtendImport.getImportedNamespace() : xtendImport
+	protected Object _text(XImportDeclaration importDeclaration) {
+		return (importDeclaration.getImportedNamespace() != null) ? importDeclaration.getImportedNamespace() : importDeclaration
 				.getImportedTypeName();
 	}
 

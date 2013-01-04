@@ -16,28 +16,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.compiler.IProblem;
-import org.eclipse.jdt.core.search.IJavaSearchConstants;
-import org.eclipse.jdt.core.search.IJavaSearchScope;
-import org.eclipse.jdt.core.search.SearchEngine;
-import org.eclipse.jdt.core.search.SearchPattern;
-import org.eclipse.jdt.core.search.TypeNameRequestor;
-import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
-import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
-import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -47,21 +34,17 @@ import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -73,11 +56,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -86,8 +65,6 @@ import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
-import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
@@ -110,8 +87,6 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitu
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
-import org.eclipse.xtext.xtype.XImportDeclaration;
-import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -530,26 +505,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 	
-	@Override
-	protected void parseImportSection(XImportSection importSection, IAcceptor<String> visiblePackages,
-			IAcceptor<String> importedTypes) {
-		for (XImportDeclaration importDeclaration : importSection.getImportDeclarations()) {
-			if (!importDeclaration.isStatic()) {
-				if (importDeclaration instanceof XtendImport && ((XtendImport) importDeclaration).getImportedNamespace() != null) {
-					String importedAsString = ((XtendImport) importDeclaration).getImportedNamespace();
-					if (importDeclaration.isWildcard()) {
-						importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
-						visiblePackages.accept(importedAsString);
-					} else {
-						importedTypes.accept(importedAsString);
-					}
-				} else {
-					importedTypes.accept(importDeclaration.getImportedTypeName());
-				}
-			}
-		}
-	}
-
 	@Fix(IssueCodes.INCONSISTENT_INDENTATION)
 	public void fixIndentation(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Correct indentation", "Correctly indents this line in this rich string",
@@ -560,11 +515,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				});
 	}
 	
-	@Fix(IssueCodes.IMPORT_WILDCARD_DEPRECATED)
-	public void fixDuplicateWildcardUse(final Issue issue, IssueResolutionAcceptor acceptor) {
-		organizeImports(issue, acceptor);
-	}
-
 	@Fix(IssueCodes.MISSING_OVERRIDE)
 	public void fixMissingOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change 'def' to 'override'", "Marks this function as 'override'", "fix_indent.gif",

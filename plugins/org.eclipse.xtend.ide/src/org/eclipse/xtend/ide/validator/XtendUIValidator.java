@@ -17,16 +17,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
-import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -41,13 +37,6 @@ public class XtendUIValidator extends XbaseUIValidator {
 		return packages;
 	}
 
-	@Check
-	public void checkRestrictedType(XtendImport xtendImport){
-		JvmType importedType = xtendImport.getImportedType();
-		if(importedType instanceof JvmDeclaredType)
-			checkRestrictedType(xtendImport, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, (JvmDeclaredType) importedType);
-	}
-	
 	@Check
 	public void checkFileNamingConventions(XtendFile xtendFile) {
 		//TODO replace usage of CLASSPATH_SCHEME by using IJavaProject
