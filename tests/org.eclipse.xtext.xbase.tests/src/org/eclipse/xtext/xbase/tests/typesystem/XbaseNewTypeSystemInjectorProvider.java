@@ -21,6 +21,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -118,6 +120,10 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		@Override
 		public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
 			return LegacyTypeArgumentContextProvider.class;
+		}
+		
+		public Class<? extends TypeReferenceSerializer> bindTypeReferenceSerializer() {
+			return TypeReferenceSerializer2.class;
 		}
 		
 	}

@@ -335,7 +335,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"testdata::OverloadedMethods::<String>addAllSuperExtends(null as java.util.List<CharSequence>, null as java.util.List<String>)".bindTypeArgumentsTo("String").done
 	}
 	
-	@Ignore("TODO")
+	@Ignore("TODO subsequent usages of local vars should contribute to the expectation")
 	@Test def void testMethodTypeParamInference_23() throws Exception {
 		"{
 			val actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)
