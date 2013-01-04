@@ -19,16 +19,6 @@ File returns XtendFile :
 	(xtendTypes+=Type)*
 ;
 
-XImportDeclaration returns XtendImport : 
-	'import' (
-		(static?='static' extension?='extension'? importedType=[types::JvmDeclaredType|QualifiedName] '.' '*') 
-		| importedType=[types::JvmDeclaredType|QualifiedName] 
-		| importedNamespace=QualifiedNameWithWildCard) ';'?
-;
-
-QualifiedNameWithWildCard :
-	QualifiedName  '.' '*';
-	
 Type returns XtendTypeDeclaration :
 	{XtendTypeDeclaration} annotations+=XAnnotation* 
 	({XtendClass.annotationInfo = current}
