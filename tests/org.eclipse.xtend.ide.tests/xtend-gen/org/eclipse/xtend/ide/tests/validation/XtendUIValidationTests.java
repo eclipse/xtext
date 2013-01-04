@@ -8,7 +8,6 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+import org.eclipse.xtext.xtype.XtypePackage.Literals;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -54,7 +54,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XTEND_IMPORT, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,7 +75,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XTEND_IMPORT, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -96,7 +96,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XTEND_IMPORT, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -117,7 +117,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XTEND_IMPORT, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -165,7 +165,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XTEND_IMPORT, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -199,7 +199,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XTEND_IMPORT, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -233,7 +233,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XTEND_IMPORT, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -267,7 +267,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XTEND_IMPORT, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);

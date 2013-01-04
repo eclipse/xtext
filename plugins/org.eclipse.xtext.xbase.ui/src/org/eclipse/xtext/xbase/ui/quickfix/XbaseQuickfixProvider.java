@@ -92,6 +92,11 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		organizeImports(issue, acceptor);
 	}
 
+	@Fix(IssueCodes.IMPORT_WILDCARD_DEPRECATED)
+	public void fixDuplicateWildcardUse(final Issue issue, IssueResolutionAcceptor acceptor) {
+		organizeImports(issue, acceptor);
+	}
+
 	protected void organizeImports(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Organize Imports.",
 				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
@@ -270,10 +275,18 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	protected void parseImportSection(XImportSection importSection, IAcceptor<String> visiblePackages,
 			IAcceptor<String> importedTypes) {
 		for (XImportDeclaration importDeclaration : importSection.getImportDeclarations()) {
-			if (!(importDeclaration.isStatic() || importDeclaration.isExtension())) {
-				String importedAsString = importDeclaration.getImportedTypeName();
-				if(importedAsString != null)
-					importedTypes.accept(importedAsString);
+			if (!importDeclaration.isStatic()) {
+				if (importDeclaration.getImportedNamespace() != null) {
+					String importedAsString = importDeclaration.getImportedNamespace();
+					if (importDeclaration.isWildcard()) {
+						importedAsString = importedAsString.substring(0, importedAsString.length() - 2);
+						visiblePackages.accept(importedAsString);
+					} else {
+						importedTypes.accept(importedAsString);
+					}
+				} else {
+					importedTypes.accept(importDeclaration.getImportedTypeName());
+				}
 			}
 		}
 	}

@@ -11,7 +11,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.inject.Inject;
 
@@ -47,7 +47,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		return images.forFile();
 	}
 
-	public Image image(XtendImport element) {
+	@Override
+	public Image image(XImportDeclaration element) {
 		return images.forImport();
 	}
 
@@ -75,7 +76,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		return element.eResource().getURI().trimFileExtension().lastSegment();
 	}
 
-	public String text(XtendImport element) {
+	public String text(XImportDeclaration element) {
 		return element.getImportedNamespace();
 	}
 

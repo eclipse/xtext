@@ -4,6 +4,7 @@
 package org.eclipse.xtend.ide.labeling;
 
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
+import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.resource.DescriptionFlags;
@@ -33,7 +34,7 @@ public class XtendDescriptionLabelProvider extends DefaultDescriptionLabelProvid
 		boolean isStatic = descriptionFlags.isStatic(element);
 		if (eClass == XTEND_FILE)
 			return images.forFile();
-		else if (eClass == XTEND_IMPORT)
+		else if (eClass == XIMPORT_DECLARATION)
 			return images.forImport();
 		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
 			return images.forClass(JvmVisibility.PUBLIC);
