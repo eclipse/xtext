@@ -98,9 +98,9 @@ public class RewritableImportSection {
 	
 	private boolean isSort;
 
-	private Set<JvmDeclaredType> locallyDeclaredTypes;
-
 	private Set<String> implicitlyImportedPackages;
+
+	private String contextPackageName;
 
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
 			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil) {
@@ -108,8 +108,8 @@ public class RewritableImportSection {
 		this.importsConfiguration = importsConfiguration;
 		this.lineSeparator = lineSeparator;
 		this.regionUtil = regionUtil;
-		this.locallyDeclaredTypes = newHashSet(importsConfiguration.getLocallyDefinedTypes(resource).values());
 		this.implicitlyImportedPackages = importsConfiguration.getImplicitlyImportedPackages(resource);
+		this.contextPackageName = importsConfiguration.getCommonPackageName(resource);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
@@ -145,8 +145,8 @@ public class RewritableImportSection {
 	}
 	
 	protected boolean needsImport(JvmDeclaredType type)  {
-		return !(implicitlyImportedPackages.contains(type.getPackageName())
-			|| locallyDeclaredTypes.contains(type));
+		String typePackageName = type.getPackageName();
+		return !(implicitlyImportedPackages.contains(typePackageName) || equal(typePackageName, contextPackageName));
 	}
 	
 	public boolean removeImport(JvmDeclaredType type) {
@@ -187,11 +187,11 @@ public class RewritableImportSection {
 	public boolean addStaticImport(JvmDeclaredType type) {
 		if (staticImports.contains(type))
 			return false;
-		staticImports.add(type);
-		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
-		importDeclaration.setImportedType(type);
-		importDeclaration.setStatic(true);
-		addedImportDeclarations.add(importDeclaration);
+			staticImports.add(type);
+			XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
+			importDeclaration.setImportedType(type);
+			importDeclaration.setStatic(true);
+			addedImportDeclarations.add(importDeclaration);
 		return true;
 	}
 
@@ -212,12 +212,12 @@ public class RewritableImportSection {
 	public boolean addStaticExtensionImport(JvmDeclaredType type) {
 		if (staticExtensionImports.contains(type))
 			return false;
-		staticExtensionImports.add(type);
-		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
-		importDeclaration.setImportedType(type);
-		importDeclaration.setStatic(true);
-		importDeclaration.setExtension(true);
-		addedImportDeclarations.add(importDeclaration);
+			staticExtensionImports.add(type);
+			XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
+			importDeclaration.setImportedType(type);
+			importDeclaration.setStatic(true);
+			importDeclaration.setExtension(true);
+			addedImportDeclarations.add(importDeclaration);
 		return true;
 	}
 
@@ -345,10 +345,13 @@ public class RewritableImportSection {
 	}
 	
 	protected List<XImportDeclaration> sort(Iterable<XImportDeclaration> declarations) {
-		List<XImportDeclaration> sortMe = newArrayList(declarations);
+		List<XImportDeclaration> sortMe = newArrayList(filter(declarations, new Predicate<XImportDeclaration>() {
+			public boolean apply(XImportDeclaration in) {
+				return !isEmpty(in.getImportedTypeName());
+			}
+		}));
 		Collections.sort(sortMe, new Comparator<XImportDeclaration>() {
 			public int compare(XImportDeclaration o1, XImportDeclaration o2) {
-				// TODO handle NPEs
 				return o1.getImportedTypeName().compareTo(o2.getImportedTypeName());
 			}
 		});

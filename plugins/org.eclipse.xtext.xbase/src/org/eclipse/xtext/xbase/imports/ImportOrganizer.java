@@ -63,7 +63,7 @@ public class ImportOrganizer {
 			String text = entry.getKey();
 			JvmDeclaredType type = entry.getValue();
 			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			if(!type.getIdentifier().equals(text)) {
+			if(!needsImport(type, text, nonOverridableTypesProvider, usages)) {
 				newImportSection.addImport(type);
 			}
 			for(TypeUsage usage: usages) {
