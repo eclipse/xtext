@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.CrossReference;
@@ -49,6 +51,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -1205,11 +1208,10 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			}
 		}
 		Set<EObject> primarySourceElements = Sets.newHashSet();
-		for (Map.Entry<String, JvmDeclaredType> declaredType : 
-				importsConfiguration.getLocallyDefinedTypes((XtextResource) importSection.eResource()).entrySet()) {
-			if(importedNames.containsKey(declaredType.getKey())){
-				JvmType importedType = importedNames.get(declaredType.getKey());
-				if(importedType != declaredType.getValue()){
+		for (JvmDeclaredType declaredType : getAllDeclaredTypes(importSection.eResource())) {
+			if(importedNames.containsKey(declaredType.getSimpleName())){
+				JvmType importedType = importedNames.get(declaredType.getSimpleName());
+				if(importedType != declaredType){
 					XImportDeclaration xtendImport = imports.get(importedType);
 					if(xtendImport != null)
 						error("The import '" 
@@ -1218,7 +1220,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 								xtendImport, null, IssueCodes.IMPORT_CONFLICT );
 				}
 			}
-			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType.getValue());
+			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType);
 			if(primarySourceElement != null)
 				primarySourceElements.add(primarySourceElement);
 		}
@@ -1263,6 +1265,25 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		for (XImportDeclaration imp : imports.values()) {
 			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
 					IssueCodes.IMPORT_UNUSED);
+		}
+	}
+	
+	protected Iterable<JvmDeclaredType> getAllDeclaredTypes(Resource resource) {
+		final List<JvmDeclaredType> allDeclaredTypes = newArrayList();
+		addDeclaredTypes(resource.getContents(), new IAcceptor<JvmDeclaredType>() {
+			public void accept(JvmDeclaredType t) {
+				allDeclaredTypes.add(t);
+			}
+		});
+		return allDeclaredTypes;
+	}
+	
+	protected void addDeclaredTypes(List<? extends EObject> elements, IAcceptor<JvmDeclaredType> result) {
+		for(EObject element: elements) {
+			if (element instanceof JvmDeclaredType) {
+				result.accept((JvmDeclaredType) element);
+				addDeclaredTypes(((JvmDeclaredType) element).getMembers(), result);
+			}
 		}
 	}
 	
