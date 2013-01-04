@@ -615,27 +615,6 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		return getFileAccess().getRule();
 	}
 
-	//XImportDeclaration returns XtendImport:
-	//	"import" (static?="static" extension?="extension"? importedType=[types::JvmDeclaredType|QualifiedName] "." "*" |
-	//	importedType=[types::JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
-	public XtendGrammarAccess.XImportDeclarationElements getXImportDeclarationAccess() {
-		return gaXtend.getXImportDeclarationAccess();
-	}
-	
-	public ParserRule getXImportDeclarationRule() {
-		return getXImportDeclarationAccess().getRule();
-	}
-
-	//QualifiedNameWithWildCard:
-	//	QualifiedName "." "*";
-	public XtendGrammarAccess.QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
-		return gaXtend.getQualifiedNameWithWildCardAccess();
-	}
-	
-	public ParserRule getQualifiedNameWithWildCardRule() {
-		return getQualifiedNameWithWildCardAccess().getRule();
-	}
-
 	//AnnotationField returns XtendField:
 	//	annotations+=XAnnotation* (type=JvmTypeReference | (final?="val" | "var") type=JvmTypeReference?) name=ValidID ("="
 	//	initialValue=XExpression)? ";"?;
@@ -1610,6 +1589,16 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmTypeParameterAccess().getRule();
 	}
 
+	//QualifiedNameWithWildCard:
+	//	QualifiedName "." "*";
+	public XtypeGrammarAccess.QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
+		return gaXtend.getQualifiedNameWithWildCardAccess();
+	}
+	
+	public ParserRule getQualifiedNameWithWildCardRule() {
+		return getQualifiedNameWithWildCardAccess().getRule();
+	}
+
 	//XImportSection:
 	//	importDeclarations+=XImportDeclaration+;
 	public XtypeGrammarAccess.XImportSectionElements getXImportSectionAccess() {
@@ -1618,6 +1607,17 @@ public class MacroGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXImportSectionRule() {
 		return getXImportSectionAccess().getRule();
+	}
+
+	//XImportDeclaration:
+	//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
+	//	importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildCard) ";"?;
+	public XtypeGrammarAccess.XImportDeclarationElements getXImportDeclarationAccess() {
+		return gaXtend.getXImportDeclarationAccess();
+	}
+	
+	public ParserRule getXImportDeclarationRule() {
+		return getXImportDeclarationAccess().getRule();
 	}
 
 	//terminal ID:

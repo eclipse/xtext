@@ -1158,11 +1158,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:60:7: ( 'import' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:60:9: 'import'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:60:7: ( ')' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:60:9: ')'
             {
-            match("import"); 
-
+            match(')'); 
 
             }
 
@@ -1179,10 +1178,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:61:7: ( ')' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:61:9: ')'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:61:7: ( '(' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:61:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -1199,10 +1198,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:62:7: ( '(' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:62:9: '('
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:62:7: ( 'throws' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:62:9: 'throws'
             {
-            match('('); 
+            match("throws"); 
+
 
             }
 
@@ -1219,10 +1219,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:63:7: ( 'throws' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:63:9: 'throws'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:63:7: ( 'new' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:63:9: 'new'
             {
-            match("throws"); 
+            match("new"); 
 
 
             }
@@ -1240,11 +1240,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:64:7: ( 'new' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:64:9: 'new'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:64:7: ( ':' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:64:9: ':'
             {
-            match("new"); 
-
+            match(':'); 
 
             }
 
@@ -1261,10 +1260,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:65:7: ( ':' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:65:9: ':'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:65:7: ( 'FOR' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:65:9: 'FOR'
             {
-            match(':'); 
+            match("FOR"); 
+
 
             }
 
@@ -1281,10 +1281,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:66:7: ( 'FOR' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:66:9: 'FOR'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:66:7: ( 'ENDFOR' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:66:9: 'ENDFOR'
             {
-            match("FOR"); 
+            match("ENDFOR"); 
 
 
             }
@@ -1302,10 +1302,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:67:7: ( 'ENDFOR' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:67:9: 'ENDFOR'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:67:7: ( 'BEFORE' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:67:9: 'BEFORE'
             {
-            match("ENDFOR"); 
+            match("BEFORE"); 
 
 
             }
@@ -1323,10 +1323,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:68:7: ( 'BEFORE' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:68:9: 'BEFORE'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:68:7: ( 'SEPARATOR' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:68:9: 'SEPARATOR'
             {
-            match("BEFORE"); 
+            match("SEPARATOR"); 
 
 
             }
@@ -1344,10 +1344,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:69:7: ( 'SEPARATOR' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:69:9: 'SEPARATOR'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:69:7: ( 'AFTER' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:69:9: 'AFTER'
             {
-            match("SEPARATOR"); 
+            match("AFTER"); 
 
 
             }
@@ -1365,10 +1365,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:70:7: ( 'AFTER' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:70:9: 'AFTER'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:70:7: ( 'IF' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:70:9: 'IF'
             {
-            match("AFTER"); 
+            match("IF"); 
 
 
             }
@@ -1386,10 +1386,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:71:7: ( 'IF' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:71:9: 'IF'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:71:7: ( 'ENDIF' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:71:9: 'ENDIF'
             {
-            match("IF"); 
+            match("ENDIF"); 
 
 
             }
@@ -1407,10 +1407,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:72:7: ( 'ENDIF' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:72:9: 'ENDIF'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:72:7: ( 'ELSE' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:72:9: 'ELSE'
             {
-            match("ENDIF"); 
+            match("ELSE"); 
 
 
             }
@@ -1428,10 +1428,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:73:7: ( 'ELSE' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:73:9: 'ELSE'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:73:7: ( 'ELSEIF' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:73:9: 'ELSEIF'
             {
-            match("ELSE"); 
+            match("ELSEIF"); 
 
 
             }
@@ -1449,10 +1449,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:74:7: ( 'ELSEIF' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:74:9: 'ELSEIF'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:74:7: ( 'instanceof' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:74:9: 'instanceof'
             {
-            match("ELSEIF"); 
+            match("instanceof"); 
 
 
             }
@@ -1470,10 +1470,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:75:7: ( 'instanceof' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:75:9: 'instanceof'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:75:7: ( 'as' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:75:9: 'as'
             {
-            match("instanceof"); 
+            match("as"); 
 
 
             }
@@ -1491,11 +1491,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:76:7: ( 'as' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:76:9: 'as'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:76:7: ( ']' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:76:9: ']'
             {
-            match("as"); 
-
+            match(']'); 
 
             }
 
@@ -1512,10 +1511,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:77:7: ( ']' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:77:9: ']'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:77:7: ( '[' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:77:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -1532,10 +1531,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__87;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:78:7: ( '[' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:78:9: '['
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:78:7: ( 'if' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:78:9: 'if'
             {
-            match('['); 
+            match("if"); 
+
 
             }
 
@@ -1552,10 +1552,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__88;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:79:7: ( 'if' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:79:9: 'if'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:79:7: ( 'else' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:79:9: 'else'
             {
-            match("if"); 
+            match("else"); 
 
 
             }
@@ -1573,10 +1573,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__89;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:80:7: ( 'else' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:80:9: 'else'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:80:7: ( 'switch' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:80:9: 'switch'
             {
-            match("else"); 
+            match("switch"); 
 
 
             }
@@ -1594,10 +1594,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__90;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:81:7: ( 'switch' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:81:9: 'switch'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:81:7: ( 'default' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:81:9: 'default'
             {
-            match("switch"); 
+            match("default"); 
 
 
             }
@@ -1615,10 +1615,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__91;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:82:7: ( 'default' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:82:9: 'default'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:82:7: ( 'case' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:82:9: 'case'
             {
-            match("default"); 
+            match("case"); 
 
 
             }
@@ -1636,10 +1636,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:83:7: ( 'case' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:83:9: 'case'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:83:7: ( 'while' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:83:9: 'while'
             {
-            match("case"); 
+            match("while"); 
 
 
             }
@@ -1657,10 +1657,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:84:7: ( 'while' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:84:9: 'while'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:84:7: ( 'do' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:84:9: 'do'
             {
-            match("while"); 
+            match("do"); 
 
 
             }
@@ -1678,10 +1678,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__94;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:85:7: ( 'do' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:85:9: 'do'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:85:7: ( '::' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:85:9: '::'
             {
-            match("do"); 
+            match("::"); 
 
 
             }
@@ -1699,10 +1699,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__95;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:86:7: ( '::' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:86:9: '::'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:86:7: ( 'null' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:86:9: 'null'
             {
-            match("::"); 
+            match("null"); 
 
 
             }
@@ -1720,10 +1720,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__96;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:87:7: ( 'null' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:87:9: 'null'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:87:7: ( 'typeof' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:87:9: 'typeof'
             {
-            match("null"); 
+            match("typeof"); 
 
 
             }
@@ -1741,10 +1741,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__97;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:88:7: ( 'typeof' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:88:9: 'typeof'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:88:7: ( 'throw' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:88:9: 'throw'
             {
-            match("typeof"); 
+            match("throw"); 
 
 
             }
@@ -1762,10 +1762,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__98;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:89:7: ( 'throw' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:89:9: 'throw'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:89:7: ( 'return' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:89:9: 'return'
             {
-            match("throw"); 
+            match("return"); 
 
 
             }
@@ -1783,10 +1783,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__99;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:90:7: ( 'return' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:90:9: 'return'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:90:7: ( 'try' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:90:9: 'try'
             {
-            match("return"); 
+            match("try"); 
 
 
             }
@@ -1804,10 +1804,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__100;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:91:8: ( 'try' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:91:10: 'try'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:91:8: ( 'finally' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:91:10: 'finally'
             {
-            match("try"); 
+            match("finally"); 
 
 
             }
@@ -1825,10 +1825,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__101;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:92:8: ( 'finally' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:92:10: 'finally'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:92:8: ( 'catch' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:92:10: 'catch'
             {
-            match("finally"); 
+            match("catch"); 
 
 
             }
@@ -1846,11 +1846,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__102;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:93:8: ( 'catch' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:93:10: 'catch'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:93:8: ( '?' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:93:10: '?'
             {
-            match("catch"); 
-
+            match('?'); 
 
             }
 
@@ -1867,10 +1866,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__103;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:94:8: ( '?' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:94:10: '?'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:94:8: ( 'extends' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:94:10: 'extends'
             {
-            match('?'); 
+            match("extends"); 
+
 
             }
 
@@ -1887,11 +1887,10 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__104;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:95:8: ( 'extends' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:95:10: 'extends'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:95:8: ( '&' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:95:10: '&'
             {
-            match("extends"); 
-
+            match('&'); 
 
             }
 
@@ -1908,10 +1907,11 @@ public class InternalMacroLexer extends Lexer {
         try {
             int _type = T__105;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:96:8: ( '&' )
-            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:96:10: '&'
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:96:8: ( 'import' )
+            // ../org.eclipse.xtend.macro.lang.ui/src-gen/org/eclipse/xtend/macro/lang/ui/contentassist/antlr/internal/InternalMacro.g:96:10: 'import'
             {
-            match('&'); 
+            match("import"); 
+
 
             }
 
@@ -4711,128 +4711,129 @@ public class InternalMacroLexer extends Lexer {
     protected DFA47 dfa47 = new DFA47(this);
     static final String DFA47_eotS =
         "\1\uffff\1\71\1\73\1\75\1\77\7\104\1\124\1\126\1\131\1\133\1\135"+
-        "\1\140\1\143\1\146\1\uffff\1\104\5\uffff\2\104\2\uffff\2\104\1\174"+
-        "\6\104\2\uffff\3\104\1\66\1\u008f\1\66\2\u0093\1\66\1\uffff\1\66"+
+        "\1\140\1\143\1\146\1\uffff\1\104\5\uffff\1\104\2\uffff\2\104\1\171"+
+        "\7\104\2\uffff\3\104\1\66\1\u008f\1\66\2\u0093\1\66\1\uffff\1\66"+
         "\13\uffff\4\104\1\uffff\1\104\1\u009d\12\104\1\u00ac\1\104\4\uffff"+
-        "\1\u00af\4\uffff\1\u00b1\13\uffff\3\104\5\uffff\3\104\1\u00b9\2"+
-        "\uffff\5\104\2\uffff\6\104\1\u00c6\2\uffff\5\104\1\u008c\1\uffff"+
-        "\2\u008f\2\uffff\1\u00d2\2\uffff\1\u0093\2\uffff\6\104\1\uffff\3"+
-        "\104\1\u00dc\7\104\1\u00e5\1\u00e6\1\u00e8\1\uffff\1\104\4\uffff"+
-        "\7\104\1\uffff\2\104\1\u00f3\1\104\1\u00f5\1\104\1\u00f7\5\104\1"+
-        "\uffff\5\104\1\u0106\2\u008f\1\u00d2\1\uffff\1\u010a\1\uffff\3\104"+
-        "\1\u010e\5\104\1\uffff\10\104\2\uffff\1\104\1\uffff\12\104\1\uffff"+
-        "\1\u0127\1\uffff\1\u0128\1\uffff\2\104\1\u012c\3\104\1\u0130\1\104"+
-        "\1\u0132\2\104\2\u0106\2\uffff\1\u008f\2\u010a\1\uffff\2\104\1\u013b"+
-        "\1\uffff\1\u013c\1\104\1\u013e\1\104\1\u0140\1\104\1\u0142\10\104"+
-        "\1\u014b\6\104\1\u0153\1\104\2\uffff\1\104\1\u0156\1\104\1\uffff"+
-        "\2\104\1\u015a\1\uffff\1\104\1\uffff\1\u015d\1\104\2\u0106\2\u010a"+
-        "\1\u0161\1\104\2\uffff\1\104\1\uffff\1\104\1\uffff\1\u0165\1\uffff"+
-        "\2\104\1\u0168\5\104\1\uffff\1\u016e\1\u016f\1\104\1\u0171\1\u0172"+
-        "\1\104\1\u0174\1\uffff\1\u0175\1\u0176\1\uffff\1\u0177\1\u0178\1"+
-        "\104\1\uffff\2\104\1\uffff\1\104\1\u0106\1\u010a\1\uffff\2\104\1"+
-        "\u017f\1\uffff\1\104\1\u0181\1\uffff\1\104\1\u0183\1\u0184\1\u0185"+
-        "\1\104\2\uffff\1\104\2\uffff\1\104\5\uffff\1\104\1\u018a\4\104\1"+
-        "\uffff\1\104\1\uffff\1\104\3\uffff\1\u0191\1\u0192\2\104\1\uffff"+
-        "\1\104\1\u0196\2\104\1\u0199\1\u019a\2\uffff\1\104\1\u019c\1\u019d"+
-        "\1\uffff\1\104\1\u019f\2\uffff\1\u01a0\2\uffff\1\u01a1\3\uffff";
+        "\1\u00af\4\uffff\1\u00b1\13\uffff\3\104\5\uffff\1\104\2\uffff\5"+
+        "\104\2\uffff\6\104\1\u00c3\1\104\1\u00c5\1\104\2\uffff\5\104\1\u008c"+
+        "\1\uffff\2\u008f\2\uffff\1\u00d2\2\uffff\1\u0093\2\uffff\6\104\1"+
+        "\uffff\3\104\1\u00dc\7\104\1\u00e5\1\u00e6\1\u00e8\1\uffff\1\104"+
+        "\4\uffff\7\104\1\u00f1\1\104\1\u00f3\1\104\1\u00f5\5\104\1\uffff"+
+        "\1\104\1\uffff\6\104\1\u0106\2\u008f\1\u00d2\1\uffff\1\u010a\1\uffff"+
+        "\3\104\1\u010e\5\104\1\uffff\10\104\2\uffff\1\104\1\uffff\10\104"+
+        "\1\uffff\1\u0125\1\uffff\1\u0126\1\uffff\2\104\1\u012a\5\104\1\u0130"+
+        "\1\104\1\u0132\2\104\2\u0106\2\uffff\1\u008f\2\u010a\1\uffff\2\104"+
+        "\1\u013b\1\uffff\1\u013c\1\104\1\u013e\1\104\1\u0140\1\104\1\u0142"+
+        "\10\104\1\u014b\4\104\1\u0151\1\104\2\uffff\1\104\1\u0154\1\104"+
+        "\1\uffff\2\104\1\u0158\2\104\1\uffff\1\104\1\uffff\1\u015d\1\104"+
+        "\2\u0106\2\u010a\1\u0161\1\104\2\uffff\1\104\1\uffff\1\104\1\uffff"+
+        "\1\u0165\1\uffff\2\104\1\u0168\5\104\1\uffff\1\u016e\1\u016f\1\104"+
+        "\1\u0171\1\u0172\1\uffff\1\u0173\1\u0174\1\uffff\1\u0175\1\u0176"+
+        "\1\104\1\uffff\1\104\1\u0179\2\104\1\uffff\1\104\1\u0106\1\u010a"+
+        "\1\uffff\2\104\1\u017f\1\uffff\1\104\1\u0181\1\uffff\1\104\1\u0183"+
+        "\1\u0184\1\u0185\1\104\2\uffff\1\104\6\uffff\2\104\1\uffff\1\u018a"+
+        "\4\104\1\uffff\1\104\1\uffff\1\104\3\uffff\1\u0191\1\u0192\2\104"+
+        "\1\uffff\1\104\1\u0196\2\104\1\u0199\1\u019a\2\uffff\1\u019b\1\104"+
+        "\1\u019d\1\uffff\1\104\1\u019f\3\uffff\1\u01a0\1\uffff\1\u01a1\3"+
+        "\uffff";
     static final String DFA47_eofS =
         "\u01a2\uffff";
     static final String DFA47_minS =
         "\1\0\2\75\1\174\1\46\1\141\1\156\4\141\1\145\3\75\1\76\2\56\2\52"+
-        "\1\uffff\1\164\5\uffff\1\145\1\146\2\uffff\1\150\1\145\1\72\1\117"+
-        "\1\114\2\105\2\106\2\uffff\1\141\1\150\1\166\2\0\1\u00ab\2\60\1"+
+        "\1\uffff\1\164\5\uffff\1\145\2\uffff\1\150\1\145\1\72\1\117\1\114"+
+        "\2\105\2\106\1\146\2\uffff\1\141\1\150\1\166\2\0\1\u00ab\2\60\1"+
         "\44\1\uffff\1\0\13\uffff\1\145\1\156\1\141\1\163\1\uffff\1\156\1"+
         "\44\1\145\1\154\1\162\1\164\2\143\1\142\1\151\1\154\1\146\1\44\1"+
         "\163\4\uffff\1\76\4\uffff\1\56\13\uffff\1\160\1\151\1\141\5\uffff"+
-        "\1\147\1\160\1\163\1\44\2\uffff\1\162\1\160\1\165\1\167\1\154\2"+
-        "\uffff\1\122\1\104\1\123\1\106\1\120\1\124\1\44\2\uffff\1\163\1"+
-        "\164\1\143\1\151\1\145\1\47\1\uffff\2\0\2\uffff\1\0\2\uffff\1\60"+
-        "\2\uffff\1\141\2\163\1\145\1\143\1\157\1\uffff\1\154\1\141\1\163"+
-        "\1\44\1\150\1\162\1\141\1\153\1\154\1\143\1\166\3\44\1\uffff\1\160"+
-        "\4\uffff\1\145\2\164\1\151\1\165\1\157\1\164\1\uffff\1\157\1\145"+
-        "\1\44\1\145\1\44\1\154\1\44\1\106\1\105\1\117\1\101\1\105\1\uffff"+
-        "\2\145\1\150\1\154\1\162\4\0\1\12\1\0\1\uffff\2\164\1\163\1\44\1"+
-        "\150\1\164\1\144\1\154\1\145\1\uffff\2\157\1\155\1\141\1\151\2\145"+
-        "\1\141\2\uffff\1\165\1\uffff\1\141\1\162\1\143\1\151\1\163\2\162"+
-        "\1\141\1\167\1\157\1\uffff\1\44\1\uffff\1\44\1\uffff\1\117\1\106"+
-        "\1\44\3\122\1\44\1\156\1\44\1\145\1\162\2\0\2\uffff\3\0\1\uffff"+
+        "\1\147\2\uffff\1\162\1\160\1\165\1\167\1\154\2\uffff\1\122\1\104"+
+        "\1\123\1\106\1\120\1\124\1\44\1\163\1\44\1\160\2\uffff\1\163\1\164"+
+        "\1\143\1\151\1\145\1\47\1\uffff\2\0\2\uffff\1\0\2\uffff\1\60\2\uffff"+
+        "\1\141\2\163\1\145\1\143\1\157\1\uffff\1\154\1\141\1\163\1\44\1"+
+        "\150\1\162\1\141\1\153\1\154\1\143\1\166\3\44\1\uffff\1\160\4\uffff"+
+        "\1\145\2\164\1\151\1\165\1\157\1\145\1\44\1\145\1\44\1\154\1\44"+
+        "\1\106\1\105\1\117\1\101\1\105\1\uffff\1\164\1\uffff\1\157\2\145"+
+        "\1\150\1\154\1\162\4\0\1\12\1\0\1\uffff\2\164\1\163\1\44\1\150\1"+
+        "\164\1\144\1\154\1\145\1\uffff\2\157\1\155\1\141\1\151\2\145\1\141"+
+        "\2\uffff\1\165\1\uffff\1\141\1\162\1\143\1\151\1\163\1\162\1\167"+
+        "\1\157\1\uffff\1\44\1\uffff\1\44\1\uffff\1\117\1\106\1\44\3\122"+
+        "\1\141\1\162\1\44\1\156\1\44\1\145\1\162\2\0\2\uffff\3\0\1\uffff"+
         "\1\145\1\162\1\44\1\uffff\1\44\1\141\1\44\1\154\1\44\1\144\1\44"+
         "\1\145\1\147\2\143\1\163\1\164\1\154\1\164\1\44\1\150\1\143\1\164"+
-        "\1\156\1\164\1\156\1\44\1\146\2\uffff\1\122\1\44\1\106\1\uffff\1"+
-        "\105\1\101\1\44\1\uffff\1\144\1\uffff\1\44\1\151\4\0\1\44\1\165"+
+        "\1\156\1\44\1\146\2\uffff\1\122\1\44\1\106\1\uffff\1\105\1\101\1"+
+        "\44\1\156\1\164\1\uffff\1\144\1\uffff\1\44\1\151\4\0\1\44\1\165"+
         "\2\uffff\1\164\1\uffff\1\171\1\uffff\1\44\1\uffff\1\164\1\145\1"+
-        "\44\1\164\1\163\1\145\1\164\1\143\1\uffff\2\44\1\145\2\44\1\143"+
-        "\1\44\1\uffff\2\44\1\uffff\2\44\1\124\1\uffff\1\163\1\151\1\uffff"+
+        "\44\1\164\1\163\1\145\1\164\1\143\1\uffff\2\44\1\145\2\44\1\uffff"+
+        "\2\44\1\uffff\2\44\1\124\1\uffff\1\143\1\44\1\163\1\151\1\uffff"+
         "\1\144\2\0\1\uffff\1\143\1\151\1\44\1\uffff\1\145\1\44\1\uffff\1"+
-        "\145\3\44\1\150\2\uffff\1\162\2\uffff\1\145\5\uffff\1\117\1\44\1"+
+        "\145\3\44\1\150\2\uffff\1\162\6\uffff\1\117\1\145\1\uffff\1\44\1"+
         "\157\1\145\1\164\1\157\1\uffff\1\162\1\uffff\1\144\3\uffff\2\44"+
-        "\1\157\1\122\1\uffff\1\156\1\44\1\157\1\156\2\44\2\uffff\1\146\2"+
-        "\44\1\uffff\1\162\1\44\2\uffff\1\44\2\uffff\1\44\3\uffff";
+        "\1\122\1\157\1\uffff\1\156\1\44\1\157\1\156\2\44\2\uffff\1\44\1"+
+        "\146\1\44\1\uffff\1\162\1\44\3\uffff\1\44\1\uffff\1\44\3\uffff";
     static final String DFA47_maxS =
         "\1\uffff\1\76\1\75\1\174\1\46\1\162\1\163\1\157\1\145\1\165\1\141"+
         "\1\157\2\75\2\76\1\56\1\72\1\56\1\57\1\uffff\1\167\5\uffff\1\145"+
-        "\1\156\2\uffff\1\171\1\165\1\72\1\117\1\116\2\105\2\106\2\uffff"+
+        "\2\uffff\1\171\1\165\1\72\1\117\1\116\2\105\2\106\1\156\2\uffff"+
         "\1\170\1\150\1\166\2\uffff\1\u00ab\1\170\1\154\1\172\1\uffff\1\uffff"+
         "\13\uffff\1\145\1\156\1\141\1\164\1\uffff\1\156\1\172\1\156\1\154"+
         "\1\162\1\164\1\143\1\162\1\142\1\157\1\162\1\146\1\172\1\163\4\uffff"+
-        "\1\76\4\uffff\1\56\13\uffff\1\160\1\151\1\141\5\uffff\1\164\1\160"+
-        "\1\163\1\172\2\uffff\1\162\1\160\1\171\1\167\1\154\2\uffff\1\122"+
-        "\1\104\1\123\1\106\1\120\1\124\1\172\2\uffff\1\163\1\164\1\143\1"+
-        "\151\1\145\1\47\1\uffff\2\uffff\2\uffff\1\uffff\2\uffff\1\154\2"+
-        "\uffff\1\141\2\163\1\145\1\143\1\157\1\uffff\1\154\1\141\1\163\1"+
-        "\172\1\150\1\162\1\141\1\153\1\154\1\164\1\166\3\172\1\uffff\1\160"+
-        "\4\uffff\1\145\2\164\1\151\1\165\1\157\1\164\1\uffff\1\157\1\145"+
-        "\1\172\1\145\1\172\1\154\1\172\1\111\1\105\1\117\1\101\1\105\1\uffff"+
-        "\2\145\1\150\1\154\1\162\4\uffff\1\12\1\uffff\1\uffff\2\164\1\163"+
-        "\1\172\1\150\1\164\1\144\1\154\1\145\1\uffff\2\157\1\155\1\141\1"+
-        "\151\2\145\1\141\2\uffff\1\165\1\uffff\1\141\1\162\1\143\1\151\1"+
-        "\163\2\162\1\141\1\167\1\157\1\uffff\1\172\1\uffff\1\172\1\uffff"+
-        "\1\117\1\106\1\172\3\122\1\172\1\156\1\172\1\145\1\162\2\uffff\2"+
+        "\1\76\4\uffff\1\56\13\uffff\1\160\1\151\1\141\5\uffff\1\164\2\uffff"+
+        "\1\162\1\160\1\171\1\167\1\154\2\uffff\1\122\1\104\1\123\1\106\1"+
+        "\120\1\124\1\172\1\163\1\172\1\160\2\uffff\1\163\1\164\1\143\1\151"+
+        "\1\145\1\47\1\uffff\2\uffff\2\uffff\1\uffff\2\uffff\1\154\2\uffff"+
+        "\1\141\2\163\1\145\1\143\1\157\1\uffff\1\154\1\141\1\163\1\172\1"+
+        "\150\1\162\1\141\1\153\1\154\1\164\1\166\3\172\1\uffff\1\160\4\uffff"+
+        "\1\145\2\164\1\151\1\165\1\157\1\145\1\172\1\145\1\172\1\154\1\172"+
+        "\1\111\1\105\1\117\1\101\1\105\1\uffff\1\164\1\uffff\1\157\2\145"+
+        "\1\150\1\154\1\162\4\uffff\1\12\1\uffff\1\uffff\2\164\1\163\1\172"+
+        "\1\150\1\164\1\144\1\154\1\145\1\uffff\2\157\1\155\1\141\1\151\2"+
+        "\145\1\141\2\uffff\1\165\1\uffff\1\141\1\162\1\143\1\151\1\163\1"+
+        "\162\1\167\1\157\1\uffff\1\172\1\uffff\1\172\1\uffff\1\117\1\106"+
+        "\1\172\3\122\1\141\1\162\1\172\1\156\1\172\1\145\1\162\2\uffff\2"+
         "\uffff\3\uffff\1\uffff\1\145\1\162\1\172\1\uffff\1\172\1\141\1\172"+
         "\1\154\1\172\1\144\1\172\1\145\1\147\2\143\1\163\1\164\1\154\1\164"+
-        "\1\172\1\150\1\143\1\164\1\156\1\164\1\156\1\172\1\146\2\uffff\1"+
-        "\122\1\172\1\106\1\uffff\1\105\1\101\1\172\1\uffff\1\163\1\uffff"+
+        "\1\172\1\150\1\143\1\164\1\156\1\172\1\146\2\uffff\1\122\1\172\1"+
+        "\106\1\uffff\1\105\1\101\1\172\1\156\1\164\1\uffff\1\163\1\uffff"+
         "\1\172\1\151\4\uffff\1\172\1\165\2\uffff\1\164\1\uffff\1\171\1\uffff"+
         "\1\172\1\uffff\1\164\1\145\1\172\1\164\1\163\1\145\1\164\1\143\1"+
-        "\uffff\2\172\1\145\2\172\1\143\1\172\1\uffff\2\172\1\uffff\2\172"+
-        "\1\124\1\uffff\1\163\1\151\1\uffff\1\144\2\uffff\1\uffff\1\143\1"+
-        "\151\1\172\1\uffff\1\145\1\172\1\uffff\1\145\3\172\1\150\2\uffff"+
-        "\1\162\2\uffff\1\145\5\uffff\1\117\1\172\1\157\1\145\1\164\1\157"+
-        "\1\uffff\1\162\1\uffff\1\144\3\uffff\2\172\1\157\1\122\1\uffff\1"+
-        "\156\1\172\1\157\1\156\2\172\2\uffff\1\146\2\172\1\uffff\1\162\1"+
-        "\172\2\uffff\1\172\2\uffff\1\172\3\uffff";
+        "\uffff\2\172\1\145\2\172\1\uffff\2\172\1\uffff\2\172\1\124\1\uffff"+
+        "\1\143\1\172\1\163\1\151\1\uffff\1\144\2\uffff\1\uffff\1\143\1\151"+
+        "\1\172\1\uffff\1\145\1\172\1\uffff\1\145\3\172\1\150\2\uffff\1\162"+
+        "\6\uffff\1\117\1\145\1\uffff\1\172\1\157\1\145\1\164\1\157\1\uffff"+
+        "\1\162\1\uffff\1\144\3\uffff\2\172\1\122\1\157\1\uffff\1\156\1\172"+
+        "\1\157\1\156\2\172\2\uffff\1\172\1\146\1\172\1\uffff\1\162\1\172"+
+        "\3\uffff\1\172\1\uffff\1\172\3\uffff";
     static final String DFA47_acceptS =
-        "\24\uffff\1\37\1\uffff\1\52\1\53\1\54\1\55\1\57\2\uffff\1\63\1\64"+
-        "\11\uffff\1\103\1\104\11\uffff\1\152\1\uffff\1\156\1\157\1\16\1"+
-        "\26\1\1\1\2\1\32\1\3\1\137\1\4\1\126\4\uffff\1\152\16\uffff\1\17"+
+        "\24\uffff\1\37\1\uffff\1\52\1\53\1\54\1\55\1\57\1\uffff\1\62\1\63"+
+        "\12\uffff\1\102\1\103\11\uffff\1\152\1\uffff\1\156\1\157\1\16\1"+
+        "\26\1\1\1\2\1\32\1\3\1\137\1\4\1\125\4\uffff\1\152\16\uffff\1\17"+
         "\1\40\1\20\1\22\1\uffff\1\27\1\23\1\24\1\33\1\uffff\1\41\1\30\1"+
-        "\135\1\124\1\35\1\136\1\34\1\154\1\155\1\36\1\37\3\uffff\1\52\1"+
-        "\53\1\54\1\55\1\57\4\uffff\1\63\1\64\5\uffff\1\114\1\67\7\uffff"+
-        "\1\103\1\104\6\uffff\1\153\2\uffff\1\143\1\144\1\uffff\1\147\1\150"+
-        "\1\uffff\1\151\1\156\6\uffff\1\102\16\uffff\1\113\1\uffff\1\31\1"+
-        "\21\1\134\1\25\7\uffff\1\105\14\uffff\1\75\13\uffff\1\145\11\uffff"+
-        "\1\56\10\uffff\1\14\1\42\1\uffff\1\15\12\uffff\1\121\1\uffff\1\66"+
-        "\1\uffff\1\70\15\uffff\1\142\1\141\3\uffff\1\146\3\uffff\1\111\30"+
-        "\uffff\1\140\1\115\3\uffff\1\77\3\uffff\1\106\1\uffff\1\130\10\uffff"+
-        "\1\45\1\123\1\uffff\1\7\1\uffff\1\44\1\uffff\1\13\10\uffff\1\43"+
-        "\7\uffff\1\117\2\uffff\1\76\3\uffff\1\74\2\uffff\1\112\3\uffff\1"+
-        "\5\3\uffff\1\10\2\uffff\1\46\5\uffff\1\107\1\127\1\uffff\1\120\1"+
-        "\62\1\uffff\1\65\1\116\1\71\1\100\1\72\6\uffff\1\122\1\uffff\1\51"+
-        "\1\uffff\1\61\1\50\1\110\4\uffff\1\125\6\uffff\1\133\1\60\3\uffff"+
-        "\1\132\2\uffff\1\11\1\47\1\uffff\1\73\1\131\1\uffff\1\6\1\101\1"+
+        "\135\1\123\1\35\1\136\1\34\1\154\1\155\1\36\1\37\3\uffff\1\52\1"+
+        "\53\1\54\1\55\1\57\1\uffff\1\62\1\63\5\uffff\1\113\1\66\12\uffff"+
+        "\1\102\1\103\6\uffff\1\153\2\uffff\1\143\1\144\1\uffff\1\147\1\150"+
+        "\1\uffff\1\151\1\156\6\uffff\1\101\16\uffff\1\112\1\uffff\1\31\1"+
+        "\21\1\134\1\25\21\uffff\1\74\1\uffff\1\104\14\uffff\1\145\11\uffff"+
+        "\1\56\10\uffff\1\14\1\42\1\uffff\1\15\10\uffff\1\120\1\uffff\1\65"+
+        "\1\uffff\1\67\17\uffff\1\142\1\141\3\uffff\1\146\3\uffff\1\110\26"+
+        "\uffff\1\140\1\114\3\uffff\1\76\5\uffff\1\105\1\uffff\1\130\10\uffff"+
+        "\1\45\1\122\1\uffff\1\7\1\uffff\1\44\1\uffff\1\13\10\uffff\1\43"+
+        "\5\uffff\1\116\2\uffff\1\75\3\uffff\1\73\4\uffff\1\111\3\uffff\1"+
+        "\5\3\uffff\1\10\2\uffff\1\46\5\uffff\1\106\1\127\1\uffff\1\117\1"+
+        "\64\1\115\1\70\1\77\1\71\2\uffff\1\126\5\uffff\1\121\1\uffff\1\51"+
+        "\1\uffff\1\61\1\50\1\107\4\uffff\1\124\6\uffff\1\133\1\60\3\uffff"+
+        "\1\132\2\uffff\1\11\1\47\1\72\1\uffff\1\131\1\uffff\1\6\1\100\1"+
         "\12";
     static final String DFA47_specialS =
-        "\1\2\54\uffff\1\3\1\23\5\uffff\1\20\130\uffff\1\16\1\6\2\uffff\1"+
-        "\11\72\uffff\1\17\1\22\1\10\1\26\1\uffff\1\0\61\uffff\1\4\1\14\2"+
-        "\uffff\1\12\1\5\1\24\53\uffff\1\13\1\15\1\1\1\25\46\uffff\1\7\1"+
-        "\21\101\uffff}>";
+        "\1\15\54\uffff\1\2\1\23\5\uffff\1\20\130\uffff\1\16\1\5\2\uffff"+
+        "\1\10\72\uffff\1\17\1\22\1\7\1\26\1\uffff\1\0\61\uffff\1\3\1\13"+
+        "\2\uffff\1\11\1\4\1\24\53\uffff\1\12\1\14\1\1\1\25\46\uffff\1\6"+
+        "\1\21\101\uffff}>";
     static final String[] DFA47_transitionS = {
             "\11\66\2\65\2\66\1\65\22\66\1\65\1\14\1\64\1\66\1\63\1\24\1"+
-            "\4\1\55\1\36\1\35\1\22\1\2\1\32\1\17\1\20\1\23\1\60\11\61\1"+
-            "\41\1\26\1\16\1\1\1\15\1\21\1\31\1\46\1\44\2\63\1\43\1\42\2"+
-            "\63\1\47\11\63\1\45\7\63\1\51\1\66\1\50\1\62\1\63\1\66\1\6\1"+
-            "\63\1\5\1\13\1\52\1\7\2\63\1\34\3\63\1\10\1\40\1\54\1\11\1\63"+
-            "\1\33\1\25\1\37\1\63\1\12\1\53\3\63\1\27\1\3\1\30\55\66\1\57"+
+            "\4\1\55\1\35\1\34\1\22\1\2\1\32\1\17\1\20\1\23\1\60\11\61\1"+
+            "\40\1\26\1\16\1\1\1\15\1\21\1\31\1\45\1\43\2\63\1\42\1\41\2"+
+            "\63\1\46\11\63\1\44\7\63\1\51\1\66\1\50\1\62\1\63\1\66\1\6\1"+
+            "\63\1\5\1\13\1\52\1\7\2\63\1\47\3\63\1\10\1\37\1\54\1\11\1\63"+
+            "\1\33\1\25\1\36\1\63\1\12\1\53\3\63\1\27\1\3\1\30\55\66\1\57"+
             "\17\66\1\56\uff44\66",
             "\1\67\1\70",
             "\1\72",
@@ -4861,18 +4862,18 @@ public class InternalMacroLexer extends Lexer {
             "",
             "",
             "\1\160",
-            "\1\163\6\uffff\1\161\1\162",
             "",
             "",
-            "\1\166\11\uffff\1\170\6\uffff\1\167",
-            "\1\171\17\uffff\1\172",
-            "\1\173",
+            "\1\163\11\uffff\1\165\6\uffff\1\164",
+            "\1\166\17\uffff\1\167",
+            "\1\170",
+            "\1\172",
+            "\1\174\1\uffff\1\173",
             "\1\175",
-            "\1\177\1\uffff\1\176",
+            "\1\176",
+            "\1\177",
             "\1\u0080",
-            "\1\u0081",
-            "\1\u0082",
-            "\1\u0083",
+            "\1\u0082\6\uffff\1\u0083\1\u0081",
             "",
             "",
             "\1\u0088\12\uffff\1\u0086\13\uffff\1\u0087",
@@ -4952,27 +4953,27 @@ public class InternalMacroLexer extends Lexer {
             "",
             "",
             "\1\u00b5\14\uffff\1\u00b6",
+            "",
+            "",
             "\1\u00b7",
             "\1\u00b8",
-            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
-            "\32\104",
-            "",
-            "",
-            "\1\u00ba",
+            "\1\u00ba\3\uffff\1\u00b9",
             "\1\u00bb",
-            "\1\u00bd\3\uffff\1\u00bc",
+            "\1\u00bc",
+            "",
+            "",
+            "\1\u00bd",
             "\1\u00be",
             "\1\u00bf",
-            "",
-            "",
             "\1\u00c0",
             "\1\u00c1",
             "\1\u00c2",
-            "\1\u00c3",
-            "\1\u00c4",
-            "\1\u00c5",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
+            "\1\u00c4",
+            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
+            "\32\104",
+            "\1\u00c6",
             "",
             "",
             "\1\u00c7",
@@ -5032,23 +5033,23 @@ public class InternalMacroLexer extends Lexer {
             "\1\u00ee",
             "\1\u00ef",
             "\1\u00f0",
-            "",
-            "\1\u00f1",
+            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
+            "\32\104",
             "\1\u00f2",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
             "\1\u00f4",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
-            "\1\u00f6",
-            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
-            "\32\104",
-            "\1\u00f8\2\uffff\1\u00f9",
+            "\1\u00f6\2\uffff\1\u00f7",
+            "\1\u00f8",
+            "\1\u00f9",
             "\1\u00fa",
             "\1\u00fb",
-            "\1\u00fc",
-            "\1\u00fd",
             "",
+            "\1\u00fc",
+            "",
+            "\1\u00fd",
             "\1\u00fe",
             "\1\u00ff",
             "\1\u0100",
@@ -5092,8 +5093,6 @@ public class InternalMacroLexer extends Lexer {
             "\1\u0122",
             "\1\u0123",
             "\1\u0124",
-            "\1\u0125",
-            "\1\u0126",
             "",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
@@ -5101,10 +5100,12 @@ public class InternalMacroLexer extends Lexer {
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
             "",
-            "\1\u0129",
-            "\1\u012a",
-            "\1\104\13\uffff\12\104\7\uffff\10\104\1\u012b\21\104\4\uffff"+
+            "\1\u0127",
+            "\1\u0128",
+            "\1\104\13\uffff\12\104\7\uffff\10\104\1\u0129\21\104\4\uffff"+
             "\1\104\1\uffff\32\104",
+            "\1\u012b",
+            "\1\u012c",
             "\1\u012d",
             "\1\u012e",
             "\1\u012f",
@@ -5153,22 +5154,22 @@ public class InternalMacroLexer extends Lexer {
             "\1\u014d",
             "\1\u014e",
             "\1\u014f",
-            "\1\u0150",
-            "\1\u0151",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
-            "\22\104\1\u0152\7\104",
-            "\1\u0154",
+            "\22\104\1\u0150\7\104",
+            "\1\u0152",
             "",
             "",
+            "\1\u0153",
+            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
+            "\32\104",
             "\1\u0155",
-            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
-            "\32\104",
-            "\1\u0157",
             "",
-            "\1\u0158",
-            "\1\u0159",
+            "\1\u0156",
+            "\1\u0157",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
+            "\1\u0159",
+            "\1\u015a",
             "",
             "\1\u015b\16\uffff\1\u015c",
             "",
@@ -5210,9 +5211,6 @@ public class InternalMacroLexer extends Lexer {
             "\32\104",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
-            "\1\u0173",
-            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
-            "\32\104",
             "",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
@@ -5223,8 +5221,11 @@ public class InternalMacroLexer extends Lexer {
             "\32\104",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
-            "\1\u0179",
+            "\1\u0177",
             "",
+            "\1\u0178",
+            "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
+            "\32\104",
             "\1\u017a",
             "\1\u017b",
             "",
@@ -5254,13 +5255,13 @@ public class InternalMacroLexer extends Lexer {
             "\1\u0187",
             "",
             "",
+            "",
+            "",
+            "",
+            "",
             "\1\u0188",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\u0189",
+            "",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
             "\1\u018b",
@@ -5292,9 +5293,9 @@ public class InternalMacroLexer extends Lexer {
             "\32\104",
             "",
             "",
-            "\1\u019b",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
+            "\1\u019c",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
             "",
@@ -5303,9 +5304,9 @@ public class InternalMacroLexer extends Lexer {
             "\32\104",
             "",
             "",
+            "",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
-            "",
             "",
             "\1\104\13\uffff\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff"+
             "\32\104",
@@ -5377,6 +5378,156 @@ public class InternalMacroLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
+                        int LA47_45 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_45=='\'') ) {s = 139;}
+
+                        else if ( ((LA47_45>='\u0000' && LA47_45<='&')||(LA47_45>='(' && LA47_45<='\uFFFF')) ) {s = 140;}
+
+                        else s = 54;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA47_259 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_259=='\'') ) {s = 309;}
+
+                        else if ( ((LA47_259>='\u0000' && LA47_259<='&')||(LA47_259>='(' && LA47_259<='\u00AA')||(LA47_259>='\u00AC' && LA47_259<='\uFFFF')) ) {s = 310;}
+
+                        else if ( (LA47_259=='\u00AB') ) {s = 261;}
+
+                        else s = 262;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA47_264 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_264=='\'') ) {s = 311;}
+
+                        else if ( ((LA47_264>='\u0000' && LA47_264<='&')||(LA47_264>='(' && LA47_264<='\u00AA')||(LA47_264>='\u00AC' && LA47_264<='\uFFFF')) ) {s = 312;}
+
+                        else if ( (LA47_264=='\u00AB') ) {s = 210;}
+
+                        else s = 266;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA47_142 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_142=='\'') ) {s = 141;}
+
+                        else if ( (LA47_142=='\u00AB') ) {s = 144;}
+
+                        else if ( ((LA47_142>='\u0000' && LA47_142<='&')||(LA47_142>='(' && LA47_142<='\u00AA')||(LA47_142>='\u00AC' && LA47_142<='\uFFFF')) ) {s = 142;}
+
+                        else s = 143;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA47_351 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_351=='\'') ) {s = 259;}
+
+                        else if ( ((LA47_351>='\u0000' && LA47_351<='&')||(LA47_351>='(' && LA47_351<='\u00AA')||(LA47_351>='\u00AC' && LA47_351<='\uFFFF')) ) {s = 260;}
+
+                        else if ( (LA47_351=='\u00AB') ) {s = 261;}
+
+                        else s = 262;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA47_206 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_206=='\'') ) {s = 141;}
+
+                        else if ( ((LA47_206>='\u0000' && LA47_206<='&')||(LA47_206>='(' && LA47_206<='\u00AA')||(LA47_206>='\u00AC' && LA47_206<='\uFFFF')) ) {s = 142;}
+
+                        else if ( (LA47_206=='\u00AB') ) {s = 144;}
+
+                        else s = 143;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA47_145 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA47_145>='\u0000' && LA47_145<='\t')||(LA47_145>='\u000B' && LA47_145<='\f')||(LA47_145>='\u000E' && LA47_145<='\uFFFF')) ) {s = 207;}
+
+                        else if ( (LA47_145=='\r') ) {s = 208;}
+
+                        else if ( (LA47_145=='\n') ) {s = 209;}
+
+                        else s = 210;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
+                        int LA47_263 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_263=='\'') ) {s = 141;}
+
+                        else if ( (LA47_263=='\u00AB') ) {s = 144;}
+
+                        else if ( ((LA47_263>='\u0000' && LA47_263<='&')||(LA47_263>='(' && LA47_263<='\u00AA')||(LA47_263>='\u00AC' && LA47_263<='\uFFFF')) ) {s = 142;}
+
+                        else s = 143;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA47_309 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA47_309>='\u0000' && LA47_309<='&')||(LA47_309>='(' && LA47_309<='\u00AA')||(LA47_309>='\u00AC' && LA47_309<='\uFFFF')) ) {s = 351;}
+
+                        else if ( (LA47_309=='\u00AB') ) {s = 261;}
+
+                        else s = 262;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 11 : 
+                        int LA47_260 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_260=='\'') ) {s = 259;}
+
+                        else if ( ((LA47_260>='\u0000' && LA47_260<='&')||(LA47_260>='(' && LA47_260<='\u00AA')||(LA47_260>='\u00AC' && LA47_260<='\uFFFF')) ) {s = 260;}
+
+                        else if ( (LA47_260=='\u00AB') ) {s = 261;}
+
+                        else s = 262;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 12 : 
+                        int LA47_310 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA47_310=='\'') ) {s = 259;}
+
+                        else if ( ((LA47_310>='\u0000' && LA47_310<='&')||(LA47_310>='(' && LA47_310<='\u00AA')||(LA47_310>='\u00AC' && LA47_310<='\uFFFF')) ) {s = 260;}
+
+                        else if ( (LA47_310=='\u00AB') ) {s = 261;}
+
+                        else s = 262;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 13 : 
                         int LA47_0 = input.LA(1);
 
                         s = -1;
@@ -5434,29 +5585,29 @@ public class InternalMacroLexer extends Lexer {
 
                         else if ( (LA47_0=='r') ) {s = 27;}
 
-                        else if ( (LA47_0=='i') ) {s = 28;}
+                        else if ( (LA47_0==')') ) {s = 28;}
 
-                        else if ( (LA47_0==')') ) {s = 29;}
+                        else if ( (LA47_0=='(') ) {s = 29;}
 
-                        else if ( (LA47_0=='(') ) {s = 30;}
+                        else if ( (LA47_0=='t') ) {s = 30;}
 
-                        else if ( (LA47_0=='t') ) {s = 31;}
+                        else if ( (LA47_0=='n') ) {s = 31;}
 
-                        else if ( (LA47_0=='n') ) {s = 32;}
+                        else if ( (LA47_0==':') ) {s = 32;}
 
-                        else if ( (LA47_0==':') ) {s = 33;}
+                        else if ( (LA47_0=='F') ) {s = 33;}
 
-                        else if ( (LA47_0=='F') ) {s = 34;}
+                        else if ( (LA47_0=='E') ) {s = 34;}
 
-                        else if ( (LA47_0=='E') ) {s = 35;}
+                        else if ( (LA47_0=='B') ) {s = 35;}
 
-                        else if ( (LA47_0=='B') ) {s = 36;}
+                        else if ( (LA47_0=='S') ) {s = 36;}
 
-                        else if ( (LA47_0=='S') ) {s = 37;}
+                        else if ( (LA47_0=='A') ) {s = 37;}
 
-                        else if ( (LA47_0=='A') ) {s = 38;}
+                        else if ( (LA47_0=='I') ) {s = 38;}
 
-                        else if ( (LA47_0=='I') ) {s = 39;}
+                        else if ( (LA47_0=='i') ) {s = 39;}
 
                         else if ( (LA47_0==']') ) {s = 40;}
 
@@ -5487,156 +5638,6 @@ public class InternalMacroLexer extends Lexer {
                         else if ( ((LA47_0>='\t' && LA47_0<='\n')||LA47_0=='\r'||LA47_0==' ') ) {s = 53;}
 
                         else if ( ((LA47_0>='\u0000' && LA47_0<='\b')||(LA47_0>='\u000B' && LA47_0<='\f')||(LA47_0>='\u000E' && LA47_0<='\u001F')||LA47_0=='#'||LA47_0=='\\'||LA47_0=='`'||(LA47_0>='~' && LA47_0<='\u00AA')||(LA47_0>='\u00AC' && LA47_0<='\u00BA')||(LA47_0>='\u00BC' && LA47_0<='\uFFFF')) ) {s = 54;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA47_45 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_45=='\'') ) {s = 139;}
-
-                        else if ( ((LA47_45>='\u0000' && LA47_45<='&')||(LA47_45>='(' && LA47_45<='\uFFFF')) ) {s = 140;}
-
-                        else s = 54;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA47_259 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_259=='\'') ) {s = 309;}
-
-                        else if ( ((LA47_259>='\u0000' && LA47_259<='&')||(LA47_259>='(' && LA47_259<='\u00AA')||(LA47_259>='\u00AC' && LA47_259<='\uFFFF')) ) {s = 310;}
-
-                        else if ( (LA47_259=='\u00AB') ) {s = 261;}
-
-                        else s = 262;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA47_264 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_264=='\'') ) {s = 311;}
-
-                        else if ( ((LA47_264>='\u0000' && LA47_264<='&')||(LA47_264>='(' && LA47_264<='\u00AA')||(LA47_264>='\u00AC' && LA47_264<='\uFFFF')) ) {s = 312;}
-
-                        else if ( (LA47_264=='\u00AB') ) {s = 210;}
-
-                        else s = 266;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA47_142 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_142=='\'') ) {s = 141;}
-
-                        else if ( (LA47_142=='\u00AB') ) {s = 144;}
-
-                        else if ( ((LA47_142>='\u0000' && LA47_142<='&')||(LA47_142>='(' && LA47_142<='\u00AA')||(LA47_142>='\u00AC' && LA47_142<='\uFFFF')) ) {s = 142;}
-
-                        else s = 143;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA47_351 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_351=='\'') ) {s = 259;}
-
-                        else if ( ((LA47_351>='\u0000' && LA47_351<='&')||(LA47_351>='(' && LA47_351<='\u00AA')||(LA47_351>='\u00AC' && LA47_351<='\uFFFF')) ) {s = 260;}
-
-                        else if ( (LA47_351=='\u00AB') ) {s = 261;}
-
-                        else s = 262;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
-                        int LA47_206 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_206=='\'') ) {s = 141;}
-
-                        else if ( ((LA47_206>='\u0000' && LA47_206<='&')||(LA47_206>='(' && LA47_206<='\u00AA')||(LA47_206>='\u00AC' && LA47_206<='\uFFFF')) ) {s = 142;}
-
-                        else if ( (LA47_206=='\u00AB') ) {s = 144;}
-
-                        else s = 143;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA47_145 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA47_145>='\u0000' && LA47_145<='\t')||(LA47_145>='\u000B' && LA47_145<='\f')||(LA47_145>='\u000E' && LA47_145<='\uFFFF')) ) {s = 207;}
-
-                        else if ( (LA47_145=='\r') ) {s = 208;}
-
-                        else if ( (LA47_145=='\n') ) {s = 209;}
-
-                        else s = 210;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
-                        int LA47_263 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_263=='\'') ) {s = 141;}
-
-                        else if ( (LA47_263=='\u00AB') ) {s = 144;}
-
-                        else if ( ((LA47_263>='\u0000' && LA47_263<='&')||(LA47_263>='(' && LA47_263<='\u00AA')||(LA47_263>='\u00AC' && LA47_263<='\uFFFF')) ) {s = 142;}
-
-                        else s = 143;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 11 : 
-                        int LA47_309 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA47_309>='\u0000' && LA47_309<='&')||(LA47_309>='(' && LA47_309<='\u00AA')||(LA47_309>='\u00AC' && LA47_309<='\uFFFF')) ) {s = 351;}
-
-                        else if ( (LA47_309=='\u00AB') ) {s = 261;}
-
-                        else s = 262;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 12 : 
-                        int LA47_260 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_260=='\'') ) {s = 259;}
-
-                        else if ( ((LA47_260>='\u0000' && LA47_260<='&')||(LA47_260>='(' && LA47_260<='\u00AA')||(LA47_260>='\u00AC' && LA47_260<='\uFFFF')) ) {s = 260;}
-
-                        else if ( (LA47_260=='\u00AB') ) {s = 261;}
-
-                        else s = 262;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 13 : 
-                        int LA47_310 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_310=='\'') ) {s = 259;}
-
-                        else if ( ((LA47_310>='\u0000' && LA47_310<='&')||(LA47_310>='(' && LA47_310<='\u00AA')||(LA47_310>='\u00AC' && LA47_310<='\uFFFF')) ) {s = 260;}
-
-                        else if ( (LA47_310=='\u00AB') ) {s = 261;}
-
-                        else s = 262;
 
                         if ( s>=0 ) return s;
                         break;
