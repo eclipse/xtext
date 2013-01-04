@@ -39,7 +39,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
+public class «getGenProposalProvider().toSimpleName()» extends «superClassName.toSimpleName()» {
 		
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
