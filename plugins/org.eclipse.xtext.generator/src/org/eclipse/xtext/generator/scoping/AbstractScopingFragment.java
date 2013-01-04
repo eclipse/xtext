@@ -112,10 +112,10 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	protected String getScopeProviderSuperClassName(Grammar grammar) {
 		Grammar superGrammar = getSuperGrammar(grammar);
-		if(superGrammar != null) {
-			return getSuperClassName(getScopeProviderName(superGrammar, getNaming()), getDefaultScopeProviderSuperClassName());
-		}
-		return getDefaultScopeProviderSuperClassName();
+		if(isInheritImplementation() && superGrammar != null) 
+			return getScopeProviderName(superGrammar, getNaming());
+		else 
+			return getDefaultScopeProviderSuperClassName();
 	}
 
 	protected String getDefaultScopeProviderSuperClassName() {

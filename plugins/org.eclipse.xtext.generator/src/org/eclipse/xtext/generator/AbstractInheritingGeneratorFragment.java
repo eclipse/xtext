@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.xtext.Grammar;
+import static org.eclipse.xtext.generator.IInheriting.Util.*;
 
 /**
  * A generator fragment that generates code which inherits form the generated code
@@ -26,7 +27,8 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 	public void setInheritImplementation(boolean isInheritImplementation) {
 		this.isInheritImplementation = isInheritImplementation;
 	}
-
+	
+	@Deprecated
 	public String getSuperClassName(String superClassName, String defaultName) {
 		if (isInheritImplementation && isClassExists(superClassName))
 			return superClassName;
@@ -34,6 +36,7 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 			return defaultName;
 	}
 
+	@Deprecated
 	protected boolean isClassExists(String className) {
 		try {
 			Class.forName(className);
@@ -44,6 +47,6 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 	}
 
 	protected Grammar getSuperGrammar(Grammar grammar) {
-		return grammar.getUsedGrammars().isEmpty() ? null : grammar.getUsedGrammars().get(0);
+		return getNonTerminalsSuperGrammar(grammar);
 	}
 }

@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
 
 import static org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.generator.IInheriting
+import static extension org.eclipse.xtext.generator.IInheriting$Util.*
 
 /**
  * @author Jan Koehnlein
@@ -23,8 +23,6 @@ import org.eclipse.xtext.generator.IInheriting
 class ValidatorNaming extends Naming {
 	
 	@Inject Grammar grammar
-	
-	@Inject extension IInheriting$Util 
 	
 	def getValidatorName(Grammar g) {
 		'''«g.basePackageRuntime».validation.«getName(g)»Validator'''.toString
@@ -35,12 +33,11 @@ class ValidatorNaming extends Naming {
 	}
 	
 	def getValidatorSuperClassName(boolean isInheritImplementation) {
-		if(isInheritImplementation) {
-			val inherited = grammar.getInheritedClassName[validatorName]
-			if(inherited != null)
-				return inherited
-		}
-		'org.eclipse.xtext.validation.AbstractDeclarativeValidator'
+		val superGrammar = grammar.nonTerminalsSuperGrammar
+		if(isInheritImplementation && superGrammar != null) 
+			superGrammar.validatorName 
+		else
+			'org.eclipse.xtext.validation.AbstractDeclarativeValidator'
 	}
 		
 	def String getGeneratedEPackageName(EPackage pack) {
