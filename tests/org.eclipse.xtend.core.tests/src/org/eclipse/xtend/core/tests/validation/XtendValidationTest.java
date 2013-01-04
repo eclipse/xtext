@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.validation;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
+import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
@@ -872,12 +873,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testImportUnused() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X {}");
-		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_UNUSED);
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 	
 	@Test public void testImportUnused_1() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private java.util.List sb }");
-		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_UNUSED);
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 	
 	@Test public void testImportUnused_2() throws Exception {
@@ -902,22 +903,22 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_DUPLICATE);
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_DUPLICATE);
 	}
 	
 	@Test public void testImportCollision() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.awt.List class X { private List sb def foo(){sb}}");
-		helper.assertError(clazz.eContainer(), XTEND_IMPORT, IMPORT_COLLISION);
+		helper.assertError(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_COLLISION);
 	}
 	
 	@Test public void testImportWildcard() throws Exception {
 		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_WILDCARD_DEPRECATED);
 	}
 	
 	@Test public void testImportConflictWithTypeInSameFile() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class List {}");
-		helper.assertError(clazz.eContainer(), XTEND_IMPORT, IMPORT_CONFLICT);
+		helper.assertError(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_CONFLICT);
 	}
 	
 	@Test public void testImportNoConflictWithTypeInSameFile() throws Exception {

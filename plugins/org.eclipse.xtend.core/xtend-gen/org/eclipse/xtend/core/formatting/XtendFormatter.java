@@ -21,7 +21,6 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -217,7 +216,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     }
   }
   
-  protected void _format(final XtendImport imp, final FormattableDocument document) {
+  protected void _format(final XImportDeclaration imp, final FormattableDocument document) {
     ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(imp, "import");
     final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
@@ -939,9 +938,6 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (clazz instanceof XFunctionTypeRef) {
       _format((XFunctionTypeRef)clazz, format);
       return;
-    } else if (clazz instanceof XtendImport) {
-      _format((XtendImport)clazz, format);
-      return;
     } else if (clazz instanceof XtendParameter) {
       _format((XtendParameter)clazz, format);
       return;
@@ -1004,6 +1000,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (clazz instanceof XExpression) {
       _format((XExpression)clazz, format);
+      return;
+    } else if (clazz instanceof XImportDeclaration) {
+      _format((XImportDeclaration)clazz, format);
       return;
     } else if (clazz instanceof XImportSection) {
       _format((XImportSection)clazz, format);

@@ -341,10 +341,10 @@ public class RewritableImportSection {
 		List<XImportDeclaration> sortMe = newArrayList(declarations);
 		Collections.sort(sortMe, new Comparator<XImportDeclaration>() {
 			public int compare(XImportDeclaration o1, XImportDeclaration o2) {
-				return o1.getImportedType().getIdentifier().compareTo(o2.getImportedType().getIdentifier());
+				// TODO handle NPEs
+				return o1.getImportedTypeName().compareTo(o2.getImportedTypeName());
 			}
 		});
 		return sortMe;
 	}
-
 }

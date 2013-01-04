@@ -1181,28 +1181,32 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		final Map<String, JvmType> importedNames = newHashMap();
 		
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
-			JvmType importedType = imp.getImportedType();
-			if (importedType != null && !importedType.eIsProxy()) {
-				Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
-				if (map.containsKey(importedType)) {
-					warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
-							IssueCodes.IMPORT_DUPLICATE);
-				} else {
-					map.put(importedType, imp);
-					if (!imp.isStatic()) {
-						JvmType currentType = importedType;
-						String currentSuffix = currentType.getSimpleName();
-						JvmType collidingImport = importedNames.put(currentSuffix, importedType);
-						if(collidingImport != null)
-							error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-									+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
-						while (currentType.eContainer() instanceof JvmType) {
-							currentType = (JvmType) currentType.eContainer();
-							currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
-							JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
-							if(collidingImport2 != null)
+			if (imp.getImportedNamespace() != null) { 
+				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+			} else {
+				JvmType importedType = imp.getImportedType();
+				if (importedType != null && !importedType.eIsProxy()) {
+					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
+					if (map.containsKey(importedType)) {
+						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
+								IssueCodes.IMPORT_DUPLICATE);
+					} else {
+						map.put(importedType, imp);
+						if (!imp.isStatic()) {
+							JvmType currentType = importedType;
+							String currentSuffix = currentType.getSimpleName();
+							JvmType collidingImport = importedNames.put(currentSuffix, importedType);
+							if(collidingImport != null)
 								error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-										+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+										+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+							while (currentType.eContainer() instanceof JvmType) {
+								currentType = (JvmType) currentType.eContainer();
+								currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
+								JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
+								if(collidingImport2 != null)
+									error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+											+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+							}
 						}
 					}
 				}

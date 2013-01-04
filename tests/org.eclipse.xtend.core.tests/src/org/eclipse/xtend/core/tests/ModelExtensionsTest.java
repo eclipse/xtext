@@ -11,7 +11,8 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendImport;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XtypeFactory;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -23,6 +24,9 @@ public class ModelExtensionsTest extends AbstractXtendTestCase {
 	
 	@Inject
 	protected XtendFactory factory;
+
+	@Inject
+	protected XtypeFactory xtypeFactory;
 	
 	@Test public void testXtendClass() throws Exception {
 		XtendFile file = file("package foo class Bar extends Object implements java.io.Serializable {}");
@@ -40,7 +44,7 @@ public class ModelExtensionsTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testXtendImport() throws Exception {
-		XtendImport xtendImport = factory.createXtendImport();
+		XImportDeclaration xtendImport = xtypeFactory.createXImportDeclaration();
 		assertFalse(xtendImport.isWildcard());
 		assertNull(xtendImport.getImportedTypeName());
 		xtendImport.setImportedNamespace("");
