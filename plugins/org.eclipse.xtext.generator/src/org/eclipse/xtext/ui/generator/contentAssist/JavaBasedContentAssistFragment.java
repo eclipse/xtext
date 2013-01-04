@@ -58,7 +58,19 @@ public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorF
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(isInheritImplementation());
+		return Collections.<Object>singletonList(getSuperClassName(grammar));
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected String getSuperClassName(Grammar grammar) {
+		Grammar superGrammar = getSuperGrammar(grammar);
+		if(isInheritImplementation() && superGrammar != null)
+			return getProposalProviderClassName(superGrammar);
+		else 
+			return "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";
+			
 	}
 
 	/**

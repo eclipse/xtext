@@ -15,12 +15,12 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(Boolean inherit) FOR Grammar»
-	«EXPAND GenProposalProvider(inherit)»
-	«EXPAND ProposalProvider(inherit)»
+«DEFINE generate(String superClassName) FOR Grammar»
+	«EXPAND GenProposalProvider(superClassName)»
+	«EXPAND ProposalProvider(superClassName)»
 «ENDDEFINE»
 
-«DEFINE GenProposalProvider(Boolean inherit) FOR Grammar»
+«DEFINE GenProposalProvider(String superClassName) FOR Grammar»
 «FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
 /*
 «fileHeader()»
@@ -29,11 +29,7 @@ package «getGenProposalProvider().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-«IF inherit && usedGrammars.size == 1-»
-import «usedGrammars.first().getProposalProvider()»;
-«ELSE-»
-import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
-«ENDIF-»
+import «superClassName»;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
@@ -43,7 +39,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && usedGrammars.size == 1-»«usedGrammars.first().getProposalProvider().toSimpleName()»«ELSE-»AbstractJavaBasedContentProposalProvider«ENDIF-» {
+public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
 		
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
@@ -87,7 +83,7 @@ public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && us
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE ProposalProvider(Boolean inherit) FOR Grammar»
+«DEFINE ProposalProvider(String superClassName) FOR Grammar»
 «FILE getProposalProvider().asPath()+".java" SRC_UI-»
 /*
 «fileHeader()»
@@ -123,8 +119,8 @@ public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvi
 «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(Boolean inherit) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String superClassName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(Boolean inherit) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String superClassName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(Boolean inherit) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String superClassName) FOR Grammar»«ENDDEFINE»

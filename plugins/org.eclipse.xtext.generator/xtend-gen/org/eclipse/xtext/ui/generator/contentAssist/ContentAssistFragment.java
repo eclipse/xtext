@@ -23,12 +23,14 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IInheriting;
+import org.eclipse.xtext.generator.IInheriting.Util;
 import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -42,7 +44,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Inject
   private Grammar grammar;
   
-  private boolean _inheritImplementation;
+  private boolean _inheritImplementation = true;
   
   public boolean isInheritImplementation() {
     return this._inheritImplementation;
@@ -66,10 +68,10 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Named(value = "fileHeader")
   private String fileHeader;
   
-  public String getProposalProviderName() {
-    String _basePackageUi = this._naming.basePackageUi(this.grammar);
+  public String getProposalProviderName(final Grammar grammar) {
+    String _basePackageUi = this._naming.basePackageUi(grammar);
     String _plus = (_basePackageUi + ".contentassist.");
-    String _name = GrammarUtil.getName(this.grammar);
+    String _name = GrammarUtil.getName(grammar);
     String _plus_1 = (_plus + _name);
     return (_plus_1 + "ProposalProvider");
   }
@@ -89,7 +91,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       final BindFactory bindFactory = _bindFactory;
       boolean _isGenerateStub = this.isGenerateStub();
       if (_isGenerateStub) {
-        String _proposalProviderName = this.getProposalProviderName();
+        String _proposalProviderName = this.getProposalProviderName(grammar);
         bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _proposalProviderName);
       } else {
         String _genProposalProviderName = this.getGenProposalProviderName();
@@ -120,16 +122,40 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   public String[] getExportedPackagesUi(final Grammar grammar) {
-    String _proposalProviderName = this.getProposalProviderName();
+    String _proposalProviderName = this.getProposalProviderName(grammar);
     String _packageName = this._naming.packageName(_proposalProviderName);
     List<String> _singletonList = Collections.<String>singletonList(_packageName);
     return ((String[])Conversions.unwrapArray(_singletonList, String.class));
   }
   
+  public String getSuperClassName() {
+    String _xblockexpression = null;
+    {
+      final Grammar superGrammar = Util.getNonTerminalsSuperGrammar(this.grammar);
+      String _xifexpression = null;
+      boolean _and = false;
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
+        _and = false;
+      } else {
+        boolean _notEquals = ObjectExtensions.operator_notEquals(superGrammar, null);
+        _and = (_isInheritImplementation && _notEquals);
+      }
+      if (_and) {
+        String _proposalProviderName = this.getProposalProviderName(superGrammar);
+        _xifexpression = _proposalProviderName;
+      } else {
+        _xifexpression = "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
   public void generate(final Xtend2ExecutionContext ctx) {
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      String _proposalProviderName = this.getProposalProviderName();
+      String _proposalProviderName = this.getProposalProviderName(this.grammar);
       String _asPath = this._naming.asPath(_proposalProviderName);
       String _plus = (_asPath + ".xtend");
       StringConcatenation _builder = new StringConcatenation();
@@ -142,7 +168,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       _builder.append("*/");
       _builder.newLine();
       _builder.append("package ");
-      String _proposalProviderName_1 = this.getProposalProviderName();
+      String _proposalProviderName_1 = this.getProposalProviderName(this.grammar);
       String _packageName = this._naming.packageName(_proposalProviderName_1);
       _builder.append(_packageName, "");
       _builder.newLineIfNotEmpty();
@@ -161,7 +187,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       _builder.append("*/");
       _builder.newLine();
       _builder.append("class ");
-      String _proposalProviderName_2 = this.getProposalProviderName();
+      String _proposalProviderName_2 = this.getProposalProviderName(this.grammar);
       String _simpleName = this._naming.toSimpleName(_proposalProviderName_2);
       _builder.append(_simpleName, "");
       _builder.append(" extends ");
@@ -176,8 +202,8 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     }
     XpandExecutionContext _xpandExecutionContext = ctx.getXpandExecutionContext();
     XpandFacade _create = XpandFacade.create(_xpandExecutionContext);
-    boolean _isInheritImplementation = this.isInheritImplementation();
-    List<Object> _singletonList = Collections.<Object>singletonList(Boolean.valueOf(_isInheritImplementation));
+    String _superClassName = this.getSuperClassName();
+    List<Object> _singletonList = Collections.<Object>singletonList(_superClassName);
     _create.evaluate2(
       "org::eclipse::xtext::ui::generator::contentAssist::JavaBasedContentAssistFragment::GenProposalProvider", 
       this.grammar, _singletonList);

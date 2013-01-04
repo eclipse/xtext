@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static java.util.Collections.*
 import static org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.generator.IInheriting$Util.*
 import org.eclipse.xtext.generator.IStubGenerating
 
 /**
@@ -33,13 +34,13 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 
 	@Inject Grammar grammar
 
-	@Property boolean inheritImplementation
+	@Property boolean inheritImplementation = true
 
 	@Property boolean generateStub = true;
 	
 	@Inject@Named("fileHeader") String fileHeader
 	
-	def String getProposalProviderName() {
+	def String getProposalProviderName(Grammar grammar) {
 		return grammar.basePackageUi + ".contentassist." + getName(grammar) + "ProposalProvider"
 	}
 	
@@ -52,7 +53,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 		if(generateStub)
 			bindFactory
 				.addTypeToType('org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider',
-						proposalProviderName)
+						grammar.proposalProviderName)
 		else 
 			bindFactory
 				.addTypeToType('org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider',
@@ -72,30 +73,39 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	}
 	
 	override getExportedPackagesUi(Grammar grammar) {
-		singletonList(proposalProviderName.packageName)
+		singletonList(grammar.proposalProviderName.packageName)
+	}
+	
+	def getSuperClassName() {
+		val superGrammar = grammar.nonTerminalsSuperGrammar
+		if(inheritImplementation && superGrammar != null)
+			superGrammar.proposalProviderName
+		else
+			"org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider"
+				
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
 		if(generateStub) {
-			ctx.writeFile(Generator::SRC_UI, proposalProviderName.asPath + '.xtend', '''
+			ctx.writeFile(Generator::SRC_UI, grammar.proposalProviderName.asPath + '.xtend', '''
 				/*
 				 «fileHeader»
 				 */
-				package «proposalProviderName.packageName»
+				package «grammar.proposalProviderName.packageName»
 				
 				import «genProposalProviderName»
 				
 				/**
 				 * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
 				 */
-				class «proposalProviderName.toSimpleName» extends «genProposalProviderName.toSimpleName» {
+				class «grammar.proposalProviderName.toSimpleName» extends «genProposalProviderName.toSimpleName» {
 				}
 			''')
 		}
 		XpandFacade::create(ctx.xpandExecutionContext).evaluate2(
 			"org::eclipse::xtext::ui::generator::contentAssist::JavaBasedContentAssistFragment::GenProposalProvider", 
 			grammar, 
-			<Object>singletonList(inheritImplementation)
+			<Object>singletonList(superClassName)
 		);
 	}
 	

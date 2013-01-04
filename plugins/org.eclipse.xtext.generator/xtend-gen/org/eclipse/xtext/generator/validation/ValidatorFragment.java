@@ -25,6 +25,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IInheriting;
+import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.validation.ValidatorNaming;
@@ -40,11 +41,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @since 2.4
  */
 @SuppressWarnings("all")
-public class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting {
+public class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
   @Inject
   private ValidatorNaming _validatorNaming;
   
-  private boolean _inheritImplementation;
+  private boolean _inheritImplementation = true;
   
   public boolean isInheritImplementation() {
     return this._inheritImplementation;
@@ -54,14 +55,14 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     this._inheritImplementation = inheritImplementation;
   }
   
-  private boolean _generateXtendStub;
+  private boolean _generateStub = true;
   
-  public boolean isGenerateXtendStub() {
-    return this._generateXtendStub;
+  public boolean isGenerateStub() {
+    return this._generateStub;
   }
   
-  public void setGenerateXtendStub(final boolean generateXtendStub) {
-    this._generateXtendStub = generateXtendStub;
+  public void setGenerateStub(final boolean generateStub) {
+    this._generateStub = generateStub;
   }
   
   @Inject
@@ -88,8 +89,8 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     {
       BindFactory _bindFactory = new BindFactory();
       final BindFactory bindFactory = _bindFactory;
-      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-      if (_isGenerateXtendStub) {
+      boolean _isGenerateStub = this.isGenerateStub();
+      if (_isGenerateStub) {
         String _validatorName = this._validatorNaming.getValidatorName(grammar);
         String _validatorName_1 = this._validatorNaming.getValidatorName(grammar);
         bindFactory.addTypeToTypeEagerSingleton(_validatorName, _validatorName_1);
@@ -218,8 +219,8 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("}");
     _builder.newLine();
     ctx.writeFile(Generator.SRC_GEN, _plus, _builder);
-    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-    if (_isGenerateXtendStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       String _validatorName = this._validatorNaming.getValidatorName(this.grammar);
       String _asPath_1 = this._validatorNaming.asPath(_validatorName);
       String _plus_1 = (_asPath_1 + ".xtend");

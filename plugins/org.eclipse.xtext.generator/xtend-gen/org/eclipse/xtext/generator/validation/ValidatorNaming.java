@@ -14,7 +14,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.IInheriting.Util;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -26,9 +25,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class ValidatorNaming extends Naming {
   @Inject
   private Grammar grammar;
-  
-  @Inject
-  private Util _iInheriting$Util;
   
   public String getValidatorName(final Grammar g) {
     StringConcatenation _builder = new StringConcatenation();
@@ -57,20 +53,22 @@ public class ValidatorNaming extends Naming {
   public String getValidatorSuperClassName(final boolean isInheritImplementation) {
     String _xblockexpression = null;
     {
-      if (isInheritImplementation) {
-        final Function1<Grammar,String> _function = new Function1<Grammar,String>() {
-            public String apply(final Grammar it) {
-              String _validatorName = ValidatorNaming.this.getValidatorName(it);
-              return _validatorName;
-            }
-          };
-        final String inherited = this._iInheriting$Util.getInheritedClassName(this.grammar, _function);
-        boolean _notEquals = ObjectExtensions.operator_notEquals(inherited, null);
-        if (_notEquals) {
-          return inherited;
-        }
+      final Grammar superGrammar = Util.getNonTerminalsSuperGrammar(this.grammar);
+      String _xifexpression = null;
+      boolean _and = false;
+      if (!isInheritImplementation) {
+        _and = false;
+      } else {
+        boolean _notEquals = ObjectExtensions.operator_notEquals(superGrammar, null);
+        _and = (isInheritImplementation && _notEquals);
       }
-      _xblockexpression = ("org.eclipse.xtext.validation.AbstractDeclarativeValidator");
+      if (_and) {
+        String _validatorName = this.getValidatorName(superGrammar);
+        _xifexpression = _validatorName;
+      } else {
+        _xifexpression = "org.eclipse.xtext.validation.AbstractDeclarativeValidator";
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

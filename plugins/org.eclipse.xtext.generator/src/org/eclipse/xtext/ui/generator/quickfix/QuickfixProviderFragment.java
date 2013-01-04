@@ -40,9 +40,11 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	 * @since 2.4
 	 */
 	public String getQuickfixProviderSuperClassName(Grammar g) {
-		if(isInheritImplementation && !g.getUsedGrammars().isEmpty()) 
-			return getQuickfixProviderName(g.getUsedGrammars().get(0), getNaming());
-		return "org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider";
+		Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(g);
+		if(isInheritImplementation && superGrammar != null) 
+			return getQuickfixProviderName(superGrammar, getNaming());
+		else
+			return "org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider";
 	}
 	
 	@Override

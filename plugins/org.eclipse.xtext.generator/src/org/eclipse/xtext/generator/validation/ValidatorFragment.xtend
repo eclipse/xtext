@@ -10,17 +10,18 @@ package org.eclipse.xtext.generator.validation
 
 import com.google.inject.Inject
 import java.util.Set
+import javax.inject.Named
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.IInheriting
+import org.eclipse.xtext.generator.IStubGenerating
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static org.eclipse.xtext.GrammarUtil.*
-import javax.inject.Named
 
 /**
  * Generates an Xtend-based model validator.
@@ -28,13 +29,13 @@ import javax.inject.Named
  * @author Jan Koehnlein
  * @since 2.4
  */
-class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting {
+class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
 	
 	@Inject extension ValidatorNaming
 	
-	@Property boolean inheritImplementation
+	@Property boolean inheritImplementation = true
 
-	@Property boolean generateXtendStub
+	@Property boolean generateStub = true
 
 	@Inject Grammar grammar
 	
@@ -48,7 +49,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting {
 	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 			val bindFactory = new BindFactory()
-		if(generateXtendStub) {
+		if(generateStub) {
 			bindFactory.addTypeToTypeEagerSingleton(
 					grammar.validatorName,
 					grammar.validatorName)
@@ -93,7 +94,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting {
 				}
 			}
 		''')
-		if(generateXtendStub) {
+		if(generateStub) {
 			ctx.writeFile(Generator::SRC, grammar.validatorName.asPath + '.xtend', '''
 				/*
 				 «fileHeader»
