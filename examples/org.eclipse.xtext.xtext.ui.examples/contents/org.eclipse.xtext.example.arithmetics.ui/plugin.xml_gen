@@ -151,28 +151,28 @@
     </extension>
 
 
-    <!-- marker definitions for org.eclipse.xtext.example.arithmetics.Arithmetics -->
-    <extension
-            id="arithmetics.check.fast"
-            name="Arithmetics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="arithmetics.check.normal"
-            name="Arithmetics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="arithmetics.check.expensive"
-            name="Arithmetics Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
-        <persistent value="true"/>
-    </extension>
+	<!-- marker definitions for org.eclipse.xtext.example.arithmetics.Arithmetics -->
+	<extension
+	        id="arithmetics.check.fast"
+	        name="Arithmetics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="arithmetics.check.normal"
+	        name="Arithmetics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="arithmetics.check.expensive"
+	        name="Arithmetics Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -235,5 +235,58 @@
             </attribute>
         </markerResolutionGenerator>
     </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.example.arithmetics.Arithmetics.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtext.example.arithmetics.Arithmetics.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.example.arithmetics.Arithmetics"
+	        class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.example.arithmetics.Arithmetics.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.example.arithmetics.ui.keyword_Arithmetics"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtext.example.arithmetics.Arithmetics.compare.contentViewers"
+            class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="calc">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtext.example.arithmetics.Arithmetics.compare.contentMergeViewers"
+            class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="calc" label="Arithmetics Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtext.example.arithmetics.Arithmetics.editors.documentProviders"
+            class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="calc">
+    </provider>
+  </extension>
 
 </plugin>
