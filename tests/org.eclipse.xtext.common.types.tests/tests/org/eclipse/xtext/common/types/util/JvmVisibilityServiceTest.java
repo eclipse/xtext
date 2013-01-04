@@ -29,6 +29,7 @@ import com.google.common.base.Predicate;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class JvmVisibilityServiceTest extends Assert {
 	private ClasspathTypeProvider typesProvider = new ClasspathTypeProviderFactory(getClass().getClassLoader())
 			.createTypeProvider();
@@ -79,7 +80,17 @@ public class JvmVisibilityServiceTest extends Assert {
 	protected VisibilityService createVisibilityService() {
 		return new VisibilityService();
 	}
-
+	
+	@Test public void testSetup() {
+		assertNotNull(superRef);
+		assertNotNull(subRef);
+		assertNotNull(subRefOtherPackage);
+		assertNotNull(privateField);
+		assertNotNull(protectedField);
+		assertNotNull(publicField);
+		assertNotNull(packagePrivateField);
+	}
+	
 	@Test public void testNoContext() throws Exception {
 		assertFalse(provider.isVisible(privateField, null));
 		assertFalse(provider.isVisible(protectedField, null));
