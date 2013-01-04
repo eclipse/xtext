@@ -57,6 +57,9 @@ import com.google.inject.Provider;
  */
 public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
 	
+	public static final QualifiedName JAVA_LANG = QualifiedName.create("java","lang");
+	public static final QualifiedName XBASE_LIB = QualifiedName.create("org","eclipse","xtext","xbase","lib");
+
 	@Inject private IJvmModelAssociations associations;
 	@Inject private IResourceScopeCache cache;
 	@Inject private IQualifiedNameProvider qualifiedNameProvider;
@@ -67,6 +70,10 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		return qualifiedNameProvider;
 	}
 
+	public IQualifiedNameConverter getQualifiedNameConverter() {
+		return qualifiedNameConverter;
+	}
+	
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
@@ -167,7 +174,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	
 	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
 		return newArrayList(
-				new ImportNormalizer(QualifiedName.create("java","lang"), true, ignoreCase));
+				new ImportNormalizer(JAVA_LANG, true, false),
+				new ImportNormalizer(XBASE_LIB, true, false));
 	}
 	
 	protected ImportScope createImportScope(IScope parent, List<ImportNormalizer> namespaceResolvers, ISelectable importFrom, EClass type, boolean ignoreCase) {
@@ -212,7 +220,10 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		if(importSection != null) {
 			for (XImportDeclaration imp: importSection.getImportDeclarations()) {
 				if (!imp.isStatic()) {
-					ImportNormalizer resolver = createImportedNamespaceResolver(imp.getImportedTypeName(), ignoreCase);
+					String value = imp.getImportedNamespace();
+					if(value == null)
+						value = imp.getImportedTypeName();
+					ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
 					if (resolver != null)
 						importedNamespaceResolvers.add(resolver);
 				}
@@ -220,7 +231,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		}
 		return importedNamespaceResolvers;
 	}
-	
+
 
 	/**
 	 * Create a new {@link ImportNormalizer} for the given namespace.
@@ -278,4 +289,8 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 	public String getWildCard() {
 		return "*";
 	}
+	
+	
+
+
 }
