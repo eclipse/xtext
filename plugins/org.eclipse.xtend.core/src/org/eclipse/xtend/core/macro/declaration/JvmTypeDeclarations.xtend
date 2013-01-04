@@ -25,6 +25,8 @@ import org.eclipse.xtext.common.types.JvmOperation
 
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtext.common.types.JvmFormalParameter
 
 abstract class NamedElementJavaImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements NamedElement {
 	
@@ -92,7 +94,7 @@ class ClassDeclarationJavaImpl extends TypeDeclarationJavaImpl<JvmGenericType> i
 		delegate.isStatic
 	}
 	
-	override getFormalTypeParameters() {
+	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
@@ -104,7 +106,7 @@ class InterfaceDeclarationJavaImpl extends TypeDeclarationJavaImpl<JvmGenericTyp
 		delegate.superTypes.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getFormalTypeParameters() {
+	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
@@ -112,12 +114,8 @@ class InterfaceDeclarationJavaImpl extends TypeDeclarationJavaImpl<JvmGenericTyp
 
 abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> extends MemberDeclarationJavaImpl<T> implements ExecutableDeclaration {
 	
-	override getFormalTypeParameters() {
+	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
-	}
-	
-	override getType() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
 	override isVarArgs() {
@@ -126,6 +124,22 @@ abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> extends Me
 	
 	override getBody() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
+	override getParameters() {
+		delegate.parameters.map[compilationUnit.toParameterDeclaration(it)]
+	}
+	
+	override getExceptions() {
+		delegate.exceptions.map[compilationUnit.toTypeReference(it)]
+	}
+	
+}
+
+class ParameterDeclarationJavaImpl extends NamedElementJavaImpl<JvmFormalParameter> implements ParameterDeclaration {
+
+	override getType() {
+		compilationUnit.toTypeReference(delegate.parameterType)
 	}
 	
 }
@@ -148,13 +162,17 @@ class MethodDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmOperati
 		delegate.isStatic
 	}
 	
-	override getType() {
+	override getReturnType() {
 		compilationUnit.toTypeReference(delegate.returnType)
 	}
 	
 }
 
 class ConstructorDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmConstructor> implements ConstructorDeclaration {
+	
+	override getName() {
+		declaringType.simpleName
+	}
 	
 	override getBody() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
