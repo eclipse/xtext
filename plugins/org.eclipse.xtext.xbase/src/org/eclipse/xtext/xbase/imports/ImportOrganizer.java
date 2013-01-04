@@ -8,12 +8,10 @@
 package org.eclipse.xtext.xbase.imports;
 
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
@@ -54,20 +52,18 @@ public class ImportOrganizer {
 	private IUnresolvedTypeResolver unresolvedTypeResolver;
 	
 	public List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource) {
-		Set<JvmDeclaredType> locallyDeclaredTypes = newHashSet(config.getLocallyDefinedTypes(resource).values());
 		TypeUsageCollector typeUsageCollector = typeUsageCollectorProvider.get();
 		TypeUsages typeUsages = typeUsageCollector.collectTypeUsages(resource);
 		if(unresolvedTypeResolver != null) 
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
-		Set<String> implicitlyImportedPackages = config.getImplicitlyImportedPackages(resource);
 		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
 		List<ReplaceRegion> replaceRegions = newArrayList();
 		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
 			String text = entry.getKey();
 			JvmDeclaredType type = entry.getValue();
 			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			if(needsImport(type, text, locallyDeclaredTypes, implicitlyImportedPackages, nonOverridableTypesProvider, usages)) {
+			if(!type.getIdentifier().equals(text)) {
 				newImportSection.addImport(type);
 			}
 			for(TypeUsage usage: usages) {
@@ -84,11 +80,8 @@ public class ImportOrganizer {
 	}
 
 	protected boolean needsImport(JvmDeclaredType type, String name, 
-			Set<JvmDeclaredType> locallyDefinedTypes, Set<String> implicitlyImportedPackages, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
 		return !((type.getIdentifier().equals(name))
-			|| implicitlyImportedPackages.contains(type.getPackageName())
-			|| locallyDefinedTypes.contains(type)
 			|| isUsedInNonOverridableContextOnly(usages, nonOverridableTypesProvider, name));
 	}
 	

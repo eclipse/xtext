@@ -55,22 +55,24 @@ public class RewritableImportSection {
 		private ImportSectionRegionUtil regionUtil;
 		
 		public RewritableImportSection parse(XtextResource resource) {
-			RewritableImportSection reWritableImportSection = new RewritableImportSection(
+			RewritableImportSection rewritableImportSection = new RewritableImportSection(
 					resource,
 					importsConfiguration,
 					importsConfiguration.getImportSection(resource), 
 					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
 					regionUtil);
-			return reWritableImportSection;
+			return rewritableImportSection;
 		}
 
 		public RewritableImportSection createNewEmpty(XtextResource resource) {
-			RewritableImportSection reWritableImportSection = new RewritableImportSection(
+			RewritableImportSection rewritableImportSection = new RewritableImportSection(
 					resource,
 					importsConfiguration,
+					null,
 					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
 					regionUtil);
-			return reWritableImportSection;
+			rewritableImportSection.setSort(true);
+			return rewritableImportSection;
 		}
 	}
 
@@ -96,9 +98,18 @@ public class RewritableImportSection {
 	
 	private boolean isSort;
 
+	private Set<JvmDeclaredType> locallyDeclaredTypes;
+
+	private Set<String> implicitlyImportedPackages;
+
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
 			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil) {
-		this(resource, importsConfiguration, lineSeparator, regionUtil);
+		this.resource = resource;
+		this.importsConfiguration = importsConfiguration;
+		this.lineSeparator = lineSeparator;
+		this.regionUtil = regionUtil;
+		this.locallyDeclaredTypes = newHashSet(importsConfiguration.getLocallyDefinedTypes(resource).values());
+		this.implicitlyImportedPackages = importsConfiguration.getImplicitlyImportedPackages(resource);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
@@ -115,15 +126,6 @@ public class RewritableImportSection {
 		}
 	}
 
-	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
-			String lineSeparator, ImportSectionRegionUtil regionUtil) {
-		this.resource = resource;
-		this.importsConfiguration = importsConfiguration;
-		this.lineSeparator = lineSeparator;
-		this.regionUtil = regionUtil;
-		setSort(true);
-	}
-
 	public void setSort(boolean isSort) {
 		this.isSort = isSort;
 	}
@@ -133,13 +135,18 @@ public class RewritableImportSection {
 	}
 	
 	public boolean addImport(JvmDeclaredType type) {
-		if (plainImports.containsKey(type.getSimpleName()))
+		if (plainImports.containsKey(type.getSimpleName()) || !needsImport(type))
 			return false;
 		plainImports.put(type.getSimpleName(), type);
 		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
 		importDeclaration.setImportedType(type);
 		addedImportDeclarations.add(importDeclaration);
 		return true;
+	}
+	
+	protected boolean needsImport(JvmDeclaredType type)  {
+		return !(implicitlyImportedPackages.contains(type.getPackageName())
+			|| locallyDeclaredTypes.contains(type));
 	}
 	
 	public boolean removeImport(JvmDeclaredType type) {
