@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.scoping;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,6 +34,8 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
+		if(!(context instanceof XtendFile)) 
+			return Collections.emptyList();
 		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
 		if (!Strings.isEmpty(((XtendFile) context).getPackage())) {
 			importedNamespaceResolvers.add(new ImportNormalizer(getQualifiedNameConverter().toQualifiedName(((XtendFile) context)

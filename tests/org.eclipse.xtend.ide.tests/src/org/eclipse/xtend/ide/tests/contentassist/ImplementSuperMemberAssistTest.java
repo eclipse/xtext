@@ -70,7 +70,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 		RewritableImportSection importSection = appendable.getImportSection();
 		List<ReplaceRegion> imports = importSection.rewrite();
 		assertEquals(1, imports.size());
-		assertEquals("java.util.Collection", imports.get(0));
+		assertEquals("import java.util.Collection", imports.get(0).getText().trim());
 	}
 	
 	@Test public void testConstructor() throws Exception {

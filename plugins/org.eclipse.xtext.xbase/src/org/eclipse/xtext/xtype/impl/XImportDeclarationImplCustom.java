@@ -21,7 +21,7 @@ public class XImportDeclarationImplCustom extends XImportDeclarationImpl {
 
 	@Override
 	public boolean isWildcard() {
-		if (super.isWildcard()) 
+		if (isStatic()) 
 			return true;
 		if (importedNamespace == null)
 			return false;
