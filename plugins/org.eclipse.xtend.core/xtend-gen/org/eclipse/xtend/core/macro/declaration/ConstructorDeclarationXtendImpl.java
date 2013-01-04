@@ -14,12 +14,15 @@ import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -40,9 +43,9 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
   }
   
   public String getName() {
-    XtendConstructor _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    TypeDeclaration _declaringType = this.getDeclaringType();
+    String _simpleName = _declaringType.getSimpleName();
+    return _simpleName;
   }
   
   public boolean isVarArgs() {
@@ -58,22 +61,36 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
     return _exists;
   }
   
-  public TypeReference getType() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public List<TypeParameterDeclaration> getFormalTypeParameters() {
+  public List<TypeReference> getExceptions() {
     XtendConstructor _delegate = this.getDelegate();
-    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
-        public TypeParameterDeclaration apply(final JvmTypeParameter it) {
+    EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
+    final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+        public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = ConstructorDeclarationXtendImpl.this.getCompilationUnit();
-          TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return _typeParameterDeclaration;
+          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+          return _typeReference;
         }
       };
-    List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
     return _map;
+  }
+  
+  public List<ParameterDeclaration> getParameters() {
+    XtendConstructor _delegate = this.getDelegate();
+    EList<XtendParameter> _parameters = _delegate.getParameters();
+    final Function1<XtendParameter,ParameterDeclaration> _function = new Function1<XtendParameter,ParameterDeclaration>() {
+        public ParameterDeclaration apply(final XtendParameter it) {
+          CompilationUnitImpl _compilationUnit = ConstructorDeclarationXtendImpl.this.getCompilationUnit();
+          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
+          return _parameterDeclaration;
+        }
+      };
+    List<ParameterDeclaration> _map = ListExtensions.<XtendParameter, ParameterDeclaration>map(_parameters, _function);
+    return _map;
+  }
+  
+  public List<TypeParameterDeclaration> getTypeParameters() {
+    List<TypeParameterDeclaration> _emptyList = CollectionLiterals.<TypeParameterDeclaration>emptyList();
+    return _emptyList;
   }
 }

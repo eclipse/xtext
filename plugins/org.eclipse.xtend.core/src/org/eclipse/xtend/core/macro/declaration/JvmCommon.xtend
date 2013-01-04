@@ -12,90 +12,80 @@ import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.declaration.VoidType
-import org.eclipse.xtend.lib.macro.type.AnyTypeReference
-import org.eclipse.xtend.lib.macro.type.ArrayTypeReference
-import org.eclipse.xtend.lib.macro.type.ParameterizedTypeReference
 import org.eclipse.xtend.lib.macro.type.TypeReference
-import org.eclipse.xtend.lib.macro.type.UnknownTypeReference
-import org.eclipse.xtend.lib.macro.type.WildCardTypeReference
-import org.eclipse.xtext.common.types.JvmAnyTypeReference
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
-import org.eclipse.xtext.common.types.JvmLowerBound
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 abstract class AbstractDeclarationImpl<T> {
 	@Property T delegate
 	@Property CompilationUnitImpl compilationUnit
 }
 
-abstract class JvmTypeReferenceImpl<T extends JvmTypeReference> extends AbstractDeclarationImpl<T> implements TypeReference {
-	
-	@Property TypeReferenceSerializer serializer
+class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
 	
 	override getType() {
-		return null
+		return compilationUnit.toType(delegate.type)
 	}
 	
 	override toString() {
-		val appendable  =new StringBuilderBasedAppendable
-		serializer.serialize(delegate, compilationUnit.xtendFile, appendable)
-		return appendable.toString
+		return delegate.toString
 	}
-	
-}
 
-
-class ParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl<JvmParameterizedTypeReference> implements ParameterizedTypeReference {
-	
 	override getActualTypeArguments() {
-		delegate.arguments.map[compilationUnit.toTypeReference(it)]
+		delegate.typeArguments.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getType() {
-		compilationUnit.toType(delegate.type)
-	}
-	
-}
-
-class WildCardTypeReferenceImpl extends JvmTypeReferenceImpl<JvmWildcardTypeReference> implements WildCardTypeReference {
-	
-	override getLowerBound() {
-		// TODO null or AnyTypeReference?
-		compilationUnit.toTypeReference(delegate.constraints.filter(typeof(JvmLowerBound)).head?.typeReference) as ParameterizedTypeReference
-	}
-	
-	override getUpperBound() {
-		// TODO null or Object?
-		compilationUnit.toTypeReference(delegate.constraints.filter(typeof(JvmUpperBound)).head?.typeReference) as ParameterizedTypeReference
-	}
-	
-}
-
-class ArrayTypeReferenceImpl extends JvmTypeReferenceImpl<JvmGenericArrayTypeReference> implements ArrayTypeReference {
-	
-	override getDimensions() {
-		delegate.dimensions
-	}
-
-	override getComponentType() {
+	override getArrayComponentType() {
 		compilationUnit.toTypeReference(delegate.componentType)
 	}
 	
-}
-
-class AnyTypeReferenceImpl extends JvmTypeReferenceImpl<JvmAnyTypeReference> implements AnyTypeReference {
-}
-
-class UnknownTypeReferenceImpl extends JvmTypeReferenceImpl<JvmUnknownTypeReference> implements UnknownTypeReference {
+	override getLowerBound() {
+		compilationUnit.toTypeReference(delegate.lowerBoundSubstitute)
+	}
+	
+	override getPrimitiveIfWrapper() {
+		compilationUnit.toTypeReference(delegate.primitiveIfWrapperType)
+	}
+	
+	override getUpperBound() {
+		compilationUnit.toTypeReference(delegate.upperBoundSubstitute)
+	}
+	
+	override getWrapperIfPrimitive() {
+		compilationUnit.toTypeReference(delegate.wrapperTypeIfPrimitive)
+	}
+	
+	override isAnyType() {
+		delegate.any
+	}
+	
+	override isArray() {
+		delegate.array
+	}
+	
+	override isAssignableFrom(TypeReference typeReference) {
+		delegate.isAssignableFrom((typeReference as TypeReferenceImpl).delegate)
+	}
+	
+	override isPrimitive() {
+		delegate.primitive
+	}
+	
+	override isPrimitiveVoid() {
+		delegate.primitiveVoid
+	}
+	
+	override isWildCard() {
+		delegate.wildcard
+	}
+	
+	override isWrapper() {
+		delegate.wrapper
+	}
+	
 }
 
 // types

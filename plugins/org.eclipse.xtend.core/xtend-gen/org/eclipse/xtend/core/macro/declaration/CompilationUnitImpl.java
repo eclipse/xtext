@@ -16,8 +16,7 @@ import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.macro.declaration.AnyTypeReferenceImpl;
-import org.eclipse.xtend.core.macro.declaration.ArrayTypeReferenceImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.declaration.ClassDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.ClassDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.ConstructorDeclarationJavaImpl;
@@ -25,50 +24,46 @@ import org.eclipse.xtend.core.macro.declaration.ConstructorDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.FieldDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.FieldDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.InterfaceDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.MethodDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.MethodDeclarationXtendImpl;
-import org.eclipse.xtend.core.macro.declaration.ParameterizedTypeReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.ParameterDeclarationJavaImpl;
+import org.eclipse.xtend.core.macro.declaration.ParameterDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclartionImpl;
-import org.eclipse.xtend.core.macro.declaration.UnknownTypeReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
-import org.eclipse.xtend.core.macro.declaration.WildCardTypeReferenceImpl;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -76,6 +71,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
@@ -125,12 +124,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this._xtendFile;
   }
   
-  public void setXtendFile(final XtendFile xtendFile) {
-    this._xtendFile = xtendFile;
-  }
-  
   @Inject
-  private TypeReferenceSerializer serializer;
+  private CommonTypeComputationServices services;
   
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
     public Map<EObject,Object> apply() {
@@ -138,6 +133,17 @@ public class CompilationUnitImpl implements CompilationUnit {
       return _newHashMap;
     }
   }.apply();
+  
+  private OwnedConverter typeRefConverter;
+  
+  public void setXtendFile(final XtendFile xtendFile) {
+    this._xtendFile = xtendFile;
+    Resource _eResource = xtendFile.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
+    OwnedConverter _ownedConverter = new OwnedConverter(_standardTypeReferenceOwner);
+    this.typeRefConverter = _ownedConverter;
+  }
   
   private <IN extends EObject, OUT extends Object> OUT get(final IN in, final Function1<? super IN,? extends OUT> provider) {
     boolean _containsKey = this.identityCache.containsKey(in);
@@ -315,6 +321,24 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _get;
   }
   
+  public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
+    final Function1<JvmFormalParameter,ParameterDeclarationJavaImpl> _function = new Function1<JvmFormalParameter,ParameterDeclarationJavaImpl>() {
+        public ParameterDeclarationJavaImpl apply(final JvmFormalParameter it) {
+          ParameterDeclarationJavaImpl _parameterDeclarationJavaImpl = new ParameterDeclarationJavaImpl();
+          final Procedure1<ParameterDeclarationJavaImpl> _function = new Procedure1<ParameterDeclarationJavaImpl>() {
+              public void apply(final ParameterDeclarationJavaImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          ParameterDeclarationJavaImpl _doubleArrow = ObjectExtensions.<ParameterDeclarationJavaImpl>operator_doubleArrow(_parameterDeclarationJavaImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    ParameterDeclarationJavaImpl _get = this.<JvmFormalParameter, ParameterDeclarationJavaImpl>get(delegate, _function);
+    return _get;
+  }
+  
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
     final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
         public MemberDeclaration apply(final JvmMember it) {
@@ -381,95 +405,43 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
-    final Function1<JvmTypeReference,JvmTypeReferenceImpl<? extends JvmTypeReference>> _function = new Function1<JvmTypeReference,JvmTypeReferenceImpl<? extends JvmTypeReference>>() {
-        public JvmTypeReferenceImpl<? extends JvmTypeReference> apply(final JvmTypeReference it) {
-          JvmTypeReferenceImpl<? extends JvmTypeReference> _switchResult = null;
-          boolean _matched = false;
-          if (!_matched) {
-            if (delegate instanceof JvmParameterizedTypeReference) {
-              final JvmParameterizedTypeReference _jvmParameterizedTypeReference = (JvmParameterizedTypeReference)delegate;
-              _matched=true;
-              ParameterizedTypeReferenceImpl _parameterizedTypeReferenceImpl = new ParameterizedTypeReferenceImpl();
-              final Procedure1<ParameterizedTypeReferenceImpl> _function = new Procedure1<ParameterizedTypeReferenceImpl>() {
-                  public void apply(final ParameterizedTypeReferenceImpl it) {
-                    it.setDelegate(_jvmParameterizedTypeReference);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                    it.setSerializer(CompilationUnitImpl.this.serializer);
-                  }
-                };
-              ParameterizedTypeReferenceImpl _doubleArrow = ObjectExtensions.<ParameterizedTypeReferenceImpl>operator_doubleArrow(_parameterizedTypeReferenceImpl, _function);
-              _switchResult = _doubleArrow;
-            }
+    TypeReference _xblockexpression = null;
+    {
+      boolean _equals = ObjectExtensions.operator_equals(delegate, null);
+      if (_equals) {
+        return null;
+      }
+      final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+          public TypeReference apply(final JvmTypeReference it) {
+            LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
+            TypeReference _typeReference = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
+            return _typeReference;
           }
-          if (!_matched) {
-            if (delegate instanceof JvmWildcardTypeReference) {
-              final JvmWildcardTypeReference _jvmWildcardTypeReference = (JvmWildcardTypeReference)delegate;
-              _matched=true;
-              WildCardTypeReferenceImpl _wildCardTypeReferenceImpl = new WildCardTypeReferenceImpl();
-              final Procedure1<WildCardTypeReferenceImpl> _function = new Procedure1<WildCardTypeReferenceImpl>() {
-                  public void apply(final WildCardTypeReferenceImpl it) {
-                    it.setDelegate(_jvmWildcardTypeReference);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                    it.setSerializer(CompilationUnitImpl.this.serializer);
-                  }
-                };
-              WildCardTypeReferenceImpl _doubleArrow = ObjectExtensions.<WildCardTypeReferenceImpl>operator_doubleArrow(_wildCardTypeReferenceImpl, _function);
-              _switchResult = _doubleArrow;
-            }
+        };
+      TypeReference _get = this.<JvmTypeReference, TypeReference>get(delegate, _function);
+      _xblockexpression = (_get);
+    }
+    return _xblockexpression;
+  }
+  
+  public TypeReference toTypeReference(final LightweightTypeReference delegate) {
+    TypeReferenceImpl _xblockexpression = null;
+    {
+      boolean _equals = ObjectExtensions.operator_equals(delegate, null);
+      if (_equals) {
+        return null;
+      }
+      TypeReferenceImpl _typeReferenceImpl = new TypeReferenceImpl();
+      final Procedure1<TypeReferenceImpl> _function = new Procedure1<TypeReferenceImpl>() {
+          public void apply(final TypeReferenceImpl it) {
+            it.setDelegate(delegate);
+            it.setCompilationUnit(CompilationUnitImpl.this);
           }
-          if (!_matched) {
-            if (delegate instanceof JvmAnyTypeReference) {
-              final JvmAnyTypeReference _jvmAnyTypeReference = (JvmAnyTypeReference)delegate;
-              _matched=true;
-              AnyTypeReferenceImpl _anyTypeReferenceImpl = new AnyTypeReferenceImpl();
-              final Procedure1<AnyTypeReferenceImpl> _function = new Procedure1<AnyTypeReferenceImpl>() {
-                  public void apply(final AnyTypeReferenceImpl it) {
-                    it.setDelegate(_jvmAnyTypeReference);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                    it.setSerializer(CompilationUnitImpl.this.serializer);
-                  }
-                };
-              AnyTypeReferenceImpl _doubleArrow = ObjectExtensions.<AnyTypeReferenceImpl>operator_doubleArrow(_anyTypeReferenceImpl, _function);
-              _switchResult = _doubleArrow;
-            }
-          }
-          if (!_matched) {
-            if (delegate instanceof JvmUnknownTypeReference) {
-              final JvmUnknownTypeReference _jvmUnknownTypeReference = (JvmUnknownTypeReference)delegate;
-              _matched=true;
-              UnknownTypeReferenceImpl _unknownTypeReferenceImpl = new UnknownTypeReferenceImpl();
-              final Procedure1<UnknownTypeReferenceImpl> _function = new Procedure1<UnknownTypeReferenceImpl>() {
-                  public void apply(final UnknownTypeReferenceImpl it) {
-                    it.setDelegate(_jvmUnknownTypeReference);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                    it.setSerializer(CompilationUnitImpl.this.serializer);
-                  }
-                };
-              UnknownTypeReferenceImpl _doubleArrow = ObjectExtensions.<UnknownTypeReferenceImpl>operator_doubleArrow(_unknownTypeReferenceImpl, _function);
-              _switchResult = _doubleArrow;
-            }
-          }
-          if (!_matched) {
-            if (delegate instanceof JvmGenericArrayTypeReference) {
-              final JvmGenericArrayTypeReference _jvmGenericArrayTypeReference = (JvmGenericArrayTypeReference)delegate;
-              _matched=true;
-              ArrayTypeReferenceImpl _arrayTypeReferenceImpl = new ArrayTypeReferenceImpl();
-              final Procedure1<ArrayTypeReferenceImpl> _function = new Procedure1<ArrayTypeReferenceImpl>() {
-                  public void apply(final ArrayTypeReferenceImpl it) {
-                    it.setDelegate(_jvmGenericArrayTypeReference);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                    it.setSerializer(CompilationUnitImpl.this.serializer);
-                  }
-                };
-              ArrayTypeReferenceImpl _doubleArrow = ObjectExtensions.<ArrayTypeReferenceImpl>operator_doubleArrow(_arrayTypeReferenceImpl, _function);
-              _switchResult = _doubleArrow;
-            }
-          }
-          return _switchResult;
-        }
-      };
-    JvmTypeReferenceImpl<? extends JvmTypeReference> _get = this.<JvmTypeReference, JvmTypeReferenceImpl<? extends JvmTypeReference>>get(delegate, _function);
-    return _get;
+        };
+      TypeReferenceImpl _doubleArrow = ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function);
+      _xblockexpression = (_doubleArrow);
+    }
+    return _xblockexpression;
   }
   
   public TypeDeclaration toTypeDeclaration(final XtendTypeDeclaration delegate) {
@@ -561,6 +533,24 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
       };
     MemberDeclaration _get = this.<XtendMember, MemberDeclaration>get(delegate, _function);
+    return _get;
+  }
+  
+  public ParameterDeclaration toParameterDeclaration(final XtendParameter delegate) {
+    final Function1<XtendParameter,ParameterDeclarationXtendImpl> _function = new Function1<XtendParameter,ParameterDeclarationXtendImpl>() {
+        public ParameterDeclarationXtendImpl apply(final XtendParameter it) {
+          ParameterDeclarationXtendImpl _parameterDeclarationXtendImpl = new ParameterDeclarationXtendImpl();
+          final Procedure1<ParameterDeclarationXtendImpl> _function = new Procedure1<ParameterDeclarationXtendImpl>() {
+              public void apply(final ParameterDeclarationXtendImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          ParameterDeclarationXtendImpl _doubleArrow = ObjectExtensions.<ParameterDeclarationXtendImpl>operator_doubleArrow(_parameterDeclarationXtendImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    ParameterDeclarationXtendImpl _get = this.<XtendParameter, ParameterDeclarationXtendImpl>get(delegate, _function);
     return _get;
   }
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import java.util.Map
+import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -24,26 +25,26 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.type.TypeReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
-import org.eclipse.xtext.common.types.JvmAnyTypeReference
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference
-import javax.inject.Inject
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtext.common.types.JvmFormalParameter
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -64,9 +65,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	@Property XtendFile xtendFile
-	@Inject TypeReferenceSerializer serializer 
-
+	@Inject CommonTypeComputationServices services;
 	Map<EObject, Object> identityCache = newHashMap
+	OwnedConverter typeRefConverter
+	
+	def void setXtendFile(XtendFile xtendFile) {
+		this._xtendFile = xtendFile
+		this.typeRefConverter = new OwnedConverter(new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet))
+	} 
 
 	def private <IN extends EObject, OUT> OUT get(IN in, (IN)=>OUT provider) {
 		if (identityCache.containsKey(in))
@@ -131,6 +137,15 @@ class CompilationUnitImpl implements CompilationUnit {
 			]
 		]
 	}
+	
+	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
+		get(delegate) [
+			new ParameterDeclarationJavaImpl => [
+				it.delegate = delegate 
+				it.compilationUnit = this
+			]
+		]
+	}
 
 	def MemberDeclaration toMemberDeclaration(JvmMember delegate) {
 		get(delegate) [
@@ -157,34 +172,25 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 
 	def TypeReference toTypeReference(JvmTypeReference delegate) {
+		/*
+		 * Nested JvmTypeReference's identity will not be preserved
+		 * i.e. given 'List<String> myField' we will get the same TypeReference instance when asking
+		 * the field for its type. But when asking for type arguments on that TypeReference we will 
+		 * get a new instance representing 'String' each time.
+		 */
+		if (delegate == null)
+			return null
 		get(delegate) [
-			switch delegate {
-				JvmParameterizedTypeReference: new ParameterizedTypeReferenceImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-					it.serializer = this.serializer
-				]
-				JvmWildcardTypeReference: new WildCardTypeReferenceImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-					it.serializer = this.serializer
-				]
-				JvmAnyTypeReference: new AnyTypeReferenceImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-					it.serializer = this.serializer
-				]
-				JvmUnknownTypeReference: new UnknownTypeReferenceImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-					it.serializer = this.serializer
-				]
-				JvmGenericArrayTypeReference: new ArrayTypeReferenceImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-					it.serializer = this.serializer
-				]
-			}
+			toTypeReference(typeRefConverter.toLightweightReference(delegate))
+		]
+	}
+	
+	def TypeReference toTypeReference(LightweightTypeReference delegate) {
+		if (delegate == null)
+			return null
+		new TypeReferenceImpl => [
+			it.delegate = delegate 
+			it.compilationUnit = this
 		]
 	}
 
@@ -217,6 +223,15 @@ class CompilationUnitImpl implements CompilationUnit {
 					it.compilationUnit = this
 				]
 			}
+		]
+	}
+	
+	def ParameterDeclaration toParameterDeclaration(XtendParameter delegate) {
+		get(delegate) [
+			new ParameterDeclarationXtendImpl => [
+				it.delegate = delegate 
+				it.compilationUnit = this
+			]
 		]
 	}
 }

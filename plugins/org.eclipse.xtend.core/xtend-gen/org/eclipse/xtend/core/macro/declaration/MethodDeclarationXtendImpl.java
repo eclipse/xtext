@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
@@ -52,7 +53,7 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     return _isStatic;
   }
   
-  public TypeReference getType() {
+  public TypeReference getReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendFunction _delegate = this.getDelegate();
     JvmTypeReference _returnType = _delegate.getReturnType();
@@ -91,7 +92,7 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     return _exists;
   }
   
-  public List<TypeParameterDeclaration> getFormalTypeParameters() {
+  public List<TypeParameterDeclaration> getTypeParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
@@ -102,6 +103,34 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
         }
       };
     List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    return _map;
+  }
+  
+  public List<TypeReference> getExceptions() {
+    XtendFunction _delegate = this.getDelegate();
+    EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
+    final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+        public TypeReference apply(final JvmTypeReference it) {
+          CompilationUnitImpl _compilationUnit = MethodDeclarationXtendImpl.this.getCompilationUnit();
+          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
+          return _typeReference;
+        }
+      };
+    List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
+    return _map;
+  }
+  
+  public List<ParameterDeclaration> getParameters() {
+    XtendFunction _delegate = this.getDelegate();
+    EList<XtendParameter> _parameters = _delegate.getParameters();
+    final Function1<XtendParameter,ParameterDeclaration> _function = new Function1<XtendParameter,ParameterDeclaration>() {
+        public ParameterDeclaration apply(final XtendParameter it) {
+          CompilationUnitImpl _compilationUnit = MethodDeclarationXtendImpl.this.getCompilationUnit();
+          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
+          return _parameterDeclaration;
+        }
+      };
+    List<ParameterDeclaration> _map = ListExtensions.<XtendParameter, ParameterDeclaration>map(_parameters, _function);
     return _map;
   }
 }

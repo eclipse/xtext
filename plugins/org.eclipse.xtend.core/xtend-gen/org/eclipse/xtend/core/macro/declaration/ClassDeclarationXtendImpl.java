@@ -61,7 +61,7 @@ public class ClassDeclarationXtendImpl extends TypeDeclarationXtendImpl<XtendCla
     return false;
   }
   
-  public List<TypeParameterDeclaration> getFormalTypeParameters() {
+  public List<TypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {

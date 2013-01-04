@@ -39,7 +39,7 @@ public class MethodDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<Jvm
     return _isStatic;
   }
   
-  public TypeReference getType() {
+  public TypeReference getReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
     JvmTypeReference _returnType = _delegate.getReturnType();

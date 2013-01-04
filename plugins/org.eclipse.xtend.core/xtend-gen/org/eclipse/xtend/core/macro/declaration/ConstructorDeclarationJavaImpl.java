@@ -9,11 +9,18 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.ExecutableDeclarationJavaImpl;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmConstructor;
 
 @SuppressWarnings("all")
 public class ConstructorDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmConstructor> implements ConstructorDeclaration {
+  public String getName() {
+    TypeDeclaration _declaringType = this.getDeclaringType();
+    String _simpleName = _declaringType.getSimpleName();
+    return _simpleName;
+  }
+  
   public Expression getBody() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;

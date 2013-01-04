@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import org.eclipse.xtend.lib.macro.type.TypeReference;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -21,4 +23,6 @@ public interface MethodDeclaration extends ExecutableDeclaration {
 	boolean isOverride();
 
 	boolean isStatic();
+	
+	TypeReference getReturnType();
 }

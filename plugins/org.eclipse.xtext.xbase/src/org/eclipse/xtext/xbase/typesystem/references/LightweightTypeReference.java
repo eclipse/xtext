@@ -74,6 +74,10 @@ public abstract class LightweightTypeReference {
 	protected LightweightTypeReference(ITypeReferenceOwner owner) {
 		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
+	
+	public List<LightweightTypeReference> getTypeArguments() {
+		return Collections.emptyList();
+	}
 
 	public boolean isResolved() {
 		return true;

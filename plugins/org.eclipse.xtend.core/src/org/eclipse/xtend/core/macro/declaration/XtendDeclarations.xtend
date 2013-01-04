@@ -22,6 +22,8 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.core.xtend.XtendParameter
 
 abstract class MemberDeclarationXtendImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements MemberDeclaration {
 	
@@ -79,7 +81,7 @@ class ClassDeclarationXtendImpl extends TypeDeclarationXtendImpl<XtendClass> imp
 		false
 	}
 	
-	override getFormalTypeParameters() {
+	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 
@@ -111,7 +113,7 @@ class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendFunctio
 		delegate.isStatic
 	}
 	
-	override getType() {
+	override getReturnType() {
 		compilationUnit.toTypeReference(delegate.returnType)
 	}
 
@@ -131,8 +133,16 @@ class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendFunctio
 		delegate.parameters.exists[varArgs]
 	}
 	
-	override getFormalTypeParameters() {
+	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
+	}
+	
+	override getExceptions() {
+		delegate.exceptions.map[compilationUnit.toTypeReference(it)]
+	}
+	
+	override getParameters() {
+		delegate.parameters.map[compilationUnit.toParameterDeclaration(it)]
 	}
 	
 }
@@ -142,26 +152,41 @@ class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendCo
 	override getBody() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
-	
 
 	override getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
 	override getName() {
-		delegate.name
+		declaringType.simpleName
 	}
 	
 	override isVarArgs() {
 		delegate.parameters.exists[varArgs]
 	}
 	
-	override getType() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+	override getExceptions() {
+		delegate.exceptions.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getFormalTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
+	override getParameters() {
+		delegate.parameters.map[compilationUnit.toParameterDeclaration(it)]
+	}
+
+	override getTypeParameters() {
+		emptyList
+	}
+	
+}
+
+class ParameterDeclarationXtendImpl extends AbstractDeclarationImpl<XtendParameter> implements ParameterDeclaration {
+
+	override getType() {
+		compilationUnit.toTypeReference(delegate.parameterType)
+	}
+	
+	override getName() {
+		delegate.name
 	}
 	
 }

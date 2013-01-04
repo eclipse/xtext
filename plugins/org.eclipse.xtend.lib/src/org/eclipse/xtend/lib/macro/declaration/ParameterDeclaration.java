@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import org.eclipse.xtend.lib.macro.type.TypeReference;
+
 import com.google.common.annotations.Beta;
 
 /**
  * @author Sven Efftinge
  */
 @Beta
-public interface ParameterDeclaration extends Declaration, TypedElement {
-
+public interface ParameterDeclaration extends NamedElement, AnnotationTarget {
+	TypeReference getType();
 }
