@@ -88,12 +88,12 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
@@ -580,8 +580,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		if (overriddenOperation.isFinal())
 			error("Attempt to override final method " + canonicalName(overriddenOperation), function,
 					XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
-		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
-		if (isMorePrivateThan(inferredOperation.getVisibility(), overriddenOperation.getVisibility())) {
+		if (isMorePrivateThan(operation.getVisibility(), overriddenOperation.getVisibility())) {
 			error("Cannot reduce the visibility of the overridden method " + overriddenOperation.getIdentifier(),
 					function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
 		}
@@ -597,7 +596,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		OwnedConverter converter = new OwnedConverter(owner);
 		TypeReferences typeReferences = getServices().getTypeReferences();
 		LightweightTypeReference declaringType = converter.toLightweightReference(typeReferences.createTypeRef(
-				inferredOperation.getDeclaringType()));
+				operation.getDeclaringType()));
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaringType);
 		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(declaratorMapping, owner);
 		LightweightTypeReference overriddenReturnType = substitutor.substitute(converter.toLightweightReference(overriddenOperation.getReturnType()));
@@ -912,7 +911,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		Multimap<DispatchHelper.DispatchSignature, XtendFunction> nonDispatchMethods = HashMultimap.create();
 		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
 			if(!method.isDispatch()) {
-				nonDispatchMethods.put(new DispatchHelper.DispatchSignature(method.getName(), method.getParameters().size()), method);
+				nonDispatchMethods.put(new DispatchHelper.DispatchSignature(method.getName(), method.getParameters().size(), true), method);
 			}
 		}
 		for(DispatchHelper.DispatchSignature dispatchSignature: dispatchMethods.keySet()) {
