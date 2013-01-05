@@ -18,9 +18,9 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface ExecutableDeclaration extends MemberDeclaration, TypeParameterDeclarator {
+public interface ExecutableDeclaration extends TypeParameterDeclarator {
 	boolean isVarArgs();
 	Expression getBody();
-	List<ParameterDeclaration> getParameters();
+	List<? extends ParameterDeclaration> getParameters();
 	List<TypeReference> getExceptions();
 }

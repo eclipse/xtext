@@ -14,5 +14,13 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MemberDeclaration extends Declaration {
+	
+	/**
+	 * @return the JavaDoc comment
+	 */
+	String getDocComment();
+
+	Visibility getVisibility();
+	
 	TypeDeclaration getDeclaringType();
 }
