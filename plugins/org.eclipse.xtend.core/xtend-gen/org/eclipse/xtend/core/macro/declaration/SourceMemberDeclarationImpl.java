@@ -12,18 +12,18 @@ import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration;
 
 @SuppressWarnings("all")
-public abstract class MemberDeclarationXtendImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements MemberDeclaration {
+public abstract class SourceMemberDeclarationImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements SourceMemberDeclaration {
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
   }
   
-  public TypeDeclaration getDeclaringType() {
-    TypeDeclaration _switchResult = null;
+  public SourceTypeDeclaration getDeclaringType() {
+    SourceTypeDeclaration _switchResult = null;
     EObject _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
     final EObject container = _eContainer;
@@ -33,8 +33,8 @@ public abstract class MemberDeclarationXtendImpl<T extends XtendMember> extends 
         final XtendTypeDeclaration _xtendTypeDeclaration = (XtendTypeDeclaration)container;
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_xtendTypeDeclaration);
-        _switchResult = _typeDeclaration;
+        SourceTypeDeclaration _sourceTypeDeclaration = _compilationUnit.toSourceTypeDeclaration(_xtendTypeDeclaration);
+        _switchResult = _sourceTypeDeclaration;
       }
     }
     if (!_matched) {

@@ -10,13 +10,13 @@ package org.eclipse.xtend.core.macro.declaration;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
-public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendConstructor> implements ConstructorDeclaration {
+public class SourceConstructorDeclarationImpl extends SourceMemberDeclarationImpl<XtendConstructor> implements SourceConstructorDeclaration {
   public Expression getBody() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
@@ -43,7 +43,7 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
   }
   
   public String getName() {
-    TypeDeclaration _declaringType = this.getDeclaringType();
+    SourceTypeDeclaration _declaringType = this.getDeclaringType();
     String _simpleName = _declaringType.getSimpleName();
     return _simpleName;
   }
@@ -53,7 +53,7 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,Boolean> _function = new Function1<XtendParameter,Boolean>() {
         public Boolean apply(final XtendParameter it) {
-          boolean _isVarArgs = ConstructorDeclarationXtendImpl.this.isVarArgs();
+          boolean _isVarArgs = SourceConstructorDeclarationImpl.this.isVarArgs();
           return Boolean.valueOf(_isVarArgs);
         }
       };
@@ -66,7 +66,7 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = ConstructorDeclarationXtendImpl.this.getCompilationUnit();
+          CompilationUnitImpl _compilationUnit = SourceConstructorDeclarationImpl.this.getCompilationUnit();
           TypeReference _typeReference = _compilationUnit.toTypeReference(it);
           return _typeReference;
         }
@@ -75,22 +75,22 @@ public class ConstructorDeclarationXtendImpl extends MemberDeclarationXtendImpl<
     return _map;
   }
   
-  public List<ParameterDeclaration> getParameters() {
+  public List<SourceParameterDeclaration> getParameters() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter,ParameterDeclaration> _function = new Function1<XtendParameter,ParameterDeclaration>() {
-        public ParameterDeclaration apply(final XtendParameter it) {
-          CompilationUnitImpl _compilationUnit = ConstructorDeclarationXtendImpl.this.getCompilationUnit();
-          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
-          return _parameterDeclaration;
+    final Function1<XtendParameter,SourceParameterDeclaration> _function = new Function1<XtendParameter,SourceParameterDeclaration>() {
+        public SourceParameterDeclaration apply(final XtendParameter it) {
+          CompilationUnitImpl _compilationUnit = SourceConstructorDeclarationImpl.this.getCompilationUnit();
+          SourceParameterDeclaration _sourceParameterDeclaration = _compilationUnit.toSourceParameterDeclaration(it);
+          return _sourceParameterDeclaration;
         }
       };
-    List<ParameterDeclaration> _map = ListExtensions.<XtendParameter, ParameterDeclaration>map(_parameters, _function);
+    List<SourceParameterDeclaration> _map = ListExtensions.<XtendParameter, SourceParameterDeclaration>map(_parameters, _function);
     return _map;
   }
   
-  public List<TypeParameterDeclaration> getTypeParameters() {
-    List<TypeParameterDeclaration> _emptyList = CollectionLiterals.<TypeParameterDeclaration>emptyList();
+  public List<SourceTypeParameterDeclaration> getTypeParameters() {
+    List<SourceTypeParameterDeclaration> _emptyList = CollectionLiterals.<SourceTypeParameterDeclaration>emptyList();
     return _emptyList;
   }
 }

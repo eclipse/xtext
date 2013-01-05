@@ -36,7 +36,7 @@ public class InterfaceDeclarationJavaImpl extends TypeDeclarationJavaImpl<JvmGen
     return _map;
   }
   
-  public List<TypeParameterDeclaration> getTypeParameters() {
+  public List<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {

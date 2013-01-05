@@ -17,7 +17,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface TypeParameterDeclaration extends TypeDeclaration {
-	
+public interface TypeParameterDeclaration extends Type, Declaration {
 	List<TypeReference> getUpperBounds();
+	TypeParameterDeclarator getTypeParameterDeclarator();
 }

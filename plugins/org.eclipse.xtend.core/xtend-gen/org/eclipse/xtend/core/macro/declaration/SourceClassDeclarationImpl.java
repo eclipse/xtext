@@ -10,12 +10,12 @@ package org.eclipse.xtend.core.macro.declaration;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeDeclarationXtendImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -24,13 +24,13 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
-public class ClassDeclarationXtendImpl extends TypeDeclarationXtendImpl<XtendClass> implements ClassDeclaration {
+public class SourceClassDeclarationImpl extends SourceTypeDeclarationImpl<XtendClass> implements SourceClassDeclaration {
   public List<TypeReference> getImplementedInterfaces() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeReference> _implements = _delegate.getImplements();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = ClassDeclarationXtendImpl.this.getCompilationUnit();
+          CompilationUnitImpl _compilationUnit = SourceClassDeclarationImpl.this.getCompilationUnit();
           TypeReference _typeReference = _compilationUnit.toTypeReference(it);
           return _typeReference;
         }
@@ -61,17 +61,17 @@ public class ClassDeclarationXtendImpl extends TypeDeclarationXtendImpl<XtendCla
     return false;
   }
   
-  public List<TypeParameterDeclaration> getTypeParameters() {
+  public List<SourceTypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
-        public TypeParameterDeclaration apply(final JvmTypeParameter it) {
-          CompilationUnitImpl _compilationUnit = ClassDeclarationXtendImpl.this.getCompilationUnit();
-          TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return _typeParameterDeclaration;
+    final Function1<JvmTypeParameter,SourceTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,SourceTypeParameterDeclaration>() {
+        public SourceTypeParameterDeclaration apply(final JvmTypeParameter it) {
+          CompilationUnitImpl _compilationUnit = SourceClassDeclarationImpl.this.getCompilationUnit();
+          SourceTypeParameterDeclaration _sourceTypeParameterDeclaration = _compilationUnit.toSourceTypeParameterDeclaration(it);
+          return _sourceTypeParameterDeclaration;
         }
       };
-    List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    List<SourceTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, SourceTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
   
@@ -79,16 +79,16 @@ public class ClassDeclarationXtendImpl extends TypeDeclarationXtendImpl<XtendCla
     return Visibility.PUBLIC;
   }
   
-  public List<? extends MemberDeclaration> getMembers() {
+  public List<SourceMemberDeclaration> getMembers() {
     XtendClass _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
-    final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
-        public MemberDeclaration apply(final XtendMember it) {
-          CompilationUnitImpl _compilationUnit = ClassDeclarationXtendImpl.this.getCompilationUnit();
-          MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
-          return _memberDeclaration;
+    final Function1<XtendMember,SourceMemberDeclaration> _function = new Function1<XtendMember,SourceMemberDeclaration>() {
+        public SourceMemberDeclaration apply(final XtendMember it) {
+          CompilationUnitImpl _compilationUnit = SourceClassDeclarationImpl.this.getCompilationUnit();
+          SourceMemberDeclaration _sourceMemberDeclaration = _compilationUnit.toSourceMemberDeclaration(it);
+          return _sourceMemberDeclaration;
         }
       };
-    return ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
+    return ListExtensions.<XtendMember, SourceMemberDeclaration>map(_members, _function);
   }
 }

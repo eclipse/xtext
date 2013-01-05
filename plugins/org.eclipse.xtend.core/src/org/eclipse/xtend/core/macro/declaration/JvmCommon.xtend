@@ -10,9 +10,10 @@ package org.eclipse.xtend.core.macro.declaration
 
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.VoidType
 import org.eclipse.xtend.lib.macro.type.TypeReference
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
@@ -118,39 +119,18 @@ class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implem
 	
 }
 
-class TypeParameterDeclartionImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
+class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
-	}
-	
-	override getMembers() {
-		emptyList
-	}
-	
-	override getPackageName() {
-		null
-	}
-	
-	override getSimpleName() {
-		delegate.name
 	}
 	
 	override getName() {
 		delegate.name
 	}
 	
-	override getDeclaringType() {
-		//TODO this one might be contained in an Xtend element or a JVM element
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getDocComment() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getVisibility() {
-		Visibility::PRIVATE
+	override getTypeParameterDeclarator() {
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as TypeParameterDeclarator
 	}
 	
 }

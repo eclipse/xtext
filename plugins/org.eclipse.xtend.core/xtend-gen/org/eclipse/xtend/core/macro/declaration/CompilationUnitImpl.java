@@ -18,19 +18,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.declaration.ClassDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.ClassDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.ConstructorDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.ConstructorDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.FieldDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.FieldDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.InterfaceDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.MethodDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.MethodDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.ParameterDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.ParameterDeclarationXtendImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceClassDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceConstructorDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceMethodDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeDeclarationJavaImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclartionImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -44,6 +45,10 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
@@ -89,16 +94,16 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _package;
   }
   
-  public List<TypeDeclaration> getSourceTypeDeclarations() {
+  public List<SourceTypeDeclaration> getSourceTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
-    final Function1<XtendTypeDeclaration,TypeDeclaration> _function = new Function1<XtendTypeDeclaration,TypeDeclaration>() {
-        public TypeDeclaration apply(final XtendTypeDeclaration it) {
-          TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
-          return _typeDeclaration;
+    final Function1<XtendTypeDeclaration,SourceTypeDeclaration> _function = new Function1<XtendTypeDeclaration,SourceTypeDeclaration>() {
+        public SourceTypeDeclaration apply(final XtendTypeDeclaration it) {
+          SourceTypeDeclaration _sourceTypeDeclaration = CompilationUnitImpl.this.toSourceTypeDeclaration(it);
+          return _sourceTypeDeclaration;
         }
       };
-    List<TypeDeclaration> _map = ListExtensions.<XtendTypeDeclaration, TypeDeclaration>map(_xtendTypes, _function);
+    List<SourceTypeDeclaration> _map = ListExtensions.<XtendTypeDeclaration, SourceTypeDeclaration>map(_xtendTypes, _function);
     return _map;
   }
   
@@ -304,20 +309,20 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
-    final Function1<JvmTypeParameter,TypeParameterDeclartionImpl> _function = new Function1<JvmTypeParameter,TypeParameterDeclartionImpl>() {
-        public TypeParameterDeclartionImpl apply(final JvmTypeParameter it) {
-          TypeParameterDeclartionImpl _typeParameterDeclartionImpl = new TypeParameterDeclartionImpl();
-          final Procedure1<TypeParameterDeclartionImpl> _function = new Procedure1<TypeParameterDeclartionImpl>() {
-              public void apply(final TypeParameterDeclartionImpl it) {
+    final Function1<JvmTypeParameter,TypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,TypeParameterDeclarationImpl>() {
+        public TypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
+          TypeParameterDeclarationImpl _typeParameterDeclarationImpl = new TypeParameterDeclarationImpl();
+          final Procedure1<TypeParameterDeclarationImpl> _function = new Procedure1<TypeParameterDeclarationImpl>() {
+              public void apply(final TypeParameterDeclarationImpl it) {
                 it.setDelegate(delegate);
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-          TypeParameterDeclartionImpl _doubleArrow = ObjectExtensions.<TypeParameterDeclartionImpl>operator_doubleArrow(_typeParameterDeclartionImpl, _function);
+          TypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<TypeParameterDeclarationImpl>operator_doubleArrow(_typeParameterDeclarationImpl, _function);
           return _doubleArrow;
         }
       };
-    TypeParameterDeclartionImpl _get = this.<JvmTypeParameter, TypeParameterDeclartionImpl>get(delegate, _function);
+    TypeParameterDeclarationImpl _get = this.<JvmTypeParameter, TypeParameterDeclarationImpl>get(delegate, _function);
     return _get;
   }
   
@@ -444,58 +449,58 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _xblockexpression;
   }
   
-  public TypeDeclaration toTypeDeclaration(final XtendTypeDeclaration delegate) {
-    final Function1<XtendTypeDeclaration,ClassDeclarationXtendImpl> _function = new Function1<XtendTypeDeclaration,ClassDeclarationXtendImpl>() {
-        public ClassDeclarationXtendImpl apply(final XtendTypeDeclaration it) {
-          ClassDeclarationXtendImpl _switchResult = null;
+  public SourceTypeDeclaration toSourceTypeDeclaration(final XtendTypeDeclaration delegate) {
+    final Function1<XtendTypeDeclaration,SourceClassDeclarationImpl> _function = new Function1<XtendTypeDeclaration,SourceClassDeclarationImpl>() {
+        public SourceClassDeclarationImpl apply(final XtendTypeDeclaration it) {
+          SourceClassDeclarationImpl _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof XtendClass) {
               final XtendClass _xtendClass = (XtendClass)delegate;
               _matched=true;
-              ClassDeclarationXtendImpl _classDeclarationXtendImpl = new ClassDeclarationXtendImpl();
-              final Procedure1<ClassDeclarationXtendImpl> _function = new Procedure1<ClassDeclarationXtendImpl>() {
-                  public void apply(final ClassDeclarationXtendImpl it) {
+              SourceClassDeclarationImpl _sourceClassDeclarationImpl = new SourceClassDeclarationImpl();
+              final Procedure1<SourceClassDeclarationImpl> _function = new Procedure1<SourceClassDeclarationImpl>() {
+                  public void apply(final SourceClassDeclarationImpl it) {
                     it.setDelegate(_xtendClass);
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
-              ClassDeclarationXtendImpl _doubleArrow = ObjectExtensions.<ClassDeclarationXtendImpl>operator_doubleArrow(_classDeclarationXtendImpl, _function);
+              SourceClassDeclarationImpl _doubleArrow = ObjectExtensions.<SourceClassDeclarationImpl>operator_doubleArrow(_sourceClassDeclarationImpl, _function);
               _switchResult = _doubleArrow;
             }
           }
           return _switchResult;
         }
       };
-    ClassDeclarationXtendImpl _get = this.<XtendTypeDeclaration, ClassDeclarationXtendImpl>get(delegate, _function);
+    SourceClassDeclarationImpl _get = this.<XtendTypeDeclaration, SourceClassDeclarationImpl>get(delegate, _function);
     return _get;
   }
   
-  public MemberDeclaration toMemberDeclaration(final XtendMember delegate) {
-    final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
-        public MemberDeclaration apply(final XtendMember it) {
-          MemberDeclaration _switchResult = null;
+  public SourceMemberDeclaration toSourceMemberDeclaration(final XtendMember delegate) {
+    final Function1<XtendMember,SourceMemberDeclaration> _function = new Function1<XtendMember,SourceMemberDeclaration>() {
+        public SourceMemberDeclaration apply(final XtendMember it) {
+          SourceMemberDeclaration _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof XtendTypeDeclaration) {
               final XtendTypeDeclaration _xtendTypeDeclaration = (XtendTypeDeclaration)delegate;
               _matched=true;
-              TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(_xtendTypeDeclaration);
-              _switchResult = _typeDeclaration;
+              SourceTypeDeclaration _sourceTypeDeclaration = CompilationUnitImpl.this.toSourceTypeDeclaration(_xtendTypeDeclaration);
+              _switchResult = _sourceTypeDeclaration;
             }
           }
           if (!_matched) {
             if (delegate instanceof XtendFunction) {
               final XtendFunction _xtendFunction = (XtendFunction)delegate;
               _matched=true;
-              MethodDeclarationXtendImpl _methodDeclarationXtendImpl = new MethodDeclarationXtendImpl();
-              final Procedure1<MethodDeclarationXtendImpl> _function = new Procedure1<MethodDeclarationXtendImpl>() {
-                  public void apply(final MethodDeclarationXtendImpl it) {
+              SourceMethodDeclarationImpl _sourceMethodDeclarationImpl = new SourceMethodDeclarationImpl();
+              final Procedure1<SourceMethodDeclarationImpl> _function = new Procedure1<SourceMethodDeclarationImpl>() {
+                  public void apply(final SourceMethodDeclarationImpl it) {
                     it.setDelegate(_xtendFunction);
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
-              MethodDeclarationXtendImpl _doubleArrow = ObjectExtensions.<MethodDeclarationXtendImpl>operator_doubleArrow(_methodDeclarationXtendImpl, _function);
+              SourceMethodDeclarationImpl _doubleArrow = ObjectExtensions.<SourceMethodDeclarationImpl>operator_doubleArrow(_sourceMethodDeclarationImpl, _function);
               _switchResult = _doubleArrow;
             }
           }
@@ -503,14 +508,14 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof XtendConstructor) {
               final XtendConstructor _xtendConstructor = (XtendConstructor)delegate;
               _matched=true;
-              ConstructorDeclarationXtendImpl _constructorDeclarationXtendImpl = new ConstructorDeclarationXtendImpl();
-              final Procedure1<ConstructorDeclarationXtendImpl> _function = new Procedure1<ConstructorDeclarationXtendImpl>() {
-                  public void apply(final ConstructorDeclarationXtendImpl it) {
+              SourceConstructorDeclarationImpl _sourceConstructorDeclarationImpl = new SourceConstructorDeclarationImpl();
+              final Procedure1<SourceConstructorDeclarationImpl> _function = new Procedure1<SourceConstructorDeclarationImpl>() {
+                  public void apply(final SourceConstructorDeclarationImpl it) {
                     it.setDelegate(_xtendConstructor);
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
-              ConstructorDeclarationXtendImpl _doubleArrow = ObjectExtensions.<ConstructorDeclarationXtendImpl>operator_doubleArrow(_constructorDeclarationXtendImpl, _function);
+              SourceConstructorDeclarationImpl _doubleArrow = ObjectExtensions.<SourceConstructorDeclarationImpl>operator_doubleArrow(_sourceConstructorDeclarationImpl, _function);
               _switchResult = _doubleArrow;
             }
           }
@@ -518,39 +523,57 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof XtendField) {
               final XtendField _xtendField = (XtendField)delegate;
               _matched=true;
-              FieldDeclarationXtendImpl _fieldDeclarationXtendImpl = new FieldDeclarationXtendImpl();
-              final Procedure1<FieldDeclarationXtendImpl> _function = new Procedure1<FieldDeclarationXtendImpl>() {
-                  public void apply(final FieldDeclarationXtendImpl it) {
+              SourceFieldDeclarationImpl _sourceFieldDeclarationImpl = new SourceFieldDeclarationImpl();
+              final Procedure1<SourceFieldDeclarationImpl> _function = new Procedure1<SourceFieldDeclarationImpl>() {
+                  public void apply(final SourceFieldDeclarationImpl it) {
                     it.setDelegate(_xtendField);
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
-              FieldDeclarationXtendImpl _doubleArrow = ObjectExtensions.<FieldDeclarationXtendImpl>operator_doubleArrow(_fieldDeclarationXtendImpl, _function);
+              SourceFieldDeclarationImpl _doubleArrow = ObjectExtensions.<SourceFieldDeclarationImpl>operator_doubleArrow(_sourceFieldDeclarationImpl, _function);
               _switchResult = _doubleArrow;
             }
           }
           return _switchResult;
         }
       };
-    MemberDeclaration _get = this.<XtendMember, MemberDeclaration>get(delegate, _function);
+    SourceMemberDeclaration _get = this.<XtendMember, SourceMemberDeclaration>get(delegate, _function);
     return _get;
   }
   
-  public ParameterDeclaration toParameterDeclaration(final XtendParameter delegate) {
-    final Function1<XtendParameter,ParameterDeclarationXtendImpl> _function = new Function1<XtendParameter,ParameterDeclarationXtendImpl>() {
-        public ParameterDeclarationXtendImpl apply(final XtendParameter it) {
-          ParameterDeclarationXtendImpl _parameterDeclarationXtendImpl = new ParameterDeclarationXtendImpl();
-          final Procedure1<ParameterDeclarationXtendImpl> _function = new Procedure1<ParameterDeclarationXtendImpl>() {
-              public void apply(final ParameterDeclarationXtendImpl it) {
+  public SourceParameterDeclaration toSourceParameterDeclaration(final XtendParameter delegate) {
+    final Function1<XtendParameter,SourceParameterDeclarationImpl> _function = new Function1<XtendParameter,SourceParameterDeclarationImpl>() {
+        public SourceParameterDeclarationImpl apply(final XtendParameter it) {
+          SourceParameterDeclarationImpl _sourceParameterDeclarationImpl = new SourceParameterDeclarationImpl();
+          final Procedure1<SourceParameterDeclarationImpl> _function = new Procedure1<SourceParameterDeclarationImpl>() {
+              public void apply(final SourceParameterDeclarationImpl it) {
                 it.setDelegate(delegate);
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-          ParameterDeclarationXtendImpl _doubleArrow = ObjectExtensions.<ParameterDeclarationXtendImpl>operator_doubleArrow(_parameterDeclarationXtendImpl, _function);
+          SourceParameterDeclarationImpl _doubleArrow = ObjectExtensions.<SourceParameterDeclarationImpl>operator_doubleArrow(_sourceParameterDeclarationImpl, _function);
           return _doubleArrow;
         }
       };
-    ParameterDeclarationXtendImpl _get = this.<XtendParameter, ParameterDeclarationXtendImpl>get(delegate, _function);
+    SourceParameterDeclarationImpl _get = this.<XtendParameter, SourceParameterDeclarationImpl>get(delegate, _function);
+    return _get;
+  }
+  
+  public SourceTypeParameterDeclaration toSourceTypeParameterDeclaration(final JvmTypeParameter delegate) {
+    final Function1<JvmTypeParameter,SourceTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,SourceTypeParameterDeclarationImpl>() {
+        public SourceTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
+          SourceTypeParameterDeclarationImpl _sourceTypeParameterDeclarationImpl = new SourceTypeParameterDeclarationImpl();
+          final Procedure1<SourceTypeParameterDeclarationImpl> _function = new Procedure1<SourceTypeParameterDeclarationImpl>() {
+              public void apply(final SourceTypeParameterDeclarationImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          SourceTypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<SourceTypeParameterDeclarationImpl>operator_doubleArrow(_sourceTypeParameterDeclarationImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    SourceTypeParameterDeclarationImpl _get = this.<JvmTypeParameter, SourceTypeParameterDeclarationImpl>get(delegate, _function);
     return _get;
   }
 }

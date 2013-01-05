@@ -16,9 +16,14 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
+import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -29,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
@@ -42,9 +48,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.core.xtend.XtendParameter
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
-import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -57,7 +61,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	override getSourceTypeDeclarations() {
-		xtendFile.xtendTypes.map[toTypeDeclaration(it)]
+		xtendFile.xtendTypes.map[toSourceTypeDeclaration(it)]
 	}
 	
 	override getGeneratedTypeDeclarations() {
@@ -131,7 +135,7 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
 		get(delegate) [
-			new TypeParameterDeclartionImpl => [
+			new TypeParameterDeclarationImpl => [
 				it.delegate = delegate 
 				it.compilationUnit = this
 			]
@@ -194,10 +198,10 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 
-	def TypeDeclaration toTypeDeclaration(XtendTypeDeclaration delegate) {
+	def SourceTypeDeclaration toSourceTypeDeclaration(XtendTypeDeclaration delegate) {
 		get(delegate) [
 			switch (delegate) {
-				XtendClass : new ClassDeclarationXtendImpl => [
+				XtendClass : new SourceClassDeclarationImpl => [
 					it.delegate = delegate 
 					it.compilationUnit = this
 				]
@@ -206,19 +210,19 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 
-	def MemberDeclaration toMemberDeclaration(XtendMember delegate) {
+	def SourceMemberDeclaration toSourceMemberDeclaration(XtendMember delegate) {
 		get(delegate) [
 			switch (delegate) {
-				XtendTypeDeclaration : toTypeDeclaration(delegate)
-				XtendFunction : new MethodDeclarationXtendImpl => [
+				XtendTypeDeclaration : toSourceTypeDeclaration(delegate)
+				XtendFunction : new SourceMethodDeclarationImpl => [
 					it.delegate = delegate 
 					it.compilationUnit = this
 				]
-				XtendConstructor : new ConstructorDeclarationXtendImpl => [
+				XtendConstructor : new SourceConstructorDeclarationImpl => [
 					it.delegate = delegate 
 					it.compilationUnit = this
 				]
-				XtendField : new FieldDeclarationXtendImpl => [
+				XtendField : new SourceFieldDeclarationImpl => [
 					it.delegate = delegate 
 					it.compilationUnit = this
 				]
@@ -226,9 +230,18 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 	
-	def ParameterDeclaration toParameterDeclaration(XtendParameter delegate) {
+	def SourceParameterDeclaration toSourceParameterDeclaration(XtendParameter delegate) {
 		get(delegate) [
-			new ParameterDeclarationXtendImpl => [
+			new SourceParameterDeclarationImpl => [
+				it.delegate = delegate 
+				it.compilationUnit = this
+			]
+		]
+	}
+	
+	def SourceTypeParameterDeclaration toSourceTypeParameterDeclaration(JvmTypeParameter delegate) {
+		get(delegate) [
+			new SourceTypeParameterDeclarationImpl => [
 				it.delegate = delegate 
 				it.compilationUnit = this
 			]

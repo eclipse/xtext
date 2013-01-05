@@ -8,14 +8,14 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public abstract class TypeDeclarationXtendImpl<T extends XtendTypeDeclaration> extends MemberDeclarationXtendImpl<T> implements TypeDeclaration {
+public abstract class SourceTypeDeclarationImpl<T extends XtendTypeDeclaration> extends SourceMemberDeclarationImpl<T> implements SourceTypeDeclaration {
   public String getPackageName() {
     EObject _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();

@@ -17,7 +17,7 @@ public interface CompilationUnit extends AnnotationTarget {
 	 */
 	String getDocComment();
 	
-	List<TypeDeclaration> getSourceTypeDeclarations();
+	List<SourceTypeDeclaration> getSourceTypeDeclarations();
 	
 	List<TypeDeclaration> getGeneratedTypeDeclarations();
 }

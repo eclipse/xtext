@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> extends MemberDeclarationJavaImpl<T> implements ExecutableDeclaration {
-  public List<TypeParameterDeclaration> getTypeParameters() {
+  public List<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmTypeParameterDeclarator _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
@@ -51,7 +51,7 @@ public abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> ext
     throw _unsupportedOperationException;
   }
   
-  public List<ParameterDeclaration> getParameters() {
+  public List<? extends ParameterDeclaration> getParameters() {
     JvmExecutable _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     final Function1<JvmFormalParameter,ParameterDeclaration> _function = new Function1<JvmFormalParameter,ParameterDeclaration>() {

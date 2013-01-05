@@ -8,9 +8,9 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 @SuppressWarnings("all")
-public class FieldDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendField> implements FieldDeclaration {
+public class SourceFieldDeclarationImpl extends SourceMemberDeclarationImpl<XtendField> implements SourceFieldDeclaration {
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();

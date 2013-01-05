@@ -142,6 +142,10 @@ class ParameterDeclarationJavaImpl extends NamedElementJavaImpl<JvmFormalParamet
 		compilationUnit.toTypeReference(delegate.parameterType)
 	}
 	
+	override getDeclaringExecutable() {
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as ExecutableDeclaration
+	}
+	
 }
 
 class MethodDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmOperation> implements MethodDeclaration {

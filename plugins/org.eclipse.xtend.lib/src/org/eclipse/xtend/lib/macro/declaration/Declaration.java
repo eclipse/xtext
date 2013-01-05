@@ -15,10 +15,4 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface Declaration extends NamedElement, AnnotationTarget {
 
-	/**
-	 * @return the JavaDoc comment
-	 */
-	String getDocComment();
-
-	Visibility getVisibility();
 }

@@ -10,12 +10,12 @@ package org.eclipse.xtend.core.macro.declaration;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.MemberDeclarationXtendImpl;
+import org.eclipse.xtend.core.macro.declaration.SourceMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceMethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<XtendFunction> implements MethodDeclaration {
+public class SourceMethodDeclarationImpl extends SourceMemberDeclarationImpl<XtendFunction> implements SourceMethodDeclaration {
   public boolean isAbstract() {
     XtendFunction _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
@@ -84,7 +84,7 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,Boolean> _function = new Function1<XtendParameter,Boolean>() {
         public Boolean apply(final XtendParameter it) {
-          boolean _isVarArgs = MethodDeclarationXtendImpl.this.isVarArgs();
+          boolean _isVarArgs = SourceMethodDeclarationImpl.this.isVarArgs();
           return Boolean.valueOf(_isVarArgs);
         }
       };
@@ -92,17 +92,17 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     return _exists;
   }
   
-  public List<TypeParameterDeclaration> getTypeParameters() {
+  public List<SourceTypeParameterDeclaration> getTypeParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
-        public TypeParameterDeclaration apply(final JvmTypeParameter it) {
-          CompilationUnitImpl _compilationUnit = MethodDeclarationXtendImpl.this.getCompilationUnit();
-          TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return _typeParameterDeclaration;
+    final Function1<JvmTypeParameter,SourceTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,SourceTypeParameterDeclaration>() {
+        public SourceTypeParameterDeclaration apply(final JvmTypeParameter it) {
+          CompilationUnitImpl _compilationUnit = SourceMethodDeclarationImpl.this.getCompilationUnit();
+          SourceTypeParameterDeclaration _sourceTypeParameterDeclaration = _compilationUnit.toSourceTypeParameterDeclaration(it);
+          return _sourceTypeParameterDeclaration;
         }
       };
-    List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    List<SourceTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, SourceTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
   
@@ -111,7 +111,7 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
-          CompilationUnitImpl _compilationUnit = MethodDeclarationXtendImpl.this.getCompilationUnit();
+          CompilationUnitImpl _compilationUnit = SourceMethodDeclarationImpl.this.getCompilationUnit();
           TypeReference _typeReference = _compilationUnit.toTypeReference(it);
           return _typeReference;
         }
@@ -120,17 +120,17 @@ public class MethodDeclarationXtendImpl extends MemberDeclarationXtendImpl<Xtend
     return _map;
   }
   
-  public List<ParameterDeclaration> getParameters() {
+  public List<SourceParameterDeclaration> getParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter,ParameterDeclaration> _function = new Function1<XtendParameter,ParameterDeclaration>() {
-        public ParameterDeclaration apply(final XtendParameter it) {
-          CompilationUnitImpl _compilationUnit = MethodDeclarationXtendImpl.this.getCompilationUnit();
-          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
-          return _parameterDeclaration;
+    final Function1<XtendParameter,SourceParameterDeclaration> _function = new Function1<XtendParameter,SourceParameterDeclaration>() {
+        public SourceParameterDeclaration apply(final XtendParameter it) {
+          CompilationUnitImpl _compilationUnit = SourceMethodDeclarationImpl.this.getCompilationUnit();
+          SourceParameterDeclaration _sourceParameterDeclaration = _compilationUnit.toSourceParameterDeclaration(it);
+          return _sourceParameterDeclaration;
         }
       };
-    List<ParameterDeclaration> _map = ListExtensions.<XtendParameter, ParameterDeclaration>map(_parameters, _function);
+    List<SourceParameterDeclaration> _map = ListExtensions.<XtendParameter, SourceParameterDeclaration>map(_parameters, _function);
     return _map;
   }
 }
