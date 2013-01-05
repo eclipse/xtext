@@ -777,28 +777,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 
-	@Test def testFunctionTypes_beforeResolve() {
-		'''
-			package foo.bar
-			import java.util.Map$Entry
-			class Foo {
-			  def (Entry)=>void test() {
-			    return null
-			  }
-			}
-		'''.assertIsOrganizedTo('''
-			package foo.bar
-
-			import java.util.Map$Entry
-
-			class Foo {
-			  def (Entry)=>void test() {
-			    return null
-			  }
-			}
-		''')
-	}
-
 	@Test def testImport_PairOf() {
 		'''
 			package foo.bar
