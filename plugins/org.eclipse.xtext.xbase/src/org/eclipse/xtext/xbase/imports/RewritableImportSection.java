@@ -310,7 +310,7 @@ public class RewritableImportSection {
 	
 	protected String serializeImports(List<XImportDeclaration> allDeclarations) {
 		StringBuilder builder = new StringBuilder();
-		if(!isEmpty(importsConfiguration.getCommonPackageName(resource)))
+		if(needsPreceedingBlankLine())
 			builder.append(lineSeparator).append(lineSeparator);
 		boolean needNewline = appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
 			public boolean apply(XImportDeclaration input) {
@@ -330,6 +330,10 @@ public class RewritableImportSection {
 		if(!isEmpty(allDeclarations)) 
 			builder.append(lineSeparator);
 		return builder.toString();
+	}
+
+	protected boolean needsPreceedingBlankLine() {
+		return !isEmpty(importsConfiguration.getCommonPackageName(resource));
 	}
 
 	protected boolean appendSubsection(StringBuilder builder, Iterable<XImportDeclaration> subSection, boolean needsNewline) {

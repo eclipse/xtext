@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -82,15 +83,25 @@ public class ImportOrganizer {
 	protected boolean needsImport(JvmDeclaredType type, String name, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
 		return !((type.getIdentifier().equals(name))
-			|| isUsedInNonOverridableContextOnly(usages, nonOverridableTypesProvider, name));
+			|| isUsedInLocalContextOnly(type, usages, nonOverridableTypesProvider, name));
 	}
 	
-	protected boolean isUsedInNonOverridableContextOnly(Iterable<TypeUsage> usages, 
+	protected boolean isUsedInLocalContextOnly(JvmDeclaredType type, Iterable<TypeUsage> usages, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, String name) {
 		for(TypeUsage usage: usages) {
-			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null) 
+			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null
+					&& !equal(getPackageName(usage.getContext()), type.getPackageName())) 
 				return false;
 		}
 		return true;
+	}
+	
+	protected String getPackageName(JvmMember context) {
+		if(context.getDeclaringType() != null)
+			return getPackageName(context.getDeclaringType());
+		if(context instanceof JvmDeclaredType) 
+			return ((JvmDeclaredType)context).getPackageName();
+		else  
+			return null;
 	}
 }

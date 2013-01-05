@@ -15,9 +15,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.collect.Multimap;
@@ -37,6 +44,15 @@ public class ConflictResolver {
 	@Inject
 	private RewritableImportSection.Factory importSectionFactory;
 	
+	@Inject@LinkingScopeProviderBinding
+	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
 	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtextResource resource) {
 		String packageName = config.getCommonPackageName(resource);
 		RewritableImportSection importSection = importSectionFactory.parse(resource);
@@ -46,7 +62,7 @@ public class ConflictResolver {
 		for (String simpleName : simpleName2Types.keySet()) {
 			Collection<JvmDeclaredType> types = simpleName2Types.get(simpleName);
 			JvmDeclaredType locallyDeclaredType = locallyDefinedTypes.get(simpleName);
-			if (locallyDeclaredType != null || isConflictsWithVisibleTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
+			if (locallyDeclaredType != null || isConflictsWithNonOverridableTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
 				for (JvmDeclaredType type : types) {
 					if (type != locallyDeclaredType)
 						result.put(type.getIdentifier(), type);
@@ -68,16 +84,32 @@ public class ConflictResolver {
 		return result;
 	}
 	
-	protected boolean isConflictsWithVisibleTypes(Iterable<JvmDeclaredType> types, TypeUsages usages, 
+	protected boolean isConflictsWithNonOverridableTypes(Iterable<JvmDeclaredType> types, TypeUsages usages, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, String simpleName) {
 		for(JvmDeclaredType type: types) {
 			for(TypeUsage usage: usages.getUsages(type)) {
 				JvmIdentifiableElement visibleType = nonOverridableTypesProvider.getVisibleType(usage.getContext(), simpleName);
 				if(visibleType != null && !visibleType.equals(type))
 					return true;
+				String contextPackage = getPackageName(usage.getContext());
+				if(!isEmpty(contextPackage)) {
+					QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(contextPackage + "." + simpleName);
+					EObject indexedJvmType = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, null, usage.getContext().eResource().getResourceSet());
+					if(indexedJvmType != null && indexedJvmType != type) 
+						return true;
+				}
 			}
 		}
 		return false;
+	}
+	
+	protected String getPackageName(JvmMember context) {
+		if(context.getDeclaringType() != null)
+			return getPackageName(context.getDeclaringType());
+		if(context instanceof JvmDeclaredType) 
+			return ((JvmDeclaredType)context).getPackageName();
+		else  
+			return null;
 	}
 
 	protected JvmDeclaredType findBestMatch(Collection<JvmDeclaredType> types, TypeUsages usages, String packageName,

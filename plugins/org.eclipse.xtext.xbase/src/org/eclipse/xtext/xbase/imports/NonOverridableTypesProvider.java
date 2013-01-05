@@ -25,7 +25,7 @@ import org.eclipse.xtext.common.types.util.VisibilityService;
 import com.google.inject.Inject;
 
 /**
- * This class detects visible inner classes of the supertype and local type parameters. These cannot be overriden by
+ * This class collects visible inner classes of the supertype and local type parameters. These cannot be overridden by
  * means of an import so they need special treatment.
  * 
  * @author Jan Koehnlein - Initial contribution and API

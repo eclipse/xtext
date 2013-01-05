@@ -1501,49 +1501,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testFunctionTypes_beforeResolve() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo.bar");
-    _builder.newLine();
-    _builder.append("import java.util.Map$Entry");
-    _builder.newLine();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("def (Entry)=>void test() {");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("return null");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo.bar");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import java.util.Map$Entry");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("def (Entry)=>void test() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return null");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
-  }
-  
-  @Test
   public void testImport_PairOf() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar");

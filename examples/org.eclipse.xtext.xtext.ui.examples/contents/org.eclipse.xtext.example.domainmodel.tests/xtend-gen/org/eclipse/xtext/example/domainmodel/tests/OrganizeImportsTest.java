@@ -213,6 +213,100 @@ public class OrganizeImportsTest {
   }
   
   @Test
+  public void testGetOrganizedImportSection_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("op test(List<String> s) : void{");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val x = newArrayList(\'foo\',\'bar\')");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Collections::sort(x)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Collections");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("op test(List<String> s) : void{");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val x = newArrayList(\'foo\',\'bar\')");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Collections::sort(x)");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testGetOrganizedImportSection_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*");
+    _builder.newLine();
+    _builder.append("import java.io.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("op test(List<String> s) : void {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.io.Serializable");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.ArrayList");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("op test(List<String> s) : void {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testInnerClasses_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
@@ -578,6 +672,80 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNameClashInnerClasses() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.XbasePackage");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNameClashInnerClassesWithPreference() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("op test(Literals x, XAnnotationsPackage$Literals y) : void {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("op test(Literals x, XAnnotationsPackage$Literals y) : void {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1268,6 +1436,156 @@ public class OrganizeImportsTest {
     _builder_1.append("*/");
     _builder_1.newLine();
     _builder_1.append("entity Foo {}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSamePackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("entity Foo {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("entity Bar {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo: Foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("entity Foo {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("entity Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("foo: Foo");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSuperPackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("entity Foo {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("package baz {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("entity Bar {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("foo: bar.Foo");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bar.Foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("package bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("entity Foo {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("package baz {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("entity Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("foo: Foo");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSubPackage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import bar.Foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("package bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar : bar.baz.Bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("package baz {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("entity Bar {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bar.baz.Bar");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("package bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar : Bar");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("package baz {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("entity Bar {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
