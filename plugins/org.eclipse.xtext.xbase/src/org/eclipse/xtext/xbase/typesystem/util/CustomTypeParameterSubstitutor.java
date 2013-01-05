@@ -45,10 +45,19 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		if (type instanceof JvmTypeParameter) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 			if (!visiting.tryVisit(typeParameter)) {
-				if (!getOwner().getDeclaredTypeParameters().contains(typeParameter)) {
-					LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
-					getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
-					return mappedReference;
+				if (!isDeclaredTypeParameter(typeParameter)) {
+					if (visiting.getCurrentDeclarator() != null) {
+						LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+						getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+						return mappedReference;
+					} else {
+						LightweightTypeReference mappedReference = getDeclaredUpperBound(typeParameter, visiting);
+						if (mappedReference == null) {
+							mappedReference = getObjectReference(typeParameter);
+						}
+						getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+						return mappedReference;
+					}
 				}
 			} else {
 				try {
@@ -87,6 +96,10 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 			result.addTypeArgument(visitedArgument);
 		}
 		return result;
+	}
+
+	protected boolean isDeclaredTypeParameter(JvmTypeParameter typeParameter) {
+		return getOwner().getDeclaredTypeParameters().contains(typeParameter);
 	}
 
 	/**
