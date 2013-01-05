@@ -49,6 +49,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -65,7 +67,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	override getGeneratedTypeDeclarations() {
-		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it)].toList
+		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it) as GeneratedTypeDeclaration].toList
 	}
 	
 	@Property XtendFile xtendFile
@@ -84,6 +86,10 @@ class CompilationUnitImpl implements CompilationUnit {
 		val result = provider.apply(in)
 		identityCache.put(in, result)
 		return result
+	}
+	
+	def private isGenerated(JvmIdentifiableElement element) {
+		element.eResource == xtendFile.eResource
 	}
 
 	def Visibility toVisibility(JvmVisibility delegate) {
@@ -116,15 +122,26 @@ class CompilationUnitImpl implements CompilationUnit {
 		get(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
-					new InterfaceDeclarationJavaImpl => [
-						it.delegate = delegate 
-						it.compilationUnit = this
-					]
+					if (delegate.isGenerated) {
+						//TODO
+					} else {
+						new InterfaceDeclarationJavaImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}
 				JvmGenericType:
-					new ClassDeclarationJavaImpl => [
-						it.delegate = delegate 
-						it.compilationUnit = this
-					]
+					if (delegate.isGenerated) {
+						new GeneratedClassDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					} else {
+						new ClassDeclarationJavaImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}
 				JvmAnnotationType:
 					null //TODO
 				JvmEnumerationType:
@@ -135,19 +152,33 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
 		get(delegate) [
-			new TypeParameterDeclarationImpl => [
-				it.delegate = delegate 
-				it.compilationUnit = this
-			]
+			if (delegate.isGenerated) {
+				new GeneratedTypeParameterDeclarationImpl => [
+					it.delegate = delegate 
+					it.compilationUnit = this
+				]
+			} else {
+				new TypeParameterDeclarationImpl => [
+					it.delegate = delegate 
+					it.compilationUnit = this
+				]
+			}
 		]
 	}
 	
 	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
 		get(delegate) [
-			new ParameterDeclarationJavaImpl => [
-				it.delegate = delegate 
-				it.compilationUnit = this
-			]
+			if (delegate.isGenerated) {
+				new GeneratedParameterDeclarationImpl => [
+					it.delegate = delegate 
+					it.compilationUnit = this
+				]
+			} else {
+				new ParameterDeclarationJavaImpl => [
+					it.delegate = delegate 
+					it.compilationUnit = this
+				]
+			}
 		]
 	}
 
@@ -156,20 +187,43 @@ class CompilationUnitImpl implements CompilationUnit {
 			switch delegate {
 				JvmDeclaredType : toTypeDeclaration(delegate)
 				JvmOperation : {
-					// TODO handle annotation properties					
-					new MethodDeclarationJavaImpl => [
-						it.delegate = delegate 
-						it.compilationUnit = this
-					]
+					// TODO handle annotation properties	
+					(if (delegate.isGenerated) {
+						new GeneratedMethodDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					} else {
+						new MethodDeclarationJavaImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}) as MemberDeclaration	//TODO bug in Xtend
 				} 
-				JvmConstructor: new ConstructorDeclarationJavaImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-				JvmField : new FieldDeclarationJavaImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
+				JvmConstructor: 
+					(if (delegate.isGenerated) {
+						new GeneratedConstructorDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					} else {
+						new ConstructorDeclarationJavaImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}) as MemberDeclaration //TODO bug in Xtend
+				JvmField :
+					(if (delegate.isGenerated) {
+						new GeneratedFieldDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					} else {
+						new FieldDeclarationJavaImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}) as MemberDeclaration //TODO bug in Xtend
 				//TODO JvmEnumerationLiteral
 			}
 		]

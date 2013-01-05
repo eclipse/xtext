@@ -5,13 +5,14 @@ import javax.inject.Inject
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
-import org.junit.Test
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.GeneratedClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.GeneratedMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceMethodDeclaration
+import org.junit.Test
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -40,7 +41,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		validFile('''
 		package foo
 		
-		class MyClass {
+		class MyClass<T extends CharSequence> {
 			
 			String myField
 			
@@ -48,19 +49,23 @@ class DeclarationsTest extends AbstractXtendTestCase {
 				this.myField = initial
 			}
 			
-			def MyClass myMethod(String a) {
-				myField = myField + a
+			def <T2 extends CharSequence> MyClass myMethod(T2 a, T b) {
+				myField = myField + a + b
 				return this
 			}
 		}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
 			val clazz = sourceTypeDeclarations.head as SourceClassDeclaration
+			val genClazz = generatedTypeDeclarations.head as GeneratedClassDeclaration
 			
 			assertEquals('foo.MyClass', clazz.name)
 			assertNull(clazz.superclass)
 			assertTrue(clazz.implementedInterfaces.empty)
 			assertEquals(3, clazz.members.size)
+			assertEquals('T', clazz.typeParameters.head.name)
+			assertEquals('CharSequence', clazz.typeParameters.head.upperBounds.head.toString)
+			assertSame(clazz, clazz.typeParameters.head.typeParameterDeclarator)
 			
 			val field = clazz.members.head as FieldDeclaration
 			assertSame(clazz, field.declaringType)
@@ -69,16 +74,27 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertFalse(field.isFinal)
 			
 			val constructor = clazz.members.get(1) as ConstructorDeclaration
+			
 			assertSame(clazz, constructor.declaringType)
 			assertEquals('MyClass', constructor.name)
 			assertEquals('initial', constructor.parameters.head.name)
 			assertEquals('String', constructor.parameters.head.type.toString)
 			
-			val method = clazz.members.get(2) as MethodDeclaration
+			val method = clazz.members.get(2) as SourceMethodDeclaration
+			val genMethod = genClazz.members.get(2) as GeneratedMethodDeclaration
+			
 			assertSame(clazz, method.declaringType)
 			assertEquals('a', method.parameters.head.name)
-			assertEquals('String', method.parameters.head.type.toString)
-			assertSame(generatedTypeDeclarations.head, method.returnType.type)
+			assertEquals('T2', method.parameters.head.type.toString)
+			assertSame(genMethod.typeParameters.head, method.parameters.head.type.type)
+			assertEquals('T', method.parameters.get(1).type.toString)
+			assertSame(genClazz.typeParameters.head, method.parameters.get(1).type.type)
+			assertSame(genClazz, method.returnType.type)
+			
+			assertEquals('T2', method.typeParameters.head.name)
+			assertEquals('CharSequence', method.typeParameters.head.upperBounds.head.toString)
+			assertSame(method.typeParameters.head, method.typeParameters.head)
+			assertSame(method, method.typeParameters.head.typeParameterDeclarator)
 			
 			assertSame(field, clazz.members.get(0))
 			assertSame(constructor, clazz.members.get(1))
