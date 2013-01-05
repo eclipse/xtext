@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -69,8 +68,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 	@Nullable
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 		if (!ignoreDeclaredTypeParameters) {
-			List<JvmTypeParameter> typeParameters = getOwner().getDeclaredTypeParameters();
-			if (typeParameters.contains(type)) {
+			if (isDeclaredTypeParameter(type)) {
 				return reference;
 			}
 		}
