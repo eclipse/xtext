@@ -1,5 +1,7 @@
 package org.eclipse.xtend.lib.macro.declaration;
 
-public interface GeneratedTypeDeclaration extends TypeDeclaration, GeneratedMemberDeclaration {
-	
+import java.util.List;
+
+public interface GeneratedTypeDeclaration extends GeneratedMemberDeclaration, TypeDeclaration {
+	public List<GeneratedMemberDeclaration> getMembers();
 }
