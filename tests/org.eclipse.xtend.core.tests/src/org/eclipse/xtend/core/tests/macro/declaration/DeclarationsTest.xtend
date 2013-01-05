@@ -11,6 +11,7 @@ import org.junit.Test
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -25,7 +26,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
-			val clazz = sourceTypeDeclarations.head as ClassDeclaration
+			val clazz = sourceTypeDeclarations.head as SourceClassDeclaration
 			assertEquals('foo.MyClass', clazz.name)
 			assertEquals('Object', clazz.superclass.toString)
 			assertEquals('Serializable', clazz.implementedInterfaces.head.toString)
@@ -54,7 +55,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
-			val clazz = sourceTypeDeclarations.head as ClassDeclaration
+			val clazz = sourceTypeDeclarations.head as SourceClassDeclaration
 			
 			assertEquals('foo.MyClass', clazz.name)
 			assertNull(clazz.superclass)
