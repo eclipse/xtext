@@ -19,5 +19,5 @@ public interface CompilationUnit extends AnnotationTarget {
 	
 	List<SourceTypeDeclaration> getSourceTypeDeclarations();
 	
-	List<TypeDeclaration> getGeneratedTypeDeclarations();
+	List<GeneratedTypeDeclaration> getGeneratedTypeDeclarations();
 }

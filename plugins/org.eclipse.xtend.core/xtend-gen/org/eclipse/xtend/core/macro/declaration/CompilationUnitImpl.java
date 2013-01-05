@@ -20,6 +20,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.declaration.ClassDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.ConstructorDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.FieldDeclarationJavaImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedClassDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedConstructorDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedMethodDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.GeneratedTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.InterfaceDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.MethodDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.ParameterDeclarationJavaImpl;
@@ -30,7 +36,6 @@ import org.eclipse.xtend.core.macro.declaration.SourceFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.SourceMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.SourceParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.SourceTypeParameterDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeDeclarationJavaImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
@@ -43,7 +48,11 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration;
@@ -61,6 +70,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -107,19 +117,19 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _map;
   }
   
-  public List<TypeDeclaration> getGeneratedTypeDeclarations() {
+  public List<GeneratedTypeDeclaration> getGeneratedTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final Function1<JvmDeclaredType,TypeDeclaration> _function = new Function1<JvmDeclaredType,TypeDeclaration>() {
-        public TypeDeclaration apply(final JvmDeclaredType it) {
+    final Function1<JvmDeclaredType,GeneratedTypeDeclaration> _function = new Function1<JvmDeclaredType,GeneratedTypeDeclaration>() {
+        public GeneratedTypeDeclaration apply(final JvmDeclaredType it) {
           TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
-          return _typeDeclaration;
+          return ((GeneratedTypeDeclaration) _typeDeclaration);
         }
       };
-    Iterable<TypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, TypeDeclaration>map(_filter, _function);
-    List<TypeDeclaration> _list = IterableExtensions.<TypeDeclaration>toList(_map);
+    Iterable<GeneratedTypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, GeneratedTypeDeclaration>map(_filter, _function);
+    List<GeneratedTypeDeclaration> _list = IterableExtensions.<GeneratedTypeDeclaration>toList(_map);
     return _list;
   }
   
@@ -159,6 +169,14 @@ public class CompilationUnitImpl implements CompilationUnit {
     final OUT result = provider.apply(in);
     this.identityCache.put(in, result);
     return result;
+  }
+  
+  private boolean isGenerated(final JvmIdentifiableElement element) {
+    Resource _eResource = element.eResource();
+    XtendFile _xtendFile = this.getXtendFile();
+    Resource _eResource_1 = _xtendFile.eResource();
+    boolean _equals = ObjectExtensions.operator_equals(_eResource, _eResource_1);
+    return _equals;
   }
   
   public Visibility toVisibility(final JvmVisibility delegate) {
@@ -250,9 +268,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
-    final Function1<JvmDeclaredType,TypeDeclarationJavaImpl<JvmGenericType>> _function = new Function1<JvmDeclaredType,TypeDeclarationJavaImpl<JvmGenericType>>() {
-        public TypeDeclarationJavaImpl<JvmGenericType> apply(final JvmDeclaredType it) {
-          TypeDeclarationJavaImpl<JvmGenericType> _switchResult = null;
+    final Function1<JvmDeclaredType,Object> _function = new Function1<JvmDeclaredType,Object>() {
+        public Object apply(final JvmDeclaredType it) {
+          Object _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof JvmGenericType) {
@@ -260,15 +278,22 @@ public class CompilationUnitImpl implements CompilationUnit {
               boolean _isInterface = _jvmGenericType.isInterface();
               if (_isInterface) {
                 _matched=true;
-                InterfaceDeclarationJavaImpl _interfaceDeclarationJavaImpl = new InterfaceDeclarationJavaImpl();
-                final Procedure1<InterfaceDeclarationJavaImpl> _function = new Procedure1<InterfaceDeclarationJavaImpl>() {
-                    public void apply(final InterfaceDeclarationJavaImpl it) {
-                      it.setDelegate(_jvmGenericType);
-                      it.setCompilationUnit(CompilationUnitImpl.this);
-                    }
-                  };
-                InterfaceDeclarationJavaImpl _doubleArrow = ObjectExtensions.<InterfaceDeclarationJavaImpl>operator_doubleArrow(_interfaceDeclarationJavaImpl, _function);
-                _switchResult = _doubleArrow;
+                InterfaceDeclarationJavaImpl _xifexpression = null;
+                boolean _isGenerated = CompilationUnitImpl.this.isGenerated(_jvmGenericType);
+                if (_isGenerated) {
+                  _xifexpression = null;
+                } else {
+                  InterfaceDeclarationJavaImpl _interfaceDeclarationJavaImpl = new InterfaceDeclarationJavaImpl();
+                  final Procedure1<InterfaceDeclarationJavaImpl> _function = new Procedure1<InterfaceDeclarationJavaImpl>() {
+                      public void apply(final InterfaceDeclarationJavaImpl it) {
+                        it.setDelegate(_jvmGenericType);
+                        it.setCompilationUnit(CompilationUnitImpl.this);
+                      }
+                    };
+                  InterfaceDeclarationJavaImpl _doubleArrow = ObjectExtensions.<InterfaceDeclarationJavaImpl>operator_doubleArrow(_interfaceDeclarationJavaImpl, _function);
+                  _xifexpression = _doubleArrow;
+                }
+                _switchResult = _xifexpression;
               }
             }
           }
@@ -276,15 +301,30 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof JvmGenericType) {
               final JvmGenericType _jvmGenericType = (JvmGenericType)delegate;
               _matched=true;
-              ClassDeclarationJavaImpl _classDeclarationJavaImpl = new ClassDeclarationJavaImpl();
-              final Procedure1<ClassDeclarationJavaImpl> _function = new Procedure1<ClassDeclarationJavaImpl>() {
-                  public void apply(final ClassDeclarationJavaImpl it) {
-                    it.setDelegate(_jvmGenericType);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-              ClassDeclarationJavaImpl _doubleArrow = ObjectExtensions.<ClassDeclarationJavaImpl>operator_doubleArrow(_classDeclarationJavaImpl, _function);
-              _switchResult = _doubleArrow;
+              Object _xifexpression = null;
+              boolean _isGenerated = CompilationUnitImpl.this.isGenerated(_jvmGenericType);
+              if (_isGenerated) {
+                GeneratedClassDeclarationImpl _generatedClassDeclarationImpl = new GeneratedClassDeclarationImpl();
+                final Procedure1<GeneratedClassDeclarationImpl> _function = new Procedure1<GeneratedClassDeclarationImpl>() {
+                    public void apply(final GeneratedClassDeclarationImpl it) {
+                      it.setDelegate(_jvmGenericType);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                GeneratedClassDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedClassDeclarationImpl>operator_doubleArrow(_generatedClassDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                ClassDeclarationJavaImpl _classDeclarationJavaImpl = new ClassDeclarationJavaImpl();
+                final Procedure1<ClassDeclarationJavaImpl> _function_1 = new Procedure1<ClassDeclarationJavaImpl>() {
+                    public void apply(final ClassDeclarationJavaImpl it) {
+                      it.setDelegate(_jvmGenericType);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                ClassDeclarationJavaImpl _doubleArrow_1 = ObjectExtensions.<ClassDeclarationJavaImpl>operator_doubleArrow(_classDeclarationJavaImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = _xifexpression;
             }
           }
           if (!_matched) {
@@ -304,22 +344,37 @@ public class CompilationUnitImpl implements CompilationUnit {
           return _switchResult;
         }
       };
-    TypeDeclarationJavaImpl<JvmGenericType> _get = this.<JvmDeclaredType, TypeDeclarationJavaImpl<JvmGenericType>>get(delegate, _function);
-    return _get;
+    Object _get = this.<JvmDeclaredType, Object>get(delegate, _function);
+    return ((TypeDeclaration)_get);
   }
   
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter,TypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,TypeParameterDeclarationImpl>() {
         public TypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
-          TypeParameterDeclarationImpl _typeParameterDeclarationImpl = new TypeParameterDeclarationImpl();
-          final Procedure1<TypeParameterDeclarationImpl> _function = new Procedure1<TypeParameterDeclarationImpl>() {
-              public void apply(final TypeParameterDeclarationImpl it) {
-                it.setDelegate(delegate);
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-          TypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<TypeParameterDeclarationImpl>operator_doubleArrow(_typeParameterDeclarationImpl, _function);
-          return _doubleArrow;
+          TypeParameterDeclarationImpl _xifexpression = null;
+          boolean _isGenerated = CompilationUnitImpl.this.isGenerated(delegate);
+          if (_isGenerated) {
+            GeneratedTypeParameterDeclarationImpl _generatedTypeParameterDeclarationImpl = new GeneratedTypeParameterDeclarationImpl();
+            final Procedure1<GeneratedTypeParameterDeclarationImpl> _function = new Procedure1<GeneratedTypeParameterDeclarationImpl>() {
+                public void apply(final GeneratedTypeParameterDeclarationImpl it) {
+                  it.setDelegate(delegate);
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+            GeneratedTypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedTypeParameterDeclarationImpl>operator_doubleArrow(_generatedTypeParameterDeclarationImpl, _function);
+            _xifexpression = _doubleArrow;
+          } else {
+            TypeParameterDeclarationImpl _typeParameterDeclarationImpl = new TypeParameterDeclarationImpl();
+            final Procedure1<TypeParameterDeclarationImpl> _function_1 = new Procedure1<TypeParameterDeclarationImpl>() {
+                public void apply(final TypeParameterDeclarationImpl it) {
+                  it.setDelegate(delegate);
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+            TypeParameterDeclarationImpl _doubleArrow_1 = ObjectExtensions.<TypeParameterDeclarationImpl>operator_doubleArrow(_typeParameterDeclarationImpl, _function_1);
+            _xifexpression = _doubleArrow_1;
+          }
+          return _xifexpression;
         }
       };
     TypeParameterDeclarationImpl _get = this.<JvmTypeParameter, TypeParameterDeclarationImpl>get(delegate, _function);
@@ -327,21 +382,36 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
-    final Function1<JvmFormalParameter,ParameterDeclarationJavaImpl> _function = new Function1<JvmFormalParameter,ParameterDeclarationJavaImpl>() {
-        public ParameterDeclarationJavaImpl apply(final JvmFormalParameter it) {
-          ParameterDeclarationJavaImpl _parameterDeclarationJavaImpl = new ParameterDeclarationJavaImpl();
-          final Procedure1<ParameterDeclarationJavaImpl> _function = new Procedure1<ParameterDeclarationJavaImpl>() {
-              public void apply(final ParameterDeclarationJavaImpl it) {
-                it.setDelegate(delegate);
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-          ParameterDeclarationJavaImpl _doubleArrow = ObjectExtensions.<ParameterDeclarationJavaImpl>operator_doubleArrow(_parameterDeclarationJavaImpl, _function);
-          return _doubleArrow;
+    final Function1<JvmFormalParameter,Object> _function = new Function1<JvmFormalParameter,Object>() {
+        public Object apply(final JvmFormalParameter it) {
+          Object _xifexpression = null;
+          boolean _isGenerated = CompilationUnitImpl.this.isGenerated(delegate);
+          if (_isGenerated) {
+            GeneratedParameterDeclarationImpl _generatedParameterDeclarationImpl = new GeneratedParameterDeclarationImpl();
+            final Procedure1<GeneratedParameterDeclarationImpl> _function = new Procedure1<GeneratedParameterDeclarationImpl>() {
+                public void apply(final GeneratedParameterDeclarationImpl it) {
+                  it.setDelegate(delegate);
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+            GeneratedParameterDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedParameterDeclarationImpl>operator_doubleArrow(_generatedParameterDeclarationImpl, _function);
+            _xifexpression = _doubleArrow;
+          } else {
+            ParameterDeclarationJavaImpl _parameterDeclarationJavaImpl = new ParameterDeclarationJavaImpl();
+            final Procedure1<ParameterDeclarationJavaImpl> _function_1 = new Procedure1<ParameterDeclarationJavaImpl>() {
+                public void apply(final ParameterDeclarationJavaImpl it) {
+                  it.setDelegate(delegate);
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+            ParameterDeclarationJavaImpl _doubleArrow_1 = ObjectExtensions.<ParameterDeclarationJavaImpl>operator_doubleArrow(_parameterDeclarationJavaImpl, _function_1);
+            _xifexpression = _doubleArrow_1;
+          }
+          return _xifexpression;
         }
       };
-    ParameterDeclarationJavaImpl _get = this.<JvmFormalParameter, ParameterDeclarationJavaImpl>get(delegate, _function);
-    return _get;
+    Object _get = this.<JvmFormalParameter, Object>get(delegate, _function);
+    return ((ParameterDeclaration)_get);
   }
   
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
@@ -361,45 +431,90 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof JvmOperation) {
               final JvmOperation _jvmOperation = (JvmOperation)delegate;
               _matched=true;
-              MethodDeclarationJavaImpl _methodDeclarationJavaImpl = new MethodDeclarationJavaImpl();
-              final Procedure1<MethodDeclarationJavaImpl> _function = new Procedure1<MethodDeclarationJavaImpl>() {
-                  public void apply(final MethodDeclarationJavaImpl it) {
-                    it.setDelegate(_jvmOperation);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-              MethodDeclarationJavaImpl _doubleArrow = ObjectExtensions.<MethodDeclarationJavaImpl>operator_doubleArrow(_methodDeclarationJavaImpl, _function);
-              _switchResult = _doubleArrow;
+              Object _xifexpression = null;
+              boolean _isGenerated = CompilationUnitImpl.this.isGenerated(_jvmOperation);
+              if (_isGenerated) {
+                GeneratedMethodDeclarationImpl _generatedMethodDeclarationImpl = new GeneratedMethodDeclarationImpl();
+                final Procedure1<GeneratedMethodDeclarationImpl> _function = new Procedure1<GeneratedMethodDeclarationImpl>() {
+                    public void apply(final GeneratedMethodDeclarationImpl it) {
+                      it.setDelegate(_jvmOperation);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                GeneratedMethodDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedMethodDeclarationImpl>operator_doubleArrow(_generatedMethodDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                MethodDeclarationJavaImpl _methodDeclarationJavaImpl = new MethodDeclarationJavaImpl();
+                final Procedure1<MethodDeclarationJavaImpl> _function_1 = new Procedure1<MethodDeclarationJavaImpl>() {
+                    public void apply(final MethodDeclarationJavaImpl it) {
+                      it.setDelegate(_jvmOperation);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                MethodDeclarationJavaImpl _doubleArrow_1 = ObjectExtensions.<MethodDeclarationJavaImpl>operator_doubleArrow(_methodDeclarationJavaImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = ((MemberDeclaration) ((MethodDeclaration)_xifexpression));
             }
           }
           if (!_matched) {
             if (delegate instanceof JvmConstructor) {
               final JvmConstructor _jvmConstructor = (JvmConstructor)delegate;
               _matched=true;
-              ConstructorDeclarationJavaImpl _constructorDeclarationJavaImpl = new ConstructorDeclarationJavaImpl();
-              final Procedure1<ConstructorDeclarationJavaImpl> _function = new Procedure1<ConstructorDeclarationJavaImpl>() {
-                  public void apply(final ConstructorDeclarationJavaImpl it) {
-                    it.setDelegate(_jvmConstructor);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-              ConstructorDeclarationJavaImpl _doubleArrow = ObjectExtensions.<ConstructorDeclarationJavaImpl>operator_doubleArrow(_constructorDeclarationJavaImpl, _function);
-              _switchResult = _doubleArrow;
+              Object _xifexpression = null;
+              boolean _isGenerated = CompilationUnitImpl.this.isGenerated(_jvmConstructor);
+              if (_isGenerated) {
+                GeneratedConstructorDeclarationImpl _generatedConstructorDeclarationImpl = new GeneratedConstructorDeclarationImpl();
+                final Procedure1<GeneratedConstructorDeclarationImpl> _function = new Procedure1<GeneratedConstructorDeclarationImpl>() {
+                    public void apply(final GeneratedConstructorDeclarationImpl it) {
+                      it.setDelegate(_jvmConstructor);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                GeneratedConstructorDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedConstructorDeclarationImpl>operator_doubleArrow(_generatedConstructorDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                ConstructorDeclarationJavaImpl _constructorDeclarationJavaImpl = new ConstructorDeclarationJavaImpl();
+                final Procedure1<ConstructorDeclarationJavaImpl> _function_1 = new Procedure1<ConstructorDeclarationJavaImpl>() {
+                    public void apply(final ConstructorDeclarationJavaImpl it) {
+                      it.setDelegate(_jvmConstructor);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                ConstructorDeclarationJavaImpl _doubleArrow_1 = ObjectExtensions.<ConstructorDeclarationJavaImpl>operator_doubleArrow(_constructorDeclarationJavaImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = ((MemberDeclaration) ((ConstructorDeclaration)_xifexpression));
             }
           }
           if (!_matched) {
             if (delegate instanceof JvmField) {
               final JvmField _jvmField = (JvmField)delegate;
               _matched=true;
-              FieldDeclarationJavaImpl _fieldDeclarationJavaImpl = new FieldDeclarationJavaImpl();
-              final Procedure1<FieldDeclarationJavaImpl> _function = new Procedure1<FieldDeclarationJavaImpl>() {
-                  public void apply(final FieldDeclarationJavaImpl it) {
-                    it.setDelegate(_jvmField);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-              FieldDeclarationJavaImpl _doubleArrow = ObjectExtensions.<FieldDeclarationJavaImpl>operator_doubleArrow(_fieldDeclarationJavaImpl, _function);
-              _switchResult = _doubleArrow;
+              Object _xifexpression = null;
+              boolean _isGenerated = CompilationUnitImpl.this.isGenerated(_jvmField);
+              if (_isGenerated) {
+                GeneratedFieldDeclarationImpl _generatedFieldDeclarationImpl = new GeneratedFieldDeclarationImpl();
+                final Procedure1<GeneratedFieldDeclarationImpl> _function = new Procedure1<GeneratedFieldDeclarationImpl>() {
+                    public void apply(final GeneratedFieldDeclarationImpl it) {
+                      it.setDelegate(_jvmField);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                GeneratedFieldDeclarationImpl _doubleArrow = ObjectExtensions.<GeneratedFieldDeclarationImpl>operator_doubleArrow(_generatedFieldDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                FieldDeclarationJavaImpl _fieldDeclarationJavaImpl = new FieldDeclarationJavaImpl();
+                final Procedure1<FieldDeclarationJavaImpl> _function_1 = new Procedure1<FieldDeclarationJavaImpl>() {
+                    public void apply(final FieldDeclarationJavaImpl it) {
+                      it.setDelegate(_jvmField);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                FieldDeclarationJavaImpl _doubleArrow_1 = ObjectExtensions.<FieldDeclarationJavaImpl>operator_doubleArrow(_fieldDeclarationJavaImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = ((MemberDeclaration) ((FieldDeclaration)_xifexpression));
             }
           }
           return _switchResult;

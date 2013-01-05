@@ -239,7 +239,8 @@ class SourceTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmType
 	}
 	
 	override getTypeParameterDeclarator() {
-		compilationUnit.toSourceMemberDeclaration(delegate.eContainer as XtendMember) as SourceTypeParameterDeclarator
+		val eContainer = delegate.eContainer
+		compilationUnit.toSourceMemberDeclaration(eContainer as XtendMember) as SourceTypeParameterDeclarator
 	}
 	
 }

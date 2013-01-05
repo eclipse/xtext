@@ -1,5 +1,5 @@
 package org.eclipse.xtend.lib.macro.declaration;
 
-public interface SourceAnnotationTypeDeclaration extends AnnotationTypeDeclaration, SourceNamedElement {
+public interface SourceAnnotationTypeDeclaration extends SourceTypeDeclaration, AnnotationTypeDeclaration {
 
 }

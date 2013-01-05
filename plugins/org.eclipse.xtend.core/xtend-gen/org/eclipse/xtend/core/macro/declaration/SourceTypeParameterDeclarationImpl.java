@@ -51,10 +51,14 @@ public class SourceTypeParameterDeclarationImpl extends AbstractDeclarationImpl<
   }
   
   public SourceTypeParameterDeclarator getTypeParameterDeclarator() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmTypeParameter _delegate = this.getDelegate();
-    EObject _eContainer = _delegate.eContainer();
-    SourceMemberDeclaration _sourceMemberDeclaration = _compilationUnit.toSourceMemberDeclaration(((XtendMember) _eContainer));
-    return ((SourceTypeParameterDeclarator) _sourceMemberDeclaration);
+    SourceTypeParameterDeclarator _xblockexpression = null;
+    {
+      JvmTypeParameter _delegate = this.getDelegate();
+      final EObject eContainer = _delegate.eContainer();
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      SourceMemberDeclaration _sourceMemberDeclaration = _compilationUnit.toSourceMemberDeclaration(((XtendMember) eContainer));
+      _xblockexpression = (((SourceTypeParameterDeclarator) _sourceMemberDeclaration));
+    }
+    return _xblockexpression;
   }
 }
