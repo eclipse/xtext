@@ -119,6 +119,53 @@ class OrganizeImportsTest {
 		''')
 	}
 
+	@Test def testGetOrganizedImportSection_03() {
+		'''
+			import java.util.*
+
+			entity Foo {
+			  op test(List<String> s) : void{
+			    val x = newArrayList('foo','bar')
+			    Collections::sort(x)
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Collections
+			import java.util.List
+
+			entity Foo {
+			  op test(List<String> s) : void{
+			    val x = newArrayList('foo','bar')
+			    Collections::sort(x)
+			  }
+			}
+		''')
+	}
+
+	@Test def testGetOrganizedImportSection_04() {
+		'''
+			import java.util.*
+			import java.io.*
+
+			entity Foo {
+			  op test(List<String> s) : void {
+			    val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			import java.util.ArrayList
+			import java.util.List
+			import java.util.Map
+
+			entity Foo {
+			  op test(List<String> s) : void {
+			    val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()
+			  }
+			}
+		''')
+	}
+
 	@Test def testInnerClasses_01() {
 		'''
 			entity Foo {
@@ -308,6 +355,48 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
+
+	@Test def testNameClashInnerClasses() {
+		'''
+			import org.eclipse.xtext.xbase.XbasePackage
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			entity Foo {
+			  op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.xtext.xbase.XbasePackage
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			entity Foo {
+			  op test(XbasePackage$Literals x, XAnnotationsPackage$Literals y) : void {
+			  }
+			}
+		''')
+	}
+
+
+	@Test def testNameClashInnerClassesWithPreference() {
+		'''
+			import org.eclipse.xtext.xbase.XbasePackage$Literals
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			entity Foo {
+			  op test(Literals x, XAnnotationsPackage$Literals y) : void {
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.xtext.xbase.XbasePackage$Literals
+			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
+			entity Foo {
+			  op test(Literals x, XAnnotationsPackage$Literals y) : void {
+			  }
+			}
+		''')
+	}
+
 
 	// TODO: activate when static imports are available 
 	@Ignore@Test def testStaticImport_01() {
@@ -639,6 +728,74 @@ class OrganizeImportsTest {
 			 * {@link List}
 			 */
 			entity Foo {}
+		''')
+	}
+	
+	@Test def testSamePackage() {
+		'''
+			package bar {
+				entity Foo {}
+				entity Bar {
+					foo: Foo
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package bar {
+				entity Foo {}
+				entity Bar {
+					foo: Foo
+				}
+			}
+		''')
+	}
+	
+	@Test def testSuperPackage() {
+		'''
+			package bar {
+				entity Foo {}
+				package baz {
+					entity Bar {
+						foo: bar.Foo
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import bar.Foo
+			
+			package bar {
+				entity Foo {}
+				package baz {
+					entity Bar {
+						foo: Foo
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test def testSubPackage() {
+		'''
+			import bar.Foo
+			
+			package bar {
+				entity Foo {
+					bar : bar.baz.Bar
+				}
+				package baz {
+					entity Bar {}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import bar.baz.Bar
+			
+			package bar {
+				entity Foo {
+					bar : Bar
+				}
+				package baz {
+					entity Bar {}
+				}
+			}
 		''')
 	}
 	
