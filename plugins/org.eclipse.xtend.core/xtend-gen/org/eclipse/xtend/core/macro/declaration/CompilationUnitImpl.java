@@ -50,10 +50,12 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.GeneratedClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration;
@@ -117,6 +119,13 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _map;
   }
   
+  public List<SourceClassDeclaration> getSourceClassDeclarations() {
+    List<SourceTypeDeclaration> _sourceTypeDeclarations = this.getSourceTypeDeclarations();
+    Iterable<SourceClassDeclaration> _filter = Iterables.<SourceClassDeclaration>filter(_sourceTypeDeclarations, SourceClassDeclaration.class);
+    List<SourceClassDeclaration> _list = IterableExtensions.<SourceClassDeclaration>toList(_filter);
+    return _list;
+  }
+  
   public List<GeneratedTypeDeclaration> getGeneratedTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
@@ -130,6 +139,13 @@ public class CompilationUnitImpl implements CompilationUnit {
       };
     Iterable<GeneratedTypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, GeneratedTypeDeclaration>map(_filter, _function);
     List<GeneratedTypeDeclaration> _list = IterableExtensions.<GeneratedTypeDeclaration>toList(_map);
+    return _list;
+  }
+  
+  public List<GeneratedClassDeclaration> getGeneratedClassDeclarations() {
+    List<GeneratedTypeDeclaration> _generatedTypeDeclarations = this.getGeneratedTypeDeclarations();
+    Iterable<GeneratedClassDeclaration> _filter = Iterables.<GeneratedClassDeclaration>filter(_generatedTypeDeclarations, GeneratedClassDeclaration.class);
+    List<GeneratedClassDeclaration> _list = IterableExtensions.<GeneratedClassDeclaration>toList(_filter);
     return _list;
   }
   

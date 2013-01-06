@@ -38,7 +38,7 @@ abstract class NamedElementJavaImpl<T extends JvmIdentifiableElement> extends Ab
 abstract class MemberDeclarationJavaImpl<T extends JvmMember> extends NamedElementJavaImpl<T> implements MemberDeclaration {
 	
 	override getDocComment() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		null
 	}
 	
 	override getVisibility() {
@@ -123,7 +123,7 @@ abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> extends Me
 	}
 	
 	override getBody() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		null
 	}
 	
 	override getParameters() {
@@ -179,7 +179,7 @@ class ConstructorDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmCo
 	}
 	
 	override getBody() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		null
 	}
 	
 }
@@ -187,7 +187,7 @@ class ConstructorDeclarationJavaImpl extends ExecutableDeclarationJavaImpl<JvmCo
 class FieldDeclarationJavaImpl extends MemberDeclarationJavaImpl<JvmField> implements FieldDeclaration {
 	
 	override getInitializer() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		null
 	}
 	
 	override isFinal() {

@@ -47,8 +47,7 @@ public abstract class ExecutableDeclarationJavaImpl<T extends JvmExecutable> ext
   }
   
   public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    return null;
   }
   
   public List<? extends ParameterDeclaration> getParameters() {

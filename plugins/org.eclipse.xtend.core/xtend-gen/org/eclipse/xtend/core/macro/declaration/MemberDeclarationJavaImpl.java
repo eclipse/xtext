@@ -19,8 +19,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 @SuppressWarnings("all")
 public abstract class MemberDeclarationJavaImpl<T extends JvmMember> extends NamedElementJavaImpl<T> implements MemberDeclaration {
   public String getDocComment() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    return null;
   }
   
   public Visibility getVisibility() {

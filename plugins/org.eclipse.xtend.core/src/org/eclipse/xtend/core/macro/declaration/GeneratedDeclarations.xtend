@@ -27,12 +27,18 @@ import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
+import java.lang.String
+import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtext.common.types.JvmVisibility
+import java.util.List
+import org.eclipse.xtend.lib.macro.type.TypeReference
 
 abstract class GeneratedNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements GeneratedNamedElement {
 	
 	override getName() {
 		delegate.simpleName
 	}
+	
 }
 
 abstract class GeneratedMemberDeclarationImpl<T extends JvmMember> extends GeneratedNamedElementImpl<T> implements GeneratedMemberDeclaration {
@@ -41,12 +47,29 @@ abstract class GeneratedMemberDeclarationImpl<T extends JvmMember> extends Gener
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
+	override setDocComment(String docComment) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
 	override getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
+	override setVisibility(Visibility visibility) {
+		delegate.visibility = switch visibility {
+			case Visibility::DEFAULT : JvmVisibility::DEFAULT
+			case Visibility::PUBLIC : JvmVisibility::PUBLIC
+			case Visibility::PRIVATE : JvmVisibility::PRIVATE
+			case Visibility::PROTECTED : JvmVisibility::PROTECTED
+		}
+	}
+	
 	override getDeclaringType() {
 		compilationUnit.toTypeDeclaration(delegate.declaringType) as GeneratedTypeDeclaration
+	}
+	
+	override setName(String name) {
+		delegate.simpleName = name
 	}
 	
 }
@@ -67,6 +90,25 @@ abstract class GeneratedTypeDeclarationImpl<T extends JvmDeclaredType> extends G
 	
 	override getName() {
 		delegate.identifier
+	}
+	
+	override setPackageName(String packageName) {
+		delegate.packageName = packageName
+	}
+	
+	override setSimpleName(String simpleName) {
+		delegate.simpleName = simpleName
+	}
+	
+	override setName(String name) {
+		val idx = name.lastIndexOf('.')
+		if (idx == -1) {
+			delegate.packageName = null
+			delegate.simpleName = name
+		} else {
+			delegate.packageName = name.substring(0, idx-1)
+			delegate.simpleName = name.substring(idx)
+		}
 	}
 	
 }
@@ -98,6 +140,26 @@ class GeneratedClassDeclarationImpl extends GeneratedTypeDeclarationImpl<JvmGene
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
+
+	override setAbstract(boolean isAbstract) {
+		delegate.setAbstract(isAbstract)
+	}
+	
+	override setFinal(boolean isFinal) {
+		delegate.setFinal(isFinal)
+	}
+	
+	override setStatic(boolean isStatic) {
+		delegate.setStatic(isStatic)
+	}
+	
+	override setSuperclass(TypeReference superclass) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
+	override setImplementedInterfaces(List<? extends TypeReference> superclass) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
 }
 
 //class InterfaceDeclarationJavaImpl extends GeneratedTypeDeclarationImpl<JvmGenericType> implements GeneratedInterfaceDeclaration {
@@ -144,6 +206,10 @@ class GeneratedParameterDeclarationImpl extends GeneratedNamedElementImpl<JvmFor
 	
 	override getDeclaringExecutable() {
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as GeneratedExecutableDeclaration
+	}
+	
+	override setName(String name) {
+		delegate.name = name
 	}
 	
 }
@@ -208,6 +274,10 @@ class GeneratedTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl
 	
 	override GeneratedTypeParameterDeclarator getTypeParameterDeclarator() {
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as GeneratedTypeParameterDeclarator
+	}
+	
+	override setName(String name) {
+		delegate.name = name
 	}
 	
 }

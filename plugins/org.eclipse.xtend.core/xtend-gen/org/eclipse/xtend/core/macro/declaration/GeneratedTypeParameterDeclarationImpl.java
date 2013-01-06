@@ -25,4 +25,9 @@ public class GeneratedTypeParameterDeclarationImpl extends TypeParameterDeclarat
     MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmExecutable) _eContainer));
     return ((GeneratedTypeParameterDeclarator) _memberDeclaration);
   }
+  
+  public void setName(final String name) {
+    JvmTypeParameter _delegate = this.getDelegate();
+    _delegate.setName(name);
+  }
 }

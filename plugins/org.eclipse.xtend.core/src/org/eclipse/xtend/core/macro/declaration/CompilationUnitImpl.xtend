@@ -19,11 +19,15 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.GeneratedClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -36,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmPrimitiveType
@@ -48,9 +53,6 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -66,8 +68,16 @@ class CompilationUnitImpl implements CompilationUnit {
 		xtendFile.xtendTypes.map[toSourceTypeDeclaration(it)]
 	}
 	
+	override getSourceClassDeclarations() {
+		sourceTypeDeclarations.filter(typeof(SourceClassDeclaration)).toList
+	}
+	
 	override getGeneratedTypeDeclarations() {
 		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it) as GeneratedTypeDeclaration].toList
+	}
+	
+	override getGeneratedClassDeclarations() {
+		generatedTypeDeclarations.filter(typeof(GeneratedClassDeclaration)).toList
 	}
 	
 	@Property XtendFile xtendFile

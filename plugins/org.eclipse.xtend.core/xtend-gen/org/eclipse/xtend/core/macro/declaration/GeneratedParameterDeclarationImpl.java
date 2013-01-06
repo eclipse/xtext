@@ -35,4 +35,9 @@ public class GeneratedParameterDeclarationImpl extends GeneratedNamedElementImpl
     MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmMember) _eContainer));
     return ((GeneratedExecutableDeclaration) _memberDeclaration);
   }
+  
+  public void setName(final String name) {
+    JvmFormalParameter _delegate = this.getDelegate();
+    _delegate.setName(name);
+  }
 }

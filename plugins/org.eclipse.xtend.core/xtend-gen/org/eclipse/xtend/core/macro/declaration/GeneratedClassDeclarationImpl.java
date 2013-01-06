@@ -98,4 +98,29 @@ public class GeneratedClassDeclarationImpl extends GeneratedTypeDeclarationImpl<
     List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
+  
+  public void setAbstract(final boolean isAbstract) {
+    JvmGenericType _delegate = this.getDelegate();
+    _delegate.setAbstract(isAbstract);
+  }
+  
+  public void setFinal(final boolean isFinal) {
+    JvmGenericType _delegate = this.getDelegate();
+    _delegate.setFinal(isFinal);
+  }
+  
+  public void setStatic(final boolean isStatic) {
+    JvmGenericType _delegate = this.getDelegate();
+    _delegate.setStatic(isStatic);
+  }
+  
+  public void setSuperclass(final TypeReference superclass) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
+  }
+  
+  public void setImplementedInterfaces(final List<? extends TypeReference> superclass) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
+  }
 }

@@ -18,8 +18,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 @SuppressWarnings("all")
 public class FieldDeclarationJavaImpl extends MemberDeclarationJavaImpl<JvmField> implements FieldDeclaration {
   public Expression getInitializer() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    return null;
   }
   
   public boolean isFinal() {

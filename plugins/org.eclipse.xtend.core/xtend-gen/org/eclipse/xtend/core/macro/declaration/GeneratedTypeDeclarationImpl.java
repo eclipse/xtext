@@ -52,4 +52,34 @@ public abstract class GeneratedTypeDeclarationImpl<T extends JvmDeclaredType> ex
     String _identifier = _delegate.getIdentifier();
     return _identifier;
   }
+  
+  public void setPackageName(final String packageName) {
+    T _delegate = this.getDelegate();
+    _delegate.setPackageName(packageName);
+  }
+  
+  public void setSimpleName(final String simpleName) {
+    T _delegate = this.getDelegate();
+    _delegate.setSimpleName(simpleName);
+  }
+  
+  public void setName(final String name) {
+    final int idx = name.lastIndexOf(".");
+    int _minus = (-1);
+    boolean _equals = (idx == _minus);
+    if (_equals) {
+      T _delegate = this.getDelegate();
+      _delegate.setPackageName(null);
+      T _delegate_1 = this.getDelegate();
+      _delegate_1.setSimpleName(name);
+    } else {
+      T _delegate_2 = this.getDelegate();
+      int _minus_1 = (idx - 1);
+      String _substring = name.substring(0, _minus_1);
+      _delegate_2.setPackageName(_substring);
+      T _delegate_3 = this.getDelegate();
+      String _substring_1 = name.substring(idx);
+      _delegate_3.setSimpleName(_substring_1);
+    }
+  }
 }

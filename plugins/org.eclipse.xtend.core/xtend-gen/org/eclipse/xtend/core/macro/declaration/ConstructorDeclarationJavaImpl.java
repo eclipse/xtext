@@ -22,7 +22,6 @@ public class ConstructorDeclarationJavaImpl extends ExecutableDeclarationJavaImp
   }
   
   public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    return null;
   }
 }
