@@ -8,14 +8,19 @@
 package org.eclipse.xtext.xbase.typesystem.override;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -78,8 +83,39 @@ public class OverrideTester {
 		return true;
 	}
 	
-	protected boolean isMatchingTypeParameters(AbstractResolvedOperation overriding, AbstractResolvedOperation overriddenInHierarchy) {
-		// TODO Auto-generated method stub
+	protected boolean isMatchingTypeParameters(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
+		int overridingTypeParameterCount = overriding.getTypeParameters().size();
+		if (overridingTypeParameterCount != overridden.getTypeParameters().size()) {
+			return overridingTypeParameterCount == 0;
+		}
+		TypeParameterSubstitutor<?> substitutor = overridden.getSubstitutor();
+		ITypeReferenceOwner owner = overriding.getContextType().getOwner();
+		for(int i = 0; i < overridingTypeParameterCount; i++) {
+			JvmTypeParameter overridingTypeParameter = overriding.getTypeParameters().get(i);
+			JvmTypeParameter overriddenTypeParameter = overridden.getTypeParameters().get(i);
+			List<LightweightTypeReference> overridingSuperTypes = new ParameterizedTypeReference(owner, overridingTypeParameter).getSuperTypes();
+			List<LightweightTypeReference> overriddenSuperTypes = new ParameterizedTypeReference(owner, overriddenTypeParameter).getSuperTypes();
+			if (overridingSuperTypes.size() != overriddenSuperTypes.size()) {
+				return false;
+			}
+			if (overridingSuperTypes.size() == 1) {
+				LightweightTypeReference resolved = substitutor.substitute(overriddenSuperTypes.get(0));
+				if (!overridingSuperTypes.get(0).getIdentifier().equals(resolved.getIdentifier())) {
+					return false;
+				}
+			} else {
+				Set<String> overridingSuperTypeNames = Sets.newHashSet();
+				for(LightweightTypeReference overridingSuperType: overridingSuperTypes) {
+					overridingSuperTypeNames.add(overridingSuperType.getIdentifier());
+				}
+				for(LightweightTypeReference overriddenSuperType: overriddenSuperTypes) {
+					LightweightTypeReference resolved = substitutor.substitute(overriddenSuperType);
+					if (!overridingSuperTypeNames.contains(resolved.getIdentifier())) {
+						return false;
+					}
+				}
+			}
+		}
 		return true;
 	}
 
@@ -134,5 +170,22 @@ public class OverrideTester {
 //			initial.add(OverrideCheckDetails.IS_FINAL);
 //		}
 //	}
-	
+//	class A5 {
+//        <T extends CharSequence> void m() {
+//        }
+//        <T extends Comparable<T>> void m2() {}
+//        <T extends Object & CharSequence & Cloneable> void m3() {
+//        }
+//    }
+//
+//        class B5<Y> extends A5 {
+//            @Override
+//            <T1 extends CharSequence> void m() {
+//            }
+//            @Override
+//            <T1 extends Comparable<T1>> void m2() {}
+//            @Override
+//            <T extends Object & Cloneable & CharSequence> void m3() {
+//            }
+//        }
 }

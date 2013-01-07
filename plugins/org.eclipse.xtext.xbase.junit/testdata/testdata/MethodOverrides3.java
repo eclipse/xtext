@@ -7,6 +7,8 @@
  *******************************************************************************/
 package testdata;
 
+import java.util.List;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.4
@@ -20,7 +22,7 @@ public class MethodOverrides3<V extends Iterable<String>> {
 	public <T extends Iterable<CharSequence>> String m2(T t) {
 		return "m2(t)";
 	}
-	
+
 	public <T extends CharSequence> String m3(T t) {
 		return "m3(t)";
 	}
@@ -28,9 +30,21 @@ public class MethodOverrides3<V extends Iterable<String>> {
 	public <T extends Iterable<CharSequence>> String m4(T t) {
 		return "m4(t)";
 	}
-	
+
 	public String m5(V v) {
 		return "m5(t)";
 	}
+
+	<T extends CharSequence> void m6() {
+	}
+
+	<T extends Comparable<T>, Y extends T, K extends List<Y>> void m7() {
+	}
+
+	<T extends Object & CharSequence & Cloneable, Y extends Enum<? super Y>> void m8() {
+	}
 	
+	<T extends V> void m9() {
+	}
+
 }

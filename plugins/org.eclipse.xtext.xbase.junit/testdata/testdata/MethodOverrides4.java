@@ -23,7 +23,7 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	public <T extends Iterable<CharSequence>> String m2(T t) {
 		return "m2(t)";
 	}
-	
+
 	@Override
 	public String m3(CharSequence t) {
 		return "m3(t)";
@@ -33,9 +33,25 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	public String m4(@SuppressWarnings("rawtypes") Iterable t) {
 		return "m4(t)";
 	}
+
+	@Override
+	public String m5(List<String> m5) {
+		return "";
+	}
+
+	@Override
+	<T1 extends CharSequence> void m6() {
+	}
+
+	@Override
+	<T1 extends Comparable<T1>, V1 extends T1, K1 extends List<V1>> void m7() {
+	}
+
+	@Override
+	<T extends Object & Cloneable & CharSequence, E extends Enum<? super E>> void m8() {
+	}
 	
 	@Override
-	public String m5(List<String> m5) { 
-		return "";
+	<T extends List<String>> void m9() {
 	}
 }

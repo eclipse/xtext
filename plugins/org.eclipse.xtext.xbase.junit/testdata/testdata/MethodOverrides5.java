@@ -39,5 +39,19 @@ public class MethodOverrides5 extends MethodOverrides3 {
 		return "m5(t)";
 	}
 	
+	@Override
+	void m6() {
+	}
 	
+	@Override
+	void m7() {
+	}
+	
+	@Override
+	void m8() {
+	}
+	
+	@Override
+	void m9() {
+	}
 }
