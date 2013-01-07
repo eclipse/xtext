@@ -114,7 +114,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testListToArrayHasTwoCandidates() {
     final IResolvedOperation operation = this.toOperation("(null as java.util.List<String>).toArray(null)");
-    final List<IResolvedOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(2, _size);
   }
@@ -134,17 +134,15 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testHashSetInheritsIterator() {
     final IResolvedOperation operation = this.toOperation("newHashSet(\"\").iterator");
-    final List<IResolvedOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(2, _size);
-    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(candidates);
-    JvmOperation _declaration = _head.getDeclaration();
-    JvmDeclaredType _declaringType = _declaration.getDeclaringType();
+    JvmOperation _head = IterableExtensions.<JvmOperation>head(candidates);
+    JvmDeclaredType _declaringType = _head.getDeclaringType();
     String _simpleName = _declaringType.getSimpleName();
     Assert.assertEquals("AbstractCollection", _simpleName);
-    IResolvedOperation _last = IterableExtensions.<IResolvedOperation>last(candidates);
-    JvmOperation _declaration_1 = _last.getDeclaration();
-    JvmDeclaredType _declaringType_1 = _declaration_1.getDeclaringType();
+    JvmOperation _last = IterableExtensions.<JvmOperation>last(candidates);
+    JvmDeclaredType _declaringType_1 = _last.getDeclaringType();
     String _simpleName_1 = _declaringType_1.getSimpleName();
     Assert.assertEquals("Set", _simpleName_1);
   }
@@ -152,7 +150,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testInheritedAbstractCollectionIteratorIsNotBottom() {
     final IResolvedOperation operation = this.toOperation("newHashSet(\"\").iterator");
-    final List<IResolvedOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    final List<IResolvedOperation> candidates = operation.getOverriddenAndImplementedMethods();
     IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(candidates);
     boolean _isBottomInContext = _head.isBottomInContext();
     Assert.assertFalse(_isBottomInContext);

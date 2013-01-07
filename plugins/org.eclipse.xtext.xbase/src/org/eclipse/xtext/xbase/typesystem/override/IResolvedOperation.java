@@ -86,13 +86,13 @@ public interface IResolvedOperation {
 	 * @see #isOverridingOrImplementing(JvmOperation)
 	 * @return a list of methods with the same simple name.
 	 */
-	List<IResolvedOperation> getOverriddenAndImplementedMethodCandidates();
+	List<JvmOperation> getOverriddenAndImplementedMethodCandidates();
 	
 	/**
 	 * Transitively check whether this operation if implementing or overriding the given operation.
 	 * @return the check result.
 	 */
-	OverrideCheckResult isOverridingOrImplementing(JvmOperation operation);
+	IOverrideCheckResult isOverridingOrImplementing(JvmOperation operation);
 	
 	/**
 	 * Returns the resolved type parameters for a given operation. If this operation
