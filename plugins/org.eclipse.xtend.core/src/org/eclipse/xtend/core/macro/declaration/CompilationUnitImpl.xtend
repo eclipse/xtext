@@ -19,15 +19,10 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
-import org.eclipse.xtend.lib.macro.declaration.GeneratedClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.GeneratedTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -40,7 +35,6 @@ import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmPrimitiveType
@@ -55,40 +49,42 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 class CompilationUnitImpl implements CompilationUnit {
-	
+
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
-	
+
 	override getPackageName() {
 		xtendFile.getPackage()
 	}
-	
+
 	override getSourceTypeDeclarations() {
-		xtendFile.xtendTypes.map[toSourceTypeDeclaration(it)]
+		xtendFile.xtendTypes.map[toXtendTypeDeclaration(it)]
 	}
-	
+
 	override getSourceClassDeclarations() {
-		sourceTypeDeclarations.filter(typeof(SourceClassDeclaration)).toList
+		sourceTypeDeclarations.filter(typeof(XtendClassDeclarationImpl)).toList
 	}
-	
+
 	override getGeneratedTypeDeclarations() {
-		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it) as GeneratedTypeDeclaration].toList
+		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it) as MutableTypeDeclaration].
+			toList
 	}
-	
+
 	override getGeneratedClassDeclarations() {
-		generatedTypeDeclarations.filter(typeof(GeneratedClassDeclaration)).toList
+		generatedTypeDeclarations.filter(typeof(MutableClassDeclaration)).toList
 	}
-	
+
 	@Property XtendFile xtendFile
 	@Inject CommonTypeComputationServices services;
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
-	
+
 	def void setXtendFile(XtendFile xtendFile) {
 		this._xtendFile = xtendFile
-		this.typeRefConverter = new OwnedConverter(new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet))
-	} 
+		this.typeRefConverter = new OwnedConverter(
+			new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet))
+	}
 
 	def private <IN extends EObject, OUT> OUT get(IN in, (IN)=>OUT provider) {
 		if (identityCache.containsKey(in))
@@ -96,10 +92,6 @@ class CompilationUnitImpl implements CompilationUnit {
 		val result = provider.apply(in)
 		identityCache.put(in, result)
 		return result
-	}
-	
-	def private isGenerated(JvmIdentifiableElement element) {
-		element.eResource == xtendFile.eResource
 	}
 
 	def Visibility toVisibility(JvmVisibility delegate) {
@@ -110,136 +102,91 @@ class CompilationUnitImpl implements CompilationUnit {
 			case JvmVisibility::PUBLIC: Visibility::PUBLIC
 		}
 	}
-	
+
 	def Type toType(JvmType delegate) {
 		get(delegate) [
 			switch delegate {
-				JvmDeclaredType: toTypeDeclaration(delegate)
-				JvmTypeParameter: toTypeParameterDeclaration(delegate)
-				JvmVoid: new VoidTypeImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-				JvmPrimitiveType: new PrimitiveTypeImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
+				JvmDeclaredType:
+					toTypeDeclaration(delegate)
+				JvmTypeParameter:
+					toTypeParameterDeclaration(delegate)
+				JvmVoid:
+					new VoidTypeImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				JvmPrimitiveType:
+					new PrimitiveTypeImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 			}
-		]
-	}
+		]}
 
 	def TypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
 		get(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
-					if (delegate.isGenerated) {
-						//TODO
-					} else {
-						new InterfaceDeclarationJavaImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					}
+					null
+				//					new InterfaceDeclarationJavaImpl => [
+				//						it.delegate = delegate 
+				//						it.compilationUnit = this
+				//					]
 				JvmGenericType:
-					if (delegate.isGenerated) {
-						new GeneratedClassDeclarationImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					} else {
-						new ClassDeclarationJavaImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					}
+					new JvmClassDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 				JvmAnnotationType:
 					null //TODO
 				JvmEnumerationType:
 					null //TODO
 			}
-		]
-	}
+		]}
 
 	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
 		get(delegate) [
-			if (delegate.isGenerated) {
-				new GeneratedTypeParameterDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-			} else {
-				new TypeParameterDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-			}
-		]
-	}
-	
+			new JvmTypeParameterDeclarationImpl => [
+				it.delegate = delegate
+				it.compilationUnit = this
+			]
+		]}
+
 	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
 		get(delegate) [
-			if (delegate.isGenerated) {
-				new GeneratedParameterDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-			} else {
-				new ParameterDeclarationJavaImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-			}
-		]
-	}
+			new JvmParameterDeclarationImpl => [
+				it.delegate = delegate
+				it.compilationUnit = this
+			]
+		]}
 
 	def MemberDeclaration toMemberDeclaration(JvmMember delegate) {
 		get(delegate) [
 			switch delegate {
-				JvmDeclaredType : toTypeDeclaration(delegate)
-				JvmOperation : {
+				JvmDeclaredType:
+					toTypeDeclaration(delegate)
+				JvmOperation: 
 					// TODO handle annotation properties	
-					(if (delegate.isGenerated) {
-						new GeneratedMethodDeclarationImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					} else {
-						new MethodDeclarationJavaImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					}) as MemberDeclaration	//TODO bug in Xtend
-				} 
-				JvmConstructor: 
-					(if (delegate.isGenerated) {
-						new GeneratedConstructorDeclarationImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					} else {
-						new ConstructorDeclarationJavaImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					}) as MemberDeclaration //TODO bug in Xtend
-				JvmField :
-					(if (delegate.isGenerated) {
-						new GeneratedFieldDeclarationImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					} else {
-						new FieldDeclarationJavaImpl => [
-							it.delegate = delegate 
-							it.compilationUnit = this
-						]
-					}) as MemberDeclaration //TODO bug in Xtend
-				//TODO JvmEnumerationLiteral
+					new JvmMethodDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				JvmConstructor:
+					new JvmConstructorDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				JvmField:
+					new JvmFieldDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+			//TODO JvmEnumerationLiteral
 			}
-		]
-	}
+		]}
 
 	def TypeReference toTypeReference(JvmTypeReference delegate) {
+
 		/*
 		 * Nested JvmTypeReference's identity will not be preserved
 		 * i.e. given 'List<String> myField' we will get the same TypeReference instance when asking
@@ -250,65 +197,65 @@ class CompilationUnitImpl implements CompilationUnit {
 			return null
 		get(delegate) [
 			toTypeReference(typeRefConverter.toLightweightReference(delegate))
-		]
-	}
-	
+		]}
+
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
 		if (delegate == null)
 			return null
 		new TypeReferenceImpl => [
-			it.delegate = delegate 
+			it.delegate = delegate
 			it.compilationUnit = this
 		]
 	}
 
-	def SourceTypeDeclaration toSourceTypeDeclaration(XtendTypeDeclaration delegate) {
+	def XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(XtendTypeDeclaration delegate) {
 		get(delegate) [
 			switch (delegate) {
-				XtendClass : new SourceClassDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-				//TODO XtendAnnotationType 
+				XtendClass:
+					new XtendClassDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+			//TODO XtendAnnotationType 
 			}
-		]
-	}
+		]}
 
-	def SourceMemberDeclaration toSourceMemberDeclaration(XtendMember delegate) {
+	def XtendMemberDeclarationImpl toXtendMemberDeclaration(XtendMember delegate) {
 		get(delegate) [
 			switch (delegate) {
-				XtendTypeDeclaration : toSourceTypeDeclaration(delegate)
-				XtendFunction : new SourceMethodDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-				XtendConstructor : new SourceConstructorDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
-				XtendField : new SourceFieldDeclarationImpl => [
-					it.delegate = delegate 
-					it.compilationUnit = this
-				]
+				XtendTypeDeclaration:
+					toXtendTypeDeclaration(delegate)
+				XtendFunction:
+					new XtendMethodDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				XtendConstructor:
+					new XtendConstructorDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				XtendField:
+					new XtendFieldDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 			}
-		]
-	}
-	
-	def SourceParameterDeclaration toSourceParameterDeclaration(XtendParameter delegate) {
+		]}
+
+	def XtendParameterDeclarationImpl toXtendParameterDeclaration(XtendParameter delegate) {
 		get(delegate) [
-			new SourceParameterDeclarationImpl => [
-				it.delegate = delegate 
+			new XtendParameterDeclarationImpl => [
+				it.delegate = delegate
 				it.compilationUnit = this
 			]
-		]
-	}
-	
-	def SourceTypeParameterDeclaration toSourceTypeParameterDeclaration(JvmTypeParameter delegate) {
+		]}
+
+	def XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(JvmTypeParameter delegate) {
 		get(delegate) [
-			new SourceTypeParameterDeclarationImpl => [
-				it.delegate = delegate 
+			new XtendTypeParameterDeclarationImpl => [
+				it.delegate = delegate
 				it.compilationUnit = this
 			]
-		]
-	}
+		]}
 }

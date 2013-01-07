@@ -16,21 +16,21 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceFieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceMemberDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceMethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclaration
 import org.eclipse.xtext.common.types.JvmUpperBound
-import org.eclipse.xtend.lib.macro.declaration.SourceExecutableDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceTypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 
-abstract class SourceMemberDeclarationImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements SourceMemberDeclaration {
+abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements MemberDeclaration {
 	
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -38,14 +38,14 @@ abstract class SourceMemberDeclarationImpl<T extends XtendMember> extends Abstra
 	
 	override getDeclaringType() {
 		switch container : delegate.eContainer {
-			XtendTypeDeclaration : compilationUnit.toSourceTypeDeclaration(container)
+			XtendTypeDeclaration : compilationUnit.toXtendTypeDeclaration(container)
 			default : null
 		}
 	}
 	
 }
 
-abstract class SourceTypeDeclarationImpl<T extends XtendTypeDeclaration> extends SourceMemberDeclarationImpl<T> implements SourceTypeDeclaration {
+abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
 	
 	override getPackageName() {
 		return (delegate.eContainer as XtendFile).getPackage
@@ -64,7 +64,7 @@ abstract class SourceTypeDeclarationImpl<T extends XtendTypeDeclaration> extends
 	
 }
 
-class SourceClassDeclarationImpl extends SourceTypeDeclarationImpl<XtendClass> implements SourceClassDeclaration {
+class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> implements ClassDeclaration {
 	
 	override getImplementedInterfaces() {
 		delegate.getImplements.map[compilationUnit.toTypeReference(it)]
@@ -87,7 +87,7 @@ class SourceClassDeclarationImpl extends SourceTypeDeclarationImpl<XtendClass> i
 	}
 	
 	override getTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toSourceTypeParameterDeclaration(it)]
+		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
 	}
 
 	override getVisibility() {
@@ -95,12 +95,12 @@ class SourceClassDeclarationImpl extends SourceTypeDeclarationImpl<XtendClass> i
 	}
 	
 	override getMembers() {
-		return delegate.members.map[compilationUnit.toSourceMemberDeclaration(it)]
+		return delegate.members.map[compilationUnit.toXtendMemberDeclaration(it)]
 	}
 	
 }
 
-class SourceMethodDeclarationImpl extends SourceMemberDeclarationImpl<XtendFunction> implements SourceMethodDeclaration {
+class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunction> implements MethodDeclaration {
 	
 	override isAbstract() {
 		delegate.expression == null
@@ -139,7 +139,7 @@ class SourceMethodDeclarationImpl extends SourceMemberDeclarationImpl<XtendFunct
 	}
 	
 	override getTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toSourceTypeParameterDeclaration(it)]
+		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
 	}
 	
 	override getExceptions() {
@@ -147,12 +147,12 @@ class SourceMethodDeclarationImpl extends SourceMemberDeclarationImpl<XtendFunct
 	}
 	
 	override getParameters() {
-		delegate.parameters.map[compilationUnit.toSourceParameterDeclaration(it)]
+		delegate.parameters.map[compilationUnit.toXtendParameterDeclaration(it)]
 	}
 	
 }
 
-class SourceConstructorDeclarationImpl extends SourceMemberDeclarationImpl<XtendConstructor> implements SourceConstructorDeclaration {
+class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
 	
 	override getBody() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -175,7 +175,7 @@ class SourceConstructorDeclarationImpl extends SourceMemberDeclarationImpl<Xtend
 	}
 	
 	override getParameters() {
-		delegate.parameters.map[compilationUnit.toSourceParameterDeclaration(it)]
+		delegate.parameters.map[compilationUnit.toXtendParameterDeclaration(it)]
 	}
 
 	override getTypeParameters() {
@@ -184,7 +184,7 @@ class SourceConstructorDeclarationImpl extends SourceMemberDeclarationImpl<Xtend
 	
 }
 
-class SourceParameterDeclarationImpl extends AbstractDeclarationImpl<XtendParameter> implements SourceParameterDeclaration {
+class XtendParameterDeclarationImpl extends AbstractDeclarationImpl<XtendParameter> implements ParameterDeclaration {
 
 	override getType() {
 		compilationUnit.toTypeReference(delegate.parameterType)
@@ -195,12 +195,12 @@ class SourceParameterDeclarationImpl extends AbstractDeclarationImpl<XtendParame
 	}
 
 	override getDeclaringExecutable() {
-		compilationUnit.toSourceMemberDeclaration(delegate.eContainer as XtendMember) as SourceExecutableDeclaration
+		compilationUnit.toXtendMemberDeclaration(delegate.eContainer as XtendMember) as ExecutableDeclaration
 	}
 	
 }
 
-class SourceFieldDeclarationImpl extends SourceMemberDeclarationImpl<XtendField> implements SourceFieldDeclaration {
+class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements FieldDeclaration {
 	
 	override getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
@@ -226,9 +226,13 @@ class SourceFieldDeclarationImpl extends SourceMemberDeclarationImpl<XtendField>
 		compilationUnit.toTypeReference(delegate.type)
 	}
 	
+	override ClassDeclaration getDeclaringType() {
+		super.getDeclaringType() as ClassDeclaration
+	}
+	
 }
 
-class SourceTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements SourceTypeParameterDeclaration {
+class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
@@ -240,7 +244,7 @@ class SourceTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmType
 	
 	override getTypeParameterDeclarator() {
 		val eContainer = delegate.eContainer
-		compilationUnit.toSourceMemberDeclaration(eContainer as XtendMember) as SourceTypeParameterDeclarator
+		compilationUnit.toXtendMemberDeclaration(eContainer as XtendMember) as TypeParameterDeclarator
 	}
 	
 }

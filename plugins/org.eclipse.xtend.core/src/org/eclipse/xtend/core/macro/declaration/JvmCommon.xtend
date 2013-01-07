@@ -87,6 +87,10 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 		delegate.wrapper
 	}
 	
+	def LightweightTypeReference getLightWeightTypeReference() {
+		delegate
+	}
+	
 }
 
 // types
