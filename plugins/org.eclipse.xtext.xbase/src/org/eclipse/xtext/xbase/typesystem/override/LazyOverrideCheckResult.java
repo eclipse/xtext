@@ -14,33 +14,25 @@ import org.eclipse.xtext.common.types.JvmOperation;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StandardOverrideCheckResult extends AbstractOverrideCheckResult {
-	
-	private EnumSet<OverrideCheckDetails> details;
-	private EnumSet<OverrideCheckDetails> problems;
+public class LazyOverrideCheckResult extends AbstractOverrideCheckResult {
 
-	public StandardOverrideCheckResult(IResolvedOperation thisOperation, JvmOperation givenOperation, OverrideCheckDetails detail, OverrideCheckDetails... details) {
-		this(thisOperation, givenOperation, EnumSet.of(detail, details));
-	}
-	
-	public StandardOverrideCheckResult(IResolvedOperation thisOperation, JvmOperation givenOperation, EnumSet<OverrideCheckDetails> details) {
+	private OverrideCheckDetails primaryDetail;
+
+	public LazyOverrideCheckResult(IResolvedOperation thisOperation, JvmOperation givenOperation, OverrideCheckDetails detail) {
 		super(thisOperation, givenOperation);
-		this.details = EnumSet.copyOf(details);
-		this.problems = EnumSet.copyOf(details);
-		this.problems.removeAll(overridingIfAnyOf);
-		this.problems.remove(OverrideCheckDetails.COVARIANT_RETURN);
+		this.primaryDetail = detail;
 	}
-	
+
 	public boolean isOverridingOrImplementing() {
-		return problems.isEmpty();
+		return overridingIfAnyOf.contains(primaryDetail);
 	}
 
 	public boolean hasProblems() {
-		return !problems.isEmpty();
+		return !isOverridingOrImplementing();
 	}
 
 	public EnumSet<OverrideCheckDetails> getDetails() {
-		return details;
+		return null;
 	}
-
+	
 }

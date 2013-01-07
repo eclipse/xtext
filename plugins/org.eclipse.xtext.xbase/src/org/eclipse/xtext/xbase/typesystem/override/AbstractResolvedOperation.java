@@ -66,7 +66,7 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 		for(JvmOperation candidate: candidates) {
 			// we know that our candidates are computed from the hierarchy
 			// thus there is no need to check the declarator for inheritance
-			if (getOverrideTester().isSubsignature(this, candidate, false, false).isOverridingOrImplementing()) {
+			if (getOverrideTester().isSubsignature(this, candidate, false).isOverridingOrImplementing()) {
 				result.add(createResolvedOperationInHierarchy(candidate));
 			}
 		}
@@ -100,7 +100,7 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 	}
 	
 	public IOverrideCheckResult isOverridingOrImplementing(final JvmOperation operation) {
-		return getOverrideTester().isSubsignature(this, operation, true, true);
+		return getOverrideTester().isSubsignature(this, operation, true);
 	}
 	
 	public List<JvmTypeParameter> getResolvedTypeParameters() {

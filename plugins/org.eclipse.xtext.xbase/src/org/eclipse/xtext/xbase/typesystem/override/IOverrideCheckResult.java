@@ -106,9 +106,13 @@ public interface IOverrideCheckResult {
 		 */
 		EXCEPTION_MISMATCH,
 		/**
-		 * The name or the arity of the given operation does not match this operation.
+		 * The name of the given operation does not match this operation.
 		 */
-		NAME_OR_ARITY_MISMATCH,
+		NAME_MISMATCH,
+		/**
+		 * The arity of the given operation does not match this operation.
+		 */
+		ARITY_MISMATCH,
 		/**
 		 * The parameter types of the given method do not match this method.
 		 */
