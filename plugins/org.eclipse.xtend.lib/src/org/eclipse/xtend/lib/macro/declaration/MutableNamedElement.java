@@ -1,5 +1,5 @@
 package org.eclipse.xtend.lib.macro.declaration;
 
-public interface GeneratedNamedElement extends NamedElement {
+public interface MutableNamedElement extends NamedElement {
 	void setName(String name);
 }

@@ -25,4 +25,6 @@ public interface FieldDeclaration extends MemberDeclaration {
 	Expression getInitializer();
 	
 	TypeReference getType();
+	
+	public ClassDeclaration getDeclaringType();
 }
