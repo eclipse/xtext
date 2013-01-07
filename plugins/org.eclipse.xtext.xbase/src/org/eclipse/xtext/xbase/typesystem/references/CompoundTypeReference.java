@@ -59,6 +59,14 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public List<LightweightTypeReference> getTypeArguments() {
+		if (components != null && components.size() == 1)
+			return components.get(0).getTypeArguments();
+		// TODO common type?
+		return super.getTypeArguments();
+	}
+	
+	@Override
 	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {
 			if (component.isRawType())
