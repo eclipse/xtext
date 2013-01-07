@@ -7,6 +7,9 @@
  *******************************************************************************/
 package testdata;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.4
@@ -41,6 +44,10 @@ public class MethodOverrides5 extends MethodOverrides3 {
 	
 	@Override
 	void m6() {
+	}
+	
+	@Override
+	void m7(Comparable[] p1, List p2, Comparable p3, Map p4) {
 	}
 	
 	@Override

@@ -8,6 +8,7 @@
 package testdata;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,6 +44,10 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	<T1 extends CharSequence> void m6() {
 	}
 
+	@Override
+	<T1 extends Comparable<T1>, V1 extends T1, K1 extends List<V1>> void m7(T1[] p1, List<? super V1[]> p2, Comparable<? extends K1> p3, Map<List<String>, Iterable<List<String>>> p4) {
+	}
+	
 	@Override
 	<T1 extends Comparable<T1>, V1 extends T1, K1 extends List<V1>> void m7() {
 	}
