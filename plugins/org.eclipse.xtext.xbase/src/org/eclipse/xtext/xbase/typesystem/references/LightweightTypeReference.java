@@ -75,10 +75,19 @@ public abstract class LightweightTypeReference {
 		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 	
+	/**
+	 * Returns the type arguments of this reference if it has any.
+	 * The type argument of <code>List&lt;String&gt;</code> is <code>String</code>.
+	 * <String> is also the type argument of a wildcard reference with upper bound 
+	 * <code>? extends List&lt;String&gt;</code>. 
+	 * 
+	 * Raw types don't carry type arguments. Wildcards with more than one upper bound
+	 * don't carry type arguments.
+	 */
 	public List<LightweightTypeReference> getTypeArguments() {
 		return Collections.emptyList();
 	}
-
+	
 	public boolean isResolved() {
 		return true;
 	}

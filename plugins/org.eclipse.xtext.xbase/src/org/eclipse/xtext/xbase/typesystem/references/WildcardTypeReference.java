@@ -44,6 +44,16 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return resolved;
 	}
 	
+	@Override
+	public List<LightweightTypeReference> getTypeArguments() {
+		if (lowerBound != null)
+			return lowerBound.getTypeArguments();
+		if (upperBounds != null && upperBounds.size() == 1) {
+			return upperBounds.get(0).getTypeArguments();
+		}
+		return super.getTypeArguments();
+	}
+	
 	public List<LightweightTypeReference> getUpperBounds() {
 		return expose(upperBounds);
 	}
