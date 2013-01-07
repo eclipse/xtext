@@ -293,7 +293,7 @@ class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
 		val operation = function.directlyInferredOperation
 		val subtype = operation.parameters.head.parameterType
 		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
-		assertEquals(superTypes.toSet, computedSuperTypes.map[ simpleName ].toSet as Object)
+		assertEquals(superTypes.<String>toSet, computedSuperTypes.map[ simpleName ].<String>toSet as Object)
 	}
 	
 	@Ignore("Old API does not support this properly")
