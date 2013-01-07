@@ -57,6 +57,23 @@ public class OverrideHelper {
 	/**
 	 * Returns <code>null</code> if the given operation declares it's own return type or if it does not override
 	 * another operation.
+	 * 
+	 * TODO support this case:
+	 * 
+	 * <pre>
+	 * interface I {
+	 *   String m()
+	 *   String m2()
+	 * }
+	 * class A {
+	 *   CharSequence m()
+	 *   int m2()
+	 * }
+	 * class B extends A implements I {
+	 *   m() will expect String since this is the best choice
+	 *   m2() will expect int since this is actually overridden and not compatible to String from I#m2
+	 * }
+	 * </pre>
 	 */
 	@Nullable
 	public LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {

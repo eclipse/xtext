@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,6 +42,9 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  @Inject
+  private OverrideTester overrideTester;
+  
   public IResolvedOperation toOperation(final String expression) {
     try {
       XExpression _expression = this.expression(expression);
@@ -50,7 +54,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
       final LightweightTypeReference receiverType = resolvedTypes.getActualType(_memberCallTarget);
       JvmIdentifiableElement _feature = featureCall.getFeature();
       final JvmOperation operation = ((JvmOperation) _feature);
-      BottomResolvedOperation _bottomResolvedOperation = new BottomResolvedOperation(operation, receiverType);
+      BottomResolvedOperation _bottomResolvedOperation = new BottomResolvedOperation(operation, receiverType, this.overrideTester);
       return _bottomResolvedOperation;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

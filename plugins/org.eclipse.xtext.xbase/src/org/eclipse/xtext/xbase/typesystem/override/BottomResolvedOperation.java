@@ -26,9 +26,11 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 public class BottomResolvedOperation extends AbstractResolvedOperation {
 	
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
+	private OverrideTester overrideTester;
 	
-	public BottomResolvedOperation(JvmOperation declaration, LightweightTypeReference contextType) {
+	public BottomResolvedOperation(JvmOperation declaration, LightweightTypeReference contextType, OverrideTester overrideTester) {
 		super(declaration, contextType);
+		this.overrideTester = overrideTester;
 	}
 	
 	public boolean isBottomInContext() {
@@ -49,5 +51,10 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 		if (typeParameterMapping != null)
 			return typeParameterMapping;
 		return typeParameterMapping = Collections.unmodifiableMap(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getContextType()));
+	}
+	
+	@Override
+	protected OverrideTester getOverrideTester() {
+		return overrideTester;
 	}
 }

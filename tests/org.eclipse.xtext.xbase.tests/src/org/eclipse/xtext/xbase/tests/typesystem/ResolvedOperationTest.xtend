@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.xbase.typesystem.^override.BottomResolvedOperation
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,14 +28,17 @@ import org.junit.Test
 class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Inject
-	IBatchTypeResolver typeResolver;
+	IBatchTypeResolver typeResolver
+	
+	@Inject
+	OverrideTester overrideTester
 	
 	def IResolvedOperation toOperation(String expression) {
 		val featureCall = expression.expression as XMemberFeatureCall
 		val resolvedTypes = typeResolver.resolveTypes(featureCall)
 		val receiverType = resolvedTypes.getActualType(featureCall.memberCallTarget)
 		val operation = featureCall.feature as JvmOperation
-		return new BottomResolvedOperation(operation, receiverType)
+		return new BottomResolvedOperation(operation, receiverType, overrideTester)
 	}
 	
 	@Test
