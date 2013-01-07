@@ -17,22 +17,10 @@ public interface CompilationUnit extends AnnotationTarget {
 	 */
 	String getDocComment();
 	
-	List<SourceTypeDeclaration> getSourceTypeDeclarations();
-	List<SourceClassDeclaration> getSourceClassDeclarations();
+	List<? extends TypeDeclaration> getSourceTypeDeclarations();
+	List<? extends ClassDeclaration> getSourceClassDeclarations();
 	
-	List<GeneratedTypeDeclaration> getGeneratedTypeDeclarations();
-	List<GeneratedClassDeclaration> getGeneratedClassDeclarations();
+	List<? extends TypeDeclaration> getGeneratedTypeDeclarations();
+	List<? extends ClassDeclaration> getGeneratedClassDeclarations();
 	
-	// factory and finder methods
-//	GeneratedClassDeclaration modifyClass(String name, Procedures.Procedure1<GeneratedClassDeclaration> initializer);
-//	GeneratedClassDeclaration newClass(String name, Procedures.Procedure1<GeneratedClassDeclaration> initializer);
-//	
-//	
-//	// type references
-//	TypeReference typeRef(String name, TypeReference ... actualArguments);
-//	TypeReference wildCard(TypeReference upperBound, TypeReference lowerBound);
-//	TypeReference primitiveVoid();
-//	TypeReference primitiveBoolean();
-//	TypeReference primitiveInt();
-//	TypeReference primitiveLong();
 }

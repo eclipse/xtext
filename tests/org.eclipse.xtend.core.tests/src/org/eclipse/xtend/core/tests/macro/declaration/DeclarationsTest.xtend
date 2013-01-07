@@ -5,14 +5,16 @@ import javax.inject.Inject
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.GeneratedClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.GeneratedMethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.SourceMethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.junit.Test
+
+import static extension org.junit.Assert.*
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -27,7 +29,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
-			val clazz = sourceTypeDeclarations.head as SourceClassDeclaration
+			val clazz = sourceTypeDeclarations.head as ClassDeclaration
 			assertEquals('foo.MyClass', clazz.name)
 			assertEquals('Object', clazz.superclass.toString)
 			assertEquals('Serializable', clazz.implementedInterfaces.head.toString)
@@ -56,8 +58,8 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
-			val clazz = sourceTypeDeclarations.head as SourceClassDeclaration
-			val genClazz = generatedTypeDeclarations.head as GeneratedClassDeclaration
+			val clazz = sourceTypeDeclarations.head as ClassDeclaration
+			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
 			
 			assertEquals('foo.MyClass', clazz.name)
 			assertNull(clazz.superclass)
@@ -80,8 +82,8 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('initial', constructor.parameters.head.name)
 			assertEquals('String', constructor.parameters.head.type.toString)
 			
-			val method = clazz.members.get(2) as SourceMethodDeclaration
-			val genMethod = genClazz.members.get(2) as GeneratedMethodDeclaration
+			val method = clazz.members.get(2) as MethodDeclaration
+			val genMethod = genClazz.members.get(2) as MutableMethodDeclaration
 			
 			assertSame(clazz, method.declaringType)
 			assertEquals('a', method.parameters.head.name)
