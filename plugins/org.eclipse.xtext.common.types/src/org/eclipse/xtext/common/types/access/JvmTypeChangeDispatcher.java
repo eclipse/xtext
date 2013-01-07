@@ -63,6 +63,18 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 				iterator.remove();
 			}
 		}
+		
+		@Override
+		protected void addAdapter(Notifier notifier) {
+			if (notifier instanceof TypeResource) {
+				IMirror mirror = ((TypeResource) notifier).getMirror();
+				if (mirror instanceof IMirrorExtension) {
+					if (((IMirrorExtension) mirror).isSealed())
+						return;
+				}
+			}
+			notifier.eAdapters().add(this);
+		}
 
 		protected boolean isRemoveThis(Notification notification) {
 			return notification.getEventType() == Notification.REMOVING_ADAPTER 
