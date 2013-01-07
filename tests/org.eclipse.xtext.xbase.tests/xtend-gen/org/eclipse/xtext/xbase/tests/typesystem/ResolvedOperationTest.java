@@ -116,6 +116,26 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testArrayListToArrayInheritsTwo() {
+    final IResolvedOperation operation = this.toOperation("(null as java.util.ArrayList<String>).toArray(null)");
+    final List<IResolvedOperation> overridden = operation.getOverriddenAndImplementedMethods();
+    int _size = overridden.size();
+    Assert.assertEquals(2, _size);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(overridden);
+    List<JvmTypeParameter> _resolvedTypeParameters = _head.getResolvedTypeParameters();
+    final JvmTypeParameter typeParameter = IterableExtensions.<JvmTypeParameter>head(_resolvedTypeParameters);
+    JvmOperation _declaration = operation.getDeclaration();
+    JvmTypeParameterDeclarator _declarator = typeParameter.getDeclarator();
+    Assert.assertEquals(_declaration, _declarator);
+    IResolvedOperation _last = IterableExtensions.<IResolvedOperation>last(overridden);
+    List<JvmTypeParameter> _resolvedTypeParameters_1 = _last.getResolvedTypeParameters();
+    final JvmTypeParameter typeParameterOfLast = IterableExtensions.<JvmTypeParameter>head(_resolvedTypeParameters_1);
+    JvmOperation _declaration_1 = operation.getDeclaration();
+    JvmTypeParameterDeclarator _declarator_1 = typeParameterOfLast.getDeclarator();
+    Assert.assertEquals(_declaration_1, _declarator_1);
+  }
+  
+  @Test
   public void testListToArrayHasTwoCandidates() {
     final IResolvedOperation operation = this.toOperation("(null as java.util.List<String>).toArray(null)");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
@@ -163,5 +183,137 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     LightweightTypeReference _contextType = _asBottom.getContextType();
     String _simpleName = _contextType.getSimpleName();
     Assert.assertEquals("AbstractCollection<String>", _simpleName);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_01() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides2).m1(null as Object)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(2, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    boolean _isEmpty = overriddenMethods.isEmpty();
+    Assert.assertTrue(_isEmpty);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_02() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides2).m1(null /* as String */)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    boolean _isEmpty = candidates.isEmpty();
+    Assert.assertTrue(_isEmpty);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    boolean _isEmpty_1 = overriddenMethods.isEmpty();
+    Assert.assertTrue(_isEmpty_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_03() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m1(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_04() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m2(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_05() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m3(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_06() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m4(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_07() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m5(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_01() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m1(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_02() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m2(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_03() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m3(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_04() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m4(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_05() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m5(null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(1, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
   }
 }

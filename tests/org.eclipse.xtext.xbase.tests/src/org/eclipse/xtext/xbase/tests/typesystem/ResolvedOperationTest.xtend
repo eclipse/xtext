@@ -78,6 +78,17 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testArrayListToArrayInheritsTwo() {
+		val operation = '(null as java.util.ArrayList<String>).toArray(null)'.toOperation
+		val overridden = operation.overriddenAndImplementedMethods
+		assertEquals(2, overridden.size)
+		val typeParameter = overridden.head.resolvedTypeParameters.head
+		assertEquals(operation.declaration, typeParameter.declarator)
+		val typeParameterOfLast = overridden.last.resolvedTypeParameters.head
+		assertEquals(operation.declaration, typeParameterOfLast.declarator)
+	}
+	
+	@Test
 	def void testListToArrayHasTwoCandidates() {
 		val operation = '(null as java.util.List<String>).toArray(null)'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
@@ -106,6 +117,114 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		val candidates = operation.overriddenAndImplementedMethods
 		assertFalse(candidates.head.bottomInContext)
 		assertEquals('AbstractCollection<String>', candidates.head.asBottom.contextType.simpleName)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_01() {
+		val operation = '(null as testdata.MethodOverrides2).m1(null as Object)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(2, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertTrue(overriddenMethods.empty)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_02() {
+		val operation = '(null as testdata.MethodOverrides2).m1(null /* as String */)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertTrue(candidates.empty)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertTrue(overriddenMethods.empty)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_03() {
+		val operation = '(null as testdata.MethodOverrides4).m1(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_04() {
+		val operation = '(null as testdata.MethodOverrides4).m2(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_05() {
+		val operation = '(null as testdata.MethodOverrides4).m3(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_06() {
+		val operation = '(null as testdata.MethodOverrides4).m4(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_07() {
+		val operation = '(null as testdata.MethodOverrides4).m5(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_01() {
+		val operation = '(null as testdata.MethodOverrides5).m1(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_02() {
+		val operation = '(null as testdata.MethodOverrides5).m2(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_03() {
+		val operation = '(null as testdata.MethodOverrides5).m3(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_04() {
+		val operation = '(null as testdata.MethodOverrides5).m4(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_05() {
+		val operation = '(null as testdata.MethodOverrides5).m5(null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(1, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
 	}
 	
 }
