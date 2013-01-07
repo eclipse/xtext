@@ -92,14 +92,14 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		val operation = 'newHashSet("").iterator'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(2, candidates.size)
-		assertEquals('AbstractCollection', candidates.head.declaration.declaringType.simpleName)
-		assertEquals('Set', candidates.last.declaration.declaringType.simpleName)
+		assertEquals('AbstractCollection', candidates.head.declaringType.simpleName)
+		assertEquals('Set', candidates.last.declaringType.simpleName)
 	}
 	
 	@Test
 	def void testInheritedAbstractCollectionIteratorIsNotBottom() {
 		val operation = 'newHashSet("").iterator'.toOperation
-		val candidates = operation.overriddenAndImplementedMethodCandidates
+		val candidates = operation.overriddenAndImplementedMethods
 		assertFalse(candidates.head.bottomInContext)
 		assertEquals('AbstractCollection<String>', candidates.head.asBottom.contextType.simpleName)
 	}

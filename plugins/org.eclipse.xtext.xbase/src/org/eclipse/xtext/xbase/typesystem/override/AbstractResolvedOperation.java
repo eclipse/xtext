@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.override;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +18,12 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -40,7 +40,7 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 	private JvmOperation declaration;
 	private LightweightTypeReference contextType;
 	private List<IResolvedOperation> validOverrides;
-	private List<IResolvedOperation> overrideCandidates;
+	private List<JvmOperation> overrideCandidates;
 	private List<LightweightTypeReference> parameterTypes;
 	private LightweightTypeReference returnType;
 	private List<LightweightTypeReference> declaredExceptions;
@@ -61,31 +61,39 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 	public List<IResolvedOperation> getOverriddenAndImplementedMethods() {
 		if (validOverrides != null)
 			return validOverrides;
-		List<IResolvedOperation> candidates = getOverriddenAndImplementedMethodCandidates();
+		List<JvmOperation> candidates = getOverriddenAndImplementedMethodCandidates();
 		if (candidates.isEmpty())
-			return candidates;
+			return Collections.emptyList();
 		List<IResolvedOperation> result = Lists.newArrayListWithCapacity(candidates.size());
-		for(IResolvedOperation candidate: candidates) {
-			if (isOverridingOrImplementing(candidate.getDeclaration()).isValid()) {
-				result.add(candidate);
+		for(JvmOperation candidate: candidates) {
+			// we know that our candidates are computed from the hierarchy
+			// thus there is no need to check the declarator for inheritance
+			if (isOverridingOrImplementing(candidate, false).isOverridingOrImplementing()) {
+				result.add(createResolvedOperationInHierarchy(candidate));
 			}
 		}
 		return validOverrides = Collections.unmodifiableList(result);
 	}
 
-	public List<IResolvedOperation> getOverriddenAndImplementedMethodCandidates() {
+	protected ResolvedOperationInHierarchy createResolvedOperationInHierarchy(JvmOperation candidate) {
+		return new ResolvedOperationInHierarchy(candidate, getBottom());
+	}
+
+	public List<JvmOperation> getOverriddenAndImplementedMethodCandidates() {
 		if (overrideCandidates != null)
 			return overrideCandidates;
+		// here we are only interested in the raw type thus the declarator is not substituted
+		// the found operation will be put in the right context by clients, e.g. #getOverriddenAndImplementedMethods
 		ParameterizedTypeReference currentDeclarator = new ParameterizedTypeReference(getContextType().getOwner(), declaration.getDeclaringType());
 		List<LightweightTypeReference> superTypes = currentDeclarator.getSuperTypes();
-		List<IResolvedOperation> result = Lists.newArrayListWithCapacity(5);
+		List<JvmOperation> result = Lists.newArrayListWithCapacity(5);
 		for(LightweightTypeReference superType: superTypes) {
 			JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
 			if (declaredSuperType != null) {
 				Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(declaration.getSimpleName());
 				for(JvmFeature equallyNamedFeature: equallyNamedFeatures) {
 					if (equallyNamedFeature instanceof JvmOperation) {
-						result.add(new ResolvedOperationInHierarchy((JvmOperation) equallyNamedFeature, getBottom()));
+						result.add((JvmOperation) equallyNamedFeature);
 					}
 				}
 			}
@@ -93,43 +101,45 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 		return overrideCandidates = Collections.unmodifiableList(result);
 	}
 	
-	public OverrideCheckResult isOverridingOrImplementing(final JvmOperation operation) {
-		class Mock implements OverrideCheckResult {
-
-			private boolean valid;
-
-			Mock(boolean valid) {
-				this.valid = valid;
-				
-			}
-			public boolean isValid() {
-				return valid;
-			}
-
-			public boolean hasProblems() {
-				throw new UnsupportedOperationException();
-			}
-
-			public EnumSet<OverrideCheckDetails> getDetails() {
-				throw new UnsupportedOperationException();
-			}
-
-			public IResolvedOperation getThisOperation() {
-				return AbstractResolvedOperation.this;
-			}
-
-			public JvmOperation getGivenOperation() {
-				return operation;
-			}
-			
-		}
-		if (operation.getSimpleName().equals(declaration.getSimpleName())) {
-			if (operation.getParameters().size() == declaration.getParameters().size()) {
-				return new Mock(true); 
-			}
-		}
-		return new Mock(false);
+	public IOverrideCheckResult isOverridingOrImplementing(final JvmOperation operation) {
+		return isOverridingOrImplementing(operation, true);
 	}
+	
+	protected IOverrideCheckResult isOverridingOrImplementing(final JvmOperation operation, boolean checkInheritance) {
+		if (operation == getDeclaration()) {
+			return new StandardOverrideCheckResult(this, operation, OverrideCheckDetails.CURRENT);
+		}
+		if (operation.getDeclaringType() == getDeclaration().getDeclaringType()) {
+			return new StandardOverrideCheckResult(this, operation, OverrideCheckDetails.SAME_DECLARATOR);
+		}
+		if (checkInheritance) {
+			ParameterizedTypeReference currentDeclarator = new ParameterizedTypeReference(getContextType().getOwner(), declaration.getDeclaringType());
+			if (!currentDeclarator.isSubtypeOf(operation.getDeclaringType())) {
+				return new StandardOverrideCheckResult(this, operation, OverrideCheckDetails.NO_INHERITANCE);	
+			}
+		}
+		if (!Strings.equal(operation.getSimpleName(), declaration.getSimpleName()) || operation.getParameters().size() != declaration.getParameters().size()) {
+			return new StandardOverrideCheckResult(this, operation, OverrideCheckDetails.NAME_OR_ARITY_MISMATCH);
+		}
+		// TODO implement 'real' super type check
+		
+		// so far we use a dummy impl and assume that
+		// everything is ok and we simply compute whether this is a redefinition, an override or an implementation
+		OverrideCheckDetails result = OverrideCheckDetails.IMPLEMENTATION;
+		if (getDeclaration().isAbstract()) {
+			if (operation.isAbstract()) {
+				result = OverrideCheckDetails.REPEATED;
+			} else {
+				result = OverrideCheckDetails.REDECLARATION;
+			}
+		} else {
+			if (!operation.isAbstract()) {
+				result = OverrideCheckDetails.OVERRIDE;
+			}
+		}
+		return new StandardOverrideCheckResult(this, operation, result);
+	}
+
 	
 	public List<JvmTypeParameter> getResolvedTypeParameters() {
 		return getBottom().getTypeParameters();
