@@ -28,7 +28,10 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
 import org.eclipse.xtext.util.Strings;
 
@@ -216,6 +219,13 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 
 	protected void requestNotificationOnChange(Runnable listener) {
 		Resource resource = eResource();
+		if (resource instanceof TypeResource) {
+			IMirror mirror = ((TypeResource) resource).getMirror();
+			if (mirror instanceof IMirrorExtension) {
+				if (((IMirrorExtension) mirror).isSealed())
+					return;
+			}
+		}
 		Notifier notifier = this;
 		if (resource != null) {
 			if (resource.getResourceSet() != null)
