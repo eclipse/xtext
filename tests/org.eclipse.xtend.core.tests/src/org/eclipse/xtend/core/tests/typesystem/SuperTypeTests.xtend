@@ -20,6 +20,7 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
+import java.util.Set
 
 /**
  * @author Sebastian Zarnekow
@@ -293,7 +294,7 @@ class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
 		val operation = function.directlyInferredOperation
 		val subtype = operation.parameters.head.parameterType
 		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
-		val superTypesAsSet = superTypes.<String>toSet
+		val Set<String> superTypesAsSet = superTypes.<String>toSet
 		assertEquals(superTypesAsSet, computedSuperTypes.map[ simpleName ].<String>toSet as Object)
 	}
 	
