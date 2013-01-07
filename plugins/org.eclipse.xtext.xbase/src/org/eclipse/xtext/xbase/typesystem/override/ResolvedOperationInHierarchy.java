@@ -56,7 +56,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 		List<LightweightTypeReference> superTypes = getContextType().getAllSuperTypes();
 		for(LightweightTypeReference superType: superTypes) {
 			if (superType.getType() == declaringType) {
-				return new BottomResolvedOperation(operation, superType);
+				return new BottomResolvedOperation(operation, superType, getBottom().getOverrideTester());
 			}
 		}
 		throw new IllegalStateException(String.format("Could not find declaring type of method %s in hierarchy of %s", 
