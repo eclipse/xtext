@@ -1,4 +1,7 @@
 /**
+ * <copyright>
+ * </copyright>
+ *
  */
 package org.eclipse.xtext.example.arithmetics.arithmetics;
 
