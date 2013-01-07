@@ -264,7 +264,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverrideMethodResolution_08() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m6(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m6()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);
@@ -275,10 +275,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverrideMethodResolution_09() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m7(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m7()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(2, _size);
     final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
     int _size_1 = overriddenMethods.size();
     Assert.assertEquals(1, _size_1);
@@ -286,7 +286,18 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverrideMethodResolution_10() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m8(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m7(null, null, null, null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(2, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_11() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m8()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);
@@ -296,8 +307,8 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testOverrideMethodResolution_11() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m9(null)");
+  public void testOverrideMethodResolution_12() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).m9()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);
@@ -363,7 +374,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testRawOverrideMethodResolution_06() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m6(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m6()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);
@@ -374,10 +385,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testRawOverrideMethodResolution_07() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m7(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m7()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(2, _size);
     final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
     int _size_1 = overriddenMethods.size();
     Assert.assertEquals(1, _size_1);
@@ -385,7 +396,18 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testRawOverrideMethodResolution_08() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m8(null)");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m7(null, null, null, null)");
+    final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
+    int _size = candidates.size();
+    Assert.assertEquals(2, _size);
+    final List<IResolvedOperation> overriddenMethods = operation.getOverriddenAndImplementedMethods();
+    int _size_1 = overriddenMethods.size();
+    Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testRawOverrideMethodResolution_09() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m8()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);
@@ -395,8 +417,8 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testRawOverrideMethodResolution_09() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m9(null)");
+  public void testRawOverrideMethodResolution_10() {
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides5).m9()");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = candidates.size();
     Assert.assertEquals(1, _size);

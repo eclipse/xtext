@@ -184,7 +184,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testOverrideMethodResolution_08() {
-		val operation = '(null as testdata.MethodOverrides4).m6(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides4).m6()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
@@ -193,16 +193,25 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testOverrideMethodResolution_09() {
-		val operation = '(null as testdata.MethodOverrides4).m7(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides4).m7()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
-		assertEquals(1, candidates.size)
+		assertEquals(2, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
 		assertEquals(1, overriddenMethods.size)
 	}
 	
 	@Test
 	def void testOverrideMethodResolution_10() {
-		val operation = '(null as testdata.MethodOverrides4).m8(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides4).m7(null, null, null, null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(2, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_11() {
+		val operation = '(null as testdata.MethodOverrides4).m8()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
@@ -210,8 +219,8 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testOverrideMethodResolution_11() {
-		val operation = '(null as testdata.MethodOverrides4).m9(null)'.toOperation
+	def void testOverrideMethodResolution_12() {
+		val operation = '(null as testdata.MethodOverrides4).m9()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
@@ -265,7 +274,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testRawOverrideMethodResolution_06() {
-		val operation = '(null as testdata.MethodOverrides5).m6(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides5).m6()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
@@ -274,16 +283,25 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testRawOverrideMethodResolution_07() {
-		val operation = '(null as testdata.MethodOverrides5).m7(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides5).m7()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
-		assertEquals(1, candidates.size)
+		assertEquals(2, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
 		assertEquals(1, overriddenMethods.size)
 	}
 	
 	@Test
 	def void testRawOverrideMethodResolution_08() {
-		val operation = '(null as testdata.MethodOverrides5).m8(null)'.toOperation
+		val operation = '(null as testdata.MethodOverrides5).m7(null, null, null, null)'.toOperation
+		val candidates = operation.overriddenAndImplementedMethodCandidates
+		assertEquals(2, candidates.size)
+		val overriddenMethods = operation.overriddenAndImplementedMethods
+		assertEquals(1, overriddenMethods.size)
+	}
+	
+	@Test
+	def void testRawOverrideMethodResolution_09() {
+		val operation = '(null as testdata.MethodOverrides5).m8()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
@@ -291,8 +309,8 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testRawOverrideMethodResolution_09() {
-		val operation = '(null as testdata.MethodOverrides5).m9(null)'.toOperation
+	def void testRawOverrideMethodResolution_10() {
+		val operation = '(null as testdata.MethodOverrides5).m9()'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
 		assertEquals(1, candidates.size)
 		val overriddenMethods = operation.overriddenAndImplementedMethods
