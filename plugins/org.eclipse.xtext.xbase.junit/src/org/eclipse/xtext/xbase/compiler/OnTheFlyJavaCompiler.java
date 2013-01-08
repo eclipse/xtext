@@ -467,6 +467,9 @@ public class OnTheFlyJavaCompiler {
 		}
 	}
 
+	/**
+	 * @param url the location of the class file.
+	 */
 	protected URL resolveBundleResourceURL(URL url) throws IOException {
 		throw new UnsupportedOperationException();
 	}

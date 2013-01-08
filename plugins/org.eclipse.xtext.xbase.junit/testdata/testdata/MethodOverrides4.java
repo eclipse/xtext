@@ -97,6 +97,6 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	private void withArray(String... s) {}
 	
 	private <T extends Iterable<CharSequence>> void sameErasure1(T iterable) {}
-	private <T extends String> void sameErasure2(Iterable<T> iterable) {}
+	private <T extends CharSequence> void sameErasure2(Iterable<T> iterable) {}
 	private <T, V extends T> void sameErasure3() {}
 }

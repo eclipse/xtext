@@ -11,6 +11,7 @@ package testdata;
  * @author Knut Wannheden - Initial contribution and API
  * @since 2.3
  */
+@SuppressWarnings("unused")
 public class Constructors2 {
 
 	private Constructors2(int i) {

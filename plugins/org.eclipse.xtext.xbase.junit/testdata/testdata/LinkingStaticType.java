@@ -7,6 +7,7 @@
  *******************************************************************************/
 package testdata;
 
+@SuppressWarnings("unused")
 public class LinkingStaticType {
 
 	protected static String protectedField;

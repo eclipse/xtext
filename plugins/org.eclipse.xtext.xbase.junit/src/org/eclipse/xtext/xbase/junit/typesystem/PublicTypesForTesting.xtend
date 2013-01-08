@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 @NonNullByDefault
 class PublicResolvedTypes extends RootResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
@@ -47,6 +48,7 @@ class PublicResolvedTypes extends RootResolvedTypes {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 @NonNullByDefault
 class PublicStackedResolvedTypes extends StackedResolvedTypes {
 	new(ResolvedTypes parent) {
@@ -57,6 +59,7 @@ class PublicStackedResolvedTypes extends StackedResolvedTypes {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 @NonNullByDefault
 class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
