@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.OverloadedMethods;
@@ -273,6 +274,63 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
 		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
 	}
+	
+	@Test public void testStaticFeatureCall_01() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata::MethodOverrides4::staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_02() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata::MethodOverrides4::<java.io.Serializable>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_03() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata::MethodOverrides4::<CharSequence>staticM5()");
+		assertEquals("testdata.MethodOverrides3.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	// TODO here we would expect an error marker since <Object> is no valid type argument
+	@Test public void testStaticFeatureCall_04() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata::MethodOverrides4::<Object>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	// TODO here we would expect an error marker since <String> is ambiguous
+	@Test public void testStaticFeatureCall_05() throws Exception {
+		XFeatureCall featureCall = (XFeatureCall) expression("testdata::MethodOverrides4::<String>staticM5()");
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val iterable = testdata::MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<java.io.Serializable> iterable = testdata::MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Ignore("TODO ambiguous method validation or eager binding of type arguments to expectation")
+	@Test public void testStaticFeatureCall_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<CharSequence> iterable = testdata::MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides3.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_09() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<Object> iterable = testdata::MethodOverrides4::staticM5() }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XFeatureCall featureCall = (XFeatureCall) variable.getRight();
+		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
+	}
+	
 	
 	@Test public void testGenerics() throws Exception {
 		expression("new testdata.GenericType1<String>() += 'foo'", true);

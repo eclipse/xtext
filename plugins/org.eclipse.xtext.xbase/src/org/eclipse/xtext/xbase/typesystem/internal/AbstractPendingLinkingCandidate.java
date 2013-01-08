@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -70,6 +71,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			int argumentTypeCompareResult = compareByArgumentTypes(right);
 			if (argumentTypeCompareResult != 0)
 				return argumentTypeCompareResult <= 0;
+			int typeArgumentCompareResult = compareByTypeArguments(right);
+			if (typeArgumentCompareResult != 0)
+				return typeArgumentCompareResult <= 0;
 			return true;
 		}
 		throw new IllegalArgumentException("other was " + other);
@@ -86,7 +90,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int result = compareByArgumentTypes(right, false);
 		if (result != 0)
 			return result;
-		result = compareDeclaredArgumentTypes(right);
+		result = compareDeclaredParameterTypes(right);
 		if (result != 0)
 			return result;
 		// subsequent parameters may have altered the bound type arguments
@@ -97,6 +101,37 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (result != 0)
 			return result;
 		return result;
+	}
+	
+	protected int compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
+		initializeArgumentTypeComputation();
+		right.initializeArgumentTypeComputation();
+		
+		int leftFailures = getTypeArgumentConformanceFailures();
+		int rightFailures = right.getTypeArgumentConformanceFailures();
+		if (leftFailures != rightFailures) {
+			if (leftFailures < rightFailures)
+				return -1;
+			return 1;
+		}
+		return 0;
+	}
+
+	protected int getTypeArgumentConformanceFailures() {
+		List<LightweightTypeReference> typeArguments = getTypeArguments();
+		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
+		int max = Math.min(typeArguments.size(), typeParameters.size());
+		int failures = 0;
+		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+		for(int i = 0; i < max; i++) {
+			LightweightTypeReference argument = typeArguments.get(i);
+			JvmTypeParameter declaration = typeParameters.get(i);
+			LightweightTypeReference substitute = substitutor.substitute(declaration);
+			if (!substitute.isAssignableFrom(argument)) {
+				failures++;
+			}
+		}
+		return failures;
 	}
 	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
@@ -157,7 +192,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
-	protected int compareDeclaredArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
 		for(int i = 0; i < upTo; i++) {
