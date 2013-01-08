@@ -113,6 +113,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				JvmGenericType castedLeftType = (JvmGenericType) leftType;
 				if (castedLeftType.isFinal() && !(rightReference.getType() instanceof JvmTypeParameter))
 					return TypeConformanceResult.FAILED;
+			} else if (leftType instanceof JvmTypeParameter && !(rightReference.getType() instanceof JvmTypeParameter)) {
+				return TypeConformanceResult.FAILED;
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
 					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
