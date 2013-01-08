@@ -64,6 +64,10 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 		}
 	}
 	
+	public LightweightTypeReference substitute(JvmTypeParameter original) {
+		return substitute(new ParameterizedTypeReference(getOwner(), original));
+	}
+	
 	@Override
 	@Nullable
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {

@@ -11,15 +11,44 @@ import java.util.EnumSet;
 
 import org.eclipse.xtext.common.types.JvmOperation;
 
+import com.google.common.collect.Sets;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LazyOverrideCheckResult extends AbstractOverrideCheckResult {
+public class LazyOverrideCheckResult implements IOverrideCheckResult {
 
+	private AbstractResolvedOperation thisOperation;
+	private JvmOperation givenOperation;
 	private OverrideCheckDetails primaryDetail;
-
-	public LazyOverrideCheckResult(IResolvedOperation thisOperation, JvmOperation givenOperation, OverrideCheckDetails detail) {
-		super(thisOperation, givenOperation);
+	private EnumSet<OverrideCheckDetails> details;
+	
+	protected static EnumSet<OverrideCheckDetails> overridingIfAnyOf = EnumSet.of(
+			OverrideCheckDetails.OVERRIDE,
+			OverrideCheckDetails.IMPLEMENTATION,
+			OverrideCheckDetails.REDECLARATION,
+			OverrideCheckDetails.REPEATED,
+			OverrideCheckDetails.SHADOWED);
+	
+	protected static EnumSet<OverrideCheckDetails> problemIfAnyOf = EnumSet.of(
+			OverrideCheckDetails.ARITY_MISMATCH,
+			OverrideCheckDetails.EXCEPTION_MISMATCH,
+			OverrideCheckDetails.IS_FINAL,
+			OverrideCheckDetails.NAME_MISMATCH,
+			OverrideCheckDetails.NO_INHERITANCE,
+			OverrideCheckDetails.NOT_VISIBLE,
+			OverrideCheckDetails.PARAMETER_TYPE_MISMATCH,
+			OverrideCheckDetails.REDUCED_VISIBILITY,
+			OverrideCheckDetails.RETURN_MISMATCH,
+			OverrideCheckDetails.SAME_ERASURE,
+			OverrideCheckDetails.STATIC_MISMATCH,
+			OverrideCheckDetails.TYPE_PARAMETER_MISMATCH,
+			OverrideCheckDetails.UNCHECKED_CONVERSION_REQUIRED,
+			OverrideCheckDetails.VAR_ARG_MISMATCH);
+	
+	public LazyOverrideCheckResult(AbstractResolvedOperation thisOperation, JvmOperation givenOperation, OverrideCheckDetails detail) {
+		this.thisOperation = thisOperation;
+		this.givenOperation = givenOperation;
 		this.primaryDetail = detail;
 	}
 
@@ -28,11 +57,30 @@ public class LazyOverrideCheckResult extends AbstractOverrideCheckResult {
 	}
 
 	public boolean hasProblems() {
-		return !isOverridingOrImplementing();
+		if (!isOverridingOrImplementing()) {
+			return true;
+		}
+		EnumSet<OverrideCheckDetails> details = getDetails();
+		return !Sets.intersection(problemIfAnyOf, details).isEmpty();
 	}
 
 	public EnumSet<OverrideCheckDetails> getDetails() {
-		return null;
+		if (details != null) {
+			return details;
+		}
+		return details = getComputedDetails();
+	}
+
+	protected EnumSet<OverrideCheckDetails> getComputedDetails() {
+		return thisOperation.getOverrideTester().getAllDetails(thisOperation, getGivenOperation(), primaryDetail);
+	}
+	
+	public IResolvedOperation getThisOperation() {
+		return thisOperation;
+	}
+
+	public JvmOperation getGivenOperation() {
+		return givenOperation;
 	}
 	
 }

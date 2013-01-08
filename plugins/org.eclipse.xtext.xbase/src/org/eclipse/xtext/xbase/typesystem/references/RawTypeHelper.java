@@ -233,14 +233,19 @@ public class RawTypeHelper implements IRawTypeHelper {
 		protected LightweightTypeReference getRawTypeFromConstraints(ITypeReferenceOwner owner, JvmTypeParameter typeParameter, ResourceSet resourceSet) {
 			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 			if (!constraints.isEmpty()) {
-				CompoundTypeReference result = new CompoundTypeReference(owner, false);
 				OwnedConverter converter = new OwnedConverter(owner);
-				for(JvmTypeConstraint constraint: constraints) {
-					if (constraint instanceof JvmUpperBound) {
-						result.addComponent(converter.toLightweightReference(constraint.getTypeReference()).accept(this, resourceSet));
+				if (constraints.size() > 1) {
+					CompoundTypeReference result = new CompoundTypeReference(owner, false);
+					for(JvmTypeConstraint constraint: constraints) {
+						if (constraint instanceof JvmUpperBound) {
+							result.addComponent(converter.toLightweightReference(constraint.getTypeReference()).accept(this, resourceSet));
+						}
 					}
+					return result;
+				} else {
+					LightweightTypeReference result = converter.toLightweightReference(constraints.get(0).getTypeReference()).accept(this, resourceSet);
+					return result;
 				}
-				return result;
 			}
 			return createObjectReference(owner, resourceSet);
 		}

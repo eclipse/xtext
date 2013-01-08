@@ -22,9 +22,17 @@ import org.eclipse.xtext.common.types.JvmOperation;
 public interface IOverrideCheckResult {
 	/**
 	 * Returns <code>true</code> if the current operation successfully overrides or implements the given operation.
+	 * Override state that is considered to be valid is:
+	 * <ul>
+	 *   <li>{@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#IMPLEMENTATION implementation}</li>
+	 *   <li>{@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#OVERRIDE override}</li>
+	 *   <li>{@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#REDECLARATION re-declaration}</li>
+	 *   <li>{@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#REPEATED repeating}</li>
+	 *   <li>{@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#SHADOWED shadowing}</li>
+	 * </ul>
 	 */
 	boolean isOverridingOrImplementing();
-
+	
 	/**
 	 * Returns <code>true</code> if there are problems in the checked method hierarchy, e.g. the return type needs
 	 * unchecked conversion.
