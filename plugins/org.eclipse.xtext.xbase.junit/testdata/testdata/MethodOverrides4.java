@@ -27,14 +27,16 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 		return "m2(t)";
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String m3(CharSequence t) {
 		return "m3(t)";
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public String m4(@SuppressWarnings("rawtypes") Iterable t) {
-		return "m4(t)";
+	public List<String> m4(@SuppressWarnings("rawtypes") Iterable t) {
+		return null;
 	}
 
 	@Override
@@ -87,7 +89,14 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 		return "m4(t)";
 	}
 	
-	public static <T extends Object> Iterable<T> staticM5() {
+	public static <T extends Serializable> Iterable<T> staticM5() {
 		return null;
 	}
+	
+	private void withVarArgs(String[] s) {}
+	private void withArray(String... s) {}
+	
+	private <T extends Iterable<CharSequence>> void sameErasure1(T iterable) {}
+	private <T extends String> void sameErasure2(Iterable<T> iterable) {}
+	private <T, V extends T> void sameErasure3() {}
 }

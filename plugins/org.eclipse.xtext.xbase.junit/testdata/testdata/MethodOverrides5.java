@@ -33,8 +33,8 @@ public class MethodOverrides5 extends MethodOverrides3 {
 	}
 
 	@Override
-	public String m4(Iterable t) {
-		return "m4(t)";
+	public List<String> m4(Iterable t) {
+		return null;
 	}
 	
 	@Override

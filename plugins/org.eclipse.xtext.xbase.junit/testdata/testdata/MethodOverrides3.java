@@ -24,12 +24,12 @@ public class MethodOverrides3<V extends Iterable<String>> {
 		return "m2(t)";
 	}
 
-	public <T extends CharSequence> String m3(T t) {
-		return "m3(t)";
+	public <T extends CharSequence> T m3(T t) {
+		return t;
 	}
 
-	public <T extends Iterable<CharSequence>> String m4(T t) {
-		return "m4(t)";
+	public <T extends Iterable<CharSequence>> T m4(T t) {
+		return t;
 	}
 
 	public String m5(V v) {
@@ -77,5 +77,12 @@ public class MethodOverrides3<V extends Iterable<String>> {
 	public static <T extends CharSequence> Iterable<T> staticM5() {
 		return null;
 	}
-
+	
+	private void withVarArgs(String... s) {}
+	private void withArray(String[] s) {}
+	
+	private void sameErasure1(Iterable<String> iterable) {}
+	private <T extends Integer> void sameErasure2(Iterable<T> iterable) {}
+	private <T, V> void sameErasure3() {}
+	
 }
