@@ -891,9 +891,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return;
 		}
 		if (javaTypeConformanceComputer.isConformant(rightType, leftType)) {
-			warning("The expression of type " + getNameOfTypes(leftType) + " is already of type "
-					+ canonicalName(rightType), null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
+			addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType)
+					+ " is already of type " + canonicalName(rightType), null);
 		}
 	}
 
@@ -1164,7 +1163,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public  void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
 		if(!isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
 			String message = "The value of the local variable " + variableDeclaration.getName() + " is not used";
-			warning(message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, UNUSED_LOCAL_VARIABLE);
+			addIssueToState(UNUSED_LOCAL_VARIABLE, message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
 		}
 	}
 	
@@ -1183,14 +1182,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
 			if (imp.getImportedNamespace() != null) { 
-				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+				addIssue(imp, IMPORT_WILDCARD_DEPRECATED, "The use of wildcard imports is deprecated.");
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
 					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
 					if (map.containsKey(importedType)) {
-						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
-								IssueCodes.IMPORT_DUPLICATE);
+						addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Duplicate import of '" + importedType.getSimpleName() + "'.");
 					} else {
 						map.put(importedType, imp);
 						if (!imp.isStatic()) {
@@ -1269,8 +1267,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		}
 		for (XImportDeclaration imp : imports.values()) {
-			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
-					IssueCodes.IMPORT_UNUSED);
+			addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
 		}
 	}
 	

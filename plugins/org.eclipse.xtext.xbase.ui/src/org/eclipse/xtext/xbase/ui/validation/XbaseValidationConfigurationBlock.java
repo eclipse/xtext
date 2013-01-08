@@ -30,6 +30,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
+
 		Composite inner = createSection(Messages.XbaseValidationConfigurationBlock_restricted_api_section_title,
 				composite, nColumns);
 
@@ -37,6 +38,17 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				Messages.XbaseValidationConfigurationBlock_forbidden_ref_label, inner, defaultIndent);
 		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.DISCOURAGED_REFERENCE,
 				Messages.XbaseValidationConfigurationBlock_discouraged_ref_label, inner, defaultIndent);
+		addComboBox(XbaseConfigurableIssueCodes.IMPORT_WILDCARD_DEPRECATED, "Use of wildcard imports:", inner,
+				defaultIndent);
+
+		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.UNUSED_LOCAL_VARIABLE,
+				"Value of local variable is not used:", unusedCode, defaultIndent);
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.IMPORT_UNUSED, "Unused import:", unusedCode,
+				defaultIndent);
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.OBSOLETE_INSTANCEOF,
+				"Unnecessary 'instanceof' operation:", unusedCode, defaultIndent);
+
 	}
 
 	protected Combo addJavaDelegatingComboBox(PreferenceKey prefKey, String label, Composite parent, int indent) {
@@ -48,12 +60,21 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
 				SeverityConverter.SEVERITY_IGNORE, javaIssueCode };
 		String javaValue = javaValue(javaIssueCode);
-		String[] valueLabels = new String[] {
-				Messages.XbaseValidationConfigurationBlock_error,
-				Messages.XbaseValidationConfigurationBlock_warning,
-				Messages.XbaseValidationConfigurationBlock_ignore,
-				NLS.bind(Messages.XbaseValidationConfigurationBlock_java_label, javaValue)};
+		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
+				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_ignore,
+				NLS.bind(Messages.XbaseValidationConfigurationBlock_java_label, javaValue) };
 		Combo comboBox = addComboBox(parent, label, prefKey.getId(), indent, values, valueLabels);
+		return comboBox;
+	}
+
+	protected Combo addComboBox(PreferenceKey prefKey, String label, Composite parent, int indent) {
+		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
+				SeverityConverter.SEVERITY_IGNORE };
+		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
+				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_ignore };
+		Combo comboBox = addComboBox(parent, label, prefKey.getId(), indent, values, valueLabels);
+//		comboBox.select(java.util.Arrays.asList(comboBox.getItems()).indexOf(prefKey.getDefaultValue()));
+//		updateCombo(comboBox);
 		return comboBox;
 	}
 
@@ -94,4 +115,9 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		return delegatedValue;
 	}
 
+	@Override
+	public void performDefaults() {
+		// TODO Auto-generated method stub
+		super.performDefaults();
+	}
 }
