@@ -41,15 +41,15 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
-<repository location="file:/shared/jobs/Xpand-nightly-HEAD/lastSuccessful/archive/xpand.p2.repository/"/>
+<repository location="http://download.eclipse.org/modeling/m2t/xpand/updates/nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
-<repository location="file:/shared/jobs/MWE-nightly-HEAD/lastSuccessful/archive/mwe.p2.repository/"/>
+<repository location="https://hudson.eclipse.org/hudson/job/MWE-nightly-HEAD/lastSuccessfulBuild/artifact/mwe.p2.repository/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-<repository location="file:/shared/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/xtext.p2.repository"/>
+<repository location="https://hudson.eclipse.org/hudson/job/Xtext-nightly-HEAD/lastSuccessfulBuild/artifact/xtext.p2.repository/"/>
 </location>
 </locations>
 </target>
