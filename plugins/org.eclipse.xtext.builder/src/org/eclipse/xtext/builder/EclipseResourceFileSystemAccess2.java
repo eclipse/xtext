@@ -38,7 +38,6 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
-import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -86,9 +85,6 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	private IWorkspace workspace;
 	
 	private Multimap<URI, IPath> sourceTraces;
-	
-	@Inject
-	private SmapSupport smapSupport;
 	
 	/**
 	 * @since 2.3

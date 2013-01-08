@@ -5,18 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.smap;
+package org.eclipse.xtext.generator.trace;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.LineMappingProvider;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
@@ -31,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class PrimarySourceInstaller {
+public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller {
 
 	public static class XtextClassAdapter extends ClassAdapter {
 
@@ -107,10 +102,12 @@ public class PrimarySourceInstaller {
 		}
 	}
 
-	private static final Logger log = Logger.getLogger(PrimarySourceInstaller.class);
+	private boolean hideSyntheticVariables;
 
 	@Inject
 	private LineMappingProvider lineMappingProvider;
+
+	protected AbstractTraceRegion trace;
 
 	protected int[] getTargetToSourceLineMapping(AbstractTraceRegion rootTraceRegion) {
 		List<LineMapping> lineInfo = lineMappingProvider.getLineMapping(rootTraceRegion);
@@ -131,26 +128,29 @@ public class PrimarySourceInstaller {
 		return target2source;
 	}
 
-	@SuppressWarnings("null")
-	public void install(IFile classFile, AbstractTraceRegion rootTraceRegion, boolean hideSyntheticVariables) {
-		try {
-			InputStream inputStream = classFile.getContents();
-			try {
-				ClassReader reader = new ClassReader(inputStream);
-				ClassWriter writer = new ClassWriter(0);
-				String sourceFile = rootTraceRegion.getAssociatedPath().lastSegment();
-				int[] target2source = getTargetToSourceLineMapping(rootTraceRegion);
-				XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFile, target2source,
-						hideSyntheticVariables);
-				reader.accept(adapter, 0);
-				classFile.setContents(new ByteArrayInputStream(writer.toByteArray()), 0, new NullProgressMonitor());
-			} finally {
-				if (inputStream != null)
-					inputStream.close();
-			}
-		} catch (Exception e) {
-			log.error("Error while installing debug source information to " + classFile.getFullPath().toFile(), e);
-		}
+	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
+		ClassReader reader = new ClassReader(javaClassBytecode);
+		ClassWriter writer = new ClassWriter(0);
+		URI associatedPath = trace.getAssociatedPath();
+		if (associatedPath == null)
+			return null;
+		String sourceFile = associatedPath.lastSegment();
+		int[] target2source = getTargetToSourceLineMapping(trace);
+		XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFile, target2source, hideSyntheticVariables);
+		reader.accept(adapter, 0);
+		return writer.toByteArray();
+	}
+
+	public boolean isHideSyntheticVariables() {
+		return hideSyntheticVariables;
+	}
+
+	public void setHideSyntheticVariables(boolean hideSyntheticVariables) {
+		this.hideSyntheticVariables = hideSyntheticVariables;
+	}
+
+	public void setTrace(String javaFileName, AbstractTraceRegion trace) {
+		this.trace = trace;
 	}
 
 }

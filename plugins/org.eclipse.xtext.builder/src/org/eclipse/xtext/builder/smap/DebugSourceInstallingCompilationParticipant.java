@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.smap;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -29,13 +30,17 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
-import org.eclipse.xtext.generator.trace.SmapSupport;
+import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
+import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
+import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -51,10 +56,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
 	@Inject
-	private SmapSupport smapSupport;
+	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
 
 	@Inject
-	private PrimarySourceInstaller traceAsPrimarySource;
+	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
 
 	@Inject
 	private ITraceInformation traceInformation;
@@ -71,6 +76,17 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 				return out;
 		}
 		return null;
+	}
+
+	protected ITraceToBytecodeInstaller getInstaller(OutputConfiguration config) {
+		if (config.isInstallDslAsPrimarySource()) {
+			TraceAsPrimarySourceInstaller installer = traceAsPrimarySourceInstallerProvider.get();
+			installer.setHideSyntheticVariables(config.isHideSyntheticLocalVariables());
+			return installer;
+		} else {
+			TraceAsSmapInstaller installer = traceAsSmapInstaller.get();
+			return installer;
+		}
 	}
 
 	@Override
@@ -98,15 +114,16 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					if (element == null)
 						continue;
 
-					if (outputConfiguration.isInstallDslAsPrimarySource()) {
-						boolean hideSyntheticLocalVariables = outputConfiguration.isHideSyntheticLocalVariables();
-						for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
-							traceAsPrimarySource.install(javaClassFile, traceToSource, hideSyntheticLocalVariables);
+					ITraceToBytecodeInstaller installer = getInstaller(outputConfiguration);
+					installer.setTrace(generatedJavaFile.getName(), traceToSource);
+					for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
+						InputStream contents = javaClassFile.getContents();
+						try {
+							byte[] byteCode = installer.installTrace(ByteStreams.toByteArray(contents));
+							javaClassFile.setContents(new ByteArrayInputStream(byteCode), 0, null);
+						} finally {
+							contents.close();
 						}
-					} else {
-						String smap = smapSupport.generateSmap(traceToSource, generatedJavaFile.getName());
-						for (IFile javaClassFile : findGeneratedJavaClassFiles(element))
-							installSmapInformation(javaClassFile, smap);
 					}
 				} catch (Exception e) {
 					String msg = "Could not process %s to install source information: %s";
@@ -143,16 +160,6 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		if (!(traceToSource instanceof AbstractTrace))
 			return null;
 		return ((AbstractTrace) traceToSource).getRootTraceRegion();
-	}
-
-	protected void installSmapInformation(IFile compiledFile, String smap) {
-		try {
-			InputStream newByteCode = smapSupport.getModifiedByteCode(smap, compiledFile.getContents());
-			compiledFile.setContents(newByteCode, 0, null);
-		} catch (Exception e) {
-			String msg = "Could not install smap information into %s: %s";
-			log.error(String.format(msg, compiledFile.getFullPath().toString(), e.getMessage()), e);
-		}
 	}
 
 	@Override
