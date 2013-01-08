@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -27,8 +28,7 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
- * The implemented algorithm pretty much mirrors the one from
- * class <code>org.eclipse.jdt.internal.corext.util.MethodOverrideTester</code>.
+ * Utility to compute information about the inheritance relationship of two operations.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -37,6 +37,15 @@ public class OverrideTester {
 	@Inject
 	private IVisibilityHelper visibilityHelper;
 	
+	/**
+	 * Checks if the overriding method and the given overridden candidate have compatible subsignatures
+	 * according to JLS 8.4.2. Uses information about static-ness and visibility for early exits.
+	 * 
+	 * The implemented algorithm pretty much mirrors the one from
+     * class <code>org.eclipse.jdt.internal.corext.util.MethodOverrideTester</code>.
+	 * 
+	 * @param checkInheritance <code>true</code> if it is unknown whether the given operations are declared in a valid type hierarchy.
+	 */
 	public IOverrideCheckResult isSubsignature(AbstractResolvedOperation overriding, JvmOperation overridden, boolean checkInheritance) {
 		JvmOperation declaration = overriding.getDeclaration();
 		if (declaration == overridden) {
@@ -63,6 +72,9 @@ public class OverrideTester {
 		if (!(new ContextualVisibilityHelper(new ParameterizedTypeReference(overriding.getContextType().getOwner(), declaration.getDeclaringType())).isVisible(overridden))) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.NOT_VISIBLE);
 		}
+		if (declaration.isStatic() != overridden.isStatic()) {
+			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.STATIC_MISMATCH);
+		}
 		AbstractResolvedOperation overriddenInHierarchy = new ResolvedOperationInHierarchy(overridden, overriding.getBottom());
 		if (parameterCount != 0 && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.PARAMETER_TYPE_MISMATCH);
@@ -75,51 +87,103 @@ public class OverrideTester {
 
 	protected EnumSet<OverrideCheckDetails> getAllDetails(AbstractResolvedOperation overriding, JvmOperation overridden, OverrideCheckDetails primary) {
 		EnumSet<OverrideCheckDetails> result = EnumSet.of(primary);
+		AbstractResolvedOperation overriddenInHierarchy = new ResolvedOperationInHierarchy(overridden, overriding.getBottom());
 		switch(primary) {
 			case CURRENT:
-			case SAME_DECLARATOR:
 			case NO_INHERITANCE:
 			case NAME_MISMATCH:
 			case ARITY_MISMATCH: return result;
-			default: {
-				AbstractResolvedOperation overriddenInHierarchy = new ResolvedOperationInHierarchy(overridden, overriding.getBottom());
-				int parameterCount = overridden.getParameters().size();
-				switch(primary) {
-					case NOT_VISIBLE: {
-						if (parameterCount != 0 && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
-							result.add(OverrideCheckDetails.PARAMETER_TYPE_MISMATCH);
-						}
-					}
-					case PARAMETER_TYPE_MISMATCH: {
-						if (!isMatchingTypeParameters(overriding, overriddenInHierarchy)) {
-							result.add(OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
-						}
-					}
-					case TYPE_PARAMETER_MISMATCH:
-					case REPEATED:
-					case SHADOWED:
-					case IMPLEMENTATION:
-					case REDECLARATION:
-					case OVERRIDE: {
-						addAdditionalDetails(overriding, overriddenInHierarchy, result);
-						return result;
-					}
-					default:
-						throw new IllegalArgumentException("Unexpected primary detail: " + primary);
+			case SAME_DECLARATOR:
+			case TYPE_PARAMETER_MISMATCH:
+			case PARAMETER_TYPE_MISMATCH: {
+				if (isSameErasure(overriding, overriddenInHierarchy)) {
+					result.add(OverrideCheckDetails.SAME_ERASURE);
 				}
+				return result;
 			}
+			case NOT_VISIBLE:
+			case STATIC_MISMATCH: 
+				if (!overriding.getParameterTypes().isEmpty() && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
+					result.add(OverrideCheckDetails.PARAMETER_TYPE_MISMATCH);
+					return result;
+				}
+				if (!isMatchingTypeParameters(overriding, overriddenInHierarchy)) {
+					result.add(OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
+					return result;
+				}
+			case REPEATED:
+			case SHADOWED:
+			case IMPLEMENTATION:
+			case REDECLARATION:
+			case OVERRIDE: {
+				addAdditionalDetails(overriding, overriddenInHierarchy, result);
+				return result;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected primary detail: " + primary);
 		}
 	}
 	
+	protected boolean isSameErasure(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
+		List<LightweightTypeReference> overridingParameterTypes = overriding.getParameterTypes();
+		List<LightweightTypeReference> overriddenParameterTypes = overridden.getParameterTypes();
+		if (overridingParameterTypes.size() != overriddenParameterTypes.size()) {
+			return false;
+		}
+		for(int i = 0; i < overridingParameterTypes.size(); i++) {
+			LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
+			LightweightTypeReference overriddenParameterType = overriddenParameterTypes.get(i);
+			String erasedOverridingParameterTypeIdentifier = overridingParameterType.getRawTypeReference().getIdentifier();
+			String erasedOverriddenParameterTypeIdentifier = overriddenParameterType.getRawTypeReference().getIdentifier();
+			if (!erasedOverridingParameterTypeIdentifier.equals(erasedOverriddenParameterTypeIdentifier)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	protected void addAdditionalDetails(AbstractResolvedOperation overriding,
 			AbstractResolvedOperation overridden, EnumSet<OverrideCheckDetails> result) {
+		addReturnTypeDetails(overriding, overridden, result);
 		addAdditionalDetails(overriding.getDeclaration(), overridden.getDeclaration(), result);
+	}
+
+	protected void addReturnTypeDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,
+			EnumSet<OverrideCheckDetails> result) {
+		LightweightTypeReference overridingReturnType = overriding.getReturnType();
+		LightweightTypeReference overriddenReturnType = overridden.getReturnType();
+		TypeConformanceComputationArgument conformanceArgument = new TypeConformanceComputationArgument(false, false, false, false, false, false);
+		if (!overriddenReturnType.isAssignableFrom(overridingReturnType, conformanceArgument)) {
+			if (overriding.getTypeParameters().isEmpty() && !overridden.getTypeParameters().isEmpty()) {
+				TypeConformanceComputationArgument rawConformanceArgument = new TypeConformanceComputationArgument(true, false, false, false, false, false);
+				if (!overriddenReturnType.isAssignableFrom(overridingReturnType, rawConformanceArgument)) {
+					result.add(OverrideCheckDetails.RETURN_MISMATCH);		
+				} else {
+					result.add(OverrideCheckDetails.UNCHECKED_CONVERSION_REQUIRED);
+					if (overridingReturnType.getRawTypeReference().getType() != overriddenReturnType.getRawTypeReference().getType()) {
+						result.add(OverrideCheckDetails.COVARIANT_RETURN);
+					}
+				}
+			} else {
+				result.add(OverrideCheckDetails.RETURN_MISMATCH);
+			}
+		} else if (!overriddenReturnType.getIdentifier().equals(overridingReturnType.getIdentifier())) {
+			if (!overridden.isRawTypeInheritance() && overriding.getTypeParameters().isEmpty() && !overridden.getTypeParameters().isEmpty()) {
+				if (overridden.getTypeParameters().contains(overridden.getDeclaration().getReturnType().getType())) {
+					result.add(OverrideCheckDetails.UNCHECKED_CONVERSION_REQUIRED);
+				}
+			}
+			result.add(OverrideCheckDetails.COVARIANT_RETURN);
+		}
 	}
 
 	protected void addAdditionalDetails(JvmOperation overriding, JvmOperation overridden,
 			EnumSet<OverrideCheckDetails> result) {
 		if (isMorePrivateThan(overriding.getVisibility(), overridden.getVisibility())) {
 			result.add(OverrideCheckDetails.REDUCED_VISIBILITY);
+		}
+		if (overriding.isVarArgs() != overridden.isVarArgs()) {
+			result.add(OverrideCheckDetails.VAR_ARG_MISMATCH);
 		}
 	}
 
@@ -199,7 +263,7 @@ public class OverrideTester {
 					return false;
 				}
 			} else {
-				Set<String> overridingSuperTypeNames = Sets.newHashSet();
+				Set<String> overridingSuperTypeNames = Sets.newHashSetWithExpectedSize(overriddenSuperTypes.size());
 				for(LightweightTypeReference overridingSuperType: overridingSuperTypes) {
 					overridingSuperTypeNames.add(overridingSuperType.getIdentifier());
 				}
@@ -217,86 +281,18 @@ public class OverrideTester {
 	protected OverrideCheckDetails getPrimaryValidDetail(IResolvedOperation overriding, JvmOperation overridden) {
 		OverrideCheckDetails result = OverrideCheckDetails.IMPLEMENTATION;
 		JvmOperation declaration = overriding.getDeclaration();
-		if (declaration.isAbstract()) {
+		if (declaration.isStatic()) {
+			result = OverrideCheckDetails.SHADOWED;
+		} else if (declaration.isAbstract()) {
 			if (overridden.isAbstract()) {
 				result = OverrideCheckDetails.REPEATED;
 			} else {
 				result = OverrideCheckDetails.REDECLARATION;
 			}
-		} else {
-			if (!overridden.isAbstract()) {
-				result = OverrideCheckDetails.OVERRIDE;
-			}
-		}
-		if (declaration.isStatic()) {
-			if (overridden.isStatic())
-				result = OverrideCheckDetails.SHADOWED;
-			else
-				result = OverrideCheckDetails.STATIC_MISMATCH;
-		} else if (overridden.isStatic()){
-			result = OverrideCheckDetails.STATIC_MISMATCH;
+		} else if (!overridden.isAbstract()) {
+			result = OverrideCheckDetails.OVERRIDE;
 		}
 		return result;
 	}
-	
-//	class A {
-//		void m(Iterable i) {}
-//	}
-//	class B extends A {
-//		void m(Iterable<String> i) {}
-//	}
-//	
-//	class A {
-//		<T extends CharSequence> void m(Iterable<String> i) {}
-//		void m2() throws IOException {}
-//	}
-//	class B extends A {
-//		@Override
-//		void m(Iterable<String> i) {}
-//		@Override
-//		void m2() throws FileNotFoundException, RuntimeException, OutOfMemoryError, Throwable {}
-//	}
-//	
-//	class A2 {
-//		<T extends CharSequence> void m(Iterable<T> i) {}
-//		<T extends CharSequence> void m2(Iterable<T> i) {}
-//	}
-//	class B2<V extends CharSequence> extends A2 {
-//		<T extends CharSequence> void m(Iterable<CharSequence> i) {}
-//		 void m2(Iterable<V> i) {}
-//	}
-//	class A3 {
-//		<T extends CharSequence> void m(T t2, T t) {
-//		}
-//	}
-//
-//	class B2 extends A3 {
-//		@Override
-//		void m(CharSequence t1, CharSequence t2) {
-//		}
-//	}
-//	protected EnumSet<OverrideCheckDetails> getProblems(EnumSet<OverrideCheckDetails> initial, IResolvedOperation overriding, JvmOperation overridden) {
-//		if (overridden.isFinal()) {
-//			initial.add(OverrideCheckDetails.IS_FINAL);
-//		}
-//	}
-//	class A5 {
-//        <T extends CharSequence> void m() {
-//        }
-//        <T extends Comparable<T>> void m2() {}
-//        <T extends Object & CharSequence & Cloneable> void m3() {
-//        }
-//    }
-//
-//        class B5<Y> extends A5 {
-//            @Override
-//            <T1 extends CharSequence> void m() {
-//            }
-//            @Override
-//            <T1 extends Comparable<T1>> void m2() {}
-//            @Override
-//            <T extends Object & Cloneable & CharSequence> void m3() {
-//            }
-//        }
 
 }

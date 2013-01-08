@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
 import org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult
 import static org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult$OverrideCheckDetails.*
 import java.util.EnumSet
+import org.eclipse.xtext.common.types.JvmVisibility
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -136,7 +137,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected withExactDetails(IResolvedOperation operation, IOverrideCheckResult$OverrideCheckDetails... details) {
-		assertEquals(1, operation.overriddenAndImplementedMethodCandidates)
+		assertEquals(1, operation.overriddenAndImplementedMethodCandidates.size)
 		val candidate = operation.overriddenAndImplementedMethodCandidates.head
 		val expectation = EnumSet::copyOf(details)
 		val checkResult = operation.isOverridingOrImplementing(candidate)
@@ -187,13 +188,13 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testOverrideMethodResolution_05() {
 		val operation = '(null as testdata.MethodOverrides4).m3(null)'.toOperation
-		operation.has(1).candidatesAndOverrides(1)
+		operation.has(1).candidatesAndOverrides(1).withExactDetails(OVERRIDE, COVARIANT_RETURN, UNCHECKED_CONVERSION_REQUIRED)
 	}
 	
 	@Test
 	def void testOverrideMethodResolution_06() {
 		val operation = '(null as testdata.MethodOverrides4).m4(null)'.toOperation
-		operation.has(1).candidatesAndOverrides(1)
+		operation.has(1).candidatesAndOverrides(1).withExactDetails(OVERRIDE, COVARIANT_RETURN, UNCHECKED_CONVERSION_REQUIRED)
 	}
 	
 	@Test
@@ -264,13 +265,13 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testRawOverrideMethodResolution_03() {
 		val operation = '(null as testdata.MethodOverrides5).m3(null)'.toOperation
-		operation.has(1).candidatesAndOverrides(1)
+		operation.has(1).candidatesAndOverrides(1).withExactDetails(OVERRIDE, COVARIANT_RETURN)
 	}
 	
 	@Test
 	def void testRawOverrideMethodResolution_04() {
 		val operation = '(null as testdata.MethodOverrides5).m4(null)'.toOperation
-		operation.has(1).candidatesAndOverrides(1)
+		operation.has(1).candidatesAndOverrides(1).withExactDetails(OVERRIDE, COVARIANT_RETURN)
 	}
 	
 	@Test
@@ -352,4 +353,86 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		operation.has(0).candidatesAndOverrides(0)
 	}
 	
+	@Test
+	def void testVarArgsMismatch_01() {
+		val operation = '(null as testdata.MethodOverrides4).withVarArgs(null)'.toOperation
+		operation.declaration.visibility = JvmVisibility::PROTECTED
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PUBLIC
+		]
+		operation.has(1).candidatesAndOverrides(1).withDetails(REDUCED_VISIBILITY, VAR_ARG_MISMATCH)
+	}
+	
+	@Test
+	def void testVarArgsMismatch_02() {
+		val operation = '(null as testdata.MethodOverrides4).withArray(null)'.toOperation
+		operation.declaration.visibility = JvmVisibility::PROTECTED
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::DEFAULT
+		]
+		operation.has(1).candidatesAndOverrides(1).withDetails(VAR_ARG_MISMATCH)
+	}
+	
+	@Test
+	def void testVarArgsMismatch_03() {
+		val operation = '(null as testdata.MethodOverrides4).withArray(null)'.toOperation
+		operation.declaration => [
+			visibility = JvmVisibility::PUBLIC
+			setStatic(true)
+		]
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PROTECTED
+			setStatic(true)
+		]
+		operation.has(1).candidatesAndOverrides(1).withExactDetails(SHADOWED, VAR_ARG_MISMATCH)
+	}
+	
+	@Test
+	def void testVarArgsMismatch_04() {
+		val operation = '(null as testdata.MethodOverrides4).withVarArgs(null)'.toOperation
+		operation.declaration => [
+			visibility = JvmVisibility::PROTECTED
+			setStatic(true)
+		]
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.has(1).candidatesAndOverrides(0).withDetails(STATIC_MISMATCH, VAR_ARG_MISMATCH)
+	}
+	
+	@Test
+	def void testSameErasure_01() {
+		val operation = '(null as testdata.MethodOverrides4).sameErasure1(null)'.toOperation
+		operation.declaration => [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.has(1).candidatesAndOverrides(0).withExactDetails(PARAMETER_TYPE_MISMATCH, SAME_ERASURE)
+	}
+	
+	@Test
+	def void testSameErasure_02() {
+		val operation = '(null as testdata.MethodOverrides4).sameErasure2(null)'.toOperation
+		operation.declaration => [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.has(1).candidatesAndOverrides(0).withExactDetails(TYPE_PARAMETER_MISMATCH, SAME_ERASURE)
+	}
+	
+	@Test
+	def void testSameErasure_03() {
+		val operation = '(null as testdata.MethodOverrides4).sameErasure3'.toOperation
+		operation.declaration => [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.overriddenAndImplementedMethodCandidates.forEach [
+			visibility = JvmVisibility::PROTECTED
+		]
+		operation.has(1).candidatesAndOverrides(0).withExactDetails(TYPE_PARAMETER_MISMATCH, SAME_ERASURE)
+	}
 }

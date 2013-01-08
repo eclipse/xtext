@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -71,6 +73,19 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 			}
 		}
 		return validOverrides = Collections.unmodifiableList(result);
+	}
+	
+	@Nullable
+	public IResolvedOperation getOverriddenMethod() {
+		if (!declaration.isAbstract() && declaration.getVisibility() != JvmVisibility.PRIVATE) {
+			List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();
+			for(IResolvedOperation candidate: overriddenAndImplemented) {
+				if (!candidate.getDeclaration().isAbstract()) {
+					return candidate;
+				}
+			}
+		}
+		return null;
 	}
 
 	protected ResolvedOperationInHierarchy createResolvedOperationInHierarchy(JvmOperation candidate) {
@@ -171,5 +186,21 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 	
 	protected OverrideTester getOverrideTester() {
 		return getBottom().getOverrideTester();
+	}
+	
+	protected boolean isRawTypeInheritance() {
+		List<LightweightTypeReference> superTypes = getContextType().getAllSuperTypes();
+		JvmDeclaredType declaringType = getDeclaration().getDeclaringType();
+		for(LightweightTypeReference superType: superTypes) {
+			if (superType.getType() == declaringType && superType.isRawType()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s in context of %s", declaration.getIdentifier(), getContextType().getSimpleName());
 	}
 }

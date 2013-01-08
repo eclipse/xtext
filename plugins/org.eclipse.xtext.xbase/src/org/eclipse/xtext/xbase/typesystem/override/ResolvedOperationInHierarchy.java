@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,18 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 
 	@Override
 	protected TypeParameterSubstitutor<?> getSubstitutor() {
+		if (isRawTypeInheritance()) {
+			return new TypeParameterSubstitutor<Object>(Collections.<JvmTypeParameter,LightweightMergedBoundTypeArgument>emptyMap(), getContextType().getOwner()) {
+				@Override
+				public LightweightTypeReference substitute(LightweightTypeReference original) {
+					return original.getRawTypeReference();
+				}
+				@Override
+				protected Object createVisiting() {
+					return new Object();
+				}
+			};
+		}
 		TypeParameterSubstitutor<?> result = super.getSubstitutor();
 		List<JvmTypeParameter> typeParameters = getTypeParameters();
 		if (!typeParameters.isEmpty()) {
