@@ -50,4 +50,32 @@ public class MethodOverrides3<V extends Iterable<String>> {
 	<T extends V> void m9() {
 	}
 
+	private <T extends CharSequence> String privateM1(T t) {
+		return "m1(t)";
+	}
+	
+	public <T> String m10(Iterable<String> t, Iterable<String> it) {
+		return "m4(t)";
+	}
+	
+	public static <T extends CharSequence> String staticM1(T t) {
+		return "m1(t)";
+	}
+	
+	public static <T extends Iterable<CharSequence>> String staticM2(T t) {
+		return "m2(t)";
+	}
+
+	public static <T extends CharSequence> String staticM3(T t) {
+		return "m3(t)";
+	}
+
+	public static <T extends Iterable<CharSequence>> String staticM4(T t) {
+		return "m4(t)";
+	}
+	
+	public static <T extends CharSequence> Iterable<T> staticM5() {
+		return null;
+	}
+
 }

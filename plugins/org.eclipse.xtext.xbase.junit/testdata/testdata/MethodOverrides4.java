@@ -7,6 +7,7 @@
  *******************************************************************************/
 package testdata;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.4
  */
+@SuppressWarnings("unused")
 public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	@Override
 	public <T extends CharSequence> String m1(T t) {
@@ -58,5 +60,34 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	
 	@Override
 	<T extends List<String>> void m9() {
+	}
+	
+	protected <T extends CharSequence> String privateM1(CharSequence t) {
+		return "m1(t)";
+	}
+	
+	@Override
+	public <T> String m10(Iterable<String> t, Iterable<String> it) {
+		return "m4(t)";
+	}
+	
+	public static <T extends CharSequence> String staticM1(T t) {
+		return "m1(t)";
+	}
+	
+	public static <T extends Iterable<CharSequence>> String staticM2(T t) {
+		return "m2(t)";
+	}
+
+	public static <T extends CharSequence> String staticM3(T t) {
+		return "m3(t)";
+	}
+
+	public static <T extends Iterable<CharSequence>> String staticM4(T t) {
+		return "m4(t)";
+	}
+	
+	public static <T extends Object> Iterable<T> staticM5() {
+		return null;
 	}
 }
