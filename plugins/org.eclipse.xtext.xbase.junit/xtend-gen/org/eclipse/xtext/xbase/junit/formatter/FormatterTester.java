@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
@@ -41,6 +42,7 @@ public class FormatterTester {
   @Inject
   private IBasicFormatter formatter;
   
+  @SuppressWarnings(value = "unchecked")
   public void assertFormatted(final Procedure1<? super AssertingFormatterData> init) {
     AssertingFormatterData _assertingFormatterData = new AssertingFormatterData();
     final AssertingFormatterData data = _assertingFormatterData;
@@ -72,8 +74,8 @@ public class FormatterTester {
       }
       Resource _eResource_2 = parsed.eResource();
       IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      final String oldDocument = _rootNode.getText();
+      ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
+      final String oldDocument = _rootNode==null?(String)null:_rootNode.getText();
       final IBasicFormatter formatter = this.formatter;
       boolean _matched = false;
       if (!_matched) {
@@ -253,9 +255,11 @@ public class FormatterTester {
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
       IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
-      for (final ILeafNode leaf : _leafNodes) {
+      ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
+      Iterable<ILeafNode> _leafNodes = _rootNode==null?(Iterable<ILeafNode>)null:_rootNode.getLeafNodes();
+      List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
+      Iterable<ILeafNode> _elvis = ObjectExtensions.<Iterable<ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+      for (final ILeafNode leaf : _elvis) {
         boolean _or = false;
         boolean _isHidden = leaf.isHidden();
         boolean _not = (!_isHidden);

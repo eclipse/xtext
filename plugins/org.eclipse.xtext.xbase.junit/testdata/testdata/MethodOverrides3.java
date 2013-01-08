@@ -82,7 +82,7 @@ public class MethodOverrides3<V extends Iterable<String>> {
 	private void withArray(String[] s) {}
 	
 	private void sameErasure1(Iterable<String> iterable) {}
-	private <T extends Integer> void sameErasure2(Iterable<T> iterable) {}
-	private <T, V> void sameErasure3() {}
+	private <T extends Number> void sameErasure2(Iterable<T> iterable) {}
+	private <T, K> void sameErasure3() {}
 	
 }

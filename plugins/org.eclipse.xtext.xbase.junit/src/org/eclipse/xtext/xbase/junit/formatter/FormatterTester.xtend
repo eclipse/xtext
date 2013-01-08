@@ -17,6 +17,7 @@ class FormatterTester {
 	@Inject extension ParseHelper<EObject>
 	@Inject IBasicFormatter formatter
 
+	@SuppressWarnings("unchecked")
 	def assertFormatted((AssertingFormatterData)=>void init) {
 		val data = new AssertingFormatterData
 		data.config = new MapBasedPreferenceValues(newHashMap)
@@ -29,7 +30,7 @@ class FormatterTester {
 		val parsed = fullToBeParsed.parse
 		if (!allowErrors)
 			Assert::assertEquals(parsed.eResource.errors.join("\n"), 0, parsed.eResource.errors.size)
-		val oldDocument = (parsed.eResource as XtextResource).parseResult.rootNode.text
+		val oldDocument = (parsed.eResource as XtextResource).parseResult?.rootNode?.text
 
 		switch formatter { AbstractFormatter: formatter.allowIdentityEdits = true }
 
@@ -95,7 +96,7 @@ class FormatterTester {
 		val offsets = edits.map[it.offset].toSet
 		val result = <TextReplacement>newArrayList
 		var lastOffset = 0
-		for (leaf : res.parseResult.rootNode.leafNodes)
+		for (leaf : res.parseResult?.rootNode?.leafNodes?:emptyList)
 			if (!leaf.hidden || !leaf.text.trim.nullOrEmpty) {
 				if ((lastOffset >= offset) && (leaf.offset <= offset + length) && !offsets.contains(lastOffset))
 					result += new TextReplacement(lastOffset, leaf.offset - lastOffset, "!!")
@@ -105,6 +106,7 @@ class FormatterTester {
 	}
 }
 
+@SuppressWarnings("restriction")
 class AssertingFormatterData {
 	@Property MapBasedPreferenceValues config
 	def getCfg() {

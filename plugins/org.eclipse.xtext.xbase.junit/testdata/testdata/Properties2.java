@@ -7,6 +7,7 @@
  *******************************************************************************/
 package testdata;
 
+@SuppressWarnings("unused")
 public class Properties2 extends Properties1 {
 
 	public void setProp2(Object prop1) {

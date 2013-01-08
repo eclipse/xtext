@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class ClassWithVarArgs {
 
 	private boolean varArgConstructor;
