@@ -66,7 +66,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 
 	public static class FQNImporter extends FQNShortener {
 
-		private static final Logger LOG = Logger.getLogger(FQNShortener.class);
+		private static final Logger LOG = Logger.getLogger(FQNImporter.class);
 		private final ITextViewer viewer;
 
 		private RewritableImportSection.Factory importSectionFactory;
@@ -140,6 +140,8 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
 			if(typeToImport == null) {
 				LOG.error("Could not find unique type named '" + notNull(qualifiedName) + "' in scope");
+				if (viewerExtension != null)
+					viewerExtension.setRedraw(true);
 				return;
 			}
 			EObject resolved = EcoreUtil.resolve(typeToImport.getEObjectOrProxy(), context);

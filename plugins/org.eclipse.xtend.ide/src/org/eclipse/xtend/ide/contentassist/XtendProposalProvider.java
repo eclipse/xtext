@@ -26,6 +26,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
@@ -36,7 +37,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
-import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -88,7 +88,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
 			// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
-			completeJavaTypes(context, XtendPackage.Literals.XTEND_FIELD__TYPE, true,
+			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
 					getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
 		}
 	}
@@ -96,7 +96,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_ReturnType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE, true,
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
 				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
 	}
 
@@ -140,7 +140,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(),
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
 				new ITypesProposalProvider.Filter() {
 					public int getSearchFor() {
 						return IJavaSearchConstants.CLASS;
@@ -158,7 +158,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Implements(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(),
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
 				TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
 	}
 

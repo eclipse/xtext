@@ -160,7 +160,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeXRelationalExpression_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION__TYPE, acceptor);
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
 	}
 
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ICompletionProposalAcceptor acceptor) {
