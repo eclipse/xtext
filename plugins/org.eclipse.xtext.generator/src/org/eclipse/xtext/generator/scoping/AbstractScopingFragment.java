@@ -62,13 +62,19 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 		this.isGenerateStub = isGenerateStub;
 	}
 	
+	private boolean logged = false;
+	
 	/**
 	 * @since 2.1
 	 */
 	public boolean isGenerateStub(Grammar grammar) {
 		if(isGenerateStub()) {
 			if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
-				Logger.getLogger(this.getClass()).warn("Skipping stub generation as Xbase is used");
+				if (!logged) {
+					logged = true;
+					// TODO Does this really deserve a warning?
+					Logger.getLogger(this.getClass()).warn("Skipping stub generation as Xbase is used");
+				}
 				return false;
 			}
 			return true;
