@@ -61,6 +61,14 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
+	public static class JavaIdentifierFunction implements Function<LightweightTypeReference, String> {
+		public String apply(@Nullable LightweightTypeReference reference) {
+			if (reference == null)
+				throw new NullPointerException("reference");
+			return reference.getJavaIdentifier();
+		}
+	}
+	
 	public static class SimpleNameFunction implements Function<LightweightTypeReference, String> {
 		public String apply(@Nullable LightweightTypeReference reference) {
 			if (reference == null)
@@ -351,6 +359,8 @@ public abstract class LightweightTypeReference {
 	public abstract String getSimpleName();
 	
 	public abstract String getIdentifier();
+	
+	public abstract String getJavaIdentifier();
 	
 	@Nullable
 	protected JvmType findType(Class<?> type) {

@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Function;
@@ -117,6 +118,11 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (isRawType())
 			return type;
 		return "(" + Joiner.on(", ").join(Iterables.transform(expose(parameterTypes), format)) + ")=>" + (returnType != null ? format.apply(returnType) : "./.");
+	}
+	
+	@Override
+	public String getJavaIdentifier() {
+		return super.getAsString(getType().getIdentifier(), new JavaIdentifierFunction());
 	}
 	
 	@Override

@@ -31,6 +31,7 @@ import com.google.common.collect.Maps;
 public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 
 	private BottomResolvedOperation bottom;
+	private IOverrideCheckResult checkResult;
 	
 	protected ResolvedOperationInHierarchy(JvmOperation declaration, BottomResolvedOperation bottom) {
 		super(declaration, bottom.getContextType());
@@ -97,5 +98,13 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping()  {
 		return getBottom().getContextTypeParameterMapping();
+	}
+	
+	public IOverrideCheckResult getOverrideCheckResult() {
+		return checkResult;
+	}
+
+	protected void setCheckResult(IOverrideCheckResult checkResult) {
+		this.checkResult = checkResult;
 	}
 }

@@ -133,8 +133,8 @@ public class OverrideTester {
 		for(int i = 0; i < overridingParameterTypes.size(); i++) {
 			LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
 			LightweightTypeReference overriddenParameterType = overriddenParameterTypes.get(i);
-			String erasedOverridingParameterTypeIdentifier = overridingParameterType.getRawTypeReference().getIdentifier();
-			String erasedOverriddenParameterTypeIdentifier = overriddenParameterType.getRawTypeReference().getIdentifier();
+			String erasedOverridingParameterTypeIdentifier = overridingParameterType.getRawTypeReference().getJavaIdentifier();
+			String erasedOverriddenParameterTypeIdentifier = overriddenParameterType.getRawTypeReference().getJavaIdentifier();
 			if (!erasedOverridingParameterTypeIdentifier.equals(erasedOverriddenParameterTypeIdentifier)) {
 				return false;
 			}
@@ -150,8 +150,8 @@ public class OverrideTester {
 
 	protected void addReturnTypeDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,
 			EnumSet<OverrideCheckDetails> result) {
-		LightweightTypeReference overridingReturnType = overriding.getReturnType();
-		LightweightTypeReference overriddenReturnType = overridden.getReturnType();
+		LightweightTypeReference overridingReturnType = overriding.getResolvedReturnType();
+		LightweightTypeReference overriddenReturnType = overridden.getResolvedReturnType();
 		TypeConformanceComputationArgument conformanceArgument = new TypeConformanceComputationArgument(false, false, false, false, false, false);
 		if (!overriddenReturnType.isAssignableFrom(overridingReturnType, conformanceArgument)) {
 			if (overriding.getTypeParameters().isEmpty() && !overridden.getTypeParameters().isEmpty()) {
@@ -167,7 +167,7 @@ public class OverrideTester {
 			} else {
 				result.add(OverrideCheckDetails.RETURN_MISMATCH);
 			}
-		} else if (!overriddenReturnType.getIdentifier().equals(overridingReturnType.getIdentifier())) {
+		} else if (!overriddenReturnType.getJavaIdentifier().equals(overridingReturnType.getJavaIdentifier())) {
 			if (!overridden.isRawTypeInheritance() && overriding.getTypeParameters().isEmpty() && !overridden.getTypeParameters().isEmpty()) {
 				if (overridden.getTypeParameters().contains(overridden.getDeclaration().getReturnType().getType())) {
 					result.add(OverrideCheckDetails.UNCHECKED_CONVERSION_REQUIRED);
@@ -181,6 +181,9 @@ public class OverrideTester {
 			EnumSet<OverrideCheckDetails> result) {
 		if (isMorePrivateThan(overriding.getVisibility(), overridden.getVisibility())) {
 			result.add(OverrideCheckDetails.REDUCED_VISIBILITY);
+		}
+		if (overridden.isFinal()) {
+			result.add(OverrideCheckDetails.IS_FINAL);
 		}
 		if (overriding.isVarArgs() != overridden.isVarArgs()) {
 			result.add(OverrideCheckDetails.VAR_ARG_MISMATCH);
@@ -215,8 +218,8 @@ public class OverrideTester {
 		for(int i = 0; i < overridingParameterTypes.size(); i++) {
 			LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
 			LightweightTypeReference overriddenParameterType = overriddenParameterTypes.get(i);
-			String overridingParameterTypeIdentifier = overridingParameterType.getIdentifier();
-			if (!overridingParameterTypeIdentifier.equals(overriddenParameterType.getIdentifier())) {
+			String overridingParameterTypeIdentifier = overridingParameterType.getJavaIdentifier();
+			if (!overridingParameterTypeIdentifier.equals(overriddenParameterType.getJavaIdentifier())) {
 				if (!overriding.getTypeParameters().isEmpty()) {
 					return false;
 				}
@@ -229,8 +232,8 @@ public class OverrideTester {
 				LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
 				LightweightTypeReference overriddenParameterType = overriddenParameterTypes.get(i);
 				LightweightTypeReference erasureType = overriddenParameterType.getRawTypeReference();
-				String overridingParameterTypeIdentifier = overridingParameterType.getIdentifier();
-				if (!overridingParameterTypeIdentifier.equals(erasureType.getIdentifier())) {
+				String overridingParameterTypeIdentifier = overridingParameterType.getJavaIdentifier();
+				if (!overridingParameterTypeIdentifier.equals(erasureType.getJavaIdentifier())) {
 					return false;
 				}
 			}
@@ -259,17 +262,17 @@ public class OverrideTester {
 			}
 			if (overridingSuperTypes.size() == 1) {
 				LightweightTypeReference resolved = substitutor.substitute(overriddenSuperTypes.get(0));
-				if (!overridingSuperTypes.get(0).getIdentifier().equals(resolved.getIdentifier())) {
+				if (!overridingSuperTypes.get(0).getJavaIdentifier().equals(resolved.getJavaIdentifier())) {
 					return false;
 				}
 			} else {
 				Set<String> overridingSuperTypeNames = Sets.newHashSetWithExpectedSize(overriddenSuperTypes.size());
 				for(LightweightTypeReference overridingSuperType: overridingSuperTypes) {
-					overridingSuperTypeNames.add(overridingSuperType.getIdentifier());
+					overridingSuperTypeNames.add(overridingSuperType.getJavaIdentifier());
 				}
 				for(LightweightTypeReference overriddenSuperType: overriddenSuperTypes) {
 					LightweightTypeReference resolved = substitutor.substitute(overriddenSuperType);
-					if (!overridingSuperTypeNames.contains(resolved.getIdentifier())) {
+					if (!overridingSuperTypeNames.contains(resolved.getJavaIdentifier())) {
 						return false;
 					}
 				}

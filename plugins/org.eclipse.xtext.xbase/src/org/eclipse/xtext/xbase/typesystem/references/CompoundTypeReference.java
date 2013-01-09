@@ -171,6 +171,11 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		return getAsString(new IdentifierFunction());
 	}
 	
+	@Override
+	public String getJavaIdentifier() {
+		return toJavaType().getJavaIdentifier();
+	}
+	
 	private String getAsString(Function<? super LightweightTypeReference, ? extends String> format) {
 		return Joiner.on(synonym ? " | " : " & ").join(Iterables.transform(expose(components), format));
 	}

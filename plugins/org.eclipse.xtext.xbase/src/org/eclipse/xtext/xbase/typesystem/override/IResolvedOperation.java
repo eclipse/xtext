@@ -113,6 +113,7 @@ public interface IResolvedOperation {
 	 * 	}
 	 * }
 	 * </pre>
+	 * 
 	 * In that case, the first match is returned thus it depends on the order in the super type.
 	 * 
 	 * @see #getOverriddenAndImplementedMethods()
@@ -136,6 +137,17 @@ public interface IResolvedOperation {
 	 * @return the check result.
 	 */
 	IOverrideCheckResult isOverridingOrImplementing(JvmOperation operation);
+
+	/**
+	 * The override check result that is associated with this operation. If this is a {@link #isBottomInContext()
+	 * bottom}, the {@link IOverrideCheckResult#getDetails() details} will only include the
+	 * {@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#CURRENT current}
+	 * detail. In other cases, the actual information about the relationship of the hierarchy function to its
+	 * specialization in the {@link #getContextType() context} is returned.
+	 * 
+	 * @return the computed check result
+	 */
+	IOverrideCheckResult getOverrideCheckResult();
 
 	/**
 	 * Returns the resolved type parameters for a given operation. If this operation represents an overridden operation,
@@ -195,6 +207,32 @@ public interface IResolvedOperation {
 	List<LightweightTypeReference> getParameterTypes();
 
 	/**
+	 * Returns the resolved signature of this operation. The resolved representation of
+	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
+	 * <code>add(int,java.util.Collection&lt;String&gt;)</code>.
+	 * 
+	 * @return the resolved signature.
+	 */
+	String getResolvedSignature();
+
+	/**
+	 * Returns the simple signature of this operation. The simple signature of
+	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
+	 * <code>add(int, Collection&lt;String&gt;)</code>.
+	 * 
+	 * @return the simple, human readable signature.
+	 */
+	String getSimpleSignature();
+
+	/**
+	 * Returns the resolved erased signature of this operation. The resolved representation of
+	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is <code>add(int,Collection)</code>.
+	 * 
+	 * @return the erased signature.
+	 */
+	String getResolvedErasureSignature();
+
+	/**
 	 * Returns the resolved return types in the current context. That is, all free type variables are bound according
 	 * the the bottom of this method hierarchy.
 	 * 
@@ -202,7 +240,7 @@ public interface IResolvedOperation {
 	 * @see #getResolvedTypeParameters()
 	 * @return the return type.
 	 */
-	LightweightTypeReference getReturnType();
+	LightweightTypeReference getResolvedReturnType();
 
 	/**
 	 * Returns the resolved declared exceptions in the current context. That is, all free type variables are bound

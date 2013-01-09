@@ -58,6 +58,11 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getJavaIdentifier() {
+		return "java.lang.Object";
+	}
+	
+	@Override
 	public boolean isType(Class<?> clazz) {
 		return false;
 	}

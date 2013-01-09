@@ -218,6 +218,11 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getJavaIdentifier() {
+		return getAsString(new JavaIdentifierFunction());
+	}
+	
+	@Override
 	@Nullable
 	public JvmType getType() {
 		return null;

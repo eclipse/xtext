@@ -461,6 +461,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getJavaIdentifier() {
+		if (internalIsResolved()) {
+			return resolvedTo.getJavaIdentifier();
+		}
+		return getIdentifier();
+	}
+	
+	@Override
 	public void accept(TypeReferenceVisitor visitor) {
 		if (internalIsResolved()) {
 			resolvedTo.accept(visitor);
