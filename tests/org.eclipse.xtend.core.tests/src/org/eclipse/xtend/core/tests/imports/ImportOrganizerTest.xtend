@@ -1063,6 +1063,18 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testEscapedPackageName() {
+		'''
+			class Foo extends types.^override.EscapePackageName {
+			}
+		'''.assertIsOrganizedTo('''
+			import types.^override.EscapePackageName
+			
+			class Foo extends EscapePackageName {
+			}
+		''')
+	}
+	
 	@Test def testJavaDoc() {
 		'''
 			/**
