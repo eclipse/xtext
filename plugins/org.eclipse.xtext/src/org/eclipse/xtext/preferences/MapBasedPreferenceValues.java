@@ -17,7 +17,8 @@ public class MapBasedPreferenceValues implements IPreferenceValues {
 	}
 	
 	public String getPreference(PreferenceKey key) {
-		return values.get(key.getId());
+		String value = values.get(key.getId());		
+		return value == null ? key.getDefaultValue() : value;
 	}
 
 	public void put(String key, String value) {
