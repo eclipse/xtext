@@ -16,8 +16,14 @@ public class ExceptionThrowing {
 
 	public void ioException() throws IOException {
 	}
+	
+	public <E extends IOException> void generifiedIoException() throws E {
+	}
 
 	public void runtimeException() throws RuntimeException {
+	}
+
+	public <E extends RuntimeException> void generifiedRuntimeException() throws E {
 	}
 	
 	public void nullPointerException() throws NullPointerException {
@@ -28,5 +34,4 @@ public class ExceptionThrowing {
 
 	public void noException() {
 	}
-
 }
