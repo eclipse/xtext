@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.imports;
 
-import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -49,24 +49,27 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 			return null;
 	}
 
-	@Override
-	public String getCommonPackageName(XtextResource resource) {
+	protected String getCommonPackageName(XtextResource resource) {
 		XtendFile xtendFile = getXtendFile(resource);
 		return xtendFile == null ? null : xtendFile.getPackage();
 	}
 	
 	@Override
-	public Map<String, JvmDeclaredType> getPrivilegedLocalTypes(XtextResource resource) {
+	public Iterable<JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
 		XtendFile xtendFile = getXtendFile(resource);
 		if(xtendFile == null)
-			return emptyMap();
-		Map<String, JvmDeclaredType> locallyDefinedTypes = newHashMap();
+			return emptyList();
+		final List<JvmDeclaredType> locallyDefinedTypes = newArrayList();
 		for(XtendTypeDeclaration xtendType: xtendFile.getXtendTypes())  {
 			for(EObject inferredElement: associations.getJvmElements(xtendType)) {
 				if(inferredElement instanceof JvmDeclaredType) {
 					JvmDeclaredType declaredType = (JvmDeclaredType) inferredElement;
-					locallyDefinedTypes.put(declaredType.getSimpleName(), declaredType);
-					addInnerTypes(declaredType, "", locallyDefinedTypes);
+					locallyDefinedTypes.add(declaredType);
+					addInnerTypes(declaredType, new IAcceptor<JvmDeclaredType>() {
+						public void accept(JvmDeclaredType t) {
+							locallyDefinedTypes.add(t);
+						}
+					});
 				}
 			}
 		}
@@ -84,6 +87,10 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 	public Set<String> getImplicitlyImportedPackages(XtextResource resource) {
 		Set<String> implicitlyImportedPackages = super.getImplicitlyImportedPackages(resource);
 		implicitlyImportedPackages.add(XtendImportedNamespaceScopeProvider.XTEND_LIB.toString("."));
+		XtendFile xtendFile = getXtendFile(resource);
+		String commonPackageName = xtendFile == null ? null : xtendFile.getPackage();
+		if(!isEmpty(commonPackageName))  
+			implicitlyImportedPackages.add(commonPackageName);
 		return implicitlyImportedPackages;
 	}
 	

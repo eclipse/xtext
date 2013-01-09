@@ -11,7 +11,11 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 	@Inject ImportOrganizer importOrganizer
 
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
-		val xtendFile = file(model.toString, true)
+		assertIsOrganizedTo(model, expected, true)
+	}
+	
+	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected, boolean validate) {
+		val xtendFile = file(model.toString, validate)
 		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
 		val builder = new StringBuilder(model)
 		for(it: changes.sortBy[offset].reverse)
@@ -153,7 +157,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  def void test(List<String> s) {
 			  }
 			}
-		''')
+		''', false)
 	}
 
 	@Test def testGetOrganizedImportSection_03() {
@@ -176,7 +180,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			    Collections::sort(x)
 			  }
 			}
-		''')
+		''', false)
 	}
 
 	@Test def testGetOrganizedImportSection_04() {
@@ -200,7 +204,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			    val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()
 			  }
 			}
-		''')
+		''', false)
 	}
 
 	@Test def testGetOrganizedImportSection_05() {
@@ -228,7 +232,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			    val x = new ArrayList<Map<StringBuilder,? extends Serializable>>()
 			  }
 			}
-		''')
+		''', false)
 	}
 
 	@Test def testInnerClasses_01() {
@@ -269,7 +273,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			    val y = EPackage$Registry::INSTANCE
 			  }
 			}
-		''')
+		''', false)
 	}
 
 	@Test def testInnerClasses_03() {
