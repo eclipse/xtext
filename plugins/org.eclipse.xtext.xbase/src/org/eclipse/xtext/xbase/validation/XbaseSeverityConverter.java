@@ -20,7 +20,7 @@ import org.eclipse.xtext.validation.SeverityConverter;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XbaseSeverityConverter extends SeverityConverter {
-	
+
 	private static final char DEFAULT_SEVERITY_SEPARATOR = ':';
 
 	@Override
@@ -39,10 +39,16 @@ public class XbaseSeverityConverter extends SeverityConverter {
 		return pair.getSecond();
 	}
 
+	/**
+	 * @returns String delegationKey:defaultSeverity
+	 */
 	public static String encodeDefaultSeverity(String delegationKey, String defaultSeverity) {
 		return new StringBuilder(delegationKey).append(DEFAULT_SEVERITY_SEPARATOR).append(defaultSeverity).toString();
 	}
 
+	/**
+	 * @returns Pair contains <delegationKey,defaultSeverity>
+	 */
 	public static Pair<String, String> decodeDelegationKey(String encodedValue) {
 		List<String> split = Strings.split(encodedValue, DEFAULT_SEVERITY_SEPARATOR);
 		if (split.size() == 2) {

@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
+import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 
 /**
  * Default ConfigurationBlock for Xbase Langauges
@@ -105,19 +106,15 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		// TODO Auto-generated method stub
 	}
 
-	protected String javaValue(String javaIssueCode) {
+	protected String javaValue(final String javaIssueCode) {
 		String delegatedValue;
+		String decodedDelegateKey = XbaseSeverityConverter.decodeDelegationKey(javaIssueCode).getFirst();
 		if (getProject() != null && getProject().isOpen() && JavaProject.hasJavaNature(getProject())) {
-			delegatedValue = JavaCore.create(getProject()).getOption(javaIssueCode, true);
+			delegatedValue = JavaCore.create(getProject()).getOption(decodedDelegateKey, true);
 		} else {
-			delegatedValue = JavaCore.getOption(javaIssueCode);
+			delegatedValue = JavaCore.getOption(decodedDelegateKey);
 		}
 		return delegatedValue;
 	}
 
-	@Override
-	public void performDefaults() {
-		// TODO Auto-generated method stub
-		super.performDefaults();
-	}
 }
