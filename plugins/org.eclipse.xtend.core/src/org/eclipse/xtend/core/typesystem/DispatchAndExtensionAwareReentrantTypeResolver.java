@@ -120,7 +120,15 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			for(JvmOperation caseOperation: cases) {
 				JvmFormalParameter parameter = caseOperation.getParameters().get(idx);
 				LightweightTypeReference parameterType = resolvedTypes.getActualType(parameter);
-				parameterTypes.add(parameterType);
+				if (parameterType != null && !parameterType.isType(Void.class)) {
+					parameterTypes.add(parameterType);
+				}
+			}
+			// every parameter type is java.lang.Void so we use Object
+			// otherwise it would only be possible to pass the null literal but not a null value, e.g. of type String
+			// to the dispatcher
+			if (parameterTypes.isEmpty()) {
+				return getServices().getTypeReferences().getTypeForName(Object.class, operation);
 			}
 			LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes);
 			if (parameterType == null) {

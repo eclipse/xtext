@@ -31,20 +31,45 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class DispatchingSupportTest extends AbstractXtendTestCase {
 	
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	protected DispatchingSupport dispatchingSupport;
 	
 	@Test public void testIgnoreVoidInParameterTypeInferrence() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				" def dispatch foo(Integer i) {null}" +
-				" def dispatch foo(Number n) {null}" +
-				" def dispatch foo(Void ignore) {null}" +
+			" def dispatch foo(Integer i) {null}" +
+			" def dispatch foo(Number n) {null}" +
+			" def dispatch foo(Void ignore) {null}" +
 			"}");
 		JvmOperation dispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, Tuples.create("foo", 1));
 		JvmFormalParameter firstParameter = dispatchMethod.getParameters().get(0);
 		assertEquals("java.lang.Number", firstParameter.getParameterType().getIdentifier());
+	}
+	
+	@Test public void testIgnoreVoidInParameterTypeInferrence_02() throws Exception {
+		XtendClass clazz = clazz("class X {\n" +
+			" def dispatch foo(Number n, Void v) {null}" +
+			" def dispatch foo(Void ignore, Object o) {null}" +
+			"}");
+		JvmOperation dispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, Tuples.create("foo", 2));
+		JvmFormalParameter firstParameter = dispatchMethod.getParameters().get(0);
+		assertEquals("java.lang.Number", firstParameter.getParameterType().getIdentifier());
+		JvmFormalParameter secondParameter = dispatchMethod.getParameters().get(1);
+		assertEquals("java.lang.Object", secondParameter.getParameterType().getIdentifier());
+	}
+	
+	@Test public void testIgnoreVoidInParameterTypeInferrence_03() throws Exception {
+		XtendClass clazz = clazz("class X {\n" +
+			" def dispatch foo(String n, Void v) {null}" +
+			" def dispatch foo(Integer i, Void v) {null}" +
+			"}");
+		JvmOperation dispatchMethod = dispatchingSupport.findSyntheticDispatchMethod(clazz, Tuples.create("foo", 2));
+		JvmFormalParameter firstParameter = dispatchMethod.getParameters().get(0);
+		assertEquals("java.lang.Object", firstParameter.getParameterType().getIdentifier());
+		JvmFormalParameter secondParameter = dispatchMethod.getParameters().get(1);
+		assertEquals("java.lang.Void", secondParameter.getParameterType().getIdentifier());
 	}
 	
 	@Test public void testSort_00() throws Exception {
