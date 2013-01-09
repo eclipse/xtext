@@ -31,8 +31,6 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
-import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
@@ -44,8 +42,6 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
-import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
-import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -145,11 +141,4 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendImportsConfiguration.class;
 	}
 
-	public Class<? extends SeverityConverter> bindSeverityConverter() {
-		return XbaseSeverityConverter.class;
-	}
-
-	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
-		return XbaseConfigurableIssueCodes.class;
-	}
 }
