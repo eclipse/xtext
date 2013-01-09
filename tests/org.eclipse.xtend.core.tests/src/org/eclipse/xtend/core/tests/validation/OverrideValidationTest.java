@@ -405,6 +405,20 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 				"Exception", "not", "compatible", "throws", "clause");
 	}
 	
+	@Ignore("Fails in old impl")
+	@Test public void testIncompatibleThrowsClause_04() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedIoException() throws java.net.URISyntaxException {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "URISyntaxException", "not", "compatible", "throws", "clause");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testIncompatibleThrowsClause_05() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedRuntimeException() throws java.io.FileNotFoundException {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "FileNotFoundException", "not", "compatible", "throws", "clause");
+	}
+	
 	@Test public void testCompatibleThrowsClause() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws java.io.FileNotFoundException {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
@@ -444,5 +458,38 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
-
+	
+	@Ignore("Fails in old impl")
+	@Test public void testCompatibleThrowsClause_08() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testCompatibleThrowsClause_09() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testCompatibleThrowsClause_10() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E, NullPointerException, OutOfMemoryError {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testCompatibleThrowsClause_11() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedIoException() throws java.io.IOException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testCompatibleThrowsClause_12() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedRuntimeException() throws NullPointerException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testCompatibleThrowsClause_13() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends RuntimeException> generifiedRuntimeException() throws E, NullPointerException {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
 }

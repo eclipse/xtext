@@ -67,7 +67,7 @@ public interface IResolvedExecutable {
 	 * @see #getContextType()
 	 * @return the declared exceptions.
 	 */
-	List<LightweightTypeReference> getDeclaredExceptions();
+	List<LightweightTypeReference> getResolvedExceptions();
 
 	/**
 	 * Returns the declared executable that is resolved.

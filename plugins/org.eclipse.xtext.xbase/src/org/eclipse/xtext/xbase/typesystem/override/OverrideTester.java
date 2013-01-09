@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Strings;
@@ -84,7 +85,6 @@ public class OverrideTester {
 		return new LazyOverrideCheckResult(overriding, overridden, getPrimaryValidDetail(overriding, overridden));
 	}
 	
-
 	protected EnumSet<OverrideCheckDetails> getAllDetails(AbstractResolvedOperation overriding, JvmOperation overridden, OverrideCheckDetails primary) {
 		EnumSet<OverrideCheckDetails> result = EnumSet.of(primary);
 		AbstractResolvedOperation overriddenInHierarchy = new ResolvedOperationInHierarchy(overridden, overriding.getBottom());
@@ -145,7 +145,34 @@ public class OverrideTester {
 	protected void addAdditionalDetails(AbstractResolvedOperation overriding,
 			AbstractResolvedOperation overridden, EnumSet<OverrideCheckDetails> result) {
 		addReturnTypeDetails(overriding, overridden, result);
+		addExceptionDetails(overriding, overridden, result);
 		addAdditionalDetails(overriding.getDeclaration(), overridden.getDeclaration(), result);
+	}
+
+	protected void addExceptionDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,
+			EnumSet<OverrideCheckDetails> result) {
+		List<LightweightTypeReference> exceptions = overriding.getResolvedExceptions();
+		if (exceptions.isEmpty()) {
+			return;
+		}
+		JvmType runtimeException = overriding.getThrowableType(RuntimeException.class);
+		JvmType error = overriding.getThrowableType(Error.class);
+		List<LightweightTypeReference> inheritedExceptions = overridden.getResolvedExceptions();
+		for(LightweightTypeReference exception: exceptions) {
+			if (!exception.isSubtypeOf(runtimeException) && !exception.isSubtypeOf(error)) {
+				boolean isDeclared = false;
+				for(LightweightTypeReference inheritedException: inheritedExceptions) {
+					if (inheritedException.isAssignableFrom(exception)) {
+						isDeclared = true;
+						break;
+					}
+				}
+				if (!isDeclared) {
+					result.add(OverrideCheckDetails.EXCEPTION_MISMATCH);
+					return;
+				}
+			}
+		}
 	}
 
 	protected void addReturnTypeDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,
@@ -189,7 +216,6 @@ public class OverrideTester {
 			result.add(OverrideCheckDetails.VAR_ARG_MISMATCH);
 		}
 	}
-
 
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
 		if (o1 == o2) {
