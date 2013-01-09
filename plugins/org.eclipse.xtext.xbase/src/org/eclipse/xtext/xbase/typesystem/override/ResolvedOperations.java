@@ -12,7 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -33,8 +35,9 @@ public class ResolvedOperations {
 
 	private LightweightTypeReference type;
 	private List<IResolvedOperation> allOperations;
-	private List<IResolvedOperation> allDeclaredOperations;
-	private ListMultimap<String, IResolvedOperation> operationsPerErasure;
+	private List<IResolvedOperation> declaredOperations;
+	private List<IResolvedConstructor> declaredConstructors;
+	private ListMultimap<String, IResolvedOperation> allOperationsPerErasure;
 	private OverrideTester overrideTester;
 
 	public ResolvedOperations(LightweightTypeReference type, OverrideTester overrideTester) {
@@ -49,11 +52,18 @@ public class ResolvedOperations {
 		return allOperations = computeAllOperations();
 	}
 	
-	public List<IResolvedOperation> getDeclaredOperations() {
-		if (allDeclaredOperations != null) {
-			return allDeclaredOperations;
+	public List<IResolvedConstructor> getDeclaredConstructors() {
+		if (declaredConstructors != null) {
+			return declaredConstructors;
 		}
-		return allDeclaredOperations = computeDeclaredOperations();
+		return declaredConstructors = computeDeclaredConstructors();
+	}
+	
+	public List<IResolvedOperation> getDeclaredOperations() {
+		if (declaredOperations != null) {
+			return declaredOperations;
+		}
+		return declaredOperations = computeDeclaredOperations();
 	}
 	
 	public List<IResolvedOperation> getDeclaredOperations(String erasedSignature) {
@@ -68,10 +78,10 @@ public class ResolvedOperations {
 	}
 	
 	public List<IResolvedOperation> getAllOperations(String erasedSignature) {
-		if (operationsPerErasure != null) {
-			return operationsPerErasure.get(erasedSignature);
+		if (allOperationsPerErasure != null) {
+			return allOperationsPerErasure.get(erasedSignature);
 		}
-		return (operationsPerErasure = computeIndex()).get(erasedSignature);
+		return (allOperationsPerErasure = computeIndex()).get(erasedSignature);
 	}
 	
 	protected ListMultimap<String, IResolvedOperation> computeIndex() {
@@ -105,6 +115,18 @@ public class ResolvedOperations {
 			if (operation.getDeclaration().getDeclaringType() == rawType) {
 				result.add(operation);
 			}
+		}
+		return Collections.unmodifiableList(result);
+	}
+	
+	protected List<IResolvedConstructor> computeDeclaredConstructors() {
+		JvmType rawType = type.getType();
+		if (!(rawType instanceof JvmGenericType)) {
+			return Collections.emptyList();
+		}
+		List<IResolvedConstructor> result = Lists.newArrayList();
+		for(JvmConstructor constructor: ((JvmGenericType)rawType).getDeclaredConstructors()) {
+			result.add(new ResolvedConstructor(constructor, getType()));
 		}
 		return Collections.unmodifiableList(result);
 	}

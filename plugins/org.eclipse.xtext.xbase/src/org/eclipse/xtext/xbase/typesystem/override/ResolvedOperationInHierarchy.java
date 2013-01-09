@@ -107,4 +107,9 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 	protected void setCheckResult(IOverrideCheckResult checkResult) {
 		this.checkResult = checkResult;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s overridden by %s", getDeclaration().getIdentifier(), getBottom());
+	}
 }

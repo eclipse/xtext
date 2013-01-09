@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
@@ -185,9 +186,10 @@ public class OverrideHelper {
 	}
 
 	/**
-	 * Returns all operations that are defined in the given <code>type</code> and that are not overridden.
+	 * Returns the resolved operations that are defined in the given <code>type</code> and its supertypes.
 	 * Considers private methods of super types, too.
-	 * @return all resolved operations. 
+	 * @param type the type. Has to be contained in a resource.
+	 * @return the resolved operations. 
 	 */
 	public ResolvedOperations getResolvedOperations(JvmDeclaredType type) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet());
@@ -197,6 +199,26 @@ public class OverrideHelper {
 				contextType.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
 			}
 		}
+		return getResolvedOperations(contextType);
+	}
+	
+	/**
+	 * Returns the resolved operations that are defined in the given <code>context type</code> and its supertypes.
+	 * Considers private methods of super types, too.
+	 * @param contextType the context type. Has to be contained in a resource.
+	 * @return the resolved operations. 
+	 */
+	public ResolvedOperations getResolvedOperations(JvmTypeReference contextType) {
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType.eResource().getResourceSet());
+		return getResolvedOperations(new OwnedConverter(owner).toLightweightReference(contextType));
+	}
+
+	/**
+	 * Returns the resolved operations that are defined in the given <code>context type</code> and its supertypes.
+	 * Considers private methods of super types, too.
+	 * @return the resolved operations. 
+	 */
+	public ResolvedOperations getResolvedOperations(LightweightTypeReference contextType) {
 		return new ResolvedOperations(contextType, overrideTester);
 	}
 	

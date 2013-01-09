@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public interface IResolvedOperation {
+public interface IResolvedOperation extends IResolvedExecutable {
 
 	/**
 	 * Returns overridden and implemented methods for this method.
@@ -143,7 +143,7 @@ public interface IResolvedOperation {
 	 * bottom}, the {@link IOverrideCheckResult#getDetails() details} will only include the
 	 * {@link org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails#CURRENT current}
 	 * detail. In other cases, the actual information about the relationship of the hierarchy function to its
-	 * specialization in the {@link #getContextType() context} is returned.
+	 * specialization in the {@link IResolvedExecutable#getContextType() context} is returned.
 	 * 
 	 * @return the computed check result
 	 */
@@ -190,49 +190,6 @@ public interface IResolvedOperation {
 	List<JvmTypeParameter> getResolvedTypeParameters();
 
 	/**
-	 * Returns the list of declared type parameters.
-	 * 
-	 * @return the list of declared type parameters.
-	 */
-	List<JvmTypeParameter> getTypeParameters();
-
-	/**
-	 * Returns the resolved parameter types in the current context. That is, all free type variables are bound according
-	 * the the bottom of this method hierarchy.
-	 * 
-	 * @see #getContextType()
-	 * @see #getResolvedTypeParameters()
-	 * @return the list of parameter types.
-	 */
-	List<LightweightTypeReference> getParameterTypes();
-
-	/**
-	 * Returns the resolved signature of this operation. The resolved representation of
-	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>add(int,java.util.Collection&lt;String&gt;)</code>.
-	 * 
-	 * @return the resolved signature.
-	 */
-	String getResolvedSignature();
-
-	/**
-	 * Returns the simple signature of this operation. The simple signature of
-	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>add(int, Collection&lt;String&gt;)</code>.
-	 * 
-	 * @return the simple, human readable signature.
-	 */
-	String getSimpleSignature();
-
-	/**
-	 * Returns the resolved erased signature of this operation. The resolved representation of
-	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is <code>add(int,Collection)</code>.
-	 * 
-	 * @return the erased signature.
-	 */
-	String getResolvedErasureSignature();
-
-	/**
 	 * Returns the resolved return types in the current context. That is, all free type variables are bound according
 	 * the the bottom of this method hierarchy.
 	 * 
@@ -241,30 +198,6 @@ public interface IResolvedOperation {
 	 * @return the return type.
 	 */
 	LightweightTypeReference getResolvedReturnType();
-
-	/**
-	 * Returns the resolved declared exceptions in the current context. That is, all free type variables are bound
-	 * according the the bottom of this method hierarchy.
-	 * 
-	 * @see #getContextType()
-	 * @see #getResolvedTypeParameters()
-	 * @return the declared exceptions.
-	 */
-	List<LightweightTypeReference> getDeclaredExceptions();
-
-	/**
-	 * Returns the declared operation that is resolved.
-	 * 
-	 * @return the declaration.
-	 */
-	JvmOperation getDeclaration();
-
-	/**
-	 * Returns the current context type.
-	 * 
-	 * @return the context.
-	 */
-	LightweightTypeReference getContextType();
 
 	/**
 	 * Returns <code>true</code> if the bottom of this resolved method hierachy, which that there is no specialization
@@ -314,4 +247,10 @@ public interface IResolvedOperation {
 	 */
 	IResolvedOperation getAsBottom();
 
+	/**
+	 * Returns the declared operation that is resolved.
+	 * 
+	 * @return the declaration.
+	 */
+	JvmOperation getDeclaration();
 }
