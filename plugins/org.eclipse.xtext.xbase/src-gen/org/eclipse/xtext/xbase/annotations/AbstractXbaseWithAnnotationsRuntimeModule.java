@@ -235,6 +235,16 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultR
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.validation.SeverityConverter> bindSeverityConverter() {
+		return org.eclipse.xtext.xbase.validation.XbaseSeverityConverter.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.validation.ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
+		return org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider.class;
 	}
