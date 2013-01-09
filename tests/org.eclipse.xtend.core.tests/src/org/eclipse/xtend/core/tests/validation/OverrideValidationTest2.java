@@ -36,32 +36,34 @@ public class OverrideValidationTest2 extends OverrideValidationTest {
 	public void testOverrideReturnType_4() throws Exception {
 		super.testOverrideReturnType_4();
 	}
-
+	
 	@Override
-	@Ignore("TODO")
 	@Test
-	public void testIncompatibleThrowsClause() throws Exception {
-		super.testIncompatibleThrowsClause();
+	public void testIncompatibleThrowsClause_04() throws Exception {
+		super.testIncompatibleThrowsClause_04();
 	}
 	
 	@Override
-	@Ignore("TODO")
 	@Test
-	public void testIncompatibleThrowsClause_01() throws Exception {
-		super.testIncompatibleThrowsClause();
+	public void testIncompatibleThrowsClause_05() throws Exception {
+		super.testIncompatibleThrowsClause_05();
 	}
 	
 	@Override
-	@Ignore("TODO")
 	@Test
-	public void testIncompatibleThrowsClause_02() throws Exception {
-		super.testIncompatibleThrowsClause();
+	public void testCompatibleThrowsClause_08() throws Exception {
+		super.testCompatibleThrowsClause_08();
 	}
 	
 	@Override
-	@Ignore("TODO")
 	@Test
-	public void testIncompatibleThrowsClause_03() throws Exception {
-		super.testIncompatibleThrowsClause();
+	public void testCompatibleThrowsClause_09() throws Exception {
+		super.testCompatibleThrowsClause_09();
+	}
+	
+	@Override
+	@Test
+	public void testCompatibleThrowsClause_10() throws Exception {
+		super.testCompatibleThrowsClause_10();
 	}
 }

@@ -567,6 +567,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 					return;	
 				}
 				boolean overrideProblems = false;
+				List<IResolvedOperation> exceptionMismatch = null;
 				for(IResolvedOperation inherited: allInherited) {
 					if (inherited.getOverrideCheckResult().hasProblems()) {
 						overrideProblems = true;
@@ -578,14 +579,17 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 							error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
 									function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
 						} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
-							// TODO declared exceptions
-//							error("Exception " + unhandledException.getSimpleName() + " is not compatible with throws clause in " +
-//									overriddenOperation.getIdentifier(), XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);			
+							if (exceptionMismatch == null)
+								exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
+							exceptionMismatch.add(inherited);
 						} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
 							error("The return type is incompatible with " + inherited.getSimpleSignature(), function,
 									XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
 						}
 					}
+				}
+				if (exceptionMismatch != null) {
+					createExceptionMismatchError(operation, function, exceptionMismatch);
 				}
 				if (!overrideProblems && !function.isOverride())
 					error("The method " + operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
@@ -593,6 +597,45 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 			}
 		}
 		
+	}
+
+	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
+			List<IResolvedOperation> exceptionMismatch) {
+		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
+		StringBuilder message = new StringBuilder(100);
+		message.append("The declared exception");
+		if (exceptions.size() > 1) {
+			message.append('s');
+		}
+		message.append(' ');
+		for(int i = 0; i < exceptions.size(); i++) {
+			if (i != 0) {
+				if (i != exceptions.size() - 1)
+					message.append(", ");
+				else
+					message.append(" and ");
+			}
+			message.append(exceptions.get(i).getSimpleName());
+		}
+		if (exceptions.size() > 1) {
+			message.append(" are");
+		} else {
+			message.append(" is");
+		}
+		message.append(" not compatible with throws clause in ");
+		for(int i = 0; i < exceptionMismatch.size(); i++) {
+			if (i != 0) {
+				if (i != exceptionMismatch.size() - 1)
+					message.append(", ");
+				else
+					message.append(" and ");
+			}
+			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
+			message.append(resolvedOperation.getDeclaration().getDeclaringType().getSimpleName());
+			message.append('.');
+			message.append(exceptionMismatch.get(i).getSimpleSignature());
+		}
+		error(message.toString(), function, XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
 	}
 
 	@Nullable
