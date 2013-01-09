@@ -16,6 +16,7 @@ import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 
+
 /**
  * This class holds all the configurable issue codes for the Xbase language.<br>
  * Use {@link #getConfigurableIssueCodes()} to get all registered codes.<br>
@@ -29,22 +30,35 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	private static final Map<String, PreferenceKey> _allConfigurableCodes = newLinkedHashMap();
 
 
-	public static final PreferenceKey FORBIDDEN_REFERENCE = create(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
-	public static final PreferenceKey DISCOURAGED_REFERENCE = create(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
+	public static final PreferenceKey FORBIDDEN_REFERENCE = createDelegate(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+	public static final PreferenceKey DISCOURAGED_REFERENCE = createDelegate(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
 	public static final PreferenceKey IMPORT_WILDCARD_DEPRECATED = create(IssueCodes.IMPORT_WILDCARD_DEPRECATED, SeverityConverter.SEVERITY_WARNING);
 	 
-	public static final PreferenceKey OBSOLETE_INSTANCEOF = create(IssueCodes.OBSOLETE_INSTANCEOF, JavaCore.COMPILER_PB_UNNECESSARY_TYPE_CHECK);
-	public static final PreferenceKey IMPORT_UNUSED = create(IssueCodes.IMPORT_UNUSED, JavaCore.COMPILER_PB_UNUSED_IMPORT);
-	public static final PreferenceKey UNUSED_LOCAL_VARIABLE = create(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL);
+	public static final PreferenceKey OBSOLETE_INSTANCEOF = createDelegate(IssueCodes.OBSOLETE_INSTANCEOF, JavaCore.COMPILER_PB_UNNECESSARY_TYPE_CHECK);
+	public static final PreferenceKey IMPORT_UNUSED = createDelegate(IssueCodes.IMPORT_UNUSED, JavaCore.COMPILER_PB_UNUSED_IMPORT);
+	public static final PreferenceKey UNUSED_LOCAL_VARIABLE = createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL);
+	
+	// TODO add IMPORT_DUPLICATE to UI
+	public static final PreferenceKey IMPORT_DUPLICATE = create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING);
+	
 	
 	/**
 	 * If you would like to a add a new IssueCode use this method,<br>
 	 * this method creates a new {@link PreferenceKey} and adds it to the inner registry map.
 	 */
-	private static PreferenceKey create(String id, String defaultvalue) {
-		PreferenceKey prefKey = new PreferenceKey(id, defaultvalue);
+	private static PreferenceKey create(String id, String defaultValue) {
+		PreferenceKey prefKey = new PreferenceKey(id, defaultValue);
 		_allConfigurableCodes.put(prefKey.getId(), prefKey);
 		return prefKey;
+	}
+
+	private static PreferenceKey createDelegate(String id, String delegationKey) {
+		return createDelegate(id, delegationKey, SeverityConverter.SEVERITY_WARNING);
+	}
+
+	private static PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
+		String encodedDelegation = XbaseSeverityConverter.encodeDefaultSeverity(delegationKey, defaultSeverity);
+		return create(id, encodedDelegation);
 	}
 
 	@Override
