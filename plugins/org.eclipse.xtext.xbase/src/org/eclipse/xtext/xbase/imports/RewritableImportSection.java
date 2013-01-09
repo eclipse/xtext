@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -54,13 +56,17 @@ public class RewritableImportSection {
 		@Inject
 		private ImportSectionRegionUtil regionUtil;
 		
+		@Inject 
+		private XbaseQualifiedNameValueConverter nameValueConverter;
+		
 		public RewritableImportSection parse(XtextResource resource) {
 			RewritableImportSection rewritableImportSection = new RewritableImportSection(
 					resource,
 					importsConfiguration,
 					importsConfiguration.getImportSection(resource), 
 					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
-					regionUtil);
+					regionUtil, 
+					nameValueConverter);
 			return rewritableImportSection;
 		}
 
@@ -70,7 +76,8 @@ public class RewritableImportSection {
 					importsConfiguration,
 					null,
 					whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), 
-					regionUtil);
+					regionUtil,
+					nameValueConverter);
 			rewritableImportSection.setSort(true);
 			return rewritableImportSection;
 		}
@@ -98,11 +105,15 @@ public class RewritableImportSection {
 
 	private Set<String> implicitlyImportedPackages;
 
+	private IValueConverter<String> nameValueConverter;
+
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
-			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil) {
+			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil,
+			IValueConverter<String> nameConverter) {
 		this.resource = resource;
 		this.lineSeparator = lineSeparator;
 		this.regionUtil = regionUtil;
+		this.nameValueConverter = nameConverter;
 		this.implicitlyImportedPackages = importsConfiguration.getImplicitlyImportedPackages(resource);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
@@ -295,7 +306,8 @@ public class RewritableImportSection {
 				builder.append("extension ");
 			}
 		}
-		builder.append(newImportDeclaration.getImportedTypeName());
+		String escapedTypeName = nameValueConverter.toString(newImportDeclaration.getImportedTypeName());
+		builder.append(escapedTypeName);
 		if (newImportDeclaration.isStatic())
 			builder.append(".*");
 		builder.append(lineSeparator);
