@@ -22,9 +22,13 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   private ImportOrganizer importOrganizer;
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
+    this.assertIsOrganizedTo(model, expected, true);
+  }
+  
+  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected, final boolean validate) {
     try {
       String _string = model.toString();
-      final XtendFile xtendFile = this.file(_string, true);
+      final XtendFile xtendFile = this.file(_string, validate);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       StringBuilder _stringBuilder = new StringBuilder(model);
@@ -293,7 +297,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
   @Test
@@ -340,7 +344,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
   @Test
@@ -387,7 +391,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
   @Test
@@ -444,7 +448,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
   @Test
@@ -523,7 +527,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
   @Test

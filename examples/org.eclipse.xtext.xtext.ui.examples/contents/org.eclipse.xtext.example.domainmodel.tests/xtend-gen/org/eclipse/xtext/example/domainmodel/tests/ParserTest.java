@@ -117,6 +117,32 @@ public class ParserTest {
   }
   
   @Test
+  public void testParsingAndLinkingWithImports() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.append("package example {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("entity MyEntity {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("p : List<String>");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      DomainModel _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testReturnTypeInference() {
     try {
       StringConcatenation _builder = new StringConcatenation();

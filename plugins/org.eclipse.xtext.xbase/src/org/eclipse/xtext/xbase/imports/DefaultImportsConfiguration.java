@@ -9,16 +9,14 @@ package org.eclipse.xtext.xbase.imports;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -36,6 +34,8 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -74,12 +74,25 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return null;
 	}
 
-	public String getCommonPackageName(XtextResource resource) {
-		return "";
-	}
-
-	public Map<String, JvmDeclaredType> getPrivilegedLocalTypes(XtextResource resource) {
-		return emptyMap();
+	public Iterable<JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
+		final List<JvmDeclaredType> locallyDefinedTypes = newArrayList();
+		for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {
+			EObject next = i.next();
+			if (next instanceof JvmDeclaredType) {
+				JvmDeclaredType declaredType = (JvmDeclaredType) next;
+				locallyDefinedTypes.add(declaredType);
+				addInnerTypes(declaredType, new IAcceptor<JvmDeclaredType>() {
+					public void accept(JvmDeclaredType t) {
+						locallyDefinedTypes.add(t);
+					}
+				});
+				i.prune();
+			}
+			if(next instanceof XExpression) {
+				i.prune();
+			}
+		}
+		return locallyDefinedTypes;
 	}
 	
 	public JvmDeclaredType getContextJvmDeclaredType(EObject model) {
@@ -99,21 +112,17 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return null;
 	}
 
-	protected void addInnerTypes(JvmDeclaredType containerType, String prefix, Map<String, JvmDeclaredType> result) {
-		String newPrefix = prefix + containerType.getSimpleName();
+	protected void addInnerTypes(JvmDeclaredType containerType, IAcceptor<? super JvmDeclaredType> result) {
 		for (JvmMember member : containerType.getMembers()) {
 			if (member instanceof JvmDeclaredType) {
-				result.put(newPrefix + "$" + member.getSimpleName(), (JvmDeclaredType) member);
-				addInnerTypes((JvmDeclaredType) member, newPrefix, result);
+				result.accept((JvmDeclaredType) member);
+				addInnerTypes((JvmDeclaredType) member, result);
 			}
 		}
 	}
 	
 	public Set<String> getImplicitlyImportedPackages(XtextResource resource) {
 		Set<String> implicitlyImportedPackages = newHashSetWithExpectedSize(2);
-		String commonPackageName = getCommonPackageName(resource);
-		if(!isEmpty(commonPackageName))  
-			implicitlyImportedPackages.add(commonPackageName);
 		implicitlyImportedPackages.add("java.lang");
 		return implicitlyImportedPackages;
 	}

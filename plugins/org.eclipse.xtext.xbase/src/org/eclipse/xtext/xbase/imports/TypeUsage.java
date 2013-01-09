@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -19,7 +20,7 @@ public class TypeUsage {
 	private ITextRegion textRegion;
 	
 	private JvmMember context;
-	
+
 	public TypeUsage(String text, ITextRegion textRegion, JvmMember context) {
 		this.text = text;
 		this.textRegion = textRegion;
@@ -37,4 +38,19 @@ public class TypeUsage {
 	public JvmMember getContext() {
 		return context;
 	}
+
+	public String getContextPackageName() {
+		return getPackageName(context);
+	}
+	
+	protected String getPackageName(JvmMember context) {
+		if(context.getDeclaringType() != null)
+			return getPackageName(context.getDeclaringType());
+		if(context instanceof JvmDeclaredType) 
+			return ((JvmDeclaredType)context).getPackageName();
+		else  
+			return null;
+	}
+
+
 }

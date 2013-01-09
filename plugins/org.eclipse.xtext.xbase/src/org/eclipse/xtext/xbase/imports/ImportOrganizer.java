@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -67,7 +66,20 @@ public class ImportOrganizer {
 			if(needsImport(type, text, nonOverridableTypesProvider, usages)) {
 				newImportSection.addImport(type);
 			}
+		}
+		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
+			String text = entry.getKey();
+			JvmDeclaredType type = entry.getValue();
+			String packageLocalName = getPackageLocalName(type);
+			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
 			for(TypeUsage usage: usages) {
+				// if the resource contains two types with the same simple name, we don't add any import
+				// but we can still use the package local name within the same package.
+				if(equal(usage.getContextPackageName(), type.getPackageName())) {
+					JvmDeclaredType importedType = newImportSection.getImportedType(packageLocalName);
+					if(importedType == null)
+						text = packageLocalName;
+				}
 				if(!equal(usage.getText(), text)) 
 					replaceRegions.add(new ReplaceRegion(usage.getTextRegion(), text));
 			}
@@ -80,6 +92,14 @@ public class ImportOrganizer {
 		return replaceRegions; 
 	}
 
+	protected String getPackageLocalName(JvmDeclaredType type) {
+		String packageName = type.getPackageName();
+		if(isEmpty(packageName)) 
+			return type.getIdentifier();
+		else 
+			return type.getIdentifier().substring(packageName.length() + 1);
+	}
+	
 	protected boolean needsImport(JvmDeclaredType type, String name, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
 		return !((type.getIdentifier().equals(name))
@@ -90,18 +110,10 @@ public class ImportOrganizer {
 			NonOverridableTypesProvider nonOverridableTypesProvider, String name) {
 		for(TypeUsage usage: usages) {
 			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null
-					&& !equal(getPackageName(usage.getContext()), type.getPackageName())) 
+					&& !equal(usage.getContextPackageName(), type.getPackageName())
+					) 
 				return false;
 		}
 		return true;
-	}
-	
-	protected String getPackageName(JvmMember context) {
-		if(context.getDeclaringType() != null)
-			return getPackageName(context.getDeclaringType());
-		if(context instanceof JvmDeclaredType) 
-			return ((JvmDeclaredType)context).getPackageName();
-		else  
-			return null;
 	}
 }

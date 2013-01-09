@@ -5,7 +5,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 public class Xbase01_Literals {
   public BigDecimal myMethod() throws Throwable {
-    BigDecimal _specialblockexpression = null;
+    BigDecimal _xblockexpression = null;
     {
       /* null */
       /* "Hello World" */
@@ -21,8 +21,8 @@ public class Xbase01_Literals {
       Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
       /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
       /* new BigInteger("beefbeefbeefbeefbeef", 16) */
-      _specialblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
+      _xblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

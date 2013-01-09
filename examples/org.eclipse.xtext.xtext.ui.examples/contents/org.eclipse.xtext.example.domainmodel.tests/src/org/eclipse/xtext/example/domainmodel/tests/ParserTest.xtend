@@ -61,6 +61,18 @@ class ParserTest {
 	}
 	
 	@Test
+	def void testParsingAndLinkingWithImports() {
+		'''
+			import java.util.List
+			package example {
+			  entity MyEntity {
+			    p : List<String>
+			  }
+			}
+		'''.parse.assertNoErrors
+	}
+	
+	@Test
 	def void testReturnTypeInference() {
 		val model = '''
 			package example {

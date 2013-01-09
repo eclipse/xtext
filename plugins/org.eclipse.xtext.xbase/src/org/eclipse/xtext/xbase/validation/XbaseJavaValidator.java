@@ -1215,13 +1215,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		for (JvmDeclaredType declaredType : getAllDeclaredTypes(importSection.eResource())) {
 			if(importedNames.containsKey(declaredType.getSimpleName())){
 				JvmType importedType = importedNames.get(declaredType.getSimpleName());
-				if(importedType != declaredType){
-					XImportDeclaration xtendImport = imports.get(importedType);
-					if(xtendImport != null)
+				if (importedType != declaredType  && importedType.eResource() != importSection.eResource()) {
+					XImportDeclaration importDeclaration = imports.get(importedType);
+					if(importDeclaration != null)
 						error("The import '" 
 								+ importedType.getIdentifier() 
 								+ "' conflicts with a type defined in the same file", 
-								xtendImport, null, IssueCodes.IMPORT_CONFLICT );
+								importDeclaration, null, IssueCodes.IMPORT_CONFLICT );
 				}
 			}
 			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType);

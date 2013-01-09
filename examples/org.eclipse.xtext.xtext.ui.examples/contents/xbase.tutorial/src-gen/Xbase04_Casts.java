@@ -1,11 +1,11 @@
 public class Xbase04_Casts {
   public int myMethod() throws Throwable {
-    int _specialblockexpression = (int) 0;
+    int _xblockexpression = (int) 0;
     {
       final CharSequence s = "foo";
       int _length = ((String) s).length();
-      _specialblockexpression = (_length);
+      _xblockexpression = (_length);
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

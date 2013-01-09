@@ -731,12 +731,50 @@ class OrganizeImportsTest {
 		''')
 	}
 	
+	@Test def testLocalNameClash() {
+		'''
+			package foo {
+				entity Referrer {
+					foo0: foo.bar.Foo
+					foo1: foo.baz.Foo
+				}
+				package bar {
+					entity Foo {
+						self: Foo
+					}
+				}
+				package baz {
+					entity Foo {
+						self: Foo
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package foo {
+				entity Referrer {
+					foo0: foo.bar.Foo
+					foo1: foo.baz.Foo
+				}
+				package bar {
+					entity Foo {
+						self: Foo
+					}
+				}
+				package baz {
+					entity Foo {
+						self: Foo
+					}
+				}
+			}
+		''')
+	}
+	
 	@Test def testSamePackage() {
 		'''
 			package bar {
 				entity Foo {}
 				entity Bar {
-					foo: Foo
+					foo: bar.Foo
 				}
 			}
 		'''.assertIsOrganizedTo('''

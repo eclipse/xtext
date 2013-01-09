@@ -287,7 +287,7 @@ public class TypeUsageCollector {
 	protected void acceptType(JvmType type, String refText, ITextRegion refRegion) {
 		if (type == null || type.eIsProxy()) {
 			typeUsages.addUnresolved(refText, refRegion, currentContext);
-		} else if (type instanceof JvmDeclaredType && !type.equals(currentThisType)) {
+		} else if (type instanceof JvmDeclaredType) {
 			typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
 		}
 	}

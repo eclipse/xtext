@@ -5,7 +5,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 public class Xbase05_Closures {
   public String myMethod() throws Throwable {
-    String _specialblockexpression = null;
+    String _xblockexpression = null;
     {
       final String x = "Hello ";
       final Function1<String,String> _function = new Function1<String,String>() {
@@ -32,8 +32,8 @@ public class Xbase05_Closures {
         };
       final Function1<? super String,? extends String> f2 = _function_2;
       String _apply = f2.apply("simsalabim");
-      _specialblockexpression = (_apply);
+      _xblockexpression = (_apply);
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

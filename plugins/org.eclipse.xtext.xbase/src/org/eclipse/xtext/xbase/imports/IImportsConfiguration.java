@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,11 +28,9 @@ public interface IImportsConfiguration {
 
 	int getImportSectionOffset(XtextResource resource);
 
-	String getCommonPackageName(XtextResource resource);
-
 	Set<String> getImplicitlyImportedPackages(XtextResource resource);
 
-	Map<String, JvmDeclaredType> getPrivilegedLocalTypes(XtextResource resource);
+	Iterable<JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource);
 	
 	JvmDeclaredType getContextJvmDeclaredType(EObject model);
 }

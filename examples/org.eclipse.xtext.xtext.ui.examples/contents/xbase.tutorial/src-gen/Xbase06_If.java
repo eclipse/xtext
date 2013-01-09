@@ -1,6 +1,6 @@
 public class Xbase06_If {
   public String myMethod() throws Throwable {
-    String _specialblockexpression = null;
+    String _xblockexpression = null;
     {
       int _length = "foo".length();
       boolean _greaterThan = (_length > 3);
@@ -26,8 +26,8 @@ public class Xbase06_If {
       if (_xifexpression_1) {
         _xifexpression = "Xbase doesn\'t need the ternary operator";
       }
-      _specialblockexpression = (_xifexpression);
+      _xblockexpression = (_xifexpression);
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

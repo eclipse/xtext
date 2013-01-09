@@ -5,7 +5,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 public class Xbase08_Loops {
   public ArrayList<String> myMethod() throws Throwable {
-    ArrayList<String> _specialblockexpression = null;
+    ArrayList<String> _xblockexpression = null;
     {
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       ArrayList<String> _arrayList = new ArrayList<String>();
@@ -32,8 +32,8 @@ public class Xbase08_Loops {
         boolean _lessThan_1 = (i < _size_1);
         _while = _lessThan_1;
       }
-      _specialblockexpression = (result);
+      _xblockexpression = (result);
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

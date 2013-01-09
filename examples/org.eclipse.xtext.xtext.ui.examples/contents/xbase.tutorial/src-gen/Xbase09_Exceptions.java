@@ -2,7 +2,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 public class Xbase09_Exceptions {
   public Object myMethod() throws Throwable {
-    Object _specialblockexpression = null;
+    Object _xblockexpression = null;
     {
       try {
         ((Object) null).toString();
@@ -16,8 +16,8 @@ public class Xbase09_Exceptions {
         }
       } finally {
       }
-      _specialblockexpression = (null);
+      _xblockexpression = (null);
     }
-    return _specialblockexpression;
+    return _xblockexpression;
   }
 }

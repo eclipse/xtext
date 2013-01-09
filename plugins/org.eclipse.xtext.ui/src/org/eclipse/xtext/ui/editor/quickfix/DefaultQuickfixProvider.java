@@ -192,7 +192,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		if (node==null)
 			return null;
 		ICompositeNode rootNode = node.getRootNode();
-		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
+		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset());
 		CrossReference crossReference = findCrossReference(target, leaf);
 		if (crossReference != null) {
 			return  GrammarUtil.getReference(crossReference, target.eClass());
