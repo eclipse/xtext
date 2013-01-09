@@ -2010,6 +2010,24 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testEscapedPackageName() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends types.^override.EscapePackageName {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import types.^override.EscapePackageName");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo extends EscapePackageName {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
