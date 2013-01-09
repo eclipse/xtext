@@ -76246,11 +76246,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred162_InternalXtend() {
+    public final boolean synpred194_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred162_InternalXtend_fragment(); // can never throw exception
+            synpred194_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -76260,11 +76260,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred194_InternalXtend() {
+    public final boolean synpred162_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred194_InternalXtend_fragment(); // can never throw exception
+            synpred162_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

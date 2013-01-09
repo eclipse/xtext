@@ -106,8 +106,8 @@ RULE_RICH_TEXT_INBETWEEN=11
 RULE_WS=18
 'instanceof'=77
 '>='=30
-'/'=44
 '=='=28
+'/'=44
 'switch'=83
 'AFTER'=71
 'implements'=61

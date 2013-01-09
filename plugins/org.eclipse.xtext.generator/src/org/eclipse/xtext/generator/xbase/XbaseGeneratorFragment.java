@@ -40,6 +40,8 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.validation.SeverityConverter;
 
 import com.google.common.collect.Lists;
 
@@ -142,7 +144,10 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(TypeArgumentContextProvider.class.getCanonicalName(), "org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider")
 				.addTypeToType(IStratumBreakpointSupport.class.getName(), "org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport")
 				.addTypeToType(LineSeparatorHarmonizer.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor")
-				.addTypeToType(IDefaultResourceDescriptionStrategy.class.getCanonicalName(), "org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy");
+				.addTypeToType(IDefaultResourceDescriptionStrategy.class.getCanonicalName(), "org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy")
+				.addTypeToType(SeverityConverter.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseSeverityConverter")
+				.addTypeToType(ConfigurableIssueCodesProvider.class.getCanonicalName(),"org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes")
+				;
 		
 		if (useInferredJvmModel) {
 			config = config
