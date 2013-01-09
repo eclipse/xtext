@@ -148,6 +148,13 @@ public interface IResolvedOperation extends IResolvedExecutable {
 	 * @return the computed check result
 	 */
 	IOverrideCheckResult getOverrideCheckResult();
+	
+	/**
+	 * Returns the list of exceptions that are declared in this operation
+	 * but do not match the super implementation.
+	 * @return the list of illegally declared exceptions.
+	 */
+	List<LightweightTypeReference> getIllegallyDeclaredExceptions();
 
 	/**
 	 * Returns the resolved type parameters for a given operation. If this operation represents an overridden operation,

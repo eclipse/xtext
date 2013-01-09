@@ -130,7 +130,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		return result;
 	}
 
-	public List<LightweightTypeReference> getDeclaredExceptions() {
+	public List<LightweightTypeReference> getResolvedExceptions() {
 		JvmExecutable declaration = getDeclaration();
 		if (declaration.getExceptions().isEmpty())
 			return Collections.emptyList();
