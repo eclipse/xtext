@@ -35,4 +35,6 @@ public abstract class GenericSuperTypeClass<T> {
 
 	public abstract <T6> void foo2(T t, Procedure1<? super T> proc);
 	
+	public abstract <T7> void foo3(T7 t, Procedure1<? super T7> proc);
+	
 }
