@@ -54,8 +54,8 @@ public class Bug372950Test extends AbstractXbaseContentAssistBugTest {
     final ICompletionProposal[] proposals = _append.computeCompletionProposals();
     final List<String> proposalStrings = tester.toString(proposals);
     String _string = proposalStrings.toString();
-    String _name = proposedType.getName();
-    boolean _contains = proposalStrings.contains(_name);
+    String _simpleName = proposedType.getSimpleName();
+    boolean _contains = proposalStrings.contains(_simpleName);
     Assert.assertTrue(_string, _contains);
   }
 }
