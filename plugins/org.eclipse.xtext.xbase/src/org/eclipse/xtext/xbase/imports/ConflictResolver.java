@@ -18,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -52,26 +52,36 @@ public class ConflictResolver {
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-	
+
 	public Map<String, JvmDeclaredType> resolveConflicts(TypeUsages usages, NonOverridableTypesProvider nonOverridableTypesProvider, XtextResource resource) {
-		String packageName = config.getCommonPackageName(resource);
 		RewritableImportSection importSection = importSectionFactory.parse(resource);
-		Map<String, JvmDeclaredType> locallyDefinedTypes = config.getPrivilegedLocalTypes(resource);
+		Multimap<String, JvmDeclaredType> locallyDefinedTypes = getLocallyDefinedTypes(resource);
 		Map<String, JvmDeclaredType> result = newLinkedHashMap();
 		Multimap<String, JvmDeclaredType> simpleName2Types = usages.getSimpleName2Types();
 		for (String simpleName : simpleName2Types.keySet()) {
 			Collection<JvmDeclaredType> types = simpleName2Types.get(simpleName);
-			JvmDeclaredType locallyDeclaredType = locallyDefinedTypes.get(simpleName);
-			if (locallyDeclaredType != null || isConflictsWithNonOverridableTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
+			Collection<JvmDeclaredType> localTypes = locallyDefinedTypes.get(simpleName);
+			if(!localTypes.isEmpty() || isConflictsWithNonOverridableTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
+				// name conflict with local type or non-overridable type
+				// if there are multiple local types with same name, none of them can be imported 
+				JvmDeclaredType singleLocalType = localTypes.size() == 1 
+						? localTypes.iterator().next() 
+						: null; 
 				for (JvmDeclaredType type : types) {
-					if (type != locallyDeclaredType)
+					if(type == singleLocalType)
+						result.put(type.getSimpleName(), type);
+					else 
 						result.put(type.getIdentifier(), type);
 				}
+			}
+			else if(isConflictsWithNonOverridableTypes(types, usages, nonOverridableTypesProvider, simpleName)) {
+				for (JvmDeclaredType type : types) 
+					result.put(type.getIdentifier(), type);
 			} else {
 				if (types.size() == 1) {
 					result.put(simpleName, types.iterator().next());
 				} else {
-					JvmDeclaredType bestMatch = findBestMatch(types, usages, packageName, importSection);
+					JvmDeclaredType bestMatch = findBestMatch(types, usages, importSection);
 					for (JvmDeclaredType type : types) {
 						if (type == bestMatch)
 							result.put(simpleName, type);
@@ -84,6 +94,18 @@ public class ConflictResolver {
 		return result;
 	}
 	
+	protected Multimap<String, JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
+		Multimap<String, JvmDeclaredType> result = HashMultimap.create();
+		for(JvmDeclaredType type: config.getLocallyDefinedTypes(resource)) {
+			String packageName = type.getPackageName();
+			if(isEmpty(packageName)) 
+				result.put(type.getIdentifier(), type);
+			else 
+				result.put(type.getIdentifier().substring(packageName.length() + 1), type);
+		}
+		return result;
+	}
+	
 	protected boolean isConflictsWithNonOverridableTypes(Iterable<JvmDeclaredType> types, TypeUsages usages, 
 			NonOverridableTypesProvider nonOverridableTypesProvider, String simpleName) {
 		for(JvmDeclaredType type: types) {
@@ -91,7 +113,7 @@ public class ConflictResolver {
 				JvmIdentifiableElement visibleType = nonOverridableTypesProvider.getVisibleType(usage.getContext(), simpleName);
 				if(visibleType != null && !visibleType.equals(type))
 					return true;
-				String contextPackage = getPackageName(usage.getContext());
+				String contextPackage = usage.getContextPackageName();
 				if(!isEmpty(contextPackage)) {
 					QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(contextPackage + "." + simpleName);
 					EObject indexedJvmType = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, null, usage.getContext().eResource().getResourceSet());
@@ -103,32 +125,21 @@ public class ConflictResolver {
 		return false;
 	}
 	
-	protected String getPackageName(JvmMember context) {
-		if(context.getDeclaringType() != null)
-			return getPackageName(context.getDeclaringType());
-		if(context instanceof JvmDeclaredType) 
-			return ((JvmDeclaredType)context).getPackageName();
-		else  
-			return null;
-	}
-
-	protected JvmDeclaredType findBestMatch(Collection<JvmDeclaredType> types, TypeUsages usages, String packageName,
+	protected JvmDeclaredType findBestMatch(Collection<JvmDeclaredType> types, TypeUsages usages,
 			RewritableImportSection importSection) {
 		Iterator<JvmDeclaredType> iterator = types.iterator();
 		JvmDeclaredType currentBestMatch = iterator.next();
 		while (iterator.hasNext()) {
 			JvmDeclaredType nextType = iterator.next();
-			if (isBetter(nextType, currentBestMatch, usages, packageName, importSection)) {
+			if (isBetter(nextType, currentBestMatch, usages, importSection)) {
 				currentBestMatch = nextType;
 			}
 		}
 		return currentBestMatch;
 	}
 
-	protected boolean isBetter(JvmDeclaredType candidate, JvmDeclaredType currentBestMatch, TypeUsages usages, String packageName,
+	protected boolean isBetter(JvmDeclaredType candidate, JvmDeclaredType currentBestMatch, TypeUsages usages, 
 			RewritableImportSection importSection) {
-		if (equal(packageName,candidate.getPackageName()) && !equal(packageName, currentBestMatch.getPackageName()))
-			return true;
 		if (importSection.getImportedType(candidate.getSimpleName()) == candidate 
 				&& importSection.getImportedType(currentBestMatch.getSimpleName()) != currentBestMatch)
 			return true;

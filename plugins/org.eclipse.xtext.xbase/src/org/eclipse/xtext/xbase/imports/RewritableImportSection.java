@@ -92,24 +92,18 @@ public class RewritableImportSection {
 
 	private XtextResource resource;
 	
-	private IImportsConfiguration importsConfiguration;
-
 	private ImportSectionRegionUtil regionUtil;
 	
 	private boolean isSort;
 
 	private Set<String> implicitlyImportedPackages;
 
-	private String contextPackageName;
-
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, 
 			XImportSection originalImportSection, String lineSeparator, ImportSectionRegionUtil regionUtil) {
 		this.resource = resource;
-		this.importsConfiguration = importsConfiguration;
 		this.lineSeparator = lineSeparator;
 		this.regionUtil = regionUtil;
 		this.implicitlyImportedPackages = importsConfiguration.getImplicitlyImportedPackages(resource);
-		this.contextPackageName = importsConfiguration.getCommonPackageName(resource);
 		if (originalImportSection != null) {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
@@ -145,8 +139,7 @@ public class RewritableImportSection {
 	}
 	
 	protected boolean needsImport(JvmDeclaredType type)  {
-		String typePackageName = type.getPackageName();
-		return !(implicitlyImportedPackages.contains(typePackageName) || equal(typePackageName, contextPackageName));
+		return !(implicitlyImportedPackages.contains(type.getPackageName()));
 	}
 	
 	public boolean removeImport(JvmDeclaredType type) {
@@ -333,7 +326,8 @@ public class RewritableImportSection {
 	}
 
 	protected boolean needsPreceedingBlankLine() {
-		return !isEmpty(importsConfiguration.getCommonPackageName(resource));
+		ITextRegion importRegion = regionUtil.computeRegion(resource);
+		return regionUtil.addLeadingWhitespace(importRegion, resource).getOffset() != 0;
 	}
 
 	protected boolean appendSubsection(StringBuilder builder, Iterable<XImportDeclaration> subSection, boolean needsNewline) {
