@@ -124,6 +124,11 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public String getJavaIdentifier() {
+		return component.getJavaIdentifier() + "[]";
+	}
+	
+	@Override
 	public boolean isType(Class<?> clazz) {
 		if (clazz.isArray()) {
 			return component.isType(clazz.getComponentType());

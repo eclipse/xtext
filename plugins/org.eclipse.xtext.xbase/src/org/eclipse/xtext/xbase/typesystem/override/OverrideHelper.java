@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -54,6 +55,9 @@ public class OverrideHelper {
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	@Inject
+	private OverrideTester overrideTester;
+	
 	/**
 	 * Returns <code>null</code> if the given operation declares it's own return type or if it does not override
 	 * another operation.
@@ -89,6 +93,40 @@ public class OverrideHelper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns <code>null</code> if the given operation declares it's own return type or if it does not override
+	 * another operation.
+	 * 
+	 * TODO support this case:
+	 * 
+	 * <pre>
+	 * interface I {
+	 *   String m()
+	 *   String m2()
+	 * }
+	 * class A {
+	 *   CharSequence m()
+	 *   int m2()
+	 * }
+	 * class B extends A implements I {
+	 *   m() will expect String since this is the best choice
+	 *   m2() will expect int since this is actually overridden and not compatible to String from I#m2
+	 * }
+	 * </pre>
+	 */
+	@Nullable
+	public LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, LightweightTypeReference context) {
+		if (operation.getVisibility() == JvmVisibility.PRIVATE || !InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			return null;
+		}
+		BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, context, overrideTester);
+		List<IResolvedOperation> overriddenMethods = resolvedOperation.getOverriddenAndImplementedMethods();
+		if (overriddenMethods.isEmpty())
+			return null;
+		LightweightTypeReference result = overriddenMethods.get(0).getResolvedReturnType();
+		return result;
+	}
 
 	@Nullable
 	protected JvmOperation findOverriddenOperation(JvmOperation operation, LightweightTypeReference declaringType,
@@ -111,7 +149,7 @@ public class OverrideHelper {
 									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
 									LightweightTypeReference candidateParameterType =
 											substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
-									if (!identifier.equals(candidateParameterType.getIdentifier())) {
+									if (!identifier.equals(candidateParameterType.getJavaIdentifier())) {
 										matchesSignature = false;
 									}
 								}
@@ -149,11 +187,17 @@ public class OverrideHelper {
 	/**
 	 * Returns all operations that are defined in the given <code>type</code> and that are not overridden.
 	 * Considers private methods of super types, too.
-	 * @return all operations. May be empty. 
+	 * @return all resolved operations. 
 	 */
-	public List<JvmOperation> getAllOperations(JvmDeclaredType type) {
-		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet()); 
-		return getAllOperations(type, owner, IVisibilityHelper.ALL);
+	public ResolvedOperations getResolvedOperations(JvmDeclaredType type) {
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet());
+		ParameterizedTypeReference contextType = new ParameterizedTypeReference(owner, type);
+		if (type instanceof JvmGenericType) {
+			for(JvmTypeParameter typeParameter: ((JvmGenericType) type).getTypeParameters()) {
+				contextType.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
+			}
+		}
+		return new ResolvedOperations(contextType, overrideTester);
 	}
 	
 	public List<JvmOperation> getAllOperations(JvmDeclaredType type, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {
@@ -184,7 +228,7 @@ public class OverrideHelper {
 							for(JvmFormalParameter parameter: parameters) {
 								LightweightTypeReference parameterType =
 										substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-								signature.append(parameterType.getIdentifier());
+								signature.append(parameterType.getJavaIdentifier());
 								signature.append(",");
 							}
 							signature.replace(signature.length() - 1, signature.length(), ")");

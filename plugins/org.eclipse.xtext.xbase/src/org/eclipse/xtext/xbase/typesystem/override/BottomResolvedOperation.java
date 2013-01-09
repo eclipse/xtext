@@ -8,11 +8,13 @@
 package org.eclipse.xtext.xbase.typesystem.override;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -56,5 +58,18 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 	@Override
 	protected OverrideTester getOverrideTester() {
 		return overrideTester;
+	}
+	
+	public IOverrideCheckResult getOverrideCheckResult() {
+		return new LazyOverrideCheckResult(this, getDeclaration(), OverrideCheckDetails.CURRENT) {
+			@Override
+			public boolean hasProblems() {
+				return false;
+			}
+			@Override
+			public EnumSet<OverrideCheckDetails> getDetails() {
+				return EnumSet.of(OverrideCheckDetails.CURRENT);
+			}
+		};
 	}
 }

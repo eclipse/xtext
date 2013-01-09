@@ -79,49 +79,49 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideGenericMethod_1() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
-									"override <T1>  getValue1(List<T1> t) {}" +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <RenamedT1> getValue1(List<RenamedT1> t) {}" +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_2() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 								    "override <T2> getValue2(T2[] t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_3() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T3> getValue3(List<T3> t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_4() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 								    "override <T3> getValue4(List<T3[]> t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_5() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 								    "override <T3> getValue5(List<List<T3>[]> t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_6() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 								    "override <T3> getValue6(List<? extends T3> t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_7() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 								    "override <T3> getValue7(List<? super T3> t) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
 	@Test public void testOverrideGenericMethod_8() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T1, T2 extends T1> getValue8(List<T1> t, List<T2> t2) {} " +
 									"}");
 		helper.assertNoErrors(xtendClass);
@@ -148,8 +148,8 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideGenericMethod_12() throws Exception {
-		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
-									"override <T> void foo2(T t, (T)=>void proc){} "+
+		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <Unused> void foo2(T t, (T)=>void proc){} "+
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
@@ -164,6 +164,13 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	@Test public void testOverrideGenericMethod_14() throws Exception {
 		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<String> {  " +
 									"override <X extends Comparable<X>> void useComparable(X x){} "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test public void testOverrideGenericMethod_15() throws Exception {
+		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T> void foo3(T t, (T)=>void proc){} "+
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}

@@ -460,7 +460,7 @@ public class TypeConformanceComputer {
 		if (type instanceof UnboundTypeReference && !type.isResolved()) {
 			allNames.add(((UnboundTypeReference) type).getHandle().toString());
 		} else {
-			String identifier = type.getIdentifier();
+			String identifier = type.getJavaIdentifier();
 			allNames.add(identifier);
 			allBoundNames.add(identifier);
 		}
@@ -469,7 +469,7 @@ public class TypeConformanceComputer {
 	private String getIdentifier(LightweightTypeReference type) {
 		if (type instanceof UnboundTypeReference && !type.isResolved())
 			return ((UnboundTypeReference) type).getHandle().toString();
-		return type.getIdentifier();
+		return type.getJavaIdentifier();
 	}
 
 	private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types, ITypeReferenceOwner owner) {

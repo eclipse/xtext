@@ -92,24 +92,24 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
     LightweightTypeReference _contextType = operation.getContextType();
     String _simpleName = _contextType.getSimpleName();
     Assert.assertEquals("ArrayList<String>", _simpleName);
-    LightweightTypeReference _returnType = operation.getReturnType();
-    String _simpleName_1 = _returnType.getSimpleName();
+    LightweightTypeReference _resolvedReturnType = operation.getResolvedReturnType();
+    String _simpleName_1 = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("Iterator<String>", _simpleName_1);
   }
   
   @Test
   public void testIterableOfStringsIteratesStrings() {
     final IResolvedOperation operation = this.toOperation("(null as Iterable<? extends String>).iterator");
-    LightweightTypeReference _returnType = operation.getReturnType();
-    String _simpleName = _returnType.getSimpleName();
+    LightweightTypeReference _resolvedReturnType = operation.getResolvedReturnType();
+    String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("Iterator<? extends String>", _simpleName);
   }
   
   @Test
   public void testListOfStringToArray() {
     final IResolvedOperation operation = this.toOperation("newArrayList(\"\").toArray(null)");
-    LightweightTypeReference _returnType = operation.getReturnType();
-    String _simpleName = _returnType.getSimpleName();
+    LightweightTypeReference _resolvedReturnType = operation.getResolvedReturnType();
+    String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("T[]", _simpleName);
   }
   

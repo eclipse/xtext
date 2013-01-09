@@ -183,6 +183,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return expose(typeArguments);
 	}
@@ -228,6 +229,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	@Override
 	public String getIdentifier() {
 		return getAsString(type.getIdentifier(), new IdentifierFunction());
+	}
+	
+	@Override
+	public String getJavaIdentifier() {
+		return getAsString(type.getIdentifier(), new JavaIdentifierFunction());
 	}
 	
 	protected String getAsString(String type, Function<LightweightTypeReference, String> format) {

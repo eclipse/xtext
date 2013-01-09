@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -95,6 +97,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject
+	private OverrideHelper overrideHelper;
 	
 	@Override
 	public void initializeFrom(EObject root) {
@@ -411,45 +416,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE)
 			return null;
-		int parameterSize = operation.getParameters().size();
 		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			LightweightTypeReference declaringType = resolvedTypes.getActualType(operation.getDeclaringType());
 			if (declaringType == null) {
 				throw new IllegalStateException("Cannot determine declaring type of operation: " + operation);
 			}
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> parameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaringType);
-			StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(parameterMapping, resolvedTypes.getReferenceOwner());
-			List<LightweightTypeReference> superTypes = declaringType.getSuperTypes();
-			OwnedConverter converter = resolvedTypes.getConverter();
-			for(LightweightTypeReference superType: superTypes) {
-				JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
-				if (declaredSuperType != null) {
-					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
-					for(JvmFeature feature: equallyNamedFeatures) {
-						if (session.isVisible(feature)) {
-							if (feature instanceof JvmOperation) {
-								JvmOperation candidate = (JvmOperation) feature;
-								if (parameterSize == candidate.getParameters().size()) {
-									boolean matchesSignature = true;
-									for(int i = 0; i < parameterSize && matchesSignature; i++) {
-										JvmFormalParameter parameter = operation.getParameters().get(i);
-										String identifier = parameter.getParameterType().getIdentifier();
-										JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
-										LightweightTypeReference candidateParameterType =
-												substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
-										if (!identifier.equals(candidateParameterType.getIdentifier())) {
-											matchesSignature = false;
-										}
-									}
-									if (matchesSignature) {
-										return substitutor.substitute(converter.toLightweightReference(candidate.getReturnType()));
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+			LightweightTypeReference result = overrideHelper.getReturnTypeOfOverriddenOperation(operation, declaringType);
+			return result;
 		}
 		return null;
 	}

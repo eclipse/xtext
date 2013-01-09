@@ -20,9 +20,10 @@ import org.eclipse.xtext.xbase.typesystem.^override.BottomResolvedOperation
 import org.junit.Test
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
 import org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult
-import static org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult$OverrideCheckDetails.*
 import java.util.EnumSet
 import org.eclipse.xtext.common.types.JvmVisibility
+
+import static org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult$OverrideCheckDetails.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -58,19 +59,19 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	def void testArrayListOfStringIteratesStrings() {
 		val operation = 'newArrayList("").iterator'.toOperation
 		assertEquals('ArrayList<String>', operation.contextType.simpleName)
-		assertEquals('Iterator<String>', operation.returnType.simpleName)
+		assertEquals('Iterator<String>', operation.resolvedReturnType.simpleName)
 	}
 	
 	@Test
 	def void testIterableOfStringsIteratesStrings() {
 		val operation = '(null as Iterable<? extends String>).iterator'.toOperation
-		assertEquals('Iterator<? extends String>', operation.returnType.simpleName)
+		assertEquals('Iterator<? extends String>', operation.resolvedReturnType.simpleName)
 	}
 	
 	@Test
 	def void testListOfStringToArray() {
 		val operation = 'newArrayList("").toArray(null)'.toOperation
-		assertEquals('T[]', operation.returnType.simpleName)
+		assertEquals('T[]', operation.resolvedReturnType.simpleName)
 	}
 	
 	@Test

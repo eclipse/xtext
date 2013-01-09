@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -19,6 +18,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -55,7 +56,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -88,23 +88,25 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -130,9 +132,6 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	private DispatchHelper dispatchHelper;
 
 	@Inject
-	private TypeErasedSignature.Provider signatureProvider; 
-	
-	@Inject
 	private XAnnotationUtil annotationUtil;
 	
 	@Inject 
@@ -146,6 +145,9 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	
+	@Inject
+	private IVisibilityHelper visibilityHelper;
 	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -398,49 +400,49 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		if (inferredType != null) {
-			Multimap<TypeErasedSignature, JvmOperation> operationsPerErasure = HashMultimap.create();
-			for (JvmOperation operation : inferredType.getDeclaredOperations()) {
-				TypeErasedSignature signature = signatureProvider.get(operation);
-				operationsPerErasure.put(signature, operation);
-			}
-			doCheckDuplicateExecutables(inferredType, operationsPerErasure);
-			doCheckOverriddenMethods(xtendClass, inferredType, operationsPerErasure);
+			ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 			
-			Multimap<TypeErasedSignature, JvmConstructor> constructorsPerErasure = HashMultimap.create();
-			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
-				TypeErasedSignature signature = signatureProvider.get(constructor);
-				constructorsPerErasure.put(signature, constructor);
-			}
-			doCheckDuplicateExecutables(inferredType, constructorsPerErasure);
+			doCheckDuplicateExecutables(inferredType, resolvedOperations);
+			doCheckOverriddenMethods(xtendClass, inferredType, resolvedOperations);
+			doCheckFunctionOverrides(resolvedOperations);
+			
+			// TODO constructors
+//			Multimap<TypeErasedSignature, JvmConstructor> constructorsPerErasure = HashMultimap.create();
+//			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
+//				TypeErasedSignature signature = signatureProvider.get(constructor);
+//				constructorsPerErasure.put(signature, constructor);
+//			}
+//			doCheckDuplicateExecutables(inferredType, constructorsPerErasure);
 		}
 	}
 	
-	protected void doCheckDuplicateExecutables(final JvmGenericType inferredType,
-			Multimap<TypeErasedSignature, ? extends JvmExecutable> executablesPerErasure) {
-		for (Collection<? extends JvmExecutable> executablesWithSameSignature : executablesPerErasure.asMap().values()) {
-			if (executablesWithSameSignature.size() > 1) {
-				Multimap<String, JvmExecutable> executablesPerReadableSignature = HashMultimap.create();
-				for (JvmExecutable executable : executablesWithSameSignature) {
-					String readableSignature = getReadableSignature(executable);
-					executablesPerReadableSignature.put(readableSignature, executable);
-				}
-				for (Collection<JvmExecutable> executablesWithSameReadableSignature : executablesPerReadableSignature
-						.asMap().values()) {
-					if (executablesWithSameReadableSignature.size() > 1) {
-						for (JvmExecutable executable : executablesWithSameReadableSignature) {
-							EObject otherSource = associations.getPrimarySourceElement(executable);
-							error("Duplicate " + typeLabel(executable) + " " + getReadableSignature(executable)
-									+ " in type " + inferredType.getSimpleName(), otherSource,
-									nameFeature(otherSource), DUPLICATE_METHOD);
+	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	ResolvedOperations resolvedOperations) {
+		List<IResolvedOperation> declaredOperations = resolvedOperations.getDeclaredOperations();
+		Set<IResolvedOperation> processed = Sets.newHashSet();
+		for(IResolvedOperation declaredOperation: declaredOperations) {
+			if (!processed.contains(declaredOperation)) {
+				List<IResolvedOperation> sameErasure = resolvedOperations.getDeclaredOperations(declaredOperation.getResolvedErasureSignature());
+				if (sameErasure.size() > 1) {
+					Multimap<String, IResolvedOperation> operationPerSignature = Multimaps.index(sameErasure, new Function<IResolvedOperation, String>() {
+						public String apply(IResolvedOperation input) {
+							return input.getResolvedSignature();
 						}
-					} else {
-						for (JvmExecutable executable : executablesWithSameReadableSignature) {
-							EObject otherSource = associations.getPrimarySourceElement(executable);
-							error("The " + typeLabel(executable) + " " + getReadableSignature(executable)
-									+ " has the same erasure "
-									+ signatureProvider.get(executable).toString()
-									+ " as another method in type " + inferredType.getSimpleName(), otherSource,
-									nameFeature(otherSource), DUPLICATE_METHOD);
+					});
+					for(Collection<IResolvedOperation> sameSignature: operationPerSignature.asMap().values()) {
+						for(IResolvedOperation operationWithSameSignature: sameSignature) {
+							JvmOperation operation = operationWithSameSignature.getDeclaration();
+							EObject otherSource = associations.getPrimarySourceElement(operation);
+							if (sameSignature.size() > 1) {
+								error("Duplicate " + typeLabel(operation) + " " + operationWithSameSignature.getSimpleSignature()
+										+ " in type " + inferredType.getSimpleName(), otherSource,
+										nameFeature(otherSource), DUPLICATE_METHOD);
+							} else {
+								error("The " + typeLabel(operation) + " " + operationWithSameSignature.getSimpleSignature()
+										+ " has the same erasure "
+										+ operationWithSameSignature.getResolvedErasureSignature()
+										+ " as another method in type " + inferredType.getSimpleName(), otherSource,
+										nameFeature(otherSource), DUPLICATE_METHOD);
+							}
 						}
 					}
 				}
@@ -469,144 +471,115 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	
-	protected void doCheckOverriddenMethods(XtendClass xtendClass, final JvmGenericType inferredType,
-			Multimap<TypeErasedSignature, JvmOperation> operationsPerErasure) {
-		List<JvmOperation> operationsMissingImplementation = null;
+	protected void doCheckOverriddenMethods(XtendClass xtendClass, JvmGenericType inferredType,
+			ResolvedOperations resolvedOperations) {
+		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
 		if (doCheckAbstract) {
-			doCheckAbstract = false;
-			for (JvmTypeReference superType: inferredType.getSuperTypes()) {
-				JvmType type = superType.getType();
-				if (type instanceof JvmGenericType) {
-					if (((JvmGenericType) type).isAbstract() || ((JvmGenericType) type).isInterface()) {
-						doCheckAbstract = true;
-						break;
-					}
-				}
-			}
+			operationsMissingImplementation = Lists.newArrayList();
 		}
-		for (JvmOperation operation : overrideHelper.getAllOperations(inferredType)) {
-			if (operation.getDeclaringType() != inferredType) {
-				TypeErasedSignature signature = signatureProvider.get(operation);
-				if (operationsPerErasure.containsKey(signature)) {
-					Collection<JvmOperation> myOperations = operationsPerErasure.get(signature);
-					if (myOperations.size() == 1) {
-						JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
-						// TODO implement me
-//						if (!overrideHelper.isOverridden(myOperation, operation, typeArgumentContext,
-//								false)) {
-//							XtendFunction source = associations.getXtendFunction(myOperation);
-//							error("Name clash: The method "
-//									+ getReadableSignature(myOperation) + " of type "
-//									+ inferredType.getSimpleName()
-//									+ " has the same erasure as "
-//									+
-//									// use source with other operations parameters to avoid confusion
-//									// due to name transformations in JVM model inference
-//									getReadableSignature(operation) + " of type "
-//									+ operation.getDeclaringType().getSimpleName() + " but does not override it.",
-//									source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
-//						}
-					}
+		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedOperations.getType());
+		for (IResolvedOperation operation : resolvedOperations.getAllOperations()) {
+			if (operation.getDeclaration().getDeclaringType() != inferredType) {
+				if (operationsMissingImplementation != null && operation.getDeclaration().isAbstract()) {
+					operationsMissingImplementation.add(operation);
 				}
-				if (doCheckAbstract && operation.isAbstract()) {
-					boolean overridden = false;
-					if (operationsPerErasure.containsKey(signature)) {
-						for (JvmOperation myOperation : operationsPerErasure.get(signature)) {
-//							if (featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext,
-//									false)) {
-//								overridden = true;
-//								break;
-//							}
+				if (visibilityHelper.isVisible(operation.getDeclaration())) {
+					List<IResolvedOperation> declaredOperationsWithSameErasure = 
+							resolvedOperations.getDeclaredOperations(operation.getResolvedErasureSignature());
+					for(IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
+						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
+							XtendFunction source = findXtendFunction(localOperation);
+							error("Name clash: The method "
+									+ localOperation.getSimpleSignature() + " of type "
+									+ inferredType.getSimpleName()
+									+ " has the same erasure as "
+									+
+									// use source with other operations parameters to avoid confusion
+									// due to name transformations in JVM model inference
+									operation.getSimpleSignature() + " of type "
+									+ operation.getDeclaration().getDeclaringType().getSimpleName() + " but does not override it.",
+									source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 						}
 					}
-					if (!overridden) {
-						if(operationsMissingImplementation == null)
-							operationsMissingImplementation = newArrayList();
-						operationsMissingImplementation.add(operation);
-					}
 				}
 			}
 		}
-		if(operationsMissingImplementation != null) {
+		if(operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
 			reportMissingImplementations(xtendClass, operationsMissingImplementation);
 		}
 	}
 
-	protected void reportMissingImplementations(XtendClass xtendClass, List<JvmOperation> operationsMissingImplementation) {
+	protected void reportMissingImplementations(XtendClass xtendClass, List<IResolvedOperation> operationsMissingImplementation) {
 		StringBuilder errorMsg = new StringBuilder();
-		errorMsg.append("The class ").append(xtendClass.getName())
-			.append(" must be defined abstract because it does not implement ");
+		errorMsg.append("The class ").append(xtendClass.getName()).append(" must be defined abstract because it does not implement ");
 		boolean needsNewLine = operationsMissingImplementation.size() > 1;
-		JvmOperation operation;
+		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
 			operation = operationsMissingImplementation.get(i);
 			if(needsNewLine)
 				errorMsg.append("\n- ");
-			errorMsg.append(getReadableSignature(operation.getSimpleName(), Lists.transform(
-						operation.getParameters(),
-						new Function<JvmFormalParameter, JvmTypeReference>() {
-							public JvmTypeReference apply(JvmFormalParameter from) {
-								JvmTypeReference parameterType = from.getParameterType();
-								return parameterType;
-							}
-						})));
+			errorMsg.append(operation.getSimpleSignature());
 		}
 		int numUnshownOperations = operationsMissingImplementation.size() - 3;
 		if(numUnshownOperations >0)
 			errorMsg.append("\nand " +  numUnshownOperations + " more.");
-		List<String> uris = transform(operationsMissingImplementation, new Function<JvmOperation, String>() {
-			public String apply(JvmOperation from) {
-				return EcoreUtil.getURI(from).toString();
+		List<String> uris = transform(operationsMissingImplementation, new Function<IResolvedOperation, String>() {
+			public String apply(IResolvedOperation from) {
+				return EcoreUtil.getURI(from.getDeclaration()).toString();
 			}
 		});
 		error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, CLASS_MUST_BE_ABSTRACT, 
 						toArray(uris, String.class));
 	}
 	
-	@Check
-	protected void checkFunctionOverride(XtendFunction function) {
-		JvmOperation operation = associations.getDirectlyInferredOperation(function);
-		JvmOperation overriddenOperation = overrideHelper.findOverriddenOperation(operation);
-		if (overriddenOperation == null) {
-			if (function.isOverride()) {
-				error("The method "+ uiStrings.signature(operation) +" of type "+operation.getDeclaringType().getSimpleName()+" must override a superclass method.", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations) {
+		for(IResolvedOperation operation: resolvedOperations.getDeclaredOperations()) {
+			XtendFunction function = findXtendFunction(operation);
+			if (function != null) {
+				List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
+				if (allInherited.isEmpty()) {
+					if (function.isOverride()) {
+						error("The method "+ operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must override a superclass method.", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+					}
+					return;	
+				}
+				boolean overrideProblems = false;
+				for(IResolvedOperation inherited: allInherited) {
+					if (inherited.getOverrideCheckResult().hasProblems()) {
+						overrideProblems = true;
+						EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
+						if (details.contains(OverrideCheckDetails.IS_FINAL)) {
+							error("Attempt to override final method " + inherited.getSimpleSignature(), function,
+									XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
+						} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
+							error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
+									function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
+						} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
+							// TODO declared exceptions
+//							error("Exception " + unhandledException.getSimpleName() + " is not compatible with throws clause in " +
+//									overriddenOperation.getIdentifier(), XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);			
+						} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
+							error("The return type is incompatible with " + inherited.getSimpleSignature(), function,
+									XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
+						}
+					}
+				}
+				if (!overrideProblems && !function.isOverride())
+					error("The method " + operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
+							XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 			}
-			return;
 		}
-		if (!function.isOverride())
-			error("The method " + uiStrings.signature(operation) +" of type "+operation.getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
-					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
-		if (overriddenOperation.isFinal())
-			error("Attempt to override final method " + canonicalName(overriddenOperation), function,
-					XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
-		if (isMorePrivateThan(operation.getVisibility(), overriddenOperation.getVisibility())) {
-			error("Cannot reduce the visibility of the overridden method " + overriddenOperation.getIdentifier(),
-					function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
-		}
-		for(JvmTypeReference unhandledException: findUnhandledExceptions(function, function.getExceptions(),overriddenOperation.getExceptions()))
-			error("Exception " + unhandledException.getSimpleName() + " is not compatible with throws clause in " +
-					overriddenOperation.getIdentifier(), XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
-		JvmTypeReference returnType = function.getReturnType();
-		if (returnType == null)
-			return;
 		
-		// TODO: Move this validation into the type computation
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), function.eResource().getResourceSet());
-		OwnedConverter converter = new OwnedConverter(owner);
-		TypeReferences typeReferences = getServices().getTypeReferences();
-		LightweightTypeReference declaringType = converter.toLightweightReference(typeReferences.createTypeRef(
-				operation.getDeclaringType()));
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaringType);
-		StandardTypeParameterSubstitutor substitutor = new StandardTypeParameterSubstitutor(declaratorMapping, owner);
-		LightweightTypeReference overriddenReturnType = substitutor.substitute(converter.toLightweightReference(overriddenOperation.getReturnType()));
-		LightweightTypeReference lightweightReturnType = converter.toLightweightReference(returnType);
-		if (!overriddenReturnType.isAssignableFrom(lightweightReturnType)) {
-			error("The return type is incompatible with " + overriddenOperation.getIdentifier(), function,
-					XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
-		}
 	}
 
+	@Nullable
+	protected XtendFunction findXtendFunction(IResolvedOperation operation) {
+		EObject sourceElement = associations.getPrimarySourceElement(operation.getDeclaration());
+		if (sourceElement instanceof XtendFunction)
+			return (XtendFunction) sourceElement;
+		return null;
+	}
 	
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
 		if (o1 == o2) {
@@ -627,19 +600,6 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		}
 	}
 
-	protected Iterable<JvmOperation> allSuperOperations(final XtendClass xtendClass) {
-		// I love Google collections
-		Iterable<JvmOperation> result = filter(
-				concat(transform(
-						filter(concat(singleton(xtendClass.getExtends()), xtendClass.getImplements()),
-								Predicates.notNull()), new Function<JvmTypeReference, Iterable<JvmFeature>>() {
-							public Iterable<JvmFeature> apply(JvmTypeReference from) {
-								return Iterables.filter(overrideHelper.getAllOperations((JvmDeclaredType) from.getType()), JvmFeature.class);
-							}
-						})), JvmOperation.class);
-		return result;
-	}
-	
 	@Check
 	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
