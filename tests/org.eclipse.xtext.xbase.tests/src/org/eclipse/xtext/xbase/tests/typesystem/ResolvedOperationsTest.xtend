@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.eclipse.xtext.xbase.typesystem.^override.ResolvedOperations
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.XCastedExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,6 +36,12 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	def ResolvedOperations toResolvedOperations(Class<?> type) {
 		val typeLiteral = '''typeof(«type.canonicalName»)'''.expression as XTypeLiteral
 		val result = overrideHelper.getResolvedOperations(typeLiteral.type as JvmDeclaredType)
+		return result
+	}
+	
+	def ResolvedOperations toResolvedOperations(String castExpression) {
+		val cast = castExpression.expression as XCastedExpression
+		val result = overrideHelper.getResolvedOperations(cast.type)
 		return result
 	}
 	
@@ -76,6 +83,47 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 		assertEquals(all.toString, 1 /* AbstractList.get */ + 1 /* AbstractCollection.size */, all.filter [ declaration.isAbstract ].size)
 		val declared = resolvedOperations.declaredOperations
 		assertEquals(1, declared.filter [ declaration.isAbstract ].size)
+	}
+	
+	@Test
+	def void testSoftReferenceConstructors() {
+		val resolvedOperations = typeof(java.lang.ref.SoftReference).toResolvedOperations
+		assertEquals(1, resolvedOperations.declaredOperations.size)
+		assertEquals(2, resolvedOperations.declaredConstructors.size)
+		resolvedOperations.declaredConstructors.forEach [
+			switch(declaration.parameters.size) {
+				case 1: {
+					assertEquals("SoftReference(T)", resolvedSignature)
+					assertEquals("SoftReference(java.lang.Object)", resolvedErasureSignature)
+				}
+				case 2: {
+					assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", resolvedSignature)
+					assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", resolvedErasureSignature)
+				}
+				default: fail("Unexpected constructor: " + it)
+			}
+		]
+	}
+	
+	
+	@Test
+	def void testSoftReferenceOfString() {
+		val resolvedOperations = "null as java.lang.ref.SoftReference<String>".toResolvedOperations
+		assertEquals(1, resolvedOperations.declaredOperations.size)
+		assertEquals(2, resolvedOperations.declaredConstructors.size)
+		resolvedOperations.declaredConstructors.forEach [
+			switch(declaration.parameters.size) {
+				case 1: {
+					assertEquals("SoftReference(java.lang.String)", resolvedSignature)
+					assertEquals("SoftReference(java.lang.String)", resolvedErasureSignature)
+				}
+				case 2: {
+					assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", resolvedSignature)
+					assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", resolvedErasureSignature)
+				}
+				default: fail("Unexpected constructor: " + it)
+			}
+		]
 	}
 	
 }

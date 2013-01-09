@@ -9,26 +9,16 @@ package org.eclipse.xtext.xbase.typesystem.override;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
 
@@ -38,29 +28,22 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractResolvedOperation implements IResolvedOperation {
+public abstract class AbstractResolvedOperation extends AbstractResolvedExecutable implements IResolvedOperation {
 	
-	private JvmOperation declaration;
-	private LightweightTypeReference contextType;
+	private final JvmOperation declaration;
 	private List<IResolvedOperation> validOverrides;
 	private List<JvmOperation> overrideCandidates;
-	private List<LightweightTypeReference> parameterTypes;
 	private LightweightTypeReference returnType;
-	private List<LightweightTypeReference> declaredExceptions;
 
 	protected AbstractResolvedOperation(JvmOperation declaration, LightweightTypeReference contextType) {
+		super(contextType);
 		this.declaration = declaration;
-		this.contextType = contextType;
 	}
 	
 	public JvmOperation getDeclaration() {
 		return declaration;
 	}
 	
-	public LightweightTypeReference getContextType() {
-		return contextType;
-	}
-
 	public List<IResolvedOperation> getOverriddenAndImplementedMethods() {
 		if (validOverrides != null)
 			return validOverrides;
@@ -128,139 +111,16 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 		return getBottom().getTypeParameters();
 	}
 
-	public List<JvmTypeParameter> getTypeParameters() {
-		return Collections.unmodifiableList(declaration.getTypeParameters());
-	}
-
-	public List<LightweightTypeReference> getParameterTypes() {
-		if (declaration.getParameters().isEmpty())
-			return Collections.emptyList();
-		if (parameterTypes != null)
-			return parameterTypes;
-		List<JvmFormalParameter> parameters = declaration.getParameters();
-		List<JvmTypeReference> unresolvedParameterTypes = Lists.newArrayListWithCapacity(parameters.size());
-		for(JvmFormalParameter parameter: parameters) {
-			unresolvedParameterTypes.add(parameter.getParameterType());
-		}
-		return parameterTypes = getResolvedReferences(unresolvedParameterTypes);
-	}
-	
-	public String getResolvedErasureSignature() {
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
-		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 20 * parameterTypes.size());
-		result.append(declaration.getSimpleName());
-		result.append('(');
-		for(int i = 0; i < parameterTypes.size(); i++) {
-			if (i != 0) {
-				result.append(',');
-			}
-			result.append(parameterTypes.get(i).getRawTypeReference().getJavaIdentifier());
-		}
-		result.append(')');
-		return result.toString();
-	}
-	
-	public String getResolvedSignature() {
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
-		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 30 * parameterTypes.size());
-		result.append(declaration.getSimpleName());
-		result.append('(');
-		for(int i = 0; i < parameterTypes.size(); i++) {
-			if (i != 0) {
-				result.append(',');
-			}
-			result.append(parameterTypes.get(i).getJavaIdentifier());
-		}
-		result.append(')');
-		return result.toString();
-	}
-	
-	public String getSimpleSignature() {
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
-		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 10 * parameterTypes.size());
-		result.append(declaration.getSimpleName());
-		result.append('(');
-		for(int i = 0; i < parameterTypes.size(); i++) {
-			if (i != 0) {
-				result.append(", ");
-			}
-			result.append(parameterTypes.get(i).getSimpleName());
-		}
-		result.append(')');
-		return result.toString();
-	}
-
 	public LightweightTypeReference getResolvedReturnType() {
 		if (returnType != null)
 			return returnType;
 		return returnType = getResolvedReference(declaration.getReturnType());
 	}
 	
-	protected LightweightTypeReference getResolvedReference(JvmTypeReference unresolved) {
-		OwnedConverter converter = new OwnedConverter(getContextType().getOwner());
-		LightweightTypeReference unresolvedLightweight = converter.toLightweightReference(unresolved);
-		if (unresolvedLightweight.isPrimitive() || unresolvedLightweight.isPrimitiveVoid())
-			return unresolvedLightweight;
-		TypeParameterSubstitutor<?> substitutor = getSubstitutor();
-		LightweightTypeReference result = substitutor.substitute(unresolvedLightweight);
-		return result;
+	@Override
+	protected boolean isResolvedTypeParameter(JvmTypeParameter typeParameter) {
+		return getResolvedTypeParameters().contains(typeParameter);
 	}
-	
-	protected List<LightweightTypeReference> getResolvedReferences(List<JvmTypeReference> unresolved) {
-		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(unresolved.size());
-		for(JvmTypeReference resolveMe: unresolved) {
-			result.add(getResolvedReference(resolveMe));
-		}
-		return result;
-	}
-
-	public List<LightweightTypeReference> getDeclaredExceptions() {
-		if (declaration.getExceptions().isEmpty())
-			return Collections.emptyList();
-		if (declaredExceptions != null)
-			return declaredExceptions;
-		return declaredExceptions = getResolvedReferences(declaration.getExceptions());
-	}
-	
-	protected TypeParameterSubstitutor<?> getSubstitutor() {
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = getContextTypeParameterMapping();
-		JvmType contextType = getContextType().getType();
-		final List<JvmTypeParameter> originalTypeParameters;
-		if (contextType instanceof JvmGenericType) {
-			List<JvmTypeParameter> declared = ((JvmGenericType) contextType).getTypeParameters();
-			if (declared.isEmpty() || getContextType().isRawType()) {
-				originalTypeParameters = Collections.emptyList();
-			} else {
-				originalTypeParameters = Lists.newArrayListWithCapacity(declared.size());
-				for(LightweightTypeReference argument: getContextType().getTypeArguments()) {
-					if (declared.contains(argument.getType())) {
-						originalTypeParameters.add((JvmTypeParameter) argument.getType());
-					}
-				}
-			}
-		} else {
-			originalTypeParameters = Collections.emptyList();
-		}
-		TypeParameterSubstitutor<?> result = new TypeParameterByConstraintSubstitutor(mapping, getContextType().getOwner()) {
-			@Override
-			protected boolean isDeclaredTypeParameter(JvmTypeParameter typeParameter) {
-				return super.isDeclaredTypeParameter(typeParameter) 
-						|| getResolvedTypeParameters().contains(typeParameter) 
-						|| originalTypeParameters.contains(typeParameter);
-			}
-			@Override
-			@Nullable
-			protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter type,
-					ConstraintVisitingInfo info) {
-				if (isDeclaredTypeParameter(type))
-					return null;
-				return super.getBoundTypeArgument(type, info);
-			}
-		};
-		return result;
-	}
-	
-	protected abstract Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping();
 	
 	protected abstract BottomResolvedOperation getBottom();
 	
@@ -279,8 +139,4 @@ public abstract class AbstractResolvedOperation implements IResolvedOperation {
 		return false;
 	}
 	
-	@Override
-	public String toString() {
-		return String.format("%s in context of %s", declaration.getIdentifier(), getContextType().getSimpleName());
-	}
 }

@@ -7,18 +7,25 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
+import java.lang.ref.SoftReference;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -27,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
@@ -55,6 +63,18 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
       final XTypeLiteral typeLiteral = ((XTypeLiteral) _expression);
       JvmType _type = typeLiteral.getType();
       final ResolvedOperations result = this.overrideHelper.getResolvedOperations(((JvmDeclaredType) _type));
+      return result;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public ResolvedOperations toResolvedOperations(final String castExpression) {
+    try {
+      XExpression _expression = this.expression(castExpression);
+      final XCastedExpression cast = ((XCastedExpression) _expression);
+      JvmTypeReference _type = cast.getType();
+      final ResolvedOperations result = this.overrideHelper.getResolvedOperations(_type);
       return result;
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -160,5 +180,93 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(declared, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
     Assert.assertEquals(1, _size_1);
+  }
+  
+  @Test
+  public void testSoftReferenceConstructors() {
+    final ResolvedOperations resolvedOperations = this.toResolvedOperations(SoftReference.class);
+    List<IResolvedOperation> _declaredOperations = resolvedOperations.getDeclaredOperations();
+    int _size = _declaredOperations.size();
+    Assert.assertEquals(1, _size);
+    List<IResolvedConstructor> _declaredConstructors = resolvedOperations.getDeclaredConstructors();
+    int _size_1 = _declaredConstructors.size();
+    Assert.assertEquals(2, _size_1);
+    List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
+    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
+        public void apply(final IResolvedConstructor it) {
+          JvmConstructor _declaration = it.getDeclaration();
+          EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+          int _size = _parameters.size();
+          final int _switchValue = _size;
+          boolean _matched = false;
+          if (!_matched) {
+            if (Objects.equal(_switchValue,1)) {
+              _matched=true;
+              String _resolvedSignature = it.getResolvedSignature();
+              Assert.assertEquals("SoftReference(T)", _resolvedSignature);
+              String _resolvedErasureSignature = it.getResolvedErasureSignature();
+              Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
+            }
+          }
+          if (!_matched) {
+            if (Objects.equal(_switchValue,2)) {
+              _matched=true;
+              String _resolvedSignature_1 = it.getResolvedSignature();
+              Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
+              String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+              Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+            }
+          }
+          if (!_matched) {
+            String _plus = ("Unexpected constructor: " + it);
+            Assert.fail(_plus);
+          }
+        }
+      };
+    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+  }
+  
+  @Test
+  public void testSoftReferenceOfString() {
+    final ResolvedOperations resolvedOperations = this.toResolvedOperations("null as java.lang.ref.SoftReference<String>");
+    List<IResolvedOperation> _declaredOperations = resolvedOperations.getDeclaredOperations();
+    int _size = _declaredOperations.size();
+    Assert.assertEquals(1, _size);
+    List<IResolvedConstructor> _declaredConstructors = resolvedOperations.getDeclaredConstructors();
+    int _size_1 = _declaredConstructors.size();
+    Assert.assertEquals(2, _size_1);
+    List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
+    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
+        public void apply(final IResolvedConstructor it) {
+          JvmConstructor _declaration = it.getDeclaration();
+          EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+          int _size = _parameters.size();
+          final int _switchValue = _size;
+          boolean _matched = false;
+          if (!_matched) {
+            if (Objects.equal(_switchValue,1)) {
+              _matched=true;
+              String _resolvedSignature = it.getResolvedSignature();
+              Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
+              String _resolvedErasureSignature = it.getResolvedErasureSignature();
+              Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
+            }
+          }
+          if (!_matched) {
+            if (Objects.equal(_switchValue,2)) {
+              _matched=true;
+              String _resolvedSignature_1 = it.getResolvedSignature();
+              Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
+              String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+              Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+            }
+          }
+          if (!_matched) {
+            String _plus = ("Unexpected constructor: " + it);
+            Assert.fail(_plus);
+          }
+        }
+      };
+    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
   }
 }

@@ -18,6 +18,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
@@ -405,42 +408,61 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 			doCheckDuplicateExecutables(inferredType, resolvedOperations);
 			doCheckOverriddenMethods(xtendClass, inferredType, resolvedOperations);
 			doCheckFunctionOverrides(resolvedOperations);
-			
-			// TODO constructors
-//			Multimap<TypeErasedSignature, JvmConstructor> constructorsPerErasure = HashMultimap.create();
-//			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
-//				TypeErasedSignature signature = signatureProvider.get(constructor);
-//				constructorsPerErasure.put(signature, constructor);
-//			}
-//			doCheckDuplicateExecutables(inferredType, constructorsPerErasure);
 		}
 	}
 	
-	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	ResolvedOperations resolvedOperations) {
+	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedOperations resolvedOperations) {
 		List<IResolvedOperation> declaredOperations = resolvedOperations.getDeclaredOperations();
-		Set<IResolvedOperation> processed = Sets.newHashSet();
-		for(IResolvedOperation declaredOperation: declaredOperations) {
-			if (!processed.contains(declaredOperation)) {
-				List<IResolvedOperation> sameErasure = resolvedOperations.getDeclaredOperations(declaredOperation.getResolvedErasureSignature());
+		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
+			public List<IResolvedOperation> apply(String erasedSignature) {
+				return resolvedOperations.getDeclaredOperations(erasedSignature);
+			}
+		});
+		final List<IResolvedConstructor> declaredConstructors = resolvedOperations.getDeclaredConstructors();
+		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
+			public List<IResolvedConstructor> apply(String erasedSignature) {
+				if (declaredConstructors.size() == 1) {
+					if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
+						return declaredConstructors;
+					}
+					return Collections.emptyList();
+				}
+				List<IResolvedConstructor> result = Lists.newArrayListWithCapacity(declaredConstructors.size());
+				for(IResolvedConstructor constructor: declaredConstructors) {
+					if (erasedSignature.equals(constructor.getResolvedErasureSignature())) {
+						result.add(constructor);
+					}
+				}
+				return result;
+			}
+		});
+	}
+
+	protected <Executable extends IResolvedExecutable> void doCheckDuplicateExecutables(JvmGenericType inferredType,
+			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature) {
+		Set<Executable> processed = Sets.newHashSet();
+		for(Executable declaredExecutable: declaredOperations) {
+			if (!processed.contains(declaredExecutable)) {
+				List<Executable> sameErasure = bySignature.apply(declaredExecutable.getResolvedErasureSignature());
 				if (sameErasure.size() > 1) {
-					Multimap<String, IResolvedOperation> operationPerSignature = Multimaps.index(sameErasure, new Function<IResolvedOperation, String>() {
-						public String apply(IResolvedOperation input) {
+					Multimap<String, Executable> perSignature = Multimaps.index(sameErasure, new Function<Executable, String>() {
+						public String apply(Executable input) {
 							return input.getResolvedSignature();
 						}
 					});
-					for(Collection<IResolvedOperation> sameSignature: operationPerSignature.asMap().values()) {
-						for(IResolvedOperation operationWithSameSignature: sameSignature) {
-							JvmOperation operation = operationWithSameSignature.getDeclaration();
-							EObject otherSource = associations.getPrimarySourceElement(operation);
+					for(Collection<Executable> sameSignature: perSignature.asMap().values()) {
+						for(Executable operationWithSameSignature: sameSignature) {
+							JvmExecutable executable = operationWithSameSignature.getDeclaration();
+							EObject otherSource = associations.getPrimarySourceElement(executable);
 							if (sameSignature.size() > 1) {
-								error("Duplicate " + typeLabel(operation) + " " + operationWithSameSignature.getSimpleSignature()
+								error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
 										+ " in type " + inferredType.getSimpleName(), otherSource,
 										nameFeature(otherSource), DUPLICATE_METHOD);
 							} else {
-								error("The " + typeLabel(operation) + " " + operationWithSameSignature.getSimpleSignature()
+								error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
 										+ " has the same erasure "
 										+ operationWithSameSignature.getResolvedErasureSignature()
-										+ " as another method in type " + inferredType.getSimpleName(), otherSource,
+										+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
 										nameFeature(otherSource), DUPLICATE_METHOD);
 							}
 						}

@@ -72,7 +72,7 @@ public class LazyOverrideCheckResult implements IOverrideCheckResult {
 	}
 
 	protected EnumSet<OverrideCheckDetails> getComputedDetails() {
-		return thisOperation.getOverrideTester().getAllDetails(thisOperation, getGivenOperation(), primaryDetail);
+		return thisOperation.getOverrideTester().getAllDetails(thisOperation, givenOperation, primaryDetail);
 	}
 	
 	public IResolvedOperation getThisOperation() {
