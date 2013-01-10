@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
@@ -23,6 +24,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
@@ -130,5 +132,26 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 	public URI getURI(String fileName, String outputConfiguration) {
 		IFile file = getFile(fileName, outputConfiguration);
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		throw new UnsupportedOperationException();
 	}
 }

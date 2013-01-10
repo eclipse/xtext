@@ -15,8 +15,11 @@ import java.io.FileInputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.google.common.io.ByteStreams;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -24,27 +27,45 @@ import org.junit.Test;
 public class JavaIoFileSystemAccessTest extends Assert {
 
 	@Test
-	public void testDirsAreCreated() throws Exception {
+	public void testDirsAndFilesAreCreated() throws Exception {
 		File dir = null;
-		File file = null;
+		File textFile = null;
+		File binFile = null;
 		try {
+
 			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
 					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider.Runtime());
+
 			File tmpDir = configureFileSystemAccess(fileSystemAccess);
 			fileSystemAccess.generateFile("tmp/X", "XX");
+			fileSystemAccess.generateFile("tmp/Y", new StringInputStream("\1\2\3"));
+
 			dir = new File(tmpDir, "tmp");
 			assertTrue(dir.exists());
 			assertTrue(dir.isDirectory());
-			file = new File(dir, "X");
-			assertTrue(file.exists());
-			assertTrue(file.isFile());
+
+			textFile = new File(dir, "X");
+			assertTrue(textFile.exists());
+			assertTrue(textFile.isFile());
+			assertEquals("XX", fileSystemAccess.readTextFile("tmp/X"));
+
+			binFile = new File(dir, "Y");
+			assertTrue(binFile.exists());
+			assertTrue(binFile.isFile());
+			assertEquals("\1\2\3", new String(ByteStreams.toByteArray(fileSystemAccess.readBinaryFile("tmp/Y"))));
+
 		} finally {
 			try {
-				if (file != null)
-					file.delete();
+				if (textFile != null)
+					textFile.delete();
 			} finally {
-				if (dir != null)
-					dir.delete();
+				try {
+					if (binFile != null)
+						binFile.delete();
+				} finally {
+					if (dir != null)
+						dir.delete();
+				}
 			}
 		}
 	}
@@ -61,8 +82,7 @@ public class JavaIoFileSystemAccessTest extends Assert {
 		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
 		fileSystemAccess.setOutputPath("testOutput", "/testDir");
 		URI uri = fileSystemAccess.getURI("testFile", "testOutput");
-		String expectedUri = new File(new File(File.separator + "testDir"), "testFile")
-			.toURI().toString();
+		String expectedUri = new File(new File(File.separator + "testDir"), "testFile").toURI().toString();
 		assertEquals(expectedUri, uri.toString());
 	}
 
