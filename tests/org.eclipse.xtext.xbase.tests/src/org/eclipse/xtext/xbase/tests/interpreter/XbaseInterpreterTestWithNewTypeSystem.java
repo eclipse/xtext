@@ -28,6 +28,27 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 		super.testBlock_02();
 	}
 	
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_08() throws Exception {
+		super.testCollectionExtensions_08();
+	}
+	
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_09() throws Exception {
+		super.testCollectionExtensions_09();
+	}
+	
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_10() throws Exception {
+		super.testCollectionExtensions_10();
+	}
+	
 	@Override
 	@Test
 	@Ignore
