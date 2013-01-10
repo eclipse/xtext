@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -599,12 +600,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		// TestEnum.values + TestEnum.valueOf
 		assertEquals(2, methodCount);
 		int constructorCount = TestEnum.class.getDeclaredConstructors().length;
-		assertEquals(1, constructorCount);
+		// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
+		assertEquals(2, constructorCount);
 		int fieldCount = TestEnum.class.getDeclaredFields().length;
 		// FirstValue, SecondValue, string, ENUM$VALUES
 		assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
 		// ENUM$VALUES is synthetic
-		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 1, type.getMembers().size());
+		// TestEnum(String, String, EnumType) is synthetic
+		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2, type.getMembers().size());
 	}
 	
 	@Test public void testMemberCount_17() {
@@ -1563,6 +1566,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		assertTrue(type instanceof JvmEnumerationType);
+		assertTrue(((JvmEnumerationType) type).isFinal());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
