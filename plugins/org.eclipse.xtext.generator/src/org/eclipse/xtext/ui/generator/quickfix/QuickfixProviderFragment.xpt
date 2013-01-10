@@ -32,14 +32,12 @@
 */
 package «getQuickfixProviderName().toJavaPackage()»;
 
-import «superClassName»;
-
 /**
  * Custom quickfixes.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-public class «getQuickfixProviderName().toSimpleName()» extends «superClassName.toSimpleName()» {
+public class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -64,7 +62,6 @@ public class «getQuickfixProviderName().toSimpleName()» extends «superClassName.
 */
 package «getQuickfixProviderName().toJavaPackage()»
 
-import «superClassName»
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 //import org.eclipse.xtext.validation.Issue
@@ -74,7 +71,7 @@ import «superClassName»
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-class «getQuickfixProviderName().toSimpleName()» extends «superClassName.toSimpleName()» {
+class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
 
 //	@Fix(MyDslValidator::INVALID_NAME)
 //	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {

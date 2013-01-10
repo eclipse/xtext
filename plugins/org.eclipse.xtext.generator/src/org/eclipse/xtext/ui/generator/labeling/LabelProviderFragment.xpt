@@ -33,9 +33,6 @@
 */
 package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
 
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;«ELSE»import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;«ENDIF» 
- 
 import com.google.inject.Inject;
 
 /**
@@ -43,10 +40,10 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseLabelProvider«ELSE»DefaultEObjectLabelProvider«ENDIF» {
+public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
 	@Inject
-	public «eObjectLabelProviderQualifiedName().toSimpleName()»(AdapterFactoryLabelProvider delegate) {
+	public «eObjectLabelProviderQualifiedName().toSimpleName()»(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
@@ -70,9 +67,6 @@ public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF us
 */
 package «eObjectLabelProviderQualifiedName().toJavaPackage()»
 
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
-«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider«ELSE»import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider«ENDIF» 
- 
 import com.google.inject.Inject
 
 /**
@@ -80,10 +74,10 @@ import com.google.inject.Inject
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseLabelProvider«ELSE»DefaultEObjectLabelProvider«ENDIF» {
+class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
 
 	@Inject
-	new(AdapterFactoryLabelProvider delegate) {
+	new(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
@@ -107,14 +101,12 @@ class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase
 */
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 
-«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;«ELSE»import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;«ENDIF»
-
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseDescriptionLabelProvider«ELSE»DefaultDescriptionLabelProvider«ENDIF» {
+public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
 	// Labels and icons can be computed like this:
 	
@@ -136,7 +128,6 @@ public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «I
 */
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 
-«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider«ELSE»import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider«ENDIF»
 //import org.eclipse.xtext.resource.IEObjectDescription
 
 /**
@@ -144,7 +135,7 @@ package «descriptionLabelProviderQualifiedName().toJavaPackage()»
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseDescriptionLabelProvider«ELSE»DefaultDescriptionLabelProvider«ENDIF» {
+class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
 
 	// Labels and icons can be computed like this:
 	

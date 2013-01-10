@@ -78,4 +78,8 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 		return parameters;
 	}
 
+	@Override
+	public String[] getExportedPackagesUi(Grammar grammar) {
+		return new String[] { getNaming().packageName(getQuickfixProviderName(grammar, getNaming())) };
+	}
 }

@@ -131,12 +131,6 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EPackage;");
     _builder.newLine();
-    _builder.append("import ");
-    boolean _isInheritImplementation = this.isInheritImplementation();
-    String _validatorSuperClassName = this._validatorNaming.getValidatorSuperClassName(_isInheritImplementation);
-    _builder.append(_validatorSuperClassName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
     {
       boolean _isEmpty = this.composedChecks.isEmpty();
       boolean _not = (!_isEmpty);
@@ -172,10 +166,9 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     String _simpleName = this._validatorNaming.toSimpleName(_abstractValidatorName_2);
     _builder.append(_simpleName, "");
     _builder.append(" extends ");
-    boolean _isInheritImplementation_1 = this.isInheritImplementation();
-    String _validatorSuperClassName_1 = this._validatorNaming.getValidatorSuperClassName(_isInheritImplementation_1);
-    String _simpleName_1 = this._validatorNaming.toSimpleName(_validatorSuperClassName_1);
-    _builder.append(_simpleName_1, "");
+    boolean _isInheritImplementation = this.isInheritImplementation();
+    String _validatorSuperClassName = this._validatorNaming.getValidatorSuperClassName(_isInheritImplementation);
+    _builder.append(_validatorSuperClassName, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -257,12 +250,12 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       _builder_1.newLine();
       _builder_1.append("class ");
       String _validatorName_2 = this._validatorNaming.getValidatorName(this.grammar);
-      String _simpleName_2 = this._validatorNaming.toSimpleName(_validatorName_2);
-      _builder_1.append(_simpleName_2, "");
+      String _simpleName_1 = this._validatorNaming.toSimpleName(_validatorName_2);
+      _builder_1.append(_simpleName_1, "");
       _builder_1.append(" extends ");
       String _abstractValidatorName_3 = this._validatorNaming.getAbstractValidatorName();
-      String _simpleName_3 = this._validatorNaming.toSimpleName(_abstractValidatorName_3);
-      _builder_1.append(_simpleName_3, "");
+      String _simpleName_2 = this._validatorNaming.toSimpleName(_abstractValidatorName_3);
+      _builder_1.append(_simpleName_2, "");
       _builder_1.append(" {");
       _builder_1.newLineIfNotEmpty();
       _builder_1.newLine();
