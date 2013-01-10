@@ -901,6 +901,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
+	@Test public void testImportUnused_6() throws Exception {
+		XtendClass clazz = clazz("import java.awt.Label /** {@link Label} */ class X{} ");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+
+	@Test public void testImportUnused_7() throws Exception {
+		XtendClass clazz = clazz("import java.awt.Label /** @see Label */ class X{} ");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+
 	@Test public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_DUPLICATE);
