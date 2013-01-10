@@ -39,10 +39,12 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 
 /**
@@ -108,33 +110,42 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	protected IProgressMonitor getMonitor() {
 		return monitor;
 	}
-
-	public void generateFile(String fileName, String outputName, CharSequence contents) {
-		if (monitor.isCanceled())
-			throw new OperationCanceledException();
-		OutputConfiguration outputConfig = getOutputConfig(outputName);
-		
-		// check output folder exists
+	
+	/**
+	 * @since 2.4
+	 */
+	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
 		IContainer container = getContainer(outputConfig);
 		if (!container.exists()) {
 			if (outputConfig.isCreateOutputDirectory()) {
 				try {
 					createContainer(container);
+					return true;
 				} catch (CoreException e) {
-					throw new RuntimeException(e);
+					throw new RuntimeIOException(e);
 				}
 			} else {
-				return;
+				return false;
 			}
 		}
-		
+		return true;
+	}
+
+	public void generateFile(String fileName, String outputName, CharSequence contents) {
+		if (monitor.isCanceled())
+			throw new OperationCanceledException();
+		OutputConfiguration outputConfig = getOutputConfig(outputName);
+
+		if (!ensureOutputConfigurationDirectoryExists(outputConfig))
+			return;
+
 		IFile file = getFile(fileName, outputName);
 		IFile traceFile = getTraceFile(file);
 		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
-		String contentsAsString = postProcessedContent.toString(); 
-		if (file.exists()) {
-			if (outputConfig.isOverrideExistingResources()) {
-				try {
+		String contentsAsString = postProcessedContent.toString();
+		try {
+			if (file.exists()) {
+				if (outputConfig.isOverrideExistingResources()) {
 					StringInputStream newContent = getInputStream(contentsAsString, getEncoding(file));
 					if (hasContentsChanged(file, newContent)) {
 						// reset to offset zero allows to reuse internal byte[]
@@ -146,29 +157,63 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						}
 					}
 					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
-				} catch (CoreException e) {
-					throw new RuntimeException(e);
-				} catch (IOException e) {
-					throw new RuntimeException(e);
+					if (callBack != null)
+						callBack.afterFileUpdate(file);
 				}
-				if (callBack != null)
-					callBack.afterFileUpdate(file);
-			}
-		} else {
-			try {
+			} else {
 				ensureParentExists(file);
 				file.create(getInputStream(contentsAsString, getEncoding(file)), true, monitor);
 				if (outputConfig.isSetDerivedProperty()) {
 					setDerived(file, true);
 				}
 				updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+				if (callBack != null)
+					callBack.afterFileCreation(file);
 			}
-			if (callBack != null)
-				callBack.afterFileCreation(file);
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void generateFile(String fileName, String outputName, InputStream content) {
+		if (monitor.isCanceled())
+			throw new OperationCanceledException();
+		OutputConfiguration outputConfig = getOutputConfig(outputName);
+
+		if (!ensureOutputConfigurationDirectoryExists(outputConfig))
+			return;
+
+		try {
+			IFile file = getFile(fileName, outputName);
+			if (file.exists()) {
+				if (outputConfig.isOverrideExistingResources() && hasContentsChanged(file, content)) {
+					// reset to offset zero allows to reuse internal byte[]
+					// no need to convert the string twice
+					content.reset();
+					file.setContents(content, true, true, monitor);
+					if (file.isDerived() != outputConfig.isSetDerivedProperty())
+						setDerived(file, outputConfig.isSetDerivedProperty());
+					if (callBack != null)
+						callBack.afterFileUpdate(file);
+				}
+			} else {
+				ensureParentExists(file);
+				file.create(content, true, monitor);
+				if (outputConfig.isSetDerivedProperty()) {
+					setDerived(file, true);
+				}
+				if (callBack != null)
+					callBack.afterFileCreation(file);
+			}
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
 		}
 	}
 
@@ -225,7 +270,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		try {
 			return new StringInputStream(contentsAsString, encoding);
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeIOException(e);
 		}
 	}
 
@@ -249,6 +294,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	}
 
 	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
+		return hasContentsChanged(file,(InputStream) newContent);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected boolean hasContentsChanged(IFile file, InputStream newContent) {
 		boolean contentChanged = false;
 		BufferedInputStream oldContent = null;
 		try {
@@ -384,7 +436,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 			IFile file = getFile(fileName, outputName);
 			deleteFile(file, monitor);
 		} catch (CoreException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeIOException(e);
 		}
 	}
 
@@ -415,6 +467,39 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	public URI getURI(String fileName, String outputConfiguration) {
 		IFile file = getFile(fileName, outputConfiguration);
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		try {
+			IFile file = getFile(fileName, outputCfgName);
+			return file.getContents();
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		try {
+			IFile file = getFile(fileName, outputCfgName);
+			String encoding = getEncoding(file);
+			InputStream inputStream = file.getContents();
+			try {
+				byte[] bytes = ByteStreams.toByteArray(inputStream);
+				return new String(bytes, encoding);
+			} finally {
+				inputStream.close();
+			}
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
+		}
 	}
 
 }
