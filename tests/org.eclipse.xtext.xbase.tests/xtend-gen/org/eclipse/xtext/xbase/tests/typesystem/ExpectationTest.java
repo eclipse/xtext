@@ -281,8 +281,22 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   @Test
   public void testForLoop_01() {
     ExpectationTest _expects = this.expects("for(int x: null) {}");
-    ExpectationTest _types = _expects.types("int[]");
-    _types.finalizedAs("int[]");
+    ExpectationTest _types = _expects.types("int[] | Iterable<? extends Integer> | Integer[]");
+    _types.finalizedAs("int[] | Iterable<? extends Integer> | Integer[]");
+  }
+  
+  @Test
+  public void testForLoop_02() {
+    ExpectationTest _expects = this.expects("for(String x: null) {}");
+    ExpectationTest _types = _expects.types("Iterable<? extends String> | String[]");
+    _types.finalizedAs("Iterable<? extends String> | String[]");
+  }
+  
+  @Test
+  public void testForLoop_03() {
+    ExpectationTest _expects = this.expects("for(Integer x: null) {}");
+    ExpectationTest _types = _expects.types("Iterable<? extends Integer> | int[] | Integer[]");
+    _types.finalizedAs("Iterable<? extends Integer> | int[] | Integer[]");
   }
   
   @Test

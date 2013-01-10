@@ -206,7 +206,17 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testForLoop_01() {
-		"for(int x: null) {}".expects.types('int[]').finalizedAs('int[]')
+		"for(int x: null) {}".expects.types('int[] | Iterable<? extends Integer> | Integer[]').finalizedAs('int[] | Iterable<? extends Integer> | Integer[]')
+	}
+	
+	@Test
+	def void testForLoop_02() {
+		"for(String x: null) {}".expects.types('Iterable<? extends String> | String[]').finalizedAs('Iterable<? extends String> | String[]')
+	}
+	
+	@Test
+	def void testForLoop_03() {
+		"for(Integer x: null) {}".expects.types('Iterable<? extends Integer> | int[] | Integer[]').finalizedAs('Iterable<? extends Integer> | int[] | Integer[]')
 	}
 	
 	@Test
