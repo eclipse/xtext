@@ -32,27 +32,27 @@ import org.eclipse.xtext.xbase.XThrowExpression
  */
 abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTest<Reference> {
 	
-	@Test override void testReturnType_01() throws Exception {
+	@Test override void testReturnExpression_01() throws Exception {
 		"return 'foo'".resolvesTo("String")
 	}
 	
-	@Test override void testReturnType_02() throws Exception {
+	@Test override void testReturnExpression_02() throws Exception {
 		"return try { if (true) 'foo' else 'bar' } finally { String::valueOf('zonk') }".resolvesTo("String")
 	}
 	
-	@Test override void testReturnType_03() throws Exception {
+	@Test override void testReturnExpression_03() throws Exception {
 		"{ val c = [ int i | return i ] c.apply(1) return null }".resolvesTo("null")
 	}
 	
-	@Test override void testReturnType_04() throws Exception {
+	@Test override void testReturnExpression_04() throws Exception {
 		"{ val c = [ int i | i ] c.apply(1) return null }".resolvesTo("null")
 	}
 	
-	@Test override void testReturnType_06() throws Exception {
+	@Test override void testReturnExpression_06() throws Exception {
 		"{ var closure = [| return 'literal'] return closure.apply }".resolvesTo("String")
 	}
 	
-	@Test override void testReturnType_08() throws Exception {
+	@Test override void testReturnExpression_08() throws Exception {
 		"return [| return 'literal'].apply".resolvesTo("String")
 	}
 	
