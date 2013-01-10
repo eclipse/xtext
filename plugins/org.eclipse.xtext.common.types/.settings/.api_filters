@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.4.0"/>
-                <message_argument value="2.3.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmAnnotationReference.java" type="org.eclipse.xtext.common.types.JvmAnnotationReference">
         <filter id="405901410">
             <message_arguments>
@@ -91,20 +83,6 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
                 <message_argument value="JVM_ANNOTATION_REFERENCE__TARGET"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/common/types/GenerateEMF.java" type="org.eclipse.xtext.common.types.GenerateEMF">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.GenerateEMF"/>
-                <message_argument value="org.eclipse.xtext.common.types_2.4.0"/>
-            </message_arguments>
-        </filter>
-        <filter id="305426566">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.GenerateEMF"/>
-                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
             </message_arguments>
         </filter>
     </resource>
