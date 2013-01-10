@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.xbase.tests.validation.AssignmentTests2;
+import org.eclipse.xtext.xbase.tests.validation.FeatureCallValidationTest2;
+import org.eclipse.xtext.xbase.tests.validation.JvmTypeReferencesValidatorTest2;
+import org.eclipse.xtext.xbase.tests.validation.TypeConformanceValidatorTest2;
+import org.eclipse.xtext.xbase.tests.validation.ValidationTests2;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,7 +21,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	CompilerAndInterpreterSuiteNewAPI.class,
-	CompilerAndInterpreterSuiteOldAPI.class
+	AssignmentTests2.class,
+	FeatureCallValidationTest2.class,
+	JvmTypeReferencesValidatorTest2.class,
+	TypeConformanceValidatorTest2.class,
+	ValidationTests2.class,
 })
-public class CompilerAndInterpreterSuite {}
+public class ValidationSuite {
+}

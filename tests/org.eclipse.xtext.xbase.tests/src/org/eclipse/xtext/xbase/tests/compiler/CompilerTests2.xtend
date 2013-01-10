@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler
 
+import org.junit.Ignore
 import org.junit.Test
 
-class CompilerTests2 extends AbstractOutputComparingCompilerTests {
+abstract class AbstractCompilerTests2 extends AbstractOutputComparingCompilerTests {
 
 	@Test def void testVariableDeclaration() throws Exception {
 		'''
@@ -113,4 +114,135 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return _thread;
 		''')
 	}
+	
+	@Test def void testForLoop_01() throws Exception {
+		'''
+			for(int i: 1..2) { i.toString }
+		'''.compilesTo('''
+			org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);
+			for (final int i : _upTo) {
+			  Integer.valueOf(i).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_02() throws Exception {
+		'''
+			for(Integer i: 1..2) { i.toString }
+		'''.compilesTo('''
+			org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);
+			for (final Integer i : _upTo) {
+			  i.toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_03() throws Exception {
+		'''
+			for(i: 1..2) { i.toString }
+		'''.compilesTo('''
+			org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);
+			for (final Integer i : _upTo) {
+			  i.toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_04() throws Exception {
+		'''
+			for(i: null as int[]) { i.toString }
+		'''.compilesTo('''
+			for (final int i : ((int[]) null)) {
+			  Integer.valueOf(i).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_05() throws Exception {
+		'''
+			for(i: null as Integer[]) { i.toString }
+		'''.compilesTo('''
+			for (final Integer i : ((Integer[]) null)) {
+			  i.toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_06() throws Exception {
+		'''
+			for(Integer i: null as int[]) { i.toString }
+		'''.compilesTo('''
+			for (final Integer i : ((int[]) null)) {
+			  i.toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_07() throws Exception {
+		'''
+			for(int i: null as Integer[]) { i.toString }
+		'''.compilesTo('''
+			for (final int i : ((Integer[]) null)) {
+			  Integer.valueOf(i).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_08() throws Exception {
+		'''
+			for(Integer i: null as int[]) { i.toString }
+		'''.compilesTo('''
+			for (final Integer i : ((int[]) null)) {
+			  i.toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_09() throws Exception {
+		'''
+			for(int i: null as Integer[]) { i.toString }
+		'''.compilesTo('''
+			for (final int i : ((Integer[]) null)) {
+			  Integer.valueOf(i).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_10() throws Exception {
+		'''
+			for(int i: newArrayList) { i.toString }
+		'''.compilesTo('''
+			java.util.ArrayList<Integer> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList();
+			for (final int i : _newArrayList) {
+			  Integer.valueOf(i).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_11() throws Exception {
+		'''
+			for(Integer i: newArrayList) { i.toString }
+		'''.compilesTo('''
+			java.util.ArrayList<Integer> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList();
+			for (final Integer i : _newArrayList) {
+			  i.toString();
+			}
+		''')
+	}
+}
+
+class CompilerTests2 extends AbstractCompilerTests2 {
+	
+	@Test 
+	@Ignore("Type check fails in old implementation")
+	override testForLoop_10() throws Exception {
+		fail("Type check fails in old implementation")
+	}
+	
+	@Test 
+	@Ignore("Type check fails in old implementation")
+	override testForLoop_11() throws Exception {
+		fail("Type check fails in old implementation")
+	}
+	
 }
