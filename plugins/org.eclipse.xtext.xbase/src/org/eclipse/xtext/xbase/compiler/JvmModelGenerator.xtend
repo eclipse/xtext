@@ -75,6 +75,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import static org.eclipse.xtext.util.Strings.*
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * A generator implementation that processes the 
@@ -579,7 +580,10 @@ class JvmModelGenerator implements IGenerator {
 						// Offset computed to the texts offset inside the node
 						val realOffset = region.offset - nodeOffset
 						parentAppendable.append(nodeText.substring(lastOffset, realOffset))
-						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, node.startLine, node.endLine), null, null))
+						val startLine = node.startLine
+						val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, realOffset));
+						val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, realOffset + region.length));
+						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
 						val desc = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
 						if(desc != null) {
 							val jvmType = EcoreUtil::resolve(desc.EObjectOrProxy, context) as JvmType
