@@ -37,7 +37,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
 	 * @since 2.4
 	 */
 	protected String getFileName(String fileName, String outputConfigName) {
-		return "memory:/" + outputConfigName + "/" + fileName;
+		return outputConfigName+fileName;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
 	 * @since 2.3
 	 */
 	public URI getURI(String fileName, String outputConfiguration) {
-		return URI.createURI(getFileName(fileName, outputConfiguration));
+		return URI.createURI("memory:/" + outputConfiguration + "/" + fileName);
 	}
 
 	/**
