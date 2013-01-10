@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.compiler.batch;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Arrays.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
@@ -114,6 +113,7 @@ public class XtendBatchCompiler {
 	protected String tempDirectory = System.getProperty("java.io.tmpdir");
 	protected boolean deleteTempDirectory = true;
 	protected List<File> tempFolders = Lists.newArrayList();
+	protected boolean writeTraceFiles = true;
 
 	public void setUseCurrentClassLoaderAsParent(boolean useCurrentClassLoaderAsParent) {
 		this.useCurrentClassLoaderAsParent = useCurrentClassLoaderAsParent;
@@ -125,6 +125,14 @@ public class XtendBatchCompiler {
 
 	public void setTempDirectory(String tempDirectory) {
 		this.tempDirectory = tempDirectory;
+	}
+	
+	public boolean isWriteTraceFiles() {
+		return writeTraceFiles;
+	}
+	
+	public void setWriteTraceFiles(boolean writeTraceFiles) {
+		this.writeTraceFiles = writeTraceFiles;
 	}
 
 	public boolean isDeleteTempDirectory() {
@@ -394,6 +402,7 @@ public class XtendBatchCompiler {
 	protected void generateJavaFiles(ResourceSet resourceSet) {
 		JavaIoFileSystemAccess javaIoFileSystemAccess = javaIoFileSystemAccessProvider.get();
 		javaIoFileSystemAccess.setOutputPath(outputPath);
+		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
 		ResourceSetBasedResourceDescriptions resourceDescriptions = getResourceDescriptions(resourceSet);
 		Iterable<IEObjectDescription> exportedObjectsByType = resourceDescriptions
 				.getExportedObjectsByType(XtendPackage.eINSTANCE.getXtendClass());
