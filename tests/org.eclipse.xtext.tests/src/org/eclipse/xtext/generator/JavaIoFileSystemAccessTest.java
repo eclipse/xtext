@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.StringInputStream;
@@ -108,6 +110,33 @@ public class JavaIoFileSystemAccessTest extends Assert {
 			assertFalse(equal(contents, utfString));
 			String isoString = new String(buffer, 0, read, "ISO-8859-1");
 			assertEquals(contents, isoString);
+		} finally {
+			if (file != null)
+				file.delete();
+		}
+	}
+
+	@Test
+	public void testTraceIsCreated() throws Exception {
+		File file = null;
+		try {
+
+			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
+					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider.Runtime(),
+					new TraceFileNameProvider(), new TraceRegionSerializer());
+
+			File tmpDir = configureFileSystemAccess(fileSystemAccess);
+			fileSystemAccess.generateFile("tmp/X", new CharSequenceBasedTraceRegionProvider("XX"));
+
+			file = new File(tmpDir, "tmp/X");
+			assertTrue(file.exists());
+			assertTrue(file.isFile());
+			assertEquals("XX", fileSystemAccess.readTextFile("tmp/X"));
+
+			file = new File(tmpDir, "tmp/.X._trace");
+			assertTrue(file.exists());
+			assertTrue(file.isFile());
+
 		} finally {
 			if (file != null)
 				file.delete();
