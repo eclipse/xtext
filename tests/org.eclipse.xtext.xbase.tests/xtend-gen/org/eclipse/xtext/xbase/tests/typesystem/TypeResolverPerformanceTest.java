@@ -26,7 +26,7 @@ public abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest 
   @Rule
   public final Timeout timeout = new Function0<Timeout>() {
     public Timeout apply() {
-      Timeout _timeout = new Timeout(400);
+      Timeout _timeout = new Timeout(100);
       return _timeout;
     }
   }.apply();
