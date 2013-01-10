@@ -1,0 +1,16 @@
+
+ - naming of phases
+ 
+ * Phase 1 (preModify/global indexing) *
+ - add implicit imports
+ - register class, interface, annotationType, enum
+ - [DOM] don't allow cross reference resolution (return null)
+ 
+ * Phase 2 (modify / process) *
+ - factory for declarations
+ - factory for type references
+ - factory for Expressions
+ - support JavaBlackBoxBlock
+ - [DOM] Expressions
+ - validation
+ - quickfixes

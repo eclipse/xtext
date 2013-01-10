@@ -15,4 +15,5 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface NamedElement {
 	String getName();
+	CompilationUnit getCompilationUnit();
 }

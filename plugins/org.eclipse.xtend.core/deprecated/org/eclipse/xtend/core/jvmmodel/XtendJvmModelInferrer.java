@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +30,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
+import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -71,6 +76,8 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -94,6 +101,8 @@ import com.google.inject.Inject;
  */
 @Deprecated
 public class XtendJvmModelInferrer implements IJvmModelInferrer {
+	
+	private static Logger logger = Logger.getLogger(XtendJvmModelInferrer.class);
 
 	public static final String CREATE_INITIALIZER_PREFIX = "_init_";
 
@@ -131,33 +140,76 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject
 	private IFileHeaderProvider fileHeaderProvider;
+	
+	@Inject
+	private AnnotationProcessor annotationProcessor;
+	
+	@Inject
+	private ActiveAnnotationContextProvider contextProvider;
 
 	public void infer(@Nullable EObject object, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
 			return;
 		XtendFile xtendFile = (XtendFile) object;
-		for(final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
+		List<Runnable> doLater = newArrayList();
+		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
 			if (Strings.isEmpty(declaration.getName()))
 				continue;
 			
 			if (declaration instanceof XtendAnnotationType) {
-				JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
+				final JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
 				setNameAndAssociate(xtendFile, declaration, annotation);
-				acceptor.accept(annotation).initializeLater(new Procedure1<JvmAnnotationType>() {
-					public void apply(@Nullable JvmAnnotationType annotation) {
-						initialize((XtendAnnotationType)declaration, annotation);
-					}
-				});
+				acceptor.accept(annotation);
+				if (!preIndexingPhase) {
+					doLater.add(new Runnable() {
+						public void run() {
+							initialize((XtendAnnotationType)declaration, annotation);
+						}
+					});
+				}
 			} else if (declaration instanceof XtendClass) {
-				JvmGenericType javaType = typesFactory.createJvmGenericType();
+				final JvmGenericType javaType = typesFactory.createJvmGenericType();
 				setNameAndAssociate(xtendFile, declaration, javaType);
-				acceptor.accept(javaType).initializeLater(new Procedure1<JvmGenericType>() {
-					public void apply(@Nullable JvmGenericType javaType) {
-						initialize((XtendClass) declaration, javaType);
-					}
-				});
+				acceptor.accept(javaType);
+				if (!preIndexingPhase) {
+					doLater.add(new Runnable() {
+						public void run() {
+							initialize((XtendClass) declaration, javaType);
+						}
+					});
+				}
 			}
 		}
+		
+		List<ActiveAnnotationContext> list = contextProvider.computeContext(xtendFile);
+		for (ActiveAnnotationContext ctx : list) {
+			try {
+				annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {
+					public void accept(JvmDeclaredType t) {
+						acceptor.accept(t);
+					}
+				}, CancelIndicator.NullImpl);
+			} catch (RuntimeException e) {
+				handleProcessingError(xtendFile, ctx, e);
+			}
+		}
+		
+		if (!preIndexingPhase) {
+			for (Runnable runnable : doLater) {
+				runnable.run();
+			}
+			for (ActiveAnnotationContext ctx : list) {
+				try {
+					annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+				} catch (RuntimeException e) {
+					handleProcessingError(xtendFile, ctx, e);
+				}
+			}
+		}
+	}
+
+	private void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, RuntimeException e) {
+		logger.error("Error processing "+xtendFile.eResource().getURI()+" with processor "+ctx.getProcessorInstance().toString(), e);
 	}
 	
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {

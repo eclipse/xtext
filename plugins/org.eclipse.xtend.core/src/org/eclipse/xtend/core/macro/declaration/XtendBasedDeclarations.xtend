@@ -29,8 +29,13 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 
-abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends AbstractDeclarationImpl<T> implements MemberDeclaration {
+abstract class XtendNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
+}
+
+abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendNamedElementImpl<T> implements MemberDeclaration {
 	
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
