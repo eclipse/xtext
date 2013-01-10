@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -44,14 +45,15 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -151,6 +153,9 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
@@ -1266,6 +1271,14 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 										break;
 									}
 								}
+							}
+						}
+					} else if( n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
+						List<ReplaceRegion> typeRefRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(n);
+						for(ReplaceRegion replaceRegion : typeRefRegions){
+							String simpleName = replaceRegion.getText();
+							if (importedNames.containsKey(simpleName)) {
+								imports.remove(importedNames.remove(simpleName));
 							}
 						}
 					}
