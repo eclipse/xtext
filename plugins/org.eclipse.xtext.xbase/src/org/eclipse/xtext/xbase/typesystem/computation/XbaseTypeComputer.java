@@ -315,8 +315,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XCastedExpression object, ITypeComputationState state) {
-		LightweightTypeReference objectType = getTypeForName(Object.class, state);
-		state.withExpectation(objectType).computeTypes(object.getTarget());
+		state.withNonVoidExpectation().computeTypes(object.getTarget());
 		state.acceptActualType(state.getConverter().toLightweightReference(object.getType()));
 	}
 
