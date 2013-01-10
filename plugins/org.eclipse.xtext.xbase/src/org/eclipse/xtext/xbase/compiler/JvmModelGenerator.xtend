@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend2.lib.StringConcatenation
@@ -46,13 +47,19 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
+import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
+import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.LocationData
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.TextRegionWithLineInformation
@@ -66,9 +73,8 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.util.Strings.*
-import org.eclipse.xtext.documentation.IFileHeaderProvider
-import java.util.List
-import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 
 /**
  * A generator implementation that processes the 
@@ -90,6 +96,8 @@ class JvmModelGenerator implements IGenerator {
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject IJvmModelAssociations jvmModelAssociations
 	@Inject JavaKeywords keywords
+	@Inject IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider
+	@Inject IScopeProvider scopeProvider
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -554,20 +562,51 @@ class JvmModelGenerator implements IGenerator {
 	} 
 	
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable) {
-		val doc = '''/**''' as StringConcatenation
-		doc.newLine
-		doc.append(" * ")
-		doc.append(text, " * ")
-		doc.newLine
-		doc.append(" */")
 		if (!documentationNodes.empty) {
 			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
 			for(node: documentationNodes) {
 				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
 			}
-			appendable.trace(new LocationData(documentationTrace, null, null)).append(doc.toString)
+			val parentAppendable = appendable.trace(new LocationData(documentationTrace, null, null))
+			for(node: documentationNodes) {
+				val nodeText = node.text
+				val context = NodeModelUtils::findActualSemanticObjectFor(node)
+				val nodeOffset = node.offset
+				val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(node) + javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node)
+				var lastOffset = 0
+				if(regions.size > 0){
+					for(region : regions){
+						// Offset computed to the texts offset inside the node
+						val realOffset = region.offset - nodeOffset
+						parentAppendable.append(nodeText.substring(lastOffset, realOffset))
+						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, node.startLine, node.endLine), null, null))
+						val desc = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
+						if(desc != null) {
+							val jvmType = EcoreUtil::resolve(desc.EObjectOrProxy, context) as JvmType
+							childAppendable.append(jvmType)
+
+						} else {
+							childAppendable.append(region.text)
+						}
+						// Last offset where we already appended the code
+						lastOffset = region.offset - nodeOffset + region.length
+					}
+					// Append the rest of the text
+					parentAppendable.append(nodeText.substring(lastOffset))
+				} else {
+					// No regions - put the full text here
+					parentAppendable.append(nodeText)
+				}
+			}
 			appendable.newLine
 		} else {
+			// In case there is no node for the given documentation we use JavaDoc-format as default
+			val doc = '''/**''' as StringConcatenation
+			doc.newLine
+			doc.append(" * ")
+			doc.append(text, " * ")
+			doc.newLine
+			doc.append(" */")
 			appendable.append(doc.toString).newLine
 		}
 	}

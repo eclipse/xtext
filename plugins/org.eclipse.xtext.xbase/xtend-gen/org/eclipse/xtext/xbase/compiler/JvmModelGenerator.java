@@ -17,8 +17,10 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -56,16 +58,24 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.validation.Issue;
@@ -79,6 +89,7 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.LoopExtensions;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
+import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -139,6 +150,12 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   private JavaKeywords keywords;
   
+  @Inject
+  private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+
+  @Inject
+  private IScopeProvider scopeProvider;
+
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
@@ -1086,49 +1103,102 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/**");
-      final StringConcatenation doc = ((StringConcatenation) _builder);
-      doc.newLine();
-      doc.append(" * ");
-      doc.append(text, " * ");
-      doc.newLine();
-      doc.append(" */");
-      ITreeAppendable _xifexpression = null;
-      boolean _isEmpty = documentationNodes.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        ITreeAppendable _xblockexpression_1 = null;
-        {
-          ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
-          for (final INode node : documentationNodes) {
-            int _offset = node.getOffset();
-            int _length = node.getLength();
-            int _startLine = node.getStartLine();
-            int _endLine = node.getEndLine();
-            TextRegionWithLineInformation _textRegionWithLineInformation = new TextRegionWithLineInformation(_offset, _length, _startLine, _endLine);
-            ITextRegionWithLineInformation _merge = documentationTrace.merge(_textRegionWithLineInformation);
-            documentationTrace = _merge;
-          }
-          LocationData _locationData = new LocationData(documentationTrace, null, null);
-          ITreeAppendable _trace = appendable.trace(_locationData);
-          String _string = doc.toString();
-          _trace.append(_string);
-          ITreeAppendable _newLine = appendable.newLine();
-          _xblockexpression_1 = (_newLine);
+    ITreeAppendable _xifexpression = null;
+    boolean _isEmpty = documentationNodes.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      ITreeAppendable _xblockexpression = null;
+      {
+        ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
+        for (final INode node : documentationNodes) {
+          int _offset = node.getOffset();
+          int _length = node.getLength();
+          int _startLine = node.getStartLine();
+          int _endLine = node.getEndLine();
+          TextRegionWithLineInformation _textRegionWithLineInformation = new TextRegionWithLineInformation(_offset, _length, _startLine, _endLine);
+          ITextRegionWithLineInformation _merge = documentationTrace.merge(_textRegionWithLineInformation);
+          documentationTrace = _merge;
         }
-        _xifexpression = _xblockexpression_1;
-      } else {
+        LocationData _locationData = new LocationData(documentationTrace, null, null);
+        final ITreeAppendable parentAppendable = appendable.trace(_locationData);
+        for (final INode node_1 : documentationNodes) {
+          {
+            final String nodeText = node_1.getText();
+            final EObject context = NodeModelUtils.findActualSemanticObjectFor(node_1);
+            final int nodeOffset = node_1.getOffset();
+            List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(node_1);
+            List<ReplaceRegion> _computeParameterTypeRefRegions = this.javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node_1);
+            final Iterable<ReplaceRegion> regions = Iterables.<ReplaceRegion>concat(_computeTypeRefRegions, _computeParameterTypeRefRegions);
+            int lastOffset = 0;
+            int _size = IterableExtensions.size(regions);
+            boolean _greaterThan = (_size > 0);
+            if (_greaterThan) {
+              for (final ReplaceRegion region : regions) {
+                {
+                  int _offset_1 = region.getOffset();
+                  final int realOffset = (_offset_1 - nodeOffset);
+                  String _substring = nodeText.substring(lastOffset, realOffset);
+                  parentAppendable.append(_substring);
+                  int _offset_2 = region.getOffset();
+                  int _length_1 = region.getLength();
+                  int _startLine_1 = node_1.getStartLine();
+                  int _endLine_1 = node_1.getEndLine();
+                  TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_2, _length_1, _startLine_1, _endLine_1);
+                  LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null, null);
+                  ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
+                  EClass _jvmType = TypesPackage.eINSTANCE.getJvmType();
+                  ScopeFakeReference _scopeFakeReference = new ScopeFakeReference(_jvmType);
+                  IScope _scope = this.scopeProvider.getScope(context, _scopeFakeReference);
+                  String _text = region.getText();
+                  QualifiedName _create = QualifiedName.create(_text);
+                  final IEObjectDescription desc = _scope.getSingleElement(_create);
+                  boolean _notEquals = ObjectExtensions.operator_notEquals(desc, null);
+                  if (_notEquals) {
+                    EObject _eObjectOrProxy = desc.getEObjectOrProxy();
+                    EObject _resolve = EcoreUtil.resolve(_eObjectOrProxy, context);
+                    final JvmType jvmType = ((JvmType) _resolve);
+                    childAppendable.append(jvmType);
+                  } else {
+                    String _text_1 = region.getText();
+                    childAppendable.append(_text_1);
+                  }
+                  int _offset_3 = region.getOffset();
+                  int _minus = (_offset_3 - nodeOffset);
+                  int _length_2 = region.getLength();
+                  int _plus = (_minus + _length_2);
+                  lastOffset = _plus;
+                }
+              }
+              String _substring = nodeText.substring(lastOffset);
+              parentAppendable.append(_substring);
+            } else {
+              parentAppendable.append(nodeText);
+            }
+          }
+        }
+        ITreeAppendable _newLine = appendable.newLine();
+        _xblockexpression = (_newLine);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      ITreeAppendable _xblockexpression_1 = null;
+      {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("/**");
+        final StringConcatenation doc = ((StringConcatenation) _builder);
+        doc.newLine();
+        doc.append(" * ");
+        doc.append(text, " * ");
+        doc.newLine();
+        doc.append(" */");
         String _string = doc.toString();
         ITreeAppendable _append = appendable.append(_string);
         ITreeAppendable _newLine = _append.newLine();
-        _xifexpression = _newLine;
+        _xblockexpression_1 = (_newLine);
       }
-      _xblockexpression = (_xifexpression);
+      _xifexpression = _xblockexpression_1;
     }
-    return _xblockexpression;
+    return _xifexpression;
   }
   
   public void generateAnnotations(final JvmAnnotationTarget it, final ITreeAppendable appendable, final boolean withLineBreak) {
