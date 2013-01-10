@@ -1171,4 +1171,19 @@
          </command>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.console.consolePatternMatchListeners">
+      <consolePatternMatchListener
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
+            id="org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
+            regex="\w+.xtend(:\d+)?">
+	        <enablement>
+	            <or>
+				  <test property="org.eclipse.ui.console.consoleTypeTest" value="javaStackTraceConsole"/>
+	               <test property="org.eclipse.debug.ui.processTypeTest" value="java"/>
+	               <test property="org.eclipse.debug.ui.processTypeTest" value="org.eclipse.ant.ui.antProcess"/>
+	            </or>
+	         </enablement>
+      </consolePatternMatchListener>
+   </extension>
 </plugin>
