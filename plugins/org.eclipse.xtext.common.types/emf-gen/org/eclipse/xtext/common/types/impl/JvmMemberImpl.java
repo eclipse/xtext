@@ -205,6 +205,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName()
 	{
 		return simpleName;
@@ -228,6 +229,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier()
 	{
 		return identifier;
