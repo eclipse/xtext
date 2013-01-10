@@ -74,8 +74,6 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
 				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_ignore };
 		Combo comboBox = addComboBox(parent, label, prefKey.getId(), indent, values, valueLabels);
-//		comboBox.select(java.util.Arrays.asList(comboBox.getItems()).indexOf(prefKey.getDefaultValue()));
-//		updateCombo(comboBox);
 		return comboBox;
 	}
 
