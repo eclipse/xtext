@@ -23,6 +23,11 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
+ * 
+ * This class is eagerly created by the injector and serves just to initialize the default preferences.
+ * TODO use {@link org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer} and its extension point instead
+ * 
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class JavaProjectPreferencesInitializer {
