@@ -234,27 +234,37 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		return typeResolver.resolveTypes(expression).getExpectedType(expression);
 	}
 	
-	@SuppressWarnings("null")
 	protected void checkCast(JvmTypeReference concreteSyntax, LightweightTypeReference toType, LightweightTypeReference fromType) {
-		if (toType != null && fromType != null && fromType.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType targetType = (JvmDeclaredType) fromType.getType();
-			if (targetType.isFinal()) {
-				if (!toType.isAssignableFrom(fromType)) {
-					error("Cannot cast element of sealed type " + getNameOfTypes(fromType) + " to "
-							+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							INVALID_CAST);
-				}
-			} else {
-				JvmType type = toType.getType();
-				if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
-					if (!fromType.isAssignableFrom(toType) && !toType.isAssignableFrom(fromType)) {
-						error("type mismatch: cannot convert from " + getNameOfTypes(fromType) + " to "
-								+ canonicalName(toType), concreteSyntax, null,
-								ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
+		if (toType == null || fromType == null)
+			return;
+		if (fromType.getType() instanceof JvmDeclaredType) {
+			
+			// if one of the types is an interface and the other is a non final class (or interface) there always can be a subtype
+			if (isInterface(fromType) 
+					&& !isFinal(toType)) 
+				return;
+			if (isInterface(toType) 
+					&& !isFinal(fromType)) 
+				return;
+			if (!toType.isAssignableFrom(fromType)) {
+				if (	(isFinal(fromType) || isFinal(toType))
+					||  (isClass(fromType) && isClass(toType))) {
+					if (!fromType.isAssignableFrom(toType)) { // no upcast
+						error("Cannot cast from " + getNameOfTypes(fromType) + " to "
+								+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+								INVALID_CAST);
 					}
 				}
 			}
 		}
+	}
+	
+	private boolean isInterface(LightweightTypeReference typeRef) {
+		return isInterface(typeRef.getType());
+	}
+	
+	private boolean isClass(LightweightTypeReference typeRef) {
+		return typeRef.getType() instanceof JvmGenericType && !((JvmGenericType)typeRef.getType()).isInterface();
 	}
 	
 	@Check
