@@ -57,6 +57,8 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -107,7 +109,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
-	private static final String LINEBREAK = "\n";
+	@Inject
+	private IWhitespaceInformationProvider whitespaceInformationProvider;
 
 	public String getDocumentation(EObject object) {
 		return computeDocumentation(object) + getDerivedOrOriginalDeclarationInformation(object);
@@ -280,6 +283,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected void getDocumentationWithPrefix(EObject object) {
 		String startTag = "/**";
 		String endTag = "*/";
+		ILineSeparatorInformation lineSeparatorInformation = whitespaceInformationProvider.getLineSeparatorInformation(EcoreUtil.getURI(object));
+		String lineBreak = lineSeparatorInformation.getLineSeparator();
 		String documentation = documentationProvider.getDocumentation(object);
 		if (documentation == null) {
 			DocumentationAdapter adapter = (DocumentationAdapter) EcoreUtil.getAdapter(object.eAdapters(),
@@ -293,12 +298,12 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 
 		if (documentation != null && documentation.length() > 0) {
 			BufferedReader reader = new BufferedReader(new StringReader(documentation));
-			StringBuilder builder = new StringBuilder(startTag + LINEBREAK);
+			StringBuilder builder = new StringBuilder(startTag + lineBreak);
 			try {
 				String line = "";
 				while ((line = reader.readLine()) != null) {
 					if (line.length() > 0)
-						builder.append(line + LINEBREAK);
+						builder.append(line + lineBreak);
 				}
 				builder.append(endTag);
 			} catch (IOException e) {
