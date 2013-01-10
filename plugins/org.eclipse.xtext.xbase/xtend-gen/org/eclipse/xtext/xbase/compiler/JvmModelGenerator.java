@@ -1,10 +1,10 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ */
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -511,8 +511,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   /**
-	 * Returns the visibility modifier and a space as suffix if not empty
-	 */
+   * Returns the visibility modifier and a space as suffix if not empty
+   */
   public String javaName(final JvmVisibility visibility) {
     boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {
