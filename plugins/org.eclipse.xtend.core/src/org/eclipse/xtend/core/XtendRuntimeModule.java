@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.typing.XtendTypeProvider;
+import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
@@ -141,4 +143,8 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendImportsConfiguration.class;
 	}
 
+	@Override
+	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
+		return XtendConfigurableIssueCodes.class;
+	}
 }

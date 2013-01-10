@@ -8,6 +8,8 @@
 package org.eclipse.xtend.ide.validator.preferences;
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
+import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
 
 /**
@@ -16,9 +18,30 @@ import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
 public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurationBlock {
 
 	@Override
-	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
-		// using keys from xbase for now.
-		super.fillSettingsPage(composite, nColumns, defaultIndent);
+	protected void fillUnusedCodeSection(int defaultIndent, Composite unusedCodeSection) {
+		super.fillUnusedCodeSection(defaultIndent, unusedCodeSection);
+		new ComboBoxBuilder(unusedCodeSection, defaultIndent)
+		
+			.addComboBox(XtendConfigurableIssueCodes.SINGLE_DISPATCH_FUNCTION, "Single dispatch function:")
+			.addComboBox(XtendConfigurableIssueCodes.DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch plain function name clash:")
+			.addComboBox(XtendConfigurableIssueCodes.FIELD_LOCALLY_NEVER_READ, "Field never read locally:")
+			.addComboBox(XtendConfigurableIssueCodes.FUNCTION_LOCALLY_NEVER_USED, "Function never used locally:")
+		;
 	}
-	
+
+	class ComboBoxBuilder {
+		private int defaultIndent;
+		private Composite unusedCodeSection;
+
+		public ComboBoxBuilder(Composite unusedCodeSection,int defaultIndent) {
+			this.unusedCodeSection = unusedCodeSection;
+			this.defaultIndent = defaultIndent;
+		}
+		
+		ComboBoxBuilder addComboBox(PreferenceKey prefKey, String label) {
+			 XtendValidatorConfigurationBlock.this.addComboBox(prefKey, label, unusedCodeSection, defaultIndent);
+			 return this;
+		}
+		
+	}
 }
