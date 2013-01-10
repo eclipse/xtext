@@ -249,12 +249,14 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable) {
 		appendable.append(visibility.javaName)
-		if (isAbstract)
-			appendable.append("abstract ")
-		if (isStatic)
-			appendable.append("static ")
-		if (isFinal)
-			appendable.append("final ")
+		if (!(it instanceof JvmEnumerationType)) {
+			if (isAbstract)
+				appendable.append("abstract ")
+			if (isStatic)
+				appendable.append("static ")
+			if (isFinal)
+				appendable.append("final ")
+		}
 	}
 	
 	def dispatch generateModifier(JvmField it, ITreeAppendable appendable) {
