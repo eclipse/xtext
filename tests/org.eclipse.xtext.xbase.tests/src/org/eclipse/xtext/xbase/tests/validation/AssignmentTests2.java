@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.tests.validation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -19,4 +21,17 @@ import org.junit.runner.RunWith;
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class AssignmentTests2 extends AssignmentTests {
 
+	@Override
+	@Test
+	@Ignore("TODO To be implemented")
+	public void testVarAssignmentWithoutTypeAndInitialization() throws Exception {
+		super.testVarAssignmentWithoutTypeAndInitialization();
+	}
+	@Override
+	@Test
+	@Ignore("TODO To be implemented")
+	public void testValAssignmentWithoutTypeAndInitialization() throws Exception {
+		super.testValAssignmentWithoutTypeAndInitialization();
+	}
+	
 }

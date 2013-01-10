@@ -266,4 +266,10 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   public void testIfExpression_10() throws Exception {
     super.testIfExpression_10();
   }
+  
+  @Ignore(value = "TODO this should work")
+  @Test
+  public void testBug_391758() throws Exception {
+    super.testBug_391758();
+  }
 }

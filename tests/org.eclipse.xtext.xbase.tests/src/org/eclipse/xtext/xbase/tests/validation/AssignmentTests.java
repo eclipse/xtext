@@ -70,7 +70,7 @@ public class AssignmentTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, MISSING_TYPE);
 	}
 
-	@Test public void testVarAssignmentWitoutTypeAndInitialization() throws Exception {
+	@Test public void testVarAssignmentWithoutTypeAndInitialization() throws Exception {
 		XExpression expression = expression("{ var foo }", false);
 		helper.assertNoError(expression, MISSING_INITIALIZATION);
 		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, MISSING_TYPE, "type", "derived");

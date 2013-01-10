@@ -1770,4 +1770,16 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
   public void testRecursiveTypeArgumentResolution_08() throws Exception {
     Assert.fail("fails in old implementation");
   }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testBug_391758() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
 }

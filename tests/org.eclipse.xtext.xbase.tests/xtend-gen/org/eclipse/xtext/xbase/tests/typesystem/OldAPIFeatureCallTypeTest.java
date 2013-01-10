@@ -72,6 +72,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testArray_09() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testClosure_03() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -181,6 +187,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testBug_389512() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testBug_391758() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -433,6 +445,24 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   @Ignore(value = "fails in old implementation")
   @Test
   public void testRecursiveTypeArgumentResolution_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_05() throws Exception {
     Assert.fail("fails in old implementation");
   }
 }

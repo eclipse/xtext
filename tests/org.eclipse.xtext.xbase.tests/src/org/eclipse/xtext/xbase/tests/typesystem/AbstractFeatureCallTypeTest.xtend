@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -259,7 +258,7 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"{ val x = new testdata.ArrayClient().swap(null) val Integer y = x.head }".resolvesFeatureCallsTo("Integer[]", "Integer[]", "Integer")
 	}
 	
-	@Test @Ignore("Investigate why this fails for nested arrays") def void testArray_09() throws Exception {
+	@Test def void testArray_09() throws Exception {
 		"{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x.head }".resolvesFeatureCallsTo("Integer[][]", "Integer[][]", "Integer[]")
 	}
 	
@@ -691,8 +690,6 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		}".resolvesFeatureCallsTo("CharSequence", "Class<? extends CharSequence>", "Field[]", "Map<String, Field>", "String", "Map<String, Object>", "Object", "CharSequence")
 	}
 	
-	// TODO fix the following case
-	@Ignore("TODO this should work")
 	@Test def void testBug_391758() throws Exception {
 		"{
 			val iterable = newArrayList

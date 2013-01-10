@@ -1320,4 +1320,52 @@ public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   public void testRecursiveTypeArgumentResolution_08() throws Exception {
     Assert.fail("fails in old implementation");
   }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testRawType_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCallWithExpectation_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCallWithExpectation_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCallWithExpectation_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testFeatureCallWithExpectation_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
 }
