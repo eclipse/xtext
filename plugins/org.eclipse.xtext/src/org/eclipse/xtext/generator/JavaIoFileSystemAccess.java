@@ -19,6 +19,10 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
@@ -40,6 +44,14 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 	@Inject
 	private IResourceServiceProvider.Registry registry;
 
+	@Inject
+	private TraceFileNameProvider traceFileNameProvider;
+
+	@Inject
+	private TraceRegionSerializer traceSerializer;
+
+	private boolean writeTrace = true;
+
 	public JavaIoFileSystemAccess() {
 	}
 
@@ -51,20 +63,70 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		this.encodingProvider = encodingProvider;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public JavaIoFileSystemAccess(IResourceServiceProvider.Registry registry, IEncodingProvider encodingProvider,
+			TraceFileNameProvider traceFileNameProvider, TraceRegionSerializer traceRegionSerializer) {
+		this.registry = registry;
+		this.encodingProvider = encodingProvider;
+		this.traceFileNameProvider = traceFileNameProvider;
+		this.traceSerializer = traceRegionSerializer;
+	}
+
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) throws RuntimeIOException {
 		File file = getFile(fileName, outputConfigName);
 		try {
 			createFolder(file.getParentFile());
-			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), getEncoding(getURI(fileName,
-					outputConfigName)));
+			String encoding = getEncoding(getURI(fileName, outputConfigName));
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoding);
 			try {
 				writer.append(postProcess(fileName, outputConfigName, contents));
+				if (writeTrace)
+					generateTrace(fileName, outputConfigName, contents);
 			} finally {
 				writer.close();
 			}
 		} catch (IOException e) {
 			throw new RuntimeIOException(e);
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
+		try {
+			if (contents instanceof ITraceRegionProvider) {
+				String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
+				File traceFile = getFile(traceFileName, outputConfigName);
+				OutputStream out = new BufferedOutputStream(new FileOutputStream(traceFile));
+				try {
+					AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+					traceSerializer.writeTraceRegionTo(traceRegion, out);
+				} finally {
+					out.close();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			throw new RuntimeIOException(e);
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public boolean isWriteTrace() {
+		return writeTrace;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void setWriteTrace(boolean writeTrace) {
+		this.writeTrace = writeTrace;
 	}
 
 	/**
