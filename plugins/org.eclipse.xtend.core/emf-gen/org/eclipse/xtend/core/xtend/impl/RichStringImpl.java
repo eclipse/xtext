@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 
-import org.eclipse.xtext.xbase.impl.XBlockExpressionImpl;
+import org.eclipse.xtext.xbase.impl.XBlockExpressionImplCustom;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.impl.XBlockExpressionImpl;
  *
  * @generated
  */
-public class RichStringImpl extends XBlockExpressionImpl implements RichString
+public class RichStringImpl extends XBlockExpressionImplCustom implements RichString
 {
 	/**
 	 * <!-- begin-user-doc -->

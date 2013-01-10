@@ -140,7 +140,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XBlockExpression createXBlockExpression()
 	{
-		XBlockExpressionImpl xBlockExpression = new XBlockExpressionImpl();
+		XBlockExpressionImplCustom xBlockExpression = new XBlockExpressionImplCustom();
 		return xBlockExpression;
 	}
 
@@ -382,7 +382,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XReturnExpression createXReturnExpression()
 	{
-		XReturnExpressionImpl xReturnExpression = new XReturnExpressionImpl();
+		XReturnExpressionImplCustom xReturnExpression = new XReturnExpressionImplCustom();
 		return xReturnExpression;
 	}
 

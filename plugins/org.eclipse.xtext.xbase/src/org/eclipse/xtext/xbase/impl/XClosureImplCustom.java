@@ -11,14 +11,27 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+
+import com.google.common.base.Joiner;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XClosureImplCustom extends XClosureImpl {
 
+	@Override
+	public String toString() {
+		String expressionAsString = Strings.emptyIfNull(expression == null ? null : expression.toString());
+		if (isExplicitSyntax()) {
+			return String.format("[%s | %s ]", Joiner.on(", ").join(getFormalParameters()), expressionAsString);
+		} else {
+			return String.format("[ %s ]", expressionAsString);
+		}
+	}
+	
 	@Override
 	public EList<JvmFormalParameter> getFormalParameters() {
 		EList<JvmFormalParameter> parameters = getDeclaredFormalParameters();
