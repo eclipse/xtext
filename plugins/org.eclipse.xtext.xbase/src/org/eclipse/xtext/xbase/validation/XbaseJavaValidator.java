@@ -56,6 +56,7 @@ import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -825,29 +826,27 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		JvmTypeReference fromType = typeProvider.getType(cast.getTarget());
 		checkCast(toType, fromType);
 	}
-
+	
 	protected void checkCast(JvmTypeReference toType, JvmTypeReference fromType) {
-		if (toType != null && fromType != null && fromType.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType targetType = (JvmDeclaredType) fromType.getType();
-			if (targetType.isFinal()) {
-				if (!conformanceComputer.isConformant(toType, fromType)) {
-					error("Cannot cast element of sealed type " + getNameOfTypes(fromType) + " to "
-							+ canonicalName(toType), toType, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							INVALID_CAST);
-				} else if (conformanceComputer.isConformant(toType, fromType)) {
-					//					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
-				}
-			} else {
-				if (conformanceComputer.isConformant(toType, fromType)) {
-					//					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
-				} else {
-					JvmType type = toType.getType();
-					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
-						if (!conformanceComputer.isConformant(fromType, toType)) {
-							error("type mismatch: cannot convert from " + getNameOfTypes(fromType) + " to "
-									+ canonicalName(toType), toType, null,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
-						}
+		//TODO see http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html
+		if (toType == null || fromType == null)
+			return;
+		if (fromType.getType() instanceof JvmDeclaredType) {
+			
+			// if one of the types is an interface and the other is a non final class (or interface) there always can be a subtype
+			if (isInterface(fromType) 
+					&& !isFinal(toType)) 
+				return;
+			if (isInterface(toType.getType()) 
+					&& !isFinal(fromType)) 
+				return;
+			if (!conformanceComputer.isConformant(fromType, toType)) {
+				if (	(isFinal(fromType) || isFinal(toType))
+					||  (isClass(fromType) && isClass(toType))) {
+					if (!conformanceComputer.isConformant(toType, fromType)) { // no upcast?
+						error("Cannot cast from " + getNameOfTypes(fromType) + " to "
+								+ canonicalName(toType), toType, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+								INVALID_CAST);
 					}
 				}
 			}
@@ -1310,7 +1309,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected boolean isInterface(JvmType type) {
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
 	}
-
+	
+	protected boolean isInterface(JvmTypeReference type) {
+		return isInterface(type.getType());
+	}
+	
+	protected boolean isClass(JvmTypeReference type) {
+		return type.getType() instanceof JvmGenericType && !((JvmGenericType)type.getType()).isInterface();
+	}
+	
 	protected boolean isConformant(JvmType leftType, JvmTypeReference right) {
 		JvmParameterizedTypeReference left = factory.createJvmParameterizedTypeReference();
 		left.setType(leftType);

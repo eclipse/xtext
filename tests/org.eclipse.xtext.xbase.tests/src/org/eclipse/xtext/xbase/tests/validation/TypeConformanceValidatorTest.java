@@ -56,7 +56,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testCast_00() throws Exception {
-		assertNoConformanceError("'foo' as Object");
+		assertNoCastError("'foo' as Object");
 	}
 
 	@Test public void testCast_01() throws Exception {
@@ -69,14 +69,12 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testCast_03() throws Exception {
-		assertNoConformanceError("new NullPointerException() as CharSequence");
+		assertNoCastError("new NullPointerException() as CharSequence");
 	}
 
 	@Test public void testCast_04() throws Exception {
 		// class MyNPE extends NullPointerException implements CharSequence {}
-		// TODO: should we check the actual type in case the a casted expression
-		// is an upcast?
-		assertNoConformanceError("('foo' as CharSequence) as NullPointerException");
+		assertNoCastError("('foo' as CharSequence) as NullPointerException");
 	}
 
 	@Test public void testCast_05() throws Exception {
@@ -93,7 +91,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testCast_07() throws Exception {
-		assertNoConformanceError("42 as byte");
+		assertNoCastError("42 as byte");
 	}
 	
 	@Test public void testSwitch_TypeGuard_01() throws Exception {
@@ -181,6 +179,11 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	protected void assertCastError(String expression, EClass objectType, String... messageParts) throws Exception {
 		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, objectType, INVALID_CAST, messageParts);
+	}
+	
+	protected void assertNoCastError(String expression) throws Exception {
+		final XExpression xExpression = expression(expression, false);
+		helper.assertNoError(xExpression, INVALID_CAST);
 	}
 
 	protected void assertNoConformanceError(String expression) throws Exception {

@@ -278,7 +278,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Test public void testFinalCast() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
-		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "sealed");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "cast");
 		expression = expression("'foo' as CharSequence");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
@@ -509,7 +509,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Test public void testCast_1() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
-		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "sealed", "type");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "cast");
 		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 
@@ -524,6 +524,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
 		helper.assertNoError(expression, OBSOLETE_CAST);
+	}
+	
+	@Test public void testCast_4() throws Exception {
+		XExpression expression = expression("new Object() as String");
+		helper.assertNoError(expression, INVALID_CAST);
 	}
 
 	@Test public void testInstanceOf_0() throws Exception {
