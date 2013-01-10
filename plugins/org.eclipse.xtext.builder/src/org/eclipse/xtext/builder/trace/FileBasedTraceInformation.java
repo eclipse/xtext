@@ -31,6 +31,7 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -49,7 +50,9 @@ import com.google.inject.Provider;
 @NonNullByDefault
 public class FileBasedTraceInformation implements ITraceInformation {
 
-	public static final String TRACE_FILE_EXTENSION = "._trace";
+	// use TraceFileNameProvider.TRACE_FILE_EXTENSION
+	@Deprecated 
+	public static final String TRACE_FILE_EXTENSION = TraceFileNameProvider.TRACE_FILE_EXTENSION;
 
 	private static final Logger log = Logger.getLogger(StorageAwareTrace.class);
 	
@@ -67,6 +70,9 @@ public class FileBasedTraceInformation implements ITraceInformation {
 	
 	@Inject 
 	private IStorage2UriMapper storage2UriMapper;
+	
+	@Inject 
+	private TraceFileNameProvider traceFileNameProvider;
 	
 	@Nullable
 	public ITrace getTraceToSource(final IStorage derivedResource) {
@@ -177,9 +183,9 @@ public class FileBasedTraceInformation implements ITraceInformation {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
 			String originLastSegment = file.getFullPath().lastSegment();
-			IFile traceFile = file.getParent().getFile(new Path("."+originLastSegment+FileBasedTraceInformation.TRACE_FILE_EXTENSION));
+			IFile traceFile = file.getParent().getFile(new Path(traceFileNameProvider.getTraceFromJava(originLastSegment)));
 			return traceFile;
-		} 
+		}
 		return null;
 	}
 
@@ -187,7 +193,7 @@ public class FileBasedTraceInformation implements ITraceInformation {
 		if (traceFile instanceof IFile) {
 			IFile file = (IFile) traceFile;
 			String lastSegment = traceFile.getFullPath().lastSegment();
-			lastSegment = lastSegment.substring(1, lastSegment.length() - TRACE_FILE_EXTENSION.length());
+			lastSegment = traceFileNameProvider.getJavaFromTrace(lastSegment);
 			return file.getParent().getFile(new Path(lastSegment));
 		}
 		return null;
